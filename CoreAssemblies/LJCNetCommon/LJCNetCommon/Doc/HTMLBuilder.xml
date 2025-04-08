@@ -3,6 +3,14 @@
 <!-- Licensed under the MIT License. -->
 <!-- HTMLBuilder.xml -->
 <items>
+  <!-- Methods -->
+  <AddIndent>
+    <summary>
+      Changes the IndentCount by the supplied value.
+    </summary>
+    <param name="increment">The amount to increment or decrement the count.</param>
+    <returns>The current indent count.</returns>
+  </AddIndent>
   <!-- Data Class Methods -->
   <ToString>
     <summary>
@@ -11,11 +19,18 @@
     <returns>The HTML text.</returns>
   </ToString>
   <!-- Append Methods -->
+  <Add>
+    <summary>
+      Adds text without modification.
+    </summary>
+    <param name="text">The append text.</param>
+  </Add>
   <Begin>
     <summary>
       Adds the element begin tag.
     </summary>
     <param name="name">The element name.</param>
+    <param name="hasText"></param>"
     <param name="text">The element content text.</param>
     <param name="htmlAttributes">The element attributes.</param>
     <param name="applyIndent">Indicates if the element should be indented.</param>
@@ -33,6 +48,7 @@
     </summary>
     <param name="name">The element name.</param>
     <param name="text">The element content text.</param>
+    <param name="hasText"></param>"
     <param name="htmlAttributes">The element attributes.</param>
     <param name="applyIndent">Indicates if the element should be indented.</param>
     <param name="isEmpty">Indicates if an empty element.</param>
@@ -50,6 +66,7 @@
       Adds the element end tag.
     </summary>
     <param name="name">The element name.</param>
+    <param name="hasText"></param>"
     <param name="applyIndent">Indicates if the element should be indented.</param>
     <returns>The added element end tag.</returns>
     <remarks>
@@ -64,6 +81,7 @@
       Adds a modified text line to the builder.
     </summary>
     <param name="text">The append text.</param>
+    <param name="hasText">Indicates if the parent value has text.</param>"
     <returns>The added text line.</returns>
   </Line>
   <Text>
@@ -71,6 +89,7 @@
       Adds modified text to the builder.
     </summary>
     <param name="text">The append text.</param>
+    <param name="hasText">Indicates if the parent value has text.</param>"
     <returns>The added text.</returns>
   </Text>
   <!-- Create Methods -->
@@ -78,6 +97,7 @@
     <summary>
       Creates the HTML beginning up to and including &lt;head&gt;.
     </summary>
+    <param name="textState"></param>"
     <param name="copyright"></param>
     <param name="fileName"></param>
     <returns></returns>
@@ -87,6 +107,7 @@
       Creates a &lt;link&gt; element for a style sheet.
     </summary>
     <param name="fileName"></param>
+    <param name="textState"></param>"
     <returns></returns>
   </CreateLink>
   <CreateMeta>
@@ -95,6 +116,7 @@
     </summary>
     <param name="name"></param>
     <param name="content"></param>
+    <param name="textState"></param>"
     <returns></returns>
   </CreateMeta>
   <CreateMetas>
@@ -102,6 +124,7 @@
       Creates common &lt;meta&gt; elements.
     </summary>
     <param name="author"></param>
+    <param name="textState"></param>"
     <param name="description"></param>
     <param name="keywords"></param>
     <param name="charSet"></param>
@@ -112,6 +135,7 @@
       Creates a &lt;script&gt; element.
     </summary>
     <param name="fileName"></param>
+    <param name="textState"></param>"
     <returns></returns>
   </CreateScript>
   <!-- Create Get Methods -->
@@ -119,6 +143,7 @@
     <summary>
       Gets the HTML beginning up to and including &lt;head&gt;.
     </summary>
+    <param name="textState"></param>"
     <param name="copyright"></param>
     <param name="fileName"></param>
     <returns></returns>
@@ -128,6 +153,7 @@
       Gets the &lt;link&gt; element for a style sheet.
     </summary>
     <param name="fileName"></param>
+    <param name="textState"></param>"
     <returns></returns>
   </GetLink>
   <GetMeta>
@@ -136,6 +162,7 @@
     </summary>
     <param name="name"></param>
     <param name="content"></param>
+    <param name="textState"></param>"
     <returns></returns>
   </GetMeta>
   <GetMetas>
@@ -143,6 +170,7 @@
       Gets common &lt;meta&gt; elements.
     </summary>
     <param name="author"></param>
+    <param name="textState"></param>"
     <param name="description"></param>
     <param name="keywords"></param>
     <param name="charSet"></param>
@@ -153,6 +181,7 @@
       Gets a &lt;script&gt; element.
     </summary>
     <param name="fileName"></param>
+    <param name="textState"></param>"
     <returns></returns>
   </GetScript>
   <!-- Attribs Methods -->
@@ -181,14 +210,6 @@
     <param name="id">The id attribute.</param>
     <returns>The common table attributes.</returns>
   </TableAttribs>
-  <!-- Other Methods -->
-  <Indent>
-    <summary>
-      Changes the IndentCount by the supplied value.
-    </summary>
-    <param name="increment">The amount to increment or decrement the count.</param>
-    <returns>The current indent count.</returns>
-  </Indent>
   <!-- Get Modified Text Methods -->
   <GetAttribs>
     <summary>
@@ -226,13 +247,15 @@
       Gets a modified text line.
     </summary>
     <param name="text">The text value.</param>
+    <param name="hasText">Indicates if the parent value has text.</param>"
     <returns>The modified text line.</returns>
   </GetLine>
   <GetText>
     <summary>
-      Gets modified text.
+      Gets potentially indented and wrapped text.
     </summary>
     <param name="text">The text value.</param>
+    <param name="hasText">Indicates if the parent value has text.</param>"
     <returns>The modified text.</returns>
     <remarks>
       Adds a newline if line length is greater than LineLimit.
@@ -240,7 +263,7 @@
   </GetText>
   <GetWrapped>
     <summary>
-      Adds added text and new wrapped line if combined line > LineLimit.
+      Appends added text and new wrapped line if combined line > LineLimit.
     </summary>
     <param name="text">The text value.</param>
     <returns>The modified text.</returns>

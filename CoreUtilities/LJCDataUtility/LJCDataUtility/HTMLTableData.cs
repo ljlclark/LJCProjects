@@ -23,12 +23,12 @@ namespace LJCDataUtility
       if (NetCommon.HasData(dataTable))
       {
         var hb = new HTMLBuilder();
-        hb.Begin("tr");
+        hb.Begin("tr", hb.HasText);
         foreach (DataColumn column in dataTable.Columns)
         {
-          hb.Create("th", column.ColumnName);
+          hb.Create("th", column.ColumnName, hb.HasText);
         }
-        hb.End("tr");
+        hb.End("tr", hb.HasText);
         retValue = hb.ToString();
       }
       return retValue;
@@ -44,10 +44,12 @@ namespace LJCDataUtility
       {
         var hb = new HTMLBuilder();
         var attribs = hb.TableAttribs();
-        hb.Begin("table", null, attribs);
-        hb.Text(DataTableHeadings(dataTable));
-        hb.Text(DataTableRows(dataTable, maxRows));
-        hb.End("table");
+        hb.Begin("table", hb.HasText, null, attribs);
+        var text = DataTableHeadings(dataTable);
+        hb.Text(text, hb.HasText);
+        text = DataTableRows(dataTable, maxRows);
+        hb.Text(text, hb.HasText);
+        hb.End("table", hb.HasText);
         retValue = hb.ToString();
       }
       return retValue;
@@ -71,13 +73,13 @@ namespace LJCDataUtility
           {
             break;
           }
-          hb.Begin("tr");
+          hb.Begin("tr", hb.HasText);
           foreach (DataColumn column in dataTable.Columns)
           {
             string value = row[column.ColumnName].ToString();
-            hb.Create("td", value);
+            hb.Create("td", value, hb.HasText);
           }
-          hb.End("tr");
+          hb.End("tr", hb.HasText);
         }
         retValue = hb.ToString();
       }
@@ -97,7 +99,7 @@ namespace LJCDataUtility
       if (NetCommon.HasItems(dataObjects))
       {
         var hb = new HTMLBuilder();
-        hb.Begin("tr");
+        hb.Begin("tr", hb.HasText);
         var dataObject = dataObjects[0];
         var reflect = new LJCReflect(dataObject);
         List<string> names = reflect.GetPropertyNames();
@@ -106,10 +108,10 @@ namespace LJCDataUtility
           if (name != "ChangedNames"
             && propertyNames.Contains(name))
           {
-            hb.Create("th", name);
+            hb.Create("th", name, hb.HasText);
           }
         }
-        hb.End("tr");
+        hb.End("tr", hb.HasText);
         retValue = hb.ToString();
       }
       return retValue;
@@ -126,10 +128,12 @@ namespace LJCDataUtility
       {
         var hb = new HTMLBuilder();
         var attribs = hb.TableAttribs();
-        hb.Begin("table", null, attribs);
-        hb.Text(DataHeadings(dataObjects, propertyNames));
-        hb.Text(DataRows(dataObjects, propertyNames, maxRows));
-        hb.End("table");
+        hb.Begin("table", hb.HasText, null, attribs);
+        var text = DataHeadings(dataObjects, propertyNames);
+        hb.Text(text, hb.HasText);
+        text = DataRows(dataObjects, propertyNames, maxRows);
+        hb.Text(text, hb.HasText);
+        hb.End("table", hb.HasText);
         retValue = hb.ToString();
       }
       return retValue;
@@ -154,7 +158,7 @@ namespace LJCDataUtility
           {
             break;
           }
-          hb.Begin("tr");
+          hb.Begin("tr", hb.HasText);
           var reflect = new LJCReflect(dataObject);
           List<string> names = reflect.GetPropertyNames();
           foreach (string name in names)
@@ -168,10 +172,10 @@ namespace LJCDataUtility
               {
                 value = objectValue.ToString();
               }
-              hb.Create("td", value);
+              hb.Create("td", value, hb.HasText);
             }
           }
-          hb.End("tr");
+          hb.End("tr", hb.HasText);
         }
         retValue = hb.ToString();
       }
@@ -190,12 +194,12 @@ namespace LJCDataUtility
       if (DbResult.HasRows(dbResult))
       {
         var hb = new HTMLBuilder();
-        hb.Begin("tr");
+        hb.Begin("tr", hb.HasText);
         foreach (var value in dbResult.Rows[0].Values)
         {
-          hb.Create("th", value.PropertyName);
+          hb.Create("th", value.PropertyName, hb.HasText);
         }
-        hb.End("tr");
+        hb.End("tr", hb.HasText);
         retValue = hb.ToString();
       }
       return retValue;
@@ -211,10 +215,12 @@ namespace LJCDataUtility
       {
         var hb = new HTMLBuilder();
         var attribs = hb.TableAttribs();
-        hb.Begin("table", null, attribs);
-        hb.Text(ResultHeadings(dbResult));
-        hb.Text(ResultRows(dbResult, maxRows));
-        hb.End("table");
+        hb.Begin("table", hb.HasText, null, attribs);
+        var text = ResultHeadings(dbResult);
+        hb.Text(text, hb.HasText);
+        text = ResultRows(dbResult, maxRows);
+        hb.Text(text, hb.HasText);
+        hb.End("table", hb.HasText);
         retValue = hb.ToString();
       }
       return retValue;
@@ -238,7 +244,7 @@ namespace LJCDataUtility
           {
             break;
           }
-          hb.Begin("tr");
+          hb.Begin("tr", hb.HasText);
           foreach (var value in row.Values)
           {
             string valueText = null;
@@ -246,9 +252,9 @@ namespace LJCDataUtility
             {
               valueText = value.Value.ToString();
             }
-            hb.Create("td", valueText);
+            hb.Create("td", valueText, hb.HasText);
           }
-          hb.End("tr");
+          hb.End("tr", hb.HasText);
         }
         retValue = hb.ToString();
       }

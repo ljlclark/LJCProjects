@@ -5,23 +5,28 @@ using System.Text;
 
 namespace LJCNetCommon
 {
-  // Move to LJCNetCommon
-  /// <summary>
-  /// Provides methods for creating HTML text.
-  /// </summary>
+  /// <summary>Provides methods for creating HTML text.</summary>
   public class HTMLBuilder
   {
     #region Constructors
 
     /// <summary>Initializes an object instance.</summary>
-    public HTMLBuilder()
+    public HTMLBuilder(TextState textState = null)
     {
       IndentCharCount = 2;
       IndentCount = 0;
+      if (textState != null)
+      {
+        IndentCount = textState.IndentCount;
+      }
       LineLength = 0;
       LineLimit = 80;
       WrapEnabled = false;
       HTML = "";
+      if (textState != null)
+      {
+        ParentHasText = textState.HasText;
+      }
     }
     #endregion
 
@@ -37,8 +42,8 @@ namespace LJCNetCommon
     #region Methods
 
     // Changes the IndentCount by the supplied value.
-    /// <include path='items/Indent/*' file='Doc/HTMLBuilder.xml'/>
-    public int Indent(int increment = 1)
+    /// <include path='items/AddIndent/*' file='Doc/HTMLBuilder.xml'/>
+    public int AddIndent(int increment = 1)
     {
       IndentCount += increment;
       if (IndentCount < 0)
@@ -49,301 +54,44 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Append Methods
+    // Line() and Text() methods start with a new line
+    // if the parm hasText = true;
+    #region Append Text Methods
 
-    // Creates the element begin tag.
-    /// <include path='items/Begin/*' file='Doc/HTMLBuilder.xml'/>
-    public string Begin(string name, string text = null
-      , Attributes htmlAttributes = null, bool applyIndent = true)
+    // Adds text without modification.
+    /// <include path='items/Add/*' file='Doc/HTMLBuilder.xml'/>
+    public void Add(string text)
     {
-      return Create(name, text, htmlAttributes, applyIndent, false
-        , false);
-    }
-
-    // Creates an element. No new line.
-    /// <include path='items/Create/*' file='Doc/HTMLBuilder.xml'/>
-    public string Create(string name, string text = null
-      , Attributes htmlAttributes = null, bool applyIndent = true
-      , bool isEmpty = false, bool close = true)
-    {
-      var builder = new StringBuilder(128);
-
-      // Any previous text does not have cr/lf.
-      if (HTML.Length > 0)
-      {
-        builder.AppendLine();
-      }
-
-      // Add the element name and attributes.
-      if (applyIndent)
-      {
-        Indent();
-        builder.Append($"{GetIndentString()}");
-      }
-      builder.Append($"<{name}");
-      builder.Append(GetAttribs(htmlAttributes));
-      if (isEmpty)
-      {
-        if (applyIndent)
-        {
-          Indent(-1);
-        }
-        builder.Append(" /");
-      }
-      builder.Append(">");
-      var content = Content(text, isEmpty
-        , out bool isWrapped);
-      builder.Append(content);
-
-      // Close the element.
-      if (!isEmpty
-        && close)
-      {
-        if (isWrapped)
-        {
-          builder.AppendLine();
-          builder.Append(GetIndentString());
-        }
-        builder.Append($"</{name}>");
-        if (applyIndent)
-        {
-          Indent(-1);
-        }
-      }
-
-      // Get value and update the HTML.
-      string retElement = builder.ToString();
-      HTML += retElement;
-      return retElement;
-    }
-
-    // Creates the element end tag.
-    /// <include path='items/End/*' file='Doc/HTMLBuilder.xml'/>
-    public string End(string name, bool applyIndent = true)
-    {
-      string retEnd;
-
-      var builder = new StringBuilder(128);
-
-      // Any previous text does not have cr/lf.
-      if (HTML.Length > 0)
-      {
-        builder.AppendLine();
-      }
-
-      if (applyIndent)
-      {
-        builder.Append($"{GetIndentString()}");
-      }
-      builder.Append($"</{name}>");
-      if (applyIndent)
-      {
-        if (IndentCount > 0)
-        {
-          IndentCount--;
-        }
-      }
-      retEnd = builder.ToString();
-      HTML += retEnd;
-      return retEnd;
+      HTML += text;
     }
 
     // Adds a modified text line to the builder.
+    // Start with a new line if the hasText parm = true.
     /// <include path='items/Line/*' file='Doc/HTMLBuilder.xml'/>
-    public string Line(string text = "")
+    public string Line(string text, bool hasText)
     {
-      var retText = GetText(text);
-      HTML += $"{retText}\r\n";
+      var retText = GetText(text, hasText);
+      retText += "\r\n";
+      HTML += retText;
       return retText;
     }
 
     // Adds modified text to the builder.
+    // Start with a new line if the hasText parm = true.
     /// <include path='items/Text/*' file='Doc/HTMLBuilder.xml'/>
-    public string Text(string text)
+    public string Text(string text, bool hasText)
     {
-      var retText = GetText(text);
+      var retText = GetText(text, hasText);
       HTML += retText;
       return retText;
     }
     #endregion
 
-    #region Create Methods
-
-    // Creates the HTML beginning up to and including <head>.
-    /// <include path='items/CreateHTMLBegin/*' file='Doc/HTMLBuilder.xml'/>
-    public string CreateHTMLBegin(string[] copyright = null
-      , string fileName = null)
-    {
-      var retValue = GetHTMLBegin(copyright, fileName);
-      Text(retValue);
-      return retValue;
-    }
-
-    // Creates a <link> element for a style sheet.
-    /// <include path='items/CreateLink/*' file='Doc/HTMLBuilder.xml'/>
-    public string CreateLink(string fileName)
-    {
-      var retValue = GetLink(fileName);
-      Line();
-      Text(retValue);
-      return retValue;
-    }
-
-    // Creates a <meta> element.
-    /// <include path='items/CreateMeta/*' file='Doc/HTMLBuilder.xml'/>
-    public string CreateMeta(string name, string content)
-    {
-      var retValue = GetMeta(name, content);
-      Line();
-      Text(retValue);
-      return retValue;
-    }
-
-    // Creates common <meta> elements.
-    /// <include path='items/CreateMetas/*' file='Doc/HTMLBuilder.xml'/>
-    public string CreateMetas(string author, string description = null
-      , string keywords = null, string charSet = "utf-8")
-    {
-      var retValue = GetMetas(author, description, keywords, charSet);
-      Line();
-      Text(retValue);
-      return retValue;
-    }
-
-    // Creates a <link> element for a style sheet.
-    /// <include path='items/CreateScript/*' file='Doc/HTMLBuilder.xml'/>
-    public string CreateScript(string fileName)
-    {
-      var retValue = GetScript(fileName);
-      Line();
-      Text(retValue);
-      return retValue;
-    }
-    #endregion
-
-    #region Create Get Methods
-
-    // Gets the HTML beginning up to <head>.
-    /// <include path='items/GetHTMLBegin/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetHTMLBegin(string[] copyright = null
-      , string fileName = null)
-    {
-      var hb = new HTMLBuilder();
-      hb.Text("<!DOCTYPE html>");
-      if (NetCommon.HasElements(copyright))
-      {
-        hb.Line();
-        var isFirst = true;
-        foreach (string text in copyright)
-        {
-          if (!isFirst)
-          {
-            hb.Text("\r\n");
-          }
-          isFirst = false;
-          hb.Text($"<!-- {text} -->");
-        }
-      }
-      if (NetString.HasValue(fileName))
-      {
-        hb.Line();
-        hb.Text($"<!-- {fileName} -->");
-      }
-      var startAttribs = hb.StartAttribs();
-      hb.Begin("html", null, startAttribs, NoIndent);
-      hb.Begin("head", null, null, NoIndent);
-      var retValue = hb.ToString();
-      return retValue;
-    }
-
-    /// <summary>Gets the HTML end &lt;body&gt; and &lt;html&gt;.</summary>
-    public string GetHTMLEnd()
-    {
-      var hb = new HTMLBuilder();
-      hb.End("body", NoIndent);
-      hb.End("html", NoIndent);
-      var retValue = hb.ToString();
-      return retValue;
-    }
-
-    // Gets the <link> element for a style sheet.
-    /// <include path='items/GetLink/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetLink(string fileName)
-    {
-      var hb = new HTMLBuilder();
-      hb.Indent(IndentCount);
-      var attribs = new Attributes()
-      {
-        { "rel", "stylesheet" },
-        { "type", "text/css" },
-        { "href", fileName },
-      };
-      hb.Create("link", null, attribs, isEmpty: true);
-      var retValue = hb.ToString();
-      return retValue;
-    }
-
-    // Gets a <meta> element.
-    /// <include path='items/GetMeta/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetMeta(string name, string content)
-    {
-      var hb = new HTMLBuilder();
-      hb.Indent(IndentCount);
-      var attribs = new Attributes()
-      {
-        { "name", name },
-        { "content", content },
-      };
-      hb.Create("meta", null, attribs, isEmpty: true);
-      var retValue = hb.ToString();
-      return retValue;
-    }
-
-    // Gets common <meta> elements.
-    /// <include path='items/GetMetas/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetMetas(string author, string description = null
-      , string keywords = null, string charSet = "utf-8")
-    {
-      var hb = new HTMLBuilder();
-      hb.Indent(IndentCount);
-      var attribs = new Attributes()
-      {
-        { "charset", charSet }
-      };
-      hb.Create("meta", null, attribs, isEmpty: true);
-      if (NetString.HasValue(description))
-      {
-        hb.CreateMeta("description", description);
-      }
-      if (NetString.HasValue(keywords))
-      {
-        hb.CreateMeta("keywords", keywords);
-      }
-      hb.CreateMeta("author", author);
-      var content = "width=device-width initial-scale=1";
-      hb.CreateMeta("viewport", content);
-      var retValue = hb.ToString();
-      return retValue;
-    }
-
-    // Gets the <script> element.
-    /// <include path='items/GetScript/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetScript(string fileName)
-    {
-      var hb = new HTMLBuilder();
-      hb.Indent(IndentCount);
-      var attribs = new Attributes()
-      {
-        { "src", fileName },
-      };
-      hb.Create("script", null, attribs);
-      var retValue = hb.ToString();
-      return retValue;
-    }
-    #endregion
-
+    // GetLine() and GetText() methods start with a new line
+    // if the parm hasText = true;
     #region Get Modified Text Methods
 
+    // Gets the attributes text.
     /// <summary>Gets the attributes text.</summary>
     /// <include path='items/GetAttribs/*' file='Doc/HTMLBuilder.xml'/>
     public string GetAttribs(Attributes htmlAttribs)
@@ -402,35 +150,39 @@ namespace LJCNetCommon
     }
 
     // Gets a modified text line.
+    // Start with a new line if the hasText parm = true.
+    // Ends with a new line.
     /// <include path='items/GetLine/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetLine(string text)
+    public string GetLine(string text, bool hasText)
     {
-      var retLine = GetText(text);
+      var retLine = "";
+
+      retLine += GetText(text, hasText);
       retLine += "\r\n";
       return retLine;
     }
 
-    // Gets modified text.
+    // Gets potentially indented and wrapped text.
+    // Start with a new line if the hasText parm = true.
     /// <include path='items/GetText/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetText(string text)
+    public string GetText(string text, bool hasText)
     {
-      var retText = GetIndented(text);
+      var retText = "";
 
-      bool isReturn = false;
-      if (!WrapEnabled)
+      if (hasText)
       {
-        // Just add text.
-        isReturn = true;
+        retText += "\r\n";
       }
+      retText += GetIndented(text);
 
-      if (!isReturn)
+      if (WrapEnabled)
       {
         retText = GetWrapped(retText);
       }
       return retText;
     }
 
-    // Adds added text and new wrapped line if combined line > LineLimit.
+    // Appends added text and new wrapped line if combined line > LineLimit.
     /// <include path='items/GetWrapped/*' file='Doc/HTMLBuilder.xml'/>
     public string GetWrapped(string text)
     {
@@ -492,7 +244,282 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Attribs Methods
+    // All append element methods start with a new line
+    // if the parm hasText = true.
+    #region Append Element Methods
+
+    // Creates the element begin tag.
+    /// <include path='items/Begin/*' file='Doc/HTMLBuilder.xml'/>
+    public string Begin(string name, bool hasText, string text = null
+      , Attributes htmlAttributes = null, bool applyIndent = true)
+    {
+      return Create(name, text, hasText, htmlAttributes, applyIndent, false
+        , false);
+    }
+
+    // Creates an element. No new line.
+    /// <include path='items/Create/*' file='Doc/HTMLBuilder.xml'/>
+    public string Create(string name, string text, bool hasText
+      , Attributes htmlAttributes = null, bool applyIndent = true
+      , bool isEmpty = false, bool close = true)
+    {
+      var tb = new TextBuilder(128);
+      if (hasText)
+      {
+        tb.Line();
+      }
+
+      // Add the element name and attributes.
+      if (applyIndent)
+      {
+        tb.Text($"{GetIndentString()}");
+      }
+      tb.Text($"<{name}");
+      tb.Text(GetAttribs(htmlAttributes));
+      if (isEmpty)
+      {
+        tb.Text(" /");
+      }
+      tb.Text(">");
+      var content = Content(text, HasText, isEmpty, out bool isWrapped);
+      if (NetString.HasValue(content))
+      {
+        tb.Text(content);
+      }
+
+      // Set indent for child elements.
+      if (!isEmpty
+        && applyIndent)
+      {
+        AddIndent();
+      }
+
+      // Close the element.
+      if (!isEmpty
+        && close)
+      {
+        if (isWrapped)
+        {
+          tb.Line();
+          if (applyIndent)
+          {
+            // Reset indent for element end.
+            AddIndent(-1);
+          }
+          applyIndent = false;
+          tb.Text(GetIndentString());
+        }
+        tb.Text($"</{name}>");
+        if (applyIndent)
+        {
+          // Reset indent for next element.
+          AddIndent(-1);
+        }
+      }
+
+      // Get value and update the HTML.
+      string retElement = tb.ToString();
+      HTML += retElement;
+      return retElement;
+    }
+
+    // Creates the element end tag.
+    /// <include path='items/End/*' file='Doc/HTMLBuilder.xml'/>
+    public string End(string name, bool hasText, bool applyIndent = true)
+    {
+      string retEnd;
+
+      var tb = new TextBuilder(128);
+      if (hasText)
+      {
+        tb.Line();
+      }
+
+      if (applyIndent)
+      {
+        AddIndent(-1);
+        tb.Text($"{GetIndentString()}");
+      }
+      tb.Text($"</{name}>");
+      retEnd = tb.ToString();
+      HTML += retEnd;
+      return retEnd;
+    }
+    #endregion
+
+    // Create Element methods start with a new line
+    // if the parm textState.HasText = true .
+    #region Create Element Methods
+
+    // Creates the HTML beginning up to and including <head>.
+    /// <include path='items/CreateHTMLBegin/*' file='Doc/HTMLBuilder.xml'/>
+    public string CreateHTMLBegin(TextState textState, string[] copyright = null
+      , string fileName = null)
+    {
+      var retValue = GetHTMLBegin(textState, copyright, fileName);
+      Text(retValue, HasText);
+      return retValue;
+    }
+
+    // Creates a <link> element for a style sheet.
+    /// <include path='items/CreateLink/*' file='Doc/HTMLBuilder.xml'/>
+    public string CreateLink(string fileName, TextState textState)
+    {
+      var retValue = GetLink(fileName, textState);
+      Text(retValue, textState.HasText);
+      return retValue;
+    }
+
+    // Creates a <meta> element.
+    /// <include path='items/CreateMeta/*' file='Doc/HTMLBuilder.xml'/>
+    public string CreateMeta(string name, string content, TextState textState)
+    {
+      var retValue = GetMeta(name, content, textState);
+      Text(retValue, textState.HasText);
+      return retValue;
+    }
+
+    // Creates common <meta> elements.
+    /// <include path='items/CreateMetas/*' file='Doc/HTMLBuilder.xml'/>
+    public string CreateMetas(string author, TextState textState
+      , string description = null, string keywords = null
+      , string charSet = "utf-8")
+    {
+      var retValue = GetMetas(author, textState, description, keywords
+        , charSet);
+      Text(retValue, textState.HasText);
+      return retValue;
+    }
+
+    // Creates a <link> element for a style sheet.
+    /// <include path='items/CreateScript/*' file='Doc/HTMLBuilder.xml'/>
+    public string CreateScript(string fileName, TextState textState)
+    {
+      var retValue = GetScript(fileName, textState);
+      Text(retValue, HasText);
+      return retValue;
+    }
+    #endregion
+
+    // Get methods do NOT start with a new line.
+    #region Create Element Get Methods
+
+    // Gets the HTML beginning up to <head>.
+    /// <include path='items/GetHTMLBegin/*' file='Doc/HTMLBuilder.xml'/>
+    public string GetHTMLBegin(TextState textState, string[] copyright = null
+      , string fileName = null)
+    {
+      var tempTextState = SetHasTextFalse(textState);
+      var hb = new HTMLBuilder(tempTextState);
+      hb.Text("<!DOCTYPE html>", hb.HasText);
+      if (NetCommon.HasElements(copyright))
+      {
+        foreach (string text in copyright)
+        {
+          hb.Text($"<!-- {text} -->", hb.HasText);
+        }
+      }
+      if (NetString.HasValue(fileName))
+      {
+        hb.Text($"<!-- {fileName} -->", hb.HasText);
+      }
+      var startAttribs = hb.StartAttribs();
+      hb.Begin("html", hb.HasText, null, startAttribs, NoIndent);
+      hb.Begin("head", hb.HasText, applyIndent: NoIndent);
+      var retValue = hb.ToString();
+      return retValue;
+    }
+
+    /// <summary>Gets the HTML end &lt;body&gt; and &lt;html&gt;.</summary>
+    public string GetHTMLEnd(TextState textState)
+    {
+      var tempTextState = SetHasTextFalse(textState);
+      var hb = new HTMLBuilder(tempTextState);
+      hb.End("body", NoIndent);
+      hb.End("html", NoIndent);
+      var retValue = hb.ToString();
+      return retValue;
+    }
+
+    // Gets the <link> element for a style sheet.
+    /// <include path='items/GetLink/*' file='Doc/HTMLBuilder.xml'/>
+    public string GetLink(string fileName, TextState textState)
+    {
+      var tempTextState = SetHasTextFalse(textState);
+      var hb = new HTMLBuilder(tempTextState);
+      var attribs = new Attributes()
+      {
+        { "rel", "stylesheet" },
+        { "type", "text/css" },
+        { "href", fileName },
+      };
+      hb.Create("link", null, hb.HasText, attribs, isEmpty: true);
+      var retValue = hb.ToString();
+      return retValue;
+    }
+
+    // Gets a <meta> element.
+    /// <include path='items/GetMeta/*' file='Doc/HTMLBuilder.xml'/>
+    public string GetMeta(string name, string content, TextState textState)
+    {
+      var tempTextState = SetHasTextFalse(textState);
+      var hb = new HTMLBuilder(tempTextState);
+      var attribs = new Attributes()
+      {
+        { "name", name },
+        { "content", content },
+      };
+      hb.Create("meta", null, hb.HasText, attribs, isEmpty: true);
+      var retValue = hb.ToString();
+      return retValue;
+    }
+
+    // Gets common <meta> elements.
+    /// <include path='items/GetMetas/*' file='Doc/HTMLBuilder.xml'/>
+    public string GetMetas(string author, TextState textState
+      , string description = null, string keywords = null
+      , string charSet = "utf-8")
+    {
+      var tempTextState = SetHasTextFalse(textState);
+      var hb = new HTMLBuilder(tempTextState);
+      var attribs = new Attributes()
+      {
+        { "charset", charSet }
+      };
+      hb.Create("meta", null, hb.HasText, attribs, isEmpty: true);
+      if (NetString.HasValue(description))
+      {
+        hb.CreateMeta("description", description, hb.TextState);
+      }
+      if (NetString.HasValue(keywords))
+      {
+        hb.CreateMeta("keywords", keywords, hb.TextState);
+      }
+      hb.CreateMeta("author", author, hb.TextState);
+      var content = "width=device-width initial-scale=1";
+      hb.CreateMeta("viewport", content, hb.TextState);
+      var retValue = hb.ToString();
+      return retValue;
+    }
+
+    // Gets the <script> element.
+    /// <include path='items/GetScript/*' file='Doc/HTMLBuilder.xml'/>
+    public string GetScript(string fileName, TextState textState)
+    {
+      var tempTextState = SetHasTextFalse(textState);
+      var hb = new HTMLBuilder(tempTextState);
+      var attribs = new Attributes()
+      {
+        { "src", fileName },
+      };
+      hb.Create("script", null, hb.HasText, attribs);
+      var retValue = hb.ToString();
+      return retValue;
+    }
+    #endregion
+
+    // Attrib methods do NOT start with a new line.
+    #region Element Attribs Methods
 
     // Gets common element attributes.
     /// <include path='items/Attribs/*' file='Doc/HTMLBuilder.xml'/>
@@ -551,7 +578,7 @@ namespace LJCNetCommon
     }
 
     // Creates the content text.
-    private string Content(string text, bool isEmpty
+    private string Content(string text, bool hasText, bool isEmpty
       , out bool isWrapped)
     {
       string retValue = "";
@@ -565,19 +592,38 @@ namespace LJCNetCommon
         {
           isWrapped = true;
           retValue += "\r\n";
-          Indent();
-          var textValue = GetText(text);
+          AddIndent();
+          var textValue = GetText(text, hasText);
           retValue += textValue;
-          Indent(-1);
+          AddIndent(-1);
           retValue += "\r\n";
+          // *** Next Statement *** Add 4/8/25
+          LineLength = 0;
         }
         else
         {
           retValue += text;
         }
-        LineLength = 0;
+        // *** Next Statement *** Delete 4/8/25
+        //LineLength = 0;
       }
       return retValue;
+    }
+
+    // Sets TextState.HasText to false.
+    private TextState SetHasTextFalse(TextState textState)
+    {
+      var retTextState = new TextState();
+
+      if (textState != null)
+      {
+        retTextState = new TextState()
+        {
+          HasText = false,
+          IndentCount = textState.IndentCount,
+        };
+      }
+      return retTextState;
     }
 
     // Gets the text length if not null.
@@ -658,10 +704,19 @@ namespace LJCNetCommon
 
     #region Properties
 
-    /// <summary>Gets the current indent count.</summary>
-    public int CurrentIndentCount
+    /// <summary>Indicates if the builder has text.</summary>
+    public bool HasText
     {
-      get { return IndentCount; }
+      get
+      {
+        bool retValue = false;
+        if (HTML.Length > 0
+          || ParentHasText)
+        {
+          retValue = true;
+        }
+        return retValue;
+      }
     }
 
     /// <summary>Gets or sets the indent character count.</summary>
@@ -682,16 +737,43 @@ namespace LJCNetCommon
     /// <summary>Indicates if line wrapping is enabled.</summary>
     public bool WrapEnabled { get; set; }
 
-    // Gets or sets the current indent value.
-    private int IndentCount { get; set; }
+    /// <summary>Gets the current indent value.</summary>
+    public int IndentCount { get; private set; }
+
+    /// <summary>Gets the current text state.</summary>
+    public TextState TextState
+    {
+      get
+      {
+        var retState = new TextState()
+        {
+          HasText = HasText,
+          IndentCount = IndentCount,
+        };
+        return retState;
+      }
+    }
 
     // Gets or sets the XML text.
     private string HTML { get; set; }
+
+    // Gets or sets the parent HasText value.
+    private bool ParentHasText { get; set; }
     #endregion
 
     #region Class Values
 
     const bool NoIndent = false;
     #endregion
+  }
+
+  /// <summary>Represents the text state.</summary>
+  public class TextState
+  {
+    /// <summary>Indicates if the text has a value.</summary>
+    public bool HasText { get; set; }
+
+    /// <summary>The current indent count.</summary>
+    public int IndentCount { get; set; }
   }
 }

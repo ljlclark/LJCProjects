@@ -3,13 +3,7 @@
 <!-- Licensed under the MIT License. -->
 <!-- ColumnHTML.xml -->
 <items>
-  <!-- HTML Methods -->
-  <DataTableHTML>
-    <summary>
-      Gets the HTML Table document from DataTable.
-    </summary>
-    <returns>The HTML document.</returns>
-  </DataTableHTML>
+  <!-- Main Methods -->
   <GetHTML>
     <summary>
       Gets the HTML Table document.
@@ -17,10 +11,26 @@
     <param name="dataType"></param>
     <returns></returns>
   </GetHTML>
+  <!-- HTML Methods -->
+  <DataHTML>
+    <summary>
+      Gets the HTML Table document from a DataObject.
+    </summary>
+    <param name="textState"></param>"
+    <returns></returns>
+  </DataHTML>
+  <DataTableHTML>
+    <summary>
+      Gets the HTML Table document from DataTable.
+    </summary>
+    <param name="textState"></param>"
+    <returns>The HTML document.</returns>
+  </DataTableHTML>
   <ResultHTML>
     <summary>
       Gets the HTML Table document from DbResult.
     </summary>
+    <param name="textState"></param>"
     <returns>The HTML document.</returns>
   </ResultHTML>
   <!-- Data Methods -->
@@ -30,6 +40,12 @@
     </summary>
     <returns>The DataTable object.</returns>
   </GetDataTable>
+  <GetDataColumns>
+    <summary>
+      Gets the Data Object.
+    </summary>
+    <returns></returns>
+  </GetDataColumns>
   <GetResult>
     <summary>
       Gets the DbResult object.

@@ -194,10 +194,10 @@ namespace LJCDataUtility
         var htmlTable = new ColumnHTMLTable(ParentObject, ColumnManager
           , fileName);
 
-        var dataType = "DataObject";
-        //dataType = "DataTable";
-        dataType = "DbResult";
-        string html = htmlTable.GetHTML(dataType);
+        //var dataType = "DataObject";
+        //var dataType = "DataTable";
+        var dataType = "DbResult";
+        string html = htmlTable.TableHTMLDoc(dataType);
 
         File.WriteAllText(fileName, html);
         ParentObject.Cursor = Cursors.Default;

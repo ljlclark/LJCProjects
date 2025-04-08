@@ -30,80 +30,90 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region HTML Methods
+    #region Main Methods
 
-    // Gets the HTML Table document from DataTable.
-    /// <include path='items/DataTableHTML/*' file='Doc/ColumnHtmlTable.xml'/>
-    internal string DataTableHTML()
-    {
-      var hb = new HTMLBuilder();
-      hb.Text(GetBegin());
-
-      var dataTable = GetDataTable();
-      hb.Text(HTMLTableData.DataTableHTML(dataTable));
-      hb.Text(hb.GetHTMLEnd());
-      var retValue = hb.ToString();
-      return retValue;
-    }
-
-    // Gets the HTML Table document.
+    // Gets the Table HTML document.
     /// <include path='items/GetHTML/*' file='Doc/ColumnHtmlTable.xml'/>
-    internal string GetHTML(string dataType)
+    internal string TableHTMLDoc(string dataType)
     {
       var hb = new HTMLBuilder();
-      hb.Text(GetBegin());
-
+      string text;
       switch (dataType.ToLower())
       {
         case "dataobject":
-          hb.Text(DataHTML());
+          text = DataHTML(hb.TextState);
+          hb.Text(text, hb.HasText);
           break;
 
         case "datatable":
-          hb.Text(DataTableHTML());
+          text = DataTableHTML(hb.TextState);
+          hb.Text(text, hb.HasText);
           break;
 
         case "dbresult":
-          hb.Text(ResultHTML());
+          text = ResultHTML(hb.TextState);
+          hb.Add(text);
           break;
       }
       var retValue = hb.ToString();
       return retValue;
     }
+    #endregion
 
-    /// <summary>
-    /// Gets the HTML Table document from a DataObject.
-    /// </summary>
-    /// <returns></returns>
-    internal string DataHTML()
+    #region HTML Methods
+
+    // Gets the HTML Table document from a DataObject.
+    /// <include path='items/DataHTML/*' file='Doc/ColumnHtmlTable.xml'/>
+    internal string DataHTML(TextState textState)
     {
-      var hb = new HTMLBuilder();
-      hb.Text(GetBegin());
+      var hb = new HTMLBuilder(textState);
+      var text = Begin(hb.TextState);
+      hb.Add(text);
 
       var dataColumns = GetDataColumns();
       if (NetCommon.HasItems(dataColumns))
       {
-        // Tricky Bit
         var dataObjects = dataColumns.ToList<object>();
-
         var propertyNames = GetPropertyNames();
-        hb.Text(HTMLTableData.DataHTML(dataObjects, propertyNames));
-        hb.Text(hb.GetHTMLEnd());
+        text = HTMLTableData.DataHTML(dataObjects, propertyNames);
+        hb.Add(text);
+        text = hb.GetHTMLEnd(hb.TextState);
+        hb.Add(text);
       }
+      var retValue = hb.ToString();
+      return retValue;
+    }
+
+    // Gets the HTML Table document from DataTable.
+    /// <include path='items/DataTableHTML/*' file='Doc/ColumnHtmlTable.xml'/>
+    internal string DataTableHTML(TextState textState)
+    {
+      var hb = new HTMLBuilder(textState);
+      var text = Begin(hb.TextState);
+      hb.Add(text);
+
+      var dataTable = GetDataTable();
+      text = HTMLTableData.DataTableHTML(dataTable);
+      hb.Add(text);
+      text = hb.GetHTMLEnd(hb.TextState);
+      hb.Add(text);
       var retValue = hb.ToString();
       return retValue;
     }
 
     // Gets the HTML Table document from DbResult.
     /// <include path='items/ResultHTML/*' file='Doc/ColumnHtmlTable.xml'/>
-    internal string ResultHTML()
+    internal string ResultHTML(TextState textState)
     {
-      var hb = new HTMLBuilder();
-      hb.Text(GetBegin());
+      var hb = new HTMLBuilder(textState);
+      var text = Begin(hb.TextState);
+      hb.Add(text);
 
       var dbResult = GetResult();
-      hb.Text(HTMLTableData.ResultHTML(dbResult));
-      hb.Text(hb.GetHTMLEnd());
+      text = HTMLTableData.ResultHTML(dbResult);
+      hb.Add(text);
+      text = hb.GetHTMLEnd(hb.TextState);
+      hb.Add(text);
       var retValue = hb.ToString();
       return retValue;
     }
@@ -123,6 +133,7 @@ namespace LJCDataUtility
     }
 
     // Gets the Data Object.
+    /// <include path='items/GetDataColumns/*' file='Doc/ColumnHtmlTable.xml'/>
     internal DataColumns GetDataColumns()
     {
       var keyColumns = GetKeyColumns();
@@ -147,14 +158,17 @@ namespace LJCDataUtility
     #region Private Methods
 
     // Gets beginning of HTML including <body> tag.
-    private string GetBegin()
+    private string Begin(TextState textState)
     {
-      var hb = new HTMLBuilder();
-      hb.Text(LJCHTML.GetHTMLBegin(FileName));
-      hb.Line();
-      hb.Text(HTMLHead());
+      var hb = new HTMLBuilder(textState);
+      var text = LJCHTML.GetHTMLBegin(hb.TextState, FileName);
+      //hb.Text(text, hb.HasText);
+      hb.Add(text);
+      text = HTMLHead(hb.TextState);
+      //hb.Text(text, hb.HasText);
+      hb.Add(text);
       hb.End("head", NoIndent);
-      hb.Begin("body", null, null, NoIndent);
+      hb.Begin("body", hb.HasText, applyIndent: NoIndent);
       var retValue = hb.ToString();
       return retValue;
     }
@@ -211,18 +225,44 @@ namespace LJCDataUtility
     }
 
     // The custom HTML Head method.
-    private string HTMLHead(string author = null)
+    private string HTMLHead(TextState textState, string author = null)
     {
       // Create HTML Table.
-      var hb = new HTMLBuilder();
+      var hb = new HTMLBuilder(textState);
+
+      // Handle in NetCommon?
       if (!NetString.HasValue(author))
       {
         author = LJCHTML.Author();
       }
-      hb.Create("title", "Creates an HTML Document");
-      hb.CreateMetas(author, "Create HTML Document");
-      hb.CreateLink("Style.css");
-      hb.CreateScript("Source.js");
+
+      hb.Create("title", "Creates an HTML Document", hb.HasText);
+      hb.CreateMetas(author, hb.TextState, "Create HTML Document");
+
+      hb.Begin("style", hb.HasText);
+      //hb.Line(null, hb.HasText);
+      var text = BeginSelector("th", hb.IndentCount);
+      hb.Text(text, hb.HasText);
+      hb.AddIndent();
+      hb.Line("background-color: rgb(214, 234, 248);", hb.HasText);
+      hb.AddIndent(-1);
+      hb.Text("}", hb.HasText);
+      hb.End("style", hb.HasText);
+
+      var retValue = hb.ToString();
+      return retValue;
+    }
+
+    private string BeginSelector(string selectorName
+      , int indentCount = 0)
+    {
+      var hb = new HTMLBuilder();
+
+      // First line indent is handled by calling builder.
+      hb.Line(selectorName, hb.HasText);
+      hb.AddIndent(indentCount);
+
+      hb.Line("{", hb.HasText);
       var retValue = hb.ToString();
       return retValue;
     }

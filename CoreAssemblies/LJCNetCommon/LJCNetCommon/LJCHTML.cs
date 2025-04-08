@@ -19,17 +19,20 @@ namespace LJCNetCommon
     /// <summary>
     /// Returns default HTML Beginning.
     /// </summary>
+    /// <param name="textState"></param>
     /// <param name="fileName">The HTML document file name.</param>
     /// <returns>The HTML begin text.</returns>
-    public static string GetHTMLBegin(string fileName = null)
+    public static string GetHTMLBegin(TextState textState
+      , string fileName = null)
     {
-      var hb = new HTMLBuilder();
+      textState.HasText = false;
+      var hb = new HTMLBuilder(textState);
       string[] copyright = new string[]
       {
         "Copyright(c) Lester J. Clark and Contributors",
         "Licensed under the MIT License",
       };
-      hb.CreateHTMLBegin(copyright, fileName);
+      hb.CreateHTMLBegin(hb.TextState, copyright, fileName);
       var retValue = hb.ToString();
       return retValue;
     }
