@@ -30,7 +30,7 @@
       Adds the element begin tag.
     </summary>
     <param name="name">The element name.</param>
-    <param name="hasText"></param>"
+    <param name="textState">The current text state values.</param>"
     <param name="text">The element content text.</param>
     <param name="htmlAttributes">The element attributes.</param>
     <param name="applyIndent">Indicates if the element should be indented.</param>
@@ -48,7 +48,7 @@
     </summary>
     <param name="name">The element name.</param>
     <param name="text">The element content text.</param>
-    <param name="hasText"></param>"
+    <param name="textState">The current text state values.</param>"
     <param name="htmlAttributes">The element attributes.</param>
     <param name="applyIndent">Indicates if the element should be indented.</param>
     <param name="isEmpty">Indicates if an empty element.</param>
@@ -81,7 +81,7 @@
       Adds a modified text line to the builder.
     </summary>
     <param name="text">The append text.</param>
-    <param name="hasText">Indicates if the parent value has text.</param>"
+    <param name="textState">The current text state values.</param>"
     <returns>The added text line.</returns>
   </Line>
   <Text>
@@ -89,7 +89,7 @@
       Adds modified text to the builder.
     </summary>
     <param name="text">The append text.</param>
-    <param name="hasText">Indicates if the parent value has text.</param>"
+    <param name="textState">The current text state values.</param>"
     <returns>The added text.</returns>
   </Text>
   <!-- Create Methods -->
@@ -107,7 +107,7 @@
       Creates a &lt;link&gt; element for a style sheet.
     </summary>
     <param name="fileName"></param>
-    <param name="textState"></param>"
+    <param name="textState">The current text state values.</param>"
     <returns></returns>
   </CreateLink>
   <CreateMeta>
@@ -116,7 +116,7 @@
     </summary>
     <param name="name"></param>
     <param name="content"></param>
-    <param name="textState"></param>"
+    <param name="textState">The current text state values.</param>"
     <returns></returns>
   </CreateMeta>
   <CreateMetas>
@@ -124,7 +124,7 @@
       Creates common &lt;meta&gt; elements.
     </summary>
     <param name="author"></param>
-    <param name="textState"></param>"
+    <param name="textState">The current text state values.</param>"
     <param name="description"></param>
     <param name="keywords"></param>
     <param name="charSet"></param>
@@ -135,7 +135,7 @@
       Creates a &lt;script&gt; element.
     </summary>
     <param name="fileName"></param>
-    <param name="textState"></param>"
+    <param name="textState">The current text state values.</param>"
     <returns></returns>
   </CreateScript>
   <!-- Create Get Methods -->
@@ -153,7 +153,7 @@
       Gets the &lt;link&gt; element for a style sheet.
     </summary>
     <param name="fileName"></param>
-    <param name="textState"></param>"
+    <param name="textState">The current text state values.</param>"
     <returns></returns>
   </GetLink>
   <GetMeta>
@@ -162,7 +162,7 @@
     </summary>
     <param name="name"></param>
     <param name="content"></param>
-    <param name="textState"></param>"
+    <param name="textState">The current text state values.</param>"
     <returns></returns>
   </GetMeta>
   <GetMetas>
@@ -170,7 +170,7 @@
       Gets common &lt;meta&gt; elements.
     </summary>
     <param name="author"></param>
-    <param name="textState"></param>"
+    <param name="textState">The current text state values.</param>"
     <param name="description"></param>
     <param name="keywords"></param>
     <param name="charSet"></param>
@@ -181,7 +181,7 @@
       Gets a &lt;script&gt; element.
     </summary>
     <param name="fileName"></param>
-    <param name="textState"></param>"
+    <param name="textState">The current text state values.</param>"
     <returns></returns>
   </GetScript>
   <!-- Attribs Methods -->
@@ -247,7 +247,7 @@
       Gets a modified text line.
     </summary>
     <param name="text">The text value.</param>
-    <param name="hasText">Indicates if the parent value has text.</param>"
+    <param name="textState">The current text state values.</param>"
     <returns>The modified text line.</returns>
   </GetLine>
   <GetText>
@@ -255,7 +255,7 @@
       Gets potentially indented and wrapped text.
     </summary>
     <param name="text">The text value.</param>
-    <param name="hasText">Indicates if the parent value has text.</param>"
+    <param name="textState">The current text state values.</param>"
     <returns>The modified text.</returns>
     <remarks>
       Adds a newline if line length is greater than LineLimit.

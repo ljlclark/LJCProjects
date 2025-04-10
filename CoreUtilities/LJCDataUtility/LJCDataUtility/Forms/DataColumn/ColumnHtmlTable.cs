@@ -42,12 +42,12 @@ namespace LJCDataUtility
       {
         case "dataobject":
           text = DataHTML(hb.TextState);
-          hb.Text(text, hb.HasText);
+          hb.Text(text, hb.TextState);
           break;
 
         case "datatable":
           text = DataTableHTML(hb.TextState);
-          hb.Text(text, hb.HasText);
+          hb.Text(text, hb.TextState);
           break;
 
         case "dbresult":
@@ -111,9 +111,9 @@ namespace LJCDataUtility
 
       var dbResult = GetResult();
       text = HTMLTableData.ResultHTML(dbResult);
-      hb.Add(text);
+      hb.Text(text, hb.TextState);  
       text = hb.GetHTMLEnd(hb.TextState);
-      hb.Add(text);
+      hb.Text(text, hb.TextState);
       var retValue = hb.ToString();
       return retValue;
     }
@@ -162,13 +162,11 @@ namespace LJCDataUtility
     {
       var hb = new HTMLBuilder(textState);
       var text = LJCHTML.GetHTMLBegin(hb.TextState, FileName);
-      //hb.Text(text, hb.HasText);
-      hb.Add(text);
+      hb.Text(text, hb.TextState);
       text = HTMLHead(hb.TextState);
-      //hb.Text(text, hb.HasText);
-      hb.Add(text);
-      hb.End("head", NoIndent);
-      hb.Begin("body", hb.HasText, applyIndent: NoIndent);
+      hb.Text(text, hb.TextState);
+      hb.End("head", hb.HasText, NoIndent);
+      hb.Begin("body", hb.TextState, applyIndent: NoIndent);
       var retValue = hb.ToString();
       return retValue;
     }
@@ -236,19 +234,18 @@ namespace LJCDataUtility
         author = LJCHTML.Author();
       }
 
-      hb.Create("title", "Creates an HTML Document", hb.HasText);
+      hb.Create("title", "Creates an HTML Document", hb.TextState);
+      hb.AddIndent(textState.IndentCount);
+
       hb.CreateMetas(author, hb.TextState, "Create HTML Document");
-
-      hb.Begin("style", hb.HasText);
-      //hb.Line(null, hb.HasText);
+      hb.Begin("style", hb.TextState);
       var text = BeginSelector("th", hb.IndentCount);
-      hb.Text(text, hb.HasText);
+      hb.Text(text, hb.TextState);
       hb.AddIndent();
-      hb.Line("background-color: rgb(214, 234, 248);", hb.HasText);
+      hb.Text("background-color: rgb(214, 234, 248);", hb.TextState);
       hb.AddIndent(-1);
-      hb.Text("}", hb.HasText);
+      hb.Text("}", hb.TextState);
       hb.End("style", hb.HasText);
-
       var retValue = hb.ToString();
       return retValue;
     }
@@ -256,13 +253,14 @@ namespace LJCDataUtility
     private string BeginSelector(string selectorName
       , int indentCount = 0)
     {
-      var hb = new HTMLBuilder();
-
-      // First line indent is handled by calling builder.
-      hb.Line(selectorName, hb.HasText);
+      var tempState = new TextState()
+      {
+        HasText = false,
+      };
+      var hb = new HTMLBuilder(tempState);
+      hb.Text(selectorName, hb.TextState);
       hb.AddIndent(indentCount);
-
-      hb.Line("{", hb.HasText);
+      hb.Text("{", hb.TextState);
       var retValue = hb.ToString();
       return retValue;
     }

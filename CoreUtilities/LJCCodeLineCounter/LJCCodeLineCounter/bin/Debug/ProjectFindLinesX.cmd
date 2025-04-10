@@ -1,4 +1,4 @@
-set Find="ShellProgram"
+set Find="supplied"
 
 if %1. == . goto default
 set folder=%1

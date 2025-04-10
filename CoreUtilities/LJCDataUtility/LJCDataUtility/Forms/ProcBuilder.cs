@@ -172,11 +172,11 @@ namespace LJCDataUtility
     {
       var b = new TextBuilder(256)
       {
-        IndentCount = 2,
         WrapAtDelimiter = true,
         WrapEnabled = true,
       };
-      //var value = b.GetIndentString();
+      b.AddIndent(2);
+
       var value = "";
       if (includeParens)
       {
@@ -749,7 +749,7 @@ namespace LJCDataUtility
     internal int IndentCount
     {
       get { return Builder.IndentCount; }
-      set { Builder.IndentCount = value; }
+      set { Builder.AddIndent(value); }
     }
 
     // Gets or sets the first item indicator.

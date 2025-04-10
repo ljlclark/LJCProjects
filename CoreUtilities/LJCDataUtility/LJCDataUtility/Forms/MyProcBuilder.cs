@@ -123,10 +123,8 @@ namespace LJCDataUtility
       , bool includeParens = true, bool useNewNames = false
       , bool includeID = false, int indentCount = 0)
     {
-      var b = new TextBuilder(256)
-      {
-        IndentCount = indentCount
-      };
+      var b = new TextBuilder(256);
+      b.AddIndent(indentCount);
       var value = "    ";
       if (includeParens)
       {
@@ -252,10 +250,8 @@ namespace LJCDataUtility
     internal string ValuesList(DataColumns dataColumns
       , List<string> varRefNames = null, int indentCount = 0)
     {
-      var b = new TextBuilder(256)
-      {
-        IndentCount = indentCount
-      };
+      var b = new TextBuilder(256);
+      b.AddIndent(indentCount);
       b.Text("    VALUES(");
 
       // Use the variable references instead of value.
@@ -669,7 +665,7 @@ namespace LJCDataUtility
     internal int IndentCount
     {
       get { return Builder.IndentCount; }
-      set { Builder.IndentCount = value; }
+      set { Builder.AddIndent(value); }
     }
 
     // Gets or sets the first item indicator.

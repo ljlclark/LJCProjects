@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TextBuilder.cs
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 
 namespace LJCNetCommon
@@ -39,7 +40,22 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Append Methods
+    #region Methods
+
+    // Changes the IndentCount by the supplied value.
+    /// <include path='items/AddIndent/*' file='Doc/HTMLBuilder.xml'/>
+    public int AddIndent(int increment = 1)
+    {
+      IndentCount += increment;
+      if (IndentCount < 0)
+      {
+        IndentCount = 0;
+      }
+      return IndentCount;
+    }
+    #endregion
+
+    #region Append Text Methods
 
     // Adds text without processing.
     /// <include path='items/Add/*' file='Doc/TextBuilder.xml'/>
@@ -94,7 +110,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Get Modified Methods
+    #region Get Modified Text Methods
 
     // Adds a delimiter if not the first list item.
     /// <include path='items/GetDelimited/*' file='Doc/TextBuilder.xml'/>
@@ -363,11 +379,25 @@ namespace LJCNetCommon
     /// <summary>Gets or sets the delimiter.</summary>
     public string Delimiter { get; set; }
 
+    /// <summary>Indicates if the builder has text.</summary>
+    public bool HasText
+    {
+      get
+      {
+        bool retValue = false;
+        if (Builder.Length > 0)
+        {
+          retValue = true;
+        }
+        return retValue;
+      }
+    }
+
     /// <summary>Gets or sets the indent character count.</summary>
     public int IndentCharCount { get; set; }
 
-    /// <summary>Gets or sets the indent count.</summary>
-    public int IndentCount { get; set; }
+    /// <summary>Gets the indent count.</summary>
+    public int IndentCount { get; private set; }
 
     /// <summary>Gets or sets the first item indicator.</summary>
     public bool IsFirst { get; set; }
@@ -377,6 +407,20 @@ namespace LJCNetCommon
 
     /// <summary>Gets or sets the character limit.</summary>
     public int LineLimit { get; set; }
+
+    /// <summary>Gets the current text state.</summary>
+    public TextState TextState
+    {
+      get
+      {
+        var retState = new TextState()
+        {
+          HasText = HasText,
+          IndentCount = IndentCount,
+        };
+        return retState;
+      }
+    }
 
     /// <summary>
     /// Indicates that a wrap should occur at a leading delimiter.

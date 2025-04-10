@@ -74,6 +74,7 @@
     <Compile Include="PropertyDelegate.cs" />
     <Compile Include="PropertyDelegates.cs" />
     <Compile Include="TextBuilder.cs" />
+    <Compile Include="TextState.cs" />
     <Compile Include="XMLAttribute.cs" />
     <Compile Include="XMLAttributes.cs" />
     <Compile Include="XMLBuilder.cs" />

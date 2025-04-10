@@ -141,9 +141,9 @@ namespace LJCDataUtility
 
         var valuesBuilder = new TextBuilder()
         {
-          IndentCount = 2,
           WrapEnabled = true,
         };
+        valuesBuilder.AddIndent(2);
         valuesBuilder.Text("Values(");
         valuesBuilder.IsFirst = true;
         foreach (var tableColumn in data.TableColumns)
