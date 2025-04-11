@@ -3,7 +3,14 @@
 <!-- Licensed under the MIT License. -->
 <!-- HTMLBuilder.xml -->
 <items>
-  <!-- Methods -->
+  <!-- Data Class Methods 1 -->
+  <ToString>
+    <summary>
+      Retrieves the HTML text.
+    </summary>
+    <returns>The HTML text.</returns>
+  </ToString>
+  <!-- Methods 1 -->
   <AddIndent>
     <summary>
       Changes the IndentCount by the supplied value.
@@ -11,71 +18,13 @@
     <param name="increment">The amount to increment or decrement the count.</param>
     <returns>The current indent count.</returns>
   </AddIndent>
-  <!-- Data Class Methods -->
-  <ToString>
-    <summary>
-      Retrieves the HTML text.
-    </summary>
-    <returns>The HTML text.</returns>
-  </ToString>
-  <!-- Append Methods -->
+  <!-- Append Text Methods (3) -->
   <Add>
     <summary>
       Adds text without modification.
     </summary>
     <param name="text">The append text.</param>
   </Add>
-  <Begin>
-    <summary>
-      Adds the element begin tag.
-    </summary>
-    <param name="name">The element name.</param>
-    <param name="textState">The current text state values.</param>"
-    <param name="text">The element content text.</param>
-    <param name="htmlAttributes">The element attributes.</param>
-    <param name="applyIndent">Indicates if the element should be indented.</param>
-    <returns>The added element begin tag.</returns>
-    <remarks>
-      The appended text does not end with a new line. This allows for additions
-      after the text.<br />
-      Begin, Create and End text will start with a new line if the builder text
-      already has a value.
-    </remarks>
-  </Begin>
-  <Create>
-    <summary>
-      Adds an XML element.
-    </summary>
-    <param name="name">The element name.</param>
-    <param name="text">The element content text.</param>
-    <param name="textState">The current text state values.</param>"
-    <param name="htmlAttributes">The element attributes.</param>
-    <param name="applyIndent">Indicates if the element should be indented.</param>
-    <param name="isEmpty">Indicates if an empty element.</param>
-    <param name="close">Indicates if the element will be closed.</param>
-    <returns>The added XML element.</returns>
-    <remarks>
-      The appended text does not end with a new line. This allows for additions
-      after the text.<br />
-      Begin, Create and End text will start with a new line if the builder text
-      already has a value.
-    </remarks>
-  </Create>
-  <End>
-    <summary>
-      Adds the element end tag.
-    </summary>
-    <param name="name">The element name.</param>
-    <param name="hasText"></param>"
-    <param name="applyIndent">Indicates if the element should be indented.</param>
-    <returns>The added element end tag.</returns>
-    <remarks>
-      The appended text does not end with a new line. This allows for additions
-      after the text.<br />
-      Begin, Create and End text will start with a new line if the builder text
-      already has a value.
-    </remarks>
-  </End>
   <Line>
     <summary>
       Adds a modified text line to the builder.
@@ -92,125 +41,7 @@
     <param name="textState">The current text state values.</param>"
     <returns>The added text.</returns>
   </Text>
-  <!-- Create Methods -->
-  <CreateHTMLBegin>
-    <summary>
-      Creates the HTML beginning up to and including &lt;head&gt;.
-    </summary>
-    <param name="textState"></param>"
-    <param name="copyright"></param>
-    <param name="fileName"></param>
-    <returns></returns>
-  </CreateHTMLBegin>
-  <CreateLink>
-    <summary>
-      Creates a &lt;link&gt; element for a style sheet.
-    </summary>
-    <param name="fileName"></param>
-    <param name="textState">The current text state values.</param>"
-    <returns></returns>
-  </CreateLink>
-  <CreateMeta>
-    <summary>
-      Creates a &lt;meta&gt; element.
-    </summary>
-    <param name="name"></param>
-    <param name="content"></param>
-    <param name="textState">The current text state values.</param>"
-    <returns></returns>
-  </CreateMeta>
-  <CreateMetas>
-    <summary>
-      Creates common &lt;meta&gt; elements.
-    </summary>
-    <param name="author"></param>
-    <param name="textState">The current text state values.</param>"
-    <param name="description"></param>
-    <param name="keywords"></param>
-    <param name="charSet"></param>
-    <returns></returns>
-  </CreateMetas>
-  <CreateScript>
-    <summary>
-      Creates a &lt;script&gt; element.
-    </summary>
-    <param name="fileName"></param>
-    <param name="textState">The current text state values.</param>"
-    <returns></returns>
-  </CreateScript>
-  <!-- Create Get Methods -->
-  <GetHTMLBegin>
-    <summary>
-      Gets the HTML beginning up to and including &lt;head&gt;.
-    </summary>
-    <param name="textState"></param>"
-    <param name="copyright"></param>
-    <param name="fileName"></param>
-    <returns></returns>
-  </GetHTMLBegin>
-  <GetLink>
-    <summary>
-      Gets the &lt;link&gt; element for a style sheet.
-    </summary>
-    <param name="fileName"></param>
-    <param name="textState">The current text state values.</param>"
-    <returns></returns>
-  </GetLink>
-  <GetMeta>
-    <summary>
-      Gets a &lt;meta&gt; element.
-    </summary>
-    <param name="name"></param>
-    <param name="content"></param>
-    <param name="textState">The current text state values.</param>"
-    <returns></returns>
-  </GetMeta>
-  <GetMetas>
-    <summary>
-      Gets common &lt;meta&gt; elements.
-    </summary>
-    <param name="author"></param>
-    <param name="textState">The current text state values.</param>"
-    <param name="description"></param>
-    <param name="keywords"></param>
-    <param name="charSet"></param>
-    <returns></returns>
-  </GetMetas>
-  <GetScript>
-    <summary>
-      Gets a &lt;script&gt; element.
-    </summary>
-    <param name="fileName"></param>
-    <param name="textState">The current text state values.</param>"
-    <returns></returns>
-  </GetScript>
-  <!-- Attribs Methods -->
-  <Attribs>
-    <summary>
-      Gets common element attributes.
-    </summary>
-    <param name="className">The class attribute.</param>
-    <param name="id">The id attribute.</param>
-    <returns>The common element attributes collection.</returns>
-  </Attribs>
-  <StartAttribs>
-    <summary>
-      Creates the HTML start attributes.
-    </summary>
-    <returns>The HTML start attributes.</returns>
-  </StartAttribs>
-  <TableAttribs>
-    <summary>
-      Gets common table attributes.
-    </summary>
-    <param name="border">The border attribute.</param>
-    <param name="cellSpacing">The cellspacing attribute</param>
-    <param name="cellPadding">The cellpadding attribute</param>
-    <param name="className">The class attribute.</param>
-    <param name="id">The id attribute.</param>
-    <returns>The common table attributes.</returns>
-  </TableAttribs>
-  <!-- Get Modified Text Methods -->
+  <!-- Get Text Methods (6) -->
   <GetAttribs>
     <summary>
       Gets the attributes text.
@@ -268,4 +99,204 @@
     <param name="text">The text value.</param>
     <returns>The modified text.</returns>
   </GetWrapped>
+  <!-- Append Element Methods (7) -->
+  <Begin>
+    <summary>
+      Appends the element begin tag.
+    </summary>
+    <param name="name">The element name.</param>
+    <param name="textState">The current text state values.</param>"
+    <param name="text">The element content text.</param>
+    <param name="htmlAttributes">The element attributes.</param>
+    <param name="applyIndent">Indicates if the element should be indented.</param>
+    <returns>The added element begin tag.</returns>
+    <remarks>
+      The appended text does not end with a new line. This allows for additions
+      after the text.<br />
+      Begin, Create and End text will start with a new line if the builder text
+      already has a value.
+    </remarks>
+  </Begin>
+  <Create>
+    <summary>
+      Appends an element.
+    </summary>
+    <param name="name">The element name.</param>
+    <param name="text">The element content text.</param>
+    <param name="textState">The current text state values.</param>"
+    <param name="htmlAttributes">The element attributes.</param>
+    <param name="applyIndent">Indicates if the element should be indented.</param>
+    <param name="isEmpty">Indicates if an empty element.</param>
+    <param name="close">Indicates if the element will be closed.</param>
+    <returns>The added HTML element.</returns>
+    <remarks>
+      The appended text does not end with a new line. This allows for additions
+      after the text.<br />
+      Begin, Create and End text will start with a new line if the builder text
+      already has a value.
+    </remarks>
+  </Create>
+  <End>
+    <summary>
+      Appends the element end tag.
+    </summary>
+    <param name="name">The element name.</param>
+    <param name="textState">The current text state values.</param>"
+    <param name="applyIndent">Indicates if the element should be indented.</param>
+    <returns>The added element end tag.</returns>
+    <remarks>
+      The appended text does not end with a new line. This allows for additions
+      after the text.<br />
+      Begin, Create and End text will start with a new line if the builder text
+      already has a value.
+    </remarks>
+  </End>
+  <Link>
+    <summary>
+      Appends a &lt;link&gt; element for a style sheet.
+    </summary>
+    <param name="fileName"></param>
+    <param name="textState">The current text state values.</param>"
+    <returns></returns>
+  </Link>
+  <Meta>
+    <summary>
+      Appends a &lt;meta&gt; element.
+    </summary>
+    <param name="name"></param>
+    <param name="content"></param>
+    <param name="textState">The current text state values.</param>"
+    <returns></returns>
+  </Meta>
+  <Metas>
+    <summary>
+      Appends common &lt;meta&gt; elements.
+    </summary>
+    <param name="author"></param>
+    <param name="textState">The current text state values.</param>"
+    <param name="description"></param>
+    <param name="keywords"></param>
+    <param name="charSet"></param>
+    <returns></returns>
+  </Metas>
+  <Script>
+    <summary>
+      Appends a &lt;script&gt; element.
+    </summary>
+    <param name="fileName"></param>
+    <param name="textState">The current text state values.</param>"
+    <returns></returns>
+  </Script>
+  <!-- Get Element Methods (6) -->
+  <GetCreate>
+    <summary>
+      Gets an element.
+    </summary>
+    <param name="name">The element name.</param>
+    <param name="text">The element content text.</param>
+    <param name="textState">The current text state values.</param>"
+    <param name="htmlAttributes">The element attributes.</param>
+    <param name="applyIndent">Indicates if the element should be indented.</param>
+    <param name="isEmpty">Indicates if an empty element.</param>
+    <param name="close">Indicates if the element will be closed.</param>
+    <returns>The HTML element.</returns>
+  </GetCreate>
+  <GetEnd>
+    <summary>
+      Gets the element end tag.
+    </summary>
+    <param name="name">The element name.</param>
+    <param name="textState">The current text state values.</param>"
+    <param name="applyIndent">Indicates if the element should be indented.</param>
+    <returns>The element end tag.</returns>
+  </GetEnd>
+  <GetLink>
+    <summary>
+      Gets the &lt;link&gt; element for a style sheet.
+    </summary>
+    <param name="fileName"></param>
+    <param name="textState">The current text state values.</param>"
+    <returns></returns>
+  </GetLink>
+  <GetMeta>
+    <summary>
+      Gets a &lt;meta&gt; element.
+    </summary>
+    <param name="name"></param>
+    <param name="content"></param>
+    <param name="textState">The current text state values.</param>"
+    <returns></returns>
+  </GetMeta>
+  <GetMetas>
+    <summary>
+      Gets common &lt;meta&gt; elements.
+    </summary>
+    <param name="author"></param>
+    <param name="textState">The current text state values.</param>"
+    <param name="description"></param>
+    <param name="keywords"></param>
+    <param name="charSet"></param>
+    <returns></returns>
+  </GetMetas>
+  <GetScript>
+    <summary>
+      Gets a &lt;script&gt; element.
+    </summary>
+    <param name="fileName"></param>
+    <param name="textState">The current text state values.</param>"
+    <returns></returns>
+  </GetScript>
+  <!-- Append HTML Methods -->
+  <HTMLBegin>
+    <summary>
+      Creates the HTML beginning up to and including &lt;head&gt;.
+    </summary>
+    <param name="textState"></param>"
+    <param name="copyright"></param>
+    <param name="fileName"></param>
+    <returns></returns>
+  </HTMLBegin>
+  <!-- Get HTML Methods (2) -->
+  <GetHTMLBegin>
+    <summary>
+      Gets the HTML beginning up to and including &lt;head&gt;.
+    </summary>
+    <param name="textState"></param>"
+    <param name="copyright"></param>
+    <param name="fileName"></param>
+    <returns></returns>
+  </GetHTMLBegin>
+  <GetHTMLEnd>
+    <summary>
+      Gets the HTML end &lt;body&gt; and &lt;html&gt;.
+    </summary>
+    <param name="textState"></param>
+    <returns></returns>
+  </GetHTMLEnd>
+  <!-- Get Element Attribs Methods (3) -->
+  <Attribs>
+    <summary>
+      Gets common element attributes.
+    </summary>
+    <param name="className">The class attribute.</param>
+    <param name="id">The id attribute.</param>
+    <returns>The common element attributes collection.</returns>
+  </Attribs>
+  <StartAttribs>
+    <summary>
+      Creates the HTML start attributes.
+    </summary>
+    <returns>The HTML start attributes.</returns>
+  </StartAttribs>
+  <TableAttribs>
+    <summary>
+      Gets common table attributes.
+    </summary>
+    <param name="border">The border attribute.</param>
+    <param name="cellSpacing">The cellspacing attribute</param>
+    <param name="cellPadding">The cellpadding attribute</param>
+    <param name="className">The class attribute.</param>
+    <param name="id">The id attribute.</param>
+    <returns>The common table attributes.</returns>
+  </TableAttribs>
 </items>

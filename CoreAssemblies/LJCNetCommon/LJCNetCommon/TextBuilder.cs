@@ -110,7 +110,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Get Modified Text Methods
+    #region Get Text Methods
 
     // Adds a delimiter if not the first list item.
     /// <include path='items/GetDelimited/*' file='Doc/TextBuilder.xml'/>
@@ -144,6 +144,13 @@ namespace LJCNetCommon
         retText += text;
       }
       return retText;
+    }
+
+    /// <summary>Returns the current indent string.</summary>
+    public string GetIndentString()
+    {
+      var retValue = new string(' ', IndentCount * IndentCharCount);
+      return retValue;
     }
 
     // Adds added text and new wrapped line if combined line > LineLimit.
@@ -349,28 +356,6 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Other Methods
-
-    /// <summary>Returns the current indent string.</summary>
-    public string GetIndentString()
-    {
-      var retValue = new string(' ', IndentCount * IndentCharCount);
-      return retValue;
-    }
-
-    // Changes the IndentCount by the supplied value.
-    /// <include path='items/Indent/*' file='Doc/TextBuilder.xml'/>
-    public int Indent(int increment = 1)
-    {
-      IndentCount += increment;
-      if (IndentCount < 0)
-      {
-        IndentCount = 0;
-      }
-      return IndentCount;
-    }
-    #endregion
-
     #region Properties
 
     /// <summary>The internal StringBuilder class.</summary>
@@ -406,7 +391,7 @@ namespace LJCNetCommon
     public int LineLength { get; private set; }
 
     /// <summary>Gets or sets the character limit.</summary>
-    public int LineLimit { get; set; }
+    public int LineLimit { get; private set; }
 
     /// <summary>Gets the current text state.</summary>
     public TextState TextState

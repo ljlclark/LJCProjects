@@ -25,14 +25,20 @@ namespace LJCNetCommon
     public static string GetHTMLBegin(TextState textState
       , string fileName = null)
     {
-      textState.HasText = false;
-      var hb = new HTMLBuilder(textState);
+      // Begin "Get String" method.
+      var hb = new HTMLBuilder();
+      hb.AddIndent(textState.IndentCount);
+      var syncState = hb.TextState;
+
       string[] copyright = new string[]
       {
         "Copyright(c) Lester J. Clark and Contributors",
         "Licensed under the MIT License",
       };
-      hb.CreateHTMLBegin(hb.TextState, copyright, fileName);
+      hb.HTMLBegin(syncState, copyright, fileName);
+
+      // End "Create String" method.
+      textState.IndentCount = syncState.IndentCount;
       var retValue = hb.ToString();
       return retValue;
     }

@@ -212,6 +212,7 @@
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataKey.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataModule.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataTable.sql" />
+    <Content Include="Doc\BuildersCompare.txt" />
     <Content Include="Doc\ColumnHTMLTable.xml" />
     <Content Include="Doc\HTMLTableData.xml" />
     <Content Include="Doc\MyProcBuilder.xml" />

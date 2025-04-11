@@ -197,7 +197,7 @@ namespace LJCDataUtility
         //var dataType = "DataObject";
         //var dataType = "DataTable";
         var dataType = "DbResult";
-        string html = htmlTable.TableHTMLDoc(dataType);
+        string html = htmlTable.ColumnHTMLDoc(dataType);
 
         File.WriteAllText(fileName, html);
         ParentObject.Cursor = Cursors.Default;

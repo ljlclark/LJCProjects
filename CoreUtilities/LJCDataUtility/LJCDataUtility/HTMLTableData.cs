@@ -30,7 +30,7 @@ namespace LJCDataUtility
           state.HasText = hb.HasText;
           hb.Create("th", column.ColumnName, state);
         }
-        hb.End("tr", hb.HasText);
+        hb.End("tr", hb.TextState);
         retValue = hb.ToString();
       }
       return retValue;
@@ -51,7 +51,7 @@ namespace LJCDataUtility
         hb.Text(text, hb.TextState);
         text = DataTableRows(dataTable, maxRows);
         hb.Text(text, hb.TextState);
-        hb.End("table", hb.HasText);
+        hb.End("table", hb.TextState);
         retValue = hb.ToString();
       }
       return retValue;
@@ -83,7 +83,7 @@ namespace LJCDataUtility
             state.HasText = hb.HasText;
             hb.Create("td", value, state);
           }
-          hb.End("tr", hb.HasText);
+          hb.End("tr", hb.TextState);
         }
         retValue = hb.ToString();
       }
@@ -117,7 +117,7 @@ namespace LJCDataUtility
             hb.Create("th", name, state);
           }
         }
-        hb.End("tr", hb.HasText);
+        hb.End("tr", hb.TextState);
         retValue = hb.ToString();
       }
       return retValue;
@@ -139,7 +139,7 @@ namespace LJCDataUtility
         hb.Text(text, hb.TextState);
         text = DataRows(dataObjects, propertyNames, maxRows);
         hb.Text(text, hb.TextState);
-        hb.End("table", hb.HasText);
+        hb.End("table", hb.TextState);
         retValue = hb.ToString();
       }
       return retValue;
@@ -183,7 +183,7 @@ namespace LJCDataUtility
               hb.Create("td", value, state);
             }
           }
-          hb.End("tr", hb.HasText);
+          hb.End("tr", hb.TextState);
         }
         retValue = hb.ToString();
       }
@@ -209,7 +209,7 @@ namespace LJCDataUtility
           state.HasText = hb.HasText;
           hb.Create("th", value.PropertyName, state);
         }
-        hb.End("tr", hb.HasText);
+        hb.End("tr", hb.TextState);
         retValue = hb.ToString();
       }
       return retValue;
@@ -217,20 +217,26 @@ namespace LJCDataUtility
 
     // Creates an HTML table from a DbResult.
     /// <include path='items/ResultHTML/*' file='Doc/HTMLTableData.xml'/>
-    public static string ResultHTML(DbResult dbResult, int maxRows = 0)
+    public static string ResultHTML(DbResult dbResult, TextState textState
+      , int maxRows = 0)
     {
       string retValue = null;
 
       if (NetCommon.HasItems(dbResult.Rows))
       {
         var hb = new HTMLBuilder();
+        hb.AddIndent(textState.IndentCount);
+        var syncState = hb.TextState;
         var attribs = hb.TableAttribs();
-        hb.Begin("table", hb.TextState, null, attribs);
+        hb.Begin("table", syncState, null, attribs);
+
         var text = ResultHeadings(dbResult);
-        hb.Text(text, hb.TextState);
+        hb.Text(text, syncState);
         text = ResultRows(dbResult, maxRows);
-        hb.Text(text, hb.TextState);
-        hb.End("table", hb.HasText);
+        hb.Text(text, syncState);
+        hb.End("table", syncState);
+
+        textState.IndentCount = syncState.IndentCount;
         retValue = hb.ToString();
       }
       return retValue;
@@ -266,7 +272,7 @@ namespace LJCDataUtility
             state.HasText = hb.HasText;
             hb.Create("td", valueText, state);
           }
-          hb.End("tr", hb.HasText);
+          hb.End("tr", hb.TextState);
         }
         retValue = hb.ToString();
       }

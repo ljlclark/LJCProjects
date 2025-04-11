@@ -105,7 +105,7 @@ namespace LJCDataUtility
     // Changes the IndentCount by the supplied value.
     internal int Indent(int count = 1)
     {
-      var retCount = Builder.Indent(count);
+      var retCount = Builder.AddIndent(count);
       return retCount;
     }
 

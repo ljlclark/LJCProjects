@@ -67,6 +67,7 @@
       Creates an HTML table from DbResult.
     </summary>
     <param name="dbResult"></param>
+    <param name="textState"></param>"
     <param name="maxRows"></param>
     <returns></returns>
   </ResultHTML>

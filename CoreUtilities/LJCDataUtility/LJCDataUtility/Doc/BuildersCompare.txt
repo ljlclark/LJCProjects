@@ -1,0 +1,97 @@
+﻿--- HTMLBuilder ---                         --- TextBuilder ---                       --- XMLBuilder ---
+*** 1 Constructors                          *** 1 Constructors                        *** 1 Constructors
+HTMLBuilder(textState:null)                 TextBuilder(capacity:32, builder:null)    XMLBuilder()
+
+*** 1 Data Class Methods                    *** 1 Data Class Methods                  *** 1 Data Class Methods
+string ToString()                           string ToString()                         string ToString()
+
+*** 1 Methods                               *** 1 Methods                             *** 1 Methods
+int AddIndent(increment:1)                  int AddIndent(increment:1)                int AddIndent(increment:1)
+
+*** 3 Append Text Methods                   *** 4 Append Text Methods                 *** 1 Append Text Methods
+Add(text)                                   Add(text)
+                                            string Item(text)
+string Line(text, textState)                string Line(text:null)
+string Text(text, textState)                string Text(text)                         string Text(text)
+
+*** 6 Get Text Methods                      *** 4 Get Text Methods                    *** 3 Get Text Methods
+                                            string GetDelimited(text)
+string GetAttribs(htmlAttribs)
+string GetIndented(text)                    string GetIndented(text)                  string GetIndented(text)
+string GetIndentString()                    string GetIndentString()                  string GetIndentString()
+string GetLine(text, textState)
+string GetText(text, textState)
+string GetWrapped(text)                     string GetWrapped(text)                   string GetWrapped(text)
+
+--- HTMLBuilder ---                         --- TextBuilder ---                       --- XMLBuilder ---
+*** 3 Append Element Methods                                                          *** 3 Append Element Methods
+string Begin(name, textState, text:null                                               string Begin(name, text:null
+ , htmlAttributes:null, applyIndent:true)                                              , xmlAttributes:null, applyIndent:true)
+string Create(name, text, textState)                                                  string Create(name, text, xmlAttributes:null)
+ , isEmpty:false, close:true)                                                          , isEmpty:false, close:true)
+string End(name, textState                                                            string End(name, applyIndent:true)
+ , applyIndent:true)
+
+*** 5 Create Element Methods
+string CreateHTMLBegin(textState
+ , copyright:null, fileName:null)
+string CreateLink(fileName, textState)
+string CreateMeta(name, content
+ , textState)
+string CreateMetas(author, textState
+ , description:null, keywords:null
+ , charSet:utf-8)
+string CreateScript(fileName, textState)
+
+--- HTMLBuilder ---                         --- TextBuilder ---                       --- XMLBuilder ---
+*** 5 Get Element Methods
+string GetHtmlBegin(textState
+ , copyright:null, fileName:null)
+string GetLink(fileName, textState)
+string GetMeta(name, content, textState)
+string GetMetas(author, textState
+ , description:null, keywords:null
+ , charSet:utf-8)
+string GetScript(fileName, textState)
+
+*** 3 Element Attribs Methods                                                         *** 1 Element Attribs Methods
+Attributes Attribs()
+Attributes StartAttribs()                                                             Attributes StartAttribs()
+Attributes TableAttribs(border:1
+ , cellSpacing:0, cellPadding:2
+ , className:null, id:null)
+
+--- HTMLBuilder ---                         --- TextBuilder ---                       --- XMLBuilder ---
+*** 4 Private Methods                       *** 8 Private Methods                     *** 4 Private Methods
+string AddText(text, addLength)             string AddText(text, addLength)           string AddText(text, addLength)
+int TextLength(text)                        int TextLength(text)                      TextLength(text)
+                                            int ToIndex(length)
+                                            int ToLength(index)
+int WrapIndex(text)                         int WrapIndex(text)                       WrapIndex(text)
+                                            string WrapPrepend()
+                                            int WrapPrependLength()
+string WrapText(text, wrapIndex)            string WrapText(text, wrapIndex)          string WrapText(text, wrapIndex)
+
+*** 8 Properties                            *** 12 Properties                         *** 4 Properties     
+                                            StringBuilder Builder
+                                            string Delimiter
+bool HasText (Get)                          bool HasText (Get)
+int IndentCharCount                         int IndentCharCount                       int IndentCharCount
+int IndentCount (Get)                       int IndentCount (Get)                     int IndentCount (Get)
+                                            bool IsFirst
+
+--- HTMLBuilder ---                         --- TextBuilder ---                       --- XMLBuilder ---
+int IndentLength
+int LineLength (Get)                        int LineLength                            int LineLength (Get)
+int LineLimit                               int LineLimit
+bool WrapEnabled                            bool WrapEnabled                          bool WrapEnabled
+TextState TextState (Get)                   TextState TextState (Get)
+                                            bool WrapAtDelimiter
+                                            string WrapPrefix
+
+*** 2 Private Properties                                                              *** 1 Private Properties
+string HTML                                                                           string XML
+bool ParentHasText
+
+*** 1 Class Values
+const bool NoIndent:false
