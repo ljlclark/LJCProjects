@@ -106,7 +106,6 @@
     </summary>
     <param name="name">The element name.</param>
     <param name="textState">The current text state values.</param>"
-    <param name="text">The element content text.</param>
     <param name="htmlAttributes">The element attributes.</param>
     <param name="applyIndent">Indicates if the element should be indented.</param>
     <returns>The added element begin tag.</returns>

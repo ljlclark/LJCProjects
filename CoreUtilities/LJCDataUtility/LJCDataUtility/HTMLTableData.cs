@@ -46,7 +46,7 @@ namespace LJCDataUtility
       {
         var hb = new HTMLBuilder();
         var attribs = hb.TableAttribs();
-        hb.Begin("table", hb.TextState, null, attribs);
+        hb.Begin("table", hb.TextState, attribs);
         var text = DataTableHeadings(dataTable);
         hb.Text(text, hb.TextState);
         text = DataTableRows(dataTable, maxRows);
@@ -134,7 +134,7 @@ namespace LJCDataUtility
       {
         var hb = new HTMLBuilder();
         var attribs = hb.TableAttribs();
-        hb.Begin("table", hb.TextState, null, attribs);
+        hb.Begin("table", hb.TextState, attribs);
         var text = DataHeadings(dataObjects, propertyNames);
         hb.Text(text, hb.TextState);
         text = DataRows(dataObjects, propertyNames, maxRows);
@@ -228,7 +228,7 @@ namespace LJCDataUtility
         hb.AddIndent(textState.IndentCount);
         var syncState = hb.TextState;
         var attribs = hb.TableAttribs();
-        hb.Begin("table", syncState, null, attribs);
+        hb.Begin("table", syncState, attribs);
 
         var text = ResultHeadings(dbResult);
         hb.Text(text, syncState);

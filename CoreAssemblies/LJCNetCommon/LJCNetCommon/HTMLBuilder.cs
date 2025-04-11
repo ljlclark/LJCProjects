@@ -260,16 +260,19 @@ namespace LJCNetCommon
 
     // Appends the element begin tag.
     /// <include path='items/Begin/*' file='Doc/HTMLBuilder.xml'/>
-    public string Begin(string name, TextState textState, string text = null
+    public string Begin(string name, TextState textState
       , Attributes htmlAttributes = null, bool applyIndent = true)
     {
       // Begin "Append" method.
       var syncState = textState;
 
-      var retText = GetCreate(name, text, syncState, htmlAttributes, applyIndent
-        , false, false);
-      // Use textState for first "Append" line after "Get String" method.
-      Text(retText, textState);
+      var retText = GetBegin(name, syncState, htmlAttributes, applyIndent);
+      if (TextLength(retText) > 0)
+      {
+        // Use textState for first "Append" line after "Get String" method.
+        Text(retText, textState);
+        syncState.HasText = true;
+      }
 
       // End "Append" method.
       textState.HasText = syncState.HasText;
@@ -331,8 +334,12 @@ namespace LJCNetCommon
       var syncState = textState;
 
       var retValue = GetLink(fileName, syncState);
-      // Use textState for first "Append" line after "Get String" method.
-      Text(retValue, textState);
+      if (TextLength(retValue) > 0)
+      {
+        // Use textState for first "Append" line after "Get String" method.
+        Text(retValue, textState);
+        syncState.HasText = true;
+      }
 
       // End "Append" method.
       textState.HasText = syncState.HasText;
@@ -348,8 +355,12 @@ namespace LJCNetCommon
       var syncState = textState;
 
       var retValue = GetMeta(name, content, syncState);
-      // Use textState for first "Append" line after "Get String" method.
-      Text(retValue, textState);
+      if (TextLength(retValue) > 0)
+      {
+        // Use textState for first "Append" line after "Get String" method.
+        Text(retValue, textState);
+        syncState.HasText = true;
+      }
 
       // End "Append" method.
       textState.HasText = syncState.HasText;
@@ -368,8 +379,12 @@ namespace LJCNetCommon
 
       var retValue = GetMetas(author, syncState, description, keywords
         , charSet);
-      // Use textState for first "Append" line after "Get String" method.
-      Text(retValue, textState);
+      if (TextLength(retValue) > 0)
+      {
+        // Use textState for first "Append" line after "Get String" method.
+        Text(retValue, textState);
+        syncState.HasText = true;
+      }
 
       // End "Append" method.
       textState.HasText = syncState.HasText;
@@ -385,8 +400,12 @@ namespace LJCNetCommon
       var syncState = textState;
 
       var retValue = GetScript(fileName, syncState);
-      // Use textState for first "Append" line after "Get String" method.
-      Text(retValue, textState);
+      if (TextLength(retValue) > 0)
+      {
+        // Use textState for first "Append" line after "Get String" method.
+        Text(retValue, textState);
+        syncState.HasText = true;
+      }
 
       // End "Append" method.
       textState.HasText = syncState.HasText;
@@ -396,6 +415,29 @@ namespace LJCNetCommon
     #endregion
 
     #region Get Element Methods (6)
+
+    /// <summary></summary>
+    public string GetBegin(string name, TextState textState
+      , Attributes htmlAttributes = null, bool applyIndent = true)
+    {
+      // Begin "Get String" method.
+      var hb = new HTMLBuilder();
+      hb.AddIndent(textState.IndentCount);
+      var syncState = hb.TextState;
+
+      var createText = GetCreate(name, null, syncState, htmlAttributes
+        , applyIndent, false, false);
+      if (TextLength(createText) > 0)
+      {
+        // Use textState for first "Append" line after "Get String" method.
+        hb.Text(createText, textState);
+      }
+
+      // End "Get String" method.
+      textState.IndentCount = syncState.IndentCount;
+      var retValue = hb.ToString();
+      return retValue;
+    }
 
     // Gets an element.
     /// <include path='items/GetCreate/*' file='Doc/HTMLBuilder.xml'/>
@@ -508,7 +550,13 @@ namespace LJCNetCommon
         { "type", "text/css" },
         { "href", fileName },
       };
-      hb.GetCreate("link", null, syncState, attribs, isEmpty: true);
+      var createText = hb.GetCreate("link", null, syncState, attribs
+        , isEmpty: true);
+      if (TextLength(createText) > 0)
+      {
+        // Use textState for first "Append" line after "Get String" method.
+        hb.Text(createText, textState);
+      }
 
       // End "Get String" method.
       textState.IndentCount = syncState.IndentCount;
@@ -530,7 +578,13 @@ namespace LJCNetCommon
         { "name", name },
         { "content", content },
       };
-      hb.GetCreate("meta", null, hb.TextState, attribs, isEmpty: true);
+      var createText = hb.GetCreate("meta", null, hb.TextState, attribs
+        , isEmpty: true);
+      if (TextLength(createText) > 0)
+      {
+        // Use textState for first "Append" line after "Get String" method.
+        hb.Text(createText, textState);
+      }
 
       // End "Get String" method.
       textState.IndentCount = syncState.IndentCount;
@@ -553,7 +607,13 @@ namespace LJCNetCommon
       {
         { "charset", charSet }
       };
-      hb.GetCreate("meta", null, hb.TextState, attribs, isEmpty: true);
+      var createText = hb.GetCreate("meta", null, hb.TextState, attribs
+        , isEmpty: true);
+      if (TextLength(createText) > 0)
+      {
+        // Use textState for first "Append" line after "Get String" method.
+        hb.Text(createText, textState);
+      }
       if (NetString.HasValue(description))
       {
         hb.Meta("description", description, hb.TextState);
@@ -585,7 +645,12 @@ namespace LJCNetCommon
       {
         { "src", fileName },
       };
-      hb.GetCreate("script", null, hb.TextState, attribs);
+      var createText = hb.GetCreate("script", null, hb.TextState, attribs);
+      if (TextLength(createText) > 0)
+      {
+        // Use textState for first "Append" line after "Get String" method.
+        hb.Text(createText, textState);
+      }
 
       // End "Get String" method.
       textState.IndentCount = syncState.IndentCount;
@@ -640,7 +705,8 @@ namespace LJCNetCommon
         hb.Text($"<!-- {fileName} -->", syncState);
       }
       var startAttribs = hb.StartAttribs();
-      var text = hb.GetCreate("html", null, syncState, startAttribs, NoIndent);
+      var text = hb.GetCreate("html", null, syncState, startAttribs
+        , NoIndent, close: false);
       // Use textState for first "Append" line after "Get String" method.
       hb.Text(text, textState);
 
