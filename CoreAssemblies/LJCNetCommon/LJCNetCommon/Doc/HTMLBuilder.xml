@@ -107,7 +107,12 @@
     <param name="name">The element name.</param>
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttributes">The element attributes.</param>
-    <param name="applyIndent">Indicates if the element should be indented.</param>
+    <param name="startIndent">
+      Indicates if the element should be indented.
+    </param>
+    <param name="childIndent">
+      Indicates if the child elements should be indented.
+    </param>
     <returns>The added element begin tag.</returns>
     <remarks>
       The appended text does not end with a new line. This allows for additions
@@ -124,7 +129,12 @@
     <param name="text">The element content text.</param>
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttributes">The element attributes.</param>
-    <param name="applyIndent">Indicates if the element should be indented.</param>
+    <param name="startIndent">
+      Indicates if the element should be indented.
+    </param>
+    <param name="childIndent">
+      Indicates if the child elements should be indented.
+    </param>
     <param name="isEmpty">Indicates if an empty element.</param>
     <param name="close">Indicates if the element will be closed.</param>
     <returns>The added HTML element.</returns>
@@ -187,6 +197,21 @@
     <returns></returns>
   </Script>
   <!-- Get Element Methods (6) -->
+  <GetBegin>
+    <summary>
+      Gets the element begin tag.
+    </summary>
+    <param name="name">The element name.</param>
+    <param name="textState">The current text state values.</param>"
+    <param name="htmlAttributes">The element attributes.</param>
+    <param name="startIndent">
+      Indicates if the element should be indented.
+    </param>
+    <param name="childIndent">
+      Indicates if the child elements should be indented.
+    </param>
+    <returns>The HTML element begin tag.</returns>
+  </GetBegin>
   <GetCreate>
     <summary>
       Gets an element.
@@ -195,7 +220,12 @@
     <param name="text">The element content text.</param>
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttributes">The element attributes.</param>
-    <param name="applyIndent">Indicates if the element should be indented.</param>
+    <param name="startIndent">
+      Indicates if the element should be indented.
+    </param>
+    <param name="childIndent">
+      Indicates if the child elements should be indented.
+    </param>
     <param name="isEmpty">Indicates if an empty element.</param>
     <param name="close">Indicates if the element will be closed.</param>
     <returns>The HTML element.</returns>

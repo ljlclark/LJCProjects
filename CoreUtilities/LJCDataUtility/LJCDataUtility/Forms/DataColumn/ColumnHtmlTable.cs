@@ -176,8 +176,8 @@ namespace LJCDataUtility
       hb.Text(text, syncState);
       text = HTMLHead(syncState);
       hb.Text(text, syncState);
-      hb.End("head", syncState, NoIndent);
-      hb.Begin("body", syncState, applyIndent: NoIndent);
+      hb.End("head", syncState, NoStartIndent);
+      hb.Begin("body", syncState, startIndent: NoStartIndent);
 
       // End "Get String" method.
       textState.IndentCount = syncState.IndentCount;
@@ -324,7 +324,7 @@ namespace LJCDataUtility
 
     #region Class Values
 
-    const bool NoIndent = false;
+    const bool NoStartIndent = false;
     #endregion
   }
 }

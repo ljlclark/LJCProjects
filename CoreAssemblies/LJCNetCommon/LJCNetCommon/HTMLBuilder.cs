@@ -177,11 +177,12 @@ namespace LJCNetCommon
 
     // Gets potentially indented and wrapped text.
     /// <include path='items/GetText/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetText(string text, TextState textState)
+    public string GetText(string text, TextState textState, bool addLine = true)
     {
       var retText = "";
 
-      if (textState.HasText)
+      if (textState.HasText
+        && addLine)
       {
         retText += "\r\n";
       }
@@ -261,12 +262,14 @@ namespace LJCNetCommon
     // Appends the element begin tag.
     /// <include path='items/Begin/*' file='Doc/HTMLBuilder.xml'/>
     public string Begin(string name, TextState textState
-      , Attributes htmlAttributes = null, bool applyIndent = true)
+      , Attributes htmlAttributes = null, bool startIndent = true
+      , bool childIndent = true)
     {
       // Begin "Append" method.
       var syncState = textState;
 
-      var retText = GetBegin(name, syncState, htmlAttributes, applyIndent);
+      var retText = GetBegin(name, syncState, htmlAttributes, startIndent
+        , childIndent);
       if (TextLength(retText) > 0)
       {
         // Use textState for first "Append" line after "Get String" method.
@@ -283,14 +286,14 @@ namespace LJCNetCommon
     // Appends an element.
     /// <include path='items/Create/*' file='Doc/HTMLBuilder.xml'/>
     public string Create(string name, string text, TextState textState
-      , Attributes htmlAttributes = null, bool applyIndent = true
-      , bool isEmpty = false, bool close = true)
+      , Attributes htmlAttributes = null, bool startIndent = true
+      , bool childIndent = true, bool isEmpty = false, bool close = true)
     {
       // Begin "Append" method.
       var syncState = textState;
 
-      var retText = GetCreate(name, text, syncState, htmlAttributes, applyIndent
-        , isEmpty, close);
+      var retText = GetCreate(name, text, syncState, htmlAttributes, startIndent
+        , childIndent, isEmpty, close);
       if (TextLength(retText) > 0)
       {
         // Use textState for first "Append" line after "Get String" method.
@@ -416,9 +419,11 @@ namespace LJCNetCommon
 
     #region Get Element Methods (6)
 
-    /// <summary></summary>
+    // Gets the element begin tag.
+    /// <include path='items/GetBegin/*' file='Doc/HTMLBuilder.xml'/>
     public string GetBegin(string name, TextState textState
-      , Attributes htmlAttributes = null, bool applyIndent = true)
+      , Attributes htmlAttributes = null, bool startIndent = true
+      , bool childIndent = true)
     {
       // Begin "Get String" method.
       var hb = new HTMLBuilder();
@@ -426,7 +431,7 @@ namespace LJCNetCommon
       var syncState = hb.TextState;
 
       var createText = GetCreate(name, null, syncState, htmlAttributes
-        , applyIndent, false, false);
+        , startIndent, childIndent, close: false);
       if (TextLength(createText) > 0)
       {
         // Use textState for first "Append" line after "Get String" method.
@@ -442,8 +447,8 @@ namespace LJCNetCommon
     // Gets an element.
     /// <include path='items/GetCreate/*' file='Doc/HTMLBuilder.xml'/>
     public string GetCreate(string name, string text, TextState textState
-      , Attributes htmlAttributes = null, bool applyIndent = true
-      , bool isEmpty = false, bool close = true)
+      , Attributes htmlAttributes = null, bool startIndent = true
+      , bool childIndent = true, bool isEmpty = false, bool close = true)
     {
       // Begin "Get String" method.
       var tb = new TextBuilder(128);
@@ -451,11 +456,11 @@ namespace LJCNetCommon
       var syncState = tb.TextState;
       if (textState.HasText)
       {
-        tb.Line();
+        tb.Line(); // ?
       }
 
       // Add the element name and attributes.
-      if (applyIndent)
+      if (startIndent)
       {
         tb.Text($"{GetIndentString()}");
       }
@@ -474,7 +479,7 @@ namespace LJCNetCommon
 
       // Set indent for child elements.
       if (!isEmpty
-        && applyIndent)
+        && childIndent)
       {
         AddSyncIndent(this, tb, syncState);
       }
@@ -486,16 +491,16 @@ namespace LJCNetCommon
         if (isWrapped)
         {
           tb.Line();
-          if (applyIndent)
+          if (childIndent)
           {
             // Reset indent for element end.
             AddSyncIndent(this, tb, syncState, -1);
           }
-          applyIndent = false;
+          //startIndent = false; // ?
           tb.Text(GetIndentString());
         }
         tb.Text($"</{name}>");
-        if (applyIndent)
+        if (childIndent)
         {
           // Reset indent for next element.
           AddSyncIndent(this, tb, syncState);
@@ -705,14 +710,16 @@ namespace LJCNetCommon
         hb.Text($"<!-- {fileName} -->", syncState);
       }
       var startAttribs = hb.StartAttribs();
-      var text = hb.GetCreate("html", null, syncState, startAttribs
-        , NoIndent, close: false);
+      var text = hb.GetBegin("html", syncState, startAttribs, NoIndent);
       // Use textState for first "Append" line after "Get String" method.
       hb.Text(text, textState);
 
-      text = hb.GetCreate("head", null, syncState, applyIndent: NoIndent);
-      hb.Text(text, syncState);
-      AddSyncIndent(hb, null, syncState);
+      // Do not start <head> with extra indent.
+      AddSyncIndent(hb, null, syncState, -1);
+      text = hb.GetBegin("head", syncState, startIndent: NoIndent);
+      // Use textState for first "Append" line after "Get String" method.
+      hb.Text(text, textState);
+      //AddSyncIndent(hb, null, syncState);
 
       // End "Get String" method.
       textState.IndentCount = syncState.IndentCount;
