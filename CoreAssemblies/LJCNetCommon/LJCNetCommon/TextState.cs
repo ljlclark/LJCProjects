@@ -11,20 +11,44 @@ namespace LJCNetCommon
     /// <summary>
     /// Initializes an object instance with the supplied values.
     /// </summary>
-    public TextState(bool hasText = false, int indentCount = 0)
+    public TextState(int indentCount = 0)
     {
-      HasText = hasText;
       IndentCount = indentCount;
+      NewIndentCount = 0;
     }
     #endregion
 
     #region Properties
 
-    /// <summary>Indicates if the builder has text.</summary>
-    public bool HasText { get; set; }
+    /// <summary>The current indent count to sync called method.</summary>
+    public int IndentCount
+    {
+      get { return mIndentCount; }
+      set
+      {
+        mIndentCount = 0;
+        if (value >= 0)
+        {
+          mIndentCount = value;
+        }
+      }
+    }
+    private int mIndentCount;
 
-    /// <summary>The current indent count.</summary>
-    public int IndentCount { get; set; }
+    /// <summary>The new indent count to sync calling method.</summary>
+    public int NewIndentCount
+    {
+      get { return mNewIndentCount; }
+      set
+      {
+        mNewIndentCount = 0;
+        if (value >= 0)
+        {
+          mNewIndentCount = value;
+        }
+      }
+    }
+    private int mNewIndentCount;
     #endregion
   }
 }

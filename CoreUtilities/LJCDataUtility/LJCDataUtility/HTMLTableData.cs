@@ -24,11 +24,9 @@ namespace LJCDataUtility
       {
         var hb = new HTMLBuilder();
         hb.Begin("tr", hb.TextState);
-        var state = new TextState(hb.HasText, hb.IndentCount);
         foreach (DataColumn column in dataTable.Columns)
         {
-          state.HasText = hb.HasText;
-          hb.Create("th", column.ColumnName, state);
+          hb.Create("th", column.ColumnName, hb.TextState);
         }
         hb.End("tr", hb.TextState);
         retValue = hb.ToString();
@@ -48,9 +46,9 @@ namespace LJCDataUtility
         var attribs = hb.TableAttribs();
         hb.Begin("table", hb.TextState, attribs);
         var text = DataTableHeadings(dataTable);
-        hb.Text(text, hb.TextState);
+        hb.Text(text);
         text = DataTableRows(dataTable, maxRows);
-        hb.Text(text, hb.TextState);
+        hb.Text(text);
         hb.End("table", hb.TextState);
         retValue = hb.ToString();
       }
@@ -67,7 +65,6 @@ namespace LJCDataUtility
       {
         var count = 0;
         var hb = new HTMLBuilder();
-        var state = new TextState(hb.HasText, hb.IndentCount);
         foreach (DataRow row in dataTable.Rows)
         {
           count++;
@@ -80,8 +77,7 @@ namespace LJCDataUtility
           foreach (DataColumn column in dataTable.Columns)
           {
             string value = row[column.ColumnName].ToString();
-            state.HasText = hb.HasText;
-            hb.Create("td", value, state);
+            hb.Create("td", value, hb.TextState);
           }
           hb.End("tr", hb.TextState);
         }
@@ -103,7 +99,6 @@ namespace LJCDataUtility
       if (NetCommon.HasItems(dataObjects))
       {
         var hb = new HTMLBuilder();
-        var state = new TextState(hb.HasText, hb.IndentCount);
         hb.Begin("tr", hb.TextState);
         var dataObject = dataObjects[0];
         var reflect = new LJCReflect(dataObject);
@@ -113,8 +108,7 @@ namespace LJCDataUtility
           if (name != "ChangedNames"
             && propertyNames.Contains(name))
           {
-            state.HasText = hb.HasText;
-            hb.Create("th", name, state);
+            hb.Create("th", name, hb.TextState);
           }
         }
         hb.End("tr", hb.TextState);
@@ -136,9 +130,9 @@ namespace LJCDataUtility
         var attribs = hb.TableAttribs();
         hb.Begin("table", hb.TextState, attribs);
         var text = DataHeadings(dataObjects, propertyNames);
-        hb.Text(text, hb.TextState);
+        hb.Text(text);
         text = DataRows(dataObjects, propertyNames, maxRows);
-        hb.Text(text, hb.TextState);
+        hb.Text(text);
         hb.End("table", hb.TextState);
         retValue = hb.ToString();
       }
@@ -156,7 +150,6 @@ namespace LJCDataUtility
       {
         var count = 0;
         var hb = new HTMLBuilder();
-        var state = new TextState(hb.HasText, hb.IndentCount);
         foreach (var dataObject in dataObjects)
         {
           count++;
@@ -179,8 +172,7 @@ namespace LJCDataUtility
               {
                 value = objectValue.ToString();
               }
-              state.HasText = hb.HasText;
-              hb.Create("td", value, state);
+              hb.Create("td", value, hb.TextState);
             }
           }
           hb.End("tr", hb.TextState);
@@ -202,12 +194,10 @@ namespace LJCDataUtility
       if (DbResult.HasRows(dbResult))
       {
         var hb = new HTMLBuilder();
-        var state = new TextState(hb.HasText, hb.IndentCount);
         hb.Begin("tr", hb.TextState);
         foreach (var value in dbResult.Rows[0].Values)
         {
-          state.HasText = hb.HasText;
-          hb.Create("th", value.PropertyName, state);
+          hb.Create("th", value.PropertyName, hb.TextState);
         }
         hb.End("tr", hb.TextState);
         retValue = hb.ToString();
@@ -231,9 +221,9 @@ namespace LJCDataUtility
         hb.Begin("table", syncState, attribs);
 
         var text = ResultHeadings(dbResult);
-        hb.Text(text, syncState);
+        hb.Text(text);
         text = ResultRows(dbResult, maxRows);
-        hb.Text(text, syncState);
+        hb.Text(text);
         hb.End("table", syncState);
 
         textState.IndentCount = syncState.IndentCount;
@@ -252,7 +242,6 @@ namespace LJCDataUtility
       {
         var count = 0;
         var hb = new HTMLBuilder();
-        var state = new TextState(hb.HasText, hb.IndentCount);
         foreach (var row in dbResult.Rows)
         {
           count++;
@@ -269,8 +258,7 @@ namespace LJCDataUtility
             {
               valueText = value.Value.ToString();
             }
-            state.HasText = hb.HasText;
-            hb.Create("td", valueText, state);
+            hb.Create("td", valueText, hb.TextState);
           }
           hb.End("tr", hb.TextState);
         }

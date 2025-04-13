@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TextBuilder.cs
+using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 
@@ -16,6 +17,7 @@ namespace LJCNetCommon
     {
       if (null == builder)
       {
+        TextState = new TextState();
         builder = new StringBuilder(capacity);
         Delimiter = ", ";
         IndentCharCount = 2;
@@ -382,7 +384,14 @@ namespace LJCNetCommon
     public int IndentCharCount { get; set; }
 
     /// <summary>Gets the indent count.</summary>
-    public int IndentCount { get; private set; }
+    public int IndentCount
+    {
+      get { return TextState.IndentCount; }
+      set
+      {
+        TextState.IndentCount = value;
+      }
+    }
 
     /// <summary>Gets or sets the first item indicator.</summary>
     public bool IsFirst { get; set; }
@@ -392,20 +401,6 @@ namespace LJCNetCommon
 
     /// <summary>Gets or sets the character limit.</summary>
     public int LineLimit { get; private set; }
-
-    /// <summary>Gets the current text state.</summary>
-    public TextState TextState
-    {
-      get
-      {
-        var retState = new TextState()
-        {
-          HasText = HasText,
-          IndentCount = IndentCount,
-        };
-        return retState;
-      }
-    }
 
     /// <summary>
     /// Indicates that a wrap should occur at a leading delimiter.
@@ -417,6 +412,12 @@ namespace LJCNetCommon
 
     /// <summary>Gets or sets the new line prefix.</summary>
     public string WrapPrefix { get; set; }
+    #endregion
+
+    #region Class Values
+
+    /// <summary></summary>
+    public TextState TextState;
     #endregion
   }
 }

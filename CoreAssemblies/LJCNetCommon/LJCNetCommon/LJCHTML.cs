@@ -37,8 +37,7 @@ namespace LJCNetCommon
       };
       hb.HTMLBegin(syncState, copyright, fileName);
 
-      // End "Create String" method.
-      textState.IndentCount = syncState.IndentCount;
+      hb.SyncState(textState, syncState);
       var retValue = hb.ToString();
       return retValue;
     }
