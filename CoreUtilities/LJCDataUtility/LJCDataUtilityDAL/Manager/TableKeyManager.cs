@@ -1,16 +1,11 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // TableKeyManager.cs
-using LJCDataAccess;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using System.Text;
-using System.Xml.Linq;
 
 namespace LJCDataUtilityDAL
 {

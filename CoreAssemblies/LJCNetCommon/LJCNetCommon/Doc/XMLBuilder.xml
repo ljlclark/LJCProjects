@@ -9,6 +9,13 @@
     </summary>
     <returns>The XML text.</returns>
   </ToString>
+  <Text>
+    <summary>
+      Adds a newline if line length is greater than LineLimit.
+    </summary>
+    <param name="text"></param>
+    <returns></returns>
+  </Text>
   <BeginElement>
     <summary>
       Creates the element begin tag.

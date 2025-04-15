@@ -1,8 +1,9 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJC.cs
+// LJCHTML.cs
 
-namespace LJCNetCommon
+// Move to LJCNetCommon
+namespace LJCDataUtility
 {
   /// <summary>LJC specific methods.</summary>
   public class LJCHTML
@@ -25,10 +26,8 @@ namespace LJCNetCommon
     public static string GetHTMLBegin(TextState textState
       , string fileName = null)
     {
-      // Begin "Get String" method.
       var hb = new HTMLBuilder();
-      hb.AddIndent(textState.IndentCount);
-      var syncState = hb.TextState;
+      var syncState = hb.GetSyncIndent(textState);
 
       string[] copyright = new string[]
       {
@@ -36,9 +35,9 @@ namespace LJCNetCommon
         "Licensed under the MIT License",
       };
       hb.HTMLBegin(syncState, copyright, fileName);
+      var retValue = hb.ToString();
 
       hb.SyncState(textState, syncState);
-      var retValue = hb.ToString();
       return retValue;
     }
     #endregion

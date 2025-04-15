@@ -37,7 +37,7 @@ namespace LJCNetCommon
     #region Methods
 
     // Changes the XMLIndentCount by the supplied value.
-    /// <include path='items/IndentXML/*' file='Doc/TextBuilder.xml'/>
+    /// <include path='items/IndentXML/*' file='Doc/XMLBuilder.xml'/>
     public int AddIndent(int increment = 1)
     {
       IndentCount += increment;
@@ -52,7 +52,7 @@ namespace LJCNetCommon
     #region Append Text Methods
 
     // Adds a newline if line length is greater than LineLimit.
-    /// <include path='items/Text/*' file='Doc/TextBuilder.xml'/>
+    /// <include path='items/Text/*' file='Doc/XMLBuilder.xml'/>
     public string Text(string text)
     {
       var retText = GetIndented(text);
@@ -75,7 +75,7 @@ namespace LJCNetCommon
     #region Get Text Methods
 
     /// <summary>Gets a new line with prefixed indent.</summary>
-    /// <include path='items/GetIndented/*' file='Doc/TextBuilder.xml'/>
+    /// <include path='items/GetIndented/*' file='Doc/XMLBuilder.xml'/>
     public string GetIndented(string text)
     {
       string retText = "";
@@ -104,7 +104,7 @@ namespace LJCNetCommon
     }
 
     // Adds added text and new wrapped line if combined line > LineLimit.
-    /// <include path='items/GetWrapped/*' file='Doc/TextBuilder.xml'/>
+    /// <include path='items/GetWrapped/*' file='Doc/XMLBuilder.xml'/>
     public string GetWrapped(string text)
     {
       string retText = text;

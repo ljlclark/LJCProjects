@@ -37,6 +37,8 @@
       Adds modified text to the builder.
     </summary>
     <param name="text">The append text.</param>
+    <param name="allowStartIndent"></param>"
+    <param name="allowNewLine"></param>"
     <returns>The added text.</returns>
   </Text>
   <!-- Get Text Methods (6) -->
@@ -45,6 +47,7 @@
       Gets the attributes text.
     </summary>
     <param name="htmlAttribs">The attributes collection.</param>
+    <param name="textState">The current text state values.</param>"
     <remarks>
       The returned text does not end with a new line. This allows for additions
       after the text.<br />
@@ -83,7 +86,8 @@
       Gets potentially indented and wrapped text.
     </summary>
     <param name="text">The text value.</param>
-    <param name="addLine"></param>"
+    <param name="allowStartIndent"></param>"
+    <param name="allowNewLine"></param>"
     <returns>The modified text.</returns>
     <remarks>
       Adds a newline if line length is greater than LineLimit.
@@ -104,9 +108,7 @@
     <param name="name">The element name.</param>
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttribs">The element attributes.</param>
-    <param name="startIndent">
-      Indicates if the element should be indented.
-    </param>
+    <param name="allowStartIndent"></param>"
     <param name="childIndent">
       Indicates if the child elements should be indented.
     </param>
@@ -126,9 +128,7 @@
     <param name="text">The element content text.</param>
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttribs">The element attributes.</param>
-    <param name="startIndent">
-      Indicates if the element should be indented.
-    </param>
+    <param name="allowStartIndent"></param>"
     <param name="childIndent">
       Indicates if the child elements should be indented.
     </param>
@@ -194,6 +194,12 @@
     <returns></returns>
   </Script>
   <!-- Get Element Methods (6) -->
+  <AddNewIndent>
+    <summary>
+      Adds the new (child) indents.
+    </summary>
+    <param name="syncState">The TextState object.</param>
+  </AddNewIndent>
   <GetBegin>
     <summary>
       Gets the element begin tag.
@@ -201,9 +207,6 @@
     <param name="name">The element name.</param>
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttribs">The element attributes.</param>
-    <param name="startIndent">
-      Indicates if the element should be indented.
-    </param>
     <returns>The HTML element begin tag.</returns>
   </GetBegin>
   <GetCreate>
@@ -214,9 +217,6 @@
     <param name="text">The element content text.</param>
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttribs">The element attributes.</param>
-    <param name="startIndent">
-      Indicates if the element should be indented.
-    </param>
     <param name="isEmpty">Indicates if an empty element.</param>
     <param name="close">Indicates if the element will be closed.</param>
     <returns>The HTML element.</returns>
@@ -293,6 +293,20 @@
     <param name="textState"></param>
     <returns></returns>
   </GetHTMLEnd>
+  <GetSyncIndent>
+    <summary>
+      Gets the sync TextState object.
+    </summary>
+    <param name="textState">The "GetString" method parameter.</param>
+    <returns>The synchronized TextState object.</returns>
+  </GetSyncIndent>
+  <SyncState>
+    <summary>
+      Sync calling function text state.
+    </summary>
+    <param name="toTextState">The "to" TextState</param>
+    <param name="fromTextState">The "from" TextState.</param>
+  </SyncState>
   <!-- Get Element Attribs Methods (3) -->
   <Attribs>
     <summary>

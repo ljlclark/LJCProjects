@@ -26,7 +26,8 @@
   <Text>
     <summary>Adds text.</summary>
     <param name="text">The next append value.</param>
-    <param name="newLine"></param>"
+    <param name="allowStartIndent"></param>"
+    <param name="allowNewLine"></param>"
     <returns>The potentially indented and wrapped new text value.</returns>
   </Text>
   <!-- -->

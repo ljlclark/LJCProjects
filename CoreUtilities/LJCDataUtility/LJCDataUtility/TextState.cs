@@ -2,7 +2,8 @@
 // Licensed under the MIT License.
 // TextState.cs
 
-namespace LJCNetCommon
+// Move to LJCNetCommon
+namespace LJCDataUtility
 {
   /// <summary>Represents the text state.</summary>
   public class TextState

@@ -36,22 +36,25 @@ namespace LJCDataUtility
     /// <include path='items/GetHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string ColumnHTMLDoc(string dataType)
     {
+      // Root GetText Method
       var hb = new HTMLBuilder();
+      var textState = new TextState();
+
       string text;
       switch (dataType.ToLower())
       {
         case "dataobject":
-          text = DataHTML(hb.TextState);
+          text = DataHTML(textState);
           hb.Text(text);
           break;
 
         case "datatable":
-          text = DataTableHTML(hb.TextState);
+          text = DataTableHTML(textState);
           hb.Text(text);
           break;
 
         case "dbresult":
-          text = ResultHTML(hb.TextState);
+          text = ResultHTML(textState);
           hb.Add(text);
           break;
       }
@@ -66,8 +69,11 @@ namespace LJCDataUtility
     /// <include path='items/DataHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string DataHTML(TextState textState)
     {
+      // GetText Method
       var hb = new HTMLBuilder(textState);
-      var text = GetBegin(hb.TextState);
+      var syncState = hb.GetSyncIndent(textState);
+
+      var text = GetBegin(syncState);
       hb.Add(text);
 
       var dataColumns = GetDataColumns();
@@ -77,10 +83,12 @@ namespace LJCDataUtility
         var propertyNames = GetPropertyNames();
         text = HTMLTableData.DataHTML(dataObjects, propertyNames);
         hb.Add(text);
-        text = hb.GetHTMLEnd(hb.TextState);
+        text = hb.GetHTMLEnd(syncState);
         hb.Add(text);
       }
       var retValue = hb.ToString();
+
+      hb.SyncState(textState, syncState);
       return retValue;
     }
 
@@ -88,16 +96,21 @@ namespace LJCDataUtility
     /// <include path='items/DataTableHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string DataTableHTML(TextState textState)
     {
-      var hb = new HTMLBuilder(textState);
-      var text = GetBegin(hb.TextState);
+      // GetText Method
+      var hb = new HTMLBuilder();
+      var syncState = hb.GetSyncIndent(textState);
+
+      var text = GetBegin(syncState);
       hb.Add(text);
 
       var dataTable = GetDataTable();
       text = HTMLTableData.DataTableHTML(dataTable);
       hb.Add(text);
-      text = hb.GetHTMLEnd(hb.TextState);
+      text = hb.GetHTMLEnd(syncState);
       hb.Add(text);
       var retValue = hb.ToString();
+
+      hb.SyncState(textState, syncState);
       return retValue;
     }
 
@@ -105,13 +118,9 @@ namespace LJCDataUtility
     /// <include path='items/ResultHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string ResultHTML(TextState textState)
     {
-      // Begin "Get String" method.
+      // GetText Method
       var hb = new HTMLBuilder();
-      if (textState != null)
-      {
-        hb.AddIndent(textState.IndentCount);
-      }
-      var syncState = hb.TextState;
+      var syncState = hb.GetSyncIndent(textState);
 
       var text = GetBegin(syncState);
       hb.Text(text);
@@ -120,10 +129,9 @@ namespace LJCDataUtility
       hb.Text(text);  
       text = hb.GetHTMLEnd(syncState);
       hb.Text(text);
-
-      // End "Get String" method.
-      textState.IndentCount = syncState.IndentCount;
       var retValue = hb.ToString();
+
+      hb.SyncState(textState, syncState);
       return retValue;
     }
     #endregion
@@ -169,34 +177,31 @@ namespace LJCDataUtility
     // Gets beginning of HTML including <body> tag.
     private string GetBegin(TextState textState)
     {
-      // Begin "Get String" method.
+      // GetText Method
       var hb = new HTMLBuilder();
-      hb.AddIndent(textState.IndentCount);
-      var syncState = hb.TextState;
+      var syncState = hb.GetSyncIndent(textState);
 
       // Creates to including <head>.
-      var text = LJCHTML.GetHTMLBegin(syncState, FileName);
-      hb.Text(text);
-      hb.IndentCount = syncState.IndentCount;
+      var getText = LJCHTML.GetHTMLBegin(syncState, FileName);
+      hb.Text(getText);
+      hb.AddChildIndent(syncState);
 
-      text = GetHTMLHead(syncState);
-      hb.Text(text);
+      getText = GetHTMLHead(syncState);
+      hb.Text(getText);
       hb.End("head", syncState, NoIndent);
-      hb.Begin("body", syncState, startIndent: NoIndent);
-
-      // End "Get String" method.
-      textState.IndentCount = syncState.IndentCount;
+      hb.Begin("body", syncState);
       var retValue = hb.ToString();
+
+      hb.SyncState(textState, syncState);
       return retValue;
     }
 
     // The custom HTML Head method.
     private string GetHTMLHead(TextState textState, string author = null)
     {
-      // Begin "Get String" method.
+      // GetText Method
       var hb = new HTMLBuilder();
-      hb.AddIndent(textState.IndentCount);
-      var syncState = hb.TextState;
+      var syncState = hb.GetSyncIndent(textState);
 
       // Handle in NetCommon?
       if (!NetString.HasValue(author))
@@ -219,10 +224,9 @@ namespace LJCDataUtility
 
       hb.Text("}");
       hb.End("style", syncState);
-
-      // End "Get String" method.
-      textState.IndentCount = syncState.IndentCount;
       var retValue = hb.ToString();
+
+      hb.SyncState(textState, syncState);
       return retValue;
     }
 
