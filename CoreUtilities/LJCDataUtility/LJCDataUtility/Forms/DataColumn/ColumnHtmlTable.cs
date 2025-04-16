@@ -10,6 +10,7 @@ using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace LJCDataUtility
@@ -36,26 +37,26 @@ namespace LJCDataUtility
     /// <include path='items/GetHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string ColumnHTMLDoc(string dataType)
     {
-      // Root GetText Method
+      // Root GetText Method Begin
       var hb = new HTMLBuilder();
       var textState = new TextState();
 
-      string text;
+      string getText;
       switch (dataType.ToLower())
       {
         case "dataobject":
-          text = DataHTML(textState);
-          hb.Text(text);
+          getText = DataHTML(textState);
+          hb.Text(getText);
           break;
 
         case "datatable":
-          text = DataTableHTML(textState);
-          hb.Text(text);
+          getText = DataTableHTML(textState);
+          hb.Text(getText);
           break;
 
         case "dbresult":
-          text = ResultHTML(textState);
-          hb.Add(text);
+          getText = ResultHTML(textState);
+          hb.Add(getText);
           break;
       }
       var retValue = hb.ToString();
@@ -69,13 +70,15 @@ namespace LJCDataUtility
     /// <include path='items/DataHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string DataHTML(TextState textState)
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder(textState);
       var syncState = hb.GetSyncIndent(textState);
 
-      var text = GetBegin(syncState);
+      // Create custom beginning of document.
+      var text = GetHTMLDocBegin(syncState);
       hb.Add(text);
 
+      // Create HTML table.
       var dataColumns = GetDataColumns();
       if (NetCommon.HasItems(dataColumns))
       {
@@ -83,11 +86,13 @@ namespace LJCDataUtility
         var propertyNames = GetPropertyNames();
         text = HTMLTableData.DataHTML(dataObjects, propertyNames);
         hb.Add(text);
-        text = hb.GetHTMLEnd(syncState);
-        hb.Add(text);
       }
+
+      text = hb.GetHTMLEnd(syncState);
+      hb.Add(text);
       var retValue = hb.ToString();
 
+      // GetText Method End
       hb.SyncState(textState, syncState);
       return retValue;
     }
@@ -96,20 +101,24 @@ namespace LJCDataUtility
     /// <include path='items/DataTableHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string DataTableHTML(TextState textState)
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder();
       var syncState = hb.GetSyncIndent(textState);
 
-      var text = GetBegin(syncState);
+      // Create custom beginning of document.
+      var text = GetHTMLDocBegin(syncState);
       hb.Add(text);
 
+      // Create HTML table.
       var dataTable = GetDataTable();
       text = HTMLTableData.DataTableHTML(dataTable);
       hb.Add(text);
+
       text = hb.GetHTMLEnd(syncState);
       hb.Add(text);
       var retValue = hb.ToString();
 
+      // GetText Method End
       hb.SyncState(textState, syncState);
       return retValue;
     }
@@ -118,19 +127,24 @@ namespace LJCDataUtility
     /// <include path='items/ResultHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string ResultHTML(TextState textState)
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder();
       var syncState = hb.GetSyncIndent(textState);
 
-      var text = GetBegin(syncState);
-      hb.Text(text);
+      // Create custom beginning of document.
+      var getText = GetHTMLDocBegin(syncState);
+      hb.Text(getText);
+
+      // Create HTML table.
       var dbResult = GetResult();
-      text = HTMLTableData.ResultHTML(dbResult, syncState);
-      hb.Text(text);  
-      text = hb.GetHTMLEnd(syncState);
-      hb.Text(text);
+      getText = HTMLTableData.ResultHTML(dbResult, syncState);
+      hb.Text(getText);  
+
+      getText = hb.GetHTMLEnd(syncState);
+      hb.Text(getText);
       var retValue = hb.ToString();
 
+      // GetText Method End
       hb.SyncState(textState, syncState);
       return retValue;
     }
@@ -172,63 +186,69 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Private Methods
+    #region Private HTML Methods
 
     // Gets beginning of HTML including <body> tag.
-    private string GetBegin(TextState textState)
+    private string GetHTMLDocBegin(TextState textState)
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder();
       var syncState = hb.GetSyncIndent(textState);
 
       // Creates to including <head>.
-      var getText = LJCHTML.GetHTMLBegin(syncState, FileName);
-      hb.Text(getText);
-      hb.AddChildIndent(syncState);
+      string[] copyright = new string[]
+      {
+        "Copyright(c) Lester J. Clark and Contributors",
+        "Licensed under the MIT License",
+      };
+      var createText = hb.GetHTMLBegin(syncState, copyright, FileName);
+      hb.Text(createText);
+      hb.AddChildIndent(createText, syncState);
 
-      getText = GetHTMLHead(syncState);
-      hb.Text(getText);
+      createText = GetHTMLDocHead(syncState);
+      hb.Text(createText);
+
       hb.End("head", syncState, NoIndent);
       hb.Begin("body", syncState);
       var retValue = hb.ToString();
 
+      // GetText Method End
       hb.SyncState(textState, syncState);
       return retValue;
     }
 
     // The custom HTML Head method.
-    private string GetHTMLHead(TextState textState, string author = null)
+    private string GetHTMLDocHead(TextState textState)
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder();
       var syncState = hb.GetSyncIndent(textState);
 
-      // Handle in NetCommon?
-      if (!NetString.HasValue(author))
-      {
-        author = LJCHTML.Author();
-      }
+      var title = "Creates an HTML Document";
+      var author = "Lester J. Clark";
+      var description = "Creates an HTML Document";
+      var getText = hb.GetHTMLHead(syncState, title, author, description);
+      hb.Text(getText);
 
-      hb.Create("title", "Creates an HTML Document", syncState
-        , childIndent: false);
-      hb.Metas(author, syncState, "Create HTML Document");
       hb.Begin("style", syncState, childIndent: false);
-      var text = BeginSelector("th", hb.IndentCount);
+      var text = hb.GetBeginSelector("th", syncState);
       hb.Text(text);
       hb.AddIndent();
       hb.Text("background-color: rgb(214, 234, 248);");
-
       // *** Manually added indent ***
       hb.AddIndent(-1);
       syncState.IndentCount += -1;
-
       hb.Text("}");
       hb.End("style", syncState);
       var retValue = hb.ToString();
 
+      // GetText Method End
       hb.SyncState(textState, syncState);
       return retValue;
     }
+    #endregion
+
+    #region Private Data Methods
 
     // Gets the key columns.
     private DbColumns GetKeyColumns()
@@ -279,17 +299,6 @@ namespace LJCDataUtility
         DataUtilColumn.ColumnDefaultValue,
       };
       return retNames;
-    }
-
-    private string BeginSelector(string selectorName
-      , int indentCount = 0)
-    {
-      var hb = new HTMLBuilder();
-      hb.Text(selectorName);
-      hb.AddIndent(indentCount);
-      hb.Text("{");
-      var retValue = hb.ToString();
-      return retValue;
     }
 
     // Sets the config properties.

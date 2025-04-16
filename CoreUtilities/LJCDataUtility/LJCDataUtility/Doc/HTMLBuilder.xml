@@ -194,12 +194,13 @@
     <returns></returns>
   </Script>
   <!-- Get Element Methods (6) -->
-  <AddNewIndent>
+  <AddChildIndent>
     <summary>
       Adds the new (child) indents.
     </summary>
+    <param name="createText"></param>"
     <param name="syncState">The TextState object.</param>
-  </AddNewIndent>
+  </AddChildIndent>
   <GetBegin>
     <summary>
       Gets the element begin tag.
@@ -207,8 +208,18 @@
     <param name="name">The element name.</param>
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttribs">The element attributes.</param>
+    <param name="allowStartIndent"></param>"
+    <param name="childIndent"></param>"
     <returns>The HTML element begin tag.</returns>
   </GetBegin>
+  <GetBeginSelector>
+    <summary>
+      Gets beginning of style selector.
+    </summary>
+    <param name="selectorName">The selector name.</param>
+    <param name="textState">The current text state values.</param>
+    <returns>The style selector beginning.</returns>
+  </GetBeginSelector>
   <GetCreate>
     <summary>
       Gets an element.
@@ -217,6 +228,8 @@
     <param name="text">The element content text.</param>
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttribs">The element attributes.</param>
+    <param name="allowStartIndent"></param>"
+    <param name="childIndent"></param>"
     <param name="isEmpty">Indicates if an empty element.</param>
     <param name="close">Indicates if the element will be closed.</param>
     <returns>The HTML element.</returns>
@@ -286,6 +299,16 @@
     <param name="fileName"></param>
     <returns></returns>
   </GetHTMLBegin>
+  <GetHTMLTitle>
+    <summary>
+      Gets the main HTML Head elements.
+    </summary>
+    <param name="textState">The current text state values.</param>
+    <param name="title">The title element content.</param>
+    <param name="author">The meta author element content.</param>
+    <param name="description">The meta description element content.</param>
+    <returns>The main head child elements.</returns>
+  </GetHTMLTitle>
   <GetHTMLEnd>
     <summary>
       Gets the HTML end &lt;body&gt; and &lt;html&gt;.

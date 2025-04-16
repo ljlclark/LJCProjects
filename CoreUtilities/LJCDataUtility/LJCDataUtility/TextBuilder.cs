@@ -63,8 +63,11 @@ namespace LJCDataUtility
     /// <include path='items/Add/*' file='Doc/TextBuilder.xml'/>
     public void Add(string text)
     {
-      Builder.Append(text);
-      DebugText += text;
+      if (TextLength(text) > 0)
+      {
+        Builder.Append(text);
+        DebugText += text;
+      }
     }
 
     // Adds a delimiter if not the first list item

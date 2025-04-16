@@ -15,7 +15,6 @@ namespace LJCDataUtility
     /// <summary>Initializes an object instance.</summary>
     public HTMLBuilder(TextState textState = null)
     {
-      //TextState = new TextState();
       IndentCharCount = 2;
       IndentCount = 0;
       if (textState != null)
@@ -59,19 +58,26 @@ namespace LJCDataUtility
     /// <include path='items/Add/*' file='Doc/HTMLBuilder.xml'/>
     public void Add(string text)
     {
-      HTML += text;
+      if (TextLength(text) > 0)
+      {
+        HTML += text;
+      }
     }
 
     // Adds a modified text line to the builder.
     /// <include path='items/Line/*' file='Doc/HTMLBuilder.xml'/>
     public string Line(string text)
     {
-      var retText = GetText(text);
-      retText += "\r\n";
-      if (TextLength(retText) > 0)
+      var retText = "\r\n";
+      if (TextLength(text) > 0)
       {
-        HTML += retText;
+        retText = GetText(text);
+        if (TextLength(retText) > 0)
+        {
+          retText += "\r\n";
+        }
       }
+      HTML += retText;
       return retText;
     }
 
@@ -99,7 +105,7 @@ namespace LJCDataUtility
 
       if (NetCommon.HasItems(htmlAttribs))
       {
-        // GetText Method
+        // GetText Method Begin
         var tb = new TextBuilder();
         var syncState = tb.GetSyncIndent(textState);
 
@@ -125,6 +131,7 @@ namespace LJCDataUtility
         }
         retText = tb.ToString();
 
+        // GetText Method End
         SyncState(textState, syncState);
       }
       return retText;
@@ -264,19 +271,17 @@ namespace LJCDataUtility
       , Attributes htmlAttribs = null, bool allowStartIndent = true
       , bool childIndent = true)
     {
-      // Append Method
-      var retText = GetBegin(name, textState, htmlAttribs);
-      if (TextLength(retText) > 0)
-      {
-        Text(retText, allowStartIndent);
-      }
+      var createText = GetBegin(name, textState, htmlAttribs);
+      Text(createText, allowStartIndent);
+      AddChildIndent(createText, textState);
       if (childIndent)
       {
         textState.IndentCount++;
       }
 
+      // Append Method
       UpdateState(textState);
-      return retText;
+      return createText;
     }
 
     // Appends an element.
@@ -285,20 +290,18 @@ namespace LJCDataUtility
       , Attributes htmlAttribs = null, bool allowStartIndent = true, bool childIndent = true
       , bool isEmpty = false, bool close = true)
     {
-      // Append Method
-      var retText = GetCreate(name, text, textState, htmlAttribs, isEmpty
+      var createText = GetCreate(name, text, textState, htmlAttribs, isEmpty
         , close);
-      if (TextLength(retText) > 0)
-      {
-        Text(retText, allowStartIndent);
-      }
+      Text(createText, allowStartIndent);
+      AddChildIndent(createText, textState);
       if (childIndent)
       {
         textState.IndentCount++;
       }
 
+      // Append Method
       UpdateState(textState);
-      return retText;
+      return createText;
     }
 
     // Appends the element end tag.
@@ -306,13 +309,13 @@ namespace LJCDataUtility
     public string End(string name, TextState textState
       , bool applyIndent = true)
     {
-      // Append Method
       var retText = GetEnd(name, textState, applyIndent);
       if (TextLength(retText) > 0)
       {
         Text(retText);
       }
 
+      // Append Method
       UpdateState(textState);
       return retText;
     }
@@ -321,13 +324,13 @@ namespace LJCDataUtility
     /// <include path='items/Link/*' file='Doc/HTMLBuilder.xml'/>
     public string Link(string fileName, TextState textState)
     {
-      // Append Method
       var retValue = GetLink(fileName, textState);
       if (TextLength(retValue) > 0)
       {
         Text(retValue);
       }
 
+      // Append Method
       UpdateState(textState);
       return retValue;
     }
@@ -336,13 +339,13 @@ namespace LJCDataUtility
     /// <include path='items/Meta/*' file='Doc/HTMLBuilder.xml'/>
     public string Meta(string name, string content, TextState textState)
     {
-      // Append Method
       var retValue = GetMeta(name, content, textState);
       if (TextLength(retValue) > 0)
       {
         Text(retValue);
       }
 
+      // Append Method
       UpdateState(textState);
       return retValue;
     }
@@ -353,7 +356,6 @@ namespace LJCDataUtility
       , string description = null, string keywords = null
       , string charSet = "utf-8")
     {
-      // Append Method
       var retValue = GetMetas(author, textState, description, keywords
         , charSet);
       if (TextLength(retValue) > 0)
@@ -361,6 +363,7 @@ namespace LJCDataUtility
         Text(retValue);
       }
 
+      // Append Method
       UpdateState(textState);
       return retValue;
     }
@@ -369,13 +372,13 @@ namespace LJCDataUtility
     /// <include path='items/Script/*' file='Doc/HTMLBuilder.xml'/>
     public string Script(string fileName, TextState textState)
     {
-      // Append Method
       var retValue = GetScript(fileName, textState);
       if (TextLength(retValue) > 0)
       {
         Text(retValue);
       }
 
+      // Append Method
       UpdateState(textState);
       return retValue;
     }
@@ -384,10 +387,11 @@ namespace LJCDataUtility
     #region Get Element Methods (10)
 
     // Adds the new (child) indents.
-    /// <include path='items/AddNewIndent/*' file='Doc/HTMLBuilder.xml'/>
-    public void AddChildIndent(TextState syncState)
+    /// <include path='items/AddChildIndent/*' file='Doc/HTMLBuilder.xml'/>
+    public void AddChildIndent(string createText, TextState syncState)
     {
-      if (syncState.ChildIndentCount > 0)
+      if (TextLength(createText) > 0
+        && syncState.ChildIndentCount > 0)
       {
         AddIndent(syncState.ChildIndentCount);
         syncState.IndentCount += syncState.ChildIndentCount;
@@ -398,56 +402,62 @@ namespace LJCDataUtility
     // Gets the element begin tag.
     /// <include path='items/GetBegin/*' file='Doc/HTMLBuilder.xml'/>
     public string GetBegin(string name, TextState textState
-      , Attributes htmlAttribs = null)
+      , Attributes htmlAttribs = null, bool allowStartIndent = true
+      , bool childIndent = true)
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder();
       var syncState = hb.GetSyncIndent(textState);
 
-      var getText = GetCreate(name, null, syncState, htmlAttribs
-        , close: false);
-      if (TextLength(getText) > 0)
-      {
-        hb.Add(getText);
-      }
-      AddChildIndent(syncState);
+      var createText = GetCreate(name, null, syncState, htmlAttribs
+        , allowStartIndent, childIndent, close: false);
+      hb.Text(createText);
+      // Handled by calling method: AddChildIndent(createText, syncState);
+
       var retValue = hb.ToString();
 
+      // GetText Method End
       SyncState(textState, syncState);
+      return retValue;
+    }
+
+    // Gets beginning of style selector.
+    /// <include path='items/GetBeginSelector/*' file='Doc/HTMLBuilder.xml'/>
+    public string GetBeginSelector(string selectorName, TextState textState)
+    {
+      // GetText Method Begin
+      var hb = new HTMLBuilder();
+      var syncState = hb.GetSyncIndent(textState);
+
+      hb.Text(selectorName);
+      hb.Text("{");
+      var retValue = hb.ToString();
+
+      // GetText Method End
+      hb.SyncState(textState, syncState);
       return retValue;
     }
 
     // Gets an element.
     /// <include path='items/GetCreate/*' file='Doc/HTMLBuilder.xml'/>
     public string GetCreate(string name, string text, TextState textState
-      , Attributes htmlAttribs = null, bool isEmpty = false, bool close = true)
+      , Attributes htmlAttribs = null, bool allowStartIndent = true
+      , bool childIndent = true, bool isEmpty = false, bool close = true)
     {
-      // GetText Method
+      // GetText Method Begin
       var tb = new TextBuilder(128);
       var syncState = tb.GetSyncIndent(textState);
 
-      if ("html" == name)
-      {
-        Debugger.Break();
-      }
-      // tb never has text so will never
-      // start on a new line unless wrapped.
-      tb.Text($"<{name}");
+      tb.Text($"<{name}", allowStartIndent);
       var getText = GetAttribs(htmlAttribs, syncState);
-      if (NetString.HasValue(getText))
-      {
-        tb.Add(getText);
-      }
+      tb.Add(getText);
       if (isEmpty)
       {
         tb.Add(" /");
       }
       tb.Add(">");
       var content = Content(text, syncState, isEmpty, out bool isWrapped);
-      if (NetString.HasValue(content))
-      {
-        tb.Add(content);
-      }
+      tb.Add(content);
 
       // Close the element.
       if (!isEmpty
@@ -460,15 +470,16 @@ namespace LJCDataUtility
         }
         tb.Add($"</{name}>");
       }
-      // *** Begin *** Add
+
       if (!isEmpty
-        && !close)
+        && !close
+        && childIndent)
       {
         syncState.ChildIndentCount++;
       }
-      // *** End   ***
       var retElement = tb.ToString();
 
+      // GetText Method End
       SyncState(textState, syncState);
       return retElement;
     }
@@ -478,7 +489,7 @@ namespace LJCDataUtility
     public string GetEnd(string name, TextState textState
       , bool applyIndent = true)
     {
-      // GetText Method
+      // GetText Method Begin
       var tb = new TextBuilder(128);
       var syncState = tb.GetSyncIndent(textState);
 
@@ -490,6 +501,7 @@ namespace LJCDataUtility
       tb.Add($"</{name}>");
       var retElement = tb.ToString();
 
+      // GetText Method End
       SyncState(textState, syncState);
       return retElement;
     }
@@ -498,7 +510,7 @@ namespace LJCDataUtility
     /// <include path='items/GetLink/*' file='Doc/HTMLBuilder.xml'/>
     public string GetLink(string fileName, TextState textState)
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder();
       var syncState = hb.GetSyncIndent(textState);
 
@@ -510,12 +522,11 @@ namespace LJCDataUtility
       };
       var createText = hb.GetCreate("link", null, syncState, attribs
         , isEmpty: true);
-      if (TextLength(createText) > 0)
-      {
-        hb.Text(createText);
-      }
+      hb.Text(createText);
+      AddChildIndent(createText, syncState);
       var retValue = hb.ToString();
 
+      // GetText Method End
       SyncState(textState, syncState);
       return retValue;
     }
@@ -524,7 +535,7 @@ namespace LJCDataUtility
     /// <include path='items/GetMeta/*' file='Doc/HTMLBuilder.xml'/>
     public string GetMeta(string name, string content, TextState textState)
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder();
       var syncState = hb.GetSyncIndent(textState);
 
@@ -535,12 +546,11 @@ namespace LJCDataUtility
       };
       var createText = hb.GetCreate("meta", null, syncState, attribs
         , isEmpty: true);
-      if (TextLength(createText) > 0)
-      {
-        hb.Text(createText);
-      }
+      hb.Text(createText);
+      AddChildIndent(createText, syncState);
       var retValue = hb.ToString();
 
+      // GetText Method End
       SyncState(textState, syncState);
       return retValue;
     }
@@ -551,7 +561,7 @@ namespace LJCDataUtility
       , string description = null, string keywords = null
       , string charSet = "utf-8")
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder();
       var syncState = hb.GetSyncIndent(textState);
 
@@ -561,10 +571,8 @@ namespace LJCDataUtility
       };
       var createText = hb.GetCreate("meta", null, syncState, attribs
         , isEmpty: true);
-      if (TextLength(createText) > 0)
-      {
-        hb.Text(createText);
-      }
+      hb.Text(createText);
+      AddChildIndent(createText, syncState);
       if (NetString.HasValue(description))
       {
         hb.Meta("description", description, syncState);
@@ -578,6 +586,7 @@ namespace LJCDataUtility
       hb.Meta("viewport", content, syncState);
       var retValue = hb.ToString();
 
+      // GetText Method End
       SyncState(textState, syncState);
       return retValue;
     }
@@ -586,7 +595,7 @@ namespace LJCDataUtility
     /// <include path='items/GetScript/*' file='Doc/HTMLBuilder.xml'/>
     public string GetScript(string fileName, TextState textState)
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder();
       var syncState = hb.GetSyncIndent(textState);
 
@@ -595,12 +604,11 @@ namespace LJCDataUtility
         { "src", fileName },
       };
       var createText = hb.GetCreate("script", null, syncState, attribs);
-      if (TextLength(createText) > 0)
-      {
-        hb.Text(createText);
-      }
+      hb.Text(createText);
+      AddChildIndent(createText, syncState);
       var retValue = hb.ToString();
 
+      // GetText Method End
       SyncState(textState, syncState);
       return retValue;
     }
@@ -633,19 +641,20 @@ namespace LJCDataUtility
       var retValue = GetHTMLBegin(textState, copyright, fileName);
       Text(retValue);
 
+      // Append Method
       UpdateState(textState);
       return retValue;
     }
     #endregion
 
-    #region Get HTML Methods (2)
+    #region Get HTML Methods (3)
 
     // Gets the HTML beginning up to <head>.
     /// <include path='items/GetHTMLBegin/*' file='Doc/HTMLBuilder.xml'/>
     public string GetHTMLBegin(TextState textState, string[] copyright = null
       , string fileName = null)
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder();
       var syncState = hb.GetSyncIndent(textState);
 
@@ -662,22 +671,36 @@ namespace LJCDataUtility
         hb.Text($"<!-- {fileName} -->");
       }
       var startAttribs = hb.StartAttribs();
-      var getText = hb.GetBegin("html", syncState, startAttribs);
-      if (NetString.HasValue(getText))
-      {
-        hb.Text(getText);
-      }
+      var createText = hb.GetBegin("html", syncState, startAttribs
+        , NoStartIndent, NoChildIndent);
+      hb.Text(createText);
+      AddChildIndent(createText, syncState);
 
-      // Add child indent for <head>.
-      getText = hb.GetBegin("head", syncState);
-      if (NetString.HasValue(getText))
-      {
-        hb.Text(getText);
-      }
-      syncState.ChildIndentCount++;
+      createText = hb.GetBegin("head", syncState, null, NoStartIndent);
+      hb.Text(createText);
+      AddChildIndent(createText, syncState);
       var retValue = hb.ToString();
 
+      // GetText Method End
       SyncState(textState, syncState);
+      return retValue;
+    }
+
+    // Gets the main HTML Head elements.
+    /// <include path='items/GetHTMLHead/*' file='Doc/HTMLBuilder.xml'/>
+    public string GetHTMLHead(TextState textState, string title = null
+      , string author = null, string description = null)
+    {
+      // GetText Method Begin
+      var hb = new HTMLBuilder();
+      var syncState = hb.GetSyncIndent(textState);
+
+      hb.Create("title", title, syncState, childIndent: false);
+      hb.Metas(author, syncState, description);
+      var retValue = hb.ToString();
+
+      // GetText Method End
+      hb.SyncState(textState, syncState);
       return retValue;
     }
 
@@ -685,18 +708,19 @@ namespace LJCDataUtility
     /// <include path='items/GetHTMLEnd/*' file='Doc/HTMLBuilder.xml'/>
     public string GetHTMLEnd(TextState textState)
     {
-      // GetText Method
+      // GetText Method Begin
       var hb = new HTMLBuilder();
       var syncState = hb.GetSyncIndent(textState);
 
-      var text = hb.GetEnd("body", syncState, NoIndent);
+      var text = hb.GetEnd("body", syncState, NoStartIndent);
       hb.Text(text);
 
-      text = hb.GetEnd("html", syncState, NoIndent);
+      text = hb.GetEnd("html", syncState, NoStartIndent);
       hb.Text(text);
       AddSyncIndent(hb, null, syncState);
       var retValue = hb.ToString();
 
+      // GetText Method End
       SyncState(textState, syncState);
       return retValue;
     }
@@ -803,6 +827,7 @@ namespace LJCDataUtility
         //LineLength = 0;
       }
 
+      // GetText Method End
       hb.SyncState(textState, syncState);
       return retValue;
     }
@@ -951,7 +976,8 @@ namespace LJCDataUtility
     #region Class Values
 
     const bool NoNewLine = false;
-    const bool NoIndent = false;
+    const bool NoStartIndent = false;
+    const bool NoChildIndent = false;
     #endregion
   }
 }
