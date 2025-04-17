@@ -59,6 +59,7 @@
     <Compile Include="DbColumns.cs" />
     <Compile Include="DbValue.cs" />
     <Compile Include="DbValues.cs" />
+    <Compile Include="HTMLBuilder.cs" />
     <Compile Include="KeyItem.cs" />
     <Compile Include="KeyItems.cs" />
     <Compile Include="CodeTokens\CommonKeywords.cs" />

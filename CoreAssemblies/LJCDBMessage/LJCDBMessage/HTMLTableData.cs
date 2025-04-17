@@ -1,12 +1,11 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // HTMLData.cs
-using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
 
-namespace LJCDataUtility
+namespace LJCDBMessage
 {
   /// <summary>Methods to set data in HTML elements.</summary>
   public class HTMLTableData

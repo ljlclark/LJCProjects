@@ -77,8 +77,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attribute.cs" />
-    <Compile Include="Attributes.cs" />
     <Compile Include="DataUtilityCommon.cs" />
     <Compile Include="Forms\DataColumn\ColumnHtmlTable.cs" />
     <Compile Include="Forms\DataTable\CustomActions\AddData.cs" />
@@ -136,12 +134,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ProcBuilder.cs" />
-    <Compile Include="HTMLBuilder.cs" />
-    <Compile Include="HTMLTableData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextBuilder.cs" />
-    <Compile Include="TextState.cs" />
     <EmbeddedResource Include="Forms\TableNameSelect.resx">
       <DependentUpon>TableNameSelect.cs</DependentUpon>
     </EmbeddedResource>

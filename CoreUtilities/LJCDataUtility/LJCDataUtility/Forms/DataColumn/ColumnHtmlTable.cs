@@ -46,12 +46,12 @@ namespace LJCDataUtility
       {
         case "dataobject":
           getText = DataHTML(textState);
-          hb.Text(getText);
+          hb.Text(getText, NoIndent);
           break;
 
         case "datatable":
           getText = DataTableHTML(textState);
-          hb.Text(getText);
+          hb.Text(getText, NoIndent);
           break;
 
         case "dbresult":
@@ -133,15 +133,15 @@ namespace LJCDataUtility
 
       // Create custom beginning of document.
       var getText = GetHTMLDocBegin(syncState);
-      hb.Text(getText);
+      hb.Text(getText, NoIndent);
 
       // Create HTML table.
       var dbResult = GetResult();
-      getText = HTMLTableData.ResultHTML(dbResult, syncState);
-      hb.Text(getText);  
+      getText = HTMLTableData.ResultTableHTML(dbResult, syncState);
+      hb.Text(getText, NoIndent);  
 
       getText = hb.GetHTMLEnd(syncState);
-      hb.Text(getText);
+      hb.Text(getText, NoIndent);
       var retValue = hb.ToString();
 
       // GetText Method End
@@ -202,11 +202,11 @@ namespace LJCDataUtility
         "Licensed under the MIT License",
       };
       var createText = hb.GetHTMLBegin(syncState, copyright, FileName);
-      hb.Text(createText);
+      hb.Text(createText, NoIndent);
       hb.AddChildIndent(createText, syncState);
 
       createText = GetHTMLDocHead(syncState);
-      hb.Text(createText);
+      hb.Text(createText, NoIndent);
 
       hb.End("head", syncState, NoIndent);
       hb.Begin("body", syncState);
@@ -228,11 +228,13 @@ namespace LJCDataUtility
       var author = "Lester J. Clark";
       var description = "Creates an HTML Document";
       var getText = hb.GetHTMLHead(syncState, title, author, description);
-      hb.Text(getText);
+      hb.Text(getText, NoIndent);
+      //hb.Link("File.css", syncState);
+      //hb.Script("File.js", syncState);
 
-      hb.Begin("style", syncState, childIndent: false);
+      hb.Begin("style", syncState);
       var text = hb.GetBeginSelector("th", syncState);
-      hb.Text(text);
+      hb.Text(text, NoIndent);
       hb.AddIndent();
       hb.Text("background-color: rgb(214, 234, 248);");
       // *** Manually added indent ***
@@ -336,9 +338,9 @@ namespace LJCDataUtility
     private string ProviderName { get; set; }
     #endregion
 
-    #region Class Values
+    #region Class Data
 
-    const bool NoIndent = false;
+    private const bool NoIndent = false;
     #endregion
   }
 }

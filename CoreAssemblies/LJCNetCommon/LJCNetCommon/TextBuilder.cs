@@ -15,7 +15,6 @@ namespace LJCNetCommon
     {
       if (null == builder)
       {
-        //TextState = new TextState();
         builder = new StringBuilder(capacity);
         Delimiter = ", ";
         IndentCharCount = 2;
@@ -56,14 +55,17 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Append Text Methods
+    #region Append Text Methods (4)
 
     // Adds text without processing.
     /// <include path='items/Add/*' file='Doc/TextBuilder.xml'/>
     public void Add(string text)
     {
-      Builder.Append(text);
-      DebugText += text;
+      if (TextLength(text) > 0)
+      {
+        Builder.Append(text);
+        DebugText += text;
+      }
     }
 
     // Adds a delimiter if not the first list item
@@ -90,38 +92,43 @@ namespace LJCNetCommon
 
     // Adds a newline if line length is greater than LineLimit.
     /// <include path='items/Text/*' file='Doc/TextBuilder.xml'/>
-    public string Text(string text, bool newLine = true)
+    public string Text(string text, bool allowStartIndent = true
+      , bool allowNewLine = true)
     {
-      var retText = text;
+      var retText = "";
 
-      var startNewLine = false;
-      if (newLine
-        && HasText)
+      if (TextLength(text) > 0)
       {
-        startNewLine = true;
-      }
-      if (startNewLine)
-      {
-        retText = "\r\n";
-        retText += GetIndented(text);
-      }
+        retText = text;
+        if (allowStartIndent)
+        {
+          retText = GetIndented(text);
+        }
 
-      bool isReturn = false;
-      if (!WrapEnabled)
-      {
-        // Just add text.
-        isReturn = true;
-        Builder.Append(retText);
-        DebugText += retText;
-        IsFirst = false;
-      }
+        if (allowNewLine
+          && HasText)
+        {
+          retText = "\r\n";
+          retText += GetIndented(text);
+        }
 
-      if (!isReturn)
-      {
-        retText = GetWrapped(retText);
-        Builder.Append(retText);
-        DebugText += retText;
-        IsFirst = false;
+        bool isReturn = false;
+        if (!WrapEnabled)
+        {
+          // Just add text.
+          isReturn = true;
+          Builder.Append(retText);
+          DebugText += retText;
+          IsFirst = false;
+        }
+
+        if (!isReturn)
+        {
+          retText = GetWrapped(retText);
+          Builder.Append(retText);
+          DebugText += retText;
+          IsFirst = false;
+        }
       }
       return retText;
     }
@@ -272,25 +279,6 @@ namespace LJCNetCommon
       {
         retLength = text.Length;
       }
-      return retLength;
-    }
-
-    // Convert length to index.
-    private int ToIndex(int length)
-    {
-      var retIndex = 0;
-
-      if (length > 0)
-      {
-        retIndex = length - 1;
-      }
-      return retIndex;
-    }
-
-    // Convert index to length.
-    private int ToLength(int index)
-    {
-      int retLength = index + 1;
       return retLength;
     }
 
@@ -450,7 +438,10 @@ namespace LJCNetCommon
     public string WrapPrefix { get; set; }
     #endregion
 
+    #region Class Data
+
     /// <summary></summary>
     public string DebugText;
+    #endregion
   }
 }
