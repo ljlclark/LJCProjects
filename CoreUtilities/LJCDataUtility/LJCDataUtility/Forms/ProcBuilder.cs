@@ -59,7 +59,7 @@ namespace LJCDataUtility
 
       BeginDelimiter = "[";
       EndDelimiter = "]";
-      Builder = new TextBuilder(512);
+      Builder = new TextBuilder();
       HasColumns = false;
       IsFirst = true;
     }
@@ -79,7 +79,7 @@ namespace LJCDataUtility
     // Clears the Builder text.
     internal void ClearText()
     {
-      Builder = new TextBuilder(512);
+      Builder = new TextBuilder();
       IsFirst = true;
     }
 
@@ -130,7 +130,7 @@ namespace LJCDataUtility
     /// <include path='items/Begin/*' file='Doc/ProcBuilder.xml'/>
     internal string Begin(string procedureName)
     {
-      var b = new TextBuilder(512);
+      var b = new TextBuilder();
       b.Line("/* Copyright(c) Lester J. Clark and Contributors. */");
       b.Line("/* Licensed under the MIT License. */");
       b.Line($"/* {procedureName}.sql */");
@@ -155,7 +155,7 @@ namespace LJCDataUtility
     /// <summary>Creates the Proc body code.</summary>
     internal string BodyBegin()
     {
-      var b = new TextBuilder(64);
+      var b = new TextBuilder();
       b.Line("AS");
       b.Line("BEGIN");
       var retValue = b.ToString();
@@ -170,7 +170,7 @@ namespace LJCDataUtility
       , bool includeParens = true, bool useNewNames = false
       , bool includeID = false)
     {
-      var b = new TextBuilder(256)
+      var b = new TextBuilder()
       {
         WrapAtDelimiter = true,
         WrapEnabled = true,
@@ -222,7 +222,7 @@ namespace LJCDataUtility
     {
       var varRefName = SQLVarName(parentIDColumnName);
 
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Text($"DECLARE {varRefName} bigint = ");
       b.Line($"(SELECT {parentIDColumnName} FROM {parentTableName}");
       b.Line($" WHERE {parentFindColumnName} = {parmFindName});");
@@ -234,7 +234,7 @@ namespace LJCDataUtility
     /// <include path='items/Parameters/*' file='Doc/ProcBuilder.xml'/>
     internal string Parameters(DataColumns dataColumns, bool isFirst = true)
     {
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       foreach (DataUtilColumn dataColumn in dataColumns)
       {
         if (!dataColumn.Name.EndsWith("ID"))
@@ -273,7 +273,7 @@ namespace LJCDataUtility
     internal string ValuesList(DataColumns dataColumns
       , string varRefName = null)
     {
-      var b = new TextBuilder(256);
+      var b = new TextBuilder();
       b.Text("    VALUES(");
 
       if (NetString.HasValue(varRefName))
@@ -312,7 +312,7 @@ namespace LJCDataUtility
     {
       var sourceNames = NetString.DelimitValues(sourceColumnList, "[", "]");
       var targetNames = NetString.DelimitValues(targetColumnList, "[", "]");
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Line(Check(objectName, ObjectType.Foreign));
       b.Line($" ALTER TABLE [dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT [{objectName}]");
@@ -331,7 +331,7 @@ namespace LJCDataUtility
       , string objectName, string columnList)
     {
       var columnNames = NetString.DelimitValues(columnList, "[", "]");
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Line(Check(objectName, ObjectType.Primary));
       b.Line($" ALTER TABLE [dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT [{objectName}]");
@@ -350,7 +350,7 @@ namespace LJCDataUtility
       , string objectName, string columnList)
     {
       var columnNames = NetString.DelimitValues(columnList, "[", "]");
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Line(Check(objectName, ObjectType.Unique));
       b.Line($" ALTER TABLE [dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT [{objectName}]");
@@ -422,7 +422,7 @@ namespace LJCDataUtility
     internal string DropConstraint(string tableName
       , string objectName, ObjectType objectType)
     {
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Line(Check(objectName, objectType, true));
       b.Line($" ALTER TABLE[dbo].[{tableName}]");
       b.Line($"  DROP CONSTRAINT[{objectName}]");
@@ -435,7 +435,7 @@ namespace LJCDataUtility
     /// <include path='items/NameAndType/*' file='Doc/ProcBuilder.xml'/>
     internal string NameAndType(DataUtilColumn dataColumn)
     {
-      var b = new TextBuilder(64);
+      var b = new TextBuilder();
 
       // Column Name
       b.Text($"  {BeginDelimiter}");
@@ -455,7 +455,7 @@ namespace LJCDataUtility
     /// <include path='items/RenameTableSQL/*' file='Doc/ProcBuilder.xml'/>
     internal string RenameTableSQL(long tableID, long siteID, DataKeys dataKeys)
     {
-      var b = new TextBuilder(512);
+      var b = new TextBuilder();
       b.Line($"USE [{DBName}]");
       b.Line();
       b.Line("/*");
@@ -539,7 +539,7 @@ namespace LJCDataUtility
     /// <returns>The table begin SQL text.</returns>
     internal string TableBegin()
     {
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Line();
       b.Text("/* Create Table */");
       b.Line(Check(TableName, ObjectType.Table));
@@ -554,7 +554,7 @@ namespace LJCDataUtility
     /// <include path='items/TableColumn/*' file='Doc/ProcBuilder.xml'/>
     internal string TableColumn(DataUtilColumn dataColumn)
     {
-      var b = new TextBuilder(512);
+      var b = new TextBuilder();
       b.Text(ItemEnd(HasColumns));
       b.Text(NameAndType(dataColumn));
 
@@ -588,7 +588,7 @@ namespace LJCDataUtility
     /// <returns>The table end SQL text.</returns>
     internal string TableEnd()
     {
-      var b = new TextBuilder(64);
+      var b = new TextBuilder();
       b.Line();
       b.Line("  )");
       b.Line("END");
@@ -602,7 +602,7 @@ namespace LJCDataUtility
     /// <include path='items/TableIdentity/*' file='Doc/ProcBuilder.xml'/>
     internal string TableIdentity(DataUtilColumn dataColumn)
     {
-      var b = new TextBuilder(64);
+      var b = new TextBuilder();
       b.Text(ItemEnd(HasColumns));
       b.Text(NameAndType(dataColumn));
       b.Text($" IDENTITY ({dataColumn.IdentityStart}");
@@ -640,7 +640,7 @@ namespace LJCDataUtility
       {
         not = " NOT";
       }
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       if (!EndsWith("\r\n\r\n"))
       {
         b.Line();

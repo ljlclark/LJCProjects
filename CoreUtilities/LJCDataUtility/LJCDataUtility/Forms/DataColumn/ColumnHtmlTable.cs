@@ -1,7 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ColumnHTML.cs
-
 using LJCDataAccess;
 using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
@@ -10,7 +9,6 @@ using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace LJCDataUtility
@@ -19,6 +17,7 @@ namespace LJCDataUtility
   internal class ColumnHTMLTable
   {
     #region Constructors
+
     internal ColumnHTMLTable(DataUtilityList parentObject
       , DataColumnManager columnManager, string fileName)
     {
@@ -56,7 +55,7 @@ namespace LJCDataUtility
 
         case "dbresult":
           getText = ResultHTML(textState);
-          hb.Add(getText);
+          hb.AddText(getText);
           break;
       }
       var retValue = hb.ToString();
@@ -72,11 +71,10 @@ namespace LJCDataUtility
     {
       // GetText Method Begin
       var hb = new HTMLBuilder(textState);
-      var syncState = hb.GetSyncIndent(textState);
 
       // Create custom beginning of document.
-      var text = GetHTMLDocBegin(syncState);
-      hb.Add(text);
+      var text = GetHTMLDocBegin(textState);
+      hb.AddText(text);
 
       // Create HTML table.
       var dataColumns = GetDataColumns();
@@ -85,15 +83,12 @@ namespace LJCDataUtility
         var dataObjects = dataColumns.ToList<object>();
         var propertyNames = GetPropertyNames();
         text = HTMLTableData.DataHTML(dataObjects, propertyNames);
-        hb.Add(text);
+        hb.AddText(text);
       }
 
-      text = hb.GetHTMLEnd(syncState);
-      hb.Add(text);
+      text = hb.GetHTMLEnd(textState);
+      hb.AddText(text);
       var retValue = hb.ToString();
-
-      // GetText Method End
-      hb.SyncState(textState, syncState);
       return retValue;
     }
 
@@ -101,25 +96,20 @@ namespace LJCDataUtility
     /// <include path='items/DataTableHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string DataTableHTML(TextState textState)
     {
-      // GetText Method Begin
-      var hb = new HTMLBuilder();
-      var syncState = hb.GetSyncIndent(textState);
+      var hb = new HTMLBuilder(textState);
 
       // Create custom beginning of document.
-      var text = GetHTMLDocBegin(syncState);
-      hb.Add(text);
+      var text = GetHTMLDocBegin(textState);
+      hb.AddText(text);
 
       // Create HTML table.
       var dataTable = GetDataTable();
       text = HTMLTableData.DataTableHTML(dataTable);
-      hb.Add(text);
+      hb.AddText(text);
 
-      text = hb.GetHTMLEnd(syncState);
-      hb.Add(text);
+      text = hb.GetHTMLEnd(textState);
+      hb.AddText(text);
       var retValue = hb.ToString();
-
-      // GetText Method End
-      hb.SyncState(textState, syncState);
       return retValue;
     }
 
@@ -127,25 +117,20 @@ namespace LJCDataUtility
     /// <include path='items/ResultHTML/*' file='Doc/ColumnHtmlTable.xml'/>
     internal string ResultHTML(TextState textState)
     {
-      // GetText Method Begin
-      var hb = new HTMLBuilder();
-      var syncState = hb.GetSyncIndent(textState);
+      var hb = new HTMLBuilder(textState);
 
       // Create custom beginning of document.
-      var getText = GetHTMLDocBegin(syncState);
+      var getText = GetHTMLDocBegin(textState);
       hb.Text(getText, NoIndent);
 
       // Create HTML table.
       var dbResult = GetResult();
-      getText = HTMLTableData.ResultTableHTML(dbResult, syncState);
+      getText = HTMLTableData.ResultTableHTML(dbResult, textState);
       hb.Text(getText, NoIndent);  
 
-      getText = hb.GetHTMLEnd(syncState);
+      getText = hb.GetHTMLEnd(textState);
       hb.Text(getText, NoIndent);
       var retValue = hb.ToString();
-
-      // GetText Method End
-      hb.SyncState(textState, syncState);
       return retValue;
     }
     #endregion
@@ -191,9 +176,7 @@ namespace LJCDataUtility
     // Gets beginning of HTML including <body> tag.
     private string GetHTMLDocBegin(TextState textState)
     {
-      // GetText Method Begin
-      var hb = new HTMLBuilder();
-      var syncState = hb.GetSyncIndent(textState);
+      var hb = new HTMLBuilder(textState);
 
       // Creates to including <head>.
       string[] copyright = new string[]
@@ -201,51 +184,45 @@ namespace LJCDataUtility
         "Copyright(c) Lester J. Clark and Contributors",
         "Licensed under the MIT License",
       };
-      var createText = hb.GetHTMLBegin(syncState, copyright, FileName);
+      var createText = hb.GetHTMLBegin(textState, copyright, FileName);
       hb.Text(createText, NoIndent);
-      hb.AddChildIndent(createText, syncState);
+      hb.AddChildIndent(createText, textState);
 
-      createText = GetHTMLDocHead(syncState);
+      createText = GetHTMLDocHead(textState);
       hb.Text(createText, NoIndent);
 
-      hb.End("head", syncState, NoIndent);
-      hb.Begin("body", syncState);
+      hb.End("head", textState, NoIndent);
+      hb.Begin("body", textState);
       var retValue = hb.ToString();
-
-      // GetText Method End
-      hb.SyncState(textState, syncState);
       return retValue;
     }
 
     // The custom HTML Head method.
     private string GetHTMLDocHead(TextState textState)
     {
-      // GetText Method Begin
-      var hb = new HTMLBuilder();
-      var syncState = hb.GetSyncIndent(textState);
+      var hb = new HTMLBuilder(textState);
 
       var title = "Creates an HTML Document";
       var author = "Lester J. Clark";
       var description = "Creates an HTML Document";
-      var getText = hb.GetHTMLHead(syncState, title, author, description);
+      var getText = hb.GetHTMLHead(textState, title, author, description);
       hb.Text(getText, NoIndent);
-      //hb.Link("File.css", syncState);
-      //hb.Script("File.js", syncState);
+      hb.Link("File.css", textState);
+      hb.Script("File.js", textState);
 
-      hb.Begin("style", syncState);
-      var text = hb.GetBeginSelector("th", syncState);
+      hb.Begin("style", textState);
+      var text = hb.GetBeginSelector("th", textState);
       hb.Text(text, NoIndent);
       hb.AddIndent();
       hb.Text("background-color: rgb(214, 234, 248);");
-      // *** Manually added indent ***
-      hb.AddIndent(-1);
-      syncState.IndentCount += -1;
-      hb.Text("}");
-      hb.End("style", syncState);
-      var retValue = hb.ToString();
 
-      // GetText Method End
-      hb.SyncState(textState, syncState);
+      // *** Move indent left ***
+      hb.AddIndent(-1);
+      textState.IndentCount += -1;
+
+      hb.Text("}");
+      hb.End("style", textState);
+      var retValue = hb.ToString();
       return retValue;
     }
     #endregion

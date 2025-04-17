@@ -95,6 +95,7 @@
     </Content>
     <Content Include="Doc\Attribute.xml" />
     <Content Include="Doc\Attributes.xml" />
+    <Content Include="Doc\HTMLBuilder.xml" />
     <Content Include="Doc\KeyItem.xml" />
     <Content Include="Doc\KeyItems.xml" />
     <Content Include="Doc\LJCAssemblyReflect.xml">

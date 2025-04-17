@@ -88,7 +88,7 @@ namespace LJCDataUtility
       var columnLists = ColumnLists(insertColumns, selectColumns, "  "
         , "MySql");
 
-      TextBuilder b = new TextBuilder(256);
+      TextBuilder b = new TextBuilder();
       string toTableName = $"New{tableName}";
       var dbName = ParentObject.DataConfigItemValue("Database");
 
@@ -115,7 +115,7 @@ namespace LJCDataUtility
       var selectColumns = manager.BaseDefinition;
       var columnLists = ColumnLists(insertColumns, selectColumns, "  ");
 
-      TextBuilder b = new TextBuilder(256);
+      TextBuilder b = new TextBuilder();
       string toTableName = $"New{tableName}";
       var dbName = ParentObject.DataConfigItemValue("Database");
       b.Line($"USE [{dbName}]");
@@ -150,8 +150,8 @@ namespace LJCDataUtility
         && NetCommon.HasItems(selectColumns))
       {
         retLists = new ColumnLists();
-        InsertBuilder = new TextBuilder(256);
-        SelectBuilder = new TextBuilder(256);
+        InsertBuilder = new TextBuilder();
+        SelectBuilder = new TextBuilder();
 
         // Add beginning value.
         InsertBuilder.Text($"{indent}(");

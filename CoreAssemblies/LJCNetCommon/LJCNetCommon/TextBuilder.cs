@@ -11,22 +11,23 @@ namespace LJCNetCommon
     #region Constructors
 
     /// <summary>Initializes an object instance.</summary>
-    public TextBuilder(int capacity = 32, StringBuilder builder = null)
+    public TextBuilder(TextState textState = null)
     {
-      if (null == builder)
+      Builder = new StringBuilder(128);
+      if (textState != null)
       {
-        builder = new StringBuilder(capacity);
-        Delimiter = ", ";
-        IndentCharCount = 2;
-        IndentCount = 0;
-        IsFirst = true;
-        LineLength = 0;
-        LineLimit = 80;
-        WrapAtDelimiter = true;
-        WrapEnabled = false;
-        WrapPrefix = "  ";
+        // Sync the important values.
+        AddIndent(textState.IndentCount);
       }
-      Builder = builder;
+      Delimiter = ", ";
+      IndentCharCount = 2;
+      IndentCount = 0;
+      IsFirst = true;
+      LineLength = 0;
+      LineLimit = 80;
+      WrapAtDelimiter = true;
+      WrapEnabled = false;
+      WrapPrefix = "  ";
       DebugText = "";
     }
     #endregion

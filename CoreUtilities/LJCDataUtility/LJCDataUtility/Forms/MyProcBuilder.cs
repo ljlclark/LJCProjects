@@ -40,7 +40,7 @@ namespace LJCDataUtility
 
       BeginDelimiter = "`";
       EndDelimiter = "`";
-      Builder = new TextBuilder(512);
+      Builder = new TextBuilder();
       HasColumns = false;
     }
     #endregion
@@ -65,7 +65,7 @@ namespace LJCDataUtility
     //Clears the Builder text.
     internal void ClearText()
     {
-      Builder = new TextBuilder(512);
+      Builder = new TextBuilder();
     }
 
     // Checks if the builder text ends with a supplied value.
@@ -104,7 +104,7 @@ namespace LJCDataUtility
     // Adds the Procedure begin code.
     internal string Begin(string procedureName)
     {
-      var b = new TextBuilder(512);
+      var b = new TextBuilder();
       b.Line("-- Copyright(c) Lester J. Clark and Contributors.");
       b.Line("-- Licensed under the MIT License.");
       b.Line($"-- {procedureName}.sql");
@@ -123,7 +123,7 @@ namespace LJCDataUtility
       , bool includeParens = true, bool useNewNames = false
       , bool includeID = false, int indentCount = 0)
     {
-      var b = new TextBuilder(256);
+      var b = new TextBuilder();
       b.AddIndent(indentCount);
       var value = "    ";
       if (includeParens)
@@ -170,7 +170,7 @@ namespace LJCDataUtility
       var varRefName
         = SQLVarName($"{parentTableName}{parentIDColumnName}");
 
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Line($"(SET {varRefName} = (SELECT {parentIDColumnName}");
       b.Line($" FROM {parentTableName}");
       b.Line($" WHERE {parentFindColumnName} = {parmFindName});");
@@ -182,7 +182,7 @@ namespace LJCDataUtility
     internal string Parameters(DataColumns dataColumns, bool isFirst = true
       , int indentCount = 0)
     {
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       {
         IndentCount = indentCount;
       }
@@ -250,7 +250,7 @@ namespace LJCDataUtility
     internal string ValuesList(DataColumns dataColumns
       , List<string> varRefNames = null, int indentCount = 0)
     {
-      var b = new TextBuilder(256);
+      var b = new TextBuilder();
       b.AddIndent(indentCount);
       b.Text("    VALUES(");
 
@@ -295,7 +295,7 @@ namespace LJCDataUtility
     {
       var sourceNames = NetString.DelimitValues(sourceColumnList, "`", "`");
       var targetNames = NetString.DelimitValues(targetColumnList, "`", "`");
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Line($"ALTER TABLE `{tableName}`");
       b.Line($"  ADD CONSTRAINT `{objectName}`");
       b.Line($"   FOREIGN KEY ({sourceNames})");
@@ -310,7 +310,7 @@ namespace LJCDataUtility
       , string objectName, string columnList)
     {
       var columnNames = NetString.DelimitValues(columnList, "`", "`");
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Line($"ALTER TABLE `{tableName}`");
       b.Line($"  ADD CONSTRAINT `{objectName}`");
       b.Text($"  PRIMARY KEY ({columnNames});");
@@ -323,7 +323,7 @@ namespace LJCDataUtility
       , string objectName, string columnList)
     {
       var columnNames = NetString.DelimitValues(columnList, "`", "`");
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Line($"ALTER TABLE `{tableName}`");
       b.Line($"  ADD CONSTRAINT `{objectName}`");
       b.Text($"  UNIQUE ({columnNames});");
@@ -402,7 +402,7 @@ namespace LJCDataUtility
     internal string DropConstraint(string tableName
       , string objectName)
     {
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Line($"ALTER TABLE `{tableName}`");
       b.Text($"  DROP CONSTRAINT IF EXISTS `{objectName}`;");
       var retValue = b.ToString();
@@ -412,7 +412,7 @@ namespace LJCDataUtility
     // Get column name and type.
     internal string NameAndType(DataUtilColumn dataColumn)
     {
-      var b = new TextBuilder(64);
+      var b = new TextBuilder();
 
       // Column Name
       b.Text($"  {BeginDelimiter}");
@@ -435,7 +435,7 @@ namespace LJCDataUtility
     internal string RenameTableSQL(long tableID, long siteID)
     {
       var keyManager = Managers.DataKeyManager;
-      var b = new TextBuilder(512);
+      var b = new TextBuilder();
       b.Line("/*");
       b.Text("/* Drop foreign keys and constraints. */");
 
@@ -506,7 +506,7 @@ namespace LJCDataUtility
     // Adds the table begin code.
     internal string TableBegin()
     {
-      var b = new TextBuilder(128);
+      var b = new TextBuilder();
       b.Line();
       b.Text($"CREATE TABLE IF NOT EXISTS ");
       if (NetString.HasValue(DBName))
@@ -527,7 +527,7 @@ namespace LJCDataUtility
     // Adds a table column definition.
     internal string TableColumn(DataUtilColumn dataColumn)
     {
-      var b = new TextBuilder(512);
+      var b = new TextBuilder();
       b.Text(ItemEnd(HasColumns));
       b.Text(NameAndType(dataColumn));
 
@@ -571,7 +571,7 @@ namespace LJCDataUtility
     // Creates the Identity column.
     internal string TableIdentity(DataUtilColumn dataColumn)
     {
-      var b = new TextBuilder(64);
+      var b = new TextBuilder();
       b.Text(ItemEnd(HasColumns));
       b.Text(NameAndType(dataColumn));
       b.Text($" NOT NULL AUTO_INCREMENT");

@@ -19,15 +19,21 @@
     <returns>The current indent count.</returns>
   </AddIndent>
   <!-- Append Text Methods (3) -->
-  <Add>
+  <AddText>
     <summary>
       Adds text without modification.
     </summary>
-    <param name="text">The append text.</param>
+    <param name="text">The add text.</param>
     <remarks>
-      Add() is an "Append" method. It adds the unmodified text to the builder.
+      AddText() is an "Add" method. It adds the unmodified text to the builder.
     </remarks>
-  </Add>
+  </AddText>
+  <AddLine>
+    <summary>
+      Adds a text line without modification.
+    </summary>
+    <param name="text">The add text.</param>
+  </AddLine>
   <Line>
     <summary>
       Adds a modified text line to the builder.
@@ -239,7 +245,7 @@
       Adds the new (child) indents.
     </summary>
     <param name="createText"></param>"
-    <param name="syncState">The TextState object.</param>
+    <param name="textState">The TextState object.</param>
   </AddChildIndent>
   <GetBegin>
     <summary>

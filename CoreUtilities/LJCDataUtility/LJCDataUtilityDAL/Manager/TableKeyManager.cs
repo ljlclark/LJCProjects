@@ -110,7 +110,7 @@ namespace LJCDataUtilityDAL
     private string TableKeySql(string tableName
       , string keyType = "PRIMARY KEY", string uniqueConstraintName = null)
     {
-      TextBuilder b = new TextBuilder(256);
+      TextBuilder b = new TextBuilder();
       b.Line("SELECT");
       b.Line(" tc.[TABLE_CATALOG] as DBName, ");
       b.Line(" tc.[TABLE_SCHEMA] as TableSchema, ");
@@ -142,7 +142,7 @@ namespace LJCDataUtilityDAL
     // Gets the sp_GetForeignKeys procedure SQL.
     private string ForeignKeysProcedureSql(string tableName)
     {
-      TextBuilder b = new TextBuilder(256);
+      TextBuilder b = new TextBuilder();
       b.Line("CREATE PROCEDURE[dbo].[sp_GetForeignKeys]");
       b.Line("  @TableName nvarchar(20)");
       b.Line("AS");
