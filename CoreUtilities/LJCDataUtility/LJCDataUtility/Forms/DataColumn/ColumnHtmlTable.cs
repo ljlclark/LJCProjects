@@ -125,7 +125,7 @@ namespace LJCDataUtility
 
       // Create HTML table.
       var dbResult = GetResult();
-      getText = HTMLTableData.ResultTableHTML(dbResult, textState);
+      getText = HTMLTableData.ResultHTML(dbResult, textState);
       hb.Text(getText, NoIndent);  
 
       getText = hb.GetHTMLEnd(textState);

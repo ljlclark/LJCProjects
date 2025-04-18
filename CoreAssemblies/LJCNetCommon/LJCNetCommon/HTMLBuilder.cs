@@ -51,7 +51,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Append Text Methods (3)
+    #region Append Text Methods (4)
 
     // Adds text without modification.
     /// <include path='items/AddText/*' file='Doc/HTMLBuilder.xml'/>
@@ -232,7 +232,7 @@ namespace LJCNetCommon
         if (wrapIndex > -1)
         {
           // Adds leading space if line exists and wrapIndex > 0.
-          var addText = AddText(retText, wrapIndex);
+          var addText = GetAddText(retText, wrapIndex);
           buildText += $"{addText}\r\n";
 
           // Next text up to LineLimit - prepend length without leading space.
@@ -383,7 +383,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Get Element Methods (10)
+    #region Get Element Methods (9)
 
     // Adds the new (child) indents.
     /// <include path='items/AddChildIndent/*' file='Doc/HTMLBuilder.xml'/>
@@ -431,13 +431,12 @@ namespace LJCNetCommon
       , Attributes htmlAttribs = null, bool addIndent = true
       , bool childIndent = true, bool isEmpty = false, bool close = true)
     {
-      // GetText Method Begin
+      textState.ChildIndentCount = 0; // ?
       var tb = new TextBuilder(textState);
-      var syncState = tb.GetSyncIndent(textState);
 
       // Start text with the opening tag.
       tb.Text($"<{name}", addIndent);
-      var getText = GetAttribs(htmlAttribs, syncState);
+      var getText = GetAttribs(htmlAttribs, textState);
       tb.Add(getText);
       if (isEmpty)
       {
@@ -450,7 +449,7 @@ namespace LJCNetCommon
       var isWrapped = false;
       if (!isEmpty)
       {
-        var content = Content(text, syncState, isEmpty, out isWrapped);
+        var content = Content(text, textState, isEmpty, out isWrapped);
         tb.Add(content);
       }
 
@@ -470,12 +469,9 @@ namespace LJCNetCommon
         && !close
         && childIndent)
       {
-        syncState.ChildIndentCount++;
+        textState.ChildIndentCount++;
       }
       var retElement = tb.ToString();
-
-      // GetText Method End
-      SyncState(textState, syncState);
       return retElement;
     }
 
@@ -577,23 +573,6 @@ namespace LJCNetCommon
       hb.Text(createText, NoIndent);
       var retValue = hb.ToString();
       return retValue;
-    }
-
-    // Gets the sync TextState object.
-    /// <include path='items/GetSyncIndent/*' file='Doc/HTMLBuilder.xml'/>
-    public TextState GetSyncIndent(TextState textState)
-    {
-      var retState = new TextState(textState.IndentCount);
-      AddIndent(retState.IndentCount);
-      return retState;
-    }
-
-    // Sync calling function text state.
-    /// <include path='items/SyncState/*' file='Doc/HTMLBuilder.xml'/>
-    public void SyncState(TextState toTextState, TextState fromTextState)
-    {
-      toTextState.IndentCount = fromTextState.IndentCount;
-      toTextState.ChildIndentCount = fromTextState.ChildIndentCount;
     }
     #endregion
 
@@ -728,19 +707,6 @@ namespace LJCNetCommon
       syncState.IndentCount += value;
     }
 
-    // Gets the text to add to the existing line.
-    private string AddText(string text, int addLength)
-    {
-      var retText = text.Substring(0, addLength);
-      if (LineLength > 0
-        && addLength > 0)
-      {
-        // Add a leading space.
-        retText = $" {retText}";
-      }
-      return retText;
-    }
-
     // Creates the content text.
     private string Content(string text, TextState textState, bool isEmpty
       , out bool isWrapped)
@@ -773,6 +739,19 @@ namespace LJCNetCommon
         //LineLength = 0;
       }
       return retValue;
+    }
+
+    // Gets the text to add to the existing line.
+    private string GetAddText(string text, int addLength)
+    {
+      var retText = text.Substring(0, addLength);
+      if (LineLength > 0
+        && addLength > 0)
+      {
+        // Add a leading space.
+        retText = $" {retText}";
+      }
+      return retText;
     }
 
     // Gets the text length if not null.

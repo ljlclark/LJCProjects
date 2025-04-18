@@ -14,14 +14,14 @@ namespace LJCNetCommon
     public TextBuilder(TextState textState = null)
     {
       Builder = new StringBuilder(128);
+      Delimiter = ", ";
+      IndentCharCount = 2;
+      IndentCount = 0;
       if (textState != null)
       {
         // Sync the important values.
         AddIndent(textState.IndentCount);
       }
-      Delimiter = ", ";
-      IndentCharCount = 2;
-      IndentCount = 0;
       IsFirst = true;
       LineLength = 0;
       LineLimit = 80;

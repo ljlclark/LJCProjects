@@ -22,14 +22,13 @@ namespace LJCDBMessage
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();
-        var syncState = hb.GetSyncIndent(textState);
 
-        hb.Begin("tr", syncState);
+        hb.Begin("tr", textState);
         foreach (DataColumn column in dataTable.Columns)
         {
-          hb.Create("th", column.ColumnName, syncState);
+          hb.Create("th", column.ColumnName, textState);
         }
-        hb.End("tr", syncState);
+        hb.End("tr", textState);
         retValue = hb.ToString();
       }
       return retValue;
@@ -45,15 +44,14 @@ namespace LJCDBMessage
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();
-        var syncState = hb.GetSyncIndent(textState);
 
         var attribs = hb.TableAttribs();
-        hb.Begin("table", syncState, attribs);
+        hb.Begin("table", textState, attribs);
         var text = DataTableHeadings(dataTable);
         hb.Text(text);
         text = DataTableRows(dataTable, maxRows);
         hb.Text(text);
-        hb.End("table", syncState);
+        hb.End("table", textState);
         retValue = hb.ToString();
       }
       return retValue;
@@ -69,7 +67,6 @@ namespace LJCDBMessage
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();
-        var syncState = hb.GetSyncIndent(textState);
 
         var count = 0;
         foreach (DataRow row in dataTable.Rows)
@@ -80,13 +77,13 @@ namespace LJCDBMessage
           {
             break;
           }
-          hb.Begin("tr", syncState);
+          hb.Begin("tr", textState);
           foreach (DataColumn column in dataTable.Columns)
           {
             string value = row[column.ColumnName].ToString();
-            hb.Create("td", value, syncState);
+            hb.Create("td", value, textState);
           }
-          hb.End("tr", syncState);
+          hb.End("tr", textState);
         }
         retValue = hb.ToString();
       }
@@ -107,9 +104,8 @@ namespace LJCDBMessage
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();
-        var syncState = hb.GetSyncIndent(textState);
 
-        hb.Begin("tr", syncState);
+        hb.Begin("tr", textState);
         var dataObject = dataObjects[0];
         var reflect = new LJCReflect(dataObject);
         List<string> names = reflect.GetPropertyNames();
@@ -118,10 +114,10 @@ namespace LJCDBMessage
           if (name != "ChangedNames"
             && propertyNames.Contains(name))
           {
-            hb.Create("th", name, syncState);
+            hb.Create("th", name, textState);
           }
         }
-        hb.End("tr", syncState);
+        hb.End("tr", textState);
         retValue = hb.ToString();
       }
       return retValue;
@@ -138,15 +134,14 @@ namespace LJCDBMessage
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();
-        var syncState = hb.GetSyncIndent(textState);
 
         var attribs = hb.TableAttribs();
-        hb.Begin("table", syncState, attribs);
+        hb.Begin("table", textState, attribs);
         var text = DataHeadings(dataObjects, propertyNames);
         hb.Text(text);
         text = DataRows(dataObjects, propertyNames, maxRows);
         hb.Text(text);
-        hb.End("table", syncState);
+        hb.End("table", textState);
         retValue = hb.ToString();
       }
       return retValue;
@@ -163,7 +158,6 @@ namespace LJCDBMessage
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();
-        var syncState = hb.GetSyncIndent(textState);
 
         var count = 0;
         foreach (var dataObject in dataObjects)
@@ -174,7 +168,7 @@ namespace LJCDBMessage
           {
             break;
           }
-          hb.Begin("tr", syncState);
+          hb.Begin("tr", textState);
           var reflect = new LJCReflect(dataObject);
           List<string> names = reflect.GetPropertyNames();
           foreach (string name in names)
@@ -188,10 +182,10 @@ namespace LJCDBMessage
               {
                 value = objectValue.ToString();
               }
-              hb.Create("td", value, syncState);
+              hb.Create("td", value, textState);
             }
           }
-          hb.End("tr", syncState);
+          hb.End("tr", textState);
         }
         retValue = hb.ToString();
       }
@@ -204,21 +198,20 @@ namespace LJCDBMessage
     // Create table headings from a DbResult.
     /// <include path='items/ResultHeadings/*' file='Doc/HTMLTableData.xml'/>
     /// <param name="textState"></param>
-    public static string ResultTableHeadings(DbResult dbResult, TextState textState)
+    public static string ResultHeadings(DbResult dbResult, TextState textState)
     {
       string retValue = null;
 
       if (DbResult.HasRows(dbResult))
       {
-        var hb = new HTMLBuilder();
-        var syncState = hb.GetSyncIndent(textState);
+        var hb = new HTMLBuilder(textState);
 
-        hb.Begin("tr", syncState);
+        hb.Begin("tr", textState);
         foreach (var value in dbResult.Rows[0].Values)
         {
-          hb.Create("th", value.PropertyName, syncState);
+          hb.Create("th", value.PropertyName, textState);
         }
-        hb.End("tr", syncState);
+        hb.End("tr", textState);
         retValue = hb.ToString();
       }
       return retValue;
@@ -226,32 +219,26 @@ namespace LJCDBMessage
 
     // Creates an HTML table from a DbResult.
     /// <include path='items/ResultHTML/*' file='Doc/HTMLTableData.xml'/>
-    public static string ResultTableHTML(DbResult dbResult, TextState textState
+    public static string ResultHTML(DbResult dbResult, TextState textState
       , int maxRows = 0)
     {
       string retValue = null;
 
       if (NetCommon.HasItems(dbResult.Rows))
       {
-        var hb = new HTMLBuilder();
-        var syncState = hb.GetSyncIndent(textState);
+        var hb = new HTMLBuilder(textState);
 
-        //hb.AddIndent(textState.IndentCount);
         var attribs = hb.TableAttribs();
-        hb.Begin("table", syncState, attribs);
+        hb.Begin("table", textState, attribs);
         // Begin already indents for child elements.
-        var text = ResultTableHeadings(dbResult, syncState);
+        var text = ResultHeadings(dbResult, textState);
         // Use NoIndent after a "GetText" method.
         hb.Text(text, NoIndent);
-        text = ResultTableRows(dbResult, syncState, maxRows);
+        text = ResultRows(dbResult, textState, maxRows);
         // Use NoIndent after a "GetText" method.
         hb.Text(text, NoIndent);
-        hb.End("table", syncState);
-
-        textState.IndentCount = syncState.IndentCount;
+        hb.End("table", textState);
         retValue = hb.ToString();
-
-        hb.SyncState(textState, syncState);
       }
       return retValue;
     }
@@ -259,15 +246,14 @@ namespace LJCDBMessage
     // Create table rows from a DbResult.
     /// <include path='items/ResultRows/*' file='Doc/HTMLTableData.xml'/>
     /// <param name="textState"></param>
-    public static string ResultTableRows(DbResult dbResult, TextState textState
+    public static string ResultRows(DbResult dbResult, TextState textState
       , int maxRows = 0)
     {
       string retValue = null;
 
       if (DbResult.HasRows(dbResult))
       {
-        var hb = new HTMLBuilder();
-        var syncState = hb.GetSyncIndent(textState);
+        var hb = new HTMLBuilder(textState);
 
         var count = 0;
         foreach (var row in dbResult.Rows)
@@ -278,7 +264,7 @@ namespace LJCDBMessage
           {
             break;
           }
-          hb.Begin("tr", syncState);
+          hb.Begin("tr", textState);
           // Begin already indents for child elements.
           foreach (var value in row.Values)
           {
@@ -287,9 +273,9 @@ namespace LJCDBMessage
             {
               valueText = value.Value.ToString();
             }
-            hb.Create("td", valueText, syncState);
+            hb.Create("td", valueText, textState);
           }
-          hb.End("tr", syncState);
+          hb.End("tr", textState);
         }
         retValue = hb.ToString();
       }
