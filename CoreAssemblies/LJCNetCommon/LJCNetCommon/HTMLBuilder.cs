@@ -38,7 +38,7 @@ namespace LJCNetCommon
 
     #region Methods
 
-    // Changes the IndentCount by the supplied value.
+    // Changes the IndentCount by the provided value.
     /// <include path='items/AddIndent/*' file='Doc/HTMLBuilder.xml'/>
     public int AddIndent(int increment = 1)
     {
@@ -125,15 +125,15 @@ namespace LJCNetCommon
             if (NetString.HasValue(htmlAttrib.Value)
               && htmlAttrib.Value.Length > 35)
             {
-              tb.Add($"\r\n{GetIndentString()}");
+              tb.AddText($"\r\n{GetIndentString()}");
             }
           }
           isFirst = false;
 
-          tb.Add($" {htmlAttrib.Name}");
+          tb.AddText($" {htmlAttrib.Name}");
           if (NetString.HasValue(htmlAttrib.Value))
           {
-            tb.Add($"=\"{htmlAttrib.Value}\"");
+            tb.AddText($"=\"{htmlAttrib.Value}\"");
           }
         }
         retText = tb.ToString();
@@ -141,7 +141,7 @@ namespace LJCNetCommon
       return retText;
     }
 
-    // Gets a new line with indent.
+    // Gets a new potentially indented line.
     /// <include path='items/GetIndented/*' file='Doc/HTMLBuilder.xml'/>
     public string GetIndented(string text)
     {
@@ -237,6 +237,7 @@ namespace LJCNetCommon
 
           // Next text up to LineLimit - prepend length without leading space.
           string wrapText = WrapText(workText, wrapIndex);
+          // *** Different than TextBuilder ***
           var lineText = $"{GetIndentString()}{wrapText}";
           LineLength = lineText.Length;
           buildText += lineText;
@@ -437,20 +438,20 @@ namespace LJCNetCommon
       // Start text with the opening tag.
       tb.Text($"<{name}", addIndent);
       var getText = GetAttribs(htmlAttribs, textState);
-      tb.Add(getText);
+      tb.AddText(getText);
       if (isEmpty)
       {
-        tb.Add(" /");
+        tb.AddText(" /");
         close = false;
       }
-      tb.Add(">");
+      tb.AddText(">");
 
       // Content is added if not an empty element.
       var isWrapped = false;
       if (!isEmpty)
       {
         var content = Content(text, textState, isEmpty, out isWrapped);
-        tb.Add(content);
+        tb.AddText(content);
       }
 
       // Close the element.
@@ -459,9 +460,9 @@ namespace LJCNetCommon
         if (isWrapped)
         {
           tb.Line();
-          tb.Add(GetIndentString());
+          tb.AddText(GetIndentString());
         }
-        tb.Add($"</{name}>");
+        tb.AddText($"</{name}>");
       }
 
       // Increment ChildIndentCount if not empty and not closed.
@@ -484,9 +485,9 @@ namespace LJCNetCommon
       AddSyncIndent(this, tb, textState, -1);
       if (addIndent)
       {
-        tb.Add($"{GetIndentString()}");
+        tb.AddText($"{GetIndentString()}");
       }
-      tb.Add($"</{name}>");
+      tb.AddText($"</{name}>");
       var retElement = tb.ToString();
       return retElement;
     }
@@ -789,6 +790,7 @@ namespace LJCNetCommon
         }
         var wrapLength = LineLimit - currentLength;
 
+        // *** Different than TextBuilder ***
         // Get wrap point in allowed length.
         // Wrap on a space.
         retIndex = text.LastIndexOf(" ", wrapLength);
@@ -809,6 +811,7 @@ namespace LJCNetCommon
       var nextLength = text.Length - wrapIndex;
 
       // Leave room for prepend text.
+      // *** Different than TextBuilder ***
       if (nextLength <= LineLimit - TextLength(GetIndentString()))
       {
         // Get text at the wrap index.
@@ -829,6 +832,7 @@ namespace LJCNetCommon
           tempText = tempText.Substring(1);
           startIndex++;
         }
+        // *** Different than TextBuilder ***
         nextLength = LineLimit - TextLength(GetIndentString());
         nextLength = tempText.LastIndexOf(" ", nextLength);
         retText = text.Substring(startIndex, nextLength);

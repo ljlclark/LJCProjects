@@ -158,7 +158,7 @@ namespace LJCDataUtility
           }
           valuesBuilder.Item(columnName);
         }
-        valuesBuilder.Add(")");
+        valuesBuilder.AddText(")");
         var valuesList = valuesBuilder.ToString();
         proc.Line(valuesList);
         proc.Line("END");

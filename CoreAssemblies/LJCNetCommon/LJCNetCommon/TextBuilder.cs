@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJCNetCommon
 {
-  /// <summary>A StringBuilder helper class.</summary>
+  /// <summary>Provides methods for creating text.</summary>
   public class TextBuilder
   {
     #region Constructors
@@ -43,7 +43,7 @@ namespace LJCNetCommon
 
     #region Methods
 
-    // Changes the IndentCount by the supplied value.
+    // Changes the IndentCount by the provided value.
     /// <include path='items/AddIndent/*' file='Doc/TextBuilder.xml'/>
     public int AddIndent(int increment = 1)
     {
@@ -56,11 +56,25 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Append Text Methods (4)
+    #region Append Text Methods (5)
 
-    // Adds text without processing.
-    /// <include path='items/Add/*' file='Doc/TextBuilder.xml'/>
-    public void Add(string text)
+    // Adds a text line without modification.
+    /// <include path='items/AddLine/*' file='Doc/TextBuilder.xml'/>
+    public string AddLine(string text)
+    {
+      string retText = "";
+      if (TextLength(text) > 0)
+      {
+        retText = text;
+      }
+      Builder.AppendLine(retText);
+      retText = $"{retText}\r\n";
+      return retText;
+    }
+
+    // Adds text without modification.
+    /// <include path='items/AddText/*' file='Doc/TextBuilder.xml'/>
+    public void AddText(string text)
     {
       if (TextLength(text) > 0)
       {
@@ -69,7 +83,7 @@ namespace LJCNetCommon
       }
     }
 
-    // Adds a delimiter if not the first list item
+    // Adds a delimiter if not the first list item.
     /// <include path='items/Item/*' file='Doc/TextBuilder.xml'/>
     public string Item(string text)
     {
@@ -79,63 +93,36 @@ namespace LJCNetCommon
       return retText;
     }
 
-    // Adds a line.
+    // Adds a modified text line to the builder.
     /// <include path='items/Line/*' file='Doc/TextBuilder.xml'/>
     public string Line(string text = null)
     {
-      var retText = Text(text);
-      retText += "\r\n";
-      Builder.AppendLine();
-      DebugText += "\r\n";
+      string retText = "\r\n";
+      if (TextLength(text) > 0)
+      {
+        retText = GetLine(text);
+      }
+      Builder.Append(retText);
       LineLength = 0;
+      DebugText += retText;
       return retText;
     }
 
-    // Adds a newline if line length is greater than LineLimit.
+    // Adds modified text to the builder.
     /// <include path='items/Text/*' file='Doc/TextBuilder.xml'/>
-    public string Text(string text, bool allowStartIndent = true
+    public string Text(string text, bool addIndent = true
       , bool allowNewLine = true)
     {
-      var retText = "";
-
-      if (TextLength(text) > 0)
+      var retText = GetText(text, addIndent, allowNewLine);
+      if (TextLength(retText) > 0)
       {
-        retText = text;
-        if (allowStartIndent)
-        {
-          retText = GetIndented(text);
-        }
-
-        if (allowNewLine
-          && HasText)
-        {
-          retText = "\r\n";
-          retText += GetIndented(text);
-        }
-
-        bool isReturn = false;
-        if (!WrapEnabled)
-        {
-          // Just add text.
-          isReturn = true;
-          Builder.Append(retText);
-          DebugText += retText;
-          IsFirst = false;
-        }
-
-        if (!isReturn)
-        {
-          retText = GetWrapped(retText);
-          Builder.Append(retText);
-          DebugText += retText;
-          IsFirst = false;
-        }
+        Builder.Append(retText);
       }
       return retText;
     }
     #endregion
 
-    #region Get Text Methods
+    #region Get Text Methods (6)
 
     // Adds a delimiter if not the first list item.
     /// <include path='items/GetDelimited/*' file='Doc/TextBuilder.xml'/>
@@ -150,7 +137,7 @@ namespace LJCNetCommon
       return retText;
     }
 
-    /// <summary>Gets a new line with prefixed indent.</summary>
+    // Gets a new potentially indented line.
     /// <include path='items/GetIndented/*' file='Doc/TextBuilder.xml'/>
     public string GetIndented(string text)
     {
@@ -174,28 +161,59 @@ namespace LJCNetCommon
     /// <summary>Returns the current indent string.</summary>
     public string GetIndentString()
     {
-      var retValue = new string(' ', IndentCount * IndentCharCount);
+      var retValue = new string(' ', IndentLength);
       return retValue;
     }
 
-    // Gets the sync TextState object.
-    /// <include path='items/GetSyncIndent/*' file='Doc/TextBuilder.xml'/>
-    public TextState GetSyncIndent(TextState textState)
+    // Gets a modified text line.
+    /// <include path='items/GetLine/*' file='Doc/TextBuilder.xml'/>
+    public string GetLine(string text)
     {
-      var retState = new TextState(textState.IndentCount);
-      AddIndent(retState.IndentCount);
-      return retState;
+      string retText = "";
+
+      if (TextLength(text) > 0)
+      {
+        retText = GetText(text);
+      }
+      retText = $"{retText}\r\n";
+      return retText;
     }
 
-    // Sync calling function text state.
-    /// <include path='items/SyncState/*' file='Doc/TextBuilder.xml'/>
-    public void SyncState(TextState toTextState, TextState fromTextState)
+    // Gets potentially indented and wrapped text.
+    /// <include path='items/GetText/*' file='Doc/TextBuilder.xml'/>
+    public string GetText(string text, bool addIndent = true
+      , bool allowNewLine = true)
     {
-      toTextState.IndentCount = fromTextState.IndentCount;
-      toTextState.ChildIndentCount = fromTextState.ChildIndentCount;
+      var retText = "";
+
+      if (TextLength(text) > 0)
+      {
+        retText = text;
+        if (addIndent)
+        {
+          retText = GetIndented(text);
+        }
+
+        if (allowNewLine
+          && HasText)
+        {
+          retText = "\r\n";
+          if (addIndent)
+          {
+            retText += GetIndentString();
+          }
+          retText += text;
+        }
+
+        if (WrapEnabled)
+        {
+          retText = GetWrapped(retText);
+        }
+      }
+      return retText;
     }
 
-    // Adds added text and new wrapped line if combined line > LineLimit.
+    // Gets added text and new wrapped line if combined line > LineLimit.
     /// <include path='items/GetWrapped/*' file='Doc/TextBuilder.xml'/>
     public string GetWrapped(string text)
     {
@@ -218,7 +236,7 @@ namespace LJCNetCommon
         if (wrapIndex > -1)
         {
           // Adds leading space if line exists and wrapIndex > 0.
-          var addText = AddText(retText, wrapIndex);
+          var addText = GetAddText(retText, wrapIndex);
           buildText += $"{addText}\r\n";
 
           // Next text up to LineLimit - prepend length without leading space.
@@ -257,10 +275,10 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Private Methods
+    #region Private Methods (6)
 
     // Gets the text to add to the existing line.
-    private string AddText(string text, int addLength)
+    private string GetAddText(string text, int addLength)
     {
       var retText = text.Substring(0, addLength);
       if (LineLength > 0
@@ -417,6 +435,15 @@ namespace LJCNetCommon
       }
     }
     private int mIndentCount;
+
+    /// <summary>Gets the current indent length.</summary>
+    public int IndentLength
+    {
+      get
+      {
+        return IndentCount * IndentCharCount;
+      }
+    }
 
     /// <summary>Gets or sets the first item indicator.</summary>
     public bool IsFirst { get; set; }

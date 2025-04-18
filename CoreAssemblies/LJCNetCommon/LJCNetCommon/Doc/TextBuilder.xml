@@ -3,35 +3,56 @@
 <!-- Licensed under the MIT License. -->
 <!-- TextBuilder.xml -->
 <items>
-  <!-- Append Methods -->
-  <Add>
-    <summary>Adds text without processing.</summary>
-    <param name="text">Next append value.</param>
-  </Add>
+  <!-- Methods -->
+  <AddIndent>
+    <summary>
+      Changes the IndentCount by the provided value.
+    </summary>
+    <param name="increment">The change amount.</param>
+    <returns>The indent count.</returns>
+  </AddIndent>
+  <!-- Append Text Methods -->
+  <AddLine>
+    <summary>
+      Adds a text line without modification.
+    </summary>
+    <param name="text">The next append value.</param>
+    <returns>The added text.</returns>
+  </AddLine>
+  <AddText>
+    <summary>Adds text without modification.</summary>
+    <param name="text">the Next append value.</param>
+  </AddText>
   <Item>
     <summary>
       Adds a delimiter if not the first list item
       and adds a newline if line length is greater than CharLength.
     </summary>
-    <param name="text">Next append value.</param>
+    <param name="text">The next append value.</param>
     <returns>
       The potentially indented, delimited and wrapped new text value.
     </returns>
   </Item>
   <Line>
-    <summary>Adds a line.</summary>
-    <param name="text">Next append value.</param>
+    <summary>
+      Adds a modified text line to the builder.
+    </summary>
+    <param name="text">The next append value.</param>
     <returns>The potentially indented and wrapped new text value.</returns>
+    <returns>The added text.</returns>
   </Line>
   <Text>
-    <summary>Adds text.</summary>
+    <summary>
+      Adds modified text to the builder.
+    </summary>
     <param name="text">The next append value.</param>
-    <param name="allowStartIndent"></param>"
-    <param name="allowNewLine"></param>"
+    <param name="addIndent">Indicates if the text should be indented.</param>
+    <param name="allowNewLine">
+      Indicates if the text may start with a new line.
+    </param>"
     <returns>The potentially indented and wrapped new text value.</returns>
   </Text>
-  <!-- -->
-  <!-- Get Modified String Methods -->
+  <!-- Get Text Methods -->
   <GetDelimited>
     <summary>
       Adds a delimiter if not the first list item.
@@ -41,14 +62,31 @@
   </GetDelimited>
   <GetIndented>
     <summary>
-      Gets a new line with prefixed indent.
+      Gets a new potentially indented line.
     </summary>
     <param name="text">The next append value.</param>
     <returns>The potentially indented new text value.</returns>
   </GetIndented>
+  <GetLine>
+    <summary>Gets a modified text line.</summary>
+    <param name="text">The next append value.</param>
+    <returns>The potentially indented and wrapped new text value.</returns>
+    <returns>The added text.</returns>
+  </GetLine>
+  <GetText>
+    <summary>
+      Gets potentially modified text.
+    </summary>
+    <param name="text">The next append value.</param>
+    <param name="addIndent">Indicates if the text should be indented.</param>
+    <param name="allowNewLine">
+      Indicates if the text may start with a new line.
+    </param>"
+    <returns>The potentially indented and wrapped new text value.</returns>
+  </GetText>
   <GetWrapped>
     <summary>
-      Adds a newline if line length is greater than CharLength.
+      Gets added text and new wrapped line if combined line > LineLimit.
     </summary>
     <param name="text">The next append value.</param>
     <returns>The potentially wrapped and indented new text value.</returns>

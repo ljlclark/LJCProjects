@@ -59,7 +59,7 @@ namespace LJCDataUtility
     // Adds text to the builder, no indent or wrap.
     internal void Add(string text)
     {
-      Builder.Add(text);
+      Builder.AddText(text);
     }
 
     //Clears the Builder text.

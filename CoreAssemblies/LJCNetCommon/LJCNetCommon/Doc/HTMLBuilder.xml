@@ -15,7 +15,9 @@
     <summary>
       Changes the IndentCount by the supplied value.
     </summary>
-    <param name="increment">The amount to increment or decrement the count.</param>
+    <param name="increment">
+      The amount to increment or decrement the count.
+    </param>
     <returns>The current indent count.</returns>
   </AddIndent>
   <!-- Append Text Methods (3) -->
