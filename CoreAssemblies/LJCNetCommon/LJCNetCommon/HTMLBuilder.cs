@@ -627,18 +627,6 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets the main HTML Head elements.
-    /// <include path='items/GetHTMLHead/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetHTMLHead(TextState textState, string title = null
-      , string author = null, string description = null)
-    {
-      var hb = new HTMLBuilder(textState);
-      hb.Create("title", title, textState, childIndent: false);
-      hb.Metas(author, textState, description);
-      var retValue = hb.ToString();
-      return retValue;
-    }
-
     // Gets the HTML end <body> and <html>.
     /// <include path='items/GetHTMLEnd/*' file='Doc/HTMLBuilder.xml'/>
     public string GetHTMLEnd(TextState textState)
@@ -650,6 +638,18 @@ namespace LJCNetCommon
       text = hb.GetEnd("html", textState, NoIndent);
       hb.Text(text);
       AddSyncIndent(hb, null, textState);
+      var retValue = hb.ToString();
+      return retValue;
+    }
+
+    // Gets the main HTML Head elements.
+    /// <include path='items/GetHTMLHead/*' file='Doc/HTMLBuilder.xml'/>
+    public string GetHTMLHead(TextState textState, string title = null
+      , string author = null, string description = null)
+    {
+      var hb = new HTMLBuilder(textState);
+      hb.Create("title", title, textState, childIndent: false);
+      hb.Metas(author, textState, description);
       var retValue = hb.ToString();
       return retValue;
     }

@@ -16,7 +16,7 @@
       Changes the IndentCount by the supplied value.
     </summary>
     <param name="increment">
-      The amount to increment or decrement the count.
+      The amount to increment or decrement the indent count.
     </param>
     <returns>The current indent count.</returns>
     <example>
@@ -51,34 +51,17 @@
       </code>
     </example>
   </AddIndent>
-  <!-- Append Text Methods (3) -->
-  <AddText>
-    <summary>
-      Adds text without modification.
-    </summary>
-    <param name="text">The add text.</param>
-    <remarks>
-      AddText() is an "Add" method. It adds the unmodified text to the builder.
-    </remarks>
-    <example>
-      <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuilder();
-
-        // Adds text without modification.
-        hb.AddText("This is some appended text.");
-        var result = hb.ToString();
-
-        // result:
-        // This is some appended text.
-      </code>
-    </example>
-  </AddText>
+  <!-- Append Text Methods (4) -->
   <AddLine>
     <summary>
       Adds a text line without modification.
     </summary>
     <param name="text">The add text.</param>
+    <returns>The added text line.</returns>
+    <remarks>
+      AddLine() is an "Append" method. It adds the unmodified text line to the
+      builder.
+    </remarks>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -94,16 +77,39 @@
       </code>
     </example>
   </AddLine>
+  <AddText>
+    <summary>
+      Adds text without modification.
+    </summary>
+    <param name="text">The add text.</param>
+    <returns>The added text.</returns>
+    <remarks>
+      AddText() is an "Append" method. It adds the unmodified text to the builder.
+    </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder();
+
+        // Adds text without modification.
+        hb.AddText("This is some appended text.");
+        var result = hb.ToString();
+
+        // result:
+        // This is some appended text.
+      </code>
+    </example>
+  </AddText>
   <Line>
     <summary>
       Adds a modified text line to the builder.
     </summary>
-    <param name="text">The append text.</param>
+    <param name="text">The add text.</param>
     <returns>The added text line.</returns>
     <remarks>
       Line() is an "Append" method. It creates the text with GetText() and adds
       a new line after the text. The text is then added to the builder.
-      &lt;br /&lt;
+      &lt;br /&gt;
       Line() works the same as Text() except it appends a new line.
     </remarks>
   </Line>
@@ -111,15 +117,15 @@
     <summary>
       Adds modified text to the builder.
     </summary>
-    <param name="text">The append text.</param>
+    <param name="text">The add text.</param>
     <param name="addIndent">
-      Indicates if the element should be indented.
+      Indicates if the element can be indented.
     </param>
-    <param name="allowNewLine"></param>"
+    <param name="allowNewLine">Indicates if a new line can be added.</param>"
     <returns>The added text.</returns>
     <remarks>
       Text() is an "Append" method. It creates the text with GetText() and adds
-      it to the builder.&lt;br /&lt;
+      it to the builder.&lt;br /&gt;
       Note: One should set the "addIndent" parameter to false when adding text
       to the builder after getting the text with a "GetText" method. This is
       because the the indent has already been added with the "GetText"
@@ -150,11 +156,12 @@
     </summary>
     <param name="htmlAttribs">The attributes collection.</param>
     <param name="textState">The current text state values.</param>"
+    <returns>The attributes text.</returns>
     <remarks>
       The returned text does not end with a new line. This allows for additions
-      after the text.&lt;br /&lt;
+      after the text.&lt;br /&gt;
       Begin, Create and End text will start with a new line if the builder text
-      already has a value.&lt;br /&lt;
+      already has a value.&lt;br /&gt;
     </remarks>
     <example>
       <code>
@@ -179,7 +186,7 @@
     <summary>
       Gets a new line with indent.
     </summary>
-    <param name="text">The append text.</param>
+    <param name="text">The add text.</param>
     <returns>The potentially indented new text value.</returns>
     <example>
       <code>
@@ -223,9 +230,9 @@
     </summary>
     <param name="text">The text value.</param>
     <param name="addIndent">
-      Indicates if the element should be indented.
+      Indicates if the element can be indented.
     </param>
-    <param name="allowNewLine"></param>"
+    <param name="allowNewLine">Indicates if a new line can be added.</param>"
     <returns>The modified text line.</returns>
     <remarks>
       GetLine() is a "GetString" method. It creates and returns the potentially
@@ -249,9 +256,9 @@
     </summary>
     <param name="text">The text value.</param>
     <param name="addIndent">
-      Indicates if the element should be indented.
+      Indicates if the element can be indented.
     </param>
-    <param name="allowNewLine"></param>"
+    <param name="allowNewLine">Indicates if a new line can be added.</param>"
     <returns>The modified text.</returns>
     <remarks>
       GetText() is a "GetString" method. It creates and returns the potentially
@@ -300,7 +307,7 @@
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttribs">The element attributes.</param>
     <param name="addIndent">
-      Indicates if the element should be indented.
+      Indicates if the element can be indented.
     </param>
     <param name="childIndent">
       Indicates if the child elements should be indented.
@@ -340,7 +347,7 @@
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttribs">The element attributes.</param>
     <param name="addIndent">
-      Indicates if the element should be indented.
+      Indicates if the element can be indented.
     </param>
     <param name="childIndent">
       Indicates if the child elements should be indented.
@@ -380,7 +387,7 @@
     <param name="name">The element name.</param>
     <param name="textState">The current text state values.</param>"
     <param name="addIndent">
-      Indicates if the element should be indented.
+      Indicates if the element can be indented.
     </param>
     <returns>The added element end tag.</returns>
     <remarks>
@@ -414,9 +421,9 @@
     <summary>
       Appends a &amp;lt;link&amp;gt; element for a style sheet.
     </summary>
-    <param name="fileName"></param>
+    <param name="fileName">The CSS file name.</param>
     <param name="textState">The current text state values.</param>"
-    <returns></returns>
+    <returns>The added &lt;link&gt; element.</returns>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -434,10 +441,10 @@
     <summary>
       Appends a &amp;lt;meta&amp;gt; element.
     </summary>
-    <param name="name"></param>
-    <param name="content"></param>
+    <param name="name">The name value.</param>
+    <param name="content">The content value.</param>
     <param name="textState">The current text state values.</param>"
-    <returns></returns>
+    <returns>The added &amp;lt;meta&amp;gt; element.</returns>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -461,14 +468,14 @@
   </Meta>
   <Metas>
     <summary>
-      Appends common &amp;lt;meta&amp;rt; elements.
+      Appends common &amp;lt;meta&amp;gt; elements.
     </summary>
-    <param name="author"></param>
+    <param name="author">The author.</param>
     <param name="textState">The current text state values.</param>"
-    <param name="description"></param>
-    <param name="keywords"></param>
-    <param name="charSet"></param>
-    <returns></returns>
+    <param name="description">The description.</param>
+    <param name="keywords">The keywords.</param>
+    <param name="charSet">The charset value.</param>
+    <returns>The added &amp;lt;meta&amp;gt; elements.</returns>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -488,9 +495,9 @@
     <summary>
       Appends a &amp;lt;script&amp;gt; element.
     </summary>
-    <param name="fileName"></param>
+    <param name="fileName">The script file name.</param>
     <param name="textState">The current text state values.</param>"
-    <returns></returns>
+    <returns>The added &amp;lt;script&amp;gt; element.</returns>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -504,13 +511,18 @@
       </code>
     </example>
   </Script>
-  <!-- Get Element Methods (6) -->
+  <!-- Get Element Methods (9) -->
   <AddChildIndent>
     <summary>
       Adds the new (child) indents.
     </summary>
-    <param name="createText"></param>"
+    <param name="createText">The previously created text.</param>"
     <param name="textState">The TextState object.</param>
+    <remarks>
+      Adds an indent for following child elements.&lt;br /&gt;
+      The indent will only be added if the createText length > 0 and the
+      textState.ChildIndentCount > 0.
+    </remarks>
   </AddChildIndent>
   <GetBegin>
     <summary>
@@ -520,13 +532,15 @@
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttribs">The element attributes.</param>
     <param name="addIndent">
-      Indicates if the element should be indented.
+      Indicates if the element can be indented.
     </param>
-    <param name="childIndent"></param>"
+    <param name="childIndent">
+      Indicates if the child indent should be applied.
+    </param>"
     <returns>The HTML element begin tag.</returns>
     <remarks>
       GetBegin() is an "GetText" method which creates the element opening tag
-      with GetCreate() and returns the text value.<br />
+      with GetCreate() and returns the text value.&lt;br /&gt;
       Note: One should set the "addIndent" parameter to false when adding text
       to the builder after getting the text with a "GetText" method. This is
       because the the indent has already been added with the "GetText"
@@ -561,9 +575,11 @@
     <param name="textState">The current text state values.</param>"
     <param name="htmlAttribs">The element attributes.</param>
     <param name="addIndent">
-      Indicates if the element should be indented.
+      Indicates if the element can be indented.
     </param>
-    <param name="childIndent"></param>"
+    <param name="childIndent">
+      Indicates if the child indent should be applied.
+    </param>"
     <param name="isEmpty">Indicates if an empty element.</param>
     <param name="close">Indicates if the element will be closed.</param>
     <returns>The HTML element.</returns>
@@ -602,7 +618,7 @@
     <param name="name">The element name.</param>
     <param name="textState">The current text state values.</param>"
     <param name="addIndent">
-      Indicates if the element should be indented.
+      Indicates if the element can be indented.
     </param>
     <returns>The element end tag.</returns>
     <remarks>
@@ -627,9 +643,9 @@
     <summary>
       Gets the link element for a style sheet.
     </summary>
-    <param name="fileName"></param>
+    <param name="fileName">The CSS file name.</param>
     <param name="textState">The current text state values.</param>"
-    <returns></returns>
+    <returns>The &lt;link&gt; element.</returns>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -646,10 +662,10 @@
     <summary>
       Gets a meta element.
     </summary>
-    <param name="name"></param>
-    <param name="content"></param>
+    <param name="name">The name value.</param>
+    <param name="content">The content value.</param>
     <param name="textState">The current text state values.</param>"
-    <returns></returns>
+    <returns>The &amp;lt;meta&amp;gt; element.</returns>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -666,12 +682,12 @@
     <summary>
       Gets common meta elements.
     </summary>
-    <param name="author"></param>
+    <param name="author">The author.</param>
     <param name="textState">The current text state values.</param>"
-    <param name="description"></param>
-    <param name="keywords"></param>
-    <param name="charSet"></param>
-    <returns></returns>
+    <param name="description">The description.</param>
+    <param name="keywords">The keywords.</param>
+    <param name="charSet">The charset value.</param>
+    <returns>The &amp;lt;meta&amp;gt; elements.</returns>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -691,7 +707,7 @@
     </summary>
     <param name="fileName"></param>
     <param name="textState">The current text state values.</param>"
-    <returns></returns>
+    <returns>The &amp;lt;script&amp;gt; element.</returns>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -709,10 +725,10 @@
     <summary>
       Creates the HTML beginning up to and including head;.
     </summary>
-    <param name="textState"></param>"
-    <param name="copyright"></param>
-    <param name="fileName"></param>
-    <returns></returns>
+    <param name="textState">The current text state values.</param>
+    <param name="copyright">The copyright array.</param>
+    <param name="fileName">The HTML file name.</param>
+    <returns>The added HTML beginning text.</returns>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -736,15 +752,15 @@
       </code>
     </example>
   </HTMLBegin>
-  <!-- Get HTML Methods (2) -->
+  <!-- Get HTML Methods (3) -->
   <GetHTMLBegin>
     <summary>
       Gets the HTML beginning up to and including &amp;lt;head&amp;gt;.
   </summary>
-    <param name="textState"></param>"
-    <param name="copyright"></param>
-    <param name="fileName"></param>
-    <returns></returns>
+    <param name="textState">The current text state values.</param>
+    <param name="copyright">The copyright array.</param>
+    <param name="fileName">The HTML file name.</param>
+    <returns>The HTML beginning text.</returns>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -771,8 +787,8 @@
     <summary>
       Gets the HTML end &amp;lt;body&amp;gt; and &amp;lt;html&amp;gt;.
     </summary>
-    <param name="textState"></param>
-    <returns></returns>
+    <param name="textState">The current text state values.</param>
+    <returns>The HTML end tags.</returns>
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -786,6 +802,16 @@
       </code>
     </example>
   </GetHTMLEnd>
+  <GetHTMLHead>
+    <summary>
+      Gets the common HTML Head elements.
+    </summary>
+    <param name="textState">The current text state values.</param>"
+    <param name="title">The page title.</param>
+    <param name="author">The author.</param>
+    <param name="description">The description.</param>
+    <returns>The common HTML head elements.</returns>
+  </GetHTMLHead>
   <!-- Get Element Attribs Methods (3) -->
   <Attribs>
     <summary>

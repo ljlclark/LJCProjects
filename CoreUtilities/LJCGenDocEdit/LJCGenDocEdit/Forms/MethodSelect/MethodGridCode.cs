@@ -54,7 +54,9 @@ namespace LJCGenDocEdit
 
         // Creates the DataAssemblies collection with the deserialized
         // "Doc" XML converted to the "Data" XML format.
-        DataRoot dataRoot = new DataRoot(assemblyGroups);
+        // *** Add *** 4/21/25
+        var fileName = "LJCGenDocEdit.exe.config";
+        DataRoot dataRoot = new DataRoot(assemblyGroups, fileName);
 
         var dataAssemblies = dataRoot.DataAssemblies;
         dataAssembly = dataAssemblies.LJCSearchUnique(docAssembly.Name);
