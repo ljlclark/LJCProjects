@@ -58,8 +58,11 @@ namespace LJCNetCommon
       MethodInfo = null;
       if (TypeReference != null)
       {
+        // *** Change *** 4/20/25
+        //BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public
+        //  | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly;
         BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public
-          | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly;
+          | BindingFlags.Static | BindingFlags.DeclaredOnly;
 
         if (null == parameterNames
           || (parameterNames != null && 0 == parameterNames.Length))

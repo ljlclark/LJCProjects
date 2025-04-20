@@ -78,18 +78,23 @@ namespace LJCWinFormControls
     // Gets the Data object property value.
     private string GetPropertyValue(LJCReflect reflect, string propertyName)
     {
-      string retValue;
+      string retValue = null;
 
       Type propertyType = reflect.GetPropertyType(propertyName);
-      if (propertyType != null
-        && propertyType.FullName.Contains("DateTime"))
+      // *** Change *** 4/20/25
+      //if (propertyType != null
+      //  && propertyType.FullName.Contains("DateTime"))
+      if (propertyType != null)
       {
-        DateTime dateValue = reflect.GetDateTime(propertyName);
-        retValue = GetUiDateString(dateValue);
-      }
-      else
-      {
-        retValue = reflect.GetString(propertyName);
+        if (propertyType.FullName.Contains("DateTime"))
+        {
+          DateTime dateValue = reflect.GetDateTime(propertyName);
+          retValue = GetUiDateString(dateValue);
+        }
+        else
+        {
+          retValue = reflect.GetString(propertyName);
+        }
       }
       return retValue;
     }

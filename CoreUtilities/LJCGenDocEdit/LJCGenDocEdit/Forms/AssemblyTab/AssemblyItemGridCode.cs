@@ -2,10 +2,8 @@
 // Licensed under the MIT License.
 // AssemblyItemGridCode.cs
 using LJCDBMessage;
-// *** Begin *** Add - Data Views
 using LJCDBViewControls;
 using LJCDBViewDAL;
-// *** End   *** Add - Data Views
 using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
@@ -337,7 +335,7 @@ namespace LJCGenDocEdit
       AssemblyGrid.Columns.Clear();
 
       // Get the view grid columns
-      var viewCombo = DocList.AssemblyGroupViewCombo;
+      var viewCombo = DocList.AssemblyViewCombo;
       var viewInfo = viewCombo.GetInfo();
       mGridColumns = mDataDbView.GetGridColumns(viewInfo.DataID);
       if (mGridColumns != null)

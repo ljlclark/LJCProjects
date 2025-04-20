@@ -166,11 +166,12 @@ namespace LJCNetCommon
 
     // Gets a modified text line.
     /// <include path='items/GetLine/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetLine(string text)
+    public string GetLine(string text, bool addIndent = true
+      , bool allowNewLine = true)
     {
       var retLine = "";
 
-      retLine += GetText(text);
+      retLine += GetText(text, addIndent, allowNewLine);
       retLine += "\r\n";
       return retLine;
     }
@@ -370,7 +371,7 @@ namespace LJCNetCommon
       return createText;
     }
 
-    // Appends a <link> element for a style sheet.
+    // Appends a <script> element for a style sheet.
     /// <include path='items/Script/*' file='Doc/HTMLBuilder.xml'/>
     public string Script(string fileName, TextState textState)
     {

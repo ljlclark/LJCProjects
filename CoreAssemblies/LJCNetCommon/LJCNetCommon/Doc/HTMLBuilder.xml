@@ -19,6 +19,37 @@
       The amount to increment or decrement the count.
     </param>
     <returns>The current indent count.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder();
+
+        // The builder keeps track of the current number of indents.
+        // Adds 1 indent by default.
+        hb.AddIndent();
+
+        // Adds text without modification.
+        hb.AddText("This text is not indented.");
+
+        // Adds a new line before adding the text if the builder
+        // already has text.
+        // Starts with the current indent string.
+        hb.Text("This text is indented.");
+
+        // No Indent
+        var addIndent = false;
+        hb.Text("Not indented.", addIndent);
+
+        // Do not start a new line.
+        hb.Text("No New Line.", allowNewLine: false);
+        var result = hb.ToString();
+
+        // result:
+        // "This text is not indented."
+        // "  This text is indented."
+        // "Not Indented.  No New Line"
+      </code>
+    </example>
   </AddIndent>
   <!-- Append Text Methods (3) -->
   <AddText>
@@ -29,12 +60,39 @@
     <remarks>
       AddText() is an "Add" method. It adds the unmodified text to the builder.
     </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder();
+
+        // Adds text without modification.
+        hb.AddText("This is some appended text.");
+        var result = hb.ToString();
+
+        // result:
+        // "This is some appended text."
+      </code>
+    </example>
   </AddText>
   <AddLine>
     <summary>
       Adds a text line without modification.
     </summary>
     <param name="text">The add text.</param>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder();
+
+        // Adds text with a new line.
+        hb.AddLine("This is an appended line.");
+        var result = hb.ToString();
+
+        // result:
+        // "This is an appended line."
+        // ""
+      </code>
+    </example>
   </AddLine>
   <Line>
     <summary>
@@ -44,7 +102,9 @@
     <returns>The added text line.</returns>
     <remarks>
       Line() is an "Append" method. It creates the text with GetText() and adds
-      a new line. The text is then added to the builder.
+      a new line after the text. The text is then added to the builder.
+      &lt;br /&lt;
+      Line() works the same as Text() except it appends a new line.
     </remarks>
   </Line>
   <Text>
@@ -59,12 +119,29 @@
     <returns>The added text.</returns>
     <remarks>
       Text() is an "Append" method. It creates the text with GetText() and adds
-      it to the builder.
+      it to the builder.&lt;br /&lt;
       Note: One should set the "addIndent" parameter to false when adding text
       to the builder after getting the text with a "GetText" method. This is
       because the the indent has already been added with the "GetText"
       method.
     </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder();
+
+        hb.Text("This is an appended line.");
+
+        // The builder keeps track of the current number of indents.
+        hb.AddIndent();
+        hb.Text("This is an indented line.");
+        var result = hb.ToString();
+
+        // result:
+        // "This is an appended line."
+        // "  This is an indented line."
+      </code>
+    </example>
   </Text>
   <!-- Get Text Methods (6) -->
   <GetAttribs>
@@ -75,16 +152,28 @@
     <param name="textState">The current text state values.</param>"
     <remarks>
       The returned text does not end with a new line. This allows for additions
-      after the text.<br />
+      after the text.&lt;br /&lt;
       Begin, Create and End text will start with a new line if the builder text
-      already has a value.<br />
+      already has a value.&lt;br /&lt;
     </remarks>
-    <code>
-      Calling code should follow this pattern:
-      var text = builder.GetMethod();
-      builder.Line();
-      builder.Text(text);
-    </code>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+        
+        var attribs = new Attributes()
+        {
+          { "class", "Selector" },
+        };
+        hb.Begin("div", null, attribs);
+        hb.End("div");
+        var result = hb.ToString();
+
+        // result:
+        // "&amp;lt;div class="Selector"&amp;gt;"
+        // "&amp;lt;div&amp;gt;"
+      </code>
+    </example>
   </GetAttribs>
   <GetIndented>
     <summary>
@@ -92,19 +181,67 @@
     </summary>
     <param name="text">The append text.</param>
     <returns>The potentially indented new text value.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var result = hb.GetIndented("This text is NOT indented.");
+
+        // The builder keeps track of the current number of indents.
+        hb.AddIndent(2);
+        result += hb.GetIndented("This text is indented.");
+
+        // result:
+        // "This text is NOT indented."
+        // "    This text is indented."
+      </code>
+    </example>
   </GetIndented>
   <GetIndentString>
     <summary>
       Returns the current indent string.
     </summary>
     <returns>The current indent string.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        // The builder keeps track of the current number of indents.
+        hb.AddIndent(2);
+        result += hb.GetIndentedString();
+
+        // result:
+        // "    "
+      </code>
+    </example>
   </GetIndentString>
   <GetLine>
     <summary>
       Gets a modified text line.
     </summary>
     <param name="text">The text value.</param>
+    <param name="addIndent">
+      Indicates if the element should be indented.
+    </param>
+    <param name="allowNewLine"></param>"
     <returns>The modified text line.</returns>
+    <remarks>
+      GetLine() is a "GetString" method. It creates and returns the potentially
+      indented and wrapped text. It will start the returned text with a new line
+      if the builder already has text.&lt;br /&gt;
+      It appends a new line to the returned text.
+      The applied indent is the product of the class properties IndentCount
+      and IndentCharCount. (IndentCount * IndentCharCount).&lt;br /&gt;
+      The "addIndent" parameter defaults to true. Set it to false to prevent
+      indenting the line further.&lt;br /&gt;
+      The "allowNewLine" parameter defaults to true. Set it to false to prevent
+      starting with a new line.&lt;br /&gt;
+      Wraps the text with a newline if the WrapEnabled parameter is true and the
+      line length is greater than LineLimit.
+      GetLine() works the same as GetText() except it appends a new line.
+    </remarks>
   </GetLine>
   <GetText>
     <summary>
@@ -117,17 +254,35 @@
     <param name="allowNewLine"></param>"
     <returns>The modified text.</returns>
     <remarks>
-      GetText() creates and returns the potentially indented and wrapped
-      text. It will start the returned text with a new line if the builder
-      already has text.<br />
+      GetText() is a "GetString" method. It creates and returns the potentially
+      indented and wrapped text. It will start the returned text with a new line
+      if the builder already has text.&lt;br /&gt;
       The applied indent is the product of the class properties IndentCount
-      and IndentCharCount. (IndentCount * IndentCharCount).<br />
+      and IndentCharCount. (IndentCount * IndentCharCount).&lt;br /&gt;
       The "addIndent" parameter defaults to true. Set it to false to prevent
-      indenting the line further.<br />
-      The "allowNewLine" parameter default to true. Set it to false to prevent
-      starting with a new line.<br />
-      Wraps the text with a newline if line length is greater than LineLimit.
+      indenting the line further.&lt;br /&gt;
+      The "allowNewLine" parameter defaults to true. Set it to false to prevent
+      starting with a new line.&lt;br /&gt;
+      Wraps the text with a newline if the WrapEnabled parameter is true and the
+      line length is greater than LineLimit.
     </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder();
+
+        var result = hb.GetText("This is an appended line.");
+
+        // The builder keeps track of the current number of indents.
+        hb.AddIndent();
+        var result += hb.GetText("This is an indented line.");
+        var result = hb.ToString();
+
+        // result:
+        // "This is an appended line."
+        // "  This is an indented line."
+      </code>
+    </example>
   </GetText>
   <GetWrapped>
     <summary>
@@ -155,10 +310,26 @@
       Begin() is an "Append" method. It creates the element opening tag with
       GetCreate() and adds it to the builder.
       The appended text does not end with a new line. This allows for additions
-      after the text.<br />
+      after the text.&lt;br /&gt;
       The added text will start with a new line if the builder text already has
       a value.
     </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var attribs = new Attributes()
+        {
+          { "class", "Selector" },
+        };
+        hb.Begin("div", null, attribs);
+        var result = hb.ToString();
+
+        // result:
+        // "&amp;lt;div class="Selector"&amp;gt;"
+      </code>
+    </example>
   </Begin>
   <Create>
     <summary>
@@ -181,10 +352,26 @@
       Create() is an "Append" method. It creates the element text with
       GetCreate() and adds it to the builder.
       The appended text does not end with a new line. This allows for additions
-      after the text.<br />
+      after the text.&lt;br /&gt;
       The added text will start with a new line if the builder text already has
       a value.
     </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var attribs = new Attributes()
+        {
+          { "src", "fileName.js" },
+        };
+        hb.Create("script", null, attribs);
+        var result = hb.ToString();
+
+        // result:
+        // "&amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;"
+      </code>
+    </example>
   </Create>
   <End>
     <summary>
@@ -204,27 +391,77 @@
       The added text will start with a new line if the builder text already has
       a value.
     </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var attribs = new Attributes()
+        {
+          { "class", "Selector" },
+        };
+        hb.Begin("div", null, attribs);
+        hb.End("div");
+        var result = hb.ToString();
+
+        // result:
+        // "&amp;lt;div class="Selector"&amp;gt;"
+        // "&amp;lt;/div&amp;gt;"
+      </code>
+    </example>
   </End>
   <Link>
     <summary>
-      Appends a &lt;link&gt; element for a style sheet.
+      Appends a &amp;lt;link&amp;gt; element for a style sheet.
     </summary>
     <param name="fileName"></param>
     <param name="textState">The current text state values.</param>"
     <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        hb.Link("fileName.css");
+        var result = hb.ToString();
+
+        // result:
+        // "&amp;lt;link rel="stylesheet" type="text/css" href=fileName.css /&amp;gt;"
+      </code>
+    </example>
   </Link>
   <Meta>
     <summary>
-      Appends a &lt;meta&gt; element.
+      Appends a &amp;lt;meta&amp;gt; element.
     </summary>
     <param name="name"></param>
     <param name="content"></param>
     <param name="textState">The current text state values.</param>"
     <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var attribs = new Attributes()
+        {
+          { "charset", "utf-8" }
+        };
+        hb.Create("meta", htmlAttribs: attribs, isEmpty: true); 
+        hb.Meta("description", "Metas");
+        hb.Meta("author", "Author");
+        var result = hb.ToString();
+
+        // result:
+        // "&amp;lt;meta charset="utf-8"  /&amp;gt;"
+        // "&amp;lt;meta name="description" content="Metas"  /&amp;gt;"
+        // "&amp;lt;meta name="author" content="Author"  /&amp;gt;"
+      </code>
+    </example>
   </Meta>
   <Metas>
     <summary>
-      Appends common &lt;meta&gt; elements.
+      Appends common &amp;lt;meta&amp;rt; elements.
     </summary>
     <param name="author"></param>
     <param name="textState">The current text state values.</param>"
@@ -232,14 +469,40 @@
     <param name="keywords"></param>
     <param name="charSet"></param>
     <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        hb.Metas("Author", null, "Metas", );
+        var result = hb.ToString();
+
+        // result:
+        // "&amp;lt;meta charset="utf-8"  /&amp;gt;"
+        // "&amp;lt;meta name="description" content="Metas"  /&amp;gt;"
+        // "&amp;lt;meta name="author" content="Author"  /&amp;gt;"
+      </code>
+    </example>
   </Metas>
   <Script>
     <summary>
-      Appends a &lt;script&gt; element.
+      Appends a &amp;lt;script&amp;gt; element.
     </summary>
     <param name="fileName"></param>
     <param name="textState">The current text state values.</param>"
     <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        hb.Script("fileName.js");
+        var result = hb.ToString();
+
+        // result:
+        // "&amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;"
+      </code>
+    </example>
   </Script>
   <!-- Get Element Methods (6) -->
   <AddChildIndent>
@@ -262,13 +525,24 @@
     <param name="childIndent"></param>"
     <returns>The HTML element begin tag.</returns>
     <remarks>
-      GetBegin() is a "GetText" method which creates the element opening tag
+      GetBegin() is an "GetText" method which creates the element opening tag
       with GetCreate() and returns the text value.<br />
       Note: One should set the "addIndent" parameter to false when adding text
       to the builder after getting the text with a "GetText" method. This is
       because the the indent has already been added with the "GetText"
       method.
     </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var result = hb.GetBegin("head");
+
+        // result:
+        // "&amp;lt;head&amp;gt;"
+      </code>
+    </example>
   </GetBegin>
   <GetBeginSelector>
     <summary>
@@ -306,6 +580,19 @@
       The ChildIndentCount is incremented if the element is not empty and
       not closed.
     </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var result = hb.GetCreate("head");
+        result += hb.GetEnd("head");
+
+        // result:
+        // "&amp;lt;head&amp;gt;"
+        // "&amp;lt;/head&amp;gt;"
+      </code>
+    </example>
   </GetCreate>
   <GetEnd>
     <summary>
@@ -321,27 +608,62 @@
       GetEnd() is a "GetText" method which creates the element closing tag
       and returns the text value.<br />
     </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var result = hb.GetCreate("head");
+        result += hb.GetEnd("head");
+
+        // result:
+        // "&amp;lt;head&amp;gt;"
+        // "&amp;lt;/head&amp;gt;"
+      </code>
+    </example>
   </GetEnd>
   <GetLink>
     <summary>
-      Gets the &lt;link&gt; element for a style sheet.
+      Gets the link element for a style sheet.
     </summary>
     <param name="fileName"></param>
     <param name="textState">The current text state values.</param>"
     <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var result = hb.GetLink("fileName.css");
+
+        // result:
+        // "&amp;lt;link rel="stylesheet" type="text/css" href=fileName.css /&amp;gt;"
+      </code>
+    </example>
   </GetLink>
   <GetMeta>
     <summary>
-      Gets a &lt;meta&gt; element.
+      Gets a meta element.
     </summary>
     <param name="name"></param>
     <param name="content"></param>
     <param name="textState">The current text state values.</param>"
     <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var result = hb.GetMeta("description", "Metas");
+
+        // result:
+        // "&amp;lt;meta name="description" content="Metas"  /&amp;gt;"
+      </code>
+    </example>
   </GetMeta>
   <GetMetas>
     <summary>
-      Gets common &lt;meta&gt; elements.
+      Gets common meta elements.
     </summary>
     <param name="author"></param>
     <param name="textState">The current text state values.</param>"
@@ -349,19 +671,42 @@
     <param name="keywords"></param>
     <param name="charSet"></param>
     <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var result = hb.GetMetas("Author", null, "Metas", );
+
+        // result:
+        // "&amp;lt;meta name="description" content="Metas"  /&amp;gt;"
+        // "&amp;lt;meta name="author" content="Author"  /&amp;gt;"
+      </code>
+    </example>
   </GetMetas>
   <GetScript>
     <summary>
-      Gets a &lt;script&gt; element.
+      Gets a &amp;lt;script&amp;gt; element.
     </summary>
     <param name="fileName"></param>
     <param name="textState">The current text state values.</param>"
     <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var result = hb.GetScript("fileName.js");
+
+        // result:
+        // "&amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;"
+      </code>
+    </example>
   </GetScript>
   <!-- Append HTML Methods -->
   <HTMLBegin>
     <summary>
-      Creates the HTML beginning up to and including &lt;head&gt;.
+      Creates the HTML beginning up to and including head;.
     </summary>
     <param name="textState"></param>"
     <param name="copyright"></param>
@@ -371,8 +716,8 @@
   <!-- Get HTML Methods (2) -->
   <GetHTMLBegin>
     <summary>
-      Gets the HTML beginning up to and including &lt;head&gt;.
-    </summary>
+      Gets the HTML beginning up to and including &amp;lt;head&amp;gt;.
+  </summary>
     <param name="textState"></param>"
     <param name="copyright"></param>
     <param name="fileName"></param>
@@ -390,25 +735,11 @@
   </GetHTMLTitle>
   <GetHTMLEnd>
     <summary>
-      Gets the HTML end &lt;body&gt; and &lt;html&gt;.
-    </summary>
+      Gets the HTML end &amp;lt;body&amp;gt; and &amp;lt;html&amp;gt;.
+  </summary>
     <param name="textState"></param>
     <returns></returns>
   </GetHTMLEnd>
-  <GetSyncIndent>
-    <summary>
-      Gets the sync TextState object.
-    </summary>
-    <param name="textState">The "GetString" method parameter.</param>
-    <returns>The synchronized TextState object.</returns>
-  </GetSyncIndent>
-  <SyncState>
-    <summary>
-      Sync calling function text state.
-    </summary>
-    <param name="toTextState">The "to" TextState</param>
-    <param name="fromTextState">The "from" TextState.</param>
-  </SyncState>
   <!-- Get Element Attribs Methods (3) -->
   <Attribs>
     <summary>
