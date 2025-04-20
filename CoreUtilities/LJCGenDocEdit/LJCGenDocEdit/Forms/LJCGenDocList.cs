@@ -6,6 +6,7 @@ using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace LJCGenDocEdit
@@ -27,23 +28,48 @@ namespace LJCGenDocEdit
       // *** Next Statement *** Change 1/17/25
       //var configValues = ValuesGenDoc.Instance;
       var configValues = ValuesGenDocEdit.Instance;
-      try
-      {
-        configValues.SetConfigFile("LJCGenDocEdit.exe.config");
-      }
-      catch (Exception ex)
-      {
-        // *** Next Statement *** Add 1/31/25
-        MessageBox.Show(ex.Message, "Config Error", MessageBoxButtons.OK
-          , MessageBoxIcon.Stop);
-        throw ex;
-      }
+      string configFileName = null;
+      SetConfig(configValues, configFileName);
       mErrors = configValues.Errors;
       var settings = configValues.StandardSettings;
       Text += $" - {settings.DataConfigName}";
       Cursor = Cursors.Default;
     }
     private readonly string mErrors;
+
+    // Sets the config file name.
+    private static void SetConfig(ValuesGenDocEdit configValues
+      , string configFileName)
+    {
+      var logName = "LJCGenDoc.Log";
+      try
+      {
+        if (NetString.HasValue(configFileName))
+        {
+          configValues.SetConfigFile(configFileName);
+        }
+        else
+        {
+          configValues.SetConfigFile();
+        }
+        var errors = configValues.Errors;
+        if (NetString.HasValue(errors))
+        {
+          var fileName = configValues.FileSpec;
+          var message = $"ConfigError: {fileName} - {errors}";
+          File.WriteAllText(logName, message);
+          Exception ex = new Exception(message);
+          throw ex;
+        }
+      }
+      catch (Exception ex)
+      {
+        var fileName = configValues.FileSpec;
+        var message = $"ConfigError: {fileName} - {ex.Message}";
+        File.WriteAllText(logName, message);
+        throw ex;
+      }
+    }
     #endregion
 
     #region Form Event Handlers

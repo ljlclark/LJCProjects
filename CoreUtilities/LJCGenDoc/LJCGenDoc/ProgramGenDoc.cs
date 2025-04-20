@@ -41,7 +41,7 @@ namespace LJCGenDoc
 
         // Set DAL config before using anywhere else in the program.
         var configValues = ValuesGenDoc.Instance;
-        configValues.SetConfigFile();
+        SetConfig(configValues);
         var settings = configValues.StandardSettings;
         NetCommon.ConsoleConfig(settings.DataConfigName);
 
@@ -75,6 +75,40 @@ namespace LJCGenDoc
         // LJCGenTextLib.GenerateText.GenRepeatItem();
         var pageCount = ValuesGenDoc.Instance.GenPageCount.ToString();
         File.WriteAllText("HTMLPageCount.txt", pageCount); ;
+      }
+    }
+
+    // Sets the config file name.
+    private static void SetConfig(ValuesGenDoc configValues
+      , string configFileName = null)
+    {
+      var logName = "LJCGenDoc.Log";
+      try
+      {
+        if (NetString.HasValue(configFileName))
+        {
+          configValues.SetConfigFile(configFileName);
+        }
+        else
+        {
+          configValues.SetConfigFile();
+        }
+        var errors = configValues.Errors;
+        if (NetString.HasValue(errors))
+        {
+          var fileName = configValues.FileSpec;
+          var message = $"ConfigError: {fileName} - {errors}";
+          File.WriteAllText(logName, message);
+          Exception ex = new Exception(message);
+          throw ex;
+        }
+      }
+      catch (Exception ex)
+      {
+        var fileName = configValues.FileSpec;
+        var message = $"ConfigError: {fileName} - {ex.Message}";
+        File.WriteAllText(logName, message);
+        throw ex;
       }
     }
   }

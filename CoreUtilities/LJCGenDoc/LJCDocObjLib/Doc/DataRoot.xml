@@ -39,6 +39,7 @@
       Initializes an object instance.
     </summary>
     <param name="assemblyGroups">The XML file names.</param>
+    <param name="configFilename"></param>
   </DataRootC>
   <CreateAssembliesData>
     <summary>

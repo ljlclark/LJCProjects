@@ -45,9 +45,9 @@
         var result = hb.ToString();
 
         // result:
-        // "This text is not indented."
-        // "  This text is indented."
-        // "Not Indented.  No New Line"
+        // This text is not indented.
+        //   This text is indented.
+        // Not Indented.  No New Line
       </code>
     </example>
   </AddIndent>
@@ -70,7 +70,7 @@
         var result = hb.ToString();
 
         // result:
-        // "This is some appended text."
+        // This is some appended text.
       </code>
     </example>
   </AddText>
@@ -89,8 +89,8 @@
         var result = hb.ToString();
 
         // result:
-        // "This is an appended line."
-        // ""
+        // This is an appended line.
+        // "\r\n"
       </code>
     </example>
   </AddLine>
@@ -138,8 +138,8 @@
         var result = hb.ToString();
 
         // result:
-        // "This is an appended line."
-        // "  This is an indented line."
+        // This is an appended line.
+        //   This is an indented line.
       </code>
     </example>
   </Text>
@@ -170,8 +170,8 @@
         var result = hb.ToString();
 
         // result:
-        // "&amp;lt;div class="Selector"&amp;gt;"
-        // "&amp;lt;div&amp;gt;"
+        // &amp;lt;div class="Selector"&amp;gt;
+        // &amp;lt;div&amp;gt;
       </code>
     </example>
   </GetAttribs>
@@ -193,8 +193,8 @@
         result += hb.GetIndented("This text is indented.");
 
         // result:
-        // "This text is NOT indented."
-        // "    This text is indented."
+        // This text is NOT indented.
+        //     This text is indented.
       </code>
     </example>
   </GetIndented>
@@ -239,7 +239,7 @@
       The "allowNewLine" parameter defaults to true. Set it to false to prevent
       starting with a new line.&lt;br /&gt;
       Wraps the text with a newline if the WrapEnabled parameter is true and the
-      line length is greater than LineLimit.
+      line length is greater than LineLimit.&lt;br /&gt;
       GetLine() works the same as GetText() except it appends a new line.
     </remarks>
   </GetLine>
@@ -279,8 +279,8 @@
         var result = hb.ToString();
 
         // result:
-        // "This is an appended line."
-        // "  This is an indented line."
+        // This is an appended line.
+        //   This is an indented line.
       </code>
     </example>
   </GetText>
@@ -327,7 +327,7 @@
         var result = hb.ToString();
 
         // result:
-        // "&amp;lt;div class="Selector"&amp;gt;"
+        // &amp;lt;div class="Selector"&amp;gt;
       </code>
     </example>
   </Begin>
@@ -369,7 +369,7 @@
         var result = hb.ToString();
 
         // result:
-        // "&amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;"
+        // &amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;
       </code>
     </example>
   </Create>
@@ -405,8 +405,8 @@
         var result = hb.ToString();
 
         // result:
-        // "&amp;lt;div class="Selector"&amp;gt;"
-        // "&amp;lt;/div&amp;gt;"
+        // &amp;lt;div class="Selector"&amp;gt;
+        // &amp;lt;/div&amp;gt;
       </code>
     </example>
   </End>
@@ -426,7 +426,7 @@
         var result = hb.ToString();
 
         // result:
-        // "&amp;lt;link rel="stylesheet" type="text/css" href=fileName.css /&amp;gt;"
+        // &amp;lt;link rel="stylesheet" type="text/css" href=fileName.css /&amp;gt;
       </code>
     </example>
   </Link>
@@ -453,9 +453,9 @@
         var result = hb.ToString();
 
         // result:
-        // "&amp;lt;meta charset="utf-8"  /&amp;gt;"
-        // "&amp;lt;meta name="description" content="Metas"  /&amp;gt;"
-        // "&amp;lt;meta name="author" content="Author"  /&amp;gt;"
+        // &amp;lt;meta charset="utf-8"  /&amp;gt;
+        // &amp;lt;meta name="description" content="Metas"  /&amp;gt;
+        // &amp;lt;meta name="author" content="Author"  /&amp;gt;
       </code>
     </example>
   </Meta>
@@ -478,9 +478,9 @@
         var result = hb.ToString();
 
         // result:
-        // "&amp;lt;meta charset="utf-8"  /&amp;gt;"
-        // "&amp;lt;meta name="description" content="Metas"  /&amp;gt;"
-        // "&amp;lt;meta name="author" content="Author"  /&amp;gt;"
+        // &amp;lt;meta charset="utf-8"  /&amp;gt;
+        // &amp;lt;meta name="description" content="Metas"  /&amp;gt;
+        // &amp;lt;meta name="author" content="Author"  /&amp;gt;
       </code>
     </example>
   </Metas>
@@ -500,7 +500,7 @@
         var result = hb.ToString();
 
         // result:
-        // "&amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;"
+        // &amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;
       </code>
     </example>
   </Script>
@@ -540,7 +540,7 @@
         var result = hb.GetBegin("head");
 
         // result:
-        // "&amp;lt;head&amp;gt;"
+        // &amp;lt;head&amp;gt;
       </code>
     </example>
   </GetBegin>
@@ -570,13 +570,14 @@
     <remarks>
       GetCreate() is a "GetText" method which creates the element or element
       opening tag and returns the text value. It is called from other element
-      create methods.<br />
+      create methods.&lt;br /&gt;
       The addIndent parameter defaults to true, which starts the text with the
-      current indent string.<br />
+      current indent string.&lt;br /&gt;
       The isEmpty element defaults to false, which does not add the empty
-      element slash.<br />
+      element slash.&lt;br /&gt;
       If isEmpty is true, the empty element slash is added and the close
-      parameter is ignored. The element will not include the closing tag.<br />
+      parameter is ignored. The element will not include the closing tag.
+      &lt;br /&gt;
       The ChildIndentCount is incremented if the element is not empty and
       not closed.
     </remarks>
@@ -589,8 +590,8 @@
         result += hb.GetEnd("head");
 
         // result:
-        // "&amp;lt;head&amp;gt;"
-        // "&amp;lt;/head&amp;gt;"
+        // &amp;lt;head&amp;gt;
+        // &amp;lt;/head&amp;gt;
       </code>
     </example>
   </GetCreate>
@@ -606,7 +607,7 @@
     <returns>The element end tag.</returns>
     <remarks>
       GetEnd() is a "GetText" method which creates the element closing tag
-      and returns the text value.<br />
+      and returns the text value.
     </remarks>
     <example>
       <code>
@@ -617,8 +618,8 @@
         result += hb.GetEnd("head");
 
         // result:
-        // "&amp;lt;head&amp;gt;"
-        // "&amp;lt;/head&amp;gt;"
+        // &amp;lt;head&amp;gt;
+        // &amp;lt;/head&amp;gt;
       </code>
     </example>
   </GetEnd>
@@ -637,7 +638,7 @@
         var result = hb.GetLink("fileName.css");
 
         // result:
-        // "&amp;lt;link rel="stylesheet" type="text/css" href=fileName.css /&amp;gt;"
+        // &amp;lt;link rel="stylesheet" type="text/css" href=fileName.css /&amp;gt;
       </code>
     </example>
   </GetLink>
@@ -657,7 +658,7 @@
         var result = hb.GetMeta("description", "Metas");
 
         // result:
-        // "&amp;lt;meta name="description" content="Metas"  /&amp;gt;"
+        // &amp;lt;meta name="description" content="Metas"  /&amp;gt;
       </code>
     </example>
   </GetMeta>
@@ -679,8 +680,8 @@
         var result = hb.GetMetas("Author", null, "Metas", );
 
         // result:
-        // "&amp;lt;meta name="description" content="Metas"  /&amp;gt;"
-        // "&amp;lt;meta name="author" content="Author"  /&amp;gt;"
+        // &amp;lt;meta name="description" content="Metas"  /&amp;gt;
+        // &amp;lt;meta name="author" content="Author"  /&amp;gt;
       </code>
     </example>
   </GetMetas>
@@ -699,7 +700,7 @@
         var result = hb.GetScript("fileName.js");
 
         // result:
-        // "&amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;"
+        // &amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;
       </code>
     </example>
   </GetScript>
@@ -712,6 +713,28 @@
     <param name="copyright"></param>
     <param name="fileName"></param>
     <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var copyright = new string[]
+        {
+          "Copyright Line 1",
+          "Copyright Line 2",
+        };
+        hb.HTMLBegin(null, copyright, "fileName.html");
+        var result = hb.ToString();
+
+        // result:
+        // &amp;lt;!DOCTYPE html&amp;gt;
+        // &amp;lt;!-- Copyright Line 1 --&amp;gt;
+        // &amp;lt;!-- Copyright Line 1 --&amp;gt;
+        // &amp;lt;!-- fileName.html --&amp;gt;
+        // &amp;lt;html lang="en" xmlns="http://www.w3.org/1999/xhtml"&amp;gt;
+        // &amp;lt;head&amp;gt;
+      </code>
+    </example>
   </HTMLBegin>
   <!-- Get HTML Methods (2) -->
   <GetHTMLBegin>
@@ -722,23 +745,46 @@
     <param name="copyright"></param>
     <param name="fileName"></param>
     <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var copyright = new string[]
+        {
+          "Copyright Line 1",
+          "Copyright Line 2",
+        };
+        var result = hb.GetHTMLBegin(null, copyright, "fileName.html");
+
+        // result:
+        // &amp;lt;!DOCTYPE html&amp;gt;
+        // &amp;lt;!-- Copyright Line 1 --&amp;gt;
+        // &amp;lt;!-- Copyright Line 1 --&amp;gt;
+        // &amp;lt;!-- fileName.html --&amp;gt;
+        // &amp;lt;html lang="en" xmlns="http://www.w3.org/1999/xhtml"&amp;gt;
+        // &amp;lt;head&amp;gt;
+      </code>
+    </example>
   </GetHTMLBegin>
-  <GetHTMLTitle>
-    <summary>
-      Gets the main HTML Head elements.
-    </summary>
-    <param name="textState">The current text state values.</param>
-    <param name="title">The title element content.</param>
-    <param name="author">The meta author element content.</param>
-    <param name="description">The meta description element content.</param>
-    <returns>The main head child elements.</returns>
-  </GetHTMLTitle>
   <GetHTMLEnd>
     <summary>
       Gets the HTML end &amp;lt;body&amp;gt; and &amp;lt;html&amp;gt;.
-  </summary>
+    </summary>
     <param name="textState"></param>
     <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var result = hb.GetHTMLEnd();
+
+        // result:
+        // &amp;lt;/body&amp;gt;
+        // &amp;lt;/html&amp;gt;
+      </code>
+    </example>
   </GetHTMLEnd>
   <!-- Get Element Attribs Methods (3) -->
   <Attribs>
@@ -754,6 +800,21 @@
       Creates the HTML start attributes.
     </summary>
     <returns>The HTML start attributes.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var result = hb.StartAttribs();
+
+        // result:
+        var result = new Attributes()
+        {
+          { "lang", "en" },
+          { "xmlns", "http://www.w3.org/1999/xhtml" },
+        };
+      </code>
+    </example>
   </StartAttribs>
   <TableAttribs>
     <summary>
@@ -765,5 +826,21 @@
     <param name="className">The class attribute.</param>
     <param name="id">The id attribute.</param>
     <returns>The common table attributes.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuider();
+
+        var result = hb.TableAttribs();
+
+        // result:
+        var result = new Attributes()
+        {
+          { "border", "1" },
+          { "cellspacing", "0" },
+          { "cellpadding", "2" },
+        };
+      </code>
+    </example>
   </TableAttribs>
 </items>
