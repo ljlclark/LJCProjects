@@ -1,9 +1,13 @@
-﻿using LJCNetCommon;
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// TextBuilderTest.cs
+using LJCNetCommon;
 
 namespace LJCNetCommonTest
 {
   internal class TextBuilderTest
   {
+    // Performs the tests.
     internal static void Test()
     {
       // Methods
@@ -17,7 +21,7 @@ namespace LJCNetCommonTest
       Text();
 
       // Get Text Methods
-      GetDelimited();
+      GetItem();
       GetIndented();
       GetIndentString();
       GetLine();
@@ -32,6 +36,7 @@ namespace LJCNetCommonTest
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var tb = new TextBuilder();
 
+      // Example Method:
       // The builder keeps track of the current number of indents.
       // Adds 1 indent by default.
       tb.AddIndent();
@@ -71,6 +76,7 @@ namespace LJCNetCommonTest
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var tb = new TextBuilder();
 
+      // Example Method:
       // Adds text that ends with a newline.
       tb.AddLine("This is an appended line.");
 
@@ -90,6 +96,7 @@ namespace LJCNetCommonTest
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var tb = new TextBuilder();
 
+      // Example Method:
       // Adds text without modification.
       tb.AddText("This is some appended text.");
       var result = tb.ToString();
@@ -122,11 +129,14 @@ namespace LJCNetCommonTest
       tb.WrapEnabled = true;
       for (int index = 0; index < 14; index++)
       {
-        // Example Method
+        // Example Method:
         var text = $"{index}**-";
         tb.Item(text, NoIndent, NoNewLine);
       }
       var result = tb.ToString();
+
+      // Eliminate compiler message
+      if (NetString.HasValue(result)) { }
 
       tb.Clear();
       result = tb.Text(saveResult);
@@ -145,6 +155,7 @@ namespace LJCNetCommonTest
       // The builder keeps track of the current number of indents.
       tb.AddIndent();
 
+      // Example Method:
       // Starts the text with a newline if the builder already has text
       // and param allowNewLine = true.
       // The text begins with the current indent string if param
@@ -176,6 +187,7 @@ namespace LJCNetCommonTest
       // The builder keeps track of the current number of indents.
       tb.AddIndent();
 
+      // Example Method:
       // Starts the text with a newline if the builder already has text
       // and param allowNewLine = true.
       // The text begins with the current indent string if param
@@ -195,7 +207,47 @@ namespace LJCNetCommonTest
 
     #region Get Text Methods (6)
 
-    private static void GetDelimited()
+    private static void GetIndented()
+    {
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var tb = new TextBuilder();
+
+      // Example Method:
+      var result = tb.GetIndented("This text is NOT indented.");
+
+      // The builder keeps track of the current number of indents.
+      tb.AddIndent(2);
+      result += tb.GetLine();
+      result += tb.GetIndented("This text is indented.");
+
+      // result:
+      // This text is NOT indented.
+      //     This text is indented.
+
+      // Eliminate compiler message
+      if (NetString.HasValue(result)) { }
+    }
+
+    private static void GetIndentString()
+    {
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var tb = new TextBuilder();
+
+      tb.AddIndent(1);
+
+      // Example Method:
+      var result = tb.GetIndentString();
+
+      result += tb.GetText(":", false);
+
+      // result:
+      //   :
+
+      // Eliminate compiler message
+      if (NetString.HasValue(result)) { }
+    }
+
+    private static void GetItem()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var tb = new TextBuilder();
@@ -215,47 +267,6 @@ namespace LJCNetCommonTest
       if (NetString.HasValue(result)) { }
     }
 
-    private static void GetIndented()
-    {
-      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var tb = new TextBuilder();
-
-      // Example Method
-      var result = tb.GetIndented("This text is NOT indented.");
-
-      // The builder keeps track of the current number of indents.
-      tb.AddIndent(2);
-      result += tb.GetLine();
-
-      result += tb.GetIndented("This text is indented.");
-
-      // result:
-      // This text is NOT indented.
-      //     This text is indented.
-
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
-    }
-
-    private static void GetIndentString()
-    {
-      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var tb = new TextBuilder();
-
-      tb.AddIndent(1);
-
-      // Example Method
-      var result = tb.GetIndentString();
-
-      result += tb.GetText(":", false);
-
-      // result:
-      //   :
-
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
-    }
-
     private static void GetLine()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -266,6 +277,7 @@ namespace LJCNetCommonTest
       // The builder keeps track of the current number of indents.
       tb.AddIndent();
 
+      // Example Method:
       // Starts the text with a newline if the builder already has text
       // and param allowNewLine = true.
       // The text begins with the current indent string if param
@@ -295,6 +307,7 @@ namespace LJCNetCommonTest
       tb.AddIndent();
       result += tb.GetLine();
 
+      // Example Method:
       // Starts the text with a newline if the builder already has text
       // and param allowNewLine = true.
       // The text begins with the current indent string if param
@@ -315,7 +328,10 @@ namespace LJCNetCommonTest
     }
     #endregion
 
+    #region Class Data
+
     private const bool NoIndent = false;
     private const bool NoNewLine = false;
+    #endregion
   }
 }

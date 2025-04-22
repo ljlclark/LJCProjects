@@ -1,9 +1,14 @@
-﻿using LJCNetCommon;
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// XMLBuilderTest.cs
+using LJCNetCommon;
+using System;
 
 namespace LJCNetCommonTest
 {
   internal class XMLBuilderTest
   {
+    // Performs the tests.
     internal static void Test()
     {
       // Methods
@@ -16,6 +21,7 @@ namespace LJCNetCommonTest
       Text();
 
       // Get Text Methods
+      GetAttribs();
       GetIndented();
       GetIndentString();
       GetLine();
@@ -30,6 +36,7 @@ namespace LJCNetCommonTest
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var xb = new XMLBuilder();
 
+      // Example Method:
       // The builder keeps track of the current number of indents.
       // Adds 1 indent by default.
       xb.AddIndent();
@@ -55,10 +62,15 @@ namespace LJCNetCommonTest
       // result:
       // This text is not indented.
       //   This text is indented.
-      // Not Indented.  No start with newLine.
+      // Not indented.  No start with newLine.
 
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
+      var compare = "This text is not indented.\r\n";
+      compare += "  This text is indented.\r\n";
+      compare += "Not indented.  No start with newline.";
+      if (result != compare)
+      {
+        Console.WriteLine("XMLBuilder.AddIndent() Error");
+      }
     }
     #endregion
 
@@ -69,6 +81,7 @@ namespace LJCNetCommonTest
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var xb = new XMLBuilder();
 
+      // Example Method:
       // Adds text that ends with a newline.
       xb.AddLine("This is an appended line.");
 
@@ -79,8 +92,12 @@ namespace LJCNetCommonTest
       // This is an appended line.
       // :
 
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
+      var compare = "This is an appended line.\r\n";
+      compare += ":";
+      if (result != compare)
+      {
+        Console.WriteLine("XMLBuilder.AddLine() Error");
+      }
     }
 
     private static void AddText()
@@ -88,6 +105,7 @@ namespace LJCNetCommonTest
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var xb = new XMLBuilder();
 
+      // Example Method:
       // Adds text without modification.
       xb.AddText("This is some appended text.");
       var result = xb.ToString();
@@ -109,6 +127,7 @@ namespace LJCNetCommonTest
       // The builder keeps track of the current number of indents.
       xb.AddIndent();
 
+      // Example Method:
       // Starts the text with a newline if the builder already has text
       // and param allowNewLine = true.
       // The text begins with the current indent string if param
@@ -140,6 +159,7 @@ namespace LJCNetCommonTest
       // The builder keeps track of the current number of indents.
       xb.AddIndent();
 
+      // Example Method:
       // Starts the text with a newline if the builder already has text
       // and param allowNewLine = true.
       // The text begins with the current indent string if param
@@ -159,18 +179,41 @@ namespace LJCNetCommonTest
 
     #region Get Text Methods (5)
 
+    private static void GetAttribs()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var xb = new XMLBuilder(textState);
+
+      var attribs = new Attributes()
+      {
+        { "name", "Someone" },
+      };
+      xb.Begin("Person", textState, attribs);
+      xb.End("Person", textState);
+      var result = xb.ToString();
+
+      // result:
+      // &amp;lt;Person name="Someone"&amp;gt;
+      // &amp;lt;Person&amp;gt;
+
+      // Eliminate compiler message
+      if (NetString.HasValue(result)) { }
+    }
+
     private static void GetIndented()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var xb = new XMLBuilder();
 
-      // Example Method
+      // Example Method:
       var result = xb.GetIndented("This text is NOT indented.");
 
       // The builder keeps track of the current number of indents.
       xb.AddIndent(2);
       result += xb.GetLine();
-
       result += xb.GetIndented("This text is indented.");
 
       // result:
@@ -188,7 +231,7 @@ namespace LJCNetCommonTest
 
       xb.AddIndent(1);
 
-      // Example Method
+      // Example Method:
       var result = xb.GetIndentString();
 
       result += xb.GetText(":", false);
@@ -210,6 +253,7 @@ namespace LJCNetCommonTest
       // The builder keeps track of the current number of indents.
       xb.AddIndent();
 
+      // Example Method:
       // Starts the text with a newline if the builder already has text
       // and param allowNewLine = true.
       // The text begins with the current indent string if param
@@ -239,6 +283,7 @@ namespace LJCNetCommonTest
       xb.AddIndent();
       result += xb.GetLine();
 
+      // Example Method:
       // Starts the text with a newline if the builder already has text
       // and param allowNewLine = true.
       // The text begins with the current indent string if param
@@ -257,6 +302,12 @@ namespace LJCNetCommonTest
     private static void GetWrapped()
     {
     }
+    #endregion
+
+    #region Class Data
+
+    private const bool NoIndent = false;
+    private const bool NoNewLine = false;
     #endregion
   }
 }

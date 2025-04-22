@@ -24,6 +24,7 @@
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
+        // Example Method:
         // The builder keeps track of the current number of indents.
         // Adds 1 indent by default.
         hb.AddIndent();
@@ -31,23 +32,25 @@
         // Adds text without modification.
         hb.AddText("This text is not indented.");
 
-        // Adds a new line before adding the text if the builder
-        // already has text.
-        // Starts with the current indent string.
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Defaults: addIndent = true, allowNewLine = true.
         hb.Text("This text is indented.");
 
         // No Indent
         var addIndent = false;
         hb.Text("Not indented.", addIndent);
 
-        // Do not start a new line.
-        hb.Text("No New Line.", allowNewLine: false);
+        // Do not start a newline.
+        hb.Text("No start with newline.", allowNewLine: false);
         var result = hb.ToString();
 
         // result:
         // This text is not indented.
         //   This text is indented.
-        // Not Indented.  No New Line
+        // Not Indented.  No start with newline.
       </code>
     </example>
   </AddIndent>
@@ -67,13 +70,16 @@
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
-        // Adds text with a new line.
+        // Example Method:
+        // Adds text that ends with a newline.
         hb.AddLine("This is an appended line.");
+
+        hb.AddText(":");
         var result = hb.ToString();
 
         // result:
         // This is an appended line.
-        // ""
+        // :
       </code>
     </example>
   </AddLine>
@@ -91,6 +97,7 @@
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
+        // Example Method:
         // Adds text without modification.
         hb.AddText("This is some appended text.");
         var result = hb.ToString();
@@ -114,6 +121,35 @@
       &lt;br /&gt;
       Line() works the same as Text() except it appends a new line.
     </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder();
+
+        hb.Text("This is an appended line.");
+
+        // The builder keeps track of the current number of indents.
+        hb.AddIndent();
+
+        // Example Method:
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Ends the text with a newline.
+        // Defaults: addIndent = true, allowNewLine = true.
+        hb.Line("");
+
+        hb.Text("This is an indented line.");
+        var result = hb.ToString();
+
+        // result:
+        // This is an appended line.
+        //
+        //
+        //   This is an indented line.
+      </code>
+    </example>
   </Line>
   <Text>
     <summary>
@@ -140,6 +176,13 @@
 
         // The builder keeps track of the current number of indents.
         hb.AddIndent();
+
+        // Example Method:
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Defaults: addIndent = true, allowNewLine = true.
         hb.Text("This is an indented line.");
         var result = hb.ToString();
 
@@ -165,15 +208,18 @@
     </remarks>
     <example>
       <code>
+        // Root Method Begin
+        var textState = new TextState();
+
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
-        
+        var hb = new HTMLBuilder(textState);
+
         var attribs = new Attributes()
         {
-          { "class", "Selector" },
+        { "class", "Selector" },
         };
-        hb.Begin("div", null, attribs);
-        hb.End("div");
+        hb.Begin("div", textState, attribs);
+        hb.End("div", textState);
         var result = hb.ToString();
 
         // result:
@@ -191,12 +237,14 @@
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        var hb = new HTMLBuilder();
 
+        // Example Method:
         var result = hb.GetIndented("This text is NOT indented.");
 
         // The builder keeps track of the current number of indents.
         hb.AddIndent(2);
+        result += hb.GetLine();
         result += hb.GetIndented("This text is indented.");
 
         // result:
@@ -213,14 +261,17 @@
     <example>
       <code>
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        var hb = new HTMLBuilder();
 
-        // The builder keeps track of the current number of indents.
-        hb.AddIndent(2);
-        result += hb.GetIndentedString();
+        hb.AddIndent(1);
+
+        // Example Method:
+        var result = hb.GetIndentString();
+
+        result += hb.GetText(":", false);
 
         // result:
-        // "    "
+        //   :
       </code>
     </example>
   </GetIndentString>
@@ -247,6 +298,32 @@
       line length is greater than LineLimit.&lt;br /&gt;
       GetLine() works the same as GetText() except it appends a new line.
     </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder();
+
+        var result = hb.GetText("This is an appended line.");
+
+        // The builder keeps track of the current number of indents.
+        hb.AddIndent();
+
+        // Example Method:
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Ends the text with a newline.
+        // Defaults: addIndent = true, allowNewLine = true.
+        result += hb.GetLine();
+
+        result += hb.GetText(":");
+
+        // result:
+        // This is an appended line.
+        //   :
+      </code>
+    </example>
   </GetLine>
   <GetText>
     <summary>
@@ -278,8 +355,15 @@
 
         // The builder keeps track of the current number of indents.
         hb.AddIndent();
-        var result += hb.GetText("This is an indented line.");
-        var result = hb.ToString();
+        result += hb.GetLine();
+
+        // Example Method:
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Defaults: addIndent = true, allowNewLine = true.
+        result += hb.GetText("This is an indented line.");
 
         // result:
         // This is an appended line.

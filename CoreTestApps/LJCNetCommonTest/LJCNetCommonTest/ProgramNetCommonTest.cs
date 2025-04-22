@@ -11,9 +11,9 @@ namespace LJCNetCommonTest
     // <include path='items/Main/*' file='../../../CoreUtilities/LJCDocLib/Common/Program.xml'/>
     private static void Main()
     {
-      //NetCommonTest.Test();
-      //NetFileTest.Test();
-      //NetStringTest.Test();
+      NetCommonTest.Test();
+      NetFileTest.Test();
+      NetStringTest.Test();
 
       HTMLBuilderTest.Test();
       TextBuilderTest.Test();
