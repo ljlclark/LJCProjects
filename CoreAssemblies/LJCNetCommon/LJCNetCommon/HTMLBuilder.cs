@@ -24,11 +24,13 @@ namespace LJCNetCommon
       LineLength = 0;
       LineLimit = 80;
       WrapEnabled = false;
+      DebugText = "";
     }
     #endregion
 
     #region Data Class Methods
 
+    // Retrieves the text.
     /// <summary>Implements the ToString() method.</summary>
     public override string ToString()
     {
@@ -53,6 +55,16 @@ namespace LJCNetCommon
 
     #region Append Text Methods (4)
 
+    // Adds a text line without modification.
+    /// <include path='items/AddLine/*' file='Doc/HTMLBuilder.xml'/>
+    public string AddLine(string text)
+    {
+      Builder.AppendLine(text);
+      var retText = $"{text}\r\n";
+      DebugText += retText;
+      return retText;
+    }
+
     // Adds text without modification.
     /// <include path='items/AddText/*' file='Doc/HTMLBuilder.xml'/>
     public void AddText(string text)
@@ -60,34 +72,19 @@ namespace LJCNetCommon
       if (TextLength(text) > 0)
       {
         Builder.Append(text);
+        DebugText += text;
       }
-    }
-
-    // Adds a text line without modification.
-    /// <include path='items/AddLine/*' file='Doc/HTMLBuilder.xml'/>
-    public string AddLine(string text)
-    {
-      string retText = "";
-      if (TextLength(text) > 0)
-      {
-        retText = text;
-      }
-      Builder.AppendLine(retText);
-      retText = $"{retText}\r\n";
-      return retText;
     }
 
     // Adds a modified text line to the builder.
     /// <include path='items/Line/*' file='Doc/HTMLBuilder.xml'/>
-    public string Line(string text)
+    public string Line(string text = null, bool addIndent = true
+      , bool allowNewLine = true)
     {
-      string retText = "";
-      if (TextLength(text) > 0)
-      {
-        retText = GetText(text);
-      }
+      var retText = GetText(text, addIndent, allowNewLine);
       Builder.AppendLine(retText);
       retText = $"{retText}\r\n";
+      DebugText += retText;
       return retText;
     }
 
@@ -166,12 +163,10 @@ namespace LJCNetCommon
 
     // Gets a modified text line.
     /// <include path='items/GetLine/*' file='Doc/HTMLBuilder.xml'/>
-    public string GetLine(string text, bool addIndent = true
+    public string GetLine(string text = null, bool addIndent = true
       , bool allowNewLine = true)
     {
-      var retLine = "";
-
-      retLine += GetText(text, addIndent, allowNewLine);
+      var retLine = GetText(text, addIndent, allowNewLine);
       retLine += "\r\n";
       return retLine;
     }
@@ -183,17 +178,27 @@ namespace LJCNetCommon
     {
       var retText = "";
 
+      // Start with newline even if no text.
+      if (allowNewLine
+        && HasText)
+      {
+        retText = "\r\n";
+      }
+
       if (TextLength(text) > 0)
       {
-        retText = text;
+        retText += text;
+
         if (addIndent)
         {
+          // Recreate string.
           retText = GetIndented(text);
         }
 
         if (allowNewLine
           && HasText)
         {
+          // Recreate string.
           retText = "\r\n";
           if (addIndent)
           {
@@ -278,10 +283,10 @@ namespace LJCNetCommon
     // Appends the element begin tag.
     /// <include path='items/Begin/*' file='Doc/HTMLBuilder.xml'/>
     public string Begin(string name, TextState textState
-      , Attributes htmlAttribs = null, bool addIndent = true
+      , Attributes attribs = null, bool addIndent = true
       , bool childIndent = true)
     {
-      var createText = GetBegin(name, textState, htmlAttribs, addIndent
+      var createText = GetBegin(name, textState, attribs, addIndent
         , childIndent);
       // Use NoIndent after a "GetText" method.
       Text(createText, NoIndent);
@@ -317,8 +322,7 @@ namespace LJCNetCommon
 
     // Appends the element end tag.
     /// <include path='items/End/*' file='Doc/HTMLBuilder.xml'/>
-    public string End(string name, TextState textState
-      , bool addIndent = true)
+    public string End(string name, TextState textState, bool addIndent = true)
     {
       var createText = GetEnd(name, textState, addIndent);
       // Use NoIndent after a GetEnd().
@@ -844,6 +848,9 @@ namespace LJCNetCommon
 
     #region Properties
 
+    /// <summary>The internal StringBuilder class.</summary>
+    public StringBuilder Builder { get; set; }
+
     /// <summary>Indicates if the builder has text.</summary>
     public bool HasText
     {
@@ -895,12 +902,12 @@ namespace LJCNetCommon
 
     /// <summary>Indicates if line wrapping is enabled.</summary>
     public bool WrapEnabled { get; set; }
-
-    // Gets or sets the XML text.
-    private StringBuilder Builder { get; set; }
     #endregion
 
     #region Class Data
+
+    /// <summary></summary>
+    public string DebugText;
 
     private const bool NoIndent = false;
     #endregion

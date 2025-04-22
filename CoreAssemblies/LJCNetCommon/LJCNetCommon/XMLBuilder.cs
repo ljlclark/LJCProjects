@@ -1,43 +1,48 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // XMLBuilder.cs
-using System.Reflection;
 using System.Text;
 
 namespace LJCNetCommon
 {
-  /// <summary>
-  /// Provides methods for creating XML text.
-  /// </summary>
+  /// <summary>Provides methods for creating XML text.</summary>
   public class XMLBuilder
   {
     #region Constructors
 
     /// <summary>Initializes an object instance.</summary>
-    public XMLBuilder()
+    public XMLBuilder(TextState textState = null)
     {
+      Builder = new StringBuilder(128);
       IndentCharCount = 2;
       IndentCount = 0;
+      if (textState != null)
+      {
+        // Sync the important values.
+        AddIndent(textState.IndentCount);
+      }
       LineLength = 0;
       LineLimit = 80;
       WrapEnabled = true;
+      DebugText = "";
       XML = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
     }
     #endregion
 
     #region Data Class Methods
 
-    /// <summary>Implements the ToString() method.</summary>
+    // Implements the ToString() method.
+    /// <include path='items/ToString/*' file='Doc/XMLBuilder.xml'/>
     public override string ToString()
     {
-      return XML;
+      return Builder.ToString();
     }
     #endregion
 
     #region Methods
 
-    // Changes the XMLIndentCount by the supplied value.
-    /// <include path='items/IndentXML/*' file='Doc/XMLBuilder.xml'/>
+    // Changes the IndentCount by the provided value.
+    /// <include path='items/AddIndent/*' file='Doc/XMLBuilder.xml'/>
     public int AddIndent(int increment = 1)
     {
       IndentCount += increment;
@@ -49,43 +54,96 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Append Text Methods
+    #region Append Text Methods (4)
+
+    // Adds a text line without modification.
+    /// <include path='items/AddLine/*' file='Doc/XMLBuilder.xml'/>
+    public string AddLine(string text = null)
+    {
+      Builder.AppendLine(text);
+      var retText = $"{text}\r\n";
+      DebugText += retText;
+      return retText;
+    }
+
+    // Adds text without modification.
+    /// <include path='items/AddText/*' file='Doc/XMLBuilder.xml'/>
+    public void AddText(string text)
+    {
+      if (TextLength(text) > 0)
+      {
+        Builder.Append(text);
+        DebugText += text;
+      }
+    }
+
+    // Adds a modified text line to the builder.
+    /// <include path='items/Line/*' file='Doc/XMLBuilder.xml'/>
+    public string Line(string text = null, bool addIndent = true
+      , bool allowNewLine = true)
+    {
+      var retText = GetText(text, addIndent, allowNewLine);
+      Builder.AppendLine(retText);
+      retText = $"{retText}\r\n";
+      DebugText += retText;
+      return retText;
+    }
 
     // Adds a newline if line length is greater than LineLimit.
     /// <include path='items/Text/*' file='Doc/XMLBuilder.xml'/>
-    public string Text(string text)
+    public string Text(string text, bool addIndent = true
+      , bool allowNewLine = true)
     {
-      var retText = GetIndented(text);
-
-      bool isReturn = false;
-      if (!WrapEnabled)
+      var retText = GetText(text, addIndent, allowNewLine);
+      if (TextLength(retText) > 0)
       {
-        // Just add text.
-        isReturn = true;
-      }
-
-      if (!isReturn)
-      {
-        retText = GetWrapped(retText);
+        Builder.Append(retText);
       }
       return retText;
     }
     #endregion
 
-    #region Get Text Methods
+    #region Get Text Methods (5)
 
-    /// <summary>Gets a new line with prefixed indent.</summary>
+    // Gets the attributes text.
+    /// <include path='items/GetAttribs/*' file='Doc/XMLBuilder.xml'/>
+    public string GetAttribs(Attributes htmlAttribs, TextState textState)
+    {
+      string retText = "";
+
+      if (NetCommon.HasItems(htmlAttribs))
+      {
+        var tb = new TextBuilder(textState);
+        var isFirst = true;
+        foreach (Attribute htmlAttrib in htmlAttribs)
+        {
+          if (!isFirst)
+          {
+            // Wrap line for large attribute value.
+            if (NetString.HasValue(htmlAttrib.Value)
+              && htmlAttrib.Value.Length > 35)
+            {
+              tb.AddText($"\r\n{GetIndentString()}");
+            }
+          }
+          isFirst = false;
+
+          tb.AddText($" {htmlAttrib.Name}");
+          if (NetString.HasValue(htmlAttrib.Value))
+          {
+            tb.AddText($"=\"{htmlAttrib.Value}\"");
+          }
+        }
+        retText = tb.ToString();
+      }
+      return retText;
+    }
+
+    // Gets a new potentially indented line.
     /// <include path='items/GetIndented/*' file='Doc/XMLBuilder.xml'/>
     public string GetIndented(string text)
     {
       string retText = "";
-
-      // Add indent to a new line with no indent.
-      //if (0 == LineLength
-      //  && text != null)
-      //{
-      //  retText = GetIndentString();
-      //}
 
       // Allow add of blank characters.
       if (text != null)
@@ -96,11 +154,66 @@ namespace LJCNetCommon
       return retText;
     }
 
-    /// <summary>Returns the current XML indent string.</summary>
+    // Returns the current indent string.
+    /// <include path='items/GetIndentString/*' file='Doc/XMLBuilder.xml'/>
     public string GetIndentString()
     {
-      var retValue = new string(' ', IndentCount * IndentCharCount);
+      var retValue = new string(' ', IndentLength);
       return retValue;
+    }
+
+    // Gets a modified text line.
+    /// <include path='items/GetLine/*' file='Doc/XMLBuilder.xml'/>
+    public string GetLine(string text = null, bool addIndent = true
+      , bool allowNewLine = true)
+    {
+      var retLine = GetText(text, addIndent, allowNewLine);
+      retLine += "\r\n";
+      return retLine;
+    }
+
+    // Gets potentially indented and wrapped text.
+    /// <include path='items/GetText/*' file='Doc/XMLBuilder.xml'/>
+    public string GetText(string text, bool addIndent = true
+      , bool allowNewLine = true)
+    {
+      var retText = "";
+
+      // Start with newline even if no text.
+      if (allowNewLine
+        && HasText)
+      {
+        retText = "\r\n";
+      }
+
+      if (TextLength(text) > 0)
+      {
+        retText += text;
+
+        if (addIndent)
+        {
+          // Recreate string.
+          retText = GetIndented(text);
+        }
+
+        if (allowNewLine
+          && HasText)
+        {
+          // Recreate string.
+          retText = "\r\n";
+          if (addIndent)
+          {
+            retText += GetIndentString();
+          }
+          retText += text;
+        }
+
+        if (WrapEnabled)
+        {
+          retText = GetWrapped(retText);
+        }
+      }
+      return retText;
     }
 
     // Adds added text and new wrapped line if combined line > LineLimit.
@@ -126,11 +239,12 @@ namespace LJCNetCommon
         if (wrapIndex > -1)
         {
           // Adds leading space if line exists and wrapIndex > 0.
-          var addText = AddText(retText, wrapIndex);
+          var addText = GetAddText(retText, wrapIndex);
           buildText += $"{addText}\r\n";
 
           // Next text up to LineLimit - prepend length without leading space.
           string wrapText = WrapText(workText, wrapIndex);
+          // *** Different than TextBuilder ***
           var lineText = $"{GetIndentString()}{wrapText}";
           LineLength = lineText.Length;
           buildText += lineText;
@@ -165,117 +279,167 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Append Element Methods
+    #region Append Element Methods (3)
 
     // Creates the element begin tag. No new line.
-    /// <include path='items/BeginElement/*' file='Doc/XMLBuilder.xml'/>
-    public string Begin(string name, string text = null
-      , bool isIndented = true, XMLAttributes xmlAttributes = null)
+    /// <include path='items/Begin/*' file='Doc/XMLBuilder.xml'/>
+    public string Begin(string name, TextState textState
+      , Attributes attribs = null, bool addIndent = true
+      , bool childIndent = true)
     {
-      return Create(name, text, xmlAttributes, isIndented, false);
+      var createText = GetBegin(name, textState, attribs, addIndent
+        , childIndent);
+      // Use NoIndent after a "GetText" method.
+      Text(createText, NoIndent);
+      // Use AddChildIndent after beginning an element.
+      AddChildIndent(createText, textState);
+
+      // Append Method
+      UpdateState(textState);
+      return createText;
     }
 
-    // Creates an element. No new line.
-    /// <include path='items/CreateElement/*' file='Doc/XMLBuilder.xml'/>
-    public string Create(string name
-      , string text = null, XMLAttributes xmlAttributes = null
-      , bool isIndented = true, bool close = true)
+    // Appends an element.
+    /// <include path='items/Create/*' file='Doc/XMLBuilder.xml'/>
+    public string Create(string name, TextState textState, string text = null
+      , Attributes attribs = null, bool addIndent = true
+      , bool childIndent = true, bool isEmpty = false, bool close = true)
     {
-      var builder = new StringBuilder(128);
-      if (XML.Length > 0)
+      // Adds the indent string.
+      var createText = GetCreate(name, textState, text, attribs, addIndent
+        , childIndent, isEmpty, close);
+      // Use NoIndent after a "GetText" method.
+      Text(createText, NoIndent);
+      if (!close)
       {
-        builder.AppendLine();
-      }
-      if (isIndented)
-      {
-        builder.Append($"{GetIndentString()}");
-      }
-      builder.Append($"<{name}");
-      if (NetCommon.HasItems(xmlAttributes))
-      {
-        var isFirst = true;
-        foreach (XMLAttribute xmlAttribute in xmlAttributes)
-        {
-          if (!isFirst)
-          {
-            builder.Append(",");
-            if (NetString.HasValue(xmlAttribute.Value)
-              && xmlAttribute.Value.Length > 35)
-            {
-              builder.Append($"\r\n{GetIndentString()}   ");
-            }
-          }
-          isFirst = false;
-
-          builder.Append($" {xmlAttribute.Name}");
-          if (NetString.HasValue(xmlAttribute.Value))
-          {
-            builder.Append($"=\"{xmlAttribute.Value}\"");
-          }
-        }
-      }
-      builder.Append(">");
-      if (isIndented)
-      {
-        AddIndent();
-      }
-      if (NetString.HasValue(text))
-      {
-        builder.AppendLine();
-        var textValue = Text(text);
-        builder.Append(textValue);
-        LineLength = 0;
+        // Use AddChildIndent after beginning an element.
+        AddChildIndent(createText, textState);
       }
 
-      if (close)
-      {
-        if (isIndented)
-        {
-          AddIndent(-1);
-        }
-        builder.AppendLine();
-        builder.Append($"{GetIndentString()}<\\{name}>");
-      }
-      string retElement = builder.ToString();
-      XML += retElement;
-      return retElement;
+      // Append Method
+      UpdateState(textState);
+      return createText;
     }
 
-    // Creates the element end tag.
+    // Appends the element end tag.
     /// <include path='items/EndElement/*' file='Doc/XMLBuilder.xml'/>
-    public string End(string name, bool isIndented = true)
+    public string End(string name, TextState textState, bool addIndent = true)
     {
-      string retEnd;
+      var createText = GetEnd(name, textState, addIndent);
+      // Use NoIndent after a GetEnd().
+      Text(createText, NoIndent);
 
-      var builder = new StringBuilder(128);
-      if (XML.Length > 0)
-      {
-        builder.AppendLine();
-      }
-
-      if (isIndented)
-      {
-        if (IndentCount > 0)
-        {
-          IndentCount--;
-        }
-        builder.Append($"{GetIndentString()}");
-      }
-
-      builder.Append($"<\\{name}>");
-      retEnd = builder.ToString();
-      XML += retEnd;
-      return retEnd;
+      // Append Method
+      UpdateState(textState);
+      return createText;
     }
     #endregion
 
-    #region Element Attributes Methods
+    #region Get Element Methods (9)
+
+    // Adds the new (child) indents.
+    /// <include path='items/AddChildIndent/*' file='Doc/HTMLBuilder.xml'/>
+    public void AddChildIndent(string createText, TextState textState)
+    {
+      if (TextLength(createText) > 0
+        && textState.ChildIndentCount > 0)
+      {
+        AddIndent(textState.ChildIndentCount);
+        textState.IndentCount += textState.ChildIndentCount;
+        textState.ChildIndentCount = 0;
+      }
+    }
+
+    // Gets the element begin tag.
+    /// <include path='items/GetBegin/*' file='Doc/XMLBuilder.xml'/>
+    public string GetBegin(string name, TextState textState
+      , Attributes htmlAttribs = null, bool addIndent = true
+      , bool childIndent = true)
+    {
+      var hb = new HTMLBuilder(textState);
+      var createText = GetCreate(name, textState, null, htmlAttribs
+        , addIndent, childIndent, close: false);
+      // Use NoIndent after a "GetText" method.
+      hb.Text(createText, NoIndent);
+      // Only use AddChildIndent() if additional text is added in this method.
+      var retValue = hb.ToString();
+      return retValue;
+    }
+
+    // Gets the element text.
+    /// <include path='items/GetCreate/*' file='Doc/XMLBuilder.xml'/>
+    public string GetCreate(string name, TextState textState, string text = null
+      , Attributes attribs = null, bool addIndent = true
+      , bool childIndent = true, bool isEmpty = false, bool close = true)
+    {
+      textState.ChildIndentCount = 0; // ?
+      var tb = new TextBuilder(textState);
+
+      // Start text with the opening tag.
+      tb.Text($"<{name}", addIndent);
+      var getText = GetAttribs(attribs, textState);
+      tb.AddText(getText);
+      if (isEmpty)
+      {
+        tb.AddText(" /");
+        close = false;
+      }
+      tb.AddText(">");
+
+      // Content is added if not an empty element.
+      var isWrapped = false;
+      if (!isEmpty)
+      {
+        var content = Content(text, textState, isEmpty, out isWrapped);
+        tb.AddText(content);
+      }
+
+      // Close the element.
+      if (close)
+      {
+        if (isWrapped)
+        {
+          tb.Line();
+          tb.AddText(GetIndentString());
+        }
+        tb.AddText($"</{name}>");
+      }
+
+      // Increment ChildIndentCount if not empty and not closed.
+      if (!isEmpty
+        && !close
+        && childIndent)
+      {
+        textState.ChildIndentCount++;
+      }
+      var retElement = tb.ToString();
+      return retElement;
+    }
+
+    // Gets the element end tag.
+    /// <include path='items/GetEnd/*' file='Doc/XMLBuilder.xml'/>
+    public string GetEnd(string name, TextState textState
+      , bool addIndent = true)
+    {
+      var tb = new TextBuilder(textState);
+      AddSyncIndent(this, tb, textState, -1);
+      if (addIndent)
+      {
+        tb.AddText($"{GetIndentString()}");
+      }
+      tb.AddText($"</{name}>");
+      var retElement = tb.ToString();
+      return retElement;
+    }
+    #endregion
+
+    #region Get Attributes Methods
 
     // Creates the XML start attributes.
     /// <include path='items/StartAttributes/*' file='Doc/XMLBuilder.xml'/>
-    public XMLAttributes StartAttributes()
+    public Attributes StartAttribs()
     {
-      var retAttributes = new XMLAttributes
+      var retAttributes = new Attributes
       {
         { "xmlns:xsd", "http://www.w3.org/2001/XMLSchema" },
         { "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance" }
@@ -286,8 +450,51 @@ namespace LJCNetCommon
 
     #region Private Methods
 
+    // Adds indent to builders and sync object.
+    private void AddSyncIndent(XMLBuilder hb, TextBuilder tb
+      , TextState syncState, int value = 1)
+    {
+      hb?.AddIndent(value);
+      tb?.AddIndent(value);
+      syncState.IndentCount += value;
+    }
+
+    // Creates the content text.
+    private string Content(string text, TextState textState, bool isEmpty
+      , out bool isWrapped)
+    {
+      string retValue = "";
+
+      var xb = new XMLBuilder(textState);
+      isWrapped = false;
+      // Add text content.
+      if (!isEmpty
+        && NetString.HasValue(text))
+      {
+        if (text.Length > 80 - IndentLength)
+        {
+          isWrapped = true;
+          retValue += "\r\n";
+          AddSyncIndent(xb, null, textState);
+          var textValue = GetText(text);
+          retValue += textValue;
+          AddSyncIndent(xb, null, textState, -1);
+          retValue += "\r\n";
+          // *** Next Statement *** Add 4/8/25
+          LineLength = 0;
+        }
+        else
+        {
+          retValue += text;
+        }
+        // *** Next Statement *** Delete 4/8/25
+        //LineLength = 0;
+      }
+      return retValue;
+    }
+
     // Gets the text to add to the existing line.
-    private string AddText(string text, int addLength)
+    private string GetAddText(string text, int addLength)
     {
       var retText = text.Substring(0, addLength);
       if (LineLength > 0
@@ -308,6 +515,12 @@ namespace LJCNetCommon
         retLength = text.Length;
       }
       return retLength;
+    }
+
+    // Updates the text state values.
+    private void UpdateState(TextState textState)
+    {
+      IndentCount = textState.IndentCount;
     }
 
     // Calculates the index at which to wrap the text.
@@ -377,11 +590,37 @@ namespace LJCNetCommon
 
     #region Properties
 
+    /// <summary>The internal StringBuilder class.</summary>
+    public StringBuilder Builder { get; set; }
+
+    /// <summary>Indicates if the builder has text.</summary>
+    public bool HasText
+    {
+      get
+      {
+        bool retValue = false;
+        if (Builder.Length > 0)
+        {
+          retValue = true;
+        }
+        return retValue;
+      }
+    }
+
     /// <summary>Gets or sets the indent character count.</summary>
     public int IndentCharCount { get; set; }
 
     /// <summary>Gets or sets the current indent value.</summary>
     public int IndentCount { get; private set; }
+
+    /// <summary>Gets the current indent length.</summary>
+    public int IndentLength
+    {
+      get
+      {
+        return IndentCount * IndentCharCount;
+      }
+    }
 
     /// <summary>Gets the current length.</summary>
     public int LineLength { get; private set; }
@@ -394,6 +633,14 @@ namespace LJCNetCommon
 
     // Gets or sets the XML text.
     private string XML { get; set; }
+    #endregion
+
+    #region Class Data
+
+    /// <summary></summary>
+    public string DebugText;
+
+    private const bool NoIndent = false;
     #endregion
   }
 }

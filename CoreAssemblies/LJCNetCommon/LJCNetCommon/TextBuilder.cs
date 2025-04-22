@@ -34,7 +34,8 @@ namespace LJCNetCommon
 
     #region Data Class Methods
 
-    /// <summary>Implements the ToString() method.</summary>
+    // Retrieves the text.
+    /// <include path='items/ToString/*' file='Doc/TextBuilder.xml'/>
     public override string ToString()
     {
       return Builder.ToString();
@@ -60,15 +61,11 @@ namespace LJCNetCommon
 
     // Adds a text line without modification.
     /// <include path='items/AddLine/*' file='Doc/TextBuilder.xml'/>
-    public string AddLine(string text)
+    public string AddLine(string text = null)
     {
-      string retText = "";
-      if (TextLength(text) > 0)
-      {
-        retText = text;
-      }
-      Builder.AppendLine(retText);
-      retText = $"{retText}\r\n";
+      Builder.AppendLine(text);
+      var retText = $"{text}\r\n";
+      DebugText += retText;
       return retText;
     }
 
@@ -85,25 +82,37 @@ namespace LJCNetCommon
 
     // Adds a delimiter if not the first list item.
     /// <include path='items/Item/*' file='Doc/TextBuilder.xml'/>
-    public string Item(string text)
+    public string Item(string text, bool addIndent = true
+      , bool allowNewLine = true)
     {
-      // If not IsFirst, start with the delimiter.
-      var retText = GetDelimited(text);
-      Text(retText);
+      var retText = text;
+
+      if (!IsFirst)
+      {
+        // Start with the delimiter.
+        retText = $"{Delimiter}{retText}";
+      }
+
+      if (!IsFirst)
+      {
+        // Do not indent or start with newline.
+        addIndent = false;
+        allowNewLine = false;
+      }
+      IsFirst = false;
+      Text(retText, addIndent, allowNewLine);
       return retText;
     }
 
     // Adds a modified text line to the builder.
     /// <include path='items/Line/*' file='Doc/TextBuilder.xml'/>
-    public string Line(string text = null)
+    public string Line(string text = null, bool addIndent = true
+      , bool allowNewLine = true)
     {
-      string retText = "\r\n";
-      if (TextLength(text) > 0)
-      {
-        retText = GetLine(text);
-      }
-      Builder.Append(retText);
+      var retText = GetText(text, addIndent, allowNewLine);
+      Builder.AppendLine(retText);
       LineLength = 0;
+      retText = $"{retText}\r\n";
       DebugText += retText;
       return retText;
     }
@@ -134,6 +143,7 @@ namespace LJCNetCommon
       {
         retText = $"{Delimiter}{retText}";
       }
+      IsFirst = false;
       return retText;
     }
 
@@ -158,7 +168,8 @@ namespace LJCNetCommon
       return retText;
     }
 
-    /// <summary>Returns the current indent string.</summary>
+    // Returns the current indent string.
+    /// <include path='items/GetIndentString/*' file='Doc/TextBuilder.xml'/>
     public string GetIndentString()
     {
       var retValue = new string(' ', IndentLength);
@@ -167,16 +178,12 @@ namespace LJCNetCommon
 
     // Gets a modified text line.
     /// <include path='items/GetLine/*' file='Doc/TextBuilder.xml'/>
-    public string GetLine(string text)
+    public string GetLine(string text = null, bool addIndent = true
+      , bool allowNewLine = true)
     {
-      string retText = "";
-
-      if (TextLength(text) > 0)
-      {
-        retText = GetText(text);
-      }
-      retText = $"{retText}\r\n";
-      return retText;
+      var retLine = GetText(text, addIndent, allowNewLine);
+      retLine = $"{retLine}\r\n";
+      return retLine;
     }
 
     // Gets potentially indented and wrapped text.
@@ -186,17 +193,27 @@ namespace LJCNetCommon
     {
       var retText = "";
 
+      // Start with newline even if no text.
+      if (allowNewLine
+        && HasText)
+      {
+        retText = "\r\n";
+      }
+
       if (TextLength(text) > 0)
       {
-        retText = text;
+        retText += text;
+
         if (addIndent)
         {
+          // Recreate string.
           retText = GetIndented(text);
         }
 
         if (allowNewLine
           && HasText)
         {
+          // Recreate string.
           retText = "\r\n";
           if (addIndent)
           {

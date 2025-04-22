@@ -3,17 +3,17 @@
 <!-- Licensed under the MIT License. -->
 <!-- HTMLBuilder.xml -->
 <items>
-  <!-- Data Class Methods 1 -->
+  <!-- Data Class Methods -->
   <ToString>
     <summary>
       Retrieves the HTML text.
     </summary>
     <returns>The HTML text.</returns>
   </ToString>
-  <!-- Methods 1 -->
+  <!-- Methods -->
   <AddIndent>
     <summary>
-      Changes the IndentCount by the supplied value.
+      Changes the IndentCount by the provided value.
     </summary>
     <param name="increment">
       The amount to increment or decrement the indent count.
@@ -73,7 +73,7 @@
 
         // result:
         // This is an appended line.
-        // "\r\n"
+        // ""
       </code>
     </example>
   </AddLine>
@@ -105,7 +105,9 @@
       Adds a modified text line to the builder.
     </summary>
     <param name="text">The add text.</param>
-    <returns>The added text line.</returns>
+    <param name="addIndent">Indicates if the element can be indented.</param>
+    <param name="allowNewLine">Indicates if a new line can be added.</param>"
+    <returns>The potentially indented and wrapped new text value.</returns>
     <remarks>
       Line() is an "Append" method. It creates the text with GetText() and adds
       a new line after the text. The text is then added to the builder.
@@ -118,11 +120,9 @@
       Adds modified text to the builder.
     </summary>
     <param name="text">The add text.</param>
-    <param name="addIndent">
-      Indicates if the element can be indented.
-    </param>
+    <param name="addIndent">Indicates if the element can be indented.</param>
     <param name="allowNewLine">Indicates if a new line can be added.</param>"
-    <returns>The added text.</returns>
+    <returns>The potentially indented and wrapped new text value.</returns>
     <remarks>
       Text() is an "Append" method. It creates the text with GetText() and adds
       it to the builder.&lt;br /&gt;
@@ -184,7 +184,7 @@
   </GetAttribs>
   <GetIndented>
     <summary>
-      Gets a new line with indent.
+      Gets a new potentially indented line.
     </summary>
     <param name="text">The add text.</param>
     <returns>The potentially indented new text value.</returns>
@@ -229,11 +229,9 @@
       Gets a modified text line.
     </summary>
     <param name="text">The text value.</param>
-    <param name="addIndent">
-      Indicates if the element can be indented.
-    </param>
-    <param name="allowNewLine">Indicates if a new line can be added.</param>"
-    <returns>The modified text line.</returns>
+    <param name="addIndent">Indicates if the element can be indented.</param>
+    <param name="allowNewLine">Indicates if a new line can be added.</param>
+    <returns>The potentially indented and wrapped new text value.</returns>
     <remarks>
       GetLine() is a "GetString" method. It creates and returns the potentially
       indented and wrapped text. It will start the returned text with a new line
@@ -255,11 +253,9 @@
       Gets potentially indented and wrapped text.
     </summary>
     <param name="text">The text value.</param>
-    <param name="addIndent">
-      Indicates if the element can be indented.
-    </param>
-    <param name="allowNewLine">Indicates if a new line can be added.</param>"
-    <returns>The modified text.</returns>
+    <param name="addIndent">Indicates if the element can be indented.</param>
+    <param name="allowNewLine">Indicates if a new line can be added.</param>
+    <returns>The potentially indented and wrapped new text value.</returns>
     <remarks>
       GetText() is a "GetString" method. It creates and returns the potentially
       indented and wrapped text. It will start the returned text with a new line
@@ -293,10 +289,10 @@
   </GetText>
   <GetWrapped>
     <summary>
-      Appends added text and new wrapped line if combined line > LineLimit.
+      Gets added text and new wrapped line if combined line > LineLimit.
     </summary>
     <param name="text">The text value.</param>
-    <returns>The modified text.</returns>
+    <returns>The potentially wrapped and indented new text value.</returns>
   </GetWrapped>
   <!-- Append Element Methods (7) -->
   <Begin>
@@ -305,7 +301,7 @@
     </summary>
     <param name="name">The element name.</param>
     <param name="textState">The current text state values.</param>"
-    <param name="htmlAttribs">The element attributes.</param>
+    <param name="attribs">The element attributes.</param>
     <param name="addIndent">
       Indicates if the element can be indented.
     </param>

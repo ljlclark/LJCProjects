@@ -46,8 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HTMLBuilderTest.cs" />
+    <Compile Include="NetCommonTest.cs" />
+    <Compile Include="NetFileTest.cs" />
+    <Compile Include="NetStringTest.cs" />
     <Compile Include="ProgramNetCommonTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextBuilderTest.cs" />
+    <Compile Include="XMLBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
