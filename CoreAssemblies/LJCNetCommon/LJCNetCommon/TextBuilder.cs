@@ -34,6 +34,14 @@ namespace LJCNetCommon
 
     #region Data Class Methods
 
+    /// <summary>Clears the Builder text.</summary>
+    public void Clear()
+    {
+      Builder.Clear();
+      IsFirst = true;
+      LineLength = 0;
+    }
+
     // Retrieves the text.
     /// <include path='items/ToString/*' file='Doc/TextBuilder.xml'/>
     public override string ToString()
@@ -91,11 +99,6 @@ namespace LJCNetCommon
       {
         // Start with the delimiter.
         retText = $"{Delimiter}{retText}";
-      }
-
-      if (!IsFirst)
-      {
-        // Do not indent or start with newline.
         addIndent = false;
         allowNewLine = false;
       }

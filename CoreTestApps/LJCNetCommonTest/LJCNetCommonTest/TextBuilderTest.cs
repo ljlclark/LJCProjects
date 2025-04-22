@@ -106,18 +106,30 @@ namespace LJCNetCommonTest
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var tb = new TextBuilder();
 
-      // Defaults: IsFirst = true, Delimiter = ",".
-      tb.Text("Items: ");
-
-      // Example Method
-      tb.Item("One");
-      // Now IsFirst = false;
-      tb.Item("Two");
-      tb.Item("Three");
-      var result = tb.ToString();
+      // Defaults: IsFirst = true, Delimiter = ", ".
+      for (int index = 0; index < 14; index++)
+      {
+        // Example Method
+        var text = $"{index}**-";
+        tb.Item(text, NoIndent, NoNewLine);
+      }
+      var saveResult = tb.ToString();
 
       // result:
-      // One, Two, Three
+      // 0**-, 1**-, 2**-, 3**-, 4**-, 5**-, 6**-, 7**-, 8**-, 9**-, 10**-, 11**-, 12**-, 13**-, 14**-
+
+      tb.Clear();
+      tb.WrapEnabled = true;
+      for (int index = 0; index < 14; index++)
+      {
+        // Example Method
+        var text = $"{index}**-";
+        tb.Item(text, NoIndent, NoNewLine);
+      }
+      var result = tb.ToString();
+
+      tb.Clear();
+      result = tb.Text(saveResult);
 
       // Eliminate compiler message
       if (NetString.HasValue(result)) { }
@@ -302,5 +314,8 @@ namespace LJCNetCommonTest
     {
     }
     #endregion
+
+    private const bool NoIndent = false;
+    private const bool NoNewLine = false;
   }
 }
