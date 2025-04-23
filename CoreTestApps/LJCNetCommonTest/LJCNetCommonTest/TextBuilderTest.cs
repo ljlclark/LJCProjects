@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // TextBuilderTest.cs
 using LJCNetCommon;
+using System;
 
 namespace LJCNetCommonTest
 {
@@ -64,8 +65,13 @@ namespace LJCNetCommonTest
       //   This text is indented.
       // Not Indented.  No start with newline.
 
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
+      var compare = "This text is not indented.\r\n";
+      compare += "  This text is indented.\r\n";
+      compare += "Not indented.  No start with newline.";
+      if (result != compare)
+      {
+        Console.WriteLine("TextBuilder.AddIndent() Error");
+      }
     }
     #endregion
 
@@ -87,8 +93,12 @@ namespace LJCNetCommonTest
       // This is an appended line.
       // :
 
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
+      var compare = "This is an appended line.\r\n";
+      compare += ":";
+      if (result != compare)
+      {
+        Console.WriteLine("TextBuilder.AddLine() Error");
+      }
     }
 
     private static void AddText()
@@ -104,8 +114,11 @@ namespace LJCNetCommonTest
       // result:
       // This is some appended text.
 
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
+      var compare = "This is some appended text.";
+      if (result != compare)
+      {
+        Console.WriteLine("TextBuilder.AddText() Error");
+      }
     }
 
     private static void Item()
@@ -173,8 +186,14 @@ namespace LJCNetCommonTest
       //
       //   This is an indented line.
 
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
+      var compare = "This is an appended line.\r\n";
+      compare += "\r\n";
+      compare += "\r\n";
+      compare += "  This is an indented line.";
+      if (result != compare)
+      {
+        Console.WriteLine("TextBuilder.Line() Error");
+      }
     }
 
     private static void Text()
@@ -200,8 +219,12 @@ namespace LJCNetCommonTest
       // This is an appended line.
       //   This is an indented line.
 
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
+      var compare = "This is an appended line.\r\n";
+      compare += "  This is an indented line.";
+      if (result != compare)
+      {
+        Console.WriteLine("TextBuilder.Text() Error");
+      }
     }
     #endregion
 
@@ -224,8 +247,12 @@ namespace LJCNetCommonTest
       // This text is NOT indented.
       //     This text is indented.
 
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
+      var compare = "This text is NOT indented.\r\n";
+      compare += "    This text is indented.";
+      if (result != compare)
+      {
+        Console.WriteLine("TextBuilder.GetIndented() Error");
+      }
     }
 
     private static void GetIndentString()
@@ -243,8 +270,11 @@ namespace LJCNetCommonTest
       // result:
       //   :
 
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
+      var compare = "  :";
+      if (result != compare)
+      {
+        Console.WriteLine("TextBuilder.GetIndentString() Error");
+      }
     }
 
     private static void GetItem()
@@ -292,8 +322,12 @@ namespace LJCNetCommonTest
       // This is an appended line.
       //   :
 
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
+      var compare = "This is an appended line.\r\n";
+      compare += "  :";
+      if (result != compare)
+      {
+        Console.WriteLine("TextBuilder.GetLine() Error");
+      }
     }
 
     private static void GetText()
@@ -319,8 +353,12 @@ namespace LJCNetCommonTest
       //   This is an appended line.
       //     This is an indented line.
 
-      // Eliminate compiler message
-      if (NetString.HasValue(result)) { }
+      var compare = "This is an appended line.\r\n";
+      compare += "  This is an indented line.";
+      if (result != compare)
+      {
+        Console.WriteLine("TextBuilder.GetText() Error");
+      }
     }
 
     private static void GetWrapped()

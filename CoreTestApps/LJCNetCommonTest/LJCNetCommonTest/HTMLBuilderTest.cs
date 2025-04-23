@@ -3,7 +3,6 @@
 // HTMLBuilderTest.cs
 using LJCNetCommon;
 using System;
-using System.Xml.Schema;
 
 namespace LJCNetCommonTest
 {
