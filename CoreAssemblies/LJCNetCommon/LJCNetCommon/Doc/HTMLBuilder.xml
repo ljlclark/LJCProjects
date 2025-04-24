@@ -41,17 +41,18 @@
         hb.Text("This text is indented.");
 
         // No Indent
-        var addIndent = false;
-        hb.Text("Not indented.", addIndent);
+        var NoIndent = false;
+        hb.Text("Not indented.", NoIndent);
 
         // Do not start a newline.
-        hb.Text("No start with newline.", allowNewLine: false);
+        var NoNewLine = false;
+        hb.Text(" No start with newline.", NoIndent, NoNewLine);
         var result = hb.ToString();
 
         // result:
         // This text is not indented.
         //   This text is indented.
-        // Not indented.  No start with newline.
+        // Not indented. No start with newline.
       </code>
     </example>
   </AddIndent>
@@ -196,6 +197,12 @@
   </Text>
   <!-- Get Text Methods (8) -->
   <EndsWithNewLine>
+    <summary>
+      Indicates if the builder text ends with a newline.
+    </summary>
+    <returns>
+      true if builder text ends with a newline; otherwise false.
+    </returns>
     <example>
       <code>
         var hb = new HTMLBuilder();
@@ -209,6 +216,11 @@
     </example>
   </EndsWithNewLine>
   <StartWithNewLine>
+    <summary>
+      Allow text to start with a newline.
+    </summary>
+    <param name="allowNewLine">Indicates if a new line can be added.</param>
+    <returns>true if allowed to start with a newline; otherwise false.</returns>
     <example>
       <code>
         var hb = new HTMLBuilder();

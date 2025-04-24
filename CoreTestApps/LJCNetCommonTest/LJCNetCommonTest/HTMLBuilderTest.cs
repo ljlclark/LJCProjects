@@ -93,22 +93,23 @@ namespace LJCNetCommonTest
       hb.Text("This text is indented.");
 
       // No Indent
-      var addIndent = false;
-      hb.Text("Not indented.", addIndent);
+      var NoIndent = false;
+      hb.Text("Not indented.", NoIndent);
 
       // Do not start a newline.
-      hb.Text("No start with newline.", allowNewLine: false);
+      var NoNewLine = false;
+      hb.Text(" No start with newline.", NoIndent, NoNewLine);
       var result = hb.ToString();
 
       // result:
       // This text is not indented.
       //   This text is indented.
-      // Not indented.  No start with newline.
+      // Not indented. No start with newline.
 
       var b = new HTMLBuilder();
       b.AddLine("This text is not indented.");
       b.AddLine("  This text is indented.");
-      b.AddText("Not indented.  No start with newline.");
+      b.AddText("Not indented. No start with newline.");
       var compare = b.ToString();
       TextCommon.Write("AddIndent()", result, compare);
     }

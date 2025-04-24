@@ -104,7 +104,8 @@ namespace LJCNetCommon
 
     #region Get Text Methods (6)
 
-    /// <summary>Indicates if the builder text ends with a newline.</summary>
+    // Indicates if the builder text ends with a newline.
+    /// <include path='items/EndsWithNewLine/*' file='Doc/HTMLBuilder.xml'/>
     public bool EndsWithNewLine()
     {
       var retValue = false;
@@ -119,7 +120,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    /// <summary>Allow text to start with a newline.</summary>
+    // Allow text to start with a newline.
+    /// <include path='items/StartWithNewLine/*' file='Doc/HTMLBuilder.xml'/>
     public bool StartWithNewLine(bool allowNewLine)
     {
       bool retValue = false;
