@@ -142,6 +142,35 @@ namespace LJCNetCommon
 
     #region Get Text Methods (6)
 
+    /// <summary>Indicates if the builder text ends with a newline.</summary>
+    public bool EndsWithNewLine()
+    {
+      var retValue = false;
+
+      if (Builder.Length > 0)
+      {
+        if ('\n' == Builder[Builder.Length - 1])
+        {
+          retValue = true;
+        }
+      }
+      return retValue;
+    }
+
+    /// <summary>Allow text to start with a newline.</summary>
+    public bool StartWithNewLine(bool allowNewLine)
+    {
+      bool retValue = false;
+
+      if (allowNewLine
+        && HasText
+        && !EndsWithNewLine())
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
     // Adds a delimiter if not the first list item.
     /// <include path='items/GetDelimited/*' file='Doc/TextBuilder.xml'/>
     public string GetDelimited(string text)
@@ -202,9 +231,8 @@ namespace LJCNetCommon
     {
       var retText = "";
 
-      // Start with newline even if no text.
-      if (allowNewLine
-        && HasText)
+      // Start with newline if text exists.
+      if (StartWithNewLine(allowNewLine))
       {
         retText = "\r\n";
       }
@@ -219,8 +247,7 @@ namespace LJCNetCommon
           retText = GetIndented(text);
         }
 
-        if (allowNewLine
-          && HasText)
+        if (StartWithNewLine(allowNewLine))
         {
           // Recreate string.
           retText = "\r\n";

@@ -26,6 +26,8 @@ namespace LJCNetCommonTest
       Text();
 
       // Get Text Methods
+      EndsWithNewLine();
+      StartWithNewLine();
       GetAttribs();
       GetIndented();
       GetIndentString();
@@ -81,7 +83,8 @@ namespace LJCNetCommonTest
       hb.AddText("This text is not indented.");
 
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Defaults: addIndent = true, allowNewLine = true.
@@ -113,6 +116,15 @@ namespace LJCNetCommonTest
         Console.WriteLine(compare);
       }
     }
+
+    private static void Write(string qualifiedMethod, string result
+      , string compare)
+    {
+      Console.WriteLine($"\r\n{qualifiedMethod}");
+      Console.WriteLine(result);
+      Console.WriteLine(" !=");
+      Console.WriteLine(compare);
+    }
     #endregion
 
     #region Append Text Methods (4)
@@ -139,10 +151,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.AddLine()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.AddLine()", result, compare);
       }
     }
 
@@ -162,10 +171,7 @@ namespace LJCNetCommonTest
       var compare = "This is some appended text.";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.AddText()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.AddText()", result, compare);
       }
     }
 
@@ -181,12 +187,13 @@ namespace LJCNetCommonTest
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Ends the text with a newline.
       // Defaults: addIndent = true, allowNewLine = true.
-      hb.Line("");
+      hb.Line();
 
       hb.Text("This is an indented line.");
       var result = hb.ToString();
@@ -194,21 +201,16 @@ namespace LJCNetCommonTest
       // result:
       // This is an appended line.
       //
-      //
       //   This is an indented line.
 
       var b = new HTMLBuilder();
       b.AddLine("This is an appended line.");
       b.AddLine();
-      b.AddLine();
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.Line()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.Line()", result, compare);
       }
     }
 
@@ -224,7 +226,8 @@ namespace LJCNetCommonTest
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Defaults: addIndent = true, allowNewLine = true.
@@ -241,15 +244,52 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.Text()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.Text()", result, compare);
       }
     }
     #endregion
 
     #region Get Text Methods (5)
+
+    private static bool EndsWithNewLine()
+    {
+      var hb = new HTMLBuilder();
+
+      bool retValue = hb.EndsWithNewLine();
+      var result = retValue.ToString();
+
+      // result:
+      // False
+
+      var b = new HTMLBuilder();
+      b.AddText("False");
+      var compare = b.ToString();
+      if (result != compare)
+      {
+        Write("HTMLBuilder.EndsWithNewLine()", result, compare);
+      }
+      return retValue;
+    }
+
+    private static bool StartWithNewLine()
+    {
+      var hb = new HTMLBuilder();
+
+      bool retValue = hb.StartWithNewLine(true);
+      var result = retValue.ToString();
+
+      // result:
+      // False
+
+      var b = new HTMLBuilder();
+      b.AddText("False");
+      var compare = b.ToString();
+      if (result != compare)
+      {
+        Write("HTMLBuilder.StartWithNewLine()", result, compare);
+      }
+      return retValue;
+    }
 
     private static void GetAttribs()
     {
@@ -277,10 +317,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetAttribs()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetAttribs()", result, compare);
       }
     }
 
@@ -310,10 +347,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetIndented()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetIndented()", result, compare);
       }
     }
 
@@ -337,10 +371,7 @@ namespace LJCNetCommonTest
       var compare = "  :";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetIndentString()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetIndentString()", result, compare);
       }
     }
 
@@ -356,7 +387,8 @@ namespace LJCNetCommonTest
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Ends the text with a newline.
@@ -364,7 +396,7 @@ namespace LJCNetCommonTest
       var text = hb.GetLine();
       hb.AddText(text);
 
-      hb.AddText(":");
+      hb.Text(":");
       var result = hb.ToString();
 
       // result:
@@ -375,14 +407,11 @@ namespace LJCNetCommonTest
       var b = new HTMLBuilder();
       b.AddLine("This is an appended line.");
       b.AddLine();
-      b.AddText(":");
+      b.AddText("  :");
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetLine()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetLine()", result, compare);
       }
     }
 
@@ -398,7 +427,8 @@ namespace LJCNetCommonTest
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Defaults: addIndent = true, allowNewLine = true.
@@ -416,10 +446,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetText()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetText()", result, compare);
       }
     }
 
@@ -451,10 +478,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetWrapped()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetGetWrapped()", result, compare);
       }
     }
     #endregion
@@ -473,7 +497,8 @@ namespace LJCNetCommonTest
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Defaults: addIndent = true, allowNewLine = true.
@@ -492,10 +517,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.Begin()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.Begin()", result, compare);
       }
     }
 
@@ -523,10 +545,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.Create()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.Create()", result, compare);
       }
     }
 
@@ -553,10 +572,7 @@ namespace LJCNetCommonTest
       var compare = "</html>";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.End()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.End()", result, compare);
       }
     }
 
@@ -581,10 +597,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.Link()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.Link()", result, compare);
       }
     }
 
@@ -610,10 +623,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.Meta()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.Meta()", result, compare);
       }
     }
 
@@ -644,10 +654,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.Metas()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.Metas()", result, compare);
       }
     }
 
@@ -669,10 +676,7 @@ namespace LJCNetCommonTest
       var compare = "<script src=\"File.js\"></script>";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.Script()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.Script()", result, compare);
       }
     }
     #endregion
@@ -692,10 +696,7 @@ namespace LJCNetCommonTest
       var compare = "<body>";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.AddChildIndent()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.AddChildIndent()", result, compare);
       }
     }
 
@@ -729,7 +730,8 @@ namespace LJCNetCommonTest
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Defaults: addIndent = true, allowNewLine = true.
@@ -741,10 +743,7 @@ namespace LJCNetCommonTest
       var compare = "<body>";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetBegin()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetBegin()", result, compare);
       }
     }
 
@@ -758,7 +757,8 @@ namespace LJCNetCommonTest
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Defaults: addIndent = true, allowNewLine = true.
@@ -770,10 +770,7 @@ namespace LJCNetCommonTest
       var compare = "tr {";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetBeginSelector()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetBeginSelector()", result, compare);
       }
     }
 
@@ -796,10 +793,7 @@ namespace LJCNetCommonTest
       var compare = "<head></head>";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetCreate()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetCreate()", result, compare);
       }
     }
 
@@ -822,10 +816,7 @@ namespace LJCNetCommonTest
       var compare = "</head>";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetEnd()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetEnd()", result, compare);
       }
     }
 
@@ -849,10 +840,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetLink()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetLink()", result, compare);
       }
     }
 
@@ -877,10 +865,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetMeta()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetMeta()", result, compare);
       }
     }
 
@@ -910,10 +895,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetMetas()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetMetas()", result, compare);
       }
     }
 
@@ -934,10 +916,7 @@ namespace LJCNetCommonTest
       var compare = "<script src=\"File.js\"></script>";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetScript()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetScript()", result, compare);
       }
     }
     #endregion
@@ -980,10 +959,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.HTMLBegin()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.HTMLBegin()", result, compare);
       }
     }
     #endregion
@@ -1025,10 +1001,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetHTMLBegin()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetHTMLBegin()", result, compare);
       }
     }
 
@@ -1053,10 +1026,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetHTMLEnd()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetHTMLEnd()", result, compare);
       }
     }
 
@@ -1091,10 +1061,7 @@ namespace LJCNetCommonTest
       var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.GetHTMLHead()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.GetHTMLHead()", result, compare);
       }
     }
     #endregion
@@ -1123,10 +1090,7 @@ namespace LJCNetCommonTest
       var compare = " id=\"id\" class=\"className\"";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.Attribs()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.Attribs()", result, compare);
       }
     }
 
@@ -1147,10 +1111,7 @@ namespace LJCNetCommonTest
       var compare = " lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.StartAttribs()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.StartAttribs()", result, compare);
       }
     }
 
@@ -1175,10 +1136,7 @@ namespace LJCNetCommonTest
       var compare = " border=\"1\" cellspacing=\"2\" cellpadding=\"3\"";
       if (result != compare)
       {
-        Console.WriteLine("\r\nHTMLBuilder.TableAttribs()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
+        Write("HTMLBuilder.TableAttribs()", result, compare);
       }
     }
     #endregion

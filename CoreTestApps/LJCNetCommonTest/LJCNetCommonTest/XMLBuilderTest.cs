@@ -8,6 +8,8 @@ namespace LJCNetCommonTest
 {
   internal class XMLBuilderTest
   {
+    #region Methods
+
     // Performs the tests.
     internal static void Test()
     {
@@ -24,6 +26,8 @@ namespace LJCNetCommonTest
       Text();
 
       // Get Text Methods
+      EndsWithNewLine();
+      StartWithNewLine();
       GetAttribs();
       GetIndented();
       GetIndentString();
@@ -46,8 +50,6 @@ namespace LJCNetCommonTest
       StartAttribs();
     }
 
-    #region Methods
-
     private static void AddIndent()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -62,7 +64,8 @@ namespace LJCNetCommonTest
       xb.AddText("This text is not indented.");
 
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Defaults: addIndent = true, allowNewLine = true.
@@ -81,12 +84,17 @@ namespace LJCNetCommonTest
       //   This text is indented.
       // Not indented.  No start with newLine.
 
-      var compare = "This text is not indented.\r\n";
-      compare += "  This text is indented.\r\n";
-      compare += "Not indented.  No start with newline.";
+      var b = new XMLBuilder();
+      b.AddLine("This text is not indented.");
+      b.AddLine("  This text is indented.");
+      b.AddText("Not indented.  No start with newline.");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("XMLBuilder.AddIndent() Error");
+        Console.WriteLine("\r\nXMLBuilder.AddIndent()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
     #endregion
@@ -109,11 +117,16 @@ namespace LJCNetCommonTest
       // This is an appended line.
       // :
 
-      var compare = "This is an appended line.\r\n";
-      compare += ":";
+      var b = new XMLBuilder();
+      b.AddLine("This is an appended line.");
+      b.AddText(":");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("XMLBuilder.AddLine() Error");
+        Console.WriteLine("\r\nXMLBuilder.AddLine()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
 
@@ -133,7 +146,10 @@ namespace LJCNetCommonTest
       var compare = "This is some appended text.";
       if (result != compare)
       {
-        Console.WriteLine("XMLBuilder.AddText() Error");
+        Console.WriteLine("\r\nXMLBuilder.AddText()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
 
@@ -149,7 +165,8 @@ namespace LJCNetCommonTest
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Ends the text with a newline.
@@ -162,16 +179,19 @@ namespace LJCNetCommonTest
       // result:
       // This is an appended line.
       //
-      //
       //   This is an indented line.
 
-      var compare = "This is an appended line.\r\n";
-      compare += "\r\n";
-      compare += "\r\n";
-      compare += "  This is an indented line.";
+      var b = new XMLBuilder();
+      b.AddLine("This is an appended line.");
+      b.AddLine();
+      b.AddText("  This is an indented line.");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("XMLBuilder.Line() Error");
+        Console.WriteLine("\r\nXMLBuilder.Line()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
 
@@ -198,16 +218,67 @@ namespace LJCNetCommonTest
       // This is an appended line.
       //   This is an indented line.
 
-      var compare = "This is an appended line.\r\n";
-      compare += "  This is an indented line.";
+      var b = new XMLBuilder();
+      b.AddLine("This is an appended line.");
+      b.AddText("  This is an indented line.");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("XMLBuilder.Text() Error");
+        Console.WriteLine("\r\nXMLBuilder.Text()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
     #endregion
 
     #region Get Text Methods (5)
+
+    private static bool EndsWithNewLine()
+    {
+      var xb = new XMLBuilder();
+
+      bool retValue = xb.EndsWithNewLine();
+      var result = retValue.ToString();
+
+      // result:
+      // False
+
+      var b = new XMLBuilder();
+      b.AddText("False");
+      var compare = b.ToString();
+      if (result != compare)
+      {
+        Console.WriteLine("\r\nXMLBuilder.EndsWithNewLine()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
+      }
+      return retValue;
+    }
+
+    private static bool StartWithNewLine()
+    {
+      var xb = new XMLBuilder();
+
+      bool retValue = xb.StartWithNewLine(true);
+      var result = retValue.ToString();
+
+      // result:
+      // False
+
+      var b = new XMLBuilder();
+      b.AddText("False");
+      var compare = b.ToString();
+      if (result != compare)
+      {
+        Console.WriteLine("\r\nXMLBuilder.StartWithNewLine()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
+      }
+      return retValue;
+    }
 
     private static void GetAttribs()
     {
@@ -230,11 +301,16 @@ namespace LJCNetCommonTest
       // <Person name="Someone">
       // </Person>
 
-      var compare = "<Person name=\"Someone\">\r\n";
-      compare += "</Person>";
+      var b = new XMLBuilder();
+      b.AddLine("<Person name=\"Someone\">");
+      b.AddText("</Person>");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("XMLBuilder.GetAttribs() Error");
+        Console.WriteLine("\r\nXMLBuilder.GetAttribs()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
 
@@ -351,7 +427,37 @@ namespace LJCNetCommonTest
 
     private static void GetWrapped()
     {
-      Console.WriteLine("XMLBuilder.GetWrapped() Not Implemented");
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var xb = new XMLBuilder()
+      {
+        WrapEnabled = true
+      };
+
+      // Example Method:
+      var b = new XMLBuilder();
+      b.AddText("Now is the time for all good men to come to the aid of their");
+      b.AddText(" country.");
+      b.AddText(" Now is the time for all good men to come to the aid of their");
+      b.AddText(" country.");
+      var text = b.ToString();
+      var result = xb.GetWrapped(text);
+
+      // result:
+      // Now is the time for all good men to come to the aid of
+      // their country.
+
+      b = new XMLBuilder();
+      b.AddText("Now is the time for all good men to come to the aid of");
+      b.AddLine(" their country. Now is the");
+      b.AddText("time for all good men to come to the aid of their country.");
+      var compare = b.ToString();
+      if (result != compare)
+      {
+        Console.WriteLine("\r\nXMLBuilder.GetWrapped()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
+      }
     }
     #endregion
 
@@ -449,7 +555,42 @@ namespace LJCNetCommonTest
 
     private static void AddChildIndent()
     {
-      Console.WriteLine("XMLBuilder.AddChildIndent() Not Implemented");
+      // Root Method Begin
+      var textState = new TextState();
+
+      var result = CustomBegin("body", textState);
+
+      // result:
+      // <body>
+
+      var compare = "<body>";
+      if (result != compare)
+      {
+        Console.WriteLine("\r\nXMLBuilder.AddChildIndent()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
+      }
+    }
+
+    private static string CustomBegin(string name, TextState textState
+      , Attributes attribs = null, bool addIndent = true
+      , bool childIndent = true)
+    {
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var xb = new HTMLBuilder(textState);
+
+      var createText = xb.GetBegin(name, textState, attribs, addIndent
+        , childIndent);
+      // Use NoIndent after a "GetText" method.
+      xb.Text(createText, NoIndent);
+      // Use AddChildIndent after beginning an element.
+      xb.AddChildIndent(createText, textState);
+      var result = xb.ToString();
+
+      // Append Method
+      //xb.UpdateState(textState);
+      return result;
     }
 
     private static void GetBegin()
@@ -529,7 +670,30 @@ namespace LJCNetCommonTest
 
     public static void StartAttribs()
     {
-      Console.WriteLine("XMLBuilder.StartAttribs() Not Implemented");
+      // Root Method Begin
+      var textState = new TextState();
+
+      var xb = new XMLBuilder(textState);
+
+      // Example Method:
+      var attribs = xb.StartAttribs();
+      var result = xb.GetAttribs(attribs, textState);
+
+      // result:
+      //  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+      //  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      var b = new HTMLBuilder();
+      b.AddLine(" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"");
+      b.AddText(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
+      var compare = b.ToString();
+      if (result != compare)
+      {
+        Console.WriteLine("\r\nXMLBuilder.StartAttribs()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
+      }
     }
     #endregion
 

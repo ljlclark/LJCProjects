@@ -27,6 +27,8 @@ namespace LJCNetCommonTest
       Text();
 
       // Get Text Methods
+      EndsWithNewLine();
+      StartWithNewLine();
       GetItem();
       GetIndented();
       GetIndentString();
@@ -49,7 +51,8 @@ namespace LJCNetCommonTest
       tb.AddText("This text is not indented.");
 
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Defaults: addIndent = true, allowNewLine = true.
@@ -188,7 +191,8 @@ namespace LJCNetCommonTest
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Ends the text with a newline.
@@ -201,12 +205,10 @@ namespace LJCNetCommonTest
       // result:
       // This is an appended line.
       //
-      //
       //   This is an indented line.
 
       var b = new TextBuilder();
       b.AddLine("This is an appended line.");
-      b.AddLine();
       b.AddLine();
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
@@ -257,6 +259,52 @@ namespace LJCNetCommonTest
     #endregion
 
     #region Get Text Methods (6)
+
+    private static bool EndsWithNewLine()
+    {
+      var tb = new TextBuilder();
+
+      bool retValue = tb.EndsWithNewLine();
+      var result = retValue.ToString();
+
+      // result:
+      // False
+
+      var b = new TextBuilder();
+      b.AddText("False");
+      var compare = b.ToString();
+      if (result != compare)
+      {
+        Console.WriteLine("\r\nTextBuilder.EndsWithNewLine()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
+      }
+      return retValue;
+    }
+
+    private static bool StartWithNewLine()
+    {
+      var tb = new TextBuilder();
+
+      bool retValue = tb.StartWithNewLine(true);
+      var result = retValue.ToString();
+
+      // result:
+      // False
+
+      var b = new TextBuilder();
+      b.AddText("False");
+      var compare = b.ToString();
+      if (result != compare)
+      {
+        Console.WriteLine("\r\nTextBuilder.StartWithNewLine()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
+      }
+      return retValue;
+    }
 
     private static void GetIndented()
     {
@@ -345,7 +393,8 @@ namespace LJCNetCommonTest
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Ends the text with a newline.
@@ -359,12 +408,10 @@ namespace LJCNetCommonTest
       // result:
       // This is an appended line.
       //
-      //
       //   :
 
       var b = new TextBuilder();
       b.AddLine("This is an appended line.");
-      b.AddLine();
       b.AddLine();
       b.AddText("  :");
       var compare = b.ToString();
@@ -389,7 +436,8 @@ namespace LJCNetCommonTest
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true.
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
       // The text begins with the current indent string if param
       // addIndent = true.
       // Defaults: addIndent = true, allowNewLine = true.
@@ -417,9 +465,11 @@ namespace LJCNetCommonTest
     private static void GetWrapped()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var tb = new TextBuilder();
-      tb.WrapEnabled = true;
-      tb.WrapPrefix = "";
+      var tb = new TextBuilder
+      {
+        WrapEnabled = true,
+        WrapPrefix = "",
+      };
 
       // Example Method:
       var b = new TextBuilder();
