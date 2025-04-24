@@ -8,9 +8,14 @@ namespace LJCNetCommonTest
 {
   internal class TextBuilderTest
   {
+    #region Methods
+
     // Performs the tests.
     internal static void Test()
     {
+      Console.WriteLine();
+      Console.WriteLine("*** TextBuilder ***");
+
       // Methods
       AddIndent();
 
@@ -29,8 +34,6 @@ namespace LJCNetCommonTest
       GetText();
       GetWrapped();
     }
-
-    #region Methods
 
     private static void AddIndent()
     {
@@ -65,12 +68,17 @@ namespace LJCNetCommonTest
       //   This text is indented.
       // Not Indented.  No start with newline.
 
-      var compare = "This text is not indented.\r\n";
-      compare += "  This text is indented.\r\n";
-      compare += "Not indented.  No start with newline.";
+      var b = new TextBuilder();
+      b.AddLine("This text is not indented.");
+      b.AddLine("  This text is indented.");
+      b.AddText("Not indented.  No start with newline.");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("TextBuilder.AddIndent() Error");
+        Console.WriteLine("\r\nTextBuilder.AddIndent()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
     #endregion
@@ -93,11 +101,16 @@ namespace LJCNetCommonTest
       // This is an appended line.
       // :
 
-      var compare = "This is an appended line.\r\n";
-      compare += ":";
+      var b = new TextBuilder();
+      b.AddLine("This is an appended line.");
+      b.AddText(":");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("TextBuilder.AddLine() Error");
+        Console.WriteLine("\r\nTextBuilder.AddLine()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
 
@@ -114,10 +127,15 @@ namespace LJCNetCommonTest
       // result:
       // This is some appended text.
 
-      var compare = "This is some appended text.";
+      var b = new TextBuilder();
+      b.AddText("This is some appended text.");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("TextBuilder.AddText() Error");
+        Console.WriteLine("\r\nTextBuilder.AddText()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
 
@@ -186,13 +204,18 @@ namespace LJCNetCommonTest
       //
       //   This is an indented line.
 
-      var compare = "This is an appended line.\r\n";
-      compare += "\r\n";
-      compare += "\r\n";
-      compare += "  This is an indented line.";
+      var b = new TextBuilder();
+      b.AddLine("This is an appended line.");
+      b.AddLine();
+      b.AddLine();
+      b.AddText("  This is an indented line.");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("TextBuilder.Line() Error");
+        Console.WriteLine("\r\nTextBuilder.Line()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
 
@@ -219,11 +242,16 @@ namespace LJCNetCommonTest
       // This is an appended line.
       //   This is an indented line.
 
-      var compare = "This is an appended line.\r\n";
-      compare += "  This is an indented line.";
+      var b = new TextBuilder();
+      b.AddLine("This is an appended line.");
+      b.AddText("  This is an indented line.");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("TextBuilder.Text() Error");
+        Console.WriteLine("\r\nTextBuilder.Text()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
     #endregion
@@ -247,11 +275,16 @@ namespace LJCNetCommonTest
       // This text is NOT indented.
       //     This text is indented.
 
-      var compare = "This text is NOT indented.\r\n";
-      compare += "    This text is indented.";
+      var b = new TextBuilder();
+      b.AddLine("This text is NOT indented.");
+      b.AddText("    This text is indented.");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("TextBuilder.GetIndented() Error");
+        Console.WriteLine("\r\nTextBuilder.GetIndented()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
 
@@ -273,7 +306,10 @@ namespace LJCNetCommonTest
       var compare = "  :";
       if (result != compare)
       {
-        Console.WriteLine("TextBuilder.GetIndentString() Error");
+        Console.WriteLine("\r\nTextBuilder.GetIndentString()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
 
@@ -302,7 +338,7 @@ namespace LJCNetCommonTest
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var tb = new TextBuilder();
 
-      var result = tb.GetText("This is an appended line.");
+      tb.Text("This is an appended line.");
 
       // The builder keeps track of the current number of indents.
       tb.AddIndent();
@@ -314,19 +350,30 @@ namespace LJCNetCommonTest
       // addIndent = true.
       // Ends the text with a newline.
       // Defaults: addIndent = true, allowNewLine = true.
-      result += tb.GetLine();
+      var text = tb.GetLine();
+      tb.AddText(text);
 
-      result += tb.GetText(":");
+      tb.Text(":");
+      var result = tb.ToString();
 
       // result:
       // This is an appended line.
+      //
+      //
       //   :
 
-      var compare = "This is an appended line.\r\n";
-      compare += "  :";
+      var b = new TextBuilder();
+      b.AddLine("This is an appended line.");
+      b.AddLine();
+      b.AddLine();
+      b.AddText("  :");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("TextBuilder.GetLine() Error");
+        Console.WriteLine("\r\nTextBuilder.GetLine()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
 
@@ -335,11 +382,10 @@ namespace LJCNetCommonTest
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var tb = new TextBuilder();
 
-      var result = tb.GetText("This is an appended line.");
+      tb.Text("This is an appended line.");
 
       // The builder keeps track of the current number of indents.
       tb.AddIndent();
-      result += tb.GetLine();
 
       // Example Method:
       // Starts the text with a newline if the builder already has text
@@ -347,22 +393,59 @@ namespace LJCNetCommonTest
       // The text begins with the current indent string if param
       // addIndent = true.
       // Defaults: addIndent = true, allowNewLine = true.
-      result += tb.GetText("This is an indented line.");
+      var tempText = tb.GetText("This is an indented line.");
+      tb.AddText(tempText);
+      var result = tb.ToString();
 
       // result:
-      //   This is an appended line.
-      //     This is an indented line.
+      // This is an appended line.
+      //   This is an indented line.
 
-      var compare = "This is an appended line.\r\n";
-      compare += "  This is an indented line.";
+      var b = new TextBuilder();
+      b.AddLine("This is an appended line.");
+      b.AddText("  This is an indented line.");
+      var compare = b.ToString();
       if (result != compare)
       {
-        Console.WriteLine("TextBuilder.GetText() Error");
+        Console.WriteLine("\r\nTextBuilder.GetText()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
       }
     }
 
     private static void GetWrapped()
     {
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var tb = new TextBuilder();
+      tb.WrapEnabled = true;
+      tb.WrapPrefix = "";
+
+      // Example Method:
+      var b = new TextBuilder();
+      b.AddText("Now is the time for all good men to come to the aid of their");
+      b.AddText(" country.");
+      b.AddText(" Now is the time for all good men to come to the aid of their");
+      b.AddText(" country.");
+      var text = b.ToString();
+      var result = tb.GetWrapped(text);
+
+      // result:
+      // Now is the time for all good men to come to the aid of their country. Now is the
+      // time for all good men to come to the aid of their country.
+
+      b.Clear();
+      b.AddText("Now is the time for all good men to come to the aid of");
+      b.AddLine(" their country. Now is the");
+      b.AddText("time for all good men to come to the aid of their country.");
+      var compare = b.ToString();
+      if (result != compare)
+      {
+        Console.WriteLine("\r\nTextBuilder.GetWrapped()");
+        Console.WriteLine(result);
+        Console.WriteLine(" !=");
+        Console.WriteLine(compare);
+      }
     }
     #endregion
 

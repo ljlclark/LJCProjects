@@ -72,6 +72,7 @@ namespace LJCNetCommon
     public string AddLine(string text = null)
     {
       Builder.AppendLine(text);
+
       var retText = $"{text}\r\n";
       DebugText += retText;
       return retText;
@@ -84,6 +85,7 @@ namespace LJCNetCommon
       if (TextLength(text) > 0)
       {
         Builder.Append(text);
+
         DebugText += text;
       }
     }
@@ -103,7 +105,8 @@ namespace LJCNetCommon
         allowNewLine = false;
       }
       IsFirst = false;
-      Text(retText, addIndent, allowNewLine);
+
+      DebugText += Text(retText, addIndent, allowNewLine);
       return retText;
     }
 
@@ -115,6 +118,7 @@ namespace LJCNetCommon
       var retText = GetText(text, addIndent, allowNewLine);
       Builder.AppendLine(retText);
       LineLength = 0;
+
       retText = $"{retText}\r\n";
       DebugText += retText;
       return retText;
@@ -129,6 +133,8 @@ namespace LJCNetCommon
       if (TextLength(retText) > 0)
       {
         Builder.Append(retText);
+
+        DebugText += retText;
       }
       return retText;
     }

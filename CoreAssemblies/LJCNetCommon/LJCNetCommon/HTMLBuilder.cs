@@ -57,7 +57,7 @@ namespace LJCNetCommon
 
     // Adds a text line without modification.
     /// <include path='items/AddLine/*' file='Doc/HTMLBuilder.xml'/>
-    public string AddLine(string text)
+    public string AddLine(string text = null)
     {
       Builder.AppendLine(text);
       var retText = $"{text}\r\n";
@@ -426,7 +426,7 @@ namespace LJCNetCommon
     {
       var hb = new HTMLBuilder(textState);
       hb.Text(selectorName);
-      hb.Text("{");
+      hb.AddText(" {");
       var retValue = hb.ToString();
       return retValue;
     }
@@ -488,11 +488,7 @@ namespace LJCNetCommon
     {
       var tb = new TextBuilder(textState);
       AddSyncIndent(this, tb, textState, -1);
-      if (addIndent)
-      {
-        tb.AddText($"{GetIndentString()}");
-      }
-      tb.AddText($"</{name}>");
+      tb.Text($"</{name}>", addIndent);
       var retElement = tb.ToString();
       return retElement;
     }
@@ -529,7 +525,7 @@ namespace LJCNetCommon
       var createText = hb.GetCreate("meta", null, textState, attribs
         , isEmpty: true);
       // Use NoIndent after a "GetText" method.
-      Text(createText, NoIndent);
+      hb.Text(createText, NoIndent);
       var retValue = hb.ToString();
       return retValue;
     }
@@ -706,11 +702,11 @@ namespace LJCNetCommon
 
     // Adds indent to builders and sync object.
     private void AddSyncIndent(HTMLBuilder hb, TextBuilder tb
-      , TextState syncState, int value = 1)
+      , TextState state, int value = 1)
     {
       hb?.AddIndent(value);
       tb?.AddIndent(value);
-      syncState.IndentCount += value;
+      state.IndentCount += value;
     }
 
     // Creates the content text.

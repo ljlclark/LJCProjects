@@ -11,6 +11,9 @@ namespace LJCNetCommonTest
     // Performs the tests.
     internal static void Test()
     {
+      Console.WriteLine();
+      Console.WriteLine("*** XMLBuilder ***");
+
       // Methods
       AddIndent();
 
@@ -27,6 +30,20 @@ namespace LJCNetCommonTest
       GetLine();
       GetText();
       GetWrapped();
+
+      // Append Element Methods
+      Begin();
+      Create();
+      End();
+
+      // Get Element Methods
+      AddChildIndent();
+      GetBegin();
+      GetCreate();
+      GetEnd();
+
+      // Get Attribute Methods
+      StartAttribs();
     }
 
     #region Methods
@@ -200,6 +217,7 @@ namespace LJCNetCommonTest
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var xb = new XMLBuilder(textState);
 
+      // Example Method:
       var attribs = new Attributes()
       {
         { "name", "Someone" },
@@ -333,6 +351,185 @@ namespace LJCNetCommonTest
 
     private static void GetWrapped()
     {
+      Console.WriteLine("XMLBuilder.GetWrapped() Not Implemented");
+    }
+    #endregion
+
+    #region Append Element Methods
+
+    private static void Begin()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var xb = new XMLBuilder(textState);
+
+      // Example Method:
+      var attribs = new Attributes()
+      {
+        { "name", "Someone" },
+      };
+      xb.Begin("Person", textState, attribs);
+
+      xb.End("Person", textState);
+      var result = xb.ToString();
+
+      // result:
+      // <Person name="Someone">
+      // </Person>
+
+      var compare = "<Person name=\"Someone\">\r\n";
+      compare += "</Person>";
+      if (result != compare)
+      {
+        Console.WriteLine("XMLBuilder.Begin() Error");
+      }
+    }
+
+    private static void Create()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var xb = new XMLBuilder(textState);
+
+      // Example Method:
+      var attribs = new Attributes()
+      {
+        { "name", "Someone" },
+      };
+      // Defaults: close = true.
+      xb.Create("Person", textState, null, attribs);
+      var result = xb.ToString();
+
+      // result:
+      // <Person name="Someone"></Person>
+
+      var compare = "<Person name=\"Someone\"></Person>";
+      if (result != compare)
+      {
+        Console.WriteLine("XMLBuilder.Create() Error");
+      }
+    }
+
+    private static void End()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var xb = new XMLBuilder(textState);
+
+      var attribs = new Attributes()
+      {
+        { "name", "Someone" },
+      };
+      xb.Begin("Person", textState, attribs);
+
+      // Example Method:
+      xb.End("Person", textState);
+      var result = xb.ToString();
+
+      // result:
+      // <Person name="Someone">
+      // </Person>
+
+      var compare = "<Person name=\"Someone\">\r\n";
+      compare += "</Person>";
+      if (result != compare)
+      {
+        Console.WriteLine("XMLBuilder.GetAttribs() Error");
+      }
+    }
+    #endregion
+
+    #region Get Element Methods
+
+    private static void AddChildIndent()
+    {
+      Console.WriteLine("XMLBuilder.AddChildIndent() Not Implemented");
+    }
+
+    private static void GetBegin()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var xb = new XMLBuilder(textState);
+
+      // Example Method:
+      var attribs = new Attributes()
+      {
+        { "name", "Someone" },
+      };
+      var result = xb.GetBegin("Person", textState, attribs);
+
+      // result:
+      // <Person name="Someone">
+
+      var compare = "<Person name=\"Someone\">";
+      if (result != compare)
+      {
+        Console.WriteLine("XMLBuilder.GetBegin() Error");
+      }
+    }
+
+    private static void GetCreate()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var xb = new XMLBuilder(textState);
+
+      // Example Method:
+      var attribs = new Attributes()
+      {
+        { "name", "Someone" },
+      };
+      // Defaults: close = true.
+      var result = xb.GetCreate("Person", textState, null, attribs);
+
+      // result:
+      // <Person name="Someone"></Person>
+
+      var compare = "<Person name=\"Someone\"></Person>";
+      if (result != compare)
+      {
+        Console.WriteLine("XMLBuilder.GetCreate() Error");
+      }
+    }
+
+    private static void GetEnd()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var xb = new XMLBuilder(textState);
+
+      // Example Method:
+      var result = xb.GetEnd("Person", textState);
+
+      // result:
+      // <Person>
+
+      var compare = "</Person>";
+      if (result != compare)
+      {
+        Console.WriteLine("XMLBuilder.GetEnd() Error");
+      }
+    }
+    #endregion
+
+    #region Get Attribs Methods
+
+    public static void StartAttribs()
+    {
+      Console.WriteLine("XMLBuilder.StartAttribs() Not Implemented");
     }
     #endregion
 
