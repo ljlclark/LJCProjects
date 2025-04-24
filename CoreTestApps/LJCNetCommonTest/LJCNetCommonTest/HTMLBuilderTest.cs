@@ -13,6 +13,8 @@ namespace LJCNetCommonTest
     // Performs the tests.
     internal static void Test()
     {
+      TextCommon = new TextCommon("HTMLBuilder");
+
       Console.WriteLine();
       Console.WriteLine("*** HTMLBuilder ***");
 
@@ -108,22 +110,7 @@ namespace LJCNetCommonTest
       b.AddLine("  This text is indented.");
       b.AddText("Not indented.  No start with newline.");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Console.WriteLine("\r\nHTMLBuilder.AddIndent()");
-        Console.WriteLine(result);
-        Console.WriteLine(" !=");
-        Console.WriteLine(compare);
-      }
-    }
-
-    private static void Write(string qualifiedMethod, string result
-      , string compare)
-    {
-      Console.WriteLine($"\r\n{qualifiedMethod}");
-      Console.WriteLine(result);
-      Console.WriteLine(" !=");
-      Console.WriteLine(compare);
+      TextCommon.Write("AddIndent()", result, compare);
     }
     #endregion
 
@@ -149,10 +136,7 @@ namespace LJCNetCommonTest
       b.AddLine("This is an appended line.");
       b.AddText(":");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.AddLine()", result, compare);
-      }
+      TextCommon.Write("AddLine()", result, compare);
     }
 
     private static void AddText()
@@ -169,10 +153,7 @@ namespace LJCNetCommonTest
       // This is some appended text.
 
       var compare = "This is some appended text.";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.AddText()", result, compare);
-      }
+      TextCommon.Write("AddText()", result, compare);
     }
 
     private static void Line()
@@ -208,10 +189,7 @@ namespace LJCNetCommonTest
       b.AddLine();
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.Line()", result, compare);
-      }
+      TextCommon.Write("Line()", result, compare);
     }
 
     private static void Text()
@@ -242,10 +220,7 @@ namespace LJCNetCommonTest
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.Text()", result, compare);
-      }
+      TextCommon.Write("Text()", result, compare);
     }
     #endregion
 
@@ -264,10 +239,7 @@ namespace LJCNetCommonTest
       var b = new HTMLBuilder();
       b.AddText("False");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.EndsWithNewLine()", result, compare);
-      }
+      TextCommon.Write("EndsWithNewLine()", result, compare);
       return retValue;
     }
 
@@ -284,10 +256,7 @@ namespace LJCNetCommonTest
       var b = new HTMLBuilder();
       b.AddText("False");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.StartWithNewLine()", result, compare);
-      }
+      TextCommon.Write("StartWithNewLine()", result, compare);
       return retValue;
     }
 
@@ -315,10 +284,7 @@ namespace LJCNetCommonTest
       b.AddLine("<div class=\"Selector\">");
       b.AddText("</div>");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetAttribs()", result, compare);
-      }
+      TextCommon.Write("GetAttribs()", result, compare);
     }
 
     private static void GetIndented()
@@ -345,10 +311,7 @@ namespace LJCNetCommonTest
       b.AddLine("This text is NOT indented.");
       b.AddText("    This text is indented.");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetIndented()", result, compare);
-      }
+      TextCommon.Write("GetIndented()", result, compare);
     }
 
     private static void GetIndentString()
@@ -369,10 +332,7 @@ namespace LJCNetCommonTest
       //   :
 
       var compare = "  :";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetIndentString()", result, compare);
-      }
+      TextCommon.Write("GetIndentString()", result, compare);
     }
 
     private static void GetLine()
@@ -409,10 +369,7 @@ namespace LJCNetCommonTest
       b.AddLine();
       b.AddText("  :");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetLine()", result, compare);
-      }
+      TextCommon.Write("GetLine()", result, compare);
     }
 
     private static void GetText()
@@ -444,10 +401,7 @@ namespace LJCNetCommonTest
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetText()", result, compare);
-      }
+      TextCommon.Write("GetText()", result, compare);
     }
 
     private static void GetWrapped()
@@ -476,10 +430,7 @@ namespace LJCNetCommonTest
       b.AddLine(" their country. Now is the");
       b.AddText("time for all good men to come to the aid of their country.");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetGetWrapped()", result, compare);
-      }
+      TextCommon.Write("GetGetWrapped()", result, compare);
     }
     #endregion
 
@@ -515,10 +466,7 @@ namespace LJCNetCommonTest
       b.AddLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
       b.AddText("</html>");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.Begin()", result, compare);
-      }
+      TextCommon.Write("Begin()", result, compare);
     }
 
     private static void Create()
@@ -543,10 +491,7 @@ namespace LJCNetCommonTest
       b.AddText(" xmlns=\"http://www.w3.org/1999/xhtml\">");
       b.AddText("</html>");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.Create()", result, compare);
-      }
+      TextCommon.Write("Create()", result, compare);
     }
 
     private static void End()
@@ -570,10 +515,7 @@ namespace LJCNetCommonTest
       // </html>
 
       var compare = "</html>";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.End()", result, compare);
-      }
+      TextCommon.Write("End()", result, compare);
     }
 
     private static void Link()
@@ -595,10 +537,7 @@ namespace LJCNetCommonTest
       b.AddText("<link rel=\"stylesheet\" type=\"text/css\"");
       b.AddText(" href=\"File.css\" />");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.Link()", result, compare);
-      }
+      TextCommon.Write("Link()", result, compare);
     }
 
     private static void Meta()
@@ -621,10 +560,7 @@ namespace LJCNetCommonTest
       b.AddText("<meta name=\"viewport\"");
       b.AddText($" content=\"{content}\" />");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.Meta()", result, compare);
-      }
+      TextCommon.Write("Meta()", result, compare);
     }
 
     private static void Metas()
@@ -652,10 +588,7 @@ namespace LJCNetCommonTest
       var content = "width=device-width initial-scale=1";
       b.AddText($"<meta name=\"viewport\" content=\"{content}\" />");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.Metas()", result, compare);
-      }
+      TextCommon.Write("Metas()", result, compare);
     }
 
     private static void Script()
@@ -674,10 +607,7 @@ namespace LJCNetCommonTest
       // <script src="File.js"></script>
 
       var compare = "<script src=\"File.js\"></script>";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.Script()", result, compare);
-      }
+      TextCommon.Write("Script()", result, compare);
     }
     #endregion
 
@@ -694,10 +624,7 @@ namespace LJCNetCommonTest
       // <body>
 
       var compare = "<body>";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.AddChildIndent()", result, compare);
-      }
+      TextCommon.Write("AddChildIndent()", result, compare);
     }
 
     private static string CustomBegin(string name, TextState textState
@@ -741,10 +668,7 @@ namespace LJCNetCommonTest
       // <body>
 
       var compare = "<body>";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetBegin()", result, compare);
-      }
+      TextCommon.Write("GetBegin()", result, compare);
     }
 
     private static void GetBeginSelector()
@@ -768,10 +692,7 @@ namespace LJCNetCommonTest
       // tr {
 
       var compare = "tr {";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetBeginSelector()", result, compare);
-      }
+      TextCommon.Write("GetBeginSelector()", result, compare);
     }
 
     private static void GetCreate()
@@ -791,10 +712,7 @@ namespace LJCNetCommonTest
       // <head></head>
 
       var compare = "<head></head>";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetCreate()", result, compare);
-      }
+      TextCommon.Write("GetCreate()", result, compare);
     }
 
     private static void GetEnd()
@@ -814,10 +732,7 @@ namespace LJCNetCommonTest
       // </head>
 
       var compare = "</head>";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetEnd()", result, compare);
-      }
+      TextCommon.Write("GetEnd()", result, compare);
     }
 
     private static void GetLink()
@@ -838,10 +753,7 @@ namespace LJCNetCommonTest
       b.AddText("<link rel=\"stylesheet\" type=\"text/css\"");
       b.AddText(" href=\"File.css\" />");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetLink()", result, compare);
-      }
+      TextCommon.Write("GetLink()", result, compare);
     }
 
     private static void GetMeta()
@@ -863,10 +775,7 @@ namespace LJCNetCommonTest
       b.AddText("<meta name=\"viewport\"");
       b.AddText($" content=\"{content}\" />");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetMeta()", result, compare);
-      }
+      TextCommon.Write("GetMeta()", result, compare);
     }
 
     private static void GetMetas()
@@ -893,10 +802,7 @@ namespace LJCNetCommonTest
       var content = "width=device-width initial-scale=1";
       b.AddText($"<meta name=\"viewport\" content=\"{content}\" />");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetMetas()", result, compare);
-      }
+      TextCommon.Write("GetMetas()", result, compare);
     }
 
     private static void GetScript()
@@ -914,10 +820,7 @@ namespace LJCNetCommonTest
       // <script src="File.js"></script>
 
       var compare = "<script src=\"File.js\"></script>";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetScript()", result, compare);
-      }
+      TextCommon.Write("GetScript()", result, compare);
     }
     #endregion
 
@@ -957,10 +860,7 @@ namespace LJCNetCommonTest
       b.AddLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
       b.AddText("<head>");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.HTMLBegin()", result, compare);
-      }
+      TextCommon.Write("HTMLBegin()", result, compare);
     }
     #endregion
 
@@ -999,10 +899,7 @@ namespace LJCNetCommonTest
       b.AddLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
       b.AddText("<head>");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetHTMLBegin()", result, compare);
-      }
+      TextCommon.Write("GetHTMLBegin()", result, compare);
     }
 
     private static void GetHTMLEnd()
@@ -1024,10 +921,7 @@ namespace LJCNetCommonTest
       b.AddLine("</body>");
       b.AddText("</html>");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetHTMLEnd()", result, compare);
-      }
+      TextCommon.Write("GetHTMLEnd()", result, compare);
     }
 
     private static void GetHTMLHead()
@@ -1059,10 +953,7 @@ namespace LJCNetCommonTest
       b.AddLine("<meta name=\"author\" content=\"Mr. Smith\" />");
       b.AddText("<meta name=\"viewport\" content=\"width=device-width initial-scale=1\" />");
       var compare = b.ToString();
-      if (result != compare)
-      {
-        Write("HTMLBuilder.GetHTMLHead()", result, compare);
-      }
+      TextCommon.Write("GetHTMLHead()", result, compare);
     }
     #endregion
 
@@ -1088,10 +979,7 @@ namespace LJCNetCommonTest
 
       var result = hb.GetAttribs(attribs, textState);
       var compare = " id=\"id\" class=\"className\"";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.Attribs()", result, compare);
-      }
+      TextCommon.Write("Attribs()", result, compare);
     }
 
     public static void StartAttribs()
@@ -1109,10 +997,7 @@ namespace LJCNetCommonTest
       // lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml"
 
       var compare = " lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.StartAttribs()", result, compare);
-      }
+      TextCommon.Write("StartAttribs()", result, compare);
     }
 
     public static void TableAttribs()
@@ -1134,14 +1019,13 @@ namespace LJCNetCommonTest
       // border="1" cellspacing="2" cellpadding="3"
 
       var compare = " border=\"1\" cellspacing=\"2\" cellpadding=\"3\"";
-      if (result != compare)
-      {
-        Write("HTMLBuilder.TableAttribs()", result, compare);
-      }
+      TextCommon.Write("TableAttribs()", result, compare);
     }
     #endregion
 
     #region Class Data
+
+    private static TextCommon TextCommon { get; set; }
 
     private const bool NoIndent = false;
     private const bool NoNewLine = false;
