@@ -120,16 +120,31 @@ namespace LJCDataUtility
       var hb = new HTMLBuilder(textState);
 
       // Create custom beginning of document.
-      var getText = GetHTMLDocBegin(textState);
-      hb.Text(getText, NoIndent);
+      var createText = GetHTMLDocBegin(textState);
+      hb.Text(createText, NoIndent);
+      hb.End("head", textState, NoIndent);
+      hb.Begin("body", textState, null, NoIndent);
+      var attribs = hb.Attribs("page");
+      hb.Begin("div", textState, attribs);
 
-      // Create HTML table.
+      // Header
+      hb.Create("br", null, textState, isEmpty: true);
+      attribs = hb.Attribs(id: "Header");
+      hb.Begin("div", textState, attribs);
+      attribs = hb.Attribs(id: "Title");
+      hb.Create("div", "Data Columns", textState, attribs);
+      hb.End("div", textState);
+      hb.Create("br", null, textState, isEmpty: true);
+
+      // HTML table.
       var dbResult = GetResult();
-      getText = HTMLTableData.ResultHTML(dbResult, textState);
-      hb.Text(getText, NoIndent);  
+      var tableText = HTMLTableData.ResultHTML(dbResult, textState);
+      hb.Text(tableText, NoIndent);
 
-      getText = hb.GetHTMLEnd(textState);
-      hb.Text(getText, NoIndent);
+      // End "page"
+      hb.End("div", textState);
+      createText = hb.GetHTMLEnd(textState);
+      hb.Text(createText, NoIndent);
       var retValue = hb.ToString();
       return retValue;
     }
@@ -190,9 +205,6 @@ namespace LJCDataUtility
 
       createText = GetHTMLDocHead(textState);
       hb.Text(createText, NoIndent);
-
-      hb.End("head", textState, NoIndent);
-      hb.Begin("body", textState);
       var retValue = hb.ToString();
       return retValue;
     }
@@ -207,7 +219,7 @@ namespace LJCDataUtility
       var description = "Creates an HTML Document";
       var getText = hb.GetHTMLHead(textState, title, author, description);
       hb.Text(getText, NoIndent);
-      hb.Link("File.css", textState);
+      hb.Link("CSS/CodeDoc.css", textState);
       hb.Script("File.js", textState);
 
       hb.Begin("style", textState);

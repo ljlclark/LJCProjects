@@ -33,7 +33,8 @@
         xb.AddText("This text is not indented.");
 
         // Starts the text with a newline if the builder already has text
-        // and param allowNewLine = true.
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
         // The text begins with the current indent string if param
         // addIndent = true.
         // Defaults: addIndent = true, allowNewLine = true.
@@ -50,7 +51,7 @@
         // result:
         // This text is not indented.
         //   This text is indented.
-        // Not Indented.  No start with newLine.
+        // Not indented.  No start with newLine.
       </code>
     </example>
   </AddIndent>
@@ -133,7 +134,8 @@
 
         // Example Method:
         // Starts the text with a newline if the builder already has text
-        // and param allowNewLine = true.
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
         // The text begins with the current indent string if param
         // addIndent = true.
         // Ends the text with a newline.
@@ -145,7 +147,6 @@
 
         // result:
         // This is an appended line.
-        //
         //
         //   This is an indented line.
       </code>
@@ -193,6 +194,32 @@
     </example>
   </Text>
   <!-- Get Text Methods (6) -->
+  <EndsWithNewLine>
+    <example>
+      <code>
+        var xb = new XMLBuilder();
+
+        bool retValue = xb.EndsWithNewLine();
+        var result = retValue.ToString();
+
+        // result:
+        // False
+      </code>
+    </example>
+  </EndsWithNewLine>
+  <StartWithNewLine>
+    <example>
+      <code>
+        var xb = new XMLBuilder();
+
+        bool retValue = xb.StartWithNewLine(true);
+        var result = retValue.ToString();
+
+        // result:
+        // False
+      </code>
+    </example>
+  </StartWithNewLine>
   <GetAttribs>
     <summary>
       Gets the attributes text.
@@ -214,6 +241,7 @@
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var xb = new XMLBuilder(textState);
 
+        // Example Method:
         var attribs = new Attributes()
         {
         { "name", "Someone" },
@@ -377,6 +405,28 @@
     </summary>
     <param name="text">The text value.</param>
     <returns>The potentially wrapped and indented new text value.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var xb = new XMLBuilder()
+        {
+          WrapEnabled = true
+        };
+
+        // Example Method:
+        var b = new XMLBuilder();
+        b.AddText("Now is the time for all good men to come to the aid of their");
+        b.AddText(" country.");
+        b.AddText(" Now is the time for all good men to come to the aid of their");
+        b.AddText(" country.");
+        var text = b.ToString();
+        var result = xb.GetWrapped(text);
+
+        // result:
+        // Now is the time for all good men to come to the aid of
+        // their country.
+      </code>
+    </example>
   </GetWrapped>
   <!-- Append Element Methods (7) -->
   <Begin>
@@ -403,18 +453,25 @@
     </remarks>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var xb = new XMLBuilder(textState);
+
+        // Example Method:
         var attribs = new Attributes()
         {
-        { "class", "Selector" },
+        { "name", "Someone" },
         };
-        hb.Begin("div", null, attribs);
-        var result = hb.ToString();
+        xb.Begin("Person", textState, attribs);
+
+        xb.End("Person", textState);
+        var result = xb.ToString();
 
         // result:
-        // &amp;lt;div class="Selector"&amp;gt;
+        // &amp;lt;Person"&amp;gt;
+        // &amp;lt;/Person"&amp;gt;
       </code>
     </example>
   </Begin>
@@ -445,18 +502,23 @@
     </remarks>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var xb = new XMLBuilder(textState);
+
+        // Example Method:
         var attribs = new Attributes()
         {
-        { "src", "fileName.js" },
+          { "name", "Someone" },
         };
-        hb.Create("script", null, attribs);
-        var result = hb.ToString();
+        // Defaults: close = true.
+        xb.Create("Person", textState, null, attribs);
+        var result = xb.ToString();
 
         // result:
-        // &amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;
+        // &amp;lt;Person"&amp;gt;&amp;lt;/Person"&amp;gt;
       </code>
     </example>
   </Create>
@@ -480,20 +542,25 @@
     </remarks>
     <example>
       <code>
+        // Root Method Begin
+        var textState = new TextState();
+
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        var xb = new XMLBuilder(textState);
 
         var attribs = new Attributes()
         {
-        { "class", "Selector" },
+        { "name", "Someone" },
         };
-        hb.Begin("div", null, attribs);
-        hb.End("div");
-        var result = hb.ToString();
+        xb.Begin("Person", textState, attribs);
+
+        // Example Method:
+        xb.End("Person", textState);
+        var result = xb.ToString();
 
         // result:
-        // &amp;lt;div class="Selector"&amp;gt;
-        // &amp;lt;/div&amp;gt;
+        // &amp;lt;Person"&amp;gt;
+        // &amp;lt;/Person"&amp;gt;
       </code>
     </example>
   </End>
@@ -509,6 +576,37 @@
       The indent will only be added if the createText length > 0 and the
       textState.ChildIndentCount > 0.
     </remarks>
+    <example>
+      <code>
+        // Root Method Begin
+        var textState = new TextState();
+
+        var result = CustomBegin("body", textState);
+
+        private static string CustomBegin(string name, TextState textState
+          , Attributes attribs = null, bool addIndent = true
+          , bool childIndent = true)
+        {
+          // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+          var xb = new HTMLBuilder(textState);
+
+          var createText = xb.GetBegin(name, textState, attribs, addIndent
+            , childIndent);
+          // Use NoIndent after a "GetText" method.
+          xb.Text(createText, NoIndent);
+          // Use AddChildIndent after beginning an element.
+          xb.AddChildIndent(createText, textState);
+          var result = xb.ToString();
+
+          // Append Method
+          //xb.UpdateState(textState);
+          return result;
+        }
+
+        // result:
+        &amp;lt;body&amp;gt;
+      </code>
+    </example>
   </AddChildIndent>
   <GetBegin>
     <summary>
@@ -534,13 +632,21 @@
     </remarks>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.GetBegin("head");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var xb = new XMLBuilder(textState);
+
+        // Example Method:
+        var attribs = new Attributes()
+        {
+        { "name", "Someone" },
+        };
+        var result = xb.GetBegin("Person", textState, attribs);
 
         // result:
-        // &amp;lt;head&amp;gt;
+        // &amp;lt;Person name="Someone"&amp;gt;
       </code>
     </example>
   </GetBegin>
@@ -577,15 +683,22 @@
     </remarks>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.GetCreate("head");
-        result += hb.GetEnd("head");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var xb = new XMLBuilder(textState);
+
+        // Example Method:
+        var attribs = new Attributes()
+        {
+          { "name", "Someone" },
+        };
+        // Defaults: close = true.
+        var result = xb.GetCreate("Person", textState, null, attribs);
 
         // result:
-        // &amp;lt;head&amp;gt;
-        // &amp;lt;/head&amp;gt;
+        // &amp;lt;Person name="Someone"&amp;gt;&amp;lt;/Person&amp;gt;
       </code>
     </example>
   </GetCreate>
@@ -605,15 +718,17 @@
     </remarks>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.GetCreate("head");
-        result += hb.GetEnd("head");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var xb = new XMLBuilder(textState);
+
+        // Example Method:
+        var result = xb.GetEnd("Person", textState);
 
         // result:
-        // &amp;lt;head&amp;gt;
-        // &amp;lt;/head&amp;gt;
+        // &amp;lt;Person&amp;gt;
       </code>
     </example>
   </GetEnd>
@@ -625,17 +740,19 @@
     <returns>The XML start attributes.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var xb = new XMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = xb.StartAttribs();
+        var xb = new XMLBuilder(textState);
+
+        // Example Method:
+        var attribs = xb.StartAttribs();
+        
+        var result = xb.GetAttribs(attribs, textState);
 
         // result:
-        var result = new Attributes()
-        {
-          { "lang", "en" },
-          { "xmlns", "http://www.w3.org/1999/xhtml" },
-        };
+        //  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        //  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       </code>
     </example>
   </StartAttribs>

@@ -502,12 +502,6 @@ namespace LJCNetCommonTest
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
 
-      var attribs = new Attributes()
-      {
-        { "name", "Someone" },
-      };
-      hb.Begin("Person", textState, attribs);
-
       // Example Method:
       var result = hb.GetEnd("html", textState);
 
@@ -991,6 +985,7 @@ namespace LJCNetCommonTest
 
       // Example Method:
       var attribs = hb.StartAttribs();
+
       var result = hb.GetAttribs(attribs, textState);
 
       // result:
@@ -1013,6 +1008,7 @@ namespace LJCNetCommonTest
       var cellpadding = 3;
       // Defaults: border = 1, cellspacing = 0, cellpadding = 2. 
       var attribs = hb.TableAttribs(border, cellspacing, cellpadding);
+
       var result = hb.GetAttribs(attribs, textState);
 
       // result:

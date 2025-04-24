@@ -33,7 +33,8 @@
         tb.AddText("This text is not indented.");
 
         // Starts the text with a newline if the builder already has text
-        // and param allowNewLine = true.
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
         // The text begins with the current indent string if param
         // addIndent = true.
         // Defaults: addIndent = true, allowNewLine = true.
@@ -122,29 +123,16 @@
         var tb = new TextBuilder();
 
         // Defaults: IsFirst = true, Delimiter = ", ".
-        for (int index = 0; index &lt; 14; index++)
-        {
-          // Example Method
-          var text = $"{index}**-";
-          tb.Item(text, NoIndent, NoNewLine);
-        }
-        var saveResult = tb.ToString();
+        for (int index = 0; index < 14; index++)
+      {
+        // Example Method
+        var text = $"{index}**-";
+        tb.Item(text, NoIndent, NoNewLine);
+      }
+      var saveResult = tb.ToString();
 
-        // result:
-        // 0**-, 1**-, 2**-, 3**-, 4**-, 5**-, 6**-, 7**-, 8**-, 9**-, 10**-, 11**-, 12**-, 13**-, 14**-
-
-        tb.Clear();
-        tb.WrapEnabled = true;
-        for (int index = 0; index &lt; 14; index++)
-        {
-          // Example Method:
-          var text = $"{index}**-";
-          tb.Item(text, NoIndent, NoNewLine);
-        }
-        var result = tb.ToString();
-
-        tb.Clear();
-        result = tb.Text(saveResult);
+      // result:
+      // 0**-, 1**-, 2**-, 3**-, 4**-, 5**-, 6**-, 7**-, 8**-, 9**-, 10**-, 11**-, 12**-, 13**-, 14**-
       </code>
     </example>
   </Item>
@@ -175,7 +163,8 @@
 
         // Example Method:
         // Starts the text with a newline if the builder already has text
-        // and param allowNewLine = true.
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
         // The text begins with the current indent string if param
         // addIndent = true.
         // Ends the text with a newline.
@@ -187,7 +176,6 @@
 
         // result:
         // This is an appended line.
-        //
         //
         //   This is an indented line.
       </code>
@@ -235,6 +223,32 @@
     </example>
   </Text>
   <!-- Get Text Methods -->
+  <EndsWithNewLine>
+    <example>
+      <code>
+        var tb = new TextBuilder();
+
+        bool retValue = tb.EndsWithNewLine();
+        var result = retValue.ToString();
+
+        // result:
+        // False
+      </code>
+    </example>
+  </EndsWithNewLine>
+  <StartWithNewLine>
+    <example>
+      <code>
+        var tb = new TextBuilder();
+
+        bool retValue = tb.StartWithNewLine(true);
+        var result = retValue.ToString();
+
+        // result:
+        // False
+      </code>
+    </example>
+  </StartWithNewLine>
   <GetIndented>
     <summary>
       Gets a new potentially indented line.
@@ -333,24 +347,28 @@
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var tb = new TextBuilder();
 
-        var result = tb.GetText("This is an appended line.");
+        tb.Text("This is an appended line.");
 
         // The builder keeps track of the current number of indents.
         tb.AddIndent();
 
         // Example Method:
         // Starts the text with a newline if the builder already has text
-        // and param allowNewLine = true.
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
         // The text begins with the current indent string if param
         // addIndent = true.
         // Ends the text with a newline.
         // Defaults: addIndent = true, allowNewLine = true.
-        result += tb.GetLine();
+        var text = tb.GetLine();
+        tb.AddText(text);
 
-        result += tb.GetText(":");
+        tb.Text(":");
+        var result = tb.ToString();
 
         // result:
         // This is an appended line.
+        //
         //   :
       </code>
     </example>
@@ -381,23 +399,25 @@
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var tb = new TextBuilder();
 
-        var result = tb.GetText("This is an appended line.");
+        tb.Text("This is an appended line.");
 
         // The builder keeps track of the current number of indents.
         tb.AddIndent();
-        result += tb.GetLine();
 
         // Example Method:
         // Starts the text with a newline if the builder already has text
-        // and param allowNewLine = true.
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
         // The text begins with the current indent string if param
         // addIndent = true.
         // Defaults: addIndent = true, allowNewLine = true.
-        result += tb.GetText("This is an indented line.");
+        var tempText = tb.GetText("This is an indented line.");
+        tb.AddText(tempText);
+        var result = tb.ToString();
 
         // result:
-        //   This is an appended line.
-        //     This is an indented line.
+        // This is an appended line.
+        //   This is an indented line.
       </code>
     </example>
   </GetText>
@@ -407,5 +427,28 @@
     </summary>
     <param name="text">The text value.</param>
     <returns>The potentially wrapped and indented new text value.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder
+        {
+          WrapEnabled = true,
+          WrapPrefix = "",
+        };
+
+        // Example Method:
+        var b = new TextBuilder();
+        b.AddText("Now is the time for all good men to come to the aid of their");
+        b.AddText(" country.");
+        b.AddText(" Now is the time for all good men to come to the aid of their");
+        b.AddText(" country.");
+        var text = b.ToString();
+        var result = tb.GetWrapped(text);
+
+        // result:
+        // Now is the time for all good men to come to the aid of their country. Now is the
+        // time for all good men to come to the aid of their country.
+      </code>
+    </example>
   </GetWrapped>
 </items>

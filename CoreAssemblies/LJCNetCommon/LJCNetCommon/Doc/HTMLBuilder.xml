@@ -33,7 +33,8 @@
         hb.AddText("This text is not indented.");
 
         // Starts the text with a newline if the builder already has text
-        // and param allowNewLine = true.
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
         // The text begins with the current indent string if param
         // addIndent = true.
         // Defaults: addIndent = true, allowNewLine = true.
@@ -50,7 +51,7 @@
         // result:
         // This text is not indented.
         //   This text is indented.
-        // Not Indented.  No start with newline.
+        // Not indented.  No start with newline.
       </code>
     </example>
   </AddIndent>
@@ -133,19 +134,19 @@
 
         // Example Method:
         // Starts the text with a newline if the builder already has text
-        // and param allowNewLine = true.
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
         // The text begins with the current indent string if param
         // addIndent = true.
         // Ends the text with a newline.
         // Defaults: addIndent = true, allowNewLine = true.
-        hb.Line("");
+        hb.Line();
 
         hb.Text("This is an indented line.");
         var result = hb.ToString();
 
         // result:
         // This is an appended line.
-        //
         //
         //   This is an indented line.
       </code>
@@ -179,7 +180,8 @@
 
         // Example Method:
         // Starts the text with a newline if the builder already has text
-        // and param allowNewLine = true.
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
         // The text begins with the current indent string if param
         // addIndent = true.
         // Defaults: addIndent = true, allowNewLine = true.
@@ -192,7 +194,33 @@
       </code>
     </example>
   </Text>
-  <!-- Get Text Methods (6) -->
+  <!-- Get Text Methods (8) -->
+  <EndsWithNewLine>
+    <example>
+      <code>
+        var hb = new HTMLBuilder();
+
+        bool retValue = hb.EndsWithNewLine();
+        var result = retValue.ToString();
+
+        // result:
+        // False
+      </code>
+    </example>
+  </EndsWithNewLine>
+  <StartWithNewLine>
+    <example>
+      <code>
+        var hb = new HTMLBuilder();
+
+        bool retValue = hb.StartWithNewLine(true);
+        var result = retValue.ToString();
+
+        // result:
+        // False
+      </code>
+    </example>
+  </StartWithNewLine>
   <GetAttribs>
     <summary>
       Gets the attributes text.
@@ -216,7 +244,7 @@
 
         var attribs = new Attributes()
         {
-        { "class", "Selector" },
+          { "class", "Selector" },
         };
         hb.Begin("div", textState, attribs);
         hb.End("div", textState);
@@ -241,11 +269,14 @@
 
         // Example Method:
         var result = hb.GetIndented("This text is NOT indented.");
+        hb.AddText(result);
 
         // The builder keeps track of the current number of indents.
         hb.AddIndent(2);
-        result += hb.GetLine();
-        result += hb.GetIndented("This text is indented.");
+        hb.AddLine();
+        result = hb.GetIndented("This text is indented.");
+        hb.AddText(result);
+        result = hb.ToString();
 
         // result:
         // This text is NOT indented.
@@ -267,8 +298,10 @@
 
         // Example Method:
         var result = hb.GetIndentString();
+        hb.AddText(result);
 
-        result += hb.GetText(":", false);
+        hb.AddText(":");
+        result = hb.ToString();
 
         // result:
         //   :
@@ -303,25 +336,29 @@
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
-        var result = hb.GetText("This is an appended line.");
+        hb.AddText("This is an appended line.");
 
         // The builder keeps track of the current number of indents.
         hb.AddIndent();
 
         // Example Method:
         // Starts the text with a newline if the builder already has text
-        // and param allowNewLine = true.
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
         // The text begins with the current indent string if param
         // addIndent = true.
         // Ends the text with a newline.
         // Defaults: addIndent = true, allowNewLine = true.
-        result += hb.GetLine();
+        var text = hb.GetLine();
+        hb.AddText(text);
 
-        result += hb.GetText(":");
+        hb.Text(":");
+        var result = hb.ToString();
 
         // result:
         // This is an appended line.
-        //   :
+        //
+        // :
       </code>
     </example>
   </GetLine>
@@ -351,19 +388,21 @@
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
-        var result = hb.GetText("This is an appended line.");
+        hb.Text("This is an appended line.");
 
         // The builder keeps track of the current number of indents.
         hb.AddIndent();
-        result += hb.GetLine();
 
         // Example Method:
         // Starts the text with a newline if the builder already has text
-        // and param allowNewLine = true.
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
         // The text begins with the current indent string if param
         // addIndent = true.
         // Defaults: addIndent = true, allowNewLine = true.
-        result += hb.GetText("This is an indented line.");
+        var text = hb.GetText("This is an indented line.");
+        hb.AddText(text);
+        var result = hb.ToString();
 
         // result:
         // This is an appended line.
@@ -377,6 +416,28 @@
     </summary>
     <param name="text">The text value.</param>
     <returns>The potentially wrapped and indented new text value.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder()
+        {
+          WrapEnabled = true
+        };
+
+        // Example Method:
+        var b = new HTMLBuilder();
+        b.AddText("Now is the time for all good men to come to the aid of their");
+        b.AddText(" country.");
+        b.AddText(" Now is the time for all good men to come to the aid of their");
+        b.AddText(" country.");
+        var text = b.ToString();
+        var result = hb.GetWrapped(text);
+
+        // result:
+        // Now is the time for all good men to come to the aid of
+        // their country.
+      </code>
+    </example>
   </GetWrapped>
   <!-- Append Element Methods (7) -->
   <Begin>
@@ -403,18 +464,29 @@
     </remarks>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var attribs = new Attributes()
-        {
-          { "class", "Selector" },
-        };
-        hb.Begin("div", null, attribs);
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        var attribs = hb.StartAttribs();
+
+        // Example Method:
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Defaults: addIndent = true, allowNewLine = true.
+        hb.Begin("html", textState, attribs);
+
+        hb.End("html", textState);
         var result = hb.ToString();
 
         // result:
-        // &amp;lt;div class="Selector"&amp;gt;
+        // &amp;lt;html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"&amp;gt;
+        // &amp;lt;/html&amp;gt;
       </code>
     </example>
   </Begin>
@@ -445,18 +517,20 @@
     </remarks>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var attribs = new Attributes()
-        {
-          { "src", "fileName.js" },
-        };
-        hb.Create("script", null, attribs);
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var attribs = hb.StartAttribs();
+        // Defaults: close = true.
+        hb.Create("html", null, textState, attribs);
         var result = hb.ToString();
 
         // result:
-        // &amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;
+        // &amp;lt;html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"&amp;gt;&amp;lt;html&amp;gt;
       </code>
     </example>
   </Create>
@@ -480,20 +554,17 @@
     </remarks>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var attribs = new Attributes()
-        {
-          { "class", "Selector" },
-        };
-        hb.Begin("div", null, attribs);
-        hb.End("div");
-        var result = hb.ToString();
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var result = hb.GetEnd("html", textState);
 
         // result:
-        // &amp;lt;div class="Selector"&amp;gt;
-        // &amp;lt;/div&amp;gt;
+        // &amp;lt;/html&amp;gt;
       </code>
     </example>
   </End>
@@ -506,14 +577,18 @@
     <returns>The added &lt;link&gt; element.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        hb.Link("fileName.css");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        hb.Link("File.css", textState);
         var result = hb.ToString();
 
         // result:
-        // &amp;lt;link rel="stylesheet" type="text/css" href=fileName.css /&amp;gt;
+        // &amp;lt;link rel="stylesheet" type="text/css" href=File.css /&amp;gt;
       </code>
     </example>
   </Link>
@@ -527,22 +602,19 @@
     <returns>The added &amp;lt;meta&amp;gt; element.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var attribs = new Attributes()
-        {
-          { "charset", "utf-8" }
-        };
-        hb.Create("meta", htmlAttribs: attribs, isEmpty: true); 
-        hb.Meta("description", "Metas");
-        hb.Meta("author", "Author");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var content = "width=device-width initial-scale=1";
+        hb.Meta("viewport", content, textState);
         var result = hb.ToString();
 
         // result:
-        // &amp;lt;meta charset="utf-8"  /&amp;gt;
-        // &amp;lt;meta name="description" content="Metas"  /&amp;gt;
-        // &amp;lt;meta name="author" content="Author"  /&amp;gt;
+        // &amp;lt;meta name="viewport" content="width=device-width initial-scale=1" /&amp;gt;
       </code>
     </example>
   </Meta>
@@ -558,16 +630,21 @@
     <returns>The added &amp;lt;meta&amp;gt; elements.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        hb.Metas("Author", null, "Metas", );
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        hb.Metas("Mr. Smith", textState, "The Description");
         var result = hb.ToString();
 
         // result:
-        // &amp;lt;meta charset="utf-8"  /&amp;gt;
-        // &amp;lt;meta name="description" content="Metas"  /&amp;gt;
-        // &amp;lt;meta name="author" content="Author"  /&amp;gt;
+        // &amp;lt;meta charset="utf-8" /&amp;gt;
+        // &amp;lt;meta name="description" content="The Description" /&amp;gt;
+        // &amp;lt;meta name="author" content="Mr. Smith" /&amp;gt;
+        // &amp;lt;meta name="viewport" content="width=device-width initial-scale=1" /&amp;gt;
       </code>
     </example>
   </Metas>
@@ -580,14 +657,18 @@
     <returns>The added &amp;lt;script&amp;gt; element.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        hb.Script("fileName.js");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        hb.Script("File.js", textState);
         var result = hb.ToString();
 
         // result:
-        // &amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;
+        // &amp;lt;script src="File.js"&amp;gt;&amp;lt;&amp;gt;
       </code>
     </example>
   </Script>
@@ -603,6 +684,37 @@
       The indent will only be added if the createText length > 0 and the
       textState.ChildIndentCount > 0.
     </remarks>
+    <example>
+      <code>
+        // Root Method Begin
+        var textState = new TextState();
+
+        var result = CustomBegin("body", textState);
+
+        // result:
+        // &amp;lt;body&amp;gt;
+
+        private static string CustomBegin(string name, TextState textState
+          , Attributes attribs = null, bool addIndent = true
+          , bool childIndent = true)
+        {
+          // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+          var hb = new HTMLBuilder(textState);
+
+          var createText = hb.GetBegin(name, textState, attribs, addIndent
+            , childIndent);
+          // Use NoIndent after a "GetText" method.
+          hb.Text(createText, NoIndent);
+          // Use AddChildIndent after beginning an element.
+          hb.AddChildIndent(createText, textState);
+          var result = hb.ToString();
+
+          // Append Method
+          //hb.UpdateState(textState);
+          return result;
+        }
+      </code>
+    </example>
   </AddChildIndent>
   <GetBegin>
     <summary>
@@ -628,13 +740,25 @@
     </remarks>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.GetBegin("head");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder();
+
+        // Example Method:
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Defaults: addIndent = true, allowNewLine = true.
+        var result = hb.GetBegin("body", textState);
 
         // result:
-        // &amp;lt;head&amp;gt;
+
+        // result:
+        // &amp;lt;body&amp;gt;
       </code>
     </example>
   </GetBegin>
@@ -645,6 +769,27 @@
     <param name="selectorName">The selector name.</param>
     <param name="textState">The current text state values.</param>
     <returns>The style selector beginning.</returns>
+    <example>
+      <code>
+        // Root Method Begin
+        var textState = new TextState();
+
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder();
+
+        // Example Method:
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Defaults: addIndent = true, allowNewLine = true.
+        var result = hb.GetBeginSelector("tr", textState);
+
+        // result:
+        // tr {
+      </code>
+    </example>
   </GetBeginSelector>
   <GetCreate>
     <summary>
@@ -679,15 +824,19 @@
     </remarks>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.GetCreate("head");
-        result += hb.GetEnd("head");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        // Defaults: close = true.
+        hb.Create("head", null, textState);
+        var result = hb.ToString();
 
         // result:
-        // &amp;lt;head&amp;gt;
-        // &amp;lt;/head&amp;gt;
+        // &amp;lt;head&amp;gt;&amp;lt;/head&amp;gt;
       </code>
     </example>
   </GetCreate>
@@ -707,14 +856,18 @@
     </remarks>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.GetCreate("head");
-        result += hb.GetEnd("head");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        // Defaults: close = true.
+        hb.End("head", textState);
+        var result = hb.ToString();
 
         // result:
-        // &amp;lt;head&amp;gt;
         // &amp;lt;/head&amp;gt;
       </code>
     </example>
@@ -728,13 +881,17 @@
     <returns>The &lt;link&gt; element.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.GetLink("fileName.css");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var result = hb.Link("File.css", textState);
 
         // result:
-        // &amp;lt;link rel="stylesheet" type="text/css" href=fileName.css /&amp;gt;
+        // &amp;lt;link rel="stylesheet" type="text/css" href="File.css" /&amp;gt;
       </code>
     </example>
   </GetLink>
@@ -748,13 +905,18 @@
     <returns>The &amp;lt;meta&amp;gt; element.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.GetMeta("description", "Metas");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var content = "width=device-width initial-scale=1";
+        var result = hb.Meta("viewport", content, textState);
 
         // result:
-        // &amp;lt;meta name="description" content="Metas"  /&amp;gt;
+        // &amp;lt;meta name="viewport" content="width=device-width initial-scale=1" /&amp;gt;
       </code>
     </example>
   </GetMeta>
@@ -770,14 +932,20 @@
     <returns>The &amp;lt;meta&amp;gt; elements.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.GetMetas("Author", null, "Metas", );
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var result = hb.GetMetas("Mr. Smith", textState, "The Description");
 
         // result:
-        // &amp;lt;meta name="description" content="Metas"  /&amp;gt;
-        // &amp;lt;meta name="author" content="Author"  /&amp;gt;
+        // &amp;lt;meta charset="utf-8" /&amp;gt;
+        // &amp;lt;meta name="description" content="The Description" /&amp;gt;
+        // &amp;lt;meta name="author" content="Mr. Smith" /&amp;gt;
+        // &amp;lt;meta name="viewport" content="width=device-width initial-scale=1" /&amp;gt;
       </code>
     </example>
   </GetMetas>
@@ -790,13 +958,17 @@
     <returns>The &amp;lt;script&amp;gt; element.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.GetScript("fileName.js");
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var result = hb.Script("File.js", textState);
 
         // result:
-        // &amp;lt;script src="fileName.js"&amp;gt;&amp;lt;&amp;gt;
+        // &amp;lt;script src="File.js"&amp;gt;&amp;lt;&amp;gt;
       </code>
     </example>
   </GetScript>
@@ -811,22 +983,29 @@
     <returns>The added HTML beginning text.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
         var copyright = new string[]
         {
-          "Copyright Line 1",
-          "Copyright Line 2",
+          "Copyright (c) First Line",
+          "Second Line",
         };
-        hb.HTMLBegin(null, copyright, "fileName.html");
+        var fileName = "File.html";
+        hb.HTMLBegin(textState, copyright, fileName);
         var result = hb.ToString();
 
         // result:
+
+        // result:
         // &amp;lt;!DOCTYPE html&amp;gt;
-        // &amp;lt;!-- Copyright Line 1 --&amp;gt;
-        // &amp;lt;!-- Copyright Line 1 --&amp;gt;
-        // &amp;lt;!-- fileName.html --&amp;gt;
+        // &amp;lt;!-- Copyright (c) First Line --&amp;gt;
+        // &amp;lt;!-- Second Line --&amp;gt;
+        // &amp;lt;!-- File.html --&amp;gt;
         // &amp;lt;html lang="en" xmlns="http://www.w3.org/1999/xhtml"&amp;gt;
         // &amp;lt;head&amp;gt;
       </code>
@@ -836,28 +1015,33 @@
   <GetHTMLBegin>
     <summary>
       Gets the HTML beginning up to and including &amp;lt;head&amp;gt;.
-  </summary>
+    </summary>
     <param name="textState">The current text state values.</param>
     <param name="copyright">The copyright array.</param>
     <param name="fileName">The HTML file name.</param>
     <returns>The HTML beginning text.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
         var copyright = new string[]
         {
-          "Copyright Line 1",
-          "Copyright Line 2",
+          "Copyright (c) First Line",
+          "Second Line",
         };
-        var result = hb.GetHTMLBegin(null, copyright, "fileName.html");
+        var fileName = "File.html";
+        var result = hb.GetHTMLBegin(textState, copyright, fileName);
 
         // result:
         // &amp;lt;!DOCTYPE html&amp;gt;
-        // &amp;lt;!-- Copyright Line 1 --&amp;gt;
-        // &amp;lt;!-- Copyright Line 1 --&amp;gt;
-        // &amp;lt;!-- fileName.html --&amp;gt;
+        // &amp;lt;!-- Copyright (c) First Line --&amp;gt;
+        // &amp;lt;!-- Second Line --&amp;gt;
+        // &amp;lt;!-- File.html --&amp;gt;
         // &amp;lt;html lang="en" xmlns="http://www.w3.org/1999/xhtml"&amp;gt;
         // &amp;lt;head&amp;gt;
       </code>
@@ -871,11 +1055,15 @@
     <returns>The HTML end tags.</returns>
     <example>
       <code>
+        // Root Method Begin
+        var textState = new TextState();
+
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        var hb = new HTMLBuilder(textState);
 
-        var result = hb.GetHTMLEnd();
-
+        // Example Method:
+        var result = hb.GetHTMLEnd(textState);
+        
         // result:
         // &amp;lt;/body&amp;gt;
         // &amp;lt;/html&amp;gt;
@@ -891,6 +1079,28 @@
     <param name="author">The author.</param>
     <param name="description">The description.</param>
     <returns>The common HTML head elements.</returns>
+    <example>
+      <code>
+        // Root Method Begin
+        var textState = new TextState();
+
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var title = "The Title";
+        var author = "Mr. Smith";
+        var description = "The Description";
+        // Defaults: title = null, author = null, description = null.
+        var result = hb.GetHTMLHead(textState, title, author, description);
+
+        // result:
+        // &amp;lt;title&amp;gt;The Title&amp;lt;/title&amp;gt;r
+        // &amp;lt;meta name="description" content="The Description" /&amp;gt;
+        // &amp;lt;meta name="author" content="Mr. Smith" /&amp;gt;
+        // &amp;lt;meta name="viewport" content="width=device-width initial-scale=1" /&amp;gt;
+      </code>
+    </example>
   </GetHTMLHead>
   <!-- Get Element Attribs Methods (3) -->
   <Attribs>
@@ -900,6 +1110,25 @@
     <param name="className">The class attribute.</param>
     <param name="id">The id attribute.</param>
     <returns>The common element attributes collection.</returns>
+    <example>
+      <code>
+        // Root Method Begin
+        var textState = new TextState();
+
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var className = "className";
+        var id = "id";
+        Attributes attribs = hb.Attribs(className, id);
+
+        // result:
+        // List&amp;lt;string&amp;gt;()
+        // {
+        //   { "className", "id" },
+        // };
+      </code>
+    </example>
   </Attribs>
   <StartAttribs>
     <summary>
@@ -908,17 +1137,18 @@
     <returns>The HTML start attributes.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.StartAttribs();
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var attribs = hb.StartAttribs();
+
+        var result = hb.GetAttribs(attribs, textState);
 
         // result:
-        var result = new Attributes()
-        {
-          { "lang", "en" },
-          { "xmlns", "http://www.w3.org/1999/xhtml" },
-        };
+        // lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml"
       </code>
     </example>
   </StartAttribs>
@@ -934,18 +1164,22 @@
     <returns>The common table attributes.</returns>
     <example>
       <code>
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuider();
+        // Root Method Begin
+        var textState = new TextState();
 
-        var result = hb.TableAttribs();
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var border = 1;
+        var cellspacing = 2;
+        var cellpadding = 3;
+        // Defaults: border = 1, cellspacing = 0, cellpadding = 2.
+        var attribs = hb.TableAttribs(border, cellspacing, cellpadding);
+
+        var result = hb.GetAttribs(attribs, textState);
 
         // result:
-        var result = new Attributes()
-        {
-          { "border", "1" },
-          { "cellspacing", "0" },
-          { "cellpadding", "2" },
-        };
+        // border="1" cellspacing="2" cellpadding="3"
       </code>
     </example>
   </TableAttribs>
