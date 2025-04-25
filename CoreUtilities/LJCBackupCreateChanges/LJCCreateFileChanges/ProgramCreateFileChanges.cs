@@ -115,12 +115,14 @@ namespace LJCCreateFileChanges
     {
       var mainPath = @"C:\Users\Les\Documents\Visual Studio 2022";
       sourcePath = $@"{mainPath}\LJCProjectsDev";
-      targetPath = $@"{mainPath}\LJCProjects_Stage";
+      targetPath = $@"{mainPath}\LJCProjects";
       changeFileSpec = $@"{mainPath}\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\ChangeFile.txt";
       multiFilter = "*.cs|*.cproj|*.sln|*.config|*.cmd|*.txt";
       skipFiles = "ChangeFile.txt|BuildAll.cmd|ClearBuild.cmd|UpdateAll.cmd";
 
-      var fileSpec = "CreateFileChangesDefaults.txt";
+      // *** Next Line *** Change
+      //var fileSpec = "CreateFileChangesDefaults.txt";
+      var fileSpec = "CreateFileChangesDefaultsWeb.txt";
       if (File.Exists(fileSpec))
       {
         string[] lines = File.ReadAllLines(fileSpec);

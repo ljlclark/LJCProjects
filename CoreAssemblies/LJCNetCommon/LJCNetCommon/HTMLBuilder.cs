@@ -5,7 +5,8 @@ using System.Text;
 
 namespace LJCNetCommon
 {
-  /// <summary>Provides methods for creating HTML text.</summary>
+  // Provides methods for creating HTML text.
+  /// <include path='items/HTMLBuilder/*' file='Doc/HTMLBuilder.xml'/>
   public class HTMLBuilder
   {
     #region Constructors

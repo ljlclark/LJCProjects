@@ -81,6 +81,12 @@ namespace LJCCreateFileChangesLib
       {
         for (int index = 0; index < sourceLines.Length; index++)
         {
+          //if (sourceLines[index].Contains("Generated ")
+          //  || targetLines[index].Contains("Generated "))
+          //{
+          //  int i = 0;
+          //}
+
           if (sourceLines[index] != targetLines[index]
             && !sourceLines[index].StartsWith("<!-- Generated"))
           {

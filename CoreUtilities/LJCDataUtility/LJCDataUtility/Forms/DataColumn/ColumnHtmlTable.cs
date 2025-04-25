@@ -124,17 +124,8 @@ namespace LJCDataUtility
       hb.Text(createText, NoIndent);
       hb.End("head", textState, NoIndent);
       hb.Begin("body", textState, null, NoIndent);
-      var attribs = hb.Attribs("page");
-      hb.Begin("div", textState, attribs);
-
-      // Header
-      hb.Create("br", null, textState, isEmpty: true);
-      attribs = hb.Attribs(id: "Header");
-      hb.Begin("div", textState, attribs);
-      attribs = hb.Attribs(id: "Title");
-      hb.Create("div", "Data Columns", textState, attribs);
-      hb.End("div", textState);
-      hb.Create("br", null, textState, isEmpty: true);
+      hb.Text(GetPage(textState), NoIndent);
+      hb.Text(GetHeader("Data Columns", textState), NoIndent);
 
       // HTML table.
       var dbResult = GetResult();
@@ -147,6 +138,33 @@ namespace LJCDataUtility
       hb.Text(createText, NoIndent);
       var retValue = hb.ToString();
       return retValue;
+    }
+
+    private string GetHeader(string text, TextState textState)
+    {
+      var hb = new HTMLBuilder(textState);
+
+      // Adds indents based on textState
+      hb.Create("br", null, textState, isEmpty: true);
+      var attribs = hb.Attribs(id: "Header");
+      hb.Begin("div", textState, attribs);
+      attribs = hb.Attribs(id: "Title");
+      hb.Create("div", text, textState, attribs);
+      hb.End("div", textState);
+      hb.Create("br", null, textState, isEmpty: true);
+      var retHeader = hb.ToString();
+      return retHeader;
+    }
+
+    private string GetPage(TextState textState)
+    {
+      var hb = new HTMLBuilder(textState);
+
+      // Adds indents based on textState
+      var attribs = hb.Attribs("page");
+      hb.Begin("div", textState, attribs);
+      var retPage = hb.ToString();
+      return retPage;
     }
     #endregion
 
