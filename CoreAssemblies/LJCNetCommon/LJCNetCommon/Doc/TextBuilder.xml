@@ -3,6 +3,55 @@
 <!-- Licensed under the MIT License. -->
 <!-- TextBuilder.xml -->
 <items>
+  <TextBuilder>
+    <summary>
+      Provides methods for creating text.
+    </summary>
+    <remarks>
+      The TextBuilder class is designed for creating text. It is similar
+      in principle to the StringBuilder class which is designed for creating
+      strings.&lt;br /&gt;
+      &lt;br /&gt;
+
+      The TextBuilder class - like the StringBuilder class - stores the text
+      internally. The text is retrieved with the ToString() method.&lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;b&gt;Add Text Methods&lt;/b&gt;&lt;br /&gt;
+      The "Add" methods are similar to StringBuilder methods:&lt;br /&gt;
+      AddLine() - StringBuilder.AppendLine()&lt;br /&gt;
+      AddText() - StringBuilder.Append()&lt;br /&gt;
+      "Add" methods add text to the builder unmodified except for AddLine()
+      which appends a newline.&lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;b&gt;Append Text Methods&lt;/b&gt;&lt;br /&gt;
+      Item(), Line(), Text()&lt;br /&gt;
+      "Append" methods add the potentially indented and wrapped text to the
+      builder.&lt;br /&gt;
+      The Text() method creates the added text without an ending newline This
+      behavior is done for consistency and it allows the developer to append to
+      the existing text.&lt;br /&gt;
+      "Append" methods start the text with a newline if the builder already has
+      text, param allowNewLine = true and builder text does not end with a
+      newline.&lt;br /&gt;
+      The Line() and Text() methods should have the addIndent property set to
+      false if it applies text retrieved with a "Get" method as the "Get" method
+      has already applied the indent.&lt;br /&gt;
+      &lt;br /&gt;
+
+      The AddIndent() method manually controls the current indent count.
+      The indent string length is calculated with the properties
+      (IndentCount * IndentCharCount) and can be retrieved with the
+      IndentLength property.&lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;b&gt;Get Text Methods&lt;/b&gt;&lt;br /&gt;
+      GetItem(), GetLine(), GetText()&lt;br /&gt;
+      All "Get" methods create and return the potentialy indented and
+      wrapped text but do not add it to the builder.&lt;br /&gt;
+    </remarks>
+  </TextBuilder>
   <!-- Data Class Methods 1 -->
   <ToString>
     <summary>
@@ -123,7 +172,7 @@
         var tb = new TextBuilder();
 
         // Defaults: IsFirst = true, Delimiter = ", ".
-        for (int index = 0; index < 14; index++)
+        for (int index = 0; index &lt; 14; index++)
       {
         // Example Method
         var text = $"{index}**-";

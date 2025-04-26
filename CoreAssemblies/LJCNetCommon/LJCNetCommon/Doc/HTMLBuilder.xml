@@ -12,52 +12,78 @@
       in principle to the StringBuilder class which is designed for creating
       strings.&lt;br /&gt;
       &lt;br /&gt;
+      
       The HTMLBuilder class - like the StringBuilder class - stores the text
       internally. The text is retrieved with the ToString() method.&lt;br /&gt;
       &lt;br /&gt;
-      The following "Append" methods are similar to StringBuilder methods:
-      &lt;br /&gt;
+      
+      &lt;b&gt;Add Text Methods&lt;/b&gt;&lt;br /&gt;
+      The "Add" methods are similar to StringBuilder methods:&lt;br /&gt;
       AddLine() - StringBuilder.AppendLine()&lt;br /&gt;
       AddText() - StringBuilder.Append()&lt;br /&gt;
-      Stores text unmodified except for AddLine() which appends a newline.
+      "Add" methods add text to the builder unmodified except for AddLine()
+      which appends a newline.&lt;br /&gt;
       &lt;br /&gt;
-      &lt;br /&gt;
-      Append Text Methods&lt;br /&gt;
+
+      &lt;b&gt;Append Text Methods&lt;/b&gt;&lt;br /&gt;
       Line(), Text()&lt;br /&gt;
-      Stores the potentially indented and wrapped text.&lt;br /&gt;
-      All "Append" methods leave the added text without an ending newline
-      except for the Line() method which appends a newline. This behavior is
-      done for consistency and it allows the developer to append to the
-      existing text.&lt;br /&gt;
+      "Append" methods add the potentially indented and wrapped text to the
+      builder.&lt;br /&gt;
+      The Text() method creates the added text without an ending newline This
+      behavior is done for consistency and it allows the developer to append to
+      the existing text.&lt;br /&gt;
+      "Append" methods start the text with a newline if the builder already has
+      text, param allowNewLine = true and builder text does not end with a
+      newline.&lt;br /&gt;
+      The Line() and Text() methods should have the addIndent property set to
+      false if it applies text retrieved with a "Get" method as the "Get" method
+      has already applied the indent.&lt;br /&gt;
       &lt;br /&gt;
+      
       The AddIndent() method manually controls the current indent count.
       The indent string length is calculated with the properties
       (IndentCount * IndentCharCount) and can be retrieved with the
       IndentLength property.&lt;br /&gt;
       &lt;br /&gt;
-      Get Text Methods&lt;br /&gt;
+
+      &lt;b&gt;Get Text Methods&lt;/b&gt;&lt;br /&gt;
       GetLine(), GetText()&lt;br /&gt;
-      All "GetText" methods create and return the potentialy indented and
+      All "Get" methods create and return the potentialy indented and
       wrapped text but do not add it to the builder.&lt;br /&gt;
       &lt;br /&gt;
-      Append Element Methods&lt;br /&gt;
+
+      &lt;b&gt;Append Element Methods&lt;/b&gt;&lt;br /&gt;
       Begin(), Create(), End()&lt;br /&gt;
       These methods append element tags and content. Begin() automatically
       increments the IndentCount by 1. Create() also increments the IndentCount
       by 1 if the isEmpty parameter is false and the close parameter is false.
       End() automatically decrements the IndentCount by 1 if the IndentCount
       is currently greater than zero.&lt;br /&gt;
+      The "Append" element methods create the added text without an ending
+      newline. This behavior is done for consistency and it allows the developer
+      to append to the existing text.&lt;br /&gt;
+      "Append" methods start the text with a newline if the builder already has
+      text, param allowNewLine = true and builder text does not end with a
+      newline.&lt;br /&gt;
       &lt;br /&gt;
-      Other Append Element Methods&lt;br /&gt;
+
+      &lt;b&gt;Other Append Element Methods&lt;/b&gt;&lt;br /&gt;
       Link(), Meta(), Metas(), Script()&lt;br /&gt;
       These methods also append elements but do not change the IndentCount
       value.&lt;br /&gt;
+      The "Append" element methods create the added text without an ending
+      newline. This behavior is done for consistency and it allows the developer
+      to append to the existing text.&lt;br /&gt;
+      "Append" methods start the text with a newline if the builder already has
+      text, param allowNewLine = true and builder text does not end with a
+      newline.&lt;br /&gt;
       &lt;br /&gt;
-      Get Element Methods&lt;br /&gt;
+
+      &lt;b&gt;Get Element Methods&lt;/b&gt;&lt;br /&gt;
       GetBegin(), GetCreate(), GetEnd(), GetLink(), GetMeta(), GetMetas()
       , GetScript()&lt;br /&gt;
-      All "GetText" methods create and return the potentialy indented and
-      wrapped text but do not add it to the builder.
+      All "Get" methods create and return the potentialy indented and wrapped
+      text but do not add it to the builder.
     </remarks>
   </HTMLBuilder>
   <!-- Data Class Methods -->

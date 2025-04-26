@@ -3,6 +3,76 @@
 <!-- Licensed under the MIT License. -->
 <!-- XMLBuilder.xml -->
 <items>
+  <XMLBuilder>
+    <summary>
+      Provides methods for creating XML text.
+    </summary>
+    <remarks>
+      The XMLBuilder class is designed for creating XML text. It is similar
+      in principle to the StringBuilder class which is designed for creating
+      strings.&lt;br /&gt;
+      &lt;br /&gt;
+
+      The XMLBuilder class - like the StringBuilder class - stores the text
+      internally. The text is retrieved with the ToString() method.&lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;b&gt;Add Text Methods&lt;/b&gt;&lt;br /&gt;
+      The "Add" methods are similar to StringBuilder methods:&lt;br /&gt;
+      AddLine() - StringBuilder.AppendLine()&lt;br /&gt;
+      AddText() - StringBuilder.Append()&lt;br /&gt;
+      "Add" methods add text to the builder unmodified except for AddLine()
+      which appends a newline.&lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;b&gt;Append Text Methods&lt;/b&gt;&lt;br /&gt;
+      Line(), Text()&lt;br /&gt;
+      "Append" methods add the potentially indented and wrapped text to the
+      builder.&lt;br /&gt;
+      The Text() method creates the added text without an ending newline This
+      behavior is done for consistency and it allows the developer to append to
+      the existing text.&lt;br /&gt;
+      "Append" methods start the text with a newline if the builder already has
+      text, param allowNewLine = true and builder text does not end with a
+      newline.&lt;br /&gt;
+      The Line() and Text() methods should have the addIndent property set to
+      false if it applies text retrieved with a "Get" method as the "Get" method
+      has already applied the indent.&lt;br /&gt;
+      &lt;br /&gt;
+
+      The AddIndent() method manually controls the current indent count.
+      The indent string length is calculated with the properties
+      (IndentCount * IndentCharCount) and can be retrieved with the
+      IndentLength property.&lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;b&gt;Get Text Methods&lt;/b&gt;&lt;br /&gt;
+      GetLine(), GetText()&lt;br /&gt;
+      All "Get" methods create and return the potentialy indented and
+      wrapped text but do not add it to the builder.&lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;b&gt;Append Element Methods&lt;/b&gt;&lt;br /&gt;
+      Begin(), Create(), End()&lt;br /&gt;
+      These methods append element tags and content. Begin() automatically
+      increments the IndentCount by 1. Create() also increments the IndentCount
+      by 1 if the isEmpty parameter is false and the close parameter is false.
+      End() automatically decrements the IndentCount by 1 if the IndentCount
+      is currently greater than zero.&lt;br /&gt;
+      The "Append" element methods create the added text without an ending
+      newline. This behavior is done for consistency and it allows the developer
+      to append to the existing text.&lt;br /&gt;
+      "Append" methods start the text with a newline if the builder already has
+      text, param allowNewLine = true and builder text does not end with a
+      newline.&lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;b&gt;Get Element Methods&lt;/b&gt;&lt;br /&gt;
+      GetBegin(), GetCreate(), GetEnd()&lt;br /&gt;
+      All "Get" methods create and return the potentialy indented and wrapped
+      text but do not add it to the builder.
+    </remarks>
+  </XMLBuilder>
   <!-- Data Class Methods -->
   <ToString>
     <summary>

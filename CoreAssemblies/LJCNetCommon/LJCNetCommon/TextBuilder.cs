@@ -5,7 +5,8 @@ using System.Text;
 
 namespace LJCNetCommon
 {
-  /// <summary>Provides methods for creating text.</summary>
+  // Provides methods for creating text.
+  /// <include path='items/TextBuilder/*' file='Doc/TextBuilder.xml'/>
   public class TextBuilder
   {
     #region Constructors
