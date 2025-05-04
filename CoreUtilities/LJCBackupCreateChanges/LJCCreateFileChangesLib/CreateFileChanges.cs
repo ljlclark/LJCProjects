@@ -18,17 +18,17 @@ namespace LJCCreateFileChangesLib
     /// <summary>
     /// Initializes an object instance with the specified values.
     /// </summary>
-    /// <param name="sourcePath">The Source path.</param>
-    /// <param name="targetPath">The Target path.</param>
-    /// <param name="changeFileSpec">The ChangeFile spec.</param>
-    /// <param name="multiFilter">The multiFilter value.</param>
-    public CreateFileChanges(string sourcePath, string targetPath
-      , string changeFileSpec, string multiFilter)
+    /// <param name="sourceRoot">The Source path.</param>
+    /// <param name="targetRoot">The Target path.</param>
+    /// <param name="changesFileSpec">The ChangeFile spec.</param>
+    /// <param name="includeFilter">The multiFilter value.</param>
+    public CreateFileChanges(string sourceRoot, string targetRoot
+      , string changesFileSpec, string includeFilter)
     {
-      mSourcePath = sourcePath;
-      mTargetPath = targetPath;
-      mChangeFileSpec = changeFileSpec;
-      mMultiFilter = multiFilter;
+      mSourceRoot = sourceRoot;
+      mTargetRoot = targetRoot;
+      mChangesFileSpec = changesFileSpec;
+      mIncludeFilter = includeFilter;
       SkipFiles = new List<string>();
     }
     #endregion
@@ -38,12 +38,12 @@ namespace LJCCreateFileChangesLib
     /// <summary>Runs the create FileChanges process.</summary>
     public void Run()
     {
-      if (File.Exists(mChangeFileSpec))
+      if (File.Exists(mChangesFileSpec))
       {
-        File.Delete(mChangeFileSpec);
+        File.Delete(mChangesFileSpec);
       }
 
-      string[] filters = mMultiFilter.Split('|');
+      string[] filters = mIncludeFilter.Split('|');
       foreach (var filter in filters)
       {
         DeleteTargetNoSourceFiles(filter);
@@ -59,9 +59,10 @@ namespace LJCCreateFileChangesLib
     {
       bool retValue = true;
 
-      if (!HasLine(mChangeFileSpec, fileChange.Text()))
+      // Add if line is not already there.
+      if (!HasLine(mChangesFileSpec, fileChange.Text()))
       {
-        File.AppendAllText(mChangeFileSpec, $"{fileChange.Text()}\r\n");
+        File.AppendAllText(mChangesFileSpec, $"{fileChange.Text()}\r\n");
       }
       return retValue;
     }
@@ -87,6 +88,7 @@ namespace LJCCreateFileChangesLib
           //  int i = 0;
           //}
 
+          // Do not consider lines that start with Generated as different?
           if (sourceLines[index] != targetLines[index]
             && !sourceLines[index].StartsWith("<!-- Generated"))
           {
@@ -105,17 +107,17 @@ namespace LJCCreateFileChangesLib
     // Creates a "Copy" FileChange command for missing or changed files.
     private void CopyMissingOrChangedFiles(string filter)
     {
-      var folders = mSourcePath.Split('\\');
+      var folders = mSourceRoot.Split('\\');
       var sourceStartFolder = folders[folders.Length - 1];
       var filterPath = GetFilterPath(ref filter);
 
       var missingFolders = "MissingFolders.txt";
       File.Delete(missingFolders);
-      var sourceSpecs = Directory.GetFiles(mSourcePath, filter
+      var sourceSpecs = Directory.GetFiles(mSourceRoot, filter
         , SearchOption.AllDirectories);
       foreach (var sourceSpec in sourceSpecs)
       {
-        // File spec does not end with the filter path.
+        // If filter has path, skip file that does not end with the filter path.
         if (NetString.HasValue(filterPath)
           && !HasFilterPath(sourceSpec, filterPath))
         {
@@ -123,8 +125,10 @@ namespace LJCCreateFileChangesLib
         }
 
         // Skip file for target folders that do not exist.
-        var targetSpec = GetToSpec(mTargetPath, sourceSpec, sourceStartFolder
+        var targetSpec = GetToSpec(mTargetRoot, sourceSpec, sourceStartFolder
           , out string codePath);
+
+        // Skip updates to target folders that do not exist.
         var filePath = Path.GetDirectoryName(targetSpec);
         if (!Directory.Exists(filePath))
         {
@@ -159,22 +163,22 @@ namespace LJCCreateFileChangesLib
     // Creates a "Delete" FileChange command for target files not in the source.
     private void DeleteTargetNoSourceFiles(string filter)
     {
-      var folders = mTargetPath.Split('\\');
+      var folders = mTargetRoot.Split('\\');
       var targetStartFolder = folders[folders.Length - 1];
       var filterPath = GetFilterPath(ref filter);
 
-      var targetSpecs = Directory.GetFiles(mTargetPath, filter
+      var targetSpecs = Directory.GetFiles(mTargetRoot, filter
         , SearchOption.AllDirectories);
       foreach (var targetSpec in targetSpecs)
       {
-        // File spec does not end with the filter path.
+        // If filter has path, skip file that does not end with the filter path.
         if (NetString.HasValue(filterPath)
           && !HasFilterPath(targetSpec, filterPath))
         {
           continue;
         }
 
-        var sourceSpec = GetToSpec(mSourcePath, targetSpec, targetStartFolder
+        var sourceSpec = GetToSpec(mSourceRoot, targetSpec, targetStartFolder
           , out string _);
         if (!File.Exists(sourceSpec))
         {
@@ -314,10 +318,10 @@ namespace LJCCreateFileChangesLib
 
     #region Class Data
 
-    private readonly string mSourcePath;
-    private readonly string mTargetPath;
-    private readonly string mChangeFileSpec;
-    private readonly string mMultiFilter;
+    private readonly string mSourceRoot;
+    private readonly string mTargetRoot;
+    private readonly string mChangesFileSpec;
+    private readonly string mIncludeFilter;
     #endregion
   }
 }

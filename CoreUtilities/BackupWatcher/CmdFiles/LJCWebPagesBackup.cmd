@@ -9,7 +9,8 @@ rem ** Set the code top-level path.
 set mainPath="C:\Users\Les\Documents\Visual Studio 2022
 
 rem ** Set the source (from) path.
-set sourcePath=%mainPath%\WebSitesDev\CodeDoc\LJCCodeDoc"
+set startFolder=LJCCodeDoc
+set sourcePath=%mainPath%\WebSitesDev\CodeDoc\%startFolder%"
 
 rem ** Set the change file path and name.
 set changeFilePath=%mainPath%\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles
@@ -27,6 +28,7 @@ rem ** Delete the previous changes file PagesChangeFile.txt.
 if exist %changeFileSpec% del %changeFileSpec%
 
 set binPath=%mainPath%\LJCProjectsDev\CoreUtilities\BackupWatcher\Bin
+
 rem ** Create the new changes file PagesChangeFile.txt.
 echo %binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%
 %binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%

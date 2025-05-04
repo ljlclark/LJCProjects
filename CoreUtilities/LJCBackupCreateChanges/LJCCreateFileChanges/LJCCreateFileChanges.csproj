@@ -53,7 +53,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\CreateFileChangesDefaults.txt" />
+    <Content Include="bin\Debug\ChangesArgsLJCPHPProjects.txt" />
+    <Content Include="bin\Debug\ChangesArgsLJCProjects.txt" />
     <Content Include="bin\Debug\CreateFileChangesDefaultsGit.txt" />
     <Content Include="bin\Debug\CreateFileChangesDefaultsPassport.txt" />
     <Content Include="bin\Debug\CreateFileChangesDefaultsStage.txt" />
