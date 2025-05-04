@@ -18,7 +18,7 @@ set changeFileSpec=%changeFilePath%\PHPChangeFile.txt"
 
 rem ** Set the files to copy and explicit skips.
 set multiFilter="ReadMe*.txt|*.cmd|*.php"
-set skipFiles="index.html|CodeDoc.html"
+set skipFiles=
 
 echo -----
 set targetFolder=
