@@ -6,11 +6,11 @@ reused by customizing certain values in the file. It could be a simple legal
 document, marketing mailer, routine negative for a radiology department or a
 software developer's code.
                                                                             |
-In some cases we could use a simple form with blanks that are filled out
-manually when  needed. However, sometimes the document needs to look like it
-was done especially for the occasion or it needs to be in a text file
-format. In these cases a common approach is to create a template with the
-fixed text and placeholders that indicate where the custom data should be
+In some cases we could use a simple preprinted form with blanks that are
+filled out manually when  needed. However, sometimes the document needs to
+look like it was done especially for the occasion or it needs to be in a text
+file format. In these cases a common approach is to create a template with
+the fixed text and placeholders that indicate where the custom data should be
 inserted. Then we want to replace those placeholders with the custom data
 and generate the customized text file.
                                                                             |
