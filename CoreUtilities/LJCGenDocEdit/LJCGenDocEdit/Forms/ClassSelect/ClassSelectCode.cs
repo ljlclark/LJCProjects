@@ -27,6 +27,7 @@ namespace LJCGenDocEdit
       StartChangeProcessing();
       Cursor = Cursors.Default;
     }
+    #endregion
 
     #region Setup Support
 
@@ -111,7 +112,6 @@ namespace LJCGenDocEdit
 
     // Gets or sets the ControlValues item.
     private ControlValues ControlValues { get; set; }
-    #endregion
     #endregion
 
     #region Item Change Processing

@@ -53,9 +53,8 @@ namespace LJCGenDocEdit
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
-      //*** Next Statement*** Delete 1 / 17 / 25
-      //FormCommon.CreateGradient(e.Graphics, ClientRectangle, BeginColor
-      //  , EndColor);
+      FormCommon.CreateGradient(e.Graphics, ClientRectangle, BeginColor
+        , EndColor);
     }
     #endregion
 
@@ -255,6 +254,12 @@ namespace LJCGenDocEdit
       if (classGroup != null)
       {
         retValue = classGroup.Heading;
+        // *** Begin *** Add 5/5/25
+        if (!NetString.HasValue(retValue))
+        {
+          retValue = classGroup.HeadingTextCustom;
+        }
+        // *** End   *** Add
       }
       return retValue;
     }
@@ -455,7 +460,7 @@ namespace LJCGenDocEdit
         LJCAssemblyID = LJCAssemblyID,
         LJCGroupID = LJCGroupID
       };
-      list.LJCChange += List_LJCChange;
+      list.LJCChange += ListLJCChange;
       if (DialogResult.OK == list.ShowDialog())
       {
         if (1 == list.ClassGrid.SelectedRows.Count)
@@ -466,7 +471,7 @@ namespace LJCGenDocEdit
     }
 
     // Event handler from selection list.
-    private void List_LJCChange(object sender, EventArgs e)
+    private void ListLJCChange(object sender, EventArgs e)
     {
       // Save if more than one row is selected.
       if (sender is ClassSelect list

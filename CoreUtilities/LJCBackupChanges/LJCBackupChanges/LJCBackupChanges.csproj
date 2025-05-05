@@ -59,7 +59,6 @@
   <ItemGroup>
     <Content Include="bin\Debug\BackupChangesDefaults.txt" />
     <Content Include="bin\Debug\BackupChangesDefaultsStage.txt" />
-    <Content Include="Doc\BackupChanges.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJCBackupChangesLib\LJCBackupChangesLib.csproj">

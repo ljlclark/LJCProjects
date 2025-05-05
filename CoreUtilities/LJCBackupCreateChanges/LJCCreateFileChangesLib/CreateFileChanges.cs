@@ -9,7 +9,8 @@ using System.Linq;
 
 namespace LJCCreateFileChangesLib
 {
-  /// <summary>The Create FileChanges class.</summary>
+  // The Create FileChanges class.
+  /// <include path='items/CreateFileChanges/*' file='Doc/ProjectCreateFileChanges.xml'/>
   public class CreateFileChanges
   {
     #region Constructors
