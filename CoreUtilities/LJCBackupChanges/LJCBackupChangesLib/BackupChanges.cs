@@ -8,29 +8,31 @@ using System.IO;
 namespace LJCBackupChangesLib
 {
   /// <summary>The Backup Changes class.</summary>
+  /// <include path='items/BackupChanges/*'
+  ///   file='Doc/ProjectBackupChanges.xml'/>
   public class BackupChanges
   {
     // Initializes an object instance.
     /// <include path='items/BackupChangesC/*' file='Doc/BackupChanges.xml'/>
-    public BackupChanges(string startFolder, string changeFileSpec)
+    public BackupChanges(string startFolder, string changeFilespec)
     {
       mStartFolder = startFolder;
-      mChangeFileSpec = changeFileSpec;
+      mChangeFilespec = changeFilespec;
     }
 
     #region Methods
 
     // Applies the change commands.
-    /// <include path='items/Apply/*' file='Doc/BackupChanges.xml'/>
-    public void Run(string targetPath)
+    /// <include path='items/Run/*' file='Doc/BackupChanges.xml'/>
+    public void Run(string targetRoot)
     {
-      if (File.Exists(mChangeFileSpec))
+      if (File.Exists(mChangeFilespec))
       {
         string log = "BackupLog.txt";
         File.WriteAllText(log, "");
-        TargetPath = targetPath;
+        TargetRoot = targetRoot;
         var fileChange = new FileChange(null, null, null);
-        var lines = File.ReadAllLines(mChangeFileSpec);
+        var lines = File.ReadAllLines(mChangeFilespec);
         foreach (string line in lines)
         {
           var tokens = line.Split(',');
@@ -45,17 +47,11 @@ namespace LJCBackupChangesLib
             fileChange.ToFileSpec = tokens[2];
           }
 
-          // Testing
-          //var fileName = Path.GetFileName(fileChange.FileSpec);
-          //if ("BackupChanges.cs" == fileName)
-          //{
-          //  int i = 0;
-          //}
-          string fileSpec = fileChange.FileSpec;
-          string targetFileSpec = null;
+          string filespec = fileChange.FileSpec;
+          string targetFilespec = null;
           if (fileChange.ChangeType.ToLower() != "delete")
           {
-            targetFileSpec = GetMatchFolderFileSpec(fileSpec, mStartFolder);
+            targetFilespec = GetMatchFolderFilespec(filespec, mStartFolder);
           }
           string toFileName = null;
           if (NetString.HasValue(fileChange.ToFileSpec))
@@ -66,30 +62,30 @@ namespace LJCBackupChangesLib
           switch (fileChange.ChangeType.ToLower())
           {
             case "copy":
-              if (File.Exists(fileSpec))
+              if (File.Exists(filespec))
               {
-                NetFile.CreateFolder(targetFileSpec);
-                File.Copy(fileSpec, targetFileSpec, true);
-                File.AppendAllText(log, $"copy {fileSpec}\r\n");
-                File.AppendAllText(log, $" - {targetFileSpec}\r\n");
+                NetFile.CreateFolder(targetFilespec);
+                File.Copy(filespec, targetFilespec, true);
+                File.AppendAllText(log, $"copy {filespec}\r\n");
+                File.AppendAllText(log, $" - {targetFilespec}\r\n");
               }
               break;
 
             case "delete":
-              if (File.Exists(fileSpec))
+              if (File.Exists(filespec))
               {
-                File.Delete(fileSpec);
-                File.AppendAllText(log, $"del {fileSpec}\r\n");
+                File.Delete(filespec);
+                File.AppendAllText(log, $"del {filespec}\r\n");
               }
               break;
 
             case "rename":
-              if (File.Exists(targetFileSpec))
+              if (File.Exists(targetFilespec))
               {
-                var targetToFileSpec = Path.Combine(TargetPath, toFileName);
-                File.Move(targetFileSpec, targetToFileSpec);
-                File.AppendAllText(log, $"ren {targetFileSpec}\r\n");
-                File.AppendAllText(log, $" - {targetToFileSpec}\r\n");
+                var targetToFilespec = Path.Combine(TargetRoot, toFileName);
+                File.Move(targetFilespec, targetToFilespec);
+                File.AppendAllText(log, $"ren {targetFilespec}\r\n");
+                File.AppendAllText(log, $" - {targetToFilespec}\r\n");
               }
               break;
           }
@@ -97,21 +93,18 @@ namespace LJCBackupChangesLib
       }
     }
 
-    // Creates the Target FileSpec.
-    /// <summary>
-    /// Creates the Target FileSpec.
-    /// </summary>
-    /// <param name="fileSpec"></param>
-    /// <param name="startFolder">The start folder of the matching path.</param>
-    /// <returns></returns>
-    public string GetMatchFolderFileSpec(string fileSpec, string startFolder)
+    // Creates the Target Filespec.
+    /// <include path='items/GetMatchFolderFilespec/*'
+    ///   file='Doc/BackupChanges.xml'/>
+    public string GetMatchFolderFilespec(string sourceFilespec
+      , string startFolder)
     {
       string retValue = null;
 
-      if (File.Exists(fileSpec))
+      if (File.Exists(sourceFilespec))
       {
-        retValue = TargetPath;
-        var filePath = Path.GetDirectoryName(fileSpec);
+        retValue = TargetRoot;
+        var filePath = Path.GetDirectoryName(sourceFilespec);
         var folders = filePath.Split('\\');
         for (int index = folders.Length - 1; index >= 0; index--)
         {
@@ -124,17 +117,17 @@ namespace LJCBackupChangesLib
             break;
           }
         }
-        var targetFile = Path.GetFileName(fileSpec);
+        var targetFile = Path.GetFileName(sourceFilespec);
         retValue = Path.Combine(retValue, targetFile);
       }
       return retValue;
     }
     #endregion
 
-    /// <summary></summary>
-    public string TargetPath { get; set; }
+    /// <summary>Gets or sets the TargetRoot value.</summary>
+    public string TargetRoot { get; set; }
 
-    private readonly string mChangeFileSpec;
+    private readonly string mChangeFilespec;
     private readonly string mStartFolder;
   }
 }

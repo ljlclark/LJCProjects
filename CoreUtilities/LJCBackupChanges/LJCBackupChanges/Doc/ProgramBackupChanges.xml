@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProgramBackupChanges.xml -->
+<items>
+  <Program>
+    <summary>
+      The Backup File Changes program.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The backup process runs in two parts. This is done to allow the user to
+        review the proposed changes if desired before updating the target files.
+      </para>
+      <para>
+        1. Run the LJCCreateFileChanges.exe program to create the "Changes"
+        file.&lt;br /&gt;
+        2. Run the LJCBackupChanges.exe program to perform the "Copy" and
+        "Delete" messages in the "Change" file.
+      </para>
+      <para>
+        The LJCBackupChanges.exe program's main functionality is provided in
+        the file LJCBackupChangesLib.dll, class BackupChanges.
+      </para>
+      <para>
+        The LJCBackupChanges.exe program copies files to, or deletes files from,
+        the target root folder and subfolders using a filespec based on the
+        targetRoot, each source "Changes" filespec and the startFolder
+        value.&lt;br /&gt;
+      </para>
+      <para>
+        The program takes two required parameters.
+      </para>
+      <para>
+        targetRoot - The full path to the target files root folder. The files in
+        this folder and all subfolders are the target of the backup.&lt;br /&gt;
+        The targetRoot is considered to not have a drive identifier if the
+        targetRoot does not have a colon ":" in character position 2. In this
+        case the program will prompt the user for a drive
+        identifier.&lt;br /&gt;
+        This is to support multiple external backup drives which may have
+        different drive identifier assignments.
+      </para>
+      <para>
+        startFolder - The targetFilespec is created by using the targetRoot
+        combined with the remainder of the sourceSpec starting after the
+        startFolder.
+      </para>
+    </remarks>
+  </Program>
+</items>

@@ -54,6 +54,7 @@
   <ItemGroup>
     <Content Include="bin\Debug\LJCBackupChangesLib.xml" />
     <Content Include="Doc\BackupChanges.xml" />
+    <Content Include="Doc\ProjectBackupChanges.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

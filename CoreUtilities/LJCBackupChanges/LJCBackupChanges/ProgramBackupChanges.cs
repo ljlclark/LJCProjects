@@ -8,32 +8,34 @@ using System.IO;
 
 namespace LJCBackupChanges
 {
-  // The program entry point class.
+  // The Backup File Changes program.
+  /// <include path='items/Program/*'
+  ///   file='Doc/ProgramBackupChanges.xml' />
   internal class Program
   {
     // The program entry point function.
     static void Main(string[] args)
     {
-      GetDefaults(out string targetPath, out string changeFileSpec
+      GetDefaults(out string targetRoot, out string changesFilespec
         , out string startFolder);
-      if (!GetArgs(args, ref targetPath, ref changeFileSpec, ref startFolder))
+      if (!GetArgs(args, ref targetRoot, ref changesFilespec, ref startFolder))
       {
         return;
       }
-      AddDriveLetter(ref targetPath);
-      if (HasTarget(targetPath))
+      AddDriveLetter(ref targetRoot);
+      if (HasTarget(targetRoot))
       {
-        var backupChanges = new BackupChanges(startFolder, changeFileSpec);
-        backupChanges.Run(targetPath);
+        var backupChanges = new BackupChanges(startFolder, changesFilespec);
+        backupChanges.Run(targetRoot);
       }
     }
 
     #region Private Functions
 
     // Prompts for and adds the drive letter if not included.
-    private static void AddDriveLetter(ref string targetPath)
+    private static void AddDriveLetter(ref string targetRoot)
     {
-      var driveLetter = targetPath.Substring(0, 2);
+      var driveLetter = targetRoot.Substring(0, 2);
       var hasDrive = false;
       if (':' == driveLetter[1])
       {
@@ -56,34 +58,34 @@ namespace LJCBackupChanges
       }
       if (!hasDrive)
       {
-        targetPath = $"{driveLetter}:{targetPath}";
+        targetRoot = $"{driveLetter}:{targetRoot}";
       }
     }
 
     // Gets the command line parameters.
-    private static bool GetArgs(string[] args, ref string targetPath
-      , ref string changeFileSpec, ref string startFolder)
+    private static bool GetArgs(string[] args, ref string targetRoot
+      , ref string changesFilespec, ref string startFolder)
     {
       bool retValue = true;
       if (args.Length >= 1)
       {
-        targetPath = args[0];
+        targetRoot = args[0];
       }
       if (args.Length >= 2)
       {
-        changeFileSpec = args[1];
+        changesFilespec = args[1];
       }
       if (args.Length >= 3)
       {
         startFolder = args[2];
       }
-      if (!NetString.HasValue(targetPath)
-        || !NetString.HasValue(changeFileSpec)
+      if (!NetString.HasValue(targetRoot)
+        || !NetString.HasValue(changesFilespec)
         || !NetString.HasValue(startFolder))
       {
         retValue = false;
-        var syntax = "Syntax: ProgramBackupChanges \"targetPath\"";
-        syntax += "\"changeFileSpec\" \"startFolder\"";
+        var syntax = "Syntax: ProgramBackupChanges \"targetRoot\"";
+        syntax += "\"changesFilespec\" \"startFolder\"";
         Console.WriteLine(syntax);
         Console.Write("Press ENTER to exit. ");
         Console.ReadLine();
@@ -92,13 +94,13 @@ namespace LJCBackupChanges
     }
 
     // Gets the default parameters.
-    private static void GetDefaults(out string targetPath
-      , out string changeFileSpec, out string startFolder)
+    private static void GetDefaults(out string targetRoot
+      , out string changesFilespec, out string startFolder)
     {
       string mainPath = @"C:\Users\Les\Documents\Visual Studio 2022";
-      targetPath = $@"{mainPath}\LJCProjects_Stage";
-      string changeFilePath = @"\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles";
-      changeFileSpec = $@"{mainPath}\{changeFilePath}\ChangeFile.txt";
+      targetRoot = $@"{mainPath}\LJCProjects_Stage";
+      string changeFilepath = @"\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles";
+      changesFilespec = $@"{mainPath}\{changeFilepath}\ChangeFile.txt";
       startFolder = "LJCProjectsDev";
 
       var fileSpec = "BackupChangesDefaults.txt";
@@ -115,11 +117,11 @@ namespace LJCBackupChanges
           switch (tokens[0].ToLower().Trim())
           {
             case "targetpath":
-              targetPath = tokens[1].Trim();
+              targetRoot = tokens[1].Trim();
               break;
 
             case "changefilespec":
-              changeFileSpec = tokens[1].Trim();
+              changesFilespec = tokens[1].Trim();
               break;
 
             case "startfolder":

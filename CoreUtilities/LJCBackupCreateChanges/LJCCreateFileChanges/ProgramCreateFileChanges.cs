@@ -9,7 +9,9 @@ using System.Linq;
 
 namespace LJCCreateFileChanges
 {
-  // The program entry point class.
+  // The Create File Changes program.
+  /// <include path='items/Program/*'
+  ///   file='Doc/ProgramCreateFileChanges.xml' />
   internal class Program
   {
     // The program entry point function.

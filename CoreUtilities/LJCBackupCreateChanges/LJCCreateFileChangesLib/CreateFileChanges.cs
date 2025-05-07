@@ -10,25 +10,21 @@ using System.Linq;
 namespace LJCCreateFileChangesLib
 {
   // The Create FileChanges class.
-  /// <include path='items/CreateFileChanges/*' file='Doc/ProjectCreateFileChanges.xml'/>
+  /// <include path='items/CreateFileChanges/*'
+  ///   file='Doc/ProjectCreateFileChanges.xml'/>
   public class CreateFileChanges
   {
     #region Constructors
 
-    // Initializes an object instance.
-    /// <summary>
-    /// Initializes an object instance with the specified values.
-    /// </summary>
-    /// <param name="sourceRoot">The Source path.</param>
-    /// <param name="targetRoot">The Target path.</param>
-    /// <param name="changesFileSpec">The ChangeFile spec.</param>
-    /// <param name="includeFilter">The multiFilter value.</param>
+    // Initializes an object instance with the supplied values.
+    /// <include path='items/CreateFileChangesC/*'
+    ///   file='Doc/CreateFileChanges.xml'/>
     public CreateFileChanges(string sourceRoot, string targetRoot
-      , string changesFileSpec, string includeFilter)
+      , string changesFilespec, string includeFilter)
     {
       mSourceRoot = sourceRoot;
       mTargetRoot = targetRoot;
-      mChangesFileSpec = changesFileSpec;
+      mChangesFilespec = changesFilespec;
       mIncludeFilter = includeFilter;
       SkipFiles = new List<string>();
     }
@@ -36,12 +32,13 @@ namespace LJCCreateFileChangesLib
 
     #region Public Methods
 
-    /// <summary>Runs the create FileChanges process.</summary>
+    /// <summary>Runs the create "Changes"file process.</summary>
+    /// <include path='items/Run/*' file='Doc/CreateFileChanges.xml'/>
     public void Run()
     {
-      if (File.Exists(mChangesFileSpec))
+      if (File.Exists(mChangesFilespec))
       {
-        File.Delete(mChangesFileSpec);
+        File.Delete(mChangesFilespec);
       }
 
       string[] filters = mIncludeFilter.Split('|');
@@ -61,9 +58,9 @@ namespace LJCCreateFileChangesLib
       bool retValue = true;
 
       // Add if line is not already there.
-      if (!HasLine(mChangesFileSpec, fileChange.Text()))
+      if (!HasLine(mChangesFilespec, fileChange.Text()))
       {
-        File.AppendAllText(mChangesFileSpec, $"{fileChange.Text()}\r\n");
+        File.AppendAllText(mChangesFilespec, $"{fileChange.Text()}\r\n");
       }
       return retValue;
     }
@@ -191,13 +188,13 @@ namespace LJCCreateFileChangesLib
     }
 
     // Check if text file already has a text line.
-    private bool HasLine(string fileSpec, string textLine)
+    private bool HasLine(string filespec, string textLine)
     {
       bool retValue = false;
 
-      if (File.Exists(fileSpec))
+      if (File.Exists(filespec))
       {
-        var lines = File.ReadAllLines(fileSpec);
+        var lines = File.ReadAllLines(filespec);
         for (int index = 0; index < lines.Count(); index++)
         {
           var line = lines[index];
@@ -216,12 +213,12 @@ namespace LJCCreateFileChangesLib
     // Create a 'to' file spec using the toFilePath and adding the folders and
     // file name using the fromFileSpec starting after the fromStartFolder.
     private string GetToSpec(string toFilePath
-      , string fromFileSpec, string fromStartFolder, out string codePath)
+      , string fromFilespec, string fromStartFolder, out string codePath)
     {
       var retValue = toFilePath;
 
       codePath = "";
-      var fromPath = Path.GetDirectoryName(fromFileSpec);
+      var fromPath = Path.GetDirectoryName(fromFilespec);
       var fromFolders = fromPath.Split('\\');
       for (int index = fromFolders.Length - 1; index >= 0; index--)
       {
@@ -240,7 +237,7 @@ namespace LJCCreateFileChangesLib
           break;
         }
       }
-      var fromFileName = Path.GetFileName(fromFileSpec);
+      var fromFileName = Path.GetFileName(fromFilespec);
       retValue = Path.Combine(retValue, fromFileName);
       return retValue;
     }
@@ -257,11 +254,11 @@ namespace LJCCreateFileChangesLib
     }
 
     // Checks if a file has more than one dot.
-    private bool HasExtraDots(string fileSpec, string filter)
+    private bool HasExtraDots(string filespec, string filter)
     {
       bool retValue = false;
 
-      var fileName = Path.GetFileName(fileSpec);
+      var fileName = Path.GetFileName(filespec);
       if (fileName.IndexOf(".") < fileName.Length - filter.Length
         && filter != ".config")
       {
@@ -313,7 +310,7 @@ namespace LJCCreateFileChangesLib
 
     #region Properties
 
-    /// <summary>The skip file list.</summary>
+    /// <summary>Gets or sets the skip file list.</summary>
     public List<string> SkipFiles { get; set; }
     #endregion
 
@@ -321,7 +318,7 @@ namespace LJCCreateFileChangesLib
 
     private readonly string mSourceRoot;
     private readonly string mTargetRoot;
-    private readonly string mChangesFileSpec;
+    private readonly string mChangesFilespec;
     private readonly string mIncludeFilter;
     #endregion
   }

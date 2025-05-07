@@ -19,7 +19,7 @@ namespace LJCGenDoc
     private static void Main(string[] args)
     {
       bool success = true;
-      if (args.Length < 0 || args.Length > 1)
+      if (args.Length < 1 || args.Length > 1)
       {
         success = false;
         Console.WriteLine("\r\nSyntax: LJCGenDoc.exe [outputPath]");
@@ -30,7 +30,7 @@ namespace LJCGenDoc
 
       if (success)
       {
-        var outputPath = "CodeDocTest";
+        string outputPath = null;
         if (args.Length > 0)
         {
           outputPath = args[0];
