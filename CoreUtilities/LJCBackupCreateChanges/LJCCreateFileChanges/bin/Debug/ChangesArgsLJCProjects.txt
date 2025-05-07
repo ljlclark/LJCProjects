@@ -1,5 +1,5 @@
 sourceRoot,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev
 targetRoot,C:\Users\Les\Documents\Visual Studio 2022\LJCProjects
-changesFileSpec,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\ChangesLJCProjects.txt
+changesFilespec,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\ChangesLJCProjects.txt
 includeFilter,*.cs|*.csproj|*.sln|*.config|*.cmd|*.txt|Doc\*.xml
 skipFiles,ChangeFile.txt|?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd

@@ -17,12 +17,11 @@ namespace LJCCreateFileChanges
     // The program entry point function.
     static void Main(string[] args)
     {
-      // ToDo: create first parm ArgsFile. (ArgsFileLJCProjects)?
       GetDefaults(out string sourceRoot, out string targetRoot
-        , out string changesFileSpec, out string includeFilter
+        , out string changesFilespec, out string includeFilter
         , out string skipFiles);
       if (!GetArgs(args, ref sourceRoot, ref targetRoot
-        , ref changesFileSpec, ref includeFilter, ref skipFiles))
+        , ref changesFilespec, ref includeFilter, ref skipFiles))
       {
         return;
       }
@@ -31,7 +30,7 @@ namespace LJCCreateFileChanges
       {
         // Creates the Changes file (changeFileSpec).
         var createFileChanges = new CreateFileChanges(sourceRoot, targetRoot
-        , changesFileSpec, includeFilter);
+        , changesFilespec, includeFilter);
         var skipList = skipFiles.Split('|').ToList<string>();
         createFileChanges.SkipFiles = skipList;
         createFileChanges.Run();
@@ -72,7 +71,7 @@ namespace LJCCreateFileChanges
 
     // Gets the command line parameters.
     private static bool GetArgs(string[] args, ref string sourceRoot
-      , ref string targetRoot, ref string changesFileSpec, ref string includeFilter
+      , ref string targetRoot, ref string changesFilespec, ref string includeFilter
       , ref string skipFiles)
     {
       bool retValue = true;
@@ -86,7 +85,7 @@ namespace LJCCreateFileChanges
       }
       if (args.Length >= 3)
       {
-        changesFileSpec = args[2];
+        changesFilespec = args[2];
       }
       if (args.Length >= 4)
       {
@@ -98,7 +97,7 @@ namespace LJCCreateFileChanges
       }
       if (!NetString.HasValue(sourceRoot)
         || !NetString.HasValue(targetRoot)
-        || !NetString.HasValue(changesFileSpec)
+        || !NetString.HasValue(changesFilespec)
         || !NetString.HasValue(includeFilter))
       {
         retValue = false;
@@ -114,15 +113,15 @@ namespace LJCCreateFileChanges
 
     // Gets the default parameters.
     private static void GetDefaults(out string sourceRoot
-      , out string targetRoot, out string changesFileSpec
+      , out string targetRoot, out string changesFilespec
       , out string includeFilter, out string skipFiles)
     {
       // Same defaults as in CreateFileChangesDefaults.txt.
       var mainPath = @"C:\Users\Les\Documents\Visual Studio 2022";
       sourceRoot = $@"{mainPath}\LJCProjectsDev";
       targetRoot = $@"{mainPath}\LJCProjects";
-      changesFileSpec = $@"{mainPath}\LJCProjectsDev\CoreUtilities";
-      changesFileSpec += @"\BackupWatcher\CmdFiles\ChangesLJCProjects.txt";
+      changesFilespec = $@"{mainPath}\LJCProjectsDev\CoreUtilities";
+      changesFilespec += @"\BackupWatcher\CmdFiles\ChangesLJCProjects.txt";
       includeFilter = @"*.cs|*.cproj|*.sln|*.config|*.cmd|*.txt|Doc\*.xml";
       skipFiles = "ChangeFile.txt|?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd";
 
@@ -150,7 +149,7 @@ namespace LJCCreateFileChanges
               break;
 
             case "changesfilespec":
-              changesFileSpec = tokens[1].Trim();
+              changesFilespec = tokens[1].Trim();
               break;
 
             case "includefilter":

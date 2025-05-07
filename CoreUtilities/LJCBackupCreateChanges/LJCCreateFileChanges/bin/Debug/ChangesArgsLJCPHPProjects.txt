@@ -1,5 +1,5 @@
 sourceRoot,C:\Users\Les\Documents\Visual Studio 2022\LJCPHPProjectsDev
 targetRoot,C:\Users\Les\Documents\Visual Studio 2022\LJCPHPProjects
 changesFileSpec,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\ChangesLJCPHPProjects.txt
-includeFilter,Readme*.txt|*.cmd|*.php
+includeFilter,*.php|Readme*.txt|*.cmd
 skipFiles,

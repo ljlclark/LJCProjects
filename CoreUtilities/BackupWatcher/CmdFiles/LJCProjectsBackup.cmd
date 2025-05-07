@@ -12,9 +12,9 @@ echo -----
 set targetPath=%mainPath%\LJCProjects"
 
 if exist %changeFileSpec% del %changeFileSpec%
-echo %binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%
-%binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFileSpec% %multiFilter% %skipFiles%
+echo %binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFilespec% %multiFilter% %skipFiles%
+%binPath%\LJCCreateFileChanges" %sourcePath% %targetPath% %changeFilespec% %multiFilter% %skipFiles%
 
 if exist %changeFilePath%\BackupLog.txt" del %changeFilePath%\BackupLog.txt
-echo %binPath%\LJCBackupChanges" %targetPath% %changeFileSpec% %startFolder%
-%binPath%\LJCBackupChanges" %targetPath% %changeFileSpec% %startFolder%
+echo %binPath%\LJCBackupChanges" %targetPath% %changeFilespec% %startFolder%
+%binPath%\LJCBackupChanges" %targetPath% %changeFilespec% %startFolder%

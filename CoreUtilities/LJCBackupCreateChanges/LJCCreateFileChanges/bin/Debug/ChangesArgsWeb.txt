@@ -1,0 +1,5 @@
+sourcePath,C:\Users\Les\Documents\Visual Studio 2022\WebSitesDev\CodeDoc\LJCCodeDoc
+targetPath,C:\Users\Les\Documents\Visual Studio 2022\WebPages\LJCCodeDoc
+changeFileSpec,C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\ChangesFilePages.txt
+multiFilter,*.html
+rem skipFiles,ChangeFile.txt|?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd
