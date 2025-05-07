@@ -127,7 +127,8 @@ namespace LJCCreateFileChanges
 
       // *** Next Line *** Change use HTML pages defaults.
       //var fileSpec = "ChangesArgsLJCProjects.txt";
-      var fileSpec = "ChangesArgsLJCPHPProjects.txt";
+      //var fileSpec = "ChangesArgsLJCPHPProjects.txt";
+      var fileSpec = "ChangesArgsWeb.txt";
       if (File.Exists(fileSpec))
       {
         string[] lines = File.ReadAllLines(fileSpec);

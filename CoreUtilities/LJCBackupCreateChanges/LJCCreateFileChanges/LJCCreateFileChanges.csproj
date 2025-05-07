@@ -56,8 +56,8 @@
   <ItemGroup>
     <Content Include="bin\Debug\ChangesArgsLJCPHPProjects.txt" />
     <Content Include="bin\Debug\ChangesArgsLJCProjects.txt" />
-    <Content Include="bin\Debug\CreateFileChangesDefaultsPassport.txt" />
-    <Content Include="bin\Debug\CreateFileChangesDefaultsWeb.txt" />
+    <Content Include="bin\Debug\ChangesArgsLJCProjectsExternal.txt" />
+    <Content Include="bin\Debug\ChangesArgsWeb.txt" />
     <Content Include="bin\Debug\LJCCreateFileChanges.xml" />
     <Content Include="Doc\ProgramCreateFileChanges.xml" />
   </ItemGroup>
