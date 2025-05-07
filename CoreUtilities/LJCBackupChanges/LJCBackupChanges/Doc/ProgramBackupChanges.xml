@@ -7,10 +7,6 @@
     <summary>
       The Backup File Changes program.
     </summary>
-    <parm name="targetRoot">The target root path.</parm>"
-    <parm name="startFolder">
-      The start folder for the merged target filespec.
-    </parm>"
     <remarks>
       <para>-- Library Level Remarks</para>
       <para>
@@ -53,4 +49,11 @@
       </para>
     </remarks>
   </Program>
+  <Main>
+    <summary>The program entry point function.</summary>
+    <parm name="targetRoot">The target root path.</parm>"
+    <parm name="startFolder">
+      The start folder for the merged target filespec.
+    </parm>"
+  </Main>
 </items>

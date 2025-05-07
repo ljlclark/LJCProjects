@@ -39,4 +39,4 @@ if exist %changesFilepath%\BackupLog.txt" del %changesFilepath%\BackupLog.txt
 rem ** Perform the backup using entries from the changes file PagesChangeFile.txt.
 echo %binPath%\LJCBackupChanges" %targetRoot% %changesFilespec% %startFolder%
 %binPath%\LJCBackupChanges" %targetRoot% %changesFilespec% %startFolder%
-pause
+

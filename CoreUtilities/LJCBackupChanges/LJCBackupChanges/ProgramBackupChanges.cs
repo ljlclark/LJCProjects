@@ -14,7 +14,9 @@ namespace LJCBackupChanges
   internal class Program
   {
     // The program entry point function.
-    static void Main(string[] args)
+    /// <include path='items/Main/*'
+    ///   file='Doc/ProgramBackupChanges.xml' />
+    internal static void Main(string[] args)
     {
       GetDefaults(out string targetRoot, out string changesFilespec
         , out string startFolder);

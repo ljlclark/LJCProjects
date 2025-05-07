@@ -59,6 +59,8 @@
   <ItemGroup>
     <Content Include="bin\Debug\BackupChangesDefaults.txt" />
     <Content Include="bin\Debug\BackupChangesDefaultsStage.txt" />
+    <Content Include="bin\Debug\LJCBackupChanges.xml" />
+    <Content Include="bin\Debug\LJCBackupChangesLib.xml" />
     <Content Include="Doc\ProgramBackupChanges.xml" />
   </ItemGroup>
   <ItemGroup>

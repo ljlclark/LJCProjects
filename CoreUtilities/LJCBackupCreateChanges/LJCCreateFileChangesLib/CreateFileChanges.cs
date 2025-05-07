@@ -71,6 +71,7 @@ namespace LJCCreateFileChangesLib
       var sourceLines = File.ReadAllLines(sourceSpec);
       var targetLines = File.ReadAllLines(targetSpec);
 
+      var sourceFileName = Path.GetFileName(sourceSpec);
       bool copy = false;
       if (sourceLines.Length != targetLines.Length)
       {
@@ -80,18 +81,25 @@ namespace LJCCreateFileChangesLib
       {
         for (int index = 0; index < sourceLines.Length; index++)
         {
-          //if (sourceLines[index].Contains("Generated ")
-          //  || targetLines[index].Contains("Generated "))
-          //{
-          //  int i = 0;
-          //}
+          var sourceLine = sourceLines[index];
+          var targetLine = targetLines[index];
 
-          // Do not consider lines that start with Generated as different?
-          if (sourceLines[index] != targetLines[index]
-            && !sourceLines[index].StartsWith("<!-- Generated"))
+          var hasValue = true;
+          if (!NetString.HasValue(sourceLine)
+            && !NetString.HasValue(targetLine))
           {
-            copy = true;
-            break;
+            hasValue = false;
+          }
+
+          if (hasValue
+            && sourceLine != targetLine)
+          {
+            // Do not consider lines that start with Generated as different?
+            if (!sourceLine.StartsWith("<!-- Generated"))
+            {
+              copy = true;
+              break;
+            }
           }
         }
       }
@@ -122,7 +130,8 @@ namespace LJCCreateFileChangesLib
           continue;
         }
 
-        // Skip file for target folders that do not exist.
+        // Create the targetSpec from the targetRoot, sourceSpec
+        // and sourceStartFolder.
         var targetSpec = GetToSpec(mTargetRoot, sourceSpec, sourceStartFolder
           , out string codePath);
 
@@ -139,8 +148,10 @@ namespace LJCCreateFileChangesLib
           }
           continue;
         }
-        if (IsSkipFile(targetSpec)
-        || HasExtraDots(targetSpec, filter))
+
+        //if (IsSkipFile(targetSpec)
+        //  || HasExtraDots(targetSpec, filter))
+        if (IsSkipFile(targetSpec))
         {
           continue;
         }
@@ -176,6 +187,8 @@ namespace LJCCreateFileChangesLib
           continue;
         }
 
+        // Create the sourceSpec from the sourceRoot, targetSpec
+        // and targetStartFolder.
         var sourceSpec = GetToSpec(mSourceRoot, targetSpec, targetStartFolder
           , out string _);
         if (!File.Exists(sourceSpec))
@@ -259,6 +272,8 @@ namespace LJCCreateFileChangesLib
       bool retValue = false;
 
       var fileName = Path.GetFileName(filespec);
+
+      // Has a dot before the extension dot.
       if (fileName.IndexOf(".") < fileName.Length - filter.Length
         && filter != ".config")
       {
