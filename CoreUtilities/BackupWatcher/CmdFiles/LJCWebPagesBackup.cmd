@@ -24,7 +24,7 @@ echo -----
 set targetFolder="LJCCodeDoc"
 set targetRoot=%mainPath%\WebPages\%targetFolder%
 
-rem ** Delete the previous changes file PagesChangeFile.txt.
+rem ** Delete the previous changes file.
 if exist %changeFileSpec% del %changeFileSpec%
 
 set binPath=%mainPath%\LJCProjectsDev\CoreUtilities\BackupWatcher\Bin
@@ -36,7 +36,7 @@ echo %binPath%\LJCCreateFileChanges" %sourceRoot% %targetRoot% %changesFilespec%
 rem ** Delete the previous BackupLog.txt file.
 if exist %changesFilepath%\BackupLog.txt" del %changesFilepath%\BackupLog.txt
 
-rem ** Perform the backup using entries from the changes file PagesChangeFile.txt.
+rem ** Perform the backup using entries from the changes file.
 echo %binPath%\LJCBackupChanges" %targetRoot% %changesFilespec% %startFolder%
 %binPath%\LJCBackupChanges" %targetRoot% %changesFilespec% %startFolder%
 

@@ -57,8 +57,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\BackupChangesDefaults.txt" />
-    <Content Include="bin\Debug\BackupChangesDefaultsStage.txt" />
+    <Content Include="bin\Debug\ChangesArgsWeb.txt" />
+    <Content Include="bin\Debug\ChangesArgsLJCProject.txt" />
     <Content Include="bin\Debug\LJCBackupChanges.xml" />
     <Content Include="bin\Debug\LJCBackupChangesLib.xml" />
     <Content Include="Doc\ProgramBackupChanges.xml" />

@@ -1,0 +1,3 @@
+targetRoot, C:\Users\Les\Documents\Visual Studio 2022\LJCProjects
+changesFileSpec, C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\ChangesFile.txt
+startFolder, LJCProjectsDev

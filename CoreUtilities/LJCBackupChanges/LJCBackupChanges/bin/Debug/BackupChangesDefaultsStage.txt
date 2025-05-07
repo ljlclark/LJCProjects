@@ -1,3 +1,0 @@
-targetPath, C:\Users\Les\Documents\Visual Studio 2022\LJCProjects_Stage
-changeFileSpec, C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles\ChangeFile.txt
-startFolder, LJCProjectsDev

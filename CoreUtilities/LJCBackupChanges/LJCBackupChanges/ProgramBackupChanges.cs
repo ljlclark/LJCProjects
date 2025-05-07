@@ -100,12 +100,13 @@ namespace LJCBackupChanges
       , out string changesFilespec, out string startFolder)
     {
       string mainPath = @"C:\Users\Les\Documents\Visual Studio 2022";
-      targetRoot = $@"{mainPath}\LJCProjects_Stage";
-      string changeFilepath = @"\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles";
-      changesFilespec = $@"{mainPath}\{changeFilepath}\ChangeFile.txt";
+      targetRoot = $@"{mainPath}\LJCProjects";
+      string changesFilepath = @"\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFiles";
+      changesFilespec = $@"{mainPath}\{changesFilepath}\ChangesFile.txt";
       startFolder = "LJCProjectsDev";
 
-      var fileSpec = "BackupChangesDefaults.txt";
+      //var fileSpec = "ChangesArgsLJCProject.txt";
+      var fileSpec = "ChangesArgsWeb.txt";
       if (File.Exists(fileSpec))
       {
         string[] lines = File.ReadAllLines(fileSpec);
@@ -118,11 +119,11 @@ namespace LJCBackupChanges
           }
           switch (tokens[0].ToLower().Trim())
           {
-            case "targetpath":
+            case "targetroot":
               targetRoot = tokens[1].Trim();
               break;
 
-            case "changefilespec":
+            case "changesfilespec":
               changesFilespec = tokens[1].Trim();
               break;
 
