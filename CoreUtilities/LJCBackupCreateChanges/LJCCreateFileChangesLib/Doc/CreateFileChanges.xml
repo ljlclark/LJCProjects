@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+  <CreateFileChangesC>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="sourceRoot">The Source root path.</param>
+    <param name="targetRoot">The Target root path.</param>
+    <param name="changesFilespec">The ChangeFile spec.</param>
+    <param name="includeFilter">The include filter value.</param>
+  </CreateFileChangesC>
+  <Run>
+    <remarks>
+      <summary>
+        Creates the "Changes" file.
+      </summary>
+      <para>
+        The Run() method uses the four required parameters that are initialized
+        in the constructor.
+      </para>
+      <para>
+        sourceRoot - The full path to the source files root folder. The files in
+        this folder and all subfolders are available for backup.
+      </para>
+      <para>
+        targetRoot - The full path to the target files root folder. The files in
+        this folder and all subfolders are the target of the backup.&lt;br /&gt;
+        Note: Only those folders that exist in the target will be updated.This
+        is how the user controls what folders to backup. The target folders must
+        be manually created to be included in the backup. The source folders and
+        target folders must have matching names.&lt;br /&gt;
+        This implicit approach prevents the user from having to specifically
+        list the folders that are available for backup. The MissingFolders.txt
+        file is written to show those folders that are not included.
+      </para>
+      <para>
+        changesFileSpec - The full file specification for the "Changes" file.
+      </para>
+      <para>
+        includeFilter - This is a list of file names that will are available for
+        backup. The file names are separated with a vertial bar and can include
+        wild cards and partial paths.
+        Example: "*.cs|Doc\*.xml" This includes all files that end with the
+        extension "cs" and all files that are in a "Doc" folder and end with the
+        extension "xml".
+      </para>
+      <para>
+        skipFiles - This optional parameter is a list of files that will not be
+        changed.The file names are separated with a vertical bar and can include
+        wild cards.&lt;br /&gt;
+        Example: "Changes*.txt|?Build*.cmd" Files matching these names will not
+        be updated or deleted.
+      </para>
+      <para>
+        If the "Source" file is different from the "Target" file, then a "Copy"
+        record is written to the "Changes" file.&lt;br /&gt;
+        If a "Source" file is missing from the "Target", then a "Copy" record is
+        written to the "Changes" file.&lt;br /&gt;
+        If a file exists in the "Target" folder but does not exist in the
+        "Source" folder, then a "Delete" record is written to the "Changes"
+        file.
+      </para>
+    </remarks>
+    <example>
+      <code>
+        <pre>
+        using LJCCreateFileChangesLib;
+        using LJCBackupChangesLib;
+
+        // Create parameter values.
+        var sourceRoot = "C:\Visual Studio 2022\LJCProjectsDev";
+        var targetRoot = "C:\Visual Studio 2022\LJCProjects";
+        var changesFilespec = "C:\Visual Studio 2022\LJCProjectsDev\ChangesFile.txt";
+        var includeFilter = "*.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config";
+        includeFilter += "|*.cmd|*.txt|*.sql|Doc\*.xml";
+        var skipFiles="?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd|Build.txt";
+        skipFiles += "|ChangesFile.txt|BackupLog.txt|MissingFolders.txt";
+
+        // Create the "Changes" file.
+        var createFileChanges = new CreateFileChanges(sourceRoot, targetRoot
+        , changesFileSpec, includeFilter);
+        var skipList = skipFiles.Split('|').ToList&lt;string&gt;();
+        createFileChanges.SkipFiles = skipList;
+        createFileChanges.Run();
+        </pre>
+      </code>
+    </example>
+  </Run>
+</items>

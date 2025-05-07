@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- BackupChanges.xml -->
+<items>
+  <BackupChangesC>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="startFolder">The start folder of the matching path.</param>
+    <param name="changeFilespec">The Change filespec.</param>
+  </BackupChangesC>
+  <Run>
+    <summary>
+      Applies the change commands.
+    </summary>
+    <param name="targetRoot">The Target root path.</param>
+    <remarks>
+      <para>
+        The Run() method copies files to, or deletes files from,
+        the target root folder and subfolders using a filespec based on the
+        targetRoot, each source "Changes" filespec and the startFolder
+        value.&lt;br /&gt;
+        &lt;br /&gt;
+        For Example:&lt;br /&gt;
+        targetRoot = "C:\Visual Studio 2022\LJCProjects"&lt;br /&gt;
+        sourceSpec = "C:\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCBackupChanges\LJCBackupChanges.sln"
+        &lt;br /&gt;
+        startFolder = "LJCProjectsDev";&lt;br /&gt;
+        The targetRoot is combined with the remainder of the sourceSpec
+        starting after the startFolder.&lt;br /&gt;
+        targetSpec = "C:\Visual Studio 2022\LJCProjects\CoreUtilities\LJCBackupChanges\LJCBackupChanges.sln"
+      </para>
+      <para>
+        Target and source paths that do not match can be handled with the
+        startFolder entry.
+      </para>
+      <para>
+        The Run() method takes the targetRoot parameter. The startFolder and
+        changesFilespec are initialized in the BackupChanges constructor.
+      </para>
+      <para>
+        targetRoot - The full path to the target files root folder. The files in
+        this folder and all subfolders are the target of the backup.&lt;br /&gt;
+      </para>
+      <para>
+        changesFileSpec - The full file specification for the "Changes" file.
+      </para>
+      <para>
+        startFolder - The targetFilespec is created by using the targetRoot
+        combined with the remainder of the sourceSpec starting after the
+        startFolder.
+      </para>
+      <para>
+        Target and source paths that do not match can be handled with the
+        startFolder entry.&lt;br /&gt;
+        &lt;br /&gt;
+        Example 1: targetRoot is shorter than sourceSpec:&lt;br /&gt;
+        targetRoot = "C:\LJCProjects"&lt;br /&gt;
+        sourceSpec = "C:\Visual Studio 2022\LJCProjectsDev\CoreUtilities\LJCBackupChanges\LJCBackupChanges.sln"
+        &lt;br /&gt;
+        startFolder = "LJCProjectsDev"&lt;br /&gt;
+        targetSpec = "C:\LJCProjects\CoreUtilities\LJCBackupChanges\LJCBackupChanges.sln"
+        &lt;br /&gt;
+        &lt;br /&gt;
+        Example 2: targetRoot is longer than sourceSpec:&lt;br /&gt;
+        targetRoot = "C:\Visual Studio 2022\LJCProjects"&lt;br /&gt;
+        sourceSpec = "C:\LJCProjectsDev\CoreUtilities\LJCBackupChanges\LJCBackupChanges.sln"
+        &lt;br /&gt;
+        startFolder = "LJCProjectsDev"&lt;br /&gt;
+        targetSpec = "C:\Visual Studio 2022\LJCProjects\CoreUtilities\LJCBackupChanges\LJCBackupChanges.sln"
+        &lt;br /&gt;
+      </para>
+    </remarks>
+    <example>
+      <code>
+        <pre>
+        using LJCCreateFileChangesLib;
+        using LJCBackupChangesLib;
+
+        // Create parameter values.
+        var sourceRoot = "C:\Visual Studio 2022\LJCProjectsDev";
+        var targetRoot = "C:\Visual Studio 2022\LJCProjects";
+        var changesFilespec = "C:\Visual Studio 2022\LJCProjectsDev\ChangesFile.txt";
+        var includeFilter = "*.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config";
+        includeFilter += "|*.cmd|*.txt|*.sql|Doc\*.xml";
+        var skipFiles="?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd|Build.txt";
+        skipFiles += "|ChangesFile.txt|BackupLog.txt|MissingFolders.txt";
+
+        // Create the "Changes" file.
+        var createFileChanges = new CreateFileChanges(sourceRoot, targetRoot
+        , changesFileSpec, includeFilter);
+        var skipList = skipFiles.Split('|').ToList&lt;string&gt;();
+        createFileChanges.SkipFiles = skipList;
+        createFileChanges.Run();
+        
+        // Create parameter values.
+        var startFolder = "LJCProjectsDev";
+
+        // Backup from LJCProjectsDev to LJCProjects.
+        var backupChanges = new BackupChanges(startFolder, changesFilespec);
+        backupChanges.Run(targetRoot);
+        </pre>
+      </code>
+    </example>
+  </Run>
+  <GetMatchFolderFilespec>
+    <summary>
+      Creates the Target Filespec.
+    </summary>
+    <param name="sourceFilespec">The source filespec.</param>
+    <param name="startFolder">The start folder of the matching path.</param>
+    <returns>The target Filespec.</returns>
+  </GetMatchFolderFilespec>
+</items>

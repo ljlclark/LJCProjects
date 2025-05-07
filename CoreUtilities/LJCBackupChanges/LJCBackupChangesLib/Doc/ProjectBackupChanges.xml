@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProjectBackupChanges.xml -->
+<items>
+  <BackupChanges>
+    <summary>
+      The Backup FileChanges class.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The backup process runs in two parts. This is done to allow the user to
+        review the proposed changes if desired before updating the target files.
+      </para>
+      <para>
+        1. Run the LJCCreateFileChanges.exe program to create the "Changes"
+        file.&lt;br /&gt;
+        2. Run the LJCBackupChanges.exe program to perform the "Copy" and
+        "Delete" messages in the "Change" file.
+      </para>
+    </remarks>
+  </BackupChanges>
+ </items>

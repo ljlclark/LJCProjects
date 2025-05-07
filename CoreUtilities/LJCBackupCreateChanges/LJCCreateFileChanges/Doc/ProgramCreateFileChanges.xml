@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProgramCreateFileChanges.xml -->
+<items>
+  <Program>
+    <summary>
+      The Create File Changes program.
+    </summary>
+    <remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The backup process runs in two parts. This is done to allow the user to
+        review the proposed changes if desired before updating the target files.
+      </para>
+      <para>
+        1. Run the LJCCreateFileChanges.exe program to create the "Changes"
+        file.&lt;br /&gt;
+        2. Run the LJCBackupChanges.exe program to perform the "Copy" and
+        "Delete" messages in the "Change" file.
+      </para>
+      <para>
+        The LJCCreateFileChanges.exe program's main functionality is provided in
+        the file LJCCreateFileChangesLib.dll, class CreateFileChanges.
+      </para>
+      <para>
+        The LJCCreateFileChanges.exe program creates a "Changes" file with the
+        copy and delete commands for the updated files. The file commands
+        contain the source filespec.
+      </para>
+      <para>
+        The program takes four required parameters and one optional parameter.
+      </para>
+      <para>
+        sourceRoot - The full path to the source files root folder. The files in
+        this folder and all subfolders are available for backup.
+      </para>
+      <para>
+        targetRoot - The full path to the target files root folder. The files in
+        this folder and all subfolders are the target of the backup.&lt;br /&gt;
+        Note: Only those folders that exist in the target will be updated.This
+        is how the user controls what folders to backup. The target folders must
+        be manually created to be included in the backup. The source folders and
+        target folders must have matching names.&lt;br /&gt;
+        This implicit approach prevents the user from having to specifically
+        list the folders that are available for backup. The MissingFolders.txt
+        file is written to show those folders that are not included.
+      </para>
+      <para>
+        changesFileSpec - The full file specification for the "Changes" file.
+      </para>
+      <para>
+        includeFilter - This is a list of file names that will are available for
+        backup. The file names are separated with a vertial bar and can include
+        wild cards and partial paths.
+        Example: "*.cs|Doc\*.xml" This includes all files that end with the
+        extension "cs" and all files that are in a "Doc" folder and end with the
+        extension "xml".
+      </para>
+      <para>
+        skipFiles - This optional parameter is a list of files that will not be
+        changed.The file names are separated with a vertical bar and can include
+        wild cards.&lt;br /&gt;
+        Example: "Changes*.txt|?Build*.cmd" Files matching these names will not
+        be updated or deleted.
+      </para>
+      <para>
+        If the "Source" file is different from the "Target" file, then a "Copy"
+        record is written to the "Changes" file.&lt;br /&gt;
+        If a "Source" file is missing from the "Target", then a "Copy" record is
+        written to the "Changes" file.&lt;br /&gt;
+        If a file exists in the "Target" folder but does not exist in the
+        "Source" folder, then a "Delete" record is written to the "Changes"
+        file.
+      </para>
+    </remarks>
+  </Program>  
+</items>
