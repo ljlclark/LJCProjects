@@ -139,12 +139,9 @@ namespace LJCCreateFileChangesLib
         var filePath = Path.GetDirectoryName(targetSpec);
         if (!Directory.Exists(filePath))
         {
-          if (NetString.HasValue(codePath))
+          if (!HasLine(missingFolders, codePath))
           {
-            if (!HasLine(missingFolders, codePath))
-            {
-              File.AppendAllText(missingFolders, $"{codePath}\r\n");
-            }
+            File.AppendAllText(missingFolders, $"{codePath}\r\n");
           }
           continue;
         }
