@@ -114,7 +114,7 @@ namespace LJCCreateFileChangesLib
     private void CopyMissingOrChangedFiles(string filter)
     {
       var folders = mSourceRoot.Split('\\');
-      var sourceStartFolder = folders[folders.Length - 1];
+      var sourceCodeLineFolder = folders[folders.Length - 1];
       var filterPath = GetFilterPath(ref filter);
 
       var missingFolders = "MissingFolders.txt";
@@ -130,9 +130,9 @@ namespace LJCCreateFileChangesLib
           continue;
         }
 
-        // Create the targetSpec from the targetRoot, sourceSpec
-        // and sourceStartFolder.
-        var targetSpec = GetToSpec(mTargetRoot, sourceSpec, sourceStartFolder
+        // Create the targetSpec from the targetRoot and sourceSpec folders and
+        // filename after the sourceCodeLineFolder.
+        var targetSpec = GetToSpec(mTargetRoot, sourceSpec, sourceCodeLineFolder
           , out string codePath);
 
         // Skip updates to target folders that do not exist.
@@ -170,7 +170,7 @@ namespace LJCCreateFileChangesLib
     private void DeleteTargetNoSourceFiles(string filter)
     {
       var folders = mTargetRoot.Split('\\');
-      var targetStartFolder = folders[folders.Length - 1];
+      var targetCodeLineFolder = folders[folders.Length - 1];
       var filterPath = GetFilterPath(ref filter);
 
       var targetSpecs = Directory.GetFiles(mTargetRoot, filter
@@ -184,9 +184,9 @@ namespace LJCCreateFileChangesLib
           continue;
         }
 
-        // Create the sourceSpec from the sourceRoot, targetSpec
-        // and targetStartFolder.
-        var sourceSpec = GetToSpec(mSourceRoot, targetSpec, targetStartFolder
+        // Create the sourceSpec from the sourceRoot and targetSpec folders and
+        // filename afer the targetCodeLineFolder.
+        var sourceSpec = GetToSpec(mSourceRoot, targetSpec, targetCodeLineFolder
           , out string _);
         if (!File.Exists(sourceSpec))
         {

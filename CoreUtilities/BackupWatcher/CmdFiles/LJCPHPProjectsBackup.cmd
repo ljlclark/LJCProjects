@@ -17,7 +17,7 @@ set changeFilePath=%mainPath%\LJCProjectsDev\CoreUtilities\BackupWatcher\CmdFile
 set changeFileSpec=%changeFilePath%\PHPChangeFile.txt"
 
 rem ** Set the files to copy and explicit skips.
-set multiFilter="ReadMe*.txt|*.cmd|*.php"
+set multiFilter="ReadMe*.txt|*.cmd|*.php|*.html|*.txt|Doc/*.xml"
 set skipFiles=
 
 echo -----
