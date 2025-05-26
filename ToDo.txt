@@ -1,8 +1,10 @@
 GenDocEdit
-1. After adding MethodGroup, cannot select another group with right
-mouse button until selecting the added item.
-
+  After adding MethodGroup, cannot select another group with right
+  mouse button until selecting the added item.
 Complete Backup Utility
+  Provide better explaination for the StartFolder parameter.
 Update LJCAppManager?
 Update LJCDataTransform?
 Make GenDoc main page template driven?
+LJCDataUtility
+  Complete SQL generation.

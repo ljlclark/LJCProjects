@@ -1,14 +1,12 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ColumnHTML.cs
-using LJCDataAccess;
-using LJCDataAccessConfig;
+//using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace LJCDataUtility
@@ -18,129 +16,142 @@ namespace LJCDataUtility
   {
     #region Constructors
 
-    internal ColumnHTMLTable(DataUtilityList parentObject
-      , DataColumnManager columnManager, string fileName)
+    internal ColumnHTMLTable(string fileName)
     {
       // Initialize property values.
-      ParentObject = parentObject;
-      ParentObject.Cursor = Cursors.WaitCursor;
-      ColumnManager = columnManager;
       FileName = fileName;
-      ParentObject.Cursor = Cursors.Default;
     }
     #endregion
 
-    #region Main Methods
+    #region Create Table HTML Document Methods
 
-    // Gets the Table HTML document.
-    /// <include path='items/GetHTML/*' file='Doc/ColumnHtmlTable.xml'/>
-    internal string ColumnHTMLDoc(string dataType)
-    {
-      // Root GetText Method Begin
-      var hb = new HTMLBuilder();
-      var textState = new TextState();
-
-      string getText;
-      switch (dataType.ToLower())
-      {
-        case "dataobject":
-          getText = DataHTML(textState);
-          hb.Text(getText, NoIndent);
-          break;
-
-        case "datatable":
-          getText = DataTableHTML(textState);
-          hb.Text(getText, NoIndent);
-          break;
-
-        case "dbresult":
-          getText = ResultHTML(textState);
-          hb.AddText(getText);
-          break;
-      }
-      var retValue = hb.ToString();
-      return retValue;
-    }
-    #endregion
-
-    #region HTML Methods
-
-    // Gets the HTML Table document from a DataObject.
+    // Creates the HTML Table document from a DataObject.
     /// <include path='items/DataHTML/*' file='Doc/ColumnHtmlTable.xml'/>
-    internal string DataHTML(TextState textState)
+    internal string DataHTML(List<object> dataObjects
+      , List<string> propertyNames, TextState textState)
     {
       // GetText Method Begin
       var hb = new HTMLBuilder(textState);
 
       // Create custom beginning of document.
-      var text = GetHTMLDocBegin(textState);
+      var text = CreateHTMLDocBegin(textState);
       hb.AddText(text);
 
+      hb.End("head", textState, NoIndent);
+      hb.Begin("body", textState, null, NoIndent);
+      hb.Text(CreatePage(textState), NoIndent);
+      hb.Text(CreateHeader("Data Columns", textState), NoIndent);
+
       // Create HTML table.
-      var dataColumns = GetDataColumns();
-      if (NetCommon.HasItems(dataColumns))
-      {
-        var dataObjects = dataColumns.ToList<object>();
-        var propertyNames = GetPropertyNames();
-        text = HTMLTableData.DataHTML(dataObjects, propertyNames);
-        hb.AddText(text);
-      }
+      text = HTMLTableData.DataHTML(dataObjects, propertyNames);
+      hb.AddText(text);
+
+      // End "page"
+      hb.End("div", textState);
 
       text = hb.GetHTMLEnd(textState);
       hb.AddText(text);
+
       var retValue = hb.ToString();
       return retValue;
     }
 
-    // Gets the HTML Table document from DataTable.
+    // Creates the HTML Table document from DataTable.
     /// <include path='items/DataTableHTML/*' file='Doc/ColumnHtmlTable.xml'/>
-    internal string DataTableHTML(TextState textState)
+    internal string DataTableHTML(DataTable dataTable, TextState textState)
     {
       var hb = new HTMLBuilder(textState);
 
       // Create custom beginning of document.
-      var text = GetHTMLDocBegin(textState);
+      var text = CreateHTMLDocBegin(textState);
       hb.AddText(text);
 
+      hb.End("head", textState, NoIndent);
+      hb.Begin("body", textState, null, NoIndent);
+      hb.Text(CreatePage(textState), NoIndent);
+      hb.Text(CreateHeader("Data Columns", textState), NoIndent);
+
       // Create HTML table.
-      var dataTable = GetDataTable();
       text = HTMLTableData.DataTableHTML(dataTable);
       hb.AddText(text);
 
+      // End "page"
+      hb.End("div", textState);
+
       text = hb.GetHTMLEnd(textState);
       hb.AddText(text);
+
       var retValue = hb.ToString();
       return retValue;
     }
 
-    // Gets the HTML Table document from DbResult.
+    // Creates the HTML Table document from DbResult.
     /// <include path='items/ResultHTML/*' file='Doc/ColumnHtmlTable.xml'/>
-    internal string ResultHTML(TextState textState)
+    internal string ResultHTML(DbResult dbResult, TextState textState)
     {
       var hb = new HTMLBuilder(textState);
 
       // Create custom beginning of document.
-      var createText = GetHTMLDocBegin(textState);
+      var createText = CreateHTMLDocBegin(textState);
       hb.Text(createText, NoIndent);
+
       hb.End("head", textState, NoIndent);
       hb.Begin("body", textState, null, NoIndent);
-      hb.Text(GetPage(textState), NoIndent);
-      hb.Text(GetHeader("Data Columns", textState), NoIndent);
+      hb.Text(CreatePage(textState), NoIndent);
+      hb.Text(CreateHeader("Data Columns", textState), NoIndent);
 
       // HTML table.
-      var dbResult = GetResult();
       var tableText = HTMLTableData.ResultHTML(dbResult, textState);
       hb.Text(tableText, NoIndent);
 
       // End "page"
       hb.End("div", textState);
+
       createText = hb.GetHTMLEnd(textState);
       hb.Text(createText, NoIndent);
+
       var retValue = hb.ToString();
       return retValue;
     }
 
-    private string GetHeader(string text, TextState textState)
+    /// <summary>
+    /// Creates the HTML Table document from a DataGridView.
+    /// </summary>
+    /// <param name="grid">The DataGridView object.</param>
+    /// <param name="textState">The TextState object.</param>
+    /// <returns>The HTML Table document.</returns>
+    internal string DataGridHTML(DataGridView grid, TextState textState)
+    {
+      var hb = new HTMLBuilder(textState);
+
+      // Create custom beginning of document.
+      var createText = CreateHTMLDocBegin(textState);
+      hb.Text(createText, NoIndent);
+
+      hb.End("head", textState, NoIndent);
+      hb.Begin("body", textState, null, NoIndent);
+      hb.Text(CreatePage(textState), NoIndent);
+      hb.Text(CreateHeader("Data Columns", textState), NoIndent);
+
+      // HTML table.
+      var text = GridTableHTML(grid);
+      hb.AddText(text);
+
+      // End "page"
+      hb.End("div", textState);
+
+      createText = hb.GetHTMLEnd(textState);
+      hb.Text(createText, NoIndent);
+
+      var retValue = hb.ToString();
+      return retValue;
+    }
+    #endregion
+
+    #region Create HTML Element Methods
+
+    // Creates the Header div.
+    private string CreateHeader(string text, TextState textState)
     {
       var hb = new HTMLBuilder(textState);
 
@@ -156,7 +167,8 @@ namespace LJCDataUtility
       return retHeader;
     }
 
-    private string GetPage(TextState textState)
+    // Creates the Page div start.
+    private string CreatePage(TextState textState)
     {
       var hb = new HTMLBuilder(textState);
 
@@ -168,73 +180,118 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Data Methods
+    #region Move to LJCDBMessage.HTMLTableData
 
-    // Gets the DataTable object.
-    /// <include path='items/GetDataTable/*' file='Doc/ColumnHtmlTable.xml'/>
-    internal DataTable GetDataTable()
+    /// <summary>Create table headings from a DataGridView.</summary>
+    /// <param name="grid">The DataGridView control.</param>
+    /// <returns>The HTML table headings row.</returns>
+    public static string GridTableHeadings(DataGridView grid)
     {
-      SetConfigData();
-      var dataAccess = new DataAccess(ConnectionString, ProviderName);
-      var loadSQL = GetLoadSQL();
-      var retTable = dataAccess.GetDataTable(loadSQL);
-      return retTable;
+      string retValue = null;
+
+      if (grid != null
+        && grid.Columns.Count > 0)
+      {
+        var hb = new HTMLBuilder();
+        var textState = new TextState();
+
+        hb.Begin("tr", textState);
+        foreach (DataGridViewColumn column in grid.Columns)
+        {
+          hb.Create("th", column.Name, textState);
+        }
+        hb.End("tr", textState);
+        retValue = hb.ToString();
+      }
+      return retValue;
     }
 
-    // Gets the Data Object.
-    /// <include path='items/GetDataColumns/*' file='Doc/ColumnHtmlTable.xml'/>
-    internal DataColumns GetDataColumns()
+    /// <summary>Create an HTML table from a DataGridView.</summary>
+    /// <param name="grid">The DataGridView control.</param>
+    /// <returns>The HTML table headings row.</returns>
+    public static string GridTableHTML(DataGridView grid)
     {
-      var keyColumns = GetKeyColumns();
-      var propertyNames = GetPropertyNames();
-      var orderByNames = GetOrderByNames();
-      ColumnManager.Manager.OrderByNames = orderByNames;
-      var retData = ColumnManager.Load(keyColumns, propertyNames);
-      return retData;
+      string retValue = null;
+
+      if (grid != null
+        && grid.Rows.Count > 0)
+      {
+        var hb = new HTMLBuilder();
+        var textState = new TextState();
+
+        var attribs = hb.TableAttribs();
+        hb.Begin("table", textState, attribs);
+        var text = GridTableHeadings(grid);
+        hb.Text(text);
+        text = GridTableRows(grid);
+        hb.Text(text);
+        hb.End("table", textState);
+        retValue = hb.ToString();
+      }
+      return retValue;
     }
 
-    // Gets the DbResult object.
-    /// <include path='items/GetResult/*' file='Doc/ColumnHtmlTable.xml'/>
-    internal DbResult GetResult()
+    /// <summary>Create table rows from a DataGridView.</summary>
+    /// <param name="grid">The DataGridView control.</param>
+    /// <returns>The HTML table rows.</returns>
+    public static string GridTableRows(DataGridView grid)
     {
-      var manager = ColumnManager.Manager;
-      var loadSQL = GetLoadSQL();
-      var retResult = manager.ExecuteClientSql(RequestType.LoadSQL, loadSQL);
-      return retResult;
+      string retValue = null;
+
+      if (grid != null
+        && grid.Rows.Count > 0)
+      {
+        var hb = new HTMLBuilder();
+        var textState = new TextState();
+
+        foreach (DataGridViewRow row in grid.Rows)
+        {
+          hb.Begin("tr", textState);
+          foreach (DataGridViewColumn column in grid.Columns)
+          {
+            var cell = row.Cells[column.Name];
+            string value = cell.Value.ToString();
+            hb.Create("td", value, textState);
+          }
+          hb.End("tr", textState);
+        }
+        retValue = hb.ToString();
+      }
+      return retValue;
     }
     #endregion
 
-    #region Private HTML Methods
+    #region Custom HTML Methods
 
     // Gets beginning of HTML including <body> tag.
-    private string GetHTMLDocBegin(TextState textState)
+    private string CreateHTMLDocBegin(TextState textState)
     {
       var hb = new HTMLBuilder(textState);
 
       // Creates to including <head>.
       string[] copyright = new string[]
       {
-        "Copyright(c) Lester J. Clark and Contributors",
+        "Copyright (c) Lester J. Clark and Contributors",
         "Licensed under the MIT License",
       };
       var createText = hb.GetHTMLBegin(textState, copyright, FileName);
       hb.Text(createText, NoIndent);
       hb.AddChildIndent(createText, textState);
 
-      createText = GetHTMLDocHead(textState);
+      createText = CreateHTMLDocHead(textState);
       hb.Text(createText, NoIndent);
       var retValue = hb.ToString();
       return retValue;
     }
 
     // The custom HTML Head method.
-    private string GetHTMLDocHead(TextState textState)
+    private string CreateHTMLDocHead(TextState textState)
     {
       var hb = new HTMLBuilder(textState);
 
       var title = "Creates an HTML Document";
-      var author = "Lester J. Clark";
       var description = "Creates an HTML Document";
+      var author = "Lester J. Clark";
       var getText = hb.GetHTMLHead(textState, title, author, description);
       hb.Text(getText, NoIndent);
       hb.Link("CSS/CodeDoc.css", textState);
@@ -257,73 +314,6 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Private Data Methods
-
-    // Gets the key columns.
-    private DbColumns GetKeyColumns()
-    {
-      var parentID = ParentObject.DataTableRowID(out long parentSiteID);
-      var retColumns = ColumnManager.ParentKey(parentID, parentSiteID);
-      return retColumns;
-    }
-
-    // Gets the load SQL.
-    private string GetLoadSQL()
-    {
-      var keyColumns = GetKeyColumns();
-      var propertyNames = GetPropertyNames();
-      var orderByNames = GetOrderByNames();
-
-      var manager = ColumnManager.Manager;
-      manager.OrderByNames = orderByNames;
-      var dataRequest = manager.CreateLoadRequest(keyColumns, propertyNames);
-      var sqlBuilder = new DbSqlBuilder(dataRequest);
-      var retSQL = sqlBuilder.CreateLoadSql(dataRequest);
-      return retSQL;
-    }
-
-    // Gets the orderby names.
-    private List<string> GetOrderByNames()
-    {
-      var retItems = new List<string>()
-      {
-        DataUtilColumn.ColumnSequence
-      };
-      return retItems;
-    }
-
-    // Gets the property names.
-    private List<string> GetPropertyNames()
-    {
-      var retNames = new List<string>()
-      {
-        DataUtilColumn.ColumnDataTableID,
-        DataUtilColumn.ColumnDataTableSiteID,
-        DataUtilColumn.ColumnName,
-        DataUtilColumn.ColumnDescription,
-        DataUtilColumn.ColumnSequence,
-        DataUtilColumn.ColumnTypeName,
-        DataUtilColumn.ColumnMaxLength,
-        DataUtilColumn.ColumnAllowNull,
-        DataUtilColumn.ColumnDefaultValue,
-      };
-      return retNames;
-    }
-
-    // Sets the config properties.
-    private void SetConfigData()
-    {
-      var settings = ParentObject.Settings;
-      var configName = settings.DataConfigName;
-
-      DataConfigs dataConfigs = new DataConfigs();
-      dataConfigs.LJCLoadData();
-      DataConfig = dataConfigs.LJCGetByName(configName);
-      ConnectionString = DataConfig.GetConnectionString();
-      ProviderName = DataConfig.GetProviderName();
-    }
-    #endregion
-
     #region Properties
 
     // Gets or sets the manager reference.
@@ -331,9 +321,6 @@ namespace LJCDataUtility
 
     // Gets or sets the connection string.
     private string ConnectionString { get; set; }
-
-    // Gets or sets the DataConfig value.
-    private DataConfig DataConfig { get; set; }
 
     // Gets or sets the file name.
     private string FileName { get; set; }

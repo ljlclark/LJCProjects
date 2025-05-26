@@ -6,77 +6,79 @@
   <!-- Static DataTable Functions -->
   <DataTableHeadings>
     <summary>
-      Create table headings from DataTable.
+      Create table headings from a DataTable.
     </summary>
-    <param name="dataTable"></param>
-    <returns></returns>
+    <param name="dataTable">The DataTable object.</param>
+    <returns>The HTML table headings row.</returns>
   </DataTableHeadings>
   <DataTableHTML>
     <summary>
-      Creates an HTML table from DataTable.
+      Creates an HTML table from a DataTable.
     </summary>
-    <param name="dataTable"></param>
-    <param name="maxRows"></param>
-    <returns></returns>
+    <param name="dataTable">The DataTable object.</param>
+    <param name="maxRows">The maximum number of rows to display.</param>
+    <returns>The HTML table.</returns>
   </DataTableHTML>
   <DataTableRows>
     <summary>
-      Creates table rows from DataTable.
+      Creates table rows from a DataTable.
     </summary>
-    <param name="dataTable"></param>
-    <param name="maxRows"></param>
-    <returns></returns>
+    <param name="dataTable">The DataTable object.</param>
+    <param name="maxRows">The maximum number of rows to display.</param>
+    <returns>The HTML table rows.</returns>
   </DataTableRows>
   <!-- Static Data Object Functions -->
   <DataHeadings>
     <summary>
-      Create table headings from a Data Object.
+      Create table headings from a data object.
     </summary>
-    <param name="dataObjects"></param>
-    <param name="propertyNames"></param>
-    <returns></returns>
+    <param name="dataObjects">The collection of data objects.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The HTML table headings row.</returns>
   </DataHeadings>
   <DataHTML>
     <summary>
-      Create an HTML table from a Data Object.
+      Create an HTML table from a collection of data objects.
     </summary>
-    <param name="dataObjects"></param>
-    <param name="propertyNames"></param>
-    <param name="maxRows"></param>
-    <returns></returns>
+    <param name="dataObjects">The collection of data objects.</param>
+    <param name="propertyNames">The included property names.</param>
+    <param name="maxRows">The maximum number of rows to display.</param>
+    <returns>The HTML table.</returns>
   </DataHTML>
   <DataRows>
     <summary>
       Create table rows from a Data Object.
     </summary>
-    <param name="dataObjects"></param>
-    <param name="propertyNames"></param>
-    <param name="maxRows"></param>
-    <returns></returns>
+    <param name="dataObjects">The collection of data objects.</param>
+    <param name="propertyNames">The included property names.</param>
+    <param name="maxRows">The maximum number of rows to display.</param>
+    <returns>The HTML table rows.</returns>
   </DataRows>
   <!-- Static DbResult Functions -->
   <ResultHeadings>
     <summary>
-      Create table headings from result.
+      Create table headings from a DbResult object.
     </summary>
-    <param name="dbResult"></param>
-    <returns></returns>
+    <param name="dbResult">The data result object.</param>
+    <param name="textState">The TextState object.</param>"
+    <returns>The HTML table headings row.</returns>
   </ResultHeadings>
   <ResultHTML>
     <summary>
-      Creates an HTML table from DbResult.
+      Creates an HTML table from a DbResult object.
     </summary>
-    <param name="dbResult"></param>
-    <param name="textState"></param>"
-    <param name="maxRows"></param>
-    <returns></returns>
+    <param name="dbResult">The data result object.</param>
+    <param name="textState">The TextState object.</param>"
+    <param name="maxRows">The maximum number of rows to display.</param>
+    <returns>The HTML table.</returns>
   </ResultHTML>
   <ResultRows>
     <summary>
-      Create table rows from result.
+      Create table rows from a DbResult object.
     </summary>
-    <param name="dbResult"></param>
-    <param name="maxRows"></param>
-    <returns></returns>
+    <param name="dbResult">The data result object.</param>
+    <param name="textState">The TextState object.</param>"
+    <param name="maxRows">The maximum number of rows to display.</param>
+    <returns>The HTML table rows.</returns>
   </ResultRows>
 </items>

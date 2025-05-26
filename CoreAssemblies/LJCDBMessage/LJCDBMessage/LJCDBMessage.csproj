@@ -90,6 +90,7 @@
     <Content Include="Diagrams\DbRequestJoin.html" />
     <Content Include="Diagrams\DbRequestJoin.jpg" />
     <Content Include="Diagrams\DbResult.jpg" />
+    <Content Include="Doc\DbCommon.html" />
     <Content Include="Doc\DbCommon.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -110,6 +111,7 @@
     </Content>
     <Content Include="Doc\DbResult.xml" />
     <Content Include="Doc\DbSqlBuilder.xml" />
+    <Content Include="Doc\HTMLTableData.xml" />
     <Content Include="Doc\ProjectDBMessage.xml">
       <SubType>Designer</SubType>
     </Content>

@@ -4,34 +4,38 @@
 <!-- ColumnHTML.xml -->
 <items>
   <!-- Main Methods -->
-  <GetHTML>
+  <ColumnHTMLDoc>
     <summary>
       Gets the HTML Table document.
     </summary>
     <param name="dataType"></param>
     <returns></returns>
-  </GetHTML>
+  </ColumnHTMLDoc>
   <!-- HTML Methods -->
   <DataHTML>
     <summary>
-      Gets the HTML Table document from a DataObject.
+      Creates the HTML Table document from a DataObject.
     </summary>
-    <param name="textState"></param>"
-    <returns></returns>
+    <param name="dataObjects">The data objects collection.</param>
+    <param name="propertyNames">The included property names.</param>
+    <param name="textState">The TextState object.</param>"
+    <returns>The HTML Table document.</returns>
   </DataHTML>
   <DataTableHTML>
     <summary>
-      Gets the HTML Table document from DataTable.
+      Creates the HTML Table document from DataTable.
     </summary>
-    <param name="textState"></param>"
-    <returns>The HTML document.</returns>
+    <param name="dataTable">The DataTable object.</param>
+    <param name="textState">The TextState object.</param>"
+    <returns>The HTML Table document.</returns>
   </DataTableHTML>
   <ResultHTML>
     <summary>
-      Gets the HTML Table document from DbResult.
+      Creates the HTML Table document from DbResult.
     </summary>
-    <param name="textState"></param>"
-    <returns>The HTML document.</returns>
+    <param name="dbResult">The DbResult object.</param>
+    <param name="textState">The TextState object.</param>"
+    <returns>The HTML Table document.</returns>
   </ResultHTML>
   <!-- Data Methods -->
   <GetDataTable>

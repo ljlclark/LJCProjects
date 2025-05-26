@@ -213,11 +213,8 @@
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataTable.sql" />
     <Content Include="Doc\BuildersCompare.txt" />
     <Content Include="Doc\ColumnHTMLTable.xml" />
-    <Content Include="Doc\HTMLBuilder.xml" />
-    <Content Include="Doc\HTMLTableData.xml" />
     <Content Include="Doc\MyProcBuilder.xml" />
     <Content Include="Doc\ProcBuilder.xml" />
-    <Content Include="Doc\TextBuilder.xml" />
     <Content Include="Forms\DataTable\ACreate.txt" />
     <Content Include="Forms\DataTable\BCreate.txt" />
     <Content Include="Naming.txt" />

@@ -11,6 +11,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using LJCDataAccess;
+using LJCDataUtility.Properties;
+using LJCDataAccessConfig;
+using LJCDBClientLib;
+using LJCDBMessage;
+using System.Data;
+using System.Linq;
 
 namespace LJCDataUtility
 {
@@ -185,21 +192,36 @@ namespace LJCDataUtility
 
     #region Action Methods
 
+    // Test generating Table HTML Document.
     internal void ColumnTableHTML()
     {
       ParentObject.Cursor = Cursors.WaitCursor;
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         var fileName = "Temp.html";
-        var htmlTable = new ColumnHTMLTable(ParentObject, ColumnManager
-          , fileName);
+        var htmlTable = new ColumnHTMLTable(fileName);
 
-        //var dataType = "DataObject";
-        //var dataType = "DataTable";
-        var dataType = "DbResult";
-        string html = htmlTable.ColumnHTMLDoc(dataType);
+        var textState = new TextState();
+        DataTable dataTable;
 
-        File.WriteAllText(fileName, html);
+        // DataObject collection.
+        var dataColumns = GetDataColumns();
+        List<object> dataObjects = dataColumns.ToList<object>();
+        var propertyNames = GetColumnPropertyNames();
+        var dataHTML = htmlTable.DataHTML(dataObjects, propertyNames, textState);
+
+        // DataTable
+        dataTable = GetColumnDataTable();
+        var tableHTML = htmlTable.DataTableHTML(dataTable, textState);
+
+        // DbResult
+        var dbResult = GetColumnResult();
+        var resultHTML = htmlTable.ResultHTML(dbResult, textState);
+
+        // DataGridView
+        var gridHTML = htmlTable.DataGridHTML(ColumnGrid, textState);
+
+        File.WriteAllText(fileName, gridHTML);
         ParentObject.Cursor = Cursors.Default;
         NetFile.ShellProgram(null, fileName);
       }
@@ -485,6 +507,140 @@ namespace LJCDataUtility
         ParentObject.TimedChange(Change.Column);
       }
       ColumnGrid.LJCAllowSelectionChange = true;
+    }
+    #endregion
+
+    #region Move to Reusable Code?
+
+    /// <summary>Gets a DataConfig from the DataConfigs.xml file.</summary>
+    /// <param name="configName">The DataConfig name.</param>
+    /// <returns>The DataConfig object.</returns>
+    public DataConfig GetDataConfig(string configName)
+    {
+      DataConfig retConfig = null;
+
+      if (NetString.HasValue(configName))
+      {
+        var dataConfigs = new DataConfigs();
+        dataConfigs.LJCLoadData();
+        retConfig = dataConfigs.LJCGetByName(configName);
+      }
+      return retConfig;
+    }
+
+    /// <summary>Gets a DataConfig name from the settings.</summary>
+    /// <param name="settings">The settings object.</param>
+    /// <returns>The DataConfig name.</returns>
+    public string GetSettingsDataConfigName(StandardUISettings settings)
+    {
+      string retName = null;
+
+      if (settings != null)
+      {
+        retName = settings.DataConfigName;
+      }
+      return retName;
+    }
+
+    /// <summary>Gets a DataConfig from the settings.</summary>
+    /// <param name="settings">The settings object.</param>
+    /// <returns>The DataConfig object.</returns>
+    public DataConfig GetSettingsDataConfig(StandardUISettings settings)
+    {
+      DataConfig retConfig = null;
+
+      var configName = GetSettingsDataConfigName(settings);
+      if (configName != null)
+      {
+        retConfig = GetDataConfig(configName);
+      }
+      return retConfig;
+    }
+    #endregion
+
+    #region HTML helper methods
+
+    // Get DataUtilColumn property names.
+    private List<string> GetColumnPropertyNames()
+    {
+      var retNames = new List<string>()
+      {
+        DataUtilColumn.ColumnDataTableID,
+        DataUtilColumn.ColumnDataTableSiteID,
+        DataUtilColumn.ColumnName,
+        DataUtilColumn.ColumnDescription,
+        DataUtilColumn.ColumnSequence,
+        DataUtilColumn.ColumnTypeName,
+        DataUtilColumn.ColumnMaxLength,
+        DataUtilColumn.ColumnAllowNull,
+        DataUtilColumn.ColumnDefaultValue,
+      };
+      return retNames;
+    }
+
+    // Get DataUtilColumn DataTable.
+    private DataTable GetColumnDataTable()
+    {
+      DataTable retDataTable;
+
+      var dataConfig = GetSettingsDataConfig(ParentObject.Settings);
+      var connectionString = dataConfig.GetConnectionString();
+      var providerName = dataConfig.GetProviderName();
+      var dataAccess = new DataAccess(connectionString, providerName);
+
+      var parentID = ParentObject.DataTableRowID(out long parentSiteID);
+      var keyColumns = ColumnManager.ParentKey(parentID, parentSiteID);
+      var propertyNames = GetColumnPropertyNames();
+      var orderByNames = new List<string>()
+      {
+        DataUtilColumn.ColumnSequence
+      };
+      var manager = ColumnManager.Manager;
+      manager.OrderByNames = orderByNames;
+      var dataRequest = manager.CreateLoadRequest(keyColumns, propertyNames);
+      var sqlBuilder = new DbSqlBuilder(dataRequest);
+      var loadSql = sqlBuilder.CreateLoadSql(dataRequest);
+      retDataTable = dataAccess.GetDataTable(loadSql);
+      return retDataTable;
+    }
+
+    // Get DataUtilColumn DbResult.
+    internal DbResult GetColumnResult()
+    {
+      DbResult retResult;
+
+      var parentID = ParentObject.DataTableRowID(out long parentSiteID);
+      var keyColumns = ColumnManager.ParentKey(parentID, parentSiteID);
+      var propertyNames = GetColumnPropertyNames();
+      var orderByNames = new List<string>()
+      {
+        DataUtilColumn.ColumnSequence
+      };
+      var manager = ColumnManager.Manager;
+      manager.OrderByNames = orderByNames;
+      var dataRequest = manager.CreateLoadRequest(keyColumns, propertyNames);
+      var sqlBuilder = new DbSqlBuilder(dataRequest);
+      var loadSql = sqlBuilder.CreateLoadSql(dataRequest);
+      retResult = manager.ExecuteClientSql(RequestType.LoadSQL, loadSql);
+      return retResult;
+    }
+
+    // Get DataColumns collection.
+    private DataColumns GetDataColumns()
+    {
+      DataColumns retColumns;
+
+      var parentID = ParentObject.DataTableRowID(out long parentSiteID);
+      var keyColumns = ColumnManager.ParentKey(parentID, parentSiteID);
+      var propertyNames = GetColumnPropertyNames();
+      var orderByNames = new List<string>()
+      {
+        DataUtilColumn.ColumnSequence
+      };
+      var manager = ColumnManager.Manager;
+      manager.OrderByNames = orderByNames;
+      retColumns = ColumnManager.Load(keyColumns, propertyNames);
+      return retColumns;
     }
     #endregion
 

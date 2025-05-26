@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// HTMLData.cs
+// HTMLTableData.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
@@ -197,7 +197,6 @@ namespace LJCDBMessage
 
     // Create table headings from a DbResult.
     /// <include path='items/ResultHeadings/*' file='Doc/HTMLTableData.xml'/>
-    /// <param name="textState"></param>
     public static string ResultHeadings(DbResult dbResult, TextState textState)
     {
       string retValue = null;
@@ -245,7 +244,6 @@ namespace LJCDBMessage
 
     // Create table rows from a DbResult.
     /// <include path='items/ResultRows/*' file='Doc/HTMLTableData.xml'/>
-    /// <param name="textState"></param>
     public static string ResultRows(DbResult dbResult, TextState textState
       , int maxRows = 0)
     {

@@ -76,7 +76,7 @@
     <Compile Include="Manager\DataKeyManager.cs" />
     <Compile Include="Data\DataTables.cs" />
     <Compile Include="Manager\DataModuleManager.cs" />
-    <Compile Include="Manager\DataTableManager,.cs" />
+    <Compile Include="Manager\DataTableManager.cs" />
     <Compile Include="Manager\TableKeyManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValuesDataUtility.CS" />
