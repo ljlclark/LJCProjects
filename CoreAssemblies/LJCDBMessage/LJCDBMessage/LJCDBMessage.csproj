@@ -71,7 +71,7 @@
     <Compile Include="DbRows.cs" />
     <Compile Include="DbSqlBuilder.cs" />
     <Compile Include="ClassInfo\InfoDataRowCollection.cs" />
-    <Compile Include="HTMLTableData.cs" />
+    <Compile Include="DataHTMLTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultConverter.cs" />
     <Compile Include="ClassInfo\InfoDataTable.cs" />

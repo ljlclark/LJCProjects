@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// HTMLTableData.cs
+// DataHTMLTable.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Data;
 namespace LJCDBMessage
 {
   /// <summary>Methods to set data in HTML elements.</summary>
-  public class HTMLTableData
+  public class DataHTMLTable
   {
     #region Static DataTable Functions
 

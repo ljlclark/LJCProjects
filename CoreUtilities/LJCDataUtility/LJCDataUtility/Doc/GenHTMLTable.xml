@@ -17,6 +17,7 @@
       Creates the HTML Table document from a DataObject.
     </summary>
     <param name="dataObjects">The data objects collection.</param>
+    <param name="heading">The page heading text.</param>
     <param name="propertyNames">The included property names.</param>
     <param name="textState">The TextState object.</param>"
     <returns>The HTML Table document.</returns>
@@ -26,6 +27,7 @@
       Creates the HTML Table document from DataTable.
     </summary>
     <param name="dataTable">The DataTable object.</param>
+    <param name="heading">The page heading text.</param>
     <param name="textState">The TextState object.</param>"
     <returns>The HTML Table document.</returns>
   </DataTableHTML>
@@ -34,9 +36,19 @@
       Creates the HTML Table document from DbResult.
     </summary>
     <param name="dbResult">The DbResult object.</param>
+    <param name="heading">The page heading text.</param>
     <param name="textState">The TextState object.</param>"
     <returns>The HTML Table document.</returns>
   </ResultHTML>
+  <DataGridHTML>
+    <summary>
+      Creates the HTML Table document from a DataGridView.
+    </summary>
+    <param name="grid">The DataGridView object.</param>
+    <param name="heading">The page heading text.</param>
+    <param name="textState">The TextState object.</param>
+    <returns>The HTML Table document.</returns>
+  </DataGridHTML>
   <!-- Data Methods -->
   <GetDataTable>
     <summary>

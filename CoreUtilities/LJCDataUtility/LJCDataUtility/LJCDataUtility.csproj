@@ -78,7 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataUtilityCommon.cs" />
-    <Compile Include="Forms\DataColumn\ColumnHtmlTable.cs" />
+    <Compile Include="Forms\DataColumn\ColumnHTMLTable.cs" />
+    <Compile Include="Forms\DataColumn\GenHTMLTable.cs" />
     <Compile Include="Forms\DataTable\CustomActions\AddData.cs" />
     <Compile Include="Forms\DataTable\CustomActions\CreateData.cs" />
     <Compile Include="Forms\DataTable\CustomActions\CreateTable.cs" />
@@ -212,7 +213,7 @@
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataModule.sql" />
     <Content Include="bin\Debug\SQLScript\1Tables\sp_DataTable.sql" />
     <Content Include="Doc\BuildersCompare.txt" />
-    <Content Include="Doc\ColumnHTMLTable.xml" />
+    <Content Include="Doc\GenHTMLTable.xml" />
     <Content Include="Doc\MyProcBuilder.xml" />
     <Content Include="Doc\ProcBuilder.xml" />
     <Content Include="Forms\DataTable\ACreate.txt" />
