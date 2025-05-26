@@ -11,10 +11,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
-using LJCDataAccess;
-using LJCDataAccessConfig;
-using LJCDBClientLib;
-using LJCDBMessage;
 using System.Data;
 using System.Linq;
 
@@ -199,7 +195,7 @@ namespace LJCDataUtility
       ParentObject.Cursor = Cursors.WaitCursor;
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        var fileName = "Temp.html";
+        var fileName = "DataUtilColumn.html";
         var htmlTable = new GenHTMLTable(fileName);
 
         var columnHTML = new ColumnHTMLTable(ParentObject);
