@@ -1,9 +1,8 @@
-﻿using LJCNetCommon;
+﻿// Copyright (c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// NetString.cs
+using LJCNetCommon;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LJCNetCommonTest
 {
@@ -11,11 +10,14 @@ namespace LJCNetCommonTest
   {
     public static void Test()
     {
+      TestCommon = new TestCommon("NetString");
+      Console.WriteLine();
+      Console.WriteLine("*** NetString ***");
+
       GetDelimitedAndIndexes();
       GetDelimitedString();
       GetStringWithDelimiters();
     }
-
 
     // Get the delimited string begin and end index.
     private static void GetDelimitedAndIndexes()
@@ -27,10 +29,18 @@ namespace LJCNetCommonTest
       var endDelimiter = "</summary>";
       var text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
         , out int beginIndex, out int endIndex, ref startIndex, endDelimiter);
-      // text = "This is some text.";
-      // beginIndex = 0;
-      // endIndex = 27;
-      // startIndex = -1;
+      var result = text;
+      var compare = "This is some text.";
+      TestCommon.Write("GetDelimitedAndIndexes()1: text", result, compare);
+      result = beginIndex.ToString();
+      compare = "0";
+      TestCommon.Write("GetDelimitedAndIndexes()1: beginIndex", result, compare);
+      result = endIndex.ToString();
+      compare = "27";
+      TestCommon.Write("GetDelimitedAndIndexes()1: endIndex", result, compare);
+      result = startIndex.ToString();
+      compare = "-1";
+      TestCommon.Write("GetDelimitedAndIndexes()1: startIndex", result, compare);
 
       // Get text that has the same begin and end delimiter.
       // The endDelimiter is not specified or null.
@@ -39,10 +49,18 @@ namespace LJCNetCommonTest
       beginDelimiter = "|";
       text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
         , out beginIndex, out endIndex, ref startIndex);
-      // text = "This is some text.";
-      // beginIndex = 0;
-      // endIndex = 19;
-      // startIndex = -1;
+      result = text;
+      compare = "This is some text.";
+      TestCommon.Write("GetDelimitedAndIndexes()2: text", result, compare);
+      result = beginIndex.ToString();
+      compare = "0";
+      TestCommon.Write("GetDelimitedAndIndexes()2: beginIndex", result, compare);
+      result = endIndex.ToString();
+      compare = "19";
+      TestCommon.Write("GetDelimitedAndIndexes()2: endIndex", result, compare);
+      result = startIndex.ToString();
+      compare = "-1";
+      TestCommon.Write("GetDelimitedAndIndexes()2: startIndex", result, compare);
 
       // Get text that has no end delimiter.
       source = "|This is some text.";
@@ -50,27 +68,65 @@ namespace LJCNetCommonTest
       beginDelimiter = "|";
       text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
         , out beginIndex, out endIndex, ref startIndex, "#NoDelimiter");
-      // text = "This is some text.";
-      // beginIndex = 0;
-      // endIndex = 19;
-      // startIndex = -1;
+      result = text;
+      compare = "This is some text.";
+      TestCommon.Write("GetDelimitedAndIndexes()3: text", result, compare);
+      result = beginIndex.ToString();
+      compare = "0";
+      TestCommon.Write("GetDelimitedAndIndexes()3: beginIndex", result, compare);
+      result = endIndex.ToString();
+      compare = "19";
+      TestCommon.Write("GetDelimitedAndIndexes()3: endIndex", result, compare);
+      result = startIndex.ToString();
+      compare = "-1";
+      TestCommon.Write("GetDelimitedAndIndexes()3: startIndex", result, compare);
 
       // Get delimited text where the delimiters occur multiple times.
       source = "|This is some text.| |and some more here.|";
       startIndex = 0;
       beginDelimiter = "|";
+      var first = true;
       while (startIndex > -1)
       {
         text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
           , out beginIndex, out endIndex, ref startIndex);
-        // First time: text = "This is some text.";
-        // beginIndex = 0;
-        // endIndex = 19;
-        // startIndex = 20;
-        // Second time: text = "and some more here.";
-        // beginIndex = 21;
-        // endIndex = 41;
-        // startIndex = -1
+        if (first)
+        {
+          result = text;
+          compare = "This is some text.";
+          TestCommon.Write("GetDelimitedAndIndexes()4: text", result, compare);
+          result = beginIndex.ToString();
+          compare = "0";
+          TestCommon.Write("GetDelimitedAndIndexes()4: beginIndex", result
+            , compare);
+          result = endIndex.ToString();
+          compare = "19";
+          TestCommon.Write("GetDelimitedAndIndexes()4: endIndex", result
+            , compare);
+          result = startIndex.ToString();
+          compare = "20";
+          TestCommon.Write("GetDelimitedAndIndexes()4: startIndex", result
+            , compare);
+        }
+        else
+        {
+          result = text;
+          compare = "and some more here.";
+          TestCommon.Write("GetDelimitedAndIndexes()4: text", result, compare);
+          result = beginIndex.ToString();
+          compare = "21";
+          TestCommon.Write("GetDelimitedAndIndexes()4: beginIndex", result
+            , compare);
+          result = endIndex.ToString();
+          compare = "41";
+          TestCommon.Write("GetDelimitedAndIndexes()4: endIndex", result
+            , compare);
+          result = startIndex.ToString();
+          compare = "-1";
+          TestCommon.Write("GetDelimitedAndIndexes()4: startIndex", result
+            , compare);
+        }
+        first = false;
       }
     }
 
@@ -84,8 +140,12 @@ namespace LJCNetCommonTest
 
       var text = NetString.GetDelimitedString(source, beginDelimiter
         , ref startIndex, endDelimiter);
-      // text = "This is some text.";
-      // startIndex = -1;
+      var result = text;
+      var compare = "This is some text.";
+      TestCommon.Write("GetDelimitedString(): text", result, compare);
+      result = startIndex.ToString();
+      compare = "-1";
+      TestCommon.Write("GetDelimitedString(): startIndex", result, compare);
     }
 
     // Get the string including the specified delimiters.
@@ -99,8 +159,13 @@ namespace LJCNetCommonTest
       // Get text that has different begin and end delimiter.
       var text = NetString.GetStringWithDelimiters(source, beginDelimiter
         , ref startIndex, endDelimiter);
-      // text = "<summary>This is some text.</summary>";
-      // startIndex = -1;
+      var result = text;
+      var compare = "<summary>This is some text.</summary>";
+      TestCommon.Write("GetStringWithDelimiters()1: text", result, compare);
+      result = startIndex.ToString();
+      compare = "-1";
+      TestCommon.Write("GetStringWithDelimiters()1: startIndex", result
+        , compare);
 
       // Get text that has the same begin and end delimiter.
       // The endDelimiter is not specified or null.
@@ -109,8 +174,13 @@ namespace LJCNetCommonTest
       beginDelimiter = "|";
       text = NetString.GetStringWithDelimiters(source, beginDelimiter
         , ref startIndex);
-      // text = "|This is some text.|";
-      // startIndex = -1;
+      result = text;
+      compare = "|This is some text.|";
+      TestCommon.Write("GetStringWithDelimiters()2: text", result, compare);
+      result = startIndex.ToString();
+      compare = "-1";
+      TestCommon.Write("GetStringWithDelimiters()2: startIndex", result
+        , compare);
 
       // Get text that has no end delimiter.
       source = "|This is some text.";
@@ -118,22 +188,50 @@ namespace LJCNetCommonTest
       beginDelimiter = "|";
       text = NetString.GetStringWithDelimiters(source, beginDelimiter
         , ref startIndex, "#NoDelimiter");
-      // text = "|This is some text.";
-      // startIndex = -1;
+      result = text;
+      compare = "|This is some text.";
+      TestCommon.Write("GetStringWithDelimiters()3: text", result, compare);
+      result = startIndex.ToString();
+      compare = "-1";
+      TestCommon.Write("GetStringWithDelimiters()3: startIndex", result
+        , compare);
 
       // Get delimited text where the delimiters occur multiple times.
       source = "|This is some text.| |and some more here.|";
       startIndex = 0;
       beginDelimiter = "|";
+      var first = true;
       while (startIndex > -1)
       {
         text = NetString.GetStringWithDelimiters(source, beginDelimiter
           , ref startIndex);
-        // First time: text = "|This is some text.|";
-        // startIndex = 20;
-        // Second time: text = "|and some more here.|";
-        // startIndex = -1
+        if (first)
+        {
+          result = text;
+          compare = "|This is some text.|";
+          TestCommon.Write("GetStringWithDelimiters()4: text", result, compare);
+          result = startIndex.ToString();
+          compare = "20";
+          TestCommon.Write("GetStringWithDelimiters()4: startIndex", result
+            , compare);
+        }
+        else
+        {
+          result = text;
+          compare = "|and some more here.|";
+          TestCommon.Write("GetStringWithDelimiters()5: text", result, compare);
+          result = startIndex.ToString();
+          compare = "-1";
+          TestCommon.Write("GetStringWithDelimiters()5: startIndex", result
+            , compare);
+        }
+        first = false;
       }
     }
+
+    #region Class Data
+
+    private static TestCommon TestCommon { get; set; }
+    #endregion
   }
 }

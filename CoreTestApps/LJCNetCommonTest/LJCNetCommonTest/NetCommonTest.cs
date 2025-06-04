@@ -1,10 +1,10 @@
-﻿using LJCNetCommon;
+﻿// Copyright (c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// NetCommonTest.cs
+using LJCNetCommon;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LJCNetCommonTest
 {
@@ -12,6 +12,10 @@ namespace LJCNetCommonTest
   {
     public static void Test()
     {
+      TestCommon = new TestCommon("NetCommon");
+      Console.WriteLine();
+      Console.WriteLine("*** NetCommon ***");
+
       // Text Transform Functions
       Base64BytesToText();
       TextToBase64Bytes();
@@ -27,6 +31,8 @@ namespace LJCNetCommonTest
       BytesToMemStream();
       MemStreamToString();
       StringToMemStream();
+      XmlEncode();
+      XmlDecode();
 
       // Object Data Functions
       GetBoolean();
@@ -53,18 +59,24 @@ namespace LJCNetCommonTest
       // Setup
       byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
 
-      // Decodes a Base64 byte array to a Text value.
+      // Create Text from Base64 byte array.
       string text = NetCommon.Base64BytesToText(base64Bytes);
+      var result = text;
+      var compare = "Text";
+      TestCommon.Write("Base64BytesToText()", result, compare);
     }
 
     // Encodes a Text value to a Base64 byte array.
     private static void TextToBase64Bytes()
     {
-      // Create Text from Base64 byte array.
+      // Create Base64 byte array from text.
       byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
 
       // Check the text.
       string text = NetCommon.Base64BytesToText(base64Bytes);
+      var result = text;
+      var compare = "Text";
+      TestCommon.Write("TextToBase64Bytes()", result, compare);
     }
 
     // Decodes a Base64 byte array to a Text byte array.
@@ -78,6 +90,9 @@ namespace LJCNetCommonTest
 
       // Check the text.
       string text = NetCommon.BytesToText(textBytes);
+      var result = text;
+      var compare = "Text";
+      TestCommon.Write("Base64BytesToTextBytes()", result, compare);
     }
 
     // Encodes a Text byte array to a Base64 byte array.
@@ -91,6 +106,9 @@ namespace LJCNetCommonTest
 
       // Check the text.
       string text = NetCommon.Base64BytesToText(base64Bytes);
+      var result = text;
+      var compare = "Text";
+      TestCommon.Write("TextBytesToBase64Bytes()", result, compare);
     }
 
     // Decodes a Base64 value to a Text value.
@@ -101,6 +119,9 @@ namespace LJCNetCommonTest
 
       // Decodes a Base64 string to Text.
       string text = NetCommon.Base64ToText(base64);
+      var result = text;
+      var compare = "Text";
+      TestCommon.Write("Base64BytesToText()", result, compare);
     }
 
     // Encodes a Text value to a Base64 value.
@@ -113,6 +134,9 @@ namespace LJCNetCommonTest
 
       // Check the text.
       text = NetCommon.Base64ToText(base64);
+      var result = text;
+      var compare = "Text";
+      TestCommon.Write("TextToBase64()", result, compare);
     }
 
     // Decodes a Base64 value to a Text byte array.
@@ -126,6 +150,9 @@ namespace LJCNetCommonTest
 
       // Check the text.
       string text = NetCommon.BytesToText(textBytes);
+      var result = text;
+      var compare = "Text";
+      TestCommon.Write("Base64ToTextBytes()", result, compare);
     }
 
     // Encodes a Text byte array to a Base64 value.
@@ -139,6 +166,9 @@ namespace LJCNetCommonTest
 
       // Check the text.
       string text = NetCommon.Base64ToText(base64);
+      var result = text;
+      var compare = "Text";
+      TestCommon.Write("TextBytesToBase64()", result, compare);
     }
 
     // Creates text from a byte array.
@@ -149,6 +179,9 @@ namespace LJCNetCommonTest
 
       // Creates text from a byte array.
       string text = NetCommon.BytesToText(bytes);
+      var result = text;
+      var compare = "Text";
+      TestCommon.Write("BytesToText()", result, compare);
     }
 
     // Creates a byte array from text.
@@ -162,6 +195,9 @@ namespace LJCNetCommonTest
 
       // Check the text.
       text = NetCommon.BytesToText(bytes);
+      var result = text;
+      var compare = "Text";
+      TestCommon.Write("TextToBytes()", result, compare);
     }
 
     // Copies a memory stream to a byte array.
@@ -177,6 +213,9 @@ namespace LJCNetCommonTest
 
       // Check the text.
       string text = NetCommon.BytesToText(textBytes);
+      var result = text;
+      var compare = "Text";
+      TestCommon.Write("MemStreamToBytes()", result, compare);
     }
 
     // Copies a byte array to a memory stream.
@@ -190,6 +229,9 @@ namespace LJCNetCommonTest
       {
         // Check the text.
         string text = NetCommon.MemStreamToString(stream);
+        var result = text;
+        var compare = "Text";
+        TestCommon.Write("BytesToMemStream()", result, compare);
       }
     }
 
@@ -201,6 +243,9 @@ namespace LJCNetCommonTest
       {
         // Creates a string from a memory stream.
         string text = NetCommon.MemStreamToString(stream);
+        var result = text;
+        var compare = "Text";
+        TestCommon.Write("MemStreamToString()", result, compare);
       }
     }
 
@@ -211,6 +256,9 @@ namespace LJCNetCommonTest
       {
         // Check the text.
         string text = NetCommon.MemStreamToString(stream);
+        var result = text;
+        var compare = "Text";
+        TestCommon.Write("StringToMemStream()", result, compare);
       }
     }
 
@@ -223,6 +271,9 @@ namespace LJCNetCommonTest
 
       // Decodes an encoded XML string.
       string text = NetCommon.XmlDecode(encoded);
+      var result = text;
+      var compare = "<text>Here & There</text>";
+      TestCommon.Write("XmlDecode()", result, compare);
     }
 
     // Encodes a string with XML escape values.
@@ -236,6 +287,9 @@ namespace LJCNetCommonTest
 
       // Check the text.
       string text = NetCommon.XmlDecode(encoded);
+      var result = text;
+      var compare = "<text>Here & There</text>";
+      TestCommon.Write("XmlEncode()", result, compare);
     }
     #endregion
 
@@ -250,6 +304,9 @@ namespace LJCNetCommonTest
 
       // Gets a short value from an object.
       bool value = NetCommon.GetBoolean(obj);
+      var result = value.ToString();
+      var compare = "True";
+      TestCommon.Write("GetBoolean()", result, compare);
     }
 
     // Gets a byte value from an object.
@@ -261,6 +318,9 @@ namespace LJCNetCommonTest
 
       // Gets a byte value from an object.
       byte value = NetCommon.GetByte(obj);
+      var result = value.ToString();
+      var compare = "65";
+      TestCommon.Write("GetByte()", result, compare);
     }
 
     // Gets a char value from an object.
@@ -272,6 +332,9 @@ namespace LJCNetCommonTest
 
       // Gets a byte value from an object.
       char value = NetCommon.GetChar(obj);
+      var result = value.ToString();
+      var compare = "A";
+      TestCommon.Write("GetChar()", result, compare);
     }
 
     // Gets a decimal value from an object.
@@ -283,6 +346,9 @@ namespace LJCNetCommonTest
 
       // Gets a decimal value from an object.
       decimal value = NetCommon.GetDecimal(obj);
+      var result = value.ToString();
+      var compare = "3.14";
+      TestCommon.Write("GetDecimal()", result, compare);
     }
 
     // Gets a short value from an object.
@@ -294,6 +360,9 @@ namespace LJCNetCommonTest
 
       // Gets a short value from an object.
       short value = NetCommon.GetInt16(obj);
+      var result = value.ToString();
+      var compare = "3";
+      TestCommon.Write("GetInt16()", result, compare);
     }
 
     // Gets an int value from an object.
@@ -305,6 +374,9 @@ namespace LJCNetCommonTest
 
       // Gets an int value from an object.
       int value = NetCommon.GetInt32(obj);
+      var result = value.ToString();
+      var compare = "3";
+      TestCommon.Write("GetInt32()", result, compare);
     }
 
     // Gets a long value from an object.
@@ -316,6 +388,9 @@ namespace LJCNetCommonTest
 
       // Gets a long value from an object.
       long value = NetCommon.GetInt64(obj);
+      var result = value.ToString();
+      var compare = "3";
+      TestCommon.Write("GetInt64()", result, compare);
     }
 
     // Gets a trimmed string value from an object.
@@ -327,6 +402,9 @@ namespace LJCNetCommonTest
 
       // Gets a string value from an object.
       string value = NetCommon.GetString(obj);
+      var result = value;
+      var compare = "3";
+      TestCommon.Write("GetString", result, compare);
     }
     #endregion
 
@@ -349,6 +427,10 @@ namespace LJCNetCommonTest
       // Deserialize an XML message file to an object.
       Person newPerson;
       newPerson = NetCommon.XmlDeserialize(typeof(Person), file) as Person;
+      var result = $"{newPerson.Id}, {newPerson.Name}" +
+        $", {newPerson.PrincipleFlag}";
+      var compare = "1, Text, True";
+      TestCommon.Write("XmlDeserialize()", result, compare);
     }
 
     // Deserialize an XML message string to an object.
@@ -366,6 +448,10 @@ namespace LJCNetCommonTest
       // Deserialize an XML message string to an object.
       Person newPerson;
       newPerson = NetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
+      var result = $"{newPerson.Id}, {newPerson.Name}" +
+        $", {newPerson.PrincipleFlag}";
+      var compare = "2, Text, True";
+      TestCommon.Write("XmlDeserializeMessage()", result, compare);
     }
 
     // Serialize an object to an XML message file.
@@ -386,6 +472,10 @@ namespace LJCNetCommonTest
       // Check the object.
       Person newPerson;
       newPerson = NetCommon.XmlDeserialize(typeof(Person), file) as Person;
+      var result = $"{newPerson.Id}, {newPerson.Name}" +
+        $", {newPerson.PrincipleFlag}";
+      var compare = "2, Text, True";
+      TestCommon.Write("XmlSerialize()", result, compare);
     }
 
     // Serialize an object to an XML message string.
@@ -403,7 +493,16 @@ namespace LJCNetCommonTest
       // Check the object.
       Person newPerson;
       newPerson = NetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
+      var result = $"{newPerson.Id}, {newPerson.Name}" +
+        $", {newPerson.PrincipleFlag}";
+      var compare = "2, Text, True";
+      TestCommon.Write("XmlSerializeToString()", result, compare);
     }
+    #endregion
+
+    #region Class Data
+
+    private static TestCommon TestCommon { get; set; }
     #endregion
   }
 

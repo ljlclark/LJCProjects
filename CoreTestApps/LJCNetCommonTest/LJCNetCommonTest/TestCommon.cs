@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright (c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// TestCommon.cs
+using System;
 
 namespace LJCNetCommonTest
 {
-  internal class TextCommon
+  internal class TestCommon
   {
-
-    internal TextCommon(string className)
+    internal TestCommon(string className)
     {
       mClassName = className;
     }

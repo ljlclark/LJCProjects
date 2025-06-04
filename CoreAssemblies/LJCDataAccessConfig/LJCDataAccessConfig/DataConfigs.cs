@@ -15,6 +15,25 @@ namespace LJCDataAccessConfig
   [XmlRoot("DataConfigs")]
   public class DataConfigs : List<DataConfig>
   {
+    #region Static Functions
+
+    /// <summary>Gets a DataConfig from the DataConfigs.xml file.</summary>
+    /// <param name="configName">The DataConfig name.</param>
+    /// <returns>The DataConfig object.</returns>
+    public static DataConfig GetDataConfig(string configName)
+    {
+      DataConfig retConfig = null;
+
+      if (NetString.HasValue(configName))
+      {
+        var dataConfigs = new DataConfigs();
+        dataConfigs.LJCLoadData();
+        retConfig = dataConfigs.LJCGetByName(configName);
+      }
+      return retConfig;
+    }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.

@@ -117,49 +117,19 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Move to Reusable Code?
-
-    /// <summary>Gets a DataConfig from the DataConfigs.xml file.</summary>
-    /// <param name="configName">The DataConfig name.</param>
-    /// <returns>The DataConfig object.</returns>
-    public DataConfig GetDataConfig(string configName)
-    {
-      DataConfig retConfig = null;
-
-      if (NetString.HasValue(configName))
-      {
-        var dataConfigs = new DataConfigs();
-        dataConfigs.LJCLoadData();
-        retConfig = dataConfigs.LJCGetByName(configName);
-      }
-      return retConfig;
-    }
-
-    /// <summary>Gets a DataConfig name from the settings.</summary>
-    /// <param name="settings">The settings object.</param>
-    /// <returns>The DataConfig name.</returns>
-    public string GetSettingsDataConfigName(StandardUISettings settings)
-    {
-      string retName = null;
-
-      if (settings != null)
-      {
-        retName = settings.DataConfigName;
-      }
-      return retName;
-    }
+    #region Private Methods
 
     /// <summary>Gets a DataConfig from the settings.</summary>
     /// <param name="settings">The settings object.</param>
     /// <returns>The DataConfig object.</returns>
-    public DataConfig GetSettingsDataConfig(StandardUISettings settings)
+    private DataConfig GetSettingsDataConfig(StandardUISettings settings)
     {
       DataConfig retConfig = null;
 
-      var configName = GetSettingsDataConfigName(settings);
+      var configName = settings.DataConfigName;
       if (configName != null)
       {
-        retConfig = GetDataConfig(configName);
+        retConfig = DataConfigs.GetDataConfig(configName);
       }
       return retConfig;
     }

@@ -196,9 +196,9 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         var fileName = "DataUtilColumn.html";
-        var htmlTable = new GenHTMLTable(fileName);
-
+        var genHTML = new GenHTMLTable(fileName);
         var columnHTML = new ColumnHTMLTable(ParentObject);
+
         var textState = new TextState();
         DataTable dataTable;
         var heading = "Data Columns";
@@ -207,19 +207,19 @@ namespace LJCDataUtility
         var dataColumns = columnHTML.GetDataColumns();
         List<object> dataObjects = dataColumns.ToList<object>();
         var propertyNames = columnHTML.GetColumnPropertyNames();
-        var dataHTML = htmlTable.DataHTML(dataObjects, heading, propertyNames
+        var dataHTML = genHTML.DataHTML(dataObjects, heading, propertyNames
           , textState);
 
         // DataTable
         dataTable = columnHTML.GetColumnDataTable();
-        var tableHTML = htmlTable.DataTableHTML(dataTable, heading, textState);
+        var tableHTML = genHTML.DataTableHTML(dataTable, heading, textState);
 
         // DbResult
         var dbResult = columnHTML.GetColumnResult();
-        var resultHTML = htmlTable.ResultHTML(dbResult, heading, textState);
+        var resultHTML = genHTML.ResultHTML(dbResult, heading, textState);
 
         // DataGridView
-        var gridHTML = htmlTable.DataGridHTML(ColumnGrid, heading, textState);
+        var gridHTML = genHTML.DataGridHTML(ColumnGrid, heading, textState);
 
         File.WriteAllText(fileName, gridHTML);
         ParentObject.Cursor = Cursors.Default;

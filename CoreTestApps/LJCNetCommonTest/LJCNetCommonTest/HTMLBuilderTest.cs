@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // HTMLBuilderTest.cs
 using LJCNetCommon;
@@ -13,23 +13,22 @@ namespace LJCNetCommonTest
     // Performs the tests.
     internal static void Test()
     {
-      TextCommon = new TextCommon("HTMLBuilder");
-
+      TestCommon = new TestCommon("HTMLBuilder");
       Console.WriteLine();
       Console.WriteLine("*** HTMLBuilder ***");
 
       // Methods
+      AddChildIndent();
       AddIndent();
+      EndsWithNewLine();
+      StartWithNewLine();
+      //HasText();
 
-      // Append Text Methods
+      // Text Methods
       AddLine();
       AddText();
       Line();
       Text();
-
-      // Get Text Methods
-      EndsWithNewLine();
-      StartWithNewLine();
       GetAttribs();
       GetIndented();
       GetIndentString();
@@ -37,30 +36,27 @@ namespace LJCNetCommonTest
       GetText();
       GetWrapped();
 
-      // Append Element Methods
+      // Element Methods
       Begin();
       Create();
       End();
-      Link();
-      Meta();
-      Metas();
-      Script();
-
-      // Get Element Methods
-      AddChildIndent();
       GetBegin();
       GetBeginSelector();
       GetCreate();
       GetEnd();
+
+      // Create Element Methods
+      Link();
+      Meta();
+      Metas();
+      Script();
       GetLink();
       GetMeta();
       GetMetas();
       GetScript();
 
-      // Append HTML Methods
+      // HTML Methods
       HTMLBegin();
-
-      // Get HTML Methods
       GetHTMLBegin();
       GetHTMLEnd();
       GetHTMLHead();
@@ -69,6 +65,23 @@ namespace LJCNetCommonTest
       Attribs();
       StartAttribs();
       TableAttribs();
+    }
+    #endregion
+
+    #region Methods
+
+    private static void AddChildIndent()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      var result = CustomBegin("body", textState);
+
+      // result:
+      // <body>
+
+      var compare = "<body>";
+      TestCommon.Write("AddChildIndent()", result, compare);
     }
 
     private static void AddIndent()
@@ -111,11 +124,45 @@ namespace LJCNetCommonTest
       b.AddLine("  This text is indented.");
       b.AddText("Not indented. No start with newline.");
       var compare = b.ToString();
-      TextCommon.Write("AddIndent()", result, compare);
+      TestCommon.Write("AddIndent()", result, compare);
+    }
+
+    private static bool EndsWithNewLine()
+    {
+      var hb = new HTMLBuilder();
+
+      bool retValue = hb.EndsWithNewLine();
+      var result = retValue.ToString();
+
+      // result:
+      // False
+
+      var b = new HTMLBuilder();
+      b.AddText("False");
+      var compare = b.ToString();
+      TestCommon.Write("EndsWithNewLine()", result, compare);
+      return retValue;
+    }
+
+    private static bool StartWithNewLine()
+    {
+      var hb = new HTMLBuilder();
+
+      bool retValue = hb.StartWithNewLine(true);
+      var result = retValue.ToString();
+
+      // result:
+      // False
+
+      var b = new HTMLBuilder();
+      b.AddText("False");
+      var compare = b.ToString();
+      TestCommon.Write("StartWithNewLine()", result, compare);
+      return retValue;
     }
     #endregion
 
-    #region Append Text Methods (4)
+    #region Text Methods
 
     private static void AddLine()
     {
@@ -137,7 +184,7 @@ namespace LJCNetCommonTest
       b.AddLine("This is an appended line.");
       b.AddText(":");
       var compare = b.ToString();
-      TextCommon.Write("AddLine()", result, compare);
+      TestCommon.Write("AddLine()", result, compare);
     }
 
     private static void AddText()
@@ -154,7 +201,7 @@ namespace LJCNetCommonTest
       // This is some appended text.
 
       var compare = "This is some appended text.";
-      TextCommon.Write("AddText()", result, compare);
+      TestCommon.Write("AddText()", result, compare);
     }
 
     private static void Line()
@@ -190,7 +237,7 @@ namespace LJCNetCommonTest
       b.AddLine();
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      TextCommon.Write("Line()", result, compare);
+      TestCommon.Write("Line()", result, compare);
     }
 
     private static void Text()
@@ -221,44 +268,7 @@ namespace LJCNetCommonTest
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      TextCommon.Write("Text()", result, compare);
-    }
-    #endregion
-
-    #region Get Text Methods (5)
-
-    private static bool EndsWithNewLine()
-    {
-      var hb = new HTMLBuilder();
-
-      bool retValue = hb.EndsWithNewLine();
-      var result = retValue.ToString();
-
-      // result:
-      // False
-
-      var b = new HTMLBuilder();
-      b.AddText("False");
-      var compare = b.ToString();
-      TextCommon.Write("EndsWithNewLine()", result, compare);
-      return retValue;
-    }
-
-    private static bool StartWithNewLine()
-    {
-      var hb = new HTMLBuilder();
-
-      bool retValue = hb.StartWithNewLine(true);
-      var result = retValue.ToString();
-
-      // result:
-      // False
-
-      var b = new HTMLBuilder();
-      b.AddText("False");
-      var compare = b.ToString();
-      TextCommon.Write("StartWithNewLine()", result, compare);
-      return retValue;
+      TestCommon.Write("Text()", result, compare);
     }
 
     private static void GetAttribs()
@@ -285,7 +295,7 @@ namespace LJCNetCommonTest
       b.AddLine("<div class=\"Selector\">");
       b.AddText("</div>");
       var compare = b.ToString();
-      TextCommon.Write("GetAttribs()", result, compare);
+      TestCommon.Write("GetAttribs()", result, compare);
     }
 
     private static void GetIndented()
@@ -312,7 +322,7 @@ namespace LJCNetCommonTest
       b.AddLine("This text is NOT indented.");
       b.AddText("    This text is indented.");
       var compare = b.ToString();
-      TextCommon.Write("GetIndented()", result, compare);
+      TestCommon.Write("GetIndented()", result, compare);
     }
 
     private static void GetIndentString()
@@ -326,14 +336,14 @@ namespace LJCNetCommonTest
       var result = hb.GetIndentString();
       hb.AddText(result);
 
-      hb.AddText(":");
+      hb.AddText("  :");
       result = hb.ToString();
 
       // result:
       //   :
 
       var compare = "  :";
-      TextCommon.Write("GetIndentString()", result, compare);
+      TestCommon.Write("GetIndentString()", result, compare);
     }
 
     private static void GetLine()
@@ -367,10 +377,9 @@ namespace LJCNetCommonTest
 
       var b = new HTMLBuilder();
       b.AddLine("This is an appended line.");
-      b.AddLine();
       b.AddText("  :");
       var compare = b.ToString();
-      TextCommon.Write("GetLine()", result, compare);
+      TestCommon.Write("GetLine()", result, compare);
     }
 
     private static void GetText()
@@ -402,7 +411,7 @@ namespace LJCNetCommonTest
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      TextCommon.Write("GetText()", result, compare);
+      TestCommon.Write("GetText()", result, compare);
     }
 
     private static void GetWrapped()
@@ -431,11 +440,11 @@ namespace LJCNetCommonTest
       b.AddLine(" their country. Now is the");
       b.AddText("time for all good men to come to the aid of their country.");
       var compare = b.ToString();
-      TextCommon.Write("GetGetWrapped()", result, compare);
+      TestCommon.Write("GetGetWrapped()", result, compare);
     }
     #endregion
 
-    #region Append Element Methods
+    #region Element Methods
 
     private static void Begin()
     {
@@ -467,7 +476,7 @@ namespace LJCNetCommonTest
       b.AddLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
       b.AddText("</html>");
       var compare = b.ToString();
-      TextCommon.Write("Begin()", result, compare);
+      TestCommon.Write("Begin()", result, compare);
     }
 
     private static void Create()
@@ -492,7 +501,7 @@ namespace LJCNetCommonTest
       b.AddText(" xmlns=\"http://www.w3.org/1999/xhtml\">");
       b.AddText("</html>");
       var compare = b.ToString();
-      TextCommon.Write("Create()", result, compare);
+      TestCommon.Write("Create()", result, compare);
     }
 
     private static void End()
@@ -510,8 +519,117 @@ namespace LJCNetCommonTest
       // </html>
 
       var compare = "</html>";
-      TextCommon.Write("End()", result, compare);
+      TestCommon.Write("End()", result, compare);
     }
+
+    private static string CustomBegin(string name, TextState textState
+      , Attributes attribs = null, bool addIndent = true
+      , bool childIndent = true)
+    {
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var hb = new HTMLBuilder(textState);
+
+      var createText = hb.GetBegin(name, textState, attribs, addIndent
+        , childIndent);
+      hb.Text(createText, NoIndent);
+
+      // Use AddChildIndent after beginning an element.
+      hb.AddChildIndent(createText, textState);
+
+      var result = hb.ToString();
+      return result;
+    }
+
+    private static void GetBegin()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var hb = new HTMLBuilder();
+
+      // Example Method:
+      // Starts the text with a newline if the builder already has text
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
+      // The text begins with the current indent string if param
+      // addIndent = true.
+      // Defaults: addIndent = true, allowNewLine = true.
+      var result = hb.GetBegin("body", textState);
+
+      // result:
+      // <body>
+
+      var compare = "<body>";
+      TestCommon.Write("GetBegin()", result, compare);
+    }
+
+    private static void GetBeginSelector()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var hb = new HTMLBuilder();
+
+      // Example Method:
+      // Starts the text with a newline if the builder already has text
+      // and param allowNewLine = true and builder text does not end with
+      // a newline.
+      // The text begins with the current indent string if param
+      // addIndent = true.
+      // Defaults: addIndent = true, allowNewLine = true.
+      var result = hb.GetBeginSelector("tr", textState);
+
+      // result:
+      // tr {
+
+      var compare = "tr {";
+      TestCommon.Write("GetBeginSelector()", result, compare);
+    }
+
+    private static void GetCreate()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var hb = new HTMLBuilder(textState);
+
+      // Example Method:
+      // Defaults: close = true.
+      hb.Create("head", null, textState);
+      var result = hb.ToString();
+
+      // result:
+      // <head></head>
+
+      var compare = "<head></head>";
+      TestCommon.Write("GetCreate()", result, compare);
+    }
+
+    private static void GetEnd()
+    {
+      // Root Method Begin
+      var textState = new TextState();
+
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var hb = new HTMLBuilder(textState);
+
+      // Example Method:
+      // Defaults: close = true.
+      hb.End("head", textState);
+      var result = hb.ToString();
+
+      // result:
+      // </head>
+
+      var compare = "</head>";
+      TestCommon.Write("GetEnd()", result, compare);
+    }
+    #endregion
+
+    #region Create Element Methods
 
     private static void Link()
     {
@@ -532,7 +650,7 @@ namespace LJCNetCommonTest
       b.AddText("<link rel=\"stylesheet\" type=\"text/css\"");
       b.AddText(" href=\"File.css\" />");
       var compare = b.ToString();
-      TextCommon.Write("Link()", result, compare);
+      TestCommon.Write("Link()", result, compare);
     }
 
     private static void Meta()
@@ -555,7 +673,7 @@ namespace LJCNetCommonTest
       b.AddText("<meta name=\"viewport\"");
       b.AddText($" content=\"{content}\" />");
       var compare = b.ToString();
-      TextCommon.Write("Meta()", result, compare);
+      TestCommon.Write("Meta()", result, compare);
     }
 
     private static void Metas()
@@ -583,7 +701,7 @@ namespace LJCNetCommonTest
       var content = "width=device-width initial-scale=1";
       b.AddText($"<meta name=\"viewport\" content=\"{content}\" />");
       var compare = b.ToString();
-      TextCommon.Write("Metas()", result, compare);
+      TestCommon.Write("Metas()", result, compare);
     }
 
     private static void Script()
@@ -602,132 +720,7 @@ namespace LJCNetCommonTest
       // <script src="File.js"></script>
 
       var compare = "<script src=\"File.js\"></script>";
-      TextCommon.Write("Script()", result, compare);
-    }
-    #endregion
-
-    #region Get Element Methods
-
-    private static void AddChildIndent()
-    {
-      // Root Method Begin
-      var textState = new TextState();
-
-      var result = CustomBegin("body", textState);
-
-      // result:
-      // <body>
-
-      var compare = "<body>";
-      TextCommon.Write("AddChildIndent()", result, compare);
-    }
-
-    private static string CustomBegin(string name, TextState textState
-      , Attributes attribs = null, bool addIndent = true
-      , bool childIndent = true)
-    {
-      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
-
-      var createText = hb.GetBegin(name, textState, attribs, addIndent
-        , childIndent);
-      // Use NoIndent after a "GetText" method.
-      hb.Text(createText, NoIndent);
-      // Use AddChildIndent after beginning an element.
-      hb.AddChildIndent(createText, textState);
-      var result = hb.ToString();
-
-      // Append Method
-      //hb.UpdateState(textState);
-      return result;
-    }
-
-    private static void GetBegin()
-    {
-      // Root Method Begin
-      var textState = new TextState();
-
-      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
-
-      // Example Method:
-      // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true and builder text does not end with
-      // a newline.
-      // The text begins with the current indent string if param
-      // addIndent = true.
-      // Defaults: addIndent = true, allowNewLine = true.
-      var result = hb.GetBegin("body", textState);
-
-      // result:
-      // <body>
-
-      var compare = "<body>";
-      TextCommon.Write("GetBegin()", result, compare);
-    }
-
-    private static void GetBeginSelector()
-    {
-      // Root Method Begin
-      var textState = new TextState();
-
-      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
-
-      // Example Method:
-      // Starts the text with a newline if the builder already has text
-      // and param allowNewLine = true and builder text does not end with
-      // a newline.
-      // The text begins with the current indent string if param
-      // addIndent = true.
-      // Defaults: addIndent = true, allowNewLine = true.
-      var result = hb.GetBeginSelector("tr", textState);
-
-      // result:
-      // tr {
-
-      var compare = "tr {";
-      TextCommon.Write("GetBeginSelector()", result, compare);
-    }
-
-    private static void GetCreate()
-    {
-      // Root Method Begin
-      var textState = new TextState();
-
-      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
-
-      // Example Method:
-      // Defaults: close = true.
-      hb.Create("head", null, textState);
-      var result = hb.ToString();
-
-      // result:
-      // <head></head>
-
-      var compare = "<head></head>";
-      TextCommon.Write("GetCreate()", result, compare);
-    }
-
-    private static void GetEnd()
-    {
-      // Root Method Begin
-      var textState = new TextState();
-
-      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
-
-      // Example Method:
-      // Defaults: close = true.
-      hb.End("head", textState);
-      var result = hb.ToString();
-
-      // result:
-      // </head>
-
-      var compare = "</head>";
-      TextCommon.Write("GetEnd()", result, compare);
+      TestCommon.Write("Script()", result, compare);
     }
 
     private static void GetLink()
@@ -748,7 +741,7 @@ namespace LJCNetCommonTest
       b.AddText("<link rel=\"stylesheet\" type=\"text/css\"");
       b.AddText(" href=\"File.css\" />");
       var compare = b.ToString();
-      TextCommon.Write("GetLink()", result, compare);
+      TestCommon.Write("GetLink()", result, compare);
     }
 
     private static void GetMeta()
@@ -770,7 +763,7 @@ namespace LJCNetCommonTest
       b.AddText("<meta name=\"viewport\"");
       b.AddText($" content=\"{content}\" />");
       var compare = b.ToString();
-      TextCommon.Write("GetMeta()", result, compare);
+      TestCommon.Write("GetMeta()", result, compare);
     }
 
     private static void GetMetas()
@@ -797,7 +790,7 @@ namespace LJCNetCommonTest
       var content = "width=device-width initial-scale=1";
       b.AddText($"<meta name=\"viewport\" content=\"{content}\" />");
       var compare = b.ToString();
-      TextCommon.Write("GetMetas()", result, compare);
+      TestCommon.Write("GetMetas()", result, compare);
     }
 
     private static void GetScript()
@@ -815,11 +808,11 @@ namespace LJCNetCommonTest
       // <script src="File.js"></script>
 
       var compare = "<script src=\"File.js\"></script>";
-      TextCommon.Write("GetScript()", result, compare);
+      TestCommon.Write("GetScript()", result, compare);
     }
     #endregion
 
-    #region Append HTML Methods
+    #region HTML Methods
 
     private static void HTMLBegin()
     {
@@ -855,11 +848,8 @@ namespace LJCNetCommonTest
       b.AddLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
       b.AddText("<head>");
       var compare = b.ToString();
-      TextCommon.Write("HTMLBegin()", result, compare);
+      TestCommon.Write("HTMLBegin()", result, compare);
     }
-    #endregion
-
-    #region Get HTML Methods
 
     private static void GetHTMLBegin()
     {
@@ -894,7 +884,7 @@ namespace LJCNetCommonTest
       b.AddLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
       b.AddText("<head>");
       var compare = b.ToString();
-      TextCommon.Write("GetHTMLBegin()", result, compare);
+      TestCommon.Write("GetHTMLBegin()", result, compare);
     }
 
     private static void GetHTMLEnd()
@@ -916,7 +906,7 @@ namespace LJCNetCommonTest
       b.AddLine("</body>");
       b.AddText("</html>");
       var compare = b.ToString();
-      TextCommon.Write("GetHTMLEnd()", result, compare);
+      TestCommon.Write("GetHTMLEnd()", result, compare);
     }
 
     private static void GetHTMLHead()
@@ -948,7 +938,7 @@ namespace LJCNetCommonTest
       b.AddLine("<meta name=\"author\" content=\"Mr. Smith\" />");
       b.AddText("<meta name=\"viewport\" content=\"width=device-width initial-scale=1\" />");
       var compare = b.ToString();
-      TextCommon.Write("GetHTMLHead()", result, compare);
+      TestCommon.Write("GetHTMLHead()", result, compare);
     }
     #endregion
 
@@ -974,7 +964,7 @@ namespace LJCNetCommonTest
 
       var result = hb.GetAttribs(attribs, textState);
       var compare = " id=\"id\" class=\"className\"";
-      TextCommon.Write("Attribs()", result, compare);
+      TestCommon.Write("Attribs()", result, compare);
     }
 
     public static void StartAttribs()
@@ -993,7 +983,7 @@ namespace LJCNetCommonTest
       // lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml"
 
       var compare = " lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"";
-      TextCommon.Write("StartAttribs()", result, compare);
+      TestCommon.Write("StartAttribs()", result, compare);
     }
 
     public static void TableAttribs()
@@ -1016,13 +1006,13 @@ namespace LJCNetCommonTest
       // border="1" cellspacing="2" cellpadding="3"
 
       var compare = " border=\"1\" cellspacing=\"2\" cellpadding=\"3\"";
-      TextCommon.Write("TableAttribs()", result, compare);
+      TestCommon.Write("TableAttribs()", result, compare);
     }
     #endregion
 
     #region Class Data
 
-    private static TextCommon TextCommon { get; set; }
+    private static TestCommon TestCommon { get; set; }
 
     private const bool NoIndent = false;
     private const bool NoNewLine = false;

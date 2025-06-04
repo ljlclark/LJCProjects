@@ -198,7 +198,7 @@
     </summary>
     <param name="text">The add text.</param>
     <param name="addIndent">Indicates if the element can be indented.</param>
-    <param name="allowNewLine">Indicates if a new line can be added.</param>"
+    <param name="allowNewLine">Indicates if a new line can be added.</param>
     <returns>The potentially indented and wrapped new text value.</returns>
     <remarks>
       Line() is an "Append" method. It creates the text with GetText() and adds
@@ -242,7 +242,7 @@
     </summary>
     <param name="text">The add text.</param>
     <param name="addIndent">Indicates if the element can be indented.</param>
-    <param name="allowNewLine">Indicates if a new line can be added.</param>"
+    <param name="allowNewLine">Indicates if a new line can be added.</param>
     <returns>The potentially indented and wrapped new text value.</returns>
     <remarks>
       Text() is an "Append" method. It creates the text with GetText() and adds
@@ -320,8 +320,8 @@
     <summary>
       Gets the attributes text.
     </summary>
-    <param name="htmlAttribs">The attributes collection.</param>
-    <param name="textState">The current text state values.</param>"
+    <param name="attribs">The attributes collection.</param>
+    <param name="textState">The current text state values.</param>
     <returns>The attributes text.</returns>
     <remarks>
       The returned text does not end with a new line. This allows for additions
@@ -540,7 +540,7 @@
       Appends the element begin tag.
     </summary>
     <param name="name">The element name.</param>
-    <param name="textState">The current text state values.</param>"
+    <param name="textState">The current text state values.</param>
     <param name="attribs">The element attributes.</param>
     <param name="addIndent">
       Indicates if the element can be indented.
@@ -591,8 +591,8 @@
     </summary>
     <param name="name">The element name.</param>
     <param name="text">The element content text.</param>
-    <param name="textState">The current text state values.</param>"
-    <param name="htmlAttribs">The element attributes.</param>
+    <param name="textState">The current text state values.</param>
+    <param name="attribs">The element attributes.</param>
     <param name="addIndent">
       Indicates if the element can be indented.
     </param>
@@ -668,7 +668,7 @@
       Appends a &amp;lt;link&amp;gt; element for a style sheet.
     </summary>
     <param name="fileName">The CSS file name.</param>
-    <param name="textState">The current text state values.</param>"
+    <param name="textState">The current text state values.</param>
     <returns>The added &lt;link&gt; element.</returns>
     <example>
       <code>
@@ -693,7 +693,7 @@
     </summary>
     <param name="name">The name value.</param>
     <param name="content">The content value.</param>
-    <param name="textState">The current text state values.</param>"
+    <param name="textState">The current text state values.</param>
     <returns>The added &amp;lt;meta&amp;gt; element.</returns>
     <example>
       <code>
@@ -718,7 +718,7 @@
       Appends common &amp;lt;meta&amp;gt; elements.
     </summary>
     <param name="author">The author.</param>
-    <param name="textState">The current text state values.</param>"
+    <param name="textState">The current text state values.</param>
     <param name="description">The description.</param>
     <param name="keywords">The keywords.</param>
     <param name="charSet">The charset value.</param>
@@ -748,7 +748,7 @@
       Appends a &amp;lt;script&amp;gt; element.
     </summary>
     <param name="fileName">The script file name.</param>
-    <param name="textState">The current text state values.</param>"
+    <param name="textState">The current text state values.</param>
     <returns>The added &amp;lt;script&amp;gt; element.</returns>
     <example>
       <code>
@@ -772,7 +772,7 @@
     <summary>
       Adds the new (child) indents.
     </summary>
-    <param name="createText">The previously created text.</param>"
+    <param name="createText">The previously created text.</param>
     <param name="textState">The TextState object.</param>
     <remarks>
       Adds an indent for following child elements.&lt;br /&gt;
@@ -816,8 +816,8 @@
       Gets the element begin tag.
     </summary>
     <param name="name">The element name.</param>
-    <param name="textState">The current text state values.</param>"
-    <param name="htmlAttribs">The element attributes.</param>
+    <param name="textState">The current text state values.</param>
+    <param name="attribs">The element attributes.</param>
     <param name="addIndent">
       Indicates if the element can be indented.
     </param>
@@ -890,8 +890,8 @@
     </summary>
     <param name="name">The element name.</param>
     <param name="text">The element content text.</param>
-    <param name="textState">The current text state values.</param>"
-    <param name="htmlAttribs">The element attributes.</param>
+    <param name="textState">The current text state values.</param>
+    <param name="attribs">The element attributes.</param>
     <param name="addIndent">
       Indicates if the element can be indented.
     </param>
@@ -938,7 +938,7 @@
       Gets the element end tag.
     </summary>
     <param name="name">The element name.</param>
-    <param name="textState">The current text state values.</param>"
+    <param name="textState">The current text state values.</param>
     <param name="addIndent">
       Indicates if the element can be indented.
     </param>
@@ -970,7 +970,7 @@
       Gets the link element for a style sheet.
     </summary>
     <param name="fileName">The CSS file name.</param>
-    <param name="textState">The current text state values.</param>"
+    <param name="textState">The current text state values.</param>
     <returns>The &lt;link&gt; element.</returns>
     <example>
       <code>
@@ -994,7 +994,7 @@
     </summary>
     <param name="name">The name value.</param>
     <param name="content">The content value.</param>
-    <param name="textState">The current text state values.</param>"
+    <param name="textState">The current text state values.</param>
     <returns>The &amp;lt;meta&amp;gt; element.</returns>
     <example>
       <code>
@@ -1018,7 +1018,7 @@
       Gets common meta elements.
     </summary>
     <param name="author">The author.</param>
-    <param name="textState">The current text state values.</param>"
+    <param name="textState">The current text state values.</param>
     <param name="description">The description.</param>
     <param name="keywords">The keywords.</param>
     <param name="charSet">The charset value.</param>
@@ -1047,7 +1047,7 @@
       Gets a &amp;lt;script&amp;gt; element.
     </summary>
     <param name="fileName"></param>
-    <param name="textState">The current text state values.</param>"
+    <param name="textState">The current text state values.</param>
     <returns>The &amp;lt;script&amp;gt; element.</returns>
     <example>
       <code>
@@ -1167,7 +1167,7 @@
     <summary>
       Gets the common HTML Head elements.
     </summary>
-    <param name="textState">The current text state values.</param>"
+    <param name="textState">The current text state values.</param>
     <param name="title">The page title.</param>
     <param name="author">The author.</param>
     <param name="description">The description.</param>

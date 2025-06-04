@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // TextBuilderTest.cs
 using LJCNetCommon;
@@ -13,8 +13,7 @@ namespace LJCNetCommonTest
     // Performs the tests.
     internal static void Test()
     {
-      TextCommon = new TextCommon("TextBuilder");
-
+      TestCommon = new TestCommon("TextBuilder");
       Console.WriteLine();
       Console.WriteLine("*** TextBuilder ***");
 
@@ -78,7 +77,7 @@ namespace LJCNetCommonTest
       b.AddLine("  This text is indented.");
       b.AddText("Not indented.  No start with newline.");
       var compare = b.ToString();
-      TextCommon.Write("AddIndent()", result, compare);
+      TestCommon.Write("AddIndent()", result, compare);
     }
     #endregion
 
@@ -104,7 +103,7 @@ namespace LJCNetCommonTest
       b.AddLine("This is an appended line.");
       b.AddText(":");
       var compare = b.ToString();
-      TextCommon.Write("AddLine()", result, compare);
+      TestCommon.Write("AddLine()", result, compare);
     }
 
     private static void AddText()
@@ -123,7 +122,7 @@ namespace LJCNetCommonTest
       var b = new TextBuilder();
       b.AddText("This is some appended text.");
       var compare = b.ToString();
-      TextCommon.Write("AddText()", result, compare);
+      TestCommon.Write("AddText()", result, compare);
     }
 
     private static void Item()
@@ -196,7 +195,7 @@ namespace LJCNetCommonTest
       b.AddLine();
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      TextCommon.Write("Line()", result, compare);
+      TestCommon.Write("Line()", result, compare);
     }
 
     private static void Text()
@@ -226,7 +225,7 @@ namespace LJCNetCommonTest
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      TextCommon.Write("Text()", result, compare);
+      TestCommon.Write("Text()", result, compare);
     }
     #endregion
 
@@ -245,7 +244,7 @@ namespace LJCNetCommonTest
       var b = new TextBuilder();
       b.AddText("False");
       var compare = b.ToString();
-      TextCommon.Write("EndsWithNewLine()", result, compare);
+      TestCommon.Write("EndsWithNewLine()", result, compare);
       return retValue;
     }
 
@@ -262,7 +261,7 @@ namespace LJCNetCommonTest
       var b = new TextBuilder();
       b.AddText("False");
       var compare = b.ToString();
-      TextCommon.Write("StartWithNewLine()", result, compare);
+      TestCommon.Write("StartWithNewLine()", result, compare);
       return retValue;
     }
 
@@ -287,7 +286,7 @@ namespace LJCNetCommonTest
       b.AddLine("This text is NOT indented.");
       b.AddText("    This text is indented.");
       var compare = b.ToString();
-      TextCommon.Write("GetIndented()", result, compare);
+      TestCommon.Write("GetIndented()", result, compare);
     }
 
     private static void GetIndentString()
@@ -306,7 +305,7 @@ namespace LJCNetCommonTest
       //   :
 
       var compare = "  :";
-      TextCommon.Write("GetIndentString()", result, compare);
+      TestCommon.Write("GetIndentString()", result, compare);
     }
 
     private static void GetItem()
@@ -363,7 +362,7 @@ namespace LJCNetCommonTest
       b.AddLine();
       b.AddText("  :");
       var compare = b.ToString();
-      TextCommon.Write("GetLine()", result, compare);
+      TestCommon.Write("GetLine()", result, compare);
     }
 
     private static void GetText()
@@ -395,7 +394,7 @@ namespace LJCNetCommonTest
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      TextCommon.Write("GetText()", result, compare);
+      TestCommon.Write("GetText()", result, compare);
     }
 
     private static void GetWrapped()
@@ -425,13 +424,13 @@ namespace LJCNetCommonTest
       b.AddLine(" their country. Now is the");
       b.AddText("time for all good men to come to the aid of their country.");
       var compare = b.ToString();
-      TextCommon.Write("GetWrapped()", result, compare);
+      TestCommon.Write("GetWrapped()", result, compare);
     }
     #endregion
 
     #region Class Data
 
-    private static TextCommon TextCommon { get; set; }
+    private static TestCommon TestCommon { get; set; }
 
     private const bool NoIndent = false;
     private const bool NoNewLine = false;
