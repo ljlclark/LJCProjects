@@ -25,7 +25,6 @@ namespace LJCNetCommon
       LineLength = 0;
       LineLimit = 80;
       WrapEnabled = false;
-      DebugText = "";
     }
     #endregion
 
@@ -98,6 +97,7 @@ namespace LJCNetCommon
     }
 
     /// <summary>Indicates if the builder has text.</summary>
+    /// <returns>true if builder has text; otherwise false.</returns>
     public bool HasText()
     {
       bool retValue = false;
@@ -116,8 +116,8 @@ namespace LJCNetCommon
     /// <include path='items/AddLine/*' file='Doc/HTMLBuilder.xml'/>
     public string AddLine(string text = null)
     {
-      Builder.AppendLine(text);
       var retText = $"{text}\r\n";
+      Builder.Append(retText);
       return retText;
     }
 
@@ -742,7 +742,7 @@ namespace LJCNetCommon
 
     #region Private Methods
 
-    // Adds indent to builders and sync object.
+    // Adds indent to builders and state object.
     private void AddSyncIndent(HTMLBuilder hb, TextState state
       , int value = 1)
     {
@@ -809,8 +809,10 @@ namespace LJCNetCommon
     // Updates the text state values.
     private void UpdateState(TextState textState)
     {
-      IndentCount = textState.IndentCount;
-      NewIndentCount = textState.ChildIndentCount;
+      if (textState != null)
+      {
+        IndentCount = textState.IndentCount;
+      }
     }
 
     // Calculates the index at which to wrap the text.
@@ -904,9 +906,6 @@ namespace LJCNetCommon
     /// <summary>Gets or sets the character limit.</summary>
     public int LineLimit { get; set; }
 
-    /// <summary>Gets or sets the new indent count.</summary>
-    public int NewIndentCount { get; set; }
-
     /// <summary>Indicates if line wrapping is enabled.</summary>
     public bool WrapEnabled { get; set; }
 
@@ -926,9 +925,6 @@ namespace LJCNetCommon
     #endregion
 
     #region Class Data
-
-    /// <summary></summary>
-    public string DebugText;
 
     private const bool NoIndent = false;
     #endregion

@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using System;
 using System.IO;
+using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace LJCNetCommonTest
