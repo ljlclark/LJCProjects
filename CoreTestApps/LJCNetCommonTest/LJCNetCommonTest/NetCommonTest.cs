@@ -57,11 +57,10 @@ namespace LJCNetCommonTest
     private static void Base64BytesToText()
     {
       // Setup
-      byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
+      byte[] base64Bytes = { 86, 71, 86, 52, 100, 65, 61, 61 };
 
       // Create Text from Base64 byte array.
-      string text = NetCommon.Base64BytesToText(base64Bytes);
-      var result = text;
+      var result = NetCommon.Base64BytesToText(base64Bytes);
       var compare = "Text";
       TestCommon.Write("Base64BytesToText()", result, compare);
     }
@@ -73,8 +72,7 @@ namespace LJCNetCommonTest
       byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
 
       // Check the text.
-      string text = NetCommon.Base64BytesToText(base64Bytes);
-      var result = text;
+      var result = NetCommon.Base64BytesToText(base64Bytes);
       var compare = "Text";
       TestCommon.Write("TextToBase64Bytes()", result, compare);
     }
@@ -83,14 +81,13 @@ namespace LJCNetCommonTest
     private static void Base64BytesToTextBytes()
     {
       // Setup
-      byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
+      byte[] base64Bytes = { 86, 71, 86, 52, 100, 65, 61, 61 };
 
       // Decodes a Base64 byte array to a Text byte array.
       byte[] textBytes = NetCommon.Base64BytesToTextBytes(base64Bytes);
 
       // Check the text.
-      string text = NetCommon.BytesToText(textBytes);
-      var result = text;
+      var result = NetCommon.BytesToText(textBytes);
       var compare = "Text";
       TestCommon.Write("Base64BytesToTextBytes()", result, compare);
     }
@@ -99,14 +96,13 @@ namespace LJCNetCommonTest
     private static void TextBytesToBase64Bytes()
     {
       // Setup
-      byte[] textBytes = NetCommon.TextToBytes("Text");
+      byte[] textBytes = { 84, 101, 120, 116 };
 
       // Encodes a byte array to a Base64 byte array.
       byte[] base64Bytes = NetCommon.TextBytesToBase64Bytes(textBytes);
 
       // Check the text.
-      string text = NetCommon.Base64BytesToText(base64Bytes);
-      var result = text;
+      var result = NetCommon.Base64BytesToText(base64Bytes);
       var compare = "Text";
       TestCommon.Write("TextBytesToBase64Bytes()", result, compare);
     }
@@ -115,11 +111,10 @@ namespace LJCNetCommonTest
     private static void Base64ToText()
     {
       // Setup
-      string base64 = NetCommon.TextToBase64("Text");
+      var base64 = "VGV4dA==";
 
       // Decodes a Base64 string to Text.
-      string text = NetCommon.Base64ToText(base64);
-      var result = text;
+      var result = NetCommon.Base64ToText(base64);
       var compare = "Text";
       TestCommon.Write("Base64BytesToText()", result, compare);
     }
@@ -130,12 +125,10 @@ namespace LJCNetCommonTest
       string text = "Text";
 
       // Encodes text to a Base64 string.
-      string base64 = NetCommon.TextToBase64(text);
+      var result = NetCommon.TextToBase64(text);
 
       // Check the text.
-      text = NetCommon.Base64ToText(base64);
-      var result = text;
-      var compare = "Text";
+      var compare = "VGV4dA==";
       TestCommon.Write("TextToBase64()", result, compare);
     }
 
@@ -143,14 +136,14 @@ namespace LJCNetCommonTest
     public static void Base64ToTextBytes()
     {
       // Setup
-      string base64 = NetCommon.TextToBase64("Text");
+      //string base64 = NetCommon.TextToBase64("Text");
+      var base64 = "VGV4dA==";
 
       // Decodes a Base64 value to a Text byte array.
       byte[] textBytes = NetCommon.Base64ToTextBytes(base64);
 
       // Check the text.
-      string text = NetCommon.BytesToText(textBytes);
-      var result = text;
+      var result = NetCommon.BytesToText(textBytes);
       var compare = "Text";
       TestCommon.Write("Base64ToTextBytes()", result, compare);
     }
@@ -159,14 +152,13 @@ namespace LJCNetCommonTest
     public static void TextBytesToBase64()
     {
       // Setup
-      byte[] TextBytes = NetCommon.TextToBytes("Text");
+      byte[] textBytes = { 84, 101, 120, 116 };
 
       // Encodes a Text byte array to a Base64 value.
-      string base64 = NetCommon.TextBytesToBase64(TextBytes);
+      string base64 = NetCommon.TextBytesToBase64(textBytes);
 
       // Check the text.
-      string text = NetCommon.Base64ToText(base64);
-      var result = text;
+      var result = NetCommon.Base64ToText(base64);
       var compare = "Text";
       TestCommon.Write("TextBytesToBase64()", result, compare);
     }
@@ -175,11 +167,10 @@ namespace LJCNetCommonTest
     private static void BytesToText()
     {
       // Setup
-      byte[] bytes = NetCommon.TextToBytes("Text");
+      byte[] textBytes = { 84, 101, 120, 116 };
 
       // Creates text from a byte array.
-      string text = NetCommon.BytesToText(bytes);
-      var result = text;
+      var result = NetCommon.BytesToText(textBytes);
       var compare = "Text";
       TestCommon.Write("BytesToText()", result, compare);
     }
@@ -194,8 +185,7 @@ namespace LJCNetCommonTest
       byte[] bytes = NetCommon.TextToBytes(text);
 
       // Check the text.
-      text = NetCommon.BytesToText(bytes);
-      var result = text;
+      var result = NetCommon.BytesToText(bytes);
       var compare = "Text";
       TestCommon.Write("TextToBytes()", result, compare);
     }
@@ -212,8 +202,7 @@ namespace LJCNetCommonTest
       }
 
       // Check the text.
-      string text = NetCommon.BytesToText(textBytes);
-      var result = text;
+      var result = NetCommon.BytesToText(textBytes);
       var compare = "Text";
       TestCommon.Write("MemStreamToBytes()", result, compare);
     }
@@ -228,8 +217,7 @@ namespace LJCNetCommonTest
       using (Stream stream = NetCommon.BytesToMemStream(bytes))
       {
         // Check the text.
-        string text = NetCommon.MemStreamToString(stream);
-        var result = text;
+        var result = NetCommon.MemStreamToString(stream);
         var compare = "Text";
         TestCommon.Write("BytesToMemStream()", result, compare);
       }
@@ -242,8 +230,7 @@ namespace LJCNetCommonTest
       using (Stream stream = NetCommon.StringToMemStream("Text"))
       {
         // Creates a string from a memory stream.
-        string text = NetCommon.MemStreamToString(stream);
-        var result = text;
+        var result = NetCommon.MemStreamToString(stream);
         var compare = "Text";
         TestCommon.Write("MemStreamToString()", result, compare);
       }
@@ -255,8 +242,7 @@ namespace LJCNetCommonTest
       using (Stream stream = NetCommon.StringToMemStream("Text"))
       {
         // Check the text.
-        string text = NetCommon.MemStreamToString(stream);
-        var result = text;
+        var result = NetCommon.MemStreamToString(stream);
         var compare = "Text";
         TestCommon.Write("StringToMemStream()", result, compare);
       }
@@ -266,12 +252,10 @@ namespace LJCNetCommonTest
     private static void XmlDecode()
     {
       // Setup
-      string xml = "<text>Here & There</text>";
-      string encoded = NetCommon.XmlEncode(xml);
+      string encoded = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
 
       // Decodes an encoded XML string.
-      string text = NetCommon.XmlDecode(encoded);
-      var result = text;
+      var result = NetCommon.XmlDecode(encoded);
       var compare = "<text>Here & There</text>";
       TestCommon.Write("XmlDecode()", result, compare);
     }
@@ -280,14 +264,10 @@ namespace LJCNetCommonTest
     private static void XmlEncode()
     {
       // Setup
-      string xml = "<text>Here & There</text>";
-
-      // Encodes a string with XML escape values.
-      string encoded = NetCommon.XmlEncode(xml);
+      string encoded = NetCommon.XmlEncode("<text>Here & There</text>");
 
       // Check the text.
-      string text = NetCommon.XmlDecode(encoded);
-      var result = text;
+      var result = NetCommon.XmlDecode(encoded);
       var compare = "<text>Here & There</text>";
       TestCommon.Write("XmlEncode()", result, compare);
     }
