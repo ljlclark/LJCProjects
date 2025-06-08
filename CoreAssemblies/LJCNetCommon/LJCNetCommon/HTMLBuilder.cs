@@ -44,11 +44,13 @@ namespace LJCNetCommon
     /// <include path='items/AddChildIndent/*' file='Doc/HTMLBuilder.xml'/>
     public void AddChildIndent(string createText, TextState textState)
     {
+      var childIndentCount = textState.ChildIndentCount;
+
       if (NetString.HasValue(createText)
-        && textState.ChildIndentCount > 0)
+        && childIndentCount > 0)
       {
-        AddIndent(textState.ChildIndentCount);
-        textState.IndentCount += textState.ChildIndentCount;
+        AddIndent(childIndentCount);
+        textState.IndentCount += childIndentCount;
         textState.ChildIndentCount = 0;
       }
     }
@@ -166,21 +168,24 @@ namespace LJCNetCommon
         var isFirst = true;
         foreach (Attribute attrib in attribs)
         {
+          var name = attrib.Name;
+          var value = attrib.Value;
+
           if (!isFirst)
           {
             // Wrap line for large attribute value.
-            if (NetString.HasValue(attrib.Value)
-              && attrib.Value.Length > 35)
+            if (NetString.HasValue(value)
+              && value.Length > 35)
             {
               hb.AddText($"\r\n{GetIndentString()}");
             }
           }
           isFirst = false;
 
-          hb.AddText($" {attrib.Name}");
-          if (NetString.HasValue(attrib.Value))
+          hb.AddText($" {name}");
+          if (NetString.HasValue(value))
           {
-            hb.AddText($"=\"{attrib.Value}\"");
+            hb.AddText($"=\"{value}\"");
           }
         }
         retText = hb.ToString();
@@ -336,7 +341,7 @@ namespace LJCNetCommon
     {
       var createText = GetBegin(name, textState, attribs, addIndent
         , childIndent);
-      Text(createText, NoIndent);
+      Text(createText, false);
 
       // Use AddChildIndent after beginning an element.
       AddChildIndent(createText, textState);
@@ -355,7 +360,7 @@ namespace LJCNetCommon
       // Adds the indent string.
       var createText = GetCreate(name, text, textState, attribs
         , addIndent, childIndent, isEmpty, close);
-      Text(createText, NoIndent);
+      Text(createText, false);
       if (!close)
       {
         // Use AddChildIndent after beginning an element.
@@ -372,7 +377,7 @@ namespace LJCNetCommon
     public string End(string name, TextState textState, bool addIndent = true)
     {
       var createText = GetEnd(name, textState, addIndent);
-      Text(createText, NoIndent);
+      Text(createText, false);
 
       // Append Method
       UpdateState(textState);
@@ -389,7 +394,7 @@ namespace LJCNetCommon
 
       var createText = GetCreate(name, null, textState, attribs
         , addIndent, childIndent, close: false);
-      hb.Text(createText, NoIndent);
+      hb.Text(createText, false);
 
       // Only use AddChildIndent() if additional text is added in this method.
       var retValue = hb.ToString();
@@ -482,7 +487,7 @@ namespace LJCNetCommon
     public string Link(string fileName, TextState textState)
     {
       var createText = GetLink(fileName, textState);
-      Text(createText, NoIndent);
+      Text(createText, false);
 
       // Append Method
       UpdateState(textState);
@@ -494,7 +499,7 @@ namespace LJCNetCommon
     public string Meta(string name, string content, TextState textState)
     {
       var createText = GetMeta(name, content, textState);
-      Text(createText, NoIndent);
+      Text(createText, false);
 
       // Append Method
       UpdateState(textState);
@@ -509,7 +514,7 @@ namespace LJCNetCommon
     {
       var createText = GetMetas(author, textState, description, keywords
         , charSet);
-      Text(createText, NoIndent);
+      Text(createText, false);
 
       // Append Method
       UpdateState(textState);
@@ -521,7 +526,7 @@ namespace LJCNetCommon
     public string Script(string fileName, TextState textState)
     {
       var createText = GetScript(fileName, textState);
-      Text(createText, NoIndent);
+      Text(createText, false);
 
       // Append Method
       UpdateState(textState);
@@ -542,7 +547,7 @@ namespace LJCNetCommon
       };
       var createText = hb.GetCreate("link", null, textState, attribs
         , isEmpty: true);
-      hb.Text(createText, NoIndent);
+      hb.Text(createText, false);
 
       var retValue = hb.ToString();
       return retValue;
@@ -561,7 +566,7 @@ namespace LJCNetCommon
       };
       var createText = hb.GetCreate("meta", null, textState, attribs
         , isEmpty: true);
-      hb.Text(createText, NoIndent);
+      hb.Text(createText, false);
 
       var retValue = hb.ToString();
       return retValue;
@@ -581,7 +586,7 @@ namespace LJCNetCommon
       };
       var createText = hb.GetCreate("meta", null, textState, attribs
         , isEmpty: true);
-      hb.Text(createText, NoIndent);
+      hb.Text(createText, false);
 
       if (NetString.HasValue(description))
       {
@@ -610,7 +615,7 @@ namespace LJCNetCommon
         { "src", fileName },
       };
       var createText = hb.GetCreate("script", null, textState, attribs);
-      hb.Text(createText, NoIndent);
+      hb.Text(createText, false);
 
       var retValue = hb.ToString();
       return retValue;
@@ -625,7 +630,7 @@ namespace LJCNetCommon
       , string fileName = null)
     {
       var retValue = GetHTMLBegin(textState, copyright, fileName);
-      Text(retValue, NoIndent);
+      Text(retValue, false);
 
       // Append Method
       UpdateState(textState);
@@ -654,11 +659,11 @@ namespace LJCNetCommon
 
       var startAttribs = hb.StartAttribs();
       var createText = hb.GetBegin("html", textState, startAttribs
-        , NoIndent);
-      hb.Text(createText, NoIndent);
+        , false);
+      hb.Text(createText, false);
 
-      createText = hb.GetBegin("head", textState, null, NoIndent);
-      hb.Text(createText, NoIndent);
+      createText = hb.GetBegin("head", textState, null, false);
+      hb.Text(createText, false);
 
       // Only use AddChildIndent() if additional text is added in this method.
       var retValue = hb.ToString();
@@ -671,11 +676,11 @@ namespace LJCNetCommon
     {
       var hb = new HTMLBuilder(textState);
 
-      var text = hb.GetEnd("body", textState, NoIndent);
-      hb.Text(text, NoIndent);
+      var text = hb.GetEnd("body", textState, false);
+      hb.Text(text, false);
 
-      text = hb.GetEnd("html", textState, NoIndent);
-      hb.Text(text, NoIndent);
+      text = hb.GetEnd("html", textState, false);
+      hb.Text(text, false);
       AddSyncIndent(hb, textState);
 
       var retValue = hb.ToString();
@@ -719,12 +724,12 @@ namespace LJCNetCommon
     /// <include path='items/StartAttribs/*' file='Doc/HTMLBuilder.xml'/>
     public Attributes StartAttribs()
     {
-      var retAttributes = new Attributes()
+      var retAttribs = new Attributes()
       {
         { "lang", "en" },
         { "xmlns", "http://www.w3.org/1999/xhtml" },
       };
-      return retAttributes;
+      return retAttribs;
     }
 
     // Gets common table attributes.
@@ -854,7 +859,7 @@ namespace LJCNetCommon
 
       // Leave room for prepend text.
       // *** Different than TextBuilder ***
-      if (nextLength <= LineLimit - TextLength(GetIndentString()))
+      if (nextLength <= LineLimit - IndentLength)
       {
         // Get text at the wrap index.
         retText = text.Substring(wrapIndex, nextLength);
@@ -875,7 +880,7 @@ namespace LJCNetCommon
           startIndex++;
         }
         // *** Different than TextBuilder ***
-        nextLength = LineLimit - TextLength(GetIndentString());
+        nextLength = LineLimit - IndentLength;
         nextLength = tempText.LastIndexOf(" ", nextLength);
         retText = text.Substring(startIndex, nextLength);
       }
@@ -922,11 +927,6 @@ namespace LJCNetCommon
       }
     }
     private int mIndentCount;
-    #endregion
-
-    #region Class Data
-
-    private const bool NoIndent = false;
     #endregion
   }
 }

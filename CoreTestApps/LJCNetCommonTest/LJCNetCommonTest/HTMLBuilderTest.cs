@@ -3,6 +3,7 @@
 // HTMLBuilderTest.cs
 using LJCNetCommon;
 using System;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LJCNetCommonTest
 {
@@ -16,6 +17,9 @@ namespace LJCNetCommonTest
       TestCommon = new TestCommon("HTMLBuilder");
       Console.WriteLine();
       Console.WriteLine("*** HTMLBuilder ***");
+
+      // Simple HTML build.
+      Build();
 
       // Methods
       AddChildIndent();
@@ -68,6 +72,45 @@ namespace LJCNetCommonTest
     }
     #endregion
 
+    // Simple HTML build.
+    public static void Build()
+    {
+      var textState = new TextState();
+      var hb = new HTMLBuilder();
+
+      var copyright = new string[]
+      {
+        "Copyright (c) Lester J. Clark and Contributors",
+        "Licensed under the MIT License.",
+      };
+      var fileName = "TestHTMLBuilderOutput.html";
+      hb.HTMLBegin(textState, copyright, fileName);
+      // Add head items.
+      hb.End("head", textState);
+
+      hb.Begin("body", textState, addIndent: false);
+      // Use AddChildIndent after beginning an element.
+      hb.AddChildIndent(" ", textState);
+
+      var text = hb.GetHTMLEnd(textState);
+      hb.Text(text, false);
+      var result = hb.ToString();
+
+      var b = new HTMLBuilder();
+      b.AddLine("<!DOCTYPE html>");
+      b.AddLine("<!-- Copyright (c) Lester J. Clark and Contributors -->");
+      b.AddLine("<!-- Licensed under the MIT License. -->");
+      b.AddLine("<!-- TestHTMLBuilderOutput.html -->");
+      b.AddLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
+      b.AddLine("<head>");
+      b.AddLine("</head>");
+      b.AddLine("<body>");
+      b.AddLine("</body>");
+      b.AddText("</html>");
+      var compare = b.ToString();
+      TestCommon.Write("AddChildIndent()", result, compare);
+    }
+
     #region Methods
 
     private static void AddChildIndent()
@@ -76,9 +119,6 @@ namespace LJCNetCommonTest
       var textState = new TextState();
 
       var result = CustomBegin("body", textState);
-
-      // result:
-      // <body>
 
       var compare = "<body>";
       TestCommon.Write("AddChildIndent()", result, compare);
@@ -106,18 +146,11 @@ namespace LJCNetCommonTest
       hb.Text("This text is indented.");
 
       // No Indent
-      var NoIndent = false;
-      hb.Text("Not indented.", NoIndent);
+      hb.Text("Not indented.", false);
 
       // Do not start a newline.
-      var NoNewLine = false;
-      hb.Text(" No start with newline.", NoIndent, NoNewLine);
+      hb.AddText(" No start with newline.");
       var result = hb.ToString();
-
-      // result:
-      // This text is not indented.
-      //   This text is indented.
-      // Not indented. No start with newline.
 
       var b = new HTMLBuilder();
       b.AddLine("This text is not indented.");
@@ -134,9 +167,6 @@ namespace LJCNetCommonTest
       bool retValue = hb.EndsWithNewLine();
       var result = retValue.ToString();
 
-      // result:
-      // False
-
       var b = new HTMLBuilder();
       b.AddText("False");
       var compare = b.ToString();
@@ -150,9 +180,6 @@ namespace LJCNetCommonTest
 
       bool retValue = hb.StartWithNewLine(true);
       var result = retValue.ToString();
-
-      // result:
-      // False
 
       var b = new HTMLBuilder();
       b.AddText("False");
@@ -176,10 +203,6 @@ namespace LJCNetCommonTest
       hb.AddText(":");
       var result = hb.ToString();
 
-      // result:
-      // This is an appended line.
-      // :
-
       var b = new HTMLBuilder();
       b.AddLine("This is an appended line.");
       b.AddText(":");
@@ -196,9 +219,6 @@ namespace LJCNetCommonTest
       // Adds text without modification.
       hb.AddText("This is some appended text.");
       var result = hb.ToString();
-
-      // result:
-      // This is some appended text.
 
       var compare = "This is some appended text.";
       TestCommon.Write("AddText()", result, compare);
@@ -226,11 +246,6 @@ namespace LJCNetCommonTest
 
       hb.Text("This is an indented line.");
       var result = hb.ToString();
-
-      // result:
-      // This is an appended line.
-      //
-      //   This is an indented line.
 
       var b = new HTMLBuilder();
       b.AddLine("This is an appended line.");
@@ -260,10 +275,6 @@ namespace LJCNetCommonTest
       hb.Text("This is an indented line.");
       var result = hb.ToString();
 
-      // result:
-      // This is an appended line.
-      //   This is an indented line.
-
       var b = new HTMLBuilder();
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
@@ -287,10 +298,6 @@ namespace LJCNetCommonTest
       hb.End("div", textState);
       var result = hb.ToString();
 
-      // result:
-      // <div class="Selector">
-      // <div>
-
       var b = new HTMLBuilder();
       b.AddLine("<div class=\"Selector\">");
       b.AddText("</div>");
@@ -311,12 +318,8 @@ namespace LJCNetCommonTest
       hb.AddIndent(2);
       hb.AddLine();
       result = hb.GetIndented("This text is indented.");
-      hb.AddText(result);
+      hb.Text(result, false);
       result = hb.ToString();
-
-      // result:
-      // This text is NOT indented.
-      //     This text is indented.
 
       var b = new HTMLBuilder();
       b.AddLine("This text is NOT indented.");
@@ -334,13 +337,10 @@ namespace LJCNetCommonTest
 
       // Example Method:
       var result = hb.GetIndentString();
-      hb.AddText(result);
+      hb.Text(result, false);
 
       hb.AddText("  :");
       result = hb.ToString();
-
-      // result:
-      //   :
 
       var compare = "  :";
       TestCommon.Write("GetIndentString()", result, compare);
@@ -365,15 +365,10 @@ namespace LJCNetCommonTest
       // Ends the text with a newline.
       // Defaults: addIndent = true, allowNewLine = true.
       var text = hb.GetLine();
-      hb.AddText(text);
+      hb.Text(text, false);
 
       hb.Text(":");
       var result = hb.ToString();
-
-      // result:
-      // This is an appended line.
-      //
-      // :
 
       var b = new HTMLBuilder();
       b.AddLine("This is an appended line.");
@@ -403,10 +398,6 @@ namespace LJCNetCommonTest
       hb.AddText(text);
       var result = hb.ToString();
 
-      // result:
-      // This is an appended line.
-      //   This is an indented line.
-
       var b = new HTMLBuilder();
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
@@ -430,10 +421,6 @@ namespace LJCNetCommonTest
       b.AddText(" country.");
       var text = b.ToString();
       var result = hb.GetWrapped(text);
-
-      // result:
-      // Now is the time for all good men to come to the aid of
-      // their country.
 
       b = new HTMLBuilder();
       b.AddText("Now is the time for all good men to come to the aid of");
@@ -468,10 +455,6 @@ namespace LJCNetCommonTest
       hb.End("html", textState);
       var result = hb.ToString();
 
-      // result:
-      // <html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">
-      // </html>
-
       var b = new HTMLBuilder();
       b.AddLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
       b.AddText("</html>");
@@ -493,9 +476,6 @@ namespace LJCNetCommonTest
       hb.Create("html", null, textState, attribs);
       var result = hb.ToString();
 
-      // result:
-      // <html lang="en" xmlns="http://www.w3.org/1999/xhtml"></html>
-
       var b = new HTMLBuilder();
       b.AddText("<html lang=\"en\"");
       b.AddText(" xmlns=\"http://www.w3.org/1999/xhtml\">");
@@ -515,9 +495,6 @@ namespace LJCNetCommonTest
       // Example Method:
       var result = hb.GetEnd("html", textState);
 
-      // result:
-      // </html>
-
       var compare = "</html>";
       TestCommon.Write("End()", result, compare);
     }
@@ -531,7 +508,7 @@ namespace LJCNetCommonTest
 
       var createText = hb.GetBegin(name, textState, attribs, addIndent
         , childIndent);
-      hb.Text(createText, NoIndent);
+      hb.Text(createText, false);
 
       // Use AddChildIndent after beginning an element.
       hb.AddChildIndent(createText, textState);
@@ -557,9 +534,6 @@ namespace LJCNetCommonTest
       // Defaults: addIndent = true, allowNewLine = true.
       var result = hb.GetBegin("body", textState);
 
-      // result:
-      // <body>
-
       var compare = "<body>";
       TestCommon.Write("GetBegin()", result, compare);
     }
@@ -581,9 +555,6 @@ namespace LJCNetCommonTest
       // Defaults: addIndent = true, allowNewLine = true.
       var result = hb.GetBeginSelector("tr", textState);
 
-      // result:
-      // tr {
-
       var compare = "tr {";
       TestCommon.Write("GetBeginSelector()", result, compare);
     }
@@ -601,9 +572,6 @@ namespace LJCNetCommonTest
       hb.Create("head", null, textState);
       var result = hb.ToString();
 
-      // result:
-      // <head></head>
-
       var compare = "<head></head>";
       TestCommon.Write("GetCreate()", result, compare);
     }
@@ -620,9 +588,6 @@ namespace LJCNetCommonTest
       // Defaults: close = true.
       hb.End("head", textState);
       var result = hb.ToString();
-
-      // result:
-      // </head>
 
       var compare = "</head>";
       TestCommon.Write("GetEnd()", result, compare);
@@ -642,9 +607,6 @@ namespace LJCNetCommonTest
       // Example Method:
       hb.Link("File.css", textState);
       var result = hb.ToString();
-
-      // result:
-      // <link rel="stylesheet" type="text/css" href="File.css" />
 
       var b = new HTMLBuilder();
       b.AddText("<link rel=\"stylesheet\" type=\"text/css\"");
@@ -666,9 +628,6 @@ namespace LJCNetCommonTest
       hb.Meta("viewport", content, textState);
       var result = hb.ToString();
 
-      // result:
-      // <meta name="viewport" content="width=device-width initial-scale=1" />
-
       var b = new HTMLBuilder();
       b.AddText("<meta name=\"viewport\"");
       b.AddText($" content=\"{content}\" />");
@@ -687,12 +646,6 @@ namespace LJCNetCommonTest
       // Example Method:
       hb.Metas("Mr. Smith", textState, "The Description");
       var result = hb.ToString();
-
-      // result:
-      // <meta charset="utf-8" />
-      // <meta name="description" content="The Description" />
-      // <meta name="author" content="Mr. Smith" />
-      // <meta name="viewport" content="width=device-width initial-scale=1" />
 
       var b = new HTMLBuilder();
       b.AddLine("<meta charset=\"utf-8\" />");
@@ -716,9 +669,6 @@ namespace LJCNetCommonTest
       hb.Script("File.js", textState);
       var result = hb.ToString();
 
-      // result:
-      // <script src="File.js"></script>
-
       var compare = "<script src=\"File.js\"></script>";
       TestCommon.Write("Script()", result, compare);
     }
@@ -733,9 +683,6 @@ namespace LJCNetCommonTest
 
       // Example Method:
       var result = hb.Link("File.css", textState);
-
-      // result:
-      // <link rel="stylesheet" type="text/css" href="File.css" />
 
       var b = new HTMLBuilder();
       b.AddText("<link rel=\"stylesheet\" type=\"text/css\"");
@@ -756,9 +703,6 @@ namespace LJCNetCommonTest
       var content = "width=device-width initial-scale=1";
       var result = hb.Meta("viewport", content, textState);
 
-      // result:
-      // <meta name="viewport" content="width=device-width initial-scale=1" />
-
       var b = new HTMLBuilder();
       b.AddText("<meta name=\"viewport\"");
       b.AddText($" content=\"{content}\" />");
@@ -776,12 +720,6 @@ namespace LJCNetCommonTest
 
       // Example Method:
       var result = hb.GetMetas("Mr. Smith", textState, "The Description");
-
-      // result:
-      // <meta charset="utf-8" />
-      // <meta name="description" content="The Description" />
-      // <meta name="author" content="Mr. Smith" />
-      // <meta name="viewport" content="width=device-width initial-scale=1" />
 
       var b = new HTMLBuilder();
       b.AddLine("<meta charset=\"utf-8\" />");
@@ -803,9 +741,6 @@ namespace LJCNetCommonTest
 
       // Example Method:
       var result = hb.Script("File.js", textState);
-
-      // result:
-      // <script src="File.js"></script>
 
       var compare = "<script src=\"File.js\"></script>";
       TestCommon.Write("GetScript()", result, compare);
@@ -831,14 +766,6 @@ namespace LJCNetCommonTest
       var fileName = "File.html";
       hb.HTMLBegin(textState, copyright, fileName);
       var result = hb.ToString();
-
-      // result:
-      // <!DOCTYPE html>
-      // <!-- Copyright (c) First Line -->
-      // <!-- Second Line -->
-      // <!-- File.html -->
-      // <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-      // <head>
 
       var b = new HTMLBuilder();
       b.AddLine("<!DOCTYPE html>");
@@ -868,14 +795,6 @@ namespace LJCNetCommonTest
       var fileName = "File.html";
       var result = hb.GetHTMLBegin(textState, copyright, fileName);
 
-      // result:
-      // <!DOCTYPE html>
-      // <!-- Copyright (c) First Line -->
-      // <!-- Second Line -->
-      // <!-- File.html -->
-      // <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-      // <head>
-
       var b = new HTMLBuilder();
       b.AddLine("<!DOCTYPE html>");
       b.AddLine("<!-- Copyright (c) First Line -->");
@@ -898,10 +817,6 @@ namespace LJCNetCommonTest
       // Example Method:
       var result = hb.GetHTMLEnd(textState);
 
-      // result:
-      // </body>
-      // </html>
-
       var b = new HTMLBuilder();
       b.AddLine("</body>");
       b.AddText("</html>");
@@ -923,13 +838,6 @@ namespace LJCNetCommonTest
       var description = "The Description";
       // Defaults: title = null, author = null, description = null.
       var result = hb.GetHTMLHead(textState, title, author, description);
-
-      // result:
-      // <title>The Title</title>
-      // <meta charset="utf-8"
-      // <meta name="description" content="The Description" />
-      // <meta name="author" content="Mr. Smith" />
-      // <meta name="viewport" content="width=device-width initial-scale=1" />
 
       var b = new HTMLBuilder();
       b.AddLine("<title>The Title</title>");
@@ -956,12 +864,6 @@ namespace LJCNetCommonTest
       var id = "id";
       Attributes attribs = hb.Attribs(className, id);
 
-      // result:
-      // List<string>()
-      // {
-      //   { "className", "id" },
-      // };
-
       var result = hb.GetAttribs(attribs, textState);
       var compare = " id=\"id\" class=\"className\"";
       TestCommon.Write("Attribs()", result, compare);
@@ -978,9 +880,6 @@ namespace LJCNetCommonTest
       var attribs = hb.StartAttribs();
 
       var result = hb.GetAttribs(attribs, textState);
-
-      // result:
-      // lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml"
 
       var compare = " lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"";
       TestCommon.Write("StartAttribs()", result, compare);
@@ -1002,9 +901,6 @@ namespace LJCNetCommonTest
 
       var result = hb.GetAttribs(attribs, textState);
 
-      // result:
-      // border="1" cellspacing="2" cellpadding="3"
-
       var compare = " border=\"1\" cellspacing=\"2\" cellpadding=\"3\"";
       TestCommon.Write("TableAttribs()", result, compare);
     }
@@ -1013,9 +909,6 @@ namespace LJCNetCommonTest
     #region Class Data
 
     private static TestCommon TestCommon { get; set; }
-
-    private const bool NoIndent = false;
-    private const bool NoNewLine = false;
     #endregion
   }
 }
