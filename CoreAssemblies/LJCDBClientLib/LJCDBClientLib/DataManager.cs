@@ -147,7 +147,7 @@ namespace LJCDBClientLib
       }
     }
 
-    // Executes a non-query client SQL statement.
+    // Executes a non-query (DML "insert", "delete", "update") SQL statement.
     /// <include path='items/ExecuteClientSql/*' file='Doc/DataManager.xml'/>
     public DbResult ExecuteClientSql(RequestType requestType, string sql
       , DbColumns requestColumns = null)

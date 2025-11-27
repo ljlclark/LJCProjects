@@ -48,7 +48,7 @@
 
       &lt;b&gt;Get Text Methods&lt;/b&gt;&lt;br /&gt;
       GetLine(), GetText()&lt;br /&gt;
-      All "Get" methods create and return the potentialy indented and
+      All "Get" methods create and return the potentially indented and
       wrapped text but do not add it to the builder.&lt;br /&gt;
       &lt;br /&gt;
 
@@ -82,7 +82,7 @@
       &lt;b&gt;Get Element Methods&lt;/b&gt;&lt;br /&gt;
       GetBegin(), GetCreate(), GetEnd(), GetLink(), GetMeta(), GetMetas()
       , GetScript()&lt;br /&gt;
-      All "Get" methods create and return the potentialy indented and wrapped
+      All "Get" methods create and return the potentially indented and wrapped
       text but do not add it to the builder.
     </remarks>
   </HTMLBuilder>

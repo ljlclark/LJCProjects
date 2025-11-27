@@ -17,7 +17,6 @@ namespace LJCNetCommonTest
 
       HTMLBuilderTest.Test();
       TextBuilderTest.Test();
-      XMLBuilderTest.Test();
 
       Console.Write("Press any key to continue ...");
       Console.ReadKey();

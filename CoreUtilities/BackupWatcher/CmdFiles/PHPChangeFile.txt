@@ -1,0 +1,2 @@
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCPHPProjectsDev\LJCPHPCommon\TestCode\HTMLTableTest\HTMLTableOutput.html
+Copy,C:\Users\Les\Documents\Visual Studio 2022\LJCPHPProjectsDev\GenDoc\GenCodeDoc\GenCodeDocFiles.txt

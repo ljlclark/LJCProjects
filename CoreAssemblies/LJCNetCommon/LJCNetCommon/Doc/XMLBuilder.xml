@@ -294,7 +294,7 @@
     <summary>
       Gets the attributes text.
     </summary>
-    <param name="htmlAttribs">The attributes collection.</param>
+    <param name="attribs">The attributes collection.</param>
     <param name="textState">The current text state values.</param>"
     <returns>The attributes text.</returns>
     <remarks>
