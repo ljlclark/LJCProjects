@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCGenDataGen.xml -->
+<members>
+  <LJCGenDataGen>
+    <summary>
+      Contains methods to create GenData XML and HTML Doc from DocData XML.
+    </summary>  
+  </LJCGenDataGen>
+  
+  <!-- Constructor Methods -->
+  <SetConfig>
+    <summary>
+      Sets the GenCodeDoc config.
+    </summary>
+    <param name="config">The LJCGenDocConfig object.</param>
+  </SetConfig>
+</members>

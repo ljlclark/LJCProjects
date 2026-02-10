@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCGenDoc2.xml -->
+<members>
+  <LJCGenDoc2>
+    <summary>
+      Generates HTML Doc for sources in SourceList.txt.
+    </summary>
+  </LJCGenDoc2>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  
+  <!-- Public Methods -->
+  <CreateFromList>
+    <summary>
+      Creates CodeDoc pages from source list.
+    </summary>
+    <param name="sourceListSpec">The source list filespec.</param>
+  </CreateFromList>
+  <CreateFilePages>
+    <summary>
+      Creates the HTML documentation files.
+    </summary>
+    <param name="sourcePath">The source folder or file path.</param>
+    <param name="pattern">The source folder file pattern.</param>
+  </CreateFilePages>
+  <SetConfig>
+    <summary>
+      Sets the GenCodeDoc config.
+    </summary>
+    <param name="config">The GenCodeDocConfig object.</param>
+  </SetConfig>
+</members>

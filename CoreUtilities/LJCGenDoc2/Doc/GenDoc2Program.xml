@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- GenDoc2Program.xml -->
+<members>
+  <GenDoc2Program>
+    <summary>
+      The GenDoc2 Program.
+    </summary>
+  </GenDoc2Program>
+  <Main>
+    <summary>
+      The program entry method.
+    </summary>
+    <param name="args">The program arguments.</param>
+    <remarks>
+      Creates the HTML Doc pages from the source files.
+    </remarks>
+  </Main>
+</members>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<LJCDocDataFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Classes>
+    <LJCDocDataClass>
+      <Name>LJCDocDataGen</Name>
+      <Syntax>public class LJCDocDataGen</Syntax>
+    </LJCDocDataClass>
+  </Classes>
+  <Name>LJCDocDataGen</Name>
+</LJCDocDataFile>

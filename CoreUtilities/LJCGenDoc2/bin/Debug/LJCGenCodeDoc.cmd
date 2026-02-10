@@ -1,0 +1,1 @@
+LJCGenCodeDoc %1%

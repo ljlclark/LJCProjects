@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<LJCDocDataFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Classes>
+    <LJCDocDataClass>
+      <Name>GenDoc2Program</Name>
+      <Syntax>internal class GenDoc2Program</Syntax>
+    </LJCDocDataClass>
+  </Classes>
+  <Name>GenDoc2Program</Name>
+</LJCDocDataFile>
