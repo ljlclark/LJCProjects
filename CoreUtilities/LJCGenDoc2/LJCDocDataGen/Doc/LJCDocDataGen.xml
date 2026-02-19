@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCDocDataGen.xml -->
+<members>
+  <LJCDocDataGen>
+    <summary>
+      Provides methods to generate DocData XML files from a code file.
+    </summary>
+    <group name="Constructor">Constructor Methods</group>
+  </LJCDocDataGen>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <SetConfig>
+    <summary>
+      Sets the GenCodeDoc config.
+    </summary>
+    <param name="config">The LJCGenDocConfig object.</param>
+  </SetConfig>
+
+  <!-- Public Methods -->
+  <SerializeDocData>
+    <summary>
+      Creates and potentially writes the DocData XML.
+    </summary>
+    <param name="codeFileSpec">The code filespec.</param>
+    <returns>The DocData XML string.</returns>
+  </SerializeDocData>
+  <ProcessCode>
+    <summary>
+      Generates the Doc data for the file.
+    </summary>
+    <param name="codeFileSpec">The code filespec.</param>
+    <returns>The DocData XML string.</returns>
+  </ProcessCode>
+</members>

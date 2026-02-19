@@ -1,4 +1,4 @@
-// LJCGenCodeDoc\bin\Debug
+// LJCGenDoc2\bin\Debug
 OutputPath: ../../CodeDoc/HTML
 DocDataXMLPath: ../XMLDocData
 GenDataXMLPath: ../XMLGenData

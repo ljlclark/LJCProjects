@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCGenDoc2.xml -->
+<members>
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+
+  <!-- Public Methods -->
+  <IsClass>
+    <summary>
+      Checks if a class definition.
+    </summary>
+    <param name="tokens">The line tokens.</param>
+    <returns>true if a class definition; otherwise false.</returns>
+  </IsClass>
+  <IsMethod>
+    <summary>
+      Checks if a method definition.
+    </summary>
+    <param name="tokens">The line tokens.</param>
+    <returns>true if a method definition; otherwise false.</returns>
+  </IsMethod>
+  <IsProperty>
+    <summary>
+      Checks if a property definition.
+    </summary>
+    <returns>true if a property definition; otherwise false.</returns>
+  </IsProperty>
+  <param name="tokens">The line tokens.</param>
+</members>

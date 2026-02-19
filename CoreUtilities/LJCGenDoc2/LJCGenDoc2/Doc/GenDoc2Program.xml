@@ -3,10 +3,21 @@
 <!-- Licensed under the MIT License. -->
 <!-- GenDoc2Program.xml -->
 <members>
+  <LJCGenDoc2>
+    <summary>
+      The GenDoc2 program.
+    </summary>
+    <remarks>
+      Generates HTML Doc pages.
+    </remarks>
+  </LJCGenDoc2>
   <GenDoc2Program>
     <summary>
-      The GenDoc2 Program.
+      The program entry class.
     </summary>
+    <remarks>
+      Create HTML Doc pages from the folder/file list.
+    </remarks>
   </GenDoc2Program>
   <Main>
     <summary>

@@ -364,7 +364,7 @@ namespace LJCNetCommon
     // Get the delimited string begin and end index.
     /// <include path='items/GetDelimitedAndIndexes/*' file='Doc/NetString.xml'/>
     public static string GetDelimitedAndIndexes(string text, string beginDelimiter
-      , out int beginIndex, out int endIndex, ref int startIndex
+      , out int beginIndex, out int endIndex, ref int nextStartIndex
       , string endDelimiter = null)
     {
       string retValue = null;
@@ -372,50 +372,45 @@ namespace LJCNetCommon
       beginIndex = -1;
       endIndex = -1;
 
-      // *** Next Statement *** Change - 6/13/23
-      if (string.IsNullOrEmpty(endDelimiter))
-      {
-        endDelimiter = beginDelimiter;
-      }
-
-      if (startIndex > -1
+      if (nextStartIndex > -1
         && HasValue(text)
-        && startIndex < text.Length - 1
+        && nextStartIndex < text.Length - 1
         && text.Contains(beginDelimiter))
       {
-        beginIndex = text.IndexOf(beginDelimiter, startIndex);
-        if (beginIndex > -1)
+        var beginLength = 0;
+        beginIndex = 0;
+        if (HasValue(beginDelimiter))
         {
-          if (endDelimiter.ToLower() == "#nodelimiter")
+          var index = text.IndexOf(beginDelimiter, nextStartIndex);
+          if (index >= 0)
           {
-            // *** Next Statement *** Change- 9/16/22
-            //endIndex = text.Length - 1;
-            endIndex = text.Length;
+            beginLength = beginDelimiter.Length;
+            beginIndex = index + beginLength;
           }
-          else
-          {
-            // Start searching at the end of the beginDelimiter.
-            endIndex = text.IndexOf(endDelimiter, beginIndex + 1);
-          }
+        }
 
-          startIndex = -1;
-          if (endIndex > -1)
+        int endLength = 0;
+        endIndex = text.Length;
+        if (HasValue(endDelimiter))
+        {
+          var index = text.IndexOf(endDelimiter, beginIndex);
+          if (index >= 0)
           {
-            // Exclude Delimiters
-            int beginLength = beginDelimiter.Length;
-            int endLength = endDelimiter.Length;
-            int startPosition = beginIndex + beginLength;
-            int textLength = endIndex - beginIndex - beginLength;
-            retValue = text.Substring(startPosition, textLength);
-
-            startIndex = -1;
-            if (endIndex < text.Length - (beginLength + endLength))
-            {
-              // There is enough text to potentially contain another begin
-              // and end delimiter.
-              startIndex = endIndex + 1;
-            }
+            endLength = endDelimiter.Length;
+            endIndex = index;
           }
+        }
+
+        int textLength = endIndex - beginIndex;
+        retValue = text.Substring(beginIndex, textLength);
+
+        nextStartIndex = -1;
+        if (endIndex >= 0
+          && endIndex < text.Length - (beginLength + endLength))
+        {
+          // There is enough text to potentially contain another begin
+          // and end delimiter.
+          nextStartIndex = endIndex + 1;
         }
       }
       return retValue;
@@ -441,24 +436,17 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      // *** Next Statement *** Change - 6/13/23
-      if (string.IsNullOrEmpty(endDelimiter))
-      {
-        endDelimiter = beginDelimiter;
-      }
-
       if (GetDelimitedAndIndexes(text, beginDelimiter, out int beginIndex
         , out int endIndex, ref startIndex, endDelimiter) != null)
       {
         // Include Delimiters
-        //int beginLength = beginDelimiter.Length;
         int endLength = endDelimiter.Length;
-        if (endDelimiter.ToLower() == "#nodelimiter")
+        if (!HasValue(endDelimiter))
         {
           endLength = 0;
         }
-        int textLength = endIndex - beginIndex + endLength;
-        retValue = text.Substring(beginIndex, textLength);
+        int textLength = endIndex - beginIndex + endLength + 1;
+        retValue = text.Substring(beginIndex - 1, textLength);
       }
       return retValue;
     }

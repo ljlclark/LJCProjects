@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCComments.xml -->
+<members>
+  <LJCComments>
+    <summary>
+      Provides methods to parse XML comment values.
+    </summary>
+  </LJCComments>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  
+  <!-- Public Methods -->
+  <ClearComments>
+    <summary>
+      Clears the XML comments.
+    </summary>
+  </ClearComments>
+  <SetComment>
+    <summary>
+      Sets the XML comment value.
+    </summary>
+    <param name="line">The source code line.</param>
+    <param name="codeFileSpec">The code filespec.</param>
+  </SetComment>
+</members>

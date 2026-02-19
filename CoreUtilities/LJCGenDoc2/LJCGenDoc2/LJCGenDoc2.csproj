@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AAE07CCE-270A-4BAF-9394-36CBBFE52802}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LJCGenCodeDoc</RootNamespace>
-    <AssemblyName>LJCGenCodeDoc</AssemblyName>
+    <RootNamespace>LJCGenDoc2</RootNamespace>
+    <AssemblyName>LJCGenDoc2</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="LJCNetCommon, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\CoreTestApps\TestTextBuilder\External\LJCNetCommon.dll</HintPath>
+      <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -138,7 +138,7 @@
     <param name="beginDelimiter">The beginning delimiter.</param>
     <param name="beginIndex">The begin index.</param>
     <param name="endIndex">The end index.</param>
-    <param name="startIndex">The starting index.</param>
+    <param name="nextStartIndex">The starting index.</param>
     <param name="endDelimiter">The ending delimiter.</param>
     <returns>The string between the specified delimiters.</returns>
     <example>

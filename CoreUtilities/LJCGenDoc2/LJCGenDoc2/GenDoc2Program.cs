@@ -1,12 +1,17 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenCodeDocProgram.cs
+using LJCDocDataDAL;
 using LJCNetCommon;
 using System;
 
+// The GenDoc2 Program.
+/// <include path="members/LJCGenDoc2/*" file="Doc/GenDoc2Program.xml"/>
+/// LibName: LJCGenDoc2
+
 namespace LJCGenDoc2
 {
-  // The GenDoc2 Program.
+  // The program entry class.
   /// <include path="members/GenDoc2Program/*" file="Doc/GenDoc2Program.xml"/>
   internal class GenDoc2Program
   {
@@ -16,20 +21,20 @@ namespace LJCGenDoc2
     {
       var genDoc2 = new LJCGenDoc2();
 
-      // Uncomment to change default values in code.
-      //var genDocConfig = new LJCGenCodeDocConfig();
-      //genDocConfig.DocDataXMLPath = @"../XMLDocData";
-      //genDocConfig.GenDataXMLPath = @"../XMLGenData";
-      //genDocConfig.WriteDocDataXML = false;
-      //genDocConfig.WriteGenDataXML = false;
-      //var parentPath = @"LJCGenCodeDoc\bin\Debug";
-      //string prefix = genDocConfig.GetParentPathPrefix(parentPath);
-      //genDocConfig.OutputPath = $"{prefix}CodeDoc/HTML";
-      //genCodeDoc.SetConfig(genDocConfig);
+      var genDocConfig = new LJCGenDocConfig();
+      genDocConfig.DocDataXMLPath = "../XMLDocData";
+      genDocConfig.GenDataXMLPath = "../XMLGenData";
+      genDocConfig.WriteDocDataXML = false;
+      genDocConfig.WriteGenDataXML = false;
+      var parentPath = @"LJCGenDoc2\bin\Debug";
+      string prefix = genDocConfig.GetParentPathPrefix(parentPath);
+      genDocConfig.OutputPath = $"{prefix}CodeDoc/HTML";
+      genDoc2.SetConfig(genDocConfig);
 
       // Configuration can be set in the source list.
       // This overrides any default values or values set in code.
-      // LJCGenCodeDoc\bin\Debug
+      // SourceList.txt
+      // // LJCGenDoc2\bin\Debug
       // OutputPath: ../../CodeDoc/HTML
       // DocDataXMLPath: ../XMLDocData
       // GenDataXMLPath: ../XMLGenData
@@ -39,7 +44,8 @@ namespace LJCGenDoc2
       var showSyntax = CheckArgs(ref args);
       if (!showSyntax)
       {
-        genDoc2.CreateFromList(args[0]);
+        var sourceList = args[0];
+        genDoc2.CreateFromList(sourceList);
       }
     }
 

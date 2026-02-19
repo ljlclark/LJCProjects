@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCNetCommon", "LJCNetCommo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHTMLBuilder", "TestHTMLBuilder\TestHTMLBuilder.csproj", "{D0C167C5-7A65-44DE-B684-B3B1218B1999}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNetString", "TestNetString\TestNetString.csproj", "{4FDBA330-F62C-4A57-BF25-282B962F5129}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D0C167C5-7A65-44DE-B684-B3B1218B1999}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0C167C5-7A65-44DE-B684-B3B1218B1999}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0C167C5-7A65-44DE-B684-B3B1218B1999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FDBA330-F62C-4A57-BF25-282B962F5129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FDBA330-F62C-4A57-BF25-282B962F5129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FDBA330-F62C-4A57-BF25-282B962F5129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FDBA330-F62C-4A57-BF25-282B962F5129}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
