@@ -30,10 +30,10 @@ namespace LJCDocDataDAL
 
       if (NetString.HasValue(line))
       {
-        var startIndex = 0;
-        var name = NetString.GetDelimitedString(line, "name=\"", ref startIndex
-          , "\">");
-        var summary = NetString.GetDelimitedString(line, ">", ref startIndex, "</");
+        var parser = new LJCParser();
+        var name = parser.DelimitedString(line, "name=\"", "\">");
+        parser.StartIndex = 0;
+        var summary = parser.DelimitedString(line, ">", "</");
         retParam = new LJCDocDataParam(name, summary);        
       }
       return retParam;

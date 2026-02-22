@@ -65,6 +65,7 @@
     <Compile Include="CodeTokens\CommonKeywords.cs" />
     <Compile Include="LJCAssemblyReflect.cs" />
     <Compile Include="LJCCryptography.cs" />
+    <Compile Include="LJCParser.cs" />
     <Compile Include="NetCommon.cs" />
     <Compile Include="NetFile.cs" />
     <Compile Include="NetString.cs" />
@@ -99,6 +100,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Doc\LJCCryptography.xml" />
+    <Content Include="Doc\LJCParser.xml" />
     <Content Include="Doc\NetCommon.xml">
       <SubType>Designer</SubType>
     </Content>

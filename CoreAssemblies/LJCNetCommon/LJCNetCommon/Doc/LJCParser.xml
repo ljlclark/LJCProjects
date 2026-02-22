@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCParser.xml -->
+<members>
+  <LJCParser>
+    <summary>
+      Contains parsing related methods.
+    </summary>
+  </LJCParser>
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <DelimitedString>
+    <summary>
+      Gets the delimited string.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="beginDelimiter">The begin delimiter.</param>
+    <param name="endDelimiter">The end delimiter.</param>
+    <returns>The delimited string.</returns>
+  </DelimitedString>
+  <FindTag>
+    <summary>
+      Finds a tag in a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="tagName">The tag name.</param>
+  </FindTag>
+  <RemoveSection>
+    <summary>
+      Removes a section from a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="beginIndex">The begin index.</param>
+    <param name="endIndex">The end index.</param>
+  </RemoveSection>
+  <RemoveTags>
+    <summary>
+      Removes tags from a text value.
+    </summary>
+    <param name="text">The text value.</param>
+  </RemoveTags>
+  <StringWithDelimiters>
+    <summary>
+      Get the string including the supplied delimiters.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="beginDelimiter">The begin delimiter.</param>
+    <param name="endDelimiter">The end delimiter.</param>
+    <returns>The delimited string including the delimiters.</returns>
+  </StringWithDelimiters>
+</members>

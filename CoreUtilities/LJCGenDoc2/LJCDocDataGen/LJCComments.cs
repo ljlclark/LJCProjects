@@ -94,6 +94,7 @@ namespace LJCDocDataGenLib
 
     #region Private Comment Methods
 
+    // Clear comment for supplied tag name.
     private void ClearComment(string tagName = null)
     {
       if (null == tagName)
@@ -205,12 +206,11 @@ namespace LJCDocDataGenLib
         var trimEnd = true;
         if (!HasCurrentEndTag(line))
         {
-          // No EndTag so do not remove cr/lf.
+          // No EndTag so do not remove newline.
           trimEnd = false;
         }
-        var startIndex = 0;
-        retComment = NetString.GetDelimitedString(line, beginTag, ref startIndex
-          , endTag);
+        var parser = new LJCParser();
+        retComment = parser.DelimitedString(line, beginTag, endTag);
         if (trimEnd)
         {
           retComment = retComment.TrimEnd();

@@ -242,6 +242,7 @@ namespace LJCNetCommon
 
     // Removes a section from a text value.
     /// <include path='items/RemoveSection/*' file='Doc/NetString.xml'/>
+    [Obsolete("Use LJCParser.RemoveSection().")]
     public static string RemoveSection(string text, int beginIndex, int endIndex)
     {
       string retValue = text;
@@ -326,6 +327,7 @@ namespace LJCNetCommon
 
     // Finds a tag in a text value.
     /// <include path='items/FindTag/*' file='Doc/NetString.xml'/>
+    [Obsolete("Use LJCParser.FindTag().")]
     public static string FindTag(string text, ref string tagName, out int beginIndex
       , out int endIndex, ref int startIndex)
     {
@@ -363,6 +365,7 @@ namespace LJCNetCommon
 
     // Get the delimited string begin and end index.
     /// <include path='items/GetDelimitedAndIndexes/*' file='Doc/NetString.xml'/>
+    [Obsolete("Use LJCParser.DelimitedString().")]
     public static string GetDelimitedAndIndexes(string text, string beginDelimiter
       , out int beginIndex, out int endIndex, ref int nextStartIndex
       , string endDelimiter = null)
@@ -418,6 +421,7 @@ namespace LJCNetCommon
 
     // Gets the string between the specified delimiters.
     /// <include path='items/GetDelimitedString/*' file='Doc/NetString.xml'/>
+    [Obsolete("Use LJCParser.DelimitedString().")]
     public static string GetDelimitedString(string text, string beginDelimiter
       , ref int startIndex, string endDelimiter)
     {
@@ -431,6 +435,7 @@ namespace LJCNetCommon
 
     // Get the string including the specified delimiters.
     /// <include path='items/GetStringWithDelimiters/*' file='Doc/NetString.xml'/>
+    [Obsolete("Use LJCParser.StringWithDelimiters().")]
     public static string GetStringWithDelimiters(string text, string beginDelimiter
       , ref int startIndex, string endDelimiter = null)
     {
@@ -453,6 +458,7 @@ namespace LJCNetCommon
 
     // Removes tags from a text value.
     /// <include path='items/RemoveTags/*' file='Doc/NetString.xml'/>
+    [Obsolete("Use LJCParser.RemoveTags().")]
     public static string RemoveTags(string text)
     {
       string retValue = text;

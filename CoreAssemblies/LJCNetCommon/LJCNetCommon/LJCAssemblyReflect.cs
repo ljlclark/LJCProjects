@@ -7,7 +7,6 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Linq;
-using System.Diagnostics;
 
 namespace LJCNetCommon
 {
@@ -199,9 +198,12 @@ namespace LJCNetCommon
       // *** Begin *** Add - 10/4/23
       if (MethodName.Contains("`"))
       {
-        var startIndex = 0;
-        MethodName = NetString.GetStringWithDelimiters(MethodName
-          , MethodName[0].ToString(), ref startIndex, "`");
+        //var startIndex = 0;
+        //MethodName = NetString.GetStringWithDelimiters(MethodName
+        //  , MethodName[0].ToString(), ref startIndex, "`");
+        var parser = new LJCParser();
+        parser.StartIndex = 0;
+        MethodName = parser.StringWithDelimiters(MethodName, MethodName[0].ToString(), "`");
         MethodName = MethodName.Substring(0, MethodName.Length - 1);
       }
       // *** End   *** Add - 10/4/23

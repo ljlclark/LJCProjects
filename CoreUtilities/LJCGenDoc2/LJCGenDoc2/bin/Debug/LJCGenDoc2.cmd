@@ -1,0 +1,1 @@
+LJCGenDoc2 %1%

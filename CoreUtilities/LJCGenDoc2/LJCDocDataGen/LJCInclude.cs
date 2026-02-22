@@ -63,14 +63,13 @@ namespace LJCDocDataGenLib
 
           var trimLine = line.Trim();
 
-          bool isValid;
-          var endTag = LineEndTag(trimLine, out isValid);
+          var endTag = LineEndTag(trimLine, out _);
           if (!isContinue)
           {
             // New comment.
-            CurrentTag = LineBeginTag(line, out isValid);
-            var comment = GetComment(line);
-            var findEndTag = LineEndTag(trimLine, out isValid);
+            CurrentTag = LineBeginTag(line, out _);
+            GetComment(line);
+            var findEndTag = LineEndTag(trimLine, out bool isValid);
             if (!isValid)
             {
               // Not supported XML comment.
@@ -92,7 +91,7 @@ namespace LJCDocDataGenLib
               isContinue = false;
             }
             var comment = GetComment(line);
-            endTag = LineEndTag(comment, out isValid);
+            LineEndTag(comment, out bool isValid);
             if (!isValid)
             {
               // Not supported XML comment.
@@ -112,9 +111,8 @@ namespace LJCDocDataGenLib
     {
       string retComment = null;
 
-      bool isValid;
-      var beginTag = LineBeginTag(line, out isValid);
-      var endTag = LineEndTag(line, out isValid);
+      var beginTag = LineBeginTag(line, out _);
+      var endTag = LineEndTag(line, out _);
 
       if (null == beginTag)
       {
@@ -123,10 +121,9 @@ namespace LJCDocDataGenLib
         beginTag = "/";
       }
 
-      var startIndex = 0;
-      var endDelimiter = endTag;
-      var comment = NetString.GetDelimitedString(line, beginTag, ref startIndex
-        , endDelimiter);
+      //var startIndex = 0;
+      var parser = new LJCParser();
+      var comment = parser.DelimitedString(line, beginTag, endTag);
       if ("<code>" == CurrentTag
         && endTag != null)
       {
@@ -134,7 +131,7 @@ namespace LJCDocDataGenLib
       }
 
       var success = true;
-      var findEndTag = LineEndTag(comment, out isValid);
+      LineEndTag(comment, out bool isValid);
       if (!isValid)
       {
         success = false;
@@ -163,7 +160,7 @@ namespace LJCDocDataGenLib
         {
           // Left Trim and Save potentially partial comment.
           retComment = LTrimXMLComment(retComment);
-          findEndTag = LineEndTag(retComment, out isValid);
+          LineEndTag(retComment, out isValid);
           if (isValid)
           {
             Comments.Add(retComment);
@@ -202,9 +199,8 @@ namespace LJCDocDataGenLib
       isValid = false;
       string retBeginTag = null;
 
-      var startIndex = 0;
-      var beginTagName = NetString.GetDelimitedString(line, "<", ref startIndex
-        , ">");
+      var parser = new LJCParser();
+      var beginTagName = parser.DelimitedString(line, "<", ">");
 
       if (IsCommentTagName(beginTagName))
       {
@@ -224,9 +220,8 @@ namespace LJCDocDataGenLib
       isValid = false;
       string retEndTag = null;
 
-      var startIndex = 0;
-      var endTagName = NetString.GetDelimitedString(line, "</", ref startIndex
-        , ">");
+      var parser = new LJCParser();
+      var endTagName = parser.DelimitedString(line, "</", ">");
 
       if (IsCommentTagName(endTagName))
       {
@@ -265,13 +260,12 @@ namespace LJCDocDataGenLib
 
       LibName = Path.GetFileNameWithoutExtension(codeFileSpec);
       Comments = new List<string>();
-      var startIndex = 0;
-      var xmlPath = NetString.GetDelimitedString(includeLine, "path=\""
-        , ref startIndex, "\"");
+      var parser = new LJCParser();
+      var xmlPath = parser.DelimitedString(includeLine, "path=\"", "\"");
       if (null == xmlPath)
       {
-        xmlPath = NetString.GetDelimitedString(includeLine, "path='"
-          , ref startIndex, "'");
+        parser.StartIndex = 0;
+        xmlPath = parser.DelimitedString(includeLine, "path='", "'");
         if (null == xmlPath)
         {
           retValue = false;
@@ -280,16 +274,14 @@ namespace LJCDocDataGenLib
 
       if (retValue)
       {
-        startIndex = 0;
-        memberTag = NetString.GetDelimitedString(xmlPath, "members/"
-          , ref startIndex, "/*");
-        startIndex = 0;
-        XMLFile = NetString.GetDelimitedString(includeLine, "file=\""
-          , ref startIndex, "\"");
+        parser.StartIndex = 0;
+        memberTag = parser.DelimitedString(includeLine, "members/", "/*");
+        parser.StartIndex = 0;
+        XMLFile = parser.DelimitedString(includeLine, "file=\"", "\"");
         if (null == XMLFile)
         {
-          XMLFile = NetString.GetDelimitedString(includeLine, "file='"
-            , ref startIndex, "'");
+          parser.StartIndex = 0;
+          XMLFile = parser.DelimitedString(includeLine, "file='", "'");
           if (null == XMLFile)
           {
             retValue = false;

@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // LJCParse.cs
 
+using LJCNetCommon;
+
 namespace LJCDocDataGenLib
 {
   // Provides methods to parse source code for class, method and property
@@ -68,6 +70,60 @@ namespace LJCDocDataGenLib
 
     // Checks if a method definition.
     /// <include path="members/IsMethod/*" file="Doc/LJCParse.xml"/>
+    public string MethodName(string[] tokens)
+    {
+      string retValue = null;
+
+      // [modifier] [modifier2] method()
+      // if (returnsBool());
+      // var name = method();
+
+      // void Method()
+      if (tokens.Length > 1)
+      {
+        if (IsType(tokens[0]))
+        {
+          if (tokens[1].Contains("("))
+          {
+            retValue = ScrubMethodName(tokens[1]);
+          }
+        }
+      }
+
+      // static void Method()
+      if (!NetString.HasValue(retValue)
+        && tokens.Length > 2)
+      {
+        if ((IsAccess(tokens[0])
+          || IsAccess2(tokens[0]))
+          && IsType(tokens[1]))
+        {
+          if (tokens[2].Contains("("))
+          {
+            retValue = ScrubMethodName(tokens[2]);
+          }
+        }
+      }
+
+      // public static void Method()
+      if (!NetString.HasValue(retValue)
+        && tokens.Length > 3)
+      {
+        if (IsAccess(tokens[0])
+          && IsAccess2(tokens[1])
+          && IsType(tokens[2]))
+        {
+          if (tokens[3].Contains("("))
+          {
+            retValue = ScrubMethodName(tokens[2]);
+          }
+        }
+      }
+      return retValue;
+    }
+
+    // Checks if a method definition.
+    /// <include path="members/IsMethod/*" file="Doc/LJCParse.xml"/>
     public bool IsMethod(string[] tokens)
     {
       var retValue = false;
@@ -76,21 +132,11 @@ namespace LJCDocDataGenLib
       // if (returnsBool());
       // var name = method();
 
-      // Method();
-      if (tokens.Length > 0)
-      {
-        if (tokens[0].Contains("("))
-        {
-          retValue = true;
-        }
-      }
-
-      // public Method()
+      // void Method()
       if (!retValue
         && tokens.Length > 1)
       {
-        if (IsAccess(tokens[0])
-          || IsAccess2(tokens[0]))
+        if (IsType(tokens[0]))
         {
           if (tokens[1].Contains("("))
           {
@@ -99,14 +145,30 @@ namespace LJCDocDataGenLib
         }
       }
 
-      // public static Method()
+      // public void Method()
       if (!retValue
         && tokens.Length > 2)
       {
-        if (IsAccess(tokens[0])
-          && IsAccess2(tokens[1]))
+        if ((IsAccess(tokens[0])
+          || IsAccess2(tokens[0]))
+          && IsType(tokens[1]))
         {
           if (tokens[2].Contains("("))
+          {
+            retValue = true;
+          }
+        }
+      }
+
+      // public static void Method()
+      if (!retValue
+        && tokens.Length > 3)
+      {
+        if (IsAccess(tokens[0])
+          && IsAccess2(tokens[1])
+          && IsType(tokens[2]))
+        {
+          if (tokens[3].Contains("("))
           {
             retValue = true;
           }
@@ -230,6 +292,21 @@ namespace LJCDocDataGenLib
       return retValue;
     }
 
+    // Gets the method name.
+    private string ScrubMethodName(string token)
+    {
+      string retValue = null;
+
+      var index = token.IndexOf("(");
+      if (index >= 0)
+      {
+        var length = token.Length;
+        length -= length - index;
+        retValue = token.Substring(0, length);
+      }
+      return retValue;
+    }
+
     // Sets the modifier properties.
     private void SetModifiers()
     {
@@ -292,6 +369,7 @@ namespace LJCDocDataGenLib
         "UInt16",
         "sbyte",
         "SByte",
+        "void",
       };
     }
     #endregion
