@@ -70,5 +70,6 @@
     <Content Include="Doc\GenDoc2Program.xml" />
     <Content Include="Doc\LJCGenDataGen.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

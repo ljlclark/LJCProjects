@@ -6,7 +6,8 @@
   <LJCGenDataGen>
     <summary>
       Contains methods to create GenData XML and HTML Doc from DocData XML.
-    </summary>  
+    </summary>
+    <group name="Constructor">Constructor Methods</group>
   </LJCGenDataGen>
   
   <!-- Constructor Methods -->
@@ -15,5 +16,6 @@
       Sets the GenCodeDoc config.
     </summary>
     <param name="config">The LJCGenDocConfig object.</param>
+    <parentgroup>Constructor</parentgroup>
   </SetConfig>
 </members>

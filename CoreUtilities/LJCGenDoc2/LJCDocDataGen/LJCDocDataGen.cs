@@ -169,23 +169,16 @@ namespace LJCDocDataGenLib
     private void ProcessClass(string className)
     {
       var classes = DocDataFile.Classes;
-      if (null == classes)
-      {
-        classes = new LJCDocDataClasses();
-        DocDataFile.Classes = classes;
-      }
       var summary = Comments.Summary;
       var newClass = new LJCDocDataClass(className, summary);
       classes.Add(newClass);
-      newClass.Syntax = Line.Trim();
-
-      // Get Comment values.
       newClass.Code = Comments.Code;
       foreach (var group in Comments.Groups)
       {
         newClass.Groups.Add(group);
       }
       newClass.Remarks = Comments.Remarks;
+      newClass.Syntax = Line.Trim();
       Comments.ClearComments();
     }
 
@@ -235,27 +228,18 @@ namespace LJCDocDataGenLib
       if (classItem != null)
       {
         var methods = classItem.Methods;
-        if (null == methods)
-        {
-          methods = new LJCDocDataMethods();
-          classItem.Methods = methods;
-        }
         var tokens = NetString.Split(Line, " ");
         var methodName = parse.MethodName(tokens);
         if (methodName != null)
         {
-          var method = new LJCDocDataMethod
-          {
-            Name = methodName,
-            Summary = Comments.Summary,
-            Returns = Comments.Returns
-          };
-          methods.Add(method);
+          var method = new LJCDocDataMethod(methodName, Comments.Summary);
           method.Code = Comments.Code;
           method.Params = Comments.Params;
           method.ParentGroup = Comments.ParentGroup;
           method.Remarks = Comments.Remarks;
+          method.Returns = Comments.Returns;
           method.Syntax = MethodSyntax();
+          methods.Add(method);
         }
 
         Comments.ClearComments();

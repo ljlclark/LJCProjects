@@ -140,7 +140,7 @@ namespace LJCDocDataGenLib
       }
     }
 
-    // Gets the comment for the current comment tag.
+    // Gets the comment from a line.
     /// <include path="members/GetComment/*" file="Doc/LJCComments.xml"/>
     private string GetComment(string line)
     {

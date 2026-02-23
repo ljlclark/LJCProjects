@@ -23,8 +23,7 @@ namespace LJCDocDataDAL
     public LJCDocDataFile(string name, string summary = null)
     {
       // Initialize Serialize Properties
-      Classes = null;
-      Methods = null;
+      Classes = new LJCDocDataClasses();
       Name = name;
       Remarks = null;
       Summary = summary;
@@ -35,9 +34,6 @@ namespace LJCDocDataDAL
 
     /// <summary>The Class collection.</summary>
     public LJCDocDataClasses Classes;
-
-    /// <summary>The Function array.</summary>
-    public LJCDocDataMethods Methods;
 
     /// <summary>The Name value.</summary>
     public string Name;

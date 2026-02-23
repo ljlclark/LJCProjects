@@ -24,6 +24,9 @@ namespace LJCDocDataDAL
     {
       Name = name;
       Summary = summary;
+      Groups = new LJCDocDataParams();
+      Methods = new LJCDocDataMethods();
+      Properties = new LJCDocDataProperties();
     }
     #endregion
 
