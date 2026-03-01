@@ -3,6 +3,8 @@
 // LJCInclude.cs
 using LJCNetCommon;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
 
 namespace LJCDocDataGenLib
@@ -61,6 +63,11 @@ namespace LJCDocDataGenLib
           }
           isStart = false;
 
+          // Testing
+          if (line.Contains("GenDoc2Program"))
+          {
+            //Debugger.Break();
+          }
           var trimLine = line.Trim();
 
           var endTag = LineEndTag(trimLine, out _);
@@ -68,7 +75,7 @@ namespace LJCDocDataGenLib
           {
             // New comment.
             CurrentTag = LineBeginTag(line, out _);
-            GetComment(line);
+            SetComment(line);
             var findEndTag = LineEndTag(trimLine, out bool isValid);
             if (!isValid)
             {
@@ -90,7 +97,7 @@ namespace LJCDocDataGenLib
               // Has end tag so end Continue comment.
               isContinue = false;
             }
-            var comment = GetComment(line);
+            var comment = SetComment(line);
             LineEndTag(comment, out bool isValid);
             if (!isValid)
             {
@@ -107,34 +114,35 @@ namespace LJCDocDataGenLib
     #region Private Methods
 
     // Gets the comment for the provided line.
-    private string GetComment(string line)
+    private string SetComment(string line)
     {
       string retComment = null;
 
       var beginTag = LineBeginTag(line, out _);
-      var endTag = LineEndTag(line, out _);
-
-      if (null == beginTag)
-      {
-        // No BeginTag so set tag for start of comment.
-        line = $"/{line}";
-        beginTag = "/";
-      }
-
-      //var startIndex = 0;
-      var parser = new LJCParser();
-      var comment = parser.DelimitedString(line, beginTag, endTag);
-      if ("<code>" == CurrentTag
-        && endTag != null)
-      {
-        comment = comment.TrimEnd();
-      }
+      var endTag = LineEndTag(line, out bool isValid);
 
       var success = true;
-      LineEndTag(comment, out bool isValid);
       if (!isValid)
       {
         success = false;
+      }
+
+      string comment = null;
+      if (success)
+      {
+        var parser = new LJCParser();
+        comment = parser.DelimitedString(line, beginTag, endTag);
+        if ("<code>" == CurrentTag
+          && endTag != null)
+        {
+          comment = comment.TrimEnd();
+        }
+
+        LineEndTag(comment, out isValid);
+        if (!isValid)
+        {
+          success = false;
+        }
       }
 
       if (success)
@@ -177,6 +185,14 @@ namespace LJCDocDataGenLib
 
       if (tagName != null)
       {
+        // Eliminate attributes.
+        if (tagName != null
+          && tagName.Contains(" "))
+        {
+          var parser = new LJCParser();
+          tagName = parser.DelimitedString(tagName, null, " ");
+        }
+
         switch (tagName)
         {
           case "code":
@@ -201,6 +217,13 @@ namespace LJCDocDataGenLib
 
       var parser = new LJCParser();
       var beginTagName = parser.DelimitedString(line, "<", ">");
+
+      // Skip end tag.
+      if (beginTagName != null
+        && beginTagName.StartsWith("/"))
+      {
+        beginTagName = null;
+      }
 
       if (IsCommentTagName(beginTagName))
       {

@@ -2,11 +2,13 @@
 // Licensed under the MIT License.
 // LJCDocDataProperties.cs
 
+using System.Collections.Generic;
+
 namespace LJCDocDataDAL
 {
   // Represents a collection of LJCDocDataProperty objects.
   /// <include path="members/LJCDocDataProperties/*" file="Doc/LJCDocDataProperties.xml"/>
-  public class LJCDocDataProperties
+  public class LJCDocDataProperties : List<LJCDocDataProperty>
   {
   }
 }

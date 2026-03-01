@@ -5,6 +5,7 @@ using LJCDocDataDAL;
 using LJCNetCommon;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 
 namespace LJCDocDataGenLib
 {
@@ -77,7 +78,7 @@ namespace LJCDocDataGenLib
       if (success)
       {
         // Testing
-        //DebugBreak("LJCDocDataGen.cs", codeFileSpec);
+        //FileNameBreak("LJCDocDataGen.cs", codeFileSpec);
 
         if (Lines.Length > 0)
         {
@@ -166,48 +167,61 @@ namespace LJCDocDataGenLib
     }
 
     // Copy the Class XML comments into the DocData objects.
-    private void ProcessClass(string className)
+    private void ProcessClass()
     {
-      var classes = DocDataFile.Classes;
-      var summary = Comments.Summary;
-      var newClass = new LJCDocDataClass(className, summary);
-      classes.Add(newClass);
-      newClass.Code = Comments.Code;
-      foreach (var group in Comments.Groups)
+      if (NetString.HasValue(ClassName))
       {
-        newClass.Groups.Add(group);
+        InitializeClasses();
+        var classes = DocDataFile.Classes;
+        var summary = Comments.Summary;
+        var classItem = new LJCDocDataClass(ClassName, summary);
+        classes.Add(classItem);
+        classItem.Code = Comments.Code;
+        foreach (var group in Comments.Groups)
+        {
+          InitializeGroups(classItem);
+          classItem.Groups.Add(group);
+        }
+        classItem.Remarks = Comments.Remarks;
+        classItem.Syntax = Line.Trim();
+        Comments.ClearComments();
       }
-      newClass.Remarks = Comments.Remarks;
-      newClass.Syntax = Line.Trim();
-      Comments.ClearComments();
     }
 
     // Processes the Class, Function or Property.
     private void ProcessItem()
     {
-      var parse = new LJCParse();
       var isFound = false;
-      var tokens = NetString.Split(Line, " ");
 
-      var className = parse.ClassName(tokens);
-      if (NetString.HasValue(className))
+      if (!isFound)
       {
-        isFound = true;
-        ClassName = className;
-        ProcessClass(ClassName);
+        var tokens = NetString.Split(Line, " ");
+        var codeParse = new LJCCodeParse();
+        var className = codeParse.ClassName(tokens);
+        if (NetString.HasValue(className))
+        {
+          isFound = true;
+          ClassName = className;
+          ProcessClass();
+        }
       }
 
-      if (!isFound
-        && Line.Contains("("))
+      if (!isFound)
       {
-        isFound = true;
-        ProcessMethod();
+        var methodName = ProcessMethod();
+        if (NetString.HasValue(methodName))
+        {
+          isFound = true;
+        }
       }
 
-      if (!isFound
-        && parse.IsProperty(tokens))
+      if (!isFound)
       {
-        ProcessProperty();
+        var propertyName = ProcessProperty();
+        if (NetString.HasValue(propertyName))
+        {
+          //isFound = true;
+        }
       }
     }
 
@@ -220,30 +234,134 @@ namespace LJCDocDataGenLib
     }
 
     // Copy the Method XML comments into the DocData objects.
-    private void ProcessMethod()
+    private string ProcessMethod()
     {
-      var parse = new LJCParse();
-      var classes = DocDataFile.Classes;
-      var classItem = classes.Find(x => x.Name == ClassName);
-      if (classItem != null)
-      {
-        var methods = classItem.Methods;
-        var tokens = NetString.Split(Line, " ");
-        var methodName = parse.MethodName(tokens);
-        if (methodName != null)
-        {
-          var method = new LJCDocDataMethod(methodName, Comments.Summary);
-          method.Code = Comments.Code;
-          method.Params = Comments.Params;
-          method.ParentGroup = Comments.ParentGroup;
-          method.Remarks = Comments.Remarks;
-          method.Returns = Comments.Returns;
-          method.Syntax = MethodSyntax();
-          methods.Add(method);
-        }
+      string retMethodName = null;
 
-        Comments.ClearComments();
+      var classes = DocDataFile.Classes;
+      if (classes != null)
+      {
+        var tokens = NetString.Split(Line, " ");
+        var codeParse = new LJCCodeParse();
+        retMethodName = codeParse.MethodName(tokens);
+        if (retMethodName != null)
+        {
+          var classItem = classes.Find(x => x.Name == ClassName);
+          if (classItem != null)
+          {
+            InitializeMethods(classItem);
+            var methods = classItem.Methods;
+            var method = new LJCDocDataMethod(retMethodName, Comments.Summary)
+            {
+              Code = Comments.Code,
+              Params = Comments.Params,
+              ParentGroup = Comments.ParentGroup,
+              Remarks = Comments.Remarks,
+              Returns = Comments.Returns,
+              Syntax = MethodSyntax()
+            };
+            methods.Add(method);
+          }
+          Comments.ClearComments();
+        }
       }
+      return retMethodName;
+    }
+
+    // Copy the Property XML comments into the DocData objects.
+    private string ProcessProperty()
+    {
+      string retPropertyName = null;
+
+      var classes = DocDataFile.Classes;
+      if (classes != null)
+      {
+        var tokens = NetString.Split(Line, " ");
+        var codeParse = new LJCCodeParse();
+        retPropertyName = codeParse.PropertyName(tokens);
+        if (retPropertyName != null)
+        {
+          var classItem = classes.Find(x => x.Name == ClassName);
+          if (classItem != null)
+          {
+            InitializeProperties(classItem);
+            var properties = classItem.Properties;
+            var property = new LJCDocDataProperty(retPropertyName, Comments.Summary)
+            {
+              Remarks = Comments.Remarks,
+              Returns = Comments.Returns,
+              Syntax = PropertySyntax()
+            };
+            properties.Add(property);
+          }
+          Comments.ClearComments();
+        }
+      }
+      return retPropertyName;
+    }
+    #endregion
+
+    #region Other Private Methods
+
+    // Break on a file name.
+    private void FileNameBreak(string fileName, string fileSpec)
+    {
+      var nameOnly = Path.GetFileName(fileSpec);
+      if (fileName == nameOnly)
+      {
+        Debugger.Break();
+      }
+    }
+
+    // Initialize the file Classes collection.
+    private void InitializeClasses()
+    {
+      if (null == DocDataFile.Classes)
+      {
+        DocDataFile.Classes = new LJCDocDataClasses();
+      }
+    }
+
+    // Initialize the class Groups collection.
+    private void InitializeGroups(LJCDocDataClass classItem)
+    {
+      if (null == classItem.Groups)
+      {
+        classItem.Groups = new LJCDocDataParams();
+      }
+    }
+
+    // Initialize the class Methods collection.
+    private void InitializeMethods(LJCDocDataClass classItem)
+    {
+      if (null == classItem.Methods)
+      {
+        classItem.Methods = new LJCDocDataMethods();
+      }
+    }
+
+    // Initialize the class Properties collection.
+    private void InitializeProperties(LJCDocDataClass classItem)
+    {
+      if (null == classItem.Properties)
+      {
+        classItem.Properties = new LJCDocDataProperties();
+      }
+    }
+
+    // Creates a Lib DocData XML output file spec.
+    private string LibGenXMLSpec(string codeFileSpec, string outputPath = null)
+    {
+      string retFilespec;
+
+      if (null == outputPath)
+      {
+        outputPath = "../XMLDocData";
+      }
+      NetFile.CreateFolder(outputPath);
+      var fileName = Path.GetFileNameWithoutExtension(codeFileSpec) + ".xml";
+      retFilespec = $"{outputPath}/{fileName}";
+      return retFilespec;
     }
 
     // Create method syntax value.
@@ -263,37 +381,13 @@ namespace LJCDocDataGenLib
       return retSyntax;
     }
 
-    // Copy the Property XML comments into the DocData objects.
-    private void ProcessProperty()
+    // Create property syntax value.
+    private string PropertySyntax()
     {
-    }
-    #endregion
+      string retSyntax;
 
-    #region Other Private Methods
-
-    // Break on a file name.
-    private void DebugBreak(string fileName, string fileSpec)
-    {
-      var nameOnly = Path.GetFileName(fileSpec);
-      if (fileName == nameOnly)
-      {
-        Debugger.Break();
-      }
-    }
-
-    // Creates a Lib DocData XML output file spec.
-    private string LibGenXMLSpec(string codeFileSpec, string outputPath = null)
-    {
-      string retFilespec;
-
-      if (null == outputPath)
-      {
-        outputPath = "../XMLDocData";
-      }
-      NetFile.CreateFolder(outputPath);
-      var fileName = Path.GetFileNameWithoutExtension(codeFileSpec) + ".xml";
-      retFilespec = $"{outputPath}/{fileName}";
-      return retFilespec;
+      retSyntax = Line.Trim();
+      return retSyntax;
     }
 
     // Writes the LibGenXML file.

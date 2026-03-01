@@ -41,7 +41,8 @@ namespace LJCNetCommon
       {
         var beginLength = 0;
         BeginIndex = 0;
-        if (NetString.HasValue(beginDelimiter))
+        //if (NetString.HasValue(beginDelimiter))
+        if (beginDelimiter != null)
         {
           var index = text.IndexOf(beginDelimiter, StartIndex);
           if (index >= 0)
@@ -53,7 +54,8 @@ namespace LJCNetCommon
 
         int endLength = 0;
         EndIndex = text.Length;
-        if (NetString.HasValue(endDelimiter))
+        //if (NetString.HasValue(endDelimiter))
+        if (endDelimiter != null)
         {
           var index = text.IndexOf(endDelimiter, BeginIndex);
           if (index >= 0)

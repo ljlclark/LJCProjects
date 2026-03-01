@@ -8,6 +8,23 @@ namespace LJCDocDataDAL
   /// <include path="members/LJCDocDataProperty/*" file="Doc/LJCDocDataProperty.xml"/>
   public class LJCDocDataProperty
   {
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include path="members/Constructor/*" file="Doc/LJCDocDataMethod.xml"/>
+    public LJCDocDataProperty()
+    {
+    }
+
+    // Initializes an object instance with the provided values.
+    /// <include path="members/ConstructorParams/*" file="Doc/LJCDocDataMethod.xml"/>
+    public LJCDocDataProperty(string name, string summary)
+    {
+      Name = name;
+      Summary = summary;
+    }
+    #endregion
+
     #region Properties
 
     /// <summary>The Name value.</summary>

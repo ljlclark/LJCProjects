@@ -22,7 +22,8 @@ namespace LJCDocDataDAL
     {
       Name = name;
       Summary = summary;
-      Params = new LJCDocDataParams();
+      //Params = new LJCDocDataParams();
+      Params = null;
     }
     #endregion
 

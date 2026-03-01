@@ -49,7 +49,7 @@
     <Compile Include="LJCDocDataGen.cs" />
     <Compile Include="LJCInclude.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LJCParse.cs" />
+    <Compile Include="LJCCodeParse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DocDataDAL\LJCDocDataDAL.csproj">

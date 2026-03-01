@@ -64,7 +64,7 @@ namespace LJCDocDataGenLib
         if ("param" != CurrentTagName
           && "group" != CurrentTagName)
         {
-          ClearComment();
+          ClearTagComment();
         }
 
         var comment = GetComment(line);
@@ -94,8 +94,8 @@ namespace LJCDocDataGenLib
 
     #region Private Comment Methods
 
-    // Clear comment for supplied tag name.
-    private void ClearComment(string tagName = null)
+    // Clear comment for current or supplied tag name.
+    private void ClearTagComment(string tagName = null)
     {
       if (null == tagName)
       {
@@ -349,7 +349,7 @@ namespace LJCDocDataGenLib
             retTag = "</code>";
             break;
           case "group":
-            retTag = "</group?";
+            retTag = "</group>";
             break;
           case "parentgroup":
             retTag = "</parentgroup>";
@@ -427,6 +427,7 @@ namespace LJCDocDataGenLib
         if (line.ToLower().IndexOf(beginTag) >= 0)
         {
           retName = BeginTagName(beginTag);
+          break;
         }
       }
       return retName;
@@ -442,6 +443,7 @@ namespace LJCDocDataGenLib
         if (line.ToLower().IndexOf(endTag) >= 0)
         {
           retName = EndTagName(endTag);
+          break;
         }
       }
       return retName;

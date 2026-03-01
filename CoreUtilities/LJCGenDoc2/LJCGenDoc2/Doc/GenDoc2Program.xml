@@ -18,6 +18,7 @@
     <remarks>
       Create HTML Doc pages from the folder/file list.
     </remarks>
+    <group name="Static">Static Methods</group>
   </GenDoc2Program>
   <Main>
     <summary>
@@ -27,5 +28,6 @@
     <remarks>
       Creates the HTML Doc pages from the source files.
     </remarks>
+    <parentgroup>Static</parentgroup>
   </Main>
 </members>

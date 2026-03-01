@@ -23,10 +23,12 @@ namespace LJCDocDataDAL
     public LJCDocDataFile(string name, string summary = null)
     {
       // Initialize Serialize Properties
-      Classes = new LJCDocDataClasses();
       Name = name;
-      Remarks = null;
       Summary = summary;
+
+      //Classes = new LJCDocDataClasses();
+      Classes = null;
+      Remarks = null;
     }
     #endregion
 

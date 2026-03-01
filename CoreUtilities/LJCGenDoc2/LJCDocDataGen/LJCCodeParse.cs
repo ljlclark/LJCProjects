@@ -9,13 +9,13 @@ namespace LJCDocDataGenLib
   // Provides methods to parse source code for class, method and property
   // definitions.
   /// <include path="members/LJCParse/*" file="Doc/LJCParse.xml"/>
-  internal class LJCParse
+  internal class LJCCodeParse
   {
     #region Constructor Methods
 
     // Initializes an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCParse.xml"/>
-    public LJCParse()
+    public LJCCodeParse()
     {
       SetModifiers();
     }
@@ -24,22 +24,22 @@ namespace LJCDocDataGenLib
     #region Public Methods
 
     // Checks if a class definition.
-    /// <include path="members/IsClass/*" file="Doc/LJCParse.xml"/>
+    /// <include path="members/ClassName/*" file="Doc/LJCParse.xml"/>
     public string ClassName(string[] tokens)
     {
-      string retValue = null;
+      string retName = null;
 
       // class
       if (tokens.Length > 1)
       {
         if ("class" == tokens[0])
         {
-          retValue = tokens[1];
+          retName = tokens[1];
         }
       }
 
       // public class
-      if (null == retValue
+      if (null == retName
         && tokens.Length > 2)
       {
         if (IsAccess(tokens[0])
@@ -47,13 +47,13 @@ namespace LJCDocDataGenLib
         {
           if ("class" == tokens[1])
           {
-            retValue = tokens[2];
+            retName = tokens[2];
           }
         }
       }
 
       // public abstract class
-      if (null == retValue
+      if (null == retName
         && tokens.Length > 3)
       {
         if (IsAccess(tokens[0])
@@ -61,92 +61,38 @@ namespace LJCDocDataGenLib
         {
           if ("class" == tokens[2])
           {
-            retValue = tokens[3];
+            retName = tokens[3];
           }
         }
       }
-      return retValue;
+      return retName;
     }
 
     // Checks if a method definition.
-    /// <include path="members/IsMethod/*" file="Doc/LJCParse.xml"/>
+    /// <include path="members/MethodName/*" file="Doc/LJCParse.xml"/>
     public string MethodName(string[] tokens)
     {
-      string retValue = null;
+      string retName = null;
 
       // [modifier] [modifier2] method()
       // if (returnsBool());
       // var name = method();
 
       // void Method()
-      if (tokens.Length > 1)
-      {
-        if (IsType(tokens[0]))
-        {
-          if (tokens[1].Contains("("))
-          {
-            retValue = ScrubMethodName(tokens[1]);
-          }
-        }
-      }
-
-      // static void Method()
-      if (!NetString.HasValue(retValue)
-        && tokens.Length > 2)
-      {
-        if ((IsAccess(tokens[0])
-          || IsAccess2(tokens[0]))
-          && IsType(tokens[1]))
-        {
-          if (tokens[2].Contains("("))
-          {
-            retValue = ScrubMethodName(tokens[2]);
-          }
-        }
-      }
-
-      // public static void Method()
-      if (!NetString.HasValue(retValue)
-        && tokens.Length > 3)
-      {
-        if (IsAccess(tokens[0])
-          && IsAccess2(tokens[1])
-          && IsType(tokens[2]))
-        {
-          if (tokens[3].Contains("("))
-          {
-            retValue = ScrubMethodName(tokens[2]);
-          }
-        }
-      }
-      return retValue;
-    }
-
-    // Checks if a method definition.
-    /// <include path="members/IsMethod/*" file="Doc/LJCParse.xml"/>
-    public bool IsMethod(string[] tokens)
-    {
-      var retValue = false;
-
-      // [modifier] [modifier2] method()
-      // if (returnsBool());
-      // var name = method();
-
-      // void Method()
-      if (!retValue
+      if (!NetString.HasValue(retName)
         && tokens.Length > 1)
       {
         if (IsType(tokens[0]))
         {
           if (tokens[1].Contains("("))
           {
-            retValue = true;
+            retName = ScrubMethodName(tokens[1]);
           }
         }
       }
 
-      // public void Method()
-      if (!retValue
+      // static void Method()
+      if (!NetString.HasValue(retName)
         && tokens.Length > 2)
       {
         if ((IsAccess(tokens[0])
@@ -155,13 +101,13 @@ namespace LJCDocDataGenLib
         {
           if (tokens[2].Contains("("))
           {
-            retValue = true;
+            retName = ScrubMethodName(tokens[2]);
           }
         }
       }
 
       // public static void Method()
-      if (!retValue
+      if (!NetString.HasValue(retName)
         && tokens.Length > 3)
       {
         if (IsAccess(tokens[0])
@@ -170,46 +116,75 @@ namespace LJCDocDataGenLib
         {
           if (tokens[3].Contains("("))
           {
-            retValue = true;
+            retName = ScrubMethodName(tokens[2]);
           }
         }
       }
-      return retValue;
+      return retName;
     }
 
     // Checks if a property definition.
-    /// <include path="members/IsProperty/*" file="Doc/LJCParse.xml"/>
-    public bool IsProperty(string[] tokens)
+    /// <include path="members/PropertyName/*" file="Doc/LJCParse.xml"/>
+    public string PropertyName(string[] tokens)
     {
-      var retValue = false;
+      string retName = null;
 
-      // string Property
-      if (tokens.Length > 1)
+      // type Property
+      // !type name = 
+      if (!NetString.HasValue(retName)
+        && tokens.Length > 1)
       {
-        if (IsType(tokens[0])
-          && !tokens[1].Contains("("))
+        if (IsType(tokens[0]))
         {
-          retValue = true;
+          if (!tokens[1].Contains("("))
+          {
+            var valid = true;
+            if (tokens.Length > 2
+              && "=" == tokens[2])
+            {
+              valid = false;
+            }
+            if (valid)
+            {
+              retName = tokens[1];
+            }
+          }
+          if (!NetString.HasValue(retName)
+            && tokens[0] != "#region"
+            && tokens[1] != "="
+            && !IsType(tokens[0])
+            && !IsType(tokens[1]))
+          {
+            retName = tokens[1];
+          }
         }
       }
 
-      // public string Property
-      if (!retValue
+      // public type Property
+      if (!NetString.HasValue(retName)
         && tokens.Length > 2)
       {
         if (IsAccess(tokens[0])
           || IsAccess2(tokens[0]))
         {
           if (IsType(tokens[1])
+            && tokens[2] != "="
             && !tokens[2].Contains("("))
           {
-            retValue = true;
+            retName = tokens[2];
+          }
+          if (!NetString.HasValue(retName)
+            && tokens[2] != "="
+            && !IsType(tokens[1])
+            && !IsType(tokens[2]))
+          {
+            retName = tokens[2];
           }
         }
       }
 
-      // public static string Property
-      if (!retValue
+      // public static type Property
+      if (!NetString.HasValue(retName)
         && tokens.Length > 3)
       {
         if (IsAccess(tokens[0])
@@ -218,11 +193,17 @@ namespace LJCDocDataGenLib
           if (IsType(tokens[2])
             && !tokens[3].Contains("("))
           {
-            retValue = true;
+            retName = tokens[3];
+          }
+          if (!NetString.HasValue(retName)
+            && !IsType(tokens[2])
+            && !IsType(tokens[3]))
+          {
+            retName = tokens[3];
           }
         }
       }
-      return retValue;
+      return retName;
     }
     #endregion
 
