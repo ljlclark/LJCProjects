@@ -102,6 +102,7 @@
     <Content Include="Doc\DataRoot.xml" />
     <Content Include="Doc\DataType.xml" />
     <Content Include="Doc\ProjectDocObjLib.xml" />
+    <Content Include="ReadMeDocObjLib.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\DataPropertyToExample.cd" />

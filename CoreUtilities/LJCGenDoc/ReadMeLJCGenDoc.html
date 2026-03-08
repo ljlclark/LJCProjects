@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License.-->
+<!-- ReadMeLJCGenDoc.html -->
+<html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+  <title>LJC LJCGenDoc Readme</title>
+  <meta charset='utf-8' />
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='../CSS/CodeDoc.css' />
+  <style>
+    .start {
+      align-content: start;
+    }
+  </style>
+</head>
+<body style="background: #F0F5FF">
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="../../index.html">Home</a>
+      / <a href="../../ReadMeLJCProjects.html">LJCProjects</a>
+      / <a href="../ReadMeCoreUtilities.html">CoreUtilities</a>
+      / LJCGenDoc
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>LJCGenDoc Readme</div>
+    </div>
+    <br />
+    <div class="Text">
+      <h4>LJCGenDoc</h4>
+      <p>
+        The GenDoc application generates HTML documentation from a Visual Studio
+        XML Comment output file. The XML Comment output file includes external
+        XML Comment files which are referenced by source file "include" XML
+        comments.
+      </p>
+      <table>
+        <tr>
+          <td class="start">CopyUpdateLinks.cmd</td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td class="start">UpdateLinks.cmd</td>
+          <td>
+            Copies the project Link Pages to the CodeDoc project folders.
+            This file should be copied to the CodeDoc root folder and run from
+            there.
+          </td>
+        </tr>
+        <tr>
+          <td class="start">UpdateLinks.cmd</td>
+          <td>
+            Copies the project Link Pages to the CodeDoc project folders.
+            This file should be copied to the CodeDoc root folder and run from
+            there.
+          </td>
+        </tr>
+      </table>
+    </div>
+    <p>
+      ProjectFolder\LinkPages -<br />
+      Each project can have one or more folders to hold link pages. There
+      should be a folder named LinkPages. There may also be other folders such
+      as Links, Diagrams, etc. to qualify the type of links.
+    </p>
+    <p>
+      LJCDocGen\bin\Debug\Links -
+      There must be an XML file in LJCDocGen\bin\Debug\Links with the name of
+      the project and a suffix of Links. For example: Project LJCDataAccess
+      would require a file named LJCDataAccessLinks.xml. This file identifies
+      the links to be added to the CodeDoc Project page. A link is created on
+      the Project page for each entry.
+    </p>
+    <pre>
+&lt;?xml version="1.0"?&gt;
+&lt;!-- Copyright (c) Lester J. Clark 2021,2022 - All Rights Reserved --&gt;
+&lt;!-- LJCDataAccessLinks.xml --&gt;
+&lt;Links xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;Link&gt;
+    &lt;Name&gt;..\..\..\..\LJCDataAccess\LJCDataAccess\LinkPages\DataAccessLink.html&lt;/Name&gt;
+    &lt;Text>Data Access Class Diagram&lt;/Text&gt;
+  &lt;/Link&gt;
+&lt;/Links&gt;</pre>
+    <p>
+      The LJCGenDoc project group has five main projects:
+    </p>
+    <table>
+      <tr>
+        <td>
+          <a href="LJCGenDoc/ReadMeGenDoc.html">LJCGenDoc</a>
+        </td>
+        <td>
+          The GenDoc Console Program
+        </td>
+      <tr>
+        <td>
+          <a href="LJCGenDocLib/ReadMeGenDocLib.html">LJCGenDocLib</a>
+        </td>
+        <td>
+          The GenDoc Library
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="LJCGenDocDAL/ReadMeGenDocDAL.html">LJCLJCGenDocDAL</a>
+        </td>
+        <td>
+          The GenDoc Data Access Layer Library
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="LJCDocXMLObjLib/ReadMeDocXMLObjLib.html">LJCDocXMLObjLib</a>
+        </td>
+        <td>
+          The GenDoc XML Object Library
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="LJCDocObjLib/ReadMeDocObjLib.html">LJCDocObjLib</a>
+        </td>
+        <td>
+          The GenDoc DocData Object Library
+        </td>
+      </tr>
+    </table>
+    <p>
+      The LJCGenDoc project group has two utility/test projects:
+    </p>
+    <table>
+      <tr>
+        <td>GenDocScript</td>
+        <td>
+          Generates SQL scripts to add DB Grouping data.
+        </td>
+      </tr>
+      <tr>
+        <td>TestSyntaxConsole</td>
+        <td>
+          The console program to test syntax highlighting.
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
+
+
+
+
+

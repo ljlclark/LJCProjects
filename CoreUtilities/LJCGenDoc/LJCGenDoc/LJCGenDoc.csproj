@@ -113,6 +113,7 @@
     <Content Include="bin\Debug\XMLFiles\GenAssembly.xml" />
     <Content Include="bin\Debug\XMLFiles\LJCNetCommonTest.xml" />
     <Content Include="Doc\ProjectDocGen.xml" />
+    <Content Include="ReadMeGenDoc.html" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

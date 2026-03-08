@@ -1,21 +1,19 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCParse.cs
+// LJCCSParser.cs
 
-using LJCNetCommon;
-
-namespace LJCDocDataGenLib
+namespace LJCNetCommon
 {
-  // Provides methods to parse source code for class, method and property
+  // Provides methods to parse a source line for class, method and property
   // definitions.
-  /// <include path="members/LJCParse/*" file="Doc/LJCParse.xml"/>
-  internal class LJCCodeParse
+  /// <include path="members/LJCCSParser/*" file="Doc/LJCCSParser.xml"/>
+  public class LJCCSParser
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCParse.xml"/>
-    public LJCCodeParse()
+    /// <include path="members/Constructor/*" file="Doc/LJCCSParser.xml"/>
+    public LJCCSParser()
     {
       SetModifiers();
     }
@@ -23,11 +21,13 @@ namespace LJCDocDataGenLib
 
     #region Public Methods
 
-    // Checks if a class definition.
-    /// <include path="members/ClassName/*" file="Doc/LJCParse.xml"/>
-    public string ClassName(string[] tokens)
+    // Attempts to parse a class name.
+    /// <include path="members/ClassName/*" file="Doc/LJCCSParser.xml"/>
+    public string ClassName(string line)
     {
       string retName = null;
+
+      string[] tokens = NetString.Split(line, " ");
 
       // class
       if (tokens.Length > 1)
@@ -42,8 +42,8 @@ namespace LJCDocDataGenLib
       if (null == retName
         && tokens.Length > 2)
       {
-        if (IsAccess(tokens[0])
-          || IsAccess2(tokens[0]))
+        if (IsModifier(tokens[0])
+          || IsModifier2(tokens[0]))
         {
           if ("class" == tokens[1])
           {
@@ -56,8 +56,8 @@ namespace LJCDocDataGenLib
       if (null == retName
         && tokens.Length > 3)
       {
-        if (IsAccess(tokens[0])
-          && IsAccessClass2(tokens[1]))
+        if (IsModifier(tokens[0])
+          && IsClassModifier2(tokens[1]))
         {
           if ("class" == tokens[2])
           {
@@ -68,11 +68,13 @@ namespace LJCDocDataGenLib
       return retName;
     }
 
-    // Checks if a method definition.
-    /// <include path="members/MethodName/*" file="Doc/LJCParse.xml"/>
-    public string MethodName(string[] tokens)
+    // Attempts to parse a method name.
+    /// <include path="members/MethodName/*" file="Doc/LJCCSParser.xml"/>
+    public string MethodName(string line)
     {
       string retName = null;
+
+      string[] tokens = NetString.Split(line, " ");
 
       // [modifier] [modifier2] method()
       // if (returnsBool());
@@ -95,8 +97,8 @@ namespace LJCDocDataGenLib
       if (!NetString.HasValue(retName)
         && tokens.Length > 2)
       {
-        if ((IsAccess(tokens[0])
-          || IsAccess2(tokens[0]))
+        if ((IsModifier(tokens[0])
+          || IsModifier2(tokens[0]))
           && IsType(tokens[1]))
         {
           if (tokens[2].Contains("("))
@@ -110,96 +112,84 @@ namespace LJCDocDataGenLib
       if (!NetString.HasValue(retName)
         && tokens.Length > 3)
       {
-        if (IsAccess(tokens[0])
-          && IsAccess2(tokens[1])
+        if (IsModifier(tokens[0])
+          && IsModifier2(tokens[1])
           && IsType(tokens[2]))
         {
           if (tokens[3].Contains("("))
           {
-            retName = ScrubMethodName(tokens[2]);
+            retName = ScrubMethodName(tokens[3]);
           }
         }
       }
       return retName;
     }
 
-    // Checks if a property definition.
-    /// <include path="members/PropertyName/*" file="Doc/LJCParse.xml"/>
-    public string PropertyName(string[] tokens)
+    // Attempts to parse a property name.
+    /// <include path="members/PropertyName/*" file="Doc/LJCCSParser.xml"/>
+    public string PropertyName(string line, string nextLine)
     {
       string retName = null;
 
-      // type Property
-      // !type name = 
-      if (!NetString.HasValue(retName)
-        && tokens.Length > 1)
+      string[] tokens = NetString.Split(line, " ");
+
+      if (!NetString.HasValue(retName))
       {
-        if (IsType(tokens[0]))
+        // type Property
+        if (2 == tokens.Length
+          && !IsModifier(tokens[0])
+          && !IsModifier2(tokens[0])
+          && !tokens[0].StartsWith("#")
+          && nextLine != null
+          && nextLine.Trim().StartsWith("{"))
         {
-          if (!tokens[1].Contains("("))
+          retName = tokens[1];
+
+          // Not "type Method()"
+          // Not "type VarName;"
+          // Not "VarName ="
+          if (tokens[1].Contains("(")
+            || tokens[1].EndsWith(";")
+            || "=" == tokens[1])
           {
-            var valid = true;
-            if (tokens.Length > 2
-              && "=" == tokens[2])
-            {
-              valid = false;
-            }
-            if (valid)
-            {
-              retName = tokens[1];
-            }
+            retName = null;
           }
-          if (!NetString.HasValue(retName)
-            && tokens[0] != "#region"
-            && tokens[1] != "="
-            && !IsType(tokens[0])
-            && !IsType(tokens[1]))
+
+          // Not "type VarName = "
+          if (tokens.Length > 2
+            && "=" == tokens[2]
+            && tokens[2] != "{")
           {
-            retName = tokens[1];
+            retName = null;
           }
         }
       }
 
-      // public type Property
-      if (!NetString.HasValue(retName)
-        && tokens.Length > 2)
+      if (!NetString.HasValue(retName))
       {
-        if (IsAccess(tokens[0])
-          || IsAccess2(tokens[0]))
+        // modifier type Property {
+        if (tokens.Length > 3
+          && (IsModifier(tokens[0])
+          || IsModifier2(tokens[0]))
+          && !tokens[0].StartsWith("#"))
         {
-          if (IsType(tokens[1])
-            && tokens[2] != "="
-            && !tokens[2].Contains("("))
-          {
-            retName = tokens[2];
-          }
-          if (!NetString.HasValue(retName)
-            && tokens[2] != "="
-            && !IsType(tokens[1])
-            && !IsType(tokens[2]))
-          {
-            retName = tokens[2];
-          }
-        }
-      }
+          retName = tokens[2];
 
-      // public static type Property
-      if (!NetString.HasValue(retName)
-        && tokens.Length > 3)
-      {
-        if (IsAccess(tokens[0])
-          && IsAccess2(tokens[1]))
-        {
-          if (IsType(tokens[2])
-            && !tokens[3].Contains("("))
+          // Not "type VarName = "
+          // Not "modifier type Method()"
+          // Not "modifier type VarName;
+          if ("=" == tokens[2]
+            || tokens[2].Contains("(")
+            || tokens[2].EndsWith(";"))
           {
-            retName = tokens[3];
+            retName = null;
           }
-          if (!NetString.HasValue(retName)
-            && !IsType(tokens[2])
-            && !IsType(tokens[3]))
+
+          // Not "mofifier type VarName ="
+          if (tokens.Length > 3
+            && "=" == tokens[3])
           {
-            retName = tokens[3];
+            retName = null;
           }
         }
       }
@@ -209,14 +199,14 @@ namespace LJCDocDataGenLib
 
     #region Private Methods
 
-    // Checks if token is access modifier.
-    private bool IsAccess(string token)
+    // Checks if the token is a ClassModifier2.
+    private bool IsClassModifier2(string token)
     {
       var retValue = false;
 
-      foreach (var access in Access)
+      foreach (var classModifier in ClassModifier2)
       {
-        if (token == access)
+        if (token == classModifier)
         {
           retValue = true;
           break;
@@ -225,14 +215,14 @@ namespace LJCDocDataGenLib
       return retValue;
     }
 
-    // Checks if token is access2 modifier.
-    private bool IsAccess2(string token)
+    // Checks if the token is a Modifier.
+    private bool IsModifier(string token)
     {
       var retValue = false;
 
-      foreach (var access in Access2)
+      foreach (var modifier in Modifier)
       {
-        if (token == access)
+        if (token == modifier)
         {
           retValue = true;
           break;
@@ -241,14 +231,14 @@ namespace LJCDocDataGenLib
       return retValue;
     }
 
-    // Checks if token is AccessClass2 modifier.
-    private bool IsAccessClass2(string token)
+    // Checks if the token is a Modifier2.
+    private bool IsModifier2(string token)
     {
       var retValue = false;
 
-      foreach (var access in AccessClass2)
+      foreach (var modifier in Modifier2)
       {
-        if (token == access)
+        if (token == modifier)
         {
           retValue = true;
           break;
@@ -288,10 +278,10 @@ namespace LJCDocDataGenLib
       return retValue;
     }
 
-    // Sets the modifier properties.
+    // Sets the modifier and type properties.
     private void SetModifiers()
     {
-      Access = new string[]
+      Modifier = new string[]
       {
         "internal",
         "private",
@@ -299,9 +289,12 @@ namespace LJCDocDataGenLib
         "public",
       };
 
-      // protected internal
-      // private protected
-      Access2 = new string[]
+      // protected internal *
+      // public override
+      // private protected *
+      // public static
+      // public virtual
+      Modifier2 = new string[]
       {
         "internal",
         "override",
@@ -310,7 +303,9 @@ namespace LJCDocDataGenLib
         "virtual",
       };
 
-      AccessClass2 = new string[]
+      // public sealed class
+      // public abstract class
+      ClassModifier2 = new string[]
       {
         "abstract",
         "sealed",
@@ -357,17 +352,17 @@ namespace LJCDocDataGenLib
 
     #region Properties
 
-    // The access modifiers.
-    private string[] Access { get; set; }
+    /// <summary>Gets or sets the second class access modifier.</summary>
+    public string[] ClassModifier2 { get; set; }
 
-    // The second access modifier.
-    public string[] Access2 { get; set; }
-
-    // The second class access modifier.
-    public string[] AccessClass2 { get; set; }
-
-    // The data types.
+    /// <summary>Gets or sets the data types.</summary>
     public string[] DataType { get; set; }
+
+    /// <summary>Gets or sets the access modifiers.</summary>
+    public string[] Modifier { get; set; }
+
+    /// <summary>Gets or sets the second access modifier.</summary>
+    public string[] Modifier2 { get; set; }
     #endregion
   }
 }

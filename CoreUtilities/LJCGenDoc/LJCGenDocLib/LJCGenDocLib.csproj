@@ -79,10 +79,10 @@
     <Content Include="CreateXML\DocLibObjGraph.jpg" />
     <Content Include="CreateXML\DocLibDataGraph.jpg" />
     <Content Include="CreateXML\DocLibXMLGraph.jpg" />
-    <Content Include="Diagrams\GenPropertyToField.html" />
-    <Content Include="Diagrams\GenPropertyToField.jpg" />
-    <Content Include="Diagrams\GenRootToMethod.html" />
-    <Content Include="Diagrams\GenRootToMethod.jpg" />
+    <Content Include="DocPages\GenPropertyToField.html" />
+    <Content Include="DocPages\GenPropertyToField.jpg" />
+    <Content Include="DocPages\GenRootToMethod.html" />
+    <Content Include="DocPages\GenRootToMethod.jpg" />
     <Content Include="Doc\CreateAssemblyXml.xml" />
     <Content Include="Doc\CreateDataXml.xml" />
     <Content Include="Doc\CreateFieldXml.xml" />
@@ -106,11 +106,12 @@
     <Content Include="Doc\GenType.xml" />
     <Content Include="Doc\ProjectDocGenLib.xml" />
     <Content Include="Doc\SyntaxHighlight.xml" />
+    <Content Include="ReadMeGenDocLib.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CreateXML\DocLibObjGraph.doc" />
-    <None Include="Diagrams\GenPropertyToField.cd" />
-    <None Include="Diagrams\GenRootToMethod.cd" />
+    <None Include="DocPages\GenPropertyToField.cd" />
+    <None Include="DocPages\GenRootToMethod.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJCDocObjLib\LJCDocObjLib.csproj">

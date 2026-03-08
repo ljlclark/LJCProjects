@@ -41,7 +41,7 @@ namespace LJCGenDoc2
       {
         if (!line.Trim().StartsWith("//"))
         {
-          // Sets config properties or returns true if a folder or file.
+          // Sets config property or returns true if a folder or file.
           if (GenDocConfig.SetProperty(line))
           {
             DocDataGen.SetConfig(GenDocConfig);

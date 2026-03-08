@@ -65,6 +65,7 @@
     <Compile Include="CodeTokens\CommonKeywords.cs" />
     <Compile Include="LJCAssemblyReflect.cs" />
     <Compile Include="LJCCryptography.cs" />
+    <Compile Include="LJCCSParser.cs" />
     <Compile Include="LJCParser.cs" />
     <Compile Include="NetCommon.cs" />
     <Compile Include="NetFile.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="LJCReflect.cs" />
     <Compile Include="PropertyDelegate.cs" />
     <Compile Include="PropertyDelegates.cs" />
+    <Compile Include="TestCommon.cs" />
     <Compile Include="TextBuilder.cs" />
     <Compile Include="TextState.cs" />
   </ItemGroup>
@@ -100,6 +102,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Doc\LJCCryptography.xml" />
+    <Content Include="Doc\LJCCSParser.xml" />
     <Content Include="Doc\LJCParser.xml" />
     <Content Include="Doc\NetCommon.xml">
       <SubType>Designer</SubType>

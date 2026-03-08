@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace LJCGenDocLib
 {
-  // Creates the Type XML Data values.
+  // Creates the Class/Type XML Data values.
   /// <include path='items/CreateTypeXml/*' file='Doc/CreateTypeXml.xml'/>
   public class CreateTypeXml
   {

@@ -129,6 +129,7 @@
     <Content Include="LinkPages\DocClassTables.jpg" />
     <Content Include="LinkPages\DocMethodTables.html" />
     <Content Include="LinkPages\DocMethodTables.jpg" />
+    <Content Include="ReadMeGenDocDAL.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

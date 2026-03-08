@@ -49,7 +49,6 @@
     <Compile Include="LJCDocDataGen.cs" />
     <Compile Include="LJCInclude.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LJCCodeParse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DocDataDAL\LJCDocDataDAL.csproj">
@@ -59,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\LJCDocDataGen.xml" />
-    <Content Include="Doc\LJCParse.xml" />
     <Content Include="Doc\LJCComments.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

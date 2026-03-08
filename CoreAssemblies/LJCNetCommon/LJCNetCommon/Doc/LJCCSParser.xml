@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCCSParser.xml -->
+<members>
+  <!-- Class -->
+  <LJCCSParser>
+    <summary>
+      Provides methods to parse a source line for class, method and property
+      definitions.
+    </summary>
+  </LJCCSParser>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+
+  <!-- Public Methods -->
+  <ClassName>
+    <summary>
+      Attempts to parse a class name.
+    </summary>
+    <param name="line">The source line.</param>
+    <returns>
+      The class name if the line contains a class definition; otherwise null.
+    </returns>
+  </ClassName>
+  <MethodName>
+    <summary>
+      Attempts to parse a method name.
+    </summary>
+    <param name="line">The source line.</param>
+    <returns>
+      The method name if the line contains a method definition; otherwise null.
+    </returns>
+  </MethodName>
+  <PropertyName>
+    <summary>
+      Attempts to parse a property name.
+    </summary>
+    <param name="line">The source line.</param>
+    <param name="nextLine">The next source line.</param>
+    <returns>
+      The property name if the line contains a property definition; otherwise
+      null.
+    </returns>
+  </PropertyName>
+</members>

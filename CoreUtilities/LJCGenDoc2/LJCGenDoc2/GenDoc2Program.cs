@@ -2,8 +2,10 @@
 // Licensed under the MIT License.
 // GenCodeDocProgram.cs
 using LJCDocDataDAL;
+using LJCDocDataGenLib;
 using LJCNetCommon;
 using System;
+using System.CodeDom.Compiler;
 
 // The GenDoc2 Program.
 /// <include path="members/LJCGenDoc2/*" file="Doc/GenDoc2Program.xml"/>
@@ -21,11 +23,13 @@ namespace LJCGenDoc2
     {
       var genDoc2 = new LJCGenDoc2();
 
-      var genDocConfig = new LJCGenDocConfig();
-      genDocConfig.DocDataXMLPath = "../XMLDocData";
-      genDocConfig.GenDataXMLPath = "../XMLGenData";
-      genDocConfig.WriteDocDataXML = false;
-      genDocConfig.WriteGenDataXML = false;
+      var genDocConfig = new LJCGenDocConfig
+      {
+        DocDataXMLPath = "../XMLDocData",
+        GenDataXMLPath = "../XMLGenData",
+        WriteDocDataXML = false,
+        WriteGenDataXML = false
+      };
       var parentPath = @"LJCGenDoc2\bin\Debug";
       string prefix = genDocConfig.GetParentPathPrefix(parentPath);
       genDocConfig.OutputPath = $"{prefix}CodeDoc/HTML";

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHTMLBuilder", "TestHTML
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNetString", "TestNetString\TestNetString.csproj", "{4FDBA330-F62C-4A57-BF25-282B962F5129}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCSParser", "TestCSParser\TestCSParser.csproj", "{8D3E5880-56BC-40F1-BF9B-82D241D007F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4FDBA330-F62C-4A57-BF25-282B962F5129}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FDBA330-F62C-4A57-BF25-282B962F5129}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FDBA330-F62C-4A57-BF25-282B962F5129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D3E5880-56BC-40F1-BF9B-82D241D007F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D3E5880-56BC-40F1-BF9B-82D241D007F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D3E5880-56BC-40F1-BF9B-82D241D007F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D3E5880-56BC-40F1-BF9B-82D241D007F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

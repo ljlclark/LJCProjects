@@ -77,6 +77,7 @@
     <Content Include="Doc\DocParams.xml" />
     <Content Include="Doc\DocParas.xml" />
     <Content Include="Doc\ProjectDocXMLObjLib.xml" />
+    <Content Include="ReadMeDocXMLObjLib.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\DocXML.cd" />

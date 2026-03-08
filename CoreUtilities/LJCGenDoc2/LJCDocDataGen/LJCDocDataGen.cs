@@ -5,7 +5,6 @@ using LJCDocDataDAL;
 using LJCNetCommon;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 
 namespace LJCDocDataGenLib
 {
@@ -86,6 +85,15 @@ namespace LJCDocDataGenLib
           while (LineIndex < Lines.Length)
           {
             Line = Lines[LineIndex];
+            // *** Begin *** Add
+            NextLine = null;
+            var nextIndex = LineIndex + 1;
+            var maxIndex = Lines.Length - 1;
+            if (nextIndex < maxIndex)
+            {
+              NextLine = Lines[LineIndex + 1];
+            }
+            // *** End ***
             LineIndex++;
 
             // Process XML Comment, empty line and Comment Line.
@@ -195,9 +203,8 @@ namespace LJCDocDataGenLib
 
       if (!isFound)
       {
-        var tokens = NetString.Split(Line, " ");
-        var codeParse = new LJCCodeParse();
-        var className = codeParse.ClassName(tokens);
+        var codeParse = new LJCCSParser();
+        var className = codeParse.ClassName(Line);
         if (NetString.HasValue(className))
         {
           isFound = true;
@@ -241,9 +248,8 @@ namespace LJCDocDataGenLib
       var classes = DocDataFile.Classes;
       if (classes != null)
       {
-        var tokens = NetString.Split(Line, " ");
-        var codeParse = new LJCCodeParse();
-        retMethodName = codeParse.MethodName(tokens);
+        var codeParse = new LJCCSParser();
+        retMethodName = codeParse.MethodName(Line);
         if (retMethodName != null)
         {
           var classItem = classes.Find(x => x.Name == ClassName);
@@ -276,9 +282,8 @@ namespace LJCDocDataGenLib
       var classes = DocDataFile.Classes;
       if (classes != null)
       {
-        var tokens = NetString.Split(Line, " ");
-        var codeParse = new LJCCodeParse();
-        retPropertyName = codeParse.PropertyName(tokens);
+        var codeParse = new LJCCSParser();
+        retPropertyName = codeParse.PropertyName(Line, NextLine);
         if (retPropertyName != null)
         {
           var classItem = classes.Find(x => x.Name == ClassName);
@@ -441,6 +446,9 @@ namespace LJCDocDataGenLib
 
     // The method name.
     private string MethodName { get; set; }
+
+    // The next process line.
+    private string NextLine { get; set; }
 
     // The property name.
     private string PropertyName { get; set; }
