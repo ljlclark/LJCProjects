@@ -32,8 +32,28 @@
     <div class="Text">
       <h4>LJCDocXMLObjLib</h4>
       <p>
-        Deserializes the VS XML Comment output data.
+        Deserializes the VS XML Comment output data into the DocComment XML
+        data.
       </p>
+      <span>Doc</span><br />
+      <span class="indent1">DocXMLAssembly</span><br />
+      <span class="indent1">DocMembers</span><br />
+      <span class="indent2">DocMember</span><br />
+      <span class="indent3">DocExample</span><br />
+      <span class="indent4">DocParas</span><br />
+      <span class="indent5">DocPara</span><br />
+      <span class="indent3">DocExceptions</span><br />
+      <span class="indent4">DocException</span><br />
+      <span class="indent3">DocLinks</span><br />
+      <span class="indent4">DocLink</span><br />
+      <span class="indent3">DocParams</span><br />
+      <span class="indent4">DocParam</span><br />
+      <span class="indent3">DocRemarks</span><br />
+      <span class="indent4">DocParas</span><br />
+      <span class="indent5">DocPara</span><br />
+      <span class="indent3">DocTypeParams</span><br />
+      <span class="indent4">DocTypeParam</span><br />
+      <br />
       <div class="indent1">
         <table>
           <tr>
@@ -75,11 +95,13 @@
           <tr>
             <td>DocMember.cs</td>
             <td>
+              Represents a "member" XML Node
             </td>
           </tr>
           <tr>
             <td>DocMembers.cs</td>
             <td>
+              Represents a collection of "member" XML Nodes
             </td>
           </tr>
           <tr>

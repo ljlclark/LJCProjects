@@ -30,16 +30,13 @@
         code outside of their codeline except for third-party software.
       </p>
       <p>
-        Usually codelines are grouped together under a main path. The main path
-        could be something like "C:\Users\User\Documents\Visual Studio 2022". In
-        this case the main IDE used is Visual Studio which creates the root
-        folder "Projects" in this main folder. So the C# codelines can be
-        created here also.
+        Usually codelines are grouped together under a root folder. The root
+        folder could be something like "C:\Users\User\Documents\Visual Studio
+        2022". In this case the main IDE used is Visual Studio which creates the
+        code line "Projects" in this main folder. So the custom C# codelines can
+        be created here also.
       </p>
       <h4>LJCProjects Codeline</h4>
-      <p>
-        The Visual Studio path: "C:\Users\User\Documents\Visual Studio 2022\LJCProjects"
-      </p>
       <p>
         This is the main codeline and is under source control online in GitHub
         at <a href="https://github.com/ljlclark/LJCProjects">
@@ -47,37 +44,47 @@
         </a>. Local code in this codeline can be commited to GitHub.
       </p>
       <p>
-        The Visual Studio path: "C:\Users\User\Documents\Visual Studio 2022\LJCProjects"
+        Sample Visual Studio path:<br />
+        "C:\Users\User\Documents\Visual Studio 2022\LJCProjects"
       </p>
       <h4>LJCProjectsDev Codeline</h4>
       <p>
         This is the development codeline. Development work is done here and then
-        promoted (backed up) to the main codeline LJCProjects.
+        promoted (copied) to the main codeline LJCProjects.
       </p>
       <p>
-        The Visual Studio path: "C:\Users\User\Documents\Visual Studio 2022\LJCProjectsDev"
+        Sample Visual Studio path:<br />
+        "C:\Users\User\Documents\Visual Studio 2022\LJCProjectsDev"
       </p>
 
-
-      <h4>Visual Studio Solutions</h4>
+      <h4>Solution Group Folders</h4>
       <p>
-        A Solution contains several projects that work together for a common
-        purpose. Solutions are organized under a Solution folder
-        and may represent a utility or a reusable code module.
+        Solutions are grouped under the codeline folder by type of solution.
       </p>
-      <h4>LJC C# Projects</h4>
-      <p>
-        A C# project produces an exe or dll file.
-      </p>
-      <h5>Core Utilities</h5>
-      <p>
-        The "CoreUtilities"
-      </p>
-      <!--  -->
-      <div class="indent1">
-        <a href="CoreUtilities/ReadMeCoreUtilities.html">Core Utilities</a>
-        - XXX.
-      </div>
+      <table>
+        <tr>
+          <td>
+            <a href="CoreAssemblies/ReadMeCoreAssemblies.html">
+              Core Assemblies
+            </a>
+          </td>
+          <td>
+            These solutions produce core LJC Framework libraries. These are DLLs
+            that provide reusable functionality for other programs and
+            libraries.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="CoreUtilities/ReadMeCoreUtilities.html">
+              Core Utilities
+            </a>
+          </td>
+          <td>
+            These solutions are common framework helper utilities and programs.
+          </td>
+        </tr>
+      </table>
     </div>
     <br />
     <div class="SmallText">

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License.-->
+<!-- ReadMeCoreAssemblies.html -->
+<html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+  <title>LJC Core Assemblies ReadMe</title>
+  <meta charset='utf-8' />
+  <meta name='author' content='Lester J. Clark' />
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+  <link rel='stylesheet' type='text/css' href='CSS/CodeDoc.css' />
+</head>
+<body style="background: #F0F5FF">
+  <div class="page">
+    <br />
+    <div class="PathText">
+      / <a href="index.html">Home</a>
+      / <a href="../ReadMeLJCProjects.html">LJCProjects</a>
+      / CoreAssemblies
+    </div>
+    <br />
+    <div id='Header'>
+      <div id='Title'>LJC Core Assemblies Readme</div>
+    </div>
+    <p>
+      These solutions produce libraries that form the core of the LJC Framework.
+    </p>
+    <p>
+      Folder: CoreAssemblies
+    </p>
+    <div class="Text">
+      <p>
+        A Solution contains at least one project. Solution projects work
+        together for a common purpose. Solutions and their projects are
+        organized under a Solution folder.
+      </p>
+      <p>
+        Solution folders usually contain several common helper command files.
+        They start with the verbs Build, Clear and Update followed by the short
+        project name.<br />
+        For example: The solution folder LJCGenDoc contains:<br />
+        BuildGenDoc.cmd, ClearGenDoc.cmd and UpdateGenDoc.cmd.
+      </p>
+      <table>
+        <tr>
+          <td>Build*.cmd</td>
+          <td>
+            Builds the solution without starting Visual Studio. This
+            includes calling Update*.cmd.
+          </td>
+        </tr>
+        <tr>
+          <td>Clear*.cmd</td>
+          <td>
+            Deletes the compiled and generated files that are not saved
+            in source control.
+          </td>
+        </tr>
+        <tr>
+          <td>Update*.cmd</td>
+          <td>
+            Copies the referenced and runtime dependencies into the
+            "External" folder.
+          </td>
+        </tr>
+      </table>
+      <h4>Solutions</h4>
+      <div class="indent1">
+        <div>Common Libaries</div>
+        <a href="LJCNetCommon/ReadMeLJCNetCommon.html">
+          LJCNetCommon
+        </a>
+        - The .NET Common Library<br />
+
+        <a href="LJCLibraries/LJCWinFormCommon/ReadMeLJCWinFormCommon.html">
+          LJCWinFormCommon
+        </a>
+        - The WinForm Common Library<br />
+
+        <a href="LJCLibraries/LJCWinformControls/ReadMeLJCWinFormControls.html">
+          LJCWinFormControls
+        </a>
+        - The WinForm Controls Library<br />
+
+        <a href="LJCTextDataReader/ReadMeLJCTextDataReader.html">
+          LJCTextDataReader
+        </a>
+        - The Text DataReader Library<br />
+        <br />
+        <div>Data Access Libaries</div>
+        <a href="LJCDataAccess/ReadMeLJCDataAccess.html">
+          LJCDataAccess
+        </a>
+        - The ADO.Net Data Access Library<br />
+
+        <a href="LJCDataAccessConfig/ReadMeLJCDataAccessConfig.html">
+          LJCDataAccessConfig
+        </a>
+        - The Data Access Configuration Library<br />
+        <br />
+        <div>Message Based Data Access Libaries</div>
+        <a href="LJCDBMessage/ReadMeLJCDBMessage.html">
+          LJCDBMessage
+        </a>
+        - The Data Service Message Library<br />
+
+        <a href="LJCDBClientLib/ReadMeLJCDBClientLib.html">
+          LJCDBClientLib
+        </a>
+        - The Data Service Client Library<br />
+
+        <a href="LJCDBDataAccess/ReadMeLJCDBDataAccess.html">
+          LJCDBDataAccess
+        </a>
+        - The Message Data Access Library<br />
+
+        <a href="LJCDBServiceLib/ReadMeLJCDBServiceLib.html">
+          LJCDBServiceLib
+        </a>
+        - The Data Service Library<br />
+
+        <a href="LJCDBServiceHost/ReadMeLJCDBServiceHost.html">
+          LJCDBServiceHost
+        </a>
+        - The Data Service Library Windows Host<br />
+
+        <a href="LJCDBServiceConsoleHost/ReadMeLJCDBServiceConsoltHost.html">
+          LJCDBServiceConsoleHost
+        </a>
+        - The Data Service Library Console Host<br />
+
+        <a href="LJCDBClientSQLLib/ReadMeLJCDBClientSQLLib.html">
+          LJCDBClientSQLLib
+        </a>
+        - The Local Message Based SQL Data Access Library<br />
+      </div>
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy; Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+  </div>
+</body>
+</html>

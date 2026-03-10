@@ -22,16 +22,63 @@
     <div id='Header'>
       <div id='Title'>LJC Core Utilities Readme</div>
     </div>
-    <br />
+    <p>
+      These solutions produce core supporting utilities and programs for the
+      LJC Framework.
+    </p>
+    <p>
+      Folder: CoreUtilities
+    </p>
     <div class="Text">
-      <h4>Core Utilities</h4>
       <p>
-        The "Core Utilities"
+        A Solution contains at least one project. Solution projects work
+        together for a common purpose. Solutions and their projects are
+        organized under a Solution folder.
       </p>
+      <p>
+        Solution folders usually contain several common helper command files.
+        They start with the verbs Build, Clear and Update followed by the short
+        project name.<br />
+        For example: The solution folder LJCGenDoc contains:<br />
+        BuildGenDoc.cmd, ClearGenDoc.cmd and UpdateGenDoc.cmd.
+      </p>
+      <table>
+        <tr>
+          <td>Build*.cmd</td>
+          <td>
+            Builds the solution without starting Visual Studio. This
+            includes calling Update*.cmd.
+          </td>
+        </tr>
+        <tr>
+          <td>Clear*.cmd</td>
+          <td>
+            Deletes the compiled and generated files that are not saved
+            in source control.
+          </td>
+        </tr>
+        <tr>
+          <td>Update*.cmd</td>
+          <td>
+            Copies the referenced and runtime dependencies into the
+            "External" folder.
+          </td>
+        </tr>
+      </table>
+      <h4>Solutions</h4>
       <div class="indent1">
+        <a href="LJCExecuteScript/ReadMeLJCExecuteScript.html">
+          LJCExecuteScript
+        </a>
+        - Execute an SQL script text or file.<br />
         <a href="LJCGenDoc/ReadMeLJCGenDoc.html">LJCGenDoc</a>
-        - A Program to Generate HTML Code Documentation from a Visual Studio
-        XML Comment output file.
+        - Generates HTML Code Documentation from a Visual Studio XML Comment
+        output file.<br />
+        <a href="LJCGenDoc2/ReadMeLJCGenDoc2.html">LJCGenDoc2</a>
+        - Generates HTML Code Documentation from source code XML Comments.<br />
+        <a href="LJCGenText/ReadMeLJCGenText.html">LJCGenText</a>
+        - Generates text files by combining GenData XML file data and a text
+        template file.<br />
       </div>
     </div>
     <br />
