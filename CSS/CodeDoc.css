@@ -123,6 +123,42 @@ div#Title {
 }
 
 /* Class Selectors */
+.indent1 {
+  margin-left: 15px;
+}
+
+.indent2 {
+  margin-left: 30px;
+}
+
+.indent3 {
+  margin-left: 45px;
+}
+
+.indent4 {
+  margin-left: 60px;
+}
+
+.indent5 {
+  margin-left: 75px;
+}
+
+.indent6 {
+  margin-left: 90px;
+}
+
+.indent7 {
+  margin-left: 105px;
+}
+
+.indent8 {
+  margin-left: 120px;
+}
+
+.indent9 {
+  margin-left: 135px;
+}
+
 .links {
   margin-left:5px;
 }

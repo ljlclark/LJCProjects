@@ -123,6 +123,18 @@ div#Title {
 }
 
 /* Class Selectors */
+.indent1 {
+  margin-left: 15px;
+}
+
+.indent2 {
+  margin-left: 30px;
+}
+
+.indent3 {
+  margin-left: 45px;
+}
+
 .links {
   margin-left:5px;
 }
