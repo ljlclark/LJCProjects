@@ -497,7 +497,11 @@ namespace LJCGenDocEdit
       if (dataType != null)
       {
         NameText.Text = dataType.Name;
-        var description = NetString.RemoveTags(dataType.Summary);
+
+        //var description = NetString.RemoveTags(dataType.Summary);
+        var textParser = new LJCParser();
+        var description = textParser.RemoveTags(dataType.Summary);
+
         if (NetString.HasValue(description))
         {
           DescriptionText.Text = NetString.Truncate(description

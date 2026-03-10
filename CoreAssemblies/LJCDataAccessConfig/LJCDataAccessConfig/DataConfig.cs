@@ -115,9 +115,13 @@ namespace LJCDataAccessConfig
         {
           string keyword = values[0].Trim();
           string value = values[1];
-          int startIndex = 0;
-          string marker = NetString.GetDelimitedString(value, "{"
-            , ref startIndex, "}");
+
+          //int startIndex = 0;
+          //string marker = NetString.GetDelimitedString(value, "{"
+          //  , ref startIndex, "}");
+          var textParser = new LJCParser();
+          string marker = textParser.DelimitedString(value, "{", "}");
+
           if (marker != null)
           {
             replacementValue = GetReplacementValue(marker);

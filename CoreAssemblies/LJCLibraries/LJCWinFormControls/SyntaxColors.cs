@@ -291,14 +291,22 @@ namespace LJCWinFormControls
     // Sets the Replacement values color.
     private void SetReplacementsColor(string lineText, int lineIndex)
     {
-      int startIndex = 0;
-      NetString.GetDelimitedAndIndexes(lineText, "_", out int beginIndex
-        , out int endIndex, ref startIndex);
+      //int startIndex = 0;
+      //NetString.GetDelimitedAndIndexes(lineText, "_", out int beginIndex
+      //  , out int endIndex, ref startIndex);
+      var textParser = new LJCParser();
+      textParser.DelimitedString(lineText, "_", "_");
+      var endIndex = textParser.EndIndex;
+
       if (endIndex > -1)
       {
-        startIndex = 0;
-        string text = NetString.GetStringWithDelimiters(lineText, "_"
-          , ref startIndex);
+        //startIndex = 0;
+        //string text = NetString.GetStringWithDelimiters(lineText, "_"
+        //  , ref startIndex);
+        textParser.StartIndex = 0;
+        string text = textParser.DelimitedString("_", "_");
+        var beginIndex = textParser.BeginIndex;
+
         while (NetString.HasValue(text))
         {
           // Use if there are no embeded spaces.
@@ -310,13 +318,19 @@ namespace LJCWinFormControls
           }
 
           text = null;
-          int saveStartIndex = startIndex;
-          NetString.GetDelimitedAndIndexes(lineText, "_", out beginIndex
-            , out endIndex, ref startIndex);
+          //int saveStartIndex = startIndex;
+          //NetString.GetDelimitedAndIndexes(lineText, "_", out beginIndex
+          //  , out endIndex, ref startIndex);
+          int saveStartIndex = textParser.StartIndex;
+          textParser.DelimitedString(lineText, "_", "_");
+          endIndex = textParser.EndIndex;
+
           if (endIndex > -1)
           {
-            startIndex = saveStartIndex;
-            text = NetString.GetStringWithDelimiters(lineText, "_", ref startIndex);
+            //startIndex = saveStartIndex;
+            //text = NetString.GetStringWithDelimiters(lineText, "_", ref startIndex);
+            textParser.StartIndex = saveStartIndex;
+            text = textParser.DelimitedString(lineText, "_", "_");
           }
         }
       }
@@ -326,9 +340,14 @@ namespace LJCWinFormControls
     private void SetDelimitedColorSetting(string lineText, int lineIndex
       , string beginDelimiter, string endDelimiter, Color color)
     {
-      int startIndex = 0;
-      string text = NetString.GetDelimitedAndIndexes(lineText, beginDelimiter
-        , out int beginIndex, out int _, ref startIndex, endDelimiter);
+      //int startIndex = 0;
+      //string text = NetString.GetDelimitedAndIndexes(lineText, beginDelimiter
+      //  , out int beginIndex, out int _, ref startIndex, endDelimiter);
+      var textParser = new LJCParser();
+      string text = textParser.DelimitedString(lineText, beginDelimiter
+        , endDelimiter);
+      var beginIndex = textParser.BeginIndex;
+
       if (NetString.HasValue(text))
       {
         int beginLength = beginDelimiter.Length;

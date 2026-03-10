@@ -506,7 +506,11 @@ namespace LJCGenDocEdit
         {
           dataMethod.Summary = "Missing Summary";
         }
-        var description = NetString.RemoveTags(dataMethod.Summary);
+
+        //var description = NetString.RemoveTags(dataMethod.Summary);
+        var textParser = new LJCParser();
+        var description = textParser.RemoveTags(dataMethod.Summary);
+
         DescriptionText.Text = NetString.Truncate(description
           , DocMethod.LengthDescription);
       }

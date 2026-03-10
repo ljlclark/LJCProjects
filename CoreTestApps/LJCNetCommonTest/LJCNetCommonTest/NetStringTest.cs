@@ -3,6 +3,7 @@
 // NetString.cs
 using LJCNetCommon;
 using System;
+using System.Xml.Serialization;
 
 namespace LJCNetCommonTest
 {
@@ -24,11 +25,19 @@ namespace LJCNetCommonTest
     {
       // Get text that has different begin and end delimiter.
       var source = "<summary>This is some text.</summary>";
-      int startIndex = 0;
+      //int startIndex = 0;
       var beginDelimiter = "<summary>";
       var endDelimiter = "</summary>";
-      var text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
-        , out int beginIndex, out int endIndex, ref startIndex, endDelimiter);
+
+      //var text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
+      //  , out int beginIndex, out int endIndex, ref startIndex, endDelimiter);
+      var textParser = new LJCParser();
+      var text = textParser.DelimitedString(source, beginDelimiter
+        , endDelimiter);
+      var beginIndex = textParser.BeginIndex;
+      var endIndex = textParser.EndIndex;
+      var startIndex = textParser.StartIndex;
+
       var result = text;
       var compare = "This is some text.";
       TestCommon.Write("GetDelimitedAndIndexes()1: text", result, compare);
@@ -45,10 +54,15 @@ namespace LJCNetCommonTest
       // Get text that has the same begin and end delimiter.
       // The endDelimiter is not specified or null.
       source = "|This is some text.|";
-      startIndex = 0;
+      //startIndex = 0;
       beginDelimiter = "|";
-      text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
-        , out beginIndex, out endIndex, ref startIndex);
+
+      //text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
+      //  , out beginIndex, out endIndex, ref startIndex);
+      textParser.StartIndex = 0;
+      text = textParser.DelimitedString(source, beginDelimiter, beginDelimiter);
+      startIndex = textParser.StartIndex;
+
       result = text;
       compare = "This is some text.";
       TestCommon.Write("GetDelimitedAndIndexes()2: text", result, compare);
@@ -64,10 +78,15 @@ namespace LJCNetCommonTest
 
       // Get text that has no end delimiter.
       source = "|This is some text.";
-      startIndex = 0;
+      //startIndex = 0;
       beginDelimiter = "|";
-      text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
-        , out beginIndex, out endIndex, ref startIndex, "#NoDelimiter");
+
+      //text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
+      //  , out beginIndex, out endIndex, ref startIndex, "#NoDelimiter");
+      textParser.StartIndex = 0;
+      text = textParser.DelimitedString(source, beginDelimiter);
+      startIndex = textParser.StartIndex;
+
       result = text;
       compare = "This is some text.";
       TestCommon.Write("GetDelimitedAndIndexes()3: text", result, compare);
@@ -83,13 +102,18 @@ namespace LJCNetCommonTest
 
       // Get delimited text where the delimiters occur multiple times.
       source = "|This is some text.| |and some more here.|";
-      startIndex = 0;
+      //startIndex = 0;
       beginDelimiter = "|";
       var first = true;
       while (startIndex > -1)
       {
-        text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
-          , out beginIndex, out endIndex, ref startIndex);
+        //text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
+        //  , out beginIndex, out endIndex, ref startIndex);
+        textParser.StartIndex = 0;
+        text = textParser.DelimitedString(source, beginDelimiter
+          , beginDelimiter);
+        startIndex = textParser.StartIndex;
+
         if (first)
         {
           result = text;
@@ -134,12 +158,17 @@ namespace LJCNetCommonTest
     private static void GetDelimitedString()
     {
       var source = "<summary>This is some text.</summary>";
-      var startIndex = 0;
+      //var startIndex = 0;
       var beginDelimiter = "<summary>";
       var endDelimiter = "</summary>";
 
-      var text = NetString.GetDelimitedString(source, beginDelimiter
-        , ref startIndex, endDelimiter);
+      //var text = NetString.GetDelimitedString(source, beginDelimiter
+      //  , ref startIndex, endDelimiter);
+      var textParser = new LJCParser();
+      var text = textParser.DelimitedString(source, beginDelimiter
+        , endDelimiter);
+      var startIndex = textParser.StartIndex;
+
       var result = text;
       var compare = "This is some text.";
       TestCommon.Write("GetDelimitedString(): text", result, compare);
@@ -152,13 +181,17 @@ namespace LJCNetCommonTest
     private static void GetStringWithDelimiters()
     {
       var source = "<summary>This is some text.</summary>";
-      var startIndex = 0;
+      //var startIndex = 0;
       var beginDelimiter = "<summary>";
       var endDelimiter = "</summary>";
 
       // Get text that has different begin and end delimiter.
-      var text = NetString.GetStringWithDelimiters(source, beginDelimiter
-        , ref startIndex, endDelimiter);
+      //var text = NetString.GetStringWithDelimiters(source, beginDelimiter
+      //  , ref startIndex, endDelimiter);
+      var textParser = new LJCParser();
+      var text = textParser.DelimitedString(source, beginDelimiter, endDelimiter);
+      var startIndex = textParser.StartIndex;
+
       var result = text;
       var compare = "<summary>This is some text.</summary>";
       TestCommon.Write("GetStringWithDelimiters()1: text", result, compare);
@@ -170,10 +203,15 @@ namespace LJCNetCommonTest
       // Get text that has the same begin and end delimiter.
       // The endDelimiter is not specified or null.
       source = "|This is some text.|";
-      startIndex = 0;
+      //startIndex = 0;
       beginDelimiter = "|";
-      text = NetString.GetStringWithDelimiters(source, beginDelimiter
-        , ref startIndex);
+
+      //text = NetString.GetStringWithDelimiters(source, beginDelimiter
+      //  , ref startIndex);
+      textParser.StartIndex = 0;
+      text = textParser.DelimitedString(source, beginDelimiter, endDelimiter);
+      startIndex = textParser.StartIndex;
+
       result = text;
       compare = "|This is some text.|";
       TestCommon.Write("GetStringWithDelimiters()2: text", result, compare);
@@ -184,10 +222,15 @@ namespace LJCNetCommonTest
 
       // Get text that has no end delimiter.
       source = "|This is some text.";
-      startIndex = 0;
+      //startIndex = 0;
       beginDelimiter = "|";
-      text = NetString.GetStringWithDelimiters(source, beginDelimiter
-        , ref startIndex, "#NoDelimiter");
+
+      //text = NetString.GetStringWithDelimiters(source, beginDelimiter
+      //  , ref startIndex, "#NoDelimiter");
+      textParser.StartIndex = 0;
+      text = textParser.DelimitedString(source, beginDelimiter);
+      startIndex = textParser.StartIndex;
+
       result = text;
       compare = "|This is some text.";
       TestCommon.Write("GetStringWithDelimiters()3: text", result, compare);
@@ -198,13 +241,16 @@ namespace LJCNetCommonTest
 
       // Get delimited text where the delimiters occur multiple times.
       source = "|This is some text.| |and some more here.|";
-      startIndex = 0;
+      //startIndex = 0;
       beginDelimiter = "|";
       var first = true;
       while (startIndex > -1)
       {
-        text = NetString.GetStringWithDelimiters(source, beginDelimiter
-          , ref startIndex);
+        //text = NetString.GetStringWithDelimiters(source, beginDelimiter
+        //  , ref startIndex);
+        text = textParser.DelimitedString(source, beginDelimiter, beginDelimiter);
+        startIndex = textParser.StartIndex;
+
         if (first)
         {
           result = text;

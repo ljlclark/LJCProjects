@@ -5,7 +5,6 @@ using LJCNetCommon;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace LJCGenDocLib
@@ -1440,9 +1439,12 @@ namespace LJCGenDocLib
     {
       string retValue = text;
 
-      int startIndex = 0;
-      string replaceTarget = NetString.GetDelimitedString(text, "name=\""
-        , ref startIndex, ";");
+      //int startIndex = 0;
+      //string replaceTarget = NetString.GetDelimitedString(text, "name=\""
+      //  , ref startIndex, ";");
+      var textParser = new LJCParser();
+      string replaceTarget = textParser.DelimitedString(text, "name=\"", ";");
+
       if (replaceTarget != null)
       {
         replaceTarget += ";";
@@ -1481,15 +1483,19 @@ namespace LJCGenDocLib
         endDelimiter = beginDelimiter;
       }
 
-      int startIndex = 0;
+      //int startIndex = 0;
+      var textParser = new LJCParser();
       int beginIndex = text.IndexOf(beginDelimiter);
       int endIndex = text.IndexOf(endDelimiter);
       if (beginIndex > -1
         && endIndex > -1)
       {
         // Begin and End delimiters are present.
-        replaceTarget = NetString.GetDelimitedString(text, beginDelimiter
-          , ref startIndex, endDelimiter);
+        //replaceTarget = NetString.GetDelimitedString(text, beginDelimiter
+        //  , ref startIndex, endDelimiter);
+        replaceTarget = textParser.DelimitedString(text, beginDelimiter
+          , endDelimiter);
+
         replaceValue = $"</span>{BeginCommentSpan}{replaceTarget}</span>"
           + $"{BeginXmlCommentSpan}";
       }
@@ -1500,9 +1506,10 @@ namespace LJCGenDocLib
         {
           // No delimiters are present.
           beginDelimiter = "///";
-          //beginIndex = text.IndexOf(beginDelimiter);
-          replaceTarget = NetString.GetDelimitedString(text, beginDelimiter
-            , ref startIndex, "</span>");
+          //replaceTarget = NetString.GetDelimitedString(text, beginDelimiter
+          //  , ref startIndex, "</span>");
+          replaceTarget = textParser.DelimitedString(text, beginDelimiter
+            , "</span>");
         }
         else
         {
@@ -1510,15 +1517,18 @@ namespace LJCGenDocLib
           {
             // Only End delimiter is present.
             beginDelimiter = "///";
-            //beginIndex = text.IndexOf(beginDelimiter);
-            replaceTarget = NetString.GetDelimitedString(text, beginDelimiter
-              , ref startIndex, endDelimiter);
+            //replaceTarget = NetString.GetDelimitedString(text, beginDelimiter
+            //  , ref startIndex, endDelimiter);
+            replaceTarget = textParser.DelimitedString(text, beginDelimiter
+              , endDelimiter);
           }
           else
           {
             // Only Begin delimiter is present.
-            replaceTarget = NetString.GetDelimitedString(text, beginDelimiter
-              , ref startIndex, "</span>");
+            //replaceTarget = NetString.GetDelimitedString(text, beginDelimiter
+            //  , ref startIndex, "</span>");
+            replaceTarget = textParser.DelimitedString(text, beginDelimiter
+              , "</span>");
           }
         }
         replaceValue = $"{BeginCommentSpan}{replaceTarget}</span>";

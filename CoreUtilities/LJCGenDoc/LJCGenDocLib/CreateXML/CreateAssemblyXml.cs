@@ -222,9 +222,11 @@ namespace LJCGenDocLib
                 section = sections.Add("Links");
               }
 
-              int startIndex = 0;
-              text = NetString.GetDelimitedString(text, "--", ref startIndex
-                , "#NoDelimiter");
+              //int startIndex = 0;
+              //text = NetString.GetDelimitedString(text, "--", ref startIndex
+              //  , "#NoDelimiter");
+              var textParser = new LJCParser();
+              text = textParser.DelimitedString(text, "--");
 
               var fileName = Path.GetFileNameWithoutExtension(fileSpec);
               var repeatItem = section.RepeatItems.Add(fileName);
