@@ -20,7 +20,7 @@
         presenting an object oriented view of the DocGroup XML data.
       </para>
       <para>
-        The LJCGenDocDAL project is part of the LJC.DocLib solution.
+        The LJCGenDocDAL project is part of the LJCGenDoc solution.
       </para>
     </remarks>
   </DocGenAssemblies>

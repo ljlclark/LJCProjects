@@ -13,7 +13,7 @@
         The DocGen program generates HTML pages.
       </para>
       <para>
-        The DocGen program is part of the LJCDocLib solution.
+        The DocGen program is part of the LJCGenDoc solution.
       </para>
     </remarks>
   </Program>

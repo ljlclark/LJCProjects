@@ -15,7 +15,7 @@
         The DocGenLib library contains classes to generate HTML pages.
       </para>
       <para>
-        The DocGenLib library is part of the LJC.DocLib solution.
+        The DocGenLib library is part of the LJCGenDoc solution.
       </para>
     </remarks>
   </GenAssembly>

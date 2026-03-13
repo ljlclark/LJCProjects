@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace LJCDocXMLObjLib
 {
   // The deserialized XML documentation "typeparam" nodes.
+  // These are parameters for generic methods.
   /// <include path='items/DocParams/*' file='Doc/DocParams.xml'/>
   public class DocTypeParams : List<DocTypeParam>
   {

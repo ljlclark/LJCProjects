@@ -5,7 +5,8 @@ using System.Xml.Serialization;
 
 namespace LJCDocXMLObjLib
 {
-  // The deserialized XML documentation "param" nodes.
+  // The deserialized XML documentation "typeparam" nodes.
+  // These are parameters for generic methods.
   /// <include path='items/DocParam/*' file='Doc/DocParam.xml'/>
   [XmlType("typeparam")]
   public class DocTypeParam
