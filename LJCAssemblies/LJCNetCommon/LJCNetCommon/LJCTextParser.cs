@@ -1,0 +1,221 @@
+﻿// Copyright(c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// LJCTextParser.cs
+
+namespace LJCNetCommon
+{
+  // Contains parsing related methods.
+  /// <include path='members/LJCTextParser/*' file='Doc/LJCTextParser.xml'/>
+  public class LJCTextParser
+  {
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include path='members/Constructor/*' file='Doc/LJCParser.xml'/>
+    public LJCTextParser()
+    {
+      BeginIndex = -1;
+      EndIndex = -1;
+      StartIndex = 0;
+    }
+    #endregion
+
+    #region Public Methods
+
+    // Gets the delimited string.
+    /// <include path='members/DelimitedString/*' file='Doc/LJCParser.xml'/>
+    public string? DelimitedString(string text, string? beginDelimiter = null
+      , string? endDelimiter = null)
+    {
+      string? retValue = null;
+
+      BeginIndex = -1;
+      EndIndex = -1;
+
+      // ToDo: What to do if text does not contain beginDelimiter.
+      if (StartIndex > -1
+        && LJCNetString.HasValue(text)
+        && StartIndex < text.Length - 1
+        && (null == beginDelimiter
+        || text.Contains(beginDelimiter)))
+      {
+        var beginLength = 0;
+        BeginIndex = 0;
+        if (beginDelimiter != null)
+        {
+          var index = text.IndexOf(beginDelimiter, StartIndex);
+          if (index >= 0)
+          {
+            // Begin after beginDelimiter.
+            beginLength = beginDelimiter.Length;
+            BeginIndex = index + beginLength;
+          }
+        }
+
+        int endLength = 0;
+        EndIndex = text.Length;
+        if (endDelimiter != null)
+        {
+          var index = text.IndexOf(endDelimiter, BeginIndex);
+          if (index >= 0)
+          {
+            endLength = endDelimiter.Length;
+            EndIndex = index;
+          }
+        }
+
+        int textLength = EndIndex - BeginIndex;
+        retValue = text.Substring(BeginIndex, textLength);
+
+        StartIndex = -1;
+        if (EndIndex >= 0
+          && EndIndex + endLength < text.Length)
+        {
+          // There is enough text to potentially contain more delimiters.
+          StartIndex = EndIndex + 1;
+        }
+
+        // Set to actual text end.
+        if (EndIndex > BeginIndex)
+        {
+          EndIndex--;
+        }
+      }
+      return retValue;
+    }
+
+    // Finds a tag in a text value.
+    /// <include path='members/FindTag/*' file='Doc/LJCParser.xml'/>
+    public string? FindTag(string text, ref string? tagName)
+    {
+      string? retTag = null;
+
+      var beginDelimiter = "<";
+      if (LJCNetString.HasValue(tagName)
+        && tagName.Contains('/'))
+      {
+        beginDelimiter += "/";
+      }
+      var endDelimiter = ">";
+      StartIndex = 0;
+      var foundTagName = DelimitedString(text, beginDelimiter, endDelimiter);
+
+      // Eliminate attributes, if not end tag.
+      if (LJCNetString.HasValue(foundTagName)
+        && !foundTagName.Contains('/'))
+      {
+        StartIndex = 0;
+        if (foundTagName.Contains(' '))
+        {
+          beginDelimiter = null;
+          endDelimiter = " ";
+          foundTagName = DelimitedString(foundTagName, beginDelimiter
+            , endDelimiter);
+        }
+      }
+
+      if (LJCNetString.HasValue(tagName)
+        && tagName.Contains('/'))
+      {
+        foundTagName = $"/{foundTagName}";
+      }
+      tagName = foundTagName;
+      if (LJCNetString.HasValue(foundTagName))
+      {
+        retTag = $"<{foundTagName}>";
+      }
+      return retTag;
+    }
+
+    // Removes a section from a text value.
+    /// <include path='members/RemoveSection/*' file='Doc/LJCParser.xml'/>
+    public string RemoveSection(string text, int beginIndex, int endIndex)
+    {
+      string retValue = text;
+
+      if (beginIndex >= 0
+        && endIndex >= beginIndex)
+      {
+        BeginIndex = -1;
+        EndIndex = -1;
+        // Get value to the beginIndex.
+        var value = retValue[..beginIndex];
+
+        // Add the value from the endIndex.
+        if (endIndex <= retValue.Length - 1)
+        {
+          endIndex++;
+        }
+        value += retValue[endIndex..];
+        retValue = value;
+      }
+      return retValue;
+    }
+
+    // Removes tags from a text value.
+    /// <include path='members/RemoveTags/*' file='Doc/LJCParser.xml'/>
+    public string RemoveTags(string text)
+    {
+      string retValue = text;
+
+      string? tag;
+      do
+      {
+        string? tagName = null;
+        StartIndex = 0;
+        tag = FindTag(retValue, ref tagName);
+        if (tag != null)
+        {
+          retValue = RemoveSection(retValue, BeginIndex - 1, EndIndex + 1);
+        }
+      } while (tag != null);
+      return retValue;
+    }
+
+    // Gets the string including the supplied delimiters.
+    /// <include path='members/StringWithDelimiters/*' file='Doc/LJCParser.xml'/>
+    public string? StringWithDelimiters(string text, string? beginDelimiter = null
+      , string? endDelimiter = null)
+    {
+      string? retValue = null;
+
+      if (DelimitedString(text, beginDelimiter, endDelimiter) != null)
+      {
+        // Include Delimiters
+        int beginLength = DelimiterLength(beginDelimiter);
+        int endLength = DelimiterLength(endDelimiter);
+        int textLength = EndIndex - BeginIndex + 1;
+        textLength += beginLength + endLength;
+        retValue = text.Substring(BeginIndex - 1, textLength);
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Private Methods
+
+    // Gets the delimiter length.
+    private int DelimiterLength(string? delimiter)
+    {
+      int retLength = 0;
+      if (LJCNetString.HasValue(delimiter))
+      {
+        retLength = delimiter.Length;
+      }
+      return retLength;
+    }
+    #endregion
+
+    #region Properties
+
+    /// <summary>The delimited string begin index.</summary>
+    public int BeginIndex { get; private set; }
+
+    /// <summary>The delimited string end index.</summary>
+    public int EndIndex { get; private set; }
+
+    /// <summary>The parsing start index.</summary>
+    public int StartIndex { get; set; }
+    #endregion
+  }
+}

@@ -1,7 +1,7 @@
 echo off
 rem Copyright (c) Lester J. Clark and Contributors.
 rem Licensed under the MIT License.
-rem UpdateDocLib.cmd
+rem UpdateGenDoc.cmd
 
 if exist SubFolders.cmd goto BuildAll
 set mainRoot=..\..\
