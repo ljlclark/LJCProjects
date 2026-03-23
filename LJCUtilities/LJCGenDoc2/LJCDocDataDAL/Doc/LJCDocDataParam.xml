@@ -1,15 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- LJCDocDataClass.xml -->
+<!-- LJCDocDataParam.xml -->
 <members>
   <!-- Class -->
-  <LJCDocDataClass>
+  <LJCDocDataParam>
     <summary>
-      Represents a DocData class.
+      Represents a DocData parameter.
     </summary>
-  </LJCDocDataClass>
-  
+  </LJCDocDataParam>
+
+  <!-- Static Methods -->
+  <GetParam>
+    <summary>
+      Create an LJCDocDataParam object from a "include" line.
+    </summary>
+    <param name="line">The text line.</param>
+  </GetParam>
+
   <!-- Constructors -->
   <Constructor>
     <summary>
@@ -25,44 +33,14 @@
   </ConstructorParams>
   
   <!-- Properties -->
-  <Code>
-    <summary>
-      Gets or sets the Code value.
-    </summary>
-  </Code>
-  <Groups>
-    <summary>
-      Gets or sets the Method Group collection.
-    </summary>
-  </Groups>
-  <Methods>
-    <summary>
-      Gets or sets the Method collection.
-    </summary>
-  </Methods>
   <Name>
     <summary>
       Gets or sets the Name value.
     </summary>
   </Name>
-  <Properties>
-    <summary>
-      Gets or sets the Property collection.
-    </summary>
-  </Properties>
-  <Remarks>
-    <summary>
-      Gets or sets the Remarks value.
-    </summary>
-  </Remarks>
   <Summary>
     <summary>
       Gets or sets the Summary value.
     </summary>
   </Summary>
-  <Syntax>
-    <summary>
-      Gets or sets the class Syntax.
-    </summary>
-  </Syntax>
 </members>

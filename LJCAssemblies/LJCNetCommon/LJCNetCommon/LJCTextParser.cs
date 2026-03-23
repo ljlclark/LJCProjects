@@ -5,7 +5,7 @@
 namespace LJCNetCommon
 {
   // Contains parsing related methods.
-  /// <include path='members/LJCTextParser/*' file='Doc/LJCTextParser.xml'/>
+  /// <include path="members/LJCTextParser/*" file="Doc/LJCTextParser.xml"/>
   public class LJCTextParser
   {
     #region Static Methods
@@ -25,7 +25,7 @@ namespace LJCNetCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='members/Constructor/*' file='Doc/LJCTextParser.xml'/>
+    /// <include path="members/Constructor/*" file="Doc/LJCTextParser.xml"/>
     public LJCTextParser()
     {
       BeginIndex = -1;
@@ -37,7 +37,7 @@ namespace LJCNetCommon
     #region Public Methods
 
     // Retrieves a delimited string.
-    /// <include path='members/DelimitedString/*' file='Doc/LJCTextParser.xml'/>
+    /// <include path="members/DelimitedString/*" file="Doc/LJCTextParser.xml"/>
     public string? DelimitedString(string text, string? beginDelimiter = null
       , string? endDelimiter = null)
     {
@@ -98,7 +98,7 @@ namespace LJCNetCommon
     }
 
     // Finds the first tag in a text value.
-    /// <include path='members/FindTag/*' file='Doc/LJCTextParser.xml'/>
+    /// <include path="members/FindTag/*" file="Doc/LJCTextParser.xml"/>
     public string? FindTag(string text, ref string? tagName)
     {
       string? retTag = null;
@@ -141,7 +141,7 @@ namespace LJCNetCommon
     }
 
     // Removes a section from a text value.
-    /// <include path='members/RemoveSection/*' file='Doc/LJCTextParser.xml'/>
+    /// <include path="members/RemoveSection/*" file="Doc/LJCTextParser.xml"/>
     public string RemoveSection(string text, int beginIndex, int endIndex)
     {
       string retValue = text;
@@ -166,7 +166,7 @@ namespace LJCNetCommon
     }
 
     // Removes tags from a text value.
-    /// <include path='members/RemoveTags/*' file='Doc/LJCTextParser.xml'/>
+    /// <include path="members/RemoveTags/*" file="Doc/LJCTextParser.xml"/>
     public string RemoveTags(string text)
     {
       string retValue = text;
@@ -186,7 +186,7 @@ namespace LJCNetCommon
     }
 
     // Retrieves a string including the supplied delimiters.
-    /// <include path='members/StringWithDelimiters/*' file='Doc/LJCTextParser.xml'/>
+    /// <include path="members/StringWithDelimiters/*" file="Doc/LJCTextParser.xml"/>
     public string? StringWithDelimiters(string text, string? beginDelimiter = null
       , string? endDelimiter = null)
     {

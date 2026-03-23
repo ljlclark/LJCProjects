@@ -5,19 +5,19 @@
 namespace LJCNetCommon
 {
   // Provides test methods.
-  /// <include path='items/LJCTextBuilder/*' file='Doc/LJCTestCommon.xml'/>
+  /// <include path="members/LJCTestCommon/*" file="Doc/LJCTestCommon.xml"/>
   public class LJCTestCommon
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/Constructor/*' file='Doc/LJCTestCommon.xml'/>
+    /// <include path="members/Constructor/*" file="Doc/LJCTestCommon.xml"/>
     public LJCTestCommon()
     {
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include path='items/ConstructorWithValues/*' file='Doc/LJCTestCommon.xml'/>
+    /// <include path="members/ConstructorWithValues/*" file="Doc/LJCTestCommon.xml"/>
     public LJCTestCommon(string className)
     {
       mClassName = className;
@@ -27,7 +27,7 @@ namespace LJCNetCommon
     #region Methods
 
     // Writes a compare message to the console.
-    /// <include path='items/Write/*' file='Doc/LJCTestCommon.xml'/>
+    /// <include path="members/Write/*" file="Doc/LJCTestCommon.xml"/>
     public void Write(string methodName, string? result
       , string? compare, bool bracket = false)
     {
@@ -40,7 +40,7 @@ namespace LJCNetCommon
 
     // Creates a compare message if the result value does not equal the compare
     // value.
-    /// <include path='items/CompareMessage/*' file='Doc/LJCTestCommon.xml'/>
+    /// <include path="members/CompareMessage/*" file="Doc/LJCTestCommon.xml"/>
     public string CompareMessage(string methodName, string? result
       , string? compare, bool bracket = false)
     {

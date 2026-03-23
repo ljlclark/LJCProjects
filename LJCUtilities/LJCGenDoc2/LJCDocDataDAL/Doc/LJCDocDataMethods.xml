@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCDocDataMethods.xml -->
+<members>
+  <!-- Class -->
+  <LJCDocDataMethods>
+    <summary>
+      Represents a collection of LJCDocDataMethod objects.
+    </summary>
+  </LJCDocDataMethods>
+  
+  <!-- Constructors -->
+  
+  <!-- Properties -->
+</members>

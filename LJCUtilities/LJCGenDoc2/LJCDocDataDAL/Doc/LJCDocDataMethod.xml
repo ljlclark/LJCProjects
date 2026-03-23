@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- LJCDocDataClass.xml -->
+<!-- LJCDocDataMethod.xml -->
 <members>
   <!-- Class -->
-  <LJCDocDataClass>
+  <LJCDocDataMethod>
     <summary>
       Represents a DocData class.
     </summary>
-  </LJCDocDataClass>
+  </LJCDocDataMethod>
   
   <!-- Constructors -->
   <Constructor>
@@ -30,31 +30,31 @@
       Gets or sets the Code value.
     </summary>
   </Code>
-  <Groups>
-    <summary>
-      Gets or sets the Method Group collection.
-    </summary>
-  </Groups>
-  <Methods>
-    <summary>
-      Gets or sets the Method collection.
-    </summary>
-  </Methods>
   <Name>
     <summary>
       Gets or sets the Name value.
     </summary>
   </Name>
-  <Properties>
+  <Params>
     <summary>
-      Gets or sets the Property collection.
+      Gets or sets the Params collection.
     </summary>
-  </Properties>
+  </Params>
+  <ParentGroup>
+    <summary>
+      Gets or sets the ParentGroup value.
+    </summary>
+  </ParentGroup>
   <Remarks>
     <summary>
       Gets or sets the Remarks value.
     </summary>
   </Remarks>
+  <Returns>
+    <summary>
+      Gets or sets the Returns value.
+    </summary>
+  </Returns>
   <Summary>
     <summary>
       Gets or sets the Summary value.
@@ -62,7 +62,7 @@
   </Summary>
   <Syntax>
     <summary>
-      Gets or sets the class Syntax.
+      Gets or sets the Syntax value.
     </summary>
   </Syntax>
 </members>

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDocDataParams.cs
-using System.Collections.Generic;
 
 namespace LJCDocDataDAL
 {

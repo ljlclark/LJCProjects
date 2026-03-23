@@ -30,19 +30,24 @@ namespace LJCDocDataDAL
 
     #region Properties
 
-    /// <summary>The Name value.</summary>
+    // Gets or sets the Name value.
+    /// <include path="members/Name/*" file="Doc/LJCDocDataMethod.xml"/>
     public string? Name;
 
-    /// <summary>The Remarks value.</summary>
+    // Gets or sets the Remarks value.
+    /// <include path="members/Remarks/*" file="Doc/LJCDocDataMethod.xml"/>
     public string? Remarks;
 
-    /// <summary>The Returns value.</summary>
+    // Gets or sets the Returns value.
+    /// <include path="members/Returns/*" file="Doc/LJCDocDataMethod.xml"/>
     public string? Returns;
 
-    /// <summary>The Summary value.</summary>
+    // Gets or sets the Summary value.
+    /// <include path="members/Summary/*" file="Doc/LJCDocDataMethod.xml"/>
     public string? Summary;
 
-    /// <summary>The Syntax value.</summary>
+    // Gets or sets the Syntax value.
+    /// <include path="members/Syntax/*" file="Doc/LJCDocDataMethod.xml"/>
     public string? Syntax;
     #endregion
   }

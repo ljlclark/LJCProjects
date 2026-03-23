@@ -35,29 +35,37 @@ namespace LJCDocDataDAL
 
     #region Properties
 
-    /// <summary>The Code value.</summary>
-    public string? Code;
+    // Gets or sets the code value.
+    /// <include path="members/Code/*" file="Doc/LJCDocDataMethod.xml"/>
+    public string? Code { get; set; }
 
-    /// <summary>The Name value.</summary>
-    public string? Name;
+    // Gets or sets the name value.
+    /// <include path="members/Name/*" file="Doc/LJCDocDataMethod.xml"/>
+    public string? Name { get; set; }
 
-    /// <summary>The Param array.</summary>
-    public LJCDocDataParams? Params;
+    // The Param array.
+    /// <include path="members/Params/*" file="Doc/LJCDocDataMethod.xml"/>
+    public LJCDocDataParams? Params { get; set; }
 
-    // The method group name.
-    public string? ParentGroup;
+    // Gets or sets the ParentGroup value.
+    /// <include path="members/ParentGroup/*" file="Doc/LJCDocDataMethod.xml"/>
+    public string? ParentGroup { get; set; }
 
-    /// <summary>The Remarks value.</summary>
-    public string? Remarks;
+    // Gets or sets the Remarks value.
+    /// <include path="members/Remarks/*" file="Doc/LJCDocDataMethod.xml"/>
+    public string? Remarks { get; set; }
 
-    /// <summary>The Returns value.</summary>
-    public string? Returns;
+    // Gets or sets the Returns value.
+    /// <include path="members/Returns/*" file="Doc/LJCDocDataMethod.xml"/>
+    public string? Returns { get; set; }
 
-    /// <summary>The Summary value.</summary>
-    public string? Summary;
+    // Gets or sets the Summary value.
+    /// <include path="members/Summary/*" file="Doc/LJCDocDataMethod.xml"/>
+    public string? Summary { get; set; }
 
-    /// <summary>The Syntax value.</summary>
-    public string? Syntax;
+    // Gets or sets the Syntax value.
+    /// <include path="members/Syntax/*" file="Doc/LJCDocDataMethod.xml"/>
+    public string? Syntax { get; set; }
     #endregion
   }
 }

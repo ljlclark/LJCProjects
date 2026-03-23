@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCDocDataClasses.xml -->
+<members>
+  <!-- Class -->
+  <LJCDocDataClasses>
+    <summary>
+      Represents a collection of LJCDocDataClass objects.
+    </summary>
+  </LJCDocDataClasses>
+  
+  <!-- Constructors -->
+  
+  <!-- Properties -->
+</members>

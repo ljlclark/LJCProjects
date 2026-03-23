@@ -11,13 +11,13 @@ namespace LJCDocDataDAL
     #region Constructor Methods
 
     // Initialize an object instance.
-    /// <include path="items/Constructor/*" file="Doc/LJCDocDataFile.xml"/>
+    /// <include path="members/Constructor/*" file="Doc/LJCDocDataFile.xml"/>
     public LJCDocDataFile()
     {
     }
 
     // Initialize an object instance with the supplied values.
-    /// <include path="items/Constructor2/*" file="Doc/LJCDocDataFile.xml"/>
+    /// <include path="members/ConstructorParams/*" file="Doc/LJCDocDataFile.xml"/>
     public LJCDocDataFile(string name, string? summary = null)
     {
       // Initialize Serialize Properties
@@ -32,16 +32,20 @@ namespace LJCDocDataDAL
 
     #region Properties
 
-    /// <summary>The Class collection.</summary>
+    // Gets or sets the Class collection.
+    /// <include path="members/Classes/*" file="Doc/LJCDocDataFile.xml"/>
     public LJCDocDataClasses? Classes;
 
-    /// <summary>The Name value.</summary>
+    // Gets or sets the Name value.
+    /// <include path="members/Name/*" file="Doc/LJCDocDataFile.xml"/>
     public string? Name;
 
-    /// <summary>The Name value.</summary>
+    // Gets or sets the Remarks value.
+    /// <include path="members/Remarks/*" file="Doc/LJCDocDataFile.xml"/>
     public string? Remarks;
 
-    /// <summary>The Summary value.</summary>
+    // Gets or sets the Summary value.
+    /// <include path="members/Summary/*" file="Doc/LJCDocDataFile.xml"/>
     public string? Summary;
     #endregion
   }

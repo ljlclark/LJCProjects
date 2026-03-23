@@ -9,22 +9,11 @@ namespace LJCDocDataDAL
   /// <include path="members/LJCDocDataParam/*" file="Doc/LJCDocDataParam.xml"/>
   public class LJCDocDataParam
   {
-    #region Constructor Methods
+    #region Static Methods
 
-    public LJCDocDataParam()
-    {
-    }
-
-    public LJCDocDataParam(string name, string summary)
-    {
-      Name = name;
-      Summary = summary;
-    }
-    #endregion
-
-    #region Public Methods
-
-    public LJCDocDataParam? GetParam(string line)
+    // Create an LJCDocDataParam object from an "include" line.
+    /// <include path="members/GetParam/*" file="Doc/LJCDocDataParam.xml"/>
+    public static LJCDocDataParam? GetParam(string line)
     {
       LJCDocDataParam? retParam = null;
 
@@ -33,20 +22,42 @@ namespace LJCDocDataDAL
         var parser = new LJCTextParser();
         var name = parser.DelimitedString(line, "name=\"", "\">");
         parser.StartIndex = 0;
-        var summary = parser.DelimitedString(line, ">", "</");
-        retParam = new LJCDocDataParam(name, summary);        
+        string? summary = parser.DelimitedString(line, ">", "</");
+        if (LJCNetString.HasValue(name))
+        {
+          retParam = new LJCDocDataParam(name, summary);
+        }
       }
       return retParam;
     }
     #endregion
 
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include path="members/Constructor/*" file="Doc/LJCDocDataParam.xml"/>
+    public LJCDocDataParam()
+    {
+    }
+
+    // Initializes an object instance with the provided values.
+    /// <include path="members/ConstructorParams/*" file="Doc/LJCDocDataParam.xml"/>
+    public LJCDocDataParam(string name, string? summary)
+    {
+      Name = name;
+      Summary = summary;
+    }
+    #endregion
+
     #region Properties
 
-    /// <summary>The Name value.</summary>
-    public string? Name;
+    // Gets or sets the Name value.
+    /// <include path="members/Name/*" file="Doc/LJCDocDataParam.xml"/>
+    public string? Name { get; set; }
 
-    /// <summary>The Summary value.</summary>
-    public string? Summary;
+    // Gets or sets the Summary value.
+    /// <include path="members/Summary/*" file="Doc/LJCDocDataParam.xml"/>
+    public string? Summary { get; set; }
     #endregion
   }
 }

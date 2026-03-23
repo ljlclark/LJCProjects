@@ -4,7 +4,7 @@
 
 namespace LJCDocDataDAL
 {
-  // Represents a collection of DataMethod objects.</summary>
+  // Represents a collection of LJCDocDataMethod objects.
   /// <include path="members/LJCDocDataMethods/*" file="Doc/LJCDocDataMethods.xml"/>
   public class LJCDocDataMethods : List<LJCDocDataMethod>
   {
