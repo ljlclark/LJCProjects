@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// TextParserProgram.cs
+// TestTextParserProgram.cs
 using LJCNetCommon;
 
 namespace TestTextParser
