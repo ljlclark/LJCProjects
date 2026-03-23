@@ -3,6 +3,7 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCTestCommon.xml -->
 <members>
+  <!-- Class -->
   <LJCTestCommon>
     <summary>
       Provides test methods.

@@ -3,6 +3,7 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCNetString.xml -->
 <members>
+  <!-- Class -->
   <LJCNetString>
     <summary>
       Contains common string related static functions.

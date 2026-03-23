@@ -3,6 +3,7 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCTextState.xml -->
 <members>
+  <!-- Class -->
   <LJCTextState>
     <summary>
       Represents the text state.

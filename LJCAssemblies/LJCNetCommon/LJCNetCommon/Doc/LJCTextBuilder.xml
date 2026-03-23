@@ -3,6 +3,7 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCTextBuilder.xml -->
 <members>
+  <!-- Class -->
   <LJCTextBuilder>
     <summary>
       Provides methods for creating text.
