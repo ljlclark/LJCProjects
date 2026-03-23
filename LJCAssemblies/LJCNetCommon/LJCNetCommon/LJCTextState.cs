@@ -1,17 +1,17 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TextState.cs
+// LJCTextState.cs
 
 namespace LJCNetCommon
 {
   /// <summary>Represents the text state.</summary>
-  public class TextState
+  /// <include path='members/LJCTextState/*' file='Doc/LJCTextState.xml'/>
+  public class LJCTextState
   {
     #region Constructors
-    /// <summary>
-    /// Initializes an object instance with the supplied values.
-    /// </summary>
-    public TextState(int indentCount = 0)
+    // Initializes an object instance with the supplied values.
+    /// <include path='members/Constructor/*' file='Doc/LJCTextState.xml'/>
+    public LJCTextState(int indentCount = 0)
     {
       IndentCount = indentCount;
       ChildIndentCount = 0;
@@ -20,7 +20,8 @@ namespace LJCNetCommon
 
     #region Properties
 
-    /// <summary>The current indent count to sync called method.</summary>
+    // Gets or sets the current indent count to sync called method.
+    /// <include path='members/IndentCount/*' file='Doc/LJCTextState.xml'/>
     public int IndentCount
     {
       get { return mIndentCount; }
@@ -35,7 +36,8 @@ namespace LJCNetCommon
     }
     private int mIndentCount;
 
-    /// <summary>The new indent count to sync calling method.</summary>
+    // Gets or sets the new indent count to sync calling method.
+    /// <include path='members/ChildIndentCount/*' file='Doc/LJCTextState.xml'/>
     public int ChildIndentCount
     {
       get { return mChildIndentCount; }

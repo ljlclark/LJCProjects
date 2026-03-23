@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37027.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCGenDoc2", "LJCGenDoc2\LJCGenDoc2.csproj", "{09D8888F-0280-4465-9386-C776B5375BB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDocDataDAL", "LJCDocDataDAL\LJCDocDataDAL.csproj", "{B5040FD9-0885-470B-8288-3C0D2BF74307}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09D8888F-0280-4465-9386-C776B5375BB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09D8888F-0280-4465-9386-C776B5375BB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09D8888F-0280-4465-9386-C776B5375BB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09D8888F-0280-4465-9386-C776B5375BB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5040FD9-0885-470B-8288-3C0D2BF74307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5040FD9-0885-470B-8288-3C0D2BF74307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5040FD9-0885-470B-8288-3C0D2BF74307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5040FD9-0885-470B-8288-3C0D2BF74307}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A7041E9-1BD2-4810-BFA1-5ED4611AA28A}
+	EndGlobalSection
+EndGlobal

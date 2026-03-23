@@ -5,20 +5,17 @@ using LJCNetCommon;
 
 namespace TestTextParser
 {
+  // The entry class.
   internal class TestTextParserProgram
   {
-    #region Entry Methods
-
-    /// <summary>
-    /// 
-    /// </summary>
+    // The entry method.
     static void Main()
     {
-      TestCommon = new TestCommon("TestTextParserProgram");
+      TestCommon = new LJCTestCommon("TestTextParserProgram");
       Console.WriteLine();
       Console.WriteLine("*** LJCTextParser ***");
 
-      // Delimited String Methods
+      #region Delimited String Methods
 
       // Begin delimiter only.
       // <comment>
@@ -44,26 +41,30 @@ namespace TestTextParser
       // Value (One), (Two)
       DelimitedString6();
 
-      // Delimited string.
+      // Both delimiters.
       DelimitedString7();
 
-      // A delimited string with delimiters.
+      // Retrieves a string including the supplied delimiters.
       StringWithDelimiters();
+      #endregion
 
-      // Find Tag Methods
+      #region Find Tag Methods
 
-      // Finds the first begin or end tag.
+      // Finds the first tag in a text value.
       FindTag();
 
-      // Removes the tags.
+      // Removes a section from a text value.
+      RemoveSection();
+
+      // Removes tags from a text value.
       RemoveTags();
+      #endregion
     }
-    #endregion
 
     #region Delimited String Methods
 
     // Begin delimiter only.
-    public static void DelimitedString1()
+    private static void DelimitedString1()
     {
       var line = "<comment>";
       var beginDelimiter = "<comment>";
@@ -77,7 +78,7 @@ namespace TestTextParser
     }
 
     // Begin delimiter and text.
-    public static void DelimitedString2()
+    private static void DelimitedString2()
     {
       var line = "<comment>This is a comment.";
       var beginDelimiter = "<comment>";
@@ -91,7 +92,7 @@ namespace TestTextParser
     }
 
     // Text only.
-    public static void DelimitedString3()
+    private static void DelimitedString3()
     {
       var line = "This is a comment.";
 
@@ -104,7 +105,7 @@ namespace TestTextParser
     }
 
     // Text and end delimiter.
-    public static void DelimitedString4()
+    private static void DelimitedString4()
     {
       var line = "This is a comment.</comment>";
       var endDelimiter = "</comment>";
@@ -118,7 +119,7 @@ namespace TestTextParser
     }
 
     // End delimiter only.
-    public static void DelimitedString5()
+    private static void DelimitedString5()
     {
       var line = "</comment>";
       var endDelimiter = "</comment>";
@@ -132,7 +133,7 @@ namespace TestTextParser
     }
 
     // Multiple delimited values.
-    public static void DelimitedString6()
+    private static void DelimitedString6()
     {
       var line = "Value (One), (Two)";
       var beginDelimiter = "(";
@@ -159,8 +160,8 @@ namespace TestTextParser
       }
     }
 
-    // A delimited string.
-    public static void DelimitedString7()
+    // Both delimiters.
+    private static void DelimitedString7()
     {
       var line = "Value (One)";
       var beginDelimiter = "(";
@@ -173,8 +174,8 @@ namespace TestTextParser
       TestCommon?.Write("DelimitedString7()", result, compare);
     }
 
-    // A delimited string with delimiters.
-    public static void StringWithDelimiters()
+    // Retrieves a string including the supplied delimiters.
+    private static void StringWithDelimiters()
     {
       var line = "Value (One)";
       var beginDelimiter = "(";
@@ -190,8 +191,8 @@ namespace TestTextParser
 
     #region Find Tag Methods
 
-    // Finds the first begin or end tag.
-    public static void FindTag()
+    // Finds the first tag in a text value.
+    private static void FindTag()
     {
       var line = "<comment>A comment.</comment>";
 
@@ -222,7 +223,26 @@ namespace TestTextParser
       TestCommon?.Write("FindTag()4", result, compare);
     }
 
-    // Removes the tags.
+    // Removes a section from a text value.
+    private static void RemoveSection()
+    {
+      var line = "<comment>A comment.</comment>";
+
+      var textParser = new LJCTextParser();
+      var beginIndex = 0;
+      var endIndex = 8;
+      var result = textParser.RemoveSection(line, beginIndex, endIndex);
+      var compare = "A comment.</comment>";
+      TestCommon?.Write("RemoveSection1", result, compare);
+
+      beginIndex = 19;
+      endIndex = 28;
+      result = textParser.RemoveSection(line, beginIndex, endIndex);
+      compare = "<comment>A comment.";
+      TestCommon?.Write("RemoveSection2", result, compare);
+    }
+
+    // Removes tags from a text value.
     private static void RemoveTags()
     {
       var line = "<comment>A comment.</comment>";
@@ -236,8 +256,8 @@ namespace TestTextParser
 
     #region Class Data
 
-    // The test common object.
-    private static TestCommon? TestCommon { get; set; }
+    // Gets or sets the test common object.
+    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCTestCommon.xml -->
+<members>
+  <LJCTestCommon>
+    <summary>
+      Provides test methods.
+    </summary>
+  </LJCTestCommon>
+  
+  <!-- Constructors -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorWithValues>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="className">The class name.</param>
+  </ConstructorWithValues>
+  
+  <!-- Methods -->
+  <Write>
+    <summary>
+      Writes a compare message to the console.
+    </summary>
+    <param name="methodName">The method name.</param>
+    <param name="result">The result value.</param>
+    <param name="compare">The compare value.</param>
+    <param name="bracket">Indicates if the values should be bracketed.</param>
+  </Write>
+  <CompareMessage>
+    <summary>
+      Creates a compare message if the result value does not equal the compare
+      value. 
+    </summary>
+    <param name="methodName">The method name.</param>
+    <param name="result">The result value.</param>
+    <param name="compare">The compare value.</param>
+    <param name="bracket">Indicates if the values should be bracketed.</param>
+    <returns>
+      The compare message.
+    </returns>
+  </CompareMessage>
+</members>

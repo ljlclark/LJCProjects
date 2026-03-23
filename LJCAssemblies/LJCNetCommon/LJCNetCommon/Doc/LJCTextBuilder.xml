@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCTextBuilder.xml -->
+<members>
+  <LJCTextBuilder>
+    <summary>
+      Provides methods for creating text.
+    </summary>
+  </LJCTextBuilder>
+
+  <!-- Static Methods -->
+  <TextLength>
+    <summary>
+      Gets the text length if not null.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>
+      The text length.
+    </returns>
+  </TextLength>
+  
+  <!-- Constructors -->
+  <Constructor>
+    <summary>
+      Initializes an object instance with the provided values.
+    </summary>
+    <param name="textState">The TextState object.</param>
+  </Constructor>
+  
+  <!-- Data Class Methods -->
+  <Clear>
+    <summary>
+      Clears the Builder text.
+    </summary>
+  </Clear>
+  <ToString>
+    <summary>
+      Retrieves the object text.
+    </summary>
+    <returns>
+      The object text.
+    </returns>
+  </ToString>
+  
+  <!-- Methods -->
+  <AddIndent>
+    <summary>
+      Changes the IndentCount by the provided value.
+    </summary>
+    <param name="increment">The increment value.</param>
+    <returns>
+      The current indent count.
+    </returns>
+  </AddIndent>
+  
+  <!-- Append Text Methods -->
+  <AddLine>
+    <summary>
+      Adds a text line without modification.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>
+      The added text line.
+    </returns>
+  </AddLine>
+  <AddText>
+    <summary>
+      Adds text without modification.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>
+      The added text.
+    </returns>
+  </AddText>
+  <Item>
+    <summary>
+      Adds a delimiter if not the first list item.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="addIndent">Indicates if the indent should be added.</param>
+    <param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param>
+    <returns>
+      The added, potentially delimited text.
+    </returns>
+  </Item>
+  <Line>
+    <summary>
+      Adds a modified text line to the builder.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="addIndent">Indicates if the indent should be added.</param>
+    <param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param>
+    <returns>
+      The added, potentially modified text line.
+    </returns>
+  </Line>
+  <Text>
+    <summary>
+      Adds modified text to the builder.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="addIndent">Indicates if the indent should be added.</param>
+    <param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param>
+    <returns>
+      The added, potentially modified text.
+    </returns>
+  </Text>
+  
+  <!-- Get Text Methods -->
+  <EndsWithNewLine>
+    <summary>
+      Indicates if the builder text ends with a newline.
+    </summary>
+    <returns>
+      true if the current value ends with a newline; otherwise false.
+    </returns>
+  </EndsWithNewLine>
+  <StartWithNewLine>
+    <summary>
+      Allow text to start with a newline.
+    </summary>
+    <param name="allowNewLine">Indicates if a new line is allowed.</param>
+    <returns>
+      true if the text should start with a newline; otherwise false.
+    </returns>
+  </StartWithNewLine>
+  <GetDelimited>
+    <summary>
+      Adds a delimiter if not the first list item.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>
+      The text value with the potentially added delimiter.
+    </returns>
+  </GetDelimited>
+  <GetIndented>
+    <summary>
+      Gets a new potentially indented line.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>
+      The text value with the potentially added indent.
+    </returns>
+  </GetIndented>
+  <GetIndentString>
+    <summary>
+      Returns the current indent string.
+    </summary>
+    <returns>
+      The current indent string.
+    </returns>
+  </GetIndentString>
+  <GetLine>
+    <summary>
+      Gets a modified text line.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="addIndent">Indicates if the indent should be added.</param>
+    <param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param>
+    <returns>
+      The modified line.
+    </returns>
+  </GetLine>
+  <GetText>
+    <summary>
+      Gets potentially indented and wrapped text.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="addIndent">Indicates if the indent should be added.</param>
+    <param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param>
+    <returns>
+      The potentially modified line.
+    </returns>
+  </GetText>
+  <GetWrapped>
+    <summary>
+      Gets added text and new wrapped line if combined line > LineLimit.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>
+      The potentially wrapped line.
+    </returns>
+  </GetWrapped>
+  
+  <!-- Properties -->
+  <Builder>
+    <summary>
+      The internal StringBuilder class.
+    </summary>
+  </Builder>
+  <DebugText>
+    <summary>
+      The debug text.
+    </summary>
+  </DebugText>
+  <Delimiter>
+    <summary>
+      Gets or sets the delimiter.
+    </summary>
+  </Delimiter>
+  <HasText>
+    <summary>
+      Gets a value indicating if the builder has text.
+    </summary>
+  </HasText>
+  <IndentCharCount>
+    <summary>
+      Gets or sets the indent character count.
+    </summary>
+  </IndentCharCount>
+  <IndentCount>
+    <summary>
+      Gets or sets the indent count.
+    </summary>
+  </IndentCount>
+  <IndentLength>
+    <summary>
+      Gets the current indent length.
+    </summary>
+  </IndentLength>
+  <IsFirst>
+    <summary>
+      Gets or sets the first item indicator.
+    </summary>    
+  </IsFirst>
+  <LineLength>
+    <summary>
+      Gets the current length.
+    </summary>
+  </LineLength>
+  <LineLimit>
+    <summary>
+      Gets the character limit.
+    </summary>
+  </LineLimit>
+  <WrapAtDelimiter>
+    <summary>
+      Gets or sets a value that indicates if a wrap should occur at a leading
+      delimiter.
+    </summary>
+  </WrapAtDelimiter>
+  <WrapEnabled>
+    <summary>
+      Gets or sets a value that indicates if line wrapping is enabled.
+    </summary>
+  </WrapEnabled>
+  <WrapPrefix>
+    <summary>
+      Gets or sets the new line prefix.
+    </summary>
+  </WrapPrefix>
+</members>

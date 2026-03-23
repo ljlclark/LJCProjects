@@ -1,29 +1,24 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// TestCommon.cs
-using System;
+// LJCTestCommon.cs
 
 namespace LJCNetCommon
 {
-  /// <summary>
-  /// 
-  /// </summary>
-  public class TestCommon
+  // Provides test methods.
+  /// <include path='items/LJCTextBuilder/*' file='Doc/LJCTestCommon.xml'/>
+  public class LJCTestCommon
   {
     #region Constructors
 
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
-    public TestCommon()
+    // Initializes an object instance.
+    /// <include path='items/Constructor/*' file='Doc/LJCTestCommon.xml'/>
+    public LJCTestCommon()
     {
     }
 
-    /// <summary>
-    /// Initializes an object instance with the supplied values.
-    /// </summary>
-    /// <param name="className">The class name.</param>
-    public TestCommon(string className)
+    // Initializes an object instance with the supplied values.
+    /// <include path='items/ConstructorWithValues/*' file='Doc/LJCTestCommon.xml'/>
+    public LJCTestCommon(string className)
     {
       mClassName = className;
     }
@@ -31,15 +26,8 @@ namespace LJCNetCommon
 
     #region Methods
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="methodName"></param>
-    /// <param name="result"></param>
-    /// <param name="compare"></param>
-    /// <param name="bracket">
-    /// Indicates if the values should be bracketed.
-    /// </param>
+    // Writes a compare message to the console.
+    /// <include path='items/Write/*' file='Doc/LJCTestCommon.xml'/>
     public void Write(string methodName, string? result
       , string? compare, bool bracket = false)
     {
@@ -50,16 +38,9 @@ namespace LJCNetCommon
       }
     }
 
-    /// <summary>
-    /// Creates a compare message.
-    /// </summary>
-    /// <param name="methodName">The method name.</param>
-    /// <param name="result">The result value.</param>
-    /// <param name="compare">The compare value.</param>
-    /// <param name="bracket">
-    /// Indicates if the values should be bracketed.
-    /// </param>
-    /// <returns>The compare message.</returns>
+    // Creates a compare message if the result value does not equal the compare
+    // value.
+    /// <include path='items/CompareMessage/*' file='Doc/LJCTestCommon.xml'/>
     public string CompareMessage(string methodName, string? result
       , string? compare, bool bracket = false)
     {
@@ -82,7 +63,7 @@ namespace LJCNetCommon
           bracketChar = "|";
         }
 
-        var tb = new TextBuilder();
+        var tb = new LJCTextBuilder();
         tb.Text($"\r\n{mClassName}.{methodName}");
         tb.Text($"{bracketChar}{result}{bracketChar}");
         tb.Text(" !=");

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCTextParser.xml -->
+<members>
+  <LJCTextParser>
+    <summary>
+      Contains parsing related methods.
+    </summary>
+  </LJCTextParser>
+
+  <!-- Constructors -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  
+  <!-- Public Methods -->
+  <DelimitedString>
+    <summary>
+      Retrieves a delimited string.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="beginDelimiter">The beginning delimiter.</param>
+    <param name="endDelimiter">The ending delimiter.</param>
+    <returns>
+      The delimited text.
+    </returns>
+  </DelimitedString>
+  <FindTag>
+    <summary>
+      Finds the first tag in a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="tagName">The tag name.</param>
+    <returns>
+      The first tag.
+    </returns>
+  </FindTag>
+  <RemoveSection>
+    <summary>
+      Removes a section from a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="beginIndex">The beginning index.</param>
+    <param name="endIndex">The ending index.</param>
+    <returns>
+      The text with the section removed.
+    </returns>
+  </RemoveSection>
+  <RemoveTags>
+    <summary>
+      Removes tags from a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>
+      The text with the tags removed.
+    </returns>
+  </RemoveTags>
+  <StringWithDelimiters>
+    <summary>
+      Retrieves a string including the supplied delimiters.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="beginDelimiter">The beginning delimiter.</param>
+    <param name="endDelimiter">The ending delimiter.</param>
+    <returns>
+      The delimited text including the delimiters.
+    </returns>
+  </StringWithDelimiters>
+</members>

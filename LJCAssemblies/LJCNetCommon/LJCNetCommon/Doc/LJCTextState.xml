@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCTextState.xml -->
+<members>
+  <LJCTextState>
+    <summary>
+      Represents the text state.
+    </summary>
+  </LJCTextState>
+  
+  <!-- Constructors -->
+  <Constructor>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="indentCount">The initial indent count.</param>
+  </Constructor>
+  
+  <!-- Properties -->
+  <IndentCount>
+    <summary>
+      Gets or sets the current indent count to sync called method.
+    </summary>
+  </IndentCount>
+  <ChildIndentCount>
+    <summary>
+      Gets or sets the new indent count to sync calling method.
+    </summary>
+  </ChildIndentCount>
+</members>

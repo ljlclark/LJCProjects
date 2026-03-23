@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCNetString.xml -->
+<members>
+  <LJCNetString>
+    <summary>
+      Contains common string related static functions.
+    </summary>
+  </LJCNetString>
+  
+  <!-- Checking String Values -->
+  <HasValue>
+    <summary>
+      Checks if a text value exists.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>
+      true if the text has a value; otherwise false.
+    </returns>
+  </HasValue>
+</members>

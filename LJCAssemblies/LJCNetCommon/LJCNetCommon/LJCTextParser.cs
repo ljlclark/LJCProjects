@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCTextParser.cs
 
@@ -8,10 +8,24 @@ namespace LJCNetCommon
   /// <include path='members/LJCTextParser/*' file='Doc/LJCTextParser.xml'/>
   public class LJCTextParser
   {
-    #region Constructor Methods
+    #region Static Methods
+
+    // Gets or sets the delimiter length.
+    private static int DelimiterLength(string? delimiter)
+    {
+      int retLength = 0;
+      if (LJCNetString.HasValue(delimiter))
+      {
+        retLength = delimiter.Length;
+      }
+      return retLength;
+    }
+    #endregion
+
+    #region Constructors
 
     // Initializes an object instance.
-    /// <include path='members/Constructor/*' file='Doc/LJCParser.xml'/>
+    /// <include path='members/Constructor/*' file='Doc/LJCTextParser.xml'/>
     public LJCTextParser()
     {
       BeginIndex = -1;
@@ -22,8 +36,8 @@ namespace LJCNetCommon
 
     #region Public Methods
 
-    // Gets the delimited string.
-    /// <include path='members/DelimitedString/*' file='Doc/LJCParser.xml'/>
+    // Retrieves a delimited string.
+    /// <include path='members/DelimitedString/*' file='Doc/LJCTextParser.xml'/>
     public string? DelimitedString(string text, string? beginDelimiter = null
       , string? endDelimiter = null)
     {
@@ -39,7 +53,6 @@ namespace LJCNetCommon
         && (null == beginDelimiter
         || text.Contains(beginDelimiter)))
       {
-        var beginLength = 0;
         BeginIndex = 0;
         if (beginDelimiter != null)
         {
@@ -47,7 +60,7 @@ namespace LJCNetCommon
           if (index >= 0)
           {
             // Begin after beginDelimiter.
-            beginLength = beginDelimiter.Length;
+            var beginLength = beginDelimiter.Length;
             BeginIndex = index + beginLength;
           }
         }
@@ -84,8 +97,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Finds a tag in a text value.
-    /// <include path='members/FindTag/*' file='Doc/LJCParser.xml'/>
+    // Finds the first tag in a text value.
+    /// <include path='members/FindTag/*' file='Doc/LJCTextParser.xml'/>
     public string? FindTag(string text, ref string? tagName)
     {
       string? retTag = null;
@@ -128,7 +141,7 @@ namespace LJCNetCommon
     }
 
     // Removes a section from a text value.
-    /// <include path='members/RemoveSection/*' file='Doc/LJCParser.xml'/>
+    /// <include path='members/RemoveSection/*' file='Doc/LJCTextParser.xml'/>
     public string RemoveSection(string text, int beginIndex, int endIndex)
     {
       string retValue = text;
@@ -153,7 +166,7 @@ namespace LJCNetCommon
     }
 
     // Removes tags from a text value.
-    /// <include path='members/RemoveTags/*' file='Doc/LJCParser.xml'/>
+    /// <include path='members/RemoveTags/*' file='Doc/LJCTextParser.xml'/>
     public string RemoveTags(string text)
     {
       string retValue = text;
@@ -172,8 +185,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets the string including the supplied delimiters.
-    /// <include path='members/StringWithDelimiters/*' file='Doc/LJCParser.xml'/>
+    // Retrieves a string including the supplied delimiters.
+    /// <include path='members/StringWithDelimiters/*' file='Doc/LJCTextParser.xml'/>
     public string? StringWithDelimiters(string text, string? beginDelimiter = null
       , string? endDelimiter = null)
     {
@@ -189,20 +202,6 @@ namespace LJCNetCommon
         retValue = text.Substring(BeginIndex - 1, textLength);
       }
       return retValue;
-    }
-    #endregion
-
-    #region Private Methods
-
-    // Gets the delimiter length.
-    private int DelimiterLength(string? delimiter)
-    {
-      int retLength = 0;
-      if (LJCNetString.HasValue(delimiter))
-      {
-        retLength = delimiter.Length;
-      }
-      return retLength;
     }
     #endregion
 
