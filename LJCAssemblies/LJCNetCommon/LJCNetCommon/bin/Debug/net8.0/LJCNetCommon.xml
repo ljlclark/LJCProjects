@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCNetCommon</name>
+    </assembly>
+    <members>
+        <member name="T:LJCNetCommon.LJCNetCommon">
+            <!-- No matching elements were found for the following include tag --><include path="members/LJCNetCommon/*" file="Doc/LJCNetCommon.xml" />
+        </member>
+        <member name="M:LJCNetCommon.LJCNetCommon.MemStreamToString(System.IO.Stream)">
+            <!-- No matching elements were found for the following include tag --><include path="items/MemStreamToString/*" file="Doc/LJCNetCommon.xml" />
+        </member>
+        <member name="M:LJCNetCommon.LJCNetCommon.StringToMemStream(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/StringToMemStream/*" file="Doc/LJCNetCommon.xml" />
+        </member>
+        <member name="M:LJCNetCommon.LJCNetCommon.XmlDeserialize(System.Type,System.String,System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/XmlDeserialize/*" file="Doc/LJCNetCommon.xml" />
+        </member>
+        <member name="M:LJCNetCommon.LJCNetCommon.XmlDeserializeMessage(System.Type,System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/XmlDeserializeMessage/*" file="Doc/LJCNetCommon.xml" />
+        </member>
+        <member name="M:LJCNetCommon.LJCNetCommon.XmlSerialize(System.Type,System.Object,System.Xml.Serialization.XmlSerializerNamespaces,System.String,System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/XmlSerialize/*" file="Doc/LJCNetCommon.xml" />
+        </member>
+        <member name="M:LJCNetCommon.LJCNetCommon.XmlSerializeToString(System.Type,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <!-- No matching elements were found for the following include tag --><include path="items/XmlSerializeToString/*" file="Doc/LJCNetCommon.xml" />
+        </member>
+        <member name="T:LJCNetCommon.LJCNetString">
+            <summary>
+      Contains common string related static functions.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon.LJCNetString.HasValue(System.String)">
+            <summary>
+      Checks if a text value exists.
+    </summary><param name="text">The text value.</param><returns>
+      true if the text has a value; otherwise false.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCNetString.IsEqual(System.String,System.String)">
+            <summary>
+      Do an Ignore Case string compare.
+    </summary><param name="stringA">The first string.</param><param name="stringB">The second string.</param>
+        </member>
+        <member name="T:LJCNetCommon.LJCTestCommon">
+            <summary>
+      Provides test methods.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon.LJCTestCommon.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon.LJCTestCommon.#ctor(System.String)">
+            <summary>
+      Initializes an object instance with the supplied values.
+    </summary><param name="className">The class name.</param>
+        </member>
+        <member name="M:LJCNetCommon.LJCTestCommon.Write(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+      Writes a compare message to the console.
+    </summary><param name="methodName">The method name.</param><param name="result">The result value.</param><param name="compare">The compare value.</param><param name="bracket">Indicates if the values should be bracketed.</param>
+        </member>
+        <member name="M:LJCNetCommon.LJCTestCommon.CompareMessage(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+      Creates a compare message if the result value does not equal the compare
+      value. 
+    </summary><param name="methodName">The method name.</param><param name="result">The result value.</param><param name="compare">The compare value.</param><param name="bracket">Indicates if the values should be bracketed.</param><returns>
+      The compare message.
+    </returns>
+        </member>
+        <member name="T:LJCNetCommon.LJCTextBuilder">
+            <summary>
+      Provides methods for creating text.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.#ctor(LJCNetCommon.LJCTextState)">
+            <summary>
+      Initializes an object instance with the provided values.
+    </summary><param name="textState">The TextState object.</param>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.Clear">
+            <summary>
+      Clears the Builder text.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.ToString">
+            <summary>
+      Retrieves the object text.
+    </summary><returns>
+      The object text.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.AddIndent(System.Int32)">
+            <summary>
+      Changes the IndentCount by the provided value.
+    </summary><param name="increment">The increment value.</param><returns>
+      The current indent count.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.AddLine(System.String)">
+            <summary>
+      Adds a text line without modification.
+    </summary><param name="text">The text value.</param><returns>
+      The added text line.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.AddText(System.String)">
+            <summary>
+      Adds text without modification.
+    </summary><param name="text">The text value.</param><returns>
+      The added text.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.Item(System.String,System.Boolean,System.Boolean)">
+            <summary>
+      Adds a delimiter if not the first list item.
+    </summary><param name="text">The text value.</param><param name="addIndent">Indicates if the indent should be added.</param><param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param><returns>
+      The added, potentially delimited text.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.Line(System.String,System.Boolean,System.Boolean)">
+            <summary>
+      Adds a modified text line to the builder.
+    </summary><param name="text">The text value.</param><param name="addIndent">Indicates if the indent should be added.</param><param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param><returns>
+      The added, potentially modified text line.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.Text(System.String,System.Boolean,System.Boolean)">
+            <summary>
+      Adds modified text to the builder.
+    </summary><param name="text">The text value.</param><param name="addIndent">Indicates if the indent should be added.</param><param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param><returns>
+      The added, potentially modified text.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.EndsWithNewLine">
+            <summary>
+      Indicates if the builder text ends with a newline.
+    </summary><returns>
+      true if the current value ends with a newline; otherwise false.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.StartWithNewLine(System.Boolean)">
+            <summary>
+      Allow text to start with a newline.
+    </summary><param name="allowNewLine">Indicates if a new line is allowed.</param><returns>
+      true if the text should start with a newline; otherwise false.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.GetDelimited(System.String)">
+            <summary>
+      Adds a delimiter if not the first list item.
+    </summary><param name="text">The text value.</param><returns>
+      The text value with the potentially added delimiter.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.GetIndented(System.String)">
+            <summary>
+      Gets a new potentially indented line.
+    </summary><param name="text">The text value.</param><returns>
+      The text value with the potentially added indent.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.GetIndentString">
+            <summary>
+      Returns the current indent string.
+    </summary><returns>
+      The current indent string.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.GetLine(System.String,System.Boolean,System.Boolean)">
+            <summary>
+      Gets a modified text line.
+    </summary><param name="text">The text value.</param><param name="addIndent">Indicates if the indent should be added.</param><param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param><returns>
+      The modified line.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.GetText(System.String,System.Boolean,System.Boolean)">
+            <summary>
+      Gets potentially indented and wrapped text.
+    </summary><param name="text">The text value.</param><param name="addIndent">Indicates if the indent should be added.</param><param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param><returns>
+      The potentially modified line.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextBuilder.GetWrapped(System.String)">
+            <summary>
+      Gets added text and new wrapped line if combined line &gt; LineLimit.
+    </summary><param name="text">The text value.</param><returns>
+      The potentially wrapped line.
+    </returns>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.Builder">
+            <summary>
+      The internal StringBuilder class.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.DebugText">
+            <summary>
+      The debug text.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.Delimiter">
+            <summary>
+      Gets or sets the delimiter.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.HasText">
+            <summary>
+      Gets a value indicating if the builder has text.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.IndentCharCount">
+            <summary>
+      Gets or sets the indent character count.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.IndentCount">
+            <summary>
+      Gets or sets the indent count.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.IndentLength">
+            <summary>
+      Gets the current indent length.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.IsFirst">
+            <summary>Gets or sets the first item indicator.</summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.LineLength">
+            <summary>
+      Gets the current length.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.LineLimit">
+            <summary>
+      Gets the character limit.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.WrapAtDelimiter">
+            <summary>
+      Gets or sets a value that indicates if a wrap should occur at a leading
+      delimiter.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.WrapEnabled">
+            <summary>
+      Gets or sets a value that indicates if line wrapping is enabled.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextBuilder.WrapPrefix">
+            <summary>
+      Gets or sets the new line prefix.
+    </summary>
+        </member>
+        <member name="T:LJCNetCommon.LJCTextParser">
+            <summary>
+      Contains parsing related methods.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextParser.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextParser.DelimitedString(System.String,System.String,System.String)">
+            <summary>
+      Retrieves a delimited string.
+    </summary><param name="text">The text value.</param><param name="beginDelimiter">The beginning delimiter.</param><param name="endDelimiter">The ending delimiter.</param><returns>
+      The delimited text.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextParser.FindTag(System.String,System.String@)">
+            <summary>
+      Finds the first tag in a text value.
+    </summary><param name="text">The text value.</param><param name="tagName">The tag name.</param><returns>
+      The first tag.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextParser.RemoveSection(System.String,System.Int32,System.Int32)">
+            <summary>
+      Removes a section from a text value.
+    </summary><param name="text">The text value.</param><param name="beginIndex">The beginning index.</param><param name="endIndex">The ending index.</param><returns>
+      The text with the section removed.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextParser.RemoveTags(System.String)">
+            <summary>
+      Removes tags from a text value.
+    </summary><param name="text">The text value.</param><returns>
+      The text with the tags removed.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextParser.StringWithDelimiters(System.String,System.String,System.String)">
+            <summary>
+      Retrieves a string including the supplied delimiters.
+    </summary><param name="text">The text value.</param><param name="beginDelimiter">The beginning delimiter.</param><param name="endDelimiter">The ending delimiter.</param><returns>
+      The delimited text including the delimiters.
+    </returns>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextParser.BeginIndex">
+            <summary>The delimited string begin index.</summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextParser.EndIndex">
+            <summary>The delimited string end index.</summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextParser.StartIndex">
+            <summary>The parsing start index.</summary>
+        </member>
+        <member name="T:LJCNetCommon.LJCTextState">
+            <summary>Represents the text state.</summary>
+            <summary>
+      Represents the text state.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon.LJCTextState.#ctor(System.Int32)">
+            <summary>
+      Initializes an object instance with the supplied values.
+    </summary><param name="indentCount">The initial indent count.</param>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextState.IndentCount">
+            <summary>
+      Gets or sets the current indent count to sync called method.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon.LJCTextState.ChildIndentCount">
+            <summary>
+      Gets or sets the new indent count to sync calling method.
+    </summary>
+        </member>
+    </members>
+</doc>
