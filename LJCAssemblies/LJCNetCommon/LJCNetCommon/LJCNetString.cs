@@ -17,6 +17,26 @@ namespace LJCNetCommon
     {
       return !string.IsNullOrWhiteSpace(text);
     }
+
+    // Do an Ignore Case string compare.
+    /// <include path="members/IsEqual/*" file="Doc/LJCNetString.xml"/>
+    public static bool IsEqual(string? stringA, string? stringB)
+    {
+      bool retValue = false;
+
+      if (stringA != null)
+      {
+        retValue = stringA.Equals(stringB
+          , System.StringComparison.InvariantCultureIgnoreCase);
+      }
+
+      if (null == stringA
+        && null == stringB)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
     #endregion
   }
 }

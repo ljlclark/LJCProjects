@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataConfigs.cs
 using System;
@@ -34,7 +34,7 @@ namespace LJCDataAccessConfig
     }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include path='items/DataConfigsC/*' file='Doc/DataConfigsDoc.xml'/>
@@ -42,7 +42,7 @@ namespace LJCDataAccessConfig
     {
       mConfigFileName = "DataConfigs.xml";
       string localAssembly = Assembly.GetExecutingAssembly().Location;
-      LJCConfigFileSpec = Path.Combine(Path.GetDirectoryName(localAssembly)
+      ConfigFileSpec = Path.Combine(Path.GetDirectoryName(localAssembly)
         , mConfigFileName);
     }
     #endregion
@@ -53,13 +53,13 @@ namespace LJCDataAccessConfig
     /// <include path='items/LJCLoadData/*' file='Doc/DataConfigsDoc.xml'/>
     public void LJCLoadData()
     {
-      if (!File.Exists(LJCConfigFileSpec))
+      if (!File.Exists(ConfigFileSpec))
       {
         WriteDefaultData();
       }
 
       if (NetCommon.XmlDeserialize(typeof(DataConfigs)
-        , LJCConfigFileSpec) is DataConfigs dataConfigs)
+        , ConfigFileSpec) is DataConfigs dataConfigs)
       {
         Clear();
         foreach (DataConfig dataConfig in dataConfigs)
@@ -118,7 +118,7 @@ namespace LJCDataAccessConfig
     /// <include path='items/LJCSave/*' file='Doc/DataConfigsDoc.xml'/>
     public void LJCSave()
     {
-      NetCommon.XmlSerialize(this.GetType(), this, null, LJCConfigFileSpec);
+      NetCommon.XmlSerialize(this.GetType(), this, null, ConfigFileSpec);
     }
     #endregion
 
@@ -141,14 +141,14 @@ namespace LJCDataAccessConfig
             "</DataConfig>",
           "</DataConfigs>"
         };
-      File.WriteAllLines(LJCConfigFileSpec, configs);
+      File.WriteAllLines(ConfigFileSpec, configs);
     }
     #endregion
 
     #region Properties
 
     /// <summary>The configuration file path.</summary>
-    public string LJCConfigFileSpec { get; set; }
+    public string ConfigFileSpec { get; set; }
     #endregion
 
     #region Class Data

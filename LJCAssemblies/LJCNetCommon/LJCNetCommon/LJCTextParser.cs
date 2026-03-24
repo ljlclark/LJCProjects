@@ -199,7 +199,9 @@ namespace LJCNetCommon
         int endLength = DelimiterLength(endDelimiter);
         int textLength = EndIndex - BeginIndex + 1;
         textLength += beginLength + endLength;
-        retValue = text.Substring(BeginIndex - 1, textLength);
+        var beginIndex = BeginIndex - beginLength;
+        //retValue = text.Substring(BeginIndex - 1, textLength);
+        retValue = text.Substring(beginIndex, textLength);
       }
       return retValue;
     }

@@ -66,7 +66,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Append Text Methods (5)
+    #region Append Text Methods
 
     // Adds a text line without modification.
     /// <include path='items/AddLine/*' file='Doc/TextBuilder.xml'/>
@@ -141,7 +141,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Get Text Methods (6)
+    #region Get Text Methods
 
     /// <summary>Indicates if the builder text ends with a newline.</summary>
     public bool EndsWithNewLine()
@@ -329,7 +329,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Private Methods (6)
+    #region Private Methods
 
     // Gets the text to add to the existing line.
     private string GetAddText(string text, int addLength)

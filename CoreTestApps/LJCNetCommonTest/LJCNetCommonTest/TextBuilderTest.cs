@@ -81,7 +81,7 @@ namespace LJCNetCommonTest
     }
     #endregion
 
-    #region Append Text Methods (5)
+    #region Append Text Methods
 
     private static void AddLine()
     {
@@ -229,7 +229,7 @@ namespace LJCNetCommonTest
     }
     #endregion
 
-    #region Get Text Methods (6)
+    #region Get Text Methods
 
     private static bool EndsWithNewLine()
     {

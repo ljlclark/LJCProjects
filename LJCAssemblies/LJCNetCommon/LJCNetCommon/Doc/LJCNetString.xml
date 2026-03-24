@@ -6,8 +6,14 @@
   <!-- Class -->
   <LJCNetString>
     <summary>
-      Contains common string related static functions.
+      Contains common string related static methods.
     </summary>
+    <remarks>
+      <para>
+        The NetCommon class contains string related static helper functions for
+        all .NET program types.
+      </para>
+    </remarks>
   </LJCNetString>
   
   <!-- Checking String Values -->
@@ -20,4 +26,185 @@
       true if the text has a value; otherwise false.
     </returns>
   </HasValue>
+  <IsDigits>
+    <summary>
+      Checks a string value for digits.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>true if all digits; otherwise, false.</returns>
+  </IsDigits>
+  <IsEqual>
+    <summary>
+      Do an Ignore Case string compare.
+    </summary>
+    <param name="stringA">The first string.</param>
+    <param name="stringB">The second string.</param>
+  </IsEqual>
+
+  <!-- Formatting a String -->
+  <GetPropertyName>
+    <summary>
+      Gets a column name with underscores converted to Pascal case.
+    </summary>
+    <param name="name">The column name.</param>
+    <returns>The Pascal case property name.</returns>
+  </GetPropertyName>
+  <GetSearchName>
+    <summary>
+      Gets the Search Property name.
+    </summary>
+    <param name="columnName">The potentially qualified column name.</param>
+    <returns>The unqualified column name.</returns>
+  </GetSearchName>
+  <ExceptionString>
+    <summary>
+      Creates an exception string with outer and inner exception.
+    </summary>
+    <param name="e">The Exception object.</param>
+    <returns>The exception string.</returns>
+  </ExceptionString>
+  <FormatValue>
+    <summary>
+      Formats the column value for the SQL string. (D)
+    </summary>
+    <param name="value">The object value.</param>
+    <param name="dataTypeName">The object data type name.</param>
+    <returns>The formatted value.</returns>
+    <remarks>
+      <para>
+        Returns the string formatted value from the Value property based
+        on the DataTypeName property.
+      </para>
+      <para>
+        If the DataType is Boolean, returns "1" or "0".&lt;br /&gt;
+        If the DataType is DateTime, returns a string Date or Minimum Date
+        value.&lt;br  /&gt;
+        If the DataType is string, returns a string with doubled single quotes.
+      </para>
+    </remarks>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        var dbColumnBool = new DbColumn("TestBool", "1", NetCommon.TypeBoolean);
+        var dbColumnDate = new DbColumn("TestDate", DateTime.Now()
+        , NetCommon.TypeDateTime);
+        var dbColumnString = new DbColumn("TestString", "string");
+      </code>
+    </example>
+  </FormatValue>
+  <InitString>
+    <summary>
+      Initializes a string to the trimmed value or null.
+    </summary>
+    <param name="value">The string value.</param>
+    <returns>
+      The trimmed string value or null if the string is null
+      or an empty string when trimmed.
+    </returns>
+  </InitString>
+  <RemoveSection>
+    <summary>
+      Removes a section from a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="beginIndex">The begin index.</param>
+    <param name="endIndex">The end index.</param>
+    <returns>The resulting text value.</returns>
+  </RemoveSection>
+  <Truncate>
+    <summary>
+      Truncates a text string to the specified length.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="length">The maximum length.</param>
+    <returns>The truncated string.</returns>
+  </Truncate>
+
+  <!-- Soundex Functions -->
+   <CreateLSoundex>
+    <summary>
+      Creates a letter based soundex value. (D)
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>The Letter based soundex value.</returns>
+    <remarks>
+      Scatter = SCTR&lt;br /&gt;
+      Aphrodisiac = APHRDSC&lt;br /&gt;
+      Pharmacy = PHRMC&lt;br /&gt;
+      Psychology = PSCHLG&lt;br /&gt;
+      Cart = CRT&lt;br /&gt;
+      Ceiling = CLNG&lt;br /&gt;
+      Cyan = CN
+    </remarks>
+  </CreateLSoundex>
+  <CreatePSoundex>
+    <summary>
+      Creates a Phonetic based soundex value. (D)
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>The Phonetic based soundex value.</returns>
+    <remarks>
+      Scatter = SCTR&lt;br /&gt;
+      Aphrodisiac = AFRDSC&lt;br /&gt;
+      Pharmacy = FRMS&lt;br /&gt;
+      Psychology = SCHLG&lt;br /&gt;
+      Cart = KRT&lt;br /&gt;
+      Ceiling = SLNG&lt;br /&gt;
+      Cyan = SN
+    </remarks>
+  </CreatePSoundex>
+  <IsSoundexLetter>
+    <summary>
+      Checks if the letter is a soundex skipped letter. (R)
+    </summary>
+    <param name="letter">The text letter.</param>
+    <param name="prevLetter">The text previous letter.</param>
+    <returns>true if the letter should be skipped; otherwise, false.</returns>
+    <remarks>
+      True if the letter is the first letter or not a vowel and not the same as
+      the previous letter.
+    </remarks>
+  </IsSoundexLetter>
+  <Phonetic>
+    <summary>
+      Creates a Phonetic character from the supplied text starting at the
+      supplied index. (D)
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="index">The start index.</param>
+    <param name="letter">The Phonetic letter.</param>
+    <returns>true if a Phonetic was created; otherwise, false.</returns>
+    <remarks>
+      <para>
+        Sets the letter parameter to:&lt;br /&gt;  -
+        "F" if the current and following letter are "PH"&lt;br /&gt;
+        - "S" if the current letter is "P", the following letter is "S"
+        and the third letter is a vowel or "Y".&lt;br /&gt;
+        - "K" if the current letter is "C" and the following letter is "A", "O"
+        or "U".&lt;br /&gt;
+        - "S" if the current letter is "C" and the following letter is "E", "I"
+        or "Y".&lt;br /&gt;
+        - Otherwise, the same letter as at the current index.
+      </para>
+    </remarks>
+  </Phonetic>
+  
+  <!-- Other Functions -->
+  <ArgError>
+    <summary>
+      Adds the missing argument name to the message.
+    </summary>
+    <param name="message">The message text.</param>
+    <param name="argument">The argument value.</param>
+    <param name="name">The argument name.</param>
+    <param name="errorContext">The error message context.</param>
+  </ArgError>
+  <ThrowInvalidArgument>
+    <summary>
+      Throws the invalid argument exception if message has a value.
+    </summary>
+    <param name="message">The message text.</param>
+    <!--exception cref="ArgumentException"></exception-->
+  </ThrowInvalidArgument>
 </members>

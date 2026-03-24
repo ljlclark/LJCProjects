@@ -12,7 +12,7 @@ namespace LJCDataAccessConfig
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/ConnectionTemplateC/*' file='Doc/ConnectionTemplate.xml'/>
+    /// <include path='items/Constructor/*' file='Doc/ConnectionTemplate.xml'/>
     public ConnectionTemplate()
     {
     }
