@@ -6,12 +6,12 @@
   <!-- Class -->
   <LJCNetCommon>
     <summary>
-      Contains common static functions.
+      Contains common static methods.
     </summary>
     <remarks>
       <para>
-        The LJCNetCommon class contains static helper functions for all .NET
-        program types.
+        The LJCNetCommon class contains static methods for all .NET program
+        types.
       </para>
     </remarks>
   </LJCNetCommon>
@@ -29,7 +29,7 @@
   </CheckArgument>
   <CompareNull>
     <summary>
-      Compare null values. (DE)
+      Compare null values.
     </summary>
     <param name="x">The compare object.</param>
     <param name="y">The compare to object.</param>
@@ -91,7 +91,7 @@
   </HasColumns1>
   <HasData>
     <summary>
-      Checks a data table for rows. (E)
+      Checks a data table for rows.
     </summary>
     <param name="dataTable">The data table object.</param>
     <returns>true if a data table and it contains rows; otherwise, false.</returns>
@@ -831,6 +831,25 @@
       The boolean value or false if the object is null.
       Also returns false if the object is not type "bool".
     </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a bool value from an object.
+        private static void GetBoolean()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          bool setup = true;
+          object obj = setup;
+
+          // Gets a short value from an object.
+          var result = NetCommon.GetBoolean(obj);
+
+          result:
+          // True
+        }
+      </code>
+    </example>
   </GetBoolean>
   <GetByte>
     <summary>
@@ -841,6 +860,26 @@
       The byte value or the byte default if the object is null.
       Also returns false if the object is not type "byte".
     </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        // Gets a byte value from an object.
+        private static void GetByte()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          byte setup = Convert.ToByte('A');
+          object obj = setup;
+
+          // Gets a byte value from an object.
+          byte value = NetCommon.GetByte(obj);
+          var result = value.ToString();
+          
+          // result:
+          // 65
+        }
+      </code>
+    </example>
   </GetByte>
   <GetChar>
     <summary>
@@ -851,6 +890,25 @@
       The char value or the char default if the object is null.
       Also returns false if the object is not type "char".
     </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        // Gets a char value from an object.
+        private static void GetChar()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          char setup = Convert.ToChar('A');
+          object obj = setup;
+
+          // Gets a byte value from an object.
+          char value = NetCommon.GetChar(obj);
+          var result = value.ToString();
+          var compare = "A";
+          TestCommon?.Write("GetChar()", result, compare);
+        }
+      </code>
+    </example>
   </GetChar>
   <GetDateTime>
     <summary>

@@ -42,20 +42,6 @@
   </IsEqual>
 
   <!-- Formatting a String -->
-  <GetPropertyName>
-    <summary>
-      Gets a column name with underscores converted to Pascal case.
-    </summary>
-    <param name="name">The column name.</param>
-    <returns>The Pascal case property name.</returns>
-  </GetPropertyName>
-  <GetSearchName>
-    <summary>
-      Gets the Search Property name.
-    </summary>
-    <param name="columnName">The potentially qualified column name.</param>
-    <returns>The unqualified column name.</returns>
-  </GetSearchName>
   <ExceptionString>
     <summary>
       Creates an exception string with outer and inner exception.
@@ -65,7 +51,7 @@
   </ExceptionString>
   <FormatValue>
     <summary>
-      Formats the column value for the SQL string. (D)
+      Formats the column value for the SQL string.
     </summary>
     <param name="value">The object value.</param>
     <param name="dataTypeName">The object data type name.</param>
@@ -93,6 +79,20 @@
       </code>
     </example>
   </FormatValue>
+  <GetPropertyName>
+    <summary>
+      Gets a column name with underscores converted to Pascal case.
+    </summary>
+    <param name="name">The column name.</param>
+    <returns>The Pascal case property name.</returns>
+  </GetPropertyName>
+  <GetSearchName>
+    <summary>
+      Gets the Search Property name.
+    </summary>
+    <param name="columnName">The potentially qualified column name.</param>
+    <returns>The unqualified column name.</returns>
+  </GetSearchName>
   <InitString>
     <summary>
       Initializes a string to the trimmed value or null.
@@ -103,15 +103,26 @@
       or an empty string when trimmed.
     </returns>
   </InitString>
-  <RemoveSection>
+  <ScrubDelimitedValues>
     <summary>
-      Removes a section from a text value.
+      Scrubs extra blanks from the comma delimited string.
     </summary>
-    <param name="text">The text value.</param>
-    <param name="beginIndex">The begin index.</param>
-    <param name="endIndex">The end index.</param>
-    <returns>The resulting text value.</returns>
-  </RemoveSection>
+    <param name="values"></param>
+  </ScrubDelimitedValues>
+  <Split>
+    <summary>
+      Split a string on a single separator without empty entries.
+    </summary>
+    <param name="text"></param>
+    <param name="separator"></param>
+  </Split>
+  <Split2>
+    <summary>
+      Split a string on multiple separators without empty entries.
+    </summary>
+    <param name="text"></param>
+    <param name="separators"></param>
+  </Split2>
   <Truncate>
     <summary>
       Truncates a text string to the specified length.
@@ -124,7 +135,7 @@
   <!-- Soundex Functions -->
    <CreateLSoundex>
     <summary>
-      Creates a letter based soundex value. (D)
+      Creates a letter based soundex value.
     </summary>
     <param name="text">The text value.</param>
     <returns>The Letter based soundex value.</returns>
@@ -156,10 +167,10 @@
   </CreatePSoundex>
   <IsSoundexLetter>
     <summary>
-      Checks if the letter is a soundex skipped letter. (R)
+      Checks if the letter is a soundex skipped letter.
     </summary>
-    <param name="letter">The text letter.</param>
-    <param name="prevLetter">The text previous letter.</param>
+    <param name="text">The text value.</param>
+    <param name="index">The current text index.</param>
     <returns>true if the letter should be skipped; otherwise, false.</returns>
     <remarks>
       True if the letter is the first letter or not a vowel and not the same as
@@ -169,7 +180,7 @@
   <Phonetic>
     <summary>
       Creates a Phonetic character from the supplied text starting at the
-      supplied index. (D)
+      supplied index.
     </summary>
     <param name="text">The text value.</param>
     <param name="index">The start index.</param>
@@ -187,24 +198,49 @@
         or "Y".&lt;br /&gt;
         - Otherwise, the same letter as at the current index.
       </para>
+      <para>
+        Advances index to the next available char.
+      </para>
     </remarks>
   </Phonetic>
   
-  <!-- Other Functions -->
-  <ArgError>
+  <!-- Other Methods -->
+  <AddObjectArgError>
     <summary>
       Adds the missing argument name to the message.
     </summary>
-    <param name="message">The message text.</param>
+    <param name="message">The error message.</param>
     <param name="argument">The argument value.</param>
     <param name="name">The argument name.</param>
     <param name="errorContext">The error message context.</param>
-  </ArgError>
-  <ThrowInvalidArgument>
+  </AddObjectArgError>
+  <ThrowArgError>
     <summary>
       Throws the invalid argument exception if message has a value.
     </summary>
-    <param name="message">The message text.</param>
+    <param name="message">The error message.</param>
     <!--exception cref="ArgumentException"></exception-->
-  </ThrowInvalidArgument>
+  </ThrowArgError>
+  
+  <!-- Constants -->
+  <CompareEqual>
+    <summary>
+      The compare object is equal to the compareto object.
+    </summary>
+  </CompareEqual>
+  <CompareGreater>
+    <summary>
+      The compare object is greater than the compareto object.
+    </summary>
+  </CompareGreater>
+  <CompareLess>
+    <summary>
+      The compare object  is less than the compareto object.
+    </summary>
+  </CompareLess>
+  <CompareNotNullOrEqual>
+    <summary>
+      The compare object is notnull or equal is equal to the compareto object.
+    </summary>
+  </CompareNotNullOrEqual>
 </members>

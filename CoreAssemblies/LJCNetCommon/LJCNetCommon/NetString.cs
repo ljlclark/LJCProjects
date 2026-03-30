@@ -1,29 +1,29 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// NetString.xml
+// NetString.cs
 using System;
 using System.Text;
 
 namespace LJCNetCommon
 {
-  // Contains common string related static functions.
-  /// <include path='items/NetString/*' file='Doc/NetString.xml'/>
+  // Contains common string related static methods.
+  /// <include path="members/NetString/*" file="Doc/NetString.xml"/>
   public class NetString
   {
     #region Checking String Values
 
     // Checks if a text value exists.
-    /// <include path='items/HasValue/*' file='Doc/NetString.xml'/>
+    /// <include path="members/HasValue/*" file="Doc/NetString.xml"/>
     public static bool HasValue(string text)
     {
       return !string.IsNullOrWhiteSpace(text);
     }
 
     // Checks a string value for digits.
-    /// <include path='items/IsDigits/*' file='Doc/NetString.xml'/>
+    /// <include path="members/IsDigits/*" file="Doc/NetString.xml"/>
     public static bool IsDigits(string text)
     {
-      string workString;
+      string textTrim;
       bool retValue = true;
 
       if (!HasValue(text))
@@ -32,8 +32,8 @@ namespace LJCNetCommon
       }
       else
       {
-        workString = text.Trim();
-        foreach (char digit in workString)
+        textTrim = text.Trim();
+        foreach (char digit in textTrim)
         {
           if (!char.IsDigit(digit))
           {
@@ -46,7 +46,7 @@ namespace LJCNetCommon
     }
 
     // Do an Ignore Case string compare.
-    /// <include path='items/IsEqual/*' file='Doc/NetString.xml'/>
+    /// <include path="members/IsEqual/*" file="Doc/NetString.xml"/>
     public static bool IsEqual(string stringA, string stringB)
     {
       bool retValue = false;
@@ -62,7 +62,8 @@ namespace LJCNetCommon
 
     #region Formatting a String
 
-    /// <summary>Adds a value to a comma delimited string.</summary>
+    // Adds a value to a comma delimited string.
+    /// <include path="members/AddDelimitedValue/*" file="Doc/NetString.xml"/>
     public static void AddDelimitedValue(ref string target, string value)
     {
       if (HasValue(target))
@@ -76,13 +77,8 @@ namespace LJCNetCommon
       target += value;
     }
 
-    /// <summary>
-    /// Adds delimiters to one or more values.
-    /// </summary>
-    /// <param name="values">The value list.</param>
-    /// <param name="beginDelimiter">The begin delimiter.</param>
-    /// <param name="endDelimiter">The end delimiter.</param>
-    /// <returns>The delimited value list.</returns>
+    // Adds delimiters to one or more values.
+    /// <include path="members/DelimitValues/*" file="Doc/NetString.xml"/>
     public static string DelimitValues(string values, string beginDelimiter
       , string endDelimiter)
     {
@@ -93,7 +89,7 @@ namespace LJCNetCommon
       {
         foreach (var name in names)
         {
-          if (NetString.HasValue(retName))
+          if (HasValue(retName))
           {
             retName += ", ";
           }
@@ -113,7 +109,7 @@ namespace LJCNetCommon
     }
 
     // Creates an exception string with outer and inner exception.
-    /// <include path='items/ExceptionString/*' file='Doc/NetString.xml'/>
+    /// <include path="members/ExceptionString/*" file="Doc/NetString.xml"/>
     public static string ExceptionString(Exception e)
     {
       string retValue;
@@ -127,93 +123,92 @@ namespace LJCNetCommon
     }
 
     // Formats the column value for the SQL string.
-    /// <include path='items/FormatValue/*' file='Doc/NetString.xml'/>
+    /// <include path="members/FormatValue/*" file="Doc/NetString.xml"/>
     public static string FormatValue(object value, string dataTypeName)
     {
-      string retValue;
+      string retValue = "null";
 
-      if (null == value)
-      {
-        retValue = "null";
-      }
-      else
+      if (value != null)
       {
         retValue = value.ToString();
-      }
 
-      switch (dataTypeName)
-      {
-        case NetCommon.TypeBoolean:
-          if ("true" == retValue.ToLower())
-          {
-            retValue = "1";
-          }
-          if ("false" == retValue.ToLower())
-          {
-            retValue = "0";
-          }
-          break;
+        switch (dataTypeName)
+        {
+          case NetCommon.TypeBoolean:
+            if (IsEqual(retValue.ToLower(), "true"))
+            {
+              retValue = "1";
+            }
+            if (IsEqual(retValue.ToLower(), "false"))
+            {
+              retValue = "0";
+            }
+            break;
 
-        case NetCommon.TypeDateTime:
-          DateTime dateTime = Convert.ToDateTime(retValue);
-          if (NetCommon.IsDbMinDate(dateTime))
-          {
-            retValue = "null";
-          }
-          else
-          {
-            retValue = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
-          }
-          break;
+          case NetCommon.TypeDateTime:
+            DateTime dateTime = Convert.ToDateTime(retValue);
+            if (NetCommon.IsDbMinDate(dateTime))
+            {
+              retValue = "null";
+            }
+            else
+            {
+              retValue = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
+            }
+            break;
 
-        case NetCommon.TypeString:
-          if (retValue != null
-            && retValue != "null")
-          {
-            retValue = retValue.Replace("'", "''");
-            retValue = $"'{retValue}'";
-          }
-          break;
+          case NetCommon.TypeString:
+            if (retValue != null
+              && retValue != "null")
+            {
+              retValue = retValue.Replace("'", "''");
+              retValue = $"'{retValue}'";
+            }
+            break;
+        }
       }
       return retValue;
     }
 
     // Gets a column name with underscores converted to Pascal case.
-    /// <include path='items/GetPropertyName/*' file='Doc/NetString.xml'/>
+    /// <include path="members/GetPropertyName/*" file="Doc/NetString.xml"/>
     public static string GetPropertyName(string name)
     {
       StringBuilder builder;
       bool makeUpper = false;
-      string retVal;
+      string retVal = null;
 
-      builder = new StringBuilder(64);
-      foreach (char ch in name)
+      if (HasValue(name))
       {
-        if (builder.Length == 0
-          || makeUpper)
+        builder = new StringBuilder(64);
+        foreach (char ch in name)
         {
-          makeUpper = false;
-          builder.Append(char.ToUpper(ch));
-        }
-        else
-        {
-          makeUpper = false;
-          if (ch == '_')
+          if (builder.Length == 0
+            || makeUpper)
           {
-            makeUpper = true;
+            makeUpper = false;
+            builder.Append(char.ToUpper(ch));
           }
           else
           {
-            builder.Append(ch);
+            makeUpper = false;
+            if (ch == '_')
+            {
+              makeUpper = true;
+            }
+            else
+            {
+              builder.Append(ch);
+            }
           }
         }
+        retVal = builder.ToString();
       }
-      retVal = builder.ToString();
       return retVal;
     }
 
     // Gets the Search Property name.
-    /// <include path='items/GetSearchName/*' file='Doc/NetString.xml'/>
+    /// <include path="members/GetSearchName/*" file="Doc/NetString.xml"/>
     public static string GetSearchName(string columnName)
     {
       var retValue = columnName;
@@ -228,60 +223,51 @@ namespace LJCNetCommon
     }
 
     // Initializes a string to the trimmed value or null.
-    /// <include path='items/InitString/*' file='Doc/NetString.xml'/>
+    /// <include path="members/InitString/*" file="Doc/NetString.xml"/>
     public static string InitString(string value)
     {
       string retVal = null;
 
-      if (NetString.HasValue(value))
+      if (HasValue(value))
       {
         retVal = value.Trim();
       }
       return retVal;
     }
 
-    // Removes a section from a text value.
-    /// <include path='items/RemoveSection/*' file='Doc/NetString.xml'/>
-    [Obsolete("Use LJCTextParser.RemoveSection().")]
-    public static string RemoveSection(string text, int beginIndex, int endIndex)
-    {
-      string retValue = text;
-
-      if (beginIndex >= 0
-        && endIndex >= beginIndex)
-      {
-        var value = retValue.Substring(0, beginIndex);
-        value += retValue.Substring(endIndex + 1);
-        retValue = value;
-      }
-      return retValue;
-    }
-
-    /// <summary>Scrubs extra blanks from the comma delimited string.</summary>
+    // Scrubs extra blanks from the comma delimited string.
+    /// <include path="members/ScrubDelimitedValues/*" file="Doc/NetString.xml"/>
     public static string ScrubDelimitedValues(string values)
     {
       string retValues = "";
 
-      if (!values.Contains(","))
+      if (HasValue(values))
       {
-        retValues = values.Trim();
-      }
-      else
-      {
-        string[] items = Split(values, ",");
-        foreach (string item in items)
+        if (!values.Contains(","))
         {
-          if (NetString.HasValue(retValues))
+          retValues = values.Trim();
+        }
+        else
+        {
+          string[] items = Split(values, ",");
+          if (NetCommon.HasElements(items))
           {
-            retValues += ", ";
+            foreach (string item in items)
+            {
+              if (NetString.HasValue(retValues))
+              {
+                retValues += ", ";
+              }
+              retValues += item.Trim();
+            }
           }
-          retValues += item.Trim();
         }
       }
       return retValues;
     }
 
-    /// <summary>Split a string without empty entries.</summary>
+    // Split a string without empty entries.
+    /// <include path="members/Split/*" file="Doc/NetString.xml"/>
     public static string[] Split(string text, string separator = ",")
     {
       string[] retValues = null;
@@ -295,7 +281,8 @@ namespace LJCNetCommon
       return retValues;
     }
 
-    /// <summary>Split a string without empty entries.</summary>
+    // Split a string on multiple separators without empty entries.
+    /// <include path="members/Split2/*" file="Doc/NetString.xml"/>
     public static string[] Split(string text, string[] separators)
     {
       string[] retValues = null;
@@ -309,7 +296,7 @@ namespace LJCNetCommon
     }
 
     // Truncates a text string to the specified length.
-    /// <include path='items/Truncate/*' file='Doc/NetString.xml'/>
+    /// <include path="members/Truncate/*" file="Doc/NetString.xml"/>
     public static string Truncate(string text, int length)
     {
       var retValue = text;
@@ -323,257 +310,129 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Parsing Delimited String
+    #region Soundex Methods
 
-    // Finds a tag in a text value.
-    /// <include path='items/FindTag/*' file='Doc/NetString.xml'/>
-    [Obsolete("Use LJCTextParser.FindTag().")]
-    public static string FindTag(string text, ref string tagName, out int beginIndex
-      , out int endIndex, ref int startIndex)
-    {
-      string retValue;
-
-      var findValue = "<";
-      if (!HasValue(tagName))
-      {
-        findValue += tagName;
-      }
-      retValue = GetDelimitedAndIndexes(text, findValue
-        , out beginIndex, out endIndex, ref startIndex, ">");
-      var name = retValue;
-
-      // Eliminate attributes.
-      if (name != null
-        && !findValue.Contains("/"))
-      {
-        var index = 0;
-        name = GetStringWithDelimiters(retValue
-          , retValue[0].ToString(), ref index, " ");
-        if (HasValue(name))
-        {
-          name = name.Substring(0, name.Length - 1);
-        }
-      }
-
-      if (tagName == "/")
-      {
-        name = $"/{name}";
-      }
-      tagName = name;
-      return retValue;
-    }
-
-    // Get the delimited string begin and end index.
-    /// <include path='items/GetDelimitedAndIndexes/*' file='Doc/NetString.xml'/>
-    [Obsolete("Use LJCTextParser.DelimitedString().")]
-    public static string GetDelimitedAndIndexes(string text, string beginDelimiter
-      , out int beginIndex, out int endIndex, ref int nextStartIndex
-      , string endDelimiter = null)
-    {
-      string retValue = null;
-
-      beginIndex = -1;
-      endIndex = -1;
-
-      if (nextStartIndex > -1
-        && HasValue(text)
-        && nextStartIndex < text.Length - 1
-        && text.Contains(beginDelimiter))
-      {
-        var beginLength = 0;
-        beginIndex = 0;
-        if (HasValue(beginDelimiter))
-        {
-          var index = text.IndexOf(beginDelimiter, nextStartIndex);
-          if (index >= 0)
-          {
-            beginLength = beginDelimiter.Length;
-            beginIndex = index + beginLength;
-          }
-        }
-
-        int endLength = 0;
-        endIndex = text.Length;
-        if (HasValue(endDelimiter))
-        {
-          var index = text.IndexOf(endDelimiter, beginIndex);
-          if (index >= 0)
-          {
-            endLength = endDelimiter.Length;
-            endIndex = index;
-          }
-        }
-
-        int textLength = endIndex - beginIndex;
-        retValue = text.Substring(beginIndex, textLength);
-
-        nextStartIndex = -1;
-        if (endIndex >= 0
-          && endIndex < text.Length - (beginLength + endLength))
-        {
-          // There is enough text to potentially contain another begin
-          // and end delimiter.
-          nextStartIndex = endIndex + 1;
-        }
-      }
-      return retValue;
-    }
-
-    // Gets the string between the specified delimiters.
-    /// <include path='items/GetDelimitedString/*' file='Doc/NetString.xml'/>
-    [Obsolete("Use LJCTextParser.DelimitedString().")]
-    public static string GetDelimitedString(string text, string beginDelimiter
-      , ref int startIndex, string endDelimiter)
-    {
-      string retValue;
-
-      // Excludes Delimiters
-      retValue = GetDelimitedAndIndexes(text, beginDelimiter, out _
-        , out _, ref startIndex, endDelimiter);
-      return retValue;
-    }
-
-    // Get the string including the specified delimiters.
-    /// <include path='items/GetStringWithDelimiters/*' file='Doc/NetString.xml'/>
-    [Obsolete("Use LJCTextParser.StringWithDelimiters().")]
-    public static string GetStringWithDelimiters(string text, string beginDelimiter
-      , ref int startIndex, string endDelimiter = null)
-    {
-      string retValue = null;
-
-      if (GetDelimitedAndIndexes(text, beginDelimiter, out int beginIndex
-        , out int endIndex, ref startIndex, endDelimiter) != null)
-      {
-        // Include Delimiters
-        int endLength = endDelimiter.Length;
-        if (!HasValue(endDelimiter))
-        {
-          endLength = 0;
-        }
-        int textLength = endIndex - beginIndex + endLength + 1;
-        retValue = text.Substring(beginIndex - 1, textLength);
-      }
-      return retValue;
-    }
-
-    // Removes tags from a text value.
-    /// <include path='items/RemoveTags/*' file='Doc/NetString.xml'/>
-    [Obsolete("Use LJCTextParser.RemoveTags().")]
-    public static string RemoveTags(string text)
-    {
-      string retValue = text;
-
-      string tag;
-      do
-      {
-        string tagName = null;
-        int startIndex = 0;
-        tag = FindTag(retValue, ref tagName, out int beginIndex
-          , out int endIndex, ref startIndex);
-        retValue = RemoveSection(retValue, beginIndex, endIndex);
-      } while (tag != null);
-      return retValue;
-    }
-    #endregion
-
-    #region Soundex Functions
-
-    // Creates a letter based soundex value. (D)
-    /// <include path='items/CreateLSoundex/*' file='Doc/NetString.xml'/>
+    // Creates a letter based soundex value.
+    /// <include path="members/CreateLSoundex/*" file="Doc/NetString.xml"/>
     public static string CreateLSoundex(string text)
     {
-      string retValue;
+      string retValue = null;
 
-      StringBuilder builder = new StringBuilder(64);
-
-      text = text.ToUpper();
-      for (int index = 0; index < text.Length; index++)
+      if (HasValue(text))
       {
-        char letter = text[index];
+        var builder = new StringBuilder(64);
 
-        if (0 == index)
+        text = text.ToUpper();
+        for (int index = 0; index < text.Length; index++)
         {
-          builder.Append(letter);
-        }
-        else
-        {
-          if (IsSoundexLetter(text[index], text[index - 1]))
-          {
-            builder.Append(letter);
-          }
-        }
-      }
-      retValue = builder.ToString();
-      return retValue;
-    }
+          char letter = text[index];
 
-    // Creates a Phonetic based soundex value. (D)
-    /// <include path='items/CreatePSoundex/*' file='Doc/NetString.xml'/>
-    public static string CreatePSoundex(string text)
-    {
-      string retValue;
-
-      StringBuilder builder = new StringBuilder(64);
-
-      text = text.ToUpper();
-      for (int index = 0; index < text.Length; index++)
-      {
-        if (Phonetic(text, ref index, out char letter))
-        {
-          builder.Append(letter);
-        }
-        else
-        {
           if (0 == index)
           {
             builder.Append(letter);
           }
           else
           {
-            if (IsSoundexLetter(text[index], text[index - 1]))
+            if (IsSoundexLetter(text, index))
             {
               builder.Append(letter);
             }
           }
         }
+        retValue = builder.ToString();
       }
-      retValue = builder.ToString();
+      return retValue;
+    }
+
+    // Creates a Phonetic based soundex value.
+    /// <include path="members/CreatePSoundex/*" file="Doc/NetString.xml"/>
+    public static string CreatePSoundex(string text)
+    {
+      string retValue = null;
+
+      if (HasValue(text))
+      {
+        var builder = new StringBuilder(64);
+
+        text = text.ToUpper();
+        for (int index = 0; index < text.Length; index++)
+        {
+          char letter = text[index];
+          if (Phonetic(text, ref index, out char? phonetic))
+          {
+            builder.Append(phonetic);
+          }
+          else
+          {
+            if (0 == index)
+            {
+              builder.Append(letter);
+            }
+            else
+            {
+              if (IsSoundexLetter(text, index))
+              {
+                builder.Append(letter);
+              }
+            }
+          }
+        }
+        retValue = builder.ToString();
+      }
       return retValue;
     }
 
     // Checks if the letter is a soundex skipped letter.
-    /// <include path='items/IsSoundexLetter/*' file='Doc/NetString.xml'/>
-    public static bool IsSoundexLetter(char letter, char prevLetter)
+    /// <include path="members/IsSoundexLetter/*" file="Doc/NetString.xml"/>
+    public static bool IsSoundexLetter(string text, int index)
     {
       bool retValue = false;
 
-      // Do not include vowels.
-      if (-1 == "AEIOU".IndexOf(letter))
+      if (HasValue(text)
+        && index < text.Length)
       {
-        // Do not include double consonants.
-        if (prevLetter != letter)
+        text = text.ToUpper();
+        string currentChar = text[index].ToString();
+        string prevChar = null;
+        if (index > 0)
         {
-          retValue = true;
+          prevChar = text[index - 1].ToString();
+        }
+
+        // Do not include blank or vowels.
+        if (!" AEIOU".Contains(currentChar))
+        {
+          // Do not include double consonants.
+          if (prevChar != null
+            && prevChar != currentChar)
+          {
+            retValue = true;
+          }
         }
       }
       return retValue;
     }
 
     // Creates a Phonetic character from the supplied text starting at the
-    // supplied index. (D)
-    /// <include path='items/Phonetic/*' file='Doc/NetString.xml'/>
-    public static bool Phonetic(string text, ref int index, out char letter)
+    // supplied index.
+    /// <include path="members/Phonetic/*" file="Doc/NetString.xml"/>
+    public static bool Phonetic(string text, ref int index, out char? letter)
     {
       bool retValue = false;
 
-      letter = text[index];
+      letter = null;
 
-      if (index < text.Length - 1)
+      // Index is in text and a next char is available.
+      if (HasValue(text)
+        && index < text.Length - 1)
       {
-        switch (letter)
+        text = text.ToUpper();
+        char currentChar = text[index];
+        char nextChar = text[index + 1];
+        switch (currentChar)
         {
           case 'P':
-            switch (text[index + 1])
+            switch (nextChar)
             {
               case 'H':
                 retValue = true;
@@ -582,19 +441,22 @@ namespace LJCNetCommon
                 break;
 
               case 'S':
-                if (text.Length > index + 2
-                 && "AEIOUY".IndexOf(text[index + 2]) > -1)
+                if (text.Length > index + 2)
                 {
-                  retValue = true;
-                  letter = 'S';
-                  index += 2;
+                  var secondChar = text[index + 2].ToString();
+                  if ("AEIOUY".Contains(secondChar))
+                  {
+                    retValue = true;
+                    letter = 'S';
+                    index += 2;
+                  }
                 }
                 break;
             }
             break;
 
           case 'C':
-            switch (text[index + 1])
+            switch (nextChar)
             {
               case 'A':
               case 'O':
@@ -622,6 +484,7 @@ namespace LJCNetCommon
     #region Other Functions
 
     /// <summary>Adds the missing argument name to the message.</summary>
+    /// <include path="members/AddObjectArgError/*" file="Doc/NetString.xml"/>
     public static void AddObjectArgError(ref string message, object argument
       , string name = null, string errorContext = null)
     {
@@ -655,21 +518,8 @@ namespace LJCNetCommon
       }
     }
 
-    // Adds the missing argument name to the message.
-    /// <include path='items/ArgError/*' file='Doc/NetString.xml'/>
-    [Obsolete("Use AddObjectArgError().")]
-    public static void ArgError(ref string message, object argument
-      , string name = null, string errorContext = null)
-    {
-      AddObjectArgError(ref message, argument, name, errorContext);
-    }
-
     // Throws an ArgumentException if the provided message has a value.
-    /// <summary>
-    /// Throws an ArgumentException if the provided message has a value.
-    /// </summary>
-    /// <param name="message">The error message.</param>
-    /// <exception cref="ArgumentException">The exception object.</exception>
+    /// <include path="members/ThrowArgError/*" file="Doc/NetString.xml"/>
     public static void ThrowArgError(string message)
     {
       if (HasValue(message))

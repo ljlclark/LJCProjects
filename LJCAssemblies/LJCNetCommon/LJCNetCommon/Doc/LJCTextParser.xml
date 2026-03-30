@@ -44,7 +44,7 @@
             , endDelimiter);
             
           // text = "This is some text.";
-          // textParser.StartIndex = -1;
+          // StartIndex = -1;
         }
       </code>
     </example>

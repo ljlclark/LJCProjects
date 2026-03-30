@@ -2,19 +2,20 @@
 <!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- NetString.xml -->
-<items>
+<members>
+  <!-- Class -->
   <NetString>
     <summary>
       Contains common string related static methods.
     </summary>
     <remarks>
       <para>
-        The NetCommon class contains string related static helper functions for
-        all .NET program types.
+        Contains string related static methods for all .NET framework program
+        types.
       </para>
     </remarks>
   </NetString>
-  
+
   <!-- Checking String Values -->
   <HasValue>
     <summary>
@@ -39,20 +40,20 @@
   </IsEqual>
 
   <!-- Formatting a String -->
-  <GetPropertyName>
+  <AddDelimitedValue>
     <summary>
-      Gets a column name with underscores converted to Pascal case.
+      Adds a value to a comma delimited string.
     </summary>
-    <param name="name">The column name.</param>
-    <returns>The Pascal case property name.</returns>
-  </GetPropertyName>
-  <GetSearchName>
+  </AddDelimitedValue>
+  <DelimitedValues>
     <summary>
-      Gets the Search Property name.
+      Adds delimiters to one or more values.
     </summary>
-    <param name="columnName">The potentially qualified column name.</param>
-    <returns>The unqualified column name.</returns>
-  </GetSearchName>
+    <param name="values">The value list.</param>
+    <param name="beginDelimiter">The begin delimiter.</param>
+    <param name="endDelimiter">The end delimiter.</param>
+    <returns>The delimited value list.</returns>
+  </DelimitedValues>
   <ExceptionString>
     <summary>
       Creates an exception string with outer and inner exception.
@@ -90,6 +91,20 @@
       </code>
     </example>
   </FormatValue>
+  <GetPropertyName>
+    <summary>
+      Gets a column name with underscores converted to Pascal case.
+    </summary>
+    <param name="name">The column name.</param>
+    <returns>The Pascal case property name.</returns>
+  </GetPropertyName>
+  <GetSearchName>
+    <summary>
+      Gets the Search Property name.
+    </summary>
+    <param name="columnName">The potentially qualified column name.</param>
+    <returns>The unqualified column name.</returns>
+  </GetSearchName>
   <InitString>
     <summary>
       Initializes a string to the trimmed value or null.
@@ -100,7 +115,7 @@
       or an empty string when trimmed.
     </returns>
   </InitString>
-  <RemoveSection>
+  <!--RemoveSection>
     <summary>
       Removes a section from a text value.
     </summary>
@@ -108,7 +123,27 @@
     <param name="beginIndex">The begin index.</param>
     <param name="endIndex">The end index.</param>
     <returns>The resulting text value.</returns>
-  </RemoveSection>
+  </RemoveSection-->
+  <ScrubDelimitedValues>
+    <summary>
+      Scrubs extra blanks from the comma delimited string.
+    </summary>
+    <param name="values">The string of value.</param>
+  </ScrubDelimitedValues>
+  <Split>
+    <summary>
+      Split a string without empty entries.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="separator">The separator value.</param>
+  </Split>
+  <Split2>
+    <summary>
+      Split a string on multiple separators without empty entries.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="separators">The array of separator values.</param>
+  </Split2>
   <Truncate>
     <summary>
       Truncates a text string to the specified length.
@@ -118,194 +153,10 @@
     <returns>The truncated string.</returns>
   </Truncate>
 
-  <!-- Parsing Delimited String Values -->
-  <FindTag>
-    <summary>
-      Finds a tag in a text value.
-    </summary>
-    <param name="text">The text value.</param>
-    <param name="tagName">The tag name.</param>
-    <param name="beginIndex">The tag begin index.</param>
-    <param name="endIndex">The tag end index.</param>
-    <param name="startIndex">The find start index.</param>
-    <returns>The tag value.</returns>
-  </FindTag>
-  <GetDelimitedAndIndexes>
-    <summary>
-      Get the delimited string begin and end index.
-    </summary>
-    <param name="text">The text value.</param>
-    <param name="beginDelimiter">The beginning delimiter.</param>
-    <param name="beginIndex">The begin index.</param>
-    <param name="endIndex">The end index.</param>
-    <param name="nextStartIndex">The starting index.</param>
-    <param name="endDelimiter">The ending delimiter.</param>
-    <returns>The string between the specified delimiters.</returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // Get the delimited string begin and end index.
-        private static void GetDelimitedAndIndexes()
-        {
-          // Get text that has different begin and end delimiter.
-          var source = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
-          int startIndex = 0;
-          var beginDelimiter = "&lt;summary&gt;";
-          var endDelimiter = "&lt;/summary&gt;";
-          var text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
-            , out int beginIndex, out int endIndex, ref startIndex, endDelimiter);
-          // text = "This is some text.";
-          // beginIndex = 0;
-          // endIndex = 27;
-          // startIndex = -1;
-
-          // Get text that has the same begin and end delimiter.
-          // The endDelimiter is not specified or null.
-          source = "|This is some text.|";
-          startIndex = 0;
-          beginDelimiter = "|";
-          text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
-            , out beginIndex, out endIndex, ref startIndex);
-          // text = "This is some text.";
-          // beginIndex = 0;
-          // endIndex = 19;
-          // startIndex = -1;
-
-          // Get text that has no end delimiter.
-          source = "|This is some text.";
-          startIndex = 0;
-          beginDelimiter = "|";
-          text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
-            , out beginIndex, out endIndex, ref startIndex, "#NoDelimiter");
-          // text = "This is some text.";
-          // beginIndex = 0;
-          // endIndex = 19;
-          // startIndex = -1;
-
-          // Get delimited text where the delimiters occur multiple times.
-          source = "|This is some text.| |and some more here.|";
-          startIndex = 0;
-          beginDelimiter = "|";
-          while (startIndex > -1)
-          {
-            text = NetString.GetDelimitedAndIndexes(source, beginDelimiter
-              , out beginIndex, out endIndex, ref startIndex);
-            // First time: text = "This is some text.";
-            // beginIndex = 0;
-            // endIndex = 19;
-            // startIndex = 20;
-            // Second time: text = "and some more here.";
-            // beginIndex = 21;
-            // endIndex = 41;
-            // startIndex = -1
-          }
-        }
-      </code>
-    </example>
-  </GetDelimitedAndIndexes>
-  <GetDelimitedString>
-    <summary>
-      Gets the string between the specified delimiters.
-    </summary>
-    <param name="text">The text value.</param>
-    <param name="beginDelimiter">The beginning delimiter.</param>
-    <param name="startIndex">The starting index.</param>
-    <param name="endDelimiter">The ending delimiter.</param>
-    <returns>The text between the delimiters.</returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets the string between the specified delimiters.
-        private static void GetDelimitedString()
-        {
-          var source = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
-          var startIndex = 0;
-          var beginDelimiter = "&lt;summary&gt;";
-          var endDelimiter = "&lt;/summary&gt;";
-
-          var text = NetString.GetDelimitedString(source, beginDelimiter, ref startIndex
-            , endDelimiter);
-          // text = "This is some text.";
-          // startIndex = -1;
-        }
-      </code>
-    </example>
-  </GetDelimitedString>
-  <GetStringWithDelimiters>
-    <summary>
-      Get the string including the specified delimiters.
-    </summary>
-    <param name="text">The text value.</param>
-    <param name="beginDelimiter">The beginning delimiter.</param>
-    <param name="startIndex">The starting index.</param>
-    <param name="endDelimiter">The ending delimiter.</param>
-    <returns>The text including the specified delimiters.</returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-
-        // Get the string including the specified delimiters.
-        private static void GetStringWithDelimiters()
-        {
-          var source = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
-          var startIndex = 0;
-          var beginDelimiter = "&lt;summary&gt;";
-          var endDelimiter = "&lt;/summary&gt;";
-          var text = NetString.GetStringWithDelimiters(source, beginDelimiter
-            , ref startIndex, endDelimiter);
-          // text = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
-          // startIndex = -1;
-
-          // Get text that has the same begin and end delimiter.
-          // The endDelimiter is not specified or null.
-          source = "|This is some text.|";
-          startIndex = 0;
-          beginDelimiter = "|";
-          text = NetString.GetStringWithDelimiters(source, beginDelimiter
-            , ref startIndex);
-          // text = "|This is some text.|";
-          // startIndex = -1;
-
-          // Get text that has no end delimiter.
-          source = "|This is some text.";
-          startIndex = 0;
-          beginDelimiter = "|";
-          text = NetString.GetStringWithDelimiters(source, beginDelimiter
-            , ref startIndex, "#NoDelimiter");
-          // text = "|This is some text.";
-          // startIndex = -1;
-
-          // Get delimited text where the delimiters occur multiple times.
-          source = "|This is some text.| |and some more here.|";
-          startIndex = 0;
-          beginDelimiter = "|";
-          while (startIndex > -1)
-          {
-            text = NetString.GetStringWithDelimiters(source, beginDelimiter
-              , ref startIndex);
-            // First time: text = "|This is some text.|";
-            // startIndex = 20;
-            // Second time: text = "|and some more here.|";
-            // startIndex = -1
-          }
-        }
-      </code>
-    </example>
-  </GetStringWithDelimiters>
-  <RemoveTags>
-    <summary>
-      Removes tags from a text value.
-    </summary>
-    <param name="text">The text value.</param>
-    <returns>The text without tags.</returns>
-  </RemoveTags>
-
   <!-- Soundex Functions -->
-   <CreateLSoundex>
+  <CreateLSoundex>
     <summary>
-      Creates a letter based soundex value. (D)
+      Creates a letter based soundex value.
     </summary>
     <param name="text">The text value.</param>
     <returns>The Letter based soundex value.</returns>
@@ -321,7 +172,7 @@
   </CreateLSoundex>
   <CreatePSoundex>
     <summary>
-      Creates a Phonetic based soundex value. (D)
+      Creates a Phonetic based soundex value.
     </summary>
     <param name="text">The text value.</param>
     <returns>The Phonetic based soundex value.</returns>
@@ -337,10 +188,10 @@
   </CreatePSoundex>
   <IsSoundexLetter>
     <summary>
-      Checks if the letter is a soundex skipped letter. (R)
+      Checks if the letter is a soundex skipped letter.
     </summary>
-    <param name="letter">The text letter.</param>
-    <param name="prevLetter">The text previous letter.</param>
+    <param name="text">The text value.</param>
+    <param name="index">The current text index.</param>
     <returns>true if the letter should be skipped; otherwise, false.</returns>
     <remarks>
       True if the letter is the first letter or not a vowel and not the same as
@@ -350,7 +201,7 @@
   <Phonetic>
     <summary>
       Creates a Phonetic character from the supplied text starting at the
-      supplied index. (D)
+      supplied index.
     </summary>
     <param name="text">The text value.</param>
     <param name="index">The start index.</param>
@@ -370,9 +221,9 @@
       </para>
     </remarks>
   </Phonetic>
-  
+
   <!-- Other Functions -->
-  <ArgError>
+  <AddObjectArgError>
     <summary>
       Adds the missing argument name to the message.
     </summary>
@@ -380,12 +231,12 @@
     <param name="argument">The argument value.</param>
     <param name="name">The argument name.</param>
     <param name="errorContext">The error message context.</param>
-  </ArgError>
-  <ThrowInvalidArgument>
+  </AddObjectArgError>
+  <ThrowArgError>
     <summary>
       Throws the invalid argument exception if message has a value.
     </summary>
     <param name="message">The message text.</param>
     <!--exception cref="ArgumentException"></exception-->
-  </ThrowInvalidArgument>
-</items>
+  </ThrowArgError>
+</members>

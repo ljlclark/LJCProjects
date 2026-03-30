@@ -2,28 +2,29 @@
 // Licensed under the MIT License.
 // NetCommon.cs
 using System;
-using System.Drawing;
-using System.Text;
-using System.IO;
-using System.Xml.Serialization;
+using System.Collections;
 using System.Configuration;
 using System.Data;
-using System.Collections;
+using System.Drawing;
+using System.IO;
+using System.Text;
+using System.Xml.Serialization;
 
 namespace LJCNetCommon
 {
-  // Contains common static functions. (D)
-  /// <include path='items/NetCommon/*' file='Doc/NetCommon.xml'/>
+  // Contains common static methods.
+  /// <include path="members/NetCommon/*" file="Doc/NetCommon.xml"/>
   public class NetCommon
   {
-    #region Check Values Functions
+    #region Check Values Methods
 
     // Check for missing argument of type: string with no value, null, 
     // integer = 0, IList with no items, decimal = 0 or DataTable with no rows.
-    /// <include path='items/CheckArgument/*' file='Doc/NetCommon.xml'/>
+    /// <include path="members/CheckArgument/*" file="Doc/NetCommon.xml"/>
     public static void CheckArgument<T>(T argument)
     {
-      if (typeof(string) == argument.GetType())
+      if (argument != null
+        && typeof(string) == argument.GetType())
       {
         if (!NetString.HasValue(GetString(argument)))
         {
@@ -38,11 +39,11 @@ namespace LJCNetCommon
         throw new ArgumentNullException(message);
       }
 
-      if (typeof(long) == argument.GetType()
-        || typeof(int) == argument.GetType()
+      if (typeof(int) == argument.GetType()
+        || typeof(long) == argument.GetType()
         || typeof(short) == argument.GetType())
       {
-        if (0 == NetCommon.GetInt64(argument))
+        if (0 == GetInt64(argument))
         {
           var message = $"Argument {nameof(argument)} is not allowed to be zero.";
           throw new ArgumentException(message);
@@ -58,11 +59,11 @@ namespace LJCNetCommon
         }
       }
 
-      if (typeof(double) == argument.GetType()
-        || typeof(decimal) == argument.GetType()
+      if (typeof(decimal) == argument.GetType()
+        || typeof(double) == argument.GetType()
         || typeof(float) == argument.GetType())
       {
-        if (0 == NetCommon.GetDouble(argument))
+        if (0 == GetDouble(argument))
         {
           var message = $"Argument {nameof(argument)} is not allowed to be zero.";
           throw new ArgumentException(message);
@@ -72,7 +73,7 @@ namespace LJCNetCommon
       if (typeof(DataTable) == argument.GetType())
       {
         DataTable dataTable = argument as DataTable;
-        if (NetCommon.HasData(dataTable))
+        if (HasData(dataTable))
         {
           var message = $"Missing argument {nameof(argument)}.";
           throw new ArgumentNullException(message);
@@ -80,8 +81,8 @@ namespace LJCNetCommon
       }
     }
 
-    // Compare null values. (DE)
-    /// <include path='items/CompareNull/*' file='Doc/NetCommon.xml'/>
+    // Compare null values.
+    /// <include path="members/CompareNull/*" file="Doc/NetCommon.xml"/>
     public static int CompareNull(object x, object y)
     {
       int retValue;
@@ -110,7 +111,7 @@ namespace LJCNetCommon
     }
 
     // Checks a DataColumns collection for items.
-    /// <include path='items/HasColumns/*' file='Doc/NetCommon.xml'/>
+    /// <include path="members/HasColumns/*" file="Doc/NetCommon.xml"/>
     public static bool HasColumns(DataColumnCollection dataColumns)
     {
       bool retValue = true;
@@ -124,7 +125,7 @@ namespace LJCNetCommon
     }
 
     // Checks a data table for columns definitions.
-    /// <include path='items/HasColumns1/*' file='Doc/NetCommon.xml'/>
+    /// <include path="members/HasColumns1/*" file="Doc/NetCommon.xml"/>
     public static bool HasColumns(DataTable dataTable)
     {
       bool retValue = true;
@@ -136,8 +137,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Checks a data table and returns true if it contains any rows. (E)
-    /// <include path='items/HasData/*' file='Doc/NetCommon.xml'/>
+    // Checks a data table for rows.
+    /// <include path="members/HasData/*" file="Doc/NetCommon.xml"/>
     public static bool HasData(DataTable dataTable)
     {
       bool retValue = false;
@@ -151,11 +152,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="array"></param>
-    /// <returns></returns>
+    // Checks an array for elements.
+    /// <include path="members/HasElements/*" file="Doc/NetCommon.xml"/>
     public static bool HasElements(object array)
     {
       bool retValue = false;
@@ -175,12 +173,13 @@ namespace LJCNetCommon
     }
 
     // Checks an IList collection for items.
-    /// <include path='items/HasItems/*' file='Doc/NetCommon.xml'/>
+    /// <include path="members/HasItems/*" file="Doc/NetCommon.xml"/>
     public static bool HasItems(IList list)
     {
       bool retValue = false;
 
-      if (list != null && list.Count > 0)
+      if (list != null
+        && list.Count > 0)
       {
         retValue = true;
       }
@@ -188,7 +187,7 @@ namespace LJCNetCommon
     }
 
     // Checks a DataSet for tables.
-    /// <include path='items/HasTables/*' file='Doc/NetCommon.xml'/>
+    /// <include path="members/HasTables/*" file="Doc/NetCommon.xml"/>
     public static bool HasTables(DataSet dataSet)
     {
       bool retValue = false;
@@ -203,17 +202,19 @@ namespace LJCNetCommon
     }
 
     // Checks if two values are equal.
-    /// <include path='items/IsEqual/*' file='Doc/NetCommon.xml'/>
+    /// <include path="members/IsEqual/*" file="Doc/NetCommon.xml"/>
     public static bool IsEqual(object oldValue, object newValue)
     {
       bool retValue = false;
 
-      if (null == oldValue && null == newValue)
+      if (null == oldValue
+        && null == newValue)
       {
         retValue = true;
       }
 
-      if (oldValue != null && newValue != null)
+      if (oldValue != null
+        && newValue != null)
       {
         string typeName = oldValue.GetType().Name;
         switch (typeName)
@@ -289,9 +290,6 @@ namespace LJCNetCommon
             break;
 
           case TypeString:
-            // *** Next Statement *** Change 1/19/25
-            //if (0 == string.Compare(oldValue.ToString(), newValue.ToString()
-            //  , true))
             if (0 == string.Compare(oldValue.ToString(), newValue.ToString()))
             {
               retValue = true;
@@ -303,7 +301,7 @@ namespace LJCNetCommon
     }
 
     // Check for DB Minimum date or less.
-    /// <include path='items/IsDbMinDate/*' file='Doc/NetCommon.xml'/>
+    /// <include path="members/IsDbMinDate/*" file="Doc/NetCommon.xml"/>
     public static bool IsDbMinDate(DateTime? dateTime)
     {
       bool retValue = false;
@@ -328,16 +326,16 @@ namespace LJCNetCommon
     #region Text Transform Functions
 
     // ** Base64 Bytes and Text
-    // Decodes a Base64 byte array to a Text value. (E)
-    /// <include path='items/Base64BytesToText/*' file='Doc/NetCommon.xml'/>
+    // Decodes a Base64 byte array to a Text value.
+    /// <include path="members/Base64BytesToText/*" file="Doc/NetCommon.xml"/>
     public static string Base64BytesToText(byte[] bytes)
     {
       byte[] byteArray = NetCommon.Base64BytesToTextBytes(bytes);
       return NetCommon.BytesToText(byteArray);
     }
 
-    // Encodes a Text value to a Base64 byte array. (E)
-    /// <include path='items/TextToBase64Bytes/*' file='Doc/NetCommon.xml'/>
+    // Encodes a Text value to a Base64 byte array.
+    /// <include path="members/TextToBase64Bytes/*" file="Doc/NetCommon.xml"/>
     public static byte[] TextToBase64Bytes(string text)
     {
       string base64 = NetCommon.TextToBase64(text);
@@ -346,8 +344,8 @@ namespace LJCNetCommon
     }
 
     // ** Base64 Bytes and Text Bytes
-    // Decodes a Base64 byte array to a Text byte array. (E)
-    /// <include path='items/Base64BytesToTextBytes/*' file='Doc/NetCommon.xml'/>
+    // Decodes a Base64 byte array to a Text byte array.
+    /// <include path="members/Base64BytesToTextBytes/*" file="Doc/NetCommon.xml"/>
     public static byte[] Base64BytesToTextBytes(byte[] bytes)
     {
       char[] chars;
@@ -362,8 +360,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Encodes a Text byte array to a Base64 byte array. (E)
-    /// <include path='items/TextBytesToBase64Bytes/*' file='Doc/NetCommon.xml'/>
+    // Encodes a Text byte array to a Base64 byte array.
+    /// <include path="members/TextBytesToBase64Bytes/*" file="Doc/NetCommon.xml"/>
     public static byte[] TextBytesToBase64Bytes(byte[] bytes)
     {
       char[] chars;
@@ -389,23 +387,23 @@ namespace LJCNetCommon
     }
 
     // ** Base64 and Text
-    // Decodes a Base64 value to a Text value. (E)
-    /// <include path='items/Base64ToText/*' file='Doc/NetCommon.xml'/>
+    // Decodes a Base64 value to a Text value.
+    /// <include path="members/Base64ToText/*" file="Doc/NetCommon.xml"/>
     public static string Base64ToText(string base64Text)
     {
       return Encoding.UTF8.GetString(Convert.FromBase64String(base64Text));
     }
 
-    // Encodes a Text value to a Base64 value. (E)
-    /// <include path='items/TextToBase64/*' file='Doc/NetCommon.xml'/>
+    // Encodes a Text value to a Base64 value.
+    /// <include path="members/TextToBase64/*" file="Doc/NetCommon.xml"/>
     public static string TextToBase64(string text)
     {
       return Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
     }
 
     // * Text Bytes and Base64
-    // Decodes a Base64 value to a Text byte array. (E)
-    /// <include path='items/Base64ToTextBytes/*' file='Doc/NetCommon.xml'/>
+    // Decodes a Base64 value to a Text byte array.
+    /// <include path="members/Base64ToTextBytes/*" file="Doc/NetCommon.xml"/>
     public static byte[] Base64ToTextBytes(string base64)
     {
       string text = Base64ToText(base64);
@@ -413,8 +411,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Encodes a Text byte array to a Base64 value. (E)
-    /// <include path='items/TextBytesToBase64/*' file='Doc/NetCommon.xml'/>
+    // Encodes a Text byte array to a Base64 value.
+    /// <include path="members/TextBytesToBase64/*" file="Doc/NetCommon.xml"/>
     public static string TextBytesToBase64(byte[] bytes)
     {
       byte[] base64Bytes = TextBytesToBase64Bytes(bytes);
@@ -423,16 +421,16 @@ namespace LJCNetCommon
     }
 
     // ** Bytes and Text
-    // Creates text from a byte array. (E)
-    /// <include path='items/BytesToText/*' file='Doc/NetCommon.xml'/>
+    // Creates text from a byte array.
+    /// <include path="members/BytesToText/*" file="Doc/NetCommon.xml"/>
     public static string BytesToText(byte[] bytes)
     {
       string retValue = Encoding.UTF8.GetString(bytes);
       return retValue;
     }
 
-    // Creates a byte array from text. (E)
-    /// <include path='items/TextToBytes/*' file='Doc/NetCommon.xml'/>
+    // Creates a byte array from text.
+    /// <include path="members/TextToBytes/*" file="Doc/NetCommon.xml"/>
     public static byte[] TextToBytes(string text)
     {
       string data = text.Trim();
@@ -446,8 +444,8 @@ namespace LJCNetCommon
     }
 
     // ** Stream and Bytes
-    // Copies a memory stream to a byte array. (E)
-    /// <include path='items/MemStreamToBytes/*' file='Doc/NetCommon.xml'/>
+    // Copies a memory stream to a byte array.
+    /// <include path="members/MemStreamToBytes/*" file="Doc/NetCommon.xml"/>
     public static byte[] MemStreamToBytes(Stream stream)
     {
       byte[] retValue = new byte[stream.Length];
@@ -461,8 +459,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Copies a byte array to a memory stream. (E)
-    /// <include path='items/BytesToMemStream/*' file='Doc/NetCommon.xml'/>
+    // Copies a byte array to a memory stream.
+    /// <include path="members/BytesToMemStream/*" file="Doc/NetCommon.xml"/>
     public static Stream BytesToMemStream(byte[] bytes)
     {
       MemoryStream retValue;
@@ -475,8 +473,8 @@ namespace LJCNetCommon
     }
 
     // ** Stream and String (Text)
-    // Creates a string from a memory stream. (E)
-    /// <include path='items/MemStreamToString/*' file='Doc/NetCommon.xml'/>
+    // Creates a string from a memory stream.
+    /// <include path="members/MemStreamToString/*" file="Doc/NetCommon.xml"/>
     public static string MemStreamToString(Stream stream)
     {
       TextReader reader;
@@ -489,8 +487,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Creates a memory stream from a string. (E)
-    /// <include path='items/StringToMemStream/*' file='Doc/NetCommon.xml'/>
+    // Creates a memory stream from a string.
+    /// <include path="members/StringToMemStream/*" file="Doc/NetCommon.xml"/>
     public static Stream StringToMemStream(string text)
     {
       Stream retValue = new MemoryStream();
@@ -503,8 +501,8 @@ namespace LJCNetCommon
     }
 
     // **
-    // Decodes an encoded XML string. (E)
-    /// <include path='items/XmlDecode/*' file='Doc/NetCommon.xml'/>
+    // Decodes an encoded XML string.
+    /// <include path="members/XmlDecode/*" file="Doc/NetCommon.xml"/>
     public static string XmlDecode(string text)
     {
       string retValue = null;
@@ -520,8 +518,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Encodes a string with XML escape values. (E)
-    /// <include path='items/XmlEncode/*' file='Doc/NetCommon.xml'/>
+    // Encodes a string with XML escape values.
+    /// <include path="members/XmlEncode/*" file="Doc/NetCommon.xml"/>
     public static string XmlEncode(string text)
     {
       string retValue = null;
@@ -540,8 +538,8 @@ namespace LJCNetCommon
 
     #region Serialization Functions
 
-    // Deserialize an XML message file to an object. (E)
-    /// <include path='items/XmlDeserialize/*' file='Doc/NetCommon.xml'/>
+    // Deserialize an XML message file to an object.
+    /// <include path="members/XmlDeserialize/*" file="Doc/NetCommon.xml"/>
     public static object XmlDeserialize(Type type, string fileSpec
       , string rootName = null)
     {
@@ -587,8 +585,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Deserialize an XML message string to an object. (E)
-    /// <include path='items/XmlDeserializeMessage/*' file='Doc/NetCommon.xml'/>
+    // Deserialize an XML message string to an object.
+    /// <include path="members/XmlDeserializeMessage/*" file="Doc/NetCommon.xml"/>
     public static object XmlDeserializeMessage(Type type, string message)
     {
       Stream stream = null;
@@ -607,8 +605,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Serialize an object to an XML message file. (E)
-    /// <include path='items/XmlSerialize/*' file='Doc/NetCommon.xml'/>
+    // Serialize an object to an XML message file.
+    /// <include path="members/XmlSerialize/*" file="Doc/NetCommon.xml"/>
     public static void XmlSerialize(Type type, object data
       , XmlSerializerNamespaces namespaces, string fileSpec
       , string rootName = null)
@@ -659,8 +657,8 @@ namespace LJCNetCommon
       return;
     }
 
-    // Serialize an object to an XML message string. (E)
-    /// <include path='items/XmlSerializeToString/*' file='Doc/NetCommon.xml'/>
+    // Serialize an object to an XML message string.
+    /// <include path="members/XmlSerializeToString/*" file="Doc/NetCommon.xml"/>
     public static string XmlSerializeToString(Type type, object data
       , XmlSerializerNamespaces namespaces)
     {
@@ -688,8 +686,8 @@ namespace LJCNetCommon
 
     #region Config Functions
 
-    // Retrieves the Config bool value. (RE)
-    /// <include path='items/ConfigBool/*' file='Doc/NetCommon.xml'/>
+    // Retrieves the Config bool value.
+    /// <include path="members/ConfigBool/*" file="Doc/NetCommon.xml"/>
     public static bool ConfigBool(string key)
     {
       bool retValue = false;
@@ -699,14 +697,14 @@ namespace LJCNetCommon
         string configValue = ConfigurationManager.AppSettings[key];
         if (NetString.HasValue(configValue))
         {
-          bool.TryParse(configValue, out retValue);
+          _ = bool.TryParse(configValue, out retValue);
         }
       }
       return retValue;
     }
 
-    // Retrieves the Config Color value. (RE)
-    /// <include path='items/ConfigColor/*' file='Doc/NetCommon.xml'/>
+    // Retrieves the Config Color value.
+    /// <include path="members/ConfigColor/*" file="Doc/NetCommon.xml"/>
     public static bool ConfigColor(string key, out Color color)
     {
       bool retValue = false;
@@ -719,7 +717,7 @@ namespace LJCNetCommon
         if (NetString.HasValue(configValue))
         {
           color = Color.FromName(configValue);
-          if (color != null)
+          if (color != Color.FromArgb(0, 0, 0, 0))
           {
             retValue = true;
           }
@@ -728,8 +726,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Retrieves the Config string value. (RE)
-    /// <include path='items/ConfigString/*' file='Doc/NetCommon.xml'/>
+    // Retrieves the Config string value.
+    /// <include path="members/ConfigString/*" file="Doc/NetCommon.xml"/>
     public static string ConfigString(string key)
     {
       string retValue = null;
@@ -756,8 +754,8 @@ namespace LJCNetCommon
 
     #region Value Functions
 
-    // Gets a decimal value from an object. (E)
-    /// <include path='items/GetBoolean/*' file='Doc/NetCommon.xml'/>
+    // Gets a decimal value from an object.
+    /// <include path="members/GetBoolean/*" file="Doc/NetCommon.xml"/>
     public static bool GetBoolean(object value)
     {
       bool retValue = default;
@@ -770,8 +768,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets a byte value from an object. (E)
-    /// <include path='items/GetByte/*' file='Doc/NetCommon.xml'/>
+    // Gets a byte value from an object.
+    /// <include path="members/GetByte/*" file="Doc/NetCommon.xml"/>
     public static byte GetByte(object value)
     {
       byte retValue = default;
@@ -784,8 +782,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets a character value from an object. (E)
-    /// <include path='items/GetChar/*' file='Doc/NetCommon.xml'/>
+    // Gets a character value from an object.
+    /// <include path="members/GetChar/*" file="Doc/NetCommon.xml"/>
     public static char GetChar(object value)
     {
       char retValue = default;
@@ -798,8 +796,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets a decimal value from an object. (E)
-    /// <include path='items/GetDateTime/*' file='Doc/NetCommon.xml'/>
+    // Gets a DateTime value from an object.
+    /// <include path="members/GetDateTime/*" file="Doc/NetCommon.xml"/>
     public static DateTime? GetDateTime(object value)
     {
       DateTime? retValue = null;
@@ -812,16 +810,16 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets a decimal value from an object. (E)
-    /// <include path='items/GetDecimal/*' file='Doc/NetCommon.xml'/>
+    // Gets a decimal value from an object.
+    /// <include path="members/GetDecimal/*" file="Doc/NetCommon.xml"/>
     public static decimal GetDecimal(object value)
     {
       decimal retValue = default;
 
       var type = value.GetType();
       if (typeof(decimal) == type
-        || typeof(long) == type
         || typeof(int) == type
+        || typeof(long) == type
         || typeof(short) == type)
       {
         retValue = Convert.ToDecimal(value);
@@ -829,8 +827,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets a decimal value from an object. (E)
-    /// <include path='items/GetDouble/*' file='Doc/NetCommon.xml'/>
+    // Gets a decimal value from an object.
+    /// <include path="members/GetDouble/*" file="Doc/NetCommon.xml"/>
     public static double GetDouble(object value)
     {
       double retValue = default;
@@ -838,8 +836,9 @@ namespace LJCNetCommon
       var type = value.GetType();
       if (typeof(double) == type
         || typeof(decimal) == type
-        || typeof(long) == type
+        || typeof(float) == type
         || typeof(int) == type
+        || typeof(long) == type
         || typeof(short) == type)
       {
         retValue = Convert.ToDouble(value);
@@ -847,8 +846,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets a short value from an object. (E)
-    /// <include path='items/GetInt16/*' file='Doc/NetCommon.xml'/>
+    // Gets a short value from an object.
+    /// <include path="members/GetInt16/*" file="Doc/NetCommon.xml"/>
     public static short GetInt16(object value)
     {
       short retValue = default;
@@ -861,8 +860,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets an integer value from an object. (E)
-    /// <include path='items/GetInt32/*' file='Doc/NetCommon.xml'/>
+    // Gets an integer value from an object.
+    /// <include path="members/GetInt32/*" file="Doc/NetCommon.xml"/>
     public static int GetInt32(object value)
     {
       int retValue = default;
@@ -876,15 +875,15 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets a long value from an object. (E)
-    /// <include path='items/GetInt64/*' file='Doc/NetCommon.xml'/>
+    // Gets a long value from an object.
+    /// <include path="members/GetInt64/*" file="Doc/NetCommon.xml"/>
     public static long GetInt64(object value)
     {
       long retValue = default;
 
       var type = value.GetType();
-      if (typeof(long) == type
-        || typeof(int) == type
+      if (typeof(int) == type
+        || typeof(long) == type
         || typeof(short) == type)
       {
         retValue = Convert.ToInt64(value);
@@ -893,7 +892,7 @@ namespace LJCNetCommon
     }
 
     // Gets an instantiated object value.
-    /// <include path='items/GetObject/*' file='Doc/NetCommon.xml'/>
+    /// <include path="members/GetObject/*" file="Doc/NetCommon.xml"/>
     public static object GetObject(object value)
     {
       object retValue = null;
@@ -951,16 +950,16 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets a float value from an object. (E)
-    /// <include path='items/GetSingle/*' file='Doc/NetCommon.xml'/>
+    // Gets a float value from an object.
+    /// <include path="members/GetSingle/*" file="Doc/NetCommon.xml"/>
     public static float GetSingle(object value)
     {
       float retValue = default;
 
       var type = value.GetType();
-      if (typeof(Single) == type
-        || typeof(long) == type
+      if (typeof(float) == type
         || typeof(int) == type
+        || typeof(long) == type
         || typeof(short) == type)
       {
         retValue = Convert.ToSingle(value);
@@ -968,16 +967,19 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets a trimmed string value from an object. (E)
-    /// <include path='items/GetString/*' file='Doc/NetCommon.xml'/>
+    // Gets a trimmed string value from an object.
+    /// <include path="members/GetString/*" file="Doc/NetCommon.xml"/>
     public static string GetString(object value)
     {
       string retValue = default;
 
-      if (value != null
-        && NetString.HasValue(value.ToString()))
+      if (value != null)
       {
-        retValue = value.ToString().Trim();
+        var text = value.ToString();
+        if (NetString.HasValue(text))
+        {
+          retValue = text.Trim();
+        }
       }
       return retValue;
     }
@@ -985,14 +987,14 @@ namespace LJCNetCommon
     /// <summary>Gets an int from a text string.</summary>
     public static int ToInt32(string text)
     {
-      int.TryParse(text, out int value);
+      _ = int.TryParse(text, out int value);
       return value;
     }
 
     /// <summary>Gets a short from a text string.</summary>
     public static short ToInt16(string text)
     {
-      short.TryParse(text, out short value);
+      _ = short.TryParse(text, out short value);
       return value;
     }
 
