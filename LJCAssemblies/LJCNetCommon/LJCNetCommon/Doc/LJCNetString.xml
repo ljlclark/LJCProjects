@@ -165,6 +165,34 @@
       Cyan = SN
     </remarks>
   </CreatePSoundex>
+  <Soundex>
+    <summary>
+      Creates a US Census Soundex value.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>
+      The Soundex value.
+    </returns>
+    <example>
+      <code>
+        // Creates a US Census soundex value.
+        private static void Soundex()
+        {
+          var text = "Clark";
+          var result = LJCNetString.Soundex(text);
+          // result = "C462"
+
+          text = "Klum";
+          result = LJCNetString.Soundex(text);
+          // result = "K450"
+
+          text = "Rodriguez";
+          result = LJCNetString.Soundex(text);
+          // result = "R362";
+        }
+      </code>
+    </example>
+  </Soundex>
   <IsSoundexLetter>
     <summary>
       Checks if the letter is a soundex skipped letter.

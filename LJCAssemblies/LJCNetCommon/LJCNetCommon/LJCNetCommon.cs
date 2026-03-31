@@ -801,7 +801,8 @@ namespace LJCNetCommon
       DateTime? retValue = null;
 
       var type = value.GetType();
-      if (typeof(DateTime) == type)
+      //if (typeof(DateTime) == type)
+      if (typeof(string) == type)
       {
         retValue = Convert.ToDateTime(value);
       }
