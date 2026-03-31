@@ -17,7 +17,7 @@
     </summary>
   </Constructor>
   
-  <!-- Public Methods -->
+  <!-- Delimited String Methods -->
   <DelimitedString>
     <summary>
       Retrieves a delimited string.
@@ -38,47 +38,16 @@
           var source = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
           var beginDelimiter = "&lt;summary&gt;";
           var endDelimiter = "&lt;/summary&gt;";
-
           var textParser = new LJCTextParser();
-          var text = textParser.DelimitedString(source, beginDelimiter
+          var result = textParser.DelimitedString(source, beginDelimiter
             , endDelimiter);
-            
-          // text = "This is some text.";
+          // result:
+          // This is some text.
           // StartIndex = -1;
         }
       </code>
     </example>
   </DelimitedString>
-  <FindTag>
-    <summary>
-      Finds the first tag in a text value.
-    </summary>
-    <param name="text">The text value.</param>
-    <param name="tagName">The tag name.</param>
-    <returns>
-      The first tag.
-    </returns>
-  </FindTag>
-  <RemoveSection>
-    <summary>
-      Removes a section from a text value.
-    </summary>
-    <param name="text">The text value.</param>
-    <param name="beginIndex">The beginning index.</param>
-    <param name="endIndex">The ending index.</param>
-    <returns>
-      The text with the section removed.
-    </returns>
-  </RemoveSection>
-  <RemoveTags>
-    <summary>
-      Removes tags from a text value.
-    </summary>
-    <param name="text">The text value.</param>
-    <returns>
-      The text with the tags removed.
-    </returns>
-  </RemoveTags>
   <StringWithDelimiters>
     <summary>
       Retrieves a string including the supplied delimiters.
@@ -96,47 +65,129 @@
         // Get the string including the specified delimiters.
         private static void StringWithDelimiters()
         {
-          var source = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
-          var beginDelimiter = "&lt;summary&gt;";
-          var endDelimiter = "&lt;/summary&gt;";
-          var textParser = new LJCTextParser();
-          var text = textParser.StringWithDelimiters(source, beginDelimiter
-            , endDelimiter);
-          // text = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
-          // textParser.StartIndex = -1;
-
-          // Get text that has the same begin and end delimiter.
-          // The endDelimiter is not specified or null.
-          source = "|This is some text.|";
-          beginDelimiter = "|";
-          textParser.StartIndex = 0;
-          text = textParser.StringWithDelimiters(source, beginDelimiter);
-          // text = "|This is some text.|";
-          // textParser.StartIndex = -1;
-
-          // Get text that has no end delimiter.
-          source = "|This is some text.";
-          beginDelimiter = "|";
-          textParser.StartIndex = 0;
-          text = textParser.StringWithDelimiters(source, beginDelimiter);
-          // text = "|This is some text.";
-          // textParser.StartIndex = -1;
-
-          // Get delimited text where the delimiters occur multiple times.
-          source = "|This is some text.| |and some more here.|";
-          beginDelimiter = "|";
-          textParser.StartIndex = 0;
-          while (startIndex > -1)
-          {
-            text = NetString.GetStringWithDelimiters(source, beginDelimiter
-              , ref startIndex);
-            // First time: text = "|This is some text.|";
-            // startIndex = 20;
-            // Second time: text = "|and some more here.|";
-            // textParser.StartIndex = -1
-          }
+          var line = "Value (One)";
+          var beginDelimiter = "(";
+          var endDelimiter = ")";
+          var parser = new LJCTextParser();
+          var result = parser.StringWithDelimiters(line, beginDelimiter, endDelimiter);
+          // result:
+          // (One)
+          // StartIndex = -1;
         }
       </code>
     </example>
   </StringWithDelimiters>
+  
+  <!-- Find Tag Methods -->
+  <FindTag>
+    <summary>
+      Finds the first tag in a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="tagName">The tag name.</param>
+    <returns>
+      The first tag.
+    </returns>
+    <example>
+      <code>
+        // Finds the first tag in a text value.
+        private static void FindTag()
+        {
+          var line = "&lt;comment&gt;A comment.&lt;/comment&gt;";
+          var textParser = new LJCTextParser();
+          string? findTagName = null;
+          var result = textParser.FindTag(line, ref findTagName);
+          // result:
+          // &lt;comment&gt;
+          // findTagName = "comment"
+
+          line = "&lt;comment name=&quot;What?&quot;&gt;A comment.&lt;/comment&gt;;
+          findTagName = null;
+          result = textParser.FindTag(line, ref findTagName);
+          // result:
+          // &lt;comment&gt;
+          // findTagName = "comment"
+
+          findTagName = "/";
+          result = textParser.FindTag(line, ref findTagName);
+          // result:
+          // &lt;/comment&gt;
+          // findTagName = "/comment"
+        }
+      </code>
+    </example>
+  </FindTag>
+  <RemoveSection>
+    <summary>
+      Removes a section from a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="beginIndex">The beginning index.</param>
+    <param name="endIndex">The ending index.</param>
+    <returns>
+      The text with the section removed.
+    </returns>
+    <example>
+      <code>
+        // Removes a section from a text value.
+        private static void RemoveSection()
+        {
+          var line = "&lt;comment&gt;A comment.&lt;/comment&gt;";
+
+          var textParser = new LJCTextParser();
+          var beginIndex = 0;
+          var endIndex = 8;
+          var result = textParser.RemoveSection(line, beginIndex, endIndex);
+          // result:
+          // A comment.&lt;/comment&gt;
+
+          beginIndex = 19;
+          endIndex = 28;
+          result = textParser.RemoveSection(line, beginIndex, endIndex);
+          // result:
+          // &lt;comment&gt;A comment.
+        }
+      </code>
+    </example>
+  </RemoveSection>
+  <RemoveTags>
+    <summary>
+      Removes tags from a text value.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>
+      The text with the tags removed.
+    </returns>
+    <example>
+      <code>
+        // Removes tags from a text value.
+        private static void RemoveTags()
+        {
+          var line = "&lt;comment&gt;A comment.&lt;/comment&gt;";
+
+          var textParser = new LJCTextParser();
+          var result = textParser.RemoveTags(line);
+          // result:
+          // A comment.
+        }
+      </code>
+    </example>
+  </RemoveTags>
+  
+  <!-- Properties -->
+  <BeginIndex>
+    <summary>
+      The delimited string begin index.
+    </summary>
+  </BeginIndex>
+  <EndIndex>
+    <summary>
+      The delimited string end index.
+    </summary>
+  </EndIndex>
+  <StartIndex>
+    <summary>
+      The parsing start index.
+    </summary>
+  </StartIndex>
 </members>

@@ -209,13 +209,16 @@ namespace LJCNetCommon
 
     #region Properties
 
-    /// <summary>The delimited string begin index.</summary>
+    // The delimited string begin index.
+    /// <include path="members/BeginIndex/*" file="Doc/LJCTextParser.xml"/>
     public int BeginIndex { get; private set; }
 
-    /// <summary>The delimited string end index.</summary>
+    // The delimited string end index.
+    /// <include path="members/EndIndex/*" file="Doc/LJCTextParser.xml"/>
     public int EndIndex { get; private set; }
 
-    /// <summary>The parsing start index.</summary>
+    // The parsing start index.
+    /// <include path="members/StartIndex/*" file="Doc/LJCTextParser.xml"/>
     public int StartIndex { get; set; }
     #endregion
   }

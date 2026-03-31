@@ -1,18 +1,18 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// NetString.xml
+// LJCParser.cs
 using System;
 
 namespace LJCNetCommon
 {
   // Contains parsing related methods.
-  /// <include path='members/LJCParser/*' file='Doc/LJCParser.xml'/>
+  /// <include path="members/LJCParser/*" file="Doc/LJCParser.xml"/>
   public class LJCParser
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='members/Constructor/*' file='Doc/LJCParser.xml'/>
+    /// <include path="members/Constructor/*" file="Doc/LJCParser.xml"/>
     public LJCParser()
     {
       BeginIndex = -1;
@@ -23,8 +23,8 @@ namespace LJCNetCommon
 
     #region Methods
 
-    // Gets the delimited string.
-    /// <include path='members/DelimitedString/*' file='Doc/LJCParser.xml'/>
+    // Gets a delimited string.
+    /// <include path="members/DelimitedString/*" file="Doc/LJCParser.xml"/>
     public string DelimitedString(string text, string beginDelimiter = null
       , string endDelimiter = null)
     {
@@ -81,7 +81,7 @@ namespace LJCNetCommon
     }
 
     // Finds a tag in a text value.
-    /// <include path='members/FindTag/*' file='Doc/LJCParser.xml'/>
+    /// <include path="members/FindTag/*" file="Doc/LJCParser.xml"/>
     public string FindTag(string text, ref string tagName)
     {
       string retValue;
@@ -116,7 +116,7 @@ namespace LJCNetCommon
     }
 
     // Removes a section from a text value.
-    /// <include path='members/RemoveSection/*' file='Doc/LJCParser.xml'/>
+    /// <include path="members/RemoveSection/*" file="Doc/LJCParser.xml"/>
     public string RemoveSection(string text, int beginIndex, int endIndex)
     {
       string retValue = text;
@@ -134,7 +134,7 @@ namespace LJCNetCommon
     }
 
     // Removes tags from a text value.
-    /// <include path='members/RemoveTags/*' file='Doc/LJCParser.xml'/>
+    /// <include path="members/RemoveTags/*" file="Doc/LJCParser.xml"/>
     public string RemoveTags(string text)
     {
       string retValue = text;
@@ -151,7 +151,7 @@ namespace LJCNetCommon
     }
 
     // Gets the string including the supplied delimiters.
-    /// <include path='members/StringWithDelimiters/*' file='Doc/LJCParser.xml'/>
+    /// <include path="members/StringWithDelimiters/*" file="Doc/LJCParser.xml"/>
     public string StringWithDelimiters(string text, string beginDelimiter = null
       , string endDelimiter = null)
     {
