@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // LJCNetString.cs
+using System.Buffers.Text;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Metrics;
 using System.Text;
 
 namespace LJCNetCommon
@@ -387,6 +389,67 @@ namespace LJCNetCommon
           }
         }
         retValue = builder.ToString();
+      }
+      return retValue;
+    }
+
+    // Creates a US Census soundex value.
+    /// <include path="members/Soundex/*" file="Doc/LJCNetString.xml"/>
+    public static string? Soundex(string text)
+    {
+      string retValue = null;
+
+      if (HasValue(text))
+      {
+        var tb = new LJCTextBuilder();
+        var upperText = text.ToUpper().Trim();
+        foreach (char letter in upperText)
+        {
+          // Keep the first letter.
+          if (0 == tb.ToString().Length)
+          {
+            tb.AddText(letter.ToString());
+          }
+          else
+          {
+            if (!"AEIOUHWY".Contains(letter))
+            {
+              if ("BFPV".Contains(letter))
+              {
+                tb.AddText("1");
+              }
+              if ("CGJKQSXZ".Contains(letter))
+              {
+                tb.AddText("2");
+              }
+              if ("DT".Contains(letter))
+              {
+                tb.AddText("3");
+              }
+              if ("L".Contains(letter))
+              {
+                tb.AddText("4");
+              }
+              if ("MN".Contains(letter))
+              {
+                tb.AddText("5");
+              }
+              if ("R".Contains(letter))
+              {
+                tb.AddText("6");
+              }
+            }
+          }
+        }
+        retValue = Truncate(tb.ToString(), 4);
+        if (HasValue(retValue)
+          && retValue.Length < 4)
+        {
+          var addLength = 4 - retValue.Length;
+          var addList = Enumerable.Repeat("0", addLength);
+          var addValue = string.Concat(addList);
+          retValue = $"{retValue}{addValue}";
+        }
       }
       return retValue;
     }
