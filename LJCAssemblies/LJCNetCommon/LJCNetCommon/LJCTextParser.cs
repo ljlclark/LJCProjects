@@ -34,7 +34,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Public Methods
+    #region Delimited String Methods
 
     // Retrieves a delimited string.
     /// <include path="members/DelimitedString/*" file="Doc/LJCTextParser.xml"/>
@@ -96,6 +96,30 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+
+    // Retrieves a string including the supplied delimiters.
+    /// <include path="members/StringWithDelimiters/*" file="Doc/LJCTextParser.xml"/>
+    public string? StringWithDelimiters(string text, string? beginDelimiter = null
+      , string? endDelimiter = null)
+    {
+      string? retValue = null;
+
+      if (DelimitedString(text, beginDelimiter, endDelimiter) != null)
+      {
+        // Include Delimiters
+        int beginLength = DelimiterLength(beginDelimiter);
+        int endLength = DelimiterLength(endDelimiter);
+        int textLength = EndIndex - BeginIndex + 1;
+        textLength += beginLength + endLength;
+        var beginIndex = BeginIndex - beginLength;
+        //retValue = text.Substring(BeginIndex - 1, textLength);
+        retValue = text.Substring(beginIndex, textLength);
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Find Tag Methods
 
     // Finds the first tag in a text value.
     /// <include path="members/FindTag/*" file="Doc/LJCTextParser.xml"/>
@@ -182,27 +206,6 @@ namespace LJCNetCommon
           retValue = RemoveSection(retValue, BeginIndex - 1, EndIndex + 1);
         }
       } while (tag != null);
-      return retValue;
-    }
-
-    // Retrieves a string including the supplied delimiters.
-    /// <include path="members/StringWithDelimiters/*" file="Doc/LJCTextParser.xml"/>
-    public string? StringWithDelimiters(string text, string? beginDelimiter = null
-      , string? endDelimiter = null)
-    {
-      string? retValue = null;
-
-      if (DelimitedString(text, beginDelimiter, endDelimiter) != null)
-      {
-        // Include Delimiters
-        int beginLength = DelimiterLength(beginDelimiter);
-        int endLength = DelimiterLength(endDelimiter);
-        int textLength = EndIndex - BeginIndex + 1;
-        textLength += beginLength + endLength;
-        var beginIndex = BeginIndex - beginLength;
-        //retValue = text.Substring(BeginIndex - 1, textLength);
-        retValue = text.Substring(beginIndex, textLength);
-      }
       return retValue;
     }
     #endregion

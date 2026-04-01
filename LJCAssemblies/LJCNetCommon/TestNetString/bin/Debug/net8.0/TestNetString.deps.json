@@ -6,12 +6,12 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "LJCNetCommon/1.0.0": {
+      "TestNetString/1.0.0": {
         "dependencies": {
-          "System.Configuration.ConfigurationManager": "10.0.5"
+          "LJCNetCommon": "1.0.0"
         },
         "runtime": {
-          "LJCNetCommon.dll": {}
+          "TestNetString.dll": {}
         }
       },
       "System.Configuration.ConfigurationManager/10.0.5": {
@@ -55,11 +55,22 @@
             "fileVersion": "10.0.526.15411"
           }
         }
+      },
+      "LJCNetCommon/1.0.0": {
+        "dependencies": {
+          "System.Configuration.ConfigurationManager": "10.0.5"
+        },
+        "runtime": {
+          "LJCNetCommon.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
   "libraries": {
-    "LJCNetCommon/1.0.0": {
+    "TestNetString/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -84,6 +95,11 @@
       "sha512": "sha512-kxR4O/8o32eNN3m4qbLe3UifYqeyEpallCyVAsLvL5ZFJVyT3JCb+9du/WHfC09VyJh1Q+p/Gd4+AwM7Rz4acg==",
       "path": "system.security.cryptography.protecteddata/10.0.5",
       "hashPath": "system.security.cryptography.protecteddata.10.0.5.nupkg.sha512"
+    },
+    "LJCNetCommon/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

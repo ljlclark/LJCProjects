@@ -1,10 +1,10 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCTextState.cs
 
 namespace LJCNetCommon
 {
-  /// <summary>Represents the text state.</summary>
+  // Represents the text state.
   /// <include path="members/LJCTextState/*" file="Doc/LJCTextState.xml"/>
   public class LJCTextState
   {

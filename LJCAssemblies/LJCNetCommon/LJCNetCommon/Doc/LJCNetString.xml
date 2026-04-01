@@ -15,7 +15,7 @@
       </para>
     </remarks>
   </LJCNetString>
-  
+
   <!-- Checking String Values -->
   <IsDigits>
     <summary>
@@ -33,6 +33,24 @@
   </IsEqual>
 
   <!-- Formatting a String -->
+  <AddDelimitedValue>
+    <summary>
+      Adds a value to a comma delimited string.
+    </summary>
+    <param name="target">The target text.</param>
+    <param name="value">The delimiter value.</param>
+  </AddDelimitedValue>
+  <DelimitValues>
+    <summary>
+      Adds delimiters to one or more values.
+    </summary>
+    <param name="values">The source string.</param>
+    <param name="beginDelimiter">The word begin delimiter.</param>
+    <param name="endDelimiter">The word end delimiter.</param>
+    <returns>
+      The string with delimited words.
+    </returns>
+  </DelimitValues>
   <ExceptionString>
     <summary>
       Creates an exception string with outer and inner exception.
@@ -124,7 +142,7 @@
   </Truncate>
 
   <!-- Soundex Functions -->
-   <CreateLSoundex>
+  <CreateLSoundex>
     <summary>
       Creates a letter based soundex value.
     </summary>
@@ -169,17 +187,17 @@
         // Creates a US Census soundex value.
         private static void Soundex()
         {
-          var text = "Clark";
-          var result = LJCNetString.Soundex(text);
-          // result = "C462"
+        var text = "Clark";
+        var result = LJCNetString.Soundex(text);
+        // result = "C462"
 
-          text = "Klum";
-          result = LJCNetString.Soundex(text);
-          // result = "K450"
+        text = "Klum";
+        result = LJCNetString.Soundex(text);
+        // result = "K450"
 
-          text = "Rodriguez";
-          result = LJCNetString.Soundex(text);
-          // result = "R362";
+        text = "Rodriguez";
+        result = LJCNetString.Soundex(text);
+        // result = "R362";
         }
       </code>
     </example>
@@ -222,7 +240,7 @@
       </para>
     </remarks>
   </Phonetic>
-  
+
   <!-- Other Methods -->
   <AddObjectArgError>
     <summary>
@@ -240,7 +258,7 @@
     <param name="message">The error message.</param>
     <!--exception cref="ArgumentException"></exception-->
   </ThrowArgError>
-  
+
   <!-- Constants -->
   <CompareEqual>
     <summary>

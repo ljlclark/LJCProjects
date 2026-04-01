@@ -113,7 +113,9 @@
     </summary>
         </member>
         <member name="T:LJCDataAccessConfig.LJCDataConfig">
-            <!-- No matching elements were found for the following include tag --><include path="members/LJCDataConfig/*" file="Doc/LJCDataConfig.xml" />
+            <summary>
+      Represents a data location configuration.
+    </summary>
         </member>
         <member name="M:LJCDataAccessConfig.LJCDataConfig.ProviderName(System.String)">
             <summary>

@@ -1,8 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCDataConfig.xml -->
 <members>
+  <!-- Class -->
+  <LJCDataConfig>
+    <summary>
+      Represents a data location configuration.
+    </summary>
+  </LJCDataConfig>
+  
   <!-- Static Methods -->
   <ProviderName>
     <summary>
@@ -37,13 +44,6 @@
     </summary>
     <returns>The identifier value.</returns>
   </ToString>
-  <CompareTo>
-    <summary>
-      Provides the default Sort functionality.
-    </summary>
-    <param name="other">The compared to object.</param>
-    <returns>An integer value indicating the order relationship.</returns>
-  </CompareTo>
   
   <!-- Public Methods -->
   <ConnectionString>

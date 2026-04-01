@@ -52,7 +52,7 @@ namespace LJCNetCommon
 
       if (typeof(IList) == argument.GetType())
       {
-        if (NetCommon.HasItems((IList)argument))
+        if (HasItems((IList)argument))
         {
           var message = $"Missing argument {nameof(argument)}.";
           throw new ArgumentNullException(message);
@@ -331,15 +331,15 @@ namespace LJCNetCommon
     public static string Base64BytesToText(byte[] bytes)
     {
       byte[] byteArray = NetCommon.Base64BytesToTextBytes(bytes);
-      return NetCommon.BytesToText(byteArray);
+      return BytesToText(byteArray);
     }
 
     // Encodes a Text value to a Base64 byte array.
     /// <include path="members/TextToBase64Bytes/*" file="Doc/NetCommon.xml"/>
     public static byte[] TextToBase64Bytes(string text)
     {
-      string base64 = NetCommon.TextToBase64(text);
-      byte[] retValue = NetCommon.TextToBytes(base64);
+      string base64 = TextToBase64(text);
+      byte[] retValue = TextToBytes(base64);
       return retValue;
     }
 
@@ -500,7 +500,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // **
+    // XML Entities
     // Decodes an encoded XML string.
     /// <include path="members/XmlDecode/*" file="Doc/NetCommon.xml"/>
     public static string XmlDecode(string text)
@@ -739,7 +739,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    /// <summary>Accept or Select the DataConfig.</summary>
+    // Accept or Select the DataConfig.
+    /// <include path="members/ConsoleConfig/*" file="Doc/NetCommon.xml"/>
     public static void ConsoleConfig(string dataConfigName)
     {
       Console.Write($"Continue with DataConfig - {dataConfigName}? (Y/N) ");
@@ -803,7 +804,8 @@ namespace LJCNetCommon
       DateTime? retValue = null;
 
       var type = value.GetType();
-      if (typeof(DateTime) == type)
+      //if (typeof(DateTime) == type)
+      if (typeof(string) == type)
       {
         retValue = Convert.ToDateTime(value);
       }
@@ -984,55 +986,67 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    /// <summary>Gets an int from a text string.</summary>
-    public static int ToInt32(string text)
-    {
-      _ = int.TryParse(text, out int value);
-      return value;
-    }
-
-    /// <summary>Gets a short from a text string.</summary>
+    // Gets a short from a text string.
+    /// <include path="members/ToInt16/*" file="Doc/NetCommon.xml"/>
     public static short ToInt16(string text)
     {
       _ = short.TryParse(text, out short value);
       return value;
     }
 
+    // Gets an int from a text string.
+    /// <include path="members/ToInt32/*" file="Doc/NetCommon.xml"/>
+    public static int ToInt32(string text)
+    {
+      _ = int.TryParse(text, out int value);
+      return value;
+    }
     #endregion
 
     #region DataType Names
 
-    /// <summary>The Boolean type name.</summary>
+    // The Boolean type name.
+    /// <include path="members/TypeBoolean/*" file="Doc/NetCommon.xml"/>
     public const string TypeBoolean = "Boolean";
 
-    /// <summary>The Byte type name.</summary>
+    // The Byte type name.
+    /// <include path="members/TypeByte/*" file="Doc/NetCommon.xml"/>
     public const string TypeByte = "Byte";
 
-    /// <summary>The Char type name.</summary>
+    // The Char type name.
+    /// <include path="members/TypeChar/*" file="Doc/NetCommon.xml"/>
     public const string TypeChar = "Char";
 
-    /// <summary>The DateTime type name.</summary>
+    // The DateTime type name.
+    /// <include path="members/TypeDateTime/*" file="Doc/NetCommon.xml"/>
     public const string TypeDateTime = "DateTime";
 
-    /// <summary>Type Decimal type name.</summary>
+    // Type Decimal type name.
+    /// <include path="members/TypeDecimal/*" file="Doc/NetCommon.xml"/>
     public const string TypeDecimal = "Decimal";
 
-    /// <summary>The Double type name.</summary>
+    // The Double type name.
+    /// <include path="members/TypeDouble/*" file="Doc/NetCommon.xml"/>
     public const string TypeDouble = "Double";
 
-    /// <summary>The Int16 type name.</summary>
+    // The Int16 type name.
+    /// <include path="members/TypeInt16/*" file="Doc/NetCommon.xml"/>
     public const string TypeInt16 = "Int16";
 
-    /// <summary>The Int32 type name.</summary>
+    // The Int32 type name.
+    /// <include path="members/TypeInt32/*" file="Doc/NetCommon.xml"/>
     public const string TypeInt32 = "Int32";
 
-    /// <summary>The Int64 type name.</summary>
+    // The Int64 type name.
+    /// <include path="members/TypeInt64/*" file="Doc/NetCommon.xml"/>
     public const string TypeInt64 = "Int64";
 
-    /// <summary>The Single type name.</summary>
+    // The Single type name.
+    /// <include path="members/TypeSingle/*" file="Doc/NetCommon.xml"/>
     public const string TypeSingle = "Single";
 
-    /// <summary>The String type name.</summary>
+    // The String type name.
+    /// <include path="members/TypeString/*" file="Doc/NetCommon.xml"/>
     public const string TypeString = "String";
     #endregion
   }

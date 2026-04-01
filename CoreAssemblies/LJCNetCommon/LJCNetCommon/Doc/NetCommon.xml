@@ -16,7 +16,7 @@
     </remarks>
   </NetCommon>
   
-  <!-- Other Functions -->
+  <!-- Check Values Functions -->
   <CheckArgument>
     <summary>
       Check for missing argument of type: string with no value, null,
@@ -160,7 +160,7 @@
   <!-- Text Transform Functions -->
   <Base64BytesToText>
     <summary>
-      Decodes a Base64 byte array to a Text value. (E)
+      Decodes a Base64 byte array to a Text value.
     </summary>
     <param name="bytes">The Base64 byte array.</param>
     <returns>The Text value.</returns>
@@ -182,7 +182,7 @@
   </Base64BytesToText>
   <TextToBase64Bytes>
     <summary>
-      Encodes a Text value to a Base64 byte array. (E)
+      Encodes a Text value to a Base64 byte array.
     </summary>
     <param name="text">The Text value.</param>
     <returns>Tye Base64 byte array.</returns>
@@ -205,7 +205,7 @@
 
   <Base64BytesToTextBytes>
     <summary>
-      Decodes a Base64 byte array to a Text byte array. (E)
+      Decodes a Base64 byte array to a Text byte array.
     </summary>
     <param name="bytes">The base64 byte array.</param>
     <returns>The Text byte array.</returns>
@@ -230,7 +230,7 @@
   </Base64BytesToTextBytes>
   <TextBytesToBase64Bytes>
     <summary>
-      Encodes a byte array to a Base64 byte array. (E)
+      Encodes a byte array to a Base64 byte array.
     </summary>
     <param name="bytes">The byte array.</param>
     <returns>The Base64 byte array.</returns>
@@ -256,7 +256,7 @@
   
   <Base64ToText>
     <summary>
-      Decodes a Base64 value to a Text value. (E)
+      Decodes a Base64 value to a Text value.
     </summary>
     <param name="base64Text">The Base64 string.</param>
     <returns>The Text value.</returns>
@@ -278,7 +278,7 @@
   </Base64ToText>
   <TextToBase64>
     <summary>
-      Encodes a Text value to a Base64 value. (E)
+      Encodes a Text value to a Base64 value.
     </summary>
     <param name="text">The Text value.</param>
     <returns>The Base64 string.</returns>
@@ -303,7 +303,7 @@
   
   <Base64ToTextBytes>
     <summary>
-      Decodes a Base64 value to a Text byte array. (E)
+      Decodes a Base64 value to a Text byte array.
     </summary>
     <param name="base64">The Base64 value.</param>
     <returns>The Text byte array.</returns>
@@ -328,7 +328,7 @@
   </Base64ToTextBytes>
   <TextBytesToBase64>
     <summary>
-      Encodes a Text byte array to a Base64 value. (E)
+      Encodes a Text byte array to a Base64 value.
     </summary>
     <param name="bytes">The Text byte array.</param>
     <returns>The Base64 string.</returns>
@@ -354,7 +354,7 @@
   
   <BytesToText>
     <summary>
-      Creates text from a byte array. (E)
+      Creates text from a byte array.
     </summary>
     <param name="bytes">The byte array.</param>
     <returns>The Text value.</returns>
@@ -376,7 +376,7 @@
   </BytesToText>
   <TextToBytes>
     <summary>
-      Creates a byte array from text. (E)
+      Creates a byte array from text.
     </summary>
     <param name="text">The Text value.</param>
     <returns>The new byte array.</returns>
@@ -402,7 +402,7 @@
   
   <MemStreamToBytes>
     <summary>
-      Copies a memory stream to a byte array. (E)
+      Copies a memory stream to a byte array.
     </summary>
     <param name="stream">The stream object.</param>
     <returns>The byte array.</returns>
@@ -430,7 +430,7 @@
   </MemStreamToBytes>
   <BytesToMemStream>
     <summary>
-      Copies a byte array to a memory stream. (E)
+      Copies a byte array to a memory stream.
     </summary>
     <param name="bytes">The byte array.</param>
     <returns>The reference to the memory stream.</returns>
@@ -458,7 +458,7 @@
   
   <MemStreamToString>
     <summary>
-      Creates a string from a memory stream. (E)
+      Creates a string from a memory stream.
     </summary>
     <param name="stream">The stream object.</param>
     <returns>The string value.</returns>
@@ -482,7 +482,7 @@
   </MemStreamToString>
   <StringToMemStream>
     <summary>
-      Creates a memory stream from a string. (E)
+      Creates a memory stream from a string.
     </summary>
     <param name="text">The Text value.</param>
     <returns>The reference to the memory stream.</returns>
@@ -506,7 +506,7 @@
   
   <XmlDecode>
     <summary>
-      Decodes an encoded XML string. (E)
+      Decodes an encoded XML string.
     </summary>
     <param name="text">The encoded text.</param>
     <returns>The decoded text.</returns>
@@ -529,7 +529,7 @@
   </XmlDecode>
   <XmlEncode>
     <summary>
-      Encodes a string with XML escape values. (E)
+      Encodes a string with XML escape values.
     </summary>
     <param name="text">The text to be encoded.</param>
     <returns>The encoded text.</returns>
@@ -714,7 +714,7 @@
   <!-- Configuration Methods -->
   <ConfigBool>
     <summary>
-      Retrieves the Config bool value. (RE)
+      Retrieves the Config bool value.
     </summary>
     <param name="key">The key value.</param>
     <returns>The bool config value.</returns>
@@ -750,7 +750,7 @@
   </ConfigBool>
   <ConfigColor>
     <summary>
-      Retrieves the Config Color value. (RE)
+      Retrieves the Config Color value.
     </summary>
     <param name="key">The key value.</param>
     <param name="color">The default color value.</param>
@@ -788,7 +788,7 @@
   </ConfigColor>
   <ConfigString>
     <summary>
-      Retrieves the Config string value. (RE)
+      Retrieves the Config string value.
     </summary>
     <param name="key">The key value.</param>
     <returns>The string config value.</returns>
@@ -822,6 +822,12 @@
       </code>
     </example>
   </ConfigString>
+  <ConsoleConfig>
+    <summary>
+      Accept or Select the DataConfig.
+    </summary>
+    <param name="dataConfigName">The DataConfig name.</param>
+  </ConsoleConfig>
 
   <!-- Object Data Functions -->
   <GetBoolean>
@@ -924,7 +930,7 @@
   </GetDateTime>
   <GetDecimal>
     <summary>
-      Gets a decimal value from an object. (E)
+      Gets a decimal value from an object.
     </summary>
     <param name="value">The value object.</param>
     <returns>
@@ -962,7 +968,7 @@
   </GetDouble>
   <GetInt16>
     <summary>
-      Gets a short value from an object. (E)
+      Gets a short value from an object.
     </summary>
     <param name="value">The value object.</param>
     <returns>
@@ -988,7 +994,7 @@
   </GetInt16>
   <GetInt32>
     <summary>
-      Gets an integer value from an object. (E)
+      Gets an integer value from an object.
     </summary>
     <param name="value">The value object.</param>
     <returns>
@@ -1014,7 +1020,7 @@
   </GetInt32>
   <GetInt64>
     <summary>
-      Gets a long value from an object. (E)
+      Gets a long value from an object.
     </summary>
     <param name="value">The value object.</param>
     <returns>
@@ -1079,4 +1085,73 @@
       </code>
     </example>
   </GetString>
+  <ToInt16>
+    <summary>
+      Gets a short from a text string.
+    </summary>
+    <param name="text">The text value.</param>
+  </ToInt16>
+  <ToInt32>
+    <summary>
+      Gets an int from a text string.
+    </summary>
+    <param name="text">The text value.</param>
+  </ToInt32>
+  
+  <!-- DataType Names -->
+  <TypeBoolean>
+    <summary>
+      The Boolean type name.
+    </summary>
+  </TypeBoolean>
+  <TypeByte>
+    <summary>
+      The Byte type name.
+    </summary>
+  </TypeByte>
+  <TypeChar>
+    <summary>
+      The Char type name.
+    </summary>
+  </TypeChar>
+  <TypeDateTime>
+    <summary>
+      The DateTime type name.
+    </summary>
+  </TypeDateTime>
+  <TypeDecimal>
+    <summary>
+      Type Decimal type name.
+    </summary>
+  </TypeDecimal>
+  <TypeDouble>
+    <summary>
+      The Double type name.
+    </summary>
+  </TypeDouble>
+  <TypeInt16>
+    <summary>
+      The Int16 type name.
+    </summary>
+  </TypeInt16>
+  <TypeInt32>
+    <summary>
+      The Int32 type name.
+    </summary>
+  </TypeInt32>
+  <TypeInt64>
+    <summary>
+      The Int64 type name.
+    </summary>
+  </TypeInt64>
+  <TypeSingle>
+    <summary>
+      The Single type name.
+    </summary>
+  </TypeSingle>
+  <TypeString>
+    <summary>
+      The String type name.
+    </summary>
+  </TypeString>
 </members>

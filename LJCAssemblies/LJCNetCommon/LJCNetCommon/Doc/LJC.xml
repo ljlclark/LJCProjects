@@ -16,7 +16,7 @@
     </remarks>
   </LJC>
   
-  <!-- Check Values Methods -->
+  <!-- Check Values Functions -->
   <CheckArgument>
     <summary>
       Check for missing argument of type: string with no value, null,
@@ -169,7 +169,7 @@
   <!-- Text Transform Methods -->
   <Base64BytesToText>
     <summary>
-      Decodes a Base64 byte array to a Text value. (E)
+      Decodes a Base64 byte array to a Text value.
     </summary>
     <param name="bytes">The Base64 byte array.</param>
     <returns>The Text value.</returns>
@@ -193,7 +193,7 @@
   </Base64BytesToText>
   <TextToBase64Bytes>
     <summary>
-      Encodes a Text value to a Base64 byte array. (E)
+      Encodes a Text value to a Base64 byte array.
     </summary>
     <param name="text">The Text value.</param>
     <returns>Tye Base64 byte array.</returns>
@@ -217,7 +217,7 @@
 
   <Base64BytesToTextBytes>
     <summary>
-      Decodes a Base64 byte array to a Text byte array. (E)
+      Decodes a Base64 byte array to a Text byte array.
     </summary>
     <param name="bytes">The base64 byte array.</param>
     <returns>The Text byte array.</returns>
@@ -244,7 +244,7 @@
   </Base64BytesToTextBytes>
   <TextBytesToBase64Bytes>
     <summary>
-      Encodes a byte array to a Base64 byte array. (E)
+      Encodes a byte array to a Base64 byte array.
     </summary>
     <param name="bytes">The byte array.</param>
     <returns>The Base64 byte array.</returns>
@@ -272,7 +272,7 @@
 
   <Base64ToText>
     <summary>
-      Decodes a Base64 value to a Text value. (E)
+      Decodes a Base64 value to a Text value.
     </summary>
     <param name="base64Text">The Base64 string.</param>
     <returns>The Text value.</returns>
@@ -296,7 +296,7 @@
   </Base64ToText>
   <TextToBase64>
     <summary>
-      Encodes a Text value to a Base64 value. (E)
+      Encodes a Text value to a Base64 value.
     </summary>
     <param name="text">The Text value.</param>
     <returns>The Base64 string.</returns>
@@ -322,7 +322,7 @@
 
   <Base64ToTextBytes>
     <summary>
-      Decodes a Base64 value to a Text byte array. (E)
+      Decodes a Base64 value to a Text byte array.
     </summary>
     <param name="base64">The Base64 value.</param>
     <returns>The Text byte array.</returns>
@@ -349,7 +349,7 @@
   </Base64ToTextBytes>
   <TextBytesToBase64>
     <summary>
-      Encodes a Text byte array to a Base64 value. (E)
+      Encodes a Text byte array to a Base64 value.
     </summary>
     <param name="bytes">The Text byte array.</param>
     <returns>The Base64 string.</returns>
@@ -377,7 +377,7 @@
 
   <BytesToText>
     <summary>
-      Creates text from a byte array. (E)
+      Creates text from a byte array.
     </summary>
     <param name="bytes">The byte array.</param>
     <returns>The Text value.</returns>
@@ -401,7 +401,7 @@
   </BytesToText>
   <TextToBytes>
     <summary>
-      Creates a byte array from text. (E)
+      Creates a byte array from text.
     </summary>
     <param name="text">The Text value.</param>
     <returns>The new byte array.</returns>
@@ -428,7 +428,7 @@
   
   <MemStreamToBytes>
     <summary>
-      Copies a memory stream to a byte array. (E)
+      Copies a memory stream to a byte array.
     </summary>
     <param name="stream">The stream object.</param>
     <returns>The byte array.</returns>
@@ -458,7 +458,7 @@
   </MemStreamToBytes>
   <BytesToMemStream>
     <summary>
-      Copies a byte array to a memory stream. (E)
+      Copies a byte array to a memory stream.
     </summary>
     <param name="bytes">The byte array.</param>
     <returns>The reference to the memory stream.</returns>
@@ -539,7 +539,7 @@
   <!-- XML Entities -->
   <XmlDecode>
     <summary>
-      Decodes an encoded XML string. (E)
+      Decodes an encoded XML string.
     </summary>
     <param name="text">The encoded text.</param>
     <returns>The decoded text.</returns>
@@ -564,7 +564,7 @@
   </XmlDecode>
   <XmlEncode>
     <summary>
-      Encodes a string with XML escape values. (E)
+      Encodes a string with XML escape values.
     </summary>
     <param name="text">The text to be encoded.</param>
     <returns>The encoded text.</returns>
@@ -1036,7 +1036,7 @@
   </GetDouble>
   <GetInt16>
     <summary>
-      Gets a short value from an object. (E)
+      Gets a short value from an object.
     </summary>
     <param name="value">The value object.</param>
     <returns>
@@ -1063,7 +1063,7 @@
   </GetInt16>
   <GetInt32>
     <summary>
-      Gets an integer value from an object. (E)
+      Gets an integer value from an object.
     </summary>
     <param name="value">The value object.</param>
     <returns>

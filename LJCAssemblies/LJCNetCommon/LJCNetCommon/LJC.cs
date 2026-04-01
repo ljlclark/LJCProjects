@@ -25,7 +25,7 @@ namespace LJCNetCommon
       if (argument != null
         && typeof(string) == argument.GetType())
       {
-        if (!LJC.HasValue(GetString(argument)))
+        if (!HasValue(GetString(argument)))
         {
           var message = $"Missing argument {nameof(argument)}.";
           throw new ArgumentNullException(message);
@@ -513,7 +513,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (LJC.HasValue(text))
+      if (HasValue(text))
       {
         retValue = text.Replace("&lt;", "<");
         retValue = retValue.Replace("&gt;", ">");
@@ -530,7 +530,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (LJC.HasValue(text))
+      if (HasValue(text))
       {
         retValue = text.Replace("&", "&amp;");
         retValue = retValue.Replace("<", "&lt;");
@@ -563,7 +563,7 @@ namespace LJCNetCommon
         try
         {
           XmlSerializer serializer;
-          if (LJC.HasValue(rootName))
+          if (HasValue(rootName))
           {
             var root = new XmlRootAttribute(rootName);
             serializer = new XmlSerializer(type, root);
@@ -620,14 +620,14 @@ namespace LJCNetCommon
       FileStream fileStream;
       string errorText;
 
-      if (!LJC.HasValue(fileSpec))
+      if (!HasValue(fileSpec))
       {
         errorText = "Missing file specification.";
         throw new ArgumentException(errorText);
       }
 
       string folder = Path.GetDirectoryName(fileSpec);
-      if (LJC.HasValue(folder)
+      if (HasValue(folder)
         && !Directory.Exists(folder))
       {
         Directory.CreateDirectory(folder);
@@ -635,7 +635,7 @@ namespace LJCNetCommon
 
       // Serialize to XML.
       XmlSerializer serializer;
-      if (LJC.HasValue(rootName))
+      if (HasValue(rootName))
       {
         var root = new XmlRootAttribute(rootName);
         serializer = new XmlSerializer(type, root);
@@ -697,10 +697,10 @@ namespace LJCNetCommon
     {
       bool retValue = false;
 
-      if (LJC.HasValue(key))
+      if (HasValue(key))
       {
         string configValue = ConfigurationManager.AppSettings[key];
-        if (LJC.HasValue(configValue))
+        if (HasValue(configValue))
         {
           _ = bool.TryParse(configValue, out retValue);
         }
@@ -716,10 +716,10 @@ namespace LJCNetCommon
 
       color = Color.Black;
 
-      if (LJC.HasValue(key))
+      if (HasValue(key))
       {
         string configValue = ConfigurationManager.AppSettings[key];
-        if (LJC.HasValue(configValue))
+        if (HasValue(configValue))
         {
           color = Color.FromName(configValue);
           if (color != Color.FromArgb(0, 0, 0, 0))
@@ -737,7 +737,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (LJC.HasValue(key))
+      if (HasValue(key))
       {
         retValue = ConfigurationManager.AppSettings[key];
       }
@@ -984,7 +984,7 @@ namespace LJCNetCommon
       if (value != null)
       {
         var text = value.ToString();
-        if (LJC.HasValue(text))
+        if (HasValue(text))
         {
           retValue = text.Trim();
         }
