@@ -1,6 +1,6 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ConnectionTemplate.cs
+// LJCConnectionTemplate.cs
 
 namespace LJCDataAccessConfig
 {

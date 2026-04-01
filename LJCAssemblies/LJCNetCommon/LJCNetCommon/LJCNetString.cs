@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // LJCNetString.cs
-using System.Buffers.Text;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Metrics;
 using System.Text;
 
 namespace LJCNetCommon
@@ -14,13 +11,6 @@ namespace LJCNetCommon
   {
     #region Checking String Values
 
-    // Checks if a text value exists.
-    /// <include path="members/HasValue/*" file="Doc/LJCNetString.xml"/>
-    public static bool HasValue([NotNullWhen(true)] string? text)
-    {
-      return !string.IsNullOrWhiteSpace(text);
-    }
-
     // Checks a string value for digits.
     /// <include path="members/IsDigits/*" file="Doc/LJCNetString.xml"/>
     public static bool IsDigits(string? text)
@@ -28,7 +18,7 @@ namespace LJCNetCommon
       string textTrim;
       bool retValue = true;
 
-      if (!HasValue(text))
+      if (!LJC.HasValue(text))
       {
         retValue = false;
       }
@@ -74,7 +64,7 @@ namespace LJCNetCommon
     /// <include path="members/AddDelimitedValue/*" file="Doc/LJCNetString.xml"/>
     public static void AddDelimitedValue(ref string? target, string value)
     {
-      if (HasValue(target))
+      if (LJC.HasValue(target))
       {
         target += ", ";
       }
@@ -92,14 +82,14 @@ namespace LJCNetCommon
     {
       string retName = "";
 
-      if (HasValue(values))
+      if (LJC.HasValue(values))
       {
         var names = Split(values, ",");
-        if (LJCNetCommon.HasItems(names))
+        if (LJC.HasItems(names))
         {
           foreach (var name in names)
           {
-            if (HasValue(retName))
+            if (LJC.HasValue(retName))
             {
               retName += ", ";
             }
@@ -145,7 +135,7 @@ namespace LJCNetCommon
 
         switch (dataTypeName)
         {
-          case LJCNetCommon.TypeBoolean:
+          case LJC.TypeBoolean:
             if (IsEqual(retValue?.ToLower(), "true"))
             {
               retValue = "1";
@@ -156,9 +146,9 @@ namespace LJCNetCommon
             }
             break;
 
-          case LJCNetCommon.TypeDateTime:
+          case LJC.TypeDateTime:
             DateTime dateTime = Convert.ToDateTime(value);
-            if (LJCNetCommon.IsDbMinDate(dateTime))
+            if (LJC.IsDbMinDate(dateTime))
             {
               retValue = "null";
             }
@@ -168,7 +158,7 @@ namespace LJCNetCommon
             }
             break;
 
-          case LJCNetCommon.TypeString:
+          case LJC.TypeString:
             if (retValue != null
               && retValue != "null")
             {
@@ -189,7 +179,7 @@ namespace LJCNetCommon
       bool makeUpper = false;
       string retVal = null;
 
-      if (HasValue(name))
+      if (LJC.HasValue(name))
       {
         builder = new StringBuilder(64);
         foreach (char ch in name)
@@ -239,7 +229,7 @@ namespace LJCNetCommon
     {
       string retVal = null;
 
-      if (HasValue(value))
+      if (LJC.HasValue(value))
       {
         retVal = value.Trim();
       }
@@ -252,7 +242,7 @@ namespace LJCNetCommon
     {
       string retValues = "";
 
-      if (HasValue(values))
+      if (LJC.HasValue(values))
       {
         if (!values.Contains(','))
         {
@@ -261,11 +251,11 @@ namespace LJCNetCommon
         else
         {
           string[] items = Split(values, ",");
-          if (LJCNetCommon.HasElements(items))
+          if (LJC.HasElements(items))
           {
             foreach (string item in items)
             {
-              if (HasValue(retValues))
+              if (LJC.HasValue(retValues))
               {
                 retValues += ", ";
               }
@@ -283,7 +273,7 @@ namespace LJCNetCommon
     {
       string[] retValues = null;
 
-      if (HasValue(text))
+      if (LJC.HasValue(text))
       {
         var separators = new string[] { separator };
         retValues = text.Split(separators
@@ -298,7 +288,7 @@ namespace LJCNetCommon
     {
       string[] retValues = null;
 
-      if (HasValue(text))
+      if (LJC.HasValue(text))
       {
         retValues = text.Split(separators
           , StringSplitOptions.RemoveEmptyEntries);
@@ -312,7 +302,7 @@ namespace LJCNetCommon
     {
       var retValue = text;
 
-      if (HasValue(text)
+      if (LJC.HasValue(text)
         && text.Length > length)
       {
         retValue = text[..length];
@@ -329,7 +319,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (HasValue(text))
+      if (LJC.HasValue(text))
       {
         var builder = new StringBuilder(64);
 
@@ -361,7 +351,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (HasValue(text))
+      if (LJC.HasValue(text))
       {
         var builder = new StringBuilder(64);
 
@@ -399,7 +389,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (HasValue(text))
+      if (LJC.HasValue(text))
       {
         var tb = new LJCTextBuilder();
         var upperText = text.ToUpper().Trim();
@@ -442,7 +432,7 @@ namespace LJCNetCommon
           }
         }
         retValue = Truncate(tb.ToString(), 4);
-        if (HasValue(retValue)
+        if (LJC.HasValue(retValue)
           && retValue.Length < 4)
         {
           var addLength = 4 - retValue.Length;
@@ -460,7 +450,7 @@ namespace LJCNetCommon
     {
       bool retValue = false;
 
-      if (HasValue(text)
+      if (LJC.HasValue(text)
         && index < text.Length)
       {
         text = text.ToUpper();
@@ -495,7 +485,7 @@ namespace LJCNetCommon
       letter = null;
 
       // Index is in text and a next char is available.
-      if (HasValue(text)
+      if (LJC.HasValue(text)
         && index < text.Length - 1)
       {
         text = text.ToUpper();
@@ -570,7 +560,7 @@ namespace LJCNetCommon
       {
         if (typeof(string) == argument.GetType())
         {
-          if (!HasValue(argument.ToString()))
+          if (!LJC.HasValue(argument.ToString()))
           {
             missing = true;
           }
@@ -579,11 +569,11 @@ namespace LJCNetCommon
 
       if (missing)
       {
-        if (HasValue(errorContext))
+        if (LJC.HasValue(errorContext))
         {
           message += $"{errorContext}\r\n";
         }
-        if (!HasValue(name))
+        if (!LJC.HasValue(name))
         {
           name = "argument";
         }
@@ -595,7 +585,7 @@ namespace LJCNetCommon
     /// <include path="members/ThrowArgError/*" file="Doc/LJCNetString.xml"/>
     public static void ThrowArgError(string message)
     {
-      if (HasValue(message))
+      if (LJC.HasValue(message))
       {
         message = message.Trim();
         var argMessage = $"Missing or invalid arguments:\r\n{message}";

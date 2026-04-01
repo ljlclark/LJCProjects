@@ -51,7 +51,7 @@ namespace LJCDataAccessConfig
     /// <include path="members/Constructor/*" file="Doc/LJCDataConfig.xml"/>
     public LJCDataConfig(string? connectionType = null)
     {
-      if (LJCNetString.HasValue(connectionType))
+      if (LJC.HasValue(connectionType))
       {
         ConnectionType = connectionType;
       }
@@ -92,7 +92,7 @@ namespace LJCDataAccessConfig
       string? replacementValue;
       string? retValue = null;
 
-      if (LJCNetString.HasValue(templateText))
+      if (LJC.HasValue(templateText))
       {
         string[] items = templateText.Split([';']
           , StringSplitOptions.RemoveEmptyEntries);
@@ -152,28 +152,28 @@ namespace LJCDataAccessConfig
       switch (marker.ToLower())
       {
         case "dbserver":
-          if (LJCNetString.HasValue(DbServer))
+          if (LJC.HasValue(DbServer))
           {
             retValue = DbServer;
           }
           break;
 
         case "database":
-          if (LJCNetString.HasValue(Database))
+          if (LJC.HasValue(Database))
           {
             retValue = Database;
           }
           break;
 
         case "uid":
-          if (LJCNetString.HasValue(UserID))
+          if (LJC.HasValue(UserID))
           {
             retValue = UserID;
           }
           break;
 
         case "pswd":
-          if (LJCNetString.HasValue(Pswd))
+          if (LJC.HasValue(Pswd))
           {
             retValue = Pswd;
           }

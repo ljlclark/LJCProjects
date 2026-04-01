@@ -56,7 +56,7 @@ namespace LJCGenDoc2
 
       if (null == args
         || args.Length < 1
-        || !LJCNetString.HasValue(args[0]))
+        || !LJC.HasValue(args[0]))
       {
         retShowSyntax = true;
       }

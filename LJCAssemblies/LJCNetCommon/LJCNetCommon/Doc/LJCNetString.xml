@@ -17,15 +17,6 @@
   </LJCNetString>
   
   <!-- Checking String Values -->
-  <HasValue>
-    <summary>
-      Checks if a text value exists.
-    </summary>
-    <param name="text">The text value.</param>
-    <returns>
-      true if the text has a value; otherwise false.
-    </returns>
-  </HasValue>
   <IsDigits>
     <summary>
       Checks a string value for digits.

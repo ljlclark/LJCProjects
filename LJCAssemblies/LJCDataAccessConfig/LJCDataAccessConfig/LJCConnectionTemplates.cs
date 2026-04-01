@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // LJCConnectionTemplates.cs
 using LJCNetCommon;
-using NetCommon = LJCNetCommon.LJCNetCommon;
 using System.Reflection;
 
 namespace LJCDataAccessConfig
@@ -19,7 +18,7 @@ namespace LJCDataAccessConfig
     {
       mTemplateFileName = "ConnectionTemplates.xml";
       string? localAssembly = Assembly.GetExecutingAssembly().Location;
-      if (LJCNetString.HasValue(localAssembly))
+      if (LJC.HasValue(localAssembly))
       {
 #pragma warning disable CS8604 // Possible null reference argument.
         TemplateFileSpec = Path.Combine(Path.GetDirectoryName(localAssembly)
@@ -37,7 +36,7 @@ namespace LJCDataAccessConfig
         WriteDefaultData();
       }
 
-      if (NetCommon.XmlDeserialize(typeof(LJCConnectionTemplates)
+      if (LJC.XmlDeserialize(typeof(LJCConnectionTemplates)
         , TemplateFileSpec) is LJCConnectionTemplates connectionTemplates)
       {
         Clear();
@@ -70,7 +69,7 @@ namespace LJCDataAccessConfig
     {
       LJCConnectionTemplate? retValue = null;
 
-      if (LJCNetString.HasValue(name))
+      if (LJC.HasValue(name))
       {
         if (Count != mPrevCount)
         {
@@ -100,7 +99,7 @@ namespace LJCDataAccessConfig
     /// <include path="members/Save/*" file="Doc/LJCConnectionTemplates.xml"/>
     public void Save()
     {
-      NetCommon.XmlSerialize(GetType(), this, null, TemplateFileSpec);
+      LJC.XmlSerialize(GetType(), this, null, TemplateFileSpec);
     }
     #endregion
 
@@ -141,7 +140,7 @@ namespace LJCDataAccessConfig
       tb.AddLine("  </ConnectionTemplate>");
       tb.AddLine("</ConnectionTemplates>");
       var templates = tb.ToString().Split('\n');
-      if (LJCNetString.HasValue(TemplateFileSpec))
+      if (LJC.HasValue(TemplateFileSpec))
       {
         File.WriteAllLines(TemplateFileSpec, templates);
       }

@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // LJCDataConfigs.cs
 using LJCNetCommon;
-using NetCommon = LJCNetCommon.LJCNetCommon;
 using System.Reflection;
 
 namespace LJCDataAccessConfig
@@ -19,7 +18,7 @@ namespace LJCDataAccessConfig
     {
       LJCDataConfig retConfig = null;
 
-      if (LJCNetString.HasValue(configName))
+      if (LJC.HasValue(configName))
       {
         var dataConfigs = new LJCDataConfigs();
         dataConfigs.LoadData();
@@ -52,7 +51,7 @@ namespace LJCDataAccessConfig
         WriteDefaultData();
       }
 
-      if (NetCommon.XmlDeserialize(typeof(LJCDataConfigs)
+      if (LJC.XmlDeserialize(typeof(LJCDataConfigs)
         , ConfigFileSpec) is LJCDataConfigs dataConfigs)
       {
         Clear();
@@ -115,7 +114,7 @@ namespace LJCDataAccessConfig
     /// <include path="members/Save/*" file="Doc/LJCDataConfigs.xml"/>
     public void Save()
     {
-      NetCommon.XmlSerialize(this.GetType(), this, null, ConfigFileSpec);
+      LJC.XmlSerialize(this.GetType(), this, null, ConfigFileSpec);
     }
     #endregion
 
@@ -138,7 +137,7 @@ namespace LJCDataAccessConfig
       tb.AddLine("  </DataConfig>");
       tb.AddLine("</DataConfigs>");
       var dataConfigs = tb.ToString().Split('\n');
-      if (LJCNetString.HasValue(ConfigFileSpec))
+      if (LJC.HasValue(ConfigFileSpec))
       {
         File.WriteAllLines(ConfigFileSpec, dataConfigs);
       }

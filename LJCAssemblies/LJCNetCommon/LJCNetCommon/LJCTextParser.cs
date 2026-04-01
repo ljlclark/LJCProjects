@@ -14,7 +14,7 @@ namespace LJCNetCommon
     private static int DelimiterLength(string? delimiter)
     {
       int retLength = 0;
-      if (LJCNetString.HasValue(delimiter))
+      if (LJC.HasValue(delimiter))
       {
         retLength = delimiter.Length;
       }
@@ -48,7 +48,7 @@ namespace LJCNetCommon
 
       // ToDo: What to do if text does not contain beginDelimiter.
       if (StartIndex > -1
-        && LJCNetString.HasValue(text)
+        && LJC.HasValue(text)
         && StartIndex < text.Length - 1
         && (null == beginDelimiter
         || text.Contains(beginDelimiter)))
@@ -104,7 +104,7 @@ namespace LJCNetCommon
       string? retTag = null;
 
       var beginDelimiter = "<";
-      if (LJCNetString.HasValue(tagName)
+      if (LJC.HasValue(tagName)
         && tagName.Contains('/'))
       {
         beginDelimiter += "/";
@@ -114,7 +114,7 @@ namespace LJCNetCommon
       var foundTagName = DelimitedString(text, beginDelimiter, endDelimiter);
 
       // Eliminate attributes, if not end tag.
-      if (LJCNetString.HasValue(foundTagName)
+      if (LJC.HasValue(foundTagName)
         && !foundTagName.Contains('/'))
       {
         StartIndex = 0;
@@ -127,13 +127,13 @@ namespace LJCNetCommon
         }
       }
 
-      if (LJCNetString.HasValue(tagName)
+      if (LJC.HasValue(tagName)
         && tagName.Contains('/'))
       {
         foundTagName = $"/{foundTagName}";
       }
       tagName = foundTagName;
-      if (LJCNetString.HasValue(foundTagName))
+      if (LJC.HasValue(foundTagName))
       {
         retTag = $"<{foundTagName}>";
       }

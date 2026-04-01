@@ -17,13 +17,13 @@ namespace LJCDocDataDAL
     {
       LJCDocDataParam? retParam = null;
 
-      if (LJCNetString.HasValue(line))
+      if (LJC.HasValue(line))
       {
         var parser = new LJCTextParser();
         var name = parser.DelimitedString(line, "name=\"", "\">");
         parser.StartIndex = 0;
         string? summary = parser.DelimitedString(line, ">", "</");
-        if (LJCNetString.HasValue(name))
+        if (LJC.HasValue(name))
         {
           retParam = new LJCDocDataParam(name, summary);
         }
