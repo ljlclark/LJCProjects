@@ -1,0 +1,1683 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCNetCommon5</name>
+    </assembly>
+    <members>
+        <member name="T:LJCNetCommon5.LJC5">
+            <summary>
+      Contains common static methods.
+    </summary><remarks>
+      <para>
+        The LJCNetCommon class contains static methods for all .NET program
+        types.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.CheckArgument``1(``0)">
+            <summary>
+      Check for missing argument of type: string with no value, null,
+      integer = 0, IList with no items, decimal = 0 or DataTable with no rows.
+    </summary><typeparam name="T">The argument type.</typeparam><param name="argument">The argument value.</param><exception cref="T:System.ArgumentNullException">Argument Null Exception</exception><exception cref="T:System.ArgumentException">Argument Exception</exception>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.CompareNull(System.Object,System.Object)">
+            <summary>
+      Compare null values.
+    </summary><param name="x">The compare object.</param><param name="y">The compare to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      -2    - Neither object is null.&lt;br /&gt;
+      -1    - Null object x precedes object y.&lt;br /&gt;
+      0     - Object x and object y are both null.&lt;br /&gt;
+      1     - Object x follows null object y.
+    </remarks><example>
+      <code>
+        using System;
+        using LJCNetCommon;
+        
+        /// &lt;summary&gt;Sort and search on Name value.&lt;/summary&gt;
+        public class NameComparer : IComparer&lt;ClassName&gt;
+        {
+          // Compares two objects.
+          /// &lt;include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/&gt;
+          public int Compare(ClassName x, ClassName y)
+          {
+            int retValue;
+
+            retValue = NetCommon.CompareNull(x, y);
+            if (-2 == retValue)
+            {
+              retValue = NetCommon.CompareNull(x.Name, y.Name);
+              if (-2 == retValue)
+              {
+                // Case sensitive.
+                //retValue = x.Name.CompareTo(y.Name);
+
+                // Not case sensitive.
+                retValue = string.Compare(x.Name, y.Name, true);
+              }
+            }
+            return retValue;
+          }
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.HasColumns(System.Data.DataColumnCollection)">
+            <summary>
+      Checks a DataColumns collection for items.
+    </summary><param name="dataColumns">The DataColumns collection.</param><returns>true if the collection has items; otherwise, false.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.HasColumns(System.Data.DataTable)">
+            <summary>
+      Checks a data table for columns definitions.
+    </summary><param name="dataTable">The data table object.</param><returns>true if the data table contains Columns; otherwise, false.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.HasData(System.Data.DataTable)">
+            <summary>
+      Checks a data table for rows.
+    </summary><param name="dataTable">The data table object.</param><returns>true if a data table and it contains rows; otherwise, false.</returns><remarks>
+      This allows a single if statement where the DataTable value may be null.
+    </remarks><example>
+      <code>
+        using System.Data;
+        using LJCNetCommon;
+        
+        private static void HasData()
+        {
+          DataTable dataTable = new DataTable();
+          
+          // Returns false.
+          bool result = NetCommon.HasData(dataTable);
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.HasElements(System.Object)">
+            <summary>
+      Checks an array for elements.
+    </summary><param name="array">The array object.</param><returns>true if an array and it has elements.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.HasItems(System.Collections.IList)">
+            <summary>
+      Checks an IList collection for items.
+    </summary><param name="list">The IList interface.</param><returns>true if the collection contains items; otherwise; false.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.HasTables(System.Data.DataSet)">
+            <summary>
+      Checks a DataSet for tables.
+    </summary><param name="dataSet">The DataSet object.</param><returns>true if the DataSet has tables; otherwise, false.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.HasValue(System.String)">
+            <summary>
+      Checks if a text value exists.
+    </summary><param name="text">The text value.</param><returns>
+      true if the text has a value; otherwise false.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.IsEqual(System.Object,System.Object)">
+            <summary>
+      Checks if two values are equal.
+    </summary><param name="oldValue"> The previous value.</param><param name="newValue"> The new value.</param><returns>true if equal; otherwise, false.</returns><remarks>
+      Performs a strongly-typed value check of two objects where those
+      objects are built-in system types.
+    </remarks>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.IsDbMinDate(System.Nullable{System.DateTime})">
+            <summary>
+      Checks for DB Minimum date or less.
+    </summary><param name="dateTime">
+      The &lt;span class="userType"&gt;DateTime&lt;/span&gt;
+      value.
+    </param><returns>true if minimum; otherwise, false.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.Base64BytesToText(System.Byte[])">
+            <summary>
+      Decodes a Base64 byte array to a Text value.
+    </summary><param name="bytes">The Base64 byte array.</param><returns>The Text value.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Decodes a Base64 byte array to a Text value.
+        private static void Base64BytesToText()
+        {
+          // Setup
+          // Encodes a Text value to a Base64 byte array.
+          byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
+
+          // Decodes a Base64 byte array to a Text value.
+          string text = NetCommon.Base64BytesToText(base64Bytes);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.TextToBase64Bytes(System.String)">
+            <summary>
+      Encodes a Text value to a Base64 byte array.
+    </summary><param name="text">The Text value.</param><returns>Tye Base64 byte array.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Encodes a Text value to a Base64 byte array.
+        private static void TextToBase64Bytes()
+        {
+          // Create Text from Base64 byte array.
+          byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
+
+          // Check the text.
+          string text = NetCommon.Base64BytesToText(base64Bytes);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.Base64BytesToTextBytes(System.Byte[])">
+            <summary>
+      Decodes a Base64 byte array to a Text byte array.
+    </summary><param name="bytes">The base64 byte array.</param><returns>The Text byte array.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Decodes a Base64 byte array to a Text byte array.
+        private static void Base64BytesToTextBytes()
+        {
+          // Setup
+          // Encodes a Text value to a Base64 byte array.
+          byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
+
+          // Decodes a Base64 byte array to a Text byte array.
+          byte[] textBytes = NetCommon.Base64BytesToTextBytes(base64Bytes);
+
+          // Check the text.
+          string text = NetCommon.BytesToText(textBytes);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.TextBytesToBase64Bytes(System.Byte[])">
+            <summary>
+      Encodes a byte array to a Base64 byte array.
+    </summary><param name="bytes">The byte array.</param><returns>The Base64 byte array.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Encodes a Text byte array to a Base64 byte array.
+        private static void TextBytesToBase64Bytes()
+        {
+          // Setup
+          // Creates a byte array from text.
+          byte[] textBytes = NetCommon.TextToBytes("Text");
+
+          // Encodes a byte array to a Base64 byte array.
+          byte[] base64Bytes = NetCommon.TextBytesToBase64Bytes(textBytes);
+
+          // Check the text.
+          string text = NetCommon.Base64BytesToText(base64Bytes);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.Base64ToText(System.String)">
+            <summary>
+      Decodes a Base64 value to a Text value.
+    </summary><param name="base64Text">The Base64 string.</param><returns>The Text value.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Decodes a Base64 value to a Text value.
+        private static void Base64ToText()
+        {
+          // Setup
+          // Encodes a Text value to a Base64 value.
+          string base64 = NetCommon.TextToBase64("Text");
+
+          // Decodes a Base64 string to Text.
+          string text = NetCommon.Base64ToText(base64);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.TextToBase64(System.String)">
+            <summary>
+      Encodes a Text value to a Base64 value.
+    </summary><param name="text">The Text value.</param><returns>The Base64 string.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Encodes a Text value to a Base64 value.
+        private static void TextToBase64()
+        {
+          string text = "Text";
+
+          // Encodes text to a Base64 string.
+          string base64 = NetCommon.TextToBase64(text);
+
+          // Check the text.
+          text = NetCommon.Base64ToText(base64);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.Base64ToTextBytes(System.String)">
+            <summary>
+      Decodes a Base64 value to a Text byte array.
+    </summary><param name="base64">The Base64 value.</param><returns>The Text byte array.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Decodes a Base64 value to a Text byte array.
+        public static void Base64ToTextBytes()
+        {
+          // Setup
+          // Encodes a Text value to a Base64 value.
+          string base64 = NetCommon.TextToBase64("Text");
+
+          // Decodes a Base64 value to a Text byte array.
+          byte[] textBytes = NetCommon.Base64ToTextBytes(base64);
+
+          // Check the text.
+          string text = NetCommon.BytesToText(textBytes);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.TextBytesToBase64(System.Byte[])">
+            <summary>
+      Encodes a Text byte array to a Base64 value.
+    </summary><param name="bytes">The Text byte array.</param><returns>The Base64 string.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Encodes a Text byte array to a Base64 value.
+        public static void TextBytesToBase64()
+        {
+          // Setup
+          // Creates a byte array from text.
+          byte[] TextBytes = NetCommon.TextToBytes("Text");
+
+          // Encodes a Text byte array to a Base64 value.
+          string base64 = NetCommon.TextBytesToBase64(TextBytes);
+
+          // Check the text.
+          string text = NetCommon.Base64ToText(base64);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.BytesToText(System.Byte[])">
+            <summary>
+      Creates text from a byte array.
+    </summary><param name="bytes">The byte array.</param><returns>The Text value.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Creates text from a byte array.
+        private static void BytesToText()
+        {
+          // Setup
+          // Creates a byte array from text.
+          byte[] bytes = NetCommon.TextToBytes("Text");
+
+          // Creates text from a byte array.
+          string text = NetCommon.BytesToText(bytes);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.TextToBytes(System.String)">
+            <summary>
+      Creates a byte array from text.
+    </summary><param name="text">The Text value.</param><returns>The new byte array.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Creates a byte array from text.
+        private static void TextToBytes()
+        {
+          // Setup
+          string text = "Text";
+
+          // Creates a byte array from text.
+          byte[] bytes = NetCommon.TextToBytes(text);
+
+          // Check the text.
+          text = NetCommon.BytesToText(bytes);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.MemStreamToBytes(System.IO.Stream)">
+            <summary>
+      Copies a memory stream to a byte array.
+    </summary><param name="stream">The stream object.</param><returns>The byte array.</returns><example>
+      <code>
+        using System.IO;
+        using LJCNetCommon;
+
+        // Copies a memory stream to a byte array.
+        private static void MemStreamToBytes()
+        {
+          // Setup
+          byte[] textBytes;
+          // Creates a memory stream from a string.
+          using (Stream stream = NetCommon.StringToMemStream("Text"))
+          {
+            // Copies a memory stream to a byte array.
+            textBytes = NetCommon.MemStreamToBytes(stream);
+          }
+
+          // Check the text.
+          string text = NetCommon.BytesToText(textBytes);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.BytesToMemStream(System.Byte[])">
+            <summary>
+      Copies a byte array to a memory stream.
+    </summary><param name="bytes">The byte array.</param><returns>The reference to the memory stream.</returns><example>
+      <code>
+        using System.IO;
+        using LJCNetCommon;
+
+        // Copies a byte array to a memory stream.
+        private static void BytesToMemStream()
+        {
+          // Setup
+          // Creates a byte array from text.
+          byte[] bytes = NetCommon.TextToBytes("Text");
+
+          // Copies a byte array to a memory stream.
+          using (Stream stream = NetCommon.BytesToMemStream(bytes))
+          {
+            // Check the text.
+            string text = NetCommon.MemStreamToString(stream);
+            // text = "Text"
+          }
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.MemStreamToString(System.IO.Stream)">
+            <summary>
+      Creates a string from a memory stream.
+    </summary><param name="stream">The stream object.</param><returns>The string value.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Creates a string from a memory stream.
+        private static void MemStreamToString()
+        {
+          // Setup
+          // Creates a memory stream from a string.
+          using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
+          {
+            // Creates a string from a memory stream.
+            string text = LJCNetCommon.MemStreamToString(stream);
+            // text = "Text"
+          }
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.StringToMemStream(System.String)">
+            <summary>
+      Creates a memory stream from a string.
+    </summary><param name="text">The Text value.</param><returns>The reference to the memory stream.</returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        // Creates a memory stream from a string.
+        private static void StringToMemStream()
+        {
+          // Creates a memory stream from a string.
+          using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
+          {
+            // Check the text.
+            string text = LJCNetCommon.MemStreamToString(stream);
+            // text = "Text"
+          }
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.XmlDecode(System.String)">
+            <summary>
+      Decodes an encoded XML string.
+    </summary><param name="text">The encoded text.</param><returns>The decoded text.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Decodes an encoded XML string.
+        private static void XmlDecode()
+        {
+          // Setup
+          string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
+          // Encodes a string with XML escape values.
+          string encoded = LJCNetCommon.XmlEncode(xml);
+
+          // Decodes an encoded XML string.
+          string text = LJCNetCommon.XmlDecode(encoded);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.XmlEncode(System.String)">
+            <summary>
+      Encodes a string with XML escape values.
+    </summary><param name="text">The text to be encoded.</param><returns>The encoded text.</returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Encodes a string with XML escape values.
+        private static void XmlEncode()
+        {
+          // Setup
+          string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
+
+          // Encodes a string with XML escape values.
+          string encoded = NetCommon.XmlEncode(xml);
+
+          // Check the text.
+          string text = NetCommon.XmlDecode(encoded);
+          // text = "Text"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.XmlDeserialize(System.Type,System.String,System.String)">
+            <summary>
+      Deserialize an XML message file to an object.
+    </summary><param name="type">The object type.</param><param name="fileSpec">The input file spec.</param><param name="rootName">The Root Name value.</param><returns>The deserialized object.</returns><example>
+      <code>
+        using LJCNetCommon;
+      
+        public class Person
+        {
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
+        }
+        
+        // Deserialize an XML message file to an object.
+        private static void XmlDeserialize()
+        {
+          // Setup
+          var person = new Person()
+          {
+            Id = 1,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string file = "Text.xml";
+          LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
+
+          // Deserialize an XML message file to an object.
+          Person newPerson;
+          newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.XmlDeserializeMessage(System.Type,System.String)">
+            <summary>
+      Deserialize an XML message string to an object.
+    </summary><param name="type">The object type.</param><param name="message">The message string.</param><returns>The deserialized object.</returns><example>
+      <code>
+        using LJCNetCommon;
+      
+        public class Person
+        {
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
+        }
+        
+        // Deserialize an XML message string to an object.
+        private static void XmlDeserializeMessage()
+        {
+          // Setup
+          var person = new Person()
+          {
+            Id = 2,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
+
+          // Deserialize an XML message string to an object.
+          Person newPerson;
+          newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.XmlSerialize(System.Type,System.Object,System.Xml.Serialization.XmlSerializerNamespaces,System.String,System.String)">
+            <summary>
+      Serialize an object to an XML message file.
+    </summary><param name="type">The object type.</param><param name="data">The object reference.</param><param name="namespaces">The XML namespaces.</param><param name="fileSpec">The output file spec.</param><param name="rootName">The Root Name value.</param><example>
+      <code>
+        using LJCNetCommon
+        
+        public class Person
+        {
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
+        }
+        
+        // Serialize an object to an XML message file.
+        private static void XmlSerialize()
+        {
+          // Setup
+          var person = new Person()
+          {
+            Id = 2,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string file = "Text.xml";
+
+          // Serialize an object to an XML message file.
+          LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
+
+          // Check the object.
+          Person newPerson;
+          newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.XmlSerializeToString(System.Type,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <summary>
+      Serialize an object to an XML message string.
+    </summary><param name="type">The object type.</param><param name="data">The object reference.</param><param name="namespaces">The XML namespaces.</param><returns>The XML message string.</returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        public class Person
+        {
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
+        }
+
+        // Serialize an object to an XML message string.
+        private static void XmlSerializeToString()
+        {
+          // Serialize an object to an XML message string.
+          var person = new Person()
+          {
+            Id = 2,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
+
+          // Check the object.
+          Person newPerson;
+          newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.ConfigBool(System.String)">
+            <summary>
+      Retrieves the Config bool value. (RE)
+    </summary><param name="key">The key value.</param><returns>The bool config value.</returns><remarks>
+      <para>
+        This uses the program config file which is the name of the program plus
+        the extension ".config".
+      </para>
+      <para>
+        // An example config file.&lt;br /&gt;
+        &lt;&lt;span class="ltgt"&gt;?&lt;/span&gt;&lt;span class="name"&gt;xml&lt;/span&gt;&lt;span
+        class="attrib"&gt; version&lt;/span&gt;="&lt;span class="data"&gt;1.0&lt;/span&gt;"&lt;span
+        class="attrib"&gt; encoding&lt;/span&gt;="&lt;span class="data"&gt;utf-8&lt;/span&gt;"&lt;span
+        class="ltgt"&gt; ?&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class="name"&gt;configuration&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class="pad1"&gt;&lt;/span&gt;&lt;&lt;span class="name"&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class="pad2"&gt;&lt;/span&gt;&lt;&lt;span class="name"&gt;add&lt;/span&gt;&lt;span
+        class="attrib"&gt; key&lt;/span&gt;="&lt;span class="data"&gt;LocalDbDataAccess&lt;/span&gt;"&lt;span
+        class="attrib"&gt; value&lt;/span&gt;="&lt;span class="data"&gt;true&lt;/span&gt;"&lt;span
+        class="ltgt"&gt; /&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class="pad1"&gt;&lt;/span&gt;&lt;&lt;span class="ltgt"&gt;/&lt;/span&gt;&lt;span class="name"&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class="ltgt"&gt;/&lt;/span&gt;&lt;span class="name"&gt;configuration&lt;/span&gt;&gt;
+      </para>
+    </remarks><example>
+      <code>
+        using LJCNetCommon;
+        
+        // This returns true.
+        bool localDbAccess = LJCNetCommon.ConfigBool("LocalDbDataAccess");
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.ConfigColor(System.String,System.Drawing.Color@)">
+            <summary>
+      Retrieves the Config Color value. (RE)
+    </summary><param name="key">The key value.</param><param name="color">The default color value.</param><returns>The Color setting value.</returns><remarks>
+      <para>
+        This uses the program config file which is the name of the program plus
+        the extension ".config".&lt;br /&gt;
+      </para>
+      <para>
+        // An example config file.&lt;br /&gt;
+        &lt;&lt;span class="ltgt"&gt;?&lt;/span&gt;&lt;span class="name"&gt;xml&lt;/span&gt;&lt;span
+        class="attrib"&gt; version&lt;/span&gt;="&lt;span class="data"&gt;1.0&lt;/span&gt;"&lt;span
+        class="attrib"&gt; encoding&lt;/span&gt;="&lt;span class="data"&gt;utf-8&lt;/span&gt;"&lt;span
+        class="ltgt"&gt; ?&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class="name"&gt;configuration&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class="pad1"&gt;&lt;/span&gt;&lt;&lt;span class="name"&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class="pad2"&gt;&lt;/span&gt;&lt;&lt;span class="name"&gt;add&lt;/span&gt;&lt;span
+        class="attrib"&gt; key&lt;/span&gt;="&lt;span class="data"&gt;BeginColor&lt;/span&gt;"&lt;span
+        class="attrib"&gt; value&lt;/span&gt;="&lt;span class="data"&gt;AliceBlue&lt;/span&gt;"&lt;span
+        class="ltgt"&gt; /&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class="pad1"&gt;&lt;/span&gt;&lt;&lt;span class="ltgt"&gt;/&lt;/span&gt;&lt;span class="name"&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class="ltgt"&gt;/&lt;/span&gt;&lt;span class="name"&gt;configuration&lt;/span&gt;&gt;
+      </para>
+    </remarks><example>
+      <code>
+        using LJCNetCommon;
+        
+        // This returns var beginColor that is Color.AliceBlue.
+        // If the key is not found it returns Color.Black.
+        LJCNetCommon.ConfigColor("BeginColor", out Color beginColor);
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.ConfigString(System.String)">
+            <summary>
+      Retrieves the Config string value. (RE)
+    </summary><param name="key">The key value.</param><returns>The string config value.</returns><remarks>
+      <para>
+        This uses the program config file which is the name of the program plus
+        the extension ".config".
+      </para>
+      <para>
+        // An example config file.&lt;br /&gt;
+        &lt;&lt;span class="ltgt"&gt;?&lt;/span&gt;&lt;span class="name"&gt;xml&lt;/span&gt;&lt;span
+        class="attrib"&gt; version&lt;/span&gt;="&lt;span class="data"&gt;1.0&lt;/span&gt;"&lt;span
+        class="attrib"&gt; encoding&lt;/span&gt;="&lt;span class="data"&gt;utf-8&lt;/span&gt;"&lt;span
+        class="ltgt"&gt; ?&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class="name"&gt;configuration&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class="pad1"&gt;&lt;/span&gt;&lt;&lt;span class="name"&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class="pad2"&gt;&lt;/span&gt;&lt;&lt;span class="name"&gt;add&lt;/span&gt;&lt;span
+        class="attrib"&gt; key&lt;/span&gt;="&lt;span class="data"&gt;ConnectionType&lt;/span&gt;"&lt;span
+        class="attrib"&gt; value&lt;/span&gt;="&lt;span class="data"&gt;MySql&lt;/span&gt;"&lt;span
+        class="ltgt"&gt; /&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class="pad1"&gt;&lt;/span&gt;&lt;&lt;span class="ltgt"&gt;/&lt;/span&gt;&lt;span class="name"&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class="ltgt"&gt;/&lt;/span&gt;&lt;span class="name"&gt;configuration&lt;/span&gt;&gt;
+      </para>
+    </remarks><example>
+      <code>
+        using LJCNetCommon;
+        
+        // This returns "MySql".
+        string dbType = NetCommon.ConfigString("ConnectionType");
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.ConsoleConfig(System.String)">
+            <summary>Accept or Select the DataConfig.</summary>
+            <summary>
+      Accept or Select the DataConfig.
+    </summary><param name="dataConfigName">The DataConfig name.</param>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetBoolean(System.Object)">
+            <summary>
+      Gets a boolean value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The boolean value or false if the object is null.
+      Also returns false if the object is not type "bool".
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a bool value from an object.
+        private static void GetBoolean()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          bool setup = true;
+          object obj = setup;
+
+          // Gets a short value from an object.
+          var result = NetCommon.GetBoolean(obj);
+          // result = True
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetByte(System.Object)">
+            <summary>
+      Gets a byte value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The byte value or the byte default if the object is null.
+      Also returns false if the object is not type "byte".
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Gets a byte value from an object.
+        private static void GetByte()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          byte setup = Convert.ToByte('A');
+          object obj = setup;
+
+          // Gets a byte value from an object.
+          byte value = NetCommon.GetByte(obj);
+          var result = value.ToString();
+          // result = "65"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetChar(System.Object)">
+            <summary>
+      Gets a byte value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The char value or the char default if the object is null.
+      Also returns false if the object is not type "char".
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Gets a char value from an object.
+        private static void GetChar()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          char setup = Convert.ToChar('A');
+          object obj = setup;
+
+          // Gets a byte value from an object.
+          char value = NetCommon.GetChar(obj);
+          var result = value.ToString();
+          // result = "A";
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetDateTime(System.Object)">
+            <summary>
+      Gets a DateTime value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The DateTime value or null if the object is null.
+      Also returns null if the object is not type "DateTime".
+    </returns><example>
+      <code>
+        // Gets a DateTime value from an object.
+        private static void GetDateTime()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          string setup = "2026/06/15 12:30:00 PM";
+          object obj = setup;
+
+          // Gets a decimal value from an object.
+          DateTime? returnValue = NetCommon.GetDateTime(obj);
+          if (returnValue != null)
+          {
+            DateTime value = (DateTime)returnValue;
+            var result = $"{value:yyyy/MM/dd HH:mm:ss tt}";
+            //result = value.ToString("yyyy/MM/dd HH:mm:ss tt");
+            // result = "2026/06/15 12:30:00 PM";
+          }
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetDecimal(System.Object)">
+            <summary>
+      Gets a decimal value from an object. (E)
+    </summary><param name="value">The value object.</param><returns>
+      The decimal value or zero if the object is null.
+      Also returns zero if the object is not type "decimal", "long", "int"
+      or "short".
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a decimal value from an object.
+        private static void GetDecimal()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          decimal setup = 3.14m;
+          object obj = setup;
+
+          // Gets a decimal value from an object.
+          decimal value = NetCommon.GetDecimal(obj);
+          // value = 3.14
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetDouble(System.Object)">
+            <summary>
+      Gets a double value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The double value or zero if the object is null.
+      Also returns zero if the object is not type "double", "decimal", "long"
+      , "int" or "short".
+    </returns><example>
+      <code>
+        // Gets a double value from an object.
+        private static void GetDouble()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          double setup = 3.14d;
+          object obj = setup;
+
+          // Gets a decimal value from an object.
+          double result = NetCommon.GetDouble(obj);
+          // result = 3.14;
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetInt16(System.Object)">
+            <summary>
+      Gets a short value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The long value or zero if the object is null.
+      Also returns zero if the object is not type "short".
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Gets a short value from an object.
+        private static void GetInt16()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          short setup = 3;
+          object obj = setup;
+
+          // Gets a short value from an object.
+          short value = NetCommon.GetInt16(obj);
+          // value = 3
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetInt32(System.Object)">
+            <summary>
+      Gets an integer value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The integer value or zero if the object is null.
+      Also returns zero if the object is not type "int" or "short".
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets an int value from an object.
+        private static void GetInt32()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          int setup = 3;
+          object obj = setup;
+
+          // Gets an int value from an object.
+          int value = NetCommon.GetInt32(obj);
+          // value = 3
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetInt64(System.Object)">
+            <summary>
+      Gets a long value from an object. (E)
+    </summary><param name="value">The value object.</param><returns>
+      The long value or zero if the object is null.
+      Also returns zero if the object is not type "long", "int" or "short".
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a long value from an object.
+        private static void GetInt64()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          long setup = 3;
+          object obj = setup;
+
+          // Gets a long value from an object.
+          long value = NetCommon.GetInt64(obj);
+          // value = 3
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetObject(System.Object)">
+            <summary>
+      Gets an instantiated object value.
+    </summary><param name="value">The value object.</param><returns>The instantiated object.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetSingle(System.Object)">
+            <summary>
+      Gets a float value from an object.
+    </summary><param name="value">The value object.</param><returns>
+      The single value or zero if the object is null.
+      Also returns zero if the object is not type "single", "long", "int"
+      or "short".
+    </returns><example>
+      <code>
+        // Gets a float (single) value from an object.
+        private static void GetSingle()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          float setup = 3.14f;
+          object obj = setup;
+
+          // Gets a decimal value from an object.
+          float result = NetCommon.GetSingle(obj);
+          result = 3.14;
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.GetString(System.Object)">
+            <summary>
+      Gets a trimmed string value from an object. (E)
+    </summary><param name="value">The value object.</param><returns>The trimmed string value or null if the object is null.</returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a trimmed string value from an object.
+        private static void GetString()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          string setup = "3";
+          object obj = setup;
+
+          // Gets a string value from an object.
+          string value = NetCommon.GetString(obj);
+          // value = "3"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.ToInt16(System.String)">
+            <summary>
+      Gets a short from a text string.
+    </summary><param name="text">The text value.</param>
+        </member>
+        <member name="M:LJCNetCommon5.LJC5.ToInt32(System.String)">
+            <summary>
+      Gets an int from a text string.
+    </summary><param name="text">The text value.</param>
+        </member>
+        <member name="F:LJCNetCommon5.LJC5.TypeBoolean">
+            <summary>
+      The Boolean type name.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJC5.TypeByte">
+            <summary>
+      The Byte type name.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJC5.TypeChar">
+            <summary>
+      The Char type name.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJC5.TypeDateTime">
+            <summary>
+      The DateTime type name.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJC5.TypeDecimal">
+            <summary>
+      Type Decimal type name.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJC5.TypeDouble">
+            <summary>
+      The Double type name.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJC5.TypeInt16">
+            <summary>
+      The Int16 type name.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJC5.TypeInt32">
+            <summary>
+      The Int32 type name.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJC5.TypeInt64">
+            <summary>
+      The Int64 type name.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJC5.TypeSingle">
+            <summary>
+      The Single type name.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJC5.TypeString">
+            <summary>
+      The String type name.
+    </summary>
+        </member>
+        <member name="T:LJCNetCommon5.LJCNetString5">
+            <summary>
+      Contains common string related static methods.
+    </summary><remarks>
+      <para>
+        The NetCommon class contains string related static helper functions for
+        all .NET program types.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.IsDigits(System.String)">
+            <summary>
+      Checks a string value for digits.
+    </summary><param name="text">The text value.</param><returns>true if all digits; otherwise, false.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.IsEqual(System.String,System.String)">
+            <summary>
+      Do an Ignore Case string compare.
+    </summary><param name="stringA">The first string.</param><param name="stringB">The second string.</param>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.AddDelimitedValue(System.String@,System.String)">
+            <summary>
+      Adds a value to a comma delimited string.
+    </summary><param name="target">The target text.</param><param name="value">The delimiter value.</param>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.DelimitValues(System.String,System.String,System.String)">
+            <summary>
+      Adds delimiters to one or more values.
+    </summary><param name="values">The source string.</param><param name="beginDelimiter">The word begin delimiter.</param><param name="endDelimiter">The word end delimiter.</param><returns>
+      The string with delimited words.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.ExceptionString(System.Exception)">
+            <summary>
+      Creates an exception string with outer and inner exception.
+    </summary><param name="e">The Exception object.</param><returns>The exception string.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.FormatValue(System.Object,System.String)">
+            <summary>
+      Formats the column value for the SQL string.
+    </summary><param name="value">The object value.</param><param name="dataTypeName">The object data type name.</param><returns>The formatted value.</returns><remarks>
+      <para>
+        Returns the string formatted value from the Value property based
+        on the DataTypeName property.
+      </para>
+      <para>
+        If the DataType is Boolean, returns "1" or "0".&lt;br /&gt;
+        If the DataType is DateTime, returns a string Date or Minimum Date
+        value.&lt;br  /&gt;
+        If the DataType is string, returns a string with doubled single quotes.
+      </para>
+    </remarks><example>
+      <code>
+        using LJCNetCommon;
+
+        var dbColumnBool = new DbColumn("TestBool", "1", NetCommon.TypeBoolean);
+        var dbColumnDate = new DbColumn("TestDate", DateTime.Now()
+        , NetCommon.TypeDateTime);
+        var dbColumnString = new DbColumn("TestString", "string");
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.GetPropertyName(System.String)">
+            <summary>
+      Gets a column name with underscores converted to Pascal case.
+    </summary><param name="name">The column name.</param><returns>The Pascal case property name.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.GetSearchName(System.String)">
+            <summary>
+      Gets the Search Property name.
+    </summary><param name="columnName">The potentially qualified column name.</param><returns>The unqualified column name.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.InitString(System.String)">
+            <summary>
+      Initializes a string to the trimmed value or null.
+    </summary><param name="value">The string value.</param><returns>
+      The trimmed string value or null if the string is null
+      or an empty string when trimmed.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.ScrubDelimitedValues(System.String)">
+            <summary>
+      Scrubs extra blanks from the comma delimited string.
+    </summary><param name="values" />
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.Split(System.String,System.String)">
+            <summary>
+      Split a string on a single separator without empty entries.
+    </summary><param name="text" /><param name="separator" />
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.Split(System.String,System.String[])">
+            <summary>
+      Split a string on multiple separators without empty entries.
+    </summary><param name="text" /><param name="separators" />
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.Truncate(System.String,System.Int32)">
+            <summary>
+      Truncates a text string to the specified length.
+    </summary><param name="text">The text value.</param><param name="length">The maximum length.</param><returns>The truncated string.</returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.CreateLSoundex(System.String)">
+            <summary>
+      Creates a letter based soundex value.
+    </summary><param name="text">The text value.</param><returns>The Letter based soundex value.</returns><remarks>
+      Scatter = SCTR&lt;br /&gt;
+      Aphrodisiac = APHRDSC&lt;br /&gt;
+      Pharmacy = PHRMC&lt;br /&gt;
+      Psychology = PSCHLG&lt;br /&gt;
+      Cart = CRT&lt;br /&gt;
+      Ceiling = CLNG&lt;br /&gt;
+      Cyan = CN
+    </remarks>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.CreatePSoundex(System.String)">
+            <summary>
+      Creates a Phonetic based soundex value. (D)
+    </summary><param name="text">The text value.</param><returns>The Phonetic based soundex value.</returns><remarks>
+      Scatter = SCTR&lt;br /&gt;
+      Aphrodisiac = AFRDSC&lt;br /&gt;
+      Pharmacy = FRMS&lt;br /&gt;
+      Psychology = SCHLG&lt;br /&gt;
+      Cart = KRT&lt;br /&gt;
+      Ceiling = SLNG&lt;br /&gt;
+      Cyan = SN
+    </remarks>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.Soundex(System.String)">
+            <summary>
+      Creates a US Census Soundex value.
+    </summary><param name="text">The text value.</param><returns>
+      The Soundex value.
+    </returns><example>
+      <code>
+        // Creates a US Census soundex value.
+        private static void Soundex()
+        {
+        var text = "Clark";
+        var result = LJCNetString.Soundex(text);
+        // result = "C462"
+
+        text = "Klum";
+        result = LJCNetString.Soundex(text);
+        // result = "K450"
+
+        text = "Rodriguez";
+        result = LJCNetString.Soundex(text);
+        // result = "R362";
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.IsSoundexLetter(System.String,System.Int32)">
+            <summary>
+      Checks if the letter is a soundex skipped letter.
+    </summary><param name="text">The text value.</param><param name="index">The current text index.</param><returns>true if the letter should be skipped; otherwise, false.</returns><remarks>
+      True if the letter is the first letter or not a vowel and not the same as
+      the previous letter.
+    </remarks>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.Phonetic(System.String,System.Int32@,System.Nullable{System.Char}@)">
+            <summary>
+      Creates a Phonetic character from the supplied text starting at the
+      supplied index.
+    </summary><param name="text">The text value.</param><param name="index">The start index.</param><param name="letter">The Phonetic letter.</param><returns>true if a Phonetic was created; otherwise, false.</returns><remarks>
+      <para>
+        Sets the letter parameter to:&lt;br /&gt;  -
+        "F" if the current and following letter are "PH"&lt;br /&gt;
+        - "S" if the current letter is "P", the following letter is "S"
+        and the third letter is a vowel or "Y".&lt;br /&gt;
+        - "K" if the current letter is "C" and the following letter is "A", "O"
+        or "U".&lt;br /&gt;
+        - "S" if the current letter is "C" and the following letter is "E", "I"
+        or "Y".&lt;br /&gt;
+        - Otherwise, the same letter as at the current index.
+      </para>
+      <para>
+        Advances index to the next available char.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.AddObjectArgError(System.String@,System.Object,System.String,System.String)">
+            <summary>
+      Adds the missing argument name to the message.
+    </summary><param name="message">The error message.</param><param name="argument">The argument value.</param><param name="name">The argument name.</param><param name="errorContext">The error message context.</param>
+        </member>
+        <member name="M:LJCNetCommon5.LJCNetString5.ThrowArgError(System.String)">
+            <summary>
+      Throws the invalid argument exception if message has a value.
+    </summary><param name="message">The error message.</param>
+        </member>
+        <member name="F:LJCNetCommon5.LJCNetString5.CompareEqual">
+            <summary>
+      The compare object is equal to the compareto object.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJCNetString5.CompareGreater">
+            <summary>
+      The compare object is greater than the compareto object.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJCNetString5.CompareLess">
+            <summary>
+      The compare object  is less than the compareto object.
+    </summary>
+        </member>
+        <member name="F:LJCNetCommon5.LJCNetString5.CompareNotNullOrEqual">
+            <summary>
+      The compare object is notnull or equal is equal to the compareto object.
+    </summary>
+        </member>
+        <member name="T:LJCNetCommon5.LJCTestCommon5">
+            <summary>
+      Provides test methods.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTestCommon5.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTestCommon5.#ctor(System.String)">
+            <summary>
+      Initializes an object instance with the supplied values.
+    </summary><param name="className">The class name.</param>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTestCommon5.Write(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+      Writes a compare message to the console.
+    </summary><param name="methodName">The method name.</param><param name="result">The result value.</param><param name="compare">The compare value.</param><param name="bracket">Indicates if the values should be bracketed.</param>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTestCommon5.CompareMessage(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+      Creates a compare message if the result value does not equal the compare
+      value. 
+    </summary><param name="methodName">The method name.</param><param name="result">The result value.</param><param name="compare">The compare value.</param><param name="bracket">Indicates if the values should be bracketed.</param><returns>
+      The compare message.
+    </returns>
+        </member>
+        <member name="T:LJCNetCommon5.LJCTextBuilder5">
+            <summary>
+      Provides methods for creating text.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.#ctor(LJCNetCommon5.LJCTextState5)">
+            <summary>
+      Initializes an object instance with the provided values.
+    </summary><param name="textState">The TextState object.</param>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.Clear">
+            <summary>
+      Clears the Builder text.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.ToString">
+            <summary>
+      Retrieves the object text.
+    </summary><returns>
+      The object text.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.AddIndent(System.Int32)">
+            <summary>
+      Changes the IndentCount by the provided value.
+    </summary><param name="increment">The increment value.</param><returns>
+      The current indent count.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.AddLine(System.String)">
+            <summary>
+      Adds a text line without modification.
+    </summary><param name="text">The text value.</param><returns>
+      The added text line.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.AddText(System.String)">
+            <summary>
+      Adds text without modification.
+    </summary><param name="text">The text value.</param><returns>
+      The added text.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.Item(System.String,System.Boolean,System.Boolean)">
+            <summary>
+      Adds a delimiter if not the first list item.
+    </summary><param name="text">The text value.</param><param name="addIndent">Indicates if the indent should be added.</param><param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param><returns>
+      The added, potentially delimited text.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.Line(System.String,System.Boolean,System.Boolean)">
+            <summary>
+      Adds a modified text line to the builder.
+    </summary><param name="text">The text value.</param><param name="addIndent">Indicates if the indent should be added.</param><param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param><returns>
+      The added, potentially modified text line.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.Text(System.String,System.Boolean,System.Boolean)">
+            <summary>
+      Adds modified text to the builder.
+    </summary><param name="text">The text value.</param><param name="addIndent">Indicates if the indent should be added.</param><param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param><returns>
+      The added, potentially modified text.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.EndsWithNewLine">
+            <summary>
+      Indicates if the builder text ends with a newline.
+    </summary><returns>
+      true if the current value ends with a newline; otherwise false.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.StartWithNewLine(System.Boolean)">
+            <summary>
+      Allow text to start with a newline.
+    </summary><param name="allowNewLine">Indicates if a new line is allowed.</param><returns>
+      true if the text should start with a newline; otherwise false.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.GetDelimited(System.String)">
+            <summary>
+      Adds a delimiter if not the first list item.
+    </summary><param name="text">The text value.</param><returns>
+      The text value with the potentially added delimiter.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.GetIndented(System.String)">
+            <summary>
+      Gets a new potentially indented line.
+    </summary><param name="text">The text value.</param><returns>
+      The text value with the potentially added indent.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.GetIndentString">
+            <summary>
+      Returns the current indent string.
+    </summary><returns>
+      The current indent string.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.GetLine(System.String,System.Boolean,System.Boolean)">
+            <summary>
+      Gets a modified text line.
+    </summary><param name="text">The text value.</param><param name="addIndent">Indicates if the indent should be added.</param><param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param><returns>
+      The modified line.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.GetText(System.String,System.Boolean,System.Boolean)">
+            <summary>
+      Gets potentially indented and wrapped text.
+    </summary><param name="text">The text value.</param><param name="addIndent">Indicates if the indent should be added.</param><param name="allowNewLine">
+      Indicates if a prefixed newline should be added.
+    </param><returns>
+      The potentially modified line.
+    </returns>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextBuilder5.GetWrapped(System.String)">
+            <summary>
+      Gets added text and new wrapped line if combined line &gt; LineLimit.
+    </summary><param name="text">The text value.</param><returns>
+      The potentially wrapped line.
+    </returns>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.Builder">
+            <summary>
+      The internal StringBuilder class.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.DebugText">
+            <summary>
+      The debug text.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.Delimiter">
+            <summary>
+      Gets or sets the delimiter.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.HasText">
+            <summary>
+      Gets a value indicating if the builder has text.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.IndentCharCount">
+            <summary>
+      Gets or sets the indent character count.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.IndentCount">
+            <summary>
+      Gets or sets the indent count.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.IndentLength">
+            <summary>
+      Gets the current indent length.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.IsFirst">
+            <summary>Gets or sets the first item indicator.</summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.LineLength">
+            <summary>
+      Gets the current length.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.LineLimit">
+            <summary>
+      Gets the character limit.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.WrapAtDelimiter">
+            <summary>
+      Gets or sets a value that indicates if a wrap should occur at a leading
+      delimiter.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.WrapEnabled">
+            <summary>
+      Gets or sets a value that indicates if line wrapping is enabled.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextBuilder5.WrapPrefix">
+            <summary>
+      Gets or sets the new line prefix.
+    </summary>
+        </member>
+        <member name="T:LJCNetCommon5.LJCTextParser5">
+            <summary>
+      Contains parsing related methods.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextParser5.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextParser5.DelimitedString(System.String,System.String,System.String)">
+            <summary>
+      Retrieves a delimited string.
+    </summary><param name="text">The text value.</param><param name="beginDelimiter">The beginning delimiter.</param><param name="endDelimiter">The ending delimiter.</param><returns>
+      The text between the delimiters.
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets the string between the specified delimiters.
+        private static void DelimitedString()
+        {
+          var source = "&lt;summary&gt;This is some text.&lt;/summary&gt;";
+          var beginDelimiter = "&lt;summary&gt;";
+          var endDelimiter = "&lt;/summary&gt;";
+          var textParser = new LJCTextParser();
+          var result = textParser.DelimitedString(source, beginDelimiter
+            , endDelimiter);
+          // result:
+          // This is some text.
+          // StartIndex = -1;
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextParser5.StringWithDelimiters(System.String,System.String,System.String)">
+            <summary>
+      Retrieves a string including the supplied delimiters.
+    </summary><param name="text">The text value.</param><param name="beginDelimiter">The beginning delimiter.</param><param name="endDelimiter">The ending delimiter.</param><returns>
+      The delimited text including the delimiters.
+    </returns><example>
+      <code>
+        using LJCNetCommon;
+
+        // Get the string including the specified delimiters.
+        private static void StringWithDelimiters()
+        {
+          var line = "Value (One)";
+          var beginDelimiter = "(";
+          var endDelimiter = ")";
+          var parser = new LJCTextParser();
+          var result = parser.StringWithDelimiters(line, beginDelimiter, endDelimiter);
+          // result:
+          // (One)
+          // StartIndex = -1;
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextParser5.FindTag(System.String,System.String@)">
+            <summary>
+      Finds the first tag in a text value.
+    </summary><param name="text">The text value.</param><param name="tagName">The tag name.</param><returns>
+      The first tag.
+    </returns><example>
+      <code>
+        // Finds the first tag in a text value.
+        private static void FindTag()
+        {
+          var line = "&lt;comment&gt;A comment.&lt;/comment&gt;";
+          var textParser = new LJCTextParser();
+          string? findTagName = null;
+          var result = textParser.FindTag(line, ref findTagName);
+          // result:
+          // &lt;comment&gt;
+          // findTagName = "comment"
+
+          line = "&lt;comment name="What?"&gt;A comment.&lt;/comment&gt;;
+          findTagName = null;
+          result = textParser.FindTag(line, ref findTagName);
+          // result:
+          // &lt;comment&gt;
+          // findTagName = "comment"
+
+          findTagName = "/";
+          result = textParser.FindTag(line, ref findTagName);
+          // result:
+          // &lt;/comment&gt;
+          // findTagName = "/comment"
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextParser5.RemoveSection(System.String,System.Int32,System.Int32)">
+            <summary>
+      Removes a section from a text value.
+    </summary><param name="text">The text value.</param><param name="beginIndex">The beginning index.</param><param name="endIndex">The ending index.</param><returns>
+      The text with the section removed.
+    </returns><example>
+      <code>
+        // Removes a section from a text value.
+        private static void RemoveSection()
+        {
+          var line = "&lt;comment&gt;A comment.&lt;/comment&gt;";
+
+          var textParser = new LJCTextParser();
+          var beginIndex = 0;
+          var endIndex = 8;
+          var result = textParser.RemoveSection(line, beginIndex, endIndex);
+          // result:
+          // A comment.&lt;/comment&gt;
+
+          beginIndex = 19;
+          endIndex = 28;
+          result = textParser.RemoveSection(line, beginIndex, endIndex);
+          // result:
+          // &lt;comment&gt;A comment.
+        }
+      </code>
+    </example>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextParser5.RemoveTags(System.String)">
+            <summary>
+      Removes tags from a text value.
+    </summary><param name="text">The text value.</param><returns>
+      The text with the tags removed.
+    </returns><example>
+      <code>
+        // Removes tags from a text value.
+        private static void RemoveTags()
+        {
+          var line = "&lt;comment&gt;A comment.&lt;/comment&gt;";
+
+          var textParser = new LJCTextParser();
+          var result = textParser.RemoveTags(line);
+          // result:
+          // A comment.
+        }
+      </code>
+    </example>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextParser5.BeginIndex">
+            <summary>
+      The delimited string begin index.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextParser5.EndIndex">
+            <summary>
+      The delimited string end index.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextParser5.StartIndex">
+            <summary>
+      The parsing start index.
+    </summary>
+        </member>
+        <member name="T:LJCNetCommon5.LJCTextState5">
+            <summary>
+      Represents the text state.
+    </summary>
+        </member>
+        <member name="M:LJCNetCommon5.LJCTextState5.#ctor(System.Int32)">
+            <summary>
+      Initializes an object instance with the supplied values.
+    </summary><param name="indentCount">The initial indent count.</param>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextState5.IndentCount">
+            <summary>
+      Gets or sets the current indent count to sync called method.
+    </summary>
+        </member>
+        <member name="P:LJCNetCommon5.LJCTextState5.ChildIndentCount">
+            <summary>
+      Gets or sets the new indent count to sync calling method.
+    </summary>
+        </member>
+    </members>
+</doc>
