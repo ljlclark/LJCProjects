@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCConnectionTemplates5.cs
+// LJCConnectionTemplates.cs
 using LJCNetCommon5;
 using System.Reflection;
 
@@ -8,17 +8,17 @@ namespace LJCDataAccessConfig5
 {
   // Represents a collection of Connection string templates.
   /// <include path="members/LJCConnectionTemplates/*" file="Doc/LJCConnectionTemplates.xml"/>
-  public class LJCConnectionTemplates5 : List<LJCConnectionTemplate5>
+  public class LJCConnectionTemplates : List<LJCConnectionTemplate>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCConnectionTemplates.xml"/>
-    public LJCConnectionTemplates5()
+    public LJCConnectionTemplates()
     {
       mTemplateFileName = "ConnectionTemplates.xml";
       string? localAssembly = Assembly.GetExecutingAssembly().Location;
-      if (LJC5.HasValue(localAssembly))
+      if (LJC.HasValue(localAssembly))
       {
 #pragma warning disable CS8604 // Possible null reference argument.
         TemplateFileSpec = Path.Combine(Path.GetDirectoryName(localAssembly)
@@ -36,11 +36,11 @@ namespace LJCDataAccessConfig5
         WriteDefaultData();
       }
 
-      if (LJC5.XmlDeserialize(typeof(LJCConnectionTemplates5)
-        , TemplateFileSpec) is LJCConnectionTemplates5 connectionTemplates)
+      if (LJC.XmlDeserialize(typeof(LJCConnectionTemplates)
+        , TemplateFileSpec) is LJCConnectionTemplates connectionTemplates)
       {
         Clear();
-        foreach (LJCConnectionTemplate5 connectionTemplate in connectionTemplates)
+        foreach (LJCConnectionTemplate connectionTemplate in connectionTemplates)
         {
           Add(connectionTemplate);
         }
@@ -52,9 +52,9 @@ namespace LJCDataAccessConfig5
 
     // Creates and adds the object from the provided valus.
     /// <include path="members/Add/*" file="Doc/LJCConnectionTemplates.xml"/>
-    public LJCConnectionTemplate5 Add(string name, string template)
+    public LJCConnectionTemplate Add(string name, string template)
     {
-      var retValue = new LJCConnectionTemplate5()
+      var retValue = new LJCConnectionTemplate()
       {
         Name = name,
         Template = template
@@ -65,11 +65,11 @@ namespace LJCDataAccessConfig5
 
     // Retrieve the data configuration.
     /// <include path="members/Retrieve/*" file="Doc/LJCConnectionTemplates.xml"/>
-    public LJCConnectionTemplate5? Retrieve(string? name)
+    public LJCConnectionTemplate? Retrieve(string? name)
     {
-      LJCConnectionTemplate5? retValue = null;
+      LJCConnectionTemplate? retValue = null;
 
-      if (LJC5.HasValue(name))
+      if (LJC.HasValue(name))
       {
         if (Count != mPrevCount)
         {
@@ -77,7 +77,7 @@ namespace LJCDataAccessConfig5
           Sort();
         }
 
-        var searchData = new LJCConnectionTemplate5()
+        var searchData = new LJCConnectionTemplate()
         {
           Name = name
         };
@@ -99,7 +99,7 @@ namespace LJCDataAccessConfig5
     /// <include path="members/Save/*" file="Doc/LJCConnectionTemplates.xml"/>
     public void Save()
     {
-      LJC5.XmlSerialize(GetType(), this, null, TemplateFileSpec);
+      LJC.XmlSerialize(GetType(), this, null, TemplateFileSpec);
     }
     #endregion
 
@@ -108,7 +108,7 @@ namespace LJCDataAccessConfig5
     // Create the default data file.
     private void WriteDefaultData()
     {
-      var tb = new LJCTextBuilder5();
+      var tb = new LJCTextBuilder();
       tb.AddLine("<?xml version='1.0'?>");
       tb.AddLine("<ConnectionTemplates xmlns: xsi\"http://www.w3.org/2001/XMLSchema-instance\"");
       tb.AddLine(" xmlns: xsd=\"http://www.w3.org/2001/XMLSchema\">");
@@ -140,7 +140,7 @@ namespace LJCDataAccessConfig5
       tb.AddLine("  </ConnectionTemplate>");
       tb.AddLine("</ConnectionTemplates>");
       var templates = tb.ToString().Split('\n');
-      if (LJC5.HasValue(TemplateFileSpec))
+      if (LJC.HasValue(TemplateFileSpec))
       {
         File.WriteAllLines(TemplateFileSpec, templates);
       }

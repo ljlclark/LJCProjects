@@ -1,17 +1,17 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCTextState5.cs
+// LJCTextState.cs
 
 namespace LJCNetCommon5
 {
   // Represents the text state.
   /// <include path="members/LJCTextState/*" file="Doc/LJCTextState.xml"/>
-  public class LJCTextState5
+  public class LJCTextState
   {
     #region Constructors
     // Initializes an object instance with the supplied values.
     /// <include path="members/Constructor/*" file="Doc/LJCTextState.xml"/>
-    public LJCTextState5(int indentCount = 0)
+    public LJCTextState(int indentCount = 0)
     {
       IndentCount = indentCount;
       ChildIndentCount = 0;

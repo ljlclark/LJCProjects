@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCTextBuilder5.cs
+// LJCTextBuilder.cs
 using System.Text;
 
 namespace LJCNetCommon5
 {
   // Provides methods for creating text.
   /// <include path="members/LJCTextBuilder/*" file="Doc/LJCTextBuilder.xml"/>
-  public class LJCTextBuilder5
+  public class LJCTextBuilder
   {
     #region Static Methods
 
@@ -27,7 +27,7 @@ namespace LJCNetCommon5
 
     // Initializes an object instance with the provided values.
     /// <include path="members/Constructor/*" file="Doc/LJCTextBuilder.xml"/>
-    public LJCTextBuilder5(LJCTextState5? textState = null)
+    public LJCTextBuilder(LJCTextState? textState = null)
     {
       Builder = new StringBuilder(128);
       Delimiter = ", ";
@@ -258,7 +258,7 @@ namespace LJCNetCommon5
       }
 
       //if (TextLength(text) > 0)
-      if (LJC5.HasValue(text))
+      if (LJC.HasValue(text))
       {
         retText += text;
 

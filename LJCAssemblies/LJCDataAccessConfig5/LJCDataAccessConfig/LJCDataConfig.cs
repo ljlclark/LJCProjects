@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCDataConfig5.cs
+// LJCDataConfig.cs
 using LJCNetCommon5;
 using System.Data.Common;
 
@@ -8,7 +8,7 @@ namespace LJCDataAccessConfig5
 {
   // Represents a data location configuration.
   /// <include path="members/LJCDataConfig/*" file="Doc/LJCDataConfig.xml"/>
-  public class LJCDataConfig5
+  public class LJCDataConfig
   {
     #region Static Methods
 
@@ -20,23 +20,23 @@ namespace LJCDataAccessConfig5
 
       if (connectionType != null)
       {
-        if (LJCNetString5.IsEqual(connectionType, "OleDB"))
+        if (LJCNetString.IsEqual(connectionType, "OleDB"))
         {
           retVal = "SQLOLEDB";
         }
-        if (LJCNetString5.IsEqual(connectionType, "ODBC"))
+        if (LJCNetString.IsEqual(connectionType, "ODBC"))
         {
           retVal = "MSDASQL.1";
         }
-        if (LJCNetString5.IsEqual(connectionType, "SQLServer"))
+        if (LJCNetString.IsEqual(connectionType, "SQLServer"))
         {
           retVal = "System.Data.SqlClient";
         }
-        if (LJCNetString5.IsEqual(connectionType, "MySQL"))
+        if (LJCNetString.IsEqual(connectionType, "MySQL"))
         {
           retVal = "MySql.Data.MySqlClient";
         }
-        if (LJCNetString5.IsEqual(connectionType, "Access"))
+        if (LJCNetString.IsEqual(connectionType, "Access"))
         {
           retVal = "Microsoft.Jet.OLEDB.4.0";
         }
@@ -49,9 +49,9 @@ namespace LJCDataAccessConfig5
 
     // Initializes an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCDataConfig.xml"/>
-    public LJCDataConfig5(string? connectionType = null)
+    public LJCDataConfig(string? connectionType = null)
     {
-      if (LJC5.HasValue(connectionType))
+      if (LJC.HasValue(connectionType))
       {
         ConnectionType = connectionType;
       }
@@ -73,8 +73,8 @@ namespace LJCDataAccessConfig5
     /// <include path="members/ConnectionString/*" file="Doc/LJCDataConfig.xml"/>
     public string? ConnectionString(string? connectionType)
     {
-      LJCConnectionTemplates5 connectionTemplates;
-      LJCConnectionTemplate5 connectionTemplate;
+      LJCConnectionTemplates connectionTemplates;
+      LJCConnectionTemplate connectionTemplate;
       string? retValue;
 
       connectionTemplates = [];
@@ -92,7 +92,7 @@ namespace LJCDataAccessConfig5
       string? replacementValue;
       string? retValue = null;
 
-      if (LJC5.HasValue(templateText))
+      if (LJC.HasValue(templateText))
       {
         string[] items = templateText.Split([';']
           , StringSplitOptions.RemoveEmptyEntries);
@@ -107,7 +107,7 @@ namespace LJCDataAccessConfig5
             string keyword = values[0].Trim();
             string value = values[1];
 
-            var textParser = new LJCTextParser5();
+            var textParser = new LJCTextParser();
             string? marker = textParser.DelimitedString(value, "{", "}");
 
             if (marker != null)
@@ -152,28 +152,28 @@ namespace LJCDataAccessConfig5
       switch (marker.ToLower())
       {
         case "dbserver":
-          if (LJC5.HasValue(DbServer))
+          if (LJC.HasValue(DbServer))
           {
             retValue = DbServer;
           }
           break;
 
         case "database":
-          if (LJC5.HasValue(Database))
+          if (LJC.HasValue(Database))
           {
             retValue = Database;
           }
           break;
 
         case "uid":
-          if (LJC5.HasValue(UserID))
+          if (LJC.HasValue(UserID))
           {
             retValue = UserID;
           }
           break;
 
         case "pswd":
-          if (LJC5.HasValue(Pswd))
+          if (LJC.HasValue(Pswd))
           {
             retValue = Pswd;
           }

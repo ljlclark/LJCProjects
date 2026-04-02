@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCTextParser5.cs
+// LJCTextParser.cs
 
 namespace LJCNetCommon5
 {
   // Contains parsing related methods.
   /// <include path="members/LJCTextParser/*" file="Doc/LJCTextParser.xml"/>
-  public class LJCTextParser5
+  public class LJCTextParser
   {
     #region Static Methods
 
@@ -14,7 +14,7 @@ namespace LJCNetCommon5
     private static int DelimiterLength(string? delimiter)
     {
       int retLength = 0;
-      if (LJC5.HasValue(delimiter))
+      if (LJC.HasValue(delimiter))
       {
         retLength = delimiter.Length;
       }
@@ -26,7 +26,7 @@ namespace LJCNetCommon5
 
     // Initializes an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCTextParser.xml"/>
-    public LJCTextParser5()
+    public LJCTextParser()
     {
       BeginIndex = -1;
       EndIndex = -1;
@@ -48,7 +48,7 @@ namespace LJCNetCommon5
 
       // ToDo: What to do if text does not contain beginDelimiter.
       if (StartIndex > -1
-        && LJC5.HasValue(text)
+        && LJC.HasValue(text)
         && StartIndex < text.Length - 1
         && (null == beginDelimiter
         || text.Contains(beginDelimiter)))
@@ -128,7 +128,7 @@ namespace LJCNetCommon5
       string? retTag = null;
 
       var beginDelimiter = "<";
-      if (LJC5.HasValue(tagName)
+      if (LJC.HasValue(tagName)
         && tagName.Contains('/'))
       {
         beginDelimiter += "/";
@@ -138,7 +138,7 @@ namespace LJCNetCommon5
       var foundTagName = DelimitedString(text, beginDelimiter, endDelimiter);
 
       // Eliminate attributes, if not end tag.
-      if (LJC5.HasValue(foundTagName)
+      if (LJC.HasValue(foundTagName)
         && !foundTagName.Contains('/'))
       {
         StartIndex = 0;
@@ -151,13 +151,13 @@ namespace LJCNetCommon5
         }
       }
 
-      if (LJC5.HasValue(tagName)
+      if (LJC.HasValue(tagName)
         && tagName.Contains('/'))
       {
         foundTagName = $"/{foundTagName}";
       }
       tagName = foundTagName;
-      if (LJC5.HasValue(foundTagName))
+      if (LJC.HasValue(foundTagName))
       {
         retTag = $"<{foundTagName}>";
       }

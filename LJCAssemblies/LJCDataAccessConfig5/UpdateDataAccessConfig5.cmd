@@ -15,7 +15,7 @@ goto Process:
 rem *** Called from line root folder UpdateAll.cmd. ***
 rem *** Sets the solution group folder values. ***
 call SubFolders2.cmd %1%
-set toRoot=%util%\LJCDataAccessConfig\
+set toRoot=%util%\LJCDataAccessConfig5\
 rem *** Sets the "to" value as External and creates folder. ***
 call TargetFolders.cmd
 :Process
@@ -33,7 +33,7 @@ rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem ---------------------------
-set to=%toRoot%LJCGenDoc2\%bin%
+set to=%toRoot%LJCGenDoc5\%bin%
 echo.
 echo *** %to% ***
 

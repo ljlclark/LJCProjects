@@ -11,9 +11,9 @@ namespace TestTextParser5
     // The entry method.
     static void Main()
     {
-      TestCommon = new LJCTestCommon5("TestTextParser5Program");
+      TestCommon = new LJCTestCommon("TestTextParser");
       Console.WriteLine();
-      Console.WriteLine("*** LJCTextParser5 ***");
+      Console.WriteLine("*** LJCTextParser ***");
 
       #region Delimited String Methods
 
@@ -69,7 +69,7 @@ namespace TestTextParser5
       var line = "<comment>";
       var beginDelimiter = "<comment>";
 
-      var textParser = new LJCTextParser5();
+      var textParser = new LJCTextParser();
       var text = textParser.DelimitedString(line, beginDelimiter);
       var result = $"{text}, {textParser.BeginIndex}, {textParser.EndIndex}";
       result += $", {textParser.StartIndex}";
@@ -83,7 +83,7 @@ namespace TestTextParser5
       var line = "<comment>This is a comment.";
       var beginDelimiter = "<comment>";
 
-      var parser = new LJCTextParser5();
+      var parser = new LJCTextParser();
       var text = parser.DelimitedString(line, beginDelimiter);
       var result = $"{text}, {parser.BeginIndex}, {parser.EndIndex}";
       result += $", {parser.StartIndex}";
@@ -96,7 +96,7 @@ namespace TestTextParser5
     {
       var line = "This is a comment.";
 
-      var parser = new LJCTextParser5();
+      var parser = new LJCTextParser();
       var text = parser.DelimitedString(line);
       var result = $"{text}, {parser.BeginIndex}, {parser.EndIndex}";
       result += $", {parser.StartIndex}";
@@ -110,7 +110,7 @@ namespace TestTextParser5
       var line = "This is a comment.</comment>";
       var endDelimiter = "</comment>";
 
-      var parser = new LJCTextParser5();
+      var parser = new LJCTextParser();
       var text = parser.DelimitedString(line, null, endDelimiter);
       var result = $"{text}, {parser.BeginIndex}, {parser.EndIndex}";
       result += $", {parser.StartIndex}";
@@ -124,7 +124,7 @@ namespace TestTextParser5
       var line = "</comment>";
       var endDelimiter = "</comment>";
 
-      var parser = new LJCTextParser5();
+      var parser = new LJCTextParser();
       var text = parser.DelimitedString(line, null, endDelimiter);
       var result = $"{text}, {parser.BeginIndex}, {parser.EndIndex}";
       result += $", {parser.StartIndex}";
@@ -139,7 +139,7 @@ namespace TestTextParser5
       var beginDelimiter = "(";
       var endDelimiter = ")";
 
-      var parser = new LJCTextParser5();
+      var parser = new LJCTextParser();
       var first = true;
       while (parser.StartIndex >= 0)
       {
@@ -167,7 +167,7 @@ namespace TestTextParser5
       var beginDelimiter = "(";
       var endDelimiter = ")";
 
-      var parser = new LJCTextParser5();
+      var parser = new LJCTextParser();
       var text = parser.DelimitedString(line, beginDelimiter, endDelimiter);
       var result = $"{text}, {parser.StartIndex}";
       var compare = "One, -1";
@@ -181,7 +181,7 @@ namespace TestTextParser5
       var beginDelimiter = "(";
       var endDelimiter = ")";
 
-      var parser = new LJCTextParser5();
+      var parser = new LJCTextParser();
       var text = parser.StringWithDelimiters(line, beginDelimiter, endDelimiter);
       var result = $"{text}, {parser.StartIndex}";
       var compare = "(One), -1";
@@ -196,7 +196,7 @@ namespace TestTextParser5
     {
       var line = "<comment>A comment.</comment>";
 
-      var textParser = new LJCTextParser5();
+      var textParser = new LJCTextParser();
       string? findTagName = null;
       var result = textParser.FindTag(line, ref findTagName);
       var compare = "<comment>";
@@ -228,7 +228,7 @@ namespace TestTextParser5
     {
       var line = "<comment>A comment.</comment>";
 
-      var textParser = new LJCTextParser5();
+      var textParser = new LJCTextParser();
       var beginIndex = 0;
       var endIndex = 8;
       var result = textParser.RemoveSection(line, beginIndex, endIndex);
@@ -247,7 +247,7 @@ namespace TestTextParser5
     {
       var line = "<comment>A comment.</comment>";
 
-      var textParser = new LJCTextParser5();
+      var textParser = new LJCTextParser();
       var result = textParser.RemoveTags(line);
       var compare = "A comment.";
       TestCommon?.Write("RemoveTags", result, compare);
@@ -257,7 +257,7 @@ namespace TestTextParser5
     #region Class Data
 
     // Gets or sets the test common object.
-    private static LJCTestCommon5? TestCommon { get; set; }
+    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

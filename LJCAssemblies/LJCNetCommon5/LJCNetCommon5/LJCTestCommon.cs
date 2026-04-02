@@ -1,24 +1,24 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// LJCTestCommon5.cs
+// LJCTestCommon.cs
 
 namespace LJCNetCommon5
 {
   // Provides test methods.
   /// <include path="members/LJCTestCommon/*" file="Doc/LJCTestCommon.xml"/>
-  public class LJCTestCommon5
+  public class LJCTestCommon
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCTestCommon.xml"/>
-    public LJCTestCommon5()
+    public LJCTestCommon()
     {
     }
 
     // Initializes an object instance with the supplied values.
     /// <include path="members/ConstructorWithValues/*" file="Doc/LJCTestCommon.xml"/>
-    public LJCTestCommon5(string className)
+    public LJCTestCommon(string className)
     {
       mClassName = className;
     }
@@ -32,7 +32,7 @@ namespace LJCNetCommon5
       , string? compare, bool bracket = false)
     {
       var message = CompareMessage(methodName, result, compare, bracket);
-      if (LJC5.HasValue(message))
+      if (LJC.HasValue(message))
       {
         Console.WriteLine(message);
       }
@@ -46,11 +46,11 @@ namespace LJCNetCommon5
     {
       var retMessage = "";
 
-      if (!LJC5.HasValue(result))
+      if (!LJC.HasValue(result))
       {
         result = "No Result";
       }
-      if (!LJC5.HasValue(compare))
+      if (!LJC.HasValue(compare))
       {
         compare = "No Compare";
       }
@@ -63,7 +63,7 @@ namespace LJCNetCommon5
           bracketChar = "|";
         }
 
-        var tb = new LJCTextBuilder5();
+        var tb = new LJCTextBuilder();
         tb.Text($"\r\n{mClassName}.{methodName}");
         tb.Text($"{bracketChar}{result}{bracketChar}");
         tb.Text(" !=");

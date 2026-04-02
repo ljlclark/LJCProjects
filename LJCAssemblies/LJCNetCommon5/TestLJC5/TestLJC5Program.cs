@@ -12,9 +12,9 @@ namespace TestLJC5
     // The entry method.
     static void Main()
     {
-      TestCommon = new LJCTestCommon5("LJC5");
+      TestCommon = new LJCTestCommon("LJC");
       Console.WriteLine();
-      Console.WriteLine("*** LJC5 ***");
+      Console.WriteLine("*** LJC ***");
 
       // Text Transform Functions
       Base64BytesToText();
@@ -64,7 +64,7 @@ namespace TestLJC5
       byte[] base64Bytes = [86, 71, 86, 52, 100, 65, 61, 61];
 
       // Create Text from Base64 byte array.
-      var result = LJC5.Base64BytesToText(base64Bytes);
+      var result = LJC.Base64BytesToText(base64Bytes);
       var compare = "Text";
       TestCommon?.Write("Base64BytesToText()", result, compare);
     }
@@ -73,10 +73,10 @@ namespace TestLJC5
     private static void TextToBase64Bytes()
     {
       // Create Base64 byte array from text.
-      byte[] base64Bytes = LJC5.TextToBase64Bytes("Text");
+      byte[] base64Bytes = LJC.TextToBase64Bytes("Text");
 
       // Check the text.
-      var result = LJC5.Base64BytesToText(base64Bytes);
+      var result = LJC.Base64BytesToText(base64Bytes);
       var compare = "Text";
       TestCommon?.Write("TextToBase64Bytes()", result, compare);
     }
@@ -88,10 +88,10 @@ namespace TestLJC5
       byte[] base64Bytes = [86, 71, 86, 52, 100, 65, 61, 61];
 
       // Decodes a Base64 byte array to a Text byte array.
-      byte[] textBytes = LJC5.Base64BytesToTextBytes(base64Bytes);
+      byte[] textBytes = LJC.Base64BytesToTextBytes(base64Bytes);
 
       // Check the text.
-      var result = LJC5.BytesToText(textBytes);
+      var result = LJC.BytesToText(textBytes);
       var compare = "Text";
       TestCommon?.Write("Base64BytesToTextBytes()", result, compare);
     }
@@ -103,10 +103,10 @@ namespace TestLJC5
       byte[] textBytes = [84, 101, 120, 116];
 
       // Encodes a byte array to a Base64 byte array.
-      byte[] base64Bytes = LJC5.TextBytesToBase64Bytes(textBytes);
+      byte[] base64Bytes = LJC.TextBytesToBase64Bytes(textBytes);
 
       // Check the text.
-      var result = LJC5.Base64BytesToText(base64Bytes);
+      var result = LJC.Base64BytesToText(base64Bytes);
       var compare = "Text";
       TestCommon?.Write("TextBytesToBase64Bytes()", result, compare);
     }
@@ -118,7 +118,7 @@ namespace TestLJC5
       var base64 = "VGV4dA==";
 
       // Decodes a Base64 string to Text.
-      var result = LJC5.Base64ToText(base64);
+      var result = LJC.Base64ToText(base64);
       var compare = "Text";
       TestCommon?.Write("Base64BytesToText()", result, compare);
     }
@@ -129,7 +129,7 @@ namespace TestLJC5
       string text = "Text";
 
       // Encodes text to a Base64 string.
-      var result = LJC5.TextToBase64(text);
+      var result = LJC.TextToBase64(text);
 
       // Check the text.
       var compare = "VGV4dA==";
@@ -144,10 +144,10 @@ namespace TestLJC5
       var base64 = "VGV4dA==";
 
       // Decodes a Base64 value to a Text byte array.
-      byte[] textBytes = LJC5.Base64ToTextBytes(base64);
+      byte[] textBytes = LJC.Base64ToTextBytes(base64);
 
       // Check the text.
-      var result = LJC5.BytesToText(textBytes);
+      var result = LJC.BytesToText(textBytes);
       var compare = "Text";
       TestCommon?.Write("Base64ToTextBytes()", result, compare);
     }
@@ -159,10 +159,10 @@ namespace TestLJC5
       byte[] textBytes = [84, 101, 120, 116];
 
       // Encodes a Text byte array to a Base64 value.
-      string base64 = LJC5.TextBytesToBase64(textBytes);
+      string base64 = LJC.TextBytesToBase64(textBytes);
 
       // Check the text.
-      var result = LJC5.Base64ToText(base64);
+      var result = LJC.Base64ToText(base64);
       var compare = "Text";
       TestCommon?.Write("TextBytesToBase64()", result, compare);
     }
@@ -174,7 +174,7 @@ namespace TestLJC5
       byte[] textBytes = [84, 101, 120, 116];
 
       // Creates text from a byte array.
-      var result = LJC5.BytesToText(textBytes);
+      var result = LJC.BytesToText(textBytes);
       var compare = "Text";
       TestCommon?.Write("BytesToText()", result, compare);
     }
@@ -186,10 +186,10 @@ namespace TestLJC5
       string text = "Text";
 
       // Creates a byte array from text.
-      byte[] bytes = LJC5.TextToBytes(text);
+      byte[] bytes = LJC.TextToBytes(text);
 
       // Check the text.
-      var result = LJC5.BytesToText(bytes);
+      var result = LJC.BytesToText(bytes);
       var compare = "Text";
       TestCommon?.Write("TextToBytes()", result, compare);
     }
@@ -199,14 +199,14 @@ namespace TestLJC5
     {
       // Setup
       byte[] textBytes;
-      using (Stream stream = LJC5.StringToMemStream("Text"))
+      using (Stream stream = LJC.StringToMemStream("Text"))
       {
         // Copies a memory stream to a byte array.
-        textBytes = LJC5.MemStreamToBytes(stream);
+        textBytes = LJC.MemStreamToBytes(stream);
       }
 
       // Check the text.
-      var result = LJC5.BytesToText(textBytes);
+      var result = LJC.BytesToText(textBytes);
       var compare = "Text";
       TestCommon?.Write("MemStreamToBytes()", result, compare);
     }
@@ -215,12 +215,12 @@ namespace TestLJC5
     private static void BytesToMemStream()
     {
       // Setup
-      byte[] bytes = LJC5.TextToBytes("Text");
+      byte[] bytes = LJC.TextToBytes("Text");
 
       // Copies a byte array to a memory stream.
-      using Stream stream = LJC5.BytesToMemStream(bytes);
+      using Stream stream = LJC.BytesToMemStream(bytes);
       // Check the text.
-      var result = LJC5.MemStreamToString(stream);
+      var result = LJC.MemStreamToString(stream);
       var compare = "Text";
       TestCommon?.Write("BytesToMemStream()", result, compare);
     }
@@ -230,9 +230,9 @@ namespace TestLJC5
     {
       // Setup
       var text = "Text";
-      using Stream stream = LJC5.StringToMemStream(text);
+      using Stream stream = LJC.StringToMemStream(text);
       // Creates a string from a memory stream.
-      var result = LJC5.MemStreamToString(stream);
+      var result = LJC.MemStreamToString(stream);
       var compare = "Text";
       TestCommon?.Write("MemStreamToString()", result, compare);
     }
@@ -241,9 +241,9 @@ namespace TestLJC5
     private static void StringToMemStream()
     {
       var text = "Text";
-      using Stream stream = LJC5.StringToMemStream(text);
+      using Stream stream = LJC.StringToMemStream(text);
       // Check the text.
-      var result = LJC5.MemStreamToString(stream);
+      var result = LJC.MemStreamToString(stream);
       var compare = "Text";
       TestCommon?.Write("StringToMemStream()", result, compare);
     }
@@ -255,7 +255,7 @@ namespace TestLJC5
       string encoded = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
 
       // Decodes an encoded XML string.
-      var result = LJC5.XmlDecode(encoded);
+      var result = LJC.XmlDecode(encoded);
       var compare = "<text>Here & There</text>";
       TestCommon?.Write("XmlDecode()", result, compare);
     }
@@ -264,12 +264,12 @@ namespace TestLJC5
     private static void XmlEncode()
     {
       // Setup
-      string? encoded = LJC5.XmlEncode("<text>Here & There</text>");
+      string? encoded = LJC.XmlEncode("<text>Here & There</text>");
 
       // Check the text.
-      if (LJC5.HasValue(encoded))
+      if (LJC.HasValue(encoded))
       {
-        var result = LJC5.XmlDecode(encoded);
+        var result = LJC.XmlDecode(encoded);
         var compare = "<text>Here & There</text>";
         TestCommon?.Write("XmlEncode()", result, compare);
       }
@@ -286,7 +286,7 @@ namespace TestLJC5
       object obj = setup;
 
       // Gets a short value from an object.
-      bool value = LJC5.GetBoolean(obj);
+      bool value = LJC.GetBoolean(obj);
       var result = value.ToString();
       var compare = "True";
       TestCommon?.Write("GetBoolean()", result, compare);
@@ -300,7 +300,7 @@ namespace TestLJC5
       object obj = setup;
 
       // Gets a byte value from an object.
-      byte value = LJC5.GetByte(obj);
+      byte value = LJC.GetByte(obj);
       var result = value.ToString();
       var compare = "65";
       TestCommon?.Write("GetByte()", result, compare);
@@ -314,7 +314,7 @@ namespace TestLJC5
       object obj = setup;
 
       // Gets a byte value from an object.
-      char value = LJC5.GetChar(obj);
+      char value = LJC.GetChar(obj);
       var result = value.ToString();
       var compare = "A";
       TestCommon?.Write("GetChar()", result, compare);
@@ -328,7 +328,7 @@ namespace TestLJC5
       object obj = setup;
 
       // Gets a decimal value from an object.
-      DateTime? returnValue = LJC5.GetDateTime(obj);
+      DateTime? returnValue = LJC.GetDateTime(obj);
       if (returnValue != null)
       {
         DateTime value = (DateTime)returnValue;
@@ -347,7 +347,7 @@ namespace TestLJC5
       object obj = setup;
 
       // Gets a decimal value from an object.
-      decimal value = LJC5.GetDecimal(obj);
+      decimal value = LJC.GetDecimal(obj);
       var result = value.ToString();
       var compare = "3.14";
       TestCommon?.Write("GetDecimal()", result, compare);
@@ -361,7 +361,7 @@ namespace TestLJC5
       object obj = setup;
 
       // Gets a decimal value from an object.
-      double value = LJC5.GetDouble(obj);
+      double value = LJC.GetDouble(obj);
       var result = value.ToString();
       var compare = "3.14";
       TestCommon?.Write("GetDouble()", result, compare);
@@ -375,7 +375,7 @@ namespace TestLJC5
       object obj = setup;
 
       // Gets a short value from an object.
-      short value = LJC5.GetInt16(obj);
+      short value = LJC.GetInt16(obj);
       var result = value.ToString();
       var compare = "3";
       TestCommon?.Write("GetInt16()", result, compare);
@@ -389,7 +389,7 @@ namespace TestLJC5
       object obj = setup;
 
       // Gets an int value from an object.
-      int value = LJC5.GetInt32(obj);
+      int value = LJC.GetInt32(obj);
       var result = value.ToString();
       var compare = "3";
       TestCommon?.Write("GetInt32()", result, compare);
@@ -403,7 +403,7 @@ namespace TestLJC5
       object obj = setup;
 
       // Gets a long value from an object.
-      long value = LJC5.GetInt64(obj);
+      long value = LJC.GetInt64(obj);
       var result = value.ToString();
       var compare = "3";
       TestCommon?.Write("GetInt64()", result, compare);
@@ -421,7 +421,7 @@ namespace TestLJC5
       object obj = setup;
 
       // Gets a decimal value from an object.
-      float value = LJC5.GetSingle(obj);
+      float value = LJC.GetSingle(obj);
       var result = value.ToString();
       var compare = "3.14";
       TestCommon?.Write("GetDouble()", result, compare);
@@ -435,7 +435,7 @@ namespace TestLJC5
       object obj = setup;
 
       // Gets a string value from an object.
-      string? value = LJC5.GetString(obj);
+      string? value = LJC.GetString(obj);
       var result = value;
       var compare = "3";
       TestCommon?.Write("GetString", result, compare);
@@ -456,11 +456,11 @@ namespace TestLJC5
       };
       string file = "Text.xml";
       //LJC.XmlSerialize(person.GetType(), person, null, file);
-      LJC5.XmlSerialize(typeof(Person), person, null, file);
+      LJC.XmlSerialize(typeof(Person), person, null, file);
 
       // Deserialize an XML message file to an object.
       Person? newPerson;
-      newPerson = LJC5.XmlDeserialize(typeof(Person), file) as Person;
+      newPerson = LJC.XmlDeserialize(typeof(Person), file) as Person;
       if (null == newPerson)
       {
         Console.WriteLine("XmlDeserialize()1 newPerson is null.");
@@ -487,12 +487,12 @@ namespace TestLJC5
       //string message = LJC.XmlSerializeToString(person.GetType(), person
       //  , null);
       var nameSpaces = new XmlSerializerNamespaces();
-      string message = LJC5.XmlSerializeToString(person.GetType(), person
+      string message = LJC.XmlSerializeToString(person.GetType(), person
         , nameSpaces);
 
       // Deserialize an XML message string to an object.
       Person? newPerson;
-      newPerson = LJC5.XmlDeserializeMessage(typeof(Person), message) as Person;
+      newPerson = LJC.XmlDeserializeMessage(typeof(Person), message) as Person;
       if (null == newPerson)
       {
         Console.WriteLine("XmlDeserializeMessage()1 newPerson is null.");
@@ -519,11 +519,11 @@ namespace TestLJC5
       string file = "Text.xml";
 
       // Serialize an object to an XML message file.
-      LJC5.XmlSerialize(person.GetType(), person, null, file);
+      LJC.XmlSerialize(person.GetType(), person, null, file);
 
       // Check the object.
       Person? newPerson;
-      newPerson = LJC5.XmlDeserialize(typeof(Person), file) as Person;
+      newPerson = LJC.XmlDeserialize(typeof(Person), file) as Person;
       if (null == newPerson)
       {
         Console.WriteLine("XmlSerialize()1 newPerson is null.");
@@ -550,12 +550,12 @@ namespace TestLJC5
       //string message = LJC.XmlSerializeToString(person.GetType(), person
       //  , null);
       var nameSpaces = new XmlSerializerNamespaces();
-      string message = LJC5.XmlSerializeToString(person.GetType(), person
+      string message = LJC.XmlSerializeToString(person.GetType(), person
         , nameSpaces);
 
       // Check the object.
       Person? newPerson;
-      newPerson = LJC5.XmlDeserializeMessage(typeof(Person), message) as Person;
+      newPerson = LJC.XmlDeserializeMessage(typeof(Person), message) as Person;
       if (null == newPerson)
       {
         Console.WriteLine("XmlSerializeToString()1 newPerson is null.");
@@ -572,7 +572,7 @@ namespace TestLJC5
 
     #region Class Data
 
-    private static LJCTestCommon5? TestCommon { get; set; }
+    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 

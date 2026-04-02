@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJC5.cs
+// LJC.cs
 using System.Collections;
 using System.Configuration;
 using System.Data;
@@ -13,7 +13,7 @@ namespace LJCNetCommon5
 {
   // Contains common static methods.
   /// <include path="members/LJC/*" file="Doc/LJC.xml"/>
-  public class LJC5
+  public class LJC
   {
     #region Check Values Methods
 

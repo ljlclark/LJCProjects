@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCDataConfigs5.cs
+// LJCDataConfigs.cs
 using LJCNetCommon5;
 using System.Reflection;
 
@@ -8,19 +8,19 @@ namespace LJCDataAccessConfig5
 {
   // Represents a collection of LJCDataConfig objects.
   /// <include path="members/LJCDataConfigs/*" file="Doc/LJCDataConfigs.xml"/>
-  public class LJCDataConfigs5 : List<LJCDataConfig5>
+  public class LJCDataConfigs : List<LJCDataConfig>
   {
     #region Static Methods
 
     // Gets a DataConfig from the DataConfigs.xml file.
     /// <include path="members/DataConfig/*" file="Doc/LJCDataConfigs.xml"/>
-    public static LJCDataConfig5? DataConfig(string configName)
+    public static LJCDataConfig? DataConfig(string configName)
     {
-      LJCDataConfig5 retConfig = null;
+      LJCDataConfig retConfig = null;
 
-      if (LJC5.HasValue(configName))
+      if (LJC.HasValue(configName))
       {
-        var dataConfigs = new LJCDataConfigs5();
+        var dataConfigs = new LJCDataConfigs();
         dataConfigs.LoadData();
         retConfig = dataConfigs.Retrieve(configName);
       }
@@ -32,7 +32,7 @@ namespace LJCDataAccessConfig5
 
     // Initializes an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCDataConfigs.xml"/>
-    public LJCDataConfigs5()
+    public LJCDataConfigs()
     {
       mConfigFileName = "DataConfigs.xml";
       string localAssembly = Assembly.GetExecutingAssembly().Location;
@@ -51,11 +51,11 @@ namespace LJCDataAccessConfig5
         WriteDefaultData();
       }
 
-      if (LJC5.XmlDeserialize(typeof(LJCDataConfigs5)
-        , ConfigFileSpec) is LJCDataConfigs5 dataConfigs)
+      if (LJC.XmlDeserialize(typeof(LJCDataConfigs)
+        , ConfigFileSpec) is LJCDataConfigs dataConfigs)
       {
         Clear();
-        foreach (LJCDataConfig5 dataConfig in dataConfigs)
+        foreach (LJCDataConfig dataConfig in dataConfigs)
         {
           Add(dataConfig);
         }
@@ -67,10 +67,10 @@ namespace LJCDataAccessConfig5
 
     // Creates and adds the object from the provided valus.
     /// <include path="members/Add/*" file="Doc/LJCDataConfigs.xml"/>
-    public LJCDataConfig5 Add(string name, string dbServer, string database
+    public LJCDataConfig Add(string name, string dbServer, string database
       , string connectionType)
     {
-      var retValue = new LJCDataConfig5(connectionType)
+      var retValue = new LJCDataConfig(connectionType)
       {
         Name = name,
         DbServer = dbServer,
@@ -83,9 +83,9 @@ namespace LJCDataAccessConfig5
 
     // Retrieve the data configuration.
     /// <include path="members/Retrieve/*" file="Doc/LJCDataConfigs.xml"/>
-    public LJCDataConfig5 Retrieve(string name)
+    public LJCDataConfig Retrieve(string name)
     {
-      LJCDataConfig5 retValue;
+      LJCDataConfig retValue;
 
       if (Count != mPrevCount)
       {
@@ -93,7 +93,7 @@ namespace LJCDataAccessConfig5
         Sort();
       }
 
-      var dataConfig = new LJCDataConfig5(ConnectionType)
+      var dataConfig = new LJCDataConfig(ConnectionType)
       {
         Name = name,
       };
@@ -114,7 +114,7 @@ namespace LJCDataAccessConfig5
     /// <include path="members/Save/*" file="Doc/LJCDataConfigs.xml"/>
     public void Save()
     {
-      LJC5.XmlSerialize(this.GetType(), this, null, ConfigFileSpec);
+      LJC.XmlSerialize(this.GetType(), this, null, ConfigFileSpec);
     }
     #endregion
 
@@ -123,7 +123,7 @@ namespace LJCDataAccessConfig5
     // Create the default data file.
     private void WriteDefaultData()
     {
-      var tb = new LJCTextBuilder5();
+      var tb = new LJCTextBuilder();
       tb.AddLine("<?xml version='1.0'?>");
       tb.AddLine("<DataConfigs xmlns: xsi\"http://www.w3.org/2001/XMLSchema-instance\"");
       tb.AddLine(" xmlns: xsd=\"http://www.w3.org/2001/XMLSchema\">");
@@ -137,7 +137,7 @@ namespace LJCDataAccessConfig5
       tb.AddLine("  </DataConfig>");
       tb.AddLine("</DataConfigs>");
       var dataConfigs = tb.ToString().Split('\n');
-      if (LJC5.HasValue(ConfigFileSpec))
+      if (LJC.HasValue(ConfigFileSpec))
       {
         File.WriteAllLines(ConfigFileSpec, dataConfigs);
       }

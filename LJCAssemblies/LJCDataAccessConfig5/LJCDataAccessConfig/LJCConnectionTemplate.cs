@@ -1,18 +1,18 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCConnectionTemplate5.cs
+// LJCConnectionTemplate.cs
 
 namespace LJCDataAccessConfig5
 {
   // Represents a Connection String template.
   /// <include path="members/LJCConnectionTemplate/*" file="Doc/LJCConnectionTemplate.xml"/>
-  public class LJCConnectionTemplate5 : IComparable<LJCConnectionTemplate5>
+  public class LJCConnectionTemplate : IComparable<LJCConnectionTemplate>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCConnectionTemplate.xml"/>
-    public LJCConnectionTemplate5()
+    public LJCConnectionTemplate()
     {
     }
     #endregion
@@ -21,10 +21,10 @@ namespace LJCDataAccessConfig5
 
     // Creates and returns a clone of the object.
     /// <include path="members/Clone/*" file="Doc/LJCConnectionTemplate.xml"/>
-    public LJCConnectionTemplate5? Clone()
+    public LJCConnectionTemplate? Clone()
     {
-      LJCConnectionTemplate5? retValue = MemberwiseClone()
-        as LJCConnectionTemplate5;
+      LJCConnectionTemplate? retValue = MemberwiseClone()
+        as LJCConnectionTemplate;
       return retValue;
     }
 
@@ -37,7 +37,7 @@ namespace LJCDataAccessConfig5
 
     // Provides the default Sort functionality.
     /// <include path="members/CompareTo/*" file="Doc/LJCConnectionTemplate.xml"/>
-    public int CompareTo(LJCConnectionTemplate5? other)
+    public int CompareTo(LJCConnectionTemplate? other)
     {
       int retValue;
 
