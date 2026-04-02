@@ -1,31 +1,31 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCDocDataParam5.cs
+// LJCDocDataParam.cs
 using LJCNetCommon5;
 
 namespace LJCDocDataDAL5
 {
   // Represents a DocData parameter.
   /// <include path="members/LJCDocDataParam/*" file="Doc/LJCDocDataParam.xml"/>
-  public class LJCDocDataParam5
+  public class LJCDocDataParam
   {
     #region Static Methods
 
     // Create an LJCDocDataParam object from an "include" line.
     /// <include path="members/GetParam/*" file="Doc/LJCDocDataParam.xml"/>
-    public static LJCDocDataParam5? GetParam(string line)
+    public static LJCDocDataParam? GetParam(string line)
     {
-      LJCDocDataParam5? retParam = null;
+      LJCDocDataParam? retParam = null;
 
-      if (LJC5.HasValue(line))
+      if (LJC.HasValue(line))
       {
-        var parser = new LJCTextParser5();
+        var parser = new LJCTextParser();
         var name = parser.DelimitedString(line, "name=\"", "\">");
         parser.StartIndex = 0;
         string? summary = parser.DelimitedString(line, ">", "</");
-        if (LJC5.HasValue(name))
+        if (LJC.HasValue(name))
         {
-          retParam = new LJCDocDataParam5(name, summary);
+          retParam = new LJCDocDataParam(name, summary);
         }
       }
       return retParam;
@@ -36,13 +36,13 @@ namespace LJCDocDataDAL5
 
     // Initializes an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCDocDataParam.xml"/>
-    public LJCDocDataParam5()
+    public LJCDocDataParam()
     {
     }
 
     // Initializes an object instance with the provided values.
     /// <include path="members/ConstructorParams/*" file="Doc/LJCDocDataParam.xml"/>
-    public LJCDocDataParam5(string name, string? summary)
+    public LJCDocDataParam(string name, string? summary)
     {
       Name = name;
       Summary = summary;

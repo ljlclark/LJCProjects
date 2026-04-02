@@ -1,24 +1,24 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCDocDataClass5.cs
+// LJCDocDataClass.cs
 
 namespace LJCDocDataDAL5
 {
   // Represents a DocData class.
   /// <include path="members/LJCDocDataClass/*" file="Doc/LJCDocDataClass.xml"/>
-  public class LJCDocDataClass5
+  public class LJCDocDataClass
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCDocDataClass.xml"/>
-    public LJCDocDataClass5()
+    public LJCDocDataClass()
     {
     }
 
     // Initializes an object instance with the provided values.
     /// <include path="members/ConstructorParams/*" file="Doc/LJCDocDataClass.xml"/>
-    public LJCDocDataClass5(string name, string summary)
+    public LJCDocDataClass(string name, string summary)
     {
       Name = name;
       Summary = summary;
@@ -41,11 +41,11 @@ namespace LJCDocDataDAL5
 
     // Gets or sets the Method Group collection.
     /// <include path="members/Groups/*" file="Doc/LJCDocDataClass.xml"/>
-    public LJCDocDataParams5? Groups;
+    public LJCDocDataParams? Groups;
 
     // Gets or sets the Method collection.
     /// <include path="members/Methods/*" file="Doc/LJCDocDataClass.xml"/>
-    public LJCDocDataMethods5? Methods;
+    public LJCDocDataMethods? Methods;
 
     // Gets or sets the Name value.
     /// <include path="members/Name/*" file="Doc/LJCDocDataClass.xml"/>
@@ -53,7 +53,7 @@ namespace LJCDocDataDAL5
 
     // Gets or sets the Property collection.
     /// <include path="members/Properties/*" file="Doc/LJCDocDataClass.xml"/>
-    public LJCDocDataProperties5? Properties;
+    public LJCDocDataProperties? Properties;
 
     // Gets or sets the Remarks value.
     /// <include path="members/Remarks/*" file="Doc/LJCDocDataClass.xml"/>

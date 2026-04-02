@@ -1,24 +1,24 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCDocDataFile5.cs
+// LJCDocDataFile.cs
 
 namespace LJCDocDataDAL5
 {
   // Represents a DocData Lib file.
   /// <include path="members/LJCDocDataFile/*" file="Doc/LJCDocDataFile.xml"/>
-  public class LJCDocDataFile5
+  public class LJCDocDataFile
   {
     #region Constructor Methods
 
     // Initialize an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCDocDataFile.xml"/>
-    public LJCDocDataFile5()
+    public LJCDocDataFile()
     {
     }
 
     // Initialize an object instance with the supplied values.
     /// <include path="members/ConstructorParams/*" file="Doc/LJCDocDataFile.xml"/>
-    public LJCDocDataFile5(string name, string? summary = null)
+    public LJCDocDataFile(string name, string? summary = null)
     {
       // Initialize Serialize Properties
       Name = name;
@@ -34,7 +34,7 @@ namespace LJCDocDataDAL5
 
     // Gets or sets the Class collection.
     /// <include path="members/Classes/*" file="Doc/LJCDocDataFile.xml"/>
-    public LJCDocDataClasses5? Classes;
+    public LJCDocDataClasses? Classes;
 
     // Gets or sets the Name value.
     /// <include path="members/Name/*" file="Doc/LJCDocDataFile.xml"/>

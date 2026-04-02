@@ -19,7 +19,7 @@ namespace LJCGenDocProgram5
     {
       //var genDoc2 = new LJCGenDoc2();
 
-      var genDocConfig = new LJCGenDocConfig5
+      var genDocConfig = new LJCGenDocConfig
       {
         DocDataXMLPath = "../XMLDocData",
         GenDataXMLPath = "../XMLGenData",
@@ -27,7 +27,7 @@ namespace LJCGenDocProgram5
         WriteGenDataXML = false
       };
       var parentPath = @"LJCGenDoc2\bin\Debug";
-      string prefix = LJCGenDocConfig5.GetParentPathPrefix(parentPath);
+      string prefix = LJCGenDocConfig.GetParentPathPrefix(parentPath);
       genDocConfig.OutputPath = $"{prefix}CodeDoc/HTML";
       //genDoc2.SetConfig(genDocConfig);
 
@@ -56,7 +56,7 @@ namespace LJCGenDocProgram5
 
       if (null == args
         || args.Length < 1
-        || !LJC5.HasValue(args[0]))
+        || !LJC.HasValue(args[0]))
       {
         retShowSyntax = true;
       }

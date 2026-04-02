@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCGenDocConfig5.cs
+// LJCGenDocConfig.cs
 using LJCNetCommon5;
 
 namespace LJCDocDataDAL5
@@ -8,14 +8,14 @@ namespace LJCDocDataDAL5
   /// <summary>
   /// Represents a GenCodeDoc configuration.
   /// </summary>
-  public class LJCGenDocConfig5
+  public class LJCGenDocConfig
   {
     #region Constructor Methods
 
     /// <summary>
     /// Initializes an object instance.
     /// </summary>
-    public LJCGenDocConfig5()
+    public LJCGenDocConfig()
     {
       // Initialize Properties
       DocDataXMLPath = @"../XMLDocData";
@@ -55,7 +55,7 @@ namespace LJCDocDataDAL5
     {
       var retIsSource = false;
 
-      if (LJC5.HasValue(line))
+      if (LJC.HasValue(line))
       {
         retIsSource = true;
       }

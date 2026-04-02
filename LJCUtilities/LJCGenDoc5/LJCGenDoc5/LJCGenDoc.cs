@@ -3,7 +3,7 @@
  /// <summary>
  /// 
  /// </summary>
-  public class LJCGenDoc5
+  public class LJCGenDoc
   {
 
   }
