@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCGenDocProgram5</name>
+    </assembly>
+    <members>
+        <member name="T:LJCGenDocProgram5.GenDocProgram5">
+            <summary>
+      The program entry class.
+    </summary>
+        </member>
+        <member name="M:LJCGenDocProgram5.GenDocProgram5.Main(System.String[])">
+            <summary>
+      The program entry method.
+    </summary><param name="args">The program arguments.</param>
+        </member>
+    </members>
+</doc>

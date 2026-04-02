@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCDocDataDAL5</name>
+    </assembly>
+    <members>
+        <member name="T:LJCDocDataDAL5.LJCDocDataClass5">
+            <summary>
+      Represents a DocData class.
+    </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCDocDataClass5.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCDocDataClass5.#ctor(System.String,System.String)">
+            <summary>
+      Initializes an object instance with the provided values.
+    </summary><param name="name">The name value.</param><param name="summary">The summary value.</param>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataClass5.Code">
+            <summary>
+      Gets or sets the Code value.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataClass5.Groups">
+            <summary>
+      Gets or sets the Method Group collection.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataClass5.Methods">
+            <summary>
+      Gets or sets the Method collection.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataClass5.Name">
+            <summary>
+      Gets or sets the Name value.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataClass5.Properties">
+            <summary>
+      Gets or sets the Property collection.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataClass5.Remarks">
+            <summary>
+      Gets or sets the Remarks value.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataClass5.Summary">
+            <summary>
+      Gets or sets the Summary value.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataClass5.Syntax">
+            <summary>
+      Gets or sets the class Syntax.
+    </summary>
+        </member>
+        <member name="T:LJCDocDataDAL5.LJCDocDataClasses5">
+            <summary>
+      Represents a collection of LJCDocDataClass objects.
+    </summary>
+        </member>
+        <member name="T:LJCDocDataDAL5.LJCDocDataFile5">
+            <summary>
+      Represents a DocData class.
+    </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCDocDataFile5.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCDocDataFile5.#ctor(System.String,System.String)">
+            <summary>
+      Initializes an object instance with the provided values.
+    </summary><param name="name">The name value.</param><param name="summary">The summary value.</param>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataFile5.Classes">
+            <summary>
+      Gets or sets the Class collection.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataFile5.Name">
+            <summary>
+      Gets or sets the Name value.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataFile5.Remarks">
+            <summary>
+      Gets or sets the Remarks value.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataFile5.Summary">
+            <summary>
+      Gets or sets the Summary value.
+    </summary>
+        </member>
+        <member name="T:LJCDocDataDAL5.LJCDocDataMethod5">
+            <summary>
+      Represents a DocData class.
+    </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCDocDataMethod5.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCDocDataMethod5.#ctor(System.String,System.String)">
+            <summary>
+      Initializes an object instance with the provided values.
+    </summary><param name="name">The name value.</param><param name="summary">The summary value.</param>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCDocDataMethod5.Code">
+            <summary>
+      Gets or sets the Code value.
+    </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCDocDataMethod5.Name">
+            <summary>
+      Gets or sets the Name value.
+    </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCDocDataMethod5.Params">
+            <summary>
+      Gets or sets the Params collection.
+    </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCDocDataMethod5.ParentGroup">
+            <summary>
+      Gets or sets the ParentGroup value.
+    </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCDocDataMethod5.Remarks">
+            <summary>
+      Gets or sets the Remarks value.
+    </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCDocDataMethod5.Returns">
+            <summary>
+      Gets or sets the Returns value.
+    </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCDocDataMethod5.Summary">
+            <summary>
+      Gets or sets the Summary value.
+    </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCDocDataMethod5.Syntax">
+            <summary>
+      Gets or sets the Syntax value.
+    </summary>
+        </member>
+        <member name="T:LJCDocDataDAL5.LJCDocDataMethods5">
+            <summary>
+      Represents a collection of LJCDocDataMethod objects.
+    </summary>
+        </member>
+        <member name="T:LJCDocDataDAL5.LJCDocDataParam5">
+            <summary>
+      Represents a DocData parameter.
+    </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCDocDataParam5.GetParam(System.String)">
+            <summary>
+      Create an LJCDocDataParam object from a "include" line.
+    </summary><param name="line">The text line.</param>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCDocDataParam5.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCDocDataParam5.#ctor(System.String,System.String)">
+            <summary>
+      Initializes an object instance with the provided values.
+    </summary><param name="name">The name value.</param><param name="summary">The summary value.</param>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCDocDataParam5.Name">
+            <summary>
+      Gets or sets the Name value.
+    </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCDocDataParam5.Summary">
+            <summary>
+      Gets or sets the Summary value.
+    </summary>
+        </member>
+        <member name="T:LJCDocDataDAL5.LJCDocDataParams5">
+            <summary>
+      Represents a collection of LJCDocDataParam objects.
+    </summary>
+        </member>
+        <member name="T:LJCDocDataDAL5.LJCDocDataProperties5">
+            <summary>
+      Represents a collection of LJCDocDataProperty objects.
+    </summary>
+        </member>
+        <member name="T:LJCDocDataDAL5.LJCDocDataProperty5">
+            <summary>
+      Represents a DocData property.
+    </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCDocDataProperty5.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCDocDataProperty5.#ctor(System.String,System.String)">
+            <summary>
+      Initializes an object instance with the provided values.
+    </summary><param name="name">The name value.</param><param name="summary">The summary value.</param>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataProperty5.Name">
+            <summary>
+      Gets or sets the Name value.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataProperty5.Remarks">
+            <summary>
+      Gets or sets the Remarks value.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataProperty5.Returns">
+            <summary>
+      Gets or sets the Returns value.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataProperty5.Summary">
+            <summary>
+      Gets or sets the Summary value.
+    </summary>
+        </member>
+        <member name="F:LJCDocDataDAL5.LJCDocDataProperty5.Syntax">
+            <summary>
+      Gets or sets the Syntax value.
+    </summary>
+        </member>
+        <member name="T:LJCDocDataDAL5.LJCGenDocConfig5">
+            <summary>
+            Represents a GenCodeDoc configuration.
+            </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCGenDocConfig5.#ctor">
+            <summary>
+            Initializes an object instance.
+            </summary>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCGenDocConfig5.GetParentPathPrefix(System.String)">
+            <summary>
+            Gets the relative path prefix.
+            </summary>
+            <param name="path">The parent folder path.</param>
+            <returns>The relative path prefix from the program folder.</returns>
+        </member>
+        <member name="M:LJCDocDataDAL5.LJCGenDocConfig5.SetProperty(System.String)">
+            <summary>
+            Sets a configuration property from a template line.
+            </summary>
+            <param name="line">The template line.</param>
+            <returns>true if line is a file; otherwise false.</returns>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCGenDocConfig5.DocDataXMLPath">
+            <summary>
+            The DocDataXML target path.
+            </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCGenDocConfig5.GenDataXMLPath">
+            <summary>
+            The GenDataXML target path.
+            </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCGenDocConfig5.OutputPath">
+            <summary>
+            The Output target path.
+            </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCGenDocConfig5.WriteDocDataXML">
+            <summary>
+            Indicates if the DocDataXML will be written to a file.
+            </summary>
+        </member>
+        <member name="P:LJCDocDataDAL5.LJCGenDocConfig5.WriteGenDataXML">
+            <summary>
+            Indicates if the GenDataXML will be written to a file.
+            </summary>
+        </member>
+    </members>
+</doc>
