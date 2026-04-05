@@ -125,7 +125,7 @@ namespace LJCNetCommon5
 
     // Formats the column value for the SQL string.
     /// <include path="members/FormatValue/*" file="Doc/LJCNetString.xml"/>
-    public static string? FormatValue(object? value, string dataTypeName)
+    public static string? FormatValue(object? value, string? dataTypeName)
     {
       string? retValue = "null";
 
@@ -596,19 +596,19 @@ namespace LJCNetCommon5
 
     #region Constants
 
-    // The compare object is equal to the compareto object.
+    // The "compare" object is equal to the "compareto" object.
     /// <include path="members/CompareEqual/*" file="Doc/LJCNetString.xml"/>
     public const int CompareEqual = 0;
 
-    // The compare object is greater than the compareto object.
+    // The "compare" object is greater than the "compareto" object.
     /// <include path="members/CompareGreater/*" file="Doc/LJCNetString.xml"/>
     public const int CompareGreater = 1;
 
-    // The compare object  is less than the compareto object.
+    // The "compare" object is less than the "compareto" object.
     /// <include path="members/CompareLess/*" file="Doc/LJCNetString.xml"/>
     public const int CompareLess = -1;
 
-    // The compare object is notnull or equal is equal to the compareto object.
+    // The "compare" object and "compareto" object are not both null.
     /// <include path="members/CompareNotNullOrEqual/*" file="Doc/LJCNetString.xml"/>
     public const int CompareNotNullOrEqual = -2;
     #endregion

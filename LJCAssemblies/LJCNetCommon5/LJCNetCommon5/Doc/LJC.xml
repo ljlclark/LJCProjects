@@ -166,7 +166,7 @@
     <returns>true if minimum; otherwise, false.</returns>
   </IsDbMinDate>
 
-  <!-- Text Transform Methods -->
+  <!-- Text Conversion Methods -->
   <Base64BytesToText>
     <summary>
       Decodes a Base64 byte array to a Text value.
@@ -536,7 +536,6 @@
     </example>
   </StringToMemStream>
   
-  <!-- XML Entities -->
   <XmlDecode>
     <summary>
       Decodes an encoded XML string.
@@ -750,7 +749,7 @@
   <!-- Configuration Methods -->
   <ConfigBool>
     <summary>
-      Retrieves the Config bool value. (RE)
+      Retrieves the Config bool value.
     </summary>
     <param name="key">The key value.</param>
     <returns>The bool config value.</returns>
@@ -786,7 +785,7 @@
   </ConfigBool>
   <ConfigColor>
     <summary>
-      Retrieves the Config Color value. (RE)
+      Retrieves the Config Color value.
     </summary>
     <param name="key">The key value.</param>
     <param name="color">The default color value.</param>
@@ -824,7 +823,7 @@
   </ConfigColor>
   <ConfigString>
     <summary>
-      Retrieves the Config string value. (RE)
+      Retrieves the Config string value.
     </summary>
     <param name="key">The key value.</param>
     <returns>The string config value.</returns>
@@ -865,7 +864,7 @@
     <param name="dataConfigName">The DataConfig name.</param>
   </ConsoleConfig>
 
-  <!-- Object Data Functions -->
+  <!-- Object Value Methods -->
   <GetBoolean>
     <summary>
       Gets a boolean value from an object.
@@ -923,7 +922,7 @@
   </GetByte>
   <GetChar>
     <summary>
-      Gets a byte value from an object.
+      Gets a character value from an object.
     </summary>
     <param name="value">The value object.</param>
     <returns>
@@ -982,7 +981,7 @@
   </GetDateTime>
   <GetDecimal>
     <summary>
-      Gets a decimal value from an object. (E)
+      Gets a decimal value from an object.
     </summary>
     <param name="value">The value object.</param>
     <returns>
@@ -1090,7 +1089,7 @@
   </GetInt32>
   <GetInt64>
     <summary>
-      Gets a long value from an object. (E)
+      Gets a long value from an object.
     </summary>
     <param name="value">The value object.</param>
     <returns>
@@ -1150,7 +1149,7 @@
   </GetSingle>
   <GetString>
     <summary>
-      Gets a trimmed string value from an object. (E)
+      Gets a trimmed string value from an object.
     </summary>
     <param name="value">The value object.</param>
     <returns>The trimmed string value or null if the object is null.</returns>
@@ -1185,7 +1184,7 @@
     <param name="text">The text value.</param>
   </ToInt32>
   
-  <!-- Class Values -->
+  <!-- DataType Names -->
   <TypeBoolean>
     <summary>
       The Boolean type name.

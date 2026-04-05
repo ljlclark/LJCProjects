@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCArgError.xml -->
+<members>
+  <!-- Class -->
+  <LJCArgError>
+    <summary>
+      Creates an argument error message.
+    </summary>
+  </LJCArgError>
+  
+  <!-- Constructors -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="className">The Class name.</param>
+  </Constructor>
+  
+  <!-- Data Class Methods -->
+  <ToString>
+    <summary>
+      Returns the message string.
+    </summary>
+    <returns>
+      The message string.
+    </returns>
+  </ToString>
+  
+  <!-- Methods -->
+  <Add1>
+    <summary>
+      Adds a message using the provided values.
+    </summary>
+    <param name="argument">The argument value.</param>
+    <param name="name">The argument name.</param>
+  </Add1>
+  <Add2>
+    <summary>
+      Adds a message.
+    </summary>
+    <param name="message">The message value.</param>
+  </Add2>
+  
+  <!-- Properties -->
+  <ClassName>
+    <summary>
+      Gets or sets the Class name.
+    </summary>
+  </ClassName>
+  <MethodName>
+    <summary>
+      Gets or sets the Method name.
+    </summary>
+  </MethodName>
+</members>

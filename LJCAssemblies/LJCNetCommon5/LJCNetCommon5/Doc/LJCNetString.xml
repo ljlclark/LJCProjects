@@ -241,7 +241,7 @@
     </remarks>
   </Phonetic>
 
-  <!-- Other Methods -->
+  <!-- Other Functions -->
   <AddObjectArgError>
     <summary>
       Adds the missing argument name to the message.

@@ -9,17 +9,6 @@
       Provides methods for creating text.
     </summary>
   </LJCTextBuilder>
-
-  <!-- Static Methods -->
-  <TextLength>
-    <summary>
-      Gets the text length if not null.
-    </summary>
-    <param name="text">The text value.</param>
-    <returns>
-      The text length.
-    </returns>
-  </TextLength>
   
   <!-- Constructors -->
   <Constructor>

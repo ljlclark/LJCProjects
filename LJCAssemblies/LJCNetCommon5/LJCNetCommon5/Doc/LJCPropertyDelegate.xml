@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCPropertyDelegate.xml -->
+<members>
+  <!-- Class -->
+  <LJCPropertyDelegate>
+    <summary>
+      Represents a PropertyDelegate definition.
+    </summary>
+  </LJCPropertyDelegate>
+  
+  <!-- Properties -->
+  <PropertyName>
+    <summary>
+      Gets or sets the PropertyName name.
+    </summary>
+  </PropertyName>
+  <Value>
+    <summary>
+      Gets or sets the Delegate reference.
+    </summary>
+  </Value>
+</members>

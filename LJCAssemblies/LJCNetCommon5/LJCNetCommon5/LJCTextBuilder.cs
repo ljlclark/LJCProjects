@@ -523,7 +523,8 @@ namespace LJCNetCommon5
       }
     }
 
-    /// <summary>Gets or sets the first item indicator.</summary>
+    // Gets or sets the first item indicator.
+    /// <include path="members/IsFirst/*" file="Doc/LJCTextBuilder.xml"/>
     public bool IsFirst { get; set; }
 
     // Gets the current length.
