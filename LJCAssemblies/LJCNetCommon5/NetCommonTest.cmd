@@ -1,5 +1,20 @@
+rem echo off
+TestAssemblyReflect\bin\Debug\net8.0\TestAssemblyReflect5.exe
+TestAttribute\bin\Debug\net8.0\TestAttribute5.exe
+TestAttributes\bin\Debug\net8.0\TestAttributes5.exe
+TestCSParser\bin\Debug\net8.0\TestCSParser5.exe
+TestDataColumn\bin\Debug\net8.0\TestDataColumn5.exe
+TestDataColumns\bin\Debug\net8.0\TestDataColumns5.exe
+TestDataValue\bin\Debug\net8.0\TestDataValue5.exe
+TestDataValues\bin\Debug\net8.0\TestDataValues5.exe
+TestHTMLBuilder5\bin\Debug\net8.0\TestHTMLBuilder5.exe
+TestKeyItem5\bin\Debug\net8.0\TestKeyItem5.exe
+TestKeyItems5\bin\Debug\net8.0\TestKeyItems5.exe
 TestLJC5\bin\Debug\net8.0\TestLJC5.exe
 TestNetString5\bin\Debug\net8.0\TestNetString5.exe
+TestPropertyDelegate5\bin\Debug\net8.0\TestPropertyDelegate5.exe
+TestPropertyDelegates5\bin\Debug\net8.0\TestPropertyDelegates5.exe
+TestReflect5\bin\Debug\net8.0\TestReflect5.exe
 TestTextBuilder5\bin\Debug\net8.0\TestTextBuilder5.exe
 TestTextParser5\bin\Debug\net8.0\TestTextParser5.exe
 pause

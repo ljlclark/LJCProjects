@@ -77,7 +77,7 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Formats the column value for the SQL string. (D)
+    // Formats the column value for the SQL string.
     /// <include path="members/FormatValue/*" file="Doc/LJCDataColumn.xml"/>
     /// <parentGroup>data</parentGroup>
     public string? FormatValue()
@@ -103,7 +103,7 @@ namespace LJCNetCommon5
 
     #region Conversions
 
-    // Creates a combined DbColumn from a DbValue and DbColumn.
+    // Creates a combined LJCDataColumn from an LJCDataValue and LJCDataColumn.
     /// <include path="members/CreateColumn/*" file="Doc/LJCDataValue.xml"/>
     /// <parentGroup>conversions</parentGroup>
     public LJCDataColumn CreateColumn(LJCDataColumn definitionColumn)

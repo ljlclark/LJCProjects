@@ -1,19 +1,19 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataValueProgram.cs
+// KeyItem5Program.cs
 using LJCNetCommon5;
 
-namespace TestDataValue5
+namespace TestKeyItem5
 {
   // The entry class.
-  internal class DataValueProgram
+  internal class KeyItem5Program
   {
     // The entry method.
     static void Main()
     {
-      TestCommon = new LJCTestCommon("LJCDataValue");
+      TestCommon = new LJCTestCommon("LJCKeyItem");
       Console.WriteLine();
-      Console.WriteLine("*** LJCDataValue ***");
+      Console.WriteLine("*** LJCKeyItem ***");
 
       // Constructor Methods
       Constructor();
@@ -22,15 +22,10 @@ namespace TestDataValue5
 
       // Data Methods
       Clone();
-      CompareTo();
-      FormatValue();
       ToStringMethod();
 
-      // Conversions
-      CreateColumn();
-
-      // Data Properties
-      Value();
+      // Search and Sort Methods
+      CompareTo();
     }
 
     #region Constructor Methods
@@ -51,7 +46,7 @@ namespace TestDataValue5
       TestCommon?.Write("CopyConstructor()", result, compare);
     }
 
-    // Initializes an object instance with the supplied values.
+    // Initializes an object instance.
     private static void ParmConstructor()
     {
       var result = "Not Implemented";
@@ -62,28 +57,12 @@ namespace TestDataValue5
 
     #region Data Methods
 
-    // Creates and returns a clone of the object.
+    // Creates and returns a clone of this object.
     private static void Clone()
     {
       var result = "Not Implemented";
       var compare = "";
       TestCommon?.Write("Clone()", result, compare);
-    }
-
-    // Provides the default Sort functionality.
-    private static void CompareTo()
-    {
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon?.Write("CompareTo()", result, compare);
-    }
-
-    // Formats the column value for the SQL string.
-    private static void FormatValue()
-    {
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon?.Write("FormatValue()", result, compare);
     }
 
     // The object string identifier.
@@ -95,25 +74,14 @@ namespace TestDataValue5
     }
     #endregion
 
-    #region Conversions
+    #region Search and Sort Methods
 
-    // Creates a combined LJCDataColumn from an LJCDataValue and LJCDataColumn.
-    private static void CreateColumn()
+    // Provides the default Sort functionality.
+    private static void CompareTo()
     {
       var result = "Not Implemented";
       var compare = "";
-      TestCommon?.Write("CreateColumn()", result, compare);
-    }
-    #endregion
-
-    #region Data Properties
-
-    // Gets or sets the Value object.
-    private static void Value()
-    {
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon?.Write("Value()", result, compare);
+      TestCommon?.Write("CompareTo()", result, compare);
     }
     #endregion
 

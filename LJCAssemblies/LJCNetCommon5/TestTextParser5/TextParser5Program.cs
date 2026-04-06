@@ -6,12 +6,12 @@ using LJCNetCommon5;
 namespace TestTextParser5
 {
   // The entry class.
-  internal class TestTextParser5Program
+  internal class TextParser5Program
   {
     // The entry method.
     static void Main()
     {
-      TestCommon = new LJCTestCommon("TestTextParser");
+      TestCommon = new LJCTestCommon("LJCTextParser");
       Console.WriteLine();
       Console.WriteLine("*** LJCTextParser ***");
 

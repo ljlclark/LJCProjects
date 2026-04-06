@@ -345,7 +345,7 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Removes a DbColumn item.
+    // Removes an LJCDataColumn item.
     /// <include path="members/LJCRemoveColumn/*" file="Doc/LJCDataColumns.xml"/>
     public void LJCRemoveColumn(string columnName)
     {
@@ -547,7 +547,7 @@ namespace LJCNetCommon5
     }
     #endregion
 
-    #region Other Public Methods
+    #region Other Methods
 
     // Get the minimum date value.
     /// <include path="members/LJCGetMinSqlDate/*" file="Doc/LJCDataColumns.xml"/>

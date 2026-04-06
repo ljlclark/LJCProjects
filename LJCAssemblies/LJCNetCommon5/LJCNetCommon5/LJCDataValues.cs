@@ -144,7 +144,7 @@ namespace LJCNetCommon5
 
       if (dataColumns != null)
       {
-        retValue = new LJCDataColumns();
+        retValue = [];
         foreach (LJCDataValue dataValue in this)
         {
           if (dataValue.PropertyName != null)
@@ -276,7 +276,7 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Gets the column object value as a decimal value.
+    // Gets the column object value as a decimal.
     /// <include path="members/LJCGetDecimal/*" file="Doc/LJCDataColumns.xml"/>
     /// <parentGroup>value</parentGroup>
     public decimal LJCGetDecimal(string propertyName)
@@ -291,7 +291,7 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Gets the column object value as a decimal double.
+    // Gets the column object value as a double.
     /// <include path="members/LJCGetDouble/*" file="Doc/LJCDataColumns.xml"/>
     /// <parentGroup>value</parentGroup>
     public double LJCGetDouble(string propertyName)

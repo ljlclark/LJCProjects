@@ -6,7 +6,7 @@ using LJCNetCommon5;
 namespace TestTextBuilder5
 {
   // The entry class.
-  internal class TestTextBuilder5Program
+  internal class TextBuilder5Program
   {
     // The entry method.
     static void Main()

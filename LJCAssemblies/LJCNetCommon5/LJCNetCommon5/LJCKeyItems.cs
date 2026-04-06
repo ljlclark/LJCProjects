@@ -12,6 +12,23 @@ namespace LJCNetCommon5
   {
     #region Static Functions
 
+    // Get custom collection from List<T>.
+    /// <include path="members/GetCollection/*" file="Doc/LJCKeyItems.xml"/>
+    public static LJCKeyItems? GetCollection(List<LJCKeyItem> items)
+    {
+      LJCKeyItems retValue = null;
+
+      if (LJC.HasItems(items))
+      {
+        retValue = [];
+        foreach (LJCKeyItem item in items)
+        {
+          retValue.Items.Add(new LJCKeyItem(item));
+        }
+      }
+      return retValue;
+    }
+
     // Checks if the collection has items.
     /// <include path="members/HasItems1/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
     public static bool HasItems(LJCKeyItems collection)
@@ -32,7 +49,7 @@ namespace LJCNetCommon5
     /// <include path="members/DefaultConstructor/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
     public LJCKeyItems()
     {
-      Items = new List<LJCKeyItem>();
+      Items = [];
       mPrevCount = -1;
     }
 
@@ -40,7 +57,7 @@ namespace LJCNetCommon5
     /// <include path="members/CopyConstructor/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
     public LJCKeyItems(LJCKeyItems items)
     {
-      Items = new List<LJCKeyItem>();
+      Items = [];
       if (HasItems(items))
       {
         foreach (var item in items)
@@ -113,23 +130,6 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Get custom collection from List<T>.
-    /// <include path="members/GetCollection/*" file="Doc/LJCKeyItems.xml"/>
-    public LJCKeyItems? GetCollection(List<LJCKeyItem> items)
-    {
-      LJCKeyItems retValue = null;
-
-      if (LJC.HasItems(items))
-      {
-        retValue = new LJCKeyItems();
-        foreach (LJCKeyItem item in items)
-        {
-          retValue.Items.Add(new LJCKeyItem(item));
-        }
-      }
-      return retValue;
-    }
-
     // Checks if the collection has items.
     /// <include path="members/HasItems2/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
     public bool HasItems()
@@ -169,7 +169,7 @@ namespace LJCNetCommon5
       if (dataColumn.Value != null
         && LJCNetString.IsDigits(dataColumn.Value.ToString()))
       {
-        int.TryParse(dataColumn.Value.ToString(), out int index);
+        _ = int.TryParse(dataColumn.Value.ToString(), out int index);
         index--;
         if (index >= 0 && index < Items.Count)
         {

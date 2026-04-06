@@ -27,7 +27,7 @@ namespace LJCNetCommon5
 
     #region Set Reflection Property Methods
 
-    // Retrieves the Assembly reference. (R)
+    // Retrieves the Assembly reference.
     /// <include path="members/SetAssembly/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public Assembly? SetAssembly(string fileSpec)
@@ -47,7 +47,7 @@ namespace LJCNetCommon5
       return Assembly;
     }
 
-    // Set the ConstructorInfo reference. (RE)
+    // Set the ConstructorInfo reference.
     /// <include path="members/SetConstructorInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public ConstructorInfo? SetConstructorInfo(string methodName
@@ -141,7 +141,7 @@ namespace LJCNetCommon5
       return ConstructorInfo;
     }
 
-    // Set the FieldInfo reference. (RE)
+    // Set the FieldInfo reference.
     /// <include path="members/SetFieldInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public FieldInfo? SetFieldInfo(string fieldName)
@@ -192,7 +192,7 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Set the MethodInfo reference. (RE)
+    // Set the MethodInfo reference.
     /// <include path="members/SetMethodInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public MethodInfo? SetMethodInfo(string methodName, string[] parameterNames)
@@ -310,7 +310,7 @@ namespace LJCNetCommon5
       return MethodInfo;
     }
 
-    // Set the PropertyInfo reference. (RE)
+    // Set the PropertyInfo reference.
     /// <include path="members/SetPropertyInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public PropertyInfo? SetPropertyInfo(string propertyName
@@ -337,7 +337,7 @@ namespace LJCNetCommon5
       return PropertyInfo;
     }
 
-    // Set the Type reference. (RE)
+    // Set the Type reference.
     /// <include path="members/SetTypeReference/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public Type? SetTypeReference(string typeName)
@@ -358,7 +358,7 @@ namespace LJCNetCommon5
 
     #region Get Syntax Methods
 
-    // Creates and returns the Constructor syntax. (E)
+    // Creates and returns the Constructor syntax.
     /// <include path="members/GetConstructorSyntax/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>syntax</parentGroup>
     public string? GetConstructorSyntax(ConstructorInfo? constructorInfo = null)
@@ -442,7 +442,7 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Creates and returns the Field syntax string. (E)
+    // Creates and returns the Field syntax string.
     /// <include path="members/GetFieldSyntax/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>syntax</parentGroup>
     public string? GetFieldSyntax(FieldInfo? fieldInfo = null)
@@ -532,7 +532,7 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Creates and returns the Method syntax. (E)
+    // Creates and returns the Method syntax.
     /// <include path="members/GetMethodSyntax/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>syntax</parentGroup>
     public string? GetMethodSyntax(MethodInfo? methodInfo = null)
@@ -628,7 +628,7 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Creates and returns the Property syntax string. (E)
+    // Creates and returns the Property syntax.
     /// <include path="members/GetPropertySyntax/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>syntax</parentGroup>
     public string? GetPropertySyntax(PropertyInfo? propertyInfo = null)
@@ -696,7 +696,7 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Creates and returns the Type syntax. (E)
+    // Creates and returns the Type syntax.
     /// <include path="members/GetTypeSyntax/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>syntax</parentGroup>
     public string? GetTypeSyntax(Type? typeReference = null)
