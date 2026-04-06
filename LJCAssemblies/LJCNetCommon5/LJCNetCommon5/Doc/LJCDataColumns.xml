@@ -16,21 +16,27 @@
   </LJCDataColumns>
 
   <!-- Static Functions -->
-  <LJCCreateObjectColumns>
+  <LJCMinSqlDate>
     <summary>
-      Creates DbColumns from a Data Object.
+      Get the minimum date value.
+    </summary>
+    <returns>The minimum value in database format.</returns>
+  </LJCMinSqlDate>
+  <LJCObjectDataColumns>
+    <summary>
+      Creates LJCDataColumns from a Data Object.
     </summary>
     <param name="dataObject">The Data Object value.</param>
-    <param name="dataDefinition">The data definitions.</param>
+    <param name="dataColumns">The data definitions.</param>
     <returns>The DbColumns collection.</returns>
-  </LJCCreateObjectColumns>
-  <LJCGetPropertyNames>
+  </LJCObjectDataColumns>
+  <LJCObjectPropertyNames>
     <summary>
       Creates a PropertyNames list from a DataObject.
     </summary>
     <param name="dataObject">The DataObject value.</param>
     <returns>The PropertyNames list.</returns>
-  </LJCGetPropertyNames>
+  </LJCObjectPropertyNames>
   <LJCDataValues>
     <summary>
       Creates a
@@ -229,12 +235,6 @@
   </LJCSearchRenameAs>
 
   <!-- Other Public Methods -->
-  <LJCGetMinSqlDate>
-    <summary>
-      Get the minimum date value.
-    </summary>
-    <returns>The minimum value in database format.</returns>
-  </LJCGetMinSqlDate>
   <LJCSetColumnCaptions>
     <summary>
       Sets the caption properties.

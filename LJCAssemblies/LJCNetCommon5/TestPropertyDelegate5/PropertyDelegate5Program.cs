@@ -16,8 +16,9 @@ namespace TestPropertyDelegate5
       Console.WriteLine("*** LJCPropertyDelegate ***");
     }
 
-    #region Class Data
+    #region Properties
 
+    // Gets or sets the TestCommon object.
     private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }

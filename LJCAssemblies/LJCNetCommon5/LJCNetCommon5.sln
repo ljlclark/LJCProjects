@@ -44,7 +44,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPropertyDelegate5", "Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPropertyDelegates5", "TestPropertyDelegates5\TestPropertyDelegates5.csproj", "{E95F80EC-6809-483F-A05A-A54C3041AF98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestReflect5", "ClassTests\TestReflect\TestReflect5.csproj", "{19BFAA21-660B-4BA6-9969-DF9B7D9A64FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestReflect5", "TestReflect5\TestReflect5.csproj", "{19BFAA21-660B-4BA6-9969-DF9B7D9A64FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -31,7 +31,7 @@ namespace LJCNetCommon5
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Gets the cached PropertyInfo value.
     /// <include path="members/GetPropertyInfo/*" file="Doc/LJCReflect.xml"/>
@@ -279,7 +279,7 @@ namespace LJCNetCommon5
       return retVal;
     }
 
-    // Gets the property value as an object using a delegate. (E)
+    // Gets the property value as an object using a delegate.
     /// <include path="members/GetValue/*" file="Doc/LJCReflect.xml"/>
     public object? GetValue(string propertyName)
     {
@@ -329,7 +329,7 @@ namespace LJCNetCommon5
 
     #region Set Methods
 
-    // Sets the property value based on value type. (E)
+    // Sets the property value based on value type.
     /// <include path="members/SetPropertyValue/*" file="Doc/LJCReflect.xml"/>
     public void SetPropertyValue(string propertyName, object value)
     {

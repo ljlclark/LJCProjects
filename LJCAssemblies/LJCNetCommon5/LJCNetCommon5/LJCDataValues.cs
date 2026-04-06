@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace LJCNetCommon5
 {
-  // Represents a collection of DbValue objects.
+  // Represents a collection of LJCDataValue objects.
   /// <include path="members/LJCDataValues/*" file="Doc/LJCDataValues.xml"/>
   /// <group name="static">Static Methods</group>
   /// <group name="constructors">Constructors</group>
@@ -139,7 +139,6 @@ namespace LJCNetCommon5
     /// <parentGroup>item</parentGroup>
     public LJCDataColumns? LJCCreateColumns(LJCDataColumns dataColumns)
     {
-      LJCDataColumn dataColumn;
       LJCDataColumns retValue = null;
 
       if (dataColumns != null)
@@ -149,7 +148,7 @@ namespace LJCNetCommon5
         {
           if (dataValue.PropertyName != null)
           {
-            dataColumn = dataColumns.LJCSearchColumnName(dataValue.PropertyName);
+            var dataColumn = dataColumns.LJCSearchColumnName(dataValue.PropertyName);
             var newDataValue = dataValue.CreateColumn(dataColumn!);
             retValue.Add(newDataValue);
           }

@@ -14,10 +14,44 @@ namespace TestPropertyDelegates5
       TestCommon = new LJCTestCommon("LJCPropertyDelegates");
       Console.WriteLine();
       Console.WriteLine("*** LJCPropertyDelegates ***");
+
+      // Collection Methods
+      Add();
+
+      LJCSearchName();
+      LJCCreateDelegate();
     }
 
-    #region Class Data
+    #region Collection Methods
 
+    // Creates and adds a PropertyDelegate object to the collection.
+    private static void Add()
+    {
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write("Add()", result, compare);
+    }
+    #endregion
+
+    // Returns the PropertyDelegate object if found in the list.
+    private static void LJCSearchName()
+    {
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write("LJCSearchName", result, compare);
+    }
+
+    // Creates and returns the delegate for the named property.
+    private static void LJCCreateDelegate()
+    {
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write("LJCCreateDelegate", result, compare);
+    }
+
+    #region Properties
+
+    // Gets or sets the TestCommon object.
     private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
