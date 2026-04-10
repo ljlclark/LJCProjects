@@ -56,7 +56,8 @@ namespace LJCNetCommon5
     {
       List<string> retValue = [];
 
-      if (PropertyInfos != null && PropertyInfos.Length > 0)
+      if (PropertyInfos != null
+        && PropertyInfos.Length > 0)
       {
         foreach (PropertyInfo propertyInfo in PropertyInfos)
         {
@@ -73,10 +74,7 @@ namespace LJCNetCommon5
       Type retVal = null;
 
       var info = GetPropertyInfo(propertyName);
-      if (info != null)
-      {
-        retVal = info.PropertyType;
-      }
+      retVal = info?.PropertyType;
       return retVal;
     }
 
@@ -272,16 +270,13 @@ namespace LJCNetCommon5
       string retVal = null;
 
       var value = GetValue(propertyName);
-      if (value != null)
-      {
-        retVal = value.ToString();
-      }
+      retVal = value?.ToString();
       return retVal;
     }
 
     // Gets the property value as an object using a delegate.
     /// <include path="members/GetValue/*" file="Doc/LJCReflect.xml"/>
-    public object? GetValue(string propertyName)
+    public object? GetValue(string propertyName, bool throwError = true)
     {
       object retValue = null;
 
@@ -291,11 +286,17 @@ namespace LJCNetCommon5
         var propertyInfo = GetPropertyInfo(propertyName);
         if (null == propertyInfo)
         {
-          var name = mType.Name;
-          var text = $"{name} Property {propertyName} was not found.";
-          throw new ArgumentException(text);
+          if (throwError)
+          {
+            var name = mType.Name;
+            var text = $"{name} Property {propertyName} was not found.";
+            throw new ArgumentException(text);
+          }
         }
-        propertyDelegate = mPropertyDelegates.Add(propertyInfo);
+        else
+        {
+          propertyDelegate = mPropertyDelegates.Add(propertyInfo);
+        }
       }
 
       if (propertyDelegate != null)
@@ -311,14 +312,23 @@ namespace LJCNetCommon5
 
     // Gets the property value as an object using reflection.
     /// <include path="members/GetValueReflect/*" file="Doc/LJCReflect.xml"/>
-    public object? GetValueReflect(string propertyName)
+    public object? GetValueReflect(string propertyName, bool throwError = true)
     {
       object retVal = null;
 
       if (LJC.HasValue(propertyName))
       {
         var propertyInfo = GetPropertyInfo(propertyName);
-        if (propertyInfo != null)
+        if (null == propertyInfo)
+        {
+          if (throwError)
+          {
+            var name = mType.Name;
+            var text = $"{name} Property {propertyName} was not found.";
+            throw new ArgumentException(text);
+          }
+        }
+        else
         {
           retVal = propertyInfo.GetValue(mSource, null);
         }

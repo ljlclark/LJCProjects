@@ -15,7 +15,18 @@ namespace TestDataColumns5
       Console.WriteLine();
       Console.WriteLine("*** LJCDataColumns ***");
 
-      // Collecion Methods
+      // Static Methods
+      LJCDeserialize();
+      LJCGetMinSqlDate();
+      LJCObjectDataColumns();
+      LJCObjectPropertyNames();
+      DataColumnsToDataValues();
+
+      // Methods
+      LJCSetColumnCaptions();
+      LJCMapNames();
+
+      // Collection Methods
       Add1();
       Add2();
       Add3();
@@ -31,7 +42,7 @@ namespace TestDataColumns5
       LJCSerialize();
       LJCSetData();
 
-      // Data Methods
+      // Item Methods
       LJCClearChanged();
       LJCGetChanged();
 
@@ -43,11 +54,6 @@ namespace TestDataColumns5
       LJCSortName();
       LJCSortProperty();
       LJCSortRenameAs();
-
-      // Other Methods
-      LJCGetMinSqlDate();
-      LJCSetColumnCaptions();
-      LJCMapNames();
 
       // Value Methods
       LJCGetBoolean();
@@ -64,6 +70,68 @@ namespace TestDataColumns5
       LJCGetString();
       LJCSetValue();
     }
+
+    #region Static Methods
+
+    // Deserializes from the specified XML file.
+    private static void LJCDeserialize()
+    {
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write("LJCDeserialize()", result, compare);
+    }
+
+    // Get the minimum date value.
+    private static void LJCGetMinSqlDate()
+    {
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write("LJCGetMinSqlDate()", result, compare);
+    }
+
+    // Creates LJCDataColumns from a Data Object.
+    private static void LJCObjectDataColumns()
+    {
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write("LJCObjectDataColumns()", result, compare);
+    }
+
+    // Creates a PropertyNames list from a DataObject.
+    private static void LJCObjectPropertyNames()
+    {
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write("LJCObjectPropertyNames()", result, compare);
+    }
+
+    // Creates an LJCDataValues object from an LJCDataColumns object.
+    private static void DataColumnsToDataValues()
+    {
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write("DataValuesToDataColumns()", result, compare);
+    }
+    #endregion
+
+    #region Methods
+
+    // Sets the caption properties.
+    private static void LJCSetColumnCaptions()
+    {
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write("LJCSetColumnCaptions()", result, compare);
+    }
+
+    // Maps the column property and rename values.
+    private static void LJCMapNames()
+    {
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write("LJCMapNames()", result, compare);
+    }
+    #endregion
 
     #region Collection Methods
 
@@ -180,7 +248,7 @@ namespace TestDataColumns5
     }
     #endregion
 
-    #region Data Methods
+    #region Item Methods
 
     // Sets the IsChanged value to false for all elements in the collection.
     private static void LJCClearChanged()
@@ -255,33 +323,6 @@ namespace TestDataColumns5
       var result = "Not Implemented";
       var compare = "";
       TestCommon?.Write("LJCSortRenameAs()", result, compare);
-    }
-    #endregion
-
-    #region Other Methods
-
-    // Get the minimum date value.
-    private static void LJCGetMinSqlDate()
-    {
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon?.Write("LJCGetMinSqlDate()", result, compare);
-    }
-
-    // Sets the caption properties.
-    private static void LJCSetColumnCaptions()
-    {
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon?.Write("LJCSetColumnCaptions()", result, compare);
-    }
-
-    // Maps the column property and rename values.
-    private static void LJCMapNames()
-    {
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon?.Write("LJCMapNames()", result, compare);
     }
     #endregion
 

@@ -16,8 +16,6 @@ namespace TestKeyItem5
       Console.WriteLine("*** LJCKeyItem ***");
 
       // Constructor Methods
-      Constructor();
-      CopyConstructor();
       ParmConstructor();
 
       // Data Methods
@@ -31,26 +29,13 @@ namespace TestKeyItem5
     #region Constructor Methods
 
     // Initializes an object instance.
-    private static void Constructor()
-    {
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon?.Write("Constructor()", result, compare);
-    }
-
-    // The Copy constructor.
-    private static void CopyConstructor()
-    {
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon?.Write("CopyConstructor()", result, compare);
-    }
-
-    // Initializes an object instance.
     private static void ParmConstructor()
     {
-      var result = "Not Implemented";
-      var compare = "";
+      // Test Method
+      var keyItem = new LJCKeyItem("ID", 1, "The primary key.");
+
+      var result = keyItem.PropertyName;
+      var compare = "ID";
       TestCommon?.Write("ParmConstructor()", result, compare);
     }
     #endregion
@@ -60,6 +45,11 @@ namespace TestKeyItem5
     // Creates and returns a clone of this object.
     private static void Clone()
     {
+      var keyItem = new LJCKeyItem("ID", 1, "The primary key.");
+
+      // Test Method
+
+
       var result = "Not Implemented";
       var compare = "";
       TestCommon?.Write("Clone()", result, compare);

@@ -16,7 +16,31 @@ namespace LJCNetCommon5
   //[XmlRoot("LJCDataColumns")]
   public class LJCDataColumns : List<LJCDataColumn>
   {
-    #region Static Functions
+    #region Static Methods
+
+    // Deserializes from the specified XML file.
+    /// <include path="members/LJCDeserialize/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
+    /// <parentGroup>static</parentGroup>
+    public static LJCDataColumns? LJCDeserialize(string? fileSpec = null)
+    {
+      LJCDataColumns retValue;
+
+      if (!LJC.HasValue(fileSpec))
+      {
+        fileSpec = LJCDefaultFileName;
+      }
+      retValue = LJC.XmlDeserialize(typeof(LJCDataColumns), fileSpec)
+        as LJCDataColumns;
+      return retValue;
+    }
+
+    // Get the minimum date value.
+    /// <include path="members/LJCMinSqlDate/*" file="Doc/LJCDataColumns.xml"/>
+    /// <parentGroup>static</parentGroup>
+    public static string LJCMinSqlDate()
+    {
+      return "1753/01/01 00:00:00";
+    }
 
     // Creates LJCDataColumns from a Data Object.
     /// <include path="members/LJCObjectDataColumns/*" file="Doc/LJCDataColumns.xml"/>
@@ -66,30 +90,6 @@ namespace LJCNetCommon5
         }
       }
       return retColumns;
-    }
-
-    // Deserializes from the specified XML file.
-    /// <include path="members/LJCDeserialize/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
-    /// <parentGroup>static</parentGroup>
-    public static LJCDataColumns? LJCDeserialize(string? fileSpec = null)
-    {
-      LJCDataColumns retValue;
-
-      if (!LJC.HasValue(fileSpec))
-      {
-        fileSpec = LJCDefaultFileName;
-      }
-      retValue = LJC.XmlDeserialize(typeof(LJCDataColumns), fileSpec)
-        as LJCDataColumns;
-      return retValue;
-    }
-
-    // Get the minimum date value.
-    /// <include path="members/LJCMinSqlDate/*" file="Doc/LJCDataColumns.xml"/>
-    /// <parentGroup>static</parentGroup>
-    public static string LJCMinSqlDate()
-    {
-      return "1753/01/01 00:00:00";
     }
 
     // Creates a PropertyNames list from a DataObject.

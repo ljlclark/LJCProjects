@@ -455,9 +455,13 @@ namespace LJCNetCommon5
     // Creates text from a byte array.
     /// <include path="members/BytesToText/*" file="Doc/LJC.xml"/>
     /// <parentGroup>convert</parentGroup>
-    public static string BytesToText(byte[] bytes)
+    public static string? BytesToText(byte[]? bytes)
     {
-      string retValue = Encoding.UTF8.GetString(bytes);
+      string retValue = null;
+      if (bytes != null)
+      {
+        retValue = Encoding.UTF8.GetString(bytes);
+      }
       return retValue;
     }
 
@@ -823,10 +827,33 @@ namespace LJCNetCommon5
     {
       byte retValue = default;
 
-      var type = value.GetType();
-      if (typeof(byte) == type)
+      if (value != null)
       {
-        retValue = Convert.ToByte(value);
+        var type = value.GetType();
+        if (typeof(byte[]) == type)
+        {
+          //retValue = Convert.ToByte(value);
+          var bytes = (byte[])value;
+          retValue = bytes[0];
+        }
+      }
+      return retValue;
+    }
+
+    // Gets a byte value from an object.
+    /// <include path="members/GetByte/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>value</parentGroup>
+    public static byte[]? GetBytes(object value)
+    {
+      byte[] retValue = default;
+
+      if (value != null)
+      {
+        var type = value.GetType();
+        if (typeof(byte[]) == type)
+        {
+          retValue = (byte[])value;
+        }
       }
       return retValue;
     }

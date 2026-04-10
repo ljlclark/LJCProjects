@@ -218,13 +218,14 @@ namespace LJCNetCommon5
       var value = LJCGetString(propertyName);
       if (value != null)
       {
-        try
+        if (LJCNetString.IsDigits(value))
         {
-          retValue = Convert.ToBoolean(value);
+          var checkValue = Convert.ToInt16(value);
+          retValue = Convert.ToBoolean(checkValue);
         }
-        catch
+        else
         {
-          retValue = false;
+          bool.TryParse(value, out retValue);
         }
       }
       return retValue;
@@ -237,10 +238,32 @@ namespace LJCNetCommon5
     {
       byte retValue = default;
 
-      var value = LJCGetString(propertyName);
-      if (value != null)
+      if (LJC.HasValue(propertyName))
       {
-        retValue = Convert.ToByte(value);
+        var dataValue = LJCSearchPropertyName(propertyName);
+        if (dataValue != null
+          && dataValue.Value != null)
+        {
+          retValue = LJC.GetByte(dataValue.Value);
+        }
+      }
+      return retValue;
+    }
+
+    // Gets the column object value as a byte array.
+    /// <include path="members/LJCGetBytes/*" file="Doc/LJCDataColumns.xml"/>
+    public byte[]? LJCGetBytes(string propertyName)
+    {
+      byte[] retValue = default;
+
+      if (LJC.HasValue(propertyName))
+      {
+        var dataValue = LJCSearchPropertyName(propertyName);
+        if (dataValue != null
+          && dataValue.Value != null)
+        {
+          retValue = LJC.GetBytes(dataValue.Value);
+        }
       }
       return retValue;
     }

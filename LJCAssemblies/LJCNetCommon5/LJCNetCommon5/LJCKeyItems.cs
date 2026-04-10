@@ -23,7 +23,7 @@ namespace LJCNetCommon5
         retValue = [];
         foreach (LJCKeyItem item in items)
         {
-          retValue.Items.Add(new LJCKeyItem(item));
+          retValue.Items.Add(item);
         }
       }
       return retValue;
@@ -35,7 +35,8 @@ namespace LJCNetCommon5
     {
       bool retValue = false;
 
-      if (collection != null && collection.Count > 0)
+      if (collection != null
+        && collection.Count > 0)
       {
         retValue = true;
       }
@@ -62,7 +63,7 @@ namespace LJCNetCommon5
       {
         foreach (var item in items)
         {
-          Add(new LJCKeyItem(item));
+          Add(item);
         }
       }
     }
@@ -109,7 +110,7 @@ namespace LJCNetCommon5
       {
         foreach (LJCKeyItem item in items)
         {
-          Add(new LJCKeyItem(item));
+          Add(item);
         }
       }
     }
@@ -142,6 +143,24 @@ namespace LJCNetCommon5
       }
       return retValue;
     }
+
+    // Retrieves an item by property name.
+    /// <include path="members/LJCRetrieve/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
+    public LJCKeyItem? LJCRetrieve(string propertyName)
+    {
+      LJCKeyItem retItem = null;
+
+      if (LJC.HasValue(propertyName))
+      {
+        var retItems = SearchPropertyName(propertyName);
+        if (retItems != null
+          && retItems.Count > 0)
+        {
+          retItem = retItems[0];
+        }
+      }
+      return retItem;
+    }
     #endregion
 
     #region Other Methods
@@ -171,7 +190,8 @@ namespace LJCNetCommon5
       {
         _ = int.TryParse(dataColumn.Value.ToString(), out int index);
         index--;
-        if (index >= 0 && index < Items.Count)
+        if (index >= 0
+          && index < Items.Count)
         {
           retValue = index;
         }
@@ -197,7 +217,8 @@ namespace LJCNetCommon5
           }
           else
           {
-            if (index >= 0 && index < items.Count)
+            if (index >= 0
+              && index < items.Count)
             {
               retValue = items[index];
             }
@@ -213,7 +234,8 @@ namespace LJCNetCommon5
     {
       LJCKeyItems retValue = null;
 
-      if (dataColumn != null && LJC.HasValue(dataColumn.PropertyName))
+      if (dataColumn != null
+        && LJC.HasValue(dataColumn.PropertyName))
       {
         retValue = SearchPropertyName(dataColumn.PropertyName);
       }
@@ -281,7 +303,8 @@ namespace LJCNetCommon5
       {
         LJCKeyItem retValue = null;
 
-        if (index >= 0 && index < Count)
+        if (index >= 0
+          && index < Count)
         {
           retValue = Items[index];
         }

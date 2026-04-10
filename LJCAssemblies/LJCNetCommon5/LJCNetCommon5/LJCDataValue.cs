@@ -40,9 +40,10 @@ namespace LJCNetCommon5
       , string dataTypeName = "String")
     {
       DataTypeName = dataTypeName;
-      IsChanged = false;
+      //IsChanged = false;
       PropertyName = propertyName;
       Value = value;
+      IsChanged = false;
     }
     #endregion
 

@@ -6,7 +6,7 @@
   <!-- Class -->
   <LJCReflect>
     <summary>
-      Provides object property reflection capabilities. (DE)
+      Provides object property reflection capabilities.
     </summary>
     <remarks>
       <para>
@@ -38,7 +38,7 @@
     <param name="source">The source object.</param>
   </SetSource>
 
-  <!-- public Methods -->
+  <!-- Methods -->
   <GetPropertyInfo>
     <summary>
       Gets the cached PropertyInfo value.
@@ -168,9 +168,10 @@
   </GetString>
   <GetValue>
     <summary>
-      Gets the property value as an object using a delegate. (E)
+      Gets the property value as an object using a delegate.
     </summary>
     <param name="propertyName">The property name.</param>
+    <param name="throwError">Indicates if the error should be thrown.</param>
     <returns>The object property value.</returns>
     <example>
       <code>
@@ -192,13 +193,14 @@
       Gets the property value as an object using reflection.
     </summary>
     <param name="propertyName">The property name.</param>
+    <param name="throwError">Indicates if the error should be thrown.</param>
     <returns>The object property value.</returns>
   </GetValueReflect>
 
   <!-- Set Methods -->
   <SetPropertyValue>
     <summary>
-      Sets the property value based on value type. (E)
+      Sets the property value based on value type.
     </summary>
     <param name="propertyName">The property name.</param>
     <param name="value">The property value.</param>

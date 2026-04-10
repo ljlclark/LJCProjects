@@ -16,19 +16,6 @@ namespace LJCNetCommon5
     {
     }
 
-    // The Copy constructor.
-    /// <include path="items/CopyConstructor/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
-    public LJCKeyItem(LJCKeyItem item)
-    {
-      DataConfigName = item.DataConfigName;
-      Description = Description;
-      ID = ID;
-      MaxLength = MaxLength;
-      PrimaryKeyName = PrimaryKeyName;
-      PropertyName = PropertyName;
-      TableName = TableName;
-    }
-
     // Initializes an object instance.
     /// <include path="items/KeyItem/*" file="Doc/LJCKeyItem.xml"/>
     public LJCKeyItem(string propertyName, long id, string description)
