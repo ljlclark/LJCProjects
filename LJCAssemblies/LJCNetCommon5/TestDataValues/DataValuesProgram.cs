@@ -37,6 +37,7 @@ namespace TestDataValues5
       LJCSearchPropertyName();
 
       // Value Methods
+      // Also in LJCDataColumns
       LJCGetBoolean();
       LJCGetByte();
       LJCGetBytes();
@@ -65,10 +66,8 @@ namespace TestDataValues5
         { "Name", 1 },
       };
       dataValues.LJCSerialize();
-
       // Test Method
       var newDataValues = LJCDataValues.LJCDeserialize();
-
       var dataValue = newDataValues?.LJCSearchPropertyName("ID");
       var result = dataValue?.PropertyName;
       var compare = "ID";
@@ -86,10 +85,8 @@ namespace TestDataValues5
         { "ID", 1, "Int64" },
         { "Name", 1 },
       };
-
       // Test Method
       var newDataValues = new LJCDataValues(dataValues);
-
       var dataValue = newDataValues?.LJCSearchPropertyName("ID");
       var result = dataValue?.PropertyName;
       var compare = "ID";
@@ -259,10 +256,9 @@ namespace TestDataValues5
       {
         { "TestValue", "true", "Boolean" },
       };
-
       // Test Method
       var value = dataValues.LJCGetBoolean("TestValue");
-
+      // Check Result
       var result = value.ToString();
       var compare = "True";
       TestCommon?.Write("LJCGetBoolean()", result, compare);
@@ -277,10 +273,9 @@ namespace TestDataValues5
       {
         { "TestValue", testBytes, "byte" },
       };
-
       // Test Method
       var value = dataValues.LJCGetByte("TestValue");
-
+      // Check Result
       var bytes = new byte[] { value };
       var result = LJC.BytesToText(bytes);
       var compare = "C";

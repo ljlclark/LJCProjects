@@ -107,27 +107,32 @@ namespace LJCNetCommon5
     // Creates a combined LJCDataColumn from an LJCDataValue and LJCDataColumn.
     /// <include path="members/CreateColumn/*" file="Doc/LJCDataValue.xml"/>
     /// <parentGroup>conversions</parentGroup>
-    public LJCDataColumn CreateColumn(LJCDataColumn definitionColumn)
+    public LJCDataColumn? CreateColumn(LJCDataColumn dataColumn)
     {
-      LJCDataColumn retValue;
+      LJCDataColumn retValue = null;
 
-      retValue = new LJCDataColumn()
+      if (dataColumn.PropertyName == PropertyName)
       {
-        Caption = definitionColumn.Caption,
-        ColumnName = definitionColumn.ColumnName,
-        DataTypeName = definitionColumn.DataTypeName,
-        IsChanged = definitionColumn.IsChanged,
-        MaxLength = definitionColumn.MaxLength,
-        PropertyName = definitionColumn.PropertyName,
-        Value = Value
-      };
-      if (0 == retValue.MaxLength)
-      {
-        retValue.MaxLength = 10;
-      }
-      if (retValue.MaxLength < 5)
-      {
-        retValue.MaxLength += 3;
+        retValue = new LJCDataColumn()
+        {
+          Caption = dataColumn.Caption,
+          ColumnName = dataColumn.ColumnName,
+          DataTypeName = dataColumn.DataTypeName,
+          IsChanged = dataColumn.IsChanged,
+          MaxLength = dataColumn.MaxLength,
+          Value = Value
+        };
+        if (retValue.DataTypeName == LJC.TypeString)
+        {
+          if (0 == retValue.MaxLength)
+          {
+            retValue.MaxLength = 10;
+          }
+          if (retValue.MaxLength < 5)
+          {
+            retValue.MaxLength += 3;
+          }
+        }
       }
       return retValue;
     }

@@ -68,7 +68,7 @@ namespace LJCNetCommon5
           && tokens.Length > 2)
         {
           if (IsModifier(tokens[0])
-            || IsModifier2(tokens[0]))
+            || IsClassModifier2(tokens[0]))
           {
             if ("class" == tokens[1])
             {
@@ -82,7 +82,7 @@ namespace LJCNetCommon5
           && tokens.Length > 3)
         {
           if (IsModifier(tokens[0])
-            && IsClassModifier2(tokens[1]))
+            || IsClassModifier2(tokens[1]))
           {
             if ("class" == tokens[2])
             {
@@ -126,7 +126,7 @@ namespace LJCNetCommon5
           && tokens.Length > 2)
         {
           if ((IsModifier(tokens[0])
-            || IsModifier2(tokens[0]))
+            || IsMethodModifier2(tokens[0]))
             && IsType(tokens[1]))
           {
             if (tokens[2].Contains('('))
@@ -141,12 +141,28 @@ namespace LJCNetCommon5
           && tokens.Length > 3)
         {
           if (IsModifier(tokens[0])
-            && IsModifier2(tokens[1])
+            && IsMethodModifier2(tokens[1])
             && IsType(tokens[2]))
           {
             if (tokens[3].Contains('('))
             {
               retName = ScrubMethodName(tokens[3]);
+            }
+          }
+        }
+
+        // public static void Method()
+        if (!LJC.HasValue(retName)
+          && tokens.Length > 4)
+        {
+          if (IsModifier(tokens[0])
+            && IsMethodModifier2(tokens[1])
+            && IsMethodModifier3(tokens[2])
+            && IsType(tokens[3]))
+          {
+            if (tokens[4].Contains('('))
+            {
+              retName = ScrubMethodName(tokens[4]);
             }
           }
         }
@@ -157,7 +173,7 @@ namespace LJCNetCommon5
     // Attempts to parse a property name.
     /// <include path="members/PropertyName/*" file="Doc/LJCCSParser.xml"/>
     /// <parentGroup>methods</parentGroup>
-    public string? PropertyName(string line, string nextLine)
+    public string? PropertyName(string line, string? nextLine)
     {
       string retName = null;
 
@@ -169,7 +185,7 @@ namespace LJCNetCommon5
           // type Property
           if (2 == tokens.Length
             && !IsModifier(tokens[0])
-            && !IsModifier2(tokens[0])
+            //&& !IsModifier2(tokens[0])
             && !tokens[0].StartsWith('#')
             && nextLine != null
             && nextLine.Trim().StartsWith('{'))
@@ -199,12 +215,16 @@ namespace LJCNetCommon5
         if (!LJC.HasValue(retName))
         {
           // modifier type Property {
-          if (tokens.Length > 3
+          if (tokens.Length > 2
             && (IsModifier(tokens[0])
-            || IsModifier2(tokens[0]))
+            || IsType(tokens[0]))
             && !tokens[0].StartsWith('#'))
           {
             retName = tokens[2];
+            if (tokens[2].Trim().StartsWith("{"))
+            {
+              retName = tokens[1];
+            }
 
             // Not "type VarName = "
             // Not "modifier type Method()"
@@ -269,14 +289,33 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Checks if the token is a Modifier2.
-    private bool IsModifier2(string token)
+    // Checks if the token is a Modifier.
+    private bool IsMethodModifier2(string token)
     {
       var retValue = false;
 
-      if (LJC.HasElements(Modifier2))
+      if (LJC.HasElements(MethodModifier2))
       {
-        foreach (var modifier in Modifier2)
+        foreach (var modifier in MethodModifier2)
+        {
+          if (token == modifier)
+          {
+            retValue = true;
+            break;
+          }
+        }
+      }
+      return retValue;
+    }
+
+    // Checks if the token is a Modifier.
+    private bool IsMethodModifier3(string token)
+    {
+      var retValue = false;
+
+      if (LJC.HasElements(MethodModifier3))
+      {
+        foreach (var modifier in MethodModifier3)
         {
           if (token == modifier)
           {
@@ -316,15 +355,12 @@ namespace LJCNetCommon5
         "private",
         "protected",
         "public",
+        "static",
       ];
 
-      // protected internal *
-      // public override
-      // private protected *
-      // public static
-      // public virtual
-      Modifier2 =
+      MethodModifier2 =
       [
+        "abstract",
         "internal",
         "override",
         "protected",
@@ -332,37 +368,47 @@ namespace LJCNetCommon5
         "virtual",
       ];
 
-      // public sealed class
-      // public abstract class
+      MethodModifier3 =
+      [
+        "sealed",
+      ];
+
       ClassModifier2 =
       [
         "abstract",
+        "protected",
         "sealed",
+        "static",
       ];
 
       // In common usage order.
       DataType =
       [
+        "void",
         "string",
         "bool",
         "int",
         "long",
         "short",
+        //
         "String",
         "Boolean",
         "Int32",
         "Int64",
         "Int16",
-        "char",
-        "byte",
+        //
         "decimal",
         "double",
         "float",
-        "Char",
-        "Byte",
+        "char",
+        "byte",
+        //
         "Decimal",
         "Double",
         "Single",
+        "Char",
+        "Byte",
+        //
         "enum",
         "DateTime",
         "struct",
@@ -374,7 +420,6 @@ namespace LJCNetCommon5
         "UInt16",
         "sbyte",
         "SByte",
-        "void",
       ];
     }
     #endregion
@@ -390,6 +435,16 @@ namespace LJCNetCommon5
     /// <include path="members/DataType/*" file="Doc/LJCCSParser.xml"/>
     /// <parentGroup>properties</parentGroup>
     public string[]? DataType { get; set; }
+
+    // Gets or sets the second method access modifier.
+    /// <include path="members/MethodModifier2/*" file="Doc/LJCCSParser.xml"/>
+    /// <parentGroup>properties</parentGroup>
+    public string[]? MethodModifier2 { get; set; }
+
+    // Gets or sets the third method access modifier.
+    /// <include path="members/MethodModifier3/*" file="Doc/LJCCSParser.xml"/>
+    /// <parentGroup>properties</parentGroup>
+    public string[]? MethodModifier3 { get; set; }
 
     // Gets or sets the access modifiers.
     /// <include path="members/Modifier/*" file="Doc/LJCCSParser.xml"/>

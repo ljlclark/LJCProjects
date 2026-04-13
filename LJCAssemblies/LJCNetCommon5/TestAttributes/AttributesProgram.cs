@@ -24,8 +24,13 @@ namespace TestAttributes5
     // Creates and adds an Attribute.
     private static void Add()
     {
-      var result = "Not Implemented";
-      var compare = "";
+      var attribs = new LJCAttributes();
+      var name = "id";
+      // Test Method
+      attribs.Add(name, "idValue");
+      var attrib = attribs[0];
+      var result = attrib.Name;
+      var compare = "id";
       TestCommon?.Write("Add()", result, compare);
     }
     #endregion

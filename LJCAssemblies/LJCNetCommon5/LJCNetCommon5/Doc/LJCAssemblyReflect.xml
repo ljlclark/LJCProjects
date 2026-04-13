@@ -150,7 +150,7 @@
       Set the PropertyInfo reference.
     </summary>
     <param name="propertyName">The Property name.</param>
-    <param name="fullName">The XMLDoc full name.</param>
+    <param name="indexerSignature">The XMLDoc full name.</param>
     <returns>The PropertyInfo value.</returns>
     <remarks>
       Sets the PropertyName property value and attempts to set the PropertyInfo

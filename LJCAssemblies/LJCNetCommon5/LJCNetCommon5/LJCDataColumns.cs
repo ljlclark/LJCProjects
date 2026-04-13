@@ -34,6 +34,20 @@ namespace LJCNetCommon5
       return retValue;
     }
 
+    // Configure the Grid Columns from the Data object properties.
+    /// <include path="members/LJCGetColumns2/*" file="Doc/LJCDataColumns.xml"/>
+    /// <parentGroup>collection</parentGroup>
+    public static LJCDataColumns? LJCGetColumns(object dataObject
+      , List<string>? propertyNames = null)
+    {
+      var retValue = LJCObjectDataColumns(dataObject);
+      if (propertyNames != null)
+      {
+        retValue = retValue?.LJCGetColumns(propertyNames);
+      }
+      return retValue;
+    }
+
     // Get the minimum date value.
     /// <include path="members/LJCMinSqlDate/*" file="Doc/LJCDataColumns.xml"/>
     /// <parentGroup>static</parentGroup>
@@ -219,7 +233,7 @@ namespace LJCNetCommon5
     #region Collection Methods
 
     // Adds the object element to the collection
-    /// <include path="members/Add/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include path="members/Add1/*" file="Doc/LJCDataColumns.xml"/>
     /// <parentGroup>collection</parentGroup>
     public new void Add(LJCDataColumn dataColumn)
     {
@@ -230,7 +244,7 @@ namespace LJCNetCommon5
     }
 
     // Creates the Object from the arguments and adds it to the collection. (R)
-    /// <include path="members/Add1/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include path="members/Add2/*" file="Doc/LJCDataColumns.xml"/>
     /// <parentGroup>collection</parentGroup>
     public LJCDataColumn Add(string columnName, int position, int maxLength)
     {
@@ -238,6 +252,7 @@ namespace LJCNetCommon5
       {
         AutoIncrement = false,
         ColumnName = columnName,
+        DataTypeName = LJC.TypeString,
         MaxLength = maxLength,
         Position = position
       };
@@ -246,7 +261,7 @@ namespace LJCNetCommon5
     }
 
     // Creates the Object from the arguments and adds it to the collection.
-    /// <include path="members/Add2/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include path="members/Add3/*" file="Doc/LJCDataColumns.xml"/>
     /// <parentGroup>collection</parentGroup>
     public LJCDataColumn Add(string columnName, string? propertyName = null
       , string? renameAs = null, string dataTypeName = "String"
@@ -267,7 +282,7 @@ namespace LJCNetCommon5
     }
 
     // Creates the Object from the arguments and adds it to the collection.
-    /// <include path="members/Add3/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include path="members/Add4/*" file="Doc/LJCDataColumns.xml"/>
     /// <parentGroup>collection</parentGroup>
     public LJCDataColumn Add(string columnName, object value
       , string dataTypeName = "String", int maxLength = 5)
@@ -311,7 +326,7 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Creates the DbColumn from the supplied values and adds to the collection.
+    // Creates the LJCDataColumn from the supplied values and adds to the collection.
     /// <include path="members/LJCAddPropertyAs/*" file="Doc/LJCDataColumns.xml"/>
     /// <parentGroup>collection</parentGroup>
     public LJCDataColumn LJCAddPropertyAs(string propertyName, string? caption = null
@@ -375,20 +390,6 @@ namespace LJCNetCommon5
             retValue.Add(new LJCDataColumn(searchColumn));
           }
         }
-      }
-      return retValue;
-    }
-
-    // Configure the Grid Columns from the Data object properties.
-    /// <include path="members/LJCGetColumns2/*" file="Doc/LJCDataColumns.xml"/>
-    /// <parentGroup>collection</parentGroup>
-    public static LJCDataColumns? LJCGetColumns(object dataObject
-      , List<string>? propertyNames = null)
-    {
-      var retValue = LJCObjectDataColumns(dataObject);
-      if (propertyNames != null)
-      {
-        retValue = retValue?.LJCGetColumns(propertyNames);
       }
       return retValue;
     }
@@ -636,13 +637,14 @@ namespace LJCNetCommon5
       var value = LJCGetString(propertyName);
       if (value != null)
       {
-        try
+        if (LJCNetString.IsDigits(value))
         {
-          retValue = Convert.ToBoolean(value);
+          var checkValue = Convert.ToInt16(value);
+          retValue = Convert.ToBoolean(checkValue);
         }
-        catch
+        else
         {
-          retValue = false;
+          _ = bool.TryParse(value, out retValue);
         }
       }
       return retValue;
@@ -655,10 +657,14 @@ namespace LJCNetCommon5
     {
       byte retValue = default;
 
-      var value = LJCGetString(propertyName);
-      if (value != null)
+      if (LJC.HasValue(propertyName))
       {
-        retValue = Convert.ToByte(value);
+        var dataColumn = LJCSearchPropertyName(propertyName);
+        if (dataColumn != null
+          && dataColumn.Value != null)
+        {
+          retValue = LJC.GetByte(dataColumn.Value);
+        }
       }
       return retValue;
     }
@@ -853,6 +859,9 @@ namespace LJCNetCommon5
     #endregion
 
     #region Class Data
+
+    /// <summary></summary>
+    public int mTestField;
 
     private int mPrevCount;
     private SortType mSortType;

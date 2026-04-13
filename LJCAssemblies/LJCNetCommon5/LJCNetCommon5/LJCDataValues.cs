@@ -150,7 +150,10 @@ namespace LJCNetCommon5
           {
             var dataColumn = dataColumns.LJCSearchColumnName(dataValue.PropertyName);
             var newDataValue = dataValue.CreateColumn(dataColumn!);
-            retValue.Add(newDataValue);
+            if (newDataValue != null)
+            {
+              retValue.Add(newDataValue);
+            }
           }
         }
       }
@@ -225,7 +228,7 @@ namespace LJCNetCommon5
         }
         else
         {
-          bool.TryParse(value, out retValue);
+          _ = bool.TryParse(value, out retValue);
         }
       }
       return retValue;

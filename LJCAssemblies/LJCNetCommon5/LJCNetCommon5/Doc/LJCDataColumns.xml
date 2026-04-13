@@ -75,14 +75,14 @@
   </CopyConstructor>
   
   <!-- Collection Methods -->
-  <Add>
+  <Add1>
     <summary>
       Adds the object element to the collection
     </summary>
     <param name="dataColumn">The object element.</param>
     <remarks>Overrides the base Add method.</remarks>
-  </Add>
-  <Add1>
+  </Add1>
+  <Add2>
     <summary>
       Creates the Object from the arguments and adds it to the collection.
       (R)
@@ -98,8 +98,8 @@
       This method is useful for data sources that require a column position value.
       An example would be a text file that uses fixed length fields.
     </remarks>
-  </Add1>
-  <Add2>
+  </Add2>
+  <Add3>
     <summary>
       Creates the Object from the arguments and adds it to the collection.
     </summary>
@@ -114,8 +114,8 @@
       &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
       object.
     </returns>
-  </Add2>
-  <Add3>
+  </Add3>
+  <Add4>
     <summary>
       Creates the Object from the arguments and adds it to the collection.
     </summary>
@@ -134,7 +134,7 @@
         dbColumns.Add("ColumnName", (object)"Value");
       </code>
     </example>
-  </Add3>
+  </Add4>
   <LJCAddPropertyAs>
     <summary>
       Creates the

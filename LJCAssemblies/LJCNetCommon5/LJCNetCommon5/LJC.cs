@@ -352,7 +352,7 @@ namespace LJCNetCommon5
     // Decodes a Base64 byte array to a Text value.
     /// <include path="members/Base64BytesToText/*" file="Doc/LJC.xml"/>
     /// <parentGroup>convert</parentGroup>
-    public static string Base64BytesToText(byte[] bytes)
+    public static string? Base64BytesToText(byte[] bytes)
     {
       byte[] byteArray = Base64BytesToTextBytes(bytes);
       return BytesToText(byteArray);
@@ -444,7 +444,7 @@ namespace LJCNetCommon5
     // Encodes a Text byte array to a Base64 value.
     /// <include path="members/TextBytesToBase64/*" file="Doc/LJC.xml"/>
     /// <parentGroup>convert</parentGroup>
-    public static string TextBytesToBase64(byte[] bytes)
+    public static string? TextBytesToBase64(byte[] bytes)
     {
       byte[] base64Bytes = TextBytesToBase64Bytes(bytes);
       string retValue = BytesToText(base64Bytes);

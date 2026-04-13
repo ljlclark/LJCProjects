@@ -32,13 +32,13 @@
       &lt;span class="userType"&gt;DbValue&lt;/span&gt; and
       &lt;span class="userType"&gt;DbColumn&lt;/span&gt;.
     </summary>
-    <param name="definitionColumn">
-      The &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+    <param name="dataColumn">
+      The &lt;span class="userType"&gt;LJCDataColumn&lt;/span&gt;
       object.
     </param>
     <returns>
       The combined
-      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
+      &lt;span class="userType"&gt;LJCDataColumn&lt;/span&gt;
       object.
     </returns>
   </CreateColumn>

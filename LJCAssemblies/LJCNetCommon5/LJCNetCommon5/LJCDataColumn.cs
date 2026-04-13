@@ -192,7 +192,7 @@ namespace LJCNetCommon5
       {
         mColumnName = LJCNetString.InitString(value);
 
-        // Set empty property name the same as the column name.
+        // Set empty property. Name the same as the column name.
         if (LJC.HasValue(mColumnName)
           && !LJC.HasValue(mPropertyName))
         {
@@ -234,6 +234,13 @@ namespace LJCNetCommon5
         if (LJC.HasValue(value))
         {
           mPropertyName = LJCNetString.InitString(value);
+
+          // Set empty property. Name the same as the column name.
+          if (LJC.HasValue(mPropertyName)
+            && !LJC.HasValue(mColumnName))
+          {
+            ColumnName = PropertyName;
+          }
         }
       }
     }

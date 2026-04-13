@@ -162,7 +162,11 @@ namespace TestLJC5
       string base64 = LJC.TextBytesToBase64(textBytes);
 
       // Check the text.
-      var result = LJC.Base64ToText(base64);
+      string result = null;
+      if (LJC.HasValue(base64))
+      {
+        result = LJC.Base64ToText(base64);
+      }
       var compare = "Text";
       TestCommon?.Write("TextBytesToBase64()", result, compare);
     }

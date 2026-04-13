@@ -16,9 +16,9 @@ namespace LJCNetCommon5
     /// <parentGroup>collection</parentGroup>
     public LJCAttribute Add(string name, string value)
     {
-      var retAttribute = new LJCAttribute(name, value);
-      Add(retAttribute);
-      return retAttribute;
+      var retAttrib = new LJCAttribute(name, value);
+      Add(retAttrib);
+      return retAttrib;
     }
     #endregion
   }

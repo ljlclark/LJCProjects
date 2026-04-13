@@ -51,7 +51,7 @@ namespace LJCNetCommon5
     /// <include path="members/SetConstructorInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public ConstructorInfo? SetConstructorInfo(string methodName
-      , string[] parameterNames)
+      , string[]? parameterNames)
     {
       ParameterInfo[] parameterInfos;
       ConstructorInfo selectedConstructorInfo = null;
@@ -195,7 +195,8 @@ namespace LJCNetCommon5
     // Set the MethodInfo reference.
     /// <include path="members/SetMethodInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>reflectionProperty</parentGroup>
-    public MethodInfo? SetMethodInfo(string methodName, string[] parameterNames)
+    public MethodInfo? SetMethodInfo(string methodName
+      , string[]? parameterNames = null)
     {
       ParameterInfo[] parameterInfos;
       MethodInfo selectedMethodInfo = null;
@@ -224,7 +225,8 @@ namespace LJCNetCommon5
           | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly;
 
         if (null == parameterNames
-          || (parameterNames != null && 0 == parameterNames.Length))
+          || (parameterNames != null
+          && 0 == parameterNames.Length))
         {
           // Get method with no parameters.
           MethodInfo = TypeReference.GetMethod(MethodName, bindingFlags
@@ -314,7 +316,7 @@ namespace LJCNetCommon5
     /// <include path="members/SetPropertyInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public PropertyInfo? SetPropertyInfo(string propertyName
-      , string? fullName = null)
+      , string? indexerSignature = null)
     {
       PropertyName = propertyName;
 
@@ -324,9 +326,9 @@ namespace LJCNetCommon5
       {
         if ("Item" == PropertyName)
         {
-          if (LJC.HasValue(fullName))
+          if (LJC.HasValue(indexerSignature))
           {
-            PropertyInfo = GetIndexerInfo(fullName);
+            PropertyInfo = GetIndexerInfo(indexerSignature);
           }
         }
         else
