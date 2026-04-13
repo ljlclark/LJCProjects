@@ -4,6 +4,7 @@
 using LJCNetCommon5;
 using System.Reflection;
 using System.Reflection.Metadata;
+using System.Runtime.Serialization.Formatters;
 
 namespace TestAssemblyReflect5
 {
@@ -25,6 +26,11 @@ namespace TestAssemblyReflect5
       SetMethodInfo();
       SetPropertyInfo();
       SetTypeReference();
+
+      HasField();
+      HasMethod();
+      HasParmMethod();
+      GetParmMethod();
 
       // Get Syntax Methods
       GetConstructorSyntax();
@@ -53,6 +59,158 @@ namespace TestAssemblyReflect5
     {
       return "LJCNetCommon5.LJCDataColumns";
     }
+
+    private static void HasField()
+    {
+      // Initialize Assembly and Type
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      var typeReference = reflect.SetTypeReference(TypeName());
+
+      string fieldName = "mTestField";
+      var result = "False";
+      var fieldInfos = typeReference?.GetFields();
+      if (LJC.HasElements(fieldInfos)
+        && fieldInfos.Any(x => x.Name.Equals(fieldName)))
+      {
+        result = "True";
+      }
+      var compare = "True";
+      TestCommon?.Write("HasField()1", result, compare);
+
+      result = "False";
+      var fieldInfo = reflect.SetFieldInfo(fieldName);
+      if (fieldInfo != null)
+      {
+        result = "True";
+      }
+      compare = "True";
+      TestCommon?.Write("HasField()2", result, compare);
+    }
+
+    private static void HasParmMethod()
+    {
+      // Initialize Assembly and Type
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      var typeReference = reflect.SetTypeReference(TypeName());
+
+      var methodName = "Add";
+      string[] parmNames =
+      [
+        "columnName",
+        "position",
+        "maxLength",
+      ];
+
+      var result = "False";
+      var methodInfos = typeReference?.GetMethods().Where
+        (x => x.Name.Equals(methodName)).ToArray();
+      if (LJC.HasItems(methodInfos)
+        && LJC.HasItems(parmNames))
+      {
+        var methodInfo = reflect.ParmMethodInfo(methodName, parmNames);
+        if (methodInfo != null)
+        {
+          result = "True";
+        }
+      }
+      var compare = "True";
+      TestCommon?.Write("HasParmMethod()", result, compare);
+    }
+
+    //private static MethodInfo? GetParmMethod(string methodName, string[] parmNames)
+    //{
+    //  MethodInfo retMethodInfo = null;
+
+    //  // Initialize Assembly and Type
+    //  var reflect = new LJCAssemblyReflect();
+    //  reflect.SetAssembly(FileSpec());
+    //  var typeReference = reflect.SetTypeReference(TypeName());
+
+    //  var methodInfos = typeReference?.GetMethods().Where
+    //    (x => x.Name.Equals(methodName)).ToArray();
+    //  if (LJC.HasItems(methodInfos))
+    //  {
+    //    ParameterInfo[] parmInfos;
+
+    //    // Check parameter count.
+    //    foreach (MethodInfo methodInfo in methodInfos)
+    //    {
+    //      try { parmInfos = methodInfo.GetParameters(); }
+    //      catch { continue; }
+    //      if (parmInfos.Length != parmNames.Length)
+    //      {
+    //        continue;
+    //      }
+
+    //      // Check parameter names.
+    //      var found = true;
+    //      for (int index = 0; index < parmNames.Length; index++)
+    //      {
+    //        string parmName = parmNames[index];
+    //        if (parmName != parmInfos[index].Name)
+    //        {
+    //          found = false;
+    //          break;
+    //        }
+    //      }
+    //      if (found)
+    //      {
+    //        retMethodInfo = methodInfo;
+    //        break;
+    //      }
+    //    }
+    //  }
+    //  return retMethodInfo;
+    //}
+
+    private static MethodInfo? GetParmMethod()
+    {
+      // Initialize Assembly and Type
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
+
+      var methodName = "Add";
+      string[] parmNames =
+      [
+        "columnName",
+        "position",
+        "maxLength",
+      ];
+      var retMethodInfo = reflect.ParmMethodInfo(methodName, parmNames);
+      return retMethodInfo;
+    }
+
+    private static void HasMethod()
+    {
+      // Initialize Assembly and Type
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      var typeReference = reflect.SetTypeReference(TypeName());
+
+      var methodName = "Clone";
+      var result = "False";
+      var methodInfos = typeReference?.GetMethods();
+      if (LJC.HasElements(methodInfos)
+        && methodInfos.Any(x => x.Name.Equals(methodName)))
+      {
+        result = "True";
+      }
+      var compare = "True";
+      TestCommon?.Write("HasMethod()1", result, compare);
+
+      result = "False";
+      var methodInfo = reflect.SetMethodInfo(methodName);
+      if (methodInfo != null)
+      {
+        result = "True";
+      }
+      compare = "True";
+      TestCommon?.Write("HasMethod()2", result, compare);
+    }
+
     #endregion
 
     #region Set Reflection Property Methods
@@ -61,10 +219,10 @@ namespace TestAssemblyReflect5
     private static void SetAssembly()
     {
       // Initialize Assembly
-      var assmReflect = new LJCAssemblyReflect();
+      var reflect = new LJCAssemblyReflect();
 
       // Test Method
-      var assembly = assmReflect.SetAssembly(FileSpec());
+      var assembly = reflect.SetAssembly(FileSpec());
       var value = assembly?.FullName;
       var tokens = LJCNetString.Split(value);
       string result = null;
@@ -80,14 +238,14 @@ namespace TestAssemblyReflect5
     private static void SetConstructorInfo()
     {
       // Initialize Assembly and Type
-      var assmReflect = new LJCAssemblyReflect();
-      assmReflect.SetAssembly(FileSpec());
-      assmReflect.SetTypeReference(TypeName());
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
 
       // Test Method
       // Get default constructor.
-      //var cstrInfo = assmReflect.SetConstructorInfo("LJCNetCommon5", null);
-      var cstrInfo = assmReflect.SetConstructorInfo("LJCDataColumns", null);
+      //var cstrInfo = reflect.SetConstructorInfo("LJCNetCommon5", null);
+      var cstrInfo = reflect.SetConstructorInfo("LJCDataColumns", null);
       var result = cstrInfo?.DeclaringType?.Name;
       var compare = "LJCDataColumns";
       TestCommon?.Write("SetConstructorInfo()1", result, compare);
@@ -98,8 +256,8 @@ namespace TestAssemblyReflect5
       [
         "items",
       ];
-      //cstrInfo = assmReflect.SetConstructorInfo("LJCNetCommon5", parms);
-      cstrInfo = assmReflect.SetConstructorInfo("LJCDataColumns", parms);
+      //cstrInfo = reflect.SetConstructorInfo("LJCNetCommon5", parms);
+      cstrInfo = reflect.SetConstructorInfo("LJCDataColumns", parms);
       result = cstrInfo?.DeclaringType?.Name;
       compare = "LJCDataColumns";
       TestCommon?.Write("SetConstructorInfo()2", result, compare);
@@ -109,9 +267,9 @@ namespace TestAssemblyReflect5
     private static void SetFieldInfo()
     {
       // Initialize Assembly and Type
-      var assmReflect = new LJCAssemblyReflect();
-      assmReflect.SetAssembly(FileSpec());
-      var typeReference = assmReflect.SetTypeReference(TypeName());
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      var typeReference = reflect.SetTypeReference(TypeName());
 
       string result = null;
       string compare = null;
@@ -123,8 +281,8 @@ namespace TestAssemblyReflect5
         if (fieldInfo != null)
         {
           // Test Method
-          assmReflect.SetFieldInfo(fieldInfo.Name);
-          result = assmReflect.FieldInfo?.Name;
+          reflect.SetFieldInfo(fieldInfo.Name);
+          result = reflect.FieldInfo?.Name;
           compare = "mTestField";
         }
       }
@@ -135,14 +293,14 @@ namespace TestAssemblyReflect5
     private static void SetIndexerInfo()
     {
       // Initialize Assembly, Type and Property
-      var assmReflect = new LJCAssemblyReflect();
-      assmReflect.SetAssembly(FileSpec());
-      assmReflect.SetTypeReference(TypeName());
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
 
       // Test Method
       string indexerName = "Item";
       string indexerSignature = "Item(System.String)";
-      var propertyInfo = assmReflect.SetPropertyInfo(indexerName
+      var propertyInfo = reflect.SetPropertyInfo(indexerName
         , indexerSignature);
       var result = propertyInfo?.Name;
       var compare = "Item";
@@ -153,12 +311,12 @@ namespace TestAssemblyReflect5
     private static void SetMethodInfo()
     {
       // Initialize Assembly, Type and Method
-      var assmReflect = new LJCAssemblyReflect();
-      assmReflect.SetAssembly(FileSpec());
-      assmReflect.SetTypeReference(TypeName());
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
 
       // Test Method
-      var methodInfo = assmReflect.SetMethodInfo("HasItems");
+      var methodInfo = reflect.SetMethodInfo("HasItems");
       var result = methodInfo?.Name;
       var compare = "HasItems";
       TestCommon?.Write("SetMethodInfo()1", result, compare);
@@ -168,7 +326,7 @@ namespace TestAssemblyReflect5
       [
         "propertyName",
       ];
-      methodInfo = assmReflect.SetMethodInfo("LJCGetBoolean", parms);
+      methodInfo = reflect.SetMethodInfo("LJCGetBoolean", parms);
       result = methodInfo?.Name;
       compare = "LJCGetBoolean";
       TestCommon?.Write("SetMethodInfo()2", result, compare);
@@ -178,12 +336,12 @@ namespace TestAssemblyReflect5
     private static void SetPropertyInfo()
     {
       // Initialize Assembly, Type and Property
-      var assmReflect = new LJCAssemblyReflect();
-      assmReflect.SetAssembly(FileSpec());
-      assmReflect.SetTypeReference(TypeName());
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
 
       // Test Method
-      var propertyInfo = assmReflect.SetPropertyInfo("LJCDefaultFileName");
+      var propertyInfo = reflect.SetPropertyInfo("LJCDefaultFileName");
       var result = propertyInfo?.Name;
       var compare = "LJCDefaultFileName";
       TestCommon?.Write("SetPropertyInfo()", result, compare);
@@ -193,11 +351,11 @@ namespace TestAssemblyReflect5
     private static void SetTypeReference()
     {
       // Initialize Assembly
-      var assmReflect = new LJCAssemblyReflect();
-      assmReflect.SetAssembly(FileSpec());
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
 
       // Test Method
-      var typeReference = assmReflect.SetTypeReference(TypeName());
+      var typeReference = reflect.SetTypeReference(TypeName());
       var result = typeReference?.Name;
       var compare = "LJCDataColumns";
       TestCommon?.Write("SetTypeReference()", result, compare);
@@ -210,18 +368,18 @@ namespace TestAssemblyReflect5
     private static void GetConstructorSyntax()
     {
       // Initialize Assembly, Type and Constructor
-      var assmReflect = new LJCAssemblyReflect();
-      assmReflect.SetAssembly(FileSpec());
-      assmReflect.SetTypeReference(TypeName());
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
       // Get constructor with "items" parameter.
       string[] parms =
       [
         "items",
       ];
-      assmReflect.SetConstructorInfo("LJCDataColumns", parms);
+      reflect.SetConstructorInfo("LJCDataColumns", parms);
 
       // Test Method
-      var result = assmReflect.GetConstructorSyntax();
+      var result = reflect.GetConstructorSyntax();
       var compare = "public LJCDataColumns(LJCDataColumns items)";
       TestCommon?.Write("GetConstructorSyntax()", result, compare);
     }
@@ -230,13 +388,13 @@ namespace TestAssemblyReflect5
     private static void GetFieldSyntax()
     {
       // Initialize Assembly, Type and Field
-      var assmReflect = new LJCAssemblyReflect();
-      assmReflect.SetAssembly(FileSpec());
-      assmReflect.SetTypeReference(TypeName());
-      assmReflect.SetFieldInfo("mTestField");
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
+      reflect.SetFieldInfo("mTestField");
 
       // Test Method
-      var result = assmReflect.GetFieldSyntax();
+      var result = reflect.GetFieldSyntax();
       var compare = "public Int32 mTestField";
       TestCommon?.Write("GetFieldSyntax()", result, compare);
     }
@@ -253,17 +411,17 @@ namespace TestAssemblyReflect5
     private static void GetMethodSyntax()
     {
       // Initialize Assembly, Type and Method
-      var assmReflect = new LJCAssemblyReflect();
-      assmReflect.SetAssembly(FileSpec());
-      assmReflect.SetTypeReference(TypeName());
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
       string[] parms =
       [
         "propertyName",
       ];
-      assmReflect.SetMethodInfo("LJCGetBoolean", parms);
+      reflect.SetMethodInfo("LJCGetBoolean", parms);
 
       // Test Method
-      var result = assmReflect.GetMethodSyntax();
+      var result = reflect.GetMethodSyntax();
       var compare = "public Boolean LJCGetBoolean(String propertyName)";
       TestCommon?.Write("GetMethodSyntax()", result, compare);
     }
@@ -272,13 +430,13 @@ namespace TestAssemblyReflect5
     private static void GetPropertySyntax()
     {
       // Initialize Assembly, Type and Property
-      var assmReflect = new LJCAssemblyReflect();
-      assmReflect.SetAssembly(FileSpec());
-      assmReflect.SetTypeReference(TypeName());
-      assmReflect.SetPropertyInfo("LJCDefaultFileName");
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
+      reflect.SetPropertyInfo("LJCDefaultFileName");
 
       // Test Method
-      var result = assmReflect.GetPropertySyntax();
+      var result = reflect.GetPropertySyntax();
       var compare = "public static String LJCDefaultFileName";
       TestCommon?.Write("GetPropertySyntax()", result, compare);
     }
@@ -287,12 +445,12 @@ namespace TestAssemblyReflect5
     private static void GetTypeSyntax()
     {
       // Initialize Assembly and Type
-      var assmReflect = new LJCAssemblyReflect();
-      assmReflect.SetAssembly(FileSpec());
-      assmReflect.SetTypeReference(TypeName());
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
 
       // Test Method
-      var result = assmReflect.GetTypeSyntax();
+      var result = reflect.GetTypeSyntax();
       var compare = "public class LJCDataColumns : List<LJCDataColumn>";
       TestCommon?.Write("GetTypeSyntax()", result, compare);
     }

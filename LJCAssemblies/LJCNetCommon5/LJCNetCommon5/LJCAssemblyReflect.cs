@@ -25,6 +25,206 @@ namespace LJCNetCommon5
     }
     #endregion
 
+    #region Static Methods
+
+    // Gets parm methods with parm names.
+    /// <include path="members/ParmMethodInfosWithParms/*" file="Doc/LJCAssemblyReflect.xml"/>
+    public static MethodInfo? ParmMethodInfoWithParms(MethodInfo[] methodInfos
+      , string[] parmNames)
+    {
+      MethodInfo retMethodInfo = null;
+
+      if (LJC.HasItems(methodInfos)
+        && LJC.HasItems(parmNames))
+      {
+        foreach (MethodInfo methodInfo in methodInfos)
+        {
+          var parmInfos = methodInfo.GetParameters();
+          if (!LJC.HasItems(parmInfos)
+            || parmInfos.Length != parmNames.Length)
+          {
+            continue;
+          }
+          var found = true;
+          for (int index = 0; index < parmNames.Length; index++)
+          {
+            string parmName = parmNames[index];
+            if (parmName != parmInfos[index].Name)
+            {
+              found = false;
+              break;
+            }
+          }
+          if (found)
+          {
+            retMethodInfo = methodInfo;
+            break;
+          }
+        }
+      }
+      return retMethodInfo;
+    }
+
+    // Gets parm methods with parm type names.
+    /// <include path="members/ParmMethodInfosWithTypes/*" file="Doc/LJCAssemblyReflect.xml"/>
+    public static MethodInfo? ParmMethodInfoWithTypes(MethodInfo[] methodInfos
+      , string[] typeNames)
+    {
+      MethodInfo retMethodInfo = null;
+
+      if (LJC.HasItems(methodInfos)
+        && LJC.HasItems(typeNames))
+      {
+        foreach (MethodInfo methodInfo in methodInfos)
+        {
+          var parmInfos = methodInfo.GetParameters();
+          if (!LJC.HasItems(parmInfos)
+            || parmInfos.Length != typeNames.Length)
+          {
+            continue;
+          }
+          var found = true;
+          for (int index = 0; index < typeNames.Length; index++)
+          {
+            string typeName = typeNames[index];
+            if (typeName != parmInfos[index].ParameterType.Name)
+            {
+              found = false;
+              break;
+            }
+          }
+          if (found)
+          {
+            retMethodInfo = methodInfo;
+            break;
+          }
+        }
+      }
+      return retMethodInfo;
+    }
+
+    // Gets parm names from method info.
+    /// <include path="members/ParmNames/*" file="Doc/LJCAssemblyReflect.xml"/>
+    public static string[]? ParmNames(MethodInfo methodInfo)
+    {
+      string[] retParamNames = null;
+
+      if (methodInfo != null)
+      {
+        var paramNames = new List<string>();
+        ParameterInfo[] parmInfos;
+
+        parmInfos = methodInfo.GetParameters();
+        if (LJC.HasItems(parmInfos))
+        {
+          for (int index = 0; index < parmInfos.Length; index++)
+          {
+            ParameterInfo parmInfo = parmInfos[index];
+            string parmName = parmInfo.Name;
+            if (LJC.HasValue(parmName))
+            {
+              paramNames.Add(parmName);
+            }
+          }
+          //retParamNames = paramNames.ToArray();
+          retParamNames = [.. paramNames];
+        }
+      }
+      return retParamNames;
+    }
+
+    // Gets parm method type names with parm names.
+    /// <include path="members/ParmTypeNames/*" file="Doc/LJCAssemblyReflect.xml"/>
+    public static string[]? ParmTypeNames(MethodInfo methodInfo)
+    {
+      string[] retTypeNames = null;
+
+      if (methodInfo != null)
+      {
+        var typeNames = new List<string>();
+        ParameterInfo[] parmInfos;
+        parmInfos = methodInfo.GetParameters();
+        if (LJC.HasItems(parmInfos))
+        {
+          for (int index = 0; index < parmInfos.Length; index++)
+          {
+            ParameterInfo parmInfo = parmInfos[index];
+            if (parmInfo != null)
+            {
+              string typeName = parmInfo.ParameterType.Name;
+              if (LJC.HasValue(typeName))
+              {
+                typeNames.Add(typeName);
+              }
+            }
+          }
+          //retTypeNames = typeNames.ToArray();
+          retTypeNames = [.. typeNames];
+        }
+      }
+      return retTypeNames;
+    }
+    #endregion
+
+    #region Methods
+
+
+    /// <include path="members/ParmMethodInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
+    public MethodInfo? ParmMethodInfo(string methodName, string[] parmNames)
+    {
+      MethodInfo retMethodInfo = null;
+
+      int parmCount = parmNames.Length;
+      MethodInfo[] parmCountInfos = ParmMethodInfosWithCount(
+        methodName, parmCount);
+      if (LJC.HasItems(parmCountInfos))
+      {
+        // Get only with matching parm names.
+        var methodInfo = ParmMethodInfoWithParms(parmCountInfos, parmNames);
+        if (methodInfo != null)
+        {
+          // Get with actual matching type names.
+          var parmTypes = ParmTypeNames(methodInfo);
+          if (LJC.HasItems(parmTypes))
+          {
+            retMethodInfo = ParmMethodInfoWithTypes(parmCountInfos, parmTypes);
+          }
+        }
+      }
+      return retMethodInfo;
+    }
+
+    // Gets parm methods with method name and parm count.
+    /// <include path="members/ParmMethodInfosWithCount/*" file="Doc/LJCAssemblyReflect.xml"/>
+    public MethodInfo[]? ParmMethodInfosWithCount(string methodName
+      , int parmCount)
+    {
+      MethodInfo[] retMethodInfos = null;
+
+      MethodInfo[] methodInfos = TypeReference?.GetMethods().Where
+        (x => x.Name.Equals(methodName)).ToArray();
+      if (LJC.HasItems(methodInfos))
+      {
+        var methodInfoList = new List<MethodInfo>();
+        ParameterInfo[] parmInfos;
+
+        // Check parameter count.
+        foreach (MethodInfo methodInfo in methodInfos)
+        {
+          try { parmInfos = methodInfo.GetParameters(); }
+          catch { continue; }
+          if (parmInfos.Length == parmCount)
+          {
+            methodInfoList.Add(methodInfo);
+          }
+        }
+        //retMethodInfos = methodInfoList.ToArray();
+        retMethodInfos = [.. methodInfoList];
+      }
+      return retMethodInfos;
+    }
+    #endregion
+
     #region Set Reflection Property Methods
 
     // Retrieves the Assembly reference.
