@@ -27,10 +27,11 @@ namespace TestAssemblyReflect5
       SetPropertyInfo();
       SetTypeReference();
 
+      // Methods
       HasField();
       HasMethod();
       HasParmMethod();
-      GetParmMethod();
+      GetParmMethodInfo();
 
       // Get Syntax Methods
       GetConstructorSyntax();
@@ -47,171 +48,6 @@ namespace TestAssemblyReflect5
       IsOverride();
       IsPublic();
     }
-
-    #region Methods
-
-    private static string FileSpec()
-    {
-      return "LJCNetCommon5.dll";
-    }
-
-    private static string TypeName()
-    {
-      return "LJCNetCommon5.LJCDataColumns";
-    }
-
-    private static void HasField()
-    {
-      // Initialize Assembly and Type
-      var reflect = new LJCAssemblyReflect();
-      reflect.SetAssembly(FileSpec());
-      var typeReference = reflect.SetTypeReference(TypeName());
-
-      string fieldName = "mTestField";
-      var result = "False";
-      var fieldInfos = typeReference?.GetFields();
-      if (LJC.HasElements(fieldInfos)
-        && fieldInfos.Any(x => x.Name.Equals(fieldName)))
-      {
-        result = "True";
-      }
-      var compare = "True";
-      TestCommon?.Write("HasField()1", result, compare);
-
-      result = "False";
-      var fieldInfo = reflect.SetFieldInfo(fieldName);
-      if (fieldInfo != null)
-      {
-        result = "True";
-      }
-      compare = "True";
-      TestCommon?.Write("HasField()2", result, compare);
-    }
-
-    private static void HasParmMethod()
-    {
-      // Initialize Assembly and Type
-      var reflect = new LJCAssemblyReflect();
-      reflect.SetAssembly(FileSpec());
-      var typeReference = reflect.SetTypeReference(TypeName());
-
-      var methodName = "Add";
-      string[] parmNames =
-      [
-        "columnName",
-        "position",
-        "maxLength",
-      ];
-
-      var result = "False";
-      var methodInfos = typeReference?.GetMethods().Where
-        (x => x.Name.Equals(methodName)).ToArray();
-      if (LJC.HasItems(methodInfos)
-        && LJC.HasItems(parmNames))
-      {
-        var methodInfo = reflect.ParmMethodInfo(methodName, parmNames);
-        if (methodInfo != null)
-        {
-          result = "True";
-        }
-      }
-      var compare = "True";
-      TestCommon?.Write("HasParmMethod()", result, compare);
-    }
-
-    //private static MethodInfo? GetParmMethod(string methodName, string[] parmNames)
-    //{
-    //  MethodInfo retMethodInfo = null;
-
-    //  // Initialize Assembly and Type
-    //  var reflect = new LJCAssemblyReflect();
-    //  reflect.SetAssembly(FileSpec());
-    //  var typeReference = reflect.SetTypeReference(TypeName());
-
-    //  var methodInfos = typeReference?.GetMethods().Where
-    //    (x => x.Name.Equals(methodName)).ToArray();
-    //  if (LJC.HasItems(methodInfos))
-    //  {
-    //    ParameterInfo[] parmInfos;
-
-    //    // Check parameter count.
-    //    foreach (MethodInfo methodInfo in methodInfos)
-    //    {
-    //      try { parmInfos = methodInfo.GetParameters(); }
-    //      catch { continue; }
-    //      if (parmInfos.Length != parmNames.Length)
-    //      {
-    //        continue;
-    //      }
-
-    //      // Check parameter names.
-    //      var found = true;
-    //      for (int index = 0; index < parmNames.Length; index++)
-    //      {
-    //        string parmName = parmNames[index];
-    //        if (parmName != parmInfos[index].Name)
-    //        {
-    //          found = false;
-    //          break;
-    //        }
-    //      }
-    //      if (found)
-    //      {
-    //        retMethodInfo = methodInfo;
-    //        break;
-    //      }
-    //    }
-    //  }
-    //  return retMethodInfo;
-    //}
-
-    private static MethodInfo? GetParmMethod()
-    {
-      // Initialize Assembly and Type
-      var reflect = new LJCAssemblyReflect();
-      reflect.SetAssembly(FileSpec());
-      reflect.SetTypeReference(TypeName());
-
-      var methodName = "Add";
-      string[] parmNames =
-      [
-        "columnName",
-        "position",
-        "maxLength",
-      ];
-      var retMethodInfo = reflect.ParmMethodInfo(methodName, parmNames);
-      return retMethodInfo;
-    }
-
-    private static void HasMethod()
-    {
-      // Initialize Assembly and Type
-      var reflect = new LJCAssemblyReflect();
-      reflect.SetAssembly(FileSpec());
-      var typeReference = reflect.SetTypeReference(TypeName());
-
-      var methodName = "Clone";
-      var result = "False";
-      var methodInfos = typeReference?.GetMethods();
-      if (LJC.HasElements(methodInfos)
-        && methodInfos.Any(x => x.Name.Equals(methodName)))
-      {
-        result = "True";
-      }
-      var compare = "True";
-      TestCommon?.Write("HasMethod()1", result, compare);
-
-      result = "False";
-      var methodInfo = reflect.SetMethodInfo(methodName);
-      if (methodInfo != null)
-      {
-        result = "True";
-      }
-      compare = "True";
-      TestCommon?.Write("HasMethod()2", result, compare);
-    }
-
-    #endregion
 
     #region Set Reflection Property Methods
 
@@ -359,6 +195,112 @@ namespace TestAssemblyReflect5
       var result = typeReference?.Name;
       var compare = "LJCDataColumns";
       TestCommon?.Write("SetTypeReference()", result, compare);
+    }
+    #endregion
+
+    #region Helper Methods
+
+    // The test file spec.
+    private static string FileSpec()
+    {
+      return "LJCNetCommon5.dll";
+    }
+
+    // The test type name.
+    private static string TypeName()
+    {
+      return "LJCNetCommon5.LJCDataColumns";
+    }
+    #endregion
+
+    #region Methods
+
+    // Checks if the type has a specific field.
+    private static void HasField()
+    {
+      // Initialize Assembly and Type
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
+
+      string fieldName = "mTestField";
+      var result = "False";
+      var fieldInfo = reflect.GetFieldInfo(fieldName);
+      if (fieldInfo != null)
+      {
+        result = "True";
+      }
+      var compare = "True";
+      TestCommon?.Write("HasField()1", result, compare);
+
+      result = "False";
+      fieldInfo = reflect.SetFieldInfo(fieldName);
+      if (fieldInfo != null)
+      {
+        result = "True";
+      }
+      compare = "True";
+      TestCommon?.Write("HasField()2", result, compare);
+    }
+
+    // Checks if the type has a specifec parameterless method.
+    private static void HasMethod()
+    {
+      // Initialize Assembly and Type
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
+
+      var methodName = "Clone";
+      var result = "False";
+      var methodInfo = reflect.GetMethodInfo(methodName);
+      if (methodInfo != null)
+      {
+        result = "True";
+      }
+      var compare = "True";
+      TestCommon?.Write("HasMethod()1", result, compare);
+
+      result = "False";
+      methodInfo = reflect.SetMethodInfo(methodName);
+      if (methodInfo != null)
+      {
+        result = "True";
+      }
+      compare = "True";
+      TestCommon?.Write("HasMethod()2", result, compare);
+    }
+
+    // Checks if the type has a parameterized method.
+    private static void HasParmMethod()
+    {
+      var result = "False";
+      var methodInfo = GetParmMethodInfo();
+      if (methodInfo != null)
+      {
+        result = "True";
+      }
+      var compare = "True";
+      TestCommon?.Write("HasParmMethod()", result, compare);
+    }
+
+    // Gets a parameterized method info object.
+    private static MethodInfo? GetParmMethodInfo()
+    {
+      // Initialize Assembly and Type
+      var reflect = new LJCAssemblyReflect();
+      reflect.SetAssembly(FileSpec());
+      reflect.SetTypeReference(TypeName());
+
+      var methodName = "Add";
+      string[] parmNames =
+      [
+        "columnName",
+        "position",
+        "maxLength",
+      ];
+      var retMethodInfo = reflect.ParmMethodInfo(methodName, parmNames);
+      return retMethodInfo;
     }
     #endregion
 
