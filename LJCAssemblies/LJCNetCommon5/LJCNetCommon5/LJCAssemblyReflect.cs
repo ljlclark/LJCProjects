@@ -1,7 +1,6 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCAssemblyReflect.cs
-using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 
@@ -115,7 +114,7 @@ namespace LJCNetCommon5
 
     #region Methods
 
-    // Get a parameterless method info object.
+    // Gets a field info object.
     /// <include path="members/GetFieldInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>method</parentGroup>
     public FieldInfo? GetFieldInfo(string fieldName)
@@ -123,7 +122,7 @@ namespace LJCNetCommon5
       return TypeReference?.GetField(fieldName);
     }
 
-    // Get a parameterless method info object.
+    // Gets a parameterless method info object.
     /// <include path="members/MethodInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>method</parentGroup>
     public MethodInfo? GetMethodInfo(string methodName)
@@ -772,7 +771,7 @@ namespace LJCNetCommon5
       }
 
       if (info != null
-        && IsNotProperty(info))
+        && !IsProperty(info))
       {
         var builder = new StringBuilder(128);
 
@@ -905,7 +904,6 @@ namespace LJCNetCommon5
 
         // Parameters
         ParameterInfo[] parameterInfos = info.GetIndexParameters();
-        //if (parameterInfos.Count() > 0)
         if (parameterInfos.Length > 0)
         {
           ParameterInfo parameterInfo = parameterInfos[0];
@@ -993,7 +991,7 @@ namespace LJCNetCommon5
           }
           else
           {
-            if (IsNotCommonClassification(baseType))
+            if (!IsCommonClassification(baseType))
             {
               hasQualifiers = true;
               builder.Append($": {baseType.Name} ");
@@ -1002,11 +1000,12 @@ namespace LJCNetCommon5
         }
 
         // Implemented Interfaces
-        if (baseType != null && baseType.Name != "Enum")
+        if (baseType != null
+          && baseType.Name != "Enum")
         {
           foreach (Type implementedType in type.GetInterfaces())
           {
-            if (IsNotCommonInterface(implementedType))
+            if (!IsCommonInterface(implementedType))
             {
               if (!hasQualifiers)
               {
@@ -1037,38 +1036,38 @@ namespace LJCNetCommon5
 
     #region Check Type Methods
 
-    // Indicates if the Type is not a common type.
+    // Indicates if the Type is a common type.
     /// <include path="members/IsNotCommonClassification/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>check</parentGroup>
-    public static bool IsNotCommonClassification(Type type)
+    public static bool IsCommonClassification(Type type)
     {
-      bool retValue = true;
+      bool retValue = false;
 
       if (type.Name == "Object"
         || type.Name == "Enum")
       {
-        retValue = false;
+        retValue = true;
       }
       return retValue;
     }
 
-    // Indicates if the Interface is not a common type.
+    // Indicates if the Interface is a common type.
     /// <include path="members/IsNotCommonInterface/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>check</parentGroup>
-    public static bool IsNotCommonInterface(Type type)
+    public static bool IsCommonInterface(Type type)
     {
-      bool retValue = true;
+      bool retValue = false;
 
       if (type != null)
       {
         if (type.FullName!.StartsWith("System.ComponentModel")
-        || type.FullName.StartsWith("System.ServiceModel")
-        || type.FullName.StartsWith("System.Windows.Forms"))
+          || type.FullName.StartsWith("System.ServiceModel")
+          || type.FullName.StartsWith("System.Windows.Forms"))
         {
-          retValue = false;
+          retValue = true;
         }
 
-        if (retValue)
+        if (!retValue)
         {
           if (type.Name.StartsWith("ICloneable")
             || type.Name.StartsWith("ICollection")
@@ -1079,7 +1078,7 @@ namespace LJCNetCommon5
             || type.Name.StartsWith("IList")
             || type.Name.StartsWith("IReadOnly"))
           {
-            retValue = false;
+            retValue = true;
           }
         }
       }
@@ -1089,13 +1088,13 @@ namespace LJCNetCommon5
     // Indicates if the Method is not a property getter or setter.
     /// <include path="members/IsNotProperty/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>check</parentGroup>
-    public static bool IsNotProperty(MethodInfo methodInfo)
+    public static bool IsProperty(MethodInfo methodInfo)
     {
       bool retValue = false;
 
       if (methodInfo != null
-        && !methodInfo.Name.StartsWith("get_")
-        && !methodInfo.Name.StartsWith("set_"))
+        && (methodInfo.Name.StartsWith("get_")
+        || methodInfo.Name.StartsWith("set_")))
       {
         retValue = true;
       }
@@ -1125,7 +1124,7 @@ namespace LJCNetCommon5
 
       if (info != null)
       {
-        if (IsNotProperty(info))
+        if (!IsProperty(info))
         {
           if (info.IsPublic)
           {
