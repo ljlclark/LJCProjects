@@ -1036,55 +1036,6 @@ namespace LJCNetCommon5
 
     #region Check Type Methods
 
-    // Indicates if the Type is a common type.
-    /// <include path="members/IsNotCommonClassification/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>check</parentGroup>
-    public static bool IsCommonClassification(Type type)
-    {
-      bool retValue = false;
-
-      if (type.Name == "Object"
-        || type.Name == "Enum")
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Indicates if the Interface is a common type.
-    /// <include path="members/IsNotCommonInterface/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>check</parentGroup>
-    public static bool IsCommonInterface(Type type)
-    {
-      bool retValue = false;
-
-      if (type != null)
-      {
-        if (type.FullName!.StartsWith("System.ComponentModel")
-          || type.FullName.StartsWith("System.ServiceModel")
-          || type.FullName.StartsWith("System.Windows.Forms"))
-        {
-          retValue = true;
-        }
-
-        if (!retValue)
-        {
-          if (type.Name.StartsWith("ICloneable")
-            || type.Name.StartsWith("ICollection")
-            || type.Name.StartsWith("IConvertible")
-            || type.Name.StartsWith("IDisposable")
-            || type.Name.StartsWith("IFormattable")
-            || type.Name.StartsWith("IEnumerable")
-            || type.Name.StartsWith("IList")
-            || type.Name.StartsWith("IReadOnly"))
-          {
-            retValue = true;
-          }
-        }
-      }
-      return retValue;
-    }
-
     // Indicates if the Method is not a property getter or setter.
     /// <include path="members/IsNotProperty/*" file="Doc/LJCAssemblyReflect.xml"/>
     /// <parentGroup>check</parentGroup>
@@ -1137,6 +1088,55 @@ namespace LJCNetCommon5
         if (ConstructorInfo != null)
         {
           if (ConstructorInfo.IsPublic)
+          {
+            retValue = true;
+          }
+        }
+      }
+      return retValue;
+    }
+
+    // Indicates if the Type is a common type.
+    /// <include path="members/IsNotCommonClassification/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <parentGroup>check</parentGroup>
+    private static bool IsCommonClassification(Type type)
+    {
+      bool retValue = false;
+
+      if (type.Name == "Object"
+        || type.Name == "Enum")
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Indicates if the Interface is a common type.
+    /// <include path="members/IsNotCommonInterface/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <parentGroup>check</parentGroup>
+    private static bool IsCommonInterface(Type type)
+    {
+      bool retValue = false;
+
+      if (type != null)
+      {
+        if (type.FullName!.StartsWith("System.ComponentModel")
+          || type.FullName.StartsWith("System.ServiceModel")
+          || type.FullName.StartsWith("System.Windows.Forms"))
+        {
+          retValue = true;
+        }
+
+        if (!retValue)
+        {
+          if (type.Name.StartsWith("ICloneable")
+            || type.Name.StartsWith("ICollection")
+            || type.Name.StartsWith("IConvertible")
+            || type.Name.StartsWith("IDisposable")
+            || type.Name.StartsWith("IFormattable")
+            || type.Name.StartsWith("IEnumerable")
+            || type.Name.StartsWith("IList")
+            || type.Name.StartsWith("IReadOnly"))
           {
             retValue = true;
           }

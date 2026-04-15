@@ -1,4 +1,5 @@
 echo off
+TestArgError\bin\Debug\net8.0\TestArgError.exe
 TestAssemblyReflect\bin\Debug\net8.0\TestAssemblyReflect5.exe
 TestAttribute\bin\Debug\net8.0\TestAttribute5.exe
 TestAttributes\bin\Debug\net8.0\TestAttributes5.exe

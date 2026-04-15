@@ -2,9 +2,6 @@
 // Licensed under the MIT License.
 // AssemblyReflectProgram.cs
 using LJCNetCommon5;
-using System.Reflection;
-using System.Reflection.Metadata;
-using System.Runtime.Serialization.Formatters;
 
 namespace TestAssemblyReflect5
 {
@@ -47,8 +44,6 @@ namespace TestAssemblyReflect5
       GetTypeSyntax();
 
       // Check Type Methods
-      IsCommonClassification();
-      IsCommonInterface();
       IsProperty();
       IsOverride();
       IsPublic();
@@ -546,22 +541,6 @@ namespace TestAssemblyReflect5
     #endregion
 
     #region Check Type Methods
-
-    // Indicates if the Type is a common type.
-    private static void IsCommonClassification()
-    {
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon?.Write("IsCommonClassification()", result, compare);
-    }
-
-    // Indicates if the Interface is a common type.
-    private static void IsCommonInterface()
-    {
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon?.Write("IsCommonInterface()", result, compare);
-    }
 
     // Indicates if the Method is a property getter or setter.
     private static void IsProperty()

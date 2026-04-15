@@ -369,27 +369,13 @@
   </GetTypeSyntax>
 
   <!-- Check Type Methods -->
-  <IsNotCommonClassification>
-    <summary>
-      Indicates if the Type is not a common type.
-    </summary>
-    <param name="type">The Type object.</param>
-    <returns>true if not a common type; otherwise, false.</returns>
-  </IsNotCommonClassification>
-  <IsNotCommonInterface>
-    <summary>
-      Indicates if the Interface is not a common type.
-    </summary>
-    <param name="type">The Type object.</param>
-    <returns>true if not a common interface; otherwise, false.</returns>
-  </IsNotCommonInterface>
-  <IsNotProperty>
+  <IsProperty>
     <summary>
       Indicates if the Method is not a property getter or setter.
     </summary>
     <param name="methodInfo">The MethodInfo object.</param>
     <returns>true if not a Property; otherwise, false.</returns>
-  </IsNotProperty>
+  </IsProperty>
   <IsOverride>
     <summary>
       Indicates if the method is "override".

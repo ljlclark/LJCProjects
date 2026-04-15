@@ -22,6 +22,14 @@ namespace LJCNetCommon5
       ClassName = className;
       mMessage = "";
     }
+
+    // Clears the messages.
+    /// <include path="members/Clear/*" file="Doc/LJCArgError.xml"/>
+    /// <parentGroup>constructors</parentGroup>
+    public void Clear()
+    {
+      mMessage = "";
+    }
     #endregion
 
     #region Data Class Methods
@@ -47,7 +55,7 @@ namespace LJCNetCommon5
     // Adds a message using the provided values.
     /// <include path="members/Add1/*" file="Doc/LJCArgError.xml"/>
     /// <parentGroup>methods</parentGroup>
-    public void Add(object argument, string name)
+    public void Add(object? argument, string name)
     {
       LJCNetString.AddObjectArgError(ref mMessage, argument, name);
     }
