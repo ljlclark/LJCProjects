@@ -4,7 +4,7 @@
         <name>LJCDataAccessConfig5</name>
     </assembly>
     <members>
-        <member name="T:LJCDataAccessConfig5.LJCConnectionTemplate5">
+        <member name="T:LJCDataAccessConfig5.LJCConnectionTemplate">
             <summary>
 			Represents a Connection String template.
 		</summary><remarks>
@@ -34,45 +34,45 @@
   Pswd       {PSWD}&lt;/pre&gt;
 		</remarks>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplate5.#ctor">
+        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplate.#ctor">
             <summary>
       Initializes an object instance.
     </summary>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplate5.Clone">
+        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplate.Clone">
             <summary>
       Creates and returns a clone of the object.
     </summary><returns>The new cloned value.</returns>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplate5.ToString">
+        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplate.ToString">
             <summary>
       The object string identifier.
     </summary><returns>The identifier value.</returns>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplate5.CompareTo(LJCDataAccessConfig5.LJCConnectionTemplate5)">
+        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplate.CompareTo(LJCDataAccessConfig5.LJCConnectionTemplate)">
             <summary>
       Provides the default Sort functionality.
     </summary><param name="other">The compared to object.</param><returns>An integer value indicating the order relationship.</returns>
         </member>
-        <member name="P:LJCDataAccessConfig5.LJCConnectionTemplate5.Name">
+        <member name="P:LJCDataAccessConfig5.LJCConnectionTemplate.Name">
             <summary>
       Gets or sets the connection type name.
     </summary>
         </member>
-        <member name="P:LJCDataAccessConfig5.LJCConnectionTemplate5.Template">
+        <member name="P:LJCDataAccessConfig5.LJCConnectionTemplate.Template">
             <summary>
       Gets or sets the connection string template.
     </summary>
         </member>
-        <member name="T:LJCDataAccessConfig5.LJCConnectionTemplates5">
+        <member name="T:LJCDataAccessConfig5.LJCConnectionTemplates">
             <!-- No matching elements were found for the following include tag --><include path="members/LJCConnectionTemplates/*" file="Doc/LJCConnectionTemplates.xml" />
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplates5.#ctor">
+        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplates.#ctor">
             <summary>
       Initializes an object instance.
     </summary>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplates5.LoadData">
+        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplates.LoadData">
             <summary>
       Retrieves the connection template data.
     </summary><example>
@@ -84,12 +84,12 @@
 			</code>
 		</example>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplates5.Add(System.String,System.String)">
+        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplates.Add(System.String,System.String)">
             <summary>
       Creates and adds the object from the provided valus.
     </summary><param name="name">The template configuration name.</param><param name="template">The connection string template.</param><returns />
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplates5.Retrieve(System.String)">
+        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplates.Retrieve(System.String)">
             <summary>
       Retrieve the data configuration.
     </summary><param name="name">The connection template configuration name.</param><example>
@@ -102,22 +102,22 @@
 			</code>
 		</example>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplates5.Save">
+        <member name="M:LJCDataAccessConfig5.LJCConnectionTemplates.Save">
             <summary>
       Saves the config data.
     </summary>
         </member>
-        <member name="P:LJCDataAccessConfig5.LJCConnectionTemplates5.TemplateFileSpec">
+        <member name="P:LJCDataAccessConfig5.LJCConnectionTemplates.TemplateFileSpec">
             <summary>
       The configuration file path.
     </summary>
         </member>
-        <member name="T:LJCDataAccessConfig5.LJCDataConfig5">
+        <member name="T:LJCDataAccessConfig5.LJCDataConfig">
             <summary>
       Represents a data location configuration.
     </summary>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfig5.ProviderName(System.String)">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfig.ProviderName(System.String)">
             <summary>
       Retrieves the provider name value.
     </summary><param name="connectionType">The database connection type string.</param><returns>The provider name.</returns><example>
@@ -132,17 +132,17 @@
       </code>
     </example>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfig5.#ctor(System.String)">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfig.#ctor(System.String)">
             <summary>
       Initializes an object instance.
     </summary>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfig5.ToString">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfig.ToString">
             <summary>
       The object string identifier.
     </summary><returns>The identifier value.</returns>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfig5.ConnectionString(System.String)">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfig.ConnectionString(System.String)">
             <summary>
 			Creates the populated connection string from the ConnectionType name.
 		</summary><param name="connectionType">The ConnectionType name.</param><returns>The connection string.</returns><example>
@@ -157,7 +157,7 @@
 			</code>
 		</example>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfig5.ConnectionStringFromTemplate(System.String)">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfig.ConnectionStringFromTemplate(System.String)">
             <summary>
 			Creates the populated connection string from the template text.
 		</summary><param name="templateText">The connection template text value.</param><returns>The connection string.</returns><example>
@@ -178,53 +178,53 @@
 			</code>
 		</example>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfig5.SQLIntegratedConnectionString">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfig.SQLIntegratedConnectionString">
             <!-- No matching elements were found for the following include tag --><include path="items/SQLIntegratedConnectionString/*" file="Doc/LJCDataConfig.xml" />
         </member>
-        <member name="P:LJCDataAccessConfig5.LJCDataConfig5.Name">
+        <member name="P:LJCDataAccessConfig5.LJCDataConfig.Name">
             <summary>
       Gets or sets the DataConfig name.
     </summary>
         </member>
-        <member name="P:LJCDataAccessConfig5.LJCDataConfig5.DbServer">
+        <member name="P:LJCDataAccessConfig5.LJCDataConfig.DbServer">
             <!-- No matching elements were found for the following include tag --><include path="mmebers/DbServer/*" file="Doc/LJCDataConfig.xml" />
         </member>
-        <member name="P:LJCDataAccessConfig5.LJCDataConfig5.Database">
+        <member name="P:LJCDataAccessConfig5.LJCDataConfig.Database">
             <summary>
       Gets or sets the Database name.
     </summary>
         </member>
-        <member name="P:LJCDataAccessConfig5.LJCDataConfig5.ConnectionType">
+        <member name="P:LJCDataAccessConfig5.LJCDataConfig.ConnectionType">
             <summary>
       Gets or sets the ConnectionType name.
     </summary>
         </member>
-        <member name="P:LJCDataAccessConfig5.LJCDataConfig5.UserID">
+        <member name="P:LJCDataAccessConfig5.LJCDataConfig.UserID">
             <summary>
       Gets or sets the UserID name.
     </summary>
         </member>
-        <member name="P:LJCDataAccessConfig5.LJCDataConfig5.Pswd">
+        <member name="P:LJCDataAccessConfig5.LJCDataConfig.Pswd">
             <summary>
       Gets or sets the Pswd name.
     </summary>
         </member>
-        <member name="T:LJCDataAccessConfig5.LJCDataConfigs5">
+        <member name="T:LJCDataAccessConfig5.LJCDataConfigs">
             <summary>
       Represents a collection of LJCDataConfig objects.
     </summary>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfigs5.DataConfig(System.String)">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfigs.DataConfig(System.String)">
             <summary>
       Gets a DataConfig from the DataConfigs.xml file.
     </summary><param name="configName">The DataConfig name.</param><returns>The DataConfig object.</returns>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfigs5.#ctor">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfigs.#ctor">
             <summary>
       Initializes an object instance.
     </summary>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfigs5.LoadData">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfigs.LoadData">
             <summary>
       Retrieves the config data.
     </summary><example>
@@ -236,12 +236,12 @@
 			</code>
 		</example>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfigs5.Add(System.String,System.String,System.String,System.String)">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfigs.Add(System.String,System.String,System.String,System.String)">
             <summary>
       Creates and adds the object from the provided valus.
     </summary><param name="name">The data configuration name.</param><param name="dbServer">The database server instance name.</param><param name="database">The database name.</param><param name="connectionType">The connection type.</param><returns />
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfigs5.Retrieve(System.String)">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfigs.Retrieve(System.String)">
             <summary>
       Retrieve the data configuration.
     </summary><param name="name">The connection template configuration name.</param><example>
@@ -254,17 +254,17 @@
       </code>
 		</example>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfigs5.Save">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfigs.Save">
             <summary>
       Saves the config data.
     </summary>
         </member>
-        <member name="P:LJCDataAccessConfig5.LJCDataConfigs5.ConnectionType">
+        <member name="P:LJCDataAccessConfig5.LJCDataConfigs.ConnectionType">
             <summary>
       Gets or sets the ConnectionType name.
     </summary>
         </member>
-        <member name="P:LJCDataAccessConfig5.LJCDataConfigs5.ConfigFileSpec">
+        <member name="P:LJCDataAccessConfig5.LJCDataConfigs.ConfigFileSpec">
             <summary>
       The configuration file path.
     </summary>

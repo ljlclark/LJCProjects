@@ -185,7 +185,7 @@ namespace LJCNetCommon5
     // The Copy constructor.
     /// <include path="members/CopyConstructor/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
     /// <parentGroup>constructors</parentGroup>
-    public LJCDataColumns(LJCDataColumns items)
+    public LJCDataColumns(LJCDataColumns? items)
     {
       if (LJC.HasItems(items))
       {
@@ -274,9 +274,12 @@ namespace LJCNetCommon5
         ColumnName = columnName,
         DataTypeName = dataTypeName,
         MaxLength = maxLength,
-        PropertyName = propertyName,
         RenameAs = renameAs
       };
+      if (propertyName != null)
+      {
+        retValue.PropertyName = propertyName;
+      }
       Add(retValue);
       return retValue;
     }
@@ -501,22 +504,25 @@ namespace LJCNetCommon5
     // Finds and returns the object that matches the supplied values.
     /// <include path="members/LJCSearchName/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
     /// <parentGroup>search</parentGroup>
-    public LJCDataColumn? LJCSearchColumnName(string name)
+    public LJCDataColumn? LJCSearchColumnName(string? name)
     {
       DbColumnNameComparer comparer;
       LJCDataColumn retValue = null;
 
-      comparer = new DbColumnNameComparer();
-      LJCSortName(comparer);
+      if (LJC.HasValue(name))
+      {
+        comparer = new DbColumnNameComparer();
+        LJCSortName(comparer);
 
-      var searchDbColumn = new LJCDataColumn()
-      {
-        ColumnName = name
-      };
-      int index = BinarySearch(searchDbColumn, comparer);
-      if (index > -1)
-      {
-        retValue = this[index];
+        var searchDbColumn = new LJCDataColumn()
+        {
+          ColumnName = name
+        };
+        int index = BinarySearch(searchDbColumn, comparer);
+        if (index > -1)
+        {
+          retValue = this[index];
+        }
       }
       return retValue;
     }
@@ -524,20 +530,23 @@ namespace LJCNetCommon5
     // Finds and returns the column that contains the supplied property name.
     /// <include path="members/LJCSearchPropertyName/*" file="Doc/LJCDataColumns.xml"/>
     /// <parentGroup>search</parentGroup>
-    public LJCDataColumn? LJCSearchPropertyName(string propertyName)
+    public LJCDataColumn? LJCSearchPropertyName(string? propertyName)
     {
       LJCDataColumn retValue = null;
 
-      var comparer = new DbColumnPropertyComparer();
-      LJCSortProperty(comparer);
-      var searchDbColumn = new LJCDataColumn()
+      if (LJC.HasValue(propertyName))
       {
-        PropertyName = propertyName
-      };
-      int index = BinarySearch(searchDbColumn, comparer);
-      if (index > -1)
-      {
-        retValue = this[index];
+        var comparer = new DbColumnPropertyComparer();
+        LJCSortProperty(comparer);
+        var searchDbColumn = new LJCDataColumn()
+        {
+          PropertyName = propertyName
+        };
+        int index = BinarySearch(searchDbColumn, comparer);
+        if (index > -1)
+        {
+          retValue = this[index];
+        }
       }
       return retValue;
     }
@@ -545,22 +554,23 @@ namespace LJCNetCommon5
     // Finds and returns the column that contains the supplied property name.
     /// <include path="members/LJCSearchRenameAs/*" file="Doc/LJCDataColumns.xml"/>
     /// <parentGroup>search</parentGroup>
-    public LJCDataColumn? LJCSearchRenameAs(string renameAs)
+    public LJCDataColumn? LJCSearchRenameAs(string? renameAs)
     {
-      LJCDataColumnRenameAsComparer comparer;
       LJCDataColumn retValue = null;
 
-      comparer = new LJCDataColumnRenameAsComparer();
-      LJCSortRenameAs(comparer);
-
-      var searchDbColumn = new LJCDataColumn()
+      if (LJC.HasValue(renameAs))
       {
-        RenameAs = renameAs
-      };
-      int index = BinarySearch(searchDbColumn, comparer);
-      if (index > -1)
-      {
-        retValue = this[index];
+        var comparer = new LJCDataColumnRenameAsComparer();
+        LJCSortRenameAs(comparer);
+        var searchDbColumn = new LJCDataColumn()
+        {
+          RenameAs = renameAs
+        };
+        int index = BinarySearch(searchDbColumn, comparer);
+        if (index > -1)
+        {
+          retValue = this[index];
+        }
       }
       return retValue;
     }

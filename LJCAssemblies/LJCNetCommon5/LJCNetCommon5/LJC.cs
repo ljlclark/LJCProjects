@@ -149,7 +149,7 @@ namespace LJCNetCommon5
     // Checks a data table for rows.
     /// <include path="members/HasData/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
-    public static bool HasData([NotNullWhen(true)] DataTable dataTable)
+    public static bool HasData([NotNullWhen(true)] DataTable? dataTable)
     {
       bool retValue = false;
 
@@ -201,7 +201,7 @@ namespace LJCNetCommon5
     // Checks a DataSet for tables.
     /// <include path="members/HasTables/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
-    public static bool HasTables([NotNullWhen(true)] DataSet dataSet)
+    public static bool HasTables([NotNullWhen(true)] DataSet? dataSet)
     {
       bool retValue = false;
 
@@ -706,7 +706,7 @@ namespace LJCNetCommon5
     /// <include path="members/XmlSerializeToString/*" file="Doc/LJC.xml"/>
     /// <parentGroup>serialize</parentGroup>
     public static string XmlSerializeToString(Type type, object data
-      , XmlSerializerNamespaces namespaces)
+      , XmlSerializerNamespaces? namespaces)
     {
       MemoryStream memStream;
       string retValue;

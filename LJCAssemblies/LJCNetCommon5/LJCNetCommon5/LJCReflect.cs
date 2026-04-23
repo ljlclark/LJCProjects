@@ -276,35 +276,38 @@ namespace LJCNetCommon5
 
     // Gets the property value as an object using a delegate.
     /// <include path="members/GetValue/*" file="Doc/LJCReflect.xml"/>
-    public object? GetValue(string propertyName, bool throwError = true)
+    public object? GetValue(string? propertyName, bool throwError = true)
     {
       object retValue = null;
 
-      var propertyDelegate = mPropertyDelegates.LJCSearchName(propertyName);
-      if (null == propertyDelegate)
+      if (LJC.HasValue(propertyName))
       {
-        var propertyInfo = GetPropertyInfo(propertyName);
-        if (null == propertyInfo)
+        var propertyDelegate = mPropertyDelegates.LJCSearchName(propertyName);
+        if (null == propertyDelegate)
         {
-          if (throwError)
+          var propertyInfo = GetPropertyInfo(propertyName);
+          if (null == propertyInfo)
           {
-            var name = mType.Name;
-            var text = $"{name} Property {propertyName} was not found.";
-            throw new ArgumentException(text);
+            if (throwError)
+            {
+              var name = mType.Name;
+              var text = $"{name} Property {propertyName} was not found.";
+              throw new ArgumentException(text);
+            }
+          }
+          else
+          {
+            propertyDelegate = mPropertyDelegates.Add(propertyInfo);
           }
         }
-        else
-        {
-          propertyDelegate = mPropertyDelegates.Add(propertyInfo);
-        }
-      }
 
-      if (propertyDelegate != null)
-      {
-        var getter = propertyDelegate.Value;
-        if (getter != null)
+        if (propertyDelegate != null)
         {
-          retValue = getter(mSource);
+          var getter = propertyDelegate.Value;
+          if (getter != null)
+          {
+            retValue = getter(mSource);
+          }
         }
       }
       return retValue;
@@ -341,7 +344,7 @@ namespace LJCNetCommon5
 
     // Sets the property value based on value type.
     /// <include path="members/SetPropertyValue/*" file="Doc/LJCReflect.xml"/>
-    public void SetPropertyValue(string propertyName, object value)
+    public void SetPropertyValue(string propertyName, object? value)
     {
       Type type;
 

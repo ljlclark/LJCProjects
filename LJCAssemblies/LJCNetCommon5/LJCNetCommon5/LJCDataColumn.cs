@@ -25,11 +25,13 @@ namespace LJCNetCommon5
     {
       AllowDBNull = false;
       AutoIncrement = false;
+      mColumnName = ""; // Required
       DataTypeName = "String";
       IsChanged = false;
       IsPrimaryKey = false;
       MaxLength = 0;
       Position = -1;
+      mPropertyName = ""; // Required
       Unique = false;
     }
 
@@ -41,6 +43,7 @@ namespace LJCNetCommon5
       AllowDBNull = item.AllowDBNull;
       AutoIncrement = item.AutoIncrement;
       Caption = item.Caption;
+      mColumnName = ""; // Required
       ColumnName = item.ColumnName;
       DataTypeName = item.DataTypeName;
       DefaultValue = item.DefaultValue;
@@ -48,6 +51,7 @@ namespace LJCNetCommon5
       IsPrimaryKey = item.IsPrimaryKey;
       MaxLength = item.MaxLength;
       Position = item.Position;
+      mPropertyName = ""; // Required
       PropertyName = item.PropertyName;
       RenameAs = item.RenameAs;
       SQLTypeName = item.SQLTypeName;
@@ -62,6 +66,7 @@ namespace LJCNetCommon5
       , string? propertyName = null, bool assignedKey = false, string? renameValue = null)
     {
       AutoIncrement = assignedKey;
+      mColumnName = ""; // Required
       ColumnName = columnName;
       DataTypeName = dataTypeName;
       if (LJC.HasValue(propertyName))
@@ -69,6 +74,7 @@ namespace LJCNetCommon5
         PropertyName = propertyName;
       }
       IsChanged = false;
+      mPropertyName = ""; // Required
       RenameAs = renameValue;
       Value = value;
     }
@@ -177,7 +183,7 @@ namespace LJCNetCommon5
     /// <parentGroup>dataProperties</parentGroup>
     public string? Caption
     {
-      get { return mCaption; }
+      get => mCaption;
       set { mCaption = LJCNetString.InitString(value); }
     }
     private string? mCaption;
@@ -185,30 +191,34 @@ namespace LJCNetCommon5
     // Gets or sets the ColumnName value.
     /// <include path="members/ColumnName/*" file="Doc/LJCDataColumn.xml"/>
     /// <parentGroup>dataProperties</parentGroup>
-    public string? ColumnName
+    public string ColumnName
     {
-      get { return mColumnName; }
+      get => mColumnName;
       set
       {
-        mColumnName = LJCNetString.InitString(value);
-
-        // Set empty property. Name the same as the column name.
-        if (LJC.HasValue(mColumnName)
-          && !LJC.HasValue(mPropertyName))
+        // Cannot change column name to null or white space.
+        if (LJC.HasValue(value))
         {
-          PropertyName = ColumnName;
+          mColumnName = value;
+
+          // Set empty property. Name the same as the column name.
+          if (LJC.HasValue(mColumnName)
+            && !LJC.HasValue(mPropertyName))
+          {
+            PropertyName = ColumnName;
+          }
         }
       }
     }
-    private string? mColumnName;
+    private string mColumnName;
 
     // Gets or sets the DataTypeName value.
     /// <include path="members/DataTypeName/*" file="Doc/LJCDataColumn.xml"/>
     /// <parentGroup>dataProperties</parentGroup>
     public string? DataTypeName
     {
-      get { return mDataTypeName; }
-      set { mDataTypeName = LJCNetString.InitString(value); }
+      get => mDataTypeName;
+      set => mDataTypeName = LJCNetString.InitString(value);
     }
     private string? mDataTypeName;
 
@@ -225,15 +235,15 @@ namespace LJCNetCommon5
     // Gets or sets the PropertyName value.
     /// <include path="members/PropertyName/*" file="Doc/LJCDataColumn.xml"/>
     /// <parentGroup>dataProperties</parentGroup>
-    public string? PropertyName
+    public string PropertyName
     {
-      get { return mPropertyName; }
+      get => mPropertyName;
       set
       {
         // Cannot change property name to null or white space.
         if (LJC.HasValue(value))
         {
-          mPropertyName = LJCNetString.InitString(value);
+          mPropertyName = value;
 
           // Set empty property. Name the same as the column name.
           if (LJC.HasValue(mPropertyName)
@@ -244,14 +254,14 @@ namespace LJCNetCommon5
         }
       }
     }
-    private string? mPropertyName;
+    private string mPropertyName;
 
     // Gets or sets the RenameAs value.
     /// <include path="members/RenameAs/*" file="Doc/LJCDataColumn.xml"/>
     /// <parentGroup>dataProperties</parentGroup>
     public string? RenameAs
     {
-      get { return mRenameAs; }
+      get => mRenameAs;
       set { mRenameAs = LJCNetString.InitString(value); }
     }
     private string? mRenameAs;
@@ -261,7 +271,7 @@ namespace LJCNetCommon5
     /// <parentGroup>dataProperties</parentGroup>
     public string? SQLTypeName
     {
-      get { return mSQLTypeName; }
+      get => mSQLTypeName;
       set { mSQLTypeName = LJCNetString.InitString(value); }
     }
     private string? mSQLTypeName;
@@ -271,7 +281,7 @@ namespace LJCNetCommon5
     /// <parentGroup>dataProperties</parentGroup>
     public object? Value
     {
-      get { return mValue; }
+      get => mValue;
       set
       {
         // Update if value is changed.
