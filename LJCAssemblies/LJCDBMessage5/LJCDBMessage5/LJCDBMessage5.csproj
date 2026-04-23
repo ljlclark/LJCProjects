@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="LJCDBCommonSBS.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LJCDataAccess5">
+      <HintPath>..\External\LJCDataAccess5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCNetCommon5">
+      <HintPath>..\External\LJCNetCommon5.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
