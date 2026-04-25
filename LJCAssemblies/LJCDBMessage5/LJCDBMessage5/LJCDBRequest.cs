@@ -42,7 +42,7 @@ namespace LJCDBMessage5
       //OrderByNames = new List<string>();
       OrderByNames = [];
       mRequestTypeName = RequestType.Select.ToString();
-      mTableName = "TableName";
+      //mTableName = "TableName";
     }
 
     // The Copy constructor.
@@ -50,7 +50,7 @@ namespace LJCDBMessage5
     public LJCDBRequest(LJCDBRequest item)
     {
       mRequestTypeName = RequestType.Select.ToString();
-      mTableName = "TableName";
+      //mTableName = "TableName";
 
       AddMissingColumns = item.AddMissingColumns;
       if (item.DbAssignedColumns != null)
@@ -91,7 +91,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance with the supplied values.
     /// <include path='items/DbRequestC/*' file='Doc/DbRequest.xml'/>
-    public LJCDBRequest(RequestType requestType, string tableName
+    public LJCDBRequest(RequestType requestType, string? tableName
       , string? dataConfigName = null)
     {
       mRequestTypeName = requestType.ToString();
@@ -208,18 +208,19 @@ namespace LJCDBMessage5
     private string? mSchemaName;
 
     /// <summary>The table name.</summary>
-    public string TableName
+    public string? TableName
     {
       get => mTableName;
       set
       {
+        mTableName = value;
         if (value != null)
         {
           mTableName = value.Trim();
         }
       }
     }
-    private string mTableName;
+    private string? mTableName;
     #endregion
 
     #region Other Properties
@@ -239,7 +240,7 @@ namespace LJCDBMessage5
     private string? mClientSql;
 
     /// <summary>The OrderBy column names.</summary>
-    public List<string> OrderByNames { get; set; }
+    public List<string>? OrderByNames { get; set; }
 
     /// <summary>The number of records in the page.</summary>
     public int PageSize { get; set; }

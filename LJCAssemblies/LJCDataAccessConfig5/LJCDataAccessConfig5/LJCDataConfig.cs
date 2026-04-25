@@ -14,7 +14,7 @@ namespace LJCDataAccessConfig5
 
     // Retrieves the provider name value. 
     /// <include path="members/ProviderName/*" file="Doc/LJCDataConfig.xml"/>
-    public static string ProviderName(string connectionType)
+    public static string ProviderName(string? connectionType = "SQLServer")
     {
       string retVal = "System.Data.SqlClient";
 
@@ -71,7 +71,7 @@ namespace LJCDataAccessConfig5
     #region Public Methods
 
     /// <include path="members/ConnectionString/*" file="Doc/LJCDataConfig.xml"/>
-    public string? ConnectionString(string? connectionType)
+    public string? ConnectionString(string? connectionType = "SQLServer")
     {
       LJCConnectionTemplates connectionTemplates;
       LJCConnectionTemplate connectionTemplate;

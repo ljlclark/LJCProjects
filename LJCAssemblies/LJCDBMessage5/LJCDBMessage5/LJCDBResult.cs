@@ -1,9 +1,10 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDBResult.cs
-using System.Data;
-using System.Xml.Serialization;
 using LJCNetCommon5;
+using System.Data;
+using System.Diagnostics.CodeAnalysis;
+using System.Xml.Serialization;
 
 namespace LJCDBMessage5
 {
@@ -48,7 +49,8 @@ namespace LJCDBMessage5
     {
       LJCDataColumns? retValue = null;
 
-      if (HasColumns(dataColumns))
+      //if (HasColumns(dataColumns))
+      if (LJC.HasColumns(dataColumns))
       {
         //retValue = new LJCDataColumns();
         retValue = [];
@@ -67,7 +69,7 @@ namespace LJCDBMessage5
     /// <param name="dataColumns">The DataColumnCollection reference.</param>
     /// <returns>true if there are items; otherwise false.</returns>
     // Note: Also in LJCGridDataLib.TableData
-    public static bool HasColumns(DataColumnCollection dataColumns)
+    public static bool HasColumns([NotNullWhen(true)] DataColumnCollection dataColumns)
     {
       bool retValue = false;
 
@@ -184,7 +186,7 @@ namespace LJCDBMessage5
 
     // Checks if the result has Columns.
     /// <include path='items/HasColumns1/*' file='Doc/DbResult.xml'/>
-    public static bool HasColumns(LJCDBResult dbResult)
+    public static bool HasColumns([NotNullWhen(true)] LJCDBResult? dbResult)
     {
       bool retValue = false;
 
@@ -212,7 +214,7 @@ namespace LJCDBMessage5
 
     // <summary>Checks if the result has Rows.</summary>
     /// <include path='items/HasRows1/*' file='Doc/DbResult.xml'/>
-    public static bool HasRows(LJCDBResult dbResult)
+    public static bool HasRows([NotNullWhen(true)] LJCDBResult? dbResult)
     {
       bool retValue = false;
 
@@ -266,8 +268,11 @@ namespace LJCDBMessage5
       mRequestTypeName = RequestType.Select.ToString();
 
       AffectedRecords = item.AffectedRecords;
-      //Columns = new LJCDataColumns(item.Columns);
-      Columns = [.. item.Columns];
+      Columns = [];
+      if (LJC.HasItems(item.Columns))
+      {
+        Columns = [.. item.Columns];
+      }
       DatabaseName = item.DatabaseName;
       ExecutedSql = item.ExecutedSql;
       RequestTypeName = item.RequestTypeName;
@@ -287,7 +292,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance with the supplied values.
     /// <include path='items/DbResultC2/*' file='Doc/DbResult.xml'/>
-    public LJCDBResult(string requestTypeName, string tableName, string? schemaName = null
+    public LJCDBResult(string requestTypeName, string? tableName, string? schemaName = null
       , string? procedureName = null)
     {
       mRequestTypeName = RequestType.Select.ToString();
@@ -406,7 +411,8 @@ namespace LJCDBMessage5
       {
         Columns = dataColumns.Clone();
       }
-      if (LJC.HasItems(dbJoins))
+      if (LJC.HasItems(dbJoins)
+        && Columns != null)
       {
         foreach (LJCDBJoin dbJoin in dbJoins)
         {
@@ -480,7 +486,7 @@ namespace LJCDBMessage5
 
     /// <summary>Gets the collection of columns that belong to this result.</summary>
     //[XmlArrayItem("Columns")]
-    public LJCDataColumns Columns { get; set; }
+    public LJCDataColumns? Columns { get; set; }
 
     /// <summary>Gets or sets the Database name.</summary>
     public string? DatabaseName { get; set; }

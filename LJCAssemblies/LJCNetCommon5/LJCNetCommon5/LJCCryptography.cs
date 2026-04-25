@@ -1,7 +1,6 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCCryptography.cs
-using System.IO;
 using System.Text;
 using System.Security.Cryptography;
 
@@ -16,7 +15,8 @@ namespace LJCNetCommon5
     /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public LJCCryptography()
     {
-      Type = Cryptography_Type.Crypto_Rijndael;
+      //Type = Cryptography_Type.Crypto_Rijndael;
+      mAlgorithm = Aes.Create();
       return;
     }
     #endregion
@@ -177,31 +177,31 @@ namespace LJCNetCommon5
       return retVal;
     }
 
-    // Returns the crypto type text using the CryptoType enumeration.
-    private string? GetCryptoTypeText(Cryptography_Type cryptoType)
-    {
-      string retValue = null;
+    //// Returns the crypto type text using the CryptoType enumeration.
+    //private static string? GetCryptoTypeText(Cryptography_Type cryptoType)
+    //{
+    //  string retValue = null;
 
-      switch (cryptoType)
-      {
-        case Cryptography_Type.Crypto_DES:
-          retValue = "DES";
-          break;
+    //  switch (cryptoType)
+    //  {
+    //    case Cryptography_Type.Crypto_DES:
+    //      retValue = "DES";
+    //      break;
 
-        case Cryptography_Type.Crypto_3DES:
-          retValue = "3DES";
-          break;
+    //    case Cryptography_Type.Crypto_3DES:
+    //      retValue = "3DES";
+    //      break;
 
-        case Cryptography_Type.Crypto_RC2:
-          retValue = "RC2";
-          break;
+    //    case Cryptography_Type.Crypto_RC2:
+    //      retValue = "RC2";
+    //      break;
 
-        case Cryptography_Type.Crypto_Rijndael:
-          retValue = "Rijndael";
-          break;
-      }
-      return retValue;
-    }
+    //    case Cryptography_Type.Crypto_Rijndael:
+    //      retValue = "Rijndael";
+    //      break;
+    //  }
+    //  return retValue;
+    //}
     #endregion
 
     #region Properties
@@ -228,25 +228,26 @@ namespace LJCNetCommon5
     }
 
     /// <summary>Gets or sets the encryption type.</summary>
-    public Cryptography_Type Type
-    {
-      get { return mType; }
-      set
-      {
-        mType = value;
-        mCryptoTypeText = GetCryptoTypeText(mType);
-        mAlgorithm = SymmetricAlgorithm.Create(mCryptoTypeText);
-        return;
-      }
-    }
+    //public Cryptography_Type Type
+    //{
+    //  get { return mType; }
+    //  set
+    //  {
+    //    mType = value;
+    //    mCryptoTypeText = GetCryptoTypeText(mType);
+    //    //mAlgorithm = SymmetricAlgorithm.Create(mCryptoTypeText);
+    //    mAlgorithm = Aes.Create();
+    //    return;
+    //  }
+    //}
     #endregion
 
     #region Class Data
 
     // Property values.
-    string? mCryptoTypeText;
-    SymmetricAlgorithm mAlgorithm;
-    Cryptography_Type mType;
+    //tring? mCryptoTypeText;
+    private readonly SymmetricAlgorithm mAlgorithm;
+    //Cryptography_Type mType;
     #endregion
   }
 

@@ -43,7 +43,7 @@ namespace LJCDBMessage5
     // Similar to RequestDataKeys and RequestLookupKeys()
     public static LJCDataColumns? RequestDataColumns(object dataObject
       , LJCDataColumns baseDefinition, List<string>? propertyNames = null
-      , bool includeNull = false)
+      , bool? includeNull = false)
     {
       LJCDataColumns? retValue = null;
 
@@ -67,7 +67,7 @@ namespace LJCDBMessage5
     // Creates LJCDataColumns values from data properties for supplied column list.
     // Similar to RequestKeys(), DataKeys() and LookupKeys()
     private static LJCDataColumns? DataColumns(object dataObject
-      , LJCDataColumns requestColumns, bool includeNull = false)
+      , LJCDataColumns requestColumns, bool? includeNull = false)
     {
       LJCDataColumns? retValue = null;
 
@@ -81,7 +81,11 @@ namespace LJCDBMessage5
         {
           // Add LJCDataColumn from request columns and value from dataObject.
           object? value = reflect.GetValue(dataColumn.PropertyName);
-          if (!includeNull
+          if (null == includeNull)
+          {
+            includeNull = false;
+          }
+          if (!(bool)includeNull
             && null == value)
           {
             continue;
@@ -146,7 +150,7 @@ namespace LJCDBMessage5
     // Gets Request Key columns from baseDefinition using keyColumns and dbJoins.
     /// <include path='items/RequestKeys/*' file='Doc/DbCommon.xml'/>
     // Similar to DataColumns() and LookupKeys()
-    public static LJCDataColumns? RequestKeys(LJCDataColumns keyColumns
+    public static LJCDataColumns? RequestKeys(LJCDataColumns? keyColumns
       , LJCDataColumns baseDefinition, LJCDBJoins? dbJoins = null)
     {
       LJCDataColumns? retValue = null;

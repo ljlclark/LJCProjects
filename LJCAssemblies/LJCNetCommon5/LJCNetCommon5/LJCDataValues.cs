@@ -137,7 +137,7 @@ namespace LJCNetCommon5
     // Creates combined LJCDataColumns from LJCDataColumns and LJCDataValues.
     /// <include path="members/LJCCreateColumns/*" file="Doc/LJCDataValues.xml"/>
     /// <parentGroup>item</parentGroup>
-    public LJCDataColumns? LJCCreateColumns(LJCDataColumns dataColumns)
+    public LJCDataColumns? LJCCreateColumns(LJCDataColumns? dataColumns)
     {
       LJCDataColumns retValue = null;
 

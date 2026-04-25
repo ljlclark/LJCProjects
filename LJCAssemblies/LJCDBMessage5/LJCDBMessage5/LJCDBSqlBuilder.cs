@@ -103,7 +103,7 @@ namespace LJCDBMessage5
     }
 
     // Qualify with the table name unless already qualified.
-    private static string QualifyColumnName(string columnName, string tableName
+    private static string QualifyColumnName(string columnName, string? tableName
       , string? alias = null)
     {
       bool qualify = true;
@@ -120,7 +120,8 @@ namespace LJCDBMessage5
         retValue = retValue[1..^1];
       }
 
-      if (qualify)
+      if (qualify
+        && LJC.HasValue(tableName))
       {
         // Allow user to qualify column name to another table.
         if (columnName.IndexOf('.') > -1)
@@ -522,41 +523,44 @@ namespace LJCDBMessage5
 
           // Allow user to qualify column name to a table other than the
           // primary table.
-          string tableName = mDbRequest.TableName;
-          string columnName = dbColumn.ColumnName;
-          if (columnName.IndexOf('.') > -1)
+          if (LJC.HasValue(mDbRequest.TableName))
           {
-            string[] values = columnName.Split('.');
-            if (values.Length > 1)
+            string tableName = mDbRequest.TableName;
+            string columnName = dbColumn.ColumnName;
+            if (columnName.IndexOf('.') > -1)
             {
-              tableName = values[0];
-              columnName = values[1];
+              string[] values = columnName.Split('.');
+              if (values.Length > 1)
+              {
+                tableName = values[0];
+                columnName = values[1];
+              }
             }
-          }
 
-          // Create the standard condition.
-          string text = $"{tableName}.{columnName} = {value}\r\n";
+            // Create the standard condition.
+            string text = $"{tableName}.{columnName} = {value}\r\n";
 
-          // Create the "is null" condition.
-          bool isNull = false;
-          if (dbColumn.DataTypeName != "String"
-            && dbColumn.DataTypeName != "Boolean")
-          {
-            if (dbColumn.AllowDBNull && isZero)
+            // Create the "is null" condition.
+            bool isNull = false;
+            if (dbColumn.DataTypeName != "String"
+              && dbColumn.DataTypeName != "Boolean")
+            {
+              if (dbColumn.AllowDBNull && isZero)
+              {
+                isNull = true;
+              }
+            }
+            if ("'-null'" == value)
             {
               isNull = true;
             }
-          }
-          if ("'-null'" == value)
-          {
-            isNull = true;
-          }
-          if (isNull)
-          {
-            text = $"{tableName}.{columnName} is null\r\n";
-          }
+            if (isNull)
+            {
+              text = $"{tableName}.{columnName} is null\r\n";
+            }
 
-          builder.Append(text);
+            builder.Append(text);
+          }
         }
         retValue = builder.ToString();
       }

@@ -213,7 +213,7 @@ namespace LJCDataAccess5
     // Executes a Stored Procedure and retrieves the DataTable object.
     /// <include path='items/GetProcedureDataTable/*' file='Doc/MySqlDataAccess.xml'/>
     public DataTable? GetProcedureDataTable(string procedureName
-      , LJCProcedureParameters parameters)
+      , LJCProcedureParameters? parameters)
     {
       MySqlConnection? connection = null;
       MySqlCommand command;
@@ -229,17 +229,20 @@ namespace LJCDataAccess5
         {
           CommandType = CommandType.StoredProcedure
         };
-        foreach (LJCProcedureParameter parameter in parameters)
+        if (LJC.HasItems(parameters))
         {
-          var parm = new MySqlParameter()
+          foreach (LJCProcedureParameter parameter in parameters)
           {
-            ParameterName = parameter.ParameterName,
-            MySqlDbType = parameter.MySqlDbType,
-            Size = parameter.Size,
-            Direction = parameter.Direction,
-            Value = parameter.Value
-          };
-          command.Parameters.Add(parm);
+            var parm = new MySqlParameter()
+            {
+              ParameterName = parameter.ParameterName,
+              MySqlDbType = parameter.MySqlDbType,
+              Size = parameter.Size,
+              Direction = parameter.Direction,
+              Value = parameter.Value
+            };
+            command.Parameters.Add(parm);
+          }
         }
 
         dataAdapter = new MySqlDataAdapter(command);

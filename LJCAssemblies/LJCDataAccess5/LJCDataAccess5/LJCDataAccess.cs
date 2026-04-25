@@ -172,37 +172,40 @@ namespace LJCDataAccess5
 
     // Executes an Insert, Update or Delete statement.
     /// <include path='items/ExecuteNonQuery/*' file='Doc/DataAccess.xml'/>
-    public int ExecuteNonQuery(string sql)
+    public int ExecuteNonQuery(string? sql)
     {
       DbCommand? command;
       int retValue = 0;
 
-      if (LJC.HasValue(mProviderName)
-        && IsMySql(mProviderName))
+      if (LJC.HasValue(sql))
       {
-        if (mMySqlDataAccess != null)
+        if (LJC.HasValue(mProviderName)
+          && IsMySql(mProviderName))
         {
-          retValue = mMySqlDataAccess.ExecuteNonQuery(sql);
-        }
-      }
-      else
-      {
-        if (ProviderFactory != null)
-        {
-          try
+          if (mMySqlDataAccess != null)
           {
-            using (command = ProviderFactory.CreateCommand(sql))
+            retValue = mMySqlDataAccess.ExecuteNonQuery(sql);
+          }
+        }
+        else
+        {
+          if (ProviderFactory != null)
+          {
+            try
             {
-              if (command != null)
+              using (command = ProviderFactory.CreateCommand(sql))
               {
-                ProviderFactory.OpenConnection();
-                retValue = command.ExecuteNonQuery();
+                if (command != null)
+                {
+                  ProviderFactory.OpenConnection();
+                  retValue = command.ExecuteNonQuery();
+                }
               }
             }
-          }
-          finally
-          {
-            ProviderFactory.CloseConnection();
+            finally
+            {
+              ProviderFactory.CloseConnection();
+            }
           }
         }
       }
@@ -419,7 +422,7 @@ namespace LJCDataAccess5
     // Executes a Stored Procedure and retrieves the DataTable object.
     /// <include path='items/GetProcedureDataTable/*' file='Doc/DataAccess.xml'/>
     public DataTable? GetProcedureDataTable(string procedureName
-      , LJCProcedureParameters parameters)
+      , LJCProcedureParameters? parameters)
     {
       DbCommand? dbCommand;
       DbDataAdapter? dbDataAdapter;

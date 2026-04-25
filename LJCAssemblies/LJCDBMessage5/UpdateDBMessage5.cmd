@@ -34,6 +34,10 @@ set src=%assmRoot%LJCDataAccess5\LJCDataAccess5\%bin%
 echo copy %src%\LJCDataAccess5.dll %to%
 copy %src%\LJCDataAccess5.dll %to%
 
+set src=%assmRoot%LJCDBDataAccess5\LJCDBDataAccess5\%bin%
+echo copy %src%\LJCDBDataAccess5.dll %to%
+copy %src%\LJCDBDataAccess5.dll %to%
+
 rem *****************************
 rem *** Runtime-only Binaries ***
 
