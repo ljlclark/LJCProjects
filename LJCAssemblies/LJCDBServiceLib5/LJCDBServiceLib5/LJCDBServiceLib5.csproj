@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Primitives" Version="10.0.652802" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LJCCipherLib5">
+      <HintPath>..\External\LJCCipherLib5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBDataAccess5">
+      <HintPath>..\External\LJCDBDataAccess5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBMessage5">
+      <HintPath>..\External\LJCDBMessage5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCNetCommon5">
+      <HintPath>..\External\LJCNetCommon5.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
