@@ -53,15 +53,6 @@ call LJCDBMessage5\UpdateDBMessage5.cmd >> Build.txt
 msbuild LJCDBMessage5\LJCDBMessage5.sln
 
 set /a counter+=1
-set marker=----------------- %counter% - LJCGridDataLib5 --------------- > Build.txt
-echo.
-echo                                         %marker%
-echo %marker% >> Build.txt
-echo LJCGridDataLib5 >> Build.txt
-call LJCGridDataLib5\UpdateGridDataLib5.cmd >> Build.txt
-msbuild LJCGridDataLib5\LJCGridDataLib5.sln
-
-set /a counter+=1
 set marker=----------------- %counter% - LJCDBClientLib5 --------------- > Build.txt
 echo.
 echo                                         %marker%
