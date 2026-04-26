@@ -9,13 +9,13 @@ namespace LJCTextDataReader5
 {
   // A text file data reader.
   /// <include path='items/TextDataReader/*' file='Doc/TextDataReader.xml'/>
-  public class TextDataReader : IDataReader
+  public class LJCTextDataReader : IDataReader
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include path='items/TextDataReaderC/*' file='Doc/TextDataReader.xml'/>
-    public TextDataReader(bool hasHeadingLine = true, short skipHeaderLines = 0
+    public LJCTextDataReader(bool hasHeadingLine = true, short skipHeaderLines = 0
       , bool fixedLengthFields = false)
     {
       LJCSkipHeaderLines = skipHeaderLines;
@@ -780,7 +780,7 @@ namespace LJCTextDataReader5
         // #Pagination Next Statement - Add
         if (LJCStream != null)
         {
-          LJCLineOffsets = new LineOffsets(LJCStream);
+          LJCLineOffsets = new LJCLineOffsets(LJCStream);
         }
 
         if (LJCHasHeadingLine)
@@ -1294,7 +1294,7 @@ namespace LJCTextDataReader5
     public bool LJCHasHeadingLine { get; set; }
 
     /// <summary>Gets the LineOffsets collection.</summary>
-    public LineOffsets LJCLineOffsets { get; private set; }
+    public LJCLineOffsets LJCLineOffsets { get; private set; }
 
     /// <summary>Gets or sets the Lines value.</summary>
     public string[] LJCLines { get; set; }
@@ -1337,7 +1337,7 @@ namespace LJCTextDataReader5
     private string? LJCLayoutFileName { get; set; }
 
     // Gets or sets the current line TextRegion values.
-    private TextRegions LJCTextRegions { get; set; }
+    private LJCTextRegions LJCTextRegions { get; set; }
     #endregion
   }
 

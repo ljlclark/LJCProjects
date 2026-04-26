@@ -5,7 +5,7 @@
 namespace LJCTextDataReader5
 {
   /// <summary>Represents the text region.</summary>
-  public class TextRegion
+  public class LJCTextRegion
   {
     #region Properties
 

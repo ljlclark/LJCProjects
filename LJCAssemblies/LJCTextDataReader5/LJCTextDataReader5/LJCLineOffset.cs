@@ -6,14 +6,14 @@ namespace LJCTextDataReader5
 {
   // Represents the file character offset for a text line.
   /// <include path='items/LineOffset/*' file='Doc/ProjectTextDataReaderLib.xml'/>
-  public class LineOffset : IComparable<LineOffset>
+  public class LJCLineOffset : IComparable<LJCLineOffset>
   {
 
     #region Data Methods
 
     // Provides the default Sort functionality.
     /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-    public int CompareTo(LineOffset? other)
+    public int CompareTo(LJCLineOffset? other)
     {
       int retValue;
 

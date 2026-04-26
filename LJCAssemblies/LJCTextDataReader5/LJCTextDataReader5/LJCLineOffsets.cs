@@ -7,9 +7,9 @@ namespace LJCTextDataReader5
   /// <summary>
   /// Represents a collection of LineOffset items.
   /// </summary>
-  public class LineOffsets : List<LineOffset>
+  public class LJCLineOffsets : List<LJCLineOffset>
   {
-    public LineOffsets()
+    public LJCLineOffsets()
     {
       LJCStream = null;
     }
@@ -18,7 +18,7 @@ namespace LJCTextDataReader5
     /// Initializes an object instance.
     /// </summary>
     /// <param name="stream">The file stream object.</param>
-    public LineOffsets(Stream stream)
+    public LJCLineOffsets(Stream stream)
     {
       LJCStream = stream;
       LJCCurrentLineNumber = 0;
@@ -34,9 +34,9 @@ namespace LJCTextDataReader5
     /// <param name="number">The line number.</param>
     /// <param name="offset">The line offset value.</param>
     /// <returns>A reference to the added item.</returns>
-    public LineOffset Add(long number, long offset)
+    public LJCLineOffset Add(long number, long offset)
     {
-      var retValue = new LineOffset()
+      var retValue = new LJCLineOffset()
       {
         Number = number,
         Offset = offset
@@ -52,9 +52,9 @@ namespace LJCTextDataReader5
     /// Retrieve the collection element by number.
     /// </summary>
     /// <param name="number">The item line number.</param>
-    public LineOffset? LJCSearchByNumber(long number)
+    public LJCLineOffset? LJCSearchByNumber(long number)
     {
-      LineOffset? retValue = null;
+      LJCLineOffset? retValue = null;
 
       if (Count != mPrevCount)
       {
@@ -62,7 +62,7 @@ namespace LJCTextDataReader5
         Sort();
       }
 
-      var searchItem = new LineOffset()
+      var searchItem = new LJCLineOffset()
       {
         Number = number
       };
@@ -86,7 +86,7 @@ namespace LJCTextDataReader5
     {
       long retValue = -1;
 
-      LineOffset? lineOffset = LJCSearchByNumber(number);
+      LJCLineOffset? lineOffset = LJCSearchByNumber(number);
       if (lineOffset != null)
       {
         retValue = lineOffset.Offset;

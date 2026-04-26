@@ -6,14 +6,14 @@ using LJCNetCommon5;
 namespace LJCTextDataReader5
 {
   /// <summary>Represents a collection of TextRegion objects.</summary>
-  public class TextRegions : List<TextRegion>
+  public class LJCTextRegions : List<LJCTextRegion>
   {
     #region Constructors
 
     /// <summary>
     /// Initializes an object instance.
     /// </summary>
-    public TextRegions()
+    public LJCTextRegions()
     {
       LJCFieldDelimiter = ',';
       LJCRegionDelimiter = '\"';
@@ -28,11 +28,11 @@ namespace LJCTextDataReader5
     /// <param name="beginIndex">The beginning index.</param>
     /// <param name="endIndex">The ending index.</param>
     /// <returns>A reference to the created TextRegion object.</returns>
-    public TextRegion Add(int beginIndex, int endIndex)
+    public LJCTextRegion Add(int beginIndex, int endIndex)
     {
-      TextRegion retValue;
+      LJCTextRegion retValue;
 
-      retValue = new TextRegion()
+      retValue = new LJCTextRegion()
       {
         BeginIndex = beginIndex,
         EndIndex = endIndex
@@ -89,7 +89,7 @@ namespace LJCTextDataReader5
     {
       bool retValue = false;
 
-      foreach (TextRegion region in this)
+      foreach (LJCTextRegion region in this)
       {
         if (region.BeginIndex <= index && region.EndIndex >= index)
         {
