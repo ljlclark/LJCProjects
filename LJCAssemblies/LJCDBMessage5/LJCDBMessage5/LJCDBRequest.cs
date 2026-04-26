@@ -134,6 +134,41 @@ namespace LJCDBMessage5
       return retValue;
     }
 
+    // Get DataColumns from the DbRequest object definition.
+    /// <include path='items/GetGridColumns1/*' file='Doc/DbRequest.xml'/>
+    public LJCDataColumns? DataColumns(List<string>? propertyNames = null)
+    {
+      LJCDataColumns? retColumns = null;
+
+      if (Columns != null)
+      {
+        retColumns = Columns.Clone();
+        if (propertyNames != null)
+        {
+          retColumns = Columns.LJCGetColumns(propertyNames);
+          if (Joins != null)
+          {
+            foreach (var dbJoin in Joins)
+            {
+              retColumns = dbJoin.Columns.LJCGetColumns(propertyNames);
+              if (LJC.HasItems(retColumns))
+              {
+                foreach (var column in retColumns)
+                {
+                  var cloneColumn = column.Clone();
+                  if (cloneColumn != null)
+                  {
+                    retColumns.Add(cloneColumn);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      return retColumns;
+    }
+
     // Serializes the object and returns the serialized string.
     /// <include path='items/Serialize1/*' file='Doc/DbRequest.xml'/>
     public string Serialize()

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="LJCDBMessage5">
+      <HintPath>..\External\LJCDBMessage5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCNetCommon5">
+      <HintPath>..\External\LJCNetCommon5.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

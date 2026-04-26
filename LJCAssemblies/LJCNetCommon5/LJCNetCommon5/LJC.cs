@@ -120,9 +120,10 @@ namespace LJCNetCommon5
     // Checks a DataColumns collection for items.
     /// <include path="members/HasColumns/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
-    public static bool HasColumns([NotNullWhen(true)] DataColumnCollection dataColumns)
+    public static bool HasColumns([NotNullWhen(true)]
+      DataColumnCollection? dataColumns)
     {
-      bool retValue = true;
+      bool retValue = false;
 
       if (dataColumns != null
         && dataColumns.Count > 0)

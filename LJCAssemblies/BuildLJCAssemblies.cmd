@@ -53,6 +53,15 @@ call LJCDBMessage5\UpdateDBMessage5.cmd >> Build.txt
 msbuild LJCDBMessage5\LJCDBMessage5.sln
 
 set /a counter+=1
+set marker=----------------- %counter% - LJCGridDataLib5 --------------- > Build.txt
+echo.
+echo                                         %marker%
+echo %marker% >> Build.txt
+echo LJCGridDataLib5 >> Build.txt
+call LJCGridDataLib5\UpdateGridDataLib5.cmd >> Build.txt
+msbuild LJCGridDataLib5\LJCGridDataLib5.sln
+
+set /a counter+=1
 set marker=----------------- %counter% - LJCDBClientLib5 --------------- > Build.txt
 echo.
 echo                                         %marker%
@@ -60,4 +69,13 @@ echo %marker% >> Build.txt
 echo LJCDBClientLib5 >> Build.txt
 call LJCDBClientLib5\UpdateDBClientLib5.cmd >> Build.txt
 msbuild LJCDBClientLib5\LJCDBClientLib5.sln
+
+set /a counter+=1
+set marker=----------------- %counter% - LJCDBServiceLib5 --------------- > Build.txt
+echo.
+echo                                         %marker%
+echo %marker% >> Build.txt
+echo LJCDBServiceLib5 >> Build.txt
+call LJCDBServiceLib5\UpdateDBServiceLib5.cmd >> Build.txt
+msbuild LJCDBServiceLib5\LJCDBServiceLib5.sln
 pause
