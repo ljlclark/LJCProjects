@@ -34,6 +34,10 @@ namespace TestTextBuilder5
       GetLine();
       GetText();
       GetWrapped();
+
+      Console.WriteLine();
+      Console.WriteLine("Press any key to continue...");
+      Console.ReadKey();
     }
 
     #region Methods

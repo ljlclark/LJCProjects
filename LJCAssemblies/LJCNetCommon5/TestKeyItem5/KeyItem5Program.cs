@@ -24,6 +24,10 @@ namespace TestKeyItem5
 
       // Search and Sort Methods
       CompareTo();
+
+      Console.WriteLine();
+      Console.WriteLine("Press any key to continue...");
+      Console.ReadKey();
     }
 
     #region Constructor Methods

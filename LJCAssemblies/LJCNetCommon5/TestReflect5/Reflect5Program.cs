@@ -45,6 +45,10 @@ namespace TestReflect5
       // Set Methods
       SetPropertyValue();
       SetValue();
+
+      Console.WriteLine();
+      Console.WriteLine("Press any key to continue...");
+      Console.ReadKey();
     }
 
     #region Constructor Methods

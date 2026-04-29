@@ -1,0 +1,14 @@
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\bin\Debug\net8.0\LJCNetCommon5.deps.json
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\bin\Debug\net8.0\LJCNetCommon5.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\bin\Debug\net8.0\LJCNetCommon5.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\bin\Debug\net8.0\LJCNetCommon5.xml
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\obj\Debug\net8.0\LJCNetCommon5.csproj.AssemblyReference.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\obj\Debug\net8.0\LJCNetCommon5.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\obj\Debug\net8.0\LJCNetCommon5.AssemblyInfoInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\obj\Debug\net8.0\LJCNetCommon5.AssemblyInfo.cs
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\obj\Debug\net8.0\LJCNetCommon5.csproj.CoreCompileInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\obj\Debug\net8.0\LJCNetCommon5.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\obj\Debug\net8.0\refint\LJCNetCommon5.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\obj\Debug\net8.0\LJCNetCommon5.xml
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\obj\Debug\net8.0\LJCNetCommon5.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\obj\Debug\net8.0\ref\LJCNetCommon5.dll

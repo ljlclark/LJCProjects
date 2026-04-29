@@ -18,21 +18,26 @@ namespace LJCTextDataReader5
     public LJCTextDataReader(bool hasHeadingLine = true, short skipHeaderLines = 0
       , bool fixedLengthFields = false)
     {
+      // Provided Properties
       LJCSkipHeaderLines = skipHeaderLines;
       LJCFixedLengthFields = fixedLengthFields;
 
       // Public Properties
-      LJCCurrentRecordCount = -1;
       LJCDataFields = [];
+
+      LJCTextRegions = [];
       LJCFieldDelimiter = ',';
+
       LJCFileName = null;
       LJCHasHeadingLine = hasHeadingLine;
       LJCLineOffsets = [];
       LJCLines = [];
+      LJCStreamReader = null;
+
+      // Pagination
+      LJCCurrentRecordCount = -1;
       LJCPageSize = 0;
       LJCPageStartIndex = -1;
-      LJCStreamReader = null;
-      LJCTextRegions = [];
 
       // Private Properties
       LJCLayoutFileName = null;
@@ -42,7 +47,7 @@ namespace LJCTextDataReader5
     }
     #endregion
 
-    #region Public IDataReader Methods
+    #region IDataReader Methods
 
     // Closes the data reader.
     /// <include path='items/Close/*' file='Doc/TextDataReader.xml'/>
@@ -71,27 +76,31 @@ namespace LJCTextDataReader5
       return this;
     }
 
-    // Retrieves the data type name for the specified field index.
+    // Retrieves the data type name for the supplied field index.
     /// <include path='items/GetDataTypeName1/*' file='Doc/TextDataReader.xml'/>
     public string GetDataTypeName(int i)
     {
       LJCDataColumn dataColumn;
       string retValue = "";
 
-      if (i > -1 && i < FieldCount)
+      if (i > -1
+        && i < FieldCount)
       {
         retValue = "String";
         dataColumn = LJCDataFields[i];
         if (dataColumn.DataTypeName != null)
         {
-          //retValue = Enum.GetName(typeof(FieldDataType), dbColumn.DataTypeName);
-          retValue = dataColumn.DataTypeName;
+          var value = DataTypeEnumName(dataColumn.DataTypeName);
+          if (value != null)
+          {
+            retValue = value;
+          }
         }
       }
       return retValue;
     }
 
-    // Retrieves the data type name for the specified field name.
+    // Retrieves the data type name for the supplied field name.
     /// <include path='items/GetDataTypeName2/*' file='Doc/TextDataReader.xml'/>
     public string GetDataTypeName(string name)
     {
@@ -99,7 +108,7 @@ namespace LJCTextDataReader5
       return GetDataTypeName(index);
     }
 
-    // Retrieves the type of the field for the specified field index.
+    // Retrieves the type of the field for the supplied field index.
     /// <include path='items/GetFieldType/*' file='Doc/TextDataReader.xml'/>
     public Type GetFieldType(int i)
     {
@@ -148,7 +157,7 @@ namespace LJCTextDataReader5
       return retValue;
     }
 
-    // Retrieves the name of the data field with the specified index.
+    // Retrieves the name of the data field with the supplied index.
     /// <include path='items/GetName/*' file='Doc/TextDataReader.xml'/>
     public string GetName(int i)
     {
@@ -161,7 +170,7 @@ namespace LJCTextDataReader5
       return retValue;
     }
 
-    // Retrieves the index of the data field with the specified name.
+    // Retrieves the index of the data field with the supplied name.
     // Required method if field mapping is used.
     /// <include path='items/GetOrdinal/*' file='Doc/TextDataReader.xml'/>
     public int GetOrdinal(string name)
@@ -170,7 +179,10 @@ namespace LJCTextDataReader5
 
       for (int index = 0; index < FieldCount; index++)
       {
-        if (LJCDataFields[index].ColumnName.Equals(name))
+        var columnName = LJCDataFields[index].ColumnName.ToLower();
+        var lowerName = name.ToLower();
+        StringComparison compare = StringComparison.InvariantCultureIgnoreCase;
+        if (columnName.Equals(lowerName, compare))
         {
           retValue = index;
           break;
@@ -179,7 +191,7 @@ namespace LJCTextDataReader5
       return retValue;
     }
 
-    // Gets the Schema DataTable object.
+    // Gets the Fields as a Schema DataTable object.
     /// <include path='items/GetSchemaTable/*' file='Doc/TextDataReader.xml'/>
     public DataTable GetSchemaTable()
     {
@@ -251,7 +263,7 @@ namespace LJCTextDataReader5
 
       while (true)
       {
-        // #Pagination Begin - Add
+        // *** Begin *** Pagination
         if (LJCCurrentRecordCount > -1
           && LJCCurrentRecordCount >= LJCPageSize)
         {
@@ -260,7 +272,7 @@ namespace LJCTextDataReader5
           LJCCurrentRecordCount = -1;
           break;
         }
-        // #Pagination End - Add
+        // *** End *** Pagination
 
         if (LJCStreamReader != null)
         {
@@ -314,7 +326,30 @@ namespace LJCTextDataReader5
     }
     #endregion
 
-    #region Public DataReader Custom Related Methods
+    #region Custom Related Methods
+
+    // Gets the LJCFieldDataType enum name from DataTypeName.
+    public static string? DataTypeEnumName(string name)
+    {
+      string? retName = null;
+
+      var names = Enum.GetNames<LJCFieldDataType>();
+      for (short index = 1; index < names.Length + 1; index++)
+      {
+        var enumName = Enum.GetName((LJCFieldDataType)index);
+        if (enumName != null)
+        {
+          //if (enumName.ToLower() == name.ToLower())
+          if (enumName.Equals(name
+            , StringComparison.InvariantCultureIgnoreCase))
+          {
+            retName = enumName;
+            break;
+          }
+        }
+      }
+      return retName;
+    }
 
     // Reads the next line from the line string array.
     /// <include path='items/LJCReadLine/*' file='Doc/TextDataReader.xml'/>
@@ -353,7 +388,7 @@ namespace LJCTextDataReader5
     }
     #endregion
 
-    #region Public IDataRecord Get Data Methods
+    #region IDataRecord Get Data Methods
 
     // Returns the bool value of the data field at the specified index.
     /// <include path='items/GetBoolean/*' file='Doc/TextDataReader.xml'/>
@@ -507,7 +542,7 @@ namespace LJCTextDataReader5
     }
     #endregion
 
-    #region Public Get Data Custom Overload Methods
+    #region Get Data Overloaded Methods
 
     // Returns the bool value of the data field with the specified name.
     /// <include path='items/GetBooleanN/*' file='Doc/TextDataReader.xml'/>
@@ -653,76 +688,7 @@ namespace LJCTextDataReader5
     }
     #endregion
 
-    #region Public IDataReader Properties
-
-    /// <summary>Currently returns 0.</summary>
-    public int Depth
-    {
-      get { return 0; }
-    }
-
-    /// <summary>Indicates if the reader is closed.</summary>
-    public bool IsClosed { get; set; }
-
-    /// <summary>Currently returns -1.</summary>
-    public int RecordsAffected
-    {
-      get { return -1; }
-    }
-    #endregion
-
-    #region Public IDataRecord Properties
-
-    // Gets the field count.
-    // This is a minimum required property.
-    /// <include path='items/FieldCount/*' file='Doc/TextDataReader.xml'/>
-    public int FieldCount
-    {
-      get
-      {
-        int retValue = 0;
-
-        if (LJCDataFields != null)
-        {
-          retValue = LJCDataFields.Count;
-        }
-        return retValue;
-      }
-    }
-
-    // Gets the data field value for the specified field index.
-    /// <include path='items/this1/*' file='Doc/TextDataReader.xml'/>
-    public object this[int i]
-    {
-      get
-      {
-        object retValue = "";
-
-        if (i > -1 && i < FieldCount)
-        {
-          var result = LJCDataFields[i].Value;
-          if (result != null)
-          {
-            retValue = result;
-          }
-        }
-        return retValue;
-      }
-    }
-
-    // Gets the data field value for the specified field name.
-    /// <include path='items/this2/*' file='Doc/TextDataReader.xml'/>
-    public object this[string name]
-    {
-      get
-      {
-        int index = GetOrdinal(name);
-        return this[index];
-      }
-    }
-    #endregion
-
-    #region Public Custom Methods
+    #region Custom Methods
 
     /// <summary>Checks for NewLine at end of file.</summary>
     public bool LJCEndsWithNewLine()
@@ -858,7 +824,7 @@ namespace LJCTextDataReader5
       }
     }
 
-    // Set the source line string array.
+    // Sets the source line string array.
     /// <include path='items/LJCSetLines/*' file='Doc/TextDataReader.xml'/>
     public void LJCSetLines(string[] lines, char fieldDelimiter = ',')
     {
@@ -901,29 +867,28 @@ namespace LJCTextDataReader5
 
           // Check for included width and type value.
           string[] values = field.Split('|');
-          switch (values.Length)
+          if (LJC.HasElements(values))
           {
-            case 1:
-              // No width or type value.
-              fieldName = values[0];
-              dataTypeName = "String";
-              break;
+            fieldName = values[0].Trim();
+            maxLength = 0;
+            dataTypeName = "String";
+            switch (values.Length)
+            {
+              case 1:
+                // No width or type value.
+                break;
 
-            case 2:
-              // Has width value.
-              fieldName = values[0];
-              _ = int.TryParse(values[1], out maxLength);
-              position += maxLength;
-              dataTypeName = "String";
-              break;
+              case 2:
+                // Has width value.
+                _ = int.TryParse(values[1], out maxLength);
+                break;
 
-            case 3:
-              // Has width and type value.
-              fieldName = values[0];
-              _ = int.TryParse(values[1], out maxLength);
-              position += maxLength;
-              dataTypeName = values[2];
-              break;
+              case 3:
+                // Has width and type value.
+                _ = int.TryParse(values[1], out maxLength);
+                dataTypeName = values[2];
+                break;
+            }
           }
 
           if (LJC.HasValue(fieldName))
@@ -937,6 +902,11 @@ namespace LJCTextDataReader5
               Position = position
             };
             LJCDataFields.Add(dataColumn);
+
+            if (maxLength > 0)
+            {
+              position += maxLength;
+            }
           }
         }
         retValue = true;
@@ -974,7 +944,7 @@ namespace LJCTextDataReader5
     }
 
     // #Pagination - New Method
-    // Sets the starting record index.
+    // Sets the page starting record index.
     /// <include path='items/LJCSetStartIndex/*' file='Doc/TextDataReader.xml'/>
     public bool LJCSetStartIndex(int recordIndex)
     {
@@ -1038,7 +1008,7 @@ namespace LJCTextDataReader5
           LJCDataColumn dataField = LJCDataFields[index];
           if (dataField != null)
           {
-            dataField.Value = values[index];
+            dataField.Value = values[index].Trim();
           }
         }
       }
@@ -1059,9 +1029,6 @@ namespace LJCTextDataReader5
         }
       }
     }
-    #endregion
-
-    #region Private Methods
 
     // Adds a DataColumn to the DataTable object.
     private static void AddColumn(DataTable dataTable, string columnName
@@ -1256,7 +1223,76 @@ namespace LJCTextDataReader5
     }
     #endregion
 
-    #region Public Custom Properties
+    #region IDataReader Properties
+
+    /// <summary>Currently returns 0.</summary>
+    public int Depth
+    {
+      get { return 0; }
+    }
+
+    /// <summary>Indicates if the reader is closed.</summary>
+    public bool IsClosed { get; set; }
+
+    /// <summary>Currently returns -1.</summary>
+    public int RecordsAffected
+    {
+      get { return -1; }
+    }
+    #endregion
+
+    #region IDataRecord Properties
+
+    // Gets the field count.
+    // This is a minimum required property.
+    /// <include path='items/FieldCount/*' file='Doc/TextDataReader.xml'/>
+    public int FieldCount
+    {
+      get
+      {
+        int retValue = 0;
+
+        if (LJCDataFields != null)
+        {
+          retValue = LJCDataFields.Count;
+        }
+        return retValue;
+      }
+    }
+
+    // Gets the data field value for the supplied field index.
+    /// <include path='items/this1/*' file='Doc/TextDataReader.xml'/>
+    public object this[int i]
+    {
+      get
+      {
+        object retValue = "";
+
+        if (i > -1 && i < FieldCount)
+        {
+          var result = LJCDataFields[i].Value;
+          if (result != null)
+          {
+            retValue = result;
+          }
+        }
+        return retValue;
+      }
+    }
+
+    // Gets the data field value for the supplied field name.
+    /// <include path='items/this2/*' file='Doc/TextDataReader.xml'/>
+    public object this[string name]
+    {
+      get
+      {
+        int index = GetOrdinal(name);
+        return this[index];
+      }
+    }
+    #endregion
+
+    #region Custom Properties
 
     /// <summary>Gets or sets the Current Line index.</summary>
     public int LJCCurrentLineIndex { get; set; }
@@ -1329,9 +1365,6 @@ namespace LJCTextDataReader5
 
     /// <summary>Gets or sets the StreamReader value.</summary>
     public StreamReader? LJCStreamReader { get; set; }
-    #endregion
-
-    #region Private Properties
 
     // Gets or sets the LayoutFile Name value.
     private string? LJCLayoutFileName { get; set; }

@@ -15,7 +15,7 @@ namespace TestTextParser5
       Console.WriteLine();
       Console.WriteLine("*** LJCTextParser ***");
 
-      #region Delimited String Methods
+      // Delimited String Methods
 
       // Begin delimiter only.
       // <comment>
@@ -46,9 +46,8 @@ namespace TestTextParser5
 
       // Retrieves a string including the supplied delimiters.
       StringWithDelimiters();
-      #endregion
 
-      #region Find Tag Methods
+      // Find Tag Methods
 
       // Finds the first tag in a text value.
       FindTag();
@@ -58,7 +57,10 @@ namespace TestTextParser5
 
       // Removes tags from a text value.
       RemoveTags();
-      #endregion
+
+      Console.WriteLine();
+      Console.WriteLine("Press any key to continue...");
+      Console.ReadKey();
     }
 
     #region Delimited String Methods

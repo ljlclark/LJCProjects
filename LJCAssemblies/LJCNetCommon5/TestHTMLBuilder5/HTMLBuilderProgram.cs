@@ -72,6 +72,10 @@ namespace TestHTMLBuilder5
       StartAttribs();
       StartXMLAttribs();
       TableAttribs();
+
+      Console.WriteLine();
+      Console.WriteLine("Press any key to continue...");
+      Console.ReadKey();
     }
 
     #region Data Class Methods

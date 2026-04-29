@@ -18,21 +18,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLJC5", "TestLJC5\TestLJ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNetString5", "TestNetString5\TestNetString5.csproj", "{038D126F-F62C-413A-9BD0-9965772061BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCSParser5", "TestCSParser\TestCSParser5.csproj", "{B29D1192-8795-4097-AFDB-03DAF5968388}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCSParser5", "TestCSParser5\TestCSParser5.csproj", "{B29D1192-8795-4097-AFDB-03DAF5968388}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataColumn5", "TestDataColumn\TestDataColumn5.csproj", "{CC24C3CE-0190-4F63-AF0A-623B1C638E6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataColumn5", "TestDataColumn5\TestDataColumn5.csproj", "{CC24C3CE-0190-4F63-AF0A-623B1C638E6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataColumns5", "TestDataColumns\TestDataColumns5.csproj", "{3E829C1A-1A4C-4C50-8FB1-2A4EC3CBC19C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataColumns5", "TestDataColumns5\TestDataColumns5.csproj", "{3E829C1A-1A4C-4C50-8FB1-2A4EC3CBC19C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataValue5", "TestDataValue\TestDataValue5.csproj", "{D8A3D363-7506-402A-BCEF-F5B40A1D4C5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataValue5", "TestDataValue5\TestDataValue5.csproj", "{D8A3D363-7506-402A-BCEF-F5B40A1D4C5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataValues5", "TestDataValues\TestDataValues5.csproj", "{66B660AE-FA4F-4EAA-9422-704FC41C4F32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataValues5", "TestDataValues5\TestDataValues5.csproj", "{66B660AE-FA4F-4EAA-9422-704FC41C4F32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAssemblyReflect5", "TestAssemblyReflect\TestAssemblyReflect5.csproj", "{97726CD5-BD56-4238-A73E-33549BA01049}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAssemblyReflect5", "TestAssemblyReflect5\TestAssemblyReflect5.csproj", "{97726CD5-BD56-4238-A73E-33549BA01049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAttribute5", "TestAttribute\TestAttribute5.csproj", "{1BD373EB-A530-4F1E-96E5-068C4940E219}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAttribute5", "TestAttribute5\TestAttribute5.csproj", "{1BD373EB-A530-4F1E-96E5-068C4940E219}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAttributes5", "TestAttributes\TestAttributes5.csproj", "{D73F87F9-E7BB-4773-872D-346B53DE066D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAttributes5", "TestAttributes5\TestAttributes5.csproj", "{D73F87F9-E7BB-4773-872D-346B53DE066D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHTMLBuilder5", "TestHTMLBuilder5\TestHTMLBuilder5.csproj", "{1BA079E9-E82F-4854-AB7A-16B232F48C9F}"
 EndProject
@@ -46,7 +46,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPropertyDelegates5", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestReflect5", "TestReflect5\TestReflect5.csproj", "{19BFAA21-660B-4BA6-9969-DF9B7D9A64FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestArgError", "TestArgError\TestArgError.csproj", "{ED0F8E58-9B61-44B8-981F-D995CFEFB65D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestArgError5", "TestArgError5\TestArgError5.csproj", "{ED0F8E58-9B61-44B8-981F-D995CFEFB65D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

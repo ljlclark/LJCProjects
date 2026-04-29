@@ -53,6 +53,10 @@ namespace TestLJC5
       XmlDeserializeMessage();
       XmlSerialize();
       XmlSerializeToString();
+
+      Console.WriteLine();
+      Console.WriteLine("Press any key to continue...");
+      Console.ReadKey();
     }
 
     #region Text Transform Functions

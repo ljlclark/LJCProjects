@@ -43,6 +43,10 @@ namespace TestNetString5
       // Other Methods
       AddObjectArgError();
       ThrowArgError();
+
+      Console.WriteLine();
+      Console.WriteLine("Press any key to continue...");
+      Console.ReadKey();
     }
 
     #region Checking String Values

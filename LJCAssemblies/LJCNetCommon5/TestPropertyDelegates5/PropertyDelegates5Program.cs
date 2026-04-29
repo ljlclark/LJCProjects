@@ -22,6 +22,10 @@ namespace TestPropertyDelegates5
 
       LJCSearchName();
       LJCCreateDelegate();
+
+      Console.WriteLine();
+      Console.WriteLine("Press any key to continue...");
+      Console.ReadKey();
     }
 
     #region Collection Methods

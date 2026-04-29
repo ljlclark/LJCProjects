@@ -14,6 +14,10 @@ namespace TestPropertyDelegate5
       TestCommon = new LJCTestCommon("LJCPropertyDelegate");
       Console.WriteLine();
       Console.WriteLine("*** LJCPropertyDelegate ***");
+
+      Console.WriteLine();
+      Console.WriteLine("Press any key to continue...");
+      Console.ReadKey();
     }
 
     #region Properties

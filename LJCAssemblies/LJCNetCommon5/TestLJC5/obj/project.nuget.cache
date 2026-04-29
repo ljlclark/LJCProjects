@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "eRukg8Ld0kU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Les\\Documents\\Visual Studio 2022\\LJCProjectsDev\\LJCAssemblies\\LJCNetCommon5\\TestLJC5\\TestLJC5.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Les\\.nuget\\packages\\system.configuration.configurationmanager\\10.0.5\\system.configuration.configurationmanager.10.0.5.nupkg.sha512",
+    "C:\\Users\\Les\\.nuget\\packages\\system.diagnostics.eventlog\\10.0.5\\system.diagnostics.eventlog.10.0.5.nupkg.sha512",
+    "C:\\Users\\Les\\.nuget\\packages\\system.security.cryptography.protecteddata\\10.0.5\\system.security.cryptography.protecteddata.10.0.5.nupkg.sha512"
+  ],
+  "logs": []
+}
