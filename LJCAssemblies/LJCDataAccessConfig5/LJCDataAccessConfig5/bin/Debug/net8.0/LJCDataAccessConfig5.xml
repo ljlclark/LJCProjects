@@ -132,15 +132,21 @@
       </code>
     </example>
         </member>
-        <member name="M:LJCDataAccessConfig5.LJCDataConfig.#ctor(System.String)">
+        <member name="M:LJCDataAccessConfig5.LJCDataConfig.#ctor">
             <summary>
       Initializes an object instance.
     </summary>
+        </member>
+        <member name="M:LJCDataAccessConfig5.LJCDataConfig.#ctor(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="members/ConstructorParam/*" file="Doc/LJCDataConfig.xml" />
         </member>
         <member name="M:LJCDataAccessConfig5.LJCDataConfig.ToString">
             <summary>
       The object string identifier.
     </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataAccessConfig5.LJCDataConfig.CompareTo(LJCDataAccessConfig5.LJCDataConfig)">
+            <!-- No matching elements were found for the following include tag --><include path="members/CompareTo/*" file="Doc/LJCDataConfig.xml" />
         </member>
         <member name="M:LJCDataAccessConfig5.LJCDataConfig.ConnectionString(System.String)">
             <summary>

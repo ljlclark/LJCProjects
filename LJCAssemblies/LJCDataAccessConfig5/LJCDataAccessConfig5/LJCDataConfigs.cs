@@ -3,11 +3,13 @@
 // LJCDataConfigs.cs
 using LJCNetCommon5;
 using System.Reflection;
+using System.Xml.Serialization;
 
 namespace LJCDataAccessConfig5
 {
   // Represents a collection of LJCDataConfig objects.
   /// <include path="members/LJCDataConfigs/*" file="Doc/LJCDataConfigs.xml"/>
+  [XmlRoot("LJCDataConfigs")]
   public class LJCDataConfigs : List<LJCDataConfig>
   {
     #region Static Methods
@@ -125,21 +127,21 @@ namespace LJCDataAccessConfig5
     {
       var tb = new LJCTextBuilder();
       tb.AddLine("<?xml version='1.0'?>");
-      tb.AddLine("<DataConfigs xmlns: xsi\"http://www.w3.org/2001/XMLSchema-instance\"");
-      tb.AddLine(" xmlns: xsd=\"http://www.w3.org/2001/XMLSchema\">");
-      tb.AddLine("  <DataConfig>");
-      tb.AddLine("    <Name>PersonData</Name>");
+      tb.AddLine("<LJCDataConfigs xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
+      tb.AddLine("  xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">");
+      tb.AddLine("  <LJCDataConfig>");
+      tb.AddLine("    <Name>DataConfig</Name>");
       tb.AddLine("    <DbServer>Machine_Name\\SQL_Instance_Name</DbServer>");
       tb.AddLine("    <Database>Database_Name</Database>");
       tb.AddLine("    <ID>User_ID</ID>");
       tb.AddLine("    <Pswd>Password</Pswd>");
       tb.AddLine("    <ConnectionType>SQLServer</ConnectionType>");
-      tb.AddLine("  </DataConfig>");
-      tb.AddLine("</DataConfigs>");
-      var dataConfigs = tb.ToString().Split('\n');
+      tb.AddLine("  </LJCDataConfig>");
+      tb.AddLine("</LJCDataConfigs>");
+      var dataConfigs = tb.ToString();
       if (LJC.HasValue(ConfigFileSpec))
       {
-        File.WriteAllLines(ConfigFileSpec, dataConfigs);
+        File.WriteAllText(ConfigFileSpec, dataConfigs);
       }
     }
     #endregion

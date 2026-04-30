@@ -8,7 +8,7 @@ namespace LJCDataAccessConfig5
 {
   // Represents a data location configuration.
   /// <include path="members/LJCDataConfig/*" file="Doc/LJCDataConfig.xml"/>
-  public class LJCDataConfig
+  public class LJCDataConfig : IComparable<LJCDataConfig>
   {
     #region Static Methods
 
@@ -49,6 +49,12 @@ namespace LJCDataAccessConfig5
 
     // Initializes an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCDataConfig.xml"/>
+    public LJCDataConfig()
+    {
+    }
+
+    // Initializes an object instance with the supplied values.
+    /// <include path="members/ConstructorParam/*" file="Doc/LJCDataConfig.xml"/>
     public LJCDataConfig(string? connectionType = null)
     {
       if (LJC.HasValue(connectionType))
@@ -65,6 +71,28 @@ namespace LJCDataAccessConfig5
     public override string? ToString()
     {
       return mName;
+    }
+
+    /// <include path="members/CompareTo/*" file="Doc/LJCDataConfig.xml"/>
+    public int CompareTo(LJCDataConfig? other)
+    {
+      int retValue;
+
+      if (null == other)
+      {
+        // This object is greater than the "other" object.
+        retValue = LJCNetString.CompareGreater;
+      }
+      else
+      {
+        retValue = LJC.CompareNull(Name, other.Name);
+        if (LJCNetString.CompareNotNullOrEqual == retValue)
+        {
+          // Case sensitive.
+          retValue = Name!.CompareTo(other.Name);
+        }
+      }
+      return retValue;
     }
     #endregion
 

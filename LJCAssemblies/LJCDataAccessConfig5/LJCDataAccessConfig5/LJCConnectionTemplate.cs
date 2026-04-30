@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // LJCConnectionTemplate.cs
 
+using LJCNetCommon5;
+
 namespace LJCDataAccessConfig5
 {
   // Represents a Connection String template.
@@ -43,15 +45,19 @@ namespace LJCDataAccessConfig5
 
       if (null == other)
       {
-        retValue = 1;
+        retValue = LJCNetString.CompareGreater;
       }
       else
       {
-        // Case sensitive.
-        //retValue = Name.CompareTo(other.Name);
+        retValue = LJC.CompareNull(Name, other.Name);
+        if (LJCNetString.CompareNotNullOrEqual == retValue)
+        {
+          // Case sensitive.
+          //retValue = Name.CompareTo(other.Name);
 
-        // Not case sensitive.
-        retValue = string.Compare(Name, other.Name, true);
+          // Not case sensitive.
+          retValue = string.Compare(Name, other.Name, true);
+        }
       }
       return retValue;
     }
