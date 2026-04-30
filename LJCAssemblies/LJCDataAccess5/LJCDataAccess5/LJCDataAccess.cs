@@ -24,6 +24,7 @@ namespace LJCDataAccess5
     {
       string retValue;
 
+      RegisterSqlClient();
       var dataSource = GetPair("Data Source", dataSourceName);
       var database = GetPair("Initial Catalog", databaseName);
       var connectionBuilder = new DbConnectionStringBuilder()
@@ -35,6 +36,7 @@ namespace LJCDataAccess5
         || null == password)
       {
         connectionBuilder.Add("Integrated Security", "True");
+        connectionBuilder.Add("Encrypt", "False");
       }
       else
       {
@@ -50,7 +52,8 @@ namespace LJCDataAccess5
         foreach (var value in pairs)
         {
           var pair = GetPair("", value);
-          if (pair != null && 2 == pair.Length)
+          if (pair != null
+            && 2 == pair.Length)
           {
             connectionBuilder.Add(pair[0], pair[1]);
           }
@@ -63,10 +66,11 @@ namespace LJCDataAccess5
     // Creates the DataAccess object.
     /// <include path='items/GetDataAccess/*' file='Doc/DataCommon.xml'/>
     public static LJCDataAccess GetDataAccess(string dataSourceName
-      , string databaseName, string providerName = "System.Data.SqlClient")
+      , string databaseName, string providerName = "Microsoft.Data.SqlClient")
     {
       LJCDataAccess retValue;
 
+      RegisterSqlClient();
       string connectionString = GetConnectionString(dataSourceName
         , databaseName);
       retValue = new LJCDataAccess(connectionString, providerName);
@@ -85,6 +89,12 @@ namespace LJCDataAccess5
         retValue = true;
       }
       return retValue;
+    }
+
+    public static void RegisterSqlClient()
+    {
+      DbProviderFactories.RegisterFactory("Microsoft.Data.SqlClient"
+        , Microsoft.Data.SqlClient.SqlClientFactory.Instance);
     }
 
     // Get a Connection String element pair.
@@ -144,24 +154,26 @@ namespace LJCDataAccess5
     }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public LJCDataAccess()
     {
+      RegisterSqlClient();
     }
 
-    // Initializes an object instance.
+    // Initializes an object instance with the supplied values.
     /// <include path='items/DataAccessC/*' file='Doc/DataAccess.xml'/>
     public LJCDataAccess(string connectionString, string? providerName = null)
     {
+      RegisterSqlClient();
       ConnectionString = connectionString;
       ProviderName = providerName;
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Closes the database connection.
     /// <include path='items/CloseConnection/*' file='Doc/DataAccess.xml'/>
@@ -395,7 +407,7 @@ namespace LJCDataAccess5
     public DataTable? GetDataTable(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
-      DataTable? retValue = null;
+      DataTable? retTable = null;
 
       if (LJC.HasValue(sql))
       {
@@ -404,19 +416,20 @@ namespace LJCDataAccess5
         {
           if (mMySqlDataAccess != null)
           {
-            retValue = mMySqlDataAccess.GetDataTable(sql, tableMapping);
+            retTable = mMySqlDataAccess.GetDataTable(sql, tableMapping);
           }
         }
         else
         {
-          retValue = GetSchemaOnly(sql);
-          if (LJC.HasData(retValue))
+          retTable = GetSchemaOnly(sql);
+          //if (LJC.HasData(retValue))
+          if (LJC.HasColumns(retTable))
           {
-            FillDataTable(sql, retValue, tableMapping);
+            FillDataTable(sql, retTable, tableMapping);
           }
         }
       }
-      return retValue;
+      return retTable;
     }
 
     // Executes a Stored Procedure and retrieves the DataTable object.
@@ -534,9 +547,6 @@ namespace LJCDataAccess5
       retValue = GetDataTable(sql);
       return retValue;
     }
-    #endregion
-
-    #region Private Methods
 
     // Creates the LJCProviderFactory object.
     private void CreateProviderFactory(string connectionString, string providerName)

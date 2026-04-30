@@ -16,7 +16,8 @@ namespace LJCDataAccessConfig5
     /// <include path="members/ProviderName/*" file="Doc/LJCDataConfig.xml"/>
     public static string ProviderName(string? connectionType = "SQLServer")
     {
-      string retVal = "System.Data.SqlClient";
+      //string retVal = "System.Data.SqlClient";
+      string retVal = "Microsoft.Data.SqlClient";
 
       if (connectionType != null)
       {
@@ -30,7 +31,8 @@ namespace LJCDataAccessConfig5
         }
         if (LJCNetString.IsEqual(connectionType, "SQLServer"))
         {
-          retVal = "System.Data.SqlClient";
+          //retVal = "System.Data.SqlClient";
+          retVal = "Microsoft.Data.SqlClient";
         }
         if (LJCNetString.IsEqual(connectionType, "MySQL"))
         {

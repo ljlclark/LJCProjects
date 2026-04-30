@@ -136,11 +136,12 @@ namespace LJCNetCommon5
     // Checks a data table for columns definitions.
     /// <include path="members/HasColumns1/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
-    public static bool HasColumns([NotNullWhen(true)] DataTable dataTable)
+    public static bool HasColumns([NotNullWhen(true)] DataTable? dataTable)
     {
       bool retValue = true;
 
-      if (HasColumns(dataTable.Columns))
+      if (dataTable != null
+        && HasColumns(dataTable.Columns))
       {
         retValue = true;
       }
