@@ -5,6 +5,7 @@ using LJCDataAccess5;
 using LJCDataAccessConfig5;
 using LJCNetCommon5;
 using System.Data;
+using System.Data.Common;
 
 namespace TestDataAccess5
 {
@@ -14,9 +15,9 @@ namespace TestDataAccess5
     // The entry method.
     static void Main()
     {
-      TestCommon = new LJCTestCommon("LJCConnectionTemplate");
+      TestCommon = new LJCTestCommon("LJCDataAccess");
       Console.WriteLine();
-      Console.WriteLine("*** LJCConnectionTemplate ***");
+      Console.WriteLine("*** LJCDataAccess ***");
 
       // Static Methods
       GetConnectionString();
@@ -103,8 +104,10 @@ namespace TestDataAccess5
     {
       var methodName = "IsUseCommand()";
 
-      var result = "Not Implemented";
-      var compare = "";
+      var command = "use[Database]";
+      var value = LJCDataAccess.IsUseCommand(command);
+      var result = value.ToString();
+      var compare = "True";
       TestCommon?.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -153,9 +156,44 @@ namespace TestDataAccess5
     {
       var methodName = "CloseConnection()";
 
-      var result = "Not Implemented";
+      //var dataSourceName = "Machine_Name\\SQL_Instance_Name";
+      //var databaseName = "Database";
+      // Local Testing
+      var dataSourceName = "DESKTOP-PDPBE34";
+      var databaseName = "LJCData";
+
+      // Available connection types: SqlServer, MySql, OleDb.
+      // Untested: Access, Odbc
+      var connectionType = ConnectionType.SqlServer.ToString();
+      var providerName = LJCDataConfig.ProviderName(connectionType);
+
+      var dataAccess = LJCDataAccess.GetDataAccess(dataSourceName
+        , databaseName, providerName);
+      var sql = "select * from Person ";
+      DbDataReader? dbDataReader;
+      var result = "";
       var compare = "";
-      TestCommon?.Write($"{methodName}", result, compare);
+      using (dbDataReader = dataAccess.GetDataReader(sql))
+      {
+        if (dbDataReader != null
+          && dbDataReader.Read())
+        {
+          result = "Open";
+        }
+        compare = "Open";
+        TestCommon?.Write($"{methodName}1", result, compare);
+
+        // Test Method
+        dataAccess.CloseConnection();
+        result = "Closed";
+        if (dbDataReader != null
+          && !dbDataReader.IsClosed)
+        {
+          result = "Open";
+        }
+        compare = "Closed";
+        TestCommon?.Write($"{methodName}2", result, compare);
+      }
     }
 
     // Executes an Insert, Update or Delete statement.
@@ -169,7 +207,8 @@ namespace TestDataAccess5
       var dataSourceName = "DESKTOP-PDPBE34";
       var databaseName = "LJCData";
 
-      // Available connection types: Access, MySql, Odbc, OleDb, SqlServer.
+      // Available connection types: SqlServer, MySql, OleDb.
+      // Untested: Access, Odbc
       var connectionType = ConnectionType.SqlServer.ToString();
       var providerName = LJCDataConfig.ProviderName(connectionType);
 
@@ -211,7 +250,8 @@ namespace TestDataAccess5
       var dataSourceName = "DESKTOP-PDPBE34";
       var databaseName = "LJCData";
 
-      // Available connection types: Access, MySql, Odbc, OleDb, SqlServer.
+      // Available connection types: SqlServer, MySql, OleDb.
+      // Untested: Access, Odbc
       var connectionType = ConnectionType.SqlServer.ToString();
       var providerName = LJCDataConfig.ProviderName(connectionType);
 
@@ -303,7 +343,8 @@ namespace TestDataAccess5
       var dataSourceName = "DESKTOP-PDPBE34";
       var databaseName = "LJCData";
 
-      // Available connection types: Access, MySql, Odbc, OleDb, SqlServer.
+      // Available connection types: SqlServer, MySql, OleDb.
+      // Untested: Access, Odbc
       var connectionType = ConnectionType.SqlServer.ToString();
       var providerName = LJCDataConfig.ProviderName(connectionType);
 
@@ -394,7 +435,8 @@ namespace TestDataAccess5
       var dataSourceName = "DESKTOP-PDPBE34";
       var databaseName = "LJCData";
 
-      // Available connection types: Access, MySql, Odbc, OleDb, SqlServer.
+      // Available connection types: SqlServer, MySql, OleDb.
+      // Untested: Access, Odbc
       var connectionType = ConnectionType.SqlServer.ToString();
       var providerName = LJCDataConfig.ProviderName(connectionType);
 
@@ -422,9 +464,46 @@ namespace TestDataAccess5
     {
       var methodName = "GetDataReader()";
 
-      var result = "Not Implemented";
-      var compare = "";
+      //var dataSourceName = "Machine_Name\\SQL_Instance_Name";
+      //var databaseName = "Database";
+      // Local Testing
+      var dataSourceName = "DESKTOP-PDPBE34";
+      var databaseName = "LJCData";
+
+      // Available connection types: SqlServer, MySql, OleDb.
+      // Untested: Access, Odbc
+      var connectionType = ConnectionType.SqlServer.ToString();
+      var providerName = LJCDataConfig.ProviderName(connectionType);
+
+      var dataAccess = LJCDataAccess.GetDataAccess(dataSourceName
+        , databaseName, providerName);
+      var sql = "insert into Person values('Test Name', 0)";
+      dataAccess.ExecuteNonQuery(sql);
+
+      // Test Method
+      sql = "select * from Person ";
+      sql += "where Name = 'Test Name';";
+      DbDataReader? dbDataReader;
+      var result = "";
+      using (dbDataReader = dataAccess.GetDataReader(sql))
+      {
+        if (dbDataReader != null)
+        {
+          if (dbDataReader.Read())
+          {
+            var value = dbDataReader[1];
+            result = value.ToString();
+          }
+          dbDataReader.Close();
+          dataAccess.CloseConnection();
+        }
+      }
+      var compare = "Test Name";
       TestCommon?.Write($"{methodName}", result, compare);
+
+      // Clear test data
+      sql = "delete from Person where Name = 'Test Name';";
+      dataAccess.ExecuteNonQuery(sql);
     }
 
     // Executes a Select statement and retrieves the DataSet object.
@@ -438,7 +517,8 @@ namespace TestDataAccess5
       var dataSourceName = "DESKTOP-PDPBE34";
       var databaseName = "LJCData";
 
-      // Available connection types: Access, MySql, Odbc, OleDb, SqlServer.
+      // Available connection types: SqlServer, MySql, OleDb.
+      // Untested: Access, Odbc
       var connectionType = ConnectionType.SqlServer.ToString();
       var providerName = LJCDataConfig.ProviderName(connectionType);
 
@@ -485,7 +565,8 @@ namespace TestDataAccess5
       var dataSourceName = "DESKTOP-PDPBE34";
       var databaseName = "LJCData";
 
-      // Available connection types: Access, MySql, Odbc, OleDb, SqlServer.
+      // Available connection types: SqlServer, MySql, OleDb.
+      // Untested: Access, Odbc
       var connectionType = ConnectionType.SqlServer.ToString();
       var providerName = LJCDataConfig.ProviderName(connectionType);
 
@@ -509,8 +590,66 @@ namespace TestDataAccess5
     {
       var methodName = "GetProcedureDataTable()";
 
-      var result = "Not Implemented";
-      var compare = "";
+      //var dataSourceName = "Machine_Name\\SQL_Instance_Name";
+      //var databaseName = "Database";
+      // Local Testing
+      var dataSourceName = "DESKTOP-PDPBE34";
+      var databaseName = "LJCData";
+
+      // Available connection types: SqlServer, MySql, OleDb.
+      // Untested: Access, Odbc
+      var connectionType = ConnectionType.SqlServer.ToString();
+      var providerName = LJCDataConfig.ProviderName(connectionType);
+
+      var dataAccess = LJCDataAccess.GetDataAccess(dataSourceName
+        , databaseName, providerName);
+      dataAccess.TableName = "Person";
+
+      var tb = new LJCTextBuilder();
+      tb.AddLine("USE[Database]");
+      tb.AddLine("GO");
+      tb.AddLine("SET ANSI_NULLS ON");
+      tb.AddLine("GO");
+      tb.AddLine("SET QUOTED_IDENTIFIER ON");
+      tb.AddLine("GO");
+      tb.AddLine("IF OBJECT_ID('[dbo].[sp_TestProc]', N'p')");
+      tb.AddLine(" IS NOT NULL");
+      tb.AddLine("  DROP PROCEDURE[dbo].[sp_TestProc];");
+      tb.AddLine("GO");
+      tb.AddLine("CREATE PROCEDURE[dbo].[sp_TestProc]");
+      tb.AddLine("  @name nvarchar(60)");
+      tb.AddLine("AS");
+      tb.AddLine("BEGIN");
+      tb.AddLine("select * from Person ");
+      tb.AddLine("where Name = @name;");
+      tb.AddLine("END");
+      var sql = tb.ToString();
+      // ToDo: Add databaseName as parameter = null?;
+      //dataAccess.DatabaseName = "Database";
+      dataAccess.DatabaseName = "LJCData";
+      dataAccess.ExecuteScriptText(sql);
+
+      // Test Method
+      var parameter = new LJCProcedureParameter();
+      parameter.ParameterName = "name";
+      parameter.SqlDbType = SqlDbType.NVarChar;
+      parameter.Size = 60;
+      parameter.Value = "Name 1";
+      parameter.Direction = ParameterDirection.Input;
+      var parameters = new LJCProcedureParameters
+      {
+        // ToDo: Solve must load MySql.Data.dll.
+        parameter
+      };
+      var dataTable = dataAccess.GetProcedureDataTable("sp_TestProc"
+        , parameters);
+      var result = "";
+      if (LJC.HasData(dataTable))
+      {
+        var row = dataTable.Rows[0];
+        result = row["Name"].ToString();
+      }
+      var compare = "Name 1";
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
@@ -525,7 +664,8 @@ namespace TestDataAccess5
       var dataSourceName = "DESKTOP-PDPBE34";
       var databaseName = "LJCData";
 
-      // Available connection types: Access, MySql, Odbc, OleDb, SqlServer.
+      // Available connection types: SqlServer, MySql, OleDb.
+      // Untested: Access, Odbc
       var connectionType = ConnectionType.SqlServer.ToString();
       var providerName = LJCDataConfig.ProviderName(connectionType);
 
@@ -555,7 +695,8 @@ namespace TestDataAccess5
       var dataSourceName = "DESKTOP-PDPBE34";
       var databaseName = "LJCData";
 
-      // Available connection types: Access, MySql, Odbc, OleDb, SqlServer.
+      // Available connection types: SqlServer, MySql, OleDb.
+      // Untested: Access, Odbc
       var connectionType = ConnectionType.SqlServer.ToString();
       var providerName = LJCDataConfig.ProviderName(connectionType);
 
