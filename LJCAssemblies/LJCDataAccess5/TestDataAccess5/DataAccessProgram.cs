@@ -287,6 +287,7 @@ namespace TestDataAccess5
 
       // Test Method
       dataAccess.ExecuteScript("TestScript.txt");
+      File.Delete("TestScript.txt");
 
       // Verify script was executed.
       tb = new LJCTextBuilder();

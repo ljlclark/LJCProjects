@@ -1,12 +1,13 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataAccess.cs
+using LJCDataAccessConfig5;
+using LJCNetCommon5;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Data.Common;
-using LJCNetCommon5;
-using LJCDataAccessConfig5;
 using System.Text;
-using Microsoft.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace LJCDataAccess5
 {
@@ -78,13 +79,12 @@ namespace LJCDataAccess5
     }
 
     /// <summary>Checks for the "use" command.</summary>
-    public static bool IsUseCommand(string sql)
+    public static bool IsUseCommand(string command)
     {
       var retValue = false;
 
       var ignoreCase = StringComparison.InvariantCultureIgnoreCase;
-      //var index = sql.IndexOf("use", ignoreCase);
-      if (sql.Contains("use", ignoreCase))
+      if (command.Contains("use", ignoreCase))
       {
         retValue = true;
       }
@@ -244,14 +244,8 @@ namespace LJCDataAccess5
     /// <include path='items/ExecuteScriptText/*' file='Doc/DataAccess.xml'/>
     public void ExecuteScriptText(string scriptText)
     {
-      //string[] separators = new string[] { "GO\r\n", "go\r\n", "GO\n", "go\n" };
-      //string[] separators = ["GO\r\n", "go\r\n", "GO\n", "go\n"];
-      //string[] commands = scriptText.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-
-      // Testing
-      var text = scriptText.Replace("GO\r\n", "go\r\n", StringComparison.OrdinalIgnoreCase);
-      text = text.Replace("GO\n", "go\r\n", StringComparison.OrdinalIgnoreCase);
-      string[] commands = text.Split(["go\r\n"], StringSplitOptions.RemoveEmptyEntries);
+      var regexOptions = RegexOptions.IgnoreCase;
+      string[] commands = Regex.Split(scriptText, "go\r\n", regexOptions);
 
       var first = true;
       foreach (string command in commands)
@@ -435,7 +429,7 @@ namespace LJCDataAccess5
     // Executes a Stored Procedure and retrieves the DataTable object.
     /// <include path='items/GetProcedureDataTable/*' file='Doc/DataAccess.xml'/>
     public DataTable? GetProcedureDataTable(string procedureName
-      , LJCProcedureParameters? parameters)
+      , LJCProcedureParameters? parameters = null)
     {
       DbCommand? dbCommand;
       DbDataAdapter? dbDataAdapter;
@@ -566,9 +560,9 @@ namespace LJCDataAccess5
       {
         if (IsUseCommand(sql))
         {
-          if (LJC.HasValue(TableName))
+          if (LJC.HasValue(DatabaseName))
           {
-            sql = $"use {TableName}";
+            sql = $"use {DatabaseName}";
           }
           else
           {
@@ -635,6 +629,14 @@ namespace LJCDataAccess5
       }
     }
     private string? mConnectionString;
+
+    /// <summary>Gets or sets the DatabaseName value.</summary>
+    public string? DatabaseName
+    {
+      get { return mDatabaseName; }
+      set { mDatabaseName = LJCNetString.InitString(value); }
+    }
+    private string? mDatabaseName;
 
     // Gets a reference to the
     /// <include path='items/ProviderFactory/*' file='Doc/DataAccess.xml'/>
