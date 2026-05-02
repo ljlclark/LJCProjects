@@ -22,7 +22,7 @@ namespace LJCDataAccess5
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Executes an Insert, Update or Delete statement.
     /// <include path='items/ExecuteNonQuery/*' file='Doc/MySqlDataAccess.xml'/>

@@ -12,7 +12,7 @@ namespace LJCDataAccess5
   /// <include path='items/ProviderFactory/*' file='Doc/ProviderFactory.xml'/>
   public class LJCProviderFactory
   {
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
@@ -23,7 +23,7 @@ namespace LJCDataAccess5
       DbProviderFactory = null;
     }
 
-    // Initializes an object instance with the provided values,
+    // Initializes an object instance with the supplied values,
     /// <include path='items/ProviderFactoryC/*' file='Doc/ProviderFactory.xml'/>
     public LJCProviderFactory(string connectionString, string providerName)
     {
@@ -33,7 +33,7 @@ namespace LJCDataAccess5
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Closes the database connection.
     /// <include path='items/CloseConnection/*' file='Doc/ProviderFactory.xml'/>
@@ -129,9 +129,6 @@ namespace LJCDataAccess5
     {
       mDbConnection?.Open();
     }
-    #endregion
-
-    #region Private Methods
 
     // Creates the DbProviderFactory object.
     /// <include path='items/CreateDbProviderFactory/*' file='Doc/ProviderFactory.xml'/>

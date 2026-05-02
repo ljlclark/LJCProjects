@@ -15,38 +15,6 @@ namespace LJCDataAccess5
   {
     #region Data Access Methods
 
-    // Retrieves the database connection ConnectionType value.
-    /// <include path='items/GetConnectionType/*' file='Doc/DataCommon.xml'/>
-    public static ConnectionType GetConnectionType(string connectionTypeName)
-    {
-      ConnectionType retVal = ConnectionType.SqlServer;
-
-      if (connectionTypeName != null)
-      {
-        if (LJCNetString.IsEqual(connectionTypeName, "Access"))
-        {
-          retVal = ConnectionType.Access;
-        }
-        if (LJCNetString.IsEqual(connectionTypeName, "MySQL"))
-        {
-          retVal = ConnectionType.MySql;
-        }
-        if (LJCNetString.IsEqual(connectionTypeName, "ODBC"))
-        {
-          retVal = ConnectionType.Odbc;
-        }
-        if (LJCNetString.IsEqual(connectionTypeName, "OleDB"))
-        {
-          retVal = ConnectionType.OleDb;
-        }
-        if (LJCNetString.IsEqual(connectionTypeName, "SQLServer"))
-        {
-          retVal = ConnectionType.SqlServer;
-        }
-      }
-      return retVal;
-    }
-
     // Sets the data adapter table mappings.
     /// <include path='items/SetTableMapping/*' file='Doc/DataCommon.xml'/>
     public static void SetTableMapping(DbDataAdapter? dataAdapter
@@ -104,7 +72,7 @@ namespace LJCDataAccess5
       return retValue;
     }
 
-    // Converts the date string to a DateTime value.
+    // Converts the date/time string to a DateTime value.
     /// <include path='items/GetDbDateTime/*' file='Doc/DataCommon.xml'/>
     public static DateTime GetDbDateTime(string dateText
       , ConnectionType connectionType = ConnectionType.SqlServer)
@@ -158,6 +126,10 @@ namespace LJCDataAccess5
 
         case ConnectionType.MySql:
           break;
+
+        default:
+          retValue = DateTime.MinValue;
+          break;
       }
       return retValue;
     }
@@ -186,7 +158,8 @@ namespace LJCDataAccess5
     {
       string? retValue = null;
 
-      if (dateTime != null && !LJC.IsDbMinDate(dateTime))
+      if (dateTime != null
+        && !LJC.IsDbMinDate(dateTime))
       {
         DateTime tempDateTime = (DateTime)dateTime;
         retValue = tempDateTime.ToString("MM/dd/yyyy");
