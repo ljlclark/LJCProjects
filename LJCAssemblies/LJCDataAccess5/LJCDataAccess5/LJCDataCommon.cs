@@ -15,62 +15,6 @@ namespace LJCDataAccess5
   {
     #region Data Access Methods
 
-    // Clones a DataColumn object.
-    /// <include path='items/DataColumnClone/*' file='Doc/DataCommon.xml'/>
-    public static DataColumn? DataColumnClone(DataColumn dataColumn)
-    {
-      DataColumn? retValue = null;
-      if (dataColumn != null)
-      {
-        retValue = new DataColumn()
-        {
-          AllowDBNull = dataColumn.AllowDBNull,
-          Caption = dataColumn.Caption,
-          ColumnName = dataColumn.ColumnName,
-          DataType = dataColumn.DataType,
-          DefaultValue = dataColumn.DefaultValue,
-          MaxLength = dataColumn.MaxLength,
-          Unique = dataColumn.Unique
-        };
-      }
-      return retValue;
-    }
-
-    // Get a DataColumn collection from the specified ColumnName values.
-    /// <include path='items/GetColumns/*' file='Doc/DataCommon.xml'/>
-    public static DataColumnCollection GetColumns(DataTable dataTable
-      , string[]? columnNames = null)
-    {
-      var workTable = new DataTable();
-      if (!LJC.HasElements(columnNames))
-      {
-        foreach (DataColumn dataColumn in dataTable.Columns)
-        {
-          var dataColumnClone = DataColumnClone(dataColumn);
-          if (dataColumnClone != null)
-          {
-            workTable.Columns.Add(dataColumnClone);
-          }
-        }
-      }
-      else
-      {
-        foreach (string columnName in columnNames)
-        {
-          DataColumn? dataColumn = dataTable.Columns[columnName];
-          if (dataColumn != null)
-          {
-            var dataColumnClone = DataColumnClone(dataColumn);
-            if (dataColumnClone != null)
-            {
-              workTable.Columns.Add(dataColumnClone);
-            }
-          }
-        }
-      }
-      return workTable.Columns;
-    }
-
     // Retrieves the database connection ConnectionType value.
     /// <include path='items/GetConnectionType/*' file='Doc/DataCommon.xml'/>
     public static ConnectionType GetConnectionType(string connectionTypeName)
@@ -79,25 +23,25 @@ namespace LJCDataAccess5
 
       if (connectionTypeName != null)
       {
-        if (LJCNetString.IsEqual(connectionTypeName, "OleDB"))
+        if (LJCNetString.IsEqual(connectionTypeName, "Access"))
         {
-          retVal = ConnectionType.OleDb;
-        }
-        if (LJCNetString.IsEqual(connectionTypeName, "ODBC"))
-        {
-          retVal = ConnectionType.Odbc;
-        }
-        if (LJCNetString.IsEqual(connectionTypeName, "SQLServer"))
-        {
-          retVal = ConnectionType.SqlServer;
+          retVal = ConnectionType.Access;
         }
         if (LJCNetString.IsEqual(connectionTypeName, "MySQL"))
         {
           retVal = ConnectionType.MySql;
         }
-        if (LJCNetString.IsEqual(connectionTypeName, "Access"))
+        if (LJCNetString.IsEqual(connectionTypeName, "ODBC"))
         {
-          retVal = ConnectionType.Access;
+          retVal = ConnectionType.Odbc;
+        }
+        if (LJCNetString.IsEqual(connectionTypeName, "OleDB"))
+        {
+          retVal = ConnectionType.OleDb;
+        }
+        if (LJCNetString.IsEqual(connectionTypeName, "SQLServer"))
+        {
+          retVal = ConnectionType.SqlServer;
         }
       }
       return retVal;

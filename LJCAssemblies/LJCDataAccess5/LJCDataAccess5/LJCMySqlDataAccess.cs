@@ -1,10 +1,11 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // MySqlDataAccess.cs
-using System.Data;
-using System.Data.Common;
 using LJCNetCommon5;
 using MySql.Data.MySqlClient;
+using System.Data;
+using System.Data.Common;
+using System.Xml.Linq;
 
 namespace LJCDataAccess5
 {
@@ -236,7 +237,8 @@ namespace LJCDataAccess5
             var parm = new MySqlParameter()
             {
               ParameterName = parameter.ParameterName,
-              MySqlDbType = parameter.MySqlDbType,
+              //MySqlDbType = parameter.MySqlDbType,
+              MySqlDbType = (MySqlDbType)parameter.MySqlDbTypeID,
               Size = parameter.Size,
               Direction = parameter.Direction,
               Value = parameter.Value

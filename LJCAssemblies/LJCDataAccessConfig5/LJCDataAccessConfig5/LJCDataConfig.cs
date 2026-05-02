@@ -21,26 +21,26 @@ namespace LJCDataAccessConfig5
 
       if (connectionType != null)
       {
-        if (LJCNetString.IsEqual(connectionType, "OleDB"))
+        if (LJCNetString.IsEqual(connectionType, "Access"))
         {
-          retVal = "SQLOLEDB";
+          retVal = "Microsoft.Jet.OLEDB.4.0";
         }
         if (LJCNetString.IsEqual(connectionType, "ODBC"))
         {
           retVal = "MSDASQL.1";
         }
-        if (LJCNetString.IsEqual(connectionType, "SQLServer"))
+        if (LJCNetString.IsEqual(connectionType, "OleDB"))
         {
-          //retVal = "System.Data.SqlClient";
-          retVal = "Microsoft.Data.SqlClient";
+          retVal = "SQLOLEDB";
         }
         if (LJCNetString.IsEqual(connectionType, "MySQL"))
         {
           retVal = "MySql.Data.MySqlClient";
         }
-        if (LJCNetString.IsEqual(connectionType, "Access"))
+        if (LJCNetString.IsEqual(connectionType, "SQLServer"))
         {
-          retVal = "Microsoft.Jet.OLEDB.4.0";
+          //retVal = "System.Data.SqlClient";
+          retVal = "Microsoft.Data.SqlClient";
         }
       }
       return retVal;

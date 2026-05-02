@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // ProcedureParameter.cs
 using System.Data;
-using MySql.Data.MySqlClient;
+using LJCNetCommon5;
 
 namespace LJCDataAccess5
 {
@@ -22,31 +22,26 @@ namespace LJCDataAccess5
     public LJCProcedureParameter(LJCProcedureParameter item)
     {
       Direction = item.Direction;
-      MySqlDbType = item.MySqlDbType;
+      MySqlDbTypeID = item.MySqlDbTypeID;
       ParameterName = item.ParameterName;
       Precision = item.Precision;
       Size = item.Size;
-      SqlDbType = item.SqlDbType;
+      SqlDbTypeID = item.SqlDbTypeID;
       Value = item.Value;
     }
 
     /// <summary>A Create constructor.</summary>
-    public LJCProcedureParameter(string parameterName, object dataType
+    public LJCProcedureParameter(string parameterName, int sqlDbTypeID
       , int size, object? value = null
-      , ParameterDirection direction = ParameterDirection.Input)
+      , ParameterDirection direction = ParameterDirection.Input
+      , int mySqlDbTypeID = -1)
     {
       ParameterName = parameterName;
-      if (dataType.GetType() == typeof(SqlDbType))
-      {
-        SqlDbType = (SqlDbType)dataType;
-      }
-      if (dataType.GetType() == typeof(MySqlDbType))
-      {
-        MySqlDbType = (MySqlDbType)dataType;
-      }
+      SqlDbTypeID = sqlDbTypeID;
       Size = size;
       Direction = direction;
       Value = value;
+      MySqlDbTypeID = mySqlDbTypeID;
     }
     #endregion
 
@@ -75,15 +70,16 @@ namespace LJCDataAccess5
 
       if (null == other)
       {
-        retValue = 1;
+        retValue = LJCNetString.CompareGreater;
       }
       else
       {
-        // Case sensitive.
-        //retValue = _CompareToName_.CompareTo(other._CompareToName_);
-
-        // Not case sensitive.
-        retValue = string.Compare(ParameterName, other.ParameterName, true);
+        retValue = LJC.CompareNull(ParameterName, other.ParameterName);
+        if (LJCNetString.CompareNotNullOrEqual == retValue)
+        {
+          // Not case sensitive.
+          retValue = string.Compare(ParameterName, other.ParameterName, true);
+        }
       }
       return retValue;
     }
@@ -94,8 +90,8 @@ namespace LJCDataAccess5
     /// <summary>Gets or sets the ParameterDirection value.</summary>
     public ParameterDirection Direction { get; set; }
 
-    /// <summary>Gets or sets the MySqlDbType value.</summary>
-    public MySqlDbType MySqlDbType { get; set; }
+    /// <summary>Gets or sets the MySqlDbTypeID value.</summary>
+    public int MySqlDbTypeID { get; set; }
 
     /// <summary>Gets or sets the ParameterName value.</summary>
     public string? ParameterName { get; set; }
@@ -107,7 +103,7 @@ namespace LJCDataAccess5
     public int Size { get; set; }
 
     /// <summary>Gets or sets the SqlDbType value.</summary>
-    public SqlDbType SqlDbType { get; set; }
+    public int SqlDbTypeID { get; set; }
 
     /// <summary>Gets or sets the Value.</summary>
     public object? Value { get; set; }

@@ -74,7 +74,8 @@ namespace LJCDataAccess5
       RegisterSqlClient();
       string connectionString = GetConnectionString(dataSourceName
         , databaseName);
-      retValue = new LJCDataAccess(connectionString, providerName);
+      retValue = new LJCDataAccess(connectionString, providerName
+        , databaseName);
       return retValue;
     }
 
@@ -103,7 +104,6 @@ namespace LJCDataAccess5
       string[] retValue = pair.Split('|');
       if (retValue.Length < 2)
       {
-        //retValue = new string[] { text, pair };
         retValue = [text, pair];
       }
       return retValue;
@@ -165,9 +165,11 @@ namespace LJCDataAccess5
 
     // Initializes an object instance with the supplied values.
     /// <include path='items/DataAccessC/*' file='Doc/DataAccess.xml'/>
-    public LJCDataAccess(string connectionString, string? providerName = null)
+    public LJCDataAccess(string connectionString, string? providerName = null
+      , string? databaseName = null)
     {
       RegisterSqlClient();
+      DatabaseName = databaseName;
       ConnectionString = connectionString;
       ProviderName = providerName;
     }
@@ -416,7 +418,6 @@ namespace LJCDataAccess5
         else
         {
           retTable = GetSchemaOnly(sql);
-          //if (LJC.HasData(retValue))
           if (LJC.HasColumns(retTable))
           {
             FillDataTable(sql, retTable, tableMapping);
@@ -456,7 +457,7 @@ namespace LJCDataAccess5
                 var parm = new SqlParameter()
                 {
                   ParameterName = parameter.ParameterName,
-                  SqlDbType = parameter.SqlDbType,
+                  SqlDbType = (SqlDbType)parameter.SqlDbTypeID,
                   Size = parameter.Size,
                   Direction = parameter.Direction,
                   Value = parameter.Value
@@ -714,5 +715,135 @@ namespace LJCDataAccess5
 
     /// <summary>Use a SQLServer connection.</summary>
     SqlServer
+  }
+
+  // Enum to number.
+  //var enumNumber = (int)SqlDbType.VarChar;
+  // Enum to name.
+  //string? enumName = Enum.GetName<SqlDbType>(SqlDbType.VarChar);
+  // Enum number to enum value.
+  //var enumValue = (SqlDbType)enumNumber;
+  // Enum name to enum value.
+  //var found = Enum.TryParse("VarChar", out SqlDbType enumValue);
+
+  /// <summary>The Connection types.</summary>
+  public enum LJCMySqlDbType
+  {
+    /// <summary></summary>
+    Binary = 754,
+
+    /// <summary></summary>
+    Bit = 16,
+
+    /// <summary></summary>
+    Blob = 252,
+
+    /// <summary></summary>
+    Byte = 1,
+
+    /// <summary></summary>
+    Date = 10,
+
+    /// <summary></summary>
+    DateTime = 12,
+
+    /// <summary></summary>
+    Decimal = 0,
+
+    /// <summary></summary>
+    Double = 5,
+
+    /// <summary></summary>
+    Enum = 247,
+
+    /// <summary></summary>
+    Float = 4,
+
+    /// <summary></summary>
+    Geometry = 255,
+
+    /// <summary></summary>
+    GUID = 854,
+
+    /// <summary></summary>
+    Int16 = 2,
+
+    /// <summary></summary>
+    Int24 = 9,
+
+    /// <summary></summary>
+    Int32 = 3,
+
+    /// <summary></summary>
+    Int64 = 8,
+
+    /// <summary></summary>
+    JSON = 245,
+
+    /// <summary></summary>
+    LongBlob = 251,
+
+    /// <summary></summary>
+    LongText = 751,
+
+    /// <summary></summary>
+    MediumBlob = 250,
+
+    /// <summary></summary>
+    MediumText = 750,
+
+    /// <summary></summary>
+    Newdate = 14,
+
+    /// <summary></summary>
+    NewDecimal = 246,
+
+    /// <summary></summary>
+    Set = 248,
+
+    /// <summary></summary>
+    String = 254,
+
+    /// <summary></summary>
+    Text = 752,
+
+    /// <summary></summary>
+    Time = 11,
+
+    /// <summary></summary>
+    TimeStamp = 7,
+
+    /// <summary></summary>
+    TinyBlob = 249,
+
+    /// <summary></summary>
+    TinyText = 749,
+
+    /// <summary></summary>
+    UByte = 501,
+
+    /// <summary></summary>
+    UInt16 = 502,
+
+    /// <summary></summary>
+    UInt24 = 509,
+
+    /// <summary></summary>
+    UInt32 = 503,
+
+    /// <summary></summary>
+    UInt64 = 508,
+
+    /// <summary></summary>
+    VarBinary = 753,
+
+    /// <summary></summary>
+    VarChar = 253,
+
+    /// <summary></summary>
+    VarString = 15,
+
+    /// <summary></summary>
+    Year = 13,
   }
 }

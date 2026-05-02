@@ -3,7 +3,6 @@
 // ProcedureParameters.cs
 using System.Data;
 using LJCNetCommon5;
-using MySql.Data.MySqlClient;
 
 namespace LJCDataAccess5
 {
@@ -11,7 +10,7 @@ namespace LJCDataAccess5
   /// <include path='items/ProcedureParameters/*' file='Doc/ProcedureParameters.xml'/>
   public class LJCProcedureParameters : List<LJCProcedureParameter>
   {
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
@@ -33,34 +32,19 @@ namespace LJCDataAccess5
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
-    // Creates and adds the object from the provided values.
-    /// <include path='items/AddSql/*' file='Doc/ProcedureParameters.xml'/>
-    public LJCProcedureParameter Add(string parameterName, SqlDbType sqlDbType, int size
-      , object? value = null, ParameterDirection direction = ParameterDirection.Input)
-    {
-      var retValue = new LJCProcedureParameter()
-      {
-        ParameterName = parameterName,
-        SqlDbType = sqlDbType,
-        Size = size,
-        Value = value,
-        Direction = direction
-      };
-      Add(retValue);
-      return retValue;
-    }
-
-    // Creates and adds the object from the provided values.
+    // Creates and adds the object from the supplied values.
     /// <include path='items/AddMySql/*' file='Doc/ProcedureParameters.xml'/>
-    public LJCProcedureParameter Add(string parameterName, MySqlDbType mySqlDbType, int size
-      , object? value = null, ParameterDirection direction = ParameterDirection.Input)
+    public LJCProcedureParameter Add(string parameterName
+      , int sqlDbTypeID, int mySqlDbTypeID, int size, object? value = null
+      , ParameterDirection direction = ParameterDirection.Input)
     {
       var retValue = new LJCProcedureParameter()
       {
         ParameterName = parameterName,
-        MySqlDbType = mySqlDbType,
+        SqlDbTypeID = sqlDbTypeID,
+        MySqlDbTypeID = mySqlDbTypeID,
         Size = size,
         Value = value,
         Direction = direction

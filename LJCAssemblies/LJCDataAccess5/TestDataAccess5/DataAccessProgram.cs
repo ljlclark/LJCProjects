@@ -535,16 +535,12 @@ namespace TestDataAccess5
       sql += ";select * from Person where Name = 'Name 2'";
       var personSet = dataAccess.GetDataSet(sql);
 
-      DataTable? table = null;
-      DataRow? row = null;
-      var result = "";
-      var compare = "";
       if (personSet != null)
       {
-        table = personSet.Tables[0];
-        row = table.Rows[0];
-        result = row["Name"].ToString();
-        compare = "Name 1";
+        DataTable table = personSet.Tables[0];
+        DataRow row = table.Rows[0];
+        var result = row["Name"].ToString();
+        var compare = "Name 1";
         TestCommon?.Write($"{methodName}1", result, compare);
 
         table = personSet.Tables[1];
@@ -625,18 +621,18 @@ namespace TestDataAccess5
       tb.AddLine("where Name = @name;");
       tb.AddLine("END");
       var sql = tb.ToString();
-      // ToDo: Add databaseName as parameter = null?;
-      //dataAccess.DatabaseName = "Database";
-      dataAccess.DatabaseName = "LJCData";
       dataAccess.ExecuteScriptText(sql);
 
       // Test Method
-      var parameter = new LJCProcedureParameter();
-      parameter.ParameterName = "name";
-      parameter.SqlDbType = SqlDbType.NVarChar;
-      parameter.Size = 60;
-      parameter.Value = "Name 1";
-      parameter.Direction = ParameterDirection.Input;
+      var parameter = new LJCProcedureParameter
+      {
+        Direction = ParameterDirection.Input,
+        ParameterName = "name",
+        MySqlDbTypeID = (int)LJCMySqlDbType.VarChar,
+        SqlDbTypeID = (int)SqlDbType.NVarChar,
+        Size = 60,
+        Value = "Name 1",
+      };
       var parameters = new LJCProcedureParameters
       {
         // ToDo: Solve must load MySql.Data.dll.

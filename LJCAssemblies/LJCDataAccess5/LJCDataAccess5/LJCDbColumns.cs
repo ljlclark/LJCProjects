@@ -1,4 +1,7 @@
-﻿using LJCNetCommon5;
+﻿// Copyright (c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// LJCDbColumns.cs
+using LJCNetCommon5;
 using System.Data;
 
 namespace LJCDataAccess5
@@ -7,42 +10,18 @@ namespace LJCDataAccess5
   {
     #region Static Methods
 
-    // Clones a DataColumn object.
-    /// <include path='items/DataColumnClone/*' file='Doc/TableData.xml'/>
-    public static DataColumn? Clone(DataColumn dbColumn)
-    {
-      DataColumn? retDbColumn = null;
-      if (dbColumn != null)
-      {
-        retDbColumn = new DataColumn()
-        {
-          AllowDBNull = dbColumn.AllowDBNull,
-          AutoIncrement = dbColumn.AutoIncrement,
-          Caption = dbColumn.Caption,
-          ColumnName = dbColumn.ColumnName,
-          DataType = dbColumn.DataType,
-          DefaultValue = dbColumn.DefaultValue,
-          MaxLength = dbColumn.MaxLength,
-          Unique = dbColumn.Unique
-        };
-      }
-      return retDbColumn;
-    }
-
     // Clones a DataColumn collection.
     /// <include path='items/DataColumnsClone/*' file='Doc/TableData.xml'/>
-    public static DataColumnCollection? Clone(DataTable dataTable)
+    public static DataColumnCollection? Clone(DataColumnCollection dbColumns)
     {
       DataColumnCollection? retDbColumns = null;
 
-      ArgumentDataTable(dataTable);
-
-      if (LJC.HasColumns(dataTable))
+      if (HasColumns(dbColumns))
       {
         retDbColumns = CreateColumns();
-        foreach (DataColumn dbColumn in dataTable.Columns)
+        foreach (DataColumn dbColumn in dbColumns)
         {
-          var dbColumnClone = Clone(dbColumn);
+          var dbColumnClone = LJCDbColumn.Clone(dbColumn);
           if (dbColumnClone != null)
           {
             retDbColumns.Add(dbColumnClone);
@@ -52,31 +31,54 @@ namespace LJCDataAccess5
       return retDbColumns;
     }
 
+    // Creates a PropertyNames list from a DataColumns collection.
+    /// <include path='items/GetPropertyNames/*' file='Doc/TableData.xml'/>
+    public static List<string>? ColumnNames(DataColumnCollection dbColumns)
+    {
+      List<string>? retValue = null;
+
+      if (HasColumns(dbColumns))
+      {
+        //retValue = new List<string>();
+        retValue = [];
+        foreach (DataColumn dbColumn in dbColumns)
+        {
+          retValue.Add(dbColumn.ColumnName);
+        }
+      }
+      return retValue;
+    }
+
     // Returns a set of DataColumns that match the supplied list.
     /// <include path='items/GetDataColumns/*' file='Doc/TableData.xml'/>
     public static DataColumnCollection? Columns(DataColumnCollection dbColumns
-      , List<string> columnNames)
+      , List<string>? columnNames = null)
     {
       DataColumnCollection? retDbColumns = null;
 
-      if (HasColumns(dbColumns)
-        && LJC.HasItems(columnNames))
+      if (HasColumns(dbColumns))
       {
-        // Create columns from names.
-        var workTable = new DataTable();
-        foreach (string columnName in columnNames)
+        if (!LJC.HasItems(columnNames))
         {
-          DataColumn? dbColumn = dbColumns[columnName];
-          if (dbColumn != null)
+          retDbColumns = Clone(dbColumns);
+        }
+        else
+        {
+          // Create columns from names.
+          retDbColumns = CreateColumns();
+          foreach (string columnName in columnNames)
           {
-            var dbColumnClone = Clone(dbColumn);
-            if (dbColumnClone != null)
+            DataColumn? dbColumn = dbColumns[columnName];
+            if (dbColumn != null)
             {
-              workTable.Columns.Add(dbColumnClone);
+              var dbColumnClone = LJCDbColumn.Clone(dbColumn);
+              if (dbColumnClone != null)
+              {
+                retDbColumns.Add(dbColumnClone);
+              }
             }
           }
         }
-        retDbColumns = workTable.Columns;
       }
       return retDbColumns;
     }
@@ -109,51 +111,9 @@ namespace LJCDataAccess5
       return retValue;
     }
 
-    // Creates a PropertyNames list from a DataColumns collection.
-    /// <include path='items/GetPropertyNames/*' file='Doc/TableData.xml'/>
-    public static List<string>? PropertyNames(DataColumnCollection dbColumns)
-    {
-      List<string>? retValue = null;
-
-      if (HasColumns(dbColumns))
-      {
-        //retValue = new List<string>();
-        retValue = [];
-        foreach (DataColumn dbColumn in dbColumns)
-        {
-          retValue.Add(dbColumn.ColumnName);
-        }
-      }
-      return retValue;
-    }
-
-    // Creates a DbColumn object from a DataColumn object.
-    /// <include path='items/GetDbColumn/*' file='Doc/TableData.xml'/>
-    // Note: Also in LJCDBMessage.DbResult
-    public static LJCDataColumn? ToDataColumn(DataColumn? dbColumn)
-    {
-      LJCDataColumn? retColumn = null;
-
-      if (dbColumn != null)
-      {
-        retColumn = new LJCDataColumn()
-        {
-          AllowDBNull = dbColumn.AllowDBNull,
-          AutoIncrement = dbColumn.AutoIncrement,
-          Caption = dbColumn.ColumnName,
-          ColumnName = dbColumn.ColumnName,
-          DataTypeName = dbColumn.DataType.Name,
-          MaxLength = dbColumn.MaxLength,
-          PropertyName = dbColumn.ColumnName,
-          Unique = dbColumn.Unique
-        };
-      }
-      return retColumn;
-    }
-
-    // Creates a DbColumns collection from a DataColumns collection.
+    // Creates an LJCDataColumns collection from a DataColumnCollection.
     /// <summary>
-    /// Creates a DbColumns collection from a DataColumns collection.
+    /// Creates an LJCDataColumns collection from a DataColumnCollection.
     /// </summary>
     /// <param name="dataColumns"></param>
     /// <returns></returns>
@@ -168,7 +128,7 @@ namespace LJCDataAccess5
         retColumns = [];
         foreach (DataColumn dbColumn in dbColumns)
         {
-          var newDbColumn = ToDataColumn(dbColumn);
+          var newDbColumn = LJCDbColumn.ToDataColumn(dbColumn);
           if (newDbColumn != null)
           {
             retColumns.Add(newDbColumn);
@@ -176,17 +136,6 @@ namespace LJCDataAccess5
         }
       }
       return retColumns;
-    }
-
-    // Checks the DataTable argument.
-    private static bool ArgumentDataTable(DataTable dataTable)
-    {
-      if (null == dataTable)
-      {
-        var message = "Missing argument dataTable.";
-        throw new ArgumentNullException(message);
-      }
-      return true;
     }
     #endregion
   }
