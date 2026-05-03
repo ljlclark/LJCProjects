@@ -9,7 +9,7 @@ namespace LJCDBMessage5
   /// <summary>Methods to set data in HTML elements.</summary>
   public class LJCDataHTMLTable
   {
-    #region Static DataTable Functions
+    #region Static DataTable Methods
 
     // Create table headings from a DataTable.
     /// <include path='items/DataTableHeadings/*' file='Doc/HTMLTableData.xml'/>
@@ -99,7 +99,7 @@ namespace LJCDBMessage5
     }
     #endregion
 
-    #region Static Data Object Functions
+    #region Static Data Object Methods
 
     // Create table headings from a Data Object.
     /// <include path='items/DataHeadings/*' file='Doc/HTMLTableData.xml'/>
@@ -227,7 +227,7 @@ namespace LJCDBMessage5
     }
     #endregion
 
-    #region Static DbResult Functions.
+    #region Static DbResult Methods
 
     // Create table headings from a DbResult.
     /// <include path='items/ResultHeadings/*' file='Doc/HTMLTableData.xml'/>

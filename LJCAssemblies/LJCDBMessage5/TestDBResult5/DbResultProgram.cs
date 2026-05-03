@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DBRequestProgram.cs
+// DBResultProgram.cs
 using LJCNetCommon5;
 
-namespace TestDBRequest5
+namespace TestDBResult5
 {
   // The entry class.
-  internal class DBRequestProgram
+  internal class DbResultProgram
   {
     // The entry method.
     static void Main()

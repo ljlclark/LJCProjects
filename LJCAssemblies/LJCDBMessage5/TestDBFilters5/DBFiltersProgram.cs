@@ -14,19 +14,62 @@ namespace TestDBFilters5
       Console.WriteLine();
       Console.WriteLine("*** LJCDBFilters ***");
 
-      // Test Methods
-      Test();
+      // Static Methods
+      //SQLSoundexFilters();
+      //SoundeFilters();
+
+      // Constructor Methods
+      ConstructorCopy();
+
+      // Collection Methods
+      Add1();
+      Add2();
+      Clone();
 
       Console.WriteLine();
       Console.WriteLine("Press any key to continue...");
       Console.ReadKey();
     }
 
-    #region Test Methods
+    #region Constructor Methods
 
-    private static void Test()
+    // The Copy constructor.
+    private static void ConstructorCopy()
     {
-      var methodName = "Test()";
+      var methodName = "ConstructorCopy()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write($"{methodName}", result, compare);
+    }
+    #endregion
+
+    #region Collection Methods
+
+    // Creates and adds the element from the supplied values.
+    private static void Add1()
+    {
+      var methodName = "Add1()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write($"{methodName}", result, compare);
+    }
+
+    // Creates and adds the element from the supplied values.
+    private static void Add2()
+    {
+      var methodName = "Add2()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write($"{methodName}", result, compare);
+    }
+
+    // Creates and returns a clone of the object.
+    private static void Clone()
+    {
+      var methodName = "Clone()";
 
       var result = "Not Implemented";
       var compare = "";

@@ -45,7 +45,7 @@ namespace TestDataCommon5
 
       var result = "Not Implemented";
       var compare = "";
-      //TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon?.Write($"{methodName}", result, compare);
     }
 
     // Sets the data adapter table mappings.
@@ -55,7 +55,7 @@ namespace TestDataCommon5
 
       var result = "Not Implemented";
       var compare = "";
-      //TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon?.Write($"{methodName}", result, compare);
     }
     #endregion
 
@@ -74,7 +74,7 @@ namespace TestDataCommon5
       TestCommon?.Write($"{methodName}1", result, compare);
 
       // With or without time.
-      dateText = "1492/1/25 09:00:00 AM";
+      //dateText = "1492/1/25 09:00:00 AM";
       // Or
       dateText = "1/25/1492 09:00:00 AM";
       dateTime = LJCDataCommon.GetDbDate(dateText);

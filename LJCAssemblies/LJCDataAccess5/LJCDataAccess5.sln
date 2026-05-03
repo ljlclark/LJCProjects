@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProviderFactory5", "Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMySqlDataAccess5", "TestMySqlDataAccess5\TestMySqlDataAccess5.csproj", "{F0A9FA3D-D739-49D7-B62D-4DC25304E46B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTableMapping5", "TestTableMapping5\TestTableMapping5.csproj", "{89C2C738-B5E5-42E5-93A2-3577BA5254F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{F0A9FA3D-D739-49D7-B62D-4DC25304E46B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0A9FA3D-D739-49D7-B62D-4DC25304E46B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0A9FA3D-D739-49D7-B62D-4DC25304E46B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89C2C738-B5E5-42E5-93A2-3577BA5254F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C2C738-B5E5-42E5-93A2-3577BA5254F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C2C738-B5E5-42E5-93A2-3577BA5254F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C2C738-B5E5-42E5-93A2-3577BA5254F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

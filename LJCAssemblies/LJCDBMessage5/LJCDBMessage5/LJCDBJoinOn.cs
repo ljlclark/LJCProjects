@@ -8,7 +8,7 @@ namespace LJCDBMessage5
   /// <summary>Represents a Join On definition.</summary>
   public class LJCDBJoinOn
   {
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>

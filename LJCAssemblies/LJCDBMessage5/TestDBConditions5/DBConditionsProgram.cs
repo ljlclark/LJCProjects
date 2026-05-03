@@ -15,19 +15,58 @@ namespace TestDBConditions5
       Console.WriteLine();
       Console.WriteLine("*** LJCDBConditions ***");
 
-      // Test Methods
-      Test();
+      // Constructor Methods
+      ConstructorCopy();
+
+      // Collection Methods
+      Add();
+      Clone();
+      HasItems();
 
       Console.WriteLine();
       Console.WriteLine("Press any key to continue...");
       Console.ReadKey();
     }
 
-    #region Test Methods
+    #region Constructor Methods
 
-    private static void Test()
+    // The Copy constructor.
+    private static void ConstructorCopy()
     {
-      var methodName = "Test()";
+      var methodName = "ConstructorCopy()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write($"{methodName}", result, compare);
+    }
+    #endregion
+
+    #region Collection Methods
+
+    // Creates and adds the element from the supplied values.
+    private static void Add()
+    {
+      var methodName = "Add()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write($"{methodName}", result, compare);
+    }
+
+    // Creates and returns a clone of the object.
+    private static void Clone()
+    {
+      var methodName = "Clone()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon?.Write($"{methodName}", result, compare);
+    }
+
+    // Checks if the collection has items.
+    private static void HasItems()
+    {
+      var methodName = "HasItems()";
 
       var result = "Not Implemented";
       var compare = "";

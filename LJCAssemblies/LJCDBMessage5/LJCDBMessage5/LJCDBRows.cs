@@ -53,7 +53,7 @@ namespace LJCDBMessage5
 
     #region Collection Methods
 
-    // Adds the specified object.
+    // Adds the supplied object.
     /// <include path='items/Add/*' file='Doc/DbRows.xml'/>
     public LJCDBRow? Add(LJCDataValues dataValues)
     {

@@ -10,7 +10,7 @@ namespace LJCDBMessage5
   /// <include path='items/DbFilters/*' file='Doc/DbFilters.xml'/>
   public class LJCDBFilters : List<LJCDBFilter>
   {
-    #region Static Functions
+    #region Static Methods
 
     // Creates the SQL Soundex filters from the supplied values.
     /// <include path='items/SQLSoundexFilters/*' file='Doc/DbFilters.xml'/>

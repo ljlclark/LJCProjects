@@ -8,7 +8,7 @@ namespace LJCDBMessage5
   /// <summary>Represents a filter condition.</summary>
   public class LJCDBCondition
   {
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
