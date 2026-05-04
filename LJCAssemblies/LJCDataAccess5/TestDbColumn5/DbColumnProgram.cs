@@ -46,7 +46,7 @@ namespace TestDbColumn5
       };
 
       // Test Method
-      var cloneColumn = LJCDbColumn.Clone(dbColumn);
+      var cloneColumn = LJCTableColumn.Clone(dbColumn);
       var result = "";
       if (cloneColumn != null)
       {
@@ -73,7 +73,7 @@ namespace TestDbColumn5
       };
 
       // Test Method
-      var dataColumn = LJCDbColumn.ToDataColumn(dbColumn);
+      var dataColumn = LJCTableColumn.ToDataColumn(dbColumn);
       var result = "";
       if (dataColumn != null)
       {

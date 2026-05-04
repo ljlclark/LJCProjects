@@ -17,6 +17,10 @@ namespace LJCDBClientLib5
     /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public LJCStandardUISettings()
     {
+      ConnectionString = "";
+      mDataConfigName = "";
+      DbServiceRef = new LJCDbServiceRef();
+      mExportTextExtension = ".txt";
     }
     #endregion
 

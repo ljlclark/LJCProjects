@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<members>
+  <!-- Class -->
+  <LJCTableColumns>
+    <summary>
+      Contains methods to complement a DataColumnCollection object.
+    </summary>
+  </LJCTableColumns>
+  
+  <!-- Static Methods -->
+  <Clone>
+    <summary>
+      Clones a DataColumn collection.
+    </summary>
+    <param name="dbColumns"></param>
+  </Clone>
+  <ColumnNames>
+    <summary>
+      Creates a PropertyNames list from a DataColumn collection.
+    </summary>
+    <param name="dbColumns"></param>
+    <returns>
+      A collection of property names.
+    </returns>
+  </ColumnNames>
+  <Columns>
+    <summary>
+      Returns a collection of DataColumns that match the supplied list.
+    </summary>
+    <param name="dbColumns"></param>
+    <param name="columnNames"></param>
+  </Columns>
+  <CreateColumns>
+    <summary>
+      Creates a new DataColumnCollection object.
+    </summary>
+  </CreateColumns>
+  <HasColumns>
+    <summary>
+      Checks the DataColumnCollection object for items.
+    </summary>
+    <param name="dataColumns">The DataColumnCollection reference.</param>
+    <returns>true if there are items; otherwise false.</returns>
+  </HasColumns>
+  <ToDataColumns>
+    <summary>
+      Creates an LJCDataColumns collection from a DataColumnCollection.
+    </summary>
+    <param name="dataColumns"></param>
+    <returns></returns>
+  </ToDataColumns>
+</members>

@@ -91,7 +91,7 @@ namespace LJCDBClientLib5
       if (LJC.HasItems(keyColumns))
       {
         // GetDataTable sets SQLStatement.
-        retTable = GetDataTable(keyColumns, DbAssignedColumns);
+        retTable = Load(keyColumns, DbAssignedColumns);
         SQLStatement = $"{addSQLStatement}\r\n{SQLStatement}";
       }
       return retTable;
@@ -110,7 +110,7 @@ namespace LJCDBClientLib5
 
     // Gets a DataTable object.
     /// <include path='items/GetDataTable/*' file='Doc/SQLManager.xml'/>
-    public DataTable? GetDataTable(LJCDataColumns keyColumns
+    public DataTable? Load(LJCDataColumns keyColumns
       , List<string>? propertyNames = null, LJCDBFilters? filters = null
       , LJCDBJoins? joins = null)
     {
@@ -120,6 +120,21 @@ namespace LJCDBClientLib5
       // Table Column Names or the SQL rename 'AS' name.
       var retValue = mDataAccess.GetDataTable(SQLStatement);
       return retValue;
+    }
+
+    // Updates the record.
+    /// <include path='items/Update/*' file='Doc/SQLManager.xml'/>
+    public void Update(object dataObject, LJCDataColumns keyColumns
+      , List<string>? propertyNames = null, LJCDBFilters? filters = null)
+    {
+      LJC.CheckArgument<object>(dataObject);
+
+      SQLStatement = CreateUpdateSQL(dataObject, keyColumns, propertyNames
+        , filters);
+      if (LJC.HasValue(SQLStatement))
+      {
+        AffectedCount = mDataAccess.ExecuteNonQuery(SQLStatement);
+      }
     }
 
     // Maps the column property and rename values.
@@ -146,21 +161,6 @@ namespace LJCDBClientLib5
         {
           LookupColumnNames.Add(propertyName);
         }
-      }
-    }
-
-    // Updates the record.
-    /// <include path='items/Update/*' file='Doc/SQLManager.xml'/>
-    public void Update(object dataObject, LJCDataColumns keyColumns
-      , List<string>? propertyNames = null, LJCDBFilters? filters = null)
-    {
-      LJC.CheckArgument<object>(dataObject);
-
-      SQLStatement = CreateUpdateSQL(dataObject, keyColumns, propertyNames
-        , filters);
-      if (LJC.HasValue(SQLStatement))
-      {
-        AffectedCount = mDataAccess.ExecuteNonQuery(SQLStatement);
       }
     }
     #endregion
@@ -199,10 +199,10 @@ namespace LJCDBClientLib5
       var dataTable = mDataAccess.GetSchemaOnly(sql);
       if (dataTable != null)
       {
-        var dbColumns = LJCDbColumns.Clone(dataTable);
+        var dbColumns = LJCTableColumns.Clone(dataTable.Columns);
         if (dbColumns != null)
         {
-          var baseDefinition = LJCDbColumns.ToDataColumns(dbColumns);
+          var baseDefinition = LJCTableColumns.ToDataColumns(dbColumns);
           if (baseDefinition != null)
           {
             BaseDefinition = baseDefinition;

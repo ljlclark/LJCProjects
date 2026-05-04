@@ -16,7 +16,7 @@ namespace LJCDBClientLib5
     /// <include path='items/CreateRequest/*' file='Doc/ManagerCommon.xml'/>
     public static LJCDBRequest CreateRequest(RequestType requestType
       , string? tableName, LJCDataColumns? requestColumns
-      , string dataConfigName, string schemaName
+      , string dataConfigName, string? schemaName = null
       , LJCDataColumns? keyColumns = null, LJCDBFilters? filters = null
       , LJCDBJoins? joins = null)
     {

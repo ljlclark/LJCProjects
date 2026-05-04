@@ -20,7 +20,6 @@ namespace LJCDBClientLib5
       mDataConfigName = "";
       DataDefinition = [];
       LookupColumnNames = [];
-      mSchemaName = "";
       SQLStatement = "";
       mTableName = "";
 
@@ -39,7 +38,8 @@ namespace LJCDBClientLib5
         && LJC.HasValue(TableName))
       {
         DataDefinition = CreateDataDefinition();
-        LookupColumnNames = new List<string>();
+        //LookupColumnNames = new List<string>();
+        LookupColumnNames = [];
       }
     }
     #endregion
@@ -50,7 +50,7 @@ namespace LJCDBClientLib5
     /// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
     public LJCDBResult? Add(object dataObject, List<string>? propertyNames = null)
     {
-      LJCDBResult? retValue = null;
+      LJCDBResult? retValue;
 
       // The record must not contain a value for DB Assigned columns.
       var dataColumns = LJCDBCommon.RequestDataColumns(dataObject, BaseDefinition
@@ -83,11 +83,11 @@ namespace LJCDBClientLib5
 
     // Executes the supplied request.
     /// <include path='items/ExecuteRequest/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
-    public LJCDBResult? ExecuteRequest(LJCDBRequest? dbRequest)
+    public LJCDBResult? ExecuteRequest(LJCDBRequest dbRequest)
     {
-      LJCDBResult? retValue = null;
+      LJCDBResult? retValue;
 
-      retValue = mDbDataAccess.Execute(dbRequest);
+      retValue = mDbDataAccess?.Execute(dbRequest);
       if (retValue != null)
       {
         AffectedCount = retValue.AffectedRecords;
@@ -154,7 +154,7 @@ namespace LJCDBClientLib5
     {
       foreach (string propertyName in propertyNames)
       {
-        string existingName = LookupColumnNames.Find(x => x == propertyName);
+        string? existingName = LookupColumnNames.Find(x => x == propertyName);
         if (null == existingName)
         {
           LookupColumnNames.Add(propertyName);
@@ -172,10 +172,9 @@ namespace LJCDBClientLib5
 
       var dbRequest = new LJCDBRequest(RequestType.SchemaOnly, TableName);
       var dbResult = ExecuteRequest(dbRequest);
-      if (dbResult != null
-        && LJCDBResult.HasColumns(dbResult))
+      if (LJCDBResult.HasColumns(dbResult))
       {
-        BaseDefinition = dbResult.Columns.Clone();
+        BaseDefinition = dbResult!.Columns!.Clone();
         retColumns = BaseDefinition.Clone();
       }
       return retColumns;
@@ -194,23 +193,23 @@ namespace LJCDBClientLib5
     public string DataConfigName
     {
       get { return mDataConfigName; }
-      private set { mDataConfigName = LJCNetString.InitString(value); }
+      private set { mDataConfigName = value.Trim(); }
     }
     private string mDataConfigName;
 
     /// <summary>Gets the data definition columns collection.</summary>
-    public LJCDataColumns DataDefinition { get; private set; }
+    public LJCDataColumns? DataDefinition { get; private set; }
 
     /// <summary>Gets or sets the LookupColumn names.</summary>
     public List<string> LookupColumnNames { get; set; }
 
     /// <summary>The Schema name.</summary>
-    public string SchemaName
+    public string? SchemaName
     {
       get { return mSchemaName; }
       set { mSchemaName = LJCNetString.InitString(value); }
     }
-    private string mSchemaName;
+    private string? mSchemaName;
 
     /// <summary>Gets or sets the last SQL statement.</summary>
     public string SQLStatement { get; set; }
@@ -219,7 +218,7 @@ namespace LJCDBClientLib5
     public string TableName
     {
       get { return mTableName; }
-      set { mTableName = LJCNetString.InitString(value); }
+      set { mTableName = value.Trim(); }
     }
     private string mTableName;
     #endregion
