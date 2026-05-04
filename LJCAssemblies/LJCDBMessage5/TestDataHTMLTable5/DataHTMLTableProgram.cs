@@ -11,9 +11,9 @@ namespace TestDataHTMLTable5
     // The entry method.
     static void Main(string[] args)
     {
-      TestCommon = new LJCTestCommon("LJCDataAccess");
+      TestCommon = new LJCTestCommon("LJCDataHTML");
       Console.WriteLine();
-      Console.WriteLine("*** LJCDataAccess ***");
+      Console.WriteLine("*** LJCDataHTML ***");
 
       // Static DataTable Methods
       DataTableHeadings();

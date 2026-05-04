@@ -11,9 +11,9 @@ namespace TestDBCommon5
     // The entry method.
     static void Main(string[] args)
     {
-      TestCommon = new LJCTestCommon("LJCTest");
+      TestCommon = new LJCTestCommon("LJCDBCommon");
       Console.WriteLine();
-      Console.WriteLine("*** LJCTest ***");
+      Console.WriteLine("*** LJCDBCommon ***");
 
       // Test Methods
       Test();
