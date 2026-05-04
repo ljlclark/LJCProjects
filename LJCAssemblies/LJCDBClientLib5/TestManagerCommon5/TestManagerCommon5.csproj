@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="LJCNetCommon5">
+      <HintPath>..\External\LJCNetCommon5.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

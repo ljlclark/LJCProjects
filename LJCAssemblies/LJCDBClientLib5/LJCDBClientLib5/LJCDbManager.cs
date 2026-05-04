@@ -4,7 +4,6 @@
 using LJCDBDataAccess5;
 using LJCDBMessage5;
 using LJCNetCommon5;
-using System.Collections.Generic;
 
 namespace LJCDBClientLib5
 {

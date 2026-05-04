@@ -1,19 +1,19 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataManagerProgram.cs
+// DbServiceRefProgram.cs
 using LJCNetCommon5;
 
-namespace TestDataManager5
+namespace TestDbServiceRef5
 {
   // The entry class.
-  internal class DataManagerProgram
+  internal class DbServiceRefProgram
   {
     // The entry method.
     static void Main()
     {
-      TestCommon = new LJCTestCommon("LJCDataManager");
+      TestCommon = new LJCTestCommon("LJCDbServiceRef");
       Console.WriteLine();
-      Console.WriteLine("*** LJCDataManager ***");
+      Console.WriteLine("*** LJCDbServiceRef ***");
 
       Console.WriteLine();
       Console.WriteLine("Press any key to continue...");
