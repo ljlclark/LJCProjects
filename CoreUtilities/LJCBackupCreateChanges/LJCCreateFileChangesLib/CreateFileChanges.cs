@@ -71,7 +71,7 @@ namespace LJCCreateFileChangesLib
       var sourceLines = File.ReadAllLines(sourceSpec);
       var targetLines = File.ReadAllLines(targetSpec);
 
-      var sourceFileName = Path.GetFileName(sourceSpec);
+      //var sourceFileName = Path.GetFileName(sourceSpec);
       bool copy = false;
       if (sourceLines.Length != targetLines.Length)
       {
@@ -113,6 +113,7 @@ namespace LJCCreateFileChangesLib
     // Creates a "Copy" FileChange command for missing or changed files.
     private void CopyMissingOrChangedFiles(string filter)
     {
+      // Get the source folder from end of a path.
       var folders = mSourceRoot.Split('\\');
       var sourceCodeLineFolder = folders[folders.Length - 1];
       var filterPath = GetFilterPath(ref filter);
@@ -169,6 +170,7 @@ namespace LJCCreateFileChangesLib
     // Creates a "Delete" FileChange command for target files not in the source.
     private void DeleteTargetNoSourceFiles(string filter)
     {
+      // Get the target folder from end of a path.
       var folders = mTargetRoot.Split('\\');
       var targetCodeLineFolder = folders[folders.Length - 1];
       var filterPath = GetFilterPath(ref filter);
