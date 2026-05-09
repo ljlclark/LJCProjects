@@ -48,6 +48,19 @@
       </code>
     </example>
   </DelimitedString>
+  <Selection>
+    <summary>
+      Retrieves the selection value.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>The selection text.</returns>
+  </Selection>
+  <SelectionLength>
+    <summary>
+      Retrieves the selection length.
+    </summary>
+    <returns>The selection length.</returns>
+  </SelectionLength>
   <StringWithDelimiters>
     <summary>
       Retrieves a string including the supplied delimiters.

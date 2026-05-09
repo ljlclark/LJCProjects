@@ -150,6 +150,35 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // Retrieve the selection string.
+    /// <include path="members/Selection/*" file="Doc/LJCParser.xml"/>
+    public string Selection(string text)
+    {
+      string retValue = null;
+
+      var length = SelectionLength();
+      if (length > 0)
+      {
+        retValue = text.Substring(BeginIndex, length);
+      }
+      return retValue;
+    }
+
+    // Retrieve the selection length.
+    /// <include path="members/Selection/*" file="Doc/LJCParser.xml"/>
+    public int SelectionLength()
+    {
+      var retValue = 0;
+
+      if (BeginIndex >= 0
+        && EndIndex >= 0
+        && BeginIndex < EndIndex)
+      {
+        retValue = EndIndex - BeginIndex;
+      }
+      return retValue;
+    }
+
     // Gets the string including the supplied delimiters.
     /// <include path="members/StringWithDelimiters/*" file="Doc/LJCParser.xml"/>
     public string StringWithDelimiters(string text, string beginDelimiter = null
@@ -176,7 +205,6 @@ namespace LJCNetCommon
 
     /// <summary>The delimited string begin index.</summary>
     public int BeginIndex { get; private set; }
-
 
     /// <summary>The delimited string end index.</summary>
     public int EndIndex { get; private set; }

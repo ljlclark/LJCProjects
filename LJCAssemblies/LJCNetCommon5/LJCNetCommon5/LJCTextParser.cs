@@ -97,6 +97,35 @@ namespace LJCNetCommon5
       return retValue;
     }
 
+    // Retrieve the selection string.
+    /// <include path="members/Selection/*" file="Doc/LJCTextParser.xml"/>
+    public string? Selection(string text)
+    {
+      string? retValue = null;
+
+      var length = SelectionLength();
+      if (length > 0)
+      {
+        retValue = text.Substring(BeginIndex, length);
+      }
+      return retValue;
+    }
+
+    // Retrieve the selection length.
+    /// <include path="members/SelectionLength/*" file="Doc/LJCTextParser.xml"/>
+    public int SelectionLength()
+    {
+      var retValue = 0;
+
+      if (BeginIndex >= 0
+        && EndIndex >= 0
+        && BeginIndex < EndIndex)
+      {
+        retValue = EndIndex - BeginIndex;
+      }
+      return retValue;
+    }
+
     // Retrieves a string including the supplied delimiters.
     /// <include path="members/StringWithDelimiters/*" file="Doc/LJCTextParser.xml"/>
     public string? StringWithDelimiters(string text, string? beginDelimiter = null

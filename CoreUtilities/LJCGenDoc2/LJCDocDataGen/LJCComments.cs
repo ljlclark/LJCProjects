@@ -3,6 +3,8 @@
 // LJCComments.cs
 using LJCDocDataDAL;
 using LJCNetCommon;
+using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace LJCDocDataGenLib
 {
@@ -50,28 +52,44 @@ namespace LJCDocDataGenLib
     /// <include path="members/SetComment/*" file="Doc/LJCComments.xml"/>
     public void SetComment(string line, string codeFileSpec = null)
     {
-      if (codeFileSpec != null)
+      var trimLine = line.Trim();
+
+      var success = true;
+      if (!trimLine.StartsWith("///"))
+      {
+        success = false;
+      }
+
+      if (success
+        && codeFileSpec != null)
       {
         CodeFileSpec = codeFileSpec;
       }
 
-      if (!IsContinue)
+      if (success
+        && !IsContinue)
       {
-        // New comment.
-        CurrentTagName = LineBeginTagName(line);
+        // Testing
+        if (trimLine.ToLower().Contains("parentgroup"))
+        {
+          Debugger.Break();
+        }
 
-        // Do not clear if possible multiple tags.
+        // New comment.
+        CurrentTagName = LineBeginTagName(trimLine);
+
+        // Do not clear if multiple tags are allowed.
         if ("param" != CurrentTagName
           && "group" != CurrentTagName)
         {
           ClearTagComment();
         }
 
-        var comment = GetComment(line);
+        var comment = GetComment(trimLine);
         if (CurrentTagName != null)
         {
           SaveComment(comment);
-          if (!HasCurrentEndTag(line))
+          if (!HasCurrentEndTag(trimLine))
           {
             // No end tag so start Continue comment.
             IsContinue = true;
@@ -81,12 +99,12 @@ namespace LJCDocDataGenLib
       else
       {
         // Continue comment.
-        if (HasCurrentEndTag(line))
+        if (HasCurrentEndTag(trimLine))
         {
           // Has end tag so end Continue comment.
           IsContinue = false;
         }
-        var comment = GetComment(line);
+        var comment = GetComment(trimLine);
         SaveComment(comment);
       }
     }
@@ -153,7 +171,8 @@ namespace LJCDocDataGenLib
       var beginIndex = -1;
       if (beginTag != null)
       {
-        beginIndex = line.IndexOf(beginTag);
+        // *** Next Statement *** Change
+        beginIndex = line.ToLower().IndexOf(beginTag);
       }
       if (beginIndex < 0)
       {
@@ -210,7 +229,13 @@ namespace LJCDocDataGenLib
           trimEnd = false;
         }
         var parser = new LJCParser();
-        retComment = parser.DelimitedString(line, beginTag, endTag);
+        // *** Begin *** Change
+        retComment = parser.DelimitedString(line.ToLower(), beginTag, endTag);
+        if (retComment != null)
+        {
+          retComment = parser.Selection(line);
+        }
+        // *** End ***
         if (trimEnd)
         {
           retComment = retComment.TrimEnd();
@@ -409,8 +434,9 @@ namespace LJCDocDataGenLib
       var retValue = false;
 
       var endTag = EndTag();
+      // *** Next Statement *** Change
       if (endTag != null
-        && line.LastIndexOf(endTag) >= 0)
+        && line.ToLower().LastIndexOf(endTag) >= 0)
       {
         retValue = true;
       }

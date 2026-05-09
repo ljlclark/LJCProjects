@@ -72,7 +72,10 @@ namespace LJCGenDoc2
       // Testing
       if (retShowSyntax)
       {
-        args = new string[] { "SourceList.txt" };
+        args = new string[]
+        {
+          "SourceList.txt",
+        };
         retShowSyntax = false;
       }
 

@@ -1,0 +1,8 @@
+// LJCGenDoc2\bin\Debug
+OutputPath: ../../CodeDoc/HTML
+DocDataXMLPath: ../XMLDocData
+GenDataXMLPath: ../XMLGenData
+WriteDocDataXML: true
+WriteGenDataXML: true
+
+../../

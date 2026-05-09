@@ -193,7 +193,7 @@ namespace LJCDocDataGenLib
           tagName = parser.DelimitedString(tagName, null, " ");
         }
 
-        switch (tagName)
+        switch (tagName.ToLower())
         {
           case "code":
           case "group":

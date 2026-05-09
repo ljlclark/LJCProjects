@@ -18,6 +18,8 @@ namespace LJCDocDataGenLib
     /// <include path="members/Constructor/*" file="Doc/LJCDocDataGen.xml"/>
     public LJCDocDataGen()
     {
+      // Collects the comments for the next DocData XML output point
+      // which is a Lib, Class, Method or Property definition.
       Comments = new LJCComments();
       DocDataFile = null;
       LibName = null;
@@ -45,6 +47,8 @@ namespace LJCDocDataGenLib
       var fileName = Path.GetFileName(codeFileSpec);
       LibName = Path.GetFileNameWithoutExtension(codeFileSpec);
       Comments.LibName = LibName;
+
+      // Create DocData object root.
       DocDataFile = new LJCDocDataFile(LibName);
 
       retXMLString = ProcessCode(codeFileSpec);
@@ -85,18 +89,13 @@ namespace LJCDocDataGenLib
           while (LineIndex < Lines.Length)
           {
             Line = Lines[LineIndex];
-            // *** Begin *** Add
-            NextLine = null;
-            var nextIndex = LineIndex + 1;
-            var maxIndex = Lines.Length - 1;
-            if (nextIndex < maxIndex)
-            {
-              NextLine = Lines[LineIndex + 1];
-            }
-            // *** End ***
+
+            // Get potential continuation line if available -
+            // before incrementing for next line.
+            ContinueLine = GetContinueLine(LineIndex);
             LineIndex++;
 
-            // Process XML Comment, empty line and Comment Line.
+            // Process LibName:, XML Comment, empty line and Comment Line.
             if (LineProcessed(codeFileSpec))
             {
               continue;
@@ -109,8 +108,8 @@ namespace LJCDocDataGenLib
               continue;
             }
 
-            // Process Class, Method or Property.
-            ProcessItem();
+            // Process Lib, Class, Method or Property.
+            SetValuesItem();
           }
         }
       }
@@ -126,56 +125,80 @@ namespace LJCDocDataGenLib
 
     #region Private Processing Methods
 
-    // Process XML Comment or Skip Null line and Comment Line.
+    private string GetContinueLine(int index)
+    {
+      string retLine = null;
+
+      var nextIndex = index + 1;
+      var maxIndex = Lines.Length - 1;
+      if (nextIndex < maxIndex)
+      {
+        retLine = Lines[nextIndex];
+      }
+      return retLine;
+    }
+
+    // Check for LibName: XML comment.
+    private bool IsLibName(string line)
+    {
+      var retValue = false;
+
+      var trimLine = line.Trim();
+      if (trimLine.StartsWith("///"))
+      {
+        var tokens = NetString.Split(trimLine, " ");
+        if (tokens.Length > 0)
+        {
+          if ("libname:" == tokens[1].ToLower())
+          {
+            retValue = true;
+          }
+        }
+      }
+      return retValue;
+    }
+
+    // Get XML Comment or skip blank line, LibName: XML comment
+    // and Comment Line.
     private bool LineProcessed(string codeFileSpec)
     {
       var retProcessed = false;
 
-      // Process blank line.
+      // Skip blank line.
       if (!NetString.HasValue(Line))
       {
         retProcessed = true;
       }
 
-      string trimLine = null;
-
-      // Process XML comments.
-      if (!retProcessed)
+      // Skip LibName: XML comment.
+      var isLibName = false;
+      if (!retProcessed
+        && IsLibName(Line))
       {
-        trimLine = Line.Trim();
-        if (trimLine.StartsWith("///"))
-        {
-          var tokens = NetString.Split(trimLine, " ");
-          if (tokens.Length > 0)
-          {
-            if ("libname:" == tokens[1].ToLower())
-            {
-              ProcessLib();
-              retProcessed = true;
-            }
-          }
-
-          if (!retProcessed)
-          {
-            Comments.SetComment(trimLine, codeFileSpec);
-            retProcessed = true;
-          }
-        }
+        isLibName = true;
       }
 
-      // Process comment.
-      if (!retProcessed)
+      // Collect XML comments.
+      // *** Next Statement *** Change 5/6/26
+      if (!retProcessed
+        && !isLibName
+        && Line.Trim().StartsWith("///"))
       {
-        if (trimLine.StartsWith("//"))
-        {
-          retProcessed = true;
-        }
+        Comments.SetComment(Line, codeFileSpec);
+        retProcessed = true;
+      }
+
+      // Skip comment.
+      if (!retProcessed
+        && Line.Trim().StartsWith("//"))
+      {
+        retProcessed = true;
       }
       return retProcessed;
     }
 
     // Copy the Class XML comments into the DocData objects.
-    private void ProcessClass()
+    private void SetValuesClass()
     {
       if (NetString.HasValue(ClassName))
       {
@@ -196,26 +219,37 @@ namespace LJCDocDataGenLib
       }
     }
 
-    // Processes the Class, Function or Property.
-    private void ProcessItem()
+    // Sets the DocData values for the Class, Method or Property.
+    private void SetValuesItem()
     {
       var isFound = false;
+
+      // Starts like this so code sections can be processed in any order.
+      if (!isFound
+        && IsLibName(Line))
+      {
+        isFound = true;
+        SetValuesLib();
+      }
 
       if (!isFound)
       {
         var codeParse = new LJCCSParser();
-        var className = codeParse.ClassName(Line);
-        if (NetString.HasValue(className))
+        if (Line.Contains("class "))
         {
-          isFound = true;
-          ClassName = className;
-          ProcessClass();
+          var className = codeParse.ClassName(Line);
+          if (NetString.HasValue(className))
+          {
+            isFound = true;
+            ClassName = className;
+            SetValuesClass();
+          }
         }
       }
 
       if (!isFound)
       {
-        var methodName = ProcessMethod();
+        var methodName = SetValuesMethod();
         if (NetString.HasValue(methodName))
         {
           isFound = true;
@@ -224,7 +258,7 @@ namespace LJCDocDataGenLib
 
       if (!isFound)
       {
-        var propertyName = ProcessProperty();
+        var propertyName = SetValuesProperty();
         if (NetString.HasValue(propertyName))
         {
           //isFound = true;
@@ -232,16 +266,16 @@ namespace LJCDocDataGenLib
       }
     }
 
-    // Copy the Lib XML comments into the DocData objects.
-    private void ProcessLib()
+    // Sets the DocData values for the Lib.
+    private void SetValuesLib()
     {
       DocDataFile.Summary = Comments.Summary;
       DocDataFile.Remarks = Comments.Remarks;
       Comments.ClearComments();
     }
 
-    // Copy the Method XML comments into the DocData objects.
-    private string ProcessMethod()
+    // Sets the DocData values for the Method.
+    private string SetValuesMethod()
     {
       string retMethodName = null;
 
@@ -275,7 +309,7 @@ namespace LJCDocDataGenLib
     }
 
     // Copy the Property XML comments into the DocData objects.
-    private string ProcessProperty()
+    private string SetValuesProperty()
     {
       string retPropertyName = null;
 
@@ -283,7 +317,7 @@ namespace LJCDocDataGenLib
       if (classes != null)
       {
         var codeParse = new LJCCSParser();
-        retPropertyName = codeParse.PropertyName(Line, NextLine);
+        retPropertyName = codeParse.PropertyName(Line, ContinueLine);
         if (retPropertyName != null)
         {
           var classItem = classes.Find(x => x.Name == ClassName);
@@ -291,7 +325,8 @@ namespace LJCDocDataGenLib
           {
             InitializeProperties(classItem);
             var properties = classItem.Properties;
-            var property = new LJCDocDataProperty(retPropertyName, Comments.Summary)
+            var property = new LJCDocDataProperty(retPropertyName
+              , Comments.Summary)
             {
               Remarks = Comments.Remarks,
               Returns = Comments.Returns,
@@ -448,7 +483,7 @@ namespace LJCDocDataGenLib
     private string MethodName { get; set; }
 
     // The next process line.
-    private string NextLine { get; set; }
+    private string ContinueLine { get; set; }
 
     // The property name.
     private string PropertyName { get; set; }

@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="GenDoc2Program.cs" />
     <Compile Include="LJCGenDoc2.cs" />
-    <Compile Include="LJCGenDataGen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,11 +63,16 @@
       <Project>{16db341f-2e8c-4623-82bf-9fb9a09e5905}</Project>
       <Name>LJCDocDataGenLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LJCGenDataGenLilb\LJCGenDataGenLib.csproj">
+      <Project>{f3795889-2090-4509-ba4c-b4db7497d538}</Project>
+      <Name>LJCGenDataGenLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\LJCGenDoc2.xml" />
     <Content Include="Doc\GenDoc2Program.xml" />
     <Content Include="Doc\LJCGenDataGen.xml" />
+    <Content Include="SourceList.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

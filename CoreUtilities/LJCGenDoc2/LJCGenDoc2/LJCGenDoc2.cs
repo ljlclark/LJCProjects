@@ -3,6 +3,7 @@
 // LJCGenDoc2.cs
 using LJCDocDataDAL;
 using LJCDocDataGenLib;
+using LJCGenDataGenLib;
 using LJCNetCommon;
 using System.IO;
 
@@ -69,7 +70,7 @@ namespace LJCGenDoc2
           docDataXML = DocDataGen.SerializeDocData(file);
           if (docDataXML != null)
           {
-            //var genDataXML = GenDataGen.SerializeList(docDataXML, file);
+            //var genDataXML = GenDataGen.SerializeGenData(docDataXML, file);
           }
         }
       }
@@ -79,7 +80,7 @@ namespace LJCGenDoc2
         docDataXML = DocDataGen.SerializeDocData(sourcePath);
         if (docDataXML != null)
         {
-          //var genDataXML = GenDataGen.SerializeList(docDataXML, sourcePath);
+          var genDataXML = GenDataGen.SerializeGenData(docDataXML, sourcePath);
         }
       }
     }

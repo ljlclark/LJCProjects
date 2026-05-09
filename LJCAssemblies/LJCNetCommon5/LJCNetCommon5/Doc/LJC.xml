@@ -10,13 +10,13 @@
     </summary>
     <remarks>
       <para>
-        The LJCNetCommon class contains static methods for all .NET program
+        The LJC class contains static methods for all .NET program
         types.
       </para>
     </remarks>
   </LJC>
   
-  <!-- Check Values Functions -->
+  <!-- Check Values Methods -->
   <CheckArgument>
     <summary>
       Check for missing argument of type: string with no value, null,
@@ -37,15 +37,17 @@
       The integer that indicates the order relationship of the objects.
     </returns>
     <remarks>
-      -2    - Neither object is null.&lt;br /&gt;
-      -1    - Null object x precedes object y.&lt;br /&gt;
-      0     - Object x and object y are both null.&lt;br /&gt;
-      1     - Object x follows null object y.
+      LJCNetString.CompareNotNullOrEqual (-2) - Neither object is null.
+      &lt;br /&gt;
+      LJCNetString.CompareLess (-1) - Null object x precedes object y.
+      &lt;br /&gt;
+      LJCNetString.CompareEqual (0) - Object x and object y are both null.
+      &lt;br /&gt;
+      LJCNetString.CompareGreater (1) - Object x follows null object y.
     </remarks>
     <example>
       <code>
-        using System;
-        using LJCNetCommon;
+        using LJCNetCommon5;
         
         /// &lt;summary&gt;Sort and search on Name value.&lt;/summary&gt;
         public class NameComparer : IComparer&lt;ClassName&gt;
@@ -56,14 +58,14 @@
           {
             int retValue;
 
-            retValue = NetCommon.CompareNull(x, y);
-            if (-2 == retValue)
+            retValue = LJC.CompareNull(x, y);
+            if (LJCNetString.CompareNotNullOrEqual == retValue)
             {
-              retValue = NetCommon.CompareNull(x.Name, y.Name);
-              if (-2 == retValue)
+              retValue = NetCommon.CompareNull(x?.Name, y?.Name);
+              if (LJCNetString.CompareNotNullOrEqual == retValue)
               {
                 // Case sensitive.
-                //retValue = x.Name.CompareTo(y.Name);
+                //retValue = x!.Name!.CompareTo(y?.Name);
 
                 // Not case sensitive.
                 retValue = string.Compare(x.Name, y.Name, true);
@@ -746,7 +748,7 @@
     </example>
   </XmlSerializeToString>
 
-  <!-- Configuration Methods -->
+  <!-- Project Config Values Methods -->
   <ConfigBool>
     <summary>
       Retrieves the Config bool value.

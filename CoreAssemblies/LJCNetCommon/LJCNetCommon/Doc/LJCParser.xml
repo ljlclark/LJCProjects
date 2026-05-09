@@ -43,6 +43,19 @@
     </summary>
     <param name="text">The text value.</param>
   </RemoveTags>
+  <Selection>
+    <summary>
+      Retrieve the selection string.
+    </summary>
+    <param name="text">The tet value.</param>
+    <returns>The selected text.</returns>
+  </Selection>
+  <SelectionLength>
+    <summary>
+      Retrieve the selection length.
+    </summary>
+    <returns>The selection length.</returns>
+  </SelectionLength>
   <StringWithDelimiters>
     <summary>
       Get the string including the supplied delimiters.
