@@ -71,7 +71,6 @@ namespace LJCCreateFileChangesLib
       var sourceLines = File.ReadAllLines(sourceSpec);
       var targetLines = File.ReadAllLines(targetSpec);
 
-      //var sourceFileName = Path.GetFileName(sourceSpec);
       bool copy = false;
       if (sourceLines.Length != targetLines.Length)
       {
