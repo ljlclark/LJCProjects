@@ -116,14 +116,14 @@ namespace LJCCreateFileChanges
       , out string targetRoot, out string changesFilespec
       , out string includeFilter, out string skipFiles)
     {
-      // Same defaults as in CreateFileChangesDefaults.txt.
+      // Same defaults as in ChangesArgsLJCProjects.txt.
       var mainPath = @"C:\Users\Les\Documents\Visual Studio 2022";
       sourceRoot = $@"{mainPath}\LJCProjectsDev";
       targetRoot = $@"{mainPath}\LJCProjects";
       changesFilespec = $@"{mainPath}\LJCProjectsDev\CoreUtilities";
       changesFilespec += @"\BackupWatcher\CmdFiles\ChangesLJCProjects.txt";
-      includeFilter = @"*.cs|*.cproj|*.sln|*.config|*.cmd|*.txt|Doc\*.xml";
-      skipFiles = "ChangeFile.txt|?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd";
+      includeFilter = @"*.cs|*.sln|*.cproj|*.Designer.cs|*.resx|*.config|*.cmd|*.txt|Doc\*.xml";
+      skipFiles = "ChangeFile.txt|BackupLog.txt|MissingFolders.txt|?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd";
 
       var fileSpec = "ChangesArgsLJCProjects.txt";
       //var fileSpec = "ChangesArgsLJCPHPProjects.txt";
