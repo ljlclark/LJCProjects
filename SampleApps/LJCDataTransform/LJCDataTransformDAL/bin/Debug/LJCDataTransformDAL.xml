@@ -1,0 +1,2787 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCDataTransformDAL</name>
+    </assembly>
+    <members>
+        <member name="T:LJCDataTransformDAL.DataType">
+            <summary>The DataType table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataType.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataType.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataType.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataType.CompareTo(LJCDataTransformDAL.DataType)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataType.DataTypeID">
+            <summary>Gets or sets the DataTypeID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataType.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataType.SQLName">
+            <summary>Gets or sets the SQLName value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataType.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataType.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataType.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataType.ColumnDataTypeID">
+            <summary>The DataTypeID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataType.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataType.ColumnSQLName">
+            <summary>The SQLName column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataType.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataType.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataType.LengthSQLName">
+            <summary>The SQLName maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataType.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.DataTypes">
+            <summary>Represents a collection of DataType objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataTypes.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataTypes.Add(System.Int16,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataTypes.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataTypes.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.Person">
+            <summary>The Person table Data Record.m</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.Person.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.Person.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.Person.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.Person.CompareTo(LJCDataTransformDAL.Person)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.Person.PersonID">
+            <summary>Gets or sets the Person_ID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.Person.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.Person.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Person.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Person.ColumnPersonID">
+            <summary>The Person ID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Person.PropertyPersonID">
+            <summary>The Person ID value.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Person.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Person.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.Persons">
+            <summary>Represents a collection of Person objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.Persons.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.Persons.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.Persons.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.Persons.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.ProcessStatus">
+            <summary>The ProcessStatus table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatus.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatus.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatus.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatus.CompareTo(LJCDataTransformDAL.ProcessStatus)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessStatus.ProcessStatusID">
+            <summary>Gets or sets the ProcessStatusID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessStatus.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessStatus.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessStatus.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessStatus.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessStatus.ColumnProcessStatusID">
+            <summary>The ProcessStatusID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessStatus.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessStatus.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessStatus.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessStatus.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.ProcessStatusType">
+            <summary>The ProcessStatus values.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessStatusType.Available">
+            <summary>Available for execution.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessStatusType.Active">
+            <summary>Selected for execution.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessStatusType.Inprocess">
+            <summary>In-process</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessStatusType.Ready">
+            <summary>Ready for the next process.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessStatusType.Failed">
+            <summary>Failed</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.ProcessStatuses">
+            <summary>Represents a collection of ProcessStatus objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatuses.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatuses.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatuses.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatuses.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.SourceLayout">
+            <summary>The Layout table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayout.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayout.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayout.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayout.CompareTo(LJCDataTransformDAL.SourceLayout)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceLayout.SourceLayoutID">
+            <summary>Gets or sets the LayoutID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceLayout.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceLayout.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceLayout.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceLayout.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceLayout.ColumnSourceLayoutID">
+            <summary>The LayoutID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceLayout.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceLayout.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceLayout.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceLayout.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.LayoutColumn">
+            <summary>The LayoutColumn table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumn.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumn.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumn.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumn.CompareTo(LJCDataTransformDAL.LayoutColumn)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumn.LayoutColumnID">
+            <summary>Gets or sets the LayoutColumnID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumn.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumn.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumn.SourceLayoutID">
+            <summary>Gets or sets the LayoutID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumn.Sequence">
+            <summary>Gets or sets the Sequence value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumn.DataTypeID">
+            <summary>Gets or sets the DataTypeID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumn.Length">
+            <summary>Gets or sets the Length value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumn.IdentityKey">
+            <summary>Gets or sets the IdentityKey flag.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumn.PrimaryKey">
+            <summary>Gets or sets the PrimaryKey flag.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumn.AllowNull">
+            <summary>Gets or sets the AllowNull flag.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumn.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.ColumnLayoutColumnID">
+            <summary>The LayoutColumnID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.ColumnSourceLayoutID">
+            <summary>The LayoutID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.ColumnSequence">
+            <summary>The Sequence column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.ColumnDataTypeID">
+            <summary>The DataTypeID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.ColumnLength">
+            <summary>The Length column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.ColumnIdentityKey">
+            <summary>The IdentityKey column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.ColumnPrimaryKey">
+            <summary>The PrimaryKey column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.ColumnAllowNull">
+            <summary>The AllowNull column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.LayoutColumn.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.LayoutColumns">
+            <summary>Represents a collection of LayoutColumn objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumns.LJCDeserialize(System.String)">
+            <summary>
+      Deserializes from the specified XML file.
+    </summary><param name="fileSpec">The file specification value.</param><returns>The deserialized object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumns.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumns.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumns.LJCSerialize(System.String)">
+            <summary>
+      Serializes the collection to a file.
+    </summary><param name="fileSpec">The alternate file specification.</param><remarks>
+      Uses the DefaultFileName value if the fileSpec parameter is null.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumns.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumns.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="P:LJCDataTransformDAL.LayoutColumns.LJCDefaultFileName">
+            <summary>Gets the Default File Name.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.SourceLayouts">
+            <summary>Represents a collection of SourceLayout objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayouts.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayouts.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayouts.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayouts.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.DataProcess">
+            <summary>
+      The Process table Data Record.
+    </summary><remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        Provides Data Access Layer (DAL) classes for the LJC.DataTransform
+        programs.
+      </para>
+      <para>
+        The LJCDataTransformDAL library contains Data and Manager classes for
+        presenting an object oriented view of the Data Transform database data.
+      </para>
+      <para>
+        The Manager classes use LJC.DataAccess to communicate
+        with the database.
+      </para>
+      <para>
+        The DataTransformDAL library is part of the LJC.DataTransform solution.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcess.StatusName(System.Int32)">
+            <summary>
+      Returns the ProcessStatus enum name from the enum value.
+    </summary><param name="StatusValue">The ProcessStatus enum value.</param><returns>The ProcessStatus enum name.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcess.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcess.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcess.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcess.CompareTo(LJCDataTransformDAL.DataProcess)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcess.DataProcessID">
+            <summary>Gets or sets the ProcessID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcess.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcess.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcess.ProcessStatusID">
+            <summary>Gets or sets the ProcessStatusID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcess.Sequence">
+            <summary>Gets or sets the join Sequence value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcess.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataProcess.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataProcess.ColumnDataProcessID">
+            <summary>The ProcessID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataProcess.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataProcess.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataProcess.ColumnProcessStatusID">
+            <summary>The ProcessStatusID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataProcess.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataProcess.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataProcess.ColumnSequence">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.MapType">
+            <summary>The MapType values.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.MapType.Merge">
+            <summary>The Merge option.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.MapType.Overwrite">
+            <summary>The Overwrite option.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.MapType.InsertInclude">
+            <summary>The InsertInclude option.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.ProcessGroup">
+            <summary>The ProcessGroup table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroup.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroup.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroup.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroup.CompareTo(LJCDataTransformDAL.ProcessGroup)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessGroup.ProcessGroupID">
+            <summary>Gets or sets the ProcessGroupID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessGroup.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessGroup.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessGroup.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessGroup.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessGroup.ColumnProcessGroupID">
+            <summary>The ProcessGroupID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessGroup.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessGroup.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessGroup.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessGroup.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.ProcessGroupProcess">
+            <summary>The ProcessGroupProcess table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroupProcess.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessGroupProcess.ProcessGroupID">
+            <summary>Gets or sets the ProcessGroupID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessGroupProcess.DataProcessID">
+            <summary>Gets or sets the ProcessID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessGroupProcess.Sequence">
+            <summary>Gets or sets the Sequence value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.ProcessGroupProcess.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessGroupProcess.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessGroupProcess.ColumnProcessGroupID">
+            <summary>The ProcessGroupID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessGroupProcess.ColumnDataProcessID">
+            <summary>The ProcessID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ProcessGroupProcess.ColumnSequence">
+            <summary>The Sequence column name.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.ProcessGroupProcesses">
+            <summary>Represents a collection of ProcessGroupProcess objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroupProcesses.Add(System.Int32,System.Int32,System.Int32)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="processGroupID">The Process Group ID.</param><param name="processID">The Process ID.</param><param name="sequence">The sequence value.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.ProcessGroups">
+            <summary>Represents a collection of ProcessGroup objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroups.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroups.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroups.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroups.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.DataProcesses">
+            <summary>Represents a collection of DataProcess objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcesses.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcesses.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcesses.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcesses.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.DataSource">
+            <summary>The Source table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSource.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSource.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSource.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSource.CompareTo(LJCDataTransformDAL.DataSource)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataSource.DataSourceID">
+            <summary>Gets or sets the SourceID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataSource.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataSource.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataSource.SourceTypeID">
+            <summary>Gets or sets the SourceTypeID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataSource.DataConfigName">
+            <summary>Gets or sets the DataConfigName value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataSource.SourceItemName">
+            <summary>Gets or sets the SourceItemName value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataSource.SourceLayoutID">
+            <summary>Gets or sets the LayoutID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataSource.SourceStatusID">
+            <summary>Gets or sets the SourceStatusID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataSource.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.ColumnDataSourceID">
+            <summary>The SourceID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.ColumnSourceTypeID">
+            <summary>The SourceTypeID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.ColumnDataConfigName">
+            <summary>The ConnectionString column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.ColumnSourceItemName">
+            <summary>The SourceItemName column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.ColumnSourceLayoutID">
+            <summary>The LayoutID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.ColumnSourceStatusID">
+            <summary>The SourceStatusID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.LengthConnectionString">
+            <summary>The ConnectionString maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.DataSource.LengthSourceItemName">
+            <summary>The SourceItemName maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.DataSources">
+            <summary>Represents a collection of DataSource objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSources.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSources.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSources.LJCSortDefault">
+            <summary>Sort on default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSources.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.SourceStatus">
+            <summary>The SourceStatus table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceStatus.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceStatus.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceStatus.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceStatus.CompareTo(LJCDataTransformDAL.SourceStatus)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceStatus.SourceStatusID">
+            <summary>Gets or sets the SourceStatusID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceStatus.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceStatus.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceStatus.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceStatus.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceStatus.ColumnSourceStatusID">
+            <summary>The SourceStatusID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceStatus.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceStatus.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceStatus.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceStatus.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.SourceStatuses">
+            <summary>Represents a collection of SourceStatus objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceStatuses.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceStatuses.Add(System.Int16,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceStatuses.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceStatuses.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.SourceType">
+            <summary>The SourceType table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceType.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceType.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceType.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceType.CompareTo(LJCDataTransformDAL.SourceType)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceType.SourceTypeID">
+            <summary>Gets or sets the SourceTypeID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceType.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceType.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.SourceType.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceType.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceType.ColumnSourceTypeID">
+            <summary>The SourceTypeID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceType.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceType.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceType.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.SourceType.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.SourceTypes">
+            <summary>Represents a collection of SourceType objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceTypes.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceTypes.Add(System.Int16,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceTypes.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceTypes.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.Step">
+            <summary>The Step table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.Step.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.Step.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.Step.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.Step.CompareTo(LJCDataTransformDAL.Step)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.Step.StepID">
+            <summary>Gets or sets the StepID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.Step.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.Step.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.Step.DataProcessID">
+            <summary>Gets or sets the ProcessID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.Step.Sequence">
+            <summary>Gets or sets the Sequence value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.Step.StatusID">
+            <summary>Gets or sets the Sequence value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.Step.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Step.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Step.ColumnStepID">
+            <summary>The StepID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Step.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Step.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Step.ColumnDataProcessID">
+            <summary>The ProcessID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Step.ColumnSequence">
+            <summary>The Sequence column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Step.ColumnStatusID">
+            <summary>The StatusID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Step.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.Step.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.Steps">
+            <summary>Represents a collection of Step objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.Steps.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.Steps.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.Steps.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.Steps.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.StepTask">
+            <summary>The Task table Data Record.</summary><remarks>
+      <para>
+        if the TaskType is "Program" then the ActionItemName contains three parts
+        separated with a forward slash. These parts are: AssemblyName, ClassName
+        and MethodName. E.G. LJC.CommonModuleLib/CommonModule/CreateTable&lt;br /&gt;
+        The assembly namespace must be the same as the assembly name.
+      </para>
+      <para>
+        If the TaskType is "StoredProcedure" then the ActionItemName is the name of
+        the stored procedure.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTask.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTask.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTask.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTask.CompareTo(LJCDataTransformDAL.StepTask)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.StepTask.StepTaskID">
+            <summary>Gets or sets the StepTaskID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.StepTask.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.StepTask.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.StepTask.StepID">
+            <summary>Gets or sets the StepID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.StepTask.Sequence">
+            <summary>Gets or sets the Sequence value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.StepTask.TaskTypeID">
+            <summary>Gets or sets the TaskTypeID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.StepTask.ActionItemName">
+            <summary>Gets or sets the ActionItemName value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.StepTask.TaskStatusID">
+            <summary>Gets or sets the TaskTypeID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.StepTask.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.ColumnStepTaskID">
+            <summary>The StepTaskID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.ColumnStepID">
+            <summary>The StepID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.ColumnSequence">
+            <summary>The Sequence column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.ColumnTaskTypeID">
+            <summary>The TaskTypeID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.ColumnActionItemName">
+            <summary>The CodeItemName column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.ColumnTaskStatusID">
+            <summary>The CodeItemName column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.LengthConnectionString">
+            <summary>The ConnectionString maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTask.LengthCodeItemName">
+            <summary>The CodeItemName maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.StepTasks">
+            <summary>Represents a collection of StepTask objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTasks.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTasks.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTasks.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTasks.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskSource">
+            <summary>The TaskSource table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskSource.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskSource.StepTaskID">
+            <summary>Gets or sets the StepTaskID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskSource.DataSourceID">
+            <summary>Gets or sets the SourceID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskSource.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskSource.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskSource.ColumnStepTaskID">
+            <summary>The StepTaskID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskSource.ColumnDataSourceID">
+            <summary>The SourceID column name.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskSources">
+            <summary>
+      Represents a collection of TaskSource objects.
+    </summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskSources.Add(System.Int32,System.Int32)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="stepTaskID">The record ID.</param><param name="dataSourceID">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskStatus">
+            <summary>The TaskStatus table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatus.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatus.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatus.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatus.CompareTo(LJCDataTransformDAL.TaskStatus)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskStatus.TaskStatusID">
+            <summary>Gets or sets the TaskStatusID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskStatus.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskStatus.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskStatus.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskStatus.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskStatus.ColumnTaskStatusID">
+            <summary>The TaskStatusID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskStatus.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskStatus.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskStatus.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskStatus.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.StepTaskStatus">
+            <summary>The StepTask Status values.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTaskStatus.Available">
+            <summary>Available for processing.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTaskStatus.Active">
+            <summary>Selected for active step.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTaskStatus.Inprocess">
+            <summary>In-process</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTaskStatus.Ready">
+            <summary>Successfull</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTaskStatus.Failed">
+            <summary>Failed</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskStatuses">
+            <summary>Represents a collection of TaskStatus objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatuses.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatuses.Add(System.Int16,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatuses.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatuses.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskTransform">
+            <summary>The TaskTransform table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransform.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransform.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransform.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransform.CompareTo(LJCDataTransformDAL.TaskTransform)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskTransform.TransformID">
+            <summary>Gets or sets the TransformID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskTransform.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskTransform.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskTransform.StepTaskID">
+            <summary>Gets or sets the StepTaskID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskTransform.SourceDataID">
+            <summary>Gets or sets the Source DataSourceID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskTransform.TargetDataID">
+            <summary>Gets or sets the Target DataSourceID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskTransform.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskTransform.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskTransform.ColumnTransformID">
+            <summary>The TransformID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskTransform.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskTransform.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskTransform.ColumnStepTaskID">
+            <summary>The StepTaskID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskTransform.ColumnSourceDataID">
+            <summary>The Source DataSourceID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskTransform.PropertySourceDataID">
+            <summary>The Source DataSourceID property name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskTransform.ColumnTargetDataID">
+            <summary>The Target DataSourceID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskTransform.PropertyTargetDataID">
+            <summary>The Target DataSourceID property name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskTransform.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskTransform.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskTransforms">
+            <summary>Represents a collection of TaskTransform objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransforms.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransforms.Add(System.Int32,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransforms.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransforms.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskType">
+            <summary>The TaskType table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskType.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskType.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskType.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskType.CompareTo(LJCDataTransformDAL.TaskType)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskType.TaskTypeID">
+            <summary>Gets or sets the TaskTypeID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskType.Name">
+            <summary>Gets or sets the Name value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskType.Description">
+            <summary>Gets or sets the Description value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TaskType.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskType.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskType.ColumnTaskTypeID">
+            <summary>The TaskTypeID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskType.ColumnName">
+            <summary>The Name column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskType.ColumnDescription">
+            <summary>The Description column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskType.LengthName">
+            <summary>The Name maximum length.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TaskType.LengthDescription">
+            <summary>The Description maximum length.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.StepTaskType">
+            <summary>The StepTask Type values.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTaskType.Program">
+            <summary>Program module.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTaskType.SQLScript">
+            <summary>SQL script file.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.StepTaskType.StoredProcedure">
+            <summary>Stored procedure.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskTypes">
+            <summary>Represents a collection of TaskType objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTypes.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTypes.Add(System.Int16,System.String)">
+            <summary>
+      Creates and adds the object from the supplied values.
+    </summary><param name="id">The item ID.</param><param name="name">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTypes.LJCSortDefault">
+            <summary>Sort on the default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTypes.LJCSearchName(System.String)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="name">The item name.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.TransformMap">
+            <summary>The TransformMap table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMap.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMap.Clone">
+            <summary>
+      Clones the structure of the object.
+    </summary><returns>A new object with the same structure as the current object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMap.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMap.CompareTo(LJCDataTransformDAL.TransformMap)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.TransformMapID">
+            <summary>Gets or sets the TransformMapID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.TransformID">
+            <summary>Gets or sets the TransformID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.Sequence">
+            <summary>Gets or sets the Sequence value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.SourceColumnID">
+            <summary>Gets or sets the SourceColumnID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.TargetColumnID">
+            <summary>Gets or sets the TargetColumnID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.MapTypeID">
+            <summary>Gets or sets the MapTypeID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.SourceColumnName">
+            <summary>Gets or sets the Join SourceColumn name.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.SourceDescription">
+            <summary>Gets or sets the Join Source Description.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.TargetColumnName">
+            <summary>Gets or sets the Join TargetColumn name.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.TargetDescription">
+            <summary>Gets or sets the Join Target Description.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.MapTypeName">
+            <summary>Gets or sets the Join MapType name.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.LayoutColumnID">
+            <summary>Gets or sets the Join LayoutColumn ID.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMap.ChangeStatus">
+            <summary>Gets or sets the Change Status value.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.ColumnTransformMapID">
+            <summary>The TransformMapID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.ColumnTransformID">
+            <summary>The TransformID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.ColumnSequence">
+            <summary>The Sequence column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.ColumnSourceColumnID">
+            <summary>The SourceColumnID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.ColumnTargetColumnID">
+            <summary>The TargetColumnID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.ColumnMapTypeID">
+            <summary>The TransformTypeID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.ColumnSourceColumnName">
+            <summary>The Join SourceColumn name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.ColumnSourceDescription">
+            <summary>The Join SourceColumn name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.ColumnTargetColumnName">
+            <summary>The Join TypeName column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.ColumnTargetDescription">
+            <summary>The Join TypeName column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMap.ColumnMapTypeName">
+            <summary>The Join TypeName column name.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.ChangeStatus">
+            <summary>The Change Status values.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ChangeStatus.Add">
+            <summary>Add record.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ChangeStatus.Change">
+            <summary>Change record.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.ChangeStatus.Delete">
+            <summary>Delete record.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.SourceIDComparer">
+            <summary>Sort and search on Name value.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceIDComparer.Compare(LJCDataTransformDAL.TransformMap,LJCDataTransformDAL.TransformMap)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.TargetIDComparer">
+            <summary>Sort and search on Name value.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TargetIDComparer.Compare(LJCDataTransformDAL.TransformMap,LJCDataTransformDAL.TransformMap)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.ColumnIDsComparer">
+            <summary>Sort and search on Name value.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ColumnIDsComparer.Compare(LJCDataTransformDAL.TransformMap,LJCDataTransformDAL.TransformMap)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.TransformMaps">
+            <summary>
+      Represents a collection of TransformMap objects.
+    </summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMaps.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMaps.Add(System.Int32,System.Int32)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="mapID">The record ID.</param><param name="transformID">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMaps.LJCSortID">
+            <summary>Sort on ID.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMaps.LJCSortSourceID(LJCDataTransformDAL.SourceIDComparer)">
+            <summary>Sort with Source ID.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMaps.LJCSortTargetID(LJCDataTransformDAL.TargetIDComparer)">
+            <summary>Sort with Target ID.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMaps.LJCSortColumnIDs(LJCDataTransformDAL.ColumnIDsComparer)">
+            <summary>Sort with Column IDs.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMaps.LJCSearchID(System.Int32)">
+            <summary>
+      Retrieve the collection element with name.
+    </summary><param name="mapID">The item name.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMaps.LJCSearchSourceID(System.Int32,System.Int32)">
+            <summary>
+      Retrieve the collection element with Source ID.
+    </summary><param name="transformID">The Transform ID.</param><param name="sourceID">The Source ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMaps.LJCSearchTargetID(System.Int32,System.Int32)">
+            <summary>
+      Retrieve the collection element with Target ID.
+    </summary><param name="transformID">The Transform ID.</param><param name="targetID">The Target ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMaps.LJCSearchColumnIDs(System.Int32,System.Int32,System.Int32)">
+            <summary>
+      Retrieve the collection element with Source and Target IDs.
+    </summary><param name="transformID">The Transform ID.</param><param name="sourceColumnID">The Source ID.</param><param name="targetColumnID">The Target ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.TransformMatch">
+            <summary>The TransformMatch table Data Record.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatch.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatch.Clone">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatch.CompareTo(LJCDataTransformDAL.TransformMatch)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.TransformMatchID">
+            <summary>Gets or sets the TransformMatchID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.TransformID">
+            <summary>Gets or sets the TransformID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.Sequence">
+            <summary>Gets or sets the Sequence value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.SourceColumnID">
+            <summary>Gets or sets the SourceColumnID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.TargetColumnID">
+            <summary>Gets or sets the TargetColumnID value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.SourceColumnName">
+            <summary>Gets or sets the Join SourceColumn name.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.SourceDescription">
+            <summary>Gets or sets the Join Source Description.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.TargetColumnName">
+            <summary>Gets or sets the Join TargetColumn name.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.TargetDescription">
+            <summary>Gets or sets the Join Target Description.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.LayoutColumnID">
+            <summary>Gets or sets the Join LayoutColumn ID.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.ChangedNames">
+            <summary>Gets a reference to the ChangedNames list.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformMatch.ChangeStatus">
+            <summary>Gets or sets the Change Status value.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMatch.TableName">
+            <summary>The table name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMatch.ColumnTransformMatchID">
+            <summary>The TransformMatchID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMatch.ColumnTransformID">
+            <summary>The TransformID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMatch.ColumnSequence">
+            <summary>The Sequence column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMatch.ColumnSourceColumnID">
+            <summary>The SourceColumnID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMatch.ColumnTargetColumnID">
+            <summary>The TargetColumnID column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMatch.ColumnSourceColumnName">
+            <summary>The Join SourceColumn name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMatch.ColumnSourceDescription">
+            <summary>The Join SourceColumn name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMatch.ColumnTargetColumnName">
+            <summary>The Join TypeName column name.</summary>
+        </member>
+        <member name="F:LJCDataTransformDAL.TransformMatch.ColumnTargetDescription">
+            <summary>The Join TypeName column name.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.MatchSourceIDComparer">
+            <summary>Sort and search on Name value.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.MatchSourceIDComparer.Compare(LJCDataTransformDAL.TransformMatch,LJCDataTransformDAL.TransformMatch)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.MatchTargetIDComparer">
+            <summary>Sort and search on Name value.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.MatchTargetIDComparer.Compare(LJCDataTransformDAL.TransformMatch,LJCDataTransformDAL.TransformMatch)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.MatchColumnIDsComparer">
+            <summary>Sort and search on Name value.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.MatchColumnIDsComparer.Compare(LJCDataTransformDAL.TransformMatch,LJCDataTransformDAL.TransformMatch)">
+            <summary>
+      Compares two objects.
+    </summary><param name="x">The compare object.</param><param name="y">The compare-to object</param><returns>An integer value indicating the order relationship.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.TransformMatches">
+            <summary>
+      Represents a collection of TransformMatch objects.
+    </summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatches.#ctor">
+            <summary>
+      Initializes an object instance.
+    </summary><remarks>
+      A default constructor is required for a serializable object.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatches.Add(System.Int32,System.Int32)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="matchID">The record ID.</param><param name="transformID">The item name.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatches.LJCSortDefault">
+            <summary>Sort on default values.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatches.LJCSortSourceID(LJCDataTransformDAL.MatchSourceIDComparer)">
+            <summary>Sort with Source ID.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatches.LJCSortTargetID(LJCDataTransformDAL.MatchTargetIDComparer)">
+            <summary>Sort with Target ID.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatches.LJCSortColumnIDs(LJCDataTransformDAL.MatchColumnIDsComparer)">
+            <summary>Sort with Column IDs.</summary>
+            <param name="comparer">The Comparer object.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatches.SearchID(System.Int32)">
+            <summary>
+      Retrieve the collection element by name.
+    </summary><param name="matchID">The item name.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatches.LJCSearchSourceID(System.Int32,System.Int32)">
+            <summary>
+      Retrieve the collection element with Source ID.
+    </summary><param name="transformID">The Transform ID.</param><param name="sourceID">The Source ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatches.LJCSearchTargetID(System.Int32,System.Int32)">
+            <summary>
+      Retrieve the collection element with Target ID.
+    </summary><param name="transformID">The Transform ID.</param><param name="targetID">The Target ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatches.LJCSearchColumnIDs(System.Int32,System.Int32,System.Int32)">
+            <summary>
+      Retrieve the collection element with Source and Target IDs.
+    </summary><param name="transformID">The Transform ID.</param><param name="sourceColumnID">The Source ID.</param><param name="targetColumnID">The Target ID.</param><returns>A reference to the matching item.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.LJCDataProcessHelper">
+            <summary>
+      Provides process helper methods.
+    </summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.LJCDataProcessHelper.#ctor(LJCDBClientLib.DbServiceRef,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The DbServiceRef object.</param><param name="dataConfigName">The DataConfigName value.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.LJCDataProcessHelper.ActivateGroupProcesses(System.Int32)">
+            <summary>
+      Attempts to Activate the DataProcesses for a ProcessGroup.
+    </summary><param name="processGroupID">The ProcessGroup ID value.</param><returns />
+        </member>
+        <member name="M:LJCDataTransformDAL.LJCDataProcessHelper.AllStepsAndTasksInStatus(LJCDataTransformDAL.DataProcesses,LJCDataTransformDAL.StepTaskStatus)">
+            <summary>
+      Check if all associated Steps and StepTasks are in the provided status.
+    </summary><param name="dataProcesses">The Processes collection.</param><param name="stepTaskStatus">The StepTask status.</param><returns>True if successful, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.LJCDataProcessHelper.ResetToStatus(System.Int32,LJCDataTransformDAL.StepTaskStatus,System.Boolean)">
+            <summary>
+      Resets the DataProcesses and associated Steps and StepTasks to the provided status.
+    </summary><param name="processGroupID">The ProcessGroup ID value.</param><param name="stepTaskStatus">The StepTask status.</param><param name="resetProcessesOnly">Indicates if only processes are reset.</param><returns>True if successfull, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.LJCDataProcessHelper.ResetToStatus(LJCDataTransformDAL.DataProcesses,LJCDataTransformDAL.StepTaskStatus,System.Boolean)">
+            <summary>
+      Resets the DataProcesses and associated Steps and StepTasks to the provided status.
+    </summary><param name="dataProcesses">The DataProcess collection.</param><param name="stepTaskStatus">The StepTask status.</param><param name="resetProcessesOnly">Indicates if only processes are reset.</param><returns>True if successfull, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.LJCDataProcessHelper.LoadGroupProcesses(System.Int32)">
+            <summary>
+      Loads the ProcessGroup Processes.
+    </summary><param name="processGroupID">The ProcessGroup ID value.</param><returns>The Processes collection.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.LJCDataProcessHelper.RetrieveProcessGroup(System.Int32)">
+            <summary>
+      Retrieves the ProcessGroup.
+    </summary><param name="processGroupID">The ProcessGroup ID.</param><returns>The ProcessGroup record.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.DataTypeManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataTypeManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public DataTypeManager(IDBService dbService, string dataConfigName
+        , string tableName = "DataType")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataTypeManager.RetrieveWithID(System.Int16,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataTypeManager.GetIDKey(System.Int16)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.DataTypeManager.GetNameKey(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetNameKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="T:LJCDataTransformDAL.LayoutColumnManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumnManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public LayoutColumnManager(IDBService dbService, string dataConfigName
+          , string tableName = "LayoutColumn")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumnManager.LoadWithLayoutID(System.Int32)">
+            <summary>
+      Retrieves a list of items by LayoutID.
+    </summary><param name="layoutID">The LayoutID value.</param><returns>The object collection.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumnManager.LoadWithPrimaryKey(System.Int32)">
+            <summary>
+      Retrieves a list of items by LayoutID where PrimaryKey is true.
+    </summary><param name="layoutID">The LayoutID value.</param><returns>The object collection.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumnManager.RetrieveWithID(System.Int16,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumnManager.GetIDKey(System.Int16)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumnManager.GetLayoutIDKey(System.Int32)">
+            <summary>
+      Gets the LayoutID key.
+    </summary><param name="layoutID">The LayoutID value.</param><returns />
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumnManager.SetOrderBySequence">
+            <summary>Sets the current OrderBy names.</summary><remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.LayoutColumnManager.IsDuplicate(LJCDataTransformDAL.LayoutColumn,LJCDataTransformDAL.LayoutColumn,System.Boolean)">
+            <summary>
+      Check for duplicate unique key.
+    </summary><param name="lookupRecord">The Lookup object.</param><param name="currentRecord">The Current object</param><param name="isUpdate">The Update flag.</param><returns>True if duplicates, otherwise false.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.SourceLayoutManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayoutManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public LayoutManager(IDBService dbService, string dataConfigName
+        	, string tableName = "Layout")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayoutManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayoutManager.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayoutManager.GetNameKey(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetNameKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceLayoutManager.IsDuplicate(LJCDataTransformDAL.SourceLayout,LJCDataTransformDAL.SourceLayout,System.Boolean)">
+            <summary>
+      Check for duplicate unique key.
+    </summary><param name="lookupRecord">The Lookup object.</param><param name="currentRecord">The Current object</param><param name="isUpdate">The Update flag.</param><returns>True if duplicates, otherwise false.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.ProcessGroupManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroupManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public ProcessGroupManager(IDBService dbService, string dataConfigName
+        	, string tableName = "ProcessGroup")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroupManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroupManager.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroupManager.GetNameKey(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetNameKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="T:LJCDataTransformDAL.DataProcessManager">
+            <summary>
+      Provides DataProcess specific data manipulation methods.
+    </summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data config name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.Add(LJCDataTransformDAL.DataProcess,System.Collections.Generic.List{System.String})">
+            <summary>
+      Adds a Data Record to the database.
+    </summary><param name="dataObject">The data record.</param><param name="propertyNames">The included property names.</param><returns>The Data Object with the DB assigned key values.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.Delete(LJCNetCommon.DbColumns,LJCDBMessage.DbFilters)">
+            <summary>
+      Deletes a Data Record with the specified ID.
+    </summary><param name="keyColumns">The key Data Object.</param><param name="filters">The filter values.</param><remarks>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.GetColumns(System.Collections.Generic.List{System.String})">
+            <summary>
+      Returns a set of columns that match the supplied list.
+    </summary><param name="columnNames">The column names.</param><returns>The created object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.Load(LJCNetCommon.DbColumns,System.Collections.Generic.List{System.String},LJCDBMessage.DbFilters,LJCDBMessage.DbJoins)">
+            <summary>
+      Retrieves a collection of Data Records.
+    </summary><param name="keyColumns">The record containing the key field values.</param><param name="propertyNames">The included property names.</param><param name="filters">The filter values.</param><param name="joins">The join values.</param><returns>The Data Object collection.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.Retrieve(LJCNetCommon.DbColumns,System.Collections.Generic.List{System.String},LJCDBMessage.DbFilters,LJCDBMessage.DbJoins)">
+            <summary>
+      Retrieves a Data Record from the database.
+    </summary><param name="keyColumns">The key record object.</param><param name="columnNames">The incuded column names.</param><param name="filters">The filter values.</param><param name="joins">The join values.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.Update(LJCDataTransformDAL.DataProcess,LJCNetCommon.DbColumns,System.Collections.Generic.List{System.String},LJCDBMessage.DbFilters)">
+            <summary>
+      Updates the Data Record.
+    </summary><param name="dataObject">The data record.</param><param name="keyColumns">The key record object.</param><param name="propertyNames">The included property names.</param><param name="filters">The filter values.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.LoadNotInGroup">
+            <summary>
+      Loads the DataProcess records that are not in the group.
+    </summary><returns>The DataProcesses collection.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.LoadWithGroupID(System.Int32)">
+            <summary>
+      Loads the DataProcess records with join on GroupID.
+    </summary><param name="groupID">The GroupID value.</param><returns>The DataProcesses collection.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.RetrieveWithGroupID(System.Int32,System.Int32)">
+            <summary>
+      Retrieves the DataProcess record with join on GroupID.
+    </summary><param name="groupID">The GroupID value.</param><param name="processID">The ProcessID value.</param><returns>The DataProcess object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.GetNameKey(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetNameKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.GetGroupIDJoins(System.Boolean)">
+            <summary>
+      Get Join on GroupID.
+    </summary><param name="outerJoin">The outer join indicator.</param><returns>The DbJoins object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.GetGroupIDJoinFilter(System.Int32,System.Int32)">
+            <summary>
+      Get Filter with GroupID and ProcessID.
+    </summary><param name="groupID">The GroupID value.</param><param name="processID">The ProcessID value.</param><returns>The DbFilters object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.GetNotInGroupFilter">
+            <summary>
+      Creates and returns the filters object.
+    </summary><returns>The DbFilters object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.SetOrderBySequence">
+            <summary>Sets the current OrderBy names.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.IsDuplicate(LJCDataTransformDAL.DataProcess,LJCDataTransformDAL.DataProcess,System.Boolean)">
+            <summary>
+      Check for duplicate unique key.
+    </summary><param name="lookupRecord">The Lookup object.</param><param name="currentRecord">The Current object</param><param name="isUpdate">The Update flag.</param><returns>True if duplicates, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataProcessManager.UpdateStatus(LJCDataTransformDAL.DataProcess)">
+            <summary>
+      Updates the DataProcess status.
+    </summary><param name="dataRecord">The record value.</param>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcessManager.AffectedCount">
+            <summary>Gets or sets the non-select affected record count.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcessManager.DataConfigName">
+            <summary>The DataConfig name.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcessManager.DbServiceRef">
+            <summary>The DBServiceRef object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcessManager.OrderByNames">
+            <summary>Gets or sets the OrderBy name list.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcessManager.PageSize">
+            <summary>Gets or sets the pagination size.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcessManager.PageStartIndex">
+            <summary>Gets or sets the pagination start index.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.DataProcessManager.SQLStatement">
+            <summary>Gets or sets the last SQL statement.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.ProcessGroupProcessManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroupProcessManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public ProcessGroupProcessManager(IDBService dbService, string dataConfigName
+        	, string tableName = "ProcessGroupProcess")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroupProcessManager.RetrieveWithIDs(System.Int32,System.Int32)">
+            <summary>
+      Retrieves a data record with the supplied value.
+    </summary><param name="processGroupID">The ProcessGroupID value.</param><param name="processID">The ProcessID value.</param><returns>The data record.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroupProcessManager.GetIDKeys(System.Int32,System.Int32)">
+            <summary>
+      Get the ID key record.
+    </summary><param name="processGroupID">The ProcessGroupID value.</param><param name="processID">The ProcessID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessGroupProcessManager.GetMaxSequence(System.Int32)">
+            <summary>
+      Creates and returns the filters object.
+    </summary><param name="groupID">The GroupID value.</param><returns>The ProcessGroupProcess object.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.DataSourceManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSourceManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSourceManager.LoadNotInStepTask(System.Int32)">
+            <summary>
+      Loads the DataSource records that are not in TaskSource.
+    </summary><param name="stepTaskID">The StepTask ID.</param><returns>The DataSources collection.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSourceManager.LoadWithTaskID(System.Int32)">
+            <summary>
+      Loads a collection of data records with the supplied value.
+    </summary><param name="stepTaskID">The StepTask ID value.</param><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSourceManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSourceManager.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSourceManager.GetNameKey(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetNameKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSourceManager.GetLoadJoins">
+            <summary>
+      Creates and returns the Load Joins object.
+    </summary><returns>The DBJoins object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSourceManager.GetLoadFilters(System.Int32)">
+            <summary>
+      Creates and returns the filters object.
+    </summary><param name="stepTaskID">The StepTask ID value.</param><returns>The DbFilters object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSourceManager.GetNotInTaskSourceFilters(System.Int32)">
+            <summary>
+      Creates and returns the filters object.
+    </summary><param name="stepTaskID">The StepTask ID.</param><returns>The DbFilters object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.DataSourceManager.IsDuplicate(LJCDataTransformDAL.DataSource,LJCDataTransformDAL.DataSource,System.Boolean)">
+            <summary>
+      Check for duplicate unique key.
+    </summary><param name="lookupRecord">The Lookup object.</param><param name="currentRecord">The Current object</param><param name="isUpdate">The Update flag.</param><returns>True if duplicates, otherwise false.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.ProcessStatusManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatusManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatusManager.LoadByDescription(LJCNetCommon.DbColumns,System.Collections.Generic.List{System.String},LJCDBMessage.DbFilters,LJCDBMessage.DbJoins)">
+            <!-- No matching elements were found for the following include tag --><include path="items/LoadByDescription/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatusManager.RetrieveWithID(System.Int16,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatusManager.GetIDKey(System.Int16)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.ProcessStatusManager.SetOrderByDescription">
+            <summary>Sets the current OrderBy names.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.SourceStatusManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceStatusManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public SourceStatusManager(IDBService dbService, string dataConfigName
+        	, string tableName = "SourceStatus")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceStatusManager.RetrieveWithID(System.Int16,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceStatusManager.GetIDKey(System.Int16)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="T:LJCDataTransformDAL.SourceTypeManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceTypeManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public SourceTypeManager(IDBService dbService, string dataConfigName
+        	, string tableName = "SourceType")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceTypeManager.RetrieveWithID(System.Int16,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.SourceTypeManager.GetIDKey(System.Int16)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="T:LJCDataTransformDAL.StepManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public StepManager(IDBService dbService, string dataConfigName
+        	, string tableName = "Step")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepManager.LoadWithProcessID(System.Int32)">
+            <summary>
+      Retrieves a data record with the supplied value.
+    </summary><param name="processID">The process ID value.</param><returns>The data record.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepManager.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.StepManager.GetProcessIDKey(System.Int32)">
+            <summary>
+      Get the process ID key record.
+    </summary><param name="processID">The ID value.</param><returns>The key record.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepManager.SetOrderBySequence">
+            <summary>Sets the current OrderBy names.</summary><remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepManager.IsDuplicate(LJCDataTransformDAL.Step,LJCDataTransformDAL.Step,System.Boolean)">
+            <summary>
+      Check for duplicate unique key.
+    </summary><param name="lookupRecord">The Lookup object.</param><param name="currentRecord">The Current object</param><param name="isUpdate">The Update flag.</param><returns>True if duplicates, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepManager.UpdateStatus(LJCDataTransformDAL.Step)">
+            <summary>
+      Update the Data Record status.
+    </summary><param name="dataRecord">The Data Record object.</param>
+        </member>
+        <member name="T:LJCDataTransformDAL.StepTaskManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTaskManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public TaskManager(IDBService dbService, string dataConfigName
+        	, string tableName = "Task")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTaskManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTaskManager.LoadWithStepID(System.Int32)">
+            <summary>
+      Loads the StepTasks by StepID.
+    </summary><param name="stepID">The Step ID value.</param><returns>The StepTasks collection.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTaskManager.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTaskManager.GetStepIDKey(System.Int32)">
+            <summary>
+      Get the Step ID key record.
+    </summary><param name="stepID">The Step ID value.</param><returns>The Step ID key record.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTaskManager.SetOrderBySequence">
+            <summary>Sets the current OrderBy names.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTaskManager.IsDuplicate(LJCDataTransformDAL.StepTask,LJCDataTransformDAL.StepTask,System.Boolean)">
+            <summary>
+      Check for duplicate unique key.
+    </summary><param name="lookupRecord">The Lookup object.</param><param name="currentRecord">The Current object</param><param name="isUpdate">The Update flag.</param><returns>True if duplicates, otherwise false.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.StepTaskManager.UpdateStatus(LJCDataTransformDAL.StepTask)">
+            <summary>
+      Update the Data Record status.
+    </summary><param name="dataRecord">The Data Record object.</param>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskSourceManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskSourceManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public TaskSourceManager(IDBService dbService, string dataConfigName
+        	, string tableName = "TaskSource")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskSourceManager.RetrieveWithIDs(System.Int32,System.Int32)">
+            <summary>
+      Retrieves a data record with the supplied value.
+    </summary><param name="stepTaskID">The StepTaskID value.</param><param name="dataSourceID">The DataSourceID value.</param><returns>The data record.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskSourceManager.GetIDKeys(System.Int32,System.Int32)">
+            <summary>
+      Get the ID key record.
+    </summary><param name="stepTaskID">The StepTaskID value.</param><param name="dataSourceID">The DataSourceID value.</param><returns>The ID key record.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskStatusManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatusManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatusManager.LoadByDescription(LJCNetCommon.DbColumns,System.Collections.Generic.List{System.String},LJCDBMessage.DbFilters,LJCDBMessage.DbJoins)">
+            <!-- No matching elements were found for the following include tag --><include path="items/LoadByDescription/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatusManager.RetrieveWithID(System.Int16,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatusManager.GetIDKey(System.Int16)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskStatusManager.SetOrderByDescription">
+            <summary>Sets the current OrderBy names.</summary>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskTransformManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransformManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public TaskTransformManager(IDBService dbService, string dataConfigName
+        , string tableName = "TaskTransform")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransformManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransformManager.LoadByName">
+            <summary>
+      Loads a collection of data records ordered by Name.
+    </summary><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransformManager.LoadWithTaskID(System.Int32)">
+            <summary>
+      Gets the TaskTransform data records by StepTaskID.
+    </summary><param name="stepTaskID">The StepTaskID value.</param><returns>The StepTask data records.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransformManager.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransformManager.GetTaskIDKey(System.Int32)">
+            <summary>
+      Get the StepTaskID key.
+    </summary><param name="stepTaskID">The StepTaskID value.</param><returns>The StepTaskID key.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransformManager.SetOrderByName">
+            <summary>Sets the current OrderBy names.</summary><remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTransformManager.IsDuplicate(LJCDataTransformDAL.TaskTransform,LJCDataTransformDAL.TaskTransform,System.Boolean)">
+            <summary>
+      Check for duplicate unique key.
+    </summary><param name="lookupRecord">The Lookup object.</param><param name="currentRecord">The Current object</param><param name="isUpdate">The Update flag.</param><returns>True if duplicates, otherwise false.</returns>
+        </member>
+        <member name="T:LJCDataTransformDAL.TaskTypeManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTypeManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public TaskTypeManager(IDBService dbService, string dataConfigName
+        	, string tableName = "TaskType")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTypeManager.RetrieveWithID(System.Int16,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TaskTypeManager.GetIDKey(System.Int16)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="T:LJCDataTransformDAL.TransformMapManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMapManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public TransformMapManager(IDBService dbService, string dataConfigName
+        , string tableName = "TransformMap")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMapManager.LoadWithInValues(System.Int32,System.Int32,System.String)">
+            <summary>
+      Loads a collection of data records using the DataSource ID.
+    </summary><param name="transformID">The Transform ID.</param><param name="sourceOrigin">Source or Target.</param><param name="inValues">The in values.</param><returns>The collection of data records.</returns><remarks>
+      Parameter sourceType 1 = Source, 2 = Target.
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMapManager.LoadWithTransformID(System.Int32)">
+            <summary>
+      Loads a collection of data records ordered by Sequence.
+    </summary><param name="transformID">The TransformID value.</param><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMapManager.RetrieveWithID(System.Int32,System.Int32)">
+            <summary>
+      Retrieves a Data Record with the supplied values.
+    </summary><param name="id">The ID value.</param><param name="transformID">The Transform ID.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMapManager.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMapManager.GetTransformIDKey(System.Int32)">
+            <summary>
+      Get the TransformID key record.
+    </summary><param name="transformID">The TransformID value.</param><returns>The TransformID key record.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMapManager.GetInValueJoins(System.Int32,System.Int32)">
+            <summary>
+      Creates and returns the Load Joins object.
+    </summary><param name="transformID">The TransformID value.</param><param name="sourceOrigin">Source or Target.</param><returns>The DBJoins object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMapManager.GetLoadJoins">
+            <summary>
+      Creates and returns the Load Joins object.
+    </summary><returns>The DBJoins object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMapManager.GetInValueFilters(System.String,System.String)">
+            <summary>
+      Creates and returns the filters object.
+    </summary><param name="columnName">The From column name.</param><param name="inValues">The To column value.</param><returns>The DbFilters object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMapManager.SetOrderBySequence">
+            <summary>Sets the current OrderBy names.</summary><remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+        </member>
+        <member name="T:LJCDataTransformDAL.TransformMatchManager">
+            <summary>Provides Table specific data manipulation methods.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatchManager.#ctor(LJCDBClientLib.DbServiceRef,System.String,System.String)">
+            <summary>
+      Initializes an object instance.
+    </summary><param name="dbServiceRef">The database service reference object.</param><param name="dataConfigName">The data configuration name.</param><param name="tableName">The table name.</param><remarks>
+      <para>
+        Syntax: public TransformMatchManager(IDBService dbService, string dataConfigName
+        , string tableName = "TransformMatch")
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatchManager.LoadBySequence">
+            <summary>
+      Loads a collection of data records ordered by Sequence.
+    </summary><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatchManager.LoadWithTransformID(System.Int32)">
+            <summary>
+      Loads a collection of data records ordered by Sequence.
+    </summary><param name="transformID">The TransformID value.</param><returns>The collection of data records.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatchManager.RetrieveWithID(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+      Retrieves a Data Record with the supplied value.
+    </summary><param name="id">The ID value.</param><param name="propertyNames">The included property names.</param><returns>The Data Object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatchManager.GetIDKey(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetIDKey/*" file="../../../CoreUtilities/LJCGenDoc/Common/Manager.xml" />
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatchManager.GetTransformIDKey(System.Int32)">
+            <summary>
+      Get the TransformID key record.
+    </summary><param name="transformID">The TransformID value.</param><returns>The TransformID key record.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatchManager.GetLoadJoins">
+            <summary>
+      Creates and returns the Load Joins object.
+    </summary><returns>The DBJoins object.</returns>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformMatchManager.SetOrderBySequence">
+            <summary>Sets the current OrderBy names.</summary><remarks>
+      These sort columns are only valid for the next manager data method call.
+    </remarks>
+        </member>
+        <member name="T:LJCDataTransformDAL.TransformManagers">
+            <summary>Gets the LJCTransformDAL Manager objects.</summary>
+        </member>
+        <member name="M:LJCDataTransformDAL.TransformManagers.#ctor(LJCDBClientLib.DbServiceRef,System.String)">
+            <summary>
+            Initializes an object instance.
+            </summary>
+            <param name="dbServiceRef">The database service reference object.</param>
+            <param name="dataConfigName">The data configuration name.</param>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.DataConfigName">
+            <summary>Gets the DataConfigName value.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.DataProcessManager">
+            <summary>Gets the DataProcessManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.DataSourceManager">
+            <summary>Gets the DataSourceManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.DataTypeManager">
+            <summary>Gets the DataTypeManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.LayoutColumnManager">
+            <summary>Gets the LayoutColumnManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.ProcessGroupManager">
+            <summary>Gets the ProcessGroupManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.ProcessGroupProcessManager">
+            <summary>Gets the ProcessGroupProcessManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.ProcessStatusManager">
+            <summary>Gets the ProcessStatusManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.SourceLayoutManager">
+            <summary>Gets the SourceLayoutManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.SourceStatusManager">
+            <summary>Gets the SourceStatusManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.SourceTypeManager">
+            <summary>Gets the SourceTypeManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.StepManager">
+            <summary>Gets the StepManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.StepTaskManager">
+            <summary>Gets the StepTaskManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.TaskSourceManager">
+            <summary>Gets the TaskSourceManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.TaskStatusManager">
+            <summary>Gets the TaskStatusManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.TaskTransformManager">
+            <summary>Gets the TaskTransformManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.TaskTypeManager">
+            <summary>Gets the TaskTypeManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.TransformMapManager">
+            <summary>Gets the TransformMapManager object.</summary>
+        </member>
+        <member name="P:LJCDataTransformDAL.TransformManagers.TransformMatchManager">
+            <summary>Gets the TransformMatchManager object.</summary>
+        </member>
+    </members>
+</doc>

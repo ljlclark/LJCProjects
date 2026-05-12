@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCCommonModuleLib</name>
+    </assembly>
+    <members>
+        <member name="T:LJCCommonModuleLib.ColumnMapping">
+            <summary>
+      Represents a Column Mapping.
+    </summary><remarks>
+      <para>-- Library Level Remarks</para>
+      <para>
+        The CommonModule library contains classes for standard Task Transforms and
+        Task Source Actions.
+      </para>
+      <para>
+        The LJC.CommonModuleLib library is part of the LJC.DataTransform solution.
+      </para>
+    </remarks>
+        </member>
+        <member name="M:LJCCommonModuleLib.ColumnMapping.ToString">
+            <summary>
+      The object string identifier.
+    </summary><returns>The identifier value.</returns>
+        </member>
+        <member name="P:LJCCommonModuleLib.ColumnMapping.MapTypeID">
+            <summary>
+      Gets or sets the MapType ID value.
+    </summary>
+        </member>
+        <member name="P:LJCCommonModuleLib.ColumnMapping.SourceColumn">
+            <summary>
+      Gets or sets the "Source" column value.
+    </summary>
+        </member>
+        <member name="P:LJCCommonModuleLib.ColumnMapping.TargetColumn">
+            <summary>
+      Gets or sets the "Target" column value.
+    </summary>
+        </member>
+        <member name="T:LJCCommonModuleLib.ColumnMappings">
+            <summary>
+      Represents a collection of ColumnMap objects.
+    </summary>
+        </member>
+        <member name="M:LJCCommonModuleLib.ColumnMappings.Add(LJCDataTransformDAL.LayoutColumn,LJCDataTransformDAL.LayoutColumn,System.Int32)">
+            <summary>
+      Creates and adds the object from the provided values.
+    </summary><param name="sourceColumn">The "Source" column.</param><param name="targetColumn">The "Target" column.</param><param name="mapTypeID">The MapType ID.</param><returns>A reference to the added item.</returns>
+        </member>
+        <member name="T:LJCCommonModuleLib.CommonModule">
+            <summary>
+      Executes an Action for all sources of a task.
+    </summary>
+        </member>
+        <member name="M:LJCCommonModuleLib.CommonModule.Init(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+      Executes the specified action.
+    </summary><param name="processID">The Process ID value.</param><param name="taskID">The Task ID value.</param><param name="actionName">The action name.</param><param name="dataConfigName">The DataConfig name.</param><returns>True if successful, otherwise false.</returns>
+        </member>
+    </members>
+</doc>
