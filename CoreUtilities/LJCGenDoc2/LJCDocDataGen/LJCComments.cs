@@ -171,7 +171,6 @@ namespace LJCDocDataGenLib
       var beginIndex = -1;
       if (beginTag != null)
       {
-        // *** Next Statement *** Change
         beginIndex = line.ToLower().IndexOf(beginTag);
       }
       if (beginIndex < 0)
@@ -229,13 +228,11 @@ namespace LJCDocDataGenLib
           trimEnd = false;
         }
         var parser = new LJCParser();
-        // *** Begin *** Change
         retComment = parser.DelimitedString(line.ToLower(), beginTag, endTag);
         if (retComment != null)
         {
           retComment = parser.Selection(line);
         }
-        // *** End ***
         if (trimEnd)
         {
           retComment = retComment.TrimEnd();
@@ -434,7 +431,6 @@ namespace LJCDocDataGenLib
       var retValue = false;
 
       var endTag = EndTag();
-      // *** Next Statement *** Change
       if (endTag != null
         && line.ToLower().LastIndexOf(endTag) >= 0)
       {
