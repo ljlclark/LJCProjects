@@ -19,7 +19,7 @@ namespace LJCDBMessage5
     {
       LJCDBRows? retValue;
 
-      if (!LJC.HasValue(fileSpec))
+      if (!LJC.HasText(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
@@ -41,7 +41,7 @@ namespace LJCDBMessage5
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public LJCDBRows(LJCDBRows items)
     {
-      if (LJC.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -59,7 +59,7 @@ namespace LJCDBMessage5
     {
       LJCDBRow? retValue = null;
 
-      if (LJC.HasItems(dataValues))
+      if (LJC.HasListItems(dataValues))
       {
         retValue = new LJCDBRow()
         {
@@ -106,7 +106,7 @@ namespace LJCDBMessage5
     /// <include path='items/Serialize2/*' file='Doc/DbResult.xml'/>
     public void Serialize(string? fileSpec = null)
     {
-      if (!LJC.HasValue(fileSpec))
+      if (!LJC.HasText(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }

@@ -21,7 +21,7 @@ namespace LJCDBMessage5
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public LJCDBJoins(LJCDBJoins? items)
     {
-      if (LJC.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -43,8 +43,8 @@ namespace LJCDBMessage5
         TableName = tableName,
         TableAlias = tableAlias
       };
-      if (LJC.HasValue(fromJoinOnColumn)
-        && LJC.HasValue(toJoinOnColumn))
+      if (LJC.HasText(fromJoinOnColumn)
+        && LJC.HasText(toJoinOnColumn))
       {
         retValue.JoinOns.Add(fromJoinOnColumn, toJoinOnColumn);
       }

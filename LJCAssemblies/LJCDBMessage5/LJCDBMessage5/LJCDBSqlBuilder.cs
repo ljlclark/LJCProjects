@@ -18,7 +18,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasItems(dbFilters))
+      if (LJC.HasListItems(dbFilters))
       {
         var builder = new StringBuilder(64);
         bool first = true;
@@ -50,7 +50,7 @@ namespace LJCDBMessage5
           // Add conditions.
           LJCDBConditionSet conditionSet = filter.ConditionSet;
           var conditions = filter.ConditionSet.Conditions;
-          if (LJC.HasItems(conditions))
+          if (LJC.HasListItems(conditions))
           {
             // Begin the conditions group.
             builder.Append('(');
@@ -86,7 +86,7 @@ namespace LJCDBMessage5
           }
 
           // Recursive filters.
-          if (LJC.HasItems(filter.Filters))
+          if (LJC.HasListItems(filter.Filters))
           {
             builder.Append(FilterWhereClause(filter.Filters, true));
           }
@@ -121,7 +121,7 @@ namespace LJCDBMessage5
       }
 
       if (qualify
-        && LJC.HasValue(tableName))
+        && LJC.HasText(tableName))
       {
         // Allow user to qualify column name to another table.
         if (columnName.IndexOf('.') > -1)
@@ -135,7 +135,7 @@ namespace LJCDBMessage5
         }
         else
         {
-          if (LJC.HasValue(alias))
+          if (LJC.HasText(alias))
           {
             tableName = alias;
           }
@@ -273,13 +273,13 @@ namespace LJCDBMessage5
       builder.AppendLine("select ");
       builder.Append(ColumnList());
       builder.Append("from ");
-      if (LJC.HasValue(dbRequest.SchemaName))
+      if (LJC.HasText(dbRequest.SchemaName))
       {
         builder.Append($"{dbRequest.SchemaName}.");
       }
       builder.Append($"{dbRequest.TableName} \r\n");
       if (dbRequest != null
-        && LJC.HasItems(dbRequest.Joins))
+        && LJC.HasListItems(dbRequest.Joins))
       {
         builder.Append(JoinStatement(dbRequest.Joins, dbRequest.SchemaName));
       }
@@ -305,13 +305,13 @@ namespace LJCDBMessage5
       builder.AppendLine("select");
       builder.Append(ColumnList(dbRequest));
       builder.Append("from ");
-      if (LJC.HasValue(dbRequest.SchemaName))
+      if (LJC.HasText(dbRequest.SchemaName))
       {
         builder.Append($"{dbRequest.SchemaName}.");
       }
       builder.Append($"{dbRequest.TableName} \r\n");
       if (dbRequest != null
-        && LJC.HasItems(dbRequest.Joins))
+        && LJC.HasListItems(dbRequest.Joins))
       {
         builder.Append(JoinStatement(dbRequest.Joins, dbRequest.SchemaName));
       }
@@ -345,8 +345,8 @@ namespace LJCDBMessage5
       bool first = true;
       foreach (LJCDBJoinOn dbJoinOn in dbJoinOns)
       {
-        if (!LJC.HasValue(dbJoinOn.FromColumnName)
-            || !LJC.HasValue(dbJoinOn.ToColumnName))
+        if (!LJC.HasText(dbJoinOn.FromColumnName)
+            || !LJC.HasText(dbJoinOn.ToColumnName))
         {
           continue;
         }
@@ -385,7 +385,7 @@ namespace LJCDBMessage5
         builder.Append(')');
 
         // Recursive JoinOns.
-        if (LJC.HasItems(dbJoinOn.JoinOns))
+        if (LJC.HasListItems(dbJoinOn.JoinOns))
         {
           builder.Append(GetJoinOns(dbJoin, dbJoinOn.JoinOns, true));
         }
@@ -407,7 +407,7 @@ namespace LJCDBMessage5
 
       var builder = new StringBuilder(64);
       builder.Append(' ');
-      if (LJC.HasValue(schemaName))
+      if (LJC.HasText(schemaName))
       {
         // Note: use schemaName from params?
         builder.Append($"{mDbRequest.SchemaName}.");
@@ -428,7 +428,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasItems(mDbRequest.Columns))
+      if (LJC.HasListItems(mDbRequest.Columns))
       {
         var builder = new StringBuilder(64);
         foreach (LJCDataColumn dbColumn in mDbRequest.Columns)
@@ -463,7 +463,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasItems(dbJoins))
+      if (LJC.HasListItems(dbJoins))
       {
         var builder = new StringBuilder(64);
         foreach (LJCDBJoin dbJoin in dbJoins)
@@ -491,14 +491,14 @@ namespace LJCDBMessage5
       string? retValue = null;
 
       var keyColumns = mDbRequest.KeyColumns;
-      if (LJC.HasItems(keyColumns))
+      if (LJC.HasListItems(keyColumns))
       {
         var builder = new StringBuilder(64);
         foreach (LJCDataColumn dbColumn in keyColumns)
         {
           // Do not include null or empty values.
           if (null == dbColumn.Value
-            || !LJC.HasValue(dbColumn.Value.ToString()))
+            || !LJC.HasText(dbColumn.Value.ToString()))
           {
             continue;
           }
@@ -523,7 +523,7 @@ namespace LJCDBMessage5
 
           // Allow user to qualify column name to a table other than the
           // primary table.
-          if (LJC.HasValue(mDbRequest.TableName))
+          if (LJC.HasText(mDbRequest.TableName))
           {
             string tableName = mDbRequest.TableName;
             string columnName = dbColumn.ColumnName;
@@ -573,7 +573,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasItems(mDbRequest.OrderByNames))
+      if (LJC.HasListItems(mDbRequest.OrderByNames))
       {
         var builder = new StringBuilder(64);
         builder.Append("order by ");
@@ -599,7 +599,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasItems(mDbRequest.OrderByNames)
+      if (LJC.HasListItems(mDbRequest.OrderByNames)
         && mDbRequest.PageSize > 0)
       {
         var builder = new StringBuilder(64);
@@ -617,7 +617,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasItems(mDbRequest.Columns))
+      if (LJC.HasListItems(mDbRequest.Columns))
       {
         var builder = new StringBuilder(64);
         foreach (LJCDataColumn dbColumn in mDbRequest.Columns)

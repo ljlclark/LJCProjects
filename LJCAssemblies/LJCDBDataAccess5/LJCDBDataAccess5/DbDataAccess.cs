@@ -116,12 +116,12 @@ namespace LJCDBDataAccess5
           retResult.AffectedRecords = AffectedCount;
           retResult.ExecutedSql = SqlStatement;
 
-          if (LJC.HasItems(DBRequest.DbAssignedColumns))
+          if (LJC.HasListItems(DBRequest.DbAssignedColumns))
           {
             string saveSql = SqlStatement;
 
             LJCDataColumns? keyColumns = null;
-            if (LJC.HasItems(DBRequest.KeyColumns))
+            if (LJC.HasListItems(DBRequest.KeyColumns))
             {
               keyColumns = DBRequest.KeyColumns;
             }
@@ -175,7 +175,7 @@ namespace LJCDBDataAccess5
       {
         retValue = CreateResult(DBRequest);
         SqlStatement = DBRequest.ClientSql;
-        if (LJC.HasValue(SqlStatement))
+        if (LJC.HasText(SqlStatement))
         {
           AffectedCount = mDataAccess.ExecuteNonQuery(SqlStatement);
           retValue.AffectedRecords = AffectedCount;
@@ -202,12 +202,12 @@ namespace LJCDBDataAccess5
         if (mDbSqlBuilder != null)
         {
           SqlStatement = mDbSqlBuilder.CreateLoadSql();
-          if (LJC.HasValue(SqlStatement))
+          if (LJC.HasText(SqlStatement))
           {
             var dataTable = mDataAccess.GetDataTable(SqlStatement);
             retValue.ExecutedSql = SqlStatement;
 
-            if (LJC.HasData(dataTable))
+            if (LJC.HasTableData(dataTable))
             {
               retValue.SetData(dataTable, DBRequest);
             }
@@ -227,12 +227,12 @@ namespace LJCDBDataAccess5
       {
         retValue = CreateResult(DBRequest);
         SqlStatement = DBRequest.ClientSql;
-        if (LJC.HasValue(SqlStatement))
+        if (LJC.HasText(SqlStatement))
         {
           var dataTable = mDataAccess.GetDataTable(SqlStatement);
           retValue.ExecutedSql = SqlStatement;
 
-          if (LJC.HasData(dataTable))
+          if (LJC.HasTableData(dataTable))
           {
             if (null == DBRequest.Columns
               || 0 == DBRequest.Columns.Count)
@@ -270,7 +270,7 @@ namespace LJCDBDataAccess5
           var dataTable = mDataAccess.GetDataTable(SqlStatement);
           retValue.ExecutedSql = SqlStatement;
 
-          if (LJC.HasData(dataTable))
+          if (LJC.HasTableData(dataTable))
           {
             retValue.SetData(dataTable, dbRequest);
           }
@@ -289,12 +289,12 @@ namespace LJCDBDataAccess5
       {
         retValue = CreateResult(DBRequest);
         SqlStatement = DBRequest.ClientSql;
-        if (LJC.HasValue(SqlStatement))
+        if (LJC.HasText(SqlStatement))
         {
           var dataTable = mDataAccess.GetDataTable(SqlStatement);
           retValue.ExecutedSql = SqlStatement;
 
-          if (LJC.HasData(dataTable))
+          if (LJC.HasTableData(dataTable))
           {
             if (null == DBRequest.Columns
               || 0 == DBRequest.Columns.Count)
@@ -333,7 +333,7 @@ namespace LJCDBDataAccess5
         retValue = CreateResult(dbRequest);
 
         SqlStatement = dbRequest.ProcedureName;
-        if (LJC.HasValue(SqlStatement))
+        if (LJC.HasText(SqlStatement))
         {
           var dataTable = mDataAccess.GetProcedureDataTable(SqlStatement
             , dbRequest.Parameters);
@@ -388,13 +388,13 @@ namespace LJCDBDataAccess5
         dbRequest = DBRequest;
       }
 
-      if (LJC.HasValue(databaseName)
+      if (LJC.HasText(databaseName)
         && dbRequest != null)
       {
         retResult = CreateResult(dbRequest);
         var dataTable = GetTableNames(databaseName);
-        if (LJC.HasData(dataTable)
-          && LJC.HasItems(dbRequest.Columns))
+        if (LJC.HasTableData(dataTable)
+          && LJC.HasListItems(dbRequest.Columns))
         {
           // Add TABLE_NAME if it is not already defined.
           var dbColumn = dbRequest.Columns.LJCSearchPropertyName("TABLE_NAME");
@@ -474,7 +474,7 @@ namespace LJCDBDataAccess5
     private void AddTableColumns(LJCDBRequest dbRequest)
     {
       if (dbRequest != null
-        && LJC.HasItems(dbRequest.Columns))
+        && LJC.HasListItems(dbRequest.Columns))
       {
         var dataTable = GetTableSchema(dbRequest);
         if (dataTable != null)
@@ -575,7 +575,7 @@ namespace LJCDBDataAccess5
       var builder = new StringBuilder(64);
       builder.Append("select * \r\n");
       builder.Append("from ");
-      if (LJC.HasValue(dbRequest.SchemaName))
+      if (LJC.HasText(dbRequest.SchemaName))
       {
         builder.Append($"{dbRequest.SchemaName}.");
       }
@@ -611,7 +611,7 @@ namespace LJCDBDataAccess5
     // Get the SQL Type name.
     private static void SetSQLTypeName(DataTable sqlTypesTable, LJCDataColumn dataColumn)
     {
-      if (LJC.HasData(sqlTypesTable))
+      if (LJC.HasTableData(sqlTypesTable))
       {
         foreach (DataRow dataRow in sqlTypesTable.Rows)
         {
@@ -646,9 +646,9 @@ namespace LJCDBDataAccess5
       LJCDataColumns? retValue = null;
 
       if (dataTable != null
-        && LJC.HasValue(DatabaseName)
+        && LJC.HasText(DatabaseName)
         && mDBRequest != null
-        && LJC.HasValue(mDBRequest.TableName))
+        && LJC.HasText(mDBRequest.TableName))
       {
         var sqlTypesTable = mDataAccess.GetColumnSQLTypes(DatabaseName
           , mDBRequest.TableName);
@@ -712,7 +712,7 @@ namespace LJCDBDataAccess5
       get => mConnectionString;
       set
       {
-        if (LJC.HasValue(value))
+        if (LJC.HasText(value))
         {
           if (value != null)
           {
@@ -730,7 +730,7 @@ namespace LJCDBDataAccess5
       get => mProviderName;
       set
       {
-        if (LJC.HasValue(value))
+        if (LJC.HasText(value))
         {
           mProviderName = value.Trim();
           mDataAccess.ProviderName = mProviderName;

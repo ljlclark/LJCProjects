@@ -22,7 +22,7 @@ namespace LJCDBMessage5
       var conditions = retValue.Add(name: "SQLSoundexFilter");
       var value1 = $"Soundex({columnName})";
       var value2 = $"Soundex('{searchValue}')";
-      if (LJC.HasValue(soundexColumn))
+      if (LJC.HasText(soundexColumn))
       {
         value1 = soundexColumn;
       }
@@ -39,14 +39,14 @@ namespace LJCDBMessage5
       var conditions = retValue.Add("and", "or", "SoundexFilter");
 
       string? soundex;
-      if (LJC.HasValue(pColumnName)
-        && LJC.HasValue(pSearchValue))
+      if (LJC.HasText(pColumnName)
+        && LJC.HasText(pSearchValue))
       {
         soundex = LJCNetString.CreatePSoundex(pSearchValue);
         conditions.Add(pColumnName, $"'{soundex}%'", "like");
       }
-      if (LJC.HasValue(lColumnName)
-        && LJC.HasValue(lSearchValue))
+      if (LJC.HasText(lColumnName)
+        && LJC.HasText(lSearchValue))
       {
         soundex = LJCNetString.CreateLSoundex(lSearchValue);
         conditions.Add(lColumnName, $"'{soundex}%'", "like");
@@ -67,7 +67,7 @@ namespace LJCDBMessage5
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public LJCDBFilters(LJCDBFilters? items)
     {
-      if (LJC.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {

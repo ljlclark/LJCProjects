@@ -17,7 +17,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
@@ -39,7 +39,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
@@ -47,12 +47,12 @@ namespace LJCDBMessage5
         var attribs = hb.TableAttribs();
         hb.Begin("table", textState, attribs);
         var text = DataTableHeadings(dataTable);
-        if (LJC.HasValue(text))
+        if (LJC.HasText(text))
         {
           hb.Text(text);
         }
         text = DataTableRows(dataTable, maxRows);
-        if (LJC.HasValue(text))
+        if (LJC.HasText(text))
         {
           hb.Text(text);
         }
@@ -68,7 +68,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
@@ -86,7 +86,7 @@ namespace LJCDBMessage5
           foreach (DataColumn column in dataTable.Columns)
           {
             var value = row[column.ColumnName].ToString();
-            if (LJC.HasValue(value))
+            if (LJC.HasText(value))
             {
               hb.Create("td", value, textState);
             }
@@ -108,7 +108,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasItems(dataObjects))
+      if (LJC.HasListItems(dataObjects))
       {
         var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
@@ -122,7 +122,7 @@ namespace LJCDBMessage5
           var success = true;
           if (name != "ChangedNames")
           {
-            if (LJC.HasElements(propertyNames)
+            if (LJC.HasArrayElements(propertyNames)
               && !propertyNames.Contains(name))
             {
               success = false;
@@ -146,7 +146,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasItems(dataObjects))
+      if (LJC.HasListItems(dataObjects))
       {
         var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
@@ -154,12 +154,12 @@ namespace LJCDBMessage5
         var attribs = hb.TableAttribs();
         hb.Begin("table", textState, attribs);
         var text = DataHeadings(dataObjects, propertyNames);
-        if (LJC.HasValue(text))
+        if (LJC.HasText(text))
         {
           hb.Text(text);
         }
         text = DataRows(dataObjects, propertyNames, maxRows);
-        if (LJC.HasValue(text))
+        if (LJC.HasText(text))
         {
           hb.Text(text);
         }
@@ -176,7 +176,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasItems(dataObjects))
+      if (LJC.HasListItems(dataObjects))
       {
         var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
@@ -198,7 +198,7 @@ namespace LJCDBMessage5
             if (name != "ChangedNames")
             {
               var success = true;
-              if (LJC.HasElements(propertyNames)
+              if (LJC.HasArrayElements(propertyNames)
                 && !propertyNames.Contains(name))
               {
                 success = false;
@@ -210,7 +210,7 @@ namespace LJCDBMessage5
                 if (objectValue != null)
                 {
                   value = objectValue.ToString();
-                  if (!LJC.HasValue(value))
+                  if (!LJC.HasText(value))
                   {
                     value = "";
                   }
@@ -242,7 +242,7 @@ namespace LJCDBMessage5
 
         hb.Begin("tr", textState);
         var values = dbResult.Rows[0].Values;
-        if (LJC.HasItems(values))
+        if (LJC.HasListItems(values))
         {
           foreach (var value in values)
           {
@@ -262,7 +262,7 @@ namespace LJCDBMessage5
     {
       string? retValue = null;
 
-      if (LJC.HasItems(dbResult.Rows))
+      if (LJC.HasListItems(dbResult.Rows))
       {
         var hb = new LJCHTMLBuilder(textState);
 
@@ -270,13 +270,13 @@ namespace LJCDBMessage5
         hb.Begin("table", textState, attribs);
         // Begin already indents for child elements.
         var text = ResultHeadings(dbResult, textState);
-        if (LJC.HasValue(text))
+        if (LJC.HasText(text))
         {
           // Use NoIndent after a "GetText" method.
           hb.Text(text, NoIndent);
         }
         text = ResultRows(dbResult, textState, maxRows);
-        if (LJC.HasValue(text))
+        if (LJC.HasText(text))
         {
           // Use NoIndent after a "GetText" method.
           hb.Text(text, NoIndent);
@@ -310,7 +310,7 @@ namespace LJCDBMessage5
           hb.Begin("tr", textState);
           // Begin already indents for child elements.
           var values = row.Values;
-          if (LJC.HasItems(values))
+          if (LJC.HasListItems(values))
           {
             foreach (var value in values)
             {

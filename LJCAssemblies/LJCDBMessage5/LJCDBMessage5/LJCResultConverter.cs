@@ -49,8 +49,8 @@ namespace LJCDBMessage5
       // Testing in LJCDBServiceLib.TestDbDataAccess.
       TList? retValue = null;
 
-      if (LJC.HasColumns(dataTable)
-        && LJC.HasData(dataTable))
+      if (LJC.HasTableColumns(dataTable)
+        && LJC.HasTableData(dataTable))
       {
         retValue = new TList();
         foreach (DataRow dataRow in dataTable.Rows)
@@ -101,7 +101,7 @@ namespace LJCDBMessage5
       // Used here to allow for different TData.
       TData? retValue = null;
 
-      if (LJC.HasItems(dataValues))
+      if (LJC.HasListItems(dataValues))
       {
         // Populate a data object with the result values.
         // Uses retValue as an object and processes with reflection.
@@ -122,9 +122,9 @@ namespace LJCDBMessage5
       string propertyName;
       TData? retValue = null;
 
-      if (LJC.HasColumns(dataTable)
-        && LJC.HasData(dataTable)
-        && LJC.HasItems(dataColumns))
+      if (LJC.HasTableColumns(dataTable)
+        && LJC.HasTableData(dataTable)
+        && LJC.HasListItems(dataColumns))
       {
         retValue = new TData();
 

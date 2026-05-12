@@ -17,7 +17,7 @@ namespace LJCDBMessage5
       bool retValue = false;
 
       if (collection != null
-        && LJC.HasItems(collection.Values))
+        && LJC.HasListItems(collection.Values))
       {
         retValue = true;
       }
@@ -38,7 +38,7 @@ namespace LJCDBMessage5
     public LJCDBRow(LJCDBRow items)
     {
       if (HasItems(items)
-        && LJC.HasItems(items.Values))
+        && LJC.HasListItems(items.Values))
       {
         Values = [];
         foreach (var item in items.Values)

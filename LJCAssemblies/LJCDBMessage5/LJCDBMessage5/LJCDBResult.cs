@@ -50,7 +50,7 @@ namespace LJCDBMessage5
       LJCDataColumns? retValue = null;
 
       //if (HasColumns(dataColumns))
-      if (LJC.HasColumns(dataColumns))
+      if (LJC.HasTableColumns(dataColumns))
       {
         //retValue = new LJCDataColumns();
         retValue = [];
@@ -73,7 +73,7 @@ namespace LJCDBMessage5
     {
       bool retValue = false;
 
-      if (LJC.HasColumns(dataColumns))
+      if (LJC.HasTableColumns(dataColumns))
       {
         retValue = true;
       }
@@ -96,8 +96,8 @@ namespace LJCDBMessage5
 
       var columns = dbResult.Columns;
       var values = dbResult.Rows[0].Values;
-      if (LJC.HasItems(columns)
-        && LJC.HasItems(values))
+      if (LJC.HasListItems(columns)
+        && LJC.HasListItems(values))
       {
         //retValue = new LJCDataColumns();
         retValue = [];
@@ -138,7 +138,7 @@ namespace LJCDBMessage5
     {
       LJCDBResult? retValue = null;
 
-      if (LJC.HasValue(result))
+      if (LJC.HasText(result))
       {
         retValue = LJC.XmlDeserializeMessage(typeof(LJCDBResult), result)
           as LJCDBResult;
@@ -191,7 +191,7 @@ namespace LJCDBMessage5
       bool retValue = false;
 
       if (dbResult != null
-        && LJC.HasItems(dbResult.Columns))
+        && LJC.HasListItems(dbResult.Columns))
       {
         retValue = true;
       }
@@ -219,7 +219,7 @@ namespace LJCDBMessage5
       bool retValue = false;
 
       if (dbResult != null
-        && LJC.HasItems(dbResult.Rows))
+        && LJC.HasListItems(dbResult.Rows))
       {
         retValue = true;
       }
@@ -231,11 +231,11 @@ namespace LJCDBMessage5
     private static void AddJoinRowValues(LJCDataValues dataValues, DataRow dataRow
       , LJCDBJoins? dbJoins)
     {
-      if (LJC.HasItems(dbJoins))
+      if (LJC.HasListItems(dbJoins))
       {
         foreach (LJCDBJoin dbJoin in dbJoins)
         {
-          if (LJC.HasItems(dbJoin.Columns))
+          if (LJC.HasListItems(dbJoin.Columns))
           {
             LJCDataValues joinValues = GetRowValues(dbJoin.Columns, dataRow);
             foreach (LJCDataValue dataValue in joinValues)
@@ -269,7 +269,7 @@ namespace LJCDBMessage5
 
       AffectedRecords = item.AffectedRecords;
       Columns = [];
-      if (LJC.HasItems(item.Columns))
+      if (LJC.HasListItems(item.Columns))
       {
         Columns = [.. item.Columns];
       }
@@ -325,7 +325,7 @@ namespace LJCDBMessage5
     {
       bool retValue = false;
 
-      if (LJC.HasItems(Rows))
+      if (LJC.HasListItems(Rows))
       {
         retValue = true;
       }
@@ -352,7 +352,7 @@ namespace LJCDBMessage5
     {
       bool retValue = false;
 
-      if (LJC.HasItems(Rows))
+      if (LJC.HasListItems(Rows))
       {
         retValue = true;
       }
@@ -373,7 +373,7 @@ namespace LJCDBMessage5
     /// <include path='items/Serialize2/*' file='Doc/DbResult.xml'/>
     public void Serialize(string? fileSpec = null)
     {
-      if (!LJC.HasValue(fileSpec))
+      if (!LJC.HasText(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
@@ -395,7 +395,7 @@ namespace LJCDBMessage5
         {
           dataValues = Rows[0].Values;
         }
-        if (LJC.HasItems(dataValues))
+        if (LJC.HasListItems(dataValues))
         {
           retValue = dataValues.LJCCreateColumns(Columns);
         }
@@ -407,16 +407,16 @@ namespace LJCDBMessage5
     /// <include path='items/SetColumns/*' file='Doc/DbResult.xml'/>
     public void SetColumns(LJCDataColumns? dataColumns, LJCDBJoins? dbJoins = null)
     {
-      if (LJC.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         Columns = dataColumns.Clone();
       }
-      if (LJC.HasItems(dbJoins)
+      if (LJC.HasListItems(dbJoins)
         && Columns != null)
       {
         foreach (LJCDBJoin dbJoin in dbJoins)
         {
-          if (LJC.HasItems(dbJoin.Columns))
+          if (LJC.HasListItems(dbJoin.Columns))
           {
             foreach (LJCDataColumn dbColumn in dbJoin.Columns)
             {
@@ -456,7 +456,7 @@ namespace LJCDBMessage5
     /// <include path='items/SetRows/*' file='Doc/DbResult.xml'/>
     public void SetRows(DataTable dataTable, LJCDBJoins? dbJoins = null)
     {
-      if (LJC.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         var dataColumns = GetDbColumns(dataTable.Columns);
         if (dataColumns != null)

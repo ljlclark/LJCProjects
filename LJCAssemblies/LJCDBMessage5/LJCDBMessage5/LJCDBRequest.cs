@@ -20,7 +20,7 @@ namespace LJCDBMessage5
     {
       LJCDBRequest? retValue = null;
 
-      if (LJC.HasValue(request))
+      if (LJC.HasText(request))
       {
         retValue = LJC.XmlDeserializeMessage(typeof(LJCDBRequest)
           , request) as LJCDBRequest;
@@ -151,7 +151,7 @@ namespace LJCDBMessage5
             foreach (var dbJoin in Joins)
             {
               retColumns = dbJoin.Columns.LJCGetColumns(propertyNames);
-              if (LJC.HasItems(retColumns))
+              if (LJC.HasListItems(retColumns))
               {
                 foreach (var column in retColumns)
                 {

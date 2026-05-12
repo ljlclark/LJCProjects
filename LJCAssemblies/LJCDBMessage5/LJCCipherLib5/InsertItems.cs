@@ -16,7 +16,7 @@ namespace LJCCipherLib5
     {
       bool retValue = false;
 
-      if (LJC.HasItems(collection))
+      if (LJC.HasListItems(collection))
       {
         retValue = true;
       }

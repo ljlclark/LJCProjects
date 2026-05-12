@@ -161,7 +161,7 @@ namespace LJCCipherLib5
     // Copy the Insert Value to the Target bytes.
     private void CopyInsertValue(InsertItem insertItem, byte[] target)
     {
-      if (LJC.HasItems(insertItem.InsertValue))
+      if (LJC.HasListItems(insertItem.InsertValue))
       {
         Array.Copy(insertItem.InsertValue, 0, target, mCurrentTargetIndex
           , insertItem.InsertValue.Length);
