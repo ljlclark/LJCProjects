@@ -1,0 +1,3 @@
+CodeLine, CodeGroup, Solution, Name, Path
+LJCProjectsDev, CoreAssemblies, LJCDataAccessConfig, LJCDataAccessConfig, LJCDataAccessConfig
+LJCProjectsDev, CoreAssemblies, LJCNetCommon, LJCNetCommon, LJCNetCommon
