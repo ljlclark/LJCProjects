@@ -55,7 +55,7 @@ namespace LJCDocDataDAL5
     {
       var retIsSource = false;
 
-      if (LJC.HasValue(line))
+      if (LJC.HasText(line))
       {
         retIsSource = true;
       }

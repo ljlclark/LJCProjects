@@ -56,7 +56,7 @@ namespace LJCGenDocProgram5
 
       if (null == args
         || args.Length < 1
-        || !LJC.HasValue(args[0]))
+        || !LJC.HasText(args[0]))
       {
         retShowSyntax = true;
       }
