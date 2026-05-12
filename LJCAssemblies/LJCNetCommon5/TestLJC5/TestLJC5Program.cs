@@ -167,7 +167,7 @@ namespace TestLJC5
 
       // Check the text.
       string result = null;
-      if (LJC.HasValue(base64))
+      if (LJC.HasText(base64))
       {
         result = LJC.Base64ToText(base64);
       }
@@ -275,7 +275,7 @@ namespace TestLJC5
       string? encoded = LJC.XmlEncode("<text>Here & There</text>");
 
       // Check the text.
-      if (LJC.HasValue(encoded))
+      if (LJC.HasText(encoded))
       {
         var result = LJC.XmlDecode(encoded);
         var compare = "<text>Here & There</text>";

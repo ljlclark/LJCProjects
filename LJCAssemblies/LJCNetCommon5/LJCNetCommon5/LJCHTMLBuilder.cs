@@ -179,7 +179,7 @@ namespace LJCNetCommon5
     {
       string retText = "";
 
-      if (LJC.HasItems(attribs))
+      if (LJC.HasListItems(attribs))
       {
         var hb = new LJCHTMLBuilder(textState);
         var isFirst = true;
@@ -191,7 +191,7 @@ namespace LJCNetCommon5
           if (!isFirst)
           {
             // Wrap line for large attribute value.
-            if (LJC.HasValue(value)
+            if (LJC.HasText(value)
               && value.Length > 35)
             {
               hb.AddText($"\r\n{GetIndentString()}");
@@ -200,7 +200,7 @@ namespace LJCNetCommon5
           isFirst = false;
 
           hb.AddText($" {name}");
-          if (LJC.HasValue(value))
+          if (LJC.HasText(value))
           {
             hb.AddText($"=\"{value}\"");
           }
@@ -256,7 +256,7 @@ namespace LJCNetCommon5
         retText = "\r\n";
       }
 
-      if (LJC.HasValue(text))
+      if (LJC.HasText(text))
       {
         retText += text;
 
@@ -461,7 +461,7 @@ namespace LJCNetCommon5
       // Content is added if not an empty element.
       var isWrapped = false;
       if (!isEmpty
-        && LJC.HasValue(text))
+        && LJC.HasText(text))
       {
         var content = Content(text, textState, isEmpty, out isWrapped);
         hb.AddText(content);
@@ -616,11 +616,11 @@ namespace LJCNetCommon5
         , isEmpty: true);
       hb.Text(createText, false);
 
-      if (LJC.HasValue(description))
+      if (LJC.HasText(description))
       {
         hb.Meta("description", description, textState);
       }
-      if (LJC.HasValue(keywords))
+      if (LJC.HasText(keywords))
       {
         hb.Meta("keywords", keywords, textState);
       }
@@ -674,14 +674,14 @@ namespace LJCNetCommon5
       var hb = new LJCHTMLBuilder(textState);
 
       hb.Text("<!DOCTYPE html>");
-      if (LJC.HasElements(copyright))
+      if (LJC.HasArrayElements(copyright))
       {
         foreach (string line in copyright)
         {
           hb.Text($"<!-- {line} -->");
         }
       }
-      if (LJC.HasValue(fileName))
+      if (LJC.HasText(fileName))
       {
         hb.Text($"<!-- {fileName} -->");
       }
@@ -738,11 +738,11 @@ namespace LJCNetCommon5
     public LJCAttributes Attribs(string? className = null, string? id = null)
     {
       var retAttribs = new LJCAttributes();
-      if (LJC.HasValue(id))
+      if (LJC.HasText(id))
       {
         retAttribs.Add("id", id);
       }
-      if (LJC.HasValue(className))
+      if (LJC.HasText(className))
       {
         retAttribs.Add("class", className);
       }
@@ -806,7 +806,7 @@ namespace LJCNetCommon5
       // Add text content.
       isWrapped = false;
       if (!isEmpty
-        && LJC.HasValue(text))
+        && LJC.HasText(text))
       {
         if (text.Length > 80 - IndentLength())
         {

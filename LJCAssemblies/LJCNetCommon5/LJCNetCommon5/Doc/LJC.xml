@@ -77,21 +77,21 @@
       </code>
     </example>
   </CompareNull>
-  <HasColumns>
+  <HasTableColumns1>
     <summary>
       Checks a DataColumns collection for items.
     </summary>
     <param name="dataColumns">The DataColumns collection.</param>
     <returns>true if the collection has items; otherwise, false.</returns>
-  </HasColumns>
-  <HasColumns1>
+  </HasTableColumns1>
+  <HasTableColumns2>
     <summary>
       Checks a data table for columns definitions.
     </summary>
     <param name="dataTable">The data table object.</param>
     <returns>true if the data table contains Columns; otherwise, false.</returns>
-  </HasColumns1>
-  <HasData>
+  </HasTableColumns2>
+  <HasTableData>
     <summary>
       Checks a data table for rows.
     </summary>
@@ -104,39 +104,39 @@
       <code>
         using System.Data;
         using LJCNetCommon;
-        
+
         private static void HasData()
         {
-          DataTable dataTable = new DataTable();
-          
-          // Returns false.
-          bool result = NetCommon.HasData(dataTable);
+        DataTable dataTable = new DataTable();
+
+        // Returns false.
+        bool result = NetCommon.HasData(dataTable);
         }
       </code>
     </example>
-  </HasData>
-  <HasElements>
+  </HasTableData>
+  <HasArrayElements>
     <summary>
       Checks an array for elements.
     </summary>
     <param name="array">The array object.</param>
     <returns>true if an array and it has elements.</returns>
-  </HasElements>
-  <HasItems>
+  </HasArrayElements>
+  <HasListItems>
     <summary>
       Checks an IList collection for items.
     </summary>
     <param name="list">The IList interface.</param>
     <returns>true if the collection contains items; otherwise; false.</returns>
-  </HasItems>
-  <HasTables>
+  </HasListItems>
+  <HasDatasetTables>
     <summary>
       Checks a DataSet for tables.
     </summary>
-    <param name="dataSet">The DataSet object.</param>
+    <param name="dataset">The DataSet object.</param>
     <returns>true if the DataSet has tables; otherwise, false.</returns>
-  </HasTables>
-  <HasValue>
+  </HasDatasetTables>
+  <HasText>
     <summary>
       Checks if a text value exists.
     </summary>
@@ -144,7 +144,7 @@
     <returns>
       true if the text has a value; otherwise false.
     </returns>
-  </HasValue>
+  </HasText>
   <IsEqual>
     <summary>
       Checks if two values are equal.

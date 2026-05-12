@@ -20,7 +20,7 @@ namespace LJCDataAccessConfig5
     {
       LJCDataConfig retConfig = null;
 
-      if (LJC.HasValue(configName))
+      if (LJC.HasText(configName))
       {
         var dataConfigs = new LJCDataConfigs();
         dataConfigs.LoadData();
@@ -139,7 +139,7 @@ namespace LJCDataAccessConfig5
       tb.AddLine("  </LJCDataConfig>");
       tb.AddLine("</LJCDataConfigs>");
       var dataConfigs = tb.ToString();
-      if (LJC.HasValue(ConfigFileSpec))
+      if (LJC.HasText(ConfigFileSpec))
       {
         File.WriteAllText(ConfigFileSpec, dataConfigs);
       }

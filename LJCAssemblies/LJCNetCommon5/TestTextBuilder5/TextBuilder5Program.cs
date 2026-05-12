@@ -155,13 +155,13 @@ namespace TestTextBuilder5
       var result = tb.ToString();
 
       // Eliminate compiler message
-      if (LJC.HasValue(result)) { }
+      if (LJC.HasText(result)) { }
 
       tb.Clear();
       result = tb.Text(saveResult);
 
       // Eliminate compiler message
-      if (LJC.HasValue(result)) { }
+      if (LJC.HasText(result)) { }
     }
 
     // Adds a modified text line to the builder.
@@ -284,7 +284,7 @@ namespace TestTextBuilder5
       // One, Two, Three
 
       // Eliminate compiler message
-      if (LJC.HasValue(result)) { }
+      if (LJC.HasText(result)) { }
     }
 
     // Gets a new potentially indented line.

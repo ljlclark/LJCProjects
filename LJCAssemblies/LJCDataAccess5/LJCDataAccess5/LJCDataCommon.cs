@@ -63,7 +63,7 @@ namespace LJCDataAccess5
       DateTime retValue;
 
       retValue = GetMinDateTime(connectionType);
-      if (LJC.HasValue(dateText)
+      if (LJC.HasText(dateText)
         && dateText.Trim() != "/  /")
       {
         retValue = DateTime.Parse(dateText);
@@ -80,7 +80,7 @@ namespace LJCDataAccess5
       DateTime retValue;
 
       retValue = GetMinDateTime(connectionType);
-      if (LJC.HasValue(dateText)
+      if (LJC.HasText(dateText)
         && dateText.Trim() != "/  /")
       {
         retValue = DateTime.Parse(dateText);

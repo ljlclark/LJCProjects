@@ -227,7 +227,7 @@ namespace TestDataAccess5
       sql += " where Name = 'John Doe Updated'";
       var personTable = dataAccess.GetDataTable(sql);
       result = "";
-      if (LJC.HasData(personTable))
+      if (LJC.HasTableData(personTable))
       {
         result = "True";
       }
@@ -315,7 +315,7 @@ namespace TestDataAccess5
       sql = "select * from Person where Name = 'Name 1';";
       resultTable = dataAccess.GetDataTable(sql);
       result = "True";
-      if (LJC.HasData(resultTable))
+      if (LJC.HasTableData(resultTable))
       {
         result = "False";
       }
@@ -325,7 +325,7 @@ namespace TestDataAccess5
       sql = "select * from Person where Name = 'Name 2';";
       resultTable = dataAccess.GetDataTable(sql);
       result = "True";
-      if (LJC.HasData(resultTable))
+      if (LJC.HasTableData(resultTable))
       {
         result = "False";
       }
@@ -407,7 +407,7 @@ namespace TestDataAccess5
       sql = "select * from Person where Name = 'Name 1';";
       resultTable = dataAccess.GetDataTable(sql);
       result = "True";
-      if (LJC.HasData(resultTable))
+      if (LJC.HasTableData(resultTable))
       {
         result = "False";
       }
@@ -417,7 +417,7 @@ namespace TestDataAccess5
       sql = "select * from Person where Name = 'Name 2';";
       resultTable = dataAccess.GetDataTable(sql);
       result = "True";
-      if (LJC.HasData(resultTable))
+      if (LJC.HasTableData(resultTable))
       {
         result = "False";
       }
@@ -452,7 +452,7 @@ namespace TestDataAccess5
         dataAccess.FillDataTable(sql, personTable);
       }
       var result = "";
-      if (LJC.HasData(personTable))
+      if (LJC.HasTableData(personTable))
       {
         result = "True";
       }
@@ -574,7 +574,7 @@ namespace TestDataAccess5
       var sql = "select * from Person";
       var personTable = dataAccess.GetDataTable(sql);
       var result = "";
-      if (LJC.HasData(personTable))
+      if (LJC.HasTableData(personTable))
       {
         result = "True";
       }
@@ -641,7 +641,7 @@ namespace TestDataAccess5
       var dataTable = dataAccess.GetProcedureDataTable("sp_TestProc"
         , parameters);
       var result = "";
-      if (LJC.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         var row = dataTable.Rows[0];
         result = row["Name"].ToString();
@@ -673,7 +673,7 @@ namespace TestDataAccess5
       var sql = "select * from Person";
       var personTable = dataAccess.GetSchemaOnly(sql);
       var result = "";
-      if (LJC.HasColumns(personTable))
+      if (LJC.HasTableColumns(personTable))
       {
         result = "True";
       }
@@ -703,7 +703,7 @@ namespace TestDataAccess5
       // Test Method
       var personTable = dataAccess.GetColumnSQLTypes(databaseName, "Person");
       var result = "";
-      if (LJC.HasData(personTable))
+      if (LJC.HasTableData(personTable))
       {
         result = "True";
       }

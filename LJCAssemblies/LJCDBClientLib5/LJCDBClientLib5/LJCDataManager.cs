@@ -65,7 +65,7 @@ namespace LJCDBClientLib5
     {
       DataConfigName = dataConfigName;
       TableName = tableName;
-      if (LJC.HasValue(schemaName))
+      if (LJC.HasText(schemaName))
       {
         SchemaName = schemaName;
       }
@@ -99,7 +99,7 @@ namespace LJCDBClientLib5
         };
       }
       if (DbServiceRef != null
-        && LJC.HasValue(TableName))
+        && LJC.HasText(TableName))
       {
         DataDefinition = CreateBaseDefinition();
       }
@@ -150,12 +150,12 @@ namespace LJCDBClientLib5
     public void Delete(LJCDataColumns keyColumns, LJCDBFilters? filters = null)
     {
       // Make sure delete is restricted.
-      if (LJC.HasItems(keyColumns)
-        || LJC.HasItems(filters))
+      if (LJC.HasListItems(keyColumns)
+        || LJC.HasListItems(filters))
       {
         var requestKeyColumns = LJCDBCommon.RequestKeys(keyColumns, BaseDefinition);
         if (null == filters
-          && !LJC.HasItems(requestKeyColumns))
+          && !LJC.HasListItems(requestKeyColumns))
         {
           throw new ArgumentException("keyColumns or filters");
         }
@@ -231,15 +231,15 @@ namespace LJCDBClientLib5
       LJCDBResult? retResult;
 
       // Make sure select is restricted.
-      if (LJC.HasItems(keyColumns)
-        || LJC.HasItems(filters))
+      if (LJC.HasListItems(keyColumns)
+        || LJC.HasListItems(filters))
       {
         var requestColumns = LJCDBCommon.RequestColumns(BaseDefinition
           , propertyNames);
         var requestKeyColumns = LJCDBCommon.RequestKeys(keyColumns
           , BaseDefinition, joins);
         if (null == filters
-          && !LJC.HasItems(requestKeyColumns))
+          && !LJC.HasListItems(requestKeyColumns))
         {
           throw new ArgumentException("keyColumns or filters");
         }
@@ -262,17 +262,17 @@ namespace LJCDBClientLib5
       , List<string>? propertyNames = null, LJCDBFilters? filters = null)
     {
       // Make sure update is restricted.
-      if (LJC.HasItems(keyColumns)
-        || LJC.HasItems(filters))
+      if (LJC.HasListItems(keyColumns)
+        || LJC.HasListItems(filters))
       {
         var dataColumns = LJCDBCommon.RequestDataColumns(dataObject, BaseDefinition
         , propertyNames);
-        if (LJC.HasItems(dataColumns))
+        if (LJC.HasListItems(dataColumns))
         {
           var requestKeyColumns = LJCDBCommon.RequestDataKeys(keyColumns
             , BaseDefinition);
           if (null == filters
-            && !LJC.HasItems(requestKeyColumns))
+            && !LJC.HasListItems(requestKeyColumns))
           {
             throw new ArgumentException("keyColumns or filters");
           }
@@ -469,7 +469,7 @@ namespace LJCDBClientLib5
       , string? renameAs = null, string? caption = null)
     {
       BaseDefinition.LJCMapNames(columnName, propertyName, renameAs, caption);
-      if (LJC.HasItems(DataDefinition))
+      if (LJC.HasListItems(DataDefinition))
       {
         DataDefinition.LJCMapNames(columnName, propertyName, renameAs, caption);
       }
@@ -498,7 +498,7 @@ namespace LJCDBClientLib5
         {
           sequence++;
           object? id = null;
-          if (LJC.HasItems(dbRow.Values))
+          if (LJC.HasListItems(dbRow.Values))
           {
             var value = dbRow.Values[idName];
             if (value != null)
@@ -560,7 +560,7 @@ namespace LJCDBClientLib5
       var retValue = new LJCDBResult();
 
       if (dbResult != null
-        && LJC.HasItems(dbResult.Columns))
+        && LJC.HasListItems(dbResult.Columns))
       {
         // Create result data records.
         LJCDataColumns dbColumns = dbResult.Columns;
@@ -612,7 +612,7 @@ namespace LJCDBClientLib5
       if (LJCDBResult.HasColumns(dbResult))
       {
         //BaseDefinition = new LJCDataColumns(dbResult.Columns);
-        if (LJC.HasItems(dbResult.Columns))
+        if (LJC.HasListItems(dbResult.Columns))
         {
           BaseDefinition = [.. dbResult.Columns];
         }

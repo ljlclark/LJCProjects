@@ -18,7 +18,7 @@ namespace LJCNetCommon5
     {
       LJCKeyItems retValue = null;
 
-      if (LJC.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         retValue = [];
         foreach (LJCKeyItem item in items)
@@ -88,7 +88,7 @@ namespace LJCNetCommon5
     {
       LJCKeyItem retValue = null;
 
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         retValue = new LJCKeyItem()
         {
@@ -150,7 +150,7 @@ namespace LJCNetCommon5
     {
       LJCKeyItem retItem = null;
 
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var retItems = SearchPropertyName(propertyName);
         if (retItems != null
@@ -235,7 +235,7 @@ namespace LJCNetCommon5
       LJCKeyItems retValue = null;
 
       if (dataColumn != null
-        && LJC.HasValue(dataColumn.PropertyName))
+        && LJC.HasText(dataColumn.PropertyName))
       {
         retValue = SearchPropertyName(dataColumn.PropertyName);
       }

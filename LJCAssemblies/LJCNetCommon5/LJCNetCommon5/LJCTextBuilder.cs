@@ -258,7 +258,7 @@ namespace LJCNetCommon5
       }
 
       //if (TextLength(text) > 0)
-      if (LJC.HasValue(text))
+      if (LJC.HasText(text))
       {
         retText += text;
 

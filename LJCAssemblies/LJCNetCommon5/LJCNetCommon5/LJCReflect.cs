@@ -161,7 +161,7 @@ namespace LJCNetCommon5
     {
       string retVal = default;
 
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var type = GetPropertyType(propertyName);
         if (type == typeof(DateTime))
@@ -280,7 +280,7 @@ namespace LJCNetCommon5
     {
       object retValue = null;
 
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var propertyDelegate = mPropertyDelegates.LJCSearchName(propertyName);
         if (null == propertyDelegate)
@@ -319,7 +319,7 @@ namespace LJCNetCommon5
     {
       object retVal = null;
 
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var propertyInfo = GetPropertyInfo(propertyName);
         if (null == propertyInfo)
@@ -349,7 +349,7 @@ namespace LJCNetCommon5
       Type type;
 
       if (value != null
-        && LJC.HasValue(value.ToString()))
+        && LJC.HasText(value.ToString()))
       {
         PropertyInfo propertyInfo = GetPropertyInfo(propertyName);
         if (propertyInfo != null)

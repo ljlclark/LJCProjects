@@ -60,13 +60,13 @@ namespace LJCNetCommon5
         ParameterInfo[] parmInfos;
 
         parmInfos = methodInfo.GetParameters();
-        if (LJC.HasItems(parmInfos))
+        if (LJC.HasListItems(parmInfos))
         {
           for (int index = 0; index < parmInfos.Length; index++)
           {
             ParameterInfo parmInfo = parmInfos[index];
             string parmName = parmInfo.Name;
-            if (LJC.HasValue(parmName))
+            if (LJC.HasText(parmName))
             {
               paramNames.Add(parmName);
             }
@@ -90,7 +90,7 @@ namespace LJCNetCommon5
         var typeNames = new List<string>();
         ParameterInfo[] parmInfos;
         parmInfos = methodInfo.GetParameters();
-        if (LJC.HasItems(parmInfos))
+        if (LJC.HasListItems(parmInfos))
         {
           for (int index = 0; index < parmInfos.Length; index++)
           {
@@ -98,7 +98,7 @@ namespace LJCNetCommon5
             if (parmInfo != null)
             {
               string typeName = parmInfo.ParameterType.Name;
-              if (LJC.HasValue(typeName))
+              if (LJC.HasText(typeName))
               {
                 typeNames.Add(typeName);
               }
@@ -131,14 +131,14 @@ namespace LJCNetCommon5
 
       MethodInfo[] methodInfos = TypeReference?.GetMethods().Where
         (x => x.Name.Equals(methodName)).ToArray();
-      if (LJC.HasItems(methodInfos))
+      if (LJC.HasListItems(methodInfos))
       {
         ParameterInfo[] parmInfos;
         foreach (MethodInfo methodInfo in methodInfos)
         {
           try { parmInfos = methodInfo.GetParameters(); }
           catch { continue; }
-          if (!LJC.HasItems(parmInfos))
+          if (!LJC.HasListItems(parmInfos))
           {
             retMethodInfo = methodInfo;
           }
@@ -160,8 +160,8 @@ namespace LJCNetCommon5
       {
         var typeNames = ParmTypeNames(methodInfo);
         var parmInfos = methodInfo.GetParameters();
-        if (LJC.HasItems(typeNames)
-          && LJC.HasItems(parmInfos)
+        if (LJC.HasListItems(typeNames)
+          && LJC.HasListItems(parmInfos)
           && typeNames.Length == parmInfos.Length)
         {
           var found = true;
@@ -193,7 +193,7 @@ namespace LJCNetCommon5
 
       MethodInfo[] methodInfos = TypeReference?.GetMethods().Where
         (x => x.Name.Equals(methodName)).ToArray();
-      if (LJC.HasItems(methodInfos))
+      if (LJC.HasListItems(methodInfos))
       {
         var methodInfoList = new List<MethodInfo>();
         ParameterInfo[] parmInfos;
@@ -223,13 +223,13 @@ namespace LJCNetCommon5
       MethodInfo retMethodInfo = null;
 
       var methodInfos = ParmMethodInfosWithCount(methodName, parmNames.Length);
-      if (LJC.HasItems(methodInfos)
-        && LJC.HasItems(parmNames))
+      if (LJC.HasListItems(methodInfos)
+        && LJC.HasListItems(parmNames))
       {
         foreach (MethodInfo methodInfo in methodInfos)
         {
           var parmInfos = methodInfo.GetParameters();
-          if (!LJC.HasItems(parmInfos)
+          if (!LJC.HasListItems(parmInfos)
             || parmInfos.Length != parmNames.Length)
           {
             continue;
@@ -264,7 +264,7 @@ namespace LJCNetCommon5
     {
       Clear();
       FileSpec = fileSpec;
-      if (LJC.HasValue(FileSpec)
+      if (LJC.HasText(FileSpec)
         && File.Exists(FileSpec))
       {
         Assembly = Assembly.LoadFrom(FileSpec);
@@ -375,7 +375,7 @@ namespace LJCNetCommon5
 
       FieldInfo = null;
       if (TypeReference != null
-        && LJC.HasValue(FieldName))
+        && LJC.HasText(FieldName))
       {
         FieldInfo = TypeReference.GetField(FieldName);
       }
@@ -445,7 +445,7 @@ namespace LJCNetCommon5
 
       MethodInfo = null;
       if (TypeReference != null
-        && LJC.HasValue(MethodName))
+        && LJC.HasText(MethodName))
       {
         BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public
           | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly;
@@ -545,11 +545,11 @@ namespace LJCNetCommon5
 
       PropertyInfo = null;
       if (TypeReference != null
-        && LJC.HasValue(PropertyName))
+        && LJC.HasText(PropertyName))
       {
         if ("Item" == PropertyName)
         {
-          if (LJC.HasValue(indexerSignature))
+          if (LJC.HasText(indexerSignature))
           {
             PropertyInfo = GetIndexerInfo(indexerSignature);
           }
@@ -573,7 +573,7 @@ namespace LJCNetCommon5
       MethodName = null;
       MethodInfo = null;
       if (Assembly != null
-        && LJC.HasValue(TypeName))
+        && LJC.HasText(TypeName))
       {
         TypeReference = Assembly.GetType(TypeName);
       }

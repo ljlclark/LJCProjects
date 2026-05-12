@@ -87,7 +87,7 @@ namespace LJCDataAccess5
     {
       DbConnection? retValue = null;
 
-      if (!LJC.HasValue(ConnectionString))
+      if (!LJC.HasText(ConnectionString))
       {
         string errorText = "The ProviderFactory.ConnectionString value"
           + " is not set.";
@@ -136,7 +136,7 @@ namespace LJCDataAccess5
     {
       StringBuilder builder;
 
-      if (!LJC.HasValue(ProviderName))
+      if (!LJC.HasText(ProviderName))
       {
         builder = new StringBuilder(64);
         builder.AppendLine("The Provider name is missing or the");

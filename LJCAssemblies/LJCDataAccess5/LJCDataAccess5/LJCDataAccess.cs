@@ -191,9 +191,9 @@ namespace LJCDataAccess5
       DbCommand? command;
       int retValue = 0;
 
-      if (LJC.HasValue(sql))
+      if (LJC.HasText(sql))
       {
-        if (LJC.HasValue(mProviderName)
+        if (LJC.HasText(mProviderName)
           && IsMySql(mProviderName))
         {
           if (mMySqlDataAccess != null)
@@ -257,7 +257,7 @@ namespace LJCDataAccess5
         if (GetUse(ref first, ref sql))
         {
           ScriptSQL = sql;
-          if (LJC.HasValue(mProviderName)
+          if (LJC.HasText(mProviderName)
             && IsMySql(mProviderName))
           {
             mMySqlDataAccess?.ExecuteNonQuery(ScriptSQL);
@@ -278,7 +278,7 @@ namespace LJCDataAccess5
       DbCommand? dbCommand;
       DbDataAdapter? dbDataAdapter = null;
 
-      if (LJC.HasValue(mProviderName)
+      if (LJC.HasText(mProviderName)
         && IsMySql(mProviderName))
       {
         mMySqlDataAccess?.FillDataTable(sql, dataTable);
@@ -328,7 +328,7 @@ namespace LJCDataAccess5
       DbCommand? command;
       DbDataReader? retValue = null;
 
-      if (LJC.HasValue(mProviderName)
+      if (LJC.HasText(mProviderName)
         && IsMySql(mProviderName))
       {
         if (mMySqlDataAccess != null)
@@ -360,7 +360,7 @@ namespace LJCDataAccess5
       DbDataAdapter? dbDataAdapter = null;
       DataSet? retValue = null;
 
-      if (LJC.HasValue(mProviderName)
+      if (LJC.HasText(mProviderName)
         && IsMySql(mProviderName))
       {
         if (mMySqlDataAccess != null)
@@ -405,9 +405,9 @@ namespace LJCDataAccess5
     {
       DataTable? retTable = null;
 
-      if (LJC.HasValue(sql))
+      if (LJC.HasText(sql))
       {
-        if (LJC.HasValue(mProviderName)
+        if (LJC.HasText(mProviderName)
           && IsMySql(mProviderName))
         {
           if (mMySqlDataAccess != null)
@@ -418,7 +418,7 @@ namespace LJCDataAccess5
         else
         {
           retTable = GetSchemaOnly(sql);
-          if (LJC.HasColumns(retTable))
+          if (LJC.HasTableColumns(retTable))
           {
             FillDataTable(sql, retTable, tableMapping);
           }
@@ -436,7 +436,7 @@ namespace LJCDataAccess5
       DbDataAdapter? dbDataAdapter;
       DataTable? retValue = null;
 
-      if (LJC.HasValue(mProviderName)
+      if (LJC.HasText(mProviderName)
         && IsMySql(mProviderName))
       {
         retValue = mMySqlDataAccess?.GetProcedureDataTable(procedureName
@@ -472,7 +472,7 @@ namespace LJCDataAccess5
               dbDataAdapter.SelectCommand = dbCommand;
               var dataSet = new DataSet();
               dbDataAdapter.Fill(dataSet);
-              if (LJC.HasTables(dataSet))
+              if (LJC.HasDatasetTables(dataSet))
               {
                 retValue = dataSet.Tables[0];
               }
@@ -490,7 +490,7 @@ namespace LJCDataAccess5
     {
       DataTable? retValue = null;
 
-      if (LJC.HasValue(mProviderName)
+      if (LJC.HasText(mProviderName)
         && IsMySql(mProviderName))
       {
         if (mMySqlDataAccess != null)
@@ -561,7 +561,7 @@ namespace LJCDataAccess5
       {
         if (IsUseCommand(sql))
         {
-          if (LJC.HasValue(DatabaseName))
+          if (LJC.HasText(DatabaseName))
           {
             sql = $"use {DatabaseName}";
           }
@@ -586,15 +586,15 @@ namespace LJCDataAccess5
         retValue = false;
         errorText += "The LJCDataAccess.ProviderFactory value is not set.\r\n";
       }
-      if (!LJC.HasValue(ConnectionString))
+      if (!LJC.HasText(ConnectionString))
       {
         errorText += "The LJCDataAccess.ConnectionString value is not set.\r\n";
       }
-      if (!LJC.HasValue(ProviderName))
+      if (!LJC.HasText(ProviderName))
       {
         errorText += "The LJCDataAccess.ProviderName value is not set.\r\n";
       }
-      if (LJC.HasValue(errorText))
+      if (LJC.HasText(errorText))
       {
         throw new MissingMemberException(errorText);
       }
@@ -610,10 +610,10 @@ namespace LJCDataAccess5
       get { return mConnectionString; }
       set
       {
-        if (LJC.HasValue(value))
+        if (LJC.HasText(value))
         {
           mConnectionString = value;
-          if (!LJC.HasValue(mProviderName))
+          if (!LJC.HasText(mProviderName))
           {
             mProviderName = GetSQLServerProviderName();
           }
@@ -649,14 +649,14 @@ namespace LJCDataAccess5
       get { return mProviderName; }
       set
       {
-        if (LJC.HasValue(value))
+        if (LJC.HasText(value))
         {
           mProviderName = value;
-          if (!LJC.HasValue(mProviderName))
+          if (!LJC.HasText(mProviderName))
           {
             mProviderName = GetSQLServerProviderName();
           }
-          if (LJC.HasValue(mConnectionString))
+          if (LJC.HasText(mConnectionString))
           {
             if ("MySql.Data.MySqlClient" == mProviderName)
             {

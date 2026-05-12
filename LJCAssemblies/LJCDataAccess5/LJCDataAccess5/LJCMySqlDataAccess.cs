@@ -32,7 +32,7 @@ namespace LJCDataAccess5
       MySqlCommand command;
       int retValue = 0;
 
-      if (!LJC.HasValue(ConnectionString))
+      if (!LJC.HasText(ConnectionString))
       {
         string errorText = "The MySqlDataAccess.ConnectionString value"
           + " is not set.";
@@ -85,7 +85,7 @@ namespace LJCDataAccess5
       MySqlCommand command;
       MySqlDataReader retValue;
 
-      if (!LJC.HasValue(ConnectionString))
+      if (!LJC.HasText(ConnectionString))
       {
         string errorText = "The MySqlDataAccess.ConnectionString value"
           + " is not set.";
@@ -142,7 +142,7 @@ namespace LJCDataAccess5
       DataTable? retValue = null;
 
       DataSet? dataSet = GetDataSet(sql, tableMapping);
-      if (LJC.HasTables(dataSet))
+      if (LJC.HasDatasetTables(dataSet))
       {
         retValue = dataSet.Tables[0];
       }
@@ -175,7 +175,7 @@ namespace LJCDataAccess5
             maxLength = 0;
             value = reader[index].ToString();
             if (columnType == typeof(string)
-              && LJC.HasValue(value))
+              && LJC.HasText(value))
             {
               maxLength = value.Length;
               lookupDataColumn = retValue.Columns[columnName];
@@ -230,7 +230,7 @@ namespace LJCDataAccess5
         {
           CommandType = CommandType.StoredProcedure
         };
-        if (LJC.HasItems(parameters))
+        if (LJC.HasListItems(parameters))
         {
           foreach (LJCProcedureParameter parameter in parameters)
           {
@@ -250,7 +250,7 @@ namespace LJCDataAccess5
         dataAdapter = new MySqlDataAdapter(command);
         var dataSet = new DataSet();
         dataAdapter.Fill(dataSet);
-        if (LJC.HasTables(dataSet))
+        if (LJC.HasDatasetTables(dataSet))
         {
           retValue = dataSet.Tables[0];
         }
@@ -273,7 +273,7 @@ namespace LJCDataAccess5
       DataSet dataSet;
       DataTable? retValue = null;
 
-      if (!LJC.HasValue(ConnectionString))
+      if (!LJC.HasText(ConnectionString))
       {
         string errorText = "The MySqlDataAccess.ConnectionString value"
           + " is not set.";
@@ -292,7 +292,7 @@ namespace LJCDataAccess5
         LJCDataCommon.SetTableMappingMySql(dataAdapter, tableMapping);
         dataSet = new DataSet();
         dataAdapter.FillSchema(dataSet, SchemaType.Source);
-        if (LJC.HasTables(dataSet))
+        if (LJC.HasDatasetTables(dataSet))
         {
           retValue = dataSet.Tables[0];
         }

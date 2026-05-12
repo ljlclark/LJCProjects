@@ -42,7 +42,7 @@ namespace LJCDBClientLib5
     {
       bool retValue = false;
 
-      if (!LJC.HasValue(dataConfigName))
+      if (!LJC.HasText(dataConfigName))
       {
         throw new ArgumentException("message", nameof(dataConfigName));
       }
@@ -54,7 +54,7 @@ namespace LJCDBClientLib5
 
       GetConfigValues(dataConfigName, out _, out string? connectionString
         , out string providerName);
-      if (LJC.HasValue(connectionString))
+      if (LJC.HasText(connectionString))
       {
         var dataAccess = new LJCDataAccess(connectionString, providerName);
         foreach (string fileSpec in fileSpecs)

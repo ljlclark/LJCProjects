@@ -25,7 +25,7 @@ namespace LJCNetCommon5
     {
       LJCDataValues retValue;
 
-      if (!LJC.HasValue(fileSpec))
+      if (!LJC.HasText(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
@@ -49,7 +49,7 @@ namespace LJCNetCommon5
     /// <parentGroup>constructors</parentGroup>
     public LJCDataValues(LJCDataValues items)
     {
-      if (LJC.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -113,7 +113,7 @@ namespace LJCNetCommon5
     /// <parentGroup>collection</parentGroup>
     public void LJCSerialize(string? fileSpec = null)
     {
-      if (!LJC.HasValue(fileSpec))
+      if (!LJC.HasText(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
@@ -241,7 +241,7 @@ namespace LJCNetCommon5
     {
       byte retValue = default;
 
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var dataValue = LJCSearchPropertyName(propertyName);
         if (dataValue != null
@@ -259,7 +259,7 @@ namespace LJCNetCommon5
     {
       byte[] retValue = default;
 
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var dataValue = LJCSearchPropertyName(propertyName);
         if (dataValue != null
@@ -422,12 +422,12 @@ namespace LJCNetCommon5
     {
       string retValue = null;
 
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var dataValue = LJCSearchPropertyName(propertyName);
         if (dataValue != null
           && dataValue.Value != null
-          && LJC.HasValue(dataValue.Value.ToString()))
+          && LJC.HasText(dataValue.Value.ToString()))
         {
           retValue = dataValue.Value.ToString();
         }
@@ -440,8 +440,8 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public void LJCSetValue(string propertyName, object value)
     {
-      if (LJC.HasItems(this)
-        && LJC.HasValue(propertyName))
+      if (LJC.HasListItems(this)
+        && LJC.HasText(propertyName))
       {
         var dbValue = LJCSearchPropertyName(propertyName);
         if (dbValue != null)

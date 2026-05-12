@@ -52,7 +52,7 @@ namespace LJCNetCommon5
       string retName = null;
 
       string[] tokens = LJCNetString.Split(line, " ");
-      if (LJC.HasElements(tokens))
+      if (LJC.HasArrayElements(tokens))
       {
         // class
         if (tokens.Length > 1)
@@ -102,14 +102,14 @@ namespace LJCNetCommon5
       string retName = null;
 
       string[] tokens = LJCNetString.Split(line, " ");
-      if (LJC.HasElements(tokens))
+      if (LJC.HasArrayElements(tokens))
       {
         // [modifier] [modifier2] method()
         // if (returnsBool());
         // var name = method();
 
         // void Method()
-        if (!LJC.HasValue(retName)
+        if (!LJC.HasText(retName)
           && tokens.Length > 1)
         {
           if (IsType(tokens[0]))
@@ -122,7 +122,7 @@ namespace LJCNetCommon5
         }
 
         // static void Method()
-        if (!LJC.HasValue(retName)
+        if (!LJC.HasText(retName)
           && tokens.Length > 2)
         {
           if ((IsModifier(tokens[0])
@@ -137,7 +137,7 @@ namespace LJCNetCommon5
         }
 
         // public static void Method()
-        if (!LJC.HasValue(retName)
+        if (!LJC.HasText(retName)
           && tokens.Length > 3)
         {
           if (IsModifier(tokens[0])
@@ -152,7 +152,7 @@ namespace LJCNetCommon5
         }
 
         // public static void Method()
-        if (!LJC.HasValue(retName)
+        if (!LJC.HasText(retName)
           && tokens.Length > 4)
         {
           if (IsModifier(tokens[0])
@@ -178,9 +178,9 @@ namespace LJCNetCommon5
       string retName = null;
 
       string[] tokens = LJCNetString.Split(line, " ");
-      if (LJC.HasElements(tokens))
+      if (LJC.HasArrayElements(tokens))
       {
-        if (!LJC.HasValue(retName))
+        if (!LJC.HasText(retName))
         {
           // type Property
           if (2 == tokens.Length
@@ -212,7 +212,7 @@ namespace LJCNetCommon5
           }
         }
 
-        if (!LJC.HasValue(retName))
+        if (!LJC.HasText(retName))
         {
           // modifier type Property {
           if (tokens.Length > 2
@@ -256,7 +256,7 @@ namespace LJCNetCommon5
     {
       var retValue = false;
 
-      if (LJC.HasElements(ClassModifier2))
+      if (LJC.HasArrayElements(ClassModifier2))
       {
         foreach (var classModifier in ClassModifier2)
         {
@@ -275,7 +275,7 @@ namespace LJCNetCommon5
     {
       var retValue = false;
 
-      if (LJC.HasElements(Modifier))
+      if (LJC.HasArrayElements(Modifier))
       {
         foreach (var modifier in Modifier)
         {
@@ -294,7 +294,7 @@ namespace LJCNetCommon5
     {
       var retValue = false;
 
-      if (LJC.HasElements(MethodModifier2))
+      if (LJC.HasArrayElements(MethodModifier2))
       {
         foreach (var modifier in MethodModifier2)
         {
@@ -313,7 +313,7 @@ namespace LJCNetCommon5
     {
       var retValue = false;
 
-      if (LJC.HasElements(MethodModifier3))
+      if (LJC.HasArrayElements(MethodModifier3))
       {
         foreach (var modifier in MethodModifier3)
         {
@@ -332,7 +332,7 @@ namespace LJCNetCommon5
     {
       var retValue = false;
 
-      if (LJC.HasElements(DataType))
+      if (LJC.HasArrayElements(DataType))
       {
         foreach (var dataType in DataType)
         {

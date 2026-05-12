@@ -32,7 +32,7 @@ namespace LJCNetCommon5
       if (argument != null
         && typeof(string) == argument.GetType())
       {
-        if (!HasValue(GetString(argument)))
+        if (!HasText(GetString(argument)))
         {
           var message = $"Missing argument {nameof(argument)}.";
           throw new ArgumentNullException(message);
@@ -58,7 +58,7 @@ namespace LJCNetCommon5
 
       if (typeof(IList) == argument.GetType())
       {
-        if (HasItems((IList)argument))
+        if (HasListItems((IList)argument))
         {
           var message = $"Missing argument {nameof(argument)}.";
           throw new ArgumentNullException(message);
@@ -79,7 +79,7 @@ namespace LJCNetCommon5
       if (typeof(DataTable) == argument.GetType())
       {
         if (argument is DataTable dataTable
-          && HasData(dataTable))
+          && HasTableData(dataTable))
         {
           var message = $"Missing argument {nameof(argument)}.";
           throw new ArgumentNullException(message);
@@ -117,10 +117,20 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Checks a DataColumns collection for items.
-    /// <include path="members/HasColumns/*" file="Doc/LJC.xml"/>
+    // Checks a data table for columns definitions.
+    /// <include path="members/HasTableColumns1/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
+    [Obsolete("Use HasTableColumns(dataColumns) instead.")]
     public static bool HasColumns([NotNullWhen(true)]
+      DataColumnCollection? dataColumns)
+    {
+      return HasTableColumns(dataColumns);
+    }
+
+    // Checks a DataColumns collection for items.
+    /// <include path="members/HasTableColumns1/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>check</parentGroup>
+    public static bool HasTableColumns([NotNullWhen(true)]
       DataColumnCollection? dataColumns)
     {
       bool retValue = false;
@@ -134,14 +144,23 @@ namespace LJCNetCommon5
     }
 
     // Checks a data table for columns definitions.
-    /// <include path="members/HasColumns1/*" file="Doc/LJC.xml"/>
+    /// <include path="members/HasTableColumns2/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
+    [Obsolete("Use HasTableColumns(dataTable) instead.")]
     public static bool HasColumns([NotNullWhen(true)] DataTable? dataTable)
+    {
+      return HasTableColumns(dataTable);
+    }
+
+    // Checks a data table for columns definitions.
+    /// <include path="members/HasTableColumns2/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>check</parentGroup>
+    public static bool HasTableColumns([NotNullWhen(true)] DataTable? dataTable)
     {
       bool retValue = true;
 
       if (dataTable != null
-        && HasColumns(dataTable.Columns))
+        && HasTableColumns(dataTable.Columns))
       {
         retValue = true;
       }
@@ -149,9 +168,18 @@ namespace LJCNetCommon5
     }
 
     // Checks a data table for rows.
-    /// <include path="members/HasData/*" file="Doc/LJC.xml"/>
+    /// <include path="members/HasTableData/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
+    [Obsolete("Use HasTableData(dataTable) instead.")]
     public static bool HasData([NotNullWhen(true)] DataTable? dataTable)
+    {
+      return HasTableData(dataTable);
+    }
+
+    // Checks a data table for rows.
+    /// <include path="members/HasTableData/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>check</parentGroup>
+    public static bool HasTableData([NotNullWhen(true)] DataTable? dataTable)
     {
       bool retValue = false;
 
@@ -165,9 +193,18 @@ namespace LJCNetCommon5
     }
 
     // Checks an array for elements.
-    /// <include path="members/HasElements/*" file="Doc/LJC.xml"/>
+    /// <include path="members/HasArrayElements/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
+    [Obsolete("Use HasArrayElements(array) instead.")]
     public static bool HasElements([NotNullWhen(true)] object? array)
+    {
+      return HasArrayElements(array);
+    }
+
+    // Checks an array for elements.
+    /// <include path="members/HasArrayElements/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>check</parentGroup>
+    public static bool HasArrayElements([NotNullWhen(true)] object? array)
     {
       bool retValue = false;
 
@@ -186,9 +223,18 @@ namespace LJCNetCommon5
     }
 
     // Checks an IList collection for items.
-    /// <include path="members/HasItems/*" file="Doc/LJC.xml"/>
+    /// <include path="members/HasListItems/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
+    [Obsolete("Use HasListItems(list) instead.")]
     public static bool HasItems([NotNullWhen(true)] IList? list)
+    {
+      return HasListItems(list);
+    }
+
+    // Checks an IList collection for items.
+    /// <include path="members/HasListItems/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>check</parentGroup>
+    public static bool HasListItems([NotNullWhen(true)] IList? list)
     {
       bool retValue = false;
 
@@ -201,15 +247,24 @@ namespace LJCNetCommon5
     }
 
     // Checks a DataSet for tables.
-    /// <include path="members/HasTables/*" file="Doc/LJC.xml"/>
+    /// <include path="members/HasDatasetTables/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
-    public static bool HasTables([NotNullWhen(true)] DataSet? dataSet)
+    [Obsolete("Use HasDatasetTables(datset) instead.")]
+    public static bool HasTables([NotNullWhen(true)] DataSet? dataset)
+    {
+      return HasDatasetTables(dataset);
+    }
+
+    // Checks a DataSet for tables.
+    /// <include path="members/HasDatasetTables/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>check</parentGroup>
+    public static bool HasDatasetTables([NotNullWhen(true)] DataSet? dataset)
     {
       bool retValue = false;
 
-      if (dataSet != null
-        && dataSet.Tables != null
-        && dataSet.Tables.Count > 0)
+      if (dataset != null
+        && dataset.Tables != null
+        && dataset.Tables.Count > 0)
       {
         retValue = true;
       }
@@ -217,9 +272,18 @@ namespace LJCNetCommon5
     }
 
     // Checks if a text value exists.
-    /// <include path="members/HasValue/*" file="Doc/LJC.xml"/>
+    /// <include path="members/HasText/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
+    [Obsolete("Use HasText(text) instead.")]
     public static bool HasValue([NotNullWhen(true)] string? text)
+    {
+      return HasText(text);
+    }
+
+    // Checks if a text value exists.
+      /// <include path="members/HasText/*" file="Doc/LJC.xml"/>
+      /// <parentGroup>check</parentGroup>
+    public static bool HasText([NotNullWhen(true)] string? text)
     {
       return !string.IsNullOrWhiteSpace(text);
     }
@@ -551,7 +615,7 @@ namespace LJCNetCommon5
     {
       string? retValue = null;
 
-      if (HasValue(text))
+      if (HasText(text))
       {
         retValue = text.Replace("&lt;", "<");
         retValue = retValue.Replace("&gt;", ">");
@@ -569,7 +633,7 @@ namespace LJCNetCommon5
     {
       string? retValue = null;
 
-      if (HasValue(text))
+      if (HasText(text))
       {
         retValue = text.Replace("&", "&amp;");
         retValue = retValue.Replace("<", "&lt;");
@@ -603,7 +667,7 @@ namespace LJCNetCommon5
         try
         {
           XmlSerializer serializer;
-          if (HasValue(rootName))
+          if (HasText(rootName))
           {
             var root = new XmlRootAttribute(rootName);
             serializer = new XmlSerializer(type, root);
@@ -662,14 +726,14 @@ namespace LJCNetCommon5
       FileStream fileStream;
       string errorText;
 
-      if (!HasValue(fileSpec))
+      if (!HasText(fileSpec))
       {
         errorText = "Missing file specification.";
         throw new ArgumentException(errorText);
       }
 
       string? folder = Path.GetDirectoryName(fileSpec);
-      if (HasValue(folder)
+      if (HasText(folder)
         && !Directory.Exists(folder))
       {
         Directory.CreateDirectory(folder);
@@ -677,7 +741,7 @@ namespace LJCNetCommon5
 
       // Serialize to XML.
       XmlSerializer serializer;
-      if (HasValue(rootName))
+      if (HasText(rootName))
       {
         var root = new XmlRootAttribute(rootName);
         serializer = new XmlSerializer(type, root);
@@ -741,10 +805,10 @@ namespace LJCNetCommon5
     {
       bool retValue = false;
 
-      if (HasValue(key))
+      if (HasText(key))
       {
         string? configValue = ConfigurationManager.AppSettings[key];
-        if (HasValue(configValue))
+        if (HasText(configValue))
         {
           _ = bool.TryParse(configValue, out retValue);
         }
@@ -761,10 +825,10 @@ namespace LJCNetCommon5
 
       color = Color.Black;
 
-      if (HasValue(key))
+      if (HasText(key))
       {
         string? configValue = ConfigurationManager.AppSettings[key];
-        if (HasValue(configValue))
+        if (HasText(configValue))
         {
           color = Color.FromName(configValue);
           if (color != Color.FromArgb(0, 0, 0, 0))
@@ -783,7 +847,7 @@ namespace LJCNetCommon5
     {
       string? retValue = null;
 
-      if (HasValue(key))
+      if (HasText(key))
       {
         retValue = ConfigurationManager.AppSettings[key];
       }
@@ -1066,7 +1130,7 @@ namespace LJCNetCommon5
       if (value != null)
       {
         var text = value.ToString();
-        if (HasValue(text))
+        if (HasText(text))
         {
           retValue = text.Trim();
         }

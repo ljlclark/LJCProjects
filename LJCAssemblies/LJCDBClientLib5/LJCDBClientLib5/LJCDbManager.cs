@@ -35,7 +35,7 @@ namespace LJCDBClientLib5
 
       mDbDataAccess = new DbDataAccess(DataConfigName);
       if (mDbDataAccess != null
-        && LJC.HasValue(TableName))
+        && LJC.HasText(TableName))
       {
         DataDefinition = CreateDataDefinition();
         //LookupColumnNames = new List<string>();
@@ -70,8 +70,8 @@ namespace LJCDBClientLib5
     /// <include path='items/Delete/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
     public void Delete(LJCDataColumns keyColumns, LJCDBFilters? filters = null)
     {
-      if (LJC.HasItems(keyColumns)
-        || LJC.HasItems(filters))
+      if (LJC.HasListItems(keyColumns)
+        || LJC.HasListItems(filters))
       {
         var requestKeys = LJCDBCommon.RequestKeys(keyColumns, BaseDefinition);
 
@@ -91,7 +91,7 @@ namespace LJCDBClientLib5
       if (retValue != null)
       {
         AffectedCount = retValue.AffectedRecords;
-        if (LJC.HasValue(retValue.ExecutedSql))
+        if (LJC.HasText(retValue.ExecutedSql))
         {
           SQLStatement = retValue.ExecutedSql;
         }

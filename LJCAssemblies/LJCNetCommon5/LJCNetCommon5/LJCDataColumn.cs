@@ -69,7 +69,7 @@ namespace LJCNetCommon5
       mColumnName = ""; // Required
       ColumnName = columnName;
       DataTypeName = dataTypeName;
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         PropertyName = propertyName;
       }
@@ -197,13 +197,13 @@ namespace LJCNetCommon5
       set
       {
         // Cannot change column name to null or white space.
-        if (LJC.HasValue(value))
+        if (LJC.HasText(value))
         {
           mColumnName = value;
 
           // Set empty property. Name the same as the column name.
-          if (LJC.HasValue(mColumnName)
-            && !LJC.HasValue(mPropertyName))
+          if (LJC.HasText(mColumnName)
+            && !LJC.HasText(mPropertyName))
           {
             PropertyName = ColumnName;
           }
@@ -241,13 +241,13 @@ namespace LJCNetCommon5
       set
       {
         // Cannot change property name to null or white space.
-        if (LJC.HasValue(value))
+        if (LJC.HasText(value))
         {
           mPropertyName = value;
 
           // Set empty property. Name the same as the column name.
-          if (LJC.HasValue(mPropertyName)
-            && !LJC.HasValue(mColumnName))
+          if (LJC.HasText(mPropertyName)
+            && !LJC.HasText(mColumnName))
           {
             ColumnName = PropertyName;
           }

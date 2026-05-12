@@ -25,7 +25,7 @@ namespace LJCNetCommon5
     {
       LJCDataColumns retValue;
 
-      if (!LJC.HasValue(fileSpec))
+      if (!LJC.HasText(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
@@ -138,7 +138,7 @@ namespace LJCNetCommon5
     {
       LJCDataValues retValue = null;
 
-      if (LJC.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         retValue = [];
         foreach (LJCDataColumn dataColumn in dataColumns)
@@ -187,7 +187,7 @@ namespace LJCNetCommon5
     /// <parentGroup>constructors</parentGroup>
     public LJCDataColumns(LJCDataColumns? items)
     {
-      if (LJC.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -206,7 +206,7 @@ namespace LJCNetCommon5
     {
       LJCDataColumn searchColumn;
 
-      if (LJC.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         foreach (LJCDataColumn dataColumn in dataColumns)
         {
@@ -346,7 +346,7 @@ namespace LJCNetCommon5
         RenameAs = renameAs
       };
 
-      if (!LJC.HasValue(renameAs))
+      if (!LJC.HasText(renameAs))
       {
         retValue.RenameAs = retValue.PropertyName;
       }
@@ -381,7 +381,7 @@ namespace LJCNetCommon5
       LJCDataColumn searchColumn;
       LJCDataColumns retValue = null;
 
-      if (LJC.HasItems(propertyNames))
+      if (LJC.HasListItems(propertyNames))
       {
         retValue = [];
         foreach (string propertyName in propertyNames)
@@ -403,7 +403,7 @@ namespace LJCNetCommon5
     {
       List<string> retValue = null;
 
-      if (LJC.HasItems(this))
+      if (LJC.HasListItems(this))
       {
         retValue = [];
         foreach (LJCDataColumn dataColumn in this)
@@ -431,7 +431,7 @@ namespace LJCNetCommon5
     /// <parentGroup>collection</parentGroup>
     public void LJCSerialize(string? fileSpec = null)
     {
-      if (!LJC.HasValue(fileSpec))
+      if (!LJC.HasText(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
@@ -444,7 +444,7 @@ namespace LJCNetCommon5
     /// <parentGroup>collection</parentGroup>
     public void LJCSetData(LJCDataColumn dataColumn)
     {
-      if (LJC.HasItems(this))
+      if (LJC.HasListItems(this))
       {
         var addDataColumn = LJCGetColumn(dataColumn.PropertyName!);
         if (addDataColumn != null)
@@ -509,7 +509,7 @@ namespace LJCNetCommon5
       DbColumnNameComparer comparer;
       LJCDataColumn retValue = null;
 
-      if (LJC.HasValue(name))
+      if (LJC.HasText(name))
       {
         comparer = new DbColumnNameComparer();
         LJCSortName(comparer);
@@ -534,7 +534,7 @@ namespace LJCNetCommon5
     {
       LJCDataColumn retValue = null;
 
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var comparer = new DbColumnPropertyComparer();
         LJCSortProperty(comparer);
@@ -558,7 +558,7 @@ namespace LJCNetCommon5
     {
       LJCDataColumn retValue = null;
 
-      if (LJC.HasValue(renameAs))
+      if (LJC.HasText(renameAs))
       {
         var comparer = new LJCDataColumnRenameAsComparer();
         LJCSortRenameAs(comparer);
@@ -667,7 +667,7 @@ namespace LJCNetCommon5
     {
       byte retValue = default;
 
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var dataColumn = LJCSearchPropertyName(propertyName);
         if (dataColumn != null
@@ -822,12 +822,12 @@ namespace LJCNetCommon5
     {
       string retValue = default;
 
-      if (LJC.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var dataColumn = LJCSearchPropertyName(propertyName);
         if (dataColumn != null
           && dataColumn.Value != null
-          && LJC.HasValue(dataColumn.Value.ToString()))
+          && LJC.HasText(dataColumn.Value.ToString()))
         {
           retValue = dataColumn.Value.ToString();
         }
@@ -840,8 +840,8 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public void LJCSetValue(string propertyName, object value)
     {
-      if (LJC.HasItems(this)
-        && LJC.HasValue(propertyName))
+      if (LJC.HasListItems(this)
+        && LJC.HasText(propertyName))
       {
         var dataColumn = LJCGetColumn(propertyName);
         if (dataColumn != null)

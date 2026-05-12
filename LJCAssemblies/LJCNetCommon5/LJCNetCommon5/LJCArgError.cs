@@ -41,7 +41,7 @@ namespace LJCNetCommon5
     {
       string retValue = null;
 
-      if (LJC.HasValue(mMessage))
+      if (LJC.HasText(mMessage))
       {
         retValue = $"{ClassName}\r\n{MethodName}\r\n";
         retValue += mMessage;

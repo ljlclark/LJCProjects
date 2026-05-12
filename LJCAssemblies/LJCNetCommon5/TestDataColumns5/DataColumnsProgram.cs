@@ -125,7 +125,7 @@ namespace TestDataColumns5
       var values = LJCDataColumns.LJCObjectPropertyNames(dataObject);
       // Check Result
       string result = null;
-      if (LJC.HasItems(values))
+      if (LJC.HasListItems(values))
       {
         result = string.Join(", ", values);
       }
@@ -356,7 +356,7 @@ namespace TestDataColumns5
       var compare = "1";
       TestCommon?.Write("LJCGetColumns1()1", result, compare);
 
-      if (LJC.HasItems(newDataColumns))
+      if (LJC.HasListItems(newDataColumns))
       {
         var value = newDataColumns[0];
         result = value?.Value?.ToString();
@@ -383,7 +383,7 @@ namespace TestDataColumns5
       var compare = "1";
       TestCommon?.Write("LJCGetColumns2()1", result, compare);
 
-      if (LJC.HasItems(newDataColumns))
+      if (LJC.HasListItems(newDataColumns))
       {
         var value = newDataColumns[0];
         result = value?.Value?.ToString();
@@ -405,7 +405,7 @@ namespace TestDataColumns5
       var names = dataColumns.LJCGetPropertyNames();
       // Check Result
       string result = null;
-      if (LJC.HasItems(names))
+      if (LJC.HasListItems(names))
       {
         result = string.Join(", ", names);
       }
@@ -429,7 +429,7 @@ namespace TestDataColumns5
       var compare = "1";
       TestCommon?.Write("LJCRemoveColumn()1", result, compare);
 
-      if (LJC.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         var value = dataColumns[0];
         result = value?.Value?.ToString();
@@ -477,7 +477,7 @@ namespace TestDataColumns5
       var compare = "2";
       TestCommon?.Write("LJCSetData()1", result, compare);
 
-      if (LJC.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         var testDataColumn = dataColumns[1];
         result = testDataColumn.PropertyName;
@@ -488,7 +488,7 @@ namespace TestDataColumns5
       dataColumn.Value = "Updated";
       // Test Method
       dataColumns?.LJCSetData(dataColumn);
-      if (LJC.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         var testDataColumn = dataColumns[1];
         result = testDataColumn?.Value?.ToString();

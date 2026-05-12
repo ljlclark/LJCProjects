@@ -43,7 +43,7 @@ namespace LJCDBClientLib5
         // The DbResult contains a record with only the DB Assigned columns.
         var dbResult = DataManager.Add(dataObject, propertyNames);
         AffectedCount = DataManager.AffectedCount;
-        if (LJC.HasValue(DataManager.SQLStatement))
+        if (LJC.HasText(DataManager.SQLStatement))
         {
           SQLStatement = DataManager.SQLStatement;
         }
@@ -72,7 +72,7 @@ namespace LJCDBClientLib5
     {
       DataManager.Delete(keyColumns, filters);
       AffectedCount = DataManager.AffectedCount;
-      if (LJC.HasValue(DataManager.SQLStatement))
+      if (LJC.HasText(DataManager.SQLStatement))
       {
         SQLStatement = DataManager.SQLStatement;
       }
@@ -84,7 +84,7 @@ namespace LJCDBClientLib5
     {
       DataManager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
       AffectedCount = DataManager.AffectedCount;
-      if (LJC.HasValue(DataManager.SQLStatement))
+      if (LJC.HasText(DataManager.SQLStatement))
       {
         SQLStatement = DataManager.SQLStatement;
       }
@@ -106,7 +106,7 @@ namespace LJCDBClientLib5
       TList? retValue = null;
 
       LJCDBResult? dbResult = DataManager.Load(keyColumns, propertyNames, filters, joins);
-      if (LJC.HasValue(DataManager.SQLStatement))
+      if (LJC.HasText(DataManager.SQLStatement))
       {
         SQLStatement = DataManager.SQLStatement;
       }
@@ -207,7 +207,7 @@ namespace LJCDBClientLib5
     public LJCDataColumns? GetColumns(List<string> propertyNames)
     {
       LJCDataColumns? retColumns = null;
-      if (LJC.HasItems(DataManager.DataDefinition))
+      if (LJC.HasListItems(DataManager.DataDefinition))
       {
         retColumns = DataManager.DataDefinition.LJCGetColumns(propertyNames);
       }
@@ -254,7 +254,7 @@ namespace LJCDBClientLib5
         foreach (LJCDBRow dbRow in dbResult.Rows)
         {
           LJCDataValues? dbValues = dbRow.Values;
-          if (LJC.HasItems(dbValues))
+          if (LJC.HasListItems(dbValues))
           {
             TData? data = CreateData(dbValues);
             if (data != null)

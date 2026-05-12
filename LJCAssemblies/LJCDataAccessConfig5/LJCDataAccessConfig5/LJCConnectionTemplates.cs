@@ -20,7 +20,7 @@ namespace LJCDataAccessConfig5
     {
       mTemplateFileName = "ConnectionTemplates.xml";
       string? localAssembly = Assembly.GetExecutingAssembly().Location;
-      if (LJC.HasValue(localAssembly))
+      if (LJC.HasText(localAssembly))
       {
 #pragma warning disable CS8604 // Possible null reference argument.
         TemplateFileSpec = Path.Combine(Path.GetDirectoryName(localAssembly)
@@ -71,7 +71,7 @@ namespace LJCDataAccessConfig5
     {
       LJCConnectionTemplate? retValue = null;
 
-      if (LJC.HasValue(name))
+      if (LJC.HasText(name))
       {
         if (Count != mPrevCount)
         {
@@ -142,7 +142,7 @@ namespace LJCDataAccessConfig5
       tb.AddLine("  </LJCConnectionTemplate>");
       tb.AddLine("</LJCConnectionTemplates>");
       var templates = tb.ToString();
-      if (LJC.HasValue(TemplateFileSpec))
+      if (LJC.HasText(TemplateFileSpec))
       {
         File.WriteAllText(TemplateFileSpec, templates);
       }

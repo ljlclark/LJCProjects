@@ -60,7 +60,7 @@ namespace TestReflect5
       var reflect = new LJCReflect(test);
       var count = 0;
       PropertyInfo[] infos = reflect.PropertyInfos;
-      if (LJC.HasElements(infos))
+      if (LJC.HasArrayElements(infos))
       {
         count = infos.Count();
       }
@@ -112,7 +112,7 @@ namespace TestReflect5
       var reflect = new LJCReflect(test);
       var names = reflect.GetPropertyNames();
       string result = null;
-      if (LJC.HasItems(names))
+      if (LJC.HasListItems(names))
       {
         result = string.Join(", ", names);
       }

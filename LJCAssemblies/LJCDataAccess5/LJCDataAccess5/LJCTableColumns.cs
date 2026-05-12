@@ -59,7 +59,7 @@ namespace LJCDataAccess5
 
       if (HasColumns(tableColumns))
       {
-        if (!LJC.HasItems(columnNames))
+        if (!LJC.HasListItems(columnNames))
         {
           retTableColumns = Clone(tableColumns);
         }
@@ -102,7 +102,7 @@ namespace LJCDataAccess5
     {
       bool retValue = false;
 
-      if (LJC.HasColumns(tableColumns))
+      if (LJC.HasTableColumns(tableColumns))
       {
         retValue = true;
       }

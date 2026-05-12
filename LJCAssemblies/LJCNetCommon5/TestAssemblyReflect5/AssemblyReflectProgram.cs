@@ -80,7 +80,7 @@ namespace TestAssemblyReflect5
       {
         // Test Method
         var names = LJCAssemblyReflect.ParmNames(methodInfo);
-        if (LJC.HasElements(names))
+        if (LJC.HasArrayElements(names))
         {
           result = "True";
         }
@@ -114,7 +114,7 @@ namespace TestAssemblyReflect5
       {
         // Test Method
         var typeNames = LJCAssemblyReflect.ParmTypeNames(methodInfo);
-        if (LJC.HasElements(typeNames))
+        if (LJC.HasArrayElements(typeNames))
         {
           result = "True";
         }
@@ -273,7 +273,7 @@ namespace TestAssemblyReflect5
       var value = assembly?.FullName;
       var tokens = LJCNetString.Split(value);
       string result = null;
-      if (LJC.HasElements(tokens))
+      if (LJC.HasArrayElements(tokens))
       {
         result = tokens[0];
       }
@@ -327,7 +327,7 @@ namespace TestAssemblyReflect5
       string result = null;
       string compare = null;
       var fieldInfos = typeReference?.GetFields();
-      if (LJC.HasElements(fieldInfos)
+      if (LJC.HasArrayElements(fieldInfos)
         && fieldInfos.Any(x => x.Name == "mTestField"))
       {
         var fieldInfo = typeReference?.GetField("mTestField");

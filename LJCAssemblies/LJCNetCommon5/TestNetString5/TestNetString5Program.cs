@@ -55,19 +55,19 @@ namespace TestNetString5
     private static void HasValue()
     {
       string? text = null;
-      var value = LJC.HasValue(text);
+      var value = LJC.HasText(text);
       var result = value.ToString();
       var compare = "False";
       TestCommon?.Write("HasValue()1: text", result, compare);
 
       text = "  ";
-      value = LJC.HasValue(text);
+      value = LJC.HasText(text);
       result = value.ToString();
       compare = "False";
       TestCommon?.Write("HasValue()2: text", result, compare);
 
       text = " x ";
-      value = LJC.HasValue(text);
+      value = LJC.HasText(text);
       result = value.ToString();
       compare = "True";
       TestCommon?.Write("HasValue()3: text", result, compare);
