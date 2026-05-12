@@ -1,8 +1,0 @@
-Backup, LJCProjectsDev to LJCProjects
-SourceRoot, C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev
-TargetRoot, C:\Users\Les\Documents\Visual Studio 2022\LJCProjects
-ChangesFileSpec, ChangesLJCProjects.txt
-IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
-IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql
-SkipFiles, ChangesFile.txt|BackupLog.txt|MissingFolders.txt
-SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd

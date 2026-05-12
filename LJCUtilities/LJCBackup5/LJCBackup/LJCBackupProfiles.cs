@@ -1,0 +1,183 @@
+﻿// Copyright (c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// LJCBackupProfiles.cs
+using LJCNetCommon5;
+
+namespace LJCBackup5
+{
+  // Represents a collection of backup profiles.
+  /// <include path="members/LJCBackupProfiles/*" file="Doc/LJCBackupProfiles.xml"/>
+  public class LJCBackupProfiles : List<LJCBackupProfile>
+  {
+    #region Static Methods
+
+    // Creates a sample profiles file.
+    /// <include path="members/CreateSampleProfilesFile/*" file="Doc/LJCBackupProfiles.xml"/>
+    public static void CreateSampleProfilesFile(string profilesFileSpec)
+    {
+      var values = new List<string>
+      {
+        "Backup, LJCProjectsDev-LJCProjects",
+      };
+      var codelineRoot = @"C:\Users\Les\Documents\Visual Studio 2022";
+
+      var property = "CodelineRoot";
+      var text = $"{property}, {codelineRoot}";
+      values.Add(text);
+
+      property = "SourceCodeline";
+      text = $"{property}, LJCProjectsDev";
+      values.Add(text);
+
+      property = "TargetCodeline";
+      text = $"{property}, LJCProjects";
+      values.Add(text);
+
+      property = "ChangesFilespec";
+      text = $@"{property}, LJCProjects\ChangesLJCProjects.txt";
+      values.Add(text);
+
+      property = "SkipFoldersFilespec";
+      text = $@"{property}, LJCProjects\SkipFoldersLJCProjects.txt";
+      values.Add(text);
+
+      property = "IncludeFilters";
+      text = $"{property}, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config";
+      values.Add(text);
+      text = $@"{property}, Doc\*.xml|*.cmd|*.txt|*.sql";
+      values.Add(text);
+
+      property = "SkipFiles";
+      text = $@"{property}, ChangesFile.txt|BackupLog.txt|MissingFolders.txt";
+      values.Add(text);
+      text = $"{property},?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd";
+      values.Add(text);
+
+      var lines = values.ToArray();
+      File.WriteAllLines(profilesFileSpec, lines);
+    }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include path="members/Constructor/*" file="Doc/LJCBackupProfiles.xml"/>
+    public LJCBackupProfiles()
+    {
+      mFilespec = "";
+    }
+
+    // Initializes an object instance with the supplied values.
+    /// <include path="members/ConstructorParam/*" file="Doc/LJCBackupProfiles.xml"/>
+    public LJCBackupProfiles(string fileSpec) : this()
+    {
+      Filespec = fileSpec;
+    }
+    #endregion
+
+    #region Collection Methods
+
+    // Loads the profiles collection data.
+    /// <include path="members/LoadProfiles/*" file="Doc/LJCBackupProfiles.xml"/>
+    public void LoadProfiles(string profilesFileSpec)
+    {
+      LJCBackupProfile? profile = null;
+
+      var lines = File.ReadAllLines(profilesFileSpec);
+      if (LJC.HasArrayElements(lines))
+      {
+        foreach (var line in lines)
+        {
+          var lineSearch = line.Trim().ToLower();
+
+          var values = line.Split(',');
+          if (LJC.HasArrayElements(values))
+          {
+            var property = values[0].Trim();
+            var value = values[1].Trim();
+
+            var comparisonType = StringComparison.OrdinalIgnoreCase;
+            if (property.Equals("Backup", comparisonType))
+            {
+              if (profile != null)
+              {
+                Add(profile);
+              }
+              profile = new LJCBackupProfile(value);
+            }
+
+            if (profile != null)
+            {
+              switch (property.ToLower())
+              {
+                case "changesfilespec":
+                  profile.ChangesFilespec = value;
+                  break;
+
+                case "codelineroot":
+                  profile.CodelineRoot = value;
+                  break;
+
+                case "includefilters":
+                  var filters = value.Split("|");
+                  foreach (var filter in filters)
+                  {
+                    profile.IncludeFilters.Add(filter.Trim());
+                  }
+                  break;
+
+                case "skipfiles":
+                  var skipFiles = value.Split("|");
+                  foreach (var skipFile in skipFiles)
+                  {
+                    profile.SkipFiles.Add(skipFile.Trim());
+                  }
+                  break;
+
+                case "skipfoldersfilespec":
+                    profile.SkipFoldersFilespec = value;
+                  break;
+
+                case "sourcecodeline":
+                  profile.SourceCodeline = value;
+                  break;
+
+                case "targetcodeline":
+                  profile.TargetCodeline = value;
+                  break;
+              }
+            }
+          }
+        }
+        if (profile != null)
+        {
+          Add(profile);
+        }
+      }
+    }
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the content filespec.
+    /// <include path="members/Filespec/*" file="Doc/LJCBackupProfiles.xml"/>
+    public string Filespec
+    {
+      get { return mFilespec; }
+      set
+      {
+        if (LJC.HasText(value))
+        {
+          mFilespec = value.Trim();
+          if (!File.Exists(mFilespec))
+          {
+            CreateSampleProfilesFile(mFilespec);
+          }
+          LoadProfiles(mFilespec);
+        }
+      }
+    }
+    private string mFilespec;
+    #endregion
+  }
+}

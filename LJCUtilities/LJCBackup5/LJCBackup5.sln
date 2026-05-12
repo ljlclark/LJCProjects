@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.37216.2 d17.14
+VisualStudioVersion = 17.14.37216.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackup", "LJCBackup\LJCBackup.csproj", "{C8396214-0A5D-488F-8A7D-014E05B39070}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackup5", "LJCBackup\LJCBackup5.csproj", "{C8396214-0A5D-488F-8A7D-014E05B39070}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
