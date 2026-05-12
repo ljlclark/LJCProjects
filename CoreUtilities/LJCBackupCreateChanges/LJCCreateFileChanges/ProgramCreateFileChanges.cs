@@ -122,7 +122,7 @@ namespace LJCCreateFileChanges
       targetRoot = $@"{mainPath}\LJCProjects";
       changesFilespec = $@"{mainPath}\LJCProjectsDev\CoreUtilities";
       changesFilespec += @"\BackupWatcher\CmdFiles\ChangesLJCProjects.txt";
-      includeFilter = @"*.cs|*.sln|*.cproj|*.Designer.cs|*.resx|*.config|*.cmd|*.txt|Doc\*.xml";
+      includeFilter = @"*.cs|*.sln|*.cproj|*.Designer.cs|*.resx|*.config|*.cmd|*.css|*.js|*.html|*.txt|Doc\*.xml";
       skipFiles = "ChangeFile.txt|BackupLog.txt|MissingFolders.txt|?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd";
 
       var fileSpec = "ChangesArgsLJCProjects.txt";

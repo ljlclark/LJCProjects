@@ -3,13 +3,9 @@
 // CreateFileChanges.cs
 using LJCBackupCommonLib;
 using LJCNetCommon;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Xml.XPath;
 
 namespace LJCCreateFileChangesLib
 {
@@ -32,8 +28,15 @@ namespace LJCCreateFileChangesLib
       mChangesFilespec = changesFilespec;
       mIncludeFilter = includeFilter;
 
+      var alwaysSkipFileSpec = "AlwaysSkipFolders.txt";
+      mAlwaysSkipFolders = new List<string>();
+      if (File.Exists(alwaysSkipFileSpec))
+      {
+        var lines = File.ReadAllLines(alwaysSkipFileSpec);
+        mAlwaysSkipFolders = lines.ToList();
+      }
       mChangeCommands = new List<string>();
-      mMissingLines = new List<string>();
+      mMissingFolders = new List<string>();
       SkipFiles = new List<string>();
     }
     #endregion
@@ -51,11 +54,12 @@ namespace LJCCreateFileChangesLib
         CopyMissingOrChangedFiles(filter);
       }
 
+      string text;
       if (File.Exists(mChangesFilespec))
       {
         File.Delete(mChangesFilespec);
       }
-      var text = string.Join("\r\n", mChangeCommands);
+      text = string.Join("\r\n", mChangeCommands);
       File.AppendAllText(mChangesFilespec, text);
 
       var missingFolders = "MissingFolders.txt";
@@ -64,7 +68,7 @@ namespace LJCCreateFileChangesLib
         File.Delete(missingFolders);
       }
       text = $"Target Folders missing in:\r\n{mTargetRoot}\r\n";
-      text += string.Join("\r\n", mMissingLines);
+      text += string.Join("\r\n", mMissingFolders);
       File.AppendAllText(missingFolders, text);
     }
     #endregion
@@ -151,6 +155,7 @@ namespace LJCCreateFileChangesLib
         var targetSpec = GetToSpec(mTargetRoot, sourceSpec, sourceCodeLineFolder
           , out string codePath);
 
+        // Skips common unpromoted folders and folders in AlwaysSkipFolders.txt.
         if (Skip(targetSpec, codePath))
         {
           continue;
@@ -314,13 +319,16 @@ namespace LJCCreateFileChangesLib
     {
       bool retValue = false;
 
-      foreach (string line in list)
+      if (NetString.HasValue(textLine))
       {
-        // File already has the change command.
-        if (line.ToLower() == textLine.ToLower())
+        foreach (string line in list)
         {
-          retValue = true;
-          break;
+          // File already has the change command.
+          if (line.ToLower() == textLine.ToLower())
+          {
+            retValue = true;
+            break;
+          }
         }
       }
       return retValue;
@@ -350,9 +358,17 @@ namespace LJCCreateFileChangesLib
 
       var filePath = Path.GetDirectoryName(fileSpec);
 
+      // Always skip listed folders.
+      // ToDo: Delete target skipped folders?
+      if (HasLine(mAlwaysSkipFolders, codePath))
+      {
+        retValue = true;
+      }
+
       // Skip common unpromoved folders/files.
-      if (filePath.Contains("\\.vs")
-        || filePath.Contains("\\obj\\"))
+      if (!retValue
+        && (filePath.Contains("\\.vs")
+        || filePath.Contains("\\obj\\")))
       {
         retValue = true;
       }
@@ -376,9 +392,9 @@ namespace LJCCreateFileChangesLib
         && !Directory.Exists(filePath))
       {
         if (!retValue
-          && !HasLine(mMissingLines, codePath))
+          && !HasLine(mMissingFolders, codePath))
         {
-          mMissingLines.Add($"{codePath}");
+          mMissingFolders.Add($"{codePath}");
         }
       }
       return retValue;
@@ -399,8 +415,9 @@ namespace LJCCreateFileChangesLib
     private readonly string mChangesFilespec;
     private readonly string mIncludeFilter;
 
+    private readonly List<string> mAlwaysSkipFolders;
     private readonly List<string> mChangeCommands;
-    private readonly List<string> mMissingLines;
+    private readonly List<string> mMissingFolders;
     #endregion
   }
 }
