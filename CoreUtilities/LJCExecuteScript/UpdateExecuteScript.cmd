@@ -1,0 +1,57 @@
+echo off
+rem Copyright (c) Lester J. Clark and Contributors.
+rem Licensed under the MIT License.
+rem UpdateExecuteScript.cmd
+
+if exist SubFolders.cmd goto BuildAll
+set mainRoot=..\..\
+call %mainRoot%SubFolders.cmd %1%
+call %mainRoot%TargetFolders.cmd
+goto Process:
+:BuildAll
+call SubFolders.cmd %1%
+set toRoot=%util%\LJCExecuteScript\
+call TargetFolders.cmd
+:Process
+
+rem ***************************
+rem *** Referenced Binaries ***
+echo *** %to% ***
+
+set src=%assmRoot%LJCDataAccess\LJCDataAccess\%bin%
+echo copy %src%\LJCDataAccess.dll %to%
+copy %src%\LJCDataAccess.dll %to%
+
+set src=%assmRoot%LJCDataAccessConfig\LJCDataAccessConfig\%bin%
+echo copy %src%\LJCDataAccessConfig.dll %to%
+copy %src%\LJCDataAccessConfig.dll %to%
+
+set src=%assmRoot%LJCNetCommon\LJCNetCommon\%bin%
+echo copy %src%\LJCNetCommon.dll %to%
+copy %src%\LJCNetCommon.dll %to%
+
+rem *****************************
+rem *** Runtime-only Binaries ***
+
+rem ----------------------------------
+set to=%toRoot%LJCExecuteScript\%bin%
+echo.
+echo *** %to% ***
+
+set src=%assmRoot%LJCDataAccess\LJCDataAccess\%bin%
+echo copy %src%\LJCDataAccess.dll %to%
+copy %src%\LJCDataAccess.dll %to%
+
+rem ----------------------------------
+set to=%toRoot%LJCExecuteScripts\%bin%
+echo.
+echo *** %to% ***
+
+set src=%assmRoot%LJCDataAccess\LJCDataAccess\%bin%
+echo copy %src%\LJCDataAccess.dll %to%
+copy %src%\LJCDataAccess.dll %to%
+
+if %mainRoot%. == . goto End
+if %1%. == nopause. goto End
+pause
+:End

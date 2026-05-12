@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCExecuteScript</name>
+    </assembly>
+    <members>
+        <member name="T:LJCExecuteScript.Program">
+             <summary>
+      The program entry point class.
+    </summary><remarks>
+      <para>-- Library Level Remarks</para>
+    </remarks>
+        </member>
+        <member name="M:LJCExecuteScript.Program.Main(System.String[])">
+             <summary>
+      The program entry point function.
+    </summary>
+        </member>
+    </members>
+</doc>
