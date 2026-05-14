@@ -24,6 +24,7 @@
     </summary>
     <typeparam name="T">The argument type.</typeparam>
     <param name="argument">The argument value.</param>
+    <param name="argName">The argument name.</param>
     <exception cref="ArgumentNullException">Argument Null Exception</exception>
     <exception cref="ArgumentException">Argument Exception</exception>
   </CheckArgument>

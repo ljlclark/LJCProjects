@@ -3,17 +3,20 @@
 // LJCBackupProgram.cs
 using LJCNetCommon5;
 
-// <include path="members/LJCBackup/*" file="Doc/LJCBackup.xml"/>
+/// <include file="Doc/LJCBackup.xml"
+///  path="members/LJCBackup/*"/>
 // LibName: LJCBackup
 
 namespace LJCBackup5
 {
   // The program entry class.
-  /// <include path="members/BackupProgram/*" file="Doc/BackupProgram.xml"/>
+  /// <include file="Doc/BackupProgram.xml"
+  ///  path="members/BackupProgram/*"/>
   internal class LJCBackupProgram
   {
     // The program entry method.
-    /// <include path="members/Main/*" file="Doc/BackupProgram.xml"/>
+    /// <include file="Doc/BackupProgram.xml"
+    ///  path="members/Main/*"/>
     static void Main()
     {
       var profilesFileSpec = "BackupProfiles.txt";
@@ -23,10 +26,13 @@ namespace LJCBackup5
       if (LJC.HasListItems(profiles))
       {
         var count = profiles.Count;
-        var selection = ProfileSelection(count);
+        Console.Write("Select Option: ");
+        var selection = SelectOption(count);
         if (selection >= 0
           && selection <= count)
         {
+          Console.WriteLine();
+          Console.Write("Running...");
           var profile = profiles[selection];
           var createChanges = new LJCCreateFileChanges(profile.SourcePath
             , profile.TargetPath, profile.ChangesFilespec)
@@ -39,31 +45,8 @@ namespace LJCBackup5
       }
     }
 
-    // Shows the profile and exit selections.
-    private static void ShowSelections(string profilesFileSpec
-      , LJCBackupProfiles? profiles)
-    {
-      if (!LJC.HasListItems(profiles))
-      {
-        Console.WriteLine($"No profiles were found in {profilesFileSpec}.");
-        Console.WriteLine("X - Exit");
-        ProfileSelection(0, true);
-      }
-
-      if (LJC.HasListItems(profiles))
-      {
-        var count = profiles.Count;
-        for (int index = 0; index < count; index++)
-        {
-          var profile = profiles[index];
-          Console.WriteLine($"{index} - {profile.Name}");
-        }
-        Console.WriteLine("X - Exit");
-      }
-    }
-
     // Gets the profile selection.
-    private static int ProfileSelection(int profileCount, bool exitOnly = false)
+    private static int SelectOption(int profileCount, bool exitOnly = false)
     {
       var retValue = -1;
 
@@ -101,6 +84,29 @@ namespace LJCBackup5
         }
       }
       return retValue;
+    }
+
+    // Shows the profile and exit selections.
+    private static void ShowSelections(string profilesFileSpec
+      , LJCBackupProfiles? profiles)
+    {
+      if (!LJC.HasListItems(profiles))
+      {
+        Console.WriteLine($"No profiles were found in {profilesFileSpec}.");
+        Console.WriteLine("X - Exit");
+        SelectOption(0, true);
+      }
+
+      if (LJC.HasListItems(profiles))
+      {
+        var count = profiles.Count;
+        for (int index = 0; index < count; index++)
+        {
+          var profile = profiles[index];
+          Console.WriteLine($"{index} - {profile.Name}");
+        }
+        Console.WriteLine("X - Exit");
+      }
     }
   }
 }

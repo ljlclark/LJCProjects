@@ -6,13 +6,15 @@ using LJCNetCommon5;
 namespace LJCBackup5
 {
   // Represents a collection of backup profiles.
-  /// <include path="members/LJCBackupProfiles/*" file="Doc/LJCBackupProfiles.xml"/>
+  /// <include file="Doc/LJCBackupProfiles.xml"
+  ///  path="members/LJCBackupProfiles/*"/>
   public class LJCBackupProfiles : List<LJCBackupProfile>
   {
     #region Static Methods
 
     // Creates a sample profiles file.
-    /// <include path="members/CreateSampleProfilesFile/*" file="Doc/LJCBackupProfiles.xml"/>
+    /// <include file="Doc/LJCBackupProfiles.xml"
+    ///  path="members/CreateSampleProfilesFile/*"/>
     public static void CreateSampleProfilesFile(string profilesFileSpec)
     {
       var values = new List<string>
@@ -65,14 +67,16 @@ namespace LJCBackup5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCBackupProfiles.xml"/>
+    /// <include file="Doc/LJCBackupProfiles.xml"
+    ///  path="members/Constructor/*"/>
     public LJCBackupProfiles()
     {
       mFilespec = "";
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include path="members/ConstructorParam/*" file="Doc/LJCBackupProfiles.xml"/>
+    /// <include file="Doc/LJCBackupProfiles.xml"
+    ///  path="members/ConstructorParam/*"/>
     public LJCBackupProfiles(string fileSpec) : this()
     {
       Filespec = fileSpec;
@@ -82,7 +86,8 @@ namespace LJCBackup5
     #region Collection Methods
 
     // Loads the profiles collection data.
-    /// <include path="members/LoadProfiles/*" file="Doc/LJCBackupProfiles.xml"/>
+    /// <include file="Doc/LJCBackupProfiles.xml"
+    ///  path="members/LoadProfiles/*"/>
     public void LoadProfiles(string profilesFileSpec)
     {
       LJCBackupProfile? profile = null;
@@ -100,8 +105,7 @@ namespace LJCBackup5
             var property = values[0].Trim();
             var value = values[1].Trim();
 
-            var comparisonType = StringComparison.OrdinalIgnoreCase;
-            if (property.Equals("Backup", comparisonType))
+            if (LJC.Equals("Backup", property))
             {
               if (profile != null)
               {
@@ -135,7 +139,7 @@ namespace LJCBackup5
                   break;
 
                 case "skipfoldersfilespec":
-                    profile.SkipFoldersFilespec = value;
+                  profile.SkipFoldersFilespec = value;
                   break;
 
                 case "sourcecodeline":
@@ -168,7 +172,8 @@ namespace LJCBackup5
     #region Properties
 
     // Gets or sets the content filespec.
-    /// <include path="members/Filespec/*" file="Doc/LJCBackupProfiles.xml"/>
+    /// <include file="Doc/LJCBackupProfiles.xml"
+    ///  path="members/Filespec/*"/>
     public string Filespec
     {
       get { return mFilespec; }

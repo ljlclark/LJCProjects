@@ -396,6 +396,7 @@ namespace LJCCreateFileChangesLib
         {
           mMissingFolders.Add($"{codePath}");
         }
+        retValue = true;
       }
       return retValue;
     }

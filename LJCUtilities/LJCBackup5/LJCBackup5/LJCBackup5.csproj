@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <Content Include="bin\Debug\net8.0\BackupProfiles.txt" />
+    <Content Include="bin\Debug\net8.0\LJCProjects\ChangesLJCProjects.txt" />
+    <Content Include="bin\Debug\net8.0\MissingFolders.txt" />
   </ItemGroup>
 
   <ItemGroup>

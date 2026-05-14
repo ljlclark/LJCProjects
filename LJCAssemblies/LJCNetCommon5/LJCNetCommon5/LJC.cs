@@ -27,7 +27,8 @@ namespace LJCNetCommon5
     // integer = 0, IList with no items, decimal = 0 or DataTable with no rows.
     /// <include path="members/CheckArgument/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
-    public static bool CheckArgument<T>([NotNullWhen(true)] T? argument)
+    public static bool CheckArgument<T>([NotNullWhen(true)] T? argument
+      , string argName)
     {
       var retValue = true;
 
@@ -36,16 +37,14 @@ namespace LJCNetCommon5
       {
         if (!HasText(GetString(argument)))
         {
-          retValue = false;
-          var message = $"Missing argument {nameof(argument)}.";
+          var message = $"Missing argument {argName}.";
           throw new ArgumentNullException(message);
         }
       }
 
       if (null == argument)
       {
-        retValue = false;
-        var message = $"Missing argument {nameof(argument)}.";
+        var message = $"Missing argument {argName}.";
         throw new ArgumentNullException(message);
       }
 
@@ -55,8 +54,7 @@ namespace LJCNetCommon5
       {
         if (0 == GetInt64(argument))
         {
-          retValue = false;
-          var message = $"Argument {nameof(argument)} is not allowed to be zero.";
+          var message = $"Argument {argName} is not allowed to be zero.";
           throw new ArgumentException(message);
         }
       }
@@ -65,8 +63,7 @@ namespace LJCNetCommon5
       {
         if (HasListItems((IList)argument))
         {
-          retValue = false;
-          var message = $"Missing argument {nameof(argument)}.";
+          var message = $"Missing argument {argName}.";
           throw new ArgumentNullException(message);
         }
       }
@@ -77,8 +74,7 @@ namespace LJCNetCommon5
       {
         if (0 == GetDouble(argument))
         {
-          retValue = false;
-          var message = $"Argument {nameof(argument)} is not allowed to be zero.";
+          var message = $"Argument {argName} is not allowed to be zero.";
           throw new ArgumentException(message);
         }
       }
@@ -88,8 +84,7 @@ namespace LJCNetCommon5
         if (argument is DataTable dataTable
           && HasTableData(dataTable))
         {
-          retValue = false;
-          var message = $"Missing argument {nameof(argument)}.";
+          var message = $"Missing argument {argName}.";
           throw new ArgumentNullException(message);
         }
       }

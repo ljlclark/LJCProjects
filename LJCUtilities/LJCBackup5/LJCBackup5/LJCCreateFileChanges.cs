@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // LJCCreateFileChanges.cs
 using LJCNetCommon5;
+using System.Security.AccessControl;
 
 namespace LJCBackup5
 {
@@ -47,14 +48,18 @@ namespace LJCBackup5
 
     // Create a 'to' file spec using the toFilePath and adding the folders and
     // file name using the fromFileSpec starting after the fromStartFolder.
+    // toFilePath = C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev
+    // fromFileSpec = C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\ViewEditorList.cs
+    // fromStartFolder = LJCProjects
+    // returns C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\ViewEditorList.cs
     private static string GetToSpec(string toFilePath
       , string fromFilespec, string fromStartFolder, out string codePath)
     {
       var retValue = toFilePath;
 
-      LJC.CheckArgument(toFilePath);
-      LJC.CheckArgument(fromFilespec);
-      LJC.CheckArgument(fromStartFolder);
+      LJC.CheckArgument(toFilePath,nameof(toFilePath));
+      LJC.CheckArgument(fromFilespec, nameof(fromFilespec));
+      LJC.CheckArgument(fromStartFolder, nameof(fromStartFolder));
 
       codePath = "";
       var fromPath = Path.GetDirectoryName(fromFilespec);
@@ -108,7 +113,7 @@ namespace LJCBackup5
     {
       bool retValue = false;
 
-      LJC.CheckArgument(targetSpec);
+      LJC.CheckArgument(targetSpec, nameof(targetSpec));
 
       var targetPath = Path.GetDirectoryName(targetSpec);
       if (LJC.HasText(targetPath))
@@ -174,7 +179,7 @@ namespace LJCBackup5
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/CreateFileChanges.xml'
-    ///  path='items/ConstructorParam/*'/>
+    ///  path='items/ConstructorParams/*'/>
     public LJCCreateFileChanges(string sourceRoot, string targetRoot
       , string changesFilespec) : this()
     {
@@ -205,12 +210,12 @@ namespace LJCBackup5
         CopyMissingOrChangedFiles(filter);
       }
 
-      string text;
+      LJCNetFile.CreateFolder(mChangesFilespec);
       if (File.Exists(mChangesFilespec))
       {
         File.Delete(mChangesFilespec);
       }
-      text = string.Join("\r\n", mChangeCommands);
+      var text = string.Join("\r\n", mChangeCommands);
       File.AppendAllText(mChangesFilespec, text);
 
       var missingFolders = "MissingFolders.txt";
@@ -285,7 +290,7 @@ namespace LJCBackup5
     {
       // Get the source folder from end of a path.
       var sourceCodeLineFolder = FinalFolder(mSourceRoot);
-      LJC.CheckArgument(sourceCodeLineFolder);
+      LJC.CheckArgument(sourceCodeLineFolder, nameof(sourceCodeLineFolder));
 
       var filterPath = GetFilterPath(ref filter);
 
@@ -300,8 +305,8 @@ namespace LJCBackup5
           continue;
         }
 
-        // Create the targetSpec from the targetRoot, sourceSpec folders and
-        // filename after the sourceCodeLineFolder.
+        // Create the targetSpec using the mTargetRoot and adding the folders and
+        // file name using the sourceSpec starting after the sourceCodeLineFolder.
         var targetSpec = GetToSpec(mTargetRoot, sourceSpec, sourceCodeLineFolder!
           , out string codePath);
 
@@ -337,7 +342,7 @@ namespace LJCBackup5
     {
       // Get the target folder from end of a path.
       var targetCodeLineFolder = FinalFolder(mTargetRoot);
-      LJC.CheckArgument(targetCodeLineFolder);
+      LJC.CheckArgument(targetCodeLineFolder, nameof(targetCodeLineFolder));
       var filterPath = GetFilterPath(ref filter);
 
       // Get all target files by filter.
@@ -352,8 +357,8 @@ namespace LJCBackup5
           continue;
         }
 
-        // Create the sourceSpec from the sourceRoot and targetSpec folders and
-        // filename afer the targetCodeLineFolder.
+        // Create the sourceSpec using the sourceRoot and adding the folders and
+        // file name using the targetSpec starting after the targetCodeLineFolder.
         var sourceSpec = GetToSpec(mSourceRoot, targetSpec, targetCodeLineFolder!
           , out string _);
         if (!File.Exists(sourceSpec))
@@ -384,14 +389,13 @@ namespace LJCBackup5
     }
 
     // Skips common unpromoted folders/files and missing target folders.
-    private bool Skip(string fileSpec, string codePath)
+    private bool Skip(string targetSpec, string codePath)
     {
       var retValue = false;
 
-      LJC.CheckArgument(fileSpec);
-      LJC.CheckArgument(codePath);
+      LJC.CheckArgument(targetSpec, nameof(targetSpec));
 
-      var filePath = Path.GetDirectoryName(fileSpec);
+      var targetPath = Path.GetDirectoryName(targetSpec);
 
       // Always skip listed folders.
       // ToDo: Delete target skipped folders?
@@ -402,14 +406,14 @@ namespace LJCBackup5
 
       // Skip common unpromoved folders/files.
       if (!retValue
-        && (filePath!.Contains("\\.vs")
-        || filePath.Contains("\\obj\\")))
+        && (targetPath!.Contains("\\.vs")
+        || targetPath.Contains("\\obj\\")))
       {
         retValue = true;
       }
       if (!retValue)
       {
-        var finalFolder = FinalFolder(filePath!);
+        var finalFolder = FinalFolder(targetPath!);
         if (LJC.HasText(finalFolder))
         {
           var skipFolders = new List<string>()
@@ -427,13 +431,15 @@ namespace LJCBackup5
 
       // Skip updates to target folders that do not exist.
       if (!retValue
-        && !Directory.Exists(filePath))
+        && !Directory.Exists(targetPath))
       {
         if (!retValue
           && !HasLine(mMissingFolders, codePath))
         {
           mMissingFolders.Add($"{codePath}");
         }
+        // *** Next Statement *** Add
+        retValue = true;
       }
       return retValue;
     }
