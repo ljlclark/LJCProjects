@@ -28,6 +28,13 @@ namespace LJCBackup5
           && selection <= count)
         {
           var profile = profiles[selection];
+          var createChanges = new LJCCreateFileChanges(profile.SourcePath
+            , profile.TargetPath, profile.ChangesFilespec)
+          {
+            IncludeFilters = profile.IncludeFilters,
+            SkipFiles = profile.SkipFiles
+          };
+          createChanges.Run();
         }
       }
     }

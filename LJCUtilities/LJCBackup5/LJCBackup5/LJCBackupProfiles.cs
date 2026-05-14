@@ -17,16 +17,20 @@ namespace LJCBackup5
     {
       var values = new List<string>
       {
-        "Backup, LJCProjectsDev-LJCProjects",
+        "Backup, CLJCProjects",
       };
       var codelineRoot = @"C:\Users\Les\Documents\Visual Studio 2022";
 
-      var property = "CodelineRoot";
+      var property = "SourceRoot";
       var text = $"{property}, {codelineRoot}";
       values.Add(text);
 
       property = "SourceCodeline";
       text = $"{property}, LJCProjectsDev";
+      values.Add(text);
+
+      property = "TargetRoot";
+      text = $"{property}, {codelineRoot}";
       values.Add(text);
 
       property = "TargetCodeline";
@@ -114,10 +118,6 @@ namespace LJCBackup5
                   profile.ChangesFilespec = value;
                   break;
 
-                case "codelineroot":
-                  profile.CodelineRoot = value;
-                  break;
-
                 case "includefilters":
                   var filters = value.Split("|");
                   foreach (var filter in filters)
@@ -142,8 +142,16 @@ namespace LJCBackup5
                   profile.SourceCodeline = value;
                   break;
 
+                case "sourceroot":
+                  profile.SourceRoot = value;
+                  break;
+
                 case "targetcodeline":
                   profile.TargetCodeline = value;
+                  break;
+
+                case "targetroot":
+                  profile.TargetRoot = value;
                   break;
               }
             }

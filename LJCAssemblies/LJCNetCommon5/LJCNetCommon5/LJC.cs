@@ -27,13 +27,16 @@ namespace LJCNetCommon5
     // integer = 0, IList with no items, decimal = 0 or DataTable with no rows.
     /// <include path="members/CheckArgument/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
-    public static void CheckArgument<T>(T argument)
+    public static bool CheckArgument<T>([NotNullWhen(true)] T? argument)
     {
+      var retValue = true;
+
       if (argument != null
         && typeof(string) == argument.GetType())
       {
         if (!HasText(GetString(argument)))
         {
+          retValue = false;
           var message = $"Missing argument {nameof(argument)}.";
           throw new ArgumentNullException(message);
         }
@@ -41,6 +44,7 @@ namespace LJCNetCommon5
 
       if (null == argument)
       {
+        retValue = false;
         var message = $"Missing argument {nameof(argument)}.";
         throw new ArgumentNullException(message);
       }
@@ -51,6 +55,7 @@ namespace LJCNetCommon5
       {
         if (0 == GetInt64(argument))
         {
+          retValue = false;
           var message = $"Argument {nameof(argument)} is not allowed to be zero.";
           throw new ArgumentException(message);
         }
@@ -60,6 +65,7 @@ namespace LJCNetCommon5
       {
         if (HasListItems((IList)argument))
         {
+          retValue = false;
           var message = $"Missing argument {nameof(argument)}.";
           throw new ArgumentNullException(message);
         }
@@ -71,6 +77,7 @@ namespace LJCNetCommon5
       {
         if (0 == GetDouble(argument))
         {
+          retValue = false;
           var message = $"Argument {nameof(argument)} is not allowed to be zero.";
           throw new ArgumentException(message);
         }
@@ -81,10 +88,12 @@ namespace LJCNetCommon5
         if (argument is DataTable dataTable
           && HasTableData(dataTable))
         {
+          retValue = false;
           var message = $"Missing argument {nameof(argument)}.";
           throw new ArgumentNullException(message);
         }
       }
+      return retValue;
     }
 
     // Compare null values.
@@ -1214,5 +1223,8 @@ namespace LJCNetCommon5
     /// <parentGroup>dataType</parentGroup>
     public const string TypeString = "String";
     #endregion
+
+    /// <summary></summary>
+    public const StringComparison IgnoreCase = StringComparison.OrdinalIgnoreCase;
   }
 }

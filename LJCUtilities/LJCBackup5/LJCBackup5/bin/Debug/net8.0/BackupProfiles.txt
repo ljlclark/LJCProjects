@@ -1,6 +1,7 @@
-Backup, LJCProjectsDev-LJCProjects
-CodelineRoot, C:\Users\Les\Documents\Visual Studio 2022
+Backup, CLJCProjects
+SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
 SourceCodeline, LJCProjectsDev
+TargetRoot, C:\Users\Les\Documents\Visual Studio 2022
 TargetCodeline, LJCProjects
 ChangesFilespec, LJCProjects\ChangesLJCProjects.txt
 SkipFoldersFilespec, LJCProjects\SkipFoldersLJCProjects.txt
