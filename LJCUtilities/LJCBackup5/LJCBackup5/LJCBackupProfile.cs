@@ -9,9 +9,11 @@ namespace LJCBackup5
   ///  path="members/LJCBackupProfile/*"/>
   public class LJCBackupProfile
   {
+    #region Constructors
+
     // Initializes an object instance.
     /// <include file="Doc/LJCBackupProfile.xml"
-    ///  path="members/ConstructorDefault/*"/>
+    ///  path="members/Constructor/*"/>
     public LJCBackupProfile()
     {
       ChangesFilespec = "";
@@ -32,6 +34,7 @@ namespace LJCBackup5
     {
       Name = name;
     }
+    #endregion
 
     #region Properties
 
@@ -79,7 +82,6 @@ namespace LJCBackup5
     /// <include file="Doc/LJCBackupProfile.xml"
     ///  path="members/TargetRoot/*"/>
     public string TargetRoot { get; set; }
-    #endregion
 
     // Gets or sets the full source path.
     /// <include file="Doc/LJCBackupProfile.xml"
@@ -96,5 +98,6 @@ namespace LJCBackup5
     {
       get { return $@"{TargetRoot}\{TargetCodeline}"; }
     }
+    #endregion
   }
 }

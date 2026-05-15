@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCCreateFileChanges.cs
 using LJCNetCommon5;
@@ -7,7 +7,7 @@ namespace LJCBackup5
 {
   // The Create FileChanges class.
   /// <include file='Doc/ProjectCreateFileChanges.xml'
-  ///  path='items/CreateFileChanges/*'/>
+  ///  path='items/LJCCreateFileChanges/*'/>
   public class LJCCreateFileChanges
   {
     #region Static Methods
@@ -161,7 +161,7 @@ namespace LJCBackup5
     #region Constructors
 
     // Initializes an object instance
-    /// <include file='Doc/CreateFileChanges.xml'
+    /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/Constructor/*'/>
     public LJCCreateFileChanges()
     {
@@ -177,7 +177,7 @@ namespace LJCBackup5
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include file='Doc/CreateFileChanges.xml'
+    /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/ConstructorParams/*'/>
     public LJCCreateFileChanges(string sourceRoot, string targetRoot
       , string changesFilespec) : this()
@@ -199,7 +199,7 @@ namespace LJCBackup5
     #region Public Methods
 
     // Runs the create "Changes"file process.
-    /// <include file='Doc/CreateFileChanges.xml'
+    /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/Run/*'/>
     public void Run()
     {
@@ -447,12 +447,12 @@ namespace LJCBackup5
     #region Properties
 
     // Gets or sets the skip file list.
-    /// <include file='Doc/CreateFileChanges.xml'
+    /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/IncludeFilters/*'/>
     public List<string> IncludeFilters { get; set; }
 
     // Gets or sets the skip file list.
-    /// <include file='Doc/CreateFileChanges.xml'
+    /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/SkipFiles/*'/>
     public List<string> SkipFiles { get; set; }
     #endregion

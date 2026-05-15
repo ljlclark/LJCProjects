@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCBackupChanges.cs
 using LJCNetCommon5;
@@ -18,17 +18,17 @@ namespace LJCBackup5
     public LJCBackupChanges()
     {
       mChangeFilespec = "";
-      mStartFolder = "";
-      TargetRoot = "";
+      mSourceCodeLine = "";
+      TargetPath = "";
     }
 
     // Initializes an object instance.
     /// <include file='Doc/LJCBackupChanges.xml'
-    ///  path='members/ConstructorParam/*'/>
-    public LJCBackupChanges(string startFolder, string changeFilespec)
+    ///  path='members/ConstructorParams/*'/>
+    public LJCBackupChanges(string sourceCodeLine, string changeFilespec)
       : this()
     {
-      mStartFolder = startFolder;
+      mSourceCodeLine = sourceCodeLine;
       mChangeFilespec = changeFilespec;
     }
     #endregion
@@ -38,13 +38,13 @@ namespace LJCBackup5
     // Applies the change commands.
     /// <include file='Doc/LJCBackupChanges.xml'
     ///  path='members/Run/*'/>
-    public void Run(string targetRoot)
+    public void Run(string targetPath)
     {
       if (File.Exists(mChangeFilespec))
       {
         string log = "BackupLog.txt";
         File.WriteAllText(log, "");
-        TargetRoot = targetRoot;
+        TargetPath = targetPath;
         var fileChange = new LJCFileChange();
         var lines = File.ReadAllLines(mChangeFilespec);
         foreach (string line in lines)
@@ -61,12 +61,12 @@ namespace LJCBackup5
             fileChange.ToFileSpec = tokens[2];
           }
 
-          string filespec = fileChange.FileSpec;
+          string sourceFilespec = fileChange.FileSpec;
           string? targetFilespec = null;
           var changeType = fileChange.ChangeType;
           if (!changeType.Equals("delete", LJC.IgnoreCase))
           {
-            targetFilespec = GetMatchFolderFilespec(filespec, mStartFolder);
+            targetFilespec = GetMatchFolderFilespec(sourceFilespec, mSourceCodeLine);
           }
           string? toFileName = null;
           if (LJC.HasText(fileChange.ToFileSpec))
@@ -77,23 +77,23 @@ namespace LJCBackup5
           switch (fileChange.ChangeType.ToLower())
           {
             case "copy":
-              if (File.Exists(filespec))
+              if (File.Exists(sourceFilespec))
               {
                 if (LJC.HasText(targetFilespec))
                 {
                   LJCNetFile.CreateFolder(targetFilespec);
-                  File.Copy(filespec, targetFilespec, true);
-                  File.AppendAllText(log, $"copy {filespec}\r\n");
+                  File.Copy(sourceFilespec, targetFilespec, true);
+                  File.AppendAllText(log, $"copy {sourceFilespec}\r\n");
                   File.AppendAllText(log, $" - {targetFilespec}\r\n");
                 }
               }
               break;
 
             case "delete":
-              if (File.Exists(filespec))
+              if (File.Exists(sourceFilespec))
               {
-                File.Delete(filespec);
-                File.AppendAllText(log, $"del {filespec}\r\n");
+                File.Delete(sourceFilespec);
+                File.AppendAllText(log, $"del {sourceFilespec}\r\n");
               }
               break;
 
@@ -102,7 +102,7 @@ namespace LJCBackup5
               {
                 if (LJC.HasText(toFileName))
                 {
-                  var targetToFilespec = Path.Combine(TargetRoot, toFileName);
+                  var targetToFilespec = Path.Combine(TargetPath, toFileName);
                   File.Move(targetFilespec, targetToFilespec);
                   File.AppendAllText(log, $"ren {targetFilespec}\r\n");
                   File.AppendAllText(log, $" - {targetToFilespec}\r\n");
@@ -124,7 +124,7 @@ namespace LJCBackup5
 
       if (File.Exists(sourceFilespec))
       {
-        retValue = TargetRoot;
+        retValue = TargetPath;
         var filePath = Path.GetDirectoryName(sourceFilespec);
         if (filePath != null)
         {
@@ -149,12 +149,15 @@ namespace LJCBackup5
     }
     #endregion
 
+    #region Properties
+
     // Gets or sets the TargetRoot value.
     /// <include file='Doc/LJCBackupChanges.xml'
     ///  path='members/TargetRoot/*'/>
-    public string TargetRoot { get; set; }
+    public string TargetPath { get; set; }
+    #endregion
 
     private readonly string mChangeFilespec;
-    private readonly string mStartFolder;
+    private readonly string mSourceCodeLine;
   }
 }

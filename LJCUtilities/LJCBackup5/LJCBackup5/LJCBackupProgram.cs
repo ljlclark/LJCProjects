@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // LJCBackupProgram.cs
 using LJCNetCommon5;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 /// <include file="Doc/LJCBackup.xml"
 ///  path="members/LJCBackup/*"/>
@@ -23,40 +24,76 @@ namespace LJCBackup5
       var profiles = new LJCBackupProfiles(profilesFileSpec);
       ShowSelections(profilesFileSpec, profiles);
 
-      if (LJC.HasListItems(profiles))
+      var selection = SelectOption(profiles);
+      if (selection >= 0
+        && selection <= profiles.Count)
       {
-        var count = profiles.Count;
-        Console.Write("Select Option: ");
-        var selection = SelectOption(count);
-        if (selection >= 0
-          && selection <= count)
-        {
-          Console.WriteLine();
-          Console.Write("Running...");
-          var profile = profiles[selection];
-          var createChanges = new LJCCreateFileChanges(profile.SourcePath
-            , profile.TargetPath, profile.ChangesFilespec)
-          {
-            IncludeFilters = profile.IncludeFilters,
-            SkipFiles = profile.SkipFiles
-          };
-          createChanges.Run();
-        }
+        var profile = CreateChanges(profiles, selection);
+        ViewProposedChanges(profile);
+        ApplyChanges(profile);
+        Console.WriteLine();
+      }
+    }
+
+    // Creates the changes file.
+    private static LJCBackupProfile CreateChanges(LJCBackupProfiles profiles
+      , int selection)
+    {
+      LJCBackupProfile retValue = profiles[selection];
+
+      Console.WriteLine();
+      Console.Write("Creating Changes File...");
+      var profile = profiles[selection];
+      var createChanges = new LJCCreateFileChanges(profile.SourcePath
+        , profile.TargetPath, profile.ChangesFilespec)
+      {
+        IncludeFilters = profile.IncludeFilters,
+        SkipFiles = profile.SkipFiles
+      };
+      createChanges.Run();
+      return retValue;
+    }
+
+    // Select to apply changes.
+    private static void ApplyChanges(LJCBackupProfile profile)
+    {
+      Console.WriteLine();
+      Console.WriteLine();
+      Console.Write("Apply Changes Y/(N): ");
+      var key = Console.ReadKey();
+      var ch = (char)key.KeyChar;
+      if ("Yy".Contains(ch))
+      {
+        Console.WriteLine();
+        Console.Write("Applying Changes...");
+        var sourceCodeLine = profile.SourceCodeline;
+        var changesFilespec = profile.ChangesFilespec;
+        var backupChanges = new LJCBackupChanges(sourceCodeLine
+          , changesFilespec);
+        backupChanges.Run(profile.TargetPath);
       }
     }
 
     // Gets the profile selection.
-    private static int SelectOption(int profileCount, bool exitOnly = false)
+    private static int SelectOption(LJCBackupProfiles? profiles
+      , bool exitOnly = false)
     {
       var retValue = -1;
+
+      Console.Write("Select Option: ");
+
+      var count = 0;
+      if (LJC.HasListItems(profiles))
+      {
+        count = profiles.Count;
+      }
 
       var success = false;
       while (!success)
       {
         var key = Console.ReadKey();
         var ch = (char)key.KeyChar;
-        if ('x' == ch
-          || 'X' == ch)
+        if ("Xx".Contains(ch))
         {
           success = true;
         }
@@ -69,7 +106,7 @@ namespace LJCBackup5
               && ch <= '9')
             {
               var selection = (int)ch - 48;
-              if (selection <= profileCount - 1)
+              if (selection <= count - 1)
               {
                 success = true;
                 retValue = selection;
@@ -94,7 +131,7 @@ namespace LJCBackup5
       {
         Console.WriteLine($"No profiles were found in {profilesFileSpec}.");
         Console.WriteLine("X - Exit");
-        SelectOption(0, true);
+        //SelectOption(null, true);
       }
 
       if (LJC.HasListItems(profiles))
@@ -106,6 +143,22 @@ namespace LJCBackup5
           Console.WriteLine($"{index} - {profile.Name}");
         }
         Console.WriteLine("X - Exit");
+      }
+    }
+
+    // Select to view proposed changes.
+    private static void ViewProposedChanges(LJCBackupProfile profile)
+    {
+      Console.WriteLine();
+      Console.WriteLine();
+      Console.Write("View Proposed Changes Y/(N): ");
+      var key = Console.ReadKey();
+      var ch = (char)key.KeyChar;
+      if ("Yy".Contains(ch))
+      {
+        Console.WriteLine();
+        Console.Write($"File: {profile.ChangesFilespec}");
+        LJCNetFile.ShellProgram(profile.ChangesFilespec);
       }
     }
   }

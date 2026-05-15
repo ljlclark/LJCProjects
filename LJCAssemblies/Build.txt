@@ -1,0 +1,13 @@
+----------------- 7 - LJCDBServiceLib5 ---------------  
+LJCDBServiceLib5 
+*** LJCUtilities\LJCDBClient5\External ***
+copy ..\..\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\bin\Debug\net8.0\LJCNetCommon5.dll LJCUtilities\LJCDBClient5\External
+The system cannot find the path specified.
+copy ..\..\LJCAssemblies\LJCDBDataAccess5\LJCDBDataAccess5\bin\Debug\net8.0\LJCDBDataAccess5.dll LJCUtilities\LJCDBClient5\External
+The system cannot find the path specified.
+copy ..\..\LJCAssemblies\LJCDBMessage5\LJCCipherLib5\bin\Debug\net8.0\LJCCipherLib5.dll LJCUtilities\LJCDBClient5\External
+The system cannot find the path specified.
+copy ..\..\LJCAssemblies\LJCDBMessage5\LJCDBMessage5\bin\Debug\net8.0\LJCDBMessage5.dll LJCUtilities\LJCDBClient5\External
+The system cannot find the path specified.
+
+*** LJCUtilities\LJCDBClient5\LJCGenDoc5\bin\Debug\net8.0 ***
