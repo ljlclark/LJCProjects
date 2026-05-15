@@ -61,12 +61,12 @@ namespace LJCBackup5
             fileChange.ToFileSpec = tokens[2];
           }
 
-          string sourceFilespec = fileChange.FileSpec;
+          string changeSpec = fileChange.FileSpec;
           string? targetFilespec = null;
           var changeType = fileChange.ChangeType;
           if (!changeType.Equals("delete", LJC.IgnoreCase))
           {
-            targetFilespec = GetMatchFolderFilespec(sourceFilespec, mSourceCodeLine);
+            targetFilespec = GetMatchFolderFilespec(changeSpec, mSourceCodeLine);
           }
           string? toFileName = null;
           if (LJC.HasText(fileChange.ToFileSpec))
@@ -77,23 +77,23 @@ namespace LJCBackup5
           switch (fileChange.ChangeType.ToLower())
           {
             case "copy":
-              if (File.Exists(sourceFilespec))
+              if (File.Exists(changeSpec))
               {
                 if (LJC.HasText(targetFilespec))
                 {
                   LJCNetFile.CreateFolder(targetFilespec);
-                  File.Copy(sourceFilespec, targetFilespec, true);
-                  File.AppendAllText(log, $"copy {sourceFilespec}\r\n");
+                  File.Copy(changeSpec, targetFilespec, true);
+                  File.AppendAllText(log, $"copy {changeSpec}\r\n");
                   File.AppendAllText(log, $" - {targetFilespec}\r\n");
                 }
               }
               break;
 
             case "delete":
-              if (File.Exists(sourceFilespec))
+              if (File.Exists(changeSpec))
               {
-                File.Delete(sourceFilespec);
-                File.AppendAllText(log, $"del {sourceFilespec}\r\n");
+                File.Delete(changeSpec);
+                File.AppendAllText(log, $"del {changeSpec}\r\n");
               }
               break;
 

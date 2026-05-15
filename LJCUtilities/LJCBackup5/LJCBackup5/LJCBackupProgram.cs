@@ -71,6 +71,10 @@ namespace LJCBackup5
         var backupChanges = new LJCBackupChanges(sourceCodeLine
           , changesFilespec);
         backupChanges.Run(profile.TargetPath);
+        Console.WriteLine();
+        Console.Write("Changes Applied");
+        Console.WriteLine();
+        Console.Write("See changes log: BackupLog.txt");
       }
     }
 
