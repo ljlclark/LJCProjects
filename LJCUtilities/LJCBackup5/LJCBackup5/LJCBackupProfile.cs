@@ -88,7 +88,7 @@ namespace LJCBackup5
     ///  path="members/TargetRoot/*"/>
     public string TargetRoot { get; set; }
 
-    // Gets or sets the full source path.
+    // Gets the full source path.
     /// <include file="Doc/LJCBackupProfile.xml"
     ///  path="members/SourcePath/*"/>
     public string SourcePath
@@ -96,7 +96,7 @@ namespace LJCBackup5
       get { return $@"{SourceRoot}\{SourceCodeline}"; }
     }
 
-    // Gets or sets the full target path.
+    // Gets the full target path.
     /// <include file="Doc/LJCBackupProfile.xml"
     ///  path="members/TargetPath/*"/>
     public string TargetPath

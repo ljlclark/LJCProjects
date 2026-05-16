@@ -35,6 +35,18 @@ namespace LJCBackup5
       }
     }
 
+    // Returns Not Available if TargetPath is not found.
+    private static string AvailableText(LJCBackupProfile profile)
+    {
+      var retText = "";
+
+      if (!IsAvailable(profile))
+      {
+        retText = " *** Not Available";
+      }
+      return retText;
+    }
+
     // Creates the changes file.
     private static LJCBackupProfile CreateChanges(LJCBackupProfiles profiles
       , int selection)
@@ -86,6 +98,18 @@ namespace LJCBackup5
       }
     }
 
+    // Checks if TargetPath is found.
+    private static bool IsAvailable(LJCBackupProfile profile)
+    {
+      var retValue = true;
+
+      if (!Directory.Exists(profile.TargetPath))
+      {
+        retValue = false;
+      }
+      return retValue;
+    }
+
     // Gets the profile selection.
     private static int SelectOption(LJCBackupProfiles? profiles
       , bool exitOnly = false)
@@ -120,8 +144,16 @@ namespace LJCBackup5
               var selection = (int)ch - 48;
               if (selection <= count - 1)
               {
-                success = true;
-                retValue = selection;
+                if (LJC.HasListItems(profiles))
+                {
+                  var profile = profiles[selection];
+                  if (profile != null
+                    && IsAvailable(profile))
+                  {
+                    success = true;
+                    retValue = selection;
+                  }
+                }
               }
             }
           }
@@ -152,7 +184,9 @@ namespace LJCBackup5
         for (int index = 0; index < count; index++)
         {
           var profile = profiles[index];
-          Console.WriteLine($"{index} - {profile.Name}");
+
+          var available = AvailableText(profile);
+          Console.WriteLine($"{index} - {profile.Name} {available}");
         }
         Console.WriteLine("X - Exit");
       }
