@@ -15,27 +15,11 @@ namespace LJCNetCommon5
     // Creates a Folder Path if it does not already exist.
     /// <include file='Doc/LJCNetFile.xml'
     ///  path='items/CreateFolder/*'/>
-    public static void CreateFolder(string path
-      , string? allowedTrailingFolder = null)
+    public static void CreateFolder(string path)
     {
       if (LJC.HasText(path))
       {
-        var makePath = path;
-        var removeLast = false;
-        var fileName = Path.GetFileName(makePath);
-        if (fileName.Contains('.'))
-        {
-          removeLast = true;
-        }
-        if (LJC.HasText(allowedTrailingFolder)
-        && LJC.Equals(fileName, allowedTrailingFolder))
-        {
-          removeLast = false;
-        }
-        if (removeLast)
-        {
-          makePath = Path.GetDirectoryName(makePath);
-        }
+        var makePath = Path.GetDirectoryName(path);
         if (LJC.HasText(makePath)
           && !Directory.Exists(makePath))
         {
