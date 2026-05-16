@@ -81,7 +81,11 @@ namespace LJCBackup5
               {
                 if (LJC.HasText(targetFilespec))
                 {
-                  LJCNetFile.CreateFolder(targetFilespec);
+                  var path = Path.GetDirectoryName(targetFilespec);
+                  if (LJC.HasText(path))
+                  {
+                    LJCNetFile.CreateFolder(path, "net8.0");
+                  }
                   File.Copy(changeSpec, targetFilespec, true);
                   File.AppendAllText(log, $"copy {changeSpec}\r\n");
                   File.AppendAllText(log, $" - {targetFilespec}\r\n");

@@ -12,22 +12,34 @@ namespace LJCNetCommon5
   {
     #region Static Methods
 
-    // Creates a Folder Path if it does not already exist. (E)
+    // Creates a Folder Path if it does not already exist.
     /// <include file='Doc/LJCNetFile.xml'
     ///  path='items/CreateFolder/*'/>
-    public static void CreateFolder(string path)
+    public static void CreateFolder(string path
+      , string? allowedTrailingFolder = null)
     {
       if (LJC.HasText(path))
       {
-        if (path.Contains('\\'))
+        var makePath = path;
+        var removeLast = false;
+        var fileName = Path.GetFileName(makePath);
+        if (fileName.Contains('.'))
         {
-          path = Path.GetDirectoryName(path);
+          removeLast = true;
         }
-        if (LJC.HasText(path)
-          && !path.Contains('.')
-          && !Directory.Exists(path))
+        if (LJC.HasText(allowedTrailingFolder)
+        && LJC.Equals(fileName, allowedTrailingFolder))
         {
-          Directory.CreateDirectory(path);
+          removeLast = false;
+        }
+        if (removeLast)
+        {
+          makePath = Path.GetDirectoryName(makePath);
+        }
+        if (LJC.HasText(makePath)
+          && !Directory.Exists(makePath))
+        {
+          Directory.CreateDirectory(makePath);
         }
       }
     }

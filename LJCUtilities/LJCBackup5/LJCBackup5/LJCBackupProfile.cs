@@ -48,6 +48,11 @@ namespace LJCBackup5
     ///  path="members/IncludeFilters/*"/>
     public List<string> IncludeFilters { get; set; }
 
+    // Gets or sets the include missing target folders flag.
+    /// <include file="Doc/LJCBackupProfile.xml"
+    ///  path="members/IncludeMissingTargetFolders/*"/>
+    public bool IncludeMissingTargetFolders { get; set; }
+
     // Gets or sets the profile name.
     /// <include file="Doc/LJCBackupProfile.xml"
     ///  path="members/Name/*"/>

@@ -100,7 +100,8 @@ namespace LJCBackup5
           var lineSearch = line.Trim().ToLower();
 
           var values = line.Split(',');
-          if (LJC.HasArrayElements(values))
+          if (LJC.HasArrayElements(values)
+            && LJC.HasText(values[0]))
           {
             var property = values[0].Trim();
             var value = values[1].Trim();
@@ -127,6 +128,13 @@ namespace LJCBackup5
                   foreach (var filter in filters)
                   {
                     profile.IncludeFilters.Add(filter.Trim());
+                  }
+                  break;
+
+                case "includemissingtargetfolders":
+                  if (bool.TryParse(value, out bool include))
+                  {
+                    profile.IncludeMissingTargetFolders = include;
                   }
                   break;
 

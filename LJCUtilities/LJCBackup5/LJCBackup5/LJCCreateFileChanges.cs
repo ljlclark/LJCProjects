@@ -403,7 +403,7 @@ namespace LJCBackup5
         retValue = true;
       }
 
-      // Skip common unpromoved folders/files.
+      // Skip common unpromoted folders/files.
       if (!retValue
         && (targetPath!.Contains("\\.vs")
         || targetPath.Contains("\\obj\\")))
@@ -430,6 +430,7 @@ namespace LJCBackup5
 
       // Skip updates to target folders that do not exist.
       if (!retValue
+        && !IncludeMissingTargetFolders
         && !Directory.Exists(targetPath))
       {
         if (!retValue
@@ -455,6 +456,11 @@ namespace LJCBackup5
     /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/SkipFiles/*'/>
     public List<string> SkipFiles { get; set; }
+
+    // Gets or sets the include missing target folders flag.
+    /// <include file='Doc/LJCCreateFileChanges.xml'
+    ///  path='items/IncludeMissingTargetFolders/*'/>
+    public bool IncludeMissingTargetFolders { get; set; }
     #endregion
 
     #region Class Data

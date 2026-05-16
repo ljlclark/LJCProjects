@@ -1,4 +1,4 @@
-Backup, CLJCProjects
+Backup, LocalLJCProjects
 SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
 SourceCodeline, LJCProjectsDev
 TargetRoot, C:\Users\Les\Documents\Visual Studio 2022
@@ -7,5 +7,29 @@ ChangesFilespec, LJCProjects\ChangesLJCProjects.txt
 SkipFoldersFilespec, LJCProjects\SkipFoldersLJCProjects.txt
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
 IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql
+SkipFiles, ChangesFile.txt|BackupLog.txt|MissingFolders.txt
+SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd
+
+Backup, SegateLJCProjects
+SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
+SourceCodeline, LJCProjectsDev
+TargetRoot, F:\My Data\Visual Studio 2022
+TargetCodeline, LJCProjectsDevBackup
+ChangesFilespec, LJCProjectsDevBackup\ChangesLJCProjects.txt
+IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
+IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql
+IncludeMissingTargetFolders, true
+SkipFiles, ChangesFile.txt|BackupLog.txt|MissingFolders.txt
+SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd
+
+Backup, HPLJCProjects
+SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
+SourceCodeline, LJCProjectsDev
+TargetRoot, E:\OldComputer\Visual Studio 2022
+TargetCodeline, LJCProjectsDevBackup
+ChangesFilespec, LJCProjectsDevBackup\ChangesLJCProjects.txt
+IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
+IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql
+IncludeMissingTargetFolders, true
 SkipFiles, ChangesFile.txt|BackupLog.txt|MissingFolders.txt
 SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd

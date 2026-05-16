@@ -48,7 +48,8 @@ namespace LJCBackup5
         , profile.TargetPath, profile.ChangesFilespec)
       {
         IncludeFilters = profile.IncludeFilters,
-        SkipFiles = profile.SkipFiles
+        SkipFiles = profile.SkipFiles,
+        IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
       };
       createChanges.Run();
       return retValue;
@@ -74,7 +75,14 @@ namespace LJCBackup5
         Console.WriteLine();
         Console.Write("Changes Applied");
         Console.WriteLine();
-        Console.Write("See changes log: BackupLog.txt");
+        Console.WriteLine();
+        Console.Write("View changes log (Y/(N): ");
+        key = Console.ReadKey();
+        ch = (char)key.KeyChar;
+        if ("Yy".Contains(ch))
+        {
+          LJCNetFile.ShellProgram("BackupLog.txt");
+        }
       }
     }
 
