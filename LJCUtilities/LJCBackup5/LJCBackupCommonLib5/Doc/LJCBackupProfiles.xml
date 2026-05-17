@@ -6,13 +6,16 @@
   <!-- Class -->
   <LJCBackupProfiles>
     <summary>
-      Represents a backup profile.
+      Represents a collection of backup profiles.
     </summary>
   </LJCBackupProfiles>
 
   <!-- Static Methods -->
   <CreateSampleProfilesFile>
-    
+    <summary>
+      Creates a sample profiles file.
+    </summary>
+    <param name="profilesFilespec">The profiles filespec.</param>
   </CreateSampleProfilesFile>
   
   <!-- Constructor Methods -->
@@ -25,9 +28,17 @@
     <summary>
       Initializes an object instance with the supplied values.
     </summary>
-    <param name="name"></param>
+    <param name="filespec">The profiles filespec.</param>
   </ConstructorParams>
 
+  <!-- Collection Methods -->
+  <LoadProfiles>
+    <summary>
+      Loads the profiles collection data.
+    </summary>
+    <param name="profilesFilespec">The profiles filespec.</param>
+  </LoadProfiles>
+  
   <!-- Properties -->
   <Filespec>
     <summary>

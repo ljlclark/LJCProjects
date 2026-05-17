@@ -6,14 +6,9 @@
   <!-- Class -->
   <LJCFileChange>
     <summary>
-      Represents a backup profile.
+      Represents the File change object.
     </summary>
   </LJCFileChange>
-
-  <!-- Static Methods -->
-  <CreateSampleProfilesFile>
-
-  </CreateSampleProfilesFile>
 
   <!-- Constructor Methods -->
   <Constructor>
@@ -25,7 +20,9 @@
     <summary>
       Initializes an object instance with the supplied values.
     </summary>
-    <param name="name"></param>
+    <param name="changeType">The chang type.</param>
+    <param name="filespec">The source filespec.</param>
+    <param name="ToFilespec">The "To" filespec.</param>
   </ConstructorParams>
 
   <!-- Methods -->
@@ -38,7 +35,7 @@
   <!-- Properties -->
   <ChangeType>
     <summary>
-      Gets or sets the content filespec.
+      Gets or sets the Change type.
     </summary>
   </ChangeType>
   <Filespec>

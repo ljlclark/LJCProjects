@@ -4,6 +4,11 @@
 using LJCBackupCommonLib5;
 using LJCNetCommon5;
 
+// Contains classes for creating the code changes file.
+// <include file="LJCBackupChanges.xml"
+//  path="members/LJCBackupChangesLib5/*"/>
+// Assembly: LJCBackupChangesLib5
+
 namespace LJCBackupChangesLib5
 {
   // The Backup Changes class.

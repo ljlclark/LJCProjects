@@ -27,8 +27,8 @@
     <summary>
       Initializes an object instance with the provided values.
     </summary>
-    <param name="sourceCodeLine"></param>
-    <param name="changeFilespec"></param>
+    <param name="sourceCodeLine">The source codeline.</param>
+    <param name="changeFilespec">The change filespec.</param>
   </ConstructorParams>
   
   <!-- Methods -->
@@ -36,6 +36,7 @@
     <summary>
       Applies the change commands.
     </summary>
+    <param name="targetPath">The target path.</param>
   </Run>
   <GetMatchFolderFilespec>
     <summary>

@@ -20,7 +20,9 @@
     <summary>
       Initializes an object instance with the supplied values.
     </summary>
-    <param name="name"></param>
+    <param name="sourceRoot">The source root path.</param>
+    <param name="targetRoot">The target root path.</param>
+    <param name="changesFilespec">The changes filespec.</param>
   </ConstructorParams>
 
   <!-- Methods -->

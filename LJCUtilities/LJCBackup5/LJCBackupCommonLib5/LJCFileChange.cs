@@ -24,11 +24,11 @@ namespace LJCBackupCommonLib5
     // Initializes the object instance with the supplied values.
     /// <include file='Doc/LJCFileChange.xml'
     ///  path='members/ConstructorParam/*'/>
-    public LJCFileChange(string changeType, string fileSpec
+    public LJCFileChange(string changeType, string filespec
       , string? toFileName = null) : this()
     {
       ChangeType = changeType;
-      Filespec = fileSpec;
+      Filespec = filespec;
       ToFilespec = toFileName;
     }
     #endregion

@@ -27,7 +27,7 @@
     <summary>
       Initializes an object instance with the supplied values.
     </summary>
-    <param name="name"></param>
+    <param name="name">The backup profile name.</param>
   </ConstructorParams>
 
   <!-- Properties -->

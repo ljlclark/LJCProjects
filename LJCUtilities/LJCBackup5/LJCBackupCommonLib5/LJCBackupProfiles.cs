@@ -15,13 +15,13 @@ namespace LJCBackupCommonLib5
     // Creates a sample profiles file.
     /// <include file="Doc/LJCBackupProfiles.xml"
     ///  path="members/CreateSampleProfilesFile/*"/>
-    public static void CreateSampleProfilesFile(string profilesFileSpec)
+    public static void CreateSampleProfilesFile(string profilesFilespec)
     {
       var values = new List<string>
       {
         "Backup, CLJCProjects",
       };
-      var codelineRoot = @"C:\Users\Les\Documents\Visual Studio 2022";
+      var codelineRoot = @"C:\Users\User\Documents\Visual Studio 2022";
 
       var property = "SourceRoot";
       var text = $"{property}, {codelineRoot}";
@@ -60,7 +60,7 @@ namespace LJCBackupCommonLib5
       values.Add(text);
 
       var lines = values.ToArray();
-      File.WriteAllLines(profilesFileSpec, lines);
+      File.WriteAllLines(profilesFilespec, lines);
     }
     #endregion
 
@@ -77,9 +77,9 @@ namespace LJCBackupCommonLib5
     // Initializes an object instance with the supplied values.
     /// <include file="Doc/LJCBackupProfiles.xml"
     ///  path="members/ConstructorParam/*"/>
-    public LJCBackupProfiles(string fileSpec) : this()
+    public LJCBackupProfiles(string filespec) : this()
     {
-      Filespec = fileSpec;
+      Filespec = filespec;
     }
     #endregion
 
@@ -88,11 +88,11 @@ namespace LJCBackupCommonLib5
     // Loads the profiles collection data.
     /// <include file="Doc/LJCBackupProfiles.xml"
     ///  path="members/LoadProfiles/*"/>
-    public void LoadProfiles(string profilesFileSpec)
+    public void LoadProfiles(string profilesFilespec)
     {
       LJCBackupProfile? profile = null;
 
-      var lines = File.ReadAllLines(profilesFileSpec);
+      var lines = File.ReadAllLines(profilesFilespec);
       if (LJC.HasArrayElements(lines))
       {
         foreach (var line in lines)

@@ -448,7 +448,7 @@ namespace LJCCreateFileChangesLib5
 
     #region Properties
 
-    // Gets or sets the skip file list.
+    // Gets or sets the include filters.
     /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/IncludeFilters/*'/>
     public List<string> IncludeFilters { get; set; }
