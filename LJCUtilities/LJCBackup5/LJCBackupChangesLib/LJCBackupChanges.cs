@@ -1,9 +1,10 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCBackupChanges.cs
+using LJCBackupCommonLib;
 using LJCNetCommon5;
 
-namespace LJCBackup5
+namespace LJCBackupChangesLib
 {
   // The Backup Changes class.
   /// <include file='Doc/ProjectBackupChanges.xml'

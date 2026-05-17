@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // LJCBackupProfile.cs
 
-namespace LJCBackup5
+namespace LJCBackupCommonLib
 {
   // Represents a backup profile.
   /// <include file="Doc/LJCBackupProfile.xml"

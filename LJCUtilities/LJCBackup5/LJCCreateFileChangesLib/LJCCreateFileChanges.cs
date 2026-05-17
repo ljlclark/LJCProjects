@@ -1,9 +1,10 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCCreateFileChanges.cs
+using LJCBackupCommonLib;
 using LJCNetCommon5;
 
-namespace LJCBackup5
+namespace LJCCreateFileChangesLib
 {
   // The Create FileChanges class.
   /// <include file='Doc/ProjectCreateFileChanges.xml'

@@ -3,7 +3,7 @@
 // LJCBackupProfiles.cs
 using LJCNetCommon5;
 
-namespace LJCBackup5
+namespace LJCBackupCommonLib
 {
   // Represents a collection of backup profiles.
   /// <include file="Doc/LJCBackupProfiles.xml"

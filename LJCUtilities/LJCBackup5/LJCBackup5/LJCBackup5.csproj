@@ -15,6 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LJCBackupChangesLib\LJCBackupChangesLib.csproj" />
+    <ProjectReference Include="..\LJCBackupCommonLib\LJCBackupCommonLib.csproj" />
+    <ProjectReference Include="..\LJCCreateFileChangesLib\LJCCreateFileChangesLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="LJCNetCommon5">
       <HintPath>..\External\LJCNetCommon5.dll</HintPath>
     </Reference>

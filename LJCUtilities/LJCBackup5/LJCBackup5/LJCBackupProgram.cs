@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCBackupProgram.cs
+using LJCBackupChangesLib;
+using LJCBackupCommonLib;
+using LJCCreateFileChangesLib;
 using LJCNetCommon5;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 

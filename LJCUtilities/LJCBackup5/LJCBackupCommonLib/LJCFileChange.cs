@@ -3,7 +3,7 @@
 // LJCFileChange.cs
 using LJCNetCommon5;
 
-namespace LJCBackup5
+namespace LJCBackupCommonLib
 {
   // Represents the File change object.
   /// <include file='Doc/LJCFileChange.xml'
