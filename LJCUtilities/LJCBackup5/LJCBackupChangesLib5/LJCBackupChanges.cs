@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCBackupChanges.cs
-using LJCBackupCommonLib;
+using LJCBackupCommonLib5;
 using LJCNetCommon5;
 
-namespace LJCBackupChangesLib
+namespace LJCBackupChangesLib5
 {
   // The Backup Changes class.
-  /// <include file='Doc/ProjectBackupChanges.xml'
-  ///  path='members/BackupChanges/*'/>
+  /// <include file='Doc/LJCBackupChanges.xml'
+  ///  path='members/LJCBackupChanges/*'/>
   public class LJCBackupChanges
   {
     #region Constructor Methods
@@ -23,7 +23,7 @@ namespace LJCBackupChangesLib
       TargetPath = "";
     }
 
-    // Initializes an object instance.
+    // Initializes an object instance with the provided values.
     /// <include file='Doc/LJCBackupChanges.xml'
     ///  path='members/ConstructorParams/*'/>
     public LJCBackupChanges(string sourceCodeLine, string changeFilespec)
@@ -56,13 +56,13 @@ namespace LJCBackupChangesLib
             continue;
           }
           fileChange.ChangeType = tokens[0];
-          fileChange.FileSpec = tokens[1];
+          fileChange.Filespec = tokens[1];
           if (tokens.Length > 2)
           {
-            fileChange.ToFileSpec = tokens[2];
+            fileChange.ToFilespec = tokens[2];
           }
 
-          string changeSpec = fileChange.FileSpec;
+          string changeSpec = fileChange.Filespec;
           string? targetFilespec = null;
           var changeType = fileChange.ChangeType;
           if (!changeType.Equals("delete", LJC.IgnoreCase))
@@ -70,9 +70,9 @@ namespace LJCBackupChangesLib
             targetFilespec = GetMatchFolderFilespec(changeSpec, mSourceCodeLine);
           }
           string? toFileName = null;
-          if (LJC.HasText(fileChange.ToFileSpec))
+          if (LJC.HasText(fileChange.ToFilespec))
           {
-            toFileName = Path.GetFileName(fileChange.ToFileSpec);
+            toFileName = Path.GetFileName(fileChange.ToFilespec);
           }
 
           switch (fileChange.ChangeType.ToLower())
@@ -125,7 +125,7 @@ namespace LJCBackupChangesLib
     /// <include file='Doc/LJCBackupChanges.xml'
     ///  path='members/GetMatchFolderFilespec/*'/>
     public string? GetMatchFolderFilespec(string sourceFilespec
-      , string startFolder)
+      , string sourceCodeLine)
     {
       string? retValue = null;
 
@@ -139,7 +139,7 @@ namespace LJCBackupChangesLib
           for (int index = folders.Length - 1; index >= 0; index--)
           {
             var folder = folders[index];
-            if (folder.Equals(startFolder, LJC.IgnoreCase))
+            if (folder.Equals(sourceCodeLine, LJC.IgnoreCase))
             {
               for (int index1 = index + 1; index1 < folders.Length; index1++)
               {
@@ -158,9 +158,9 @@ namespace LJCBackupChangesLib
 
     #region Properties
 
-    // Gets or sets the TargetRoot value.
+    // Gets or sets the TargetPath value.
     /// <include file='Doc/LJCBackupChanges.xml'
-    ///  path='members/TargetRoot/*'/>
+    ///  path='members/TargetPath/*'/>
     public string TargetPath { get; set; }
     #endregion
 

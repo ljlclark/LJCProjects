@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCBackupChanges.xml -->
+<members>
+  <!-- Assembly -->
+  <LJCBackupChangesLib5>
+    <summary>
+      Contains classes for creating the code changes file.
+    </summary>
+  </LJCBackupChangesLib5>
+
+  <!-- Class -->
+  <LJCBackupChanges>
+    <summary>
+      The Backup Changes class.
+    </summary>
+  </LJCBackupChanges>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorParams>
+    <summary>
+      Initializes an object instance with the provided values.
+    </summary>
+    <param name="sourceCodeLine"></param>
+    <param name="changeFilespec"></param>
+  </ConstructorParams>
+  
+  <!-- Methods -->
+  <Run>
+    <summary>
+      Applies the change commands.
+    </summary>
+  </Run>
+  <GetMatchFolderFilespec>
+    <summary>
+      Creates the Target Filespec.
+    </summary>
+    <param name="sourceFilespec">The source filespec.</param>
+    <param name="sourceCodeLine">The source codeline folder.</param>
+  </GetMatchFolderFilespec>
+  
+  <!-- Properties -->
+  <TargetPath>
+    <summary>
+      Gets or sets the TargetPath value.
+    </summary>
+  </TargetPath>
+</members>

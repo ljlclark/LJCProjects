@@ -3,7 +3,7 @@
 // LJCFileChange.cs
 using LJCNetCommon5;
 
-namespace LJCBackupCommonLib
+namespace LJCBackupCommonLib5
 {
   // Represents the File change object.
   /// <include file='Doc/LJCFileChange.xml'
@@ -28,8 +28,8 @@ namespace LJCBackupCommonLib
       , string? toFileName = null) : this()
     {
       ChangeType = changeType;
-      FileSpec = fileSpec;
-      ToFileSpec = toFileName;
+      Filespec = fileSpec;
+      ToFilespec = toFileName;
     }
     #endregion
 
@@ -41,10 +41,10 @@ namespace LJCBackupCommonLib
     public string Text()
     {
       string retValue = ChangeType;
-      retValue += $",{FileSpec}";
-      if (LJC.HasText(ToFileSpec))
+      retValue += $",{Filespec}";
+      if (LJC.HasText(ToFilespec))
       {
-        retValue += $",{ToFileSpec}";
+        retValue += $",{ToFilespec}";
       }
       return retValue;
     }
@@ -71,7 +71,7 @@ namespace LJCBackupCommonLib
     // Gets or sets the FileSpec.
     /// <include file='Doc/LJCFileChange.xml'
     ///  path='members/FileSpec/*'/>
-    public string FileSpec
+    public string Filespec
     {
       get { return mFileSpec; }
       set
@@ -87,7 +87,7 @@ namespace LJCBackupCommonLib
     // Gets or sets the To FileSpec.
     /// <include file='Doc/LJCFileChange.xml'
     ///  path='members/ToFileSpec/*'/>
-    public string? ToFileSpec
+    public string? ToFilespec
     {
       get { return mToFileSpec; }
       set { mToFileSpec = LJCNetString.InitString(value); }

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCBackupProfile.xml -->
+<members>
+  <!-- Assembly -->
+  <LJCBackupCommonLib5>
+    <summary>
+      Contains common backup program classes.
+    </summary>
+  </LJCBackupCommonLib5>
+
+  <!-- Class -->
+  <LJCBackupProfile>
+    <summary>
+      Represents a backup profile.
+    </summary>
+  </LJCBackupProfile>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorParams>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="name"></param>
+  </ConstructorParams>
+
+  <!-- Properties -->
+  <ChangesFilespec>
+    <summary>
+      Gets or sets the changes filespec.
+    </summary>
+  </ChangesFilespec>
+  <IncludeFilters>
+    <summary>
+      Gets or sets the included file filters.
+    </summary>
+  </IncludeFilters>
+  <IncludeMissingTargetFolders>
+    <summary>
+      Gets or sets the include missing target folders flag.
+    </summary>
+  </IncludeMissingTargetFolders>
+  <Name>
+    <summary>
+      Gets or sets the profile name.
+    </summary>
+  </Name>
+  <SkipFiles>
+    <summary>
+      Gets or sets the skipped files.
+    </summary>
+  </SkipFiles>
+  <SkipFoldersFilespec>
+    <summary>
+      Gets or sets the skipped folder file.
+    </summary>
+  </SkipFoldersFilespec>
+  <SourceCodeline>
+    Gets or sets the source codeline value.
+  </SourceCodeline>
+  <SourceRoot>
+    Gets or sets the source root value.
+  </SourceRoot>
+  <TargetCodeline>
+    Gets or sets the target codeline value.
+  </TargetCodeline>
+  <TargetRoot>
+    Gets or sets the target root value.
+  </TargetRoot>
+  <SourcePath>
+    Gets the full source path.
+  </SourcePath>
+  <TargetPath>
+    <summary>
+      Gets the full target path.
+    </summary>
+  </TargetPath>
+</members>

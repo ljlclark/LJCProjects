@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCCreateFileChanges.cs
-using LJCBackupCommonLib;
+using LJCBackupCommonLib5;
 using LJCNetCommon5;
 
-namespace LJCCreateFileChangesLib
+namespace LJCCreateFileChangesLib5
 {
   // The Create FileChanges class.
-  /// <include file='Doc/ProjectCreateFileChanges.xml'
+  /// <include file='Doc/LJCCreateFileChanges.xml'
   ///  path='items/LJCCreateFileChanges/*'/>
   public class LJCCreateFileChanges
   {
@@ -199,7 +199,7 @@ namespace LJCCreateFileChangesLib
 
     #region Public Methods
 
-    // Runs the create "Changes"file process.
+    // Runs the create "Changes" file process.
     /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/Run/*'/>
     public void Run()

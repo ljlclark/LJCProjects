@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCFileChange.xml -->
+<members>
+  <!-- Class -->
+  <LJCFileChange>
+    <summary>
+      Represents a backup profile.
+    </summary>
+  </LJCFileChange>
+
+  <!-- Static Methods -->
+  <CreateSampleProfilesFile>
+
+  </CreateSampleProfilesFile>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorParams>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="name"></param>
+  </ConstructorParams>
+
+  <!-- Methods -->
+  <Text>
+    <summary>
+      Returns the Change text.
+    </summary>
+  </Text>
+  
+  <!-- Properties -->
+  <ChangeType>
+    <summary>
+      Gets or sets the content filespec.
+    </summary>
+  </ChangeType>
+  <Filespec>
+    <summary>
+      Gets or sets the FileSpec.
+    </summary>
+  </Filespec>
+  <ToFilespec>
+    <summary>
+      Gets or sets the To FileSpec.
+    </summary>
+  </ToFilespec>
+</members>

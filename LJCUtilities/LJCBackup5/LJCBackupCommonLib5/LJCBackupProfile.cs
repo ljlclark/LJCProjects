@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // LJCBackupProfile.cs
 
-namespace LJCBackupCommonLib
+namespace LJCBackupCommonLib5
 {
   // Represents a backup profile.
   /// <include file="Doc/LJCBackupProfile.xml"
@@ -63,7 +63,7 @@ namespace LJCBackupCommonLib
     ///  path="members/SkipFiles/*"/>
     public List<string> SkipFiles { get; set; }
 
-    // Gets or sets the skipped files.
+    // Gets or sets the skipped folder file.
     /// <include file="Doc/LJCBackupProfile.xml"
     ///  path="members/SkipFoldersFilespec/*"/>
     public string SkipFoldersFilespec { get; set; }

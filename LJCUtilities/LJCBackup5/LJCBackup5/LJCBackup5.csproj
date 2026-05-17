@@ -5,6 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,9 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LJCBackupChangesLib\LJCBackupChangesLib.csproj" />
-    <ProjectReference Include="..\LJCBackupCommonLib\LJCBackupCommonLib.csproj" />
-    <ProjectReference Include="..\LJCCreateFileChangesLib\LJCCreateFileChangesLib.csproj" />
+    <ProjectReference Include="..\LJCBackupChangesLib5\LJCBackupChangesLib5.csproj" />
+    <ProjectReference Include="..\LJCBackupCommonLib5\LJCBackupCommonLib5.csproj" />
+    <ProjectReference Include="..\LJCCreateFileChangesLib5\LJCCreateFileChangesLib5.csproj" />
   </ItemGroup>
 
   <ItemGroup>

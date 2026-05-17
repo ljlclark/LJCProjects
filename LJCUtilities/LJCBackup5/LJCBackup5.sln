@@ -5,11 +5,11 @@ VisualStudioVersion = 17.14.37216.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackup5", "LJCBackup5\LJCBackup5.csproj", "{C8396214-0A5D-488F-8A7D-014E05B39070}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCCreateFileChangesLib", "LJCCreateFileChangesLib\LJCCreateFileChangesLib.csproj", "{F308F152-1CEE-4792-8B88-F7AF637FF5DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCCreateFileChangesLib5", "LJCCreateFileChangesLib5\LJCCreateFileChangesLib5.csproj", "{F308F152-1CEE-4792-8B88-F7AF637FF5DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackupCommonLib", "LJCBackupCommonLib\LJCBackupCommonLib.csproj", "{46EF58CE-0F26-4E6D-B759-0A18CE901B4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackupCommonLib5", "LJCBackupCommonLib5\LJCBackupCommonLib5.csproj", "{46EF58CE-0F26-4E6D-B759-0A18CE901B4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackupChangesLib", "LJCBackupChangesLib\LJCBackupChangesLib.csproj", "{680811F1-B121-45EB-A6A8-16A0CAAB8370}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackupChangesLib5", "LJCBackupChangesLib5\LJCBackupChangesLib5.csproj", "{680811F1-B121-45EB-A6A8-16A0CAAB8370}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

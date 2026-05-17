@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCBackupProfiles.xml -->
+<members>
+  <!-- Class -->
+  <LJCBackupProfiles>
+    <summary>
+      Represents a backup profile.
+    </summary>
+  </LJCBackupProfiles>
+
+  <!-- Static Methods -->
+  <CreateSampleProfilesFile>
+    
+  </CreateSampleProfilesFile>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorParams>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="name"></param>
+  </ConstructorParams>
+
+  <!-- Properties -->
+  <Filespec>
+    <summary>
+      Gets or sets the content filespec.
+    </summary>
+  </Filespec>
+</members>

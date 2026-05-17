@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCCreateFileChanges.xml -->
+<members>
+  <!-- Class -->
+  <LJCCreateFileChanges>
+    <summary>
+      The Create FileChanges class.
+    </summary>
+  </LJCCreateFileChanges>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorParams>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="name"></param>
+  </ConstructorParams>
+
+  <!-- Methods -->
+  <Run>
+    <summary>
+      Runs the create "Changes" file process.
+    </summary>
+  </Run>
+
+  <!-- Properties -->
+  <IncludeFilters>
+    <summary>
+      Gets or sets the include filters.
+    </summary>
+  </IncludeFilters>
+  <SkipFiles>
+    <summary>
+      Gets or sets the skip file list.
+    </summary>
+  </SkipFiles>
+  <IncludeMissingTargetFolders>
+    <summary>
+      Gets or sets the include missing target folders flag.
+    </summary>
+  </IncludeMissingTargetFolders>
+</members>

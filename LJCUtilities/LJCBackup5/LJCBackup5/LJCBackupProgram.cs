@@ -1,25 +1,24 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCBackupProgram.cs
-using LJCBackupChangesLib;
-using LJCBackupCommonLib;
-using LJCCreateFileChangesLib;
+using LJCBackupChangesLib5;
+using LJCBackupCommonLib5;
+using LJCCreateFileChangesLib5;
 using LJCNetCommon5;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-/// <include file="Doc/LJCBackup.xml"
-///  path="members/LJCBackup/*"/>
-// LibName: LJCBackup
+// <include file="Doc/LJCBackup.xml"
+//  path="members/LJCBackup5/*"/>
+// Assembly: LJCBackup5
 
 namespace LJCBackup5
 {
-  // The program entry class.
-  /// <include file="Doc/BackupProgram.xml"
-  ///  path="members/BackupProgram/*"/>
+  // A code Backup program.
+  /// <include file="Doc/LJCBackupProgram.xml"
+  ///  path="members/LJCBackupProgram/*"/>
   internal class LJCBackupProgram
   {
     // The program entry method.
-    /// <include file="Doc/BackupProgram.xml"
+    /// <include file="Doc/LJCBackupProgram.xml"
     ///  path="members/Main/*"/>
     static void Main()
     {
