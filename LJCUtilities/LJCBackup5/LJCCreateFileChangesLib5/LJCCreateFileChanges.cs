@@ -223,7 +223,7 @@ namespace LJCCreateFileChangesLib5
       {
         File.Delete(missingFolders);
       }
-      text = $"Target Folders missing in:\r\n{mTargetRoot}\r\n";
+      text = $"Target Folders missing in:\r\n{mTargetRoot}\r\n\r\n";
       text += string.Join("\r\n", mMissingFolders);
       File.AppendAllText(missingFolders, text);
     }

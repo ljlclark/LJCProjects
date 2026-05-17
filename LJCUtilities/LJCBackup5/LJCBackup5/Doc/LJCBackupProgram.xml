@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCBackupProgram.xml -->
+<members>
+  <!-- Assembly -->
+  <LJCBackup5>
+    <summary>
+      Contains classes for code backup.
+    </summary>
+  </LJCBackup5>
+  
+  <!-- Class -->
+  <LJCBackupProgram>
+    <summary>
+      A code Backup program.
+    </summary>
+    <remarks>
+      The program entry class.
+    </remarks>
+  </LJCBackupProgram>
+  
+  <!-- Methods -->
+  <main>
+    <summary>
+      The program entry method.
+    </summary>
+  </main>
+</members>
