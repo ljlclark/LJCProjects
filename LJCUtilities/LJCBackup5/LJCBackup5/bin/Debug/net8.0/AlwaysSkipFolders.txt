@@ -1,48 +1,20 @@
-Target Folders missing in:
-C:\Users\Les\Documents\Visual Studio 2022\LJCProjects
-
-CoreTestAppsNew\CipherTestNew
-CoreTestAppsNew\CipherTestNew\Doc
-CoreTestAppsNew\CipherTestNew\Properties
-CoreTestAppsNew\CipherTestNew\bin\Debug
-
-CoreTestAppsNew\ConfigTestConsoleNew
-CoreTestAppsNew\ConfigTestConsoleNew\Doc
-CoreTestAppsNew\ConfigTestConsoleNew\Properties
-CoreTestAppsNew\ConfigTestConsoleNew\bin\Debug
-
-CoreTestAppsNew\LJCDataDetailConsoleNew
-CoreTestAppsNew\LJCDataDetailConsoleNew\Properties
-CoreTestAppsNew\LJCDataDetailConsoleNew\bin\Debug
-
-CoreTestAppsNew\LJCDataDetailTestNew
-CoreTestAppsNew\LJCDataDetailTestNew\Properties
-
-CoreTestAppsNew\LJCTestConsoleNew
-CoreTestAppsNew\LJCTestConsoleNew\Doc
-CoreTestAppsNew\LJCTestConsoleNew\Properties
-CoreTestAppsNew\LJCTestConsoleNew\bin\Debug
-
-CoreTestAppsNew\ObjectManagerTestNew
-CoreTestAppsNew\ObjectManagerTestNew\Doc
-CoreTestAppsNew\ObjectManagerTestNew\Properties
-CoreTestAppsNew\ObjectManagerTestNew\bin\Debug
-
 _AICodeTest
-_AICodeTest\AIPrompts
-_AICodeTest\GenDataCollection
-_AICodeTest\GenDataObject
-
 _AICodeTest\_AICodeTest
+_AICodeTest\_AICodeTest\bin\Debug
 _AICodeTest\_AICodeTest\Doc
 _AICodeTest\_AICodeTest\Properties
-_AICodeTest\_AICodeTest\bin\Debug
+
+_AICodeTest\AIPrompts
+
+_AICodeTest\GenDataCollection
+
+_AICodeTest\GenDataObject
 
 CoreAssemblies\LJCPagination
 CoreAssemblies\LJCPagination\LJCDataPageList
+CoreAssemblies\LJCPagination\LJCDataPageList\bin\Debug
 CoreAssemblies\LJCPagination\LJCDataPageList\Doc
 CoreAssemblies\LJCPagination\LJCDataPageList\Properties
-CoreAssemblies\LJCPagination\LJCDataPageList\bin\Debug
 
 CoreAssemblies\LJCPagination\LJCPaginationDAL
 CoreAssemblies\LJCPagination\LJCPaginationDAL\bin\Debug
@@ -52,16 +24,16 @@ CoreAssemblies\LJCPagination\LJCPaginationDAL\Manager
 CoreAssemblies\LJCPagination\LJCPaginationDAL\Properties
 
 CoreAssemblies\LJCPagination\LJCTextPageList
+CoreAssemblies\LJCPagination\LJCTextPageList\bin\Debug
 CoreAssemblies\LJCPagination\LJCTextPageList\Doc
 CoreAssemblies\LJCPagination\LJCTextPageList\Properties
-CoreAssemblies\LJCPagination\LJCTextPageList\bin\Debug
 
 CoreAssemblies\LJCViewControls
 
 CoreTestApps\LJCDataManagerTest
 CoreTestApps\LJCDataManagerTest\LJCDataManagerTest
-CoreTestApps\LJCDataManagerTest\LJCDataManagerTest\Properties
 CoreTestApps\LJCDataManagerTest\LJCDataManagerTest\bin\Debug
+CoreTestApps\LJCDataManagerTest\LJCDataManagerTest\Properties
 
 CoreTestApps\LJCDataManagerTest\PersonDAL
 CoreTestApps\LJCDataManagerTest\PersonDAL\Data
@@ -69,17 +41,16 @@ CoreTestApps\LJCDataManagerTest\PersonDAL\Doc
 CoreTestApps\LJCDataManagerTest\PersonDAL\Manager
 CoreTestApps\LJCDataManagerTest\PersonDAL\Properties
 CoreTestApps\LJCDataManagerTest\PersonDAL\SQLScript
-
 CoreTestApps\LJCDataManagerTest\PersonDALTest
+CoreTestApps\LJCDataManagerTest\PersonDALTest\bin\Debug
 CoreTestApps\LJCDataManagerTest\PersonDALTest\Doc
 CoreTestApps\LJCDataManagerTest\PersonDALTest\ManagerTest
 CoreTestApps\LJCDataManagerTest\PersonDALTest\Properties
 CoreTestApps\LJCDataManagerTest\PersonDALTest\Test
-CoreTestApps\LJCDataManagerTest\PersonDALTest\bin\Debug
 
 CoreTestApps\LJCDataManagerTest\PersonList
-CoreTestApps\LJCDataManagerTest\PersonList\Properties
 CoreTestApps\LJCDataManagerTest\PersonList\bin\Debug
+CoreTestApps\LJCDataManagerTest\PersonList\Properties
 
 CoreTestApps\LJCDBDataAccessTest
 CoreTestApps\LJCDBDataAccessTest\LJCDBDataAccessTest
@@ -107,10 +78,37 @@ CoreTestApps\UsingDataAccess\PersonDAL
 CoreTestApps\UsingDataAccess\PersonDAL\Manager
 CoreTestApps\UsingDataAccess\PersonDAL\Properties
 
+CoreTestAppsNew\CipherTestNew
+CoreTestAppsNew\CipherTestNew\bin\Debug
+CoreTestAppsNew\CipherTestNew\Doc
+CoreTestAppsNew\CipherTestNew\Properties
+
+CoreTestAppsNew\ConfigTestConsoleNew
+CoreTestAppsNew\ConfigTestConsoleNew\bin\Debug
+CoreTestAppsNew\ConfigTestConsoleNew\Doc
+CoreTestAppsNew\ConfigTestConsoleNew\Properties
+
+CoreTestAppsNew\LJCDataDetailConsoleNew
+CoreTestAppsNew\LJCDataDetailConsoleNew\bin\Debug
+CoreTestAppsNew\LJCDataDetailConsoleNew\Properties
+
+CoreTestAppsNew\LJCDataDetailTestNew
+CoreTestAppsNew\LJCDataDetailTestNew\Properties
+
 CoreTestAppsNew\LJCDBViewDALTestNew\ConsoleApp2
 CoreTestAppsNew\LJCDBViewDALTestNew\ConsoleApp2\bin\Debug
 CoreTestAppsNew\LJCDBViewDALTestNew\ConsoleApp2\Doc
 CoreTestAppsNew\LJCDBViewDALTestNew\ConsoleApp2\Properties
+
+CoreTestAppsNew\LJCTestConsoleNew
+CoreTestAppsNew\LJCTestConsoleNew\bin\Debug
+CoreTestAppsNew\LJCTestConsoleNew\Doc
+CoreTestAppsNew\LJCTestConsoleNew\Properties
+
+CoreTestAppsNew\ObjectManagerTestNew
+CoreTestAppsNew\ObjectManagerTestNew\bin\Debug
+CoreTestAppsNew\ObjectManagerTestNew\Doc
+CoreTestAppsNew\ObjectManagerTestNew\Properties
 
 CoreUtilities\Categorize
 CoreUtilities\Categorize\Categorize
@@ -122,6 +120,11 @@ CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug\UserTypeFiles
 CoreUtilities\LJCGenDoc2\Old
 
 CoreUtilities\LJCSystemBuilder
+CoreUtilities\LJCSystemBuilder\LJCSystemBuildDAL
+CoreUtilities\LJCSystemBuilder\LJCSystemBuildDAL\Data
+CoreUtilities\LJCSystemBuilder\LJCSystemBuildDAL\Manager
+CoreUtilities\LJCSystemBuilder\LJCSystemBuildDAL\Properties
+
 CoreUtilities\LJCSystemBuilder\LJCSystemBuilder
 CoreUtilities\LJCSystemBuilder\LJCSystemBuilder\bin\Debug
 CoreUtilities\LJCSystemBuilder\LJCSystemBuilder\bin\Debug\SQLScript
@@ -129,17 +132,16 @@ CoreUtilities\LJCSystemBuilder\LJCSystemBuilder\Doc
 CoreUtilities\LJCSystemBuilder\LJCSystemBuilder\Forms\Solution
 CoreUtilities\LJCSystemBuilder\LJCSystemBuilder\Properties
 
-CoreUtilities\LJCSystemBuilder\LJCSystemBuildDAL
-CoreUtilities\LJCSystemBuilder\LJCSystemBuildDAL\Data
-CoreUtilities\LJCSystemBuilder\LJCSystemBuildDAL\Manager
-CoreUtilities\LJCSystemBuilder\LJCSystemBuildDAL\Properties
-
 CoreUtilities\LJCViewBuilder
 CoreUtilities\LJCViewBuilder\LJCViewBuilder
 CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug
 CoreUtilities\LJCViewBuilder\LJCViewBuilder\Doc
 CoreUtilities\LJCViewBuilder\LJCViewBuilder\Forms\ViewBuilder
 CoreUtilities\LJCViewBuilder\LJCViewBuilder\Properties
+
+Dependencies
+
+Dependencies\DataFiles
 
 LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\LJCProjects
 LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\LJCProjectsDevBackup
@@ -175,8 +177,8 @@ SampleApps\LJCDocAppManager\LJCDocAppManager\Forms\Main
 SampleApps\LJCDocAppManager\LJCDocAppManager\Properties
 
 SampleApps\LJCDocAppManager\LJCDocAppManagerDAL
-SampleApps\LJCDocAppManager\LJCDocAppManagerDAL\DBScript
 SampleApps\LJCDocAppManager\LJCDocAppManagerDAL\Data
+SampleApps\LJCDocAppManager\LJCDocAppManagerDAL\DBScript
 SampleApps\LJCDocAppManager\LJCDocAppManagerDAL\Doc
 SampleApps\LJCDocAppManager\LJCDocAppManagerDAL\Manager
 SampleApps\LJCDocAppManager\LJCDocAppManagerDAL\Properties
@@ -191,8 +193,8 @@ SampleApps\LJCFacilityManagerSetup\InstallForms\Properties
 SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup
 SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup\bin\Debug
 SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup\Doc
-SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup\Properties
 SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup\InstallResources
+SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup\Properties
 
 SampleApps\LJCFacilityManagerSetup\LJCInstallLib
 SampleApps\LJCFacilityManagerSetup\LJCInstallLib\Doc
@@ -228,6 +230,3 @@ SampleApps\LJCTextInvasion\LJCTextInvasion\bin\Debug
 SampleApps\LJCTextInvasion\LJCTextInvasion\Doc
 SampleApps\LJCTextInvasion\LJCTextInvasion\Forms
 SampleApps\LJCTextInvasion\LJCTextInvasion\Properties
-
-Dependencies
-Dependencies\DataFiles
