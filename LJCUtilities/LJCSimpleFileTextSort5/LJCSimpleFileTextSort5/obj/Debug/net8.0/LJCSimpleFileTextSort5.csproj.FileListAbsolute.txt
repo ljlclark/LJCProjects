@@ -1,0 +1,17 @@
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\bin\Debug\net8.0\LJCSimpleFileTextSort5.exe
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\bin\Debug\net8.0\LJCSimpleFileTextSort5.deps.json
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\bin\Debug\net8.0\LJCSimpleFileTextSort5.runtimeconfig.json
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\bin\Debug\net8.0\LJCSimpleFileTextSort5.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\bin\Debug\net8.0\LJCSimpleFileTextSort5.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\bin\Debug\net8.0\LJCNetCommon5.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\obj\Debug\net8.0\LJCSimpleFileTextSort5.csproj.AssemblyReference.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\obj\Debug\net8.0\LJCSimpleFileTextSort5.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\obj\Debug\net8.0\LJCSimpleFileTextSort5.AssemblyInfoInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\obj\Debug\net8.0\LJCSimpleFileTextSort5.AssemblyInfo.cs
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\obj\Debug\net8.0\LJCSimpleFileTextSort5.csproj.CoreCompileInputs.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\obj\Debug\net8.0\LJCSimpl.288CBCE8.Up2Date
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\obj\Debug\net8.0\LJCSimpleFileTextSort5.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\obj\Debug\net8.0\refint\LJCSimpleFileTextSort5.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\obj\Debug\net8.0\LJCSimpleFileTextSort5.pdb
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\obj\Debug\net8.0\LJCSimpleFileTextSort5.genruntimeconfig.cache
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCUtilities\LJCSimpleFileTextSort5\LJCSimpleFileTextSort5\obj\Debug\net8.0\ref\LJCSimpleFileTextSort5.dll
