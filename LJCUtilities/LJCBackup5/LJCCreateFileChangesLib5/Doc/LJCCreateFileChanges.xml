@@ -3,6 +3,13 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCCreateFileChanges.xml -->
 <members>
+  <!-- Assembly -->
+  <LJCCreateFileChangesLib5>
+    <summary>
+      Contains code to create the FileChanges file.
+    </summary>
+  </LJCCreateFileChangesLib5>
+
   <!-- Class -->
   <LJCCreateFileChanges>
     <summary>

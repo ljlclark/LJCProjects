@@ -6,7 +6,7 @@
   <!-- Assembly -->
   <LJCBackupChangesLib5>
     <summary>
-      Contains classes for creating the code changes file.
+      Contains code to apply the file changes.
     </summary>
   </LJCBackupChangesLib5>
 
