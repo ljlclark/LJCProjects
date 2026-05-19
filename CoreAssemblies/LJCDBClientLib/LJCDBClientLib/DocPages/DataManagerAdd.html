@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>DataManager Add</title>
+  <meta name="author" content="Lester J. Clark" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div id='Header'>
+      <div id='Title'>DataManager Add Overview</div>
+    </div>
+    <div class='Text'>
+      <p>
+        The DbRequest.Columns object includes the definitions for the columns to be
+        added to the base table.
+      </p>
+      <p>
+        The DbRequest.Columns include all the columns from the BaseDefinition by
+        default. It includes only the columns contained in the optional
+        propertyNames parameter if provided. It uses the columns in the ChangedNames
+        object if it exists and the propertyNames parameter is null.
+      </p>
+      <p>
+        The propertyNames must not include calculated or join columns. This will
+        cause an error.
+      </p>
+      <p>
+        The DbRequest.Columns do not include AutoIncrement columns or columns with
+        null values. To include a null column value, set the column value to
+        "-null".
+      </p>
+      <p>
+        The lookup Key columns must be available in the BaseDefinition object to be
+        included.
+      </p>
+      <p>
+        The lookup key columns do not use keys with null values or invalid dates.
+      </p>
+      <p>
+        The result contains the database assigned column values.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataManagerClass.html -->
+<html lang="en">
+<head>
+  <title>DataManager Overview</title>
+  <meta name="author" content="Lester J. Clark" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div id='Header'>
+      <div id='Title'>DataManager Overview</div>
+    </div>
+    <div class='Text'>
+      <p>
+        The Data Manager is the client code that creates a table specific
+        <span class="userType">LJCDBMessage.DbRequest</span>
+        object. It then serializes the
+        <span class="userType">DbRequest</span>
+        object into a Request XML message to pass to the
+        <span class="userType">LJCDBServiceLib.DbService.Execute()</span>
+        method or directly to the
+        <span class="commonType">LJCDBDataAccess.DbDataAccess.Execute()</span>
+        method.
+      </p>
+      <p>
+        The
+        <span class="userType">DataManager</span>
+        object creates the contained
+        <span class="commonType">BaseDefinition</span>
+        collection when the
+        <span class="userType">DataManager</span>
+        is created. The
+        <span class="commonType">BaseDefinition</span>
+        is an
+        <span class="commonType">LJCNetCommon.DbColumns</span>
+        collection which contains the column definitions for the base table.
+        Each element
+        <span class="userType">DbColumn</span>
+        contains the table ColumnName, PropertyName, Caption, DataTypeName and
+        MaxLength. These column definitions are retrieved from the database.
+      </p>
+      <p>
+        The contained
+        <span class="commonType">DataDefinition</span>
+        collection is also created at this time. This enables adding Calculated
+        and Join columns to a grid column configuration.
+      </p>
+      <p>
+        The
+        <span class="commonType">DbColumn.Caption</span>
+        is initially set to the same value as the ColumnName as that is how it
+        is returned from ADO.NET. The PropertyName is initially set to the same
+        value as the ColumnName if the
+        <span class="userType">DbColumn</span>
+        is initialized with a blank PropertyName value. These values can be
+        modified later as required.
+      </p>
+      <p>
+        The
+        <span class="commonType">BaseDefinition</span>
+        is used to create the
+        <span class="userType">DbColumn</span>
+        objects that are defined in a
+        <span class="userType">DbRequest</span>
+        object. These objects are then used to create the SQL Statements that are
+        executed to perform the requested data operation.
+      </p>
+      <p>
+        The Data methods are Add(), Delete(), ExecuteClientSql(), Load,
+        LoadProcedure(), Retrieve() and Update().
+      </p>
+      <p>
+        The Data methods create a
+        <span class="userType">DbRequest</span>
+        object and pass it to the
+        <span class="commonType">ExecuteRequest()</span>
+        method.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

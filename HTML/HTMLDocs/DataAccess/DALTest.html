@@ -29,7 +29,7 @@
       </p>
       <ul class="listMargins">
         <li>
-          Add a new Console Project named "DataTestDAL" to the DataTest solution.
+          Add a new Console Project named "PersonDALTest" to the DataTest solution.
         </li>
       </ul>
     </div>
@@ -59,8 +59,16 @@
       {
         success = <span class='keyWord'>false</span>;
       }
-    }
 
+      <span class='keyWord'>if</span> (success)
+      {
+        <span class='comment'>// Test function calls.</span>
+
+        Console.WriteLine("Press any key to <span class='keyWord'>continue</span> . . .");
+        Console.ReadKey();
+      }
+    }
+s
     <span class='xmlComment'>#region Helper Methods</span>
 
     <span class='comment'>// Creates the DbServiceRef object.</span>
@@ -156,9 +164,9 @@
         </li>
       </ul>
     </div>
-    <pre>
+    <pre class="code">
 <span class='comment'>// Creates the PersonManager object.</span>
-<span class='modifier'>private</span> <span class='modifier'>static</span> PersonManager CreatePersonManager(DbServiceRef dbServiceRef
+<span class='modifier'>private</span> <span class='modifier'>static</span> <span class="userType">PersonManager</span> CreatePersonManager(DbServiceRef dbServiceRef
   , <span class='commonType'>string</span> dataConfigName)
 {
   PersonManager retValue = <span class='keyWord'>new</span> <span class='userType'>PersonManager</span>(dbServiceRef, dataConfigName);
@@ -198,7 +206,6 @@
     </div>
     <pre class="code">
 <span class='comment'>// Write the record string.</span>
-
 <span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>string</span> WriteRowString(Person person)
 {
   <span class='commonType'>string</span> retValue = <span class='keyWord'>null</span>;

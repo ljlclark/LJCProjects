@@ -58,6 +58,9 @@
       </ul>
     </div>
     <br />
+    <img src="CreateSolution.jpg" width="400" />
+    <br />
+    <br />
     <div class="columnsAuto">
       <p class="book">
         The following examples use the table created with this script.
@@ -194,7 +197,7 @@ GO</pre>
 <span class='keyWord'>namespace</span> DataTestDAL
 {
   <span class='comment'>// Represents a collection of Person objects.</span>
-  <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Persons</span> : <span class='libType'>List</span><Person>
+  <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Persons</span> : <span class='libType'>List</span>&lt;<span class="userType">Person</span>&gt;
   {
   }
 }</pre>
@@ -237,7 +240,7 @@ GO</pre>
 {
   <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>Provides object specific data manipulation methods.</span><span class='xmlComment'>&lt;/summary&gt;</span>
   <span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>PersonManager</span>
-    : ObjectManager<Person, Persons>
+    : ObjectManager&lt;<span class="userType">Person</span>, <span class="userType">Persons</span>&gt;
   {
     <span class='comment'>// Initializes an object instance.</span>
     <span class='xmlComment'>/// <include path='items/ObjectManagerC/*' file='../../CommonManager.xml' /></span>

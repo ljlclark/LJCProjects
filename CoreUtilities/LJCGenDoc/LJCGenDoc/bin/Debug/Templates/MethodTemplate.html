@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
-<!-- #SectionBegin Main -->
 <!--X------------------------------------->
+<!-- #CommentChars <!-- -->
+<!-- #SectionBegin Main -->
 <!-- #Value _AssemblyHtm_ -->
 <!-- #Value _AssemblyName_ -->
 <!-- #Value _Code_ -->
@@ -46,7 +47,7 @@
       <div id='Title'>_Description_ _MethodName_</div>
     </div>
     <!--X------------------------------------->
-    <!-- #IfBegin _HasParams_ NotNull -->
+    <!-- #IfBegin _HasParams_ HasValue -->
     <br />
     <div id='Title'>Parameters</div>
     <!-- #IfEnd HasParams -->
@@ -56,14 +57,14 @@
     <div class='Text'>_ParameterName_ - _ParameterText_</div>
     <!-- #SectionEnd Parameters -->
     <!--X------------------------------------->
-    <!-- #IfBegin _Returns_ NotNull -->
+    <!-- #IfBegin _Returns_ HasValue -->
     <br />
     <div class='Text'>Returns</div>
     <br />
     <div class='Text'>_Returns_</div>
     <!-- #IfEnd Returns -->
     <!--X------------------------------------->
-    <!-- #IfBegin _Syntax_ NotNull -->
+    <!-- #IfBegin _Syntax_ HasValue -->
     <br />
     <div class='Text'>Syntax</div>
     <br />
@@ -81,7 +82,7 @@
     </div>
     <!-- #IfEnd Syntax -->
     <!--X------------------------------------->
-    <!-- #IfBegin _Summary_ NotNull -->
+    <!-- #IfBegin _Summary_ HasValue -->
     <br />
     <div class='Text'>_Summary_</div>
     <!-- #IfElse Summary -->
@@ -93,7 +94,7 @@
     <br />
     <div class='Text'>Remarks</div>
     <!-- #IfEnd HasRemarks -->
-    <!-- #IfBegin _RemarkText_ NotNull -->
+    <!-- #IfBegin _RemarkText_ HasValue -->
     <br />
     <div class='Text'>_RemarkText_</div>
     <!-- #IfEnd RemarkText -->
@@ -104,20 +105,20 @@
     <div class='Text'>_Para_</div>
     <!-- #SectionEnd MethodRemarks -->
     <!--X------------------------------------->
-    <!-- #IfBegin _HasExample_ NotNull -->
+    <!-- #IfBegin _HasExample_ HasValue -->
     <br />
     <div class='Text'>Example</div>
     <!-- #IfEnd HasExample -->
     <!-- #SectionBegin ExampleRemarks -->
     <!-- #Value _Para_ -->
     <!-- #Value _Code_ -->
-    <!-- #IfBegin _Para_ NotNull -->
+    <!-- #IfBegin _Para_ HasValue -->
     <br />
     <div class='Text'>_Para_</div>
     <!-- #IfEnd -->
     <!-- #SectionEnd ExampleRemarks -->
     <!--X------------------------------------->
-    <!-- #IfBegin _Code_ NotNull -->
+    <!-- #IfBegin _Code_ HasValue -->
     <br />
     <div class='SectionContainer'>
       <table class='CodeTable'>

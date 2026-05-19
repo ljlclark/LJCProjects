@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>DataManager Load</title>
+  <meta name="author" content="Lester J. Clark" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div id='Header'>
+      <div id='Title'>DataManager Load Overview</div>
+    </div>
+    <div class='Text'>
+      <p>
+        The keyColumns parameter is optional.
+      </p>
+      <p>
+        The DbRequest.Columns object includes the definitions for the columns to be
+        retrieved from the base table.
+      </p>
+      <p>
+        The DbRequest.Columns include all the columns from the BaseDefinition by
+        default. It only includes the columns contained in the optional
+        propertyNames parameter if provided.
+      </p>
+      <p>
+        The keyColumn.ColumnName must be available in the BaseDefinition object or
+        the join.Columns parameter to be included.
+      </p>
+      <p>
+        The keyColumns do not use keys with null values. To include a null column
+        value, set the column value to "'-null'".
+      </p>
+    </div>
+  </div>
+</body>
+</html>

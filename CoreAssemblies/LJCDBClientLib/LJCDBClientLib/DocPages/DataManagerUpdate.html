@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>DataManager Update</title>
+  <meta name="author" content="Lester J. Clark" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div id='Header'>
+      <div id='Title'>DataManager Update Overview</div>
+    </div>
+    <div class='Text'>
+      <p>
+        Creates an "Insert"
+        <span class="userType">DbRequest</span>
+        object. The
+        <span class="commonType">DbRequest.Columns</span>
+        object includes the definitions for the columns to be updated in the base
+        table.
+      </p>
+      <p>
+        The DbRequest.Columns include all columns from the BaseDefinition by default;
+        except it does not include AutoIncrement columns or columns with null
+        values. To include a null column value, set the column value to "-null". It
+        only includes the columns contained in the optional propertyNames parameter
+        if provided. It uses the columns in the ChangedNames object if it exists and
+        the propertyNames parameter is null.
+      </p>
+      <p>
+        The DbRequest.Columns do not include AutoIncrement columns or columns with
+        null values. To include a null column value, set the column value to
+        "-null".
+      </p>
+      <p>
+        The Key Columns are assigned from the LookupColumnNames property. The
+        keyColumn.ColumnName must be available in the BaseDefinition object to
+        be included.
+      </p>
+      <p>
+        The Key Columns are those columns whose value will be used to find the
+        added record. This is to return the DB Assigned column values to the
+        calling program.
+      </p>
+      <p>
+        The keyColumns do not use keys with null values or invalid dates. To include
+        a null column value, set the column value to "'-null'".
+      </p>
+      <p>
+        Verify: The Key Columns must include the DB Assigned columns for the assigned
+        values to be returned to the calling program. The value must be set to
+        zero to prevent including it as a key value?
+      </p>
+      <p>
+        Verify: The Lookup Retrieve call will not include keys with a value of "0".
+      </p>
+      <p>
+        Verify: The Add Data Object property names must be the same as the Request Column
+        property names to map the values into the Key Columns.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

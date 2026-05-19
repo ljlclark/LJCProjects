@@ -28,7 +28,7 @@ namespace LJCBackupChangesLib5
       TargetPath = "";
     }
 
-    // Initializes an object instance with the provided values.
+    // Initializes an object instance with the supplied values.
     /// <include file='Doc/LJCBackupChanges.xml'
     ///  path='members/ConstructorParams/*'/>
     public LJCBackupChanges(string sourceCodeLine, string changeFilespec)

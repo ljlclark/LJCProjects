@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<!-- #SectionBegin Main -->
+<!-- #CommentChars <!-- -->
 <!--X------------------------------------->
+<!-- #SectionBegin Main -->
 <!-- #Value _AssemblyHtm_ -->
 <!-- #Value _AssemblyName_ -->
 <!-- #Value _Code_ -->
@@ -46,7 +47,7 @@
       <div id='Title'>Class _TypeName_</div>
     </div>
     <!--X------------------------------------->
-    <!-- #IfBegin _Syntax_ NotNull -->
+    <!-- #IfBegin _Syntax_ HasValue -->
     <br />
     <div class='Text'>Syntax</div>
     <br />
@@ -64,7 +65,7 @@
     </div>
     <!-- #IfEnd Syntax -->
     <!--X------------------------------------->
-    <!-- #IfBegin _Summary_ NotNull -->
+    <!-- #IfBegin _Summary_ HasValue -->
     <br />
     <div class='Text'>_Summary_</div>
     <!-- #IfElse Summary -->
@@ -76,7 +77,7 @@
     <br />
     <div class='Text'>Remarks</div>
     <!-- #IfEnd HasRemarks -->
-    <!-- #IfBegin _RemarkText_ NotNull -->
+    <!-- #IfBegin _RemarkText_ HasValue -->
     <br />
     <div class='Text'>_RemarkText_</div>
     <!-- #IfEnd RemarkText -->
@@ -118,7 +119,7 @@
         <td class='ListTable' width='25%'>
           <a href='_HTMLFileName_'>_Name_</a>
         </td>
-        <!-- #IfBegin _Summary_ NotNull -->
+        <!-- #IfBegin _Summary_ HasValue -->
         <td class='ListTable'>_Summary_</td>
         <!-- #IfElse -->
         <td class='ListTableMissing'>Missing Summary</td>
@@ -130,7 +131,7 @@
     <!-- #SectionEnd MethodGroups -->
     <!--X------------------------------------->
     <!--X------------------------------------->
-    <!-- #IfBegin _OtherMethodCount_ NotNull -->
+    <!-- #IfBegin _OtherMethodCount_ HasValue -->
     <br />
     <div class='Title1'>_MethodListPreface_Public Methods</div>
     <table class='ListTable'>
@@ -143,19 +144,19 @@
         <td class='ListTable' width='25%'>
           <a href='_FileName_'>_MethodName_</a>
         </td>
-        <!-- #IfBegin _MethodSummary_ NotNull -->
+        <!-- #IfBegin _MethodSummary_ HasValue -->
         <td class='ListTable'>_MethodSummary_</td>
         <!-- #IfElse -->
         <td class='ListTableMissing'>Missing Summary</td>
         <!-- #IfEnd _MethodSummary_ -->
       </tr>
       <!-- #SectionEnd PublicMethods -->
-      <!-- #IfBegin _PublicMethodCount_ NotNull -->
+      <!-- #IfBegin _PublicMethodCount_ HasValue -->
     </table>
     <div class='Text'>_PublicMethodCount_ Methods</div>
     <!-- #IfEnd PublicMethodCount -->
     <!--X------------------------------------->
-    <!-- #IfBegin _PrivateMethodCount_ NotNull -->
+    <!-- #IfBegin _PrivateMethodCount_ HasValue -->
     <br />
     <div class='Title2'>_MethodListPreface_Private Methods</div>
     <table class='ListTable'>
@@ -168,19 +169,19 @@
         <td class='ListTable' width='25%'>
           <a href='_FileName_'>_MethodName_</a>
         </td>
-        <!-- #IfBegin _MethodSummary_ NotNull -->
+        <!-- #IfBegin _MethodSummary_ HasValue -->
         <td class='ListTable'>_MethodSummary_</td>
         <!-- #IfElse -->
         <td class='ListTableMissing'>Missing Summary</td>
         <!-- #IfEnd _MethodSummary_ -->
       </tr>
       <!-- #SectionEnd PrivateMethods -->
-      <!-- #IfBegin _PrivateMethodCount_ NotNull -->
+      <!-- #IfBegin _PrivateMethodCount_ HasValue -->
     </table>
     <div class='Text'>_PrivateMethodCount_ Methods</div>
     <!-- #IfEnd PrivateMethodCount -->
     <!--X------------------------------------->
-    <!-- #IfBegin _PropertyCount_ NotNull -->
+    <!-- #IfBegin _PropertyCount_ HasValue -->
     <br />
     <div id='Title'>Properties</div>
     <table class='ListTable'>
@@ -193,18 +194,18 @@
         <td class='ListTable' width='25%'>
           <a href='_FileName_'>_PropertyName_</a>
         </td>
-        <!-- #IfBegin _PropertySummary_ NotNull -->
+        <!-- #IfBegin _PropertySummary_ HasValue -->
         <td class='ListTable'>_PropertySummary_</td>
         <!-- #IfElse -->
         <td class='ListTableMissing'>Missing Summary</td>
         <!-- #IfEnd _PropertySummary_ -->
       </tr>
       <!-- #SectionEnd Properties -->
-      <!-- #IfBegin _PropertyCount_ NotNull -->
+      <!-- #IfBegin _PropertyCount_ HasValue -->
     </table>
     <!-- #IfEnd PropertyCount -->
     <!--X------------------------------------->
-    <!-- #IfBegin _FieldCount_ NotNull -->
+    <!-- #IfBegin _FieldCount_ HasValue -->
     <br />
     <div id='Title'>Fields</div>
     <table class='ListTable'>
@@ -217,18 +218,18 @@
         <td class='ListTable' width='25%'>
           <a href='_FileName_'>_FieldName_</a>
         </td>
-        <!-- #IfBegin _FieldSummary_ NotNull -->
+        <!-- #IfBegin _FieldSummary_ HasValue -->
         <td class='ListTable'>_FieldSummary_</td>
         <!-- #IfElse -->
         <td class='ListTableMissing'>Missing Summary</td>
         <!-- #IfEnd _FieldSummary_ -->
       </tr>
       <!-- #SectionEnd Fields -->
-      <!-- #IfBegin _FieldCount_ NotNull -->
+      <!-- #IfBegin _FieldCount_ HasValue -->
     </table>
     <!-- #IfEnd FieldCount -->
     <!--X------------------------------------->
-    <!-- #IfBegin _HasExample_ NotNull -->
+    <!-- #IfBegin _HasExample_ HasValue -->
     <br />
     <div class='Text'>Example</div>
     <!-- #IfEnd HasExample -->
@@ -239,7 +240,7 @@
     <div class='Text'>_Para_</div>
     <!-- #SectionEnd ExampleRemarks -->
     <!--X-------------------------------------->
-    <!-- #IfBegin _Code_ NotNull -->
+    <!-- #IfBegin _Code_ HasValue -->
     <br />
     <div class='SectionContainer'>
       <table class='CodeTable'>

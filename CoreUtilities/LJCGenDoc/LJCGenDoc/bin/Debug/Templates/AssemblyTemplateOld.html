@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<!-- #CommentChars <!-- -->
+﻿<!DOCTYPE html>
 <!--X------------------------------------->
 <!-- #SectionBegin Main -->
 <!-- #Value _AssemblyName_ -->
@@ -44,52 +43,24 @@
       <!-- #IfEnd _HasLinks_ -->
       <!--X------------------------------------->
       <!-- #SectionBegin Links -->
-      <!-- #Value _LinkFile_ -->
+      <!-- #Value _LinkName_ -->
       <!-- #Value _LinkText_ -->
       <!-- #IfBegin _HasLinks_ true -->
-      <a class="links" href='_LinkFile_' target='_blank'>_LinkText_</a>
+      <a href='_LinkName_' target='_blank'>_LinkText_</a>
       <!-- #IfEnd _HasLinks_ -->
       <!-- #SectionEnd Links -->
       <!--X------------------------------------->
       <!-- #IfBegin _HasLinks_ true -->
     </div>
     <!-- #IfEnd _HasLinks_ -->
-    <!-- #IfBegin _Image_ HasValue -->
+    <br />
+    <div id='Title'>_ClassListHeading_<br></div>
+    <!-- #IfBegin _Image_ NotNull -->
     <table>
       <tr>
         <td>
           <!-- #IfEnd Image -->
-          <!--X------------------------------------->
-          <!-- #SectionBegin ClassGroups -->
-          <!-- #Value _Heading_ -->
-          <br />
-          <div class='Title1'>_Heading_<br></div>
           <table class='ListTable'>
-            <!--X------------------------------------->
-            <!-- #SectionBegin SubSection -->
-            <!-- #Value _HTMLFileName_ -->
-            <!-- #Value _Name_ -->
-            <!-- #Value _Summary_ -->
-            <tr>
-              <td class='ListTable' width='25%'>
-                <a href='_HTMLFileName_'>_Name_</a>
-              </td>
-              <!-- #IfBegin _Summary_ HasValue -->
-              <td class='ListTable'>_Summary_</td>
-              <!-- #IfElse -->
-              <td class='ListTableMissing'>Missing Summary</td>
-              <!-- #IfEnd _Summary_ -->
-            </tr>
-            <!-- #SectionEnd SubSection -->
-            <!--X------------------------------------->
-          </table>
-          <!-- #SectionEnd ClassGroups -->
-          <!--X------------------------------------->
-          <!-- #IfBegin _HasClasses_ true -->
-          <br />
-          <div class='Title1'>_ClassListHeading_<br></div>
-          <table class='ListTable'>
-            <!-- #IfEnd _HasClasses_ -->
             <!--X------------------------------------->
             <!-- #SectionBegin ClassList -->
             <!-- #Value _HTMLFileName_ -->
@@ -99,7 +70,7 @@
               <td class='ListTable' width='25%'>
                 <a href='_HTMLFileName_'>_Name_</a>
               </td>
-              <!-- #IfBegin _Summary_ HasValue -->
+              <!-- #IfBegin _Summary_ NotNull -->
               <td class='ListTable'>_Summary_</td>
               <!-- #IfElse -->
               <td class='ListTableMissing'>Missing Summary</td>
@@ -107,10 +78,8 @@
             </tr>
             <!-- #SectionEnd ClassList -->
             <!--X------------------------------------->
-            <!-- #IfBegin _HasClasses_ true -->
           </table>
-          <!-- #IfEnd _HasClasses_ -->
-          <!-- #IfBegin _Image_ HasValue -->
+          <!-- #IfBegin _Image_ NotNull -->
         </td>
         <td>
           <img src='_Image_' height='350' />

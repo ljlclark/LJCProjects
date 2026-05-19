@@ -25,7 +25,7 @@
   </Constructor>
   <ConstructorParams>
     <summary>
-      Initializes an object instance with the provided values.
+      Initializes an object instance with the supplied values.
     </summary>
     <param name="sourceCodeLine">The source codeline.</param>
     <param name="changeFilespec">The change filespec.</param>

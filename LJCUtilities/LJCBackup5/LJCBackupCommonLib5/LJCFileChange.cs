@@ -68,7 +68,7 @@ namespace LJCBackupCommonLib5
     }
     private string mChangeType;
 
-    // Gets or sets the FileSpec.
+    // Gets or sets the Filespec.
     /// <include file='Doc/LJCFileChange.xml'
     ///  path='members/FileSpec/*'/>
     public string Filespec
@@ -84,7 +84,7 @@ namespace LJCBackupCommonLib5
     }
     private string mFileSpec;
 
-    // Gets or sets the To FileSpec.
+    // Gets or sets the To Filespec.
     /// <include file='Doc/LJCFileChange.xml'
     ///  path='members/ToFileSpec/*'/>
     public string? ToFilespec

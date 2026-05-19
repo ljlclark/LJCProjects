@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataManagerCode.html -->
+<html lang="en">
+<head>
+  <title>DataManager Exmple</title>
+  <meta name="author" content="Lester J. Clark" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div id='Header'>
+      <div id='Title'>DataManager Example</div>
+    </div>
+    <div class='Text'>
+      <p>
+        This is sample supporting code for a Person Manager class. The
+        additional code for the suggested Person manager methods Add(),
+        Retrieve(), Load(), Update() and Delete() is listed under the
+        DataManager methods with the same names.
+      </p>
+<pre style='margin-left: 2px;'>
+<span class='keyWord'>using</span> System;
+<span class='keyWord'>using</span> System.Collections.Generic;
+<span class='keyWord'>using</span> LJCNetCommon;
+<span class='keyWord'>using</span> LJCDBClientLib;
+<span class='keyWord'>using</span> LJCDBServiceLib;
+
+<span class='xmlComment'>/// &lt;summary&gt;</span>
+<span class='xmlComment'>///<span class='comment'> Represents a collection of Person objects.</span>&lt;/summary&gt;</span>
+<span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Persons</span> : <span class='libType'>List</span>&lt;<span class='userType'>Person</span>&gt; { }
+
+<span class='xmlComment'>/// &lt;summary&gt;</span>
+<span class='xmlComment'>///<span class='comment'> A Data Record class.</span></span>
+<span class='xmlComment'>/// &lt;/summary&gt;</span>
+<span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>Person</span>
+{
+  <span class='xmlComment'>/// &lt;summary&gt;<span class='comment'>Gets or sets the PersonId value.</span></span>
+  <span class='xmlComment'>/// &lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='commonType'>Int32</span> PersonId { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+  <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>Gets or sets the Name value.</span><span class='xmlComment'>&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='commonType'>String</span> <span class='userType'>Name</span> { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+}
+
+<span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>Provides Person specific data manipulation methods.</span><span class='xmlComment'>&lt;/summary&gt;</span>
+<span class='modifier'>public</span> <span class='refType'>class</span> <span class='userType'>PersonManager</span>
+{
+  <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>Initializes an object instance.</span><span class='xmlComment'>&lt;/summary&gt;</span>
+  <span class='xmlComment'>/// &lt;param name="</span>dbService<span class='xmlComment'>"&gt;</span><span class='comment'>The database service object.</span><span class='xmlComment'>&lt;/param&gt;</span>
+  <span class='modifier'>public</span> <span class='userType'>PersonManager</span>()
+  {
+    <span class='userType'>DbServiceRef</span> dbServiceRef = <span class='keyWord'>new</span> <span class='userType'>DbServiceRef</span>();
+    {
+      <span class='userType'>DbService</span> = <span class='keyWord'>new</span> <span class='userType'>DbService</span>();
+    };
+
+    <span class='commonType'>string</span> dataConfigName = "PersonData";
+    <span class='commonType'>string</span> tableName = "Person";
+    mDataManager = <span class='keyWord'>new</span> <span class='userType'>DataManager</span>(dbServiceRef, dataConfigName, tableName);
+    mDataManager.MapNames("Id", "PersonId");
+  }
+
+  <span class='comment'>// The Add(), Delete(), Load(), Retrieve() and Update() methods would go here.</span>
+  <span class='comment'>// These are listed under the DataManager methods with the same names.</span>
+
+  <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>Gets or sets the non-select affected record count.</span><span class='xmlComment'>&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='commonType'>int</span> AffectedCount { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+  <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>Gets a reference to the Data Definition columns collection.</span><span class='xmlComment'>&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='userType'>DbColumns</span> DataDefinition
+  {
+    <span class='keyWord'>get</span> { <span class='keyWord'>return</span> mDataManager.DataDefinition; }
+  }
+
+  <span class='xmlComment'>/// &lt;summary&gt;</span><span class='comment'>Gets or sets the last SQL statement.</span><span class='xmlComment'>&lt;/summary&gt;</span>
+  <span class='modifier'>public</span> <span class='commonType'>string</span> SQLStatement { <span class='keyWord'>get</span>; <span class='keyWord'>set</span>; }
+
+  <span class='modifier'>private</span> <span class='userType'>DataManager</span> mDataManager;
+}
+
+<span class='comment'>// The DbService object retrieves the data configuration from a file named</span>
+<span class='comment'>// "DataConfigs.xml". This file must be in the same folder as the application.</span>
+<span class='comment'>// This is the XML file layout.</span>
+&lt;? xml version="1.0"?&gt;
+&lt;DataConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;DataConfig&gt;
+    &lt;Name&gt;PersonData&lt;/Name&gt;
+    &lt;DbServer&gt;Machine_Name\SQL_Instance_Name&lt;/DbServer&gt;
+    &lt;Database&gt;Database_Name&lt;/Database&gt;
+    &lt;ConnectionType&gt;SQLServer&lt;/ConnectionType&gt;
+  &lt;/DataConfig&gt;
+&lt;/DataConfigs&gt;</pre>
+    </div>
+  </div>
+</body>
+</html>

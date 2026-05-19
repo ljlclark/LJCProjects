@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <p>
+    Provided, supplied, available, included.
+  </p>
+
+  ------------------------------------------------------------------------------
+  <br />
+  RequestColumns(baseDefinition, propertyNames)
+  <p>
+    Generally used in the Load() and Retrieve() manager methods to define
+    the columns to be retrieved.
+  </p>
+  <p>
+    Defaults to all baseDefinition columns if the propertyNames parameter
+    has no values.
+  </p>
+  <p>
+    Creates a DbColumns collection of column definitions from the
+    baseDefinition parameter whose PropertyName values match the names in
+    the propertyNames parameter.
+  </p>
+  <p>
+    The DbColumn definitions do not include values.
+  </p>
+
+  ------------------------------------------------------------------------------
+  <br />
+  RequestDataColumns(dataObject, baseDefinition, propertyNames)
+  <p>
+    Generally used in the Add() and Update() manager methods to define the
+    columns to be added or updated and the values to use in the add or
+    update.
+  </p>
+  <p>
+    This method attempts to default the property names to the dataObject
+    ChangedNames property if it exists and the propertyNames parameter has
+    no values.
+  </p>
+  <p>
+    Creates a DbColumns collection of data definitions from the
+    baseDefinition parameter whose PropertyName values match the names in
+    the propertyNames parameter.
+  </p>
+  <p>
+    The dataObject property names must also match the names in the
+    propertyNames parameter and the data value must not be null for the
+    data definition to be included.
+  </p>
+  <p>
+    The DbColumn definitions include the dataObject value. The dataObject
+    property values are retrieved using reflection.
+  </p>
+  <p>
+    A Data Column is excluded if it is an AutoIncrement column.
+  </p>
+  <p>
+    The value is set to "null" if the original value is "-null" or "-".
+  </p>
+
+  ------------------------------------------------------------------------------
+  <br />
+  RequestDataKeys(keyColumns, baseDefinition)
+  <p>
+    Generally used in the Update() manager method to define the update key
+    columns and values.
+  </p>
+  <p>
+    Creates a DbColumns collection of data definitions from the
+    baseDefinition parameter whose PropertyName values match the names in
+    the keyColumns parameter.
+  </p>
+  <p>
+    The DbColumn definitions include the Key Column ColumnName and Value.
+  </p>
+  <p>
+    A Key Column is not created if it is an AutoIncrement column, the
+    value equals "0" or it is an invalid DateTime.
+  </p>
+
+  ------------------------------------------------------------------------------
+  <br />
+  RequestKeys(keyColumns, baseDefinition, dbJoins)
+  <p>
+    Generally used in the Delete() Load() and Retrieve() manager methods to
+    define the key columns and values.
+  </p>
+  <p>
+    This method allows pre-qualified Join Column names.
+  </p>
+  <p>
+    Creates a DbColumns collection of data definitions from the
+    baseDefinition parameter whose PropertyName values match the unqualified
+    names in the keyColumns parameter.
+  </p>
+  <p>
+    The DbColumn definitions include the original potentially qualified Key
+    Column ColumnName and Value.
+  </p>
+  <p>
+    The DbColumn definitions also include the original potentially
+    qualified Join Column ColumnName and Value if it is found in the Join
+    Column definitions.
+  </p>
+  <p>
+    A valid Join ColumnName is included unmodified if the ColumnName is
+    already qualified with a Table Name or Alias. Otherwise the ColumnName
+    is qualified with the Join TableName or Alias.
+  </p>
+
+  ------------------------------------------------------------------------------
+  <br />
+  RequestLookupKeys(dataObject, baseDefinition, propertyNames)
+  <p>
+    Generally used in the Add() manager method to define the lookup keys
+    columns and values to retrieve the row that was just added to the
+    database. This allows for retrieving the database assigned values.
+  </p>
+  <p>
+    This method attempts to default the property names to the dataObject
+    ChangedNames property if it exists and the propertyNames parameter has
+    no values.
+  </p>
+  <p>
+    Creates a DbColumns collection of data definitions from the
+    baseDefinition parameter whose PropertyName values match the names in
+    the propertyNames parameter.
+  </p>
+  <p>
+    The dataObject property names must also match the names in the
+    propertyNames parameter and the data value must not be null for the
+    data definition to be included.
+  </p>
+  <p>
+    The DbColumn definitions includes the dataObject value. The dataObject
+    property values are retrieved using reflection.
+  </p>
+  <p>
+    A Key Column is not created if it is an AutoIncrement column, the
+    value equals "0" or it is an invalid DateTime.
+  </p>
+</body>
+</html>

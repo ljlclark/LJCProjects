@@ -6,7 +6,7 @@ TargetCodeline, LJCProjects
 ChangesFilespec, LJCProjects\ChangesLJCProjects.txt
 SkipFoldersFilespec, LJCProjects\SkipFoldersLJCProjects.txt
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
-IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql
+IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
 SkipFiles, ChangesFile.txt|BackupLog.txt|MissingFolders.txt
 SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd
 
@@ -17,7 +17,7 @@ TargetRoot, F:\My Data\Visual Studio 2022
 TargetCodeline, LJCProjectsDevBackup
 ChangesFilespec, LJCProjectsDevBackup\ChangesLJCProjects.txt
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
-IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql
+IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
 IncludeMissingTargetFolders, true
 SkipFiles, ChangesFile.txt|BackupLog.txt|MissingFolders.txt
 SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd
@@ -29,7 +29,7 @@ TargetRoot, E:\OldComputer\Visual Studio 2022
 TargetCodeline, LJCProjectsDevBackup
 ChangesFilespec, LJCProjectsDevBackup\ChangesLJCProjects.txt
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
-IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql
+IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
 IncludeMissingTargetFolders, true
 SkipFiles, ChangesFile.txt|BackupLog.txt|MissingFolders.txt
 SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd

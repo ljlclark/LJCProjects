@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+  <title>System Build Documentation</title>
+  <meta charset='utf-8' />
+  <meta name='author' content='Les Clark' />
+  <meta name='viewport' content='width=device-width, initial -scale=1' />
+  <link rel='stylesheet' type='text/css' href='CodeDoc.css' />
+</head>
+<body>
+  <div id='Header'>
+    <div id='Title'>System Build Documentation</div>
+  </div>
+  <br />
+  <div class='Text'>
+    <p><b><u>System Build Commands</u></b></p>
+    <p>
+      The System Build commands are in the LJCProjects folder.
+    </p>
+    <p><b>BuildAll Command</b></p>
+    <p>
+      The BuildAll command "BuildAll.cmd" builds all the system Solutions.
+    </p>
+    <p>
+      The BuildAll command calls each SolutionBuild command.
+    </p>
+    <p><b>ClearBuild Command</b></p>
+    <p>
+      The ClearBuild command "ClearBuild.cmd" clears all the system Projects.
+    </p>
+    <p>
+      The ClearBuild command calls each SolutionClear command file to remove the
+      compiled and generated code.<br />This makes the Solutions ready to be
+      backed up.
+    </p>
+    <p><b>UpdateAll Command</b></p>
+    <p>
+      The UpdateAll command "UpdateAll.cmd" updates all the system Projects.
+    </p>
+    <p>
+      The UpdateAll command calls each SolutionUpdate command file to copy the
+      Referenced and Runtime dependencies.
+    </p>
+    <p>
+      <br />
+      <b><u>Solution Commands</u></b>
+    </p>
+    <p>
+      The Solution commands are in each solution folder.
+    </p>
+    <p><b>SolutionBuild Command</b></p>
+    <p>
+      Each Solution has a unique SolutionBuild command.<br />
+      The SolutionBuild command name starts with "Build" and is followed with a
+      Solution name.<br />
+      This is useful if you want to build only that Solution without starting
+      Visual Studio.
+    </p>
+    <p>
+      The SolutionBuild command calls the SolutionUpdate command file before
+      building the Solution.
+    </p>
+    <p><b>SolutionUpdate Command</b></p>
+    <p>
+      Each Solution has a unique SolutionUpdate command.<br />
+      The SolutionUpdate command name starts with "Update" and is followed with
+      a Solution name.
+    </p>
+    <p>
+      The SolutionUpdate command copies the Referenced and Runtime dependencies
+      for the Solution Projects.
+    </p>
+    <p><b>SolutionClear Command</b></p>
+    <p>
+      Each Solution has a unique SolutionClear command.<br />
+      The SolutionClear command name starts with "Clear" and is followed with a
+      Solution name.<br />
+      This is useful if you want to clear only that Solutions Projects.
+    </p>
+    <p>
+      The SolutionClear command file removes the compiled and generated code.<br />
+      This makes the Solution Projects ready to be backed up.
+    </p>
+    <p>
+      <br />
+      <b><u>System Build Procedure</u></b>
+    </p>
+    <p>
+      The SolutionUpdate command copies the Referenced dependencies to the Solution
+      "External" folder.<br />
+      It copies the Runtime dependencies to the projects bin/Debug folder.
+    </p>
+    <p>
+      Referencing dependencies in the External folder allows the developer to
+      create and test changes in the current Solution without being affected
+      by changes in the dependencies.
+    </p>
+    <p>
+      The developer can run the SolutionUpdate command when they are ready to
+      incorporate<br /> the potentially changed Referenced and Runtime dependencies.
+    </p>
+  </div>
+  <br />
+  <div class='SmallText'>Copyright (c) Lester J. Clark 2017-2020 - All Rights Reserved</div>
+  <br />
+</body>
+</html>

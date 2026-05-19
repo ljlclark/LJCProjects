@@ -5,7 +5,9 @@ _AICodeTest\_AICodeTest\Doc
 _AICodeTest\_AICodeTest\Properties
 
 _AICodeTest\AIPrompts
+
 _AICodeTest\GenDataCollection
+
 _AICodeTest\GenDataObject
 
 CoreAssemblies\LJCPagination
@@ -138,6 +140,7 @@ CoreUtilities\LJCViewBuilder\LJCViewBuilder\Forms\ViewBuilder
 CoreUtilities\LJCViewBuilder\LJCViewBuilder\Properties
 
 Dependencies
+
 Dependencies\DataFiles
 
 LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\LJCProjects
