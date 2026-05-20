@@ -9,17 +9,32 @@
       Contains classes for code backup.
     </summary>
   </LJCBackup5>
-  
+
   <!-- Class -->
   <LJCBackupProgram>
     <summary>
       A Code Backup program.
     </summary>
     <remarks>
-      The program entry class.
+      <para>
+        The program entry class.
+      </para>
+      <para>-- Assembly Level Remarks </para>
+      <para>
+        The Code Backup program is part of the
+        <span class="commonType">LJCBackup5</span>
+        solution.
+      </para>
+      <para>Referenced Assemblies</para>
+      <para>
+        &lt;div class='Text'&gt;LJCBackupChangesLib5&lt;/div&gt;
+        &lt;div class='Text'&gt;LJCBackupCommonLib5&lt;/div&gt;
+        &lt;div class='Text'&gt;LJCCreateFileChangesLib5&lt;/div&gt;
+        &lt;div class='Text'&gt;LJCNetCommon&lt;/div&gt;
+      </para>
     </remarks>
   </LJCBackupProgram>
-  
+
   <!-- Methods -->
   <main>
     <summary>
