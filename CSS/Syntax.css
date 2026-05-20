@@ -9,11 +9,6 @@
 	color: red;
 }
 
-.code {
-	font-size: 9pt;
-	margin-left: 5px;
-}
-
 .comment {
 	color: green;
 }
@@ -56,10 +51,6 @@
 
 .refType {
 	color: blue;
-}
-
-.text {
-	color: brown;
 }
 
 .userType{
