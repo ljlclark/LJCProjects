@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <!-- Copyright (c) Lester J. Clark and Contributors -->
 <!-- Licensed under the MIT license. -->
-<!-- LJCBackupProgram_Main.html -->
+<!-- LJCBackupChanges_ConstructorParams.html -->
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Main</title>
+  <title>Constructor</title>
   <meta charset="utf-8" />
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width" initial-scale=1 />
@@ -16,16 +16,20 @@
     <br />
     <div class="PathText">
       / <a href="../../../../LJCUtilities.html">LJCUtilities</a>
-      / <a href="../LJCBackup5.html">LJCBackup5</a>
-      / <a href="../LJCBackupProgram.html">LJDBackupProgram</a>
-      / Main
+      / <a href="../LJCBackupChangesLib5.html">LJCBackupChangesLib5</a>
+      / <a href="../LJCBackupChanges.html">LJCBackupChanges</a>
+      / ConstructorParams
     </div>
     <br />
-    <div id='Title'>Namespace - LJCBackup5</div>
+    <div id='Title'>Namespace - LJCBackupChangesLib5</div>
     <br />
     <div id='Header'>
-      <div id='Title'>Method Main</div>
+      <div id='Title'>Parameterized Constructor</div>
     </div>
+    <br />
+    <div id='Title'>Parameters</div>
+    <div class='Text'>sourceCodeLine - The source codeline folder.</div>
+    <div class='Text'>changeFilespec - The change filespec.</div>
     <br />
     <div class='Text'>Syntax</div>
     <br />
@@ -35,7 +39,8 @@
           <tr><th class='CodeTable'>C#</th></tr>
           <tr class='CodeTable'>
             <td class='CodeTable'>
-              static void Main()
+              public LJCBackupChanges(string sourceCodeLine
+              , string changeFilespec) : this()
             </td>
           </tr>
         </tbody>
@@ -43,7 +48,7 @@
     </div>
     <br />
     <div class='Text'>
-      The program entry method.
+      Initializes an object instance with the supplied values.
     </div>
     <br />
     <div class="SmallText">
