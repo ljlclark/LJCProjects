@@ -35,6 +35,29 @@
       Gets or sets the include missing target folders flag.
     </div>
     <br />
+    <div class="Text">Remarks</div>
+    <br />
+    <div class="Text">
+      The standard behavior is to only copy files where the target folder
+      already exists.
+    </div>
+    <br />
+    <div class="Text">
+      The standard behavior uses this implicit way of controlling which
+      folders get backed up instead of having to explicitly list the source
+      folders to be included.
+    </div>
+    <br />
+    <div class="Text">
+      When a new source folder is created, it must be copied to or created in
+      the target codeline to be included in the backup.
+    </div>
+    <br />
+    <div class="Text">
+      Setting the IncludeMissingTargetFolders property to true overrides the
+      standard behavior and will create missing target folders.
+    </div>
+    <br />
     <div class="SmallText">
       Copyright &copy Lester J. Clark and Contributors.<br />
       Licensed under the MIT License.

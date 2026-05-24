@@ -37,11 +37,21 @@
     <summary>
       Gets or sets the Change type.
     </summary>
+    <remarks>
+      <para>
+        The change type can be "Copy" or "Delete".
+      </para>
+    </remarks>
   </ChangeType>
   <Filespec>
     <summary>
       Gets or sets the FileSpec.
     </summary>
+    <remarks>
+      <para>
+        This is the full filespec to the source file.
+      </para>
+    </remarks>
   </Filespec>
   <ToFilespec>
     <summary>

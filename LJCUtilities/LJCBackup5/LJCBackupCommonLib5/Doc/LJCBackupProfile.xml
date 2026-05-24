@@ -33,18 +33,65 @@
   <!-- Properties -->
   <ChangesFilespec>
     <summary>
-      Gets or sets the changes filespec.
+      Gets or sets the changes file name.
     </summary>
+    <remarks>
+      <para>
+        This is the name of a file that contains the backup "copy" and "delete"
+        commands.<br />
+        These commands can be viewed and edited before running the
+        code to apply these changes.
+      </para>
+    </remarks>
   </ChangesFilespec>
   <IncludeFilters>
     <summary>
       Gets or sets the included file filters.
     </summary>
+    <remarks>
+      <para>
+        A list of file patterns using wild cards separated with the
+        "Vertical Bar" (pipe) character. For example: "*.cs|*.sln|*.csproj
+        |*.cmd"
+      </para>
+      <para>
+        Files that match one of these file patterns will be included in the
+        Code Backup.
+      </para>
+      <para>
+        Files will be copied to the target folder if they do not exist there
+        or the source file has changed.
+      </para>
+      <para>
+        Files will be deleted from the target folder if they do not exist in the
+        source folder. This keeps the folders synched.<br />
+        However, this behavior must be managed carefully to prevent losing code.
+      </para>
+    </remarks>
   </IncludeFilters>
   <IncludeMissingTargetFolders>
     <summary>
       Gets or sets the include missing target folders flag.
     </summary>
+    <remarks>
+      <para>
+        The standard behavior is to only copy files where the target folder
+        already exists.
+      </para>
+      <para>
+        The standard behavior uses this implicit way of controlling which
+        folders get backed up instead of having to explicitly list the source
+        folders to be included.
+      </para>
+      <para>
+        When a new source folder is created, it must be copied to or created in
+        the target codeline to be included in the backup.
+      </para>
+      <para>
+        Setting the IncludeMissingTargetFolders property to true overrides the
+        standard behavior and will create missing target folders.
+      </para>
+    </remarks>
   </IncludeMissingTargetFolders>
   <Name>
     <summary>
@@ -53,32 +100,110 @@
   </Name>
   <SkipFiles>
     <summary>
-      Gets or sets the skipped files.
+      Gets or sets the skip file list.
     </summary>
+    <remarks>
+      <para>
+        A list of file patterns using wild cards separated with the
+        "Vertical Bar" (pipe) character. For example: "Build*.cmd|Example*.cs"
+      </para>
+      <para>
+        Files that match one of these file patterns will not be included in the
+        Code Backup.
+      </para>
+    </remarks>
   </SkipFiles>
   <SkipFoldersFilespec>
     <summary>
-      Gets or sets the skipped folder file.
+      Gets or sets the skipped folder file name.
     </summary>
+    <remarks>
+      <para>
+        This is the name of a file that contains partial target folder paths
+        for folders that are intentionally excluded.
+      </para>
+      <para>
+        The backup program writes a partial target folder path to the file
+        "MissingFolders.txt" when the backup detects a missing target folder.
+        <br />
+        This is notification of a source folder that is not included in the
+        backup.
+      </para>
+      <para>
+        Adding a partial folder to the SkipFolders file prevents getting a
+        missing folders entry for a source folder you intended to exclude.<br />
+        This makes it easier to see the folders you did not intend to exclude.
+      </para>      
+    </remarks>
   </SkipFoldersFilespec>
   <SourceCodeline>
-    Gets or sets the source codeline value.
+    <summary>
+      Gets or sets the source codeline value.
+    </summary>
+    <remarks>
+      <para>
+        The source codeline is the name of the source folder that holds the code
+        specific to that codeline.
+      </para>
+      <para>
+        A codeline contains the solutions, projects and other code that is
+        a version of a framework, product or other associated code.
+      </para>
+    </remarks>
   </SourceCodeline>
   <SourceRoot>
-    Gets or sets the source root value.
+    <summary>
+      Gets or sets the source root value.
+    </summary>
+    <remarks>
+      <para>
+        The source root is the full path to the source folder that contains the
+        source codeline folders.
+      </para>
+    </remarks>
   </SourceRoot>
   <TargetCodeline>
-    Gets or sets the target codeline value.
+    <summary>
+      Gets or sets the target codeline value.
+    </summary>
+    <remarks>
+      <para>
+        The target codeline is the name of the target folder that holds the code
+        specific to that codeline.
+      </para>
+      <para>
+        A codeline contains the solutions, projects and other code that is
+        a version of a framework, product or other associated code.
+      </para>
+    </remarks>
   </TargetCodeline>
   <TargetRoot>
-    Gets or sets the target root value.
+    <summary>
+      Gets or sets the target root value.
+    </summary>
+    <remarks>
+      <para>
+        The target root is the full path to the target folder that contains the
+        target codeline folders.
+      </para>
+    </remarks>
   </TargetRoot>
   <SourcePath>
-    Gets the full source path.
+    <summary>
+      Gets the full source path.
+    </summary>
+    <remarks>
+      The SourcePath is the full path combination of the SourceRoot and
+      SourceCodeline.
+    </remarks>
   </SourcePath>
   <TargetPath>
     <summary>
       Gets the full target path.
     </summary>
+    <remarks>
+      The TargetPath is the full path combination of the TargetRoot and
+      TargetCodeline.
+    </remarks>
   </TargetPath>
 </members>

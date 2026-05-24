@@ -46,12 +46,15 @@ namespace LJCCreateFileChangesLib5
       return retValue;
     }
 
-    // Create a 'to' file spec using the toFilePath and adding the folders and
-    // file name using the fromFileSpec starting after the fromStartFolder.
-    // toFilePath = C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev
-    // fromFileSpec = C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\ViewEditorList.cs
+    // Creates a "to" file spec.
+    // Takes the toFilePath and adds the folders and file name from the
+    // fromFileSpec starting after the fromStartFolder.
+    // Example:
+    // toFilePath = C:\CodeLineRoot\LJCProjectsDev
+    // fromFileSpec = C:\CodeLineRoot\LJCProjects\ViewEditorList.cs
     // fromStartFolder = LJCProjects
-    // returns C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\ViewEditorList.cs
+    //                           |ToCodeline|                                  
+    //   returns C:\CodeLineRoot\LJCProjectsDev\ViewEditorList.cs</pre>
     private static string GetToSpec(string toFilePath
       , string fromFilespec, string fromStartFolder, out string codePath)
     {

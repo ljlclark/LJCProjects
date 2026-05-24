@@ -31,6 +31,30 @@
       Gets or sets the included file filters.
     </div>
     <br />
+    <div class='Text'>Remarks</div>
+    <br />
+    <div class='Text'>
+      A list of file patterns using wild cards separated with the
+      "Vertical Bar" (pipe) character. For example: "*.cs|*.sln|*.csproj
+      |*.cmd"
+    </div>
+    <br />
+    <div class='Text'>
+      Files that match one of these file patterns will be included in the
+      Code Backup.
+    </div>
+    <br />
+    <div class='Text'>
+      Files will be copied to the target folder if they do not exist there
+      or the source file has changed.
+    </div>
+    <br />
+    <div class='Text'>
+      Files will be deleted from the target folder if they do not exist in the
+      source folder. This keeps the folders synched.<br />
+      However, this behavior must be managed carefully to prevent losing code.
+    </div>
+    <br />
     <div class="SmallText">
       Copyright &copy Lester J. Clark and Contributors.<br />
       Licensed under the MIT License.

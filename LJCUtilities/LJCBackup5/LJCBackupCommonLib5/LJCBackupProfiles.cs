@@ -60,7 +60,10 @@ namespace LJCBackupCommonLib5
       values.Add(text);
 
       var lines = values.ToArray();
-      File.WriteAllLines(profilesFilespec, lines);
+      if (!File.Exists(profilesFilespec))
+      {
+        File.WriteAllLines(profilesFilespec, lines);
+      }
     }
     #endregion
 

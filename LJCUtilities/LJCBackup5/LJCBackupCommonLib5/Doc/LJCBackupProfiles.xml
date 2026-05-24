@@ -16,8 +16,40 @@
       Creates a sample profiles file.
     </summary>
     <param name="profilesFilespec">The profiles filespec.</param>
+    <remarks>
+      <para>
+        The profiles text file can contain a definition for one or more backup
+        profiles.<br />
+        Each profile contains the values needed for a specific backup operation.
+      </para>
+      <para>
+        A backup profile starts with the "Backup" command followed by a comma
+        and the backup name, then followed by the profile values.<br />
+        The sample backup name contains the target backup drive and target
+        codeline name.
+      </para>
+      <para>
+        Backup, CLJCProjects<br />
+        SourceRoot, C:\Users\User\Documents\Visual Studio 2022<br />
+        SourceCodeline, LJCProjectsDev<br />
+        TargetRoot, C:\Users\User\Documents\Visual Studio 2022<br />
+        TargetCodeline, LJCProjects<br />
+        ChangesFilespec, LJCProjects\ChangesLJCProjects.txt<br />
+        SkipFoldersFilespec, LJCProjects\SkipFoldersLJCProjects.txt<br />
+        IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config<br />
+        IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql<br />
+        SkipFiles, ChangesFile.txt|BackupLog.txt|MissingFolders.txt
+        SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd
+      </para>
+      <para>
+        The IncludeFilters and SkipFiles values can contain multiple entries.
+        <br />
+        Values with multiple entries are combined into a single list when read
+        by the program.
+      </para>
+    </remarks>
   </CreateSampleProfilesFile>
-  
+
   <!-- Constructor Methods -->
   <Constructor>
     <summary>
@@ -29,6 +61,15 @@
       Initializes an object instance with the supplied values.
     </summary>
     <param name="filespec">The profiles filespec.</param>
+    <remarks>
+      <para>
+        The parameterized constructor sets the Filespec property with the filespec
+        parameter.
+      </para>
+      <para>
+        The Filespec property loads the backup profiles from the profiles file.
+      </para>
+    </remarks>
   </ConstructorParams>
 
   <!-- Collection Methods -->
@@ -37,12 +78,31 @@
       Loads the profiles collection data.
     </summary>
     <param name="profilesFilespec">The profiles filespec.</param>
+    <remarks>
+      <para>
+        Loads the backup profiles from the profiles file into the collection.
+      </para>
+    </remarks>
   </LoadProfiles>
-  
+
   <!-- Properties -->
   <Filespec>
     <summary>
       Gets or sets the content filespec.
     </summary>
+    <remarks>
+      <para>
+        When the backup profiles Filespec property is set, it looks for the
+        profiles file with the suppied name.
+      </para>
+      <para>
+        If the profiles file does not exist, it calls the
+        CreateSampleProfilesFile() method to create a sample profiles file.
+      </para>
+      <para>
+        The profiles file is then loaded into the collection with the
+        LoadProfiles() method.
+      </para>
+    </remarks>
   </Filespec>
 </members>

@@ -50,6 +50,45 @@
       Creates a sample profiles file.
     </div>
     <br />
+    <div class='Text'>Remarks</div>
+    <br />
+    <div class='Text'>
+      The profiles text file can contain a definition for one or more backup
+      profiles.<br />
+      Each profile contains the values needed for a specific backup operation.
+    </div>
+    <br />
+    <div class='Text'>
+      A backup profile starts with the "Backup" command followed by a comma
+      and the backup name, then followed by the profile values.<br />
+      The sample backup name contains the target backup drive and target
+      codeline name.
+    </div>
+    <br />
+    <div class='Text'>
+      <pre>
+  Backup, CLJCProjects
+  SourceRoot, C:\Users\User\Documents\Visual Studio 2022
+  SourceCodeline, LJCProjectsDev
+  TargetRoot, C:\Users\User\Documents\Visual Studio 2022
+  TargetCodeline, LJCProjects
+  ChangesFilespec, LJCProjects\ChangesLJCProjects.txt
+  SkipFoldersFilespec, LJCProjects\SkipFoldersLJCProjects.txt
+  IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
+  IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql
+  SkipFiles, ChangesFile.txt|BackupLog.txt|MissingFolders.txt
+  SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd</pre>
+    </div>
+    <br />
+    <div class='Text'>
+      The IncludeFilters and SkipFiles values can contain multiple entries.
+    </div>
+    <br />
+    <div class='Text'>
+      Values with multiple entries are combined into a single list when read
+      by the program.
+    </div>
+    <br />
     <div class="SmallText">
       Copyright &copy Lester J. Clark and Contributors.<br />
       Licensed under the MIT License.

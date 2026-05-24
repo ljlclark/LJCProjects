@@ -16,7 +16,7 @@
       The Create FileChanges class.
     </summary>
   </LJCCreateFileChanges>
-
+  
   <!-- Constructor Methods -->
   <Constructor>
     <summary>
@@ -37,22 +37,94 @@
     <summary>
       Runs the create "Changes" file process.
     </summary>
+    <remarks>
+      <para>
+        Filespecs are retrieved for each IncludeFilter. 
+      </para>
+      <para>
+        First, filespecs are retrieved from the Target codeline.<br />
+        A Source filespec is created based on the target filespec but in the
+        the source codeline.<br />
+        A "Delete" command is written to the "Changes" file to delete the
+        target file if there is no associated source file of that name.<br />
+        This keeps the folders synched.<br />
+        However, this behavior must be managed carefully to prevent losing code.
+      </para>
+      <para>
+        Next, filespecs are retrieved from the Source codeline.<br />
+        A Target filespec is created based on the source filespec but in the
+        the target codeline.<br />
+        A "Copy" command is written to the "Changes" file to add the
+        source file if there is no associated target file of that name.<br />
+        A "Copy" command is also written to the "Changes" file to update the
+        target file if it is different from the source file.
+      </para>
+    </remarks>
   </Run>
 
   <!-- Properties -->
   <IncludeFilters>
     <summary>
-      Gets or sets the include filters.
+      Gets or sets the included file filters.
     </summary>
+    <remarks>
+      <para>
+        A list of file patterns using wild cards separated with the
+        "Vertical Bar" (pipe) character. For example: "*.cs|*.sln|*.csproj
+        |*.cmd"
+      </para>
+      <para>
+        Files that match one of these file patterns will be included in the
+        Code Backup.
+      </para>
+      <para>
+        Files will be copied to the target folder if they do not exist there
+        or the source file has changed.
+      </para>
+      <para>
+        Files will be deleted from the target folder if they do not exist in the
+        source folder. This keeps the folders synched.<br />
+        However, this behavior must be managed carefully to prevent losing code.
+      </para>
+    </remarks>
   </IncludeFilters>
-  <SkipFiles>
-    <summary>
-      Gets or sets the skip file list.
-    </summary>
-  </SkipFiles>
   <IncludeMissingTargetFolders>
     <summary>
       Gets or sets the include missing target folders flag.
     </summary>
+    <remarks>
+      <para>
+        The standard behavior is to only copy files where the target folder
+        already exists.
+      </para>
+      <para>
+        The standard behavior uses this implicit way of controlling which
+        folders get backed up instead of having to explicitly list the source
+        folders to be included.
+      </para>
+      <para>
+        When a new source folder is created, it must be copied to or created in
+        the target codeline to be included in the backup.
+      </para>
+      <para>
+        Setting the IncludeMissingTargetFolders property to true overrides the
+        standard behavior and will create missing target folders.
+      </para>
+    </remarks>
   </IncludeMissingTargetFolders>
+  <SkipFiles>
+    <summary>
+      Gets or sets the skip file list.
+    </summary>
+    <remarks>
+      <para>
+        A list of file patterns using wild cards separated with the
+        "Vertical Bar" (pipe) character. For example: "Build*.cmd|Example*.cs"
+      </para>
+      <para>
+        Files that match one of these file patterns will not be included in the
+        Code Backup.
+      </para>
+    </remarks>
+  </SkipFiles>
 </members>
