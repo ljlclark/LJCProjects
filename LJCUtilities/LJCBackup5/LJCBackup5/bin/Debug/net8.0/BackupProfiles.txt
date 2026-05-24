@@ -33,3 +33,21 @@ IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
 IncludeMissingTargetFolders, true
 SkipFiles, ChangesFile.txt|BackupLog.txt|MissingFolders.txt
 SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd
+
+Backup, CLJCCodeDoc
+SourceRoot, C:\Users\Les\Documents\Visual Studio 2022\WebSitesDev\CodeDoc
+SourceCodeline, LJCCodeDoc
+TargetRoot, C:\Users\Les\Documents\Visual Studio 2022\WebPages
+TargetCodeline, LJCCodeDoc
+ChangesFilespec, LJCCodeDoc\ChangesLJCCodeDoc.txt
+IncludeFilters, *.html
+IncludeMissingTargetFolders, false
+
+Backup, CLJCPHPProjects
+SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
+SourceCodeline, LJCPHPProjectsDev
+TargetRoot, C:\Users\Les\Documents\Visual Studio 2022
+TargetCodeline, LJCPHPProjects
+ChangesFilespec, LJCPHPProjects\ChangesLJCPHPProjects.txt
+IncludeFilters, ReadMe*.txt|*.cmd|*.php|*.html|*.txt|Doc/*.xml
+IncludeMissingTargetFolders, false
