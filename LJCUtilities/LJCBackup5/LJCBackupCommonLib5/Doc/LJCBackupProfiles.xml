@@ -85,6 +85,46 @@
     </remarks>
   </LoadProfiles>
 
+  <!-- Collection Methods -->
+  <Clone>
+    <summary>
+      Creates and returns a clone of the object.
+    </summary>
+    <returns>
+      The cloned object.
+    </returns>
+  </Clone>
+  <LJCHasItems>
+    <summary>
+      Checks if the collection has items.
+    </summary>
+    <returns>
+      true if the collection has items; otherwise false.
+    </returns>
+  </LJCHasItems>
+  <LJCRemove>
+    <summary>
+      Removes an item by keys.
+    </summary>
+    <param name="name">The name value.</param>
+  </LJCRemove>
+  <LJCRetrieve>
+    <summary>
+      Retrieve the collection element.
+    </summary>
+    <param name="name">The name value.</param>
+    <returns>
+      The retrieved object.
+    </returns>
+  </LJCRetrieve>
+  
+  <!-- Search and Sort Methods -->
+  <LJCSort>
+    <summary>
+      Sort on the unique key.
+    </summary>
+  </LJCSort>
+  
   <!-- Properties -->
   <Filespec>
     <summary>
@@ -105,4 +145,9 @@
       </para>
     </remarks>
   </Filespec>
+  <NameIndexer>
+    <summary>
+      Retrieve the collection element by name.
+    </summary>
+  </NameIndexer>
 </members>

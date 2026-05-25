@@ -200,7 +200,7 @@ namespace LJCCreateFileChangesLib5
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Runs the create "Changes" file process.
     /// <include file='Doc/LJCCreateFileChanges.xml'

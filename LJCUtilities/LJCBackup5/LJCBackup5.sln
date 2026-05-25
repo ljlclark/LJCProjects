@@ -11,6 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackupCommonLib5", "LJCB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCBackupChangesLib5", "LJCBackupChangesLib5\LJCBackupChangesLib5.csproj", "{680811F1-B121-45EB-A6A8-16A0CAAB8370}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug\Templates\AssemblyTemplate.html = ..\..\CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug\Templates\AssemblyTemplate.html
+		..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\CollectionTemplate.cs = ..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\CollectionTemplate.cs
+		..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataManagerTemplate.cs = ..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataManagerTemplate.cs
+		..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs = ..\..\CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug\Templates\DataTemplate.cs
+		..\LJCUtilities.html = ..\LJCUtilities.html
+		..\..\CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug\Templates\MethodTemplate.html = ..\..\CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug\Templates\MethodTemplate.html
+		..\..\CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug\Templates\PropertyTemplate.html = ..\..\CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug\Templates\PropertyTemplate.html
+		..\..\CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug\Templates\TypeTemplate.html = ..\..\CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug\Templates\TypeTemplate.html
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

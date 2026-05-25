@@ -84,9 +84,6 @@ namespace LJCBackupCommonLib5
     {
       Filespec = filespec;
     }
-    #endregion
-
-    #region Collection Methods
 
     // Loads the profiles collection data.
     /// <include file="Doc/LJCBackupProfiles.xml"
@@ -180,6 +177,79 @@ namespace LJCBackupCommonLib5
     }
     #endregion
 
+    #region Collection Methods
+
+    // Creates and returns a clone of the object.
+    /// <include file="Doc/LJCBackupProfiles.xml"
+    ///  path="members/Clone/*"/>
+    public LJCBackupProfiles? Clone()
+    {
+      var retValue = MemberwiseClone() as LJCBackupProfiles;
+      return retValue;
+    }
+
+    // Checks if the collection has items.
+    /// <include file="Doc/LJCBackupProfiles.xml"
+    ///  path="members/LJCHasItems/*"/>
+    public bool LJCHasItems()
+    {
+      bool retValue = false;
+
+      if (Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Removes an item by keys.
+    /// <include file="Doc/LJCBackupProfiles.xml"
+    ///  path="members/LJCRemove/*"/>
+    public void LJCRemove(string name)
+    {
+      LJCBackupProfile? item = Find(x => x.Name == name);
+      if (item != null)
+      {
+        Remove(item);
+      }
+    }
+
+    // Retrieve the collection element.
+    /// <include file="Doc/LJCBackupProfiles.xml"
+    ///  path="members/LJCRetrieve/*"/>
+    public LJCBackupProfile? LJCRetrieve(string name)
+    {
+      LJCBackupProfile? retValue = null;
+
+      LJCSort();
+      LJCBackupProfile searchItem = new()
+      {
+        Name = name,
+      };
+      int index = BinarySearch(searchItem);
+      if (index > -1)
+      {
+        retValue = this[index];
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Search and Sort Methods
+
+    // Sort on the unique key.
+    /// <include file="Doc/LJCBackupProfiles.xml"
+    ///  path="members/LJCSortPrimary/*"/>
+    public void LJCSort()
+    {
+      if (Count != mPrevCount)
+      {
+        mPrevCount = Count;
+        Sort();
+      }
+    }
+    #endregion
+
     #region Properties
 
     // Gets or sets the content filespec.
@@ -202,6 +272,19 @@ namespace LJCBackupCommonLib5
       }
     }
     private string mFilespec;
+
+    // The item for the specified name.
+    /// <include file="Doc/LJCBackupProfiles.xml"
+    ///  path="members/NameIndexer/*"/>
+    public LJCBackupProfile? this[string name]
+    {
+      get { return LJCRetrieve(name); }
+    }
+    #endregion
+
+    #region Class Data
+
+    private int mPrevCount;
     #endregion
   }
 }

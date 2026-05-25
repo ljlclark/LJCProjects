@@ -7,12 +7,14 @@
 //  path="members/LJCBackupCommonLib5/*"/>
 // Assembly: LJCBackupCommonLib5
 
+using LJCNetCommon5;
+
 namespace LJCBackupCommonLib5
 {
   // Represents a backup profile.
   /// <include file="Doc/LJCBackupProfile.xml"
   ///  path="members/LJCBackupProfile/*"/>
-  public class LJCBackupProfile
+  public class LJCBackupProfile : IComparable<LJCBackupProfile>
   {
     #region Constructors
 
@@ -38,6 +40,33 @@ namespace LJCBackupCommonLib5
     public LJCBackupProfile(string name) : this()
     {
       Name = name;
+    }
+    #endregion
+
+    #region Data Methods
+
+    // Provides the default Sort functionality.
+    /// <include file="Doc/LJCBackupProfile.xml"
+    ///  path="members/CompareTo/*"/>
+    public int CompareTo(LJCBackupProfile? other)
+    {
+      int retValue;
+
+      if (null == other)
+      {
+        // This value is greater than null.
+        retValue = LJCNetString.CompareGreater;
+      }
+      else
+      {
+        retValue = LJC.CompareNull(Name, other.Name);
+        if (LJCNetString.CompareNotNullOrEqual == retValue)
+        {
+          // Not case sensitive.
+          retValue = string.Compare(Name, other.Name, true);
+        }
+      }
+      return retValue;
     }
     #endregion
 

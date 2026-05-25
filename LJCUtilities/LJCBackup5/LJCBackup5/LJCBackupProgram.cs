@@ -82,9 +82,9 @@ namespace LJCBackup5
       {
         Console.WriteLine();
         Console.Write("Applying Changes...");
-        var sourceCodeLine = profile.SourceCodeline;
+        var sourceCodeline = profile.SourceCodeline;
         var changesFilespec = profile.ChangesFilespec;
-        var backupChanges = new LJCBackupChanges(sourceCodeLine
+        var backupChanges = new LJCBackupChanges(sourceCodeline
           , changesFilespec);
         backupChanges.Run(profile.TargetPath);
         Console.WriteLine();

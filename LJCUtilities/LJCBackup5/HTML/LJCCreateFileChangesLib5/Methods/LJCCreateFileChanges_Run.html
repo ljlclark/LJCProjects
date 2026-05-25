@@ -76,6 +76,40 @@
       target file if it is different from the source file.
     </div>
     <br />
+    <div class='Text'>Example</div>
+    <br />
+    <div class='SectionContainer'>
+      <table class='CodeTable'>
+        <tbody>
+          <tr class='CodeTable'><th class='CodeTable'>C#</th></tr>
+          <tr class='CodeTable'>
+            <td class='CodeTable'>
+              <pre style='margin-left: 2px;'>
+  using LJCBackupCommonLib5;
+  using LJCCreateFileChangesLib5;
+
+  private static void Run()
+  {
+    var profilesFilespec = "BackupProfiles.txt";
+    var profiles = new LJCBackupProfiles(profilesFilespec);
+    var profile = profiles[0];
+    var createChanges = new LJCCreateFileChanges(profile.SourcePath
+      , profile.TargetPath, profile.ChangesFileSpec)
+    {
+      IncludeFilters = profile.IncludeFilters,
+      SkipFiles = profile.SkipFiles,
+      IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
+    };
+
+    // Test Method
+    createChanges.Run();
+  }</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
     <div class="SmallText">
       Copyright &copy Lester J. Clark and Contributors.<br />
       Licensed under the MIT License.

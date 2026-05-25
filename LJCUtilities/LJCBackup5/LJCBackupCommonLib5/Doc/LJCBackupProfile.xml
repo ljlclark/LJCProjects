@@ -30,6 +30,19 @@
     <param name="name">The backup profile name.</param>
   </ConstructorParams>
 
+  <!-- Data Methods -->
+  <CompareTo>
+    <summary>
+      Provides the default Sort functionality.
+    </summary>
+    <param name="other">The compare to value.</param>
+    <returns>
+      -1 - This object is less than the compare to object.
+      0 - This object is equal to the compare to object.<br />
+      1 - This object is greater than the compare to object.<br />
+    </returns>
+  </CompareTo>
+  
   <!-- Properties -->
   <ChangesFilespec>
     <summary>
