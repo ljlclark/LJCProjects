@@ -48,6 +48,38 @@
       LoadProfiles() method.
     </div>
     <br />
+    <div class='Text'>Example</div>
+    <br />
+    <div class='Text'>_Para_</div>
+    <br />
+    <div class='SectionContainer'>
+      <table class='CodeTable'>
+        <tbody>
+          <tr class='CodeTable'><th class='CodeTable'>C#</th></tr>
+          <tr class='CodeTable'>
+            <td class='CodeTable'>
+              <pre style='margin-left: 2px;'>
+  using LJCBakupCommonLib5;
+        
+  private static void Filespec()
+  {
+    var profiles = new LJCBackupProfiles();
+    var profilesFilespec = "BackupProfiles.txt";
+          
+    // Test Method
+    profiles.Filespec = profilesFilespec;
+          
+    var result = profiles.HasItems();
+          
+    // result
+    // true
+  }</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
     <div class="SmallText">
       Copyright &copy Lester J. Clark and Contributors.<br />
       Licensed under the MIT License.

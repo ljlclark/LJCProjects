@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <!-- Copyright (c) Lester J. Clark and Contributors -->
 <!-- Licensed under the MIT license. -->
-<!-- LJCBackupChanges_GetMatchFolderFilespec.html -->
+<!-- LJCBackupChanges_CreateTargetFilespec.html -->
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>GetMatchFolderFilespec</title>
+  <title>CreateTargetFilespec</title>
   <meta charset="utf-8" />
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width" initial-scale=1 />
@@ -18,13 +18,13 @@
       / <a href="../../../../LJCUtilities.html">LJCUtilities</a>
       / <a href="../LJCBackupChangesLib5.html">LJCBackupChangesLib5</a>
       / <a href="../LJCBackupChanges.html">LJCBackupChanges</a>
-      / GetMatchFolderFilespec
+      / CreateTargetFilespec
     </div>
     <br />
     <div id='Title'>Namespace - LJCBackupChangesLib5</div>
     <br />
     <div id='Header'>
-      <div id='Title'>GetMatchFolderFilespec</div>
+      <div id='Title'>CreateTargetFilespec</div>
     </div>
     <br />
     <div id='Title'>Parameters</div>
@@ -39,7 +39,7 @@
           <tr><th class='CodeTable'>C#</th></tr>
           <tr class='CodeTable'>
             <td class='CodeTable'>
-              public string? GetMatchFolderFilespec(string sourceFilespec
+              public string? CreateTargetFilespec(string sourceFilespec
               , string sourceCodeLine)
             </td>
           </tr>
@@ -49,6 +49,34 @@
     <br />
     <div class='Text'>
       Creates the Target Filespec.
+    </div>
+    <br />
+    <div class='Text'>Example</div>
+    <br />
+    <div class='Text'>_Para_</div>
+    <br />
+    <div class='SectionContainer'>
+      <table class='CodeTable'>
+        <tbody>
+          <tr class='CodeTable'><th class='CodeTable'>C#</th></tr>
+          <tr class='CodeTable'>
+            <td class='CodeTable'>
+              <pre style='margin-left: 2px;'>
+  private static void CreateTargetFilespec()
+  {
+    var sourceCodeline = "CodeLineDev";                            
+    var sourceFileSpec = $@"C:\Users\User\SourceRoot\{sourceCodeline}\File.cs";
+    var targetCodeline = "CodeLine";
+    var targetPath = $@"C:\Users\User\TargetRoot\{targetCodeline}\";
+          
+    // Test Method
+    var targetFileSpec = LJCBackupChanges.CreateTargetFilespec(
+      sourceFilespec, sourceCodeline, targetPath);
+  }</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <br />
     <div class="SmallText">

@@ -35,8 +35,8 @@
           var targetPath = $@"C:\Users\User\TargetRoot\{targetCodeline}\";
           
           // Test Method
-          var targetFileSpec = LJCBackupChanges.CreateTartetFilespec(
-            sourceFilespec, sourceCodeline, 
+          var targetFileSpec = LJCBackupChanges.CreateTargetFilespec(
+            sourceFilespec, sourceCodeline, targetPath);
         }
       </code>
     </example>

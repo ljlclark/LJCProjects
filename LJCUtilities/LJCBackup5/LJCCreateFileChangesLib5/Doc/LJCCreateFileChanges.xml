@@ -72,8 +72,13 @@
           var profile = profiles[0];
           // or profile = profiles["LocalLJCProjects"];
           // or profile = profiles.Retrieve("LocalLJCProjects");
-          var createChanges = new LJCCreateFileChanges(profile.SourceRoot
-            , profile.TargetRoot, profile.ChangesFilespec);
+          var createChanges = new LJCCreateFileChanges(profile.SourcePath
+            , profile.TargetPath, profile.ChangesFilespec)
+          {
+            IncludeFilters = profile.IncludeFilters,
+            SkipFiles = profile.SkipFiles,
+            IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
+          };
 
           // Test Method
           createChanges.Run();
