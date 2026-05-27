@@ -6,7 +6,7 @@ using LJCBackupCommonLib5;
 using LJCCreateFileChangesLib5;
 using LJCNetCommon5;
 
-// <summary>Contains classes for code backup.</summary>
+// Contains classes for code backup.
 // <include file="Doc/LJCBackup.xml"
 //  path="members/LJCBackup5/*"/>
 // Assembly: LJCBackup5
