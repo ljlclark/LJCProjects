@@ -85,12 +85,16 @@
     <param name="targetPath">The target source codeline folder.</param>
     <example>
       <code>
-        private static void GetMatchFolderFilespec()
+        private static void CreateTargetFilespec()
         {
           var sourceCodeline = "CodeLineDev";                            
           var sourceFileSpec = $@"C:\Users\User\SourceRoot\{sourceCodeline}\File.cs";
           var targetCodeline = "CodeLine";
           var targetPath = $@"C:\Users\User\TargetRoot\{targetCodeline}\";
+          
+          // Test Method
+          var targetFileSpec = LJCBackupChanges.CreateTartetFilespec(
+            sourceFilespec, sourceCodeline, 
         }
       </code>
     </example>

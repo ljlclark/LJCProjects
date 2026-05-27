@@ -72,7 +72,7 @@ namespace LJCBackupChangesLib5
           var changeType = fileChange.ChangeType;
           if (!changeType.Equals("delete", LJC.IgnoreCase))
           {
-            targetFilespec = GetMatchFolderFilespec(changeSpec, mSourceCodeLine
+            targetFilespec = CreateTargetFilespec(changeSpec, mSourceCodeLine
                 , TargetPath);
           }
           string? toFileName = null;
@@ -130,7 +130,7 @@ namespace LJCBackupChangesLib5
     // Creates the Target Filespec.
     /// <include file='Doc/LJCBackupChanges.xml'
     ///  path='members/GetMatchFolderFilespec/*'/>
-    public string? GetMatchFolderFilespec(string sourceFilespec
+    public string? CreateTargetFilespec(string sourceFilespec
       , string sourceCodeline, string targetPath)
     {
       string? retValue = null;
