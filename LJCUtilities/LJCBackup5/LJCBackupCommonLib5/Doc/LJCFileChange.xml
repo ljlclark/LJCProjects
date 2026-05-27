@@ -30,6 +30,21 @@
     <summary>
       Returns the Change text.
     </summary>
+    <example>
+      <code>
+        using LJCBackupCommonLib5;
+
+        private static void Text()
+        {
+          var changeType = "Copy";
+          var filespec = "C:\Users\User\SourceRoot\SourceCodeline\File.txt";
+          var fileChange = new LJCFileChange(changeType, filespec);
+
+          // Test Method
+          var change = fileChange.Text();          
+        }
+      </code>
+    </example>
   </Text>
   
   <!-- Properties -->

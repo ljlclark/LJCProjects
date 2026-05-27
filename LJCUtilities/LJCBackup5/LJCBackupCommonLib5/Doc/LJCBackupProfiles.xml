@@ -83,6 +83,25 @@
         Loads the backup profiles from the profiles file into the collection.
       </para>
     </remarks>
+    <example>
+      <code>
+        using LJCBakupCommonLib5;
+        
+        private static void LoadProfiles()
+        {
+          var profiles = new LJCBackupProfiles();
+          var profilesFilespec = "BackupProfiles.txt";
+          
+          // Test Method
+          profiles.LoadProfiles(profilesFilespec);
+          
+          var result = profiles.HasItems();
+          
+          // result
+          // true
+        }
+      </code>
+    </example>
   </LoadProfiles>
 
   <!-- Collection Methods -->
@@ -144,6 +163,25 @@
         LoadProfiles() method.
       </para>
     </remarks>
+    <example>
+      <code>
+        using LJCBakupCommonLib5;
+        
+        private static void Filespec()
+        {
+          var profiles = new LJCBackupProfiles();
+          var profilesFilespec = "BackupProfiles.txt";
+          
+          // Test Method
+          profiles.Filespec = profilesFilespec;
+          
+          var result = profiles.HasItems();
+          
+          // result
+          // true
+        }
+      </code>
+    </example>
   </Filespec>
   <NameIndexer>
     <summary>

@@ -2,7 +2,8 @@
 // Licensed under the MIT License.
 // LJCBackupProfile.cs
 
-// Contains common backup program classes.
+// Contains common backup code.
+// Assembly level XML comments are in the first class XML.
 // <include file="LJCBackupProfile.xml"
 //  path="members/LJCBackupCommonLib5/*"/>
 // Assembly: LJCBackupCommonLib5

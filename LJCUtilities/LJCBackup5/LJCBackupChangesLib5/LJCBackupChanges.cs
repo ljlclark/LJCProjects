@@ -16,6 +16,43 @@ namespace LJCBackupChangesLib5
   ///  path='members/LJCBackupChanges/*'/>
   public class LJCBackupChanges
   {
+    #region Static Methods
+
+    // Creates the Target Filespec.
+    /// <include file='Doc/LJCBackupChanges.xml'
+    ///  path='members/CreateTargetFilespec/*'/>
+    public static string? CreateTargetFilespec(string sourceFilespec
+      , string sourceCodeline, string targetPath)
+    {
+      string? retValue = null;
+
+      if (File.Exists(sourceFilespec))
+      {
+        retValue = targetPath;
+        var filePath = Path.GetDirectoryName(sourceFilespec);
+        if (filePath != null)
+        {
+          var folders = filePath.Split('\\');
+          for (int index = folders.Length - 1; index >= 0; index--)
+          {
+            var folder = folders[index];
+            if (folder.Equals(sourceCodeline, LJC.IgnoreCase))
+            {
+              for (int index1 = index + 1; index1 < folders.Length; index1++)
+              {
+                retValue = Path.Combine(retValue, folders[index1]);
+              }
+              break;
+            }
+          }
+          var targetFile = Path.GetFileName(sourceFilespec);
+          retValue = Path.Combine(retValue, targetFile);
+        }
+      }
+      return retValue;
+    }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -125,40 +162,6 @@ namespace LJCBackupChangesLib5
           }
         }
       }
-    }
-
-    // Creates the Target Filespec.
-    /// <include file='Doc/LJCBackupChanges.xml'
-    ///  path='members/GetMatchFolderFilespec/*'/>
-    public string? CreateTargetFilespec(string sourceFilespec
-      , string sourceCodeline, string targetPath)
-    {
-      string? retValue = null;
-
-      if (File.Exists(sourceFilespec))
-      {
-        retValue = targetPath;
-        var filePath = Path.GetDirectoryName(sourceFilespec);
-        if (filePath != null)
-        {
-          var folders = filePath.Split('\\');
-          for (int index = folders.Length - 1; index >= 0; index--)
-          {
-            var folder = folders[index];
-            if (folder.Equals(sourceCodeline, LJC.IgnoreCase))
-            {
-              for (int index1 = index + 1; index1 < folders.Length; index1++)
-              {
-                retValue = Path.Combine(retValue, folders[index1]);
-              }
-              break;
-            }
-          }
-          var targetFile = Path.GetFileName(sourceFilespec);
-          retValue = Path.Combine(retValue, targetFile);
-        }
-      }
-      return retValue;
     }
     #endregion
 

@@ -17,6 +17,31 @@
     </summary>
   </LJCBackupChanges>
 
+  <!-- Static Methods -->
+  <CreateTargetFilespec>
+    <summary>
+      Creates the Target Filespec.
+    </summary>
+    <param name="sourceFilespec">The source filespec.</param>
+    <param name="sourceCodeline">The source codeline folder.</param>
+    <param name="targetPath">The target source codeline folder.</param>
+    <example>
+      <code>
+        private static void CreateTargetFilespec()
+        {
+          var sourceCodeline = "CodeLineDev";                            
+          var sourceFileSpec = $@"C:\Users\User\SourceRoot\{sourceCodeline}\File.cs";
+          var targetCodeline = "CodeLine";
+          var targetPath = $@"C:\Users\User\TargetRoot\{targetCodeline}\";
+          
+          // Test Method
+          var targetFileSpec = LJCBackupChanges.CreateTartetFilespec(
+            sourceFilespec, sourceCodeline, 
+        }
+      </code>
+    </example>
+  </CreateTargetFilespec>
+  
   <!-- Constructor Methods -->
   <Constructor>
     <summary>
@@ -36,8 +61,8 @@
 
         private void static ConstructorParam()
         {
-          var profilesFileSpec = "BackupProfiles.txt";
-          var profiles = new LJCBackupProfiles(profilesFileSpec);
+          var profilesFilespec = "BackupProfiles.txt";
+          var profiles = new LJCBackupProfiles(profilesFilespec);
           var profile = profiles[0];
           // or profile = profiles["LocalLJCProjects"];
           // or profile = profiles.Retrieve("LocalLJCProjects");
@@ -73,32 +98,10 @@
 
         // Test Method
         backupChanges.Run(profile.TargetPath);
+      }
       </code>
     </example>
   </Run>
-  <GetMatchFolderFilespec>
-    <summary>
-      Creates the Target Filespec.
-    </summary>
-    <param name="sourceFilespec">The source filespec.</param>
-    <param name="sourceCodeline">The source codeline folder.</param>
-    <param name="targetPath">The target source codeline folder.</param>
-    <example>
-      <code>
-        private static void CreateTargetFilespec()
-        {
-          var sourceCodeline = "CodeLineDev";                            
-          var sourceFileSpec = $@"C:\Users\User\SourceRoot\{sourceCodeline}\File.cs";
-          var targetCodeline = "CodeLine";
-          var targetPath = $@"C:\Users\User\TargetRoot\{targetCodeline}\";
-          
-          // Test Method
-          var targetFileSpec = LJCBackupChanges.CreateTartetFilespec(
-            sourceFilespec, sourceCodeline, 
-        }
-      </code>
-    </example>
-  </GetMatchFolderFilespec>
   
   <!-- Properties -->
   <TargetPath>

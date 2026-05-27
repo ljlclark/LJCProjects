@@ -60,6 +60,26 @@
         target file if it is different from the source file.
       </para>
     </remarks>
+    <example>
+      <code>
+        using LJCBackupChangesLib5;
+        using LJCBackupCommonLib5;
+
+        private static void Run()
+        {
+          var profilesFilespec = "BackupProfiles.txt";
+          var profiles = new LJCBackupProfiles(profilesFilespec);
+          var profile = profiles[0];
+          // or profile = profiles["LocalLJCProjects"];
+          // or profile = profiles.Retrieve("LocalLJCProjects");
+          var createChanges = new LJCCreateFileChanges(profile.SourceRoot
+            , profile.TargetRoot, profile.ChangesFilespec);
+
+          // Test Method
+          createChanges.Run();
+        }
+      </code>
+    </example>
   </Run>
 
   <!-- Properties -->

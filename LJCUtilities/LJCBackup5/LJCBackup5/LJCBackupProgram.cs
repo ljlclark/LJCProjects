@@ -7,6 +7,7 @@ using LJCCreateFileChangesLib5;
 using LJCNetCommon5;
 
 // Contains classes for code backup.
+// Assembly level XML comments are in the first class XML.
 // <include file="Doc/LJCBackup.xml"
 //  path="members/LJCBackup5/*"/>
 // Assembly: LJCBackup5
