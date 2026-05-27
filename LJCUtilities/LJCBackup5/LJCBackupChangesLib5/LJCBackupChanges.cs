@@ -4,7 +4,7 @@
 using LJCBackupCommonLib5;
 using LJCNetCommon5;
 
-// Contains classes for creating the code changes file.
+// Contains code to apply the file changes.
 // <include file="LJCBackupChanges.xml"
 //  path="members/LJCBackupChangesLib5/*"/>
 // Assembly: LJCBackupChangesLib5
@@ -72,7 +72,8 @@ namespace LJCBackupChangesLib5
           var changeType = fileChange.ChangeType;
           if (!changeType.Equals("delete", LJC.IgnoreCase))
           {
-            targetFilespec = GetMatchFolderFilespec(changeSpec, mSourceCodeLine);
+            targetFilespec = GetMatchFolderFilespec(changeSpec, mSourceCodeLine
+                , TargetPath);
           }
           string? toFileName = null;
           if (LJC.HasText(fileChange.ToFilespec))
@@ -130,13 +131,13 @@ namespace LJCBackupChangesLib5
     /// <include file='Doc/LJCBackupChanges.xml'
     ///  path='members/GetMatchFolderFilespec/*'/>
     public string? GetMatchFolderFilespec(string sourceFilespec
-      , string sourceCodeLine)
+      , string sourceCodeline, string targetPath)
     {
       string? retValue = null;
 
       if (File.Exists(sourceFilespec))
       {
-        retValue = TargetPath;
+        retValue = targetPath;
         var filePath = Path.GetDirectoryName(sourceFilespec);
         if (filePath != null)
         {
@@ -144,7 +145,7 @@ namespace LJCBackupChangesLib5
           for (int index = folders.Length - 1; index >= 0; index--)
           {
             var folder = folders[index];
-            if (folder.Equals(sourceCodeLine, LJC.IgnoreCase))
+            if (folder.Equals(sourceCodeline, LJC.IgnoreCase))
             {
               for (int index1 = index + 1; index1 < folders.Length; index1++)
               {

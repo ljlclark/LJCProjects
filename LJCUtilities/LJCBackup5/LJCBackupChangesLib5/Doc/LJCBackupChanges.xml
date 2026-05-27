@@ -29,6 +29,25 @@
     </summary>
     <param name="sourceCodeLine">The source codeline.</param>
     <param name="changeFilespec">The change filespec.</param>
+    <example>
+      <code>
+        using LJCBackupChangesLib5;
+        using LJCBackupCommonLib5;
+
+        private void static ConstructorParam()
+        {
+          var profilesFileSpec = "BackupProfiles.txt";
+          var profiles = new LJCBackupProfiles(profilesFileSpec);
+          var profile = profiles[0];
+          // or profile = profiles["LocalLJCProjects"];
+          // or profile = profiles.Retrieve("LocalLJCProjects");
+
+          // Test Method
+          var backupChanges = new LJCBackupChanges(profile.SourceCodeline
+            , profile.ChangesFilespec)    
+        }
+      </code>
+    </example>
   </ConstructorParams>
   
   <!-- Methods -->
@@ -37,13 +56,44 @@
       Applies the change commands.
     </summary>
     <param name="targetPath">The target path.</param>
+    <example>
+      <code>
+      using LJCBackupChangesLib5;
+      using LJCBackupCommonLib5;
+
+      private static void Run()
+      {
+        var profilesFilespec = "BackupProfiles.txt";
+        var profiles = new LJCBackupProfiles(profilesFilespec);
+        var profile = profiles[0];
+        // or profile = profiles["LocalLJCProjects"];
+        // or profile = profiles.Retrieve("LocalLJCProjects");
+        var backupChanges = new LJCBackupChanges(profile.SourceCodeline
+          , profile.ChangesFilespec)    
+
+        // Test Method
+        backupChanges.Run(profile.TargetPath);
+      </code>
+    </example>
   </Run>
   <GetMatchFolderFilespec>
     <summary>
       Creates the Target Filespec.
     </summary>
     <param name="sourceFilespec">The source filespec.</param>
-    <param name="sourceCodeLine">The source codeline folder.</param>
+    <param name="sourceCodeline">The source codeline folder.</param>
+    <param name="targetPath">The target source codeline folder.</param>
+    <example>
+      <code>
+        private static void GetMatchFolderFilespec()
+        {
+          var sourceCodeline = "CodeLineDev";                            
+          var sourceFileSpec = $@"C:\Users\User\SourceRoot\{sourceCodeline}\File.cs";
+          var targetCodeline = "CodeLine";
+          var targetPath = $@"C:\Users\User\TargetRoot\{targetCodeline}\";
+        }
+      </code>
+    </example>
   </GetMatchFolderFilespec>
   
   <!-- Properties -->
