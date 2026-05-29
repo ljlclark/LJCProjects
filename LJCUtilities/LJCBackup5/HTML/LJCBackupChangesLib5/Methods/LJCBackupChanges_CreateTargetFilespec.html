@@ -53,8 +53,6 @@
     <br />
     <div class='Text'>Example</div>
     <br />
-    <div class='Text'>_Para_</div>
-    <br />
     <div class='SectionContainer'>
       <table class='CodeTable'>
         <tbody>
@@ -62,16 +60,27 @@
           <tr class='CodeTable'>
             <td class='CodeTable'>
               <pre style='margin-left: 2px;'>
+  using LJCBackupChangesLib5;
+
+  // Creates the Target Filespec.
   private static void CreateTargetFilespec()
   {
-    var sourceCodeline = "CodeLineDev";                            
-    var sourceFileSpec = $@"C:\Users\User\SourceRoot\{sourceCodeline}\File.cs";
+    var sourceRoot = @"C:\Users\User\SourceRoot";
+    var sourceCodeline = "CodeLineDev";
+    var sourceFilespec = $@"{sourceRoot}\{sourceCodeline}\File.cs";
+    var targetRoot = @"C:\Users\User\TargetRoot";
     var targetCodeline = "CodeLine";
-    var targetPath = $@"C:\Users\User\TargetRoot\{targetCodeline}\";
+    var targetPath = $@"{targetRoot}\{targetCodeline}\";
           
     // Test Method
+    // Source file must exist.
     var targetFileSpec = LJCBackupChanges.CreateTargetFilespec(
       sourceFilespec, sourceCodeline, targetPath);
+
+    var result = targetFilespec;
+            
+    // result
+    // C:\Users\User\TargetRoot\CodeLine\File.cs
   }</pre>
             </td>
           </tr>

@@ -51,6 +51,46 @@
       Initializes an object instance with the supplied values.
     </div>
     <br />
+    <div class='Text'>Example</div>
+    <br />
+    <div class='SectionContainer'>
+      <table class='CodeTable'>
+        <tbody>
+          <tr class='CodeTable'><th class='CodeTable'>C#</th></tr>
+          <tr class='CodeTable'>
+            <td class='CodeTable'>
+              <pre style='margin-left: 2px;'>
+  using LJCBackupChangesLib5;
+  using LJCBackupCommonLib5;
+
+  private static void ConstructorParam()
+  {
+    var profilesFilespec = "BackupProfiles.txt";
+    var profiles = new LJCBackupProfiles(profilesFilespec);
+    var profile = profiles[0];
+    // or
+    profile = profiles["LocalLJCProjects"];
+    // or
+    profile = profiles.LJCRetrieve("LocalLJCProjects");
+
+    // Test Method
+    var backupChanges = new LJCBackupChanges(profile.SourceCodeline
+      , profile.ChangesFilespec);
+    if (backupChanges != null)
+    {
+      result = profile.SourceCodeline;
+    }
+          
+    // result
+    // LJCProjectsDev
+  }
+</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
     <div class="SmallText">
       Copyright &copy Lester J. Clark and Contributors.<br />
       Licensed under the MIT License.

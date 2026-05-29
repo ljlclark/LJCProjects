@@ -27,16 +27,27 @@
     <param name="targetPath">The target source codeline folder.</param>
     <example>
       <code>
+        using LJCBackupChangesLib5;
+        
+        // Creates the Target Filespec.
         private static void CreateTargetFilespec()
         {
-          var sourceCodeline = "CodeLineDev";                            
-          var sourceFileSpec = $@"C:\Users\User\SourceRoot\{sourceCodeline}\File.cs";
+          var sourceRoot = @"C:\Users\User\SourceRoot";
+          var sourceCodeline = "CodeLineDev";
+          var sourceFilespec = $@"{sourceRoot}\{sourceCodeline}\File.cs";
+          var targetRoot = @"C:\Users\User\TargetRoot";
           var targetCodeline = "CodeLine";
-          var targetPath = $@"C:\Users\User\TargetRoot\{targetCodeline}\";
+          var targetPath = $@"{targetRoot}\{targetCodeline}\";
           
           // Test Method
-          var targetFileSpec = LJCBackupChanges.CreateTargetFilespec(
-            sourceFilespec, sourceCodeline, targetPath);
+          // Source file must exist.
+          var targetFilespec = LJCBackupChanges.CreateTargetFilespec
+            (sourceFilespec, sourceCodeline, targetPath);
+
+          var result = targetFilespec;
+            
+          // result
+          // C:\Users\User\TargetRoot\CodeLine\File.cs
         }
       </code>
     </example>
@@ -59,17 +70,26 @@
         using LJCBackupChangesLib5;
         using LJCBackupCommonLib5;
 
-        private void static ConstructorParam()
+        private static void ConstructorParam()
         {
           var profilesFilespec = "BackupProfiles.txt";
           var profiles = new LJCBackupProfiles(profilesFilespec);
           var profile = profiles[0];
-          // or profile = profiles["LocalLJCProjects"];
-          // or profile = profiles.Retrieve("LocalLJCProjects");
+          // or
+          profile = profiles["LocalLJCProjects"];
+          // or
+          profile = profiles.LJCRetrieve("LocalLJCProjects");
 
           // Test Method
           var backupChanges = new LJCBackupChanges(profile.SourceCodeline
-            , profile.ChangesFilespec)    
+            , profile.ChangesFilespec);
+          if (backupChanges != null)
+          {
+            result = profile.SourceCodeline;
+          }
+          
+          // result
+          // LJCProjectsDev
         }
       </code>
     </example>
@@ -83,22 +103,40 @@
     <param name="targetPath">The target path.</param>
     <example>
       <code>
-      using LJCBackupChangesLib5;
-      using LJCBackupCommonLib5;
+        using LJCBackupChangesLib5;
+        using LJCBackupCommonLib5;
 
-      private static void Run()
-      {
-        var profilesFilespec = "BackupProfiles.txt";
-        var profiles = new LJCBackupProfiles(profilesFilespec);
-        var profile = profiles[0];
-        // or profile = profiles["LocalLJCProjects"];
-        // or profile = profiles.Retrieve("LocalLJCProjects");
-        var backupChanges = new LJCBackupChanges(profile.SourceCodeline
-          , profile.ChangesFilespec)    
+        private static void Run()
+        {
+          var profilesFilespec = "BackupProfiles.txt";
+          var profiles = new LJCBackupProfiles(profilesFilespec);
+          var profile = profiles[0];
+          // or
+          profile = profiles["LocalLJCProjects"];
+          // or
+          profile = profiles.LJCRetrieve("LocalLJCProjects");
 
-        // Test Method
-        backupChanges.Run(profile.TargetPath);
-      }
+          if (profile != null)
+          {
+            // Changes File must exist.
+            if (!File.Exists(profile.ChangesFilespec))
+            {
+              LJCNetFile.CreateFolder(profile.ChangesFilespec);
+              File.WriteAllText(profile.ChangesFilespec, "");
+            }
+
+            var backupChanges = new LJCBackupChanges(profile.SourceCodeline
+              , profile.ChangesFilespec);
+
+            // Test Method
+            backupChanges.Run(profile.TargetPath);
+
+            var result = backupChanges.TargetPath;
+
+            // result
+            // C:\Users\User\Documents\Visual Studio 2022\LJCProjects
+          }
+        }
       </code>
     </example>
   </Run>

@@ -66,11 +66,31 @@
     var profilesFilespec = "BackupProfiles.txt";
     var profiles = new LJCBackupProfiles(profilesFilespec);
     var profile = profiles[0];
-    var backupChanges = new LJCBackupChanges(profile.SourceCodeline
-      , profile.ChangesFilespec)    
+    // or
+    profile = profiles["LocalLJCProjects"];
+    // or
+    profile = profiles.LJCRetrieve("LocalLJCProjects");
 
-    // Test Method
-    backupChanges.Run(profile.TargetPath);
+    if (profile != null)
+    {
+      // Changes File must exist.
+      if (!File.Exists(profile.ChangesFilespec))
+      {
+        LJCNetFile.CreateFolder(profile.ChangesFilespec);
+        File.WriteAllText(profile.ChangesFilespec, "");
+      }
+
+      var backupChanges = new LJCBackupChanges(profile.SourceCodeline
+        , profile.ChangesFilespec);
+
+      // Test Method
+      backupChanges.Run(profile.TargetPath);
+
+      var result = backupChanges.TargetPath;
+
+      // result
+      // C:\Users\User\Documents\Visual Studio 2022\LJCProjects
+    }
   }</pre>
             </td>
           </tr>
