@@ -30,6 +30,36 @@
     <param name="sourceRoot">The source root path.</param>
     <param name="targetRoot">The target root path.</param>
     <param name="changesFilespec">The changes filespec.</param>
+    <example>
+      <code>
+        using LJCBackupCommonLib5;
+        using LJCCreateFileChangesLib5;
+
+        // Initializes an object instance with the supplied values.
+        private static void ConstructorParam()
+        {
+          var profilesFilespec = "BackupProfiles.txt";
+          var profiles = new LJCBackupProfiles(profilesFilespec);
+          var profile = profiles[0];
+          // or
+          profile = profiles["LocalLJCProjects"];
+          // or
+          profile = profiles.LJCRetrieve("LocalLJCProjects");
+
+          string? result = null;
+          if (profile != null)
+          {
+            // Test Method
+            var backupChanges = new LJCBackupChanges(profile.SourceCodeline
+              , profile.ChangesFilespec);
+            if (backupChanges != null)
+            {
+              result = profile.SourceCodeline;
+            }
+          }
+        }
+      }</code>
+    </example>
   </ConstructorParams>
 
   <!-- Methods -->
