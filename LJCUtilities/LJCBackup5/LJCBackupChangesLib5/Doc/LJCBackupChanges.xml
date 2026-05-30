@@ -70,6 +70,7 @@
         using LJCBackupChangesLib5;
         using LJCBackupCommonLib5;
 
+        // Initializes an object instance with the supplied values.
         private static void ConstructorParam()
         {
           var profilesFilespec = "BackupProfiles.txt";
@@ -80,12 +81,16 @@
           // or
           profile = profiles.LJCRetrieve("LocalLJCProjects");
 
-          // Test Method
-          var backupChanges = new LJCBackupChanges(profile.SourceCodeline
-            , profile.ChangesFilespec);
-          if (backupChanges != null)
+          string? result = null;
+          if (profile != null)
           {
-            result = profile.SourceCodeline;
+            // Test Method
+            var backupChanges = new LJCBackupChanges(profile.SourceCodeline
+              , profile.ChangesFilespec);
+            if (backupChanges != null)
+            {
+              result = profile.SourceCodeline;
+            }
           }
           
           // result
@@ -106,6 +111,7 @@
         using LJCBackupChangesLib5;
         using LJCBackupCommonLib5;
 
+        // Applies the change commands.
         private static void Run()
         {
           var profilesFilespec = "BackupProfiles.txt";

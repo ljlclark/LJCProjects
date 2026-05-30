@@ -48,6 +48,7 @@ namespace TestBackupChanges5
       sourceRoot = @"C:\Users\Les\Documents\Visual Studio 2022";
       sourceCodeline = "LJCProjectsDev";
       sourceFilespec = $@"{sourceRoot}\{sourceCodeline}\1BuildAll.cmd";
+      targetRoot = @"C:\Users\Les\Documents\Visual Studio 2022";
       targetCodeline = "LJCProjects";
       targetPath = $@"{targetRoot}\{targetCodeline}\";
 
@@ -58,6 +59,10 @@ namespace TestBackupChanges5
 
       var result = targetFilespec;
       var compare = @"C:\Users\User\TargetRoot";
+
+      // Live Compare
+      compare = @"C:\Users\Les\Documents\Visual Studio 2022";
+
       compare += @"\LJCProjects\1BuildAll.cmd";
       TestCommon?.Write($"{methodName}", result, compare);
     }
@@ -134,8 +139,10 @@ namespace TestBackupChanges5
         var result = backupChanges.TargetPath;
 
         var compare = @"C:\Users\User\Documents\Visual Studio 2022\LJCProjects";
+
         // Live Test
         compare = @"C:\Users\Les\Documents\Visual Studio 2022\LJCProjects";
+
         TestCommon?.Write($"{methodName}", result, compare);
       }
     }
