@@ -50,13 +50,22 @@
           if (profile != null)
           {
             // Test Method
-            var backupChanges = new LJCBackupChanges(profile.SourceCodeline
-              , profile.ChangesFilespec);
-            if (backupChanges != null)
+            var createChanges = new LJCCreateFileChanges(profile.SourceRoot
+              , profile.TargetRoot, profile.ChangesFilespec)
             {
-              result = profile.SourceCodeline;
+              IncludeFilters = profile.IncludeFilters,
+              SkipFiles = profile.SkipFiles,
+              IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
+            };
+            if (createChanges != null)
+            {
+              var value = profile.IncludeMissingTargetFolders;
+              result = value.ToString();
             }
           }
+          
+          // result
+          // True
         }
       }</code>
     </example>
@@ -95,23 +104,33 @@
         using LJCBackupChangesLib5;
         using LJCBackupCommonLib5;
 
+        // Runs the create "Changes" file process.
         private static void Run()
         {
           var profilesFilespec = "BackupProfiles.txt";
           var profiles = new LJCBackupProfiles(profilesFilespec);
           var profile = profiles[0];
-          // or profile = profiles["LocalLJCProjects"];
-          // or profile = profiles.Retrieve("LocalLJCProjects");
-          var createChanges = new LJCCreateFileChanges(profile.SourcePath
-            , profile.TargetPath, profile.ChangesFilespec)
-          {
-            IncludeFilters = profile.IncludeFilters,
-            SkipFiles = profile.SkipFiles,
-            IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
-          };
+          // or
+          profile = profiles["LocalLJCProjects"];
+          // or
+          profile = profiles.LJCRetrieve("LocalLJCProjects");
 
-          // Test Method
-          createChanges.Run();
+          if (profile != null)
+          {
+            var createChanges = new LJCCreateFileChanges(profile.SourcePath
+              , profile.TargetPath, profile.ChangesFilespec)
+            {
+              IncludeFilters = profile.IncludeFilters,
+              SkipFiles = profile.SkipFiles,
+              IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
+            };
+
+            if (createChanges != null)
+            {
+              // Test Method
+              createChanges.Run();
+            }
+          }
         }
       </code>
     </example>

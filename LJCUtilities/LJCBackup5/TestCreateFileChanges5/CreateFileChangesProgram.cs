@@ -19,6 +19,9 @@ namespace TestCreateFileChanges5
 
       // Constructor Methods
       ConstructorParam();
+
+      // Method
+      Run();
     }
 
     #region Constructor Methods
@@ -43,21 +46,53 @@ namespace TestCreateFileChanges5
       if (profile != null)
       {
         // Test Method
-        var createFileChanges = new LJCCreateFileChanges(profile.SourceRoot
+        var createChanges = new LJCCreateFileChanges(profile.SourceRoot
           , profile.TargetRoot, profile.ChangesFilespec)
         {
           IncludeFilters = profile.IncludeFilters,
           SkipFiles = profile.SkipFiles,
+          IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
         };
-        if (createFileChanges != null)
+        if (createChanges != null)
         {
           var value = profile.IncludeMissingTargetFolders;
           result = value.ToString();
         }
       }
 
-      var compare = "True";
+      var compare = "False";
       TestCommon?.Write($"{methodName}", result, compare);
+    }
+
+    // Runs the create "Changes" file process.
+    private static void Run()
+    {
+      //var methodName = "Run()";
+
+      var profilesFilespec = "BackupProfiles.txt";
+      var profiles = new LJCBackupProfiles(profilesFilespec);
+      var profile = profiles[0];
+      // or
+      profile = profiles["LocalLJCProjects"];
+      // or
+      profile = profiles.LJCRetrieve("LocalLJCProjects");
+
+      if (profile != null)
+      {
+        var createChanges = new LJCCreateFileChanges(profile.SourceRoot
+          , profile.TargetRoot, profile.ChangesFilespec)
+        {
+          IncludeFilters = profile.IncludeFilters,
+          SkipFiles = profile.SkipFiles,
+          IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
+        };
+
+        if (createChanges != null)
+        {
+          // Test Method
+          createChanges.Run();
+        }
+      }
     }
     #endregion
 

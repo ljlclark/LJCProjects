@@ -68,20 +68,33 @@
   using LJCBackupCommonLib5;
   using LJCCreateFileChangesLib5;
 
+  // Initializes an object instance with the supplied values.
   private static void CreateFileChanges()
   {
     var profilesFilespec = "BackupProfiles.txt";
     var profiles = new LJCBackupProfiles(profilesFilespec);
     var profile = profiles[0];
+    // or
+    profile = profiles["LocalLJCProjects"];
+    // or
+    profile = profiles.LJCRetrieve("LocalLJCProjects");
 
-    // Test Method
-    var createChanges = new LJCCreateFileChanges(profile.SourcePath
-      , profile.TargetPath, profile.ChangesFileSpec)
+    string? result = null;
+    if (profile != null)
     {
-      IncludeFilters = profile.IncludeFilters,
-      SkipFiles = profile.SkipFiles,
-      IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
-    };
+      // Test Method
+      var createChanges = new LJCCreateFileChanges(profile.SourceRoot
+        , profile.TargetRoot, profile.ChangesFilespec)
+      {
+        IncludeFilters = profile.IncludeFilters,
+        SkipFiles = profile.SkipFiles,
+        IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
+      };
+      if (createChanges != null)
+      {
+        var value = profile.IncludeMissingTargetFolders;
+        result = value.ToString();
+      }
   }</pre>
             </td>
           </tr>
