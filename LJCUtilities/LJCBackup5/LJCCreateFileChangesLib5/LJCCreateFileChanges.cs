@@ -196,6 +196,13 @@ namespace LJCCreateFileChangesLib5
       mTargetPath = targetPath;
       mChangesFilespec = changesFilespec;
 
+      SkipFolders = new List<string>()
+      {
+        @"\.vs\",
+        @"\obj\",
+        @"\Release\",
+      };
+
       var alwaysSkipFileSpec = "AlwaysSkipFolders.txt";
       if (File.Exists(alwaysSkipFileSpec))
       {
@@ -412,7 +419,7 @@ namespace LJCCreateFileChangesLib5
 
       var targetPath = Path.GetDirectoryName(targetSpec);
 
-      // Always skip listed folders.
+      // Always skip listed folders if not included.
       if (!IncludeMissingTargetFolders
         && HasSkipFolder(mAlwaysSkipFolders, codePath))
       {
@@ -433,32 +440,20 @@ namespace LJCCreateFileChangesLib5
         retSkip = true;
       }
 
-      // Skip common unpromoted folders/files.
-      if (!retSkip
-        && (targetPath!.Contains(@"\.vs\")
-        || targetPath.Contains(@"\obj\")))
-      {
-        retSkip = true;
-      }
+      // Skip common unpromoted folders.
       if (!retSkip)
       {
-        var finalFolder = FinalFolder(targetPath!);
-        if (LJC.HasText(finalFolder))
+        foreach (string skipFolder in SkipFolders)
         {
-          var skipFolders = new List<string>()
-          {
-            "obj",
-            //"Debug",
-            "Release",
-          };
-          if (skipFolders.Contains(finalFolder))
+          if (targetSpec!.Contains(skipFolder))
           {
             retSkip = true;
+            break;
           }
         }
       }
 
-      // Skip updates to target folders that do not exist.
+      // Skip updates to target folders that do not exist if not included.
       if (!retSkip
         && !IncludeMissingTargetFolders
         && !Directory.Exists(targetPath))
@@ -468,7 +463,6 @@ namespace LJCCreateFileChangesLib5
         {
           mMissingFolders.Add($"{codePath}");
         }
-        // *** Next Statement *** Add
         retSkip = true;
       }
       return retSkip;
@@ -486,6 +480,11 @@ namespace LJCCreateFileChangesLib5
     /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/SkipFiles/*'/>
     public List<string> SkipFiles { get; set; }
+
+    // Gets or sets the skip folder list.
+    /// <include file='Doc/LJCCreateFileChanges.xml'
+    ///  path='items/SkipFolders/*'/>
+    public List<string> SkipFolders { get; set; }
 
     // Gets or sets the include missing target folders flag.
     /// <include file='Doc/LJCCreateFileChanges.xml'
