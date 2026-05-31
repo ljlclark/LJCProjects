@@ -332,16 +332,9 @@ namespace LJCCreateFileChangesLib5
         {
           if (File.Exists(targetSpec))
           {
-            Console.WriteLine();
-            var text = $"Are you sure you want to delete file:";
-            Console.WriteLine(text);
-            Console.Write($"{targetSpec}? ");
-            var key = Console.ReadKey();
-            var ch = (char)key.KeyChar;
-            if ("Yy".Contains(ch))
-            {
-              File.Delete(targetSpec);
-            }
+            // *** Changed ***
+            var fileChange = new LJCFileChange("Delete", targetSpec);
+            AppendChangeFile(fileChange);
           }
           continue;
         }
@@ -425,23 +418,24 @@ namespace LJCCreateFileChangesLib5
       {
         if (Directory.Exists(targetPath))
         {
-          Console.WriteLine();
-          var text = $"Are you sure you want to delete folder:";
+          //  Console.WriteLine();
+          //  var text = $"Are you sure you want to delete folder:";
+          var text = $"Delete folder {targetPath}.";
           Console.WriteLine(text);
-          Console.Write($"{targetPath}? ");
-          var key = Console.ReadKey();
-          var ch = (char)key.KeyChar;
-          if ("Yy".Contains(ch))
-          {
-            Directory.Delete(targetPath, true);
-          }
+          //  Console.Write($"{targetPath}? ");
+          //  var key = Console.ReadKey();
+          //  var ch = (char)key.KeyChar;
+          //  if ("Yy".Contains(ch))
+          //  {
+          //    Directory.Delete(targetPath, true);
+          //  }
         }
         retSkip = true;
       }
 
       // Skip common unpromoted folders/files.
       if (!retSkip
-        && (targetPath!.Contains(@"\.vs")
+        && (targetPath!.Contains(@"\.vs\")
         || targetPath.Contains(@"\obj\")))
       {
         retSkip = true;
