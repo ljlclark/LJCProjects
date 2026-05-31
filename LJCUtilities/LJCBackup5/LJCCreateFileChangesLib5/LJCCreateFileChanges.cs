@@ -60,7 +60,7 @@ namespace LJCCreateFileChangesLib5
     {
       var retValue = toFilePath;
 
-      LJC.CheckArgument(toFilePath,nameof(toFilePath));
+      LJC.CheckArgument(toFilePath, nameof(toFilePath));
       LJC.CheckArgument(fromFilespec, nameof(fromFilespec));
       LJC.CheckArgument(fromStartFolder, nameof(fromStartFolder));
 
@@ -92,22 +92,6 @@ namespace LJCCreateFileChangesLib5
       }
       var fromFileName = Path.GetFileName(fromFilespec);
       retValue = Path.Combine(retValue, fromFileName);
-      return retValue;
-    }
-
-    // Checks if a file has more than one dot.
-    private static bool HasExtraDots(string filespec, string filter)
-    {
-      bool retValue = false;
-
-      var fileName = Path.GetFileName(filespec);
-
-      // Has a dot before the extension dot.
-      if (fileName.IndexOf('.') < fileName.Length - filter.Length
-        && filter != ".config")
-      {
-        retValue = true;
-      }
       return retValue;
     }
 
@@ -149,9 +133,31 @@ namespace LJCCreateFileChangesLib5
       {
         foreach (string line in list)
         {
-          // File already has the change command.
-          //if (line.ToLower() == textLine.ToLower())
+          // File already has the line.
           if (LJC.Equals(line, textLine))
+          {
+            retValue = true;
+            break;
+          }
+        }
+      }
+      return retValue;
+    }
+
+    // Check if skip folder file has a code path.
+    private static bool HasSkipFolder(List<string> folderList, string codePath)
+    {
+      bool retValue = false;
+
+      if (LJC.HasText(codePath))
+      {
+        foreach (string folder in folderList)
+        {
+          if (!codePath.EndsWith('\\'))
+          {
+            codePath += "\\";
+          }
+          if (codePath.StartsWith(folder))
           {
             retValue = true;
             break;
@@ -176,18 +182,18 @@ namespace LJCCreateFileChangesLib5
       mChangeCommands = [];
       mChangesFilespec = "";
       mMissingFolders = [];
-      mSourceRoot = "";
-      mTargetRoot = "";
+      mSourcePath = "";
+      mTargetPath = "";
     }
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/ConstructorParams/*'/>
-    public LJCCreateFileChanges(string sourceRoot, string targetRoot
+    public LJCCreateFileChanges(string sourcePath, string targetPath
       , string changesFilespec) : this()
     {
-      mSourceRoot = sourceRoot;
-      mTargetRoot = targetRoot;
+      mSourcePath = sourcePath;
+      mTargetPath = targetPath;
       mChangesFilespec = changesFilespec;
 
       var alwaysSkipFileSpec = "AlwaysSkipFolders.txt";
@@ -213,6 +219,7 @@ namespace LJCCreateFileChangesLib5
         CopyMissingOrChangedFiles(filter);
       }
 
+      // Write the changes file.
       LJCNetFile.CreateFolder(mChangesFilespec);
       if (File.Exists(mChangesFilespec))
       {
@@ -221,12 +228,13 @@ namespace LJCCreateFileChangesLib5
       var text = string.Join("\r\n", mChangeCommands);
       File.AppendAllText(mChangesFilespec, text);
 
+      // Write the missing folders file.
       var missingFolders = "MissingFolders.txt";
       if (File.Exists(missingFolders))
       {
         File.Delete(missingFolders);
       }
-      text = $"Target Folders missing in:\r\n{mTargetRoot}\r\n\r\n";
+      text = $"Target Folders missing in:\r\n{mTargetPath}\r\n\r\n";
       text += string.Join("\r\n", mMissingFolders);
       File.AppendAllText(missingFolders, text);
     }
@@ -292,12 +300,12 @@ namespace LJCCreateFileChangesLib5
     private void CopyMissingOrChangedFiles(string filter)
     {
       // Get the source folder from end of a path.
-      var sourceCodeLineFolder = FinalFolder(mSourceRoot);
+      var sourceCodeLineFolder = FinalFolder(mSourcePath);
       LJC.CheckArgument(sourceCodeLineFolder, nameof(sourceCodeLineFolder));
 
       var filterPath = GetFilterPath(ref filter);
 
-      var sourceSpecs = Directory.GetFiles(mSourceRoot, filter
+      var sourceSpecs = Directory.GetFiles(mSourcePath, filter
         , SearchOption.AllDirectories);
       foreach (var sourceSpec in sourceSpecs)
       {
@@ -310,7 +318,7 @@ namespace LJCCreateFileChangesLib5
 
         // Create the targetSpec using the mTargetRoot and adding the folders and
         // file name using the sourceSpec starting after the sourceCodeLineFolder.
-        var targetSpec = GetToSpec(mTargetRoot, sourceSpec, sourceCodeLineFolder!
+        var targetSpec = GetToSpec(mTargetPath, sourceSpec, sourceCodeLineFolder!
           , out string codePath);
 
         // Skips common unpromoted folders and folders in AlwaysSkipFolders.txt.
@@ -319,11 +327,22 @@ namespace LJCCreateFileChangesLib5
           continue;
         }
 
-        //if (IsSkipFile(targetSpec)
-        //  || HasExtraDots(targetSpec, filter))
-        if (IsSkipFile(targetSpec))
+        if (!IncludeMissingTargetFolders
+          && IsSkipFile(targetSpec))
         {
-          // ToDo: Delete target skipped files?
+          if (File.Exists(targetSpec))
+          {
+            Console.WriteLine();
+            var text = $"Are you sure you want to delete file:";
+            Console.WriteLine(text);
+            Console.Write($"{targetSpec}? ");
+            var key = Console.ReadKey();
+            var ch = (char)key.KeyChar;
+            if ("Yy".Contains(ch))
+            {
+              File.Delete(targetSpec);
+            }
+          }
           continue;
         }
 
@@ -344,12 +363,12 @@ namespace LJCCreateFileChangesLib5
     private void DeleteTargetNoSourceFiles(string filter)
     {
       // Get the target folder from end of a path.
-      var targetCodeLineFolder = FinalFolder(mTargetRoot);
+      var targetCodeLineFolder = FinalFolder(mTargetPath);
       LJC.CheckArgument(targetCodeLineFolder, nameof(targetCodeLineFolder));
       var filterPath = GetFilterPath(ref filter);
 
       // Get all target files by filter.
-      var targetSpecs = Directory.GetFiles(mTargetRoot, filter
+      var targetSpecs = Directory.GetFiles(mTargetPath, filter
         , SearchOption.AllDirectories);
       foreach (var targetSpec in targetSpecs)
       {
@@ -362,7 +381,7 @@ namespace LJCCreateFileChangesLib5
 
         // Create the sourceSpec using the sourceRoot and adding the folders and
         // file name using the targetSpec starting after the targetCodeLineFolder.
-        var sourceSpec = GetToSpec(mSourceRoot, targetSpec, targetCodeLineFolder!
+        var sourceSpec = GetToSpec(mSourcePath, targetSpec, targetCodeLineFolder!
           , out string _);
         if (!File.Exists(sourceSpec))
         {
@@ -394,27 +413,40 @@ namespace LJCCreateFileChangesLib5
     // Skips common unpromoted folders/files and missing target folders.
     private bool Skip(string targetSpec, string codePath)
     {
-      var retValue = false;
+      var retSkip = false;
 
       LJC.CheckArgument(targetSpec, nameof(targetSpec));
 
       var targetPath = Path.GetDirectoryName(targetSpec);
 
       // Always skip listed folders.
-      // ToDo: Delete target skipped folders?
-      if (HasLine(mAlwaysSkipFolders, codePath))
+      if (!IncludeMissingTargetFolders
+        && HasSkipFolder(mAlwaysSkipFolders, codePath))
       {
-        retValue = true;
+        if (Directory.Exists(targetPath))
+        {
+          Console.WriteLine();
+          var text = $"Are you sure you want to delete folder:";
+          Console.WriteLine(text);
+          Console.Write($"{targetPath}? ");
+          var key = Console.ReadKey();
+          var ch = (char)key.KeyChar;
+          if ("Yy".Contains(ch))
+          {
+            Directory.Delete(targetPath, true);
+          }
+        }
+        retSkip = true;
       }
 
       // Skip common unpromoted folders/files.
-      if (!retValue
-        && (targetPath!.Contains("\\.vs")
-        || targetPath.Contains("\\obj\\")))
+      if (!retSkip
+        && (targetPath!.Contains(@"\.vs")
+        || targetPath.Contains(@"\obj\")))
       {
-        retValue = true;
+        retSkip = true;
       }
-      if (!retValue)
+      if (!retSkip)
       {
         var finalFolder = FinalFolder(targetPath!);
         if (LJC.HasText(finalFolder))
@@ -427,25 +459,25 @@ namespace LJCCreateFileChangesLib5
           };
           if (skipFolders.Contains(finalFolder))
           {
-            retValue = true;
+            retSkip = true;
           }
         }
       }
 
       // Skip updates to target folders that do not exist.
-      if (!retValue
+      if (!retSkip
         && !IncludeMissingTargetFolders
         && !Directory.Exists(targetPath))
       {
-        if (!retValue
+        if (!retSkip
           && !HasLine(mMissingFolders, codePath))
         {
           mMissingFolders.Add($"{codePath}");
         }
         // *** Next Statement *** Add
-        retValue = true;
+        retSkip = true;
       }
-      return retValue;
+      return retSkip;
     }
     #endregion
 
@@ -473,8 +505,8 @@ namespace LJCCreateFileChangesLib5
     private readonly List<string> mChangeCommands;
     private readonly string mChangesFilespec;
     private readonly List<string> mMissingFolders;
-    private readonly string mSourceRoot;
-    private readonly string mTargetRoot;
+    private readonly string mSourcePath;
+    private readonly string mTargetPath;
     #endregion
   }
 }
