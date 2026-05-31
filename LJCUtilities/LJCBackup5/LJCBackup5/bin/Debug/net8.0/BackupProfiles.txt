@@ -5,6 +5,7 @@ TargetRoot, C:\Users\Les\Documents\Visual Studio 2022
 TargetCodeline, LJCProjects
 ChangesFilespec, LJCProjects\ChangesLJCProjects.txt
 SkipFoldersFilespec, LJCProjects\SkipFoldersLJCProjects.txt
+SkipSubfolders, .vs|obj|Release
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
 IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
 SkipFiles, ChangesLJCProjects.txt|BackupLog.txt|MissingFolders.txt
@@ -16,6 +17,7 @@ SourceCodeline, LJCProjectsDev
 TargetRoot, F:\My Data\Visual Studio 2022
 TargetCodeline, LJCProjectsDevBackup
 ChangesFilespec, LJCProjectsDevBackup\ChangesLJCProjects.txt
+SkipSubfolders, .vs|obj|Release
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
 IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
 IncludeMissingTargetFolders, true
@@ -28,6 +30,7 @@ SourceCodeline, LJCProjectsDev
 TargetRoot, E:\OldComputer\Visual Studio 2022
 TargetCodeline, LJCProjectsDevBackup
 ChangesFilespec, LJCProjectsDevBackup\ChangesLJCProjects.txt
+SkipSubfolders, .vs|obj|Release
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
 IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
 IncludeMissingTargetFolders, true

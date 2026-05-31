@@ -146,6 +146,14 @@ namespace LJCBackupCommonLib5
                   }
                   break;
 
+                case "skipsubfolders":
+                  var skipSubfolders = value.Split("|");
+                  foreach (var skipSubfolder in skipSubfolders)
+                  {
+                    profile.SkipSubfolders.Add($@"\{skipSubfolder.Trim()}\");
+                  }
+                  break;
+
                 case "skipfoldersfilespec":
                   profile.SkipFoldersFilespec = value;
                   break;

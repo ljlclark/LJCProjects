@@ -29,6 +29,7 @@ namespace LJCBackupCommonLib5
       Name = "";
       SkipFiles = [];
       SkipFoldersFilespec = "";
+      SkipSubfolders = [];
       SourceCodeline = "";
       SourceRoot = "";
       TargetCodeline = "";
@@ -97,6 +98,11 @@ namespace LJCBackupCommonLib5
     /// <include file="Doc/LJCBackupProfile.xml"
     ///  path="members/SkipFiles/*"/>
     public List<string> SkipFiles { get; set; }
+
+    // Gets or sets the skipped subfolders.
+    /// <include file="Doc/LJCBackupProfile.xml"
+    ///  path="members/SkipSubfolders/*"/>
+    public List<string> SkipSubfolders { get; set; }
 
     // Gets or sets the skipped folder file.
     /// <include file="Doc/LJCBackupProfile.xml"

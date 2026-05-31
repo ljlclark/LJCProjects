@@ -145,7 +145,7 @@ namespace LJCCreateFileChangesLib5
     }
 
     // Check if skip folder file has a code path.
-    private static bool HasSkipFolder(List<string> folderList, string codePath)
+    private static bool HasSkipCodePath(List<string> folderList, string codePath)
     {
       bool retValue = false;
 
@@ -177,8 +177,10 @@ namespace LJCCreateFileChangesLib5
     {
       IncludeFilters = [];
       SkipFiles = [];
+      SkipSubfolders = [];
+      IncludeMissingTargetFolders = false;
 
-      mAlwaysSkipFolders = [];
+      mSkipCodePaths = [];
       mChangeCommands = [];
       mChangesFilespec = "";
       mMissingFolders = [];
@@ -196,19 +198,12 @@ namespace LJCCreateFileChangesLib5
       mTargetPath = targetPath;
       mChangesFilespec = changesFilespec;
 
-      SkipFolders = new List<string>()
+      var skipCodePathsSpec = "SkipCodePaths.txt";
+      if (File.Exists(skipCodePathsSpec))
       {
-        @"\.vs\",
-        @"\obj\",
-        @"\Release\",
-      };
-
-      var alwaysSkipFileSpec = "AlwaysSkipFolders.txt";
-      if (File.Exists(alwaysSkipFileSpec))
-      {
-        var lines = File.ReadAllLines(alwaysSkipFileSpec);
+        var lines = File.ReadAllLines(skipCodePathsSpec);
         //mAlwaysSkipFolders = lines.ToList();
-        mAlwaysSkipFolders = [.. lines];
+        mSkipCodePaths = [.. lines];
       }
     }
     #endregion
@@ -421,7 +416,7 @@ namespace LJCCreateFileChangesLib5
 
       // Always skip listed folders if not included.
       if (!IncludeMissingTargetFolders
-        && HasSkipFolder(mAlwaysSkipFolders, codePath))
+        && HasSkipCodePath(mSkipCodePaths, codePath))
       {
         if (Directory.Exists(targetPath))
         {
@@ -443,9 +438,9 @@ namespace LJCCreateFileChangesLib5
       // Skip common unpromoted folders.
       if (!retSkip)
       {
-        foreach (string skipFolder in SkipFolders)
+        foreach (string skipSubfolder in SkipSubfolders)
         {
-          if (targetSpec!.Contains(skipFolder))
+          if (targetSpec!.Contains(skipSubfolder))
           {
             retSkip = true;
             break;
@@ -458,8 +453,8 @@ namespace LJCCreateFileChangesLib5
         && !IncludeMissingTargetFolders
         && !Directory.Exists(targetPath))
       {
-        if (!retSkip
-          && !HasLine(mMissingFolders, codePath))
+        // If not a skip codePath.
+        if (!HasLine(mMissingFolders, codePath))
         {
           mMissingFolders.Add($"{codePath}");
         }
@@ -483,8 +478,8 @@ namespace LJCCreateFileChangesLib5
 
     // Gets or sets the skip folder list.
     /// <include file='Doc/LJCCreateFileChanges.xml'
-    ///  path='items/SkipFolders/*'/>
-    public List<string> SkipFolders { get; set; }
+    ///  path='items/SkipSubfolders/*'/>
+    public List<string> SkipSubfolders { get; set; }
 
     // Gets or sets the include missing target folders flag.
     /// <include file='Doc/LJCCreateFileChanges.xml'
@@ -494,10 +489,10 @@ namespace LJCCreateFileChangesLib5
 
     #region Class Data
 
-    private readonly List<string> mAlwaysSkipFolders;
     private readonly List<string> mChangeCommands;
     private readonly string mChangesFilespec;
     private readonly List<string> mMissingFolders;
+    private readonly List<string> mSkipCodePaths;
     private readonly string mSourcePath;
     private readonly string mTargetPath;
     #endregion

@@ -65,6 +65,7 @@ namespace LJCBackup5
       {
         IncludeFilters = profile.IncludeFilters,
         SkipFiles = profile.SkipFiles,
+        SkipSubfolders = profile.SkipSubfolders,
         IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
       };
       createChanges.Run();
