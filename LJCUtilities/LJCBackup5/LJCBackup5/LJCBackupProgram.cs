@@ -26,16 +26,25 @@ namespace LJCBackup5
     {
       var profilesFileSpec = "BackupProfiles.txt";
       var profiles = new LJCBackupProfiles(profilesFileSpec);
-      ShowSelections(profilesFileSpec, profiles);
 
-      var selection = SelectOption(profiles);
-      if (selection >= 0
-        && selection <= profiles.Count)
+      while (true)
       {
-        var profile = CreateChanges(profiles, selection);
-        ViewProposedChanges(profile);
-        ApplyChanges(profile);
-        Console.WriteLine();
+        ShowSelections(profilesFileSpec, profiles);
+        var selection = SelectOption(profiles);
+        if (selection >= 0
+          && selection <= profiles.Count)
+        {
+          var profile = CreateChanges(profiles, selection);
+          ViewProposedChanges(profile);
+          ApplyChanges(profile);
+          Console.WriteLine();
+          Console.WriteLine();
+        }
+        else
+        {
+          Console.WriteLine();
+          break;
+        }
       }
     }
 
