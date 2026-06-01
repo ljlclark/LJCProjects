@@ -31,10 +31,10 @@ namespace LJCBackup5
       {
         ShowSelections(profilesFileSpec, profiles);
         var selection = SelectOption(profiles);
-        if (selection >= 0
+        if (selection >= 1
           && selection <= profiles.Count)
         {
-          var profile = CreateChanges(profiles, selection);
+          var profile = CreateChanges(profiles, selection - 1);
           ViewProposedChanges(profile);
           ApplyChanges(profile);
           Console.WriteLine();
@@ -130,7 +130,8 @@ namespace LJCBackup5
     {
       var retValue = -1;
 
-      Console.Write("Select Option: ");
+      var prompt = "Select Option: ";
+      Console.Write(prompt);
 
       var count = 0;
       if (LJC.HasListItems(profiles))
@@ -141,32 +142,42 @@ namespace LJCBackup5
       var success = false;
       while (!success)
       {
-        var key = Console.ReadKey();
-        var ch = (char)key.KeyChar;
-        if ("Xx".Contains(ch))
+        var value = Console.ReadLine();
+
+        // Get the profile selection value.
+        var selection = 0;
+        if (LJC.HasText(value))
         {
-          success = true;
+          value = value.Trim();
+          if ("Xx".Contains(value))
+          {
+            success = true;
+          }
+          else
+          {
+            if (false == int.TryParse(value, out selection))
+            {
+              success = true;
+            }
+          }
         }
 
+        // Check if the profile is available.
         if (!success)
         {
           if (!exitOnly)
           {
-            if (ch >= '0'
-              && ch <= '9')
+            if (selection >= 1
+              && selection <= count)
             {
-              var selection = (int)ch - 48;
-              if (selection <= count - 1)
+              if (LJC.HasListItems(profiles))
               {
-                if (LJC.HasListItems(profiles))
+                var profile = profiles[selection];
+                if (profile != null
+                  && IsAvailable(profile))
                 {
-                  var profile = profiles[selection];
-                  if (profile != null
-                    && IsAvailable(profile))
-                  {
-                    success = true;
-                    retValue = selection;
-                  }
+                  success = true;
+                  retValue = selection;
                 }
               }
             }
@@ -174,7 +185,17 @@ namespace LJCBackup5
 
           if (!success)
           {
-            Console.Write("\b");
+            if (LJC.HasText(value))
+            {
+              // Clear an invalid selection.
+              var left = prompt.Length + value.Length;
+              var backspaces = new string('\b', value.Length);
+              var spaces = new string(' ', value.Length);
+              Console.SetCursorPosition(left, Console.CursorTop - 1);
+              Console.Write(backspaces);
+              Console.Write(spaces);
+              Console.Write(backspaces);
+            }
           }
         }
       }
@@ -200,7 +221,7 @@ namespace LJCBackup5
           var profile = profiles[index];
 
           var available = AvailableText(profile);
-          Console.WriteLine($"{index} - {profile.Name} {available}");
+          Console.WriteLine($"{index + 1} - {profile.Name} {available}");
         }
         Console.WriteLine("X - Exit");
       }
