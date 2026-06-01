@@ -172,7 +172,7 @@ namespace LJCBackup5
             {
               if (LJC.HasListItems(profiles))
               {
-                var profile = profiles[selection];
+                var profile = profiles[selection - 1];
                 if (profile != null
                   && IsAvailable(profile))
                 {
