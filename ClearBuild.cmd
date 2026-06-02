@@ -1,0 +1,58 @@
+echo Copyright (c) Lester J. Clark and Contributors.
+echo Licensed under the MIT License.
+rem ClearBuild.cmd
+del Build.txt
+
+rem CoreAssemblies
+call CoreAssemblies\LJCDataDetail\ClearDataDetail.cmd ClearAll
+call CoreAssemblies\LJCDataAccess\ClearDataAccess.cmd ClearAll
+call CoreAssemblies\LJCDataAccessConfig\ClearDataAccessConfig.cmd ClearAll
+call CoreAssemblies\LJCDataDetail\ClearDataDetail.cmd ClearAll
+call CoreAssemblies\LJCDBClientLib\ClearDBClientLib.cmd ClearAll
+call CoreAssemblies\LJCDBClientSQLLib\ClearDBClientSQLLib.cmd ClearAll
+call CoreAssemblies\LJCDBDataAccess\ClearDBDataAccess.cmd ClearAll
+call CoreAssemblies\LJCDBMessage\ClearDBMessage.cmd ClearAll
+call CoreAssemblies\LJCDBServiceHosts\ClearDBServiceHosts.cmd ClearAll
+call CoreAssemblies\LJCDBServiceLib\ClearDBServiceLib.cmd ClearAll
+call CoreAssemblies\LJCDBViewControls\ClearDBViewControls.cmd ClearAll
+call CoreAssemblies\LJCDBViewDAL\ClearDBViewDAL.cmd ClearAll
+call CoreAssemblies\LJCGridDataLib\ClearGridDataLib.cmd ClearAll
+call CoreAssemblies\LJCLibraries\ClearLibraries.cmd ClearAll
+call CoreAssemblies\LJCNetCommon\ClearNetCommon.cmd ClearAll
+call CoreAssemblies\LJCPagination\ClearPagination.cmd ClearAll
+call CoreAssemblies\LJCTextDataReader\ClearTextDataReader.cmd ClearAll
+
+rem CoreTestApps
+call CoreTestApps\LJCDataAccessTest\ClearDataAccessTest.cmd ClearAll
+call CoreTestApps\LJCDataManagerTest\ClearDataManagerTest.cmd ClearAll
+call CoreTestApps\LJCNetCommonTest\ClearNetCommonTest.cmd ClearAll
+
+rem CoreUtilities
+call CoreUtilities\LJCAddressParserLib\ClearAddressParserLib.cmd ClearAll
+call CoreUtilities\LJCBackupWatcherHosts\ClearBackupWatherHosts.cmd ClearAll
+call CoreUtilities\LJCBackupWatcherLib\ClearBackupWatcherLib.cmd ClearAl
+call CoreUtilities\LJCCodeLineCounter\ClearCodeLineCounter.cmd ClearAll
+call CoreUtilities\LJCGenDoc\ClearGenDoc.cmd ClearAll
+call CoreUtilities\LJCCreateFileChanges\ClearCreateFileChanges.cmd ClearAll
+call CoreUtilities\LJCDocGroupEditor\ClearDocGroupEditor.cmd ClearAll
+call CoreUtilities\LJCGenDoc\ClearGenDoc.cmd ClearAll
+call CoreUtilities\LJCExecuteScript\ClearExecuteScript.cmd ClearAll
+call CoreUtilities\LJCGenDocEdit\ClearGenDocEdit.cmd ClearAll
+call CoreUtilities\LJCGenText\ClearGenText.cmd ClearAll
+call CoreUtilities\LJCGenText\ClearGenTextData.cmd ClearAll
+call CoreUtilities\LJCSQLUtilLib\ClearSQLUtilLib.cmd ClearAll
+call CoreUtilities\LJCViewBuilder\ClearViewBuilder.cmd ClearAll
+call CoreUtilities\LJCViewEditor\ClearViewEditor.cmd ClearAll
+
+rem SampleApps
+call SampleApps\CVRManager\ClearCVRManager.cmd ClearAll
+call SampleApps\Genealogy\ClearGenealogy.cmd ClearAll
+call SampleApps\LJCAppManager\ClearAppManager.cmd ClearAll
+call SampleApps\LJCDataTransform\ClearDataTransform.cmd ClearAll
+call SampleApps\LJCDocAppManager\ClearDocAppManager.cmd ClearAll
+call SampleApps\LJCFacilityManager\ClearFacilityManager.cmd ClearAll
+call SampleApps\LJCFacilityManagerSetup\ClearFacilityManagerSetup.cmd ClearAll
+call SampleApps\LJCRegionManager\ClearRegionManager.cmd ClearAll
+call SampleApps\LJCSales\ClearSalesManager.cmd ClearAll
+call SampleApps\LJCTextInvasion\ClearTextInvasion.cmd ClearAll
+call SampleApps\LJCUnitMeasure\ClearUnitMeasure.cmd ClearAll

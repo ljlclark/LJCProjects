@@ -143,7 +143,24 @@ namespace LJCBackupChangesLib5
               if (File.Exists(changeSpec))
               {
                 File.Delete(changeSpec);
-                File.AppendAllText(log, $"del {changeSpec}\r\n");
+                File.AppendAllText(log, $"del /q {changeSpec}\r\n");
+              }
+              break;
+
+            case "deletefolder":
+              if (Directory.Exists(changeSpec))
+              {
+                Console.WriteLine();
+                var text = $"Are you sure you want to delete folder:";
+                Console.WriteLine(text);
+                Console.Write($"{targetPath}? ");
+                var key = Console.ReadKey();
+                var ch = (char)key.KeyChar;
+                if ("Yy".Contains(ch))
+                {
+                  Directory.Delete(targetPath, true);
+                  File.AppendAllText(log, $"rmdir /s /q {changeSpec}\r\n");
+                }
               }
               break;
 

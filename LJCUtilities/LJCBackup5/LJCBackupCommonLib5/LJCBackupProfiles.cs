@@ -47,6 +47,10 @@ namespace LJCBackupCommonLib5
       text = $@"{property}, LJCProjects\SkipFoldersLJCProjects.txt";
       values.Add(text);
 
+      property = "SkipSubFolders";
+      text = $"{property}, .vs|obj|Release";
+      values.Add(text);
+
       property = "IncludeFilters";
       text = $"{property}, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config";
       values.Add(text);
@@ -138,6 +142,10 @@ namespace LJCBackupCommonLib5
                   }
                   break;
 
+                case "skipcodepathspec":
+                  profile.SkipCodePathspec = value;
+                  break;
+
                 case "skipfiles":
                   var skipFiles = value.Split("|");
                   foreach (var skipFile in skipFiles)
@@ -152,10 +160,6 @@ namespace LJCBackupCommonLib5
                   {
                     profile.SkipSubfolders.Add($@"\{skipSubfolder.Trim()}\");
                   }
-                  break;
-
-                case "skipfoldersfilespec":
-                  profile.SkipFoldersFilespec = value;
                   break;
 
                 case "sourcecodeline":

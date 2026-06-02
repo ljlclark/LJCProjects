@@ -73,6 +73,7 @@ namespace LJCBackup5
         , profile.TargetPath, profile.ChangesFilespec)
       {
         IncludeFilters = profile.IncludeFilters,
+        SkipCodePathspec = profile.SkipCodePathspec,
         SkipFiles = profile.SkipFiles,
         SkipSubfolders = profile.SkipSubfolders,
         IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,

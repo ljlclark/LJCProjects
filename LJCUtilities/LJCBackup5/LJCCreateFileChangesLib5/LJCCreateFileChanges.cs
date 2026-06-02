@@ -180,6 +180,7 @@ namespace LJCCreateFileChangesLib5
       SkipSubfolders = [];
       IncludeMissingTargetFolders = false;
 
+      mSkipCodePathspec = "";
       mSkipCodePaths = [];
       mChangeCommands = [];
       mChangesFilespec = "";
@@ -197,18 +198,10 @@ namespace LJCCreateFileChangesLib5
       mSourcePath = sourcePath;
       mTargetPath = targetPath;
       mChangesFilespec = changesFilespec;
-
-      var skipCodePathsSpec = "SkipCodePaths.txt";
-      if (File.Exists(skipCodePathsSpec))
-      {
-        var lines = File.ReadAllLines(skipCodePathsSpec);
-        //mAlwaysSkipFolders = lines.ToList();
-        mSkipCodePaths = [.. lines];
-      }
     }
     #endregion
 
-    #region Methods
+    #region Public Methods
 
     // Runs the create "Changes" file process.
     /// <include file='Doc/LJCCreateFileChanges.xml'
@@ -217,11 +210,111 @@ namespace LJCCreateFileChangesLib5
     {
       foreach (var filter in IncludeFilters)
       {
-        DeleteTargetNoSourceFiles(filter);
-        CopyMissingOrChangedFiles(filter);
+        DeleteTargetNoSource(filter);
+        CopyMissingOrChanged(filter);
       }
 
-      // Write the changes file.
+      WriteChanges();
+      WriteMissingFolders();
+    }
+
+    // Creates a "Copy" FileChange command for missing or changed files.
+    /// <include file='Doc/LJCCreateFileChanges.xml'
+    ///  path='items/CopyMissingOrChanged/*'/>
+    public void CopyMissingOrChanged(string filter)
+    {
+      // Get the source folder from end of a path.
+      var sourceCodeLineFolder = FinalFolder(mSourcePath);
+      LJC.CheckArgument(sourceCodeLineFolder, nameof(sourceCodeLineFolder));
+
+      var filterPath = GetFilterPath(ref filter);
+
+      var sourceSpecs = Directory.GetFiles(mSourcePath, filter
+        , SearchOption.AllDirectories);
+      foreach (var sourceSpec in sourceSpecs)
+      {
+        // If filter has path, skip file that does not end with the filter path.
+        if (LJC.HasText(filterPath)
+          && !HasFilterPath(sourceSpec, filterPath))
+        {
+          continue;
+        }
+
+        // Create the targetSpec using the mTargetRoot and adding the folders and
+        // file name using the sourceSpec starting after the sourceCodeLineFolder.
+        var targetSpec = GetToSpec(mTargetPath, sourceSpec, sourceCodeLineFolder!
+          , out string codePath);
+
+        // Skips common unpromoted folders and folders in AlwaysSkipFolders.txt.
+        if (Skip(targetSpec, codePath))
+        {
+          continue;
+        }
+
+        if (!IncludeMissingTargetFolders
+          && IsSkipFile(targetSpec))
+        {
+          if (File.Exists(targetSpec))
+          {
+            var fileChange = new LJCFileChange("Delete", targetSpec);
+            AppendChangeFile(fileChange);
+          }
+          continue;
+        }
+
+        if (File.Exists(targetSpec))
+        {
+          CopyChangedFiles(sourceSpec, targetSpec);
+        }
+        else
+        {
+          // Copy missing file.
+          var fileChange = new LJCFileChange("Copy", sourceSpec);
+          AppendChangeFile(fileChange);
+        }
+      }
+    }
+
+    // Creates a "Delete" FileChange command for target files not in the source.
+    /// <include file='Doc/LJCCreateFileChanges.xml'
+    ///  path='items/DeleteTargetNoSource/*'/>
+    public void DeleteTargetNoSource(string filter)
+    {
+      // Get the target folder from end of a path.
+      var targetCodeLineFolder = FinalFolder(mTargetPath);
+      LJC.CheckArgument(targetCodeLineFolder, nameof(targetCodeLineFolder));
+      var filterPath = GetFilterPath(ref filter);
+
+      // Get all target files by filter.
+      var targetSpecs = Directory.GetFiles(mTargetPath, filter
+        , SearchOption.AllDirectories);
+      foreach (var targetSpec in targetSpecs)
+      {
+        // If filter has path, skip file that does not end with the filter path.
+        if (LJC.HasText(filterPath)
+          && !HasFilterPath(targetSpec, filterPath))
+        {
+          continue;
+        }
+
+        // Create the sourceSpec using the sourceRoot and adding the folders and
+        // file name using the targetSpec starting after the targetCodeLineFolder.
+        var sourceSpec = GetToSpec(mSourcePath, targetSpec, targetCodeLineFolder!
+          , out string _);
+        if (!File.Exists(sourceSpec))
+        {
+          // Target file is not found in source path.
+          var fileChange = new LJCFileChange("Delete", targetSpec);
+          AppendChangeFile(fileChange);
+        }
+      }
+    }
+
+    // Write the changes file.
+    /// <include file='Doc/LJCCreateFileChanges.xml'
+    ///  path='items/WriteChanges/*'/>
+    public void WriteChanges()
+    {
       LJCNetFile.CreateFolder(mChangesFilespec);
       if (File.Exists(mChangesFilespec))
       {
@@ -229,17 +322,25 @@ namespace LJCCreateFileChangesLib5
       }
       var text = string.Join("\r\n", mChangeCommands);
       File.AppendAllText(mChangesFilespec, text);
+    }
 
-      // Write the missing folders file.
+    // Write the missing folders file.
+    /// <include file='Doc/LJCCreateFileChanges.xml'
+    ///  path='items/WriteMissingFolders/*'/>
+    public void WriteMissingFolders()
+    {
       var missingFolders = "MissingFolders.txt";
       if (File.Exists(missingFolders))
       {
         File.Delete(missingFolders);
       }
-      text = $"Target Folders missing in:\r\n{mTargetPath}\r\n\r\n";
+      var text = $"Target Folders missing in:\r\n{mTargetPath}\r\n\r\n";
       text += string.Join("\r\n", mMissingFolders);
       File.AppendAllText(missingFolders, text);
     }
+    #endregion
+
+    #region Private Methods
 
     // Appends new FileChange commands to the ChangeFile.
     private bool AppendChangeFile(LJCFileChange fileChange)
@@ -298,95 +399,6 @@ namespace LJCCreateFileChangesLib5
       }
     }
 
-    // Creates a "Copy" FileChange command for missing or changed files.
-    private void CopyMissingOrChangedFiles(string filter)
-    {
-      // Get the source folder from end of a path.
-      var sourceCodeLineFolder = FinalFolder(mSourcePath);
-      LJC.CheckArgument(sourceCodeLineFolder, nameof(sourceCodeLineFolder));
-
-      var filterPath = GetFilterPath(ref filter);
-
-      var sourceSpecs = Directory.GetFiles(mSourcePath, filter
-        , SearchOption.AllDirectories);
-      foreach (var sourceSpec in sourceSpecs)
-      {
-        // If filter has path, skip file that does not end with the filter path.
-        if (LJC.HasText(filterPath)
-          && !HasFilterPath(sourceSpec, filterPath))
-        {
-          continue;
-        }
-
-        // Create the targetSpec using the mTargetRoot and adding the folders and
-        // file name using the sourceSpec starting after the sourceCodeLineFolder.
-        var targetSpec = GetToSpec(mTargetPath, sourceSpec, sourceCodeLineFolder!
-          , out string codePath);
-
-        // Skips common unpromoted folders and folders in AlwaysSkipFolders.txt.
-        if (Skip(targetSpec, codePath))
-        {
-          continue;
-        }
-
-        if (!IncludeMissingTargetFolders
-          && IsSkipFile(targetSpec))
-        {
-          if (File.Exists(targetSpec))
-          {
-            // *** Changed ***
-            var fileChange = new LJCFileChange("Delete", targetSpec);
-            AppendChangeFile(fileChange);
-          }
-          continue;
-        }
-
-        if (File.Exists(targetSpec))
-        {
-          CopyChangedFiles(sourceSpec, targetSpec);
-        }
-        else
-        {
-          // Copy missing file.
-          var fileChange = new LJCFileChange("Copy", sourceSpec);
-          AppendChangeFile(fileChange);
-        }
-      }
-    }
-
-    // Creates a "Delete" FileChange command for target files not in the source.
-    private void DeleteTargetNoSourceFiles(string filter)
-    {
-      // Get the target folder from end of a path.
-      var targetCodeLineFolder = FinalFolder(mTargetPath);
-      LJC.CheckArgument(targetCodeLineFolder, nameof(targetCodeLineFolder));
-      var filterPath = GetFilterPath(ref filter);
-
-      // Get all target files by filter.
-      var targetSpecs = Directory.GetFiles(mTargetPath, filter
-        , SearchOption.AllDirectories);
-      foreach (var targetSpec in targetSpecs)
-      {
-        // If filter has path, skip file that does not end with the filter path.
-        if (LJC.HasText(filterPath)
-          && !HasFilterPath(targetSpec, filterPath))
-        {
-          continue;
-        }
-
-        // Create the sourceSpec using the sourceRoot and adding the folders and
-        // file name using the targetSpec starting after the targetCodeLineFolder.
-        var sourceSpec = GetToSpec(mSourcePath, targetSpec, targetCodeLineFolder!
-          , out string _);
-        if (!File.Exists(sourceSpec))
-        {
-          // Target file is not found in source path.
-          var fileChange = new LJCFileChange("Delete", targetSpec);
-          AppendChangeFile(fileChange);
-        }
-      }
-    }
-
     // Checks if file is a skiped file.
     private bool IsSkipFile(string targetSpec)
     {
@@ -414,23 +426,14 @@ namespace LJCCreateFileChangesLib5
 
       var targetPath = Path.GetDirectoryName(targetSpec);
 
-      // Always skip listed folders if not included.
+      // Skip listed code path folders if not included.
       if (!IncludeMissingTargetFolders
         && HasSkipCodePath(mSkipCodePaths, codePath))
       {
         if (Directory.Exists(targetPath))
         {
-          //  Console.WriteLine();
-          //  var text = $"Are you sure you want to delete folder:";
-          var text = $"Delete folder {targetPath}.";
-          Console.WriteLine(text);
-          //  Console.Write($"{targetPath}? ");
-          //  var key = Console.ReadKey();
-          //  var ch = (char)key.KeyChar;
-          //  if ("Yy".Contains(ch))
-          //  {
-          //    Directory.Delete(targetPath, true);
-          //  }
+          var fileChange = new LJCFileChange("DeleteFolder", targetPath);
+          AppendChangeFile(fileChange);
         }
         retSkip = true;
       }
@@ -471,12 +474,34 @@ namespace LJCCreateFileChangesLib5
     ///  path='items/IncludeFilters/*'/>
     public List<string> IncludeFilters { get; set; }
 
+    // Gets or sets the skipped code path file.
+    /// <include file='Doc/LJCCreateFileChanges.xml'
+    ///  path='items/SkipCodePathspec/*'/>
+    public string SkipCodePathspec
+    {
+      get { return mSkipCodePathspec; }
+      set
+      {
+        if (LJC.HasText(value))
+        {
+          mSkipCodePathspec = value.Trim();
+          if (File.Exists(mSkipCodePathspec))
+          {
+            var lines = File.ReadAllLines(mSkipCodePathspec);
+            //mSkipCodePaths = lines.ToList();
+            mSkipCodePaths = [.. lines];
+          }
+        }
+      }
+    }
+    private string mSkipCodePathspec;
+
     // Gets or sets the skip file list.
     /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/SkipFiles/*'/>
     public List<string> SkipFiles { get; set; }
 
-    // Gets or sets the skip folder list.
+    // Gets or sets the skip common folder list.
     /// <include file='Doc/LJCCreateFileChanges.xml'
     ///  path='items/SkipSubfolders/*'/>
     public List<string> SkipSubfolders { get; set; }
@@ -489,10 +514,11 @@ namespace LJCCreateFileChangesLib5
 
     #region Class Data
 
+    private List<string> mSkipCodePaths;
+
     private readonly List<string> mChangeCommands;
     private readonly string mChangesFilespec;
     private readonly List<string> mMissingFolders;
-    private readonly List<string> mSkipCodePaths;
     private readonly string mSourcePath;
     private readonly string mTargetPath;
     #endregion

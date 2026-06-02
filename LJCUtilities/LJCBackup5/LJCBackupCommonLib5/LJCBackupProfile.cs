@@ -27,8 +27,8 @@ namespace LJCBackupCommonLib5
       ChangesFilespec = "";
       IncludeFilters = [];
       Name = "";
+      SkipCodePathspec = "";
       SkipFiles = [];
-      SkipFoldersFilespec = "";
       SkipSubfolders = [];
       SourceCodeline = "";
       SourceRoot = "";
@@ -94,6 +94,11 @@ namespace LJCBackupCommonLib5
     ///  path="members/Name/*"/>
     public string Name { get; set; }
 
+    // Gets or sets the skipped code path file.
+    /// <include file="Doc/LJCBackupProfile.xml"
+    ///  path="members/SkipCodePathspec/*"/>
+    public string SkipCodePathspec { get; set; }
+
     // Gets or sets the skipped files.
     /// <include file="Doc/LJCBackupProfile.xml"
     ///  path="members/SkipFiles/*"/>
@@ -103,11 +108,6 @@ namespace LJCBackupCommonLib5
     /// <include file="Doc/LJCBackupProfile.xml"
     ///  path="members/SkipSubfolders/*"/>
     public List<string> SkipSubfolders { get; set; }
-
-    // Gets or sets the skipped folder file.
-    /// <include file="Doc/LJCBackupProfile.xml"
-    ///  path="members/SkipFoldersFilespec/*"/>
-    public string SkipFoldersFilespec { get; set; }
 
     // Gets or sets the source codeline value.
     /// <include file="Doc/LJCBackupProfile.xml"
