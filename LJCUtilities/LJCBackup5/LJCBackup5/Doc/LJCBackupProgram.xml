@@ -19,6 +19,35 @@
       <para>
         The program entry class.
       </para>
+      <para>
+        The backup program contains several steps. These are described here at a
+        high level.
+      </para>
+      <para>
+        First the program creates a "Changes" file. This contains "Copy" commands
+        with the names of the files that will be copied to the backup target. These
+        are files that were added or changed in the backup source by the developer.
+      </para>
+      <para>
+        It also contains "Delete" commands with the names of the files that will be
+        deleted from the backup target. These are files that are still in the backup
+        target but have been delete in the backup source by the developer.
+      </para>
+      <para>
+        The developer can modify the "Changes" file before the next step. This
+        may include actions such as removing deletes that the developer wants to
+        verify before the actual backup is performed.
+      </para>
+      <para>
+        The backup program then reads and applies the change commands contained in
+        the "Changes" file.
+      </para>
+      <para>
+        Note:
+        The LJC Code Backup program does not contain code "Merge" functionality. A
+        code "Merge" may be performed manually by the developer before promoting
+        code to the version control codeline.
+      </para>
       <para>-- Assembly Level Remarks </para>
       <para>
         The Code Backup program is part of the
@@ -31,6 +60,17 @@
         &lt;div class='Text'&gt;LJCBackupCommonLib5&lt;/div&gt;
         &lt;div class='Text'&gt;LJCCreateFileChangesLib5&lt;/div&gt;
         &lt;div class='Text'&gt;LJCNetCommon&lt;/div&gt;
+      </para>
+      <para>
+        The LJC Code Backup program is not a generalized backup program but is
+        designed specifically for backing up or promoting source code and other
+        related text files. It is not designed for backup of binary files.
+      </para>
+      <para>
+        When a developer is making changes to source code, it is challenging to
+        keep track of which files were changed when it comes time to promote or
+        backup the code. This is the task that the LJC Code Backup program is
+        designed to automate.
       </para>
     </remarks>
   </LJCBackupProgram>

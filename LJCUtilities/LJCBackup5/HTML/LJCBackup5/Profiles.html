@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and Contributors -->
+<!-- Licensed under the MIT license. -->
+<!-- LJCBackupProgram.html -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>LJCBackupProgram</title>
+  <meta charset='utf-8' />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width" initial-scale=1 />
+  <link rel='stylesheet' type='text/css' href='../../../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div id='Header'>
+      <div id='Title'>Code Backup Profiles</div>
+    </div>
+    <br />
+    <div class='Text'>
+      A code backup action is defined by a backup profile. These profiles are
+      defined in the file "BackupProfiles.txt". This file must be in the same
+      folder as the backup program.
+    </div>
+    <br />
+    <div class='Text'>
+      Backup profiles are defined by Name and Value pairs separated with a comma.
+    </div>
+    <br />
+    <div class='Text'>
+      The location from which the code will be retrieved is called the "Source"
+      and the location to which the code will be copied is called the "Target".
+    </div>
+    <br />
+    <div class='Text'>
+      A backup profile starts with the name "Backup" followed by a comma and the
+      profile name.
+    </div>
+    <br />
+    <div class='Text'>
+      The "SourceRoot" name is set to the "Source" root path. For example:
+      "C:\Users\User\Documents\Visual Studio 2022".
+    </div>
+    <br />
+    <div class='Text'>
+      The "SourceCodeline" is set to the "Source" codeline folder name. For
+      example: "LJCProjectsDev".
+    </div>
+    <br />
+    <div class='Text'>
+      The "TargetRoot" name is set to the "Target" root path. For example:
+      "C:\Users\User\Documents\Visual Studio 2022".
+    </div>
+    <br />
+    <div class='Text'>
+      The "TargetCodeline" is set to the "Target" codeline folder name. For
+      example: "LJCProjects".
+    </div>
+    <br />
+    <div class='Text'>
+      ChangesFileSpec is set to the name of the changes file.
+    </div>
+    <br />
+    <div class='Text'>
+      IncludeFilters is set to a list of file patterns that identify the files
+      that will be backed up. The file patterns are separated with a vertical bar
+      (pipe) character. For example: *.cs|*.sln<br />
+      The set of files that match each file pattern will be retrieved and
+      processed in the order that they are defined in the IncludeFilters value.
+      This will be reflected in the order of commands in the "Changes" file.
+    </div>
+    <br />
+    <div class='Text'>
+      SkipFiles is set to a list of specific files that will be excluded from the
+      backup. For example: Changes.txt|BackupLog.txt|MissingFolders.txt
+    </div>
+    <br />
+    <div class='Text'>
+      SkipSubFolders is set to common folders that are to be excluded from the
+      backup. For example: .vs|obj
+    </div>
+    <br />
+    <div class='Text'>
+      SkipCodePathspec is set to the filespec of the file containing code paths
+      that are to be skipped in the backup.<br />
+      This is useful where not all folders from a codeline are to be promoted.
+      <br />
+      A code path is the file path that appears after the codeline folder name.
+      For example: in C:\Users\User\Codelines\Codeline\SolutionName\ProjectName
+      Root = C:\Users\user\Codelines
+      Codeline = Codeline
+      Codepath = SolutionName\ProjectName<br />
+      In this case if the file defined in SkipCodePathspec contains the folder
+      "SolutionName\ProjectName", it would not be backed up.
+    </div>
+    <br />
+    <div class='Text'>
+      IncludeMissingTargetFolders is set to "true" or if missing, is assumed
+      "false". If "true" then any missing target folders are created and backed
+      up even if they are in the SkipCodePathspec file.
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+    <br />
+  </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+LJC Code Backup
+
+    The LJC Code Backup program is not a generalized backup program but is
+    designed specifically for backing up or promoting source code and other
+    related text files. It is not designed for backup of binary files.
+
+    When a developer is making changes to source code, it is challenging to
+    keep track of which files were changed when it comes time to promote or
+    backup the code. This is the task that the LJC Code Backup program is
+    designed to automate.
+
+    The backup program contains several steps. These are described here at a
+    high level.
+
+    First the program creates a "Changes" file. This contains "Copy" commands
+    with the names of the files that will be copied to the backup target. These
+    are files that were added or changed in the backup source by the developer.
+    
+    It also contains "Delete" commands with the names of the files that will be
+    deleted from the backup target. These are files that are still in the backup
+    target but have been delete in the backup source by the developer.
+
+    The developer can modify the "Changes" file before the next step. This
+    may include actions such as removing deletes that the developer wants to
+    verify before the actual backup is performed.
+
+    The backup program then reads and applies the change commands contained in
+    the "Changes" file.
+
+    Note:
+    The LJC Code Backup program does not contain code "Merge" functionality. A
+    code "Merge" may be performed manually by the developer before promoting
+    code to the version control codeline.
+
+    A multi-developer environment requires a version of the following steps when
+    making a code change. These steps require a shared version control code line
+    which is managed by a Version Control System (VCS).
+
+    1. Verify all previous developer changes have been tested and promoted
+       correctly.
+    2. Refresh the developers version control codeline to get the current code.
+    3. Use the VCS to "Checkout" the files to be modified.
+    3. Refresh the developers development codeline to set the starting point.
+    4. Code and "Dev Test" the development changes.
+    5. Refresh the developers version control codeline to get any changes that
+       happened while the developer was coding.
+    6. Copy the development code changes to the local version control codeline.
+    7. Integration test the local version control line.
+    8. Use the VCS to update the shared codeline.
+
+Code Lines
+
+    Related source code is usually kept under a parent folder. This
+    documentation refers to this folder as the "Codeline". A codeline may
+    contain code related to an application, framework, programming language or
+    other classification.
+    
+    Code lines are organized under a common or "root" folder. For example:
+    C:\Users\User\Codelines. If one is using Microsoft Visual Studio, the
+    standard location for source code is something like:
+    C:\Users\User\Documents\Visual Studio 2022\Projects. Where "Projects" is the
+    "Codeline" and C:\Users\User\Documents\Visual Studio 2022 is the codeline
+    "root".
+
+    On a developers machine, it is common for there to be two codelines for each
+    code base; one that is under version control and one for current
+    development. Changes are made in the development codeline and, when
+    complete, are promoted to the version control codeline. The version control
+    codeline is then promoted to the version control system (VCS) shared
+    codeline using the VCS software.
+
+    The LJC C# codelines are: version control codeline, "LJCProjects" and
+    development codeline, "LJCProjectsDev". Both of these codelines are in the
+    root C:\Users\User\Documents\Visual Studio 2022.
+
+Code Backup Profiles
+
+    A code backup action is defined by a backup profile. These profiles are
+    defined in the file "BackupProfiles.txt". This file must be in the same
+    folder as the backup program.
+
+    Backup profiles are defined by Name and Value pairs separated with a comma.
+
+    The location from which the code will be retrieved is called the "Source"
+    and the location to which the code will be copied is called the "Target".
+
+    A backup profile starts with the name "Backup" followed by a comma and the
+    profile name.
+
+    The "SourceRoot" name is set to the "Source" root path. For example:
+    "C:\Users\User\Documents\Visual Studio 2022".
+
+    The "SourceCodeline" is set to the "Source" codeline folder name. For
+    example: "LJCProjectsDev".
+
+    The "TargetRoot" name is set to the "Target" root path. For example:
+    "C:\Users\User\Documents\Visual Studio 2022".
+
+    The "TargetCodeline" is set to the "Target" codeline folder name. For
+    example: "LJCProjects".
+
+    ChangesFileSpec is set to the name of the changes file.
+
+    IncludeFilters is set to a list of file patterns that identify the files
+    that will be backed up. The file patterns are separated with a vertical bar
+    (pipe) character. For example: *.cs|*.sln<br />
+    The set of files that match each file pattern will be retrieved and
+    processed in the order that they are defined in the IncludeFilters value.
+    This will be reflected in the order of commands in the "Changes" file.
+
+    SkipFiles is set to a list of specific files that will be excluded from the
+    backup. For example: Changes.txt|BackupLog.txt|MissingFolders.txt
+
+    SkipSubFolders is set to common folders that are to be excluded from the
+    backup. For example: .vs|obj
+
+    SkipCodePathspec is set to the filespec of the file containing code paths
+    that are to be skipped in the backup.<br />
+    This is useful where not all folders from a codeline are to be promoted.
+    <br />
+    A code path is the file path that appears after the codeline folder name.
+    For example: in C:\Users\User\Codelines\Codeline\SolutionName\ProjectName
+    Root = C:\Users\user\Codelines
+    Codeline = Codeline
+    Codepath = SolutionName\ProjectName<br />
+    In this case if the file defined in SkipCodePathspec contains the folder
+    "SolutionName\ProjectName", it would not be backed up.
+
+    IncludeMissingTargetFolders is set to "true" or if missing, is assumed
+    "false". If "true" then any missing target folders are created and backed
+    up even if they are in the SkipCodePathspec file.
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- Copyright (c) Lester J. Clark and Contributors -->
+<!-- Licensed under the MIT license. -->
+<!-- LJCBackupProgram.html -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>LJCBackupProgram</title>
+  <meta charset='utf-8' />
+  <meta name="author" content="Lester J. Clark" />
+  <meta name="viewport" content="width=device-width" initial-scale=1 />
+  <link rel='stylesheet' type='text/css' href='../../../../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../../../../CSS/Syntax.css' />
+</head>
+<body>
+  <div class="page">
+    <br />
+    <div id='Header'>
+      <div id='Title'>Code Backup Program Steps</div>
+    </div>
+    <br />
+    <div class='Text'>
+      The backup program contains several steps. These are described here at a
+      high level.
+    </div>
+    <br />
+    <div class='Text'>
+      First the program creates a "Changes" file. This contains "Copy" commands
+      with the names of the files that will be copied to the backup target. These
+      are files that were added or changed in the backup source by the developer.
+    </div>
+    <br />
+    <div class='Text'>
+      It also contains "Delete" commands with the names of the files that will be
+      deleted from the backup target. These are files that are still in the backup
+      target but have been delete in the backup source by the developer.
+    </div>
+    <br />
+    <div class='Text'>
+      The developer can modify the "Changes" file before the next step. This
+      may include actions such as removing deletes that the developer wants to
+      verify before the actual backup is performed.
+    </div>
+    <br />
+    <div class='Text'>
+      The backup program then reads and applies the change commands contained in
+      the "Changes" file.
+    </div>
+    <br />
+    <div class='Text'>
+      Note:<br />
+      The LJC Code Backup program does not contain code "Merge" functionality. A
+      code "Merge" may be performed manually by the developer before promoting
+      code to the version control codeline.
+    </div>
+    <br />
+    <div class="SmallText">
+      Copyright &copy Lester J. Clark and Contributors.<br />
+      Licensed under the MIT License.
+    </div>
+    <br />
+  </div>
+</body>
+</html>
