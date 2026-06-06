@@ -60,27 +60,27 @@
           <tr class='CodeTable'>
             <td class='CodeTable'>
               <pre style='margin-left: 2px;'>
-  using LJCBackupChangesLib5;
+  <span class='keyWord'>using</span> LJCBackupChangesLib5;
 
-  // Creates the Target Filespec.
-  private static void CreateTargetFilespec()
+  <span class='comment'>// Creates the Target Filespec.</span>
+  <span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> CreateTargetFilespec()
   {
-    var sourceRoot = @"C:\Users\User\SourceRoot";
-    var sourceCodeline = "CodeLineDev";
-    var sourceFilespec = $@"{sourceRoot}\{sourceCodeline}\File.cs";
-    var targetRoot = @"C:\Users\User\TargetRoot";
-    var targetCodeline = "CodeLine";
-    var targetPath = $@"{targetRoot}\{targetCodeline}\";
+    <span class='commonType'>var</span> sourceRoot = <span class='name'>@"C:\Users\User\SourceRoot"</span>;
+    <span class='commonType'>var</span> sourceCodeline = <span class='name'>"CodeLineDev"</span>;
+    <span class='commonType'>var</span> sourceFilespec = <span class='name'>$@"{sourceRoot}\{sourceCodeline}\File.cs"</span>;
+    <span class='commonType'>var</span> targetRoot = <span class='name'>@"C:\Users\User\TargetRoot"</span>;
+    <span class='commonType'>var</span> targetCodeline = <span class='name'>"CodeLine"</span>;
+    <span class='commonType'>var</span> targetPath = <span class='name'>$@"{targetRoot}\{targetCodeline}\"</span>;
           
-    // Test Method
-    // Source file must exist.
-    var targetFileSpec = LJCBackupChanges.CreateTargetFilespec(
+    <span class='comment'>// Test Method</span>
+    <span class='comment'>// Source file must exist.</span>
+    <span class='commonType'>var</span> targetFileSpec = LJCBackupChanges.CreateTargetFilespec(
       sourceFilespec, sourceCodeline, targetPath);
 
-    var result = targetFilespec;
+    <span class='commonType'>var</span> result = targetFilespec;
             
-    // result
-    // C:\Users\User\TargetRoot\CodeLine\File.cs
+    <span class='comment'>// result</span>
+    <span class='comment'>// C:\Users\User\TargetRoot\CodeLine\File.cs</span>
   }</pre>
             </td>
           </tr>

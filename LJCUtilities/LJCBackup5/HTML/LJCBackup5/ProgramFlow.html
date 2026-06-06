@@ -17,42 +17,37 @@
     <div id='Header'>
       <div id='Title'>Code Backup Program Steps</div>
     </div>
-    <br />
     <div class='Text'>
-      The backup program contains several steps. These are described here at a
-      high level.
+      <p>
+        The backup program contains several steps. These are described here at a
+        high level.
+      </p>
+      <p>
+        First the program creates a "Changes" file. This contains "Copy" commands
+        with the names of the files that will be copied to the backup target. These
+        are files that were added or changed in the backup source by the developer.
+      </p>
+      <p>
+        It also contains "Delete" commands with the names of the files that will be
+        deleted from the backup target. These are files that are still in the backup
+        target but have been delete in the backup source by the developer.
+      </p>
+      <p>
+        The developer can modify the "Changes" file before the next step. This
+        may include actions such as removing deletes that the developer wants to
+        verify before the actual backup is performed.
+      </p>
+      <p>
+        The backup program then reads and applies the change commands contained in
+        the "Changes" file.
+      </p>
+      <p>
+        Note:<br />
+        The LJC Code Backup program does not contain code "Merge" functionality. A
+        code "Merge" may be performed manually by the developer before promoting
+        code to the version control codeline.
+      </p>
     </div>
-    <br />
-    <div class='Text'>
-      First the program creates a "Changes" file. This contains "Copy" commands
-      with the names of the files that will be copied to the backup target. These
-      are files that were added or changed in the backup source by the developer.
-    </div>
-    <br />
-    <div class='Text'>
-      It also contains "Delete" commands with the names of the files that will be
-      deleted from the backup target. These are files that are still in the backup
-      target but have been delete in the backup source by the developer.
-    </div>
-    <br />
-    <div class='Text'>
-      The developer can modify the "Changes" file before the next step. This
-      may include actions such as removing deletes that the developer wants to
-      verify before the actual backup is performed.
-    </div>
-    <br />
-    <div class='Text'>
-      The backup program then reads and applies the change commands contained in
-      the "Changes" file.
-    </div>
-    <br />
-    <div class='Text'>
-      Note:<br />
-      The LJC Code Backup program does not contain code "Merge" functionality. A
-      code "Merge" may be performed manually by the developer before promoting
-      code to the version control codeline.
-    </div>
-    <br />
     <div class="SmallText">
       Copyright &copy Lester J. Clark and Contributors.<br />
       Licensed under the MIT License.

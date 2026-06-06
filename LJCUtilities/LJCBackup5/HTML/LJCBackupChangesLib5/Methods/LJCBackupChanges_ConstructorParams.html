@@ -60,36 +60,35 @@
           <tr class='CodeTable'>
             <td class='CodeTable'>
               <pre style='margin-left: 2px;'>
-  using LJCBackupChangesLib5;
-  using LJCBackupCommonLib5;
+  <span class='keyWord'>using</span> LJCBackupChangesLib5;
+  <span class='keyWord'>using</span> LJCBackupCommonLib5;
 
-  // Initializes an object instance with the supplied values.
-  private static void ConstructorParam()
+  <span class='comment'>// Initializes an object instance with the supplied values.</span>
+  <span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> ConstructorParam()
   {
-    var profilesFilespec = "BackupProfiles.txt";
-    var profiles = new LJCBackupProfiles(profilesFilespec);
-    var profile = profiles[0];
-    // or
-    profile = profiles["LocalLJCProjects"];
-    // or
-    profile = profiles.LJCRetrieve("LocalLJCProjects");
+    <span class='commonType'>var</span> profilesFilespec = <span class='name'>"BackupProfiles.txt"</span>;
+    <span class='commonType'>var</span> profiles = <span class='keyWord'>new</span> <span class='userType'>LJCBackupProfiles</span>(profilesFilespec);
+    <span class='commonType'>var</span> profile = profiles[0];
+    <span class='comment'>// or</span>
+    profile = profiles[<span class='name'>"LocalLJCProjects"</span>];
+    <span class='comment'>// or</span>
+    profile = profiles.LJCRetrieve(<span class='name'>"LocalLJCProjects"</span>);
 
-    string? result = null;
-    if (profile != null)
+    string? result = <span class='keyWord'>null</span>;
+    <span class='keyWord'>if</span> (profile != null)
     {
-      // Test Method
-      var backupChanges = new LJCBackupChanges(profile.SourceCodeline
-        , profile.ChangesFilespec);
-      if (backupChanges != null)
+      <span class='comment'>// Test Method</span>
+      <span class='commonType'>var</span> backupChanges = <span class='keyWord'>new</span> <span class='userType'>LJCBackupChanges</span>(profile.SourceCodeline
+      , profile.ChangesFilespec);
+      <span class='keyWord'>if</span> (backupChanges != null)
       {
         result = profile.SourceCodeline;
       }
     }
-          
-    // result
-    // LJCProjectsDev
-  }
-</pre>
+
+    <span class='comment'>// result</span>
+    <span class='comment'>// LJCProjectsDev</span>
+  }</pre>
             </td>
           </tr>
         </tbody>

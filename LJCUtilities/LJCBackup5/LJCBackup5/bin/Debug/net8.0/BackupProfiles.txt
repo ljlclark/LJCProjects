@@ -3,7 +3,7 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
 SourceCodeline, LJCProjectsDev
 TargetRoot, C:\Users\Les\Documents\Visual Studio 2022
 TargetCodeline, LJCProjects
-ChangesFilespec, LJCProjects\Changes.txt
+ChangesFilespec, LocalLJCProjects\Changes.txt
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
 IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
 SkipFiles, ChangesLJCProjects.txt|BackupLog.txt|MissingFolders.txt
@@ -17,7 +17,7 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
 SourceCodeline, LJCProjectsDev
 TargetRoot, F:\My Data\Visual Studio 2022
 TargetCodeline, LJCProjectsDevBackup
-ChangesFilespec, LJCProjectsDevBackup\Changes.txt
+ChangesFilespec, SegateLJCProjects\Changes.txt
 SkipSubfolders, .vs|obj|Release
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
 IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
@@ -30,7 +30,7 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
 SourceCodeline, LJCProjectsDev
 TargetRoot, E:\OldComputer\Visual Studio 2022
 TargetCodeline, LJCProjectsDevBackup
-ChangesFilespec, LJCProjectsDevBackup\Changes.txt
+ChangesFilespec, HPLJCProjects\Changes.txt
 SkipSubfolders, .vs|obj|Release
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
 IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
@@ -43,7 +43,7 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022\WebSitesDev\CodeDoc
 SourceCodeline, LJCCodeDoc
 TargetRoot, C:\Users\Les\Documents\Visual Studio 2022\WebPages
 TargetCodeline, LJCCodeDoc
-ChangesFilespec, LJCCodeDoc\Changes.txt
+ChangesFilespec, LocalLJCCodeDoc\Changes.txt
 SkipSubfolders, .vs
 IncludeFilters, *.html
 IncludeMissingTargetFolders, false
@@ -53,7 +53,7 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022\WebSitesDev\CodeDoc
 SourceCodeline, LJCDBDiagrams
 TargetRoot, C:\Users\Les\Documents\Visual Studio 2022\WebPages
 TargetCodeline, LJCDBDiagrams
-ChangesFilespec, LJCDBDiagrams\Changes.txt
+ChangesFilespec, LocalLJCDBDiagrams\Changes.txt
 SkipSubfolders, .vs
 IncludeFilters, *.html
 IncludeMissingTargetFolders, false
@@ -63,7 +63,7 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022\WebSitesDev\CodeDoc
 SourceCodeline, LJCJSCodeDoc
 TargetRoot, C:\Users\Les\Documents\Visual Studio 2022\WebPages
 TargetCodeline, LJCJSCodeDoc
-ChangesFilespec, LJCJSCodeDoc\Changes.txt
+ChangesFilespec, LocalLJCJSCodeDoc\Changes.txt
 SkipSubfolders, .vs
 IncludeFilters, *.html
 IncludeMissingTargetFolders, false
@@ -73,7 +73,7 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022\WebSitesDev\CodeDoc
 SourceCodeline, LJCPHPCodeDoc
 TargetRoot, C:\Users\Les\Documents\Visual Studio 2022\WebPages
 TargetCodeline, LJCPHPCodeDoc
-ChangesFilespec, LJCPHPCodeDoc\Changes.txt
+ChangesFilespec, LocalLJCPHPCodeDoc\Changes.txt
 SkipSubfolders, .vs
 IncludeFilters, *.html
 IncludeMissingTargetFolders, false
@@ -83,7 +83,7 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
 SourceCodeline, WebSitesDev
 TargetRoot, F:\My Data\Visual Studio 2022\WebSitesDevBackup
 TargetCodeline, CodeDoc
-ChangesFilespec, LJCCodeDoc\ChangesLJCCodeDoc.txt
+ChangesFilespec, SegateCodeDoc\Changes.txt
 SkipSubfolders, .vs
 IncludeFilters, *.html
 IncludeMissingTargetFolders, true
@@ -93,7 +93,7 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
 SourceCodeline, WebSitesDev
 TargetRoot, E:\OldComputer\Visual Studio 2022\WebSitesDevBackup
 TargetCodeline, CodeDoc
-ChangesFilespec, LJCCodeDoc\ChangesLJCCodeDoc.txt
+ChangesFilespec, HPCodeDoc\Changes.txt
 SkipSubfolders, .vs
 IncludeFilters, *.html
 IncludeMissingTargetFolders, true
@@ -103,7 +103,7 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
 SourceCodeline, LJCPHPProjectsDev
 TargetRoot, C:\Users\Les\Documents\Visual Studio 2022
 TargetCodeline, LJCPHPProjects
-ChangesFilespec, LJCPHPProjects\ChangesLJCPHPProjects.txt
+ChangesFilespec, LocalLJCPHPProjects\Changes.txt
 IncludeFilters, ReadMe*.txt|*.cmd|*.php|*.html|*.txt|Doc/*.xml
 IncludeMissingTargetFolders, false
 
@@ -112,7 +112,7 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
 SourceCodeline, LJCPHPProjectsDev
 TargetRoot, F:\Users\Les\Documents\Visual Studio 2022
 TargetCodeline, LJCPHPProjects
-ChangesFilespec, LJCPHPProjects\ChangesLJCPHPProjects.txt
+ChangesFilespec, SegateLJCPHPProjects\Changes.txt
 IncludeFilters, ReadMe*.txt|*.cmd|*.php|*.html|*.txt|Doc/*.xml
 IncludeMissingTargetFolders, false
 
@@ -121,6 +121,6 @@ SourceRoot, C:\Users\Les\Documents\Visual Studio 2022
 SourceCodeline, LJCPHPProjectsDev
 TargetRoot, E:\Users\Les\Documents\Visual Studio 2022
 TargetCodeline, LJCPHPProjects
-ChangesFilespec, LJCPHPProjects\ChangesLJCPHPProjects.txt
+ChangesFilespec, HPLJCPHPProjects\Changes.txt
 IncludeFilters, ReadMe*.txt|*.cmd|*.php|*.html|*.txt|Doc/*.xml
 IncludeMissingTargetFolders, false
