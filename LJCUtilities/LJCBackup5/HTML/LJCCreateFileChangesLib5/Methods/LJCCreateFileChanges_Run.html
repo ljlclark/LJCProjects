@@ -85,23 +85,23 @@
           <tr class='CodeTable'>
             <td class='CodeTable'>
               <pre style='margin-left: 2px;'>
-  using LJCBackupCommonLib5;
-  using LJCCreateFileChangesLib5;
+  <span class='keyWord'>using</span> LJCBackupCommonLib5;
+  <span class='keyWord'>using</span> LJCCreateFileChangesLib5;
 
-  // Runs the create "Changes" file process.
-  private static void Run()
+  <span class='comment'>// Runs the create "Changes" file process.</span>
+  <span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> Run()
   {
-    var profilesFilespec = "BackupProfiles.txt";
-    var profiles = new LJCBackupProfiles(profilesFilespec);
-    var profile = profiles[0];
-    // or
-    profile = profiles["LocalLJCProjects"];
-    // or
-    profile = profiles.LJCRetrieve("LocalLJCProjects");
+    <span class='commonType'>var</span> profilesFilespec = <span class='name'>"BackupProfiles.txt"</span>;
+    <span class='commonType'>var</span> profiles = <span class='keyWord'>new</span> <span class='userType'>LJCBackupProfiles</span>(profilesFilespec);
+    <span class='commonType'>var</span> profile = profiles[0];
+    <span class='comment'>// or</span>
+    profile = profiles[<span class='name'>"LocalLJCProjects"</span>];
+    <span class='comment'>// or</span>
+    profile = profiles.LJCRetrieve(<span class='name'>"LocalLJCProjects"</span>);
 
-    if (profile != null)
+    <span class='keyWord'>if</span> (profile != <span class='keyWord'>null</span>)
     {
-      var createChanges = new LJCCreateFileChanges(profile.SourcePath
+      <span class='commonType'>var</span> createChanges = <span class='keyWord'>new</span> <span class='userType'>LJCCreateFileChanges</span>(profile.SourcePath
         , profile.TargetPath, profile.ChangesFilespec)
       {
         IncludeFilters = profile.IncludeFilters,
@@ -109,9 +109,9 @@
         IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
       };
 
-      if (createChanges != null)
+      <span class='keyWord'>if</span> (createChanges != <span class='keyWord'>null</span>)
       {
-        // Test Method
+        <span class='comment'>// Test Method</span>
         createChanges.Run();
       }
     }
