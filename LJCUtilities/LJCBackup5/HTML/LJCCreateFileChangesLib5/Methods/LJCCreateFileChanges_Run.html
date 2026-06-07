@@ -55,27 +55,31 @@
     <div class="Text">
       Filespecs are retrieved for each IncludeFilter.
     </div>
-    <br />
     <div class="Text">
-      First, filespecs are retrieved from the Target codeline.<br />
-      A Source filespec is created based on the target filespec but in the
-      the source codeline.<br />
-      A "Delete" command is written to the "Changes" file to delete the
-      target file if there is no associated source file of that name.<br />
-      This keeps the folders synched.<br />
-      However, this behavior must be managed carefully to prevent losing code.
+      <p>
+        First, filespecs are retrieved from the Target codeline.<br />
+        A Source filespec is created based on the target filespec but in the
+        the source codeline.<br />
+        A "Delete" command is written to the "Changes" file to delete the
+        target file if there is no source file with the same name.<br />
+        This keeps the folders synched.<br />
+        However, this behavior must be managed carefully to prevent losing code.
+      </p>
+      <p>
+        Next, filespecs are retrieved from the Source codeline.<br />
+        A Target filespec is created based on the source filespec but in the
+        the target codeline.<br />
+        A "Copy" command is written to the "Changes" file to add the
+        source file if there is no associated target file of that name.<br />
+        A "Copy" command is also written to the "Changes" file to update the
+        target file if it is different from the source file.
+      </p>
+      <p>
+        The developer can modify the "Changes" file before the next step. This
+        may include actions such as removing deletes that the developer wants to
+        verify before the actual backup is performed.
+      </p>
     </div>
-    <br />
-    <div class="Text">
-      Next, filespecs are retrieved from the Source codeline.<br />
-      A Target filespec is created based on the source filespec but in the
-      the target codeline.<br />
-      A "Copy" command is written to the "Changes" file to add the
-      source file if there is no associated target file of that name.<br />
-      A "Copy" command is also written to the "Changes" file to update the
-      target file if it is different from the source file.
-    </div>
-    <br />
     <div class='Text'>Example</div>
     <br />
     <div class='SectionContainer'>
@@ -84,7 +88,7 @@
           <tr class='CodeTable'><th class='CodeTable'>C#</th></tr>
           <tr class='CodeTable'>
             <td class='CodeTable'>
-              <pre style='margin-left: 2px;'>
+  <pre style='margin-left: 2px;'>
   <span class='keyWord'>using</span> LJCBackupCommonLib5;
   <span class='keyWord'>using</span> LJCCreateFileChangesLib5;
 

@@ -48,6 +48,25 @@
     <div class='Text'>
       Applies the change commands.
     </div>
+    <div class='Text'>Remarks</div>
+    <div class="Text">
+      <p>
+        First the program creates a "Changes" file. This contains "Copy"
+        commands with the names of the files that will be copied to the backup
+        target. These are files that were added or changed in the backup source
+        by the developer.
+      </p>
+      <p>
+        It also contains "Delete" commands with the names of the files that will
+        be deleted from the backup target. These are files that are still in the
+        backup target but have been delete in the backup source by the developer.
+      </p>
+      <p>
+        The developer can modify the "Changes" file before the next step. This
+        may include actions such as removing deletes that the developer wants to
+        verify before the actual backup is performed.
+      </p>
+    </div>
     <br />
     <div class='Text'>Example</div>
     <br />
@@ -58,39 +77,39 @@
           <tr class='CodeTable'>
             <td class='CodeTable'>
               <pre style='margin-left: 2px;'>
-  <span class='keyWord'>using</span> LJCBackupChangesLib5;
-  <span class='keyWord'>using</span> LJCBackupCommonLib5;
+              <span class='keyWord'>using</span> LJCBackupChangesLib5;
+              <span class='keyWord'>using</span> LJCBackupCommonLib5;
 
-  <span class='comment'>// Applies the change commands.</span>
-  <span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> Run()
+              <span class='comment'>// Applies the change commands.</span>
+              <span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> Run()
   {
-    <span class='commonType'>var</span> profilesFilespec = <span class='name'>"BackupProfiles.txt"</span>;
-    <span class='commonType'>var</span> profiles = <span class='keyWord'>new</span> <span class='userType'>LJCBackupProfiles</span>(profilesFilespec);
-    <span class='commonType'>var</span> profile = profiles[0];
-    <span class='comment'>// or</span>
+              <span class='commonType'>var</span> profilesFilespec = <span class='name'>"BackupProfiles.txt"</span>;
+              <span class='commonType'>var</span> profiles = <span class='keyWord'>new</span> <span class='userType'>LJCBackupProfiles</span>(profilesFilespec);
+              <span class='commonType'>var</span> profile = profiles[0];
+              <span class='comment'>// or</span>
     profile = profiles[<span class='name'>"LocalLJCProjects"</span>];
-    <span class='comment'>// or</span>
+              <span class='comment'>// or</span>
     profile = profiles.LJCRetrieve(<span class='name'>"LocalLJCProjects"</span>);
 
-    <span class='keyWord'>if</span> (profile != null)
+              <span class='keyWord'>if</span> (profile != null)
     {
-      <span class='comment'>// Changes File must exist.</span>
-      <span class='keyWord'>if</span> (!File.Exists(profile.ChangesFilespec))
+              <span class='comment'>// Changes File must exist.</span>
+              <span class='keyWord'>if</span> (!File.Exists(profile.ChangesFilespec))
       {
         LJCNetFile.CreateFolder(profile.ChangesFilespec);
         File.WriteAllText(profile.ChangesFilespec, <span class='name'>""</span>);
       }
 
-      <span class='commonType'>var</span> backupChanges = <span class='keyWord'>new</span> <span class='userType'>LJCBackupChanges</span>(profile.SourceCodeline
+              <span class='commonType'>var</span> backupChanges = <span class='keyWord'>new</span> <span class='userType'>LJCBackupChanges</span>(profile.SourceCodeline
         , profile.ChangesFilespec);
 
-      <span class='comment'>// Test Method</span>
+              <span class='comment'>// Test Method</span>
       backupChanges.Run(profile.TargetPath);
 
-      <span class='commonType'>var</span> result = backupChanges.TargetPath;
+              <span class='commonType'>var</span> result = backupChanges.TargetPath;
 
-      <span class='comment'>// result</span>
-      <span class='comment'>// C:\Users\User\Documents\Visual Studio 2022\LJCProjects</span>
+              <span class='comment'>// result</span>
+              <span class='comment'>// C:\Users\User\Documents\Visual Studio 2022\LJCProjects</span>
     }
   }</pre>
             </td>
