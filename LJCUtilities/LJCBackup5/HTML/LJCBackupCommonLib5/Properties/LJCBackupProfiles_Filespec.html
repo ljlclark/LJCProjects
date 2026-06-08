@@ -50,8 +50,6 @@
     <br />
     <div class='Text'>Example</div>
     <br />
-    <div class='Text'>_Para_</div>
-    <br />
     <div class='SectionContainer'>
       <table class='CodeTable'>
         <tbody>
@@ -59,20 +57,20 @@
           <tr class='CodeTable'>
             <td class='CodeTable'>
               <pre style='margin-left: 2px;'>
-  using LJCBakupCommonLib5;
+  <span class='keyWord'>using</span> LJCBakupCommonLib5;
         
-  private static void Filespec()
+  <span class='modifier'>private</span> <span class='modifier'>static</span> <span class='commonType'>void</span> Filespec()
   {
-    var profiles = new LJCBackupProfiles();
-    var profilesFilespec = "BackupProfiles.txt";
+    <span class='commonType'>var</span> profiles = <span class='keyWord'>new</span> <span class='userType'>LJCBackupProfiles</span>();
+    <span class='commonType'>var</span> profilesFilespec = "BackupProfiles.txt";
           
-    // Test Method
+    <span class='comment'>// Test Method</span>
     profiles.Filespec = profilesFilespec;
           
-    var result = profiles.HasItems();
+    <span class='commonType'>var</span> result = profiles.HasItems();
           
-    // result
-    // true
+    <span class='comment'>// result</span>
+    <span class='comment'>// true</span>
   }</pre>
             </td>
           </tr>

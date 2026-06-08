@@ -87,7 +87,9 @@
         , profile.TargetRoot, profile.ChangesFilespec)
       {
         IncludeFilters = profile.IncludeFilters,
+        SkipCodePathspec = profile.SkipCodePathspec,
         SkipFiles = profile.SkipFiles,
+        SkipSubfolders = profile.SkipSubfolders,
         IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
       };
       <span class='keyWord'>if</span> (createChanges != <span class='keyWord'>null</span>)
