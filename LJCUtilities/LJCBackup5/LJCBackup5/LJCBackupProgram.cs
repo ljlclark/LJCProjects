@@ -5,6 +5,7 @@ using LJCBackupChangesLib5;
 using LJCBackupCommonLib5;
 using LJCCreateFileChangesLib5;
 using LJCNetCommon5;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // Contains classes for code backup.
 // Assembly level XML comments are in the first class XML.
@@ -30,21 +31,40 @@ namespace LJCBackup5
       while (true)
       {
         ShowSelections(profilesFileSpec, profiles);
+
         var selection = SelectOption(profiles);
-        if (selection >= 1
-          && selection <= profiles.Count)
+        if (0 == selection)
         {
-          var profile = CreateChanges(profiles, selection - 1);
-          ViewProposedChanges(profile);
-          ApplyChanges(profile);
-          Console.WriteLine();
-          Console.WriteLine();
-        }
-        else
-        {
-          Console.WriteLine();
           break;
         }
+
+        var profile = CreateChanges(profiles, selection - 1);
+        ViewProposedChanges(profile);
+        ApplyChanges(profile);
+      }
+    }
+
+    // Select to apply changes.
+    private static void ApplyChanges(LJCBackupProfile profile)
+    {
+      Console.WriteLine();
+      var prompt = "Apply Changes Y|N: ";
+      Console.Write(prompt);
+
+      var value = LJC.KeyOption(prompt, "YyNn");
+      if ("Yy".Contains(value))
+      {
+        Console.WriteLine();
+        Console.Write("Applying Changes...");
+        var sourceCodeline = profile.SourceCodeline;
+        var changesFilespec = profile.ChangesFilespec;
+        var backupChanges = new LJCBackupChanges(sourceCodeline
+          , changesFilespec);
+        backupChanges.Run(profile.TargetPath);
+        Console.WriteLine();
+        Console.Write("Changes Applied");
+        Console.WriteLine();
+        ViewLog();
       }
     }
 
@@ -79,38 +99,8 @@ namespace LJCBackup5
         IncludeMissingTargetFolders = profile.IncludeMissingTargetFolders,
       };
       createChanges.Run();
+      Console.WriteLine();
       return retValue;
-    }
-
-    // Select to apply changes.
-    private static void ApplyChanges(LJCBackupProfile profile)
-    {
-      Console.WriteLine();
-      Console.WriteLine();
-      Console.Write("Apply Changes Y/(N): ");
-      var key = Console.ReadKey();
-      var ch = (char)key.KeyChar;
-      if ("Yy".Contains(ch))
-      {
-        Console.WriteLine();
-        Console.Write("Applying Changes...");
-        var sourceCodeline = profile.SourceCodeline;
-        var changesFilespec = profile.ChangesFilespec;
-        var backupChanges = new LJCBackupChanges(sourceCodeline
-          , changesFilespec);
-        backupChanges.Run(profile.TargetPath);
-        Console.WriteLine();
-        Console.Write("Changes Applied");
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.Write("View changes log (Y/(N): ");
-        key = Console.ReadKey();
-        ch = (char)key.KeyChar;
-        if ("Yy".Contains(ch))
-        {
-          LJCNetFile.ShellProgram("BackupLog.txt");
-        }
-      }
     }
 
     // Checks if TargetPath is found.
@@ -126,10 +116,9 @@ namespace LJCBackup5
     }
 
     // Gets the profile selection.
-    private static int SelectOption(LJCBackupProfiles? profiles
-      , bool exitOnly = false)
+    private static int SelectOption(LJCBackupProfiles? profiles)
     {
-      var retValue = -1;
+      var retValue = 0;
 
       var prompt = "Select Option: ";
       Console.Write(prompt);
@@ -140,65 +129,51 @@ namespace LJCBackup5
         count = profiles.Count;
       }
 
-      var success = false;
-      while (!success)
+      while (true)
       {
         var value = Console.ReadLine();
 
-        // Get the profile selection value.
-        var selection = 0;
-        if (LJC.HasText(value))
+        if (!LJC.HasText(value))
         {
-          value = value.Trim();
-          if ("Xx".Contains(value))
+          LJC.ClearReadLine(prompt, "");
+          continue;
+        }
+
+        var checkValue = value!.Trim();
+        if ("Xx".Contains(checkValue))
+        {
+          break;
+        }
+
+        // Get integer profile selection.
+        if (!int.TryParse(value, out int selection))
+        {
+          LJC.ClearReadLine(prompt, value);
+          continue;
+        }
+
+        // Invalid selection value.
+        if (selection < 1
+          || selection > count)
+        {
+          LJC.ClearReadLine(prompt, value);
+          continue;
+        }
+
+        // Get selection.
+        if (LJC.HasListItems(profiles))
+        {
+          var profile = profiles[selection - 1];
+          if (profile != null
+            && IsAvailable(profile))
           {
-            success = true;
-          }
-          else
-          {
-            if (false == int.TryParse(value, out selection))
-            {
-              success = true;
-            }
+            retValue = selection;
+            break;
           }
         }
 
-        // Check if the profile is available.
-        if (!success)
-        {
-          if (!exitOnly)
-          {
-            if (selection >= 1
-              && selection <= count)
-            {
-              if (LJC.HasListItems(profiles))
-              {
-                var profile = profiles[selection - 1];
-                if (profile != null
-                  && IsAvailable(profile))
-                {
-                  success = true;
-                  retValue = selection;
-                }
-              }
-            }
-          }
-
-          if (!success)
-          {
-            if (LJC.HasText(value))
-            {
-              // Clear an invalid selection.
-              var left = prompt.Length + value.Length;
-              var backspaces = new string('\b', value.Length);
-              var spaces = new string(' ', value.Length);
-              Console.SetCursorPosition(left, Console.CursorTop - 1);
-              Console.Write(backspaces);
-              Console.Write(spaces);
-              Console.Write(backspaces);
-            }
-          }
-        }
+        // Clear unavailable selection.
+        LJC.ClearReadLine(prompt, value);
       }
       return retValue;
     }
@@ -207,11 +182,11 @@ namespace LJCBackup5
     private static void ShowSelections(string profilesFileSpec
       , LJCBackupProfiles? profiles)
     {
+      Console.WriteLine();
       if (!LJC.HasListItems(profiles))
       {
         Console.WriteLine($"No profiles were found in {profilesFileSpec}.");
         Console.WriteLine("X - Exit");
-        //SelectOption(null, true);
       }
 
       if (LJC.HasListItems(profiles))
@@ -228,18 +203,31 @@ namespace LJCBackup5
       }
     }
 
+    // Select to view the backup log.
+    private static void ViewLog()
+    {
+      Console.WriteLine();
+      var prompt = "View changes log (Y/(N): ";
+      Console.Write(prompt);
+
+      var value = LJC.KeyOption(prompt, "YyNn");
+      if ("Yy".Contains(value))
+      {
+        LJCNetFile.ShellProgram("BackupLog.txt");
+      }
+    }
+
     // Select to view proposed changes.
     private static void ViewProposedChanges(LJCBackupProfile profile)
     {
       Console.WriteLine();
-      Console.WriteLine();
-      Console.Write("View Proposed Changes Y/(N): ");
-      var key = Console.ReadKey();
-      var ch = (char)key.KeyChar;
-      if ("Yy".Contains(ch))
+      var prompt = "View Proposed Changes Y|N: ";
+      Console.Write(prompt);
+
+      var value = LJC.KeyOption(prompt, "YyNn");
+      if ("Yy".Contains(value))
       {
-        Console.WriteLine();
-        Console.Write($"File: {profile.ChangesFilespec}");
+        Console.WriteLine($"File: {profile.ChangesFilespec}");
         LJCNetFile.ShellProgram(profile.ChangesFilespec);
       }
     }

@@ -112,7 +112,8 @@ namespace LJCNetCommon5
 
         // If no programFileSpec, then arguments must contain only a
         // file specification.
-        if (null == programFileSpec)
+        //if (null == programFileSpec)
+        if (!LJC.HasText(programFileSpec))
         {
           if (!File.Exists(arguments))
           {

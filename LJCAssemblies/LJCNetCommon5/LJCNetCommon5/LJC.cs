@@ -416,6 +416,96 @@ namespace LJCNetCommon5
     }
     #endregion
 
+    #region Console Methods
+
+    /// <summary>Clears an invalid ReadKey() selection.</summary>
+    public static void ClearReadKey(string prompt, char value)
+    {
+      while (true)
+      {
+        if ("\r\t ".Contains(value))
+        {
+          var left = prompt.Length;
+          Console.SetCursorPosition(left, Console.CursorTop);
+          break;
+        }
+
+        if ("\b".Contains(value))
+        {
+          Console.Write(" ");
+          break;
+        }
+
+        Console.Write('\b');
+        Console.Write(' ');
+        Console.Write('\b');
+        break;
+      }
+    }
+
+    /// <summary>Clears an invalid ReadLine() selection.</summary>
+    public static void ClearReadLine(string prompt, string value)
+    {
+      var left = prompt.Length + value.Length;
+      var backspaces = new string('\b', value.Length);
+      var spaces = new string(' ', value.Length);
+      Console.SetCursorPosition(left, Console.CursorTop - 1);
+      Console.Write(backspaces);
+      Console.Write(spaces);
+      Console.Write(backspaces);
+    }
+
+    /// <summary>Get a console character option value.</summary>
+    public static char KeyOption(string prompt, string options)
+    {
+      char retOption;
+
+      // Get valid key.
+      while (true)
+      {
+        while (true)
+        {
+          var info = Console.ReadKey();
+          retOption = info.KeyChar;
+          if (options.Contains(retOption))
+          {
+            break;
+          }
+          ClearReadKey(prompt, retOption);
+        }
+
+        // Wait for ENTER key.
+        var success = false;
+        while (true)
+        {
+          var info = Console.ReadKey();
+          var keyChar = info.KeyChar;
+          if ('\b' == keyChar)
+          {
+            Console.Write(' ');
+            Console.Write('\b');
+            break;
+          }
+          if ('\r' == keyChar)
+          {
+            success = true;
+            break;
+          }
+          else
+          {
+            ClearReadKey(prompt, keyChar);
+          }
+        }
+        if (success)
+        {
+          break;
+        }
+      }
+      Console.WriteLine();
+      return retOption;
+    }
+    #endregion
+
     #region Text Conversion Methods
 
     // ** Base64 Bytes and Text
