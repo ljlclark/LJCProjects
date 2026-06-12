@@ -169,6 +169,602 @@
     <returns>true if minimum; otherwise, false.</returns>
   </IsDbMinDate>
 
+  <!-- Object Value Methods -->
+  <GetBoolean>
+    <summary>
+      Gets a boolean value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The boolean value or false if the object is null.
+      Also returns false if the object is not type "bool".
+    </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a bool value from an object.
+        private static void GetBoolean()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          bool setup = true;
+          object obj = setup;
+
+          // Gets a short value from an object.
+          var result = NetCommon.GetBoolean(obj);
+          // result = True
+        }
+      </code>
+    </example>
+  </GetBoolean>
+  <GetByte>
+    <summary>
+      Gets a byte value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The byte value or the byte default if the object is null.
+      Also returns false if the object is not type "byte".
+    </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        // Gets a byte value from an object.
+        private static void GetByte()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          byte setup = Convert.ToByte('A');
+          object obj = setup;
+
+          // Gets a byte value from an object.
+          byte value = NetCommon.GetByte(obj);
+          var result = value.ToString();
+          // result = "65"
+        }
+      </code>
+    </example>
+  </GetByte>
+  <GetChar>
+    <summary>
+      Gets a character value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The char value or the char default if the object is null.
+      Also returns false if the object is not type "char".
+    </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        // Gets a char value from an object.
+        private static void GetChar()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          char setup = Convert.ToChar('A');
+          object obj = setup;
+
+          // Gets a byte value from an object.
+          char value = NetCommon.GetChar(obj);
+          var result = value.ToString();
+          // result = "A";
+        }
+      </code>
+    </example>
+  </GetChar>
+  <GetDateTime>
+    <summary>
+      Gets a DateTime value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The DateTime value or null if the object is null.
+      Also returns null if the object is not type "DateTime".
+    </returns>
+    <example>
+      <code>
+        // Gets a DateTime value from an object.
+        private static void GetDateTime()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          string setup = "2026/06/15 12:30:00 PM";
+          object obj = setup;
+
+          // Gets a decimal value from an object.
+          DateTime? returnValue = NetCommon.GetDateTime(obj);
+          if (returnValue != null)
+          {
+            DateTime value = (DateTime)returnValue;
+            var result = $"{value:yyyy/MM/dd HH:mm:ss tt}";
+            //result = value.ToString("yyyy/MM/dd HH:mm:ss tt");
+            // result = "2026/06/15 12:30:00 PM";
+          }
+        }
+      </code>
+    </example>
+  </GetDateTime>
+  <GetDecimal>
+    <summary>
+      Gets a decimal value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The decimal value or zero if the object is null.
+      Also returns zero if the object is not type "decimal", "long", "int"
+      or "short".
+    </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a decimal value from an object.
+        private static void GetDecimal()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          decimal setup = 3.14m;
+          object obj = setup;
+
+          // Gets a decimal value from an object.
+          decimal value = NetCommon.GetDecimal(obj);
+          // value = 3.14
+        }
+      </code>
+    </example>
+  </GetDecimal>
+  <GetDouble>
+    <summary>
+      Gets a double value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The double value or zero if the object is null.
+      Also returns zero if the object is not type "double", "decimal", "long"
+      , "int" or "short".
+    </returns>
+    <example>
+      <code>
+        // Gets a double value from an object.
+        private static void GetDouble()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          double setup = 3.14d;
+          object obj = setup;
+
+          // Gets a decimal value from an object.
+          double result = NetCommon.GetDouble(obj);
+          // result = 3.14;
+        }
+      </code>
+    </example>
+  </GetDouble>
+  <GetInt16>
+    <summary>
+      Gets a short value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The long value or zero if the object is null.
+      Also returns zero if the object is not type "short".
+    </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        // Gets a short value from an object.
+        private static void GetInt16()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          short setup = 3;
+          object obj = setup;
+
+          // Gets a short value from an object.
+          short value = NetCommon.GetInt16(obj);
+          // value = 3
+        }
+      </code>
+    </example>
+  </GetInt16>
+  <GetInt32>
+    <summary>
+      Gets an integer value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The integer value or zero if the object is null.
+      Also returns zero if the object is not type "int" or "short".
+    </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets an int value from an object.
+        private static void GetInt32()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          int setup = 3;
+          object obj = setup;
+
+          // Gets an int value from an object.
+          int value = NetCommon.GetInt32(obj);
+          // value = 3
+        }
+      </code>
+    </example>
+  </GetInt32>
+  <GetInt64>
+    <summary>
+      Gets a long value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The long value or zero if the object is null.
+      Also returns zero if the object is not type "long", "int" or "short".
+    </returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a long value from an object.
+        private static void GetInt64()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          long setup = 3;
+          object obj = setup;
+
+          // Gets a long value from an object.
+          long value = NetCommon.GetInt64(obj);
+          // value = 3
+        }
+      </code>
+    </example>
+  </GetInt64>
+  <GetObject>
+    <summary>
+      Gets an instantiated object value.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>The instantiated object.</returns>
+  </GetObject>
+  <GetSingle>
+    <summary>
+      Gets a float value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The single value or zero if the object is null.
+      Also returns zero if the object is not type "single", "long", "int"
+      or "short".
+    </returns>
+    <example>
+      <code>
+        // Gets a float (single) value from an object.
+        private static void GetSingle()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          float setup = 3.14f;
+          object obj = setup;
+
+          // Gets a decimal value from an object.
+          float result = NetCommon.GetSingle(obj);
+          result = 3.14;
+        }
+      </code>
+    </example>
+  </GetSingle>
+  <GetString>
+    <summary>
+      Gets a trimmed string value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>The trimmed string value or null if the object is null.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // Gets a trimmed string value from an object.
+        private static void GetString()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          string setup = "3";
+          object obj = setup;
+
+          // Gets a string value from an object.
+          string value = NetCommon.GetString(obj);
+          // value = "3"
+        }
+      </code>
+    </example>
+  </GetString>
+  <ToInt16>
+    <summary>
+      Gets a short from a text string.
+    </summary>
+    <param name="text">The text value.</param>
+  </ToInt16>
+  <ToInt32>
+    <summary>
+      Gets an int from a text string.
+    </summary>
+    <param name="text">The text value.</param>
+  </ToInt32>
+
+  <!-- Project Config Values Methods -->
+  <ConfigBool>
+    <summary>
+      Retrieves the Config bool value.
+    </summary>
+    <param name="key">The key value.</param>
+    <returns>The bool config value.</returns>
+    <remarks>
+      <para>
+        This uses the program config file which is the name of the program plus
+        the extension ".config".
+      </para>
+      <para>
+        // An example config file.&lt;br /&gt;
+        &lt;&lt;span class=&quot;ltgt&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;xml&lt;/span&gt;&lt;span
+        class=&quot;attrib&quot;&gt; version&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;1.0&lt;/span&gt;&quot;&lt;span
+        class=&quot;attrib&quot;&gt; encoding&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;utf-8&lt;/span&gt;&quot;&lt;span
+        class=&quot;ltgt&quot;&gt; ?&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad2&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;add&lt;/span&gt;&lt;span
+        class=&quot;attrib&quot;&gt; key&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;LocalDbDataAccess&lt;/span&gt;&quot;&lt;span
+        class=&quot;attrib&quot;&gt; value&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;true&lt;/span&gt;&quot;&lt;span
+        class=&quot;ltgt&quot;&gt; /&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;
+      </para>
+    </remarks>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // This returns true.
+        bool localDbAccess = LJCNetCommon.ConfigBool("LocalDbDataAccess");
+      </code>
+    </example>
+  </ConfigBool>
+  <ConfigColor>
+    <summary>
+      Retrieves the Config Color value.
+    </summary>
+    <param name="key">The key value.</param>
+    <param name="color">The default color value.</param>
+    <returns>The Color setting value.</returns>
+    <remarks>
+      <para>
+        This uses the program config file which is the name of the program plus
+        the extension ".config".&lt;br /&gt;
+      </para>
+      <para>
+        // An example config file.&lt;br /&gt;
+        &lt;&lt;span class=&quot;ltgt&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;xml&lt;/span&gt;&lt;span
+        class=&quot;attrib&quot;&gt; version&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;1.0&lt;/span&gt;&quot;&lt;span
+        class=&quot;attrib&quot;&gt; encoding&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;utf-8&lt;/span&gt;&quot;&lt;span
+        class=&quot;ltgt&quot;&gt; ?&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad2&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;add&lt;/span&gt;&lt;span
+        class=&quot;attrib&quot;&gt; key&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;BeginColor&lt;/span&gt;&quot;&lt;span
+        class=&quot;attrib&quot;&gt; value&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;AliceBlue&lt;/span&gt;&quot;&lt;span
+        class=&quot;ltgt&quot;&gt; /&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;
+      </para>
+    </remarks>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // This returns var beginColor that is Color.AliceBlue.
+        // If the key is not found it returns Color.Black.
+        LJCNetCommon.ConfigColor("BeginColor", out Color beginColor);
+      </code>
+    </example>
+  </ConfigColor>
+  <ConfigString>
+    <summary>
+      Retrieves the Config string value.
+    </summary>
+    <param name="key">The key value.</param>
+    <returns>The string config value.</returns>
+    <remarks>
+      <para>
+        This uses the program config file which is the name of the program plus
+        the extension ".config".
+      </para>
+      <para>
+        // An example config file.&lt;br /&gt;
+        &lt;&lt;span class=&quot;ltgt&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;xml&lt;/span&gt;&lt;span
+        class=&quot;attrib&quot;&gt; version&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;1.0&lt;/span&gt;&quot;&lt;span
+        class=&quot;attrib&quot;&gt; encoding&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;utf-8&lt;/span&gt;&quot;&lt;span
+        class=&quot;ltgt&quot;&gt; ?&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad2&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;add&lt;/span&gt;&lt;span
+        class=&quot;attrib&quot;&gt; key&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;ConnectionType&lt;/span&gt;&quot;&lt;span
+        class=&quot;attrib&quot;&gt; value&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;MySql&lt;/span&gt;&quot;&lt;span
+        class=&quot;ltgt&quot;&gt; /&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
+        &lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;
+      </para>
+    </remarks>
+    <example>
+      <code>
+        using LJCNetCommon;
+        
+        // This returns "MySql".
+        string dbType = NetCommon.ConfigString("ConnectionType");
+      </code>
+    </example>
+  </ConfigString>
+  <ConsoleConfig>
+    <summary>
+      Accept or Select the DataConfig.
+    </summary>
+    <param name="dataConfigName">The DataConfig name.</param>
+  </ConsoleConfig>
+
+  <!-- Serialization Methods -->
+  <XmlDeserialize>
+    <summary>
+      Deserialize an XML message file to an object.
+    </summary>
+    <param name="type">The object type.</param>
+    <param name="fileSpec">The input file spec.</param>
+    <param name="rootName">The Root Name value.</param>
+    <returns>The deserialized object.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        public class Person
+        {
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
+        }
+
+        // Deserialize an XML message file to an object.
+        private static void XmlDeserialize()
+        {
+          // Setup
+          var person = new Person()
+          {
+            Id = 1,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string file = "Text.xml";
+          LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
+
+          // Deserialize an XML message file to an object.
+          Person newPerson;
+          newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
+        }
+      </code>
+    </example>
+  </XmlDeserialize>
+  <XmlDeserializeMessage>
+    <summary>
+      Deserialize an XML message string to an object.
+    </summary>
+    <param name="type">The object type.</param>
+    <param name="message">The message string.</param>
+    <returns>The deserialized object.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        public class Person
+        {
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
+        }
+
+        // Deserialize an XML message string to an object.
+        private static void XmlDeserializeMessage()
+        {
+          // Setup
+          var person = new Person()
+          {
+            Id = 2,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
+
+          // Deserialize an XML message string to an object.
+          Person newPerson;
+          newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
+        }
+      </code>
+    </example>
+  </XmlDeserializeMessage>
+  <XmlSerialize>
+    <summary>
+      Serialize an object to an XML message file.
+    </summary>
+    <param name="type">The object type.</param>
+    <param name="data">The object reference.</param>
+    <param name="namespaces">The XML namespaces.</param>
+    <param name="fileSpec">The output file spec.</param>
+    <param name="rootName">The Root Name value.</param>
+    <example>
+      <code>
+        using LJCNetCommon
+
+        public class Person
+        {
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
+        }
+
+        // Serialize an object to an XML message file.
+        private static void XmlSerialize()
+        {
+          // Setup
+          var person = new Person()
+          {
+            Id = 2,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string file = "Text.xml";
+
+          // Serialize an object to an XML message file.
+          LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
+
+          // Check the object.
+          Person newPerson;
+          newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
+        }
+      </code>
+    </example>
+  </XmlSerialize>
+  <XmlSerializeToString>
+    <summary>
+      Serialize an object to an XML message string.
+    </summary>
+    <param name="type">The object type.</param>
+    <param name="data">The object reference.</param>
+    <param name="namespaces">The XML namespaces.</param>
+    <returns>The XML message string.</returns>
+    <example>
+      <code>
+        using LJCNetCommon;
+
+        public class Person
+        {
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
+        }
+
+        // Serialize an object to an XML message string.
+        private static void XmlSerializeToString()
+        {
+          // Serialize an object to an XML message string.
+          var person = new Person()
+          {
+            Id = 2,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
+
+          // Check the object.
+          Person newPerson;
+          newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
+        }
+      </code>
+    </example>
+  </XmlSerializeToString>
+
   <!-- Text Conversion Methods -->
   <Base64BytesToText>
     <summary>
@@ -590,602 +1186,6 @@
       </code>
     </example>
   </XmlEncode>
-
-  <!-- Serialization Methods -->
-  <XmlDeserialize>
-    <summary>
-      Deserialize an XML message file to an object.
-    </summary>
-    <param name="type">The object type.</param>
-    <param name="fileSpec">The input file spec.</param>
-    <param name="rootName">The Root Name value.</param>
-    <returns>The deserialized object.</returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-      
-        public class Person
-        {
-          public long Id { get; set; }
-          public string Name { get; set; }
-          public bool PrincipleFlag { get; set; }
-        }
-        
-        // Deserialize an XML message file to an object.
-        private static void XmlDeserialize()
-        {
-          // Setup
-          var person = new Person()
-          {
-            Id = 1,
-            Name = "Text",
-            PrincipleFlag = true
-          };
-          string file = "Text.xml";
-          LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
-
-          // Deserialize an XML message file to an object.
-          Person newPerson;
-          newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
-        }
-      </code>
-    </example>
-  </XmlDeserialize>
-  <XmlDeserializeMessage>
-    <summary>
-      Deserialize an XML message string to an object.
-    </summary>
-    <param name="type">The object type.</param>
-    <param name="message">The message string.</param>
-    <returns>The deserialized object.</returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-      
-        public class Person
-        {
-          public long Id { get; set; }
-          public string Name { get; set; }
-          public bool PrincipleFlag { get; set; }
-        }
-        
-        // Deserialize an XML message string to an object.
-        private static void XmlDeserializeMessage()
-        {
-          // Setup
-          var person = new Person()
-          {
-            Id = 2,
-            Name = "Text",
-            PrincipleFlag = true
-          };
-          string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
-
-          // Deserialize an XML message string to an object.
-          Person newPerson;
-          newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
-        }
-      </code>
-    </example>
-  </XmlDeserializeMessage>
-  <XmlSerialize>
-    <summary>
-      Serialize an object to an XML message file.
-    </summary>
-    <param name="type">The object type.</param>
-    <param name="data">The object reference.</param>
-    <param name="namespaces">The XML namespaces.</param>
-    <param name="fileSpec">The output file spec.</param>
-    <param name="rootName">The Root Name value.</param>
-    <example>
-      <code>
-        using LJCNetCommon
-        
-        public class Person
-        {
-          public long Id { get; set; }
-          public string Name { get; set; }
-          public bool PrincipleFlag { get; set; }
-        }
-        
-        // Serialize an object to an XML message file.
-        private static void XmlSerialize()
-        {
-          // Setup
-          var person = new Person()
-          {
-            Id = 2,
-            Name = "Text",
-            PrincipleFlag = true
-          };
-          string file = "Text.xml";
-
-          // Serialize an object to an XML message file.
-          LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
-
-          // Check the object.
-          Person newPerson;
-          newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
-        }
-      </code>
-    </example>
-  </XmlSerialize>
-  <XmlSerializeToString>
-    <summary>
-      Serialize an object to an XML message string.
-    </summary>
-    <param name="type">The object type.</param>
-    <param name="data">The object reference.</param>
-    <param name="namespaces">The XML namespaces.</param>
-    <returns>The XML message string.</returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        public class Person
-        {
-          public long Id { get; set; }
-          public string Name { get; set; }
-          public bool PrincipleFlag { get; set; }
-        }
-
-        // Serialize an object to an XML message string.
-        private static void XmlSerializeToString()
-        {
-          // Serialize an object to an XML message string.
-          var person = new Person()
-          {
-            Id = 2,
-            Name = "Text",
-            PrincipleFlag = true
-          };
-          string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
-
-          // Check the object.
-          Person newPerson;
-          newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
-        }
-      </code>
-    </example>
-  </XmlSerializeToString>
-
-  <!-- Project Config Values Methods -->
-  <ConfigBool>
-    <summary>
-      Retrieves the Config bool value.
-    </summary>
-    <param name="key">The key value.</param>
-    <returns>The bool config value.</returns>
-    <remarks>
-      <para>
-        This uses the program config file which is the name of the program plus
-        the extension ".config".
-      </para>
-      <para>
-        // An example config file.&lt;br /&gt;
-        &lt;&lt;span class=&quot;ltgt&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;xml&lt;/span&gt;&lt;span
-        class=&quot;attrib&quot;&gt; version&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;1.0&lt;/span&gt;&quot;&lt;span
-        class=&quot;attrib&quot;&gt; encoding&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;utf-8&lt;/span&gt;&quot;&lt;span
-        class=&quot;ltgt&quot;&gt; ?&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;span class=&quot;pad2&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;add&lt;/span&gt;&lt;span
-        class=&quot;attrib&quot;&gt; key&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;LocalDbDataAccess&lt;/span&gt;&quot;&lt;span
-        class=&quot;attrib&quot;&gt; value&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;true&lt;/span&gt;&quot;&lt;span
-        class=&quot;ltgt&quot;&gt; /&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;
-      </para>
-    </remarks>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // This returns true.
-        bool localDbAccess = LJCNetCommon.ConfigBool("LocalDbDataAccess");
-      </code>
-    </example>
-  </ConfigBool>
-  <ConfigColor>
-    <summary>
-      Retrieves the Config Color value.
-    </summary>
-    <param name="key">The key value.</param>
-    <param name="color">The default color value.</param>
-    <returns>The Color setting value.</returns>
-    <remarks>
-      <para>
-        This uses the program config file which is the name of the program plus
-        the extension ".config".&lt;br /&gt;
-      </para>
-      <para>
-        // An example config file.&lt;br /&gt;
-        &lt;&lt;span class=&quot;ltgt&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;xml&lt;/span&gt;&lt;span
-        class=&quot;attrib&quot;&gt; version&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;1.0&lt;/span&gt;&quot;&lt;span
-        class=&quot;attrib&quot;&gt; encoding&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;utf-8&lt;/span&gt;&quot;&lt;span
-        class=&quot;ltgt&quot;&gt; ?&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;span class=&quot;pad2&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;add&lt;/span&gt;&lt;span
-        class=&quot;attrib&quot;&gt; key&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;BeginColor&lt;/span&gt;&quot;&lt;span
-        class=&quot;attrib&quot;&gt; value&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;AliceBlue&lt;/span&gt;&quot;&lt;span
-        class=&quot;ltgt&quot;&gt; /&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;
-      </para>
-    </remarks>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // This returns var beginColor that is Color.AliceBlue.
-        // If the key is not found it returns Color.Black.
-        LJCNetCommon.ConfigColor("BeginColor", out Color beginColor);
-      </code>
-    </example>
-  </ConfigColor>
-  <ConfigString>
-    <summary>
-      Retrieves the Config string value.
-    </summary>
-    <param name="key">The key value.</param>
-    <returns>The string config value.</returns>
-    <remarks>
-      <para>
-        This uses the program config file which is the name of the program plus
-        the extension ".config".
-      </para>
-      <para>
-        // An example config file.&lt;br /&gt;
-        &lt;&lt;span class=&quot;ltgt&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;xml&lt;/span&gt;&lt;span
-        class=&quot;attrib&quot;&gt; version&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;1.0&lt;/span&gt;&quot;&lt;span
-        class=&quot;attrib&quot;&gt; encoding&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;utf-8&lt;/span&gt;&quot;&lt;span
-        class=&quot;ltgt&quot;&gt; ?&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;span class=&quot;pad2&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;name&quot;&gt;add&lt;/span&gt;&lt;span
-        class=&quot;attrib&quot;&gt; key&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;ConnectionType&lt;/span&gt;&quot;&lt;span
-        class=&quot;attrib&quot;&gt; value&lt;/span&gt;=&quot;&lt;span class=&quot;data&quot;&gt;MySql&lt;/span&gt;&quot;&lt;span
-        class=&quot;ltgt&quot;&gt; /&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;span class=&quot;pad1&quot;&gt;&lt;/span&gt;&lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;appSettings&lt;/span&gt;&gt;&lt;br /&gt;
-        &lt;&lt;span class=&quot;ltgt&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&gt;
-      </para>
-    </remarks>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // This returns "MySql".
-        string dbType = NetCommon.ConfigString("ConnectionType");
-      </code>
-    </example>
-  </ConfigString>
-  <ConsoleConfig>
-    <summary>
-      Accept or Select the DataConfig.
-    </summary>
-    <param name="dataConfigName">The DataConfig name.</param>
-  </ConsoleConfig>
-
-  <!-- Object Value Methods -->
-  <GetBoolean>
-    <summary>
-      Gets a boolean value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The boolean value or false if the object is null.
-      Also returns false if the object is not type "bool".
-    </returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets a bool value from an object.
-        private static void GetBoolean()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          bool setup = true;
-          object obj = setup;
-
-          // Gets a short value from an object.
-          var result = NetCommon.GetBoolean(obj);
-          // result = True
-        }
-      </code>
-    </example>
-  </GetBoolean>
-  <GetByte>
-    <summary>
-      Gets a byte value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The byte value or the byte default if the object is null.
-      Also returns false if the object is not type "byte".
-    </returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-
-        // Gets a byte value from an object.
-        private static void GetByte()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          byte setup = Convert.ToByte('A');
-          object obj = setup;
-
-          // Gets a byte value from an object.
-          byte value = NetCommon.GetByte(obj);
-          var result = value.ToString();
-          // result = "65"
-        }
-      </code>
-    </example>
-  </GetByte>
-  <GetChar>
-    <summary>
-      Gets a character value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The char value or the char default if the object is null.
-      Also returns false if the object is not type "char".
-    </returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-
-        // Gets a char value from an object.
-        private static void GetChar()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          char setup = Convert.ToChar('A');
-          object obj = setup;
-
-          // Gets a byte value from an object.
-          char value = NetCommon.GetChar(obj);
-          var result = value.ToString();
-          // result = "A";
-        }
-      </code>
-    </example>
-  </GetChar>
-  <GetDateTime>
-    <summary>
-      Gets a DateTime value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The DateTime value or null if the object is null.
-      Also returns null if the object is not type "DateTime".
-    </returns>
-    <example>
-      <code>
-        // Gets a DateTime value from an object.
-        private static void GetDateTime()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          string setup = "2026/06/15 12:30:00 PM";
-          object obj = setup;
-
-          // Gets a decimal value from an object.
-          DateTime? returnValue = NetCommon.GetDateTime(obj);
-          if (returnValue != null)
-          {
-            DateTime value = (DateTime)returnValue;
-            var result = $"{value:yyyy/MM/dd HH:mm:ss tt}";
-            //result = value.ToString("yyyy/MM/dd HH:mm:ss tt");
-            // result = "2026/06/15 12:30:00 PM";
-          }
-        }
-      </code>
-    </example>
-  </GetDateTime>
-  <GetDecimal>
-    <summary>
-      Gets a decimal value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The decimal value or zero if the object is null.
-      Also returns zero if the object is not type "decimal", "long", "int"
-      or "short".
-    </returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets a decimal value from an object.
-        private static void GetDecimal()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          decimal setup = 3.14m;
-          object obj = setup;
-
-          // Gets a decimal value from an object.
-          decimal value = NetCommon.GetDecimal(obj);
-          // value = 3.14
-        }
-      </code>
-    </example>
-  </GetDecimal>
-  <GetDouble>
-    <summary>
-      Gets a double value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The double value or zero if the object is null.
-      Also returns zero if the object is not type "double", "decimal", "long"
-      , "int" or "short".
-    </returns>
-    <example>
-      <code>
-        // Gets a double value from an object.
-        private static void GetDouble()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          double setup = 3.14d;
-          object obj = setup;
-
-          // Gets a decimal value from an object.
-          double result = NetCommon.GetDouble(obj);
-          // result = 3.14;
-        }
-      </code>
-    </example>
-  </GetDouble>
-  <GetInt16>
-    <summary>
-      Gets a short value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The long value or zero if the object is null.
-      Also returns zero if the object is not type "short".
-    </returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-
-        // Gets a short value from an object.
-        private static void GetInt16()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          short setup = 3;
-          object obj = setup;
-
-          // Gets a short value from an object.
-          short value = NetCommon.GetInt16(obj);
-          // value = 3
-        }
-      </code>
-    </example>
-  </GetInt16>
-  <GetInt32>
-    <summary>
-      Gets an integer value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The integer value or zero if the object is null.
-      Also returns zero if the object is not type "int" or "short".
-    </returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets an int value from an object.
-        private static void GetInt32()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          int setup = 3;
-          object obj = setup;
-
-          // Gets an int value from an object.
-          int value = NetCommon.GetInt32(obj);
-          // value = 3
-        }
-      </code>
-    </example>
-  </GetInt32>
-  <GetInt64>
-    <summary>
-      Gets a long value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The long value or zero if the object is null.
-      Also returns zero if the object is not type "long", "int" or "short".
-    </returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets a long value from an object.
-        private static void GetInt64()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          long setup = 3;
-          object obj = setup;
-
-          // Gets a long value from an object.
-          long value = NetCommon.GetInt64(obj);
-          // value = 3
-        }
-      </code>
-    </example>
-  </GetInt64>
-  <GetObject>
-    <summary>
-      Gets an instantiated object value.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>The instantiated object.</returns>
-  </GetObject>
-  <GetSingle>
-    <summary>
-      Gets a float value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The single value or zero if the object is null.
-      Also returns zero if the object is not type "single", "long", "int"
-      or "short".
-    </returns>
-    <example>
-      <code>
-        // Gets a float (single) value from an object.
-        private static void GetSingle()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          float setup = 3.14f;
-          object obj = setup;
-
-          // Gets a decimal value from an object.
-          float result = NetCommon.GetSingle(obj);
-          result = 3.14;
-        }
-      </code>
-    </example>
-  </GetSingle>
-  <GetString>
-    <summary>
-      Gets a trimmed string value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>The trimmed string value or null if the object is null.</returns>
-    <example>
-      <code>
-        using LJCNetCommon;
-        
-        // Gets a trimmed string value from an object.
-        private static void GetString()
-        {
-          // Simulates an Object value like that received from a DataTable.
-          string setup = "3";
-          object obj = setup;
-
-          // Gets a string value from an object.
-          string value = NetCommon.GetString(obj);
-          // value = "3"
-        }
-      </code>
-    </example>
-  </GetString>
-  <ToInt16>
-    <summary>
-      Gets a short from a text string.
-    </summary>
-    <param name="text">The text value.</param>
-  </ToInt16>
-  <ToInt32>
-    <summary>
-      Gets an int from a text string.
-    </summary>
-    <param name="text">The text value.</param>
-  </ToInt32>
   
   <!-- DataType Names -->
   <TypeBoolean>

@@ -506,463 +506,6 @@ namespace LJCNetCommon5
     }
     #endregion
 
-    #region Text Conversion Methods
-
-    // ** Base64 Bytes and Text
-    // Decodes a Base64 byte array to a Text value.
-    /// <include path="members/Base64BytesToText/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static string? Base64BytesToText(byte[] bytes)
-    {
-      byte[] byteArray = Base64BytesToTextBytes(bytes);
-      return BytesToText(byteArray);
-    }
-
-    // Encodes a Text value to a Base64 byte array.
-    /// <include path="members/TextToBase64Bytes/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static byte[] TextToBase64Bytes(string text)
-    {
-      string base64 = TextToBase64(text);
-      byte[] retValue = TextToBytes(base64);
-      return retValue;
-    }
-
-    // ** Base64 Bytes and Text Bytes
-    // Decodes a Base64 byte array to a Text byte array.
-    /// <include path="members/Base64BytesToTextBytes/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static byte[] Base64BytesToTextBytes(byte[] bytes)
-    {
-      char[] chars;
-      byte[] retValue;
-
-      // Copy bytes to chars.
-      chars = new char[bytes.Length];
-      Array.Copy(bytes, chars, chars.Length);
-
-      // Convert Base64 chars to original bytes.
-      retValue = Convert.FromBase64CharArray(chars, 0, chars.Length);
-      return retValue;
-    }
-
-    // Encodes a Text byte array to a Base64 byte array.
-    /// <include path="members/TextBytesToBase64Bytes/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static byte[] TextBytesToBase64Bytes(byte[] bytes)
-    {
-      char[] chars;
-      long charsLength;
-      byte[] retValue;
-
-      // Convert bytes to Base64 chars.
-      charsLength = (long)((4.0d / 3.0d) * bytes.Length);
-      if (charsLength % 4 != 0)
-      {
-        charsLength += 4 - charsLength % 4;
-      }
-      chars = new char[charsLength];
-      Convert.ToBase64CharArray(bytes, 0, bytes.Length, chars, 0);
-
-      // Copy chars to bytes.
-      retValue = new byte[chars.Length];
-      for (int index = 0; index < retValue.Length; index++)
-      {
-        retValue[index] = (byte)chars[index];
-      }
-      return retValue;
-    }
-
-    // ** Base64 and Text
-    // Decodes a Base64 value to a Text value.
-    /// <include path="members/Base64ToText/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static string Base64ToText(string base64Text)
-    {
-      return Encoding.UTF8.GetString(Convert.FromBase64String(base64Text));
-    }
-
-    // Encodes a Text value to a Base64 value.
-    /// <include path="members/TextToBase64/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static string TextToBase64(string text)
-    {
-      return Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
-    }
-
-    // * Text Bytes and Base64
-    // Decodes a Base64 value to a Text byte array.
-    /// <include path="members/Base64ToTextBytes/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static byte[] Base64ToTextBytes(string base64)
-    {
-      string text = Base64ToText(base64);
-      byte[] retValue = TextToBytes(text);
-      return retValue;
-    }
-
-    // Encodes a Text byte array to a Base64 value.
-    /// <include path="members/TextBytesToBase64/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static string? TextBytesToBase64(byte[] bytes)
-    {
-      byte[] base64Bytes = TextBytesToBase64Bytes(bytes);
-      string retValue = BytesToText(base64Bytes);
-      return retValue;
-    }
-
-    // ** Bytes and Text
-    // Creates text from a byte array.
-    /// <include path="members/BytesToText/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static string? BytesToText(byte[]? bytes)
-    {
-      string retValue = null;
-      if (bytes != null)
-      {
-        retValue = Encoding.UTF8.GetString(bytes);
-      }
-      return retValue;
-    }
-
-    // Creates a byte array from text.
-    /// <include path="members/TextToBytes/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static byte[] TextToBytes(string text)
-    {
-      string data = text.Trim();
-      byte[] retValue = new byte[data.Length];
-
-      for (int index = 0; index < data.Length; index++)
-      {
-        retValue[index] = Convert.ToByte(data[index]);
-      }
-      return retValue;
-    }
-
-    // ** Stream and Bytes
-    // Copies a memory stream to a byte array.
-    /// <include path="members/MemStreamToBytes/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static byte[] MemStreamToBytes(Stream stream)
-    {
-      byte[] retValue = new byte[stream.Length];
-
-      stream.Position = 0;
-      for (int index = 0; index < stream.Length; index++)
-      {
-        retValue[index] = Convert.ToByte(stream.ReadByte());
-      }
-      stream.Position = 0;
-      return retValue;
-    }
-
-    // Copies a byte array to a memory stream.
-    /// <include path="members/BytesToMemStream/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static Stream BytesToMemStream(byte[] bytes)
-    {
-      MemoryStream retValue;
-
-      retValue = new MemoryStream(bytes, 0, bytes.Length)
-      {
-        Position = 0
-      };
-      return retValue;
-    }
-
-    // ** Stream and String (Text)
-    // Creates a string from a memory stream.
-    /// <include path="members/MemStreamToString/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static string MemStreamToString(Stream stream)
-    {
-      TextReader reader;
-      string retValue;
-
-      stream.Position = 0;
-      reader = new StreamReader(stream);
-      retValue = reader.ReadToEnd();
-      reader.Close();
-      return retValue;
-    }
-
-    // Creates a memory stream from a string.
-    /// <include path="members/StringToMemStream/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static Stream StringToMemStream(string text)
-    {
-      Stream retValue = new MemoryStream();
-
-      TextWriter writer = new StreamWriter(retValue);
-      writer.Write(text);
-      writer.Flush();
-      retValue.Position = 0;
-      return retValue;
-    }
-
-    // ** XML Entities
-    // Decodes an encoded XML string.
-    /// <include path="members/XmlDecode/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static string? XmlDecode(string text)
-    {
-      string? retValue = null;
-
-      if (HasText(text))
-      {
-        retValue = text.Replace("&lt;", "<");
-        retValue = retValue.Replace("&gt;", ">");
-        retValue = retValue.Replace("&apos;", "'");
-        retValue = retValue.Replace("&quot;", "\"");
-        retValue = retValue.Replace("&amp;", "&");
-      }
-      return retValue;
-    }
-
-    // Encodes a string with XML escape values.
-    /// <include path="members/XmlEncode/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>convert</parentGroup>
-    public static string? XmlEncode(string text)
-    {
-      string? retValue = null;
-
-      if (HasText(text))
-      {
-        retValue = text.Replace("&", "&amp;");
-        retValue = retValue.Replace("<", "&lt;");
-        retValue = retValue.Replace(">", "&gt;");
-        retValue = retValue.Replace("'", "&apos;");
-        retValue = retValue.Replace("\"", "&quot;");
-      }
-      return retValue;
-    }
-    #endregion
-
-    #region Serialization Methods
-
-    // Deserialize an XML message file to an object.
-    /// <include path="members/XmlDeserialize/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>serialize</parentGroup>
-    public static object? XmlDeserialize(Type type, string? fileSpec
-      , string? rootName = null)
-    {
-      string errorText;
-      object? retValue = null;
-
-      if (!File.Exists(fileSpec))
-      {
-        errorText = $"File '{fileSpec}' was not found.";
-        throw new FileNotFoundException(errorText);
-      }
-      else
-      {
-        FileStream? fileStream = null;
-        try
-        {
-          XmlSerializer serializer;
-          if (HasText(rootName))
-          {
-            var root = new XmlRootAttribute(rootName);
-            serializer = new XmlSerializer(type, root);
-          }
-          else
-          {
-            serializer = new XmlSerializer(type);
-          }
-          fileStream = new FileStream(fileSpec, FileMode.Open);
-          try
-          {
-            retValue = serializer.Deserialize(fileStream);
-          }
-          catch (Exception e)
-          {
-            errorText = e.Message;
-            throw new Exception(errorText);
-          }
-        }
-        finally
-        {
-          fileStream?.Close();
-        }
-      }
-      return retValue;
-    }
-
-    // Deserialize an XML message string to an object.
-    /// <include path="members/XmlDeserializeMessage/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>serialize</parentGroup>
-    public static object? XmlDeserializeMessage(Type type, string message)
-    {
-      Stream? stream = null;
-      object? retValue = null;
-
-      try
-      {
-        stream = StringToMemStream(message);
-        var serializer = new XmlSerializer(type);
-        retValue = serializer.Deserialize(stream);
-      }
-      finally
-      {
-        stream?.Close();
-      }
-      return retValue;
-    }
-
-    // Serialize an object to an XML message file.
-    /// <include path="members/XmlSerialize/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>serialize</parentGroup>
-    public static void XmlSerialize(Type type, object data
-      , XmlSerializerNamespaces? namespaces, string? fileSpec
-      , string? rootName = null)
-    {
-      FileStream fileStream;
-      string errorText;
-
-      if (!HasText(fileSpec))
-      {
-        errorText = "Missing file specification.";
-        throw new ArgumentException(errorText);
-      }
-
-      string? folder = Path.GetDirectoryName(fileSpec);
-      if (HasText(folder)
-        && !Directory.Exists(folder))
-      {
-        Directory.CreateDirectory(folder);
-      }
-
-      // Serialize to XML.
-      XmlSerializer serializer;
-      if (HasText(rootName))
-      {
-        var root = new XmlRootAttribute(rootName);
-        serializer = new XmlSerializer(type, root);
-      }
-      else
-      {
-        serializer = new XmlSerializer(type);
-      }
-      fileStream = new FileStream(fileSpec, FileMode.Create);
-      try
-      {
-        if (namespaces == null)
-        {
-          serializer.Serialize(fileStream, data);
-        }
-        else
-        {
-          serializer.Serialize(fileStream, data, namespaces);
-        }
-      }
-      finally
-      {
-        fileStream?.Close();
-      }
-    }
-
-    // Serialize an object to an XML message string.
-    /// <include path="members/XmlSerializeToString/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>serialize</parentGroup>
-    public static string XmlSerializeToString(Type type, object data
-      , XmlSerializerNamespaces? namespaces)
-    {
-      MemoryStream memStream;
-      string retValue;
-
-      // Serialize to XML.
-      var xmlSerializer = new XmlSerializer(type);
-      memStream = new MemoryStream();
-
-      if (namespaces == null)
-      {
-        xmlSerializer.Serialize(memStream, data);
-      }
-      else
-      {
-        xmlSerializer.Serialize(memStream, data, namespaces);
-      }
-
-      retValue = MemStreamToString(memStream);
-      memStream.Close();
-      return retValue;
-    }
-    #endregion
-
-    #region Project Config Values Methods
-
-    // Retrieves the Config bool value.
-    /// <include path="members/ConfigBool/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>config</parentGroup>
-    public static bool ConfigBool(string key)
-    {
-      bool retValue = false;
-
-      if (HasText(key))
-      {
-        string? configValue = ConfigurationManager.AppSettings[key];
-        if (HasText(configValue))
-        {
-          _ = bool.TryParse(configValue, out retValue);
-        }
-      }
-      return retValue;
-    }
-
-    // Retrieves the Config Color value.
-    /// <include path="members/ConfigColor/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>config</parentGroup>
-    public static bool ConfigColor(string key, out Color color)
-    {
-      bool retValue = false;
-
-      color = Color.Black;
-
-      if (HasText(key))
-      {
-        string? configValue = ConfigurationManager.AppSettings[key];
-        if (HasText(configValue))
-        {
-          color = Color.FromName(configValue);
-          if (color != Color.FromArgb(0, 0, 0, 0))
-          {
-            retValue = true;
-          }
-        }
-      }
-      return retValue;
-    }
-
-    // Retrieves the Config string value.
-    /// <include path="members/ConfigString/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>config</parentGroup>
-    public static string? ConfigString(string key)
-    {
-      string? retValue = null;
-
-      if (HasText(key))
-      {
-        retValue = ConfigurationManager.AppSettings[key];
-      }
-      return retValue;
-    }
-
-    /// <summary>Accept or Select the DataConfig.</summary>
-    /// <include path="members/ConsoleConfig/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>config</parentGroup>
-    public static void ConsoleConfig(string dataConfigName)
-    {
-      Console.Write($"Continue with DataConfig - {dataConfigName}? (Y/N) ");
-      if (Console.ReadKey().Key != ConsoleKey.Y)
-      {
-        Console.WriteLine();
-        Environment.Exit(0);
-      }
-      Console.WriteLine();
-    }
-    #endregion
-
     #region Object Value Methods
 
     // Gets a decimal value from an object.
@@ -1248,6 +791,463 @@ namespace LJCNetCommon5
     {
       _ = int.TryParse(text, out int value);
       return value;
+    }
+    #endregion
+
+    #region Project Config Values Methods
+
+    // Retrieves the Config bool value.
+    /// <include path="members/ConfigBool/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>config</parentGroup>
+    public static bool ConfigBool(string key)
+    {
+      bool retValue = false;
+
+      if (HasText(key))
+      {
+        string? configValue = ConfigurationManager.AppSettings[key];
+        if (HasText(configValue))
+        {
+          _ = bool.TryParse(configValue, out retValue);
+        }
+      }
+      return retValue;
+    }
+
+    // Retrieves the Config Color value.
+    /// <include path="members/ConfigColor/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>config</parentGroup>
+    public static bool ConfigColor(string key, out Color color)
+    {
+      bool retValue = false;
+
+      color = Color.Black;
+
+      if (HasText(key))
+      {
+        string? configValue = ConfigurationManager.AppSettings[key];
+        if (HasText(configValue))
+        {
+          color = Color.FromName(configValue);
+          if (color != Color.FromArgb(0, 0, 0, 0))
+          {
+            retValue = true;
+          }
+        }
+      }
+      return retValue;
+    }
+
+    // Retrieves the Config string value.
+    /// <include path="members/ConfigString/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>config</parentGroup>
+    public static string? ConfigString(string key)
+    {
+      string? retValue = null;
+
+      if (HasText(key))
+      {
+        retValue = ConfigurationManager.AppSettings[key];
+      }
+      return retValue;
+    }
+
+    /// <summary>Accept or Select the DataConfig.</summary>
+    /// <include path="members/ConsoleConfig/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>config</parentGroup>
+    public static void ConsoleConfig(string dataConfigName)
+    {
+      Console.Write($"Continue with DataConfig - {dataConfigName}? (Y/N) ");
+      if (Console.ReadKey().Key != ConsoleKey.Y)
+      {
+        Console.WriteLine();
+        Environment.Exit(0);
+      }
+      Console.WriteLine();
+    }
+    #endregion
+
+    #region Serialization Methods
+
+    // Deserialize an XML message file to an object.
+    /// <include path="members/XmlDeserialize/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>serialize</parentGroup>
+    public static object? XmlDeserialize(Type type, string? fileSpec
+      , string? rootName = null)
+    {
+      string errorText;
+      object? retValue = null;
+
+      if (!File.Exists(fileSpec))
+      {
+        errorText = $"File '{fileSpec}' was not found.";
+        throw new FileNotFoundException(errorText);
+      }
+      else
+      {
+        FileStream? fileStream = null;
+        try
+        {
+          XmlSerializer serializer;
+          if (HasText(rootName))
+          {
+            var root = new XmlRootAttribute(rootName);
+            serializer = new XmlSerializer(type, root);
+          }
+          else
+          {
+            serializer = new XmlSerializer(type);
+          }
+          fileStream = new FileStream(fileSpec, FileMode.Open);
+          try
+          {
+            retValue = serializer.Deserialize(fileStream);
+          }
+          catch (Exception e)
+          {
+            errorText = e.Message;
+            throw new Exception(errorText);
+          }
+        }
+        finally
+        {
+          fileStream?.Close();
+        }
+      }
+      return retValue;
+    }
+
+    // Deserialize an XML message string to an object.
+    /// <include path="members/XmlDeserializeMessage/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>serialize</parentGroup>
+    public static object? XmlDeserializeMessage(Type type, string message)
+    {
+      Stream? stream = null;
+      object? retValue = null;
+
+      try
+      {
+        stream = StringToMemStream(message);
+        var serializer = new XmlSerializer(type);
+        retValue = serializer.Deserialize(stream);
+      }
+      finally
+      {
+        stream?.Close();
+      }
+      return retValue;
+    }
+
+    // Serialize an object to an XML message file.
+    /// <include path="members/XmlSerialize/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>serialize</parentGroup>
+    public static void XmlSerialize(Type type, object data
+      , XmlSerializerNamespaces? namespaces, string? fileSpec
+      , string? rootName = null)
+    {
+      FileStream fileStream;
+      string errorText;
+
+      if (!HasText(fileSpec))
+      {
+        errorText = "Missing file specification.";
+        throw new ArgumentException(errorText);
+      }
+
+      string? folder = Path.GetDirectoryName(fileSpec);
+      if (HasText(folder)
+        && !Directory.Exists(folder))
+      {
+        Directory.CreateDirectory(folder);
+      }
+
+      // Serialize to XML.
+      XmlSerializer serializer;
+      if (HasText(rootName))
+      {
+        var root = new XmlRootAttribute(rootName);
+        serializer = new XmlSerializer(type, root);
+      }
+      else
+      {
+        serializer = new XmlSerializer(type);
+      }
+      fileStream = new FileStream(fileSpec, FileMode.Create);
+      try
+      {
+        if (namespaces == null)
+        {
+          serializer.Serialize(fileStream, data);
+        }
+        else
+        {
+          serializer.Serialize(fileStream, data, namespaces);
+        }
+      }
+      finally
+      {
+        fileStream?.Close();
+      }
+    }
+
+    // Serialize an object to an XML message string.
+    /// <include path="members/XmlSerializeToString/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>serialize</parentGroup>
+    public static string XmlSerializeToString(Type type, object data
+      , XmlSerializerNamespaces? namespaces)
+    {
+      MemoryStream memStream;
+      string retValue;
+
+      // Serialize to XML.
+      var xmlSerializer = new XmlSerializer(type);
+      memStream = new MemoryStream();
+
+      if (namespaces == null)
+      {
+        xmlSerializer.Serialize(memStream, data);
+      }
+      else
+      {
+        xmlSerializer.Serialize(memStream, data, namespaces);
+      }
+
+      retValue = MemStreamToString(memStream);
+      memStream.Close();
+      return retValue;
+    }
+    #endregion
+
+    #region Text Conversion Methods
+
+    // ** Base64 Bytes and Text
+    // Decodes a Base64 byte array to a Text value.
+    /// <include path="members/Base64BytesToText/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static string? Base64BytesToText(byte[] bytes)
+    {
+      byte[] byteArray = Base64BytesToTextBytes(bytes);
+      return BytesToText(byteArray);
+    }
+
+    // Encodes a Text value to a Base64 byte array.
+    /// <include path="members/TextToBase64Bytes/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static byte[] TextToBase64Bytes(string text)
+    {
+      string base64 = TextToBase64(text);
+      byte[] retValue = TextToBytes(base64);
+      return retValue;
+    }
+
+    // ** Base64 Bytes and Text Bytes
+    // Decodes a Base64 byte array to a Text byte array.
+    /// <include path="members/Base64BytesToTextBytes/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static byte[] Base64BytesToTextBytes(byte[] bytes)
+    {
+      char[] chars;
+      byte[] retValue;
+
+      // Copy bytes to chars.
+      chars = new char[bytes.Length];
+      Array.Copy(bytes, chars, chars.Length);
+
+      // Convert Base64 chars to original bytes.
+      retValue = Convert.FromBase64CharArray(chars, 0, chars.Length);
+      return retValue;
+    }
+
+    // Encodes a Text byte array to a Base64 byte array.
+    /// <include path="members/TextBytesToBase64Bytes/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static byte[] TextBytesToBase64Bytes(byte[] bytes)
+    {
+      char[] chars;
+      long charsLength;
+      byte[] retValue;
+
+      // Convert bytes to Base64 chars.
+      charsLength = (long)((4.0d / 3.0d) * bytes.Length);
+      if (charsLength % 4 != 0)
+      {
+        charsLength += 4 - charsLength % 4;
+      }
+      chars = new char[charsLength];
+      Convert.ToBase64CharArray(bytes, 0, bytes.Length, chars, 0);
+
+      // Copy chars to bytes.
+      retValue = new byte[chars.Length];
+      for (int index = 0; index < retValue.Length; index++)
+      {
+        retValue[index] = (byte)chars[index];
+      }
+      return retValue;
+    }
+
+    // ** Base64 and Text
+    // Decodes a Base64 value to a Text value.
+    /// <include path="members/Base64ToText/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static string Base64ToText(string base64Text)
+    {
+      return Encoding.UTF8.GetString(Convert.FromBase64String(base64Text));
+    }
+
+    // Encodes a Text value to a Base64 value.
+    /// <include path="members/TextToBase64/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static string TextToBase64(string text)
+    {
+      return Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
+    }
+
+    // * Text Bytes and Base64
+    // Decodes a Base64 value to a Text byte array.
+    /// <include path="members/Base64ToTextBytes/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static byte[] Base64ToTextBytes(string base64)
+    {
+      string text = Base64ToText(base64);
+      byte[] retValue = TextToBytes(text);
+      return retValue;
+    }
+
+    // Encodes a Text byte array to a Base64 value.
+    /// <include path="members/TextBytesToBase64/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static string? TextBytesToBase64(byte[] bytes)
+    {
+      byte[] base64Bytes = TextBytesToBase64Bytes(bytes);
+      string retValue = BytesToText(base64Bytes);
+      return retValue;
+    }
+
+    // ** Bytes and Text
+    // Creates text from a byte array.
+    /// <include path="members/BytesToText/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static string? BytesToText(byte[]? bytes)
+    {
+      string retValue = null;
+      if (bytes != null)
+      {
+        retValue = Encoding.UTF8.GetString(bytes);
+      }
+      return retValue;
+    }
+
+    // Creates a byte array from text.
+    /// <include path="members/TextToBytes/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static byte[] TextToBytes(string text)
+    {
+      string data = text.Trim();
+      byte[] retValue = new byte[data.Length];
+
+      for (int index = 0; index < data.Length; index++)
+      {
+        retValue[index] = Convert.ToByte(data[index]);
+      }
+      return retValue;
+    }
+
+    // ** Stream and Bytes
+    // Copies a memory stream to a byte array.
+    /// <include path="members/MemStreamToBytes/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static byte[] MemStreamToBytes(Stream stream)
+    {
+      byte[] retValue = new byte[stream.Length];
+
+      stream.Position = 0;
+      for (int index = 0; index < stream.Length; index++)
+      {
+        retValue[index] = Convert.ToByte(stream.ReadByte());
+      }
+      stream.Position = 0;
+      return retValue;
+    }
+
+    // Copies a byte array to a memory stream.
+    /// <include path="members/BytesToMemStream/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static Stream BytesToMemStream(byte[] bytes)
+    {
+      MemoryStream retValue;
+
+      retValue = new MemoryStream(bytes, 0, bytes.Length)
+      {
+        Position = 0
+      };
+      return retValue;
+    }
+
+    // ** Stream and String (Text)
+    // Creates a string from a memory stream.
+    /// <include path="members/MemStreamToString/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static string MemStreamToString(Stream stream)
+    {
+      TextReader reader;
+      string retValue;
+
+      stream.Position = 0;
+      reader = new StreamReader(stream);
+      retValue = reader.ReadToEnd();
+      reader.Close();
+      return retValue;
+    }
+
+    // Creates a memory stream from a string.
+    /// <include path="members/StringToMemStream/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static Stream StringToMemStream(string text)
+    {
+      Stream retValue = new MemoryStream();
+
+      TextWriter writer = new StreamWriter(retValue);
+      writer.Write(text);
+      writer.Flush();
+      retValue.Position = 0;
+      return retValue;
+    }
+
+    // ** XML Entities
+    // Decodes an encoded XML string.
+    /// <include path="members/XmlDecode/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static string? XmlDecode(string text)
+    {
+      string? retValue = null;
+
+      if (HasText(text))
+      {
+        retValue = text.Replace("&lt;", "<");
+        retValue = retValue.Replace("&gt;", ">");
+        retValue = retValue.Replace("&apos;", "'");
+        retValue = retValue.Replace("&quot;", "\"");
+        retValue = retValue.Replace("&amp;", "&");
+      }
+      return retValue;
+    }
+
+    // Encodes a string with XML escape values.
+    /// <include path="members/XmlEncode/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>convert</parentGroup>
+    public static string? XmlEncode(string text)
+    {
+      string? retValue = null;
+
+      if (HasText(text))
+      {
+        retValue = text.Replace("&", "&amp;");
+        retValue = retValue.Replace("<", "&lt;");
+        retValue = retValue.Replace(">", "&gt;");
+        retValue = retValue.Replace("'", "&apos;");
+        retValue = retValue.Replace("\"", "&quot;");
+      }
+      return retValue;
     }
     #endregion
 
