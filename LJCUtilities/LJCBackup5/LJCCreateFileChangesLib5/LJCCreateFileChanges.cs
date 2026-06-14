@@ -329,7 +329,7 @@ namespace LJCCreateFileChangesLib5
     ///  path='items/WriteMissingFolders/*'/>
     public void WriteMissingFolders()
     {
-      var missingFolders = "MissingFolders.txt";
+      var missingFolders = @"RunFiles\MissingFolders.txt";
       if (File.Exists(missingFolders))
       {
         File.Delete(missingFolders);

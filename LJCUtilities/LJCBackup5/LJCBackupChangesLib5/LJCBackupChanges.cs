@@ -85,7 +85,7 @@ namespace LJCBackupChangesLib5
     {
       if (File.Exists(mChangeFilespec))
       {
-        string log = "BackupLog.txt";
+        string log = @"RunFiles\BackupLog.txt";
         File.WriteAllText(log, "");
         TargetPath = targetPath;
         var fileChange = new LJCFileChange();
