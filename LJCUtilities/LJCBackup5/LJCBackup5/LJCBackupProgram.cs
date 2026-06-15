@@ -86,9 +86,11 @@ namespace LJCBackup5
     {
       LJCBackupProfile retValue = profiles[selection];
 
-      Console.WriteLine();
-      Console.Write("Creating Changes File...");
       var profile = profiles[selection];
+      Console.WriteLine();
+      var filters = string.Join("|", profile.IncludeFilters);
+      Console.WriteLine($"Include: {filters}");
+      Console.Write("Creating Changes File...");
       var createChanges = new LJCCreateFileChanges(profile.SourcePath
         , profile.TargetPath, profile.ChangesFilespec)
       {
