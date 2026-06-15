@@ -6,7 +6,7 @@ TargetCodeline, LJCProjects
 ChangesFilespec, RunFiles\LocalLJCProjects\Changes.txt
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
 IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
-SkipFiles, ChangesLJCProjects.txt|BackupLog.txt|MissingFolders.txt
+SkipFiles, Changes.txt|BackupLog.txt|MissingFolders.txt
 //SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd
 SkipSubfolders, .vs|obj|Release
 SkipCodePathspec, RunFiles\LocalLJCProjects\SkipCodePaths.txt
@@ -22,7 +22,7 @@ SkipSubfolders, .vs|obj|Release
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
 IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
 IncludeMissingTargetFolders, true
-SkipFiles, ChangesLJCProjects.txt|BackupLog.txt|MissingFolders.txt
+SkipFiles, Changes.txt|BackupLog.txt|MissingFolders.txt
 //SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd
 
 Backup, HPLJCProjects
@@ -35,7 +35,7 @@ SkipSubfolders, .vs|obj|Release
 IncludeFilters, *.cs|*.sln|*.csproj|*.Designer.cs|*.resx|*.config
 IncludeFilters, Doc\*.xml|*.cmd|*.txt|*.sql|*.html
 IncludeMissingTargetFolders, true
-SkipFiles, ChangesLJCProjects.txt|BackupLog.txt|MissingFolders.txt
+SkipFiles, Changes.txt|BackupLog.txt|MissingFolders.txt
 //SkipFiles,?Build*.cmd|ClearBuild.cmd|UpdateAll.cmd
 
 Backup, LocalLJCCodeDoc
