@@ -439,13 +439,13 @@ namespace LJCDataUtility
 
       // Column Name
       b.Text($"  {BeginDelimiter}");
-      b.Text($"{dataColumn.Name}");
-      b.Text($"{EndDelimiter}");
+      b.AddText($"{dataColumn.Name}");
+      b.AddText($"{EndDelimiter}");
 
       // Type Name
-      b.Text($" {BeginDelimiter}");
-      b.Text($"{dataColumn.TypeName}");
-      b.Text($"{EndDelimiter}");
+      b.AddText($" {BeginDelimiter}");
+      b.AddText($"{dataColumn.TypeName}");
+      b.AddText($"{EndDelimiter}");
 
       var retString = b.ToString();
       return retString;
@@ -542,11 +542,11 @@ namespace LJCDataUtility
       var b = new TextBuilder();
       b.Line();
       b.Text("/* Create Table */");
-      b.Line(Check(TableName, ObjectType.Table));
-      b.Line($"CREATE TABLE [dbo].[{TableName}] (");
+      b.AddLine(Check(TableName, ObjectType.Table));
+      b.Line($" CREATE TABLE [dbo].[{TableName}] (");
       HasColumns = false;
       string retString = b.ToString();
-      Text(retString);
+      Builder.Text(retString);
       return retString;
     }
 
@@ -555,32 +555,32 @@ namespace LJCDataUtility
     internal string TableColumn(DataUtilColumn dataColumn)
     {
       var b = new TextBuilder();
-      b.Text(ItemEnd(HasColumns));
+      b.AddText(ItemEnd(HasColumns));
       b.Text(NameAndType(dataColumn));
 
       var typeName = dataColumn.TypeName.Trim().ToLower();
       if ("nvarchar" == typeName
         || "varchar" == typeName)
       {
-        b.Text($"({dataColumn.MaxLength})");
+        b.AddText($"({dataColumn.MaxLength})");
       }
 
       // AllowNull
       if (!dataColumn.AllowNull)
       {
-        b.Text(" NOT");
+        b.AddText(" NOT");
       }
-      b.Text(" NULL");
+      b.AddText(" NULL");
 
       if (dataColumn.DefaultValue != null)
       {
-        b.Text($" DEFAULT {dataColumn.DefaultValue}");
+        b.AddText($" DEFAULT {dataColumn.DefaultValue}");
       }
 
       // Add to Builder property and also return.
       HasColumns = true;
       var retString = b.ToString();
-      Text(retString);
+      Builder.AddText(retString);
       return retString;
     }
 
@@ -589,8 +589,7 @@ namespace LJCDataUtility
     internal string TableEnd()
     {
       var b = new TextBuilder();
-      b.Line();
-      b.Line("  )");
+      b.Line(" )");
       b.Line("END");
       string retString = b.ToString();
 
@@ -603,10 +602,10 @@ namespace LJCDataUtility
     internal string TableIdentity(DataUtilColumn dataColumn)
     {
       var b = new TextBuilder();
-      b.Text(ItemEnd(HasColumns));
+      b.AddText(ItemEnd(HasColumns));
       b.Text(NameAndType(dataColumn));
-      b.Text($" IDENTITY ({dataColumn.IdentityStart}");
-      b.Text($", {dataColumn.IdentityIncrement}) NOT NULL");
+      b.AddText($" IDENTITY ({dataColumn.IdentityStart}");
+      b.AddText($", {dataColumn.IdentityIncrement}) NOT NULL");
 
       // Add to Builder property and also return.
       HasColumns = true;

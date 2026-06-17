@@ -10,14 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Text;
-using System.Xml.Linq;
-using System.Reflection;
-using System.Data;
-using System.IO;
-using LJCDataUtility;
-using LJCDBClientLib;
-using LJCDBMessage;
 
 namespace LJCDataUtility
 {
