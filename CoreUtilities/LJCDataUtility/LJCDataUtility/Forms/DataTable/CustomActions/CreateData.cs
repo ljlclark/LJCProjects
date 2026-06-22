@@ -18,6 +18,7 @@ namespace LJCDataUtility
     {
       // Initialize property values.
       ParentObject = parentObject;
+      Config = ParentObject.DataConfigItem();
       Managers = ParentObject.Managers;
     }
     #endregion
@@ -55,9 +56,7 @@ namespace LJCDataUtility
       var dataColumns = columnManager.Load();
       if (NetCommon.HasItems(dataColumns))
       {
-        var dbName = ParentObject.DataConfigItemValue("Database");
-
-        var proc = new ProcBuilder(ParentObject, dbName, null);
+        var proc = new ProcBuilder(ParentObject, Config.Database, null);
         proc.Begin("sp_DataColumnData");
         proc.BodyBegin();
 
@@ -75,7 +74,8 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value
+        var scriptWindow = new DataUtilityCommon();
+        var controlValue = scriptWindow.ShowInfo(value
           , "Column Data Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
       }
@@ -88,9 +88,7 @@ namespace LJCDataUtility
       var dataKeys = keyManager.Load();
       if (NetCommon.HasItems(dataKeys))
       {
-        var dbName = ParentObject.DataConfigItemValue("Database");
-
-        var proc = new ProcBuilder(ParentObject, dbName, null);
+        var proc = new ProcBuilder(ParentObject, Config.Database, null);
         proc.Begin("sp_DataKeyData");
         proc.BodyBegin();
 
@@ -108,7 +106,8 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value
+        var scriptWindow = new DataUtilityCommon();
+        var controlValue = scriptWindow.ShowInfo(value
           , "Key Data Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
       }
@@ -121,9 +120,7 @@ namespace LJCDataUtility
       var dataTables = moduleManager.Load();
       if (NetCommon.HasItems(dataTables))
       {
-        var dbName = ParentObject.DataConfigItemValue("Database");
-
-        var proc = new ProcBuilder(ParentObject, dbName, null);
+        var proc = new ProcBuilder(ParentObject, Config.Database, null);
         proc.Begin("sp_DataModuleData");
         proc.BodyBegin();
 
@@ -136,7 +133,8 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value
+        var scriptWindow = new DataUtilityCommon();
+        var controlValue = scriptWindow.ShowInfo(value
           , "Module Data Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
       }
@@ -149,9 +147,7 @@ namespace LJCDataUtility
       var dataTables = tableManager.Load();
       if (NetCommon.HasItems(dataTables))
       {
-        var dbName = ParentObject.DataConfigItemValue("Database");
-
-        var proc = new ProcBuilder(ParentObject, dbName, null);
+        var proc = new ProcBuilder(ParentObject, Config.Database, null);
         proc.Begin("sp_DataTableData");
         proc.BodyBegin();
 
@@ -169,7 +165,8 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value
+        var scriptWindow = new DataUtilityCommon();
+        var controlValue = scriptWindow.ShowInfo(value
           , "Table Data Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
       }
@@ -177,6 +174,9 @@ namespace LJCDataUtility
     #endregion
 
     #region Properties
+
+    // Gets or sets the DataConfig value.
+    private DataConfig Config { get; set; }
 
     // Gets or sets the Parent List reference.
     private DataUtilityList ParentObject { get; set; }

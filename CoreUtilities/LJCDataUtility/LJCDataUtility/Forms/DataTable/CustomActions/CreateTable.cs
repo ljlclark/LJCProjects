@@ -1,6 +1,8 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CreateTable.cs
+using LJCDataAccess;
+using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace LJCDataUtility
     {
       // Initialize property values.
       ParentObject = parentObject;
+      Config = ParentObject.DataConfigItem();
       Managers = ParentObject.Managers;
     }
     #endregion
@@ -37,8 +40,8 @@ namespace LJCDataUtility
       if (NetCommon.HasItems(dataColumns))
       {
         var parentTableName = ParentObject.DataTableRowName();
-        var dbName = ParentObject.DataConfigItemValue("Database");
-        var connectionType = ParentObject.DataConfigItemValue("ConnectionType");
+        var dbName = Config.Database;
+        var connectionType = Config.ConnectionType;
         if (!NetString.HasValue(connectionType))
         {
           // Default value.
@@ -59,15 +62,29 @@ namespace LJCDataUtility
             break;
         }
 
+        // Show CreateTable procedure script.
         var infoValue = ParentObject.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(showText
+        var scriptWindow = new DataUtilityCommon();
+        var controlValue = scriptWindow.ShowInfo(showText
           , "Create Table Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
+
+        // Execute CreateTable procedure script.
+        if (scriptWindow.IsExecute)
+        {
+          var connectionString = Config.GetConnectionString();
+          var providerName = Config.GetProviderName();
+          DataAccess dataAccess = new DataAccess(connectionString, providerName);
+          dataAccess.ExecuteScriptText(showText);
+        }
       }
     }
     #endregion
 
     #region Properties
+
+    // Gets or sets the DataConfig value.
+    private DataConfig Config { get; set; }
 
     // Gets or sets the Parent List reference.
     private DataUtilityList ParentObject { get; set; }

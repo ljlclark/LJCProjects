@@ -28,6 +28,7 @@ namespace LJCDataUtility
       // Initialize property values.
       ParentObject = parentObject;
       ParentObject.Cursor = Cursors.WaitCursor;
+      Config = ParentObject.DataConfigItem();
 
       // Set Grid vars.
       TableGrid = ParentObject.TableGrid;
@@ -369,9 +370,8 @@ namespace LJCDataUtility
         var targetNames = NetString.DelimitValues(dataKey.TargetColumnName
           , "[", "]");
 
-        var dbName = ParentObject.DataConfigItemValue("Database");
-
-        var proc = new ProcBuilder(ParentObject, dbName, sourceTableName);
+        var proc = new ProcBuilder(ParentObject, Config.Database
+          , sourceTableName);
         proc.Begin(proc.ForeignKeyProcName);
         proc.Line("AS");
         proc.Line("BEGIN");
@@ -389,7 +389,8 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value
+        var scriptWindow = new DataUtilityCommon();
+        var controlValue = scriptWindow.ShowInfo(value
           , "Foreign Key Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
       }
@@ -408,9 +409,7 @@ namespace LJCDataUtility
         var tableRow = ParentObject.DataTableRow();
         var tableName = ParentObject.DataTableRowName(tableRow);
 
-        var dbName = ParentObject.DataConfigItemValue("Database");
-
-        var proc = new ProcBuilder(ParentObject, dbName, tableName);
+        var proc = new ProcBuilder(ParentObject, Config.Database, tableName);
         proc.Begin(proc.ForeignKeyDropProcName);
 
         proc.Line("AS");
@@ -424,7 +423,8 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(value
+        var scriptWindow = new DataUtilityCommon();
+        var controlValue = scriptWindow.ShowInfo(value
           , "Foreign Key Drop Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
       }
@@ -581,6 +581,8 @@ namespace LJCDataUtility
     #endregion
 
     #region Properties
+
+    private DataConfig Config { get; set; }
 
     // Gets or sets the Parent List reference.
     private DataUtilityList ParentObject { get; set; }

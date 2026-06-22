@@ -11,6 +11,26 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 
+// DataUtilityList DataUtilityList.cs
+//                 DataUtilityListCode.cs
+// Control Code
+//   .ModuleComboCode DataModuleComboCode
+//   .ColumnGridCode DataColumnGridCode
+//   .KeyGridCode DataKeyGridCode
+//   .TableGridCode DataTableGridCode
+// Create SQL
+//   - AddData
+//   - CreateData
+//   - CreateTable
+//   - InsertSelect
+//   - RenameTable
+//   - SetUtilData
+// Create Procedure
+//   - MyProcBuilder
+//   - ProcBuilder
+
+//   Managers (ManagersDataUtility)
+
 namespace LJCDataUtility
 {
   // The list form code.
@@ -92,42 +112,6 @@ namespace LJCDataUtility
       var configCombo = DataConfigCombo;
       var retConfig = configCombo.SelectedItem as DataConfig;
       return retConfig;
-    }
-
-    // Gets the DataConfig object.
-    internal string DataConfigItemValue(string propertyName)
-    {
-      string retValue = null;
-
-      var dataConfig = DataConfigItem();
-      if (dataConfig != null)
-      {
-        switch (propertyName.ToLower())
-        {
-          case "connectiontype":
-            retValue = dataConfig.ConnectionType;
-            break;
-          case "database":
-            retValue = dataConfig.Database;
-            break;
-          case "dbserver":
-            retValue = dataConfig.DbServer;
-            break;
-          case "name":
-            retValue = dataConfig.Name;
-            break;
-          case "providername":
-            retValue = dataConfig.GetProviderName();
-            break;
-          case "pswd":
-            retValue = dataConfig.Pswd;
-            break;
-          case "userid":
-            retValue = dataConfig.UserID;
-            break;
-        }
-      }
-      return retValue;
     }
     #endregion
 

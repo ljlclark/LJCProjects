@@ -186,7 +186,6 @@ namespace LJCDataUtility
 
       if (NetCommon.HasItems(dataColumns))
       {
-        //var first = true;
         b.IsFirst = true;
         foreach (DataUtilColumn dataColumn in dataColumns)
         {
@@ -202,13 +201,13 @@ namespace LJCDataUtility
           {
             nameValue = dataColumn.NewName;
           }
-          b.Item(nameValue);
+          b.Item(nameValue, false, false);
         }
       }
 
       if (includeParens)
       {
-        b.Text(")");
+        b.AddText(")");
       }
       var retList = b.ToString();
       return retList;
@@ -241,7 +240,7 @@ namespace LJCDataUtility
         {
           if (!isFirst)
           {
-            b.Line(",");
+            b.AddLine(",");
           }
           isFirst = false;
           var declaration = SQLDeclaration(dataColumn);
@@ -335,8 +334,7 @@ namespace LJCDataUtility
       b.Line(Check(objectName, ObjectType.Primary));
       b.Line($" ALTER TABLE [dbo].[{tableName}]");
       b.Line($"  ADD CONSTRAINT [{objectName}]");
-      b.Line("  PRIMARY KEY CLUSTERED");
-      b.Line("  (");
+      b.Line("  PRIMARY KEY CLUSTERED (");
       b.Line($"    {columnNames} ASC");
       b.Line("  )");
       b.Text("END");

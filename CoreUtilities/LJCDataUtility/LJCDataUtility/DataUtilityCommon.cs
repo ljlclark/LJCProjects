@@ -12,8 +12,8 @@ namespace LJCDataUtility
   {
     #region Functions
 
-    // Show the info data.
-    internal static ControlValue ShowInfo(string contents, string text
+    // Show the info window.
+    internal ControlValue ShowInfo(string contents, string text
       , ControlValue controlValue = null)
     {
       ControlValue retValue = controlValue;
@@ -23,23 +23,38 @@ namespace LJCDataUtility
       {
         location = new Point(retValue.Left, retValue.Top);
       }
-      var info = new InfoWindow(text, contents, location);
+      var infoWindow = new InfoWindow(text, contents, location);
       if (retValue != null)
       {
-        info.Height = retValue.Height;
-        info.Width = retValue.Width;
+        infoWindow.Height = retValue.Height;
+        infoWindow.Width = retValue.Width;
       }
-      info.ShowDialog();
+      // *** Begin *** Add
+      infoWindow.ShowExecuteButton(true);
+      infoWindow.LJCCloseEvent += InfoWindow_LJCCloseEvent;
+      // *** End ***
+      infoWindow.ShowDialog();
       retValue = new ControlValue()
       {
         ControlName = "AddProc",
-        Height = info.Height,
-        Left = info.Left,
-        Top = info.Top,
-        Width = info.Width
+        Height = infoWindow.Height,
+        Left = infoWindow.Left,
+        Top = infoWindow.Top,
+        Width = infoWindow.Width
       };
       return retValue;
     }
     #endregion
+
+    private void InfoWindow_LJCCloseEvent(object sender, System.EventArgs e)
+    {
+      var infoWindow = (InfoWindow)sender;
+      if (infoWindow.LJCIsExecute)
+      {
+        IsExecute = true;
+      }
+    }
+
+    public bool IsExecute { get; set; }
   }
 }

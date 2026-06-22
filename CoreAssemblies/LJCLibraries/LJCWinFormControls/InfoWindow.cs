@@ -25,38 +25,34 @@ namespace LJCWinFormControls
   /// <summary>The Info window.</summary>
   public partial class InfoWindow : Form
   {
-    // ******************************
     #region Constructors
-    // ******************************
 
     /// <summary>Initializes an object instance.</summary>
     public InfoWindow()
     {
       // Initialize properties.
-      LJCText = null;
       LJCContents = null;
+      LJCIsExecute = false;
+      LJCText = null;
     }
 
     // Initializes an object instance with the supplied values.
     /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-    // ********************
     public InfoWindow(string text = null, string contents = null
       , Point? location = null) : this()
     {
       InitializeComponent();
+      ExecuteButton.Visible = false;
 
-      LJCLocation = location;
       LJCText = text;
       LJCContents = contents;
+      LJCLocation = location;
     }
     #endregion
 
-    // ******************************
     #region Form Event Handlers
-    // ******************************
 
     // Handles the form Load event.
-    // ********************
     private void InfoWindow_Load(object sender, EventArgs e)
     {
       SetContents();
@@ -79,6 +75,13 @@ namespace LJCWinFormControls
       return InfoRTBox.Text;
     }
 
+    /// <summary>Sets the execute button visibility.</summary>
+    /// <param name="visible">The visible flag.</param>
+    public void ShowExecuteButton(bool visible = false)
+    {
+      ExecuteButton.Visible = visible;
+    }
+
     // Sets the contents after the form is loaded.
     private void SetContents()
     {
@@ -90,13 +93,10 @@ namespace LJCWinFormControls
     }
     #endregion
 
-    // ******************************
     #region Event Methods
-    // ******************************
 
     // Fires the OnClose event.
     /// <include path='items/OnClose/*' file='Doc/InfoWindow.xml'/>
-    // ********************
     protected void LJCOnClose()
     {
       LJCCloseEvent?.Invoke(this, new EventArgs());
@@ -104,7 +104,6 @@ namespace LJCWinFormControls
 
     // Fires the OnClosing event.
     /// <include path='items/OnClosing/*' file='Doc/InfoWindow.xml'/>
-    // ********************
     protected override void OnClosing(CancelEventArgs e)
     {
       base.OnClosing(e);
@@ -112,21 +111,23 @@ namespace LJCWinFormControls
     }
     #endregion
 
-    // ******************************
+    // Handles the ExecuteButton click event.
+    private void ExecuteButton_Click(object sender, EventArgs e)
+    {
+      LJCIsExecute = true;
+      Close();
+    }
+
     #region Control Event Handlers
-    // ******************************
 
     // Handles the OKButton click event.
-    // ********************
     private void OKButton_Click(object sender, EventArgs e)
     {
       Close();
     }
     #endregion
 
-    // ******************************
     #region Properties
-    // ******************************
 
     /// <summary>Gets or sets the InfoWindow contents.</summary>
     public string LJCContents
@@ -138,6 +139,9 @@ namespace LJCWinFormControls
       }
     }
     private string mLJCContents;
+
+    /// <summary>Gets or sets the IsExecute value.</summary>
+    public bool LJCIsExecute { get; set; }
 
     /// <summary>Gets or sets the form Title text.</summary>
     public string LJCText
@@ -151,9 +155,7 @@ namespace LJCWinFormControls
 
     #endregion
 
-    // ******************************
     #region Class Data
-    // ******************************
 
     /// <summary>The Close event.</summary>
     public event EventHandler<EventArgs> LJCCloseEvent;

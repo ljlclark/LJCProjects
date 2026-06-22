@@ -5,11 +5,8 @@ using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCNetCommon;
-using LJCWinFormCommon;
-using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
@@ -23,6 +20,7 @@ namespace LJCDataUtility
     {
       // Initialize property values.
       ParentObject = parentObject;
+      Config = ParentObject.DataConfigItem();
       Managers = ParentObject.Managers;
     }
     #endregion
@@ -47,11 +45,8 @@ namespace LJCDataUtility
       {
         var parentTableName = ParentObject.DataTableRowName();
 
-        var configCombo = ParentObject.DataConfigCombo;
-        var dataConfig = configCombo.SelectedItem as DataConfig;
-        var dataConfigName = dataConfig.Name;
-
-        var connectionType = ParentObject.DataConfigItemValue("ConnectionType");
+        var dataConfigName = Config.Name;
+        var connectionType = Config.ConnectionType;
         if (!NetString.HasValue(connectionType))
         {
           // Default value.
@@ -73,7 +68,8 @@ namespace LJCDataUtility
         }
 
         var infoValue = ParentObject.InfoValue;
-        var controlValue = DataUtilityCommon.ShowInfo(showText
+        var scriptWindow = new DataUtilityCommon();
+        var controlValue = scriptWindow.ShowInfo(showText
           , "Insert Select SQL", infoValue);
         ParentObject.InfoValue = controlValue;
       }
@@ -90,10 +86,10 @@ namespace LJCDataUtility
 
       TextBuilder b = new TextBuilder();
       string toTableName = $"New{tableName}";
-      var dbName = ParentObject.DataConfigItemValue("Database");
 
       // Create new Table.
-      var myProc = new MyProcBuilder(ParentObject, dbName, toTableName);
+      var myProc = new MyProcBuilder(ParentObject, Config.Database
+        , toTableName);
       var createTable = myProc.CreateTable(insertColumns);
       b.Text(createTable);
 
@@ -117,7 +113,7 @@ namespace LJCDataUtility
 
       TextBuilder b = new TextBuilder();
       string toTableName = $"New{tableName}";
-      var dbName = ParentObject.DataConfigItemValue("Database");
+      var dbName = Config.Database;
       b.Line($"USE [{dbName}]");
 
       // Create new Table.
@@ -337,6 +333,9 @@ namespace LJCDataUtility
     #endregion
 
     #region Properties
+
+    // Gets or sets the DataConfig value.
+    private DataConfig Config { get; set; }
 
     private string Indent { get; set; }
 

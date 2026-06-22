@@ -1,6 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // AddData.cs
+using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace LJCDataUtility
     {
       // Initialize property values.
       ParentObject = parentObject;
+      Config = ParentObject.DataConfigItem();
       Managers = ParentObject.Managers;
     }
     #endregion
@@ -37,13 +39,13 @@ namespace LJCDataUtility
       if (NetCommon.HasItems(dataColumns))
       {
         var tableName = ParentObject.DataTableRowName();
-        var dbName = ParentObject.DataConfigItemValue("Database");
-        var procData = new AddProcData(dbName, dataColumns, tableName)
+        var procData = new AddProcData(Config.Database, dataColumns, tableName)
         {
           ForeignKeys = ParentObject.ForeignKeys()
         };
 
-        var connectionType = ParentObject.DataConfigItemValue("ConnectionType");
+        //var connectionType = ParentObject.DataConfigItemValue("ConnectionType");
+        var connectionType = Config.ConnectionType;
         if (!NetString.HasValue(connectionType))
         {
           // Default value.
@@ -144,19 +146,21 @@ namespace LJCDataUtility
           WrapEnabled = true,
         };
         valuesBuilder.AddIndent(2);
-        valuesBuilder.Text("Values(");
+        valuesBuilder.Text("VALUES(");
         valuesBuilder.IsFirst = true;
         foreach (var tableColumn in data.TableColumns)
         {
           if ("ID" == tableColumn.Name)
+          {
             continue;
+          }
 
           var columnName = tableColumn.Name;
           if (IsForeignKeyColumn(keyValues, columnName))
           {
             columnName = ProcBuilder.SQLVarName(columnName);
           }
-          valuesBuilder.Item(columnName);
+          valuesBuilder.Item(columnName, false, false);
         }
         valuesBuilder.AddText(")");
         var valuesList = valuesBuilder.ToString();
@@ -166,7 +170,8 @@ namespace LJCDataUtility
       } while (false);
 
       var infoValue = ParentObject.InfoValue;
-      var controlValue = DataUtilityCommon.ShowInfo(retString
+      var scriptWindow = new DataUtilityCommon();
+      var controlValue = scriptWindow.ShowInfo(retString
         , "Add Data Procedure", infoValue);
       ParentObject.InfoValue = controlValue;
       return retString;
@@ -342,7 +347,8 @@ namespace LJCDataUtility
       }
 
       var infoValue = ParentObject.InfoValue;
-      var controlValue = DataUtilityCommon.ShowInfo(retString
+      var scriptWindow = new DataUtilityCommon();
+      var controlValue = scriptWindow.ShowInfo(retString
         , "Add Data Procedure", infoValue);
       ParentObject.InfoValue = controlValue;
       return retString;
@@ -485,6 +491,9 @@ namespace LJCDataUtility
     #endregion
 
     #region Properties
+
+    // Gets or sets the DataConfig value.
+    private DataConfig Config { get; set; }
 
     // Gets or sets the Parent List reference.
     private DataUtilityList ParentObject { get; set; }

@@ -5,7 +5,6 @@ using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCDBDataAccess;
 using LJCNetCommon;
-using System;
 using System.Windows.Forms;
 
 namespace LJCDataUtility
