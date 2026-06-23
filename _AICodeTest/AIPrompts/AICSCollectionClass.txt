@@ -1,0 +1,92 @@
+Please write a C# strongly typed collection class named "LJCPersons".
+Use straightforward, common coding techniques and not highly optimized or
+"tricky" code.
+
+Use an indent of 2 spaces.
+The first brace for methods, etc. starts on a new line.
+Do not use "this." for accessing members except where necessary or to avoid
+confusion.
+Do not automatically wrap all arguments or parameters.
+Wrap lines that exceed 80 characters where possible.
+Wrap code statements before ",", "&&" or "||" where possible.
+
+The class will represent a collection of LJCPerson data objects.
+The LJCPerson objects have the following values:
+ID long (database generated primary key),
+ParentID long (foreign key),
+Name string(60),
+Description string(100).
+
+Default Constructor
+Create the default constructor.
+
+Copy Constructor LJCPersons(LJCPersons persons)
+Creates a deep copy of the provided persons collection object.
+Return the new object.
+
+Public Method Clone()
+Creates a deep copy of the collection object.
+
+Public Method Add(long id, long parentID, string name, string description = null)
+The "parentID" and "name" values are the unique key. Check for an existing item
+using the Retrieve() method and throw an error if a duplicate is found.
+The parameters are used to create a new LJCPerson object which is then added to
+the collection.
+Return the added object.
+
+Public Method AddObject(LJCPerson person)
+Add the supplied person object to the collection using the Add() method.
+Return the added object.
+
+Public Method Retrieve(long parentID, string name)
+Search the collection for an object with the matching parentID and name values.
+Return the matching object.
+
+Public Method Remove(long parentID, string name)
+Use the Retrieve() method to find the matching item and remove it from the
+collection.
+
+Return the code as files not as JSON.
+
+
+Create an external XML file for this class with XML comments for public members
+named "Doc/LJCPersons.xml".
+Wrap lines that exceed 80 characters.
+
+Add the <include> XML comments to the public class members to reference the
+external member XML comments using the template:
+/// <include path="members/ID" file="Doc/Person.xml"/>
+
+Use this sample template for the external file:
+<?xml version="1.0"?>
+<members>
+  <!-- Static Methods -->
+
+  <!-- Class -->
+  <LJCPersons>
+  </LJCPersons>
+
+  <!-- Constructor Methods -->
+  <DefaultCtor>
+  </DefaultCtor>
+  <ParameterizedCtor>
+  </ParameterizedCtor>
+  <CopyCtor>
+  </CopyCtor>
+
+  <!-- Data Object Methods -->
+  <Clone>
+  </Clone>
+
+  <!-- Collection Methods -->
+  <Add>
+  </Add>
+  <AddObject>
+  </AddObject>
+  <Remove>
+  </Remove>
+  <Retrieve>
+  </Retrieve>
+
+  <!-- Properties -->
+</members>

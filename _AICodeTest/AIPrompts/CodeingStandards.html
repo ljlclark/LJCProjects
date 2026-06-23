@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!-- CodingStandards.html -->
+<html>
+<head>
+  <title>Coding Standards</title>
+  <meta charset='utf-8' />
+  <meta name='author' content='Lester J. Clark' />
+  <meta name="description" content="C# Coding Standards">
+  <meta name='viewport' content='width=device-width initial-scale=1' />
+</head>
+<body>
+  <h4>Naming conventions</h4>
+  <p>
+    Consistent naming makes code more readable and easier to maintain.
+  </p>
+  <p>
+    <b>PascalCase:</b> Use for types (classes, interfaces, records, enums),
+    public members (properties, methods, events), namespaces, and file names.
+  </p>
+  <p>
+    <b>camelCase:</b> Use for local variables and method parameters.
+  </p>
+  <p>
+    <b>Interfaces:</b> Prefix interface names with I (e.g., IEnumerable,
+    IDisposable).
+  </p>
+  <p>
+    <b>Constants and readonly fields:</b> Use PascalCase, but avoid
+    SCREAMING_CAPS.
+  </p>
+  <p>
+    <b>Private fields:</b> Prefix private or internal fields with an underscore
+    (_) followed by camelCase (e.g., _myPrivateField). Static private fields are
+    sometimes prefixed with s_.
+  </p>
+  <p>
+    <b>Boolean properties/variables:</b> Prefix with a verb to frame them as a
+    question (e.g., isComplete, hasStarted).
+  </p>
+  <p>
+    <b>Descriptive names:</b> Favor meaningful names over abbreviations (e.g.,
+    horizontalAlignment is clearer than alignHoriz).
+  </p>
+  <h4>Code formatting</h4>
+  <p>
+    Formatting rules ensure consistency and readability across a project.
+  </p>
+  <p>
+    <b>Indentation:</b> Use two spaces for each level of indentation, not tabs.
+  </p>
+  <p>
+    <b>Statements per line:</b> Write only one statement per line.
+  </p>
+  <p>
+    <b>Spacing:</b> Add a single space after keywords like if, for, and while,
+    as well as around binary operators like == and +.
+  </p>
+  <p>
+    <b>Braces:</b> Place opening and closing braces on their own lines
+    (Allman style), and always use braces even for single-line conditional
+    statements.
+  </p>
+  <p>
+    <b>Blank lines:</b> Use blank lines to separate logical sections of code,
+    such as between method and property definitions.
+  </p>
+  <h4>Documentation and comments</h4>
+  <p>
+    Comments should clarify why a piece of code exists, not just what it does.
+  </p>
+  <p>
+    <b>XML comments (///):</b> Use for documenting public members like classes,
+    methods, and properties. Visual Studio uses these to provide IntelliSense
+    and generate documentation.
+  </p>
+  <p>
+    <b>Single-line comments (//):</b> Use for short explanations or notes.
+  </p>
+  <p>
+    <b>Avoid outdated comments:</b> Do not use C-style multi-line comments
+    (/* ... */) for documenting code. Reserve them for temporarily commenting
+    out code.
+  </p>
+  <p>
+    <b>Keep comments up-to-date:</b> If you modify code, update its
+    corresponding comments to prevent confusion.
+  </p>
+  <h4>Code organization</h4>
+  <p>
+    Logical organization of code is essential for maintainability.
+  </p>
+  <p>
+    <b>Single responsibility principle (SRP):</b> Each class should represent
+    one logical object and each method should have one main purpose, making them
+    more focused and easier to manage.
+  </p>
+  <p>
+    <b>Small methods:</b> Keep methods small and focused on a single task. If a
+    method grows too large, refactor it into smaller, more specific methods.
+  </p>
+  <p>
+    <b>File-scoped namespaces:</b> Place the namespace declaration at the top of
+    the file to reduce indentation.
+  </p>
+  <p>
+    <b>One type per file:</b> For clarity and ease of navigation, declare each
+    top-level type (class, interface, etc.) in its own file.
+  </p>
+  <p>
+    <b>File layout:</b> Use the following regions and order for members:<br />
+    Static Methods<br />
+    Constructors<br />
+    Public Methods<br />
+    <br />
+    // Public Methods can be grouped by common or related purpose or
+    functionality to make their relationship clearer.<br />
+    Data Object Methods: Clone(), SetOriginalState()<br />
+    Collection Methods: Add(), AddObject(), Retrieve(), Remove()<br />
+    Data Methods: Add(), Delete(), Load(), Retrieve()<br />
+    <br />
+    Private Methods<br />
+    Public Properties<br />
+    Private Properties<br />
+    Public Fields<br />
+    Private Fields<br />
+  </p>
+  <h4>Best practices</h4>
+  <p>
+    These standards improve code quality, performance, and robustness.
+  </p>
+  <p>
+    <b>Use var wisely:</b> Use implicit typing (var) only when the type is
+    obvious from the right-hand side of the assignment.
+  </p>
+  <p>
+    <b>Exception handling:</b> Use try/catch/finally blocks to handle errors and
+    release resources. Catch only specific, predictable exceptions.
+  </p>
+  <p>
+    <b>The using statement:</b> Use the using statement for disposable types to
+    ensure resources are cleaned up properly.
+  </p>
+  <p>
+    <b>Avoid magic numbers:</b> Replace hard-coded numeric values with named
+    constants or enums to make their purpose clear.
+  </p>
+  <p>
+    <b>Asynchronous programming:</b> Use the async and await keywords for
+    I/O-bound operations to prevent blocking and improve application
+    responsiveness.
+  </p>
+  <p>
+    <b>Null-conditional operators:</b> Use the null-conditional operator (?.) to
+    safely access members on potentially null objects, reducing the need for
+    explicit null checks.
+  </p>
+  <p>
+    <b>Immutable types:</b> Use readonly fields and record types when
+    immutability is desired to prevent accidental changes.
+  </p>
+  <p>
+    <b>Prefer is and as:</b> Use the is and as operators for safe casting and
+    type checking.
+  </p>
+</body>
+</html>

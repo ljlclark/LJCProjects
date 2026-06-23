@@ -134,6 +134,12 @@ namespace LJCDataAccess
             retValue = command.ExecuteNonQuery();
           }
         }
+        catch (Exception ex)
+        {
+          string message = NetString.ExceptionString(ex);
+          message += "\r\n" + sql;
+          throw new Exception(message);
+        }
         finally
         {
           ProviderFactory.CloseConnection();
@@ -208,9 +214,9 @@ namespace LJCDataAccess
           {
             dbDataAdapter.Fill(dataTable);
           }
-          catch (Exception e)
+          catch (Exception ex)
           {
-            string message = NetString.ExceptionString(e);
+            string message = NetString.ExceptionString(ex);
             throw new Exception(message);
           }
         }
@@ -358,9 +364,9 @@ namespace LJCDataAccess
             {
               dbDataAdapter.FillSchema(retValue, SchemaType.Mapped);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-              string message = NetString.ExceptionString(e);
+              string message = NetString.ExceptionString(ex);
               message += "\r\n" + sql;
               throw new Exception(message);
             }

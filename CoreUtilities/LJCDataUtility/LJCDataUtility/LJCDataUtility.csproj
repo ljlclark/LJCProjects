@@ -77,7 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataUtilityCommon.cs" />
+    <Compile Include="ShowInfoDialog.cs" />
     <Compile Include="Forms\DataColumn\ColumnHTMLTable.cs" />
     <Compile Include="Forms\DataColumn\GenHTMLTable.cs" />
     <Compile Include="Forms\DataTable\CustomActions\AddData.cs" />
@@ -135,7 +135,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ProcBuilder.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="DataUtilityProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\TableNameSelect.resx">
       <DependentUpon>TableNameSelect.cs</DependentUpon>
@@ -216,8 +216,8 @@
     <Content Include="Doc\GenHTMLTable.xml" />
     <Content Include="Doc\MyProcBuilder.xml" />
     <Content Include="Doc\ProcBuilder.xml" />
-    <Content Include="Forms\DataTable\ACreate.txt" />
-    <Content Include="Forms\DataTable\BCreate.txt" />
+    <Content Include="Forms\DataTable\CustomActions\MyAddData.txt" />
+    <Content Include="Forms\DataTable\CustomActions\MyCreateTable.txt" />
     <Content Include="Naming.txt" />
   </ItemGroup>
   <ItemGroup>

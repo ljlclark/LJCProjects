@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<members>
+  <!-- Class -->
+  <LJCPerson>
+    <summary>
+      Represents a person entity.
+    </summary>
+  </LJCPerson>
+
+  <!-- Constructors -->
+  <LJCPersonCtor>
+    <summary>
+      Initializes a new instance of the <see cref="Person"/> class.
+    </summary>
+  </LJCPersonCtor>
+  <LJCPersonCtor2>
+    <summary>
+      Initializes a new instance of the <see cref="Person"/> class with the
+      provided values.
+    </summary>
+    <param name="id">The ID value.</param>
+    <param name="name">The Name value.</param>
+    <param name="description">The Description value. (optional)</param>
+  </LJCPersonCtor2>
+  <LJCPersonCtor3>
+    <summary>
+      Initializes a new instance of the <see cref="Person"/> class with the
+      values copied from the provided object.
+    </summary>
+    <param name="person">The object to be copied</param>
+    <returns>The copied object.</returns>
+  </LJCPersonCtor3>
+
+  <!-- Data Object Methods -->
+  <Clone>
+    <summary>
+      Creates a deep copy of the current <see cref="Person"/> object.
+    </summary>
+    <returns>
+      A new <see cref="Person"/> object.
+    </returns>
+  </Clone>
+  <SetOriginalState>
+    <summary>
+      Sets the original values from the current property values and clears the
+      changed properties.
+    </summary>
+  </SetOriginalState>
+
+  <!-- Properties -->
+  <ID>
+    <summary>
+      <summary>Gets or sets the ID value.</summary>
+    </summary>
+  </ID>
+  <ParentID>
+    <summary>
+      Gets or sets the ParentID value.
+    </summary>
+  </ParentID>
+  <Name>
+    <summary>
+      <summary>Gets or sets the Name value.</summary>
+    </summary>
+  </Name>
+  <Description>
+    <summary>
+      <summary>Gets or sets the Description value.</summary>
+    </summary>
+  </Description>
+  <ChangedProperties>
+    <summary>
+      Gets a set of strings containing the names of properties that have been
+      changed since the last call to <see cref="SetOriginalState"/>.
+    </summary>
+  </ChangedProperties>
+</members>

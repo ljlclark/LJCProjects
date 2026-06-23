@@ -1,8 +1,6 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // ManagersDataSite.cs
-using System;
-using System.Reflection;
 using LJCDBClientLib;
 using LJCNetCommon;
 
@@ -104,21 +102,6 @@ namespace LJCDataSiteDAL
 
     #region Properties
 
-    /// <summary>Gets the DataSiteManager object.</summary>
-    public DataSiteManager DataSiteManager
-    {
-      get
-      {
-        if (null == mDataSiteManager)
-        {
-          mDataSiteManager
-            = new DataSiteManager(mDbServiceRef, mDataConfigName);
-        }
-        return mDataSiteManager;
-      }
-    }
-    private DataSiteManager mDataSiteManager;
-
     /// <summary>Gets the DataEntryManager object.</summary>
     public DataEntryManager DataEntryManager
     {
@@ -148,6 +131,21 @@ namespace LJCDataSiteDAL
       }
     }
     private DataEntrySiteManager mDataEntrySiteManager;
+
+    /// <summary>Gets the DataSiteManager object.</summary>
+    public DataSiteManager DataSiteManager
+    {
+      get
+      {
+        if (null == mDataSiteManager)
+        {
+          mDataSiteManager
+            = new DataSiteManager(mDbServiceRef, mDataConfigName);
+        }
+        return mDataSiteManager;
+      }
+    }
+    private DataSiteManager mDataSiteManager;
     #endregion
 
     #region Class Data

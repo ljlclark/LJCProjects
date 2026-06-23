@@ -74,7 +74,7 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var scriptWindow = new DataUtilityCommon();
+        var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(value
           , "Column Data Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
@@ -106,7 +106,7 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var scriptWindow = new DataUtilityCommon();
+        var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(value
           , "Key Data Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
@@ -133,7 +133,7 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var scriptWindow = new DataUtilityCommon();
+        var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(value
           , "Module Data Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
@@ -165,7 +165,7 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var scriptWindow = new DataUtilityCommon();
+        var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(value
           , "Table Data Procedure", infoValue);
         ParentObject.InfoValue = controlValue;

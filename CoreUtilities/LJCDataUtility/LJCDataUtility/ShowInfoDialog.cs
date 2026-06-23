@@ -7,13 +7,29 @@ using System.Drawing;
 
 namespace LJCDataUtility
 {
-  // Common DataUtility Methods.
-  internal class DataUtilityCommon
+  /// <summary>Common DataUtility Methods.</summary>
+  public class ShowInfoDialog
   {
+    #region Constructor Methods
+
+    /// <summary>Initializes an object instance.</summary>
+    public ShowInfoDialog()
+    {
+      ShowExecuteButton = false;
+    }
+
+    /// <summary>Initializes an object instance.</summary>
+    public ShowInfoDialog(bool showExecuteButton) : this()
+    {
+      ShowExecuteButton = showExecuteButton;
+    }
+
+    #endregion
+
     #region Functions
 
-    // Show the info window.
-    internal ControlValue ShowInfo(string contents, string text
+    /// <summary>Show the info window.</summary>
+    public ControlValue ShowInfo(string contents, string text
       , ControlValue controlValue = null)
     {
       ControlValue retValue = controlValue;
@@ -29,10 +45,8 @@ namespace LJCDataUtility
         infoWindow.Height = retValue.Height;
         infoWindow.Width = retValue.Width;
       }
-      // *** Begin *** Add
-      infoWindow.ShowExecuteButton(true);
+      infoWindow.ShowExecuteButton(ShowExecuteButton);
       infoWindow.LJCCloseEvent += InfoWindow_LJCCloseEvent;
-      // *** End ***
       infoWindow.ShowDialog();
       retValue = new ControlValue()
       {
@@ -55,6 +69,10 @@ namespace LJCDataUtility
       }
     }
 
+    /// <summary>Gets or sets the IsExecute flag.</summary>
     public bool IsExecute { get; set; }
+
+    /// <summary>Gets or sets the show "Execute" button flag.</summary>
+    public bool ShowExecuteButton { get; set; }
   }
 }

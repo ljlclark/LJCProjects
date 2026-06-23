@@ -68,7 +68,7 @@ namespace LJCDataUtility
         }
 
         var infoValue = ParentObject.InfoValue;
-        var scriptWindow = new DataUtilityCommon();
+        var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(showText
           , "Insert Select SQL", infoValue);
         ParentObject.InfoValue = controlValue;

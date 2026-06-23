@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36623.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_AICodeTest", "_AICodeTest\_AICodeTest.csproj", "{C510906C-3F06-41AF-9ED1-A909BBE46FBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AIPrompts", "AIPrompts", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		AIPrompts\AICheckDataObject.cs = AIPrompts\AICheckDataObject.cs
+		AIPrompts\AICSCollectionClass.txt = AIPrompts\AICSCollectionClass.txt
+		AIPrompts\AICSDataObjectClass.txt = AIPrompts\AICSDataObjectClass.txt
+		AIPrompts\CodeingStandards.html = AIPrompts\CodeingStandards.html
+		Persons.cs = Persons.cs
+		Person2.cs = Person2.cs
+		Persons.xml = Persons.xml
+		Persons2.cs = Persons2.cs
+		Persons2.xml = Persons2.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C510906C-3F06-41AF-9ED1-A909BBE46FBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C510906C-3F06-41AF-9ED1-A909BBE46FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C510906C-3F06-41AF-9ED1-A909BBE46FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C510906C-3F06-41AF-9ED1-A909BBE46FBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9765B0EF-954B-4F42-9EC1-6B7E3D2B6600}
+	EndGlobalSection
+EndGlobal

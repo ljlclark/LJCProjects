@@ -170,7 +170,7 @@ namespace LJCDataUtility
       } while (false);
 
       var infoValue = ParentObject.InfoValue;
-      var scriptWindow = new DataUtilityCommon();
+      var scriptWindow = new ShowInfoDialog();
       var controlValue = scriptWindow.ShowInfo(retString
         , "Add Data Procedure", infoValue);
       ParentObject.InfoValue = controlValue;
@@ -347,7 +347,7 @@ namespace LJCDataUtility
       }
 
       var infoValue = ParentObject.InfoValue;
-      var scriptWindow = new DataUtilityCommon();
+      var scriptWindow = new ShowInfoDialog();
       var controlValue = scriptWindow.ShowInfo(retString
         , "Add Data Procedure", infoValue);
       ParentObject.InfoValue = controlValue;

@@ -389,7 +389,7 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var scriptWindow = new DataUtilityCommon();
+        var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(value
           , "Foreign Key Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
@@ -423,7 +423,7 @@ namespace LJCDataUtility
         var value = proc.ToString();
 
         var infoValue = ParentObject.InfoValue;
-        var scriptWindow = new DataUtilityCommon();
+        var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(value
           , "Foreign Key Drop Procedure", infoValue);
         ParentObject.InfoValue = controlValue;

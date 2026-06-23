@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<members>
+  <!-- Class -->
+  <LJCPersons>
+    <summary>
+      Represents a strongly typed collection of <see cref="LJCPerson"/>
+      objects, indexed by a combination of ParentID and Name.
+    </summary>
+  </LJCPersons>
+
+  <!-- Constructor Methods -->
+  <DefaultCtor>
+    <summary>
+      Initializes a new, empty instance of the <see cref="LJCPersons"/> class.
+    </summary>
+  </DefaultCtor>
+  <CopyCtor>
+    <summary>
+      Initializes a new instance of the <see cref="LJCPersons"/> class
+      that is a deep copy of the specified collection.
+    </summary>
+    <param name="persons">
+      The <see cref="LJCPersons"/> collection to copy.
+    </param>
+  </CopyCtor>
+
+  <!-- Data Object Methods -->
+  <Clone>
+    <summary>
+      Creates a deep copy of the current collection.
+    </summary>
+    <returns>
+      A new <see cref="LJCPersons"/> object that is a deep copy of
+      this instance.
+    </returns>
+  </Clone>
+
+  <!-- Collection Methods -->
+  <Add>
+    <summary>
+      Adds a new <see cref="LJCPerson"/> object to the collection
+      using the specified values.
+    </summary>
+    <param name="id">The database-generated primary key.</param>
+    <param name="parentID">The foreign key to the parent object.</param>
+    <param name="name">The name of the person (part of the unique key).</param>
+    <param name="description">The person's description.</param>
+    <returns>
+      The newly created <see cref="LJCPerson"/> object.
+    </returns>
+    <exception cref="System.InvalidOperationException">
+      Thrown if a person with the same ParentID and Name already exists.
+    </exception>
+  </Add>
+  <AddObject>
+    <summary>
+      Adds the specified <see cref="LJCPerson"/> object to the collection.
+    </summary>
+    <param name="person">
+      The <see cref="LJCPerson"/> object to add.
+    </param>
+    <returns>
+      The newly added <see cref="LJCPerson"/> object.
+    </returns>
+    <exception cref="System.InvalidOperationException">
+      Thrown if a person with the same ParentID and Name already exists.
+    </exception>
+  </AddObject>
+  <Retrieve>
+    <summary>
+      Searches for and retrieves a <see cref="LJCPerson"/> object with
+      the matching ParentID and Name.
+    </summary>
+    <param name="parentID">The foreign key of the person to retrieve.</param>
+    <param name="name">The name of the person to retrieve.</param>
+    <returns>
+      The <see cref="LJCPerson"/> object if found; otherwise, null.
+    </returns>
+  </Retrieve>
+  <Remove>
+    <summary>
+      Removes a <see cref="LJCPerson"/> object from the collection
+      using the specified ParentID and Name.
+    </summary>
+    <param name="parentID">The foreign key of the person to remove.</param>
+    <param name="name">The name of the person to remove.</param>
+  </Remove>
+
+  <!-- Properties -->
+</members>

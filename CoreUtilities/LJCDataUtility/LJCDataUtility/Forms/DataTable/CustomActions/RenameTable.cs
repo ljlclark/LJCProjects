@@ -57,7 +57,7 @@ namespace LJCDataUtility
         }
 
         var infoValue = ParentObject.InfoValue;
-        var scriptWindow = new DataUtilityCommon();
+        var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(showText
           , "Rename Table SQL", infoValue);
         ParentObject.InfoValue = controlValue;

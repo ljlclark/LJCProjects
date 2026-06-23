@@ -48,24 +48,27 @@ namespace LJCDataUtility
           connectionType = "SQLServer";
         }
 
-        string showText = null;
+        string procText = null;
         switch (connectionType.ToLower())
         {
           case "mysql":
             var myProc = new MyProcBuilder(ParentObject, dbName, parentTableName);
-            showText = myProc.CreateTableProc(dataColumns);
+            procText = myProc.CreateTableProc(dataColumns);
             break;
 
           case "sqlserver":
             var proc = new ProcBuilder(ParentObject, dbName, parentTableName);
-            showText = proc.CreateTableProc(dataColumns);
+            procText = proc.CreateTableProc(dataColumns);
             break;
         }
 
         // Show CreateTable procedure script.
         var infoValue = ParentObject.InfoValue;
-        var scriptWindow = new DataUtilityCommon();
-        var controlValue = scriptWindow.ShowInfo(showText
+        var scriptWindow = new ShowInfoDialog
+        {
+          ShowExecuteButton = true
+        };
+        var controlValue = scriptWindow.ShowInfo(procText
           , "Create Table Procedure", infoValue);
         ParentObject.InfoValue = controlValue;
 
@@ -75,7 +78,7 @@ namespace LJCDataUtility
           var connectionString = Config.GetConnectionString();
           var providerName = Config.GetProviderName();
           DataAccess dataAccess = new DataAccess(connectionString, providerName);
-          dataAccess.ExecuteScriptText(showText);
+          dataAccess.ExecuteScriptText(procText);
         }
       }
     }

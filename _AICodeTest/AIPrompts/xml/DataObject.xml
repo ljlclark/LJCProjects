@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<members>
+  <!-- Class -->
+  <Person>
+    <summary>
+      Represents a person data object with change tracking capabilities.
+    </summary>
+  </Person>
+
+  <!-- Constructors -->
+  <PersonCtor>
+    <summary>
+      Initializes a new instance of the <see cref="Person"/> class.
+    </summary>
+    <param name="name">The name of the person.</param>
+    <param name="description">The optional description of the person.</param>
+  </PersonCtor>
+
+  <!-- Data Object Methods -->
+  <Clone>
+    <summary>
+      Creates a deep copy of the current <see cref="Person"/> object.
+    </summary>
+    <returns>
+      A new <see cref="Person"/> object that is a copy of this instance.
+    </returns>
+  </Clone>
+  <SetOriginalState>
+    <summary>
+      Sets the current property values as the original values,
+      and clears the list of changed properties.
+    </summary>
+  </SetOriginalState>
+
+  <!-- Properties -->
+  <ID>
+    <summary>
+      Gets or sets the unique identifier for the person.
+    </summary>
+    <remarks>
+      This is a database-generated primary key.
+    </remarks>
+  </ID>
+  <ParentID>
+    <summary>
+      Gets or sets the identifier of the person's parent.
+    </summary>
+  </ParentID>
+  <Name>
+    <summary>
+      Gets or sets the name of the person.
+    </summary>
+  </Name>
+  <Description>
+    <summary>
+      Gets or sets the description of the person.
+    </summary>
+  </Description>
+  <ChangedProperties>
+    <summary>
+      Gets a collection of properties names that have been changed from their
+      original values.
+    </summary>
+  </ChangedProperties>
+</members>

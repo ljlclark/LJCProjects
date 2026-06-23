@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<members>
+  <!-- Static Methods -->
+
+  <!-- Class -->
+  <LJCPersons>
+    <summary>
+      Represents a strongly typed collection of <see cref="LJCPerson"/>
+      objects. The unique key for an item is the combination of ParentID and
+      Name.
+    </summary>
+  </LJCPersons>
+
+  <!-- Constructor Methods -->
+  <DefaultCtor>
+    <summary>
+      Initializes a new instance of the <see cref="LJCPersons"/> class.
+    </summary>
+  </DefaultCtor>
+  <CopyCtor>
+    <summary>
+      Initializes a new instance of the <see cref="LJCPersons"/> class as a
+      deep copy of the specified collection.
+    </summary>
+    <param name="persons">
+      The <see cref="LJCPersons"/> collection to copy.
+    </param>
+    <exception cref="ArgumentNullException">
+      Thrown when the persons parameter is null.
+    </exception>
+  </CopyCtor>
+
+  <!-- Data Object Methods -->
+  <Clone>
+    <summary>
+      Creates a new object that is a deep copy of the current instance.
+    </summary>
+    <returns>A new object that is a deep copy of this instance.</returns>
+  </Clone>
+
+  <!-- Collection Methods -->
+  <Add>
+    <summary>
+      Creates a new <see cref="LJCPerson"/> object with the specified details
+      and adds it to the collection.
+    </summary>
+    <param name="id">The unique identifier (database primary key).</param>
+    <param name="parentID">The foreign key to the parent object.</param>
+    <param name="name">The name (part of the unique key).</param>
+    <param name="description">An optional description.</param>
+    <returns>
+      The newly created and added <see cref="LJCPerson"/> object.
+    </returns>
+    <exception cref="InvalidOperationException">
+      Thrown if an item with the same ParentID and Name already exists.
+    </exception>
+  </Add>
+  <AddObject>
+    <summary>
+      Adds an existing <see cref="LJCPerson"/> object to the collection.
+    </summary>
+    <param name="person">
+      The <see cref="LJCPerson"/> object to add.
+    </param>
+    <returns>
+      The added <see cref="LJCPerson"/> object.
+    </returns>
+    <exception cref="ArgumentNullException">
+      Thrown when the person parameter is null.
+    </exception>
+    <exception cref="InvalidOperationException">
+      Thrown if an item with the same ParentID and Name already exists.
+    </exception>
+  </AddObject>
+  <Remove>
+    <summary>
+      Removes the first occurrence of a specific object with matching
+      ParentID and Name from the collection.
+    </summary>
+    <param name="parentID">The foreign key to the parent object.</param>
+    <param name="name">The name of the person to remove.</param>
+  </Remove>
+  <Retrieve>
+    <summary>
+      Searches for a <see cref="LJCPerson"/> object with matching ParentID
+      and Name values.
+    </summary>
+    <param name="parentID">The foreign key to the parent object.</param>
+    <param name="name">The name to search for.</param>
+    <returns>
+      The matching <see cref="LJCPerson"/> object if found; otherwise, null.
+    </returns>
+  </Retrieve>
+
+  <!-- Properties -->
+  <ID>
+    <summary>
+      Gets or sets the unique identifier (database generated primary key).
+    </summary>
+  </ID>
+  <ParentID>
+    <summary>
+      Gets or sets the foreign key to the parent object.
+    </summary>
+  </ParentID>
+  <Name>
+    <summary>
+      Gets or sets the name (part of the unique key).
+    </summary>
+  </Name>
+  <Description>
+    <summary>
+      Gets or sets an optional description.
+    </summary>
+  </Description>
+</members>
+Use code with caution.
+
+
+

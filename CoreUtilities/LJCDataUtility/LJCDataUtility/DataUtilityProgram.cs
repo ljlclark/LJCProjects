@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace LJCDataUtility
 {
-  internal static class Program
+  internal static class DataUtilityProgram
   {
     // The main entry point for the application.
     [STAThread]

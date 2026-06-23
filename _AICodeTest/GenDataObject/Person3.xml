@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<members>
+  <!-- Class -->
+  <LJCPerson>
+    <summary>Represents a person data object with change tracking.</summary>
+  </LJCPerson>
+
+  <!-- Constructor Methods -->
+  <DefaultCtor>
+    <summary>Initializes a new instance of the LJCPerson class.</summary>
+  </DefaultCtor>
+  <ParameterizedCtor>
+    <summary>Initializes an LJCPerson instance with specific values.</summary>
+    <param name="id">The record ID.</param>
+    <param name="parentID">The parent record ID.</param>
+    <param name="name">The person's name.</param>
+    <param name="description">The person's description.</param>
+  </ParameterizedCtor>
+  <CopyCtor>
+    <summary>Initializes a new instance by copying another instance.</summary>
+    <param name="person">The object to copy.</param>
+  </CopyCtor>
+
+  <!-- Data Object Methods -->
+  <Clone>
+    <summary>Creates a deep copy of the current object.</summary>
+    <returns>A new LJCPerson object.</returns>
+  </Clone>
+  <SetOriginalState>
+    <summary>
+      Sets the original values to match the current property values and
+      clears the list of changed properties.
+    </summary>
+  </SetOriginalState>
+
+  <!-- Properties -->
+  <ID>
+    <summary>Gets or sets the primary key ID.</summary>
+  </ID>
+  <ParentID>
+    <summary>Gets or sets the foreign key Parent ID.</summary>
+  </ParentID>
+  <Name>
+    <summary>Gets or sets the person's name (trimmed).</summary>
+  </Name>
+  <Description>
+    <summary>Gets or sets the person's description (trimmed).</summary>
+  </Description>
+  <ChangedProperties>
+    <summary>Gets or sets the list of property names that have changed.</summary>
+  </ChangedProperties>
+</members>
+
+
+
+
+

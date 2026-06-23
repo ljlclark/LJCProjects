@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<members>
+  <!-- Static Methods -->
+
+  <!-- Class -->
+  <LJCPerson>
+    <summary>Represents a Person data object.</summary>
+  </LJCPerson>
+
+  <!-- Constructor Methods -->
+  <DefaultCtor>
+    <summary>Initializes a new instance of the LJCPerson class.</summary>
+  </DefaultCtor>
+  <ParameterizedCtor>
+    <summary>Initializes an LJCPerson instance with provided values.</summary>
+    <param name="id">The record ID.</param>
+    <param name="parentID">The parent record ID.</param>
+    <param name="name">The name of the person.</param>
+    <param name="description">A description for the person.</param>
+  </ParameterizedCtor>
+  <CopyCtor>
+    <summary>Initializes a new instance by copying another object.</summary>
+    <param name="person">The person object to copy.</param>
+  </CopyCtor>
+
+  <!-- Data Object Methods -->
+  <Clone>
+    <summary>Creates a deep copy of the current object.</summary>
+    <returns>A new LJCPerson object.</returns>
+  </Clone>
+  <SetOriginalState>
+    <summary>Sets original values to current and clears changes.</summary>
+  </SetOriginalState>
+
+  <!-- Methods -->
+
+  <!-- Properties -->
+  <ID>
+    <summary>Gets or sets the database generated primary key.</summary>
+  </ID>
+  <ParentID>
+    <summary>Gets or sets the foreign key to the parent record.</summary>
+  </ParentID>
+  <Name>
+    <summary>Gets or sets the person's name (max 60 chars).</summary>
+  </Name>
+  <Description>
+    <summary>Gets or sets the person's description (max 100 chars).</summary>
+  </Description>
+  <ChangedProperties>
+    <summary>Gets or sets the list of modified property names.</summary>
+  </ChangedProperties>
+</members>
