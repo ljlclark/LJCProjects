@@ -74,21 +74,16 @@ namespace LJCDataUtilityDAL
 
     #region Data Class Methods
 
-    // Adds changed propertynames.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyNames"></param>
+    /// <summary>Adds property names to the changed names.</summary>
     public void AddChangedNames(List<string> propertyNames)
     {
-      foreach (string propertyName in propertyNames)
-      {
-        var name = ChangedNames.FindName(propertyName);
-        if (null == name)
-        {
-          ChangedNames.Add(propertyName);
-        }
-      }
+      ChangedNames.AddNames(propertyNames);
+    }
+
+    /// <summary>Clears the changed names.</summary>
+    public void ClearChangedNames()
+    {
+      ChangedNames.Clear();
     }
 
     // Creates and returns a clone of this object.

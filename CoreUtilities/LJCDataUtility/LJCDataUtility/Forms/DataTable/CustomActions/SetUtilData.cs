@@ -118,7 +118,7 @@ namespace LJCDataUtility
       };
       var propertyNames = tableManager.PropertyNames();
       propertyNames.Remove("ID");
-      dataTable.AddChangedNames(propertyNames);
+      dataTable.ChangedNames.AddNames(propertyNames);
       var newTable = tableManager.Add(dataTable);
 
       CreateColumns(newTable.ID);
@@ -276,7 +276,7 @@ namespace LJCDataUtility
       var keyManager = Managers.DataKeyManager;
       var names = keyManager.PropertyNames();
       names.Remove("ID");
-      newKey.AddChangedNames(names);
+      newKey.ChangedNames.AddNames(names);
       LJCReflect reflect = new LJCReflect(newKey);
       foreach (var name in names)
       {

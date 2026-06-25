@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDataUtilityDAL", "LJCDat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCDataSiteDAL", "LJCDataSiteDAL\LJCDataSiteDAL.csproj", "{BBCA1660-57D0-4156-86FA-65999F556231}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataUtilityDAL", "TestDataUtilityDAL\TestDataUtilityDAL.csproj", "{D27D39AF-1E43-4C6B-86BA-A827E89D58FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BBCA1660-57D0-4156-86FA-65999F556231}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBCA1660-57D0-4156-86FA-65999F556231}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBCA1660-57D0-4156-86FA-65999F556231}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D27D39AF-1E43-4C6B-86BA-A827E89D58FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D27D39AF-1E43-4C6B-86BA-A827E89D58FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D27D39AF-1E43-4C6B-86BA-A827E89D58FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D27D39AF-1E43-4C6B-86BA-A827E89D58FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -111,6 +111,27 @@ set src=%assmRoot%LJCDBServiceLib\LJCDBServiceLib\%bin%
 echo copy %src%\LJCDBServiceLib.dll %to%
 copy %src%\LJCDBServiceLib.dll %to%
 
+rem ---------------------------
+set to=%toRoot%TestDataUtilityDAL\%bin%
+echo.
+echo *** %to% ***
+
+set src=%assmRoot%LJCDBMessage\CipherLib\%bin%
+echo copy %src%\CipherLib.dll %to%
+copy %src%\CipherLib.dll %to%
+
+set src=%assmRoot%LJCDataAccess\LJCDataAccess\%bin%
+echo copy %src%\LJCDataAccess.dll %to%
+copy %src%\LJCDataAccess.dll %to%
+
+set src=%assmRoot%LJCDBDataAccess\LJCDBDataAccess\%bin%
+echo copy %src%\LJCDBDataAccess.dll %to%
+copy %src%\LJCDBDataAccess.dll %to%
+
+set src=%assmRoot%LJCDBServiceLib\LJCDBServiceLib\%bin%
+echo copy %src%\LJCDBServiceLib.dll %to%
+copy %src%\LJCDBServiceLib.dll %to%
+
 if %mainRoot%. == . goto End
 if %1%. == nopause. goto End
 pause

@@ -1,58 +1,66 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataUtilTable.cs
-using LJCNetCommon;
 using LJCDBClientLib;
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
-using LJCDataUtilityDAL;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LJCDataUtilityDAL
 {
   /// <summary>The DataTable table Data Object.</summary>
   public class DataUtilTable : IComparable<DataUtilTable>
   {
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataUtilTable()
     {
+      _ID = 0;
+      _DataSiteID = 0;
+      _DataModuleID = 0;
+      _DataModuleSiteID = 0;
+      _Name = "";
+      _Description = "";
+      _Sequence = 0;
+
       ChangedNames = new ChangedNames();
+      _OriginalValues = new OriginalValues();
+      SetOriginalValues();
+    }
+
+    // Initializes an object instance.
+    /// <include path='items/ParamConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    public DataUtilTable(string name, int sequence) : this()
+    {
+      _Name = name;
+      _Sequence = sequence;
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataUtilTable(DataUtilTable item)
     {
-      ChangedNames = new ChangedNames();
-      ID = item.ID;
-      DataModuleID = item.DataModuleID;
-      Name = item.Name;
-      Description = item.Description;
-      SchemaName = item.SchemaName;
-      NewName = item.NewName;
+      _DataSiteID = item.DataSiteID;
+      _ID = item.ID;
+      _DataModuleSiteID = item.DataModuleSiteID;
+      _DataModuleID = item.DataModuleID;
+      _Name = item.Name;
+      _Description = item.Description;
+      _Sequence = item.Sequence;
+      _SchemaName = item.SchemaName;
+      _NewName = item.NewName;
+
+      ChangedNames = item.ChangedNames;
+      _OriginalValues = new OriginalValues();
+      SetOriginalValues();
     }
     #endregion
 
-    #region Data Class Methods
-
-    // Adds changed propertynames.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="propertyNames"></param>
-    public void AddChangedNames(List<string> propertyNames)
-    {
-      foreach (string propertyName in propertyNames)
-      {
-        var name = ChangedNames.FindName(propertyName);
-        if (null == name)
-        {
-          ChangedNames.Add(propertyName);
-        }
-      }
-    }
+    #region Data Object Methods
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
@@ -82,11 +90,26 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
+    /// <summary>Initializes the original values.</summary>
+    public void SetOriginalValues()
+    {
+      _OriginalValues.DataSiteID = _DataModuleSiteID;
+      _OriginalValues.ID = _ID;
+      _OriginalValues.DataModuleSiteID = _DataModuleSiteID;
+      _OriginalValues.DataModuleID = _DataModuleID;
+      _OriginalValues.Name = _Name;
+      _OriginalValues.Description = _Description;
+      _OriginalValues.Sequence = _Sequence;
+      _OriginalValues.SchemaName = _SchemaName;
+      _OriginalValues.NewName = _NewName;
+      ChangedNames.Clear();
+    }
+
     // The object string identifier.
     /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
-      var retValue = $"{mName}:{mID}";
+      var retValue = $"{_Name}:{_ID}";
       return retValue;
     }
     #endregion
@@ -96,130 +119,161 @@ namespace LJCDataUtilityDAL
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
 
-    /// <summary>Gets or sets the ID value.</summary>
-    //[Required]
-    //[Column("ID", TypeName="bigint")]
-    public Int64 ID
+    /// <summary>Gets or sets the database ID.</summary>
+    [Required]
+    [Column("DataSiteID", TypeName = "bigint")]
+    public long DataSiteID
     {
-      get { return mID; }
+      get => _DataSiteID;
       set
       {
-        mID = ChangedNames.Add(ColumnID, mID, value);
+        if (_DataSiteID != value)
+        {
+          _DataSiteID = ChangedNames.Add(ColumnDataSiteID
+            , _OriginalValues.DataSiteID, value);
+        }
       }
     }
-    private Int64 mID;
+    private long _DataSiteID;
 
-    /// <summary>Gets or sets the DataSiteID value.</summary>
-    //[Required]
-    //[Column("DataSiteID", TypeName="bigint")]
-    public Int64 DataSiteID
+    /// <summary>Gets or sets the table row ID.</summary>
+    [Required]
+    [Column("ID", TypeName = "bigint")]
+    public long ID
     {
-      get { return mDataSiteID; }
+      get => _ID;
       set
       {
-        mDataSiteID = ChangedNames.Add(ColumnDataSiteID, mDataSiteID, value);
+        if (_DataModuleID != value)
+        {
+          _ID = ChangedNames.Add(ColumnID, _OriginalValues.ID
+            , value);
+        }
       }
     }
-    private Int64 mDataSiteID;
+    private long _ID;
 
-    /// <summary>Gets or sets the DataModuleID value.</summary>
-    //[Required]
-    //[Column("DataModuleID", TypeName="bigint")]
-    public Int64 DataModuleID
+    /// <summary>Gets or sets the parent database ID.</summary>
+    [Required]
+    [Column("DataModuleSiteID", TypeName = "bigint")]
+    public long DataModuleSiteID
     {
-      get { return mDataModuleID; }
+      get => _DataModuleID;
       set
       {
-        mDataModuleID = ChangedNames.Add(ColumnDataModuleID, mDataModuleID, value);
+        if (_DataModuleID != value)
+        {
+          _DataModuleSiteID = ChangedNames.Add(ColumnDataModuleSiteID
+            , _OriginalValues.DataModuleSiteID, value);
+        }
       }
     }
-    private Int64 mDataModuleID;
+    private long _DataModuleSiteID;
 
-    /// <summary>Gets or sets the DataModuleSiteID value.</summary>
-    //[Required]
-    //[Column("DataModuleSiteID", TypeName="bigint")]
-    public Int64 DataModuleSiteID
+    /// <summary>Gets or sets the parent table row ID.</summary>
+    [Required]
+    [Column("DataModuleID", TypeName = "bigint")]
+    public long DataModuleID
     {
-      get { return mDataModuleID; }
+      get => _DataModuleID;
       set
       {
-        mDataModuleSiteID = ChangedNames.Add(ColumnDataModuleSiteID
-          , mDataModuleSiteID, value);
+        if (_DataModuleID != value)
+        {
+          _DataModuleID = ChangedNames.Add(ColumnDataModuleID
+            , _OriginalValues.DataModuleID, value);
+        }
       }
     }
-    private Int64 mDataModuleSiteID;
+    private long _DataModuleID;
 
-    /// <summary>Gets or sets the Name value.</summary>
-    //[Required]
-    //[Column("Name", TypeName="nvarchar(60")]
-    public String Name
+    /// <summary>Gets or sets the name.</summary>
+    [Required]
+    [Column("Name", TypeName = "nvarchar(60")]
+    public string Name
     {
-      get { return mName; }
+      get => _Name;
       set
       {
-        value = NetString.InitString(value);
-        mName = ChangedNames.Add(ColumnName, mName, value);
+        var newValue = value?.Trim();
+        if (_Name != newValue)
+        {
+          _Name = ChangedNames.Add(ColumnName, _OriginalValues.Name, newValue);
+        }
       }
     }
-    private String mName;
+    private string _Name;
 
-    /// <summary>Gets or sets the Description value.</summary>
-    //[Required]
-    //[Column("Description", TypeName="nvarchar(80")]
-    public String Description
+    /// <summary>Gets or sets the description.</summary>
+    [Required]
+    [Column("Description", TypeName = "nvarchar(80")]
+    public string Description
     {
-      get { return mDescription; }
+      get => _Description;
       set
       {
-        value = NetString.InitString(value);
-        mDescription = ChangedNames.Add(ColumnDescription, mDescription, value);
+        var newValue = value?.Trim();
+        if (_Name != newValue)
+        {
+          _Description = ChangedNames.Add(ColumnDescription
+            , _OriginalValues.Description, newValue);
+        }
       }
     }
-    private String mDescription;
+    private string _Description;
 
-    /// <summary>Gets or sets the Sequence value.</summary>
-    //[Required]
-    //[Column("Sequence", TypeName="int")]
-    public Int32 Sequence
+    /// <summary>Gets or sets the sequence.</summary>
+    [Required]
+    [Column("Sequence", TypeName = "int")]
+    public int Sequence
     {
-      get { return mSequence; }
+      get => _Sequence;
       set
       {
-        mSequence = ChangedNames.Add(ColumnSequence, mSequence, value);
+        if (_Sequence != value)
+        {
+          _Sequence = ChangedNames.Add(ColumnSequence, _OriginalValues.Sequence
+            , value);
+        }
       }
     }
-    private Int32 mSequence;
+    private int _Sequence;
 
-    /// <summary>Gets or sets the SchemaName value.</summary>
-    //[Column("SchemaName", TypeName="nvarchar(30")]
-    public String SchemaName
+    /// <summary>Gets or sets the schema name.</summary>
+    [Column("SchemaName", TypeName = "nvarchar(30")]
+    public string SchemaName
     {
-      get { return mSchemaName; }
+      get => _SchemaName;
       set
       {
-        value = NetString.InitString(value);
-        mSchemaName = ChangedNames.Add(ColumnSchemaName, mSchemaName, value);
+        var newValue = value?.Trim();
+        if (_SchemaName != newValue)
+        {
+          _SchemaName = ChangedNames.Add(ColumnSchemaName
+            , _OriginalValues.SchemaName, newValue);
+        }
       }
     }
-    private String mSchemaName;
+    private string _SchemaName;
 
-    /// <summary>Gets or sets the NewName value.</summary>
-    //[Column("NewName", TypeName="nvarchar(60")]
-    public String NewName
+    /// <summary>Gets or sets the new name.</summary>
+    [Column("NewName", TypeName = "nvarchar(60")]
+    public string NewName
     {
-      get { return mNewName; }
+      get => _NewName;
       set
       {
-        value = NetString.InitString(value);
-        mNewName = ChangedNames.Add(ColumnNewName, mNewName, value);
+        var newValue = value?.Trim();
+        if (_NewName != newValue)
+        {
+          _NewName = ChangedNames.Add(ColumnNewName, _OriginalValues.NewName
+            , newValue);
+        }
       }
     }
-    private String mNewName;
-    #endregion
+    private string _NewName;
 
-    #region Calculated and Join Data Properties
-
-    /// <summary>Gets or sets the Join ModuleName value.</summary>
+    /// <summary>Gets or sets the Join module name.</summary>
     public string ModuleName { get; set; }
     #endregion
 
@@ -234,17 +288,17 @@ namespace LJCDataUtilityDAL
     /// <summary>The table name.</summary>
     public static string TableName = "DataTable";
 
-    /// <summary>The ID column name.</summary>
-    public static string ColumnID = "ID";
-
     /// <summary>The DataSiteID column name.</summary>
     public static string ColumnDataSiteID = "DataSiteID";
 
-    /// <summary>The DataModuleID column name.</summary>
-    public static string ColumnDataModuleID = "DataModuleID";
+    /// <summary>The ID column name.</summary>
+    public static string ColumnID = "ID";
 
     /// <summary>The DataModuleSiteID column name.</summary>
     public static string ColumnDataModuleSiteID = "DataModuleSiteID";
+
+    /// <summary>The DataModuleID column name.</summary>
+    public static string ColumnDataModuleID = "DataModuleID";
 
     /// <summary>The Name column name.</summary>
     public static string ColumnName = "Name";
@@ -269,12 +323,43 @@ namespace LJCDataUtilityDAL
 
     /// <summary>The Description maximum length.</summary>
     public static int LengthSequence = 3;
-    #endregion
-
-    #region Calculated and Join Class Data
 
     /// <summary>The Join ModuleName column name.</summary>
     public static string ColumnModuleName = "ModuleName";
+
+    // The object starting values.
+    private readonly OriginalValues _OriginalValues;
+
+    // The object starting values.
+    private class OriginalValues
+    {
+      // Gets or sets the database ID.
+      public long DataSiteID { get; set; }
+
+      // Gets or sets the table row ID.
+      public long ID { get; set; }
+
+      // Gets or sets the parent database ID.
+      public long DataModuleSiteID { get; set; }
+
+      // Gets or sets the parent table row ID.
+      public long DataModuleID { get; set; }
+
+      // Gets or sets the unique name.
+      public string Name { get; set; }
+
+      // Gets or sets the description.
+      public string Description { get; set; }
+
+      // Gets or sets the sequence.
+      public int Sequence { get; set; }
+
+      // Gets or sets the schema name.
+      public string SchemaName { get; set; }
+
+      // Gets or sets the new name.
+      public string NewName { get; set; }
+    }
     #endregion
   }
 

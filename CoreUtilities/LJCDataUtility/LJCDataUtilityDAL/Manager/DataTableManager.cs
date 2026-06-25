@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // DataTableManager.cs
 using LJCDataSiteDAL;
-using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
@@ -122,6 +121,9 @@ namespace LJCDataUtilityDAL
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
       EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
+    #endregion
+
+    #region Info Methods
 
     // Creates a collection of columns that match the supplied list.
     /// <include path='items/Columns/*' file='../../LJCGenDoc/Common/Manager.xml'/>
@@ -143,7 +145,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Load/Retrieve Methods
+    #region Additional Load and Retrieve Methods
 
     // Retrieves a record with the supplied value.
     /// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
@@ -176,7 +178,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region GetKey Methods
+    #region Get Key Methods
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
@@ -192,7 +194,7 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Gets the ID key columns.
+    // Gets the Parent ID key columns.
     /// <include path='items/ParentKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbColumns ParentKey(int parentID)
     {
@@ -206,7 +208,7 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Gets the ID key columns.
+    // Gets the Unique ID key columns.
     /// <include path='items/UniqueKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbColumns UniqueKey(int parentID, string name)
     {

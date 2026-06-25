@@ -1,31 +1,52 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataKey.cs
-using LJCNetCommon;
 using LJCDBClientLib;
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
-using LJCDataUtilityDAL;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LJCDataUtilityDAL
 {
   /// <summary>The DataKey table Data Object.</summary>
   public class DataKey : IComparable<DataKey>
   {
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataKey()
     {
+      _ID = 0;
+      _DataSiteID = 0;
+      _DataTableID = 0;
+      _DataTableSiteID = 0;
+      _Name = "";
+      _KeyType = 0;
+      _SourceColumnName = null;
+      _TargetTableName = null;
+      _TargetColumnName = null;
+      _IsClustered = false;
+      _IsAscending = false;
+
       ChangedNames = new ChangedNames();
+      _OriginalValues = new OriginalValues();
+      SetOriginalValues();
+    }
+
+    // Initializes an object instance.
+    /// <include path='items/ParamConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    public DataKey(string name) : this()
+    {
+      _Name = name;
     }
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataKey(DataKey item)
     {
-      ChangedNames = new ChangedNames();
       ID = item.ID;
       DataSiteID = item.DataSiteID;
       DataTableID = item.DataTableID;
@@ -40,24 +61,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Data Class Methods
-
-    // Adds changed propertynames.
-    /// <summary>
-    /// Adds changed propertynames.
-    /// </summary>
-    /// <param name="propertyNames">The property name list.</param>
-    public void AddChangedNames(List<string> propertyNames)
-    {
-      foreach (string propertyName in propertyNames)
-      {
-        var name = ChangedNames.FindName(propertyName);
-        if (null == name)
-        {
-          ChangedNames.Add(propertyName);
-        }
-      }
-    }
+    #region Data Object Methods
 
     // Creates and returns a clone of this object.
     /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
@@ -89,11 +93,28 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
+    /// <summary>Initializes the original values.</summary>
+    public void SetOriginalValues()
+    {
+      _OriginalValues.ID = _ID;
+      _OriginalValues.DataSiteID = _DataSiteID;
+      _OriginalValues.DataTableID = _DataTableID;
+      _OriginalValues.DataTableSiteID = _DataTableSiteID;
+      _OriginalValues.Name = _Name;
+      _OriginalValues.KeyType = _KeyType;
+      _OriginalValues.SourceColumnName = _SourceColumnName;
+      _OriginalValues.TargetTableName = _TargetTableName;
+      _OriginalValues.TargetColumnName = _TargetColumnName;
+      _OriginalValues.IsClustered = _IsClustered;
+      _OriginalValues.IsAscending = _IsAscending;
+      ChangedNames.Clear();
+    }
+
     // The object string identifier.
     /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
-      var retValue = $"{mName}:{mID}";
+      var retValue = $"{_Name}:{_ID}";
       return retValue;
     }
     #endregion
@@ -104,157 +125,190 @@ namespace LJCDataUtilityDAL
     // if property was renamed.
 
     /// <summary>Gets or sets the ID value.</summary>
-    //[Required]
-    //[Column("ID", TypeName="int")]
-    public Int64 ID
+    [Required]
+    [Column("ID", TypeName = "int")]
+    public long ID
     {
-      get { return mID; }
+      get => _ID;
       set
       {
-        mID = ChangedNames.Add(ColumnID
-          , mID, value);
+        if (_ID != value)
+        {
+          _ID = ChangedNames.Add(ColumnID, _OriginalValues.ID, value);
+        }
       }
     }
-    private Int64 mID;
+    private long _ID;
 
     /// <summary>Gets or sets the ID value.</summary>
-    //[Required]
-    //[Column("ID", TypeName="bigint")]
-    public Int64 DataSiteID
+    [Required]
+    [Column("DataSiteID", TypeName = "bigint")]
+    public long DataSiteID
     {
-      get { return mDataSiteID; }
+      get => _DataSiteID;
       set
       {
-        mDataSiteID = ChangedNames.Add(ColumnDataSiteID, mDataSiteID, value);
+        if (_DataSiteID != value)
+        {
+          _DataSiteID = ChangedNames.Add(ColumnDataSiteID
+            , _OriginalValues.DataSiteID, value);
+        }
       }
     }
-    private Int64 mDataSiteID;
+    private long _DataSiteID;
 
     /// <summary>Gets or sets the DataTableID value.</summary>
-    //[Required]
-    //[Column("DataTableID", TypeName="int")]
-    public Int64 DataTableID
+    [Required]
+    [Column("DataTableID", TypeName = "bigint")]
+    public long DataTableID
     {
-      get { return mDataTableID; }
+      get => _DataTableID;
       set
       {
-        mDataTableID = ChangedNames.Add(ColumnDataTableID
-          , mDataTableID, value);
+        if (_DataTableID != value)
+        {
+          _DataTableID = ChangedNames.Add(ColumnDataTableID
+          , _OriginalValues.DataTableID, value);
+        }
       }
     }
-    private Int64 mDataTableID;
+    private long _DataTableID;
 
     /// <summary>Gets or sets the DataTableID value.</summary>
-    //[Required]
-    //[Column("DataTableSiteID", TypeName="bigint")]
-    public Int64 DataTableSiteID
+    [Required]
+    [Column("DataTableSiteID", TypeName = "bigint")]
+    public long DataTableSiteID
     {
-      get { return mDataTableSiteID; }
+      get => _DataTableSiteID;
       set
       {
-        mDataTableSiteID = ChangedNames.Add(ColumnDataTableSiteID
-          , mDataTableSiteID, value);
+        if (_DataTableSiteID != value)
+        {
+          _DataTableSiteID = ChangedNames.Add(ColumnDataTableSiteID
+            , _OriginalValues.DataTableSiteID, value);
+        }
       }
     }
-    private Int64 mDataTableSiteID;
+    private long _DataTableSiteID;
 
     /// <summary>Gets or sets the Name value.</summary>
-    //[Required]
-    //[Column("Name", TypeName="nvarchar(60")]
-    public String Name
+    [Required]
+    [Column("Name", TypeName = "nvarchar(60")]
+    public string Name
     {
-      get { return mName; }
+      get => _Name;
       set
       {
-        value = NetString.InitString(value);
-        mName = ChangedNames.Add(ColumnName
-          , mName, value);
+        var newValue = value?.Trim();
+        if (_Name != newValue)
+        {
+          _Name = ChangedNames.Add(ColumnName
+            , _OriginalValues.Name, newValue);
+        }
       }
     }
-    private String mName;
+    private String _Name;
 
     /// <summary>Gets or sets the KeyType value.</summary>
-    //[Required]
-    //[Column("KeyType", TypeName="smallint")]
-    public Int16 KeyType
+    [Required]
+    [Column("KeyType", TypeName = "smallint")]
+    public short KeyType
     {
-      get { return mKeyType; }
+      get => _KeyType;
       set
       {
-        mKeyType = ChangedNames.Add(ColumnKeyType
-          , mKeyType, value);
+        if (_KeyType != value)
+        {
+          _KeyType = ChangedNames.Add(ColumnKeyType
+            , _OriginalValues.KeyType, value);
+        }
       }
     }
-    private Int16 mKeyType;
+    private short _KeyType;
 
-    /// <summary>Gets or sets the SourceColumnName value.</summary>
-    //[Column("SourceColumnName", TypeName="nvarchar(60")]
-    public String SourceColumnName
+    /// <summary>Gets or sets the source column name.</summary>
+    [Column("SourceColumnName", TypeName = "nvarchar(60")]
+    public string SourceColumnName
     {
-      get { return mSourceColumnName; }
+      get => _SourceColumnName;
       set
       {
         //value = NetString.InitString(value);
-        value = NetString.ScrubDelimitedValues(value);
-        mSourceColumnName = ChangedNames.Add(ColumnSourceColumnName
-          , mSourceColumnName, value);
+        var newValue = NetString.ScrubDelimitedValues(value);
+        if (_SourceColumnName != newValue)
+        {
+          _SourceColumnName = ChangedNames.Add(ColumnSourceColumnName
+           , _OriginalValues.SourceColumnName, newValue);
+        }
       }
     }
-    private String mSourceColumnName;
+    private string _SourceColumnName;
 
-    /// <summary>Gets or sets the TargetTableName value.</summary>
-    //[Column("TargetTableName", TypeName="nvarchar(60")]
-    public String TargetTableName
+    /// <summary>Gets or sets the target table name.</summary>
+    [Column("TargetTableName", TypeName = "nvarchar(60")]
+    public string TargetTableName
     {
-      get { return mTargetTableName; }
+      get => _TargetTableName;
       set
       {
-        value = NetString.InitString(value);
-        mTargetTableName = ChangedNames.Add(ColumnTargetTableName
-          , mTargetTableName, value);
+        value = value?.Trim();
+        if (_TargetTableName != value)
+        {
+          _TargetTableName = ChangedNames.Add(ColumnTargetTableName
+            , _OriginalValues.TargetTableName, value);
+        }
       }
     }
-    private String mTargetTableName;
+    private string _TargetTableName;
 
-    /// <summary>Gets or sets the TargetColumnName value.</summary>
-    //[Column("TargetColumnName", TypeName="nvarchar(60")]
-    public String TargetColumnName
+    /// <summary>Gets or sets the target column name.</summary>
+    [Column("TargetColumnName", TypeName = "nvarchar(60")]
+    public string TargetColumnName
     {
-      get { return mTargetColumnName; }
+      get => _TargetColumnName;
       set
       {
-        value = NetString.InitString(value);
-        mTargetColumnName = ChangedNames.Add(ColumnTargetColumnName
-          , mTargetColumnName, value);
+        value = value?.Trim();
+        if (_TargetColumnName != value)
+        {
+          _TargetColumnName = ChangedNames.Add(ColumnTargetColumnName
+            , _OriginalValues.TargetColumnName, value);
+        }
       }
     }
-    private String mTargetColumnName;
+    private string _TargetColumnName;
 
-    /// <summary>Gets or sets the IsClustered value.</summary>
-    //[Column("IsClustered", TypeName="bit")]
-    public Boolean IsClustered
+    /// <summary>Gets or sets the IsClustered flag.</summary>
+    [Column("IsClustered", TypeName="bit")]
+    public bool IsClustered
     {
-      get { return mIsClustered; }
+      get => _IsClustered;
       set
       {
-        mIsClustered = ChangedNames.Add(ColumnIsClustered
-          , mIsClustered, value);
+        if (_IsClustered != value)
+        {
+          _IsClustered = ChangedNames.Add(ColumnIsClustered
+            , _OriginalValues.IsClustered, value);
+        }
       }
     }
-    private Boolean mIsClustered;
+    private bool _IsClustered;
 
-    /// <summary>Gets or sets the IsAscending value.</summary>
-    //[Column("IsAscending", TypeName="bit")]
-    public Boolean IsAscending
+    /// <summary>Gets or sets the IsAscending flag.</summary>
+    [Column("IsAscending", TypeName="bit")]
+    public bool IsAscending
     {
-      get { return mIsAscending; }
+      get => _IsAscending;
       set
       {
-        mIsAscending = ChangedNames.Add(ColumnIsAscending
-          , mIsAscending, value);
+        if (_IsAscending != value)
+        {
+          _IsAscending = ChangedNames.Add(ColumnIsAscending
+            , _OriginalValues.IsAscending, value);
+        }
       }
     }
-    private Boolean mIsAscending;
+    private bool _IsAscending;
     #endregion
 
     #region Calculated and Join Data Properties
@@ -330,6 +384,46 @@ namespace LJCDataUtilityDAL
 
     /// <summary>The TargetColumnName maximum length.</summary>
     public static int LengthTargetColumnName = 60;
+
+    // The object starting values.
+    private readonly OriginalValues _OriginalValues;
+
+    // The object starting values.
+    private class OriginalValues
+    {
+      // Gets or sets the table row ID.
+      public long ID { get; set; }
+
+      // Gets or sets the database ID.
+      public long DataSiteID { get; set; }
+
+      // Gets or sets the parent table row ID.
+      public long DataTableID { get; set; }
+
+      // Gets or sets the parent database ID.
+      public long DataTableSiteID { get; set; }
+
+      // Gets or sets the unique name.
+      public string Name { get; set; }
+
+      // Gets or sets the KeyType value.
+      public short KeyType { get; set; }
+
+      // Gets or sets the source column name.
+      public string SourceColumnName { get; set; }
+
+      // Gets or sets the target table name.
+      public string TargetTableName { get; set; }
+
+      // Gets or sets the target column name.
+      public string TargetColumnName { get; set; }
+
+      // Gets or sets the IsClustered flag.
+      public bool IsClustered { get; set; }
+
+      // Gets or sets the IsAscending flag.
+      public bool IsAscending { get; set; }
+    }
     #endregion
   }
 
