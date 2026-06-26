@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataUtilTable.cs
 using LJCDBClientLib;
@@ -10,13 +10,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>The DataTable table Data Object.</summary>
+  /// <summary>The DataTable data.</summary>
   public class DataUtilTable : IComparable<DataUtilTable>
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public DataUtilTable()
     {
       _ID = 0;
@@ -27,13 +28,16 @@ namespace LJCDataUtilityDAL
       _Description = "";
       _Sequence = 0;
 
+      _SchemaName = null;
+      _NewName = null;
       ChangedNames = new ChangedNames();
       _OriginalValues = new OriginalValues();
       SetOriginalValues();
     }
 
-    // Initializes an object instance.
-    /// <include path='items/ParamConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/DataTable.xml'
+    ///  path='members/ParamConstructor/*'/>
     public DataUtilTable(string name, int sequence) : this()
     {
       _Name = name;
@@ -41,16 +45,18 @@ namespace LJCDataUtilityDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/CopyConstructor/*'/>
     public DataUtilTable(DataUtilTable item)
     {
-      _DataSiteID = item.DataSiteID;
       _ID = item.ID;
-      _DataModuleSiteID = item.DataModuleSiteID;
+      _DataSiteID = item.DataSiteID;
       _DataModuleID = item.DataModuleID;
+      _DataModuleSiteID = item.DataModuleSiteID;
       _Name = item.Name;
       _Description = item.Description;
       _Sequence = item.Sequence;
+
       _SchemaName = item.SchemaName;
       _NewName = item.NewName;
 
@@ -63,7 +69,8 @@ namespace LJCDataUtilityDAL
     #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public DataUtilTable Clone()
     {
       var retValue = MemberwiseClone() as DataUtilTable;
@@ -71,42 +78,50 @@ namespace LJCDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/CompareTo/*'/>
     public int CompareTo(DataUtilTable other)
     {
-      int retValue = -2;
+      int retValue;
 
-      var isContinue = true;
-      if (null == other)
+      while (true)
       {
-        // This value is greater than null.
-        retValue = 1;
-        isContinue = false;
-      }
-      if (isContinue)
-      {
+        if (null == other)
+        {
+          // This value is greater than null.
+          retValue = NetString.CompareGreater;
+          break;
+        }
+
         retValue = ID.CompareTo(other.ID);
+        // Not case sensitive.
+        //retValue = string.Compare(ID, other.ID, true);
+        break;
       }
       return retValue;
     }
 
-    /// <summary>Initializes the original values.</summary>
+    // Initializes the original values.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/SetOriginalValues/*'/>
     public void SetOriginalValues()
     {
-      _OriginalValues.DataSiteID = _DataModuleSiteID;
       _OriginalValues.ID = _ID;
-      _OriginalValues.DataModuleSiteID = _DataModuleSiteID;
+      _OriginalValues.DataSiteID = _DataModuleSiteID;
       _OriginalValues.DataModuleID = _DataModuleID;
+      _OriginalValues.DataModuleSiteID = _DataModuleSiteID;
       _OriginalValues.Name = _Name;
       _OriginalValues.Description = _Description;
       _OriginalValues.Sequence = _Sequence;
+
       _OriginalValues.SchemaName = _SchemaName;
       _OriginalValues.NewName = _NewName;
       ChangedNames.Clear();
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/ToString/*'/>
     public override string ToString()
     {
       var retValue = $"{_Name}:{_ID}";
@@ -119,7 +134,27 @@ namespace LJCDataUtilityDAL
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
 
-    /// <summary>Gets or sets the database ID.</summary>
+    // Gets or sets the ID value.
+    /// <include file='doc/DataTable.xml'
+    ///  path='members/ID/*'/>
+    [Required]
+    [Column("ID", TypeName = "bigint")]
+    public long ID
+    {
+      get => _ID;
+      set
+      {
+        if (_ID != value)
+        {
+          _ID = ChangedNames.Add(ColumnID, _OriginalValues.ID, value);
+        }
+      }
+    }
+    private long _ID;
+
+    // Gets or sets the database ID.
+    /// <include file='doc/DataTable.xml'
+    ///  path='members/DataSiteID/*'/>
     [Required]
     [Column("DataSiteID", TypeName = "bigint")]
     public long DataSiteID
@@ -136,41 +171,9 @@ namespace LJCDataUtilityDAL
     }
     private long _DataSiteID;
 
-    /// <summary>Gets or sets the table row ID.</summary>
-    [Required]
-    [Column("ID", TypeName = "bigint")]
-    public long ID
-    {
-      get => _ID;
-      set
-      {
-        if (_DataModuleID != value)
-        {
-          _ID = ChangedNames.Add(ColumnID, _OriginalValues.ID
-            , value);
-        }
-      }
-    }
-    private long _ID;
-
-    /// <summary>Gets or sets the parent database ID.</summary>
-    [Required]
-    [Column("DataModuleSiteID", TypeName = "bigint")]
-    public long DataModuleSiteID
-    {
-      get => _DataModuleID;
-      set
-      {
-        if (_DataModuleID != value)
-        {
-          _DataModuleSiteID = ChangedNames.Add(ColumnDataModuleSiteID
-            , _OriginalValues.DataModuleSiteID, value);
-        }
-      }
-    }
-    private long _DataModuleSiteID;
-
-    /// <summary>Gets or sets the parent table row ID.</summary>
+    // Gets or sets the parent table row ID.
+    /// <include file='doc/DataTable.xml'
+    ///  path='members/DataModuleID/*'/>
     [Required]
     [Column("DataModuleID", TypeName = "bigint")]
     public long DataModuleID
@@ -187,7 +190,28 @@ namespace LJCDataUtilityDAL
     }
     private long _DataModuleID;
 
-    /// <summary>Gets or sets the name.</summary>
+    // Gets or sets the parent database ID.
+    /// <include file='doc/DataTable.xml'
+    ///  path='members/DataModuleSiteID/*'/>
+    [Required]
+    [Column("DataModuleSiteID", TypeName = "bigint")]
+    public long DataModuleSiteID
+    {
+      get => _DataModuleID;
+      set
+      {
+        if (_DataModuleID != value)
+        {
+          _DataModuleSiteID = ChangedNames.Add(ColumnDataModuleSiteID
+            , _OriginalValues.DataModuleSiteID, value);
+        }
+      }
+    }
+    private long _DataModuleSiteID;
+
+    // Gets or sets the name.
+    /// <include file='doc/DataTable.xml'
+    ///  path='members/Name/*'/>
     [Required]
     [Column("Name", TypeName = "nvarchar(60")]
     public string Name
@@ -204,7 +228,9 @@ namespace LJCDataUtilityDAL
     }
     private string _Name;
 
-    /// <summary>Gets or sets the description.</summary>
+    // Gets or sets the description.
+    /// <include file='doc/DataTable.xml'
+    ///  path='members/Description/*'/>
     [Required]
     [Column("Description", TypeName = "nvarchar(80")]
     public string Description
@@ -213,7 +239,7 @@ namespace LJCDataUtilityDAL
       set
       {
         var newValue = value?.Trim();
-        if (_Name != newValue)
+        if (_Description != newValue)
         {
           _Description = ChangedNames.Add(ColumnDescription
             , _OriginalValues.Description, newValue);
@@ -222,7 +248,9 @@ namespace LJCDataUtilityDAL
     }
     private string _Description;
 
-    /// <summary>Gets or sets the sequence.</summary>
+    // Gets or sets the sequence.
+    /// <include file='doc/DataTable.xml'
+    ///  path='members/Sequence/*'/>
     [Required]
     [Column("Sequence", TypeName = "int")]
     public int Sequence
@@ -239,7 +267,9 @@ namespace LJCDataUtilityDAL
     }
     private int _Sequence;
 
-    /// <summary>Gets or sets the schema name.</summary>
+    // Gets or sets the schema name.
+    /// <include file='doc/DataTable.xml'
+    ///  path='members/SchemaName/*'/>
     [Column("SchemaName", TypeName = "nvarchar(30")]
     public string SchemaName
     {
@@ -256,7 +286,9 @@ namespace LJCDataUtilityDAL
     }
     private string _SchemaName;
 
-    /// <summary>Gets or sets the new name.</summary>
+    // Gets or sets the new name.
+    /// <include file='doc/DataTable.xml'
+    ///  path='members/NewName/*'/>
     [Column("NewName", TypeName = "nvarchar(60")]
     public string NewName
     {
@@ -272,14 +304,21 @@ namespace LJCDataUtilityDAL
       }
     }
     private string _NewName;
+    #endregion
 
-    /// <summary>Gets or sets the Join module name.</summary>
+    #region Calculated and Join Data Properties.
+
+    // Gets or sets the Join module name.
+    /// <include file='doc/DataTable.xml'
+    ///  path='members/ModuleName/*'/>
     public string ModuleName { get; set; }
     #endregion
 
     #region Class Properties
 
-    /// <summary>Gets a reference to the ChangedNames list.</summary>
+    // Gets a reference to the ChangedNames list.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/ToString/*'/>
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 
@@ -333,17 +372,18 @@ namespace LJCDataUtilityDAL
     // The object starting values.
     private class OriginalValues
     {
-      // Gets or sets the database ID.
-      public long DataSiteID { get; set; }
 
       // Gets or sets the table row ID.
       public long ID { get; set; }
 
-      // Gets or sets the parent database ID.
-      public long DataModuleSiteID { get; set; }
+      // Gets or sets the database ID.
+      public long DataSiteID { get; set; }
 
       // Gets or sets the parent table row ID.
       public long DataModuleID { get; set; }
+
+      // Gets or sets the parent database ID.
+      public long DataModuleSiteID { get; set; }
 
       // Gets or sets the unique name.
       public string Name { get; set; }

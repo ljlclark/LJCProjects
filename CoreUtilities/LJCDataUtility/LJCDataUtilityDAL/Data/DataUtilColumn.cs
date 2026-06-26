@@ -1,47 +1,59 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataUtilColumn.cs
-using LJCNetCommon;
 using LJCDBClientLib;
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
-using LJCDataUtilityDAL;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>The DataColumn Data Object.</summary>
+  /// <summary>The DataColumn data.</summary>
   public class DataUtilColumn : IComparable<DataUtilColumn>
   {
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public DataUtilColumn()
     {
+      _ID = 0;
+      _DataSiteID = 0;
+      _DataTableID = 0;
+      _DataTableSiteID = 0;
+      _Name = "";
+      _Description = null;
+      _Sequence = 0;
+
+      _AllowNull = false;
+      _DefaultValue = null;
+      _IdentityStart = 0;
+      _IdentityIncrement = 1;
+      _MaxLength = 0;
+      _NewName = null;
+      _NewMaxLength = 0;
+      _TypeName = "";
+
       ChangedNames = new ChangedNames();
+      _OriginalValues = new OriginalValues();
+      SetOriginalValues();
     }
 
-    // Initialize with main values.
-    /// <summary>
-    /// Initialize with main values.
-    /// </summary>
-    /// <param name="name"></param>
-    /// <param name="typeName"></param>
-    /// <param name="allowNull"></param>
-    /// <param name="maxLength"></param>
-    /// <param name="defaultValue"></param>
-    /// <param name="identityIncrement"></param>
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/ParamConstructor/*'/>
     public DataUtilColumn(string name, string typeName
       , bool allowNull = true, short maxLength = 0
-      , string defaultValue = null, short identityIncrement = 0)
+      , string defaultValue = null, short identityIncrement = 0) : this()
     {
-      ChangedNames = new ChangedNames();
       Name = name;
       TypeName = typeName;
       AllowNull = allowNull;
       MaxLength = maxLength;
       DefaultValue = defaultValue;
-      IdentityStart = 0;
       IdentityIncrement = identityIncrement;
       if (IdentityIncrement > 0)
       {
@@ -50,10 +62,10 @@ namespace LJCDataUtilityDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public DataUtilColumn(DataUtilColumn item)
     {
-      ChangedNames = new ChangedNames();
       ID = item.ID;
       DataSiteID = item.DataSiteID;
       DataTableID = item.DataTableID;
@@ -61,33 +73,27 @@ namespace LJCDataUtilityDAL
       Name = item.Name;
       Description = item.Description;
       Sequence = item.Sequence;
-      TypeName = item.TypeName;
-      MaxLength = item.MaxLength;
+
       AllowNull = item.AllowNull;
       DefaultValue = item.DefaultValue;
       IdentityStart = item.IdentityStart;
       IdentityIncrement = item.IdentityIncrement;
+      MaxLength = item.MaxLength;
       NewName = item.NewName;
       NewMaxLength = item.NewMaxLength;
+      TypeName = item.TypeName;
+
+      ChangedNames = item.ChangedNames;
+      _OriginalValues = new OriginalValues();
+      SetOriginalValues();
     }
     #endregion
 
-    #region Data Class Methods
-
-    /// <summary>Adds property names to the changed names.</summary>
-    public void AddChangedNames(List<string> propertyNames)
-    {
-      ChangedNames.AddNames(propertyNames);
-    }
-
-    /// <summary>Clears the changed names.</summary>
-    public void ClearChangedNames()
-    {
-      ChangedNames.Clear();
-    }
+    #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public DataUtilColumn Clone()
     {
       var retValue = MemberwiseClone() as DataUtilColumn;
@@ -95,38 +101,60 @@ namespace LJCDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/CompareTo/*'/>
     public int CompareTo(DataUtilColumn other)
     {
-      int retValue = -2;
+      int retValue;
 
-      var isContinue = true;
-      if (null == other)
+      while (true)
       {
-        // This value is greater than null.
-        retValue = 1;
-        isContinue = false;
-      }
-      if (isContinue)
-      {
-        retValue = ID.CompareTo(other.ID);
-        if (retValue != 0)
+        if (null == other)
         {
-          isContinue = false;
+          // This value is greater than null.
+          retValue = NetString.CompareGreater;
+          break;
         }
-      }
-      if (isContinue)
-      {
+
+        retValue = ID.CompareTo(other.ID);
+        if (NetString.CompareEqual == retValue)
+        {
+          break;
+        }
+
         retValue = DataSiteID.CompareTo(other.DataSiteID);
+        break;
       }
       return retValue;
     }
 
+    // Initializes the original values.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/SetOriginalValues/*'/>
+    public void SetOriginalValues()
+    {
+      _OriginalValues.ID = _ID;
+      _OriginalValues.Name = _Name;
+      _OriginalValues.Description = _Description;
+      _OriginalValues.Sequence = _Sequence;
+
+      _OriginalValues.AllowNull = _AllowNull;
+      _OriginalValues.DefaultValue = _DefaultValue;
+      _OriginalValues.IdentityStart = _IdentityStart;
+      _OriginalValues.IdentityIncrement = _IdentityIncrement;
+      _OriginalValues.MaxLength = _MaxLength;
+      _OriginalValues.NewName = _NewName;
+      _OriginalValues.NewMaxLength = _NewMaxLength;
+      _OriginalValues.TypeName = _TypeName;
+      ChangedNames.Clear();
+    }
+
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/ToString/*'/>
     public override string ToString()
     {
-      var retValue = $"{mName}:{mID}";
+      var retValue = $"{_Name}:{_ID}";
       return retValue;
     }
     #endregion
@@ -136,213 +164,290 @@ namespace LJCDataUtilityDAL
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
 
-    /// <summary>Gets or sets the ID value.</summary>
-    //[Required]
-    //[Column("ID", TypeName="bigint")]
-    public Int64 ID
+    // Gets or sets the ID value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/ID/*'/>
+    [Required]
+    [Column("ID", TypeName = "bigint")]
+    public long ID
     {
-      get { return mID; }
+      get => _ID;
       set
       {
-        mID = ChangedNames.Add(ColumnID, mID, value);
+        if (_ID != value)
+        {
+          _ID = ChangedNames.Add(ColumnID, _OriginalValues.ID, value);
+        }
       }
     }
-    private Int64 mID;
+    private long _ID;
 
-    /// <summary>Gets or sets the ID value.</summary>
-    //[Required]
-    //[Column("ID", TypeName="bigint")]
-    public Int64 DataSiteID
+    // Gets or sets the ID value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/DataSiteID/*'/>
+    [Required]
+    [Column("ID", TypeName = "bigint")]
+    public long DataSiteID
     {
-      get { return mDataSiteID; }
+      get => _DataSiteID;
       set
       {
-        mDataSiteID = ChangedNames.Add(ColumnDataSiteID, mDataSiteID, value);
+        if (_DataSiteID != value)
+        {
+          _DataSiteID = ChangedNames.Add(ColumnDataSiteID
+            , _OriginalValues.DataSiteID, value);
+        }
       }
     }
-    private Int64 mDataSiteID;
+    private long _DataSiteID;
 
-    /// <summary>Gets or sets the DataTableID value.</summary>
-    //[Required]
-    //[Column("DataTableID", TypeName="bigint")]
-    public Int64 DataTableID
+    // Gets or sets the DataTableID value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/DataTableID/*'/>
+    [Required]
+    [Column("DataTableID", TypeName = "bigint")]
+    public long DataTableID
     {
-      get { return mDataTableID; }
+      get => _DataTableID;
       set
       {
-        mDataTableID = ChangedNames.Add(ColumnDataTableID
-          , mDataTableID, value);
+        if (_DataTableID != value)
+        {
+          _DataTableID = ChangedNames.Add(ColumnDataTableID
+            , _OriginalValues.DataTableID, value);
+        }
       }
     }
-    private Int64 mDataTableID;
+    private long _DataTableID;
 
-    /// <summary>Gets or sets the DataTableID value.</summary>
-    //[Required]
-    //[Column("DataTableSiteID", TypeName="bigint")]
-    public Int64 DataTableSiteID
+    // Gets or sets the DataTableID value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/DataTableSiteID/*'/>
+    [Required]
+    [Column("DataTableSiteID", TypeName = "bigint")]
+    public long DataTableSiteID
     {
-      get { return mDataTableSiteID; }
+      get => _DataTableSiteID;
       set
       {
-        mDataTableSiteID = ChangedNames.Add(ColumnDataTableSiteID
-          , mDataTableSiteID, value);
+        if (_DataTableSiteID != value)
+        {
+          _DataTableSiteID = ChangedNames.Add(ColumnDataTableSiteID
+            , _OriginalValues.DataTableSiteID, value);
+        }
       }
     }
-    private Int64 mDataTableSiteID;
+    private long _DataTableSiteID;
 
-    /// <summary>Gets or sets the Name value.</summary>
-    //[Required]
-    //[Column("Name", TypeName="nvarchar(60")]
-    public String Name
+    // Gets or sets the Name value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/Name/*'/>
+    [Required]
+    [Column("Name", TypeName = "nvarchar(60")]
+    public string Name
     {
-      get { return mName; }
+      get => _Name;
       set
       {
-        value = NetString.InitString(value);
-        mName = ChangedNames.Add(ColumnName, mName, value);
+        var newValue = value?.Trim();
+        if (_Name != newValue)
+        {
+          _Name = ChangedNames.Add(ColumnName, _OriginalValues.Name, newValue);
+        }
       }
     }
-    private String mName;
+    private string _Name;
 
-    /// <summary>Gets or sets the Description value.</summary>
-    //[Column("Description", TypeName="nvarchar(80")]
-    public String Description
+    // Gets or sets the Description value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/Description/*'/>
+    [Column("Description", TypeName = "nvarchar(80")]
+    public string Description
     {
-      get { return mDescription; }
+      get => _Description;
       set
       {
-        value = NetString.InitString(value);
-        mDescription = ChangedNames.Add(ColumnDescription
-          , mDescription, value);
+        var newValue = value?.Trim();
+        if (_Description != newValue)
+        {
+          _Description = ChangedNames.Add(ColumnDescription
+            , _OriginalValues.Description, newValue);
+        }
       }
     }
-    private String mDescription;
+    private string _Description;
 
-    /// <summary>Gets or sets the Sequence value.</summary>
-    //[Required]
-    //[Column("Sequence", TypeName="int")]
-    public Int32 Sequence
+    // Gets or sets the Sequence value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/Sequence/*'/>
+    [Required]
+    [Column("Sequence", TypeName = "int")]
+    public int Sequence
     {
-      get { return mSequence; }
+      get => Sequence;
       set
       {
-        mSequence = ChangedNames.Add(ColumnSequence
-          , mSequence, value);
+        if (_Sequence != value)
+        {
+          _Sequence = ChangedNames.Add(ColumnSequence
+            , _OriginalValues.Sequence, value);
+        }
       }
     }
-    private Int32 mSequence;
+    private int _Sequence;
 
-    /// <summary>Gets or sets the TypeName value.</summary>
-    //[Required]
-    //[Column("TypeName", TypeName="nvarchar(20")]
-    public String TypeName
+    // Gets or sets the AllowNull value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/AllowNull/*'/>
+    [Required]
+    [Column("AllowNull", TypeName = "bit")]
+    public bool AllowNull
     {
-      get { return mTypeName; }
+      get => _AllowNull;
       set
       {
-        value = NetString.InitString(value);
-        mTypeName = ChangedNames.Add(ColumnTypeName
-          , mTypeName, value);
+        if (_AllowNull != value)
+        {
+          _AllowNull = ChangedNames.Add(ColumnAllowNull
+            , _AllowNull, value);
+        }
       }
     }
-    private String mTypeName;
+    private bool _AllowNull;
 
-    /// <summary>Gets or sets the MaxLength value.</summary>
-    //[Required]
-    //[Column("MaxLength", TypeName="smallint")]
-    public Int16 MaxLength
-    {
-      get { return mMaxLength; }
-      set
-      {
-        mMaxLength = ChangedNames.Add(ColumnMaxLength
-          , mMaxLength, value);
-      }
-    }
-    private Int16 mMaxLength;
-
-    /// <summary>Gets or sets the AllowNull value.</summary>
-    //[Required]
-    //[Column("AllowNull", TypeName="bit")]
-    public Boolean AllowNull
-    {
-      get { return mAllowNull; }
-      set
-      {
-        mAllowNull = ChangedNames.Add(ColumnAllowNull
-          , mAllowNull, value);
-      }
-    }
-    private Boolean mAllowNull;
-
-    /// <summary>Gets or sets the Default value.</summary>
-    //[Column("DefaultValue", TypeName="nvarchar(30)")]
+    // Gets or sets the Default value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/DefaultValue/*'/>
+    [Column("DefaultValue", TypeName = "nvarchar(30)")]
     public string DefaultValue
     {
-      get { return mDefaultValue; }
+      get => _DefaultValue;
       set
       {
-        mDefaultValue = ChangedNames.Add(ColumnDefaultValue
-          , mDefaultValue, value);
+        var newValue = value?.Trim();
+        if (_DefaultValue != newValue)
+        {
+          _DefaultValue = ChangedNames.Add(ColumnDefaultValue
+            , _DefaultValue, value);
+        }
       }
     }
-    private string mDefaultValue;
+    private string _DefaultValue;
 
-    /// <summary>Gets or sets the IdentityStart value.</summary>
-    //[Required]
-    //[Column("IdentityStart", TypeName="smallint")]
-    public Int16 IdentityStart
+    // Gets or sets the IdentityStart value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/IdentityStart/*'/>
+    [Required]
+    [Column("IdentityStart", TypeName = "smallint")]
+    public short IdentityStart
     {
-      get { return mIdentityStart; }
+      get => _IdentityStart;
       set
       {
-        mIdentityStart = ChangedNames.Add(ColumnIdentityStart
-          , mIdentityStart, value);
+        if (_IdentityStart != value)
+        {
+          _IdentityStart = ChangedNames.Add(ColumnIdentityStart
+            , _IdentityStart, value);
+        }
       }
     }
-    private Int16 mIdentityStart;
+    private short _IdentityStart;
 
-    /// <summary>Gets or sets the IdentityIncrement value.</summary>
-    //[Required]
-    //[Column("IdentityIncrement", TypeName="smallint")]
-    public Int16 IdentityIncrement
+    // Gets or sets the IdentityIncrement value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/IdentityIncrement/*'/>
+    [Required]
+    [Column("IdentityIncrement", TypeName = "smallint")]
+    public short IdentityIncrement
     {
-      get { return mIdentityIncrement; }
+      get => _IdentityIncrement;
       set
       {
-        mIdentityIncrement = ChangedNames.Add(ColumnIdentityIncrement
-          , mIdentityIncrement, value);
+        if (_IdentityIncrement != value)
+        {
+          _IdentityIncrement = ChangedNames.Add(ColumnIdentityIncrement
+            , _IdentityIncrement, value);
+        }
       }
     }
-    private Int16 mIdentityIncrement;
+    private short _IdentityIncrement;
 
-    /// <summary>Gets or sets the NewName value.</summary>
-    //[Column("NewName", TypeName="nvarchar(60")]
-    public String NewName
+    // Gets or sets the MaxLength value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/MaxLength/*'/>
+    [Required]
+    [Column("MaxLength", TypeName = "smallint")]
+    public short MaxLength
     {
-      get { return mNewName; }
+      get => _MaxLength;
       set
       {
-        value = NetString.InitString(value);
-        mNewName = ChangedNames.Add(ColumnNewName
-          , mNewName, value);
+        if (_MaxLength != value)
+        {
+          _MaxLength = ChangedNames.Add(ColumnMaxLength
+            , _MaxLength, value);
+        }
       }
     }
-    private String mNewName;
+    private short _MaxLength;
 
-    /// <summary>Gets or sets the MaxLength value.</summary>
-    //[Required]
-    //[Column("NewMaxLength", TypeName="smallint")]
-    public Int16 NewMaxLength
+    // Gets or sets the NewName value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/NewName/*'/>
+    [Column("NewName", TypeName = "nvarchar(60")]
+    public string NewName
     {
-      get { return mNewMaxLength; }
+      get => _NewName;
       set
       {
-        mNewMaxLength = ChangedNames.Add(ColumnNewMaxLength
-          , mNewMaxLength, value);
+        var newValue = value?.Trim();
+        if (_NewName != newValue)
+        {
+          _NewName = ChangedNames.Add(ColumnNewName
+            , _NewName, value);
+        }
       }
     }
-    private Int16 mNewMaxLength;
+    private string _NewName;
+
+    // Gets or sets the MaxLength value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/NewMaxLength/*'/>
+    [Required]
+    [Column("NewMaxLength", TypeName = "smallint")]
+    public short NewMaxLength
+    {
+      get => _NewMaxLength;
+      set
+      {
+        if (_NewMaxLength != value)
+        {
+          _NewMaxLength = ChangedNames.Add(ColumnNewMaxLength
+            , _NewMaxLength, value);
+        }
+      }
+    }
+    private short _NewMaxLength;
+
+    // Gets or sets the TypeName value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/TypeName/*'/>
+    [Required]
+    [Column("TypeName", TypeName = "nvarchar(20")]
+    public string TypeName
+    {
+      get => _TypeName;
+      set
+      {
+        var newValue = value?.Trim();
+        if (_TypeName != newValue)
+        {
+          _TypeName = ChangedNames.Add(ColumnTypeName
+            , _OriginalValues.TypeName, newValue);
+        }
+      }
+    }
+    private string _TypeName;
     #endregion
 
     #region Class Properties
@@ -377,8 +482,11 @@ namespace LJCDataUtilityDAL
     /// <summary>The Sequence column name.</summary>
     public static string ColumnSequence = "Sequence";
 
-    /// <summary>The TypeName column name.</summary>
-    public static string ColumnTypeName = "TypeName";
+    /// <summary>The AllowNull column name.</summary>
+    public static string ColumnAllowNull = "AllowNull";
+
+    /// <summary>The DefaultValue column name.</summary>
+    public static string ColumnDefaultValue = "DefaultValue";
 
     /// <summary>The IdentityStart column name.</summary>
     public static string ColumnIdentityStart = "IdentityStart";
@@ -389,20 +497,14 @@ namespace LJCDataUtilityDAL
     /// <summary>The MaxLength column name.</summary>
     public static string ColumnMaxLength = "MaxLength";
 
-    /// <summary>The AllowNull column name.</summary>
-    public static string ColumnAllowNull = "AllowNull";
-
-    /// <summary>The DefaultValue column name.</summary>
-    public static string ColumnDefaultValue = "DefaultValue";
-
     /// <summary>The Name column name.</summary>
     public static string ColumnNewName = "NewName";
 
-    /// <summary>The Sequence column name.</summary>
-    public static string ColumnNewSequence = "NewSequence";
-
     /// <summary>The MaxLength column name.</summary>
     public static string ColumnNewMaxLength = "NewMaxLength";
+
+    /// <summary>The TypeName column name.</summary>
+    public static string ColumnTypeName = "TypeName";
 
     /// <summary>The Name maximum length.</summary>
     public static int LengthName = 60;
@@ -413,6 +515,9 @@ namespace LJCDataUtilityDAL
     /// <summary>The Sequence maximum length.</summary>
     public static int LengthSequence = 3;
 
+    /// <summary>The MaxLength maximum length.</summary>
+    public static int LengthDefaultValue = 30;
+
     /// <summary>The IdentityStart maximum length.</summary>
     public static int LengthIdentityStart = 3;
 
@@ -422,8 +527,57 @@ namespace LJCDataUtilityDAL
     /// <summary>The MaxLength maximum length.</summary>
     public static int LengthMaxLength = 5;
 
-    /// <summary>The MaxLength maximum length.</summary>
-    public static int LengthDefaultValue = 30;
+    // The object starting values.
+    private readonly OriginalValues _OriginalValues;
+
+    // The object starting values.
+    private class OriginalValues
+    {
+      // Gets or sets the table row ID.
+      public long ID { get; set; }
+
+      // Gets or sets the database ID.
+      public long DataSiteID { get; set; }
+
+      // Gets or sets the parent row ID.
+      public long DataTableID { get; set; }
+
+      // Gets or sets the parent database ID.
+      public long DataTableSiteID { get; set; }
+
+      // Gets or sets the unique name.
+      public string Name { get; set; }
+
+      // Gets or sets the description.
+      public string Description { get; set; }
+
+      // Gets or sets the Sequence value.
+      public int Sequence { get; set; }
+
+      // Gets or sets the AllowNull value.
+      public bool AllowNull { get; set; }
+
+      // Gets or sets the Default value.
+      public string DefaultValue { get; set; }
+
+      // Gets or sets the IdentityStart value.
+      public int IdentityStart { get; set; }
+
+      // Gets or sets the IdentityIncrement value.
+      public int IdentityIncrement { get; set; }
+
+      // Gets or sets the MaxLength value.
+      public int MaxLength { get; set; }
+
+      // Gets or sets the NewName value.
+      public string NewName { get; set; }
+
+      // Gets or sets the MaxLength value.
+      public int NewMaxLength { get; set; }
+
+      // Gets or sets the TypeName value.
+      public string TypeName { get; set; }
+    }
     #endregion
   }
 

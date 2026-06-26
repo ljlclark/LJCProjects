@@ -86,6 +86,12 @@ namespace LJCDBClientLib
     {
       get => _ChangedProperties.ToList<string>();
     }
+
+    /// <summary>Returns the changed property names string.</summary>
+    public string ChangedPropertyNames
+    {
+      get => string.Join(", ", ChangedProperties);
+    }
     #endregion
 
     #region Class Data

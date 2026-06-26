@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Doc\DataKey.xml" />
     <Content Include="Data\Doc\DataModules.xml" />
     <Compile Include="Data\TableKey.cs" />
     <Compile Include="Data\TableKeys.cs" />
@@ -81,6 +82,9 @@
     <Compile Include="Manager\TableKeyManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValuesDataUtility.CS" />
+    <Content Include="Data\Doc\DataModule.xml" />
+    <Content Include="Data\Doc\DataColumn.xml" />
+    <Content Include="Data\Doc\DataTable.xml" />
     <Content Include="Manager\Doc\DataColumnManager.xml" />
     <Content Include="Manager\Doc\DataKeyManager.xml" />
   </ItemGroup>

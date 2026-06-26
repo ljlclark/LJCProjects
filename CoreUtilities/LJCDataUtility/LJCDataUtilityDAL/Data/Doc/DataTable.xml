@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataTable.xml -->
+<members>
+  <!-- Constructor Methods -->
+  <ParamConstructor>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+  </ParamConstructor>
+  <!-- Data Properties -->
+  <ID>
+    <summary>
+      Gets or sets the ID value.
+    </summary>
+  </ID>
+  <DataSiteID>
+    <summary>
+      Gets or sets the database ID.
+    </summary>
+  </DataSiteID>
+  <DataModuleID>
+    <summary>
+      Gets or sets the parent table row ID.
+    </summary>
+  </DataModuleID>
+  <DataModuleSiteID>
+    <summary>
+      Gets or sets the parent database ID.
+    </summary>
+  </DataModuleSiteID>
+  <Name>
+    <summary>
+      Gets or sets the name.
+    </summary>
+  </Name>
+  <Description>
+    <summary>
+      Gets or sets the description.
+    </summary>
+  </Description>
+  <Sequence>
+    <summary>
+      Gets or sets the sequence.
+    </summary>
+  </Sequence>
+  <SchemaName>
+    <summary>
+      Gets or sets the schema name.
+    </summary>
+  </SchemaName>
+  <NewName>
+    <summary>
+      Gets or sets the new name.
+    </summary>
+  </NewName>
+  <!-- Calculated and Join Data Properties -->
+  <ModuleName>
+    <summary>
+      Gets or sets the Join module name.
+    </summary>
+  </ModuleName>
+  <!-- Class Properties -->
+  <ChangedNames>
+    <summary>
+      Gets a reference to the ChangedNames list.
+    </summary>
+  </ChangedNames>
+</members>

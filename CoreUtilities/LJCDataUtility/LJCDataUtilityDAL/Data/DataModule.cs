@@ -1,41 +1,64 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataModule.cs
-using LJCNetCommon;
 using LJCDBClientLib;
+using LJCNetCommon;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>The DataModule table Data Object.</summary>
+  /// <summary>The DataModule data.</summary>
   public class DataModule : IComparable<DataModule>
   {
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public DataModule()
     {
+      _ID = 0;
+      _DataSiteID = 0;
+      _Name = "";
+      _Description = "";
+
       ChangedNames = new ChangedNames();
+      _OriginalValues = new OriginalValues();
+      SetOriginalValues();
+    }
+
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/DataModule.xml'
+    ///  path='members/ParamConstructor/*'/>
+    public DataModule(string name) : this()
+    {
+      _Name = name;
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/CopyConstructor/*'/>
     public DataModule(DataModule item)
     {
-      ChangedNames = new ChangedNames();
       ID = item.ID;
       DataSiteID = item.DataSiteID;
       Name = item.Name;
       Description = item.Description;
+
+      ChangedNames = item.ChangedNames;
+      _OriginalValues = new OriginalValues();
+      SetOriginalValues();
     }
     #endregion
 
-    #region Data Class Methods
+    #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public DataModule Clone()
     {
       var retValue = MemberwiseClone() as DataModule;
@@ -43,38 +66,51 @@ namespace LJCDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/CompareTo/*'/>
     public int CompareTo(DataModule other)
     {
-      int retValue = -2;
+      int retValue;
 
-      var isContinue = true;
-      if (null == other)
+      while (true)
       {
-        // This value is greater than null.
-        retValue = 1;
-        isContinue = false;
-      }
-      if (isContinue)
-      {
-        retValue = ID.CompareTo(other.ID);
-        if (retValue != 0)
+        if (null == other)
         {
-          isContinue = false;
+          // This value is greater than null.
+          retValue = NetString.CompareGreater;
+          break;
         }
-      }
-      if (isContinue)
-      {
+
+        retValue = ID.CompareTo(other.ID);
+        if (NetString.CompareEqual == retValue)
+        {
+          break;
+        }
+
         retValue = DataSiteID.CompareTo(other.DataSiteID);
+        break;
       }
       return retValue;
     }
 
+    // Initializes the original values.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/SetOriginalValues/*'/>
+    public void SetOriginalValues()
+    {
+      _OriginalValues.ID = _ID;
+      _OriginalValues.Name = _Name;
+      _OriginalValues.Description = _Description;
+
+      ChangedNames.Clear();
+    }
+
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/ToString/*'/>
     public override string ToString()
     {
-      var retValue = $"{mName}:{mID}";
+      var retValue = $"{_Name}:{_ID}";
       return retValue;
     }
     #endregion
@@ -84,64 +120,88 @@ namespace LJCDataUtilityDAL
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
 
-    /// <summary>Gets or sets the ID value.</summary>
-    //[Required]
-    //[Column("ID", TypeName="bigint")]
-    public Int64 ID
+    // Gets or sets the ID value.
+    /// <include file='Doc/DataModule.xml'
+    ///  path='members/ID/*'/>
+    [Required]
+    [Column("ID", TypeName = "bigint")]
+    public long ID
     {
-      get { return mID; }
+      get => _ID;
       set
       {
-        mID = ChangedNames.Add(ColumnID, mID, value);
+        if (_ID != value)
+        {
+          _ID = ChangedNames.Add(ColumnID, _OriginalValues.ID, value);
+        }
       }
     }
-    private Int64 mID;
+    private long _ID;
 
-    /// <summary>Gets or sets the DataModuleID value.</summary>
-    //[Required]
-    //[Column("DataSiteID", TypeName="bigint")]
-    public Int64 DataSiteID
+    // Gets or sets the DataModuleID value.
+    /// <include file='Doc/DataModule.xml'
+    ///  path='members/DataSiteID/*'/>
+    [Required]
+    [Column("DataSiteID", TypeName="bigint")]
+    public long DataSiteID
     {
-      get { return mDataSiteID; }
+      get => _DataSiteID;
       set
       {
-        mDataSiteID = ChangedNames.Add(ColumnDataSiteID, mDataSiteID, value);
+        if (_DataSiteID != value)
+        {
+          _DataSiteID = ChangedNames.Add(ColumnDataSiteID
+            , _OriginalValues.DataSiteID, value);
+        }
       }
     }
-    private Int64 mDataSiteID;
+    private long _DataSiteID;
 
-    /// <summary>Gets or sets the Name value.</summary>
-    //[Required]
-    //[Column("Name", TypeName="nvarchar(60")]
-    public String Name
+    // Gets or sets the Name value.
+    /// <include file='Doc/DataModule.xml'
+    ///  path='members/Name/*'/>
+    [Required]
+    [Column("Name", TypeName="nvarchar(60")]
+    public string Name
     {
-      get { return mName; }
+      get => _Name;
       set
       {
-        value = NetString.InitString(value);
-        mName = ChangedNames.Add(ColumnName, mName, value);
+        var newValue = value?.Trim();
+        if (_Name != newValue)
+        {
+          _Name = ChangedNames.Add(ColumnName, _OriginalValues.Name, newValue);
+        }
       }
     }
-    private String mName;
+    private string _Name;
 
-    /// <summary>Gets or sets the Description value.</summary>
-    //[Required]
-    //[Column("Description", TypeName="nvarchar(80")]
-    public String Description
+    // Gets or sets the Description value.
+    /// <include file='Doc/DataModule.xml'
+    ///  path='members/Description/*'/>
+    [Required]
+    [Column("Description", TypeName="nvarchar(80")]
+    public string Description
     {
-      get { return mDescription; }
+      get => _Description;
       set
       {
-        value = NetString.InitString(value);
-        mDescription = ChangedNames.Add(ColumnDescription, mDescription, value);
+        var newValue = value?.Trim();
+        if (_Description != newValue)
+        {
+          _Description = ChangedNames.Add(ColumnDescription
+            , _OriginalValues.Description, newValue);
+        }
       }
     }
-    private String mDescription;
+    private string _Description;
     #endregion
 
     #region Class Properties
 
-    /// <summary>Gets a reference to the ChangedNames list.</summary>
+    // Gets a reference to the ChangedNames list.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/ToString/*'/>
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 
@@ -167,6 +227,26 @@ namespace LJCDataUtilityDAL
 
     /// <summary>The Description maximum length.</summary>
     public static int LengthDescription = 80;
+
+    // The object starting values.
+    private readonly OriginalValues _OriginalValues;
+
+    // The object starting values.
+    private class OriginalValues
+    {
+
+      // Gets or sets the table row ID.
+      public long ID { get; set; }
+
+      // Gets or sets the database ID.
+      public long DataSiteID { get; set; }
+
+      // Gets or sets the unique name.
+      public string Name { get; set; }
+
+      // Gets or sets the description.
+      public string Description { get; set; }
+    }
     #endregion
   }
 

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataModule.xml -->
+<members>
+  <!-- Constructor Methods -->
+  <ParamConstructor>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+  </ParamConstructor>
+  <!-- Data Properties -->
+  <ID>
+    <summary>
+      Gets or sets the ID value.
+    </summary>
+  </ID>
+  <DataSiteID>
+    <summary>
+      Gets or sets the database ID.
+    </summary>
+  </DataSiteID>
+  <Name>
+    <summary>
+      Gets or sets the name.
+    </summary>
+  </Name>
+  <Description>
+    <summary>
+      Gets or sets the description.
+    </summary>
+  </Description>
+  <!-- Class Properties -->
+  <ChangedNames>
+    <summary>
+      Gets a reference to the ChangedNames list.
+    </summary>
+  </ChangedNames>
+</members>

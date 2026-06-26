@@ -160,7 +160,7 @@ namespace LJCDataUtility
       var columnManager = Managers.DataColumnManager;
       var names = columnManager.PropertyNames();
       names.Remove("ID");
-      newColumn.AddChangedNames(names);
+      newColumn.ChangedNames.AddNames(names);
       LJCReflect reflect = new LJCReflect(newColumn);
       foreach (var name in names)
       {

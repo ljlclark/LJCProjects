@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DataKeys.xml -->
-<items>
+<members>
   <Add>
     <summary>
       Creates and adds the object from the provided values.
@@ -35,4 +35,4 @@
     <param name="name">The name value.</param>
     <returns>The element item object.</returns>
   </NameIndexer>
-</items>
+</members>
