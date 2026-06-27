@@ -165,7 +165,7 @@ namespace LJCNetCommon
     }
 
     // Retrieve the selection length.
-    /// <include path="members/Selection/*" file="Doc/LJCParser.xml"/>
+    /// <include path="members/SelectionLength/*" file="Doc/LJCParser.xml"/>
     public int SelectionLength()
     {
       var retValue = 0;

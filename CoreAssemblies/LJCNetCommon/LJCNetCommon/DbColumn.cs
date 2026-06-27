@@ -8,21 +8,42 @@ using System.Xml.Serialization;
 namespace LJCNetCommon
 {
   // Represents a database column. (D)
-  /// <include path='items/DbColumn/*' file='Doc/DbColumn.xml'/>
+  /// <include file='Doc/DbColumn.xml'
+  ///  path='items/DbColumn/*'/>
   public class DbColumn : IComparable<DbColumn>
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public DbColumn()
     {
       DataTypeName = "String";
       IsChanged = false;
     }
 
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/DbColumnC/*'/>
+    public DbColumn(string columnName, string value = null, string dataTypeName = "String"
+      , string propertyName = null, bool assignedKey = false, string renameValue = null)
+    {
+      AutoIncrement = assignedKey;
+      ColumnName = columnName;
+      DataTypeName = dataTypeName;
+      if (NetString.HasValue(propertyName))
+      {
+        PropertyName = propertyName;
+      }
+      IsChanged = false;
+      RenameAs = renameValue;
+      Value = value;
+    }
+
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public DbColumn(DbColumn item)
     {
       AllowDBNull = item.AllowDBNull;
@@ -41,29 +62,13 @@ namespace LJCNetCommon
       Unique = item.Unique;
       Value = item.Value;
     }
-
-    // Initializes an object instance with the supplied values.
-    /// <include path='items/DbColumnC/*' file='Doc/DbColumn.xml'/>
-    public DbColumn(string columnName, string value = null, string dataTypeName = "String"
-      , string propertyName = null, bool assignedKey = false, string renameValue = null)
-    {
-      AutoIncrement = assignedKey;
-      ColumnName = columnName;
-      DataTypeName = dataTypeName;
-      if (NetString.HasValue(propertyName))
-      {
-        PropertyName = propertyName;
-      }
-      IsChanged = false;
-      RenameAs = renameValue;
-      Value = value;
-    }
     #endregion
 
     #region Data Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public DbColumn Clone()
     {
       DbColumn retValue = MemberwiseClone() as DbColumn;
@@ -71,7 +76,8 @@ namespace LJCNetCommon
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CompareTo/*'/>
     public int CompareTo(DbColumn other)
     {
       int retValue;
@@ -90,7 +96,8 @@ namespace LJCNetCommon
     }
 
     // Formats the column value for the SQL string. (D)
-    /// <include path='items/FormatValue/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/FormatValue/*'/>
     public string FormatValue()
     {
       string retValue = NetString.FormatValue(Value, DataTypeName);
@@ -98,7 +105,8 @@ namespace LJCNetCommon
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/ToString/*'/>
     public override string ToString()
     {
       string retValue = mColumnName;
@@ -122,7 +130,8 @@ namespace LJCNetCommon
     #region Conversions
 
     // Creates a DbValue object from a DbColumn object. (E)
-    /// <include path='items/DbValue/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/DbValue/*'/>
     public static implicit operator DbValue(DbColumn dbColumn)
     {
       DbValue retValue = null;
@@ -145,6 +154,9 @@ namespace LJCNetCommon
 
     #region Data Properties
 
+    /// <summary></summary> 
+    public int AddOrderIndex { get; set; }
+
     /// <summary>Gets or sets the AllowDBNull value.</summary>
     public bool AllowDBNull { get; set; }
 
@@ -152,7 +164,8 @@ namespace LJCNetCommon
     public bool AutoIncrement { get; set; }
 
     // Gets or sets the Caption value.
-    /// <include path='items/Caption/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/Caption/*'/>
     public string Caption
     {
       get { return mCaption; }
@@ -161,7 +174,8 @@ namespace LJCNetCommon
     private string mCaption;
 
     // Gets or sets the ColumnName value.
-    /// <include path='items/ColumnName/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/ColumnName/*'/>
     public string ColumnName
     {
       get { return mColumnName; }
@@ -191,11 +205,13 @@ namespace LJCNetCommon
     public int MaxLength { get; set; }
 
     // Gets or sets the Fixed Length Field Position value. (R)
-    /// <include path='items/Position/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/Position/*'/>
     public int Position { get; set; }
 
     // Gets or sets the PropertyName value.
-    /// <include path='items/PropertyName/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/PropertyName/*'/>
     public string PropertyName
     {
       get { return mPropertyName; }
@@ -211,7 +227,8 @@ namespace LJCNetCommon
     private string mPropertyName;
 
     // Gets or sets the RenameAs value.
-    /// <include path='items/RenameAs/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/RenameAs/*'/>
     public string RenameAs
     {
       get { return mRenameAs; }
@@ -269,38 +286,37 @@ namespace LJCNetCommon
     public bool Unique { get; set; }
     #endregion
 
-    #region Calculated and Join Data Properties
+    #region View Join Data Properties
 
     // Gets or sets the ID value. (R)
-    /// <include path='items/ID/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/ID/*'/>
     [XmlIgnore()]
     public int ID { get; set; }
 
     // Gets or sets the Sequence value. (R)
-    /// <include path='items/Sequence/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/Sequence/*'/>
     [XmlIgnore()]
     public int Sequence { get; set; }
 
     // Gets or sets the ViewData ID value. (R)
-    /// <include path='items/ViewDataID/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/ViewDataID/*'/>
     [XmlIgnore()]
     public int ViewDataID { get; set; }
 
     // Gets or sets the ViewJoin ID value. (R)
-    /// <include path='items/ViewJoinID/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/ViewJoinID/*'/>
     [XmlIgnore()]
     public int ViewJoinID { get; set; }
 
     // Gets or sets the Width value. (R)
-    /// <include path='items/Width/*' file='Doc/DbColumn.xml'/>
+    /// <include file='Doc/DbColumn.xml'
+    ///  path='items/Width/*'/>
     [XmlIgnore()]
     public int Width { get; set; }
-    #endregion
-
-    #region Class Properties
-
-    /// <summary></summary> 
-    public int AddOrderIndex { get; set; }
     #endregion
 
     #region Class Data
@@ -340,11 +356,14 @@ namespace LJCNetCommon
     #endregion
   }
 
+  #region Comparers
+
   /// <summary>Sort and search on column name.</summary>
   public class DbColumnNameComparer : IComparer<DbColumn>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Compare/*'/>
     public int Compare(DbColumn x, DbColumn y)
     {
       int retValue;
@@ -364,11 +383,13 @@ namespace LJCNetCommon
   }
 
   // Sort and search on property name.
-  /// <include path='items/DbColumnPropertyComparer/*' file='Doc/DbColumn.xml'/>
+  /// <include file='Doc/DbColumn.xml'
+  ///  path='items/DbColumnPropertyComparer/*'/>
   public class DbColumnPropertyComparer : IComparer<DbColumn>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Compare/*'/>
     public int Compare(DbColumn x, DbColumn y)
     {
       int retValue;
@@ -388,11 +409,13 @@ namespace LJCNetCommon
   }
 
   // Sort and search on RenameAs value.
-  /// <include path='items/DbColumnRenameAsComparer/*' file='Doc/DbColumn.xml'/>
+  /// <include file='Doc/DbColumn.xml'
+  ///  path='items/DbColumnRenameAsComparer/*'/>
   public class DbColumnRenameAsComparer : IComparer<DbColumn>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Compare/*'/>
     public int Compare(DbColumn x, DbColumn y)
     {
       int retValue;
@@ -410,4 +433,5 @@ namespace LJCNetCommon
       return retValue;
     }
   }
+  #endregion
 }

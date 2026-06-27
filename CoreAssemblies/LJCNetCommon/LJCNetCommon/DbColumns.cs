@@ -16,7 +16,8 @@ namespace LJCNetCommon
     #region Static Functions
 
     // Creates DbColumns from a Data Object.
-    /// <include path='items/LJCCreateObjectColumns/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCCreateObjectColumns/*'/>
     public static DbColumns LJCCreateObjectColumns(object dataObject
       , DbColumns dataDefinition = null)
     {
@@ -65,7 +66,8 @@ namespace LJCNetCommon
     }
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCDeserialize/*'/>
     public static DbColumns LJCDeserialize(string fileSpec = null)
     {
       DbColumns retValue;
@@ -80,7 +82,8 @@ namespace LJCNetCommon
     }
 
     // Creates a ColumnNames list from a DataObject.
-    /// <include path='items/LJCGetPropertyNames/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetPropertyNames/*'/>
     public static List<string> LJCGetPropertyNames(object dataObject)
     {
       List<string> retValue = null;
@@ -104,7 +107,8 @@ namespace LJCNetCommon
     }
 
     // Creates a DbValues object from a DbColumns object.
-    /// <include path='items/DbValues/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/DbValues/*'/>
     public static implicit operator DbValues(DbColumns dbColumns)
     {
       DbValues retValue = null;
@@ -125,14 +129,16 @@ namespace LJCNetCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public DbColumns()
     {
       mPrevCount = -1;
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public DbColumns(DbColumns items)
     {
       if (NetCommon.HasItems(items))
@@ -148,7 +154,8 @@ namespace LJCNetCommon
     #region Collection Methods
 
     // Adds the object element to the collection
-    /// <include path='items/Add/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/Add/*'/>
     public new void Add(DbColumn dbColumn)
     {
       LJCSortAddOrderIndex();
@@ -158,59 +165,93 @@ namespace LJCNetCommon
     }
 
     // Creates the Object from the arguments and adds it to the collection. (R)
-    /// <include path='items/Add1/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/Add1/*'/>
     public DbColumn Add(string columnName, int position, int maxLength)
     {
       DbColumn retValue = new DbColumn()
       {
-        AutoIncrement = false,
         ColumnName = columnName,
+        Position = position,
         MaxLength = maxLength,
-        Position = position
+
+        AutoIncrement = false,
       };
       Add(retValue);
       return retValue;
     }
 
     // Creates the Object from the arguments and adds it to the collection.
-    /// <include path='items/Add2/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/Add2/*'/>
     public DbColumn Add(string columnName, string propertyName = null
       , string renameAs = null, string dataTypeName = "String"
       , string caption = null, int maxLength = 5)
     {
       DbColumn retValue = new DbColumn()
       {
-        AutoIncrement = false,
-        Caption = caption,
         ColumnName = columnName,
-        DataTypeName = dataTypeName,
-        MaxLength = maxLength,
         PropertyName = propertyName,
-        RenameAs = renameAs
+        RenameAs = renameAs,
+        DataTypeName = dataTypeName,
+        Caption = caption,
+        MaxLength = maxLength,
+
+        AutoIncrement = false,
       };
       Add(retValue);
       return retValue;
     }
 
     // Creates the Object from the arguments and adds it to the collection.
-    /// <include path='items/Add3/*' file='Doc/DbColumns.xml'/>
+    // Use (object) cast with a string value to use this overload.
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/Add3/*'/>
     public DbColumn Add(string columnName, object value
       , string dataTypeName = "String", int maxLength = 5)
     {
       DbColumn retValue = new DbColumn()
       {
-        AutoIncrement = false,
         ColumnName = columnName,
+        Value = value,
         DataTypeName = dataTypeName,
         MaxLength = maxLength,
-        Value = value
+
+        AutoIncrement = false,
       };
       Add(retValue);
       return retValue;
     }
 
+    // Creates the DbColumn from the supplied values and adds to the collection.
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCAddPropertyAs/*'/>
+    public DbColumn LJCAddPropertyAs(string propertyName, string caption = null
+      , string renameAs = null, string dataTypeName = "String")
+    {
+      DbColumn retValue = new DbColumn()
+      {
+        ColumnName = propertyName,
+        PropertyName = propertyName,
+        Caption = caption,
+        RenameAs = renameAs,
+        DataTypeName = dataTypeName,
+
+        AutoIncrement = false,
+        Value = null,
+      };
+
+      if (!NetString.HasValue(renameAs))
+      {
+        retValue.RenameAs = retValue.PropertyName;
+      }
+      Add(retValue);
+      return retValue;
+    }
+
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public DbColumns Clone()
     {
       var retValue = new DbColumns();
@@ -222,7 +263,8 @@ namespace LJCNetCommon
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -234,32 +276,9 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Creates the DbColumn from the supplied values and adds to the collection.
-    /// <include path='items/LJCAddPropertyAs/*' file='Doc/DbColumns.xml'/>
-    public DbColumn LJCAddPropertyAs(string propertyName, string caption = null
-      , string renameAs = null, string dataTypeName = "String")
-    {
-      DbColumn retValue = new DbColumn()
-      {
-        ColumnName = propertyName,
-        PropertyName = propertyName,
-        Caption = caption,
-        DataTypeName = dataTypeName,
-        AutoIncrement = false,
-        Value = null,
-        RenameAs = renameAs
-      };
-
-      if (!NetString.HasValue(renameAs))
-      {
-        retValue.RenameAs = retValue.PropertyName;
-      }
-      Add(retValue);
-      return retValue;
-    }
-
     // Returns a column by property name.
-    /// <include path='items/LJCGetColumn/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetColumn/*'/>
     public DbColumn LJCGetColumn(string propertyName)
     {
       DbColumn retValue = null;
@@ -277,7 +296,8 @@ namespace LJCNetCommon
     }
 
     // Returns a set of columns that match the supplied list.
-    /// <include path='items/LJCGetColumns/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetColumns/*'/>
     public DbColumns LJCGetColumns(List<string> propertyNames)
     {
       DbColumn searchColumn;
@@ -302,7 +322,8 @@ namespace LJCNetCommon
     }
 
     // Configure the Grid Columns from the Data object properties.
-    /// <include path='items/LJCGetColumns2/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetColumns2/*'/>
     public static DbColumns LJCGetColumns(object dataObject
       , List<string> propertyNames = null)
     {
@@ -331,7 +352,8 @@ namespace LJCNetCommon
     }
 
     // Removes a DbColumn item.
-    /// <include path='items/LJCRemoveColumn/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCRemoveColumn/*'/>
     public void LJCRemoveColumn(string columnName)
     {
       DbColumn column = Find(x => x.ColumnName == columnName);
@@ -342,7 +364,8 @@ namespace LJCNetCommon
     }
 
     // Serializes the collection
-    /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSerialize/*'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -384,7 +407,8 @@ namespace LJCNetCommon
     #region Data Methods
 
     // Sets the IsChanged value to false for all elements in the collection.
-    /// <include path='items/LJCClearChanged/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCClearChanged/*'/>
     public void LJCClearChanged()
     {
       foreach (DbColumn dbColumn in this)
@@ -394,7 +418,8 @@ namespace LJCNetCommon
     }
 
     // Gets a collection of changed columns.
-    /// <include path='items/LJCGetChanged/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetChanged/*'/>
     public DbColumns LJCGetChanged()
     {
       List<DbColumn> columns;
@@ -412,7 +437,8 @@ namespace LJCNetCommon
     #region Search and Sort Methods
 
     // Finds and returns the object that matches the supplied values.
-    /// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSearchName/*'/>
     public DbColumn LJCSearchColumnName(string name)
     {
       DbColumnNameComparer comparer;
@@ -434,7 +460,8 @@ namespace LJCNetCommon
     }
 
     // Finds and returns the column that contains the supplied property name.
-    /// <include path='items/LJCSearchPropertyName/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCSearchPropertyName/*'/>
     public DbColumn LJCSearchPropertyName(string propertyName)
     {
       DbColumn retValue = null;
@@ -454,7 +481,8 @@ namespace LJCNetCommon
     }
 
     // Finds and returns the column that contains the supplied property name.
-    /// <include path='items/LJCSearchRenameAs/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCSearchRenameAs/*'/>
     public DbColumn LJCSearchRenameAs(string renameAs)
     {
       DbColumnRenameAsComparer comparer;
@@ -530,14 +558,16 @@ namespace LJCNetCommon
     #region Other Public Methods
 
     // Get the minimum date value.
-    /// <include path='items/LJCGetMinSqlDate/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetMinSqlDate/*'/>
     public static string LJCGetMinSqlDate()
     {
       return "1753/01/01 00:00:00";
     }
 
     // Sets the caption properties.
-    /// <include path='items/LJCSetColumnCaptions/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCSetColumnCaptions/*'/>
     public void LJCSetColumnCaptions(DbColumns dbColumns)
     {
       DbColumn searchColumn;
@@ -556,7 +586,8 @@ namespace LJCNetCommon
     }
 
     // Maps the column property and rename values.
-    /// <include path='items/LJCMapNames/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCMapNames/*'/>
     public void LJCMapNames(string columnName, string propertyName = null
       , string renameAs = null, string caption = null)
     {
@@ -589,7 +620,8 @@ namespace LJCNetCommon
     #region Value Methods
 
     // Gets the column object value as a bool.
-    /// <include path='items/LJCGetBoolean/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetBoolean/*'/>
     public bool LJCGetBoolean(string propertyName)
     {
       bool retValue = default;
@@ -610,7 +642,8 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a byte.
-    /// <include path='items/LJCGetByte/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetByte/*'/>
     public byte LJCGetByte(string propertyName)
     {
       byte retValue = default;
@@ -624,7 +657,8 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a char.
-    /// <include path='items/LJCGetChar/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetChar/*'/>
     public char LJCGetChar(string propertyName)
     {
       char retValue = default;
@@ -638,7 +672,8 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a DateTime.
-    /// <include path='items/LJCGetDbDateTime/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetDbDateTime/*'/>
     public DateTime LJCGetDbDateTime(string propertyName)
     {
       DateTime retValue = DateTime.Parse(LJCGetMinSqlDate());
@@ -652,7 +687,8 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a decimal.
-    /// <include path='items/LJCGetDecimal/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetDecimal/*'/>
     public decimal LJCGetDecimal(string propertyName)
     {
       decimal retValue = default;
@@ -666,7 +702,8 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a double.
-    /// <include path='items/LJCGetDouble/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetDouble/*'/>
     public double LJCGetDouble(string propertyName)
     {
       double retValue = default;
@@ -680,7 +717,8 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a short int.
-    /// <include path='items/LJCGetInt16/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetInt16/*'/>
     public short LJCGetInt16(string propertyName)
     {
       short retValue = default;
@@ -694,7 +732,8 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as an int.
-    /// <include path='items/LJCGetInt32/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetInt32/*'/>
     public int LJCGetInt32(string propertyName)
     {
       int retValue = default;
@@ -708,7 +747,8 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a long int.
-    /// <include path='items/LJCGetInt64/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetInt64/*'/>
     public long LJCGetInt64(string propertyName)
     {
       long retValue = default;
@@ -722,7 +762,8 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as an object.
-    /// <include path='items/LJCGetObject/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetObject/*'/>
     public object LJCGetObject(string propertyName)
     {
       object retValue = default;
@@ -737,7 +778,8 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a single.
-    /// <include path='items/LJCGetSingle/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetSingle/*'/>
     public float LJCGetSingle(string propertyName)
     {
       float retValue = default;
@@ -751,7 +793,8 @@ namespace LJCNetCommon
     }
 
     // Gets the string value for the column with the specified name.
-    /// <include path='items/LJCGetString/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetString/*'/>
     public string LJCGetString(string propertyName)
     {
       string retValue = default;
@@ -770,7 +813,8 @@ namespace LJCNetCommon
     }
 
     // Update column value.
-    /// <include path='items/LJCSetValue/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCSetValue/*'/>
     public void LJCSetValue(string propertyName, object value)
     {
       if (NetCommon.HasItems(this)
@@ -794,7 +838,8 @@ namespace LJCNetCommon
     }
 
     // The column for the specified name.
-    /// <include path='items/Item/*' file='Doc/DbColumns.xml'/>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/Item/*'/>
     public DbColumn this[string propertyName]
     {
       get { return LJCSearchPropertyName(propertyName); }
