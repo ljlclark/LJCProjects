@@ -65,7 +65,7 @@
     <Content Include="Data\Doc\DataKey.xml" />
     <Content Include="Data\Doc\DataModules.xml" />
     <Compile Include="Data\DataTables.cs" />
-    <Compile Include="Data\DataUtilTableNew.cs" />
+    <Compile Include="Data\DataUtilTableX.cs" />
     <Compile Include="Data\TableKey.cs" />
     <Compile Include="Data\TableKeys.cs" />
     <Compile Include="Data\DataUtilTableSave.cs" />
@@ -79,7 +79,7 @@
     <Compile Include="Data\DataUtilTable.cs" />
     <Compile Include="Manager\DataColumnManager.cs" />
     <Compile Include="Manager\DataKeyManager.cs" />
-    <Compile Include="Data\DataTablesNew.cs" />
+    <Compile Include="Data\DataTablesX.cs" />
     <Compile Include="Manager\DataModuleManager.cs" />
     <Compile Include="Manager\DataTableManager.cs" />
     <Compile Include="Manager\TableKeyManager.cs" />

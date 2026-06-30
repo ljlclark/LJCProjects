@@ -148,6 +148,7 @@ namespace LJCNetCommon
           compareValue = LJCCompareColumn(columnValue, keyColumn);
           if (index < keyColumns.Count - 1)
           {
+            // Parent key value is not equal.
             if (compareValue != NetString.CompareEqual)
             {
               break;
@@ -155,6 +156,7 @@ namespace LJCNetCommon
           }
           else
           {
+            // Item key value is equal.
             if (NetString.CompareEqual == compareValue)
             {
               retIndex = middleIndex;
@@ -162,7 +164,8 @@ namespace LJCNetCommon
           }
         }
 
-        if (compareValue == NetString.CompareEqual)
+        // DbColumns item was found.
+        if (NetString.CompareEqual == compareValue)
         {
           break;
         }

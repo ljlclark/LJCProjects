@@ -1,21 +1,22 @@
-﻿using LJCNetCommon;
+﻿// Copyright (c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// DataUtilTableX.cs
+using LJCNetCommon;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Xml.Linq;
 
 namespace LJCDataUtilityDAL
 {
   // Represents the DataTable data.
   /// <include file='Doc/DataUtilTableNew.xml'
   ///  path='members/DataUtilTableNew/*'/>
-  public class DataUtilTableNew : DbColumns
+  public class DataUtilTableX : DbColumns
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/Constructor/*'/>
-    public DataUtilTableNew()
+    public DataUtilTableX()
     {
       // columnName, propertyName, renameAs, dataTypeName
       //   , caption, maxLength
@@ -58,7 +59,7 @@ namespace LJCDataUtilityDAL
     // Initializes an object instance with the supplied object.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/CopyConstructor/*'/>
-    public DataUtilTableNew(DataUtilTableNew item) : this()
+    public DataUtilTableX(DataUtilTableX item) : this()
     {
       LJCSetValue(ColumnID, item.LJCGetValue(ColumnID));
       LJCSetValue(ColumnDataSiteID, item.LJCGetValue(ColumnDataSiteID));
@@ -109,12 +110,16 @@ namespace LJCDataUtilityDAL
   // Sort and search on Name value.
   /// <include file='Doc/DataUtilTableNew.xml'
   ///  path='members/DataTableUniqueComparerNew/*'/>
-  public class DataTableUniqueComparerNew : IComparer<DataUtilTableNew>
+  public class DataTableComparerX : IComparer<DataUtilTableX>
   {
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/ColumnNames/*'/>
+    public List<string> ColumnNames { get; set; }
+
     // Compares two objects.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='items/Compare/*'/>
-    public int Compare(DataUtilTableNew x, DataUtilTableNew y)
+    public int Compare(DataUtilTableX x, DataUtilTableX y)
     {
       int retValue;
 
@@ -123,38 +128,49 @@ namespace LJCDataUtilityDAL
 
       while (true)
       {
-        if (retValue != NetString.CompareNotNullOrEqual)
-        {
-          break;
-        }
-
         // Check for null values.
-        var xName = x.LJCGetString("Name");
-        var yName = y.LJCGetString("Name");
-        retValue = NetCommon.CompareNull(xName, yName);
+        if (null == ColumnNames
+          || retValue != NetString.CompareNotNullOrEqual)
+        {
+          break;
+        }
+
+        foreach (string columnName in ColumnNames)
+        {
+          var xValue = x.LJCGetString(columnName);
+          var yValue = y.LJCGetString(columnName);
+          retValue = NetCommon.CompareNull(xValue, yValue);
+          if (retValue != NetString.CompareNotNullOrEqual)
+          {
+            break;
+          }
+        }
         if (retValue != NetString.CompareNotNullOrEqual)
         {
           break;
         }
 
-        // Compare parent keys if neither value is null.
-        var xDataModuleID = x.LJCGetString("DataModuleID");
-        var yDataModuleID = y.LJCGetString("DataModuleID");
-        retValue = xDataModuleID.CompareTo(yDataModuleID);
-        if (retValue != NetString.CompareEqual)
+        for (int index = 0; index < ColumnNames.Count; index++)
         {
-          break;
-        }
-        var xDataModuleSiteID = x.LJCGetString("DataModuleSiteID");
-        var yDataModuleSiteID = y.LJCGetString("DataModuleSiteID");
-        retValue = xDataModuleSiteID.CompareTo(yDataModuleSiteID);
-        if (retValue != NetString.CompareEqual)
-        {
-          break;
-        }
+          var columnName = ColumnNames[index];
+          var xValue = x.LJCGetString(columnName);
+          var yValue = y.LJCGetString(columnName);
 
-        // Compare value if parent keys are equal.
-        retValue = xName.CompareTo(yName);
+          if (index < ColumnNames.Count - 1)
+          {
+            // Compare parent keys if neither value is null.
+            retValue = xValue.CompareTo(yValue);
+            if (retValue != NetString.CompareEqual)
+            {
+              break;
+            }
+          }
+          else
+          {
+            // Compare value if parent keys are equal.
+            retValue = xValue.CompareTo(yValue);
+          }
+        }
         break;
       }
       return retValue;

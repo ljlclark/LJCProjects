@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DataTablesNew.cs
+// DataTablesX.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -11,14 +11,14 @@ namespace LJCDataUtilityDAL
   /// <include file='Doc/DataTablesNew.xml'
   ///  path='members/DataTablesNew/*'/>
   [XmlRoot("DataTables")]
-  public class DataTablesNew : List<DataUtilTableNew>
+  public class DataTablesX : List<DataUtilTableX>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/Constructor/*'/>
-    public DataTablesNew()
+    public DataTablesX()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.DataTables");
       //mPrevCount = -1;
@@ -27,13 +27,13 @@ namespace LJCDataUtilityDAL
     // The Copy constructor.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
-    public DataTablesNew(DataTablesNew items)
+    public DataTablesX(DataTablesX items)
     {
       if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {
-          Add(new DataUtilTableNew(item));
+          Add(new DataUtilTableX(item));
         }
       }
     }
@@ -44,23 +44,23 @@ namespace LJCDataUtilityDAL
     // Creates and returns a clone of the object.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/Clone/*'/>
-    public DataTablesNew Clone()
+    public DataTablesX Clone()
     {
-      var retValue = MemberwiseClone() as DataTablesNew;
+      var retValue = MemberwiseClone() as DataTablesX;
       return retValue;
     }
 
     // Get custom collection from List<T>.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCGetCollection/*'/>
-    public DataTablesNew LJCGetCollection(List<DataUtilTableNew> list)
+    public DataTablesX LJCGetCollection(List<DataUtilTableX> list)
     {
-      DataTablesNew retValue = null;
+      DataTablesX retValue = null;
 
       if (NetCommon.HasItems(list))
       {
-        retValue = new DataTablesNew();
-        foreach (DataUtilTableNew item in list)
+        retValue = new DataTablesX();
+        foreach (DataUtilTableX item in list)
         {
           retValue.Add(item);
         }
@@ -71,13 +71,11 @@ namespace LJCDataUtilityDAL
     // Retrieves the collection element with unique values.
     /// <include file='Doc/DataTablesNew.xml'
     ///  path='members/LJCGetWithUnique/*'/>
-    public DataUtilTableNew LJCGetWithUnique(DbColumns keyColumns)
+    public DataUtilTableX LJCGetWithUnique(DbColumns keyColumns)
     {
-      DataUtilTableNew retDataTable = null;
+      DataUtilTableX retDataTable = null;
 
-      var comparer = new DataTableUniqueComparerNew();
-      LJCSortUnique(comparer);
-
+      LJCSortUnique();
       var foundIndex = DbColumns.LJCSearchColumns(this, keyColumns);
       if (foundIndex != -1)
       {
@@ -87,20 +85,29 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Search and Sort Methods
+    #region Sort Methods
 
-    /// <summary>Sort on Unique values.</summary>
-    /// <param name="comparer">The Comparer object.</param>
+    // Sort on unique column values.
     /// <include file='Doc/DataTablesNew.xml'
     ///  path='members/LJCSortUnique/*'/>
-    public void LJCSortUnique(DataTableUniqueComparerNew comparer)
+    public void LJCSortUnique()
     {
       if (Count != mPrevCount
         || mSortType.CompareTo(SortType.Unique) != 0)
       {
         mPrevCount = Count;
-        Sort(comparer);
         mSortType = SortType.Unique;
+
+        var comparer = new DataTableComparerX
+        {
+          ColumnNames = new List<string>()
+          {
+            "DataModuleID",
+            "DataModuleSiteID",
+            "Name",
+          }
+        };
+        Sort(comparer);
       }
     }
     #endregion
@@ -110,7 +117,7 @@ namespace LJCDataUtilityDAL
     // The item for the supplied name.
     /// <include file='Doc/DataTablesNew.xml'
     ///  path='members/NameIndexer/*'/>
-    public DataUtilTableNew this[int dataTableID, string name]
+    public DataUtilTableX this[int dataTableID, string name]
     {
       get
       {
