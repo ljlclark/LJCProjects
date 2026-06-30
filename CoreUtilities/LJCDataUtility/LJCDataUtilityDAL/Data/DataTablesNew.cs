@@ -70,15 +70,15 @@ namespace LJCDataUtilityDAL
 
     // Retrieves the collection element with unique values.
     /// <include file='Doc/DataTablesNew.xml'
-    ///  path='members/LJCGetWithName/*'/>
-    public DataUtilTableNew LJCGetWithName(string name)
+    ///  path='members/LJCGetWithUnique/*'/>
+    public DataUtilTableNew LJCGetWithUnique(DbColumns keyColumns)
     {
       DataUtilTableNew retDataTable = null;
 
       var comparer = new DataTableUniqueComparerNew();
       LJCSortUnique(comparer);
 
-      var foundIndex = BinarySearchColumns(this, "Name", name);
+      var foundIndex = DbColumns.LJCSearchColumns(this, keyColumns);
       if (foundIndex != -1)
       {
         retDataTable = this[foundIndex];
@@ -88,49 +88,6 @@ namespace LJCDataUtilityDAL
     #endregion
 
     #region Search and Sort Methods
-
-    // Custom binary search for Name value.
-    /// <include file='Doc/DataTablesNew.xml'
-    ///  path='members/BinarySearchColumns/*'/>
-    public int BinarySearchColumns(DataTablesNew items, string propertyName
-      , string searchValue)
-    {
-      int retIndex = -1;
-
-      int leftIndex = 0;
-      int rightIndex = items.Count - 1;
-      while (leftIndex <= rightIndex)
-      {
-        // Get the midpoint.
-        int middleIndex = leftIndex + (rightIndex - leftIndex) / 2;
-
-        // Get the object compare value.
-        var middleItem = items[middleIndex];
-        var itemName = middleItem.LJCGetString(propertyName);
-
-        // Case sensitive.
-        //var compareValue = itemName.CompareTo(searchName);
-        // Not case sensitive.
-        var compareValue = string.Compare(itemName, searchValue, true);
-        if (NetString.CompareEqual == compareValue)
-        {
-          retIndex = middleIndex;
-          break;
-        }
-
-        if (NetString.CompareLess == compareValue)
-        {
-          // Eliminate left half
-          leftIndex = middleIndex + 1;
-        }
-        else
-        {
-          // Eliminate right half
-          rightIndex = middleIndex - 1;
-        }
-      }
-      return retIndex;
-    }
 
     /// <summary>Sort on Unique values.</summary>
     /// <param name="comparer">The Comparer object.</param>

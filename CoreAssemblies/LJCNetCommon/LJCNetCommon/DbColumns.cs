@@ -16,6 +16,21 @@ namespace LJCNetCommon
   {
     #region Static Functions
 
+    /// <summary>Compare column value to key column value.</summary>
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='members/LJCCompareColumn/*'/>
+    public static int LJCCompareColumn(string columnValue, DbColumn keyColumn
+      , bool ignoreCase = true)
+    {
+      string searchValue = null;
+      if (keyColumn.Value != null)
+      {
+        searchValue = keyColumn.Value.ToString();
+      }
+      int retIndex = string.Compare(columnValue, searchValue, ignoreCase);
+      return retIndex;
+    }
+
     // Creates DbColumns from a Data Object.
     /// <include file='Doc/DbColumns.xml'
     ///  path='items/LJCCreateObjectColumns/*'/>
@@ -105,6 +120,65 @@ namespace LJCNetCommon
         }
       }
       return retValue;
+    }
+
+    // Custom binary search for Name value.
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='members/LJCSearchColumns/*'/>
+    public static int LJCSearchColumns<T>(List<T> list, DbColumns keyColumns)
+    {
+      int retIndex = -1;
+
+      int leftIndex = 0;
+      int rightIndex = list.Count - 1;
+      while (leftIndex <= rightIndex)
+      {
+        // Get the midpoint.
+        int middleIndex = leftIndex + (rightIndex - leftIndex) / 2;
+
+        // Get the object compare value.
+        var dbColumns = list[middleIndex] as DbColumns;
+
+        int compareValue = NetString.CompareGreater;
+        for (short index = 0; index < keyColumns.Count; index++)
+        {
+          var keyColumn = keyColumns[index];
+          var propertyName = keyColumn.PropertyName;
+          var columnValue = dbColumns.LJCGetString(propertyName);
+          compareValue = LJCCompareColumn(columnValue, keyColumn);
+          if (index < keyColumns.Count - 1)
+          {
+            if (compareValue != NetString.CompareEqual)
+            {
+              break;
+            }
+          }
+          else
+          {
+            if (NetString.CompareEqual == compareValue)
+            {
+              retIndex = middleIndex;
+            }
+          }
+        }
+
+        if (compareValue == NetString.CompareEqual)
+        {
+          break;
+        }
+
+        if (NetString.CompareLess == compareValue)
+        {
+          // Eliminate left half
+          leftIndex = middleIndex + 1;
+        }
+        else
+        {
+          // Eliminate right half
+          rightIndex = middleIndex - 1;
+        }
+      }
+      return retIndex;
     }
 
     // Creates a DbValues object from a DbColumns object.

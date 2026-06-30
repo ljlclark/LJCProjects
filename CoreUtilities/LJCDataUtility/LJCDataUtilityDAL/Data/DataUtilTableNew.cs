@@ -6,8 +6,8 @@ using System.Xml.Linq;
 namespace LJCDataUtilityDAL
 {
   // Represents the DataTable data.
-  /// <include file='Doc/XDataUtilTable.xml'
-  ///  path='members/XDataUtilTable/*'/>
+  /// <include file='Doc/DataUtilTableNew.xml'
+  ///  path='members/DataUtilTableNew/*'/>
   public class DataUtilTableNew : DbColumns
   {
     #region Constructors
@@ -106,7 +106,9 @@ namespace LJCDataUtilityDAL
 
   #region Comparers
 
-  /// <summary>Sort and search on Name value.</summary>
+  // Sort and search on Name value.
+  /// <include file='Doc/DataUtilTableNew.xml'
+  ///  path='members/DataTableUniqueComparerNew/*'/>
   public class DataTableUniqueComparerNew : IComparer<DataUtilTableNew>
   {
     // Compares two objects.
@@ -116,7 +118,7 @@ namespace LJCDataUtilityDAL
     {
       int retValue;
 
-      // Check if for null objects.
+      // Check for null objects.
       retValue = NetCommon.CompareNull(x, y);
 
       while (true)
@@ -126,7 +128,7 @@ namespace LJCDataUtilityDAL
           break;
         }
 
-        // Check if for null values.
+        // Check for null values.
         var xName = x.LJCGetString("Name");
         var yName = y.LJCGetString("Name");
         retValue = NetCommon.CompareNull(xName, yName);
@@ -135,10 +137,17 @@ namespace LJCDataUtilityDAL
           break;
         }
 
-        // Compare parent keys if neither is null.
+        // Compare parent keys if neither value is null.
         var xDataModuleID = x.LJCGetString("DataModuleID");
         var yDataModuleID = y.LJCGetString("DataModuleID");
         retValue = xDataModuleID.CompareTo(yDataModuleID);
+        if (retValue != NetString.CompareEqual)
+        {
+          break;
+        }
+        var xDataModuleSiteID = x.LJCGetString("DataModuleSiteID");
+        var yDataModuleSiteID = y.LJCGetString("DataModuleSiteID");
+        retValue = xDataModuleSiteID.CompareTo(yDataModuleSiteID);
         if (retValue != NetString.CompareEqual)
         {
           break;
