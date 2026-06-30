@@ -1,22 +1,22 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DataUtilTableX.cs
+// DataTable2.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 
 namespace LJCDataUtilityDAL
 {
   // Represents the DataTable data.
-  /// <include file='Doc/DataUtilTableNew.xml'
+  /// <include file='Doc/DataTable2.xml'
   ///  path='members/DataUtilTableNew/*'/>
-  public class DataUtilTableX : DbColumns
+  public class DataTable2 : DbColumns
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/Constructor/*'/>
-    public DataUtilTableX()
+    public DataTable2()
     {
       // columnName, propertyName, renameAs, dataTypeName
       //   , caption, maxLength
@@ -59,7 +59,7 @@ namespace LJCDataUtilityDAL
     // Initializes an object instance with the supplied object.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/CopyConstructor/*'/>
-    public DataUtilTableX(DataUtilTableX item) : this()
+    public DataTable2(DataTable2 item) : this()
     {
       LJCSetValue(ColumnID, item.LJCGetValue(ColumnID));
       LJCSetValue(ColumnDataSiteID, item.LJCGetValue(ColumnDataSiteID));
@@ -108,18 +108,18 @@ namespace LJCDataUtilityDAL
   #region Comparers
 
   // Sort and search on Name value.
-  /// <include file='Doc/DataUtilTableNew.xml'
+  /// <include file='Doc/DataTable2.xml'
   ///  path='members/DataTableUniqueComparerNew/*'/>
-  public class DataTableComparerX : IComparer<DataUtilTableX>
+  public class DataTable2Comparer : IComparer<DataTable2>
   {
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/ColumnNames/*'/>
-    public List<string> ColumnNames { get; set; }
+    public List<string> LJCColumnNames { get; set; }
 
     // Compares two objects.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='items/Compare/*'/>
-    public int Compare(DataUtilTableX x, DataUtilTableX y)
+    public int Compare(DataTable2 x, DataTable2 y)
     {
       int retValue;
 
@@ -129,13 +129,13 @@ namespace LJCDataUtilityDAL
       while (true)
       {
         // Check for null values.
-        if (null == ColumnNames
+        if (null == LJCColumnNames
           || retValue != NetString.CompareNotNullOrEqual)
         {
           break;
         }
 
-        foreach (string columnName in ColumnNames)
+        foreach (string columnName in LJCColumnNames)
         {
           var xValue = x.LJCGetString(columnName);
           var yValue = y.LJCGetString(columnName);
@@ -150,13 +150,13 @@ namespace LJCDataUtilityDAL
           break;
         }
 
-        for (int index = 0; index < ColumnNames.Count; index++)
+        for (int index = 0; index < LJCColumnNames.Count; index++)
         {
-          var columnName = ColumnNames[index];
+          var columnName = LJCColumnNames[index];
           var xValue = x.LJCGetString(columnName);
           var yValue = y.LJCGetString(columnName);
 
-          if (index < ColumnNames.Count - 1)
+          if (index < LJCColumnNames.Count - 1)
           {
             // Compare parent keys if neither value is null.
             retValue = xValue.CompareTo(yValue);

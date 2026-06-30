@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DataTablesX.cs
+// DataTables2.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -8,32 +8,32 @@ using System.Xml.Serialization;
 namespace LJCDataUtilityDAL
 {
   // Represents a collection of DataTable objects.
-  /// <include file='Doc/DataTablesNew.xml'
-  ///  path='members/DataTablesNew/*'/>
-  [XmlRoot("DataTables")]
-  public class DataTablesX : List<DataUtilTableX>
+  /// <include file='Doc/DataTables2.xml'
+  ///  path='members/DataTables2/*'/>
+  [XmlRoot("DataTables2")]
+  public class DataTables2 : List<DataTable2>
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/Constructor/*'/>
-    public DataTablesX()
+    public DataTables2()
     {
-      mArgError = new ArgError("LJCDataUtilityDAL.DataTables");
-      //mPrevCount = -1;
+      mArgError = new ArgError("LJCDataUtilityDAL.DataTables2");
+      mPrevCount = -1;
     }
 
     // The Copy constructor.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
-    public DataTablesX(DataTablesX items)
+    public DataTables2(DataTables2 items) : this()
     {
       if (NetCommon.HasItems(items))
       {
         foreach (var item in items)
         {
-          Add(new DataUtilTableX(item));
+          Add(new DataTable2(item));
         }
       }
     }
@@ -44,23 +44,23 @@ namespace LJCDataUtilityDAL
     // Creates and returns a clone of the object.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/Clone/*'/>
-    public DataTablesX Clone()
+    public DataTables2 Clone()
     {
-      var retValue = MemberwiseClone() as DataTablesX;
+      var retValue = MemberwiseClone() as DataTables2;
       return retValue;
     }
 
     // Get custom collection from List<T>.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCGetCollection/*'/>
-    public DataTablesX LJCGetCollection(List<DataUtilTableX> list)
+    public DataTables2 LJCGetCollection(List<DataTable2> list)
     {
-      DataTablesX retValue = null;
+      DataTables2 retValue = null;
 
       if (NetCommon.HasItems(list))
       {
-        retValue = new DataTablesX();
-        foreach (DataUtilTableX item in list)
+        retValue = new DataTables2();
+        foreach (DataTable2 item in list)
         {
           retValue.Add(item);
         }
@@ -69,11 +69,11 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieves the collection element with unique values.
-    /// <include file='Doc/DataTablesNew.xml'
+    /// <include file='Doc/DataTables2.xml'
     ///  path='members/LJCGetWithUnique/*'/>
-    public DataUtilTableX LJCGetWithUnique(DbColumns keyColumns)
+    public DataTable2 LJCGetWithUnique(DbColumns keyColumns)
     {
-      DataUtilTableX retDataTable = null;
+      DataTable2 retDataTable = null;
 
       LJCSortUnique();
       var foundIndex = DbColumns.LJCSearchColumns(this, keyColumns);
@@ -88,7 +88,7 @@ namespace LJCDataUtilityDAL
     #region Sort Methods
 
     // Sort on unique column values.
-    /// <include file='Doc/DataTablesNew.xml'
+    /// <include file='Doc/DataTables2.xml'
     ///  path='members/LJCSortUnique/*'/>
     public void LJCSortUnique()
     {
@@ -98,9 +98,9 @@ namespace LJCDataUtilityDAL
         mPrevCount = Count;
         mSortType = SortType.Unique;
 
-        var comparer = new DataTableComparerX
+        var comparer = new DataTable2Comparer
         {
-          ColumnNames = new List<string>()
+          LJCColumnNames = new List<string>()
           {
             "DataModuleID",
             "DataModuleSiteID",
@@ -114,15 +114,21 @@ namespace LJCDataUtilityDAL
 
     #region Properties
 
-    // The item for the supplied name.
-    /// <include file='Doc/DataTablesNew.xml'
-    ///  path='members/NameIndexer/*'/>
-    public DataUtilTableX this[int dataTableID, string name]
+    // The item for the supplied values.
+    /// <include file='Doc/DataTables2.xml'
+    ///  path='members/UniqueIndexer/*'/>
+    public DataTable2 this[long dataModuleID, long dataModuleSiteID
+      , object name]
     {
       get
       {
-        return null;
-        //return LJCSearchUnique(dataTableID, name);
+        var keyColumns = new DbColumns()
+        {
+          { "DataModuleID",  dataModuleID},
+          { "DataModuleSiteID",  4},
+          { "Name",  name },
+        };
+        return LJCGetWithUnique(keyColumns);
       }
     }
     #endregion

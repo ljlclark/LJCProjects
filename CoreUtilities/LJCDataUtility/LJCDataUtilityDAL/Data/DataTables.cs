@@ -19,9 +19,9 @@ namespace LJCDataUtilityDAL
 
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public static DataTablesX LJCDeserialize(string fileSpec = null)
+    public static DataTables2 LJCDeserialize(string fileSpec = null)
     {
-      DataTablesX retValue;
+      DataTables2 retValue;
 
       if (!NetString.HasValue(fileSpec))
       {
@@ -34,8 +34,8 @@ namespace LJCDataUtilityDAL
       }
       else
       {
-        retValue = NetCommon.XmlDeserialize(typeof(DataTablesX), fileSpec)
-        as DataTablesX;
+        retValue = NetCommon.XmlDeserialize(typeof(DataTables2), fileSpec)
+        as DataTables2;
       }
       return retValue;
     }
@@ -98,9 +98,9 @@ namespace LJCDataUtilityDAL
 
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
-    public DataTablesX Clone()
+    public DataTables2 Clone()
     {
-      var retValue = MemberwiseClone() as DataTablesX;
+      var retValue = MemberwiseClone() as DataTables2;
       return retValue;
     }
 

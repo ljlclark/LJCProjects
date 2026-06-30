@@ -2,9 +2,7 @@
 
 namespace LJCDataUtilityDAL
 {
-  // Represents the DataTable data.
-  /// <include file='Doc/XDataUtilTable.xml'
-  ///  path='members/XDataUtilTable/*'/>
+  /// <summary>Represents the DataTable data.</summary>
   public class DataUtilTableSave : DbColumns
   {
     #region Constructors
