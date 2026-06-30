@@ -1,7 +1,6 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DataTables.cs
-using LJCDataUtilityDAL;
+// DataTablesOld.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
@@ -13,16 +12,16 @@ namespace LJCDataUtilityDAL
   /// <remarks>
   /// <para>-- Library Level Remarks</para>
   /// </remarks>
-  [XmlRoot("DataTables")]
+  [XmlRoot("DataTablesOld")]
   public class DataTables : List<DataUtilTable>
   {
     #region Static Functions
 
     // Deserializes from the specified XML file.
     /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public static DataTables LJCDeserialize(string fileSpec = null)
+    public static DataTablesNew LJCDeserialize(string fileSpec = null)
     {
-      DataTables retValue;
+      DataTablesNew retValue;
 
       if (!NetString.HasValue(fileSpec))
       {
@@ -35,8 +34,8 @@ namespace LJCDataUtilityDAL
       }
       else
       {
-        retValue = NetCommon.XmlDeserialize(typeof(DataTables), fileSpec)
-        as DataTables;
+        retValue = NetCommon.XmlDeserialize(typeof(DataTablesNew), fileSpec)
+        as DataTablesNew;
       }
       return retValue;
     }
@@ -99,9 +98,9 @@ namespace LJCDataUtilityDAL
 
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
-    public DataTables Clone()
+    public DataTablesNew Clone()
     {
-      var retValue = MemberwiseClone() as DataTables;
+      var retValue = MemberwiseClone() as DataTablesNew;
       return retValue;
     }
 

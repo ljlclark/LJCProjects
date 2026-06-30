@@ -19,26 +19,52 @@ namespace LJCNetCommon
     ///  path='items/DefaultConstructor/*'/>
     public DbColumn()
     {
-      DataTypeName = "String";
+      // Data Properties
+      AllowDBNull = false;
+      AutoIncrement = false;
+      _Caption = "";
+      _ColumnName = "";
+      _DataTypeName = "string";
+      MaxLength = 0;
+      Position = -1;
+      _PropertyName = "";
+      _RenameAs = null;
+      _SQLTypeName = null;
+      _Value = null;
+
+      // Additional Properties
+      AddOrderIndex = -1;
+      _DefaultValue = null;
       IsChanged = false;
+      IsPrimaryKey = false;
+      _KeyType = null;
+      _OriginalValue = null;
+      Unique = false;
+
+      // View Join Data Properties
+      ID = 0;
+      Sequence = 0;
+      ViewDataID = 0;
+      ViewJoinID = 0;
+      Width = 0;
     }
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/DbColumn.xml'
     ///  path='items/DbColumnC/*'/>
-    public DbColumn(string columnName, string value = null, string dataTypeName = "String"
-      , string propertyName = null, bool assignedKey = false, string renameValue = null)
+    public DbColumn(string columnName, string value = null
+      , string dataTypeName = "String", string propertyName = null
+      , bool assignedKey = false, string renameValue = null) : this()
     {
-      AutoIncrement = assignedKey;
       ColumnName = columnName;
+      Value = value;
       DataTypeName = dataTypeName;
       if (NetString.HasValue(propertyName))
       {
         PropertyName = propertyName;
       }
-      IsChanged = false;
+      AutoIncrement = assignedKey;
       RenameAs = renameValue;
-      Value = value;
     }
 
     // The Copy constructor.
@@ -46,21 +72,34 @@ namespace LJCNetCommon
     ///  path='items/CopyConstructor/*'/>
     public DbColumn(DbColumn item)
     {
+      // Data Properties
       AllowDBNull = item.AllowDBNull;
       AutoIncrement = item.AutoIncrement;
       Caption = item.Caption;
       ColumnName = item.ColumnName;
       DataTypeName = item.DataTypeName;
-      DefaultValue = item.DefaultValue;
-      IsChanged = item.IsChanged;
-      IsPrimaryKey = item.IsPrimaryKey;
       MaxLength = item.MaxLength;
       Position = item.Position;
       PropertyName = item.PropertyName;
       RenameAs = item.RenameAs;
       SQLTypeName = item.SQLTypeName;
-      Unique = item.Unique;
       Value = item.Value;
+
+      // Additional Properties
+      AddOrderIndex = item.AddOrderIndex;
+      DefaultValue = item.DefaultValue;
+      IsChanged = item.IsChanged;
+      IsPrimaryKey = item.IsPrimaryKey;
+      KeyType = item.KeyType;
+      OriginalValue = item.OriginalValue;
+      Unique = item.Unique;
+
+      // View Join Data Properties
+      ID = item.ID;
+      Sequence = item.Sequence;
+      ViewDataID = item.ViewDataID;
+      ViewJoinID = item.ViewJoinID;
+      Width = item.Width;
     }
     #endregion
 
@@ -109,19 +148,19 @@ namespace LJCNetCommon
     ///  path='items/ToString/*'/>
     public override string ToString()
     {
-      string retValue = mColumnName;
+      string retValue = _ColumnName;
 
-      if (mPropertyName != mColumnName)
+      if (_PropertyName != _ColumnName)
       {
-        retValue += $"-{mPropertyName}";
+        retValue += $"-{_PropertyName}";
       }
       if (IsPrimaryKey)
       {
         retValue += "-P";
       }
-      if (mValue != null)
+      if (_Value != null)
       {
-        retValue += $":{mValue}";
+        retValue += $":{_Value}";
       }
       return retValue;
     }
@@ -154,9 +193,6 @@ namespace LJCNetCommon
 
     #region Data Properties
 
-    /// <summary></summary> 
-    public int AddOrderIndex { get; set; }
-
     /// <summary>Gets or sets the AllowDBNull value.</summary>
     public bool AllowDBNull { get; set; }
 
@@ -168,38 +204,62 @@ namespace LJCNetCommon
     ///  path='items/Caption/*'/>
     public string Caption
     {
-      get { return mCaption; }
-      set { mCaption = NetString.InitString(value); }
+      get => _Caption;
+      set
+      {
+        if (_Caption != value)
+        {
+          _Caption = value;
+          if (value != null)
+          {
+            _Caption = value.ToString().Trim();
+          }
+        }
+      }
     }
-    private string mCaption;
+    private string _Caption;
 
     // Gets or sets the ColumnName value.
     /// <include file='Doc/DbColumn.xml'
     ///  path='items/ColumnName/*'/>
     public string ColumnName
     {
-      get { return mColumnName; }
+      get => _ColumnName;
       set
       {
-        mColumnName = NetString.InitString(value);
-
-        // Set empty property name the same as the column name.
-        if (NetString.HasValue(mColumnName)
-          && !NetString.HasValue(mPropertyName))
+        // Cannot change column name to null or white space.
+        if (_ColumnName != value
+          && NetString.HasValue(value))
         {
-          PropertyName = ColumnName;
+          _ColumnName = value.ToString().Trim();
+
+          // Set empty property name the same as the column name.
+          if (!NetString.HasValue(_PropertyName))
+          {
+            PropertyName = ColumnName;
+          }
         }
       }
     }
-    private string mColumnName;
+    private string _ColumnName;
 
     /// <summary>Gets or sets the DataTypeName value.</summary>
     public string DataTypeName
     {
-      get { return mDataTypeName; }
-      set { mDataTypeName = NetString.InitString(value); }
+      get => _DataTypeName;
+      set
+      {
+        if (_DataTypeName != value)
+        {
+          _DataTypeName = value;
+          if (value != null)
+          {
+            _DataTypeName = value.ToString().Trim();
+          }
+        }
+      }
     }
-    private string mDataTypeName;
+    private string _DataTypeName;
 
     /// <summary>Gets or sets the MaxLength value.</summary>
     public int MaxLength { get; set; }
@@ -214,75 +274,158 @@ namespace LJCNetCommon
     ///  path='items/PropertyName/*'/>
     public string PropertyName
     {
-      get { return mPropertyName; }
+      get => _PropertyName;
       set
       {
         // Cannot change property name to null or white space.
-        if (NetString.HasValue(value))
+        if (_PropertyName != value
+          && NetString.HasValue(value))
         {
-          mPropertyName = NetString.InitString(value);
+          _PropertyName = value.ToString().Trim();
+
+          // Set empty column name the same as the property name.
+          if (!NetString.HasValue(_ColumnName))
+          {
+            ColumnName = PropertyName;
+          }
         }
       }
     }
-    private string mPropertyName;
+    private string _PropertyName;
 
     // Gets or sets the RenameAs value.
     /// <include file='Doc/DbColumn.xml'
     ///  path='items/RenameAs/*'/>
     public string RenameAs
     {
-      get { return mRenameAs; }
-      set { mRenameAs = NetString.InitString(value); }
+      get => _RenameAs;
+      set
+      {
+        if (_RenameAs != value)
+        {
+          _RenameAs = value;
+          if (value != null)
+          {
+            _RenameAs = value.ToString().Trim();
+          }
+        }
+      }
     }
-    private string mRenameAs;
+    private string _RenameAs;
 
     /// <summary>Gets or sets the SQLTypeName value.</summary>
     public string SQLTypeName
     {
-      get { return mSQLTypeName; }
-      set { mSQLTypeName = NetString.InitString(value); }
+      get => _SQLTypeName;
+      set
+      {
+        if (_SQLTypeName != value)
+        {
+          _SQLTypeName = value;
+          if (value != null)
+          {
+            _SQLTypeName = value.ToString().Trim();
+          }
+        }
+      }
     }
-    private string mSQLTypeName;
+    private string _SQLTypeName;
 
     /// <summary>Gets or sets the Value object.</summary>
     public object Value
     {
-      get { return mValue; }
+      get => _Value;
       set
       {
-        // Update if value is changed.
-        if (!NetCommon.IsEqual(mValue, value))
+        if (_Value != value)
         {
-          IsChanged = true;
-          mValue = value;
+          _Value = value;
+          if (typeof(string) == value.GetType()
+            && value != null)
+          {
+            _Value = value.ToString().Trim();
+          }
+
+          IsChanged = false;
+          if (!EqualityComparer<object>.Default.Equals(OriginalValue, _Value))
+          {
+            IsChanged = true;
+          }
         }
       }
     }
-    private object mValue;
+    private object _Value;
     #endregion
 
     #region Additional Properties
 
-    /// <summary>Gets or sets the DefaultValue value.</summary>
+    /// <summary>Gets or sets the add order index.</summary> 
+    public int AddOrderIndex { get; set; }
+
+    /// <summary>Gets or sets the default value.</summary>
     public string DefaultValue
     {
-      get { return mDefaultValue; }
-      set { mDefaultValue = NetString.InitString(value); }
+      get => _DefaultValue;
+      set
+      {
+        if (_DefaultValue != value)
+        {
+          _DefaultValue = value;
+          if (value != null)
+          {
+            _DefaultValue = value.ToString().Trim();
+          }
+        }
+      }
     }
-    private string mDefaultValue;
+    private string _DefaultValue;
 
-    /// <summary>Indicates that the value has changed.</summary>
+    /// <summary>Gets or sets the changed indicator.</summary>
     [XmlIgnore()]
     public bool IsChanged { get; set; }
 
-    /// <summary>Gets or sets the IsPrimaryKey value.</summary>
+    /// <summary>Gets or sets the primary key indicator.</summary>
     public bool IsPrimaryKey { get; set; }
 
     /// <summary>Gets or sets the KeyType value.</summary>
     // "Natural", "Natural*", "Foreign"
-    public string KeyType { get; set; }
+    public string KeyType
+    {
+      get => _KeyType;
+      set
+      {
+        if (_KeyType != value)
+        {
+          _KeyType = value;
+          if (value != null)
+          {
+            _KeyType = value.ToString().Trim();
+          }
+        }
+      }
+    }
+    private string _KeyType;
 
-    /// <summary>Gets or sets the Unique value.</summary>
+    /// <summary>Gets or sets the original value.</summary>
+    public object OriginalValue
+    {
+      get => _OriginalValue;
+      set
+      {
+        if (_OriginalValue != value)
+        {
+          _OriginalValue = value;
+          if (typeof(string) == value.GetType()
+            && value != null)
+          {
+            _OriginalValue = value.ToString().Trim();
+          }
+        }
+      }
+    }
+    private object _OriginalValue;
+
+    /// <summary>Gets or sets the unique key indicator.</summary>
     public bool Unique { get; set; }
     #endregion
 

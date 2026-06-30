@@ -112,10 +112,7 @@ namespace _AICodeTest
     }
     #endregion
 
-    #region Public Methods
-    #endregion
-
-    #region Private Methods
+    #region Methods
 
     private void TrackChange<T>(string propertyName, T originalValue, T newValue)
     {
@@ -175,6 +172,7 @@ namespace _AICodeTest
       get => _name;
       set
       {
+        // If value is changed.
         var newValue = value?.Trim();
         if (_name != newValue)
         {
@@ -209,19 +207,13 @@ namespace _AICodeTest
     }
     #endregion
 
-    #region Private Properties
-    #endregion
-
-    #region Private Fields
+    #region Class Data
 
     // Prevents duplicates automatically.
     // Faster than List<T>.
     private readonly HashSet<string> _changedProperties;
 
     private readonly OriginalValues _originalValues;
-    #endregion
-
-    #region Private Classes
 
     private class OriginalValues
     {

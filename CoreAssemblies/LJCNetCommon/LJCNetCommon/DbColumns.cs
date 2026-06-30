@@ -1,6 +1,6 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DbColumns
+// DbColumns.cs
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -9,7 +9,8 @@ using System.Xml.Serialization;
 namespace LJCNetCommon
 {
   // Represents a collection of DbColumn objects.
-  /// <include path='items/DbColumns/*' file='Doc/DbColumns.xml'/>
+  /// <include file='Doc/DbColumns.xml'
+  ///  path='items/DbColumns/*'/>
   [XmlRoot("DbColumns")]
   public class DbColumns : List<DbColumn>
   {
@@ -133,7 +134,7 @@ namespace LJCNetCommon
     ///  path='items/DefaultConstructor/*'/>
     public DbColumns()
     {
-      mPrevCount = -1;
+      _PrevCount = -1;
     }
 
     // The Copy constructor.
@@ -283,8 +284,8 @@ namespace LJCNetCommon
     {
       DbColumn retValue = null;
 
-      if (Count != mPrevCount
-        || mSortType.CompareTo(SortType.PropertyName) != 0)
+      if (Count != _PrevCount
+        || _SortType.CompareTo(SortType.PropertyName) != 0)
       {
         retValue = Find(x => x.PropertyName == propertyName);
       }
@@ -506,12 +507,12 @@ namespace LJCNetCommon
     /// <summary>Sort on AddOrderIndex.</summary>
     public void LJCSortAddOrderIndex()
     {
-      if (Count != mPrevCount
-        || mSortType.CompareTo(SortType.AddOrderIndex) != 0)
+      if (Count != _PrevCount
+        || _SortType.CompareTo(SortType.AddOrderIndex) != 0)
       {
-        mPrevCount = Count;
+        _PrevCount = Count;
         Sort();
-        mSortType = SortType.AddOrderIndex;
+        _SortType = SortType.AddOrderIndex;
       }
     }
 
@@ -519,12 +520,12 @@ namespace LJCNetCommon
     /// <param name="comparer">The comparer function.</param>
     public void LJCSortName(DbColumnNameComparer comparer)
     {
-      if (Count != mPrevCount
-        || mSortType.CompareTo(SortType.ColumnName) != 0)
+      if (Count != _PrevCount
+        || _SortType.CompareTo(SortType.ColumnName) != 0)
       {
-        mPrevCount = Count;
+        _PrevCount = Count;
         Sort(comparer);
-        mSortType = SortType.ColumnName;
+        _SortType = SortType.ColumnName;
       }
     }
 
@@ -532,12 +533,12 @@ namespace LJCNetCommon
     /// <param name="comparer">The comparer function.</param>
     public void LJCSortProperty(DbColumnPropertyComparer comparer)
     {
-      if (Count != mPrevCount
-        || mSortType.CompareTo(SortType.PropertyName) != 0)
+      if (Count != _PrevCount
+        || _SortType.CompareTo(SortType.PropertyName) != 0)
       {
-        mPrevCount = Count;
+        _PrevCount = Count;
         Sort(comparer);
-        mSortType = SortType.PropertyName;
+        _SortType = SortType.PropertyName;
       }
     }
 
@@ -545,12 +546,12 @@ namespace LJCNetCommon
     /// <param name="comparer">The comparer function.</param>
     public void LJCSortRenameAs(DbColumnRenameAsComparer comparer)
     {
-      if (Count != mPrevCount
-        || mSortType.CompareTo(SortType.RenameAs) != 0)
+      if (Count != _PrevCount
+        || _SortType.CompareTo(SortType.RenameAs) != 0)
       {
-        mPrevCount = Count;
+        _PrevCount = Count;
         Sort(comparer);
-        mSortType = SortType.RenameAs;
+        _SortType = SortType.RenameAs;
       }
     }
     #endregion
@@ -812,6 +813,25 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // Get the column value.
+    /// <include file='Doc/DbColumns.xml'
+    ///  path='items/LJCGetValue/*'/>
+    public object LJCGetValue(string propertyName)
+    {
+      object retValue = default;
+
+      if (NetCommon.HasItems(this)
+        && NetString.HasValue(propertyName))
+      {
+        var dataColumn = LJCGetColumn(propertyName);
+        if (dataColumn != null)
+        {
+          retValue = dataColumn.Value;
+        }
+      }
+      return retValue;
+    }
+
     // Update column value.
     /// <include file='Doc/DbColumns.xml'
     ///  path='items/LJCSetValue/*'/>
@@ -848,8 +868,8 @@ namespace LJCNetCommon
 
     #region Class Data
 
-    private int mPrevCount;
-    private SortType mSortType;
+    private int _PrevCount;
+    private SortType _SortType;
 
     private enum SortType
     {
