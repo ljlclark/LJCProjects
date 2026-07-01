@@ -23,13 +23,15 @@ namespace TestDataUtilityDAL
       AddChangedNames();
       Clone();
       CompareTo();
-      SetOriginalValues();
+      LJCSetOriginalValues();
       TestToString();
 
       // Data Properties
       NoChange();
       ID();
+      DataSiteID();
       DataModuleID();
+      DataModuleSiteID();
       Name();
       Description();
       SchemaName();
@@ -50,7 +52,10 @@ namespace TestDataUtilityDAL
         "Name",
         "Description",
       };
+
+      // Test Method
       dataTable.ChangedNames.AddNames(changedNames);
+
       var result = dataTable.ChangedNames.ChangedPropertyNames;
       var compare = "Name, Description";
       TestCommon.Write($"{methodName}", result, compare);
@@ -71,6 +76,8 @@ namespace TestDataUtilityDAL
         SchemaName = "SchemaName",
         NewName = "NewName"
       };
+
+      // Test Method
       var newDataTable = dataTable.Clone();
 
       var result = newDataTable.ID.ToString();
@@ -131,7 +138,7 @@ namespace TestDataUtilityDAL
     }
 
     // Initializes the original values.
-    public void SetOriginalValues()
+    public void LJCSetOriginalValues()
     {
       var methodName = "SetOriginalValues()";
 
@@ -145,7 +152,9 @@ namespace TestDataUtilityDAL
         SchemaName = "SchemaName",
         NewName = "NewName",
       };
-      dataTable.SetOriginalValues();
+
+      // Test Method
+      dataTable.LJCSetOriginalValues();
 
       dataTable.ID = 1;
       var result = dataTable.ChangedNames.ChangedPropertyNames;
@@ -194,7 +203,9 @@ namespace TestDataUtilityDAL
         Name = "Name",
       };
 
+      // Test Method
       var result = dataTable.ToString();
+
       var compare = "Name:1";
       TestCommon.Write($"{methodName}", result, compare);
     }
@@ -219,6 +230,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "ID()";
 
+      // Test Method
       var dataTable = new DataUtilTable
       {
         ID = 0,
@@ -231,6 +243,27 @@ namespace TestDataUtilityDAL
       dataTable.ID = 1;
       result = dataTable.ChangedNames.ChangedPropertyNames;
       compare = "ID";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
+    // Change DataSiteID
+    public void DataSiteID()
+    {
+      var methodName = "DataSiteID()";
+
+      // Test Method
+      var dataTable = new DataUtilTable
+      {
+        DataSiteID = 0,
+      };
+
+      var result = dataTable.ChangedNames.ChangedPropertyNames;
+      var compare = "No Result";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dataTable.DataSiteID = 1;
+      result = dataTable.ChangedNames.ChangedPropertyNames;
+      compare = "DataSiteID";
       TestCommon.Write($"{methodName}2", result, compare);
     }
 
@@ -254,11 +287,33 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}2", result, compare);
     }
 
+    // Change DataSiteID
+    public void DataModuleSiteID()
+    {
+      var methodName = "DataModuleSiteID()";
+
+      // Test Method
+      var dataTable = new DataUtilTable
+      {
+        DataModuleSiteID = 0,
+      };
+
+      var result = dataTable.ChangedNames.ChangedPropertyNames;
+      var compare = "No Result";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dataTable.DataModuleSiteID = 1;
+      result = dataTable.ChangedNames.ChangedPropertyNames;
+      compare = "DataModuleSiteID";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
     // Change Name
     public void Name()
     {
       var methodName = "Name()";
 
+      // Test Method
       var dataTable = new DataUtilTable
       {
         Name = "",
@@ -279,6 +334,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "Description()";
 
+      // Test Method
       var dataTable = new DataUtilTable
       {
         Description = "",
@@ -299,6 +355,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "Sequence()";
 
+      // Test Method
       var dataTable = new DataUtilTable
       {
         Sequence = 0,
@@ -319,6 +376,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "SchemaName()";
 
+      // Test Method
       var dataTable = new DataUtilTable
       {
         SchemaName = null,
@@ -339,6 +397,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "NewName()";
 
+      // Test Method
       var dataTable = new DataUtilTable
       {
         NewName = null,

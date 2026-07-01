@@ -1,5 +1,11 @@
-﻿using LJCDataUtilityDAL;
+﻿// Copyright(c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// TestDataTableManager.cs
+using LJCDataUtilityDAL;
+using LJCDBMessage;
 using LJCNetCommon;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace TestDataUtilityDAL
 {
@@ -25,6 +31,8 @@ namespace TestDataUtilityDAL
     // Run the tests.
     public void Run()
     {
+      CleanUp();
+
       // DataTable Data Methods
       Add();
       Delete();
@@ -49,16 +57,109 @@ namespace TestDataUtilityDAL
       GetJoins();
     }
 
+    private void CleanUp()
+    {
+      var methodName = "CleanUp()";
+
+      // DataUtility module.
+      long dataModuleID = 1;
+      long dataModuleSiteID = 1;
+
+      string name = "TestTableName";
+
+      var uniqueColumns = new DbColumns()
+      {
+        { "DataModuleID", dataModuleID },
+        { "DataModuleSiteID", dataModuleSiteID },
+        { "Name", (object)name },
+      };
+      DataTableManager.Delete(uniqueColumns);
+
+      var utilTable = DataTableManager.Retrieve(uniqueColumns);
+      var result = "HasObject";
+      if (null == utilTable)
+      {
+        result = null;
+      }
+      var compare = "No Result";
+      TestCommon.Write($"{methodName}1", result, compare);
+    }
+
     #region Data Methods
 
     // Adds a record to the database.
     private void Add()
     {
+      string methodName = "Add()";
+
+      long dataSiteID = 1;
+
+      // DataUtility module.
+      long dataModuleID = 1;
+      long dataModuleSiteID = 1;
+      string name = "TestTableName";
+
+      var dataUtilTable = new DataUtilTable()
+      {
+        DataSiteID = dataSiteID,
+        DataModuleID = dataModuleID,
+        DataModuleSiteID = dataModuleSiteID,
+        Name = name,
+        Description = "The test table.",
+        Sequence = 5,
+        SchemaName = "dbo",
+        NewName = null,
+      };
+
+      // Test Method
+      DataTableManager.Add(dataUtilTable);
+
+      var uniqueColumns = new DbColumns()
+      {
+        { "DataModuleID", dataModuleID },
+        { "DataModuleSiteID", dataModuleSiteID },
+        { "Name", (object)name },
+      };
+      var utilTable = DataTableManager.Retrieve(uniqueColumns);
+      var result = utilTable.Name;
+      var compare = "TestTableName";
+      TestCommon.Write($"{methodName}", result, compare);
+
+      DataTableManager.Delete(uniqueColumns);
     }
 
     // Deletes the records with the specified key values.
     private void Delete()
     {
+      string methodName = "Delete()";
+
+      // DataUtility module.
+      long dataModuleID = 1;
+      long dataModuleSiteID = 1;
+
+      string name = "TestTableName";
+
+      var uniqueColumns = new DbColumns()
+      {
+        { "DataModuleID", dataModuleID },
+        { "DataModuleSiteID", dataModuleSiteID },
+        { "Name", (object)name },
+      };
+      var utilTable = DataTableManager.Retrieve(uniqueColumns);
+      if (utilTable != null)
+      {
+        var result = utilTable.Name;
+        var compare = "TestTableName";
+        TestCommon.Write($"{methodName}1", result, compare);
+
+        // Test Method
+        DataTableManager.Delete(uniqueColumns);
+
+        utilTable = DataTableManager.Retrieve(uniqueColumns);
+        result = null;
+        compare = "No Result";
+        TestCommon.Write($"{methodName}2", result, compare);
+      }
     }
 
     // Retrieves a collection of data records.
@@ -71,13 +172,14 @@ namespace TestDataUtilityDAL
     {
       var methodName = "Retrieve()";
 
-      var keyColumns = DataTableManager.IDKey(1);
-      keyColumns.Add(DataUtilTable.ColumnDataSiteID, 1, "Int32");
+      var id = 1;
+      var dataSiteID = 1;
+      var keyColumns = DataTableManager.IDKey(id, dataSiteID);
       var dataUtilTable = DataTableManager.Retrieve(keyColumns);
 
       var result = dataUtilTable.Name;
       var compare = "DataModule";
-      TestCommon.Write(methodName, result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Updates the record.

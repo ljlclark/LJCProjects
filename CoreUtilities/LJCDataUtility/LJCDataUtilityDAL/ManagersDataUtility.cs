@@ -77,15 +77,16 @@ namespace LJCDataUtilityDAL
     }
 
     /// <summary>Gets the DataKey by ID.</summary>
-    public DataUtilTable GetDataTable(long id)
+    public DataUtilTable GetDataTable(long id, long siteID)
     {
       DataUtilTable retDataTable = null;
 
-      IDError(id, "GetDataTable(long id)", "id");
+      IDError(id, "GetDataTable(id, siteID)", "id");
+      IDError(siteID, "GetDataTable(id, siteID)", "siteID");
       var manager = DataTableManager;
       if (manager != null)
       {
-        retDataTable = manager.RetrieveWithID(id);
+        retDataTable = manager.RetrieveWithID(id, siteID);
       }
       return retDataTable;
     }

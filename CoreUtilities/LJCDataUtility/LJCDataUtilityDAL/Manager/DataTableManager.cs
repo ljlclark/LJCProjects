@@ -15,13 +15,23 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='items/Constructor/*'/>
+    public DataTableManager()
+    {
+      Manager = null;
+      ResultConverter = new ResultConverter<DataUtilTable, DataTables>();
+      EntryManager = null;
+    }
+
+    // Initializes an object instance with the supplied values.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='items/ParamConstructor/*'/>
     public DataTableManager(DbServiceRef dbServiceRef, string dataConfigName
-      , string tableName = "DataTable", string schemaName = null)
+      , string tableName = "DataTable", string schemaName = null) : this()
     {
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
-      ResultConverter = new ResultConverter<DataUtilTable, DataTables>();
 
       // Map table names with property names or captions
       // that differ from the column names.
@@ -147,14 +157,15 @@ namespace LJCDataUtilityDAL
 
     #region Additional Load and Retrieve Methods
 
-    // Retrieves a record with the supplied value.
-    /// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DataUtilTable RetrieveWithID(long id
+    // Retrieves a record with the supplied values.
+    /// <include file='Doc/DataTableManager.xml'
+    ///  path='items/RetrieveWithID/*'/>
+    public DataUtilTable RetrieveWithID(long id, long dataSiteID
       , List<string> propertyNames = null)
     {
       DataUtilTable retValue;
 
-      var keyColumns = IDKey(id);
+      var keyColumns = IDKey(id, dataSiteID);
       var joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
@@ -182,14 +193,15 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns IDKey(long id)
+    public DbColumns IDKey(long id, long siteID)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
-        { DataUtilTable.ColumnID, id }
+        { DataUtilTable.ColumnID, id },
+        { DataUtilTable.ColumnDataSiteID, siteID},
       };
       return retValue;
     }

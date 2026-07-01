@@ -63,7 +63,8 @@ namespace LJCDataUtility
         var tableManager = Managers.DataTableManager;
         foreach (var dataColumn in dataColumns)
         {
-          var dataTable = tableManager.RetrieveWithID(dataColumn.DataTableID);
+          var dataTable = tableManager.RetrieveWithID(dataColumn.DataTableID
+            , dataColumn.DataSiteID);
           proc.Line($"EXEC sp_DataColumnAdd {dataTable.Name}");
           proc.Line($" , '{dataColumn.Name}', '{dataColumn.Description}'");
           proc.Text($" , {dataColumn.Sequence}, {dataColumn.TypeName}");
@@ -95,7 +96,8 @@ namespace LJCDataUtility
         var tableManager = Managers.DataTableManager;
         foreach (var data in dataKeys)
         {
-          var dataTable = tableManager.RetrieveWithID(data.DataTableID);
+          var dataTable = tableManager.RetrieveWithID(data.DataTableID
+            , data.DataSiteID);
           proc.Line($"EXEC sp_DataKeyAdd {dataTable.Name}");
           proc.Line($" , '{data.Name}', {data.KeyType}");
           proc.Text($" , {data.SourceColumnName}, {data.TargetTableName}");

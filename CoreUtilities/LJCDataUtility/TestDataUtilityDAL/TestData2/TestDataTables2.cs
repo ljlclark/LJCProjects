@@ -20,17 +20,68 @@ namespace TestDataUtilityDAL
     // Run the tests.
     public void Run()
     {
+      // Static Methods
+      LJCGetCollection();
+
       // Constructor Methods
       CopyConstructor();
 
       // Collection Methods
       Clone();
-      LJCGetCollection();
       LJCGetWithUnique();
 
       // Properties
       UniqueIndexer();
     }
+
+    #region Static Methods
+
+    // Get custom collection from List<T>.
+    public void LJCGetCollection()
+    {
+      var methodName = "LJCGetCollection()";
+
+      var dataTables = new List<DataTable2>();
+      var dataTable = new DataTable2();
+      dataTable.LJCSetValue(ColumnID, 1);
+      dataTable.LJCSetValue(ColumnDataSiteID, 2);
+      dataTable.LJCSetValue(ColumnDataModuleID, 3);
+      dataTable.LJCSetValue(ColumnDataModuleSiteID, 4);
+      dataTable.LJCSetValue(ColumnName, "Name");
+      dataTable.LJCSetValue(ColumnDescription, "Description");
+      dataTable.LJCSetValue(ColumnSequence, 1);
+      dataTable.LJCSetValue(ColumnSchemaName, "SchemaName");
+      dataTable.LJCSetValue(ColumnNewName, "NewName");
+      dataTables.Add(dataTable);
+
+      dataTable = new DataTable2();
+      dataTable.LJCSetValue(ColumnID, 2);
+      dataTable.LJCSetValue(ColumnDataSiteID, 2);
+      dataTable.LJCSetValue(ColumnDataModuleID, 3);
+      dataTable.LJCSetValue(ColumnDataModuleSiteID, 4);
+      dataTable.LJCSetValue(ColumnName, "First");
+      dataTables.Add(dataTable);
+
+      // Test Method
+      //var testDataTables = new DataTables2();
+      var newDataTables = DataTables2.LJCGetCollection(dataTables);
+
+      var testDataTable = newDataTables[3, 4, "Name"];
+      if (null == testDataTable)
+      {
+        var result = "HasValue";
+        var compare = "IsNull";
+        TestCommon.Write($"{methodName}1", result, compare);
+      }
+
+      if (testDataTable != null)
+      {
+        var result = testDataTable.LJCGetString("Name");
+        var compare = "Name";
+        TestCommon.Write($"{methodName}2", result, compare);
+      }
+    }
+    #endregion
 
     #region Constructor Methods
 
@@ -60,7 +111,9 @@ namespace TestDataUtilityDAL
       dataTable.LJCSetValue(ColumnName, "First");
       dataTables.Add(dataTable);
 
+      // Test Method
       var testDataTables = new DataTables2(dataTables);
+
       var testDataTable = testDataTables[3, 4, "Name"];
       var result = testDataTable.LJCGetString("Name");
       var compare = "Name";
@@ -96,52 +149,10 @@ namespace TestDataUtilityDAL
       dataTable.LJCSetValue(ColumnName, "First");
       dataTables.Add(dataTable);
 
+      // Test Method
       var testDataTables = dataTables.Clone();
+
       var testDataTable = testDataTables[3, 4, "Name"];
-      if (null == testDataTable)
-      {
-        var result = "HasValue";
-        var compare = "IsNull";
-        TestCommon.Write($"{methodName}1", result, compare);
-      }
-
-      if (testDataTable != null)
-      {
-        var result = testDataTable.LJCGetString("Name");
-        var compare = "Name";
-        TestCommon.Write($"{methodName}2", result, compare);
-      }
-    }
-
-    // Get custom collection from List<T>.
-    public void LJCGetCollection()
-    {
-      var methodName = "LJCGetCollection()";
-
-      var dataTables = new List<DataTable2>();
-      var dataTable = new DataTable2();
-      dataTable.LJCSetValue(ColumnID, 1);
-      dataTable.LJCSetValue(ColumnDataSiteID, 2);
-      dataTable.LJCSetValue(ColumnDataModuleID, 3);
-      dataTable.LJCSetValue(ColumnDataModuleSiteID, 4);
-      dataTable.LJCSetValue(ColumnName, "Name");
-      dataTable.LJCSetValue(ColumnDescription, "Description");
-      dataTable.LJCSetValue(ColumnSequence, 1);
-      dataTable.LJCSetValue(ColumnSchemaName, "SchemaName");
-      dataTable.LJCSetValue(ColumnNewName, "NewName");
-      dataTables.Add(dataTable);
-
-      dataTable = new DataTable2();
-      dataTable.LJCSetValue(ColumnID, 2);
-      dataTable.LJCSetValue(ColumnDataSiteID, 2);
-      dataTable.LJCSetValue(ColumnDataModuleID, 3);
-      dataTable.LJCSetValue(ColumnDataModuleSiteID, 4);
-      dataTable.LJCSetValue(ColumnName, "First");
-      dataTables.Add(dataTable);
-
-      var testDataTables = new DataTables2();
-      var newDataTables = testDataTables.LJCGetCollection(dataTables);
-      var testDataTable = newDataTables[3, 4, "Name"];
       if (null == testDataTable)
       {
         var result = "HasValue";
@@ -191,6 +202,7 @@ namespace TestDataUtilityDAL
       dataTable.LJCSetValue(ColumnName, "BeforeName");
       dataTables.Add(dataTable);
 
+      // Test Method
       var keyColumns = new DbColumns()
       {
         { "DataModuleID",  3},
@@ -198,6 +210,7 @@ namespace TestDataUtilityDAL
         { "Name",  (object)"Name" },
       };
       var testDataTable = dataTables.LJCGetWithUnique(keyColumns);
+
       if (null == testDataTable)
       {
         var result = "HasValue";
@@ -274,7 +287,9 @@ namespace TestDataUtilityDAL
       dataTable.LJCSetValue(ColumnName, "First");
       dataTables.Add(dataTable);
 
+      // Test Method
       var testDataTable = dataTables[3, 4, "Name"];
+
       if (null == testDataTable)
       {
         var result = "HasValue";

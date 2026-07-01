@@ -90,6 +90,7 @@
     <Content Include="Data2\Doc\DataTables2.xml" />
     <Content Include="Data2\Doc\DataTable2.xml" />
     <Content Include="Data\Doc\DataTable.xml" />
+    <Content Include="Manager\Doc\DataTableManager.xml" />
     <Content Include="Manager\Doc\DataColumnManager.xml" />
     <Content Include="Manager\Doc\DataKeyManager.xml" />
   </ItemGroup>

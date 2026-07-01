@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- NewDataUtilTable.xml -->
+<members>
+  <!-- Methods -->
+  <GetWithColumnName>
+    <summary>
+      Gets the DbColumn with the supplied column name value.
+    </summary>
+  </GetWithColumnName>
+  <GetWithRenameAs>
+    <summary>
+      Gets the DbColumn with the supplied rename as value.
+    </summary>
+  </GetWithRenameAs>
+  <!-- Class Properties -->
+  <indexer>
+    <summary>
+      Get the DbColumn for the supplied property name.
+    </summary>
+  </indexer>
+  <!-- Class Data -->
+  <Columns>
+    <summary>
+      Gets the DbColumns object.
+    </summary>
+  </Columns>
+</members>

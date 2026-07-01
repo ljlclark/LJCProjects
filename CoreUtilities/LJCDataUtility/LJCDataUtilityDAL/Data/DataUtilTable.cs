@@ -32,7 +32,7 @@ namespace LJCDataUtilityDAL
       _NewName = null;
       ChangedNames = new ChangedNames();
       _OriginalValues = new OriginalValues();
-      SetOriginalValues();
+      LJCSetOriginalValues();
     }
 
     // Initializes an object instance with the supplied values.
@@ -47,7 +47,7 @@ namespace LJCDataUtilityDAL
     // The Copy constructor.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/CopyConstructor/*'/>
-    public DataUtilTable(DataUtilTable item)
+    public DataUtilTable(DataUtilTable item) : this()
     {
       _ID = item.ID;
       _DataSiteID = item.DataSiteID;
@@ -62,7 +62,7 @@ namespace LJCDataUtilityDAL
 
       ChangedNames = item.ChangedNames;
       _OriginalValues = new OriginalValues();
-      SetOriginalValues();
+      LJCSetOriginalValues();
     }
     #endregion
 
@@ -103,8 +103,8 @@ namespace LJCDataUtilityDAL
 
     // Initializes the original values.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='members/SetOriginalValues/*'/>
-    public void SetOriginalValues()
+    ///  path='members/LJCSetOriginalValues/*'/>
+    public void LJCSetOriginalValues()
     {
       _OriginalValues.ID = _ID;
       _OriginalValues.DataSiteID = _DataModuleSiteID;
@@ -372,7 +372,6 @@ namespace LJCDataUtilityDAL
     // The object starting values.
     private class OriginalValues
     {
-
       // Gets or sets the table row ID.
       public long ID { get; set; }
 

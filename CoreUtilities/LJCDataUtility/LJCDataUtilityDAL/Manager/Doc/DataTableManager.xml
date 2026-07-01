@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataTableManager.xml -->
+<items>
+  <RetrieveWithID>
+    <summary>
+      Retrieves a record with the supplied values.
+    </summary>
+    <param name="id">The primary key.</param>
+    <param name="dataSiteID">The primary and foreign key.</param>
+    <param name="propertyNames">The property names.</param>
+  </RetrieveWithID>
+</items>
