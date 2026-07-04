@@ -65,6 +65,62 @@ namespace LJCDataUtilityDAL
 
     #region Collection Methods
 
+    // Creates and returns a clone of the object.
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    public DataColumns Clone()
+    {
+      var retValue = new DataColumns();
+      foreach (DataUtilColumn dataColumn in this)
+      {
+        retValue.Add(dataColumn.Clone());
+      }
+      return retValue;
+    }
+
+    // Get custom collection from List<T>.
+    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public DataColumns LJCGetCollection(List<DataUtilColumn> list)
+    {
+      DataColumns retValue = null;
+
+      if (NetCommon.HasItems(list))
+      {
+        retValue = new DataColumns();
+        foreach (DataUtilColumn item in list)
+        {
+          retValue.Add(item);
+        }
+      }
+      return retValue;
+    }
+
+    // Checks if the collection has items.
+    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public bool LJCHasItems()
+    {
+      bool retValue = false;
+
+      if (Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Serializes the collection to a file.
+    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public void LJCSerialize(string fileSpec = null)
+    {
+      if (!NetString.HasValue(fileSpec))
+      {
+        fileSpec = LJCDefaultFileName;
+      }
+      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
+    }
+    #endregion
+
+    #region Collection Data Methods
+
     // Creates and adds the object from the provided values.
     /// <summary>
     /// Creates and adds the object from the provided values.
@@ -89,7 +145,7 @@ namespace LJCDataUtilityDAL
 
       // Prevent search from sorting current items.
       var checkColumns = this.Clone();
-      var duplicate = checkColumns.LJCSearchUnique(parentTableID
+      var duplicate = checkColumns.LJCGetWithUnique(parentTableID
         , parentSiteID, name);
       if (duplicate != null)
       {
@@ -125,7 +181,7 @@ namespace LJCDataUtilityDAL
 
       // Prevent search from sorting current items.
       var checkColumns = Clone();
-      var duplicate = checkColumns.LJCSearchUnique(parentTableID, parentSiteID
+      var duplicate = checkColumns.LJCGetWithUnique(parentTableID, parentSiteID
         , name);
       if (duplicate != null)
       {
@@ -148,81 +204,9 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
-    public DataColumns Clone()
-    {
-      var retValue = new DataColumns();
-      foreach (DataUtilColumn dataColumn in this)
-      {
-        retValue.Add(dataColumn.Clone());
-      }
-      return retValue;
-    }
-
-    // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataColumns GetCollection(List<DataUtilColumn> list)
-    {
-      DataColumns retValue = null;
-
-      if (NetCommon.HasItems(list))
-      {
-        retValue = new DataColumns();
-        foreach (DataUtilColumn item in list)
-        {
-          retValue.Add(item);
-        }
-      }
-      return retValue;
-    }
-
-    // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public bool HasItems()
-    {
-      bool retValue = false;
-
-      if (Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Removes an item by name.
-    /// <summary>
-    /// Removes an item by name.
-    /// </summary>
-    /// <param name="parentTableID"></param>
-    /// <param name="name">The item name value.</param>
-    public void LJCRemove(long parentTableID, string name)
-    {
-      DataUtilColumn item = Find(x => x.DataTableID == parentTableID
-        && x.Name == name);
-      if (item != null)
-      {
-        Remove(item);
-      }
-    }
-
-    // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public void LJCSerialize(string fileSpec = null)
-    {
-      if (!NetString.HasValue(fileSpec))
-      {
-        fileSpec = LJCDefaultFileName;
-      }
-      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
-    }
-    #endregion
-
-    #region Search and Sort Methods
-
     // Retrieve the collection element.
     /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataUtilColumn LJCSearchID(int id)
+    public DataUtilColumn LJCGetWithID(int id)
     {
       DataUtilColumn retValue = null;
 
@@ -247,7 +231,7 @@ namespace LJCDataUtilityDAL
     /// <param name="parentSiteID">The parent dataTable site ID</param>
     /// <param name="name">The dataTable name.</param>
     /// <returns>The data column object.</returns>
-    public DataUtilColumn LJCSearchUnique(long parentTableID, long parentSiteID
+    public DataUtilColumn LJCGetWithUnique(long parentTableID, long parentSiteID
       , string name)
     {
       DataUtilColumn retValue = null;
@@ -267,6 +251,25 @@ namespace LJCDataUtilityDAL
       }
       return retValue;
     }
+
+    // Removes an item by name.
+    /// <summary>
+    /// Removes an item by name.
+    /// </summary>
+    /// <param name="parentTableID"></param>
+    /// <param name="name">The item name value.</param>
+    public void LJCRemove(long parentTableID, string name)
+    {
+      DataUtilColumn item = Find(x => x.DataTableID == parentTableID
+        && x.Name == name);
+      if (item != null)
+      {
+        Remove(item);
+      }
+    }
+    #endregion
+
+    #region Sort Methods
 
     /// <summary>Sort on ID.</summary>
     public void LJCSortID()
@@ -315,7 +318,7 @@ namespace LJCDataUtilityDAL
     {
       get
       {
-        return LJCSearchUnique(parentTableID, parentSiteID, name);
+        return LJCGetWithUnique(parentTableID, parentSiteID, name);
       }
     }
     #endregion

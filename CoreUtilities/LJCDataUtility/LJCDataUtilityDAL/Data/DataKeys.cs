@@ -68,35 +68,6 @@ namespace LJCDataUtilityDAL
 
     #region Collection Methods
 
-    // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='Doc/DataKeys.xml'/>
-    public DataKey Add(int id, int dataTableID, string name)
-    {
-      DataKey retValue;
-
-      string message = "";
-      if (id <= 0)
-      {
-        message += "id must be greater than zero.\r\n";
-      }
-      mArgError.Add(message);
-      mArgError.Add(name, "name");
-      NetString.ThrowArgError(mArgError.ToString());
-
-      retValue = LJCSearchUnique(dataTableID, name);
-      if (null == retValue)
-      {
-        retValue = new DataKey()
-        {
-          ID = id,
-          DataTableID = dataTableID,
-          Name = name
-        };
-        Add(retValue);
-      }
-      return retValue;
-    }
-
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataKeys Clone()
@@ -107,7 +78,7 @@ namespace LJCDataUtilityDAL
 
     // Get custom collection from List<T>.
     /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataKeys GetCollection(List<DataKey> list)
+    public DataKeys LJCGetCollection(List<DataKey> list)
     {
       DataKeys retValue = null;
 
@@ -124,7 +95,7 @@ namespace LJCDataUtilityDAL
 
     // Checks if the collection has items.
     /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public bool HasItems()
+    public bool LJCHasItems()
     {
       bool retValue = false;
 
@@ -133,18 +104,6 @@ namespace LJCDataUtilityDAL
         retValue = true;
       }
       return retValue;
-    }
-
-    // Removes an item by name.
-    /// <include path='items/LJCRemove/*' file='Doc/DataKeys.xml'/>
-    public void LJCRemove(int dataTableID, string name)
-    {
-      DataKey item = Find(x => x.DataTableID == dataTableID
-        && x.Name == name);
-      if (item != null)
-      {
-        Remove(item);
-      }
     }
 
     // Serializes the collection to a file.
@@ -159,11 +118,40 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Search and Sort Methods
+    #region Collection Data Methods
+
+    // Creates and adds the object from the provided values.
+    /// <include path='items/Add/*' file='Doc/DataKeys.xml'/>
+    public DataKey Add(int id, int dataTableID, string name)
+    {
+      DataKey retValue;
+
+      string message = "";
+      if (id <= 0)
+      {
+        message += "id must be greater than zero.\r\n";
+      }
+      mArgError.Add(message);
+      mArgError.Add(name, "name");
+      NetString.ThrowArgError(mArgError.ToString());
+
+      retValue = LJCGetWithUnique(dataTableID, name);
+      if (null == retValue)
+      {
+        retValue = new DataKey()
+        {
+          ID = id,
+          DataTableID = dataTableID,
+          Name = name
+        };
+        Add(retValue);
+      }
+      return retValue;
+    }
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataKey LJCSearchID(int id)
+    public DataKey LJCGetWithID(int id)
     {
       DataKey retValue = null;
 
@@ -182,7 +170,7 @@ namespace LJCDataUtilityDAL
 
     // Retrieve the collection element with unique values.
     /// <include path='items/LJCSearchUnique/*' file='Doc/DataKeys.xml'/>
-    public DataKey LJCSearchUnique(int dataTableID, string name)
+    public DataKey LJCGetWithUnique(int dataTableID, string name)
     {
       DataKey retValue = null;
 
@@ -200,6 +188,21 @@ namespace LJCDataUtilityDAL
       }
       return retValue;
     }
+
+    // Removes an item by name.
+    /// <include path='items/LJCRemove/*' file='Doc/DataKeys.xml'/>
+    public void LJCRemove(int dataTableID, string name)
+    {
+      DataKey item = Find(x => x.DataTableID == dataTableID
+        && x.Name == name);
+      if (item != null)
+      {
+        Remove(item);
+      }
+    }
+    #endregion
+
+    #region Sort Methods
 
     /// <summary>Sort on ID.</summary>
     public void LJCSortID()
@@ -239,13 +242,13 @@ namespace LJCDataUtilityDAL
     /// <include path='items/NameIndexer/*' file='Doc/DataKeys.xml'/>
     public DataKey this[int dataTableID, string name]
     {
-      get { return LJCSearchUnique(dataTableID, name); }
+      get { return LJCGetWithUnique(dataTableID, name); }
     }
     #endregion
 
     #region Class Data
 
-    private ArgError mArgError;
+    private readonly ArgError mArgError;
     private int mPrevCount;
     private SortType mSortType;
 

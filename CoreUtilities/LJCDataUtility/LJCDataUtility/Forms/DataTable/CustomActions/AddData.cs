@@ -416,7 +416,7 @@ namespace LJCDataUtility
         var parentColumns = Managers.TableDataColumns(targetTableID
           , targetSiteID);
         retTypeValue = "nvarchar(5)";
-        var findColumn = parentColumns.LJCSearchUnique(targetTableID
+        var findColumn = parentColumns.LJCGetWithUnique(targetTableID
           , targetSiteID, dataKey.TargetColumnName);
         if (findColumn != null)
         {
@@ -471,7 +471,7 @@ namespace LJCDataUtility
       var targetTableColumns = TargetColumns(targetTableName);
       var targetTableID = ParentObject.TargetDataTableID(targetTableName
         , out long targetSiteID);
-      var findColumn = targetTableColumns.LJCSearchUnique(targetTableID
+      var findColumn = targetTableColumns.LJCGetWithUnique(targetTableID
         , targetSiteID, uniqueColumnName);
       typeValue = "bigint";
       if (findColumn != null)

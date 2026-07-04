@@ -76,7 +76,7 @@ namespace LJCDataUtilityDAL
       if (retValue != null)
       {
         dataObject.ID = retValue.ID;
-        EntryManager.WriteDataEntry(Manager.SQLStatement);
+        //EntryManager.WriteDataEntry(Manager.SQLStatement);
       }
       return retValue;
     }
@@ -86,7 +86,7 @@ namespace LJCDataUtilityDAL
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
-      EntryManager.WriteDataEntry(Manager.SQLStatement);
+      //EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
 
     // Retrieves a collection of data records.
@@ -129,33 +129,11 @@ namespace LJCDataUtilityDAL
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
-      EntryManager.WriteDataEntry(Manager.SQLStatement);
+      //EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
     #endregion
 
-    #region Info Methods
-
-    // Creates a collection of columns that match the supplied list.
-    /// <include path='items/Columns/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns Columns(List<string> propertyNames = null)
-    {
-      var retColumns = Manager.DataDefinition;
-      if (NetCommon.HasItems(propertyNames))
-      {
-        retColumns = Manager.DataDefinition.LJCGetColumns(propertyNames);
-      }
-      return retColumns;
-    }
-
-    // Creates a list of BaseDefinition property names.
-    /// <include path='items/PropertyNames/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public List<string> PropertyNames()
-    {
-      return Manager.GetPropertyNames();
-    }
-    #endregion
-
-    #region Additional Load and Retrieve Methods
+    #region Custom Data Methods
 
     // Retrieves a record with the supplied values.
     /// <include file='Doc/DataTableManager.xml'
@@ -186,6 +164,28 @@ namespace LJCDataUtilityDAL
         , joins: joins);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
+    }
+    #endregion
+
+    #region Info Methods
+
+    // Creates a collection of columns that match the supplied list.
+    /// <include path='items/Columns/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public DbColumns Columns(List<string> propertyNames = null)
+    {
+      var retColumns = Manager.DataDefinition;
+      if (NetCommon.HasItems(propertyNames))
+      {
+        retColumns = Manager.DataDefinition.LJCGetColumns(propertyNames);
+      }
+      return retColumns;
+    }
+
+    // Creates a list of BaseDefinition property names.
+    /// <include path='items/PropertyNames/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    public List<string> PropertyNames()
+    {
+      return Manager.GetPropertyNames();
     }
     #endregion
 

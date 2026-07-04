@@ -12,7 +12,7 @@ namespace LJCDataUtilityDAL
   /// <remarks>
   /// <para>-- Library Level Remarks</para>
   /// </remarks>
-  [XmlRoot("DataTablesOld")]
+  [XmlRoot("DataTables")]
   public class DataTables : List<DataUtilTable>
   {
     #region Static Functions
@@ -67,35 +67,6 @@ namespace LJCDataUtilityDAL
 
     #region Collection Methods
 
-    // Creates and adds the object from the supplied values.
-    /// <include path='items/Add/*' file='Doc/DataTables.xml'/>
-    public DataUtilTable Add(int id, int dataModuleID, string name)
-    {
-      DataUtilTable retValue;
-
-      string message = "";
-      if (id <= 0)
-      {
-        message += "id must be greater than zero.\r\n";
-      }
-      mArgError.Add(message);
-      mArgError.Add((object)name, "name");
-      NetString.ThrowArgError(message);
-
-      retValue = LJCSearchUnique(dataModuleID, name);
-      if (null == retValue)
-      {
-        retValue = new DataUtilTable()
-        {
-          ID = id,
-          DataModuleID = dataModuleID,
-          Name = name
-        };
-        Add(retValue);
-      }
-      return retValue;
-    }
-
     // Creates and returns a clone of the object.
     /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataTables2 Clone()
@@ -106,7 +77,7 @@ namespace LJCDataUtilityDAL
 
     // Get custom collection from List<T>.
     /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataTables GetCollection(List<DataUtilTable> list)
+    public DataTables LJCGetCollection(List<DataUtilTable> list)
     {
       DataTables retValue = null;
 
@@ -123,7 +94,7 @@ namespace LJCDataUtilityDAL
 
     // Checks if the collection has items.
     /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public bool HasItems()
+    public bool LJCHasItems()
     {
       bool retValue = false;
 
@@ -132,18 +103,6 @@ namespace LJCDataUtilityDAL
         retValue = true;
       }
       return retValue;
-    }
-
-    // Removes an item by name.
-    /// <include path='items/LJCRemove/*' file='Doc/DataTables.xml'/>
-    public void LJCRemove(int dataModuleID, string name)
-    {
-      DataUtilTable item = Find(x => x.DataModuleID == dataModuleID
-        && x.Name == name);
-      if (item != null)
-      {
-        Remove(item);
-      }
     }
 
     // Serializes the collection to a file.
@@ -158,11 +117,40 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Search and Sort Methods
+    #region Collection Data Methods
+
+    // Creates and adds the object from the supplied values.
+    /// <include path='items/Add/*' file='Doc/DataTables.xml'/>
+    public DataUtilTable Add(int id, int dataModuleID, string name)
+    {
+      DataUtilTable retValue;
+
+      string message = "";
+      if (id <= 0)
+      {
+        message += "id must be greater than zero.\r\n";
+      }
+      mArgError.Add(message);
+      mArgError.Add((object)name, "name");
+      NetString.ThrowArgError(message);
+
+      retValue = LJCGetWithUnique(dataModuleID, name);
+      if (null == retValue)
+      {
+        retValue = new DataUtilTable()
+        {
+          ID = id,
+          DataModuleID = dataModuleID,
+          Name = name
+        };
+        Add(retValue);
+      }
+      return retValue;
+    }
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataUtilTable LJCSearchID(int id)
+    public DataUtilTable LJCGetWithID(int id)
     {
       DataUtilTable retValue = null;
 
@@ -181,7 +169,7 @@ namespace LJCDataUtilityDAL
 
     // Retrieve the collection element with unique values.
     /// <include path='items/LJCSearchUnique/*' file='Doc/DataTables.xml'/>
-    public DataUtilTable LJCSearchUnique(int dataModuleID, string name)
+    public DataUtilTable LJCGetWithUnique(int dataModuleID, string name)
     {
       DataUtilTable retValue = null;
 
@@ -199,6 +187,21 @@ namespace LJCDataUtilityDAL
       }
       return retValue;
     }
+
+    // Removes an item by name.
+    /// <include path='items/LJCRemove/*' file='Doc/DataTables.xml'/>
+    public void LJCRemove(int dataModuleID, string name)
+    {
+      DataUtilTable item = Find(x => x.DataModuleID == dataModuleID
+        && x.Name == name);
+      if (item != null)
+      {
+        Remove(item);
+      }
+    }
+    #endregion
+
+    #region Sort Methods
 
     /// <summary>Sort on Code.</summary>
     public void LJCSortID()
@@ -238,7 +241,7 @@ namespace LJCDataUtilityDAL
     /// <include path='items/NameIndexer/*' file='Doc/DataTables.xml'/>
     public DataUtilTable this[int dataTableID, string name]
     {
-      get { return LJCSearchUnique(dataTableID, name); }
+      get { return LJCGetWithUnique(dataTableID, name); }
     }
     #endregion
 

@@ -49,7 +49,7 @@ namespace LJCDataUtilityDAL
 
     // Checks if the collection has items.
     /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public bool HasItems()
+    public bool LJCHasItems()
     {
       bool retValue = false;
 
@@ -61,11 +61,11 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Search and Sort Methods
+    #region Collection Data Methods
 
     // Retrieve the collection element.
     /// <include path='items/LJCSearchUnique/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public TableKey LJCSearchName(string name)
+    public TableKey LJCGetWithName(string name)
     {
       TableKey retValue = null;
 
@@ -81,6 +81,9 @@ namespace LJCDataUtilityDAL
       }
       return retValue;
     }
+    #endregion
+
+    #region Sort Methods
 
     /// <summary>Sort on Code.</summary>
     public void LJCSortName()
@@ -103,7 +106,7 @@ namespace LJCDataUtilityDAL
     /// <returns></returns>
     public TableKey this[string name]
     {
-      get { return LJCSearchName(name); }
+      get { return LJCGetWithName(name); }
     }
     #endregion
 

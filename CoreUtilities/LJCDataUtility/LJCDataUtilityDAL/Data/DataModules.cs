@@ -68,6 +68,58 @@ namespace LJCDataUtilityDAL
 
     #region Collection Methods
 
+    // Creates and returns a clone of the object.
+    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    public DataModules Clone()
+    {
+      var retValue = MemberwiseClone() as DataModules;
+      return retValue;
+    }
+
+    // Get custom collection from List<T>.
+    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public DataModules LJCGetCollection(List<DataModule> list)
+    {
+      DataModules retValue = null;
+
+      if (NetCommon.HasItems(list))
+      {
+        retValue = new DataModules();
+        foreach (DataModule item in list)
+        {
+          retValue.Add(item);
+        }
+      }
+      return retValue;
+    }
+
+    // Checks if the collection has items.
+    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public bool LJCHasItems()
+    {
+      bool retValue = false;
+
+      if (Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Serializes the collection to a file.
+    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public void LJCSerialize(string fileSpec = null)
+    {
+      if (!NetString.HasValue(fileSpec))
+      {
+        fileSpec = LJCDefaultFileName;
+      }
+      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
+    }
+    #endregion
+
+    #region Collection Data Methods
+
     // Creates and adds the object from the provided values.
     /// <include path='items/Add/*' file='Doc/DataModules.xml'/>
     public DataModule Add(long id, long dataSiteID, string name)
@@ -87,7 +139,7 @@ namespace LJCDataUtilityDAL
       mArgError.Add(name, "name");
       NetString.ThrowArgError(mArgError.ToString());
 
-      retValue = LJCSearchName(name);
+      retValue = LJCGetWithName(name);
       if (null == retValue)
       {
         retValue = new DataModule()
@@ -101,72 +153,9 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
-    public DataModules Clone()
-    {
-      var retValue = MemberwiseClone() as DataModules;
-      return retValue;
-    }
-
-    // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataModules GetCollection(List<DataModule> list)
-    {
-      DataModules retValue = null;
-
-      if (NetCommon.HasItems(list))
-      {
-        retValue = new DataModules();
-        foreach (DataModule item in list)
-        {
-          retValue.Add(item);
-        }
-      }
-      return retValue;
-    }
-
-    // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public bool HasItems()
-    {
-      bool retValue = false;
-
-      if (Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Removes an item by name.
-    /// <include path='items/LJCRemove/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public void LJCRemove(string name)
-    {
-      DataModule item = Find(x => x.Name == name);
-      if (item != null)
-      {
-        Remove(item);
-      }
-    }
-
-    // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public void LJCSerialize(string fileSpec = null)
-    {
-      if (!NetString.HasValue(fileSpec))
-      {
-        fileSpec = LJCDefaultFileName;
-      }
-      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
-    }
-    #endregion
-
-    #region Search and Sort Methods
-
     // Retrieve the collection element.
     /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataModule LJCSearchID(int id)
+    public DataModule LJCGetWithID(int id)
     {
       DataModule retValue = null;
 
@@ -185,7 +174,7 @@ namespace LJCDataUtilityDAL
 
     // Retrieve the collection element with unique values.
     /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataModule LJCSearchName(string name)
+    public DataModule LJCGetWithName(string name)
     {
       DataModule retValue = null;
 
@@ -202,6 +191,20 @@ namespace LJCDataUtilityDAL
       }
       return retValue;
     }
+
+    // Removes an item by name.
+    /// <include path='items/LJCRemove/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public void LJCRemove(string name)
+    {
+      DataModule item = Find(x => x.Name == name);
+      if (item != null)
+      {
+        Remove(item);
+      }
+    }
+    #endregion
+
+    #region Sort Methods
 
     /// <summary>Sort on ID.</summary>
     public void LJCSortID()
@@ -241,13 +244,13 @@ namespace LJCDataUtilityDAL
     /// <include path='items/NameIndexer/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataModule this[string name]
     {
-      get { return LJCSearchName(name); }
+      get { return LJCGetWithName(name); }
     }
     #endregion
 
     #region Class Data
 
-    private ArgError mArgError;
+    private readonly ArgError mArgError;
     private int mPrevCount;
     private SortType mSortType;
 
