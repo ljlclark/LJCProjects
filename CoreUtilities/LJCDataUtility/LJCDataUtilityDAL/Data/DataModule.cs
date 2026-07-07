@@ -10,7 +10,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>The DataModule data.</summary>
+  // The DataModule data.
+  /// <include file='Doc/DataModule.xml'
+  ///  path='members/DataModule/*'/>
   public class DataModule : IComparable<DataModule>
   {
     #region Constructor Methods
@@ -27,7 +29,7 @@ namespace LJCDataUtilityDAL
 
       ChangedNames = new ChangedNames();
       _OriginalValues = new OriginalValues();
-      SetOriginalValues();
+      LJCSetOriginalValues();
     }
 
     // Initializes an object instance with the supplied values.
@@ -43,14 +45,14 @@ namespace LJCDataUtilityDAL
     ///  path='members/CopyConstructor/*'/>
     public DataModule(DataModule item)
     {
-      ID = item.ID;
-      DataSiteID = item.DataSiteID;
-      Name = item.Name;
-      Description = item.Description;
+      _ID = item.ID;
+      _DataSiteID = item.DataSiteID;
+      _Name = item.Name;
+      _Description = item.Description;
 
       ChangedNames = item.ChangedNames;
       _OriginalValues = new OriginalValues();
-      SetOriginalValues();
+      LJCSetOriginalValues();
     }
     #endregion
 
@@ -76,13 +78,13 @@ namespace LJCDataUtilityDAL
       {
         if (null == other)
         {
-          // This value is greater than null.
+          // This object is greater than null.
           retValue = NetString.CompareGreater;
           break;
         }
 
         retValue = ID.CompareTo(other.ID);
-        if (NetString.CompareEqual == retValue)
+        if (retValue != NetString.CompareEqual)
         {
           break;
         }
@@ -96,7 +98,7 @@ namespace LJCDataUtilityDAL
     // Initializes the original values.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/SetOriginalValues/*'/>
-    public void SetOriginalValues()
+    public void LJCSetOriginalValues()
     {
       _OriginalValues.ID = _ID;
       _OriginalValues.Name = _Name;
@@ -142,7 +144,7 @@ namespace LJCDataUtilityDAL
     /// <include file='Doc/DataModule.xml'
     ///  path='members/DataSiteID/*'/>
     [Required]
-    [Column("DataSiteID", TypeName="bigint")]
+    [Column("DataSiteID", TypeName = "bigint")]
     public long DataSiteID
     {
       get => _DataSiteID;
@@ -161,7 +163,7 @@ namespace LJCDataUtilityDAL
     /// <include file='Doc/DataModule.xml'
     ///  path='members/Name/*'/>
     [Required]
-    [Column("Name", TypeName="nvarchar(60")]
+    [Column("Name", TypeName = "nvarchar(60")]
     public string Name
     {
       get => _Name;
@@ -180,7 +182,7 @@ namespace LJCDataUtilityDAL
     /// <include file='Doc/DataModule.xml'
     ///  path='members/Description/*'/>
     [Required]
-    [Column("Description", TypeName="nvarchar(80")]
+    [Column("Description", TypeName = "nvarchar(80")]
     public string Description
     {
       get => _Description;
@@ -252,32 +254,34 @@ namespace LJCDataUtilityDAL
 
   #region Comparers
 
-  /// <summary>Sort and search on Name value.</summary>
+  // Sort and search on Name value.
+  /// <include file='Doc/DataModule.xml'
+  ///  path='items/Compare/*'/>
   public class DataModuleUniqueComparer : IComparer<DataModule>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/Compare/*'/>
     public int Compare(DataModule x, DataModule y)
     {
       int retValue;
 
-      var isContinue = true;
-      retValue = NetCommon.CompareNull(x, y);
-      if (retValue != -2)
+      while (true)
       {
-        isContinue = false;
-      }
-      if (isContinue)
-      {
-        retValue = NetCommon.CompareNull(x.Name, y.Name);
-        if (retValue != -2)
+        retValue = NetCommon.CompareNull(x, y);
+        if (retValue != NetString.CompareNotNull)
         {
-          isContinue = false;
+          break;
         }
-      }
-      if (isContinue)
-      {
-        retValue = x.Name.CompareTo(y.Name);
+
+        retValue = NetCommon.CompareNull(x.Name, y.Name);
+        if (retValue != NetString.CompareNotNull)
+        {
+          break;
+        }
+
+        retValue = string.Compare(x.Name, y.Name, true);
+        break;
       }
       return retValue;
     }

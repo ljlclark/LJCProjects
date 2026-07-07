@@ -1,45 +1,60 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // TableKey.cs
-using LJCDBClientLib;
 using LJCNetCommon;
 using System;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>The DataColumn Data Object.</summary>
+  // The DataColumn Data Object.
+  /// <include file='Doc/TableKey.xml'
+  ///  path='members/TableKey/*'/>
   public class TableKey : IComparable<TableKey>
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public TableKey()
     {
+      _DBName = null;
+      _TableSchema = null;
+      _TableName = null;
+      _KeyType = null;
+      _ColumnName = null;
+      _ConstraintName = null;
+      _TargetTable = null;
+      _TargetColumns = null;
+      _UpdateRule = null;
+      _DeleteRule = null;
+      _OrdinalPosition = 0;
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/CopyConstructor/*'/>
     public TableKey(TableKey item)
     {
-      DBName = item.DBName;
-      TableSchema = item.TableSchema;
-      TableName = item.TableName;
-      KeyType = item.KeyType;
-      ColumnName = item.ColumnName;
-      ConstraintName = item.ConstraintName;
-      TargetTable = item.TargetTable;
-      TargetColumns = item.TargetColumns;
-      UpdateRule = item.UpdateRule;
-      DeleteRule = item.DeleteRule;
-      OrdinalPosition = item.OrdinalPosition;
+      _DBName = item.DBName;
+      _TableSchema = item.TableSchema;
+      _TableName = item.TableName;
+      _KeyType = item.KeyType;
+      _ColumnName = item.ColumnName;
+      _ConstraintName = item.ConstraintName;
+      _TargetTable = item.TargetTable;
+      _TargetColumns = item.TargetColumns;
+      _UpdateRule = item.UpdateRule;
+      _DeleteRule = item.DeleteRule;
+      _OrdinalPosition = item.OrdinalPosition;
     }
     #endregion
 
-    #region Data Class Methods
+    #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public TableKey Clone()
     {
       var retValue = MemberwiseClone() as TableKey;
@@ -47,25 +62,29 @@ namespace LJCDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/CompareTo/*'/>
     public int CompareTo(TableKey other)
     {
       int retValue;
 
-      if (null == other)
+      while (true)
       {
-        // This value is greater than null.
-        retValue = 1;
-      }
-      else
-      {
-        // Not case sensitive.
-        retValue = string.Compare(ConstraintName, other.ConstraintName, true);
-        if (0 == retValue)
+        if (null == other)
         {
-          // Case sensitive.
-          retValue = OrdinalPosition.CompareTo(other.OrdinalPosition);
+          // This object is greater than null.
+          retValue = NetString.CompareGreater;
+          break;
         }
+
+        retValue = string.Compare(ConstraintName, other.ConstraintName, true);
+        if (retValue != NetString.CompareEqual)
+        {
+          break;
+        }
+
+        retValue = OrdinalPosition.CompareTo(other.OrdinalPosition);
+        break;
       }
       return retValue;
     }
@@ -76,164 +95,199 @@ namespace LJCDataUtilityDAL
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
 
-    /// <summary>Gets or sets the DBName value.</summary>
-    public String DBName
+    // Gets or sets the DBName value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/DBName/*'/>
+    public string DBName
     {
-      get { return mDBName; }
+      get => _DBName;
       set
       {
-        mDBName = NetString.InitString(value);
+        _DBName = value?.Trim();
       }
     }
-    private String mDBName;
+    private string _DBName;
 
-    /// <summary>Gets or sets the TableSchema value.</summary>
-    public String TableSchema
+    // Gets or sets the TableSchema value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/TableSchema/*'/>
+    public string TableSchema
     {
-      get { return mTableSchema; }
+      get => _TableSchema;
       set
       {
-        mTableSchema = NetString.InitString(value);
+        _TableSchema = value?.Trim();
       }
     }
-    private String mTableSchema;
+    private string _TableSchema;
 
-    /// <summary>Gets or sets the TableName value.</summary>
-    public String TableName
+    // Gets or sets the TableName value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/TableName/*'/>
+    public string TableName
     {
-      get { return mTableName; }
+      get => _TableName;
       set
       {
-        mTableName = NetString.InitString(value);
+        _TableName = value?.Trim();
       }
     }
-    private String mTableName;
+    private string _TableName;
 
-    /// <summary>Gets or sets the KeyType value.</summary>
-    public String KeyType
+    // Gets or sets the KeyType value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/KeyType/*'/>
+    public string KeyType
     {
-      get { return mKeyType; }
+      get => _KeyType;
       set
       {
-        mKeyType = NetString.InitString(value);
+        _KeyType = value?.Trim();
       }
     }
-    private String mKeyType;
+    private string _KeyType;
 
-    /// <summary>Gets or sets the ColumnName value.</summary>
-    public String ColumnName
+    // Gets or sets the ColumnName value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/ColumnName/*'/>
+    public string ColumnName
     {
-      get { return mColumnName; }
+      get => _ColumnName;
       set
       {
-        mColumnName = NetString.InitString(value);
+        _ColumnName = value?.Trim();
       }
     }
-    private String mColumnName;
+    private string _ColumnName;
 
-    /// <summary>Gets or sets the ConstraintName value.</summary>
-    public String ConstraintName
+    // Gets or sets the ConstraintName value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/ConstraintName/*'/>
+    public string ConstraintName
     {
-      get { return mConstraintName; }
+      get => _ConstraintName;
       set
       {
-        mConstraintName = NetString.InitString(value);
+        _ConstraintName = value?.Trim();
       }
     }
-    private String mConstraintName;
+    private string _ConstraintName;
 
-    /// <summary>Gets or sets the UpdateRule value.</summary>
-    public String UpdateRule
+    // Gets or sets the UpdateRule value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/UpdateRule/*'/>
+    public string UpdateRule
     {
-      get { return mUpdateRule; }
+      get => _UpdateRule;
       set
       {
-        mUpdateRule = NetString.InitString(value);
+        _UpdateRule = value?.Trim();
       }
     }
-    private String mUpdateRule;
+    private string _UpdateRule;
 
-    /// <summary>Gets or sets the DeleteRule value.</summary>
-    public String DeleteRule
+    // Gets or sets the DeleteRule value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/DeleteRule/*'/>
+    public string DeleteRule
     {
-      get { return mDeleteRule; }
+      get => _DeleteRule;
       set
       {
-        mDeleteRule = NetString.InitString(value);
+        _DeleteRule = value?.Trim();
       }
     }
-    private String mDeleteRule;
+    private string _DeleteRule;
 
-    /// <summary>Gets or sets the TargetTable value.</summary>
-    public String TargetTable
+    // Gets or sets the TargetTable value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/TargetTable/*'/>
+    public string TargetTable
     {
-      get { return mTargetTable; }
+      get => _TargetTable;
       set
       {
-        mTargetTable = NetString.InitString(value);
+        _TargetTable = value?.Trim();
       }
     }
-    private String mTargetTable;
+    private string _TargetTable;
 
-    /// <summary>Gets or sets the TargetColumn value.</summary>
-    public String TargetColumns
+    // Gets or sets the TargetColumn value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/TargetColumns/*'/>
+    public string TargetColumns
     {
-      get { return mTargetColumns; }
+      get => _TargetColumns;
       set
       {
-        mTargetColumns = NetString.InitString(value);
+        _TargetColumns = value?.Trim();
       }
     }
-    private String mTargetColumns;
+    private string _TargetColumns;
 
-    /// <summary>Gets or sets the OrdinalPosition value.</summary>
-    public Int32 OrdinalPosition
+    // Gets or sets the OrdinalPosition value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/OrdinalPosition/*'/>
+    public int OrdinalPosition
     {
-      get { return mOrdinalPosition; }
+      get => _OrdinalPosition;
       set
       {
-        mOrdinalPosition = value;
+        _OrdinalPosition = value;
       }
     }
-    private Int32 mOrdinalPosition;
+    private int _OrdinalPosition;
 
-    /// <summary>Gets or sets the UniqueConstraintName value.</summary>
-    public String UniqueConstraintName
+    // Gets or sets the UniqueConstraintName value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/UniqueConstraintName/*'/>
+    public string UniqueConstraintName
     {
-      get { return mUniqueConstraintName; }
+      get => _UniqueConstraintName;
       set
       {
-        mUniqueConstraintName = NetString.InitString(value);
+        _UniqueConstraintName = value?.Trim();
       }
     }
-    private String mUniqueConstraintName;
+    private string _UniqueConstraintName;
     #endregion
 
     #region Class Data
 
-    /// <summary>The ID column name.</summary>
+    /// <summary>The DBName column name.</summary>
     public static string ColumnDBName = "TableCatalog";
-    /// <summary></summary>
+
+    /// <summary>The TableSchema column name.</summary>
     public static string ColumnTableSchema = "TableSchema";
-    /// <summary></summary>
+
+    /// <summary>The TableName column name.</summary>
     public static string ColumnTableName = "TableName";
-    /// <summary></summary>
+
+    /// <summary>The ColumnName value.</summary>
     public static string ColumnColumnName = "ColumnName";
-    /// <summary></summary>
+
+    /// <summary>The ConstraintDBName column name.</summary>
     public static string ColumnConstraintDBName = "ConstraintDBName";
-    /// <summary></summary>
+
+    /// <summary>The ConstraintSchema column name.</summary>
     public static string ColumnConstraintSchema = "ConstraintSchema";
-    /// <summary></summary>
+
+    /// <summary>The ConstraintName column name.</summary>
     public static string ColumnConstraintName = "ConstraintName";
-    /// <summary></summary>
+
+    /// <summary>The UpdateRule column name.</summary>
     public static string ColumnUpdateRule = "UpdateRule";
-    /// <summary></summary>
+
+    /// <summary>The DeleteRule column name.</summary>
     public static string ColumnDeleteRule = "DeleteRule";
-    /// <summary></summary>
+
+    /// <summary>The TargetTable column name.</summary>
     public static string ColumnTargetTable = "TargetTable";
-    /// <summary></summary>
+
+    /// <summary>The TargetColumn column name.</summary>
     public static string ColumnTargetColumn = "TargetColumn";
-    /// <summary></summary>
+
+    /// <summary>The OrdinalPosition column name.</summary>
     public static string ColumnOrdinalPosition = "OrdinalPosition";
     #endregion
   }

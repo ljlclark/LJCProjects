@@ -10,7 +10,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>The DataTable data.</summary>
+  // The DataTable data.
+  /// <include file='Doc/DataTable.xml'
+  ///  path='members/DataUtilTable/*'/>
   public class DataUtilTable : IComparable<DataUtilTable>
   {
     #region Constructor Methods
@@ -30,6 +32,7 @@ namespace LJCDataUtilityDAL
 
       _SchemaName = null;
       _NewName = null;
+
       ChangedNames = new ChangedNames();
       _OriginalValues = new OriginalValues();
       LJCSetOriginalValues();
@@ -88,14 +91,18 @@ namespace LJCDataUtilityDAL
       {
         if (null == other)
         {
-          // This value is greater than null.
+          // This object is greater than null.
           retValue = NetString.CompareGreater;
           break;
         }
 
         retValue = ID.CompareTo(other.ID);
-        // Not case sensitive.
-        //retValue = string.Compare(ID, other.ID, true);
+        if (retValue != NetString.CompareEqual)
+        {
+          break;
+        }
+
+        retValue = DataSiteID.CompareTo(other.DataSiteID);
         break;
       }
       return retValue;
@@ -209,7 +216,7 @@ namespace LJCDataUtilityDAL
     }
     private long _DataModuleSiteID;
 
-    // Gets or sets the name.
+    // Gets or sets the name value.
     /// <include file='doc/DataTable.xml'
     ///  path='members/Name/*'/>
     [Required]
@@ -304,9 +311,6 @@ namespace LJCDataUtilityDAL
       }
     }
     private string _NewName;
-    #endregion
-
-    #region Calculated and Join Data Properties.
 
     // Gets or sets the Join module name.
     /// <include file='doc/DataTable.xml'
@@ -318,7 +322,7 @@ namespace LJCDataUtilityDAL
 
     // Gets a reference to the ChangedNames list.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='members/ToString/*'/>
+    ///  path='members/ChangedNames/*'/>
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 
@@ -404,40 +408,46 @@ namespace LJCDataUtilityDAL
 
   #region Comparers
 
-  /// <summary>Sort and search on Name value.</summary>
+  // Sort and search on Name value.
+  /// <include file='Doc/DataTable.xml'
+  ///  path='items/Compare/*'/>
   public class DataTableUniqueComparer : IComparer<DataUtilTable>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/Compare/*'/>
     public int Compare(DataUtilTable x, DataUtilTable y)
     {
       int retValue;
 
-      var isContinue = true;
-      retValue = NetCommon.CompareNull(x, y);
-      if (retValue != -2)
+      while (true)
       {
-        isContinue = false;
-      }
-      if (isContinue)
-      {
+        retValue = NetCommon.CompareNull(x, y);
+        if (retValue != NetString.CompareNotNull)
+        {
+          break;
+        }
+
         retValue = NetCommon.CompareNull(x.Name, y.Name);
-        if (retValue != -2)
+        if (retValue != NetString.CompareNotNull)
         {
-          isContinue = false;
+          break;
         }
-      }
-      if (isContinue)
-      {
+
+        retValue = x.DataModuleSiteID.CompareTo(y.DataModuleSiteID);
+        if (retValue != NetString.CompareEqual)
+        {
+          break;
+        }
+
         retValue = x.DataModuleID.CompareTo(y.DataModuleID);
-        if (retValue != 0)
+        if (retValue != NetString.CompareEqual)
         {
-          isContinue = false;
+          break;
         }
-      }
-      if (isContinue)
-      {
-        retValue = x.Name.CompareTo(y.Name);
+
+        retValue = string.Compare(x.Name, y.Name, true);
+        break;
       }
       return retValue;
     }

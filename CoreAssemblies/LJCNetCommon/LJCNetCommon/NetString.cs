@@ -549,6 +549,11 @@ namespace LJCNetCommon
     /// <summary>
     /// The compare object is notnull or equal is equal to the compareto object.
     /// </summary>
+    public const int CompareNotNull = -2;
+
+    /// <summary>
+    /// The compare object is notnull or equal is equal to the compareto object.
+    /// </summary>
     public const int CompareNotNullOrEqual = -2;
     #endregion
   }

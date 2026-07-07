@@ -1,22 +1,25 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataColumns.cs
-using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>Represents a collection of DataUtilColumn objects.</summary>
+  // Represents a collection of DataColumn objects.
+  /// <include file='Doc/DataColumns.xml'
+  ///  path='members/DataColumns/*'/>
   [XmlRoot("DataColumns")]
   public class DataColumns : List<DataUtilColumn>
   {
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCDeserialize/*'/>
     public static DataColumns LJCDeserialize(string fileSpec = null)
     {
       DataColumns retValue;
@@ -33,7 +36,7 @@ namespace LJCDataUtilityDAL
       else
       {
         retValue = NetCommon.XmlDeserialize(typeof(DataColumns), fileSpec)
-        as DataColumns;
+         as DataColumns;
       }
       return retValue;
     }
@@ -42,7 +45,8 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public DataColumns()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.DataColumns");
@@ -50,8 +54,9 @@ namespace LJCDataUtilityDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataColumns(DataColumns items)
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/CopyConstructor/*'/>
+    public DataColumns(DataColumns items) : this()
     {
       if (NetCommon.HasItems(items))
       {
@@ -66,7 +71,8 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public DataColumns Clone()
     {
       var retValue = new DataColumns();
@@ -78,7 +84,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCGetCollection/*'/>
     public DataColumns LJCGetCollection(List<DataUtilColumn> list)
     {
       DataColumns retValue = null;
@@ -95,7 +102,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems/*'/>
     public bool LJCHasItems()
     {
       bool retValue = false;
@@ -108,7 +116,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCSerialize/*'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -121,32 +130,35 @@ namespace LJCDataUtilityDAL
 
     #region Collection Data Methods
 
-    // Creates and adds the object from the provided values.
-    /// <summary>
-    /// Creates and adds the object from the provided values.
-    /// </summary>
-    /// <param name="parentTableID"></param>
-    /// <param name="parentSiteID"></param>
-    /// <param name="name"></param>
-    /// <returns></returns>
-    public DataUtilColumn Add(long parentTableID, long parentSiteID
-      , string name)
+    // Creates and adds the object from the supplied values.
+    /// <include file='Doc/DataTables.xml'
+    ///  path='members/Add1/*'/>
+    public DataUtilColumn Add(long dataSiteID, long dataTableID
+      , long dataTableSiteID, string name)
     {
       DataUtilColumn retValue = null;
 
       string message = "";
-      if (parentTableID <= 0)
+      if (dataSiteID <= 0)
       {
-        message += "id must be greater than zero.\r\n";
+        message += "dataSiteID must be greater than zero.\r\n";
+      }
+      if (dataTableID <= 0)
+      {
+        message += "dataTableID must be greater than zero.\r\n";
+      }
+      if (dataTableSiteID <= 0)
+      {
+        message += "dataTableSiteID must be greater than zero.\r\n";
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
       NetString.ThrowArgError(mArgError.ToString());
 
       // Prevent search from sorting current items.
-      var checkColumns = this.Clone();
-      var duplicate = checkColumns.LJCGetWithUnique(parentTableID
-        , parentSiteID, name);
+      var checkColumns = Clone();
+      var duplicate = checkColumns.LJCGetWithUnique(dataTableID
+        , dataTableSiteID, name);
       if (duplicate != null)
       {
         retValue = duplicate.Clone();
@@ -156,32 +168,45 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilColumn()
         {
-          ID = parentTableID,
-          Name = name
+          DataSiteID = dataSiteID,
+          DataTableID = dataTableID,
+          DataTableSiteID = dataTableSiteID,
+          Name = name,
         };
         Add(retValue);
       }
       return retValue;
     }
 
-    /// <summary>Creates and adds the object from the provided values.</summary>
-    /// <param name="parentTableID">The parent table ID.</param>
-    /// <param name="parentSiteID"></param>
-    /// <param name="name">The item name value.</param>
-    /// <param name="typeName"></param>
-    /// <param name="allowNull"></param>
-    /// <param name="maxLength"></param>
-    /// <param name="defaultValue"></param>
-    /// <param name="identityIncrement"></param>
-    public DataUtilColumn Add(long parentTableID, long parentSiteID
-      , string name, string typeName, bool allowNull = true, short maxLength = 0
-      , string defaultValue = null, short identityIncrement = 0)
+    // Creates and adds the object from the provided values.
+    /// <include file='Doc/DataTables.xml'
+    ///  path='members/Add2/*'/>
+    public DataUtilColumn Add(long dataSiteID, long dataTableID
+      , long dataTableSiteID, string name, string typeName
+      , bool allowNull = true, short maxLength = 0, string defaultValue = null
+      , short identityIncrement = 0)
     {
       DataUtilColumn retValue = null;
+      string message = "";
+      if (dataSiteID <= 0)
+      {
+        message += "dataSiteID must be greater than zero.\r\n";
+      }
+      if (dataTableID <= 0)
+      {
+        message += "dataTableID must be greater than zero.\r\n";
+      }
+      if (dataTableSiteID <= 0)
+      {
+        message += "dataTableSiteID must be greater than zero.\r\n";
+      }
+      mArgError.Add(message);
+      mArgError.Add(name, "name");
+      NetString.ThrowArgError(mArgError.ToString());
 
       // Prevent search from sorting current items.
       var checkColumns = Clone();
-      var duplicate = checkColumns.LJCGetWithUnique(parentTableID, parentSiteID
+      var duplicate = checkColumns.LJCGetWithUnique(dataTableID, dataTableSiteID
         , name);
       if (duplicate != null)
       {
@@ -192,12 +217,16 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilColumn()
         {
+          DataSiteID = dataSiteID,
+          DataTableID = dataTableID,
+          DataTableSiteID = dataTableSiteID,
           Name = name,
+
           TypeName = typeName,
           AllowNull = allowNull,
           MaxLength = maxLength,
           DefaultValue = defaultValue,
-          IdentityIncrement = identityIncrement
+          IdentityIncrement = identityIncrement,
         };
         Add(retValue);
       }
@@ -205,15 +234,17 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataUtilColumn LJCGetWithID(int id)
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCGetWithID/*'/>
+    public DataUtilColumn LJCGetWithID(long id, long dataSiteID)
     {
       DataUtilColumn retValue = null;
 
       LJCSortID();
       DataUtilColumn searchItem = new DataUtilColumn()
       {
-        ID = id
+        ID = id,
+        DataSiteID = dataSiteID,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -224,15 +255,10 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection element with unique values.
-    /// <summary>
-    /// Retrieve the collection element with unique values.
-    /// </summary>
-    /// <param name="parentTableID">The parent dataTable ID.</param>
-    /// <param name="parentSiteID">The parent dataTable site ID</param>
-    /// <param name="name">The dataTable name.</param>
-    /// <returns>The data column object.</returns>
-    public DataUtilColumn LJCGetWithUnique(long parentTableID, long parentSiteID
-      , string name)
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCGetWithUnique/*'/>
+    public DataUtilColumn LJCGetWithUnique(long dataTableID
+      , long dataTableSiteID, string name)
     {
       DataUtilColumn retValue = null;
 
@@ -240,9 +266,9 @@ namespace LJCDataUtilityDAL
       LJCSortUnique(comparer);
       DataUtilColumn searchItem = new DataUtilColumn()
       {
-        DataTableID = parentTableID,
-        DataTableSiteID = parentSiteID,
-        Name = name
+        DataTableID = dataTableID,
+        DataTableSiteID = dataTableSiteID,
+        Name = name,
       };
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)
@@ -253,14 +279,12 @@ namespace LJCDataUtilityDAL
     }
 
     // Removes an item by name.
-    /// <summary>
-    /// Removes an item by name.
-    /// </summary>
-    /// <param name="parentTableID"></param>
-    /// <param name="name">The item name value.</param>
-    public void LJCRemove(long parentTableID, string name)
+    /// <include file='Doc/DataColumns.xml'
+    ///  path='members/LJCRemove/*'/>
+    public void LJCRemove(long dataTableID, long dataTableSiteID, string name)
     {
-      DataUtilColumn item = Find(x => x.DataTableID == parentTableID
+      DataUtilColumn item = Find(x => x.DataTableID == dataTableID
+        && x.DataTableSiteID == dataTableSiteID
         && x.Name == name);
       if (item != null)
       {
@@ -271,7 +295,9 @@ namespace LJCDataUtilityDAL
 
     #region Sort Methods
 
-    /// <summary>Sort on ID.</summary>
+    // Sort on ID.
+    /// <include file='Doc/DataTables.xml'
+    ///  path='members/LJCSortID/*'/>
     public void LJCSortID()
     {
       if (Count != mPrevCount
@@ -283,8 +309,9 @@ namespace LJCDataUtilityDAL
       }
     }
 
-    /// <summary>Sort on Unique values.</summary>
-    /// <param name="comparer">The Comparer object.</param>
+    // Sort on Unique values.
+    /// <include file='Doc/DataTables.xml'
+    ///  path='members/LJCSortUnique/*'/>
     public void LJCSortUnique(DataColumnUnique comparer)
     {
       if (Count != mPrevCount
@@ -299,27 +326,21 @@ namespace LJCDataUtilityDAL
 
     #region Properties
 
-    /// <summary>Gets the Default File Name.</summary>
+    // Gets the Default File Name.
+    /// <include file='Doc/DataColumns.xml'
+    ///  path='members/LJCDefaultFileName/*'/>
     public static string LJCDefaultFileName
     {
       get { return "DataColumns.xml"; }
     }
 
     // The item for the specified name.
-    /// <summary>
-    /// The item for the supplied name.
-    /// </summary>
-    /// <param name="parentTableID">The parent ID value.</param>
-    /// <param name="parentSiteID"></param>
-    /// <param name="name">The item name.</param>
-    /// <returns>The selected item.</returns>
-    public DataUtilColumn this[long parentTableID, long parentSiteID
+    /// <include file='Doc/DataColumns.xml'
+    ///  path='members/UniqueIndexer/*'/>
+    public DataUtilColumn this[long dataTableID, long dataTableSiteID
       , string name]
     {
-      get
-      {
-        return LJCGetWithUnique(parentTableID, parentSiteID, name);
-      }
+      get => LJCGetWithUnique(dataTableID, dataTableSiteID, name);
     }
     #endregion
 

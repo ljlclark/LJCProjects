@@ -100,9 +100,12 @@ namespace LJCDataUtility
       TableGrid.LJCRowsClear();
 
       int parentID = ModuleCombo.LJCSelectedItemID();
-      if (parentID > 0)
+      var dataUtilTable = ModuleCombo.SelectedItem as DataUtilTable;
+      var parentSiteID = dataUtilTable.DataModuleSiteID;
+      if (parentID > 0
+        && parentSiteID > 0)
       {
-        var keyColumns = TableManager.ParentKey(parentID);
+        var keyColumns = TableManager.ParentKey(parentID, parentSiteID);
         var orderBy = new List<string>()
         {
           DataUtilTable.ColumnSequence

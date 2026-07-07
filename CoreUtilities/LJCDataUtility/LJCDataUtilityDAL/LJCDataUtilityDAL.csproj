@@ -62,6 +62,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Doc\DataColumns.xml" />
+    <Content Include="Data\Doc\TableKey.xml" />
     <Content Include="Data\Doc\DataKey.xml" />
     <Content Include="Data\Doc\DataModules.xml" />
     <Compile Include="Data\DataTables.cs" />

@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LJCDataAccess, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LJCDataUtilityDAL\bin\Debug\LJCDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="LJCDataAccessConfig">
       <HintPath>..\External\LJCDataAccessConfig.dll</HintPath>
     </Reference>

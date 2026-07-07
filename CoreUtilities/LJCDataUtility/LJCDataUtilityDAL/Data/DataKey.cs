@@ -10,14 +10,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>The DataKey data.</summary>
+  // The DataKey data.
+  /// <include file='Doc/DataKey.xml'
+  ///  path='members/DataKey/*'/>
   public class DataKey : IComparable<DataKey>
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file="../../LJCGenDoc/Common/Data.xml"
-    ///  path="members/Constructor/*" />
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public DataKey()
     {
       _ID = 0;
@@ -35,46 +37,46 @@ namespace LJCDataUtilityDAL
 
       ChangedNames = new ChangedNames();
       _OriginalValues = new OriginalValues();
-      SetOriginalValues();
+      LJCSetOriginalValues();
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include file="Doc/DataKey.xml"
-    ///  path="members/ParamConstructor/*"/>
+    /// <include file='Doc/DataKey.xml'
+    ///  path='members/ParamConstructor/*'/>
     public DataKey(string name) : this()
     {
       _Name = name;
     }
 
     // The Copy constructor.
-    /// <include file="../../LJCGenDoc/Common/Data.xml"
-    ///  path="members/CopyConstructor/*"/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/CopyConstructor/*'/>
     public DataKey(DataKey item)
     {
-      ID = item.ID;
-      DataSiteID = item.DataSiteID;
-      DataTableID = item.DataTableID;
-      DataTableSiteID = item.DataTableSiteID;
-      Name = item.Name;
-      KeyType = item.KeyType;
+      _ID = item.ID;
+      _DataSiteID = item.DataSiteID;
+      _DataTableID = item.DataTableID;
+      _DataTableSiteID = item.DataTableSiteID;
+      _Name = item.Name;
+      _KeyType = item.KeyType;
 
-      IsClustered = item.IsClustered;
-      IsAscending = item.IsAscending;
-      SourceColumnName = item.SourceColumnName;
-      TargetTableName = item.TargetTableName;
-      TargetColumnName = item.TargetColumnName;
+      _IsClustered = item.IsClustered;
+      _IsAscending = item.IsAscending;
+      _SourceColumnName = item.SourceColumnName;
+      _TargetTableName = item.TargetTableName;
+      _TargetColumnName = item.TargetColumnName;
 
       ChangedNames = item.ChangedNames;
       _OriginalValues = new OriginalValues();
-      SetOriginalValues();
+      LJCSetOriginalValues();
     }
     #endregion
 
     #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    /// <include file="../../LJCGenDoc/Common/Data.xml"
-    ///  path="members/Clone/*"/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public DataKey Clone()
     {
       var retValue = MemberwiseClone() as DataKey;
@@ -82,8 +84,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include file="../../LJCGenDoc/Common/Data.xml"
-    ///  path="members/CompareTo/*"/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/CompareTo/*'/>
     public int CompareTo(DataKey other)
     {
       int retValue;
@@ -92,25 +94,27 @@ namespace LJCDataUtilityDAL
       {
         if (null == other)
         {
-          // This value is greater than null.
+          // This object is greater than null.
           retValue = NetString.CompareGreater;
           break;
         }
 
-        // Case sensitive.
         retValue = ID.CompareTo(other.ID);
+        if (retValue != NetString.CompareEqual)
+        {
+          break;
+        }
 
-        // Not case sensitive.
-        //retValue = string.Compare(ID, other.ID, true);
+        retValue = DataSiteID.CompareTo(other.DataSiteID);
         break;
       }
       return retValue;
     }
 
     // Initializes the original values.
-    /// <include file="../../LJCGenDoc/Common/Data.xml"
-    ///  path="members/SetOriginalValues/*"/>
-    public void SetOriginalValues()
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/LJCSetOriginalValues/*'/>
+    public void LJCSetOriginalValues()
     {
       _OriginalValues.ID = _ID;
       _OriginalValues.DataSiteID = _DataSiteID;
@@ -128,8 +132,8 @@ namespace LJCDataUtilityDAL
     }
 
     // The object string identifier.
-    /// <include file="../../LJCGenDoc/Common/Data.xml"
-    ///  path="members/ToString/*"/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/ToString/*'/>
     public override string ToString()
     {
       var retValue = $"{_Name}:{_ID}";
@@ -143,8 +147,8 @@ namespace LJCDataUtilityDAL
     // if property was renamed.
 
     // Gets or sets the ID value.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/ID/*"/>
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/ID/*'/>
     [Required]
     [Column("ID", TypeName = "bigint")]
     public long ID
@@ -161,8 +165,8 @@ namespace LJCDataUtilityDAL
     private long _ID;
 
     // Gets or sets the database ID.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/DataSiteID/*"/>
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/DataSiteID/*'/>
     [Required]
     [Column("DataSiteID", TypeName = "bigint")]
     public long DataSiteID
@@ -179,9 +183,9 @@ namespace LJCDataUtilityDAL
     }
     private long _DataSiteID;
 
-    // Gets or sets the DataTableID value.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/DataTableID/*"/>
+    // Gets or sets the parent table row ID.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/DataTableID/*'/>
     [Required]
     [Column("DataTableID", TypeName = "bigint")]
     public long DataTableID
@@ -199,8 +203,8 @@ namespace LJCDataUtilityDAL
     private long _DataTableID;
 
     // Gets or sets the DataTable database ID.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/DataTableSiteID/*"/>
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/DataTableSiteID/*'/>
     [Required]
     [Column("DataTableSiteID", TypeName = "bigint")]
     public long DataTableSiteID
@@ -218,8 +222,8 @@ namespace LJCDataUtilityDAL
     private long _DataTableSiteID;
 
     // Gets or sets the Name value.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/Name/*"/>
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/Name/*'/>
     [Required]
     [Column("Name", TypeName = "nvarchar(60")]
     public string Name
@@ -234,11 +238,11 @@ namespace LJCDataUtilityDAL
         }
       }
     }
-    private String _Name;
+    private string _Name;
 
     // Gets or sets the KeyType value.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/KeyType/*"/>
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/KeyType/*'/>
     [Required]
     [Column("KeyType", TypeName = "smallint")]
     public short KeyType
@@ -256,8 +260,8 @@ namespace LJCDataUtilityDAL
     private short _KeyType;
 
     // Gets or sets the IsAscending flag.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/IsAscending/*"/>
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/IsAscending/*'/>
     [Column("IsAscending", TypeName = "bit")]
     public bool IsAscending
     {
@@ -274,8 +278,8 @@ namespace LJCDataUtilityDAL
     private bool _IsAscending;
 
     // Gets or sets the IsClustered flag.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/IsClustered/*"/>
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/IsClustered/*'/>
     [Column("IsClustered", TypeName = "bit")]
     public bool IsClustered
     {
@@ -292,15 +296,14 @@ namespace LJCDataUtilityDAL
     private bool _IsClustered;
 
     // Gets or sets the source column name.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/SourceColumnName/*"/>
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/SourceColumnName/*'/>
     [Column("SourceColumnName", TypeName = "nvarchar(60")]
     public string SourceColumnName
     {
       get => _SourceColumnName;
       set
       {
-        //value = NetString.InitString(value);
         var newValue = NetString.ScrubDelimitedValues(value);
         if (_SourceColumnName != newValue)
         {
@@ -312,38 +315,38 @@ namespace LJCDataUtilityDAL
     private string _SourceColumnName;
 
     // Gets or sets the target table name.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/TargetTableName/*"/>
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/TargetTableName/*'/>
     [Column("TargetTableName", TypeName = "nvarchar(60")]
     public string TargetTableName
     {
       get => _TargetTableName;
       set
       {
-        value = value?.Trim();
-        if (_TargetTableName != value)
+        var newValue = value?.Trim();
+        if (_TargetTableName != newValue)
         {
           _TargetTableName = ChangedNames.Add(ColumnTargetTableName
-            , _OriginalValues.TargetTableName, value);
+            , _OriginalValues.TargetTableName, newValue);
         }
       }
     }
     private string _TargetTableName;
 
     // Gets or sets the target column name.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/TargetColumnName/*"/>
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/TargetColumnName/*'/>
     [Column("TargetColumnName", TypeName = "nvarchar(60")]
     public string TargetColumnName
     {
       get => _TargetColumnName;
       set
       {
-        value = value?.Trim();
-        if (_TargetColumnName != value)
+        var newValue = value?.Trim();
+        if (_TargetColumnName != newValue)
         {
           _TargetColumnName = ChangedNames.Add(ColumnTargetColumnName
-            , _OriginalValues.TargetColumnName, value);
+            , _OriginalValues.TargetColumnName, newValue);
         }
       }
     }
@@ -353,23 +356,17 @@ namespace LJCDataUtilityDAL
     #region Calculated and Join Data Properties
 
     // Gets or sets the Join TableName value.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/DataTableName/*"/>
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/DataTableName/*'/>
     public string DataTableName { get; set; }
     #endregion
 
     #region Class Properties
 
     // Gets a reference to the ChangedNames list.
-    /// <include file="doc/DataKey.xml"
-    ///  path="members/ChangedNames/*"/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/ChangedNames/*'/>
     public ChangedNames ChangedNames { get; private set; }
-    #endregion
-
-    #region Calculated and Join Class Data
-
-    /// <summary>The Join ModuleName column name.</summary>
-    public static string ColumnDataTableName = "DataTableName";
     #endregion
 
     #region Class Data
@@ -428,6 +425,9 @@ namespace LJCDataUtilityDAL
     /// <summary>The TargetColumnName maximum length.</summary>
     public static int LengthTargetColumnName = 60;
 
+    /// <summary>The Join TableName column name.</summary>
+    public static string ColumnDataTableName = "DataTableName";
+
     // The object starting values.
     private readonly OriginalValues _OriginalValues;
 
@@ -472,40 +472,46 @@ namespace LJCDataUtilityDAL
 
   #region Comparers
 
-  /// <summary>Sort and search on Name value.</summary>
+  // Sort and search on Name value.
+  /// <include file='Doc/DataKey.xml'
+  ///  path='items/Compare/*'/>
   public class DataKeyUniqueComparer : IComparer<DataKey>
   {
     // Compares two objects.
-    /// <include path="items/Compare/*" file="../../LJCGenDoc/Common/Data.xml"/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/Compare/*'/>
     public int Compare(DataKey x, DataKey y)
     {
       int retValue;
 
-      var isContinue = true;
-      retValue = NetCommon.CompareNull(x, y);
-      if (retValue != -2)
+      while (true)
       {
-        isContinue = false;
-      }
-      if (isContinue)
-      {
+        retValue = NetCommon.CompareNull(x, y);
+        if (retValue != NetString.CompareNotNull)
+        {
+          break;
+        }
+
         retValue = NetCommon.CompareNull(x.Name, y.Name);
-        if (retValue != -2)
+        if (retValue != NetString.CompareNotNull)
         {
-          isContinue = false;
+          break;
         }
-      }
-      if (isContinue)
-      {
+
+        retValue = x.DataTableSiteID.CompareTo(y.DataTableSiteID);
+        if (retValue != NetString.CompareEqual)
+        {
+          break;
+        }
+
         retValue = x.DataTableID.CompareTo(y.DataTableID);
-        if (retValue != 0)
+        if (retValue != NetString.CompareEqual)
         {
-          isContinue = false;
+          break;
         }
-      }
-      if (isContinue)
-      {
-        retValue = x.Name.CompareTo(y.Name);
+
+        retValue = string.Compare(x.Name, y.Name, true);
+        break;
       }
       return retValue;
     }

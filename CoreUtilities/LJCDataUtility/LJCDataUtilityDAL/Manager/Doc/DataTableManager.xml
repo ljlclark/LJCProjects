@@ -2,13 +2,44 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DataTableManager.xml -->
-<items>
+<members>
   <RetrieveWithID>
     <summary>
-      Retrieves a record with the supplied values.
+      Retrieves a record with the supplied key values.
     </summary>
     <param name="id">The primary key.</param>
-    <param name="dataSiteID">The primary and foreign key.</param>
-    <param name="propertyNames">The property names.</param>
+    <param name="dataSiteID">The primary and site foreign key.</param>
+    <param name="propertyNames">The retrieved property names.</param>
   </RetrieveWithID>
-</items>
+  <RetrieveWithUnique>
+    <summary>
+      Retrieves a record with the supplied unique values.
+    </summary>
+    <param name="parentID">The parent foreign key.</param>
+    <param name="parentSiteID">The parent foreign and site foreign key.</param>
+    <param name="name">The name value.</param>
+    <param name="propertyNames">The retrieved property names.</param>
+  </RetrieveWithUnique>
+  <IDKey>
+    <summary>
+      Gets the ID key columns.
+    </summary>
+    <param name="id">The primary key.</param>
+    <param name="dataSiteID">The primary and site foreign key.</param>
+  </IDKey>
+  <ParentKey>
+    <summary>
+      Gets the Parent ID key columns.
+    </summary>
+    <param name="parentID">The parent foreign key.</param>
+    <param name="parentSiteID">The parent foreign and site foreign key.</param>
+  </ParentKey>
+  <UniqueKey>
+    <summary>
+      Gets the Unique ID key columns.
+    </summary>
+    <param name="parentID">The parent foreign key.</param>
+    <param name="parentSiteID">The parent foreign and site foreign key.</param>
+    <param name="name">The name value.</param>
+  </UniqueKey>
+</members>

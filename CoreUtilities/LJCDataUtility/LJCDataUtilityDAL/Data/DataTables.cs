@@ -1,24 +1,25 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// DataTablesOld.cs
+// DataTables.cs
 using LJCNetCommon;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>Represents a collection of DataTable objects.</summary>
-  /// <remarks>
-  /// <para>-- Library Level Remarks</para>
-  /// </remarks>
+  // Represents a collection of DataTable objects.
+  /// <include file='Doc/DataTables.xml'
+  ///  path='members/DataTables/*'/>
   [XmlRoot("DataTables")]
   public class DataTables : List<DataUtilTable>
   {
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCDeserialize/*'/>
     public static DataTables2 LJCDeserialize(string fileSpec = null)
     {
       DataTables2 retValue;
@@ -35,7 +36,7 @@ namespace LJCDataUtilityDAL
       else
       {
         retValue = NetCommon.XmlDeserialize(typeof(DataTables2), fileSpec)
-        as DataTables2;
+         as DataTables2;
       }
       return retValue;
     }
@@ -44,7 +45,8 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public DataTables()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.DataTables");
@@ -52,8 +54,9 @@ namespace LJCDataUtilityDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataTables(DataTables items)
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/CopyConstructor/*'/>
+    public DataTables(DataTables items) : this()
     {
       if (NetCommon.HasItems(items))
       {
@@ -68,15 +71,17 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
-    public DataTables2 Clone()
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
+    public DataTables Clone()
     {
-      var retValue = MemberwiseClone() as DataTables2;
+      var retValue = MemberwiseClone() as DataTables;
       return retValue;
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCGetCollection/*'/>
     public DataTables LJCGetCollection(List<DataUtilTable> list)
     {
       DataTables retValue = null;
@@ -93,7 +98,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems/*'/>
     public bool LJCHasItems()
     {
       bool retValue = false;
@@ -106,7 +112,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCSerialize/*'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -120,28 +127,47 @@ namespace LJCDataUtilityDAL
     #region Collection Data Methods
 
     // Creates and adds the object from the supplied values.
-    /// <include path='items/Add/*' file='Doc/DataTables.xml'/>
-    public DataUtilTable Add(int id, int dataModuleID, string name)
+    /// <include file='Doc/DataTables.xml'
+    ///  path='members/Add/*'/>
+    public DataUtilTable Add(long dataSiteID, long dataModuleID
+      , long dataModuleSiteID, string name)
     {
-      DataUtilTable retValue;
+      DataUtilTable retValue = null;
 
       string message = "";
-      if (id <= 0)
+      if (dataSiteID <= 0)
       {
-        message += "id must be greater than zero.\r\n";
+        message += "dataSiteID must be greater than zero.\r\n";
+      }
+      if (dataModuleID <= 0)
+      {
+        message += "dataModuleID must be greater than zero.\r\n";
+      }
+      if (dataModuleSiteID <= 0)
+      {
+        message += "dataModuleSiteID must be greater than zero.\r\n";
       }
       mArgError.Add(message);
-      mArgError.Add((object)name, "name");
+      mArgError.Add(name, "name");
       NetString.ThrowArgError(message);
 
-      retValue = LJCGetWithUnique(dataModuleID, name);
+      // Prevent search from sorting current items.
+      var checkTables = Clone();
+      var duplicate = checkTables.LJCGetWithUnique(dataModuleID
+        , dataModuleSiteID, name);
+      if (duplicate != null)
+      {
+        retValue = duplicate.Clone();
+      }
+
       if (null == retValue)
       {
         retValue = new DataUtilTable()
         {
-          ID = id,
+          DataSiteID = dataSiteID,
           DataModuleID = dataModuleID,
-          Name = name
+          DataModuleSiteID = dataModuleSiteID,
+          Name = name,
         };
         Add(retValue);
       }
@@ -149,15 +175,17 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataUtilTable LJCGetWithID(int id)
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCGetWithID/*'/>
+    public DataUtilTable LJCGetWithID(long id, long dataSiteID)
     {
       DataUtilTable retValue = null;
 
       LJCSortID();
       DataUtilTable searchItem = new DataUtilTable()
       {
-        ID = id
+        ID = id,
+        DataSiteID = dataSiteID,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -168,8 +196,10 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection element with unique values.
-    /// <include path='items/LJCSearchUnique/*' file='Doc/DataTables.xml'/>
-    public DataUtilTable LJCGetWithUnique(int dataModuleID, string name)
+    /// <include file='Doc/DataTables.xml'
+    ///  path='members/LJCGetWithUnique/*'/>
+    public DataUtilTable LJCGetWithUnique(long dataModuleID
+      , long dataModuleSiteID, string name)
     {
       DataUtilTable retValue = null;
 
@@ -178,7 +208,8 @@ namespace LJCDataUtilityDAL
       DataUtilTable searchItem = new DataUtilTable()
       {
         DataModuleID = dataModuleID,
-        Name = name
+        DataModuleSiteID = dataModuleSiteID,
+        Name = name,
       };
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)
@@ -189,10 +220,13 @@ namespace LJCDataUtilityDAL
     }
 
     // Removes an item by name.
-    /// <include path='items/LJCRemove/*' file='Doc/DataTables.xml'/>
-    public void LJCRemove(int dataModuleID, string name)
+    /// <include file='Doc/DataTables.xml'
+    ///  path='members/LJCRemove/*'/>
+    public void LJCRemove(int dataModuleID, long dataModuleSiteID
+      , string name)
     {
       DataUtilTable item = Find(x => x.DataModuleID == dataModuleID
+        && x.DataModuleSiteID == dataModuleSiteID
         && x.Name == name);
       if (item != null)
       {
@@ -203,7 +237,9 @@ namespace LJCDataUtilityDAL
 
     #region Sort Methods
 
-    /// <summary>Sort on Code.</summary>
+    // Sort on ID.
+    /// <include file='Doc/DataTables.xml'
+    ///  path='members/LJCSortID/*'/>
     public void LJCSortID()
     {
       if (Count != mPrevCount
@@ -215,8 +251,9 @@ namespace LJCDataUtilityDAL
       }
     }
 
-    /// <summary>Sort on Unique values.</summary>
-    /// <param name="comparer">The Comparer object.</param>
+    // Sort on Unique values.
+    /// <include file='Doc/DataTables.xml'
+    ///  path='members/LJCSortUnique/*'/>
     public void LJCSortUnique(DataTableUniqueComparer comparer)
     {
       if (Count != mPrevCount
@@ -231,17 +268,21 @@ namespace LJCDataUtilityDAL
 
     #region Properties
 
-    /// <summary>Gets the Default File Name.</summary>
+    // Gets the Default File Name.
+    /// <include file='Doc/DataTables.xml'
+    ///  path='members/LJCDefaultFileName/*'/>
     public static string LJCDefaultFileName
     {
       get { return "DataTables.xml"; }
     }
 
     // The item for the supplied name.
-    /// <include path='items/NameIndexer/*' file='Doc/DataTables.xml'/>
-    public DataUtilTable this[int dataTableID, string name]
+    /// <include file='Doc/DataTables.xml'
+    ///  path='members/UniqueIndexer/*'/>
+    public DataUtilTable this[long dataTableID, long dataTableSiteID
+      , string name]
     {
-      get { return LJCGetWithUnique(dataTableID, name); }
+      get => LJCGetWithUnique(dataTableID, dataTableSiteID, name);
     }
     #endregion
 

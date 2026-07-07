@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataKey.xml -->
+<members>
+  <!-- Constructor Methods -->
+  <ParamConstructor>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="name">The unique name value.</param>
+  </ParamConstructor>
+  <!-- Data Properties -->
+  <ID>
+    <summary>
+      Gets or sets the ID value.
+    </summary>
+  </ID>
+  <DataSiteID>
+    <summary>
+      Gets or sets the database ID.
+    </summary>
+  </DataSiteID>
+  <DataTableID>
+    <summary>
+      Gets or sets the DataTableID value.
+    </summary>
+  </DataTableID>
+  <DataTableSiteID>
+    <summary>
+      Gets or sets the DataTable database ID.
+    </summary>
+  </DataTableSiteID>
+  <Name>
+    <summary>
+      Gets or sets the Name value.
+    </summary>
+  </Name>
+  <KeyType>
+    <summary>
+      Gets or sets the KeyType value.
+    </summary>
+  </KeyType>
+  <SourceColumnName>
+    <summary>
+      Gets or sets the source column name.
+    </summary>
+  </SourceColumnName>
+  <TargetTableName>
+    <summary>
+      Gets or sets the target table name.
+    </summary>
+  </TargetTableName>
+  <TargetColumnName>
+    <summary>
+      Gets or sets the target column name.
+    </summary>
+  </TargetColumnName>
+  <IsClustered>
+    <summary>
+      Gets or sets the IsClustered flag.
+    </summary>
+  </IsClustered>
+  <IsAscending>
+    <summary>
+      Gets or sets the IsAscending flag.
+    </summary>
+  </IsAscending>
+  <!-- Calculated and Join Data Properties -->
+  <DataTableName>
+    <summary>
+      Gets or sets the Join TableName value.
+    </summary>
+  </DataTableName>
+  <!-- Class Properties -->
+  <ChangedNames>
+    <summary>
+      Gets a reference to the ChangedNames list.
+    </summary>
+  </ChangedNames>
+</members>

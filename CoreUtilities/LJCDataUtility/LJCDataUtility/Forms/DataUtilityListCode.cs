@@ -351,8 +351,9 @@ namespace LJCDataUtility
 
       siteID = 0;
       var moduleID = DataModuleItemID();
+      var moduleSiteID = DataModuleItemSiteID();
       var tableManager = Managers.DataTableManager;
-      var targetTable = tableManager.RetrieveWithUnique(moduleID
+      var targetTable = tableManager.RetrieveWithUnique(moduleID, moduleSiteID
         , targetTableName);
       if (targetTable != null)
       {
@@ -522,10 +523,11 @@ namespace LJCDataUtility
     // Saves the control values. 
     private void SaveControlValues()
     {
-      ControlValues controlValues = new ControlValues();
-
-      // Save Window values.
-      controlValues.Add(Name, Left, Top, Width, Height);
+      ControlValues controlValues = new ControlValues
+      {
+        // Save Window values.
+        { Name, Left, Top, Width, Height },
+      };
 
       // Save Grid column sizes.
       TableGrid.LJCSaveColumnValues(controlValues);
