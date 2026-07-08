@@ -101,11 +101,11 @@ namespace LJCDataUtility
 
       int parentID = ModuleCombo.LJCSelectedItemID();
       var dataUtilTable = ModuleCombo.SelectedItem as DataUtilTable;
-      var parentSiteID = dataUtilTable.DataModuleSiteID;
+      var parentDbID = (short)dataUtilTable.DataModuleSiteID;
       if (parentID > 0
-        && parentSiteID > 0)
+        && parentDbID > 0)
       {
-        var keyColumns = TableManager.ParentKey(parentID, parentSiteID);
+        var keyColumns = TableManager.ParentKey(parentID, parentDbID);
         var orderBy = new List<string>()
         {
           DataUtilTable.ColumnSequence
@@ -277,7 +277,7 @@ namespace LJCDataUtility
       {
         int sequence = TableGrid.Rows.Count + 1;
         int parentID = ModuleCombo.LJCSelectedItemID();
-        var parentSiteID = ParentObject.DataModuleItemSiteID();
+        var parentSiteID = ParentObject.DataModuleItemDbID();
         string parentName = ModuleCombo.Text;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);

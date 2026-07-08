@@ -63,7 +63,7 @@ namespace LJCDataUtility
         Text += " - Edit";
         LJCIsUpdate = true;
         var manager = LJCManagers.DataTableManager;
-        mOriginalRecord = manager.RetrieveWithID(LJCID, LJCSiteID);
+        mOriginalRecord = manager.RetrieveWithID(LJCID, LJCDbID);
         GetValues(mOriginalRecord);
       }
       else
@@ -102,7 +102,7 @@ namespace LJCDataUtility
         NewNameText.Text = data.NewName;
 
         // Reference key values.
-        LJCSiteID = data.DataSiteID;
+        LJCDbID = (short)data.DataSiteID;
         LJCParentID = data.DataModuleID;
         LJCParentSiteID = data.DataModuleSiteID;
       }
@@ -124,7 +124,7 @@ namespace LJCDataUtility
 
       // Get Reference key values.
       retData.ID = LJCID;
-      retData.DataSiteID = LJCSiteID;
+      retData.DataSiteID = LJCDbID;
       retData.DataModuleID = LJCParentID;
       retData.DataModuleSiteID = LJCParentSiteID;
       return retData;
@@ -169,7 +169,7 @@ namespace LJCDataUtility
       {
         if (LJCIsUpdate)
         {
-          var keyColumns = manager.IDKey(LJCID, LJCSiteID);
+          var keyColumns = manager.IDKey(LJCID, LJCDbID);
           LJCRecord.ID = 0;
           manager.Update(LJCRecord, keyColumns);
           ResetValues(LJCRecord);
@@ -307,7 +307,7 @@ namespace LJCDataUtility
     internal long LJCID { get; set; }
 
     // Gets or sets the primary ID value.
-    internal long LJCSiteID { get; set; }
+    internal short LJCDbID { get; set; }
 
     // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }

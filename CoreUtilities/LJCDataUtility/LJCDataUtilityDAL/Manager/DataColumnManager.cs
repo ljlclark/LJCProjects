@@ -1,22 +1,24 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataColumnManager.cs
 using LJCDataSiteDAL;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
-using System;
 using System.Collections.Generic;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>Provides table specific data methods.</summary>
+  // Provides table specific data methods.
+  /// <include file='Doc/DataColumnManager.xml'
+  ///  path='members/DataColumnManager/*'/>
   public class DataColumnManager
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='Doc/DataColumnManager.xml'
+    ///  path='members/ParamConstructor/*'/>
     public DataColumnManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DataColumn", string schemaName = null)
     {
@@ -34,14 +36,14 @@ namespace LJCDataUtilityDAL
       // Create the list of database assigned columns.
       Manager.SetDbAssignedColumns(new string[]
       {
-        DataUtilColumn.ColumnID
+        DataUtilColumn.ColumnID,
       });
 
       // Create the list of lookup column names.
       Manager.SetLookupColumns(new string[]
       {
         DataUtilColumn.ColumnDataTableID,
-        DataUtilColumn.ColumnName
+        DataUtilColumn.ColumnName,
       });
 
       var values = ValuesDataUtility.Instance;
@@ -53,7 +55,8 @@ namespace LJCDataUtilityDAL
     #region Data Methods
 
     // Adds a Data Record to the database.
-    /// <include path='items/Add/*' file='Doc/DataColumnManager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='items/Add/*'/>
     public DataUtilColumn Add(DataUtilColumn dataObject
       , List<string> propertyNames = null, bool includeNull = false)
     {
@@ -65,21 +68,23 @@ namespace LJCDataUtilityDAL
       if (retValue != null)
       {
         dataObject.ID = retValue.ID;
-        EntryManager.WriteDataEntry(Manager.SQLStatement);
+        //EntryManager.WriteDataEntry(Manager.SQLStatement);
       }
       return retValue;
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Delete/*'/>
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
-      EntryManager.WriteDataEntry(Manager.SQLStatement);
+      //EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
 
     // Retrieves a collection of data records.
-    /// <include path='items/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Load/*'/>
     public DataColumns Load(DbColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -92,7 +97,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieves a record from the database.
-    /// <include path='items/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Retrieve/*'/>
     public DataUtilColumn Retrieve(DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -105,51 +111,57 @@ namespace LJCDataUtilityDAL
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Update/*'/>
     public void Update(DataUtilColumn dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
-      EntryManager.WriteDataEntry(Manager.SQLStatement);
+      //EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
 
     // Creates a set of columns that match the supplied list.
-    /// <include path='items/Columns/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Columns/*'/>
     public DbColumns Columns(List<string> propertyNames)
     {
       return Manager.DataDefinition.LJCGetColumns(propertyNames);
     }
 
     // Creates a list of BaseDefinition property names.
-    /// <include path='items/PropertyNames/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/PropertyNames/*'/>
     public List<string> PropertyNames()
     {
       return Manager.GetPropertyNames();
     }
     #endregion
 
-    #region Load/Retrieve Methods
+    #region Custom Data Methods
 
     // Retrieves a record with the supplied value.
-    /// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DataUtilColumn RetrieveWithID(long id, List<string> propertyNames = null)
+    /// <include file='Doc/DataColumnManager.xml'
+    ///  path='members/RetrieveWithID/*'/>
+    public DataUtilColumn RetrieveWithID(long id, short dbID
+      , List<string> propertyNames = null)
     {
       DataUtilColumn retValue;
 
-      var keyColumns = IDKey(id);
+      var keyColumns = IDKey(id, dbID);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
     }
 
     // Retrieves a record with the supplied unique values.
-    /// <include path='items/RetrieveWithUnique/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DataUtilColumn RetrieveWithUnique(long parentID, string name
-      , List<string> propertyNames = null)
+    /// <include file='Doc/DataColumnManager.xml'
+    ///  path='members/RetrieveWithUnique/*'/>
+    public DataUtilColumn RetrieveWithUnique(long parentID, short parentDbID
+      , string name, List<string> propertyNames = null)
     {
       DataUtilColumn retValue;
 
-      var keyColumns = UniqueKey(parentID, name);
+      var keyColumns = UniqueKey(parentID, parentDbID, name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -159,45 +171,45 @@ namespace LJCDataUtilityDAL
     #region GetKey Methods
 
     // Gets the ID key columns.
-    /// <include path='items/IDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns IDKey(long id)
+    /// <include file='Doc/DataColumnManager.xml'
+    ///  path='members/IDKey/*'/>
+    public DbColumns IDKey(long id, short dbID)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
-        { DataUtilColumn.ColumnID, id }
+        { DataUtilColumn.ColumnID, id },
+        { DataUtilColumn.ColumnDataSiteID, dbID},
       };
       return retValue;
     }
 
     // Gets the ID key columns.
-    /// <summary>
-    /// Gets the ID key columns.
-    /// </summary>
-    /// <param name="parentID">The parent table ID.</param>
-    /// <param name="parentSiteID">The parent site ID.</param>
-    /// <returns></returns>
-    public DbColumns ParentKey(long parentID, long parentSiteID)
+    /// <include file='Doc/DataColumnManager.xml'
+    ///  path='members/ParentKey/*'/>
+    public DbColumns ParentKey(long parentID, short parentDbID)
     {
       var retValue = new DbColumns()
       {
         { DataUtilColumn.ColumnDataTableID, parentID },
-        { DataUtilColumn.ColumnDataTableSiteID, parentSiteID }
+        { DataUtilColumn.ColumnDataTableSiteID, parentDbID },
       };
       return retValue;
     }
 
     // Gets the ID key columns.
-    /// <include path='items/UniqueKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns UniqueKey(long parentID, string name)
+    /// <include file='Doc/DataColumnManager.xml'
+    ///  path='members/UniqueKey/*'/>
+    public DbColumns UniqueKey(long parentID, short parentDbID, string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { DataUtilColumn.ColumnDataTableID, parentID },
-        { DataUtilColumn.ColumnName, (object)name }
+        { DataUtilColumn.ColumnDataTableSiteID, parentDbID },
+        { DataUtilColumn.ColumnName, (object)name },
       };
       return retValue;
     }
@@ -205,19 +217,27 @@ namespace LJCDataUtilityDAL
 
     #region Properties
 
-    /// <summary>Gets the affected record count.</summary>
+    // Gets the affected record count.
+    /// <include file='Doc/DataColumnManager.xml'
+    ///  path='members/AffectedCount/*'/>
     public int AffectedCount
     {
-      get { return Manager.AffectedCount; }
+      get => Manager.AffectedCount;
     }
 
-    /// <summary>Gets or sets the DataManager reference.</summary>
+    // Gets or sets the DataManager reference.
+    /// <include file='Doc/DataColumnManager.xml'
+    ///  path='members/Manager/*'/>
     public DataManager Manager { get; set; }
 
-    /// <summary>Gets or sets the ResultConverter reference.</summary>
+    // Gets or sets the ResultConverter reference.
+    /// <include file='Doc/DataColumnManager.xml'
+    ///  path='members/ResultConverter/*'/>
     public ResultConverter<DataUtilColumn, DataColumns> ResultConverter { get; set; }
 
-    /// <summary>Gets or sets the DataManager reference.</summary>
+    // Gets or sets the DataManager reference.
+    /// <include file='Doc/DataColumnManager.xml'
+    ///  path='members/EntryManager/*'/>
     private DataEntryManager EntryManager { get; set; }
     #endregion
   }

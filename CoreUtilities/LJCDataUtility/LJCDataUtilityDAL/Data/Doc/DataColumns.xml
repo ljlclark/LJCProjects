@@ -17,7 +17,7 @@
       Removes an item by name.
     </summary>
     <param name="dataTableID">The parent ID.</param>
-    <param name="dataTableSiteID">The parent site ID.</param>
+    <param name="dataTableDbID">The parent database ID.</param>
     <param name="name">The item unique Name value.</param>
   </LJCRemove>
   <LJCSearchUnique>

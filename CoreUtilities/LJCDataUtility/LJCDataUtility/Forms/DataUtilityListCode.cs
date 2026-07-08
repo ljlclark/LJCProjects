@@ -125,11 +125,11 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal long DataKeyRowID(out long siteID, LJCGridRow row = null)
+    internal long DataKeyRowID(out short dbID, LJCGridRow row = null)
     {
       long retKeyID = 0;
 
-      siteID = 0;
+      dbID = 0;
       if (null == row)
       {
         row = DataKeyRow();
@@ -138,7 +138,7 @@ namespace LJCDataUtility
         && "KeyGrid" == row.DataGridView.Name)
       {
         retKeyID = row.LJCGetInt64(DataKey.ColumnID);
-        siteID = row.LJCGetInt64(DataKey.ColumnDataSiteID);
+        dbID = (short)row.LJCGetInt32(DataKey.ColumnDataSiteID);
       }
       return retKeyID;
     }
@@ -186,9 +186,9 @@ namespace LJCDataUtility
     /// <returns>The foreign key collection.</returns>
     internal DataKeys ForeignKeys()
     {
-      var tableID = DataTableRowID(out long siteID);
+      var tableID = DataTableRowID(out short dbID);
       var keyManager = Managers.DataKeyManager;
-      var retKeys = keyManager.LoadWithParentType(tableID, siteID
+      var retKeys = keyManager.LoadWithParentType(tableID, dbID
         , (short)KeyType.Foreign);
       return retKeys;
     }
@@ -199,9 +199,9 @@ namespace LJCDataUtility
     {
       string retList = null;
 
-      var parentID = DataTableRowID(out long parentSiteID);
+      var parentID = DataTableRowID(out short parentDbID);
       var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithParentType(parentID, parentSiteID
+      var dataKey = keyManager.RetrieveWithParentType(parentID, parentDbID
         , (short)KeyType.Primary);
       if (dataKey != null)
       {
@@ -216,9 +216,9 @@ namespace LJCDataUtility
     {
       string retList = null;
 
-      var parentID = DataTableRowID(out long parentSiteID);
+      var parentID = DataTableRowID(out short parentDbID);
       var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithParentType(parentID, parentSiteID
+      var dataKey = keyManager.RetrieveWithParentType(parentID, parentDbID
         , (short)KeyType.Unique);
       if (dataKey != null)
       {
@@ -262,9 +262,9 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row SiteID.
-    internal long DataModuleItemSiteID(LJCItem item = null)
+    internal short DataModuleItemDbID(LJCItem item = null)
     {
-      long retModuleSiteID = 0;
+      short retModuleDbID = 0;
 
       if (null == item)
       {
@@ -272,9 +272,9 @@ namespace LJCDataUtility
       }
       if (item is LJCItem)
       {
-        retModuleSiteID = Settings.SiteID;
+        retModuleDbID = (short)Settings.SiteID;
       }
-      return retModuleSiteID;
+      return retModuleDbID;
     }
     #endregion
 
@@ -287,11 +287,11 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal long DataTableRowID(out long siteID, LJCGridRow row = null)
+    internal long DataTableRowID(out short dbID, LJCGridRow row = null)
     {
       long retTableID = 0;
 
-      siteID = 0;
+      dbID = 0;
       if (row == null)
       {
         row = DataTableRow();
@@ -300,7 +300,7 @@ namespace LJCDataUtility
         && "TableGrid" == row.DataGridView.Name)
       {
         retTableID = row.LJCGetInt64(DataUtilTable.ColumnID);
-        siteID = row.LJCGetInt64(DataUtilTable.ColumnDataSiteID);
+        dbID = (short)row.LJCGetInt32(DataUtilTable.ColumnDataSiteID);
       }
       return retTableID;
     }
@@ -345,20 +345,20 @@ namespace LJCDataUtility
     }
 
     // Gets the target table ID.
-    internal long TargetDataTableID(string targetTableName, out long siteID)
+    internal long TargetDataTableID(string targetTableName, out short dbID)
     {
       long retTableID = 0;
 
-      siteID = 0;
+      dbID = 0;
       var moduleID = DataModuleItemID();
-      var moduleSiteID = DataModuleItemSiteID();
+      var moduleSiteID = DataModuleItemDbID();
       var tableManager = Managers.DataTableManager;
       var targetTable = tableManager.RetrieveWithUnique(moduleID, moduleSiteID
         , targetTableName);
       if (targetTable != null)
       {
         retTableID = targetTable.ID;
-        siteID = targetTable.DataSiteID;
+        dbID = (short)targetTable.DataSiteID;
       }
       return retTableID;
     }

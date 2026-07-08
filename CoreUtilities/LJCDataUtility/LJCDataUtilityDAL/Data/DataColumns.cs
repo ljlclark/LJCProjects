@@ -4,7 +4,6 @@
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL
@@ -133,23 +132,23 @@ namespace LJCDataUtilityDAL
     // Creates and adds the object from the supplied values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/Add1/*'/>
-    public DataUtilColumn Add(long dataSiteID, long dataTableID
-      , long dataTableSiteID, string name)
+    public DataUtilColumn Add(short dbID, long dataTableID
+      , short dataTableDbID, string name)
     {
       DataUtilColumn retValue = null;
 
       string message = "";
-      if (dataSiteID <= 0)
+      if (dbID <= 0)
       {
-        message += "dataSiteID must be greater than zero.\r\n";
+        message += "dbID must be greater than zero.\r\n";
       }
       if (dataTableID <= 0)
       {
         message += "dataTableID must be greater than zero.\r\n";
       }
-      if (dataTableSiteID <= 0)
+      if (dataTableDbID <= 0)
       {
-        message += "dataTableSiteID must be greater than zero.\r\n";
+        message += "dataTableDbID must be greater than zero.\r\n";
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
@@ -158,7 +157,7 @@ namespace LJCDataUtilityDAL
       // Prevent search from sorting current items.
       var checkColumns = Clone();
       var duplicate = checkColumns.LJCGetWithUnique(dataTableID
-        , dataTableSiteID, name);
+        , dataTableDbID, name);
       if (duplicate != null)
       {
         retValue = duplicate.Clone();
@@ -168,9 +167,9 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilColumn()
         {
-          DataSiteID = dataSiteID,
+          DataSiteID = dbID,
           DataTableID = dataTableID,
-          DataTableSiteID = dataTableSiteID,
+          DataTableSiteID = dataTableDbID,
           Name = name,
         };
         Add(retValue);
@@ -181,24 +180,24 @@ namespace LJCDataUtilityDAL
     // Creates and adds the object from the provided values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/Add2/*'/>
-    public DataUtilColumn Add(long dataSiteID, long dataTableID
-      , long dataTableSiteID, string name, string typeName
+    public DataUtilColumn Add(short dbID, long dataTableID
+      , short dataTableDbID, string name, string typeName
       , bool allowNull = true, short maxLength = 0, string defaultValue = null
       , short identityIncrement = 0)
     {
       DataUtilColumn retValue = null;
       string message = "";
-      if (dataSiteID <= 0)
+      if (dbID <= 0)
       {
-        message += "dataSiteID must be greater than zero.\r\n";
+        message += "dbID must be greater than zero.\r\n";
       }
       if (dataTableID <= 0)
       {
         message += "dataTableID must be greater than zero.\r\n";
       }
-      if (dataTableSiteID <= 0)
+      if (dataTableDbID <= 0)
       {
-        message += "dataTableSiteID must be greater than zero.\r\n";
+        message += "dataTableDbID must be greater than zero.\r\n";
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
@@ -206,7 +205,7 @@ namespace LJCDataUtilityDAL
 
       // Prevent search from sorting current items.
       var checkColumns = Clone();
-      var duplicate = checkColumns.LJCGetWithUnique(dataTableID, dataTableSiteID
+      var duplicate = checkColumns.LJCGetWithUnique(dataTableID, dataTableDbID
         , name);
       if (duplicate != null)
       {
@@ -217,9 +216,9 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilColumn()
         {
-          DataSiteID = dataSiteID,
+          DataSiteID = dbID,
           DataTableID = dataTableID,
-          DataTableSiteID = dataTableSiteID,
+          DataTableSiteID = dataTableDbID,
           Name = name,
 
           TypeName = typeName,
@@ -236,7 +235,7 @@ namespace LJCDataUtilityDAL
     // Retrieve the collection element.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCGetWithID/*'/>
-    public DataUtilColumn LJCGetWithID(long id, long dataSiteID)
+    public DataUtilColumn LJCGetWithID(long id, short dbID)
     {
       DataUtilColumn retValue = null;
 
@@ -244,7 +243,7 @@ namespace LJCDataUtilityDAL
       DataUtilColumn searchItem = new DataUtilColumn()
       {
         ID = id,
-        DataSiteID = dataSiteID,
+        DataSiteID = dbID,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -258,7 +257,7 @@ namespace LJCDataUtilityDAL
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCGetWithUnique/*'/>
     public DataUtilColumn LJCGetWithUnique(long dataTableID
-      , long dataTableSiteID, string name)
+      , short dataTableDbID, string name)
     {
       DataUtilColumn retValue = null;
 
@@ -267,7 +266,7 @@ namespace LJCDataUtilityDAL
       DataUtilColumn searchItem = new DataUtilColumn()
       {
         DataTableID = dataTableID,
-        DataTableSiteID = dataTableSiteID,
+        DataTableSiteID = dataTableDbID,
         Name = name,
       };
       int index = BinarySearch(searchItem, comparer);
@@ -281,10 +280,10 @@ namespace LJCDataUtilityDAL
     // Removes an item by name.
     /// <include file='Doc/DataColumns.xml'
     ///  path='members/LJCRemove/*'/>
-    public void LJCRemove(long dataTableID, long dataTableSiteID, string name)
+    public void LJCRemove(long dataTableID, long dataTableDbID, string name)
     {
       DataUtilColumn item = Find(x => x.DataTableID == dataTableID
-        && x.DataTableSiteID == dataTableSiteID
+        && x.DataTableSiteID == dataTableDbID
         && x.Name == name);
       if (item != null)
       {
@@ -337,10 +336,10 @@ namespace LJCDataUtilityDAL
     // The item for the specified name.
     /// <include file='Doc/DataColumns.xml'
     ///  path='members/UniqueIndexer/*'/>
-    public DataUtilColumn this[long dataTableID, long dataTableSiteID
+    public DataUtilColumn this[long dataTableID, short dataTableDbID
       , string name]
     {
-      get => LJCGetWithUnique(dataTableID, dataTableSiteID, name);
+      get => LJCGetWithUnique(dataTableID, dataTableDbID, name);
     }
     #endregion
 

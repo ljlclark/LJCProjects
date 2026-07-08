@@ -61,8 +61,8 @@ namespace LJCDataUtility
       {
         var tableManager = Managers.DataTableManager;
         var moduleID = ParentObject.DataModuleItemID();
-        var moduleSiteID = ParentObject.DataModuleItemSiteID();
-        dataTable = tableManager.RetrieveWithUnique(moduleID, moduleSiteID
+        var moduleDbID = ParentObject.DataModuleItemDbID();
+        dataTable = tableManager.RetrieveWithUnique(moduleID, moduleDbID
           , TableName);
         if (null == dataTable)
         {
@@ -96,6 +96,7 @@ namespace LJCDataUtility
       if (isContinue)
       {
         TableID = dataTable.ID;
+        TableDbID = (short)dataTable.DataSiteID;
         UpdateColumns();
         SetKeysPrimary();
         SetKeysUnique();
@@ -123,7 +124,7 @@ namespace LJCDataUtility
       dataTable.ChangedNames.AddNames(propertyNames);
       var newTable = tableManager.Add(dataTable);
 
-      CreateColumns(newTable.ID);
+      CreateColumns(newTable.ID, (short)newTable.DataSiteID);
       CreateKeys(newTable.ID);
 
       var tableGridCode = new DataTableGridCode(ParentObject);
@@ -136,11 +137,12 @@ namespace LJCDataUtility
 
     // Creates DataUtilColumn data.
     private void CreateColumn(DbColumn dbColumn, long tableID
-      , int sequence)
+      , short tableDbID, int sequence)
     {
       var newColumn = new DataUtilColumn
       {
         DataTableID = tableID,
+        DataTableSiteID = tableDbID,
         Name = dbColumn.ColumnName,
         Description = dbColumn.ColumnName,
         Sequence = sequence,
@@ -175,7 +177,7 @@ namespace LJCDataUtility
     }
 
     // Creates the new columns.
-    private void CreateColumns(long newTableID)
+    private void CreateColumns(long newTableID, short newTableDbID)
     {
       var manager = new DataManager(DataConfigName, TableName);
       var dbColumns = manager.BaseDefinition;
@@ -183,7 +185,7 @@ namespace LJCDataUtility
       foreach (var dbColumn in dbColumns)
       {
         sequence++;
-        CreateColumn(dbColumn, newTableID, sequence);
+        CreateColumn(dbColumn, newTableID, newTableDbID, sequence);
       }
     }
 
@@ -226,7 +228,7 @@ namespace LJCDataUtility
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
           var columnManager = Managers.DataColumnManager;
-          var keyColumns = columnManager.IDKey(dataColumn.ID);
+          var keyColumns = columnManager.IDKey(dataColumn.ID, dataColumn.DataSiteID);
           columnManager.Update(updateColumn, keyColumns);
         }
       }
@@ -241,7 +243,7 @@ namespace LJCDataUtility
       foreach (var dbColumn in dbColumns)
       {
         var columnName = dbColumn.ColumnName;
-        var dataColumn = columnManager.RetrieveWithUnique(TableID
+        var dataColumn = columnManager.RetrieveWithUnique(TableID, TableDbID
           , columnName);
         if (null == dataColumn)
         {
@@ -249,7 +251,7 @@ namespace LJCDataUtility
           if (DialogResult.Yes == MessageBox.Show(message, "Create Column"
               , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
           {
-            CreateColumn(dbColumn, TableID, dbColumns.Count + 1);
+            CreateColumn(dbColumn, TableID, TableDbID, dbColumns.Count + 1);
           }
           continue;
         }
@@ -375,7 +377,7 @@ namespace LJCDataUtility
             // Get foreignDataKey.
             var dataKeyManager = Managers.DataKeyManager;
             var foreignDataKey = dataKeyManager.RetrieveWithUnique(TableID
-              , workForeignTableKey.ConstraintName);
+              , TableDbID, workForeignTableKey.ConstraintName);
             if (foreignDataKey == null)
             {
               var message = $"Create {workForeignTableKey.ConstraintName}?";
@@ -413,7 +415,8 @@ namespace LJCDataUtility
         var primaryKey = primaryKeys[0];
         primaryKey.ColumnName = sourceColumnNames;
         var constraintName = primaryKey.ConstraintName;
-        var dataKey = keyManager.RetrieveWithUnique(TableID, constraintName);
+        var dataKey = keyManager.RetrieveWithUnique(TableID, TableDbID
+          , constraintName);
         if (dataKey == null)
         {
           var message = $"Create {dataKey.Name}?";
@@ -448,7 +451,8 @@ namespace LJCDataUtility
         var uniqueKey = uniqueKeys[0];
         uniqueKey.ColumnName = sourceColumnNames;
         var constraintName = uniqueKey.ConstraintName;
-        var dataKey = keyManager.RetrieveWithUnique(TableID, constraintName);
+        var dataKey = keyManager.RetrieveWithUnique(TableID, TableDbID
+          , constraintName);
         if (dataKey == null)
         {
           var message = $"Create {dataKey.Name}?";
@@ -495,7 +499,8 @@ namespace LJCDataUtility
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
           var keyManager = Managers.DataKeyManager;
-          var keyColumns = keyManager.UniqueKey(dataKey.DataTableID, dataKey.Name);
+          var keyColumns = keyManager.UniqueKey(dataKey.DataTableID
+            , (short)dataKey.DataTableSiteID, dataKey.Name);
           keyManager.Update(updateKey, keyColumns);
         }
       }
@@ -515,6 +520,9 @@ namespace LJCDataUtility
 
     // Gets or sets the Table ID.
     private long TableID { get; set; }
+
+    // Gets or sets the Table database ID.
+    private short TableDbID { get; set; }
 
     // Gets or sets the Table name.
     private string TableName { get; set; }

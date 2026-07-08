@@ -1,7 +1,6 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataModules.cs
-using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
@@ -9,17 +8,17 @@ using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>Represents a collection of DataModule objects.</summary>
-  /// <remarks>
-  /// <para>-- Library Level Remarks</para>
-  /// </remarks>
+  // Represents a collection of DataModule objects.
+  /// <include file='Doc/DataModules.xml'
+  ///  path='members/DataTables/*'/>
   [XmlRoot("DataModules")]
   public class DataModules : List<DataModule>
   {
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCDeserialize/*'/>
     public static DataModules LJCDeserialize(string fileSpec = null)
     {
       DataModules retValue;
@@ -45,7 +44,8 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public DataModules()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.DataModules");
@@ -53,8 +53,9 @@ namespace LJCDataUtilityDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataModules(DataModules items)
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/CopyConstructor/*'/>
+    public DataModules(DataModules items) : this()
     {
       if (NetCommon.HasItems(items))
       {

@@ -15,8 +15,6 @@
     <summary>
       Retrieves a record with the supplied unique values.
     </summary>
-    <param name="parentID">The parent foreign key.</param>
-    <param name="parentDbID">The parent foreign and site foreign key.</param>
     <param name="name">The name value.</param>
     <param name="propertyNames">The retrieved property names.</param>
   </RetrieveWithUnique>

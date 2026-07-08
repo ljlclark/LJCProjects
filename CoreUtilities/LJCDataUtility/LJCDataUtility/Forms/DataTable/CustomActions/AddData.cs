@@ -28,13 +28,13 @@ namespace LJCDataUtility
     // Generates the AddData procedure.
     internal void AddDataProc()
     {
-      var tableID = ParentObject.DataTableRowID(out long tableSiteID);
+      var tableID = ParentObject.DataTableRowID(out short tableDbID);
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
       };
       var dataColumns = Managers.TableDataColumns(tableID
-        , tableSiteID, orderByNames);
+        , tableDbID, orderByNames);
 
       if (NetCommon.HasItems(dataColumns))
       {
@@ -391,14 +391,14 @@ namespace LJCDataUtility
       DataColumns retColumns = null;
 
       var tableID = ParentObject.TargetDataTableID(targetTableName
-        , out long siteID);
+        , out short dbID);
       if (tableID > 0)
       {
         var orderByNames = new List<string>()
         {
           DataUtilColumn.ColumnSequence
         };
-        retColumns = Managers.TableDataColumns(tableID, siteID, orderByNames);
+        retColumns = Managers.TableDataColumns(tableID, dbID, orderByNames);
       }
       return retColumns;
     }
@@ -410,14 +410,14 @@ namespace LJCDataUtility
 
       var targetTableName = dataKey.TargetTableName;
       var targetTableID = ParentObject.TargetDataTableID(targetTableName
-        , out long targetSiteID);
+        , out short targetDbID);
       if (targetTableID > 0)
       {
         var parentColumns = Managers.TableDataColumns(targetTableID
-          , targetSiteID);
+          , targetDbID);
         retTypeValue = "nvarchar(5)";
         var findColumn = parentColumns.LJCGetWithUnique(targetTableID
-          , targetSiteID, dataKey.TargetColumnName);
+          , targetDbID, dataKey.TargetColumnName);
         if (findColumn != null)
         {
           retTypeValue = findColumn.TypeName;
@@ -435,10 +435,10 @@ namespace LJCDataUtility
     {
       var targetTableName = dataKey.TargetTableName;
       var targetTableID = ParentObject.TargetDataTableID(targetTableName
-        , out long targetSiteID);
+        , out short targetDbID);
       var keyManager = Managers.DataKeyManager;
       var retUniqueKeys = keyManager.LoadWithParentType(targetTableID
-        , targetSiteID, (int)KeyType.Unique);
+        , targetDbID, (int)KeyType.Unique);
       return retUniqueKeys;
     }
 
@@ -470,9 +470,9 @@ namespace LJCDataUtility
       var targetTableName = foreignKey.TargetTableName;
       var targetTableColumns = TargetColumns(targetTableName);
       var targetTableID = ParentObject.TargetDataTableID(targetTableName
-        , out long targetSiteID);
+        , out short targetDbID);
       var findColumn = targetTableColumns.LJCGetWithUnique(targetTableID
-        , targetSiteID, uniqueColumnName);
+        , targetDbID, uniqueColumnName);
       typeValue = "bigint";
       if (findColumn != null)
       {

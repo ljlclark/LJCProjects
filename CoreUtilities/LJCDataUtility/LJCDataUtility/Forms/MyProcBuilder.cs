@@ -432,7 +432,7 @@ namespace LJCDataUtility
     }
 
     // Renames a table. Removes old keys and creates new keys.
-    internal string RenameTableSQL(long tableID, long siteID)
+    internal string RenameTableSQL(long tableID, short dbID)
     {
       var keyManager = Managers.DataKeyManager;
       var b = new TextBuilder();
@@ -449,7 +449,7 @@ namespace LJCDataUtility
       }
 
       // Drop constraints and foreign keys.
-      var otherKeys = keyManager.LoadWithParent(tableID, siteID);
+      var otherKeys = keyManager.LoadWithParent(tableID, dbID);
       foreach (DataKey dataKey in otherKeys)
       {
         if (dataKey.KeyType != (short)ObjectType.Primary)

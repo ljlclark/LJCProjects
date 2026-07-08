@@ -27,7 +27,7 @@ namespace LJCDataUtility
     // Generates the Rename Table SQL.
     internal void RenameTableSQL()
     {
-      var parentID = ParentObject.DataTableRowID(out long parentSiteID);
+      var parentID = ParentObject.DataTableRowID(out short parentDbID);
       var keyManager = Managers.DataKeyManager;
       var dataKeys = keyManager.Load();
       if (NetCommon.HasItems(dataKeys))
@@ -47,12 +47,12 @@ namespace LJCDataUtility
           case "mysql":
             var myProc = new MyProcBuilder(ParentObject, dbName
               , parentTableName);
-            showText = myProc.RenameTableSQL(parentID, parentSiteID);
+            showText = myProc.RenameTableSQL(parentID, parentDbID);
             break;
 
           case "sqlserver":
             var proc = new ProcBuilder(ParentObject, dbName, parentTableName);
-            showText = proc.RenameTableSQL(parentID, parentSiteID, dataKeys);
+            showText = proc.RenameTableSQL(parentID, parentDbID, dataKeys);
             break;
         }
 

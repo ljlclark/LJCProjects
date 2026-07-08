@@ -104,8 +104,8 @@ namespace LJCDataUtility
 
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        var parentID = ParentObject.DataTableRowID(out long parentSiteID);
-        var keyColumns = ColumnManager.ParentKey(parentID, parentSiteID);
+        var parentID = ParentObject.DataTableRowID(out short parentDbID);
+        var keyColumns = ColumnManager.ParentKey(parentID, parentDbID);
         var orderByNames = new List<string>()
         {
           DataUtilColumn.ColumnSequence
@@ -276,7 +276,7 @@ namespace LJCDataUtility
         && ColumnGrid.CurrentRow is LJCGridRow)
       {
         var id = ParentObject.DataColumnRowID();
-        var parentID = ParentObject.DataTableRowID(out long parentSiteID);
+        var parentID = ParentObject.DataTableRowID(out short parentDbID);
         string parentName = ParentObject.DataTableRowName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail()
@@ -285,7 +285,7 @@ namespace LJCDataUtility
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
-          LJCParentSiteID = parentSiteID,
+          LJCParentDbID = parentDbID,
           LJCParentName = parentName,
         };
         detail.LJCChange += Detail_Change;
@@ -301,7 +301,7 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         int sequence = ColumnGrid.Rows.Count + 1;
-        var parentID = ParentObject.DataTableRowID(out long parentSiteID);
+        var parentID = ParentObject.DataTableRowID(out short parentDbID);
         string parentName = ParentObject.DataTableRowName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail
@@ -309,7 +309,7 @@ namespace LJCDataUtility
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
-          LJCParentSiteID = parentSiteID,
+          LJCParentDbID = parentDbID,
           LJCParentName = parentName,
           LJCSequence = sequence
         };

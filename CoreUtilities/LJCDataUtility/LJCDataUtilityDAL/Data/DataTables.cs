@@ -3,7 +3,6 @@
 // DataTables.cs
 using LJCNetCommon;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -75,6 +74,13 @@ namespace LJCDataUtilityDAL
     ///  path='members/Clone/*'/>
     public DataTables Clone()
     {
+      //var retValue = new DataTables();
+      //foreach (DataUtilTable dataTable in this)
+      //{
+      //  retValue.Add(dataTable.Clone());
+      //}
+
+      // Testing
       var retValue = MemberwiseClone() as DataTables;
       return retValue;
     }
@@ -129,23 +135,23 @@ namespace LJCDataUtilityDAL
     // Creates and adds the object from the supplied values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/Add/*'/>
-    public DataUtilTable Add(long dataSiteID, long dataModuleID
-      , long dataModuleSiteID, string name)
+    public DataUtilTable Add(long dbID, long dataModuleID
+      , short dataModuleDbID, string name)
     {
       DataUtilTable retValue = null;
 
       string message = "";
-      if (dataSiteID <= 0)
+      if (dbID <= 0)
       {
-        message += "dataSiteID must be greater than zero.\r\n";
+        message += "dbID must be greater than zero.\r\n";
       }
       if (dataModuleID <= 0)
       {
         message += "dataModuleID must be greater than zero.\r\n";
       }
-      if (dataModuleSiteID <= 0)
+      if (dataModuleDbID <= 0)
       {
-        message += "dataModuleSiteID must be greater than zero.\r\n";
+        message += "dataModuleDbID must be greater than zero.\r\n";
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
@@ -154,7 +160,7 @@ namespace LJCDataUtilityDAL
       // Prevent search from sorting current items.
       var checkTables = Clone();
       var duplicate = checkTables.LJCGetWithUnique(dataModuleID
-        , dataModuleSiteID, name);
+        , dataModuleDbID, name);
       if (duplicate != null)
       {
         retValue = duplicate.Clone();
@@ -164,9 +170,9 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilTable()
         {
-          DataSiteID = dataSiteID,
+          DataSiteID = dbID,
           DataModuleID = dataModuleID,
-          DataModuleSiteID = dataModuleSiteID,
+          DataModuleSiteID = dataModuleDbID,
           Name = name,
         };
         Add(retValue);
@@ -177,7 +183,7 @@ namespace LJCDataUtilityDAL
     // Retrieve the collection element.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCGetWithID/*'/>
-    public DataUtilTable LJCGetWithID(long id, long dataSiteID)
+    public DataUtilTable LJCGetWithID(long id, short dbID)
     {
       DataUtilTable retValue = null;
 
@@ -185,7 +191,7 @@ namespace LJCDataUtilityDAL
       DataUtilTable searchItem = new DataUtilTable()
       {
         ID = id,
-        DataSiteID = dataSiteID,
+        DataSiteID = dbID,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -199,7 +205,7 @@ namespace LJCDataUtilityDAL
     /// <include file='Doc/DataTables.xml'
     ///  path='members/LJCGetWithUnique/*'/>
     public DataUtilTable LJCGetWithUnique(long dataModuleID
-      , long dataModuleSiteID, string name)
+      , short dataModuleDbID, string name)
     {
       DataUtilTable retValue = null;
 
@@ -208,7 +214,7 @@ namespace LJCDataUtilityDAL
       DataUtilTable searchItem = new DataUtilTable()
       {
         DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleSiteID,
+        DataModuleSiteID = dataModuleDbID,
         Name = name,
       };
       int index = BinarySearch(searchItem, comparer);
@@ -222,11 +228,11 @@ namespace LJCDataUtilityDAL
     // Removes an item by name.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/LJCRemove/*'/>
-    public void LJCRemove(int dataModuleID, long dataModuleSiteID
+    public void LJCRemove(long dataModuleID, short dataModuleDbID
       , string name)
     {
       DataUtilTable item = Find(x => x.DataModuleID == dataModuleID
-        && x.DataModuleSiteID == dataModuleSiteID
+        && x.DataModuleSiteID == dataModuleDbID
         && x.Name == name);
       if (item != null)
       {
@@ -276,20 +282,19 @@ namespace LJCDataUtilityDAL
       get { return "DataTables.xml"; }
     }
 
-    // The item for the supplied name.
+    // The item for the supplied values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/UniqueIndexer/*'/>
-    public DataUtilTable this[long dataTableID, long dataTableSiteID
+    public DataUtilTable this[long dataTableID, short dataTableDbID
       , string name]
     {
-      get => LJCGetWithUnique(dataTableID, dataTableSiteID, name);
+      get => LJCGetWithUnique(dataTableID, dataTableDbID, name);
     }
     #endregion
 
     #region Class Data
 
     private readonly ArgError mArgError;
-
     private int mPrevCount;
     private SortType mSortType;
 

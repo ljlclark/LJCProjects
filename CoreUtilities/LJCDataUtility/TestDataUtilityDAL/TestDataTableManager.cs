@@ -509,7 +509,7 @@ namespace TestDataUtilityDAL
       };
       var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
 
-      long dataSiteID = 1;
+      short dbID = 1;
       long dataModuleID = 1;
       long dataModuleSiteID = 1;
       string name = "TestTableName";
@@ -517,7 +517,7 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataUtilTable = new DataUtilTable()
       {
-        DataSiteID = dataSiteID,
+        DataSiteID = dbID,
         DataModuleID = dataModuleID,
         DataModuleSiteID = dataModuleSiteID,
         Name = name,
@@ -542,8 +542,8 @@ namespace TestDataUtilityDAL
 
       // Update the test record.
       var id = utilTable.ID;
-      dataSiteID = utilTable.DataSiteID;
-      var idKey = dataTableManager.IDKey(id, dataSiteID);
+      dbID = (short)utilTable.DataSiteID;
+      var idKey = dataTableManager.IDKey(id, dbID);
       utilTable.Description += " Updated";
       var propertyNames = new List<string>()
       {
@@ -554,7 +554,7 @@ namespace TestDataUtilityDAL
       dataTableManager.Update(utilTable, idKey, propertyNames);
 
       // Verify the test record was updated.
-      utilTable = dataTableManager.RetrieveWithID(id, dataSiteID);
+      utilTable = dataTableManager.RetrieveWithID(id, dbID);
       result = utilTable.Description;
       compare = "The test table. Updated";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -592,7 +592,7 @@ namespace TestDataUtilityDAL
       };
       var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
 
-      long dataSiteID = 1;
+      short dbID = 1;
       long dataModuleID = 1;
       long dataModuleSiteID = 1;
       string name = "TestTableName";
@@ -600,7 +600,7 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataUtilTable = new DataUtilTable()
       {
-        DataSiteID = dataSiteID,
+        DataSiteID = dbID,
         DataModuleID = dataModuleID,
         DataModuleSiteID = dataModuleSiteID,
         Name = name,
@@ -628,7 +628,7 @@ namespace TestDataUtilityDAL
       var id = utilTable.ID;
 
       // Test Method
-      utilTable = dataTableManager.RetrieveWithID(id, dataSiteID);
+      utilTable = dataTableManager.RetrieveWithID(id, dbID);
 
       // Verify the record was retrieved.
       result = utilTable.Name;
@@ -665,17 +665,17 @@ namespace TestDataUtilityDAL
       };
       var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
 
-      long dataSiteID = 1;
+      short dbID = 1;
       long dataModuleID = 1;
-      long dataModuleSiteID = 1;
+      short dataModuleDbID = 1;
       string name = "TestTableName";
 
       // Create the test record.
       var dataUtilTable = new DataUtilTable()
       {
-        DataSiteID = dataSiteID,
+        DataSiteID = dbID,
         DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleSiteID,
+        DataModuleSiteID = dataModuleDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -685,7 +685,8 @@ namespace TestDataUtilityDAL
       dataTableManager.Add(dataUtilTable);
 
       // Test Method
-      var utilTable = dataTableManager.RetrieveWithUnique(dataModuleID, dataModuleSiteID, name);
+      var utilTable = dataTableManager.RetrieveWithUnique(dataModuleID
+        , dataModuleDbID, name);
 
       var result = utilTable.Name;
       var compare = "TestTableName";
@@ -695,7 +696,7 @@ namespace TestDataUtilityDAL
       var uniqueColumns = new DbColumns()
       {
         { "DataModuleID", dataModuleID },
-        { "DataModuleSiteID", dataModuleSiteID },
+        { "DataModuleSiteID", dataModuleDbID },
         { "Name", (object)name },
       };
       dataTableManager.Delete(uniqueColumns);
@@ -731,10 +732,10 @@ namespace TestDataUtilityDAL
       var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
 
       long id = 1;
-      long dataSiteID = 1;
+      short dbID = 1;
 
       // Test Method
-      var idKey = dataTableManager.IDKey(id, dataSiteID);
+      var idKey = dataTableManager.IDKey(id, dbID);
 
       var key = idKey.LJCSearchPropertyName(DataUtilTable.ColumnID);
       var propertyName = key.PropertyName;
@@ -771,10 +772,10 @@ namespace TestDataUtilityDAL
       var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
 
       long dataModuleID = 1;
-      long dataModuleSiteID = 1;
+      short dataModuleDbID = 1;
 
       // Test Method
-      var idKey = dataTableManager.ParentKey(dataModuleID, dataModuleSiteID);
+      var idKey = dataTableManager.ParentKey(dataModuleID, dataModuleDbID);
 
       var key = idKey.LJCSearchPropertyName(DataUtilTable.ColumnDataModuleID);
       var propertyName = key.PropertyName;
@@ -811,11 +812,11 @@ namespace TestDataUtilityDAL
       var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
 
       long dataModuleID = 1;
-      long dataModuleSiteID = 1;
+      short dataModuleDbID = 1;
       string name = "TestTableName";
 
       // Test Method
-      var idKey = dataTableManager.UniqueKey(dataModuleID, dataModuleSiteID
+      var idKey = dataTableManager.UniqueKey(dataModuleID, dataModuleDbID
         , name);
 
       var key = idKey.LJCSearchPropertyName(DataUtilTable.ColumnName);

@@ -1,26 +1,24 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataKeyManager.cs
 using LJCDataSiteDAL;
-using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
-using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Security.Policy;
-using System.Xml.Linq;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>Provides table specific data methods.</summary>
+  // Provides table specific data methods.
+  /// <include file='Doc/DataKeyManager.xml'
+  ///  path='members/DataKeyManager/*'/>
   public class DataKeyManager
   {
     #region Constructors
 
-    // Initializes an object instance.
-    /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='members/ParamConstructor/*'/>
     public DataKeyManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DataKey", string schemaName = null)
     {
@@ -61,7 +59,8 @@ namespace LJCDataUtilityDAL
     #region Data Methods
 
     // Adds a Data Record to the database.
-    /// <include path='items/Add/*' file='Doc/DataKeyManager.xml'/>
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='members/Add/*'/>
     public DataKey Add(DataKey dataObject
       , List<string> propertyNames = null, bool includeNull = false)
     {
@@ -73,21 +72,23 @@ namespace LJCDataUtilityDAL
       if (retValue != null)
       {
         dataObject.ID = retValue.ID;
-        EntryManager.WriteDataEntry(Manager.SQLStatement);
+        //EntryManager.WriteDataEntry(Manager.SQLStatement);
       }
       return retValue;
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Delete/*'/>
     public void Delete(DbColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
-      EntryManager.WriteDataEntry(Manager.SQLStatement);
+      //EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
 
     // Retrieves a collection of data records.
-    /// <include path='items/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Load/*'/>
     public DataKeys Load(DbColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -104,7 +105,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieves a record from the database.
-    /// <include path='items/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Retrieve/*'/>
     public DataKey Retrieve(DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -121,33 +123,42 @@ namespace LJCDataUtilityDAL
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Update/*'/>
     public void Update(DataKey dataObject, DbColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
-      EntryManager.WriteDataEntry(Manager.SQLStatement);
+      //EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
 
     // Creates a set of columns that match the supplied list.
-    /// <include path='items/Columns/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Columns/*'/>
     public DbColumns Columns(List<string> propertyNames)
     {
-      return Manager.DataDefinition.LJCGetColumns(propertyNames);
+      var retColumns = Manager.DataDefinition;
+      if (NetCommon.HasItems(propertyNames))
+      {
+        retColumns = Manager.DataDefinition.LJCGetColumns(propertyNames);
+      }
+      return retColumns;
     }
 
     // Creates a list of BaseDefinition property names.
-    /// <include path='items/PropertyNames/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/PropertyNames/*'/>
     public List<string> PropertyNames()
     {
       return Manager.GetPropertyNames();
     }
     #endregion
 
-    #region Load Methods
+    #region Custom Data Methods
 
     // Loads records with the supplied values.
-    /// <include path='items/LoadWithForeign/*' file='Doc/DataKeyManager.xml'/>
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='items/LoadWithForeign/*'/>
     public DataKeys LoadWithForeign(string tableName
       , List<string> propertyNames = null)
     {
@@ -157,44 +168,45 @@ namespace LJCDataUtilityDAL
     }
 
     // Loads records with the supplied values.
-    /// <include path='items/LoadWithParent/*' file='Doc/DataKeyManager.xml'/>
-    public DataKeys LoadWithParent(long parentID, long parentSiteID
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='items/LoadWithParent/*'/>
+    public DataKeys LoadWithParent(long parentID, short parentDbID
       , List<string> propertyNames = null)
     {
-      var keyColumns = ParentKey(parentID, parentSiteID);
+      var keyColumns = ParentKey(parentID, parentDbID);
       var retKeys = Load(keyColumns, propertyNames);
       return retKeys;
     }
 
     // Loads records with the supplied values.
-    /// <include path='items/LoadWithParentType/*' file='Doc/DataKeyManager.xml'/>
-    public DataKeys LoadWithParentType(long parentID, long parentSiteID
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='items/LoadWithParentType/*'/>
+    public DataKeys LoadWithParentType(long parentID, short parentDbID
       , int keyType, List<string> propertyNames = null)
     {
-      var keyColumns = ParentTypeKey(parentID, parentSiteID, keyType);
+      var keyColumns = ParentTypeKey(parentID, parentDbID, keyType);
       var retKeys = Load(keyColumns, propertyNames);
       return retKeys;
     }
 
     // Loads records with the supplied values.
-    /// <include path='items/LoadWithType/*' file='Doc/DataKeyManager.xml'/>
-    public DataKeys LoadWithType(long id, long siteID, short keyType
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='items/LoadWithType/*'/>
+    public DataKeys LoadWithType(long id, short dbID, short keyType
       , List<string> propertyNames = null)
     {
-      var keyColumns = TypeKey(id, siteID, keyType);
+      var keyColumns = TypeKey(id, dbID, keyType);
       var retKeys = Load(keyColumns, propertyNames);
       return retKeys;
     }
-    #endregion
-
-    #region The Retrieve Methods
 
     // Retrieves a record with the supplied value.
-    /// <include path='items/RetrieveWithIDs/*' file='Doc/DataKeyManager.xml'/>
-    public DataKey RetrieveWithIDs(long id, long siteID
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='items/RetrieveWithIDs/*'/>
+    public DataKey RetrieveWithID(long id, short dbID
       , List<string> propertyNames = null)
     {
-      var keyColumns = IDKeys(id, siteID);
+      var keyColumns = IDKeys(id, dbID);
       var joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
@@ -203,12 +215,13 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieves a record with the supplied values.
-    /// <include path='items/RetrieveWithParentType/*' file='Doc/DataKeyManager.xml'/>
-    public DataKey RetrieveWithParentType(long parentID, long parentSiteID
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='items/RetrieveWithParentType/*'/>
+    public DataKey RetrieveWithParentType(long parentID, short parentDbID
       , short keyType, List<string> propertyNames = null)
     {
       var joins = GetJoins();
-      var keyColumns = ParentTypeKey(parentID, parentSiteID, keyType);
+      var keyColumns = ParentTypeKey(parentID, parentDbID, keyType);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
       var retValue = ResultConverter.CreateData(dbResult);
@@ -216,12 +229,13 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieves a record with the supplied unique values.
-    /// <include path='items/RetrieveWithUnique/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DataKey RetrieveWithUnique(long parentID, string name
-      , List<string> propertyNames = null)
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='items/RetrieveWithUnique/*'/>
+    public DataKey RetrieveWithUnique(long parentID, short parentDbID
+      , string name, List<string> propertyNames = null)
     {
       var joins = GetJoins();
-      var keyColumns = UniqueKey(parentID, name);
+      var keyColumns = UniqueKey(parentID, parentDbID, name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
       var retValue = ResultConverter.CreateData(dbResult);
@@ -298,13 +312,14 @@ namespace LJCDataUtilityDAL
 
     // Gets the unique key columns.
     /// <include path='items/UniqueKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns UniqueKey(long parentID, string name)
+    public DbColumns UniqueKey(long parentID, short parentDbID, string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { DataKey.ColumnDataTableID, parentID },
-        { DataKey.ColumnName, (object)name }
+        { DataKey.ColumnDataTableSiteID, parentDbID },
+        { DataKey.ColumnName, (object)name },
       };
       return retValue;
     }

@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataTableManager.cs
 using LJCDataSiteDAL;
@@ -9,7 +9,9 @@ using System.Collections.Generic;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>Provides table specific data methods.</summary>
+  // Provides table specific data methods.
+  /// <include file='Doc/DataTableManager.xml'
+  ///  path='members/DataTableManager/*'/>
   public class DataTableManager
   {
     #region Constructors
@@ -25,7 +27,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    /// <include file='Doc/DataTableManager.xml'
     ///  path='members/ParamConstructor/*'/>
     public DataTableManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DataTable", string schemaName = null) : this()
@@ -46,14 +48,14 @@ namespace LJCDataUtilityDAL
       // Create the list of database assigned columns.
       Manager.SetDbAssignedColumns(new string[]
       {
-        DataUtilTable.ColumnID
+        DataUtilTable.ColumnID,
       });
 
       // Create the list of lookup column names.
       Manager.SetLookupColumns(new string[]
       {
         DataUtilTable.ColumnDataModuleID,
-        DataUtilTable.ColumnName
+        DataUtilTable.ColumnName,
       });
 
       var values = ValuesDataUtility.Instance;
@@ -64,7 +66,7 @@ namespace LJCDataUtilityDAL
 
     #region Data Methods
 
-    // Adds a record to the database.
+    // Adds a Data Record to the database.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/Add/*'/>
     public DataUtilTable Add(DataUtilTable dataObject
@@ -143,12 +145,12 @@ namespace LJCDataUtilityDAL
     // Retrieves a record with the supplied key values.
     /// <include file='Doc/DataTableManager.xml'
     ///  path='members/RetrieveWithID/*'/>
-    public DataUtilTable RetrieveWithID(long id, long dataSiteID
+    public DataUtilTable RetrieveWithID(long id, short dbID
       , List<string> propertyNames = null)
     {
       DataUtilTable retValue;
 
-      var keyColumns = IDKey(id, dataSiteID);
+      var keyColumns = IDKey(id, dbID);
       var joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
@@ -159,12 +161,12 @@ namespace LJCDataUtilityDAL
     // Retrieves a record with the supplied unique values.
     /// <include file='Doc/DataTableManager.xml'
     ///  path='members/RetrieveWithUnique/*'/>
-    public DataUtilTable RetrieveWithUnique(long parentID, long parentSiteID
+    public DataUtilTable RetrieveWithUnique(long parentID, short parentDbID
       , string name, List<string> propertyNames = null)
     {
       DataUtilTable retValue;
 
-      var keyColumns = UniqueKey(parentID, parentSiteID, name);
+      var keyColumns = UniqueKey(parentID, parentDbID, name);
       var joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
@@ -202,13 +204,13 @@ namespace LJCDataUtilityDAL
     // Gets the ID key columns.
     /// <include file='Doc/DataTableManager.xml'
     ///  path='members/IDKey/*'/>
-    public DbColumns IDKey(long id, long dataSiteID)
+    public DbColumns IDKey(long id, short dbID)
     {
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
         { DataUtilTable.ColumnID, id },
-        { DataUtilTable.ColumnDataSiteID, dataSiteID},
+        { DataUtilTable.ColumnDataSiteID, dbID},
       };
       return retValue;
     }
@@ -216,13 +218,13 @@ namespace LJCDataUtilityDAL
     // Gets the Parent ID key columns.
     /// <include file='Doc/DataTableManager.xml'
     ///  path='members/ParentKey/*'/>
-    public DbColumns ParentKey(long parentID, long parentSiteID)
+    public DbColumns ParentKey(long parentID, short parentDbID)
     {
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
         { DataUtilTable.ColumnDataModuleID, parentID },
-        { DataUtilTable.ColumnDataModuleSiteID, parentSiteID },
+        { DataUtilTable.ColumnDataModuleSiteID, parentDbID },
       };
       return retValue;
     }
@@ -230,13 +232,13 @@ namespace LJCDataUtilityDAL
     // Gets the Unique ID key columns.
     /// <include file='Doc/DataTableManager.xml'
     ///  path='members/UniqueKey/*'/>
-    public DbColumns UniqueKey(long parentID, long parentSiteID, string name)
+    public DbColumns UniqueKey(long parentID, short parentDbID, string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
         { DataUtilTable.ColumnDataModuleID, parentID },
-        { DataUtilTable.ColumnDataModuleSiteID, parentSiteID },
+        { DataUtilTable.ColumnDataModuleSiteID, parentDbID },
         { DataUtilTable.ColumnName, (object)name }
       };
       return retValue;
@@ -288,19 +290,27 @@ namespace LJCDataUtilityDAL
 
     #region Properties
 
-    /// <summary>Gets the affected record count.</summary>
+    // Gets the affected record count.
+    /// <include file='Doc/DataTableManager.xml'
+    ///  path='members/AffectedCount/*'/>
     public int AffectedCount
     {
       get { return Manager.AffectedCount; }
     }
 
-    /// <summary>Gets or sets the DataManager reference.</summary>
+    // Gets or sets the DataManager reference.
+    /// <include file='Doc/DataTableManager.xml'
+    ///  path='members/Manager/*'/>
     public DataManager Manager { get; set; }
 
-    /// <summary>Gets or sets the ResultConverter reference.</summary>
+    // Gets or sets the ResultConverter reference.
+    /// <include file='Doc/DataTableManager.xml'
+    ///  path='members/ResultConverter/*'/>
     public ResultConverter<DataUtilTable, DataTables> ResultConverter { get; set; }
 
-    /// <summary>Gets or sets the DataManager reference.</summary>
+    // Gets or sets the DataManager reference.
+    /// <include file='Doc/DataTableManager.xml'
+    ///  path='members/EntryManager/*'/>
     private DataEntryManager EntryManager { get; set; }
     #endregion
   }

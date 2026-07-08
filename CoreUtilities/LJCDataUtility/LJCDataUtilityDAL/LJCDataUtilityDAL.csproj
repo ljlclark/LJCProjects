@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Doc\DataColumns.xml" />
+    <Content Include="Data\Doc\TableKeys.xml" />
     <Content Include="Data\Doc\TableKey.xml" />
     <Content Include="Data\Doc\DataKey.xml" />
     <Content Include="Data\Doc\DataModules.xml" />
@@ -92,6 +93,7 @@
     <Content Include="Data2\Doc\DataTables2.xml" />
     <Content Include="Data2\Doc\DataTable2.xml" />
     <Content Include="Data\Doc\DataTable.xml" />
+    <Content Include="Manager\Doc\DataModuleManager.xml" />
     <Content Include="Manager\Doc\DataTableManager.xml" />
     <Content Include="Manager\Doc\DataColumnManager.xml" />
     <Content Include="Manager\Doc\DataKeyManager.xml" />

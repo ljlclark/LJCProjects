@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // TableKeys.cs
 using LJCNetCommon;
-using System;
 using System.Collections.Generic;
 
 namespace LJCDataUtilityDAL
@@ -21,7 +20,7 @@ namespace LJCDataUtilityDAL
 
     // The Copy constructor.
     /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public TableKeys(TableKeys items)
+    public TableKeys(TableKeys items) : this()
     {
       if (NetCommon.HasItems(items))
       {
@@ -36,7 +35,8 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public TableKeys Clone()
     {
       var retValue = new TableKeys();
@@ -48,7 +48,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems/*'/>
     public bool LJCHasItems()
     {
       bool retValue = false;
@@ -64,7 +65,8 @@ namespace LJCDataUtilityDAL
     #region Collection Data Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchUnique/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='Doc/TableKeys.xml'
+    ///  path='members/LJCGetWithName/*'/>
     public TableKey LJCGetWithName(string name)
     {
       TableKey retValue = null;
@@ -86,6 +88,8 @@ namespace LJCDataUtilityDAL
     #region Sort Methods
 
     /// <summary>Sort on Code.</summary>
+    /// <include file='Doc/TableKeys.xml'
+    ///  path='members/LJCSortName/*'/>
     public void LJCSortName()
     {
       if (Count != mPrevCount)
@@ -98,15 +102,12 @@ namespace LJCDataUtilityDAL
 
     #region Properties
 
-    // The item for the specified name.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="name"></param>
-    /// <returns></returns>
+    // The item for the supplied name.
+    /// <include file='Doc/TableKeys.xml'
+    ///  path='members/UniqueIndexer/*'/>
     public TableKey this[string name]
     {
-      get { return LJCGetWithName(name); }
+      get => LJCGetWithName(name);
     }
     #endregion
 

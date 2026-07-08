@@ -1,7 +1,6 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataKeys.cs
-using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
@@ -9,17 +8,17 @@ using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>Represents a collection of DataKey objects.</summary>
-  /// <remarks>
-  /// <para>-- Library Level Remarks</para>
-  /// </remarks>
+  // Represents a collection of DataKey objects.
+  /// <include file='Doc/DataKeys.xml'
+  ///  path='members/DataTables/*'/>
   [XmlRoot("DataKeys")]
   public class DataKeys : List<DataKey>
   {
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCDeserialize/*'/>
     public static DataKeys LJCDeserialize(string fileSpec = null)
     {
       DataKeys retValue;
@@ -45,7 +44,8 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public DataKeys()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.DataKeys");
@@ -53,7 +53,8 @@ namespace LJCDataUtilityDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/CopyConstructor/*'/>
     public DataKeys(DataKeys items)
     {
       if (NetCommon.HasItems(items))
@@ -69,15 +70,21 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public DataKeys Clone()
     {
-      var retValue = MemberwiseClone() as DataKeys;
+      var retValue = new DataKeys();
+      foreach (DataKey dataKey in this)
+      {
+        retValue.Add(dataKey.Clone());
+      }
       return retValue;
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCGetCollection/*'/>
     public DataKeys LJCGetCollection(List<DataKey> list)
     {
       DataKeys retValue = null;
@@ -94,7 +101,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems/*'/>
     public bool LJCHasItems()
     {
       bool retValue = false;
@@ -107,7 +115,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCSerialize/*'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -121,28 +130,39 @@ namespace LJCDataUtilityDAL
     #region Collection Data Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='Doc/DataKeys.xml'/>
-    public DataKey Add(int id, int dataTableID, string name)
+    /// <include file='Doc/DataKeys.xml'
+    ///  path='items/Add/*'/>
+    public DataKey Add(long dbID, long dataTableID, short dataTableDbID
+      , string name)
     {
       DataKey retValue;
 
       string message = "";
-      if (id <= 0)
+      if (dbID <= 0)
       {
-        message += "id must be greater than zero.\r\n";
+        message += "dbID must be greater than zero.\r\n";
+      }
+      if (dataTableID <= 0)
+      {
+        message += "dataTableID must be greater than zero.\r\n";
+      }
+      if (dataTableDbID <= 0)
+      {
+        message += "dataTableDbID must be greater than zero.\r\n";
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
       NetString.ThrowArgError(mArgError.ToString());
 
-      retValue = LJCGetWithUnique(dataTableID, name);
+      retValue = LJCGetWithUnique(dataTableID, dataTableDbID, name);
       if (null == retValue)
       {
         retValue = new DataKey()
         {
-          ID = id,
+          DataSiteID = dbID,
           DataTableID = dataTableID,
-          Name = name
+          DataTableSiteID = dataTableDbID,
+          Name = name,
         };
         Add(retValue);
       }
@@ -150,15 +170,17 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataKey LJCGetWithID(int id)
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCGetWithID/*'/>
+    public DataKey LJCGetWithID(long id, short dbID)
     {
       DataKey retValue = null;
 
       LJCSortID();
       DataKey searchItem = new DataKey()
       {
-        ID = id
+        ID = id,
+        DataSiteID = dbID,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -169,8 +191,10 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection element with unique values.
-    /// <include path='items/LJCSearchUnique/*' file='Doc/DataKeys.xml'/>
-    public DataKey LJCGetWithUnique(int dataTableID, string name)
+    /// <include file='Doc/DataKeys.xml'
+    ///  path='members/LJCGetWithUnique/*'/>
+    public DataKey LJCGetWithUnique(long dataTableID, short dataTableDbID
+      , string name)
     {
       DataKey retValue = null;
 
@@ -179,7 +203,8 @@ namespace LJCDataUtilityDAL
       DataKey searchItem = new DataKey()
       {
         DataTableID = dataTableID,
-        Name = name
+        DataTableSiteID = dataTableDbID,
+        Name = name,
       };
       int index = BinarySearch(searchItem, comparer);
       if (index > -1)
@@ -190,10 +215,12 @@ namespace LJCDataUtilityDAL
     }
 
     // Removes an item by name.
-    /// <include path='items/LJCRemove/*' file='Doc/DataKeys.xml'/>
-    public void LJCRemove(int dataTableID, string name)
+    /// <include file='Doc/DataKeys.xml'
+    ///  path='members/LJCRemove/*'/>
+    public void LJCRemove(long dataTableID, short dataTableDbID, string name)
     {
       DataKey item = Find(x => x.DataTableID == dataTableID
+        && x.DataTableSiteID == dataTableDbID
         && x.Name == name);
       if (item != null)
       {
@@ -204,7 +231,9 @@ namespace LJCDataUtilityDAL
 
     #region Sort Methods
 
-    /// <summary>Sort on ID.</summary>
+    // Sort on ID.
+    /// <include file='Doc/DataKeys.xml'
+    ///  path='members/LJCSortID/*'/>
     public void LJCSortID()
     {
       if (Count != mPrevCount
@@ -216,8 +245,9 @@ namespace LJCDataUtilityDAL
       }
     }
 
-    /// <summary>Sort on Unique values.</summary>
-    /// <param name="comparer">The Comparer object.</param>
+    // Sort on Unique values.
+    /// <include file='Doc/DataKeys.xml'
+    ///  path='members/LJCSortUnique/*'/>
     public void LJCSortUnique(DataKeyUniqueComparer comparer)
     {
       if (Count != mPrevCount
@@ -232,17 +262,20 @@ namespace LJCDataUtilityDAL
 
     #region Properties
 
-    /// <summary>Gets the Default File Name.</summary>
+    // Gets the Default File Name.
+    /// <include file='Doc/DataKeys.xml'
+    ///  path='members/LJCDefaultFileName/*'/>
     public static string LJCDefaultFileName
     {
       get { return "DataKeys.xml"; }
     }
 
     // The item for the supplied name.
-    /// <include path='items/NameIndexer/*' file='Doc/DataKeys.xml'/>
-    public DataKey this[int dataTableID, string name]
+    /// <include file='Doc/DataKeys.xml'
+    ///  path='members/UniqueIndexer/*'/>
+    public DataKey this[int dataTableID, short dataTableDbID, string name]
     {
-      get { return LJCGetWithUnique(dataTableID, name); }
+      get { return LJCGetWithUnique(dataTableID, dataTableDbID, name); }
     }
     #endregion
 

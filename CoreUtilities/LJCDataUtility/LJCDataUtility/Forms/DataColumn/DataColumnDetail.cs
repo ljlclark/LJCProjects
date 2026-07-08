@@ -68,7 +68,7 @@ namespace LJCDataUtility
         Text += " - Edit";
         LJCIsUpdate = true;
         var manager = LJCManagers.DataColumnManager;
-        mOriginalRecord = manager.RetrieveWithID(LJCID);
+        mOriginalRecord = manager.RetrieveWithID(LJCID, LJCDbID);
         GetValues(mOriginalRecord);
       }
       else
@@ -118,9 +118,9 @@ namespace LJCDataUtility
         AllowNullCheck.Checked = data.AllowNull;
 
         // Reference key values.
-        LJCSiteID = data.DataSiteID;
+        LJCDbID = data.DataSiteID;
         LJCParentID = data.DataTableID;
-        LJCParentSiteID = data.DataTableSiteID;
+        LJCParentDbID = data.DataTableSiteID;
       }
     }
 
@@ -145,9 +145,9 @@ namespace LJCDataUtility
 
       // Get Reference key values.
       retData.ID = LJCID;
-      retData.DataSiteID = LJCSiteID;
+      retData.DataSiteID = LJCDbID;
       retData.DataTableID = LJCParentID;
-      retData.DataTableSiteID = LJCParentSiteID;
+      retData.DataTableSiteID = LJCParentDbID;
       return retData;
     }
 
@@ -190,7 +190,7 @@ namespace LJCDataUtility
       {
         if (LJCIsUpdate)
         {
-          var keyColumns = manager.IDKey(LJCID);
+          var keyColumns = manager.IDKey(LJCID, LJCDbID);
           LJCRecord.ID = 0;
           manager.Update(LJCRecord, keyColumns);
           ResetValues(LJCRecord);
@@ -200,7 +200,7 @@ namespace LJCDataUtility
         else
         {
           LJCRecord.ID = 0;
-          LJCRecord.DataSiteID = mSettings.SiteID;
+          LJCRecord.DataSiteID = (short)mSettings.SiteID;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
           if (addedRecord != null)
@@ -340,10 +340,8 @@ namespace LJCDataUtility
     #region Control Event Methods
 
     // Sets the Identity control default values.
-    private void IdentityEnable(bool enable)
+    private void IdentityEnable()
     {
-      //IdentityStartText.Enabled = enable;
-      //IdentityIncrementText.Enabled = enable;
       AllowNullCheck.Enabled = false;
       if (false == IdentityStartText.Enabled
         || false == IdentityIncrementText.Enabled)
@@ -406,7 +404,7 @@ namespace LJCDataUtility
         {
           SetComboIndex("bigint");
         }
-        IdentityEnable(false);
+        IdentityEnable();
       }
 
       if (!isTypeSet)
@@ -434,13 +432,13 @@ namespace LJCDataUtility
       var identityStart = IdentityStartText.Text.Trim();
       if (identityStart.StartsWith("-"))
       {
-        IdentityEnable(false);
+        IdentityEnable();
         AllowNullCheck.Checked = false;
         AllowNullCheck.Enabled = true;
       }
       else
       {
-        IdentityEnable(true);
+        IdentityEnable();
         IdentityIncrementText.Text = "1";
         AllowNullCheck.Checked = false;
         AllowNullCheck.Enabled = false;
@@ -458,7 +456,7 @@ namespace LJCDataUtility
         || "nvarchar" == typeName
         || "varchar" == typeName)
       {
-        IdentityEnable(false);
+        IdentityEnable();
         var maxLength = MaxLengthText.Text.Trim();
         if ("-1" == maxLength
           || !NetString.HasValue(maxLength))
@@ -503,7 +501,7 @@ namespace LJCDataUtility
     internal long LJCID { get; set; }
 
     // Gets or sets the primary ID value.
-    internal long LJCSiteID { get; set; }
+    internal short LJCDbID { get; set; }
 
     // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
@@ -518,7 +516,7 @@ namespace LJCDataUtility
     internal long LJCParentID { get; set; }
 
     // Gets or sets the ParentSite ID value.
-    internal long LJCParentSiteID { get; set; }
+    internal short LJCParentDbID { get; set; }
 
     // Gets or sets the LJCParentName value.
     internal string LJCParentName
