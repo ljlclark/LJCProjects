@@ -55,12 +55,37 @@ namespace LJCDataUtilityDAL
       Manager.SetLookupColumns(new string[]
       {
         DataUtilTable.ColumnDataModuleID,
+        DataUtilTable.ColumnDataModuleSiteID,
         DataUtilTable.ColumnName,
       });
 
       var values = ValuesDataUtility.Instance;
       var ManagersDataSite = values.SiteManagers;
       EntryManager = ManagersDataSite.DataEntryManager;
+    }
+    #endregion
+
+    #region Manager Methods
+
+    // Creates a collection of columns that match the supplied list.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Columns/*'/>
+    public DbColumns Columns(List<string> propertyNames = null)
+    {
+      var retColumns = Manager.DataDefinition;
+      if (NetCommon.HasItems(propertyNames))
+      {
+        retColumns = Manager.DataDefinition.LJCGetColumns(propertyNames);
+      }
+      return retColumns;
+    }
+
+    // Creates a list of BaseDefinition property names.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/PropertyNames/*'/>
+    public List<string> PropertyNames()
+    {
+      return Manager.GetPropertyNames();
     }
     #endregion
 
@@ -175,30 +200,6 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Info Methods
-
-    // Creates a collection of columns that match the supplied list.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='members/Columns/*'/>
-    public DbColumns Columns(List<string> propertyNames = null)
-    {
-      var retColumns = Manager.DataDefinition;
-      if (NetCommon.HasItems(propertyNames))
-      {
-        retColumns = Manager.DataDefinition.LJCGetColumns(propertyNames);
-      }
-      return retColumns;
-    }
-
-    // Creates a list of BaseDefinition property names.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='members/PropertyNames/*'/>
-    public List<string> PropertyNames()
-    {
-      return Manager.GetPropertyNames();
-    }
-    #endregion
-
     #region Get Key Methods
 
     // Gets the ID key columns.
@@ -239,7 +240,7 @@ namespace LJCDataUtilityDAL
       {
         { DataUtilTable.ColumnDataModuleID, parentID },
         { DataUtilTable.ColumnDataModuleSiteID, parentDbID },
-        { DataUtilTable.ColumnName, (object)name }
+        { DataUtilTable.ColumnName, (object)name },
       };
       return retValue;
     }
@@ -295,7 +296,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/AffectedCount/*'/>
     public int AffectedCount
     {
-      get { return Manager.AffectedCount; }
+      get => Manager.AffectedCount;
     }
 
     // Gets or sets the DataManager reference.
@@ -308,7 +309,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/ResultConverter/*'/>
     public ResultConverter<DataUtilTable, DataTables> ResultConverter { get; set; }
 
-    // Gets or sets the DataManager reference.
+    // Gets or sets the EntryManager reference.
     /// <include file='Doc/DataTableManager.xml'
     ///  path='members/EntryManager/*'/>
     private DataEntryManager EntryManager { get; set; }

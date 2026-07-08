@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // TableKeyManager.cs
 using LJCDBClientLib;
@@ -15,23 +15,29 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Constructor/*'/>
+    public TableKeyManager()
+    {
+      Manager = null;
+      ResultConverter = new ResultConverter<TableKey, TableKeys>();
+    }
+
+    // Initializes an object instance.
     /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public TableKeyManager(DbServiceRef dbServiceRef, string dataConfigName
-      , string tableName = "", string schemaName = null)
+      , string tableName = "", string schemaName = null) : this()
     {
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
-      ResultConverter = new ResultConverter<TableKey, TableKeys>();
     }
     #endregion
 
     #region Data Methods
 
     // Retrieves a collection of data records.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/LoadForeignKeys/*'/>
     public TableKeys LoadForeignKeys()
     {
       //TableKeys retValue;
@@ -62,12 +68,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieves a collection of Primary key records.
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="keyType"></param>
-    /// <param name="constraintName"></param>
-    /// <returns></returns>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/LoadTableKeys/*'/>
     public TableKeys LoadTableKeys(string keyType = "PRIMARY KEY"
       , string constraintName = null)
     {
@@ -77,36 +79,38 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Create the sp_GetForeignKeys procedure.
-    private void CreateForeignKeysProcedure()
-    {
-      var sql = "DROP PROCEDURE IF EXISTS dbo.sp_GetForeignKeys;";
-      Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
+    //// Create the sp_GetForeignKeys procedure.
+    //private void CreateForeignKeysProcedure()
+    //{
+    //  var sql = "DROP PROCEDURE IF EXISTS dbo.sp_GetForeignKeys;";
+    //  Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
 
-      sql = ForeignKeysProcedureSql(Manager.TableName);
-      try
-      {
-        Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
-      }
-      catch (Exception e)
-      {
-        var isHandled = false;
-        if (e is SqlException)
-        {
-          // ErrorCode -2146232060
-          if (e.Message.StartsWith("There is already an object"))
-          {
-            isHandled = true;
-          }
-        }
-        if (!isHandled)
-        {
-          throw e;
-        }
-      }
-    }
+    //  sql = ForeignKeysProcedureSql(Manager.TableName);
+    //  try
+    //  {
+    //    Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
+    //  }
+    //  catch (Exception e)
+    //  {
+    //    var isHandled = false;
+    //    if (e is SqlException)
+    //    {
+    //      // ErrorCode -2146232060
+    //      if (e.Message.StartsWith("There is already an object"))
+    //      {
+    //        isHandled = true;
+    //      }
+    //    }
+    //    if (!isHandled)
+    //    {
+    //      throw e;
+    //    }
+    //  }
+    //}
 
     // Gets the table key values SQL.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/TableKeySql/*'/>
     private string TableKeySql(string tableName
       , string keyType = "PRIMARY KEY", string uniqueConstraintName = null)
     {
@@ -139,51 +143,57 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Gets the sp_GetForeignKeys procedure SQL.
-    private string ForeignKeysProcedureSql(string tableName)
-    {
-      TextBuilder b = new TextBuilder();
-      b.Line("CREATE PROCEDURE[dbo].[sp_GetForeignKeys]");
-      b.Line("  @TableName nvarchar(20)");
-      b.Line("AS");
-      b.Line("BEGIN");
-      b.Line("SELECT");
-      b.Line(" tc.[TABLE_CATALOG] as DBName, ");
-      b.Line(" tc.[TABLE_SCHEMA] as TableSchema, ");
-      b.Line(" tc.[TABLE_NAME] as TableName, ");
-      b.Line(" tc.[CONSTRAINT_Name] as ConstraintName, ");
-      b.Line(" tc.[CONSTRAINT_TYPE] as KeyType, ");
-      b.Line(" ccu.[COLUMN_NAME] as ColumnName, ");
-      b.Line(" kcu.[ORDINAL_POSITION] as OrdinalPosition, ");
-      b.Line(" rc.[UPDATE_RULE] as UpdateRule, ");
-      b.Line(" rc.[DELETE_RULE] as DeleteRule ");
-      b.Line("from [INFORMATION_SCHEMA].[TABLE_CONSTRAINTS] as tc ");
-      b.Line("left join[INFORMATION_SCHEMA].[CONSTRAINT_COLUMN_USAGE] as ccu ");
-      b.Line(" on tc.[CONSTRAINT_NAME] = ccu.[CONSTRAINT_NAME] ");
-      b.Line("left join[INFORMATION_SCHEMA].[KEY_COLUMN_USAGE] as kcu ");
-      b.Line(" on tc.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
-      b.Line("left join[INFORMATION_SCHEMA].[REFERENTIAL_CONSTRAINTS] as rc ");
-      b.Line(" on ccu.[CONSTRAINT_NAME] = rc.[CONSTRAINT_NAME] ");
-      b.Line($"where tc.[TABLE_NAME] = '{tableName}'");
-      b.Line($" and tc.[CONSTRAINT_TYPE] = 'FOREIGN KEY'");
-      b.Line("END");
-      var retValue = b.ToString();
-      return retValue;
-    }
+    //// Gets the sp_GetForeignKeys procedure SQL.
+    //private string ForeignKeysProcedureSql(string tableName)
+    //{
+    //  TextBuilder b = new TextBuilder();
+    //  b.Line("CREATE PROCEDURE[dbo].[sp_GetForeignKeys]");
+    //  b.Line("  @TableName nvarchar(20)");
+    //  b.Line("AS");
+    //  b.Line("BEGIN");
+    //  b.Line("SELECT");
+    //  b.Line(" tc.[TABLE_CATALOG] as DBName, ");
+    //  b.Line(" tc.[TABLE_SCHEMA] as TableSchema, ");
+    //  b.Line(" tc.[TABLE_NAME] as TableName, ");
+    //  b.Line(" tc.[CONSTRAINT_Name] as ConstraintName, ");
+    //  b.Line(" tc.[CONSTRAINT_TYPE] as KeyType, ");
+    //  b.Line(" ccu.[COLUMN_NAME] as ColumnName, ");
+    //  b.Line(" kcu.[ORDINAL_POSITION] as OrdinalPosition, ");
+    //  b.Line(" rc.[UPDATE_RULE] as UpdateRule, ");
+    //  b.Line(" rc.[DELETE_RULE] as DeleteRule ");
+    //  b.Line("from [INFORMATION_SCHEMA].[TABLE_CONSTRAINTS] as tc ");
+    //  b.Line("left join[INFORMATION_SCHEMA].[CONSTRAINT_COLUMN_USAGE] as ccu ");
+    //  b.Line(" on tc.[CONSTRAINT_NAME] = ccu.[CONSTRAINT_NAME] ");
+    //  b.Line("left join[INFORMATION_SCHEMA].[KEY_COLUMN_USAGE] as kcu ");
+    //  b.Line(" on tc.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
+    //  b.Line("left join[INFORMATION_SCHEMA].[REFERENTIAL_CONSTRAINTS] as rc ");
+    //  b.Line(" on ccu.[CONSTRAINT_NAME] = rc.[CONSTRAINT_NAME] ");
+    //  b.Line($"where tc.[TABLE_NAME] = '{tableName}'");
+    //  b.Line($" and tc.[CONSTRAINT_TYPE] = 'FOREIGN KEY'");
+    //  b.Line("END");
+    //  var retValue = b.ToString();
+    //  return retValue;
+    //}
     #endregion
 
     #region Properties
 
-    /// <summary>Gets the affected record count.</summary>
+    // Gets the affected record count.
+    /// <include file='Doc/TableKeyManager.xml'
+    ///  path='members/AffectedCount/*'/>
     public int AffectedCount
     {
-      get { return Manager.AffectedCount; }
+      get => Manager.AffectedCount;
     }
 
-    /// <summary>Gets or sets the DataManager reference.</summary>
+    // Gets or sets the DataManager reference.
+    /// <include file='Doc/TableKeyManager.xml'
+    ///  path='members/Manager/*'/>
     public DataManager Manager { get; set; }
 
-    /// <summary>Gets or sets the ResultConverter reference.</summary>
+    // Gets or sets the ResultConverter reference.
+    /// <include file='Doc/TableKeyManager.xml'
+    ///  path='members/ResultConverter/*'/>
     public ResultConverter<TableKey, TableKeys> ResultConverter { get; set; }
     #endregion
   }

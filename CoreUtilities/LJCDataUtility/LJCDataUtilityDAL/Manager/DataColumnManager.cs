@@ -17,14 +17,23 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Constructor/*'/>
+    public DataColumnManager()
+    {
+      Manager = null;
+      ResultConverter = new ResultConverter<DataUtilColumn, DataColumns>();
+      EntryManager = null;
+    }
+
+    // Initializes an object instance.
     /// <include file='Doc/DataColumnManager.xml'
     ///  path='members/ParamConstructor/*'/>
     public DataColumnManager(DbServiceRef dbServiceRef, string dataConfigName
-      , string tableName = "DataColumn", string schemaName = null)
+      , string tableName = "DataColumn", string schemaName = null) : this()
     {
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
-      ResultConverter = new ResultConverter<DataUtilColumn, DataColumns>();
 
       // Map table names with property names or captions
       // that differ from the column names.
@@ -43,12 +52,32 @@ namespace LJCDataUtilityDAL
       Manager.SetLookupColumns(new string[]
       {
         DataUtilColumn.ColumnDataTableID,
+        DataUtilColumn.ColumnDataTableSiteID,
         DataUtilColumn.ColumnName,
       });
 
       var values = ValuesDataUtility.Instance;
       var ManagersDataSite = values.SiteManagers;
       EntryManager = ManagersDataSite.DataEntryManager;
+    }
+    #endregion
+
+    #region Manager Methods
+
+    // Creates a set of columns that match the supplied list.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Columns/*'/>
+    public DbColumns Columns(List<string> propertyNames)
+    {
+      return Manager.DataDefinition.LJCGetColumns(propertyNames);
+    }
+
+    // Creates a list of BaseDefinition property names.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/PropertyNames/*'/>
+    public List<string> PropertyNames()
+    {
+      return Manager.GetPropertyNames();
     }
     #endregion
 
@@ -119,22 +148,6 @@ namespace LJCDataUtilityDAL
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
       //EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
-
-    // Creates a set of columns that match the supplied list.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='members/Columns/*'/>
-    public DbColumns Columns(List<string> propertyNames)
-    {
-      return Manager.DataDefinition.LJCGetColumns(propertyNames);
-    }
-
-    // Creates a list of BaseDefinition property names.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='members/PropertyNames/*'/>
-    public List<string> PropertyNames()
-    {
-      return Manager.GetPropertyNames();
-    }
     #endregion
 
     #region Custom Data Methods
@@ -175,8 +188,6 @@ namespace LJCDataUtilityDAL
     ///  path='members/IDKey/*'/>
     public DbColumns IDKey(long id, short dbID)
     {
-      // Add(columnName, propertyName = null, renameAs = null
-      //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
@@ -191,6 +202,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/ParentKey/*'/>
     public DbColumns ParentKey(long parentID, short parentDbID)
     {
+      // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
         { DataUtilColumn.ColumnDataTableID, parentID },

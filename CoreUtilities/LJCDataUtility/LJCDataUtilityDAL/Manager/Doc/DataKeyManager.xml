@@ -72,7 +72,7 @@
       Gets the primary key columns.
     </summary>
     <param name="id">The table ID.</param>
-    <param name="siteID">The database ID.</param>
+    <param name="dbID">The database ID.</param>
     <returns>The primary keys.</returns>
   </IDKeys>
   <ParentKey>
@@ -80,7 +80,7 @@
       Gets the parent key columns.
     </summary>
     <param name="parentID">The parent (Table) ID.</param>
-    <param name="parentSiteID">The parent (Table) database ID.</param>
+    <param name="parentDbID">The parent (Table) database ID.</param>
     <returns>The parent (Table) keys.</returns>
   </ParentKey>
   <ParentTypeKey>
@@ -88,7 +88,7 @@
       Gets the parent by type key columns.
     </summary>
     <param name="parentID">The parent table ID.</param>
-    <param name="parentSiteID">The parent site ID.</param>
+    <param name="parentDbID">The parent site ID.</param>
     <param name="keyType">The key type name.</param>
     <returns>The type keys object.</returns>
   </ParentTypeKey>
@@ -97,7 +97,7 @@
       Gets the type key columns.
     </summary>
     <param name="id">The table ID.</param>
-    <param name="siteID">The database ID.</param>
+    <param name="dbID">The database ID.</param>
     <param name="keyType">The key type name.</param>
     <returns>The type keys object.</returns>
   </TypeKey>

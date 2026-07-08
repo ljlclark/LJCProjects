@@ -16,15 +16,24 @@ namespace LJCDataUtilityDAL
   {
     #region Constructors
 
+    // Initializes an object instance.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Constructor/*'/>
+    public DataKeyManager()
+    {
+      Manager = null;
+      ResultConverter = new ResultConverter<DataKey, DataKeys>();
+      EntryManager = null;
+    }
+
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/DataKeyManager.xml'
     ///  path='members/ParamConstructor/*'/>
     public DataKeyManager(DbServiceRef dbServiceRef, string dataConfigName
-      , string tableName = "DataKey", string schemaName = null)
+      , string tableName = "DataKey", string schemaName = null) : this()
     {
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
-      ResultConverter = new ResultConverter<DataKey, DataKeys>();
 
       // Map table names with property names or captions
       // that differ from the column names.
@@ -53,6 +62,30 @@ namespace LJCDataUtilityDAL
       var values = ValuesDataUtility.Instance;
       var ManagersDataSite = values.SiteManagers;
       EntryManager = ManagersDataSite.DataEntryManager;
+    }
+    #endregion
+
+    #region Manager Methods
+
+    // Creates a set of columns that match the supplied list.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Columns/*'/>
+    public DbColumns Columns(List<string> propertyNames)
+    {
+      var retColumns = Manager.DataDefinition;
+      if (NetCommon.HasItems(propertyNames))
+      {
+        retColumns = Manager.DataDefinition.LJCGetColumns(propertyNames);
+      }
+      return retColumns;
+    }
+
+    // Creates a list of BaseDefinition property names.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/PropertyNames/*'/>
+    public List<string> PropertyNames()
+    {
+      return Manager.GetPropertyNames();
     }
     #endregion
 
@@ -131,27 +164,6 @@ namespace LJCDataUtilityDAL
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
       //EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
-
-    // Creates a set of columns that match the supplied list.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='members/Columns/*'/>
-    public DbColumns Columns(List<string> propertyNames)
-    {
-      var retColumns = Manager.DataDefinition;
-      if (NetCommon.HasItems(propertyNames))
-      {
-        retColumns = Manager.DataDefinition.LJCGetColumns(propertyNames);
-      }
-      return retColumns;
-    }
-
-    // Creates a list of BaseDefinition property names.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='members/PropertyNames/*'/>
-    public List<string> PropertyNames()
-    {
-      return Manager.GetPropertyNames();
-    }
     #endregion
 
     #region Custom Data Methods
@@ -220,8 +232,8 @@ namespace LJCDataUtilityDAL
     public DataKey RetrieveWithParentType(long parentID, short parentDbID
       , short keyType, List<string> propertyNames = null)
     {
-      var joins = GetJoins();
       var keyColumns = ParentTypeKey(parentID, parentDbID, keyType);
+      var joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
       var retValue = ResultConverter.CreateData(dbResult);
@@ -234,8 +246,8 @@ namespace LJCDataUtilityDAL
     public DataKey RetrieveWithUnique(long parentID, short parentDbID
       , string name, List<string> propertyNames = null)
     {
-      var joins = GetJoins();
       var keyColumns = UniqueKey(parentID, parentDbID, name);
+      var joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
       var retValue = ResultConverter.CreateData(dbResult);
@@ -245,73 +257,78 @@ namespace LJCDataUtilityDAL
 
     #region GetKey Methods
 
-    /// Gets the foreign key columns.
+    // Gets the foreign key columns.
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='members/ForeignKey/*'/>
     public DbColumns ForeignKey(string targetTableName)
     {
       var foreignKeyType = 3;
       var retValue = new DbColumns()
       {
         { DataKey.ColumnTargetTableName, (object)targetTableName },
-        { DataKey.ColumnKeyType, foreignKeyType }
+        { DataKey.ColumnKeyType, foreignKeyType },
       };
       return retValue;
     }
 
     // Gets the primary key columns.
-    /// <include path='items/IDKeys/*' file='Doc/DataKeyManager.xml'/>
-    public DbColumns IDKeys(long id, long siteID)
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='items/IDKeys/*'/>
+    public DbColumns IDKeys(long id, short dbID)
     {
-      // Add(columnName, propertyName = null, renameAs = null
-      //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
         { DataKey.ColumnID, id },
-        { DataKey.ColumnDataSiteID, siteID }
+        { DataKey.ColumnDataSiteID, dbID },
       };
       return retValue;
     }
 
     // Gets the parent key columns.
-    /// <include path='items/ParentKey/*' file='Doc/DataKeyManager.xml'/>
-    public DbColumns ParentKey(long parentID, long parentSiteID)
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='items/ParentKey/*'/>
+    public DbColumns ParentKey(long parentID, short parentDbID)
     {
       var retValue = new DbColumns()
       {
         { DataKey.ColumnDataTableID, parentID },
-        { DataKey.ColumnDataTableSiteID, parentSiteID }
+        { DataKey.ColumnDataTableSiteID, parentDbID },
       };
       return retValue;
     }
 
     // Gets the parent by type key columns.
-    /// <include path='items/ParentTypeKey/*' file='Doc/DataKeyManager.xml'/>
-    public DbColumns ParentTypeKey(long parentID, long parentSiteID, int keyType)
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='items/ParentTypeKey/*'/>
+    public DbColumns ParentTypeKey(long parentID, short parentDbID, int keyType)
     {
       var retValue = new DbColumns()
       {
         { DataKey.ColumnDataTableID, parentID },
-        { DataKey.ColumnDataTableSiteID, parentSiteID },
-        { DataKey.ColumnKeyType, keyType }
+        { DataKey.ColumnDataTableSiteID, parentDbID },
+        { DataKey.ColumnKeyType, keyType },
       };
       return retValue;
     }
 
     // Gets the parent by type key columns.
-    /// <include path='items/TypeKey/*' file='Doc/DataKeyManager.xml'/>
-    public DbColumns TypeKey(long id, long siteID, int keyType)
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='items/TypeKey/*'/>
+    public DbColumns TypeKey(long id, short dbID, int keyType)
     {
       var retValue = new DbColumns()
       {
         { DataKey.ColumnDataTableID, id },
-        { DataKey.ColumnDataTableSiteID, siteID },
-        { DataKey.ColumnKeyType, keyType }
+        { DataKey.ColumnDataTableSiteID, dbID },
+        { DataKey.ColumnKeyType, keyType },
       };
       return retValue;
     }
 
     // Gets the unique key columns.
-    /// <include path='items/UniqueKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='items/UniqueKey/*'/>
     public DbColumns UniqueKey(long parentID, short parentDbID, string name)
     {
       // Needs cast for string to select the correct Add overload.
@@ -369,19 +386,27 @@ namespace LJCDataUtilityDAL
 
     #region Properties
 
-    /// <summary>Gets the affected record count.</summary>
+    // Gets the affected record count.
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='members/AffectedCount/*'/>
     public int AffectedCount
     {
-      get { return Manager.AffectedCount; }
+      get => Manager.AffectedCount;
     }
 
-    /// <summary>Gets or sets the DataManager reference.</summary>
+    // Gets or sets the DataManager reference.
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='members/Manager/*'/>
     public DataManager Manager { get; set; }
 
-    /// <summary>Gets or sets the ResultConverter reference.</summary>
+    // Gets or sets the ResultConverter reference.
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='members/ResultConverter/*'/>
     public ResultConverter<DataKey, DataKeys> ResultConverter { get; set; }
 
-    /// <summary>Gets or sets the DataManager reference.</summary>
+    // Gets or sets the EntryManager reference.
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='members/EntryManager/*'/>
     private DataEntryManager EntryManager { get; set; }
     #endregion
   }

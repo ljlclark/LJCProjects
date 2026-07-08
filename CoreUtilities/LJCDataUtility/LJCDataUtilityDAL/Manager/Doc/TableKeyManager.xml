@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataTableManager.xml -->
+<members>
+  <RetrieveWithID>
+    <summary>
+      Retrieves a record with the supplied key values.
+    </summary>
+    <param name="id">The primary key.</param>
+    <param name="dbID">The primary and site foreign key.</param>
+    <param name="propertyNames">The retrieved property names.</param>
+  </RetrieveWithID>
+  <RetrieveWithUnique>
+    <summary>
+      Retrieves a record with the supplied unique values.
+    </summary>
+    <param name="parentID">The parent foreign key.</param>
+    <param name="parentDbID">The parent foreign and site foreign key.</param>
+    <param name="name">The name value.</param>
+    <param name="propertyNames">The retrieved property names.</param>
+  </RetrieveWithUnique>
+  <IDKey>
+    <summary>
+      Gets the ID key columns.
+    </summary>
+    <param name="id">The primary key.</param>
+    <param name="dbID">The primary and site foreign key.</param>
+  </IDKey>
+  <ParentKey>
+    <summary>
+      Gets the Parent ID key columns.
+    </summary>
+    <param name="parentID">The parent foreign key.</param>
+    <param name="parentDbID">The parent foreign and site foreign key.</param>
+  </ParentKey>
+  <UniqueKey>
+    <summary>
+      Gets the Unique ID key columns.
+    </summary>
+    <param name="parentID">The parent foreign key.</param>
+    <param name="parentDbID">The parent foreign and site foreign key.</param>
+    <param name="name">The name value.</param>
+  </UniqueKey>
+</members>

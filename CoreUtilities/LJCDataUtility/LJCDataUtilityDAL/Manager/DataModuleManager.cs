@@ -10,21 +10,30 @@ using System.Collections.Generic;
 namespace LJCDataUtilityDAL
 {
   // Provides table specific data methods.
-  /// <include file='Doc/DataTableManager.xml'
+  /// <include file='Doc/DataModuleManager.xml'
   ///  path='members/DataModuleManager/*'/>
   public class DataModuleManager
   {
     #region Constructors
 
+    // Initializes an object instance.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Constructor/*'/>
+    public DataModuleManager()
+    {
+      Manager = null;
+      ResultConverter = new ResultConverter<DataModule, DataModules>();
+      EntryManager = null;
+    }
+
     // Initializes an object instance with the supplied values.
-    /// <include file='Doc/DataTableManager.xml'
+    /// <include file='Doc/DataModuleManager.xml'
     ///  path='members/ParamConstructor/*'/>
     public DataModuleManager(DbServiceRef dbServiceRef, string dataConfigName
-      , string tableName = "DataModule", string schemaName = null)
+      , string tableName = "DataModule", string schemaName = null) : this()
     {
       Manager = new DataManager(dbServiceRef, dataConfigName, tableName
         , schemaName);
-      ResultConverter = new ResultConverter<DataModule, DataModules>();
 
       // Map table names with property names or captions
       // that differ from the column names.
@@ -48,6 +57,17 @@ namespace LJCDataUtilityDAL
       var values = ValuesDataUtility.Instance;
       var ManagersDataSite = values.SiteManagers;
       EntryManager = ManagersDataSite.DataEntryManager;
+    }
+    #endregion
+
+    #region Manager Methods
+
+    // Creates a set of columns that match the supplied list.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/Columns/*'/>
+    public DbColumns Columns(List<string> propertyNames)
+    {
+      return Manager.DataDefinition.LJCGetColumns(propertyNames);
     }
     #endregion
 
@@ -117,20 +137,12 @@ namespace LJCDataUtilityDAL
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
       //EntryManager.WriteDataEntry(Manager.SQLStatement);
     }
-
-    // Creates a set of columns that match the supplied list.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='members/Columns/*'/>
-    public DbColumns Columns(List<string> propertyNames)
-    {
-      return Manager.DataDefinition.LJCGetColumns(propertyNames);
-    }
     #endregion
 
     #region Custom Data Methods
 
     // Retrieves a record with the supplied value.
-    /// <include file='Doc/DataTableManager.xml'
+    /// <include file='Doc/DataModuleManager.xml'
     ///  path='members/RetrieveWithID/*'/>
     public DataModule RetrieveWithID(long id, short dbID
       , List<string> propertyNames = null)
@@ -151,7 +163,7 @@ namespace LJCDataUtilityDAL
     {
       DataModule retValue;
 
-      var keyColumns = NameKey(name);
+      var keyColumns = UniqueKey(name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -161,12 +173,10 @@ namespace LJCDataUtilityDAL
     #region GetKey Methods
 
     // Gets the ID key columns.
-    /// <include file='Doc/DataTableManager.xml'
+    /// <include file='Doc/DataModuleManager.xml'
     ///  path='members/IDKey/*'/>
     public DbColumns IDKey(long id, short dbID)
     {
-      // Add(columnName, propertyName = null, renameAs = null
-      //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
@@ -178,8 +188,8 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='items/NameKey/*'/>
-    public DbColumns NameKey(string name)
+    ///  path='items/UniqueKey/*'/>
+    public DbColumns UniqueKey(string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
@@ -197,21 +207,21 @@ namespace LJCDataUtilityDAL
     ///  path='members/AffectedCount/*'/>
     public int AffectedCount
     {
-      get { return Manager.AffectedCount; }
+      get => Manager.AffectedCount;
     }
 
     // Gets or sets the DataManager reference.
-    /// <include file='Doc/DataTableManager.xml'
+    /// <include file='Doc/DataModuleManager.xml'
     ///  path='members/Manager/*'/>
     public DataManager Manager { get; set; }
 
     // Gets or sets the ResultConverter reference.
-    /// <include file='Doc/DataTableManager.xml'
+    /// <include file='Doc/DataModuleManager.xml'
     ///  path='members/ResultConverter/*'/>
     public ResultConverter<DataModule, DataModules> ResultConverter { get; set; }
 
-    // Gets or sets the DataManager reference.
-    /// <include file='Doc/DataTableManager.xml'
+    // Gets or sets the EntryManager reference.
+    /// <include file='Doc/DataModuleManager.xml'
     ///  path='members/EntryManager/*'/>
     private DataEntryManager EntryManager { get; set; }
     #endregion

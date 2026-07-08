@@ -95,6 +95,7 @@
     <Content Include="Data\Doc\DataTable.xml" />
     <Content Include="Manager\Doc\DataModuleManager.xml" />
     <Content Include="Manager\Doc\DataTableManager.xml" />
+    <Content Include="Manager\Doc\TableKeyManager.xml" />
     <Content Include="Manager\Doc\DataColumnManager.xml" />
     <Content Include="Manager\Doc\DataKeyManager.xml" />
   </ItemGroup>
