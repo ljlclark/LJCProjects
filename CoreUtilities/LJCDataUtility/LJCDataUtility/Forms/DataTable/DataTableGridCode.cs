@@ -193,7 +193,7 @@ namespace LJCDataUtility
     private void SetStoredValues(LJCGridRow row, DataUtilTable dataRecord)
     {
       row.LJCSetInt64(DataUtilTable.ColumnID, dataRecord.ID);
-      row.LJCSetInt64(DataUtilTable.ColumnDataSiteID, dataRecord.DataSiteID);
+      row.LJCSetInt64(DataUtilTable.ColumnDbID, dataRecord.DataSiteID);
       row.LJCSetString(DataUtilTable.ColumnName, dataRecord.Name);
     }
     #endregion

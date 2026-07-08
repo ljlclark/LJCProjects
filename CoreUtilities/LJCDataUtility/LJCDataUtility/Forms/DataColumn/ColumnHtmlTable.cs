@@ -83,7 +83,7 @@ namespace LJCDataUtility
       var retNames = new List<string>()
       {
         DataUtilColumn.ColumnDataTableID,
-        DataUtilColumn.ColumnDataTableSiteID,
+        DataUtilColumn.ColumnDataTableDbID,
         DataUtilColumn.ColumnName,
         DataUtilColumn.ColumnDescription,
         DataUtilColumn.ColumnSequence,

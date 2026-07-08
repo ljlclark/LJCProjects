@@ -194,7 +194,7 @@ namespace LJCDataUtilityDAL
       {
         if (_DataDbID != value)
         {
-          _DataDbID = ChangedNames.Add(ColumnDataSiteID
+          _DataDbID = ChangedNames.Add(ColumnDbID
             , _OriginalValues.DbID, value);
         }
       }
@@ -232,7 +232,7 @@ namespace LJCDataUtilityDAL
       {
         if (_DataTableDbID != value)
         {
-          _DataTableDbID = ChangedNames.Add(ColumnDataTableSiteID
+          _DataTableDbID = ChangedNames.Add(ColumnDataTableDbID
             , _OriginalValues.DataTableDbID, value);
         }
       }
@@ -465,13 +465,13 @@ namespace LJCDataUtilityDAL
     public static string ColumnID = "ID";
 
     /// <summary>The ID column name.</summary>
-    public static string ColumnDataSiteID = "DataSiteID";
+    public static string ColumnDbID = "DataSiteID";
 
     /// <summary>The DataTableID column name.</summary>
     public static string ColumnDataTableID = "DataTableID";
 
     /// <summary>The DataTableSiteID column name.</summary>
-    public static string ColumnDataTableSiteID = "DataTableSiteID";
+    public static string ColumnDataTableDbID = "DataTableSiteID";
 
     /// <summary>The Name column name.</summary>
     public static string ColumnName = "Name";

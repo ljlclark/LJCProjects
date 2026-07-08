@@ -181,7 +181,7 @@ namespace LJCDataUtilityDAL
       var retValue = new DbColumns()
       {
         { DataModule.ColumnID, id },
-        { DataModule.ColumnDataSiteID, dbID },
+        { DataModule.ColumnDbID, dbID },
       };
       return retValue;
     }

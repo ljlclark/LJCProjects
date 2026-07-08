@@ -280,7 +280,7 @@ namespace LJCDataUtilityDAL
       var retValue = new DbColumns()
       {
         { DataKey.ColumnID, id },
-        { DataKey.ColumnDataSiteID, dbID },
+        { DataKey.ColumnDbID, dbID },
       };
       return retValue;
     }
@@ -293,7 +293,7 @@ namespace LJCDataUtilityDAL
       var retValue = new DbColumns()
       {
         { DataKey.ColumnDataTableID, parentID },
-        { DataKey.ColumnDataTableSiteID, parentDbID },
+        { DataKey.ColumnDataTableDbID, parentDbID },
       };
       return retValue;
     }
@@ -306,7 +306,7 @@ namespace LJCDataUtilityDAL
       var retValue = new DbColumns()
       {
         { DataKey.ColumnDataTableID, parentID },
-        { DataKey.ColumnDataTableSiteID, parentDbID },
+        { DataKey.ColumnDataTableDbID, parentDbID },
         { DataKey.ColumnKeyType, keyType },
       };
       return retValue;
@@ -320,7 +320,7 @@ namespace LJCDataUtilityDAL
       var retValue = new DbColumns()
       {
         { DataKey.ColumnDataTableID, id },
-        { DataKey.ColumnDataTableSiteID, dbID },
+        { DataKey.ColumnDataTableDbID, dbID },
         { DataKey.ColumnKeyType, keyType },
       };
       return retValue;
@@ -335,7 +335,7 @@ namespace LJCDataUtilityDAL
       var retValue = new DbColumns()
       {
         { DataKey.ColumnDataTableID, parentID },
-        { DataKey.ColumnDataTableSiteID, parentDbID },
+        { DataKey.ColumnDataTableDbID, parentDbID },
         { DataKey.ColumnName, (object)name },
       };
       return retValue;

@@ -55,7 +55,7 @@ namespace LJCDataUtilityDAL
       Manager.SetLookupColumns(new string[]
       {
         DataUtilTable.ColumnDataModuleID,
-        DataUtilTable.ColumnDataModuleSiteID,
+        DataUtilTable.ColumnDataModuleDbID,
         DataUtilTable.ColumnName,
       });
 
@@ -211,7 +211,7 @@ namespace LJCDataUtilityDAL
       var retValue = new DbColumns()
       {
         { DataUtilTable.ColumnID, id },
-        { DataUtilTable.ColumnDataSiteID, dbID},
+        { DataUtilTable.ColumnDbID, dbID},
       };
       return retValue;
     }
@@ -225,7 +225,7 @@ namespace LJCDataUtilityDAL
       var retValue = new DbColumns()
       {
         { DataUtilTable.ColumnDataModuleID, parentID },
-        { DataUtilTable.ColumnDataModuleSiteID, parentDbID },
+        { DataUtilTable.ColumnDataModuleDbID, parentDbID },
       };
       return retValue;
     }
@@ -239,7 +239,7 @@ namespace LJCDataUtilityDAL
       var retValue = new DbColumns()
       {
         { DataUtilTable.ColumnDataModuleID, parentID },
-        { DataUtilTable.ColumnDataModuleSiteID, parentDbID },
+        { DataUtilTable.ColumnDataModuleDbID, parentDbID },
         { DataUtilTable.ColumnName, (object)name },
       };
       return retValue;

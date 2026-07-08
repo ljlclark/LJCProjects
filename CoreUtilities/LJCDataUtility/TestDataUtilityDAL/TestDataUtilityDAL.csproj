@@ -65,9 +65,11 @@
   <ItemGroup>
     <Compile Include="DataUtilityDALProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDataModules.cs" />
     <Compile Include="TestDataTableManager.cs" />
     <Compile Include="TestData2\TestDataTables2.cs" />
     <Compile Include="TestData2\TestDataTable2.cs" />
+    <Compile Include="TestDataModule.cs" />
     <Compile Include="TestDataUtilTable.cs" />
   </ItemGroup>
   <ItemGroup>

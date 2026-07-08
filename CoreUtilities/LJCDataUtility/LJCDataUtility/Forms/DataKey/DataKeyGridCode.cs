@@ -193,7 +193,7 @@ namespace LJCDataUtility
     private void SetStoredValues(LJCGridRow row, DataKey data)
     {
       row.LJCSetInt64(DataKey.ColumnID, data.ID);
-      row.LJCSetInt64(DataKey.ColumnDataSiteID, data.DataSiteID);
+      row.LJCSetInt64(DataKey.ColumnDbID, data.DataSiteID);
     }
 
     // Sets the KeyType column value.
@@ -229,7 +229,7 @@ namespace LJCDataUtility
         var keyColumns = new DbColumns()
         {
           { DataKey.ColumnID, id },
-          { DataKey.ColumnDataSiteID, dbID }
+          { DataKey.ColumnDbID, dbID }
         };
         KeyManager.Delete(keyColumns);
         if (0 == KeyManager.AffectedCount)

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL
 {
@@ -152,8 +153,8 @@ namespace LJCDataUtilityDAL
       {
         if (_DataSiteID != value)
         {
-          _DataSiteID = ChangedNames.Add(ColumnDataSiteID
-            , _OriginalValues.DataSiteID, value);
+          _DataSiteID = ChangedNames.Add(ColumnDbID
+            , _OriginalValues.DataDbID, value);
         }
       }
     }
@@ -204,44 +205,52 @@ namespace LJCDataUtilityDAL
     // Gets a reference to the ChangedNames list.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/ToString/*'/>
+    [XmlIgnore]
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 
     #region Class Data
 
     /// <summary>The table name.</summary>
+    [XmlIgnore]
     public static string TableName = "DataModule";
 
     /// <summary>The ID column name.</summary>
+    [XmlIgnore]
     public static string ColumnID = "ID";
 
     /// <summary>The DataSiteID column name.</summary>
-    public static string ColumnDataSiteID = "DataSiteID";
+    [XmlIgnore]
+    public static string ColumnDbID = "DataSiteID";
 
     /// <summary>The Name column name.</summary>
+    [XmlIgnore]
     public static string ColumnName = "Name";
 
     /// <summary>The Description column name.</summary>
+    [XmlIgnore]
     public static string ColumnDescription = "Description";
 
     /// <summary>The Name maximum length.</summary>
+    [XmlIgnore]
     public static int LengthName = 60;
 
     /// <summary>The Description maximum length.</summary>
+    [XmlIgnore]
     public static int LengthDescription = 80;
 
     // The object starting values.
+    [XmlIgnore]
     private readonly OriginalValues _OriginalValues;
 
     // The object starting values.
     private class OriginalValues
     {
-
       // Gets or sets the table row ID.
       public long ID { get; set; }
 
       // Gets or sets the database ID.
-      public long DataSiteID { get; set; }
+      public long DataDbID { get; set; }
 
       // Gets or sets the unique name.
       public string Name { get; set; }

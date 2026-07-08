@@ -98,7 +98,7 @@ namespace LJCDataUtility
       if (row is LJCGridRow
         && "ColumnGrid" == row.DataGridView.Name)
       {
-        retColumnSiteID = row.LJCGetInt64(DataUtilColumn.ColumnDataSiteID);
+        retColumnSiteID = row.LJCGetInt64(DataUtilColumn.ColumnDbID);
       }
       return retColumnSiteID;
     }
@@ -138,7 +138,7 @@ namespace LJCDataUtility
         && "KeyGrid" == row.DataGridView.Name)
       {
         retKeyID = row.LJCGetInt64(DataKey.ColumnID);
-        dbID = (short)row.LJCGetInt32(DataKey.ColumnDataSiteID);
+        dbID = (short)row.LJCGetInt32(DataKey.ColumnDbID);
       }
       return retKeyID;
     }
@@ -177,7 +177,7 @@ namespace LJCDataUtility
       if (row is LJCGridRow
         && "KeyGrid" == row.DataGridView.Name)
       {
-        retKeySiteID = row.LJCGetInt64(DataKey.ColumnDataSiteID);
+        retKeySiteID = row.LJCGetInt64(DataKey.ColumnDbID);
       }
       return retKeySiteID;
     }
@@ -300,7 +300,7 @@ namespace LJCDataUtility
         && "TableGrid" == row.DataGridView.Name)
       {
         retTableID = row.LJCGetInt64(DataUtilTable.ColumnID);
-        dbID = (short)row.LJCGetInt32(DataUtilTable.ColumnDataSiteID);
+        dbID = (short)row.LJCGetInt32(DataUtilTable.ColumnDbID);
       }
       return retTableID;
     }
@@ -339,7 +339,7 @@ namespace LJCDataUtility
       if (row is LJCGridRow
         && "TableGrid" == row.DataGridView.Name)
       {
-        retTableSiteID = row.LJCGetInt64(DataUtilTable.ColumnDataSiteID);
+        retTableSiteID = row.LJCGetInt64(DataUtilTable.ColumnDbID);
       }
       return retTableSiteID;
     }

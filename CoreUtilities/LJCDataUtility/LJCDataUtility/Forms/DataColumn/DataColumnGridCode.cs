@@ -182,7 +182,7 @@ namespace LJCDataUtility
     {
       row.LJCSetInt64(DataUtilColumn.ColumnID
         , dataRecord.ID);
-      row.LJCSetInt64(DataUtilColumn.ColumnDataSiteID, dataRecord.DataSiteID);
+      row.LJCSetInt64(DataUtilColumn.ColumnDbID, dataRecord.DataSiteID);
       row.LJCSetString(DataUtilColumn.ColumnName, dataRecord.Name);
     }
     #endregion

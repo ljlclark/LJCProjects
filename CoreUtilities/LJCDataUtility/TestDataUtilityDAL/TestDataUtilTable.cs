@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TestDataUtilTable.cs
 using LJCDataUtilityDAL;
@@ -13,7 +13,7 @@ namespace TestDataUtilityDAL
     // Initializes an object instance.
     public TestDataUtilTable()
     {
-      TestCommon = new TestCommon("DataTableManager");
+      TestCommon = new TestCommon("DataUtilTable");
     }
 
     // Run the tests.

@@ -39,6 +39,23 @@ namespace LJCDataUtilityDAL
       }
       return retValue;
     }
+
+    // Get custom collection from List<T>.
+    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    public static DataModules LJCGetCollection(List<DataModule> list)
+    {
+      DataModules retValue = null;
+
+      if (NetCommon.HasItems(list))
+      {
+        retValue = new DataModules();
+        foreach (DataModule item in list)
+        {
+          retValue.Add(item);
+        }
+      }
+      return retValue;
+    }
     #endregion
 
     #region Constructors
@@ -70,32 +87,17 @@ namespace LJCDataUtilityDAL
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public DataModules Clone()
     {
       var retValue = MemberwiseClone() as DataModules;
       return retValue;
     }
 
-    // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataModules LJCGetCollection(List<DataModule> list)
-    {
-      DataModules retValue = null;
-
-      if (NetCommon.HasItems(list))
-      {
-        retValue = new DataModules();
-        foreach (DataModule item in list)
-        {
-          retValue.Add(item);
-        }
-      }
-      return retValue;
-    }
-
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='items/HasItems2/*'/>
     public bool LJCHasItems()
     {
       bool retValue = false;
@@ -108,7 +110,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSerialize/*'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -121,8 +124,9 @@ namespace LJCDataUtilityDAL
 
     #region Collection Data Methods
 
-    // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='Doc/DataModules.xml'/>
+    // Creates and adds the object from the supplied values.
+    /// <include file='Doc/DataModules.xml'
+    ///  path='items/Add/*'/>
     public DataModule Add(long id, long dataSiteID, string name)
     {
       DataModule retValue;
@@ -154,16 +158,18 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Retrieve the collection element.
-    /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataModule LJCGetWithID(int id)
+    // Retrieve the collection item.
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCGetWithID/*'/>
+    public DataModule LJCGetWithID(long id, short dbID)
     {
       DataModule retValue = null;
 
       LJCSortID();
       DataModule searchItem = new DataModule()
       {
-        ID = id
+        ID = id,
+        DataSiteID= dbID,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -173,7 +179,7 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Retrieve the collection element with unique values.
+    // Retrieve the collection item with unique values.
     /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataModule LJCGetWithName(string name)
     {
@@ -194,7 +200,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Removes an item by name.
-    /// <include path='items/LJCRemove/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCRemove/*'/>
     public void LJCRemove(string name)
     {
       DataModule item = Find(x => x.Name == name);
