@@ -24,7 +24,7 @@ namespace LJCDataUtilityDAL
     public DataModule()
     {
       _ID = 0;
-      _DataSiteID = 0;
+      _DataDbID = 0;
       _Name = "";
       _Description = "";
 
@@ -47,7 +47,7 @@ namespace LJCDataUtilityDAL
     public DataModule(DataModule item)
     {
       _ID = item.ID;
-      _DataSiteID = item.DataSiteID;
+      _DataDbID = item.DataSiteID;
       _Name = item.Name;
       _Description = item.Description;
 
@@ -148,17 +148,17 @@ namespace LJCDataUtilityDAL
     [Column("DataSiteID", TypeName = "bigint")]
     public long DataSiteID
     {
-      get => _DataSiteID;
+      get => _DataDbID;
       set
       {
-        if (_DataSiteID != value)
+        if (_DataDbID != value)
         {
-          _DataSiteID = ChangedNames.Add(ColumnDbID
+          _DataDbID = ChangedNames.Add(ColumnDbID
             , _OriginalValues.DataDbID, value);
         }
       }
     }
-    private long _DataSiteID;
+    private long _DataDbID;
 
     // Gets or sets the Name value.
     /// <include file='Doc/DataModule.xml'

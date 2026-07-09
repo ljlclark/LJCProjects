@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL
 {
@@ -284,7 +285,7 @@ namespace LJCDataUtilityDAL
     [Column("Sequence", TypeName = "int")]
     public int Sequence
     {
-      get => Sequence;
+      get => _Sequence;
       set
       {
         if (_Sequence != value)
@@ -453,6 +454,7 @@ namespace LJCDataUtilityDAL
     #region Class Properties
 
     /// <summary>Gets a reference to the ChangedNames list.</summary>
+    [XmlIgnore]
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 

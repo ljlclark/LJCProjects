@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL
 {
@@ -23,9 +24,9 @@ namespace LJCDataUtilityDAL
     public DataUtilTable()
     {
       _ID = 0;
-      _DataSiteID = 0;
+      _DataDbID = 0;
       _DataModuleID = 0;
-      _DataModuleSiteID = 0;
+      _DataModuleDbID = 0;
       _Name = "";
       _Description = "";
       _Sequence = 0;
@@ -53,9 +54,9 @@ namespace LJCDataUtilityDAL
     public DataUtilTable(DataUtilTable item) : this()
     {
       _ID = item.ID;
-      _DataSiteID = item.DataSiteID;
+      _DataDbID = item.DataSiteID;
       _DataModuleID = item.DataModuleID;
-      _DataModuleSiteID = item.DataModuleSiteID;
+      _DataModuleDbID = item.DataModuleSiteID;
       _Name = item.Name;
       _Description = item.Description;
       _Sequence = item.Sequence;
@@ -114,9 +115,9 @@ namespace LJCDataUtilityDAL
     public void LJCSetOriginalValues()
     {
       _OriginalValues.ID = _ID;
-      _OriginalValues.DataSiteID = _DataModuleSiteID;
+      _OriginalValues.DataDbID = _DataModuleDbID;
       _OriginalValues.DataModuleID = _DataModuleID;
-      _OriginalValues.DataModuleSiteID = _DataModuleSiteID;
+      _OriginalValues.DataModuleSiteID = _DataModuleDbID;
       _OriginalValues.Name = _Name;
       _OriginalValues.Description = _Description;
       _OriginalValues.Sequence = _Sequence;
@@ -166,17 +167,17 @@ namespace LJCDataUtilityDAL
     [Column("DataSiteID", TypeName = "bigint")]
     public long DataSiteID
     {
-      get => _DataSiteID;
+      get => _DataDbID;
       set
       {
-        if (_DataSiteID != value)
+        if (_DataDbID != value)
         {
-          _DataSiteID = ChangedNames.Add(ColumnDbID
-            , _OriginalValues.DataSiteID, value);
+          _DataDbID = ChangedNames.Add(ColumnDbID
+            , _OriginalValues.DataDbID, value);
         }
       }
     }
-    private long _DataSiteID;
+    private long _DataDbID;
 
     // Gets or sets the parent table row ID.
     /// <include file='doc/DataTable.xml'
@@ -204,17 +205,17 @@ namespace LJCDataUtilityDAL
     [Column("DataModuleSiteID", TypeName = "bigint")]
     public long DataModuleSiteID
     {
-      get => _DataModuleID;
+      get => _DataModuleDbID;
       set
       {
-        if (_DataModuleID != value)
+        if (_DataModuleDbID != value)
         {
-          _DataModuleSiteID = ChangedNames.Add(ColumnDataModuleDbID
+          _DataModuleDbID = ChangedNames.Add(ColumnDataModuleDbID
             , _OriginalValues.DataModuleSiteID, value);
         }
       }
     }
-    private long _DataModuleSiteID;
+    private long _DataModuleDbID;
 
     // Gets or sets the name value.
     /// <include file='doc/DataTable.xml'
@@ -323,54 +324,69 @@ namespace LJCDataUtilityDAL
     // Gets a reference to the ChangedNames list.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/ChangedNames/*'/>
+    [XmlIgnore]
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 
     #region Class Data
 
     /// <summary>The table name.</summary>
+    [XmlIgnore]
     public static string TableName = "DataTable";
 
     /// <summary>The ID column name.</summary>
+    [XmlIgnore]
     public static string ColumnID = "ID";
 
     /// <summary>The DataSiteID column name.</summary>
+    [XmlIgnore]
     public static string ColumnDbID = "DataSiteID";
 
     /// <summary>The DataModuleID column name.</summary>
+    [XmlIgnore]
     public static string ColumnDataModuleID = "DataModuleID";
 
     /// <summary>The DataModuleSiteID column name.</summary>
+    [XmlIgnore]
     public static string ColumnDataModuleDbID = "DataModuleSiteID";
 
     /// <summary>The Name column name.</summary>
+    [XmlIgnore]
     public static string ColumnName = "Name";
 
     /// <summary>The Description column name.</summary>
+    [XmlIgnore]
     public static string ColumnDescription = "Description";
 
     /// <summary>The SchemaName column name.</summary>
+    [XmlIgnore]
     public static string ColumnSchemaName = "SchemaName";
 
     /// <summary>The Sequence column name.</summary>
+    [XmlIgnore]
     public static string ColumnSequence = "Sequence";
 
     /// <summary>The NewName column name.</summary>
+    [XmlIgnore]
     public static string ColumnNewName = "NewName";
 
     /// <summary>The Name maximum length.</summary>
+    [XmlIgnore]
     public static int LengthName = 60;
 
     /// <summary>The Description maximum length.</summary>
+    [XmlIgnore]
     public static int LengthDescription = 80;
 
     /// <summary>The Description maximum length.</summary>
     public static int LengthSequence = 3;
 
     /// <summary>The Join ModuleName column name.</summary>
+    [XmlIgnore]
     public static string ColumnModuleName = "ModuleName";
 
     // The object starting values.
+    [XmlIgnore]
     private readonly OriginalValues _OriginalValues;
 
     // The object starting values.
@@ -380,7 +396,7 @@ namespace LJCDataUtilityDAL
       public long ID { get; set; }
 
       // Gets or sets the database ID.
-      public long DataSiteID { get; set; }
+      public long DataDbID { get; set; }
 
       // Gets or sets the parent table row ID.
       public long DataModuleID { get; set; }

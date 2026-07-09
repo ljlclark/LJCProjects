@@ -23,9 +23,9 @@ namespace LJCDataUtilityDAL
     public DataKey()
     {
       _ID = 0;
-      _DataSiteID = 0;
+      _DataDbID = 0;
       _DataTableID = 0;
-      _DataTableSiteID = 0;
+      _DataTableDbID = 0;
       _Name = "";
       _KeyType = 0;
 
@@ -54,9 +54,9 @@ namespace LJCDataUtilityDAL
     public DataKey(DataKey item)
     {
       _ID = item.ID;
-      _DataSiteID = item.DataSiteID;
+      _DataDbID = item.DataSiteID;
       _DataTableID = item.DataTableID;
-      _DataTableSiteID = item.DataTableSiteID;
+      _DataTableDbID = item.DataTableSiteID;
       _Name = item.Name;
       _KeyType = item.KeyType;
 
@@ -117,9 +117,9 @@ namespace LJCDataUtilityDAL
     public void LJCSetOriginalValues()
     {
       _OriginalValues.ID = _ID;
-      _OriginalValues.DataSiteID = _DataSiteID;
+      _OriginalValues.DataSiteID = _DataDbID;
       _OriginalValues.DataTableID = _DataTableID;
-      _OriginalValues.DataTableSiteID = _DataTableSiteID;
+      _OriginalValues.DataTableSiteID = _DataTableDbID;
       _OriginalValues.Name = _Name;
       _OriginalValues.KeyType = _KeyType;
 
@@ -171,17 +171,17 @@ namespace LJCDataUtilityDAL
     [Column("DataSiteID", TypeName = "bigint")]
     public long DataSiteID
     {
-      get => _DataSiteID;
+      get => _DataDbID;
       set
       {
-        if (_DataSiteID != value)
+        if (_DataDbID != value)
         {
-          _DataSiteID = ChangedNames.Add(ColumnDbID
+          _DataDbID = ChangedNames.Add(ColumnDbID
             , _OriginalValues.DataSiteID, value);
         }
       }
     }
-    private long _DataSiteID;
+    private long _DataDbID;
 
     // Gets or sets the parent table row ID.
     /// <include file='doc/DataKey.xml'
@@ -209,17 +209,17 @@ namespace LJCDataUtilityDAL
     [Column("DataTableSiteID", TypeName = "bigint")]
     public long DataTableSiteID
     {
-      get => _DataTableSiteID;
+      get => _DataTableDbID;
       set
       {
-        if (_DataTableSiteID != value)
+        if (_DataTableDbID != value)
         {
-          _DataTableSiteID = ChangedNames.Add(ColumnDataTableDbID
+          _DataTableDbID = ChangedNames.Add(ColumnDataTableDbID
             , _OriginalValues.DataTableSiteID, value);
         }
       }
     }
-    private long _DataTableSiteID;
+    private long _DataTableDbID;
 
     // Gets or sets the Name value.
     /// <include file='doc/DataKey.xml'

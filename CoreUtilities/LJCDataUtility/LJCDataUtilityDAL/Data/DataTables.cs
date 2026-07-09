@@ -19,9 +19,9 @@ namespace LJCDataUtilityDAL
     // Deserializes from the specified XML file.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
-    public static DataTables2 LJCDeserialize(string fileSpec = null)
+    public static DataTables LJCDeserialize(string fileSpec = null)
     {
-      DataTables2 retValue;
+      DataTables retValue;
 
       if (!NetString.HasValue(fileSpec))
       {
@@ -34,8 +34,26 @@ namespace LJCDataUtilityDAL
       }
       else
       {
-        retValue = NetCommon.XmlDeserialize(typeof(DataTables2), fileSpec)
-         as DataTables2;
+        retValue = NetCommon.XmlDeserialize(typeof(DataTables), fileSpec)
+         as DataTables;
+      }
+      return retValue;
+    }
+
+    // Get custom collection from List<T>.
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCGetCollection/*'/>
+    public static DataTables LJCGetCollection(List<DataUtilTable> list)
+    {
+      DataTables retValue = null;
+
+      if (NetCommon.HasItems(list))
+      {
+        retValue = new DataTables();
+        foreach (DataUtilTable item in list)
+        {
+          retValue.Add(item);
+        }
       }
       return retValue;
     }
@@ -74,32 +92,14 @@ namespace LJCDataUtilityDAL
     ///  path='members/Clone/*'/>
     public DataTables Clone()
     {
-      //var retValue = new DataTables();
-      //foreach (DataUtilTable dataTable in this)
-      //{
-      //  retValue.Add(dataTable.Clone());
-      //}
+      var retValue = new DataTables();
+      foreach (DataUtilTable dataTable in this)
+      {
+        retValue.Add(dataTable.Clone());
+      }
 
       // Testing
-      var retValue = MemberwiseClone() as DataTables;
-      return retValue;
-    }
-
-    // Get custom collection from List<T>.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='members/LJCGetCollection/*'/>
-    public DataTables LJCGetCollection(List<DataUtilTable> list)
-    {
-      DataTables retValue = null;
-
-      if (NetCommon.HasItems(list))
-      {
-        retValue = new DataTables();
-        foreach (DataUtilTable item in list)
-        {
-          retValue.Add(item);
-        }
-      }
+      //var retValue = MemberwiseClone() as DataTables;
       return retValue;
     }
 

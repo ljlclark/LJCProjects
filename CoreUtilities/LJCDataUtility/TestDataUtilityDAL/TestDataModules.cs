@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace TestDataUtilityDAL
 {
-  // Tests the DataModule object.
+  // Tests the DataModules collection.
   internal class TestDataModules
   {
     #region Constructor Methods

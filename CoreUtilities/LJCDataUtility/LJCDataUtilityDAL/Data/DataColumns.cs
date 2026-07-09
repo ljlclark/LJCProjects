@@ -39,6 +39,24 @@ namespace LJCDataUtilityDAL
       }
       return retValue;
     }
+
+    // Get custom collection from List<T>.
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCGetCollection/*'/>
+    public static DataColumns LJCGetCollection(List<DataUtilColumn> list)
+    {
+      DataColumns retValue = null;
+
+      if (NetCommon.HasItems(list))
+      {
+        retValue = new DataColumns();
+        foreach (DataUtilColumn item in list)
+        {
+          retValue.Add(item);
+        }
+      }
+      return retValue;
+    }
     #endregion
 
     #region Constructors
@@ -78,24 +96,6 @@ namespace LJCDataUtilityDAL
       foreach (DataUtilColumn dataColumn in this)
       {
         retValue.Add(dataColumn.Clone());
-      }
-      return retValue;
-    }
-
-    // Get custom collection from List<T>.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='members/LJCGetCollection/*'/>
-    public DataColumns LJCGetCollection(List<DataUtilColumn> list)
-    {
-      DataColumns retValue = null;
-
-      if (NetCommon.HasItems(list))
-      {
-        retValue = new DataColumns();
-        foreach (DataUtilColumn item in list)
-        {
-          retValue.Add(item);
-        }
       }
       return retValue;
     }
