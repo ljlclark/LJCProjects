@@ -40,7 +40,7 @@ namespace LJCDataUtilityDAL
 
       ChangedNames = new ChangedNames();
       _OriginalValues = new OriginalValues();
-      SetOriginalValues();
+      LJCSetOriginalValues();
     }
 
     // Initializes an object instance with the supplied values.
@@ -86,7 +86,7 @@ namespace LJCDataUtilityDAL
 
       ChangedNames = item.ChangedNames;
       _OriginalValues = new OriginalValues();
-      SetOriginalValues();
+      LJCSetOriginalValues();
     }
     #endregion
 
@@ -132,7 +132,7 @@ namespace LJCDataUtilityDAL
     // Initializes the original values.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/SetOriginalValues/*'/>
-    public void SetOriginalValues()
+    public void LJCSetOriginalValues()
     {
       _OriginalValues.ID = _ID;
       _OriginalValues.Name = _Name;
