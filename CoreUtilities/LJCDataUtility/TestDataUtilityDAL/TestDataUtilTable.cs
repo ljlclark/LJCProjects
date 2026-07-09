@@ -10,10 +10,12 @@ namespace TestDataUtilityDAL
   // Tests the DataUtilTable object.
   internal class TestDataUtilTable
   {
+    #region Constructor Methods
+
     // Initializes an object instance.
     public TestDataUtilTable()
     {
-      TestCommon = new TestCommon("DataUtilTable");
+      TestCommon = new TestCommon("TestDataUtilTable");
     }
 
     // Run the tests.
@@ -37,6 +39,7 @@ namespace TestDataUtilityDAL
       SchemaName();
       NewName();
     }
+    #endregion
 
     #region Data Object Methods
 
@@ -233,6 +236,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataTable = new DataUtilTable
       {
+        // Original Value
         ID = 0,
       };
 
@@ -254,6 +258,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataTable = new DataUtilTable
       {
+        // Original Value
         DataSiteID = 0,
       };
 
@@ -274,6 +279,7 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
+        // Original Value
         DataModuleID = 0,
       };
 
@@ -295,6 +301,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataTable = new DataUtilTable
       {
+        // Original Value
         DataModuleSiteID = 0,
       };
 
@@ -316,6 +323,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataTable = new DataUtilTable
       {
+        // Original Value
         Name = "",
       };
 
@@ -337,6 +345,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataTable = new DataUtilTable
       {
+        // Original Value
         Description = "",
       };
 
@@ -358,6 +367,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataTable = new DataUtilTable
       {
+        // Original Value
         Sequence = 0,
       };
 
@@ -379,6 +389,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataTable = new DataUtilTable
       {
+        // Original Value
         SchemaName = null,
       };
 
@@ -400,6 +411,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataTable = new DataUtilTable
       {
+        // Original Value
         NewName = null,
       };
 

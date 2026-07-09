@@ -10,6 +10,8 @@ namespace TestDataUtilityDAL
   // Tests the DataModule object.
   internal class TestDataModule
   {
+    #region Constructor Methods
+
     // Initializes an object instance.
     public TestDataModule()
     {
@@ -32,6 +34,7 @@ namespace TestDataUtilityDAL
       Name();
       Description();
     }
+    #endregion
 
     #region Data Object Methods
 
@@ -175,6 +178,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataModule = new DataModule
       {
+        // Original Value
         ID = 0,
       };
 
@@ -196,6 +200,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataModule = new DataModule
       {
+        // Original Value
         DataSiteID = 0,
       };
 
@@ -217,6 +222,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataModule = new DataModule
       {
+        // Original Value
         Name = "",
       };
 
@@ -238,6 +244,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataModule = new DataModule
       {
+        // Original Value
         Description = "",
       };
 

@@ -73,6 +73,7 @@
     <Compile Include="TestData2\TestDataTable2.cs" />
     <Compile Include="TestDataModule.cs" />
     <Compile Include="TestDataColumn.cs" />
+    <Compile Include="TestDataKey.cs" />
     <Compile Include="TestDataUtilTable.cs" />
   </ItemGroup>
   <ItemGroup>

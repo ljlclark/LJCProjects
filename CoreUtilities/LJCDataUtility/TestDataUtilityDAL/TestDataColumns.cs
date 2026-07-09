@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TestDataUtilColumn()s.cs
+// TestDataColumn()s.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace TestDataUtilityDAL
     // Initializes an object instance.
     public TestDataColumns()
     {
-      TestCommon = new TestCommon("TestDataUtilColumns");
+      TestCommon = new TestCommon("TestDataColumns");
     }
 
     // Run the tests.

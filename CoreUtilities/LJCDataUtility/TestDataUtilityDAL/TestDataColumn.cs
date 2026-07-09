@@ -254,6 +254,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         ID = 0,
       };
 
@@ -275,6 +276,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         DataSiteID = 0,
       };
 
@@ -295,6 +297,7 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
+        // Original Value
         DataModuleID = 0,
       };
 
@@ -316,6 +319,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         DataTableSiteID = 0,
       };
 
@@ -337,6 +341,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         Name = "",
       };
 
@@ -358,6 +363,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         Description = null,
       };
 
@@ -379,6 +385,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         Sequence = 0,
       };
 
@@ -400,6 +407,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         AllowNull = false,
       };
 
@@ -421,6 +429,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         DefaultValue = null,
       };
 
@@ -442,6 +451,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         IdentityStart = 0,
       };
 
@@ -463,6 +473,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         IdentityIncrement = 1,
       };
 
@@ -484,6 +495,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         MaxLength = 0,
       };
 
@@ -505,6 +517,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         NewName = null,
       };
 
@@ -526,6 +539,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         NewMaxLength = 0,
       };
 
@@ -547,6 +561,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var dataColumn = new DataUtilColumn
       {
+        // Original Value
         TypeName = "",
       };
 

@@ -31,7 +31,7 @@ namespace LJCDataUtilityDAL
 
       _IsClustered = false;
       _IsAscending = false;
-      _SourceColumnName = null;
+      _SourceColumnName = "";
       _TargetTableName = null;
       _TargetColumnName = null;
 

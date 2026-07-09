@@ -22,6 +22,9 @@ namespace TestDataUtilityDAL
       var testDataColumns = new TestDataColumns();
       testDataColumns.Run();
 
+      var testDataKey = new TestDataKey();
+      testDataKey.Run();
+
       // Test collection of DbColumns.
       var testDataTable2 = new TestDataTable2();
       testDataTable2.Run();
