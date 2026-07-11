@@ -162,26 +162,26 @@ namespace TestDataUtilityDAL
       dataColumns.Add(dataColumn);
 
       // Test Method
-      var newDataTables = dataColumns.Clone();
+      var newDataColumns = dataColumns.Clone();
 
-      var newDataTable = newDataTables[0];
-      var result = newDataTable.ID.ToString();
-      result += $", {newDataTable.DataSiteID}";
+      var newDataColumn = newDataColumns[0];
+      var result = newDataColumn.ID.ToString();
+      result += $", {newDataColumn.DataSiteID}";
       var compare = "1, 2";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      result = $"{newDataTable.DataTableID}";
-      result += $", {newDataTable.DataTableSiteID}";
+      result = $"{newDataColumn.DataTableID}";
+      result += $", {newDataColumn.DataTableSiteID}";
       compare = "3, 4";
       TestCommon.Write($"{methodName}2", result, compare);
 
-      result = newDataTable.Name;
-      result += $", {newDataTable.Description}";
+      result = newDataColumn.Name;
+      result += $", {newDataColumn.Description}";
       compare = "Name, Description";
       TestCommon.Write($"{methodName}3", result, compare);
 
-      result = newDataTable.Sequence.ToString();
-      result += $", {newDataTable.NewName}";
+      result = newDataColumn.Sequence.ToString();
+      result += $", {newDataColumn.NewName}";
       compare = "1, NewName";
       TestCommon.Write($"{methodName}4", result, compare);
     }

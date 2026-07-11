@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // TableKeys.cs
 using LJCNetCommon;
@@ -67,14 +67,15 @@ namespace LJCDataUtilityDAL
     // Retrieve the collection element.
     /// <include file='Doc/TableKeys.xml'
     ///  path='members/LJCGetWithName/*'/>
-    public TableKey LJCGetWithName(string name)
+    public TableKey LJCGetWithUnique(string constraintName, int ordinalPosition)
     {
       TableKey retValue = null;
 
-      LJCSortName();
+      LJCSortUnique();
       TableKey searchItem = new TableKey()
       {
-        UpdateRule = name,
+        ConstraintName = constraintName,
+        OrdinalPosition = ordinalPosition,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -87,10 +88,10 @@ namespace LJCDataUtilityDAL
 
     #region Sort Methods
 
-    /// <summary>Sort on Code.</summary>
+    /// <summary>Sort on Unique.</summary>
     /// <include file='Doc/TableKeys.xml'
-    ///  path='members/LJCSortName/*'/>
-    public void LJCSortName()
+    ///  path='members/LJCSortUnique/*'/>
+    public void LJCSortUnique()
     {
       if (Count != mPrevCount)
       {
@@ -105,9 +106,9 @@ namespace LJCDataUtilityDAL
     // The item for the supplied name.
     /// <include file='Doc/TableKeys.xml'
     ///  path='members/UniqueIndexer/*'/>
-    public TableKey this[string name]
+    public TableKey this[string constraintName, int ordinalPosition]
     {
-      get => LJCGetWithName(name);
+      get => LJCGetWithUnique(constraintName, ordinalPosition);
     }
     #endregion
 

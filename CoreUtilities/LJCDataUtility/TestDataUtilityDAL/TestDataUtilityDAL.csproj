@@ -67,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDataColumns.cs" />
     <Compile Include="TestDataKeys.cs" />
+    <Compile Include="TestTableKeys.cs" />
     <Compile Include="TestTableKey.cs" />
     <Compile Include="TestDataTables.cs" />
     <Compile Include="TestDataModules.cs" />
