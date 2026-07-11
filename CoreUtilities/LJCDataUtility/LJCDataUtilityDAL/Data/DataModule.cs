@@ -212,35 +212,27 @@ namespace LJCDataUtilityDAL
     #region Class Data
 
     /// <summary>The table name.</summary>
-    [XmlIgnore]
     public static string TableName = "DataModule";
 
     /// <summary>The ID column name.</summary>
-    [XmlIgnore]
     public static string ColumnID = "ID";
 
     /// <summary>The DataSiteID column name.</summary>
-    [XmlIgnore]
     public static string ColumnDbID = "DataSiteID";
 
     /// <summary>The Name column name.</summary>
-    [XmlIgnore]
     public static string ColumnName = "Name";
 
     /// <summary>The Description column name.</summary>
-    [XmlIgnore]
     public static string ColumnDescription = "Description";
 
     /// <summary>The Name maximum length.</summary>
-    [XmlIgnore]
     public static int LengthName = 60;
 
     /// <summary>The Description maximum length.</summary>
-    [XmlIgnore]
     public static int LengthDescription = 80;
 
     // The object starting values.
-    [XmlIgnore]
     private readonly OriginalValues _OriginalValues;
 
     // The object starting values.

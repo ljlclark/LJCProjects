@@ -39,6 +39,24 @@ namespace LJCDataUtilityDAL
       }
       return retValue;
     }
+
+    // Get custom collection from List<T>.
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCGetCollection/*'/>
+    public static DataKeys LJCGetCollection(List<DataKey> list)
+    {
+      DataKeys retValue = null;
+
+      if (NetCommon.HasItems(list))
+      {
+        retValue = new DataKeys();
+        foreach (DataKey item in list)
+        {
+          retValue.Add(item);
+        }
+      }
+      return retValue;
+    }
     #endregion
 
     #region Constructors
@@ -82,24 +100,6 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Get custom collection from List<T>.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='members/LJCGetCollection/*'/>
-    public DataKeys LJCGetCollection(List<DataKey> list)
-    {
-      DataKeys retValue = null;
-
-      if (NetCommon.HasItems(list))
-      {
-        retValue = new DataKeys();
-        foreach (DataKey item in list)
-        {
-          retValue.Add(item);
-        }
-      }
-      return retValue;
-    }
-
     // Checks if the collection has items.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/HasItems/*'/>
@@ -132,12 +132,16 @@ namespace LJCDataUtilityDAL
     // Creates and adds the object from the provided values.
     /// <include file='Doc/DataKeys.xml'
     ///  path='items/Add/*'/>
-    public DataKey Add(long dbID, long dataTableID, short dataTableDbID
-      , string name)
+    public DataKey Add(long id, short dbID, long dataTableID
+      , short dataTableDbID, string name)
     {
       DataKey retValue;
 
       string message = "";
+      if (id <= 0)
+      {
+        message += "id must be greater than zero.\r\n";
+      }
       if (dbID <= 0)
       {
         message += "dbID must be greater than zero.\r\n";
@@ -159,6 +163,7 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataKey()
         {
+          ID = id,
           DataSiteID = dbID,
           DataTableID = dataTableID,
           DataTableSiteID = dataTableDbID,

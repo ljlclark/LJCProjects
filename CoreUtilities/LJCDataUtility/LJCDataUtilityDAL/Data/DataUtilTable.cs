@@ -331,62 +331,48 @@ namespace LJCDataUtilityDAL
     #region Class Data
 
     /// <summary>The table name.</summary>
-    [XmlIgnore]
     public static string TableName = "DataTable";
 
     /// <summary>The ID column name.</summary>
-    [XmlIgnore]
     public static string ColumnID = "ID";
 
     /// <summary>The DataSiteID column name.</summary>
-    [XmlIgnore]
     public static string ColumnDbID = "DataSiteID";
 
     /// <summary>The DataModuleID column name.</summary>
-    [XmlIgnore]
     public static string ColumnDataModuleID = "DataModuleID";
 
     /// <summary>The DataModuleSiteID column name.</summary>
-    [XmlIgnore]
     public static string ColumnDataModuleDbID = "DataModuleSiteID";
 
     /// <summary>The Name column name.</summary>
-    [XmlIgnore]
     public static string ColumnName = "Name";
 
     /// <summary>The Description column name.</summary>
-    [XmlIgnore]
     public static string ColumnDescription = "Description";
 
     /// <summary>The SchemaName column name.</summary>
-    [XmlIgnore]
     public static string ColumnSchemaName = "SchemaName";
 
     /// <summary>The Sequence column name.</summary>
-    [XmlIgnore]
     public static string ColumnSequence = "Sequence";
 
     /// <summary>The NewName column name.</summary>
-    [XmlIgnore]
     public static string ColumnNewName = "NewName";
 
     /// <summary>The Name maximum length.</summary>
-    [XmlIgnore]
     public static int LengthName = 60;
 
     /// <summary>The Description maximum length.</summary>
-    [XmlIgnore]
     public static int LengthDescription = 80;
 
     /// <summary>The Description maximum length.</summary>
     public static int LengthSequence = 3;
 
     /// <summary>The Join ModuleName column name.</summary>
-    [XmlIgnore]
     public static string ColumnModuleName = "ModuleName";
 
     // The object starting values.
-    [XmlIgnore]
     private readonly OriginalValues _OriginalValues;
 
     // The object starting values.

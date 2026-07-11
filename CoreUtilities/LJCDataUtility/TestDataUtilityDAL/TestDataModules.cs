@@ -227,17 +227,11 @@ namespace TestDataUtilityDAL
     {
       var methodName = "Add()";
 
-      var dataModules = new DataModules();
-      var dataModule = new DataModule
-      {
-        ID = 1,
-        DataSiteID = 2,
-        Name = "Name",
-        Description = "Description",
-      };
-
       // Test Method
-      dataModules.Add(dataModule);
+      var dataModules = new DataModules
+      {
+        { 1, 2, "Name" },
+      };
 
       var item = dataModules[0];
       var result = item.Name;

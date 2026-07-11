@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TestDataColumn()s.cs
+// TestDataKeys.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
@@ -8,14 +8,14 @@ using System.Collections.Generic;
 namespace TestDataUtilityDAL
 {
   // Tests the DataTables collection.
-  internal class TestDataColumns
+  internal class TestDataKeys
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    public TestDataColumns()
+    public TestDataKeys()
     {
-      TestCommon = new TestCommon("TestDataColumns");
+      TestCommon = new TestCommon("TestDataKeys");
     }
 
     // Run the tests.
@@ -52,36 +52,42 @@ namespace TestDataUtilityDAL
     {
       var methodName = "LJCDeserialize()";
 
-      var dataColumns = new DataColumns();
-      var dataColumn = new DataUtilColumn()
+      var dataKeys = new DataKeys();
+      var dataKey = new DataKey
       {
         ID = 1,
         DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        NewName = "NewName",
+        KeyType = 0,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = null,
+        TargetTableName = null,
+        TargetColumnName = null,
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
-      dataColumn = new DataUtilColumn()
+      dataKey = new DataKey
       {
         ID = 2,
         DataSiteID = 3,
         DataTableID = 4,
         DataTableSiteID = 5,
         Name = "First",
-        Description = "Description2",
-        Sequence = 2,
-        NewName = "NewName2",
+        KeyType = 0,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = null,
+        TargetTableName = null,
+        TargetColumnName = null,
       };
-      dataColumns.Add(dataColumn);
-      dataColumns.LJCSerialize();
+      dataKeys.Add(dataKey);
+      dataKeys.LJCSerialize();
 
       // Test Method
-      var newDataTables = DataTables.LJCDeserialize();
+      var newDataTables = DataKeys.LJCDeserialize();
 
       var result = newDataTables.Count.ToString();
       var compare = "2";
@@ -93,47 +99,53 @@ namespace TestDataUtilityDAL
     {
       var methodName = "LJCGetCollection()";
 
-      var dataColumns = new List<DataUtilColumn>();
-      var dataColumn = new DataUtilColumn()
+      var dataKeys = new List<DataKey>();
+      var dataKey = new DataKey
       {
         ID = 1,
         DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        NewName = "NewName",
+        KeyType = 0,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = null,
+        TargetTableName = null,
+        TargetColumnName = null,
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
-      dataColumn = new DataUtilColumn()
+      dataKey = new DataKey
       {
         ID = 2,
         DataSiteID = 3,
         DataTableID = 4,
         DataTableSiteID = 5,
         Name = "First",
-        Description = "Description2",
-        Sequence = 2,
-        NewName = "NewName2",
+        KeyType = 0,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = null,
+        TargetTableName = null,
+        TargetColumnName = null,
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
       // Test Method
-      var newDataTables = DataColumns.LJCGetCollection(dataColumns);
+      var newDataKeys = DataKeys.LJCGetCollection(dataKeys);
 
-      var testDataTable = newDataTables[3, 4, "Name"];
-      if (null == testDataTable)
+      var testDataKey = newDataKeys[3, 4, "Name"];
+      if (null == testDataKey)
       {
         var result = "HasValue";
         var compare = "IsNull";
         TestCommon.Write($"{methodName}1", result, compare);
       }
 
-      if (testDataTable != null)
+      if (testDataKey != null)
       {
-        var result = testDataTable.Name;
+        var result = testDataKey.Name;
         var compare = "Name";
         TestCommon.Write($"{methodName}2", result, compare);
       }
@@ -147,42 +159,46 @@ namespace TestDataUtilityDAL
     {
       var methodName = "Clone()";
 
-      var dataColumns = new DataColumns();
-      var dataColumn = new DataUtilColumn()
+      var dataKeys = new DataKeys();
+      var dataKey = new DataKey
       {
         ID = 1,
         DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        NewName = "NewName",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
       // Test Method
-      var newDataTables = dataColumns.Clone();
+      var newDataKeys = dataKeys.Clone();
 
-      var newDataTable = newDataTables[0];
-      var result = newDataTable.ID.ToString();
-      result += $", {newDataTable.DataSiteID}";
+      var newDataKey = newDataKeys[0];
+      var result = $"{newDataKey.ID}";
+      result += $", {newDataKey.DataSiteID}";
       var compare = "1, 2";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      result = $"{newDataTable.DataTableID}";
-      result += $", {newDataTable.DataTableSiteID}";
+      result = $"{newDataKey.DataTableID}";
+      result += $", {newDataKey.DataTableSiteID}";
       compare = "3, 4";
       TestCommon.Write($"{methodName}2", result, compare);
 
-      result = newDataTable.Name;
-      result += $", {newDataTable.Description}";
-      compare = "Name, Description";
+      result = newDataKey.Name;
+      result += $", {newDataKey.KeyType}";
+      compare = "Name, 1";
       TestCommon.Write($"{methodName}3", result, compare);
 
-      result = newDataTable.Sequence.ToString();
-      result += $", {newDataTable.NewName}";
-      compare = "1, NewName";
+      result = newDataKey.SourceColumnName;
+      result += $", {newDataKey.TargetTableName}";
+      result += $", {newDataKey.TargetColumnName}";
+      compare = "SourceColumnName, TargetTableName, TargetColumnName";
       TestCommon.Write($"{methodName}4", result, compare);
     }
 
@@ -191,27 +207,30 @@ namespace TestDataUtilityDAL
     {
       var methodName = "LJCHasItems()";
 
-      var dataColumns = new DataColumns();
+      var dataKeys = new DataKeys();
 
       // Test Method
-      var result = dataColumns.LJCHasItems().ToString();
+      var result = dataKeys.LJCHasItems().ToString();
       var compare = "False";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      var dataColumn = new DataUtilColumn()
+      var dataKey = new DataKey
       {
         ID = 1,
         DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        NewName = "NewName",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
-      result = dataColumns.LJCHasItems().ToString();
+      result = dataKeys.LJCHasItems().ToString();
       compare = "True";
       TestCommon.Write($"{methodName}2", result, compare);
     }
@@ -221,39 +240,45 @@ namespace TestDataUtilityDAL
     {
       var methodName = "LJCSerialize()";
 
-      var dataColumns = new DataColumns();
-      var dataColumn = new DataUtilColumn()
+      var dataKeys = new DataKeys();
+      var dataKey = new DataKey
       {
         ID = 1,
         DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        NewName = "NewName",
+        KeyType = 0,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = null,
+        TargetTableName = null,
+        TargetColumnName = null,
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
-      dataColumn = new DataUtilColumn()
+      dataKey = new DataKey
       {
         ID = 2,
         DataSiteID = 3,
         DataTableID = 4,
         DataTableSiteID = 5,
         Name = "First",
-        Description = "Description2",
-        Sequence = 2,
-        NewName = "NewName2",
+        KeyType = 0,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = null,
+        TargetTableName = null,
+        TargetColumnName = null,
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
       // Test Method
-      dataColumns.LJCSerialize();
+      dataKeys.LJCSerialize();
 
-      var newDataTables = DataTables.LJCDeserialize();
+      var newDataKeys = DataKeys.LJCDeserialize();
 
-      var result = newDataTables.Count.ToString();
+      var result = newDataKeys.Count.ToString();
       var compare = "2";
       TestCommon.Write($"{methodName}", result, compare);
     }
@@ -267,12 +292,12 @@ namespace TestDataUtilityDAL
       var methodName = "Add()";
 
       // Test Method
-      var dataColumns = new DataColumns
+      var dataKeys = new DataKeys
       {
         { 1, 2, 3, 4, "Name" },
       };
 
-      var item = dataColumns[0];
+      var item = dataKeys[0];
       var result = item.Name;
       var compare = "Name";
       TestCommon.Write($"{methodName}", result, compare);
@@ -283,22 +308,25 @@ namespace TestDataUtilityDAL
     {
       var methodName = "LJCGetWithID()";
 
-      var dataColumns = new DataColumns();
-      var dataColumn = new DataUtilColumn()
+      var dataKeys = new DataKeys();
+      var dataKey = new DataKey
       {
         ID = 1,
         DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        NewName = "NewName",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
       // Test Method
-      var item = dataColumns.LJCGetWithID(1, 2);
+      var item = dataKeys.LJCGetWithID(1, 2);
 
       var result = "";
       if (item != null)
@@ -314,22 +342,25 @@ namespace TestDataUtilityDAL
     {
       var methodName = "LJCGetWithName()";
 
-      var dataColumns = new DataColumns();
-      var dataColumn = new DataUtilColumn()
+      var dataKeys = new DataKeys();
+      var dataKey = new DataKey
       {
         ID = 1,
         DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        NewName = "NewName",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
       // Test Method
-      var item = dataColumns.LJCGetWithUnique(3, 4, "Name");
+      var item = dataKeys.LJCGetWithUnique(3, 4, "Name");
 
       var result = "";
       if (item != null)
@@ -345,38 +376,44 @@ namespace TestDataUtilityDAL
     {
       var methodName = "LJCRemove()";
 
-      var dataColumns = new DataColumns();
-      var dataColumn = new DataUtilColumn()
+      var dataKeys = new DataKeys();
+      var dataKey = new DataKey
       {
         ID = 1,
         DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        NewName = "NewName",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
-      dataColumn = new DataUtilColumn()
+      dataKey = new DataKey
       {
         ID = 2,
         DataSiteID = 3,
         DataTableID = 4,
         DataTableSiteID = 5,
         Name = "First",
-        Description = "Description2",
-        Sequence = 2,
-        NewName = "NewName2",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
       // Test Method
-      dataColumns.LJCRemove(3, 4, "Name");
+      dataKeys.LJCRemove(3, 4, "Name");
 
-      dataColumn = dataColumns[0];
-      var result = dataColumn.Name;
+      dataKey = dataKeys[0];
+      var result = dataKey.Name;
       var compare = "First";
       TestCommon.Write($"{methodName}", result, compare);
     }
@@ -389,38 +426,44 @@ namespace TestDataUtilityDAL
     {
       var methodName = "LJCSortID()";
 
-      var dataColumns = new DataColumns();
-      var dataColumn = new DataUtilColumn()
+      var dataKeys = new DataKeys();
+      var dataKey = new DataKey
       {
         ID = 2,
         DataSiteID = 3,
         DataTableID = 4,
         DataTableSiteID = 5,
         Name = "First",
-        Description = "Description2",
-        Sequence = 2,
-        NewName = "NewName2",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
-      dataColumn = new DataUtilColumn()
+      dataKey = new DataKey
       {
         ID = 1,
         DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        NewName = "NewName",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
       // Test Method
-      dataColumns.LJCSortID();
+      dataKeys.LJCSortID();
 
-      dataColumn = dataColumns[0];
-      var result = dataColumn.ID.ToString();
+      dataKey = dataKeys[0];
+      var result = dataKey.ID.ToString();
       var compare = "1";
       TestCommon.Write($"{methodName}", result, compare);
     }
@@ -430,39 +473,45 @@ namespace TestDataUtilityDAL
     {
       var methodName = "LJCSortUnique()";
 
-      var dataColumns = new DataColumns();
-      var dataColumn = new DataUtilColumn()
+      var dataKeys = new DataKeys();
+      var dataKey = new DataKey
       {
         ID = 1,
         DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        NewName = "NewName",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
-      dataColumn = new DataUtilColumn()
+      dataKey = new DataKey
       {
         ID = 2,
-        DataSiteID = 3,
+        DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "First",
-        Description = "Description2",
-        Sequence = 2,
-        NewName = "NewName2",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
       // Test Method
-      var comparer = new DataColumnUnique();
-      dataColumns.LJCSortUnique(comparer);
+      var comparer = new DataKeyUniqueComparer();
+      dataKeys.LJCSortUnique(comparer);
 
-      dataColumn = dataColumns[0];
-      var result = dataColumn.Name;
+      dataKey = dataKeys[0];
+      var result = dataKey.Name;
       var compare = "First";
       TestCommon.Write($"{methodName}", result, compare);
     }
@@ -475,35 +524,41 @@ namespace TestDataUtilityDAL
     {
       var methodName = "NameIndexer()";
 
-      var dataColumns = new DataColumns();
-      var dataColumn = new DataUtilColumn()
+      var dataKeys = new DataKeys();
+      var dataKey = new DataKey
       {
         ID = 1,
         DataSiteID = 2,
         DataTableID = 3,
         DataTableSiteID = 4,
         Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        NewName = "NewName",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
-      dataColumn = new DataUtilColumn()
+      dataKey = new DataKey
       {
         ID = 2,
         DataSiteID = 3,
         DataTableID = 4,
         DataTableSiteID = 5,
         Name = "First",
-        Description = "Description2",
-        Sequence = 2,
-        NewName = "NewName2",
+        KeyType = 1,
+        IsClustered = false,
+        IsAscending = false,
+        SourceColumnName = "SourceColumnName",
+        TargetTableName = "TargetTableName",
+        TargetColumnName = "TargetColumnName",
       };
-      dataColumns.Add(dataColumn);
+      dataKeys.Add(dataKey);
 
-      dataColumn = dataColumns[3, 4, "Name"];
-      var result = dataColumn.Name;
+      dataKey = dataKeys[3, 4, "Name"];
+      var result = dataKey.Name;
       var compare = "Name";
       TestCommon.Write($"{methodName}", result, compare);
     }

@@ -275,22 +275,11 @@ namespace TestDataUtilityDAL
     {
       var methodName = "Add()";
 
-      var dataTables = new DataTables();
-      var dataTable = new DataUtilTable
-      {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
-        Name = "Name",
-        Description = "Description",
-        Sequence = 1,
-        SchemaName = "SchemaName",
-        NewName = "NewName",
-      };
-
       // Test Method
-      dataTables.Add(dataTable);
+      var dataTables = new DataTables
+      {
+        { 1, 2, 3, 4, "Name" },
+      };
 
       var item = dataTables[0];
       var result = item.Name;

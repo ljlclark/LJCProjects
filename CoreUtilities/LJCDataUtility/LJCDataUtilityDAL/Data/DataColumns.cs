@@ -132,12 +132,20 @@ namespace LJCDataUtilityDAL
     // Creates and adds the object from the supplied values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/Add1/*'/>
-    public DataUtilColumn Add(short dbID, long dataTableID
+    public DataUtilColumn Add(long id, short dbID, long dataTableID
       , short dataTableDbID, string name)
     {
       DataUtilColumn retValue = null;
 
       string message = "";
+      if (id <= 0)
+      {
+        message += "id must be greater than zero.\r\n";
+      }
+      if (dbID <= 0)
+      {
+        message += "dbID must be greater than zero.\r\n";
+      }
       if (dbID <= 0)
       {
         message += "dbID must be greater than zero.\r\n";
@@ -167,6 +175,7 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilColumn()
         {
+          ID = id,
           DataSiteID = dbID,
           DataTableID = dataTableID,
           DataTableSiteID = dataTableDbID,

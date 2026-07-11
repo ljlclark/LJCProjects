@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL
 {
@@ -366,6 +367,7 @@ namespace LJCDataUtilityDAL
     // Gets a reference to the ChangedNames list.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='members/ChangedNames/*'/>
+    [XmlIgnore]
     public ChangedNames ChangedNames { get; private set; }
     #endregion
 
