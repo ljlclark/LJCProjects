@@ -69,6 +69,14 @@ namespace LJCDataUtilityDAL
     {
       return Manager.DataDefinition.LJCGetColumns(propertyNames);
     }
+
+    // Creates a list of BaseDefinition property names.
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='members/PropertyNames/*'/>
+    public List<string> PropertyNames()
+    {
+      return Manager.GetPropertyNames();
+    }
     #endregion
 
     #region Data Methods

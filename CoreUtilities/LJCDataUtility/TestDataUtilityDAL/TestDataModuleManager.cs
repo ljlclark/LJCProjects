@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // TestDataModuleManager.cs
 using LJCDataAccess;
@@ -183,15 +183,11 @@ namespace TestDataUtilityDAL
 
       // Get Key Methods
       IDKey();
-      ParentKey();
       UniqueKey();
 
       // DataTable Info Methods
       Columns();
       PropertyNames();
-
-      // Joins
-      GetJoins();
     }
 
     // Remove the test record.
@@ -205,23 +201,20 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
+      var dataModuleManager = new DataModuleManager(dbServiceRef
+        , dataConfigName);
 
-      long dataModuleID = 1;
-      long dataModuleSiteID = 1;
-      string name = "TestTableName";
+      string name = "TestModuleName";
 
       // Delete the test record.
       var uniqueColumns = new DbColumns()
       {
-        { "DataModuleID", dataModuleID },
-        { "DataModuleSiteID", dataModuleSiteID },
         { "Name", (object)name },
       };
-      dataTableManager.Delete(uniqueColumns);
+      dataModuleManager.Delete(uniqueColumns);
 
       // Verify the test record does not exist.
-      var utilTable = dataTableManager.Retrieve(uniqueColumns);
+      var utilTable = dataModuleManager.Retrieve(uniqueColumns);
       var result = "HasObject";
       if (null == utilTable)
       {
@@ -427,44 +420,36 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
+      var dataModuleManager = new DataModuleManager(dbServiceRef
+        , dataConfigName);
 
       long dataSiteID = 1;
-      long dataModuleID = 1;
-      long dataModuleSiteID = 1;
-      string name = "TestTableName";
+      string name = "TestModuleName";
 
       // Create the test record.
-      var dataUtilTable = new DataUtilTable()
+      var dataModule = new DataModule()
       {
         DataSiteID = dataSiteID,
-        DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleSiteID,
         Name = name,
         Description = "The test table.",
-        Sequence = 5,
-        SchemaName = "dbo",
-        NewName = null,
       };
-      dataTableManager.Add(dataUtilTable);
+      dataModuleManager.Add(dataModule);
 
       // Verify the test record was created.
       var uniqueColumns = new DbColumns()
       {
-        { "DataModuleID", dataModuleID },
-        { "DataModuleSiteID", dataModuleSiteID },
         { "Name", (object)name },
       };
 
       // Test Method
-      var utilTable = dataTableManager.Retrieve(uniqueColumns);
+      dataModule = dataModuleManager.Retrieve(uniqueColumns);
 
-      var result = utilTable.Name;
-      var compare = "TestTableName";
+      var result = dataModule.Name;
+      var compare = "TestModuleName";
       TestCommon.Write($"{methodName}", result, compare);
 
       // Delete the test record.
-      dataTableManager.Delete(uniqueColumns);
+      dataModuleManager.Delete(uniqueColumns);
     }
 
     // Updates the record.
@@ -491,60 +476,52 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
+      var dataModuleManager = new DataModuleManager(dbServiceRef
+        , dataConfigName);
 
       short dbID = 1;
-      long dataModuleID = 1;
-      long dataModuleSiteID = 1;
-      string name = "TestTableName";
+      string name = "TestModuleName";
 
       // Create the test record.
-      var dataUtilTable = new DataUtilTable()
+      var dataModule = new DataModule()
       {
         DataSiteID = dbID,
-        DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleSiteID,
         Name = name,
         Description = "The test table.",
-        Sequence = 5,
-        SchemaName = "dbo",
-        NewName = null,
       };
-      dataTableManager.Add(dataUtilTable);
+      dataModuleManager.Add(dataModule);
 
       // Verify the test record was created.
       var uniqueColumns = new DbColumns()
       {
-        { "DataModuleID", dataModuleID },
-        { "DataModuleSiteID", dataModuleSiteID },
         { "Name", (object)name },
       };
-      var utilTable = dataTableManager.Retrieve(uniqueColumns);
-      var result = utilTable.Name;
-      var compare = "TestTableName";
+      dataModule = dataModuleManager.Retrieve(uniqueColumns);
+      var result = dataModule.Name;
+      var compare = "TestModuleName";
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Update the test record.
-      var id = utilTable.ID;
-      dbID = (short)utilTable.DataSiteID;
-      var idKey = dataTableManager.IDKey(id, dbID);
-      utilTable.Description += " Updated";
+      var id = dataModule.ID;
+      dbID = (short)dataModule.DataSiteID;
+      var idKey = dataModuleManager.IDKey(id, dbID);
+      dataModule.Description += " Updated";
       var propertyNames = new List<string>()
       {
         "Description",
       };
 
       // Test Method
-      dataTableManager.Update(utilTable, idKey, propertyNames);
+      dataModuleManager.Update(dataModule, idKey, propertyNames);
 
       // Verify the test record was updated.
-      utilTable = dataTableManager.RetrieveWithID(id, dbID);
-      result = utilTable.Description;
+      dataModule = dataModuleManager.RetrieveWithID(id, dbID);
+      result = dataModule.Description;
       compare = "The test table. Updated";
       TestCommon.Write($"{methodName}2", result, compare);
 
       // Delete the test record.
-      dataTableManager.Delete(uniqueColumns);
+      dataModuleManager.Delete(uniqueColumns);
     }
     #endregion
 
@@ -574,53 +551,45 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
+      var dataModuleManager = new DataModuleManager(dbServiceRef
+        , dataConfigName);
 
       short dbID = 1;
-      long dataModuleID = 1;
-      long dataModuleSiteID = 1;
-      string name = "TestTableName";
+      string name = "TestModuleName";
 
       // Create the test record.
-      var dataUtilTable = new DataUtilTable()
+      var dataModule = new DataModule()
       {
         DataSiteID = dbID,
-        DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleSiteID,
         Name = name,
         Description = "The test table.",
-        Sequence = 5,
-        SchemaName = "dbo",
-        NewName = null,
       };
-      dataTableManager.Add(dataUtilTable);
+      dataModuleManager.Add(dataModule);
 
       // Verify the test record was created.
       var uniqueColumns = new DbColumns()
       {
-        { "DataModuleID", dataModuleID },
-        { "DataModuleSiteID", dataModuleSiteID },
         { "Name", (object)name },
       };
-      var utilTable = dataTableManager.Retrieve(uniqueColumns);
+      dataModule = dataModuleManager.Retrieve(uniqueColumns);
 
-      var result = utilTable.Name;
-      var compare = "TestTableName";
+      var result = dataModule.Name;
+      var compare = "TestModuleName";
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Retrieve with ID.
-      var id = utilTable.ID;
+      var id = dataModule.ID;
 
       // Test Method
-      utilTable = dataTableManager.RetrieveWithID(id, dbID);
+      dataModule = dataModuleManager.RetrieveWithID(id, dbID);
 
       // Verify the record was retrieved.
-      result = utilTable.Name;
-      compare = "TestTableName";
+      result = dataModule.Name;
+      compare = "TestModuleName";
       TestCommon.Write($"{methodName}2", result, compare);
 
       // Delete the test record.
-      dataTableManager.Delete(uniqueColumns);
+      dataModuleManager.Delete(uniqueColumns);
     }
 
     // Retrieves a record with the supplied unique values.
@@ -647,43 +616,34 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
+      var dataModuleManager = new DataModuleManager(dbServiceRef
+        , dataConfigName);
 
       short dbID = 1;
-      long dataModuleID = 1;
-      short dataModuleDbID = 1;
-      string name = "TestTableName";
+      string name = "TestModuleName";
 
       // Create the test record.
-      var dataUtilTable = new DataUtilTable()
+      var dataModule = new DataModule()
       {
         DataSiteID = dbID,
-        DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleDbID,
         Name = name,
         Description = "The test table.",
-        Sequence = 5,
-        SchemaName = "dbo",
-        NewName = null,
       };
-      dataTableManager.Add(dataUtilTable);
+      dataModuleManager.Add(dataModule);
 
       // Test Method
-      var utilTable = dataTableManager.RetrieveWithUnique(dataModuleID
-        , dataModuleDbID, name);
+      dataModule = dataModuleManager.RetrieveWithUnique(name);
 
-      var result = utilTable.Name;
-      var compare = "TestTableName";
+      var result = dataModule.Name;
+      var compare = "TestModuleName";
       TestCommon.Write($"{methodName}", result, compare);
 
       // Delete the test record.
       var uniqueColumns = new DbColumns()
       {
-        { "DataModuleID", dataModuleID },
-        { "DataModuleSiteID", dataModuleDbID },
         { "Name", (object)name },
       };
-      dataTableManager.Delete(uniqueColumns);
+      dataModuleManager.Delete(uniqueColumns);
     }
     #endregion
 
@@ -713,59 +673,20 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
+      var dataModuleManager = new DataModuleManager(dbServiceRef
+        , dataConfigName);
 
       long id = 1;
       short dbID = 1;
 
       // Test Method
-      var idKey = dataTableManager.IDKey(id, dbID);
+      var idKey = dataModuleManager.IDKey(id, dbID);
 
-      var key = idKey.LJCSearchPropertyName(DataUtilTable.ColumnID);
+      var key = idKey.LJCSearchPropertyName(DataModule.ColumnID);
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";
       var compare = "ID: 1";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Gets the Parent ID key columns.
-    private void ParentKey()
-    {
-      var methodName = "ParentKey()";
-
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
-
-      // Create the data table manager.
-      var dataConfigName = "DataUtility";
-      var dbServiceRef = new DbServiceRef()
-      {
-        DbDataAccess = new DbDataAccess(dataConfigName),
-      };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
-
-      long dataModuleID = 1;
-      short dataModuleDbID = 1;
-
-      // Test Method
-      var idKey = dataTableManager.ParentKey(dataModuleID, dataModuleDbID);
-
-      var key = idKey.LJCSearchPropertyName(DataUtilTable.ColumnDataModuleID);
-      var propertyName = key.PropertyName;
-      var value = key.Value;
-      var result = $"{propertyName}: {value}";
-      var compare = "DataModuleID: 1";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -793,21 +714,19 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
+      var dataModuleManager = new DataModuleManager(dbServiceRef
+        , dataConfigName);
 
-      long dataModuleID = 1;
-      short dataModuleDbID = 1;
-      string name = "TestTableName";
+      string name = "TestModuleName";
 
       // Test Method
-      var idKey = dataTableManager.UniqueKey(dataModuleID, dataModuleDbID
-        , name);
+      var idKey = dataModuleManager.UniqueKey(name);
 
-      var key = idKey.LJCSearchPropertyName(DataUtilTable.ColumnName);
+      var key = idKey.LJCSearchPropertyName(DataModule.ColumnName);
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";
-      var compare = "Name: TestTableName";
+      var compare = "Name: TestModuleName";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -838,17 +757,16 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
+      var dataModuleManager = new DataModuleManager(dbServiceRef
+        , dataConfigName);
 
       var propertyNames = new List<string>()
       {
-        "DataModuleID",
-        "DataModuleSiteID",
         "Name",
       };
 
       // Test Method
-      var columns = dataTableManager.Columns(propertyNames);
+      var columns = dataModuleManager.Columns(propertyNames);
 
       var column = columns["Name"];
       var result = column.PropertyName;
@@ -880,54 +798,15 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
+      var dataModuleManager = new DataModuleManager(dbServiceRef
+        , dataConfigName);
 
       // Test Method
-      var names = dataTableManager.PropertyNames();
+      var names = dataModuleManager.PropertyNames();
       var result = names[2];
-      var compare = "DataSiteID";
+      var compare = "ID";
       TestCommon.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Joins
-
-    // Creates and returns the Load Joins object.
-    private void GetJoins()
-    {
-      var methodName = "GetJoins()";
-
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
-
-      // Create the data table manager.
-      var dataConfigName = "DataUtility";
-      var dbServiceRef = new DbServiceRef()
-      {
-        DbDataAccess = new DbDataAccess(dataConfigName),
-      };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
-
-      // Test Method
-      var joins = dataTableManager.GetJoins();
-
-      var result = joins[0].TableName;
-      var compare = "DataModule";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-    #endregion
-
-    #region Properties
     #endregion
 
     private TestCommon TestCommon { get; set; }
