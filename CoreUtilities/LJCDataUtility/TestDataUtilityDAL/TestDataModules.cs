@@ -16,6 +16,7 @@ namespace TestDataUtilityDAL
     public TestDataModules()
     {
       TestCommon = new TestCommon("TestDataModules");
+      Run();
     }
 
     // Run the tests.

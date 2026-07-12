@@ -15,6 +15,7 @@ namespace TestDataUtilityDAL
     public TestTableKey()
     {
       TestCommon = new TestCommon("TestTableKey");
+      Run();
     }
 
     // Run the tests.

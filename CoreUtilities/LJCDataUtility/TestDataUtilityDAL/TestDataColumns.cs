@@ -16,6 +16,7 @@ namespace TestDataUtilityDAL
     public TestDataColumns()
     {
       TestCommon = new TestCommon("TestDataColumns");
+      Run();
     }
 
     // Run the tests.

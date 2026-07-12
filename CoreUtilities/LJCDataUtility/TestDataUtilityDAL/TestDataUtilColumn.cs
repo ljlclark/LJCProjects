@@ -1,20 +1,21 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TestDataColumn.cs
+// TestDataUtilColumn.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 
 namespace TestDataUtilityDAL
 {
   // Tests the DataUtilTable object.
-  internal class TestDataColumn
+  internal class TestDataUtilColumn
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    public TestDataColumn()
+    public TestDataUtilColumn()
     {
       TestCommon = new TestCommon("TestDataColumn");
+      Run();
     }
 
     // Run the tests.

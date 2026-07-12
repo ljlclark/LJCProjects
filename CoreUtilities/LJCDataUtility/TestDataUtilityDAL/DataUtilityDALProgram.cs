@@ -5,32 +5,22 @@ namespace TestDataUtilityDAL
   {
     static void Main()
     {
-      var testDataModule = new TestDataModule();
-      testDataModule.Run();
-      var testDataModules = new TestDataModules();
-      testDataModules.Run();
+      _ = new TestDataModule();
+      _ = new TestDataModules();
+      _ = new TestDataModuleManager();
 
-      var testDataTable = new TestDataUtilTable();
-      testDataTable.Run();
-      var testDataTables = new TestDataTables();
-      testDataTables.Run();
-      var testDataTableManager = new TestDataTableManager();
-      testDataTableManager.Run();
+      _ = new TestDataUtilTable();
+      _ = new TestDataTables();
+      _ = new TestDataTableManager();
 
-      var testDataColumn = new TestDataColumn();
-      testDataColumn.Run();
-      var testDataColumns = new TestDataColumns();
-      testDataColumns.Run();
+      _ = new TestDataUtilColumn();
+      _ = new TestDataColumns();
 
-      var testDataKey = new TestDataKey();
-      testDataKey.Run();
-      var testDataKeys = new TestDataKeys();
-      testDataKeys.Run();
+      _ = new TestDataKey();
+      _ = new TestDataKeys();
 
-      var testTableKey = new TestTableKey();
-      testTableKey.Run();
-      var testTableKeys = new TestTableKeys();
-      testTableKeys.Run();
+      _ = new TestTableKey();
+      _ = new TestTableKeys();
 
       // Test collection of DbColumns.
       var testDataTable2 = new TestDataTable2();
