@@ -14,7 +14,7 @@ namespace TestDataUtilityDAL
     // Initializes an object instance.
     public TestDataUtilColumn()
     {
-      TestCommon = new TestCommon("TestDataColumn");
+      TestCommon = new TestCommon("TestDataUtilColumn");
       Run();
     }
 

@@ -34,8 +34,8 @@
     <summary>
       Loads records with the supplied values.
     </summary>
-    <param name="id">The table ID.</param>
-    <param name="dbID">The database ID.</param>"
+    <param name="parentID">The parent table ID.</param>
+    <param name="parentDbID">The parent database ID.</param>"
     <param name="keyType">The key type name.</param>
     <param name="propertyNames">The included property names.</param>
     <returns>The retrieved records collection.</returns>
@@ -96,8 +96,8 @@
     <summary>
       Gets the type key columns.
     </summary>
-    <param name="id">The table ID.</param>
-    <param name="dbID">The database ID.</param>
+    <param name="parentID">The parent table ID.</param>
+    <param name="parentDbID">The parent database ID.</param>"
     <param name="keyType">The key type name.</param>
     <returns>The type keys object.</returns>
   </TypeKey>

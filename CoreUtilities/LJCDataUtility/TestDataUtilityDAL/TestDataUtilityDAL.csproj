@@ -65,9 +65,12 @@
   <ItemGroup>
     <Compile Include="DataUtilityDALProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestTableKeyManager.cs" />
+    <Compile Include="TestDataKeyManager.cs" />
     <Compile Include="TestDataColumns.cs" />
     <Compile Include="TestDataKeys.cs" />
     <Compile Include="TestDataModuleManager.cs" />
+    <Compile Include="TestDataColumnManager.cs" />
     <Compile Include="TestTableKeys.cs" />
     <Compile Include="TestTableKey.cs" />
     <Compile Include="TestDataTables.cs" />

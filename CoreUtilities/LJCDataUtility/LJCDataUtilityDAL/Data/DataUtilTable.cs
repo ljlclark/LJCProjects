@@ -165,7 +165,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/DataSiteID/*'/>
     [Required]
     [Column("DataSiteID", TypeName = "bigint")]
-    public long DataSiteID
+    public short DataSiteID
     {
       get => _DataDbID;
       set
@@ -177,7 +177,7 @@ namespace LJCDataUtilityDAL
         }
       }
     }
-    private long _DataDbID;
+    private short _DataDbID;
 
     // Gets or sets the parent table row ID.
     /// <include file='doc/DataTable.xml'
@@ -203,7 +203,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/DataModuleSiteID/*'/>
     [Required]
     [Column("DataModuleSiteID", TypeName = "bigint")]
-    public long DataModuleSiteID
+    public short DataModuleSiteID
     {
       get => _DataModuleDbID;
       set
@@ -215,7 +215,7 @@ namespace LJCDataUtilityDAL
         }
       }
     }
-    private long _DataModuleDbID;
+    private short _DataModuleDbID;
 
     // Gets or sets the name value.
     /// <include file='doc/DataTable.xml'
@@ -382,13 +382,13 @@ namespace LJCDataUtilityDAL
       public long ID { get; set; }
 
       // Gets or sets the database ID.
-      public long DataDbID { get; set; }
+      public short DataDbID { get; set; }
 
       // Gets or sets the parent table row ID.
       public long DataModuleID { get; set; }
 
       // Gets or sets the parent database ID.
-      public long DataModuleSiteID { get; set; }
+      public short DataModuleSiteID { get; set; }
 
       // Gets or sets the unique name.
       public string Name { get; set; }

@@ -5,6 +5,7 @@ namespace TestDataUtilityDAL
   {
     static void Main()
     {
+      // Test DAL
       _ = new TestDataModule();
       _ = new TestDataModules();
       _ = new TestDataModuleManager();
@@ -15,18 +16,19 @@ namespace TestDataUtilityDAL
 
       _ = new TestDataUtilColumn();
       _ = new TestDataColumns();
+      _ = new TestDataColumnManager();
 
       _ = new TestDataKey();
       _ = new TestDataKeys();
+      _ = new TestDataKeyManager();
 
       _ = new TestTableKey();
       _ = new TestTableKeys();
+      _ = new TestTableKeyManager();
 
       // Test collection of DbColumns.
-      var testDataTable2 = new TestDataTable2();
-      testDataTable2.Run();
-      var testDataTables2 = new TestDataTables2();
-      testDataTables2.Run();
+      _ = new TestDataTable2();
+      _ = new TestDataTables2();
     }
   }
 }

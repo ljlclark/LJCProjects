@@ -67,7 +67,7 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Retrieves a collection of Primary key records.
+    // Retrieves a collection of Key records.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/LoadTableKeys/*'/>
     public TableKeys LoadTableKeys(string keyType = "PRIMARY KEY"
@@ -195,6 +195,11 @@ namespace LJCDataUtilityDAL
     /// <include file='Doc/TableKeyManager.xml'
     ///  path='members/ResultConverter/*'/>
     public ResultConverter<TableKey, TableKeys> ResultConverter { get; set; }
+
+    // Gets or sets the table name.
+    /// <include file='Doc/TableKeyManager.xml'
+    ///  path='members/TableName/*'/>
+    public string TableName { get; set; }
     #endregion
   }
 }

@@ -15,9 +15,11 @@ namespace TestDataUtilityDAL
     #region Constructor Methods
 
     // Initializes an object instance.
+    /// <include file='Doc/TestDataTableManager.xml'
+    ///  path='members/Constructor/*'/>
     public TestDataTableManager()
     {
-      TestCommon = new TestCommon("DataTableManager");
+      TestCommon = new TestCommon("TestDataTableManager");
       Run();
     }
 
@@ -26,8 +28,23 @@ namespace TestDataUtilityDAL
     #region Methods
 
     // Run the tests.
+    /// <include file='Doc/TestDataTableManager.xml'
+    ///  path='members/Run/*'/>
     public void Run()
     {
+      // The DataConfigs.xml file example.
+      //<?xml version='1.0'?>
+      //<DataConfigs
+      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+      //  <DataConfig>
+      //    <Name>DataUtility</Name>
+      //    <ConnectionType>SQLServer</ConnectionType>
+      //    <DbServer>DBServerName</DbServer>
+      //    <Database>DatabaseName</Database>
+      //  </DataConfig >
+      //</DataConfigs>
+
       CleanUp();
 
       // DataTable Data Methods
@@ -92,25 +109,14 @@ namespace TestDataUtilityDAL
     }
     #endregion
 
-    #region Data Methods
+    #region Manager Methods
 
-    // Adds a record to the database.
-    private void Add()
+    // Creates a collection of columns that match the supplied list.
+    private void Columns()
     {
-      string methodName = "Add()";
+      var methodName = "Columns()";
 
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
+      // See: Run() for the DataConfigs.xml file example.
 
       // Create the data table manager.
       var dataConfigName = "DataUtility";
@@ -120,9 +126,65 @@ namespace TestDataUtilityDAL
       };
       var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
 
-      long dataSiteID = 1;
+      var propertyNames = new List<string>()
+      {
+        "DataModuleID",
+        "DataModuleSiteID",
+        "Name",
+      };
+
+      // Test Method
+      var columns = dataTableManager.Columns(propertyNames);
+
+      var column = columns["Name"];
+      var result = column.PropertyName;
+      var compare = "Name";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Creates a list of BaseDefinition property names.
+    private void PropertyNames()
+    {
+      var methodName = "PropertyNames()";
+
+      // See: Run() for the DataConfigs.xml file example.
+
+      // Create the data table manager.
+      var dataConfigName = "DataUtility";
+      var dbServiceRef = new DbServiceRef()
+      {
+        DbDataAccess = new DbDataAccess(dataConfigName),
+      };
+      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
+
+      // Test Method
+      var names = dataTableManager.PropertyNames();
+      var result = names[2];
+      var compare = "DataSiteID";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+    #endregion
+
+    #region Data Methods
+
+    // Adds a record to the database.
+    private void Add()
+    {
+      string methodName = "Add()";
+
+      // See: Run() for the DataConfigs.xml file example.
+
+      // Create the data table manager.
+      var dataConfigName = "DataUtility";
+      var dbServiceRef = new DbServiceRef()
+      {
+        DbDataAccess = new DbDataAccess(dataConfigName),
+      };
+      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
+
+      short dataSiteID = 1;
       long dataModuleID = 1;
-      long dataModuleSiteID = 1;
+      short dataModuleSiteID = 1;
       string name = "TestTableName";
 
       // Create the test record.
@@ -162,18 +224,7 @@ namespace TestDataUtilityDAL
     {
       string methodName = "Delete()";
 
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
+      // See: Run() for the DataConfigs.xml file example.
 
       // Create the data table manager.
       var dataConfigName = "DataUtility";
@@ -220,18 +271,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "Load()";
 
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
+      // See: Run() for the DataConfigs.xml file example.
 
       // Create the data table manager.
       var dataConfigName = "DataUtility";
@@ -241,9 +281,9 @@ namespace TestDataUtilityDAL
       };
       var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
 
-      long dataSiteID = 1;
+      short dataSiteID = 1;
       long dataModuleID = 1;
-      long dataModuleSiteID = 1;
+      short dataModuleSiteID = 1;
       string name = "TestTableName";
 
       // Create the test record.
@@ -287,18 +327,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "Retrieve()";
 
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
+      // See: Run() for the DataConfigs.xml file example.
 
       // Create the data table manager.
       var dataConfigName = "DataUtility";
@@ -308,9 +337,9 @@ namespace TestDataUtilityDAL
       };
       var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
 
-      long dataSiteID = 1;
+      short dataSiteID = 1;
       long dataModuleID = 1;
-      long dataModuleSiteID = 1;
+      short dataModuleSiteID = 1;
       string name = "TestTableName";
 
       // Create the test record.
@@ -351,18 +380,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "Update()";
 
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
+      // See: Run() for the DataConfigs.xml file example.
 
       // Create the data table manager.
       var dataConfigName = "DataUtility";
@@ -374,7 +392,7 @@ namespace TestDataUtilityDAL
 
       short dbID = 1;
       long dataModuleID = 1;
-      long dataModuleSiteID = 1;
+      short dataModuleSiteID = 1;
       string name = "TestTableName";
 
       // Create the test record.
@@ -434,18 +452,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "RetrieveWithID()";
 
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
+      // See: Run() for the DataConfigs.xml file example.
 
       // Create the data table manager.
       var dataConfigName = "DataUtility";
@@ -457,7 +464,7 @@ namespace TestDataUtilityDAL
 
       short dbID = 1;
       long dataModuleID = 1;
-      long dataModuleSiteID = 1;
+      short dataModuleSiteID = 1;
       string name = "TestTableName";
 
       // Create the test record.
@@ -507,18 +514,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "RetrieveWithUnique()";
 
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
+      // See: Run() for the DataConfigs.xml file example.
 
       // Create the data table manager.
       var dataConfigName = "DataUtility";
@@ -573,18 +569,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "IDKey()";
 
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
+      // See: Run() for the DataConfigs.xml file example.
 
       // Create the data table manager.
       var dataConfigName = "DataUtility";
@@ -613,18 +598,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "ParentKey()";
 
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
+      // See: Run() for the DataConfigs.xml file example.
 
       // Create the data table manager.
       var dataConfigName = "DataUtility";
@@ -653,18 +627,7 @@ namespace TestDataUtilityDAL
     {
       var methodName = "UniqueKey()";
 
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
+      // See: Run() for the DataConfigs.xml file example.
 
       // Create the data table manager.
       var dataConfigName = "DataUtility";
@@ -691,103 +654,14 @@ namespace TestDataUtilityDAL
     }
     #endregion
 
-    #region Info Methods
-
-    // Creates a collection of columns that match the supplied list.
-    private void Columns()
-    {
-      var methodName = "Columns()";
-
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
-
-      // Create the data table manager.
-      var dataConfigName = "DataUtility";
-      var dbServiceRef = new DbServiceRef()
-      {
-        DbDataAccess = new DbDataAccess(dataConfigName),
-      };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
-
-      var propertyNames = new List<string>()
-      {
-        "DataModuleID",
-        "DataModuleSiteID",
-        "Name",
-      };
-
-      // Test Method
-      var columns = dataTableManager.Columns(propertyNames);
-
-      var column = columns["Name"];
-      var result = column.PropertyName;
-      var compare = "Name";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Creates a list of BaseDefinition property names.
-    private void PropertyNames()
-    {
-      var methodName = "PropertyNames()";
-
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
-
-      // Create the data table manager.
-      var dataConfigName = "DataUtility";
-      var dbServiceRef = new DbServiceRef()
-      {
-        DbDataAccess = new DbDataAccess(dataConfigName),
-      };
-      var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
-
-      // Test Method
-      var names = dataTableManager.PropertyNames();
-      var result = names[2];
-      var compare = "DataSiteID";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-    #endregion
-
     #region Joins
 
-    // Creates and returns the Load Joins object.
+    // Creates and returns the Joins object.
     private void GetJoins()
     {
       var methodName = "GetJoins()";
 
-      // The DataConfigs.xml file example.
-      //<?xml version='1.0'?>
-      //<DataConfigs
-      //  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-      //  xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
-      //  <DataConfig>
-      //    <Name>DataUtility</Name>
-      //    <ConnectionType>SQLServer</ConnectionType>
-      //    <DbServer>dbServerName</DbServer>
-      //    <Database>databaseName</Database>
-      //  </DataConfig >
-      //</DataConfigs>
+      // See: Run() for the DataConfigs.xml file example.
 
       // Create the data table manager.
       var dataConfigName = "DataUtility";
@@ -806,6 +680,10 @@ namespace TestDataUtilityDAL
     }
     #endregion
 
+    #region Properties
+
+    // Gets or sets the TestCommon reference.
     private TestCommon TestCommon { get; set; }
+    #endregion
   }
 }

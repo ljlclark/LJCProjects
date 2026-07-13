@@ -14,6 +14,7 @@ namespace TestDataUtilityDAL
     public TestDataTable2()
     {
       TestCommon = new TestCommon("TestDataUtilTableNew");
+      Run();
     }
 
     // Run the tests.

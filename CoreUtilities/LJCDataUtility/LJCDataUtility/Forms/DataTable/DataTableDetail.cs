@@ -180,7 +180,7 @@ namespace LJCDataUtility
         else
         {
           LJCRecord.ID = 0;
-          LJCRecord.DataSiteID = mSettings.SiteID;
+          LJCRecord.DataSiteID = (short)mSettings.SiteID;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
           if (addedRecord != null)
@@ -322,7 +322,7 @@ namespace LJCDataUtility
     internal long LJCParentID { get; set; }
 
     // Gets or sets the ParentSite ID value.
-    internal long LJCParentSiteID { get; set; }
+    internal short LJCParentSiteID { get; set; }
 
     // Gets or sets the LJCParentName value.
     internal string LJCParentName

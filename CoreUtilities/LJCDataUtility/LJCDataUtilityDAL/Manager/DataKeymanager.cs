@@ -204,10 +204,10 @@ namespace LJCDataUtilityDAL
     // Loads records with the supplied values.
     /// <include file='Doc/DataKeyManager.xml'
     ///  path='items/LoadWithType/*'/>
-    public DataKeys LoadWithType(long id, short dbID, short keyType
+    public DataKeys LoadWithType(long parentID, short parentDbID, short keyType
       , List<string> propertyNames = null)
     {
-      var keyColumns = TypeKey(id, dbID, keyType);
+      var keyColumns = TypeKey(parentID, parentDbID, keyType);
       var retKeys = Load(keyColumns, propertyNames);
       return retKeys;
     }
@@ -262,6 +262,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/ForeignKey/*'/>
     public DbColumns ForeignKey(string targetTableName)
     {
+      // Add(columnName, object value, dataTypeName = "String");
       var foreignKeyType = 3;
       var retValue = new DbColumns()
       {
@@ -290,6 +291,7 @@ namespace LJCDataUtilityDAL
     ///  path='items/ParentKey/*'/>
     public DbColumns ParentKey(long parentID, short parentDbID)
     {
+      // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
         { DataKey.ColumnDataTableID, parentID },
@@ -303,6 +305,7 @@ namespace LJCDataUtilityDAL
     ///  path='items/ParentTypeKey/*'/>
     public DbColumns ParentTypeKey(long parentID, short parentDbID, int keyType)
     {
+      // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
         { DataKey.ColumnDataTableID, parentID },
@@ -315,12 +318,13 @@ namespace LJCDataUtilityDAL
     // Gets the parent by type key columns.
     /// <include file='Doc/DataKeyManager.xml'
     ///  path='items/TypeKey/*'/>
-    public DbColumns TypeKey(long id, short dbID, int keyType)
+    public DbColumns TypeKey(long parentID, short parentDbID, int keyType)
     {
+      // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()
       {
-        { DataKey.ColumnDataTableID, id },
-        { DataKey.ColumnDataTableDbID, dbID },
+        { DataKey.ColumnDataTableID, parentID },
+        { DataKey.ColumnDataTableDbID, parentDbID },
         { DataKey.ColumnKeyType, keyType },
       };
       return retValue;
@@ -331,6 +335,7 @@ namespace LJCDataUtilityDAL
     ///  path='items/UniqueKey/*'/>
     public DbColumns UniqueKey(long parentID, short parentDbID, string name)
     {
+      // Add(columnName, object value, dataTypeName = "String");
       // Needs cast for string to select the correct Add overload.
       var retValue = new DbColumns()
       {
@@ -357,11 +362,14 @@ namespace LJCDataUtilityDAL
       // dbColumns.Add(string columnName, string propertyName = null
       //   , string renameAs = null, string dataTypeName = "String"
       //   , string caption = null) 
+      // dbColumns.Add(columnName, object value, dataTypeName = "String");
 
       // Example SQL additions
-      // DataTable.Name
-      //left join DataTable
-      // on ((DataKey.TableID = DataTable.ID))
+      // //select
+      //   JoinTable.Name as JoinTableName
+      // //from MainTable
+      // left join JoinTable
+      //  on ((MainTable.ParentID = JoinTable.ID))
 
       DbJoin dbJoin;
       dbJoin = new DbJoin
