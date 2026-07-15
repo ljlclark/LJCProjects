@@ -266,7 +266,7 @@ namespace LJCDataUtility
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
-          LJCParentSiteID = parentDbID,
+          LJCParentDbID = parentDbID,
           LJCParentName = parentName,
         };
         detail.LJCChange += Detail_Change;
@@ -289,7 +289,7 @@ namespace LJCDataUtility
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
-          LJCParentSiteID = parentDbID,
+          LJCParentDbID = parentDbID,
           LJCParentName = parentName
         };
         detail.LJCChange += Detail_Change;

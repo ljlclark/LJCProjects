@@ -20,7 +20,7 @@ namespace TestDataUtilityDAL
     }
 
     // Run the tests.
-    public void Run()
+    private void Run()
     {
       // Static Methods
       LJCDeserialize();
@@ -49,7 +49,7 @@ namespace TestDataUtilityDAL
     #region Static Methods
 
     // Deserializes from the specified XML file.
-    public void LJCDeserialize()
+    private void LJCDeserialize()
     {
       var methodName = "LJCDeserialize()";
 
@@ -82,7 +82,7 @@ namespace TestDataUtilityDAL
     }
 
     // Get custom collection from List<T>.
-    public void LJCGetCollection()
+    private void LJCGetCollection()
     {
       var methodName = "LJCGetCollection()";
 
@@ -128,7 +128,7 @@ namespace TestDataUtilityDAL
     #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    public void Clone()
+    private void Clone()
     {
       var methodName = "Clone()";
 
@@ -161,7 +161,7 @@ namespace TestDataUtilityDAL
     }
 
     // Checks if the collection has items.
-    public void LJCHasItems()
+    private void LJCHasItems()
     {
       var methodName = "LJCHasItems()";
 
@@ -187,7 +187,7 @@ namespace TestDataUtilityDAL
     }
 
     // Serializes the collection to a file.
-    public void LJCSerialize()
+    private void LJCSerialize()
     {
       var methodName = "LJCSerialize()";
 
@@ -224,7 +224,7 @@ namespace TestDataUtilityDAL
     #region Collection Data Methods
 
     // Creates and adds the object from the supplied values.
-    public void Add()
+    private void Add()
     {
       var methodName = "Add()";
 
@@ -241,7 +241,7 @@ namespace TestDataUtilityDAL
     }
 
     // Retrieve the collection item.
-    public void LJCGetWithID()
+    private void LJCGetWithID()
     {
       var methodName = "LJCGetWithID()";
 
@@ -268,7 +268,7 @@ namespace TestDataUtilityDAL
     }
 
     // Retrieve the collection item with unique values.
-    public void LJCGetWithName()
+    private void LJCGetWithName()
     {
       var methodName = "LJCGetWithName()";
 
@@ -295,7 +295,7 @@ namespace TestDataUtilityDAL
     }
 
     // Removes an item by name.
-    public void LJCRemove()
+    private void LJCRemove()
     {
       var methodName = "LJCRemove()";
 
@@ -331,7 +331,7 @@ namespace TestDataUtilityDAL
     #region Sort Methods
 
     // Sort on ID.
-    public void LJCSortID()
+    private void LJCSortID()
     {
       var methodName = "LJCSortID()";
 
@@ -364,7 +364,7 @@ namespace TestDataUtilityDAL
     }
 
     // Sort on Unique values.
-    public void LJCSortUnique()
+    private void LJCSortUnique()
     {
       var methodName = "LJCSortUnique()";
 
@@ -401,7 +401,7 @@ namespace TestDataUtilityDAL
     #region Data Properties
 
     // Creates and returns a clone of this object.
-    public void NameIndexer()
+    private void NameIndexer()
     {
       var methodName = "NameIndexer()";
 

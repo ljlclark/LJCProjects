@@ -16,10 +16,11 @@ namespace TestDataUtilityDAL
     public TestDataUtilTable()
     {
       TestCommon = new TestCommon("TestDataUtilTable");
+      Run();
     }
 
     // Run the tests.
-    public void Run()
+    private void Run()
     {
       // Data Object Methods
       AddChangedNames();
@@ -44,7 +45,7 @@ namespace TestDataUtilityDAL
     #region Data Object Methods
 
     // Adds changed propertynames.
-    public void AddChangedNames()
+    private void AddChangedNames()
     {
       var methodName = "AddChangedNames()";
 
@@ -65,7 +66,7 @@ namespace TestDataUtilityDAL
     }
 
     // Creates and returns a clone of this object.
-    public void Clone()
+    private void Clone()
     {
       var methodName = "Clone()";
 
@@ -113,7 +114,7 @@ namespace TestDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    public void CompareTo()
+    private void CompareTo()
     {
       var methodName = "CompareTo()";
 
@@ -141,7 +142,7 @@ namespace TestDataUtilityDAL
     }
 
     // Initializes the original values.
-    public void LJCSetOriginalValues()
+    private void LJCSetOriginalValues()
     {
       var methodName = "SetOriginalValues()";
 
@@ -196,7 +197,7 @@ namespace TestDataUtilityDAL
     }
 
     // The object string identifier.
-    public void TestToString()
+    private void TestToString()
     {
       var methodName = "TestToString()";
 
@@ -217,7 +218,7 @@ namespace TestDataUtilityDAL
     #region Data Properties
 
     // No changes.
-    public void NoChange()
+    private void NoChange()
     {
       var methodName = "NoChange()";
 
@@ -229,7 +230,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change ID
-    public void ID()
+    private void ID()
     {
       var methodName = "ID()";
 
@@ -251,7 +252,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change DataSiteID
-    public void DataSiteID()
+    private void DataSiteID()
     {
       var methodName = "DataSiteID()";
 
@@ -273,7 +274,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change DataModuleID
-    public void DataModuleID()
+    private void DataModuleID()
     {
       var methodName = "DataModuleID()";
 
@@ -294,7 +295,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change DataSiteID
-    public void DataModuleSiteID()
+    private void DataModuleSiteID()
     {
       var methodName = "DataModuleSiteID()";
 
@@ -316,7 +317,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change Name
-    public void Name()
+    private void Name()
     {
       var methodName = "Name()";
 
@@ -338,7 +339,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change Description
-    public void Description()
+    private void Description()
     {
       var methodName = "Description()";
 
@@ -360,7 +361,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change Sequence
-    public void Sequence()
+    private void Sequence()
     {
       var methodName = "Sequence()";
 
@@ -382,7 +383,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change SchemaName
-    public void SchemaName()
+    private void SchemaName()
     {
       var methodName = "SchemaName()";
 
@@ -404,7 +405,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change NewName
-    public void NewName()
+    private void NewName()
     {
       var methodName = "NewName()";
 

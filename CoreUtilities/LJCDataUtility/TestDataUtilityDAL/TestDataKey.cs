@@ -19,7 +19,7 @@ namespace TestDataUtilityDAL
     }
 
     // Run the tests.
-    public void Run()
+    private void Run()
     {
       // Data Object Methods
       Clone();
@@ -46,7 +46,7 @@ namespace TestDataUtilityDAL
     #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    public void Clone()
+    private void Clone()
     {
       var methodName = "Clone()";
 
@@ -96,7 +96,7 @@ namespace TestDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    public void CompareTo()
+    private void CompareTo()
     {
       var methodName = "CompareTo()";
 
@@ -127,7 +127,7 @@ namespace TestDataUtilityDAL
     }
 
     // Initializes the original values.
-    public void LJCSetOriginalValues()
+    private void LJCSetOriginalValues()
     {
       var methodName = "SetOriginalValues()";
 
@@ -182,7 +182,7 @@ namespace TestDataUtilityDAL
     }
 
     // The object string identifier.
-    public void TestToString()
+    private void TestToString()
     {
       var methodName = "TestToString()";
 
@@ -203,7 +203,7 @@ namespace TestDataUtilityDAL
     #region Data Properties
 
     // No changes.
-    public void NoChange()
+    private void NoChange()
     {
       var methodName = "NoChange()";
 
@@ -215,7 +215,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change ID
-    public void ID()
+    private void ID()
     {
       var methodName = "ID()";
 
@@ -237,7 +237,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change DataSiteID
-    public void DataSiteID()
+    private void DataSiteID()
     {
       var methodName = "DataSiteID()";
 
@@ -259,7 +259,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change DataModuleID
-    public void DataTableID()
+    private void DataTableID()
     {
       var methodName = "DataTableID()";
 
@@ -280,7 +280,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change DataSiteID
-    public void DataTableSiteID()
+    private void DataTableSiteID()
     {
       var methodName = "DataTableSiteID()";
 
@@ -302,7 +302,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change Name
-    public void Name()
+    private void Name()
     {
       var methodName = "Name()";
 
@@ -324,7 +324,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change KeyType
-    public void KeyType()
+    private void KeyType()
     {
       var methodName = "KeyType()";
 
@@ -346,7 +346,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change IsAscending
-    public void IsAscending()
+    private void IsAscending()
     {
       var methodName = "IsAscending()";
 
@@ -368,7 +368,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change IsClustered
-    public void IsClustered()
+    private void IsClustered()
     {
       var methodName = "IsClustered()";
 
@@ -390,7 +390,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change SourceColumnName
-    public void SourceColumnName()
+    private void SourceColumnName()
     {
       var methodName = "SourceColumnName()";
 
@@ -412,7 +412,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change TargetTableName
-    public void TargetTableName()
+    private void TargetTableName()
     {
       var methodName = "TargetTableName()";
 
@@ -434,7 +434,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change TargetColumnName
-    public void TargetColumnName()
+    private void TargetColumnName()
     {
       var methodName = "TargetColumnName()";
 

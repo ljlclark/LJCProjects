@@ -99,7 +99,7 @@ namespace LJCDataUtility
         // Reference key values.
         LJCDbID = (short)data.DataSiteID;
         LJCParentID = data.DataTableID;
-        LJCParentSiteID = data.DataTableSiteID;
+        LJCParentDbID = data.DataTableSiteID;
       }
     }
 
@@ -124,7 +124,7 @@ namespace LJCDataUtility
       retData.ID = LJCID;
       retData.DataSiteID = LJCDbID;
       retData.DataTableID = LJCParentID;
-      retData.DataTableSiteID = LJCParentSiteID;
+      retData.DataTableSiteID = LJCParentDbID;
       return retData;
     }
 
@@ -169,7 +169,7 @@ namespace LJCDataUtility
       {
         if (LJCIsUpdate)
         {
-          var keyColumns = manager.IDKeys(LJCID, LJCDbID);
+          var keyColumns = manager.IDKey(LJCID, LJCDbID);
           LJCRecord.ID = 0;
           manager.Update(LJCRecord, keyColumns);
           ResetValues(LJCRecord);
@@ -179,7 +179,7 @@ namespace LJCDataUtility
         else
         {
           LJCRecord.ID = 0;
-          LJCRecord.DataSiteID = mSettings.SiteID;
+          LJCRecord.DataSiteID = (short)mSettings.SiteID;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
           if (addedRecord != null)
@@ -408,7 +408,7 @@ namespace LJCDataUtility
     internal long LJCParentID { get; set; }
 
     // Gets or sets the ParentSite ID value.
-    internal long LJCParentSiteID { get; set; }
+    internal short LJCParentDbID { get; set; }
 
     // Gets or sets the LJCParentName value.
     internal string LJCParentName

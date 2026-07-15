@@ -19,7 +19,7 @@ namespace TestDataUtilityDAL
     }
 
     // Run the tests.
-    public void Run()
+    private void Run()
     {
       // Collection Methods
       Clone();
@@ -39,7 +39,7 @@ namespace TestDataUtilityDAL
     #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    public void Clone()
+    private void Clone()
     {
       var methodName = "Clone()";
 
@@ -99,7 +99,7 @@ namespace TestDataUtilityDAL
     }
 
     // Checks if the collection has items.
-    public void LJCHasItems()
+    private void LJCHasItems()
     {
       var methodName = "LJCHasItems()";
 
@@ -136,7 +136,7 @@ namespace TestDataUtilityDAL
     #region Collection Data Methods
 
     // Retrieve the collection item with unique values.
-    public void LJCGetWithUnique()
+    private void LJCGetWithUnique()
     {
       var methodName = "LJCGetWithUnique()";
 
@@ -176,7 +176,7 @@ namespace TestDataUtilityDAL
     #region Sort Methods
 
     // Sort on Unique values.
-    public void LJCSortUnique()
+    private void LJCSortUnique()
     {
       var methodName = "LJCSortUnique()";
 
@@ -229,7 +229,7 @@ namespace TestDataUtilityDAL
     #region Data Properties
 
     // Creates and returns a clone of this object.
-    public void UniqueIndexer()
+    private void UniqueIndexer()
     {
       var methodName = "UniqueIndexer()";
 

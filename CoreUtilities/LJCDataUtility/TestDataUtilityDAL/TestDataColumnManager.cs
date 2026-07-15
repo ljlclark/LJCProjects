@@ -29,7 +29,7 @@ namespace TestDataUtilityDAL
     // Run the tests.
     /// <include file='Doc/TestDataColumnManager.xml'
     ///  path='members/Run/*'/>
-    public void Run()
+    private void Run()
     {
       // The DataConfigs.xml file example.
       //<?xml version='1.0'?>

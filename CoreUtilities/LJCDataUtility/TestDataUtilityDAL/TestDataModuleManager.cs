@@ -660,9 +660,9 @@ namespace TestDataUtilityDAL
       string name = "TestModuleName";
 
       // Test Method
-      var idKey = dataModuleManager.UniqueKey(name);
+      var uniqueKey = dataModuleManager.UniqueKey(name);
 
-      var key = idKey.LJCSearchPropertyName(DataModule.ColumnName);
+      var key = uniqueKey.LJCSearchPropertyName(DataModule.ColumnName);
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";

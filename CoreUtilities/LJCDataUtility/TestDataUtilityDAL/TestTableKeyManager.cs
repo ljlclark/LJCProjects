@@ -8,7 +8,7 @@ using LJCNetCommon;
 
 namespace TestDataUtilityDAL
 {
-  // Tests the DataKeyManager object.
+  // Tests the TableKeyManager object.
   internal class TestTableKeyManager
   {
     #region Constructor Methods
@@ -28,7 +28,7 @@ namespace TestDataUtilityDAL
     // Run the tests.
     /// <include file='Doc/TestTableKeyManager.xml'
     ///  path='members/Run/*'/>
-    public void Run()
+    private void Run()
     {
       // The DataConfigs.xml file example.
       //<?xml version='1.0'?>
@@ -51,7 +51,7 @@ namespace TestDataUtilityDAL
 
     #region Data Methods
 
-    // Retrieves a collection of data records.
+    // Retrieves a collection of foreign key records.
     private void LoadForeignKeys()
     {
       string methodName = "LoadForeignKeys()";
@@ -83,7 +83,7 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}", result, compare);
     }
 
-    // Retrieves a collection of Key records.
+    // Retrieves a collection of table key records.
     private void LoadTableKeys()
     {
       string methodName = "LoadTableKeys()";

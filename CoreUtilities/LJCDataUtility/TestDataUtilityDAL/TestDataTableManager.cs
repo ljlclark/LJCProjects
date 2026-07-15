@@ -22,7 +22,6 @@ namespace TestDataUtilityDAL
       TestCommon = new TestCommon("TestDataTableManager");
       Run();
     }
-
     #endregion
 
     #region Methods
@@ -30,7 +29,7 @@ namespace TestDataUtilityDAL
     // Run the tests.
     /// <include file='Doc/TestDataTableManager.xml'
     ///  path='members/Run/*'/>
-    public void Run()
+    private void Run()
     {
       // The DataConfigs.xml file example.
       //<?xml version='1.0'?>

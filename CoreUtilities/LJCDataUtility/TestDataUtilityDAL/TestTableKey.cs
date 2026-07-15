@@ -19,7 +19,7 @@ namespace TestDataUtilityDAL
     }
 
     // Run the tests.
-    public void Run()
+    private void Run()
     {
       // Data Object Methods
       Clone();
@@ -42,7 +42,7 @@ namespace TestDataUtilityDAL
     #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    public void Clone()
+    private void Clone()
     {
       var methodName = "Clone()";
 
@@ -115,7 +115,7 @@ namespace TestDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    public void CompareTo()
+    private void CompareTo()
     {
       var methodName = "CompareTo()";
 
@@ -148,7 +148,7 @@ namespace TestDataUtilityDAL
     #region Data Properties
 
     // Change DBName
-    public void DBName()
+    private void DBName()
     {
       var methodName = "DBName()";
 
@@ -170,7 +170,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change TableSchema
-    public void TableSchema()
+    private void TableSchema()
     {
       var methodName = "TableSchema()";
 
@@ -192,7 +192,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change TableSchema
-    public void TableName()
+    private void TableName()
     {
       var methodName = "TableName()";
 
@@ -214,7 +214,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change KeyType
-    public void KeyType()
+    private void KeyType()
     {
       var methodName = "KeyType()";
 
@@ -236,7 +236,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change ColumnName
-    public void ColumnName()
+    private void ColumnName()
     {
       var methodName = "ColumnName()";
 
@@ -258,7 +258,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change ConstraintName
-    public void ConstraintName()
+    private void ConstraintName()
     {
       var methodName = "ConstraintName()";
 
@@ -280,7 +280,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change TargetTable
-    public void TargetTable()
+    private void TargetTable()
     {
       var methodName = "TargetTable()";
 
@@ -302,7 +302,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change TargetColumns
-    public void TargetColumns()
+    private void TargetColumns()
     {
       var methodName = "TargetColumns()";
 
@@ -324,7 +324,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change UpdateRule
-    public void UpdateRule()
+    private void UpdateRule()
     {
       var methodName = "UpdateRule()";
 
@@ -346,7 +346,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change DeleteRule
-    public void DeleteRule()
+    private void DeleteRule()
     {
       var methodName = "DeleteRule()";
 
@@ -368,7 +368,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change OrdinalPosition
-    public void OrdinalPosition()
+    private void OrdinalPosition()
     {
       var methodName = "OrdinalPosition()";
 

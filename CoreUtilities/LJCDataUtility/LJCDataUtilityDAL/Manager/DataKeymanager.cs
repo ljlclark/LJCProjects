@@ -218,7 +218,7 @@ namespace LJCDataUtilityDAL
     public DataKey RetrieveWithID(long id, short dbID
       , List<string> propertyNames = null)
     {
-      var keyColumns = IDKeys(id, dbID);
+      var keyColumns = IDKey(id, dbID);
       var joins = GetJoins();
       var dbResult = Manager.Retrieve(keyColumns, propertyNames
         , joins: joins);
@@ -275,7 +275,7 @@ namespace LJCDataUtilityDAL
     // Gets the primary key columns.
     /// <include file='Doc/DataKeyManager.xml'
     ///  path='items/IDKeys/*'/>
-    public DbColumns IDKeys(long id, short dbID)
+    public DbColumns IDKey(long id, short dbID)
     {
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new DbColumns()

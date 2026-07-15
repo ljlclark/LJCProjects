@@ -4,7 +4,6 @@
 using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCDBDataAccess;
-using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 
@@ -30,7 +29,7 @@ namespace TestDataUtilityDAL
     // Run the tests.
     /// <include file='Doc/TestDataKeyManager.xml'
     ///  path='members/Run/*'/>
-    public void Run()
+    private void Run()
     {
       // The DataConfigs.xml file example.
       //<?xml version='1.0'?>
@@ -187,35 +186,25 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataColumnManager = new DataColumnManager(dbServiceRef
+      var dataKeyManager = new DataKeyManager(dbServiceRef
         , dataConfigName);
 
       short dataSiteID = 1;
       long dataTableID = 1;
       short dataTableSiteID = 1;
-      string name = "TestColumnName";
+      string name = "TestKeyName";
 
       // Create the test record.
-      var dataColumn = new DataUtilColumn()
+      var dataKey = new DataKey()
       {
         DataSiteID = dataSiteID,
         DataTableID = dataTableID,
         DataTableSiteID = dataTableSiteID,
         Name = name,
-        Description = "The test column.",
-        Sequence = 5,
-        AllowNull = true,
-        DefaultValue = null,
-        IdentityStart = 1,
-        IdentityIncrement = 1,
-        MaxLength = 1,
-        NewName = null,
-        NewMaxLength = 1,
-        TypeName = "TypeName",
       };
 
       // Test Method
-      dataColumnManager.Add(dataColumn);
+      dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
       var uniqueColumns = new DbColumns()
@@ -224,13 +213,13 @@ namespace TestDataUtilityDAL
         { "DataTableSiteID", dataTableSiteID },
         { "Name", (object)name },
       };
-      dataColumn = dataColumnManager.Retrieve(uniqueColumns);
-      var result = dataColumn.Name;
-      var compare = "TestColumnName";
+      dataKey = dataKeyManager.Retrieve(uniqueColumns);
+      var result = dataKey.Name;
+      var compare = "TestKeyName";
       TestCommon.Write($"{methodName}", result, compare);
 
       // Delete the test record.
-      dataColumnManager.Delete(uniqueColumns);
+      dataKeyManager.Delete(uniqueColumns);
     }
 
     // Deletes the records with the specified key values.
@@ -246,12 +235,12 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataColumnManager = new DataColumnManager(dbServiceRef
+      var dataKeyManager = new DataKeyManager(dbServiceRef
         , dataConfigName);
 
       long dataTableID = 1;
       short dataTableSiteID = 1;
-      string name = "TestColumnName";
+      string name = "TestKeyName";
 
       // Create the test record.
       var uniqueColumns = new DbColumns()
@@ -260,19 +249,19 @@ namespace TestDataUtilityDAL
         { "DataTableSiteID", dataTableSiteID },
         { "Name", (object)name },
       };
-      var dataColumn = dataColumnManager.Retrieve(uniqueColumns);
-      if (dataColumn != null)
+      var dataKey = dataKeyManager.Retrieve(uniqueColumns);
+      if (dataKey != null)
       {
-        var result = dataColumn.Name;
-        var compare = "TestColumnName";
+        var result = dataKey.Name;
+        var compare = "TestKeyName";
         TestCommon.Write($"{methodName}1", result, compare);
 
         // Test Method
-        dataColumnManager.Delete(uniqueColumns);
+        dataKeyManager.Delete(uniqueColumns);
 
         // Verify the test record was deleted.
-        dataColumn = dataColumnManager.Retrieve(uniqueColumns);
-        if (null == dataColumn)
+        dataKey = dataKeyManager.Retrieve(uniqueColumns);
+        if (null == dataKey)
         {
           result = null;
         }
@@ -294,40 +283,30 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataColumnManager = new DataColumnManager(dbServiceRef
+      var dataKeyManager = new DataKeyManager(dbServiceRef
         , dataConfigName);
 
       short dataSiteID = 1;
       long dataTableID = 1;
       short dataTableSiteID = 1;
-      string name = "TestColumnName";
+      string name = "TestKeyName";
 
       // Create the test record.
-      var dataUtilTable = new DataUtilColumn()
+      var dataKey = new DataKey()
       {
         DataSiteID = dataSiteID,
         DataTableID = dataTableID,
         DataTableSiteID = dataTableSiteID,
         Name = name,
-        Description = "The test table.",
-        Sequence = 5,
-        AllowNull = true,
-        DefaultValue = null,
-        IdentityStart = 1,
-        IdentityIncrement = 1,
-        MaxLength = 1,
-        NewName = null,
-        NewMaxLength = 1,
-        TypeName = "TypeName",
       };
-      dataColumnManager.Add(dataUtilTable);
+      dataKeyManager.Add(dataKey);
 
       // Test Method
-      var dataColumns = dataColumnManager.Load();
+      var dataKeys = dataKeyManager.Load();
 
       // Verify the records were loaded.
       var result = "";
-      if (dataColumns.Count > 0)
+      if (dataKeys.Count > 0)
       {
         result = "HasItems";
       }
@@ -341,7 +320,7 @@ namespace TestDataUtilityDAL
         { "DataTableSiteID", dataTableSiteID },
         { "Name", (object)name },
       };
-      dataColumnManager.Delete(uniqueColumns);
+      dataKeyManager.Delete(uniqueColumns);
     }
 
     // Retrieves a record from the database.
@@ -357,33 +336,23 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataColumnManager = new DataColumnManager(dbServiceRef
+      var dataKeyManager = new DataKeyManager(dbServiceRef
         , dataConfigName);
 
       short dataSiteID = 1;
       long dataTableID = 1;
       short dataTableSiteID = 1;
-      string name = "TestColumnName";
+      string name = "TestKeyName";
 
       // Create the test record.
-      var dataColumn = new DataUtilColumn()
+      var dataKey = new DataKey()
       {
         DataSiteID = dataSiteID,
         DataTableID = dataTableID,
         DataTableSiteID = dataTableSiteID,
         Name = name,
-        Description = "The test table.",
-        Sequence = 5,
-        AllowNull = true,
-        DefaultValue = null,
-        IdentityStart = 1,
-        IdentityIncrement = 1,
-        MaxLength = 1,
-        NewName = null,
-        NewMaxLength = 1,
-        TypeName = "TypeName",
       };
-      dataColumnManager.Add(dataColumn);
+      dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
       var uniqueColumns = new DbColumns()
@@ -394,14 +363,14 @@ namespace TestDataUtilityDAL
       };
 
       // Test Method
-      dataColumn = dataColumnManager.Retrieve(uniqueColumns);
+      dataKey = dataKeyManager.Retrieve(uniqueColumns);
 
-      var result = dataColumn.Name;
-      var compare = "TestColumnName";
+      var result = dataKey.Name;
+      var compare = "TestKeyName";
       TestCommon.Write($"{methodName}", result, compare);
 
       // Delete the test record.
-      dataColumnManager.Delete(uniqueColumns);
+      dataKeyManager.Delete(uniqueColumns);
     }
 
     // Updates the record.
@@ -417,33 +386,23 @@ namespace TestDataUtilityDAL
       {
         DbDataAccess = new DbDataAccess(dataConfigName),
       };
-      var dataColumnManager = new DataColumnManager(dbServiceRef
+      var dataKeyManager = new DataKeyManager(dbServiceRef
         , dataConfigName);
 
       short dbID = 1;
       long dataTableID = 1;
       short dataTableSiteID = 1;
-      string name = "TestColumnName";
+      string name = "TestKeyName";
 
       // Create the test record.
-      var dataColumn = new DataUtilColumn()
+      var dataKey = new DataKey()
       {
         DataSiteID = dbID,
         DataTableID = dataTableID,
         DataTableSiteID = dataTableSiteID,
         Name = name,
-        Description = "The test column.",
-        Sequence = 5,
-        AllowNull = true,
-        DefaultValue = null,
-        IdentityStart = 1,
-        IdentityIncrement = 1,
-        MaxLength = 1,
-        NewName = null,
-        NewMaxLength = 1,
-        TypeName = "TypeName",
       };
-      dataColumnManager.Add(dataColumn);
+      dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
       var uniqueColumns = new DbColumns()
@@ -452,32 +411,34 @@ namespace TestDataUtilityDAL
         { "DataTableSiteID", dataTableSiteID },
         { "Name", (object)name },
       };
-      dataColumn = dataColumnManager.Retrieve(uniqueColumns);
-      var result = dataColumn.Name;
-      var compare = "TestColumnName";
+      dataKey = dataKeyManager.Retrieve(uniqueColumns);
+      var result = dataKey.Name;
+      var compare = "TestKeyName";
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Update the test record.
-      var id = dataColumn.ID;
-      dbID = dataColumn.DataSiteID;
-      var idKey = dataColumnManager.IDKey(id, dbID);
-      dataColumn.Description += " Updated";
+      var id = dataKey.ID;
+      dbID = dataKey.DataSiteID;
+      var idKey = dataKeyManager.IDKey(id, dbID);
+      dataKey.Name += " Updated";
       var propertyNames = new List<string>()
       {
-        "Description",
+        "Name",
       };
 
       // Test Method
-      dataColumnManager.Update(dataColumn, idKey, propertyNames);
+      dataKeyManager.Update(dataKey, idKey, propertyNames);
 
       // Verify the test record was updated.
-      dataColumn = dataColumnManager.RetrieveWithID(id, dbID);
-      result = dataColumn.Description;
-      compare = "The test column. Updated";
+      dataKey = dataKeyManager.RetrieveWithID(id, dbID);
+      result = dataKey.Name;
+      compare = "TestKeyName Updated";
       TestCommon.Write($"{methodName}2", result, compare);
 
       // Delete the test record.
-      dataColumnManager.Delete(uniqueColumns);
+      var nameColumn = uniqueColumns.LJCSearchPropertyName("Name");
+      nameColumn.Value = "TestKeyName Updated";
+      dataKeyManager.Delete(uniqueColumns);
     }
     #endregion
 
@@ -991,7 +952,7 @@ namespace TestDataUtilityDAL
       short dbID = 1;
 
       // Test Method
-      var idKey = dataKeyManager.IDKeys(id, dbID);
+      var idKey = dataKeyManager.IDKey(id, dbID);
 
       var key = idKey.LJCSearchPropertyName(DataKey.ColumnID);
       var propertyName = key.PropertyName;

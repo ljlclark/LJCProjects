@@ -4,8 +4,7 @@
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
-using System;
-using System.Data.SqlClient;
+using System.Xml.Linq;
 
 namespace LJCDataUtilityDAL
 {
@@ -24,7 +23,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Initializes an object instance.
-    /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    ///  path='items/DataManagerC/*'/>
     public TableKeyManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "", string schemaName = null) : this()
     {
@@ -61,7 +61,7 @@ namespace LJCDataUtilityDAL
       //retValue = ResultConverter.CreateCollection(dbResult);
       //return retValue;
 
-      var sql = TableKeySql(Manager.TableName, "FOREIGN KEY");
+      var sql = ForeignKeySql(Manager.TableName);
       var dbResult = Manager.ExecuteClientSql(RequestType.LoadSQL, sql);
       var retValue = ResultConverter.CreateCollection(dbResult);
       return retValue;
@@ -74,8 +74,78 @@ namespace LJCDataUtilityDAL
       , string constraintName = null)
     {
       var sql = TableKeySql(Manager.TableName, keyType, constraintName);
+      if ("FOREIGN KEY" == keyType)
+      {
+        sql = ForeignKeySql(Manager.TableName);
+      }
       var dbResult = Manager.ExecuteClientSql(RequestType.LoadSQL, sql);
       var retValue = ResultConverter.CreateCollection(dbResult);
+      return retValue;
+    }
+
+    // Gets the table foreign key values SQL.
+    private string ForeignKeySql(string tableName)
+    {
+      TextBuilder tb = new TextBuilder();
+
+      tb.Line("select");
+      tb.Line("rc.CONSTRAINT_CATALOG as DBName,");
+      tb.Line("rc.CONSTRAINT_NAME AS ConstraintName,");
+      tb.Line("kcus.TABLE_SCHEMA AS TableSchema,");
+      tb.Line("kcus.TABLE_NAME AS TableName,");
+      tb.Line("tc.CONSTRAINT_TYPE as KeyType,");
+      tb.Line("kcus.COLUMN_NAME AS ColumnName,");
+      tb.Line("kcus.ORDINAL_POSITION as OrdinalPosition,");
+      tb.Line("rc.UNIQUE_CONSTRAINT_NAME as UniqueConstraintName,");
+      tb.Line("kcut.TABLE_NAME AS TargetTable,");
+      tb.Line("kcut.COLUMN_NAME AS TargetColumn");
+      tb.Line("from INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS rc");
+      tb.Line("left join INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc");
+      tb.Line("  on rc.CONSTRAINT_NAME = tc.CONSTRAINT_NAME");
+      tb.Line("left join INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcus");
+      tb.Line("  on rc.CONSTRAINT_NAME = kcus.CONSTRAINT_NAME");
+      tb.Line("left join INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcut");
+      tb.Line("  on rc.UNIQUE_CONSTRAINT_NAME = kcut.CONSTRAINT_NAME");
+      tb.Line("  and kcus.ORDINAL_POSITION = kcut.ORDINAL_POSITION");
+      tb.Line($"where kcus.Table_Name = '{tableName}'");
+      tb.Line("order by rc.[CONSTRAINT_NAME], kcus.[ORDINAL_POSITION];");
+
+      var retValue = tb.ToString();
+      return retValue;
+    }
+
+    // Gets the table key values SQL.
+    private string TableKeySql(string tableName
+      , string keyType = "PRIMARY KEY", string uniqueConstraintName = null)
+    {
+      TextBuilder tb = new TextBuilder();
+
+      tb.Line("SELECT");
+      tb.Line(" tc.[TABLE_CATALOG] as DBName, ");
+      tb.Line(" tc.[TABLE_SCHEMA] as TableSchema, ");
+      tb.Line(" tc.[TABLE_NAME] as TableName, ");
+      tb.Line(" tc.[CONSTRAINT_TYPE] as KeyType, ");
+      tb.Line(" tc.[CONSTRAINT_NAME] as ConstraintName, ");
+      tb.Line(" kcu.[COLUMN_NAME] as ColumnName, ");
+      tb.Line(" kcu.[ORDINAL_POSITION] as OrdinalPosition, ");
+      tb.Line(" rc.[UNIQUE_CONSTRAINT_NAME] as UniqueConstraintName ");
+      tb.Line("FROM [INFORMATION_SCHEMA].[TABLE_CONSTRAINTS] as tc ");
+      tb.Line("LEFT JOIN [INFORMATION_SCHEMA].[KEY_COLUMN_USAGE] as kcu ");
+      tb.Line(" ON tc.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
+      tb.Line("LEFT JOIN INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS as rc");
+      tb.Line(" ON tc.CONSTRAINT_NAME = rc.CONSTRAINT_NAME");
+      if (NetString.HasValue(uniqueConstraintName))
+      {
+        tb.Line($"WHERE tc.[CONSTRAINT_NAME] = '{uniqueConstraintName}'");
+      }
+      else
+      {
+        tb.Line($"WHERE tc.[TABLE_NAME] = '{tableName}'");
+        tb.Line($" AND tc.[CONSTRAINT_TYPE] = '{keyType}'");
+      }
+      tb.Line("ORDER BY tc.[CONSTRAINT_NAME], kcu.[ORDINAL_POSITION];");
+
+      var retValue = tb.ToString();
       return retValue;
     }
 
@@ -107,41 +177,6 @@ namespace LJCDataUtilityDAL
     //    }
     //  }
     //}
-
-    // Gets the table key values SQL.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='members/TableKeySql/*'/>
-    private string TableKeySql(string tableName
-      , string keyType = "PRIMARY KEY", string uniqueConstraintName = null)
-    {
-      TextBuilder b = new TextBuilder();
-      b.Line("SELECT");
-      b.Line(" tc.[TABLE_CATALOG] as DBName, ");
-      b.Line(" tc.[TABLE_SCHEMA] as TableSchema, ");
-      b.Line(" tc.[TABLE_NAME] as TableName, ");
-      b.Line(" tc.[CONSTRAINT_TYPE] as KeyType, ");
-      b.Line(" tc.[CONSTRAINT_NAME] as ConstraintName, ");
-      b.Line(" kcu.[COLUMN_NAME] as ColumnName, ");
-      b.Line(" kcu.[ORDINAL_POSITION] as OrdinalPosition, ");
-      b.Line(" rc.[UNIQUE_CONSTRAINT_NAME] as UniqueConstraintName ");
-      b.Line("FROM [INFORMATION_SCHEMA].[TABLE_CONSTRAINTS] as tc ");
-      b.Line("LEFT JOIN [INFORMATION_SCHEMA].[KEY_COLUMN_USAGE] as kcu ");
-      b.Line(" ON tc.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
-      b.Line("LEFT JOIN INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS as rc");
-      b.Line(" ON tc.CONSTRAINT_NAME = rc.CONSTRAINT_NAME");
-      if (NetString.HasValue(uniqueConstraintName))
-      {
-        b.Line($"WHERE tc.[CONSTRAINT_NAME] = '{uniqueConstraintName}'");
-      }
-      else
-      {
-        b.Line($"WHERE tc.[TABLE_NAME] = '{tableName}'");
-        b.Line($" AND tc.[CONSTRAINT_TYPE] = '{keyType}'");
-      }
-      b.Line("ORDER BY tc.[CONSTRAINT_NAME], kcu.[ORDINAL_POSITION];");
-      var retValue = b.ToString();
-      return retValue;
-    }
 
     //// Gets the sp_GetForeignKeys procedure SQL.
     //private string ForeignKeysProcedureSql(string tableName)
@@ -199,7 +234,17 @@ namespace LJCDataUtilityDAL
     // Gets or sets the table name.
     /// <include file='Doc/TableKeyManager.xml'
     ///  path='members/TableName/*'/>
-    public string TableName { get; set; }
+    public string TableName
+    {
+      get => _TableName;
+      set
+      {
+        var newValue = value?.Trim();
+        _TableName = newValue;
+        Manager.TableName = newValue;
+      }
+    }
+    private string _TableName;
     #endregion
   }
 }

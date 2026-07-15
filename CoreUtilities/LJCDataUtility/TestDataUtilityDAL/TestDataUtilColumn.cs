@@ -19,7 +19,7 @@ namespace TestDataUtilityDAL
     }
 
     // Run the tests.
-    public void Run()
+    private void Run()
     {
       // Data Object Methods
       Clone();
@@ -50,7 +50,7 @@ namespace TestDataUtilityDAL
     #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    public void Clone()
+    private void Clone()
     {
       var methodName = "Clone()";
 
@@ -114,7 +114,7 @@ namespace TestDataUtilityDAL
     }
 
     // Provides the default Sort functionality.
-    public void CompareTo()
+    private void CompareTo()
     {
       var methodName = "CompareTo()";
 
@@ -144,7 +144,7 @@ namespace TestDataUtilityDAL
     }
 
     // Initializes the original values.
-    public void LJCSetOriginalValues()
+    private void LJCSetOriginalValues()
     {
       var methodName = "SetOriginalValues()";
 
@@ -215,7 +215,7 @@ namespace TestDataUtilityDAL
     }
 
     // The object string identifier.
-    public void TestToString()
+    private void TestToString()
     {
       var methodName = "TestToString()";
 
@@ -236,7 +236,7 @@ namespace TestDataUtilityDAL
     #region Data Properties
 
     // No changes.
-    public void NoChange()
+    private void NoChange()
     {
       var methodName = "NoChange()";
 
@@ -248,7 +248,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change ID
-    public void ID()
+    private void ID()
     {
       var methodName = "ID()";
 
@@ -270,7 +270,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change DataSiteID
-    public void DataSiteID()
+    private void DataSiteID()
     {
       var methodName = "DataSiteID()";
 
@@ -292,7 +292,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change DataTableID
-    public void DataTableID()
+    private void DataTableID()
     {
       var methodName = "DataModuleID()";
 
@@ -313,7 +313,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change DataTableSiteID
-    public void DataTableSiteID()
+    private void DataTableSiteID()
     {
       var methodName = "DataTableSiteID()";
 
@@ -335,7 +335,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change Name
-    public void Name()
+    private void Name()
     {
       var methodName = "Name()";
 
@@ -357,7 +357,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change Description
-    public void Description()
+    private void Description()
     {
       var methodName = "Description()";
 
@@ -379,7 +379,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change Sequence
-    public void Sequence()
+    private void Sequence()
     {
       var methodName = "Sequence()";
 
@@ -401,7 +401,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change AllowNull
-    public void AllowNull()
+    private void AllowNull()
     {
       var methodName = "AllowNull()";
 
@@ -423,7 +423,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change DefaultValue
-    public void DefaultValue()
+    private void DefaultValue()
     {
       var methodName = "DefaultValue()";
 
@@ -445,7 +445,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change IdentityStart
-    public void IdentityStart()
+    private void IdentityStart()
     {
       var methodName = "IdentityStart()";
 
@@ -467,7 +467,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change IdentityIncrement
-    public void IdentityIncrement()
+    private void IdentityIncrement()
     {
       var methodName = "IdentityIncrement()";
 
@@ -489,7 +489,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change MaxLength
-    public void MaxLength()
+    private void MaxLength()
     {
       var methodName = "MaxLength()";
 
@@ -511,7 +511,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change NewName
-    public void NewName()
+    private void NewName()
     {
       var methodName = "NewName()";
 
@@ -533,7 +533,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change NewMaxLength
-    public void NewMaxLength()
+    private void NewMaxLength()
     {
       var methodName = "NewMaxLength()";
 
@@ -555,7 +555,7 @@ namespace TestDataUtilityDAL
     }
 
     // Change TypeName
-    public void TypeName()
+    private void TypeName()
     {
       var methodName = "TypeName()";
 

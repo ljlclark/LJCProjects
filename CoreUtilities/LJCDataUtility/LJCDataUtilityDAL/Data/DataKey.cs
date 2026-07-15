@@ -118,9 +118,9 @@ namespace LJCDataUtilityDAL
     public void LJCSetOriginalValues()
     {
       _OriginalValues.ID = _ID;
-      _OriginalValues.DataSiteID = _DataDbID;
+      _OriginalValues.DbID = _DataDbID;
       _OriginalValues.DataTableID = _DataTableID;
-      _OriginalValues.DataTableSiteID = _DataTableDbID;
+      _OriginalValues.DataTableDbID = _DataTableDbID;
       _OriginalValues.Name = _Name;
       _OriginalValues.KeyType = _KeyType;
 
@@ -170,7 +170,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/DataSiteID/*'/>
     [Required]
     [Column("DataSiteID", TypeName = "bigint")]
-    public long DataSiteID
+    public short DataSiteID
     {
       get => _DataDbID;
       set
@@ -178,11 +178,11 @@ namespace LJCDataUtilityDAL
         if (_DataDbID != value)
         {
           _DataDbID = ChangedNames.Add(ColumnDbID
-            , _OriginalValues.DataSiteID, value);
+            , _OriginalValues.DbID, value);
         }
       }
     }
-    private long _DataDbID;
+    private short _DataDbID;
 
     // Gets or sets the parent table row ID.
     /// <include file='doc/DataKey.xml'
@@ -208,7 +208,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/DataTableSiteID/*'/>
     [Required]
     [Column("DataTableSiteID", TypeName = "bigint")]
-    public long DataTableSiteID
+    public short DataTableSiteID
     {
       get => _DataTableDbID;
       set
@@ -216,11 +216,11 @@ namespace LJCDataUtilityDAL
         if (_DataTableDbID != value)
         {
           _DataTableDbID = ChangedNames.Add(ColumnDataTableDbID
-            , _OriginalValues.DataTableSiteID, value);
+            , _OriginalValues.DataTableDbID, value);
         }
       }
     }
-    private long _DataTableDbID;
+    private short _DataTableDbID;
 
     // Gets or sets the Name value.
     /// <include file='doc/DataKey.xml'
@@ -440,13 +440,13 @@ namespace LJCDataUtilityDAL
       public long ID { get; set; }
 
       // Gets or sets the database ID.
-      public long DataSiteID { get; set; }
+      public short DbID { get; set; }
 
       // Gets or sets the parent table row ID.
       public long DataTableID { get; set; }
 
       // Gets or sets the parent database ID.
-      public long DataTableSiteID { get; set; }
+      public short DataTableDbID { get; set; }
 
       // Gets or sets the unique name.
       public string Name { get; set; }
