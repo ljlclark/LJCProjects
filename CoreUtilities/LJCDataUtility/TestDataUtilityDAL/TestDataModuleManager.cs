@@ -282,13 +282,13 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      long dataSiteID = 1;
+      short dbID = dataModuleManager.DbID;
       string name = "TestModuleName";
 
       // Create the test record.
       var dataModule = new DataModule()
       {
-        DataSiteID = dataSiteID,
+        DataSiteID = dbID,
         Name = name,
         Description = "The test table.",
       };
@@ -370,13 +370,13 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      long dataSiteID = 1;
+      short dbID = dataModuleManager.DbID;
       string name = "TestModuleName";
 
       // Create the test record.
       var dataModule = new DataModule()
       {
-        DataSiteID = dataSiteID,
+        DataSiteID = dbID,
         Name = name,
         Description = "The test table.",
       };
@@ -418,13 +418,13 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      long dataSiteID = 1;
+      short dbID = dataModuleManager.DbID;
       string name = "TestModuleName";
 
       // Create the test record.
       var dataModule = new DataModule()
       {
-        DataSiteID = dataSiteID,
+        DataSiteID = dbID,
         Name = name,
         Description = "The test table.",
       };
@@ -463,7 +463,7 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = 1;
+      short dbID = dataModuleManager.DbID;
       string name = "TestModuleName";
 
       // Create the test record.
@@ -527,7 +527,7 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = 1;
+      short dbID = dataModuleManager.DbID;
       string name = "TestModuleName";
 
       // Create the test record.
@@ -581,7 +581,7 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = 1;
+      short dbID = dataModuleManager.DbID;
       string name = "TestModuleName";
 
       // Create the test record.
@@ -628,7 +628,7 @@ namespace TestDataUtilityDAL
         , dataConfigName);
 
       long id = 1;
-      short dbID = 1;
+      short dbID = dataModuleManager.DbID;
 
       // Test Method
       var idKey = dataModuleManager.IDKey(id, dbID);

@@ -117,7 +117,7 @@ namespace LJCDataUtilityDAL
       _OriginalValues.ID = _ID;
       _OriginalValues.DataDbID = _DataModuleDbID;
       _OriginalValues.DataModuleID = _DataModuleID;
-      _OriginalValues.DataModuleSiteID = _DataModuleDbID;
+      _OriginalValues.DataModuleDbID = _DataModuleDbID;
       _OriginalValues.Name = _Name;
       _OriginalValues.Description = _Description;
       _OriginalValues.Sequence = _Sequence;
@@ -211,7 +211,7 @@ namespace LJCDataUtilityDAL
         if (_DataModuleDbID != value)
         {
           _DataModuleDbID = ChangedNames.Add(ColumnDataModuleDbID
-            , _OriginalValues.DataModuleSiteID, value);
+            , _OriginalValues.DataModuleDbID, value);
         }
       }
     }
@@ -388,7 +388,7 @@ namespace LJCDataUtilityDAL
       public long DataModuleID { get; set; }
 
       // Gets or sets the parent database ID.
-      public short DataModuleSiteID { get; set; }
+      public short DataModuleDbID { get; set; }
 
       // Gets or sets the unique name.
       public string Name { get; set; }

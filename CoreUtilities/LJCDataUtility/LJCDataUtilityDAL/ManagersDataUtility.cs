@@ -1,10 +1,7 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // ManagersDataUtility.cs
-using System;
 using System.Collections.Generic;
-using System.Reflection;
-using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCNetCommon;
 

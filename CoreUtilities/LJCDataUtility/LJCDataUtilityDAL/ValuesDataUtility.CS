@@ -51,6 +51,7 @@ namespace LJCDataUtilityDAL
           SiteManagers = new ManagersDataSite();
           SiteManagers.SetDBProperties(settings.DbServiceRef
             , settings.DataConfigName);
+          DbGroupID = SiteManagers.DbGroupManager.DbID;
 
           var dataConfigs = new DataConfigs();
           dataConfigs.LJCLoadData();
@@ -65,6 +66,9 @@ namespace LJCDataUtilityDAL
 
     /// <summary>Gets or sets the connection type value.</summary>
     public string ConnectionType { get; set; }
+
+    /// <summary>Gets or sets the connection type value.</summary>
+    public short DbGroupID { get; set; }
 
     /// <summary>Gets the Error message</summary>
     public string Errors { get; private set; }

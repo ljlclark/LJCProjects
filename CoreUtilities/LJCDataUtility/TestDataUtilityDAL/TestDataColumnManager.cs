@@ -81,14 +81,14 @@ namespace TestDataUtilityDAL
       var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
 
       long dataModuleID = 1;
-      long dataModuleSiteID = 1;
+      long dataModuleDbID = 1;
       string name = "TestTableName";
 
       // Delete the test record.
       var uniqueColumns = new DbColumns()
       {
         { "DataModuleID", dataModuleID },
-        { "DataModuleSiteID", dataModuleSiteID },
+        { "DataModuleSiteID", dataModuleDbID },
         { "Name", (object)name },
       };
       dataTableManager.Delete(uniqueColumns);
@@ -181,17 +181,17 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dataSiteID = 1;
+      short dbID = dataColumnManager.DbID;
       long dataTableID = 1;
-      short dataTableSiteID = 1;
+      short dataTableDbID = 1;
       string name = "TestColumnName";
 
       // Create the test record.
       var dataColumn = new DataUtilColumn()
       {
-        DataSiteID = dataSiteID,
+        DataSiteID = dbID,
         DataTableID = dataTableID,
-        DataTableSiteID = dataTableSiteID,
+        DataTableSiteID = dataTableDbID,
         Name = name,
         Description = "The test column.",
         Sequence = 5,
@@ -212,7 +212,7 @@ namespace TestDataUtilityDAL
       var uniqueColumns = new DbColumns()
       {
         { "DataTableID", dataTableID },
-        { "DataTableSiteID", dataTableSiteID },
+        { "DataTableSiteID", dataTableDbID },
         { "Name", (object)name },
       };
       dataColumn = dataColumnManager.Retrieve(uniqueColumns);
@@ -241,14 +241,14 @@ namespace TestDataUtilityDAL
         , dataConfigName);
 
       long dataTableID = 1;
-      short dataTableSiteID = 1;
+      short dataTableDbID = 1;
       string name = "TestColumnName";
 
       // Create the test record.
       var uniqueColumns = new DbColumns()
       {
         { "DataTableID", dataTableID },
-        { "DataTableSiteID", dataTableSiteID },
+        { "DataTableSiteID", dataTableDbID },
         { "Name", (object)name },
       };
       var dataColumn = dataColumnManager.Retrieve(uniqueColumns);
@@ -288,17 +288,17 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dataSiteID = 1;
+      short dbID = dataColumnManager.DbID;
       long dataTableID = 1;
-      short dataTableSiteID = 1;
+      short dataTableDbID = 1;
       string name = "TestColumnName";
 
       // Create the test record.
       var dataUtilTable = new DataUtilColumn()
       {
-        DataSiteID = dataSiteID,
+        DataSiteID = dbID,
         DataTableID = dataTableID,
-        DataTableSiteID = dataTableSiteID,
+        DataTableSiteID = dataTableDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -329,7 +329,7 @@ namespace TestDataUtilityDAL
       var uniqueColumns = new DbColumns()
       {
         { "DataTableID", dataTableID },
-        { "DataTableSiteID", dataTableSiteID },
+        { "DataTableSiteID", dataTableDbID },
         { "Name", (object)name },
       };
       dataColumnManager.Delete(uniqueColumns);
@@ -351,17 +351,17 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dataSiteID = 1;
+      short dbID = dataColumnManager.DbID;
       long dataTableID = 1;
-      short dataTableSiteID = 1;
+      short dataTableDbID = 1;
       string name = "TestColumnName";
 
       // Create the test record.
       var dataColumn = new DataUtilColumn()
       {
-        DataSiteID = dataSiteID,
+        DataSiteID = dbID,
         DataTableID = dataTableID,
-        DataTableSiteID = dataTableSiteID,
+        DataTableSiteID = dataTableDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -380,7 +380,7 @@ namespace TestDataUtilityDAL
       var uniqueColumns = new DbColumns()
       {
         { "DataTableID", dataTableID },
-        { "DataTableSiteID", dataTableSiteID },
+        { "DataTableSiteID", dataTableDbID },
         { "Name", (object)name },
       };
 
@@ -411,9 +411,9 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = 1;
+      short dbID = dataColumnManager.DbID;
       long dataTableID = 1;
-      short dataTableSiteID = 1;
+      short dataTableDbID = 1;
       string name = "TestColumnName";
 
       // Create the test record.
@@ -421,7 +421,7 @@ namespace TestDataUtilityDAL
       {
         DataSiteID = dbID,
         DataTableID = dataTableID,
-        DataTableSiteID = dataTableSiteID,
+        DataTableSiteID = dataTableDbID,
         Name = name,
         Description = "The test column.",
         Sequence = 5,
@@ -440,7 +440,7 @@ namespace TestDataUtilityDAL
       var uniqueColumns = new DbColumns()
       {
         { "DataTableID", dataTableID },
-        { "DataTableSiteID", dataTableSiteID },
+        { "DataTableSiteID", dataTableDbID },
         { "Name", (object)name },
       };
       dataColumn = dataColumnManager.Retrieve(uniqueColumns);
@@ -490,9 +490,9 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = 1;
+      short dbID = dataColumnManager.DbID;
       long dataTableID = 1;
-      short dataTableSiteID = 1;
+      short dataTableDbID = 1;
       string name = "TestColumnName";
 
       // Create the test record.
@@ -500,7 +500,7 @@ namespace TestDataUtilityDAL
       {
         DataSiteID = dbID,
         DataTableID = dataTableID,
-        DataTableSiteID = dataTableSiteID,
+        DataTableSiteID = dataTableDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -519,7 +519,7 @@ namespace TestDataUtilityDAL
       var uniqueColumns = new DbColumns()
       {
         { "DataTableID", dataTableID },
-        { "DataTableSiteID", dataTableSiteID },
+        { "DataTableSiteID", dataTableDbID },
         { "Name", (object)name },
       };
       dataColumn = dataColumnManager.Retrieve(uniqueColumns);
@@ -559,7 +559,7 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = 1;
+      short dbID = dataColumnManager.DbID;
       long dataTableID = 1;
       short dataTableDbID = 1;
       string name = "TestTableName";
@@ -622,7 +622,7 @@ namespace TestDataUtilityDAL
         , dataConfigName);
 
       long id = 1;
-      short dbID = 1;
+      short dbID = dataColumnManager.DbID;
 
       // Test Method
       var idKey = dataColumnManager.IDKey(id, dbID);

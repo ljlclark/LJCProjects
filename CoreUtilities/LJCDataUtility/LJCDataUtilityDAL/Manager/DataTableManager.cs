@@ -61,6 +61,7 @@ namespace LJCDataUtilityDAL
 
       var values = ValuesDataUtility.Instance;
       var ManagersDataSite = values.SiteManagers;
+      DbID = ManagersDataSite.DbGroupManager.DbID;
       EntryManager = ManagersDataSite.DataEntryManager;
     }
     #endregion
@@ -298,6 +299,11 @@ namespace LJCDataUtilityDAL
     {
       get => Manager.AffectedCount;
     }
+
+    // Gets or sets the Database ID.
+    /// <include file='Doc/DataTableManager.xml'
+    ///  path='members/DbID/*'/>
+    public short DbID { get; set; }
 
     // Gets or sets the DataManager reference.
     /// <include file='Doc/DataTableManager.xml'

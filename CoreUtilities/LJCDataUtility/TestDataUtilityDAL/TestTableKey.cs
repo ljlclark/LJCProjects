@@ -26,16 +26,15 @@ namespace TestDataUtilityDAL
       CompareTo();
 
       // Data Properties
-      DBName();
-      TableSchema();
-      TableName();
-      KeyType();
       ColumnName();
       ConstraintName();
-      TargetTable();
-      UpdateRule();
-      DeleteRule();
+      DBName();
+      KeyType();
       OrdinalPosition();
+      TableName();
+      TableSchema();
+      TargetColumn();
+      TargetTable();
     }
     #endregion
 
@@ -54,10 +53,8 @@ namespace TestDataUtilityDAL
         KeyType = "KeyType",
         ColumnName = "ColumnName",
         ConstraintName = "ConstraintName",
-        UpdateRule = "UpdateRule",
-        DeleteRule = "DeleteRule",
         TargetTable = "TargetTable",
-        TargetColumns = "TargetColumns",
+        TargetColumn = "TargetColumn",
         OrdinalPosition = 1,
         UniqueConstraintName = "UniqueConstraintName",
       };
@@ -89,29 +86,21 @@ namespace TestDataUtilityDAL
       compare = "ConstraintName";
       TestCommon.Write($"{methodName}6", result, compare);
 
-      result = newTableKey.UpdateRule;
-      compare = "UpdateRule";
-      TestCommon.Write($"{methodName}7", result, compare);
-
-      result = newTableKey.DeleteRule;
-      compare = "DeleteRule";
-      TestCommon.Write($"{methodName}8", result, compare);
-
       result = newTableKey.TargetTable;
       compare = "TargetTable";
-      TestCommon.Write($"{methodName}9", result, compare);
+      TestCommon.Write($"{methodName}7", result, compare);
 
-      result = newTableKey.TargetColumns;
-      compare = "TargetColumns";
-      TestCommon.Write($"{methodName}10", result, compare);
+      result = newTableKey.TargetColumn;
+      compare = "TargetColumn";
+      TestCommon.Write($"{methodName}8", result, compare);
 
       result = $"{newTableKey.OrdinalPosition}";
       compare = "1";
-      TestCommon.Write($"{methodName}11", result, compare);
+      TestCommon.Write($"{methodName}9", result, compare);
 
       result = newTableKey.UniqueConstraintName;
       compare = "UniqueConstraintName";
-      TestCommon.Write($"{methodName}12", result, compare);
+      TestCommon.Write($"{methodName}10", result, compare);
     }
 
     // Provides the default Sort functionality.
@@ -146,94 +135,6 @@ namespace TestDataUtilityDAL
     #endregion
 
     #region Data Properties
-
-    // Change DBName
-    private void DBName()
-    {
-      var methodName = "DBName()";
-
-      // Test Method
-      var tableKey = new TableKey
-      {
-        // Original Value
-        DBName = "",
-      };
-
-      var result = tableKey.DBName;
-      var compare = "No Result";
-      TestCommon.Write($"{methodName}1", result, compare);
-
-      tableKey.DBName = "DBName";
-      result = tableKey.DBName;
-      compare = "DBName";
-      TestCommon.Write($"{methodName}2", result, compare);
-    }
-
-    // Change TableSchema
-    private void TableSchema()
-    {
-      var methodName = "TableSchema()";
-
-      // Test Method
-      var tableKey = new TableKey
-      {
-        // Original Value
-        TableSchema = null,
-      };
-
-      var result = tableKey.TableSchema;
-      var compare = "No Result";
-      TestCommon.Write($"{methodName}1", result, compare);
-
-      tableKey.TableSchema = "TableSchema";
-      result = tableKey.TableSchema;
-      compare = "TableSchema";
-      TestCommon.Write($"{methodName}2", result, compare);
-    }
-
-    // Change TableSchema
-    private void TableName()
-    {
-      var methodName = "TableName()";
-
-      // Test Method
-      var tableKey = new TableKey
-      {
-        // Original Value
-        TableName = null,
-      };
-
-      var result = tableKey.TableName;
-      var compare = "No Result";
-      TestCommon.Write($"{methodName}1", result, compare);
-
-      tableKey.TableName = "TableName";
-      result = tableKey.TableName;
-      compare = "TableName";
-      TestCommon.Write($"{methodName}2", result, compare);
-    }
-
-    // Change KeyType
-    private void KeyType()
-    {
-      var methodName = "KeyType()";
-
-      // Test Method
-      var tableKey = new TableKey
-      {
-        // Original Value
-        KeyType = null,
-      };
-
-      var result = tableKey.KeyType;
-      var compare = "No Result";
-      TestCommon.Write($"{methodName}1", result, compare);
-
-      tableKey.KeyType = "KeyType";
-      result = tableKey.KeyType;
-      compare = "KeyType";
-      TestCommon.Write($"{methodName}2", result, compare);
-    }
 
     // Change ColumnName
     private void ColumnName()
@@ -279,91 +180,47 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}2", result, compare);
     }
 
-    // Change TargetTable
-    private void TargetTable()
+    // Change DBName
+    private void DBName()
     {
-      var methodName = "TargetTable()";
+      var methodName = "DBName()";
 
       // Test Method
       var tableKey = new TableKey
       {
         // Original Value
-        TargetTable = null,
+        DBName = "",
       };
 
-      var result = tableKey.TargetTable;
+      var result = tableKey.DBName;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      tableKey.TargetTable = "TargetTable";
-      result = tableKey.TargetTable;
-      compare = "TargetTable";
+      tableKey.DBName = "DBName";
+      result = tableKey.DBName;
+      compare = "DBName";
       TestCommon.Write($"{methodName}2", result, compare);
     }
 
-    // Change TargetColumns
-    private void TargetColumns()
+    // Change KeyType
+    private void KeyType()
     {
-      var methodName = "TargetColumns()";
+      var methodName = "KeyType()";
 
       // Test Method
       var tableKey = new TableKey
       {
         // Original Value
-        TargetColumns = null,
+        KeyType = null,
       };
 
-      var result = tableKey.TargetColumns;
+      var result = tableKey.KeyType;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      tableKey.TargetColumns = "TargetColumns";
-      result = tableKey.TargetColumns;
-      compare = "TargetColumns";
-      TestCommon.Write($"{methodName}2", result, compare);
-    }
-
-    // Change UpdateRule
-    private void UpdateRule()
-    {
-      var methodName = "UpdateRule()";
-
-      // Test Method
-      var tableKey = new TableKey
-      {
-        // Original Value
-        UpdateRule = null,
-      };
-
-      var result = tableKey.UpdateRule;
-      var compare = "No Result";
-      TestCommon.Write($"{methodName}1", result, compare);
-
-      tableKey.UpdateRule = "UpdateRule";
-      result = tableKey.UpdateRule;
-      compare = "UpdateRule";
-      TestCommon.Write($"{methodName}2", result, compare);
-    }
-
-    // Change DeleteRule
-    private void DeleteRule()
-    {
-      var methodName = "DeleteRule()";
-
-      // Test Method
-      var tableKey = new TableKey
-      {
-        // Original Value
-        DeleteRule = null,
-      };
-
-      var result = tableKey.DeleteRule;
-      var compare = "No Result";
-      TestCommon.Write($"{methodName}1", result, compare);
-
-      tableKey.DeleteRule = "DeleteRule";
-      result = tableKey.DeleteRule;
-      compare = "DeleteRule";
+      tableKey.KeyType = "KeyType";
+      result = tableKey.KeyType;
+      compare = "KeyType";
       TestCommon.Write($"{methodName}2", result, compare);
     }
 
@@ -386,6 +243,94 @@ namespace TestDataUtilityDAL
       tableKey.OrdinalPosition = 1;
       result = $"{tableKey.OrdinalPosition}";
       compare = "1";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
+    // Change TableSchema
+    private void TableName()
+    {
+      var methodName = "TableName()";
+
+      // Test Method
+      var tableKey = new TableKey
+      {
+        // Original Value
+        TableName = null,
+      };
+
+      var result = tableKey.TableName;
+      var compare = "No Result";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      tableKey.TableName = "TableName";
+      result = tableKey.TableName;
+      compare = "TableName";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
+    // Change TableSchema
+    private void TableSchema()
+    {
+      var methodName = "TableSchema()";
+
+      // Test Method
+      var tableKey = new TableKey
+      {
+        // Original Value
+        TableSchema = null,
+      };
+
+      var result = tableKey.TableSchema;
+      var compare = "No Result";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      tableKey.TableSchema = "TableSchema";
+      result = tableKey.TableSchema;
+      compare = "TableSchema";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
+    // Change TargetColumn
+    private void TargetColumn()
+    {
+      var methodName = "TargetColumn()";
+
+      // Test Method
+      var tableKey = new TableKey
+      {
+        // Original Value
+        TargetColumn = null,
+      };
+
+      var result = tableKey.TargetColumn;
+      var compare = "No Result";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      tableKey.TargetColumn = "TargetColumn";
+      result = tableKey.TargetColumn;
+      compare = "TargetColumn";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
+    // Change TargetTable
+    private void TargetTable()
+    {
+      var methodName = "TargetTable()";
+
+      // Test Method
+      var tableKey = new TableKey
+      {
+        // Original Value
+        TargetTable = null,
+      };
+
+      var result = tableKey.TargetTable;
+      var compare = "No Result";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      tableKey.TargetTable = "TargetTable";
+      result = tableKey.TargetTable;
+      compare = "TargetTable";
       TestCommon.Write($"{methodName}2", result, compare);
     }
     #endregion

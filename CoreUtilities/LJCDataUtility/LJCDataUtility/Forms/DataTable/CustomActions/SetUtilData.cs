@@ -368,7 +368,7 @@ namespace LJCDataUtility
           var targetColumnNames = targetKeyGroup.NextGroupNames();
           if (NetString.HasValue(targetColumnNames))
           {
-            workForeignTableKey.TargetColumns = targetColumnNames;
+            workForeignTableKey.TargetColumn = targetColumnNames;
 
             // Get TargetTable name.
             var primaryTableKey = targetKeyGroup.CurrentTableKey;
@@ -486,11 +486,11 @@ namespace LJCDataUtility
         compare += $"DataKey.TargetTableName: {dataKey.TargetTableName}";
         compare += $" = {tableKey.TargetTable}\r\n";
       }
-      if (dataKey.TargetColumnName != tableKey.TargetColumns)
+      if (dataKey.TargetColumnName != tableKey.TargetColumn)
       {
-        updateKey.TargetColumnName = tableKey.TargetColumns;
+        updateKey.TargetColumnName = tableKey.TargetColumn;
         compare += $"DataKey.TargetColumnName: {dataKey.TargetColumnName}";
-        compare += $" = {tableKey.TargetColumns}\r\n";
+        compare += $" = {tableKey.TargetColumn}\r\n";
       }
       if (NetString.HasValue(compare))
       {

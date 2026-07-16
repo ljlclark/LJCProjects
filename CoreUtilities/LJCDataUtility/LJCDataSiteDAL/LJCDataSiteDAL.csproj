@@ -56,17 +56,18 @@
     <Compile Include="Data\DataEntry.cs" />
     <Compile Include="Data\DataEntrySite.cs" />
     <Compile Include="Data\DataEntrySites.cs" />
-    <Compile Include="Data\DataSite.cs" />
-    <Compile Include="Data\DataSites.cs" />
+    <Compile Include="Data\DbGroup.cs" />
+    <Compile Include="Data\DbGroups.cs" />
     <Compile Include="Manager\DataEntryManager.cs" />
     <Compile Include="Manager\DataEntrySiteManager.cs" />
-    <Compile Include="Manager\DataSiteManager.cs" />
+    <Compile Include="Manager\DbGroupManager.cs" />
     <Compile Include="ManagersDataSite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Doc\DataEntries.xml" />
     <Content Include="Data\Doc\DataEntrySites.xml" />
+    <Content Include="Manager\Doc\DbGroupManager.xml" />
     <Content Include="Manager\Doc\DataEntryManager.xml" />
     <Content Include="Manager\Doc\DataEntrySiteManager.xml" />
   </ItemGroup>

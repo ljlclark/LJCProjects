@@ -47,17 +47,15 @@ namespace TestDataUtilityDAL
 
       var tableKey = new TableKey()
       {
-        DBName = "DBName",
-        TableSchema = "TableSchema",
-        TableName = "TableName",
-        KeyType = "KeyType",
         ColumnName = "ColumnName",
         ConstraintName = "ConstraintName",
-        UpdateRule = "UpdateRule",
-        DeleteRule = "DeleteRule",
-        TargetTable = "TargetTable",
-        TargetColumns = "TargetColumns",
+        DBName = "DBName",
+        KeyType = "KeyType",
         OrdinalPosition = 1,
+        TableName = "TableName",
+        TableSchema = "TableSchema",
+        TargetColumn = "TargetColumn",
+        TargetTable = "TargetTable",
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
@@ -67,35 +65,30 @@ namespace TestDataUtilityDAL
 
       var newTableKey = newTableKeys[0];
 
-      var result = newTableKey.DBName;
-      result += $", {newTableKey.TableSchema}";
-      var compare = "DBName, TableSchema";
+      var result = newTableKey.ColumnName;
+      result += $", {newTableKey.ConstraintName}";
+      var compare = "ColumnName, ConstraintName";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      result = newTableKey.TableName;
+      result = newTableKey.DBName;
       result += $", {newTableKey.KeyType}";
-      compare = "TableName, KeyType";
+      compare = "DBName, KeyType";
       TestCommon.Write($"{methodName}2", result, compare);
 
-      result = newTableKey.ColumnName;
-      result += $", {newTableKey.ConstraintName}";
-      compare = "ColumnName, ConstraintName";
+      result = $"{newTableKey.OrdinalPosition}";
+      result += $", {newTableKey.TableName}";
+      compare = "1, TableName";
       TestCommon.Write($"{methodName}3", result, compare);
 
-      result = newTableKey.UpdateRule;
-      result += $", {newTableKey.DeleteRule}";
-      compare = "UpdateRule, DeleteRule";
+      result = newTableKey.TableSchema;
+      result += $", {newTableKey.TargetColumn}";
+      compare = "TableSchema, TargetColumn";
       TestCommon.Write($"{methodName}4", result, compare);
 
       result = newTableKey.TargetTable;
-      result += $", {newTableKey.TargetColumns}";
-      compare = "TargetTable, TargetColumns";
-      TestCommon.Write($"{methodName}5", result, compare);
-
-      result = $"{newTableKey.OrdinalPosition}";
       result += $", {newTableKey.UniqueConstraintName}";
-      compare = "1, UniqueConstraintName";
-      TestCommon.Write($"{methodName}6", result, compare);
+      compare = "TargetTable, UniqueConstraintName";
+      TestCommon.Write($"{methodName}5", result, compare);
     }
 
     // Checks if the collection has items.
@@ -112,17 +105,15 @@ namespace TestDataUtilityDAL
 
       var tableKey = new TableKey()
       {
-        DBName = "DBName",
-        TableSchema = "TableSchema",
-        TableName = "TableName",
-        KeyType = "KeyType",
         ColumnName = "ColumnName",
         ConstraintName = "ConstraintName",
-        UpdateRule = "UpdateRule",
-        DeleteRule = "DeleteRule",
-        TargetTable = "TargetTable",
-        TargetColumns = "TargetColumns",
+        DBName = "DBName",
+        KeyType = "KeyType",
         OrdinalPosition = 1,
+        TableName = "TableName",
+        TableSchema = "TableSchema",
+        TargetColumn = "TargetColumns",
+        TargetTable = "TargetTable",
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
@@ -144,17 +135,15 @@ namespace TestDataUtilityDAL
 
       var tableKey = new TableKey()
       {
-        DBName = "DBName",
-        TableSchema = "TableSchema",
-        TableName = "TableName",
-        KeyType = "KeyType",
         ColumnName = "ColumnName",
         ConstraintName = "ConstraintName",
-        UpdateRule = "UpdateRule",
-        DeleteRule = "DeleteRule",
-        TargetTable = "TargetTable",
-        TargetColumns = "TargetColumns",
+        DBName = "DBName",
+        KeyType = "KeyType",
         OrdinalPosition = 1,
+        TableName = "TableName",
+        TableSchema = "TableSchema",
+        TargetColumn = "TargetColumns",
+        TargetTable = "TargetTable",
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
@@ -184,34 +173,30 @@ namespace TestDataUtilityDAL
 
       var tableKey = new TableKey()
       {
-        DBName = "DBName",
-        TableSchema = "TableSchema",
-        TableName = "TableName",
-        KeyType = "KeyType",
         ColumnName = "ColumnName2",
         ConstraintName = "ConstraintName",
-        UpdateRule = "UpdateRule",
-        DeleteRule = "DeleteRule",
-        TargetTable = "TargetTable",
-        TargetColumns = "TargetColumns",
+        DBName = "DBName",
+        KeyType = "KeyType",
         OrdinalPosition = 2,
+        TableName = "TableName",
+        TableSchema = "TableSchema",
+        TargetColumn = "TargetColumns",
+        TargetTable = "TargetTable",
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
 
       tableKey = new TableKey()
       {
-        DBName = "DBName",
-        TableSchema = "TableSchema",
-        TableName = "TableName",
-        KeyType = "KeyType",
         ColumnName = "ColumnName",
         ConstraintName = "ConstraintName",
-        UpdateRule = "UpdateRule",
-        DeleteRule = "DeleteRule",
-        TargetTable = "TargetTable",
-        TargetColumns = "TargetColumns",
+        DBName = "DBName",
+        KeyType = "KeyType",
         OrdinalPosition = 1,
+        TableName = "TableName",
+        TableSchema = "TableSchema",
+        TargetColumn = "TargetColumns",
+        TargetTable = "TargetTable",
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
@@ -237,34 +222,30 @@ namespace TestDataUtilityDAL
 
       var tableKey = new TableKey()
       {
-        DBName = "DBName",
-        TableSchema = "TableSchema",
-        TableName = "TableName",
-        KeyType = "KeyType",
         ColumnName = "ColumnName",
         ConstraintName = "ConstraintName",
-        UpdateRule = "UpdateRule",
-        DeleteRule = "DeleteRule",
-        TargetTable = "TargetTable",
-        TargetColumns = "TargetColumns",
+        DBName = "DBName",
+        KeyType = "KeyType",
         OrdinalPosition = 1,
+        TableName = "TableName",
+        TableSchema = "TableSchema",
+        TargetColumn = "TargetColumns",
+        TargetTable = "TargetTable",
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
 
       tableKey = new TableKey()
       {
-        DBName = "DBName",
-        TableSchema = "TableSchema",
-        TableName = "TableName",
-        KeyType = "KeyType",
         ColumnName = "ColumnName2",
         ConstraintName = "ConstraintName",
-        UpdateRule = "UpdateRule",
-        DeleteRule = "DeleteRule",
-        TargetTable = "TargetTable",
-        TargetColumns = "TargetColumns",
+        DBName = "DBName",
+        KeyType = "KeyType",
         OrdinalPosition = 2,
+        TableName = "TableName",
+        TableSchema = "TableSchema",
+        TargetColumn = "TargetColumns",
+        TargetTable = "TargetTable",
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);

@@ -18,17 +18,16 @@ namespace LJCDataUtilityDAL
     ///  path='members/Constructor/*'/>
     public TableKey()
     {
-      _DBName = null;
-      _TableSchema = null;
-      _TableName = null;
-      _KeyType = null;
       _ColumnName = null;
       _ConstraintName = null;
-      _TargetTable = null;
-      _TargetColumns = null;
-      _UpdateRule = null;
-      _DeleteRule = null;
+      _DBName = null;
+      _KeyType = null;
       _OrdinalPosition = 0;
+      _TableName = null;
+      _TableSchema = null;
+      _TargetColumn = null;
+      _TargetTable = null;
+      _UniqueConstraintName = null;
     }
 
     // The Copy constructor.
@@ -36,17 +35,16 @@ namespace LJCDataUtilityDAL
     ///  path='members/CopyConstructor/*'/>
     public TableKey(TableKey item)
     {
-      _DBName = item.DBName;
-      _TableSchema = item.TableSchema;
-      _TableName = item.TableName;
-      _KeyType = item.KeyType;
       _ColumnName = item.ColumnName;
       _ConstraintName = item.ConstraintName;
-      _TargetTable = item.TargetTable;
-      _TargetColumns = item.TargetColumns;
-      _UpdateRule = item.UpdateRule;
-      _DeleteRule = item.DeleteRule;
+      _DBName = item.DBName;
+      _KeyType = item.KeyType;
       _OrdinalPosition = item.OrdinalPosition;
+      _TableName = item.TableName;
+      _TableSchema = item.TableSchema;
+      _TargetColumn = item.TargetColumn;
+      _TargetTable = item.TargetTable;
+      _UniqueConstraintName = item.UniqueConstraintName;
     }
     #endregion
 
@@ -92,61 +90,6 @@ namespace LJCDataUtilityDAL
 
     #region Data Properties
 
-    // Update ChangedNames.Add() statements to "Property" constant
-    // if property was renamed.
-
-    // Gets or sets the DBName value.
-    /// <include file='doc/TableKey.xml'
-    ///  path='members/DBName/*'/>
-    public string DBName
-    {
-      get => _DBName;
-      set
-      {
-        _DBName = value?.Trim();
-      }
-    }
-    private string _DBName;
-
-    // Gets or sets the TableSchema value.
-    /// <include file='doc/TableKey.xml'
-    ///  path='members/TableSchema/*'/>
-    public string TableSchema
-    {
-      get => _TableSchema;
-      set
-      {
-        _TableSchema = value?.Trim();
-      }
-    }
-    private string _TableSchema;
-
-    // Gets or sets the TableName value.
-    /// <include file='doc/TableKey.xml'
-    ///  path='members/TableName/*'/>
-    public string TableName
-    {
-      get => _TableName;
-      set
-      {
-        _TableName = value?.Trim();
-      }
-    }
-    private string _TableName;
-
-    // Gets or sets the KeyType value.
-    /// <include file='doc/TableKey.xml'
-    ///  path='members/KeyType/*'/>
-    public string KeyType
-    {
-      get => _KeyType;
-      set
-      {
-        _KeyType = value?.Trim();
-      }
-    }
-    private string _KeyType;
-
     // Gets or sets the ColumnName value.
     /// <include file='doc/TableKey.xml'
     ///  path='members/ColumnName/*'/>
@@ -173,57 +116,34 @@ namespace LJCDataUtilityDAL
     }
     private string _ConstraintName;
 
-    // Gets or sets the UpdateRule value.
-    /// <include file='doc/TableKey.xml'
-    ///  path='members/UpdateRule/*'/>
-    public string UpdateRule
-    {
-      get => _UpdateRule;
-      set
-      {
-        _UpdateRule = value?.Trim();
-      }
-    }
-    private string _UpdateRule;
+    // Update ChangedNames.Add() statements to "Property" constant
+    // if property was renamed.
 
-    // Gets or sets the DeleteRule value.
+    // Gets or sets the DBName value.
     /// <include file='doc/TableKey.xml'
-    ///  path='members/DeleteRule/*'/>
-    public string DeleteRule
+    ///  path='members/DBName/*'/>
+    public string DBName
     {
-      get => _DeleteRule;
+      get => _DBName;
       set
       {
-        _DeleteRule = value?.Trim();
+        _DBName = value?.Trim();
       }
     }
-    private string _DeleteRule;
+    private string _DBName;
 
-    // Gets or sets the TargetTable value.
+    // Gets or sets the KeyType value.
     /// <include file='doc/TableKey.xml'
-    ///  path='members/TargetTable/*'/>
-    public string TargetTable
+    ///  path='members/KeyType/*'/>
+    public string KeyType
     {
-      get => _TargetTable;
+      get => _KeyType;
       set
       {
-        _TargetTable = value?.Trim();
+        _KeyType = value?.Trim();
       }
     }
-    private string _TargetTable;
-
-    // Gets or sets the TargetColumn value.
-    /// <include file='doc/TableKey.xml'
-    ///  path='members/TargetColumns/*'/>
-    public string TargetColumns
-    {
-      get => _TargetColumns;
-      set
-      {
-        _TargetColumns = value?.Trim();
-      }
-    }
-    private string _TargetColumns;
+    private string _KeyType;
 
     // Gets or sets the OrdinalPosition value.
     /// <include file='doc/TableKey.xml'
@@ -238,6 +158,58 @@ namespace LJCDataUtilityDAL
     }
     private int _OrdinalPosition;
 
+    // Gets or sets the TableName value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/TableName/*'/>
+    public string TableName
+    {
+      get => _TableName;
+      set
+      {
+        _TableName = value?.Trim();
+      }
+    }
+    private string _TableName;
+
+    // Gets or sets the TableSchema value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/TableSchema/*'/>
+    public string TableSchema
+    {
+      get => _TableSchema;
+      set
+      {
+        _TableSchema = value?.Trim();
+      }
+    }
+    private string _TableSchema;
+
+    // Gets or sets the TargetColumn value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/TargetColumns/*'/>
+    public string TargetColumn
+    {
+      get => _TargetColumn;
+      set
+      {
+        _TargetColumn = value?.Trim();
+      }
+    }
+    private string _TargetColumn;
+
+    // Gets or sets the TargetTable value.
+    /// <include file='doc/TableKey.xml'
+    ///  path='members/TargetTable/*'/>
+    public string TargetTable
+    {
+      get => _TargetTable;
+      set
+      {
+        _TargetTable = value?.Trim();
+      }
+    }
+    private string _TargetTable;
+
     // Gets or sets the UniqueConstraintName value.
     /// <include file='doc/TableKey.xml'
     ///  path='members/UniqueConstraintName/*'/>
@@ -250,45 +222,6 @@ namespace LJCDataUtilityDAL
       }
     }
     private string _UniqueConstraintName;
-    #endregion
-
-    #region Class Data
-
-    /// <summary>The DBName column name.</summary>
-    public static string ColumnDBName = "TableCatalog";
-
-    /// <summary>The TableSchema column name.</summary>
-    public static string ColumnTableSchema = "TableSchema";
-
-    /// <summary>The TableName column name.</summary>
-    public static string ColumnTableName = "TableName";
-
-    /// <summary>The ColumnName value.</summary>
-    public static string ColumnColumnName = "ColumnName";
-
-    /// <summary>The ConstraintDBName column name.</summary>
-    public static string ColumnConstraintDBName = "ConstraintDBName";
-
-    /// <summary>The ConstraintSchema column name.</summary>
-    public static string ColumnConstraintSchema = "ConstraintSchema";
-
-    /// <summary>The ConstraintName column name.</summary>
-    public static string ColumnConstraintName = "ConstraintName";
-
-    /// <summary>The UpdateRule column name.</summary>
-    public static string ColumnUpdateRule = "UpdateRule";
-
-    /// <summary>The DeleteRule column name.</summary>
-    public static string ColumnDeleteRule = "DeleteRule";
-
-    /// <summary>The TargetTable column name.</summary>
-    public static string ColumnTargetTable = "TargetTable";
-
-    /// <summary>The TargetColumn column name.</summary>
-    public static string ColumnTargetColumn = "TargetColumn";
-
-    /// <summary>The OrdinalPosition column name.</summary>
-    public static string ColumnOrdinalPosition = "OrdinalPosition";
     #endregion
   }
 }

@@ -310,7 +310,7 @@ namespace LJCDataUtilityDAL
         if (_AllowNull != value)
         {
           _AllowNull = ChangedNames.Add(ColumnAllowNull
-            , _AllowNull, value);
+            , _OriginalValues.AllowNull, value);
         }
       }
     }
@@ -329,7 +329,7 @@ namespace LJCDataUtilityDAL
         if (_DefaultValue != newValue)
         {
           _DefaultValue = ChangedNames.Add(ColumnDefaultValue
-            , _DefaultValue, value);
+            , _OriginalValues.DefaultValue, value);
         }
       }
     }
@@ -348,7 +348,7 @@ namespace LJCDataUtilityDAL
         if (_IdentityStart != value)
         {
           _IdentityStart = ChangedNames.Add(ColumnIdentityStart
-            , _IdentityStart, value);
+            , _OriginalValues.IdentityStart, value);
         }
       }
     }
@@ -367,7 +367,7 @@ namespace LJCDataUtilityDAL
         if (_IdentityIncrement != value)
         {
           _IdentityIncrement = ChangedNames.Add(ColumnIdentityIncrement
-            , _IdentityIncrement, value);
+            , _OriginalValues.IdentityIncrement, value);
         }
       }
     }
@@ -386,7 +386,7 @@ namespace LJCDataUtilityDAL
         if (_MaxLength != value)
         {
           _MaxLength = ChangedNames.Add(ColumnMaxLength
-            , _MaxLength, value);
+            , _OriginalValues.MaxLength, value);
         }
       }
     }
@@ -405,7 +405,7 @@ namespace LJCDataUtilityDAL
         if (_NewName != newValue)
         {
           _NewName = ChangedNames.Add(ColumnNewName
-            , _NewName, value);
+            , _OriginalValues.NewName, value);
         }
       }
     }
@@ -424,7 +424,7 @@ namespace LJCDataUtilityDAL
         if (_NewMaxLength != value)
         {
           _NewMaxLength = ChangedNames.Add(ColumnNewMaxLength
-            , _NewMaxLength, value);
+            , _OriginalValues.NewMaxLength, value);
         }
       }
     }
@@ -563,19 +563,19 @@ namespace LJCDataUtilityDAL
       public string DefaultValue { get; set; }
 
       // Gets or sets the IdentityStart value.
-      public int IdentityStart { get; set; }
+      public short IdentityStart { get; set; }
 
       // Gets or sets the IdentityIncrement value.
-      public int IdentityIncrement { get; set; }
+      public short IdentityIncrement { get; set; }
 
       // Gets or sets the MaxLength value.
-      public int MaxLength { get; set; }
+      public short MaxLength { get; set; }
 
       // Gets or sets the NewName value.
       public string NewName { get; set; }
 
       // Gets or sets the MaxLength value.
-      public int NewMaxLength { get; set; }
+      public short NewMaxLength { get; set; }
 
       // Gets or sets the TypeName value.
       public string TypeName { get; set; }

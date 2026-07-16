@@ -48,12 +48,12 @@ namespace LJCDataSiteDAL
     }
 
     /// <summary>Gets the DataColumn by ID.</summary>
-    public DataSite GetDataSite(long id)
+    public DbGroup GetDataSite(long id)
     {
-      DataSite retDataSite = null;
+      DbGroup retDataSite = null;
 
       IDError(id, "GetDataSite(long id)", "id");
-      var manager = DataSiteManager;
+      var manager = DbGroupManager;
       if (manager != null)
       {
         retDataSite = manager.RetrieveWithID(id);
@@ -62,12 +62,12 @@ namespace LJCDataSiteDAL
     }
 
     /// <summary>Gets the DataColumn by Name.</summary>
-    public DataSite GetDataSiteUnique(string name)
+    public DbGroup GetDataSiteUnique(string name)
     {
-      DataSite retDataSite = null;
+      DbGroup retDataSite = null;
 
       NameError(name, "GetDataSiteUnique(string name)", "name");
-      var manager = DataSiteManager;
+      var manager = DbGroupManager;
       if (manager != null)
       {
         retDataSite = manager.RetrieveWithName(name);
@@ -133,19 +133,19 @@ namespace LJCDataSiteDAL
     private DataEntrySiteManager mDataEntrySiteManager;
 
     /// <summary>Gets the DataSiteManager object.</summary>
-    public DataSiteManager DataSiteManager
+    public DbGroupManager DbGroupManager
     {
       get
       {
-        if (null == mDataSiteManager)
+        if (null == _DbGroupManager)
         {
-          mDataSiteManager
-            = new DataSiteManager(mDbServiceRef, mDataConfigName);
+          _DbGroupManager
+            = new DbGroupManager(mDbServiceRef, mDataConfigName);
         }
-        return mDataSiteManager;
+        return _DbGroupManager;
       }
     }
-    private DataSiteManager mDataSiteManager;
+    private DbGroupManager _DbGroupManager;
     #endregion
 
     #region Class Data

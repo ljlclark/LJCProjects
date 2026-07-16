@@ -89,25 +89,25 @@ namespace LJCDataUtilityDAL
       TextBuilder tb = new TextBuilder();
 
       tb.Line("select");
-      tb.Line("rc.CONSTRAINT_CATALOG as DBName,");
-      tb.Line("rc.CONSTRAINT_NAME AS ConstraintName,");
-      tb.Line("kcus.TABLE_SCHEMA AS TableSchema,");
-      tb.Line("kcus.TABLE_NAME AS TableName,");
-      tb.Line("tc.CONSTRAINT_TYPE as KeyType,");
-      tb.Line("kcus.COLUMN_NAME AS ColumnName,");
-      tb.Line("kcus.ORDINAL_POSITION as OrdinalPosition,");
-      tb.Line("rc.UNIQUE_CONSTRAINT_NAME as UniqueConstraintName,");
-      tb.Line("kcut.TABLE_NAME AS TargetTable,");
-      tb.Line("kcut.COLUMN_NAME AS TargetColumn");
-      tb.Line("from INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS rc");
-      tb.Line("left join INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc");
-      tb.Line("  on rc.CONSTRAINT_NAME = tc.CONSTRAINT_NAME");
-      tb.Line("left join INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcus");
-      tb.Line("  on rc.CONSTRAINT_NAME = kcus.CONSTRAINT_NAME");
-      tb.Line("left join INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcut");
-      tb.Line("  on rc.UNIQUE_CONSTRAINT_NAME = kcut.CONSTRAINT_NAME");
-      tb.Line("  and kcus.ORDINAL_POSITION = kcut.ORDINAL_POSITION");
-      tb.Line($"where kcus.Table_Name = '{tableName}'");
+      tb.Line("rc.CONSTRAINT_CATALOG as DBName, ");
+      tb.Line("rc.CONSTRAINT_NAME AS ConstraintName, ");
+      tb.Line("rc.UNIQUE_CONSTRAINT_NAME as UniqueConstraintName, ");
+      tb.Line("tc.CONSTRAINT_TYPE as KeyType, ");
+      tb.Line("kcus.COLUMN_NAME AS ColumnName, ");
+      tb.Line("kcus.ORDINAL_POSITION as OrdinalPosition, ");
+      tb.Line("kcus.TABLE_NAME AS TableName, ");
+      tb.Line("kcus.TABLE_SCHEMA AS TableSchema, ");
+      tb.Line("kcut.COLUMN_NAME AS TargetColumn, ");
+      tb.Line("kcut.TABLE_NAME AS TargetTable ");
+      tb.Line("from INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS rc ");
+      tb.Line("left join INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc ");
+      tb.Line("  on rc.CONSTRAINT_NAME = tc.CONSTRAINT_NAME ");
+      tb.Line("left join INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcus ");
+      tb.Line("  on rc.CONSTRAINT_NAME = kcus.CONSTRAINT_NAME ");
+      tb.Line("left join INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcut ");
+      tb.Line("  on rc.UNIQUE_CONSTRAINT_NAME = kcut.CONSTRAINT_NAME ");
+      tb.Line("  and kcus.ORDINAL_POSITION = kcut.ORDINAL_POSITION ");
+      tb.Line($"where kcus.Table_Name = '{tableName}' ");
       tb.Line("order by rc.[CONSTRAINT_NAME], kcus.[ORDINAL_POSITION];");
 
       var retValue = tb.ToString();
@@ -121,18 +121,18 @@ namespace LJCDataUtilityDAL
       TextBuilder tb = new TextBuilder();
 
       tb.Line("SELECT");
-      tb.Line(" tc.[TABLE_CATALOG] as DBName, ");
-      tb.Line(" tc.[TABLE_SCHEMA] as TableSchema, ");
-      tb.Line(" tc.[TABLE_NAME] as TableName, ");
-      tb.Line(" tc.[CONSTRAINT_TYPE] as KeyType, ");
       tb.Line(" tc.[CONSTRAINT_NAME] as ConstraintName, ");
+      tb.Line(" tc.[TABLE_CATALOG] as DBName, ");
+      tb.Line(" tc.[CONSTRAINT_TYPE] as KeyType, ");
+      tb.Line(" tc.[TABLE_NAME] as TableName, ");
+      tb.Line(" tc.[TABLE_SCHEMA] as TableSchema, ");
       tb.Line(" kcu.[COLUMN_NAME] as ColumnName, ");
       tb.Line(" kcu.[ORDINAL_POSITION] as OrdinalPosition, ");
       tb.Line(" rc.[UNIQUE_CONSTRAINT_NAME] as UniqueConstraintName ");
       tb.Line("FROM [INFORMATION_SCHEMA].[TABLE_CONSTRAINTS] as tc ");
       tb.Line("LEFT JOIN [INFORMATION_SCHEMA].[KEY_COLUMN_USAGE] as kcu ");
       tb.Line(" ON tc.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
-      tb.Line("LEFT JOIN INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS as rc");
+      tb.Line("LEFT JOIN INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS as rc ");
       tb.Line(" ON tc.CONSTRAINT_NAME = rc.CONSTRAINT_NAME");
       if (NetString.HasValue(uniqueConstraintName))
       {
