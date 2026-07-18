@@ -59,7 +59,7 @@ namespace LJCDataUtilityDAL
     }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../LJCGenDoc/Common/Data.xml'

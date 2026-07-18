@@ -55,6 +55,11 @@
     <Compile Include="CodeTokens\LibTypes.cs" />
     <Compile Include="CodeTokens\Modifiers.cs" />
     <Compile Include="CodeTokens\RefTypes.cs" />
+    <Compile Include="LJCDataRows.cs" />
+    <Compile Include="LJCDataValues.cs" />
+    <Compile Include="LJCDataColumns.cs" />
+    <Compile Include="LJCDataValue.cs" />
+    <Compile Include="LJCDataColumn.cs" />
     <Compile Include="DbColumn.cs" />
     <Compile Include="DbColumns.cs" />
     <Compile Include="DbValue.cs" />
@@ -81,6 +86,19 @@
   <ItemGroup>
     <Content Include="Doc\AppSettings.xml" />
     <Content Include="Doc\CodeTokenizer.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Doc\LJCDataRows.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Doc\LJCDataValues.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Doc\LJCDataColumns.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Doc\LJCDataValue.xml" />
+    <Content Include="Doc\LJCDataColumn.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Doc\DbColumn.xml">

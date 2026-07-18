@@ -1,4 +1,7 @@
-﻿
+﻿// Copyright (c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// DataUtilityDALProgram.cs
+
 namespace TestDataUtilityDAL
 {
   internal class DataUtilityDALProgram
