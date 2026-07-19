@@ -1,12 +1,18 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// LJCDataRows.cs
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace LJCNetCommon
 {
+  // Represents a collection of LJCDataColumns objects.
   /// <include file='Doc/LJCDataRows.xml'
   ///  path='members/LJCDataRows/*'/>
+  [XmlRoot("LJCDataRows")]
   public class LJCDataRows : List<LJCDataColumns>
   {
-    #region Methods
+    #region Custom Data Methods
 
     // Dynamic binary search with key columns.
     /// <include file='Doc/LJCDataRows.xml'
@@ -83,6 +89,16 @@ namespace LJCNetCommon
       }
       int retIndex = string.Compare(columnValue, searchValue, ignoreCase);
       return retIndex;
+    }
+
+    // Sorts on the supplied property names.
+    /// <include file='Doc/LJCDataRows.xml'
+    ///  path='members/LJCSort/*'/>
+    public void LJCSort(List<string> propertyNames)
+    {
+      var uniqueComparer = new DataRowsUniqueComparer();
+      uniqueComparer.LJCColumnNames = propertyNames;
+      Sort(uniqueComparer);
     }
     #endregion
   }
