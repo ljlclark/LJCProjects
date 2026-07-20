@@ -3,7 +3,6 @@
 // LJCDataColumns.cs
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Xml.Serialization;
 
 namespace LJCNetCommon
@@ -249,19 +248,23 @@ namespace LJCNetCommon
     // Gets a list of property names from the collection items.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCGetPropertyNames/*'/>
-    public List<string> LJCGetPropertyNames()
+    public List<string> LJCPropertyNames(LJCDataColumns dataColumns = null)
     {
-      List<string> retValue = null;
+      List<string> retList = null;
 
-      if (NetCommon.HasItems(this))
+      if (!NetCommon.HasItems(dataColumns))
       {
-        retValue = new List<string>();
-        foreach (LJCDataColumn dataColumn in this)
+        dataColumns = this;
+      }
+      if (NetCommon.HasItems(dataColumns))
+      {
+        retList = new List<string>();
+        foreach (LJCDataColumn dataColumn in dataColumns)
         {
-          retValue.Add(dataColumn.PropertyName);
+          retList.Add(dataColumn.PropertyName);
         }
       }
-      return retValue;
+      return retList;
     }
 
     // Serializes the collection
@@ -448,8 +451,25 @@ namespace LJCNetCommon
     {
       LJCDataColumn retValue = null;
 
-      var comparer = new DataColumnPropertyComparer();
-      LJCSortByPropertyName(comparer);
+      //var comparer = new DataColumnPropertyComparer();
+      //LJCSortByPropertyName(comparer);
+
+      // Set the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // KeyColumnName, ColumnValue
+        { "PropertyName", (object)propertyName },
+      };
+      LJCKeyColumns = keyColumns;
+      LJCSort();
+
+      var comparer = new DataColumnKeyComparer()
+      {
+        LJCPropertyNames = new List<string>()
+        {
+          "PropertyName",
+        }
+      };
       var dataColumn = new LJCDataColumn()
       {
         PropertyName = propertyName
@@ -488,6 +508,23 @@ namespace LJCNetCommon
 
     #region Sort Methods
 
+    // Sorts on the supplied property names.
+    /// <include file='Doc/LJCDataRows.xml'
+    ///  path='members/LJCSort/*'/>
+    public void LJCSort()
+    {
+      if (_IsPendingSort)
+      {
+        var sortNames = LJCPropertyNames(_KeyColumns);
+        var uniqueComparer = new DataColumnKeyComparer
+        {
+          LJCPropertyNames = sortNames
+        };
+        Sort(uniqueComparer);
+      }
+      _IsPendingSort = false;
+    }
+
     // Sort by AddOrderIndex.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='items/LJCSortAddOrderIndex/*'/>
@@ -516,19 +553,19 @@ namespace LJCNetCommon
       }
     }
 
-    // Sort by PropertyName.
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='items/LJCSortPropertyName/*'/>
-    public void LJCSortByPropertyName(DataColumnPropertyComparer comparer)
-    {
-      if (Count != _PrevCount
-        || _SortType.CompareTo(SortType.PropertyName) != 0)
-      {
-        _PrevCount = Count;
-        Sort(comparer);
-        _SortType = SortType.PropertyName;
-      }
-    }
+    //// Sort by PropertyName.
+    ///// <include file='Doc/LJCDataColumns.xml'
+    /////  path='items/LJCSortPropertyName/*'/>
+    //public void LJCSortByPropertyName(DataColumnPropertyComparer comparer)
+    //{
+    //  if (Count != _PrevCount
+    //    || _SortType.CompareTo(SortType.PropertyName) != 0)
+    //  {
+    //    _PrevCount = Count;
+    //    Sort(comparer);
+    //    _SortType = SortType.PropertyName;
+    //  }
+    //}
 
     // Sort by RenameAs.
     /// <include file='Doc/LJCDataColumns.xml'
@@ -542,6 +579,57 @@ namespace LJCNetCommon
         Sort(comparer);
         _SortType = SortType.RenameAs;
       }
+    }
+
+    // Checks if the key columns value has changed.
+    private bool IsKeyColumnsChanged(LJCDataColumns newKeyColumns, LJCDataColumns currentKeyColumns)
+    {
+      bool retValue = false;
+
+      while (true)
+      {
+        var hasNewColumns = NetCommon.HasItems(newKeyColumns);
+        var hasSortColumns = NetCommon.HasItems(currentKeyColumns);
+
+        // One value has no columns.
+        if ((!hasNewColumns
+          && hasSortColumns)
+          || hasNewColumns
+          && !hasSortColumns)
+        {
+          retValue = true;
+          break;
+        }
+
+        if (hasNewColumns)
+        {
+          if (newKeyColumns.Count != currentKeyColumns.Count)
+          {
+            retValue = true;
+            break;
+          }
+
+          for (short index = 0; index < newKeyColumns.Count; index++)
+          {
+            var newColumn = newKeyColumns[index];
+            var currentColumn = currentKeyColumns[index];
+
+            var propertyName = newColumn.PropertyName;
+            var propertyValue = newColumn.Value;
+            var sortPropertyName = currentColumn.PropertyName;
+            var sortPropertyValue = currentColumn.Value;
+            if (propertyName.CompareTo(sortPropertyName) != 0
+              || !EqualityComparer<object>.Default.Equals(propertyValue
+              , sortPropertyValue))
+            {
+              retValue = true;
+              break;
+            }
+          }
+        }
+        break;
+      }
+      return retValue;
     }
     #endregion
 
@@ -834,6 +922,31 @@ namespace LJCNetCommon
       get { return "DbColumns.xml"; }
     }
 
+    // Gets or sets the key columns.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/LJCKeyColumns/*'/>
+    public LJCDataColumns LJCKeyColumns
+    {
+      get => _KeyColumns;
+      set
+      {
+        if (IsKeyColumnsChanged(value, _KeyColumns))
+        {
+          _IsPendingSort = true;
+        }
+        // Must be done after check for changes.
+        _KeyColumns = value;
+
+        // New sort if count has changed.
+        if (Count != _PrevCount)
+        {
+          _IsPendingSort = true;
+          _PrevCount = Count;
+        }
+      }
+    }
+    private LJCDataColumns _KeyColumns;
+
     // Returns the item with the supplied property name.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='items/Item/*'/>
@@ -845,7 +958,9 @@ namespace LJCNetCommon
 
     #region Class Data
 
+    private bool _IsPendingSort;
     private int _PrevCount;
+
     private SortType _SortType;
 
     private enum SortType
@@ -856,5 +971,83 @@ namespace LJCNetCommon
       RenameAs
     }
     #endregion
+  }
+
+  // Sort and search on key values.
+  /// <include file='Doc/LJCDataColumns.xml'
+  ///  path='members/DataColumnKeyComparer/*'/>
+  public class DataColumnKeyComparer : IComparer<LJCDataColumn>
+  {
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/ColumnNames/*'/>
+    public List<string> LJCPropertyNames { get; set; }
+
+    // Compares two objects.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='items/Compare/*'/>
+    public int Compare(LJCDataColumn x, LJCDataColumn y)
+    {
+      int retValue;
+
+      // Check for null objects.
+      retValue = NetCommon.CompareNull(x, y);
+
+      while (true)
+      {
+        // End if one of the objects is null.
+        if (null == LJCPropertyNames
+          || retValue != NetString.CompareNotNullOrEqual)
+        {
+          break;
+        }
+
+        LJCReflect xReflect = new LJCReflect(x);
+        LJCReflect yReflect = new LJCReflect(y);
+
+        // Check for null values.
+        foreach (string propertyName in LJCPropertyNames)
+        {
+          var xValue = xReflect.GetString(propertyName);
+          var yValue = yReflect.GetString(propertyName);
+          retValue = NetCommon.CompareNull(xValue, yValue);
+
+          // Break if one of the values is null.
+          if (retValue != NetString.CompareNotNullOrEqual)
+          {
+            break;
+          }
+        }
+
+        // End if one of the values is null.
+        if (retValue != NetString.CompareNotNullOrEqual)
+        {
+          break;
+        }
+
+        for (int index = 0; index < LJCPropertyNames.Count; index++)
+        {
+          var propertyName = LJCPropertyNames[index];
+          var xValue = xReflect.GetString(propertyName);
+          var yValue = yReflect.GetString(propertyName);
+
+          if (index < LJCPropertyNames.Count - 1)
+          {
+            // Compare parent keys.
+            retValue = xValue.CompareTo(yValue);
+            if (retValue != NetString.CompareEqual)
+            {
+              break;
+            }
+          }
+          else
+          {
+            // Compare value if parent keys are equal.
+            retValue = xValue.CompareTo(yValue);
+          }
+        }
+        break;
+      }
+      return retValue;
+    }
   }
 }
