@@ -4,6 +4,8 @@
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Runtime.Remoting.Proxies;
 
 namespace TestData
 {
@@ -99,7 +101,11 @@ namespace TestData
       if (index != -1)
       {
         rowDataColumns = dataRows[index];
-        dataColumn = rowDataColumns.LJCGetWithPropertyName("LastName");
+        // *** Begin *** Change
+        //dataColumn = rowDataColumns.LJCGetWith("LastName");
+        keyColumns = LJCDataColumns.LJCPropertyNameKeys("LastName");
+        dataColumn = rowDataColumns.LJCGetWith(keyColumns);
+        // *** End ***
         value = $"{dataColumn.Value}";
       }
 
@@ -147,18 +153,22 @@ namespace TestData
       dataRows.Add(rowDataColumns);
 
       // Create the unique compare values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // KeyColumnName, ColumnValue
-        { "LastName", (object)"Final Last Name" },
-      };
+      //var keyColumns = new LJCDataColumns()
+      //{
+      //  // KeyColumnName, ColumnValue
+      //  { "LastName", (object)"Final Last Name" },
+      //};
 
       var result = "";
       var found = false;
       var propertyName = "LastName";
       foreach (var dataColumns in dataRows)
       {
-        dataColumn = dataColumns.LJCGetWithPropertyName(propertyName);
+        // *** Begin *** Change
+        //dataColumn = dataColumns.LJCGetWith(propertyName);
+        var keyColumns = LJCDataColumns.LJCPropertyNameKeys(propertyName);
+        dataColumn = dataColumns.LJCGetWith(keyColumns);
+        // *** End ***
         var columnValue = $"{dataColumn.Value}";
 
         foreach (var keyColumn in keyColumns)
@@ -235,7 +245,11 @@ namespace TestData
       string value = "";
       if (rowDataColumns != null)
       {
-        dataColumn = rowDataColumns.LJCGetWithPropertyName("LastName");
+        // *** Begin *** Change
+        //dataColumn = rowDataColumns.LJCGetWith("LastName");
+        keyColumns = LJCDataColumns.LJCPropertyNameKeys("LastName");
+        dataColumn = rowDataColumns.LJCGetWith(keyColumns);
+        // *** End ***
         value = $"{dataColumn.Value}";
       }
 
@@ -295,7 +309,11 @@ namespace TestData
 
       // Get the first data row and search column.
       rowDataColumns = dataRows[0];
-      dataColumn = rowDataColumns.LJCGetWithPropertyName("LastName");
+      // *** Begin *** Change
+      //dataColumn = rowDataColumns.LJCGetWith("LastName");
+      keyColumns = LJCDataColumns.LJCPropertyNameKeys("LastName");
+      dataColumn = rowDataColumns.LJCGetWith(keyColumns);
+      // *** End ***
 
       var result = $"{dataColumn.Value}";
       var compare = "Final Last Name";
