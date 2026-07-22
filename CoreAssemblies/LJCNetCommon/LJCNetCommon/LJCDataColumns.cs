@@ -109,6 +109,18 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='items/GetPropertyNameKey/*'/>
+    public static LJCDataColumns LJCPropertyNameKeys(string value)
+    {
+      var retKeys = new LJCDataColumns()
+      {
+        // KeyColumnName, ColumnValue
+        { "PropertyName", (object)value },
+      };
+      return retKeys;
+    }
+
     // Operator to create LJCDataValues from LJCDataColumns.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCDataValues/*'/>
@@ -383,6 +395,15 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/LJCAddValue/*'/>
+    public LJCDataColumn LJCAddValue(string propertyName, object value
+      , string dataTypeName = "String", int maxLength = 5)
+    {
+      var retValue = Add(propertyName, value, dataTypeName, maxLength);
+      return retValue;
+    }
+
     // Removes the item with the supplied property name.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCRemove/*'/>
@@ -442,6 +463,7 @@ namespace LJCNetCommon
       LJCKeyColumns = keyColumns;
       LJCSort();
 
+      // Create search item.
       var dataColumn = new LJCDataColumn();
       var reflect = new LJCReflect(dataColumn);
       foreach (var keyColumn in keyColumns)
@@ -449,31 +471,19 @@ namespace LJCNetCommon
         reflect.SetValue(keyColumn.ColumnName, keyColumn.Value);
       }
 
+      // Create comparer.
+      var propertyNames = LJCPropertyNames(keyColumns);
       var comparer = new DataColumnKeyComparer()
       {
-        LJCPropertyNames = new List<string>()
-        {
-          "PropertyName",
-        }
+        LJCPropertyNames = propertyNames,
       };
+
       int index = BinarySearch(dataColumn, comparer);
       if (index > -1)
       {
         retValue = this[index];
       }
       return retValue;
-    }
-
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='items/GetPropertyNameKey/*'/>
-    public static LJCDataColumns LJCPropertyNameKeys(string value)
-    {
-      var retKeys = new LJCDataColumns()
-      {
-        // KeyColumnName, ColumnValue
-        { "PropertyName", (object)value },
-      };
-      return retKeys;
     }
     #endregion
 
@@ -497,7 +507,8 @@ namespace LJCNetCommon
     }
 
     // Checks if the key columns value has changed.
-    private bool IsKeyColumnsChanged(LJCDataColumns newKeyColumns, LJCDataColumns currentKeyColumns)
+    private bool IsKeyColumnsChanged(LJCDataColumns newKeyColumns
+      , LJCDataColumns currentKeyColumns)
     {
       bool retValue = false;
 

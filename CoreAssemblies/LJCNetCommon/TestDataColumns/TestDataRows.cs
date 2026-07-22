@@ -55,34 +55,34 @@ namespace TestData
       var dataRows = new LJCDataRows();
 
       // Create a row item and add to the list.
-      var rowDataColumns = new LJCDataColumns();
+      var rowColumns = new LJCDataColumns();
       var dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "First Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       // Create a row item and add to the list.
-      rowDataColumns = new LJCDataColumns();
+      rowColumns = new LJCDataColumns();
       dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "Second Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       // Create a row item and add to the list.
-      rowDataColumns = new LJCDataColumns();
+      rowColumns = new LJCDataColumns();
       dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "Final Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       // Add the unique compare values.
       var keyColumns = new LJCDataColumns()
@@ -100,12 +100,9 @@ namespace TestData
       string value = "";
       if (index != -1)
       {
-        rowDataColumns = dataRows[index];
-        // *** Begin *** Change
-        //dataColumn = rowDataColumns.LJCGetWith("LastName");
+        rowColumns = dataRows[index];
         keyColumns = LJCDataColumns.LJCPropertyNameKeys("LastName");
-        dataColumn = rowDataColumns.LJCGetWith(keyColumns);
-        // *** End ***
+        dataColumn = rowColumns.LJCGetWith(keyColumns);
         value = $"{dataColumn.Value}";
       }
 
@@ -123,63 +120,61 @@ namespace TestData
       var dataRows = new LJCDataRows();
 
       // Create a row item and add to the list.
-      var rowDataColumns = new LJCDataColumns();
+      var rowColumns = new LJCDataColumns();
       var dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "First Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       // Create a row item and add to the list.
-      rowDataColumns = new LJCDataColumns();
+      rowColumns = new LJCDataColumns();
       dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "Second Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       // Create a row item and add to the list.
-      rowDataColumns = new LJCDataColumns();
+      rowColumns = new LJCDataColumns();
       dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "Final Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
-
-      // Create the unique compare values.
-      //var keyColumns = new LJCDataColumns()
-      //{
-      //  // KeyColumnName, ColumnValue
-      //  { "LastName", (object)"Final Last Name" },
-      //};
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       var result = "";
       var found = false;
-      var propertyName = "LastName";
-      foreach (var dataColumns in dataRows)
+      var searchPropertyName = "LastName";
+      foreach (var rowColumnsItem in dataRows)
       {
-        // *** Begin *** Change
-        //dataColumn = dataColumns.LJCGetWith(propertyName);
-        var keyColumns = LJCDataColumns.LJCPropertyNameKeys(propertyName);
-        dataColumn = dataColumns.LJCGetWith(keyColumns);
-        // *** End ***
-        var columnValue = $"{dataColumn.Value}";
+        // Gets the data column with the matching property name.
+        //var keyColumns = LJCDataColumns.LJCPropertyNameKeys(searchPropertyName);
+        var rowsKeyColumns = new LJCDataColumns();
+        rowsKeyColumns.LJCAddValue("PropertyName", searchPropertyName);
+        dataColumn = rowColumnsItem.LJCGetWith(rowsKeyColumns);
 
-        foreach (var keyColumn in keyColumns)
+        // Create key columns for matching column value.
+        var searchColumnValue = "Final Last Name";
+        var columnsKeyColumns = new LJCDataColumns();
+        columnsKeyColumns.LJCAddValue(searchPropertyName, searchColumnValue);
+
+        foreach (var keyColumn in columnsKeyColumns)
         {
           // Test Method
-          var compareValue = dataRows.LJCCompareColumn(columnValue, keyColumn);
+          var compareValue = dataRows.LJCCompareColumn(searchColumnValue
+            , keyColumn);
 
           if (NetString.CompareEqual == compareValue)
           {
             found = true;
-            result = columnValue;
+            result = $"{dataColumn.Value}";
             break;
           }
         }
@@ -201,34 +196,34 @@ namespace TestData
       var dataRows = new LJCDataRows();
 
       // Create a row item and add to the list.
-      var rowDataColumns = new LJCDataColumns();
+      var rowColumns = new LJCDataColumns();
       var dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "First Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       // Create a row item and add to the list.
-      rowDataColumns = new LJCDataColumns();
+      rowColumns = new LJCDataColumns();
       dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "Second Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       // Create a row item and add to the list.
-      rowDataColumns = new LJCDataColumns();
+      rowColumns = new LJCDataColumns();
       dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "Final Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       // Add the unique compare values.
       var keyColumns = new LJCDataColumns()
@@ -239,17 +234,14 @@ namespace TestData
       dataRows.LJCKeyColumns = keyColumns;
 
       // Test Method
-      rowDataColumns = dataRows.LJCGetRow();
+      rowColumns = dataRows.LJCGetRow();
 
       // Get the found data row and search column.
       string value = "";
-      if (rowDataColumns != null)
+      if (rowColumns != null)
       {
-        // *** Begin *** Change
-        //dataColumn = rowDataColumns.LJCGetWith("LastName");
         keyColumns = LJCDataColumns.LJCPropertyNameKeys("LastName");
-        dataColumn = rowDataColumns.LJCGetWith(keyColumns);
-        // *** End ***
+        dataColumn = rowColumns.LJCGetWith(keyColumns);
         value = $"{dataColumn.Value}";
       }
 
@@ -267,34 +259,34 @@ namespace TestData
       var dataRows = new LJCDataRows();
 
       // Create a row item and add to the list.
-      var rowDataColumns = new LJCDataColumns();
+      var rowColumns = new LJCDataColumns();
       var dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "First Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       // Create a row item and add to the list.
-      rowDataColumns = new LJCDataColumns();
+      rowColumns = new LJCDataColumns();
       dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "Second Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       // Create a row item and add to the list.
-      rowDataColumns = new LJCDataColumns();
+      rowColumns = new LJCDataColumns();
       dataColumn = new LJCDataColumn("FirstName", "First Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Middle Name");
-      rowDataColumns.Add(dataColumn);
+      rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "Final Last Name");
-      rowDataColumns.Add(dataColumn);
-      dataRows.Add(rowDataColumns);
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
 
       // Add the unique compare values.
       var keyColumns = new LJCDataColumns()
@@ -308,12 +300,9 @@ namespace TestData
       dataRows.LJCSort();
 
       // Get the first data row and search column.
-      rowDataColumns = dataRows[0];
-      // *** Begin *** Change
-      //dataColumn = rowDataColumns.LJCGetWith("LastName");
+      rowColumns = dataRows[0];
       keyColumns = LJCDataColumns.LJCPropertyNameKeys("LastName");
-      dataColumn = rowDataColumns.LJCGetWith(keyColumns);
-      // *** End ***
+      dataColumn = rowColumns.LJCGetWith(keyColumns);
 
       var result = $"{dataColumn.Value}";
       var compare = "Final Last Name";
