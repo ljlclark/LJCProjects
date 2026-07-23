@@ -110,12 +110,12 @@ namespace LJCNetCommon
         retValue = new LJCDataColumns();
         foreach (var dataValue in this)
         {
-          // *** Begin *** Change
-          //definitionColumn = dataDefinition.LJCGetWith(dataValue.PropertyName);
           var propertyName = dataValue.PropertyName;
-          var keyColumns = LJCDataColumns.LJCPropertyNameKeys(propertyName);
+          var keyColumns = new LJCDataColumns()
+          {
+            { "PropertyName", propertyName },
+          };
           definitionColumn = dataDefinition.LJCGetWith(keyColumns);
-          // *** End ***
           var dataColumn = dataValue.CreateColumn(definitionColumn);
           retValue.Add(dataColumn);
         }

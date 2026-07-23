@@ -241,7 +241,8 @@ namespace TestData
       // Test Method
       var dataColumns = new LJCDataColumns();
 
-      var dataColumn = dataColumns.Add("PropertyName", "ColumnName");
+      var dataColumn = dataColumns.Add("PropertyName");
+      dataColumn.ColumnName = "ColumnName";
       var result = dataColumn.PropertyName;
       result += $", {dataColumn.ColumnName}";
       var compare = "PropertyName, ColumnName";
