@@ -115,7 +115,7 @@ namespace LJCNetCommon
           {
             { "PropertyName", propertyName },
           };
-          definitionColumn = dataDefinition.LJCGetWith(keyColumns);
+          definitionColumn = dataDefinition.LJCGetUnique(keyColumns);
           var dataColumn = dataValue.CreateColumn(definitionColumn);
           retValue.Add(dataColumn);
         }

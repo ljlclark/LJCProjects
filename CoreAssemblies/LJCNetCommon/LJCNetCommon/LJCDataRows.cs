@@ -12,14 +12,142 @@ namespace LJCNetCommon
   [XmlRoot("LJCDataRows")]
   public class LJCDataRows : List<LJCDataColumns>
   {
+    #region Collection Methods
+
+    // Gets property names list from data columns.
+    private List<string> LJCPropertyNames(LJCDataColumns dataColumns)
+    {
+      List<string> retList = null;
+
+      if (NetCommon.HasItems(dataColumns))
+      {
+        retList = new List<string>();
+        foreach (var dataColumn in dataColumns)
+        {
+          retList.Add(dataColumn.PropertyName);
+        }
+      }
+      return retList;
+    }
+    #endregion
+
+    #region Collection Data Methods
+
+    // Returns the row that matches the key columns.
+    // The row is identified by its column property name values and column
+    // values.
+    /// <include file='Doc/LJCDataRows.xml'
+    ///  path='members/LJCGetUnique/*'/>
+    public LJCDataColumns LJCGetUnique(LJCDataColumns keyColumns = null)
+    {
+      LJCDataColumns retColumns = null;
+
+      if (keyColumns != null)
+      {
+        LJCKeyColumns = keyColumns;
+      }
+
+      if (NetCommon.HasItems(LJCKeyColumns))
+      {
+        var index = LJCBinarySearch();
+        if (index != -1)
+        {
+          retColumns = this[index];
+        }
+      }
+      return retColumns;
+    }
+
+    // Sorts on the current key columns.
+    /// <include file='Doc/LJCDataRows.xml'
+    ///  path='members/LJCSort/*'/>
+    public void LJCSort(LJCDataColumns keyColumns = null)
+    {
+      if (NetCommon.HasItems(keyColumns))
+      {
+        LJCKeyColumns = keyColumns;
+      }
+
+      if (_IsPendingSort)
+      {
+        var sortNames = LJCPropertyNames(_KeyColumns);
+        if (sortNames != null)
+        {
+          var uniqueComparer = new DataRowKeyComparer
+          {
+            LJCPropertyNames = sortNames
+          };
+          Sort(uniqueComparer);
+        }
+      }
+      _IsPendingSort = false;
+    }
+
+    // Checks if the key columns value has changed.
+    private bool IsKeyColumnsChanged(LJCDataColumns newKeyColumns, LJCDataColumns currentKeyColumns)
+    {
+      bool retValue = false;
+
+      while (true)
+      {
+        var hasNewColumns = NetCommon.HasItems(newKeyColumns);
+        var hasSortColumns = NetCommon.HasItems(currentKeyColumns);
+
+        // One value has no columns.
+        if ((!hasNewColumns
+          && hasSortColumns)
+          || hasNewColumns
+          && !hasSortColumns)
+        {
+          retValue = true;
+          break;
+        }
+
+        if (hasNewColumns)
+        {
+          if (newKeyColumns.Count != currentKeyColumns.Count)
+          {
+            retValue = true;
+            break;
+          }
+
+          for (short index = 0; index < newKeyColumns.Count; index++)
+          {
+            var newColumn = newKeyColumns[index];
+            var currentColumn = currentKeyColumns[index];
+
+            var propertyName = newColumn.PropertyName;
+            var propertyValue = newColumn.Value;
+            var sortPropertyName = currentColumn.PropertyName;
+            var sortPropertyValue = currentColumn.Value;
+            if (propertyName.CompareTo(sortPropertyName) != 0
+              || !EqualityComparer<object>.Default.Equals(propertyValue
+              , sortPropertyValue))
+            {
+              retValue = true;
+              break;
+            }
+          }
+        }
+        break;
+      }
+      return retValue;
+    }
+    #endregion
+
     #region Custom Data Methods
 
     // Dynamic binary search with key columns.
     /// <include file='Doc/LJCDataRows.xml'
     ///  path='members/LJCBinarySearch/*'/>
-    public int LJCBinarySearch()
+    public int LJCBinarySearch(LJCDataColumns keyColumns = null)
     {
       int retIndex = -1;
+
+      if (keyColumns != null)
+      {
+        LJCKeyColumns = keyColumns;
+      }
 
       LJCSort();
 
@@ -100,108 +228,6 @@ namespace LJCNetCommon
       }
       int retIndex = string.Compare(columnValue, searchValue, ignoreCase);
       return retIndex;
-    }
-
-    // Returns the row that matches the key columns.
-    /// <include file='Doc/LJCDataRows.xml'
-    ///  path='members/LJCSearchValue/*'/>
-    public LJCDataColumns LJCGetRow()
-    {
-      LJCDataColumns retColumns = null;
-
-      var index = LJCBinarySearch();
-      if (index != -1)
-      {
-        retColumns = this[index];
-      }
-      return retColumns;
-    }
-    #endregion
-
-    #region Sort Methods
-
-    // Sorts on the supplied property names.
-    /// <include file='Doc/LJCDataRows.xml'
-    ///  path='members/LJCSort/*'/>
-    public void LJCSort()
-    {
-      if (_IsPendingSort)
-      {
-        var sortNames = PropertyNames(_KeyColumns);
-        var uniqueComparer = new DataRowKeyComparer
-        {
-          LJCPropertyNames = sortNames
-        };
-        Sort(uniqueComparer);
-      }
-      _IsPendingSort = false;
-    }
-
-    // Gets property names list from data columns.
-    private List<string> PropertyNames(LJCDataColumns dataColumns)
-    {
-      List<string> retList = null;
-
-      if (NetCommon.HasItems(dataColumns))
-      {
-        retList = new List<string>();
-        foreach (var dataColumn in dataColumns)
-        {
-          retList.Add(dataColumn.PropertyName);
-        }
-      }
-      return retList;
-    }
-
-    // Checks if the key columns value has changed.
-    private bool IsKeyColumnsChanged(LJCDataColumns newKeyColumns, LJCDataColumns currentKeyColumns)
-    {
-      bool retValue = false;
-
-      while (true)
-      {
-        var hasNewColumns = NetCommon.HasItems(newKeyColumns);
-        var hasSortColumns = NetCommon.HasItems(currentKeyColumns);
-
-        // One value has no columns.
-        if ((!hasNewColumns
-          && hasSortColumns)
-          || hasNewColumns
-          && !hasSortColumns)
-        {
-          retValue = true;
-          break;
-        }
-
-        if (hasNewColumns)
-        {
-          if (newKeyColumns.Count != currentKeyColumns.Count)
-          {
-            retValue = true;
-            break;
-          }
-
-          for (short index = 0; index < newKeyColumns.Count; index++)
-          {
-            var newColumn = newKeyColumns[index];
-            var currentColumn = currentKeyColumns[index];
-
-            var propertyName = newColumn.PropertyName;
-            var propertyValue = newColumn.Value;
-            var sortPropertyName = currentColumn.PropertyName;
-            var sortPropertyValue = currentColumn.Value;
-            if (propertyName.CompareTo(sortPropertyName) != 0
-              || !EqualityComparer<object>.Default.Equals(propertyValue
-              , sortPropertyValue))
-            {
-              retValue = true;
-              break;
-            }
-          }
-        }
-        break;
-      }
-      return retValue;
     }
     #endregion
 

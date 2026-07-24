@@ -60,7 +60,7 @@ namespace LJCNetCommon
             {
               { "PropertyName", propertyName },
             };
-            definitionColumn = dataDefinition.LJCGetWith(keyColumns);
+            definitionColumn = dataDefinition.LJCGetUnique(keyColumns);
           }
 
           LJCDataColumn dataColumn = new LJCDataColumn()
@@ -239,7 +239,7 @@ namespace LJCNetCommon
           {
             { "PropertyName", searchName },
           };
-          searchColumn = LJCGetWith(keyColumns);
+          searchColumn = LJCGetUnique(keyColumns);
           if (searchColumn != null)
           {
             retValue.Add(new LJCDataColumn(searchColumn));
@@ -310,28 +310,6 @@ namespace LJCNetCommon
       dataColumn.AddOrderIndex = newIndex;
     }
 
-    //// Creates item with the supplied values and adds it to the collection.
-    ///// <include file='Doc/LJCDataColumns.xml'
-    /////  path='members/Add2/*'/>
-    //public LJCDataColumn Add(string propertyName, string columnName = null
-    //  , string renameAs = null, string dataTypeName = "String"
-    //  , string caption = null, int maxLength = 5)
-    //{
-    //  var retValue = new LJCDataColumn()
-    //  {
-    //    PropertyName = propertyName,
-    //    ColumnName = columnName,
-    //    RenameAs = renameAs,
-    //    DataTypeName = dataTypeName,
-    //    Caption = caption,
-    //    MaxLength = maxLength,
-
-    //    AutoIncrement = false,
-    //  };
-    //  Add(retValue);
-    //  return retValue;
-    //}
-
     // Creates item with Position and MaxLength and adds it to the collection.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/Add3/*'/>
@@ -350,7 +328,6 @@ namespace LJCNetCommon
     }
 
     // Creates item with Value and adds it to the collection.
-    // Use (object) cast with a string value to use this overload.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/Add4/*'/>
     public LJCDataColumn Add(string propertyName, object value = null
@@ -366,6 +343,47 @@ namespace LJCNetCommon
         AutoIncrement = false,
       };
       Add(retValue);
+      return retValue;
+    }
+
+    // Returns the column that matches the key columns.
+    // The column is identified by its property names and values.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='items/LJCGetUnique/*'/>
+    public LJCDataColumn LJCGetUnique(LJCDataColumns keyColumns = null)
+    {
+      LJCDataColumn retValue = null;
+
+      if (keyColumns != null)
+      {
+        LJCKeyColumns = keyColumns;
+      }
+
+      if (NetCommon.HasItems(LJCKeyColumns))
+      {
+        LJCSort();
+
+        // Create search item.
+        var dataColumn = new LJCDataColumn();
+        var reflect = new LJCReflect(dataColumn);
+        foreach (var keyColumn in keyColumns)
+        {
+          reflect.SetValue(keyColumn.PropertyName, keyColumn.Value);
+        }
+
+        // Create comparer.
+        var propertyNames = LJCPropertyNames(keyColumns);
+        var comparer = new DataColumnKeyComparer()
+        {
+          LJCPropertyNames = propertyNames,
+        };
+
+        int index = BinarySearch(dataColumn, comparer);
+        if (index > -1)
+        {
+          retValue = this[index];
+        }
+      }
       return retValue;
     }
 
@@ -393,7 +411,7 @@ namespace LJCNetCommon
         {
           { "PropertyName", dataColumn.PropertyName },
         };
-        var updateColumn = LJCGetWith(keyColumns);
+        var updateColumn = LJCGetUnique(keyColumns);
         if (updateColumn != null)
         {
           updateColumn.AllowDBNull = dataColumn.AllowDBNull;
@@ -414,60 +432,28 @@ namespace LJCNetCommon
         }
       }
     }
-    #endregion
 
-    #region Custom Data Methods
-
-    // Returns the item with the supplied property name.
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='items/LJCGetWithPropertyName/*'/>
-    //public LJCDataColumn LJCGetWith(string propertyName, object value = null)
-    public LJCDataColumn LJCGetWith(LJCDataColumns keyColumns)
-    {
-      LJCDataColumn retValue = null;
-
-      LJCKeyColumns = keyColumns;
-      LJCSort();
-
-      // Create search item.
-      var dataColumn = new LJCDataColumn();
-      var reflect = new LJCReflect(dataColumn);
-      foreach (var keyColumn in keyColumns)
-      {
-        reflect.SetValue(keyColumn.PropertyName, keyColumn.Value);
-      }
-
-      // Create comparer.
-      var propertyNames = LJCPropertyNames(keyColumns);
-      var comparer = new DataColumnKeyComparer()
-      {
-        LJCPropertyNames = propertyNames,
-      };
-
-      int index = BinarySearch(dataColumn, comparer);
-      if (index > -1)
-      {
-        retValue = this[index];
-      }
-      return retValue;
-    }
-    #endregion
-
-    #region Sort Methods
-
-    // Sorts on the supplied property names.
+    // Sorts on the current key columns.
     /// <include file='Doc/LJCDataRows.xml'
     ///  path='members/LJCSort/*'/>
-    public void LJCSort()
+    public void LJCSort(LJCDataColumns keyColumns = null)
     {
+      if (NetCommon.HasItems(keyColumns))
+      {
+        LJCKeyColumns = keyColumns;
+      }
+
       if (_IsPendingSort)
       {
         var sortNames = LJCPropertyNames(_KeyColumns);
-        var uniqueComparer = new DataColumnKeyComparer
+        if (sortNames != null)
         {
-          LJCPropertyNames = sortNames
-        };
-        Sort(uniqueComparer);
+          var uniqueComparer = new DataColumnKeyComparer
+          {
+            LJCPropertyNames = sortNames
+          };
+          Sort(uniqueComparer);
+        }
       }
       _IsPendingSort = false;
     }
@@ -542,7 +528,7 @@ namespace LJCNetCommon
           {
             { "PropertyName", dataColumn.PropertyName },
           };
-          searchColumn = LJCGetWith(keyColumns);
+          searchColumn = LJCGetUnique(keyColumns);
           if (searchColumn != null)
           {
             dataColumn.Caption = searchColumn.Caption;
@@ -561,7 +547,7 @@ namespace LJCNetCommon
       {
         { "PropertyName", columnName },
       };
-      var dataColumn = LJCGetWith(keyColumns);
+      var dataColumn = LJCGetUnique(keyColumns);
       SetMapValues(dataColumn, propertyName, renameAs, caption);
     }
 
@@ -761,7 +747,7 @@ namespace LJCNetCommon
         {
           { "PropertyName", propertyName }
         };
-        var dataColumn = LJCGetWith(keyColumns);
+        var dataColumn = LJCGetUnique(keyColumns);
 
         if (dataColumn != null
           && dataColumn.Value != null
@@ -787,7 +773,7 @@ namespace LJCNetCommon
         {
           { "PropertyName", propertyName },
         };
-        var dataColumn = LJCGetWith(keyColumns);
+        var dataColumn = LJCGetUnique(keyColumns);
         if (dataColumn != null
           && dataColumn.Value != null)
         {
@@ -809,7 +795,7 @@ namespace LJCNetCommon
         {
           { "PropertyName", propertyName },
         };
-        var dataColumn = LJCGetWith(keyColumns);
+        var dataColumn = LJCGetUnique(keyColumns);
         if (dataColumn != null)
         {
           dataColumn.Value = value;
@@ -864,7 +850,7 @@ namespace LJCNetCommon
         {
           { "PropertyName", propertyName },
         };
-        return LJCGetWith(keyColumns);
+        return LJCGetUnique(keyColumns);
       }
     }
     #endregion
