@@ -12,6 +12,31 @@ namespace LJCNetCommon
   [XmlRoot("LJCDataRows")]
   public class LJCDataRows : List<LJCDataColumns>
   {
+    #region Constructor Methods
+
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
+    public LJCDataRows()
+    {
+      _IsPendingSort = false;
+      _PrevCount = 0;
+    }
+
+    // Initializes an object from the supplied items.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/CopyConstructor/*'/>
+    public LJCDataRows(LJCDataRows items)
+    {
+      if (NetCommon.HasItems(items))
+      {
+        foreach (var item in items)
+        {
+          Add(new LJCDataColumns(item));
+        }
+      }
+    }
+    #endregion
+
     #region Collection Methods
 
     // Gets property names list from data columns.
