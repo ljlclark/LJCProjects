@@ -29,11 +29,14 @@ namespace TestData
       // Deserializes from the specified XML file.
       LJCDeserialize();
 
+      // Get the minimum date value.
+      LJCMinSqlDate();
+
       // Gets a collection of items from a data object.
-      LJCGetObjectColumns();
+      LJCObjectColumns();
 
       // Gets a list of property names from a data object.
-      LJCGetObjectPropertyNames();
+      LJCObjectPropertyNames();
 
       // Operator to create LJCDataValues from LJCDataColumns.
       DataColumnsToDataValues();
@@ -56,20 +59,20 @@ namespace TestData
       // Checks if the collection has items.
       HasItems();
 
+      // Gets a collection of changed columns.
+      LJCChanged();
+
       // Sets the IsChanged value to false for all items.
       LJCClearChanged();
 
-      // Gets a collection of changed columns.
-      LJCGetChanged();
-
       // Returns a collection of items that match a list of property names.
-      LJCGetColumns1();
+      LJCColumns1();
 
       // Returns a collection of items from the data object properties.
-      LJCGetColumns2();
+      LJCColumns2();
 
       // Gets a list of property names from the collection items.
-      LJCGetPropertyNames();
+      LJCPropertyNames();
 
       // Serializes the collection
       LJCSerialize();
@@ -80,17 +83,14 @@ namespace TestData
       // Adds the supplied item to the collection
       Add1();
 
-      // Creates item with the supplied values and adds it to the collection.
+      // Creates item with Position and MaxLength and adds it to the collection.
       Add2();
 
-      // Creates item with Position and MaxLength and adds it to the collection.
+      // Creates item with Value and adds it to the collection.
       Add3();
 
-      // Creates item with Value and adds it to the collection.
-      Add4();
-
-      // Creates item with Caption and RenameAs and adds to the collection.
-      LJCAddPropertyAs();
+      // Returns the column that matches the key columns.
+      LJCGetUnique();
 
       // Removes the item with the supplied property name.
       LJCRemove();
@@ -99,37 +99,7 @@ namespace TestData
       LJCSetData();
       #endregion
 
-      #region Custom Data Methods
-
-      // Returns the item with the supplied column name.
-      LJCGetWithColumnName();
-
-      // Returns the item with the supplied property name.
-      LJCGetWithPropertyName();
-
-      // Returns the item with the supplied RenameAs value.
-      LJCGetWithRenameAs();
-      #endregion
-
-      #region Sort Methods
-
-      // Sorts by AddOrderIndex.
-      LJCSortByAddOrderIndex();
-
-      // Sorts by ColumnName.
-      LJCSortByColumnName();
-
-      // Sorts by PropertyName.
-      LJCSortByPropertyName();
-
-      // Sorts by RenameAs.
-      LJCSortByRenameAs();
-      #endregion
-
       #region Other Public Methods
-
-      // Gets the minimum date value.
-      LJCGetMinSqlDate();
 
       // Sets the caption properties.
       LJCSetColumnCaptions();
@@ -182,6 +152,9 @@ namespace TestData
 
       #region Properties
 
+      // Gets or sets the key columns.
+      LJCKeyColumns();
+
       // Returns the item with the supplied property name.
       PropertyNameIndexer();
       #endregion
@@ -200,8 +173,18 @@ namespace TestData
       TestCommon.Write($"{methodName}", result, compare);
     }
 
+    // Get the minimum date value.
+    private void LJCMinSqlDate()
+    {
+      var methodName = "LJCMinSqlDate()";
+
+      var result = "";
+      var compare = "Not Implemented";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
     // Gets a collection of items from a data object.
-    private void LJCGetObjectColumns()
+    private void LJCObjectColumns()
     {
       var methodName = "LJCCreateObjectColumns()";
 
@@ -211,7 +194,7 @@ namespace TestData
     }
 
     // Gets a list of property names from a data object.
-    private void LJCGetObjectPropertyNames()
+    private void LJCObjectPropertyNames()
     {
       var methodName = "LJCGetPropertyNames()";
 
@@ -282,6 +265,16 @@ namespace TestData
       TestCommon.Write($"{methodName}", result, compare);
     }
 
+    // Gets a collection of changed columns.
+    private void LJCChanged()
+    {
+      var methodName = "LJCChanged()";
+
+      var result = "";
+      var compare = "Not Implemented";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
     // Sets the IsChanged value to false for all items.
     private void LJCClearChanged()
     {
@@ -292,20 +285,10 @@ namespace TestData
       TestCommon.Write($"{methodName}", result, compare);
     }
 
-    // Gets a collection of changed columns.
-    private void LJCGetChanged()
-    {
-      var methodName = "LJCGetChanged()";
-
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
     // Returns a collection of items that match a list of property names.
-    private void LJCGetColumns1()
+    private void LJCColumns1()
     {
-      var methodName = "LJCGetColumns1()";
+      var methodName = "LJCColumns1()";
 
       var result = "";
       var compare = "Not Implemented";
@@ -313,9 +296,9 @@ namespace TestData
     }
 
     // Returns a collection of items from the data object properties.
-    private void LJCGetColumns2()
+    private void LJCColumns2()
     {
-      var methodName = "LJCGetColumns2()";
+      var methodName = "LJCColumns2()";
 
       var result = "";
       var compare = "Not Implemented";
@@ -323,7 +306,7 @@ namespace TestData
     }
 
     // Gets a list of property names from the collection items.
-    private void LJCGetPropertyNames()
+    private void LJCPropertyNames()
     {
       var methodName = "LJCGetPropertyNames()";
 
@@ -355,7 +338,7 @@ namespace TestData
       TestCommon.Write($"{methodName}", result, compare);
     }
 
-    // Creates item with the supplied values and adds it to the collection.
+    // Creates item with Position and MaxLength and adds it to the collection.
     private void Add2()
     {
       var methodName = "Add2()";
@@ -365,7 +348,7 @@ namespace TestData
       TestCommon.Write($"{methodName}", result, compare);
     }
 
-    // Creates item with Position and MaxLength and adds it to the collection.
+    // Creates item with Value and adds it to the collection.
     private void Add3()
     {
       var methodName = "Add3()";
@@ -375,21 +358,10 @@ namespace TestData
       TestCommon.Write($"{methodName}", result, compare);
     }
 
-    // Creates item with Value and adds it to the collection.
-    // Use (object) cast with a string value to use this overload.
-    private void Add4()
+    // Returns the column that matches the key columns.
+    private void LJCGetUnique()
     {
-      var methodName = "Add4()";
-
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Creates item with Caption and RenameAs and adds to the collection.
-    private void LJCAddPropertyAs()
-    {
-      var methodName = "LJCAddPropertyAs()";
+      var methodName = "LJCGetUnique()";
 
       var result = "";
       var compare = "Not Implemented";
@@ -415,77 +387,11 @@ namespace TestData
       var compare = "Not Implemented";
       TestCommon.Write($"{methodName}", result, compare);
     }
-    #endregion
 
-    #region Custom Data Methods
-
-    // Returns the item with the supplied column name.
-    private void LJCGetWithColumnName()
+    // Sorts on the current key columns.
+    private void LJCSort()
     {
-      var methodName = "LJCGetWithColumnName()";
-
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Returns the item with the supplied property name.
-    private void LJCGetWithPropertyName()
-    {
-      var methodName = "LJCGetWithPropertyName()";
-
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Returns the item with the supplied RenameAs value.
-    private void LJCGetWithRenameAs()
-    {
-      var methodName = "LJCGetWithRenameAs()";
-
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-    #endregion
-
-    #region Sort Methods
-
-    // Sorts by AddOrderIndex.
-    private void LJCSortByAddOrderIndex()
-    {
-      var methodName = "LJCSortAddOrderIndex()";
-
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Sorts by ColumnName.
-    private void LJCSortByColumnName()
-    {
-      var methodName = "LJCSortColumnName()";
-
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Sorts by PropertyName.
-    private void LJCSortByPropertyName()
-    {
-      var methodName = "LJCSortPropertyName()";
-
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Sorts by RenameAs.
-    private void LJCSortByRenameAs()
-    {
-      var methodName = "LJCSortRenameAs()";
+      var methodName = "LJCSort()";
 
       var result = "";
       var compare = "Not Implemented";
@@ -494,16 +400,6 @@ namespace TestData
     #endregion
 
     #region Other Public Methods
-
-    // Get the minimum date value.
-    private void LJCGetMinSqlDate()
-    {
-      var methodName = "LJCGetMinSqlDate()";
-
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
 
     // Sets the caption properties.
     private void LJCSetColumnCaptions()
@@ -660,6 +556,16 @@ namespace TestData
     #endregion
 
     #region Properties
+
+    // Returns the item with the supplied property name.
+    private void LJCKeyColumns()
+    {
+      var methodName = "LJCKeyColumns()";
+
+      var result = "";
+      var compare = "Not Implemented";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
 
     // Returns the item with the supplied property name.
     private void PropertyNameIndexer()

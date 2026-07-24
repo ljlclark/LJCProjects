@@ -24,6 +24,12 @@ namespace TestData
     // Runs the test methods.
     private void Run()
     {
+      #region Collection Methods
+
+      // Gets property names list from data columns.
+      LJCPropertyNames();
+      #endregion
+
       #region Collection Data Methods
 
       // Returns the row that matches the key columns.
@@ -41,6 +47,25 @@ namespace TestData
       // Compares column value to key column value.
       LJCCompareColumn();
       #endregion
+
+      #region Properties
+
+      // Gets or sets the key columns.
+      LJCKeyColumns();
+      #endregion
+    }
+    #endregion
+
+    #region Collection Methods
+
+    // Gets property names list from data columns.
+    private void LJCPropertyNames()
+    {
+      var methodName = "LJCPropertyNames()";
+
+      var result = "";
+      var compare = "Not Implemented";
+      TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
 
@@ -357,6 +382,19 @@ namespace TestData
         }
       }
       var compare = "Final Last";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the key columns.
+    private void LJCKeyColumns()
+    {
+      var methodName = "LJCKeyColumns()";
+
+      var result = "";
+      var compare = "Not Implemented";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion

@@ -31,6 +31,14 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // Get the minimum date value.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='items/LJCMinSqlDate/*'/>
+    public static string LJCMinSqlDate()
+    {
+      return "1753/01/01 00:00:00";
+    }
+
     // Gets a collection of items from a data object.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCObjectColumns/*'/>
@@ -109,14 +117,6 @@ namespace LJCNetCommon
         }
       }
       return retValue;
-    }
-
-    // Get the minimum date value.
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='items/LJCMinSqlDate/*'/>
-    public static string LJCMinSqlDate()
-    {
-      return "1753/01/01 00:00:00";
     }
 
     // Operator to create LJCDataValues from LJCDataColumns.
@@ -222,7 +222,7 @@ namespace LJCNetCommon
 
     // Returns a collection of items that match a list of property names.
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCGetColumns1/*'/>
+    ///  path='members/LJCColumns1/*'/>
     public LJCDataColumns LJCColumns(List<string> propertyNames)
     {
       LJCDataColumn searchColumn;
@@ -251,7 +251,7 @@ namespace LJCNetCommon
 
     // Returns a collection of items from the data object properties.
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCGetColumns2/*'/>
+    ///  path='members/LJCColumns2/*'/>
     public static LJCDataColumns LJCColumns(object dataObject
       , List<string> propertyNames = null)
     {
@@ -312,7 +312,7 @@ namespace LJCNetCommon
 
     // Creates item with Position and MaxLength and adds it to the collection.
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/Add3/*'/>
+    ///  path='members/Add2/*'/>
     public LJCDataColumn Add(string propertyName, int position, int maxLength)
     {
       LJCDataColumn retValue = new LJCDataColumn()
@@ -329,7 +329,7 @@ namespace LJCNetCommon
 
     // Creates item with Value and adds it to the collection.
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/Add4/*'/>
+    ///  path='members/Add3/*'/>
     public LJCDataColumn Add(string propertyName, object value = null
       , string dataTypeName = "String", int maxLength = 5)
     {

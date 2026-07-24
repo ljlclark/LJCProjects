@@ -66,22 +66,6 @@
     <summary>
       Creates the Object from the arguments and adds it to the collection.
     </summary>
-    <param name="columnName">The column name.</param>
-    <param name="propertyName">The property name.</param>
-    <param name="renameAs">The rename value.</param>
-    <param name="dataTypeName">The data type name.</param>
-    <param name="caption">The caption value.</param>
-    <param name="maxLength">The column length.</param>
-    <returns>
-      The created
-      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
-      object.
-    </returns>
-  </Add2>
-  <Add3>
-    <summary>
-      Creates the Object from the arguments and adds it to the collection.
-    </summary>
     <param name="propertyName">The property name.</param>
     <param name="position">The column layout position.</param>
     <param name="maxLength">The column length.</param>
@@ -93,8 +77,8 @@
       This method is useful for data sources that require a column position value.
       An example would be a text file that uses fixed length fields.
     </remarks>
-  </Add3>
-  <Add4>
+  </Add2>
+  <Add3>
     <summary>
       Creates the Object from the arguments and adds it to the collection.
     </summary>
@@ -113,7 +97,7 @@
         dbColumns.Add("ColumnName", (object)"Value");
       </code>
     </example>
-  </Add4>
+  </Add3>
   <LJCAddPropertyAs>
     <summary>
       Creates the
