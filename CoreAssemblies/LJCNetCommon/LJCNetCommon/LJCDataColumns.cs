@@ -796,6 +796,7 @@ namespace LJCNetCommon
           { "PropertyName", propertyName },
         };
         var dataColumn = LJCGetUnique(keyColumns);
+
         if (dataColumn != null)
         {
           dataColumn.Value = value;

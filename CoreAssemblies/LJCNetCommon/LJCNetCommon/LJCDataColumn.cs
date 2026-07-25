@@ -10,7 +10,7 @@ namespace LJCNetCommon
   // Represents a data source column.
   /// <include file='Doc/LJCDataColumn.xml'
   ///  path='members/LJCDataColumn/*'/>
-  public class LJCDataColumn : IComparable<LJCDataColumn>
+  public class LJCDataColumn
   {
     #region Constructor Methods
 
@@ -39,7 +39,7 @@ namespace LJCNetCommon
       IsPrimaryKey = false;
       _KeyType = null;
       _OriginalValue = null;
-      Unique = false;
+      IsUniqueKey = false;
 
       // View Join Data Properties
       ID = 0;
@@ -92,7 +92,7 @@ namespace LJCNetCommon
       IsPrimaryKey = item.IsPrimaryKey;
       KeyType = item.KeyType;
       OriginalValue = item.OriginalValue;
-      Unique = item.Unique;
+      IsUniqueKey = item.IsUniqueKey;
 
       // View Join Data Properties
       ID = item.ID;
@@ -111,28 +111,6 @@ namespace LJCNetCommon
     public LJCDataColumn Clone()
     {
       var retValue = MemberwiseClone() as LJCDataColumn;
-      return retValue;
-    }
-
-    // Provides the default Sort functionality.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/CompareTo/*'/>
-    public int CompareTo(LJCDataColumn other)
-    {
-      int retValue;
-
-      while (true)
-      {
-        if (null == other)
-        {
-          // This object is larger than the "other" object.
-          retValue = 1;
-          break;
-        }
-
-        retValue = AddOrderIndex.CompareTo(other.AddOrderIndex);
-        break;
-      }
       return retValue;
     }
 
@@ -342,8 +320,8 @@ namespace LJCNetCommon
         if (!EqualityComparer<object>.Default.Equals(_Value, value))
         {
           _Value = value;
-          if (typeof(string) == value.GetType()
-            && value != null)
+          if (value != null
+            && typeof(string) == value.GetType())
           {
             _Value = value.ToString().Trim();
           }
@@ -394,6 +372,11 @@ namespace LJCNetCommon
     ///  path='members/IsPrimaryKey/*'/>
     public bool IsPrimaryKey { get; set; }
 
+    // Gets or sets the unique key indicator.
+    /// <include file='Doc/LJCDataColumn.xml'
+    ///  path='members/IsUniqueKey/*'/>
+    public bool IsUniqueKey { get; set; }
+
     // Gets or sets the KeyType value.
     // "Natural", "Natural*", "Foreign"
     /// <include file='Doc/LJCDataColumn.xml'
@@ -420,12 +403,11 @@ namespace LJCNetCommon
       get => _OriginalValue;
       set
       {
-        //if (_OriginalValue != value)
         if (!EqualityComparer<object>.Default.Equals(_OriginalValue, value))
         {
           _OriginalValue = value;
-          if (typeof(string) == value.GetType()
-            && value != null)
+          if (value != null
+            && typeof(string) == value.GetType())
           {
             _OriginalValue = value.ToString().Trim();
           }
@@ -433,11 +415,6 @@ namespace LJCNetCommon
       }
     }
     private object _OriginalValue;
-
-    // Gets or sets the unique key indicator.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/Unique/*'/>
-    public bool Unique { get; set; }
     #endregion
 
     #region View Join Data Properties
@@ -509,40 +486,4 @@ namespace LJCNetCommon
     public static string ColumnValue = "Value";
     #endregion
   }
-
-  #region Comparers
-
-  // Sort and search on RenameAs value.
-  /// <include file='Doc/LJCDataColumn.xml'
-  ///  path='members/DataColumnRenameAsComparer/*'/>
-  public class DataColumnRenameAsComparer : IComparer<LJCDataColumn>
-  {
-    // Compares two objects.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/Compare/*'/>
-    public int Compare(LJCDataColumn x, LJCDataColumn y)
-    {
-      int retValue;
-
-      while (true)
-      {
-        retValue = NetCommon.CompareNull(x, y);
-        if (retValue != NetString.CompareNotNull)
-        {
-          break;
-        }
-
-        retValue = NetCommon.CompareNull(x.RenameAs, y.RenameAs);
-        if (retValue != NetString.CompareNotNull)
-        {
-          break;
-        }
-
-        retValue = x.RenameAs.CompareTo(y.RenameAs);
-        break;
-      }
-      return retValue;
-    }
-  }
-  #endregion
 }

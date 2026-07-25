@@ -3,6 +3,7 @@
 // TestDataRows.cs
 using LJCNetCommon;
 using System;
+using System.Data;
 
 namespace TestData
 {
@@ -40,6 +41,7 @@ namespace TestData
 
       // Returns the row that matches the key columns.
       LJCGetUnique();
+      LJCGetUniqueMultiKey();
 
       // Sorts on the supplied property names.
       LJCSort();
@@ -62,6 +64,7 @@ namespace TestData
     }
     #endregion
 
+    // Creates sample data rows for testing.
     private LJCDataRows CreateTestDataRows()
     {
       // Create a rows collection of data columns collections.
@@ -69,17 +72,7 @@ namespace TestData
 
       // Create a row of data columns and add to the data rows.
       var rowColumns = new LJCDataColumns();
-      var dataColumn = new LJCDataColumn("FirstName", "First First");
-      rowColumns.Add(dataColumn);
-      dataColumn = new LJCDataColumn("MiddleName", "First Middle");
-      rowColumns.Add(dataColumn);
-      dataColumn = new LJCDataColumn("LastName", "First Last");
-      rowColumns.Add(dataColumn);
-      retDataRows.Add(rowColumns);
-
-      // Create a row of data columns and add to the data rows.
-      rowColumns = new LJCDataColumns();
-      dataColumn = new LJCDataColumn("FirstName", "Second First");
+      var dataColumn = new LJCDataColumn("FirstName", "Second First");
       rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("MiddleName", "Second Middle");
       rowColumns.Add(dataColumn);
@@ -89,19 +82,19 @@ namespace TestData
 
       // Create a row of data columns and add to the data rows.
       rowColumns = new LJCDataColumns();
-      dataColumn = new LJCDataColumn("FirstName", "Third First");
+      dataColumn = new LJCDataColumn("FirstName", "First First");
       rowColumns.Add(dataColumn);
-      dataColumn = new LJCDataColumn("MiddleName", "Third Middle");
+      dataColumn = new LJCDataColumn("MiddleName", "First Middle");
       rowColumns.Add(dataColumn);
-      dataColumn = new LJCDataColumn("LastName", "Third Last");
+      dataColumn = new LJCDataColumn("LastName", "First Last");
       rowColumns.Add(dataColumn);
       retDataRows.Add(rowColumns);
 
       // Create a row of data columns and add to the data rows.
       rowColumns = new LJCDataColumns();
-      dataColumn = new LJCDataColumn("FirstName", "Fourth First");
+      dataColumn = new LJCDataColumn("FirstName", "Third First");
       rowColumns.Add(dataColumn);
-      dataColumn = new LJCDataColumn("MiddleName", "Fourth Middle");
+      dataColumn = new LJCDataColumn("MiddleName", "Third Middle");
       rowColumns.Add(dataColumn);
       dataColumn = new LJCDataColumn("LastName", "Third Last");
       rowColumns.Add(dataColumn);
@@ -165,7 +158,7 @@ namespace TestData
     // Returns the row that matches the key columns.
     private void LJCGetUnique()
     {
-      var methodName = "LJCBinarySearch()";
+      var methodName = "LJCGetUnique()";
 
       // See: Constructor()
       var dataRows = CreateTestDataRows();
@@ -180,9 +173,21 @@ namespace TestData
         { rowColumnPropertyNameValue, rowColumnValue },
       };
       dataRows.LJCKeyColumns = keyColumns;
+      // Before Row Sort on LastName
+      // 0 - FirstName: "Second First", MiddleName: "Second Middle", LastName: "Second Last"
+      // 1 - FirstName: "First First", MiddleName: "First Middle", LastName: "First Last"
+      // 2 - FirstName: "Third First", MiddleName: "Third Middle", LastName: "Third Last"
 
       // Test Method
       var rowColumns = dataRows.LJCGetUnique();
+
+      // After Row Sort on LastName
+      // 0 - FirstName: "First First", MiddleName: "First Middle", LastName: "First Last"
+      // 1 - FirstName: "Second First", MiddleName: "Second Middle", LastName: "Second Last"
+      // 2 - FirstName: "Third First", MiddleName: "Third Middle", LastName: "Third Last"
+
+      // Retrieves:
+      // 2 - FirstName: "Third First", MiddleName: "Third Middle", LastName: "Third Last"
 
       // Get the found data row and search column.
       string value = "";
@@ -202,6 +207,72 @@ namespace TestData
 
       var result = value;
       var compare = "Third Last";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Returns the row that matches multiple key columns.
+    private void LJCGetUniqueMultiKey()
+    {
+      var methodName = "LJCGetUniqueMultiKey()";
+
+      // See: Constructor()
+      var dataRows = CreateTestDataRows();
+
+      // Create a row of data columns and add to the data rows.
+      var rowColumns = new LJCDataColumns();
+      var dataColumn = new LJCDataColumn("FirstName", "Fourth First");
+      rowColumns.Add(dataColumn);
+      dataColumn = new LJCDataColumn("MiddleName", "Fourth Middle");
+      rowColumns.Add(dataColumn);
+      dataColumn = new LJCDataColumn("LastName", "Third Last");
+      rowColumns.Add(dataColumn);
+      dataRows.Add(rowColumns);
+
+      // Add the unique compare values.
+      // The row is identified by its column property name values and column
+      // values.
+      var keyColumns = new LJCDataColumns()
+      {
+        { "LastName", "Third Last" },
+        { "FirstName", "Fourth First" },
+      };
+      dataRows.LJCKeyColumns = keyColumns;
+      // Before Row Sort on LastName, FirstName:
+      // 0 - FirstName: "Second First", MiddleName: "Second Middle", LastName: "Second Last"
+      // 1 - FirstName: "First First", MiddleName: "First Middle", LastName: "First Last"
+      // 2 - FirstName: "Third First", MiddleName: "Third Middle", LastName: "Third Last"
+      // 3 - FirstName: "Fourth First", MiddleName: "Fourth Middle", LastName: "Third Last"
+
+      // Test Method
+      rowColumns = dataRows.LJCGetUnique();
+
+      // After Row Sort on LastName, FirstName:
+      // 0 - FirstName: "First First", MiddleName: "First Middle", LastName: "First Last"
+      // 1 - FirstName: "Second First", MiddleName: "Second Middle", LastName: "Second Last"
+      // 2 - FirstName: "Fourth First", MiddleName: "Fourth Middle", LastName: "Third Last"
+      // 3 - FirstName: "Third First", MiddleName: "Third Middle", LastName: "Third Last"
+
+      // Retrieves:
+      // 2 - FirstName: "Fourth First", MiddleName: "Fourth Middle", LastName: "Third Last"
+
+      // Get the found data row and search column.
+      string value = "";
+      if (rowColumns != null)
+      {
+        // Add the unique compare values.
+        // The column is identified by its property names and values.
+        var dataColumnPropertyName = "PropertyName";
+        var dataColumnValue = "FirstName";
+        keyColumns = new LJCDataColumns()
+        {
+          { dataColumnPropertyName, dataColumnValue },
+        };
+        dataColumn = rowColumns.LJCGetUnique(keyColumns);
+        value = $"{dataColumn.Value}";
+      }
+
+      var result = value;
+      var compare = "Fourth First";
       TestCommon.Write($"{methodName}", result, compare);
     }
 

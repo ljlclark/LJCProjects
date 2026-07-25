@@ -3,6 +3,7 @@
 // LJCDataValue.cs
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace LJCNetCommon
 {
@@ -13,20 +14,21 @@ namespace LJCNetCommon
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDataValue()
     {
-      DataTypeName = "String";
-      IsChanged = false;
+      DataTypeName = "string";
       PropertyName = "";
       Value = "";
+
+      IsChanged = false;
     }
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/LJCDataValue.xml'
     ///  path='members/ParamConstructor/*'/>
     public LJCDataValue(string propertyName, object value = null
-      , string dataTypeName = "String") : this()
+      , string dataTypeName = "string") : this()
     {
       PropertyName = propertyName;
       Value = value;
@@ -78,7 +80,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Formats the column value for the SQL string. (D)
+    // Formats the column value for the SQL string.
     /// <include file='Doc/DbColumn.xml'
     ///  path='members/FormatValue/*'/>
     public string FormatValue()
@@ -100,9 +102,6 @@ namespace LJCNetCommon
       }
       return retValue;
     }
-    #endregion
-
-    #region Conversions
 
     // Creates a combined LJCDataColumn from a LJCDataValue and LJCDataColumn.
     /// <include file='Doc/LJCDataValue.xml'
@@ -156,11 +155,6 @@ namespace LJCNetCommon
     }
     private string _DataTypeName;
 
-    // Indicates that the value has changed.
-    /// <include file='Doc/LJCDataValue.xml'
-    ///  path='members/IsChanged/*'/>
-    public bool IsChanged { get; set; }
-
     // Gets or sets the PropertyName value.
     /// <include file='Doc/LJCDataValue.xml'
     ///  path='members/PropertyName/*'/>
@@ -186,13 +180,12 @@ namespace LJCNetCommon
       get => _Value;
       set
       {
-        //if (!NetCommon.IsEqual(_Value, value))
         if (!EqualityComparer<object>.Default.Equals(_Value, value))
         {
           IsChanged = true;
           _Value = value;
-          if (typeof(string) == value.GetType()
-            && value != null)
+          if (value != null
+            && typeof(string) == value.GetType())
           {
             _Value = value.ToString().Trim();
           }
@@ -200,6 +193,36 @@ namespace LJCNetCommon
       }
     }
     private object _Value;
+    #endregion
+
+    #region Additional Properties
+
+    // Gets or sets the changed indicator.
+    /// <include file='Doc/LJCDataColumn.xml'
+    ///  path='members/IsChanged/*'/>
+    [XmlIgnore()]
+    public bool IsChanged { get; set; }
+
+    // Gets or sets the original value.
+    /// <include file='Doc/LJCDataColumn.xml'
+    ///  path='members/OriginalValue/*'/>
+    public object OriginalValue
+    {
+      get => _OriginalValue;
+      set
+      {
+        if (!EqualityComparer<object>.Default.Equals(_OriginalValue, value))
+        {
+          _OriginalValue = value;
+          if (value != null
+            && typeof(string) == value.GetType())
+          {
+            _OriginalValue = value.ToString().Trim();
+          }
+        }
+      }
+    }
+    private object _OriginalValue;
     #endregion
   }
 }

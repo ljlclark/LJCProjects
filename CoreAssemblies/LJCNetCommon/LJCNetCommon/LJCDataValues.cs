@@ -30,6 +30,14 @@ namespace LJCNetCommon
         as LJCDataValues;
       return retValue;
     }
+
+    // Get the minimum date value.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCMinSqlDate/*'/>
+    public static string LJCMinSqlDate()
+    {
+      return "1753/01/01 00:00:00";
+    }
     #endregion
 
     #region Constructor Methods
@@ -86,6 +94,22 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // Gets a collection of changed columns.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCChanged/*'/>
+    public LJCDataValues LJCChanged()
+    {
+      List<LJCDataValue> dataValues;
+      var retValue = new LJCDataValues();
+
+      dataValues = FindAll(x => x.IsChanged);
+      foreach (var dataValue in dataValues)
+      {
+        retValue.Add(dataValue.Clone());
+      }
+      return retValue;
+    }
+
     // Sets the IsChanged value to false for all elements in the collection.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCClearChanged/*'/>
@@ -123,20 +147,26 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets a collection of changed columns.
+    // Gets a list of property names from the collection items.
     /// <include file='Doc/LJCDataValues.xml'
-    ///  path='members/LJCGetChanged/*'/>
-    public LJCDataValues LJCGetChanged()
+    ///  path='members/LJCPropertyNames/*'/>
+    public List<string> LJCPropertyNames(LJCDataValues dataValues = null)
     {
-      List<LJCDataValue> dataValues;
-      var retValue = new LJCDataValues();
+      List<string> retList = null;
 
-      dataValues = FindAll(x => x.IsChanged);
-      foreach (var dataValue in dataValues)
+      if (!NetCommon.HasItems(dataValues))
       {
-        retValue.Add(dataValue.Clone());
+        dataValues = this;
       }
-      return retValue;
+      if (NetCommon.HasItems(dataValues))
+      {
+        retList = new List<string>();
+        foreach (LJCDataValue dataValue in dataValues)
+        {
+          retList.Add(dataValue.PropertyName);
+        }
+      }
+      return retList;
     }
 
     // Serializes the collection
@@ -169,31 +199,121 @@ namespace LJCNetCommon
       Add(retValue);
       return retValue;
     }
-    #endregion
 
-    #region Custom Retrieve Methods
-
-    // Finds and returns the object that matches the supplied values.
+    // Returns the column that matches the key columns.
+    // The column is identified by its property names and values.
     /// <include file='Doc/LJCDataValues.xml'
-    ///  path='members/LJCGetWithPropertyName/*'/>
-    public LJCDataValue LJCGetWithPropertyName(string propertyName)
+    ///  path='items/LJCGetUnique/*'/>
+    public LJCDataValue LJCGetUnique(LJCDataValues keyColumns = null)
     {
       LJCDataValue retValue = null;
 
-      if (Count != _PrevCount)
+      if (keyColumns != null)
       {
-        _PrevCount = Count;
-        Sort();
+        LJCKeyColumns = keyColumns;
       }
 
-      var searchDataValue = new LJCDataValue()
+      if (NetCommon.HasItems(LJCKeyColumns))
       {
-        PropertyName = propertyName
-      };
-      int index = BinarySearch(searchDataValue);
-      if (index > -1)
+        LJCSort();
+
+        // Create search item.
+        var dataValue = new LJCDataValue();
+        var reflect = new LJCReflect(dataValue);
+        foreach (var keyColumn in keyColumns)
+        {
+          reflect.SetValue(keyColumn.PropertyName, keyColumn.Value);
+        }
+
+        // Create comparer.
+        var propertyNames = LJCPropertyNames(keyColumns);
+        var comparer = new DataValueKeyComparer()
+        {
+          LJCPropertyNames = propertyNames,
+        };
+
+        int index = BinarySearch(dataValue, comparer);
+        if (index > -1)
+        {
+          retValue = this[index];
+        }
+      }
+      return retValue;
+    }
+
+    // Sorts on the current key columns.
+    /// <include file='Doc/LJCDataRows.xml'
+    ///  path='members/LJCSort/*'/>
+    public void LJCSort(LJCDataValues keyColumns = null)
+    {
+      if (NetCommon.HasItems(keyColumns))
       {
-        retValue = this[index];
+        LJCKeyColumns = keyColumns;
+      }
+
+      if (_IsPendingSort)
+      {
+        var sortNames = LJCPropertyNames(_KeyColumns);
+        if (sortNames != null)
+        {
+          var uniqueComparer = new DataValueKeyComparer
+          {
+            LJCPropertyNames = sortNames
+          };
+          Sort(uniqueComparer);
+        }
+      }
+      _IsPendingSort = false;
+    }
+
+    // Checks if the key columns value has changed.
+    private bool IsKeyColumnsChanged(LJCDataValues newKeyColumns
+      , LJCDataValues currentKeyColumns)
+    {
+      bool retValue = false;
+
+      while (true)
+      {
+        var hasNewColumns = NetCommon.HasItems(newKeyColumns);
+        var hasSortColumns = NetCommon.HasItems(currentKeyColumns);
+
+        // One value has no columns.
+        if ((!hasNewColumns
+          && hasSortColumns)
+          || hasNewColumns
+          && !hasSortColumns)
+        {
+          retValue = true;
+          break;
+        }
+
+        if (hasNewColumns)
+        {
+          if (newKeyColumns.Count != currentKeyColumns.Count)
+          {
+            retValue = true;
+            break;
+          }
+
+          for (short index = 0; index < newKeyColumns.Count; index++)
+          {
+            var newColumn = newKeyColumns[index];
+            var currentColumn = currentKeyColumns[index];
+
+            var propertyName = newColumn.PropertyName;
+            var propertyValue = newColumn.Value;
+            var sortPropertyName = currentColumn.PropertyName;
+            var sortPropertyValue = currentColumn.Value;
+            if (propertyName.CompareTo(sortPropertyName) != 0
+              || !EqualityComparer<object>.Default.Equals(propertyValue
+              , sortPropertyValue))
+            {
+              retValue = true;
+              break;
+            }
+          }
+        }
+        break;
       }
       return retValue;
     }
@@ -258,7 +378,7 @@ namespace LJCNetCommon
     ///  path='members/LJCGetDbDateTime/*'/>
     public DateTime LJCGetDbDateTime(string propertyName)
     {
-      DateTime retValue = DateTime.Parse(LJCGetMinSqlDate());
+      DateTime retValue = DateTime.Parse(LJCMinSqlDate());
 
       var value = LJCGetString(propertyName);
       if (value != null)
@@ -343,30 +463,6 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Get the minimum date value.
-    /// <include file='Doc/LJCDataValues.xml'
-    ///  path='members/LJCGetMinSqlDate/*'/>
-    public static string LJCGetMinSqlDate()
-    {
-      return "1753/01/01 00:00:00";
-    }
-
-    // Gets the column object value as an object.
-    /// <include file='Doc/LJCDataValues.xml'
-    ///  path='members/LJCGetObject/*'/>
-    public object LJCGetObject(string propertyName)
-    {
-      object retValue = default;
-
-      var dbValue = LJCGetWithPropertyName(propertyName);
-      if (dbValue != null
-        && dbValue.Value != null)
-      {
-        retValue = dbValue.Value;
-      }
-      return retValue;
-    }
-
     // Gets the column object value as a single.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCGetSingle/*'/>
@@ -389,14 +485,46 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (NetString.HasValue(propertyName))
+      if (NetCommon.HasItems(this)
+        && NetString.HasValue(propertyName))
       {
-        var dbValue = LJCGetWithPropertyName(propertyName);
-        if (dbValue != null
-          && dbValue.Value != null
-          && NetString.HasValue(dbValue.Value.ToString()))
+        // Get with unique compare values.
+        var keyColumns = new LJCDataColumns()
         {
-          retValue = dbValue.Value.ToString();
+          { "PropertyName", propertyName }
+        };
+        var dataValue = LJCGetUnique(keyColumns);
+
+        if (dataValue != null
+          && dataValue.Value != null
+          && NetString.HasValue(dataValue.Value.ToString()))
+        {
+          retValue = dataValue.Value.ToString();
+        }
+      }
+      return retValue;
+    }
+
+    // Gets the column object value as an object.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetValue/*'/>
+    public object LJCGetValue(string propertyName)
+    {
+      object retValue = default;
+
+      if (NetCommon.HasItems(this)
+        && NetString.HasValue(propertyName))
+      {
+        var keyColumns = new LJCDataColumns()
+        {
+          { "PropertyName", propertyName },
+        };
+        var dataValue = LJCGetUnique(keyColumns);
+
+        if (dataValue != null
+          && dataValue.Value != null)
+        {
+          retValue = dataValue.Value;
         }
       }
       return retValue;
@@ -410,10 +538,15 @@ namespace LJCNetCommon
       if (NetCommon.HasItems(this)
         && NetString.HasValue(propertyName))
       {
-        var dbValue = LJCGetWithPropertyName(propertyName);
-        if (dbValue != null)
+        var keyColumns = new LJCDataColumns()
         {
-          dbValue.Value = value;
+          { "PropertyName", propertyName },
+        };
+        var dataValue = LJCGetUnique(keyColumns);
+
+        if (dataValue != null)
+        {
+          dataValue.Value = value;
         }
       }
     }
@@ -426,21 +559,131 @@ namespace LJCNetCommon
     ///  path='members/LJCDefaultFileName/*'/>
     public static string LJCDefaultFileName
     {
-      get { return "DbValues.xml"; }
+      get => "LJCDataValues.xml";
     }
+
+    // Gets or sets the key columns.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCKeyColumns/*'/>
+    public LJCDataValues LJCKeyColumns
+    {
+      get => _KeyColumns;
+      set
+      {
+        if (IsKeyColumnsChanged(value, _KeyColumns))
+        {
+          _IsPendingSort = true;
+        }
+        // Must be done after check for changes.
+        _KeyColumns = value;
+
+        // New sort if count has changed.
+        if (Count != _PrevCount)
+        {
+          _IsPendingSort = true;
+          _PrevCount = Count;
+        }
+      }
+    }
+    private LJCDataValues _KeyColumns;
 
     // The column for the specified name.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/Item/*'/>
     public LJCDataValue this[string propertyName]
     {
-      get { return LJCGetWithPropertyName(propertyName); }
+      get {
+        var keyColumns = new LJCDataColumns()
+        {
+          { "PropertyName", propertyName },
+        };
+        return LJCGetUnique(keyColumns);
+      }
     }
     #endregion
 
     #region Class Data
 
+    private bool _IsPendingSort;
     private int _PrevCount;
     #endregion
+  }
+
+  // Sort and search on key values.
+  /// <include file='Doc/LJCDataValues.xml'
+  ///  path='members/DataValueKeyComparer/*'/>
+  public class DataValueKeyComparer : IComparer<LJCDataValue>
+  {
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/ColumnNames/*'/>
+    public List<string> LJCPropertyNames { get; set; }
+
+    // Compares two objects.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='items/Compare/*'/>
+    public int Compare(LJCDataValue x, LJCDataValue y)
+    {
+      int retValue;
+
+      // Check for null objects.
+      retValue = NetCommon.CompareNull(x, y);
+
+      while (true)
+      {
+        // End if one of the objects is null.
+        if (null == LJCPropertyNames
+          || retValue != NetString.CompareNotNullOrEqual)
+        {
+          break;
+        }
+
+        LJCReflect xReflect = new LJCReflect(x);
+        LJCReflect yReflect = new LJCReflect(y);
+
+        // Check for null values.
+        foreach (string propertyName in LJCPropertyNames)
+        {
+          var xValue = xReflect.GetString(propertyName);
+          var yValue = yReflect.GetString(propertyName);
+          retValue = NetCommon.CompareNull(xValue, yValue);
+
+          // Break if one of the values is null.
+          if (retValue != NetString.CompareNotNullOrEqual)
+          {
+            break;
+          }
+        }
+
+        // End if one of the values is null.
+        if (retValue != NetString.CompareNotNullOrEqual)
+        {
+          break;
+        }
+
+        for (int index = 0; index < LJCPropertyNames.Count; index++)
+        {
+          var propertyName = LJCPropertyNames[index];
+          var xValue = xReflect.GetString(propertyName);
+          var yValue = yReflect.GetString(propertyName);
+
+          if (index < LJCPropertyNames.Count - 1)
+          {
+            // Compare parent keys.
+            retValue = xValue.CompareTo(yValue);
+            if (retValue != NetString.CompareEqual)
+            {
+              break;
+            }
+          }
+          else
+          {
+            // Compare value if parent keys are equal.
+            retValue = xValue.CompareTo(yValue);
+          }
+        }
+        break;
+      }
+      return retValue;
+    }
   }
 }

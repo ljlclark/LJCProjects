@@ -29,7 +29,6 @@ namespace TestData
 
       // Data Methods
       Clone();
-      CompareTo();
       FormatValue();
       TestToString();
       DataColumnToDataValue();
@@ -52,9 +51,9 @@ namespace TestData
       DefaultValue();
       IsChanged();
       IsPrimaryKey();
+      IsUniqueKey();
       KeyType();
       OriginalValue();
-      IsUniqueKey();
 
       // View Join Data Properties
       ID();
@@ -134,16 +133,6 @@ namespace TestData
       result += $", {testDataColumn.ColumnName}";
       result += $", {testDataColumn.DataTypeName}";
       var compare = "PropertyName, ColumnName, string";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Provides the default Sort functionality.
-    private void CompareTo()
-    {
-      var methodName = "CompareTo()";
-
-      var result = "";
-      var compare = "Not Implemented";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -333,6 +322,16 @@ namespace TestData
       TestCommon.Write($"{methodName}", result, compare);
     }
 
+    // Gets or sets the unique key indicator.
+    private void IsUniqueKey()
+    {
+      var methodName = "IsUniqueKey()";
+
+      var result = "";
+      var compare = "Not Implemented";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
     // Gets or sets the KeyType value.
     // "Natural", "Natural*", "Foreign"
     private void KeyType()
@@ -348,16 +347,6 @@ namespace TestData
     private void OriginalValue()
     {
       var methodName = "OriginalValue()";
-
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Gets or sets the unique key indicator.
-    private void IsUniqueKey()
-    {
-      var methodName = "IsUniqueKey()";
 
       var result = "";
       var compare = "Not Implemented";
