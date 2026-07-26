@@ -34,7 +34,7 @@ namespace TestData
       DataColumnToDataValue();
 
       // Data Properties
-      AllowDbNull();
+      AllowDBNull();
       AutoIncrement();
       Caption();
       ColumnName();
@@ -141,9 +141,22 @@ namespace TestData
     {
       var methodName = "FormatValue()";
 
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
+      var dataColumn = new LJCDataColumn("IsValue", "true", "Boolean");
+      var result = dataColumn.FormatValue();
+      var compare = "1";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dataColumn.Value = new DateTime(2026, 1, 9);
+      dataColumn.DataTypeName = "DateTime";
+      result = dataColumn.FormatValue();
+      compare = "'2026/01/09 00:00:00'";
+      TestCommon.Write($"{methodName}2", result, compare);
+
+      dataColumn.Value = "Name";
+      dataColumn.DataTypeName = "String";
+      result = dataColumn.FormatValue();
+      compare = "'Name'";
+      TestCommon.Write($"{methodName}3", result, compare);
     }
 
     // Returns the object string identifier.
@@ -151,8 +164,11 @@ namespace TestData
     {
       var methodName = "TestToString()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("ID", "1", "Int64", "ColumnID");
+      dataColumn.IsPrimaryKey = true;
+
+      var result = dataColumn.ToString();
+      var compare = "ID-ColumnID-P:1";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -161,8 +177,13 @@ namespace TestData
     {
       var methodName = "DataColumnToDataValue()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("ID", "1", "Int64", "ColumnID");
+
+      // Test Method
+      var dataValue = dataColumn;
+
+      var result = dataValue.PropertyName;
+      var compare = "ID";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -170,12 +191,14 @@ namespace TestData
     #region Data Properties
 
     // Gets or sets the AllowDBNull flag.
-    private void AllowDbNull()
+    private void AllowDBNull()
     {
-      var methodName = "AllowDbNull()";
+      var methodName = "AllowDBNull()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = $"{dataColumn.AllowDBNull}";
+      var compare = "False";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -184,8 +207,10 @@ namespace TestData
     {
       var methodName = "AutoIncrement()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = $"{dataColumn.AutoIncrement}";
+      var compare = "False";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -194,8 +219,10 @@ namespace TestData
     {
       var methodName = "Caption()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = dataColumn.PropertyName;
+      var compare = "Name";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -204,8 +231,13 @@ namespace TestData
     {
       var methodName = "ColumnName()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name")
+      {
+        ColumnName = "ColumnName"
+      };
+
+      var result = dataColumn.ColumnName;
+      var compare = "ColumnName";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -214,8 +246,10 @@ namespace TestData
     {
       var methodName = "DataTypeName()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = dataColumn.DataTypeName;
+      var compare = "string";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -224,8 +258,13 @@ namespace TestData
     {
       var methodName = "MaxLength()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name")
+      {
+        MaxLength = 20,
+      };
+
+      var result = $"{dataColumn.MaxLength}";
+      var compare = "20";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -234,8 +273,15 @@ namespace TestData
     {
       var methodName = "Position()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name")
+      {
+        Position = 1,
+        MaxLength = 20,
+      };
+
+      var result = $"{dataColumn.Position}";
+      result += $", {dataColumn.MaxLength}";
+      var compare = "1, 20";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -244,8 +290,10 @@ namespace TestData
     {
       var methodName = "PropertyName()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = $"{dataColumn.PropertyName}";
+      var compare = "Name";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -254,8 +302,13 @@ namespace TestData
     {
       var methodName = "RenameAs()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name")
+      {
+        RenameAs = "NameRename",
+      };
+
+      var result = $"{dataColumn.RenameAs}";
+      var compare = "NameRename";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -264,8 +317,13 @@ namespace TestData
     {
       var methodName = "SQLTypeName()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name")
+      {
+        SQLTypeName = "varchar(60)",
+      };
+
+      var result = $"{dataColumn.SQLTypeName}";
+      var compare = "varchar(60)";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -274,8 +332,18 @@ namespace TestData
     {
       var methodName = "Value()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name")
+      {
+        Value = "First",
+      };
+
+      var result = $"{dataColumn.IsChanged}";
+      var compare = "False";
+      TestCommon.Write($"{methodName}", result, compare);
+
+      dataColumn.Value = "FirstChanged";
+      result = $"{dataColumn.IsChanged}";
+      compare = "True";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -287,8 +355,10 @@ namespace TestData
     {
       var methodName = "AddOrderIndex()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = $"{dataColumn.AddOrderIndex}";
+      var compare = "0";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -297,8 +367,10 @@ namespace TestData
     {
       var methodName = "DefaultValue()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = $"{dataColumn.DefaultValue}";
+      var compare = "";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -307,8 +379,10 @@ namespace TestData
     {
       var methodName = "IsChanged()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = $"{dataColumn.IsChanged}";
+      var compare = "False";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -317,8 +391,10 @@ namespace TestData
     {
       var methodName = "IsPrimaryKey()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = $"{dataColumn.IsPrimaryKey}";
+      var compare = "False";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -327,8 +403,10 @@ namespace TestData
     {
       var methodName = "IsUniqueKey()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = $"{dataColumn.IsUniqueKey}";
+      var compare = "False";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -338,8 +416,10 @@ namespace TestData
     {
       var methodName = "KeyType()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = $"{dataColumn.KeyType}";
+      var compare = "";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -348,8 +428,10 @@ namespace TestData
     {
       var methodName = "OriginalValue()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+
+      var result = $"{dataColumn.OriginalValue}";
+      var compare = "";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -361,8 +443,13 @@ namespace TestData
     {
       var methodName = "ID()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name")
+      {
+        ID = 1,
+      };
+
+      var result = $"{dataColumn.ID}";
+      var compare = "1";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -371,8 +458,13 @@ namespace TestData
     {
       var methodName = "Sequence()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name")
+      {
+        Sequence = 1,
+      };
+
+      var result = $"{dataColumn.Sequence}";
+      var compare = "1";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -381,8 +473,13 @@ namespace TestData
     {
       var methodName = "ViewDataID()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name")
+      {
+        ViewDataID = 1,
+      };
+
+      var result = $"{dataColumn.ViewDataID}";
+      var compare = "1";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -391,8 +488,13 @@ namespace TestData
     {
       var methodName = "ViewJoinID()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name")
+      {
+        ViewJoinID = 1,
+      };
+
+      var result = $"{dataColumn.ViewJoinID}";
+      var compare = "1";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -401,8 +503,13 @@ namespace TestData
     {
       var methodName = "Width()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name")
+      {
+        Width = 25,
+      };
+
+      var result = $"{dataColumn.Width}";
+      var compare = "25";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion

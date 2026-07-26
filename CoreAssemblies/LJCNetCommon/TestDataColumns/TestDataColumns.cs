@@ -97,6 +97,9 @@ namespace TestData
 
       // Add or Update.
       LJCSetData();
+
+      // Sorts on the current key columns.
+      LJCSort();
       #endregion
 
       #region Other Public Methods
@@ -168,8 +171,26 @@ namespace TestData
     {
       var methodName = "LJCDeserialize()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", 1 },
+      };
+      dataColumns.LJCSerialize();
+
+      // Test Method
+      var newDataColumns = LJCDataColumns.LJCDeserialize();
+
+      // Set the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "ID" },
+      };
+      var dataColumn = newDataColumns?.LJCGetUnique(keyColumns);
+      var result = dataColumn?.DataTypeName;
+      var compare = "Int64";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -178,8 +199,8 @@ namespace TestData
     {
       var methodName = "LJCMinSqlDate()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var result = LJCDataValues.LJCMinSqlDate();
+      var compare = "1753/01/01 00:00:00";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -237,8 +258,19 @@ namespace TestData
     {
       var methodName = "CopyConstructor()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", 1 },
+      };
+
+      // Test Method
+      var newDataColumns = new LJCDataColumns(dataColumns);
+
+      var dataColumn = newDataColumns[0];
+      var result = dataColumn.DataTypeName;
+      var compare = "Int64";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -250,8 +282,19 @@ namespace TestData
     {
       var methodName = "Clone()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", 1 },
+      };
+
+      // Test Method
+      var newDataColumns = dataColumns?.Clone();
+
+      var dataColumn = newDataColumns[0];
+      var result = dataColumn.DataTypeName;
+      var compare = "Int64";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -260,8 +303,18 @@ namespace TestData
     {
       var methodName = "HasItems()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", 1 },
+      };
+
+      // Test Method
+      var value = dataColumns?.HasItems();
+
+      var result = $"{value}";
+      var compare = "True";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -270,8 +323,18 @@ namespace TestData
     {
       var methodName = "LJCChanged()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", 1 },
+      };
+
+      // Test Method
+      var changed = dataColumns?.LJCChanged();
+
+      var result = $"{changed.Count}";
+      var compare = "0";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -280,8 +343,23 @@ namespace TestData
     {
       var methodName = "LJCClearChanged()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", "NameValue" },
+      };
+      var changed = dataColumns?.LJCChanged();
+      var result = $"{changed.Count}";
+      var compare = "0";
+      TestCommon?.Write($"{methodName}1", result, compare);
+
+      dataColumns = new LJCDataColumns();
+      dataColumns?.Add("ID", 1, "Int64");
+      dataColumns?.Add("Name", "NameValue");
+      changed = dataColumns?.LJCChanged();
+      result = $"{changed.Count}";
+      compare = "0";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -320,8 +398,27 @@ namespace TestData
     {
       var methodName = "LJCSerialize()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", 1 },
+      };
+
+      // Test Method
+      dataColumns.LJCSerialize();
+
+      var newDataColumns = LJCDataColumns.LJCDeserialize();
+
+      // Set the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "Name" },
+      };
+      var dataColumn = newDataColumns?.LJCGetUnique(keyColumns);
+      var result = dataColumn?.DataTypeName;
+      var compare = "string";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -333,8 +430,21 @@ namespace TestData
     {
       var methodName = "Add1()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns();
+      var dataColumn = new LJCDataColumn("ID", "1", "Int64");
+
+      // Test Method
+      dataColumns?.Add(dataColumn);
+
+      // Set the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "ID" },
+      };
+      var dataValue = dataColumns?.LJCGetUnique(keyColumns);
+      var result = dataValue?.DataTypeName;
+      var compare = "Int64";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -343,8 +453,21 @@ namespace TestData
     {
       var methodName = "Add2()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns();
+
+      // Test Method
+      var dataColumn = dataColumns?.Add("ID", 1, 6);
+      dataColumn.DataTypeName = "Int64";
+
+      // Set the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "ID" },
+      };
+      var dataValue = dataColumns?.LJCGetUnique(keyColumns);
+      var result = dataValue?.DataTypeName;
+      var compare = "Int64";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -353,8 +476,20 @@ namespace TestData
     {
       var methodName = "Add3()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns();
+
+      // Test Method
+      dataColumns?.Add("ID", 1, "Int64");
+
+      // Set the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "ID" },
+      };
+      var dataValue = dataColumns?.LJCGetUnique(keyColumns);
+      var result = dataValue?.DataTypeName;
+      var compare = "Int64";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -363,8 +498,24 @@ namespace TestData
     {
       var methodName = "LJCGetUnique()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", 1 },
+      };
+
+      // Test Method
+      // Set the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "ID" },
+      };
+      var dataColumn = dataColumns?.LJCGetUnique(keyColumns);
+
+      var result = $"{dataColumn?.Value}";
+      var compare = "1";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -393,8 +544,27 @@ namespace TestData
     {
       var methodName = "LJCSort()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "Name", 1 },
+        { "ID", 1, "Int64" },
+      };
+
+      // Add the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "DataTypeName", "string" },
+      };
+      dataColumns.LJCKeyColumns = keyColumns;
+
+      // Test Method
+      dataColumns.LJCSort();
+
+      var dataColumn = dataColumns.LJCGetUnique(keyColumns);
+      var result = $"{dataColumn?.DataTypeName}";
+      var compare = "string";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -429,8 +599,18 @@ namespace TestData
     {
       var methodName = "LJCGetBoolean()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", "true", "Boolean" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetBoolean("TestValue");
+
+      // Check Result
+      var result = value.ToString();
+      var compare = "True";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -439,8 +619,20 @@ namespace TestData
     {
       var methodName = "LJCGetByte()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var testByte = (byte)'C';
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", testByte, "byte" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetByte("TestValue");
+
+      // Check Result
+      var ch = (char)value;
+      var result = ch.ToString();
+      var compare = "C";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -449,8 +641,18 @@ namespace TestData
     {
       var methodName = "LJCGetChar()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = 'C';
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test, "char" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetChar("TestValue");
+
+      var result = $"{value}";
+      var compare = "C";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -459,8 +661,18 @@ namespace TestData
     {
       var methodName = "LJCGetDbDateTime()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = new DateTime(2026, 1, 1);
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test, "DateTime" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetDbDateTime("TestValue");
+
+      var result = value.ToShortDateString();
+      var compare = "1/1/2026";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -469,8 +681,18 @@ namespace TestData
     {
       var methodName = "LJCGetDecimal()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = 3.14m;
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test, "Decimal" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetDecimal("TestValue");
+
+      var result = value.ToString();
+      var compare = "3.14";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -479,8 +701,18 @@ namespace TestData
     {
       var methodName = "LJCGetDouble()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = 3.14d;
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test, "Double" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetDouble("TestValue");
+
+      var result = value.ToString();
+      var compare = "3.14";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -489,8 +721,18 @@ namespace TestData
     {
       var methodName = "LJCGetInt16()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = (short)3;
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test, "Int16" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetInt16("TestValue");
+
+      var result = value.ToString();
+      var compare = "3";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -499,8 +741,18 @@ namespace TestData
     {
       var methodName = "LJCGetInt32()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = 3;
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test, "Int32" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetInt32("TestValue");
+
+      var result = value.ToString();
+      var compare = "3";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -509,8 +761,18 @@ namespace TestData
     {
       var methodName = "LJCGetInt64()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = (long)3;
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test, "Int64" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetInt64("TestValue");
+
+      var result = value.ToString();
+      var compare = "3";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -519,8 +781,18 @@ namespace TestData
     {
       var methodName = "LJCGetSingle()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = 3.14f;
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test, "Single" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetSingle("TestValue");
+
+      var result = value.ToString();
+      var compare = "3.14";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -529,8 +801,17 @@ namespace TestData
     {
       var methodName = "LJCGetString()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = "3.14";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test },
+      };
+
+      // Test Method
+      var result = dataColumns.LJCGetString("TestValue");
+
+      var compare = "3.14";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -539,8 +820,18 @@ namespace TestData
     {
       var methodName = "LJCGetValue()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = (object)3;
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test, "Object" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetValue("TestValue");
+
+      var result = value?.ToString();
+      var compare = "3";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -549,8 +840,18 @@ namespace TestData
     {
       var methodName = "LJCSetValue()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = "3.14";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test },
+      };
+
+      // Test Method
+      dataColumns.LJCSetValue("TestValue", "3.14159");
+
+      var result = dataColumns.LJCGetString("TestValue");
+      var compare = "3.14159";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -562,8 +863,16 @@ namespace TestData
     {
       var methodName = "LJCKeyColumns()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      // Set the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "ID" },
+      };
+      var keyColumn = keyColumns[0];
+      var result = keyColumn.ColumnName;
+      result += $", {keyColumn.Value}";
+      var compare = "PropertyName, ID";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -572,8 +881,18 @@ namespace TestData
     {
       var methodName = "PropertyNameIndexer()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var test = "3.14";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", test },
+      };
+
+      // Test Method
+      var dataColumn = dataColumns["TestValue"];
+
+      var result = $"{dataColumn.Value}";
+      var compare = "3.14";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion

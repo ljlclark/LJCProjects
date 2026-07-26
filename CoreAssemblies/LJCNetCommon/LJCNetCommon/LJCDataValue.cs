@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace LJCNetCommon
 {
   /// <summary>Represents a data source value.</summary>
-  public class LJCDataValue : IComparable<LJCDataValue>
+  public class LJCDataValue
   {
     #region Constructors
 
@@ -55,28 +55,6 @@ namespace LJCNetCommon
     public LJCDataValue Clone()
     {
       var retValue = MemberwiseClone() as LJCDataValue;
-      return retValue;
-    }
-
-    // Provides the default Sort functionality.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/CompareTo/*'/>
-    public int CompareTo(LJCDataValue other)
-    {
-      int retValue;
-
-      while (true)
-      {
-        if (null == other)
-        {
-          // This object is larger than the "other" object.
-          retValue = 1;
-          break;
-        }
-
-        retValue = string.Compare(PropertyName, other.PropertyName, true);
-        break;
-      }
       return retValue;
     }
 

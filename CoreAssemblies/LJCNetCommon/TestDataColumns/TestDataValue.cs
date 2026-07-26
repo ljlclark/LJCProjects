@@ -41,9 +41,6 @@ namespace TestData
       // Creates and returns a clone of the object.
       Clone();
 
-      // Provides the default Sort functionality.
-      CompareTo();
-
       // Formats the column value for the SQL string.
       FormatValue();
 
@@ -141,24 +138,27 @@ namespace TestData
       TestCommon.Write($"{methodName}", result, compare);
     }
 
-    // Provides the default Sort functionality.
-    private void CompareTo()
-    {
-      var methodName = "CompareTo()";
-
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
     // Formats the column value for an SQL string.
     private void FormatValue()
     {
       var methodName = "FormatValue()";
 
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
+      var dataValue = new LJCDataColumn("IsValue", "true", "Boolean");
+      var result = dataValue.FormatValue();
+      var compare = "1";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dataValue.Value = new DateTime(2026, 1, 9);
+      dataValue.DataTypeName = "DateTime";
+      result = dataValue.FormatValue();
+      compare = "'2026/01/09 00:00:00'";
+      TestCommon.Write($"{methodName}2", result, compare);
+
+      dataValue.Value = "Name";
+      dataValue.DataTypeName = "String";
+      result = dataValue.FormatValue();
+      compare = "'Name'";
+      TestCommon.Write($"{methodName}3", result, compare);
     }
 
     // Returns the object string identifier.
@@ -166,8 +166,10 @@ namespace TestData
     {
       var methodName = "TestToString()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataValue = new LJCDataValue("ID", "1", "Int64");
+
+      var result = dataValue.ToString();
+      var compare = "ID:1";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -176,8 +178,15 @@ namespace TestData
     {
       var methodName = "CreateColumn()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumn = new LJCDataColumn("Name");
+      var dataValue = new LJCDataValue("Name")
+      {
+        Value = "Some Value",
+      };
+
+      var newDataColumn = dataValue.CreateColumn(dataColumn);
+      var result = $"{newDataColumn.Value}";
+      var compare = "Some Value";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -189,8 +198,10 @@ namespace TestData
     {
       var methodName = "DataTypeName()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataValue = new LJCDataValue("Name");
+
+      var result = dataValue.DataTypeName;
+      var compare = "string";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -199,8 +210,10 @@ namespace TestData
     {
       var methodName = "PropertyName()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataValue = new LJCDataValue("Name");
+
+      var result = $"{dataValue.PropertyName}";
+      var compare = "Name";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -209,8 +222,18 @@ namespace TestData
     {
       var methodName = "Value()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataValue = new LJCDataValue("Name")
+      {
+        Value = "First",
+      };
+
+      var result = $"{dataValue.IsChanged}";
+      var compare = "False";
+      TestCommon.Write($"{methodName}", result, compare);
+
+      dataValue.Value = "FirstChanged";
+      result = $"{dataValue.IsChanged}";
+      compare = "True";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -222,8 +245,10 @@ namespace TestData
     {
       var methodName = "IsChanged()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataValue = new LJCDataValue("Name");
+
+      var result = $"{dataValue.IsChanged}";
+      var compare = "False";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion

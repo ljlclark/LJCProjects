@@ -331,7 +331,7 @@ namespace LJCNetCommon
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/Add3/*'/>
     public LJCDataColumn Add(string propertyName, object value = null
-      , string dataTypeName = "String", int maxLength = 5)
+      , string dataTypeName = "string", int maxLength = 5)
     {
       var retValue = new LJCDataColumn()
       {

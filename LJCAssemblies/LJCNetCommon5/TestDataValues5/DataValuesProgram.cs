@@ -70,8 +70,10 @@ namespace TestDataValues5
         { "Name", 1 },
       };
       dataValues.LJCSerialize();
+
       // Test Method
       var newDataValues = LJCDataValues.LJCDeserialize();
+
       var dataValue = newDataValues?.LJCSearchPropertyName("ID");
       var result = dataValue?.PropertyName;
       var compare = "ID";
@@ -89,7 +91,9 @@ namespace TestDataValues5
         { "ID", 1, "Int64" },
         { "Name", 1 },
       };
+
       // Test Method
+
       var newDataValues = new LJCDataValues(dataValues);
       var dataValue = newDataValues?.LJCSearchPropertyName("ID");
       var result = dataValue?.PropertyName;
@@ -178,8 +182,8 @@ namespace TestDataValues5
         { "ID", 1, "Int64" },
         { "Name", "NameValue" },
       };
-      var changed = dataValues.LJCGetChanged();
-      var result = changed.Count.ToString();
+      var changed = dataValues?.LJCGetChanged();
+      var result = $"{changed?.Count}";
       var compare = "0";
       TestCommon?.Write("LJCClearChanged1()", result, compare);
 
@@ -187,7 +191,7 @@ namespace TestDataValues5
       dataValues?.Add("ID", 1, "Int64");
       dataValues?.Add("Name", "NameValue");
       changed = dataValues?.LJCGetChanged();
-      result = changed?.Count.ToString();
+      result = $"{changed?.Count}";
       compare = "0";
       TestCommon?.Write("LJCClearChanged2()", result, compare);
 
@@ -256,16 +260,21 @@ namespace TestDataValues5
     // Gets the column object value as a bool.
     private static void LJCGetBoolean()
     {
+      var methodName = "LJCGetBoolean()";
+
       var dataValues = new LJCDataValues()
       {
+        // PropertyName, Value, DataTypeName
         { "TestValue", "true", "Boolean" },
       };
+
       // Test Method
       var value = dataValues.LJCGetBoolean("TestValue");
+
       // Check Result
       var result = value.ToString();
       var compare = "True";
-      TestCommon?.Write("LJCGetBoolean()", result, compare);
+      TestCommon?.Write($"{methodName}", result, compare);
     }
 
     // Gets the column object value as a byte.

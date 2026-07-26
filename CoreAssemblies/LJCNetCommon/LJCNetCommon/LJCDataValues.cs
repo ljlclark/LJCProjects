@@ -26,7 +26,7 @@ namespace LJCNetCommon
       {
         fileSpec = LJCDefaultFileName;
       }
-      retValue = NetCommon.XmlDeserialize(typeof(DbValues), fileSpec)
+      retValue = NetCommon.XmlDeserialize(typeof(LJCDataValues), fileSpec)
         as LJCDataValues;
       return retValue;
     }
@@ -47,6 +47,7 @@ namespace LJCNetCommon
     ///  path='members/Constructor/*'/>
     public LJCDataValues()
     {
+      _IsPendingSort = false;
       _PrevCount = -1;
     }
 
@@ -188,13 +189,13 @@ namespace LJCNetCommon
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/Add/*'/>
     public LJCDataValue Add(string propertyName, object value
-      , string dataTypeName = "String")
+      , string dataTypeName = "string")
     {
       var retValue = new LJCDataValue()
       {
-        DataTypeName = dataTypeName,
         PropertyName = propertyName,
         Value = value,
+        DataTypeName = dataTypeName,
       };
       Add(retValue);
       return retValue;
@@ -204,7 +205,7 @@ namespace LJCNetCommon
     // The column is identified by its property names and values.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='items/LJCGetUnique/*'/>
-    public LJCDataValue LJCGetUnique(LJCDataValues keyColumns = null)
+    public LJCDataValue LJCGetUnique(LJCDataColumns keyColumns = null)
     {
       LJCDataValue retValue = null;
 
@@ -244,7 +245,7 @@ namespace LJCNetCommon
     // Sorts on the current key columns.
     /// <include file='Doc/LJCDataRows.xml'
     ///  path='members/LJCSort/*'/>
-    public void LJCSort(LJCDataValues keyColumns = null)
+    public void LJCSort(LJCDataColumns keyColumns = null)
     {
       if (NetCommon.HasItems(keyColumns))
       {
@@ -267,8 +268,8 @@ namespace LJCNetCommon
     }
 
     // Checks if the key columns value has changed.
-    private bool IsKeyColumnsChanged(LJCDataValues newKeyColumns
-      , LJCDataValues currentKeyColumns)
+    private bool IsKeyColumnsChanged(LJCDataColumns newKeyColumns
+      , LJCDataColumns currentKeyColumns)
     {
       bool retValue = false;
 
@@ -497,9 +498,9 @@ namespace LJCNetCommon
 
         if (dataValue != null
           && dataValue.Value != null
-          && NetString.HasValue(dataValue.Value.ToString()))
+          && NetString.HasValue($"{dataValue.Value}"))
         {
-          retValue = dataValue.Value.ToString();
+          retValue = $"{dataValue.Value}";
         }
       }
       return retValue;
@@ -565,7 +566,7 @@ namespace LJCNetCommon
     // Gets or sets the key columns.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCKeyColumns/*'/>
-    public LJCDataValues LJCKeyColumns
+    public LJCDataColumns LJCKeyColumns
     {
       get => _KeyColumns;
       set
@@ -585,7 +586,7 @@ namespace LJCNetCommon
         }
       }
     }
-    private LJCDataValues _KeyColumns;
+    private LJCDataColumns _KeyColumns;
 
     // The column for the specified name.
     /// <include file='Doc/LJCDataValues.xml'
