@@ -9,6 +9,8 @@ namespace TestData
   // Provides the LJCDataColumn test methods.
   internal class TestDataColumn
   {
+    #region Constructor Methods
+
     // Initializes an object instance.
     public TestDataColumn()
     {
@@ -22,48 +24,114 @@ namespace TestData
     // Runs the test methods.
     private void Run()
     {
-      // Constructor Methods
+      #region Constructor Method Calls
+
+      // Initializes an object instance.
       Constructor();
+
+      // Initializes an object instance with the supplied values.
       ParamConstructor();
+
+      // Initializes an object instance from the supplied object.
       CopyConstructor();
+      #endregion
 
-      // Data Methods
+      #region Data Method Calls
+
+      // Creates and returns a clone of the object.
       Clone();
+
+      // Formats the column value for an SQL string.
       FormatValue();
+
+      // Returns the object string identifier.
       TestToString();
+
+      // Creates a LJCDataValue object from an LJCDataColumn object.
       DataColumnToDataValue();
+      #endregion
 
-      // Data Properties
+      #region Data Property Calls
+
+      // Gets or sets the AllowDBNull flag.
       AllowDBNull();
+
+      // Gets or sets the AutoIncrement flag.
       AutoIncrement();
+
+      // Gets or sets the Caption value.
       Caption();
+
+      // Gets or sets the ColumnName value.
       ColumnName();
+
+      // Gets or sets the DataTypeName value.
       DataTypeName();
+
+      // Gets or sets the MaxLength value.
       MaxLength();
+
+      // Gets or sets the Fixed Length Field Position value.
       Position();
+
+      // Gets or sets the PropertyName value.
       PropertyName();
+
+      // Gets or sets the RenameAs value.
       RenameAs();
+
+      // Gets or sets the SQLTypeName value.
       SQLTypeName();
+
+      // Gets or sets the Value object.
       Value();
+      #endregion
 
-      // Additional Properties
+      #region Additional Property Calls
+
+      // Gets or sets the add order index.
       AddOrderIndex();
+
+      // Gets or sets the default value.
       DefaultValue();
+
+      // Gets or sets the changed indicator.
       IsChanged();
+
+      // Gets or sets the primary key indicator.
       IsPrimaryKey();
+
+      // Gets or sets the unique key indicator.
       IsUniqueKey();
+
+      // Gets or sets the KeyType value.
       KeyType();
+
+      // Gets or sets the original value.
       OriginalValue();
+      #endregion
 
-      // View Join Data Properties
+      #region View Join Data Property Calls
+
+      // Gets or sets the ID value.
       ID();
-      Sequence();
-      ViewDataID();
-      ViewJoinID();
-      Width();
-    }
 
-    #region Constructor Methods
+      // Gets or sets the Sequence value.
+      Sequence();
+
+      // Gets or sets the ViewData ID value.
+      ViewDataID();
+
+      // Gets or sets the ViewJoin ID value.
+      ViewJoinID();
+
+      // Gets or sets the Width value.
+      Width();
+      #endregion
+    }
+    #endregion
+
+    #region Constructor Test Methods
 
     // Initializes an object instance.
     private void Constructor()
@@ -164,8 +232,10 @@ namespace TestData
     {
       var methodName = "TestToString()";
 
-      var dataColumn = new LJCDataColumn("ID", "1", "Int64", "ColumnID");
-      dataColumn.IsPrimaryKey = true;
+      var dataColumn = new LJCDataColumn("ID", "1", "Int64", "ColumnID")
+      {
+        IsPrimaryKey = true
+      };
 
       var result = dataColumn.ToString();
       var compare = "ID-ColumnID-P:1";
@@ -332,16 +402,15 @@ namespace TestData
     {
       var methodName = "Value()";
 
-      var dataColumn = new LJCDataColumn("Name")
-      {
-        Value = "First",
-      };
-
+      var dataColumn = new LJCDataColumn("Name");
       var result = $"{dataColumn.IsChanged}";
       var compare = "False";
       TestCommon.Write($"{methodName}", result, compare);
 
-      dataColumn.Value = "FirstChanged";
+      dataColumn = new LJCDataColumn("Name")
+      {
+        Value = "First",
+      };
       result = $"{dataColumn.IsChanged}";
       compare = "True";
       TestCommon.Write($"{methodName}", result, compare);
@@ -358,7 +427,7 @@ namespace TestData
       var dataColumn = new LJCDataColumn("Name");
 
       var result = $"{dataColumn.AddOrderIndex}";
-      var compare = "0";
+      var compare = "-1";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -370,7 +439,7 @@ namespace TestData
       var dataColumn = new LJCDataColumn("Name");
 
       var result = $"{dataColumn.DefaultValue}";
-      var compare = "";
+      var compare = "No Result";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -419,7 +488,7 @@ namespace TestData
       var dataColumn = new LJCDataColumn("Name");
 
       var result = $"{dataColumn.KeyType}";
-      var compare = "";
+      var compare = "No Result";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -431,7 +500,7 @@ namespace TestData
       var dataColumn = new LJCDataColumn("Name");
 
       var result = $"{dataColumn.OriginalValue}";
-      var compare = "";
+      var compare = "No Result";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion

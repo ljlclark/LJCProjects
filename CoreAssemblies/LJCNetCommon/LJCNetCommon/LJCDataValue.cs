@@ -19,7 +19,7 @@ namespace LJCNetCommon
     {
       DataTypeName = "string";
       PropertyName = "";
-      Value = "";
+      Value = null;
 
       IsChanged = false;
     }

@@ -3,6 +3,7 @@
 // TestDataColumns.cs
 using LJCNetCommon;
 using System;
+using System.Collections.Generic;
 
 namespace TestData
 {
@@ -24,7 +25,7 @@ namespace TestData
     // Runs the test methods.
     private void Run()
     {
-      #region Static Methods
+      #region Static Method Calls
 
       // Deserializes from the specified XML file.
       LJCDeserialize();
@@ -35,6 +36,10 @@ namespace TestData
       // Gets a collection of items from a data object.
       LJCObjectColumns();
 
+      // Gets a collection of items from a data object that match the supplied
+      // property Names.
+      LJCObjectColumnsInList();
+
       // Gets a list of property names from a data object.
       LJCObjectPropertyNames();
 
@@ -42,7 +47,7 @@ namespace TestData
       DataColumnsToDataValues();
       #endregion
 
-      #region Constructor Methods
+      #region Constructor Method Calls
 
       // Initializes an object instance.
       Constructor();
@@ -51,7 +56,7 @@ namespace TestData
       CopyConstructor();
       #endregion
 
-      #region Collection Methods
+      #region Collection Method Calls
 
       // Creates and returns a clone of the object.
       Clone();
@@ -66,10 +71,7 @@ namespace TestData
       LJCClearChanged();
 
       // Returns a collection of items that match a list of property names.
-      LJCColumns1();
-
-      // Returns a collection of items from the data object properties.
-      LJCColumns2();
+      LJCColumns();
 
       // Gets a list of property names from the collection items.
       LJCPropertyNames();
@@ -78,7 +80,7 @@ namespace TestData
       LJCSerialize();
       #endregion
 
-      #region Collection Data Methods
+      #region Collection Data Method Calls
 
       // Adds the supplied item to the collection
       Add1();
@@ -102,7 +104,7 @@ namespace TestData
       LJCSort();
       #endregion
 
-      #region Other Public Methods
+      #region Other Public Method Calls
 
       // Sets the caption properties.
       LJCSetColumnCaptions();
@@ -111,7 +113,7 @@ namespace TestData
       LJCMapNames();
       #endregion
 
-      #region Value Methods
+      #region Value Method Calls
 
       // Gets the column object value as a bool.
       LJCGetBoolean();
@@ -153,7 +155,7 @@ namespace TestData
       LJCSetValue();
       #endregion
 
-      #region Properties
+      #region Property Calls
 
       // Gets or sets the key columns.
       LJCKeyColumns();
@@ -207,20 +209,59 @@ namespace TestData
     // Gets a collection of items from a data object.
     private void LJCObjectColumns()
     {
-      var methodName = "LJCCreateObjectColumns()";
+      var methodName = "LJCObjectColumns()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataValue = new LJCDataValue("Name");
+
+      // Test Method
+      var dataColumns = LJCDataColumns.LJCObjectColumns(dataValue);
+
+      // Set the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "PropertyName" },
+      };
+      var foundDataValue = dataColumns?.LJCGetUnique(keyColumns);
+      var result = foundDataValue?.PropertyName;
+      var compare = "PropertyName";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Returns a collection of items from the data object properties.
+    private void LJCObjectColumnsInList()
+    {
+      var methodName = "LJCColumns2()";
+
+      var dataColumn = new LJCDataColumn("Name", "NameValue");
+
+      var propertyNames = new List<string>()
+      {
+        "PropertyName",
+        "Value",
+      };
+
+      // Test Method
+      var dataColumns = LJCDataColumns.LJCObjectColumnsInList(dataColumn, propertyNames);
+
+      dataColumn = dataColumns[1];
+      var result = $"{dataColumn.Value}";
+      var compare = "NameValue";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Gets a list of property names from a data object.
     private void LJCObjectPropertyNames()
     {
-      var methodName = "LJCGetPropertyNames()";
+      var methodName = "LJCObjectPropertyNames()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataValue = new LJCDataValue("Name");
+
+      // Test Method
+      var columnList = LJCDataColumns.LJCObjectPropertyNames(dataValue);
+
+      var result = columnList[0];
+      var compare = "DataTypeName";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -229,13 +270,24 @@ namespace TestData
     {
       var methodName = "DataColumnsToDataValues()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", 1 },
+      };
+
+      // Test Method
+      var dataValues = dataColumns;
+
+      var dataValue = dataValues[1];
+      var result = dataValue.PropertyName;
+      var compare = "Name";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
     // Initializes an object instance.
     private void Constructor()
@@ -323,7 +375,16 @@ namespace TestData
     {
       var methodName = "LJCChanged()";
 
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataColumns();
+
+      // Test Method
+      var changed = dataColumns?.LJCChanged();
+
+      var result = $"{changed.Count}";
+      var compare = "0";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dataColumns = new LJCDataColumns()
       {
         // PropertyName, Value, DataTypeName
         { "ID", 1, "Int64" },
@@ -331,11 +392,11 @@ namespace TestData
       };
 
       // Test Method
-      var changed = dataColumns?.LJCChanged();
+      changed = dataColumns?.LJCChanged();
 
-      var result = $"{changed.Count}";
-      var compare = "0";
-      TestCommon.Write($"{methodName}", result, compare);
+      result = $"{changed.Count}";
+      compare = "2";
+      TestCommon.Write($"{methodName}2", result, compare);
     }
 
     // Sets the IsChanged value to false for all items.
@@ -351,45 +412,64 @@ namespace TestData
       };
       var changed = dataColumns?.LJCChanged();
       var result = $"{changed.Count}";
-      var compare = "0";
+      var compare = "2";
       TestCommon?.Write($"{methodName}1", result, compare);
 
-      dataColumns = new LJCDataColumns();
-      dataColumns?.Add("ID", 1, "Int64");
-      dataColumns?.Add("Name", "NameValue");
+      // Test Method
+      dataColumns.LJCClearChanged();
+
       changed = dataColumns?.LJCChanged();
       result = $"{changed.Count}";
       compare = "0";
-      TestCommon.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}2", result, compare);
     }
 
     // Returns a collection of items that match a list of property names.
-    private void LJCColumns1()
+    private void LJCColumns()
     {
       var methodName = "LJCColumns1()";
 
-      var result = "";
-      var compare = "Not Implemented";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", "NameValue" },
+        { "Description", "DescriptionValue" },
+      };
 
-    // Returns a collection of items from the data object properties.
-    private void LJCColumns2()
-    {
-      var methodName = "LJCColumns2()";
+      var propertyNames = new List<string>()
+      {
+        "Name",
+        "Description",
+      };
 
-      var result = "";
-      var compare = "Not Implemented";
+      // Test Method
+      var newDataColumns = dataColumns.LJCColumns(propertyNames);
+
+      var dataColumn = newDataColumns[1];
+      var result = dataColumn.PropertyName;
+      var compare = "Description";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Gets a list of property names from the collection items.
     private void LJCPropertyNames()
     {
-      var methodName = "LJCGetPropertyNames()";
+      var methodName = "LJCPropertyNames()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", "NameValue" },
+        { "Description", "DescriptionValue" },
+      };
+
+      // Test Method
+      var propertyNames = dataColumns.LJCPropertyNames();
+
+      var result = propertyNames[1];
+      var compare = "Name";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -524,8 +604,20 @@ namespace TestData
     {
       var methodName = "LJCRemove()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", "NameValue" },
+        { "Description", "DescriptionValue" },
+      };
+
+      // Test Method
+      dataColumns.LJCRemove("Name");
+
+      var dataColumn = dataColumns[1];
+      var result = dataColumn.PropertyName;
+      var compare = "Description";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -534,8 +626,42 @@ namespace TestData
     {
       var methodName = "LJCSetData()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", "NameValue" },
+        { "Description", "DescriptionValue" },
+      };
+
+      // Test Method
+      var dataColumn = new LJCDataColumn("Name", "NameUpdated");
+      dataColumns.LJCSetData(dataColumn);
+
+      // Set the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "Name" },
+      };
+      var foundDataColumn = dataColumns?.LJCGetUnique(keyColumns);
+      var result = $"{foundDataColumn.Value}";
+      var compare = "NameUpdated";
+      TestCommon.Write($"{methodName}", result, compare);
+
+      // Test Method
+      dataColumn = new LJCDataColumn("Sequence", "1");
+      dataColumns.LJCSetData(dataColumn);
+
+      // Set the unique compare values.
+      keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "Sequence" },
+      };
+      foundDataColumn = dataColumns?.LJCGetUnique(keyColumns);
+      result = $"{foundDataColumn.Value}";
+      compare = "1";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -576,8 +702,35 @@ namespace TestData
     {
       var methodName = "LJCSetColumnCaptions()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", "NameValue" },
+        { "Description", "DescriptionValue" },
+      };
+
+      var newDataColumns = new LJCDataColumns();
+      var dataColumn = newDataColumns.Add("ID", "1");
+      dataColumn.DataTypeName = "Int64";
+      dataColumn.Caption = "ID Caption";
+      dataColumn = newDataColumns.Add("Name", "NameValue");
+      dataColumn.Caption = "Name Caption";
+      dataColumn = newDataColumns.Add("Description", "DescriptionValue");
+      dataColumn.Caption = "Description Caption";
+
+      // Test Method
+      newDataColumns.LJCSetCaptions(dataColumns);
+
+      // Set the unique compare values.
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "Name" },
+      };
+      var foundDataColumn = dataColumns?.LJCGetUnique(keyColumns);
+      var result = foundDataColumn.Caption;
+      var compare = "Name Caption";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -586,8 +739,27 @@ namespace TestData
     {
       var methodName = "LJCMapNames()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var dataColumns = new LJCDataColumns()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", "NameValue" },
+        { "Description", "DescriptionValue" },
+      };
+
+      // Test Method
+      dataColumns.LJCMapNames("Name", "NewName", "RenameName", "New Caption");
+
+      var keyColumns = new LJCDataColumns()
+      {
+        // PropertyName, SearchValue
+        { "PropertyName", "NewName" },
+      };
+      var foundDataColumn = dataColumns?.LJCGetUnique(keyColumns);
+      var result = $"{foundDataColumn.Value}";
+      result += $", {foundDataColumn.RenameAs}";
+      result += $", {foundDataColumn.Caption}";
+      var compare = "NameValue, RenameName, New Caption";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion

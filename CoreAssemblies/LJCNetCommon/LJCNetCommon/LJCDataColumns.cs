@@ -94,6 +94,21 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // Gets a collection of items from a data object that match the supplied
+    // property Names.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/LJCColumns/*'/>
+    public static LJCDataColumns LJCObjectColumnsInList(object dataObject
+      , List<string> propertyNames = null)
+    {
+      var retValue = LJCObjectColumns(dataObject);
+      if (propertyNames != null)
+      {
+        retValue = retValue.LJCColumns(propertyNames);
+      }
+      return retValue;
+    }
+
     // Gets a list of property names from a data object.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCObjectPropertyNames/*'/>
@@ -222,7 +237,7 @@ namespace LJCNetCommon
 
     // Returns a collection of items that match a list of property names.
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCColumns1/*'/>
+    ///  path='members/LJCColumns/*'/>
     public LJCDataColumns LJCColumns(List<string> propertyNames)
     {
       LJCDataColumn searchColumn;
@@ -245,20 +260,6 @@ namespace LJCNetCommon
             retValue.Add(new LJCDataColumn(searchColumn));
           }
         }
-      }
-      return retValue;
-    }
-
-    // Returns a collection of items from the data object properties.
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCColumns2/*'/>
-    public static LJCDataColumns LJCColumns(object dataObject
-      , List<string> propertyNames = null)
-    {
-      var retValue = LJCObjectColumns(dataObject);
-      if (propertyNames != null)
-      {
-        retValue = retValue.LJCColumns(propertyNames);
       }
       return retValue;
     }
@@ -513,13 +514,11 @@ namespace LJCNetCommon
 
     #region Other Public Methods
 
-    // Sets the caption properties.
+    // Sets caption properties for supplied columns from current columns.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='items/LJCSetCaptions/*'/>
     public void LJCSetCaptions(LJCDataColumns dataColumns)
     {
-      LJCDataColumn searchColumn;
-
       if (NetCommon.HasItems(dataColumns))
       {
         foreach (var dataColumn in dataColumns)
@@ -528,10 +527,10 @@ namespace LJCNetCommon
           {
             { "PropertyName", dataColumn.PropertyName },
           };
-          searchColumn = LJCGetUnique(keyColumns);
-          if (searchColumn != null)
+          var foundColumn = LJCGetUnique(keyColumns);
+          if (foundColumn != null)
           {
-            dataColumn.Caption = searchColumn.Caption;
+            dataColumn.Caption = foundColumn.Caption;
           }
         }
       }

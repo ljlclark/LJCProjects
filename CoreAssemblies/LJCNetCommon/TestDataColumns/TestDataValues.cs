@@ -24,7 +24,7 @@ namespace TestData
     // Runs the test methods.
     private void Run()
     {
-      #region Static Methods
+      #region Static Method Calls
 
       // Deserializes from the specified XML file.
       LJCDeserialize();
@@ -33,7 +33,7 @@ namespace TestData
       LJCMinSqlDate();
       #endregion
 
-      #region Constructor Methods
+      #region Constructor Method Calls
 
       // Initializes an object instance.
       Constructor();
@@ -42,7 +42,7 @@ namespace TestData
       CopyConstructor();
       #endregion
 
-      #region Collection Methods
+      #region Collection Method Calls
 
       // Creates and returns a clone of the object.
       Clone();
@@ -56,14 +56,14 @@ namespace TestData
       // Sets the IsChanged value to false for all items.
       LJCClearChanged();
 
-      // Returns a collection of items that match a list of property names.
+      // Creates combined LJCDataColumns from LJCDataColumns and LJCDataValues.
       LJCCreateColumns();
 
       // Serializes the collection
       LJCSerialize();
       #endregion
 
-      #region Collection Data Methods
+      #region Collection Data Method Calls
 
       // Creates item with Value and adds it to the collection.
       Add();
@@ -75,7 +75,7 @@ namespace TestData
       LJCSort();
       #endregion
 
-      #region Value Methods
+      #region Value Method Calls
 
       // Gets the column object value as a bool.
       LJCGetBoolean();
@@ -117,7 +117,7 @@ namespace TestData
       LJCSetValue();
       #endregion
 
-      #region Properties
+      #region Property Calls
 
       // Gets or sets the key columns.
       LJCKeyColumns();
@@ -169,7 +169,7 @@ namespace TestData
     }
     #endregion
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
     // Initializes an object instance.
     private void Constructor()
@@ -266,7 +266,16 @@ namespace TestData
     {
       var methodName = "LJCChanged()";
 
-      var dataValues = new LJCDataValues()
+      var dataValues = new LJCDataValues();
+
+      // Test Method
+      var changed = dataValues?.LJCChanged();
+
+      var result = $"{changed.Count}";
+      var compare = "0";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dataValues = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "ID", 1, "Int64" },
@@ -274,11 +283,11 @@ namespace TestData
       };
 
       // Test Method
-      var changed = dataValues?.LJCChanged();
+      changed = dataValues?.LJCChanged();
 
-      var result = $"{changed.Count}";
-      var compare = "0";
-      TestCommon.Write($"{methodName}", result, compare);
+      result = $"{changed.Count}";
+      compare = "2";
+      TestCommon.Write($"{methodName}2", result, compare);
     }
 
     // Sets the IsChanged value to false for all items.
@@ -294,23 +303,16 @@ namespace TestData
       };
       var changed = dataValues?.LJCChanged();
       var result = $"{changed.Count}";
-      var compare = "0";
+      var compare = "2";
       TestCommon?.Write($"{methodName}1", result, compare);
 
-      dataValues = new LJCDataValues();
-      dataValues?.Add("ID", 1, "Int64");
-      dataValues?.Add("Name", "NameValue");
+      // Test Method
+      dataValues.LJCClearChanged();
+
       changed = dataValues?.LJCChanged();
       result = $"{changed.Count}";
       compare = "0";
       TestCommon?.Write($"{methodName}2", result, compare);
-
-      // Test Method
-      dataValues?.LJCClearChanged();
-      changed = dataValues?.LJCChanged();
-      result = $"{changed.Count}";
-      compare = "0";
-      TestCommon.Write($"{methodName}3", result, compare);
     }
 
     // Creates combined LJCDataColumns from LJCDataColumns and LJCDataValues.

@@ -24,7 +24,7 @@ namespace TestData
     // Runs the test methods.
     private void Run()
     {
-      #region Constructor Methods
+      #region Constructor Method Calls
 
       // Initializes an object instance.
       Constructor();
@@ -32,11 +32,11 @@ namespace TestData
       // Initializes an object instance with the supplied values.
       ParamConstructor();
 
-      // The Copy constructor.
+      // Initializes an object instance from the supplied object.
       CopyConstructor();
       #endregion
 
-      #region Data Methods
+      #region Data Method Calls
 
       // Creates and returns a clone of the object.
       Clone();
@@ -51,7 +51,7 @@ namespace TestData
       CreateColumn();
       #endregion
 
-      #region Data Properties
+      #region Data Property Calls
 
       // Gets or sets the DataTypeName value.
       DataTypeName();
@@ -63,7 +63,7 @@ namespace TestData
       Value();
       #endregion
 
-      #region Additional Properties
+      #region Additional Property Calls
 
       // Indicates if the value has changed.
       IsChanged();
@@ -71,7 +71,7 @@ namespace TestData
     }
     #endregion
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
     // Initializes an object instance.
     private void Constructor()
@@ -222,16 +222,15 @@ namespace TestData
     {
       var methodName = "Value()";
 
-      var dataValue = new LJCDataValue("Name")
-      {
-        Value = "First",
-      };
-
+      var dataValue = new LJCDataValue("Name");
       var result = $"{dataValue.IsChanged}";
       var compare = "False";
       TestCommon.Write($"{methodName}", result, compare);
 
-      dataValue.Value = "FirstChanged";
+      dataValue = new LJCDataValue("Name")
+      {
+        Value = "First",
+      };
       result = $"{dataValue.IsChanged}";
       compare = "True";
       TestCommon.Write($"{methodName}", result, compare);

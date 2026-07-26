@@ -316,7 +316,6 @@ namespace LJCNetCommon
       get => _Value;
       set
       {
-        //if (_Value != value)
         if (!EqualityComparer<object>.Default.Equals(_Value, value))
         {
           _Value = value;
