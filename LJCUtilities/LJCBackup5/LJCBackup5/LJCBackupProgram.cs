@@ -222,13 +222,14 @@ namespace LJCBackup5
     // Select to view proposed changes.
     private static void ViewProposedChanges(LJCBackupProfile profile)
     {
-      //Console.WriteLine();
+      Console.WriteLine();
       //var prompt = "View Proposed Changes Y|N: ";
       //Console.Write(prompt);
 
       //var value = LJC.KeyOption(prompt, "YyNn");
       //if ("Yy".Contains(value))
       //{
+      Console.WriteLine("Proposed Changes");
       Console.WriteLine($"File: {profile.ChangesFilespec}");
       LJCNetFile.ShellProgram(profile.ChangesFilespec);
       //}
