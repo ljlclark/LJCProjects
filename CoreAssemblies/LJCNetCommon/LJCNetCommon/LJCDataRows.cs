@@ -41,7 +41,9 @@ namespace LJCNetCommon
     #region Collection Methods
 
     // Gets property names list from data columns.
-    private List<string> LJCPropertyNames(LJCDataColumns dataColumns)
+    /// <include file='Doc/LJCDataRows.xml'
+    ///  path='members/LJCPropertyNames/*'/>
+    public List<string> LJCPropertyNames(LJCDataColumns dataColumns)
     {
       List<string> retList = null;
 

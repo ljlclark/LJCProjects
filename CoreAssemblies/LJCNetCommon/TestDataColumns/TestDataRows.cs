@@ -3,6 +3,7 @@
 // TestDataRows.cs
 using LJCNetCommon;
 using System;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace TestData
 {
@@ -102,7 +103,7 @@ namespace TestData
       return retDataRows;
     }
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
     // Initializes an object instance.
     private void Constructor()
@@ -134,7 +135,7 @@ namespace TestData
       var dataRow = newDataRows[0];
       var dataColumn = dataRow[0];
       var result = $"{dataColumn.Value}";
-      var compare = "First First";
+      var compare = "Second First";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -146,8 +147,13 @@ namespace TestData
     {
       var methodName = "LJCPropertyNames()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      // See: Constructor()
+      var dataRows = CreateTestDataRows();
+
+      var dataColumns = dataRows[0];
+      var propertyNamesList = dataRows.LJCPropertyNames(dataColumns);
+      var result = propertyNamesList[0];
+      var compare = "FirstName";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -423,8 +429,11 @@ namespace TestData
     {
       var methodName = "LJCKeyColumns()";
 
-      var result = "";
-      var compare = "Not Implemented";
+      var keys = LJC.Keys("PropertyName", "ID");
+      var key = keys[0];
+      var result = key.ColumnName;
+      result += $", {key.Value}";
+      var compare = "PropertyName, ID";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion

@@ -273,7 +273,7 @@ namespace LJCNetCommon
       if (LJC.HasItems(dataColumns))
       {
         retList = new List<string>();
-        foreach (LJCDataColumn dataColumn in dataColumns)
+        foreach (var dataColumn in dataColumns)
         {
           retList.Add(dataColumn.PropertyName);
         }
