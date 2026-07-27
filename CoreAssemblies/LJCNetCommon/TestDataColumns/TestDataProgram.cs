@@ -15,12 +15,6 @@ namespace TestData
 
       _ = new TestDataValue();
       _ = new TestDataValues();
-
-      _ = new TestDbColumn();
-      _ = new TestDbColumns();
-
-      _ = new TestDbValue();
-      _ = new TestDbValues();
     }
   }
 }

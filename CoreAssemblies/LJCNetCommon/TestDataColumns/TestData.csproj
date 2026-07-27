@@ -50,10 +50,6 @@
     <Compile Include="TestDataRows.cs" />
     <Compile Include="TestDataValue.cs" />
     <Compile Include="TestDataValues.cs" />
-    <Compile Include="TestDbColumn.cs" />
-    <Compile Include="TestDbColumns.cs" />
-    <Compile Include="TestDbValue.cs" />
-    <Compile Include="TestDbValues.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

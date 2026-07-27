@@ -262,7 +262,7 @@ namespace TestData
         // Add the unique compare values.
         // The column is identified by its property names and values.
         // Get where DataColumn property = "PropertyName", value = "FirstName".
-        keys = LJC.Keys("PropertyName", "FirstName");
+        keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "FirstName");
         dataColumn = rowColumns.LJCGetUnique(keys);
         value = $"{dataColumn.Value}";
       }
@@ -283,12 +283,9 @@ namespace TestData
       // Add the unique compare values.
       // The sort is identified by its column property name values and column
       // values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // KeyColumnName, ColumnValue
-        { "LastName", "Third Last" },
-      };
-      dataRows.LJCKeys = keyColumns;
+      // Get where DataColumn.PropertyName = "LastName", value = "Third Last"
+      var keys = LJC.Keys("LastName", "Third Last");
+      dataRows.LJCKeys = keys;
 
       // Test Method
       dataRows.LJCSort();
@@ -296,13 +293,10 @@ namespace TestData
       // Get the first data row.
       var rowColumns = dataRows[0];
 
-      // Add the unique compare values.
       // The column is identified by its property names and values.
-      keyColumns = new LJCDataColumns()
-      {
-        { "PropertyName", "LastName" },
-      };
-      var dataColumn = rowColumns.LJCGetUnique(keyColumns);
+      // Get where DataColumn property = "PropertyName", value = "LastName".
+      keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "LastName");
+      var dataColumn = rowColumns.LJCGetUnique(keys);
 
       var result = $"{dataColumn.Value}";
       var compare = "First Last";
@@ -320,15 +314,11 @@ namespace TestData
       // See: Constructor()
       var dataRows = CreateTestDataRows();
 
-      // Add the unique compare values.
       // The search is identified by its column property name values and column
       // values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // KeyColumnName, ColumnValue
-        { "LastName", "Third Last" },
-      };
-      dataRows.LJCKeys = keyColumns;
+      // Get where DataColumn.PropertyName = "LastName", value = "Third Last"
+      var keys = LJC.Keys("LastName", "Third Last");
+      dataRows.LJCKeys = keys;
 
       // Test Method
       // Do a binary search on the list items with the key columns and values.
@@ -340,13 +330,10 @@ namespace TestData
       {
         var rowColumns = dataRows[index];
 
-        // Add the unique compare values.
         // The column is identified by its property names and values.
-        keyColumns = new LJCDataColumns()
-        {
-          { "PropertyName", "LastName" },
-        };
-        var dataColumn = rowColumns.LJCGetUnique(keyColumns);
+        // Get where DataColumn property = "PropertyName", value = "LastName".
+        keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "LastName");
+        var dataColumn = rowColumns.LJCGetUnique(keys);
         value = $"{dataColumn.Value}";
       }
 
@@ -369,28 +356,19 @@ namespace TestData
       // LJCCompareColumn() is called in LJCDataRows.BinarySearch().
       // This code loops through the row columns to demonstrate
       // LJCCompareColumn().
-      var searchPropertyName = "LastName";
       foreach (var rowColumnsItem in dataRows)
       {
-        // Add the unique compare values.
         // The column is identified by its property names and values.
-        var rowsKeyColumns = new LJCDataColumns()
-        {
-          { "PropertyName", searchPropertyName },
-        };
-        var dataColumn = rowColumnsItem.LJCGetUnique(rowsKeyColumns);
+        // Get where DataColumn.PropertyName = "PropertyName", value = "LastName"
+        var rowKeys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "LastName");
+        var dataColumn = rowColumnsItem.LJCGetUnique(rowKeys);
         var dataColumnValue = $"{dataColumn.Value}";
 
-        // Add the unique compare values.
         // The search is identified by its column property name values and column
         // values.
-        var searchColumnValue = "Third Last";
-        var columnsKeyColumns = new LJCDataColumns()
-        {
-          { searchPropertyName, searchColumnValue },
-        };
+        var columnKeys = LJC.Keys("LastName", "Third Last");
 
-        foreach (var keyColumn in columnsKeyColumns)
+        foreach (var keyColumn in columnKeys)
         {
           // Test Method
           var compareValue = dataRows.LJCCompareColumn(dataColumnValue
@@ -421,7 +399,7 @@ namespace TestData
       var methodName = "LJCKeyColumns()";
 
       // Get where DataColumn property = "PropertyName", value = "ID".
-      var keys = LJC.Keys("PropertyName", "ID");
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "ID");
       var key = keys[0];
       var result = key.ColumnName;
       result += $", {key.Value}";

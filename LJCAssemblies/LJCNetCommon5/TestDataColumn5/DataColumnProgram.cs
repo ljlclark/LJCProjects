@@ -21,7 +21,7 @@ namespace TestDataColumn5
 
       // Data Class Methods
       Clone();
-      CompareTo();
+      //CompareTo();
       FormatValue();
       ToStringMethod();
 
@@ -56,8 +56,10 @@ namespace TestDataColumn5
     private static void ParmConstructor()
     {
       // Test Method
-      var dataColumn = new LJCDataColumn("TestValue");
-      dataColumn.Value = 3;
+      var dataColumn = new LJCDataColumn("TestValue")
+      {
+        Value = 3
+      };
       var result = dataColumn.PropertyName;
       var compare = "TestValue";
       TestCommon?.Write("ParmConstructor()", result, compare);
@@ -69,8 +71,10 @@ namespace TestDataColumn5
     // Creates and returns a clone of the object.
     private static void Clone()
     {
-      var dataColumn = new LJCDataColumn("TestValue");
-      dataColumn.Value = 3;
+      var dataColumn = new LJCDataColumn("TestValue")
+      {
+        Value = 3
+      };
       // Test Method
       var newDataColumn = dataColumn.Clone();
       var result = newDataColumn?.PropertyName;
@@ -78,44 +82,46 @@ namespace TestDataColumn5
       TestCommon?.Write("Clone()", result, compare);
     }
 
-    // Provides the default Sort functionality.
-    private static void CompareTo()
-    {
-      var dataColumns = new LJCDataColumns();
-      var compareObject = new LJCDataColumn("Alpha");
-      dataColumns.Add(compareObject);
-      var compareToObject = new LJCDataColumn("Beta");
-      dataColumns.Add(compareToObject);
-      // Test Method
-      var value = compareObject.CompareTo(null);
-      var result = value.ToString();
-      var compare = "1";
-      TestCommon?.Write("CompareTo()1", result, compare);
+    //// Provides the default Sort functionality.
+    //private static void CompareTo()
+    //{
+    //  var dataColumns = new LJCDataColumns();
+    //  var compareObject = new LJCDataColumn("Alpha");
+    //  dataColumns.Add(compareObject);
+    //  var compareToObject = new LJCDataColumn("Beta");
+    //  dataColumns.Add(compareToObject);
+    //  // Test Method
+    //  var value = compareObject.CompareTo(null);
+    //  var result = value.ToString();
+    //  var compare = "1";
+    //  TestCommon?.Write("CompareTo()1", result, compare);
 
-      // Test Method
-      value = compareObject.CompareTo(compareToObject);
-      result = value.ToString();
-      compare = "-1";
-      TestCommon?.Write("CompareTo()2", result, compare);
+    //  // Test Method
+    //  value = compareObject.CompareTo(compareToObject);
+    //  result = value.ToString();
+    //  compare = "-1";
+    //  TestCommon?.Write("CompareTo()2", result, compare);
 
-      // Test Method
-      value = compareObject.CompareTo(compareObject);
-      result = value.ToString();
-      compare = "0";
-      TestCommon?.Write("CompareTo()3", result, compare);
+    //  // Test Method
+    //  value = compareObject.CompareTo(compareObject);
+    //  result = value.ToString();
+    //  compare = "0";
+    //  TestCommon?.Write("CompareTo()3", result, compare);
 
-      // Test Method
-      value = compareToObject.CompareTo(compareObject);
-      result = value.ToString();
-      compare = "1";
-      TestCommon?.Write("CompareTo()4", result, compare);
-    }
+    //  // Test Method
+    //  value = compareToObject.CompareTo(compareObject);
+    //  result = value.ToString();
+    //  compare = "1";
+    //  TestCommon?.Write("CompareTo()4", result, compare);
+    //}
 
     // Formats the column value for the SQL string.
     private static void FormatValue()
     {
-      var dataColumn = new LJCDataColumn("TestValue");
-      dataColumn.Value = 3;
+      var dataColumn = new LJCDataColumn("TestValue")
+      {
+        Value = 3
+      };
       // Test Method
       var result = dataColumn.FormatValue();
       var compare = "'3'";
@@ -145,8 +151,10 @@ namespace TestDataColumn5
     // The object string identifier.
     private static void ToStringMethod()
     {
-      var dataColumn = new LJCDataColumn("TestValue");
-      dataColumn.Value = 3;
+      var dataColumn = new LJCDataColumn("TestValue")
+      {
+        Value = 3
+      };
       // Test Method
       var result = dataColumn.ToString();
       var compare = "TestValue:3";
@@ -167,8 +175,10 @@ namespace TestDataColumn5
     // Creates a combined LJCDataColumn from an LJCDataValue and LJCDataColumn.
     private static void CreateValue()
     {
-      var dataColumn = new LJCDataColumn("TestValue");
-      dataColumn.Value = 3;
+      var dataColumn = new LJCDataColumn("TestValue")
+      {
+        Value = 3
+      };
       // Test Method
       var newDataValue = dataColumn;
       var result = newDataValue?.Value?.ToString();
