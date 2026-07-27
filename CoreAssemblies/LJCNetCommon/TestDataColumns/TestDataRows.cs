@@ -3,7 +3,6 @@
 // TestDataRows.cs
 using LJCNetCommon;
 using System;
-using System.Data;
 
 namespace TestData
 {

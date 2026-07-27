@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TestDataValues.cs
-using LJC = LJCNetCommon.NetCommon;
 using LJCNetCommon;
 using System;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace TestData
 {
