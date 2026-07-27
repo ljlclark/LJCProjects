@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TestDataValues.cs
+using LJC = LJCNetCommon.NetCommon;
 using LJCNetCommon;
 using System;
 
@@ -146,13 +147,8 @@ namespace TestData
       // Test Method
       var newDataValues = LJCDataValues.LJCDeserialize();
 
-      // Set the unique compare values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // PropertyName, SearchValue
-        { "PropertyName", "ID" },
-      };
-      var dataValue = newDataValues?.LJCGetUnique(keyColumns);
+      var keys = LJC.Keys("PropertyName", "ID");
+      var dataValue = newDataValues?.LJCGetUnique(keys);
       var result = dataValue?.DataTypeName;
       var compare = "Int64";
       TestCommon.Write($"{methodName}", result, compare);
@@ -199,13 +195,8 @@ namespace TestData
       // Test Method
       var newDataValues = new LJCDataValues(dataValues);
 
-      // Set the unique compare values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // PropertyName, SearchValue
-        { "PropertyName", "ID" },
-      };
-      var dataValue = newDataValues?.LJCGetUnique(keyColumns);
+      var keys = LJC.Keys("PropertyName", "ID");
+      var dataValue = newDataValues?.LJCGetUnique(keys);
       var result = dataValue?.DataTypeName;
       var compare = "Int64";
       TestCommon.Write($"{methodName}", result, compare);
@@ -229,13 +220,8 @@ namespace TestData
       // Test Method
       var newDataValues = dataValues?.Clone();
 
-      // Set the unique compare values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // PropertyName, SearchValue
-        { "PropertyName", "ID" },
-      };
-      var dataValue = newDataValues?.LJCGetUnique(keyColumns);
+      var keys = LJC.Keys("PropertyName", "ID");
+      var dataValue = newDataValues?.LJCGetUnique(keys);
       var result = dataValue?.DataTypeName;
       var compare = "Int64";
       TestCommon.Write($"{methodName}", result, compare);
@@ -336,13 +322,8 @@ namespace TestData
       // Test Method
       var newDataColumns = dataValues.LJCCreateColumns(dataColumns);
 
-      // Set the unique compare values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // PropertyName, SearchValue
-        { "PropertyName", "Name" },
-      };
-      var dataColumn = newDataColumns?.LJCGetUnique(keyColumns);
+      var keys = LJC.Keys("PropertyName", "Name");
+      var dataColumn = newDataColumns?.LJCGetUnique(keys);
       var result = $"{dataColumn?.Value}";
       var compare = "NameValue";
       TestCommon.Write($"{methodName}", result, compare);
@@ -365,13 +346,8 @@ namespace TestData
 
       var newDataValues = LJCDataValues.LJCDeserialize();
 
-      // Set the unique compare values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // PropertyName, SearchValue
-        { "PropertyName", "Name" },
-      };
-      var dataValue = newDataValues?.LJCGetUnique(keyColumns);
+      var keys = LJC.Keys("PropertyName", "Name");
+      var dataValue = newDataValues?.LJCGetUnique(keys);
       var result = dataValue?.DataTypeName;
       var compare = "string";
       TestCommon.Write($"{methodName}", result, compare);
@@ -390,13 +366,8 @@ namespace TestData
       // Test Method
       dataValues?.Add("ID", 1, "Int64");
 
-      // Set the unique compare values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // PropertyName, SearchValue
-        { "PropertyName", "ID" },
-      };
-      var dataValue = dataValues?.LJCGetUnique(keyColumns);
+      var keys = LJC.Keys("PropertyName", "ID");
+      var dataValue = dataValues?.LJCGetUnique(keys);
       var result = dataValue?.DataTypeName;
       var compare = "Int64";
       TestCommon.Write($"{methodName}", result, compare);
@@ -415,13 +386,8 @@ namespace TestData
       };
 
       // Test Method
-      // Set the unique compare values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // PropertyName, SearchValue
-        { "PropertyName", "ID" },
-      };
-      var dataValue = dataValues?.LJCGetUnique(keyColumns);
+      var keys = LJC.Keys("PropertyName", "ID");
+      var dataValue = dataValues?.LJCGetUnique(keys);
 
       var result = $"{dataValue?.Value}";
       var compare = "1";
@@ -441,17 +407,13 @@ namespace TestData
       };
 
       // Add the unique compare values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // PropertyName, SearchValue
-        { "DataTypeName", "string" },
-      };
-      dataValues.LJCKeyColumns = keyColumns;
+      var keys = LJC.Keys("DataTypeName", "string");
+      dataValues.LJCKeyColumns = keys;
 
       // Test Method
       dataValues.LJCSort();
 
-      var dataValue = dataValues.LJCGetUnique(keyColumns);
+      var dataValue = dataValues.LJCGetUnique(keys);
       var result = $"{dataValue?.DataTypeName}";
       var compare = "string";
       TestCommon.Write($"{methodName}", result, compare);
@@ -729,13 +691,8 @@ namespace TestData
     {
       var methodName = "LJCKeyColumns()";
 
-      // Set the unique compare values.
-      var keyColumns = new LJCDataColumns()
-      {
-        // PropertyName, SearchValue
-        { "PropertyName", "ID" },
-      };
-      var keyColumn = keyColumns[0];
+      var keys = LJC.Keys("PropertyName", "ID");
+      var keyColumn = keys[0];
       var result = keyColumn.ColumnName;
       result += $", {keyColumn.Value}";
       var compare = "PropertyName, ID";
