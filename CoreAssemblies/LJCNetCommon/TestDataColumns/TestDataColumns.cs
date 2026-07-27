@@ -636,7 +636,7 @@ namespace TestData
 
       // Add the unique compare values.
       var keys = LJC.Keys("DataTypeName", "string");
-      dataColumns.LJCKeyColumns = keys;
+      dataColumns.LJCKeys = keys;
 
       // Test Method
       dataColumns.LJCSort();

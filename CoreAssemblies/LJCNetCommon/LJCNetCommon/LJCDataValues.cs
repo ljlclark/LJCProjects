@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCNetCommon
 {
@@ -26,7 +27,7 @@ namespace LJCNetCommon
       {
         fileSpec = LJCDefaultFileName;
       }
-      retValue = NetCommon.XmlDeserialize(typeof(LJCDataValues), fileSpec)
+      retValue = LJC.XmlDeserialize(typeof(LJCDataValues), fileSpec)
         as LJCDataValues;
       return retValue;
     }
@@ -56,7 +57,7 @@ namespace LJCNetCommon
     ///  path='members/CopyConstructor/*'/>
     public LJCDataValues(LJCDataValues items)
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasItems(items))
       {
         foreach (var item in items)
         {
@@ -135,12 +136,9 @@ namespace LJCNetCommon
         retValue = new LJCDataColumns();
         foreach (var dataValue in this)
         {
-          var propertyName = dataValue.PropertyName;
-          var keyColumns = new LJCDataColumns()
-          {
-            { "PropertyName", propertyName },
-          };
-          definitionColumn = dataDefinition.LJCGetUnique(keyColumns);
+          var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
+            , dataValue.PropertyName);
+          definitionColumn = dataDefinition.LJCGetUnique(keys);
           var dataColumn = dataValue.CreateColumn(definitionColumn);
           retValue.Add(dataColumn);
         }
@@ -155,11 +153,11 @@ namespace LJCNetCommon
     {
       List<string> retList = null;
 
-      if (!NetCommon.HasItems(dataValues))
+      if (!LJC.HasItems(dataValues))
       {
         dataValues = this;
       }
-      if (NetCommon.HasItems(dataValues))
+      if (LJC.HasItems(dataValues))
       {
         retList = new List<string>();
         foreach (LJCDataValue dataValue in dataValues)
@@ -179,7 +177,7 @@ namespace LJCNetCommon
       {
         fileSpec = LJCDefaultFileName;
       }
-      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
+      LJC.XmlSerialize(GetType(), this, null, fileSpec);
     }
     #endregion
 
@@ -205,29 +203,29 @@ namespace LJCNetCommon
     // The column is identified by its property names and values.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='items/LJCGetUnique/*'/>
-    public LJCDataValue LJCGetUnique(LJCDataColumns keyColumns = null)
+    public LJCDataValue LJCGetUnique(LJCDataColumns keys = null)
     {
       LJCDataValue retValue = null;
 
-      if (keyColumns != null)
+      if (keys != null)
       {
-        LJCKeyColumns = keyColumns;
+        LJCKeys = keys;
       }
 
-      if (NetCommon.HasItems(LJCKeyColumns))
+      if (LJC.HasItems(LJCKeys))
       {
         LJCSort();
 
         // Create search item.
         var dataValue = new LJCDataValue();
         var reflect = new LJCReflect(dataValue);
-        foreach (var keyColumn in keyColumns)
+        foreach (var key in keys)
         {
-          reflect.SetValue(keyColumn.PropertyName, keyColumn.Value);
+          reflect.SetValue(key.PropertyName, key.Value);
         }
 
         // Create comparer.
-        var propertyNames = LJCPropertyNames(keyColumns);
+        var propertyNames = LJCPropertyNames(keys);
         var comparer = new DataValueKeyComparer()
         {
           LJCPropertyNames = propertyNames,
@@ -243,18 +241,18 @@ namespace LJCNetCommon
     }
 
     // Sorts on the current key columns.
-    /// <include file='Doc/LJCDataRows.xml'
+    /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCSort/*'/>
-    public void LJCSort(LJCDataColumns keyColumns = null)
+    public void LJCSort(LJCDataColumns keys = null)
     {
-      if (NetCommon.HasItems(keyColumns))
+      if (LJC.HasItems(keys))
       {
-        LJCKeyColumns = keyColumns;
+        LJCKeys = keys;
       }
 
       if (_IsPendingSort)
       {
-        var sortNames = LJCPropertyNames(_KeyColumns);
+        var sortNames = LJCPropertyNames(_Keys);
         if (sortNames != null)
         {
           var uniqueComparer = new DataValueKeyComparer
@@ -268,15 +266,15 @@ namespace LJCNetCommon
     }
 
     // Checks if the key columns value has changed.
-    private bool IsKeyColumnsChanged(LJCDataColumns newKeyColumns
-      , LJCDataColumns currentKeyColumns)
+    private bool IsKeyColumnsChanged(LJCDataColumns newKeys
+      , LJCDataColumns currentKeys)
     {
       bool retValue = false;
 
       while (true)
       {
-        var hasNewColumns = NetCommon.HasItems(newKeyColumns);
-        var hasSortColumns = NetCommon.HasItems(currentKeyColumns);
+        var hasNewColumns = LJC.HasItems(newKeys);
+        var hasSortColumns = LJC.HasItems(currentKeys);
 
         // One value has no columns.
         if ((!hasNewColumns
@@ -290,16 +288,16 @@ namespace LJCNetCommon
 
         if (hasNewColumns)
         {
-          if (newKeyColumns.Count != currentKeyColumns.Count)
+          if (newKeys.Count != currentKeys.Count)
           {
             retValue = true;
             break;
           }
 
-          for (short index = 0; index < newKeyColumns.Count; index++)
+          for (short index = 0; index < newKeys.Count; index++)
           {
-            var newColumn = newKeyColumns[index];
-            var currentColumn = currentKeyColumns[index];
+            var newColumn = newKeys[index];
+            var currentColumn = currentKeys[index];
 
             var propertyName = newColumn.PropertyName;
             var propertyValue = newColumn.Value;
@@ -486,7 +484,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (NetCommon.HasItems(this)
+      if (LJC.HasItems(this)
         && NetString.HasValue(propertyName))
       {
         // Get with unique compare values.
@@ -513,7 +511,7 @@ namespace LJCNetCommon
     {
       object retValue = default;
 
-      if (NetCommon.HasItems(this)
+      if (LJC.HasItems(this)
         && NetString.HasValue(propertyName))
       {
         var keyColumns = new LJCDataColumns()
@@ -536,7 +534,7 @@ namespace LJCNetCommon
     ///  path='members/LJCSetValue/*'/>
     public void LJCSetValue(string propertyName, object value)
     {
-      if (NetCommon.HasItems(this)
+      if (LJC.HasItems(this)
         && NetString.HasValue(propertyName))
       {
         var keyColumns = new LJCDataColumns()
@@ -566,17 +564,17 @@ namespace LJCNetCommon
     // Gets or sets the key columns.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCKeyColumns/*'/>
-    public LJCDataColumns LJCKeyColumns
+    public LJCDataColumns LJCKeys
     {
-      get => _KeyColumns;
+      get => _Keys;
       set
       {
-        if (IsKeyColumnsChanged(value, _KeyColumns))
+        if (IsKeyColumnsChanged(value, _Keys))
         {
           _IsPendingSort = true;
         }
         // Must be done after check for changes.
-        _KeyColumns = value;
+        _Keys = value;
 
         // New sort if count has changed.
         if (Count != _PrevCount)
@@ -586,7 +584,7 @@ namespace LJCNetCommon
         }
       }
     }
-    private LJCDataColumns _KeyColumns;
+    private LJCDataColumns _Keys;
 
     // The column for the specified name.
     /// <include file='Doc/LJCDataValues.xml'
@@ -594,11 +592,9 @@ namespace LJCNetCommon
     public LJCDataValue this[string propertyName]
     {
       get {
-        var keyColumns = new LJCDataColumns()
-        {
-          { "PropertyName", propertyName },
-        };
-        return LJCGetUnique(keyColumns);
+        var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
+          , propertyName);
+        return LJCGetUnique(keys);
       }
     }
     #endregion
@@ -627,7 +623,7 @@ namespace LJCNetCommon
       int retValue;
 
       // Check for null objects.
-      retValue = NetCommon.CompareNull(x, y);
+      retValue = LJC.CompareNull(x, y);
 
       while (true)
       {
@@ -646,7 +642,7 @@ namespace LJCNetCommon
         {
           var xValue = xReflect.GetString(propertyName);
           var yValue = yReflect.GetString(propertyName);
-          retValue = NetCommon.CompareNull(xValue, yValue);
+          retValue = LJC.CompareNull(xValue, yValue);
 
           // Break if one of the values is null.
           if (retValue != NetString.CompareNotNullOrEqual)

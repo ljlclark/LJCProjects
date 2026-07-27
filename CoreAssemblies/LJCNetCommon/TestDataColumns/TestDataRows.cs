@@ -171,7 +171,7 @@ namespace TestData
       {
         { rowColumnPropertyNameValue, rowColumnValue },
       };
-      dataRows.LJCKeyColumns = keyColumns;
+      dataRows.LJCKeys = keyColumns;
       // Before Row Sort on LastName
       // 0 - FirstName: "Second First", MiddleName: "Second Middle", LastName: "Second Last"
       // 1 - FirstName: "First First", MiddleName: "First Middle", LastName: "First Last"
@@ -235,7 +235,7 @@ namespace TestData
         { "LastName", "Third Last" },
         { "FirstName", "Fourth First" },
       };
-      dataRows.LJCKeyColumns = keyColumns;
+      dataRows.LJCKeys = keyColumns;
       // Before Row Sort on LastName, FirstName:
       // 0 - FirstName: "Second First", MiddleName: "Second Middle", LastName: "Second Last"
       // 1 - FirstName: "First First", MiddleName: "First Middle", LastName: "First Last"
@@ -291,7 +291,7 @@ namespace TestData
         // KeyColumnName, ColumnValue
         { "LastName", "Third Last" },
       };
-      dataRows.LJCKeyColumns = keyColumns;
+      dataRows.LJCKeys = keyColumns;
 
       // Test Method
       dataRows.LJCSort();
@@ -331,7 +331,7 @@ namespace TestData
         // KeyColumnName, ColumnValue
         { "LastName", "Third Last" },
       };
-      dataRows.LJCKeyColumns = keyColumns;
+      dataRows.LJCKeys = keyColumns;
 
       // Test Method
       // Do a binary search on the list items with the key columns and values.

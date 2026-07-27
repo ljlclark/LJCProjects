@@ -3,6 +3,7 @@
 // LJCDataRows.cs
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCNetCommon
 {
@@ -27,7 +28,7 @@ namespace LJCNetCommon
     ///  path='members/CopyConstructor/*'/>
     public LJCDataRows(LJCDataRows items)
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasItems(items))
       {
         foreach (var item in items)
         {
@@ -44,7 +45,7 @@ namespace LJCNetCommon
     {
       List<string> retList = null;
 
-      if (NetCommon.HasItems(dataColumns))
+      if (LJC.HasItems(dataColumns))
       {
         retList = new List<string>();
         foreach (var dataColumn in dataColumns)
@@ -63,16 +64,16 @@ namespace LJCNetCommon
     // values.
     /// <include file='Doc/LJCDataRows.xml'
     ///  path='members/LJCGetUnique/*'/>
-    public LJCDataColumns LJCGetUnique(LJCDataColumns keyColumns = null)
+    public LJCDataColumns LJCGetUnique(LJCDataColumns keys = null)
     {
       LJCDataColumns retColumns = null;
 
-      if (keyColumns != null)
+      if (keys != null)
       {
-        LJCKeyColumns = keyColumns;
+        LJCKeys = keys;
       }
 
-      if (NetCommon.HasItems(LJCKeyColumns))
+      if (LJC.HasItems(LJCKeys))
       {
         var index = LJCBinarySearch();
         if (index != -1)
@@ -86,16 +87,16 @@ namespace LJCNetCommon
     // Sorts on the current key columns.
     /// <include file='Doc/LJCDataRows.xml'
     ///  path='members/LJCSort/*'/>
-    public void LJCSort(LJCDataColumns keyColumns = null)
+    public void LJCSort(LJCDataColumns keys = null)
     {
-      if (NetCommon.HasItems(keyColumns))
+      if (LJC.HasItems(keys))
       {
-        LJCKeyColumns = keyColumns;
+        LJCKeys = keys;
       }
 
       if (_IsPendingSort)
       {
-        var sortNames = LJCPropertyNames(_KeyColumns);
+        var sortNames = LJCPropertyNames(_Keys);
         if (sortNames != null)
         {
           var uniqueComparer = new DataRowKeyComparer
@@ -109,14 +110,15 @@ namespace LJCNetCommon
     }
 
     // Checks if the key columns value has changed.
-    private bool IsKeyColumnsChanged(LJCDataColumns newKeyColumns, LJCDataColumns currentKeyColumns)
+    private bool IsKeyColumnsChanged(LJCDataColumns newKeys
+      , LJCDataColumns currentKeys)
     {
       bool retValue = false;
 
       while (true)
       {
-        var hasNewColumns = NetCommon.HasItems(newKeyColumns);
-        var hasSortColumns = NetCommon.HasItems(currentKeyColumns);
+        var hasNewColumns = LJC.HasItems(newKeys);
+        var hasSortColumns = LJC.HasItems(currentKeys);
 
         // One value has no columns.
         if ((!hasNewColumns
@@ -130,16 +132,16 @@ namespace LJCNetCommon
 
         if (hasNewColumns)
         {
-          if (newKeyColumns.Count != currentKeyColumns.Count)
+          if (newKeys.Count != currentKeys.Count)
           {
             retValue = true;
             break;
           }
 
-          for (short index = 0; index < newKeyColumns.Count; index++)
+          for (short index = 0; index < newKeys.Count; index++)
           {
-            var newColumn = newKeyColumns[index];
-            var currentColumn = currentKeyColumns[index];
+            var newColumn = newKeys[index];
+            var currentColumn = currentKeys[index];
 
             var propertyName = newColumn.PropertyName;
             var propertyValue = newColumn.Value;
@@ -165,20 +167,20 @@ namespace LJCNetCommon
     // Dynamic binary search with key columns.
     /// <include file='Doc/LJCDataRows.xml'
     ///  path='members/LJCBinarySearch/*'/>
-    public int LJCBinarySearch(LJCDataColumns keyColumns = null)
+    public int LJCBinarySearch(LJCDataColumns keys = null)
     {
       int retIndex = -1;
 
-      if (keyColumns != null)
+      if (keys != null)
       {
-        LJCKeyColumns = keyColumns;
+        LJCKeys = keys;
       }
 
       LJCSort();
 
       while (true)
       {
-        if (!NetCommon.HasItems(_KeyColumns))
+        if (!LJC.HasItems(_Keys))
         {
           break;
         }
@@ -194,13 +196,13 @@ namespace LJCNetCommon
           var dataColumns = this[middleIndex];
 
           int compareValue = NetString.CompareGreater;
-          for (short index = 0; index < _KeyColumns.Count; index++)
+          for (short index = 0; index < _Keys.Count; index++)
           {
-            var keyColumn = _KeyColumns[index];
+            var keyColumn = _Keys[index];
             var propertyName = keyColumn.PropertyName;
             var columnValue = dataColumns.LJCGetString(propertyName);
             compareValue = LJCCompareColumn(columnValue, keyColumn);
-            if (index < _KeyColumns.Count - 1)
+            if (index < _Keys.Count - 1)
             {
               // Parent key value is not equal.
               if (compareValue != NetString.CompareEqual)
@@ -260,18 +262,18 @@ namespace LJCNetCommon
 
     // Gets or sets the key columns.
     /// <include file='Doc/LJCDataRows.xml'
-    ///  path='members/LJCKeyColumns/*'/>
-    public LJCDataColumns LJCKeyColumns
+    ///  path='members/LJCKeys/*'/>
+    public LJCDataColumns LJCKeys
     {
-      get => _KeyColumns;
+      get => _Keys;
       set
       {
-        if (IsKeyColumnsChanged(value, _KeyColumns))
+        if (IsKeyColumnsChanged(value, _Keys))
         {
           _IsPendingSort = true;
         }
         // Must be done after check for changes.
-        _KeyColumns = value;
+        _Keys = value;
 
         // New sort if count has changed.
         if (Count != _PrevCount)
@@ -281,7 +283,7 @@ namespace LJCNetCommon
         }
       }
     }
-    private LJCDataColumns _KeyColumns;
+    private LJCDataColumns _Keys;
     #endregion
 
     #region Class Data
@@ -297,7 +299,7 @@ namespace LJCNetCommon
   public class DataRowKeyComparer : IComparer<LJCDataColumns>
   {
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/ColumnNames/*'/>
+    ///  path='members/LJCPropertyNames/*'/>
     public List<string> LJCPropertyNames { get; set; }
 
     // Compares two objects.
@@ -308,7 +310,7 @@ namespace LJCNetCommon
       int retValue;
 
       // Check for null objects.
-      retValue = NetCommon.CompareNull(x, y);
+      retValue = LJC.CompareNull(x, y);
 
       while (true)
       {
@@ -324,7 +326,7 @@ namespace LJCNetCommon
         {
           var xValue = x.LJCGetString(propertyName);
           var yValue = y.LJCGetString(propertyName);
-          retValue = NetCommon.CompareNull(xValue, yValue);
+          retValue = LJC.CompareNull(xValue, yValue);
 
           // Break if one of the values is null.
           if (retValue != NetString.CompareNotNullOrEqual)
