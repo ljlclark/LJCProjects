@@ -147,7 +147,8 @@ namespace TestData
       // Test Method
       var newDataValues = LJCDataValues.LJCDeserialize();
 
-      var keys = LJC.Keys("PropertyName", "ID");
+      // Get where DataColumn property = "PropertyName", value = "ID".
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "ID");
       var dataValue = newDataValues?.LJCGetUnique(keys);
       var result = dataValue?.DataTypeName;
       var compare = "Int64";
@@ -195,7 +196,8 @@ namespace TestData
       // Test Method
       var newDataValues = new LJCDataValues(dataValues);
 
-      var keys = LJC.Keys("PropertyName", "ID");
+      // Get where DataColumn property = "PropertyName", value = "ID".
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "ID");
       var dataValue = newDataValues?.LJCGetUnique(keys);
       var result = dataValue?.DataTypeName;
       var compare = "Int64";
@@ -220,7 +222,8 @@ namespace TestData
       // Test Method
       var newDataValues = dataValues?.Clone();
 
-      var keys = LJC.Keys("PropertyName", "ID");
+      // Get where DataColumn property = "PropertyName", value = "ID".
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "ID");
       var dataValue = newDataValues?.LJCGetUnique(keys);
       var result = dataValue?.DataTypeName;
       var compare = "Int64";
@@ -322,7 +325,8 @@ namespace TestData
       // Test Method
       var newDataColumns = dataValues.LJCCreateColumns(dataColumns);
 
-      var keys = LJC.Keys("PropertyName", "Name");
+      // Get where DataColumn property = "PropertyName", value = "Name".
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "Name");
       var dataColumn = newDataColumns?.LJCGetUnique(keys);
       var result = $"{dataColumn?.Value}";
       var compare = "NameValue";
@@ -346,7 +350,8 @@ namespace TestData
 
       var newDataValues = LJCDataValues.LJCDeserialize();
 
-      var keys = LJC.Keys("PropertyName", "Name");
+      // Get where DataColumn property = "PropertyName", value = "Name".
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "Name");
       var dataValue = newDataValues?.LJCGetUnique(keys);
       var result = dataValue?.DataTypeName;
       var compare = "string";
@@ -366,7 +371,8 @@ namespace TestData
       // Test Method
       dataValues?.Add("ID", 1, "Int64");
 
-      var keys = LJC.Keys("PropertyName", "ID");
+      // Get where DataColumn property = "PropertyName", value = "ID".
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "ID");
       var dataValue = dataValues?.LJCGetUnique(keys);
       var result = dataValue?.DataTypeName;
       var compare = "Int64";
@@ -386,7 +392,8 @@ namespace TestData
       };
 
       // Test Method
-      var keys = LJC.Keys("PropertyName", "ID");
+      // Get where DataColumn property = "PropertyName", value = "ID".
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "ID");
       var dataValue = dataValues?.LJCGetUnique(keys);
 
       var result = $"{dataValue?.Value}";
@@ -407,7 +414,8 @@ namespace TestData
       };
 
       // Add the unique compare values.
-      var keys = LJC.Keys("DataTypeName", "string");
+      // Get where DataColumn property = "DataTypeName", value = "string".
+      var keys = LJC.Keys(LJCDataColumn.ColumnDataTypeName, "string");
       dataValues.LJCKeys = keys;
 
       // Test Method
@@ -691,7 +699,8 @@ namespace TestData
     {
       var methodName = "LJCKeyColumns()";
 
-      var keys = LJC.Keys("PropertyName", "ID");
+      // Get where DataColumn property = "PropertyName", value = "ID".
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "ID");
       var keyColumn = keys[0];
       var result = keyColumn.ColumnName;
       result += $", {keyColumn.Value}";

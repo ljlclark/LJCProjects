@@ -136,6 +136,8 @@ namespace LJCNetCommon
         retValue = new LJCDataColumns();
         foreach (var dataValue in this)
         {
+          // Get where DataColumn property = "PropertyName"
+          //   , value = dataValue.PropertyName.
           var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
             , dataValue.PropertyName);
           definitionColumn = dataDefinition.LJCGetUnique(keys);
@@ -592,6 +594,7 @@ namespace LJCNetCommon
     public LJCDataValue this[string propertyName]
     {
       get {
+        // Get where DataColumn property = "PropertyName", value = propertyName.
         var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
           , propertyName);
         return LJCGetUnique(keys);

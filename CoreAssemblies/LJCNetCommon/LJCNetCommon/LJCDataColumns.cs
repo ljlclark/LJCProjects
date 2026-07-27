@@ -64,6 +64,8 @@ namespace LJCNetCommon
 
           if (dataDefinition != null)
           {
+            // Get where DataColumn property = "PropertyName"
+            //   , value = propertyName.
             var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
               , propertyName);
             definitionColumn = dataDefinition.LJCGetUnique(keys);
@@ -247,6 +249,7 @@ namespace LJCNetCommon
         foreach (string propertyName in propertyNames)
         {
           var searchName = NetString.GetSearchName(propertyName);
+          // Get where DataColumn property = "PropertyName", value = searchName.
           var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
             , searchName);
           searchColumn = LJCGetUnique(keys);
@@ -402,6 +405,8 @@ namespace LJCNetCommon
     {
       if (LJC.HasItems(this))
       {
+        // Get where DataColumn property = "PropertyName"
+        //   , value = dataColumn.PropertyName.
         var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
           , dataColumn.PropertyName);
         var updateColumn = LJCGetUnique(keys);
@@ -515,6 +520,8 @@ namespace LJCNetCommon
       {
         foreach (var dataColumn in dataColumns)
         {
+          // Get where DataColumn property = "PropertyName"
+          //   , value = dataColumn.PropertyName.
           var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
             , dataColumn.PropertyName);
           var foundColumn = LJCGetUnique(keys);
@@ -532,6 +539,7 @@ namespace LJCNetCommon
     public void LJCMapNames(string columnName, string propertyName = null
       , string renameAs = null, string caption = null)
     {
+      // Get where DataColumn property = "PropertyName", value = columnName.
       var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
         , columnName);
       var dataColumn = LJCGetUnique(keys);
@@ -729,6 +737,7 @@ namespace LJCNetCommon
 
       if (NetString.HasValue(propertyName))
       {
+        // Get where DataColumn property = "PropertyName", value = propertyName.
         var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
           , propertyName);
         var dataColumn = LJCGetUnique(keys);
@@ -753,6 +762,7 @@ namespace LJCNetCommon
       if (LJC.HasItems(this)
         && NetString.HasValue(propertyName))
       {
+        // Get where DataColumn property = "PropertyName", value = propertyName.
         var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
           , propertyName);
         var dataColumn = LJCGetUnique(keys);
@@ -773,6 +783,7 @@ namespace LJCNetCommon
       if (LJC.HasItems(this)
         && NetString.HasValue(propertyName))
       {
+        // Get where DataColumn property = "PropertyName", value = propertyName.
         var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
           , propertyName);
         var dataColumn = LJCGetUnique(keys);
@@ -827,6 +838,7 @@ namespace LJCNetCommon
     {
       get
       {
+        // Get where DataColumn property = "PropertyName", value = propertyName.
         var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
           , propertyName);
         return LJCGetUnique(keys);
