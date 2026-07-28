@@ -86,9 +86,9 @@ namespace LJCNetCommon5
     // Creates and returns a clone of the object.
     /// <include path="members/Clone/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
     /// <parentGroup>dataClass</parentGroup>
-    public LJCDataColumn? Clone()
+    public LJCDataColumnX? Clone()
     {
-      LJCDataColumn retValue = MemberwiseClone() as LJCDataColumn;
+      LJCDataColumnX retValue = MemberwiseClone() as LJCDataColumnX;
       return retValue;
     }
 
@@ -431,11 +431,11 @@ namespace LJCNetCommon5
 
   // Sort and search on column name.
   /// <include path="members/DbColumnNameComparer/*" file="Doc/LJCDataColumn.xml"/>
-  public class DbColumnNameComparer : IComparer<LJCDataColumn>
+  public class DbColumnNameComparer : IComparer<LJCDataColumnX>
   {
     // Compares two objects.
     /// <include path="members/Compare/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
-    public int Compare(LJCDataColumn? x, LJCDataColumn? y)
+    public int Compare(LJCDataColumnX? x, LJCDataColumnX? y)
     {
       int retValue;
 
@@ -455,11 +455,11 @@ namespace LJCNetCommon5
 
   // Sort and search on property name.
   /// <include path="members/DbColumnPropertyComparer/*" file="Doc/LJCDataColumn.xml"/>
-  public class DbColumnPropertyComparer : IComparer<LJCDataColumn>
+  public class DbColumnPropertyComparer : IComparer<LJCDataColumnX>
   {
     // Compares two objects.
     /// <include path="members/Compare/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
-    public int Compare(LJCDataColumn? x, LJCDataColumn? y)
+    public int Compare(LJCDataColumnX? x, LJCDataColumnX? y)
     {
       int retValue;
 
@@ -479,11 +479,11 @@ namespace LJCNetCommon5
 
   // Sort and search on RenameAs value.
   /// <include path="members/DbColumnRenameAsComparer/*" file="Doc/LJCDataColumn.xml"/>
-  public class LJCDataColumnRenameAsComparer : IComparer<LJCDataColumn>
+  public class LJCDataColumnRenameAsComparer : IComparer<LJCDataColumnX>
   {
     // Compares two objects.
     /// <include path="members/Compare/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
-    public int Compare(LJCDataColumn? x, LJCDataColumn? y)
+    public int Compare(LJCDataColumnX? x, LJCDataColumnX? y)
     {
       int retValue;
 

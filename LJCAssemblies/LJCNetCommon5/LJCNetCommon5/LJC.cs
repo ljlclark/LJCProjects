@@ -21,6 +21,16 @@ namespace LJCNetCommon5
   /// <group name="dataType">DataType Names</group>
   public class LJC
   {
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='items/LJCMinSqlDate/*'/>
+    public static LJCDataColumns Keys(string propertyName, string searchValue)
+    {
+      return new LJCDataColumns()
+      {
+        { propertyName, searchValue },
+      };
+    }
+
     #region Check Values Methods
 
     // Check for missing argument of type: string with no value, null, 
