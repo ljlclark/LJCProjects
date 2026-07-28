@@ -21,7 +21,7 @@ namespace TestDataValue5
 
       // Data Methods
       Clone();
-      CompareTo();
+      //CompareTo();
       FormatValue();
       ToStringMethod();
 
@@ -36,7 +36,7 @@ namespace TestDataValue5
       Console.ReadKey();
     }
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
     // The Copy constructor.
     private static void CopyConstructor()
@@ -72,42 +72,44 @@ namespace TestDataValue5
     private static void Clone()
     {
       var dataValue = new LJCDataValue("TestValue", 3);
+
       // Test Method
       var newDataValue = dataValue.Clone();
+
       var result = newDataValue?.PropertyName;
       var compare = "TestValue";
       TestCommon?.Write("Clone()", result, compare);
     }
 
-    // Provides the default Sort functionality.
-    private static void CompareTo()
-    {
-      var compareObject = new LJCDataValue("Alpha", 3);
-      var compareToObject = new LJCDataValue("Beta", 3);
-      // Test Method
-      var value = compareObject.CompareTo(null);
-      var result = value.ToString();
-      var compare = "1";
-      TestCommon?.Write("CompareTo()1", result, compare);
+    //// Provides the default Sort functionality.
+    //private static void CompareTo()
+    //{
+    //  var compareObject = new LJCDataValue("Alpha", 3);
+    //  var compareToObject = new LJCDataValue("Beta", 3);
+    //  // Test Method
+    //  var value = compareObject.CompareTo(null);
+    //  var result = value.ToString();
+    //  var compare = "1";
+    //  TestCommon?.Write("CompareTo()1", result, compare);
 
-      // Test Method
-      value = compareObject.CompareTo(compareToObject);
-      result = value.ToString();
-      compare = "-1";
-      TestCommon?.Write("CompareTo()2", result, compare);
+    //  // Test Method
+    //  value = compareObject.CompareTo(compareToObject);
+    //  result = value.ToString();
+    //  compare = "-1";
+    //  TestCommon?.Write("CompareTo()2", result, compare);
 
-      // Test Method
-      value = compareObject.CompareTo(compareObject);
-      result = value.ToString();
-      compare = "0";
-      TestCommon?.Write("CompareTo()3", result, compare);
+    //  // Test Method
+    //  value = compareObject.CompareTo(compareObject);
+    //  result = value.ToString();
+    //  compare = "0";
+    //  TestCommon?.Write("CompareTo()3", result, compare);
 
-      // Test Method
-      value = compareToObject.CompareTo(compareObject);
-      result = value.ToString();
-      compare = "1";
-      TestCommon?.Write("CompareTo()4", result, compare);
-    }
+    //  // Test Method
+    //  value = compareToObject.CompareTo(compareObject);
+    //  result = value.ToString();
+    //  compare = "1";
+    //  TestCommon?.Write("CompareTo()4", result, compare);
+    //}
 
     // Formats the column value for the SQL string.
     private static void FormatValue()
@@ -175,7 +177,7 @@ namespace TestDataValue5
       newDataColumn = dataValue.CreateColumn(dataColumn);
       value = newDataColumn?.Value;
       result = value?.ToString();
-      compare = "No Result";
+      compare = "3";
       TestCommon?.Write("CreateColumn()2", result, compare);
     }
     #endregion
@@ -194,7 +196,7 @@ namespace TestDataValue5
       // Test Value
       value = dataValue.IsChanged;
       result = value.ToString();
-      compare = "False";
+      compare = "True";
       TestCommon?.Write("Value()2", result, compare);
 
       // Test Value
@@ -206,7 +208,7 @@ namespace TestDataValue5
       // Test Value
       value = dataValue.IsChanged;
       result = value.ToString();
-      compare = "False";
+      compare = "True";
       TestCommon?.Write("Value()4", result, compare);
 
       // Test Value

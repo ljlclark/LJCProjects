@@ -33,24 +33,7 @@ namespace TestDataColumn5
       Console.ReadKey();
     }
 
-    #region Constructor Methods
-
-    // The Copy constructor.
-    private static void CopyConstructor()
-    {
-      var dataColumn = new LJCDataColumn()
-      {
-        DataTypeName = "String",
-        IsChanged = false,
-        PropertyName = "TestValue",
-        Value = 3
-      };
-      // Test Method
-      var newDataColumn = new LJCDataValue(dataColumn);
-      var result = newDataColumn.PropertyName;
-      var compare = "TestValue";
-      TestCommon?.Write("CopyConstructor()", result, compare);
-    }
+    #region Constructor Test Methods
 
     // Initializes an object instance with the supplied values.
     private static void ParmConstructor()
@@ -64,6 +47,25 @@ namespace TestDataColumn5
       var compare = "TestValue";
       TestCommon?.Write("ParmConstructor()", result, compare);
     }
+
+    // The Copy constructor.
+    private static void CopyConstructor()
+    {
+      var dataColumn = new LJCDataColumn()
+      {
+        DataTypeName = "String",
+        IsChanged = false,
+        PropertyName = "TestValue",
+        Value = 3
+      };
+
+      // Test Method
+      var newDataColumn = new LJCDataValue(dataColumn);
+
+      var result = newDataColumn.PropertyName;
+      var compare = "TestValue";
+      TestCommon?.Write("CopyConstructor()", result, compare);
+    }
     #endregion
 
     #region Data Class Methods
@@ -75,8 +77,10 @@ namespace TestDataColumn5
       {
         Value = 3
       };
+
       // Test Method
       var newDataColumn = dataColumn.Clone();
+
       var result = newDataColumn?.PropertyName;
       var compare = "TestValue";
       TestCommon?.Write("Clone()", result, compare);

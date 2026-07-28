@@ -136,6 +136,7 @@ namespace LJCNetCommon5
         switch (dataTypeName)
         {
           case LJC.TypeBoolean:
+          case "bool":
             if (IsEqual(retValue?.ToLower(), "true"))
             {
               retValue = "1";
@@ -159,6 +160,7 @@ namespace LJCNetCommon5
             break;
 
           case LJC.TypeString:
+          case "string":
             if (retValue != null
               && retValue != "null")
             {
