@@ -33,7 +33,6 @@ namespace TestDataColumns5
       Add4();
       Clone();
       HasItems();
-      LJCAddPropertyAs();
       LJCGetColumn();
       LJCGetColumns1();
       LJCGetColumns2();
@@ -49,11 +48,8 @@ namespace TestDataColumns5
       // Search and Sort Methods
       LJCSearchColumnName();
       LJCSearchPropertyName();
-      LJCSearchRenameAs();
       LJCSortAddOrderIndex();
-      LJCSortName();
       LJCSortProperty();
-      LJCSortRenameAs();
 
       // Value Methods
       // Also in LJCDataValues
@@ -66,7 +62,7 @@ namespace TestDataColumns5
       LJCGetInt16();
       LJCGetInt32();
       LJCGetInt64();
-      LJCGetObject();
+      LJCGetValue();
       LJCGetSingle();
       LJCGetString();
       LJCSetValue();
@@ -90,8 +86,16 @@ namespace TestDataColumns5
       // Test Method
       var newDataColumns = LJCDataColumns.LJCDeserialize();
       // Check Result
-      var dataColumn = newDataColumns?.LJCSearchPropertyName("ID");
-      var result = dataColumn?.PropertyName;
+      // *** Change ***
+      //var dataColumn = newDataColumns?.LJCSearchPropertyName("ID");
+      var result = "";
+      if (newDataColumns != null)
+      {
+        // Get where DataColumn property = "PropertyName", value = "ID".
+        var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "ID");
+        var dataColumn = newDataColumns.LJCGetUnique(keys);
+        result = dataColumn?.PropertyName;
+      }
       var compare = "ID";
       TestCommon?.Write("LJCDeserialize()", result, compare);
     }
@@ -109,7 +113,7 @@ namespace TestDataColumns5
     {
       var dataObject = new { ID = 1, Name = "Name" };
       // Test Method
-      var dataColumns = LJCDataColumns.LJCObjectDataColumns(dataObject);
+      var dataColumns = LJCDataColumns.LJCObjectColumns(dataObject);
       // Check Result
       var dataColumn = dataColumns?[0];
       var result = dataColumn?.PropertyName;
@@ -167,12 +171,12 @@ namespace TestDataColumns5
         { "Name", 1 },
       };
       // Test Method
-      withCaptions.LJCSetColumnCaptions(dataColumns);
+      withCaptions.LJCSetCaptions(dataColumns);
       // Check Result
       dataColumn = dataColumns[1];
       var result = dataColumn.Caption;
       var compare = "Name Value";
-      TestCommon?.Write("LJCSetColumnCaptions()", result, compare);
+      TestCommon?.Write("LJCSetCaptions()", result, compare);
     }
 
     // Maps the column property and rename values.
@@ -184,10 +188,14 @@ namespace TestDataColumns5
         { "ID", 1, "Int64" },
       };
       // Test Method
+      // ColumnName, PropertyName?, RenameAs?, Caption?);
       dataColumns.LJCMapNames("Name", "NameProperty", "NameRename"
         , "Name Property");
       // Check Result
-      var value = dataColumns.LJCSearchColumnName("Name");
+      // Get where DataColumn property = "PropertyName"
+      // and value = "Name".
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "NameProperty");
+      var value = dataColumns.LJCGetUnique(keys);
       var result = value?.PropertyName;
       var compare = "NameProperty";
       TestCommon?.Write("LJCMapNames()1", result, compare);
@@ -239,19 +247,20 @@ namespace TestDataColumns5
     {
       var dataColumns = new LJCDataColumns();
       // Test Method
-      var dataColumn = dataColumns.Add("ID", dataTypeName: LJC.TypeInt64
-        , caption: "Primary Key");
+      // *** Change ***
+      var dataColumn = dataColumns.Add("ID", dataTypeName: LJC.TypeInt64);
       // Check Result
-      var result = dataColumn.Caption;
-      var compare = "Primary Key";
+      var result = dataColumn.DataTypeName;
+      var compare = "Int64";
       TestCommon?.Write("Add3()1", result, compare);
 
       // Test Method
-      dataColumns.Add("Name", caption: "Name Column");
+      // *** Change ***
+      dataColumns.Add("Name");
       // Check Result
       var value = dataColumns[1];
-      result = value.Caption;
-      compare = "Name Column";
+      result = value.DataTypeName;
+      compare = "string";
       TestCommon?.Write("Add3()2", result, compare);
     }
 
@@ -283,7 +292,7 @@ namespace TestDataColumns5
       // Test Method
       var newDataColumns = dataColumns.Clone();
       // Check Result
-      var value = dataColumns[1];
+      var value = newDataColumns[1];
       var result = value.PropertyName;
       var compare = "Name";
       TestCommon?.Write("Clone()", result, compare);
@@ -306,19 +315,19 @@ namespace TestDataColumns5
       TestCommon?.Write("HasItems()", result, compare);
     }
 
-    // Creates the LJCDataColumn from the supplied values and adds to the collection.
-    private static void LJCAddPropertyAs()
-    {
-      var dataColumns = new LJCDataColumns();
-      // Test Method
-      dataColumns.LJCAddPropertyAs("IDProperty", dataTypeName: LJC.TypeInt64);
-      dataColumns.LJCAddPropertyAs("NameProperty");
-      // Check Result
-      var value = dataColumns[1];
-      var result = value.PropertyName;
-      var compare = "NameProperty";
-      TestCommon?.Write("LJCAddPropertyAs()", result, compare);
-    }
+    //// Creates the LJCDataColumn from the supplied values and adds to the collection.
+    //private static void LJCAddPropertyAs()
+    //{
+    //  var dataColumns = new LJCDataColumns();
+    //  // Test Method
+    //  dataColumns.LJCAddPropertyAs("IDProperty", dataTypeName: LJC.TypeInt64);
+    //  dataColumns.LJCAddPropertyAs("NameProperty");
+    //  // Check Result
+    //  var value = dataColumns[1];
+    //  var result = value.PropertyName;
+    //  var compare = "NameProperty";
+    //  TestCommon?.Write("LJCAddPropertyAs()", result, compare);
+    //}
 
     // Returns a column by property name.
     private static void LJCGetColumn()
@@ -330,7 +339,12 @@ namespace TestDataColumns5
         { "Name", (object)"Name Value" }
       };
       // Test Method
-      var value = dataColumns.LJCGetColumn("Name");
+      // *** Change ***
+      //var value = dataColumns.LJCGetColumn("Name");
+
+      // Get where DataColumn property = "PropertyName", value = "Name".
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "Name");
+      var value = dataColumns.LJCGetUnique(keys);
       var result = value?.Value?.ToString();
       var compare = "Name Value";
       TestCommon?.Write("LJCGetColumn()", result, compare);
@@ -350,7 +364,8 @@ namespace TestDataColumns5
       {
         "Name",
       };
-      var newDataColumns = dataColumns.LJCGetColumns(propertNames);
+      // *** Change ***
+      var newDataColumns = dataColumns.LJCColumns(propertNames);
       // Check Result
       var result = newDataColumns?.Count.ToString();
       var compare = "1";
@@ -368,15 +383,17 @@ namespace TestDataColumns5
     // Configure the Grid Columns from the Data object properties.
     private static void LJCGetColumns2()
     {
-      var dataObject = new TestObject();
-      dataObject.Name = "Name Value";
+      var dataObject = new TestObject
+      {
+        Name = "Name Value"
+      };
       // Test Method
       var propertyNames = new List<string>
       {
         "Name",
       };
       // Creates columns from the data object.
-      var newDataColumns = LJCDataColumns.LJCGetColumns(dataObject
+      var newDataColumns = LJCDataColumns.LJCObjectColumnsInList(dataObject
         , propertyNames);
       // Check Result
       var result = newDataColumns?.Count.ToString();
@@ -402,7 +419,7 @@ namespace TestDataColumns5
         { "Name", (object)"Name Value" }
       };
       // Test Method
-      var names = dataColumns.LJCGetPropertyNames();
+      var names = dataColumns.LJCPropertyNames();
       // Check Result
       string result = null;
       if (LJC.HasListItems(names))
@@ -423,7 +440,7 @@ namespace TestDataColumns5
         { "Name", (object)"Name Value" }
       };
       // Test Method
-      dataColumns.LJCRemoveColumn("ID");
+      dataColumns.LJCRemove("ID");
       // Check Result
       var result = dataColumns?.Count.ToString();
       var compare = "1";
@@ -450,8 +467,16 @@ namespace TestDataColumns5
       dataColumns.LJCSerialize();
       // Check Result
       var newDataColumns = LJCDataColumns.LJCDeserialize();
-      var dataColumn = newDataColumns?.LJCGetColumn("ID");
-      var result = dataColumn?.PropertyName;
+      // *** Change ***
+      //var dataColumn = newDataColumns?.LJCGetColumn("ID");
+      var result = "";
+      if (newDataColumns != null)
+      {
+        // Get where DataColumn property = "PropertyName", value = "ID".
+        var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "ID");
+        var dataColumn = newDataColumns.LJCGetUnique(keys);
+        result = dataColumn?.PropertyName;
+      }
       var compare = "ID";
       TestCommon?.Write("LJCSerialize()", result, compare);
     }
@@ -511,13 +536,13 @@ namespace TestDataColumns5
       // ToDo: This should not be necessary.
       dataColumns.LJCClearChanged();
       // Test Method
-      var testDataColumns = dataColumns.LJCGetChanged();
+      var testDataColumns = dataColumns.LJCChanged();
       var result = testDataColumns.Count.ToString();
       var compare = "0";
       TestCommon?.Write("LJCClearChanged()1", result, compare);
 
       dataColumns.LJCSetValue("Name", "Updated");
-      testDataColumns = dataColumns.LJCGetChanged();
+      testDataColumns = dataColumns.LJCChanged();
       var dataColumn = testDataColumns[0];
       result = dataColumn.Value?.ToString();
       compare = "Updated";
@@ -525,7 +550,7 @@ namespace TestDataColumns5
 
       // Test Method
       dataColumns.LJCClearChanged();
-      testDataColumns = dataColumns.LJCGetChanged();
+      testDataColumns = dataColumns.LJCChanged();
       result = testDataColumns.Count.ToString();
       compare = "0";
       TestCommon?.Write("LJCClearChanged()3", result, compare);
@@ -543,13 +568,13 @@ namespace TestDataColumns5
       // ToDo: This should not be necessary.
       dataColumns.LJCClearChanged();
       // Test Method
-      var testDataColumns = dataColumns.LJCGetChanged();
+      var testDataColumns = dataColumns.LJCChanged();
       var result = testDataColumns.Count.ToString();
       var compare = "0";
       TestCommon?.Write("LJCGetChanged()1", result, compare);
 
       dataColumns.LJCSetValue("Name", "Updated");
-      testDataColumns = dataColumns.LJCGetChanged();
+      testDataColumns = dataColumns.LJCChanged();
       var dataColumn = testDataColumns[0];
       result = dataColumn.Value?.ToString();
       compare = "Updated";
@@ -565,11 +590,13 @@ namespace TestDataColumns5
       var dataColumns = new LJCDataColumns
       {
         { "ID", 1, LJC.TypeInt64 },
-        // Must add object cast to get the Add() value overload method.
-        { "Name", (object)"Name Value" },
+        { "Name", "Name Value" },
       };
+
       // Test Method
-      var dataColumn = dataColumns.LJCSearchPropertyName("Name");
+      // Get where DataColumn property = "ColumnName", value = "Name".
+      var keys = LJC.Keys(LJCDataColumn.ColumnColumnName, "Name");
+      var dataColumn = dataColumns.LJCGetUnique(keys);
       // Check Result
       var result = dataColumn?.ColumnName;
       var compare = "Name";
@@ -585,68 +612,49 @@ namespace TestDataColumns5
         // Must add object cast to get the Add() value overload method.
         { "Name", (object)"Name Value" },
       };
+
       // Test Method
-      var dataColumn = dataColumns.LJCSearchPropertyName("Name");
+      // Get where DataColumn property = "PropertyName", value = "Name".
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "Name");
+      var dataColumn = dataColumns.LJCGetUnique(keys);
       // Check Result
       var result = dataColumn?.PropertyName;
       var compare = "Name";
       TestCommon?.Write("LJCSearchPropertyName()", result, compare);
     }
 
-    // Finds and returns the column that contains the supplied property name.
-    private static void LJCSearchRenameAs()
-    {
-      var dataColumns = new LJCDataColumns();
-      dataColumns.Add("ID", dataTypeName: LJC.TypeInt64);
-      dataColumns.Add("Name", renameAs: "ResultName");
-      // Test Method
-      var testDataColumn = dataColumns.LJCSearchRenameAs("ResultName");
-      // Check Result
-      var result = testDataColumn?.ColumnName;
-      var compare = "Name";
-      TestCommon?.Write("LJCSearchRenameAs()", result, compare);
-    }
-
     // Sort on AddOrderIndex.
     private static void LJCSortAddOrderIndex()
     {
+      var methodName = "LJCSortAddOrderIndex()";
+
       var dataColumns = new LJCDataColumns
       {
-        // Must add object cast to get the Add() value overload method.
-        { "Name", (object)"Name Value" },
+        { "Name", "Name Value" },
         { "ID", 1, LJC.TypeInt64 },
       };
-      dataColumns.LJCSortName(new DbColumnNameComparer());
+
+      // Test Method
+      // Sort on LJCDataColumn.PropertyName.
+      var propertyName = LJCDataColumn.ColumnPropertyName;
+      var keys = LJC.Keys(propertyName, "");
+      dataColumns.LJCSort(keys);
+      // Check Result
       var testDataColumn = dataColumns[1];
       var result = testDataColumn.PropertyName;
       var compare = "Name";
-      TestCommon?.Write("LJCSortAddOrderIndex()1", result, compare);
+      TestCommon?.Write($"{methodName}1", result, compare);
 
       // Test Method
-      dataColumns.LJCSortAddOrderIndex();
+      // Sort on LJCDataColumn.PropertyName.
+      propertyName = "AddOrderIndex";
+      keys = LJC.Keys(propertyName, "");
+      dataColumns.LJCSort(keys);
       // Check Result
       testDataColumn = dataColumns[1];
       result = testDataColumn.PropertyName;
       compare = "ID";
-      TestCommon?.Write("LJCSortAddOrderIndex()2", result, compare);
-    }
-
-    // Sort on ColumnName.
-    private static void LJCSortName()
-    {
-      var dataColumns = new LJCDataColumns
-      {
-        // Must add object cast to get the Add() value overload method.
-        { "Name", (object)"Name Value" },
-        { "ID", 1, LJC.TypeInt64 },
-      };
-      // Test Method
-      dataColumns.LJCSortName(new DbColumnNameComparer());
-      // Check Result
-      var testDataColumn = dataColumns[1];
-      var result = testDataColumn.ColumnName;
-      var compare = "Name";
-      TestCommon?.Write("LJCSortName()", result, compare);
+      TestCommon?.Write($"{methodName}2", result, compare);
     }
 
     // Sort on PropertyName.
@@ -658,28 +666,22 @@ namespace TestDataColumns5
         { "Name", (object)"Name Value" },
         { "ID", 1, LJC.TypeInt64 },
       };
+
       // Test Method
-      dataColumns.LJCSortProperty(new DbColumnPropertyComparer());
+      // *** Change ***
+      //dataColumns.LJCSortProperty(new DbColumnPropertyComparer());
+      //var keys = LJC.Keys(LJCDataColumn.ColumnColumnName, "Name Value");
+
+      // Sort on LJCDataColumn.PropertyName.
+      var propertyName = LJCDataColumn.ColumnPropertyName;
+      var keys = LJC.Keys(propertyName, "");
+      dataColumns.LJCSort(keys);
+
       // Check Result
       var testDataColumn = dataColumns[1];
       var result = testDataColumn.PropertyName;
       var compare = "Name";
       TestCommon?.Write("LJCSortProperty()", result, compare);
-    }
-
-    // Sort on PropertyName.
-    private static void LJCSortRenameAs()
-    {
-      var dataColumns = new LJCDataColumns();
-      dataColumns.Add("Name", renameAs: "ResultName");
-      dataColumns.Add("ID", dataTypeName: LJC.TypeInt64);
-      // Test Method
-      dataColumns.LJCSortRenameAs(new LJCDataColumnRenameAsComparer());
-      // Check Result
-      var testDataColumn = dataColumns[1];
-      var result = testDataColumn.RenameAs;
-      var compare = "ResultName";
-      TestCommon?.Write("LJCSortRenameAs()", result, compare);
     }
     #endregion
 
@@ -690,11 +692,15 @@ namespace TestDataColumns5
     {
       var dataColumns = new LJCDataColumns
       {
-        { "TestValue", 1, LJC.TypeBoolean },
+        // PropertyName, Value, DataTypeName
+        { "TestValue", "true", LJC.TypeBoolean },
+        { "TestValue2", true, LJC.TypeBoolean },
       };
+
       // Test Method
       var value = dataColumns.LJCGetBoolean("TestValue");
-      // Check REsult
+
+      // Check Result
       var result = value.ToString();
       var compare = "True";
       TestCommon?.Write("LJCGetBoolean()", result, compare);
@@ -838,7 +844,7 @@ namespace TestDataColumns5
     }
 
     // Gets the column object value as an object.
-    private static void LJCGetObject()
+    private static void LJCGetValue()
     {
       var test = (object)3;
       var dataColumns = new LJCDataColumns()
@@ -847,11 +853,13 @@ namespace TestDataColumns5
       };
 
       // Test Method
-      var value = dataColumns.LJCGetObject("TestValue");
+      // *** c
+      //var value = dataColumns.LJCGetObject("TestValue");
+      var value = dataColumns.LJCGetValue("TestValue");
 
       var result = value?.ToString();
       var compare = "3";
-      TestCommon?.Write("LJCGetObject()", result, compare);
+      TestCommon?.Write("LJCGetValue()", result, compare);
     }
 
     // Gets the column object value as a single.

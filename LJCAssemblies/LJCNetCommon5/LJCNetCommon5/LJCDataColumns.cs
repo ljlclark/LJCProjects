@@ -16,7 +16,7 @@ namespace LJCNetCommon5
     // Deserializes from the specified XML file.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
-    public static LJCDataColumns? LJCDeserialize(string fileSpec = null)
+    public static LJCDataColumns? LJCDeserialize(string? fileSpec = null)
     {
       LJCDataColumns retValue;
 
@@ -46,7 +46,7 @@ namespace LJCNetCommon5
       LJCDataColumn definitionColumn = null;
       LJCDataColumns retValue = null;
 
-      LJCReflect reflect = new LJCReflect(dataObject);
+      var reflect = new LJCReflect(dataObject);
       List<string> propertyNames = reflect.GetPropertyNames();
 
       if (propertyNames != null)
@@ -68,7 +68,7 @@ namespace LJCNetCommon5
             definitionColumn = dataDefinition.LJCGetUnique(keys);
           }
 
-          LJCDataColumn dataColumn = new LJCDataColumn()
+          var dataColumn = new LJCDataColumn()
           {
             Caption = propertyName,
             ColumnName = propertyName,
@@ -99,7 +99,8 @@ namespace LJCNetCommon5
       , List<string>? propertyNames = null)
     {
       var retValue = LJCObjectColumns(dataObject);
-      if (propertyNames != null)
+      if (retValue != null
+        && propertyNames != null)
       {
         retValue = retValue.LJCColumns(propertyNames);
       }
@@ -113,7 +114,7 @@ namespace LJCNetCommon5
     {
       List<string> retValue = null;
 
-      LJCReflect reflect = new LJCReflect(dataObject);
+      var reflect = new LJCReflect(dataObject);
       List<string> propertyNames = reflect.GetPropertyNames();
 
       if (propertyNames != null)
@@ -150,8 +151,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if the key columns value has changed.
-    private static bool IsKeyColumnsChanged(LJCDataColumns newKeys
-      , LJCDataColumns currentKeys)
+    private static bool IsKeyColumnsChanged(LJCDataColumns? newKeys
+      , LJCDataColumns? currentKeys)
     {
       bool retValue = false;
 
@@ -172,7 +173,7 @@ namespace LJCNetCommon5
 
         if (hasNewColumns)
         {
-          if (newKeys.Count != currentKeys.Count)
+          if (newKeys!.Count != currentKeys!.Count)
           {
             retValue = true;
             break;
@@ -231,7 +232,7 @@ namespace LJCNetCommon5
     ///  path='members/Constructor/*'/>
     public LJCDataColumns()
     {
-      _Keys = [];
+      //_Keys = new LJCDataColumns();
       _PrevCount = -1;
     }
 
@@ -344,7 +345,7 @@ namespace LJCNetCommon5
     // Gets a list of property names from the collection items.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCGetPropertyNames/*'/>
-    public List<string>? LJCPropertyNames(LJCDataColumns dataColumns = null)
+    public List<string>? LJCPropertyNames(LJCDataColumns? dataColumns = null)
     {
       List<string>? retList = null;
 
@@ -400,6 +401,7 @@ namespace LJCNetCommon5
         MaxLength = maxLength,
 
         AutoIncrement = false,
+        DataTypeName = "string",
       };
       Add(retValue);
       return retValue;
@@ -428,11 +430,14 @@ namespace LJCNetCommon5
     // The column is identified by its property names and values.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='items/LJCGetUnique/*'/>
-    public LJCDataColumn? LJCGetUnique(LJCDataColumns keys = null)
+    public LJCDataColumn? LJCGetUnique(LJCDataColumns? keys = null)
     {
       LJCDataColumn retValue = null;
 
-      LJCKeys = keys;
+      if (keys != null)
+      {
+        LJCKeys = keys;
+      }
 
       if (LJC.HasListItems(LJCKeys))
       {
@@ -571,7 +576,10 @@ namespace LJCNetCommon5
       var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
         , columnName);
       var dataColumn = LJCGetUnique(keys);
-      SetMapValues(dataColumn, propertyName, renameAs, caption);
+      if (dataColumn != null)
+      {
+        SetMapValues(dataColumn, propertyName, renameAs, caption);
+      }
     }
     #endregion
 
@@ -606,10 +614,18 @@ namespace LJCNetCommon5
     {
       byte retValue = default;
 
-      var value = LJCGetString(propertyName);
-      if (value != null)
+      // *** Change ***
+      if (LJC.HasText(propertyName))
       {
-        retValue = Convert.ToByte(value);
+        //var value = LJCGetString(propertyName);
+        var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, propertyName);
+        var dataColumn = LJCGetUnique(keys);
+        if (dataColumn != null
+          && dataColumn.Value != null)
+        {
+          //retValue = Convert.ToByte(value);
+          retValue = LJC.GetByte(dataColumn.Value);
+        }
       }
       return retValue;
     }
@@ -815,7 +831,7 @@ namespace LJCNetCommon5
     // Gets or sets the key columns.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCKeyColumns/*'/>
-    public LJCDataColumns LJCKeys
+    public LJCDataColumns? LJCKeys
     {
       get => _Keys;
       set
@@ -835,7 +851,7 @@ namespace LJCNetCommon5
         }
       }
     }
-    private LJCDataColumns _Keys;
+    private LJCDataColumns? _Keys;
 
     // Returns the item with the supplied property name.
     /// <include file='Doc/LJCDataColumns.xml'
@@ -880,15 +896,15 @@ namespace LJCNetCommon5
 
       while (true)
       {
-        // End if one of the objects is null.
+        // End if one or both of the objects are null.
         if (null == LJCPropertyNames
           || retValue != LJCNetString.CompareNotNullOrEqual)
         {
           break;
         }
 
-        LJCReflect xReflect = new LJCReflect(x);
-        LJCReflect yReflect = new LJCReflect(y);
+        var xReflect = new LJCReflect(x!);
+        var yReflect = new LJCReflect(y!);
 
         // Check for null values.
         foreach (string propertyName in LJCPropertyNames)
@@ -897,7 +913,7 @@ namespace LJCNetCommon5
           var yValue = yReflect.GetString(propertyName);
           retValue = LJC.CompareNull(xValue, yValue);
 
-          // Break if one of the values is null.
+          // Break if one or both of the values are null.
           if (retValue != LJCNetString.CompareNotNullOrEqual)
           {
             break;

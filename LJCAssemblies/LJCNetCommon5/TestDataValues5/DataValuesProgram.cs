@@ -220,7 +220,10 @@ namespace TestDataValues5
       // Test Method
       var newDataColumns = dataValues.LJCCreateColumns(dataColumns);
 
-      var dataColumn = newDataColumns?.LJCGetColumn("Name");
+      // *** Change ***
+      //var dataColumn = newDataColumns?.LJCGetColumn("Name");
+      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "Name");
+      var dataColumn = dataColumns.LJCGetUnique(keys);
       var result = dataColumn?.Value?.ToString();
       var compare = "NameValue";
       TestCommon?.Write("LJCCreateColumns()", result, compare);

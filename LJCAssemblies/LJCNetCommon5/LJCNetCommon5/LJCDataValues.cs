@@ -148,7 +148,11 @@ namespace LJCNetCommon5
         {
           if (dataValue.PropertyName != null)
           {
-            var dataColumn = dataColumns.LJCSearchColumnName(dataValue.PropertyName);
+            // *** Change ***
+            //var dataColumn = dataColumns.LJCSearchPropertyName(dataValue.PropertyName);
+            var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
+              , dataValue.PropertyName);
+            var dataColumn = dataColumns.LJCGetUnique(keys);
             var newDataValue = dataValue.CreateColumn(dataColumn!);
             if (newDataValue != null)
             {

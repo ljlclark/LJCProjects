@@ -246,22 +246,24 @@ namespace LJCNetCommon5
     // Creates the Object from the arguments and adds it to the collection. (R)
     /// <include path="members/Add2/*" file="Doc/LJCDataColumns.xml"/>
     /// <parentGroup>collection</parentGroup>
-    public LJCDataColumnX Add(string columnName, int position, int maxLength)
+    public LJCDataColumnX Add(string propertyName, int position, int maxLength)
     {
       var retValue = new LJCDataColumnX()
       {
-        AutoIncrement = false,
-        ColumnName = columnName,
-        DataTypeName = LJC.TypeString,
+        PropertyName = propertyName,
+        Position = position,
         MaxLength = maxLength,
-        Position = position
+
+        AutoIncrement = false,
+        DataTypeName = LJC.TypeString,
       };
       Add(retValue);
       return retValue;
     }
 
-    // Creates the Object from the arguments and adds it to the collection.
-    /// <include path="members/Add3/*" file="Doc/LJCDataColumns.xml"/>
+    /// <summary>
+    /// Creates the Object from the arguments and adds it to the collection.
+    /// </summary>
     /// <parentGroup>collection</parentGroup>
     public LJCDataColumnX Add(string columnName, string? propertyName = null
       , string? renameAs = null, string dataTypeName = "String"

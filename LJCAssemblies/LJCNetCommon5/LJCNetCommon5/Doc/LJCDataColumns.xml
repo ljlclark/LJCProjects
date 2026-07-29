@@ -85,9 +85,8 @@
   <Add2>
     <summary>
       Creates the Object from the arguments and adds it to the collection.
-      (R)
     </summary>
-    <param name="columnName">The column name.</param>
+    <param name="propertyName">The property name.</param>
     <param name="position">The column layout position.</param>
     <param name="maxLength">The column length.</param>
     <returns>
@@ -103,23 +102,7 @@
     <summary>
       Creates the Object from the arguments and adds it to the collection.
     </summary>
-    <param name="columnName">The column name.</param>
     <param name="propertyName">The property name.</param>
-    <param name="renameAs">The rename value.</param>
-    <param name="dataTypeName">The data type name.</param>
-    <param name="caption">The caption value.</param>
-    <param name="maxLength">The column length.</param>
-    <returns>
-      The created
-      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
-      object.
-    </returns>
-  </Add3>
-  <Add4>
-    <summary>
-      Creates the Object from the arguments and adds it to the collection.
-    </summary>
-    <param name="columnName">The column name.</param>
     <param name="value">The value object.</param>
     <param name="dataTypeName">The data type name.</param>
     <param name="maxLength">The column length.</param>
@@ -134,7 +117,7 @@
         dbColumns.Add("ColumnName", (object)"Value");
       </code>
     </example>
-  </Add4>
+  </Add3>
   <LJCAddPropertyAs>
     <summary>
       Creates the
