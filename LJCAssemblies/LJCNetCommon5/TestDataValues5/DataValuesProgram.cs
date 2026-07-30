@@ -33,9 +33,6 @@ namespace TestDataValues5
       LJCCreateColumns();
       LJCGetChanged();
 
-      // Search and Sort Methods
-      LJCSearchPropertyName();
-
       // Value Methods
       // Also in LJCDataColumns
       LJCGetBoolean();
@@ -74,8 +71,15 @@ namespace TestDataValues5
       // Test Method
       var newDataValues = LJCDataValues.LJCDeserialize();
 
-      var dataValue = newDataValues?.LJCSearchPropertyName("ID");
-      var result = dataValue?.PropertyName;
+      // Check Result
+      var result = "";
+      if (newDataValues != null)
+      {
+        // Get where DataValue property = "PropertyName", value = "ID".
+        var keys = LJC.Keys("PropertyName", "ID");
+        var dataValue = newDataValues.LJCGetUnique(keys);
+        result = dataValue?.PropertyName;
+      }
       var compare = "ID";
       TestCommon?.Write("LJCDeserialize()", result, compare);
     }
@@ -95,8 +99,16 @@ namespace TestDataValues5
       // Test Method
 
       var newDataValues = new LJCDataValues(dataValues);
-      var dataValue = newDataValues?.LJCSearchPropertyName("ID");
-      var result = dataValue?.PropertyName;
+
+      // Check Result
+      var result = "";
+      if (newDataValues != null)
+      {
+        // Get where DataValue property = "PropertyName", value = "ID".
+        var keys = LJC.Keys("PropertyName", "ID");
+        var dataValue = newDataValues.LJCGetUnique(keys);
+        result = dataValue?.PropertyName;
+      }
       var compare = "ID";
       TestCommon?.Write("CopyConstructor()", result, compare);
     }
@@ -112,8 +124,15 @@ namespace TestDataValues5
       // Test Method
       dataValues?.Add("ID", 1, "Int64");
 
-      var dataValue = dataValues?.LJCSearchPropertyName("ID");
-      var result = dataValue?.DataTypeName;
+      // Check Result
+      var result = "";
+      if (dataValues != null)
+      {
+        // Get where DataValue property = "PropertyName", value = "ID".
+        var keys = LJC.Keys("PropertyName", "ID");
+        var dataValue = dataValues.LJCGetUnique(keys);
+        result = dataValue?.DataTypeName;
+      }
       var compare = "Int64";
       TestCommon?.Write("Add()", result, compare);
     }
@@ -130,8 +149,15 @@ namespace TestDataValues5
       // Test Method
       var newDataValues = dataValues?.Clone();
 
-      var dataValue = newDataValues?.LJCSearchPropertyName("ID");
-      var result = dataValue?.DataTypeName;
+      // Check Result
+      var result = "";
+      if (newDataValues != null)
+      {
+        // Get where DataValue property = "PropertyName", value = "ID".
+        var keys = LJC.Keys("PropertyName", "ID");
+        var dataValue = newDataValues.LJCGetUnique(keys);
+        result = dataValue?.DataTypeName;
+      }
       var compare = "Int64";
       TestCommon?.Write("Clone()", result, compare);
     }
@@ -165,8 +191,16 @@ namespace TestDataValues5
       dataValues.LJCSerialize();
 
       var newDataValues = LJCDataValues.LJCDeserialize();
-      var dataValue = newDataValues?.LJCSearchPropertyName("ID");
-      var result = dataValue?.DataTypeName;
+
+      // Check Result
+      var result = "";
+      if (newDataValues != null)
+      {
+        // Get where DataValue property = "PropertyName", value = "ID".
+        var keys = LJC.Keys("PropertyName", "ID");
+        var dataValue = newDataValues.LJCGetUnique(keys);
+        result = dataValue?.DataTypeName;
+      }
       var compare = "Int64";
       TestCommon?.Write("LJCSerialize()", result, compare);
     }
@@ -182,7 +216,7 @@ namespace TestDataValues5
         { "ID", 1, "Int64" },
         { "Name", "NameValue" },
       };
-      var changed = dataValues?.LJCGetChanged();
+      var changed = dataValues?.LJCChanged();
       var result = $"{changed?.Count}";
       var compare = "0";
       TestCommon?.Write("LJCClearChanged1()", result, compare);
@@ -190,7 +224,7 @@ namespace TestDataValues5
       dataValues = new LJCDataValues();
       dataValues?.Add("ID", 1, "Int64");
       dataValues?.Add("Name", "NameValue");
-      changed = dataValues?.LJCGetChanged();
+      changed = dataValues?.LJCChanged();
       result = $"{changed?.Count}";
       compare = "0";
       TestCommon?.Write("LJCClearChanged2()", result, compare);
@@ -235,26 +269,6 @@ namespace TestDataValues5
       var result = "Not Implemented";
       var compare = "";
       TestCommon?.Write("LJCGetChanged()", result, compare);
-    }
-    #endregion
-
-    #region Search and Sort Methods
-
-    // Finds and returns the object that matches the supplied values.
-    private static void LJCSearchPropertyName()
-    {
-      var dataValues = new LJCDataValues()
-      {
-        { "ID", 1, "Int64" },
-        { "Name", "NameValue" },
-      };
-
-      // Test Method
-      var dataValue = dataValues.LJCSearchPropertyName("Name");
-
-      var result = dataValue?.Value?.ToString();
-      var compare = "NameValue";
-      TestCommon?.Write("LJCSearchPropertyName()", result, compare);
     }
     #endregion
 
@@ -461,7 +475,7 @@ namespace TestDataValues5
       };
 
       // Test Method
-      var value = dataValues.LJCGetObject("TestValue");
+      var value = dataValues.LJCGetValue("TestValue");
 
       var result = value?.ToString();
       var compare = "3";

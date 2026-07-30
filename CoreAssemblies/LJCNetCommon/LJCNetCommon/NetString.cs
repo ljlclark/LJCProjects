@@ -85,7 +85,7 @@ namespace LJCNetCommon
       string retName = "";
 
       var names = Split(values, ",");
-      if (NetCommon.HasItems(names))
+      if (NetCommon.HasListItems(names))
       {
         foreach (var name in names)
         {

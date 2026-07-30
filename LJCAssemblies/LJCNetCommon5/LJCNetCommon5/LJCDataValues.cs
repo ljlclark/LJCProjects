@@ -6,21 +6,22 @@ using System.Xml.Serialization;
 namespace LJCNetCommon5
 {
   // Represents a collection of LJCDataValue objects.
-  /// <include path="members/LJCDataValues/*" file="Doc/LJCDataValues.xml"/>
+  /// <include file='Doc/LJCDataValues.xml'
+  ///  path='members/LJCDataValues/*'/>
   /// <group name="static">Static Methods</group>
   /// <group name="constructors">Constructors</group>
   /// <group name="collection">Collection Methods</group>
   /// <group name="item">Item Methods</group>
   /// <group name="search">Search and Sort Methods</group>
   /// <group name="value">Value Methods</group>
-  //[XmlRoot("LJCDataValues")]
+  [XmlRoot("LJCDataValues")]
   public class LJCDataValues : List<LJCDataValue>
   {
     #region Static Methods
 
     // Deserializes from the specified XML file.
-    /// <include path="members/LJCDeserialize/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
-    /// <parentGroup>static</parentGroup>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCDeserialize/*'/>
     public static LJCDataValues? LJCDeserialize(string? fileSpec = null)
     {
       LJCDataValues retValue;
@@ -33,19 +34,83 @@ namespace LJCNetCommon5
         as LJCDataValues;
       return retValue;
     }
+
+    // Get the minimum date value.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCMinSqlDate/*'/>
+    public static string LJCMinSqlDate()
+    {
+      return "1753/01/01 00:00:00";
+    }
+
+    // Checks if the key columns value has changed.
+    private static bool IsKeyColumnsChanged(LJCDataColumns? newKeys
+      , LJCDataColumns? currentKeys)
+    {
+      bool retValue = false;
+
+      while (true)
+      {
+        var hasNewColumns = LJC.HasListItems(newKeys);
+        var hasSortColumns = LJC.HasListItems(currentKeys);
+
+        // One value has no columns.
+        if ((!hasNewColumns
+          && hasSortColumns)
+          || hasNewColumns
+          && !hasSortColumns)
+        {
+          retValue = true;
+          break;
+        }
+
+        if (hasNewColumns)
+        {
+          if (newKeys!.Count != currentKeys!.Count)
+          {
+            retValue = true;
+            break;
+          }
+
+          for (short index = 0; index < newKeys.Count; index++)
+          {
+            var newColumn = newKeys[index];
+            var currentColumn = currentKeys[index];
+
+            var propertyName = newColumn.PropertyName;
+            var propertyValue = newColumn.Value;
+            var sortPropertyName = currentColumn.PropertyName;
+            var sortPropertyValue = currentColumn.Value;
+            if (propertyName.CompareTo(sortPropertyName) != 0
+              || !EqualityComparer<object>.Default.Equals(propertyValue
+              , sortPropertyValue))
+            {
+              retValue = true;
+              break;
+            }
+          }
+        }
+        break;
+      }
+      return retValue;
+    }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/DefaultConstructor/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     /// <parentGroup>constructors</parentGroup>
     public LJCDataValues()
     {
+      _IsPendingSort = false;
+      _PrevCount = -1;
     }
 
     // The Copy constructor.
-    /// <include path="members/CopyConstructor/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/CopyConstructor/*'/>
     /// <parentGroup>constructors</parentGroup>
     public LJCDataValues(LJCDataValues items)
     {
@@ -61,24 +126,9 @@ namespace LJCNetCommon5
 
     #region Collection Methods
 
-    // Creates the Object from the arguments and adds it to the collection.
-    /// <include path="members/Add/*" file="Doc/LJCDataValues.xml"/>
-    /// <parentGroup>collection</parentGroup>
-    public LJCDataValue Add(string propertyName, object value
-      , string dataTypeName = "String")
-    {
-      var retValue = new LJCDataValue()
-      {
-        DataTypeName = dataTypeName,
-        PropertyName = propertyName,
-        Value = value,
-      };
-      Add(retValue);
-      return retValue;
-    }
-
     // Creates and returns a clone of the object.
-    /// <include path="members/Clone/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     /// <parentGroup>collection</parentGroup>
     public LJCDataValues Clone()
     {
@@ -95,7 +145,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include path="members/HasItems2/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems/*'/>
     /// <parentGroup>collection</parentGroup>
     public bool HasItems()
     {
@@ -108,66 +159,11 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Serializes the collection
-    /// <include path="members/LJCSerialize/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
-    /// <parentGroup>collection</parentGroup>
-    public void LJCSerialize(string? fileSpec = null)
-    {
-      if (!LJC.HasText(fileSpec))
-      {
-        fileSpec = LJCDefaultFileName;
-      }
-      LJC.XmlSerialize(GetType(), this, null, fileSpec);
-    }
-    #endregion
-
-    #region Item Methods
-
-    // Sets the IsChanged value to false for all elements in the collection.
-    /// <include path="members/LJCClearChanged/*" file="Doc/LJCDataValues.xml"/>
-    /// <parentGroup>item</parentGroup>
-    public void LJCClearChanged()
-    {
-      foreach (LJCDataValue dataValue in this)
-      {
-        dataValue.IsChanged = false;
-      }
-    }
-
-    // Creates combined LJCDataColumns from LJCDataColumns and LJCDataValues.
-    /// <include path="members/LJCCreateColumns/*" file="Doc/LJCDataValues.xml"/>
-    /// <parentGroup>item</parentGroup>
-    public LJCDataColumns? LJCCreateColumns(LJCDataColumns? dataColumns)
-    {
-      LJCDataColumns retValue = null;
-
-      if (dataColumns != null)
-      {
-        retValue = [];
-        foreach (LJCDataValue dataValue in this)
-        {
-          if (dataValue.PropertyName != null)
-          {
-            // *** Change ***
-            //var dataColumn = dataColumns.LJCSearchPropertyName(dataValue.PropertyName);
-            var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
-              , dataValue.PropertyName);
-            var dataColumn = dataColumns.LJCGetUnique(keys);
-            var newDataValue = dataValue.CreateColumn(dataColumn!);
-            if (newDataValue != null)
-            {
-              retValue.Add(newDataValue);
-            }
-          }
-        }
-      }
-      return retValue;
-    }
-
     // Gets a collection of changed columns.
-    /// <include path="members/LJCGetChanged/*" file="Doc/LJCDataValues.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCChanged/*'/>
     /// <parentGroup>item</parentGroup>
-    public LJCDataValues LJCGetChanged()
+    public LJCDataValues LJCChanged()
     {
       List<LJCDataValue> dataValues;
       var retValue = new LJCDataValues();
@@ -183,40 +179,203 @@ namespace LJCNetCommon5
       }
       return retValue;
     }
+
+    // Sets the IsChanged value to false for all elements in the collection.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCClearChanged/*'/>
+    /// <parentGroup>item</parentGroup>
+    public void LJCClearChanged()
+    {
+      foreach (LJCDataValue dataValue in this)
+      {
+        dataValue.IsChanged = false;
+      }
+    }
+
+    // Creates combined LJCDataColumns from LJCDataColumns and LJCDataValues.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCCreateColumns/*'/>
+    /// <parentGroup>item</parentGroup>
+    public LJCDataColumns? LJCCreateColumns(LJCDataColumns? dataColumns)
+    {
+      LJCDataColumns retValue = null;
+
+      if (dataColumns != null)
+      {
+        retValue = [];
+        foreach (var dataValue in this)
+        {
+          if (dataValue.PropertyName != null)
+          {
+            // Get where DataColumn property = "PropertyName"
+            //   , value = dataValue.PropertyName.
+            var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
+              , dataValue.PropertyName);
+            var dataColumn = dataColumns.LJCGetUnique(keys);
+            var newDataValue = dataValue.CreateColumn(dataColumn!);
+            if (newDataValue != null)
+            {
+              retValue.Add(newDataValue);
+            }
+          }
+        }
+      }
+      return retValue;
+    }
+
+    // Gets a list of property names from the collection items.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCKeyPropertyNames/*'/>
+    public List<string>? LJCKeyPropertyNames(LJCDataColumns? dataColumns = null)
+    {
+      List<string>? retList = null;
+
+      if (!LJC.HasListItems(dataColumns))
+      {
+        dataColumns = _Keys;
+      }
+      if (LJC.HasListItems(dataColumns))
+      {
+        retList = [];
+        foreach (var dataColumn in dataColumns)
+        {
+          retList.Add(dataColumn.PropertyName);
+        }
+      }
+      return retList;
+    }
+
+    // Gets a list of property names from the collection items.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCPropertyNames/*'/>
+    public List<string>? LJCPropertyNames(LJCDataValues? dataValues = null)
+    {
+      List<string>? retList = null;
+
+      if (!LJC.HasListItems(dataValues))
+      {
+        dataValues = this;
+      }
+      if (LJC.HasListItems(dataValues))
+      {
+        retList = [];
+        foreach (var dataValue in dataValues)
+        {
+          retList.Add(dataValue.PropertyName);
+        }
+      }
+      return retList;
+    }
+
+    // Serializes the collection
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCSerialize/*'/>
+    /// <parentGroup>collection</parentGroup>
+    public void LJCSerialize(string? fileSpec = null)
+    {
+      if (!LJC.HasText(fileSpec))
+      {
+        fileSpec = LJCDefaultFileName;
+      }
+      LJC.XmlSerialize(GetType(), this, null, fileSpec);
+    }
     #endregion
 
-    #region Search and Sort Methods
+    #region Collection Data Methods
 
-    // Finds and returns the object that matches the supplied values.
-    /// <include path="members/LJCSearchPropertyName/*" file="Doc/LJCDataValues.xml"/>
-    /// <parentGroup>search</parentGroup>
-    public LJCDataValue? LJCSearchPropertyName(string propertyName)
+    // Creates the Object from the arguments and adds it to the collection.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/Add/*'/>
+    /// <parentGroup>collection</parentGroup>
+    public LJCDataValue Add(string propertyName, object value
+      , string dataTypeName = "String")
+    {
+      var retValue = new LJCDataValue()
+      {
+        PropertyName = propertyName,
+        Value = value,
+        DataTypeName = dataTypeName,
+      };
+      Add(retValue);
+      return retValue;
+    }
+
+    // Returns the column that matches the key columns.
+    // The column is identified by its property names and values.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='items/LJCGetUnique/*'/>
+    public LJCDataValue? LJCGetUnique(LJCDataColumns? keys = null)
     {
       LJCDataValue retValue = null;
 
-      if (Count != mPrevCount)
+      if (keys != null)
       {
-        mPrevCount = Count;
-        Sort();
+        LJCKeys = keys;
       }
 
-      var searchDbColumn = new LJCDataValue()
+      if (LJC.HasListItems(LJCKeys))
       {
-        PropertyName = propertyName
-      };
-      int index = BinarySearch(searchDbColumn);
-      if (index > -1)
-      {
-        retValue = this[index];
+        LJCSort();
+
+        // Create search item.
+        var dataValue = new LJCDataValue();
+        var reflect = new LJCReflect(dataValue);
+        foreach (var key in LJCKeys)
+        {
+          reflect.SetValue(key.PropertyName, key.Value);
+        }
+
+        // Create comparer.
+        DataValueKeyComparer comparer = null;
+        var propertyNames = LJCPropertyNames(LJCKeys);
+        if (propertyNames != null)
+        {
+          comparer = new DataValueKeyComparer()
+          {
+            LJCPropertyNames = propertyNames,
+          };
+        }
+
+        int index = BinarySearch(dataValue, comparer);
+        if (index > -1)
+        {
+          retValue = this[index];
+        }
       }
       return retValue;
+    }
+
+    // Sorts on the current key columns.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCSort/*'/>
+    public void LJCSort(LJCDataColumns? keys = null)
+    {
+      if (LJC.HasListItems(keys))
+      {
+        LJCKeys = keys;
+      }
+
+      if (_IsPendingSort)
+      {
+        var sortNames = LJCKeyPropertyNames(_Keys);
+        if (sortNames != null)
+        {
+          var uniqueComparer = new DataValueKeyComparer
+          {
+            LJCPropertyNames = sortNames
+          };
+          Sort(uniqueComparer);
+        }
+      }
+      _IsPendingSort = false;
     }
     #endregion
 
     #region Value Methods
 
     // Gets the column object value as a bool.
-    /// <include path="members/LJCGetBoolean/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetBoolean/*'/>
     /// <parentGroup>value</parentGroup>
     public bool LJCGetBoolean(string propertyName)
     {
@@ -239,7 +398,8 @@ namespace LJCNetCommon5
     }
 
     // Gets the column object value as a byte.
-    /// <include path="members/LJCGetByte/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetByte/*'/>
     /// <parentGroup>value</parentGroup>
     public byte LJCGetByte(string propertyName)
     {
@@ -247,7 +407,10 @@ namespace LJCNetCommon5
 
       if (LJC.HasText(propertyName))
       {
-        var dataValue = LJCSearchPropertyName(propertyName);
+        // Get where DataColumn property = "PropertyName"
+        //   , value = propertyName.
+        var keys = LJC.Keys("PropertyName", propertyName);
+        var dataValue = LJCGetUnique(keys);
         if (dataValue != null
           && dataValue.Value != null)
         {
@@ -258,14 +421,18 @@ namespace LJCNetCommon5
     }
 
     // Gets the column object value as a byte array.
-    /// <include path="members/LJCGetBytes/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file="Doc/LJCDataValues.xml"
+    /// path="members/LJCGetBytes/*"/>
     public byte[]? LJCGetBytes(string propertyName)
     {
       byte[] retValue = default;
 
       if (LJC.HasText(propertyName))
       {
-        var dataValue = LJCSearchPropertyName(propertyName);
+        // Get where DataColumn property = "PropertyName"
+        //   , value = propertyName.
+        var keys = LJC.Keys("PropertyName", propertyName);
+        var dataValue = LJCGetUnique(keys);
         if (dataValue != null
           && dataValue.Value != null)
         {
@@ -276,7 +443,8 @@ namespace LJCNetCommon5
     }
 
     // Gets the column object value as a char.
-    /// <include path="members/LJCGetChar/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetChar/*'/>
     /// <parentGroup>value</parentGroup>
     public char LJCGetChar(string propertyName)
     {
@@ -291,11 +459,12 @@ namespace LJCNetCommon5
     }
 
     // Gets the column object value as a DateTime.
-    /// <include path="members/LJCGetDbDateTime/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetDbDateTime/*'/>
     /// <parentGroup>value</parentGroup>
     public DateTime LJCGetDbDateTime(string propertyName)
     {
-      DateTime retValue = DateTime.Parse(LJCGetMinSqlDate());
+      DateTime retValue = DateTime.Parse(LJCMinSqlDate());
 
       var value = LJCGetString(propertyName);
       if (value != null)
@@ -306,7 +475,8 @@ namespace LJCNetCommon5
     }
 
     // Gets the column object value as a decimal.
-    /// <include path="members/LJCGetDecimal/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetDecimal/*'/>
     /// <parentGroup>value</parentGroup>
     public decimal LJCGetDecimal(string propertyName)
     {
@@ -321,7 +491,8 @@ namespace LJCNetCommon5
     }
 
     // Gets the column object value as a double.
-    /// <include path="members/LJCGetDouble/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetDouble/*'/>
     /// <parentGroup>value</parentGroup>
     public double LJCGetDouble(string propertyName)
     {
@@ -336,7 +507,8 @@ namespace LJCNetCommon5
     }
 
     // Gets the column object value as a short int.
-    /// <include path="members/LJCGetInt16/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetInt16/*'/>
     /// <parentGroup>value</parentGroup>
     public short LJCGetInt16(string propertyName)
     {
@@ -351,7 +523,8 @@ namespace LJCNetCommon5
     }
 
     // Gets the column object value as an int.
-    /// <include path="members/LJCGetInt32/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetInt32/*'/>
     /// <parentGroup>value</parentGroup>
     public int LJCGetInt32(string propertyName)
     {
@@ -366,7 +539,8 @@ namespace LJCNetCommon5
     }
 
     // Gets the column object value as a long int.
-    /// <include path="members/LJCGetInt64/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetInt64/*'/>
     /// <parentGroup>value</parentGroup>
     public long LJCGetInt64(string propertyName)
     {
@@ -380,32 +554,9 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Get the minimum date value.
-    /// <include path="members/LJCGetMinSqlDate/*" file="Doc/LJCDataColumns.xml"/>
-    /// <parentGroup>value</parentGroup>
-    public static string LJCGetMinSqlDate()
-    {
-      return "1753/01/01 00:00:00";
-    }
-
-    // Gets the column object value as an object.
-    /// <include path="members/LJCGetObject/*" file="Doc/LJCDataColumns.xml"/>
-    /// <parentGroup>value</parentGroup>
-    public object? LJCGetObject(string propertyName)
-    {
-      object retValue = default;
-
-      var dbValue = LJCSearchPropertyName(propertyName);
-      if (dbValue != null
-        && dbValue.Value != null)
-      {
-        retValue = dbValue.Value;
-      }
-      return retValue;
-    }
-
     // Gets the column object value as a single.
-    /// <include path="members/LJCGetSingle/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetSingle/*'/>
     /// <parentGroup>value</parentGroup>
     public float LJCGetSingle(string propertyName)
     {
@@ -420,37 +571,70 @@ namespace LJCNetCommon5
     }
 
     // Gets the string value for the column with the specified name.
-    /// <include path="members/LJCGetString/*" file="Doc/LJCDataColumns.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetString/*'/>
     /// <parentGroup>value</parentGroup>
     public string? LJCGetString(string propertyName)
     {
       string retValue = null;
 
-      if (LJC.HasText(propertyName))
+      if (LJC.HasListItems(this)
+        && LJC.HasText(propertyName))
       {
-        var dataValue = LJCSearchPropertyName(propertyName);
+        // Get where DataColumn property = "PropertyName"
+        //   , value = propertyName.
+        var keys = LJC.Keys("PropertyName", propertyName);
+        var dataValue = LJCGetUnique(keys);
         if (dataValue != null
           && dataValue.Value != null
-          && LJC.HasText(dataValue.Value.ToString()))
+          && LJC.HasText($"{dataValue.Value}"))
         {
-          retValue = dataValue.Value.ToString();
+          retValue = $"{dataValue.Value}";
+        }
+      }
+      return retValue;
+    }
+
+    // Gets the column object value as an object.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCGetValue/*'/>
+    /// <parentGroup>value</parentGroup>
+    public object? LJCGetValue(string propertyName)
+    {
+      object retValue = default;
+
+      if (LJC.HasListItems(this)
+        && LJC.HasText(propertyName))
+      {
+        // Get where DataColumn property = "PropertyName"
+        //   , value = propertyName.
+        var keys = LJC.Keys("PropertyName", propertyName);
+        var dataValue = LJCGetUnique(keys);
+        if (dataValue != null
+          && dataValue.Value != null)
+        {
+          retValue = dataValue.Value;
         }
       }
       return retValue;
     }
 
     // Sets the object value for the column with the specified name.
-    /// <include path="members/LJCSetValue/*" file="Doc/LJCDataValues.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCSetValue/*'/>
     /// <parentGroup>value</parentGroup>
     public void LJCSetValue(string propertyName, object value)
     {
       if (LJC.HasListItems(this)
         && LJC.HasText(propertyName))
       {
-        var dbValue = LJCSearchPropertyName(propertyName);
-        if (dbValue != null)
+        // Get where DataColumn property = "PropertyName"
+        //   , value = propertyName.
+        var keys = LJC.Keys("PropertyName", propertyName);
+        var dataValue = LJCGetUnique(keys);
+        if (dataValue != null)
         {
-          dbValue.Value = value;
+          dataValue.Value = value;
         }
       }
     }
@@ -459,23 +643,139 @@ namespace LJCNetCommon5
     #region Properties
 
     // Gets the Default File Name.
-    /// <include path="members/LJCDefaultFileName/*" file="Doc/LJCDataValues.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCDefaultFileName/*'/>
     public static string LJCDefaultFileName
     {
       get { return "LJCDataValues.xml"; }
     }
 
+    // Gets or sets the key columns.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCKeyColumns/*'/>
+    public LJCDataColumns? LJCKeys
+    {
+      get => _Keys;
+      set
+      {
+        if (IsKeyColumnsChanged(value, _Keys))
+        {
+          _IsPendingSort = true;
+        }
+        // Must be done after check for changes.
+        _Keys = value;
+
+        // New sort if count has changed.
+        if (Count != _PrevCount)
+        {
+          _IsPendingSort = true;
+          _PrevCount = Count;
+        }
+      }
+    }
+    private LJCDataColumns? _Keys;
+
     // The column for the specified name.
-    /// <include path="members/Item/*" file="Doc/LJCDataValues.xml"/>
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/Item/*'/>
     public LJCDataValue? this[string propertyName]
     {
-      get { return LJCSearchPropertyName(propertyName); }
+      get
+      {
+        // Get where DataColumn property = "PropertyName"
+        //   , value = propertyName.
+        var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
+          , propertyName);
+        return LJCGetUnique(keys);
+      }
     }
     #endregion
 
     #region Class Data
 
-    private int mPrevCount;
+    private bool _IsPendingSort;
+    private int _PrevCount;
     #endregion
+  }
+
+  // Sort and search on key values.
+  /// <include file='Doc/LJCDataValues.xml'
+  ///  path='members/DataValueKeyComparer/*'/>
+  public class DataValueKeyComparer : IComparer<LJCDataValue>
+  {
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/ColumnNames/*'/>
+    public List<string>? LJCPropertyNames { get; set; }
+
+    // Compares two objects.
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='items/Compare/*'/>
+    public int Compare(LJCDataValue? x, LJCDataValue? y)
+    {
+      int retValue;
+
+      // Check for null objects.
+      retValue = LJC.CompareNull(x, y);
+
+      while (true)
+      {
+        // End if one or both objects are null.
+        if (null == LJCPropertyNames
+          || retValue != LJCNetString.CompareNotNullOrEqual)
+        {
+          break;
+        }
+
+        var xReflect = new LJCReflect(x!);
+        var yReflect = new LJCReflect(y!);
+
+        // Check for null values.
+        foreach (string propertyName in LJCPropertyNames)
+        {
+          var xValue = xReflect.GetString(propertyName);
+          var yValue = yReflect.GetString(propertyName);
+          retValue = LJC.CompareNull(xValue, yValue);
+
+          // Break if one or both values are null.
+          if (retValue != LJCNetString.CompareNotNullOrEqual)
+          {
+            break;
+          }
+        }
+
+        // End if one or both values are null.
+        if (retValue != LJCNetString.CompareNotNullOrEqual)
+        {
+          break;
+        }
+
+        for (int index = 0; index < LJCPropertyNames.Count; index++)
+        {
+          var propertyName = LJCPropertyNames[index];
+          var xValue = xReflect.GetString(propertyName);
+          var yValue = yReflect.GetString(propertyName);
+
+          if (xValue != null)
+          {
+            if (index < LJCPropertyNames.Count - 1)
+            {
+              // Compare parent keys.
+              retValue = xValue.CompareTo(yValue);
+              if (retValue != LJCNetString.CompareEqual)
+              {
+                break;
+              }
+            }
+            else
+            {
+              // Compare value if parent keys are equal.
+              retValue = xValue.CompareTo(yValue);
+            }
+          }
+        }
+        break;
+      }
+      return retValue;
+    }
   }
 }

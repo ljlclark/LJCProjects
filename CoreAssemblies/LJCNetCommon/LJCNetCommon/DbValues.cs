@@ -42,7 +42,7 @@ namespace LJCNetCommon
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public DbValues(DbValues items)
     {
-      if (NetCommon.HasItems(items))
+      if (NetCommon.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -375,7 +375,7 @@ namespace LJCNetCommon
     /// <include path='items/LJCSetValue/*' file='Doc/DbValues.xml'/>
     public void LJCSetValue(string propertyName, object value)
     {
-      if (NetCommon.HasItems(this)
+      if (NetCommon.HasListItems(this)
         && NetString.HasValue(propertyName))
       {
         var dbValue = LJCSearchPropertyName(propertyName);

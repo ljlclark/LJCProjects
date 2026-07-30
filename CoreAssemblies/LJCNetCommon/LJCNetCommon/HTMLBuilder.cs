@@ -177,7 +177,7 @@ namespace LJCNetCommon
     {
       string retText = "";
 
-      if (NetCommon.HasItems(attribs))
+      if (NetCommon.HasListItems(attribs))
       {
         var hb = new HTMLBuilder(textState);
         var isFirst = true;

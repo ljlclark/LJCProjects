@@ -28,7 +28,7 @@ namespace LJCNetCommon
     ///  path='members/CopyConstructor/*'/>
     public LJCDataRows(LJCDataRows items)
     {
-      if (LJC.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -47,7 +47,7 @@ namespace LJCNetCommon
     {
       List<string> retList = null;
 
-      if (LJC.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         retList = new List<string>();
         foreach (var dataColumn in dataColumns)
@@ -75,7 +75,7 @@ namespace LJCNetCommon
         LJCKeys = keys;
       }
 
-      if (LJC.HasItems(LJCKeys))
+      if (LJC.HasListItems(LJCKeys))
       {
         var index = LJCBinarySearch();
         if (index != -1)
@@ -91,7 +91,7 @@ namespace LJCNetCommon
     ///  path='members/LJCSort/*'/>
     public void LJCSort(LJCDataColumns keys = null)
     {
-      if (LJC.HasItems(keys))
+      if (LJC.HasListItems(keys))
       {
         LJCKeys = keys;
       }
@@ -119,8 +119,8 @@ namespace LJCNetCommon
 
       while (true)
       {
-        var hasNewColumns = LJC.HasItems(newKeys);
-        var hasSortColumns = LJC.HasItems(currentKeys);
+        var hasNewColumns = LJC.HasListItems(newKeys);
+        var hasSortColumns = LJC.HasListItems(currentKeys);
 
         // One value has no columns.
         if ((!hasNewColumns
@@ -182,7 +182,7 @@ namespace LJCNetCommon
 
       while (true)
       {
-        if (!LJC.HasItems(_Keys))
+        if (!LJC.HasListItems(_Keys))
         {
           break;
         }

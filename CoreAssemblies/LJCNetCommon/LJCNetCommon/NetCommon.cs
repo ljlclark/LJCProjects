@@ -62,7 +62,7 @@ namespace LJCNetCommon
 
       if (typeof(IList) == argument.GetType())
       {
-        if (HasItems((IList)argument))
+        if (HasListItems((IList)argument))
         {
           var message = $"Missing argument {nameof(argument)}.";
           throw new ArgumentNullException(message);
@@ -184,7 +184,23 @@ namespace LJCNetCommon
 
     // Checks an IList collection for items.
     /// <include path="members/HasItems/*" file="Doc/NetCommon.xml"/>
+    [Obsolete ("Use HasListItems()")]
     public static bool HasItems(IList list)
+    {
+      bool retValue = false;
+
+      if (list != null
+        && list.Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks an IList collection for items.
+    /// <include file='Doc/NetCommon.xml'
+    ///  path='members/HasListItems/*'/>
+    public static bool HasListItems(IList list)
     {
       bool retValue = false;
 
@@ -209,6 +225,14 @@ namespace LJCNetCommon
         retValue = true;
       }
       return retValue;
+    }
+
+    // Checks if a text value exists.
+    /// <include file="Doc/NetCommon.xml"
+    ///  path="members/HasText/*"/>
+    public static bool HasText(string text)
+    {
+      return !string.IsNullOrWhiteSpace(text);
     }
 
     // Checks if two values are equal.

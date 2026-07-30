@@ -191,7 +191,7 @@ namespace LJCNetCommon
     {
       DbValues retValue = null;
 
-      if (NetCommon.HasItems(dbColumns))
+      if (NetCommon.HasListItems(dbColumns))
       {
         retValue = new DbValues();
         foreach (DbColumn dbColumn in dbColumns)
@@ -219,7 +219,7 @@ namespace LJCNetCommon
     ///  path='items/CopyConstructor/*'/>
     public DbColumns(DbColumns items)
     {
-      if (NetCommon.HasItems(items))
+      if (NetCommon.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -381,7 +381,7 @@ namespace LJCNetCommon
       DbColumn searchColumn;
       DbColumns retValue = null;
 
-      if (NetCommon.HasItems(propertyNames))
+      if (NetCommon.HasListItems(propertyNames))
       {
         retValue = new DbColumns();
         foreach (string propertyName in propertyNames)
@@ -418,7 +418,7 @@ namespace LJCNetCommon
     {
       List<string> retValue = null;
 
-      if (NetCommon.HasItems(this))
+      if (NetCommon.HasListItems(this))
       {
         retValue = new List<string>();
         foreach (DbColumn dbColumn in this)
@@ -457,7 +457,7 @@ namespace LJCNetCommon
     /// <param name="dbColumn">The DbColumn object.</param>
     public void LJCSetData(DbColumn dbColumn)
     {
-      if (NetCommon.HasItems(this))
+      if (NetCommon.HasListItems(this))
       {
         var dataColumn = LJCGetColumn(dbColumn.PropertyName);
         if (dataColumn != null)
@@ -650,7 +650,7 @@ namespace LJCNetCommon
     {
       DbColumn searchColumn;
 
-      if (NetCommon.HasItems(dbColumns))
+      if (NetCommon.HasListItems(dbColumns))
       {
         foreach (DbColumn dbColumn in dbColumns)
         {
@@ -897,7 +897,7 @@ namespace LJCNetCommon
     {
       object retValue = default;
 
-      if (NetCommon.HasItems(this)
+      if (NetCommon.HasListItems(this)
         && NetString.HasValue(propertyName))
       {
         var dataColumn = LJCGetColumn(propertyName);
@@ -914,7 +914,7 @@ namespace LJCNetCommon
     ///  path='items/LJCSetValue/*'/>
     public void LJCSetValue(string propertyName, object value)
     {
-      if (NetCommon.HasItems(this)
+      if (NetCommon.HasListItems(this)
         && NetString.HasValue(propertyName))
       {
         var dataColumn = LJCGetColumn(propertyName);
