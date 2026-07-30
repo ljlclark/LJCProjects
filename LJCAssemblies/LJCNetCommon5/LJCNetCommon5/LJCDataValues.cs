@@ -199,11 +199,7 @@ namespace LJCNetCommon5
         {
           if (dataValue.PropertyName != null)
           {
-            // Get where DataColumn property = "PropertyName"
-            //   , value = dataValue.PropertyName.
-            var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
-              , dataValue.PropertyName);
-            var dataColumn = dataColumns.LJCGetUnique(keys);
+            var dataColumn = dataColumns.LJCColumn(dataValue.PropertyName);
             var newDataValue = dataValue.CreateColumn(dataColumn!);
             if (newDataValue != null)
             {
@@ -218,18 +214,18 @@ namespace LJCNetCommon5
     // Gets a list of property names from the collection items.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCKeyPropertyNames/*'/>
-    public List<string>? LJCKeyPropertyNames(LJCDataColumns? dataColumns = null)
+    public List<string>? LJCKeyPropertyNames(LJCDataColumns? keys = null)
     {
       List<string>? retList = null;
 
-      if (!LJC.HasListItems(dataColumns))
+      if (!LJC.HasListItems(keys))
       {
-        dataColumns = _Keys;
+        keys = _Keys;
       }
-      if (LJC.HasListItems(dataColumns))
+      if (LJC.HasListItems(keys))
       {
         retList = [];
-        foreach (var dataColumn in dataColumns)
+        foreach (var dataColumn in keys)
         {
           retList.Add(dataColumn.PropertyName);
         }
@@ -271,11 +267,30 @@ namespace LJCNetCommon5
       }
       LJC.XmlSerialize(GetType(), this, null, fileSpec);
     }
+
+    // Gets a data column by property name.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/LJCValue/*'/>
+    public LJCDataValue? LJCValue(string propertyName)
+    {
+      LJCDataValue retValue = null;
+
+      if (LJC.HasListItems(this)
+        && LJC.HasText(propertyName))
+      {
+        // Get where LJCDataColumn property = "PropertyName"
+        //   , value = propertyName.
+        var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
+        , propertyName);
+        retValue = LJCGetUnique(keys);
+      }
+      return retValue;
+    }
     #endregion
 
     #region Collection Data Methods
 
-    // Creates the Object from the arguments and adds it to the collection.
+    // Creates item with Value and adds it to the collection.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/Add/*'/>
     /// <parentGroup>collection</parentGroup>
@@ -458,7 +473,7 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public decimal LJCGetDecimal(string propertyName)
     {
-      decimal retValue = 0;
+      decimal retValue = default;
 
       var value = LJCGetValue(propertyName);
       if (value != null)
@@ -474,7 +489,7 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public double LJCGetDouble(string propertyName)
     {
-      double retValue = 0;
+      double retValue = default;
 
       var value = LJCGetValue(propertyName);
       if (value != null)
@@ -490,7 +505,7 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public short LJCGetInt16(string propertyName)
     {
-      short retValue = 0;
+      short retValue = default;
 
       var value = LJCGetValue(propertyName);
       if (value != null)
@@ -506,7 +521,7 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public int LJCGetInt32(string propertyName)
     {
-      int retValue = 0;
+      int retValue = default;
 
       var value = LJCGetValue(propertyName);
       if (value != null)
@@ -522,7 +537,7 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public long LJCGetInt64(string propertyName)
     {
-      long retValue = 0;
+      long retValue = default;
 
       var value = LJCGetValue(propertyName);
       if (value != null)
@@ -538,7 +553,7 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public float LJCGetSingle(string propertyName)
     {
-      float retValue = 0;
+      float retValue = default;
 
       var value = LJCGetValue(propertyName);
       if (value != null)
@@ -572,18 +587,11 @@ namespace LJCNetCommon5
     {
       object retValue = default;
 
-      if (LJC.HasListItems(this)
-        && LJC.HasText(propertyName))
-      {
-        // Get where DataColumn property = "PropertyName"
-        //   , value = propertyName.
-        var keys = LJC.Keys("PropertyName", propertyName);
-        var dataValue = LJCGetUnique(keys);
-        if (dataValue != null
+      var dataValue = LJCValue(propertyName);
+      if (dataValue != null
           && dataValue.Value != null)
-        {
-          retValue = dataValue.Value;
-        }
+      {
+        retValue = dataValue.Value;
       }
       return retValue;
     }
@@ -594,17 +602,10 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public void LJCSetValue(string propertyName, object value)
     {
-      if (LJC.HasListItems(this)
-        && LJC.HasText(propertyName))
+      var dataValue = LJCValue(propertyName);
+      if (dataValue != null)
       {
-        // Get where DataColumn property = "PropertyName"
-        //   , value = propertyName.
-        var keys = LJC.Keys("PropertyName", propertyName);
-        var dataValue = LJCGetUnique(keys);
-        if (dataValue != null)
-        {
-          dataValue.Value = value;
-        }
+        dataValue.Value = value;
       }
     }
     #endregion
@@ -644,18 +645,14 @@ namespace LJCNetCommon5
     }
     private LJCDataColumns? _Keys;
 
-    // The column for the specified name.
+    // Gets the item with the supplied property name.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/Item/*'/>
     public LJCDataValue? this[string propertyName]
     {
       get
       {
-        // Get where DataColumn property = "PropertyName"
-        //   , value = propertyName.
-        var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
-          , propertyName);
-        return LJCGetUnique(keys);
+        return LJCValue(propertyName);
       }
     }
     #endregion
