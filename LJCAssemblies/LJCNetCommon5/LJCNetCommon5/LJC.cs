@@ -21,8 +21,10 @@ namespace LJCNetCommon5
   /// <group name="dataType">DataType Names</group>
   public class LJC
   {
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='items/LJCMinSqlDate/*'/>
+    #region Common Methods
+
+    /// <include file='Doc/LJC.xml'
+    ///  path='items/MinSqlDate/*'/>
     public static LJCDataColumns Keys(string propertyName, string searchValue)
     {
       return new LJCDataColumns()
@@ -30,6 +32,15 @@ namespace LJCNetCommon5
         { propertyName, searchValue },
       };
     }
+
+    // Get the minimum date value.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/MinSqlDate/*'/>
+    public static string MinSqlDate()
+    {
+      return "1753/01/01 00:00:00";
+    }
+    #endregion
 
     #region Check Values Methods
 
@@ -545,7 +556,6 @@ namespace LJCNetCommon5
         var type = value.GetType();
         if (typeof(byte[]) == type)
         {
-          //retValue = Convert.ToByte(value);
           var bytes = (byte[])value;
           retValue = bytes[0];
         }

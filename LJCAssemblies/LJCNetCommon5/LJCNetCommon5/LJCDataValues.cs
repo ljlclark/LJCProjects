@@ -35,14 +35,6 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Get the minimum date value.
-    /// <include file='Doc/LJCDataValues.xml'
-    ///  path='members/LJCMinSqlDate/*'/>
-    public static string LJCMinSqlDate()
-    {
-      return "1753/01/01 00:00:00";
-    }
-
     // Checks if the key columns value has changed.
     private static bool IsKeyColumnsChanged(LJCDataColumns? newKeys
       , LJCDataColumns? currentKeys)
@@ -405,17 +397,10 @@ namespace LJCNetCommon5
     {
       byte retValue = default;
 
-      if (LJC.HasText(propertyName))
+      var value = LJCGetValue(propertyName);
+      if (value != null)
       {
-        // Get where DataColumn property = "PropertyName"
-        //   , value = propertyName.
-        var keys = LJC.Keys("PropertyName", propertyName);
-        var dataValue = LJCGetUnique(keys);
-        if (dataValue != null
-          && dataValue.Value != null)
-        {
-          retValue = LJC.GetByte(dataValue.Value);
-        }
+        retValue = LJC.GetByte(value);
       }
       return retValue;
     }
@@ -427,17 +412,10 @@ namespace LJCNetCommon5
     {
       byte[] retValue = default;
 
-      if (LJC.HasText(propertyName))
+      var value = LJCGetValue(propertyName);
+      if (value != null)
       {
-        // Get where DataColumn property = "PropertyName"
-        //   , value = propertyName.
-        var keys = LJC.Keys("PropertyName", propertyName);
-        var dataValue = LJCGetUnique(keys);
-        if (dataValue != null
-          && dataValue.Value != null)
-        {
-          retValue = LJC.GetBytes(dataValue.Value);
-        }
+        retValue = LJC.GetBytes(value);
       }
       return retValue;
     }
@@ -450,10 +428,10 @@ namespace LJCNetCommon5
     {
       char retValue = default;
 
-      var value = LJCGetString(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
-        retValue = Convert.ToChar(value);
+        retValue = LJC.GetChar(value);
       }
       return retValue;
     }
@@ -464,7 +442,7 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public DateTime LJCGetDbDateTime(string propertyName)
     {
-      DateTime retValue = DateTime.Parse(LJCMinSqlDate());
+      DateTime retValue = DateTime.Parse(LJC.MinSqlDate());
 
       var value = LJCGetString(propertyName);
       if (value != null)
@@ -482,10 +460,10 @@ namespace LJCNetCommon5
     {
       decimal retValue = 0;
 
-      var value = LJCGetString(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
-        retValue = Convert.ToDecimal(value);
+        retValue = LJC.GetDecimal(value);
       }
       return retValue;
     }
@@ -498,10 +476,10 @@ namespace LJCNetCommon5
     {
       double retValue = 0;
 
-      var value = LJCGetString(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
-        retValue = Convert.ToDouble(value);
+        retValue = LJC.GetDouble(value);
       }
       return retValue;
     }
@@ -514,10 +492,10 @@ namespace LJCNetCommon5
     {
       short retValue = 0;
 
-      var value = LJCGetString(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
-        retValue = Convert.ToInt16(value);
+        retValue = LJC.GetInt16(value);
       }
       return retValue;
     }
@@ -530,10 +508,10 @@ namespace LJCNetCommon5
     {
       int retValue = 0;
 
-      var value = LJCGetString(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
-        retValue = Convert.ToInt32(value);
+        retValue = LJC.GetInt32(value);
       }
       return retValue;
     }
@@ -546,10 +524,10 @@ namespace LJCNetCommon5
     {
       long retValue = 0;
 
-      var value = LJCGetString(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
-        retValue = Convert.ToInt64(value);
+        retValue = LJC.GetInt64(value);
       }
       return retValue;
     }
@@ -562,10 +540,10 @@ namespace LJCNetCommon5
     {
       float retValue = 0;
 
-      var value = LJCGetString(propertyName);
+      var value = LJCGetValue(propertyName);
       if (value != null)
       {
-        retValue = Convert.ToSingle(value);
+        retValue = LJC.GetSingle(value);
       }
       return retValue;
     }
@@ -576,21 +554,12 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public string? LJCGetString(string propertyName)
     {
-      string retValue = null;
+      string retValue = default;
 
-      if (LJC.HasListItems(this)
-        && LJC.HasText(propertyName))
+      var value = LJCGetValue(propertyName);
+      if (value != null)
       {
-        // Get where DataColumn property = "PropertyName"
-        //   , value = propertyName.
-        var keys = LJC.Keys("PropertyName", propertyName);
-        var dataValue = LJCGetUnique(keys);
-        if (dataValue != null
-          && dataValue.Value != null
-          && LJC.HasText($"{dataValue.Value}"))
-        {
-          retValue = $"{dataValue.Value}";
-        }
+        retValue = LJC.GetString(value);
       }
       return retValue;
     }

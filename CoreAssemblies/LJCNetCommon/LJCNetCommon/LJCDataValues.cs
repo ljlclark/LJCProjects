@@ -32,14 +32,6 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Get the minimum date value.
-    /// <include file='Doc/LJCDataValues.xml'
-    ///  path='members/LJCMinSqlDate/*'/>
-    public static string LJCMinSqlDate()
-    {
-      return "1753/01/01 00:00:00";
-    }
-
     // Checks if the key columns value has changed.
     private static bool IsKeyColumnsChanged(LJCDataColumns newKeys
       , LJCDataColumns currentKeys)

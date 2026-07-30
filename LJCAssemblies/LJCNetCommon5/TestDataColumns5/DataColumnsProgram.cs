@@ -17,7 +17,6 @@ namespace TestDataColumns5
 
       // Static Methods
       LJCDeserialize();
-      LJCGetMinSqlDate();
       LJCObjectDataColumns();
       LJCObjectPropertyNames();
       DataColumnsToDataValues();
@@ -98,14 +97,6 @@ namespace TestDataColumns5
       }
       var compare = "ID";
       TestCommon?.Write("LJCDeserialize()", result, compare);
-    }
-
-    // Get the minimum date value.
-    private static void LJCGetMinSqlDate()
-    {
-      var result = LJCDataColumns.LJCMinSqlDate();
-      var compare = "1753/01/01 00:00:00";
-      TestCommon?.Write("LJCGetMinSqlDate()", result, compare);
     }
 
     // Creates LJCDataColumns from a Data Object.
