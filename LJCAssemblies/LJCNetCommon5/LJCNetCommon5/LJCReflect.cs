@@ -291,7 +291,7 @@ namespace LJCNetCommon5
             if (throwError)
             {
               var name = mType.Name;
-              var text = $"{name} Property {propertyName} was not found.";
+              var text = $"{name}: Property \"{propertyName}\" was not found.";
               throw new ArgumentException(text);
             }
           }

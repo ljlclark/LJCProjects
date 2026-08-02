@@ -1,9 +1,9 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDataColumn.cs
-using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCNetCommon
 {
@@ -59,7 +59,7 @@ namespace LJCNetCommon
       PropertyName = propertyName;
       Value = value;
       DataTypeName = dataTypeName;
-      if (NetString.HasValue(columnName))
+      if (LJC.HasText(columnName))
       {
         ColumnName = columnName;
       }
@@ -209,10 +209,10 @@ namespace LJCNetCommon
         if (_ColumnName != newValue
           && NetString.HasValue(newValue))
         {
-          _ColumnName = value.ToString().Trim();
+          _ColumnName = newValue;
 
           // Set empty property name the same as the column name.
-          if (!NetString.HasValue(_PropertyName))
+          if (!LJC.HasText(_PropertyName))
           {
             PropertyName = ColumnName;
           }
@@ -322,7 +322,8 @@ namespace LJCNetCommon
           if (value != null
             && typeof(string) == value.GetType())
           {
-            _Value = value.ToString().Trim();
+            var newValue = (string)value;
+            _Value = newValue?.Trim();
           }
 
           IsChanged = false;
@@ -408,7 +409,8 @@ namespace LJCNetCommon
           if (value != null
             && typeof(string) == value.GetType())
           {
-            _OriginalValue = value.ToString().Trim();
+            var newValue = (string)value;
+            _OriginalValue = newValue?.Trim();
           }
         }
       }
@@ -418,31 +420,31 @@ namespace LJCNetCommon
 
     #region View Join Data Properties
 
-    // Gets or sets the ID value.
+    // Gets or sets the view ID value.
     /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/ID/*'/>
     [XmlIgnore()]
     public int ID { get; set; }
 
-    // Gets or sets the Sequence value.
+    // Gets or sets the view Sequence value.
     /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/Sequence/*'/>
     [XmlIgnore()]
     public int Sequence { get; set; }
 
-    // Gets or sets the ViewData ID value.
+    // Gets or sets the view DataID value.
     /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/ViewDataID/*'/>
     [XmlIgnore()]
     public int ViewDataID { get; set; }
 
-    // Gets or sets the ViewJoin ID value.
+    // Gets or sets the view JoinID value.
     /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/ViewJoinID/*'/>
     [XmlIgnore()]
     public int ViewJoinID { get; set; }
 
-    // Gets or sets the Width value.
+    // Gets or sets the view Width value.
     /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/Width/*'/>
     [XmlIgnore()]

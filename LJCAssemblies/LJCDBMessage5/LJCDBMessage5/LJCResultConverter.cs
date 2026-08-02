@@ -6,7 +6,7 @@ using LJCNetCommon5;
 
 namespace LJCDBMessage5
 {
-  // Converts DbColumns and DbResult objects to data objects.
+  // Converts DataColumns and DbResult objects to data objects.
   /// <include path='items/ResultConverter/*' file='Doc/ResultConverter.xml'/>
   public class LJCResultConverter<TData, TList>
     where TData : class, new()
@@ -66,7 +66,7 @@ namespace LJCDBMessage5
       return retValue;
     }
 
-    // Creates a Data Object from the result DbColumns object.
+    // Creates a Data Object from the result DataColumns object.
     /// <include path='items/CreateData1/*' file='Doc/ResultConverter.xml'/>
     public TData CreateData(LJCDataColumns dataColumns)
     {

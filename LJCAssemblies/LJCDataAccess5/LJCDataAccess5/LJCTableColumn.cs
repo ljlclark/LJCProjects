@@ -34,7 +34,7 @@ namespace LJCDataAccess5
     }
 
     // Creates an LJCDataColumn object from a DataColumn object.
-    /// <include path='items/GetDbColumn/*' file='Doc/LJCTableColumn.xml'/>
+    /// <include path='items/ToDataColumn/*' file='Doc/LJCTableColumn.xml'/>
     // Note: Also in LJCDBMessage.DbResult
     public static LJCDataColumn? ToDataColumn(DataColumn? tableColumn)
     {

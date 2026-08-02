@@ -29,9 +29,6 @@ namespace TestData
 
       // Deserializes from the specified XML file.
       LJCDeserialize();
-
-      // Get the minimum date value.
-      LJCMinSqlDate();
       #endregion
 
       #region Constructor Method Calls
@@ -152,16 +149,6 @@ namespace TestData
       var dataValue = newDataValues?.LJCGetUnique(keys);
       var result = dataValue?.DataTypeName;
       var compare = "Int64";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Get the minimum date value.
-    private void LJCMinSqlDate()
-    {
-      var methodName = "LJCMinSqlDate()";
-
-      var result = LJCDataValues.LJCMinSqlDate();
-      var compare = "1753/01/01 00:00:00";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion

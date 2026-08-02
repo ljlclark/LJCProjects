@@ -3,10 +3,13 @@
 // LJCDataValue.cs
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCNetCommon
 {
-  /// <summary>Represents a data source value.</summary>
+  // Represents a data source value.
+  /// <include file='Doc/LJCDataValue.xml'
+  ///  path='members/LJCDataValue/*'/>
   public class LJCDataValue
   {
     #region Constructors
@@ -21,6 +24,7 @@ namespace LJCNetCommon
       Value = null;
 
       IsChanged = false;
+      _OriginalValue = null;
     }
 
     // Initializes an object instance with the supplied values.
@@ -40,9 +44,12 @@ namespace LJCNetCommon
     public LJCDataValue(LJCDataValue item)
     {
       DataTypeName = item.DataTypeName;
-      IsChanged = item.IsChanged;
       PropertyName = item.PropertyName;
       Value = item.Value;
+
+      // Additional Properties
+      IsChanged = item.IsChanged;
+      OriginalValue = item.OriginalValue;
     }
     #endregion
 
@@ -97,7 +104,8 @@ namespace LJCNetCommon
         Value = Value
       };
 
-      if (typeof(string) == Value.GetType())
+      if (Value != null
+        && typeof(string) == Value.GetType())
       {
         retValue.MaxLength = definitionColumn.MaxLength;
         if (0 == retValue.MaxLength)
@@ -141,7 +149,8 @@ namespace LJCNetCommon
       set
       {
         var newValue = value?.Trim();
-        if (_PropertyName != newValue)
+        if (_PropertyName != newValue
+          && LJC.HasText(newValue))
         {
           _PropertyName = newValue;
         }
@@ -159,12 +168,18 @@ namespace LJCNetCommon
       {
         if (!EqualityComparer<object>.Default.Equals(_Value, value))
         {
-          IsChanged = true;
           _Value = value;
           if (value != null
             && typeof(string) == value.GetType())
           {
-            _Value = value.ToString().Trim();
+            var newValue = (string)value;
+            _Value = newValue?.Trim();
+          }
+
+          IsChanged = false;
+          if (!EqualityComparer<object>.Default.Equals(OriginalValue, _Value))
+          {
+            IsChanged = true;
           }
         }
       }
@@ -194,7 +209,8 @@ namespace LJCNetCommon
           if (value != null
             && typeof(string) == value.GetType())
           {
-            _OriginalValue = value.ToString().Trim();
+            var newValue = (string)value;
+            _OriginalValue = newValue?.Trim();
           }
         }
       }

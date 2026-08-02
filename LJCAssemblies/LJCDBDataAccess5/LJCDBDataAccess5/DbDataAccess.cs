@@ -237,7 +237,7 @@ namespace LJCDBDataAccess5
             if (null == DBRequest.Columns
               || 0 == DBRequest.Columns.Count)
             {
-              DBRequest.Columns = CreateDbColumnsFromTable(dataTable);
+              DBRequest.Columns = CreateDataColumnsFromTable(dataTable);
             }
             retValue.SetData(dataTable, DBRequest);
           }
@@ -299,7 +299,7 @@ namespace LJCDBDataAccess5
             if (null == DBRequest.Columns
               || 0 == DBRequest.Columns.Count)
             {
-              DBRequest.Columns = CreateDbColumnsFromTable(dataTable);
+              DBRequest.Columns = CreateDataColumnsFromTable(dataTable);
             }
             retValue.SetData(dataTable, DBRequest);
           }
@@ -364,7 +364,7 @@ namespace LJCDBDataAccess5
           var dataTable = GetTableSchema(dbRequest);
           if (dataTable != null)
           {
-            retResult.Columns = CreateDbColumnsFromTable(dataTable);
+            retResult.Columns = CreateDataColumnsFromTable(dataTable);
           }
         }
       }
@@ -397,8 +397,8 @@ namespace LJCDBDataAccess5
           && LJC.HasListItems(dbRequest.Columns))
         {
           // Add TABLE_NAME if it is not already defined.
-          var dbColumn = dbRequest.Columns.LJCSearchPropertyName("TABLE_NAME");
-          if (null == dbColumn)
+          var dataColumn = dbRequest.Columns.LJCSearchPropertyName("TABLE_NAME");
+          if (null == dataColumn)
           {
             dbRequest.Columns.Add("TABLE_NAME");
           }
@@ -481,14 +481,14 @@ namespace LJCDBDataAccess5
         {
           foreach (DataColumn dataColumn in dataTable.Columns)
           {
-            var dbColumn
+            var foundDataColumn
               = dbRequest.Columns.LJCSearchPropertyName(dataColumn.ColumnName);
-            if (null == dbColumn)
+            if (null == foundDataColumn)
             {
-              var newDbColumn = CreateDbColumnFromDataColumn(dataColumn);
-              if (newDbColumn != null)
+              var newDataColumn = CreateDataColumnFromDbColumn(dataColumn);
+              if (newDataColumn != null)
               {
-                dbRequest.Columns.Add(newDbColumn);
+                dbRequest.Columns.Add(newDataColumn);
               }
             }
           }
@@ -589,20 +589,20 @@ namespace LJCDBDataAccess5
     #region Conversion Methods
 
     // Creates an LJCDataColumn object from a DataColumn object.
-    private static LJCDataColumn? CreateDbColumnFromDataColumn(DataColumn dataColumn)
+    private static LJCDataColumn? CreateDataColumnFromDbColumn(DataColumn dbColumn)
     {
       LJCDataColumn? retValue = null;
 
-      if (dataColumn != null)
+      if (dbColumn != null)
       {
         retValue = new LJCDataColumn
         {
-          AllowDBNull = dataColumn.AllowDBNull,
-          AutoIncrement = dataColumn.AutoIncrement,
-          Caption = dataColumn.Caption,
-          ColumnName = dataColumn.ColumnName,
-          DataTypeName = dataColumn.DataType.Name,
-          MaxLength = dataColumn.MaxLength
+          AllowDBNull = dbColumn.AllowDBNull,
+          AutoIncrement = dbColumn.AutoIncrement,
+          Caption = dbColumn.Caption,
+          ColumnName = dbColumn.ColumnName,
+          DataTypeName = dbColumn.DataType.Name,
+          MaxLength = dbColumn.MaxLength
         };
       }
       return retValue;
@@ -641,7 +641,7 @@ namespace LJCDBDataAccess5
     }
 
     // Creates an LJCDataColumns object from the DataTable columns.
-    private LJCDataColumns? CreateDbColumnsFromTable(DataTable? dataTable)
+    private LJCDataColumns? CreateDataColumnsFromTable(DataTable? dataTable)
     {
       LJCDataColumns? retValue = null;
 
@@ -658,12 +658,12 @@ namespace LJCDBDataAccess5
           retValue = [];
           foreach (DataColumn dataColumn in dataTable.Columns)
           {
-            var dbColumn = CreateDbColumnFromDataColumn(dataColumn);
-            if (dbColumn != null)
+            var newDataColumn = CreateDataColumnFromDbColumn(dataColumn);
+            if (newDataColumn != null)
             {
-              SetSQLTypeName(sqlTypesTable, dbColumn);
-              SetPrimaryKey(dataTable, dbColumn);
-              retValue.Add(dbColumn);
+              SetSQLTypeName(sqlTypesTable, newDataColumn);
+              SetPrimaryKey(dataTable, newDataColumn);
+              retValue.Add(newDataColumn);
             }
           }
         }

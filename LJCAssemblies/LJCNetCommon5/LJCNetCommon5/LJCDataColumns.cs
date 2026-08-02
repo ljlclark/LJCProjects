@@ -63,7 +63,7 @@ namespace LJCNetCommon5
             dataColumn.DataTypeName = type.Name;
             if (dataDefinition != null)
             {
-              var definitionColumn = dataDefinition.LJCColumn(propertyName);
+              var definitionColumn = dataDefinition[propertyName];
               if (definitionColumn != null
                 && "String" == type.Name)
               {
@@ -302,25 +302,6 @@ namespace LJCNetCommon5
       }
     }
 
-    // Gets a data column by property name.
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCColumn/*'/>
-    public LJCDataColumn? LJCColumn(string propertyName)
-    {
-      LJCDataColumn retColumn = null;
-
-      if (LJC.HasListItems(this)
-        && LJC.HasText(propertyName))
-      {
-        // Get where LJCDataColumn property = "PropertyName"
-        //   , value = propertyName.
-        var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
-        , propertyName);
-        retColumn = LJCGetUnique(keys);
-      }
-      return retColumn;
-    }
-
     // Gets a collection of items that match a list of property names.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCColumns/*'/>
@@ -334,7 +315,7 @@ namespace LJCNetCommon5
         foreach (string propertyName in propertyNames)
         {
           var searchName = LJCNetString.GetSearchName(propertyName);
-          var searchColumn = LJCColumn(propertyName);
+          var searchColumn = this[searchName];
           if (searchColumn != null)
           {
             retValue.Add(new LJCDataColumn(searchColumn));
@@ -500,8 +481,7 @@ namespace LJCNetCommon5
     ///  path='members/LJCRemove/*'/>
     public void LJCRemove(string propertyName)
     {
-      //var column = Find(x => x.PropertyName == propertyName);
-      var dataColumn = LJCColumn(propertyName);
+      var dataColumn = this[propertyName];
       if (dataColumn != null)
       {
         Remove(dataColumn);
@@ -515,7 +495,7 @@ namespace LJCNetCommon5
     {
       if (LJC.HasListItems(this))
       {
-        var updateColumn = LJCColumn(dataColumn.PropertyName);
+        var updateColumn = this[dataColumn.PropertyName];
         if (updateColumn != null)
         {
           updateColumn.AllowDBNull = dataColumn.AllowDBNull;
@@ -574,7 +554,7 @@ namespace LJCNetCommon5
       {
         foreach (var dataColumn in dataColumns)
         {
-          var foundColumn = LJCColumn(dataColumn.PropertyName);
+          var foundColumn = this[dataColumn.PropertyName];
           if (foundColumn != null)
           {
             dataColumn.Caption = foundColumn.Caption;
@@ -589,7 +569,7 @@ namespace LJCNetCommon5
     public void LJCMapNames(string columnName, string? propertyName = null
       , string? renameAs = null, string? caption = null)
     {
-      var dataColumn = LJCColumn(columnName);
+      var dataColumn = this[columnName];
       if (dataColumn != null)
       {
         SetMapValues(dataColumn, propertyName, renameAs, caption);
@@ -794,7 +774,7 @@ namespace LJCNetCommon5
     {
       object retValue = default;
 
-      var dataColumn = LJCColumn(propertyName);
+      var dataColumn = this[propertyName];
       if (dataColumn != null
         && dataColumn.Value != null)
       {
@@ -808,7 +788,7 @@ namespace LJCNetCommon5
     ///  path='members/LJCSetValue/*'/>
     public void LJCSetValue(string propertyName, object value)
     {
-      var dataColumn = LJCColumn(propertyName);
+      var dataColumn = this[propertyName];
       if (dataColumn != null)
       {
         dataColumn.Value = value;
@@ -858,7 +838,18 @@ namespace LJCNetCommon5
     {
       get
       {
-        return LJCColumn(propertyName);
+        LJCDataColumn retColumn = null;
+
+        if (LJC.HasListItems(this)
+          && LJC.HasText(propertyName))
+        {
+          // Get where LJCDataColumn property = "PropertyName"
+          //   , value = propertyName.
+          var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
+          , propertyName);
+          retColumn = LJCGetUnique(keys);
+        }
+        return retColumn;
       }
     }
     #endregion

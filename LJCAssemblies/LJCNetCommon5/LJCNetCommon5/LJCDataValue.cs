@@ -5,7 +5,9 @@ using System.Xml.Serialization;
 
 namespace LJCNetCommon5
 {
-  /// <summary>Represents a data source value.</summary>
+  // Represents a data source value.
+  /// <include file='Doc/LJCDataValue.xml'
+  ///  path='members/LJCDataValue/*'/>
   public class LJCDataValue
   {
     #region Constructor Methods
@@ -165,12 +167,10 @@ namespace LJCNetCommon5
       {
         if (!EqualityComparer<object>.Default.Equals(_Value, value))
         {
-          //IsChanged = true;
           _Value = value;
           if (value != null
             && typeof(string) == value.GetType())
           {
-            //_Value = value.ToString().Trim();
             var newValue = (string)value;
             _Value = newValue?.Trim();
           }
@@ -208,7 +208,6 @@ namespace LJCNetCommon5
           if (value != null
             && typeof(string) == value.GetType())
           {
-            //_OriginalValue = value.ToString().Trim();
             var newValue = (string)value;
             _OriginalValue = newValue?.Trim();
           }

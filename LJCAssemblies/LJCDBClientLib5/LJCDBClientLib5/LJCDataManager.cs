@@ -396,9 +396,9 @@ namespace LJCDBClientLib5
     {
       var retValue = new List<string>();
 
-      foreach (LJCDataColumn dbColumn in BaseDefinition)
+      foreach (LJCDataColumn dataColumn in BaseDefinition)
       {
-        retValue.Add(dbColumn.PropertyName);
+        retValue.Add(dataColumn.PropertyName);
       }
       return retValue;
     }
@@ -520,15 +520,13 @@ namespace LJCDBClientLib5
       DbAssignedColumns = [];
       foreach (string propertyName in propertyNames)
       {
-        // *** Next Statement *** Change - 12/26/23
-        //LJCDataColumn dbColumn = DataDefinition.LJCSearchPropertyName(propertyName);
-        LJCDataColumn? dbColumn = BaseDefinition.LJCSearchPropertyName(propertyName);
-        if (null == dbColumn)
+        LJCDataColumn? dataColumn = BaseDefinition.LJCSearchPropertyName(propertyName);
+        if (null == dataColumn)
         {
           throw new MissingMemberException($"Column '{propertyName}' was not found.");
         }
-        dbColumn.AutoIncrement = true;
-        var clone = dbColumn.Clone();
+        dataColumn.AutoIncrement = true;
+        var clone = dataColumn.Clone();
         if (clone != null)
         {
           DbAssignedColumns.Add(clone);
@@ -563,13 +561,13 @@ namespace LJCDBClientLib5
         && LJC.HasListItems(dbResult.Columns))
       {
         // Create result data records.
-        LJCDataColumns dbColumns = dbResult.Columns;
-        foreach (LJCDataColumn dbColumnNew in dbColumns)
+        LJCDataColumns dataColumns = dbResult.Columns;
+        foreach (LJCDataColumn dataColumn in dataColumns)
         {
           var dataValues = new LJCDataValues
           {
-            { "ColumnName", dbColumnNew.ColumnName },
-            { "PropertyName", dbColumnNew.ColumnName }
+            { "ColumnName", dataColumn.ColumnName },
+            { "PropertyName", dataColumn.ColumnName }
           };
           retValue.Rows.Add(dataValues);
         }

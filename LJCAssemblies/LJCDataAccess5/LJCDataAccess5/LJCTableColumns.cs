@@ -85,7 +85,8 @@ namespace LJCDataAccess5
     }
 
     // Creates a new DataColumnCollection object.
-    /// <include path='items/CreateColumns/*' file='Doc/LJCDbColumns.xml'/>
+    /// <include file='Doc/LJCTableColumns.xml'
+    ///  path='items/CreateColumns/*'/>
     public static DataColumnCollection CreateColumns()
     {
       DataColumnCollection retTableColumns;
@@ -96,7 +97,7 @@ namespace LJCDataAccess5
     }
 
     // Checks the DataColumnCollection object for items.
-    /// <include path='items/HasColumns/*' file='Doc/LJCDbColumns.xml'/>
+    /// <include path='items/HasColumns/*' file='Doc/LJCTableColumns.xml'/>
     // Note: Also in LJCDBMessage.DbResult
     public static bool HasColumns(DataColumnCollection tableColumns)
     {
@@ -110,7 +111,8 @@ namespace LJCDataAccess5
     }
 
     // Creates an LJCDataColumns collection from a DataColumnCollection.
-    /// <include path='items/ToDataColumns/*' file='Doc/LJCDbColumns.xml'/>
+    /// <include file='Doc/LJCTableColumns.xml'
+    ///  path='items/ToDataColumns/*'/>
     // Note: Also in LJCDBMessage.DbResult
     public static LJCDataColumns? ToDataColumns(DataColumnCollection tableColumns)
     {

@@ -13,9 +13,12 @@ using System.Xml.Serialization;
 namespace LJCNetCommon
 {
   // Contains common static methods.
-  /// <include path="members/NetCommon/*" file="Doc/NetCommon.xml"/>
+  /// <include file='Doc/NetCommon.xml'
+  ///  path='members/NetCommon/*'/>
   public class NetCommon
   {
+    #region Common Methods
+
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='items/LJCMinSqlDate/*'/>
     public static LJCDataColumns Keys(string propertyName, string searchValue)
@@ -25,6 +28,15 @@ namespace LJCNetCommon
         { propertyName, searchValue },
       };
     }
+
+    // Get the minimum date value.
+    /// <include file='Doc/NetCommon.xml'
+    ///  path='members/MinSqlDate/*'/>
+    public static string MinSqlDate()
+    {
+      return "1753/01/01 00:00:00";
+    }
+    #endregion
 
     #region Check Values Methods
 

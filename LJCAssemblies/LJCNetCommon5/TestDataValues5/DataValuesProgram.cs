@@ -31,7 +31,7 @@ namespace TestDataValues5
       // Item Methods
       LJCClearChanged();
       LJCCreateColumns();
-      LJCGetChanged();
+      LJCChanged();
 
       // Value Methods
       // Also in LJCDataColumns
@@ -208,6 +208,22 @@ namespace TestDataValues5
 
     #region Item Methods
 
+    // Gets a collection of changed columns.
+    private static void LJCChanged()
+    {
+      var methodName = "LJCGetChanged()";
+
+      var dataValues = new LJCDataValues()
+      {
+        { "ID", 1, "Int64" },
+        { "Name", "NameValue" },
+      };
+      var changed = dataValues?.LJCChanged();
+      var result = $"{changed?.Count}";
+      var compare = "2";
+      TestCommon?.Write($"{methodName}", result, compare);
+    }
+
     // Sets the IsChanged value to false for all elements in the collection.
     private static void LJCClearChanged()
     {
@@ -218,7 +234,7 @@ namespace TestDataValues5
       };
       var changed = dataValues?.LJCChanged();
       var result = $"{changed?.Count}";
-      var compare = "0";
+      var compare = "2";
       TestCommon?.Write("LJCClearChanged1()", result, compare);
 
       dataValues = new LJCDataValues();
@@ -226,11 +242,12 @@ namespace TestDataValues5
       dataValues?.Add("Name", "NameValue");
       changed = dataValues?.LJCChanged();
       result = $"{changed?.Count}";
-      compare = "0";
+      compare = "2";
       TestCommon?.Write("LJCClearChanged2()", result, compare);
 
       // Test Method
       dataValues?.LJCClearChanged();
+      changed = dataValues?.LJCChanged();
       result = changed?.Count.ToString();
       compare = "0";
       TestCommon?.Write("LJCClearChanged3()", result, compare);
@@ -239,6 +256,8 @@ namespace TestDataValues5
     // Creates combined LJCDataColumns from LJCDataColumns and LJCDataValues.
     private static void LJCCreateColumns()
     {
+      var methodName = "LJCCreateColumns()";
+
       var dataValues = new LJCDataValues()
       {
         { "ID", 1, "Int64" },
@@ -254,21 +273,14 @@ namespace TestDataValues5
       // Test Method
       var newDataColumns = dataValues.LJCCreateColumns(dataColumns);
 
-      // *** Change ***
-      //var dataColumn = newDataColumns?.LJCGetColumn("Name");
-      var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "Name");
-      var dataColumn = dataColumns.LJCGetUnique(keys);
+      LJCDataColumn dataColumn = null;
+      if (newDataColumns != null)
+      {
+        dataColumn = newDataColumns["Name"];
+      }
       var result = dataColumn?.Value?.ToString();
       var compare = "NameValue";
-      TestCommon?.Write("LJCCreateColumns()", result, compare);
-    }
-
-    // Gets a collection of changed columns.
-    private static void LJCGetChanged()
-    {
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon?.Write("LJCGetChanged()", result, compare);
+      TestCommon?.Write($"{methodName}", result, compare);
     }
     #endregion
 

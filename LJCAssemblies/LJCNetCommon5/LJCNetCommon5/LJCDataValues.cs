@@ -199,7 +199,7 @@ namespace LJCNetCommon5
         {
           if (dataValue.PropertyName != null)
           {
-            var dataColumn = dataColumns.LJCColumn(dataValue.PropertyName);
+            var dataColumn = dataColumns[dataValue.PropertyName];
             var newDataValue = dataValue.CreateColumn(dataColumn!);
             if (newDataValue != null)
             {
@@ -267,25 +267,6 @@ namespace LJCNetCommon5
       }
       LJC.XmlSerialize(GetType(), this, null, fileSpec);
     }
-
-    // Gets a data column by property name.
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCValue/*'/>
-    public LJCDataValue? LJCValue(string propertyName)
-    {
-      LJCDataValue retValue = null;
-
-      if (LJC.HasListItems(this)
-        && LJC.HasText(propertyName))
-      {
-        // Get where LJCDataColumn property = "PropertyName"
-        //   , value = propertyName.
-        var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
-        , propertyName);
-        retValue = LJCGetUnique(keys);
-      }
-      return retValue;
-    }
     #endregion
 
     #region Collection Data Methods
@@ -310,7 +291,7 @@ namespace LJCNetCommon5
     // Returns the column that matches the key columns.
     // The column is identified by its property names and values.
     /// <include file='Doc/LJCDataValues.xml'
-    ///  path='items/LJCGetUnique/*'/>
+    ///  path='members/LJCGetUnique/*'/>
     public LJCDataValue? LJCGetUnique(LJCDataColumns? keys = null)
     {
       LJCDataValue retValue = null;
@@ -587,7 +568,7 @@ namespace LJCNetCommon5
     {
       object retValue = default;
 
-      var dataValue = LJCValue(propertyName);
+      var dataValue = this[propertyName];
       if (dataValue != null
           && dataValue.Value != null)
       {
@@ -602,7 +583,7 @@ namespace LJCNetCommon5
     /// <parentGroup>value</parentGroup>
     public void LJCSetValue(string propertyName, object value)
     {
-      var dataValue = LJCValue(propertyName);
+      var dataValue = this[propertyName];
       if (dataValue != null)
       {
         dataValue.Value = value;
@@ -652,7 +633,18 @@ namespace LJCNetCommon5
     {
       get
       {
-        return LJCValue(propertyName);
+        LJCDataValue retValue = null;
+
+        if (LJC.HasListItems(this)
+          && LJC.HasText(propertyName))
+        {
+          // Get where LJCDataColumn property = "PropertyName"
+          //   , value = propertyName.
+          var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
+          , propertyName);
+          retValue = LJCGetUnique(keys);
+        }
+        return retValue;
       }
     }
     #endregion
@@ -675,7 +667,7 @@ namespace LJCNetCommon5
 
     // Compares two objects.
     /// <include file='Doc/LJCDataValues.xml'
-    ///  path='items/Compare/*'/>
+    ///  path='members/Compare/*'/>
     public int Compare(LJCDataValue? x, LJCDataValue? y)
     {
       int retValue;

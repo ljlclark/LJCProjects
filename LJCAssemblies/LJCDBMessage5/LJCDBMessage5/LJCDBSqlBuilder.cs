@@ -176,7 +176,7 @@ namespace LJCDBMessage5
       else
       {
         var builder = new StringBuilder(64);
-        foreach (LJCDataColumn dbColumn in dbRequest.Columns)
+        foreach (LJCDataColumn dataColumn in dbRequest.Columns)
         {
           if (0 == builder.Length)
           {
@@ -190,10 +190,10 @@ namespace LJCDBMessage5
             builder.AppendLine(", ");
           }
 
-          builder.Append($" {dbRequest.TableName}.{dbColumn.ColumnName}");
-          if (dbColumn.RenameAs != null)
+          builder.Append($" {dbRequest.TableName}.{dataColumn.ColumnName}");
+          if (dataColumn.RenameAs != null)
           {
-            builder.Append($" as {dbColumn.RenameAs}");
+            builder.Append($" as {dataColumn.RenameAs}");
           }
         }
 
@@ -431,7 +431,7 @@ namespace LJCDBMessage5
       if (LJC.HasListItems(mDbRequest.Columns))
       {
         var builder = new StringBuilder(64);
-        foreach (LJCDataColumn dbColumn in mDbRequest.Columns)
+        foreach (LJCDataColumn dataColumn in mDbRequest.Columns)
         {
           if (0 == builder.Length)
           {
@@ -444,7 +444,7 @@ namespace LJCDBMessage5
           {
             builder.AppendLine(",");
           }
-          builder.Append($" {dbColumn.FormatValue()}");
+          builder.Append($" {dataColumn.FormatValue()}");
         }
         builder.AppendLine();
 
@@ -494,20 +494,20 @@ namespace LJCDBMessage5
       if (LJC.HasListItems(keyColumns))
       {
         var builder = new StringBuilder(64);
-        foreach (LJCDataColumn dbColumn in keyColumns)
+        foreach (LJCDataColumn dataColumn in keyColumns)
         {
           // Do not include null or empty values.
-          if (null == dbColumn.Value
-            || !LJC.HasText(dbColumn.Value.ToString()))
+          if (null == dataColumn.Value
+            || !LJC.HasText(dataColumn.Value.ToString()))
           {
             continue;
           }
 
-          string? value = dbColumn.FormatValue();
-          bool isZero = "0" == dbColumn.Value.ToString();
+          string? value = dataColumn.FormatValue();
+          bool isZero = "0" == dataColumn.Value.ToString();
 
           // Do not include AutoIncrement if the value is "0".
-          if (dbColumn.AutoIncrement && isZero)
+          if (dataColumn.AutoIncrement && isZero)
           {
             continue;
           }
@@ -526,7 +526,7 @@ namespace LJCDBMessage5
           if (LJC.HasText(mDbRequest.TableName))
           {
             string tableName = mDbRequest.TableName;
-            string columnName = dbColumn.ColumnName;
+            string columnName = dataColumn.ColumnName;
             if (columnName.IndexOf('.') > -1)
             {
               string[] values = columnName.Split('.');
@@ -542,10 +542,10 @@ namespace LJCDBMessage5
 
             // Create the "is null" condition.
             bool isNull = false;
-            if (dbColumn.DataTypeName != "String"
-              && dbColumn.DataTypeName != "Boolean")
+            if (dataColumn.DataTypeName != "String"
+              && dataColumn.DataTypeName != "Boolean")
             {
-              if (dbColumn.AllowDBNull && isZero)
+              if (dataColumn.AllowDBNull && isZero)
               {
                 isNull = true;
               }
@@ -620,13 +620,13 @@ namespace LJCDBMessage5
       if (LJC.HasListItems(mDbRequest.Columns))
       {
         var builder = new StringBuilder(64);
-        foreach (LJCDataColumn dbColumn in mDbRequest.Columns)
+        foreach (LJCDataColumn dataColumn in mDbRequest.Columns)
         {
           if (builder.Length > 0)
           {
             builder.AppendLine(",");
           }
-          builder.Append($" {dbColumn.ColumnName} = {dbColumn.FormatValue()}");
+          builder.Append($" {dataColumn.ColumnName} = {dataColumn.FormatValue()}");
         }
         builder.AppendLine();
         retValue = builder.ToString();

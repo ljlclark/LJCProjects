@@ -16,48 +16,48 @@ namespace LJCDBMessage5
     #region TableData Static Methods?
 
     /// <summary>
-    /// Creates a DbColumn object from a DataColumn object. 
+    /// Creates a DataColumn object from a ADO Column object. 
     /// </summary>
-    /// <param name="dataColumn">The DataColumn reference.</param>
-    /// <returns>The DbColumn Object.</returns>
+    /// <param name="adoColumn">The DataColumn reference.</param>
+    /// <returns>The DataColumn Object.</returns>
     // Note: Also in LJCGridDataLib.TableData
-    public static LJCDataColumn GetDbColumn(DataColumn dataColumn)
+    public static LJCDataColumn GetDataColumn(DataColumn adoColumn)
     {
       LJCDataColumn retValue;
 
       retValue = new LJCDataColumn()
       {
-        AllowDBNull = dataColumn.AllowDBNull,
-        AutoIncrement = dataColumn.AutoIncrement,
-        Caption = dataColumn.ColumnName,
-        ColumnName = dataColumn.ColumnName,
-        DataTypeName = dataColumn.DataType.Name,
-        MaxLength = dataColumn.MaxLength,
-        PropertyName = dataColumn.ColumnName,
-        Unique = dataColumn.Unique
+        AllowDBNull = adoColumn.AllowDBNull,
+        AutoIncrement = adoColumn.AutoIncrement,
+        Caption = adoColumn.ColumnName,
+        ColumnName = adoColumn.ColumnName,
+        DataTypeName = adoColumn.DataType.Name,
+        MaxLength = adoColumn.MaxLength,
+        PropertyName = adoColumn.ColumnName,
+        Unique = adoColumn.Unique
       };
       return retValue;
     }
 
     /// <summary>
-    /// Creates a DbColumns collection from a DataColumns collection.
+    /// Creates a DataColumns collection from an ADO Columns collection.
     /// </summary>
-    /// <param name="dataColumns">The DataColumnCollection reference.</param>
-    /// <returns>The DbColumns object.</returns>
+    /// <param name="adoColumns">The DataColumnCollection reference.</param>
+    /// <returns>The LJCDataColumns object.</returns>
     // Note: Also in LJCGridDataLib.TableData
-    public static LJCDataColumns? GetDbColumns(DataColumnCollection dataColumns)
+    public static LJCDataColumns? GetDataColumns(DataColumnCollection adoColumns)
     {
       LJCDataColumns? retValue = null;
 
       //if (HasColumns(dataColumns))
-      if (LJC.HasTableColumns(dataColumns))
+      if (LJC.HasTableColumns(adoColumns))
       {
         //retValue = new LJCDataColumns();
         retValue = [];
-        foreach (DataColumn dataColumn in dataColumns)
+        foreach (DataColumn adoColumn in adoColumns)
         {
-          LJCDataColumn dbColumn = GetDbColumn(dataColumn);
-          retValue.Add(dbColumn);
+          LJCDataColumn dataColumn = GetDataColumn(adoColumn);
+          retValue.Add(dataColumn);
         }
       }
       return retValue;
@@ -83,27 +83,27 @@ namespace LJCDBMessage5
 
     #region Static Methods
 
-    // Creates combined DbColumns from DbColumns and DbValues.
+    // Creates combined DataColumns from DataColumns and DataValues.
     /// <summary>
-    /// Creates combined DbColumns from result DbColumns and DbValues.
+    /// Creates combined DataColumns from result DataColumns and DataValues.
     /// </summary>
     /// <param name="dbResult">The DbResult object.</param>
-    /// <returns>The DbColumns collection.</returns>
+    /// <returns>The LJCDataColumns collection.</returns>
     public static LJCDataColumns? CreateResultColumns(LJCDBResult dbResult)
     {
       LJCDataColumn? findColumn;
       LJCDataColumns? retValue = null;
 
-      var columns = dbResult.Columns;
-      var values = dbResult.Rows[0].Values;
-      if (LJC.HasListItems(columns)
-        && LJC.HasListItems(values))
+      var dataColumns = dbResult.Columns;
+      var dataValues = dbResult.Rows[0].Values;
+      if (LJC.HasListItems(dataColumns)
+        && LJC.HasListItems(dataValues))
       {
         //retValue = new LJCDataColumns();
         retValue = [];
-        foreach (LJCDataValue value in values)
+        foreach (LJCDataValue dataValue in dataValues)
         {
-          findColumn = columns.LJCSearchPropertyName(value.PropertyName);
+          findColumn = dataColumns.LJCSearchPropertyName(dataValue.PropertyName);
           if (findColumn != null)
           {
             var dataColumn = new LJCDataColumn()
@@ -115,7 +115,7 @@ namespace LJCDBMessage5
               DataTypeName = findColumn.DataTypeName,
               MaxLength = findColumn.MaxLength,
               PropertyName = findColumn.PropertyName,
-              Value = value.Value
+              Value = dataValue.Value
             };
             if (0 == dataColumn.MaxLength)
             {
@@ -383,7 +383,7 @@ namespace LJCDBMessage5
 
     #region Public Methods
 
-    // Get DbColumns from result records.
+    // Get DataColumns from result records.
     /// <include path='items/GetValueColumns/*' file='Doc/DbResult.xml'/>
     public LJCDataColumns? GetValueColumns(LJCDataValues? dataValues = null)
     {
@@ -418,9 +418,9 @@ namespace LJCDBMessage5
         {
           if (LJC.HasListItems(dbJoin.Columns))
           {
-            foreach (LJCDataColumn dbColumn in dbJoin.Columns)
+            foreach (LJCDataColumn dataColumn in dbJoin.Columns)
             {
-              Columns.Add(dbColumn);
+              Columns.Add(dataColumn);
             }
           }
         }
@@ -458,7 +458,7 @@ namespace LJCDBMessage5
     {
       if (LJC.HasTableData(dataTable))
       {
-        var dataColumns = GetDbColumns(dataTable.Columns);
+        var dataColumns = GetDataColumns(dataTable.Columns);
         if (dataColumns != null)
         {
           foreach (DataRow dataRow in dataTable.Rows)
