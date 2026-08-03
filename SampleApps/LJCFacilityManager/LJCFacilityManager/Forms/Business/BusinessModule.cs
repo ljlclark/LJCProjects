@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // BusinessModule.cs
 using System;
@@ -12,6 +12,7 @@ using LJCNetCommon;
 using LJCDBMessage;
 using LJCDBClientLib;
 using LJCFacilityManagerDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCFacilityManager
 {
@@ -61,7 +62,7 @@ namespace LJCFacilityManager
 			businessManager.SetOrderByName();
 			records = businessManager.Load(joins: dbJoins);
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (Business record in records)
 				{
@@ -157,7 +158,7 @@ namespace LJCFacilityManager
 					personManager.SetOrderByFirstLast();
 					records = personManager.Load(joins: dbJoins, filters: dbFilters);
 
-					if (NetCommon.HasItems(records))
+					if (LJC.HasListItems(records))
 					{
 						foreach (Person record in records)
 						{
@@ -239,12 +240,12 @@ namespace LJCFacilityManager
 			BusinessPersons list;
 			string retValue = null;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ BusinessPerson.ColumnBusinessID, businessID }
 			};
 			list = Managers.BusinessPersonManager.Load(keyColumns);
-			if (NetCommon.HasItems(list))
+			if (LJC.HasListItems(list))
 			{
 				builder = new StringBuilder(64);
 				foreach (BusinessPerson record in list)
@@ -291,7 +292,7 @@ namespace LJCFacilityManager
 					var dbFilters = addressManager.GetLoadFilters("ID", inValues);
 					records = addressManager.Load(filters: dbFilters);
 
-					if (NetCommon.HasItems(records))
+					if (LJC.HasListItems(records))
 					{
 						foreach (Address record in records)
 						{
@@ -373,12 +374,12 @@ namespace LJCFacilityManager
 			BusinessAddresses list;
 			string retValue = null;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ BusinessAddress.ColumnBusinessID, businessID }
 			};
 			list = Managers.BusinessAddressManager.Load(keyColumns);
-			if (NetCommon.HasItems(list))
+			if (LJC.HasListItems(list))
 			{
 				builder = new StringBuilder(64);
 				foreach (BusinessAddress record in list)
@@ -482,7 +483,7 @@ namespace LJCFacilityManager
 					// Data from list items.
 					int id = row.LJCGetInt32(Business.ColumnID);
 
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ Business.ColumnID, id }
 					};
@@ -650,7 +651,7 @@ namespace LJCFacilityManager
 				if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
 					, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ BusinessPerson.ColumnBusinessID
 							, parentRow.LJCGetInt32(Business.ColumnID) },
@@ -836,7 +837,7 @@ namespace LJCFacilityManager
 				if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
 					, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ BusinessAddress.ColumnBusinessID
 							, parentRow.LJCGetInt32(Business.ColumnID) },

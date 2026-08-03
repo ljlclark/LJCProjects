@@ -106,7 +106,7 @@ namespace LJCTransformManager
 				//LayoutGrid.LJCRestoreColumnValues(ControlValues);
 			}
 		}
-		private DbColumns mGridColumnsLayout;
+		private LJCDataColumns mGridColumnsLayout;
 
 		// Setup the grid columns.
 		private void SetupGridLayoutColumn()
@@ -129,7 +129,7 @@ namespace LJCTransformManager
 				LayoutColumnGrid.LJCRestoreColumnValues(ControlValues);
 			}
 		}
-		private DbColumns mGridColumnsLayoutColumn;
+		private LJCDataColumns mGridColumnsLayoutColumn;
 
 		// Saves the control values. 
 		private void SaveControlValues()

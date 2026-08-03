@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // EquipmentGridCode.cs
 using System;
@@ -8,6 +8,7 @@ using LJCFacilityManagerDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCFacilityManager
 {
@@ -39,7 +40,7 @@ namespace LJCFacilityManager
 			DbJoins dbJoins = equipmentManager.GetLoadJoins();
 			records = equipmentManager.Load(joins: dbJoins);
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (Equipment record in records)
 				{
@@ -186,7 +187,7 @@ namespace LJCFacilityManager
 					// Data from list items.
 					int id = row.LJCGetInt32(Equipment.ColumnID);
 
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ Equipment.ColumnID, id }
 					};

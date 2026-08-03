@@ -153,7 +153,7 @@ namespace LJCFacilityManager
 				};
 
 				// Get the grid columns from the manager Data Definition.
-				DbColumns columns = Managers.FacilityDbManager.GetColumns(propertyNames);
+				LJCDataColumns columns = Managers.FacilityDbManager.GetColumns(propertyNames);
 
 				// Setup the grid columns.
 				FacilityGrid.LJCAddColumns(columns);
@@ -177,7 +177,7 @@ namespace LJCFacilityManager
 				};
 
 				// Get the grid columns from the manager Data Definition.
-				DbColumns gridColumns = Managers.UnitManager.GetColumns(propertyNames);
+				LJCDataColumns gridColumns = Managers.UnitManager.GetColumns(propertyNames);
 
 				// Setup the grid columns.
 				UnitGrid.LJCAddColumns(gridColumns);

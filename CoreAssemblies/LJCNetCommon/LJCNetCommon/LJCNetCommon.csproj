@@ -60,10 +60,6 @@
     <Compile Include="LJCDataColumns.cs" />
     <Compile Include="LJCDataValue.cs" />
     <Compile Include="LJCDataColumn.cs" />
-    <Compile Include="DbColumn.cs" />
-    <Compile Include="DbColumns.cs" />
-    <Compile Include="DbValue.cs" />
-    <Compile Include="DbValues.cs" />
     <Compile Include="HTMLBuilder.cs" />
     <Compile Include="KeyItem.cs" />
     <Compile Include="KeyItems.cs" />

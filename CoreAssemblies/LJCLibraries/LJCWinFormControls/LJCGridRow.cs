@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCGridRow.cs
 using LJCNetCommon;
@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCWinFormControls
 {
@@ -31,11 +32,11 @@ namespace LJCWinFormControls
 
     #region SetValues Methods
 
-    // Updates a grid row with DbValues.
+    // Updates a grid row with LJCDataValues.
     /// <include path='items/LJCRowSetValues2/*' file='Doc/LJCGridRow.xml'/>
-    public void LJCSetValues(DataGridView grid, DbValues dbValues)
+    public void LJCSetValues(DataGridView grid, LJCDataValues dbValues)
     {
-      if (NetCommon.HasItems(dbValues))
+      if (LJC.HasListItems(dbValues))
       {
         List<object> listValues = new List<object>();
         foreach (DataGridViewColumn gridColumn in grid.Columns)

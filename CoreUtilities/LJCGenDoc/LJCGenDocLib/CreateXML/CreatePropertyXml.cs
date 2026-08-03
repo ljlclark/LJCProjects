@@ -1,10 +1,11 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CreatePropertyXml.cs
 using System;
 using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
+using LJC = LJCNetCommon.NetCommon;
 using Section = LJCGenTextLib.Section;
 
 namespace LJCGenDocLib
@@ -145,7 +146,7 @@ namespace LJCGenDocLib
       DataRemark remark = DataProperty.Remark;
 
       if (remark != null
-        && NetCommon.HasItems(remark.Paras))
+        && LJC.HasListItems(remark.Paras))
       {
         bool showGroups = true;
         foreach (DataPara para in remark.Paras)

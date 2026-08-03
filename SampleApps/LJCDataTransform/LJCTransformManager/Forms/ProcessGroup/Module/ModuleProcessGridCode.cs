@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ModuleProcessGridCode.cs
 using System;
@@ -7,6 +7,7 @@ using LJCWinFormControls;
 using LJCDataTransformDAL;
 using LJCWinFormCommon;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -43,7 +44,7 @@ namespace LJCTransformManager
 				var dataProcessManager = mManagers.DataProcessManager;
 				records = dataProcessManager.LoadWithGroupID(parentID);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (DataProcess record in records)
 					{
@@ -255,7 +256,7 @@ namespace LJCTransformManager
 					int parentID = parentRow.LJCGetInt32(ProcessGroup.ColumnProcessGroupID);
 					int childID = row.LJCGetInt32(DataProcess.ColumnDataProcessID);
 
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ ProcessGroupProcess.ColumnProcessGroupID, parentID },
 						{ ProcessGroupProcess.ColumnDataProcessID, childID }

@@ -1,9 +1,10 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataHTMLTable.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {
@@ -100,7 +101,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (NetCommon.HasItems(dataObjects))
+      if (LJC.HasListItems(dataObjects))
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();
@@ -130,7 +131,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (NetCommon.HasItems(dataObjects))
+      if (LJC.HasListItems(dataObjects))
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();
@@ -154,7 +155,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (NetCommon.HasItems(dataObjects))
+      if (LJC.HasListItems(dataObjects))
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();
@@ -223,7 +224,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (NetCommon.HasItems(dbResult.Rows))
+      if (LJC.HasListItems(dbResult.Rows))
       {
         var hb = new HTMLBuilder(textState);
 

@@ -1,8 +1,9 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SendCipher.cs
 using LJCNetCommon;
 using System;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace CipherLib
 {
@@ -161,7 +162,7 @@ namespace CipherLib
     // Copy the Insert Value to the Target bytes.
     private void CopyInsertValue(InsertItem insertItem, byte[] target)
     {
-      if (NetCommon.HasItems(insertItem.InsertValue))
+      if (LJC.HasListItems(insertItem.InsertValue))
       {
         Array.Copy(insertItem.InsertValue, 0, target, mCurrentTargetIndex
           , insertItem.InsertValue.Length);

@@ -1,10 +1,11 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ObjectManager.cs
 using LJCDataAccess;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBClientLib
 {
@@ -52,7 +53,7 @@ namespace LJCDBClientLib
 
     // Creates the Load DbRequest object.
     /// <include path='items/CreateLoadRequest/*' file='Doc/ObjectManager.xml'/>
-    public DbRequest CreateLoadRequest(DbColumns keyColumns = null
+    public DbRequest CreateLoadRequest(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -63,7 +64,7 @@ namespace LJCDBClientLib
 
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='Doc/ObjectManager.xml'/>
-    public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       DataManager.Delete(keyColumns, filters);
       AffectedCount = DataManager.AffectedCount;
@@ -88,7 +89,7 @@ namespace LJCDBClientLib
 
     // Retrieves a collection of data records.
     /// <include path='items/Load/*' file='Doc/ObjectManager.xml'/>
-    public TList Load(DbColumns keyColumns = null
+    public TList Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -138,7 +139,7 @@ namespace LJCDBClientLib
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='Doc/ObjectManager.xml'/>
-    public TData Retrieve(DbColumns keyColumns
+    public TData Retrieve(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -171,7 +172,7 @@ namespace LJCDBClientLib
 
     // Updates the record.
     /// <include path='items/Update/*' file='Doc/ObjectManager.xml'/>
-    public void Update(TData dataObject, DbColumns keyColumns
+    public void Update(TData dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       DataManager.Update(dataObject, keyColumns, propertyNames, filters);
@@ -184,9 +185,9 @@ namespace LJCDBClientLib
 
     // Creates a set of columns that match the supplied list.
     /// <include path='items/GetColumns/*' file='Doc/ObjectManager.xml'/>
-    public DbColumns GetColumns(List<string> propertyNames)
+    public LJCDataColumns GetColumns(List<string> propertyNames)
     {
-      return DataManager.DataDefinition.LJCGetColumns(propertyNames);
+      return DataManager.DataDefinition.LJCColumns(propertyNames);
     }
 
     // Maps the column property and rename values.
@@ -226,8 +227,8 @@ namespace LJCDBClientLib
       {
         foreach (DbRow dbRow in dbResult.Rows)
         {
-          DbValues dbValues = dbRow.Values;
-          if (NetCommon.HasItems(dbValues))
+          LJCDataValues dbValues = dbRow.Values;
+          if (LJC.HasListItems(dbValues))
           {
             TData data = CreateData(dbValues);
             retValue.Add(data);
@@ -239,7 +240,7 @@ namespace LJCDBClientLib
 
     // Creates a data object from the result record.
     /// <include path='items/CreateData/*' file='Doc/ObjectManager.xml'/>
-    public TData CreateData(DbValues dbValues)
+    public TData CreateData(LJCDataValues dbValues)
     {
       // Also in LJCDBMessage.ResultConverter.
       // Used here because TData is already defined.
@@ -260,7 +261,7 @@ namespace LJCDBClientLib
     public int AffectedCount { get; set; }
 
     /// <summary>Gets the base data definition columns collection.</summary>
-    public DbColumns BaseDefinition
+    public LJCDataColumns BaseDefinition
     {
       get { return DataManager.BaseDefinition; }
     }
@@ -277,7 +278,7 @@ namespace LJCDBClientLib
     private string mDataConfigName;
 
     /// <summary>Gets a reference to the Data Definition columns collection.</summary>
-    public DbColumns DataDefinition
+    public LJCDataColumns DataDefinition
     {
       get { return DataManager.DataDefinition; }
     }

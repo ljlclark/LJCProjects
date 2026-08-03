@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDataGrid.cs
 using System;
@@ -311,7 +311,7 @@ namespace LJCWinFormControls
 
     // Adds a column to the grid.
     /// <include path='items/LJCAddColumn1/*' file='Doc/LJCDataGrid.xml'/>
-    public DataGridViewColumn LJCAddColumn(DbColumn column)
+    public DataGridViewColumn LJCAddColumn(LJCDataColumn column)
     {
       DataGridViewColumn retVal = null;
 
@@ -342,11 +342,11 @@ namespace LJCWinFormControls
 
     // Adds grid columns.
     /// <include path='items/LJCAddColumns/*' file='Doc/LJCDataGrid.xml'/>
-    public void LJCAddColumns(DbColumns columns)
+    public void LJCAddColumns(LJCDataColumns columns)
     {
       if (columns != null)
       {
-        foreach (DbColumn column in columns)
+        foreach (LJCDataColumn column in columns)
         {
           LJCAddColumn(column);
         }

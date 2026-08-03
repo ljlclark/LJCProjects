@@ -69,11 +69,11 @@ namespace LJCDataDetailDAL
       return retValue;
     }
 
-    // Gets the DbColumn values.
+    // Gets the LJCDataColumn values.
     /// <include path='items/GetDbColumnValues/*' file='../Doc/ControlData.xml'/>
-    public DbColumn GetDbColumnValues()
+    public LJCDataColumn GetDbColumnValues()
     {
-      var retValue = new DbColumn()
+      var retValue = new LJCDataColumn()
       {
         AllowDBNull = AllowDBNull,
         AutoIncrement = AutoIncrement,
@@ -90,9 +90,9 @@ namespace LJCDataDetailDAL
       return retValue;
     }
 
-    // Sets the DbColumn values.
+    // Sets the LJCDataColumn values.
     /// <include path='items/SetDbColumnValues/*' file='../Doc/ControlData.xml'/>
-    public void SetDbColumnValues(DbColumn dbColumn)
+    public void SetDbColumnValues(LJCDataColumn dbColumn)
     {
       if (dbColumn != null)
       {
@@ -131,7 +131,7 @@ namespace LJCDataDetailDAL
     public Int64 ControlDetailID { get; set; }
     #endregion
 
-    #region DbColumn Properties
+    #region LJCDataColumn Properties
 
     /// <summary>Gets or sets the AllowDBNull value.</summary>
     //[Required]

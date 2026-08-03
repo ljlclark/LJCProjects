@@ -1,12 +1,9 @@
 ﻿using LJCDataDetailDAL;
 using LJCNetCommon;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataDetail
 {
@@ -17,12 +14,12 @@ namespace LJCDataDetail
     // Create the Controls from the configuration.
     private void CreateControls()
     {
-      DbColumn dataColumn;
+      LJCDataColumn dataColumn;
 
       // Local references.
       var config = ControlDetail;
 
-      if (NetCommon.HasItems(LJCDataColumns))
+      if (LJC.HasListItems(LJCDataColumns))
       {
         // Create additional tabs.
         foreach (ControlTab controlTab in config.ControlTabItems)
@@ -58,8 +55,9 @@ namespace LJCDataDetail
             foreach (ControlRow controlRow in controlColumn.ControlRows)
             {
               int rowIndex = controlRow.RowIndex;
-              dataColumn
-                = LJCDataColumns.LJCSearchPropertyName(controlRow.DataValueName);
+              //dataColumn
+              //  = LJCDataColumns.LJCSearchPropertyName(controlRow.DataValueName);
+              dataColumn = LJCDataColumns[controlRow.DataValueName];
 
               ControlRow(controlColumn, dataColumn, controlColumn.LabelsWidth
                 , tabPageIndex, columnIndex, rowIndex, ref tabIndex);
@@ -71,7 +69,7 @@ namespace LJCDataDetail
     }
 
     // Creates the ControlRow and associated controls.
-    private void ControlRow(ControlColumn controlColumn, DbColumn dataColumn
+    private void ControlRow(ControlColumn controlColumn, LJCDataColumn dataColumn
       , int labelsWidth, int tabIndex, int columnIndex, int rowIndex, ref int tabbingIndex)
     {
       ControlRow controlRow;
@@ -205,7 +203,8 @@ namespace LJCDataDetail
     {
       Control retValue;
 
-      var dataColumn = LJCDataColumns.LJCSearchPropertyName(propertyName);
+      //var dataColumn = LJCDataColumns.LJCSearchPropertyName(propertyName);
+      var dataColumn = LJCDataColumns[propertyName];
       string controlRowType = mDataDetailCode.ControlRowType(dataColumn
         , LJCKeyItems);
       string suffix;
@@ -271,7 +270,7 @@ namespace LJCDataDetail
     }
 
     // Selects the matching Static Combo item.
-    private void SelectStaticComboItem(ComboBox comboBox, DbColumn dataColumn)
+    private void SelectStaticComboItem(ComboBox comboBox, LJCDataColumn dataColumn)
     {
       if (dataColumn.Value != null && NetString.HasValue(dataColumn.Value.ToString()))
       {
@@ -297,7 +296,7 @@ namespace LJCDataDetail
     }
 
     // Sets the TextBox event handlers.
-    private void SetTextBoxControlHandlers(TextBox textBox, DbColumn dataColumn)
+    private void SetTextBoxControlHandlers(TextBox textBox, LJCDataColumn dataColumn)
     {
       if ("Int16" == dataColumn.DataTypeName
         || "Int32" == dataColumn.DataTypeName
@@ -477,7 +476,7 @@ namespace LJCDataDetail
     #region Create Controls Methods
 
     // Creates the Button control.
-    private Button AddButton(ControlRow controlRow, DbColumn dataColumn
+    private Button AddButton(ControlRow controlRow, LJCDataColumn dataColumn
       , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
     {
       Button retValue;
@@ -498,7 +497,7 @@ namespace LJCDataDetail
     }
 
     // Creates the CheckBox control.
-    private CheckBox AddCheckBox(ControlRow controlRow, DbColumn dataColumn
+    private CheckBox AddCheckBox(ControlRow controlRow, LJCDataColumn dataColumn
       , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
     {
       int width;
@@ -523,7 +522,7 @@ namespace LJCDataDetail
     }
 
     // Creates the TextBox control.
-    private ComboBox AddComboBox(ControlRow controlRow, DbColumn dataColumn
+    private ComboBox AddComboBox(ControlRow controlRow, LJCDataColumn dataColumn
       , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
     {
       int width;
@@ -546,7 +545,7 @@ namespace LJCDataDetail
     }
 
     // Creates the Label control.
-    private void AddLabel(ControlRow controlRow, DbColumn dataColumn, int width
+    private void AddLabel(ControlRow controlRow, LJCDataColumn dataColumn, int width
       , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
     {
       Label label;
@@ -567,7 +566,7 @@ namespace LJCDataDetail
     }
 
     // Creates the TextBox control.
-    private TextBox AddTextBox(ControlRow controlRow, DbColumn dataColumn
+    private TextBox AddTextBox(ControlRow controlRow, LJCDataColumn dataColumn
       , int tabPageIndex, int columnIndex, int rowIndex, int tabIndex)
     {
       int width;
@@ -689,7 +688,7 @@ namespace LJCDataDetail
       if (LJCKeyItems != null)
       {
         propertyItems = LJCKeyItems.Items.FindAll(x => x.PropertyName == propertyName);
-        if (NetCommon.HasItems(propertyItems))
+        if (LJC.HasListItems(propertyItems))
         {
           foreach (KeyItem keyItem in propertyItems)
           {

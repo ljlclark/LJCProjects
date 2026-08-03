@@ -141,7 +141,7 @@ namespace LJCAppManager
 
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ AppModule.ColumnAppProgramID, LJCRecord.AppProgramID },
 				{ AppModule.ColumnTypeName, (object)LJCRecord.TypeName }
@@ -158,8 +158,9 @@ namespace LJCAppManager
 				MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 
-			var dbColumn = keyColumns.LJCSearchColumnName("TypeName");
-			keyColumns.Remove(dbColumn);
+			//var dbColumn = keyColumns.LJCSearchColumnName("TypeName");
+      var dbColumn = keyColumns["TypeName"];
+      keyColumns.Remove(dbColumn);
 			keyColumns.Add("Title", (object)LJCRecord.Title);
 			lookupRecord = moduleManager.Retrieve(keyColumns);
 			if (lookupRecord != null

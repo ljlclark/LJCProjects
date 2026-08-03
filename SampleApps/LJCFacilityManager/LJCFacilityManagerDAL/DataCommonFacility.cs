@@ -18,7 +18,7 @@ namespace LJCFacilityManagerDAL
 		{
 			Facility retValue;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Facility.ColumnID, facilityID }
 			};
@@ -50,7 +50,7 @@ namespace LJCFacilityManagerDAL
 		{
 			Person retValue;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Person.ColumnID, personID }
 			};
@@ -68,7 +68,7 @@ namespace LJCFacilityManagerDAL
 			Facility record;
 			string retValue = null;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Facility.ColumnID, facilityID }
 			};
@@ -91,7 +91,7 @@ namespace LJCFacilityManagerDAL
 			Unit record;
 			string retValue = null;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Unit.ColumnID, unitID }
 			};
@@ -114,7 +114,7 @@ namespace LJCFacilityManagerDAL
 			Person record;
 			string retValue = null;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Person.ColumnID, personID }
 			};
@@ -139,7 +139,7 @@ namespace LJCFacilityManagerDAL
 			Business record;
 			string retValue = null;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Business.ColumnID, businessID }
 			};

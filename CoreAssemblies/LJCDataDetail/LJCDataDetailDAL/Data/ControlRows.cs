@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataDetailDAL
 {
@@ -47,7 +48,7 @@ namespace LJCDataDetailDAL
     /// <include path='items/CopyConstructor/*' file='Doc/ControlRows.xml'/>
     public ControlRows(ControlRows items)
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -112,7 +113,7 @@ namespace LJCDataDetailDAL
     {
       ControlRows retValue = null;
 
-      if (NetCommon.HasItems(list))
+      if (LJC.HasListItems(list))
       {
         retValue = new ControlRows();
         foreach (ControlRow item in list)

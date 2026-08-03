@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // StepGridCode.cs
 using System;
@@ -7,6 +7,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDataTransformDAL;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -39,7 +40,7 @@ namespace LJCTransformManager
 				var stepManager = mManagers.StepManager;
 				records = stepManager.LoadWithProcessID(mParent.LJCParentID);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (Step record in records)
 					{

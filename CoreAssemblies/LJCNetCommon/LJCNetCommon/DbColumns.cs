@@ -1,6 +1,7 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbColumns.cs
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -12,6 +13,7 @@ namespace LJCNetCommon
   /// <include file='Doc/DbColumns.xml'
   ///  path='items/DbColumns/*'/>
   [XmlRoot("DbColumns")]
+  [Obsolete ("Use LJCDataColumns()")]
   public class DbColumns : List<DbColumn>
   {
     #region Static Functions

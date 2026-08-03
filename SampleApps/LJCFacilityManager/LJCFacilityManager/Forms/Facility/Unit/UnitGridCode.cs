@@ -1,13 +1,13 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // UnitGridCode.cs
 using System;
 using System.Windows.Forms;
-using LJCDBMessage;
 using LJCFacilityManagerDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCFacilityManager
 {
@@ -42,7 +42,7 @@ namespace LJCFacilityManager
 				facilityID = parentRow.LJCGetInt32(Facility.ColumnID);
 				records = mManagers.UnitManager.LoadWithParentID(facilityID);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (Unit record in records)
 					{

@@ -63,7 +63,7 @@ namespace LJCDataTransformDAL
 
 		// Deletes a record with the specified ID.
 		/// <include path='items/Delete/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public void Delete(DbColumns keyColumns, DbFilters filters = null)
+		public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
 		{
 			mDataManager.Delete(keyColumns, filters);
 			SQLStatement = mDataManager.SQLStatement;
@@ -72,14 +72,14 @@ namespace LJCDataTransformDAL
 
 		// Returns a set of columns that match the supplied list.
 		/// <include path='items/GetColumns/*' file='Doc/DataProcessManager.xml'/>
-		public DbColumns GetColumns(List<string> columnNames)
+		public LJCDataColumns GetColumns(List<string> columnNames)
 		{
-			return mDataManager.DataDefinition.LJCGetColumns(columnNames);
+			return mDataManager.DataDefinition.LJCColumns(columnNames);
 		}
 
 		// Retrieves a collection of data records.
 		/// <include path='items/Load/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DataProcesses Load(DbColumns keyColumns = null, List<string> propertyNames = null
+		public DataProcesses Load(LJCDataColumns keyColumns = null, List<string> propertyNames = null
 			, DbFilters filters = null, DbJoins joins = null)
 		{
 			DataProcesses retValue = null;
@@ -100,7 +100,7 @@ namespace LJCDataTransformDAL
 
 		// Retrieves a DataProcess record from the database.
 		/// <include path='items/Retrieve/*' file='Doc/DataProcessManager.xml'/>
-		public DataProcess Retrieve(DbColumns keyColumns, List<string> columnNames = null
+		public DataProcess Retrieve(LJCDataColumns keyColumns, List<string> columnNames = null
 			, DbFilters filters = null, DbJoins joins = null)
 		{
 			DataProcess retValue = null;
@@ -120,7 +120,7 @@ namespace LJCDataTransformDAL
 
 		// Updates the DataProcess record.
 		/// <include path='items/Update/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public void Update(DataProcess dataObject, DbColumns keyColumns
+		public void Update(DataProcess dataObject, LJCDataColumns keyColumns
 			, List<string> propertyNames = null, DbFilters filters = null)
 		{
 			mDataManager.Update(dataObject, keyColumns, propertyNames, filters);
@@ -183,9 +183,9 @@ namespace LJCDataTransformDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ DataProcess.ColumnDataProcessID, id }
 			};
@@ -194,9 +194,9 @@ namespace LJCDataTransformDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetNameKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetNameKey(string name)
+		public LJCDataColumns GetNameKey(string name)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ DataProcess.ColumnName, (object)name }
 			};
@@ -235,7 +235,7 @@ namespace LJCDataTransformDAL
 				dbJoin.JoinType = "left outer";
 			}
 
-			dbJoin.Columns = new DbColumns();
+			dbJoin.Columns = new LJCDataColumns();
 			dbJoin.Columns.Add(ProcessGroupProcess.ColumnSequence, dataTypeName: "int");
 			retValue.Add(dbJoin);
 			return retValue;

@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // UnitMeasureGridCode.cs
 using System;
@@ -8,6 +8,7 @@ using LJCNetCommon;
 using LJCUnitMeasureDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCUnitMeasure
 {
@@ -52,14 +53,14 @@ namespace LJCUnitMeasure
 				categoryID = mCategoryCombo.LJCSelectedItemID();
 			}
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ UnitMeasure.ColumnUnitSystemID, systemID },
 				{ UnitMeasure.ColumnUnitCategoryID, categoryID }
 			};
 			dataRecords = unitMeasureManager.LoadBySequence(keyColumns);
 
-			if (NetCommon.HasItems(dataRecords))
+			if (LJC.HasListItems(dataRecords))
 			{
 				foreach (UnitMeasure dataRecord in dataRecords)
 				{
@@ -217,7 +218,7 @@ namespace LJCUnitMeasure
 					// Data from items.
 					int id = row.LJCGetInt32(UnitMeasure.ColumnID);
 
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ UnitMeasure.ColumnID, id }
 					};
@@ -266,9 +267,9 @@ namespace LJCUnitMeasure
 		#region Setup Methods
 
 		// Setup the grid columns.
-		internal DbColumns SetupGrid()
+		internal LJCDataColumns SetupGrid()
 		{
-			DbColumns retValue = null;
+			LJCDataColumns retValue = null;
 
 			// Setup default grid columns if no columns are defined.
 			if (0 == mUnitMeasureGrid.Columns.Count)

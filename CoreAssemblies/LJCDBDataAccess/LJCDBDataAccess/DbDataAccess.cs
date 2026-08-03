@@ -8,6 +8,7 @@ using LJCNetCommon;
 using System;
 using System.Data;
 using System.Text;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBDataAccess
 {
@@ -111,7 +112,7 @@ namespace LJCDBDataAccess
       retValue.AffectedRecords = AffectedCount;
       retValue.ExecutedSql = SqlStatement;
 
-      if (NetCommon.HasItems(DbRequest.DbAssignedColumns))
+      if (LJC.HasListItems(DbRequest.DbAssignedColumns))
       {
         string saveSql = SqlStatement;
 
@@ -302,7 +303,8 @@ namespace LJCDBDataAccess
       if (NetCommon.HasData(dataTable))
       {
         // Add TABLE_NAME if it is not already defined.
-        var dbColumn = dbRequest.Columns.LJCSearchPropertyName("TABLE_NAME");
+        //var dbColumn = dbRequest.Columns.LJCSearchPropertyName("TABLE_NAME");
+        var dbColumn = dbRequest.Columns["TABLE_NAME"];
         if (null == dbColumn)
         {
           dbRequest.Columns.Add("TABLE_NAME");
@@ -375,11 +377,12 @@ namespace LJCDBDataAccess
       {
         foreach (DataColumn dataColumn in dataTable.Columns)
         {
-          var dbColumn
-            = dbRequest.Columns.LJCSearchPropertyName(dataColumn.ColumnName);
+          //var dbColumn
+          //  = dbRequest.Columns.LJCSearchPropertyName(dataColumn.ColumnName);
+          var dbColumn = dbRequest.Columns[dataColumn.ColumnName];
           if (null == dbColumn)
           {
-            DbColumn newDbColumn = CreateDbColumnFromDataColumn(dataColumn);
+            var newDbColumn = CreateDbColumnFromDataColumn(dataColumn);
             if (newDbColumn != null)
             {
               dbRequest.Columns.Add(newDbColumn);
@@ -411,16 +414,16 @@ namespace LJCDBDataAccess
       return retValue;
     }
 
-    //// Creates a DbColumns object with each key column that has a value in the
+    //// Creates a LJCDataColumns object with each key column that has a value in the
     //// data object.
-    //private DbColumns CreateKeyValueColumns(DbColumns dataColumns, DbColumns keyColumns)
+    //private LJCDataColumns CreateKeyValueColumns(LJCDataColumns dataColumns, LJCDataColumns keyColumns)
     //{
-    //	DbColumns retValue;
+    //	LJCDataColumns retValue;
 
-    //	retValue = new DbColumns();
-    //	foreach (DbColumn keyColumn in keyColumns)
+    //	retValue = new LJCDataColumns();
+    //	foreach (LJCDataColumn keyColumn in keyColumns)
     //	{
-    //		DbColumn dataColumn = dataColumns.LJCSearchName(keyColumn.ColumnName);
+    //		LJCDataColumn dataColumn = dataColumns.LJCSearchName(keyColumn.ColumnName);
     //		if (dataColumn != null
     //			&& dataColumn.Value != null && dataColumn.Value.ToString() != "0")
     //		{
@@ -482,14 +485,14 @@ namespace LJCDBDataAccess
 
     #region Conversion Methods
 
-    // Creates a DbColumn object from a DataColumn object.
-    private DbColumn CreateDbColumnFromDataColumn(DataColumn dataColumn)
+    // Creates a LJCDataColumn object from a DataColumn object.
+    private LJCDataColumn CreateDbColumnFromDataColumn(DataColumn dataColumn)
     {
-      DbColumn retValue = null;
+      LJCDataColumn retValue = null;
 
       if (dataColumn != null)
       {
-        retValue = new DbColumn
+        retValue = new LJCDataColumn
         {
           AllowDBNull = dataColumn.AllowDBNull,
           AutoIncrement = dataColumn.AutoIncrement,
@@ -502,20 +505,20 @@ namespace LJCDBDataAccess
       return retValue;
     }
 
-    // Creates a DbColumns object from the DataTable columns.
-    private DbColumns CreateDbColumnsFromTable(DataTable dataTable)
+    // Creates a LJCDataColumns object from the DataTable columns.
+    private LJCDataColumns CreateDbColumnsFromTable(DataTable dataTable)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       if (dataTable != null)
       {
         DataTable sqlTypesTable = mDataAccess.GetColumnSQLTypes(DatabaseName
           , mDbRequest.TableName);
 
-        retValue = new DbColumns();
+        retValue = new LJCDataColumns();
         foreach (DataColumn dataColumn in dataTable.Columns)
         {
-          DbColumn dbColumn = CreateDbColumnFromDataColumn(dataColumn);
+          LJCDataColumn dbColumn = CreateDbColumnFromDataColumn(dataColumn);
           if (dbColumn != null)
           {
             SetSQLTypeName(sqlTypesTable, dbColumn);
@@ -528,7 +531,7 @@ namespace LJCDBDataAccess
     }
 
     // Get the SQL Type name.
-    private void SetSQLTypeName(DataTable sqlTypesTable, DbColumn dataColumn)
+    private void SetSQLTypeName(DataTable sqlTypesTable, LJCDataColumn dataColumn)
     {
       if (NetCommon.HasData(sqlTypesTable))
       {
@@ -544,7 +547,7 @@ namespace LJCDBDataAccess
     }
 
     // Sets the PrimaryKey value.
-    private void SetPrimaryKey(DataTable dataTable, DbColumn dataColumn)
+    private void SetPrimaryKey(DataTable dataTable, LJCDataColumn dataColumn)
     {
       if (dataTable.PrimaryKey != null && dataTable.PrimaryKey.Length > 0)
       {

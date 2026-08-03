@@ -1,9 +1,10 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewTableManager.cs
 using LJCDBClientLib;
 using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -42,7 +43,7 @@ namespace LJCDBViewDAL
     {
       ViewTable retValue;
 
-      var keyColumns = new DbColumns()
+      var keyColumns = new LJCDataColumns()
       {
         { ViewTable.ColumnID, id }
       };
@@ -56,7 +57,7 @@ namespace LJCDBViewDAL
     {
       ViewTable retValue;
 
-      var keyColumns = new DbColumns()
+      var keyColumns = new LJCDataColumns()
       {
         { ViewTable.ColumnName, (object)tableName }
       };
@@ -107,13 +108,17 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (NetCommon.HasItems(viewTable.ChangedNames))
+          // *** Change ***
+          var changedNames = viewTable.ChangedNames.ChangedProperties;
+          //if (NetCommon.HasItems(viewTable.ChangedNames))
+          if (LJC.HasListItems(changedNames))
           {
-            var keyColumns = new DbColumns()
+            var keyColumns = new LJCDataColumns()
             {
               { ViewTable.ColumnID, retrieveData.ID }
             };
-            Update(viewTable, keyColumns, viewTable.ChangedNames);
+            //Update(viewTable, keyColumns, viewTable.ChangedNames);
+            Update(viewTable, keyColumns, changedNames);
           }
         }
       }

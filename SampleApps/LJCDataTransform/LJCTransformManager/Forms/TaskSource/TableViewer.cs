@@ -122,7 +122,7 @@ namespace LJCTransformManager
 		private void SetupGrid(DbResult dbResult)
 		{
 			// Get the grid columns from the manager Data Definition.
-			DbColumns gridColumns = dbResult.Columns;
+			LJCDataColumns gridColumns = dbResult.Columns;
 			RecordsGrid.LJCAddColumns(gridColumns);
 
 			// Setup the grid columns.

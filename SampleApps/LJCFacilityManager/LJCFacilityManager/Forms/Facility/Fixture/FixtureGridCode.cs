@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // FixtureGridCode.cs
 using System;
@@ -8,6 +8,7 @@ using LJCFacilityManagerDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCFacilityManager
 {
@@ -38,7 +39,7 @@ namespace LJCFacilityManager
 
 			if (mUnitGrid.CurrentRow is LJCGridRow parentRow)
 			{
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Fixture.ColumnUnitID, parentRow.LJCGetInt32(Unit.ColumnID) }
 				};
@@ -47,7 +48,7 @@ namespace LJCFacilityManager
 				fixtureManager.SetOrderByCode();
 				records = fixtureManager.Load(keyColumns, joins: dbJoins);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (Fixture record in records)
 					{
@@ -207,7 +208,7 @@ namespace LJCFacilityManager
 					// Data from list items.
 					int id = row.LJCGetInt32(Fixture.ColumnID);
 
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ Fixture.ColumnID, id }
 					};

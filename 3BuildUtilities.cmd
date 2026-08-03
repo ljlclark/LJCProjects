@@ -8,6 +8,7 @@ call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDe
 rem *************
 rem CoreUtilities
 rem *************
+goto start
 set /a counter+=1
 set marker=----------------- %counter% - LJCBackupCommonLib ----------
 echo.
@@ -36,6 +37,7 @@ echo LJCBackupChanges >> Build.txt
 rem ***call CoreUtilities\LJCBackupChanges\UpdateBackupChanges.cmd BuildAll >> Build.txt
 msbuild CoreUtilities\LJCBackupChanges\LJCBackupChanges.sln
 
+:start
 set /a counter+=1
 echo - >> Build.txt
 set marker=----------------- %counter% - LJCCodeLineCounter ----------

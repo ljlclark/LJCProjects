@@ -178,14 +178,14 @@ namespace LJCFacilityManager
 		private bool DataSave()
 		{
 			Person lookupRecord;
-			DbColumns keyColumns;
+			LJCDataColumns keyColumns;
 			string title;
 			string message;
 			bool retValue = true;
 
 			LJCRecord = SetRecordValues();
 
-			keyColumns = new DbColumns()
+			keyColumns = new LJCDataColumns()
 			{
 				{ Person.ColumnFirstName, (object)LJCRecord.FirstName },
 				{ Person.ColumnMiddleInitial, (object)LJCRecord.MiddleInitial },
@@ -556,7 +556,7 @@ namespace LJCFacilityManager
 
 		private StandardUISettings mSettings;
 		private PersonManager mPersonManager;
-		//private DbColumns mPersonGridColumns;
+		//private LJCDataColumns mPersonGridColumns;
 
 		/// <summary>The change event.</summary>
 		public event EventHandler<EventArgs> LJCChange;

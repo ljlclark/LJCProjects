@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ColumnGridCode.cs
 using LJCDataDetail;
@@ -10,6 +10,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace DataHelper
 {
@@ -45,13 +46,13 @@ namespace DataHelper
         // Data from items.
         int parentID = parentRow.LJCGetInt32(DbMetaDataColumn.ColumnID);
 
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { DbMetaDataColumn.ColumnDbMetaDataTableID, parentID }
         };
         records = dataColumnManager.Load(keyColumns);
 
-        if (NetCommon.HasItems(records))
+        if (LJC.HasListItems(records))
         {
           foreach (DbMetaDataColumn record in records)
           {
@@ -124,8 +125,7 @@ namespace DataHelper
     internal void DoNewColumn()
     {
       // ToDo: Convert to new DataDetailDialog.
-      DbColumns dataColumns
-       = mManagers.DbMetaDataColumnManager.DataDefinition;
+      var dataColumns = mManagers.DbMetaDataColumnManager.DataDefinition;
 
       var detail = new DataDetailDialog(mUserID, mTableName)
       {
@@ -151,7 +151,7 @@ namespace DataHelper
         //int parentID = parentRow.LJCGetInt32(DbMetaDataTable.ColumnID);
 
         // Retrieve Data
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { DbMetaDataColumn.ColumnID, id }
         };
@@ -161,7 +161,7 @@ namespace DataHelper
         if (DbResult.HasData(dbResult))
         {
           // The Data Definition and Record values are merged. 
-          DbColumns dataColumns = dbResult.GetValueColumns();
+          LJCDataColumns dataColumns = dbResult.GetValueColumns();
 
           // ToDo: Convert to new DataDetailDialog.
           var detail = new DataDetailDialog(mUserID, mTableName)
@@ -183,7 +183,7 @@ namespace DataHelper
     private void ColumnDetail_Change(object sender, EventArgs e)
     {
       DataDetailDialog detail;
-      DbColumns dataColumns;
+      LJCDataColumns dataColumns;
 
       detail = sender as DataDetailDialog;
       dataColumns = detail.LJCDataColumns;
@@ -194,7 +194,7 @@ namespace DataHelper
       var dataColumnManager = mManagers.DbMetaDataColumnManager;
       if (detail.LJCIsUpdate)
       {
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { DbMetaDataColumn.ColumnID, mdColumn.ID }
         };
@@ -232,7 +232,7 @@ namespace DataHelper
           // Data from items.
           int id = row.LJCGetInt32(DbMetaDataColumn.ColumnID);
 
-          var keyColumns = new DbColumns()
+          var keyColumns = new LJCDataColumns()
           {
             { DbMetaDataColumn.ColumnID, id }
           };

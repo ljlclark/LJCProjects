@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ProcessStepModuleCode.cs
 using System;
@@ -11,6 +11,7 @@ using LJCWinFormControls;
 using LJCNetCommon;
 using LJCDBClientLib;
 using LJCDataTransformDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -29,7 +30,7 @@ namespace LJCTransformManager
 			var dataProcessManager = Managers.DataProcessManager;
 			records = dataProcessManager.Load();
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (DataProcess record in records)
 				{
@@ -111,7 +112,7 @@ namespace LJCTransformManager
 				//StepGrid.LJCRestoreColumnValues(ControlValues);
 			}
 		}
-		private DbColumns mGridColumnsStep;
+		private LJCDataColumns mGridColumnsStep;
 
 		// Setup the grid columns.
 		private void SetupGridTask()
@@ -135,7 +136,7 @@ namespace LJCTransformManager
 				//TaskGrid.LJCRestoreColumnValues(ControlValues);
 			}
 		}
-		private DbColumns mGridColumnsTask;
+		private LJCDataColumns mGridColumnsTask;
 
 		// Saves the control values. 
 		private void SaveControlValues()

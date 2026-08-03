@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TransformDetailCode.cs
 using System;
@@ -10,6 +10,7 @@ using LJCWinFormControls;
 using LJCNetCommon;
 using LJCDBClientLib;
 using LJCDataTransformDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -88,7 +89,7 @@ namespace LJCTransformManager
 			Cursor = Cursors.WaitCursor;
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ TaskTransform.ColumnName, (object)LJCRecord.Name }
 			};
@@ -107,7 +108,7 @@ namespace LJCTransformManager
 			{
 				if (LJCIsUpdate)
 				{
-					keyColumns = new DbColumns()
+					keyColumns = new LJCDataColumns()
 					{
 						{ TaskTransform.ColumnTransformID, LJCRecord.TransformID }
 					};
@@ -220,7 +221,7 @@ namespace LJCTransformManager
 		private void LoadSourceCombo(LJCItemCombo itemCombo)
 		{
 			DataSources dataSources = mDataSourceManager.Load();
-			if (NetCommon.HasItems(dataSources))
+			if (LJC.HasListItems(dataSources))
 			{
 				foreach (DataSource dataSource in dataSources)
 				{

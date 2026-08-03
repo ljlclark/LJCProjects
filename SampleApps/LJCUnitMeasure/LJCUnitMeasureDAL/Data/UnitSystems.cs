@@ -1,11 +1,10 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // UnitSystems.cs
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Xml.Serialization;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCUnitMeasureDAL
 {
@@ -91,7 +90,7 @@ namespace LJCUnitMeasureDAL
 		{
 			UnitSystems retValue = null;
 
-			if (NetCommon.HasItems(list))
+			if (LJC.HasListItems(list))
 			{
 				retValue = new UnitSystems();
 				foreach (UnitSystem item in list)

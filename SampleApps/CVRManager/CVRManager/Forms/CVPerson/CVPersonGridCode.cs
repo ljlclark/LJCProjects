@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CVPersonGridCode.cs
 using System;
@@ -8,6 +8,7 @@ using LJCDBMessage;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace CVRManager
 {
@@ -32,7 +33,7 @@ namespace CVRManager
 			mParent.Cursor = Cursors.WaitCursor;
 			mCVPersonGrid.LJCRowsClear();
 
-			if (NetCommon.HasItems(dataRecords))
+			if (LJC.HasListItems(dataRecords))
 			{
 				foreach (CVPerson record in dataRecords)
 				{
@@ -73,7 +74,7 @@ namespace CVRManager
 		}
 
 		// Selects a row based on the key record values.
-		private bool RowSelectCVPerson(DbColumns keyColumns)
+		private bool RowSelectCVPerson(LJCDataColumns keyColumns)
 		{
 			long rowID;
 			bool retValue = false;
@@ -84,8 +85,9 @@ namespace CVRManager
 				foreach (LJCGridRow row in mCVPersonGrid.Rows)
 				{
 					rowID = row.LJCGetInt64(CVPerson.ColumnID);
-					var keyColumn = keyColumns.LJCSearchPropertyName(CVPerson.ColumnID);
-					if (rowID == (long)keyColumn.Value)
+					//var keyColumn = keyColumns.LJCSearchPropertyName(CVPerson.ColumnID);
+          var keyColumn = keyColumns[CVPerson.ColumnID];
+          if (rowID == (long)keyColumn.Value)
 					{
 						// LJCSetCurrentRow sets the LJCAllowSelectionChange property.
 						mCVPersonGrid.LJCSetCurrentRow(row, true);

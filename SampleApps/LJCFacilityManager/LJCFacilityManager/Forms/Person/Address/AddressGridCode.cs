@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // AddressGridCode.cs
 using System;
@@ -7,8 +7,8 @@ using System.Windows.Forms;
 using LJCDBMessage;
 using LJCFacilityManagerDAL;
 using LJCNetCommon;
-using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCFacilityManager
 {
@@ -53,7 +53,7 @@ namespace LJCFacilityManager
 					{
 						records = addressManager.Load(filters: dbFilters, joins: dbJoins);
 
-						if (NetCommon.HasItems(records))
+						if (LJC.HasListItems(records))
 						{
 							foreach (Address record in records)
 							{
@@ -135,12 +135,12 @@ namespace LJCFacilityManager
 			PersonAddresses list;
 			string retValue = null;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ PersonAddress.ColumnPersonID, personID }
 			};
 			list = mManagers.PersonAddressManager.Load(keyColumns);
-			if (NetCommon.HasItems(list))
+			if (LJC.HasListItems(list))
 			{
 				builder = new StringBuilder(64);
 				foreach (PersonAddress record in list)
@@ -302,7 +302,7 @@ namespace LJCFacilityManager
 				if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
 					, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ PersonAddress.ColumnPersonID
 							, parentRow.LJCGetInt32(Person.ColumnID) },

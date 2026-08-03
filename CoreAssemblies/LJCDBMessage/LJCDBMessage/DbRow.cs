@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbRow.cs
 using LJCNetCommon;
@@ -38,17 +38,18 @@ namespace LJCDBMessage
     {
       if (HasItems(items))
       {
-        Values = new DbValues();
+        Values = new LJCDataValues();
         foreach (var item in items.Values)
         {
-          Values.Add(new DbValue(item));
+          Values.Add(new LJCDataValue(item));
         }
       }
     }
     #endregion
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public DbRow Clone()
     {
       DbRow retValue = MemberwiseClone() as DbRow;
@@ -58,12 +59,13 @@ namespace LJCDBMessage
     #region Properties
 
     // The row value for the specified value column index.
-    /// <include path='items/Item1/*' file='Doc/DbRow.xml'/>
-    public DbValue this[int columnIndex]
+    /// <include file='Doc/DbRow.xml'
+    ///  path='items/Item1/*'/>
+    public LJCDataValue this[int columnIndex]
     {
       get
       {
-        DbValue retValue = null;
+        LJCDataValue retValue = null;
         if (null != Values)
         {
           retValue = Values[columnIndex];
@@ -73,22 +75,24 @@ namespace LJCDBMessage
     }
 
     // The row value for the specified value property name.
-    /// <include path='items/Item2/*' file='Doc/DbRow.xml'/>
-    public DbValue this[string propertyName]
+    /// <include file='Doc/DbRow.xml'
+    ///  path='items/Item2/*'/>
+    public LJCDataValue this[string propertyName]
     {
       get
       {
-        DbValue retValue = null;
+        LJCDataValue retValue = null;
         if (null != Values)
         {
-          retValue = Values.LJCSearchPropertyName(propertyName);
+          //retValue = Values.LJCPropertyName(propertyName);
+          retValue = Values[propertyName];
         }
         return retValue;
       }
     }
 
     /// <summary>Gets or sets the row values.</summary>
-    public DbValues Values { get; set; }
+    public LJCDataValues Values { get; set; }
     #endregion
   }
 }

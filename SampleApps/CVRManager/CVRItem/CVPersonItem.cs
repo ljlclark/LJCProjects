@@ -73,9 +73,9 @@ namespace CVRItem
 		/// </summary>
 		/// <param name="id">The record ID value.</param>
 		/// <returns>The RecordColumns object.</returns>
-		public DbColumns SetDataColumns(long id)
+		public LJCDataColumns SetDataColumns(long id)
 		{
-			DbColumns retValue;
+			LJCDataColumns retValue;
 
 			var manager = mCVRManagers.CVPersonManager;
 			DataColumns = manager.DataColumns(id);
@@ -87,7 +87,7 @@ namespace CVRItem
 		#region Properties
 
 		/// <summary>Gets the DataColumn value.</summary>
-		public DbColumns DataColumns { get; private set; }
+		public LJCDataColumns DataColumns { get; private set; }
 
 		/// <summary>Gets or sets the DataConfigName value.</summary>
 		public string DataConfigName

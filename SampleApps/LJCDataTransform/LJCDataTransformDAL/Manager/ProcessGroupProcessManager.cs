@@ -48,9 +48,9 @@ namespace LJCDataTransformDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKeys/*' file='Doc/ProcessGroupProcessManager.xml'/>
-		public DbColumns GetIDKeys(int processGroupID, int processID)
+		public LJCDataColumns GetIDKeys(int processGroupID, int processID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ ProcessGroupProcess.ColumnProcessGroupID, processGroupID },
 				{ ProcessGroupProcess.ColumnDataProcessID, processID }

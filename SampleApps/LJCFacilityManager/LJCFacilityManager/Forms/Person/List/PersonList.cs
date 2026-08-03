@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // PersonList.cs
 using System;
@@ -10,6 +10,7 @@ using LJCWinFormControls;
 using LJCDBMessage;
 using LJCDBClientLib;
 using LJCFacilityManagerDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCFacilityManager
 {
@@ -78,7 +79,7 @@ namespace LJCFacilityManager
 		private void DataRetrievePerson()
 		{
 			Persons dataRecords;
-			DbColumns keyColumns = null;
+			LJCDataColumns keyColumns = null;
 
 			Cursor = Cursors.WaitCursor;
 			PersonGrid.LJCRowsClear();
@@ -88,7 +89,7 @@ namespace LJCFacilityManager
 
 			if (parentID >= 0)
 			{
-				keyColumns = new DbColumns()
+				keyColumns = new LJCDataColumns()
 				{
 					{ Person.ColumnCodeTypeID, parentID }
 				};
@@ -99,7 +100,7 @@ namespace LJCFacilityManager
 			personManager.SetOrderByFirstLast();
 			dataRecords = personManager.Load(keyColumns, loadColumnNames, joins: dbJoins);
 
-			if (NetCommon.HasItems(dataRecords))
+			if (LJC.HasListItems(dataRecords))
 			{
 				foreach (Person record in dataRecords)
 				{
@@ -263,7 +264,7 @@ namespace LJCFacilityManager
 					// Data from list items.
 					int id = row.LJCGetInt32(Person.ColumnID);
 
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ Person.ColumnID, id }
 					};
@@ -320,7 +321,7 @@ namespace LJCFacilityManager
 				Cursor = Cursors.WaitCursor;
 				id = row.LJCGetInt32(Person.ColumnID);
 
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Person.ColumnID, id }
 				};

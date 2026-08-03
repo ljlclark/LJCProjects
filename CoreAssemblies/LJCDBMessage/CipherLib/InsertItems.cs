@@ -1,9 +1,8 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // InsertItems.cs
-using LJCNetCommon;
-using System;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace CipherLib
 {
@@ -13,12 +12,13 @@ namespace CipherLib
     #region Static Functions
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/HasItems1/*'/>
     public static bool HasItems(InsertItems collection)
     {
       bool retValue = false;
 
-      if (NetCommon.HasItems(collection))
+      if (LJC.HasListItems(collection))
       {
         retValue = true;
       }

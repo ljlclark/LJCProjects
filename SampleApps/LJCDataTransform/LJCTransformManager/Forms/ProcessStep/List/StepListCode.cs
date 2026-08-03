@@ -88,7 +88,7 @@ namespace LJCTransformManager
 				//StepGrid.LJCRestoreColumnValues(ControlValues);
 			}
 		}
-		private DbColumns mGridColumnsStep;
+		private LJCDataColumns mGridColumnsStep;
 
 		// Saves the control values. 
 		private void SaveControlValues()

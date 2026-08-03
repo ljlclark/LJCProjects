@@ -80,7 +80,7 @@ namespace LJCFacilityManager
 			if (LJCUnitID > 0)
 			{
 				LJCIsUpdate = true;
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ UnitPerson.ColumnUnitID, LJCUnitID },
 					{ UnitPerson.ColumnPersonID, LJCPersonID }
@@ -111,7 +111,7 @@ namespace LJCFacilityManager
 				ParentNameTextbox.Text = DataCommonFacility.GetPersonName(mPersonManager2, dataRecord.PersonID);
 
 				mOriginalUnitID = dataRecord.UnitID;
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Unit.ColumnID, mOriginalUnitID }
 				};
@@ -148,14 +148,14 @@ namespace LJCFacilityManager
 		private bool DataSave()
 		{
 			UnitPerson lookupRecord;
-			DbColumns keyColumns;
+			LJCDataColumns keyColumns;
 			string title;
 			string message;
 			bool retValue = true;
 
 			LJCRecord = SetRecordValues();
 
-			keyColumns = new DbColumns()
+			keyColumns = new LJCDataColumns()
 			{
 				{ UnitPerson.ColumnUnitID, LJCRecord.UnitID },
 				{ UnitPerson.ColumnPersonID, LJCRecord.PersonID }
@@ -176,7 +176,7 @@ namespace LJCFacilityManager
 			{
 				if (LJCIsUpdate)
 				{
-					keyColumns = new DbColumns()
+					keyColumns = new LJCDataColumns()
 					{
 						{ UnitPerson.ColumnUnitID, mOriginalUnitID },
 						{ UnitPerson.ColumnPersonID, LJCRecord.PersonID }

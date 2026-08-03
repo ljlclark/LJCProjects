@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // MainListCode.cs
 using System;
@@ -6,12 +6,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using LJCDataDetail;
 using LJCDBClientLib;
 using LJCNetCommon;
 using LJCSQLUtilLibDAL;
 using LJCWinFormCommon;
-using LJCWinFormControls;
 
 namespace DataHelper
 {
@@ -93,7 +91,7 @@ namespace DataHelper
 				TableGrid.LJCAddColumns(mGridColumnsTable);
 			}
 		}
-		private DbColumns mGridColumnsTable;
+		private LJCDataColumns mGridColumnsTable;
 
 		// Setup the grid columns.
 		private void SetupGridColumn()
@@ -116,7 +114,7 @@ namespace DataHelper
 				ColumnGrid.LJCAddColumns(mGridColumnsColumn);
 			}
 		}
-		private DbColumns mGridColumnsColumn;
+		private LJCDataColumns mGridColumnsColumn;
 
 		// Setup the grid columns.
 		private void SetupGridKey()
@@ -139,7 +137,7 @@ namespace DataHelper
 				KeyGrid.LJCAddColumns(mGridColumnsKey);
 			}
 		}
-		private DbColumns mGridColumnsKey;
+		private LJCDataColumns mGridColumnsKey;
 
 		// Saves the control values. 
 		private void SaveControlValues()

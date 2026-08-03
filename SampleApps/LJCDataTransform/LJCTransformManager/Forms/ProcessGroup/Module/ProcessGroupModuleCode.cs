@@ -70,7 +70,7 @@ namespace LJCTransformManager
 				//ProcessGroupGrid.LJCRestoreColumnValues(ControlValues);
 			}
 		}
-		private DbColumns mGridColumnsGroup;
+		private LJCDataColumns mGridColumnsGroup;
 
 		// Setup the grid columns.
 		private void SetupGridProcess()
@@ -92,7 +92,7 @@ namespace LJCTransformManager
 				DataProcessGrid.LJCAddColumns(mGridColumnsProcess);
 			}
 		}
-		private DbColumns mGridColumnsProcess;
+		private LJCDataColumns mGridColumnsProcess;
 
 		// Saves the control values. 
 		private void SaveControlValues()

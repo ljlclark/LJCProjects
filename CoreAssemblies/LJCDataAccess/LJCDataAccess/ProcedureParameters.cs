@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using LJCNetCommon;
 using MySql.Data.MySqlClient;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataAccess
 {
@@ -24,7 +25,7 @@ namespace LJCDataAccess
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public ProcedureParameters(ProcedureParameters items)
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {

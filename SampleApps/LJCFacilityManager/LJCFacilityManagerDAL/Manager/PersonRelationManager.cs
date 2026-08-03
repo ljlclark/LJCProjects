@@ -21,11 +21,13 @@ namespace LJCFacilityManagerDAL
 
 			// Add calculated and join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			DataDefinition.Add(PersonRelation.ColumnFirstName, caption: "First Name");
-			DataDefinition.Add(PersonRelation.ColumnLastName, caption: "Last Name");
+			var dataColumn = DataDefinition.Add(PersonRelation.ColumnFirstName);
+      dataColumn.Caption = "First Name";
+      dataColumn = DataDefinition.Add(PersonRelation.ColumnLastName);
+      dataColumn.Caption = "Last Name";
 
-			// Create the list of database assigned columns.
-			SetDbAssignedColumns(new string[]
+      // Create the list of database assigned columns.
+      SetDbAssignedColumns(new string[]
 			{
 				PersonRelation.ColumnID
 			});
@@ -52,7 +54,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ PersonRelation.ColumnRelationID, Person.ColumnID }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ Person.ColumnFirstName },
 					{ Person.ColumnMiddleInitial },
 					{ Person.ColumnLastName }}
@@ -65,7 +67,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ PersonRelation.ColumnRelationCodeTypeID, CodeType.ColumnID }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ CodeType.ColumnDescription, PersonRelation.ColumnTypeDescription
 						, PersonRelation.ColumnTypeDescription }}
 			};

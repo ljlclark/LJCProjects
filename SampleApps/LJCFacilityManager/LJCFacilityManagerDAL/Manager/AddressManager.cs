@@ -23,18 +23,23 @@ namespace LJCFacilityManagerDAL
 
 			// Add calculated and join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			DataDefinition.Add(Address.ColumnCityStateZip, caption: "City, State Zip");
-			DataDefinition.Add(RegionData.ColumnName, Address.PropertyRegionName
-				, Address.PropertyRegionName, "Region Name");
-			DataDefinition.Add(Province.ColumnName, Address.PropertyProvinceName
-				, Address.PropertyProvinceName, "Province Name");
-			DataDefinition.Add(City.ColumnName, Address.PropertyCityName
-				, Address.PropertyCityName, "City Name");
-			DataDefinition.Add(CitySection.ColumnName, Address.PropertyCitySectionName
-				, Address.PropertyCitySectionName, "City Section Name");
+			var dataColumn = DataDefinition.Add(Address.ColumnCityStateZip);
+      dataColumn.Caption = "City, State Zip";
+      dataColumn = DataDefinition.Add(RegionData.ColumnName
+        , Address.PropertyRegionName);
+      dataColumn.Caption = "Region Name";
+      dataColumn = DataDefinition.Add(Province.ColumnName
+        , Address.PropertyProvinceName);
+      dataColumn.Caption = "Province Name";
+      dataColumn = DataDefinition.Add(City.ColumnName
+        , Address.PropertyCityName);
+      dataColumn.Caption = "City Name";
+      dataColumn = DataDefinition.Add(CitySection.ColumnName
+        , Address.PropertyCitySectionName);
+      dataColumn.Caption = "City Section Name";
 
-			// Create the list of database assigned columns.
-			SetDbAssignedColumns(new string[]
+      // Create the list of database assigned columns.
+      SetDbAssignedColumns(new string[]
 			{
 				Address.ColumnID
 			});
@@ -99,9 +104,9 @@ namespace LJCFacilityManagerDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ Address.ColumnID, id }
 			};
@@ -113,9 +118,9 @@ namespace LJCFacilityManagerDAL
 		/// </summary>
 		/// <param name="codeTypeID">The ID value.</param>
 		/// <returns>The CodeTypeID key record.</returns>
-		public DbColumns GetCodeTypeIDKey(int codeTypeID)
+		public LJCDataColumns GetCodeTypeIDKey(int codeTypeID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ Address.ColumnCodeTypeID, codeTypeID }
 			};
@@ -147,7 +152,7 @@ namespace LJCFacilityManagerDAL
 					// Testing
 					//{ Address.ColumnRegionID, RegionData.ColumnRegionID }
 				},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ RegionData.ColumnName, Address.PropertyRegionName, Address.PropertyRegionName }
 				}
 			};
@@ -172,7 +177,7 @@ namespace LJCFacilityManagerDAL
 				JoinOns = new DbJoinOns() {
 					{ Address.ColumnProvinceID, Province.ColumnID }
 				},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ Province.ColumnName, Address.PropertyProvinceName, Address.PropertyProvinceName }
 				}
 			};
@@ -185,7 +190,7 @@ namespace LJCFacilityManagerDAL
 				JoinOns = new DbJoinOns() {
 					{ Address.ColumnCityID, City.ColumnID }
 				},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ City.ColumnName, Address.PropertyCityName, Address.PropertyCityName }
 				}
 			};
@@ -198,7 +203,7 @@ namespace LJCFacilityManagerDAL
 				JoinOns = new DbJoinOns() {
 					{ Address.ColumnCitySectionID, CitySection.ColumnID }
 				},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ CitySection.ColumnName, Address.PropertyCitySectionName, Address.PropertyCitySectionName }
 				}
 			};
@@ -211,7 +216,7 @@ namespace LJCFacilityManagerDAL
 				JoinOns = new DbJoinOns() {
 					{ Address.ColumnCodeTypeID, CodeType.ColumnID }
 				},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ CodeType.ColumnDescription, "TypeDescription", "TypeDescription" }
 				}
 			};

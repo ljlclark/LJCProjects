@@ -29,18 +29,20 @@ namespace LJCAppManagerDAL
 			MapNames(UserAppModule.ColumnAppModuleID, UserAppModule.PropertyAppModuleID);
 
 			// Add calculated and join columns.
-			DataDefinition.Add("TypeName", caption: "Module Name");
-			DataDefinition.Add("ModuleTitle", caption: "Module Title");
-		}
-		#endregion
+			var dataColumn = DataDefinition.Add("TypeName");
+      dataColumn.Caption = "Module Name";
+      DataDefinition.Add("ModuleTitle");
+      dataColumn.Caption = "Module Title";
+    }
+    #endregion
 
-		#region GetKey Methods
+    #region GetKey Methods
 
-		// Gets the ID key record.
-		/// <include path='items/GetIDKeys/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKeys(int parentID, int childID)
+    // Gets the ID key record.
+    /// <include path='items/GetIDKeys/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public LJCDataColumns GetIDKeys(int parentID, int childID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ UserAppModule.ColumnAppProgramID, parentID },
 				{ UserAppModule.ColumnAppModuleID, childID }
@@ -50,9 +52,9 @@ namespace LJCAppManagerDAL
 
 		// Gets the ID key record.
 		/// <include path='items/GetIDKeys/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetUserIDKeys(int parentID, int childID)
+		public LJCDataColumns GetUserIDKeys(int parentID, int childID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ UserAppModule.ColumnAppManagerUserID, parentID },
 				{ UserAppModule.ColumnAppProgramID, childID }
@@ -85,7 +87,7 @@ namespace LJCAppManagerDAL
 				AppUser.ColumnUserID};
 			AppUserManager2 userManager = new AppUserManager2(mDbServiceRef, mDataConfigName);
 			userJoin.Columns = userManager.GetColumns(columnNames);
-			DbColumn userIDColumn = userJoin.Columns[0];
+			LJCDataColumn userIDColumn = userJoin.Columns[0];
 			userIDColumn.PropertyName = "UserName";
 
 			// Join to AppProgram.
@@ -107,7 +109,7 @@ namespace LJCAppManagerDAL
 				AppModule.ColumnTitle};
 			AppModuleManager2 moduleManager = new AppModuleManager2(mDbServiceRef, mDataConfigName);
 			moduleJoin.Columns = moduleManager.GetColumns(columnNames);
-			DbColumn titleColumn = moduleJoin.Columns[1];
+			LJCDataColumn titleColumn = moduleJoin.Columns[1];
 			titleColumn.PropertyName = "ModuleTitle";
 			titleColumn.RenameAs = "ModuleTitle";
 

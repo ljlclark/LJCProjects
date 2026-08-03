@@ -22,11 +22,12 @@ namespace LJCFacilityManagerDAL
 
 			// Add calculated and join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			DataDefinition.Add(CodeType.ColumnCodeTypeClassDescription, caption: "CodeType Class");
+			var dataColumn = DataDefinition.Add(CodeType.ColumnCodeTypeClassDescription);
+      dataColumn.ColumnName = "CodeType Class";
 
-			// Create the list of database assigned columns.
-			// And make sure the AutoIncrement value is set.
-			SetDbAssignedColumns(new string[]
+      // Create the list of database assigned columns.
+      // And make sure the AutoIncrement value is set.
+      SetDbAssignedColumns(new string[]
 			{
 				CodeType.ColumnID
 			});
@@ -49,7 +50,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ CodeType.ColumnCodeTypeClassID, CodeTypeClass.ColumnID }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ CodeTypeClass.ColumnDescription, CodeType.ColumnCodeTypeClassDescription
 						, CodeType.ColumnCodeTypeClassDescription }}
 			};

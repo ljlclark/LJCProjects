@@ -83,7 +83,7 @@ namespace LJCFacilityManager
 			if (LJCID > 0)
 			{
 				LJCIsUpdate = true;
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Equipment.ColumnID, LJCID }
 				};
@@ -159,7 +159,7 @@ namespace LJCFacilityManager
 		private bool DataSave()
 		{
 			Equipment lookupRecord;
-			DbColumns keyColumns;
+			LJCDataColumns keyColumns;
 			string title;
 			string message;
 			bool retValue = true;
@@ -168,7 +168,7 @@ namespace LJCFacilityManager
 
 			if (NetString.HasValue(LJCRecord.Code))
 			{
-				keyColumns = new DbColumns()
+				keyColumns = new LJCDataColumns()
 				{
 					{ Equipment.ColumnCode, (object)LJCRecord.Code }
 				};
@@ -184,7 +184,7 @@ namespace LJCFacilityManager
 				}
 			}
 
-			keyColumns = new DbColumns()
+			keyColumns = new LJCDataColumns()
 			{
 				{ Equipment.ColumnDescription, (object)LJCRecord.Description }
 			};
@@ -203,7 +203,7 @@ namespace LJCFacilityManager
 			{
 				if (LJCIsUpdate)
 				{
-					keyColumns = new DbColumns()
+					keyColumns = new LJCDataColumns()
 					{
 						{ Equipment.ColumnID, LJCRecord.ID }
 					};

@@ -1,9 +1,9 @@
 // Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewColumns.cs
-using System;
 using System.Collections.Generic;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -52,7 +52,7 @@ namespace LJCDBViewDAL
 		{
 			ViewColumns retValue = null;
 
-			if (NetCommon.HasItems(list))
+			if (LJC.HasListItems(list))
 			{
 				retValue = new ViewColumns();
 				foreach (ViewColumn item in list)

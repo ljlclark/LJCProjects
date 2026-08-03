@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CVVisitGridCode.cs
 using System;
@@ -10,6 +10,7 @@ using LJCDBMessage;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace CVRManager
 {
@@ -36,7 +37,7 @@ namespace CVRManager
 			LogTime logTime = new LogTime("CVRManager.log", region, true);
 			mCVVisitGrid.LJCRowsClear();
 
-			if (NetCommon.HasItems(dataRecords))
+			if (LJC.HasListItems(dataRecords))
 			{
 				foreach (CVVisit dataRecord in dataRecords)
 				{

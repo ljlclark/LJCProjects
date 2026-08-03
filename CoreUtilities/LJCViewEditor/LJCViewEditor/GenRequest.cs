@@ -1,11 +1,11 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenRequest.cs
-using System;
 using System.Text;
 using LJCNetCommon;
 using LJCDBMessage;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCViewEditor
 {
@@ -61,15 +61,15 @@ namespace LJCViewEditor
 
     #region Child Functions
 
-    // Creates and returns the DbColumns create code for the specified	DbColumns.
+    // Creates and returns the LJCDataColumns create code for the specified	LJCDataColumns.
     /// <include path='items/ColumnsCode/*' file='Doc/GenRequest.xml'/>
-    public static string ColumnsCode(DbColumns dbColumns, string indent = null)
+    public static string ColumnsCode(LJCDataColumns dbColumns, string indent = null)
     {
       string retValue;
 
       var columns = new string[]
       {
-        "0 {0}Columns = new DbColumns\r\n",
+        "0 {0}Columns = new LJCDataColumns\r\n",
         "1 {0}{{\r\n",
         "2 {0}  // columnName, propertyName = null, renameAs = null, ",
         "3 dataTypeName = \"String\", caption = null\r\n",  // Continuation
@@ -87,7 +87,7 @@ namespace LJCViewEditor
       builder.Append(Line(columns, 3, indent));
 
       bool isFirst = true;
-      foreach (DbColumn dbColumn in dbColumns)
+      foreach (LJCDataColumn dbColumn in dbColumns)
       {
         bool hasPropertyName = NetString.HasValue(dbColumn.PropertyName)
           && dbColumn.PropertyName != dbColumn.ColumnName;
@@ -217,7 +217,7 @@ namespace LJCViewEditor
         "8 {0}dbFilters.Add(dbFilter);\r\n"
       };
 
-      if (NetCommon.HasItems(dbRequest.Filters))
+      if (LJC.HasListItems(dbRequest.Filters))
       {
         StringBuilder builder = new StringBuilder(128);
         builder.AppendLine();
@@ -259,7 +259,7 @@ namespace LJCViewEditor
         "3 {0}}},\r\n"
       };
 
-      if (NetCommon.HasItems(dbJoin.JoinOns))
+      if (LJC.HasListItems(dbJoin.JoinOns))
       {
         indent += "  ";
         StringBuilder builder = new StringBuilder(128);
@@ -304,7 +304,7 @@ namespace LJCViewEditor
         "9 {0}dbRequest.Joins = dbJoins;\r\n"
       };
 
-      if (NetCommon.HasItems(dbRequest.Joins))
+      if (LJC.HasListItems(dbRequest.Joins))
       {
         StringBuilder builder = new StringBuilder(128);
         builder.AppendLine();
@@ -327,7 +327,7 @@ namespace LJCViewEditor
           builder.Append(JoinOnsCode(dbJoin, indent));
 
           // Join Columns
-          if (NetCommon.HasItems(dbJoin.Columns))
+          if (LJC.HasListItems(dbJoin.Columns))
           {
             builder.Append(ColumnsCode(dbJoin.Columns, indent));
           }
@@ -368,7 +368,7 @@ namespace LJCViewEditor
         "3 {0}}};\r\n",
       };
 
-      if (NetCommon.HasItems(orderByNames))
+      if (LJC.HasListItems(orderByNames))
       {
         StringBuilder builder = new StringBuilder(128);
         builder.AppendLine();

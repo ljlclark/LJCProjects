@@ -10,6 +10,7 @@ namespace LJCNetCommon
   // Represents a database column. (D)
   /// <include file='Doc/DbColumn.xml'
   ///  path='items/DbColumn/*'/>
+  [Obsolete ("Use LJCDataColumn()")]
   public class DbColumn : IComparable<DbColumn>
   {
     #region Constructors

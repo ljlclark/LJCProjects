@@ -7,6 +7,7 @@ using System.Data.SqlTypes;
 namespace LJCNetCommon
 {
   /// <summary>Represents a data source value.</summary>
+  [Obsolete ("Use LJCDataValue()")]
   public class DbValue : IComparable<DbValue>
   {
     #region Constructors

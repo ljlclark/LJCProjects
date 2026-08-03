@@ -74,7 +74,7 @@ namespace LJCGenTextLib
 
     // Generates the data XML files.
     /// <include path='items/Create/*' file='Doc/XMLData.xml'/>
-    public string Create(string tableName, DbColumns dbColumns)
+    public string Create(string tableName, LJCDataColumns dbColumns)
     {
       string retValue;
 
@@ -176,13 +176,13 @@ namespace LJCGenTextLib
 
     // Creates the Property Items.
     /// <include path='items/PropertyItems/*' file='Doc/XMLData.xml'/>
-    public string PropertyItems(DbColumns dbColumns)
+    public string PropertyItems(LJCDataColumns dbColumns)
     {
       string retValue;
 
       Builder = new StringBuilder(128);
       int index = 0;
-      foreach (DbColumn dbColumn in dbColumns)
+      foreach (LJCDataColumn dbColumn in dbColumns)
       {
         Add("<RepeatItem>");
         index++;

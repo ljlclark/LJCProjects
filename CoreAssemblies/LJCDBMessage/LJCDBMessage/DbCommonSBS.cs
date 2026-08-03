@@ -1,45 +1,48 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Testing.cs
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {
   class DbCommonSBS
   {
     // Gets Request columns from the baseDefinition using the propertyNames.
-    /// <include path='items/RequestColumns/*' file='Doc/DbCommon.xml'/>
-    public static DbColumns RequestColumns(DbColumns baseDefinition
+    /// <include file='Doc/DbCommon.xml'
+    ///  path='items/RequestColumns/*'/>
+    public static LJCDataColumns RequestColumns(LJCDataColumns baseDefinition
       , List<string> propertyNames = null)
     {
-      DbColumns requestColumns;
-      if (!NetCommon.HasItems(propertyNames))
+      LJCDataColumns requestColumns;
+      if (!LJC.HasListItems(propertyNames))
       {
         // Default to all Data Definition columns.
         requestColumns = baseDefinition;
       }
       else
       {
-        requestColumns = baseDefinition.LJCGetColumns(propertyNames);
+        requestColumns = baseDefinition.LJCColumns(propertyNames);
       }
 
-      var retValue = new DbColumns(requestColumns);
+      var retValue = new LJCDataColumns(requestColumns);
       return retValue;
     }
 
     #region Data Value Columns
 
-    // Gets Request Value columns from the baseDefinition using the propertyNames.
+    // Gets Request Value columns from the baseDefinition using propertyNames.
     // Similar to RequestDataKeys and RequestLookupKeys()
-    /// <include path='items/RequestDataColumns/*' file='Doc/DbCommon.xml'/>
-    public static DbColumns RequestDataColumns(object dataObject
-      , DbColumns baseDefinition, List<string> propertyNames = null
+    /// <include file='Doc/DbCommon.xml'
+    ///  path='items/RequestDataColumns/*'/>
+    public static LJCDataColumns RequestDataColumns(object dataObject
+      , LJCDataColumns baseDefinition, List<string> propertyNames = null
       , bool includeNull = false)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       if (dataObject != null)
       {
@@ -50,47 +53,42 @@ namespace LJCDBMessage
       return retValue;
     }
 
-    // Creates DbColumns values from data properties for supplied column list.
+    // Creates LJCDataColumns values from data properties for supplied column list.
     // Similar to RequestKeys() and LookupKeys()
-    private static DbColumns DataColumns(object dataObject
-      , DbColumns requestColumns, bool includeNull)
+    private static LJCDataColumns DataColumns(object dataObject
+      , LJCDataColumns requestColumns, bool includeNull)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       if (dataObject != null
         && requestColumns != null)
       {
-        retValue = new DbColumns();
+        retValue = new LJCDataColumns();
         LJCReflect reflect = new LJCReflect(dataObject);
-        foreach (DbColumn dbColumn in requestColumns)
+        foreach (LJCDataColumn dataColumn in requestColumns)
         {
-          // Add DbColumn from request columns and value from dataObject.
-          object value = reflect.GetValue(dbColumn.PropertyName);
-          // *** Next Statement *** Delete 12/05/24?
-          //if (value != null)
-          //{
-          // *** Begin *** Add 12/05/24?
+          // Add LJCDataColumn from request columns and value from dataObject.
+          object value = reflect.GetValue(dataColumn.PropertyName);
           if (!includeNull
             && null == value)
           {
             continue;
           }
-          // *** End   *** Add
-          var dbValueColumn = CreateDataColumn(dbColumn, value);
-          if (IsDataColumn(dbValueColumn))
+          var valueColumn = CreateDataColumn(dataColumn, value);
+          if (IsDataColumn(valueColumn))
           {
-            retValue.Add(dbValueColumn);
+            retValue.Add(valueColumn);
           }
-          //}
         }
       }
       return retValue;
     }
 
-    // Creates the value DbColumn object.
-    private static DbColumn CreateDataColumn(DbColumn dataColumn, object value)
+    // Creates the value LJCDataColumn object.
+    private static LJCDataColumn CreateDataColumn(LJCDataColumn dataColumn
+      , object value)
     {
-      DbColumn retValue = null;
+      LJCDataColumn retValue = null;
 
       if (dataColumn != null
         || value != null)
@@ -101,7 +99,7 @@ namespace LJCDBMessage
           value = "null";
         }
 
-        retValue = new DbColumn(dataColumn)
+        retValue = new LJCDataColumn(dataColumn)
         {
           Value = value
         };
@@ -110,7 +108,7 @@ namespace LJCDBMessage
     }
 
     // Checks if the Data column should be included.
-    private static bool IsDataColumn(DbColumn dataColumn)
+    private static bool IsDataColumn(LJCDataColumn dataColumn)
     {
       bool retValue = false;
 
@@ -128,32 +126,32 @@ namespace LJCDBMessage
     // Gets Request Key columns from baseDefinition using keyColumns and dbJoins.
     /// <include path='items/RequestKeys/*' file='Doc/DbCommon.xml'/>
     // Similar to DataColumns() and LookupKeys()
-    public static DbColumns RequestKeys(DbColumns keyColumns
-      , DbColumns baseDefinition, DbJoins dbJoins = null)
+    public static LJCDataColumns RequestKeys(LJCDataColumns keyColumns
+      , LJCDataColumns baseDefinition, DbJoins dbJoins = null)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       if (keyColumns != null)
       {
-        retValue = new DbColumns();
-        foreach (DbColumn keyColumn in keyColumns)
+        retValue = new LJCDataColumns();
+        foreach (LJCDataColumn keyColumn in keyColumns)
         {
           // Fill out the remainder of the column definition.
-          var dbColumn = CreateKeyColumn(keyColumn, baseDefinition, dbJoins);
-          if (dbColumn != null)
+          var dataColumn = CreateKeyColumn(keyColumn, baseDefinition, dbJoins);
+          if (dataColumn != null)
           {
-            retValue.Add(dbColumn);
+            retValue.Add(dataColumn);
           }
         }
       }
       return retValue;
     }
 
-    // Creates the key DbColumn object.
-    private static DbColumn CreateKeyColumn(DbColumn keyColumn
-      , DbColumns baseDefinition, DbJoins dbJoins = null)
+    // Creates the key LJCDataColumn object.
+    private static LJCDataColumn CreateKeyColumn(LJCDataColumn keyColumn
+      , LJCDataColumns baseDefinition, DbJoins dbJoins = null)
     {
-      DbColumn retValue = null;
+      LJCDataColumn retValue = null;
 
       bool process = true;
       if (null == keyColumn.Value)
@@ -181,20 +179,22 @@ namespace LJCDBMessage
     }
 
     // Gets the Key Column using the column collection and Key Column values. 
-    private static DbColumn GetKeyColumn(DbColumns dataColumns, DbColumn keyColumn)
+    private static LJCDataColumn GetKeyColumn(LJCDataColumns dataColumns
+      , LJCDataColumn keyColumn)
     {
-      DbColumn retValue;
+      LJCDataColumn retValue;
 
       // Preserve original and potentially user qualified name.
       var columnName = keyColumn.ColumnName;
 
       // Get column definition by column name.
       var searchName = NetString.GetSearchName(keyColumn.ColumnName);
-      retValue = dataColumns.LJCSearchColumnName(searchName);
+      //retValue = dataColumns.LJCSearchColumnName(searchName);
+      retValue = dataColumns[searchName];
       if (retValue != null)
       {
         // Create key column with original name.
-        retValue = new DbColumn(retValue)
+        retValue = new LJCDataColumn(retValue)
         {
           ColumnName = columnName,
           Value = keyColumn.Value
@@ -204,14 +204,14 @@ namespace LJCDBMessage
     }
 
     // Attempt to get the Join column qualified with the Join table name.
-    private static DbColumn QualifiedJoinColumn(DbColumn keyColumn
+    private static LJCDataColumn QualifiedJoinColumn(LJCDataColumn keyColumn
       , DbJoins dbJoins)
     {
-      DbColumn retValue = null;
+      LJCDataColumn retValue = null;
 
       foreach (DbJoin dbJoin in dbJoins)
       {
-        if (NetCommon.HasItems(dbJoin.Columns))
+        if (LJC.HasListItems(dbJoin.Columns))
         {
           retValue = GetKeyColumn(dbJoin.Columns, keyColumn);
           if (retValue != null)
@@ -236,35 +236,36 @@ namespace LJCDBMessage
     #region Data Keys
 
     // Gets the Request Key columns from the keyColumns and baseDefinition.
-    /// <include path='items/RequestDataKeys/*' file='Doc/DbCommon.xml'/>
+    /// <include file='Doc/DbCommon.xml'
+    ///  path='items/RequestDataKeys/*'/>
     // Similar to RequestDataColumns and RequestLookupKeys()
-    public static DbColumns RequestDataKeys(DbColumns keyColumns
-      , DbColumns baseDefinition)
+    public static LJCDataColumns RequestDataKeys(LJCDataColumns keyColumns
+      , LJCDataColumns baseDefinition)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       if (keyColumns != null)
       {
-        var requestColumns = RequestKeys(keyColumns, baseDefinition);
-        retValue = DataKeys(requestColumns);
+        var dataColumns = RequestKeys(keyColumns, baseDefinition);
+        retValue = DataKeys(dataColumns);
       }
       return retValue;
     }
 
-    // Creates DbColumns Key columns from valid key columns.
-    private static DbColumns DataKeys(DbColumns keyColumns)
+    // Creates LJCDataColumns Key columns from valid key columns.
+    private static LJCDataColumns DataKeys(LJCDataColumns keyColumns)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       if (keyColumns != null)
       {
-        retValue = new DbColumns();
-        foreach (DbColumn dbColumn in keyColumns)
+        retValue = new LJCDataColumns();
+        foreach (LJCDataColumn dataColumn in keyColumns)
         {
-          if (dbColumn.Value != null)
+          if (dataColumn.Value != null)
           {
             // Create the Data Key column.
-            var dbValueColumn = dbColumn.Clone();
+            var dbValueColumn = dataColumn.Clone();
             if (IsKeyColumn(dbValueColumn, true))
             {
               retValue.Add(dbValueColumn);
@@ -280,48 +281,49 @@ namespace LJCDBMessage
 
     // Get Request Value Key columns from the data object for the property names.
     // Creates Add Lookup Data Key Columns.
-    /// <include path='items/RequestLookupKeys/*' file='Doc/DbCommon.xml'/>
+    /// <include file='Doc/DbCommon.xml'
+    ///  path='items/RequestLookupKeys/*'/>
     // Similar to RequestDataColumns and RequestDataKeys()
-    public static DbColumns RequestLookupKeys(object dataObject
-      , DbColumns baseDefinition, List<string> propertyNames = null)
+    public static LJCDataColumns RequestLookupKeys(object dataObject
+      , LJCDataColumns baseDefinition, List<string> propertyNames = null)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       if (dataObject != null)
       {
         GetDefaultPropertyNames(dataObject, ref propertyNames);
 
-        var keyDataColumns = RequestColumns(baseDefinition, propertyNames);
-        retValue = LookupKeys(dataObject, keyDataColumns);
+        var dataColumns = RequestColumns(baseDefinition, propertyNames);
+        retValue = LookupKeys(dataObject, dataColumns);
       }
       return retValue;
     }
 
-    // Creates DbColumns keys from data properties for supplied column list.
-    private static DbColumns LookupKeys(object dataObject
-      , DbColumns requestColumns)
+    // Creates LJCDataColumns keys from data properties for supplied column list.
+    private static LJCDataColumns LookupKeys(object dataObject
+      , LJCDataColumns requestColumns)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       if (dataObject != null
         && requestColumns != null)
       {
-        retValue = new DbColumns();
+        retValue = new LJCDataColumns();
         LJCReflect reflect = new LJCReflect(dataObject);
-        foreach (DbColumn dbColumn in requestColumns)
+        foreach (LJCDataColumn dataColumn in requestColumns)
         {
-          // Add DbColumn from dataDefinition and value from dataObject.
-          object value = reflect.GetValue(dbColumn.PropertyName);
+          // Add LJCDataColumn from dataDefinition and value from dataObject.
+          object value = reflect.GetValue(dataColumn.PropertyName);
           if (value != null)
           {
             // Create the Lookup Key column.
-            var dbValueColumn = new DbColumn(dbColumn)
+            var valueColumn = new LJCDataColumn(dataColumn)
             {
               Value = value
             };
-            if (IsKeyColumn(dbValueColumn, true))
+            if (IsKeyColumn(valueColumn, true))
             {
-              retValue.Add(dbValueColumn);
+              retValue.Add(valueColumn);
             }
           }
         }
@@ -331,7 +333,7 @@ namespace LJCDBMessage
     #endregion
 
     // Checks if the column should be included.
-    private static bool IsKeyColumn(DbColumn dataColumn
+    private static bool IsKeyColumn(LJCDataColumn dataColumn
       , bool includeAutoIncrement = false)
     {
       bool retValue = true;

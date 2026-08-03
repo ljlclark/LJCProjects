@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // FacilityGridCode.cs
 using System;
@@ -7,6 +7,7 @@ using CVRDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace CVRManager
 {
@@ -37,7 +38,7 @@ namespace CVRManager
 			dataRecords = mManagers.FacilityManager.Load();
 
 			//FacilityManager facilityManager = mManagers.FacilityManager;
-			if (NetCommon.HasItems(dataRecords))
+			if (LJC.HasListItems(dataRecords))
 			{
 				foreach (Facility dataRecord in dataRecords)
 				{

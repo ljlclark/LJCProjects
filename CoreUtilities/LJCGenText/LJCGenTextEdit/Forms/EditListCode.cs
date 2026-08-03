@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // EditListCode.cs
 using LJCNetCommon;
@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenTextEdit
 {
@@ -264,7 +265,7 @@ namespace LJCGenTextEdit
 
       if (0 == SectionGrid.Columns.Count)
       {
-        mGridColumnsSection = new DbColumns()
+        mGridColumnsSection = new LJCDataColumns()
         {
           "Name"
         };
@@ -273,7 +274,7 @@ namespace LJCGenTextEdit
         SectionGrid.LJCAddColumns(mGridColumnsSection);
       }
     }
-    private DbColumns mGridColumnsSection;
+    private LJCDataColumns mGridColumnsSection;
 
     // Setup the grid columns.
     private void SetupGridItem()
@@ -282,7 +283,7 @@ namespace LJCGenTextEdit
 
       if (0 == ItemGrid.Columns.Count)
       {
-        mGridColumnsItem = new DbColumns()
+        mGridColumnsItem = new LJCDataColumns()
         {
           "Name"
         };
@@ -291,7 +292,7 @@ namespace LJCGenTextEdit
         ItemGrid.LJCAddColumns(mGridColumnsItem);
       }
     }
-    private DbColumns mGridColumnsItem;
+    private LJCDataColumns mGridColumnsItem;
 
     // Setup the grid columns.
     private void SetupGridReplacement()
@@ -300,7 +301,7 @@ namespace LJCGenTextEdit
 
       if (0 == ReplacementGrid.Columns.Count)
       {
-        mGridColumnsReplacement = new DbColumns()
+        mGridColumnsReplacement = new LJCDataColumns()
         {
           "Name",
           "Value"
@@ -310,7 +311,7 @@ namespace LJCGenTextEdit
         ReplacementGrid.LJCAddColumns(mGridColumnsReplacement);
       }
     }
-    private DbColumns mGridColumnsReplacement;
+    private LJCDataColumns mGridColumnsReplacement;
 
     // Gets or sets the ControlValues item.
     private ControlValues ControlValues { get; set; }
@@ -383,7 +384,7 @@ namespace LJCGenTextEdit
         MessageBox.Show("mSyntaxColors is null");
       }
 
-      if (NetCommon.HasItems(mSyntaxColors.ColorSettings))
+      if (LJC.HasListItems(mSyntaxColors.ColorSettings))
       {
         foreach (ColorSetting setting in mSyntaxColors.ColorSettings)
         {

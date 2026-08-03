@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ReplacementGridCode.cs
 using LJCGenTextLib;
@@ -8,6 +8,7 @@ using LJCWinFormControls;
 using System;
 using System.Windows.Forms;
 using static LJCGenTextEdit.EditList;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenTextEdit
 {
@@ -47,7 +48,7 @@ namespace LJCGenTextEdit
         string repeatItemName = row.LJCGetCellText("Name");
 
         var records = GenDataManager.LoadReplacements(sectionName, repeatItemName);
-        if (NetCommon.HasItems(records))
+        if (LJC.HasListItems(records))
         {
           foreach (Replacement record in records)
           {

@@ -10,6 +10,7 @@ namespace LJCNetCommon
   // Represents a collection of DbValue objects.
   /// <include path='items/DbValues/*' file='Doc/DbValues.xml'/>
   [XmlRoot("DbValues")]
+  [Obsolete ("Use LJCDataValues()")]
   public class DbValues : List<DbValue>
   {
     #region Static Functions

@@ -1,11 +1,11 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ClassItemComboCode.cs
 using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormControls;
-using System.Reflection;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenDocEdit
 {
@@ -39,7 +39,7 @@ namespace LJCGenDocEdit
         var manager = mManagers.DocClassManager;
         var dataRecords = manager.LoadWithGroup(ClassGroupID());
 
-        if (NetCommon.HasItems(dataRecords))
+        if (LJC.HasListItems(dataRecords))
         {
           foreach (DocClass dataRecord in dataRecords)
           {

@@ -10,6 +10,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace DataHelper
 {
@@ -42,7 +43,7 @@ namespace DataHelper
 			var dataTableManager = mManagers.DbMetaDataTableManager;
 			records = dataTableManager.Load();
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (DbMetaDataTable record in records)
 				{
@@ -113,7 +114,7 @@ namespace DataHelper
 		// Displays a detail dialog for a new record.
 		internal void DoNewTable()
 		{
-			DbColumns dataColumns
+			LJCDataColumns dataColumns
 				= mManagers.DbMetaDataTableManager.DataDefinition;
 
       // ToDo: Convert to new DataDetailDialog.
@@ -140,7 +141,7 @@ namespace DataHelper
 				int id = row.LJCGetInt32(DbMetaDataTable.ColumnID);
 
 				// Retrieve Data
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ DbMetaDataTable.ColumnID, id }
 				};
@@ -150,7 +151,7 @@ namespace DataHelper
 				if (DbResult.HasData(dbResult))
 				{
 					// The Data Definition and Record values are merged. 
-					DbColumns dataColumns = dbResult.GetValueColumns();
+					LJCDataColumns dataColumns = dbResult.GetValueColumns();
 
           // ToDo: Convert to new DataDetailDialog.
           var detail = new DataDetailDialog(mUserID, mTableName)
@@ -172,7 +173,7 @@ namespace DataHelper
 		private void TableDetail_Change(object sender, EventArgs e)
 		{
 			DataDetailDialog detail;
-			DbColumns dataColumns;
+			LJCDataColumns dataColumns;
 
 			detail = sender as DataDetailDialog;
 			dataColumns = detail.LJCDataColumns;
@@ -183,7 +184,7 @@ namespace DataHelper
 			var dataTableManager = mManagers.DbMetaDataTableManager;
 			if (detail.LJCIsUpdate)
 			{
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ DbMetaDataTable.ColumnID, mdTable.ID }
 				};
@@ -221,7 +222,7 @@ namespace DataHelper
 					// Data from items.
 					int id = row.LJCGetInt32(DbMetaDataTable.ColumnID);
 
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ DbMetaDataTable.ColumnID, id }
 					};

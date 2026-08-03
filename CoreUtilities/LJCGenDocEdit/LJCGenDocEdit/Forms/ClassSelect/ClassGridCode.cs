@@ -154,7 +154,7 @@ namespace LJCGenDocEdit
       ClassGrid.MultiSelect = true;
       if (0 == ClassGrid.Columns.Count)
       {
-        GridColumns = new DbColumns()
+        GridColumns = new LJCDataColumns()
         {
           { "Name" },
           { "Summary" }
@@ -221,7 +221,7 @@ namespace LJCGenDocEdit
     private ArgError ArgError { get; set; }
 
     // Gets or sets the GridColumns value.
-    private DbColumns GridColumns { get; set; }
+    private LJCDataColumns GridColumns { get; set; }
 
     // Gets or sets the Class Grid reference.
     private LJCDataGrid ClassGrid { get; set; }

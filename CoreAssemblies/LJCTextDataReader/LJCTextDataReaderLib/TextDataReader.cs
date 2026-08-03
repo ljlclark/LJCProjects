@@ -31,7 +31,7 @@ namespace LJCTextDataReaderLib
       LJCFixedLengthFields = fixedLengthFields;
       LJCHasHeadingLine = hasHeadingLine;
       LJCSkipHeaderLines = skipHeaderLines;
-      LJCDataFields = new DbColumns();
+      LJCDataFields = new LJCDataColumns();
 
       IsClosed = true;
     }
@@ -69,7 +69,7 @@ namespace LJCTextDataReaderLib
     /// <include path='items/GetDataTypeName1/*' file='Doc/TextDataReader.xml'/>
     public string GetDataTypeName(int i)
     {
-      DbColumn dbColumn;
+      LJCDataColumn dbColumn;
       string retValue = null;
 
       if (i > -1 && i < FieldCount)
@@ -184,7 +184,7 @@ namespace LJCTextDataReaderLib
       const int IsUnique = 5;
 
       DataTable retValue = CreateSchemaTable();
-      foreach (DbColumn dbColumn in LJCDataFields)
+      foreach (LJCDataColumn dbColumn in LJCDataFields)
       {
         DataRow dataRow = retValue.NewRow();
         dataRow[AllowDBNull] = dbColumn.AllowDBNull;
@@ -193,7 +193,7 @@ namespace LJCTextDataReaderLib
         dataRow[DataType] = GetDataType(dbColumn.DataTypeName);
         dataRow[DataTypeName] = dbColumn.DataTypeName;
         dataRow[ColumnSize] = dbColumn.MaxLength;
-        dataRow[IsUnique] = dbColumn.Unique;
+        dataRow[IsUnique] = dbColumn.IsUniqueKey;
         retValue.Rows.Add(dataRow);
       }
       return retValue;
@@ -768,8 +768,8 @@ namespace LJCTextDataReaderLib
     public void LJCSetFields(string layoutFileName)
     {
       LJCLayoutFileName = layoutFileName;
-      LJCDataFields = NetCommon.XmlDeserialize(typeof(DbColumns)
-        , LJCLayoutFileName) as DbColumns;
+      LJCDataFields = NetCommon.XmlDeserialize(typeof(LJCDataColumns)
+        , LJCLayoutFileName) as LJCDataColumns;
     }
 
     // Sets the source text file values.
@@ -780,7 +780,7 @@ namespace LJCTextDataReaderLib
       LJCFieldDelimiter = fieldDelimiter;
       if (null == LJCDataFields)
       {
-        LJCDataFields = new DbColumns();
+        LJCDataFields = new LJCDataColumns();
       }
 
       if (!File.Exists(fileName))
@@ -812,7 +812,7 @@ namespace LJCTextDataReaderLib
     {
       LJCLines = lines;
       LJCFieldDelimiter = fieldDelimiter;
-      LJCDataFields = new DbColumns();
+      LJCDataFields = new LJCDataColumns();
 
       LJCCurrentLineIndex = 0;
       if (LJCHasHeadingLine)
@@ -873,7 +873,7 @@ namespace LJCTextDataReaderLib
           }
 
           // Add field data definition.
-          DbColumn dbColumn = new DbColumn()
+          LJCDataColumn dbColumn = new LJCDataColumn()
           {
             ColumnName = fieldName,
             DataTypeName = dataTypeName,
@@ -889,10 +889,10 @@ namespace LJCTextDataReaderLib
 
     // Sets the data object property values from the TextDataReader.
     /// <include path='items/LJCSetObjectValues/*' file='Doc/TextDataReader.xml'/>
-    public void LJCSetObjectValues(object dataObject, DbColumns dataFields = null)
+    public void LJCSetObjectValues(object dataObject, LJCDataColumns dataFields = null)
     {
       LJCReflect reflect;
-      DbColumns fieldColumns;
+      LJCDataColumns fieldColumns;
 
       fieldColumns = LJCDataFields;
       if (dataFields != null)
@@ -901,7 +901,7 @@ namespace LJCTextDataReaderLib
       }
 
       reflect = new LJCReflect(dataObject);
-      foreach (DbColumn dbColumn in fieldColumns)
+      foreach (LJCDataColumn dbColumn in fieldColumns)
       {
         string sourceColumnName = dbColumn.ColumnName;
         if (NetString.HasValue(dbColumn.RenameAs))
@@ -976,7 +976,7 @@ namespace LJCTextDataReaderLib
         //for (int index = 0; index < FieldCount; index++)
         for (int index = 0; index < values.Length; index++)
         {
-          DbColumn dataField = LJCDataFields[index];
+          LJCDataColumn dataField = LJCDataFields[index];
           if (dataField != null)
           {
             dataField.Value = values[index];
@@ -994,7 +994,7 @@ namespace LJCTextDataReaderLib
       //for (int index = 0; index < FieldCount; index++)
       for (int index = 0; index < LJCDataFields.Count; index++)
       {
-        DbColumn dataField = LJCDataFields[index];
+        LJCDataColumn dataField = LJCDataFields[index];
         if (dataField != null)
         {
           dataField.Value = line.Substring(dataField.Position - 1
@@ -1204,7 +1204,7 @@ namespace LJCTextDataReaderLib
     public int LJCCurrentRecordCount { get; set; }
 
     /// <summary>Gets or sets the current DataField values.</summary>
-    public DbColumns LJCDataFields { get; private set; }
+    public LJCDataColumns LJCDataFields { get; private set; }
 
     /// <summary>Gets or sets the field delimiter.</summary>
     public char LJCFieldDelimiter

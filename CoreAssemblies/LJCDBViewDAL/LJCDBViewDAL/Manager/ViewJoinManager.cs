@@ -1,9 +1,10 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoinManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -85,9 +86,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns IDKey(int id)
+    public LJCDataColumns IDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewJoin.ColumnID, id }
       };
@@ -96,9 +97,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns ParentIDKey(int id)
+    public LJCDataColumns ParentIDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewJoin.ColumnViewDataID, id }
       };
@@ -107,9 +108,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/UniqueKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns UniqueKey(int parentID, string name)
+    public LJCDataColumns UniqueKey(int parentID, string name)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewJoin.ColumnViewDataID, parentID },
         { ViewJoin.ColumnTableName, (object)name }
@@ -160,10 +161,14 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (NetCommon.HasItems(viewJoin.ChangedNames))
+          // *** Change ***
+          var changedNames = viewJoin.ChangedNames.ChangedProperties;
+          //if (NetCommon.HasItems(viewJoin.ChangedNames))
+          if (LJC.HasListItems(changedNames))
           {
             var keyColumns = IDKey(retrieveData.ID);
-            Update(viewJoin, keyColumns, viewJoin.ChangedNames);
+            //Update(viewJoin, keyColumns, viewJoin.ChangedNames);
+            Update(viewJoin, keyColumns, changedNames);
           }
         }
       }

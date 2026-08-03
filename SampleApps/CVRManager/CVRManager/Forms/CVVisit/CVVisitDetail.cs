@@ -248,7 +248,7 @@ namespace CVRManager
 
 			UnitMeasure unitMeasure;
 			var unitMeasureManager = UnitMeasureManagers.UnitMeasureManager;
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ UnitMeasure.ColumnName, (object)"Celsius" }
 			};

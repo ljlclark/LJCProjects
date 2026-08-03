@@ -50,9 +50,9 @@ namespace LJCRegionDAL
 
     // Get the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public LJCDataColumns GetIDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { City.ColumnID, id }
       };
@@ -64,9 +64,9 @@ namespace LJCRegionDAL
 
     // Creates the RecordColumns object.
     /// <include path='items/DataColumns/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns DataColumns(long id)
+    public LJCDataColumns DataColumns(long id)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       // Use common data definitions.
       var keyColumns = GetIDKey((int)id);

@@ -82,7 +82,7 @@ namespace LJCFacilityManager
 
 			if (FacilityCommon.GetAdministrator(0) == null)
 			{
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Person.ColumnFirstName, (object)"System" },
 					{ Person.ColumnLastName, (object)"Administrator" }
@@ -134,7 +134,7 @@ namespace LJCFacilityManager
 			if (NetString.HasValue(userID))
 			{
 				enteredPassword = PasswordTextbox.Text.Trim();
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Person.ColumnUserID, userID }
 				};

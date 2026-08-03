@@ -57,14 +57,14 @@ namespace LJCGenDocEdit
       if (DocList.MethodGroupGrid.CurrentRow is LJCGridRow _)
       {
         var manager = Managers.DocMethodManager;
-        var propertyNames = mGridColumns.LJCGetPropertyNames();
+        var propertyNames = mGridColumns.LJCPropertyNames();
         var names = new List<string>()
         {
           DocMethod.ColumnSequence
         };
         manager.SetOrderBy(names);
 
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { DocMethod.ColumnDocMethodGroupID, MethodGroupID() }
         };
@@ -96,7 +96,7 @@ namespace LJCGenDocEdit
     }
 
     // Adds a grid row and updates it with the result values.
-    private LJCGridRow RowAddValues(DbValues dbValues)
+    private LJCGridRow RowAddValues(LJCDataValues dbValues)
     {
       ArgError.MethodName = "RowAddValues(dataRecord)";
       ArgError.Add(dbValues, "dbValues");
@@ -176,7 +176,7 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        var keyRecord = new DbColumns()
+        var keyRecord = new LJCDataColumns()
         {
           { DocMethod.ColumnID, DocMethodID() }
         };
@@ -345,7 +345,7 @@ namespace LJCGenDocEdit
       {
         // Setup the grid columns.
         var columns = mGridColumns.Clone();
-        columns.LJCRemoveColumn(DocMethod.ColumnID);
+        columns.LJCRemove(DocMethod.ColumnID);
         MethodGrid.LJCAddColumns(columns);
         MethodGrid.LJCRestoreColumnValues(DocList.ControlValues);
       }
@@ -498,7 +498,7 @@ namespace LJCGenDocEdit
     private LJCGenDocList DocList { get; set; }
 
     // Gets or sets the GridColumns value.
-    internal DbColumns GridColumns { get; set; }
+    internal LJCDataColumns GridColumns { get; set; }
 
     // The Managers object.
     private ManagersGenDoc Managers { get; set; }
@@ -513,7 +513,7 @@ namespace LJCGenDocEdit
     #region Class Data
 
     // The grid column definitions.
-    private DbColumns mGridColumns;
+    private LJCDataColumns mGridColumns;
 
     // *** Next Statement *** Add - Data View
     private readonly DataDbView mDataDbView;

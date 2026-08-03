@@ -30,6 +30,10 @@ set src=%assmRoot%LJCDBClientLib\LJCDBClientLib\%bin%
 echo copy %src%\LJCDBClientLib.dll %to%
 copy %src%\LJCDBClientLib.dll %to%
 
+set src=%assmRoot%LJCDBMessage\LJCDBMessage\%bin%
+echo copy %src%\LJCDBMessage.dll %to%
+copy %src%\LJCDBMessage.dll %to%
+
 set src=%utilRoot%LJCGenDoc\LJCDocObjLib\%bin%
 echo copy %src%\LJCDocObjLib.dll %to%
 copy %src%\LJCDocObjLib.dll %to%

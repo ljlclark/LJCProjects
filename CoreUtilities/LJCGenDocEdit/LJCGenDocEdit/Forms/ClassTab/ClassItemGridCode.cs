@@ -53,18 +53,18 @@ namespace LJCGenDocEdit
       if (ClassGroupGrid.CurrentRow is LJCGridRow _)
       {
         var manager = Managers.DocClassManager;
-        var propertyNames = mGridColumns.LJCGetPropertyNames();
+        var propertyNames = mGridColumns.LJCPropertyNames();
         var names = new List<string>()
         {
           LJCGenDocDAL.DocClass.ColumnSequence
         };
         manager.SetOrderBy(names);
 
-        DbColumns keyColumns;
+        LJCDataColumns keyColumns;
         if (0 == ClassGroupID())
         {
           // Get ungrouped classes.
-          keyColumns = new DbColumns()
+          keyColumns = new LJCDataColumns()
           {
             { LJCGenDocDAL.DocClass.ColumnDocClassGroupID, (object)"'-null'" },
             { LJCGenDocDAL.DocClass.ColumnDocAssemblyID, DocAssemblyID() }
@@ -72,7 +72,7 @@ namespace LJCGenDocEdit
         }
         else
         {
-          keyColumns = new DbColumns()
+          keyColumns = new LJCDataColumns()
           {
             { LJCGenDocDAL.DocClass.ColumnDocClassGroupID, ClassGroupID() }
           };
@@ -132,7 +132,7 @@ namespace LJCGenDocEdit
     }
 
     // Adds a grid row and updates it with the result values.
-    private LJCGridRow RowAddValues(DbValues dbValues)
+    private LJCGridRow RowAddValues(LJCDataValues dbValues)
     {
       ArgError.MethodName = "RowAddValues(dataRecord)";
       ArgError.Add(dbValues, "dbValues");
@@ -189,7 +189,7 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        var keyRecord = new DbColumns()
+        var keyRecord = new LJCDataColumns()
         {
           { LJCGenDocDAL.DocClass.ColumnDocClassGroupID, ClassGroupID() },
           { LJCGenDocDAL.DocClass.ColumnID, DocClassID() }
@@ -360,7 +360,7 @@ namespace LJCGenDocEdit
       {
         // Setup the grid columns.
         var columns = mGridColumns.Clone();
-        columns.LJCRemoveColumn(LJCGenDocDAL.DocClass.ColumnID);
+        columns.LJCRemove(LJCGenDocDAL.DocClass.ColumnID);
         ClassGrid.LJCAddColumns(columns);
         ClassGrid.LJCRestoreColumnValues(DocList.ControlValues);
       }
@@ -559,7 +559,7 @@ namespace LJCGenDocEdit
     private LJCGenDocList DocList { get; set; }
 
     // Gets or sets the GridColumns value.
-    //private DbColumns GridColumns { get; set; }
+    //private LJCDataColumns GridColumns { get; set; }
 
     // Gets or sets the ClassGroup Grid reference.
     private LJCDataGrid ClassGroupGrid { get; set; }
@@ -574,7 +574,7 @@ namespace LJCGenDocEdit
     #region Class Data
 
     // The grid column definitions.
-    private DbColumns mGridColumns;
+    private LJCDataColumns mGridColumns;
 
     // *** Next Statement *** Add - Data View
     private readonly DataDbView mDataDbView;

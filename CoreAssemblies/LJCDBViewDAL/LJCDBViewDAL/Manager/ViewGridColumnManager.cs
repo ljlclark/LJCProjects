@@ -1,10 +1,11 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewGridColumnManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -88,9 +89,9 @@ namespace LJCDBViewDAL
 
     // Get the ID key record.
     /// <include path='items/GetIDsKey/*' file='Doc/ViewGridColumnManager.xml'/>
-    public DbColumns GetIDsKey(int viewDataID, int viewColumnID)
+    public LJCDataColumns GetIDsKey(int viewDataID, int viewColumnID)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewGridColumn.ColumnViewDataID, viewDataID },
         { ViewGridColumn.ColumnViewColumnID, viewColumnID }
@@ -100,12 +101,12 @@ namespace LJCDBViewDAL
 
     // Get the Unique key record.
     /// <include path='items/GetUniqueKey/*' file='Doc/ViewGridColumnManager.xml'/>
-    public DbColumns GetUniqueKey(int viewDataID, string propertyName)
+    public LJCDataColumns GetUniqueKey(int viewDataID, string propertyName)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { "PropertyName", (object)propertyName },
         { ViewGridColumn.ColumnViewDataID, viewDataID }
@@ -115,9 +116,9 @@ namespace LJCDBViewDAL
 
     // Get the ViewDataID key record.
     /// <include path='items/GetViewDataIDKey/*' file='Doc/ViewGridColumnManager.xml'/>
-    public DbColumns GetViewDataIDKey(int viewDataID)
+    public LJCDataColumns GetViewDataIDKey(int viewDataID)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewGridColumn.ColumnViewDataID, viewDataID }
       };
@@ -156,7 +157,7 @@ namespace LJCDBViewDAL
           { ViewGridColumn.ColumnViewColumnID
            , $"[vc].{ViewColumn.ColumnID}" }
         },
-        Columns = new DbColumns() {
+        Columns = new LJCDataColumns() {
           { ViewColumn.ColumnColumnName },
           { ViewColumn.ColumnPropertyName }
         }
@@ -196,17 +197,17 @@ namespace LJCDBViewDAL
 
     // Retrieves the grid Columns definition.
     /// <include path='items/GetGridColumns/*' file='Doc/ViewGridColumnManager.xml'/>
-    public DbColumns GetGridColumns(int viewDataID)
+    public LJCDataColumns GetGridColumns(int viewDataID)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       ViewGridColumns viewGridColumns = LoadWithViewIDBySequence(viewDataID);
-      if (NetCommon.HasItems(viewGridColumns))
+      if (LJC.HasListItems(viewGridColumns))
       {
-        retValue = new DbColumns();
+        retValue = new LJCDataColumns();
         foreach (ViewGridColumn viewGridColumn in viewGridColumns)
         {
-          DbColumn dbColumn = new DbColumn()
+          LJCDataColumn dbColumn = new LJCDataColumn()
           {
             ColumnName = viewGridColumn.ColumnName,
             PropertyName = viewGridColumn.PropertyName
@@ -241,11 +242,15 @@ namespace LJCDBViewDAL
         {
           // Update record.
           // Note: Changed to update only changed columns.
-          if (NetCommon.HasItems(viewGridColumn.ChangedNames))
+          // *** Change ***
+          var changedNames = viewGridColumn.ChangedNames.ChangedProperties;
+          //if (NetCommon.HasItems(viewGridColumn.ChangedNames))
+          if (LJC.HasListItems(changedNames))
           {
             var keyColumns = GetIDsKey(retrieveData.ViewDataID
-              , retrieveData.ViewColumnID);
-            Update(viewGridColumn, keyColumns, viewGridColumn.ChangedNames);
+            , retrieveData.ViewColumnID);
+            //Update(viewGridColumn, keyColumns, viewGridColumn.ChangedNames);
+            Update(viewGridColumn, keyColumns, changedNames);
           }
         }
       }

@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbRequest.cs
 using System.Collections.Generic;
@@ -8,14 +8,16 @@ using LJCDataAccess;
 
 namespace LJCDBMessage
 {
-  /// <include path='items/DbRequest/*' file='Doc/ProjectDBMessage.xml'/>
+  /// <include file='Doc/ProjectDBMessage.xml'
+  ///  path='items/DbRequest/*'/>
   [XmlRoot("DbRequest")]
   public class DbRequest
   {
     #region Static Functions
 
     // Deserializes the DbRequest message.
-    /// <include path='items/Deserialize/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Deserialize/*'/>
     public static DbRequest Deserialize(string request)
     {
       DbRequest retValue = null;
@@ -36,24 +38,26 @@ namespace LJCDBMessage
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public DbRequest()
     {
       OrderByNames = new List<string>();
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public DbRequest(DbRequest item)
     {
       AddMissingColumns = item.AddMissingColumns;
-      DbAssignedColumns = new DbColumns(item.DbAssignedColumns);
+      DbAssignedColumns = new LJCDataColumns(item.DbAssignedColumns);
       ClientSql = item.ClientSql;
-      Columns = new DbColumns(item.Columns);
+      Columns = new LJCDataColumns(item.Columns);
       DataConfigName = item.DataConfigName;
       Filters = new DbFilters(item.Filters);
       Joins = new DbJoins(item.Joins);
-      KeyColumns = new DbColumns(item.KeyColumns);
+      KeyColumns = new LJCDataColumns(item.KeyColumns);
       OrderByNames = item.OrderByNames;
       PageSize = item.PageSize;
       Parameters = new ProcedureParameters(item.Parameters);
@@ -65,7 +69,8 @@ namespace LJCDBMessage
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include path='items/DbRequestC/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/DbRequestC/*'/>
     public DbRequest(RequestType requestType, string tableName
       , string dataConfigName = null)
     {
@@ -103,7 +108,8 @@ namespace LJCDBMessage
     }
 
     // Serializes the object and returns the serialized string.
-    /// <include path='items/Serialize1/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Serialize1/*'/>
     public string Serialize()
     {
       string retValue;
@@ -113,7 +119,8 @@ namespace LJCDBMessage
     }
 
     // Serialize the object to the specified file.
-    /// <include path='items/Serialize2/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Serialize2/*'/>
     public void Serialize(string fileSpec)
     {
       NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
@@ -123,8 +130,9 @@ namespace LJCDBMessage
     #region Data Properties
 
     // The included table columns.
-    /// <include path='items/Columns/*' file='Doc/DbRequest.xml'/>
-    public DbColumns Columns { get; set; }
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Columns/*'/>
+    public LJCDataColumns Columns { get; set; }
 
     /// <summary>The data configuration name.</summary>
     public string DataConfigName
@@ -141,8 +149,9 @@ namespace LJCDBMessage
     public DbJoins Joins { get; set; }
 
     // The key column values.
-    /// <include path='items/KeyColumns/*' file='Doc/DbRequest.xml'/>
-    public DbColumns KeyColumns { get; set; }
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/KeyColumns/*'/>
+    public LJCDataColumns KeyColumns { get; set; }
 
     /// <summary>Gets or sets the ProcedureName value.</summary>
     public string ProcedureName
@@ -153,7 +162,8 @@ namespace LJCDBMessage
     private string mProcedureName;
 
     // The request type name.
-    /// <include path='items/RequestTypeName/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/RequestTypeName/*'/>
     public string RequestTypeName
     {
       get { return mRequestTypeName; }
@@ -184,7 +194,7 @@ namespace LJCDBMessage
     public bool AddMissingColumns { get; set; }
 
     /// <summary>The Database Assigned columns.</summary>
-    public DbColumns DbAssignedColumns { get; set; }
+    public LJCDataColumns DbAssignedColumns { get; set; }
 
     /// <summary>Gets or sets the ClientSql value.</summary>
     public string ClientSql

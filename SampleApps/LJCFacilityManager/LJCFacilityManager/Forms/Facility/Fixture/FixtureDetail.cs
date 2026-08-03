@@ -80,7 +80,7 @@ namespace LJCFacilityManager
 			if (LJCID > 0)
 			{
 				LJCIsUpdate = true;
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Fixture.ColumnID, LJCID }
 				};
@@ -146,7 +146,7 @@ namespace LJCFacilityManager
 		private bool DataSave()
 		{
 			Fixture lookupRecord;
-			DbColumns keyColumns;
+			LJCDataColumns keyColumns;
 			string title;
 			string message;
 			bool retValue = true;
@@ -155,7 +155,7 @@ namespace LJCFacilityManager
 
 			if (NetString.HasValue(LJCRecord.Code))
 			{
-				keyColumns = new DbColumns()
+				keyColumns = new LJCDataColumns()
 				{
 					{ Fixture.ColumnCode, (object)LJCRecord.Code }
 				};
@@ -170,7 +170,7 @@ namespace LJCFacilityManager
 					MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				}
 			}
-			keyColumns = new DbColumns()
+			keyColumns = new LJCDataColumns()
 			{
 				{ Fixture.ColumnDescription, (object)LJCRecord.Description }
 			};
@@ -189,7 +189,7 @@ namespace LJCFacilityManager
 			{
 				if (LJCIsUpdate)
 				{
-					keyColumns = new DbColumns()
+					keyColumns = new LJCDataColumns()
 					{
 						{ Fixture.ColumnID, (object)LJCRecord.ID }
 					};

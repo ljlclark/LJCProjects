@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDataTransformDAL;
-using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -43,7 +43,7 @@ namespace LJCTransformManager
 				var layoutColumnManager = mManagers.LayoutColumnManager;
 				records = layoutColumnManager.LoadWithLayoutID(parentID);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (LayoutColumn record in records)
 					{

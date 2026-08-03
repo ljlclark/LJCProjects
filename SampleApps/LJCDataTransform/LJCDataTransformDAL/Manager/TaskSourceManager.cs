@@ -46,9 +46,9 @@ namespace LJCDataTransformDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKeys/*' file='Doc/TaskSourceManager.xml'/>
-		public DbColumns GetIDKeys(int stepTaskID, int dataSourceID)
+		public LJCDataColumns GetIDKeys(int stepTaskID, int dataSourceID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ TaskSource.ColumnStepTaskID, stepTaskID },
 				{ TaskSource.ColumnDataSourceID, dataSourceID }

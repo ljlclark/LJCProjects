@@ -1,9 +1,10 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TextGenLib.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenTextLib
 {
@@ -176,7 +177,7 @@ namespace LJCGenTextLib
       var repeatItems = section.RepeatItems;
 
       // No Section data.
-      if (!NetCommon.HasItems(repeatItems))
+      if (!LJC.HasListItems(repeatItems))
       {
         success = false;
         nextLineIndex = SkipSection(nextLineIndex, section.Name);
@@ -191,7 +192,7 @@ namespace LJCGenTextLib
           var repeatItem = repeatItems[itemIndex];
 
           // No Replacement data.
-          if (!NetCommon.HasItems(repeatItem.Replacements))
+          if (!LJC.HasListItems(repeatItem.Replacements))
           {
             nextLineIndex = SkipSection(nextLineIndex, section.Name);
 
@@ -380,7 +381,7 @@ namespace LJCGenTextLib
     // Add current replacements to Active array.
     private void AddActive(RepeatItem item)
     {
-      if (NetCommon.HasItems(item.Replacements))
+      if (LJC.HasListItems(item.Replacements))
       {
         ActiveReplacements.Add(item.Replacements);
       }
@@ -484,7 +485,7 @@ namespace LJCGenTextLib
     // Remove Replacements that are no longer active.
     private void RemoveActive()
     {
-      if (NetCommon.HasItems(ActiveReplacements))
+      if (LJC.HasListItems(ActiveReplacements))
       {
         ActiveReplacements.RemoveAt(ActiveReplacements.Count - 1);
       }

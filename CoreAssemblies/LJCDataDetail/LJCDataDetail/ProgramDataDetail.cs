@@ -52,11 +52,11 @@ namespace LJCDataDetail
     }
 
     // 
-    private static void ShowResult(DbColumns dbColumns
+    private static void ShowResult(LJCDataColumns dbColumns
       , KeyItems controlItems)
     {
       string results = "";
-      foreach (DbColumn dbColumn in dbColumns)
+      foreach (LJCDataColumn dbColumn in dbColumns)
       {
         KeyItem item = null;
         if (controlItems != null)

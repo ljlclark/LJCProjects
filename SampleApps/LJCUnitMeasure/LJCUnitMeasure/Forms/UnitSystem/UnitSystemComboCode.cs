@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // UnitSystemComboCode.cs
 using System;
@@ -7,6 +7,7 @@ using LJCNetCommon;
 using LJCUnitMeasureDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCUnitMeasure
 {
@@ -51,7 +52,7 @@ namespace LJCUnitMeasure
 			var unitSystemManager = mManagers.UnitSystemManager;
 			var dataRecords = unitSystemManager.Load();
 
-			if (NetCommon.HasItems(dataRecords))
+			if (LJC.HasListItems(dataRecords))
 			{
 				foreach (UnitSystem dataRecord in dataRecords)
 				{
@@ -147,7 +148,7 @@ namespace LJCUnitMeasure
 					// Data from items.
 					int id = UnitSystemCombo.LJCSelectedItemID();
 
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ UnitSystem.ColumnID, id }
 					};

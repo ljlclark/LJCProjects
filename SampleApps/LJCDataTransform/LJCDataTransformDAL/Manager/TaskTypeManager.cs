@@ -49,9 +49,9 @@ namespace LJCDataTransformDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(short id)
+		public LJCDataColumns GetIDKey(short id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ TaskType.ColumnTaskTypeID, id }
 			};

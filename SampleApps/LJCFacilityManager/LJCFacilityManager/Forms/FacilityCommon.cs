@@ -75,7 +75,7 @@ namespace LJCFacilityManager
 
 			manager = new PersonManager(settings.DbServiceRef
 				, settings.DataConfigName);
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Person.ColumnUserID, (object)"Admin" }
 			};

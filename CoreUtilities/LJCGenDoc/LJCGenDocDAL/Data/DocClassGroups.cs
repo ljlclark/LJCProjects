@@ -1,11 +1,11 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // CollectionTemplate.cs
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Linq;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenDocDAL
 {
@@ -56,7 +56,7 @@ namespace LJCGenDocDAL
     /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DocClassGroups(DocClassGroups items)
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -121,7 +121,7 @@ namespace LJCGenDocDAL
     {
       DocClassGroups retValue = null;
 
-      if (NetCommon.HasItems(list))
+      if (LJC.HasListItems(list))
       {
         retValue = new DocClassGroups();
         foreach (DocClassGroup item in list)

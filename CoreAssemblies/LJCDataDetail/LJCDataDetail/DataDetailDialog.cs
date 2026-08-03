@@ -1,16 +1,14 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataDetailDialog.cs
 using LJCDataDetailDAL;
 using LJCDataDetailLib;
-using LJCDBClientLib;
-using LJCDBDataAccess;
-using LJCDBMessage;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataDetail
 {
@@ -93,7 +91,7 @@ namespace LJCDataDetail
       Control control;
       string controlName;
 
-      foreach (DbColumn dbColumn in LJCDataColumns)
+      foreach (LJCDataColumn dbColumn in LJCDataColumns)
       {
         bool isCombo = false;
 
@@ -364,7 +362,7 @@ namespace LJCDataDetail
     {
       var config = ControlDetail;
       var controlTabItems = config.ControlTabItems;
-      if (!NetCommon.HasItems(controlTabItems))
+      if (!LJC.HasListItems(controlTabItems))
       {
         // Create new configuration.
         config.ControlRowHeight = ControlRowHeight(config.ControlRowHeight);
@@ -406,7 +404,7 @@ namespace LJCDataDetail
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
-      if (!NetCommon.HasItems(LJCDataColumns))
+      if (!LJC.HasListItems(LJCDataColumns))
       {
         throw new MissingMemberException(Name, "LJCDataColumns");
       }
@@ -573,7 +571,7 @@ namespace LJCDataDetail
 
     // Gets a reference to the record object.
     /// <include path='items/LJCDataColumns/*' file='Doc/DataDetailDialog.xml'/>
-    public DbColumns LJCDataColumns { get; set; }
+    public LJCDataColumns LJCDataColumns { get; set; }
 
     /// <summary>Gets the LJCIsUpdate value.</summary>
     public bool LJCIsUpdate { get; set; }

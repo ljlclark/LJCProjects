@@ -155,7 +155,7 @@ namespace LJCViewEditor
 			{
 				if (LJCIsUpdate)
 				{
-					var updateKeyColumns = new DbColumns()
+					var updateKeyColumns = new LJCDataColumns()
 					{
 						{ ViewOrderBy.ColumnID, LJCRecord.ID }
 					};
@@ -249,7 +249,7 @@ namespace LJCViewEditor
 			if (dataHelper != null)
 			{
 				mTableColumns = dataHelper.GetTableColumns(LJCTableName);
-				foreach (DbColumn dbColumn in mTableColumns)
+				foreach (LJCDataColumn dbColumn in mTableColumns)
 				{
 					ColumnNameTextbox.Items.Add(dbColumn);
 				}
@@ -358,7 +358,7 @@ namespace LJCViewEditor
     // Singleton values.
     private ViewOrderBy mOriginalRecord;
     private StandardUISettings mSettings;
-		private DbColumns mTableColumns;
+		private LJCDataColumns mTableColumns;
 		#endregion
 	}
 }

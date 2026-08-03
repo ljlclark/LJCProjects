@@ -59,9 +59,9 @@ namespace CVRDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(long id)
+    public LJCDataColumns GetIDKey(long id)
     {
-      DbColumns retValue = new DbColumns()
+      LJCDataColumns retValue = new LJCDataColumns()
       {
         { CVPerson.ColumnID, id }
       };
@@ -73,9 +73,9 @@ namespace CVRDAL
 
     // Creates the DataColumns object.
     /// <include path='items/DataColumns/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns DataColumns(long id)
+    public LJCDataColumns DataColumns(long id)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       bool useObject = false;
       if (useObject)
@@ -84,14 +84,14 @@ namespace CVRDAL
         var cvPerson = RetrieveWithID(id);
         if (cvPerson != null)
         {
-          retValue = DbColumns.LJCCreateObjectColumns(cvPerson
+          retValue = LJCDataColumns.LJCObjectColumns(cvPerson
             , DataDefinition);
         }
       }
       else
       {
         // Use common data definitions.
-        DbColumns keyColumns = GetIDKey(id);
+        LJCDataColumns keyColumns = GetIDKey(id);
         var dbResult = DataManager.Retrieve(keyColumns);
         if (DbResult.HasRows(dbResult))
         {

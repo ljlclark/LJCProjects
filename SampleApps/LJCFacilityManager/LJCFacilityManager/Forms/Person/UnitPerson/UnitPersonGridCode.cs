@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // UnitPersonGridCode.cs
 using System;
@@ -8,6 +8,7 @@ using LJCFacilityManagerDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCFacilityManager
 {
@@ -41,7 +42,7 @@ namespace LJCFacilityManager
 				//  // Data from list items.
 				int parentID = parentRow.LJCGetInt32(Person.ColumnID);
 
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ UnitPerson.ColumnPersonID, parentID }
 				};
@@ -49,7 +50,7 @@ namespace LJCFacilityManager
 				DbJoins dbJoins = unitPersonManager.GetLoadJoins();
 				records = unitPersonManager.Load(keyColumns, joins: dbJoins);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (UnitPerson record in records)
 					{
@@ -210,7 +211,7 @@ namespace LJCFacilityManager
 				if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
 					, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ UnitPerson.ColumnUnitID, row.LJCGetInt32(UnitPerson.ColumnUnitID) },
 						{ UnitPerson.ColumnPersonID

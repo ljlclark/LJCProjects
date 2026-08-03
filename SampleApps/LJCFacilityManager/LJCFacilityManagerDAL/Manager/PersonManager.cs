@@ -27,12 +27,15 @@ namespace LJCFacilityManagerDAL
 
 			// Add calculated and join columns.
 			// This allows them to be added to a grid configuration and to populate a Data Object.
-			DataDefinition.Add(Person.ColumnFullName, caption: "Name");
-			DataDefinition.Add(Person.ColumnTypeDescription, caption: "Type Description");
-			DataDefinition.Add(Person.ColumnUnitDescription, caption: "Unit Description");
+			var dataColumn = DataDefinition.Add(Person.ColumnFullName);
+      dataColumn.Caption = "Name";
+      dataColumn = DataDefinition.Add(Person.ColumnTypeDescription);
+      dataColumn.Caption = "Type Description";
+      dataColumn = DataDefinition.Add(Person.ColumnUnitDescription);
+      dataColumn.Caption = "Unit Description";
 
-			// Create the list of database assigned columns.
-			SetDbAssignedColumns(new string[]
+      // Create the list of database assigned columns.
+      SetDbAssignedColumns(new string[]
 			{
 				Person.ColumnID
 			});
@@ -82,9 +85,9 @@ namespace LJCFacilityManagerDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ Person.ColumnID, id }
 			};
@@ -112,7 +115,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ "CodeType_Id", "Id" }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ columnName, propertyName, renameAs }}
 			};
 			retValue.Add(dbJoin);
@@ -146,7 +149,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ "[UnitPerson].Unit_Id", "Id" }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ Unit.ColumnDescription, Person.ColumnUnitDescription
 						, Person.ColumnUnitDescription }}
 			};

@@ -80,7 +80,7 @@ namespace LJCGenDocDAL
 
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       ArgError.MethodName = "Delete(keyColumns, filters)";
       if (null == keyColumns
@@ -96,14 +96,14 @@ namespace LJCGenDocDAL
 
     // Gets the collection of specified columns.
     /// <include path='items/GetColumns/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetColumns(List<string> propertyNames)
+    public LJCDataColumns GetColumns(List<string> propertyNames)
     {
-      return Manager.DataDefinition.LJCGetColumns(propertyNames);
+      return Manager.DataDefinition.LJCColumns(propertyNames);
     }
 
     // Retrieves a collection of data records.
     /// <include path='items/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DocClasses Load(DbColumns keyColumns = null
+    public DocClasses Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -114,7 +114,7 @@ namespace LJCGenDocDAL
 
     // Retrieves a collection of data records.
     /// <include path='items/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbResult LoadResult(DbColumns keyColumns = null
+    public DbResult LoadResult(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -124,7 +124,7 @@ namespace LJCGenDocDAL
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DocClass Retrieve(DbColumns keyColumns
+    public DocClass Retrieve(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -143,7 +143,7 @@ namespace LJCGenDocDAL
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public void Update(DocClass dataObject, DbColumns keyColumns
+    public void Update(DocClass dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       ArgError.MethodName = "Update(dataObjecct, keyColumns, filters)";
@@ -234,10 +234,10 @@ namespace LJCGenDocDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetForeignKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetForeignKey(short foreignID)
+    public LJCDataColumns GetForeignKey(short foreignID)
     {
       // Needs cast for string to select the correct Add overload.
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DocClass.ColumnDocClassGroupID, foreignID }
       };
@@ -246,12 +246,12 @@ namespace LJCGenDocDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public LJCDataColumns GetIDKey(int id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DocClass.ColumnID, id }
       };
@@ -260,10 +260,10 @@ namespace LJCGenDocDAL
 
     // Gets the Parent key columns.
     /// <include path='items/GetParentIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetParentIDKey(short parentID)
+    public LJCDataColumns GetParentIDKey(short parentID)
     {
       // Needs cast for string to select the correct Add overload.
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DocClass.ColumnDocAssemblyID, parentID }
       };
@@ -272,10 +272,10 @@ namespace LJCGenDocDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetUniqueKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetUniqueKey(short parentID, string name)
+    public LJCDataColumns GetUniqueKey(short parentID, string name)
     {
       // Needs cast for string to select the correct Add overload.
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DocClass.ColumnDocAssemblyID, parentID },
         { DocClass.ColumnName, (object)name }

@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TableData.cs
 //using LJCDBMessage;
@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGridDataLib
 {
@@ -72,14 +73,14 @@ namespace LJCGridDataLib
       return retValue;
     }
 
-    // Creates a DbColumn object from a DataColumn object.
+    // Creates a LJCDataColumn object from a DataColumn object.
     /// <include path='items/GetDbColumn/*' file='Doc/TableData.xml'/>
     // Note: Also in LJCDBMessage.DbResult
-    public static DbColumn GetDbColumn(DataColumn dataColumn)
+    public static LJCDataColumn GetDbColumn(DataColumn dataColumn)
     {
-      DbColumn retValue;
+      LJCDataColumn retValue;
 
-      retValue = new DbColumn()
+      retValue = new LJCDataColumn()
       {
         AllowDBNull = dataColumn.AllowDBNull,
         AutoIncrement = dataColumn.AutoIncrement,
@@ -88,28 +89,28 @@ namespace LJCGridDataLib
         DataTypeName = dataColumn.DataType.Name,
         MaxLength = dataColumn.MaxLength,
         PropertyName = dataColumn.ColumnName,
-        Unique = dataColumn.Unique
+        IsUniqueKey = dataColumn.Unique
       };
       return retValue;
     }
 
-    // Creates a DbColumns collection from a DataColumns collection.
+    // Creates a LJCDataColumns collection from a DataColumns collection.
     /// <summary>
-    /// Creates a DbColumns collection from a DataColumns collection.
+    /// Creates a LJCDataColumns collection from a DataColumns collection.
     /// </summary>
     /// <param name="dataColumns"></param>
     /// <returns></returns>
     // Note: Also in LJCDBMessage.DbResult
-    public static DbColumns GetDbColumns(DataColumnCollection dataColumns)
+    public static LJCDataColumns GetDbColumns(DataColumnCollection dataColumns)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       if (HasColumns(dataColumns))
       {
-        retValue = new DbColumns();
+        retValue = new LJCDataColumns();
         foreach (DataColumn dataColumn in dataColumns)
         {
-          DbColumn dbColumn = GetDbColumn(dataColumn);
+          LJCDataColumn dbColumn = GetDbColumn(dataColumn);
           retValue.Add(dbColumn);
         }
       }
@@ -125,7 +126,7 @@ namespace LJCGridDataLib
       DataColumnCollection retValue = null;
 
       if (HasColumns(dataColumns)
-        && NetCommon.HasItems(columnNames))
+        && LJC.HasListItems(columnNames))
       {
         // Create columns from names.
         DataTable workTable = new DataTable();
@@ -145,23 +146,23 @@ namespace LJCGridDataLib
 
     // Configure the Grid Columns from the DbRequest object definition.
     /// <include path='items/GetGridColumns1/*' file='Doc/ResultData.xml'/>
-    public static DbColumns GetGridColumns(DbRequest dbRequest
+    public static LJCDataColumns GetGridColumns(DbRequest dbRequest
       , List<string> propertyNames = null)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       if (dbRequest != null && dbRequest.Columns != null)
       {
         retValue = dbRequest.Columns.Clone();
         if (propertyNames != null)
         {
-          retValue = dbRequest.Columns.LJCGetColumns(propertyNames);
+          retValue = dbRequest.Columns.LJCColumns(propertyNames);
           if (dbRequest.Joins != null)
           {
             foreach (DbJoin dbJoin in dbRequest.Joins)
             {
-              retValue = dbJoin.Columns.LJCGetColumns(propertyNames);
-              foreach (DbColumn dbColumn in retValue)
+              retValue = dbJoin.Columns.LJCColumns(propertyNames);
+              foreach (LJCDataColumn dbColumn in retValue)
               {
                 retValue.Add(dbColumn.Clone());
               }
@@ -209,7 +210,7 @@ namespace LJCGridDataLib
     // Updates a grid row with the DataRow values.
     /// <include path='items/RowSetValues/*' file='Doc/TableData.xml'/>
     public static void RowSetValues(LJCGridRow ljcGridRow, DataRow dataRow
-      , DbColumns dataDefinition)
+      , LJCDataColumns dataDefinition)
     {
       ArgumentDataRow(dataRow);
 
@@ -222,7 +223,8 @@ namespace LJCGridDataLib
 
         if (dataDefinition != null)
         {
-          var dbColumn = dataDefinition.LJCSearchPropertyName(dataColumnName);
+          //var dbColumn = dataDefinition.LJCSearchPropertyName(dataColumnName);
+          var dbColumn = dataDefinition[dataColumnName];
           if (dbColumn?.RenameAs != null)
           {
             dataColumnName = dbColumn.RenameAs;
@@ -243,12 +245,13 @@ namespace LJCGridDataLib
     #region Private Functions
 
     // Add the Primary Key lookup values.
-    private static void AddPrimaryKeyValues(DbColumns dataDefinition, LJCGridRow row
-      , DbValue dbValue)
+    private static void AddPrimaryKeyValues(LJCDataColumns dataDefinition, LJCGridRow row
+      , LJCDataValue dbValue)
     {
       if (dbValue.Value != null)
       {
-        DbColumn dbColumn = dataDefinition.LJCSearchPropertyName(dbValue.PropertyName);
+        //LJCDataColumn dbColumn = dataDefinition.LJCSearchPropertyName(dbValue.PropertyName);
+        var dbColumn = dataDefinition[dbValue.PropertyName];
         if (dbColumn != null && dbColumn.IsPrimaryKey)
         {
           switch (dbColumn.DataTypeName)

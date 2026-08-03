@@ -1,9 +1,10 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoinOnManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -79,7 +80,7 @@ namespace LJCDBViewDAL
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
-      var keyColumns = new DbColumns()
+      var keyColumns = new LJCDataColumns()
       {
         { ViewJoinOn.ColumnViewJoinID, viewJoinID },
         { ViewJoinOn.ColumnFromColumnName, (object)fromColumnName }
@@ -93,9 +94,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public LJCDataColumns GetIDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewJoinOn.ColumnID, id }
       };
@@ -104,9 +105,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetParentKey(int id)
+    public LJCDataColumns GetParentKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewJoinOn.ColumnViewJoinID, id }
       };
@@ -156,10 +157,14 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (NetCommon.HasItems(viewJoinOn.ChangedNames))
+          // *** Change ***
+          var changedNames = viewJoinOn.ChangedNames.ChangedProperties;
+          //if (NetCommon.HasItems(viewJoinOn.ChangedNames))
+          if (LJC.HasListItems(changedNames))
           {
             var keyColumns = GetIDKey(retrieveData.ID);
-            Update(viewJoinOn, keyColumns, viewJoinOn.ChangedNames);
+            //Update(viewJoinOn, keyColumns, viewJoinOn.ChangedNames);
+            Update(viewJoinOn, keyColumns, changedNames);
           }
         }
       }

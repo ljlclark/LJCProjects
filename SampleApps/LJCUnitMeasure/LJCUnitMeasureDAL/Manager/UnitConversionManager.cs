@@ -52,9 +52,9 @@ namespace LJCUnitMeasureDAL
     /// <param name="fromMeasureUnitID">The 'From' UnitID value.</param>
     /// <param name="toMeasureUnitID">The 'To' UnitID value.</param>
     /// <returns>The IDKeys value.</returns>
-    public DbColumns GetIDKeys(int fromMeasureUnitID, int toMeasureUnitID)
+    public LJCDataColumns GetIDKeys(int fromMeasureUnitID, int toMeasureUnitID)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { UnitConversion.ColumnFromUnitMeasureID, fromMeasureUnitID },
         { UnitConversion.ColumnToUnitMeasureID, toMeasureUnitID }

@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // UserModule.cs
 using System;
@@ -11,6 +11,7 @@ using LJCWinFormControls;
 using LJCDBMessage;
 using LJCDBClientLib;
 using LJCAppManagerDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCAppManager
 {
@@ -45,7 +46,7 @@ namespace LJCAppManager
       UserGrid.LJCRowsClear();
       records = Managers.AppUserManager.Load();
 
-      if (NetCommon.HasItems(records))
+      if (LJC.HasListItems(records))
       {
         foreach (AppUser record in records)
         {
@@ -112,7 +113,7 @@ namespace LJCAppManager
       ProgramGrid.LJCRowsClear();
       if (UserGrid.CurrentRow is LJCGridRow parentRow)
       {
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { UserAppProgram.ColumnAppManagerUserID
             , parentRow.LJCGetInt32(AppUser.ColumnID) }
@@ -121,7 +122,7 @@ namespace LJCAppManager
         DbJoins dbJoins = userProgramManager.GetLoadJoins();
         records = userProgramManager.Load(keyColumns, joins: dbJoins);
 
-        if (NetCommon.HasItems(records))
+        if (LJC.HasListItems(records))
         {
           foreach (UserAppProgram record in records)
           {
@@ -201,7 +202,7 @@ namespace LJCAppManager
         DbJoins joins = userModuleManager.GetLoadJoins();
         records = userModuleManager.Load(keyColumns, joins: joins);
 
-        if (NetCommon.HasItems(records))
+        if (LJC.HasListItems(records))
         {
           foreach (UserAppModule record in records)
           {
@@ -631,7 +632,7 @@ namespace LJCAppManager
       if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
         , MessageBoxIcon.Question) == DialogResult.Yes)
       {
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { UserAppProgram.ColumnAppManagerUserID, userID },
           { UserAppProgram.ColumnAppProgramID, programID },
@@ -739,7 +740,7 @@ namespace LJCAppManager
           AppUser.ColumnName,
           AppUser.ColumnUserID
         };
-        DbColumns gridColumns
+        LJCDataColumns gridColumns
           = Managers.AppUserManager.GetColumns(propertyNames);
         UserGrid.LJCAddColumns(gridColumns);
       }
@@ -757,7 +758,7 @@ namespace LJCAppManager
           "Title",
           AppProgram.ColumnActive
         };
-        DbColumns gridColumns
+        LJCDataColumns gridColumns
           = Managers.UserAppProgramManager.GetColumns(propertyNames);
         ProgramGrid.LJCAddColumns(gridColumns);
       }
@@ -775,7 +776,7 @@ namespace LJCAppManager
           "ModuleTitle",
           AppModule.ColumnActive
         };
-        DbColumns gridColumns
+        LJCDataColumns gridColumns
           = Managers.UserAppModuleManager.GetColumns(propertyNames);
         ModuleGrid.LJCAddColumns(gridColumns);
       }
@@ -1214,7 +1215,7 @@ namespace LJCAppManager
         {
           Active = 1 == active
         };
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { AppUser.ColumnID, userRow.LJCGetInt32(AppUser.ColumnID) },
           { UserAppProgram.ColumnAppProgramID

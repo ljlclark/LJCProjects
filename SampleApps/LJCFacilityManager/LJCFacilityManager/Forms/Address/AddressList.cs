@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // AddressList.cs
 using System;
@@ -10,6 +10,7 @@ using LJCWinFormControls;
 using LJCDBMessage;
 using LJCDBClientLib;
 using LJCFacilityManagerDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCFacilityManager
 {
@@ -83,7 +84,7 @@ namespace LJCFacilityManager
 		private void DataRetrieveAddress()
 		{
 			Addresses records;
-			DbColumns keyColumns = null;
+			LJCDataColumns keyColumns = null;
 
 			Cursor = Cursors.WaitCursor;
 			AddressGrid.LJCRowsClear();
@@ -99,7 +100,7 @@ namespace LJCFacilityManager
 			DbJoins dbJoins = addressManager.GetLoadJoins();
 			records = addressManager.Load(keyColumns, joins: dbJoins);
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (Address record in records)
 				{
@@ -250,7 +251,7 @@ namespace LJCFacilityManager
 		/// <include path='items/DoDelete/*' file='../../../CoreUtilities/LJCGenDoc/Common/List.xml'/>
 		private void DoDeleteAddress()
 		{
-			DbColumns keyColumns;
+			LJCDataColumns keyColumns;
 			string title;
 			string message;
 
@@ -264,7 +265,7 @@ namespace LJCFacilityManager
 					// Data from list items.
 					int id = row.LJCGetInt32(Address.ColumnID);
 
-					keyColumns = new DbColumns()
+					keyColumns = new LJCDataColumns()
 					{
 						{ Address.ColumnID, id }
 					};
@@ -321,7 +322,7 @@ namespace LJCFacilityManager
 				Cursor = Cursors.WaitCursor;
 				id = row.LJCGetInt32(Address.ColumnID);
 
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Address.ColumnID, id }
 				};

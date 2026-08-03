@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CreateAssemblyXml.cs
 using System;
@@ -8,6 +8,7 @@ using LJCDocObjLib;
 using System.IO;
 using LJCGenDocDAL;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 using Section = LJCGenTextLib.Section;
 
 namespace LJCGenDocLib
@@ -80,7 +81,7 @@ namespace LJCGenDocLib
         classListHeading = "Other Classes";
       }
 
-      if (NetCommon.HasItems(mRemainingTypes))
+      if (LJC.HasListItems(mRemainingTypes))
       {
         replacements.Add("_HasClasses_", "true");
         replacements.Add("_ClassListHeading_", classListHeading);
@@ -119,7 +120,7 @@ namespace LJCGenDocLib
         classGroupManager.SetOrderBy(orderColumns);
         var classGroups = classGroupManager.LoadWithParentID(docAssembly.ID);
 
-        if (NetCommon.HasItems(classGroups))
+        if (LJC.HasListItems(classGroups))
         {
           var section = sections.Add("ClassGroups");
           var repeatItems = section.RepeatItems;
@@ -140,7 +141,7 @@ namespace LJCGenDocLib
             var docClasses
               = classManager.LoadWithGroup(classGroup.ID);
 
-            if (NetCommon.HasItems(docClasses))
+            if (LJC.HasListItems(docClasses))
             {
               retValue = true;
 
@@ -207,7 +208,7 @@ namespace LJCGenDocLib
       // Look through all data types for Assembly Remarks.
       foreach (DataType dataType in DataAssembly.DataTypes)
       {
-        if (NetCommon.HasItems(dataType.DataLinks))
+        if (LJC.HasListItems(dataType.DataLinks))
         {
           Section section = null;
           foreach (DataLink dataLink in dataType.DataLinks)
@@ -255,7 +256,7 @@ namespace LJCGenDocLib
       {
         DataRemark remark = dataType.Remark;
         if (remark != null
-          && NetCommon.HasItems(remark.Paras))
+          && LJC.HasListItems(remark.Paras))
         {
           bool showParas = false;
           foreach (DataPara para in remark.Paras)

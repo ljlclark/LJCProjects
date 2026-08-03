@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // KeyGridCode.cs
 using LJCDataDetail;
@@ -10,6 +10,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace DataHelper
 {
@@ -56,7 +57,7 @@ namespace DataHelper
           }
         }
 
-        if (NetCommon.HasItems(records))
+        if (LJC.HasListItems(records))
         {
           foreach (DbMetaDataKey record in records)
           {
@@ -128,7 +129,7 @@ namespace DataHelper
     // Displays a detail dialog for a new record.
     internal void DoNewKey()
     {
-      DbColumns dataColumns = mManagers.DbMetaDataKeyManager.DataDefinition;
+      LJCDataColumns dataColumns = mManagers.DbMetaDataKeyManager.DataDefinition;
 
       // ToDo: Convert to new DataDetailDialog.
       var detail = new DataDetailDialog(mUserID, mTableName)
@@ -155,7 +156,7 @@ namespace DataHelper
         int parentID = parentRow.LJCGetInt32(DbMetaDataTable.ColumnID);
 
         // Retrieve Data
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { DbMetaDataKey.ColumnID, id }
         };
@@ -164,7 +165,7 @@ namespace DataHelper
         if (DbResult.HasData(dbResult))
         {
           // The Data Definition and Record values are merged. 
-          DbColumns dataColumns = dbResult.GetValueColumns();
+          LJCDataColumns dataColumns = dbResult.GetValueColumns();
 
           // ToDo: Convert to new DataDetailDialog.
           var detail = new DataDetailDialog(mUserID, mTableName)
@@ -186,7 +187,7 @@ namespace DataHelper
     private void KeyDetail_Change(object sender, EventArgs e)
     {
       DataDetailDialog detail;
-      DbColumns dataColumns;
+      LJCDataColumns dataColumns;
 
       detail = sender as DataDetailDialog;
       dataColumns = detail.LJCDataColumns;
@@ -197,7 +198,7 @@ namespace DataHelper
       var dataKeyManager = mManagers.DbMetaDataKeyManager;
       if (detail.LJCIsUpdate)
       {
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { DbMetaDataKey.ColumnID, mdKey.ID }
         };
@@ -236,7 +237,7 @@ namespace DataHelper
           // Data from items.
           int id = row.LJCGetInt32(DbMetaDataKey.ColumnID);
 
-          var keyColumns = new DbColumns()
+          var keyColumns = new LJCDataColumns()
           {
             { DbMetaDataKey.ColumnID, id }
           };

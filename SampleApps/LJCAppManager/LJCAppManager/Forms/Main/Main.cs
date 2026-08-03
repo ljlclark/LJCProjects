@@ -252,7 +252,7 @@ namespace LJCAppManager
 			mUserAppModules = new UserAppModules();
 
 			// Load the data for the programs to which this user is authorized.
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ UserAppProgram.ColumnAppManagerUserID, mAppManagerUser.ID }
 			};

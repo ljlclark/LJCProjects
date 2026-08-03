@@ -5,7 +5,7 @@ using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
-using System.Runtime;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataDetailDAL
 {
@@ -32,16 +32,16 @@ namespace LJCDataDetailDAL
 
     // Loads or creates Data Columns.
     /// <include path='items/DataColumns/*' file='Doc/DataDetailData.xml'/>
-    public DbColumns DataColumns(long controlDetailID)
+    public LJCDataColumns DataColumns(long controlDetailID)
     {
-      DbColumns retValue;
+      LJCDataColumns retValue;
 
       //var managers = configValues.Managers;
       var manager = Managers.ControlDataManager;
       var controlDataItems = manager.LoadWithParentID(controlDetailID);
-      if (NetCommon.HasItems(controlDataItems))
+      if (LJC.HasListItems(controlDataItems))
       {
-        retValue = controlDataItems.DbColumns();
+        retValue = controlDataItems.LJCDataColumns();
       }
       else
       {
@@ -53,7 +53,7 @@ namespace LJCDataDetailDAL
         retValue = dbResult.Columns;
 
         // Add columns to table.
-        foreach (DbColumn dbColumn in retValue)
+        foreach (LJCDataColumn dbColumn in retValue)
         {
           var controlData = new ControlData()
           {
@@ -85,7 +85,7 @@ namespace LJCDataDetailDAL
         // Load ControlTabItems.
         var tabManager = Managers.ControlTabManager;
         var controlTabItems = tabManager.LoadWithParentID(retValue.ID);
-        if (NetCommon.HasItems(controlTabItems))
+        if (LJC.HasListItems(controlTabItems))
         {
           retValue.ControlTabItems = controlTabItems;
           var columnManager = Managers.ControlColumnManager;
@@ -94,7 +94,7 @@ namespace LJCDataDetailDAL
           {
             // Load ControlColumns.
             var controlColumns = columnManager.LoadWithParentID(controlTab.ID);
-            if (NetCommon.HasItems(controlColumns))
+            if (LJC.HasListItems(controlColumns))
             {
               controlTab.ControlColumns = controlColumns;
               foreach (ControlColumn controlColumn in controlColumns)
@@ -113,7 +113,7 @@ namespace LJCDataDetailDAL
     // Updates the ControlDetail data object.
     /// <include path='items/UpdateControlDetail/*' file='Doc/DataDetailData.xml'/>
     public int UpdateControlDetail(ControlDetail dataObject
-      , DbColumns keyColumns = null)
+      , LJCDataColumns keyColumns = null)
     {
       int retValue = 0;
 
@@ -202,7 +202,7 @@ namespace LJCDataDetailDAL
     // Updates the ControlTab data object.
     /// <include path='items/UpdateControlTab/*' file='Doc/DataDetailData.xml'/>
     public int UpdateControlTab(ControlTab dataObject
-      , DbColumns keyColumns = null)
+      , LJCDataColumns keyColumns = null)
     {
       int retValue = 0;
 
@@ -239,7 +239,7 @@ namespace LJCDataDetailDAL
     // Updates the ControlColumn data object.
     /// <include path='items/UpdateControlColumn/*' file='Doc/DataDetailData.xml'/>
     public int UpdateControlColumn(ControlColumn dataObject
-      , DbColumns keyColumns = null)
+      , LJCDataColumns keyColumns = null)
     {
       int retValue = 0;
 
@@ -276,7 +276,7 @@ namespace LJCDataDetailDAL
     // Updates the ControlRow data object.
     /// <include path='items/UpdateControlRow/*' file='Doc/DataDetailData.xml'/>
     public int UpdateControlRow(ControlRow dataObject
-      , DbColumns keyColumns = null)
+      , LJCDataColumns keyColumns = null)
     {
       int retValue = 0;
 

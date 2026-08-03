@@ -24,10 +24,11 @@ namespace LJCFacilityManagerDAL
 
 			// Add calculated and join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			DataDefinition.Add(Account.ColumnBusinessName, caption: "Business Name");
+			var dataColumn = DataDefinition.Add(Account.ColumnBusinessName);
+      dataColumn.Caption = "Business Name";
 
-			// Create the list of database assigned columns.
-			SetDbAssignedColumns(new string[]
+      // Create the list of database assigned columns.
+      SetDbAssignedColumns(new string[]
 			{
 				Account.ColumnID
 			});
@@ -52,7 +53,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ Account.ColumnBusinessID, Business.ColumnID }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ Account.ColumnBusinessName }}
 			};
 			retValue.Add(dbJoin);

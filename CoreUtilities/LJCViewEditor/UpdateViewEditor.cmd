@@ -18,9 +18,9 @@ rem ***************************
 rem *** Referenced Binaries ***
 echo *** %to% ***
 
-set src=DataDetail\DataDetail\%bin%
-echo copy %assmRoot%%src%\DataDetail.exe %to%
-copy %assmRoot%%src%\DataDetail.exe %to%
+set src=LJCDataDetail\LJCDataDetail\%bin%
+echo copy %assmRoot%%src%\LJCDataDetail.exe %to%
+copy %assmRoot%%src%\LJCDataDetail.exe %to%
 
 set src=LJCDataAccess\LJCDataAccess\%bin%
 echo copy %assmRoot%%src%\LJCDataAccess.dll %to%
@@ -30,7 +30,7 @@ set src=LJCDataAccessConfig\LJCDataAccessConfig\%bin%
 echo copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
 copy %assmRoot%%src%\LJCDataAccessConfig.dll %to%
 
-set src=DataDetail\LJCDataDetailLib\%bin%
+set src=LJCDataDetail\LJCDataDetailLib\%bin%
 echo copy %assmRoot%%src%\LJCDataDetailLib.dll %to%
 copy %assmRoot%%src%\LJCDataDetailLib.dll %to%
 
@@ -90,7 +90,7 @@ set src=LJCDBMessage\CipherLib\%bin%
 echo copy %assmRoot%%src%\CipherLib.dll %to%
 copy %assmRoot%%src%\CipherLib.dll %to%
 
-set src=DataDetail\LJCDataDetailDAL\%bin%
+set src=LJCDataDetail\LJCDataDetailDAL\%bin%
 echo copy %assmRoot%%src%\LJCDataDetailDAL.dll %to%
 copy %assmRoot%%src%\LJCDataDetailDAL.dll %to%
 

@@ -93,7 +93,7 @@ namespace LJCViewEditor
 
         // Set default values.
         var name = $"{LJCParentName}Standard";
-        var keyRecord = new DbColumns()
+        var keyRecord = new LJCDataColumns()
         {
           { ViewData.ColumnName, (object)name }
         };
@@ -169,7 +169,7 @@ namespace LJCViewEditor
       {
         if (LJCIsUpdate)
         {
-          var updateKeyColumns = new DbColumns()
+          var updateKeyColumns = new LJCDataColumns()
           {
             { ViewData.ColumnID, LJCRecord.ID }
           };

@@ -1,13 +1,15 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbSqlBuilder.cs
 using System.Text;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {
   // Provides SQL builder methods.
-  /// <include path='items/DbSqlBuilder/*' file='Doc/DbSqlBuilder.xml'/>
+  /// <include file='Doc/DbSqlBuilder.xml'
+  ///  path='items/DbSqlBuilder/*'/>
   public class DbSqlBuilder
   {
     #region Constructors
@@ -23,7 +25,8 @@ namespace LJCDBMessage
     #region Public Methods
 
     // Creates the list of included table columns.
-    /// <include path='items/ColumnList/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/ColumnList/*'/>
     public string ColumnList(DbRequest dbRequest = null, bool listOnly = true)
     {
       string retValue;
@@ -40,7 +43,7 @@ namespace LJCDBMessage
       else
       {
         StringBuilder builder = new StringBuilder(64);
-        foreach (DbColumn dbColumn in dbRequest.Columns)
+        foreach (LJCDataColumn dbColumn in dbRequest.Columns)
         {
           if (0 == builder.Length)
           {
@@ -67,7 +70,7 @@ namespace LJCDBMessage
           {
             if (join.Columns != null)
             {
-              foreach (DbColumn column in join.Columns)
+              foreach (LJCDataColumn column in join.Columns)
               {
                 string qualifier = join.TableName;
                 if (join.TableAlias != null)
@@ -96,7 +99,8 @@ namespace LJCDBMessage
     }
 
     // Creates the SQL Insert statement.
-    /// <include path='items/CreateAddSql/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/CreateAddSql/*'/>
     public string CreateAddSql()
     {
       string retValue;
@@ -110,7 +114,8 @@ namespace LJCDBMessage
     }
 
     // Creates the SQL Delete statement.
-    /// <include path='items/CreateDeleteSql/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/CreateDeleteSql/*'/>
     public string CreateDeleteSql()
     {
       string retValue;
@@ -123,7 +128,8 @@ namespace LJCDBMessage
     }
 
     // Creates the SQL Select statement for multiple records.
-    /// <include path='items/CreateLoadSql/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/CreateLoadSql/*'/>
     public string CreateLoadSql(DbRequest dbRequest = null)
     {
       string retValue;
@@ -151,7 +157,8 @@ namespace LJCDBMessage
     }
 
     // Creates the SQL Select statement for one record.
-    /// <include path='items/CreateRetrieveSql/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/CreateRetrieveSql/*'/>
     public string CreateRetrieveSql(DbRequest dbRequest = null)
     {
       string retValue;
@@ -177,7 +184,8 @@ namespace LJCDBMessage
     }
 
     // Creates the SQL Update statement.
-    /// <include path='items/CreateUpdateSql/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/CreateUpdateSql/*'/>
     public string CreateUpdateSql()
     {
       string retValue;
@@ -192,12 +200,13 @@ namespace LJCDBMessage
     }
 
     // Creates the where clause from the filters.
-    /// <include path='items/FilterWhereClause/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/FilterWhereClause/*'/>
     public string FilterWhereClause(DbFilters dbFilters, bool recursive = false)
     {
       string retValue = null;
 
-      if (NetCommon.HasItems(dbFilters))
+      if (LJC.HasListItems(dbFilters))
       {
         StringBuilder builder = new StringBuilder(64);
         bool first = true;
@@ -229,7 +238,7 @@ namespace LJCDBMessage
           // Add conditions.
           DbConditionSet conditionSet = filter.ConditionSet;
           var conditions = filter.ConditionSet.Conditions;
-          if (NetCommon.HasItems(conditions))
+          if (LJC.HasListItems(conditions))
           {
             // Begin the conditions group.
             builder.Append("(");
@@ -265,7 +274,7 @@ namespace LJCDBMessage
           }
 
           // Recursive filters.
-          if (NetCommon.HasItems(filter.Filters))
+          if (LJC.HasListItems(filter.Filters))
           {
             builder.Append(FilterWhereClause(filter.Filters, true));
           }
@@ -324,7 +333,7 @@ namespace LJCDBMessage
         builder.Append(")");
 
         // Recursive JoinOns.
-        if (NetCommon.HasItems(dbJoinOn.JoinOns))
+        if (LJC.HasListItems(dbJoinOn.JoinOns))
         {
           builder.Append(GetJoinOns(dbJoin, dbJoinOn.JoinOns, true));
         }
@@ -362,15 +371,16 @@ namespace LJCDBMessage
     }
 
     // Creates a list of record values.
-    /// <include path='items/InsertValueList/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/InsertValueList/*'/>
     public string InsertValueList(bool listOnly = true)
     {
       string retValue = null;
 
-      if (NetCommon.HasItems(mDbRequest.Columns))
+      if (LJC.HasListItems(mDbRequest.Columns))
       {
         StringBuilder builder = new StringBuilder(64);
-        foreach (DbColumn dbColumn in mDbRequest.Columns)
+        foreach (LJCDataColumn dbColumn in mDbRequest.Columns)
         {
           if (0 == builder.Length)
           {
@@ -397,12 +407,13 @@ namespace LJCDBMessage
     }
 
     // Creates the join statement.
-    /// <include path='items/JoinStatement/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/JoinStatement/*'/>
     public string JoinStatement(DbJoins dbJoins, string schemaName = null)
     {
       string retValue = null;
 
-      if (NetCommon.HasItems(dbJoins))
+      if (LJC.HasListItems(dbJoins))
       {
         StringBuilder builder = new StringBuilder(64);
         foreach (DbJoin dbJoin in dbJoins)
@@ -424,16 +435,17 @@ namespace LJCDBMessage
     }
 
     // Creates the where clause from the key values.
-    /// <include path='items/KeyWhereClause/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/KeyWhereClause/*'/>
     public string KeyWhereClause()
     {
       string retValue = null;
 
-      DbColumns keyColumns = mDbRequest.KeyColumns;
-      if (NetCommon.HasItems(keyColumns))
+      LJCDataColumns keyColumns = mDbRequest.KeyColumns;
+      if (LJC.HasListItems(keyColumns))
       {
         StringBuilder builder = new StringBuilder(64);
-        foreach (DbColumn dbColumn in keyColumns)
+        foreach (LJCDataColumn dbColumn in keyColumns)
         {
           // Do not include null or empty values.
           if (null == dbColumn.Value
@@ -504,12 +516,13 @@ namespace LJCDBMessage
     }
 
     // Creates the order by statement from the order by column list.
-    /// <include path='items/OrderBy/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/OrderBy/*'/>
     public string OrderBy()
     {
       string retValue = null;
 
-      if (NetCommon.HasItems(mDbRequest.OrderByNames))
+      if (LJC.HasListItems(mDbRequest.OrderByNames))
       {
         StringBuilder builder = new StringBuilder(64);
         builder.Append("order by ");
@@ -530,12 +543,13 @@ namespace LJCDBMessage
     }
 
     // Creates the offset/fetch next statement.
-    /// <include path='items/PageFetch/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/PageFetch/*'/>
     public string PageFetch()
     {
       string retValue = null;
 
-      if (NetCommon.HasItems(mDbRequest.OrderByNames)
+      if (LJC.HasListItems(mDbRequest.OrderByNames)
         && mDbRequest.PageSize > 0)
       {
         StringBuilder builder = new StringBuilder(64);
@@ -589,15 +603,16 @@ namespace LJCDBMessage
     }
 
     // Creates a list of record update values.
-    /// <include path='items/UpdateList/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/UpdateList/*'/>
     public string UpdateValueList()
     {
       string retValue = null;
 
-      if (NetCommon.HasItems(mDbRequest.Columns))
+      if (LJC.HasListItems(mDbRequest.Columns))
       {
         StringBuilder builder = new StringBuilder(64);
-        foreach (DbColumn dbColumn in mDbRequest.Columns)
+        foreach (LJCDataColumn dbColumn in mDbRequest.Columns)
         {
           if (builder.Length > 0)
           {
@@ -612,7 +627,8 @@ namespace LJCDBMessage
     }
 
     // Create the where clause.
-    /// <include path='items/WhereClause/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/WhereClause/*'/>
     public string WhereClause()
     {
       string retValue = null;

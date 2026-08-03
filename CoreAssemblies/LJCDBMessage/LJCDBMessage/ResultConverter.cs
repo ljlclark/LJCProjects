@@ -1,14 +1,16 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ResultConverter.cs
 using System.Collections.Generic;
 using System.Data;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {
-  // Converts DbColumns and DbResult objects to data objects.
-  /// <include path='items/ResultConverter/*' file='Doc/ResultConverter.xml'/>
+  // Converts LJCDataColumns and DbResult objects to data objects.
+  /// <include file='Doc/ResultConverter.xml'
+  ///  path='items/ResultConverter/*'/>
   public class ResultConverter<TData, TList>
     where TData : class, new()
     where TList : List<TData>, new()
@@ -16,7 +18,8 @@ namespace LJCDBMessage
     #region public Methods
 
     // Creates a collection from the result records.
-    /// <include path='items/CreateCollection/*' file='Doc/ResultConverter.xml'/>
+    /// <include file='Doc/ResultConverter.xml'
+    ///  path='items/CreateCollection/*'/>
     public TList CreateCollection(DbResult dbResult)
     {
       // Also in LJCDBClientLib.ObjectManager.
@@ -37,9 +40,10 @@ namespace LJCDBMessage
     }
 
     // Creates a Data Object collection from the Table rows.
-    /// <include path='items/CreateCollectionFromTable/*' file='Doc/ResultConverter.xml'/>
+    /// <include file='Doc/ResultConverter.xml'
+    ///  path='items/CreateCollectionFromTable/*'/>
     public TList CreateCollectionFromTable(DataTable dataTable
-      , DbColumns dataDefinition = null)
+      , LJCDataColumns dataDefinition = null)
     {
       // Testing in LJCDBServiceLib.TestDbDataAccess.
       TList retValue = null;
@@ -61,9 +65,10 @@ namespace LJCDBMessage
       return retValue;
     }
 
-    // Creates a Data Object from the result DbColumns object.
-    /// <include path='items/CreateData1/*' file='Doc/ResultConverter.xml'/>
-    public TData CreateData(DbColumns dataColumns)
+    // Creates a Data Object from the result LJCDataColumns object.
+    /// <include file='Doc/ResultConverter.xml'
+    ///  path='items/CreateData1/*'/>
+    public TData CreateData(LJCDataColumns dataColumns)
     {
       TData retValue;
 
@@ -76,7 +81,8 @@ namespace LJCDBMessage
     }
 
     // Creates a Data Object from the result values.
-    /// <include path='items/CreateData2/*' file='Doc/ResultConverter.xml'/>
+    /// <include file='Doc/ResultConverter.xml'
+    ///  path='items/CreateData2/*'/>
     public TData CreateData(DbResult dbResult)
     {
       TData retValue = null;
@@ -89,14 +95,15 @@ namespace LJCDBMessage
     }
 
     // Creates a Data Object from the data values.
-    /// <include path='items/CreateData3/*' file='Doc/ResultConverter.xml'/>
-    public TData CreateData(DbValues dataValues)
+    /// <include file='Doc/ResultConverter.xml'
+    ///  path='items/CreateData3/*'/>
+    public TData CreateData(LJCDataValues dataValues)
     {
       // Also in LJCDBClientLib.ObjectManager.
       // Used here to allow for different TData.
       TData retValue = null;
 
-      if (NetCommon.HasItems(dataValues))
+      if (LJC.HasListItems(dataValues))
       {
         // Populate a data object with the result values.
         // Uses retValue as an object and processes with reflection.
@@ -108,9 +115,10 @@ namespace LJCDBMessage
     }
 
     // Creates a Data Object from the row values.
-    /// <include path='items/CreateDataFromTable/*' file='Doc/ResultConverter.xml'/>
+    /// <include file='Doc/ResultConverter.xml'
+    ///  path='items/CreateDataFromTable/*'/>
     public TData CreateDataFromTable(DataTable dataTable, DataRow dataRow = null
-      , DbColumns dataDefinition = null)
+      , LJCDataColumns dataDefinition = null)
     {
       LJCReflect reflect;
       string columnName;
@@ -143,25 +151,29 @@ namespace LJCDBMessage
     #endregion
 
     // Gets the property name.
-    private string GetPropertyName(DbColumns propertyMapping, string columnName)
+    private string GetPropertyName(LJCDataColumns propertyMapping, string columnName)
     {
       // Similar logic in LJCDBMessage.DbResult.GetRowValues().
-      DbColumn dbColumn;
+      LJCDataColumn dataColumn;
       string retValue = columnName;
 
       if (propertyMapping != null)
       {
-        dbColumn = propertyMapping.LJCSearchRenameAs(columnName);
-        if (dbColumn != null)
+        //dataColumn = propertyMapping.LJCSearchRenameAs(columnName);
+        var keys = LJC.Keys(LJCDataColumn.ColumnRenameAs, columnName);
+        dataColumn = propertyMapping.LJCGetUnique(keys);
+        if (dataColumn != null)
         {
-          retValue = dbColumn.PropertyName;
+          retValue = dataColumn.PropertyName;
         }
         else
         {
-          dbColumn = propertyMapping.LJCSearchColumnName(columnName);
-          if (dbColumn != null)
+          //dataColumn = propertyMapping.LJCSearchColumnName(columnName);
+          keys = LJC.Keys(LJCDataColumn.ColumnColumnName, columnName);
+          dataColumn = propertyMapping.LJCGetUnique(keys);
+          if (dataColumn != null)
           {
-            retValue = dbColumn.PropertyName;
+            retValue = dataColumn.PropertyName;
           }
         }
       }

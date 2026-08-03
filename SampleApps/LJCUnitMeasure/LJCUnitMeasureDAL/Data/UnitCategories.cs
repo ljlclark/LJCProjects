@@ -1,11 +1,10 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // UnitCategories.cs
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Xml.Serialization;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCUnitMeasureDAL
 {
@@ -88,7 +87,7 @@ namespace LJCUnitMeasureDAL
 		{
 			UnitCategories retValue = null;
 
-			if (NetCommon.HasItems(list))
+			if (LJC.HasListItems(list))
 			{
 				retValue = new UnitCategories();
 				foreach (UnitCategory item in list)

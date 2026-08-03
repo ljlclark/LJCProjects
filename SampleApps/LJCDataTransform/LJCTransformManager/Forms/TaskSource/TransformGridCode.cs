@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TransformGridCode.cs
 using System;
@@ -7,6 +7,7 @@ using LJCDataTransformDAL;
 using System.Windows.Forms;
 using LJCWinFormCommon;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -43,7 +44,7 @@ namespace LJCTransformManager
 				taskTransformManager = mManagers.TaskTransformManager;
 				records = taskTransformManager.LoadWithTaskID(parentID);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (TaskTransform record in records)
 					{
@@ -187,7 +188,7 @@ namespace LJCTransformManager
 				if (MessageBox.Show(FormCommon.DeleteConfirm, title
 					, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ TaskTransform.ColumnTransformID
 							, row.LJCGetInt32(TaskTransform.ColumnTransformID) }

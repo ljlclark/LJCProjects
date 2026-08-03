@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataDetailDAL
 {
@@ -47,7 +48,7 @@ namespace LJCDataDetailDAL
     /// <include path='items/CopyConstructor/*' file='Doc/ControlTabs.xml'/>
     public ControlTabItems(ControlTabItems items)
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -111,7 +112,7 @@ namespace LJCDataDetailDAL
     {
       ControlTabItems retValue = null;
 
-      if (NetCommon.HasItems(list))
+      if (LJC.HasListItems(list))
       {
         retValue = new ControlTabItems();
         foreach (ControlTab item in list)

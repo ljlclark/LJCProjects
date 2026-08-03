@@ -49,9 +49,9 @@ namespace CVRDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public LJCDataColumns GetIDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { CVSex.ColumnID, id }
       };
@@ -63,9 +63,9 @@ namespace CVRDAL
 
     // Creates the RecordColumns object.
     /// <include path='items/DataColumns/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns DataColumns(long id)
+    public LJCDataColumns DataColumns(long id)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       // Use common data definitions.
       var keyColumns = GetIDKey((int)id);
@@ -101,7 +101,7 @@ namespace CVRDAL
 
     // Creates the KeyItems collection.
     /// <include path='items/GetKeyItems/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public KeyItems GetKeyItems(string propertyName, DbColumns keyColumns = null)
+    public KeyItems GetKeyItems(string propertyName, LJCDataColumns keyColumns = null)
     {
       KeyItems retValue = null;
 

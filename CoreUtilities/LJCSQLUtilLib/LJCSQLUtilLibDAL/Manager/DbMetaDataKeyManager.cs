@@ -32,15 +32,15 @@ namespace LJCSQLUtilLibDAL
 
 			// Add Calculated and Join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			DataDefinition.Add(DbMetaDataKey.ColumnColumnName
-			 , caption: "Column Name");
-			DataDefinition.Add(DbMetaDataKey.ColumnToTableName
-			 , caption: "To Table Name");
-			DataDefinition.Add(DbMetaDataKey.ColumnToColumnName
-			 , caption: "To Column Name");
+			var dataColumn = DataDefinition.Add(DbMetaDataKey.ColumnColumnName);
+      dataColumn.Caption = "Column Name";
+      dataColumn = DataDefinition.Add(DbMetaDataKey.ColumnToTableName);
+      dataColumn.Caption = "To Table Name";
+      dataColumn = DataDefinition.Add(DbMetaDataKey.ColumnToColumnName);
+      dataColumn.Caption = "To Column Name";
 
-			// Create the list of database assigned columns.
-			SetDbAssignedColumns(new string[]
+      // Create the list of database assigned columns.
+      SetDbAssignedColumns(new string[]
 				{
 					DbMetaDataKey.ColumnID
 				});
@@ -96,7 +96,7 @@ namespace LJCSQLUtilLibDAL
 		public DbMetaDataKey RetrieveWithUniqueKey(int columnID
 			, int keyTypeID)
 		{
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ DbMetaDataKey.ColumnDbMetaDataColumnID, columnID },
 				{ DbMetaDataKey.ColumnDbMetaDataKeyTypeID, keyTypeID }
@@ -162,9 +162,9 @@ namespace LJCSQLUtilLibDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ DbMetaDataKey.ColumnID, id }
 			};
@@ -187,11 +187,11 @@ namespace LJCSQLUtilLibDAL
 
 		// Get the Foreign key record.
 		/// <include path='items/GetForeignKey/*' file='Doc/DbMetaDataKeyManager.xml'/>
-		public DbColumns GetForeignKey(int columnID)
+		public LJCDataColumns GetForeignKey(int columnID)
 		{
 			//where [DbMetaDataKey].[DbMetaDataColumnID] = 6
 			// and [DbMetaDataKey].[DbMetaDataKeyTypeID] = 2
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ DbMetaDataKey.ColumnDbMetaDataColumnID, columnID },
 				{ DbMetaDataKey.ColumnDbMetaDataKeyTypeID, 2 }
@@ -216,7 +216,7 @@ namespace LJCSQLUtilLibDAL
 			// to recieve the join values.
 			// The RenameAs property is required if there is another table column
 			// with the same name.
-			// DbColumns.Add(string columnName, string propertyName = null
+			// LJCDataColumns.Add(string columnName, string propertyName = null
 			// , string renameAs = null, string dataTypeName = "String", string caption = null) 
 
 			// 1.
@@ -232,7 +232,7 @@ namespace LJCSQLUtilLibDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ DbMetaDataKey.ColumnDbMetaDataColumnID, joinToColumnName }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ DbMetaDataColumn.ColumnColumnName }}
 			};
 			retValue.Add(dbJoin);
@@ -252,7 +252,7 @@ namespace LJCSQLUtilLibDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ joinFromColumnName, joinToColumnName }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ DbMetaDataTable.ColumnName, "FromTableName", "FromTableName" }}
 			};
 			retValue.Add(dbJoin);
@@ -270,7 +270,7 @@ namespace LJCSQLUtilLibDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ DbMetaDataKey.ColumnToColumnID, joinToColumnName }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ DbMetaDataColumn.ColumnColumnName, "ToColumnName", "ToColumnName" }}
 			};
 			retValue.Add(dbJoin);
@@ -290,7 +290,7 @@ namespace LJCSQLUtilLibDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ joinFromColumnName, joinToColumnName }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ DbMetaDataTable.ColumnName, "ToTableName", "ToTableName" }}
 			};
 			retValue.Add(dbJoin);

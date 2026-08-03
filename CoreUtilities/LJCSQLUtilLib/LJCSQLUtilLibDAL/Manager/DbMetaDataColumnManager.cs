@@ -73,7 +73,7 @@ namespace LJCSQLUtilLibDAL
 		public DbMetaDataColumn RetrieveWithUniqueKey(int tableID
 			, string columnName)
 		{
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ DbMetaDataColumn.ColumnDbMetaDataTableID, tableID },
 				{ DbMetaDataColumn.ColumnColumnName, (object)columnName }
@@ -101,7 +101,7 @@ namespace LJCSQLUtilLibDAL
 
 				if (retValue)
 				{
-					DbColumns keyColumns = GetIDKey(retrieveData.ID);
+					LJCDataColumns keyColumns = GetIDKey(retrieveData.ID);
 					Update(mdColumn, keyColumns);
 				}
 			}
@@ -135,9 +135,9 @@ namespace LJCSQLUtilLibDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ DbMetaDataColumn.ColumnID, id }
 			};
@@ -146,9 +146,9 @@ namespace LJCSQLUtilLibDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetTableIDKey/*' file='Doc/DbMetaDataColumnManager.xml'/>
-		public DbColumns GetTableIDKey(int tableID)
+		public LJCDataColumns GetTableIDKey(int tableID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ DbMetaDataColumn.ColumnDbMetaDataTableID, tableID }
 			};
@@ -180,7 +180,7 @@ namespace LJCSQLUtilLibDAL
 			//	JoinType = "left",
 			//	JoinOns = new DbJoinOns() {
 			//			{ DbMetaDataColumn.ColumnCodeTypeID, CodeType.ColumnID }},
-			//	Columns = new DbColumns() {
+			//	Columns = new LJCDataColumns() {
 			//			{ columnName, propertyName, renameAs }}
 			//};
 			//retValue.Add(dbJoin);

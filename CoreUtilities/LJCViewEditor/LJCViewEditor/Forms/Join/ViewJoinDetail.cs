@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoinDetail.cs
 using LJCDBClientLib;
@@ -12,6 +12,7 @@ using System;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCViewEditor
 {
@@ -301,7 +302,7 @@ namespace LJCViewEditor
     // Populates the join table combo.
     private void PopulateTableCombo(ForeignKeys foreignKeys, string targetTableName)
     {
-      if (NetCommon.HasItems(foreignKeys))
+      if (LJC.HasListItems(foreignKeys))
       {
         int index = 0;
         foreach (ForeignKey foreignKey in foreignKeys)

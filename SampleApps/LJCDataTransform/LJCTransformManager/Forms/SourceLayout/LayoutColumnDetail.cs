@@ -155,7 +155,7 @@ namespace LJCTransformManager
 			Cursor = Cursors.WaitCursor;
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ LayoutColumn.ColumnSourceLayoutID, LJCRecord.SourceLayoutID },
 				{ LayoutColumn.ColumnName, (object)LJCRecord.Name }
@@ -175,7 +175,7 @@ namespace LJCTransformManager
 			{
 				if (LJCIsUpdate)
 				{
-					keyColumns = new DbColumns()
+					keyColumns = new LJCDataColumns()
 					{
 						{ LayoutColumn.ColumnSourceLayoutID, LJCRecord.SourceLayoutID },
 						{ LayoutColumn.ColumnLayoutColumnID, LJCRecord.LayoutColumnID }

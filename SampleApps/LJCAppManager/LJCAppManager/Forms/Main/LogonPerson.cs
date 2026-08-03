@@ -46,7 +46,7 @@ namespace LJCAppManager
 		{
 			AppUser retValue;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ AppUser.ColumnUserID, (object)WindowsUserID }
 			};

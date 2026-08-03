@@ -24,10 +24,11 @@ namespace LJCFacilityManagerDAL
 
 			// Add calculated and join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			DataDefinition.Add(Fixture.ColumnTypeDescription, caption: "Code Type Description");
+			var dataColumn = DataDefinition.Add(Fixture.ColumnTypeDescription);
+      dataColumn.Caption = "Code Type Description";
 
-			// Create the list of database assigned columns.
-			SetDbAssignedColumns(new string[]
+      // Create the list of database assigned columns.
+      SetDbAssignedColumns(new string[]
 			{
 				Fixture.ColumnID
 			});
@@ -50,7 +51,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ "CodeType_Id", "Id" }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ CodeType.ColumnDescription, Fixture.ColumnTypeDescription
 						, Fixture.ColumnTypeDescription }}
 			};

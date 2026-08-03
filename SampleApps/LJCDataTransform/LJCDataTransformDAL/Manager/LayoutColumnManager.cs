@@ -68,9 +68,9 @@ namespace LJCDataTransformDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(short id)
+		public LJCDataColumns GetIDKey(short id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ LayoutColumn.ColumnLayoutColumnID, id }
 			};
@@ -79,9 +79,9 @@ namespace LJCDataTransformDAL
 
 		// 
 		/// <include path='items/GetLayoutIDKey/*' file='Doc/LayoutColumnManager.xml'/>
-		public DbColumns GetLayoutIDKey(int layoutID)
+		public LJCDataColumns GetLayoutIDKey(int layoutID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ LayoutColumn.ColumnSourceLayoutID, layoutID }
 			};

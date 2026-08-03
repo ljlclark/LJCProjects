@@ -1,9 +1,10 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataDetailCode.cs
 using LJCDataDetailDAL;
 using LJCDBMessage;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataDetailLib
 {
@@ -26,7 +27,7 @@ namespace LJCDataDetailLib
 
     // Adjust the control for usability.
     /// <include path='items/AdjustedWidth/*' file='Doc/DataDetailCode.xml'/>
-    public int AdjustedWidth(DbColumn dataColumn)
+    public int AdjustedWidth(LJCDataColumn dataColumn)
     {
       int minWidth = 4;
       int intWidth = 12;
@@ -124,7 +125,7 @@ namespace LJCDataDetailLib
 
     // Gets the ControlRow type name.
     /// <include path='items/ControlRowType/*' file='Doc/DataDetailCode.xml'/>
-    public string ControlRowType(DbColumn dataColumn, KeyItems keyItems)
+    public string ControlRowType(LJCDataColumn dataColumn, KeyItems keyItems)
     {
       string retValue = null;
 
@@ -209,9 +210,9 @@ namespace LJCDataDetailLib
 
     // Configure the New controls.
     /// <include path='items/NewControlData/*' file='Doc/DataDetailCode.xml'/>
-    public void NewControlData(DbColumns dataColumns, KeyItems keyItems)
+    public void NewControlData(LJCDataColumns dataColumns, KeyItems keyItems)
     {
-      if (NetCommon.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         int controlColumnsCount = CalculateColumnsCount(dataColumns.Count);
         NewControlColumns(controlColumnsCount, dataColumns);
@@ -277,16 +278,16 @@ namespace LJCDataDetailLib
 
     // Get labels and controls width for the specified start and stop
     // DataColumn indexes.
-    private void GetWidths(DbColumns dataColumns, int startIndex, int stopIndex
+    private void GetWidths(LJCDataColumns dataColumns, int startIndex, int stopIndex
       , out int labelsWidth, out int controlsWidth)
     {
-      DbColumn dbColumn;
+      LJCDataColumn dbColumn;
       int width;
 
       labelsWidth = MinLabelWidth;
       controlsWidth = MinControlWidth;
 
-      if (NetCommon.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         // Only use data items for the current ControlColumn.
         for (int index = startIndex; index <= stopIndex; index++)
@@ -321,7 +322,7 @@ namespace LJCDataDetailLib
     }
 
     // Gets the ControlColumns object.
-    private void NewControlColumns(int controlColumnsCount, DbColumns dataColumns)
+    private void NewControlColumns(int controlColumnsCount, LJCDataColumns dataColumns)
     {
       ControlTab controlTab = null;
 
@@ -399,7 +400,7 @@ namespace LJCDataDetailLib
 
     // Creates a ControlRow DB and Collection item.
     private ControlRow NewControlRow(ControlColumn controlColumn
-      , DbColumn dataColumn, int rowIndex, int tabbingIndex)
+      , LJCDataColumn dataColumn, int rowIndex, int tabbingIndex)
     {
       ControlRow retValue;
 
@@ -424,12 +425,12 @@ namespace LJCDataDetailLib
     }
 
     // Creates the ControlRows DB and Collection data.
-    private void NewControlRows(DbColumns dataColumns, KeyItems keyItems)
+    private void NewControlRows(LJCDataColumns dataColumns, KeyItems keyItems)
     {
       // Local references.
       var config = ControlDetail;
 
-      if (NetCommon.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         foreach (ControlTab controlTab in config.ControlTabItems)
         {
@@ -448,7 +449,7 @@ namespace LJCDataDetailLib
               if (dataIndex < dataColumns.Count)
               {
                 int rowIndex = dataIndex - columnIndex * config.ColumnRowsLimit;
-                DbColumn dataColumn = dataColumns[dataIndex];
+                LJCDataColumn dataColumn = dataColumns[dataIndex];
 
                 NewControlRow(controlColumn, dataColumn, rowIndex, tabbingIndex);
                 string controlRowType = ControlRowType(dataColumn, keyItems);

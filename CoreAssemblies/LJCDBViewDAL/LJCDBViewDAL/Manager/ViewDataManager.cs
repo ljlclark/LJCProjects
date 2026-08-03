@@ -1,10 +1,11 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewDataManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -82,7 +83,7 @@ namespace LJCDBViewDAL
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
-      var keyColumns = new DbColumns()
+      var keyColumns = new LJCDataColumns()
       {
         { ViewData.ColumnViewTableID, viewTableID },
         { ViewData.ColumnName, (object)name }
@@ -96,9 +97,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public LJCDataColumns GetIDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewData.ColumnID, id }
       };
@@ -107,9 +108,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetParentKey(int id)
+    public LJCDataColumns GetParentKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewData.ColumnViewTableID, id }
       };
@@ -159,10 +160,14 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (NetCommon.HasItems(viewData.ChangedNames))
+          // *** Change ***
+          var changedNames = viewData.ChangedNames.ChangedProperties;
+          //if (NetCommon.HasItems(viewData.ChangedNames))
+          if (LJC.HasListItems(changedNames))
           {
             var keyColumns = GetIDKey(retrieveData.ID);
-            Update(viewData, keyColumns, viewData.ChangedNames);
+            //Update(viewData, keyColumns, viewData.ChangedNames);
+            Update(viewData, keyColumns, changedNames);
           }
         }
       }

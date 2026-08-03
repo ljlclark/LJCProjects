@@ -130,7 +130,7 @@ namespace LJCGenTableCode
       builder.AppendLine("    <RepeatItems>");
 
       int index = 0;
-      foreach (DbColumn dbColumn in dataManager.DataDefinition)
+      foreach (LJCDataColumn dbColumn in dataManager.DataDefinition)
       {
         builder.AppendLine("      <RepeatItem>");
         index++;

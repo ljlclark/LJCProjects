@@ -1,10 +1,11 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenDataManager.cs
 using LJCGenTextLib;
 using LJCNetCommon;
 using System;
 using System.IO;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenTextEdit
 {
@@ -85,7 +86,7 @@ namespace LJCGenTextEdit
       {
         // Check for child items.
         RepeatItems repeatItems = searchSection.RepeatItems;
-        if (NetCommon.HasItems(repeatItems))
+        if (LJC.HasListItems(repeatItems))
         {
           var errorText = "The Section cannot be deleted becauses it has child items.";
           throw new InvalidOperationException(errorText);

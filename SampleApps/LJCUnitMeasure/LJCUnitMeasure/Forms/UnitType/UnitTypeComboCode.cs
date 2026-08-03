@@ -1,11 +1,11 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // UnitTypeComboCode.cs
-using System;
 using System.Windows.Forms;
 using LJCNetCommon;
 using LJCUnitMeasureDAL;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCUnitMeasure
 {
@@ -49,7 +49,7 @@ namespace LJCUnitMeasure
 			var unitTypeManager = mManagers.UnitTypeManager;
 			var dataRecords = unitTypeManager.Load();
 
-			if (NetCommon.HasItems(dataRecords))
+			if (LJC.HasListItems(dataRecords))
 			{
 				foreach (UnitType dataRecord in dataRecords)
 				{

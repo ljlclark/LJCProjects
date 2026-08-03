@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CommonModule.cs
 using System;
@@ -15,6 +15,7 @@ using LJCDataAccessConfig;
 using LJCTextDataReaderLib;
 using LJCAddressParserLib;
 using LJCDataTransformDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCCommonModuleLib
 {
@@ -429,7 +430,7 @@ namespace LJCCommonModuleLib
 				StandardAddress standardAddress = new StandardAddress();
 				foreach (DbRow dbRow in dbResult.Rows)
 				{
-					DbValues dbValues = dbRow.Values;
+					LJCDataValues dbValues = dbRow.Values;
 					string addressLine1 = dbValues.LJCGetString("AddressLine1").ToString();
 					standardAddress.ParseDeliveryAddressLine(addressLine1);
 
@@ -1102,7 +1103,7 @@ namespace LJCCommonModuleLib
 				}
 
 				// Add SQL statement Primary Key constraint.
-				if (NetCommon.HasItems(primaryColumns))
+				if (LJC.HasListItems(primaryColumns))
 				{
 					builder.AppendLine(",");
 					builder.AppendLine($"  CONSTRAINT [PK_{tableName}] PRIMARY KEY CLUSTERED");

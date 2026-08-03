@@ -1,9 +1,9 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Section.cs
-using LJCNetCommon;
 using System;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenTextLib
 {
@@ -114,7 +114,7 @@ namespace LJCGenTextLib
     {
       bool retValue = false;
 
-      if (NetCommon.HasItems(RepeatItems))
+      if (LJC.HasListItems(RepeatItems))
       {
         retValue = true;
       }

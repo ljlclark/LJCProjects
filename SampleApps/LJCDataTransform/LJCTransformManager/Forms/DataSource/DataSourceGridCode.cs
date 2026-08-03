@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataSourceGridCode.cs
 using System;
@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDataTransformDAL;
-using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -49,7 +49,7 @@ namespace LJCTransformManager
 				records = dataSourceManager.Load();
 			}
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (DataSource record in records)
 				{

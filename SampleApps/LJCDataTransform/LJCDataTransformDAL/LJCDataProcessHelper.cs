@@ -1,9 +1,10 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDataProcessHelper.cs
 using System;
 using LJCDBClientLib;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataTransformDAL
 {
@@ -127,7 +128,7 @@ namespace LJCDataTransformDAL
 				{
 					retValue = false;
 					Steps steps = LoadSteps(dataProcess.DataProcessID);
-					if (NetCommon.HasItems(steps))
+					if (LJC.HasListItems(steps))
 					{
 						retValue = true;
 						foreach (Step step in steps)
@@ -142,7 +143,7 @@ namespace LJCDataTransformDAL
 							// Check if all StepTasks are in the specified status.
 							retValue = false;
 							StepTasks stepTasks = LoadStepTasks(step.StepID);
-							if (NetCommon.HasItems(stepTasks))
+							if (LJC.HasListItems(stepTasks))
 							{
 								retValue = true;
 								foreach (StepTask stepTask in stepTasks)
@@ -174,7 +175,7 @@ namespace LJCDataTransformDAL
 			bool retValue = false;
 
 			Steps steps = LoadSteps(dataProcessID);
-			if (NetCommon.HasItems(steps))
+			if (LJC.HasListItems(steps))
 			{
 				retValue = true;
 				SetStepManager();
@@ -186,7 +187,7 @@ namespace LJCDataTransformDAL
 					{
 						retValue = false;
 						StepTasks tasks = LoadStepTasks(step.StepID);
-						if (NetCommon.HasItems(tasks))
+						if (LJC.HasListItems(tasks))
 						{
 							retValue = true;
 							foreach (StepTask stepTask in tasks)

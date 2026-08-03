@@ -261,7 +261,7 @@ namespace LJCViewEditor
 			DataHelper dataHelper = new DataHelper(mSettings.DbServiceRef
 				, mSettings.DataConfigName);
 			mFirstValueColumns = dataHelper.GetTableColumns(LJCTableName);
-			foreach (DbColumn dbColumn in mFirstValueColumns)
+			foreach (LJCDataColumn dbColumn in mFirstValueColumns)
 			{
 				FirstValueCombo.Items.Add(dbColumn);
 			}
@@ -405,7 +405,7 @@ namespace LJCViewEditor
     internal event EventHandler<EventArgs> LJCChange;
 
     // Singleton values.
-    private DbColumns mFirstValueColumns;
+    private LJCDataColumns mFirstValueColumns;
     private ViewCondition mOriginalRecord;
     private StandardUISettings mSettings;
 		#endregion

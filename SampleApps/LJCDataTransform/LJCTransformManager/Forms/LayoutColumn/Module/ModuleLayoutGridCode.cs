@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ModuleLayoutGridCode.cs
 using System;
@@ -7,6 +7,7 @@ using LJCWinFormControls;
 using LJCDataTransformDAL;
 using LJCWinFormCommon;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -37,7 +38,7 @@ namespace LJCTransformManager
 			var layoutManager = mManagers.SourceLayoutManager;
 			records = layoutManager.Load();
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (SourceLayout record in records)
 				{

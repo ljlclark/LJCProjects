@@ -88,7 +88,7 @@ namespace CVRManager
 				CVPersonGrid.LJCAddColumns(mGridColumnsCVPerson);
 			}
 		}
-		private DbColumns mGridColumnsCVPerson;
+		private LJCDataColumns mGridColumnsCVPerson;
 
 		// Saves the control values. 
 		private void SaveControlValues()

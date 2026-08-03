@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TaskSourceModuleCode.cs
 using System;
@@ -11,6 +11,7 @@ using LJCWinFormControls;
 using LJCNetCommon;
 using LJCDBClientLib;
 using LJCDataTransformDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -31,7 +32,7 @@ namespace LJCTransformManager
 			DataProcessManager dataProcessManager = Managers.DataProcessManager;
 			records = dataProcessManager.Load();
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (DataProcess record in records)
 				{
@@ -71,7 +72,7 @@ namespace LJCTransformManager
 				StepManager stepManager = Managers.StepManager;
 				records = stepManager.LoadWithProcessID(id);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (Step record in records)
 					{
@@ -201,7 +202,7 @@ namespace LJCTransformManager
 				TaskGrid.LJCAddColumns(mGridColumnsTask);
 			}
 		}
-		private DbColumns mGridColumnsTask;
+		private LJCDataColumns mGridColumnsTask;
 
 		// Setup the grid columns.
 		private void SetupGridTransform()
@@ -222,7 +223,7 @@ namespace LJCTransformManager
 				TransformGrid.LJCAddColumns(mGridColumnsTransform);
 			}
 		}
-		private DbColumns mGridColumnsTransform;
+		private LJCDataColumns mGridColumnsTransform;
 
 		// Setup the grid columns.
 		private void SetupGridDataSource()
@@ -243,7 +244,7 @@ namespace LJCTransformManager
 				DataSourceGrid.LJCAddColumns(mGridColumnsDataSource);
 			}
 		}
-		private DbColumns mGridColumnsDataSource;
+		private LJCDataColumns mGridColumnsDataSource;
 
 		// Saves the control values. 
 		private void SaveControlValues()

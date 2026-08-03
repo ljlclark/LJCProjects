@@ -81,7 +81,7 @@ namespace LJCRegionManager
       if (LJCID > 0)
       {
         LJCIsUpdate = true;
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { City.ColumnID, LJCID }
         };
@@ -146,7 +146,7 @@ namespace LJCRegionManager
 
       LJCRecord = SetRecordValues();
 
-      var keyColumns = new DbColumns()
+      var keyColumns = new LJCDataColumns()
       {
         { City.ColumnProvinceID, LJCRecord.ProvinceID },
         { City.ColumnName, LJCRecord.Name }
@@ -166,7 +166,7 @@ namespace LJCRegionManager
       {
         if (LJCIsUpdate)
         {
-          var updateKeyColumns = new DbColumns()
+          var updateKeyColumns = new LJCDataColumns()
           {
             { City.ColumnID, LJCRecord.ID }
           };

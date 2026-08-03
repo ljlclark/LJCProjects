@@ -1,8 +1,9 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataCommon.cs
 using LJCDocXMLObjLib;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDocObjLib
 {
@@ -25,7 +26,7 @@ namespace LJCDocObjLib
           Paras = new DataParas(),
           Code = docExample.Code
         };
-        if (NetCommon.HasItems(docExample.Paras))
+        if (LJC.HasListItems(docExample.Paras))
         {
           foreach (DocPara docPara in docExample.Paras)
           {
@@ -46,7 +47,7 @@ namespace LJCDocObjLib
     {
       DataExceptions retValue = null;
 
-      if (NetCommon.HasItems(docExceptions))
+      if (LJC.HasListItems(docExceptions))
       {
         retValue = new DataExceptions();
         foreach (DocException docException in docExceptions)
@@ -68,7 +69,7 @@ namespace LJCDocObjLib
     {
       DataLinks retValue = null;
 
-      if (NetCommon.HasItems(docLinks))
+      if (LJC.HasListItems(docLinks))
       {
         retValue = new DataLinks();
         foreach (DocLink docLink in docLinks)
@@ -90,7 +91,7 @@ namespace LJCDocObjLib
     {
       DataParams retValue = null;
 
-      if (NetCommon.HasItems(docParams))
+      if (LJC.HasListItems(docParams))
       {
         retValue = new DataParams();
         foreach (DocParam docParam in docParams)
@@ -114,7 +115,7 @@ namespace LJCDocObjLib
 
       if (docRemarks != null
         && (NetString.HasValue(docRemarks.Text)
-        || NetCommon.HasItems(docRemarks.Paras)))
+        || LJC.HasListItems(docRemarks.Paras)))
       {
         retValue = new DataRemark()
         {
@@ -124,7 +125,7 @@ namespace LJCDocObjLib
         {
           retValue.Text = docRemarks.Text;
         }
-        if (NetCommon.HasItems(docRemarks.Paras))
+        if (LJC.HasListItems(docRemarks.Paras))
         {
           foreach (DocPara docPara in docRemarks.Paras)
           {
@@ -145,7 +146,7 @@ namespace LJCDocObjLib
     {
       DataTypeParams retValue = null;
 
-      if (NetCommon.HasItems(docTypeParams))
+      if (LJC.HasListItems(docTypeParams))
       {
         retValue = new DataTypeParams();
         foreach (DocTypeParam docParam in docTypeParams)
@@ -170,7 +171,7 @@ namespace LJCDocObjLib
       hasSyntax = false;
 
       if (remark != null
-        && NetCommon.HasItems(remark.Paras))
+        && LJC.HasListItems(remark.Paras))
       {
         foreach (DataPara dataPara in remark.Paras)
         {

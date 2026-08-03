@@ -44,7 +44,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ Business.ColumnCodeTypeID, CodeType.ColumnID }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ CodeType.ColumnDescription, Business.ColumnTypeDescription
 						, Business.ColumnTypeDescription }}
 			};

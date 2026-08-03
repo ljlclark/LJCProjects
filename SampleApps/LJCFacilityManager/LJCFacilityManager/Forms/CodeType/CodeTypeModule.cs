@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CodeTypeModule.cs
 using System;
@@ -11,6 +11,7 @@ using LJCWinFormControls;
 using LJCDBMessage;
 using LJCDBClientLib;
 using LJCFacilityManagerDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCFacilityManager
 {
@@ -56,7 +57,7 @@ namespace LJCFacilityManager
 			codeTypeManager.SetOrderByClassDescription();
 			records = codeTypeManager.Load(joins: dbJoins);
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (CodeType record in records)
 				{
@@ -199,7 +200,7 @@ namespace LJCFacilityManager
 				if (MessageBox.Show(message, title, MessageBoxButtons.YesNo
 					, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ CodeType.ColumnID, row.LJCGetInt32(CodeType.ColumnID) }
 					};

@@ -575,7 +575,8 @@ namespace TestData
       // Test Method
       dataColumns.LJCRemove("Name");
 
-      var dataColumn = dataColumns[1];
+      //var dataColumn = dataColumns[1];
+      var dataColumn = dataColumns["Description"];
       var result = dataColumn.PropertyName;
       var compare = "Description";
       TestCommon.Write($"{methodName}", result, compare);

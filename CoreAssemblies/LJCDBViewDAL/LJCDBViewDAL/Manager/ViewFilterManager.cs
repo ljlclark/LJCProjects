@@ -1,9 +1,10 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewFilterManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -78,9 +79,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/IDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns IDKey(int id)
+    public LJCDataColumns IDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewFilter.ColumnID, id }
       };
@@ -89,9 +90,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/ParentIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns ParentIDKey(int parentID)
+    public LJCDataColumns ParentIDKey(int parentID)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewFilter.ColumnViewDataID, parentID }
       };
@@ -100,9 +101,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/UniqueKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns UniqueKey(int parentID, string name)
+    public LJCDataColumns UniqueKey(int parentID, string name)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewFilter.ColumnViewDataID, parentID },
         { ViewFilter.ColumnName, (object)name }
@@ -153,10 +154,14 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (NetCommon.HasItems(viewFilter.ChangedNames))
+          // *** Change ***
+          var changedNames = viewFilter.ChangedNames.ChangedProperties;
+          //if (NetCommon.HasItems(viewFilter.ChangedNames))
+          if (LJC.HasListItems(changedNames))
           {
             var keyColumns = IDKey(retrieveData.ID);
-            Update(viewFilter, keyColumns, viewFilter.ChangedNames);
+            //Update(viewFilter, keyColumns, viewFilter.ChangedNames);
+            Update(viewFilter, keyColumns, changedNames);
           }
         }
       }

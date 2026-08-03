@@ -48,9 +48,9 @@ namespace LJCFacilityManagerDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ Facility.ColumnID, id }
 			};
@@ -68,7 +68,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ Facility.ColumnCodeTypeID, CodeType.ColumnID }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ CodeType.ColumnDescription, Facility.ColumnTypeDescription
 						, Facility.ColumnTypeDescription }}
 			};

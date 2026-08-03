@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // AccountGridCode.cs
 using System;
@@ -8,6 +8,7 @@ using LJCFacilityManagerDAL;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCFacilityManager
 {
@@ -41,7 +42,7 @@ namespace LJCFacilityManager
 				// Data from list items.
 				int parentID = parentRow.LJCGetInt32(Person.ColumnID);
 
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Account.ColumnPersonID, parentID }
 				};
@@ -49,7 +50,7 @@ namespace LJCFacilityManager
 				DbJoins dbJoins = accountManager.GetLoadJoins();
 				records = accountManager.Load(keyColumns, joins: dbJoins);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (Account record in records)
 					{
@@ -207,7 +208,7 @@ namespace LJCFacilityManager
 					// Data from list items.
 					int id = row.LJCGetInt32(Account.ColumnID);
 
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ Account.ColumnID, id }
 					};

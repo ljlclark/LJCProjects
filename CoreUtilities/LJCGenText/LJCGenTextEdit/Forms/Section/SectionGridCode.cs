@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SectionGridCode.cs
 using LJCDBClientLib;
@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using static LJCGenTextEdit.EditList;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenTextEdit
 {
@@ -41,7 +42,7 @@ namespace LJCGenTextEdit
       if (GenDataManager != null)
       {
         var records = GenDataManager.LoadSections();
-        if (NetCommon.HasItems(records))
+        if (LJC.HasListItems(records))
         {
           foreach (Section record in records)
           {
@@ -270,7 +271,7 @@ namespace LJCGenTextEdit
         string tableName = detail.TableName;
 
         DataManager dataManager = new DataManager(dataConfigName, tableName);
-        DbColumns dbColumns = dataManager.DataDefinition;
+        LJCDataColumns dbColumns = dataManager.DataDefinition;
         XMLData xmlData = new XMLData();
         string data = xmlData.Create(tableName, dbColumns);
 

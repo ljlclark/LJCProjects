@@ -1,10 +1,10 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenItemManager.cs
-using LJCDBMessage;
 using LJCGenTextLib;
 using LJCNetCommon;
 using System;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenTextEdit
 {
@@ -87,7 +87,7 @@ namespace LJCGenTextEdit
         {
           // Check for child items.
           Replacements replacements = searchRepeatItem.Replacements;
-          if (NetCommon.HasItems(replacements))
+          if (LJC.HasListItems(replacements))
           {
             string errorText = "The RepeatItem cannot be deleted becauses it has child items.";
             throw new InvalidOperationException(errorText);

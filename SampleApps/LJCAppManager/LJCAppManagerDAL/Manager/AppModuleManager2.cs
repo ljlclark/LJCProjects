@@ -46,9 +46,9 @@ namespace LJCAppManagerDAL
 
 		// Gets the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ AppModule.ColumnID, id }
 			};
@@ -76,7 +76,7 @@ namespace LJCAppManagerDAL
 				AppProgram.ColumnTitle};
 			AppProgramManager2 programManager = new AppProgramManager2(mDbServiceRef, mDataConfigName);
 			programJoin.Columns = programManager.GetColumns(columnNames);
-			DbColumn titleColumn = programJoin.Columns[1];
+			LJCDataColumn titleColumn = programJoin.Columns[1];
 			titleColumn.PropertyName = "ProgramTitle";
 			titleColumn.RenameAs = "ProgramTitle";
 

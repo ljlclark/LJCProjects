@@ -85,7 +85,7 @@ namespace LJCTransformManager
 				//DataProcessGrid.LJCRestoreColumnValues(ControlValues);
 			}
 		}
-		private DbColumns mGridColumnsProcess;
+		private LJCDataColumns mGridColumnsProcess;
 
 		// Saves the control values. 
 		internal void SaveControlValues()

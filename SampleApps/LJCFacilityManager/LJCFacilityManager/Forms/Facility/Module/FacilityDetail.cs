@@ -80,7 +80,7 @@ namespace LJCFacilityManager
 			if (LJCID > 0)
 			{
 				LJCIsUpdate = true;
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Facility.ColumnID, LJCID }
 				};
@@ -135,14 +135,14 @@ namespace LJCFacilityManager
 			Facility lookupRecord;
 			string title;
 			string message;
-			DbColumns keyColumns;
+			LJCDataColumns keyColumns;
 			bool retValue = true;
 
 			LJCRecord = SetRecordValues();
 
 			if (NetString.HasValue(LJCRecord.Code))
 			{
-				keyColumns = new DbColumns()
+				keyColumns = new LJCDataColumns()
 				{
 					{ Facility.ColumnCode, (object)LJCRecord.Code }
 				};
@@ -159,7 +159,7 @@ namespace LJCFacilityManager
 				}
 			}
 
-			keyColumns = new DbColumns()
+			keyColumns = new LJCDataColumns()
 			{
 				{ Facility.ColumnDescription, (object)LJCRecord.Description }
 			};

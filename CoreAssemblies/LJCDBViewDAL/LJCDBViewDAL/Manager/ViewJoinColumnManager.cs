@@ -1,10 +1,11 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoinColumnManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -38,16 +39,16 @@ namespace LJCDBViewDAL
 
     #region Load/Retrieve Methods
 
-    // Retrieves a DbColumns collection for the specified parent ID.
+    // Retrieves a LJCDataColumns collection for the specified parent ID.
     /// <include path='items/LoadDbColumnsWithParentID/*' file='Doc/ViewJoinColumnManager.xml'/>
-    public DbColumns LoadDbColumnsWithParentID(int viewJoinID)
+    public LJCDataColumns LoadDbColumnsWithParentID(int viewJoinID)
     {
-      // Load from DataManager to get DbColumns result.
+      // Load from DataManager to get LJCDataColumns result.
       var keyColumns = ParentIDKey(viewJoinID);
       var dbResult = DataManager.Load(keyColumns);
       SQLStatement = DataManager.SQLStatement;
-      ResultConverter<DbColumn, DbColumns> resultConverter
-        = new ResultConverter<DbColumn, DbColumns>();
+      ResultConverter<LJCDataColumn, LJCDataColumns> resultConverter
+        = new ResultConverter<LJCDataColumn, LJCDataColumns>();
       var retValue = resultConverter.CreateCollection(dbResult);
       return retValue;
     }
@@ -100,9 +101,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/IDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns IDKey(int id)
+    public LJCDataColumns IDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewJoinColumn.ColumnID, id }
       };
@@ -111,9 +112,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/ParentIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns ParentIDKey(int parentID)
+    public LJCDataColumns ParentIDKey(int parentID)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewJoinColumn.ColumnViewJoinID, parentID }
       };
@@ -122,10 +123,10 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/GetUniqueKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns UniqueKey(int parentID, string propertyName
+    public LJCDataColumns UniqueKey(int parentID, string propertyName
       , string renameAs)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewJoinColumn.ColumnViewJoinID, parentID },
         { ViewJoinColumn.ColumnPropertyName, propertyName },
@@ -203,10 +204,14 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (NetCommon.HasItems(viewJoinColumn.ChangedNames))
+          // *** Change ***
+          var changedNames = viewJoinColumn.ChangedNames.ChangedProperties;
+          //if (NetCommon.HasItems(viewJoinColumn.ChangedNames))
+          if (LJC.HasListItems(changedNames))
           {
             var keyColumns = IDKey(retrieveData.ID);
-            Update(viewJoinColumn, keyColumns, viewJoinColumn.ChangedNames);
+            //Update(viewJoinColumn, keyColumns, viewJoinColumn.ChangedNames);
+            Update(viewJoinColumn, keyColumns, changedNames);
           }
         }
       }

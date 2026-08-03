@@ -84,7 +84,7 @@ namespace LJCFacilityManager
 			if (LJCID > 0)
 			{
 				LJCIsUpdate = true;
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Account.ColumnID, LJCID }
 				};
@@ -160,7 +160,7 @@ namespace LJCFacilityManager
 			bool retValue = true;
 
 			LJCRecord = SetRecordValues();
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Account.ColumnPersonID, LJCRecord.PersonID },
 				{ Account.ColumnDescription, (object)LJCRecord.Description }
@@ -180,7 +180,7 @@ namespace LJCFacilityManager
 			{
 				if (LJCIsUpdate)
 				{
-					keyColumns = new DbColumns()
+					keyColumns = new LJCDataColumns()
 					{
 						{ Account.ColumnID, LJCRecord.ID }
 					};
@@ -328,7 +328,7 @@ namespace LJCFacilityManager
 			// #002 Begin - Add
 			if (mBusinessID > 0)
 			{
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Business.ColumnID, mBusinessID }
 				};

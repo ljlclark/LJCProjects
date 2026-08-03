@@ -157,7 +157,7 @@ namespace LJCFacilityManager
 
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Address.ColumnProvinceID, mProvinceID },
 				{ Address.ColumnCityID, mCityID },
@@ -178,7 +178,7 @@ namespace LJCFacilityManager
 			{
 				if (LJCIsUpdate)
 				{
-					keyColumns = new DbColumns()
+					keyColumns = new LJCDataColumns()
 					{
 						{ Address.ColumnID, LJCRecord.ID }
 					};

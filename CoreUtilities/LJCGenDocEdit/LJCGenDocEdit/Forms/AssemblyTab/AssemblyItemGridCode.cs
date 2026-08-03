@@ -54,14 +54,14 @@ namespace LJCGenDocEdit
       if (DocList.AssemblyGroupGrid.CurrentRow is LJCGridRow _)
       {
         var manager = DocAssemblyManager;
-        var propertyNames = mGridColumns.LJCGetPropertyNames();
+        var propertyNames = mGridColumns.LJCPropertyNames();
         var names = new List<string>()
         {
           DocAssembly.ColumnSequence
         };
         manager.SetOrderBy(names);
 
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { DocAssembly.ColumnDocAssemblyGroupID, AssemblyGroupID() }
         };
@@ -117,7 +117,7 @@ namespace LJCGenDocEdit
     }
 
     // Adds a grid row and updates it with the result values.
-    private LJCGridRow RowAddValues(DbValues dbValues)
+    private LJCGridRow RowAddValues(LJCDataValues dbValues)
     {
       ArgError.MethodName = "RowAddValues(dataRecord)";
       ArgError.Add(dbValues, "dbValues");
@@ -175,7 +175,7 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        var keyRecord = new DbColumns()
+        var keyRecord = new LJCDataColumns()
         {
           { DocAssembly.ColumnDocAssemblyGroupID, AssemblyGroupID() },
           { DocAssembly.ColumnID, AssemblyID() }
@@ -342,7 +342,7 @@ namespace LJCGenDocEdit
       {
         // Setup the grid columns.
         var columns = mGridColumns.Clone();
-        columns.LJCRemoveColumn(DocAssembly.ColumnID);
+        columns.LJCRemove(DocAssembly.ColumnID);
         AssemblyGrid.LJCAddColumns(columns);
         AssemblyGrid.LJCRestoreColumnValues(DocList.ControlValues);
       }
@@ -498,7 +498,7 @@ namespace LJCGenDocEdit
     #region Properties
 
     // Gets or sets the GridColumns value.
-    internal DbColumns GridColumns { get; set; }
+    internal LJCDataColumns GridColumns { get; set; }
 
     // Gets or sets the ArgError object.
     private ArgError ArgError { get; set; }
@@ -522,7 +522,7 @@ namespace LJCGenDocEdit
     #region Class Data
 
     // The grid column definitions.
-    private DbColumns mGridColumns;
+    private LJCDataColumns mGridColumns;
 
     // *** Next Statement *** Add - Data View
     private readonly DataDbView mDataDbView;

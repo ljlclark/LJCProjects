@@ -59,8 +59,9 @@ namespace LJCDataDetail
       // Create the Grid Columns.
       if (DbResult.HasData(dbResult))
       {
-        DbColumns gridColumns = dbResult.Columns.Clone();
-        var idColumn = gridColumns.LJCSearchPropertyName("ID");
+        LJCDataColumns gridColumns = dbResult.Columns.Clone();
+        //var idColumn = gridColumns.LJCSearchPropertyName("ID");
+        var idColumn = gridColumns["ID"];
         gridColumns.Remove(idColumn);
 
         // Configure the grid.

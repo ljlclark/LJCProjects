@@ -18,7 +18,7 @@ namespace LJCViewEditorDAL
       , string tableName = null)
       : base(dbServiceRef, dataConfigName, tableName)
     {
-      DataManager.BaseDefinition = new DbColumns()
+      DataManager.BaseDefinition = new LJCDataColumns()
       {
         { "TABLE_NAME" }
       };

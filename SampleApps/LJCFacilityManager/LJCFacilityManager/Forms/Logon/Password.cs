@@ -51,7 +51,7 @@ namespace LJCFacilityManager
 			Person personRecord;
 			Crypto crypto = new Crypto();
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Person.ColumnID, LJCPersonID }
 			};
@@ -93,7 +93,7 @@ namespace LJCFacilityManager
 			bool success;
 			bool retValue = true;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Person.ColumnID, LJCPersonID }
 			};

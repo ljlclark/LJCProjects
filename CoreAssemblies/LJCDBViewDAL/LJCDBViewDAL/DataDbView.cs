@@ -5,6 +5,7 @@ using System;
 using LJCNetCommon;
 using LJCDBMessage;
 using LJCDBClientLib;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -94,7 +95,7 @@ namespace LJCDBViewDAL
 
     // Gets the ViewGrid columns.
     /// <include path='items/GetGridColumns/*' file='Doc/ViewHelper.xml'/>
-    public DbColumns GetGridColumns(int viewDataID)
+    public LJCDataColumns GetGridColumns(int viewDataID)
     {
       return Managers.ViewGridColumnManager.GetGridColumns(viewDataID);
     }
@@ -102,7 +103,7 @@ namespace LJCDBViewDAL
     // Creates the DbRequest Columns.
     private void GetViewColumns(int viewDataID, DbRequest dbRequest)
     {
-      // Retrieve DbColumns directly.
+      // Retrieve LJCDataColumns directly.
       dbRequest.Columns
         = Managers.ViewColumnManager.LoadDbColumnsWithParentID(viewDataID
         , dbRequest.TableName);
@@ -113,7 +114,7 @@ namespace LJCDBViewDAL
     {
       var viewFilters
         = Managers.ViewFilterManager.LoadWithParentID(viewDataID);
-      if (NetCommon.HasItems(viewFilters))
+      if (LJC.HasListItems(viewFilters))
       {
         var manager = Managers.ViewConditionSetManager;
         dbRequest.Filters = new DbFilters();
@@ -128,7 +129,7 @@ namespace LJCDBViewDAL
           }
 
           // Create the Condition Set.
-          if (NetCommon.HasItems(viewConditions))
+          if (LJC.HasListItems(viewConditions))
           {
             DbConditionSet dbConditionSet = new DbConditionSet()
             {
@@ -152,7 +153,7 @@ namespace LJCDBViewDAL
     private void GetViewJoins(int viewDataID, DbRequest dbRequest)
     {
       var viewJoins = Managers.ViewJoinManager.LoadWithParentID(viewDataID);
-      if (NetCommon.HasItems(viewJoins))
+      if (LJC.HasListItems(viewJoins))
       {
         dbRequest.Joins = new DbJoins();
         foreach (ViewJoin viewJoin in viewJoins)
@@ -164,7 +165,7 @@ namespace LJCDBViewDAL
           // Add the Join On clauses.
           var ViewJoinOns
             = Managers.ViewJoinOnManager.LoadWithParentID(viewJoin.ID);
-          if (NetCommon.HasItems(ViewJoinOns))
+          if (LJC.HasListItems(ViewJoinOns))
           {
             dbJoin.JoinOns = new DbJoinOns();
             foreach (ViewJoinOn ViewJoinOn in ViewJoinOns)
@@ -175,7 +176,7 @@ namespace LJCDBViewDAL
           }
 
           // Add join columns.
-          // Note: Converts results to DbColumns with ResultCoverter().
+          // Note: Converts results to LJCDataColumns with ResultCoverter().
           dbJoin.Columns
             = Managers.ViewJoinColumnManager.LoadDbColumnsWithParentID(viewJoin.ID);
         }
@@ -187,7 +188,7 @@ namespace LJCDBViewDAL
     {
       var viewOrderBys
         = Managers.ViewOrderByManager.LoadWithParentID(viewDataID);
-      if (NetCommon.HasItems(viewOrderBys))
+      if (LJC.HasListItems(viewOrderBys))
       {
         foreach (ViewOrderBy viewOrderBy in viewOrderBys)
         {
@@ -230,11 +231,11 @@ namespace LJCDBViewDAL
 
     #region Column Conversion Methods
 
-    // Creates and returns a DbColumn object from a ViewColumn record.
+    // Creates and returns a LJCDataColumn object from a ViewColumn record.
     /// <include path='items/GetDbColumnFromViewColumn/*' file='Doc/ViewHelper.xml'/>
-    public DbColumn GetDbColumnFromViewColumn(ViewColumn viewColumn)
+    public LJCDataColumn GetDbColumnFromViewColumn(ViewColumn viewColumn)
     {
-      DbColumn retValue = new DbColumn()
+      LJCDataColumn retValue = new LJCDataColumn()
       {
         ColumnName = viewColumn.ColumnName,
         PropertyName = viewColumn.PropertyName,
@@ -245,11 +246,11 @@ namespace LJCDBViewDAL
       return retValue;
     }
 
-    // Creates and returns a DbColumn object from a ViewGridColumn record.
+    // Creates and returns a LJCDataColumn object from a ViewGridColumn record.
     /// <include path='items/GetDbColumnFromViewGridColumn/*' file='Doc/ViewHelper.xml'/>
-    public DbColumn GetDbColumnFromViewGridColumn(ViewGridColumn viewGridColumn)
+    public LJCDataColumn GetDbColumnFromViewGridColumn(ViewGridColumn viewGridColumn)
     {
-      DbColumn retValue = new DbColumn()
+      LJCDataColumn retValue = new LJCDataColumn()
       {
         ColumnName = viewGridColumn.ColumnName,
         PropertyName = viewGridColumn.PropertyName,
@@ -258,11 +259,11 @@ namespace LJCDBViewDAL
       return retValue;
     }
 
-    // Creates and returns a DbColumn object from a ViewJoinColumn record.
+    // Creates and returns a LJCDataColumn object from a ViewJoinColumn record.
     /// <include path='items/GetDbColumnFromViewJoinColumn/*' file='Doc/ViewHelper.xml'/>
-    public DbColumn GetDbColumnFromViewJoinColumn(ViewJoinColumn viewJoinColumn)
+    public LJCDataColumn GetDbColumnFromViewJoinColumn(ViewJoinColumn viewJoinColumn)
     {
-      DbColumn retValue = new DbColumn()
+      LJCDataColumn retValue = new LJCDataColumn()
       {
         ColumnName = viewJoinColumn.ColumnName,
         PropertyName = viewJoinColumn.PropertyName,
@@ -273,9 +274,9 @@ namespace LJCDBViewDAL
       return retValue;
     }
 
-    // Creates and returns a ViewColumn record from a DbColumn object.
+    // Creates and returns a ViewColumn record from a LJCDataColumn object.
     /// <include path='items/GetViewColumnFromDbColumn/*' file='Doc/ViewHelper.xml'/>
-    public ViewColumn GetViewColumnFromDbColumn(DbColumn dbColumn
+    public ViewColumn GetViewColumnFromDbColumn(LJCDataColumn dbColumn
       , int viewDataID = 0)
     {
       ViewColumn retValue = new ViewColumn()
@@ -290,22 +291,22 @@ namespace LJCDBViewDAL
       return retValue;
     }
 
-    //// Creates and returns a ViewColumns collection from a DbColumns collection.
+    //// Creates and returns a ViewColumns collection from a LJCDataColumns collection.
     ///// <include path='items/GetViewColumnsFromDbColumns/*' file='Doc/ViewHelper.xml'/>
-    //public ViewColumns GetViewColumnsFromDbColumns(DbColumns dbColumns, int viewDataID = 0)
+    //public ViewColumns GetViewColumnsFromDbColumns(LJCDataColumns dbColumns, int viewDataID = 0)
     //{
     //	ViewColumns retValue = new ViewColumns();
 
-    //	foreach (DbColumn dbColumn in dbColumns)
+    //	foreach (LJCDataColumn dbColumn in dbColumns)
     //	{
     //		retValue.Add(GetViewColumnFromDbColumn(dbColumn, viewDataID));
     //	}
     //	return retValue;
     //}
 
-    // Creates and returns a ViewJoinColumn record from a DbColumn object. 
+    // Creates and returns a ViewJoinColumn record from a LJCDataColumn object. 
     /// <include path='items/GetViewJoinColumnFromDbColumn/*' file='Doc/ViewHelper.xml'/>
-    public ViewJoinColumn GetViewJoinColumnFromDbColumn(DbColumn dbColumn
+    public ViewJoinColumn GetViewJoinColumnFromDbColumn(LJCDataColumn dbColumn
       , int viewJoinID)
     {
       ViewJoinColumn retValue;
@@ -322,14 +323,14 @@ namespace LJCDBViewDAL
       return retValue;
     }
 
-    // Creates and returns a ViewJoinColumns collection from a DbColumns collection.
+    // Creates and returns a ViewJoinColumns collection from a LJCDataColumns collection.
     /// <include path='items/GetViewJoinColumnsFromDbColumns/*' file='Doc/ViewHelper.xml'/>
-    public ViewJoinColumns GetViewJoinColumnsFromDbColumns(DbColumns dbColumns
+    public ViewJoinColumns GetViewJoinColumnsFromDbColumns(LJCDataColumns dbColumns
       , int viewJoinID = 0)
     {
       ViewJoinColumns retValue = new ViewJoinColumns();
 
-      foreach (DbColumn dbColumn in dbColumns)
+      foreach (LJCDataColumn dbColumn in dbColumns)
       {
         retValue.Add(GetViewJoinColumnFromDbColumn(dbColumn, viewJoinID));
       }
@@ -348,11 +349,11 @@ namespace LJCDBViewDAL
 
       // Next Statement - Change 1/6/21
       if (viewDataID > 0
-        && NetCommon.HasItems(dbRequest.Columns))
+        && LJC.HasListItems(dbRequest.Columns))
       {
         retValue = new ViewGridColumns();
         int sequence = 0;
-        foreach (DbColumn dbColumn in dbRequest.Columns)
+        foreach (LJCDataColumn dbColumn in dbRequest.Columns)
         {
           // Get referenced record.
           var viewColumn
@@ -398,7 +399,7 @@ namespace LJCDBViewDAL
 
     //// Saves the ViewGridColumn from the specified ViewJoin column.
     ///// <include path='items/SaveJoinGridColumn/*' file='Doc/ViewHelper.xml'/>
-    //private ViewGridColumn SaveJoinGridColumn(ViewJoin viewJoin, DbColumn dbColumn
+    //private ViewGridColumn SaveJoinGridColumn(ViewJoin viewJoin, LJCDataColumn dbColumn
     //	, int sequence)
     //{
     //	//ViewJoinColumn viewJoinColumn;
@@ -443,7 +444,7 @@ namespace LJCDBViewDAL
       //ViewGridColumn viewGridColumn;
       ViewGridColumns retValue = null;
 
-      if (NetCommon.HasItems(dbRequest.Joins))
+      if (LJC.HasListItems(dbRequest.Joins))
       {
         retValue = new ViewGridColumns();
         foreach (DbJoin dbJoin in dbRequest.Joins)
@@ -465,9 +466,9 @@ namespace LJCDBViewDAL
           }
           if (viewJoin != null)
           {
-            if (NetCommon.HasItems(dbJoin.Columns))
+            if (LJC.HasListItems(dbJoin.Columns))
             {
-              foreach (DbColumn dbColumn in dbJoin.Columns)
+              foreach (LJCDataColumn dbColumn in dbJoin.Columns)
               {
                 sequence++;
                 //viewGridColumn = SaveJoinGridColumn(viewJoin, dbColumn, sequence);
@@ -541,10 +542,10 @@ namespace LJCDBViewDAL
       ViewColumns retValue = null;
 
       if (CheckColumnParams(viewDataID, dbRequest)
-        && NetCommon.HasItems(dbRequest.Columns))
+        && LJC.HasListItems(dbRequest.Columns))
       {
         retValue = new ViewColumns();
-        foreach (DbColumn dbColumn in dbRequest.Columns)
+        foreach (LJCDataColumn dbColumn in dbRequest.Columns)
         {
           // Get Update record.
           var viewColumn
@@ -645,7 +646,7 @@ namespace LJCDBViewDAL
       ViewFilters retValue = null;
 
       CheckFilterParams(viewDataID, dbRequest);
-      if (NetCommon.HasItems(dbRequest.Filters))
+      if (LJC.HasListItems(dbRequest.Filters))
       {
         retValue = new ViewFilters();
         foreach (DbFilter dbFilter in dbRequest.Filters)
@@ -682,10 +683,10 @@ namespace LJCDBViewDAL
       ViewJoinColumns retValue = null;
 
       CheckJoinColumnParams(viewJoin, dbJoin);
-      if (NetCommon.HasItems(dbJoin.Columns))
+      if (LJC.HasListItems(dbJoin.Columns))
       {
         retValue = new ViewJoinColumns();
-        foreach (DbColumn dbColumn in dbJoin.Columns)
+        foreach (LJCDataColumn dbColumn in dbJoin.Columns)
         {
           // Get Update record.
           var manager = Managers.ViewJoinColumnManager;
@@ -719,7 +720,7 @@ namespace LJCDBViewDAL
       ViewJoinOns retValue = null;
 
       CheckJoinOnParams(viewJoinID, dbJoin);
-      if (NetCommon.HasItems(dbJoin.JoinOns))
+      if (LJC.HasListItems(dbJoin.JoinOns))
       {
         retValue = new ViewJoinOns();
         foreach (DbJoinOn dbJoinOn in dbJoin.JoinOns)
@@ -753,7 +754,7 @@ namespace LJCDBViewDAL
       ViewJoins retValue = null;
 
       if (CheckJoinParams(viewDataID, dbRequest)
-        && NetCommon.HasItems(dbRequest.Joins))
+        && LJC.HasListItems(dbRequest.Joins))
       {
         retValue = new ViewJoins();
         foreach (DbJoin dbJoin in dbRequest.Joins)
@@ -778,7 +779,7 @@ namespace LJCDBViewDAL
           Managers.ViewJoinManager.SaveData(viewJoin);
           retValue.Add(viewJoin);
 
-          // Save contained DbJoinOns and DbColumns.
+          // Save contained DbJoinOns and LJCDataColumns.
           SaveRequestJoinOns(viewJoin.ID, dbJoin);
           SaveRequestJoinColumns(viewJoin, dbJoin);
         }

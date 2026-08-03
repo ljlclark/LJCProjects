@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // BusinessList.cs
 using System;
@@ -9,6 +9,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDBClientLib;
 using LJCFacilityManagerDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCFacilityManager
 {
@@ -79,7 +80,7 @@ namespace LJCFacilityManager
 		private void DataRetrieveBusiness()
 		{
 			Businesses records;
-			DbColumns keyColumns = null;
+			LJCDataColumns keyColumns = null;
 
 			Cursor = Cursors.WaitCursor;
 			BusinessGrid.LJCRowsClear();
@@ -89,7 +90,7 @@ namespace LJCFacilityManager
 				int typeID = TypeClassCombo.LJCGetSelectedItemID();
 				if (typeID >= 0)
 				{
-					keyColumns = new DbColumns()
+					keyColumns = new LJCDataColumns()
 					{
 						{ Business.ColumnCodeTypeID, typeID }
 					};
@@ -97,7 +98,7 @@ namespace LJCFacilityManager
 				Managers.BusinessManager.SetOrderByName();
 				records = Managers.BusinessManager.Load(keyColumns);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (Business record in records)
 					{
@@ -266,7 +267,7 @@ namespace LJCFacilityManager
 					// Data from list items.
 					int id = row.LJCGetInt32(Business.ColumnID);
 
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ Business.ColumnID, id }
 					};
@@ -323,7 +324,7 @@ namespace LJCFacilityManager
 				Cursor = Cursors.WaitCursor;
 				id = row.LJCGetInt32(Business.ColumnID);
 
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ Business.ColumnID, id }
 				};
@@ -399,7 +400,7 @@ namespace LJCFacilityManager
 				};
 
 				// Get the grid columns from the manager Data Definition.
-				DbColumns columns = Managers.BusinessManager.GetColumns(propertyNames);
+				LJCDataColumns columns = Managers.BusinessManager.GetColumns(propertyNames);
 
 				// Setup the grid columns.
 				BusinessGrid.LJCAddColumns(columns);

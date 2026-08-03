@@ -77,9 +77,9 @@ namespace CVRDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetFacilityIDKey(int id)
+    public LJCDataColumns GetFacilityIDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { CVVisit.ColumnFacilityID, id }
       };
@@ -88,9 +88,9 @@ namespace CVRDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(long id)
+    public LJCDataColumns GetIDKey(long id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { CVVisit.ColumnID, id }
       };
@@ -102,9 +102,9 @@ namespace CVRDAL
 
     // Creates the RecordColumns object.
     /// <include path='items/DataColumns/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns DataColumns(long id)
+    public LJCDataColumns DataColumns(long id)
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       // Use common data definitions.
       var keyColumns = GetIDKey((int)id);
@@ -168,7 +168,7 @@ namespace CVRDAL
         {
           { CVVisit.ColumnCVPersonID, CVPerson.ColumnID }
         },
-        Columns = new DbColumns()
+        Columns = new LJCDataColumns()
         {
 			    // columnName, propertyName = null, renameAs = null, dataTypeName = "String", caption = null
 					{ CVPerson.ColumnFirstName },

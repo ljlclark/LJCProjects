@@ -40,7 +40,7 @@ namespace LJCFacilityManager
 			CodeTypes list;
 
 			Items.Clear();
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ CodeType.ColumnCodeTypeClassID, classID }
 			};

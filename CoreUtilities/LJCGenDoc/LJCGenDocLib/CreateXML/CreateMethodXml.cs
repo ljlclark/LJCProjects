@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CreateMethodXml.cs
 using System;
@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
+using LJC = LJCNetCommon.NetCommon;
 using Section = LJCGenTextLib.Section;
 
 namespace LJCGenDocLib
@@ -190,7 +191,7 @@ namespace LJCGenDocLib
     // <include path='items/AddParams/*' file='Doc/CreateMethodXml.xml'/>
     private void AddParams(Sections sections, Replacements mainReplacements)
     {
-      if (NetCommon.HasItems(DataMethod.Params))
+      if (LJC.HasListItems(DataMethod.Params))
       {
         mainReplacements.Add("_HasParams_", "true");
         var section = sections.Add("Parameters");
@@ -224,7 +225,7 @@ namespace LJCGenDocLib
       DataExample example = DataMethod.Example;
 
       if (example != null
-        && NetCommon.HasItems(example.Paras))
+        && LJC.HasListItems(example.Paras))
       {
         foreach (DataPara para in example.Paras)
         {
@@ -286,7 +287,7 @@ namespace LJCGenDocLib
       DataRemark remark = DataMethod.Remark;
 
       if (remark != null
-        && NetCommon.HasItems(remark.Paras))
+        && LJC.HasListItems(remark.Paras))
       {
         bool showGroups = true;
         foreach (DataPara para in remark.Paras)

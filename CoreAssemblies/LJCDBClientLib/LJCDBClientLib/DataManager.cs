@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataManager.cs
 using CipherLib;
@@ -8,8 +8,7 @@ using LJCDBMessage;
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Security.Principal;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBClientLib
 {
@@ -124,15 +123,15 @@ namespace LJCDBClientLib
 
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='Doc/DataManager.xml'/>
-    public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       // Make sure delete is restricted.
-      if (NetCommon.HasItems(keyColumns)
-        || NetCommon.HasItems(filters))
+      if (LJC.HasListItems(keyColumns)
+        || LJC.HasListItems(filters))
       {
         var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition);
         if (null == filters
-          && !NetCommon.HasItems(requestKeyColumns))
+          && !LJC.HasListItems(requestKeyColumns))
         {
           throw new ArgumentException("keyColumns or filters");
         }
@@ -150,7 +149,7 @@ namespace LJCDBClientLib
     // Executes a non-query (DML "insert", "delete", "update") SQL statement.
     /// <include path='items/ExecuteClientSql/*' file='Doc/DataManager.xml'/>
     public DbResult ExecuteClientSql(RequestType requestType, string sql
-      , DbColumns requestColumns = null)
+      , LJCDataColumns requestColumns = null)
     {
       DbResult retValue;
 
@@ -170,7 +169,7 @@ namespace LJCDBClientLib
 
     // Retrieves a collection of data records.
     /// <include path='items/Load/*' file='Doc/DataManager.xml'/>
-    public DbResult Load(DbColumns keyColumns = null
+    public DbResult Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -203,20 +202,20 @@ namespace LJCDBClientLib
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='Doc/DataManager.xml'/>
-    public DbResult Retrieve(DbColumns keyColumns
+    public DbResult Retrieve(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
       DbResult retValue;
 
       // Make sure select is restricted.
-      if (NetCommon.HasItems(keyColumns)
-        || NetCommon.HasItems(filters))
+      if (LJC.HasListItems(keyColumns)
+        || LJC.HasListItems(filters))
       {
         var requestColumns = DbCommon.RequestColumns(BaseDefinition, propertyNames);
         var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition, joins);
         if (null == filters
-          && !NetCommon.HasItems(requestKeyColumns))
+          && !LJC.HasListItems(requestKeyColumns))
         {
           throw new ArgumentException("keyColumns or filters");
         }
@@ -235,21 +234,21 @@ namespace LJCDBClientLib
 
     // Updates the record.
     /// <include path='items/Update/*' file='Doc/DataManager.xml'/>
-    public void Update(object dataObject, DbColumns keyColumns
+    public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       // Make sure update is restricted.
-      if (NetCommon.HasItems(keyColumns)
-        || NetCommon.HasItems(filters))
+      if (LJC.HasListItems(keyColumns)
+        || LJC.HasListItems(filters))
       {
         var dataColumns = DbCommon.RequestDataColumns(dataObject, BaseDefinition
         , propertyNames);
-        if (NetCommon.HasItems(dataColumns))
+        if (LJC.HasListItems(dataColumns))
         {
           var requestKeyColumns = DbCommon.RequestDataKeys(keyColumns
             , BaseDefinition);
           if (null == filters
-            && !NetCommon.HasItems(requestKeyColumns))
+            && !LJC.HasListItems(requestKeyColumns))
           {
             throw new ArgumentException("keyColumns or filters");
           }
@@ -271,7 +270,7 @@ namespace LJCDBClientLib
 
     // Creates the Load DbRequest object.
     /// <include path='items/CreateLoadRequest/*' file='Doc/DataManager.xml'/>
-    public DbRequest CreateLoadRequest(DbColumns keyColumns = null
+    public DbRequest CreateLoadRequest(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -369,8 +368,8 @@ namespace LJCDBClientLib
       List<string> retValue = new List<string>();
 
       // *** Next Statement *** - 12/26/23
-      //foreach (DbColumn dbColumn in DataDefinition)
-      foreach (DbColumn dbColumn in BaseDefinition)
+      //foreach (LJCDataColumn dbColumn in DataDefinition)
+      foreach (LJCDataColumn dbColumn in BaseDefinition)
       {
         retValue.Add(dbColumn.PropertyName);
       }
@@ -403,16 +402,16 @@ namespace LJCDBClientLib
     /// <include path='items/GetTableNames/*' file='Doc/DataManager.xml'/>
     public DbResult GetTableNames()
     {
-      DbColumns includedColumns;
+      LJCDataColumns includedColumns;
       DbResult retValue;
 
       // ToDo: Why is this needed when DbDataAccess.TableNames also adds it?
       if (null == DataDefinition)
       {
-        DataDefinition = new DbColumns()
+        DataDefinition = new LJCDataColumns()
         {
           // *** Next Statement *** Change - 2/6/23
-          new DbColumn("TABLE_NAME", propertyName: "Name")
+          new LJCDataColumn("Name", columnName: "TABLE_NAME")
         };
       }
 
@@ -421,7 +420,7 @@ namespace LJCDBClientLib
       if (DataDefinition != null)
       {
         List<string> propertyNames = new List<string>() { "Name" };
-        includedColumns = DataDefinition.LJCGetColumns(propertyNames);
+        includedColumns = DataDefinition.LJCColumns(propertyNames);
         Request.Columns = includedColumns.Clone();
       }
       retValue = ExecuteRequest(Request);
@@ -444,7 +443,7 @@ namespace LJCDBClientLib
     {
       var dataManager = new DataManager(DbServiceRef, DataConfigName
         , TableName);
-      var columns = new DbColumns()
+      var columns = new LJCDataColumns()
       {
         { idName }
       };
@@ -470,12 +469,11 @@ namespace LJCDBClientLib
     /// <include path='items/SetDbAssignedColumns/*' file='Doc/DataManager.xml'/>
     public void SetDbAssignedColumns(string[] propertyNames)
     {
-      DbAssignedColumns = new DbColumns();
+      DbAssignedColumns = new LJCDataColumns();
       foreach (string propertyName in propertyNames)
       {
-        // *** Next Statement *** Change - 12/26/23
-        //DbColumn dbColumn = DataDefinition.LJCSearchPropertyName(propertyName);
-        DbColumn dbColumn = BaseDefinition.LJCSearchPropertyName(propertyName);
+        //LJCDataColumn dbColumn = DataDefinition.LJCSearchPropertyName(propertyName);
+        var dbColumn = BaseDefinition[propertyName];
         if (null == dbColumn)
         {
           throw new MissingMemberException($"Column '{propertyName}' was not found.");
@@ -519,10 +517,10 @@ namespace LJCDBClientLib
       DbResult retValue = new DbResult();
 
       // Create result data records.
-      DbColumns dbColumns = dbResult.Columns;
-      foreach (DbColumn dbColumnNew in dbColumns)
+      LJCDataColumns dbColumns = dbResult.Columns;
+      foreach (LJCDataColumn dbColumnNew in dbColumns)
       {
-        DbValues dbValues = new DbValues
+        LJCDataValues dbValues = new LJCDataValues
         {
           { "ColumnName", dbColumnNew.ColumnName },
           { "PropertyName", dbColumnNew.ColumnName }
@@ -531,10 +529,13 @@ namespace LJCDBClientLib
       }
 
       // Create result columns.
-      retValue.Columns = new DbColumns();
-      retValue.Columns.Add("ColumnName", caption: "Column Name");
-      retValue.Columns.Add("PropertyName", caption: "Property Name");
-      retValue.Columns.Add("RenameAs", caption: "Rename As");
+      retValue.Columns = new LJCDataColumns();
+      var addDataColumn = retValue.Columns.Add("ColumnName");
+      addDataColumn.Caption = "Column Name";
+      addDataColumn = retValue.Columns.Add("PropertyName");
+      addDataColumn.Caption = "Property Name";
+      addDataColumn = retValue.Columns.Add("RenameAs");
+      addDataColumn.Caption = "Rename As";
       return retValue;
     }
     #endregion
@@ -542,15 +543,15 @@ namespace LJCDBClientLib
     #region Private Methods
 
     // Creates a DataDefinition value.
-    private DbColumns CreateBaseDefinition()
+    private LJCDataColumns CreateBaseDefinition()
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       DbResult dbResult = GetSchemaOnly(DataConfigName, TableName);
       if (DbResult.HasColumns(dbResult))
       {
-        BaseDefinition = new DbColumns(dbResult.Columns);
-        retValue = new DbColumns(BaseDefinition);
+        BaseDefinition = new LJCDataColumns(dbResult.Columns);
+        retValue = new LJCDataColumns(BaseDefinition);
       }
       return retValue;
     }
@@ -580,7 +581,7 @@ namespace LJCDBClientLib
     public int AffectedCount { get; set; }
 
     /// <summary>Gets the base data definition columns collection.</summary>
-    public DbColumns BaseDefinition { get; set; }
+    public LJCDataColumns BaseDefinition { get; set; }
 
     /// <summary>Gets DbServiceRef object.</summary>
     public DbServiceRef DbServiceRef { get; private set; }
@@ -595,10 +596,10 @@ namespace LJCDBClientLib
 
     // Gets or sets a reference to the Data Definition columns collection.
     /// <include path='items/DataDefinition/*' file='Doc/DataManager.xml'/>
-    public DbColumns DataDefinition { get; set; }
+    public LJCDataColumns DataDefinition { get; set; }
 
     /// <summary>Gets or sets the Database assigned columns.</summary>
-    public DbColumns DbAssignedColumns { get; set; }
+    public LJCDataColumns DbAssignedColumns { get; set; }
 
     /// <summary>Gets or sets the LookupColumn names.</summary>
     public List<string> LookupColumnNames { get; set; }

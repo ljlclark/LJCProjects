@@ -127,7 +127,7 @@ namespace LJCAppManager
 
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ AppProgram.ColumnFileName, (object)LJCRecord.FileName }
 			};
@@ -143,8 +143,9 @@ namespace LJCAppManager
 				MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 
-			var dbColumn = keyColumns.LJCSearchColumnName("FileName");
-			keyColumns.Remove(dbColumn);
+			//var dbColumn = keyColumns.LJCSearchColumnName("FileName");
+      var dbColumn = keyColumns["FileName"];
+      keyColumns.Remove(dbColumn);
 			keyColumns.Add("Title", (object)LJCRecord.Title);
 			lookupRecord = programManager.Retrieve(keyColumns);
 			if (lookupRecord != null

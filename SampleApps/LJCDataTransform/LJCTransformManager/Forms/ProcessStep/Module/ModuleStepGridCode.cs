@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDataTransformDAL;
-using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -42,7 +42,7 @@ namespace LJCTransformManager
 				var stepManager = mManagers.StepManager;
 				records = stepManager.LoadWithProcessID(parentID);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (Step record in records)
 					{

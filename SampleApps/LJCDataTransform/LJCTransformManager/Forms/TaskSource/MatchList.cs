@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // MatchList.cs
 using System;
@@ -12,6 +12,7 @@ using LJCWinFormControls;
 using LJCDBMessage;
 using LJCDBClientLib;
 using LJCDataTransformDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -69,13 +70,13 @@ namespace LJCTransformManager
 				dataSource = dataSourceManager.RetrieveWithID(mSourceDataID);
 				if (dataSource != null)
 				{
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ LayoutColumn.ColumnSourceLayoutID, dataSource.SourceLayoutID }
 					};
 					var layoutColumnManager = Managers.LayoutColumnManager;
 					records = layoutColumnManager.Load(keyColumns);
-					if (NetCommon.HasItems(records))
+					if (LJC.HasListItems(records))
 					{
 						foreach (LayoutColumn record in records)
 						{
@@ -131,13 +132,13 @@ namespace LJCTransformManager
 				dataSource = dataSourceManager.RetrieveWithID(mTargetDataID);
 				if (dataSource != null)
 				{
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ LayoutColumn.ColumnSourceLayoutID, dataSource.SourceLayoutID }
 					};
 					var layoutColumnManager = Managers.LayoutColumnManager;
 					records = layoutColumnManager.Load(keyColumns);
-					if (NetCommon.HasItems(records))
+					if (LJC.HasListItems(records))
 					{
 						foreach (LayoutColumn record in records)
 						{
@@ -215,7 +216,7 @@ namespace LJCTransformManager
 						}
 						else
 						{
-							var keyColumns = new DbColumns()
+							var keyColumns = new LJCDataColumns()
 							{
 								{ TransformMatch.ColumnTransformID, changeMatch.TransformID },
 								{ TransformMatch.ColumnSourceColumnID, changeMatch.SourceColumnID },
@@ -236,7 +237,7 @@ namespace LJCTransformManager
 						}
 						else
 						{
-							var keyColumns = new DbColumns()
+							var keyColumns = new LJCDataColumns()
 							{
 								{ TransformMatch.ColumnTransformID, changeMatch.TransformID },
 								{ TransformMatch.ColumnSourceColumnID, changeMatch.SourceColumnID },
@@ -900,7 +901,7 @@ namespace LJCTransformManager
 		{
 			TransformMatch retValue;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ TransformMatch.ColumnTransformID, transformID },
 				{ TransformMatch.ColumnSourceColumnID, sourceColumnID }
@@ -916,7 +917,7 @@ namespace LJCTransformManager
 		{
 			TransformMatch retValue;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ TransformMatch.ColumnTransformID, transformID },
 				{ TransformMatch.ColumnTargetColumnID, targetColumnID }
@@ -933,7 +934,7 @@ namespace LJCTransformManager
 		{
 			TransformMatch retValue;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ TransformMatch.ColumnTransformID, transformID },
 				{ TransformMatch.ColumnSourceColumnID, sourceColumnID },
@@ -1086,7 +1087,7 @@ namespace LJCTransformManager
 				SourceGrid.LJCAddColumns(mGridColumnsSource);
 			}
 		}
-		private DbColumns mGridColumnsSource;
+		private LJCDataColumns mGridColumnsSource;
 
 		// Setup the grid columns.
 		private void SetupGridTarget()
@@ -1109,7 +1110,7 @@ namespace LJCTransformManager
 				TargetGrid.LJCAddColumns(mGridColumnsTarget);
 			}
 		}
-		private DbColumns mGridColumnsTarget;
+		private LJCDataColumns mGridColumnsTarget;
 
 		// Saves the control values. 
 		private void SaveControlValues()

@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SourceLayoutModuleCode.cs
 using System;
@@ -11,6 +11,7 @@ using LJCWinFormControls;
 using LJCNetCommon;
 using LJCDBClientLib;
 using LJCDataTransformDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -32,7 +33,7 @@ namespace LJCTransformManager
 			var dataSourceManager = Managers.DataSourceManager;
 			records = dataSourceManager.Load();
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (DataSource record in records)
 				{
@@ -149,7 +150,7 @@ namespace LJCTransformManager
 				LayoutColumnGrid.LJCAddColumns(mGridColumnsLayoutColumn);
 			}
 		}
-		private DbColumns mGridColumnsLayoutColumn;
+		private LJCDataColumns mGridColumnsLayoutColumn;
 
 		// Saves the control values. 
 		private void SaveControlValues()

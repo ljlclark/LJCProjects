@@ -34,15 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataDetail">
-      <HintPath>..\External\DataDetail.exe</HintPath>
-    </Reference>
     <Reference Include="LJCDataAccess">
       <HintPath>..\External\LJCDataAccess.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="LJCDataAccessConfig">
       <HintPath>..\External\LJCDataAccessConfig.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDataDetail">
+      <HintPath>..\External\LJCDataDetail.exe</HintPath>
     </Reference>
     <Reference Include="LJCDataDetailLib">
       <HintPath>..\External\LJCDataDetailLib.dll</HintPath>

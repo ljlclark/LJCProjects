@@ -3,7 +3,7 @@
 // ControlDataItems.cs
 using LJCNetCommon;
 using System.Collections.Generic;
-using System.Windows.Forms.VisualStyles;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataDetailDAL
 {
@@ -25,7 +25,7 @@ namespace LJCDataDetailDAL
     /// <include path='items/CopyConstructor/*' file='Doc/ControlColumns.xml'/>
     public ControlDataItems(ControlDataItems items)
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -82,13 +82,13 @@ namespace LJCDataDetailDAL
     /// 
     /// </summary>
     /// <returns></returns>
-    public DbColumns DbColumns()
+    public LJCDataColumns LJCDataColumns()
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       if (HasItems())
       {
-        retValue = new DbColumns();
+        retValue = new LJCDataColumns();
         foreach (ControlData controlData in this)
         {
           var dbColumn = controlData.GetDbColumnValues();
@@ -104,7 +104,7 @@ namespace LJCDataDetailDAL
     {
       ControlDataItems retValue = null;
 
-      if (NetCommon.HasItems(list))
+      if (LJC.HasListItems(list))
       {
         retValue = new ControlDataItems();
         foreach (ControlData item in list)

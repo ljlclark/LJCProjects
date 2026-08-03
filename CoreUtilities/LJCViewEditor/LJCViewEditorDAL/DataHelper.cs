@@ -25,9 +25,9 @@ namespace LJCViewEditorDAL
 
 		// Retrieves the table columns.
 		/// <include path='items/GetTableColumns/*' file='Doc/DataHelper.xml'/>
-		public DbColumns GetTableColumns(string tableName)
+		public LJCDataColumns GetTableColumns(string tableName)
 		{
-			DbColumns retValue;
+			LJCDataColumns retValue;
 
 			mDataManager.Reset(null, mDataConfigName, tableName);
 			retValue = mDataManager.DataDefinition;
@@ -36,7 +36,7 @@ namespace LJCViewEditorDAL
 
 		// Retrieves the parent ViewData table columns.
 		/// <include path='items/GetJoinFromColumns/*' file='Doc/DataHelper.xml'/>
-		public DbColumns GetJoinFromColumns(int joinID)
+		public LJCDataColumns GetJoinFromColumns(int joinID)
 		{
 			ViewTableManager viewTableManager;
 			ViewDataManager viewDataManager;
@@ -45,7 +45,7 @@ namespace LJCViewEditorDAL
 			ViewData viewData;
 			ViewJoin viewJoin;
 			ViewTable viewTable;
-			DbColumns retValue = null;
+			LJCDataColumns retValue = null;
 
 			//if (null == mDataDbView)
 			//{
@@ -72,12 +72,12 @@ namespace LJCViewEditorDAL
 
 		// Retrieves the ViewJoin table columns.
 		/// <include path='items/GetJoinToColumns/*' file='Doc/DataHelper.xml'/>
-		public DbColumns GetJoinToColumns(int joinID)
+		public LJCDataColumns GetJoinToColumns(int joinID)
 		{
 			ViewJoinManager viewJoinManager;
 			DataManager dataManager;
 			ViewJoin viewJoin;
-			DbColumns retValue;
+			LJCDataColumns retValue;
 
 			//if (null == mDataDbView)
 			//{

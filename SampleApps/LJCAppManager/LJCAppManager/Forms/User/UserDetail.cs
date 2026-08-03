@@ -130,7 +130,7 @@ namespace LJCAppManager
 
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ AppUser.ColumnName, (object)LJCRecord.Name },
 				{ AppUser.ColumnUserID, LJCRecord.UserID }

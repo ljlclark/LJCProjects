@@ -39,7 +39,7 @@ namespace LJCDataTransformDAL
 
 		// Loads a collection of data records ordered by Description.
 		/// <include path='items/LoadByDescription/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public TaskStatuses LoadByDescription(DbColumns keyColumns = null
+		public TaskStatuses LoadByDescription(LJCDataColumns keyColumns = null
 			, List<string> propertyNames = null, DbFilters filters = null
 			, DbJoins joins = null)
 		{
@@ -60,9 +60,9 @@ namespace LJCDataTransformDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(short id)
+		public LJCDataColumns GetIDKey(short id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ TaskStatus.ColumnTaskStatusID, id }
 			};

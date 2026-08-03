@@ -1,10 +1,11 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbManager.cs
 using LJCDBDataAccess;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBClientLib
 {
@@ -61,10 +62,10 @@ namespace LJCDBClientLib
 
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
-    public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
-      if (NetCommon.HasItems(keyColumns)
-        || NetCommon.HasItems(filters))
+      if (LJC.HasListItems(keyColumns)
+        || LJC.HasListItems(filters))
       {
         var requestKeys = DbCommon.RequestKeys(keyColumns, BaseDefinition);
 
@@ -91,7 +92,7 @@ namespace LJCDBClientLib
 
     // Loads a collection of data records.
     /// <include path='items/Load/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
-    public DbResult Load(DbColumns keyColumns, List<string> propertyNames = null
+    public DbResult Load(LJCDataColumns keyColumns, List<string> propertyNames = null
       , DbFilters filters = null, DbJoins joins = null)
     {
       DbResult retValue;
@@ -107,7 +108,7 @@ namespace LJCDBClientLib
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
-    public DbResult Retrieve(DbColumns keyColumns, List<string> propertyNames = null
+    public DbResult Retrieve(LJCDataColumns keyColumns, List<string> propertyNames = null
       , DbFilters filters = null, DbJoins joins = null)
     {
       DbResult retValue;
@@ -123,7 +124,7 @@ namespace LJCDBClientLib
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
-    public void Update(object dataObject, DbColumns keyColumns
+    public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       var dataColumns = DbCommon.RequestDataColumns(dataObject, BaseDefinition
@@ -156,9 +157,9 @@ namespace LJCDBClientLib
     #region DataManager Related Create Data Methods
 
     // Creates a DataDefinition value.
-    private DbColumns CreateDataDefinition()
+    private LJCDataColumns CreateDataDefinition()
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       var dbRequest = new DbRequest(RequestType.SchemaOnly, TableName);
       var dbResult = ExecuteRequest(dbRequest);
@@ -178,7 +179,7 @@ namespace LJCDBClientLib
     public int AffectedCount { get; set; }
 
     /// <summary>Gets the base data definition columns collection.</summary>
-    public DbColumns BaseDefinition { get; private set; }
+    public LJCDataColumns BaseDefinition { get; private set; }
 
     /// <summary>Gets or sets the data configuration name.</summary>
     public string DataConfigName
@@ -189,7 +190,7 @@ namespace LJCDBClientLib
     private string mDataConfigName;
 
     /// <summary>Gets the data definition columns collection.</summary>
-    public DbColumns DataDefinition { get; private set; }
+    public LJCDataColumns DataDefinition { get; private set; }
 
     /// <summary>Gets or sets the LookupColumn names.</summary>
     public List<string> LookupColumnNames { get; set; }

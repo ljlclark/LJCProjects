@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SourceLayoutColumnGridCode.cs
 using System;
@@ -7,6 +7,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDataTransformDAL;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -40,7 +41,7 @@ namespace LJCTransformManager
 				var layoutColumnManager = mManagers.LayoutColumnManager;
 				records = layoutColumnManager.LoadWithLayoutID(sourceLayoutID);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (LayoutColumn record in records)
 					{

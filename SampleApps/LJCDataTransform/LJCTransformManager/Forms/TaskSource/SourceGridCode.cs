@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SourceGridCode.cs
 using System;
@@ -7,6 +7,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDataTransformDAL;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -44,7 +45,7 @@ namespace LJCTransformManager
 				DataSourceManager dataSourceManager = mManagers.DataSourceManager;
 				records = dataSourceManager.LoadWithTaskID(parentID);
 
-				if (NetCommon.HasItems(records))
+				if (LJC.HasListItems(records))
 				{
 					foreach (DataSource record in records)
 					{
@@ -227,7 +228,7 @@ namespace LJCTransformManager
 					int parentID = parentRow.LJCGetInt32(StepTask.ColumnStepTaskID);
 					int id = row.LJCGetInt32(DataSource.ColumnDataSourceID);
 
-					var keyColumns = new DbColumns()
+					var keyColumns = new LJCDataColumns()
 					{
 						{ TaskSource.ColumnStepTaskID, parentID },
 						{ TaskSource.ColumnDataSourceID, id }

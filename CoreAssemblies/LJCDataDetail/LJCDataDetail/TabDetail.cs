@@ -226,7 +226,7 @@ namespace LJCDataDetail
     }
 
     // Moves a TabPage.
-    private void MoveTab(DbColumns keyColumns)
+    private void MoveTab(LJCDataColumns keyColumns)
     {
       // tab will move to the left.
       if (LJCRecord.TabIndex < LJCTabOriginalIndex)
@@ -240,7 +240,7 @@ namespace LJCDataDetail
     }
 
     // Moves a TabPage to the left.
-    private void MoveLeft(DbColumns keyColumns)
+    private void MoveLeft(LJCDataColumns keyColumns)
     {
       var manager = DataDetailData.Managers.ControlTabManager;
 
@@ -252,7 +252,7 @@ namespace LJCDataDetail
       {
         // Move each tab index one to the right starting with left of
         // original source to right of target.
-        DbColumns updateKeyColumns = new DbColumns()
+        LJCDataColumns updateKeyColumns = new LJCDataColumns()
         {
           { ControlTab.ColumnControlDetailID, LJCRecord.ControlDetailID },
         };
@@ -284,7 +284,7 @@ namespace LJCDataDetail
     }
 
     // Moves a TabPage to the right.
-    private void MoveRight(DbColumns keyColumns)
+    private void MoveRight(LJCDataColumns keyColumns)
     {
       var manager = DataDetailData.Managers.ControlTabManager;
 
@@ -296,7 +296,7 @@ namespace LJCDataDetail
       {
         // Move each tab index one to the left starting with right of
         // original source to left of target.
-        DbColumns updateKeyColumns = new DbColumns()
+        LJCDataColumns updateKeyColumns = new LJCDataColumns()
         {
           { ControlTab.ColumnControlDetailID, LJCRecord.ControlDetailID },
         };

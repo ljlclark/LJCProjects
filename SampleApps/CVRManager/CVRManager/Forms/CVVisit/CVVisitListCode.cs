@@ -89,7 +89,7 @@ namespace CVRManager
 
 			if (0 == CVVisitGrid.Columns.Count)
 			{
-				mGridColumnsRegisterDate = new DbColumn()
+				mGridColumnsRegisterDate = new LJCDataColumn()
 				{
 					ColumnName = "RegisterDate",
 					DataTypeName = "DateTime",
@@ -124,9 +124,9 @@ namespace CVRManager
 				CVVisitGrid.LJCAddColumns(mGridColumnsCVVisit);
 			}
 		}
-		public DbColumns mRealGridColumnsCVVisit;
-		private DbColumns mGridColumnsCVVisit;
-		internal DbColumn mGridColumnsRegisterDate;
+		public LJCDataColumns mRealGridColumnsCVVisit;
+		private LJCDataColumns mGridColumnsCVVisit;
+		internal LJCDataColumn mGridColumnsRegisterDate;
 
 		// Saves the control values. 
 		private void SaveControlValues()

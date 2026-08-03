@@ -140,7 +140,7 @@ namespace LJCTransformManager
 			Cursor = Cursors.WaitCursor;
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ Step.ColumnDataProcessID, LJCRecord.DataProcessID },
 				{ Step.ColumnName, (object)LJCRecord.Name }
@@ -160,7 +160,7 @@ namespace LJCTransformManager
 			{
 				if (LJCIsUpdate)
 				{
-					keyColumns = new DbColumns()
+					keyColumns = new LJCDataColumns()
 					{
 						{ Step.ColumnDataProcessID, LJCRecord.DataProcessID },
 						{ Step.ColumnStepID, LJCRecord.StepID }

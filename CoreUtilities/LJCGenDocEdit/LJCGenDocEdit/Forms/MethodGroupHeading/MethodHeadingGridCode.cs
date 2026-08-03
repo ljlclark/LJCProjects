@@ -70,7 +70,7 @@ namespace LJCGenDocEdit
     }
 
     // Adds a grid row and updates it with the result values.
-    private LJCGridRow RowAddValues(DbValues dbValues)
+    private LJCGridRow RowAddValues(LJCDataValues dbValues)
     {
       ArgError.MethodName = "RowAddValues(dataRecord)";
       ArgError.Add(dbValues, "dbValues");
@@ -178,7 +178,7 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        var keyRecord = new DbColumns()
+        var keyRecord = new LJCDataColumns()
         {
           { DocMethodGroupHeading.ColumnID, MethodHeadingID() }
         };
@@ -446,7 +446,7 @@ namespace LJCGenDocEdit
     #region Properties
 
     // Gets or sets the GridColumns value.
-    internal DbColumns GridColumns { get; set; }
+    internal LJCDataColumns GridColumns { get; set; }
 
     // Gets or sets the ArgError object.
     private ArgError ArgError { get; set; }

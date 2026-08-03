@@ -71,7 +71,7 @@ namespace CVRManager
         FacilityGrid.LJCAddColumns(mGridColumnsFacility);
       }
     }
-    private DbColumns mGridColumnsFacility;
+    private LJCDataColumns mGridColumnsFacility;
 
     // Saves the control values. 
     private void SaveControlValues()

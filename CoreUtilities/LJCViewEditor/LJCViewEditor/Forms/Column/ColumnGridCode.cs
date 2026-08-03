@@ -75,7 +75,7 @@ namespace LJCViewEditor
     }
 
     // Adds a grid row and updates it with the result values.
-    private LJCGridRow RowAddValues(DbValues dbValues)
+    private LJCGridRow RowAddValues(LJCDataValues dbValues)
     {
       var ljcGrid = ColumnGrid;
       var retValue = ljcGrid.LJCRowAdd();
@@ -147,7 +147,7 @@ namespace LJCViewEditor
           var viewColumn = dataDbView.GetViewColumnFromDbColumn(dbColumn);
           viewColumn.ViewDataID = parentID;
 
-          var keyColumns = new DbColumns()
+          var keyColumns = new LJCDataColumns()
           {
             { ViewColumn.ColumnViewDataID, viewColumn.ViewDataID },
             { ViewColumn.ColumnColumnName, (object)viewColumn.ColumnName }
@@ -250,7 +250,7 @@ namespace LJCViewEditor
         var parentID = parentRow.LJCGetInt32(ViewData.ColumnID);
 
         var gridColumnManager = Managers.ViewGridColumnManager;
-        var keyGridColumns = new DbColumns()
+        var keyGridColumns = new LJCDataColumns()
         {
           { ViewGridColumn.ColumnViewDataID, parentID },
           { ViewGridColumn.ColumnViewColumnID, id }
@@ -260,7 +260,7 @@ namespace LJCViewEditor
 
       if (success)
       {
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { ViewColumn.ColumnID, id }
         };

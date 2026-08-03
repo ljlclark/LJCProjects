@@ -213,7 +213,7 @@ namespace LJCGenDocEdit
       // Setup default grid columns if no columns are defined.
       if (0 == MethodGrid.Columns.Count)
       {
-        GridColumns = new DbColumns()
+        GridColumns = new LJCDataColumns()
         {
           { "Name" },
           { "OverloadName" },
@@ -307,7 +307,7 @@ namespace LJCGenDocEdit
     internal short LJCClassID { get; set; }
 
     // Gets or sets the GridColumns value.
-    internal DbColumns GridColumns { get; set; }
+    internal LJCDataColumns GridColumns { get; set; }
 
     // Gets or sets the ArgError object.
     private ArgError ArgError { get; set; }

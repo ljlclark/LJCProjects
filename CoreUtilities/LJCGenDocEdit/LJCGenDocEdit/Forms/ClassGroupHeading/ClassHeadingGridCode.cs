@@ -69,7 +69,7 @@ namespace LJCGenDocEdit
     }
 
     // Adds a grid row and updates it with the result values.
-    private LJCGridRow RowAddValues(DbValues dbValues)
+    private LJCGridRow RowAddValues(LJCDataValues dbValues)
     {
       ArgError.MethodName = "RowAddValues(dataRecord)";
       ArgError.Add(dbValues, "dbValues");
@@ -177,7 +177,7 @@ namespace LJCGenDocEdit
 
       if (success)
       {
-        var keyRecord = new DbColumns()
+        var keyRecord = new LJCDataColumns()
         {
           { DocClassGroupHeading.ColumnID, ClassHeadingID() }
         };
@@ -455,7 +455,7 @@ namespace LJCGenDocEdit
     private ClassHeadingSelect ClassHeadingSelect { get; set; }
 
     // Gets or sets the GridColumns value.
-    internal DbColumns GridColumns { get; set; }
+    internal LJCDataColumns GridColumns { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersGenDoc Managers { get; set; }

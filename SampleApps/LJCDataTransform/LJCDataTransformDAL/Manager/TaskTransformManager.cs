@@ -72,9 +72,9 @@ namespace LJCDataTransformDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ TaskTransform.ColumnTransformID, id }
 			};
@@ -83,9 +83,9 @@ namespace LJCDataTransformDAL
 
 		// 
 		/// <include path='items/GetTaskIDKey/*' file='Doc/TaskTransformManager.xml'/>
-		public DbColumns GetTaskIDKey(int stepTaskID)
+		public LJCDataColumns GetTaskIDKey(int stepTaskID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ TaskTransform.ColumnStepTaskID, stepTaskID }
 			};

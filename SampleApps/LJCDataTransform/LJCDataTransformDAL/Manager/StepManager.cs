@@ -58,9 +58,9 @@ namespace LJCDataTransformDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ Step.ColumnStepID, id }
 			};
@@ -69,9 +69,9 @@ namespace LJCDataTransformDAL
 
 		// Get the process ID key record.
 		/// <include path='items/GetProcessIDKey/*' file='Doc/StepManager.xml'/>
-		public DbColumns GetProcessIDKey(int processID)
+		public LJCDataColumns GetProcessIDKey(int processID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ Step.ColumnDataProcessID, processID }
 			};

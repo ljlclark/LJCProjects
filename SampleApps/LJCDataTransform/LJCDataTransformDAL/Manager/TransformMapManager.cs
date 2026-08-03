@@ -22,22 +22,22 @@ namespace LJCDataTransformDAL
 			, string tableName = "TransformMap")
 			: base(dbServiceRef, dataConfigName, tableName)
 		{
-			// Add Calculated and Join columns.
-			// Enables populating a Data Object and adding to a grid configuration.
-			DataDefinition.Add(TransformMap.ColumnSourceColumnName
-				, caption: "Name");
-			DataDefinition.Add(TransformMap.ColumnSourceDescription
-				, caption: "Description");
-			DataDefinition.Add(TransformMap.ColumnTargetColumnName
-			 , caption: "Name");
-			DataDefinition.Add(TransformMap.ColumnTargetDescription
-				, caption: "Description");
-			DataDefinition.Add(TransformMap.ColumnMapTypeName
-			 , caption: "Map Type");
-			DataDefinition.Add("LayoutColumnID");
+      // Add Calculated and Join columns.
+      // Enables populating a Data Object and adding to a grid configuration.
+      var dataColumn = DataDefinition.Add(TransformMap.ColumnSourceColumnName);
+			dataColumn.Caption = "Name";
+      dataColumn = DataDefinition.Add(TransformMap.ColumnSourceDescription);
+      dataColumn.Caption = "Description";
+      dataColumn = DataDefinition.Add(TransformMap.ColumnTargetColumnName);
+      dataColumn.Caption = "Name";
+      dataColumn = DataDefinition.Add(TransformMap.ColumnTargetDescription);
+			dataColumn.Caption = "Description";
+      dataColumn = DataDefinition.Add(TransformMap.ColumnMapTypeName);
+      dataColumn.Caption = "Map Type";
+      DataDefinition.Add("LayoutColumnID");
 
-			// Create the list of database assigned columns.
-			SetDbAssignedColumns(new string[]
+      // Create the list of database assigned columns.
+      SetDbAssignedColumns(new string[]
 				{
 					TransformMap.ColumnTransformMapID
 				});
@@ -87,9 +87,9 @@ namespace LJCDataTransformDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ TransformMap.ColumnTransformMapID, id }
 			};
@@ -98,9 +98,9 @@ namespace LJCDataTransformDAL
 
 		// Get the TransformID key record.
 		/// <include path='items/GetTransformIDKey/*' file='Doc/TransformMapManager.xml'/>
-		public DbColumns GetTransformIDKey(int transformID)
+		public LJCDataColumns GetTransformIDKey(int transformID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ TransformMap.ColumnTransformID, transformID }
 			};
@@ -144,7 +144,7 @@ namespace LJCDataTransformDAL
 					{ TransformMap.ColumnTransformID, secondValue },
 					{ sourceColumnIDName, LayoutColumn.ColumnLayoutColumnID }
 				},
-				Columns = new DbColumns {
+				Columns = new LJCDataColumns {
 					// columnName, propertyName = null, renameAs = null
 					//   , dataTypeName = "String", caption = null
 					{ LayoutColumn.ColumnLayoutColumnID },
@@ -166,7 +166,7 @@ namespace LJCDataTransformDAL
 				JoinOns = new DbJoinOns() {
 					{ TransformMap.ColumnMapTypeID, "MapTypeID" }
 				},
-				Columns = new DbColumns {
+				Columns = new LJCDataColumns {
 					// columnName, propertyName = null, renameAs = null
 					//   , dataTypeName = "String", caption = null
 					{ "Name" , TransformMap.ColumnMapTypeName
@@ -199,7 +199,7 @@ namespace LJCDataTransformDAL
 				JoinOns = new DbJoinOns() {
 					{ TransformMap.ColumnSourceColumnID, LayoutColumn.ColumnLayoutColumnID }
 				},
-				Columns = new DbColumns {
+				Columns = new LJCDataColumns {
 					// columnName, propertyName = null, renameAs = null
 					//   , dataTypeName = "String", caption = null
 					{ LayoutColumn.ColumnName, TransformMap.ColumnSourceColumnName
@@ -219,7 +219,7 @@ namespace LJCDataTransformDAL
 				JoinOns = new DbJoinOns() {
 					{ TransformMap.ColumnTargetColumnID, LayoutColumn.ColumnLayoutColumnID }
 				},
-				Columns = new DbColumns {
+				Columns = new LJCDataColumns {
 					// columnName, propertyName = null, renameAs = null
 					//   , dataTypeName = "String", caption = null
 					{ LayoutColumn.ColumnName, TransformMap.ColumnTargetColumnName

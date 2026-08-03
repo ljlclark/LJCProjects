@@ -1,9 +1,10 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewConditionSetManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -77,9 +78,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/IDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns IDKey(int id)
+    public LJCDataColumns IDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewConditionSet.ColumnID, id }
       };
@@ -88,9 +89,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/ParentIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns ParentIDKey(int parentID)
+    public LJCDataColumns ParentIDKey(int parentID)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewConditionSet.ColumnViewFilterID, parentID }
       };
@@ -140,10 +141,14 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (NetCommon.HasItems(viewConditionSet.ChangedNames))
+          // *** Change ***
+          var changedNames = viewConditionSet.ChangedNames.ChangedProperties;
+          //if (NetCommon.HasItems(viewConditionSet.ChangedNames))
+          if (LJC.HasListItems(changedNames))
           {
             var keyColumns = IDKey(retrieveData.ID);
-            Update(viewConditionSet, keyColumns, viewConditionSet.ChangedNames);
+            //Update(viewConditionSet, keyColumns, viewConditionSet.ChangedNames);
+            Update(viewConditionSet, keyColumns, changedNames);
           }
         }
       }

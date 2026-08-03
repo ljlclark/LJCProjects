@@ -57,14 +57,14 @@ namespace LJCDataDetailDAL
 
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
     }
 
     // Retrieves a collection of data records.
     /// <include path='items/Load/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public ControlTabItems Load(DbColumns keyColumns = null
+    public ControlTabItems Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -77,7 +77,7 @@ namespace LJCDataDetailDAL
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public ControlTab Retrieve(DbColumns keyColumns, List<string> propertyNames = null
+    public ControlTab Retrieve(LJCDataColumns keyColumns, List<string> propertyNames = null
       , DbFilters filters = null, DbJoins joins = null)
     {
       ControlTab retValue;
@@ -89,7 +89,7 @@ namespace LJCDataDetailDAL
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public void Update(ControlTab dataObject, DbColumns keyColumns
+    public void Update(ControlTab dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
@@ -135,13 +135,13 @@ namespace LJCDataDetailDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(long id)
+    public LJCDataColumns GetIDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
       // Needs (object) cast for string value to select correct Add overload.
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ControlTab.ColumnID, id }
       };
@@ -150,9 +150,9 @@ namespace LJCDataDetailDAL
 
     // Gets the Parent ID key columns.
     /// <include path='items/GetParentKey/*' file='Doc/ControlTabManager.xml'/>
-    public DbColumns GetParentKey(long controlDetailID)
+    public LJCDataColumns GetParentKey(long controlDetailID)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ControlTab.ColumnControlDetailID, controlDetailID }
       };
@@ -161,9 +161,9 @@ namespace LJCDataDetailDAL
 
     // Gets the ID key columns.
     /// <include path='items/GetUniqueKey/*' file='Doc/ControlTabManager.xml'/>
-    public DbColumns GetUniqueKey(long controlDetailID, int tabIndex)
+    public LJCDataColumns GetUniqueKey(long controlDetailID, int tabIndex)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ControlTab.ColumnControlDetailID, controlDetailID },
         { ControlTab.ColumnTabIndex, tabIndex }

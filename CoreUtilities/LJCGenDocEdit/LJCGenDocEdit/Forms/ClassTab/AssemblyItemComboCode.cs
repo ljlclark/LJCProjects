@@ -1,10 +1,11 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // AssemblyItemComboCode.cs
 using LJCGenDocDAL;
 using LJCNetCommon;
 using LJCWinFormControls;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenDocEdit
 {
@@ -37,7 +38,7 @@ namespace LJCGenDocEdit
         var manager = Managers.DocAssemblyManager;
         var dataRecords = manager.LoadWithParentID(AssemblyGroupID());
 
-        if (NetCommon.HasItems(dataRecords))
+        if (LJC.HasListItems(dataRecords))
         {
           foreach (DocAssembly dataRecord in dataRecords)
           {

@@ -28,18 +28,20 @@ namespace LJCAppManagerDAL
 			MapNames(UserAppProgram.ColumnAppProgramID, UserAppProgram.PropertyAppProgramID);
 
 			// Add calculated and join columns.
-			DataDefinition.LJCAddPropertyAs("FileName", caption: "File Name");
-			DataDefinition.LJCAddPropertyAs("Title", caption: "Program Title");
-		}
-		#endregion
+			var dataColumn = DataDefinition.Add("FileName");
+      dataColumn.Caption = "File Name";
+      dataColumn = DataDefinition.Add("Title");
+      dataColumn.Caption = "Program Title";
+    }
+    #endregion
 
-		#region GetKey Methods
+    #region GetKey Methods
 
-		// Gets the ID key record.
-		/// <include path='items/GetIDKeys/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKeys(int parentID, int childID)
+    // Gets the ID key record.
+    /// <include path='items/GetIDKeys/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    public LJCDataColumns GetIDKeys(int parentID, int childID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ UserAppProgram.ColumnAppManagerUserID, parentID },
 				{ UserAppProgram.ColumnAppProgramID, childID }
@@ -70,7 +72,7 @@ namespace LJCAppManagerDAL
 				AppUser.ColumnUserID};
 			AppUserManager2 userManager = new AppUserManager2(mDbServiceRef, mDataConfigName);
 			userJoin.Columns = userManager.GetColumns(columnNames);
-			DbColumn userIDColumn = userJoin.Columns[0];
+			LJCDataColumn userIDColumn = userJoin.Columns[0];
 			userIDColumn.PropertyName = "UserName";
 
 			// Join to AppProgram.

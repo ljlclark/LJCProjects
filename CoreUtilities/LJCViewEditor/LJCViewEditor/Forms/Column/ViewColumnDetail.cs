@@ -113,8 +113,9 @@ namespace LJCViewEditor
         // This is to allow on Edit but not TemplateCombo changed.
         if (null == TemplateColumnCombo.SelectedItem)
         {
-          var dbColumn
-            = mTableColumns.LJCSearchPropertyName(dataRecord.PropertyName);
+          //var dbColumn
+          //  = mTableColumns.LJCSearchPropertyName(dataRecord.PropertyName);
+          var dbColumn = mTableColumns[dataRecord.PropertyName];
           if (dbColumn != null)
           {
             mAllowTemplateGetValues = false;
@@ -299,7 +300,7 @@ namespace LJCViewEditor
       // Template Columns Combo
       DataHelper dataHelper = new DataHelper(mDbServiceRef, mDataConfigName);
       mTableColumns = dataHelper.GetTableColumns(LJCTableName);
-      foreach (DbColumn dbColumn in mTableColumns)
+      foreach (LJCDataColumn dbColumn in mTableColumns)
       {
         TemplateColumnCombo.Items.Add(dbColumn);
       }
@@ -375,7 +376,7 @@ namespace LJCViewEditor
     {
       if (mAllowTemplateGetValues)
       {
-        DbColumn dbColumn = TemplateColumnCombo.SelectedItem as DbColumn;
+        LJCDataColumn dbColumn = TemplateColumnCombo.SelectedItem as LJCDataColumn;
         ViewColumn viewColumn = mDataDbView.GetViewColumnFromDbColumn(dbColumn);
         GetRecordValues(viewColumn);
       }
@@ -457,7 +458,7 @@ namespace LJCViewEditor
     private DbServiceRef mDbServiceRef;
     private ViewColumn mOriginalRecord;
     private StandardUISettings mSettings;
-    private DbColumns mTableColumns;
+    private LJCDataColumns mTableColumns;
     #endregion
   }
 }

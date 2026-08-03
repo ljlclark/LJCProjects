@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LayoutColumnList.cs
 using System;
@@ -8,9 +8,9 @@ using System.Windows.Forms;
 using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
-using LJCDBClientLib;
 using LJCTextDataReaderLib;
 using LJCDataTransformDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -152,7 +152,7 @@ namespace LJCTransformManager
 		// Import columns from selected file.
 		private void LayoutColumnMenuImport_Click(object sender, EventArgs e)
 		{
-			DbColumns dbColumns = null;
+			LJCDataColumns dbColumns = null;
 			string fileSpec = null;
 			int sourceLayoutID = 0;
 			bool success = false;
@@ -187,7 +187,7 @@ namespace LJCTransformManager
 						break;
 
 					case ".xml":
-						dbColumns = DbColumns.LJCDeserialize(fileSpec);
+						dbColumns = LJCDataColumns.LJCDeserialize(fileSpec);
 						break;
 
 					default:
@@ -224,8 +224,8 @@ namespace LJCTransformManager
 						fileSpec = FormCommon.SaveFile(filter, initialFolder, "*.xml");
 						if (fileSpec != null)
 						{
-							var dbColumns = CreateDbColumnsFromLayoutColumns(layoutColumns);
-							if (NetCommon.HasItems(dbColumns))
+							var dbColumns = CreateLJCDataColumnsFromLayoutColumns(layoutColumns);
+							if (LJC.HasListItems(dbColumns))
 							{
 								dbColumns.LJCSerialize(fileSpec);
 							}
@@ -235,18 +235,18 @@ namespace LJCTransformManager
 			}
 		}
 
-		// Create DbColumns from LayoutColumns.
-		private DbColumns CreateDbColumnsFromLayoutColumns(LayoutColumns layoutColumns)
+		// Create LJCDataColumns from LayoutColumns.
+		private LJCDataColumns CreateLJCDataColumnsFromLayoutColumns(LayoutColumns layoutColumns)
 		{
-			DbColumns retValue = null;
+			LJCDataColumns retValue = null;
 
 			if (layoutColumns != null)
 			{
-				retValue = new DbColumns();
+				retValue = new LJCDataColumns();
 				foreach (LayoutColumn layoutColumn in layoutColumns)
 				{
 					string dataTypeName = GetDataTypeName(layoutColumn.DataTypeID);
-					DbColumn dbColumn = new DbColumn()
+					LJCDataColumn dbColumn = new LJCDataColumn()
 					{
 						ColumnName = layoutColumn.Name,
 						Caption = layoutColumn.Name,
@@ -282,13 +282,13 @@ namespace LJCTransformManager
 		}
 
 		// Adds the LayoutColumns.
-		private void AddLayoutColumns(DbColumns dbColumns, int sourceLayoutID)
+		private void AddLayoutColumns(LJCDataColumns dbColumns, int sourceLayoutID)
 		{
 			LayoutColumn dataRecord;
 
-			if (NetCommon.HasItems(dbColumns))
+			if (LJC.HasListItems(dbColumns))
 			{
-				foreach (DbColumn dbColumn in dbColumns)
+				foreach (LJCDataColumn dbColumn in dbColumns)
 				{
 					var searchColumn = GetLayoutColumnWithName(dbColumn.ColumnName
 						, sourceLayoutID);
@@ -309,7 +309,7 @@ namespace LJCTransformManager
 		{
 			LayoutColumn retValue;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ LayoutColumn.ColumnSourceLayoutID, sourceLayoutID },
 				{ LayoutColumn.ColumnName, (object)name }
@@ -319,8 +319,8 @@ namespace LJCTransformManager
 			return retValue;
 		}
 
-		// Create LayoutColumn from DbColumn.
-		private LayoutColumn CreateLayoutColumn(DbColumn dbColumn
+		// Create LayoutColumn from LJCDataColumn.
+		private LayoutColumn CreateLayoutColumn(LJCDataColumn dbColumn
 			, int sourceLayoutID)
 		{
 			DataType dataType;

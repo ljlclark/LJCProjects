@@ -75,7 +75,7 @@ namespace LJCViewEditor
     }
 
     // Adds a grid row and updates it with the result values.
-    private LJCGridRow RowAddValues(DbValues dbValues)
+    private LJCGridRow RowAddValues(LJCDataValues dbValues)
     {
       var ljcGrid = JoinOnGrid;
       var retValue = ljcGrid.LJCRowAdd();
@@ -197,7 +197,7 @@ namespace LJCViewEditor
 
       if (success)
       {
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { ViewJoinOn.ColumnID, row.LJCGetInt32(ViewJoinOn.ColumnID) }
         };

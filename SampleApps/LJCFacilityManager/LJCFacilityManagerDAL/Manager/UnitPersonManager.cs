@@ -24,8 +24,9 @@ namespace LJCFacilityManagerDAL
 
 			// Add calculated and join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			DataDefinition.Add(UnitPerson.PropertyUnitDescription, caption: "Unit Description");
-		}
+			var dataColumn = DataDefinition.Add(UnitPerson.PropertyUnitDescription);
+      dataColumn.Caption = "Unit Description";
+    }
 
 		#region Joins
 
@@ -50,7 +51,7 @@ namespace LJCFacilityManagerDAL
 				JoinOns = new DbJoinOns() {
 					{ UnitPerson.ColumnUnitID, Unit.ColumnID }
 				},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ Unit.ColumnDescription, UnitPerson.PropertyUnitDescription, UnitPerson.PropertyUnitDescription },
 				}
 			};

@@ -1,9 +1,10 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewOrderByManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -86,9 +87,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public LJCDataColumns GetIDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewOrderBy.ColumnID, id }
       };
@@ -97,12 +98,12 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/GetNameKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetNameKey(string name)
+    public LJCDataColumns GetNameKey(string name)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewOrderBy.ColumnColumnName, (object)name }
       };
@@ -111,9 +112,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetParentKey(int id)
+    public LJCDataColumns GetParentKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewOrderBy.ColumnViewDataID, id }
       };
@@ -162,10 +163,14 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (NetCommon.HasItems(viewOrderBy.ChangedNames))
+          // *** Change ***
+          var changedNames = viewOrderBy.ChangedNames.ChangedProperties;
+          //if (NetCommon.HasItems(viewOrderBy.ChangedNames))
+          if (LJC.HasListItems(changedNames))
           {
             var keyColumns = GetIDKey(retrieveData.ID);
-            Update(viewOrderBy, keyColumns, viewOrderBy.ChangedNames);
+            //Update(viewOrderBy, keyColumns, viewOrderBy.ChangedNames);
+            Update(viewOrderBy, keyColumns, changedNames);
           }
         }
       }

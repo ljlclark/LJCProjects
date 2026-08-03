@@ -53,7 +53,7 @@ namespace LJCUnitMeasureDAL
 
     // Loads a collection of data records ordered by Description.
     /// <include path='items/LoadByDescription/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public UnitTypes LoadByDescription(DbColumns keyColumns = null
+    public UnitTypes LoadByDescription(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -62,9 +62,9 @@ namespace LJCUnitMeasureDAL
 
     // Gets the ID key record.
     /// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns GetIDKey(int id)
+    public LJCDataColumns GetIDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { UnitType.ColumnID, id }
       };

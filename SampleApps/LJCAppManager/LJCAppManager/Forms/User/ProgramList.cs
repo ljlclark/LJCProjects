@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ProgramList.cs
 using System;
@@ -8,6 +8,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDBClientLib;
 using LJCAppManagerDAL;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCAppManager
 {
@@ -49,7 +50,7 @@ namespace LJCAppManager
 			var programManager = Managers.AppProgramManager;
 			records = programManager.Load();
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (AppProgram record in records)
 				{
@@ -286,20 +287,21 @@ namespace LJCAppManager
 			//if (record != null
 			if (0 == ProgramGrid.Columns.Count)
 			{
-				//DbColumns columns = GetGridColumns(record);
-        DbColumns gridColumns = GetGridColumns();
+				//LJCDataColumns columns = GetGridColumns(record);
+        LJCDataColumns gridColumns = GetGridColumns();
         ProgramGrid.LJCAddColumns(gridColumns);
 			}
 		}
 
-		//private DbColumns GetGridColumns(AppProgram module = null)
-    private DbColumns GetGridColumns()
+		//private LJCDataColumns GetGridColumns(AppProgram module = null)
+    private LJCDataColumns GetGridColumns()
     {
-      DbColumns retValue;
+      LJCDataColumns retValue;
 
-			retValue = new DbColumns();
-			retValue.Add("FileName", caption: "File Name");
-			retValue.Add("Title");
+			retValue = new LJCDataColumns();
+			var dataColumn = retValue.Add("FileName");
+      dataColumn.Caption = "File Name";
+      retValue.Add("Title");
 			return retValue;
 		}
 		#endregion

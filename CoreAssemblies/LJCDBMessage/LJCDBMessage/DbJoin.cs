@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbJoin.cs
 using LJCNetCommon;
@@ -11,19 +11,21 @@ namespace LJCDBMessage
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public DbJoin()
     {
       JoinType = "Left";
       JoinOns = new DbJoinOns();
-      Columns = new DbColumns();
+      Columns = new LJCDataColumns();
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public DbJoin(DbJoin item)
     {
-      Columns = new DbColumns(item.Columns);
+      Columns = new LJCDataColumns(item.Columns);
       JoinOns = new DbJoinOns(item.JoinOns);
       JoinType = item.JoinType;
       TableAlias = item.TableAlias;
@@ -34,7 +36,8 @@ namespace LJCDBMessage
     #region Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public DbJoin Clone()
     {
       DbJoin retValue = new DbJoin()
@@ -57,14 +60,16 @@ namespace LJCDBMessage
     #region Properties
 
     // The included join table columns.
-    /// <include path='items/Columns/*' file='Doc/DbJoin.xml'/>
-    public DbColumns Columns { get; set; }
+    /// <include file='Doc/DbJoin.xml'
+    ///  path='items/Columns/*'/>
+    public LJCDataColumns Columns { get; set; }
 
     /// <summary>The join on definitions.</summary>
     public DbJoinOns JoinOns { get; set; }
 
     // The join type.
-    /// <include path='items/JoinType/*' file='Doc/DbJoin.xml'/>
+    /// <include file='Doc/DbJoin.xml'
+    ///  path='items/JoinType/*'/>
     public string JoinType
     {
       get { return mJoinType; }

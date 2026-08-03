@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ManagerCommon.cs
 using LJCDataAccess;
@@ -14,9 +14,10 @@ namespace LJCDBClientLib
   {
     // Creates the DbRequest object.
     /// <include path='items/CreateRequest/*' file='Doc/ManagerCommon.xml'/>
-    public static DbRequest CreateRequest(RequestType requestType, string tableName
-      , DbColumns requestColumns, string dataConfigName, string schemaName
-      , DbColumns keyColumns = null, DbFilters filters = null, DbJoins joins = null)
+    public static DbRequest CreateRequest(RequestType requestType
+      , string tableName, LJCDataColumns requestColumns, string dataConfigName
+      , string schemaName, LJCDataColumns keyColumns = null
+      , DbFilters filters = null, DbJoins joins = null)
     {
       DbRequest retValue;
 

@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // RegionModule.cs
 using System;
@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using LJCDBClientLib;
-using LJCGridDataLib;
 using LJCNetCommon;
 using LJCRegionDAL;
 using LJCWinFormCommon;
 using LJCWinFormControls;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCRegionManager
 {
@@ -95,7 +95,7 @@ namespace LJCRegionManager
       regionManager.SetOrderByName();
       records = regionManager.Load();
 
-      if (NetCommon.HasItems(records))
+      if (LJC.HasListItems(records))
       {
         foreach (RegionData regionData in records)
         {
@@ -148,7 +148,7 @@ namespace LJCRegionManager
       if (NetString.HasValue(RegionCombo.Text)
         && RegionCombo.SelectedItem is RegionData regionData)
       {
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { Province.ColumnRegionID, regionData.ID }
         };
@@ -156,7 +156,7 @@ namespace LJCRegionManager
         provinceManager.SetOrderByName();
         Provinces records = provinceManager.Load(keyColumns);
 
-        if (NetCommon.HasItems(records))
+        if (LJC.HasListItems(records))
         {
           SetupGridProvince(records[0]);  // Region
           foreach (Province province in records)
@@ -232,20 +232,20 @@ namespace LJCRegionManager
     /// <include path='items/SetProvince/*' file='Doc/RegionModule.xml'/>
     public void SetProvince(int provinceID, string provinceCode)
     {
-      DbColumns keyColumns;
+      LJCDataColumns keyColumns;
 
       if (provinceID > 0 || provinceCode != null)
       {
         if (provinceID > 0)
         {
-          keyColumns = new DbColumns()
+          keyColumns = new LJCDataColumns()
           {
             { Province.ColumnID, provinceID }
           };
         }
         else
         {
-          keyColumns = new DbColumns()
+          keyColumns = new LJCDataColumns()
           {
             { Province.ColumnAbbreviation, (object)provinceCode }
           };
@@ -273,7 +273,7 @@ namespace LJCRegionManager
         // Data from list items.
         int provinceID = parentRow.LJCGetInt32(Province.ColumnID);
 
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { City.ColumnProvinceID, provinceID },
         };
@@ -281,7 +281,7 @@ namespace LJCRegionManager
         cityManager.SetOrderByName();
         Cities cities = cityManager.Load(keyColumns);
 
-        if (NetCommon.HasItems(cities))
+        if (LJC.HasListItems(cities))
         {
           SetupGridCity(cities[0]);  // Region
           foreach (City city in cities)
@@ -357,20 +357,20 @@ namespace LJCRegionManager
     /// <include path='items/SetCity/*' file='Doc/RegionModule.xml'/>
     public void SetCity(int cityID, string cityName)
     {
-      DbColumns keyColumns;
+      LJCDataColumns keyColumns;
 
       if (cityID > 0 || cityName != null)
       {
         if (cityID > 0)
         {
-          keyColumns = new DbColumns()
+          keyColumns = new LJCDataColumns()
           {
             { City.ColumnID, cityID }
           };
         }
         else
         {
-          keyColumns = new DbColumns()
+          keyColumns = new LJCDataColumns()
           {
             { City.ColumnName, (object)cityName }
           };
@@ -398,7 +398,7 @@ namespace LJCRegionManager
         // Data from list items.
         int cityID = parentRow.LJCGetInt32(City.ColumnID);
 
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { CitySection.ColumnCityID, cityID }
         };
@@ -406,7 +406,7 @@ namespace LJCRegionManager
         citySectionManager.SetOrderByName();
         CitySections list = citySectionManager.Load(keyColumns);
 
-        if (NetCommon.HasItems(list))
+        if (LJC.HasListItems(list))
         {
           SetupGridCitySection(list[0]);  // Region
           foreach (CitySection city in list)
@@ -481,20 +481,20 @@ namespace LJCRegionManager
     /// <include path='items/SetCitySection/*' file='Doc/RegionModule.xml'/>
     public void SetCitySection(int citySectionID, string citySectionName)
     {
-      DbColumns keyColumns;
+      LJCDataColumns keyColumns;
 
       if (citySectionID > 0 || citySectionName != null)
       {
         if (citySectionID > 0)
         {
-          keyColumns = new DbColumns()
+          keyColumns = new LJCDataColumns()
           {
             { CitySection.ColumnID, citySectionID }
           };
         }
         else
         {
-          keyColumns = new DbColumns()
+          keyColumns = new LJCDataColumns()
           {
             { CitySection.ColumnName, (object)citySectionName }
           };
@@ -614,7 +614,7 @@ namespace LJCRegionManager
           // Data from list items.
           int id = row.LJCGetInt32(Province.ColumnID);
 
-          var keyColumns = new DbColumns()
+          var keyColumns = new LJCDataColumns()
           {
             { Province.ColumnID, id }
           };
@@ -674,7 +674,7 @@ namespace LJCRegionManager
         Cursor = Cursors.WaitCursor;
         id = row.LJCGetInt32(Province.ColumnID);
 
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { Province.ColumnID, id }
         };
@@ -816,7 +816,7 @@ namespace LJCRegionManager
           // Data from list items.
           int id = row.LJCGetInt32(City.ColumnID);
 
-          var keyColumns = new DbColumns()
+          var keyColumns = new LJCDataColumns()
           {
             { City.ColumnID, id }
           };
@@ -1018,7 +1018,7 @@ namespace LJCRegionManager
           // Data from list items.
           int id = row.LJCGetInt32(CitySection.ColumnID);
 
-          var keyColumns = new DbColumns()
+          var keyColumns = new LJCDataColumns()
           {
             { CitySection.ColumnID, id }
           };
@@ -1081,7 +1081,7 @@ namespace LJCRegionManager
         Cursor = Cursors.WaitCursor;
         id = row.LJCGetInt32(CitySection.ColumnID);
 
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { CitySection.ColumnID, id }
         };
@@ -1333,7 +1333,8 @@ namespace LJCRegionManager
         };
 
         // Get the grid columns from the record.
-        var gridColumns = DbColumns.LJCGetColumns(record, propertyNames);
+        var gridColumns
+          = LJCDataColumns.LJCObjectColumnsInList(record, propertyNames);
 
         // Setup the grid columns.
         ProvinceGrid.LJCAddColumns(gridColumns);
@@ -1359,7 +1360,8 @@ namespace LJCRegionManager
         };
 
         // Get the grid columns from the record.
-        var gridColumns = DbColumns.LJCGetColumns(record, propertyNames);
+        var gridColumns
+          = LJCDataColumns.LJCObjectColumnsInList(record, propertyNames);
 
         // Setup the grid columns.
         CityGrid.LJCAddColumns(gridColumns);
@@ -1385,7 +1387,8 @@ namespace LJCRegionManager
         };
 
         // Get the grid columns from the record.
-        var gridColumns = DbColumns.LJCGetColumns(record, propertyNames);
+        var gridColumns
+          = LJCDataColumns.LJCObjectColumnsInList(record, propertyNames);
 
         // Setup the grid columns.
         CitySectionGrid.LJCAddColumns(gridColumns);

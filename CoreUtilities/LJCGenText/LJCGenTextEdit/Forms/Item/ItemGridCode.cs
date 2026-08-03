@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ItemGridCode.cs
 using LJCGenTextLib;
@@ -7,6 +7,7 @@ using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenTextEdit
 {
@@ -43,7 +44,7 @@ namespace LJCGenTextEdit
         string sectionName = parentRow.LJCGetCellText("Name");
 
         var records = GenDataManager.LoadRepeatItems(sectionName);
-        if (NetCommon.HasItems(records))
+        if (LJC.HasListItems(records))
         {
           foreach (RepeatItem record in records)
           {

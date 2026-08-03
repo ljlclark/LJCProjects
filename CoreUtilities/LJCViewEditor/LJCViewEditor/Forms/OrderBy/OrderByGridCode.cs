@@ -74,7 +74,7 @@ namespace LJCViewEditor
     }
 
     // Adds a grid row and updates it with the result values.
-    private LJCGridRow RowAddValues(DbValues dbValues)
+    private LJCGridRow RowAddValues(LJCDataValues dbValues)
     {
       var ljcGrid = OrderByGrid;
       var retValue = ljcGrid.LJCRowAdd();
@@ -202,7 +202,7 @@ namespace LJCViewEditor
         // Data from items.
         var id = row.LJCGetInt32(ViewOrderBy.ColumnID);
 
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { ViewOrderBy.ColumnID, id }
         };

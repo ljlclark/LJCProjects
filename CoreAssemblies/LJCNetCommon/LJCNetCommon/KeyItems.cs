@@ -1,7 +1,6 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // KeyItems.cs
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -9,13 +8,15 @@ using System.Xml.Serialization;
 namespace LJCNetCommon
 {
   // <summary>Represents a collection of KeyItem objects.</summary>
-  /// <include path='items/KeyItems/*' file='Doc/KeyItems.xml'/>
+  /// <include file='Doc/KeyItems.xml'
+  ///  path='items/KeyItems/*'/>
   public class KeyItems : IEnumerable<KeyItem>
   {
     #region Static Functions
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/HasItems1/*'/>
     public static bool HasItems(KeyItems collection)
     {
       bool retValue = false;
@@ -31,7 +32,8 @@ namespace LJCNetCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Constructor/*'/>
     public KeyItems()
     {
       Items = new List<KeyItem>();
@@ -39,7 +41,8 @@ namespace LJCNetCommon
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public KeyItems(KeyItems items)
     {
       Items = new List<KeyItem>();
@@ -56,7 +59,8 @@ namespace LJCNetCommon
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include path='items/Add1/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/KeyItems.xml'
+    ///  path='items/Add1/*'/>
     public void Add(KeyItem item)
     {
       if (item != null)
@@ -66,7 +70,8 @@ namespace LJCNetCommon
     }
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add2/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/KeyItems.xml'
+    ///  path='items/Add2/*'/>
     public KeyItem Add(string propertyName, long id, string description = null
       , int maxLength = 10)
     {
@@ -87,7 +92,8 @@ namespace LJCNetCommon
     }
 
     // Appends the supplied objects to the collection.
-    /// <include path='items/Append/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/KeyItems.xml'
+    ///  path='items/Append/*'/>
     public void Append(KeyItems items)
     {
       if (HasItems(items))
@@ -100,7 +106,8 @@ namespace LJCNetCommon
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public KeyItems Clone()
     {
       var retValue = new KeyItems();
@@ -112,7 +119,8 @@ namespace LJCNetCommon
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/KeyItems.xml'
+    ///  path='items/GetCollection/*'/>
     public KeyItems GetCollection(List<KeyItem> items)
     {
       KeyItems retValue = null;
@@ -129,7 +137,8 @@ namespace LJCNetCommon
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -145,8 +154,9 @@ namespace LJCNetCommon
     #region Other Methods
 
     // Gets the Item Description with Value as index within PropertyName.
-    /// <include path='items/GetDescription/*' file='Doc/KeyItems.xml'/>
-    public string GetDescription(DbColumn dataColumn)
+    /// <include file='Doc/KeyItems.xml'
+    ///  path='items/GetDescription/*'/>
+    public string GetDescription(LJCDataColumn dataColumn)
     {
       string retValue = null;
 
@@ -159,8 +169,9 @@ namespace LJCNetCommon
     }
 
     // Get index from Value.
-    /// <include path='items/GetIndex/*' file='Doc/KeyItems.xml'/>
-    public int GetIndex(DbColumn dataColumn)
+    /// <include file='Doc/KeyItems.xml'
+    ///  path='items/GetIndex/*'/>
+    public int GetIndex(LJCDataColumn dataColumn)
     {
       int retValue = -1;
 
@@ -178,8 +189,9 @@ namespace LJCNetCommon
     }
 
     // Gets the KeyItem with Value as index within PropertyName.
-    /// <include path='items/GetItem/*' file='Doc/KeyItems.xml'/>
-    public KeyItem GetItem(DbColumn dataColumn)
+    /// <include file='Doc/KeyItems.xml'
+    ///  path='items/GetItem/*'/>
+    public KeyItem GetItem(LJCDataColumn dataColumn)
     {
       KeyItem retValue = null;
 
@@ -206,8 +218,9 @@ namespace LJCNetCommon
     }
 
     // Gets the Items with the PropertyName.
-    /// <include path='items/GetItems/*' file='Doc/KeyItems.xml'/>
-    public KeyItems GetItems(DbColumn dataColumn)
+    /// <include file='Doc/KeyItems.xml'
+    ///  path='items/GetItems/*'/>
+    public KeyItems GetItems(LJCDataColumn dataColumn)
     {
       KeyItems retValue = null;
 
@@ -222,7 +235,8 @@ namespace LJCNetCommon
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/SearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/SearchName/*'/>
     public KeyItems SearchPropertyName(string name)
     {
       List<KeyItem> items;
@@ -235,7 +249,8 @@ namespace LJCNetCommon
     }
 
     // Sort on Name.
-    /// <include path='items/SortName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/SortName/*'/>
     public void SortPropertyName()
     {
       if (Count != mPrevCount)
@@ -249,7 +264,8 @@ namespace LJCNetCommon
     #region IEnumerable Methods
 
     // Gets the Collection Enumerator.
-    /// <include path='items/GetEnumerator/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/KeyItems.xml'
+    ///  path='items/GetEnumerator/*'/>
     public IEnumerator<KeyItem> GetEnumerator()
     {
       return ((IEnumerable<KeyItem>)Items).GetEnumerator();
@@ -271,7 +287,8 @@ namespace LJCNetCommon
     }
 
     // Gets the item by index value.
-    /// <include path='items/Indexer/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/KeyItems.xml'
+    ///  path='items/Indexer/*'/>
     public KeyItem this[int index]
     {
       get

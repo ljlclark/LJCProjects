@@ -21,12 +21,14 @@ namespace LJCFacilityManagerDAL
 
 			// Add calculated and join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			DataDefinition.Add(Equipment.ColumnTypeDescription, caption: "Code Type Description");
-			DataDefinition.Add(Equipment.ColumnUnitDescription, caption: "Unit Description");
+			var dataColumn = DataDefinition.Add(Equipment.ColumnTypeDescription);
+      dataColumn.Caption = "Code Type Description";
+      dataColumn = DataDefinition.Add(Equipment.ColumnUnitDescription);
+      dataColumn.Caption = "Unit Description";
 
-			// Create the list of database assigned columns.
-			// And make sure the AutoIncrement value is set.
-			SetDbAssignedColumns(new string[]
+      // Create the list of database assigned columns.
+      // And make sure the AutoIncrement value is set.
+      SetDbAssignedColumns(new string[]
 			{
 				Equipment.ColumnID
 			});
@@ -51,7 +53,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{Equipment.ColumnCodeTypeID, CodeType.ColumnID }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ CodeType.ColumnDescription, Equipment.ColumnTypeDescription
 						, Equipment.ColumnTypeDescription }}
 			};
@@ -63,7 +65,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ Equipment.ColumnUnitID, Unit.ColumnID }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ Unit.ColumnDescription, Equipment.ColumnUnitDescription
 						, Equipment.ColumnUnitDescription }}
 			};

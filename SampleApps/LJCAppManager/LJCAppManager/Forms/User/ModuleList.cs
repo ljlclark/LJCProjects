@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ModuleList.cs
 using System;
@@ -10,6 +10,7 @@ using LJCWinFormControls;
 using LJCDBMessage;
 using LJCAppManagerDAL;
 using LJCDBClientLib;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCAppManager
 {
@@ -48,7 +49,7 @@ namespace LJCAppManager
       AppModules records;
 
       ModuleGrid.LJCRowsClear();
-      var keyColumns = new DbColumns()
+      var keyColumns = new LJCDataColumns()
       {
         { AppModule.ColumnAppProgramID, LJCParentID }
       };
@@ -56,7 +57,7 @@ namespace LJCAppManager
       DbJoins dbJoins = moduleManager.GetLoadJoins();
       records = moduleManager.Load(keyColumns, joins: dbJoins);
 
-      if (NetCommon.HasItems(records))
+      if (LJC.HasListItems(records))
       {
         foreach (AppModule record in records)
         {
@@ -296,7 +297,7 @@ namespace LJCAppManager
           AppModule.ColumnTypeName,
           AppModule.ColumnTitle
         };
-        DbColumns gridColumns = Managers.AppModuleManager.GetColumns(propertyNames);
+        LJCDataColumns gridColumns = Managers.AppModuleManager.GetColumns(propertyNames);
         ModuleGrid.LJCAddColumns(gridColumns);
       }
     }

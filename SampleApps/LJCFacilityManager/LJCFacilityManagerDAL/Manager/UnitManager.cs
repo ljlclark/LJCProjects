@@ -23,11 +23,13 @@ namespace LJCFacilityManagerDAL
 
 			// Add join and calculated columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			DataDefinition.Add(Unit.ColumnTypeDescription, caption: "Code Type Description");
-			DataDefinition.Add(Unit.ColumnPersonName, caption: "Person Name");
+			var dataColumn = DataDefinition.Add(Unit.ColumnTypeDescription);
+      dataColumn.Caption = "Code Type Description";
+      dataColumn = DataDefinition.Add(Unit.ColumnPersonName);
+      dataColumn.Caption = "Person Name";
 
-			// Create the list of database assigned columns.
-			SetDbAssignedColumns(new string[]
+      // Create the list of database assigned columns.
+      SetDbAssignedColumns(new string[]
 			{
 				Unit.ColumnID
 			});
@@ -92,9 +94,9 @@ namespace LJCFacilityManagerDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ Unit.ColumnID, id }
 			};
@@ -103,9 +105,9 @@ namespace LJCFacilityManagerDAL
 
 		// Get the Code key record.
 		/// <include path='items/GetCodeKey/*' file='Doc/UnitManager.xml'/>
-		public DbColumns GetCodeKey(string code)
+		public LJCDataColumns GetCodeKey(string code)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ Unit.ColumnCode, (object)code }
 			};
@@ -114,9 +116,9 @@ namespace LJCFacilityManagerDAL
 
 		// Gets the Description key record.
 		/// <include path='items/GetDescriptionKey/*' file='Doc/UnitManager.xml'/>
-		public DbColumns GetDescriptionKey(string description)
+		public LJCDataColumns GetDescriptionKey(string description)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ Unit.ColumnDescription, (object)description }
 			};
@@ -125,9 +127,9 @@ namespace LJCFacilityManagerDAL
 
 		// Gets the Parent ID key record.
 		/// <include path='items/GetParentIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetParentIDKey(int parentID)
+		public LJCDataColumns GetParentIDKey(int parentID)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ Unit.ColumnFacilityID, parentID }
 			};
@@ -150,7 +152,7 @@ namespace LJCFacilityManagerDAL
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ Unit.ColumnCodeTypeID, CodeType.ColumnID }},
-				Columns = new DbColumns() {
+				Columns = new LJCDataColumns() {
 					{ CodeType.ColumnDescription, Unit.ColumnTypeDescription
 						, Unit.ColumnTypeDescription }}
 			};
@@ -165,18 +167,21 @@ namespace LJCFacilityManagerDAL
 			};
 			retValue.Add(dbJoin);
 
-			dbJoin = new DbJoin
+      var dataColumns = new LJCDataColumns();
+      var dataColumn = dataColumns.Add(Person.ColumnID, Unit.ColumnPersonID
+        , "Int32");
+      dataColumn.RenameAs = Unit.PropertyPersonID;
+      dataColumns.Add(Person.ColumnFirstName, dataTypeName: "Int32");
+      dataColumns.Add(Person.ColumnMiddleInitial, dataTypeName: "Int32");
+      dataColumns.Add(Person.ColumnLastName, dataTypeName: "Int32");
+
+      dbJoin = new DbJoin
 			{
 				TableName = "Person",
 				JoinType = "left",
 				JoinOns = new DbJoinOns() {
 					{ "UnitPerson.Person_Id", "Id" }},
-				Columns = new DbColumns() {
-					{ Person.ColumnID, Unit.ColumnPersonID, Unit.PropertyPersonID, "Int32" },
-					{ Person.ColumnFirstName, Unit.ColumnFirstName, Unit.ColumnFirstName, "Int32" },
-					{ Person.ColumnMiddleInitial, Unit.ColumnMiddleInitial
-						, Unit.ColumnMiddleInitial, "Int32" },
-					{ Person.ColumnLastName, Unit.ColumnLastName, Unit.ColumnLastName, "Int32" }}
+				Columns = dataColumns,
 			};
 			retValue.Add(dbJoin);
 

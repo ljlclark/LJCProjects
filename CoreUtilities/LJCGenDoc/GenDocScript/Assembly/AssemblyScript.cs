@@ -114,7 +114,7 @@ namespace GenDocScript
         {
           { DocAssembly.ColumnDocAssemblyGroupID, "ID" }
         },
-        Columns = new DbColumns
+        Columns = new LJCDataColumns
         {
           // columnName, propertyName = null, renameAs = null, dataTypeName = "String", caption = null
           { "Name", "GroupName", "GroupName" }

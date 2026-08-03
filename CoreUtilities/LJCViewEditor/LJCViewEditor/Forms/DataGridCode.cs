@@ -1,7 +1,7 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataGridClass.cs
-using DataDetail;
+using LJCDataDetail;
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
@@ -54,14 +54,15 @@ namespace LJCViewEditor
           var dataColumns = dbResult.CreateResultColumns(dbResult);
 
           // Create and show DataDetail dialog.
-          var dialog = new DataDetailDialog(mUserID, EditList.DataConfigName
-            , TableName)
+          //var dialog = new DataDetailDialog(mUserID, EditList.DataConfigName
+          //  , TableName)
+          var dialog = new DataDetailDialog(mUserID, TableName)
           {
             LJCDataColumns = dataColumns
           };
           if (DialogResult.OK == dialog.ShowDialog())
           {
-            //DbColumns resultColumns = dialog.LJCDataColumns;
+            //LJCDataColumns resultColumns = dialog.LJCDataColumns;
           }
         }
       }
@@ -102,17 +103,17 @@ namespace LJCViewEditor
     #region Private Methods
 
     // Sets the DbRequest Key values.
-    private void SetKeyValues(DbRequest dbRequest, DbColumns dataDefinition)
+    private void SetKeyValues(DbRequest dbRequest, LJCDataColumns dataDefinition)
     {
       if (DataGrid.CurrentRow is LJCGridRow row)
       {
-        foreach (DbColumn dbColumn in dataDefinition)
+        foreach (LJCDataColumn dbColumn in dataDefinition)
         {
           if (dbColumn.IsPrimaryKey)
           {
             if (null == dbRequest.KeyColumns)
             {
-              dbRequest.KeyColumns = new DbColumns();
+              dbRequest.KeyColumns = new LJCDataColumns();
             }
 
             switch (dbColumn.DataTypeName)

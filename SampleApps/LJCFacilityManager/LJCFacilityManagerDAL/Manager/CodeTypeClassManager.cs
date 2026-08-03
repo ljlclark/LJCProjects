@@ -47,7 +47,7 @@ namespace LJCFacilityManagerDAL
 			CodeTypeClass record;
 			int retValue = 0;
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ CodeTypeClass.ColumnCode, (object)code }
 			};

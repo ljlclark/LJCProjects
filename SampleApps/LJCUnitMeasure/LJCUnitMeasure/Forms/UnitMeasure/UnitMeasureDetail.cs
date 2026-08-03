@@ -84,7 +84,7 @@ namespace LJCUnitMeasure
 			if (LJCID > 0)
 			{
 				LJCIsUpdate = true;
-				var keyColumns = new DbColumns()
+				var keyColumns = new LJCDataColumns()
 				{
 					{ UnitMeasure.ColumnID, LJCID }
 				};
@@ -151,7 +151,7 @@ namespace LJCUnitMeasure
 			Cursor = Cursors.WaitCursor;
 			LJCRecord = SetRecordValues();
 
-			var keyColumns = new DbColumns()
+			var keyColumns = new LJCDataColumns()
 			{
 				{ UnitMeasure.ColumnName, (object)LJCRecord.Name }
 			};
@@ -171,7 +171,7 @@ namespace LJCUnitMeasure
 			{
 				if (LJCIsUpdate)
 				{
-					keyColumns = new DbColumns()
+					keyColumns = new LJCDataColumns()
 					{
 						{ UnitMeasure.ColumnID, LJCRecord.ID }
 					};

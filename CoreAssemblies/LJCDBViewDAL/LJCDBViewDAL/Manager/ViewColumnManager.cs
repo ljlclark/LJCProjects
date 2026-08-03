@@ -1,10 +1,11 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewColumnManager.cs
 using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBViewDAL
 {
@@ -50,21 +51,21 @@ namespace LJCDBViewDAL
       return retValue;
     }
 
-    // Retrieves a DbColumns collection for the specified parent ID.
+    // Retrieves a LJCDataColumns collection for the specified parent ID.
     /// <include path='items/LoadDbColumnsWithParentID/*' file='Doc/ViewColumnManager.xml'/>
-    public DbColumns LoadDbColumnsWithParentID(int viewDataID, string tableName)
+    public LJCDataColumns LoadDbColumnsWithParentID(int viewDataID, string tableName)
     {
       DbResult viewColumnResult;
-      DbColumns retValue;
+      LJCDataColumns retValue;
 
-      // Load from DataManager to get DbColumns result.
+      // Load from DataManager to get LJCDataColumns result.
       var keyColumns = ParentIDKey(viewDataID);
       viewColumnResult = DataManager.Load(keyColumns);
 
-      // Copies ViewColumn properties to DbColumn objects.
-      // Where ViewColumn properties match DbColumn.PropertyName.
-      ResultConverter<DbColumn, DbColumns> resultConverter
-        = new ResultConverter<DbColumn, DbColumns>();
+      // Copies ViewColumn properties to LJCDataColumn objects.
+      // Where ViewColumn properties match LJCDataColumn.PropertyName.
+      ResultConverter<LJCDataColumn, LJCDataColumns> resultConverter
+        = new ResultConverter<LJCDataColumn, LJCDataColumns>();
       retValue = resultConverter.CreateCollection(viewColumnResult);
 
       // Get table definition.
@@ -74,10 +75,11 @@ namespace LJCDBViewDAL
 
       // Populate missing values.
       // Process each Data Object column.
-      foreach (DbColumn column in retValue)
+      foreach (LJCDataColumn column in retValue)
       {
-        var findColumn
-          = recordColumns.LJCSearchPropertyName(column.PropertyName);
+        //var findColumn
+        //  = recordColumns.LJCSearchPropertyName(column.PropertyName);
+        var findColumn = recordColumns[column.PropertyName];
         if (findColumn != null)
         {
           column.MaxLength = findColumn.MaxLength;
@@ -130,9 +132,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/IDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns IDKey(int id)
+    public LJCDataColumns IDKey(int id)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewColumn.ColumnID, id }
       };
@@ -141,9 +143,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/ParentIDKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns ParentIDKey(int parentID)
+    public LJCDataColumns ParentIDKey(int parentID)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewColumn.ColumnViewDataID, parentID }
       };
@@ -152,9 +154,9 @@ namespace LJCDBViewDAL
 
     // Gets the ID key record.
     /// <include path='items/UniqueKey/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns UniqueKey(int parentID, string name)
+    public LJCDataColumns UniqueKey(int parentID, string name)
     {
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { ViewColumn.ColumnViewDataID, parentID },
         { ViewColumn.ColumnColumnName, (object)name }
@@ -244,10 +246,14 @@ namespace LJCDBViewDAL
         if (retValue)
         {
           // Note: Changed to update only changed columns.
-          if (NetCommon.HasItems(viewColumn.ChangedNames))
+          // *** Change ***
+          var changedNames = viewColumn.ChangedNames.ChangedProperties;
+          //if (NetCommon.HasItems(viewColumn.ChangedNames))
+          if (LJC.HasListItems(changedNames))
           {
             var keyColumns = IDKey(retrieveData.ID);
-            Update(viewColumn, keyColumns, viewColumn.ChangedNames);
+            //Update(viewColumn, keyColumns, viewColumn.ChangedNames);
+            Update(viewColumn, keyColumns, changedNames);
           }
         }
       }

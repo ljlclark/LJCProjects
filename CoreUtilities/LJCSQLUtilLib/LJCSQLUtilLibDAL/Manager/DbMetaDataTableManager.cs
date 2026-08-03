@@ -126,9 +126,9 @@ namespace LJCSQLUtilLibDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetIDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-		public DbColumns GetIDKey(int id)
+		public LJCDataColumns GetIDKey(int id)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ DbMetaDataTable.ColumnID, id }
 			};
@@ -137,9 +137,9 @@ namespace LJCSQLUtilLibDAL
 
 		// Get the ID key record.
 		/// <include path='items/GetTableNameKey/*' file='Doc/DbMetaDataTableManager.xml'/>
-		public DbColumns GetTableNameKey(string tableName)
+		public LJCDataColumns GetTableNameKey(string tableName)
 		{
-			var retValue = new DbColumns()
+			var retValue = new LJCDataColumns()
 			{
 				{ DbMetaDataTable.ColumnTableName, (object)tableName }
 			};
@@ -171,7 +171,7 @@ namespace LJCSQLUtilLibDAL
 			//		JoinType = "left",
 			//		JoinOns = new DbJoinOns() {
 			//			{ DbMetaDataTable.ColumnCodeTypeID, CodeType.ColumnID }},
-			//		Columns = new DbColumns() {
+			//		Columns = new LJCDataColumns() {
 			//			{ columnName, propertyName, renameAs }}
 			//	};
 			//	//retValue.Add(dbJoin);

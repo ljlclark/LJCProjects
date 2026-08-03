@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCMetadata.cs
 using LJCDBClientLib;
@@ -10,6 +10,7 @@ using LJCWinFormCommon;
 using System;
 using System.Data;
 using System.Text;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCSQLUtilLib
 {
@@ -106,7 +107,7 @@ namespace LJCSQLUtilLib
 			StringBuilder builder;
 			string retValue = null;
 
-			if (NetCommon.HasItems(mdColumns))
+			if (LJC.HasListItems(mdColumns))
 			{
 				builder = new StringBuilder(128);
 				foreach (DbMetaDataColumn mdColumn in mdColumns)
@@ -189,7 +190,7 @@ namespace LJCSQLUtilLib
 			string retValue = null;
 
 			DbMetaDataKeys mdKeys = MdKeyManager.LoadPrimaryKeys();
-			if (NetCommon.HasItems(mdKeys))
+			if (LJC.HasListItems(mdKeys))
 			{
 				if (null == builder)
 				{
@@ -224,7 +225,7 @@ namespace LJCSQLUtilLib
 			foreach (DbMetaDataColumn mdColumn in mdColumns)
 			{
 				DbMetaDataKeys mdKeys = MdKeyManager.LoadForeignKey(mdColumn.ID);
-				if (NetCommon.HasItems(mdKeys))
+				if (LJC.HasListItems(mdKeys))
 				{
 					if (null == builder)
 					{
@@ -269,7 +270,7 @@ namespace LJCSQLUtilLib
 
 			builder.AppendLine("-- Drop table FK constraints. ");
 			foreignKeys = LoadSchemaForeignKeys(tableName);
-			if (NetCommon.HasItems(foreignKeys))
+			if (LJC.HasListItems(foreignKeys))
 			{
 				foreach (ForeignKey foreignKey in foreignKeys)
 				{
@@ -283,7 +284,7 @@ namespace LJCSQLUtilLib
 
 			builder.AppendLine("-- Drop table PK constraints. ");
 			primaryKeys = LoadSchemaPrimaryKeys(tableName);
-			if (NetCommon.HasItems(primaryKeys))
+			if (LJC.HasListItems(primaryKeys))
 			{
 				foreach (ForeignKey foreignKey in primaryKeys)
 				{
@@ -356,7 +357,7 @@ namespace LJCSQLUtilLib
 			builder.AppendLine();
 
 			builder.Append("-- Create new table FK constraints. ");
-			if (NetCommon.HasItems(foreignKeys))
+			if (LJC.HasListItems(foreignKeys))
 			{
 				foreach (ForeignKey foreignKey in foreignKeys)
 				{
@@ -396,8 +397,8 @@ namespace LJCSQLUtilLib
 				DbMetaDataTable mdTable = SaveMdTable(tableName);
 
 				int sequence = 0;
-				DbColumns dbColumns = dbResult.Columns;
-				foreach (DbColumn dbColumn in dbColumns)
+				LJCDataColumns dbColumns = dbResult.Columns;
+				foreach (LJCDataColumn dbColumn in dbColumns)
 				{
 					sequence++;
 					mdColumn = SaveMdColumn(mdTable.ID, sequence, dbColumn);
@@ -478,9 +479,9 @@ namespace LJCSQLUtilLib
 			return retValue;
 		}
 
-		// Saves the MD Column from the DbColumn object.
+		// Saves the MD Column from the LJCDataColumn object.
 		/// <include path='items/SaveMdColumn/*' file='Doc/LJCMetadata.xml'/>
-		public DbMetaDataColumn SaveMdColumn(int tableID, int sequence, DbColumn dbColumn)
+		public DbMetaDataColumn SaveMdColumn(int tableID, int sequence, LJCDataColumn dbColumn)
 		{
 			DbMetaDataColumn retValue;
 

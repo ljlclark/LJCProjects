@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CreateTypeXml.cs
 using System;
@@ -7,8 +7,9 @@ using LJCNetCommon;
 using LJCGenTextLib;
 using LJCDocObjLib;
 using LJCGenDocDAL;
-using Section = LJCGenTextLib.Section;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
+using Section = LJCGenTextLib.Section;
 
 namespace LJCGenDocLib
 {
@@ -223,7 +224,7 @@ namespace LJCGenDocLib
           };
           methodGroupManager.SetOrderBy(orderColumns);
           var methodGroups = methodGroupManager.LoadWithParentID(docClass.ID);
-          if (NetCommon.HasItems(methodGroups))
+          if (LJC.HasListItems(methodGroups))
           {
             var section = sections.Add("MethodGroups");
             var repeatItems = section.RepeatItems;
@@ -238,7 +239,7 @@ namespace LJCGenDocLib
               methodManager.SetOrderBy(orderColumns);
               var docMethods
                 = methodManager.LoadWithGroup(methodGroup.ID);
-              if (NetCommon.HasItems(docMethods)
+              if (LJC.HasListItems(docMethods)
                 && HasValidMethods(docMethods))
               {
                 retValue = true;
@@ -332,7 +333,7 @@ namespace LJCGenDocLib
     // <include path='items/AddLinks/*' file='Doc/CreateTypeXml.xml'/>
     private void AddLinks(Sections sections, Replacements mainReplacements)
     {
-      if (NetCommon.HasItems(DataType.DataLinks))
+      if (LJC.HasListItems(DataType.DataLinks))
       {
         Section section = null;
         foreach (DataLink dataLink in DataType.DataLinks)
@@ -458,7 +459,7 @@ namespace LJCGenDocLib
     {
       int retValue = 0;
 
-      if (NetCommon.HasItems(dataMethods))
+      if (LJC.HasListItems(dataMethods))
       {
         foreach (DataMethod dataMethod in dataMethods)
         {
@@ -495,7 +496,7 @@ namespace LJCGenDocLib
       DataExample example = DataType.Example;
 
       if (example != null
-        && NetCommon.HasItems(example.Paras))
+        && LJC.HasListItems(example.Paras))
       {
         foreach (DataPara para in example.Paras)
         {
@@ -523,7 +524,7 @@ namespace LJCGenDocLib
 
       DataRemark remark = DataType.Remark;
       if (remark != null
-        && NetCommon.HasItems(remark.Paras))
+        && LJC.HasListItems(remark.Paras))
       {
         bool showParas = true;
         foreach (DataPara para in remark.Paras)

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using LJCDataTransformDAL;
-using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCTransformManager
 {
@@ -48,7 +48,7 @@ namespace LJCTransformManager
 				records = dataProcessManager.Load();
 			}
 
-			if (NetCommon.HasItems(records))
+			if (LJC.HasListItems(records))
 			{
 				foreach (DataProcess record in records)
 				{

@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SQLManager.cs
 using LJCDataAccess;
@@ -8,6 +8,7 @@ using LJCGridDataLib;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBClientLib
 {
@@ -83,7 +84,7 @@ namespace LJCDBClientLib
 
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='Doc/SQLManager.xml'/>
-    public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       SQLStatement = CreateDeleteSQL(keyColumns, filters);
       if (NetString.HasValue(SQLStatement))
@@ -94,7 +95,7 @@ namespace LJCDBClientLib
 
     // Gets a DataTable object.
     /// <include path='items/GetDataTable/*' file='Doc/SQLManager.xml'/>
-    public DataTable GetDataTable(DbColumns keyColumns = null
+    public DataTable GetDataTable(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -131,7 +132,7 @@ namespace LJCDBClientLib
 
     // Updates the record.
     /// <include path='items/Update/*' file='Doc/SQLManager.xml'/>
-    public void Update(object dataObject, DbColumns keyColumns
+    public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       NetCommon.CheckArgument<object>(dataObject);
@@ -171,9 +172,9 @@ namespace LJCDBClientLib
     }
 
     // Creates a DataDefinition value.
-    private DbColumns CreateDataDefinition()
+    private LJCDataColumns CreateDataDefinition()
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       string sql = $"select * from {TableName}";
       var dataTable = mDataAccess.GetSchemaOnly(sql);
@@ -187,13 +188,13 @@ namespace LJCDBClientLib
     }
 
     // Creates the SQL "Delete" string.
-    private string CreateDeleteSQL(DbColumns keyColumns
+    private string CreateDeleteSQL(LJCDataColumns keyColumns
       , DbFilters filters = null)
     {
       string retValue = null;
 
       // Must have a KeyColumns definition.
-      if (NetCommon.HasItems(keyColumns)
+      if (LJC.HasListItems(keyColumns)
         || filters != null)
       {
         var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition);
@@ -207,7 +208,7 @@ namespace LJCDBClientLib
     }
 
     // Creates the SQL "Select" string.
-    private string CreateSelectSQL(DbColumns keyColumns
+    private string CreateSelectSQL(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -224,13 +225,13 @@ namespace LJCDBClientLib
     }
 
     // Creates the SQL "Update" string.
-    private string CreateUpdateSQL(object dataObject, DbColumns keyColumns
+    private string CreateUpdateSQL(object dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       string retValue = null;
 
       if (dataObject != null
-        && (NetCommon.HasItems(keyColumns)
+        && (LJC.HasListItems(keyColumns)
         || filters != null))
       {
         var dataColumns = DbCommon.RequestDataColumns(dataObject, BaseDefinition
@@ -253,7 +254,7 @@ namespace LJCDBClientLib
     public int AffectedCount { get; set; }
 
     /// <summary>Gets the base data definition columns collection.</summary>
-    public DbColumns BaseDefinition { get; private set; }
+    public LJCDataColumns BaseDefinition { get; private set; }
 
     /// <summary>Gets or sets the data configuration name.</summary>
     public string DataConfigName
@@ -264,7 +265,7 @@ namespace LJCDBClientLib
     private string mDataConfigName;
 
     /// <summary>Gets the data definition columns collection.</summary>
-    public DbColumns DataDefinition { get; private set; }
+    public LJCDataColumns DataDefinition { get; private set; }
 
     /// <summary>Gets or sets the Database assigned columns.</summary>
     public List<string> DbAssignedColumns { get; set; }

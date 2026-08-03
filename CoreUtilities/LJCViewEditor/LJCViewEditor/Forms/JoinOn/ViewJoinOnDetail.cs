@@ -107,16 +107,18 @@ namespace LJCViewEditor
         ParentTextbox.Text = LJCParentName;
 
         FromColumnCombo.Text = dataRecord.FromColumnName;
-        var dbColumn
-          = mJoinTableColumns.LJCSearchPropertyName(dataRecord.FromColumnName);
+        //var dbColumn
+        //  = mJoinTableColumns.LJCSearchPropertyName(dataRecord.FromColumnName);
+        var dbColumn = mJoinTableColumns[dataRecord.FromColumnName];
         if (dbColumn != null)
         {
           FromColumnCombo.SelectedItem = dbColumn;
         }
 
         ToColumnCombo.Text = dataRecord.ToColumnName;
-        dbColumn
-          = mJoinOnTableColumns.LJCSearchPropertyName(dataRecord.ToColumnName);
+        //dbColumn
+        //  = mJoinOnTableColumns.LJCSearchPropertyName(dataRecord.ToColumnName);
+        dbColumn = mJoinOnTableColumns[dataRecord.ToColumnName];
         if (dbColumn != null)
         {
           ToColumnCombo.SelectedItem = dbColumn;
@@ -272,14 +274,14 @@ namespace LJCViewEditor
       DataHelper dataHelper = new DataHelper(mSettings.DbServiceRef
         , mSettings.DataConfigName);
       mJoinTableColumns = dataHelper.GetJoinFromColumns(LJCParentID);
-      foreach (DbColumn dbColumn in mJoinTableColumns)
+      foreach (LJCDataColumn dbColumn in mJoinTableColumns)
       {
         FromColumnCombo.Items.Add(dbColumn);
       }
 
       // To Columns Combo
       mJoinOnTableColumns = dataHelper.GetJoinToColumns(LJCParentID);
-      foreach (DbColumn dbColumn in mJoinOnTableColumns)
+      foreach (LJCDataColumn dbColumn in mJoinOnTableColumns)
       {
         ToColumnCombo.Items.Add(dbColumn);
       }
@@ -389,8 +391,8 @@ namespace LJCViewEditor
     // The Change event.
     internal event EventHandler<EventArgs> LJCChange;
 
-    private DbColumns mJoinOnTableColumns;
-    private DbColumns mJoinTableColumns;
+    private LJCDataColumns mJoinOnTableColumns;
+    private LJCDataColumns mJoinTableColumns;
     private ViewJoinOn mOriginalRecord;
     private StandardUISettings mSettings;
     #endregion

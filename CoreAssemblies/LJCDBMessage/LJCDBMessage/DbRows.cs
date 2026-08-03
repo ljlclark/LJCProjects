@@ -1,15 +1,16 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbRows.cs
-using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {
   // Represents a collection of DbRow objects.
-  /// <include path='items/DbRows/*' file='Doc/DbRows.xml'/>
+  /// <include file='Doc/DbRows.xml'
+  ///  path='items/DbRows/*'/>
   [XmlRoot("DbRows")]
   public class DbRows : List<DbRow>
   {
@@ -43,7 +44,7 @@ namespace LJCDBMessage
     /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
     public DbRows(DbRows items)
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -56,16 +57,17 @@ namespace LJCDBMessage
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include path='items/Add/*' file='Doc/DbRows.xml'/>
-    public DbRow Add(DbValues dataValues)
+    /// <include file='Doc/DbRows.xml'
+    ///  path='items/Add/*'/>
+    public DbRow Add(LJCDataValues dataValues)
     {
       DbRow retValue = null;
 
-      if (NetCommon.HasItems(dataValues))
+      if (LJC.HasListItems(dataValues))
       {
         retValue = new DbRow()
         {
-          Values = new DbValues(dataValues)
+          Values = new LJCDataValues(dataValues)
         };
         Add(retValue);
       }
@@ -73,7 +75,8 @@ namespace LJCDBMessage
     }
 
     // Clones the structure of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public DbRows Clone()
     {
       var retValue = new DbRows();
@@ -85,7 +88,8 @@ namespace LJCDBMessage
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -98,7 +102,8 @@ namespace LJCDBMessage
     }
 
     // Serialize the object to the specified file.
-    /// <include path='items/Serialize2/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/Serialize2/*'/>
     public void Serialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
