@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -21,9 +22,9 @@ namespace LJCNetCommon
 
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='items/LJCMinSqlDate/*'/>
-    public static LJCDataColumns Keys(string propertyName, string searchValue)
+    public static LJCDataValues Keys(string propertyName, string searchValue)
     {
-      return new LJCDataColumns()
+      return new LJCDataValues()
       {
         { propertyName, searchValue },
       };
@@ -471,7 +472,12 @@ namespace LJCNetCommon
     /// <include path="members/BytesToText/*" file="Doc/NetCommon.xml"/>
     public static string BytesToText(byte[] bytes)
     {
-      string retValue = Encoding.UTF8.GetString(bytes);
+      string retValue = null;
+
+      if (bytes != null)
+      {
+        retValue = Encoding.UTF8.GetString(bytes);
+      }
       return retValue;
     }
 

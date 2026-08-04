@@ -33,8 +33,8 @@ namespace LJCNetCommon
     }
 
     // Checks if the key columns value has changed.
-    private static bool IsKeyColumnsChanged(LJCDataColumns newKeys
-      , LJCDataColumns currentKeys)
+    private static bool IsKeyColumnsChanged(LJCDataValues newKeys
+      , LJCDataValues currentKeys)
     {
       bool retValue = false;
 
@@ -280,7 +280,7 @@ namespace LJCNetCommon
     // The column is identified by its property names and values.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCGetUnique/*'/>
-    public LJCDataValue LJCGetUnique(LJCDataColumns keys = null)
+    public LJCDataValue LJCGetUnique(LJCDataValues keys = null)
     {
       LJCDataValue retValue = null;
 
@@ -324,7 +324,7 @@ namespace LJCNetCommon
     // Sorts on the current key columns.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCSort/*'/>
-    public void LJCSort(LJCDataColumns keys = null)
+    public void LJCSort(LJCDataValues keys = null)
     {
       if (LJC.HasListItems(keys))
       {
@@ -579,7 +579,7 @@ namespace LJCNetCommon
     // Gets or sets the key columns.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCKeyColumns/*'/>
-    public LJCDataColumns LJCKeys
+    public LJCDataValues LJCKeys
     {
       get => _Keys;
       set
@@ -599,7 +599,7 @@ namespace LJCNetCommon
         }
       }
     }
-    private LJCDataColumns _Keys;
+    private LJCDataValues _Keys;
 
     // The column for the specified name.
     /// <include file='Doc/LJCDataValues.xml'

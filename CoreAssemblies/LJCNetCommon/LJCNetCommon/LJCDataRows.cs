@@ -42,6 +42,24 @@ namespace LJCNetCommon
 
     // Gets property names list from data columns.
     /// <include file='Doc/LJCDataRows.xml'
+    ///  path='members/LJCKeyPropertyNames/*'/>
+    public List<string> LJCKeyPropertyNames(LJCDataValues dataValues)
+    {
+      List<string> retList = null;
+
+      if (LJC.HasListItems(dataValues))
+      {
+        retList = new List<string>();
+        foreach (var dataValue in dataValues)
+        {
+          retList.Add(dataValue.PropertyName);
+        }
+      }
+      return retList;
+    }
+
+    // Gets property names list from data columns.
+    /// <include file='Doc/LJCDataRows.xml'
     ///  path='members/LJCPropertyNames/*'/>
     public List<string> LJCPropertyNames(LJCDataColumns dataColumns)
     {
@@ -66,7 +84,7 @@ namespace LJCNetCommon
     // values.
     /// <include file='Doc/LJCDataRows.xml'
     ///  path='members/LJCGetUnique/*'/>
-    public LJCDataColumns LJCGetUnique(LJCDataColumns keys = null)
+    public LJCDataColumns LJCGetUnique(LJCDataValues keys = null)
     {
       LJCDataColumns retColumns = null;
 
@@ -98,7 +116,7 @@ namespace LJCNetCommon
 
       if (_IsPendingSort)
       {
-        var sortNames = LJCPropertyNames(_Keys);
+        var sortNames = LJCKeyPropertyNames(_Keys);
         if (sortNames != null)
         {
           var uniqueComparer = new DataRowKeyComparer
@@ -112,8 +130,8 @@ namespace LJCNetCommon
     }
 
     // Checks if the key columns value has changed.
-    private bool IsKeyColumnsChanged(LJCDataColumns newKeys
-      , LJCDataColumns currentKeys)
+    private bool IsKeyColumnsChanged(LJCDataValues newKeys
+      , LJCDataValues currentKeys)
     {
       bool retValue = false;
 
@@ -200,10 +218,10 @@ namespace LJCNetCommon
           int compareValue = NetString.CompareGreater;
           for (short index = 0; index < _Keys.Count; index++)
           {
-            var keyColumn = _Keys[index];
-            var propertyName = keyColumn.PropertyName;
+            var keyValue = _Keys[index];
+            var propertyName = keyValue.PropertyName;
             var columnValue = dataColumns.LJCGetString(propertyName);
-            compareValue = LJCCompareColumn(columnValue, keyColumn);
+            compareValue = LJCCompareColumn(columnValue, keyValue);
             if (index < _Keys.Count - 1)
             {
               // Parent key value is not equal.
@@ -248,7 +266,7 @@ namespace LJCNetCommon
     /// <include file='Doc/LJCDataRows.xml'
     ///  path='members/LJCCompareColumn/*'/>
     public int LJCCompareColumn(string columnValue
-      , LJCDataColumn keyColumn, bool ignoreCase = true)
+      , LJCDataValue keyColumn, bool ignoreCase = true)
     {
       string searchValue = null;
       if (keyColumn.Value != null)
@@ -265,7 +283,7 @@ namespace LJCNetCommon
     // Gets or sets the key columns.
     /// <include file='Doc/LJCDataRows.xml'
     ///  path='members/LJCKeys/*'/>
-    public LJCDataColumns LJCKeys
+    public LJCDataValues LJCKeys
     {
       get => _Keys;
       set
@@ -285,7 +303,7 @@ namespace LJCNetCommon
         }
       }
     }
-    private LJCDataColumns _Keys;
+    private LJCDataValues _Keys;
     #endregion
 
     #region Class Data

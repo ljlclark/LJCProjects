@@ -72,6 +72,12 @@ namespace TestData
       LJCColumns();
 
       // Gets a list of property names from the collection items.
+      LJCKeys();
+
+      // Gets a list of property names from the collection items.
+      LJCKeyPropertyNames();
+
+      // Gets a list of property names from the collection items.
       LJCPropertyNames();
 
       // Serializes the collection
@@ -105,7 +111,7 @@ namespace TestData
       #region Other Public Method Calls
 
       // Sets the caption properties.
-      LJCSetColumnCaptions();
+      LJCSetCaptions();
 
       // Maps the column property and rename values.
       LJCMapNames();
@@ -118,6 +124,9 @@ namespace TestData
 
       // Gets the column object value as a byte.
       LJCGetByte();
+
+      // Gets the column object value as a byte array.
+      LJCGetBytes();
 
       // Gets the column object value as a char.
       LJCGetChar();
@@ -156,10 +165,10 @@ namespace TestData
       #region Property Calls
 
       // Gets or sets the key columns.
-      LJCKeyColumns();
+      LJCKeys();
 
       // Returns the item with the supplied property name.
-      PropertyNameIndexer();
+      Indexer();
       #endregion
     }
     #endregion
@@ -171,7 +180,7 @@ namespace TestData
     {
       var methodName = "LJCDeserialize()";
 
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "ID", 1, "Int64" },
@@ -180,7 +189,7 @@ namespace TestData
       dataColumns.LJCSerialize();
 
       // Test Method
-      var newDataColumns = LJCDataColumns.LJCDeserialize();
+      var newDataColumns = LJCDataValues.LJCDeserialize();
 
       // Get where DataColumn property = "PropertyName", value = "ID".
       var keys = LJC.Keys("PropertyName", "ID");
@@ -195,10 +204,10 @@ namespace TestData
     {
       var methodName = "LJCObjectColumns()";
 
-      var dataValue = new LJCDataValue("Name");
+      var dataColumn = new LJCDataColumn("Name");
 
       // Test Method
-      var dataColumns = LJCDataColumns.LJCObjectColumns(dataValue);
+      var dataColumns = LJCDataColumns.LJCObjectColumns(dataColumn);
 
       // Get where DataColumn property = "PropertyName", value = "PropertyName".
       var keys = LJC.Keys("PropertyName", "PropertyName");
@@ -235,13 +244,13 @@ namespace TestData
     {
       var methodName = "LJCObjectPropertyNames()";
 
-      var dataValue = new LJCDataValue("Name");
+      var dataColumn = new LJCDataColumn("Name");
 
       // Test Method
-      var columnList = LJCDataColumns.LJCObjectPropertyNames(dataValue);
+      var columnList = LJCDataColumns.LJCObjectPropertyNames(dataColumn);
 
       var result = columnList[0];
-      var compare = "DataTypeName";
+      var compare = "AllowDBNull";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -250,7 +259,7 @@ namespace TestData
     {
       var methodName = "DataColumnsToDataValues()";
 
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "ID", 1, "Int64" },
@@ -290,7 +299,7 @@ namespace TestData
     {
       var methodName = "CopyConstructor()";
 
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "ID", 1, "Int64" },
@@ -298,7 +307,7 @@ namespace TestData
       };
 
       // Test Method
-      var newDataColumns = new LJCDataColumns(dataColumns);
+      var newDataColumns = new LJCDataValues(dataColumns);
 
       var dataColumn = newDataColumns[0];
       var result = dataColumn.DataTypeName;
@@ -314,7 +323,7 @@ namespace TestData
     {
       var methodName = "Clone()";
 
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "ID", 1, "Int64" },
@@ -335,7 +344,7 @@ namespace TestData
     {
       var methodName = "HasItems()";
 
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "ID", 1, "Int64" },
@@ -355,7 +364,7 @@ namespace TestData
     {
       var methodName = "LJCChanged()";
 
-      var dataColumns = new LJCDataColumns();
+      var dataColumns = new LJCDataValues();
 
       // Test Method
       var changed = dataColumns?.LJCChanged();
@@ -364,7 +373,7 @@ namespace TestData
       var compare = "0";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataColumns = new LJCDataColumns()
+      dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "ID", 1, "Int64" },
@@ -384,7 +393,7 @@ namespace TestData
     {
       var methodName = "LJCClearChanged()";
 
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "ID", 1, "Int64" },
@@ -433,6 +442,31 @@ namespace TestData
     }
 
     // Gets a list of property names from the collection items.
+    private void LJCKeyPropertyNames()
+    {
+      var methodName = "LJCPropertyNames()";
+
+      var dataValues = new LJCDataValues()
+      {
+        // PropertyName, Value, DataTypeName
+        { "ID", 1, "Int64" },
+        { "Name", "NameValue" },
+        { "Description", "DescriptionValue" },
+      };
+      var dataColumns = new LJCDataColumns
+      {
+        LJCKeys = dataValues
+      };
+
+      // Test Method
+      var propertyNames = dataColumns.LJCKeyPropertyNames();
+
+      var result = propertyNames[1];
+      var compare = "Name";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Gets a list of property names from the collection items.
     private void LJCPropertyNames()
     {
       var methodName = "LJCPropertyNames()";
@@ -458,7 +492,7 @@ namespace TestData
     {
       var methodName = "LJCSerialize()";
 
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "ID", 1, "Int64" },
@@ -468,7 +502,7 @@ namespace TestData
       // Test Method
       dataColumns.LJCSerialize();
 
-      var newDataColumns = LJCDataColumns.LJCDeserialize();
+      var newDataColumns = LJCDataValues.LJCDeserialize();
 
       // Get where DataColumn property = "PropertyName", value = "Name".
       var keys = LJC.Keys("PropertyName", "Name");
@@ -648,7 +682,7 @@ namespace TestData
     #region Other Public Methods
 
     // Sets the caption properties.
-    private void LJCSetColumnCaptions()
+    private void LJCSetCaptions()
     {
       var methodName = "LJCSetColumnCaptions()";
 
@@ -712,7 +746,7 @@ namespace TestData
     {
       var methodName = "LJCGetBoolean()";
 
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", "true", "Boolean" },
@@ -733,7 +767,7 @@ namespace TestData
       var methodName = "LJCGetByte()";
 
       var testByte = (byte)'C';
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", testByte, "byte" },
@@ -749,13 +783,35 @@ namespace TestData
       TestCommon.Write($"{methodName}", result, compare);
     }
 
+    // Gets the column object value as a byte array.
+    private void LJCGetBytes()
+    {
+      var methodName = "LJCGetByte()";
+
+      var text = "C";
+      var testBytes = LJC.TextToBytes(text);
+      var dataColumns = new LJCDataValues()
+      {
+        // PropertyName, Value, DataTypeName
+        { "TestValue", testBytes, "byte[]" },
+      };
+
+      // Test Method
+      var value = dataColumns.LJCGetBytes("TestValue");
+
+      // Check Result
+      var result = LJC.BytesToText(value);
+      var compare = "C";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
     // Gets the column object value as a char.
     private void LJCGetChar()
     {
       var methodName = "LJCGetChar()";
 
       var test = 'C';
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test, "char" },
@@ -775,7 +831,7 @@ namespace TestData
       var methodName = "LJCGetDbDateTime()";
 
       var test = new DateTime(2026, 1, 1);
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test, "DateTime" },
@@ -795,7 +851,7 @@ namespace TestData
       var methodName = "LJCGetDecimal()";
 
       var test = 3.14m;
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test, "Decimal" },
@@ -815,7 +871,7 @@ namespace TestData
       var methodName = "LJCGetDouble()";
 
       var test = 3.14d;
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test, "Double" },
@@ -835,7 +891,7 @@ namespace TestData
       var methodName = "LJCGetInt16()";
 
       var test = (short)3;
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test, "Int16" },
@@ -855,7 +911,7 @@ namespace TestData
       var methodName = "LJCGetInt32()";
 
       var test = 3;
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test, "Int32" },
@@ -875,7 +931,7 @@ namespace TestData
       var methodName = "LJCGetInt64()";
 
       var test = (long)3;
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test, "Int64" },
@@ -895,7 +951,7 @@ namespace TestData
       var methodName = "LJCGetSingle()";
 
       var test = 3.14f;
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test, "Single" },
@@ -915,7 +971,7 @@ namespace TestData
       var methodName = "LJCGetString()";
 
       var test = "3.14";
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test },
@@ -934,7 +990,7 @@ namespace TestData
       var methodName = "LJCGetValue()";
 
       var test = (object)3;
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test, "Object" },
@@ -954,7 +1010,7 @@ namespace TestData
       var methodName = "LJCSetValue()";
 
       var test = "3.14";
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test },
@@ -972,26 +1028,26 @@ namespace TestData
     #region Properties
 
     // Returns the item with the supplied property name.
-    private void LJCKeyColumns()
+    private void LJCKeys()
     {
       var methodName = "LJCKeyColumns()";
 
       // Get where DataColumn property = "PropertyName", value = "ID".
       var keys = LJC.Keys("PropertyName", "ID");
       var key = keys[0];
-      var result = key.ColumnName;
+      var result = key.PropertyName;
       result += $", {key.Value}";
       var compare = "PropertyName, ID";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Returns the item with the supplied property name.
-    private void PropertyNameIndexer()
+    private void Indexer()
     {
       var methodName = "PropertyNameIndexer()";
 
       var test = "3.14";
-      var dataColumns = new LJCDataColumns()
+      var dataColumns = new LJCDataValues()
       {
         // PropertyName, Value, DataTypeName
         { "TestValue", test },

@@ -401,7 +401,7 @@ namespace TestData
       // Get where DataColumn property = "PropertyName", value = "ID".
       var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName, "ID");
       var key = keys[0];
-      var result = key.ColumnName;
+      var result = key.PropertyName;
       result += $", {key.Value}";
       var compare = "PropertyName, ID";
       TestCommon.Write($"{methodName}", result, compare);
