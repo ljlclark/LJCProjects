@@ -14,138 +14,15 @@ using LJC = LJCNetCommon.NetCommon;
 namespace LJCGridDataLib
 {
   // Provides DataTable helpers.
-  /// <include path='items/TableData/*' file='Doc/TableData.xml'/>
+  /// <include file='Doc/TableData.xml'
+  ///  path='items/TableData/*'/>
   public class TableData
   {
-    #region Public Functions
-
-    // Creates a new DataColumns object.
-    /// <include path='items/CreateDataColumns/*' file='Doc/TableData.xml'/>
-    public static DataColumnCollection CreateDataColumns()
-    {
-      DataColumnCollection retValue;
-
-      DataTable workTable = new DataTable();
-      retValue = workTable.Columns;
-      return retValue;
-    }
-
-    // Clones a DataColumn object.
-    /// <include path='items/DataColumnClone/*' file='Doc/TableData.xml'/>
-    public static DataColumn DataColumnClone(DataColumn dataColumn)
-    {
-      DataColumn retValue = null;
-      if (dataColumn != null)
-      {
-        retValue = new DataColumn()
-        {
-          AllowDBNull = dataColumn.AllowDBNull,
-          AutoIncrement = dataColumn.AutoIncrement,
-          Caption = dataColumn.Caption,
-          ColumnName = dataColumn.ColumnName,
-          DataType = dataColumn.DataType,
-          DefaultValue = dataColumn.DefaultValue,
-          MaxLength = dataColumn.MaxLength,
-          Unique = dataColumn.Unique
-        };
-      }
-      return retValue;
-    }
-
-    // Clones a DataColumn collection.
-    /// <include path='items/DataColumnsClone/*' file='Doc/TableData.xml'/>
-    public static DataColumnCollection DataColumnsClone(DataTable dataTable)
-    {
-      DataColumn dataColumnClone;
-      DataColumnCollection retValue = null;
-
-      ArgumentDataTable(dataTable);
-
-      if (NetCommon.HasColumns(dataTable))
-      {
-        retValue = CreateDataColumns();
-        foreach (DataColumn dataColumn in dataTable.Columns)
-        {
-          dataColumnClone = DataColumnClone(dataColumn);
-          retValue.Add(dataColumnClone);
-        }
-      }
-      return retValue;
-    }
-
-    // Creates a LJCDataColumn object from a DataColumn object.
-    /// <include path='items/GetDbColumn/*' file='Doc/TableData.xml'/>
-    // Note: Also in LJCDBMessage.DbResult
-    public static LJCDataColumn GetDbColumn(DataColumn dataColumn)
-    {
-      LJCDataColumn retValue;
-
-      retValue = new LJCDataColumn()
-      {
-        AllowDBNull = dataColumn.AllowDBNull,
-        AutoIncrement = dataColumn.AutoIncrement,
-        Caption = dataColumn.ColumnName,
-        ColumnName = dataColumn.ColumnName,
-        DataTypeName = dataColumn.DataType.Name,
-        MaxLength = dataColumn.MaxLength,
-        PropertyName = dataColumn.ColumnName,
-        IsUniqueKey = dataColumn.Unique
-      };
-      return retValue;
-    }
-
-    // Creates a LJCDataColumns collection from a DataColumns collection.
-    /// <summary>
-    /// Creates a LJCDataColumns collection from a DataColumns collection.
-    /// </summary>
-    /// <param name="dataColumns"></param>
-    /// <returns></returns>
-    // Note: Also in LJCDBMessage.DbResult
-    public static LJCDataColumns GetDbColumns(DataColumnCollection dataColumns)
-    {
-      LJCDataColumns retValue = null;
-
-      if (HasColumns(dataColumns))
-      {
-        retValue = new LJCDataColumns();
-        foreach (DataColumn dataColumn in dataColumns)
-        {
-          LJCDataColumn dbColumn = GetDbColumn(dataColumn);
-          retValue.Add(dbColumn);
-        }
-      }
-      return retValue;
-    }
-
-    // Returns a set of DataColumns that match the supplied list.
-    /// <include path='items/GetDataColumns/*' file='Doc/TableData.xml'/>
-    public static DataColumnCollection GetDataColumns(DataColumnCollection dataColumns
-      , List<string> columnNames)
-    {
-      DataColumn dataColumnClone;
-      DataColumnCollection retValue = null;
-
-      if (HasColumns(dataColumns)
-        && LJC.HasListItems(columnNames))
-      {
-        // Create columns from names.
-        DataTable workTable = new DataTable();
-        foreach (string columnName in columnNames)
-        {
-          DataColumn dataColumn = dataColumns[columnName];
-          if (dataColumn != null)
-          {
-            dataColumnClone = DataColumnClone(dataColumn);
-            workTable.Columns.Add(dataColumnClone);
-          }
-        }
-        retValue = workTable.Columns;
-      }
-      return retValue;
-    }
+    #region Methods
 
     // Configure the Grid Columns from the DbRequest object definition.
-    /// <include path='items/GetGridColumns1/*' file='Doc/ResultData.xml'/>
+    /// <include file='Doc/ResultData.xml'
+    ///  path='items/GetGridColumns/*'/>
     public static LJCDataColumns GetGridColumns(DbRequest dbRequest
       , List<string> propertyNames = null)
     {
@@ -173,46 +50,13 @@ namespace LJCGridDataLib
       return retValue;
     }
 
-    // Creates a PropertyNames list from a DataColumns collection.
-    /// <include path='items/GetPropertyNames/*' file='Doc/TableData.xml'/>
-    public static List<string> GetPropertyNames(DataColumnCollection dataColumns)
-    {
-      List<string> retValue = null;
-
-      if (HasColumns(dataColumns))
-      {
-        retValue = new List<string>();
-        foreach (DataColumn dataColumn in dataColumns)
-        {
-          retValue.Add(dataColumn.ColumnName);
-        }
-      }
-      return retValue;
-    }
-
-    /// <summary>
-    /// Checks the DataColumnCollection object for items.
-    /// </summary>
-    /// <param name="dataColumns">The DataColumnCollection reference.</param>
-    /// <returns>true if there are items; otherwise false.</returns>
-    // Note: Also in LJCDBMessage.DbResult
-    public static bool HasColumns(DataColumnCollection dataColumns)
-    {
-      bool retValue = false;
-
-      if (NetCommon.HasColumns(dataColumns))
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Updates a grid row with the DataRow values.
-    /// <include path='items/RowSetValues/*' file='Doc/TableData.xml'/>
-    public static void RowSetValues(LJCGridRow ljcGridRow, DataRow dataRow
+    /// <include file='Doc/TableData.xml'
+    ///  path='items/RowSetValues/*'/>
+    public static void RowSetValues(LJCGridRow ljcGridRow, DataRow adoRow
       , LJCDataColumns dataDefinition)
     {
-      ArgumentDataRow(dataRow);
+      ArgumentDataRow(adoRow);
 
       object value;
       List<object> listValues = new List<object>();
@@ -232,73 +76,29 @@ namespace LJCGridDataLib
         }
 
         value = null;
-        if (dataRow.Table.Columns.Contains(dataColumnName))
+        if (adoRow.Table.Columns.Contains(dataColumnName))
         {
-          value = dataRow[dataColumnName];
+          value = adoRow[dataColumnName];
         }
         listValues.Add(value);
       }
       var values = listValues.ToArray();
       ljcGridRow.SetValues(values);
     }
+    #endregion
 
     #region Private Functions
 
-    // Add the Primary Key lookup values.
-    private static void AddPrimaryKeyValues(LJCDataColumns dataDefinition, LJCGridRow row
-      , LJCDataValue dbValue)
-    {
-      if (dbValue.Value != null)
-      {
-        //LJCDataColumn dbColumn = dataDefinition.LJCSearchPropertyName(dbValue.PropertyName);
-        var dbColumn = dataDefinition[dbValue.PropertyName];
-        if (dbColumn != null && dbColumn.IsPrimaryKey)
-        {
-          switch (dbColumn.DataTypeName)
-          {
-            case "Int32":
-              int intKeyValue = (int)dbValue.Value;
-              row.LJCSetInt32(dbColumn.ColumnName, intKeyValue);
-              break;
-
-            case "Int64":
-              long longKeyValue = (long)dbValue.Value;
-              row.LJCSetInt64(dbColumn.ColumnName, longKeyValue);
-              break;
-
-            case "String":
-              if (dbValue.Value != null)
-              {
-                row.LJCSetString(dbColumn.ColumnName, dbValue.Value.ToString());
-              }
-              break;
-          }
-        }
-      }
-    }
-
     // Checks the DataRow argument.
-    private static bool ArgumentDataRow(DataRow dataRow)
+    private static bool ArgumentDataRow(DataRow adoRow)
     {
-      if (null == dataRow)
+      if (null == adoRow)
       {
         var message = "Missing argument dataRow.";
         throw new ArgumentNullException(message);
       }
       return true;
     }
-
-    // Checks the DataTable argument.
-    private static bool ArgumentDataTable(DataTable dataTable)
-    {
-      if (null == dataTable)
-      {
-        var message = "Missing argument dataTable.";
-        throw new ArgumentNullException(message);
-      }
-      return true;
-    }
-    #endregion
     #endregion
   }
 }

@@ -124,7 +124,7 @@ namespace LJCNetCommon
     // Operator to create LJCDataValues from LJCDataColumns.
     // var dataValues = dataColumns;
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/DataColumnsToDataValues/*'/>
+    ///  path='members/ToDataValues/*'/>
     public static implicit operator LJCDataValues(LJCDataColumns dataColumns)
     {
       LJCDataValues retValues = new LJCDataValues();

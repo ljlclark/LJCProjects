@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCTableColumns.xml -->
+<members>
+  <!-- Static Methods -->
+  <Clone>
+    
+  </Clone>
+  <ColumnNames>
+    
+  </ColumnNames>
+  <Columns>
+    
+  </Columns>
+  <CreateColumns>
+    
+  </CreateColumns>
+  <HasColumns>
+    
+  </HasColumns>
+  <ToDataColumns>
+    
+  </ToDataColumns>
+</members>

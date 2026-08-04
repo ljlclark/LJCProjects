@@ -3,56 +3,71 @@
 <!-- Licensed under the MIT License. -->
 <!-- DbColumns.xml -->
 <members>
-  <DbColumns>
+  <LJCDataColumns>
     <summary>
       Represents a collection of
-      &lt;span class="userType"&gt;DbColumn&lt;/span&gt; objects.
+      &lt;span class="userType"&gt;LJCDataColumn&lt;/span&gt; objects.
     </summary>
     <remarks>
-      A DbColumn collection element can also be retrieved by name using
-      the collection object: columns["ColumnName"];
+      A DataColumn collection element can be retrieved by name using the
+      collection object: dataColumns["ColumnName"];
     </remarks>
-  </DbColumns>
+  </LJCDataColumns>
 
   <!-- Static Functions -->
-  <LJCCreateObjectColumns>
+  <LJCDeserialize>
     <summary>
-      Creates DbColumns from a Data Object.
+      Deserializes from the specified XML file.
     </summary>
-    <param name="dataObject">The Data Object value.</param>
+    <param name="fileSpec">The XML file specification.</param>
+    <returns>The LJCDataColumns collection.</returns>
+  </LJCDeserialize>
+  <LJCObjectColumns>
+    <summary>
+      Gets a collection of items from a data object.
+    </summary>
+    <param name="dataObject">The data object value.</param>
     <param name="dataDefinition">The data definitions.</param>
-    <returns>The DbColumns collection.</returns>
-  </LJCCreateObjectColumns>
-  <LJCGetPropertyNames>
+    <returns>The LJCDataColumns collection.</returns>
+  </LJCObjectColumns>
+  <LJCObjectColumnsInList>
     <summary>
-      Get the list of property names.
+      Gets a collection of items from a data object that match the supplied
+      property Names.
     </summary>
-    <returns>The PropertyNames list.</returns>
-  </LJCGetPropertyNames>
-  <DbValues>
+    <param name="dataObject">The data object value.</param>
+    <param name="propertyNames">The property names list.</param>
+    <returns>The LJCDataColumns collection.</returns>
+  </LJCObjectColumnsInList>
+  <LJCObjectPropertyNames>
     <summary>
-      Creates a
-      &lt;span class="userType"&gt;DbValues&lt;/span&gt;
-      object from a
-      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
-      (E)
+      Gets a list of property names from a data object.
     </summary>
-    <param name="dbColumns">
-      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+    <returns>The property names list.</returns>
+  </LJCObjectPropertyNames>
+  <ToDataValues>
+    <summary>
+      Operator to create
+      &lt;span class="userType"&gt;LJCDataValues&lt;/span&gt;
+      from
+      &lt;span class="userType"&gt;LJCDataColumns&lt;/span&gt;.
+    </summary>
+    <param name="dataColumns">
+      The &lt;span class="userType"&gt;LJCDataColumns&lt;/span&gt;
       object.
     </param>
     <example>
       <code>
         using LJCNetCommon;
 
-        DbColumns dbColumns = new DbColumns();
-        dbColumns.Add("Column1");
-        dbColumns.Add("Column2");
+        LJCDataColumns dataColumns = new LJCDataColumns();
+        dataColumns.Add("Column1");
+        dataColumns.Add("Column2");
 
-        DbValues dbValues = DbColumns;
+        var dataValues = dataColumns;
       </code>
     </example>
-  </DbValues>
+  </ToDataValues>
 
   <!-- Collection Methods -->
   <Add1>

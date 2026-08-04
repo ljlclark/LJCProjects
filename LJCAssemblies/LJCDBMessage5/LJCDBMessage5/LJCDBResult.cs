@@ -20,7 +20,6 @@ namespace LJCDBMessage5
     /// </summary>
     /// <param name="adoColumn">The DataColumn reference.</param>
     /// <returns>The DataColumn Object.</returns>
-    // Note: Also in LJCGridDataLib.TableData
     public static LJCDataColumn GetDataColumn(DataColumn adoColumn)
     {
       LJCDataColumn retValue;
@@ -44,7 +43,6 @@ namespace LJCDBMessage5
     /// </summary>
     /// <param name="adoColumns">The DataColumnCollection reference.</param>
     /// <returns>The LJCDataColumns object.</returns>
-    // Note: Also in LJCGridDataLib.TableData
     public static LJCDataColumns? GetDataColumns(DataColumnCollection adoColumns)
     {
       LJCDataColumns? retValue = null;
@@ -68,12 +66,11 @@ namespace LJCDBMessage5
     /// </summary>
     /// <param name="dataColumns">The DataColumnCollection reference.</param>
     /// <returns>true if there are items; otherwise false.</returns>
-    // Note: Also in LJCGridDataLib.TableData
-    public static bool HasColumns([NotNullWhen(true)] DataColumnCollection dataColumns)
+    public static bool HasColumns([NotNullWhen(true)] DataColumnCollection adoColumns)
     {
       bool retValue = false;
 
-      if (LJC.HasTableColumns(dataColumns))
+      if (LJC.HasTableColumns(adoColumns))
       {
         retValue = true;
       }
@@ -133,7 +130,8 @@ namespace LJCDBMessage5
     }
 
     // Deserializes the DbResult message.
-    /// <include path='items/DeserializeMessage/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/DeserializeMessage/*'/>
     public static LJCDBResult? DeserializeMessage(string result)
     {
       LJCDBResult? retValue = null;
@@ -151,8 +149,10 @@ namespace LJCDBMessage5
     }
 
     // Gets the result values from the data row.
-    /// <include path='items/GetRowValues/*' file='Doc/DbResult.xml'/>
-    public static LJCDataValues GetRowValues(LJCDataColumns dataColumns, DataRow dataRow)
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/GetRowValues/*'/>
+    public static LJCDataValues GetRowValues(LJCDataColumns dataColumns
+      , DataRow dataRow)
     {
       // Similar logic in LJCDBMessage.ResultConverter.GetPropertyName().
       object? value;
@@ -185,7 +185,8 @@ namespace LJCDBMessage5
     }
 
     // Checks if the result has Columns.
-    /// <include path='items/HasColumns1/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/HasColumns1/*'/>
     public static bool HasColumns([NotNullWhen(true)] LJCDBResult? dbResult)
     {
       bool retValue = false;
@@ -199,7 +200,8 @@ namespace LJCDBMessage5
     }
 
     // Checks if the result has Columns and Rows.
-    /// <include path='items/HasColumns1/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/HasColumns1/*'/>
     public static bool HasData(LJCDBResult dbResult)
     {
       bool retValue;
@@ -213,7 +215,8 @@ namespace LJCDBMessage5
     }
 
     // <summary>Checks if the result has Rows.</summary>
-    /// <include path='items/HasRows1/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/HasRows1/*'/>
     public static bool HasRows([NotNullWhen(true)] LJCDBResult? dbResult)
     {
       bool retValue = false;
@@ -227,9 +230,10 @@ namespace LJCDBMessage5
     }
 
     // Adds the join values.
-    /// <include path='items/AddJoinRowValues/*' file='Doc/DbResult.xml'/>
-    private static void AddJoinRowValues(LJCDataValues dataValues, DataRow dataRow
-      , LJCDBJoins? dbJoins)
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/AddJoinRowValues/*'/>
+    private static void AddJoinRowValues(LJCDataValues dataValues
+      , DataRow dataRow, LJCDBJoins? dbJoins)
     {
       if (LJC.HasListItems(dbJoins))
       {
@@ -251,7 +255,8 @@ namespace LJCDBMessage5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCDBResult()
     {
       mRequestTypeName = RequestType.Select.ToString();
@@ -262,7 +267,8 @@ namespace LJCDBMessage5
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCDBResult(LJCDBResult item)
     {
       mRequestTypeName = RequestType.Select.ToString();
@@ -283,17 +289,19 @@ namespace LJCDBMessage5
     }
 
     // Initializes an object instance with the DbResult object.
-    /// <include path='items/DbResultC1/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/DbResultC1/*'/>
     public LJCDBResult(LJCDBRequest dbRequest)
-      : this(dbRequest.RequestTypeName, dbRequest.TableName, dbRequest.SchemaName
-      , dbRequest.ProcedureName)
+      : this(dbRequest.RequestTypeName, dbRequest.TableName
+          , dbRequest.SchemaName, dbRequest.ProcedureName)
     {
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include path='items/DbResultC2/*' file='Doc/DbResult.xml'/>
-    public LJCDBResult(string requestTypeName, string? tableName, string? schemaName = null
-      , string? procedureName = null)
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/DbResultC2/*'/>
+    public LJCDBResult(string requestTypeName, string? tableName
+      , string? schemaName = null, string? procedureName = null)
     {
       mRequestTypeName = RequestType.Select.ToString();
 

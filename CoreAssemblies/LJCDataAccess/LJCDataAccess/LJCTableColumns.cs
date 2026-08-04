@@ -1,21 +1,26 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCTableColumns.cs
-using LJCNetCommon5;
+using LJCNetCommon;
+using System.Collections.Generic;
 using System.Data;
+using LJC = LJCNetCommon.NetCommon;
 
-namespace LJCDataAccess5
+namespace LJCDataAccess
 {
   // Contains methods to complement a DataColumnCollection object.
+  /// <include file='Doc/LJCTableColumns.xml'
+  ///  path='items/LJCTableColumns/*'/>
   public class LJCTableColumns
   {
     #region Static Methods
 
     // Clones a DataColumn collection.
-    /// <include path='items/Clone/*' file='Doc/LJCTableColumns.xml'/>
-    public static DataColumnCollection? Clone(DataColumnCollection adoColumns)
+    /// <include file='Doc/LJCTableColumns.xml'
+    ///  path='items/Clone/*'/>
+    public static DataColumnCollection Clone(DataColumnCollection adoColumns)
     {
-      DataColumnCollection? retTableColumns = null;
+      DataColumnCollection retTableColumns = null;
 
       if (HasColumns(adoColumns))
       {
@@ -33,15 +38,16 @@ namespace LJCDataAccess5
     }
 
     // Creates a PropertyNames list from a DataColumns collection.
-    /// <include path='items/GetPropertyNames/*' file='Doc/LJCTableColumns.xml'/>
-    public static List<string>? ColumnNames(DataColumnCollection adoColumns)
+    /// <include file='Doc/LJCTableColumns.xml'
+    ///  path='items/GetPropertyNames/*'/>
+    public static List<string> ColumnNames(DataColumnCollection adoColumns)
     {
-      List<string>? retValue = null;
+      List<string> retValue = null;
 
       if (HasColumns(adoColumns))
       {
         //retValue = new List<string>();
-        retValue = [];
+        retValue = new List<string>();
         foreach (DataColumn tableColumn in adoColumns)
         {
           retValue.Add(tableColumn.ColumnName);
@@ -51,12 +57,13 @@ namespace LJCDataAccess5
     }
 
     // Returns a set of DataColumns that match the supplied list.
-    /// <include path='items/Columns/*' file='Doc/LJCTableColumns.xml'/>
+    /// <include file='Doc/LJCTableColumns.xml'
+    ///  path='items/Columns/*'/>
     // Note: Also in LJCGridDataLib.TableData
-    public static DataColumnCollection? Columns(DataColumnCollection adoColumns
-      , List<string>? columnNames = null)
+    public static DataColumnCollection Columns(DataColumnCollection adoColumns
+      , List<string> columnNames = null)
     {
-      DataColumnCollection? retTableColumns = null;
+      DataColumnCollection retTableColumns = null;
 
       if (HasColumns(adoColumns))
       {
@@ -70,7 +77,7 @@ namespace LJCDataAccess5
           retTableColumns = CreateColumns();
           foreach (string columnName in columnNames)
           {
-            DataColumn? tableColumn = adoColumns[columnName];
+            DataColumn tableColumn = adoColumns[columnName];
             if (tableColumn != null)
             {
               var tableColumnClone = LJCTableColumn.Clone(tableColumn);
@@ -98,13 +105,14 @@ namespace LJCDataAccess5
     }
 
     // Checks the DataColumnCollection object for items.
-    /// <include path='items/HasColumns/*' file='Doc/LJCTableColumns.xml'/>
+    /// <include file='Doc/LJCTableColumns.xml'
+    ///  path='items/HasColumns/*'/>
     // Note: Also in LJCDBMessage.DbResult
     public static bool HasColumns(DataColumnCollection adoColumns)
     {
       bool retValue = false;
 
-      if (LJC.HasTableColumns(adoColumns))
+      if (LJC.HasColumns(adoColumns))
       {
         retValue = true;
       }
@@ -115,13 +123,13 @@ namespace LJCDataAccess5
     /// <include file='Doc/LJCTableColumns.xml'
     ///  path='items/ToDataColumns/*'/>
     // Note: Also in LJCDBMessage.DbResult
-    public static LJCDataColumns? ToDataColumns(DataColumnCollection adoColumns)
+    public static LJCDataColumns ToDataColumns(DataColumnCollection adoColumns)
     {
-      LJCDataColumns? retDataColumns = null;
+      LJCDataColumns retDataColumns = null;
 
       if (HasColumns(adoColumns))
       {
-        retDataColumns = [];
+        retDataColumns = new LJCDataColumns();
         foreach (DataColumn tableColumn in adoColumns)
         {
           var dataColumn = LJCTableColumn.ToDataColumn(tableColumn);

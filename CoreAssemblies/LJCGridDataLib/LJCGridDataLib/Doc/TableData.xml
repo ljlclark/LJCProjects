@@ -63,40 +63,40 @@
   </TableGridData>
   
   <!-- Static Functions -->
-  <CreateDataColumns>
+  <CreateADOColumns>
     <summary>
       Creates a new DataColumns object.
     </summary>
     <returns>The new DataColumns object.</returns>
-  </CreateDataColumns>
+  </CreateADOColumns>
   
-  <DataColumnClone>
+  <ADOColumnClone>
     <summary>
       Clones a DataColumn object.
     </summary>
-    <param name="dataColumn">The DataColumn object.</param>
+    <param name="adoColumn">The DataColumn object.</param>
     <returns>The cloned DataColumn object.</returns>
-  </DataColumnClone>
-  <DataColumnsClone>
+  </ADOColumnClone>
+  <ADOColumnsClone>
     <summary>
       Clones a DataColumn collection.
     </summary>
     <param name="dataTable">The DataTable object.</param>
     <returns>The cloned DataColumnCollection object.</returns>
-  </DataColumnsClone>
+  </ADOColumnsClone>
 
-  <GetDbColumn>
+  <GetDataColumn>
     <summary>
       Creates a DbColumn object from a DataColumn object.
     </summary>
-    <param name="dataColumn">The DataColumn object.</param>
+    <param name="adoColumn">The DataColumn object.</param>
     <returns>The DbColumn object.</returns>
-  </GetDbColumn>
-  <GetDbColumns>
+  </GetDataColumn>
+  <GetDataColumns1>
     <summary>
       Creates a DbColumns collection from a DataColumns collection.
     </summary>
-    <param name="dataColumns">The DataColumns collection.</param>
+    <param name="adoColumns">The DataColumns collection.</param>
     <returns>The DbColumns collection.</returns>
     <example>
       <code>
@@ -117,28 +117,34 @@
         }
       </code>
     </example>
-  </GetDbColumns>
-  <GetDataColumns>
+  </GetDataColumns1>
+  <GetDataColumns2>
     <summary>
       Returns a set of DataColumns that match the supplied list.
     </summary>
-    <param name="dataColumns">The DataColumnCollection object.</param>
+    <param name="adoColumns">The DataColumnCollection object.</param>
     <param name="columnNames">The column names.</param>
     <returns>The DataColumns object.</returns>
-  </GetDataColumns>
+  </GetDataColumns2>
+  <GetGridColumns>
+    
+  </GetGridColumns>
   <GetPropertyNames>
     <summary>
       Creates a PropertyNames list from a DataColumns collection.
     </summary>
-    <param name="dataColumns">The DataColumn collection.</param>
+    <param name="adoColumns">The DataColumn collection.</param>
     <returns>The ColumnNames list.</returns>
   </GetPropertyNames>
+  <HasColumns>
+    
+  </HasColumns>
   <RowSetValues>
     <summary>
       Updates a grid row with the DataRow values.
     </summary>
     <param name="ljcGridRow">The LJCGridRow object.</param>
-    <param name="dataRow">The DataRow object.</param>
+    <param name="adoRow">The DataRow object.</param>
     <param name="dataDefinition">The DataDefinition object.</param>
     <example>
       <code>

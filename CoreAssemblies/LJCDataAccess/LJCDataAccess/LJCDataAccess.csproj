@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="DataAccess.cs" />
     <Compile Include="DataCommon.cs" />
+    <Compile Include="LJCTableColumn.cs" />
+    <Compile Include="LJCTableColumns.cs" />
     <Compile Include="MySqlDataAccess.cs" />
     <Compile Include="ProcedureParameter.cs" />
     <Compile Include="ProcedureParameters.cs" />
@@ -74,6 +76,8 @@
     <Content Include="Doc\DataCommon.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Doc\LJCTableColumns.xml" />
+    <Content Include="Doc\LJCTableColumn.xml" />
     <Content Include="Doc\MySqlDataAccess.xml" />
     <Content Include="Doc\ProcedureParameters.xml" />
     <Content Include="Doc\ProjectDataAccess.xml">

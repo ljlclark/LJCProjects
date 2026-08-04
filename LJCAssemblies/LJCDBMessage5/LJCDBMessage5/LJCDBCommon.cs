@@ -204,7 +204,8 @@ namespace LJCDBMessage5
     }
 
     // Gets the Key Column using the column collection and Key Column values. 
-    private static LJCDataColumn? GetKeyColumn(LJCDataColumns dataColumns, LJCDataColumn keyColumn)
+    private static LJCDataColumn? GetKeyColumn(LJCDataColumns dataColumns
+      , LJCDataColumn keyColumn)
     {
       LJCDataColumn? retValue;
 
@@ -503,7 +504,8 @@ namespace LJCDBMessage5
 
     // Sets the Data Object property values from the data columns object.
     /// <include path='items/SetObjectValues1/*' file='Doc/DbCommon.xml'/>
-    public static void SetObjectValues(LJCDataColumns dataColumns, object dataObject)
+    public static void SetObjectValues(LJCDataColumns dataColumns
+      , object dataObject)
     {
       LJCReflect reflect;
 
@@ -517,7 +519,8 @@ namespace LJCDBMessage5
 
     // Sets the Data Object property values from the DbValues object.
     /// <include path='items/SetObjectValues2/*' file='Doc/DbCommon.xml'/>
-    public static void SetObjectValues(LJCDataValues dataValues, object dataObject)
+    public static void SetObjectValues(LJCDataValues dataValues
+      , object dataObject)
     {
       LJCReflect reflect;
 

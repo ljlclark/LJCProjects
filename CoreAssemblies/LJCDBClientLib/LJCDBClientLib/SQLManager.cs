@@ -180,8 +180,10 @@ namespace LJCDBClientLib
       var dataTable = mDataAccess.GetSchemaOnly(sql);
       if (dataTable != null)
       {
-        var dataColumns = TableData.DataColumnsClone(dataTable);
-        BaseDefinition = TableData.GetDbColumns(dataColumns);
+        //var dataColumns = TableData.ADOColumnsClone(dataTable);
+        //BaseDefinition = TableData.GetDataColumns(dataColumns);
+        var dataColumns = LJCTableColumns.Clone(dataTable.Columns);
+        BaseDefinition = LJCTableColumns.ToDataColumns(dataColumns);
         retValue = BaseDefinition.Clone();
       }
       return retValue;

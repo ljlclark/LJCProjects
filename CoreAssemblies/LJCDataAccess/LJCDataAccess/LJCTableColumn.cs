@@ -1,12 +1,14 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCTableColumn.cs
-using LJCNetCommon5;
+using LJCNetCommon;
 using System.Data;
 
-namespace LJCDataAccess5
+namespace LJCDataAccess
 {
   // Contains methods to complement a DataColumn object.
+  /// <include file='Doc/LJCTableColumn.xml'
+  ///  path='items/LJCTableColumn/*'/>
   public class LJCTableColumn
   {
     #region Static Methods
@@ -15,9 +17,9 @@ namespace LJCDataAccess5
     /// <include file='Doc/LJCTableColumn.xml'
     ///  path='items/DataColumnClone/*'/>
     // Note: Also in LJCGridDataLib.TableData
-    public static DataColumn? Clone(DataColumn adoColumn)
+    public static DataColumn Clone(DataColumn adoColumn)
     {
-      DataColumn? retTableColumn = null;
+      DataColumn retTableColumn = null;
       if (adoColumn != null)
       {
         retTableColumn = new DataColumn()
@@ -39,22 +41,22 @@ namespace LJCDataAccess5
     /// <include file='Doc/LJCTableColumn.xml'
     ///  path='items/ToDataColumn/*'/>
     // Note: Also in LJCDBMessage.DbResult
-    public static LJCDataColumn? ToDataColumn(DataColumn? tableColumn)
+    public static LJCDataColumn ToDataColumn(DataColumn adoColumn)
     {
-      LJCDataColumn? retTableColumn = null;
+      LJCDataColumn retTableColumn = null;
 
-      if (tableColumn != null)
+      if (adoColumn != null)
       {
         retTableColumn = new LJCDataColumn()
         {
-          AllowDBNull = tableColumn.AllowDBNull,
-          AutoIncrement = tableColumn.AutoIncrement,
-          Caption = tableColumn.ColumnName,
-          ColumnName = tableColumn.ColumnName,
-          DataTypeName = tableColumn.DataType.Name,
-          MaxLength = tableColumn.MaxLength,
-          PropertyName = tableColumn.ColumnName,
-          Unique = tableColumn.Unique
+          AllowDBNull = adoColumn.AllowDBNull,
+          AutoIncrement = adoColumn.AutoIncrement,
+          Caption = adoColumn.ColumnName,
+          ColumnName = adoColumn.ColumnName,
+          DataTypeName = adoColumn.DataType.Name,
+          MaxLength = adoColumn.MaxLength,
+          PropertyName = adoColumn.ColumnName,
+          IsUniqueKey = adoColumn.Unique
         };
       }
       return retTableColumn;

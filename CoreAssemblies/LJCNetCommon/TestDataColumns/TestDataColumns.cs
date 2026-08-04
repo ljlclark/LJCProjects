@@ -42,7 +42,7 @@ namespace TestData
       LJCObjectPropertyNames();
 
       // Operator to create LJCDataValues from LJCDataColumns.
-      DataColumnsToDataValues();
+      ToDataValues();
       #endregion
 
       #region Constructor Method Calls
@@ -255,7 +255,7 @@ namespace TestData
     }
 
     // Operator to creates LJCDataValues from LJCDataColumns.
-    private void DataColumnsToDataValues()
+    private void ToDataValues()
     {
       var methodName = "DataColumnsToDataValues()";
 
