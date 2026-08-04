@@ -24,16 +24,13 @@ namespace LJCDataTransformDAL
 		{
       // Add Calculated and Join columns.
       // Enables populating a Data Object and adding to a grid configuration.
-      var dataColumn = DataDefinition.Add(TransformMap.ColumnSourceColumnName);
-			dataColumn.Caption = "Name";
-      dataColumn = DataDefinition.Add(TransformMap.ColumnSourceDescription);
-      dataColumn.Caption = "Description";
-      dataColumn = DataDefinition.Add(TransformMap.ColumnTargetColumnName);
-      dataColumn.Caption = "Name";
-      dataColumn = DataDefinition.Add(TransformMap.ColumnTargetDescription);
-			dataColumn.Caption = "Description";
-      dataColumn = DataDefinition.Add(TransformMap.ColumnMapTypeName);
-      dataColumn.Caption = "Map Type";
+      DataDefinition.Add(TransformMap.ColumnSourceColumnName, caption: "Name");
+      DataDefinition.Add(TransformMap.ColumnSourceDescription
+        , caption: "Description");
+      DataDefinition.Add(TransformMap.ColumnTargetColumnName, caption: "Name");
+      DataDefinition.Add(TransformMap.ColumnTargetDescription
+        , caption: "Description");
+      DataDefinition.Add(TransformMap.ColumnMapTypeName, caption: "Map Type");
       DataDefinition.Add("LayoutColumnID");
 
       // Create the list of database assigned columns.

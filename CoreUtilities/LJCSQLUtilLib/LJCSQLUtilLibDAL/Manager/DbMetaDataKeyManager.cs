@@ -32,12 +32,12 @@ namespace LJCSQLUtilLibDAL
 
 			// Add Calculated and Join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			var dataColumn = DataDefinition.Add(DbMetaDataKey.ColumnColumnName);
-      dataColumn.Caption = "Column Name";
-      dataColumn = DataDefinition.Add(DbMetaDataKey.ColumnToTableName);
-      dataColumn.Caption = "To Table Name";
-      dataColumn = DataDefinition.Add(DbMetaDataKey.ColumnToColumnName);
-      dataColumn.Caption = "To Column Name";
+			DataDefinition.Add(DbMetaDataKey.ColumnColumnName
+        , caption: "Column Name");
+      DataDefinition.Add(DbMetaDataKey.ColumnToTableName
+        , caption: "To Table Name");
+      DataDefinition.Add(DbMetaDataKey.ColumnToColumnName
+        , caption: "To Column Name");
 
       // Create the list of database assigned columns.
       SetDbAssignedColumns(new string[]

@@ -23,20 +23,16 @@ namespace LJCFacilityManagerDAL
 
 			// Add calculated and join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			var dataColumn = DataDefinition.Add(Address.ColumnCityStateZip);
-      dataColumn.Caption = "City, State Zip";
-      dataColumn = DataDefinition.Add(RegionData.ColumnName
-        , Address.PropertyRegionName);
-      dataColumn.Caption = "Region Name";
-      dataColumn = DataDefinition.Add(Province.ColumnName
-        , Address.PropertyProvinceName);
-      dataColumn.Caption = "Province Name";
-      dataColumn = DataDefinition.Add(City.ColumnName
-        , Address.PropertyCityName);
-      dataColumn.Caption = "City Name";
-      dataColumn = DataDefinition.Add(CitySection.ColumnName
-        , Address.PropertyCitySectionName);
-      dataColumn.Caption = "City Section Name";
+			DataDefinition.Add(Address.ColumnCityStateZip
+        , caption: "City, State Zip");
+      DataDefinition.Add(RegionData.ColumnName, Address.PropertyRegionName
+        , caption: "Region Name");
+      DataDefinition.Add(Province.ColumnName, Address.PropertyProvinceName
+        , caption: "Province Name");
+      DataDefinition.Add(City.ColumnName, Address.PropertyCityName
+        , caption: "City Name");
+      DataDefinition.Add(CitySection.ColumnName, Address.PropertyCitySectionName
+        , caption: "City Section Name");
 
       // Create the list of database assigned columns.
       SetDbAssignedColumns(new string[]

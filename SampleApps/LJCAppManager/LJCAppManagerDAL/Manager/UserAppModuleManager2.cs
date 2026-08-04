@@ -29,10 +29,8 @@ namespace LJCAppManagerDAL
 			MapNames(UserAppModule.ColumnAppModuleID, UserAppModule.PropertyAppModuleID);
 
 			// Add calculated and join columns.
-			var dataColumn = DataDefinition.Add("TypeName");
-      dataColumn.Caption = "Module Name";
-      DataDefinition.Add("ModuleTitle");
-      dataColumn.Caption = "Module Title";
+			DataDefinition.Add("TypeName", caption: "Module Name");
+      DataDefinition.Add("ModuleTitle", caption: "Module Title");
     }
     #endregion
 

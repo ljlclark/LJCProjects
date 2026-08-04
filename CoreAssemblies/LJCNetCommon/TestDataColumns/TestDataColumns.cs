@@ -661,13 +661,10 @@ namespace TestData
       };
 
       var newDataColumns = new LJCDataColumns();
-      var dataColumn = newDataColumns.Add("ID", "1");
-      dataColumn.DataTypeName = "Int64";
-      dataColumn.Caption = "ID Caption";
-      dataColumn = newDataColumns.Add("Name", "NameValue");
-      dataColumn.Caption = "Name Caption";
-      dataColumn = newDataColumns.Add("Description", "DescriptionValue");
-      dataColumn.Caption = "Description Caption";
+      newDataColumns.Add("ID", "1", "Int64", caption: "ID Caption");
+      newDataColumns.Add("Name", "NameValue", caption: "Name Caption");
+      newDataColumns.Add("Description", "DescriptionValue"
+        , caption: "Description Caption");
 
       // Test Method
       newDataColumns.LJCSetCaptions(dataColumns);

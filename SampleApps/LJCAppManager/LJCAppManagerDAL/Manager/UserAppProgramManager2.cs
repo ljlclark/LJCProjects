@@ -28,10 +28,8 @@ namespace LJCAppManagerDAL
 			MapNames(UserAppProgram.ColumnAppProgramID, UserAppProgram.PropertyAppProgramID);
 
 			// Add calculated and join columns.
-			var dataColumn = DataDefinition.Add("FileName");
-      dataColumn.Caption = "File Name";
-      dataColumn = DataDefinition.Add("Title");
-      dataColumn.Caption = "Program Title";
+			DataDefinition.Add("FileName", caption: "File Name");
+      DataDefinition.Add("Title", caption: "Program Title");
     }
     #endregion
 

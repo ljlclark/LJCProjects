@@ -21,10 +21,10 @@ namespace LJCFacilityManagerDAL
 
 			// Add calculated and join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			var dataColumn = DataDefinition.Add(Equipment.ColumnTypeDescription);
-      dataColumn.Caption = "Code Type Description";
-      dataColumn = DataDefinition.Add(Equipment.ColumnUnitDescription);
-      dataColumn.Caption = "Unit Description";
+			DataDefinition.Add(Equipment.ColumnTypeDescription
+        , caption: "Code Type Description");
+      DataDefinition.Add(Equipment.ColumnUnitDescription
+        , caption: "Unit Description");
 
       // Create the list of database assigned columns.
       // And make sure the AutoIncrement value is set.

@@ -24,8 +24,8 @@ namespace LJCFacilityManagerDAL
 
 			// Add calculated and join columns.
 			// Enables populating a Data Object and adding to a grid configuration.
-			var dataColumn = DataDefinition.Add(UnitPerson.PropertyUnitDescription);
-      dataColumn.Caption = "Unit Description";
+			DataDefinition.Add(UnitPerson.PropertyUnitDescription
+        , caption: "Unit Description");
     }
 
 		#region Joins

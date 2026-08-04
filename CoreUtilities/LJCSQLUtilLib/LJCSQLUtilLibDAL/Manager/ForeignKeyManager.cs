@@ -30,16 +30,11 @@ namespace LJCSQLUtilLibDAL
 
       // Add calculated and join columns.
       // Enables populating a Data Object and adding to a grid configuration.
-      var dataColumn = DataDefinition.Add("TargetConstraint");
-      dataColumn.Caption = "Target Constraint";
-      dataColumn = DataDefinition.Add("UpdateRule");
-      dataColumn.Caption = "Update Rule";
-      dataColumn = DataDefinition.Add("DeleteRule");
-      dataColumn.Caption = "Delete Rule";
-      dataColumn = DataDefinition.Add("TargetTable");
-      dataColumn.Caption = "Target Table";
-      dataColumn = DataDefinition.Add("TargetColumn");
-      dataColumn.Caption = "Target Column";
+      DataDefinition.Add("TargetConstraint", caption: "Target Constraint");
+      DataDefinition.Add("UpdateRule", caption: "Update Rule");
+      DataDefinition.Add("DeleteRule", caption: "Delete Rule");
+      DataDefinition.Add("TargetTable", caption: "Target Table");
+      DataDefinition.Add("TargetColumn", caption: "Target Column");
     }
     #endregion
 

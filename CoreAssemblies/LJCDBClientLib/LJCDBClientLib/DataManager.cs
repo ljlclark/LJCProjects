@@ -530,12 +530,9 @@ namespace LJCDBClientLib
 
       // Create result columns.
       retValue.Columns = new LJCDataColumns();
-      var addDataColumn = retValue.Columns.Add("ColumnName");
-      addDataColumn.Caption = "Column Name";
-      addDataColumn = retValue.Columns.Add("PropertyName");
-      addDataColumn.Caption = "Property Name";
-      addDataColumn = retValue.Columns.Add("RenameAs");
-      addDataColumn.Caption = "Rename As";
+      retValue.Columns.Add("ColumnName", caption: "Column Name");
+      retValue.Columns.Add("PropertyName", caption: "Property Name");
+      retValue.Columns.Add("RenameAs", caption: "Rename As");
       return retValue;
     }
     #endregion
