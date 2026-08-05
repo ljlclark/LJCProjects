@@ -15,7 +15,8 @@ namespace LJCDBMessage
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DbSqlBuilderC/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/DbSqlBuilderC/*'/>
     public DbSqlBuilder(DbRequest dbRequest)
     {
       mDbRequest = dbRequest;

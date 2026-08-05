@@ -14,7 +14,8 @@ namespace LJCDBMessage
     #region Static DataTable Functions
 
     // Create table headings from a DataTable.
-    /// <include path='items/DataTableHeadings/*' file='Doc/HTMLTableData.xml'/>
+    /// <include file='Doc/HTMLTableData.xml'
+    ///  path='items/DataTableHeadings/*'/>
     public static string DataTableHeadings(DataTable dataTable)
     {
       string retValue = null;
@@ -36,7 +37,8 @@ namespace LJCDBMessage
     }
 
     // Creates an HTML table from a DataTable.
-    /// <include path='items/DataTableHTML/*' file='Doc/HTMLTableData.xml'/>
+    /// <include file='Doc/HTMLTableData.xml'
+    ///  path='items/DataTableHTML/*'/>
     public static string DataTableHTML(DataTable dataTable, int maxRows = 0)
     {
       string retValue = null;
@@ -59,7 +61,8 @@ namespace LJCDBMessage
     }
 
     // Creates table rows from a DataTable.
-    /// <include path='items/DataTableRows/*' file='Doc/HTMLTableData.xml'/>
+    /// <include file='Doc/HTMLTableData.xml'
+    ///  path='items/DataTableRows/*'/>
     public static string DataTableRows(DataTable dataTable, int maxRows = 0)
     {
       string retValue = null;
@@ -95,7 +98,8 @@ namespace LJCDBMessage
     #region Static Data Object Functions
 
     // Create table headings from a Data Object.
-    /// <include path='items/DataHeadings/*' file='Doc/HTMLTableData.xml'/>
+    /// <include file='Doc/HTMLTableData.xml'
+    ///  path='items/DataHeadings/*'/>
     public static string DataHeadings(List<object> dataObjects
       , List<string> propertyNames = null)
     {
@@ -125,7 +129,8 @@ namespace LJCDBMessage
     }
 
     // Create an HTML table from a Data Object.
-    /// <include path='items/DataHTML/*' file='Doc/HTMLTableData.xml'/>
+    /// <include file='Doc/HTMLTableData.xml'
+    ///  path='items/DataHTML/*'/>
     public static string DataHTML(List<object> dataObjects
       , List<string> propertyNames, int maxRows = 0)
     {
@@ -149,7 +154,8 @@ namespace LJCDBMessage
     }
 
     // Create table rows from a Data Object.
-    /// <include path='items/DataRows/*' file='Doc/HTMLTableData.xml'/>
+    /// <include file='Doc/HTMLTableData.xml'
+    ///  path='items/DataRows/*'/>
     public static string DataRows(List<object> dataObjects
       , List<string> propertyNames = null, int maxRows = 0)
     {
@@ -197,7 +203,8 @@ namespace LJCDBMessage
     #region Static DbResult Functions.
 
     // Create table headings from a DbResult.
-    /// <include path='items/ResultHeadings/*' file='Doc/HTMLTableData.xml'/>
+    /// <include file='Doc/HTMLTableData.xml'
+    ///  path='items/ResultHeadings/*'/>
     public static string ResultHeadings(DbResult dbResult, TextState textState)
     {
       string retValue = null;
@@ -218,7 +225,8 @@ namespace LJCDBMessage
     }
 
     // Creates an HTML table from a DbResult.
-    /// <include path='items/ResultHTML/*' file='Doc/HTMLTableData.xml'/>
+    /// <include file='Doc/HTMLTableData.xml'
+    ///  path='items/ResultHTML/*'/>
     public static string ResultHTML(DbResult dbResult, TextState textState
       , int maxRows = 0)
     {
@@ -244,7 +252,8 @@ namespace LJCDBMessage
     }
 
     // Create table rows from a DbResult.
-    /// <include path='items/ResultRows/*' file='Doc/HTMLTableData.xml'/>
+    /// <include file='Doc/HTMLTableData.xml'
+    ///  path='items/ResultRows/*'/>
     public static string ResultRows(DbResult dbResult, TextState textState
       , int maxRows = 0)
     {

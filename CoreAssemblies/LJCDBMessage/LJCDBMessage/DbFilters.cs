@@ -8,13 +8,15 @@ using LJC = LJCNetCommon.NetCommon;
 namespace LJCDBMessage
 {
   // Represents a collection of DbFilter objects.
-  /// <include path='items/DbFilters/*' file='Doc/DbFilters.xml'/>
+  /// <include file='Doc/DbFilters.xml'
+  ///  path='items/DbFilters/*'/>
   public class DbFilters : List<DbFilter>
   {
     #region Static Functions
 
     // Creates the SQL Soundex filters from the supplied values.
-    /// <include path='items/SQLSoundexFilters/*' file='Doc/DbFilters.xml'/>
+    /// <include file='Doc/DbFilters.xml'
+    ///  path='items/SQLSoundexFilters/*'/>
     public static DbFilters SQLSoundexFilters(string columnName
       , string searchValue, string soundexColumn = null)
     {
@@ -32,7 +34,8 @@ namespace LJCDBMessage
     }
 
     // Creates the Soundex filters from the supplied values.
-    /// <include path='items/SoundexFilters/*' file='Doc/DbFilters.xml'/>
+    /// <include file='Doc/DbFilters.xml'
+    ///  path='items/SoundexFilters/*'/>
     public static DbFilters SoundexFilters(string pColumnName, string pSearchValue
       , string lColumnName = null, string lSearchValue = null)
     {
@@ -63,13 +66,15 @@ namespace LJCDBMessage
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DbFiltersC/*' file='Doc/DbFilters.xml'/>
+    /// <include file='Doc/DbFilters.xml'
+    ///  path='items/DbFiltersC/*'/>
     public DbFilters()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public DbFilters(DbFilters items)
     {
       if (LJC.HasListItems(items))
@@ -85,7 +90,8 @@ namespace LJCDBMessage
     #region Collection Methods
 
     // Creates and adds the element from the supplied values.
-    /// <include path='items/Add1/*' file='Doc/DbFilters.xml'/>
+    /// <include file='Doc/DbFilters.xml'
+    ///  path='items/Add1/*'/>
     public DbConditions Add(string filterBooleanOperator = "and"
       , string conditionSetBooleanOperator = "and", string name = "Filter")
     {
@@ -103,7 +109,8 @@ namespace LJCDBMessage
     }
 
     // Creates and adds the element from the supplied values.
-    /// <include path='items/Add2/*' file='Doc/DbFilters.xml'/>
+    /// <include file='Doc/DbFilters.xml'
+    ///  path='items/Add2/*'/>
     public DbFilter Add(string name, DbConditionSet dbConditionSet
       , DbFilters dbFilters = null, string booleanOperator = "and")
     {
@@ -119,7 +126,8 @@ namespace LJCDBMessage
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public DbFilters Clone()
     {
       DbFilters retValue = new DbFilters();

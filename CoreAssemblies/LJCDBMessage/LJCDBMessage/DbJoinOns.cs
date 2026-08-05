@@ -13,13 +13,15 @@ namespace LJCDBMessage
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public DbJoinOns()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public DbJoinOns(DbJoinOns items)
     {
       if (LJC.HasListItems(items))
@@ -35,7 +37,8 @@ namespace LJCDBMessage
     #region Collection Methods
 
     // Creates and adds the element from the supplied values.
-    /// <include path='items/Add/*' file='Doc/DbJoinOns.xml'/>
+    /// <include file='Doc/DbJoinOns.xml'
+    ///  path='items/Add/*'/>
     public DbJoinOn Add(string fromColumnName, string toColumnName
       , string joinOperator = "=")
     {
@@ -52,7 +55,8 @@ namespace LJCDBMessage
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public DbJoinOns Clone()
     {
       DbJoinOns retValue = new DbJoinOns();

@@ -84,7 +84,8 @@ namespace LJCDBMessage
     #region Data Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public DbRequest Clone()
     {
       DbRequest retValue = MemberwiseClone() as DbRequest;

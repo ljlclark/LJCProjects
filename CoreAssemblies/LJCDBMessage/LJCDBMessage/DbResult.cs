@@ -383,7 +383,8 @@ namespace LJCDBMessage
     #region Private Methods
 
     // Adds the join values.
-    /// <include path='items/AddJoinRowValues/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/AddJoinRowValues/*'/>
     private void AddJoinRowValues(LJCDataValues dbValues, DataRow dataRow
       , DbJoins dbJoins)
     {

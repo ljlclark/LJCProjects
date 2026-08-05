@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbConditionSet.cs
 using LJCNetCommon;
@@ -6,20 +6,23 @@ using LJCNetCommon;
 namespace LJCDBMessage
 {
   // Represents the conditions and properties.
-  /// <include path='items/DbConditionSet/*' file='Doc/DbConditionSet.xml'/>
+  /// <include file='Doc/DbConditionSet.xml'
+  ///  path='items/DbConditionSet/*'/>
   public class DbConditionSet
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DbConditionSetC/*' file='Doc/DbConditionSet.xml'/>
+    /// <include file='Doc/DbConditionSet.xml'
+    ///  path='items/DbConditionSetC/*'/>
     public DbConditionSet()
     {
       Conditions = new DbConditions();
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public DbConditionSet(DbConditionSet item)
     {
       BooleanOperator = item.BooleanOperator;
@@ -30,7 +33,8 @@ namespace LJCDBMessage
     #region Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='Doc/DbConditionSet.xml'/>
+    /// <include file='Doc/DbConditionSet.xml'
+    ///  path='items/Clone/*'/>
     public DbConditionSet Clone()
     {
       DbConditionSet retValue = MemberwiseClone() as DbConditionSet;
