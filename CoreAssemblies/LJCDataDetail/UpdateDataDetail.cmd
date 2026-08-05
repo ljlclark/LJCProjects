@@ -38,10 +38,6 @@ set src=%assmRoot%LJCDBMessage\LJCDBMessage\%bin%
 echo copy %src%\LJCDBMessage.dll %to%
 copy %src%\LJCDBMessage.dll %to%
 
-set src=%assmRoot%LJCGridDataLib\LJCGridDataLib\%bin%
-echo copy %src%\LJCGridDataLib.dll %to%
-copy %src%\LJCGridDataLib.dll %to%
-
 set src=%assmRoot%LJCNetCommon\LJCNetCommon\%bin%
 echo copy %src%\LJCNetCommon.dll %to%
 copy %src%\LJCNetCommon.dll %to%

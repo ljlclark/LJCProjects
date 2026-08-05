@@ -110,10 +110,6 @@ set src=%assmRoot%LJCDBServiceLib\LJCDBServiceLib\%bin%
 echo copy %src%\LJCDBServiceLib.dll %to%
 copy %src%\LJCDBServiceLib.dll %to%
 
-set src=%assmRoot%LJCGridDataLib\LJCGridDataLib\%bin%
-echo copy %src%\LJCGridDataLib.dll %to%
-copy %src%\LJCGridDataLib.dll %to%
-
 set src=%appsRoot%LJCRegionManager\LJCRegionDAL\%bin%
 echo copy %src%\LJCRegionDAL.dll %to%
 copy %src%\LJCRegionDAL.dll %to%

@@ -54,10 +54,6 @@ set src=LJCDBViewDAL\LJCDBViewDAL\%bin%
 echo copy %assmRoot%%src%\LJCDBViewDAL.dll %to%
 copy %assmRoot%%src%\LJCDBViewDAL.dll %to%
 
-set src=LJCGridDataLib\LJCGridDataLib\%bin%
-echo copy %assmRoot%%src%\LJCGridDataLib.dll %to%
-copy %assmRoot%%src%\LJCGridDataLib.dll %to%
-
 set src=LJCNetCommon\LJCNetCommon\%bin%
 echo copy %assmRoot%%src%\LJCNetCommon.dll %to%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%

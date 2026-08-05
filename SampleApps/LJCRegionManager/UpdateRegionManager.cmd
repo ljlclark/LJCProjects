@@ -33,9 +33,6 @@ copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
 set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
 copy %assmRoot%%src%\LJCDBServiceLib.dll %to%
 
-set src=LJCGridDataLib\LJCGridDataLib\%bin%
-copy %assmRoot%%src%\LJCGridDataLib.dll %to%
-
 set src=LJCNetCommon\LJCNetCommon\%bin%
 copy %assmRoot%%src%\LJCNetCommon.dll %to%
 
@@ -81,9 +78,6 @@ copy %assmRoot%%src%\LJCDBDataAccess.dll %to%
 
 set src=LJCDBServiceLib\LJCDBServiceLib\%bin%
 copy %assmRoot%%src%\LJCDBServiceLib.dll %to%
-
-set src=LJCGridDataLib\LJCGridDataLib\%bin%
-copy %assmRoot%%src%\LJCGridDataLib.dll %to%
 
 set src=LJCLibraries\LJCWinFormControls\%bin%
 copy %assmRoot%%src%\LJCWinFormCommon.dll %to%

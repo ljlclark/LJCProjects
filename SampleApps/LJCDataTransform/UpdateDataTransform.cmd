@@ -50,10 +50,6 @@ set src=%assmRoot%LJCDBServiceLib\LJCDBServiceLib\%bin%
 echo copy %src%\LJCDBServiceLib.dll %to%
 copy %src%\LJCDBServiceLib.dll %to%
 
-set src=%assmRoot%LJCGridDataLib\LJCGridDataLib\%bin%
-echo copy %src%\LJCGridDataLib.dll %to%
-copy %src%\LJCGridDataLib.dll %to%
-
 set src=%assmRoot%LJCNetCommon\LJCNetCommon\%bin%
 echo copy %src%\LJCNetCommon.dll %to%
 copy %src%\LJCNetCommon.dll %to%
@@ -145,10 +141,6 @@ rem copy %src%\LJCDataTransformDAL.dll %to%
 rem set src=%utilRoot%LJCDataTransform\LJCTransformManager\%bin%
 rem echo copy %src%\LJCTransformManager.exe %to%
 rem copy %src%\LJCTransformManager.exe %to%
-
-set src=%assmRoot%LJCGridDataLib\LJCGridDataLib\%bin%
-echo copy %src%\LJCGridDataLib.dll %to%
-copy %src%\LJCGridDataLib.dll %to%
 
 rem -----------------------------
 set to=%toRoot%TransformServiceTest\%bin%
