@@ -52,9 +52,6 @@
     <Reference Include="LJCDBServiceLib">
       <HintPath>..\External\LJCDBServiceLib.dll</HintPath>
     </Reference>
-    <Reference Include="LJCGridDataLib">
-      <HintPath>..\External\LJCGridDataLib.dll</HintPath>
-    </Reference>
     <Reference Include="LJCNetCommon">
       <HintPath>..\External\LJCNetCommon.dll</HintPath>
     </Reference>

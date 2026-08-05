@@ -68,16 +68,6 @@ msbuild CoreAssemblies\LJCLibraries\LJCLibraries.sln
 
 set /a counter+=1
 echo - >> Build.txt
-set marker=----------------- %counter% - LJCGridDataLib --------------- >> Build.txt
-echo.
-echo                                         %marker%
-echo %marker% >> Build.txt
-echo LJCGridDataLib >> Build.txt
-call CoreAssemblies\LJCGridDataLib\UpdateGridDataLib.cmd >> Build.txt
-msbuild CoreAssemblies\LJCGridDataLib\LJCGridDataLib.sln
-
-set /a counter+=1
-echo - >> Build.txt
 set marker=----------------- %counter% - LJCDBServiceLib ------------- >> Build.txt
 echo.
 echo                                         %marker%

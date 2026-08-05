@@ -13,7 +13,7 @@ namespace LJCDBMessage
   [XmlRoot("DbRequest")]
   public class DbRequest
   {
-    #region Static Functions
+    #region Static Methods
 
     // Deserializes the DbRequest message.
     /// <include file='Doc/DbRequest.xml'
@@ -124,6 +124,33 @@ namespace LJCDBMessage
     public void Serialize(string fileSpec)
     {
       NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
+    }
+    #endregion
+
+    #region Additional Methods
+
+    // Configure the Grid Columns from the DbRequest object definition.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/GridColumns/*'/>
+    public LJCDataColumns GridColumns(List<string> propertyNames = null)
+    {
+      var retValue = Columns.Clone();
+      if (propertyNames != null)
+      {
+        retValue = Columns.LJCColumns(propertyNames);
+        if (Joins != null)
+        {
+          foreach (DbJoin dbJoin in Joins)
+          {
+            retValue = dbJoin.Columns.LJCColumns(propertyNames);
+            foreach (LJCDataColumn dbColumn in retValue)
+            {
+              retValue.Add(dbColumn.Clone());
+            }
+          }
+        }
+      }
+      return retValue;
     }
     #endregion
 

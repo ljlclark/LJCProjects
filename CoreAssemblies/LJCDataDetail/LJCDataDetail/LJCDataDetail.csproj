@@ -49,9 +49,6 @@
     <Reference Include="LJCDBMessage">
       <HintPath>..\External\LJCDBMessage.dll</HintPath>
     </Reference>
-    <Reference Include="LJCGridDataLib">
-      <HintPath>..\External\LJCGridDataLib.dll</HintPath>
-    </Reference>
     <Reference Include="LJCNetCommon, Version=2.2.521.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External\LJCNetCommon.dll</HintPath>

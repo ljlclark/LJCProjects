@@ -4,6 +4,8 @@
 using System;
 using System.Data;
 using System.Xml.Serialization;
+using LJCDataAccess;
+
 //using LJCGridDataLib;
 using LJCNetCommon;
 using LJC = LJCNetCommon.NetCommon;
@@ -26,7 +28,7 @@ namespace LJCDBMessage
 
       if (NetString.HasValue(result))
       {
-        retValue = NetCommon.XmlDeserializeMessage(typeof(DbResult), result)
+        retValue = LJC.XmlDeserializeMessage(typeof(DbResult), result)
           as DbResult;
         if (null == retValue)
         {
@@ -35,72 +37,6 @@ namespace LJCDBMessage
       }
       return retValue;
     }
-
-    #region TableData Methods?
-
-    /// <summary>
-    /// Creates a LJCDataColumn object from a DataColumn object. 
-    /// </summary>
-    /// <param name="dataColumn">The DataColumn reference.</param>
-    /// <returns>The LJCDataColumn Object.</returns>
-    // Note: Also in LJCGridDataLib.TableData
-    public static LJCDataColumn GetLJCDataColumn(DataColumn dataColumn)
-    {
-      LJCDataColumn retValue;
-
-      retValue = new LJCDataColumn()
-      {
-        AllowDBNull = dataColumn.AllowDBNull,
-        AutoIncrement = dataColumn.AutoIncrement,
-        Caption = dataColumn.ColumnName,
-        ColumnName = dataColumn.ColumnName,
-        DataTypeName = dataColumn.DataType.Name,
-        MaxLength = dataColumn.MaxLength,
-        PropertyName = dataColumn.ColumnName,
-        IsUniqueKey = dataColumn.Unique
-      };
-      return retValue;
-    }
-
-    /// <summary>
-    /// Creates a LJCDataColumns collection from a DataColumns collection.
-    /// </summary>
-    /// <param name="dataColumns">The DataColumnCollection reference.</param>
-    /// <returns>The LJCDataColumns object.</returns>
-    // Note: Also in LJCGridDataLib.TableData
-    public static LJCDataColumns GetLJCDataColumns(DataColumnCollection dataColumns)
-    {
-      LJCDataColumns retValue = null;
-
-      if (HasColumns(dataColumns))
-      {
-        retValue = new LJCDataColumns();
-        foreach (DataColumn dataColumn in dataColumns)
-        {
-          LJCDataColumn dbColumn = GetLJCDataColumn(dataColumn);
-          retValue.Add(dbColumn);
-        }
-      }
-      return retValue;
-    }
-
-    /// <summary>
-    /// Checks the DataColumnCollection object for items.
-    /// </summary>
-    /// <param name="dataColumns">The DataColumnCollection reference.</param>
-    /// <returns>true if there are items; otherwise false.</returns>
-    // Note: Also in LJCGridDataLib.TableData
-    public static bool HasColumns(DataColumnCollection dataColumns)
-    {
-      bool retValue = false;
-
-      if (NetCommon.HasColumns(dataColumns))
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-    #endregion
 
     // Checks if the result has Columns.
     /// <include file='Doc/DbResult.xml'
@@ -257,7 +193,7 @@ namespace LJCDBMessage
     {
       string retValue;
 
-      retValue = NetCommon.XmlSerializeToString(GetType(), this, null);
+      retValue = LJC.XmlSerializeToString(GetType(), this, null);
       return retValue;
     }
 
@@ -270,7 +206,7 @@ namespace LJCDBMessage
       {
         fileSpec = LJCDefaultFileName;
       }
-      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
+      LJC.XmlSerialize(GetType(), this, null, fileSpec);
     }
     #endregion
 
@@ -393,10 +329,9 @@ namespace LJCDBMessage
     ///  path='items/SetRows/*'/>
     public void SetRows(DataTable dataTable, DbJoins dbJoins = null)
     {
-      if (NetCommon.HasData(dataTable))
+      if (LJC.HasData(dataTable))
       {
-        // *** Next Statement *** Add 12/25/24
-        var dataColumns = GetLJCDataColumns(dataTable.Columns);
+        var dataColumns = LJCTableColumns.ToDataColumns(dataTable.Columns);
         foreach (DataRow dataRow in dataTable.Rows)
         {
           LJCDataValues dataValues = GetRowValues(dataColumns, dataRow);
@@ -417,7 +352,7 @@ namespace LJCDBMessage
     //public void SetRows(DataTable dataTable
     //  , LJCDataColumns dataColumns, DbJoins dbJoins = null)
     //{
-    //  if (NetCommon.HasData(dataTable))
+    //  if (LJC.HasData(dataTable))
     //  {
     //    // *** Next Statement *** Add 12/25/24
     //    dataColumns = TableData.GetLJCDataColumns(dataTable.Columns);

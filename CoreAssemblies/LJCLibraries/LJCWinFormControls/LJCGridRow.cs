@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using LJC = LJCNetCommon.NetCommon;
@@ -32,8 +33,42 @@ namespace LJCWinFormControls
 
     #region SetValues Methods
 
+    // Updates a grid row with the DataRow values.
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCSetValues1/*'/>
+    public void LJCSetValues(DataRow adoRow
+      , LJCDataColumns dataDefinition)
+    {
+      object value;
+      List<object> listValues = new List<object>();
+      var gridColumns = DataGridView.Columns;
+      foreach (DataGridViewColumn gridColumn in gridColumns)
+      {
+        var dataColumnName = gridColumn.Name;
+
+        if (dataDefinition != null)
+        {
+          var dataColumn = dataDefinition[dataColumnName];
+          if (dataColumn?.RenameAs != null)
+          {
+            dataColumnName = dataColumn.RenameAs;
+          }
+        }
+
+        value = null;
+        if (adoRow.Table.Columns.Contains(dataColumnName))
+        {
+          value = adoRow[dataColumnName];
+        }
+        listValues.Add(value);
+      }
+      var values = listValues.ToArray();
+      SetValues(values);
+    }
+
     // Updates a grid row with LJCDataValues.
-    /// <include path='items/LJCRowSetValues2/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCRowSetValues2/*'/>
     public void LJCSetValues(DataGridView grid, LJCDataValues dbValues)
     {
       if (LJC.HasListItems(dbValues))
@@ -49,7 +84,8 @@ namespace LJCWinFormControls
     }
 
     // Updates a grid row with the object values.
-    /// <include path='items/LJCRowSetValues1/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCRowSetValues1/*'/>
     public void LJCSetValues(DataGridView grid, object[] values)
     {
       if ((values != null && values.Count() > 0)
@@ -60,7 +96,8 @@ namespace LJCWinFormControls
     }
 
     // Updates a grid row with the record values.
-    /// <include path='items/LJCRowSetValues/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCRowSetValues3/*'/>
     public void LJCSetValues(DataGridView grid, object record)
     {
       LJCReflect reflect;

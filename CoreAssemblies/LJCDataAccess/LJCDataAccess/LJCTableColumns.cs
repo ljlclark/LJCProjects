@@ -107,7 +107,6 @@ namespace LJCDataAccess
     // Checks the DataColumnCollection object for items.
     /// <include file='Doc/LJCTableColumns.xml'
     ///  path='items/HasColumns/*'/>
-    // Note: Also in LJCDBMessage.DbResult
     public static bool HasColumns(DataColumnCollection adoColumns)
     {
       bool retValue = false;
@@ -122,7 +121,6 @@ namespace LJCDataAccess
     // Creates an LJCDataColumns collection from a DataColumnCollection.
     /// <include file='Doc/LJCTableColumns.xml'
     ///  path='items/ToDataColumns/*'/>
-    // Note: Also in LJCDBMessage.DbResult
     public static LJCDataColumns ToDataColumns(DataColumnCollection adoColumns)
     {
       LJCDataColumns retDataColumns = null;

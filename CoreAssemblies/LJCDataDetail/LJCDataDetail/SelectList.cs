@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using System.IO;
 using LJCDBClientLib;
 using LJCDBMessage;
-using LJCGridDataLib;
 using LJCNetCommon;
 using LJCWinFormCommon;
 

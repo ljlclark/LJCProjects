@@ -4,7 +4,6 @@
 using LJCDataAccess;
 using LJCDataAccessConfig;
 using LJCDBMessage;
-using LJCGridDataLib;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;

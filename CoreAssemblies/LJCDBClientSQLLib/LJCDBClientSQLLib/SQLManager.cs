@@ -5,10 +5,10 @@ using LJCDataAccess;
 using LJCDataAccessConfig;
 using LJCDBClientLib;
 using LJCDBMessage;
-using LJCGridDataLib;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBClientSQLLib
 {
@@ -70,7 +70,7 @@ namespace LJCDBClientSQLLib
 
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
-    public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       SQLStatement = CreateDeleteSQL(keyColumns, filters);
       AffectedCount = mDataAccess.ExecuteNonQuery(SQLStatement);
@@ -78,7 +78,7 @@ namespace LJCDBClientSQLLib
 
     // Gets a DataTable object.
     /// <include path='items/GetDataTable/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
-    public DataTable GetDataTable(DbColumns keyColumns = null
+    public DataTable GetDataTable(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -92,7 +92,7 @@ namespace LJCDBClientSQLLib
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../LJCDocLib/Common/SQLManager.xml'/>
-    public void Update(object dataObject, DbColumns keyColumns
+    public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       SQLStatement = CreateUpdateSQL(dataObject, keyColumns, propertyNames
@@ -125,14 +125,14 @@ namespace LJCDBClientSQLLib
     }
 
     // Creates the SQL "Delete" string.
-    private string CreateDeleteSQL(DbColumns keyColumns
+    private string CreateDeleteSQL(LJCDataColumns keyColumns
       , DbFilters filters = null)
     {
       string retValue = null;
 
       // Must have a KeyColumns definition.
-      if (NetCommon.HasItems(keyColumns)
-        || NetCommon.HasItems(filters))
+      if (LJC.HasListItems(keyColumns)
+        || LJC.HasListItems(filters))
       {
         var requestKeyColumns = DbCommon.RequestKeys(keyColumns, BaseDefinition);
 
@@ -145,7 +145,7 @@ namespace LJCDBClientSQLLib
     }
 
     // Creates the SQL "Select" string.
-    private string CreateSelectSQL(DbColumns keyColumns
+    private string CreateSelectSQL(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -162,7 +162,7 @@ namespace LJCDBClientSQLLib
     }
 
     // Creates the SQL "Update" string.
-    private string CreateUpdateSQL(object dataObject, DbColumns keyColumns
+    private string CreateUpdateSQL(object dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       string retValue = null;
@@ -203,16 +203,16 @@ namespace LJCDBClientSQLLib
     #region DataManager Related Create Data Methods
 
     // Creates a DataDefinition value.
-    private DbColumns CreateDataDefinition()
+    private LJCDataColumns CreateDataDefinition()
     {
-      DbColumns retValue = null;
+      LJCDataColumns retValue = null;
 
       string sql = $"select * from {TableName}";
       DataTable dataTable = mDataAccess.GetSchemaOnly(sql);
       if (dataTable != null)
       {
-        var dataColumns = TableData.DataColumnsClone(dataTable);
-        BaseDefinition = TableData.GetDbColumns(dataColumns);
+        var dataColumns = LJCTableColumns.Clone(dataTable.Columns);
+        BaseDefinition = LJCTableColumns.ToDataColumns(dataColumns);
         retValue = BaseDefinition.Clone();
       }
       return retValue;
@@ -225,7 +225,7 @@ namespace LJCDBClientSQLLib
     public int AffectedCount { get; set; }
 
     /// <summary>Gets the base data definition columns collection.</summary>
-    public DbColumns BaseDefinition { get; private set; }
+    public LJCDataColumns BaseDefinition { get; private set; }
 
     /// <summary>Gets or sets the data configuration name.</summary>
     public string DataConfigName
@@ -236,7 +236,7 @@ namespace LJCDBClientSQLLib
     private string mDataConfigName;
 
     /// <summary>Gets the data definition columns collection.</summary>
-    public DbColumns DataDefinition { get; private set; }
+    public LJCDataColumns DataDefinition { get; private set; }
 
     /// <summary>Gets or sets the LookupColumn names.</summary>
     public List<string> LookupColumnNames { get; set; }
