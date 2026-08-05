@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // AppSettings.cs
 using System;
@@ -11,13 +11,15 @@ using System.IO;
 namespace LJCNetCommon
 {
   // Represents the Configuration AppSettings.
-  /// <include path='items/AppSettings/*' file='Doc/ProjectNetCommon.xml'/>
+  /// <include file='Doc/ProjectNetCommon.xml'
+  ///  path='items/AppSettings/*'/>
   public class AppSettings
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/AppSettingsC/*' file='Doc/AppSettings.xml'/>
+    /// <include file='Doc/AppSettings.xml'
+    ///  path='items/AppSettingsC/*'/>
     public AppSettings(string fileSpec)
     {
       XElement appSettings;
@@ -53,7 +55,8 @@ namespace LJCNetCommon
     #region Get Setting Types
 
     // Gets the bool value of the specified setting. (E)
-    /// <include path='items/GetBool/*' file='Doc/AppSettings.xml'/>
+    /// <include file='Doc/AppSettings.xml'
+    ///  path='items/GetBool/*'/>
     public bool GetBool(string keyName)
     {
       bool retValue = false;
@@ -68,7 +71,8 @@ namespace LJCNetCommon
     }
 
     // Gets the Color value of the specified setting. (E)
-    /// <include path='items/GetColor/*' file='Doc/AppSettings.xml'/>
+    /// <include file='Doc/AppSettings.xml'
+    ///  path='items/GetColor/*'/>
     public Color GetColor(string keyName, Color defaultColor)
     {
       Color retValue = defaultColor;
@@ -92,7 +96,8 @@ namespace LJCNetCommon
     }
 
     // Gets a Color from an RGB string. (E)
-    /// <include path='items/GetColorFromRGBString/*' file='Doc/AppSettings.xml'/>
+    /// <include file='Doc/AppSettings.xml'
+    ///  path='items/GetColorFromRGBString/*'/>
     public Color GetColorFromRGBString(string rgbText)
     {
       string[] rgb;
@@ -125,7 +130,8 @@ namespace LJCNetCommon
     }
 
     // Gets an integer color value from a string. (E)
-    /// <include path='items/GetColorValue/*' file='Doc/AppSettings.xml'/>
+    /// <include file='Doc/AppSettings.xml'
+    ///  path='items/GetColorValue/*'/>
     public int GetColorValue(string text)
     {
       string errorText;
@@ -149,7 +155,8 @@ namespace LJCNetCommon
     }
 
     // Get the string value of the specified setting. (E)
-    /// <include path='items/GetString/*' file='Doc/AppSettings.xml'/>
+    /// <include file='Doc/AppSettings.xml'
+    ///  path='items/GetString/*'/>
     public string GetString(string keyName, bool allowMissingValue = true)
     {
       IEnumerable<XElement> settings = null;

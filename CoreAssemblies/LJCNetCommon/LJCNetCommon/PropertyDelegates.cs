@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // PropertyDelegates.cs
 using System;
@@ -12,7 +12,8 @@ namespace LJCNetCommon
   public class PropertyDelegates : List<PropertyDelegate>
   {
     // Creates and adds a PropertyDelegate object to the collection. (R)
-    /// <include path='items/Add/*' file='Doc/PropertyDelegates.xml'/>
+    /// <include file='Doc/PropertyDelegates.xml'
+    ///  path='items/Add/*'/>
     public PropertyDelegate Add(PropertyInfo propertyInfo)
     {
       PropertyDelegate retValue;
@@ -35,7 +36,8 @@ namespace LJCNetCommon
     }
 
     // Returns the PropertyDelegate object if found in the list.
-    /// <include path='items/LJCSearchName/*' file='Doc/PropertyDelegates.xml'/>
+    /// <include file='Doc/PropertyDelegates.xml'
+    ///  path='items/LJCSearchName/*'/>
     public PropertyDelegate LJCSearchName(string propertyName)
     {
       PropertyDelegate retValue = null;
@@ -45,7 +47,8 @@ namespace LJCNetCommon
     }
 
     // Creates and returns the delegate for the named property.
-    /// <include path='items/LJCCreateDelegate/*' file='Doc/PropertyDelegates.xml'/>
+    /// <include file='Doc/PropertyDelegates.xml'
+    ///  path='items/LJCCreateDelegate/*'/>
     public Func<object, object> LJCCreateDelegate(PropertyInfo propertyInfo)
     {
       // Create the instance parameter.

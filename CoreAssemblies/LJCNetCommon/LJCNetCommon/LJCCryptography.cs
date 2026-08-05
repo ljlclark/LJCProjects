@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCCryptography.cs
 using System.IO;
@@ -13,7 +13,8 @@ namespace LJCNetCommon
     #region Constructors
 
     // Initializes a new instance of the MemoryCrypto class.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCCryptography()
     {
       Type = Cryptography_Type.Crypto_Rijndael;
@@ -24,7 +25,8 @@ namespace LJCNetCommon
     #region Methods
 
     // Returns a decrypted string from a cipher byte array. (E)
-    /// <include path='items/Decrypt/*' file='Doc/LJCCryptography.xml'/>
+    /// <include file='Doc/LJCCryptography.xml'
+    ///  path='items/Decrypt/*'/>
     public string Decrypt(byte[] cipher, byte[] key
       , byte[] initializationVector)
     {
@@ -37,7 +39,8 @@ namespace LJCNetCommon
     }
 
     // Returns a decrypted byte array from a cipher byte array.
-    /// <include path='items/DecryptBytes/*' file='Doc/LJCCryptography.xml'/>
+    /// <include file='Doc/LJCCryptography.xml'
+    ///  path='items/DecryptBytes/*'/>
     public byte[] DecryptBytes(byte[] cipher, byte[] key
       , byte[] initializationVector)
     {
@@ -80,7 +83,8 @@ namespace LJCNetCommon
     }
 
     // Returns an encrypted byte array from a byte array.
-    /// <include path='items/Encrypt1/*' file='Doc/LJCCryptography.xml'/>
+    /// <include file='Doc/LJCCryptography.xml'
+    ///  path='items/Encrypt1/*'/>
     public byte[] Encrypt(byte[] bytes, byte[] key
       , byte[] initializationVector)
     {
@@ -126,7 +130,8 @@ namespace LJCNetCommon
     }
 
     // Returns an encrypted byte array from a string value. (E)
-    /// <include path='items/Encrypt2/*' file='Doc/LJCCryptography.xml'/>
+    /// <include file='Doc/LJCCryptography.xml'
+    ///  path='items/Encrypt2/*'/>
     public byte[] Encrypt(string plainText, byte[] key
       , byte[] initializationVector)
     {
@@ -137,7 +142,8 @@ namespace LJCNetCommon
     }
 
     // Generates a random initialization vector based on the encryption type.
-    /// <include path='items/GenerateIV/*' file='Doc/LJCCryptography.xml'/>
+    /// <include file='Doc/LJCCryptography.xml'
+    ///  path='items/GenerateIV/*'/>
     public byte[] GenerateIV()
     {
       mSal.GenerateIV();
@@ -145,7 +151,8 @@ namespace LJCNetCommon
     }
 
     // Generates a random encryption key based on the encryption type.
-    /// <include path='items/GenerateKey/*' file='Doc/LJCCryptography.xml'/>
+    /// <include file='Doc/LJCCryptography.xml'
+    ///  path='items/GenerateKey/*'/>
     public byte[] GenerateKey()
     {
       mSal.GenerateKey();
@@ -153,7 +160,8 @@ namespace LJCNetCommon
     }
 
     // Returns true if the key size is valid otherwise returns false.
-    /// <include path='items/IsValidKeySize/*' file='Doc/LJCCryptography.xml'/>
+    /// <include file='Doc/LJCCryptography.xml'
+    ///  path='items/IsValidKeySize/*'/>
     public bool IsValidKeySize(int sizeValue)
     {
       KeySizes[] keySizesArray;
@@ -221,7 +229,8 @@ namespace LJCNetCommon
     }
 
     // Gets the supported key sizes.
-    /// <include path='items/LegalKeySizes/*' file='Doc/LJCCryptography.xml'/>
+    /// <include file='Doc/LJCCryptography.xml'
+    ///  path='items/LegalKeySizes/*'/>
     public KeySizes[] LegalKeySizes
     {
       get { return mSal.LegalKeySizes; }

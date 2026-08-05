@@ -329,7 +329,7 @@ namespace LJCNetCommon
     }
 
     // Gets a list of property names from the collection items.
-    /// <include file='Doc/LJCDataValues.xml'
+    /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCKeyPropertyNames/*'/>
     public List<string> LJCKeyPropertyNames(LJCDataValues keys = null)
     {
@@ -548,7 +548,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Other Public Methods
+    #region Other Methods
 
     // Sets caption properties for supplied columns from current columns.
     /// <include file='Doc/LJCDataColumns.xml'
@@ -623,7 +623,7 @@ namespace LJCNetCommon
     }
 
     // Gets the column object value as a byte array.
-    /// <include file="Doc/LJCDataValues.xml"
+    /// <include file="Doc/LJCDataColumns.xml"
     /// path="members/LJCGetBytes/*"/>
     public byte[] LJCGetBytes(string propertyName)
     {

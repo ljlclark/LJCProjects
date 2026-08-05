@@ -6,13 +6,15 @@ using System;
 namespace LJCNetCommon
 {
   // Contains parsing related methods.
-  /// <include path="members/LJCParser/*" file="Doc/LJCParser.xml"/>
+  /// <include file='Doc/LJCParser.xml'
+  ///  path='members/LJCParser/*'/>
   public class LJCParser
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCParser.xml"/>
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/Constructor/*'/>
     public LJCParser()
     {
       BeginIndex = -1;
@@ -24,7 +26,8 @@ namespace LJCNetCommon
     #region Methods
 
     // Gets a delimited string.
-    /// <include path="members/DelimitedString/*" file="Doc/LJCParser.xml"/>
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/DelimitedString/*'/>
     public string DelimitedString(string text, string beginDelimiter = null
       , string endDelimiter = null)
     {
@@ -81,7 +84,8 @@ namespace LJCNetCommon
     }
 
     // Finds a tag in a text value.
-    /// <include path="members/FindTag/*" file="Doc/LJCParser.xml"/>
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/FindTag/*'/>
     public string FindTag(string text, ref string tagName)
     {
       string retValue;
@@ -116,7 +120,8 @@ namespace LJCNetCommon
     }
 
     // Removes a section from a text value.
-    /// <include path="members/RemoveSection/*" file="Doc/LJCParser.xml"/>
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/RemoveSection/*'/>
     public string RemoveSection(string text, int beginIndex, int endIndex)
     {
       string retValue = text;
@@ -134,7 +139,8 @@ namespace LJCNetCommon
     }
 
     // Removes tags from a text value.
-    /// <include path="members/RemoveTags/*" file="Doc/LJCParser.xml"/>
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/RemoveTags/*'/>
     public string RemoveTags(string text)
     {
       string retValue = text;
@@ -151,7 +157,8 @@ namespace LJCNetCommon
     }
 
     // Retrieve the selection string.
-    /// <include path="members/Selection/*" file="Doc/LJCParser.xml"/>
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/Selection/*'/>
     public string Selection(string text)
     {
       string retValue = null;
@@ -165,7 +172,8 @@ namespace LJCNetCommon
     }
 
     // Retrieve the selection length.
-    /// <include path="members/SelectionLength/*" file="Doc/LJCParser.xml"/>
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/SelectionLength/*'/>
     public int SelectionLength()
     {
       var retValue = 0;
@@ -180,7 +188,8 @@ namespace LJCNetCommon
     }
 
     // Gets the string including the supplied delimiters.
-    /// <include path="members/StringWithDelimiters/*" file="Doc/LJCParser.xml"/>
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/StringWithDelimiters/*'/>
     public string StringWithDelimiters(string text, string beginDelimiter = null
       , string endDelimiter = null)
     {

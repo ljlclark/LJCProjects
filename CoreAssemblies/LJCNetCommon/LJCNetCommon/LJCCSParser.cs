@@ -6,13 +6,15 @@ namespace LJCNetCommon
 {
   // Provides methods to parse a source line for class, method and property
   // definitions.
-  /// <include path="members/LJCCSParser/*" file="Doc/LJCCSParser.xml"/>
+  /// <include file='Doc/LJCCSParser.xml'
+  ///  path='members/LJCCSParser/*'/>
   public class LJCCSParser
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCCSParser.xml"/>
+    /// <include file='Doc/LJCCSParser.xml'
+    ///  path='members/Constructor/*'/>
     public LJCCSParser()
     {
       SetModifiers();
@@ -22,7 +24,8 @@ namespace LJCNetCommon
     #region Public Methods
 
     // Attempts to parse a class name.
-    /// <include path="members/ClassName/*" file="Doc/LJCCSParser.xml"/>
+    /// <include file='Doc/LJCCSParser.xml'
+    ///  path='members/ClassName/*'/>
     public string ClassName(string line)
     {
       string retName = null;
@@ -69,7 +72,8 @@ namespace LJCNetCommon
     }
 
     // Attempts to parse a method name.
-    /// <include path="members/MethodName/*" file="Doc/LJCCSParser.xml"/>
+    /// <include file='Doc/LJCCSParser.xml'
+    ///  path='members/MethodName/*'/>
     public string MethodName(string line)
     {
       string retName = null;
@@ -126,7 +130,8 @@ namespace LJCNetCommon
     }
 
     // Attempts to parse a property name.
-    /// <include path="members/PropertyName/*" file="Doc/LJCCSParser.xml"/>
+    /// <include file='Doc/LJCCSParser.xml'
+    ///  path='members/PropertyName/*'/>
     public string PropertyName(string line, string nextLine)
     {
       string retName = null;

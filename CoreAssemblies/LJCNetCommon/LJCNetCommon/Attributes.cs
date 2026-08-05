@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Attributes.cs
 using System.Collections.Generic;
@@ -14,7 +14,8 @@ namespace LJCNetCommon
     #region Collection Methods
 
     // Creates and adds an Attribute.
-    /// <include path='items/Add/*' file='Doc/Attributes.xml'/>
+    /// <include file='Doc/Attributes.xml'
+    ///  path='items/Add/*'/>
     public Attribute Add(string name, string value)
     {
       var retAttribute = new Attribute(name, value);

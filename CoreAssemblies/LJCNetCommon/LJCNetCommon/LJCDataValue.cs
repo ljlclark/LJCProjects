@@ -92,9 +92,9 @@ namespace LJCNetCommon
     ///  path='members/CreateColumn/*'/>
     public LJCDataColumn CreateColumn(LJCDataColumn definitionColumn)
     {
-      LJCDataColumn retValue;
+      LJCDataColumn retColumn;
 
-      retValue = new LJCDataColumn()
+      retColumn = new LJCDataColumn()
       {
         Caption = definitionColumn.Caption,
         ColumnName = definitionColumn.ColumnName,
@@ -107,17 +107,17 @@ namespace LJCNetCommon
       if (Value != null
         && typeof(string) == Value.GetType())
       {
-        retValue.MaxLength = definitionColumn.MaxLength;
-        if (0 == retValue.MaxLength)
+        retColumn.MaxLength = definitionColumn.MaxLength;
+        if (0 == retColumn.MaxLength)
         {
-          retValue.MaxLength = 10;
+          retColumn.MaxLength = 10;
         }
-        if (retValue.MaxLength < 5)
+        if (retColumn.MaxLength < 5)
         {
-          retValue.MaxLength += 3;
+          retColumn.MaxLength += 3;
         }
       }
-      return retValue;
+      return retColumn;
     }
     #endregion
 

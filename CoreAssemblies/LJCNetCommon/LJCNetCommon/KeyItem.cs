@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // KeyItem.cs
 using System;
@@ -11,13 +11,15 @@ namespace LJCNetCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public KeyItem()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public KeyItem(KeyItem item)
     {
       DataConfigName = item.DataConfigName;
@@ -30,7 +32,8 @@ namespace LJCNetCommon
     }
 
     // Initializes an object instance.
-    /// <include path='items/KeyItem/*' file='Doc/KeyItem.xml'/>
+    /// <include file='Doc/KeyItem.xml'
+    ///  path='items/KeyItem/*'/>
     public KeyItem(string propertyName, long id, string description)
     {
       PropertyName = propertyName;
@@ -42,7 +45,8 @@ namespace LJCNetCommon
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public KeyItem Clone()
     {
       KeyItem retValue = MemberwiseClone() as KeyItem;
@@ -50,7 +54,8 @@ namespace LJCNetCommon
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/ToString/*'/>
     public override string ToString()
     {
       return Description;
@@ -60,7 +65,8 @@ namespace LJCNetCommon
     #region Search and Sort Methods
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CompareTo/*'/>
     public int CompareTo(KeyItem other)
     {
       int retValue;

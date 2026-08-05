@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Attribute.cs
 
@@ -13,7 +13,8 @@ namespace LJCNetCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/CHTMLAttribute/*' file='Doc/Attribute.xml'/>
+    /// <include file='Doc/Attribute.xml'
+    ///  path='items/CHTMLAttribute/*'/>
     public Attribute(string name, string value = null)
     {
       Name = name;

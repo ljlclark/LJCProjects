@@ -14,29 +14,29 @@ namespace LJCNetCommon
   [XmlRoot("LJCDataValues")]
   public class LJCDataValues : List<LJCDataValue>
   {
-    #region Static Functions
+    #region Static Methods
 
     // Deserializes from the specified XML file.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
     public static LJCDataValues LJCDeserialize(string fileSpec = null)
     {
-      LJCDataValues retValue;
+      LJCDataValues retValues;
 
       if (!LJC.HasText(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
-      retValue = LJC.XmlDeserialize(typeof(LJCDataValues), fileSpec)
+      retValues = LJC.XmlDeserialize(typeof(LJCDataValues), fileSpec)
         as LJCDataValues;
-      return retValue;
+      return retValues;
     }
 
     // Checks if the key columns value has changed.
     private static bool IsKeyColumnsChanged(LJCDataValues newKeys
       , LJCDataValues currentKeys)
     {
-      bool retValue = false;
+      bool retIsChanged = false;
 
       while (true)
       {
@@ -49,7 +49,7 @@ namespace LJCNetCommon
           || hasNewColumns
           && !hasSortColumns)
         {
-          retValue = true;
+          retIsChanged = true;
           break;
         }
 
@@ -57,7 +57,7 @@ namespace LJCNetCommon
         {
           if (newKeys.Count != currentKeys.Count)
           {
-            retValue = true;
+            retIsChanged = true;
             break;
           }
 
@@ -74,14 +74,14 @@ namespace LJCNetCommon
               || !EqualityComparer<object>.Default.Equals(propertyValue
               , sortPropertyValue))
             {
-              retValue = true;
+              retIsChanged = true;
               break;
             }
           }
         }
         break;
       }
-      return retValue;
+      return retIsChanged;
     }
     #endregion
 
@@ -118,16 +118,16 @@ namespace LJCNetCommon
     ///  path='members/Clone/*'/>
     public LJCDataValues Clone()
     {
-      var retValue = new LJCDataValues();
+      var retValues = new LJCDataValues();
       foreach (var dataValue in this)
       {
         var newDataValue = dataValue.Clone();
         if (newDataValue != null)
         {
-          retValue.Add(newDataValue);
+          retValues.Add(newDataValue);
         }
       }
-      return retValue;
+      return retValues;
     }
 
     // Checks if the collection has items.
@@ -135,13 +135,13 @@ namespace LJCNetCommon
     ///  path='members/HasItems/*'/>
     public bool HasItems()
     {
-      bool retValue = false;
+      bool retHasItems = false;
 
       if (Count > 0)
       {
-        retValue = true;
+        retHasItems = true;
       }
-      return retValue;
+      return retHasItems;
     }
 
     // Gets a collection of changed columns.
@@ -150,7 +150,7 @@ namespace LJCNetCommon
     public LJCDataValues LJCChanged()
     {
       List<LJCDataValue> dataValues;
-      var retValue = new LJCDataValues();
+      var retValues = new LJCDataValues();
 
       dataValues = FindAll(x => x.IsChanged);
       foreach (var dataValue in dataValues)
@@ -158,10 +158,10 @@ namespace LJCNetCommon
         var newDataValue = dataValue.Clone();
         if (newDataValue != null)
         {
-          retValue.Add(newDataValue);
+          retValues.Add(newDataValue);
         }
       }
-      return retValue;
+      return retValues;
     }
 
     // Sets the IsChanged value to false for all elements in the collection.
@@ -180,11 +180,11 @@ namespace LJCNetCommon
     ///  path='members/LJCCreateColumns/*'/>
     public LJCDataColumns LJCCreateColumns(LJCDataColumns dataColumns)
     {
-      LJCDataColumns retValue = null;
+      LJCDataColumns retColumns = null;
 
       if (dataColumns != null)
       {
-        retValue = new LJCDataColumns();
+        retColumns = new LJCDataColumns();
         foreach (var dataValue in this)
         {
           if (dataValue.PropertyName != null)
@@ -193,34 +193,34 @@ namespace LJCNetCommon
             var newDataValue = dataValue.CreateColumn(dataColumn);
             if (newDataValue != null)
             {
-              retValue.Add(newDataValue);
+              retColumns.Add(newDataValue);
             }
           }
         }
       }
-      return retValue;
+      return retColumns;
     }
 
     // Gets a list of property names from the collection items.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCKeyPropertyNames/*'/>
-    public List<string> LJCKeyPropertyNames(LJCDataValues dataValues = null)
+    public List<string> LJCKeyPropertyNames(LJCDataValues keys = null)
     {
-      List<string> retList = null;
+      List<string> retNames = null;
 
-      if (!LJC.HasListItems(dataValues))
+      if (!LJC.HasListItems(keys))
       {
-        dataValues = _Keys;
+        keys = _Keys;
       }
-      if (LJC.HasListItems(dataValues))
+      if (LJC.HasListItems(keys))
       {
-        retList = new List<string>();
-        foreach (var dataValue in dataValues)
+        retNames = new List<string>();
+        foreach (var dataValue in keys)
         {
-          retList.Add(dataValue.PropertyName);
+          retNames.Add(dataValue.PropertyName);
         }
       }
-      return retList;
+      return retNames;
     }
 
     // Gets a list of property names from the collection items.
@@ -228,7 +228,7 @@ namespace LJCNetCommon
     ///  path='members/LJCPropertyNames/*'/>
     public List<string> LJCPropertyNames(LJCDataValues dataValues = null)
     {
-      List<string> retList = null;
+      List<string> retNames = null;
 
       if (!LJC.HasListItems(dataValues))
       {
@@ -236,13 +236,13 @@ namespace LJCNetCommon
       }
       if (LJC.HasListItems(dataValues))
       {
-        retList = new List<string>();
+        retNames = new List<string>();
         foreach (var dataValue in dataValues)
         {
-          retList.Add(dataValue.PropertyName);
+          retNames.Add(dataValue.PropertyName);
         }
       }
-      return retList;
+      return retNames;
     }
 
     // Serializes the collection
@@ -276,8 +276,8 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Returns the column that matches the key columns.
-    // The column is identified by its property names and values.
+    // Gets the value that matches the key columns.
+    // The value is identified by its property names and values.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCGetUnique/*'/>
     public LJCDataValue LJCGetUnique(LJCDataValues keys = null)
@@ -537,7 +537,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets the column object value as an object.
+    // Gets the column object value.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCGetValue/*'/>
     public object LJCGetValue(string propertyName)
@@ -636,12 +636,8 @@ namespace LJCNetCommon
   ///  path='members/DataValueKeyComparer/*'/>
   public class DataValueKeyComparer : IComparer<LJCDataValue>
   {
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/ColumnNames/*'/>
-    public List<string> LJCPropertyNames { get; set; }
-
     // Compares two objects.
-    /// <include file='Doc/LJCDataColumns.xml'
+    /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/Compare/*'/>
     public int Compare(LJCDataValue x, LJCDataValue y)
     {
@@ -710,5 +706,9 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/LJCPropertyNames/*'/>
+    public List<string> LJCPropertyNames { get; set; }
   }
 }

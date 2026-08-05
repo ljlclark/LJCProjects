@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // NetFile.cs
 using System;
@@ -8,13 +8,15 @@ using System.IO;
 namespace LJCNetCommon
 {
   // Contains common file related static functions. (R)
-  /// <include path='items/NetFile/*' file='Doc/NetFile.xml'/>
+  /// <include file='Doc/NetFile.xml'
+  ///  path='items/NetFile/*'/>
   public class NetFile
   {
     #region Public Functions
 
     // Creates a Folder Path if it does not already exist. (E)
-    /// <include path='items/CreateFolder/*' file='Doc/NetFile.xml'/>
+    /// <include file='Doc/NetFile.xml'
+    ///  path='items/CreateFolder/*'/>
     public static void CreateFolder(string path)
     {
       if (path.Contains("\\"))
@@ -30,7 +32,8 @@ namespace LJCNetCommon
     }
 
     // Returns the relative path.
-    /// <include path='items/GetRelativePath/*' file='Doc/NetFile.xml'/>
+    /// <include file='Doc/NetFile.xml'
+    ///  path='items/GetRelativePath/*'/>
     public static string GetRelativePath(string fromPath, string toFileSpec)
     {
       string retValue;
@@ -50,7 +53,8 @@ namespace LJCNetCommon
     }
 
     // Get all text lines from a file.
-    /// <include path='items/ReadAllLines/*' file='Doc/NetFile.xml'/>
+    /// <include file='Doc/NetFile.xml'
+    ///  path='items/ReadAllLines/*'/>
     public static string[] ReadAllLines(string fileSpec)
     {
       string errorText;
@@ -143,7 +147,8 @@ namespace LJCNetCommon
     }
 
     // Writes a string format to the Log file with the current date and time.
-    /// <include path='items/WriteLog/*' file='Doc/NetFile.xml'/>
+    /// <include file='Doc/NetFile.xml'
+    ///  path='items/WriteLog/*'/>
     public static void WriteLog(string logFileSpec, string formatText = null
       , params object[] parameters)
     {
@@ -163,7 +168,8 @@ namespace LJCNetCommon
     }
 
     // Writes string format + cr/lf to the Log file with current date and time.
-    /// <include path='items/WriteLogLine/*' file='Doc/NetFile.xml'/>
+    /// <include file='Doc/NetFile.xml'
+    ///  path='items/WriteLogLine/*'/>
     public static void WriteLogLine(string logFileSpec, string formatText = null
       , params object[] parameters)
     {
