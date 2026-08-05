@@ -71,7 +71,7 @@ namespace LJCViewEditor
     {
       var retValue = ConditionSetGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(ConditionSetGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 
@@ -89,7 +89,7 @@ namespace LJCViewEditor
       var name = dbValues.LJCGetString(columnName);
       retValue.LJCSetString(columnName, name);
 
-      retValue.LJCSetValues(ljcGrid, dbValues);
+      retValue.LJCSetValues(dbValues);
       return retValue;
     }
 
@@ -123,7 +123,7 @@ namespace LJCViewEditor
       if (ConditionSetGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, dataRecord);
-        row.LJCSetValues(ConditionSetGrid, dataRecord);
+        row.LJCSetValues(dataRecord);
       }
     }
 

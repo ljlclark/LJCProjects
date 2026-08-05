@@ -50,7 +50,7 @@ namespace LJCFacilityManager
 				foreach (DbRow dbRow in dbResult.Rows)
 				{
 					var gridRow = mParent.PersonGrid.LJCRowAdd();
-					gridRow.LJCSetValues(mParent.PersonGrid, dbRow.Values);
+					gridRow.LJCSetValues(dbRow.Values);
 				}
 				mParent.DoChange(PersonModule.Change.Person);
 			}
@@ -85,7 +85,7 @@ namespace LJCFacilityManager
 			SetStoredValues(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(mPersonGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -96,7 +96,7 @@ namespace LJCFacilityManager
 			if (mPersonGrid.CurrentRow is LJCGridRow gridRow)
 			{
 				SetStoredValues(gridRow, dataRecord);
-				gridRow.LJCSetValues(mPersonGrid, dataRecord);
+				gridRow.LJCSetValues(dataRecord);
 			}
 		}
 

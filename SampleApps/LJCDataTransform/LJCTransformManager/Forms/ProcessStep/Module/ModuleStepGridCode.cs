@@ -63,7 +63,7 @@ namespace LJCTransformManager
 			SetStoredValuesStep(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(mStepGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			SetStatusValuesStep(retValue, dataRecord.StatusID);
 			return retValue;
 		}
@@ -74,7 +74,7 @@ namespace LJCTransformManager
 			if (mStepGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesStep(row, dataRecord);
-				row.LJCSetValues(mStepGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 				SetStatusValuesStep(row, dataRecord.StatusID);
 			}
 		}

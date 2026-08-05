@@ -121,7 +121,7 @@ namespace LJCFacilityManager
 			SetStoredValuesPerson(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(PersonGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -132,7 +132,7 @@ namespace LJCFacilityManager
 			if (PersonGrid.CurrentRow is LJCGridRow gridRow)
 			{
 				SetStoredValuesPerson(gridRow, dataRecord);
-				gridRow.LJCSetValues(PersonGrid, dataRecord);
+				gridRow.LJCSetValues(dataRecord);
 			}
 		}
 

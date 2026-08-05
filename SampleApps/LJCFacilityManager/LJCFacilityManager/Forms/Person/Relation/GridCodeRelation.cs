@@ -70,7 +70,7 @@ namespace LJCFacilityManager
 			SetStoredValuesRelation(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(mRelationGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -81,7 +81,7 @@ namespace LJCFacilityManager
 			if (mRelationGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesRelation(row, dataRecord);
-				row.LJCSetValues(mRelationGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 

@@ -3,27 +3,27 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCGridRow.xml -->
 <items>
-  <LJCRowSetValues2>
+  <LJCSetValues1>
+    
+  </LJCSetValues1>
+  <LJCSetValues2>
     <summary>
-      Updates a grid row with the DbValues.
+      Updates a grid row with the DataValues.
     </summary>
-    <param name="grid">The grid control.</param>
-    <param name="dbValues">The result values.</param>
-  </LJCRowSetValues2>
-  <LJCRowSetValues1>
+    <param name="dataValues">The result values.</param>
+  </LJCSetValues2>
+  <LJCSetValues3>
     <summary>
       Updates a grid row with the object values.
     </summary>
-    <param name="grid">The grid control.</param>
     <param name="values">The object values.</param>
-  </LJCRowSetValues1>
-  <LJCRowSetValues>
+  </LJCSetValues3>
+  <LJCSetValues4>
     <summary>
       Updates a grid row with the record values.
     </summary>
-    <param name="grid">The grid control.</param>
     <param name="record">The record object.</param>
-  </LJCRowSetValues>
+  </LJCSetValues4>
 
   <!-- Saved Value Methods -->
   <LJCSetInt321>

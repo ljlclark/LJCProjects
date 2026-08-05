@@ -90,7 +90,7 @@ namespace LJCGenDocEdit
 
       var retValue = ClassGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(ClassGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 

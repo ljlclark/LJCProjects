@@ -67,7 +67,7 @@ namespace LJCAppManager
 
 			retValue = ProgramGrid.LJCRowAdd();
 			SetStoredValues(retValue, dataRecord);
-			retValue.LJCSetValues(ProgramGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -77,7 +77,7 @@ namespace LJCAppManager
 			if (ProgramGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValues(row, dataRecord);
-				row.LJCSetValues(ProgramGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 

@@ -112,7 +112,7 @@ namespace LJCGenDocEdit
 
       var retValue = AssemblyGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(AssemblyGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 
@@ -129,7 +129,7 @@ namespace LJCGenDocEdit
       var id = dbValues.LJCGetInt32(columnName);
       retValue.LJCSetInt32(columnName, id);
 
-      retValue.LJCSetValues(AssemblyGrid, dbValues);
+      retValue.LJCSetValues(dbValues);
       return retValue;
     }
 
@@ -139,7 +139,7 @@ namespace LJCGenDocEdit
       if (AssemblyGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, dataRecord);
-        row.LJCSetValues(AssemblyGrid, dataRecord);
+        row.LJCSetValues(dataRecord);
       }
     }
 

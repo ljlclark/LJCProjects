@@ -62,7 +62,7 @@ namespace LJCTransformManager
 			SetStoredValuesLayoutColumn(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(mLayoutColumnGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -72,7 +72,7 @@ namespace LJCTransformManager
 			if (mLayoutColumnGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesLayoutColumn(row, dataRecord);
-				row.LJCSetValues(mLayoutColumnGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 

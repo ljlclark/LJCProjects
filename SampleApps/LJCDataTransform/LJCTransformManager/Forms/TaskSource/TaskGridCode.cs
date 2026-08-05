@@ -63,7 +63,7 @@ namespace LJCTransformManager
 			SetStoredValuesTask(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(mTaskGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -73,7 +73,7 @@ namespace LJCTransformManager
 			if (mTaskGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesTask(row, dataRecord);
-				row.LJCSetValues(mTaskGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 

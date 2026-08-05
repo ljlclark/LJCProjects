@@ -61,7 +61,7 @@ namespace LJCFacilityManager
 			SetStoredValuesEquipment(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(mEquipmentGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -72,7 +72,7 @@ namespace LJCFacilityManager
 			if (mEquipmentGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesEquipment(row, dataRecord);
-				row.LJCSetValues(mEquipmentGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 

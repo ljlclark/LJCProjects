@@ -80,7 +80,7 @@ namespace LJCUnitMeasure
 			SetStoredValues(retValue, dataRecord);
 
       // Sets the row values from a data object.
-      retValue.LJCSetValues(mUnitMeasureGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -90,7 +90,7 @@ namespace LJCUnitMeasure
 			if (mUnitMeasureGrid.CurrentRow is LJCGridRow gridRow)
 			{
 				SetStoredValues(gridRow, dataRecord);
-				gridRow.LJCSetValues(mUnitMeasureGrid, dataRecord);
+				gridRow.LJCSetValues(dataRecord);
 			}
 		}
 

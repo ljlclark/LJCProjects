@@ -120,7 +120,7 @@ namespace LJCFacilityManager
 			SetStoredValuesBusiness(retValue, dataRecord);
 
       // Sets the row values from a data object.
-      retValue.LJCSetValues(BusinessGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -131,7 +131,7 @@ namespace LJCFacilityManager
 			if (BusinessGrid.CurrentRow is LJCGridRow gridRow)
 			{
 				SetStoredValuesBusiness(gridRow, dataRecord);
-				gridRow.LJCSetValues(BusinessGrid, dataRecord);
+				gridRow.LJCSetValues(dataRecord);
 			}
 		}
 

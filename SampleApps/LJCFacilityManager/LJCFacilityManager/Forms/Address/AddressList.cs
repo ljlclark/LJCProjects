@@ -121,7 +121,7 @@ namespace LJCFacilityManager
 			SetStoredValuesAddress(retValue, dataRecord);
 
       // Sets the row values from a data object.
-      retValue.LJCSetValues(AddressGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -132,7 +132,7 @@ namespace LJCFacilityManager
 			if (AddressGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesAddress(row, dataRecord);
-				row.LJCSetValues(AddressGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 

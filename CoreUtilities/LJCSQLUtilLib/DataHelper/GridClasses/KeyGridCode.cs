@@ -78,7 +78,7 @@ namespace DataHelper
       SetStoredValuesKey(retValue, record);
 
       // Sets the row values from a data object.
-      retValue.LJCSetValues(mParent.KeyGrid, record);
+      retValue.LJCSetValues(record);
       return retValue;
     }
 
@@ -88,7 +88,7 @@ namespace DataHelper
       if (mParent.KeyGrid.CurrentRow is LJCGridRow gridRow)
       {
         SetStoredValuesKey(gridRow, record);
-        gridRow.LJCSetValues(mParent.KeyGrid, record);
+        gridRow.LJCSetValues(record);
       }
     }
 

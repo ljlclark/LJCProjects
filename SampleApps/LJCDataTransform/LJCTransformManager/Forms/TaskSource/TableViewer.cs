@@ -75,7 +75,7 @@ namespace LJCTransformManager
 				foreach (DbRow dbRow in dbResult.Rows)
 				{
 					var gridRow = RecordsGrid.LJCRowAdd();
-					gridRow.LJCSetValues(RecordsGrid, dbRow.Values);
+					gridRow.LJCSetValues(dbRow.Values);
 				}
 			}
 			Cursor = Cursors.Default;

@@ -72,7 +72,7 @@ namespace LJCFacilityManager
 			SetStoredValuesAccount(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(mAccountGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -83,7 +83,7 @@ namespace LJCFacilityManager
 			if (mAccountGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesAccount(row, dataRecord);
-				row.LJCSetValues(mAccountGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 

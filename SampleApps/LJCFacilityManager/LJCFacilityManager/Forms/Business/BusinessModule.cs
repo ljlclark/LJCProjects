@@ -83,7 +83,7 @@ namespace LJCFacilityManager
 			SetStoredValuesBusiness(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(BusinessGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -94,7 +94,7 @@ namespace LJCFacilityManager
 			if (BusinessGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesBusiness(row, dataRecord);
-				row.LJCSetValues(BusinessGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 
@@ -181,7 +181,7 @@ namespace LJCFacilityManager
 			SetStoredValuesContact(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(ContactGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -192,7 +192,7 @@ namespace LJCFacilityManager
 			if (ContactGrid.CurrentRow is LJCGridRow gridRow)
 			{
 				SetStoredValuesContact(gridRow, dataRecord);
-				gridRow.LJCSetValues(ContactGrid, dataRecord);
+				gridRow.LJCSetValues(dataRecord);
 			}
 		}
 
@@ -315,7 +315,7 @@ namespace LJCFacilityManager
 			SetStoredValuesAddress(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(AddressGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -326,7 +326,7 @@ namespace LJCFacilityManager
 			if (AddressGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesAddress(row, dataRecord);
-				row.LJCSetValues(AddressGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 

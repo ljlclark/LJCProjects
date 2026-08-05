@@ -98,7 +98,7 @@ namespace LJCTransformManager
 			SetStoredValuesSource(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(SourceGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -160,7 +160,7 @@ namespace LJCTransformManager
 			SetStoredValuesTarget(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(TargetGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 

@@ -74,7 +74,7 @@ namespace LJCAppManager
 
       retValue = ModuleGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(ModuleGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 
@@ -84,7 +84,7 @@ namespace LJCAppManager
       if (ModuleGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, dataRecord);
-        row.LJCSetValues(ModuleGrid, dataRecord);
+        row.LJCSetValues(dataRecord);
       }
     }
 

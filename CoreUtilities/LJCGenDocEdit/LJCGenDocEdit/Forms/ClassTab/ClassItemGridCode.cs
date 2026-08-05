@@ -127,7 +127,7 @@ namespace LJCGenDocEdit
 
       var retValue = ClassGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(ClassGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 
@@ -143,7 +143,7 @@ namespace LJCGenDocEdit
       var columnName = LJCGenDocDAL.DocClass.ColumnID;
       var id = dbValues.LJCGetInt32(columnName);
       retValue.LJCSetInt32(columnName, id);
-      retValue.LJCSetValues(ClassGrid, dbValues);
+      retValue.LJCSetValues(dbValues);
       return retValue;
     }
 
@@ -153,7 +153,7 @@ namespace LJCGenDocEdit
       if (ClassGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, dataRecord);
-        row.LJCSetValues(ClassGrid, dataRecord);
+        row.LJCSetValues(dataRecord);
       }
     }
 

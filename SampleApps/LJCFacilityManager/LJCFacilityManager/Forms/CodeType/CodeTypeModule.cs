@@ -77,7 +77,7 @@ namespace LJCFacilityManager
 			SetStoredValuesCodeType(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(CodeTypeGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -88,7 +88,7 @@ namespace LJCFacilityManager
 			if (CodeTypeGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesCodeType(row, dataRecord);
-				row.LJCSetValues(CodeTypeGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 

@@ -70,7 +70,7 @@ namespace LJCFacilityManager
 			SetStoredValuesFixture(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(mFixtureGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -81,7 +81,7 @@ namespace LJCFacilityManager
 			if (mFixtureGrid.CurrentRow is LJCGridRow gridRow)
 			{
 				SetStoredValuesFixture(gridRow, dataRecord);
-				gridRow.LJCSetValues(mFixtureGrid, dataRecord);
+				gridRow.LJCSetValues(dataRecord);
 			}
 		}
 

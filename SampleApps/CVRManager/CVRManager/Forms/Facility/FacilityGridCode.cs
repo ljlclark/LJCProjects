@@ -58,7 +58,7 @@ namespace CVRManager
 			SetStoredValuesFacility(retValue, dataRecord);
 
       // Sets the row values from a data object.
-      retValue.LJCSetValues(mFacilityGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -68,7 +68,7 @@ namespace CVRManager
 			if (mFacilityGrid.CurrentRow is LJCGridRow gridRow)
 			{
 				SetStoredValuesFacility(gridRow, dataRecord);
-				gridRow.LJCSetValues(mFacilityGrid, dataRecord);
+				gridRow.LJCSetValues(dataRecord);
 			}
 		}
 

@@ -63,7 +63,7 @@ namespace LJCAppManager
 
       retValue = UserGrid.LJCRowAdd();
       SetStoredValuesUser(retValue, dataRecord);
-      retValue.LJCSetValues(UserGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 
@@ -73,7 +73,7 @@ namespace LJCAppManager
       if (UserGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValuesUser(row, dataRecord);
-        row.LJCSetValues(UserGrid, dataRecord);
+        row.LJCSetValues(dataRecord);
       }
     }
 
@@ -140,7 +140,7 @@ namespace LJCAppManager
 
       retValue = ProgramGrid.LJCRowAdd();
       SetStoredValuesProgram(retValue, dataRecord);
-      retValue.LJCSetValues(ProgramGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 
@@ -150,7 +150,7 @@ namespace LJCAppManager
       if (ProgramGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValuesProgram(row, dataRecord);
-        row.LJCSetValues(ProgramGrid, dataRecord);
+        row.LJCSetValues(dataRecord);
       }
     }
 
@@ -220,7 +220,7 @@ namespace LJCAppManager
 
       retValue = ModuleGrid.LJCRowAdd();
       SetStoredValuesModule(retValue, dataRecord);
-      retValue.LJCSetValues(ModuleGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 
@@ -230,7 +230,7 @@ namespace LJCAppManager
       if (ModuleGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValuesModule(row, dataRecord);
-        row.LJCSetValues(ModuleGrid, dataRecord);
+        row.LJCSetValues(dataRecord);
       }
     }
 

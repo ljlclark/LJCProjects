@@ -57,7 +57,7 @@ namespace LJCTransformManager
 			SetStoredValuesProcessGroup(retValue, dataRecord);
 
 			// Sets the row values from a data object.
-			retValue.LJCSetValues(mProcessGroupGrid, dataRecord);
+			retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -67,7 +67,7 @@ namespace LJCTransformManager
 			if (mProcessGroupGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesProcessGroup(row, dataRecord);
-				row.LJCSetValues(mProcessGroupGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 

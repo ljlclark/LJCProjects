@@ -64,7 +64,7 @@ namespace LJCGenTextEdit
     private LJCGridRow RowAdd(Replacement dataRecord)
     {
       var retValue = ReplacementGrid.LJCRowAdd();
-      retValue.LJCSetValues(ReplacementGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 
@@ -95,7 +95,7 @@ namespace LJCGenTextEdit
     {
       if (ReplacementGrid.CurrentRow is LJCGridRow gridRow)
       {
-        gridRow.LJCSetValues(ReplacementGrid, dataRecord);
+        gridRow.LJCSetValues(dataRecord);
       }
     }
     #endregion

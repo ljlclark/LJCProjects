@@ -65,7 +65,7 @@ namespace LJCGenDocEdit
 
       var retValue = MethodHeadingGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(MethodHeadingGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 
@@ -82,7 +82,7 @@ namespace LJCGenDocEdit
       var id = dbValues.LJCGetInt32(columnName);
       retValue.LJCSetInt32(columnName, id);
 
-      retValue.LJCSetValues(MethodHeadingGrid, dbValues);
+      retValue.LJCSetValues(dbValues);
       return retValue;
     }
 
@@ -116,7 +116,7 @@ namespace LJCGenDocEdit
       if (MethodHeadingGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, dataRecord);
-        row.LJCSetValues(MethodHeadingGrid, dataRecord);
+        row.LJCSetValues(dataRecord);
       }
     }
 

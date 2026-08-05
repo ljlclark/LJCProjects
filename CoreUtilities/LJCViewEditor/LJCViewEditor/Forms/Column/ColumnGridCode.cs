@@ -70,7 +70,7 @@ namespace LJCViewEditor
     {
       var retValue = ColumnGrid.LJCRowAdd();
       SetStoredValues(retValue, dataRecord);
-      retValue.LJCSetValues(ColumnGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 
@@ -84,7 +84,7 @@ namespace LJCViewEditor
       var id = dbValues.LJCGetInt32(columnName);
       retValue.LJCSetInt32(columnName, id);
 
-      retValue.LJCSetValues(ljcGrid, dbValues);
+      retValue.LJCSetValues(dbValues);
       return retValue;
     }
 
@@ -117,7 +117,7 @@ namespace LJCViewEditor
       if (ColumnGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, dataRecord);
-        row.LJCSetValues(ColumnGrid, dataRecord);
+        row.LJCSetValues(dataRecord);
       }
     }
 

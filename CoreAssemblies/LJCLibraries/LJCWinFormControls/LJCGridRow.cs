@@ -68,15 +68,16 @@ namespace LJCWinFormControls
 
     // Updates a grid row with LJCDataValues.
     /// <include file='Doc/LJCGridRow.xml'
-    ///  path='items/LJCRowSetValues2/*'/>
-    public void LJCSetValues(DataGridView grid, LJCDataValues dbValues)
+    ///  path='items/LJCSetValues2/*'/>
+    public void LJCSetValues(LJCDataValues dataValues)
     {
-      if (LJC.HasListItems(dbValues))
+      if (LJC.HasListItems(dataValues))
       {
+        var grid = DataGridView;
         List<object> listValues = new List<object>();
         foreach (DataGridViewColumn gridColumn in grid.Columns)
         {
-          listValues.Add(dbValues.LJCGetString(gridColumn.Name));
+          listValues.Add(dataValues.LJCGetString(gridColumn.Name));
         }
         var values = listValues.ToArray();
         SetValues(values);
@@ -85,9 +86,10 @@ namespace LJCWinFormControls
 
     // Updates a grid row with the object values.
     /// <include file='Doc/LJCGridRow.xml'
-    ///  path='items/LJCRowSetValues1/*'/>
-    public void LJCSetValues(DataGridView grid, object[] values)
+    ///  path='items/LJCSetValues3/*'/>
+    public void LJCSetValues(object[] values)
     {
+      var grid = DataGridView;
       if ((values != null && values.Count() > 0)
         && (values.Count() <= grid.Columns.Count))
       {
@@ -97,13 +99,14 @@ namespace LJCWinFormControls
 
     // Updates a grid row with the record values.
     /// <include file='Doc/LJCGridRow.xml'
-    ///  path='items/LJCRowSetValues3/*'/>
-    public void LJCSetValues(DataGridView grid, object record)
+    ///  path='items/LJCSetValues4/*'/>
+    public void LJCSetValues(object record)
     {
       LJCReflect reflect;
       string value;
 
       // Attempt to populate all existing columns.
+      var grid = DataGridView;
       reflect = new LJCReflect(record);
       foreach (DataGridViewColumn gridColumn in grid.Columns)
       {

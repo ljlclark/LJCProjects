@@ -60,7 +60,7 @@ namespace LJCGenTextEdit
     private LJCGridRow RowAdd(RepeatItem dataRecord)
     {
       var retValue = ItemGrid.LJCRowAdd();
-      retValue.LJCSetValues(ItemGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
       return retValue;
     }
 
@@ -93,7 +93,7 @@ namespace LJCGenTextEdit
     {
       if (ItemGrid.CurrentRow is LJCGridRow gridRow)
       {
-        gridRow.LJCSetValues(ItemGrid, dataRecord);
+        gridRow.LJCSetValues(dataRecord);
       }
     }
     #endregion

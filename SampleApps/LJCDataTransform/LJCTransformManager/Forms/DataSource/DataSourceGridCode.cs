@@ -69,7 +69,7 @@ namespace LJCTransformManager
 			SetStoredValuesDataProcess(retValue, dataRecord);
 
       // Sets the row values from a data object.
-      retValue.LJCSetValues(mDataSourceGrid, dataRecord);
+      retValue.LJCSetValues(dataRecord);
 			return retValue;
 		}
 
@@ -79,7 +79,7 @@ namespace LJCTransformManager
 			if (mDataSourceGrid.CurrentRow is LJCGridRow row)
 			{
 				SetStoredValuesDataProcess(row, dataRecord);
-				row.LJCSetValues(mDataSourceGrid, dataRecord);
+				row.LJCSetValues(dataRecord);
 			}
 		}
 
