@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ConnectionTemplate.cs
 using System;
@@ -6,13 +6,15 @@ using System;
 namespace LJCDataAccessConfig
 {
   // Represents a Connection String template.
-  /// <include path='items/ConnectionTemplate/*' file='Doc/ConnectionTemplate.xml'/>
+  /// <include file='Doc/ConnectionTemplate.xml'
+  ///  path='items/ConnectionTemplate/*'/>
   public class ConnectionTemplate : IComparable<ConnectionTemplate>
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/Constructor/*' file='Doc/ConnectionTemplate.xml'/>
+    /// <include file='Doc/ConnectionTemplate.xml'
+    ///  path='items/Constructor/*'/>
     public ConnectionTemplate()
     {
     }
@@ -21,7 +23,8 @@ namespace LJCDataAccessConfig
     #region Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='Doc/ConnectionTemplate.xml'/>
+    /// <include file='Doc/ConnectionTemplate.xml'
+    ///  path='items/Clone/*'/>
     public ConnectionTemplate Clone()
     {
       ConnectionTemplate retValue = MemberwiseClone() as ConnectionTemplate;
@@ -29,14 +32,16 @@ namespace LJCDataAccessConfig
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='Doc/ConnectionTemplate.xml'/>
+    /// <include file='Doc/ConnectionTemplate.xml'
+    ///  path='items/ToString/*'/>
     public override string ToString()
     {
       return Name;
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='Doc/ConnectionTemplate.xml'/>
+    /// <include file='Doc/ConnectionTemplate.xml'
+    ///  path='items/CompareTo/*'/>
     public int CompareTo(ConnectionTemplate other)
     {
       int retValue;

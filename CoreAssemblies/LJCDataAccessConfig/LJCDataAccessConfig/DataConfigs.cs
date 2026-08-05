@@ -11,7 +11,8 @@ using LJCNetCommon;
 namespace LJCDataAccessConfig
 {
   // Represents a collection of DataConfig objects.
-  /// <include path='items/DataConfigs/*' file='Doc/DataConfigsDoc.xml'/>
+  /// <include file='Doc/DataConfigsDoc.xml'
+  ///  path='items/DataConfigs/*'/>
   [XmlRoot("DataConfigs")]
   public class DataConfigs : List<DataConfig>
   {
@@ -37,7 +38,8 @@ namespace LJCDataAccessConfig
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DataConfigsC/*' file='Doc/DataConfigsDoc.xml'/>
+    /// <include file='Doc/DataConfigsDoc.xml'
+    ///  path='items/DataConfigsC/*'/>
     public DataConfigs()
     {
       mConfigFileName = "DataConfigs.xml";
@@ -50,7 +52,8 @@ namespace LJCDataAccessConfig
     #region Public Methods
 
     // Retrieves the config data.
-    /// <include path='items/LJCLoadData/*' file='Doc/DataConfigsDoc.xml'/>
+    /// <include file='Doc/DataConfigsDoc.xml'
+    ///  path='items/LJCLoadData/*'/>
     public void LJCLoadData()
     {
       if (!File.Exists(ConfigFileSpec))
@@ -70,7 +73,8 @@ namespace LJCDataAccessConfig
     }
 
     // Creates and adds the object from the provided valus.
-    /// <include path='items/Add/*' file='Doc/DataConfigsDoc.xml'/>
+    /// <include file='Doc/DataConfigsDoc.xml'
+    ///  path='items/Add/*'/>
     public DataConfig Add(string name, string dbServer, string database)
     {
       DataConfig retValue = new DataConfig
@@ -86,7 +90,8 @@ namespace LJCDataAccessConfig
     }
 
     // Retrieve the data configuration.
-    /// <include path='items/LJCGetByName/*' file='Doc/DataConfigsDoc.xml'/>
+    /// <include file='Doc/DataConfigsDoc.xml'
+    ///  path='items/LJCGetByName/*'/>
     public DataConfig LJCGetByName(string name)
     {
       DataConfig retValue;
@@ -115,7 +120,8 @@ namespace LJCDataAccessConfig
     }
 
     // Saves the config data.
-    /// <include path='items/LJCSave/*' file='Doc/DataConfigsDoc.xml'/>
+    /// <include file='Doc/DataConfigsDoc.xml'
+    ///  path='items/LJCSave/*'/>
     public void LJCSave()
     {
       NetCommon.XmlSerialize(this.GetType(), this, null, ConfigFileSpec);

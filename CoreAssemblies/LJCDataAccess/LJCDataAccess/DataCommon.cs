@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataCommon.cs
 using System;
@@ -11,13 +11,15 @@ using MySql.Data.MySqlClient;
 namespace LJCDataAccess
 {
   // Provides common data methods.
-  /// <include path='items/DataCommon/*' file='Doc/DataCommon.xml'/>
+  /// <include file='Doc/DataCommon.xml'
+  ///  path='items/DataCommon/*'/>
   public class DataCommon
   {
     #region Data Access Methods
 
     // Clones a DataColumn object.
-    /// <include path='items/DataColumnClone/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/DataColumnClone/*'/>
     public static DataColumn DataColumnClone(DataColumn dataColumn)
     {
       DataColumn retValue = null;
@@ -38,7 +40,8 @@ namespace LJCDataAccess
     }
 
     // Get a DataColumn collection from the specified ColumnName values.
-    /// <include path='items/GetColumns/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetColumns/*'/>
     public static DataColumnCollection GetColumns(DataTable dataTable
       , string[] columnNames = null)
     {
@@ -56,7 +59,8 @@ namespace LJCDataAccess
     }
 
     // Retrieves the database connection ConnectionType value.
-    /// <include path='items/GetConnectionType/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetConnectionType/*'/>
     public static ConnectionType GetConnectionType(string connectionTypeName)
     {
       ConnectionType retVal = ConnectionType.SqlServer;
@@ -88,7 +92,8 @@ namespace LJCDataAccess
     }
 
     // Sets the data adapter table mappings.
-    /// <include path='items/SetTableMapping/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/SetTableMapping/*'/>
     public static void SetTableMapping(DbDataAdapter dataAdapter
       , DataTableMappingCollection tableMapping)
     {
@@ -106,7 +111,8 @@ namespace LJCDataAccess
     }
 
     // Sets the data adapter table mappings.
-    /// <include path='items/SetTableMappingMySql/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/SetTableMappingMySql/*'/>
     public static void SetTableMappingMySql(MySqlDataAdapter dataAdapter
       , DataTableMappingCollection tableMapping)
     {
@@ -127,7 +133,8 @@ namespace LJCDataAccess
     #region Data Conversion Methods
 
     // Converts the date string to a DateTime value.
-    /// <include path='items/GetDbDate/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetDbDate/*'/>
     public static DateTime GetDbDate(string dateText
       , ConnectionType connectionType = ConnectionType.SqlServer)
     {
@@ -144,7 +151,8 @@ namespace LJCDataAccess
     }
 
     // Converts the date string to a DateTime value.
-    /// <include path='items/GetDbDateTime/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetDbDateTime/*'/>
     public static DateTime GetDbDateTime(string dateText
       , ConnectionType connectionType = ConnectionType.SqlServer)
     {
@@ -160,7 +168,8 @@ namespace LJCDataAccess
     }
 
     // Formats the DateTime value to a date string in database format.
-    /// <include path='items/GetDbDateString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetDbDateString/*'/>
     public static string GetDbDateString(DateTime dateTime
       , ConnectionType dbType = ConnectionType.SqlServer)
     {
@@ -172,7 +181,8 @@ namespace LJCDataAccess
     }
 
     // Formats the DateTime value to a date/time string in database format.
-    /// <include path='items/GetDbDateTimeString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetDbDateTimeString/*'/>
     public static string GetDbDateTimeString(DateTime dateTime)
     {
       string retValue;
@@ -182,7 +192,8 @@ namespace LJCDataAccess
     }
 
     // Get the minimum date/time value.
-    /// <include path='items/GetMinDateTime/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetMinDateTime/*'/>
     public static DateTime GetMinDateTime(ConnectionType connectionType
       = ConnectionType.SqlServer)
     {
@@ -202,7 +213,8 @@ namespace LJCDataAccess
     }
 
     // Get the minimum date/time string formatted for display.
-    /// <include path='items/GetMinUIDateTimeString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetMinUIDateTimeString/*'/>
     public static string GetMinUIDateTimeString(ConnectionType connectionType
       = ConnectionType.SqlServer)
     {
@@ -220,7 +232,8 @@ namespace LJCDataAccess
     }
 
     // Format the date value for display.
-    /// <include path='items/GetUIDateString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetUIDateString/*'/>
     public static string GetUIDateString(DateTime? dateTime)
     {
       string retValue = null;
@@ -234,7 +247,8 @@ namespace LJCDataAccess
     }
 
     // Format the date/time value for display.
-    /// <include path='items/GetUIDateTimeString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetUIDateTimeString/*'/>
     public static string GetUIDateTimeString(DateTime dateTime)
     {
       string retValue = null;
@@ -247,7 +261,8 @@ namespace LJCDataAccess
     }
 
     // Format the date/time to time for display.
-    /// <include path='items/GetUITimeString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetUITimeString/*'/>
     public static string GetUITimeString(DateTime dateTime)
     {
       string retValue = null;

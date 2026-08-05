@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ProcedureParameters.cs
 using System.Collections.Generic;
@@ -10,19 +10,22 @@ using LJC = LJCNetCommon.NetCommon;
 namespace LJCDataAccess
 {
   // Represents a collection of ProcedureParameter objects.
-  /// <include path='items/ProcedureParameters/*' file='Doc/ProcedureParameters.xml'/>
+  /// <include file='Doc/ProcedureParameters.xml'
+  ///  path='items/ProcedureParameters/*'/>
   public class ProcedureParameters : List<ProcedureParameter>
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public ProcedureParameters()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public ProcedureParameters(ProcedureParameters items)
     {
       if (LJC.HasListItems(items))
@@ -38,7 +41,8 @@ namespace LJCDataAccess
     #region Public Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/AddSql/*' file='Doc/ProcedureParameters.xml'/>
+    /// <include file='Doc/ProcedureParameters.xml'
+    ///  path='items/AddSql/*'/>
     public ProcedureParameter Add(string parameterName, SqlDbType sqlDbType, int size
       , object value = null, ParameterDirection direction = ParameterDirection.Input)
     {
@@ -55,7 +59,8 @@ namespace LJCDataAccess
     }
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/AddMySql/*' file='Doc/ProcedureParameters.xml'/>
+    /// <include file='Doc/ProcedureParameters.xml'
+    ///  path='items/AddMySql/*'/>
     public ProcedureParameter Add(string parameterName, MySqlDbType mySqlDbType, int size
       , object value = null, ParameterDirection direction = ParameterDirection.Input)
     {
@@ -72,7 +77,8 @@ namespace LJCDataAccess
     }
 
     // Retrieve the collection element by name.
-    /// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSearchName/*'/>
     public ProcedureParameter LJCSearchName(string name)
     {
       ProcedureParameter retValue = null;

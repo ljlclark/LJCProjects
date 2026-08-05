@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ConnectionTemplates.cs
 using System;
@@ -11,14 +11,16 @@ using LJCNetCommon;
 namespace LJCDataAccessConfig
 {
   // Represents a collection of Connection string templates.
-  /// <include path='items/ConnectionTemplates/*' file='Doc/ConnectionTemplatesDoc.xml'/>
+  /// <include file='Doc/ConnectionTemplatesDoc.xml'
+  ///  path='items/ConnectionTemplates/*'/>
   [XmlRoot("ConnectionTemplates")]
   public class ConnectionTemplates : List<ConnectionTemplate>
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/ConnectionTemplatesC/*' file='Doc/ConnectionTemplatesDoc.xml'/>
+    /// <include file='Doc/ConnectionTemplatesDoc.xml'
+    ///  path='items/ConnectionTemplatesC/*'/>
     public ConnectionTemplates()
     {
       mTemplateFileName = "ConnectionTemplates.xml";
@@ -31,7 +33,8 @@ namespace LJCDataAccessConfig
     #region Public Methods
 
     // Retrieves the config data.
-    /// <include path='items/LJCLoadData/*' file='Doc/ConnectionTemplatesDoc.xml'/>
+    /// <include file='Doc/ConnectionTemplatesDoc.xml'
+    ///  path='items/LJCLoadData/*'/>
     public void LJCLoadData()
     {
       if (!File.Exists(LJCTemplateFileSpec))
@@ -51,7 +54,8 @@ namespace LJCDataAccessConfig
     }
 
     // Creates and adds the object from the provided valus.
-    /// <include path='items/Add/*' file='Doc/ConnectionTemplatesDoc.xml'/>
+    /// <include file='Doc/ConnectionTemplatesDoc.xml'
+    ///  path='items/Add/*'/>
     public ConnectionTemplate Add(string name, string template)
     {
       ConnectionTemplate retValue = new ConnectionTemplate()
@@ -64,7 +68,8 @@ namespace LJCDataAccessConfig
     }
 
     // Retrieve the data configuration.
-    /// <include path='items/LJCGetByName/*' file='Doc/ConnectionTemplatesDoc.xml'/>
+    /// <include file='Doc/ConnectionTemplatesDoc.xml'
+    ///  path='items/LJCGetByName/*'/>
     public ConnectionTemplate LJCGetByName(string name)
     {
       ConnectionTemplate retValue;
@@ -93,7 +98,8 @@ namespace LJCDataAccessConfig
     }
 
     // Saves the config data.
-    /// <include path='items/LJCSave/*' file='Doc/ConnectionTemplatesDoc.xml'/>
+    /// <include file='Doc/ConnectionTemplatesDoc.xml'
+    ///  path='items/LJCSave/*'/>
     public void LJCSave()
     {
       NetCommon.XmlSerialize(GetType(), this, null, LJCTemplateFileSpec);

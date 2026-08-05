@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCCrypto.cs
 using System;
@@ -8,13 +8,15 @@ using LJCNetCommon;
 namespace LJCDataAccessConfig
 {
   // Data access encryption.
-  /// <include path='items/LJCCrypto/*' file='Doc/LJCCrypto.xml'/>
+  /// <include file='Doc/LJCCrypto.xml'
+  ///  path='items/LJCCrypto/*'/>
   public class LJCCrypto
   {
     #region Methods
 
     // Retrieves the administrator flag.
-    /// <include path='items/GetIsAdministrator/*' file='Doc/LJCCrypto.xml'/>
+    /// <include file='Doc/LJCCrypto.xml'
+    ///  path='items/GetIsAdministrator/*'/>
     public static bool GetIsAdministrator(string password)
     {
       LJCCrypto crypto = new LJCCrypto();
@@ -24,7 +26,8 @@ namespace LJCDataAccessConfig
     }
 
     // Encrypt the user information.
-    /// <include path='items/Encrypt/*' file='Doc/LJCCrypto.xml'/>
+    /// <include file='Doc/LJCCrypto.xml'
+    ///  path='items/Encrypt/*'/>
     public string Encrypt()
     {
       StringBuilder builder;
@@ -45,7 +48,8 @@ namespace LJCDataAccessConfig
     }
 
     // Decrypts the user information.
-    /// <include path='items/Decrypt/*' file='Doc/LJCCrypto.xml'/>
+    /// <include file='Doc/LJCCrypto.xml'
+    ///  path='items/Decrypt/*'/>
     public bool Decrypt(string value)
     {
       LJCCryptography ljcCryptography;

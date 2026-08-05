@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataConfig.cs
 using System;
@@ -9,13 +9,15 @@ using LJCNetCommon;
 namespace LJCDataAccessConfig
 {
   // Represents a data location configuration.
-  /// <include path='items/DataConfig/*' file='Doc/ProjectDataAccessConfig.xml'/>
+  /// <include file='Doc/ProjectDataAccessConfig.xml'
+  ///  path='items/DataConfig/*'/>
   public partial class DataConfig : IComparable<DataConfig>
   {
     #region Static Functions
 
     // Retrieves the provider name value. 
-    /// <include path='items/GetProviderName/*' file='Doc/DataConfig.xml'/>
+    /// <include file='Doc/DataConfig.xml'
+    ///  path='items/GetProviderName/*'/>
     public static string GetProviderName(string connectionTypeName)
     {
       string retVal = "System.Data.SqlClient";
@@ -50,7 +52,8 @@ namespace LJCDataAccessConfig
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DataConfigC/*' file='Doc/DataConfig.xml'/>
+    /// <include file='Doc/DataConfig.xml'
+    ///  path='items/DataConfigC/*'/>
     public DataConfig()
     {
       G = SymmetricAlgorithm.Create("Rijndael");
@@ -60,28 +63,32 @@ namespace LJCDataAccessConfig
     #region Public Methods
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='Doc/DataConfig.xml'/>
+    /// <include file='Doc/DataConfig.xml'
+    ///  path='items/ToString/*'/>
     public override string ToString()
     {
       return mName;
     }
 
     // Retrieves the provider name value.
-    /// <include path='items/GetProviderName2/*' file='Doc/DataConfig.xml'/>
+    /// <include file='Doc/DataConfig.xml'
+    ///  path='items/GetProviderName2/*'/>
     public string GetProviderName()
     {
       return GetProviderName(ConnectionType);
     }
 
     // Creates the populated connection string.
-    /// <include path='items/GetConnectionString1/*' file='Doc/DataConfig.xml'/>
+    /// <include file='Doc/DataConfig.xml'
+    ///  path='items/GetConnectionString1/*'/>
     public string GetConnectionString()
     {
       return GetConnectionString(ConnectionType);
     }
 
     // Creates the populated connection string from the ConnectionType name.
-    /// <include path='items/GetConnectionString2/*' file='Doc/DataConfig.xml'/>
+    /// <include file='Doc/DataConfig.xml'
+    ///  path='items/GetConnectionString2/*'/>
     public string GetConnectionString(string connectionType)
     {
       ConnectionTemplates connectionTemplates;
@@ -96,7 +103,8 @@ namespace LJCDataAccessConfig
     }
 
     // Creates the populated connection string from the template text.
-    /// <include path='items/GetConnectionStringFromText/*' file='Doc/DataConfig.xml'/>
+    /// <include file='Doc/DataConfig.xml'
+    ///  path='items/GetConnectionStringFromText/*'/>
     public string GetConnectionStringFromText(string templateText)
     {
       DbConnectionStringBuilder connectionBuilder;
@@ -141,7 +149,8 @@ namespace LJCDataAccessConfig
     }
 
     // Creates the SQL integrated connection string from an internal value.
-    /// <include path='items/SQLIntegratedConnectionString/*' file='Doc/DataConfig.xml'/>
+    /// <include file='Doc/DataConfig.xml'
+    ///  path='items/SQLIntegratedConnectionString/*'/>
     public string SQLIntegratedConnectionString()
     {
       string retValue;
@@ -197,7 +206,8 @@ namespace LJCDataAccessConfig
     #region IComparable Methods
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='Doc/DataConfig.xml'/>
+    /// <include file='Doc/DataConfig.xml'
+    ///  path='items/CompareTo/*'/>
     public int CompareTo(DataConfig other)
     {
       int retValue;
