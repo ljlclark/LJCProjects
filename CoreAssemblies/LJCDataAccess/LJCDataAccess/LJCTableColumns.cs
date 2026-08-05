@@ -59,7 +59,6 @@ namespace LJCDataAccess
     // Returns a set of DataColumns that match the supplied list.
     /// <include file='Doc/LJCTableColumns.xml'
     ///  path='items/Columns/*'/>
-    // Note: Also in LJCGridDataLib.TableData
     public static DataColumnCollection Columns(DataColumnCollection adoColumns
       , List<string> columnNames = null)
     {

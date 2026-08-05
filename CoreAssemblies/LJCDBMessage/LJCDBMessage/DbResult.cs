@@ -345,30 +345,6 @@ namespace LJCDBMessage
       }
     }
 
-    //// Sets the result records from the DataTable, principle values
-    //// and join values.
-    ///// <include path='items/SetRows/*' file='Doc/DbResult.xml'/>
-    //[Obsolete("Use SetRows(DataTable, DbJoins")]
-    //public void SetRows(DataTable dataTable
-    //  , LJCDataColumns dataColumns, DbJoins dbJoins = null)
-    //{
-    //  if (LJC.HasData(dataTable))
-    //  {
-    //    // *** Next Statement *** Add 12/25/24
-    //    dataColumns = TableData.GetLJCDataColumns(dataTable.Columns);
-    //    foreach (DataRow dataRow in dataTable.Rows)
-    //    {
-    //      LJCDataValues dataValues = GetRowValues(dataColumns, dataRow);
-    //      AddJoinRowValues(dataValues, dataRow, dbJoins);
-    //      DbRow row = new DbRow()
-    //      {
-    //        Values = dataValues
-    //      };
-    //      Rows.Add(row);
-    //    }
-    //  }
-    //}
-
     // Gets the result values from the data row.
     /// <include file='Doc/DbResult.xml'
     ///  path='items/GetRowValues/*'/>
@@ -378,13 +354,13 @@ namespace LJCDBMessage
       object value;
       LJCDataValues retValue = new LJCDataValues();
 
-      foreach (LJCDataColumn dbColumn in dataColumns)
+      foreach (LJCDataColumn dataColumn in dataColumns)
       {
         // Get the datarow value.
-        string columnName = dbColumn.ColumnName;
-        if (dbColumn.RenameAs != null)
+        string columnName = dataColumn.ColumnName;
+        if (dataColumn.RenameAs != null)
         {
-          columnName = dbColumn.RenameAs;
+          columnName = dataColumn.RenameAs;
         }
 
         value = dataRow[columnName];
@@ -393,9 +369,9 @@ namespace LJCDBMessage
           value = null;
         }
 
-        if (value != null || dbColumn.AllowDBNull)
+        if (value != null || dataColumn.AllowDBNull)
         {
-          LJCDataValue dataValue = dbColumn;
+          LJCDataValue dataValue = dataColumn;
           dataValue.Value = value;
           retValue.Add(dataValue);
         }
