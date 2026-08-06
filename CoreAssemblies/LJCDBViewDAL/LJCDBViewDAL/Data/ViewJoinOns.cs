@@ -1,19 +1,21 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoinOns.cs
 using System.Collections.Generic;
 
 namespace LJCDBViewDAL
 {
-	/// Represents a collection of ViewJoinOn objects. 
-	/// <include path='items/ViewJoinOns/*' file='Doc/ViewJoinOns.xml'/>
-	public class ViewJoinOns : List<ViewJoinOn>
+  // Represents a collection of ViewJoinOn objects. 
+  /// <include file='Doc/ViewJoinOns.xml'
+  ///  path='items/ViewJoinOns/*'/>
+  public class ViewJoinOns : List<ViewJoinOn>
 	{
-		#region Public Methods
+    #region Public Methods
 
-		/// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='Doc/ViewJoinOns.xml'/>
-		public ViewJoinOn Add(int id, int viewJoinID, string fromColumnName
+    // Creates and adds the object from the provided values.
+    /// <include file='Doc/ViewJoinOns.xml'
+    ///  path='items/Add/*'/>
+    public ViewJoinOn Add(int id, int viewJoinID, string fromColumnName
 			, string toColumnName)
 		{
 			ViewJoinOn retValue = new ViewJoinOn()
@@ -27,9 +29,10 @@ namespace LJCDBViewDAL
 			return retValue;
 		}
 
-		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='Doc/ViewJoinOns.xml'/>
-		public ViewJoinOn LJCSearchName(string fromColumnName)
+    // Retrieve the collection element with name.
+    /// <include file='Doc/ViewJoinOns.xml'
+    ///  path='items/LJCSearchName/*'/>
+    public ViewJoinOn LJCSearchName(string fromColumnName)
 		{
 			ViewJoinOn retValue = null;
 

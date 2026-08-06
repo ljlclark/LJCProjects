@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataDbView.cs
 using System;
@@ -26,7 +26,8 @@ namespace LJCDBViewDAL
     #region Get View Methods
 
     // Retrieves the View data.
-    /// <include path='items/GetViewData/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/GetViewData/*'/>
     public DbResult GetViewData(string tableName, int viewDataID)
     {
       DbResult retValue = null;
@@ -47,7 +48,8 @@ namespace LJCDBViewDAL
     }
 
     // Creates the DbRequest object for the specified View.
-    /// <include path='items/GetViewRequest1/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/GetViewRequest1/*'/>
     public DbRequest GetViewRequest(string tableName, string viewName)
     {
       DbRequest retValue = null;
@@ -94,7 +96,8 @@ namespace LJCDBViewDAL
     }
 
     // Gets the ViewGrid columns.
-    /// <include path='items/GetGridColumns/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/GetGridColumns/*'/>
     public LJCDataColumns GetGridColumns(int viewDataID)
     {
       return Managers.ViewGridColumnManager.GetGridColumns(viewDataID);
@@ -201,7 +204,8 @@ namespace LJCDBViewDAL
     #region Create Data Methods
 
     // Creates and returns the default ViewData record.
-    /// <include path='items/CreateDefaultViewData/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/CreateDefaultViewData/*'/>
     public ViewData CreateDefaultViewData(DbRequest dbRequest)
     {
       ViewData retValue;
@@ -213,7 +217,8 @@ namespace LJCDBViewDAL
     }
 
     // Creates and returns the default ViewTable record.
-    /// <include path='items/CreateDefaultViewTable/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/CreateDefaultViewTable/*'/>
     public ViewTable CreateDefaultViewTable(string tableName)
     {
       ViewTable retValue;
@@ -232,7 +237,8 @@ namespace LJCDBViewDAL
     #region Column Conversion Methods
 
     // Creates and returns a LJCDataColumn object from a ViewColumn record.
-    /// <include path='items/GetDbColumnFromViewColumn/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/GetDbColumnFromViewColumn/*'/>
     public LJCDataColumn GetDbColumnFromViewColumn(ViewColumn viewColumn)
     {
       LJCDataColumn retValue = new LJCDataColumn()
@@ -247,7 +253,8 @@ namespace LJCDBViewDAL
     }
 
     // Creates and returns a LJCDataColumn object from a ViewGridColumn record.
-    /// <include path='items/GetDbColumnFromViewGridColumn/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/GetDbColumnFromViewGridColumn/*'/>
     public LJCDataColumn GetDbColumnFromViewGridColumn(ViewGridColumn viewGridColumn)
     {
       LJCDataColumn retValue = new LJCDataColumn()
@@ -260,7 +267,8 @@ namespace LJCDBViewDAL
     }
 
     // Creates and returns a LJCDataColumn object from a ViewJoinColumn record.
-    /// <include path='items/GetDbColumnFromViewJoinColumn/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/GetDbColumnFromViewJoinColumn/*'/>
     public LJCDataColumn GetDbColumnFromViewJoinColumn(ViewJoinColumn viewJoinColumn)
     {
       LJCDataColumn retValue = new LJCDataColumn()
@@ -275,7 +283,8 @@ namespace LJCDBViewDAL
     }
 
     // Creates and returns a ViewColumn record from a LJCDataColumn object.
-    /// <include path='items/GetViewColumnFromDbColumn/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/GetViewColumnFromDbColumn/*'/>
     public ViewColumn GetViewColumnFromDbColumn(LJCDataColumn dbColumn
       , int viewDataID = 0)
     {
@@ -305,7 +314,8 @@ namespace LJCDBViewDAL
     //}
 
     // Creates and returns a ViewJoinColumn record from a LJCDataColumn object. 
-    /// <include path='items/GetViewJoinColumnFromDbColumn/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/GetViewJoinColumnFromDbColumn/*'/>
     public ViewJoinColumn GetViewJoinColumnFromDbColumn(LJCDataColumn dbColumn
       , int viewJoinID)
     {
@@ -324,7 +334,8 @@ namespace LJCDBViewDAL
     }
 
     // Creates and returns a ViewJoinColumns collection from a LJCDataColumns collection.
-    /// <include path='items/GetViewJoinColumnsFromDbColumns/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/GetViewJoinColumnsFromDbColumns/*'/>
     public ViewJoinColumns GetViewJoinColumnsFromDbColumns(LJCDataColumns dbColumns
       , int viewJoinID = 0)
     {
@@ -341,7 +352,8 @@ namespace LJCDBViewDAL
     #region Save Grid Column Methods
 
     // Saves the ViewGridColumns from the specified DbRequest columns.
-    /// <include path='items/SaveRequestViewGridColumns/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/SaveRequestViewGridColumns/*'/>
     public ViewGridColumns SaveRequestViewGridColumns(int viewDataID
       , DbRequest dbRequest)
     {
@@ -397,8 +409,6 @@ namespace LJCDBViewDAL
       return retValue;
     }
 
-    //// Saves the ViewGridColumn from the specified ViewJoin column.
-    ///// <include path='items/SaveJoinGridColumn/*' file='Doc/ViewHelper.xml'/>
     //private ViewGridColumn SaveJoinGridColumn(ViewJoin viewJoin, LJCDataColumn dbColumn
     //	, int sequence)
     //{
@@ -437,7 +447,8 @@ namespace LJCDBViewDAL
     //}
 
     // Saves the ViewGridColumns from the specified DbRequest join columns.
-    /// <include path='items/SaveRequestJoinGridColumns/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/SaveRequestJoinGridColumns/*'/>
     private ViewGridColumns SaveRequestJoinGridColumns(int viewDataID, DbRequest dbRequest
       , int sequence)
     {
@@ -488,7 +499,8 @@ namespace LJCDBViewDAL
     #region Save DbRequest View Methods
 
     // Saves the view from the specified DbRequest object.
-    /// <include path='items/SaveRequestView/*' file='Doc/ViewHelper.xml'/>
+    /// <include file='Doc/ViewHelper.xml'
+    ///  path='items/SaveRequestView/*'/>
     public ViewData SaveRequestView(string viewName, string viewDescription, DbRequest dbRequest)
     {
       ViewData retValue = null;

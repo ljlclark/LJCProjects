@@ -10,29 +10,32 @@ namespace LJCDBViewDAL
 	/// <summary>The ViewColumn table Data Record.</summary>
 	public class ViewColumn : IComparable<ViewColumn>
 	{
-		#region Constructors
+    #region Constructors
 
-		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public ViewColumn()
+    // Initializes an object instance.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
+    public ViewColumn()
 		{
 			ChangedNames = new ChangedNames();
 		}
-		#endregion
+    #endregion
 
-		#region Data Methods
+    #region Data Methods
 
-		// Creates and returns a clone of this object.
-		/// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public ViewColumn Clone()
+    // Creates and returns a clone of this object.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
+    public ViewColumn Clone()
 		{
 			ViewColumn retValue = MemberwiseClone() as ViewColumn;
 			return retValue;
 		}
 
-		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public int CompareTo(ViewColumn other)
+    // Provides the default Sort functionality.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CompareTo/*'/>
+    public int CompareTo(ViewColumn other)
 		{
 			int retValue;
 
@@ -48,9 +51,10 @@ namespace LJCDBViewDAL
 			return retValue;
 		}
 
-		// The object string identifier.
-		/// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public override string ToString()
+    // The object string identifier.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/ToString/*'/>
+    public override string ToString()
 		{
 			string retValue = mColumnName;
 

@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewOrderBys.cs
 using System.Collections.Generic;
@@ -9,11 +9,12 @@ namespace LJCDBViewDAL
 	/// <include path='items/ViewOrderBys/*' file='Doc/ViewOrderBys.xml'/>
 	public class ViewOrderBys : List<ViewOrderBy>
 	{
-		#region Public Methods
+    #region Public Methods
 
-		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='Doc/ViewOrderBys.xml'/>
-		public ViewOrderBy Add(int id, string columnName)
+    // Creates and adds the object from the provided values.
+    /// <include file='Doc/ViewOrderBys.xml'
+    ///  path='items/Add/*'/>
+    public ViewOrderBy Add(int id, string columnName)
 		{
 			ViewOrderBy retValue = new ViewOrderBy()
 			{
@@ -24,9 +25,10 @@ namespace LJCDBViewDAL
 			return retValue;
 		}
 
-		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='Doc/ViewOrderBys.xml'/>
-		public ViewOrderBy LJCSearchName(string columnName)
+    // Retrieve the collection element with name.
+    /// <include file='Doc/ViewOrderBys.xml'
+    ///  path='items/LJCSearchName/*'/>
+    public ViewOrderBy LJCSearchName(string columnName)
 		{
 			ViewOrderBy retValue = null;
 

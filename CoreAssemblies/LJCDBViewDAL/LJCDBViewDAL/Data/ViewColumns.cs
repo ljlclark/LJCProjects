@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewColumns.cs
 using System.Collections.Generic;
@@ -11,21 +11,23 @@ namespace LJCDBViewDAL
 	/// <include path='items/Collection/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 	public class ViewColumns : List<ViewColumn>
 	{
-		#region Constructors
+    #region Constructors
 
-		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public ViewColumns()
+    // Initializes an object instance.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
+    public ViewColumns()
 		{
 			mPrevCount = -1;
 		}
-		#endregion
+    #endregion
 
-		#region Collection Methods
+    #region Collection Methods
 
-		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public ViewColumn Add(int id, string name)
+    // Creates and adds the object from the provided values.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/Add/*'/>
+    public ViewColumn Add(int id, string name)
 		{
 			ViewColumn retValue = null;
 
@@ -46,9 +48,10 @@ namespace LJCDBViewDAL
 			return retValue;
 		}
 
-		// Get custom collection from List<T>.
-		/// <include path='items/GetCollection/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public ViewColumns GetCollection(List<ViewColumn> list)
+    // Get custom collection from List<T>.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/GetCollection/*'/>
+    public ViewColumns GetCollection(List<ViewColumn> list)
 		{
 			ViewColumns retValue = null;
 
@@ -62,13 +65,14 @@ namespace LJCDBViewDAL
 			}
 			return retValue;
 		}
-		#endregion
+    #endregion
 
-		#region Sort and Search Methods
+    #region Sort and Search Methods
 
-		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public ViewColumn LJCSearchName(string name)
+    // Retrieve the collection element with name.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSearchName/*'/>
+    public ViewColumn LJCSearchName(string name)
 		{
 			ViewColumn retValue = null;
 

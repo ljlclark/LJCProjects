@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewOrderBy.cs
 using LJCDBClientLib;
@@ -10,11 +10,12 @@ namespace LJCDBViewDAL
 	/// <summary>The ViewOrderBy table Data Record.</summary>
 	public class ViewOrderBy : IComparable<ViewOrderBy>
 	{
-		#region Constructors
+    #region Constructors
 
-		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public ViewOrderBy()
+    // Initializes an object instance.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
+    public ViewOrderBy()
 		{
 			ChangedNames = new ChangedNames();
 		}
@@ -23,7 +24,8 @@ namespace LJCDBViewDAL
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public ViewOrderBy Clone()
     {
       var retValue = MemberwiseClone() as ViewOrderBy;
@@ -31,15 +33,17 @@ namespace LJCDBViewDAL
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/ToString/*'/>
     public override string ToString()
 		{
 			return mColumnName;
 		}
 
-		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public int CompareTo(ViewOrderBy other)
+    // Provides the default Sort functionality.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CompareTo/*'/>
+    public int CompareTo(ViewOrderBy other)
 		{
 			int retValue;
 

@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewFilter.cs
 using LJCDBClientLib;
@@ -10,11 +10,12 @@ namespace LJCDBViewDAL
 	/// <summary>The ViewFilter table Data Record.</summary>
 	public class ViewFilter : IComparable<ViewFilter>
 	{
-		#region Constructors
+    #region Constructors
 
-		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public ViewFilter()
+    // Initializes an object instance.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
+    public ViewFilter()
 		{
 			ChangedNames = new ChangedNames();
 		}
@@ -23,7 +24,8 @@ namespace LJCDBViewDAL
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public ViewFilter Clone()
     {
       ViewFilter retValue = MemberwiseClone() as ViewFilter;
@@ -31,15 +33,17 @@ namespace LJCDBViewDAL
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/ToString/*'/>
     public override string ToString()
 		{
 			return mName;
 		}
 
-		// Provides the default Sort functionality.
-		/// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public int CompareTo(ViewFilter other)
+    // Provides the default Sort functionality.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CompareTo/*'/>
+    public int CompareTo(ViewFilter other)
 		{
 			int retValue;
 

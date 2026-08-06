@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // ManagersDbView.cs
 using LJCDBClientLib;
@@ -16,7 +16,8 @@ namespace LJCDBViewDAL
     }
 
     // Sets the DB properties.
-    /// <include path='items/SetDbProperties/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/SetDbProperties/*'/>
     public void SetDbProperties(DbServiceRef dbServiceRef
       , string dataConfigName)
     {

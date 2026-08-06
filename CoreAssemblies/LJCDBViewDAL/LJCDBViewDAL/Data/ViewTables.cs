@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewTables.cs
 using System.Collections.Generic;
@@ -8,11 +8,12 @@ namespace LJCDBViewDAL
 	/// <summary>Represents a collection of ViewTable objects.</summary>
 	public class ViewTables : List<ViewTable>
 	{
-		#region Public Methods
+    #region Public Methods
 
-		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public ViewTable Add(int id, string name)
+    // Creates and adds the object from the provided values.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/Add/*'/>
+    public ViewTable Add(int id, string name)
 		{
 			ViewTable retValue = new ViewTable()
 			{
@@ -23,9 +24,10 @@ namespace LJCDBViewDAL
 			return retValue;
 		}
 
-		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public ViewTable LJCSearchName(string name)
+    // Retrieve the collection element with name.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSearchName/*'/>
+    public ViewTable LJCSearchName(string name)
 		{
 			ViewTable retValue = null;
 

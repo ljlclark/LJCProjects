@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewCondition.cs
 using LJCDBClientLib;
@@ -13,7 +13,8 @@ namespace LJCDBViewDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public ViewCondition()
 		{
 			ChangedNames = new ChangedNames();
@@ -23,7 +24,8 @@ namespace LJCDBViewDAL
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public ViewCondition Clone()
     {
       var retValue = MemberwiseClone() as ViewCondition;
@@ -31,7 +33,8 @@ namespace LJCDBViewDAL
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/ToString/*'/>
     public override string ToString()
 		{
 			return $"{FirstValue} {ComparisonOperator} {SecondValue}";

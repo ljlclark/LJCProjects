@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoinColumns.cs
 using System.Collections.Generic;
@@ -11,21 +11,23 @@ namespace LJCDBViewDAL
 	/// <include path='items/Collection/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
 	public class ViewJoinColumns : List<ViewJoinColumn>
 	{
-		#region Constructors
+    #region Constructors
 
-		// Initializes an object instance.
-		/// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
-		public ViewJoinColumns()
+    // Initializes an object instance.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
+    public ViewJoinColumns()
 		{
 			mPrevCount = -1;
 		}
-		#endregion
+    #endregion
 
-		#region Collection Methods
+    #region Collection Methods
 
-		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public ViewJoinColumn Add(int id, string name)
+    // Creates and adds the object from the provided values.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/Add/*'/>
+    public ViewJoinColumn Add(int id, string name)
 		{
 			ViewJoinColumn retValue = null;
 
@@ -46,9 +48,10 @@ namespace LJCDBViewDAL
 			return retValue;
 		}
 
-		// Get custom collection from List<T>.
-		/// <include path='items/GetCollection/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public ViewJoinColumns GetCollection(List<ViewJoinColumn> list)
+    // Get custom collection from List<T>.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/GetCollection/*'/>
+    public ViewJoinColumns GetCollection(List<ViewJoinColumn> list)
 		{
 			ViewJoinColumns retValue = null;
 
@@ -62,13 +65,14 @@ namespace LJCDBViewDAL
 			}
 			return retValue;
 		}
-		#endregion
+    #endregion
 
-		#region Sort and Search Methods
+    #region Sort and Search Methods
 
-		// Sort on Name.
-		/// <include path='items/LJCSortName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public void LJCSortName()
+    // Sort on Name.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSortName/*'/>
+    public void LJCSortName()
 		{
 			if (Count != mPrevCount)
 			{
@@ -77,9 +81,10 @@ namespace LJCDBViewDAL
 			}
 		}
 
-		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public ViewJoinColumn LJCSearchName(string name)
+    // Retrieve the collection element with name.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSearchName/*'/>
+    public ViewJoinColumn LJCSearchName(string name)
 		{
 			ViewJoinColumn retValue = null;
 

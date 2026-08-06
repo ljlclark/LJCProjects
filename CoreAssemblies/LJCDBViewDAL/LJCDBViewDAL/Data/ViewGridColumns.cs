@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewGridColumns.cs
 using System.Collections.Generic;
@@ -9,11 +9,12 @@ namespace LJCDBViewDAL
 	/// <include path='items/ViewGridColumns/*' file='Doc/ViewGridColumns.xml'/>
 	public class ViewGridColumns : List<ViewGridColumn>
 	{
-		#region Public Methods
+    #region Public Methods
 
-		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='Doc/ViewGridColumns.xml'/>
-		public ViewGridColumn Add(int viewDataID, int viewColumnID)
+    // Creates and adds the object from the provided values.
+    /// <include file='Doc/ViewGridColumns.xml'
+    ///  path='items/Add/*'/>
+    public ViewGridColumn Add(int viewDataID, int viewColumnID)
 		{
 			ViewGridColumn retValue = new ViewGridColumn()
 			{
@@ -24,9 +25,10 @@ namespace LJCDBViewDAL
 			return retValue;
 		}
 
-		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchID/*' file='Doc/ViewGridColumns.xml'/>
-		public ViewGridColumn LJCSearchID(int viewDataID, int viewColumnID)
+    // Retrieve the collection element with name.
+    /// <include file='Doc/ViewGridColumns.xml'
+    ///  path='items/LJCSearchID/*'/>
+    public ViewGridColumn LJCSearchID(int viewDataID, int viewColumnID)
 		{
 			ViewGridColumn retValue = null;
 

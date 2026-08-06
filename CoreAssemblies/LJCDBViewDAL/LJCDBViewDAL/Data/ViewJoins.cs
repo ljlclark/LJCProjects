@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ViewJoins.cs
 using System.Collections.Generic;
@@ -9,11 +9,12 @@ namespace LJCDBViewDAL
 	/// <include path='items/ViewJoins/*' file='Doc/ViewJoins.xml'/>
 	public class ViewJoins : List<ViewJoin>
 	{
-		#region Public Methods
+    #region Public Methods
 
-		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='Doc/ViewJoins.xml'/>
-		public ViewJoin Add(int id, string joinTableName)
+    // Creates and adds the object from the provided values.
+    /// <include file='Doc/ViewJoins.xml'
+    ///  path='items/Add/*'/>
+    public ViewJoin Add(int id, string joinTableName)
 		{
 			ViewJoin retValue = new ViewJoin()
 			{
@@ -24,9 +25,10 @@ namespace LJCDBViewDAL
 			return retValue;
 		}
 
-		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public ViewJoin LJCSearchName(string name)
+    // Retrieve the collection element with name.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSearchName/*'/>
+    public ViewJoin LJCSearchName(string name)
 		{
 			ViewJoin retValue = null;
 

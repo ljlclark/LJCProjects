@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Views.cs
 using System.Collections.Generic;
@@ -9,11 +9,12 @@ namespace LJCDBViewDAL
 	/// <include path='items/Views/*' file='Doc/Views.xml'/>
 	public class Views : List<ViewData>
 	{
-		#region Public Methods
+    #region Public Methods
 
-		// Creates and adds the object from the provided values.
-		/// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public ViewData Add(int id, string name)
+    // Creates and adds the object from the provided values.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/Add/*'/>
+    public ViewData Add(int id, string name)
 		{
 			ViewData retValue = new ViewData()
 			{
@@ -24,9 +25,10 @@ namespace LJCDBViewDAL
 			return retValue;
 		}
 
-		// Retrieve the collection element with name.
-		/// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-		public ViewData LJCSearchName(string name)
+    // Retrieve the collection element with name.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSearchName/*'/>
+    public ViewData LJCSearchName(string name)
 		{
 			ViewData retValue = null;
 
