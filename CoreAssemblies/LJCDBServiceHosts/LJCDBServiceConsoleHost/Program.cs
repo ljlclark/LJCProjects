@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Program.cs
 using LJCDBServiceLib;
@@ -13,7 +13,8 @@ namespace LJCDBServiceConsoleHost
   public class Program
   {
     // The main entry point method.
-    /// <include path='items/Main/*' file='../../../CoreUtilities/LJCGenDoc/Common/Program.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Program.xml'
+    ///  path='items/Main/*'/>
     private static void Main()
     {
       using (ServiceHost serviceHost = new ServiceHost(

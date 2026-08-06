@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TextDataReader.cs
 using LJCNetCommon;
@@ -16,7 +16,8 @@ namespace LJCTextDataReaderLib
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/TextDataReaderC/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/TextDataReaderC/*'/>
     public TextDataReader(bool hasHeadingLine = true, short skipHeaderLines = 0
       , bool fixedLengthFields = false)
     {
@@ -40,7 +41,8 @@ namespace LJCTextDataReaderLib
     #region Public IDataReader Methods
 
     // Closes the data reader.
-    /// <include path='items/Close/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/Close/*'/>
     public void Close()
     {
       if (LJCStreamReader != null)
@@ -52,21 +54,24 @@ namespace LJCTextDataReaderLib
     }
 
     // Disposes the object.
-    /// <include path='items/Dispose/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/Dispose/*'/>
     public void Dispose()
     {
       Close();
     }
 
     // Not supported. Currently returns null.
-    /// <include path='items/GetData/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetData/*'/>
     public IDataReader GetData(int i)
     {
       return null;
     }
 
     // Retrieves the data type name for the specified field index.
-    /// <include path='items/GetDataTypeName1/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetDataTypeName1/*'/>
     public string GetDataTypeName(int i)
     {
       LJCDataColumn dbColumn;
@@ -86,7 +91,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Retrieves the data type name for the specified field name.
-    /// <include path='items/GetDataTypeName2/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetDataTypeName2/*'/>
     public string GetDataTypeName(string name)
     {
       int index = GetOrdinal(name);
@@ -94,7 +100,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Retrieves the type of the field for the specified field index.
-    /// <include path='items/GetFieldType/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetFieldType/*'/>
     public Type GetFieldType(int i)
     {
       string dataTypeName;
@@ -141,7 +148,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Retrieves the name of the data field with the specified index.
-    /// <include path='items/GetName/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetName/*'/>
     public string GetName(int i)
     {
       string retValue = null;
@@ -155,7 +163,8 @@ namespace LJCTextDataReaderLib
 
     // Retrieves the index of the data field with the specified name.
     // Required method if field mapping is used.
-    /// <include path='items/GetOrdinal/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetOrdinal/*'/>
     public int GetOrdinal(string name)
     {
       int retValue = -1;
@@ -172,7 +181,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Gets the Schema DataTable object.
-    /// <include path='items/GetSchemaTable/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetSchemaTable/*'/>
     public DataTable GetSchemaTable()
     {
       const int AllowDBNull = 13;
@@ -200,7 +210,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Gets an array of record values.
-    /// <include path='items/GetValues/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetValues/*'/>
     public int GetValues(object[] values)
     {
       for (int index = 0; index < values.Length; index++)
@@ -214,7 +225,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Indicates if the field value is null or whitespace.
-    /// <include path='items/IsDBNull/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/IsDBNull/*'/>
     public bool IsDBNull(int i)
     {
       bool retValue;
@@ -225,7 +237,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Sets to the next result. Currently returns false.
-    /// <include path='items/NextResult/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/NextResult/*'/>
     public bool NextResult()
     {
       return false;
@@ -233,7 +246,8 @@ namespace LJCTextDataReaderLib
 
     // Reads the next line of the text file.
     // This is a minimum required method.
-    /// <include path='items/Read/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/Read/*'/>
     public bool Read()
     {
       string line;
@@ -304,7 +318,8 @@ namespace LJCTextDataReaderLib
     #region Public DataReader Custom Related Methods
 
     // Reads the next line from the line string array.
-    /// <include path='items/LJCReadLine/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/LJCReadLine/*'/>
     public bool LJCReadLine()
     {
       string line;
@@ -343,7 +358,8 @@ namespace LJCTextDataReaderLib
     #region Public IDataRecord Get Data Methods
 
     // Returns the bool value of the data field at the specified index.
-    /// <include path='items/GetBoolean/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetBoolean/*'/>
     public bool GetBoolean(int i)
     {
       bool.TryParse(GetString(i), out bool retValue);
@@ -351,7 +367,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the byte value of the data field at the specified index.
-    /// <include path='items/GetByte/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetByte/*'/>
     public byte GetByte(int i)
     {
       byte.TryParse(GetString(i), out byte retValue);
@@ -359,7 +376,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Place field bytes into a byte array buffer.
-    /// <include path='items/GetBytes/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetBytes/*'/>
     public long GetBytes(int i, long fieldOffset, byte[] buffer
       , int bufferoffset, int length)
     {
@@ -371,7 +389,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the char value of the data field at the specified index.
-    /// <include path='items/GetChar/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetChar/*'/>
     public char GetChar(int i)
     {
       char.TryParse(GetString(i), out char retValue);
@@ -379,7 +398,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Place field characters into a character array buffer.
-    /// <include path='items/GetChars/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetChars/*'/>
     public long GetChars(int i, long fieldOffset, char[] buffer
       , int bufferoffset, int length)
     {
@@ -391,7 +411,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the DateTime value of the data field at the specified index.
-    /// <include path='items/GetDateTime/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetDateTime/*'/>
     public DateTime GetDateTime(int i)
     {
       DateTime.TryParse(GetString(i), out DateTime retValue);
@@ -399,7 +420,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the decimal value of the data field at the specified index.
-    /// <include path='items/GetDecimal/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetDecimal/*'/>
     public decimal GetDecimal(int i)
     {
       decimal.TryParse(GetString(i), out decimal retValue);
@@ -407,7 +429,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the double value of the data field at the specified index.
-    /// <include path='items/GetDouble/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetDouble/*'/>
     public double GetDouble(int i)
     {
       double.TryParse(GetString(i), out double retValue);
@@ -415,7 +438,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the float value of the data field at the specified index.
-    /// <include path='items/GetFloat/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetFloat/*'/>
     public float GetFloat(int i)
     {
       float.TryParse(GetString(i), out float retValue);
@@ -423,7 +447,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the Guid value of the data field at the specified index.
-    /// <include path='items/GetGuid/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetGuid/*'/>
     public Guid GetGuid(int i)
     {
       Guid.TryParse(GetString(i), out Guid retValue);
@@ -431,7 +456,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the short int value of the data field at the specified index.
-    /// <include path='items/GetInt16/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetInt16/*'/>
     public short GetInt16(int i)
     {
       short.TryParse(GetString(i), out short retValue);
@@ -439,7 +465,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the int value of the data field at the specified index.
-    /// <include path='items/GetInt32/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetInt32/*'/>
     public int GetInt32(int i)
     {
       int.TryParse(GetString(i), out int retValue);
@@ -447,7 +474,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the long int value of the data field at the specified index.
-    /// <include path='items/GetInt64/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetInt64/*'/>
     public long GetInt64(int i)
     {
       long.TryParse(GetString(i), out long retValue);
@@ -455,7 +483,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the string value of the data field at the specified index.
-    /// <include path='items/GetString/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetString/*'/>
     public string GetString(int i)
     {
       string retValue = null;
@@ -479,7 +508,8 @@ namespace LJCTextDataReaderLib
 
     // Returns the object value of the data field at the specified index.
     // This is a minimum required method.
-    /// <include path='items/GetValue/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetValue/*'/>
     public object GetValue(int i)
     {
       return this[i];
@@ -489,7 +519,8 @@ namespace LJCTextDataReaderLib
     #region Public Get Data Custom Overload Methods
 
     // Returns the bool value of the data field with the specified name.
-    /// <include path='items/GetBooleanN/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetBooleanN/*'/>
     public bool GetBoolean(string name)
     {
       bool.TryParse(GetString(name), out bool retValue);
@@ -497,7 +528,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the byte value of the data field with the specified name.
-    /// <include path='items/GetByteN/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetByteN/*'/>
     public byte GetByte(string name)
     {
       byte.TryParse(GetString(name), out byte retValue);
@@ -505,7 +537,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Place field bytes into a byte array buffer.
-    /// <include path='items/GetBytesN/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetBytesN/*'/>
     public long GetBytes(string name, long fieldOffset, byte[] buffer
       , int bufferoffset)
     {
@@ -517,7 +550,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the char value of the data field with the specified name.
-    /// <include path='items/GetCharN/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetCharN/*'/>
     public char GetChar(string name)
     {
       char.TryParse(GetString(name), out char retValue);
@@ -525,7 +559,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Place field characters into a character array buffer.
-    /// <include path='items/GetCharsN/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetCharsN/*'/>
     public long GetChars(string name, long fieldOffset, char[] buffer
       , int bufferoffset)
     {
@@ -537,7 +572,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the DateTime value of the data field with the specified name.
-    /// <include path='items/GetDateTimeN/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetDateTimeN/*'/>
     public DateTime GetDateTime(string name)
     {
       DateTime.TryParse(GetString(name), out DateTime retValue);
@@ -545,7 +581,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the decimal value of the data field with the specified name.
-    /// <include path='items/GetDecimalN/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetDecimalN/*'/>
     public decimal GetDecimal(string name)
     {
       decimal.TryParse(GetString(name), out decimal retValue);
@@ -553,7 +590,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the double value of the data field with the specified name.
-    /// <include path='items/GetDoubleN/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetDoubleN/*'/>
     public double GetDouble(string name)
     {
       double.TryParse(GetString(name), out double retValue);
@@ -561,7 +599,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the float value of the data field with the specified name.
-    /// <include path='items/GetFloatN/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetFloatN/*'/>
     public float GetFloat(string name)
     {
       float.TryParse(GetString(name), out float retValue);
@@ -569,7 +608,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the Guid value of the data field with the specified name. 
-    /// <include path='items/GetGuidN/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetGuidN/*'/>
     public Guid GetGuid(string name)
     {
       Guid.TryParse(GetString(name), out Guid retValue);
@@ -577,7 +617,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the short int value of the data field with the specified name.
-    /// <include path='items/GetInt16N/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetInt16N/*'/>
     public short GetInt16(string name)
     {
       short.TryParse(GetString(name), out short retValue);
@@ -585,7 +626,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the int value of the data field with the specified name.
-    /// <include path='items/GetInt32N/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetInt32N/*'/>
     public int GetInt32(string name)
     {
       int.TryParse(GetString(name), out int retValue);
@@ -593,7 +635,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the long int value of the data field with the specified name.
-    /// <include path='items/GetInt64N/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetInt64N/*'/>
     public long GetInt64(string name)
     {
       long.TryParse(GetString(name), out long retValue);
@@ -601,7 +644,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the string value of the data field with the specified name.
-    /// <include path='items/GetStringN/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetStringN/*'/>
     public string GetString(string name)
     {
       string retValue = null;
@@ -646,7 +690,8 @@ namespace LJCTextDataReaderLib
 
     // Gets the field count.
     // This is a minimum required property.
-    /// <include path='items/FieldCount/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/FieldCount/*'/>
     public int FieldCount
     {
       get
@@ -662,7 +707,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Gets the data field value for the specified field index.
-    /// <include path='items/this1/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/this1/*'/>
     public object this[int i]
     {
       get
@@ -678,7 +724,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Gets the data field value for the specified field name.
-    /// <include path='items/this2/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/this2/*'/>
     public object this[string name]
     {
       get
@@ -720,7 +767,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Returns the field names.
-    /// <include path='items/LJCGetFieldNames/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/LJCGetFieldNames/*'/>
     public string[] LJCGetFieldNames()
     {
       string[] retValue = new string[FieldCount];
@@ -764,7 +812,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Sets the data field definitions from an XML file.
-    /// <include path='items/LJCSetFields/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/LJCSetFields/*'/>
     public void LJCSetFields(string layoutFileName)
     {
       LJCLayoutFileName = layoutFileName;
@@ -773,7 +822,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Sets the source text file values.
-    /// <include path='items/LJCSetFile/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/LJCSetFile/*'/>
     public void LJCSetFile(string fileName, char fieldDelimiter = ',')
     {
       LJCFileName = fileName;
@@ -793,7 +843,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Sets the line field values.
-    /// <include path='items/LJCSetLine/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/LJCSetLine/*'/>
     public void LJCSetLine(string line)
     {
       if (LJCTextRegions.LJCHasRegions(line))
@@ -807,7 +858,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Set the source line string array.
-    /// <include path='items/LJCSetLines/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/LJCSetLines/*'/>
     public void LJCSetLines(string[] lines, char fieldDelimiter = ',')
     {
       LJCLines = lines;
@@ -831,7 +883,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Sets the data field names.
-    /// <include path='items/LJCSetNames/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/LJCSetNames/*'/>
     public bool LJCSetNames(string line)
     {
       string fieldName = null;
@@ -888,7 +941,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Sets the data object property values from the TextDataReader.
-    /// <include path='items/LJCSetObjectValues/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/LJCSetObjectValues/*'/>
     public void LJCSetObjectValues(object dataObject, LJCDataColumns dataFields = null)
     {
       LJCReflect reflect;
@@ -915,7 +969,8 @@ namespace LJCTextDataReaderLib
 
     // #Pagination - New Method
     // Sets the starting record index.
-    /// <include path='items/LJCSetStartIndex/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/LJCSetStartIndex/*'/>
     public bool LJCSetStartIndex(int recordIndex)
     {
       bool retValue = false;
@@ -943,7 +998,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Sets the current line values.
-    /// <include path='items/LJCSetValues1/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/LJCSetValues1/*'/>
     public void LJCSetValues(string[] values)
     {
       bool isError;
@@ -986,7 +1042,8 @@ namespace LJCTextDataReaderLib
     }
 
     // Sets the current, fixed length, line values.
-    /// <include path='items/LJCSetValues2/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/LJCSetValues2/*'/>
     public void LJCSetValues(string line)
     {
       // Allow values to be less than FieldCount.

@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DBWindowsService.cs
 using System;
@@ -15,7 +15,8 @@ namespace LJCDBServiceHost
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public DBWindowsService()
     {
       InitializeComponent();
@@ -23,7 +24,8 @@ namespace LJCDBServiceHost
     #endregion
 
     // Starts the windows Database service.
-    /// <include path='items/OnStart/*' file='Doc/DBWindowsService.xml'/>
+    /// <include file='Doc/DBWindowsService.xml'
+    ///  path='items/OnStart/*'/>
     protected override void OnStart(string[] args)
     {
       if (mServiceHost != null)
@@ -46,7 +48,8 @@ namespace LJCDBServiceHost
     }
 
     // Stops the windows Database service.
-    /// <include path='items/OnStop/*' file='Doc/DBWindowsService.xml'/>
+    /// <include file='Doc/DBWindowsService.xml'
+    ///  path='items/OnStop/*'/>
     protected override void OnStop()
     {
       mServiceHost.Close();

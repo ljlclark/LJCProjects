@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbService.cs
 using CipherLib;
@@ -11,13 +11,15 @@ namespace LJCDBServiceLib
 {
   // The Service Type for performing database operations using request
   // XML messages.
-  /// <include path='items/DbService/*' file='Doc/ProjectDBServiceLib.xml'/>
+  /// <include file='Doc/ProjectDBServiceLib.xml'
+  ///  path='items/DbService/*'/>
   public class DbService : IDbService
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DbServiceC/*' file='Doc/DbService.xml'/>
+    /// <include file='Doc/DbService.xml'
+    ///  path='items/DbServiceC/*'/>
     public DbService(bool useEncryption = true)
     {
       UseEncryption = useEncryption;
@@ -36,7 +38,8 @@ namespace LJCDBServiceLib
     #region Methods
 
     // Executes the specified request XML message.
-    /// <include path='items/Execute/*' file='Doc/DbService.xml'/>
+    /// <include file='Doc/DbService.xml'
+    ///  path='items/Execute/*'/>
     public string Execute(string request)
     {
       string requestText;
