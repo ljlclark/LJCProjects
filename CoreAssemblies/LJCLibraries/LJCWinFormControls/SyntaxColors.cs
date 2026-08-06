@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SyntaxColors.cs
 using System.Collections.Generic;
@@ -11,13 +11,15 @@ using LJCNetCommon;
 namespace LJCWinFormControls
 {
   // The line color settings.
-  /// <include path='items/SyntaxColors/*' file='Doc/SyntaxColors.xml'/>
+  /// <include file='Doc/SyntaxColors.xml'
+  ///  path='items/SyntaxColors/*'/>
   public class SyntaxColors
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public SyntaxColors()
     {
       Lines = new List<string>();
@@ -29,7 +31,8 @@ namespace LJCWinFormControls
     #region Public Methods
 
     // Parallel processing a text file for the ColorSettings.
-    /// <include path='items/CreateColorSettings1/*' file='Doc/SyntaxColors.xml'/>
+    /// <include file='Doc/SyntaxColors.xml'
+    ///  path='items/CreateColorSettings1/*'/>
     public void CreateColorSettings(string fileSpec)
     {
       using (StreamReader streamReader = File.OpenText(fileSpec))
@@ -44,7 +47,8 @@ namespace LJCWinFormControls
     }
 
     // Parallel processing a string array for the ColorSettings.
-    /// <include path='items/CreateColorSettings2/*' file='Doc/SyntaxColors.xml'/>
+    /// <include file='Doc/SyntaxColors.xml'
+    ///  path='items/CreateColorSettings2/*'/>
     public void CreateColorSettings(string[] lines)
     {
       CodeTokenizer setup = new CodeTokenizer();
@@ -69,7 +73,8 @@ namespace LJCWinFormControls
     }
 
     // Creates the ColorSettings for the specified line.
-    /// <include path='items/CreateLineColorSettings/*' file='Doc/SyntaxColors.xml'/>
+    /// <include file='Doc/SyntaxColors.xml'
+    ///  path='items/CreateLineColorSettings/*'/>
     public void CreateLineColorSettings(CodeTokenizer setup, string lineText, int lineIndex)
     {
       string token;
@@ -175,7 +180,8 @@ namespace LJCWinFormControls
     }
 
     // Processes the Param token.
-    /// <include path='items/ProcessParam/*' file='Doc/SyntaxColors.xml'/>
+    /// <include file='Doc/SyntaxColors.xml'
+    ///  path='items/ProcessParam/*'/>
     public void ProcessParam(string lineText, int lineIndex)
     {
       IsSummaryInProcess = false;
@@ -187,7 +193,8 @@ namespace LJCWinFormControls
     }
 
     // Processes the Summary and Returns tokens.
-    /// <include path='items/ProcessXmlComment/*' file='Doc/SyntaxColors.xml'/>
+    /// <include file='Doc/SyntaxColors.xml'
+    ///  path='items/ProcessXmlComment/*'/>
     public void ProcessXmlComment(CodeTokenizer tokens, string lineText, int lineIndex
       , string beginTag, string endTag, bool isSummary = true)
     {

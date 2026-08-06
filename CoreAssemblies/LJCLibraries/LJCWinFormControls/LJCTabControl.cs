@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJLCTabControl.cs
 using System;
@@ -14,7 +14,8 @@ namespace LJCWinFormControls
     #region Constructors
 
     // Initializes an instance of the class.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCTabControl()
     {
       InitializeComponent();
@@ -22,7 +23,8 @@ namespace LJCWinFormControls
     }
 
     // Instantiates an instance of the class and adds it to a container.
-    /// <include path='items/LJCTabControlC/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCTabControlC/*'/>
     public LJCTabControl(IContainer parentContainer)
     {
       parentContainer.Add(this);
@@ -35,7 +37,8 @@ namespace LJCWinFormControls
     #region Override Event Methods
 
     // Provides custom MouseDown event code.
-    /// <include path='items/OnMouseDown/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnMouseDown/*'/>
     protected override void OnMouseDown(MouseEventArgs e)
     {
       base.OnMouseDown(e);
@@ -50,7 +53,8 @@ namespace LJCWinFormControls
     }
 
     // Provides custom MouseMove event code.
-    /// <include path='items/OnMouseMove/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnMouseMove/*'/>
     protected override void OnMouseMove(MouseEventArgs e)
     {
       Point mousePoint;
@@ -72,7 +76,8 @@ namespace LJCWinFormControls
     }
 
     // Provides custom DragOver event code.
-    /// <include path='items/OnDragOver/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnDragOver/*'/>
     protected override void OnDragOver(DragEventArgs drgevent)
     {
       LJCTabControl sourceTabControl;
@@ -133,7 +138,8 @@ namespace LJCWinFormControls
     }
 
     // Provides custom DragLeave event code.
-    /// <include path='items/OnDragLeave/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnDragLeave/*'/>
     protected override void OnDragLeave(EventArgs e)
     {
       base.OnDragLeave(e);
@@ -148,7 +154,8 @@ namespace LJCWinFormControls
     }
 
     // Provides custom DragDrop event code.
-    /// <include path='items/OnDragDrop/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnDragDrop/*'/>
     protected override void OnDragDrop(DragEventArgs drgevent)
     {
       TabControl sourceTabControl;
@@ -198,7 +205,8 @@ namespace LJCWinFormControls
     }
 
     // Provides custom MouseUp event code.
-    /// <include path='items/OnMouseUp/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnMouseUp/*'/>
     protected override void OnMouseUp(MouseEventArgs e)
     {
       base.OnMouseUp(e);
@@ -208,7 +216,8 @@ namespace LJCWinFormControls
     }
 
     // Provides custom Resize event code.
-    /// <include path='items/OnResize/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnResize/*'/>
     protected override void OnResize(EventArgs e)
     {
       base.OnResize(e);
@@ -221,7 +230,8 @@ namespace LJCWinFormControls
     #region Custom Event Methods
 
     // Calls the LJCPanelAdd event handlers.
-    /// <include path='items/OnLJCPanelAdd/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnLJCPanelAdd/*'/>
     protected void LJCOnLJCPanelAdd()
     {
       LJCPanelAdd?.Invoke(this, new EventArgs());
@@ -237,14 +247,16 @@ namespace LJCWinFormControls
     #region Public Methods
 
     // Closes the tiled split panel.
-    /// <include path='items/LJCCloseEmptyPanel/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCCloseEmptyPanel/*'/>
     public void LJCCloseEmptyPanel()
     {
       LJCOnLJCPanelRemove();
     }
 
     // Gets the tab page with the matching text.
-    /// <include path='items/LJCGetTabPage1/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCGetTabPage1/*'/>
     public TabPage LJCGetTabPage(string text)
     {
       TabPage retValue = null;
@@ -263,7 +275,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the tab page if the position corresponds to a tab label.
-    /// <include path='items/LJCGetTabPage2/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCGetTabPage2/*'/>
     public TabPage LJCGetTabPage(int x, int y)
     {
       Rectangle tabRectangle;
@@ -282,7 +295,8 @@ namespace LJCWinFormControls
     }
 
     // Retrieves the tab page where the mouse was clicked.
-    /// <include path='items/LJCGetTabPage3/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCGetTabPage3/*'/>
     public TabPage LJCGetTabPage(MouseEventArgs e)
     {
       var retValue = LJCGetTabPage(e.X, e.Y);
@@ -290,7 +304,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the tab index for a tab page.
-    /// <include path='items/LJCGetTabPageIndex/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCGetTabPageIndex/*'/>
     public int LJCGetTabPageIndex(TabPage tabPage)
     {
       int retVal = -1;
@@ -307,7 +322,8 @@ namespace LJCWinFormControls
     }
 
     // Moves a tab page.
-    /// <include path='items/LJCMoveTabPage/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCMoveTabPage/*'/>
     public void LJCMoveTabPage(int sourceIndex, int targetIndex)
     {
       var sourcePage = TabPages[sourceIndex];
@@ -316,7 +332,8 @@ namespace LJCWinFormControls
     }
 
     // Moves the tab page left to the main tabs.
-    /// <include path='items/LJCMoveTabPageLeft/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCMoveTabPageLeft/*'/>
     public void LJCMoveTabPageLeft(LJCTabControl targetTabs
       , SplitContainer split)
     {
@@ -328,7 +345,8 @@ namespace LJCWinFormControls
     }
 
     // Moves the tab page right to the tile tabs.
-    /// <include path='items/LJCMoveTabPageRight/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCMoveTabPageRight/*'/>
     public void LJCMoveTabPageRight(LJCTabControl targetTabs
       , SplitContainer split)
     {
@@ -340,7 +358,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the current tab page.
-    /// <include path='items/LJCSetCurrentTabPage/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCSetCurrentTabPage/*'/>
     public void LJCSetCurrentTabPage(MouseEventArgs e)
     {
       if (LJCGetTabPage(e) is TabPage tabPage)
@@ -403,12 +422,14 @@ namespace LJCWinFormControls
 
     // Occurs during a dragdrop operation when a temporary target panel
     // should be displayed.
-    /// <include path='items/LJCPanelAdd/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCPanelAdd/*'/>
     public event EventHandler<EventArgs> LJCPanelAdd;
 
     // Occurs during a dragdrop operation when a temporary target panel
     // should be hidden.
-    /// <include path='items/LJCPanelRemove/*' file='Doc/LJCTabControl.xml'/>
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCPanelRemove/*'/>
     public event EventHandler<EventArgs> LJCPanelRemove;
     #endregion
   }

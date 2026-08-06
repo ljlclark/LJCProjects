@@ -17,7 +17,8 @@ namespace LJCWinFormControls
     #region Constructors
 
     // Instantiates an instance of the class.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCGridRow()
     {
       mIntInts = new Dictionary<int, int>();
@@ -173,7 +174,8 @@ namespace LJCWinFormControls
     #region Stored Value Methods
 
     // Stores an int key and int value pair.
-    /// <include path='items/LJCSetInt321/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCSetInt321/*'/>
     public void LJCSetInt32(int key, int value)
     {
       if (mIntInts.ContainsKey(key))
@@ -187,7 +189,8 @@ namespace LJCWinFormControls
     }
 
     // Stores a string key and int value pair.
-    /// <include path='items/LJCSetInt322/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCSetInt322/*'/>
     public void LJCSetInt32(string key, int value)
     {
       if (mStringInts.ContainsKey(key))
@@ -201,7 +204,8 @@ namespace LJCWinFormControls
     }
 
     // Stores an int key and int value pair.
-    /// <include path='items/LJCSetInt641/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCSetInt641/*'/>
     public void LJCSetInt64(long key, long value)
     {
       if (mLongLongs.ContainsKey(key))
@@ -215,7 +219,8 @@ namespace LJCWinFormControls
     }
 
     // Stores a string key and long value pair.
-    /// <include path='items/LJCSetInt642/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCSetInt642/*'/>
     public void LJCSetInt64(string key, long value)
     {
       if (mStringLongs.ContainsKey(key))
@@ -229,7 +234,8 @@ namespace LJCWinFormControls
     }
 
     // Stores a int key and string value pair.
-    /// <include path='items/LJCSetString1/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCSetString1/*'/>
     public void LJCSetString(int key, string value)
     {
       if (mIntStrings.ContainsKey(key))
@@ -243,7 +249,8 @@ namespace LJCWinFormControls
     }
 
     // Stores a string key and string value pair.
-    /// <include path='items/LJCSetString2/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCSetString2/*'/>
     public void LJCSetString(string key, string value)
     {
       if (mStringStrings.ContainsKey(key))
@@ -257,7 +264,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the stored int value using an int key.
-    /// <include path='items/LJCGetInt321/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCGetInt321/*'/>
     public int LJCGetInt32(int key)
     {
       int retVal = 0;
@@ -270,7 +278,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the stored int value using a string key.
-    /// <include path='items/LJCGetInt322/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCGetInt322/*'/>
     public int LJCGetInt32(string key)
     {
       int retVal = 0;
@@ -283,7 +292,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the stored long value using a long key.
-    /// <include path='items/LJCGetInt641/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCGetInt641/*'/>
     public long LJCGetInt64(long key)
     {
       long retVal = 0;
@@ -296,7 +306,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the stored long value using a string key.
-    /// <include path='items/LJCGetInt642/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCGetInt642/*'/>
     public long LJCGetInt64(string key)
     {
       long retVal = 0;
@@ -309,7 +320,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the stored string value using an int key.
-    /// <include path='items/LJCGetString1/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCGetString1/*'/>
     public string LJCGetString(int key)
     {
       string retVal = null;
@@ -322,7 +334,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the stored string value using a string key.
-    /// <include path='items/LJCGetString2/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCGetString2/*'/>
     public string LJCGetString(string key)
     {
       string retValue = null;
@@ -342,7 +355,8 @@ namespace LJCWinFormControls
     #region Cell Methods
 
     // Sets the cell value.
-    /// <include path='items/LJCGetCellText/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCGetCellText/*'/>
     public string LJCGetCellText(string columnName)
     {
       string retVal = null;
@@ -359,7 +373,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the cell value.
-    /// <include path='items/LJCSetCellText/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCSetCellText/*'/>
     public void LJCSetCellText(string columnName, object value)
     {
       if (DataGridView != null)
@@ -377,7 +392,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the cell value by index.
-    /// <include path='items/LJCSetCellText1/*' file='Doc/LJCGridRow.xml'/>
+    /// <include file='Doc/LJCGridRow.xml'
+    ///  path='items/LJCSetCellText1/*'/>
     public void LJCSetCellText(int index, object value)
     {
       if (DataGridView != null)

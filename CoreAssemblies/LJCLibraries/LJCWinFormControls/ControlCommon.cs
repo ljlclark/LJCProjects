@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ControlCommon.cs
 using System.Drawing;
@@ -10,7 +10,8 @@ namespace LJCWinFormControls
   public class ControlCommon
   {
     // Use a supplied text and control font.
-    /// <include path='items/AverageCharWidth/*' file='Doc/ControlCommon.xml'/>
+    /// <include file='Doc/ControlCommon.xml'
+    ///  path='items/AverageCharWidth/*'/>
     public static int AverageCharWidth(Control control, string text)
     {
       int retValue;
@@ -21,7 +22,8 @@ namespace LJCWinFormControls
     }
 
     // Use text consisting of possible characters (A-Z) or (a-z).
-    /// <include path='items/AverageCharWidth1/*' file='Doc/ControlCommon.xml'/>
+    /// <include file='Doc/ControlCommon.xml'
+    ///  path='items/AverageCharWidth1/*'/>
     public static int AverageCharWidth(Control control, int textLength
       , int upperCount = 0)
     {
@@ -32,7 +34,8 @@ namespace LJCWinFormControls
     }
 
     // Display the Calendar control to select a date.
-    /// <include path='items/GetSelectedDate/*' file='Doc/ControlCommon.xml'/>
+    /// <include file='Doc/ControlCommon.xml'
+    ///  path='items/GetSelectedDate/*'/>
     public static string GetSelectedDate(string startDate)
     {
       Calendar calendar;
@@ -50,7 +53,8 @@ namespace LJCWinFormControls
     }
 
     // The text length in page units.
-    /// <include path='items/TextUnitWidth/*' file='Doc/ControlCommon.xml'/>
+    /// <include file='Doc/ControlCommon.xml'
+    ///  path='items/TextUnitWidth/*'/>
     public static int TextUnitWidth(Control control, string text)
     {
       int retValue;
@@ -62,7 +66,8 @@ namespace LJCWinFormControls
     }
 
     // Use text consisting of possible characters (A-Z) or (a-z).
-    /// <include path='items/TextUnitWidth1/*' file='Doc/ControlCommon.xml'/>
+    /// <include file='Doc/ControlCommon.xml'
+    ///  path='items/TextUnitWidth1/*'/>
     public static int TextUnitWidth(Control control, int textLength
       , int capsCount = 0)
     {

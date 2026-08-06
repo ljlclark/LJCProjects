@@ -13,13 +13,15 @@ using LJCWinFormCommon;
 namespace LJCWinFormControls
 {
   // Provides custom functionality for a DataGridView control. (D)
-  /// <include path='items/LJCDataGrid/*' file='Doc/LJCDataGrid.xml'/>
+  /// <include file='Doc/LJCDataGrid.xml'
+  ///  path='items/LJCDataGrid/*'/>
   public partial class LJCDataGrid : DataGridView
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCDataGrid()
     {
       InitializeComponent();
@@ -29,7 +31,8 @@ namespace LJCWinFormControls
     }
 
     // Initializes an object instance and adds it to a container.
-    /// <include path='items/LJCDataGridC/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCDataGridC/*'/>
     public LJCDataGrid(IContainer container)
     {
       container.Add(this);
@@ -43,7 +46,8 @@ namespace LJCWinFormControls
     #region Row Data Methods
 
     // Clears the rows without allowing SelectionChange.
-    /// <include path='items/LJCRowsClear/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCRowsClear/*'/>
     public void LJCRowsClear()
     {
       LJCAllowSelectionChange = false;
@@ -52,7 +56,8 @@ namespace LJCWinFormControls
     }
 
     // Adds a GridRow control to the grid. 
-    /// <include path='items/LJCRowAdd/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCRowAdd/*'/>
     public LJCGridRow LJCRowAdd()
     {
       LJCGridRow retValue;
@@ -78,7 +83,8 @@ namespace LJCWinFormControls
     }
 
     // Inserts a GridRow control into the grid. 
-    /// <include path='items/LJCRowInsert/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCRowInsert/*'/>
     public LJCGridRow LJCRowInsert(int index)
     {
       LJCGridRow retValue;
@@ -97,7 +103,8 @@ namespace LJCWinFormControls
     #region Column Get Methods
 
     // Retrieves the column where the mouse was clicked.
-    /// <include path='items/LJCGetMouseColumn/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCGetMouseColumn/*'/>
     public DataGridViewColumn LJCGetMouseColumn(MouseEventArgs e)
     {
       DataGridViewColumn retValue = null;
@@ -111,7 +118,8 @@ namespace LJCWinFormControls
     }
 
     // Retrieves the column index where the mouse was clicked.
-    /// <include path='items/LJCGetMouseColumnIndex/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCGetMouseColumnIndex/*'/>
     public int LJCGetMouseColumnIndex(MouseEventArgs e)
     {
       int retValue = -1;
@@ -143,7 +151,8 @@ namespace LJCWinFormControls
     }
 
     // Retrieves the row for a DragOver or DragDrop event.
-    /// <include path='items/LJCGetDragRowIndex/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCGetDragRowIndex/*'/>
     public int LJCGetDragRowIndex(Point dragPoint)
     {
       int retValue;
@@ -154,7 +163,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the row at the cursor location.
-    /// <include path='items/LJCGetMouseRow/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCGetMouseRow/*'/>
     public LJCGridRow LJCGetMouseRow(int x, int y)
     {
       LJCGridRow retValue = null;
@@ -168,7 +178,8 @@ namespace LJCWinFormControls
     }
 
     // Retrieves the row where the mouse was clicked
-    /// <include path='items/LJCGetMouseRow1/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCGetMouseRow1/*'/>
     public LJCGridRow LJCGetMouseRow(MouseEventArgs e)
     {
       LJCGridRow retValue = null;
@@ -182,7 +193,8 @@ namespace LJCWinFormControls
     }
 
     // Retrieves the row index where the mouse was clicked.
-    /// <include path='items/LJCGetMouseRowIndex/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCGetMouseRowIndex/*'/>
     public int LJCGetMouseRowIndex(MouseEventArgs e)
     {
       int retValue;
@@ -192,7 +204,8 @@ namespace LJCWinFormControls
     }
 
     // Retrieves the row index for the X and Y values.
-    /// <include path='items/LJCGetMouseRowIndex1/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCGetMouseRowIndex1/*'/>
     public int LJCGetMouseRowIndex(int x, int y)
     {
       int retValue = -1;
@@ -210,7 +223,8 @@ namespace LJCWinFormControls
     #region Row Set Methods
 
     // Sets the current row to the mouse row.
-    /// <include path='items/LJCSetMouseCurrentRow/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCSetMouseCurrentRow/*'/>
     public void LJCSetCurrentRow(MouseEventArgs e
       , bool allowSelectionChange = false)
     {
@@ -221,7 +235,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the current row.
-    /// <include path='items/LJCSetCurrentRow1/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCSetCurrentRow1/*'/>
     public void LJCSetCurrentRow(DataGridViewRow row
       , bool allowSelectionChange = false)
     {
@@ -232,7 +247,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the current row to the specified index.
-    /// <include path='items/LJCSetCurrentRow2/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCSetCurrentRow2/*'/>
     public void LJCSetCurrentRow(int rowIndex, bool allowSelectionChange = false)
     {
       if (Rows[rowIndex] is DataGridViewRow row)
@@ -246,7 +262,8 @@ namespace LJCWinFormControls
     #region Row Selection Changed Methods
 
     // Compares the current row against the last selected row.
-    /// <include path='items/LJCIsDifferentRow/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCIsDifferentRow/*'/>
     public bool LJCIsDifferentRow(MouseEventArgs e)
     {
       bool retValue = false;
@@ -263,7 +280,8 @@ namespace LJCWinFormControls
     }
 
     // Saves the last selected row index.
-    /// <include path='items/LJCSetLastRow/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCSetLastRow/*'/>
     public void LJCSetLastRow(LJCGridRow row = null)
     {
       if (row != null)
@@ -287,7 +305,8 @@ namespace LJCWinFormControls
     #region Grid Configuration Methods
 
     // Adds a Checkbox column.
-    /// <include path='items/LJCAddCheckColumn/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCAddCheckColumn/*'/>
     public DataGridViewColumn LJCAddCheckColumn(string name, string caption = null)
     {
       DataGridViewColumn retValue;
@@ -310,7 +329,8 @@ namespace LJCWinFormControls
     }
 
     // Adds a column to the grid.
-    /// <include path='items/LJCAddColumn1/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCAddColumn1/*'/>
     public DataGridViewColumn LJCAddColumn(LJCDataColumn column)
     {
       DataGridViewColumn retVal = null;
@@ -325,7 +345,8 @@ namespace LJCWinFormControls
     }
 
     // Adds a grid column.
-    /// <include path='items/LJCAddColumn2/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCAddColumn2/*'/>
     public DataGridViewColumn LJCAddColumn(string name, string caption
       , int textLength = 0, int averageCapsWordSize = 0)
     {
@@ -341,7 +362,8 @@ namespace LJCWinFormControls
     }
 
     // Adds grid columns.
-    /// <include path='items/LJCAddColumns/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCAddColumns/*'/>
     public void LJCAddColumns(LJCDataColumns columns)
     {
       if (columns != null)
@@ -355,7 +377,8 @@ namespace LJCWinFormControls
     }
 
     // Restores the grid column values.
-    /// <include path='items/LJCRestoreColumnValues/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCRestoreColumnValues/*'/>
     public void LJCRestoreColumnValues(ControlValues controlValues)
     {
       if (controlValues != null)
@@ -391,7 +414,8 @@ namespace LJCWinFormControls
     }
 
     // Saves the grid column values.
-    /// <include path='items/LJCSaveColumnValues/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCSaveColumnValues/*'/>
     public void LJCSaveColumnValues(ControlValues controlValues)
     {
       foreach (DataGridViewColumn column in Columns)
@@ -442,7 +466,8 @@ namespace LJCWinFormControls
 
     // Sets the last column AutoSizeMode to "Fill" if the columns width is less
     // than the grid width.
-    /// <include path='items/LJCSetLastColumnAutoSizeFill/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCSetLastColumnAutoSizeFill/*'/>
     public void LJCSetLastColumnAutoSizeFill()
     {
       int columnsWidth = 0;
@@ -471,7 +496,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the grid to a simple read-only grid.
-    /// <include path='items/LJCSetPlain/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCSetPlain/*'/>
     public void LJCSetPlain()
     {
       AllowUserToAddRows = false;
@@ -490,7 +516,8 @@ namespace LJCWinFormControls
     #region Other Methods
 
     // Exports the grid values to a data file.
-    /// <include path='items/LJCExportData/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCExportData/*'/>
     public void LJCExportData(string fileName)
     {
       StringBuilder builder;
@@ -543,7 +570,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the grid count in the counter label.
-    /// <include path='items/LJCSetCounter/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCSetCounter/*'/>
     public void LJCSetCounter(Label counter)
     {
       int current = 0;
@@ -561,7 +589,8 @@ namespace LJCWinFormControls
     #region Control Event Handlers
 
     // The OnColumnWidthChanged event method.
-    /// <include path='items/OnColumnWidthChanged/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/OnColumnWidthChanged/*'/>
     protected override void OnColumnWidthChanged(DataGridViewColumnEventArgs e)
     {
       base.OnColumnWidthChanged(e);
@@ -584,7 +613,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the focus colors.
-    /// <include path='items/OnEnter/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/OnEnter/*'/>
     protected override void OnEnter(EventArgs e)
     {
       base.OnEnter(e);
@@ -593,7 +623,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the NoFocus colors.
-    /// <include path='items/OnLeave/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/OnLeave/*'/>
     protected override void OnLeave(EventArgs e)
     {
       base.OnLeave(e);
@@ -601,7 +632,8 @@ namespace LJCWinFormControls
     }
 
     // The OnResize event method.
-    /// <include path='items/OnResize/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/OnResize/*'/>
     protected override void OnResize(EventArgs e)
     {
       base.OnResize(e);

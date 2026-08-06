@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCItemCombo.cs
 using LJCNetCommon;
@@ -15,7 +15,8 @@ namespace LJCWinFormControls
     #region Constructor
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCItemCombo()
     {
       InitializeComponent();
@@ -26,7 +27,8 @@ namespace LJCWinFormControls
     #region Methods
 
     // Adds an Item to the ComboBox.
-    /// <include path='items/LJCAddItem/*' file='Doc/LJCItemCombo.xml'/>
+    /// <include file='Doc/LJCItemCombo.xml'
+    ///  path='items/LJCAddItem/*'/>
     public LJCItem LJCAddItem(int id, string text)
     {
       mArgError.MethodName = "LJCAddItem";
@@ -49,7 +51,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the combo SelectedIndex to the item with the specified ID value.
-    /// <include path='items/LJCSetByItemID/*' file='Doc/LJCItemCombo.xml'/>
+    /// <include file='Doc/LJCItemCombo.xml'
+    ///  path='items/LJCSetByItemID/*'/>
     public void LJCSetByItemID(int id)
     {
       for (int index = 0; index < Items.Count; index++)
@@ -64,7 +67,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the combo SelectedItem ID.
-    /// <include path='items/LJCSelectedItemID/*' file='Doc/LJCItemCombo.xml'/>
+    /// <include file='Doc/LJCItemCombo.xml'
+    ///  path='items/LJCSelectedItemID/*'/>
     public int LJCSelectedItemID()
     {
       int retValue = 0;
@@ -90,7 +94,8 @@ namespace LJCWinFormControls
     //}
 
     // Exports the grid values to a data file.
-    /// <include path='items/LJCExportData/*' file='Doc/LJCDataGrid.xml'/>
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCExportData/*'/>
     public void LJCExportData(string fileName)
     {
       string separator;
@@ -122,13 +127,15 @@ namespace LJCWinFormControls
   }
 
   // Represents an LJCItemCombo Item.
-  /// <include path='items/LJCItem/*' file='Doc/LJCItemCombo.xml'/>
+  /// <include file='Doc/LJCItemCombo.xml'
+  ///  path='items/LJCItem/*'/>
   public class LJCItem
   {
     #region Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public LJCItem Clone()
     {
       LJCItem retValue = MemberwiseClone() as LJCItem;
@@ -136,7 +143,8 @@ namespace LJCWinFormControls
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/ToString/*'/>
     public override string ToString()
     {
       return Text;

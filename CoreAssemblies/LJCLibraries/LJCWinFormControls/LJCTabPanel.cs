@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCTabPanel.cs
 using System;
@@ -11,7 +11,8 @@ namespace LJCWinFormControls
   public partial class LJCTabPanel : Panel
   {
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCTabPanel()
     {
       InitializeComponent();
@@ -20,7 +21,8 @@ namespace LJCWinFormControls
     #region Control Event Overrides
 
     // The DragOver event method override.
-    /// <include path='items/OnDragOver/*' file='Doc/LJCTabPanel.xml'/>
+    /// <include file='Doc/LJCTabPanel.xml'
+    ///  path='items/OnDragOver/*'/>
     protected override void OnDragOver(DragEventArgs drgevent)
     {
       Point gridPoint;
@@ -43,14 +45,16 @@ namespace LJCWinFormControls
     #endregion
 
     // The AddTile event method.
-    /// <include path='items/OnAddTile/*' file='Doc/LJCTabPanel.xml'/>
+    /// <include file='Doc/LJCTabPanel.xml'
+    ///  path='items/OnAddTile/*'/>
     protected void LJCOnAddTile()
     {
       LJCAddTile?.Invoke(this, new EventArgs());
     }
 
     // The remove tile event method.
-    /// <include path='items/OnRemoveTile/*' file='Doc/LJCTabPanel.xml'/>
+    /// <include file='Doc/LJCTabPanel.xml'
+    ///  path='items/OnRemoveTile/*'/>
     protected void LJCOnRemoveTile()
     {
       LJCRemoveTile?.Invoke(this, new EventArgs());

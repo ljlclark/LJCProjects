@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCPanelManager.cs
 using System;
@@ -12,7 +12,8 @@ namespace LJCWinFormControls
     #region Constructors
 
     // Initializes an instance of the class.
-    /// <include path='items/LJCPanelManagerC/*' file='Doc/LJCPanelManager.xml'/>
+    /// <include file='Doc/LJCPanelManager.xml'
+    ///  path='items/LJCPanelManagerC/*'/>
     public LJCPanelManager(SplitContainer split, LJCTabControl mainTabs, LJCTabControl tileTabs)
     {
       ParentSplit = split;

@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // PanelControlsAdjust.cs
 
@@ -10,13 +10,15 @@ namespace LJCWinFormControls
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public PanelControlsAdjust()
     {
     }
 
     // Initializes an object instance.
-    /// <include path='items/PanelControlsAdjustC/*' file='Doc/PanelControlsAdjust.xml'/>
+    /// <include file='Doc/PanelControlsAdjust.xml'
+    ///  path='items/PanelControlsAdjustC/*'/>
     public PanelControlsAdjust(int headerWidthAdjust = 0, int panelWidthAdjust = 0
       , int gridWidthAdjust = 0, int gridHeightAdjust = 0, int gridLeft = 0
       , int gridTop = 0)

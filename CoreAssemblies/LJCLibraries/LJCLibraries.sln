@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37516.0 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCWinFormControls", "LJCWinFormControls\LJCWinFormControls.csproj", "{A0139B7D-CBCF-4C84-9495-60B124A41A5C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCWinFormCommon", "LJCWinFormCommon\LJCWinFormCommon.csproj", "{7890D423-41BD-4FA2-BF27-88B0976B6098}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCModifyLine", "LJCModifyLine\LJCModifyLine.csproj", "{84B93EFC-1E6B-4195-BE8C-45954094BC41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7890D423-41BD-4FA2-BF27-88B0976B6098}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7890D423-41BD-4FA2-BF27-88B0976B6098}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7890D423-41BD-4FA2-BF27-88B0976B6098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84B93EFC-1E6B-4195-BE8C-45954094BC41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84B93EFC-1E6B-4195-BE8C-45954094BC41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84B93EFC-1E6B-4195-BE8C-45954094BC41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84B93EFC-1E6B-4195-BE8C-45954094BC41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

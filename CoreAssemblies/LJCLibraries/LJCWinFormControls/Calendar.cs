@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Calendar.cs
 using System;
@@ -8,13 +8,15 @@ using LJCNetCommon;
 namespace LJCWinFormControls
 {
   // The calendar form.
-  /// <include path='items/Calendar/*' file='Doc/ProjectControls.xml'/>
+  /// <include file='Doc/ProjectControls.xml'
+  ///  path='items/Calendar/*'/>
   public partial class Calendar : Form
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public Calendar()
     {
       InitializeComponent();
@@ -35,7 +37,8 @@ namespace LJCWinFormControls
     #region Setup Methods
 
     // Configures the controls and loads the selection control data.
-    /// <include path='items/InitializeControls/*' file='../../../CoreUtilities/LJCGenDoc/Common/Detail.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Detail.xml'
+    ///  path='items/InitializeControls/*'/>
     private void InitializeControls()
     {
       DateTime startDate;

@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCHeaderBox.cs
 using System;
@@ -10,13 +10,15 @@ using System.Windows.Forms;
 namespace LJCWinFormControls
 {
   // A custom control for heading text. (R)
-  /// <include path='items/LJCHeaderBox/*' file='Doc/LJCHeaderBox.xml'/>
+  /// <include file='Doc/LJCHeaderBox.xml'
+  ///  path='items/LJCHeaderBox/*'/>
   public partial class LJCHeaderBox : Control
   {
     #region Constructors
 
     // Initializes an instance of the class.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCHeaderBox()
     {
       InitializeComponent();
@@ -27,7 +29,8 @@ namespace LJCWinFormControls
     #region Override Event Methods
 
     // Provides custom MouseClick event code.
-    /// <include path='items/OnMouseClick/*' file='Doc/LJCHeaderBox.xml'/>
+    /// <include file='Doc/LJCHeaderBox.xml'
+    ///  path='items/OnMouseClick/*'/>
     protected override void OnMouseClick(MouseEventArgs e)
     {
       base.OnMouseClick(e);
@@ -41,7 +44,8 @@ namespace LJCWinFormControls
     }
 
     // Provides custom MouseMove event code.
-    /// <include path='items/OnMouseMove/*' file='Doc/LJCHeaderBox.xml'/>
+    /// <include file='Doc/LJCHeaderBox.xml'
+    ///  path='items/OnMouseMove/*'/>
     protected override void OnMouseMove(MouseEventArgs e)
     {
       base.OnMouseMove(e);
@@ -68,7 +72,8 @@ namespace LJCWinFormControls
     }
 
     // Provides custom MouseLeave event code.
-    /// <include path='items/OnMouseLeave/*' file='Doc/LJCHeaderBox.xml'/>
+    /// <include file='Doc/LJCHeaderBox.xml'
+    ///  path='items/OnMouseLeave/*'/>
     protected override void OnMouseLeave(EventArgs e)
     {
       base.OnMouseLeave(e);
@@ -79,7 +84,8 @@ namespace LJCWinFormControls
     }
 
     // Provides custom Resize event code.
-    /// <include path='items/OnResize/*' file='Doc/LJCHeaderBox.xml'/>
+    /// <include file='Doc/LJCHeaderBox.xml'
+    ///  path='items/OnResize/*'/>
     protected override void OnResize(EventArgs e)
     {
       base.OnResize(e);
@@ -89,7 +95,8 @@ namespace LJCWinFormControls
     }
 
     // Provides custom Paint event code.
-    /// <include path='items/OnPaint/*' file='Doc/LJCHeaderBox.xml'/>
+    /// <include file='Doc/LJCHeaderBox.xml'
+    ///  path='items/OnPaint/*'/>
     protected override void OnPaint(PaintEventArgs pe)
     {
       LinearGradientBrush brush;
@@ -149,7 +156,8 @@ namespace LJCWinFormControls
     #region Custom Event Methods
 
     // Calls the LJCClosePanel event handlers.
-    /// <include path='items/OnClosePanel/*' file='Doc/LJCHeaderBox.xml'/>
+    /// <include file='Doc/LJCHeaderBox.xml'
+    ///  path='items/OnClosePanel/*'/>
     protected void LJCOnClosePanel()
     {
       LJCClosePanel?.Invoke(this, new EventArgs());

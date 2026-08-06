@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ListHelper.cs
 using System.Drawing;
@@ -13,7 +13,8 @@ namespace LJCWinFormControls
   public class ListHelper
   {
     // Sets size and position for child SplitterContainer in a SplitterPanel.
-    /// <include path='items/SetPanelSplitControl/*' file='Doc/ListHelper.xml'/>
+    /// <include file='Doc/ListHelper.xml'
+    ///  path='items/SetPanelSplitControl/*'/>
     public static void SetPanelSplitControl(SplitterPanel panel
       , SplitContainer childSplit, int adjust = 0, int splitLeft = 0
       , int splitTop = 0)
@@ -24,7 +25,8 @@ namespace LJCWinFormControls
     }
 
     // Sets size and position for child SplitterContainer in a TabPage control.
-    /// <include path='items/SetPageSplitControl/*' file='Doc/ListHelper.xml'/>
+    /// <include file='Doc/ListHelper.xml'
+    ///  path='items/SetPageSplitControl/*'/>
     public static void SetPageSplitControl(TabPage page
       , SplitContainer childSplit, int adjust = 0, int splitLeft = 0
       , int splitTop = 0)
@@ -35,7 +37,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the size for a TabControl within a SplitterPanel.
-    /// <include path='items/SetPanelTabControl/*' file='Doc/ListHelper.xml'/>
+    /// <include file='Doc/ListHelper.xml'
+    ///  path='items/SetPanelTabControl/*'/>
     public static void SetPanelTabControl(SplitterPanel panel
       , TabControl tabControl, int adjust = 0, int tabLeft = 0
       , int tabTop = 0)
@@ -46,7 +49,8 @@ namespace LJCWinFormControls
     }
 
     // Sets size and position for standard list controls in a SplitterPanel.
-    /// <include path='items/SetPanelControls1/*' file='Doc/ListHelper.xml'/>
+    /// <include file='Doc/ListHelper.xml'
+    ///  path='items/SetPanelControls1/*'/>
     public static void SetPanelControls(SplitterPanel panel
       , LJCHeaderBox headerBox, Panel toolPanel, LJCDataGrid dataGrid
       , int adjustAll = 0, int gridLeft = 0, int gridTop = 0)
@@ -57,7 +61,8 @@ namespace LJCWinFormControls
     }
 
     // Sets size and position for standard list controls in a SplitterPanel.
-    /// <include path='items/SetPanelControls2/*' file='Doc/ListHelper.xml'/>
+    /// <include file='Doc/ListHelper.xml'
+    ///  path='items/SetPanelControls2/*'/>
     public static void SetPanelControls(SplitterPanel panel
       , LJCHeaderBox headerBox, Panel toolPanel, LJCDataGrid dataGrid
       , PanelControlsAdjust adjust)
@@ -78,7 +83,8 @@ namespace LJCWinFormControls
     }
 
     // Sets size and position for standard list controls in a TabPage control.
-    /// <include path='items/SetPageControls1/*' file='Doc/ListHelper.xml'/>
+    /// <include file='Doc/ListHelper.xml'
+    ///  path='items/SetPageControls1/*'/>
     public static void SetPageControls(TabPage page, LJCHeaderBox headerBox
       , Panel toolPanel, LJCDataGrid dataGrid, int adjustAll = 0, int gridLeft = 0
       , int gridTop = 0)
@@ -89,7 +95,8 @@ namespace LJCWinFormControls
     }
 
     // Sets size and position for standard list controls in a TabPage control.
-    /// <include path='items/SetPageControls2/*' file='Doc/ListHelper.xml'/>
+    /// <include file='Doc/ListHelper.xml'
+    ///  path='items/SetPageControls2/*'/>
     public static void SetPageControls(TabPage page, LJCHeaderBox headerBox
       , Panel toolPanel, LJCDataGrid dataGrid, PanelControlsAdjust adjust)
     {

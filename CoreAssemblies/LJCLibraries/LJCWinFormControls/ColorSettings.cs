@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ColorSettings.cs
 using System.Collections.Generic;
@@ -10,7 +10,8 @@ namespace LJCWinFormControls
   public class ColorSettings : List<ColorSetting>
   {
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='Doc/ColorSettings.xml'/>
+    /// <include file='Doc/ColorSettings.xml'
+    ///  path='items/Add/*'/>
     public ColorSetting Add(int lineIndex, int beginIndex, int textLength
       , Color color)
     {

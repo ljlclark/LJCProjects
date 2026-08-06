@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ColorSetting.cs
 using System.Drawing;
@@ -9,7 +9,8 @@ namespace LJCWinFormControls
   public class ColorSetting
   {
     // Initializes an object instance.
-    /// <include path='items/ColorSettingC/*' file='Doc/ColorSetting.xml'/>
+    /// <include file='Doc/ColorSetting.xml'
+    ///  path='items/ColorSettingC/*'/>
     public ColorSetting(int lineIndex, int beginIndex, int textLength
       , Color color)
     {

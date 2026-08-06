@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCRtControl.cs
 using System.Drawing;
@@ -16,7 +16,8 @@ namespace LJCWinFormControls
     #region Static Methods
 
     // Reads a file into an LJCRtControl and sets the leading tabs.
-    /// <include path='items/LJCReadFileToRTF/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCReadFileToRTF/*'/>
     public static void LJCReadFileToRTF(string fileSpec, LJCRtControl rtfControl)
     {
       string line;
@@ -39,7 +40,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the text leading spaces to tabs. 
-    /// <include path='items/LJCSetLeadingSpacesToTabs/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCSetLeadingSpacesToTabs/*'/>
     public static string LJCSetLeadingSpacesToTabs(string text, int leadingSpaces = 8)
     {
       StringBuilder builder;
@@ -60,7 +62,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the leading spaces to a different number of spaces.
-    /// <include path='items/LJCSetLeadingSpacesToSpaces/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCSetLeadingSpacesToSpaces/*'/>
     public static string LJCSetLeadingSpacesToSpaces(string text, int leadingSpaces = 8
       , int outputSpaces = 4)
     {
@@ -82,7 +85,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the leading tabs to spaces.
-    /// <include path='items/LJCSetLeadingTabsToSpaces/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCSetLeadingTabsToSpaces/*'/>
     public static string LJCSetLeadingTabsToSpaces(string text, int outputSpaces = 4)
     {
       StringBuilder builder;
@@ -103,7 +107,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the number of tabs that are required based on the leadingSpaces
-    /// <include path='items/LJCLeadingSpaceToTabCount/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCLeadingSpaceToTabCount/*'/>
     public static int LJCLeadingSpaceToTabCount(string text, int leadingSpaces = 8)
     {
       int count = text.TakeWhile(x => x == ' ').Count();
@@ -111,7 +116,8 @@ namespace LJCWinFormControls
     }
 
     // Prepares the line for text editor display.
-    /// <include path='items/LJCPrepareLine/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCPrepareLine/*'/>
     public static string LJCPrepareLine(string lineText)
     {
       string retValue;
@@ -125,7 +131,8 @@ namespace LJCWinFormControls
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCRtControl()
     {
       InitializeComponent();
@@ -262,7 +269,8 @@ namespace LJCWinFormControls
     #region Public Append Methods
 
     // Adds text to the control.
-    /// <include path='items/LJCAppend1/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCAppend1/*'/>
     public void LJCAppend(string text)
     {
       if (text != null)
@@ -272,14 +280,16 @@ namespace LJCWinFormControls
     }
 
     // Adds text with a font.
-    /// <include path='items/LJCAppend2/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCAppend2/*'/>
     public void LJCAppend(string text, FontStyle fontStyle)
     {
       LJCAppend(text, fontStyle, SelectionColor);
     }
 
     // Adds text with a font and a color.
-    /// <include path='items/LJCAppend3/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCAppend3/*'/>
     public void LJCAppend(string text, FontStyle fontStyle, Color color)
     {
       if (text != null)
@@ -295,28 +305,32 @@ namespace LJCWinFormControls
     }
 
     // Adds a carriage return line feed.
-    /// <include path='items/LJCAppendLine1/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCAppendLine1/*'/>
     public void LJCAppendLine()
     {
       LJCAppend("\r\n");
     }
 
     // Adds the text plus a CR/LF.
-    /// <include path='items/LJCAppendLine2/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCAppendLine2/*'/>
     public void LJCAppendLine(string text)
     {
       LJCAppend(text + "\r\n");
     }
 
     // Adds text with a font and CR/LF.
-    /// <include path='items/LJCAppendLine3/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCAppendLine3/*'/>
     public void LJCAppendLine(string text, FontStyle fontStyle)
     {
       LJCAppend(text + "\r\n", fontStyle);
     }
 
     // Adds text with a font, color and CR/LF.
-    /// <include path='items/LJCAppendLine4/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCAppendLine4/*'/>
     public void LJCAppendLine(string text, FontStyle fontStyle, Color color)
     {
       LJCAppend(text + "\r\n", fontStyle, color);

@@ -37,7 +37,8 @@ namespace LJCWinFormControls
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public InfoWindow(string text = null, string contents = null
       , Point? location = null) : this()
     {
@@ -96,14 +97,16 @@ namespace LJCWinFormControls
     #region Event Methods
 
     // Fires the OnClose event.
-    /// <include path='items/OnClose/*' file='Doc/InfoWindow.xml'/>
+    /// <include file='Doc/InfoWindow.xml'
+    ///  path='items/OnClose/*'/>
     protected void LJCOnClose()
     {
       LJCCloseEvent?.Invoke(this, new EventArgs());
     }
 
     // Fires the OnClosing event.
-    /// <include path='items/OnClosing/*' file='Doc/InfoWindow.xml'/>
+    /// <include file='Doc/InfoWindow.xml'
+    ///  path='items/OnClosing/*'/>
     protected override void OnClosing(CancelEventArgs e)
     {
       base.OnClosing(e);
