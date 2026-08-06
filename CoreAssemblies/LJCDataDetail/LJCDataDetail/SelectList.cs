@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SelectList.cs
 using System;
@@ -17,7 +17,8 @@ namespace LJCDataDetail
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public SelectList()
     {
       InitializeComponent();
@@ -45,7 +46,8 @@ namespace LJCDataDetail
     #region Data Methods
 
     // Retrieves the list rows.
-    /// <include path='items/DataRetrieve/*' file='../../../CoreUtilities/LJCGenDoc/Common/List.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/List.xml'
+    ///  path='items/DataRetrieve/*'/>
     private void DataRetrieve()
     {
       DbResult dbResult;

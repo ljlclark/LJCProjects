@@ -19,7 +19,8 @@ namespace LJCDataDetail
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DataDetailDialogC/*' file='Doc/DataDetailDialog.xml'/>
+    /// <include file='Doc/DataDetailDialog.xml'
+    ///  path='items/DataDetailDialogC/*'/>
     public DataDetailDialog(string userID, string tableName)
     {
       Cursor = Cursors.WaitCursor;
