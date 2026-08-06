@@ -8,14 +8,16 @@ using System.Xml.Serialization;
 namespace LJCDataAccessConfig5
 {
   // Represents a collection of LJCDataConfig objects.
-  /// <include path="members/LJCDataConfigs/*" file="Doc/LJCDataConfigs.xml"/>
+  /// <include file='Doc/LJCDataConfigs.xml'
+  ///  path='members/LJCDataConfigs/*'/>
   [XmlRoot("LJCDataConfigs")]
   public class LJCDataConfigs : List<LJCDataConfig>
   {
     #region Static Methods
 
     // Gets a DataConfig from the DataConfigs.xml file.
-    /// <include path="members/DataConfig/*" file="Doc/LJCDataConfigs.xml"/>
+    /// <include file='Doc/LJCDataConfigs.xml'
+    ///  path='members/DataConfig/*'/>
     public static LJCDataConfig? DataConfig(string configName)
     {
       LJCDataConfig retConfig = null;
@@ -33,7 +35,8 @@ namespace LJCDataAccessConfig5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCDataConfigs.xml"/>
+    /// <include file='Doc/LJCDataConfigs.xml'
+    ///  path='members/Constructor/*'/>
     public LJCDataConfigs()
     {
       mConfigFileName = "DataConfigs.xml";
@@ -45,7 +48,8 @@ namespace LJCDataAccessConfig5
     }
 
     // Retrieves the config data.
-    /// <include path="members/LoadData/*" file="Doc/LJCDataConfigs.xml"/>
+    /// <include file='Doc/LJCDataConfigs.xml'
+    ///  path='members/LoadData/*'/>
     public void LoadData()
     {
       if (!File.Exists(ConfigFileSpec))
@@ -68,7 +72,8 @@ namespace LJCDataAccessConfig5
     #region Collection Methods
 
     // Creates and adds the object from the provided valus.
-    /// <include path="members/Add/*" file="Doc/LJCDataConfigs.xml"/>
+    /// <include file='Doc/LJCDataConfigs.xml'
+    ///  path='members/Add/*'/>
     public LJCDataConfig Add(string name, string dbServer, string database
       , string connectionType)
     {
@@ -84,7 +89,8 @@ namespace LJCDataAccessConfig5
     }
 
     // Retrieve the data configuration.
-    /// <include path="members/Retrieve/*" file="Doc/LJCDataConfigs.xml"/>
+    /// <include file='Doc/LJCDataConfigs.xml'
+    ///  path='members/Retrieve/*'/>
     public LJCDataConfig Retrieve(string name)
     {
       LJCDataConfig retValue;
@@ -113,7 +119,8 @@ namespace LJCDataAccessConfig5
     }
 
     // Saves the config data.
-    /// <include path="members/Save/*" file="Doc/LJCDataConfigs.xml"/>
+    /// <include file='Doc/LJCDataConfigs.xml'
+    ///  path='members/Save/*'/>
     public void Save()
     {
       LJC.XmlSerialize(this.GetType(), this, null, ConfigFileSpec);
@@ -149,7 +156,8 @@ namespace LJCDataAccessConfig5
     #region Properties
 
     // Gets or sets the ConnectionType name.
-    /// <include path="members/ConnectionType/*" file="Doc/LJCDataConfigs.xml"/>
+    /// <include file='Doc/LJCDataConfigs.xml'
+    ///  path='members/ConnectionType/*'/>
     public string? ConnectionType
     {
       get { return mConnectionType; }
@@ -158,7 +166,8 @@ namespace LJCDataAccessConfig5
     private string? mConnectionType;
 
     // The configuration file path.
-    /// <include path="members/ConfigFileSpec/*" file="Doc/LJCDataConfigs.xml"/>
+    /// <include file='Doc/LJCDataConfigs.xml'
+    ///  path='members/ConfigFileSpec/*'/>
     public string ConfigFileSpec { get; set; }
     #endregion
 
