@@ -10,13 +10,15 @@ using MySql.Data.MySqlClient;
 namespace LJCDataAccess5
 {
   // Provides common data methods.
-  /// <include path='items/DataCommon/*' file='Doc/DataCommon.xml'/>
+  /// <include file='Doc/DataCommon.xml'
+  ///  path='items/DataCommon/*'/>
   public class LJCDataCommon
   {
     #region Data Access Methods
 
     // Sets the data adapter table mappings.
-    /// <include path='items/SetTableMapping/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/SetTableMapping/*'/>
     public static void SetTableMapping(DbDataAdapter? dataAdapter
       , DataTableMappingCollection? tableMapping)
     {
@@ -35,7 +37,8 @@ namespace LJCDataAccess5
     }
 
     // Sets the data adapter table mappings.
-    /// <include path='items/SetTableMappingMySql/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/SetTableMappingMySql/*'/>
     public static void SetTableMappingMySql(MySqlDataAdapter dataAdapter
       , DataTableMappingCollection? tableMapping)
     {
@@ -56,7 +59,8 @@ namespace LJCDataAccess5
     #region Data Conversion Methods
 
     // Converts the date string to a DateTime value.
-    /// <include path='items/GetDbDate/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetDbDate/*'/>
     public static DateTime GetDbDate(string dateText
       , ConnectionType connectionType = ConnectionType.SqlServer)
     {
@@ -73,7 +77,8 @@ namespace LJCDataAccess5
     }
 
     // Converts the date/time string to a DateTime value.
-    /// <include path='items/GetDbDateTime/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetDbDateTime/*'/>
     public static DateTime GetDbDateTime(string dateText
       , ConnectionType connectionType = ConnectionType.SqlServer)
     {
@@ -89,7 +94,8 @@ namespace LJCDataAccess5
     }
 
     // Formats the DateTime value to a date string in database format.
-    /// <include path='items/GetDbDateString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetDbDateString/*'/>
     public static string GetDbDateString(DateTime dateTime
       , ConnectionType dbType = ConnectionType.SqlServer)
     {
@@ -101,7 +107,8 @@ namespace LJCDataAccess5
     }
 
     // Formats the DateTime value to a date/time string in database format.
-    /// <include path='items/GetDbDateTimeString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetDbDateTimeString/*'/>
     public static string GetDbDateTimeString(DateTime dateTime)
     {
       string retValue;
@@ -111,7 +118,8 @@ namespace LJCDataAccess5
     }
 
     // Get the minimum date/time value.
-    /// <include path='items/GetMinDateTime/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetMinDateTime/*'/>
     public static DateTime GetMinDateTime(ConnectionType connectionType
       = ConnectionType.SqlServer)
     {
@@ -135,7 +143,8 @@ namespace LJCDataAccess5
     }
 
     // Get the minimum date/time string formatted for display.
-    /// <include path='items/GetMinUIDateTimeString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetMinUIDateTimeString/*'/>
     public static string GetMinUIDateTimeString(ConnectionType connectionType
       = ConnectionType.SqlServer)
     {
@@ -153,7 +162,8 @@ namespace LJCDataAccess5
     }
 
     // Format the date value for display.
-    /// <include path='items/GetUIDateString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetUIDateString/*'/>
     public static string? GetUIDateString(DateTime? dateTime)
     {
       string? retValue = null;
@@ -168,7 +178,8 @@ namespace LJCDataAccess5
     }
 
     // Format the date/time value for display.
-    /// <include path='items/GetUIDateTimeString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetUIDateTimeString/*'/>
     public static string? GetUIDateTimeString(DateTime dateTime)
     {
       string? retValue = null;
@@ -181,7 +192,8 @@ namespace LJCDataAccess5
     }
 
     // Format the date/time to time for display.
-    /// <include path='items/GetUITimeString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetUITimeString/*'/>
     public static string? GetUITimeString(DateTime dateTime)
     {
       string? retValue = null;

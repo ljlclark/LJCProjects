@@ -15,7 +15,8 @@ namespace LJCDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCProviderFactory()
     {
       ConnectionString = "";
@@ -24,7 +25,8 @@ namespace LJCDataAccess5
     }
 
     // Initializes an object instance with the supplied values,
-    /// <include path='items/ProviderFactoryC/*' file='Doc/ProviderFactory.xml'/>
+    /// <include file='Doc/ProviderFactory.xml'
+    ///  path='items/ProviderFactoryC/*'/>
     public LJCProviderFactory(string connectionString, string providerName)
     {
       ConnectionString = connectionString;
@@ -36,14 +38,16 @@ namespace LJCDataAccess5
     #region Methods
 
     // Closes the database connection.
-    /// <include path='items/CloseConnection/*' file='Doc/ProviderFactory.xml'/>
+    /// <include file='Doc/ProviderFactory.xml'
+    ///  path='items/CloseConnection/*'/>
     public void CloseConnection()
     {
       mDbConnection?.Close();
     }
 
     // Retrieves the DbCommand object.
-    /// <include path='items/CreateCommand/*' file='Doc/ProviderFactory.xml'/>
+    /// <include file='Doc/ProviderFactory.xml'
+    ///  path='items/CreateCommand/*'/>
     public DbCommand? CreateCommand(string commandText
       , CommandType commandType = CommandType.Text)
     {
@@ -82,7 +86,8 @@ namespace LJCDataAccess5
     }
 
     // Retrieves the DbConnection object.
-    /// <include path='items/CreateConnection/*' file='Doc/ProviderFactory.xml'/>
+    /// <include file='Doc/ProviderFactory.xml'
+    ///  path='items/CreateConnection/*'/>
     public DbConnection? CreateConnection()
     {
       DbConnection? retValue = null;
@@ -111,7 +116,8 @@ namespace LJCDataAccess5
     }
 
     // Creates the DbDataAdapter object.
-    /// <include path='items/CreateDataAdapter/*' file='Doc/ProviderFactory.xml'/>
+    /// <include file='Doc/ProviderFactory.xml'
+    ///  path='items/CreateDataAdapter/*'/>
     public DbDataAdapter? CreateDataAdapter()
     {
       DbDataAdapter? retValue = null;
@@ -124,14 +130,16 @@ namespace LJCDataAccess5
     }
 
     // Opens the database connection.
-    /// <include path='items/OpenConnection/*' file='Doc/ProviderFactory.xml'/>
+    /// <include file='Doc/ProviderFactory.xml'
+    ///  path='items/OpenConnection/*'/>
     public void OpenConnection()
     {
       mDbConnection?.Open();
     }
 
     // Creates the DbProviderFactory object.
-    /// <include path='items/CreateDbProviderFactory/*' file='Doc/ProviderFactory.xml'/>
+    /// <include file='Doc/ProviderFactory.xml'
+    ///  path='items/CreateDbProviderFactory/*'/>
     private void CreateDbProviderFactory()
     {
       StringBuilder builder;

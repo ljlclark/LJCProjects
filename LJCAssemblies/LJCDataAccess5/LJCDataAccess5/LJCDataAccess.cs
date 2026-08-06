@@ -12,13 +12,15 @@ using System.Text.RegularExpressions;
 namespace LJCDataAccess5
 {
   // Implements an ADO.NET SQL data access control layer.
-  /// <include path='items/DataAccess/*' file='Doc/ProjectDataAccess.xml'/>
+  /// <include file='Doc/ProjectDataAccess.xml'
+  ///  path='items/DataAccess/*'/>
   public partial class LJCDataAccess
   {
     #region Static Functions
 
     // Creates a connection string.
-    /// <include path='items/GetConnectionString/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetConnectionString/*'/>
     public static string GetConnectionString(string dataSourceName
       , string databaseName, string? userID = null, string? password = null
       , params string[] pairs)
@@ -65,7 +67,8 @@ namespace LJCDataAccess5
     }
 
     // Creates the DataAccess object.
-    /// <include path='items/GetDataAccess/*' file='Doc/DataCommon.xml'/>
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/GetDataAccess/*'/>
     public static LJCDataAccess GetDataAccess(string dataSourceName
       , string databaseName, string providerName = "Microsoft.Data.SqlClient")
     {
@@ -157,14 +160,16 @@ namespace LJCDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCDataAccess()
     {
       RegisterSqlClient();
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include path='items/DataAccessC/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/DataAccessC/*'/>
     public LJCDataAccess(string connectionString, string? providerName = null
       , string? databaseName = null)
     {
@@ -178,14 +183,16 @@ namespace LJCDataAccess5
     #region Methods
 
     // Closes the database connection.
-    /// <include path='items/CloseConnection/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/CloseConnection/*'/>
     public void CloseConnection()
     {
       ProviderFactory?.CloseConnection();
     }
 
     // Executes an Insert, Update or Delete statement.
-    /// <include path='items/ExecuteNonQuery/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ExecuteNonQuery/*'/>
     public int ExecuteNonQuery(string? sql)
     {
       DbCommand? command;
@@ -227,7 +234,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a script file.
-    /// <include path='items/ExecuteScript/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ExecuteScript/*'/>
     public void ExecuteScript(string scriptFileSpec)
     {
       if (!File.Exists(scriptFileSpec))
@@ -243,7 +251,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a script text string.
-    /// <include path='items/ExecuteScriptText/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ExecuteScriptText/*'/>
     public void ExecuteScriptText(string scriptText)
     {
       var regexOptions = RegexOptions.IgnoreCase;
@@ -271,7 +280,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a Select statement and fills the specified DataTable.
-    /// <include path='items/FillDataTable/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/FillDataTable/*'/>
     public void FillDataTable(string sql, DataTable dataTable
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -322,7 +332,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a Select statement and retrieves the DbDataReader object.
-    /// <include path='items/GetDataReader/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/GetDataReader/*'/>
     public DbDataReader? GetDataReader(string sql)
     {
       DbCommand? command;
@@ -352,7 +363,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a Select statement and retrieves the DataSet object.
-    /// <include path='items/GetDataSet/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/GetDataSet/*'/>
     public DataSet? GetDataSet(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -399,7 +411,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a Select statement and retrieves the DataTable object.
-    /// <include path='items/GetDataTable/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/GetDataTable/*'/>
     public DataTable? GetDataTable(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -428,7 +441,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a Stored Procedure and retrieves the DataTable object.
-    /// <include path='items/GetProcedureDataTable/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/GetProcedureDataTable/*'/>
     public DataTable? GetProcedureDataTable(string procedureName
       , LJCProcedureParameters? parameters = null)
     {
@@ -484,7 +498,8 @@ namespace LJCDataAccess5
     }
 
     // Retrieves the DataTable object with schema only.
-    /// <include path='items/GetSchemaOnly/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/GetSchemaOnly/*'/>
     public DataTable? GetSchemaOnly(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -528,7 +543,8 @@ namespace LJCDataAccess5
     }
 
     // Get the column SQL types.
-    /// <include path='items/GetColumnSQLTypes/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/GetColumnSQLTypes/*'/>
     public DataTable? GetColumnSQLTypes(string dbName, string tableName)
     {
       DataTable? retValue;

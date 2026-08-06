@@ -14,7 +14,6 @@ namespace LJCDataAccess5
     // Clones a DataColumn object.
     /// <include file='Doc/LJCTableColumn.xml'
     ///  path='items/DataColumnClone/*'/>
-    // Note: Also in LJCGridDataLib.TableData
     public static DataColumn? Clone(DataColumn adoColumn)
     {
       DataColumn? retTableColumn = null;

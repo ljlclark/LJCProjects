@@ -12,13 +12,15 @@ namespace LJCDataAccess5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCProcedureParameter()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCProcedureParameter(LJCProcedureParameter item)
     {
       Direction = item.Direction;
@@ -48,14 +50,16 @@ namespace LJCDataAccess5
     #region Methods
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/ToString/*'/>
     public override string? ToString()
     {
       return ParameterName;
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public LJCProcedureParameter? Clone()
     {
       LJCProcedureParameter? retValue = MemberwiseClone() as LJCProcedureParameter;
@@ -63,7 +67,8 @@ namespace LJCDataAccess5
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CompareTo/*'/>
     public int CompareTo(LJCProcedureParameter? other)
     {
       int retValue;

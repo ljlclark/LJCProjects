@@ -36,8 +36,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if the key columns value has changed.
-    private static bool IsKeyColumnsChanged(LJCDataColumns? newKeys
-      , LJCDataColumns? currentKeys)
+    private static bool IsKeyColumnsChanged(LJCDataValues? newKeys
+      , LJCDataValues? currentKeys)
     {
       bool retValue = false;
 
@@ -214,7 +214,7 @@ namespace LJCNetCommon5
     // Gets a list of property names from the collection items.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCKeyPropertyNames/*'/>
-    public List<string>? LJCKeyPropertyNames(LJCDataColumns? keys = null)
+    public List<string>? LJCKeyPropertyNames(LJCDataValues? keys = null)
     {
       List<string>? retList = null;
 
@@ -275,7 +275,7 @@ namespace LJCNetCommon5
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/Add/*'/>
     /// <parentGroup>collection</parentGroup>
-    public LJCDataValue Add(string propertyName, object value
+    public LJCDataValue Add(string propertyName, object? value = null
       , string dataTypeName = "String")
     {
       var retValue = new LJCDataValue()
@@ -604,7 +604,7 @@ namespace LJCNetCommon5
     // Gets or sets the key columns.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCKeyColumns/*'/>
-    public LJCDataColumns? LJCKeys
+    public LJCDataValues? LJCKeys
     {
       get => _Keys;
       set
@@ -624,7 +624,7 @@ namespace LJCNetCommon5
         }
       }
     }
-    private LJCDataColumns? _Keys;
+    private LJCDataValues? _Keys;
 
     // Gets the item with the supplied property name.
     /// <include file='Doc/LJCDataValues.xml'

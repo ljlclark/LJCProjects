@@ -14,7 +14,7 @@ namespace TestDataColumns5
       _ = new TestDataColumns();
 
       _ = new TestDataValue();
-      //_ = new TestDataValues();
+      _ = new TestDataValues();
 
       Console.WriteLine();
       Console.WriteLine();

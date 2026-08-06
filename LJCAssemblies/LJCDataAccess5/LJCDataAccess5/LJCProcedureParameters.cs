@@ -13,13 +13,15 @@ namespace LJCDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCProcedureParameters()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCProcedureParameters(LJCProcedureParameters? items)
     {
       if (LJC.HasListItems(items))
@@ -35,7 +37,8 @@ namespace LJCDataAccess5
     #region Methods
 
     // Creates and adds the object from the supplied values.
-    /// <include path='items/AddMySql/*' file='Doc/ProcedureParameters.xml'/>
+    /// <include file='Doc/ProcedureParameters.xml'
+    ///  path='items/AddMySql/*'/>
     public LJCProcedureParameter Add(string parameterName
       , int sqlDbTypeID, int mySqlDbTypeID, int size, object? value = null
       , ParameterDirection direction = ParameterDirection.Input)
@@ -54,7 +57,8 @@ namespace LJCDataAccess5
     }
 
     // Retrieve the collection element by name.
-    /// <include path='items/LJCSearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSearchName/*'/>
     public LJCProcedureParameter? LJCSearchName(string name)
     {
       LJCProcedureParameter? retValue = null;

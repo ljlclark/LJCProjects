@@ -306,8 +306,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if a text value exists.
-      /// <include path="members/HasText/*" file="Doc/LJC.xml"/>
-      /// <parentGroup>check</parentGroup>
+    /// <include path="members/HasText/*" file="Doc/LJC.xml"/>
+    /// <parentGroup>check</parentGroup>
     public static bool HasText([NotNullWhen(true)] string? text)
     {
       return !string.IsNullOrWhiteSpace(text);

@@ -13,7 +13,8 @@ namespace LJCDataAccess5
     #region Constructors
 
     // Initializes an instance of the object.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCTableMapping()
     {
       //TableMaps = new DataTableMappingCollection();
@@ -24,7 +25,8 @@ namespace LJCDataAccess5
     #region Methods
 
     // Adds a DataTable column map to the table mapping.
-    /// <include path='items/AddColumnMap/*' file='Doc/TableMapping.xml'/>
+    /// <include file='Doc/TableMapping.xml'
+    ///  path='items/AddColumnMap/*'/>
     public DataColumnMapping? AddColumnMap(string dataSetTable, string sourceColumn
       , string dataSetColumn)
     {
@@ -40,7 +42,8 @@ namespace LJCDataAccess5
     }
 
     // Adds a DataTable map to the TableMaps collection.
-    /// <include path='items/AddTableMap/*' file='Doc/TableMapping.xml'/>
+    /// <include file='Doc/TableMapping.xml'
+    ///  path='items/AddTableMap/*'/>
     public DataTableMapping AddTableMap(string dataSetTable)
     {
       string sourceTable;

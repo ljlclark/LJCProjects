@@ -15,7 +15,8 @@ namespace LJCDataAccess5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/MySqlDataAccessC/*' file='Doc/MySqlDataAccess.xml'/>
+    /// <include file='Doc/MySqlDataAccess.xml'
+    ///  path='items/MySqlDataAccessC/*'/>
     public LJCMySqlDataAccess(string connectionString)
     {
       ConnectionString = connectionString;
@@ -25,7 +26,8 @@ namespace LJCDataAccess5
     #region Methods
 
     // Executes an Insert, Update or Delete statement.
-    /// <include path='items/ExecuteNonQuery/*' file='Doc/MySqlDataAccess.xml'/>
+    /// <include file='Doc/MySqlDataAccess.xml'
+    ///  path='items/ExecuteNonQuery/*'/>
     public int ExecuteNonQuery(string sql)
     {
       MySqlConnection connection;
@@ -58,7 +60,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a Select statement and fills the specified DataTable.
-    /// <include path='items/FillDataTable/*' file='Doc/MySqlDataAccess.xml'/>
+    /// <include file='Doc/MySqlDataAccess.xml'
+    ///  path='items/FillDataTable/*'/>
     public void FillDataTable(string sql, DataTable dataTable
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -78,7 +81,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a Select statement and retrieves the MySqlDataReader object.
-    /// <include path='items/GetDataReader/*' file='Doc/MySqlDataAccess.xml'/>
+    /// <include file='Doc/MySqlDataAccess.xml'
+    ///  path='items/GetDataReader/*'/>
     public MySqlDataReader GetDataReader(string sql)
     {
       MySqlConnection connection;
@@ -112,7 +116,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a Select statement and retrieves the DataSet object.
-    /// <include path='items/GetDataSet/*' file='Doc/MySqlDataAccess.xml'/>
+    /// <include file='Doc/MySqlDataAccess.xml'
+    ///  path='items/GetDataSet/*'/>
     public DataSet? GetDataSet(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -135,7 +140,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a Select statement and retrieves the DataTable object.
-    /// <include path='items/GetDataTable/*' file='Doc/MySqlDataAccess.xml'/>
+    /// <include file='Doc/MySqlDataAccess.xml'
+    ///  path='items/GetDataTable/*'/>
     public DataTable? GetDataTable(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -150,7 +156,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a Select statement and retrieves the DataTable object.
-    /// <include path='items/GetDataTableFromReader/*' file='Doc/MySqlDataAccess.xml'/>
+    /// <include file='Doc/MySqlDataAccess.xml'
+    ///  path='items/GetDataTableFromReader/*'/>
     public DataTable GetDataTableFromReader(string sql)
     {
       MySqlDataReader reader;
@@ -212,7 +219,8 @@ namespace LJCDataAccess5
     }
 
     // Executes a Stored Procedure and retrieves the DataTable object.
-    /// <include path='items/GetProcedureDataTable/*' file='Doc/MySqlDataAccess.xml'/>
+    /// <include file='Doc/MySqlDataAccess.xml'
+    ///  path='items/GetProcedureDataTable/*'/>
     public DataTable? GetProcedureDataTable(string procedureName
       , LJCProcedureParameters? parameters)
     {
@@ -263,7 +271,8 @@ namespace LJCDataAccess5
     }
 
     // Retrieves the DataTable object with schema only.
-    /// <include path='items/GetSchemaOnly/*' file='Doc/MySqlDataAccess.xml'/>
+    /// <include file='Doc/MySqlDataAccess.xml'
+    ///  path='items/GetSchemaOnly/*'/>
     public DataTable? GetSchemaOnly(string sql
       , DataTableMappingCollection? tableMapping = null)
     {

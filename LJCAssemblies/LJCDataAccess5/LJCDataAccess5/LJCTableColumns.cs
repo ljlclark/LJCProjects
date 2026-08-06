@@ -12,7 +12,8 @@ namespace LJCDataAccess5
     #region Static Methods
 
     // Clones a DataColumn collection.
-    /// <include path='items/Clone/*' file='Doc/LJCTableColumns.xml'/>
+    /// <include file='Doc/LJCTableColumns.xml'
+    ///  path='items/Clone/*'/>
     public static DataColumnCollection? Clone(DataColumnCollection adoColumns)
     {
       DataColumnCollection? retTableColumns = null;
@@ -33,7 +34,8 @@ namespace LJCDataAccess5
     }
 
     // Creates a PropertyNames list from a DataColumns collection.
-    /// <include path='items/GetPropertyNames/*' file='Doc/LJCTableColumns.xml'/>
+    /// <include file='Doc/LJCTableColumns.xml'
+    ///  path='items/GetPropertyNames/*'/>
     public static List<string>? ColumnNames(DataColumnCollection adoColumns)
     {
       List<string>? retValue = null;
@@ -51,8 +53,8 @@ namespace LJCDataAccess5
     }
 
     // Returns a set of DataColumns that match the supplied list.
-    /// <include path='items/Columns/*' file='Doc/LJCTableColumns.xml'/>
-    // Note: Also in LJCGridDataLib.TableData
+    /// <include file='Doc/LJCTableColumns.xml'
+    ///  path='items/Columns/*'/>
     public static DataColumnCollection? Columns(DataColumnCollection adoColumns
       , List<string>? columnNames = null)
     {
@@ -98,7 +100,8 @@ namespace LJCDataAccess5
     }
 
     // Checks the DataColumnCollection object for items.
-    /// <include path='items/HasColumns/*' file='Doc/LJCTableColumns.xml'/>
+    /// <include file='Doc/LJCTableColumns.xml'
+    ///  path='items/HasColumns/*'/>
     // Note: Also in LJCDBMessage.DbResult
     public static bool HasColumns(DataColumnCollection adoColumns)
     {

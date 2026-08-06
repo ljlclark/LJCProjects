@@ -216,5 +216,17 @@ namespace LJCNetCommon5
     }
     private object? _OriginalValue;
     #endregion
+
+    #region Class Data
+
+    /// <summary>The DataTypeName column name.</summary>
+    public const string ColumnDataTypeName = "DataTypeName";
+
+    /// <summary>The PropertyName column name.</summary>
+    public const string ColumnPropertyName = "PropertyName";
+
+    /// <summary>The Value column name.</summary>
+    public const string ColumnValue = "Value";
+    #endregion
   }
 }
