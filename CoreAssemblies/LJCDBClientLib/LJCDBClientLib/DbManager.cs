@@ -15,14 +15,16 @@ namespace LJCDBClientLib
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DbManagerC/*' file='Doc/DbManager.xml'/>
+    /// <include file='Doc/DbManager.xml'
+    ///  path='items/DbManagerC/*'/>
     public DbManager(string dataConfigName, string tableName)
     {
       Reset(dataConfigName, tableName);
     }
 
-    /// Resets the data access configuration.
-    /// <include path='items/Reset/*' file='Doc/DbManager.xml'/>
+    // Resets the data access configuration.
+    /// <include file='Doc/DbManager.xml'
+    ///  path='items/Reset/*'/>
     public void Reset(string dataConfigName, string tableName)
     {
       DataConfigName = dataConfigName;
@@ -41,7 +43,8 @@ namespace LJCDBClientLib
     #region DataManager related Public Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'
+    ///  path='items/Add/*'/>
     public DbResult Add(object dataObject, List<string> propertyNames = null)
     {
       DbResult retValue;
@@ -61,7 +64,8 @@ namespace LJCDBClientLib
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
+    ///  path='items/Delete/*'/>
     public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       if (LJC.HasListItems(keyColumns)
@@ -76,7 +80,8 @@ namespace LJCDBClientLib
     }
 
     // Executes the supplied request.
-    /// <include path='items/ExecuteRequest/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
+    ///  path='items/ExecuteRequest/*'/>
     public DbResult ExecuteRequest(DbRequest dbRequest)
     {
       DbResult retValue;
@@ -91,7 +96,8 @@ namespace LJCDBClientLib
     }
 
     // Loads a collection of data records.
-    /// <include path='items/Load/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
+    ///  path='items/Load/*'/>
     public DbResult Load(LJCDataColumns keyColumns, List<string> propertyNames = null
       , DbFilters filters = null, DbJoins joins = null)
     {
@@ -107,7 +113,8 @@ namespace LJCDBClientLib
     }
 
     // Retrieves a record from the database.
-    /// <include path='items/Retrieve/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
+    ///  path='items/Retrieve/*'/>
     public DbResult Retrieve(LJCDataColumns keyColumns, List<string> propertyNames = null
       , DbFilters filters = null, DbJoins joins = null)
     {
@@ -123,7 +130,8 @@ namespace LJCDBClientLib
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
+    ///  path='items/Update/*'/>
     public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
@@ -140,7 +148,8 @@ namespace LJCDBClientLib
     #region Other Public Methods
 
     // Adds the lookup column names.
-    /// <include path='items/SetLookupColumns/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/SetLookupColumns/*'/>
     public void SetLookupColumns(string[] propertyNames)
     {
       foreach (string propertyName in propertyNames)

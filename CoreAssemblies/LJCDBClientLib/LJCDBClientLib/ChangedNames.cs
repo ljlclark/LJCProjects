@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ChangedNames.cs
 using LJCNetCommon;
@@ -26,7 +26,8 @@ namespace LJCDBClientLib
     }
 
     // Adds the property name if the value has changed and not already in list.
-    /// <include path='items/Add/*' file='Doc/ChangedNames.xml'/>
+    /// <include file='Doc/ChangedNames.xml'
+    ///  path='items/Add/*'/>
     public T Add<T>(string propertyName, T originalValue, T newValue)
     {
       T retValue = newValue;

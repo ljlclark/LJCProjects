@@ -19,7 +19,8 @@ namespace LJCDBClientLib
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DataManagerC1/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/DataManagerC1/*'/>
     public DataManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = null, string schemaName = null
       , bool useEncryption = true)
@@ -29,7 +30,8 @@ namespace LJCDBClientLib
     }
 
     // Initializes an object instance.
-    /// <include path='items/DataManagerC2/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/DataManagerC2/*'/>
     public DataManager(string dataConfigName, string tableName = null
       , string schemaName = null, bool useEncryption = true)
     {
@@ -37,7 +39,8 @@ namespace LJCDBClientLib
     }
 
     // Resets the data access configuration.
-    /// <include path='items/Reset/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/Reset/*'/>
     public void Reset(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = null, string schemaName = null
       , bool useEncryption = true)
@@ -97,7 +100,8 @@ namespace LJCDBClientLib
     //int stepID = Convert.ToInt32((decimal)command.ExecuteScalar());
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/Add/*'/>
     public DbResult Add(object dataObject, List<string> propertyNames = null
       , bool includeNull = false)
     {
@@ -122,7 +126,8 @@ namespace LJCDBClientLib
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/Delete/*'/>
     public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       // Make sure delete is restricted.
@@ -147,7 +152,8 @@ namespace LJCDBClientLib
     }
 
     // Executes a non-query (DML "insert", "delete", "update") SQL statement.
-    /// <include path='items/ExecuteClientSql/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/ExecuteClientSql/*'/>
     public DbResult ExecuteClientSql(RequestType requestType, string sql
       , LJCDataColumns requestColumns = null)
     {
@@ -168,7 +174,8 @@ namespace LJCDBClientLib
     }
 
     // Retrieves a collection of data records.
-    /// <include path='items/Load/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/Load/*'/>
     public DbResult Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -181,7 +188,8 @@ namespace LJCDBClientLib
     }
 
     // Retrieves a collection of data records.
-    /// <include path='items/LoadProcedure/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/LoadProcedure/*'/>
     public DbResult LoadProcedure(string procedureName
       , ProcedureParameters parameters = null, DbJoins joins = null)
     {
@@ -201,7 +209,8 @@ namespace LJCDBClientLib
     }
 
     // Retrieves a record from the database.
-    /// <include path='items/Retrieve/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/Retrieve/*'/>
     public DbResult Retrieve(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -233,7 +242,8 @@ namespace LJCDBClientLib
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/Update/*'/>
     public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
@@ -269,7 +279,8 @@ namespace LJCDBClientLib
     #region Other Public Methods
 
     // Creates the Load DbRequest object.
-    /// <include path='items/CreateLoadRequest/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/CreateLoadRequest/*'/>
     public DbRequest CreateLoadRequest(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -289,7 +300,8 @@ namespace LJCDBClientLib
     }
 
     // Executes the supplied request.
-    /// <include path='items/ExecuteRequest/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/ExecuteRequest/*'/>
     public DbResult ExecuteRequest(DbRequest dbRequest)
     {
       string result;
@@ -362,7 +374,8 @@ namespace LJCDBClientLib
     }
 
     // Creates a PropertyNames list from the data definition.
-    /// <include path='items/GetPropertyNames/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/GetPropertyNames/*'/>
     public List<string> GetPropertyNames()
     {
       List<string> retValue = new List<string>();
@@ -377,7 +390,8 @@ namespace LJCDBClientLib
     }
 
     // Retrieves the column names for the specified table.
-    /// <include path='items/GetSchemaOnly/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/GetSchemaOnly/*'/>
     public DbResult GetSchemaOnly(string dataConfigName = null
       , string tableName = null)
     {
@@ -399,7 +413,8 @@ namespace LJCDBClientLib
     }
 
     // Retrieves the table names for the data configuration database.
-    /// <include path='items/GetTableNames/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/GetTableNames/*'/>
     public DbResult GetTableNames()
     {
       LJCDataColumns includedColumns;
@@ -428,7 +443,8 @@ namespace LJCDBClientLib
     }
 
     // Maps the column property and rename values.
-    /// <include path='items/MapNames/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/MapNames/*'/>
     public void MapNames(string columnName, string propertyName = null
       , string renameAs = null, string caption = null)
     {
@@ -437,7 +453,8 @@ namespace LJCDBClientLib
     }
 
     // Resequence the sequence column values.
-    /// <include path='items/Resequence/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/Resequence/*'/>
     public void Resequence(string idName, string sequenceName
       , string whereClause)
     {
@@ -466,7 +483,8 @@ namespace LJCDBClientLib
     }
 
     // Sets the database assigned value column names. 
-    /// <include path='items/SetDbAssignedColumns/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/SetDbAssignedColumns/*'/>
     public void SetDbAssignedColumns(string[] propertyNames)
     {
       DbAssignedColumns = new LJCDataColumns();
@@ -484,7 +502,8 @@ namespace LJCDBClientLib
     }
 
     // Adds the lookup column names.
-    /// <include path='items/SetLookupColumns/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/SetLookupColumns/*'/>
     public void SetLookupColumns(string[] propertyNames)
     {
       foreach (string propertyName in propertyNames)
@@ -502,7 +521,8 @@ namespace LJCDBClientLib
 
     // Retrieves the schema result for the specified table and transforms
     // it into a result of column names.
-    /// <include path='items/CreateSchemaColumnsResult/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/CreateSchemaColumnsResult/*'/>
     public DbResult CreateSchemaColumnsResult(string dataConfigName
       , string tableName)
     {
@@ -511,7 +531,8 @@ namespace LJCDBClientLib
     }
 
     // Takes a result object and transforms it into a result of column names.
-    /// <include path='items/CreateSchemaColumnsResult1/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/CreateSchemaColumnsResult1/*'/>
     public DbResult CreateSchemaColumnsResult(DbResult dbResult)
     {
       DbResult retValue = new DbResult();

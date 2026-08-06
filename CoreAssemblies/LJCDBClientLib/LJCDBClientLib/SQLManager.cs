@@ -17,7 +17,8 @@ namespace LJCDBClientLib
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/SQLManagerC/*' file='Doc/SQLManager.xml'/>
+    /// <include file='Doc/SQLManager.xml'
+    ///  path='items/SQLManagerC/*'/>
     public SQLManager(string dataConfigName, string tableName
       , string connectionString = null, string providerName = null)
     {
@@ -62,7 +63,8 @@ namespace LJCDBClientLib
     #region Public Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='Doc/SQLManager.xml'/>
+    /// <include file='Doc/SQLManager.xml'
+    ///  path='items/Add/*'/>
     public DataTable Add(object dataObject, List<string> propertyNames = null)
     {
       NetCommon.CheckArgument<object>(dataObject);
@@ -82,7 +84,8 @@ namespace LJCDBClientLib
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='Doc/SQLManager.xml'/>
+    /// <include file='Doc/SQLManager.xml'
+    ///  path='items/Delete/*'/>
     public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       SQLStatement = CreateDeleteSQL(keyColumns, filters);
@@ -93,7 +96,8 @@ namespace LJCDBClientLib
     }
 
     // Gets a DataTable object.
-    /// <include path='items/GetDataTable/*' file='Doc/SQLManager.xml'/>
+    /// <include file='Doc/SQLManager.xml'
+    ///  path='items/GetDataTable/*'/>
     public DataTable GetDataTable(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -107,7 +111,8 @@ namespace LJCDBClientLib
     }
 
     // Maps the column property and rename values.
-    /// <include path='items/MapNames/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/MapNames/*'/>
     public void MapNames(string columnName, string propertyName = null
       , string renameAs = null, string caption = null)
     {
@@ -116,7 +121,8 @@ namespace LJCDBClientLib
     }
 
     // Adds the lookup column names.
-    /// <include path='items/SetLookupColumns/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/SetLookupColumns/*'/>
     public void SetLookupColumns(string[] propertyNames)
     {
       foreach (string propertyName in propertyNames)
@@ -130,7 +136,8 @@ namespace LJCDBClientLib
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='Doc/SQLManager.xml'/>
+    /// <include file='Doc/SQLManager.xml'
+    ///  path='items/Update/*'/>
     public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {

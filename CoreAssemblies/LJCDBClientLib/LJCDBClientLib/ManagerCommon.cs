@@ -13,7 +13,8 @@ namespace LJCDBClientLib
   public class ManagerCommon
   {
     // Creates the DbRequest object.
-    /// <include path='items/CreateRequest/*' file='Doc/ManagerCommon.xml'/>
+    /// <include file='Doc/ManagerCommon.xml'
+    ///  path='items/CreateRequest/*'/>
     public static DbRequest CreateRequest(RequestType requestType
       , string tableName, LJCDataColumns requestColumns, string dataConfigName
       , string schemaName, LJCDataColumns keyColumns = null
@@ -36,7 +37,8 @@ namespace LJCDBClientLib
     }
 
     // Run the CreateTables script.
-    /// <include path='items/CreateTables/*' file='Doc/ManagerCommon.xml'/>
+    /// <include file='Doc/ManagerCommon.xml'
+    ///  path='items/CreateTables/*'/>
     public static bool CreateTables(string dataConfigName, string[] fileSpecs)
     {
       bool retValue;
@@ -62,7 +64,8 @@ namespace LJCDBClientLib
     }
 
     // Gets the additional Config values.
-    /// <include path='items/GetConfigValues/*' file='Doc/ManagerCommon.xml'/>
+    /// <include file='Doc/ManagerCommon.xml'
+    ///  path='items/GetConfigValues/*'/>
     public static void GetConfigValues(string dataConfigName
       , out string connectionType, out string connectionString
       , out string providerName)
@@ -76,7 +79,8 @@ namespace LJCDBClientLib
     }
 
     // Gets the Missing Table ErrorCode.
-    /// <include path='items/GetMissingTableErrorCode/*' file='Doc/ManagerCommon.xml'/>
+    /// <include file='Doc/ManagerCommon.xml'
+    ///  path='items/GetMissingTableErrorCode/*'/>
     public static int GetMissingTableErrorCode(string dataConfigName)
     {
       int retValue;
