@@ -10,7 +10,8 @@ namespace LJCNetCommon5
   public class LJCPropertyDelegates : List<LJCPropertyDelegate>
   {
     // Creates and adds a PropertyDelegate object to the collection. (R)
-    /// <include path="members/Add/*" file="Doc/LJCPropertyDelegates.xml"/>
+    /// <include file='Doc/LJCPropertyDelegates.xml'
+    ///  path='members/Add/*'/>
     public LJCPropertyDelegate? Add(PropertyInfo propertyInfo)
     {
       LJCPropertyDelegate retValue;
@@ -33,7 +34,8 @@ namespace LJCNetCommon5
     }
 
     // Returns the PropertyDelegate object if found in the list.
-    /// <include path="members/LJCSearchName/*" file="Doc/LJCPropertyDelegates.xml"/>
+    /// <include file='Doc/LJCPropertyDelegates.xml'
+    ///  path='members/LJCSearchName/*'/>
     public LJCPropertyDelegate? LJCSearchName(string propertyName)
     {
       LJCPropertyDelegate retValue = null;
@@ -43,7 +45,8 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns the delegate for the named property.
-    /// <include path="members/LJCCreateDelegate/*" file="Doc/LJCPropertyDelegates.xml"/>
+    /// <include file='Doc/LJCPropertyDelegates.xml'
+    ///  path='members/LJCCreateDelegate/*'/>
     public static Func<object, object>? LJCCreateDelegate(PropertyInfo propertyInfo)
     {
       Func<object, object> retValue = null;

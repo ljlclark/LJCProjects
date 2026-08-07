@@ -7,13 +7,15 @@ using System.Xml.Serialization;
 namespace LJCNetCommon5
 {
   // <summary>Represents a collection of KeyItem objects.</summary>
-  /// <include path="members/KeyItems/*" file="Doc/LJCKeyItems.xml"/>
+  /// <include file='Doc/LJCKeyItems.xml'
+  ///  path='members/KeyItems/*'/>
   public class LJCKeyItems : IEnumerable<LJCKeyItem>
   {
     #region Static Functions
 
     // Get custom collection from List<T>.
-    /// <include path="members/GetCollection/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/GetCollection/*'/>
     public static LJCKeyItems? GetCollection(List<LJCKeyItem> items)
     {
       LJCKeyItems retValue = null;
@@ -30,7 +32,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include path="members/HasItems1/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems1/*'/>
     public static bool HasItems(LJCKeyItems collection)
     {
       bool retValue = false;
@@ -47,7 +50,8 @@ namespace LJCNetCommon5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path="members/DefaultConstructor/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/DefaultConstructor/*'/>
     public LJCKeyItems()
     {
       Items = [];
@@ -55,7 +59,8 @@ namespace LJCNetCommon5
     }
 
     // The Copy constructor.
-    /// <include path="members/CopyConstructor/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/CopyConstructor/*'/>
     public LJCKeyItems(LJCKeyItems items)
     {
       Items = [];
@@ -72,7 +77,8 @@ namespace LJCNetCommon5
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include path="members/Add1/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/Add1/*'/>
     public void Add(LJCKeyItem item)
     {
       if (item != null)
@@ -82,7 +88,8 @@ namespace LJCNetCommon5
     }
 
     // Creates and adds the object from the provided values.
-    /// <include path="members/Add2/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/Add2/*'/>
     public LJCKeyItem? Add(string propertyName, long id, string? description = null
       , int maxLength = 10)
     {
@@ -103,7 +110,8 @@ namespace LJCNetCommon5
     }
 
     // Appends the supplied objects to the collection.
-    /// <include path="members/Append/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/Append/*'/>
     public void Append(LJCKeyItems items)
     {
       if (HasItems(items))
@@ -116,7 +124,8 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns a clone of the object.
-    /// <include path="members/Clone/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public LJCKeyItems Clone()
     {
       var retValue = new LJCKeyItems();
@@ -132,7 +141,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include path="members/HasItems2/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -145,7 +155,8 @@ namespace LJCNetCommon5
     }
 
     // Retrieves an item by property name.
-    /// <include path="members/LJCRetrieve/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCRetrieve/*'/>
     public LJCKeyItem? LJCRetrieve(string propertyName)
     {
       LJCKeyItem retItem = null;
@@ -166,7 +177,8 @@ namespace LJCNetCommon5
     #region Other Methods
 
     // Gets the Item Description with Value as index within PropertyName.
-    /// <include path="members/GetDescription/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/GetDescription/*'/>
     public string? GetDescription(LJCDataColumn dataColumn)
     {
       string retValue = null;
@@ -180,7 +192,8 @@ namespace LJCNetCommon5
     }
 
     // Get index from Value.
-    /// <include path="members/GetIndex/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/GetIndex/*'/>
     public int GetIndex(LJCDataColumn dataColumn)
     {
       int retValue = -1;
@@ -200,7 +213,8 @@ namespace LJCNetCommon5
     }
 
     // Gets the KeyItem with Value as index within PropertyName.
-    /// <include path="members/GetItem/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/GetItem/*'/>
     public LJCKeyItem? GetItem(LJCDataColumn dataColumn)
     {
       LJCKeyItem retValue = null;
@@ -229,7 +243,8 @@ namespace LJCNetCommon5
     }
 
     // Gets the Items with the PropertyName.
-    /// <include path="members/GetItems/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/GetItems/*'/>
     public LJCKeyItems? GetItems(LJCDataColumn dataColumn)
     {
       LJCKeyItems retValue = null;
@@ -246,7 +261,8 @@ namespace LJCNetCommon5
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path="members/SearchName/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/SearchName/*'/>
     public LJCKeyItems? SearchPropertyName(string name)
     {
       List<LJCKeyItem> items;
@@ -259,7 +275,8 @@ namespace LJCNetCommon5
     }
 
     // Sort on Name.
-    /// <include path="members/SortName/*" file="../../../CoreUtilities/LJCGenDoc/Common/Collection.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/SortName/*'/>
     public void SortPropertyName()
     {
       if (Count != mPrevCount)
@@ -273,7 +290,8 @@ namespace LJCNetCommon5
     #region IEnumerable Methods
 
     // Gets the Collection Enumerator.
-    /// <include path="members/GetEnumerator/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/GetEnumerator/*'/>
     public IEnumerator<LJCKeyItem> GetEnumerator()
     {
       return ((IEnumerable<LJCKeyItem>)Items).GetEnumerator();
@@ -289,14 +307,16 @@ namespace LJCNetCommon5
     #region IEnumerable Properties
 
     // The Collection count.
-    /// <include path="members/Count/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/Count/*'/>
     public int Count
     {
       get { return Items.Count; }
     }
 
     // Gets the item by index value.
-    /// <include path="members/Indexer/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/Indexer/*'/>
     public LJCKeyItem? this[int index]
     {
       get
@@ -313,7 +333,8 @@ namespace LJCNetCommon5
     }
 
     // The KeyItem items.
-    /// <include path="members/Items/*" file="Doc/LJCKeyItems.xml"/>
+    /// <include file='Doc/LJCKeyItems.xml'
+    ///  path='members/Items/*'/>
     [XmlArray(RootName)]
     public List<LJCKeyItem> Items { get; set; }
     #endregion

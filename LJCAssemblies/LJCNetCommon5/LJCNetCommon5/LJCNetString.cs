@@ -12,7 +12,8 @@ namespace LJCNetCommon5
     #region Checking String Values
 
     // Checks a string value for digits.
-    /// <include path="members/IsDigits/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/IsDigits/*'/>
     public static bool IsDigits(string? text)
     {
       string textTrim;
@@ -38,7 +39,8 @@ namespace LJCNetCommon5
     }
 
     // Do an Ignore Case string compare.
-    /// <include path="members/IsEqual/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/IsEqual/*'/>
     public static bool IsEqual(string? stringA, string? stringB)
     {
       bool retValue = false;
@@ -61,7 +63,8 @@ namespace LJCNetCommon5
     #region Formatting a String
 
     // Adds a value to a comma delimited string.
-    /// <include path="members/AddDelimitedValue/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/AddDelimitedValue/*'/>
     public static void AddDelimitedValue(ref string? target, string value)
     {
       if (LJC.HasText(target))
@@ -76,7 +79,8 @@ namespace LJCNetCommon5
     }
 
     // Adds delimiters to one or more values.
-    /// <include path="members/DelimitValues/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/DelimitValues/*'/>
     public static string DelimitValues(string? values, string beginDelimiter
       , string endDelimiter)
     {
@@ -110,7 +114,8 @@ namespace LJCNetCommon5
     }
 
     // Creates an exception string with outer and inner exception.
-    /// <include path="members/ExceptionString/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/ExceptionString/*'/>
     public static string ExceptionString(Exception e)
     {
       string retValue;
@@ -124,7 +129,8 @@ namespace LJCNetCommon5
     }
 
     // Formats the column value for the SQL string.
-    /// <include path="members/FormatValue/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/FormatValue/*'/>
     public static string? FormatValue(object? value, string? dataTypeName)
     {
       string? retValue = "null";
@@ -174,7 +180,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a column name with underscores converted to Pascal case.
-    /// <include path="members/GetPropertyName/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/GetPropertyName/*'/>
     public static string? GetPropertyName(string? name)
     {
       StringBuilder builder;
@@ -211,7 +218,8 @@ namespace LJCNetCommon5
     }
 
     // Gets the Search Property name.
-    /// <include path="members/GetSearchName/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/GetSearchName/*'/>
     public static string GetSearchName(string columnName)
     {
       var retValue = columnName;
@@ -226,7 +234,8 @@ namespace LJCNetCommon5
     }
 
     // Initializes a string to the trimmed value or null.
-    /// <include path="members/InitString/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/InitString/*'/>
     public static string? InitString(string? value)
     {
       string? retVal = null;
@@ -239,7 +248,8 @@ namespace LJCNetCommon5
     }
 
     // Scrubs extra blanks from the comma delimited string.
-    /// <include path="members/ScrubDelimitedValues/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/ScrubDelimitedValues/*'/>
     public static string ScrubDelimitedValues(string? values)
     {
       string retValues = "";
@@ -270,7 +280,8 @@ namespace LJCNetCommon5
     }
 
     // Split a string on a single separator without empty entries.
-    /// <include path="members/Split/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/Split/*'/>
     public static string[]? Split(string? text, string separator = ",")
     {
       string[]? retValues = null;
@@ -285,7 +296,8 @@ namespace LJCNetCommon5
     }
 
     // Split a string on multiple separators without empty entries.
-    /// <include path="members/Split2/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/Split2/*'/>
     public static string[]? Split(string? text, string[] separators)
     {
       string[]? retValues = null;
@@ -299,7 +311,8 @@ namespace LJCNetCommon5
     }
 
     // Truncates a text string to the specified length.
-    /// <include path="members/Truncate/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/Truncate/*'/>
     public static string? Truncate(string? text, int length)
     {
       var retValue = text;
@@ -316,7 +329,8 @@ namespace LJCNetCommon5
     #region Soundex Methods
 
     // Creates a letter based soundex value.
-    /// <include path="members/CreateLSoundex/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/CreateLSoundex/*'/>
     public static string? CreateLSoundex(string? text)
     {
       string? retValue = null;
@@ -348,7 +362,8 @@ namespace LJCNetCommon5
     }
 
     // Creates a Phonetic based soundex value.
-    /// <include path="members/CreatePSoundex/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/CreatePSoundex/*'/>
     public static string? CreatePSoundex(string? text)
     {
       string? retValue = null;
@@ -386,7 +401,8 @@ namespace LJCNetCommon5
     }
 
     // Creates a US Census soundex value.
-    /// <include path="members/Soundex/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/Soundex/*'/>
     public static string? Soundex(string text)
     {
       string? retValue = null;
@@ -447,7 +463,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if the letter is a soundex skipped letter.
-    /// <include path="members/IsSoundexLetter/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/IsSoundexLetter/*'/>
     public static bool IsSoundexLetter(string? text, int index)
     {
       bool retValue = false;
@@ -479,7 +496,8 @@ namespace LJCNetCommon5
 
     // Creates a Phonetic character from the supplied text starting at the
     // supplied index.
-    /// <include path="members/Phonetic/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/Phonetic/*'/>
     public static bool Phonetic(string? text, ref int index, out char? letter)
     {
       bool retValue = false;
@@ -549,7 +567,8 @@ namespace LJCNetCommon5
     #region Other Functions
 
     // Adds the missing argument name to the message.
-    /// <include path="members/AddObjectArgError/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/AddObjectArgError/*'/>
     public static void AddObjectArgError(ref string message, object? argument
       , string? name = null, string? errorContext = null)
     {
@@ -584,7 +603,8 @@ namespace LJCNetCommon5
     }
 
     // Throws an ArgumentException if the provided message has a value.
-    /// <include path="members/ThrowArgError/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/ThrowArgError/*'/>
     public static void ThrowArgError(string message)
     {
       if (LJC.HasText(message))
@@ -599,19 +619,23 @@ namespace LJCNetCommon5
     #region Constants
 
     // The "compare" object is equal to the "compareto" object.
-    /// <include path="members/CompareEqual/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/CompareEqual/*'/>
     public const int CompareEqual = 0;
 
     // The "compare" object is greater than the "compareto" object.
-    /// <include path="members/CompareGreater/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/CompareGreater/*'/>
     public const int CompareGreater = 1;
 
     // The "compare" object is less than the "compareto" object.
-    /// <include path="members/CompareLess/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/CompareLess/*'/>
     public const int CompareLess = -1;
 
     // The "compare" object and "compareto" object are not both null.
-    /// <include path="members/CompareNotNullOrEqual/*" file="Doc/LJCNetString.xml"/>
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/CompareNotNullOrEqual/*'/>
     public const int CompareNotNullOrEqual = -2;
     #endregion
   }

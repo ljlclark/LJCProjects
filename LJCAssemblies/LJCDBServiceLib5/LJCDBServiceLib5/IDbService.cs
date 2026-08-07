@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // IDBService.cs
 using System;
@@ -8,12 +8,14 @@ namespace LJCDBServiceLib5
 {
   // The Service Contract for performing database operations using request
   // XML messages. 
-  /// <include path='items/IDbService/*' file='Doc/IDbService.xml'/>
+  /// <include file='Doc/IDbService.xml'
+  ///  path='items/IDbService/*'/>
   [ServiceContract(Namespace = "ljspricket@gmail.com")]
   public interface IDbService
   {
     // Executes the specified request XML message.
-    /// <include path='items/Execute/*' file='Doc/IDbService.xml'/>
+    /// <include file='Doc/IDbService.xml'
+    ///  path='items/Execute/*'/>
     [OperationContract]
     string Execute(string request);
   }
