@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDBResult.cs
 using LJCNetCommon5;
@@ -9,7 +9,8 @@ using System.Xml.Serialization;
 namespace LJCDBMessage5
 {
   // Represents a data result.
-  /// <include path='items/DbResult/*' file='Doc/DbResult.xml'/>
+  /// <include file='Doc/DbResult.xml'
+  ///  path='items/DbResult/*'/>
   //[XmlRoot("DbResult")]
   public class LJCDBResult
   {
@@ -320,7 +321,8 @@ namespace LJCDBMessage5
     #region Collection Methods
 
     // Clones the structure of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public LJCDBResult? Clone()
     {
       LJCDBResult? retValue = MemberwiseClone() as LJCDBResult;
@@ -328,7 +330,8 @@ namespace LJCDBMessage5
     }
 
     // Checks if the result has Columns.
-    /// <include path='items/HasColumns2/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/HasColumns2/*'/>
     public bool HasColumns()
     {
       bool retValue = false;
@@ -341,7 +344,8 @@ namespace LJCDBMessage5
     }
 
     // Checks if the result has Columns and Rows.
-    /// <include path='items/HasColumns2/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/HasColumns2/*'/>
     public bool HasData()
     {
       bool retValue;
@@ -355,7 +359,8 @@ namespace LJCDBMessage5
     }
 
     // <summary>Checks if the result has Rows.</summary>
-    /// <include path='items/HasRows2/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/HasRows2/*'/>
     public bool HasRows()
     {
       bool retValue = false;
@@ -368,7 +373,8 @@ namespace LJCDBMessage5
     }
 
     // Serializes the object and returns the serialized string.
-    /// <include path='items/Serialize1/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/Serialize1/*'/>
     public string Serialize()
     {
       string retValue;
@@ -378,7 +384,8 @@ namespace LJCDBMessage5
     }
 
     // Serialize the object to the specified file.
-    /// <include path='items/Serialize2/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/Serialize2/*'/>
     public void Serialize(string? fileSpec = null)
     {
       if (!LJC.HasText(fileSpec))
@@ -392,7 +399,8 @@ namespace LJCDBMessage5
     #region Public Methods
 
     // Get DataColumns from result records.
-    /// <include path='items/GetValueColumns/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/GetValueColumns/*'/>
     public LJCDataColumns? GetValueColumns(LJCDataValues? dataValues = null)
     {
       LJCDataColumns? retValue = null;
@@ -412,7 +420,8 @@ namespace LJCDBMessage5
     }
 
     // Sets the Columns property from the principle and join columns.
-    /// <include path='items/SetColumns/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/SetColumns/*'/>
     public void SetColumns(LJCDataColumns? dataColumns, LJCDBJoins? dbJoins = null)
     {
       if (LJC.HasListItems(dataColumns))
@@ -445,7 +454,8 @@ namespace LJCDBMessage5
     }
 
     // Sets the result records from the DataTable and DbRequest objects.
-    /// <include path='items/SetData/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/SetData/*'/>
     public void SetData(DataTable dataTable, LJCDBRequest dbRequest)
     {
       // *** Next Statement *** Add 12/25/24
@@ -461,7 +471,8 @@ namespace LJCDBMessage5
 
     // Sets the result records from the DataTable, principle values
     // and join values.
-    /// <include path='items/SetRows/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/SetRows/*'/>
     public void SetRows(DataTable dataTable, LJCDBJoins? dbJoins = null)
     {
       if (LJC.HasTableData(dataTable))

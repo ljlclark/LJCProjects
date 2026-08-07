@@ -4,18 +4,19 @@
 using System.Xml.Serialization;
 using LJCNetCommon5;
 using LJCDataAccess5;
-using System.Runtime.InteropServices.ObjectiveC;
 
 namespace LJCDBMessage5
 {
-  /// <include path='items/DbRequest/*' file='Doc/ProjectDBMessage.xml'/>
+  /// <include file='Doc/ProjectDBMessage.xml'
+  ///  path='items/DbRequest/*'/>
   [XmlRoot("DbRequest")]
   public class LJCDBRequest
   {
     #region Static Functions
 
     // Deserializes the DbRequest message.
-    /// <include path='items/Deserialize/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Deserialize/*'/>
     public static LJCDBRequest? Deserialize(string request)
     {
       LJCDBRequest? retValue = null;
@@ -36,7 +37,8 @@ namespace LJCDBMessage5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCDBRequest()
     {
       //OrderByNames = new List<string>();
@@ -46,7 +48,8 @@ namespace LJCDBMessage5
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCDBRequest(LJCDBRequest item)
     {
       mRequestTypeName = RequestType.Select.ToString();
@@ -90,7 +93,8 @@ namespace LJCDBMessage5
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include path='items/DbRequestC/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/DbRequestC/*'/>
     public LJCDBRequest(RequestType requestType, string? tableName
       , string? dataConfigName = null)
     {
@@ -108,7 +112,8 @@ namespace LJCDBMessage5
     #region Data Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public LJCDBRequest? Clone()
     {
       LJCDBRequest? retValue = MemberwiseClone() as LJCDBRequest;
@@ -135,7 +140,8 @@ namespace LJCDBMessage5
     }
 
     // Get DataColumns from the DbRequest object definition.
-    /// <include path='items/GetGridColumns1/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/GetGridColumns1/*'/>
     public LJCDataColumns? DataColumns(List<string>? propertyNames = null)
     {
       LJCDataColumns? retColumns = null;
@@ -170,7 +176,8 @@ namespace LJCDBMessage5
     }
 
     // Serializes the object and returns the serialized string.
-    /// <include path='items/Serialize1/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Serialize1/*'/>
     public string Serialize()
     {
       string retValue;
@@ -180,7 +187,8 @@ namespace LJCDBMessage5
     }
 
     // Serialize the object to the specified file.
-    /// <include path='items/Serialize2/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Serialize2/*'/>
     public void Serialize(string fileSpec)
     {
       LJC.XmlSerialize(GetType(), this, null, fileSpec);
@@ -190,7 +198,8 @@ namespace LJCDBMessage5
     #region Data Properties
 
     // The included table columns.
-    /// <include path='items/Columns/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Columns/*'/>
     public LJCDataColumns? Columns { get; set; }
 
     /// <summary>The data configuration name.</summary>
@@ -208,7 +217,8 @@ namespace LJCDBMessage5
     public LJCDBJoins? Joins { get; set; }
 
     // The key column values.
-    /// <include path='items/KeyColumns/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/KeyColumns/*'/>
     public LJCDataColumns? KeyColumns { get; set; }
 
     /// <summary>Gets or sets the ProcedureName value.</summary>
@@ -220,7 +230,8 @@ namespace LJCDBMessage5
     private string? mProcedureName;
 
     // The request type name.
-    /// <include path='items/RequestTypeName/*' file='Doc/DbRequest.xml'/>
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/RequestTypeName/*'/>
     public string RequestTypeName
     {
       get => mRequestTypeName;

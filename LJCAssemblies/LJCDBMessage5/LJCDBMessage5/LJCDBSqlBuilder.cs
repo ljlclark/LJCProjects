@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDBSqlBuilder.cs
 using System.Text;
@@ -7,13 +7,15 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Provides SQL builder methods.
-  /// <include path='items/DbSqlBuilder/*' file='Doc/DbSqlBuilder.xml'/>
+  /// <include file='Doc/DbSqlBuilder.xml'
+  ///  path='items/DbSqlBuilder/*'/>
   public class LJCDBSqlBuilder
   {
     #region Static Methods
 
     // Creates the where clause from the filters.
-    /// <include path='items/FilterWhereClause/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/FilterWhereClause/*'/>
     public static string? FilterWhereClause(LJCDBFilters dbFilters, bool recursive = false)
     {
       string? retValue = null;
@@ -149,7 +151,8 @@ namespace LJCDBMessage5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DbSqlBuilderC/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/DbSqlBuilderC/*'/>
     public LJCDBSqlBuilder(LJCDBRequest dbRequest)
     {
       mDbRequest = dbRequest;
@@ -159,7 +162,8 @@ namespace LJCDBMessage5
     #region Public Methods
 
     // Creates the list of included table columns.
-    /// <include path='items/ColumnList/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/ColumnList/*'/>
     public string ColumnList(LJCDBRequest? dbRequest = null, bool listOnly = true)
     {
       string retValue;
@@ -232,7 +236,8 @@ namespace LJCDBMessage5
     }
 
     // Creates the SQL Insert statement.
-    /// <include path='items/CreateAddSql/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/CreateAddSql/*'/>
     public string CreateAddSql()
     {
       string retValue;
@@ -246,7 +251,8 @@ namespace LJCDBMessage5
     }
 
     // Creates the SQL Delete statement.
-    /// <include path='items/CreateDeleteSql/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/CreateDeleteSql/*'/>
     public string CreateDeleteSql()
     {
       string retValue;
@@ -259,7 +265,8 @@ namespace LJCDBMessage5
     }
 
     // Creates the SQL Select statement for multiple records.
-    /// <include path='items/CreateLoadSql/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/CreateLoadSql/*'/>
     public string CreateLoadSql(LJCDBRequest? dbRequest = null)
     {
       string retValue;
@@ -291,7 +298,8 @@ namespace LJCDBMessage5
     }
 
     // Creates the SQL Select statement for one record.
-    /// <include path='items/CreateRetrieveSql/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/CreateRetrieveSql/*'/>
     public string CreateRetrieveSql(LJCDBRequest? dbRequest = null)
     {
       string retValue;
@@ -321,7 +329,8 @@ namespace LJCDBMessage5
     }
 
     // Creates the SQL Update statement.
-    /// <include path='items/CreateUpdateSql/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/CreateUpdateSql/*'/>
     public string CreateUpdateSql()
     {
       string retValue;
@@ -423,7 +432,8 @@ namespace LJCDBMessage5
     }
 
     // Creates a list of record values.
-    /// <include path='items/InsertValueList/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/InsertValueList/*'/>
     public string? InsertValueList(bool listOnly = true)
     {
       string? retValue = null;
@@ -458,7 +468,8 @@ namespace LJCDBMessage5
     }
 
     // Creates the join statement.
-    /// <include path='items/JoinStatement/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/JoinStatement/*'/>
     public string? JoinStatement(LJCDBJoins dbJoins, string? schemaName = null)
     {
       string? retValue = null;
@@ -485,7 +496,8 @@ namespace LJCDBMessage5
     }
 
     // Creates the where clause from the key values.
-    /// <include path='items/KeyWhereClause/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/KeyWhereClause/*'/>
     public string? KeyWhereClause()
     {
       string? retValue = null;
@@ -568,7 +580,8 @@ namespace LJCDBMessage5
     }
 
     // Creates the order by statement from the order by column list.
-    /// <include path='items/OrderBy/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/OrderBy/*'/>
     public string? OrderBy()
     {
       string? retValue = null;
@@ -594,7 +607,8 @@ namespace LJCDBMessage5
     }
 
     // Creates the offset/fetch next statement.
-    /// <include path='items/PageFetch/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/PageFetch/*'/>
     public string? PageFetch()
     {
       string? retValue = null;
@@ -612,7 +626,8 @@ namespace LJCDBMessage5
     }
 
     // Creates a list of record update values.
-    /// <include path='items/UpdateList/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/UpdateList/*'/>
     public string? UpdateValueList()
     {
       string? retValue = null;
@@ -635,7 +650,8 @@ namespace LJCDBMessage5
     }
 
     // Create the where clause.
-    /// <include path='items/WhereClause/*' file='Doc/DbSqlBuilder.xml'/>
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='items/WhereClause/*'/>
     public string? WhereClause()
     {
       string? retValue = null;

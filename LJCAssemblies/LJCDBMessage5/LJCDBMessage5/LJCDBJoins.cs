@@ -6,19 +6,22 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a collection of table joins.
-  /// <include path='items/DbJoins/*' file='Doc/DbJoins.xml'/>
+  /// <include file='Doc/DbJoins.xml'
+  ///  path='items/DbJoins/*'/>
   public class LJCDBJoins : List<LJCDBJoin>
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCDBJoins()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCDBJoins(LJCDBJoins? items)
     {
       if (LJC.HasListItems(items))
@@ -34,7 +37,8 @@ namespace LJCDBMessage5
     #region Collection Methods
 
     // Creates the element from the supplied values and adds it to the collection.
-    /// <include path='items/Add/*' file='Doc/DbJoins.xml'/>
+    /// <include file='Doc/DbJoins.xml'
+    ///  path='items/Add/*'/>
     public LJCDBJoin Add(string tableName, string? tableAlias = null
       , string? fromJoinOnColumn = null, string? toJoinOnColumn = null)
     {
@@ -53,7 +57,8 @@ namespace LJCDBMessage5
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public LJCDBJoins Clone()
     {
       var retValue = new LJCDBJoins();

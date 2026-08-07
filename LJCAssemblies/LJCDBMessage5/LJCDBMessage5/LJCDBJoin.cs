@@ -11,7 +11,8 @@ namespace LJCDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCDBJoin()
     {
       mTableName = "";
@@ -21,7 +22,8 @@ namespace LJCDBMessage5
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCDBJoin(LJCDBJoin item)
     {
       mTableName = "";
@@ -36,7 +38,8 @@ namespace LJCDBMessage5
     #region Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public LJCDBJoin Clone()
     {
       LJCDBJoin retValue = new LJCDBJoin()
@@ -59,14 +62,16 @@ namespace LJCDBMessage5
     #region Properties
 
     // The included join table columns.
-    /// <include path='items/Columns/*' file='Doc/DbJoin.xml'/>
+    /// <include file='Doc/DbJoin.xml'
+    ///  path='items/Columns/*'/>
     public LJCDataColumns Columns { get; set; }
 
     /// <summary>The join on definitions.</summary>
     public LJCDBJoinOns JoinOns { get; set; }
 
     // The join type.
-    /// <include path='items/JoinType/*' file='Doc/DbJoin.xml'/>
+    /// <include file='Doc/DbJoin.xml'
+    ///  path='items/JoinType/*'/>
     public string? JoinType
     {
       get => mJoinType;

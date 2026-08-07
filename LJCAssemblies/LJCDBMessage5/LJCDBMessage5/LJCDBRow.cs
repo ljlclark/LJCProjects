@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDBRow.cs
 using LJCNetCommon5;
@@ -11,7 +11,8 @@ namespace LJCDBMessage5
     #region Static Functions
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/HasItems1/*'/>
     public static bool HasItems(LJCDBRow collection)
     {
       bool retValue = false;
@@ -28,13 +29,15 @@ namespace LJCDBMessage5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCDBRow()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCDBRow(LJCDBRow items)
     {
       if (HasItems(items)
@@ -50,7 +53,8 @@ namespace LJCDBMessage5
     #endregion
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public LJCDBRow? Clone()
     {
       LJCDBRow? retValue = MemberwiseClone() as LJCDBRow;
@@ -60,7 +64,8 @@ namespace LJCDBMessage5
     #region Properties
 
     // The row value for the specified value column index.
-    /// <include path='items/Item1/*' file='Doc/DbRow.xml'/>
+    /// <include file='Doc/DbRow.xml'
+    ///  path='items/Item1/*'/>
     public LJCDataValue? this[int columnIndex]
     {
       get
@@ -75,7 +80,8 @@ namespace LJCDBMessage5
     }
 
     // The row value for the specified value property name.
-    /// <include path='items/Item2/*' file='Doc/DbRow.xml'/>
+    /// <include file='Doc/DbRow.xml'
+    ///  path='items/Item2/*'/>
     public LJCDataValue? this[string propertyName]
     {
       get

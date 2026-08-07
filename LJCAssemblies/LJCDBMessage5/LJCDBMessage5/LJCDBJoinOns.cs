@@ -1,25 +1,27 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDBJoinOns.cs
 using LJCNetCommon5;
-using System.Collections.Generic;
 
 namespace LJCDBMessage5
 {
   // Represents a collection of join on definitions.
-  /// <include path='items/DbJoinOns/*' file='Doc/DbJoinOns.xml'/>
+  /// <include file='Doc/DbJoinOns.xml'
+  ///  path='items/DbJoinOns/*'/>
   public class LJCDBJoinOns : List<LJCDBJoinOn>
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCDBJoinOns()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCDBJoinOns(LJCDBJoinOns items)
     {
       if (LJC.HasListItems(items))
@@ -35,7 +37,8 @@ namespace LJCDBMessage5
     #region Collection Methods
 
     // Creates and adds the element from the supplied values.
-    /// <include path='items/Add/*' file='Doc/DbJoinOns.xml'/>
+    /// <include file='Doc/DbJoinOns.xml'
+    ///  path='items/Add/*'/>
     public LJCDBJoinOn Add(string fromColumnName, string toColumnName
       , string joinOperator = "=")
     {
@@ -52,7 +55,8 @@ namespace LJCDBMessage5
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public LJCDBJoinOns Clone()
     {
       var retValue = new LJCDBJoinOns();

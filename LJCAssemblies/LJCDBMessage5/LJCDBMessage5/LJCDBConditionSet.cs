@@ -12,7 +12,8 @@ namespace LJCDBMessage5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DbConditionSetC/*' file='Doc/DbConditionSet.xml'/>
+    /// <include file='Doc/DbConditionSet.xml'
+    ///  path='items/DbConditionSetC/*'/>
     public LJCDBConditionSet()
     {
       //Conditions = new DbConditions();
@@ -20,7 +21,8 @@ namespace LJCDBMessage5
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCDBConditionSet(LJCDBConditionSet item)
     {
       BooleanOperator = item.BooleanOperator;
@@ -32,7 +34,8 @@ namespace LJCDBMessage5
     #region Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='Doc/DbConditionSet.xml'/>
+    /// <include file='Doc/DbConditionSet.xml'
+    ///  path='items/Clone/*'/>
     public LJCDBConditionSet? Clone()
     {
       LJCDBConditionSet? retValue = MemberwiseClone() as LJCDBConditionSet;

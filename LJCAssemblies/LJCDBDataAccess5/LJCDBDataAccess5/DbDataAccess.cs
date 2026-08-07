@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbDataAccess.cs
 using LJCDataAccess5;
@@ -11,20 +11,23 @@ using System.Text;
 namespace LJCDBDataAccess5
 {
   // The Data Access methods.
-  /// <include path='items/DbDataAccess/*' file='Doc/ProjectDBDataAccess.xml'/>
+  /// <include file='Doc/ProjectDBDataAccess.xml'
+  ///  path='items/DbDataAccess/*'/>
   public partial class DbDataAccess
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public DbDataAccess()
     {
       mDataAccess = new LJCDataAccess();
     }
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public DbDataAccess(string dataConfigName)
     {
       mDataAccess = new LJCDataAccess();
@@ -33,7 +36,8 @@ namespace LJCDBDataAccess5
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include path='items/DbDataAccessC/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/DbDataAccessC/*'/>
     public DbDataAccess(string databaseName, string? connectionString = null
       , string? providerName = null)
     {
@@ -49,7 +53,8 @@ namespace LJCDBDataAccess5
     #region Public Methods
 
     // Executes the specified database request XML message.
-    /// <include path='items/Execute/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/Execute/*'/>
     public LJCDBResult? Execute(LJCDBRequest dbRequest)
     {
       LJCDBResult? retValue = null;
@@ -100,7 +105,8 @@ namespace LJCDBDataAccess5
     #region Private Data Methods
 
     // Inserts a record in the database with the specified columns.
-    /// <include path='items/Add/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/Add/*'/>
     private LJCDBResult? Add()
     {
       LJCDBResult? retResult = null;
@@ -146,7 +152,8 @@ namespace LJCDBDataAccess5
     }
 
     // Delete a record in the database.
-    /// <include path='items/Delete/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/Delete/*'/>
     private LJCDBResult? Delete()
     {
       LJCDBResult? retValue = null;
@@ -166,7 +173,8 @@ namespace LJCDBDataAccess5
     }
 
     // Executes a non-query client SQL statement.
-    /// <include path='items/ExecuteClientSql/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/ExecuteClientSql/*'/>
     private LJCDBResult? ExecuteClientSql()
     {
       LJCDBResult? retValue = null;
@@ -186,7 +194,8 @@ namespace LJCDBDataAccess5
     }
 
     // Retrieves multiple data rows.
-    /// <include path='items/Load/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/Load/*'/>
     private LJCDBResult? Load()
     {
       LJCDBResult? retValue = null;
@@ -218,7 +227,8 @@ namespace LJCDBDataAccess5
     }
 
     // Executes a "Load" client SQL statement.
-    /// <include path='items/LoadClientSql/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/LoadClientSql/*'/>
     private LJCDBResult? LoadClientSql()
     {
       LJCDBResult? retValue = null;
@@ -247,7 +257,8 @@ namespace LJCDBDataAccess5
     }
 
     // Retrieves the data row values.
-    /// <include path='items/Retrieve/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/Retrieve/*'/>
     private LJCDBResult? Retrieve(LJCDBRequest? dbRequest = null)
     {
       LJCDBResult? retValue = null;
@@ -280,7 +291,8 @@ namespace LJCDBDataAccess5
     }
 
     // Executes a "Retrieve" client SQL statement.
-    /// <include path='items/RetrieveClientSql/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/RetrieveClientSql/*'/>
     private LJCDBResult? RetrieveClientSql()
     {
       LJCDBResult? retValue = null;
@@ -309,7 +321,8 @@ namespace LJCDBDataAccess5
     }
 
     // Retrieves the data row values from a Stored Procedure.
-    /// <include path='items/SelectProcedure/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/SelectProcedure/*'/>
     private LJCDBResult? SelectProcedure(LJCDBRequest? dbRequest = null)
     {
       LJCDBResult? retValue = null;
@@ -372,7 +385,8 @@ namespace LJCDBDataAccess5
     }
 
     // Retrieves the table names for the specified database.
-    /// <include path='items/TableNames/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/TableNames/*'/>
     private LJCDBResult? TableNames(string? databaseName = null
       , LJCDBRequest? dbRequest = null)
     {
@@ -410,7 +424,8 @@ namespace LJCDBDataAccess5
     }
 
     // Updates a database record.
-    /// <include path='items/Update/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/Update/*'/>
     private LJCDBResult? Update()
     {
       LJCDBResult? retResult = null;
@@ -457,7 +472,8 @@ namespace LJCDBDataAccess5
     }
 
     // Sets the LJCDataConfig values.
-    /// <include path='items/GetConfigValues/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/GetConfigValues/*'/>
     private void GetConfigValues(string dataConfigName)
     {
       LJCDataConfig dataConfig = GetLJCDataConfig(dataConfigName);
@@ -497,7 +513,8 @@ namespace LJCDBDataAccess5
     }
 
     // Creates the result object with common values.
-    /// <include path='items/CreateResult/*' file='Doc/DbDataAccess.xml'/>
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/CreateResult/*'/>
     private LJCDBResult CreateResult(LJCDBRequest dbRequest)
     {
       LJCDBResult retValue;

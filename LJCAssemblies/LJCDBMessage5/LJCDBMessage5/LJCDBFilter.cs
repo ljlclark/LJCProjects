@@ -11,7 +11,8 @@ namespace LJCDBMessage5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCDBFilter()
     {
       BooleanOperator = "and";
@@ -21,7 +22,8 @@ namespace LJCDBMessage5
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCDBFilter(LJCDBFilter item)
     {
       BooleanOperator = item.BooleanOperator;
@@ -59,7 +61,8 @@ namespace LJCDBMessage5
     #region Methods
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public LJCDBFilter? Clone()
     {
       LJCDBFilter? retValue = MemberwiseClone() as LJCDBFilter;

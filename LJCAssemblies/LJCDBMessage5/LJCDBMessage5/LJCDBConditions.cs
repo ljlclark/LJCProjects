@@ -12,13 +12,15 @@ namespace LJCDBMessage5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCDBConditions()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCDBConditions(LJCDBConditions items)
     {
       if (LJC.HasListItems(items))
@@ -34,7 +36,8 @@ namespace LJCDBMessage5
     #region Collection Methods
 
     // Creates and adds the element from the supplied values.
-    /// <include path='items/Add/*' file='Doc/DbConditions.xml'/>
+    /// <include file='Doc/DbConditions.xml'
+    ///  path='items/Add/*'/>
     public LJCDBCondition Add(string value1, string value2, string comparisonOperator = "=")
     {
       var retValue = new LJCDBCondition()
@@ -48,7 +51,8 @@ namespace LJCDBMessage5
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public LJCDBConditions Clone()
     {
       var retValue = new LJCDBConditions();
@@ -64,7 +68,8 @@ namespace LJCDBMessage5
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;

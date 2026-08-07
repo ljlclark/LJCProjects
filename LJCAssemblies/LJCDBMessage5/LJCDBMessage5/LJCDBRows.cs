@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDBRows.cs
 using System.Xml.Serialization;
@@ -7,14 +7,16 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a collection of DbRow objects.
-  /// <include path='items/DbRows/*' file='Doc/DbRows.xml'/>
+  /// <include file='Doc/DbRows.xml'
+  ///  path='items/DbRows/*'/>
   [XmlRoot("DbRows")]
   public class LJCDBRows : List<LJCDBRow>
   {
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCDeserialize/*'/>
     public static LJCDBRows? LJCDeserialize(string? fileSpec = null)
     {
       LJCDBRows? retValue;
@@ -32,13 +34,15 @@ namespace LJCDBMessage5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public LJCDBRows()
     {
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public LJCDBRows(LJCDBRows items)
     {
       if (LJC.HasListItems(items))
@@ -54,7 +58,8 @@ namespace LJCDBMessage5
     #region Collection Methods
 
     // Adds the supplied object.
-    /// <include path='items/Add/*' file='Doc/DbRows.xml'/>
+    /// <include file='Doc/DbRows.xml'
+    ///  path='items/Add/*'/>
     public LJCDBRow? Add(LJCDataValues dataValues)
     {
       LJCDBRow? retValue = null;
@@ -71,7 +76,8 @@ namespace LJCDBMessage5
     }
 
     // Clones the structure of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public LJCDBRows Clone()
     {
       var retValue = new LJCDBRows();
@@ -90,7 +96,8 @@ namespace LJCDBMessage5
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -103,7 +110,8 @@ namespace LJCDBMessage5
     }
 
     // Serialize the object to the specified file.
-    /// <include path='items/Serialize2/*' file='Doc/DbResult.xml'/>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/Serialize2/*'/>
     public void Serialize(string? fileSpec = null)
     {
       if (!LJC.HasText(fileSpec))
