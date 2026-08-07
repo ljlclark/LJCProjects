@@ -13,7 +13,8 @@ namespace LJCDataAccessConfig5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCConnectionTemplate.xml"/>
+    /// <include file='Doc/LJCConnectionTemplate.xml'
+    ///  path='members/Constructor/*'/>
     public LJCConnectionTemplate()
     {
     }
@@ -22,7 +23,8 @@ namespace LJCDataAccessConfig5
     #region Data Class Methods
 
     // Creates and returns a clone of the object.
-    /// <include path="members/Clone/*" file="Doc/LJCConnectionTemplate.xml"/>
+    /// <include file='Doc/LJCConnectionTemplate.xml'
+    ///  path='members/Clone/*'/>
     public LJCConnectionTemplate? Clone()
     {
       LJCConnectionTemplate? retValue = MemberwiseClone()
@@ -31,14 +33,16 @@ namespace LJCDataAccessConfig5
     }
 
     // The object string value.
-    /// <include path="members/ToString/*" file="Doc/LJCConnectionTemplate.xml"/>
+    /// <include file='Doc/LJCConnectionTemplate.xml'
+    ///  path='members/ToString/*'/>
     public override string? ToString()
     {
       return Name;
     }
 
     // Provides the default Sort functionality.
-    /// <include path="members/CompareTo/*" file="Doc/LJCConnectionTemplate.xml"/>
+    /// <include file='Doc/LJCConnectionTemplate.xml'
+    ///  path='members/CompareTo/*'/>
     public int CompareTo(LJCConnectionTemplate? other)
     {
       int retValue;
@@ -66,11 +70,13 @@ namespace LJCDataAccessConfig5
     #region Properties
 
     // Gets or sets the connection type name.
-    /// <include path="members/Name/*" file="Doc/LJCConnectionTemplate.xml"/>
+    /// <include file='Doc/LJCConnectionTemplate.xml'
+    ///  path='members/Name/*'/>
     public string? Name { get; set; }
 
     // Gets or sets the connection string template.
-    /// <include path="members/Template/*" file="Doc/LJCConnectionTemplate.xml"/>
+    /// <include file='Doc/LJCConnectionTemplate.xml'
+    ///  path='members/Template/*'/>
     public string? Template { get; set; }
     #endregion
   }

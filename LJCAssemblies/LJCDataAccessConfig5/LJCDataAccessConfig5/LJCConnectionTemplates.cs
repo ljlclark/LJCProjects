@@ -8,14 +8,16 @@ using System.Xml.Serialization;
 namespace LJCDataAccessConfig5
 {
   // Represents a collection of Connection string templates.
-  /// <include path="members/LJCConnectionTemplates/*" file="Doc/LJCConnectionTemplates.xml"/>
+  /// <include file='Doc/LJCConnectionTemplates.xml'
+  ///  path='members/LJCConnectionTemplates/*'/>
   [XmlRoot("LJCConnectionTemplates")]
   public class LJCConnectionTemplates : List<LJCConnectionTemplate>
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCConnectionTemplates.xml"/>
+    /// <include file='Doc/LJCConnectionTemplates.xml'
+    ///  path='members/Constructor/*'/>
     public LJCConnectionTemplates()
     {
       mTemplateFileName = "ConnectionTemplates.xml";
@@ -30,7 +32,8 @@ namespace LJCDataAccessConfig5
     }
 
     // Loads the config data.
-    /// <include path="members/LoadData/*" file="Doc/LJCConnectionTemplates.xml"/>
+    /// <include file='Doc/LJCConnectionTemplates.xml'
+    ///  path='members/LoadData/*'/>
     public void LoadData()
     {
       if (!File.Exists(TemplateFileSpec))
@@ -53,7 +56,8 @@ namespace LJCDataAccessConfig5
     #region Methods
 
     // Creates and adds the object from the supplied valus.
-    /// <include path="members/Add/*" file="Doc/LJCConnectionTemplates.xml"/>
+    /// <include file='Doc/LJCConnectionTemplates.xml'
+    ///  path='members/Add/*'/>
     public LJCConnectionTemplate Add(string name, string template)
     {
       var retValue = new LJCConnectionTemplate()
@@ -66,7 +70,8 @@ namespace LJCDataAccessConfig5
     }
 
     // Retrieve the connection template.
-    /// <include path="members/Retrieve/*" file="Doc/LJCConnectionTemplates.xml"/>
+    /// <include file='Doc/LJCConnectionTemplates.xml'
+    ///  path='members/Retrieve/*'/>
     public LJCConnectionTemplate? Retrieve(string? name)
     {
       LJCConnectionTemplate? retValue = null;
@@ -98,7 +103,8 @@ namespace LJCDataAccessConfig5
     }
 
     // Saves the config data.
-    /// <include path="members/Save/*" file="Doc/LJCConnectionTemplates.xml"/>
+    /// <include file='Doc/LJCConnectionTemplates.xml'
+    ///  path='members/Save/*'/>
     public void Save()
     {
       LJC.XmlSerialize(GetType(), this, null, TemplateFileSpec);
@@ -152,7 +158,8 @@ namespace LJCDataAccessConfig5
     #region Properties
 
     // The configuration file path.
-    /// <include path="members/TemplateFileSpec/*" file="Doc/LJCConnectionTemplates.xml"/>
+    /// <include file='Doc/LJCConnectionTemplates.xml'
+    ///  path='members/TemplateFileSpec/*'/>
     public string? TemplateFileSpec { get; private set; }
     #endregion
 

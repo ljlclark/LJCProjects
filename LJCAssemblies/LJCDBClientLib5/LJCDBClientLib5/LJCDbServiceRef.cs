@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbServiceRef.cs
 using LJCDBDataAccess5;
@@ -43,7 +43,8 @@ namespace LJCDBClientLib5
     }
 
     // Gets or sets the DbDataAccess reference.
-    /// <include path='items/DbDataAccess/*' file='Doc/DbServiceRef.xml'/>
+    /// <include file='Doc/DbServiceRef.xml'
+    ///  path='items/DbDataAccess/*'/>
     public DbDataAccess? DbDataAccess { get; set; }
 
     // Gets or sets the DbService reference.
@@ -51,7 +52,8 @@ namespace LJCDBClientLib5
     //public DbService DbService { get; set; }
 
     // Gets or sets the DbServiceClient proxy reference.
-    /// <include path='items/DbServiceClient/*' file='Doc/DbServiceRef.xml'/>
+    /// <include file='Doc/DbServiceRef.xml'
+    ///  path='items/DbServiceClient/*'/>
     //public DbServiceClient DbServiceClient { get; set; }
   }
 }

@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ObjectManager.cs
 using LJCDataAccess5;
@@ -8,7 +8,8 @@ using LJCNetCommon5;
 namespace LJCDBClientLib5
 {
   // Provides object specific data manipulation methods.
-  /// <include path='items/ObjectManager/*' file='Doc/ObjectManager.xml'/>
+  /// <include file='Doc/ObjectManager.xml'
+  ///  path='items/ObjectManager/*'/>
   public class LJCObjectManager<TData, TList>
     where TData : class, new()
     where TList : List<TData>, new()
@@ -16,7 +17,8 @@ namespace LJCDBClientLib5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/ObjectManagerC/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/ObjectManagerC/*'/>
     public LJCObjectManager(LJCDbServiceRef dbServiceRef, string dataConfigName
       , string tableName, string? schemaName = null)
     {
@@ -32,7 +34,8 @@ namespace LJCDBClientLib5
     #region Public Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/Add/*'/>
     public TData? Add(TData dataObject, List<string>? propertyNames = null)
     {
       TData? retValue = default;
@@ -56,7 +59,8 @@ namespace LJCDBClientLib5
     }
 
     // Creates the Load DbRequest object.
-    /// <include path='items/CreateLoadRequest/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/CreateLoadRequest/*'/>
     public LJCDBRequest CreateLoadRequest(LJCDataColumns? keyColumns = null
       , List<string>? propertyNames = null, LJCDBFilters? filters = null
       , LJCDBJoins? joins = null)
@@ -67,7 +71,8 @@ namespace LJCDBClientLib5
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/Delete/*'/>
     public void Delete(LJCDataColumns keyColumns, LJCDBFilters? filters = null)
     {
       DataManager.Delete(keyColumns, filters);
@@ -79,7 +84,8 @@ namespace LJCDBClientLib5
     }
 
     // Executes a non-query client SQL statement.
-    /// <include path='items/ExecuteClientSql/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/ExecuteClientSql/*'/>
     public void ExecuteClientSql(string sql)
     {
       DataManager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
@@ -91,14 +97,16 @@ namespace LJCDBClientLib5
     }
 
     // Execute the supplied request.
-    /// <include path='items/ExecuteRequest/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/ExecuteRequest/*'/>
     public LJCDBResult? ExecuteRequest(LJCDBRequest dbRequest)
     {
       return DataManager.ExecuteRequest(dbRequest);
     }
 
     // Retrieves a collection of data records.
-    /// <include path='items/Load/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/Load/*'/>
     public TList? Load(LJCDataColumns? keyColumns = null
       , List<string>? propertyNames = null, LJCDBFilters? filters = null
       , LJCDBJoins? joins = null)
@@ -118,7 +126,8 @@ namespace LJCDBClientLib5
     }
 
     // Executes a "Load" client SQL statement.
-    /// <include path='items/LoadClientSql/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/LoadClientSql/*'/>
     public TList? LoadClientSql(string sql)
     {
       LJCDBResult? dbResult;
@@ -134,7 +143,8 @@ namespace LJCDBClientLib5
     }
 
     // Retrieves a collection of data records.
-    /// <include path='items/LoadProcedure/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/LoadProcedure/*'/>
     public TList? LoadProcedure(string procedureName
       , LJCProcedureParameters? parameters = null, LJCDBJoins? joins = null)
     {
@@ -151,7 +161,8 @@ namespace LJCDBClientLib5
     }
 
     // Retrieves a record from the database.
-    /// <include path='items/Retrieve/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/Retrieve/*'/>
     public TData? Retrieve(LJCDataColumns keyColumns
       , List<string>? propertyNames = null, LJCDBFilters? filters = null
       , LJCDBJoins? joins = null)
@@ -173,7 +184,8 @@ namespace LJCDBClientLib5
     }
 
     // Executes a "Retrieve" client SQL statement.
-    /// <include path='items/RetrieveClientSql/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/RetrieveClientSql/*'/>
     public TData? RetrieveClientSql(string sql)
     {
       LJCDBResult? dbResult;
@@ -190,7 +202,8 @@ namespace LJCDBClientLib5
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/Update/*'/>
     public void Update(TData dataObject, LJCDataColumns keyColumns
       , List<string>? propertyNames = null, LJCDBFilters? filters = null)
     {
@@ -203,7 +216,8 @@ namespace LJCDBClientLib5
     #region Other Public Methods
 
     // Creates a set of columns that match the supplied list.
-    /// <include path='items/GetColumns/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/GetColumns/*'/>
     public LJCDataColumns? GetColumns(List<string> propertyNames)
     {
       LJCDataColumns? retColumns = null;
@@ -215,7 +229,8 @@ namespace LJCDBClientLib5
     }
 
     // Maps the column property and rename values.
-    /// <include path='items/MapNames/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/MapNames/*'/>
     public void MapNames(string columnName, string? propertyName = null
       , string? renameAs = null, string? caption = null)
     {
@@ -223,14 +238,16 @@ namespace LJCDBClientLib5
     }
 
     // Sets the database assigned value column names.
-    /// <include path='items/SetDbAssignedColumns/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/SetDbAssignedColumns/*'/>
     public void SetDbAssignedColumns(string[] propertyNames)
     {
       DataManager.SetDbAssignedColumns(propertyNames);
     }
 
     // Adds the lookup column names.
-    /// <include path='items/SetLookupColumns/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/SetLookupColumns/*'/>
     public void SetLookupColumns(string[] propertyNames)
     {
       DataManager.SetLookupColumns(propertyNames);
@@ -240,7 +257,8 @@ namespace LJCDBClientLib5
     #region Create Data Methods
 
     // Creates a collection from the result records.
-    /// <include path='items/CreateCollection/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/CreateCollection/*'/>
     public TList CreateCollection(LJCDBResult? dbResult)
     {
       // Also in LJC.DBMessage.ResultConverter.
@@ -268,7 +286,8 @@ namespace LJCDBClientLib5
     }
 
     // Creates a data object from the result record.
-    /// <include path='items/CreateData/*' file='Doc/ObjectManager.xml'/>
+    /// <include file='Doc/ObjectManager.xml'
+    ///  path='items/CreateData/*'/>
     public TData? CreateData(LJCDataValues? dbValues)
     {
       // Also in LJCDBMessage.ResultConverter.

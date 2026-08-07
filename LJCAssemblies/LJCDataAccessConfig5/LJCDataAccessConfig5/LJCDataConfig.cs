@@ -7,13 +7,15 @@ using System.Data.Common;
 namespace LJCDataAccessConfig5
 {
   // Represents a data location configuration.
-  /// <include path="members/LJCDataConfig/*" file="Doc/LJCDataConfig.xml"/>
+  /// <include file='Doc/LJCDataConfig.xml'
+  ///  path='members/LJCDataConfig/*'/>
   public class LJCDataConfig : IComparable<LJCDataConfig>
   {
     #region Static Methods
 
     // Retrieves the provider name value. 
-    /// <include path="members/ProviderName/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/ProviderName/*'/>
     public static string ProviderName(string? connectionType = "SQLServer")
     {
       //string retVal = "System.Data.SqlClient";
@@ -50,13 +52,15 @@ namespace LJCDataAccessConfig5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/Constructor/*'/>
     public LJCDataConfig()
     {
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include path="members/ConstructorParam/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/ConstructorParam/*'/>
     public LJCDataConfig(string? connectionType = null)
     {
       if (LJC.HasText(connectionType))
@@ -69,13 +73,15 @@ namespace LJCDataAccessConfig5
     #region Data Class Methods
 
     // The object string value.
-    /// <include path="members/ToString/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/ToString/*'/>
     public override string? ToString()
     {
       return mName;
     }
 
-    /// <include path="members/CompareTo/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/CompareTo/*'/>
     public int CompareTo(LJCDataConfig? other)
     {
       int retValue;
@@ -100,7 +106,8 @@ namespace LJCDataAccessConfig5
 
     #region Public Methods
 
-    /// <include path="members/ConnectionString/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/ConnectionString/*'/>
     public string? ConnectionString(string? connectionType = "SQLServer")
     {
       LJCConnectionTemplates connectionTemplates;
@@ -115,7 +122,8 @@ namespace LJCDataAccessConfig5
     }
 
     // Creates the populated connection string from the template text.
-    /// <include path="members/ConnectionStringFromTemplate/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/ConnectionStringFromTemplate/*'/>
     public string? ConnectionStringFromTemplate(string? templateText)
     {
       DbConnectionStringBuilder connectionBuilder;
@@ -160,7 +168,8 @@ namespace LJCDataAccessConfig5
     }
 
     // Creates the SQL integrated connection string from an internal value.
-    /// <include path="items/SQLIntegratedConnectionString/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='items/SQLIntegratedConnectionString/*'/>
     public string? SQLIntegratedConnectionString()
     {
       string retValue;
@@ -216,7 +225,8 @@ namespace LJCDataAccessConfig5
     #region Properties
 
     // Gets or sets the DataConfig name.
-    /// <include path="members/Name/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/Name/*'/>
     public string? Name
     {
       get { return mName; }
@@ -225,7 +235,8 @@ namespace LJCDataAccessConfig5
     private string? mName;
 
     // Gets or sets the DbServer instance name.
-    /// <include path="mmebers/DbServer/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='mmebers/DbServer/*'/>
     public string? DbServer
     {
       get { return mDbServer; }
@@ -234,7 +245,8 @@ namespace LJCDataAccessConfig5
     private string? mDbServer;
 
     // Gets or sets the Database name.
-    /// <include path="members/Database/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/Database/*'/>
     public string? Database
     {
       get { return mDatabase; }
@@ -243,7 +255,8 @@ namespace LJCDataAccessConfig5
     private string? mDatabase;
 
     // Gets or sets the ConnectionType name.
-    /// <include path="members/ConnectionType/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/ConnectionType/*'/>
     public string? ConnectionType
     {
       get { return mConnectionType; }
@@ -252,7 +265,8 @@ namespace LJCDataAccessConfig5
     private string? mConnectionType;
 
     // Gets or sets the UserID name.
-    /// <include path="members/UserID/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/UserID/*'/>
     public string? UserID
     {
       get { return mUserID; }
@@ -261,7 +275,8 @@ namespace LJCDataAccessConfig5
     private string? mUserID;
 
     // Gets or sets the Pswd name.
-    /// <include path="members/Pswd/*" file="Doc/LJCDataConfig.xml"/>
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/Pswd/*'/>
     public string? Pswd
     {
       get { return mPswd; }

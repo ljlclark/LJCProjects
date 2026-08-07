@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DbManager.cs
 using LJCDBDataAccess5;
@@ -13,7 +13,8 @@ namespace LJCDBClientLib5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DbManagerC/*' file='Doc/DbManager.xml'/>
+    /// <include file='Doc/DbManager.xml'
+    ///  path='items/DbManagerC/*'/>
     public LJCDbManager(string dataConfigName, string tableName)
     {
       BaseDefinition = [];
@@ -26,8 +27,9 @@ namespace LJCDBClientLib5
       Reset(dataConfigName, tableName);
     }
 
-    /// Resets the data access configuration.
-    /// <include path='items/Reset/*' file='Doc/DbManager.xml'/>
+    // Resets the data access configuration.
+    /// <include file='Doc/DbManager.xml'
+    ///  path='items/Reset/*'/>
     public void Reset(string dataConfigName, string tableName)
     {
       DataConfigName = dataConfigName;
@@ -47,7 +49,8 @@ namespace LJCDBClientLib5
     #region DataManager related Public Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'
+    ///  path='items/Add/*'/>
     public LJCDBResult? Add(object dataObject, List<string>? propertyNames = null)
     {
       LJCDBResult? retValue;
@@ -67,7 +70,8 @@ namespace LJCDBClientLib5
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
+    ///  path='items/Delete/*'/>
     public void Delete(LJCDataColumns keyColumns, LJCDBFilters? filters = null)
     {
       if (LJC.HasListItems(keyColumns)
@@ -82,7 +86,8 @@ namespace LJCDBClientLib5
     }
 
     // Executes the supplied request.
-    /// <include path='items/ExecuteRequest/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
+    ///  path='items/ExecuteRequest/*'/>
     public LJCDBResult? ExecuteRequest(LJCDBRequest dbRequest)
     {
       LJCDBResult? retValue;
@@ -100,7 +105,8 @@ namespace LJCDBClientLib5
     }
 
     // Loads a collection of data records.
-    /// <include path='items/Load/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
+    ///  path='items/Load/*'/>
     public LJCDBResult? Load(LJCDataColumns keyColumns, List<string>? propertyNames = null
       , LJCDBFilters? filters = null, LJCDBJoins? joins = null)
     {
@@ -116,7 +122,8 @@ namespace LJCDBClientLib5
     }
 
     // Retrieves a record from the database.
-    /// <include path='items/Retrieve/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
+    ///  path='items/Retrieve/*'/>
     public LJCDBResult? Retrieve(LJCDataColumns keyColumns, List<string>? propertyNames = null
       , LJCDBFilters? filters = null, LJCDBJoins? joins = null)
     {
@@ -132,7 +139,8 @@ namespace LJCDBClientLib5
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
+    ///  path='items/Update/*'/>
     public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string>? propertyNames = null, LJCDBFilters? filters = null)
     {
@@ -149,7 +157,8 @@ namespace LJCDBClientLib5
     #region Other Public Methods
 
     // Adds the lookup column names.
-    /// <include path='items/SetLookupColumns/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/SetLookupColumns/*'/>
     public void SetLookupColumns(string[] propertyNames)
     {
       foreach (string propertyName in propertyNames)

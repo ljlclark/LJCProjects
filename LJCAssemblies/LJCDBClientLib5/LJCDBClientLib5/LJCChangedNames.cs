@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ChangedNames.cs
 using LJCNetCommon5;
@@ -11,7 +11,8 @@ namespace LJCDBClientLib5
   {
     // Adds the property name to the list if the value has changed and it
     // is not already in the list.
-    /// <include path='items/Add/*' file='Doc/ChangedNames.xml'/>
+    /// <include file='Doc/ChangedNames.xml'
+    ///  path='items/Add/*'/>
     public T Add<T>(string propertyName, T oldValue, T newValue)
     {
       T retValue = newValue;
@@ -28,7 +29,8 @@ namespace LJCDBClientLib5
     }
 
     // Returns the existing property name or null if it does not exist.
-    /// <include path='items/FindName/*' file='Doc/ChangedNames.xml'/>
+    /// <include file='Doc/ChangedNames.xml'
+    ///  path='items/FindName/*'/>
     public string? FindName(string propertyName)
     {
       return Find(x => 0 == string.Compare(x, propertyName, true));

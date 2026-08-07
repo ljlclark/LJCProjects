@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ManagerCommon.cs
 using LJCDataAccess5;
@@ -13,7 +13,8 @@ namespace LJCDBClientLib5
   public class LJCManagerCommon
   {
     // Creates the LJCDBRequest object.
-    /// <include path='items/CreateRequest/*' file='Doc/ManagerCommon.xml'/>
+    /// <include file='Doc/ManagerCommon.xml'
+    ///  path='items/CreateRequest/*'/>
     public static LJCDBRequest CreateRequest(RequestType requestType
       , string? tableName, LJCDataColumns? requestColumns
       , string dataConfigName, string? schemaName = null
@@ -37,7 +38,8 @@ namespace LJCDBClientLib5
     }
 
     // Run the CreateTables script.
-    /// <include path='items/CreateTables/*' file='Doc/ManagerCommon.xml'/>
+    /// <include file='Doc/ManagerCommon.xml'
+    ///  path='items/CreateTables/*'/>
     public static bool CreateTables(string dataConfigName, string[] fileSpecs)
     {
       bool retValue = false;
@@ -67,7 +69,8 @@ namespace LJCDBClientLib5
     }
 
     // Gets the additional Config values.
-    /// <include path='items/GetConfigValues/*' file='Doc/ManagerCommon.xml'/>
+    /// <include file='Doc/ManagerCommon.xml'
+    ///  path='items/GetConfigValues/*'/>
     public static void GetConfigValues(string dataConfigName
       , out string? connectionType, out string? connectionString
       , out string providerName)
@@ -81,7 +84,8 @@ namespace LJCDBClientLib5
     }
 
     // Gets the Missing Table ErrorCode.
-    /// <include path='items/GetMissingTableErrorCode/*' file='Doc/ManagerCommon.xml'/>
+    /// <include file='Doc/ManagerCommon.xml'
+    ///  path='items/GetMissingTableErrorCode/*'/>
     public static int GetMissingTableErrorCode(string dataConfigName)
     {
       int retValue;

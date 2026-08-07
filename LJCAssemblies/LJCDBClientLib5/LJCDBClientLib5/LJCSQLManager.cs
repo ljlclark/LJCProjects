@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SQLManager.cs
 using LJCDataAccess5;
@@ -15,7 +15,8 @@ namespace LJCDBClientLib5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/SQLManagerC/*' file='Doc/SQLManager.xml'/>
+    /// <include file='Doc/SQLManager.xml'
+    ///  path='items/SQLManagerC/*'/>
     public LJCSQLManager(string dataConfigName, string tableName
       , string? connectionString = null, string? providerName = null)
     {
@@ -32,8 +33,9 @@ namespace LJCDBClientLib5
       Reset(dataConfigName, tableName, connectionString, providerName);
     }
 
-    /// Resets the data access configuration.
-    /// <include path='items/Reset/*' file='Doc/SQLManager.xml'/>
+    // Resets the data access configuration.
+    /// <include file='Doc/SQLManager.xml'
+    ///  path='items/Reset/*'/>
     public void Reset(string dataConfigName, string tableName
       , string? connectionString = null, string? providerName = null)
     {
@@ -75,7 +77,8 @@ namespace LJCDBClientLib5
     #region Public Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='Doc/SQLManager.xml'/>
+    /// <include file='Doc/SQLManager.xml'
+    ///  path='items/Add/*'/>
     public DataTable? Add(object dataObject, List<string>? propertyNames = null)
     {
       LJC.CheckArgument(dataObject);
@@ -98,7 +101,8 @@ namespace LJCDBClientLib5
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='Doc/SQLManager.xml'/>
+    /// <include file='Doc/SQLManager.xml'
+    ///  path='items/Delete/*'/>
     public void Delete(LJCDataColumns keyColumns, LJCDBFilters? filters = null)
     {
       SQLStatement = CreateDeleteSQL(keyColumns, filters);
@@ -109,7 +113,8 @@ namespace LJCDBClientLib5
     }
 
     // Gets a DataTable object.
-    /// <include path='items/GetDataTable/*' file='Doc/SQLManager.xml'/>
+    /// <include file='Doc/SQLManager.xml'
+    ///  path='items/GetDataTable/*'/>
     public DataTable? Load(LJCDataColumns keyColumns
       , List<string>? propertyNames = null, LJCDBFilters? filters = null
       , LJCDBJoins? joins = null)
@@ -123,7 +128,8 @@ namespace LJCDBClientLib5
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='Doc/SQLManager.xml'/>
+    /// <include file='Doc/SQLManager.xml'
+    ///  path='items/Update/*'/>
     public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string>? propertyNames = null, LJCDBFilters? filters = null)
     {
@@ -138,7 +144,8 @@ namespace LJCDBClientLib5
     }
 
     // Maps the column property and rename values.
-    /// <include path='items/MapNames/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/MapNames/*'/>
     public void MapNames(string columnName, string? propertyName = null
       , string? renameAs = null, string? caption = null)
     {
@@ -151,7 +158,8 @@ namespace LJCDBClientLib5
     }
 
     // Adds the lookup column names.
-    /// <include path='items/SetLookupColumns/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/SetLookupColumns/*'/>
     public void SetLookupColumns(string[] propertyNames)
     {
       foreach (string propertyName in propertyNames)
