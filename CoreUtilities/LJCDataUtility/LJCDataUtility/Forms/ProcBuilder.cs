@@ -3,6 +3,7 @@
 // ProcBuilder.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -184,7 +185,7 @@ namespace LJCDataUtility
       }
       b.Text(value);
 
-      if (NetCommon.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         b.IsFirst = true;
         foreach (DataUtilColumn dataColumn in dataColumns)
@@ -280,7 +281,7 @@ namespace LJCDataUtility
         b.Text($"{varRefName}, ");
       }
 
-      if (NetCommon.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         b.IsFirst = true;
         foreach (DataUtilColumn dataColumn in dataColumns)

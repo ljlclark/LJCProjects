@@ -95,7 +95,7 @@ namespace TestDataUtilityDAL
       string name = "TestKeyName";
 
       // Delete the test record.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -207,7 +207,7 @@ namespace TestDataUtilityDAL
       dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -243,7 +243,7 @@ namespace TestDataUtilityDAL
       string name = "TestKeyName";
 
       // Create the test record.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -314,7 +314,7 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}", result, compare);
 
       // Delete the test record.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableSiteID },
@@ -355,7 +355,7 @@ namespace TestDataUtilityDAL
       dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -405,7 +405,7 @@ namespace TestDataUtilityDAL
       dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -436,7 +436,8 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}2", result, compare);
 
       // Delete the test record.
-      var nameColumn = uniqueColumns.LJCSearchPropertyName("Name");
+      //var nameColumn = uniqueColumns.LJCSearchPropertyName("Name");
+      var nameColumn = uniqueColumns["Name"];
       nameColumn.Value = "TestKeyName Updated";
       dataKeyManager.Delete(uniqueColumns);
     }
@@ -482,7 +483,7 @@ namespace TestDataUtilityDAL
       dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -551,7 +552,7 @@ namespace TestDataUtilityDAL
       dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -617,7 +618,7 @@ namespace TestDataUtilityDAL
       dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -685,7 +686,7 @@ namespace TestDataUtilityDAL
       dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -754,7 +755,7 @@ namespace TestDataUtilityDAL
       dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -818,7 +819,7 @@ namespace TestDataUtilityDAL
       dataKeyManager.Add(dataKey);
 
       // Verify the test record was created.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -893,7 +894,7 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}", result, compare);
 
       // Delete the test record.
-      var uniqueColumns = new DbColumns()
+      var uniqueColumns = new LJCDataColumns()
       {
         { "DataTableID", dataTableID },
         { "DataTableSiteID", dataTableDbID },
@@ -925,7 +926,8 @@ namespace TestDataUtilityDAL
       // Test Method
       var idKey = dataKeyManager.ForeignKey(targetTableName);
 
-      var key = idKey.LJCSearchPropertyName(DataKey.ColumnKeyType);
+      //var key = idKey.LJCSearchPropertyName(DataKey.ColumnKeyType);
+      var key = idKey[DataKey.ColumnKeyType];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";
@@ -954,7 +956,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var idKey = dataKeyManager.IDKey(id, dbID);
 
-      var key = idKey.LJCSearchPropertyName(DataKey.ColumnID);
+      var key = idKey[DataKey.ColumnID];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";
@@ -983,7 +985,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var idKey = dataKeyManager.ParentKey(dataTableID, dataTableDbID);
 
-      var key = idKey.LJCSearchPropertyName(DataKey.ColumnDataTableID);
+      var key = idKey[DataKey.ColumnDataTableID];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";
@@ -1014,7 +1016,7 @@ namespace TestDataUtilityDAL
       var idKey = dataKeyManager.ParentTypeKey(dataTableID, dataTableDbID
         , keyType);
 
-      var key = idKey.LJCSearchPropertyName(DataKey.ColumnDataTableID);
+      var key = idKey[DataKey.ColumnDataTableID];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";
@@ -1045,7 +1047,7 @@ namespace TestDataUtilityDAL
       var idKey = dataKeyManager.UniqueKey(dataModuleID, dataModuleDbID
         , name);
 
-      var key = idKey.LJCSearchPropertyName(DataKey.ColumnName);
+      var key = idKey[DataKey.ColumnName];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";

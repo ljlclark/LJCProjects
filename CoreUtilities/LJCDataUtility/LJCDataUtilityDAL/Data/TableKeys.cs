@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // TableKeys.cs
-using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtilityDAL
 {
@@ -22,7 +22,7 @@ namespace LJCDataUtilityDAL
     /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public TableKeys(TableKeys items) : this()
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {

@@ -6,6 +6,7 @@ using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -37,7 +38,7 @@ namespace LJCDataUtility
       var dataColumns = Managers.TableDataColumns(parentID, parentDbID
         , orderByNames);
 
-      if (NetCommon.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         var parentTableName = ParentObject.DataTableRowName();
         var dbName = Config.Database;

@@ -4,6 +4,7 @@
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtilityDAL
 {
@@ -22,7 +23,7 @@ namespace LJCDataUtilityDAL
     {
       DataTables2 retValue = null;
 
-      if (NetCommon.HasItems(list))
+      if (LJC.HasListItems(list))
       {
         retValue = new DataTables2();
         foreach (DataTable2 item in list)
@@ -50,7 +51,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/CopyConstructor/*'/>
     public DataTables2(DataTables2 items) : this()
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -74,12 +75,12 @@ namespace LJCDataUtilityDAL
     // Retrieves the collection element with unique values.
     /// <include file='Doc/DataTables2.xml'
     ///  path='members/LJCGetWithUnique/*'/>
-    public DataTable2 LJCGetWithUnique(DbColumns keyColumns)
+    public DataTable2 LJCGetWithUnique(LJCDataColumns keyColumns)
     {
       DataTable2 retDataTable = null;
 
       LJCSortUnique();
-      var foundIndex = DbColumns.LJCSearchColumns(this, keyColumns);
+      var foundIndex = LJCDataColumns.LJCSearchColumns(this, keyColumns);
       if (foundIndex != -1)
       {
         retDataTable = this[foundIndex];
@@ -125,7 +126,7 @@ namespace LJCDataUtilityDAL
     {
       get
       {
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { "DataModuleID",  dataModuleID},
           { "DataModuleSiteID",  4},

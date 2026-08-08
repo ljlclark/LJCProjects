@@ -204,7 +204,7 @@ namespace TestDataUtilityDAL
       dataTables.Add(dataTable);
 
       // Test Method
-      var keyColumns = new DbColumns()
+      var keyColumns = new LJCDataColumns()
       {
         { "DataModuleID",  3},
         { "DataModuleSiteID",  4},

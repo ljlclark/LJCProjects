@@ -5,6 +5,7 @@ using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataSiteDAL
 {
@@ -49,7 +50,7 @@ namespace LJCDataSiteDAL
     /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataEntrySites(DataEntrySites items)
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {
@@ -112,7 +113,7 @@ namespace LJCDataSiteDAL
     {
       DataEntrySites retValue = null;
 
-      if (NetCommon.HasItems(list))
+      if (LJC.HasListItems(list))
       {
         retValue = new DataEntrySites();
         foreach (DataEntrySite item in list)

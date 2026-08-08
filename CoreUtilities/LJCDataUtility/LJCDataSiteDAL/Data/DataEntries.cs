@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataSiteDAL
 {
@@ -110,7 +111,7 @@ namespace LJCDataSiteDAL
     {
       DataEntries retValue = null;
 
-      if (NetCommon.HasItems(list))
+      if (LJC.HasListItems(list))
       {
         retValue = new DataEntries();
         foreach (DataEntry item in list)

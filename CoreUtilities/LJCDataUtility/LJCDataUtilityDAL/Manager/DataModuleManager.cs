@@ -66,9 +66,9 @@ namespace LJCDataUtilityDAL
     // Creates a set of columns that match the supplied list.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/Columns/*'/>
-    public DbColumns Columns(List<string> propertyNames)
+    public LJCDataColumns Columns(List<string> propertyNames)
     {
-      return Manager.DataDefinition.LJCGetColumns(propertyNames);
+      return Manager.DataDefinition.LJCColumns(propertyNames);
     }
 
     // Creates a list of BaseDefinition property names.
@@ -103,7 +103,7 @@ namespace LJCDataUtilityDAL
     // Deletes the records with the specified key values.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/Delete/*'/>
-    public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
       //EntryManager.WriteDataEntry(Manager.SQLStatement);
@@ -112,7 +112,7 @@ namespace LJCDataUtilityDAL
     // Retrieves a collection of data records.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/Load/*'/>
-    public DataModules Load(DbColumns keyColumns = null
+    public DataModules Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -126,7 +126,7 @@ namespace LJCDataUtilityDAL
     // Retrieves a record from the database.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/Retrieve/*'/>
-    public DataModule Retrieve(DbColumns keyColumns
+    public DataModule Retrieve(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -140,7 +140,7 @@ namespace LJCDataUtilityDAL
     // Updates the record.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/Update/*'/>
-    public void Update(DataModule dataObject, DbColumns keyColumns
+    public void Update(DataModule dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
@@ -184,10 +184,10 @@ namespace LJCDataUtilityDAL
     // Gets the ID key columns.
     /// <include file='Doc/DataModuleManager.xml'
     ///  path='members/IDKey/*'/>
-    public DbColumns IDKey(long id, short dbID)
+    public LJCDataColumns IDKey(long id, short dbID)
     {
       // Add(columnName, object value, dataTypeName = "String");
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DataModule.ColumnID, id },
         { DataModule.ColumnDbID, dbID },
@@ -198,10 +198,10 @@ namespace LJCDataUtilityDAL
     // Gets the ID key columns.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='items/UniqueKey/*'/>
-    public DbColumns UniqueKey(string name)
+    public LJCDataColumns UniqueKey(string name)
     {
       // Needs cast for string to select the correct Add overload.
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DataModule.ColumnName, (object)name },
       };

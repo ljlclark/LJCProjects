@@ -3,6 +3,7 @@
 // LJCDataColumns.cs
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Xml.Serialization;
 using LJC = LJCNetCommon.NetCommon;
 
@@ -15,6 +16,21 @@ namespace LJCNetCommon
   public class LJCDataColumns : List<LJCDataColumn>
   {
     #region Static Methods
+
+    // Compare column value to key column value.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/LJCCompareColumn/*'/>
+    public static int LJCCompareColumn(string columnValue, LJCDataValue keyColumn
+      , bool ignoreCase = true)
+    {
+      string searchValue = null;
+      if (keyColumn.Value != null)
+      {
+        searchValue = keyColumn.Value.ToString();
+      }
+      int retIndex = string.Compare(columnValue, searchValue, ignoreCase);
+      return retIndex;
+    }
 
     // Deserializes from the specified XML file.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
@@ -138,6 +154,68 @@ namespace LJCNetCommon
         }
       }
       return retValues;
+    }
+
+    // Custom binary search for Name value.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/LJCSearchColumns/*'/>
+    public static int LJCSearchColumns<T>(List<T> list, LJCDataValues keyColumns)
+    {
+      int retIndex = -1;
+
+      int leftIndex = 0;
+      int rightIndex = list.Count - 1;
+      while (leftIndex <= rightIndex)
+      {
+        // Get the midpoint.
+        int middleIndex = leftIndex + (rightIndex - leftIndex) / 2;
+
+        // Get the object compare value.
+        var dataColumns = list[middleIndex] as LJCDataColumns;
+
+        int compareValue = NetString.CompareGreater;
+        for (short index = 0; index < keyColumns.Count; index++)
+        {
+          var keyColumn = keyColumns[index];
+          var propertyName = keyColumn.PropertyName;
+          var columnValue = dataColumns.LJCGetString(propertyName);
+          compareValue = LJCCompareColumn(columnValue, keyColumn);
+          if (index < keyColumns.Count - 1)
+          {
+            // Parent key value is not equal.
+            if (compareValue != NetString.CompareEqual)
+            {
+              break;
+            }
+          }
+          else
+          {
+            // Item key value is equal.
+            if (NetString.CompareEqual == compareValue)
+            {
+              retIndex = middleIndex;
+            }
+          }
+        }
+
+        // DbColumns item was found.
+        if (NetString.CompareEqual == compareValue)
+        {
+          break;
+        }
+
+        if (NetString.CompareLess == compareValue)
+        {
+          // Eliminate left half
+          leftIndex = middleIndex + 1;
+        }
+        else
+        {
+          // Eliminate right half
+          rightIndex = middleIndex - 1;
+        }
+      }
+      return retIndex;
     }
 
     // Checks if the key columns value has changed.

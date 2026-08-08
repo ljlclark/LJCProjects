@@ -5,6 +5,7 @@ using LJCNetCommon;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtilityDAL
 {
@@ -47,7 +48,7 @@ namespace LJCDataUtilityDAL
     {
       DataTables retValue = null;
 
-      if (NetCommon.HasItems(list))
+      if (LJC.HasListItems(list))
       {
         retValue = new DataTables();
         foreach (DataUtilTable item in list)
@@ -75,7 +76,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/CopyConstructor/*'/>
     public DataTables(DataTables items) : this()
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {

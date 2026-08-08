@@ -40,14 +40,14 @@ namespace LJCDataSiteDAL
 
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
     }
 
     // Retrieves a collection of data records.
     /// <include path='items/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DataEntrySites Load(DbColumns keyColumns = null
+    public DataEntrySites Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -60,7 +60,7 @@ namespace LJCDataSiteDAL
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DataEntrySite Retrieve(DbColumns keyColumns
+    public DataEntrySite Retrieve(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -73,7 +73,7 @@ namespace LJCDataSiteDAL
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public void Update(DataEntrySite dataObject, DbColumns keyColumns
+    public void Update(DataEntrySite dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
@@ -101,13 +101,13 @@ namespace LJCDataSiteDAL
 
     // Gets the primary key columns.
     /// <include path='items/PrimaryKey/*' file='Doc/DataEntrySiteManager.xml'/>
-    public DbColumns PrimaryKey(long dataEntryID, long dataEntrySiteID
+    public LJCDataColumns PrimaryKey(long dataEntryID, long dataEntrySiteID
       , long dataSiteID)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DataEntrySite.ColumnDataEntryID, dataEntryID },
         { DataEntrySite.ColumnDataEntrySiteID, dataEntrySiteID },

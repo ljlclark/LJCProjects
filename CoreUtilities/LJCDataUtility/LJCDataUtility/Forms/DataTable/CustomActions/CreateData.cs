@@ -3,8 +3,7 @@
 // CreateData.cs
 using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
-using LJCNetCommon;
-using System;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -54,7 +53,7 @@ namespace LJCDataUtility
     {
       var columnManager = Managers.DataColumnManager;
       var dataColumns = columnManager.Load();
-      if (NetCommon.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         var proc = new ProcBuilder(ParentObject, Config.Database, null);
         proc.Begin("sp_DataColumnData");
@@ -87,7 +86,7 @@ namespace LJCDataUtility
     {
       var keyManager = Managers.DataKeyManager;
       var dataKeys = keyManager.Load();
-      if (NetCommon.HasItems(dataKeys))
+      if (LJC.HasListItems(dataKeys))
       {
         var proc = new ProcBuilder(ParentObject, Config.Database, null);
         proc.Begin("sp_DataKeyData");
@@ -120,7 +119,7 @@ namespace LJCDataUtility
     {
       var moduleManager = Managers.DataModuleManager;
       var dataTables = moduleManager.Load();
-      if (NetCommon.HasItems(dataTables))
+      if (LJC.HasListItems(dataTables))
       {
         var proc = new ProcBuilder(ParentObject, Config.Database, null);
         proc.Begin("sp_DataModuleData");
@@ -147,7 +146,7 @@ namespace LJCDataUtility
     {
       var tableManager = Managers.DataTableManager;
       var dataTables = tableManager.Load();
-      if (NetCommon.HasItems(dataTables))
+      if (LJC.HasListItems(dataTables))
       {
         var proc = new ProcBuilder(ParentObject, Config.Database, null);
         proc.Begin("sp_DataTableData");

@@ -10,10 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using LJCDataUtility;
-using System.Data;
-using System.Data.Common;
 using LJCDataAccessConfig;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -105,7 +103,7 @@ namespace LJCDataUtility
         var parentID = ParentObject.DataTableRowID(out short parentDbID);
         var keyColumns = KeyManager.ParentKey(parentID, parentDbID);
         var items = KeyManager.Load(keyColumns);
-        if (NetCommon.HasItems(items))
+        if (LJC.HasListItems(items))
         {
           foreach (var item in items)
           {
@@ -123,7 +121,8 @@ namespace LJCDataUtility
     {
       var retValue = KeyGrid.LJCRowAdd();
       SetStoredValues(retValue, data);
-      retValue.LJCSetValues(KeyGrid, data);
+      //retValue.LJCSetValues(KeyGrid, data);
+      retValue.LJCSetValues(data);
       SetKeyTypeName(retValue, data.KeyType);
       return retValue;
     }
@@ -159,7 +158,8 @@ namespace LJCDataUtility
       if (KeyGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, data);
-        row.LJCSetValues(KeyGrid, data);
+        //row.LJCSetValues(KeyGrid, data);
+        row.LJCSetValues(data);
         SetKeyTypeName(row, data.KeyType);
       }
     }
@@ -226,7 +226,7 @@ namespace LJCDataUtility
       if (isContinue)
       {
         var id = ParentObject.DataKeyRowID(out short dbID);
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { DataKey.ColumnID, id },
           { DataKey.ColumnDbID, dbID }

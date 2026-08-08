@@ -29,7 +29,7 @@ namespace LJCWinFormControls
     // Adds an Item to the ComboBox.
     /// <include file='Doc/LJCItemCombo.xml'
     ///  path='items/LJCAddItem/*'/>
-    public LJCItem LJCAddItem(int id, string text)
+    public LJCItem LJCAddItem(long id, short dbID, string text)
     {
       mArgError.MethodName = "LJCAddItem";
       var message = "";
@@ -44,6 +44,7 @@ namespace LJCWinFormControls
       var retItem = new LJCItem()
       {
         ID = id,
+        DbID = dbID,
         Text = text
       };
       Items.Add(retItem);
@@ -69,9 +70,9 @@ namespace LJCWinFormControls
     // Gets the combo SelectedItem ID.
     /// <include file='Doc/LJCItemCombo.xml'
     ///  path='items/LJCSelectedItemID/*'/>
-    public int LJCSelectedItemID()
+    public long LJCSelectedItemID()
     {
-      int retValue = 0;
+      long retValue = 0;
 
       if (SelectedItem is LJCItem item)
       {
@@ -154,7 +155,10 @@ namespace LJCWinFormControls
     #region Properties
 
     /// <summary>Gets or sets the ID value.</summary>
-    public int ID { get; set; }
+    public long ID { get; set; }
+
+    /// <summary>Gets or sets the database ID value.</summary>
+    public short DbID { get; set; }
 
     /// <summary>Gets or sets the Text value.</summary>
     public string Text { get; set; }

@@ -6,6 +6,7 @@ using LJCDBClientLib;
 using LJCDBDataAccess;
 using LJCNetCommon;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -76,7 +77,7 @@ namespace LJCDataUtility
           }
           else
           {
-            CreateData(moduleID);
+            CreateData((int)moduleID);
           }
         }
       }
@@ -136,7 +137,7 @@ namespace LJCDataUtility
     #region Column Methods
 
     // Creates DataUtilColumn data.
-    private void CreateColumn(DbColumn dbColumn, long tableID
+    private void CreateColumn(LJCDataColumn dbColumn, long tableID
       , short tableDbID, int sequence)
     {
       var newColumn = new DataUtilColumn
@@ -190,7 +191,7 @@ namespace LJCDataUtility
     }
 
     // Updates the DataUtilColumn values.
-    private void UpdateColumn(DbColumn dbColumn, DataUtilColumn dataColumn)
+    private void UpdateColumn(LJCDataColumn dbColumn, DataUtilColumn dataColumn)
     {
       string compareText = "";
       var updateColumn = new DataUtilColumn();
@@ -349,7 +350,7 @@ namespace LJCDataUtility
     {
       // Get the foreign keys for TableName
       var foreignTableKeys = GetTableKeys("FOREIGN KEY");
-      if (NetCommon.HasItems(foreignTableKeys))
+      if (LJC.HasListItems(foreignTableKeys))
       {
         // Get combined SourceColumnNames.
         var foreignKeyGroup = new TableKeyGroup(foreignTableKeys);
@@ -403,7 +404,7 @@ namespace LJCDataUtility
       var keyManager = Managers.DataKeyManager;
 
       var primaryKeys = GetTableKeys();
-      if (NetCommon.HasItems(primaryKeys))
+      if (LJC.HasListItems(primaryKeys))
       {
         // Create comma delimited string.
         string sourceColumnNames = "";
@@ -439,7 +440,7 @@ namespace LJCDataUtility
       var keyManager = Managers.DataKeyManager;
 
       var uniqueKeys = GetTableKeys("UNIQUE");
-      if (NetCommon.HasItems(uniqueKeys))
+      if (LJC.HasListItems(uniqueKeys))
       {
         // Create comma delimited string.
         string sourceColumnNames = "";

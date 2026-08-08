@@ -9,7 +9,7 @@ namespace LJCDataUtilityDAL
   // Represents the DataTable data.
   /// <include file='Doc/DataTable2.xml'
   ///  path='members/DataUtilTableNew/*'/>
-  public class DataTable2 : DbColumns
+  public class DataTable2 : LJCDataColumns
   {
     #region Constructors
 
@@ -44,7 +44,7 @@ namespace LJCDataUtilityDAL
       // Unique Key
       dbColumn = Add("Name");
       dbColumn.KeyType = "Natural";
-      dbColumn.Unique = true;
+      dbColumn.IsUniqueKey = true;
 
       Add("Description");
 

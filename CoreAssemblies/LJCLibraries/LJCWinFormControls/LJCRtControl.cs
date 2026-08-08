@@ -162,7 +162,8 @@ namespace LJCWinFormControls
     }
 
     // Reads a file into the Control and sets the leading tabs.
-    /// <include path='items/LJCLoadFromFile/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCLoadFromFile/*'/>
     public void LJCLoadFromFile(string fileSpec)
     {
       string line;
@@ -185,7 +186,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the text color for the delimited string value.
-    /// <include path='items/LJCSetDelimitedTextColor/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCSetDelimitedTextColor/*'/>
     public void LJCSetDelimitedTextColor(int lineIndex, string beginDelimiter
       , string endDelimiter, Color color)
     {
@@ -229,7 +231,8 @@ namespace LJCWinFormControls
     }
 
     // Sets the text color from the beginning offset to length.
-    /// <include path='items/LJCSetTextColor/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCSetTextColor/*'/>
     public void LJCSetTextColor(int lineIndex, int colorBeginIndex, int length
       , Color color)
     {
@@ -247,7 +250,8 @@ namespace LJCWinFormControls
     }
 
     // Gets the text for the specified line.
-    /// <include path='items/LJCGetLineText/*' file='Doc/LJCRtControl.xml'/>
+    /// <include file='Doc/LJCRtControl.xml'
+    ///  path='items/LJCGetLineText/*'/>
     public string LJCGetLineText(int lineIndex)
     {
       string retValue = null;

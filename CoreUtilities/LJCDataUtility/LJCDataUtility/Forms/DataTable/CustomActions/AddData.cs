@@ -5,6 +5,7 @@ using LJCDataAccessConfig;
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -36,7 +37,7 @@ namespace LJCDataUtility
       var dataColumns = Managers.TableDataColumns(tableID
         , tableDbID, orderByNames);
 
-      if (NetCommon.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         var tableName = ParentObject.DataTableRowName();
         var procData = new AddProcData(Config.Database, dataColumns, tableName)
@@ -79,7 +80,7 @@ namespace LJCDataUtility
         proc.Begin(proc.AddProcName);
 
         var keyValues = KeyValues(data.ForeignKeys);
-        if (NetCommon.HasItems(keyValues))
+        if (LJC.HasListItems(keyValues))
         {
           var uniqueParamValueList = UniqueParamValueList(keyValues);
           proc.Text(uniqueParamValueList);
@@ -94,7 +95,7 @@ namespace LJCDataUtility
         proc.Line("BEGIN");
 
         List<string> foreignKeyVars = new List<string>();
-        if (NetCommon.HasItems(keyValues))
+        if (LJC.HasListItems(keyValues))
         {
           var line = "";
           foreach (KeyValues keyValueObject in keyValues)
@@ -182,7 +183,7 @@ namespace LJCDataUtility
     {
       List<KeyValues> retValues = new List<KeyValues>();
 
-      if (NetCommon.HasItems(foreignKeys))
+      if (LJC.HasListItems(foreignKeys))
       {
         foreach (DataKey foreignKey in foreignKeys)
         {
@@ -190,7 +191,7 @@ namespace LJCDataUtility
           var foreignKeyColumnNames = ToNames(foreignKey.SourceColumnName);
 
           var targetUniqueKeys = TargetUniqueKeys(foreignKey);
-          if (!NetCommon.HasItems(targetUniqueKeys))
+          if (!LJC.HasListItems(targetUniqueKeys))
             continue;
 
           foreach (var targetUniqueKey in targetUniqueKeys)
@@ -235,7 +236,7 @@ namespace LJCDataUtility
       string retValue = null;
 
       var vars = keyValueObject.UniqueVarNames;
-      if (NetCommon.HasItems(vars)
+      if (LJC.HasListItems(vars)
         && vars.Count > 0
         && vars.Count <= index + 1)
       {
@@ -279,7 +280,7 @@ namespace LJCDataUtility
         string parmFindName = null;
         var isFirst = true;
         myProc.IsFirst = true;
-        if (NetCommon.HasItems(data.ForeignKeys))
+        if (LJC.HasListItems(data.ForeignKeys))
         {
           foreach (DataKey dataKey in data.ForeignKeys)
           {
@@ -308,7 +309,7 @@ namespace LJCDataUtility
 
         // Get IF for referenced variables.
         List<string> varRefNames = new List<string>();
-        if (NetCommon.HasItems(data.ForeignKeys))
+        if (LJC.HasListItems(data.ForeignKeys))
         {
           foreach (DataKey dataKey in data.ForeignKeys)
           {
@@ -376,7 +377,7 @@ namespace LJCDataUtility
       string retValue = null;
 
       var names = keyValues.UniqueColumnNames;
-      if (NetCommon.HasItems(names)
+      if (LJC.HasListItems(names)
         && names.Count > 0
         && names.Count <= index + 1)
       {

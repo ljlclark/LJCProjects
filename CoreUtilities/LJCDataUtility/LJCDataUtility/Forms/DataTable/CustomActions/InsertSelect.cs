@@ -7,6 +7,7 @@ using LJCDBClientLib;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Text;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -41,7 +42,7 @@ namespace LJCDataUtility
       };
       var insertColumns = Managers.TableDataColumns(parentID, parentDbID
         , orderByNames);
-      if (NetCommon.HasItems(insertColumns))
+      if (LJC.HasListItems(insertColumns))
       {
         var parentTableName = ParentObject.DataTableRowName();
 
@@ -136,14 +137,14 @@ namespace LJCDataUtility
 
     // Creates the column lists.
     private ColumnLists ColumnLists(DataColumns insertColumns
-      , DbColumns selectColumns, string indent = null
+      , LJCDataColumns selectColumns, string indent = null
       , string connectionType = "SqlServer")
     {
       ColumnLists retLists = null;
 
       Indent = indent;
-      if (NetCommon.HasItems(insertColumns)
-        && NetCommon.HasItems(selectColumns))
+      if (LJC.HasListItems(insertColumns)
+        && LJC.HasListItems(selectColumns))
       {
         retLists = new ColumnLists();
         InsertBuilder = new TextBuilder();
@@ -170,8 +171,9 @@ namespace LJCDataUtility
 
           // Get Select list value.
           var selectName = insertColumn.Name;
-          var selectColumn
-            = selectColumns.LJCSearchColumnName(insertColumn.Name);
+          //var selectColumn
+          //  = selectColumns.LJCSearchColumnName(insertColumn.Name);
+          var selectColumn = selectColumns[insertColumn.Name];
           if (null == selectColumn)
           {
             // Add column uses the default value.

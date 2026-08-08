@@ -286,30 +286,30 @@ namespace LJCDataUtility
     // Loads the TypeName combo.
     private void LoadTypeCombo()
     {
-      TypeNameCombo.LJCAddItem(15, "nvarchar");
-      TypeNameCombo.LJCAddItem(11, "int");
-      TypeNameCombo.LJCAddItem(18, "smallint");
-      TypeNameCombo.LJCAddItem(1, "bigint");
-      TypeNameCombo.LJCAddItem(2, "binary");
-      TypeNameCombo.LJCAddItem(3, "bit");
-      TypeNameCombo.LJCAddItem(4, "char");
-      TypeNameCombo.LJCAddItem(5, "date");
-      TypeNameCombo.LJCAddItem(6, "datetime");
-      TypeNameCombo.LJCAddItem(7, "datetime2");
-      TypeNameCombo.LJCAddItem(8, "datetimeoffset");
-      TypeNameCombo.LJCAddItem(9, "decimal");
-      TypeNameCombo.LJCAddItem(10, "float");
-      TypeNameCombo.LJCAddItem(12, "money");
-      TypeNameCombo.LJCAddItem(13, "nchar");
-      TypeNameCombo.LJCAddItem(14, "ntext");
-      TypeNameCombo.LJCAddItem(16, "real");
-      TypeNameCombo.LJCAddItem(17, "smalldatetime");
-      TypeNameCombo.LJCAddItem(19, "smallmoney");
-      TypeNameCombo.LJCAddItem(20, "text");
-      TypeNameCombo.LJCAddItem(21, "time");
-      TypeNameCombo.LJCAddItem(22, "tinyint");
-      TypeNameCombo.LJCAddItem(23, "varbinary");
-      TypeNameCombo.LJCAddItem(24, "varchar");
+      TypeNameCombo.LJCAddItem(15, 1, "nvarchar");
+      TypeNameCombo.LJCAddItem(11, 1, "int");
+      TypeNameCombo.LJCAddItem(18, 1, "smallint");
+      TypeNameCombo.LJCAddItem(1, 1, "bigint");
+      TypeNameCombo.LJCAddItem(2, 1, "binary");
+      TypeNameCombo.LJCAddItem(3, 1, "bit");
+      TypeNameCombo.LJCAddItem(4, 1, "char");
+      TypeNameCombo.LJCAddItem(5, 1, "date");
+      TypeNameCombo.LJCAddItem(6, 1, "datetime");
+      TypeNameCombo.LJCAddItem(7, 1, "datetime2");
+      TypeNameCombo.LJCAddItem(8, 1, "datetimeoffset");
+      TypeNameCombo.LJCAddItem(9, 1, "decimal");
+      TypeNameCombo.LJCAddItem(10, 1, "float");
+      TypeNameCombo.LJCAddItem(12, 1, "money");
+      TypeNameCombo.LJCAddItem(13, 1, "nchar");
+      TypeNameCombo.LJCAddItem(14, 1, "ntext");
+      TypeNameCombo.LJCAddItem(16, 1, "real");
+      TypeNameCombo.LJCAddItem(17, 1, "smalldatetime");
+      TypeNameCombo.LJCAddItem(19, 1, "smallmoney");
+      TypeNameCombo.LJCAddItem(20, 1, "text");
+      TypeNameCombo.LJCAddItem(21, 1, "time");
+      TypeNameCombo.LJCAddItem(22, 1, "tinyint");
+      TypeNameCombo.LJCAddItem(23, 1, "varbinary");
+      TypeNameCombo.LJCAddItem(24, 1, "varchar");
     }
 
     // Sets the NoSpace events.

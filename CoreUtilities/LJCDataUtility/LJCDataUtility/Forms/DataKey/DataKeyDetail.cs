@@ -250,10 +250,10 @@ namespace LJCDataUtility
       TargetColumnText.MaxLength = DataKey.LengthTargetColumnName;
 
       // Load control data.
-      KeyTypeCombo.LJCAddItem(1, "Primary");
-      KeyTypeCombo.LJCAddItem(2, "Unique");
-      KeyTypeCombo.LJCAddItem(3, "Foreign");
-      KeyTypeCombo.LJCAddItem(4, "Table");
+      KeyTypeCombo.LJCAddItem(1, 1, "Primary");
+      KeyTypeCombo.LJCAddItem(2, 1, "Unique");
+      KeyTypeCombo.LJCAddItem(3, 1, "Foreign");
+      KeyTypeCombo.LJCAddItem(4, 1, "Table");
 
       Cursor = Cursors.Default;
     }

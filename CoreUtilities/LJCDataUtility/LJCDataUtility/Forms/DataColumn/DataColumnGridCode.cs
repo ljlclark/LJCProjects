@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data;
 using System.Linq;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -112,7 +113,7 @@ namespace LJCDataUtility
         };
         ColumnManager.Manager.OrderByNames = orderByNames;
         var items = ColumnManager.Load(keyColumns);
-        if (NetCommon.HasItems(items))
+        if (LJC.HasListItems(items))
         {
           foreach (var item in items)
           {
@@ -130,7 +131,8 @@ namespace LJCDataUtility
     {
       var retValue = ColumnGrid.LJCRowAdd();
       SetStoredValues(retValue, data);
-      retValue.LJCSetValues(ColumnGrid, data);
+      //retValue.LJCSetValues(ColumnGrid, data);
+      retValue.LJCSetValues(data);
       return retValue;
     }
 
@@ -164,7 +166,8 @@ namespace LJCDataUtility
       if (ColumnGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, data);
-        row.LJCSetValues(ColumnGrid, data);
+        //row.LJCSetValues(ColumnGrid, data);
+        row.LJCSetValues(data);
       }
     }
 
@@ -247,7 +250,7 @@ namespace LJCDataUtility
       if (isContinue)
       {
         var id = ParentObject.DataColumnRowID();
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { DataUtilColumn.ColumnID, id }
         };

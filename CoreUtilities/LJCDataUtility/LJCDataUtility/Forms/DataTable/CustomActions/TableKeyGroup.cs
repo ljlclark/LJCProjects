@@ -3,7 +3,7 @@
 // TableKeyGroup.cs
 using LJCDataUtilityDAL;
 using LJCNetCommon;
-using System;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -19,7 +19,7 @@ namespace LJCDataUtility
       TableKeys.Sort();
       UsedKeys = new TableKeys();
       CurrentTableKey = null;
-      if (NetCommon.HasItems(TableKeys))
+      if (LJC.HasListItems(TableKeys))
       {
         CurrentTableKey = TableKeys[0];
         mPrevConstraintName = CurrentTableKey.ConstraintName;
@@ -34,7 +34,7 @@ namespace LJCDataUtility
     {
       string retNames = null;
 
-      if (NetCommon.HasItems(TableKeys))
+      if (LJC.HasListItems(TableKeys))
       {
         // Find next current value.
         foreach (TableKey sourceKey in TableKeys)
@@ -68,7 +68,7 @@ namespace LJCDataUtility
     {
       TableKey retKey = null;
 
-      if (NetCommon.HasItems(UsedKeys))
+      if (LJC.HasListItems(UsedKeys))
       {
         var tableKey = new TableKey
         {

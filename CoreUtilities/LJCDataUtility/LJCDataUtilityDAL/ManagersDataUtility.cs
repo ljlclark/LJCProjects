@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using LJCDBClientLib;
 using LJCNetCommon;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtilityDAL
 {
@@ -97,12 +98,12 @@ namespace LJCDataUtilityDAL
       IDError(tableID, "TableDataColumns(int tableID)", "tableID");
       var columnManager = DataColumnManager;
       var keyColumns = columnManager.ParentKey(tableID, dbID);
-      if (NetCommon.HasItems(orderByNames))
+      if (LJC.HasListItems(orderByNames))
       {
         columnManager.Manager.OrderByNames = orderByNames;
       }
       var items = columnManager.Load(keyColumns);
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         retColumns = items;
       }

@@ -4,6 +4,7 @@
 using LJCDataUtilityDAL;
 using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -132,7 +133,7 @@ namespace LJCDataUtility
       }
       b.Text(value);
 
-      if (NetCommon.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         b.IsFirst = true;
         foreach (DataUtilColumn dataColumn in dataColumns)
@@ -255,7 +256,7 @@ namespace LJCDataUtility
       b.Text("    VALUES(");
 
       // Use the variable references instead of value.
-      if (NetCommon.HasItems(varRefNames))
+      if (LJC.HasListItems(varRefNames))
       {
         b.IsFirst = true;
         foreach (string varRefName in varRefNames)
@@ -264,7 +265,7 @@ namespace LJCDataUtility
         }
       }
 
-      if (NetCommon.HasItems(dataColumns))
+      if (LJC.HasListItems(dataColumns))
       {
         b.IsFirst = true;
         foreach (DataUtilColumn dataColumn in dataColumns)

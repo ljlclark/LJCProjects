@@ -3,7 +3,7 @@
 namespace LJCDataUtilityDAL
 {
   /// <summary>Represents the DataTable data.</summary>
-  public class DataUtilTableSave : DbColumns
+  public class DataUtilTableSave : LJCDataColumns
   {
     #region Constructors
 
@@ -46,7 +46,7 @@ namespace LJCDataUtilityDAL
 
       dbColumn = Add("Name");
       dbColumn.KeyType = "Natural";
-      dbColumn.Unique = true;
+      dbColumn.IsUniqueKey = true;
 
       Add("Description");
 

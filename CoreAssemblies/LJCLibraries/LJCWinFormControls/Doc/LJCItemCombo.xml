@@ -18,6 +18,7 @@
       Adds an Item to the ComboBox.
     </summary>
     <param name="id">The Item ID.</param>
+    <param name="dbID">The database ID.</param>
     <param name="text">The Item text.</param>
     <returns>The added Item.</returns>
   </LJCAddItem>

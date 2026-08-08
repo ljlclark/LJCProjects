@@ -58,14 +58,14 @@ namespace LJCDataSiteDAL
 
     // Deletes the records with the specified key values.
     /// <include path='items/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
     }
 
     // Retrieves a collection of data records.
     /// <include path='items/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DataEntries Load(DbColumns keyColumns = null
+    public DataEntries Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -78,7 +78,7 @@ namespace LJCDataSiteDAL
 
     // Retrieves a record from the database.
     /// <include path='items/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DataEntry Retrieve(DbColumns keyColumns
+    public DataEntry Retrieve(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -91,7 +91,7 @@ namespace LJCDataSiteDAL
 
     // Updates the record.
     /// <include path='items/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public void Update(DataEntry dataObject, DbColumns keyColumns
+    public void Update(DataEntry dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
@@ -143,12 +143,12 @@ namespace LJCDataSiteDAL
 
     // Gets the ID key columns.
     /// <include path='items/IDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
-    public DbColumns IDKey(long id)
+    public LJCDataColumns IDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
       //   , datatypeName = "String", caption = null);
       // Add(columnName, object value, dataTypeName = "String");
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DataEntry.ColumnID, id }
       };
@@ -157,10 +157,10 @@ namespace LJCDataSiteDAL
 
     // Gets the Unique key columns.
     /// <include path='items/UniqueKey/*' file='Doc/DataEntryManager.xml'/>
-    public DbColumns UniqueKey(long dataSiteID, DateTime entryTime)
+    public LJCDataColumns UniqueKey(long dataSiteID, DateTime entryTime)
     {
       // Needs cast for string to select the correct Add overload.
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DataEntry.ColumnDataSiteID, dataSiteID },
         { DataEntry.ColumnEntryTime, entryTime }

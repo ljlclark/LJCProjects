@@ -230,9 +230,9 @@ namespace LJCDataUtility
 
     #region DataModule value methods.
 
-    internal int DataModuleItemID(LJCItem item = null)
+    internal long DataModuleItemID(LJCItem item = null)
     {
-      int retModuleID = 0;
+      long retModuleID = 0;
 
       if (null == item)
       {

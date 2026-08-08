@@ -6,6 +6,7 @@ using LJCDBClientLib;
 using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtilityDAL
 {
@@ -71,12 +72,12 @@ namespace LJCDataUtilityDAL
     // Creates a collection of columns that match the supplied list.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/Columns/*'/>
-    public DbColumns Columns(List<string> propertyNames = null)
+    public LJCDataColumns Columns(List<string> propertyNames = null)
     {
       var retColumns = Manager.DataDefinition;
-      if (NetCommon.HasItems(propertyNames))
+      if (LJC.HasListItems(propertyNames))
       {
-        retColumns = Manager.DataDefinition.LJCGetColumns(propertyNames);
+        retColumns = Manager.DataDefinition.LJCColumns(propertyNames);
       }
       return retColumns;
     }
@@ -113,7 +114,7 @@ namespace LJCDataUtilityDAL
     // Deletes the records with the specified key values.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/Delete/*'/>
-    public void Delete(DbColumns keyColumns, DbFilters filters = null)
+    public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
       //EntryManager.WriteDataEntry(Manager.SQLStatement);
@@ -122,7 +123,7 @@ namespace LJCDataUtilityDAL
     // Retrieves a collection of data records.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/Load/*'/>
-    public DataTables Load(DbColumns keyColumns = null
+    public DataTables Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -140,7 +141,7 @@ namespace LJCDataUtilityDAL
     // Retrieves a record from the database.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/Retrieve/*'/>
-    public DataUtilTable Retrieve(DbColumns keyColumns
+    public DataUtilTable Retrieve(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
     {
@@ -158,7 +159,7 @@ namespace LJCDataUtilityDAL
     // Updates the record.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
     ///  path='members/Update/*'/>
-    public void Update(DataUtilTable dataObject, DbColumns keyColumns
+    public void Update(DataUtilTable dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
       Manager.Update(dataObject, keyColumns, propertyNames, filters);
@@ -206,10 +207,10 @@ namespace LJCDataUtilityDAL
     // Gets the ID key columns.
     /// <include file='Doc/DataTableManager.xml'
     ///  path='members/IDKey/*'/>
-    public DbColumns IDKey(long id, short dbID)
+    public LJCDataColumns IDKey(long id, short dbID)
     {
       // Add(columnName, object value, dataTypeName = "String");
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DataUtilTable.ColumnID, id },
         { DataUtilTable.ColumnDbID, dbID},
@@ -220,10 +221,10 @@ namespace LJCDataUtilityDAL
     // Gets the Parent ID key columns.
     /// <include file='Doc/DataTableManager.xml'
     ///  path='members/ParentKey/*'/>
-    public DbColumns ParentKey(long parentID, short parentDbID)
+    public LJCDataColumns ParentKey(long parentID, short parentDbID)
     {
       // Add(columnName, object value, dataTypeName = "String");
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DataUtilTable.ColumnDataModuleID, parentID },
         { DataUtilTable.ColumnDataModuleDbID, parentDbID },
@@ -234,10 +235,10 @@ namespace LJCDataUtilityDAL
     // Gets the Unique ID key columns.
     /// <include file='Doc/DataTableManager.xml'
     ///  path='members/UniqueKey/*'/>
-    public DbColumns UniqueKey(long parentID, short parentDbID, string name)
+    public LJCDataColumns UniqueKey(long parentID, short parentDbID, string name)
     {
       // Needs cast for string to select the correct Add overload.
-      var retValue = new DbColumns()
+      var retValue = new LJCDataColumns()
       {
         { DataUtilTable.ColumnDataModuleID, parentID },
         { DataUtilTable.ColumnDataModuleDbID, parentDbID },
@@ -278,7 +279,7 @@ namespace LJCDataUtilityDAL
         {
           { DataUtilTable.ColumnDataModuleID, DataModule.ColumnID }
         },
-        Columns = new DbColumns()
+        Columns = new LJCDataColumns()
         {
           // columnName, propertyName = null, renameAs = null
           //   , dataTypeName = "String", caption = null

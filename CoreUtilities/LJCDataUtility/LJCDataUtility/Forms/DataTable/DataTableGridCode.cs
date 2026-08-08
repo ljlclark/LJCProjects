@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -99,9 +100,13 @@ namespace LJCDataUtility
       ParentObject.Cursor = Cursors.WaitCursor;
       TableGrid.LJCRowsClear();
 
-      int parentID = ModuleCombo.LJCSelectedItemID();
-      var dataUtilTable = ModuleCombo.SelectedItem as DataUtilTable;
-      var parentDbID = (short)dataUtilTable.DataModuleSiteID;
+      // *** Testing ***
+      //var parentID = ModuleCombo.LJCSelectedItemID();
+      //var dataUtilTable = ModuleCombo.SelectedItem as DataUtilTable;
+      var ljcItem = ModuleCombo.SelectedItem as LJCItem;
+      //var parentDbID = (short)dataUtilTable.DataModuleSiteID;
+      var parentID = ljcItem.ID;
+      var parentDbID = ljcItem.DbID;
       if (parentID > 0
         && parentDbID > 0)
       {
@@ -112,7 +117,7 @@ namespace LJCDataUtility
         };
         TableManager.Manager.OrderByNames = orderBy;
         var items = TableManager.Load(keyColumns);
-        if (NetCommon.HasItems(items))
+        if (LJC.HasListItems(items))
         {
           foreach (var item in items)
           {
@@ -141,7 +146,8 @@ namespace LJCDataUtility
     {
       var retValue = TableGrid.LJCRowAdd();
       SetStoredValues(retValue, data);
-      retValue.LJCSetValues(TableGrid, data);
+      //retValue.LJCSetValues(TableGrid, data);
+      retValue.LJCSetValues(data);
       return retValue;
     }
 
@@ -175,7 +181,8 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, data);
-        row.LJCSetValues(TableGrid, data);
+        //row.LJCSetValues(TableGrid, data);
+        row.LJCSetValues(data);
       }
     }
 
@@ -221,7 +228,7 @@ namespace LJCDataUtility
         // Data from items.
         var id = row.LJCGetInt64(DataUtilTable.ColumnID);
 
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { DataUtilTable.ColumnID, id }
         };
@@ -251,7 +258,12 @@ namespace LJCDataUtility
       {
         // Data from items.
         long id = row.LJCGetInt64(DataUtilTable.ColumnID);
-        int parentID = ModuleCombo.LJCSelectedItemID();
+        // *** Begin *** Change
+        //int parentID = ModuleCombo.LJCSelectedItemID();
+        var ljcItem = ModuleCombo.SelectedItem as LJCItem;
+        var parentID = ljcItem.ID;
+        var parentDbID = ljcItem.DbID;
+        // *** End ***
         string parentName = ModuleCombo.Text;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
@@ -276,7 +288,8 @@ namespace LJCDataUtility
       if (ModuleCombo.SelectedItem != null)
       {
         int sequence = TableGrid.Rows.Count + 1;
-        int parentID = ModuleCombo.LJCSelectedItemID();
+        // *** Next Statement *** Change
+        long parentID = ModuleCombo.LJCSelectedItemID();
         var parentSiteID = ParentObject.DataModuleItemDbID();
         string parentName = ModuleCombo.Text;
 

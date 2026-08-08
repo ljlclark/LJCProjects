@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using static LJCDataUtility.DataUtilityList;
+using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataUtility
 {
@@ -60,7 +61,7 @@ namespace LJCDataUtility
       };
       ModuleManager.Manager.OrderByNames = orderByNames;
       var dataItems = ModuleManager.Load();
-      if (NetCommon.HasItems(dataItems))
+      if (LJC.HasListItems(dataItems))
       {
         foreach (var dataItem in dataItems)
         {
@@ -81,7 +82,7 @@ namespace LJCDataUtility
     private LJCItem RowAdd(DataModule data)
     {
       // *** Next Statement *** Demotion needs correcting.
-      var retValue = ModuleCombo.LJCAddItem((int)data.ID, data.Name);
+      var retValue = ModuleCombo.LJCAddItem(data.ID, 1, data.Name);
       return retValue;
     }
 
@@ -149,7 +150,7 @@ namespace LJCDataUtility
       if (isContinue)
       {
         var id = ParentObject.DataModuleItemID();
-        var keyColumns = new DbColumns()
+        var keyColumns = new LJCDataColumns()
         {
           { DataModule.ColumnID, id }
         };
@@ -176,11 +177,11 @@ namespace LJCDataUtility
     {
       if (ModuleCombo.SelectedItem is LJCItem)
       {
-        int id = ParentObject.DataModuleItemID();
+        var id = ParentObject.DataModuleItemID();
         //var location = FormPoint.DialogScreenPoint(ModuleGrid);
         var detail = new DataModuleDetail()
         {
-          LJCID = id,
+          LJCID = (short)id,
           //LJCLocation = location,
           LJCManagers = Managers,
         };
@@ -208,7 +209,7 @@ namespace LJCDataUtility
     internal void Refresh()
     {
       ParentObject.Cursor = Cursors.WaitCursor;
-      int id = 0;
+      long id = 0;
       if (ModuleCombo.SelectedItem is LJCItem)
       {
         // Save the original row.
@@ -219,7 +220,7 @@ namespace LJCDataUtility
       // Select the original row.
       if (id > 0)
       {
-        RowSelect(id);
+        RowSelect((int)id);
       }
       ParentObject.Cursor = Cursors.Default;
     }
@@ -246,7 +247,7 @@ namespace LJCDataUtility
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           var item = RowAdd(record);
-          ModuleCombo.LJCSetByItemID(item.ID);
+          ModuleCombo.LJCSetByItemID((int)item.ID);
           SetControlState();
           ParentObject.TimedChange(Change.Module);
         }
