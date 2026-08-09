@@ -61,8 +61,7 @@ namespace LJCDataUtility
       if (isContinue)
       {
         var tableManager = Managers.DataTableManager;
-        var moduleID = ParentObject.DataModuleItemID();
-        var moduleDbID = ParentObject.DataModuleItemDbID();
+        var moduleID = ParentObject.DataModuleItemID(out short moduleDbID);
         dataTable = tableManager.RetrieveWithUnique(moduleID, moduleDbID
           , TableName);
         if (null == dataTable)

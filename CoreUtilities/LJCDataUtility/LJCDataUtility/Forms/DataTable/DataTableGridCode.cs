@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataTableGridCode.cs
 using static LJCDataUtility.DataUtilityList;
@@ -100,11 +100,7 @@ namespace LJCDataUtility
       ParentObject.Cursor = Cursors.WaitCursor;
       TableGrid.LJCRowsClear();
 
-      // *** Testing ***
-      //var parentID = ModuleCombo.LJCSelectedItemID();
-      //var dataUtilTable = ModuleCombo.SelectedItem as DataUtilTable;
       var ljcItem = ModuleCombo.SelectedItem as LJCItem;
-      //var parentDbID = (short)dataUtilTable.DataModuleSiteID;
       var parentID = ljcItem.ID;
       var parentDbID = ljcItem.DbID;
       if (parentID > 0
@@ -146,7 +142,6 @@ namespace LJCDataUtility
     {
       var retValue = TableGrid.LJCRowAdd();
       SetStoredValues(retValue, data);
-      //retValue.LJCSetValues(TableGrid, data);
       retValue.LJCSetValues(data);
       return retValue;
     }
@@ -181,7 +176,6 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, data);
-        //row.LJCSetValues(TableGrid, data);
         row.LJCSetValues(data);
       }
     }
@@ -200,7 +194,7 @@ namespace LJCDataUtility
     private void SetStoredValues(LJCGridRow row, DataUtilTable dataRecord)
     {
       row.LJCSetInt64(DataUtilTable.ColumnID, dataRecord.ID);
-      row.LJCSetInt64(DataUtilTable.ColumnDbID, dataRecord.DataSiteID);
+      row.LJCSetInt32(DataUtilTable.ColumnDbID, dataRecord.DataSiteID);
       row.LJCSetString(DataUtilTable.ColumnName, dataRecord.Name);
     }
     #endregion
@@ -258,12 +252,9 @@ namespace LJCDataUtility
       {
         // Data from items.
         long id = row.LJCGetInt64(DataUtilTable.ColumnID);
-        // *** Begin *** Change
-        //int parentID = ModuleCombo.LJCSelectedItemID();
         var ljcItem = ModuleCombo.SelectedItem as LJCItem;
         var parentID = ljcItem.ID;
         var parentDbID = ljcItem.DbID;
-        // *** End ***
         string parentName = ModuleCombo.Text;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
@@ -288,9 +279,9 @@ namespace LJCDataUtility
       if (ModuleCombo.SelectedItem != null)
       {
         int sequence = TableGrid.Rows.Count + 1;
-        // *** Next Statement *** Change
-        long parentID = ModuleCombo.LJCSelectedItemID();
-        var parentSiteID = ParentObject.DataModuleItemDbID();
+        var moduleItem = ModuleCombo.SelectedItem as LJCItem;
+        var parentID = moduleItem.ID;
+        var parentDbID = moduleItem.DbID;
         string parentName = ModuleCombo.Text;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
@@ -299,7 +290,7 @@ namespace LJCDataUtility
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
-          LJCParentSiteID = parentSiteID,
+          LJCParentSiteID = parentDbID,
           LJCParentName = parentName,
           LJCSequence = sequence
         };

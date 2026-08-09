@@ -288,12 +288,10 @@ namespace LJCDataUtility
             var typeValue = TargetColumnType(dataKey);
             parmFindName = myProc.SQLVarName(dataKey.TargetTableName);
             parmFindName += dataKey.TargetColumnName;
-            // *** Begin *** Add
             if (!myProc.IsFirst)
             {
               myProc.Line(",");
             }
-            // *** End   *** Add
             myProc.Text($"  `{parmFindName}` {typeValue}");
             isFirst = false;
           }

@@ -180,7 +180,8 @@ namespace LJCDataUtility
       if (id > 1)
       {
         var dataKey = Managers.GetDataKey(id, dbID);
-        if ((int)KeyType.Foreign == dataKey.KeyType)
+        if (dataKey != null
+          && (int)KeyType.Foreign == dataKey.KeyType)
         {
           ParentObject.KeyForeignKeyProc.Enabled = true;
           ParentObject.KeyForeignKeyDropProc.Enabled = true;

@@ -207,8 +207,11 @@ namespace LJCDataUtilityDAL
       var retValue = new LJCDataColumns()
       {
         { DataUtilColumn.ColumnDataTableID, parentID },
-        { DataUtilColumn.ColumnDataTableDbID, parentDbID },
       };
+      if (parentDbID > 0)
+      {
+        retValue.Add(DataUtilColumn.ColumnDataTableDbID, parentDbID);
+      }
       return retValue;
     }
 

@@ -54,12 +54,13 @@ namespace LJCWinFormControls
     // Sets the combo SelectedIndex to the item with the specified ID value.
     /// <include file='Doc/LJCItemCombo.xml'
     ///  path='items/LJCSetByItemID/*'/>
-    public void LJCSetByItemID(int id)
+    public void LJCSetByItemID(int id, short dbID)
     {
       for (int index = 0; index < Items.Count; index++)
       {
         LJCItem item = Items[index] as LJCItem;
-        if (id == item.ID)
+        if (id == item.ID
+          && dbID == item.DbID)
         {
           SelectedIndex = index;
           break;

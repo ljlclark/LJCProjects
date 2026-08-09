@@ -51,7 +51,7 @@ namespace LJCDataSiteDAL
     /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataEntries(DataEntries items)
     {
-      if (NetCommon.HasItems(items))
+      if (LJC.HasListItems(items))
       {
         foreach (var item in items)
         {

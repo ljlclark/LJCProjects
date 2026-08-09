@@ -207,7 +207,7 @@ namespace LJCDataUtility
       hb.AddIndent();
       hb.Text("background-color: rgb(214, 234, 248);");
 
-      // *** Move indent left ***
+      // Move indent left.
       hb.AddIndent(-1);
       textState.IndentCount += -1;
 

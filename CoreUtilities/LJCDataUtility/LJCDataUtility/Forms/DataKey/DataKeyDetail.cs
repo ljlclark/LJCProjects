@@ -89,7 +89,7 @@ namespace LJCDataUtility
         // In control order.
         ParentNameText.Text = LJCParentName;
         NameText.Text = data.Name;
-        KeyTypeCombo.LJCSetByItemID(data.KeyType);
+        KeyTypeCombo.LJCSetByItemID(data.KeyType, 0);
         SourceColumnText.Text = data.SourceColumnName;
         TargetTableText.Text = data.TargetTableName;
         TargetColumnText.Text = data.TargetColumnName;

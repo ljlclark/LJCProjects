@@ -283,8 +283,11 @@ namespace LJCDataUtilityDAL
       var retValue = new LJCDataColumns()
       {
         { DataKey.ColumnID, id },
-        { DataKey.ColumnDbID, dbID },
       };
+      if (dbID > 0)
+      {
+        retValue.Add(DataKey.ColumnID, dbID);
+      }
       return retValue;
     }
 

@@ -153,7 +153,6 @@ namespace LJCDataUtility
         // Add beginning value.
         InsertBuilder.Text($"{indent}(");
         SelectBuilder.Text(indent);
-        // *** Next Statement *** Add 3/16/25
         SelectBuilder.IsFirst = true;
 
         // Remove column.

@@ -137,7 +137,7 @@ namespace LJCDataUtility
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelect(long id)
+    private bool RowSelect(long id, short dbID)
     {
       bool retValue = false;
 
@@ -146,8 +146,9 @@ namespace LJCDataUtility
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in ColumnGrid.Rows)
         {
-          var rowID = ParentObject.DataColumnRowID(row);
-          if (rowID == id)
+          var rowID = ParentObject.DataColumnRowID(out short rowDbID, row);
+          if (rowID == id
+            && rowDbID == dbID)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             ColumnGrid.LJCSetCurrentRow(row, true);
@@ -249,10 +250,11 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = ParentObject.DataColumnRowID();
+        var id = ParentObject.DataColumnRowID(out short dbID);
         var keyColumns = new LJCDataColumns()
         {
-          { DataUtilColumn.ColumnID, id }
+          { DataUtilColumn.ColumnID, id },
+          { DataUtilColumn.ColumnDbID, dbID },
         };
         ColumnManager.Delete(keyColumns);
         if (0 == ColumnManager.AffectedCount)
@@ -278,13 +280,14 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow
         && ColumnGrid.CurrentRow is LJCGridRow)
       {
-        var id = ParentObject.DataColumnRowID();
+        var id = ParentObject.DataColumnRowID(out short dbID);
         var parentID = ParentObject.DataTableRowID(out short parentDbID);
         string parentName = ParentObject.DataTableRowName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail()
         {
           LJCID = id,
+          LJCDbID = dbID,
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,
@@ -328,17 +331,18 @@ namespace LJCDataUtility
     {
       ParentObject.Cursor = Cursors.WaitCursor;
       long id = 0;
+      short dbID = 0;
       if (ColumnGrid.CurrentRow is LJCGridRow)
       {
         // Save the original row.
-        id = ParentObject.DataColumnRowID();
+        id = ParentObject.DataColumnRowID(out dbID);
       }
       DataRetrieve();
 
       // Select the original row.
       if (id > 0)
       {
-        RowSelect(id);
+        RowSelect(id, dbID);
       }
       ParentObject.Cursor = Cursors.Default;
     }

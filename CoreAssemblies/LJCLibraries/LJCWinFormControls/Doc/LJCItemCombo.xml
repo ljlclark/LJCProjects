@@ -27,6 +27,7 @@
       Sets the combo SelectedIndex to the item with the specified ID value.
     </summary>
     <param name="id">The Item ID.</param>
+    <param name="dbID">The database ID.</param>
   </LJCSetByItemID>
   <LJCSelectedItemID>
     <summary>

@@ -81,26 +81,27 @@ namespace LJCDataUtility
     // Adds a grid row and updates it with the record values.
     private LJCItem RowAdd(DataModule data)
     {
-      // *** Next Statement *** Demotion needs correcting.
       var retValue = ModuleCombo.LJCAddItem(data.ID, 1, data.Name);
       return retValue;
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelect(int id)
+    private bool RowSelect(int id, short dbID)
     {
       bool retValue = false;
 
-      if (id > 0)
+      if (id > 0
+        && dbID > 0)
       {
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCItem item in ModuleCombo.Items)
         {
-          var rowID = ParentObject.DataModuleItemID(item);
-          if (rowID == id)
+          var rowID = ParentObject.DataModuleItemID(out short rowDbID, item);
+          if (rowID == id
+            && rowDbID == dbID)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            ModuleCombo.LJCSetByItemID(id);
+            ModuleCombo.LJCSetByItemID(id, dbID);
             retValue = true;
             break;
           }
@@ -149,10 +150,11 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = ParentObject.DataModuleItemID();
+        var id = ParentObject.DataModuleItemID(out short dbID);
         var keyColumns = new LJCDataColumns()
         {
-          { DataModule.ColumnID, id }
+          { DataModule.ColumnID, id },
+          { DataModule.ColumnDbID, dbID },
         };
         ModuleManager.Delete(keyColumns);
         if (0 == ModuleManager.AffectedCount)
@@ -177,11 +179,12 @@ namespace LJCDataUtility
     {
       if (ModuleCombo.SelectedItem is LJCItem)
       {
-        var id = ParentObject.DataModuleItemID();
+        var id = ParentObject.DataModuleItemID(out short dbID);
         //var location = FormPoint.DialogScreenPoint(ModuleGrid);
         var detail = new DataModuleDetail()
         {
           LJCID = (short)id,
+          LJCDbID = dbID,
           //LJCLocation = location,
           LJCManagers = Managers,
         };
@@ -210,17 +213,18 @@ namespace LJCDataUtility
     {
       ParentObject.Cursor = Cursors.WaitCursor;
       long id = 0;
+      short dbID = 0;
       if (ModuleCombo.SelectedItem is LJCItem)
       {
         // Save the original row.
-        id = ParentObject.DataModuleItemID();
+        id = ParentObject.DataModuleItemID(out dbID);
       }
       DataRetrieve();
 
       // Select the original row.
       if (id > 0)
       {
-        RowSelect((int)id);
+        RowSelect((int)id, dbID);
       }
       ParentObject.Cursor = Cursors.Default;
     }
@@ -247,7 +251,7 @@ namespace LJCDataUtility
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
           var item = RowAdd(record);
-          ModuleCombo.LJCSetByItemID((int)item.ID);
+          ModuleCombo.LJCSetByItemID((int)item.ID, item.DbID);
           SetControlState();
           ParentObject.TimedChange(Change.Module);
         }
