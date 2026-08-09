@@ -23,8 +23,8 @@ namespace LJCDataUtilityDAL
     ///  path='members/Constructor/*'/>
     public DataModule()
     {
-      _ID = 0;
-      _DataDbID = 0;
+      _Id = 0;
+      _DbId = 0;
       _Name = "";
       _Description = "";
 
@@ -46,8 +46,8 @@ namespace LJCDataUtilityDAL
     ///  path='members/CopyConstructor/*'/>
     public DataModule(DataModule item)
     {
-      _ID = item.ID;
-      _DataDbID = item.DataSiteID;
+      _Id = item.Id;
+      _DbId = item.DbId;
       _Name = item.Name;
       _Description = item.Description;
 
@@ -84,13 +84,13 @@ namespace LJCDataUtilityDAL
           break;
         }
 
-        retValue = ID.CompareTo(other.ID);
+        retValue = Id.CompareTo(other.Id);
         if (retValue != NetString.CompareEqual)
         {
           break;
         }
 
-        retValue = DataSiteID.CompareTo(other.DataSiteID);
+        retValue = DbId.CompareTo(other.DbId);
         break;
       }
       return retValue;
@@ -101,7 +101,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/SetOriginalValues/*'/>
     public void LJCSetOriginalValues()
     {
-      _OriginalValues.ID = _ID;
+      _OriginalValues.ID = _Id;
       _OriginalValues.Name = _Name;
       _OriginalValues.Description = _Description;
 
@@ -113,7 +113,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/ToString/*'/>
     public override string ToString()
     {
-      var retValue = $"{_Name}:{_ID}";
+      var retValue = $"{_Name}:{_Id}";
       return retValue;
     }
     #endregion
@@ -127,38 +127,38 @@ namespace LJCDataUtilityDAL
     /// <include file='Doc/DataModule.xml'
     ///  path='members/ID/*'/>
     [Required]
-    [Column("ID", TypeName = "bigint")]
-    public long ID
+    [Column("Id", TypeName = "bigint")]
+    public long Id
     {
-      get => _ID;
+      get => _Id;
       set
       {
-        if (_ID != value)
+        if (_Id != value)
         {
-          _ID = ChangedNames.Add(ColumnID, _OriginalValues.ID, value);
+          _Id = ChangedNames.Add(ColumnId, _OriginalValues.ID, value);
         }
       }
     }
-    private long _ID;
+    private long _Id;
 
     // Gets or sets the DataModuleID value.
     /// <include file='Doc/DataModule.xml'
     ///  path='members/DataSiteID/*'/>
     [Required]
-    [Column("DataSiteID", TypeName = "bigint")]
-    public long DataSiteID
+    [Column("DbId", TypeName = "smallint")]
+    public long DbId
     {
-      get => _DataDbID;
+      get => _DbId;
       set
       {
-        if (_DataDbID != value)
+        if (_DbId != value)
         {
-          _DataDbID = ChangedNames.Add(ColumnDbID
+          _DbId = ChangedNames.Add(ColumnDbId
             , _OriginalValues.DataDbID, value);
         }
       }
     }
-    private long _DataDbID;
+    private long _DbId;
 
     // Gets or sets the Name value.
     /// <include file='Doc/DataModule.xml'
@@ -215,10 +215,10 @@ namespace LJCDataUtilityDAL
     public static string TableName = "DataModule";
 
     /// <summary>The ID column name.</summary>
-    public static string ColumnID = "ID";
+    public static string ColumnId = "Id";
 
     /// <summary>The DataSiteID column name.</summary>
-    public static string ColumnDbID = "DataSiteID";
+    public static string ColumnDbId = "DbId";
 
     /// <summary>The Name column name.</summary>
     public static string ColumnName = "Name";

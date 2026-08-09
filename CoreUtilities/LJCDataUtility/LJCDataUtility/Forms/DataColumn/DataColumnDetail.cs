@@ -26,7 +26,7 @@ namespace LJCDataUtility
       InitializeComponent();
 
       // Initialize property values.
-      LJCID = 0;
+      LJCId = 0;
       LJCIsUpdate = false;
       LJCParentID = 0;
       LJCParentName = null;
@@ -63,12 +63,12 @@ namespace LJCDataUtility
     {
       Cursor = Cursors.WaitCursor;
       Text = "DataUtilityColumn Detail";
-      if (LJCID > 0)
+      if (LJCId > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
         var manager = LJCManagers.DataColumnManager;
-        mOriginalRecord = manager.RetrieveWithID(LJCID, LJCDbID);
+        mOriginalRecord = manager.RetrieveWithID(LJCId, LJCDbId);
         GetValues(mOriginalRecord);
       }
       else
@@ -118,9 +118,9 @@ namespace LJCDataUtility
         AllowNullCheck.Checked = data.AllowNull;
 
         // Reference key values.
-        LJCDbID = data.DataSiteID;
-        LJCParentID = data.DataTableID;
-        LJCParentDbID = data.DataTableSiteID;
+        LJCDbId = data.DbId;
+        LJCParentID = data.DataTableId;
+        LJCParentDbID = data.DataTableDbId;
       }
     }
 
@@ -144,10 +144,10 @@ namespace LJCDataUtility
       retData.AllowNull = AllowNullCheck.Checked;
 
       // Get Reference key values.
-      retData.ID = LJCID;
-      retData.DataSiteID = LJCDbID;
-      retData.DataTableID = LJCParentID;
-      retData.DataTableSiteID = LJCParentDbID;
+      retData.Id = LJCId;
+      retData.DbId = LJCDbId;
+      retData.DataTableId = LJCParentID;
+      retData.DataTableDbId = LJCParentDbID;
       return retData;
     }
 
@@ -190,22 +190,22 @@ namespace LJCDataUtility
       {
         if (LJCIsUpdate)
         {
-          var keyColumns = manager.IDKey(LJCID, LJCDbID);
-          LJCRecord.ID = 0;
+          var keyColumns = manager.IDKey(LJCId, LJCDbId);
+          LJCRecord.Id = 0;
           manager.Update(LJCRecord, keyColumns);
           ResetValues(LJCRecord);
-          LJCRecord.ID = LJCID;
+          LJCRecord.Id = LJCId;
           retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
         }
         else
         {
-          LJCRecord.ID = 0;
-          LJCRecord.DataSiteID = (short)mSettings.SiteID;
+          LJCRecord.Id = 0;
+          LJCRecord.DbId = (short)mSettings.SiteID;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
           if (addedRecord != null)
           {
-            LJCRecord.ID = addedRecord.ID;
+            LJCRecord.Id = addedRecord.Id;
           }
           retValue = !FormCommon.AddError(this, manager.AffectedCount);
         }
@@ -498,10 +498,10 @@ namespace LJCDataUtility
     #region Properties
 
     // Gets or sets the primary ID value.
-    internal long LJCID { get; set; }
+    internal long LJCId { get; set; }
 
     // Gets or sets the primary ID value.
-    internal short LJCDbID { get; set; }
+    internal short LJCDbId { get; set; }
 
     // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }

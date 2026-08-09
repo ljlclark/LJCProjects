@@ -189,9 +189,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataColumn = new DataUtilColumn()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         Description = "The test column.",
         Sequence = 5,
@@ -296,9 +296,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataUtilTable = new DataUtilColumn()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -359,9 +359,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataColumn = new DataUtilColumn()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -419,9 +419,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataColumn = new DataUtilColumn()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         Description = "The test column.",
         Sequence = 5,
@@ -449,8 +449,8 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Update the test record.
-      var id = dataColumn.ID;
-      dbID = dataColumn.DataSiteID;
+      var id = dataColumn.Id;
+      dbID = dataColumn.DbId;
       var idKey = dataColumnManager.IDKey(id, dbID);
       dataColumn.Description += " Updated";
       var propertyNames = new List<string>()
@@ -498,9 +498,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataColumn = new DataUtilColumn()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -529,7 +529,7 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Retrieve with ID.
-      var id = dataColumn.ID;
+      var id = dataColumn.Id;
 
       // Test Method
       dataColumn = dataColumnManager.RetrieveWithID(id, dbID);
@@ -567,9 +567,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataColumn = new DataUtilColumn()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -628,7 +628,7 @@ namespace TestDataUtilityDAL
       var idKey = dataColumnManager.IDKey(id, dbID);
 
       //var key = idKey.LJCSearchPropertyName(DataUtilColumn.ColumnID);
-      var key = idKey[DataUtilColumn.ColumnID];
+      var key = idKey[DataUtilColumn.ColumnId];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";
@@ -659,7 +659,7 @@ namespace TestDataUtilityDAL
       var idKey = dataColumnManager.ParentKey(dataTableID, dataTableDbID);
 
       //var key = idKey.LJCSearchPropertyName(DataUtilColumn.ColumnDataTableID);
-      var key = idKey[DataUtilColumn.ColumnDataTableID];
+      var key = idKey[DataUtilColumn.ColumnDataTableId];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";

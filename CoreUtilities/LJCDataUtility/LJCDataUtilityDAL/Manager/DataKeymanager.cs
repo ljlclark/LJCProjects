@@ -38,7 +38,7 @@ namespace LJCDataUtilityDAL
 
       // Map table names with property names or captions
       // that differ from the column names.
-      Manager.MapNames(DataKey.ColumnID, caption: "DataKey ID");
+      Manager.MapNames(DataKey.ColumnId, caption: "DataKey ID");
       //Manager.MapNames(DataKey.ColumnSourceColumnName
       //  , DataKey.PropertySourceColumnNames, caption: "Columns");
       //Manager.MapNames(DataKey.ColumnTargetColumnName
@@ -50,13 +50,13 @@ namespace LJCDataUtilityDAL
       // Create the list of database assigned columns.
       Manager.SetDbAssignedColumns(new string[]
       {
-        DataKey.ColumnID
+        DataKey.ColumnId
       });
 
       // Create the list of lookup column names.
       Manager.SetLookupColumns(new string[]
       {
-        DataKey.ColumnDataTableID,
+        DataKey.ColumnDataTableId,
         DataKey.ColumnName
       });
 
@@ -282,11 +282,11 @@ namespace LJCDataUtilityDAL
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new LJCDataColumns()
       {
-        { DataKey.ColumnID, id },
+        { DataKey.ColumnId, id },
       };
       if (dbID > 0)
       {
-        retValue.Add(DataKey.ColumnID, dbID);
+        retValue.Add(DataKey.ColumnId, dbID);
       }
       return retValue;
     }
@@ -299,8 +299,8 @@ namespace LJCDataUtilityDAL
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new LJCDataColumns()
       {
-        { DataKey.ColumnDataTableID, parentID },
-        { DataKey.ColumnDataTableDbID, parentDbID },
+        { DataKey.ColumnDataTableId, parentID },
+        { DataKey.ColumnDataTableDbId, parentDbID },
       };
       return retValue;
     }
@@ -313,8 +313,8 @@ namespace LJCDataUtilityDAL
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new LJCDataColumns()
       {
-        { DataKey.ColumnDataTableID, parentID },
-        { DataKey.ColumnDataTableDbID, parentDbID },
+        { DataKey.ColumnDataTableId, parentID },
+        { DataKey.ColumnDataTableDbId, parentDbID },
         { DataKey.ColumnKeyType, keyType },
       };
       return retValue;
@@ -328,8 +328,8 @@ namespace LJCDataUtilityDAL
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new LJCDataColumns()
       {
-        { DataKey.ColumnDataTableID, parentID },
-        { DataKey.ColumnDataTableDbID, parentDbID },
+        { DataKey.ColumnDataTableId, parentID },
+        { DataKey.ColumnDataTableDbId, parentDbID },
         { DataKey.ColumnKeyType, keyType },
       };
       return retValue;
@@ -344,8 +344,8 @@ namespace LJCDataUtilityDAL
       // Needs cast for string to select the correct Add overload.
       var retValue = new LJCDataColumns()
       {
-        { DataKey.ColumnDataTableID, parentID },
-        { DataKey.ColumnDataTableDbID, parentDbID },
+        { DataKey.ColumnDataTableId, parentID },
+        { DataKey.ColumnDataTableDbId, parentDbID },
         { DataKey.ColumnName, (object)name },
       };
       return retValue;
@@ -383,7 +383,7 @@ namespace LJCDataUtilityDAL
         JoinType = "left",
         JoinOns = new DbJoinOns()
         {
-          { DataKey.ColumnDataTableID, DataUtilTable.ColumnID }
+          { DataKey.ColumnDataTableId, DataUtilTable.ColumnId }
         },
         Columns = new LJCDataColumns()
         {

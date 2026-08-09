@@ -956,7 +956,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var idKey = dataKeyManager.IDKey(id, dbID);
 
-      var key = idKey[DataKey.ColumnID];
+      var key = idKey[DataKey.ColumnId];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";
@@ -985,7 +985,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var idKey = dataKeyManager.ParentKey(dataTableID, dataTableDbID);
 
-      var key = idKey[DataKey.ColumnDataTableID];
+      var key = idKey[DataKey.ColumnDataTableId];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";
@@ -1016,7 +1016,7 @@ namespace TestDataUtilityDAL
       var idKey = dataKeyManager.ParentTypeKey(dataTableID, dataTableDbID
         , keyType);
 
-      var key = idKey[DataKey.ColumnDataTableID];
+      var key = idKey[DataKey.ColumnDataTableId];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";

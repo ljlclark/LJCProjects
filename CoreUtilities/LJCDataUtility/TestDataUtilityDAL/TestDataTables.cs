@@ -55,10 +55,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -69,10 +69,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataModuleID = 4,
-        DataModuleSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataModuleId = 4,
+        DataModuleDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -98,10 +98,10 @@ namespace TestDataUtilityDAL
       var dataTables = new List<DataUtilTable>();
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -112,10 +112,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataModuleID = 4,
-        DataModuleSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataModuleId = 4,
+        DataModuleDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -154,10 +154,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -170,13 +170,13 @@ namespace TestDataUtilityDAL
       var newDataTables = dataTables.Clone();
 
       var newDataTable = newDataTables[0];
-      var result = newDataTable.ID.ToString();
-      result += $", {newDataTable.DataSiteID}";
+      var result = newDataTable.Id.ToString();
+      result += $", {newDataTable.DbId}";
       var compare = "1, 2";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      result = $"{newDataTable.DataModuleID}";
-      result += $", {newDataTable.DataModuleSiteID}";
+      result = $"{newDataTable.DataModuleId}";
+      result += $", {newDataTable.DataModuleDbId}";
       compare = "3, 4";
       TestCommon.Write($"{methodName}2", result, compare);
 
@@ -206,10 +206,10 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -231,10 +231,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -245,10 +245,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataModuleID = 4,
-        DataModuleSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataModuleId = 4,
+        DataModuleDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -295,10 +295,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -327,10 +327,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -359,10 +359,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -373,10 +373,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataModuleID = 4,
-        DataModuleSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataModuleId = 4,
+        DataModuleDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -405,10 +405,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataModuleID = 4,
-        DataModuleSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataModuleId = 4,
+        DataModuleDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -419,10 +419,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -435,7 +435,7 @@ namespace TestDataUtilityDAL
       dataTables.LJCSortID();
 
       dataTable = dataTables[0];
-      var result = dataTable.ID.ToString();
+      var result = dataTable.Id.ToString();
       var compare = "1";
       TestCommon.Write($"{methodName}", result, compare);
     }
@@ -448,10 +448,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -462,10 +462,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 2,
+        DbId = 3,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -495,10 +495,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataModuleID = 3,
-        DataModuleSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataModuleId = 3,
+        DataModuleDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -509,10 +509,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataModuleID = 4,
-        DataModuleSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataModuleId = 4,
+        DataModuleDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,

@@ -56,8 +56,8 @@ namespace TestDataUtilityDAL
       var dataModules = new DataModules();
       var dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "Name",
         Description = "Description",
       };
@@ -65,8 +65,8 @@ namespace TestDataUtilityDAL
 
       dataModule = new DataModule
       {
-        ID = 2,
-        DataSiteID = 3,
+        Id = 2,
+        DbId = 3,
         Name = "First",
         Description = "Description",
       };
@@ -89,8 +89,8 @@ namespace TestDataUtilityDAL
       var dataModules = new List<DataModule>();
       var dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "Name",
         Description = "Description",
       };
@@ -98,8 +98,8 @@ namespace TestDataUtilityDAL
 
       dataModule = new DataModule
       {
-        ID = 2,
-        DataSiteID = 3,
+        Id = 2,
+        DbId = 3,
         Name = "First",
         Description = "Description",
       };
@@ -134,8 +134,8 @@ namespace TestDataUtilityDAL
 
       var dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "Name",
         Description = "Description",
       };
@@ -143,11 +143,11 @@ namespace TestDataUtilityDAL
       // Test Method
       var newDataModule = dataModule.Clone();
 
-      var result = newDataModule.ID.ToString();
+      var result = newDataModule.Id.ToString();
       var compare = "1";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      result = newDataModule.DataSiteID.ToString();
+      result = newDataModule.DbId.ToString();
       compare = "2";
       TestCommon.Write($"{methodName}2", result, compare);
 
@@ -174,8 +174,8 @@ namespace TestDataUtilityDAL
 
       var dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "Name",
         Description = "Description",
       };
@@ -194,8 +194,8 @@ namespace TestDataUtilityDAL
       var dataModules = new DataModules();
       var dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "Name",
         Description = "Description",
       };
@@ -203,8 +203,8 @@ namespace TestDataUtilityDAL
 
       dataModule = new DataModule
       {
-        ID = 2,
-        DataSiteID = 3,
+        Id = 2,
+        DbId = 3,
         Name = "First",
         Description = "Description",
       };
@@ -248,8 +248,8 @@ namespace TestDataUtilityDAL
       var dataModules = new DataModules();
       var dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "Name",
         Description = "Description",
       };
@@ -275,8 +275,8 @@ namespace TestDataUtilityDAL
       var dataModules = new DataModules();
       var dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "Name",
         Description = "Description",
       };
@@ -302,8 +302,8 @@ namespace TestDataUtilityDAL
       var dataModules = new DataModules();
       var dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "Name",
         Description = "Description",
       };
@@ -311,8 +311,8 @@ namespace TestDataUtilityDAL
 
       dataModule = new DataModule
       {
-        ID = 2,
-        DataSiteID = 3,
+        Id = 2,
+        DbId = 3,
         Name = "First",
         Description = "Description",
       };
@@ -338,8 +338,8 @@ namespace TestDataUtilityDAL
       var dataModules = new DataModules();
       var dataModule = new DataModule
       {
-        ID = 2,
-        DataSiteID = 3,
+        Id = 2,
+        DbId = 3,
         Name = "Name",
         Description = "Description",
       };
@@ -347,8 +347,8 @@ namespace TestDataUtilityDAL
 
       dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "First",
         Description = "Description",
       };
@@ -358,7 +358,7 @@ namespace TestDataUtilityDAL
       dataModules.LJCSortID();
 
       dataModule = dataModules[0];
-      var result = dataModule.ID.ToString();
+      var result = dataModule.Id.ToString();
       var compare = "1";
       TestCommon.Write($"{methodName}", result, compare);
     }
@@ -371,8 +371,8 @@ namespace TestDataUtilityDAL
       var dataModules = new DataModules();
       var dataModule = new DataModule
       {
-        ID = 2,
-        DataSiteID = 3,
+        Id = 2,
+        DbId = 3,
         Name = "Name",
         Description = "Description",
       };
@@ -380,8 +380,8 @@ namespace TestDataUtilityDAL
 
       dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "First",
         Description = "Description",
       };
@@ -408,8 +408,8 @@ namespace TestDataUtilityDAL
       var dataModules = new DataModules();
       var dataModule = new DataModule
       {
-        ID = 2,
-        DataSiteID = 3,
+        Id = 2,
+        DbId = 3,
         Name = "Name",
         Description = "Description",
       };
@@ -417,8 +417,8 @@ namespace TestDataUtilityDAL
 
       dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "First",
         Description = "Description",
       };

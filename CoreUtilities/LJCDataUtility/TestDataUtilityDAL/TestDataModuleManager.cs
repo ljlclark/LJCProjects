@@ -282,13 +282,13 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataModuleManager.DbID;
+      short dbID = dataModuleManager.DbId;
       string name = "TestModuleName";
 
       // Create the test record.
       var dataModule = new DataModule()
       {
-        DataSiteID = dbID,
+        DbId = dbID,
         Name = name,
         Description = "The test table.",
       };
@@ -370,13 +370,13 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataModuleManager.DbID;
+      short dbID = dataModuleManager.DbId;
       string name = "TestModuleName";
 
       // Create the test record.
       var dataModule = new DataModule()
       {
-        DataSiteID = dbID,
+        DbId = dbID,
         Name = name,
         Description = "The test table.",
       };
@@ -418,13 +418,13 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataModuleManager.DbID;
+      short dbID = dataModuleManager.DbId;
       string name = "TestModuleName";
 
       // Create the test record.
       var dataModule = new DataModule()
       {
-        DataSiteID = dbID,
+        DbId = dbID,
         Name = name,
         Description = "The test table.",
       };
@@ -463,13 +463,13 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataModuleManager.DbID;
+      short dbID = dataModuleManager.DbId;
       string name = "TestModuleName";
 
       // Create the test record.
       var dataModule = new DataModule()
       {
-        DataSiteID = dbID,
+        DbId = dbID,
         Name = name,
         Description = "The test table.",
       };
@@ -486,8 +486,8 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Update the test record.
-      var id = dataModule.ID;
-      dbID = (short)dataModule.DataSiteID;
+      var id = dataModule.Id;
+      dbID = (short)dataModule.DbId;
       var idKey = dataModuleManager.IDKey(id, dbID);
       dataModule.Description += " Updated";
       var propertyNames = new List<string>()
@@ -527,13 +527,13 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataModuleManager.DbID;
+      short dbID = dataModuleManager.DbId;
       string name = "TestModuleName";
 
       // Create the test record.
       var dataModule = new DataModule()
       {
-        DataSiteID = dbID,
+        DbId = dbID,
         Name = name,
         Description = "The test table.",
       };
@@ -551,7 +551,7 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Retrieve with ID.
-      var id = dataModule.ID;
+      var id = dataModule.Id;
 
       // Test Method
       dataModule = dataModuleManager.RetrieveWithID(id, dbID);
@@ -581,13 +581,13 @@ namespace TestDataUtilityDAL
       var dataModuleManager = new DataModuleManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataModuleManager.DbID;
+      short dbID = dataModuleManager.DbId;
       string name = "TestModuleName";
 
       // Create the test record.
       var dataModule = new DataModule()
       {
-        DataSiteID = dbID,
+        DbId = dbID,
         Name = name,
         Description = "The test table.",
       };
@@ -628,12 +628,12 @@ namespace TestDataUtilityDAL
         , dataConfigName);
 
       long id = 1;
-      short dbID = dataModuleManager.DbID;
+      short dbId = dataModuleManager.DbId;
 
       // Test Method
-      var idKey = dataModuleManager.IDKey(id, dbID);
+      var idKey = dataModuleManager.IDKey(id, dbId);
 
-      var key = idKey[DataModule.ColumnID];
+      var key = idKey[DataModule.ColumnId];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";

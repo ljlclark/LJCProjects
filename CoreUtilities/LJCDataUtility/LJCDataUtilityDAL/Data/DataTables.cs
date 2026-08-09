@@ -175,10 +175,10 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilTable()
         {
-          ID = id,
-          DataSiteID = dbID,
-          DataModuleID = dataModuleID,
-          DataModuleSiteID = dataModuleDbID,
+          Id = id,
+          DbId = dbID,
+          DataModuleId = dataModuleID,
+          DataModuleDbId = dataModuleDbID,
           Name = name,
         };
         Add(retValue);
@@ -196,8 +196,8 @@ namespace LJCDataUtilityDAL
       LJCSortID();
       DataUtilTable searchItem = new DataUtilTable()
       {
-        ID = id,
-        DataSiteID = dbID,
+        Id = id,
+        DbId = dbID,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -219,8 +219,8 @@ namespace LJCDataUtilityDAL
       LJCSortUnique(comparer);
       DataUtilTable searchItem = new DataUtilTable()
       {
-        DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleDbID,
+        DataModuleId = dataModuleID,
+        DataModuleDbId = dataModuleDbID,
         Name = name,
       };
       int index = BinarySearch(searchItem, comparer);
@@ -237,8 +237,8 @@ namespace LJCDataUtilityDAL
     public void LJCRemove(long dataModuleID, short dataModuleDbID
       , string name)
     {
-      DataUtilTable item = Find(x => x.DataModuleID == dataModuleID
-        && x.DataModuleSiteID == dataModuleDbID
+      DataUtilTable item = Find(x => x.DataModuleId == dataModuleID
+        && x.DataModuleDbId == dataModuleDbID
         && x.Name == name);
       if (item != null)
       {

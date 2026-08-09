@@ -102,9 +102,9 @@ namespace LJCDataUtility
         NewNameText.Text = data.NewName;
 
         // Reference key values.
-        LJCDbID = (short)data.DataSiteID;
-        LJCParentID = data.DataModuleID;
-        LJCParentSiteID = data.DataModuleSiteID;
+        LJCDbID = (short)data.DbId;
+        LJCParentID = data.DataModuleId;
+        LJCParentSiteID = data.DataModuleDbId;
       }
     }
 
@@ -123,10 +123,10 @@ namespace LJCDataUtility
         = FormCommon.SetString(NewNameText.Text);
 
       // Get Reference key values.
-      retData.ID = LJCID;
-      retData.DataSiteID = LJCDbID;
-      retData.DataModuleID = LJCParentID;
-      retData.DataModuleSiteID = LJCParentSiteID;
+      retData.Id = LJCID;
+      retData.DbId = LJCDbID;
+      retData.DataModuleId = LJCParentID;
+      retData.DataModuleDbId = LJCParentSiteID;
       return retData;
     }
 
@@ -170,22 +170,22 @@ namespace LJCDataUtility
         if (LJCIsUpdate)
         {
           var keyColumns = manager.IDKey(LJCID, LJCDbID);
-          LJCRecord.ID = 0;
+          LJCRecord.Id = 0;
           manager.Update(LJCRecord, keyColumns);
           ResetValues(LJCRecord);
-          LJCRecord.ID = LJCID;
+          LJCRecord.Id = LJCID;
           retValue = !FormCommon.UpdateError(this
             , manager.AffectedCount);
         }
         else
         {
-          LJCRecord.ID = 0;
-          LJCRecord.DataSiteID = (short)mSettings.SiteID;
+          LJCRecord.Id = 0;
+          LJCRecord.DbId = (short)mSettings.SiteID;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
           if (addedRecord != null)
           {
-            LJCRecord.ID = addedRecord.ID;
+            LJCRecord.Id = addedRecord.Id;
           }
           retValue = !FormCommon.AddError(this
             , manager.AffectedCount);

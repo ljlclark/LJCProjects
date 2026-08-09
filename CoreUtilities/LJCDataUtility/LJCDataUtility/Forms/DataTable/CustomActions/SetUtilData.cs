@@ -95,8 +95,8 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        TableID = dataTable.ID;
-        TableDbID = (short)dataTable.DataSiteID;
+        TableID = dataTable.Id;
+        TableDbID = (short)dataTable.DbId;
         UpdateColumns();
         SetKeysPrimary();
         SetKeysUnique();
@@ -115,7 +115,7 @@ namespace LJCDataUtility
       var tableManager = Managers.DataTableManager;
       var dataTable = new DataUtilTable
       {
-        DataModuleID = moduleID,
+        DataModuleId = moduleID,
         Name = TableName,
         Description = TableName
       };
@@ -124,12 +124,12 @@ namespace LJCDataUtility
       dataTable.ChangedNames.AddNames(propertyNames);
       var newTable = tableManager.Add(dataTable);
 
-      CreateColumns(newTable.ID, (short)newTable.DataSiteID);
-      CreateKeys(newTable.ID);
+      CreateColumns(newTable.Id, (short)newTable.DbId);
+      CreateKeys(newTable.Id);
 
       var tableGridCode = new DataTableGridCode(ParentObject);
       tableGridCode.Refresh();
-      tableGridCode.RowSelect(newTable.ID);
+      tableGridCode.RowSelect(newTable.Id);
     }
     #endregion
 
@@ -141,8 +141,8 @@ namespace LJCDataUtility
     {
       var newColumn = new DataUtilColumn
       {
-        DataTableID = tableID,
-        DataTableSiteID = tableDbID,
+        DataTableId = tableID,
+        DataTableDbId = tableDbID,
         Name = dbColumn.ColumnName,
         Description = dbColumn.ColumnName,
         Sequence = sequence,
@@ -228,7 +228,7 @@ namespace LJCDataUtility
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
           var columnManager = Managers.DataColumnManager;
-          var keyColumns = columnManager.IDKey(dataColumn.ID, dataColumn.DataSiteID);
+          var keyColumns = columnManager.IDKey(dataColumn.Id, dataColumn.DbId);
           columnManager.Update(updateColumn, keyColumns);
         }
       }

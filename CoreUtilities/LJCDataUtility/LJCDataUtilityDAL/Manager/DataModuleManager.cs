@@ -37,7 +37,7 @@ namespace LJCDataUtilityDAL
 
       // Map table names with property names or captions
       // that differ from the column names.
-      Manager.MapNames(DataModule.ColumnID, caption: "DataModule ID");
+      Manager.MapNames(DataModule.ColumnId, caption: "DataModule ID");
 
       // Add Calculated and Join columns.
       // Enables adding Calculated and Join columns to a grid configuration.
@@ -45,7 +45,7 @@ namespace LJCDataUtilityDAL
       // Create the list of database assigned columns.
       Manager.SetDbAssignedColumns(new string[]
       {
-        DataModule.ColumnID
+        DataModule.ColumnId
       });
 
       // Create the list of lookup column names.
@@ -56,7 +56,7 @@ namespace LJCDataUtilityDAL
 
       var values = ValuesDataUtility.Instance;
       var ManagersDataSite = values.SiteManagers;
-      DbID = ManagersDataSite.DbGroupManager.DbID;
+      DbId = ManagersDataSite.DbGroupManager.DbID;
       EntryManager = ManagersDataSite.DataEntryManager;
     }
     #endregion
@@ -94,7 +94,7 @@ namespace LJCDataUtilityDAL
       retValue = ResultConverter.CreateData(dbResult);
       if (retValue != null)
       {
-        dataObject.ID = retValue.ID;
+        dataObject.Id = retValue.Id;
         //EntryManager.WriteDataEntry(Manager.SQLStatement);
       }
       return retValue;
@@ -153,12 +153,12 @@ namespace LJCDataUtilityDAL
     // Retrieves a record with the supplied value.
     /// <include file='Doc/DataModuleManager.xml'
     ///  path='members/RetrieveWithID/*'/>
-    public DataModule RetrieveWithID(long id, short dbID
+    public DataModule RetrieveWithID(long id, short dbId
       , List<string> propertyNames = null)
     {
       DataModule retValue;
 
-      var keyColumns = IDKey(id, dbID);
+      var keyColumns = IDKey(id, dbId);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -184,13 +184,13 @@ namespace LJCDataUtilityDAL
     // Gets the ID key columns.
     /// <include file='Doc/DataModuleManager.xml'
     ///  path='members/IDKey/*'/>
-    public LJCDataColumns IDKey(long id, short dbID)
+    public LJCDataColumns IDKey(long id, short dbId)
     {
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new LJCDataColumns()
       {
-        { DataModule.ColumnID, id },
-        { DataModule.ColumnDbID, dbID },
+        { DataModule.ColumnId, id },
+        { DataModule.ColumnDbId, dbId },
       };
       return retValue;
     }
@@ -222,7 +222,7 @@ namespace LJCDataUtilityDAL
     // Gets or sets the Database ID.
     /// <include file='Doc/DataModuleManager.xml'
     ///  path='members/DbID/*'/>
-    public short DbID { get; set; }
+    public short DbId { get; set; }
 
     // Gets or sets the DataManager reference.
     /// <include file='Doc/DataModuleManager.xml'

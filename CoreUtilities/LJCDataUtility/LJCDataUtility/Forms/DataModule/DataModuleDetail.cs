@@ -83,7 +83,7 @@ namespace LJCDataUtility
         DescriptionText.Text = data.Description;
 
         // Reference key values.
-        LJCDbID = (short)data.DataSiteID;
+        LJCDbID = (short)data.DbId;
       }
     }
 
@@ -97,8 +97,8 @@ namespace LJCDataUtility
       retData.Description = FormCommon.SetString(DescriptionText.Text);
 
       // Get Reference key values.
-      retData.ID = LJCID;
-      retData.DataSiteID = LJCDbID;
+      retData.Id = LJCID;
+      retData.DbId = LJCDbID;
       return retData;
     }
 
@@ -145,21 +145,21 @@ namespace LJCDataUtility
         if (LJCIsUpdate)
         {
           var keyColumns = manager.IDKey(LJCID, LJCDbID);
-          LJCRecord.ID = 0;
+          LJCRecord.Id = 0;
           manager.Update(LJCRecord, keyColumns);
           ResetValues(LJCRecord);
-          LJCRecord.ID = LJCID;
+          LJCRecord.Id = LJCID;
           retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
         }
         else
         {
-          LJCRecord.ID = 0;
-          LJCRecord.DataSiteID = mSettings.SiteID;
+          LJCRecord.Id = 0;
+          LJCRecord.DbId = mSettings.SiteID;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
           if (addedRecord != null)
           {
-            LJCRecord.ID = addedRecord.ID;
+            LJCRecord.Id = addedRecord.Id;
           }
           retValue = !FormCommon.AddError(this, manager.AffectedCount);
         }

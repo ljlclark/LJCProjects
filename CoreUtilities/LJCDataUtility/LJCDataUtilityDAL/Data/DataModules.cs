@@ -150,8 +150,8 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataModule()
         {
-          ID = id,
-          DataSiteID = dataSiteID,
+          Id = id,
+          DbId = dataSiteID,
           Name = name
         };
         Add(retValue);
@@ -169,8 +169,8 @@ namespace LJCDataUtilityDAL
       LJCSortID();
       DataModule searchItem = new DataModule()
       {
-        ID = id,
-        DataSiteID= dbID,
+        Id = id,
+        DbId= dbID,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)

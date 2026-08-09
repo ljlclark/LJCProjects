@@ -81,7 +81,7 @@ namespace LJCDataUtility
     // Adds a grid row and updates it with the record values.
     private LJCItem RowAdd(DataModule data)
     {
-      var retValue = ModuleCombo.LJCAddItem(data.ID, 1, data.Name);
+      var retValue = ModuleCombo.LJCAddItem(data.Id, 1, data.Name);
       return retValue;
     }
 
@@ -153,8 +153,8 @@ namespace LJCDataUtility
         var id = ParentObject.DataModuleItemID(out short dbID);
         var keyColumns = new LJCDataColumns()
         {
-          { DataModule.ColumnID, id },
-          { DataModule.ColumnDbID, dbID },
+          { DataModule.ColumnId, id },
+          { DataModule.ColumnDbId, dbID },
         };
         ModuleManager.Delete(keyColumns);
         if (0 == ModuleManager.AffectedCount)

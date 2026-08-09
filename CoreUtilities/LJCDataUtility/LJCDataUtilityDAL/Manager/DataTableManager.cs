@@ -38,7 +38,7 @@ namespace LJCDataUtilityDAL
 
       // Map table names with property names or captions
       // that differ from the column names.
-      Manager.MapNames(DataUtilTable.ColumnID, caption: "DataTable ID");
+      Manager.MapNames(DataUtilTable.ColumnId, caption: "DataTable ID");
 
       // Add Calculated and Join columns.
       // Enables adding Calculated and Join columns to a grid configuration.
@@ -49,14 +49,14 @@ namespace LJCDataUtilityDAL
       // Create the list of database assigned columns.
       Manager.SetDbAssignedColumns(new string[]
       {
-        DataUtilTable.ColumnID,
+        DataUtilTable.ColumnId,
       });
 
       // Create the list of lookup column names.
       Manager.SetLookupColumns(new string[]
       {
-        DataUtilTable.ColumnDataModuleID,
-        DataUtilTable.ColumnDataModuleDbID,
+        DataUtilTable.ColumnDataModuleId,
+        DataUtilTable.ColumnDataModuleDbId,
         DataUtilTable.ColumnName,
       });
 
@@ -105,7 +105,7 @@ namespace LJCDataUtilityDAL
       retValue = ResultConverter.CreateData(dbResult);
       if (retValue != null)
       {
-        dataObject.ID = retValue.ID;
+        dataObject.Id = retValue.Id;
         //EntryManager.WriteDataEntry(Manager.SQLStatement);
       }
       return retValue;
@@ -212,8 +212,8 @@ namespace LJCDataUtilityDAL
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new LJCDataColumns()
       {
-        { DataUtilTable.ColumnID, id },
-        { DataUtilTable.ColumnDbID, dbID},
+        { DataUtilTable.ColumnId, id },
+        { DataUtilTable.ColumnDbId, dbID},
       };
       return retValue;
     }
@@ -226,8 +226,8 @@ namespace LJCDataUtilityDAL
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new LJCDataColumns()
       {
-        { DataUtilTable.ColumnDataModuleID, parentID },
-        { DataUtilTable.ColumnDataModuleDbID, parentDbID },
+        { DataUtilTable.ColumnDataModuleId, parentID },
+        { DataUtilTable.ColumnDataModuleDbId, parentDbID },
       };
       return retValue;
     }
@@ -240,8 +240,8 @@ namespace LJCDataUtilityDAL
       // Needs cast for string to select the correct Add overload.
       var retValue = new LJCDataColumns()
       {
-        { DataUtilTable.ColumnDataModuleID, parentID },
-        { DataUtilTable.ColumnDataModuleDbID, parentDbID },
+        { DataUtilTable.ColumnDataModuleId, parentID },
+        { DataUtilTable.ColumnDataModuleDbId, parentDbID },
         { DataUtilTable.ColumnName, (object)name },
       };
       return retValue;
@@ -277,7 +277,7 @@ namespace LJCDataUtilityDAL
         JoinType = "left",
         JoinOns = new DbJoinOns()
         {
-          { DataUtilTable.ColumnDataModuleID, DataModule.ColumnID }
+          { DataUtilTable.ColumnDataModuleId, DataModule.ColumnId }
         },
         Columns = new LJCDataColumns()
         {

@@ -21,10 +21,10 @@ namespace LJCDataUtilityDAL
     ///  path='members/Constructor/*'/>
     public DataUtilColumn()
     {
-      _ID = 0;
+      _Id = 0;
       _DataDbID = 0;
-      _DataTableID = 0;
-      _DataTableDbID = 0;
+      _DataTableId = 0;
+      _DataTableDbId = 0;
       _Name = "";
       _Description = null;
       _Sequence = 0;
@@ -67,10 +67,10 @@ namespace LJCDataUtilityDAL
     ///  path='members/Constructor/*'/>
     public DataUtilColumn(DataUtilColumn item)
     {
-      ID = item.ID;
-      DataSiteID = item.DataSiteID;
-      DataTableID = item.DataTableID;
-      DataTableSiteID = item.DataTableSiteID;
+      Id = item.Id;
+      DbId = item.DbId;
+      DataTableId = item.DataTableId;
+      DataTableDbId = item.DataTableDbId;
       Name = item.Name;
       Description = item.Description;
       Sequence = item.Sequence;
@@ -117,13 +117,13 @@ namespace LJCDataUtilityDAL
           break;
         }
 
-        retValue = ID.CompareTo(other.ID);
+        retValue = Id.CompareTo(other.Id);
         if (NetString.CompareEqual == retValue)
         {
           break;
         }
 
-        retValue = DataSiteID.CompareTo(other.DataSiteID);
+        retValue = DbId.CompareTo(other.DbId);
         break;
       }
       return retValue;
@@ -134,7 +134,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/SetOriginalValues/*'/>
     public void LJCSetOriginalValues()
     {
-      _OriginalValues.ID = _ID;
+      _OriginalValues.ID = _Id;
       _OriginalValues.Name = _Name;
       _OriginalValues.Description = _Description;
       _OriginalValues.Sequence = _Sequence;
@@ -155,7 +155,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/ToString/*'/>
     public override string ToString()
     {
-      var retValue = $"{_Name}:{_ID}";
+      var retValue = $"{_Name}:{_Id}";
       return retValue;
     }
     #endregion
@@ -169,33 +169,33 @@ namespace LJCDataUtilityDAL
     /// <include file='Doc/DataColumn.xml'
     ///  path='members/ID/*'/>
     [Required]
-    [Column("ID", TypeName = "bigint")]
-    public long ID
+    [Column("Id", TypeName = "bigint")]
+    public long Id
     {
-      get => _ID;
+      get => _Id;
       set
       {
-        if (_ID != value)
+        if (_Id != value)
         {
-          _ID = ChangedNames.Add(ColumnID, _OriginalValues.ID, value);
+          _Id = ChangedNames.Add(ColumnId, _OriginalValues.ID, value);
         }
       }
     }
-    private long _ID;
+    private long _Id;
 
     // Gets or sets the ID value.
     /// <include file='Doc/DataColumn.xml'
     ///  path='members/DataSiteID/*'/>
     [Required]
-    [Column("DataSiteID", TypeName = "bigint")]
-    public short DataSiteID
+    [Column("DbId", TypeName = "smallint")]
+    public short DbId
     {
       get => _DataDbID;
       set
       {
         if (_DataDbID != value)
         {
-          _DataDbID = ChangedNames.Add(ColumnDbID
+          _DataDbID = ChangedNames.Add(ColumnDbId
             , _OriginalValues.DbID, value);
         }
       }
@@ -206,39 +206,39 @@ namespace LJCDataUtilityDAL
     /// <include file='Doc/DataColumn.xml'
     ///  path='members/DataTableID/*'/>
     [Required]
-    [Column("DataTableID", TypeName = "bigint")]
-    public long DataTableID
+    [Column("DataTableId", TypeName = "bigint")]
+    public long DataTableId
     {
-      get => _DataTableID;
+      get => _DataTableId;
       set
       {
-        if (_DataTableID != value)
+        if (_DataTableId != value)
         {
-          _DataTableID = ChangedNames.Add(ColumnDataTableID
+          _DataTableId = ChangedNames.Add(ColumnDataTableId
             , _OriginalValues.DataTableID, value);
         }
       }
     }
-    private long _DataTableID;
+    private long _DataTableId;
 
     // Gets or sets the DataTableID value.
     /// <include file='Doc/DataColumn.xml'
     ///  path='members/DataTableSiteID/*'/>
     [Required]
-    [Column("DataTableSiteID", TypeName = "bigint")]
-    public short DataTableSiteID
+    [Column("DataTableDbId", TypeName = "smallint")]
+    public short DataTableDbId
     {
-      get => _DataTableDbID;
+      get => _DataTableDbId;
       set
       {
-        if (_DataTableDbID != value)
+        if (_DataTableDbId != value)
         {
-          _DataTableDbID = ChangedNames.Add(ColumnDataTableDbID
+          _DataTableDbId = ChangedNames.Add(ColumnDataTableDbId
             , _OriginalValues.DataTableDbID, value);
         }
       }
     }
-    private short _DataTableDbID;
+    private short _DataTableDbId;
 
     // Gets or sets the Name value.
     /// <include file='Doc/DataColumn.xml'
@@ -464,16 +464,16 @@ namespace LJCDataUtilityDAL
     public static string TableName = "DataColumn";
 
     /// <summary>The ID column name.</summary>
-    public static string ColumnID = "ID";
+    public static string ColumnId = "Id";
 
     /// <summary>The ID column name.</summary>
-    public static string ColumnDbID = "DataSiteID";
+    public static string ColumnDbId = "DbId";
 
     /// <summary>The DataTableID column name.</summary>
-    public static string ColumnDataTableID = "DataTableID";
+    public static string ColumnDataTableId = "DataTableId";
 
     /// <summary>The DataTableSiteID column name.</summary>
-    public static string ColumnDataTableDbID = "DataTableSiteID";
+    public static string ColumnDataTableDbId = "DataTableDbId";
 
     /// <summary>The Name column name.</summary>
     public static string ColumnName = "Name";
@@ -610,7 +610,7 @@ namespace LJCDataUtilityDAL
       }
       if (isContinue)
       {
-        retValue = x.DataTableID.CompareTo(y.DataTableID);
+        retValue = x.DataTableId.CompareTo(y.DataTableId);
         if (retValue != 0)
         {
           isContinue = false;
@@ -618,7 +618,7 @@ namespace LJCDataUtilityDAL
       }
       if (isContinue)
       {
-        retValue = x.DataTableSiteID.CompareTo(y.DataTableSiteID);
+        retValue = x.DataTableDbId.CompareTo(y.DataTableDbId);
       }
       if (isContinue)
       {

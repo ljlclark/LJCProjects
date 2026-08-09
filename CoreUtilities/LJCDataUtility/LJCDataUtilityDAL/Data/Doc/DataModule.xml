@@ -10,16 +10,16 @@
     </summary>
   </ParamConstructor>
   <!-- Data Properties -->
-  <ID>
+  <Id>
     <summary>
-      Gets or sets the ID value.
+      Gets or sets the table ID value.
     </summary>
-  </ID>
-  <DataSiteID>
+  </Id>
+  <DbId>
     <summary>
       Gets or sets the database ID.
     </summary>
-  </DataSiteID>
+  </DbId>
   <Name>
     <summary>
       Gets or sets the name.

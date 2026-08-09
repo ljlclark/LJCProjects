@@ -72,8 +72,8 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataModuleID = 2,
+        Id = 1,
+        DataModuleId = 2,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -84,11 +84,11 @@ namespace TestDataUtilityDAL
       // Test Method
       var newDataTable = dataTable.Clone();
 
-      var result = newDataTable.ID.ToString();
+      var result = newDataTable.Id.ToString();
       var compare = "1";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      result = newDataTable.DataModuleID.ToString();
+      result = newDataTable.DataModuleId.ToString();
       compare = "2";
       TestCommon.Write($"{methodName}2", result, compare);
 
@@ -120,11 +120,11 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
-        ID = 1
+        Id = 1
       };
       var toDataTable = new DataUtilTable
       {
-        ID = 2
+        Id = 2
       };
 
       var result = dataTable.CompareTo(toDataTable).ToString();
@@ -135,7 +135,7 @@ namespace TestDataUtilityDAL
       compare = "1";
       TestCommon.Write($"{methodName}2", result, compare);
 
-      toDataTable.ID = 1;
+      toDataTable.Id = 1;
       result = dataTable.CompareTo(toDataTable).ToString();
       compare = "0";
       TestCommon.Write($"{methodName}3", result, compare);
@@ -148,8 +148,8 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
-        ID = 1,
-        DataModuleID = 2,
+        Id = 1,
+        DataModuleId = 2,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -160,12 +160,12 @@ namespace TestDataUtilityDAL
       // Test Method
       dataTable.LJCSetOriginalValues();
 
-      dataTable.ID = 1;
+      dataTable.Id = 1;
       var result = dataTable.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataTable.DataModuleID = 2;
+      dataTable.DataModuleId = 2;
       result = dataTable.ChangedNames.ChangedPropertyNames;
       compare = "No Result";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -203,7 +203,7 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
-        ID = 1,
+        Id = 1,
         Name = "Name",
       };
 
@@ -238,14 +238,14 @@ namespace TestDataUtilityDAL
       var dataTable = new DataUtilTable
       {
         // Original Value
-        ID = 0,
+        Id = 0,
       };
 
       var result = dataTable.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataTable.ID = 1;
+      dataTable.Id = 1;
       result = dataTable.ChangedNames.ChangedPropertyNames;
       compare = "ID";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -260,14 +260,14 @@ namespace TestDataUtilityDAL
       var dataTable = new DataUtilTable
       {
         // Original Value
-        DataSiteID = 0,
+        DbId = 0,
       };
 
       var result = dataTable.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataTable.DataSiteID = 1;
+      dataTable.DbId = 1;
       result = dataTable.ChangedNames.ChangedPropertyNames;
       compare = "DataSiteID";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -281,14 +281,14 @@ namespace TestDataUtilityDAL
       var dataTable = new DataUtilTable
       {
         // Original Value
-        DataModuleID = 0,
+        DataModuleId = 0,
       };
 
       var result = dataTable.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataTable.DataModuleID = 1;
+      dataTable.DataModuleId = 1;
       result = dataTable.ChangedNames.ChangedPropertyNames;
       compare = "DataModuleID";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -303,14 +303,14 @@ namespace TestDataUtilityDAL
       var dataTable = new DataUtilTable
       {
         // Original Value
-        DataModuleSiteID = 0,
+        DataModuleDbId = 0,
       };
 
       var result = dataTable.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataTable.DataModuleSiteID = 1;
+      dataTable.DataModuleDbId = 1;
       result = dataTable.ChangedNames.ChangedPropertyNames;
       compare = "DataModuleSiteID";
       TestCommon.Write($"{methodName}2", result, compare);

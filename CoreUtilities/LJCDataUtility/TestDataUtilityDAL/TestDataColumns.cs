@@ -56,10 +56,10 @@ namespace TestDataUtilityDAL
       var dataColumns = new DataColumns();
       var dataColumn = new DataUtilColumn()
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -69,10 +69,10 @@ namespace TestDataUtilityDAL
 
       dataColumn = new DataUtilColumn()
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -97,10 +97,10 @@ namespace TestDataUtilityDAL
       var dataColumns = new List<DataUtilColumn>();
       var dataColumn = new DataUtilColumn()
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -110,10 +110,10 @@ namespace TestDataUtilityDAL
 
       dataColumn = new DataUtilColumn()
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -151,10 +151,10 @@ namespace TestDataUtilityDAL
       var dataColumns = new DataColumns();
       var dataColumn = new DataUtilColumn()
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -166,13 +166,13 @@ namespace TestDataUtilityDAL
       var newDataColumns = dataColumns.Clone();
 
       var newDataColumn = newDataColumns[0];
-      var result = newDataColumn.ID.ToString();
-      result += $", {newDataColumn.DataSiteID}";
+      var result = newDataColumn.Id.ToString();
+      result += $", {newDataColumn.DbId}";
       var compare = "1, 2";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      result = $"{newDataColumn.DataTableID}";
-      result += $", {newDataColumn.DataTableSiteID}";
+      result = $"{newDataColumn.DataTableId}";
+      result += $", {newDataColumn.DataTableDbId}";
       compare = "3, 4";
       TestCommon.Write($"{methodName}2", result, compare);
 
@@ -201,10 +201,10 @@ namespace TestDataUtilityDAL
 
       var dataColumn = new DataUtilColumn()
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -225,10 +225,10 @@ namespace TestDataUtilityDAL
       var dataColumns = new DataColumns();
       var dataColumn = new DataUtilColumn()
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -238,10 +238,10 @@ namespace TestDataUtilityDAL
 
       dataColumn = new DataUtilColumn()
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -287,10 +287,10 @@ namespace TestDataUtilityDAL
       var dataColumns = new DataColumns();
       var dataColumn = new DataUtilColumn()
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -318,10 +318,10 @@ namespace TestDataUtilityDAL
       var dataColumns = new DataColumns();
       var dataColumn = new DataUtilColumn()
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -349,10 +349,10 @@ namespace TestDataUtilityDAL
       var dataColumns = new DataColumns();
       var dataColumn = new DataUtilColumn()
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -362,10 +362,10 @@ namespace TestDataUtilityDAL
 
       dataColumn = new DataUtilColumn()
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -393,10 +393,10 @@ namespace TestDataUtilityDAL
       var dataColumns = new DataColumns();
       var dataColumn = new DataUtilColumn()
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -406,10 +406,10 @@ namespace TestDataUtilityDAL
 
       dataColumn = new DataUtilColumn()
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -421,7 +421,7 @@ namespace TestDataUtilityDAL
       dataColumns.LJCSortID();
 
       dataColumn = dataColumns[0];
-      var result = dataColumn.ID.ToString();
+      var result = dataColumn.Id.ToString();
       var compare = "1";
       TestCommon.Write($"{methodName}", result, compare);
     }
@@ -434,10 +434,10 @@ namespace TestDataUtilityDAL
       var dataColumns = new DataColumns();
       var dataColumn = new DataUtilColumn()
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -447,10 +447,10 @@ namespace TestDataUtilityDAL
 
       dataColumn = new DataUtilColumn()
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -479,10 +479,10 @@ namespace TestDataUtilityDAL
       var dataColumns = new DataColumns();
       var dataColumn = new DataUtilColumn()
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -492,10 +492,10 @@ namespace TestDataUtilityDAL
 
       dataColumn = new DataUtilColumn()
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         Description = "Description2",
         Sequence = 2,

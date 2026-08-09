@@ -46,8 +46,8 @@ namespace TestDataUtilityDAL
 
       var dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "Name",
         Description = "Description",
       };
@@ -55,11 +55,11 @@ namespace TestDataUtilityDAL
       // Test Method
       var newDataModule = dataModule.Clone();
 
-      var result = newDataModule.ID.ToString();
+      var result = newDataModule.Id.ToString();
       var compare = "1";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      result = newDataModule.DataSiteID.ToString();
+      result = newDataModule.DbId.ToString();
       compare = "2";
       TestCommon.Write($"{methodName}2", result, compare);
 
@@ -79,11 +79,11 @@ namespace TestDataUtilityDAL
 
       var dataModule = new DataModule
       {
-        ID = 1
+        Id = 1
       };
       var toDataModule = new DataModule
       {
-        ID = 2
+        Id = 2
       };
 
       var result = dataModule.CompareTo(toDataModule).ToString();
@@ -94,7 +94,7 @@ namespace TestDataUtilityDAL
       compare = "1";
       TestCommon.Write($"{methodName}2", result, compare);
 
-      toDataModule.ID = 1;
+      toDataModule.Id = 1;
       result = dataModule.CompareTo(toDataModule).ToString();
       compare = "0";
       TestCommon.Write($"{methodName}3", result, compare);
@@ -107,8 +107,8 @@ namespace TestDataUtilityDAL
 
       var dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "Name",
         Description = "Description",
       };
@@ -116,12 +116,12 @@ namespace TestDataUtilityDAL
       // Test Method
       dataModule.LJCSetOriginalValues();
 
-      dataModule.ID = 1;
+      dataModule.Id = 1;
       var result = dataModule.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataModule.DataSiteID = 2;
+      dataModule.DbId = 2;
       result = dataModule.ChangedNames.ChangedPropertyNames;
       compare = "No Result";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -144,8 +144,8 @@ namespace TestDataUtilityDAL
 
       var dataModule = new DataModule
       {
-        ID = 1,
-        DataSiteID = 2,
+        Id = 1,
+        DbId = 2,
         Name = "Name",
       };
 
@@ -180,14 +180,14 @@ namespace TestDataUtilityDAL
       var dataModule = new DataModule
       {
         // Original Value
-        ID = 0,
+        Id = 0,
       };
 
       var result = dataModule.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataModule.ID = 1;
+      dataModule.Id = 1;
       result = dataModule.ChangedNames.ChangedPropertyNames;
       compare = "ID";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -202,14 +202,14 @@ namespace TestDataUtilityDAL
       var dataModule = new DataModule
       {
         // Original Value
-        DataSiteID = 0,
+        DbId = 0,
       };
 
       var result = dataModule.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataModule.DataSiteID = 1;
+      dataModule.DbId = 1;
       result = dataModule.ChangedNames.ChangedPropertyNames;
       compare = "DataSiteID";
       TestCommon.Write($"{methodName}2", result, compare);

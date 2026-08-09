@@ -193,8 +193,8 @@ namespace LJCDataUtility
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataKey data)
     {
-      row.LJCSetInt64(DataKey.ColumnID, data.ID);
-      row.LJCSetInt64(DataKey.ColumnDbID, data.DataSiteID);
+      row.LJCSetInt64(DataKey.ColumnId, data.ID);
+      row.LJCSetInt64(DataKey.ColumnDbId, data.DataSiteID);
     }
 
     // Sets the KeyType column value.
@@ -229,8 +229,8 @@ namespace LJCDataUtility
         var id = ParentObject.DataKeyRowID(out short dbID);
         var keyColumns = new LJCDataColumns()
         {
-          { DataKey.ColumnID, id },
-          { DataKey.ColumnDbID, dbID }
+          { DataKey.ColumnId, id },
+          { DataKey.ColumnDbId, dbID }
         };
         KeyManager.Delete(keyColumns);
         if (0 == KeyManager.AffectedCount)

@@ -184,9 +184,9 @@ namespace LJCDataUtility
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataUtilColumn dataRecord)
     {
-      row.LJCSetInt64(DataUtilColumn.ColumnID
-        , dataRecord.ID);
-      row.LJCSetInt64(DataUtilColumn.ColumnDbID, dataRecord.DataSiteID);
+      row.LJCSetInt64(DataUtilColumn.ColumnId
+        , dataRecord.Id);
+      row.LJCSetInt64(DataUtilColumn.ColumnDbId, dataRecord.DbId);
       row.LJCSetString(DataUtilColumn.ColumnName, dataRecord.Name);
     }
     #endregion
@@ -253,8 +253,8 @@ namespace LJCDataUtility
         var id = ParentObject.DataColumnRowID(out short dbID);
         var keyColumns = new LJCDataColumns()
         {
-          { DataUtilColumn.ColumnID, id },
-          { DataUtilColumn.ColumnDbID, dbID },
+          { DataUtilColumn.ColumnId, id },
+          { DataUtilColumn.ColumnDbId, dbID },
         };
         ColumnManager.Delete(keyColumns);
         if (0 == ColumnManager.AffectedCount)
@@ -286,8 +286,8 @@ namespace LJCDataUtility
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail()
         {
-          LJCID = id,
-          LJCDbID = dbID,
+          LJCId = id,
+          LJCDbId = dbID,
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,

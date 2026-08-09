@@ -60,8 +60,8 @@ namespace LJCDataUtility
       if (row is LJCGridRow
         && "ColumnGrid" == row.DataGridView.Name)
       {
-        retColumnID = row.LJCGetInt64(DataUtilColumn.ColumnID);
-        dbID = (short)row.LJCGetInt32(DataUtilColumn.ColumnDbID);
+        retColumnID = row.LJCGetInt64(DataUtilColumn.ColumnId);
+        dbID = (short)row.LJCGetInt32(DataUtilColumn.ColumnDbId);
       }
       return retColumnID;
     }
@@ -117,8 +117,8 @@ namespace LJCDataUtility
       if (row is LJCGridRow
         && "KeyGrid" == row.DataGridView.Name)
       {
-        retKeyID = row.LJCGetInt64(DataKey.ColumnID);
-        dbID = (short)row.LJCGetInt32(DataKey.ColumnDbID);
+        retKeyID = row.LJCGetInt64(DataKey.ColumnId);
+        dbID = (short)row.LJCGetInt32(DataKey.ColumnDbId);
       }
       return retKeyID;
     }
@@ -243,8 +243,8 @@ namespace LJCDataUtility
       if (row is LJCGridRow
         && "TableGrid" == row.DataGridView.Name)
       {
-        retTableID = row.LJCGetInt64(DataUtilTable.ColumnID);
-        dbID = (short)row.LJCGetInt32(DataUtilTable.ColumnDbID);
+        retTableID = row.LJCGetInt64(DataUtilTable.ColumnId);
+        dbID = (short)row.LJCGetInt32(DataUtilTable.ColumnDbId);
       }
       return retTableID;
     }
@@ -267,19 +267,18 @@ namespace LJCDataUtility
     }
 
     // Gets the target table ID.
-    internal long TargetDataTableID(string targetTableName, out short dbID)
+    internal long TargetDataTableID(string targetTableName, out short dbId)
     {
       long retTableID = 0;
 
-      dbID = 0;
-      var moduleID = DataModuleItemID(out dbID);
+      var moduleID = DataModuleItemID(out dbId);
       var tableManager = Managers.DataTableManager;
-      var targetTable = tableManager.RetrieveWithUnique(moduleID, dbID
+      var targetTable = tableManager.RetrieveWithUnique(moduleID, dbId
         , targetTableName);
       if (targetTable != null)
       {
-        retTableID = targetTable.ID;
-        dbID = targetTable.DataSiteID;
+        retTableID = targetTable.Id;
+        dbId = targetTable.DbId;
       }
       return retTableID;
     }

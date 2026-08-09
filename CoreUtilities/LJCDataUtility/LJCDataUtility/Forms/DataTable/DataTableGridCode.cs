@@ -131,7 +131,7 @@ namespace LJCDataUtility
     {
       var dataRecord = new DataUtilTable()
       {
-        ID = id
+        Id = id
       };
       var retValue = RowSelect(dataRecord);
       return retValue;
@@ -156,8 +156,8 @@ namespace LJCDataUtility
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in TableGrid.Rows)
         {
-          var rowID = row.LJCGetInt64(DataUtilTable.ColumnID);
-          if (rowID == data.ID)
+          var rowID = row.LJCGetInt64(DataUtilTable.ColumnId);
+          if (rowID == data.Id)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             TableGrid.LJCSetCurrentRow(row, true);
@@ -193,8 +193,8 @@ namespace LJCDataUtility
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataUtilTable dataRecord)
     {
-      row.LJCSetInt64(DataUtilTable.ColumnID, dataRecord.ID);
-      row.LJCSetInt32(DataUtilTable.ColumnDbID, dataRecord.DataSiteID);
+      row.LJCSetInt64(DataUtilTable.ColumnId, dataRecord.Id);
+      row.LJCSetInt32(DataUtilTable.ColumnDbId, dataRecord.DbId);
       row.LJCSetString(DataUtilTable.ColumnName, dataRecord.Name);
     }
     #endregion
@@ -220,11 +220,11 @@ namespace LJCDataUtility
       if (isContinue)
       {
         // Data from items.
-        var id = row.LJCGetInt64(DataUtilTable.ColumnID);
+        var id = row.LJCGetInt64(DataUtilTable.ColumnId);
 
         var keyColumns = new LJCDataColumns()
         {
-          { DataUtilTable.ColumnID, id }
+          { DataUtilTable.ColumnId, id }
         };
         TableManager.Delete(keyColumns);
         if (0 == TableManager.AffectedCount)
@@ -251,7 +251,7 @@ namespace LJCDataUtility
         && TableGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
-        long id = row.LJCGetInt64(DataUtilTable.ColumnID);
+        long id = row.LJCGetInt64(DataUtilTable.ColumnId);
         var ljcItem = ModuleCombo.SelectedItem as LJCItem;
         var parentID = ljcItem.ID;
         var parentDbID = ljcItem.DbID;
@@ -309,7 +309,7 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow row)
       {
         // Save the original row.
-        id = row.LJCGetInt64(DataUtilTable.ColumnID);
+        id = row.LJCGetInt64(DataUtilTable.ColumnId);
       }
       DataRetrieve();
 
@@ -318,7 +318,7 @@ namespace LJCDataUtility
       {
         var record = new DataUtilTable()
         {
-          ID = id
+          Id = id
         };
         RowSelect(record);
       }

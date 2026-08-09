@@ -133,8 +133,8 @@ namespace LJCDataUtilityDAL
     // Creates and adds the object from the supplied values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/Add1/*'/>
-    public DataUtilColumn Add(long id, short dbID, long dataTableID
-      , short dataTableDbID, string name)
+    public DataUtilColumn Add(long id, short dbID, long dataTableId
+      , short dataTableDbId, string name)
     {
       DataUtilColumn retValue = null;
 
@@ -151,11 +151,11 @@ namespace LJCDataUtilityDAL
       {
         message += "dbID must be greater than zero.\r\n";
       }
-      if (dataTableID <= 0)
+      if (dataTableId <= 0)
       {
         message += "dataTableID must be greater than zero.\r\n";
       }
-      if (dataTableDbID <= 0)
+      if (dataTableDbId <= 0)
       {
         message += "dataTableDbID must be greater than zero.\r\n";
       }
@@ -165,8 +165,8 @@ namespace LJCDataUtilityDAL
 
       // Prevent search from sorting current items.
       var checkColumns = Clone();
-      var duplicate = checkColumns.LJCGetWithUnique(dataTableID
-        , dataTableDbID, name);
+      var duplicate = checkColumns.LJCGetWithUnique(dataTableId
+        , dataTableDbId, name);
       if (duplicate != null)
       {
         retValue = duplicate.Clone();
@@ -176,10 +176,10 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilColumn()
         {
-          ID = id,
-          DataSiteID = dbID,
-          DataTableID = dataTableID,
-          DataTableSiteID = dataTableDbID,
+          Id = id,
+          DbId = dbID,
+          DataTableId = dataTableId,
+          DataTableDbId = dataTableDbId,
           Name = name,
         };
         Add(retValue);
@@ -190,8 +190,8 @@ namespace LJCDataUtilityDAL
     // Creates and adds the object from the provided values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/Add2/*'/>
-    public DataUtilColumn Add(short dbID, long dataTableID
-      , short dataTableDbID, string name, string typeName
+    public DataUtilColumn Add(short dbID, long dataTableId
+      , short dataTableDbId, string name, string typeName
       , bool allowNull = true, short maxLength = 0, string defaultValue = null
       , short identityIncrement = 0)
     {
@@ -201,11 +201,11 @@ namespace LJCDataUtilityDAL
       {
         message += "dbID must be greater than zero.\r\n";
       }
-      if (dataTableID <= 0)
+      if (dataTableId <= 0)
       {
         message += "dataTableID must be greater than zero.\r\n";
       }
-      if (dataTableDbID <= 0)
+      if (dataTableDbId <= 0)
       {
         message += "dataTableDbID must be greater than zero.\r\n";
       }
@@ -215,7 +215,7 @@ namespace LJCDataUtilityDAL
 
       // Prevent search from sorting current items.
       var checkColumns = Clone();
-      var duplicate = checkColumns.LJCGetWithUnique(dataTableID, dataTableDbID
+      var duplicate = checkColumns.LJCGetWithUnique(dataTableId, dataTableDbId
         , name);
       if (duplicate != null)
       {
@@ -226,9 +226,9 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilColumn()
         {
-          DataSiteID = dbID,
-          DataTableID = dataTableID,
-          DataTableSiteID = dataTableDbID,
+          DbId = dbID,
+          DataTableId = dataTableId,
+          DataTableDbId = dataTableDbId,
           Name = name,
 
           TypeName = typeName,
@@ -245,15 +245,15 @@ namespace LJCDataUtilityDAL
     // Retrieve the collection element.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCGetWithID/*'/>
-    public DataUtilColumn LJCGetWithID(long id, short dbID)
+    public DataUtilColumn LJCGetWithID(long id, short dbId)
     {
       DataUtilColumn retValue = null;
 
       LJCSortID();
       DataUtilColumn searchItem = new DataUtilColumn()
       {
-        ID = id,
-        DataSiteID = dbID,
+        Id = id,
+        DbId = dbId,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -275,8 +275,8 @@ namespace LJCDataUtilityDAL
       LJCSortUnique(comparer);
       DataUtilColumn searchItem = new DataUtilColumn()
       {
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
       };
       int index = BinarySearch(searchItem, comparer);
@@ -292,8 +292,8 @@ namespace LJCDataUtilityDAL
     ///  path='members/LJCRemove/*'/>
     public void LJCRemove(long dataTableID, long dataTableDbID, string name)
     {
-      DataUtilColumn item = Find(x => x.DataTableID == dataTableID
-        && x.DataTableSiteID == dataTableDbID
+      DataUtilColumn item = Find(x => x.DataTableId == dataTableID
+        && x.DataTableDbId == dataTableDbID
         && x.Name == name);
       if (item != null)
       {

@@ -189,9 +189,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataUtilTable = new DataUtilTable()
       {
-        DataSiteID = dbID,
-        DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleDbID,
+        DbId = dbID,
+        DataModuleId = dataModuleID,
+        DataModuleDbId = dataModuleDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -288,9 +288,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataUtilTable = new DataUtilTable()
       {
-        DataSiteID = dbID,
-        DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleDbID,
+        DbId = dbID,
+        DataModuleId = dataModuleID,
+        DataModuleDbId = dataModuleDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -344,9 +344,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataUtilTable = new DataUtilTable()
       {
-        DataSiteID = dbID,
-        DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleDbID,
+        DbId = dbID,
+        DataModuleId = dataModuleID,
+        DataModuleDbId = dataModuleDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -397,9 +397,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataUtilTable = new DataUtilTable()
       {
-        DataSiteID = dbID,
-        DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleDbID,
+        DbId = dbID,
+        DataModuleId = dataModuleID,
+        DataModuleDbId = dataModuleDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -421,8 +421,8 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Update the test record.
-      var id = utilTable.ID;
-      dbID = (short)utilTable.DataSiteID;
+      var id = utilTable.Id;
+      dbID = (short)utilTable.DbId;
       var idKey = dataTableManager.IDKey(id, dbID);
       utilTable.Description += " Updated";
       var propertyNames = new List<string>()
@@ -469,9 +469,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataUtilTable = new DataUtilTable()
       {
-        DataSiteID = dbID,
-        DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleDbID,
+        DbId = dbID,
+        DataModuleId = dataModuleID,
+        DataModuleDbId = dataModuleDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -494,7 +494,7 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Retrieve with ID.
-      var id = utilTable.ID;
+      var id = utilTable.Id;
 
       // Test Method
       utilTable = dataTableManager.RetrieveWithID(id, dbID);
@@ -531,9 +531,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataUtilTable = new DataUtilTable()
       {
-        DataSiteID = dbID,
-        DataModuleID = dataModuleID,
-        DataModuleSiteID = dataModuleDbID,
+        DbId = dbID,
+        DataModuleId = dataModuleID,
+        DataModuleDbId = dataModuleDbID,
         Name = name,
         Description = "The test table.",
         Sequence = 5,
@@ -584,7 +584,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var idKey = dataTableManager.IDKey(id, dbID);
 
-      var key = idKey[DataUtilTable.ColumnID];
+      var key = idKey[DataUtilTable.ColumnId];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";
@@ -613,7 +613,7 @@ namespace TestDataUtilityDAL
       // Test Method
       var idKey = dataTableManager.ParentKey(dataModuleID, dataModuleDbID);
 
-      var key = idKey[DataUtilTable.ColumnDataModuleID];
+      var key = idKey[DataUtilTable.ColumnDataModuleId];
       var propertyName = key.PropertyName;
       var value = key.Value;
       var result = $"{propertyName}: {value}";
