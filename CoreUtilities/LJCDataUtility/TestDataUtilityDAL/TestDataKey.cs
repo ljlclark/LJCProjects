@@ -52,10 +52,10 @@ namespace TestDataUtilityDAL
 
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 1,
-        DataTableID = 2,
-        DataTableSiteID = 2,
+        Id = 1,
+        DbId = 1,
+        DataTableId = 2,
+        DataTableDbId = 2,
         Name = "Name",
         KeyType = 1,
         IsAscending = true,
@@ -68,13 +68,13 @@ namespace TestDataUtilityDAL
       // Test Method
       var newDataKey = dataKey.Clone();
 
-      var result = $"{newDataKey.ID}";
-      result += $", {newDataKey.DataSiteID}";
+      var result = $"{newDataKey.Id}";
+      result += $", {newDataKey.DbId}";
       var compare = "1, 1";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      result = newDataKey.DataTableID.ToString();
-      result += $", {newDataKey.DataTableSiteID}";
+      result = newDataKey.DataTableId.ToString();
+      result += $", {newDataKey.DataTableDbId}";
       compare = "2, 2";
       TestCommon.Write($"{methodName}2", result, compare);
 
@@ -102,13 +102,13 @@ namespace TestDataUtilityDAL
 
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 1,
+        Id = 1,
+        DbId = 1,
       };
       var toDataKey = new DataKey
       {
-        ID = 2,
-        DataSiteID = 2,
+        Id = 2,
+        DbId = 2,
       };
 
       var result = dataKey.CompareTo(toDataKey).ToString();
@@ -119,8 +119,8 @@ namespace TestDataUtilityDAL
       compare = "1";
       TestCommon.Write($"{methodName}2", result, compare);
 
-      toDataKey.ID = 1;
-      toDataKey.DataSiteID = 1;
+      toDataKey.Id = 1;
+      toDataKey.DbId = 1;
       result = dataKey.CompareTo(toDataKey).ToString();
       compare = "0";
       TestCommon.Write($"{methodName}3", result, compare);
@@ -133,10 +133,10 @@ namespace TestDataUtilityDAL
 
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 1,
-        DataTableID = 2,
-        DataTableSiteID = 2,
+        Id = 1,
+        DbId = 1,
+        DataTableId = 2,
+        DataTableDbId = 2,
         Name = "Name",
         KeyType = 1,
         IsAscending = true,
@@ -149,14 +149,14 @@ namespace TestDataUtilityDAL
       // Test Method
       dataKey.LJCSetOriginalValues();
 
-      dataKey.ID = 1;
-      dataKey.DataSiteID = 1;
+      dataKey.Id = 1;
+      dataKey.DbId = 1;
       var result = dataKey.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataKey.DataTableID = 2;
-      dataKey.DataTableSiteID = 2;
+      dataKey.DataTableId = 2;
+      dataKey.DataTableDbId = 2;
       result = dataKey.ChangedNames.ChangedPropertyNames;
       compare = "No Result";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -188,7 +188,7 @@ namespace TestDataUtilityDAL
 
       var dataKey = new DataKey
       {
-        ID = 1,
+        Id = 1,
         Name = "Name",
       };
 
@@ -223,14 +223,14 @@ namespace TestDataUtilityDAL
       var dataKey = new DataKey
       {
         // Original Value
-        ID = 0,
+        Id = 0,
       };
 
       var result = dataKey.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataKey.ID = 1;
+      dataKey.Id = 1;
       result = dataKey.ChangedNames.ChangedPropertyNames;
       compare = "ID";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -245,14 +245,14 @@ namespace TestDataUtilityDAL
       var dataKey = new DataKey
       {
         // Original Value
-        DataSiteID = 0,
+        DbId = 0,
       };
 
       var result = dataKey.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataKey.DataSiteID = 1;
+      dataKey.DbId = 1;
       result = dataKey.ChangedNames.ChangedPropertyNames;
       compare = "DataSiteID";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -266,14 +266,14 @@ namespace TestDataUtilityDAL
       var dataKey = new DataKey
       {
         // Original Value
-        DataTableID = 0,
+        DataTableId = 0,
       };
 
       var result = dataKey.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataKey.DataTableID = 1;
+      dataKey.DataTableId = 1;
       result = dataKey.ChangedNames.ChangedPropertyNames;
       compare = "DataTableID";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -288,14 +288,14 @@ namespace TestDataUtilityDAL
       var dataKey = new DataKey
       {
         // Original Value
-        DataTableSiteID = 0,
+        DataTableDbId = 0,
       };
 
       var result = dataKey.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataKey.DataTableSiteID = 1;
+      dataKey.DataTableDbId = 1;
       result = dataKey.ChangedNames.ChangedPropertyNames;
       compare = "DataTableSiteID";
       TestCommon.Write($"{methodName}2", result, compare);

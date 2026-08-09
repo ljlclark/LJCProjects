@@ -251,7 +251,7 @@ namespace LJCDataUtility
         && TableGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
-        long id = row.LJCGetInt64(DataUtilTable.ColumnId);
+        var id = ParentObject.DataTableRowID(out short dbId);
         var ljcItem = ModuleCombo.SelectedItem as LJCItem;
         var parentID = ljcItem.ID;
         var parentDbID = ljcItem.DbID;
@@ -261,6 +261,7 @@ namespace LJCDataUtility
         var detail = new DataTableDetail()
         {
           LJCID = id,
+          LJCDbID = dbId,
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,

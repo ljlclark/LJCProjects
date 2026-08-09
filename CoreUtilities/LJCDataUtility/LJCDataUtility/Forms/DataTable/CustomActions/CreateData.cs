@@ -95,8 +95,8 @@ namespace LJCDataUtility
         var tableManager = Managers.DataTableManager;
         foreach (var data in dataKeys)
         {
-          var dataTable = tableManager.RetrieveWithID(data.DataTableID
-            , (short)data.DataSiteID);
+          var dataTable = tableManager.RetrieveWithID(data.DataTableId
+            , (short)data.DbId);
           proc.Line($"EXEC sp_DataKeyAdd {dataTable.Name}");
           proc.Line($" , '{data.Name}', {data.KeyType}");
           proc.Text($" , {data.SourceColumnName}, {data.TargetTableName}");

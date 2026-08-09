@@ -106,7 +106,7 @@ namespace LJCDataUtilityDAL
       retValue = ResultConverter.CreateData(dbResult);
       if (retValue != null)
       {
-        dataObject.ID = retValue.ID;
+        dataObject.Id = retValue.Id;
         //EntryManager.WriteDataEntry(Manager.SQLStatement);
       }
       return retValue;
@@ -286,7 +286,7 @@ namespace LJCDataUtilityDAL
       };
       if (dbID > 0)
       {
-        retValue.Add(DataKey.ColumnId, dbID);
+        retValue.Add(DataKey.ColumnDbId, dbID);
       }
       return retValue;
     }

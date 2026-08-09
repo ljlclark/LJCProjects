@@ -23,10 +23,10 @@ namespace LJCDataUtilityDAL
     ///  path='members/Constructor/*'/>
     public DataKey()
     {
-      _ID = 0;
-      _DataDbID = 0;
-      _DataTableID = 0;
-      _DataTableDbID = 0;
+      _Id = 0;
+      _DbId = 0;
+      _DataTableId = 0;
+      _DataTableDbId = 0;
       _Name = "";
       _KeyType = 0;
 
@@ -54,10 +54,10 @@ namespace LJCDataUtilityDAL
     ///  path='members/CopyConstructor/*'/>
     public DataKey(DataKey item)
     {
-      _ID = item.ID;
-      _DataDbID = item.DataSiteID;
-      _DataTableID = item.DataTableID;
-      _DataTableDbID = item.DataTableSiteID;
+      _Id = item.Id;
+      _DbId = item.DbId;
+      _DataTableId = item.DataTableId;
+      _DataTableDbId = item.DataTableDbId;
       _Name = item.Name;
       _KeyType = item.KeyType;
 
@@ -100,13 +100,13 @@ namespace LJCDataUtilityDAL
           break;
         }
 
-        retValue = ID.CompareTo(other.ID);
+        retValue = Id.CompareTo(other.Id);
         if (retValue != NetString.CompareEqual)
         {
           break;
         }
 
-        retValue = DataSiteID.CompareTo(other.DataSiteID);
+        retValue = DbId.CompareTo(other.DbId);
         break;
       }
       return retValue;
@@ -117,10 +117,10 @@ namespace LJCDataUtilityDAL
     ///  path='members/LJCSetOriginalValues/*'/>
     public void LJCSetOriginalValues()
     {
-      _OriginalValues.ID = _ID;
-      _OriginalValues.DbID = _DataDbID;
-      _OriginalValues.DataTableID = _DataTableID;
-      _OriginalValues.DataTableDbID = _DataTableDbID;
+      _OriginalValues.ID = _Id;
+      _OriginalValues.DbID = _DbId;
+      _OriginalValues.DataTableID = _DataTableId;
+      _OriginalValues.DataTableDbID = _DataTableDbId;
       _OriginalValues.Name = _Name;
       _OriginalValues.KeyType = _KeyType;
 
@@ -137,7 +137,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/ToString/*'/>
     public override string ToString()
     {
-      var retValue = $"{_Name}:{_ID}";
+      var retValue = $"{_Name}:{_Id}";
       return retValue;
     }
     #endregion
@@ -151,76 +151,76 @@ namespace LJCDataUtilityDAL
     /// <include file='doc/DataKey.xml'
     ///  path='members/ID/*'/>
     [Required]
-    [Column("ID", TypeName = "bigint")]
-    public long ID
+    [Column("Id", TypeName = "bigint")]
+    public long Id
     {
-      get => _ID;
+      get => _Id;
       set
       {
-        if (_ID != value)
+        if (_Id != value)
         {
-          _ID = ChangedNames.Add(ColumnId, _OriginalValues.ID, value);
+          _Id = ChangedNames.Add(ColumnId, _OriginalValues.ID, value);
         }
       }
     }
-    private long _ID;
+    private long _Id;
 
     // Gets or sets the database ID.
     /// <include file='doc/DataKey.xml'
     ///  path='members/DataSiteID/*'/>
     [Required]
-    [Column("DataSiteID", TypeName = "bigint")]
-    public short DataSiteID
+    [Column("DbId", TypeName = "smallint")]
+    public short DbId
     {
-      get => _DataDbID;
+      get => _DbId;
       set
       {
-        if (_DataDbID != value)
+        if (_DbId != value)
         {
-          _DataDbID = ChangedNames.Add(ColumnDbId
+          _DbId = ChangedNames.Add(ColumnDbId
             , _OriginalValues.DbID, value);
         }
       }
     }
-    private short _DataDbID;
+    private short _DbId;
 
     // Gets or sets the parent table row ID.
     /// <include file='doc/DataKey.xml'
     ///  path='members/DataTableID/*'/>
     [Required]
-    [Column("DataTableID", TypeName = "bigint")]
-    public long DataTableID
+    [Column("DataTableId", TypeName = "bigint")]
+    public long DataTableId
     {
-      get => _DataTableID;
+      get => _DataTableId;
       set
       {
-        if (_DataTableID != value)
+        if (_DataTableId != value)
         {
-          _DataTableID = ChangedNames.Add(ColumnDataTableId
+          _DataTableId = ChangedNames.Add(ColumnDataTableId
           , _OriginalValues.DataTableID, value);
         }
       }
     }
-    private long _DataTableID;
+    private long _DataTableId;
 
     // Gets or sets the DataTable database ID.
     /// <include file='doc/DataKey.xml'
     ///  path='members/DataTableSiteID/*'/>
     [Required]
-    [Column("DataTableSiteID", TypeName = "bigint")]
-    public short DataTableSiteID
+    [Column("DataTableDbId", TypeName = "smallint")]
+    public short DataTableDbId
     {
-      get => _DataTableDbID;
+      get => _DataTableDbId;
       set
       {
-        if (_DataTableDbID != value)
+        if (_DataTableDbId != value)
         {
-          _DataTableDbID = ChangedNames.Add(ColumnDataTableDbId
+          _DataTableDbId = ChangedNames.Add(ColumnDataTableDbId
             , _OriginalValues.DataTableDbID, value);
         }
       }
     }
-    private short _DataTableDbID;
+    private short _DataTableDbId;
 
     // Gets or sets the Name value.
     /// <include file='doc/DataKey.xml'
@@ -500,13 +500,13 @@ namespace LJCDataUtilityDAL
           break;
         }
 
-        retValue = x.DataTableSiteID.CompareTo(y.DataTableSiteID);
+        retValue = x.DataTableDbId.CompareTo(y.DataTableDbId);
         if (retValue != NetString.CompareEqual)
         {
           break;
         }
 
-        retValue = x.DataTableID.CompareTo(y.DataTableID);
+        retValue = x.DataTableId.CompareTo(y.DataTableId);
         if (retValue != NetString.CompareEqual)
         {
           break;

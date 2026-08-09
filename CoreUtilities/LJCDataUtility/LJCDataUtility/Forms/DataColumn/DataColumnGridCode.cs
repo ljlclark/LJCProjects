@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataColumnGridCode.cs
 using static LJCDataUtility.DataUtilityList;
@@ -186,7 +186,7 @@ namespace LJCDataUtility
     {
       row.LJCSetInt64(DataUtilColumn.ColumnId
         , dataRecord.Id);
-      row.LJCSetInt64(DataUtilColumn.ColumnDbId, dataRecord.DbId);
+      row.LJCSetInt32(DataUtilColumn.ColumnDbId, dataRecord.DbId);
       row.LJCSetString(DataUtilColumn.ColumnName, dataRecord.Name);
     }
     #endregion
@@ -280,14 +280,14 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow
         && ColumnGrid.CurrentRow is LJCGridRow)
       {
-        var id = ParentObject.DataColumnRowID(out short dbID);
+        var id = ParentObject.DataColumnRowID(out short dbId);
         var parentID = ParentObject.DataTableRowID(out short parentDbID);
         string parentName = ParentObject.DataTableRowName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail()
         {
           LJCId = id,
-          LJCDbId = dbID,
+          LJCDbId = dbId,
           LJCLocation = location,
           LJCManagers = Managers,
           LJCParentID = parentID,

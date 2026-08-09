@@ -267,7 +267,7 @@ namespace LJCDataUtility
     {
       var newKey = new DataKey()
       {
-        DataTableID = tableID,
+        DataTableId = tableID,
         Name = tableKey.ConstraintName,
         KeyType = keyType,
         SourceColumnName = tableKey.ColumnName,
@@ -499,8 +499,8 @@ namespace LJCDataUtility
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
           var keyManager = Managers.DataKeyManager;
-          var keyColumns = keyManager.UniqueKey(dataKey.DataTableID
-            , (short)dataKey.DataTableSiteID, dataKey.Name);
+          var keyColumns = keyManager.UniqueKey(dataKey.DataTableId
+            , (short)dataKey.DataTableDbId, dataKey.Name);
           keyManager.Update(updateKey, keyColumns);
         }
       }

@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataKeyGridCode.cs
 using static LJCDataUtility.DataUtilityList;
@@ -121,7 +121,6 @@ namespace LJCDataUtility
     {
       var retValue = KeyGrid.LJCRowAdd();
       SetStoredValues(retValue, data);
-      //retValue.LJCSetValues(KeyGrid, data);
       retValue.LJCSetValues(data);
       SetKeyTypeName(retValue, data.KeyType);
       return retValue;
@@ -176,7 +175,7 @@ namespace LJCDataUtility
       ParentObject.KeyForeignKeyProc.Enabled = false;
       ParentObject.KeyForeignKeyDropProc.Enabled = false;
       var row = ParentObject.DataKeyRow();
-      var id = ParentObject.DataKeyRowID(out short dbID, row);
+      var id = ParentObject.DataKeyRowId(out short dbID, row);
       if (id > 1)
       {
         var dataKey = Managers.GetDataKey(id, dbID);
@@ -193,8 +192,8 @@ namespace LJCDataUtility
     // Sets the row stored values.
     private void SetStoredValues(LJCGridRow row, DataKey data)
     {
-      row.LJCSetInt64(DataKey.ColumnId, data.ID);
-      row.LJCSetInt64(DataKey.ColumnDbId, data.DataSiteID);
+      row.LJCSetInt64(DataKey.ColumnId, data.Id);
+      row.LJCSetInt32(DataKey.ColumnDbId, data.DbId);
     }
 
     // Sets the KeyType column value.
@@ -226,7 +225,7 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = ParentObject.DataKeyRowID(out short dbID);
+        var id = ParentObject.DataKeyRowId(out short dbID);
         var keyColumns = new LJCDataColumns()
         {
           { DataKey.ColumnId, id },
@@ -256,18 +255,18 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow
         && KeyGrid.CurrentRow is LJCGridRow)
       {
-        var id = ParentObject.DataKeyRowID(out short dbID);
-        var parentID = ParentObject.DataTableRowID(out short parentDbID);
+        var id = ParentObject.DataKeyRowId(out short dbId);
+        var parentId = ParentObject.DataTableRowID(out short parentDbId);
         string parentName = ParentObject.DataTableRowName();
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail()
         {
           LJCID = id,
-          LJCDbID = dbID,
+          LJCDbID = dbId,
           LJCLocation = location,
           LJCManagers = Managers,
-          LJCParentID = parentID,
-          LJCParentDbID = parentDbID,
+          LJCParentID = parentId,
+          LJCParentDbID = parentDbId,
           LJCParentName = parentName,
         };
         detail.LJCChange += Detail_Change;
@@ -309,7 +308,7 @@ namespace LJCDataUtility
       if (KeyGrid.CurrentRow is LJCGridRow)
       {
         // Save the original row.
-        id = ParentObject.DataKeyRowID(out dbID);
+        id = ParentObject.DataKeyRowId(out dbID);
       }
       DataRetrieve();
 
@@ -357,7 +356,7 @@ namespace LJCDataUtility
     internal void ForeignKeyProc()
     {
       var row = ParentObject.DataKeyRow();
-      var id = ParentObject.DataKeyRowID(out short dbID, row);
+      var id = ParentObject.DataKeyRowId(out short dbID, row);
       var dataKey = Managers.GetDataKey(id, dbID);
       if (dataKey != null
         && dataKey.KeyType == (int)KeyType.Foreign)
@@ -401,7 +400,7 @@ namespace LJCDataUtility
     internal void ForeignKeyDropProc()
     {
       var row = ParentObject.DataKeyRow();
-      var id = ParentObject.DataKeyRowID(out short dbID, row);
+      var id = ParentObject.DataKeyRowId(out short dbID, row);
       var dataKey = Managers.GetDataKey(id, dbID);
       if (dataKey != null
         && dataKey.KeyType == (int)KeyType.Foreign)

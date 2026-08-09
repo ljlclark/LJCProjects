@@ -56,10 +56,10 @@ namespace TestDataUtilityDAL
       var dataKeys = new DataKeys();
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         KeyType = 0,
         IsClustered = false,
@@ -72,10 +72,10 @@ namespace TestDataUtilityDAL
 
       dataKey = new DataKey
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         KeyType = 0,
         IsClustered = false,
@@ -103,10 +103,10 @@ namespace TestDataUtilityDAL
       var dataKeys = new List<DataKey>();
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         KeyType = 0,
         IsClustered = false,
@@ -119,10 +119,10 @@ namespace TestDataUtilityDAL
 
       dataKey = new DataKey
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         KeyType = 0,
         IsClustered = false,
@@ -163,10 +163,10 @@ namespace TestDataUtilityDAL
       var dataKeys = new DataKeys();
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         KeyType = 1,
         IsClustered = false,
@@ -181,13 +181,13 @@ namespace TestDataUtilityDAL
       var newDataKeys = dataKeys.Clone();
 
       var newDataKey = newDataKeys[0];
-      var result = $"{newDataKey.ID}";
-      result += $", {newDataKey.DataSiteID}";
+      var result = $"{newDataKey.Id}";
+      result += $", {newDataKey.DbId}";
       var compare = "1, 2";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      result = $"{newDataKey.DataTableID}";
-      result += $", {newDataKey.DataTableSiteID}";
+      result = $"{newDataKey.DataTableId}";
+      result += $", {newDataKey.DataTableDbId}";
       compare = "3, 4";
       TestCommon.Write($"{methodName}2", result, compare);
 
@@ -217,10 +217,10 @@ namespace TestDataUtilityDAL
 
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         KeyType = 1,
         IsClustered = false,
@@ -244,10 +244,10 @@ namespace TestDataUtilityDAL
       var dataKeys = new DataKeys();
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         KeyType = 0,
         IsClustered = false,
@@ -260,10 +260,10 @@ namespace TestDataUtilityDAL
 
       dataKey = new DataKey
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         KeyType = 0,
         IsClustered = false,
@@ -312,10 +312,10 @@ namespace TestDataUtilityDAL
       var dataKeys = new DataKeys();
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         KeyType = 1,
         IsClustered = false,
@@ -346,10 +346,10 @@ namespace TestDataUtilityDAL
       var dataKeys = new DataKeys();
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         KeyType = 1,
         IsClustered = false,
@@ -380,10 +380,10 @@ namespace TestDataUtilityDAL
       var dataKeys = new DataKeys();
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         KeyType = 1,
         IsClustered = false,
@@ -396,10 +396,10 @@ namespace TestDataUtilityDAL
 
       dataKey = new DataKey
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         KeyType = 1,
         IsClustered = false,
@@ -430,10 +430,10 @@ namespace TestDataUtilityDAL
       var dataKeys = new DataKeys();
       var dataKey = new DataKey
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         KeyType = 1,
         IsClustered = false,
@@ -446,10 +446,10 @@ namespace TestDataUtilityDAL
 
       dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         KeyType = 1,
         IsClustered = false,
@@ -464,7 +464,7 @@ namespace TestDataUtilityDAL
       dataKeys.LJCSortID();
 
       dataKey = dataKeys[0];
-      var result = dataKey.ID.ToString();
+      var result = dataKey.Id.ToString();
       var compare = "1";
       TestCommon.Write($"{methodName}", result, compare);
     }
@@ -477,10 +477,10 @@ namespace TestDataUtilityDAL
       var dataKeys = new DataKeys();
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         KeyType = 1,
         IsClustered = false,
@@ -493,10 +493,10 @@ namespace TestDataUtilityDAL
 
       dataKey = new DataKey
       {
-        ID = 2,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 2,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "First",
         KeyType = 1,
         IsClustered = false,
@@ -528,10 +528,10 @@ namespace TestDataUtilityDAL
       var dataKeys = new DataKeys();
       var dataKey = new DataKey
       {
-        ID = 1,
-        DataSiteID = 2,
-        DataTableID = 3,
-        DataTableSiteID = 4,
+        Id = 1,
+        DbId = 2,
+        DataTableId = 3,
+        DataTableDbId = 4,
         Name = "Name",
         KeyType = 1,
         IsClustered = false,
@@ -544,10 +544,10 @@ namespace TestDataUtilityDAL
 
       dataKey = new DataKey
       {
-        ID = 2,
-        DataSiteID = 3,
-        DataTableID = 4,
-        DataTableSiteID = 5,
+        Id = 2,
+        DbId = 3,
+        DataTableId = 4,
+        DataTableDbId = 5,
         Name = "First",
         KeyType = 1,
         IsClustered = false,

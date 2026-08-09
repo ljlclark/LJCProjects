@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataKeyDetail.cs
 using LJCDataUtilityDAL;
@@ -7,12 +7,10 @@ using LJCNetCommon;
 using LJCWinFormCommon;
 using LJCWinFormControls;
 using System;
-using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using static LJCDataUtility.DataKeyGridCode;
-using System.Xml.Linq;
 
 namespace LJCDataUtility
 {
@@ -97,9 +95,9 @@ namespace LJCDataUtility
         AscendingCheck.Checked = data.IsAscending;
 
         // Reference key values.
-        LJCDbID = (short)data.DataSiteID;
-        LJCParentID = data.DataTableID;
-        LJCParentDbID = data.DataTableSiteID;
+        LJCDbID = (short)data.DbId;
+        LJCParentID = data.DataTableId;
+        LJCParentDbID = data.DataTableDbId;
       }
     }
 
@@ -121,10 +119,10 @@ namespace LJCDataUtility
       retData.IsAscending = AscendingCheck.Checked;
 
       // Get Reference key values.
-      retData.ID = LJCID;
-      retData.DataSiteID = LJCDbID;
-      retData.DataTableID = LJCParentID;
-      retData.DataTableSiteID = LJCParentDbID;
+      retData.Id = LJCID;
+      retData.DbId = LJCDbID;
+      retData.DataTableId = LJCParentID;
+      retData.DataTableDbId = LJCParentDbID;
       return retData;
     }
 
@@ -170,21 +168,21 @@ namespace LJCDataUtility
         if (LJCIsUpdate)
         {
           var keyColumns = manager.IDKey(LJCID, LJCDbID);
-          LJCRecord.ID = 0;
+          LJCRecord.Id = 0;
           manager.Update(LJCRecord, keyColumns);
           ResetValues(LJCRecord);
-          LJCRecord.ID = LJCID;
+          LJCRecord.Id = LJCID;
           retValue = !FormCommon.UpdateError(this, manager.AffectedCount);
         }
         else
         {
-          LJCRecord.ID = 0;
-          LJCRecord.DataSiteID = (short)mSettings.SiteID;
+          LJCRecord.Id = 0;
+          LJCRecord.DbId = (short)mSettings.SiteID;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
           if (addedRecord != null)
           {
-            LJCRecord.ID = addedRecord.ID;
+            LJCRecord.Id = addedRecord.Id;
           }
           retValue = !FormCommon.AddError(this, manager.AffectedCount);
         }

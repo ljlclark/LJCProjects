@@ -472,8 +472,8 @@ namespace LJCDataUtility
       }
 
       // Drop constraints and foreign keys.
-      var otherKeys = dataKeys.FindAll(x => x.DataTableID == tableID
-        && x.DataTableSiteID == siteID
+      var otherKeys = dataKeys.FindAll(x => x.DataTableId == tableID
+        && x.DataTableDbId == siteID
         && x.KeyType != (short)ObjectType.Primary);
       foreach (DataKey dataKey in otherKeys)
       {

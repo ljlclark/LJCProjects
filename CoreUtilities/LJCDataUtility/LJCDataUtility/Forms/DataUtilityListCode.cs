@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataUtilityListCode.cs
 using LJCDataAccessConfig;
@@ -38,52 +38,6 @@ namespace LJCDataUtility
   {
     #region Control Item Value Methods
 
-    #region DataColumn value methods.
-
-    // Gets the current Column Grid row.
-    internal LJCGridRow DataColumnRow()
-    {
-      LJCGridRow retRow = ColumnGrid.CurrentRow as LJCGridRow;
-      return retRow;
-    }
-
-    // Gets the selected row ID.
-    internal long DataColumnRowID(out short dbID, LJCGridRow row = null)
-    {
-      long retColumnID = 0;
-
-      dbID = 0;
-      if (null == row)
-      {
-        row = DataColumnRow();
-      }
-      if (row is LJCGridRow
-        && "ColumnGrid" == row.DataGridView.Name)
-      {
-        retColumnID = row.LJCGetInt64(DataUtilColumn.ColumnId);
-        dbID = (short)row.LJCGetInt32(DataUtilColumn.ColumnDbId);
-      }
-      return retColumnID;
-    }
-
-    // Gets the selected row Name.
-    internal string DataColumnRowName(LJCGridRow row = null)
-    {
-      string retColumnName = null;
-
-      if (null == row)
-      {
-        row = DataColumnRow();
-      }
-      if (row is LJCGridRow
-        && "ColumnGrid" == row.DataGridView.Name)
-      {
-        retColumnName = row.LJCGetString(DataUtilColumn.ColumnName);
-      }
-      return retColumnName;
-    }
-    #endregion
-
     #region DataConfig value methods.
 
     // Gets the DataConfig object.
@@ -92,97 +46,6 @@ namespace LJCDataUtility
       var configCombo = DataConfigCombo;
       var retConfig = configCombo.SelectedItem as DataConfig;
       return retConfig;
-    }
-    #endregion
-
-    #region DataKey value methods.
-
-    // Gets the current DataKey grid row.
-    internal LJCGridRow DataKeyRow()
-    {
-      LJCGridRow retRow = KeyGrid.CurrentRow as LJCGridRow;
-      return retRow;
-    }
-
-    // Gets the selected row ID.
-    internal long DataKeyRowID(out short dbID, LJCGridRow row = null)
-    {
-      long retKeyID = 0;
-
-      dbID = 0;
-      if (null == row)
-      {
-        row = DataKeyRow();
-      }
-      if (row is LJCGridRow
-        && "KeyGrid" == row.DataGridView.Name)
-      {
-        retKeyID = row.LJCGetInt64(DataKey.ColumnId);
-        dbID = (short)row.LJCGetInt32(DataKey.ColumnDbId);
-      }
-      return retKeyID;
-    }
-
-    // Gets the selected row Name.
-    internal string DataKeyRowName(LJCGridRow row = null)
-    {
-      string retKeyName = null;
-
-      if (null == row)
-      {
-        row = DataKeyRow();
-      }
-      if (row is LJCGridRow
-        && "KeyGrid" == row.DataGridView.Name)
-      {
-        retKeyName = row.LJCGetString(DataKey.ColumnName);
-      }
-      return retKeyName;
-    }
-
-    /// <summary>Retrieve the Foreign keys.</summary>
-    /// <returns>The foreign key collection.</returns>
-    internal DataKeys ForeignKeys()
-    {
-      var tableID = DataTableRowID(out short dbID);
-      var keyManager = Managers.DataKeyManager;
-      var retKeys = keyManager.LoadWithParentType(tableID, dbID
-        , (short)KeyType.Foreign);
-      return retKeys;
-    }
-
-    /// <summary>Retrieve the Primary key column list.</summary>
-    /// <returns>The primary key columns text.</returns>
-    internal string PrimaryKeyColumns()
-    {
-      string retList = null;
-
-      var parentID = DataTableRowID(out short parentDbID);
-      var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithParentType(parentID, parentDbID
-        , (short)KeyType.Primary);
-      if (dataKey != null)
-      {
-        retList = dataKey.SourceColumnName;
-      }
-      return retList;
-    }
-
-    /// <summary>Retrieve the Unique key column list.</summary>
-    /// <returns>The unique key columns text.</returns>
-    internal string UniqueKeyColumns()
-    {
-      string retList = null;
-
-      var parentID = DataTableRowID(out short parentDbID);
-      var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithParentType(parentID, parentDbID
-        , (short)KeyType.Unique);
-      if (dataKey != null)
-      {
-        retList = dataKey.SourceColumnName;
-      }
-      return retList;
     }
     #endregion
 
@@ -231,11 +94,11 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal long DataTableRowID(out short dbID, LJCGridRow row = null)
+    internal long DataTableRowID(out short dbId, LJCGridRow row = null)
     {
-      long retTableID = 0;
+      long retTableId = 0;
 
-      dbID = 0;
+      dbId = 0;
       if (row == null)
       {
         row = DataTableRow();
@@ -243,10 +106,10 @@ namespace LJCDataUtility
       if (row is LJCGridRow
         && "TableGrid" == row.DataGridView.Name)
       {
-        retTableID = row.LJCGetInt64(DataUtilTable.ColumnId);
-        dbID = (short)row.LJCGetInt32(DataUtilTable.ColumnDbId);
+        retTableId = row.LJCGetInt64(DataUtilTable.ColumnId);
+        dbId = (short)row.LJCGetInt32(DataUtilTable.ColumnDbId);
       }
-      return retTableID;
+      return retTableId;
     }
 
     // Gets the selected row Name.
@@ -281,6 +144,140 @@ namespace LJCDataUtility
         dbId = targetTable.DbId;
       }
       return retTableID;
+    }
+    #endregion
+
+    #region DataColumn value methods.
+
+    // Gets the current Column Grid row.
+    internal LJCGridRow DataColumnRow()
+    {
+      LJCGridRow retRow = ColumnGrid.CurrentRow as LJCGridRow;
+      return retRow;
+    }
+
+    // Gets the selected row ID.
+    internal long DataColumnRowID(out short dbId, LJCGridRow row = null)
+    {
+      long retColumnId = 0;
+
+      dbId = 0;
+      if (null == row)
+      {
+        row = DataColumnRow();
+      }
+      if (row is LJCGridRow
+        && "ColumnGrid" == row.DataGridView.Name)
+      {
+        retColumnId = row.LJCGetInt64(DataUtilColumn.ColumnId);
+        dbId = (short)row.LJCGetInt32(DataUtilColumn.ColumnDbId);
+      }
+      return retColumnId;
+    }
+
+    // Gets the selected row Name.
+    internal string DataColumnRowName(LJCGridRow row = null)
+    {
+      string retColumnName = null;
+
+      if (null == row)
+      {
+        row = DataColumnRow();
+      }
+      if (row is LJCGridRow
+        && "ColumnGrid" == row.DataGridView.Name)
+      {
+        retColumnName = row.LJCGetString(DataUtilColumn.ColumnName);
+      }
+      return retColumnName;
+    }
+    #endregion
+
+    #region DataKey value methods.
+
+    // Gets the current DataKey grid row.
+    internal LJCGridRow DataKeyRow()
+    {
+      LJCGridRow retRow = KeyGrid.CurrentRow as LJCGridRow;
+      return retRow;
+    }
+
+    // Gets the selected row ID.
+    internal long DataKeyRowId(out short dbId, LJCGridRow row = null)
+    {
+      long retKeyId = 0;
+
+      dbId = 0;
+      if (null == row)
+      {
+        row = DataKeyRow();
+      }
+      if (row is LJCGridRow
+        && "KeyGrid" == row.DataGridView.Name)
+      {
+        retKeyId = row.LJCGetInt64(DataKey.ColumnId);
+        dbId = (short)row.LJCGetInt32(DataKey.ColumnDbId);
+      }
+      return retKeyId;
+    }
+
+    // Gets the selected row Name.
+    internal string DataKeyRowName(LJCGridRow row = null)
+    {
+      string retKeyName = null;
+
+      if (null == row)
+      {
+        row = DataKeyRow();
+      }
+      if (row is LJCGridRow
+        && "KeyGrid" == row.DataGridView.Name)
+      {
+        retKeyName = row.LJCGetString(DataKey.ColumnName);
+      }
+      return retKeyName;
+    }
+
+    // Retrieve the Foreign keys.
+    internal DataKeys ForeignKeys()
+    {
+      var tableID = DataTableRowID(out short dbID);
+      var keyManager = Managers.DataKeyManager;
+      var retKeys = keyManager.LoadWithParentType(tableID, dbID
+        , (short)KeyType.Foreign);
+      return retKeys;
+    }
+
+    // Retrieve the Primary key column list.
+    internal string PrimaryKeyColumns()
+    {
+      string retList = null;
+
+      var parentID = DataTableRowID(out short parentDbID);
+      var keyManager = Managers.DataKeyManager;
+      var dataKey = keyManager.RetrieveWithParentType(parentID, parentDbID
+        , (short)KeyType.Primary);
+      if (dataKey != null)
+      {
+        retList = dataKey.SourceColumnName;
+      }
+      return retList;
+    }
+
+    // Retrieve the Unique key column list.
+    internal string UniqueKeyColumns()
+    {
+      string retList = null;
+
+      var parentID = DataTableRowID(out short parentDbID);
+      var keyManager = Managers.DataKeyManager;
+      var dataKey = keyManager.RetrieveWithParentType(parentID, parentDbID
+        , (short)KeyType.Unique);
+      if (dataKey != null)
+      {
+        retList = dataKey.SourceColumnName;
+      }
+      return retList;
     }
     #endregion
     #endregion
@@ -393,7 +390,7 @@ namespace LJCDataUtility
     }
     #endregion
 
-    #region Private Methods
+    #region Other Methods
 
     // Restores the control values.
     private void RestoreControlValues()

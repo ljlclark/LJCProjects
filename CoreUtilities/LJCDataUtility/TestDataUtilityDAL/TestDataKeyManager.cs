@@ -197,9 +197,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataKey = new DataKey()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
       };
 
@@ -294,9 +294,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataKey = new DataKey()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableSiteID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableSiteID,
         Name = name,
       };
       dataKeyManager.Add(dataKey);
@@ -347,9 +347,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataKey = new DataKey()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
       };
       dataKeyManager.Add(dataKey);
@@ -397,9 +397,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataKey = new DataKey()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
       };
       dataKeyManager.Add(dataKey);
@@ -417,8 +417,8 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Update the test record.
-      var id = dataKey.ID;
-      dbID = dataKey.DataSiteID;
+      var id = dataKey.Id;
+      dbID = dataKey.DbId;
       var idKey = dataKeyManager.IDKey(id, dbID);
       dataKey.Name += " Updated";
       var propertyNames = new List<string>()
@@ -469,9 +469,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataKey = new DataKey()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         KeyType = foreignKey,
         IsAscending = true,
@@ -538,9 +538,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataKey = new DataKey()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         KeyType = 1,
         IsAscending = true,
@@ -565,8 +565,8 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Load with parent.
-      dataTableID = dataKey.DataTableID;
-      dataTableDbID = (short)dataKey.DataTableSiteID;
+      dataTableID = dataKey.DataTableId;
+      dataTableDbID = (short)dataKey.DataTableDbId;
 
       // Test Method
       var dataKeys = dataKeyManager.LoadWithParent(dataTableID, dataTableDbID);
@@ -604,9 +604,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataKey = new DataKey()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         KeyType = 1,
         IsAscending = true,
@@ -631,8 +631,8 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Load with parent.
-      dataTableID = dataKey.DataTableID;
-      dataTableDbID = (short)dataKey.DataTableSiteID;
+      dataTableID = dataKey.DataTableId;
+      dataTableDbID = (short)dataKey.DataTableDbId;
       var keyType = 1;
 
       // Test Method
@@ -672,9 +672,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataKey = new DataKey()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         KeyType = 1,
         IsAscending = true,
@@ -699,8 +699,8 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Load with type.
-      var id = dataKey.ID;
-      dbID = (short)dataKey.DataTableSiteID;
+      var id = dataKey.Id;
+      dbID = (short)dataKey.DataTableDbId;
       short keyType = 1;
 
       // Test Method
@@ -741,9 +741,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataKey = new DataKey()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         KeyType = 1,
         IsAscending = true,
@@ -768,7 +768,7 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Retrieve with ID.
-      var id = dataKey.ID;
+      var id = dataKey.Id;
 
       // Test Method
       dataKey = dataKeyManager.RetrieveWithID(id, dbID);
@@ -805,9 +805,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataKey = new DataKey()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         KeyType = 1,
         IsAscending = true,
@@ -832,8 +832,8 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Retrieve with parent KeyType.
-      var parentID = dataKey.DataTableID;
-      short parentDbID = (short)dataKey.DataTableSiteID;
+      var parentID = dataKey.DataTableId;
+      short parentDbID = (short)dataKey.DataTableDbId;
       var keyType = dataKey.KeyType;
 
       // Test Method
@@ -872,9 +872,9 @@ namespace TestDataUtilityDAL
       // Create the test record.
       var dataKey = new DataKey()
       {
-        DataSiteID = dbID,
-        DataTableID = dataTableID,
-        DataTableSiteID = dataTableDbID,
+        DbId = dbID,
+        DataTableId = dataTableID,
+        DataTableDbId = dataTableDbID,
         Name = name,
         KeyType = 1,
         IsAscending = true,
