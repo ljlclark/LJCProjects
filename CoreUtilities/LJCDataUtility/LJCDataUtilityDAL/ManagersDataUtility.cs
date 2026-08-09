@@ -33,7 +33,7 @@ namespace LJCDataUtilityDAL
     #region Data Methods
 
     /// <summary>Gets the DataColumn by ID.</summary>
-    public DataUtilColumn GetDataColumn(long id, short dbID)
+    public DataUtilColumn GetDataColumn(long id, short dbId)
     {
       DataUtilColumn retDataColumn = null;
 
@@ -41,13 +41,13 @@ namespace LJCDataUtilityDAL
       var manager = DataColumnManager;
       if (manager != null)
       {
-        retDataColumn = manager.RetrieveWithID(id, dbID);
+        retDataColumn = manager.RetrieveWithId(id, dbId);
       }
       return retDataColumn;
     }
 
     /// <summary>Gets the DataKey by ID.</summary>
-    public DataKey GetDataKey(long id, short dbID)
+    public DataKey GetDataKey(long id, short dbId)
     {
       DataKey retDataKey = null;
 
@@ -55,13 +55,13 @@ namespace LJCDataUtilityDAL
       var manager = DataKeyManager;
       if (manager != null)
       {
-        retDataKey = manager.RetrieveWithID(id, dbID);
+        retDataKey = manager.RetrieveWithID(id, dbId);
       }
       return retDataKey;
     }
 
     /// <summary>Gets the DataModule by ID.</summary>
-    public DataModule GetDataModule(long id, short dbID)
+    public DataModule GetDataModule(long id, short dbId)
     {
       DataModule retDataModule = null;
 
@@ -69,35 +69,35 @@ namespace LJCDataUtilityDAL
       var manager = DataModuleManager;
       if (manager != null)
       {
-        retDataModule = manager.RetrieveWithID(id, dbID);
+        retDataModule = manager.RetrieveWithID(id, dbId);
       }
       return retDataModule;
     }
 
     /// <summary>Gets the DataKey by ID.</summary>
-    public DataUtilTable GetDataTable(long id, short dbID)
+    public DataUtilTable GetDataTable(long id, short dbId)
     {
       DataUtilTable retDataTable = null;
 
-      IDError(id, "GetDataTable(id, siteID)", "id");
-      IDError(dbID, "GetDataTable(id, siteID)", "siteID");
+      IDError(id, "GetDataTable(id, dbId)", "id");
+      IDError(dbId, "GetDataTable(id, dbId)", "dbId");
       var manager = DataTableManager;
       if (manager != null)
       {
-        retDataTable = manager.RetrieveWithID(id, dbID);
+        retDataTable = manager.RetrieveWithID(id, dbId);
       }
       return retDataTable;
     }
 
     /// <summary>Gets the table DataColumns.</summary>
-    public DataColumns TableDataColumns(long tableID, short dbID
+    public DataColumns TableDataColumns(long tableId, short dbId
       , List<string> orderByNames = null)
     {
       DataColumns retColumns = null;
 
-      IDError(tableID, "TableDataColumns(int tableID)", "tableID");
+      IDError(tableId, "TableDataColumns(int tableId)", "tableId");
       var columnManager = DataColumnManager;
-      var keyColumns = columnManager.ParentKey(tableID, dbID);
+      var keyColumns = columnManager.ParentKey(tableId, dbId);
       if (LJC.HasListItems(orderByNames))
       {
         columnManager.Manager.OrderByNames = orderByNames;

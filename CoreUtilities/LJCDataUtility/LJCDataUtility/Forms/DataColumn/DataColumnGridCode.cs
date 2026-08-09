@@ -105,8 +105,8 @@ namespace LJCDataUtility
 
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        var parentID = ParentObject.DataTableRowID(out short parentDbID);
-        var keyColumns = ColumnManager.ParentKey(parentID, parentDbID);
+        var parentId = ParentObject.DataTableRowId(out short parentDbId);
+        var keyColumns = ColumnManager.ParentKey(parentId, parentDbId);
         var orderByNames = new List<string>()
         {
           DataUtilColumn.ColumnSequence
@@ -131,13 +131,12 @@ namespace LJCDataUtility
     {
       var retValue = ColumnGrid.LJCRowAdd();
       SetStoredValues(retValue, data);
-      //retValue.LJCSetValues(ColumnGrid, data);
       retValue.LJCSetValues(data);
       return retValue;
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelect(long id, short dbID)
+    private bool RowSelect(long id, short dbId)
     {
       bool retValue = false;
 
@@ -146,9 +145,9 @@ namespace LJCDataUtility
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in ColumnGrid.Rows)
         {
-          var rowID = ParentObject.DataColumnRowID(out short rowDbID, row);
-          if (rowID == id
-            && rowDbID == dbID)
+          var rowId = ParentObject.DataColumnRowId(out short rowDbId, row);
+          if (rowId == id
+            && rowDbId == dbId)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             ColumnGrid.LJCSetCurrentRow(row, true);
@@ -250,11 +249,11 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = ParentObject.DataColumnRowID(out short dbID);
+        var id = ParentObject.DataColumnRowId(out short dbId);
         var keyColumns = new LJCDataColumns()
         {
           { DataUtilColumn.ColumnId, id },
-          { DataUtilColumn.ColumnDbId, dbID },
+          { DataUtilColumn.ColumnDbId, dbId },
         };
         ColumnManager.Delete(keyColumns);
         if (0 == ColumnManager.AffectedCount)
@@ -280,8 +279,8 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow
         && ColumnGrid.CurrentRow is LJCGridRow)
       {
-        var id = ParentObject.DataColumnRowID(out short dbId);
-        var parentID = ParentObject.DataTableRowID(out short parentDbID);
+        var id = ParentObject.DataColumnRowId(out short dbId);
+        var parentId = ParentObject.DataTableRowId(out short parentDbId);
         string parentName = ParentObject.DataTableRowName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail()
@@ -290,8 +289,8 @@ namespace LJCDataUtility
           LJCDbId = dbId,
           LJCLocation = location,
           LJCManagers = Managers,
-          LJCParentID = parentID,
-          LJCParentDbID = parentDbID,
+          LJCParentId = parentId,
+          LJCParentDbId = parentDbId,
           LJCParentName = parentName,
         };
         detail.LJCChange += Detail_Change;
@@ -307,15 +306,15 @@ namespace LJCDataUtility
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         int sequence = ColumnGrid.Rows.Count + 1;
-        var parentID = ParentObject.DataTableRowID(out short parentDbID);
+        var parentId = ParentObject.DataTableRowId(out short parentDbId);
         string parentName = ParentObject.DataTableRowName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail
         {
           LJCLocation = location,
           LJCManagers = Managers,
-          LJCParentID = parentID,
-          LJCParentDbID = parentDbID,
+          LJCParentId = parentId,
+          LJCParentDbId = parentDbId,
           LJCParentName = parentName,
           LJCSequence = sequence
         };
@@ -331,18 +330,18 @@ namespace LJCDataUtility
     {
       ParentObject.Cursor = Cursors.WaitCursor;
       long id = 0;
-      short dbID = 0;
+      short dbId = 0;
       if (ColumnGrid.CurrentRow is LJCGridRow)
       {
         // Save the original row.
-        id = ParentObject.DataColumnRowID(out dbID);
+        id = ParentObject.DataColumnRowId(out dbId);
       }
       DataRetrieve();
 
       // Select the original row.
       if (id > 0)
       {
-        RowSelect(id, dbID);
+        RowSelect(id, dbId);
       }
       ParentObject.Cursor = Cursors.Default;
     }

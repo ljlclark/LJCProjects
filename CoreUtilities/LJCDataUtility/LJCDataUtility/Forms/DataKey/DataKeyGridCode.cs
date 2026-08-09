@@ -100,7 +100,7 @@ namespace LJCDataUtility
 
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        var parentID = ParentObject.DataTableRowID(out short parentDbID);
+        var parentID = ParentObject.DataTableRowId(out short parentDbID);
         var keyColumns = KeyManager.ParentKey(parentID, parentDbID);
         var items = KeyManager.Load(keyColumns);
         if (LJC.HasListItems(items))
@@ -136,7 +136,7 @@ namespace LJCDataUtility
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in KeyGrid.Rows)
         {
-          var rowID = ParentObject.DataTableRowID(out short tableDbID);
+          var rowID = ParentObject.DataTableRowId(out short tableDbID);
           if (rowID == id
             && siteID == tableDbID)
           {
@@ -256,7 +256,7 @@ namespace LJCDataUtility
         && KeyGrid.CurrentRow is LJCGridRow)
       {
         var id = ParentObject.DataKeyRowId(out short dbId);
-        var parentId = ParentObject.DataTableRowID(out short parentDbId);
+        var parentId = ParentObject.DataTableRowId(out short parentDbId);
         string parentName = ParentObject.DataTableRowName();
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail()
@@ -281,7 +281,7 @@ namespace LJCDataUtility
     {
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        var parentID = ParentObject.DataTableRowID(out short parentDbID);
+        var parentID = ParentObject.DataTableRowId(out short parentDbID);
         string parentName = ParentObject.DataTableRowName();
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail

@@ -28,7 +28,7 @@ namespace LJCDataUtility
     // Generates the Rename Table SQL.
     internal void RenameTableSQL()
     {
-      var parentID = ParentObject.DataTableRowID(out short parentDbID);
+      var parentID = ParentObject.DataTableRowId(out short parentDbID);
       var keyManager = Managers.DataKeyManager;
       var dataKeys = keyManager.Load();
       if (LJC.HasListItems(dataKeys))

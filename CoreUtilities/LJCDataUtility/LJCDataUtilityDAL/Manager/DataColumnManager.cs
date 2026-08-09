@@ -58,7 +58,7 @@ namespace LJCDataUtilityDAL
 
       var values = ValuesDataUtility.Instance;
       var ManagersDataSite = values.SiteManagers;
-      DbID = ManagersDataSite.DbGroupManager.DbID;
+      DbId = ManagersDataSite.DbGroupManager.DbID;
       EntryManager = ManagersDataSite.DataEntryManager;
     }
     #endregion
@@ -156,12 +156,12 @@ namespace LJCDataUtilityDAL
     // Retrieves a record with the supplied value.
     /// <include file='Doc/DataColumnManager.xml'
     ///  path='members/RetrieveWithID/*'/>
-    public DataUtilColumn RetrieveWithID(long id, short dbID
+    public DataUtilColumn RetrieveWithId(long id, short dbId
       , List<string> propertyNames = null)
     {
       DataUtilColumn retValue;
 
-      var keyColumns = IDKey(id, dbID);
+      var keyColumns = IdKey(id, dbId);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -170,12 +170,12 @@ namespace LJCDataUtilityDAL
     // Retrieves a record with the supplied unique values.
     /// <include file='Doc/DataColumnManager.xml'
     ///  path='members/RetrieveWithUnique/*'/>
-    public DataUtilColumn RetrieveWithUnique(long parentID, short parentDbID
+    public DataUtilColumn RetrieveWithUnique(long parentId, short parentDbId
       , string name, List<string> propertyNames = null)
     {
       DataUtilColumn retValue;
 
-      var keyColumns = UniqueKey(parentID, parentDbID, name);
+      var keyColumns = UniqueKey(parentId, parentDbId, name);
       var dbResult = Manager.Retrieve(keyColumns, propertyNames);
       retValue = ResultConverter.CreateData(dbResult);
       return retValue;
@@ -186,14 +186,14 @@ namespace LJCDataUtilityDAL
 
     // Gets the ID key columns.
     /// <include file='Doc/DataColumnManager.xml'
-    ///  path='members/IDKey/*'/>
-    public LJCDataColumns IDKey(long id, short dbID)
+    ///  path='members/IdKey/*'/>
+    public LJCDataColumns IdKey(long id, short dbId)
     {
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new LJCDataColumns()
       {
         { DataUtilColumn.ColumnId, id },
-        { DataUtilColumn.ColumnDbId, dbID},
+        { DataUtilColumn.ColumnDbId, dbId},
       };
       return retValue;
     }
@@ -201,16 +201,16 @@ namespace LJCDataUtilityDAL
     // Gets the ID key columns.
     /// <include file='Doc/DataColumnManager.xml'
     ///  path='members/ParentKey/*'/>
-    public LJCDataColumns ParentKey(long parentID, short parentDbID)
+    public LJCDataColumns ParentKey(long parentId, short parentDbId)
     {
       // Add(columnName, object value, dataTypeName = "String");
       var retValue = new LJCDataColumns()
       {
-        { DataUtilColumn.ColumnDataTableId, parentID },
+        { DataUtilColumn.ColumnDataTableId, parentId },
       };
-      if (parentDbID > 0)
+      if (parentDbId > 0)
       {
-        retValue.Add(DataUtilColumn.ColumnDataTableDbId, parentDbID);
+        retValue.Add(DataUtilColumn.ColumnDataTableDbId, parentDbId);
       }
       return retValue;
     }
@@ -218,13 +218,13 @@ namespace LJCDataUtilityDAL
     // Gets the ID key columns.
     /// <include file='Doc/DataColumnManager.xml'
     ///  path='members/UniqueKey/*'/>
-    public LJCDataColumns UniqueKey(long parentID, short parentDbID, string name)
+    public LJCDataColumns UniqueKey(long parentId, short parentDbId, string name)
     {
       // Needs cast for string to select the correct Add overload.
       var retValue = new LJCDataColumns()
       {
-        { DataUtilColumn.ColumnDataTableId, parentID },
-        { DataUtilColumn.ColumnDataTableDbId, parentDbID },
+        { DataUtilColumn.ColumnDataTableId, parentId },
+        { DataUtilColumn.ColumnDataTableDbId, parentDbId },
         { DataUtilColumn.ColumnName, (object)name },
       };
       return retValue;
@@ -243,8 +243,8 @@ namespace LJCDataUtilityDAL
 
     // Gets or sets the Database ID.
     /// <include file='Doc/DataColumnManager.xml'
-    ///  path='members/DbID/*'/>
-    public short DbID { get; set; }
+    ///  path='members/DbId/*'/>
+    public short DbId { get; set; }
 
     // Gets or sets the DataManager reference.
     /// <include file='Doc/DataColumnManager.xml'

@@ -251,7 +251,7 @@ namespace LJCDataUtility
         && TableGrid.CurrentRow is LJCGridRow row)
       {
         // Data from items.
-        var id = ParentObject.DataTableRowID(out short dbId);
+        var id = ParentObject.DataTableRowId(out short dbId);
         var ljcItem = ModuleCombo.SelectedItem as LJCItem;
         var parentID = ljcItem.ID;
         var parentDbID = ljcItem.DbID;

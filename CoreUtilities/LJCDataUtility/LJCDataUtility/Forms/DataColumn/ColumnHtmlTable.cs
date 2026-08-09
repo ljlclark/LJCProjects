@@ -38,8 +38,8 @@ namespace LJCDataUtility
     {
       DataColumns retColumns;
 
-      var parentID = ParentObject.DataTableRowID(out short parentDbID);
-      var keyColumns = ColumnManager.ParentKey(parentID, parentDbID);
+      var parentId = ParentObject.DataTableRowId(out short parentDbId);
+      var keyColumns = ColumnManager.ParentKey(parentId, parentDbId);
       var propertyNames = GetColumnPropertyNames();
       var orderByNames = new List<string>()
       {
@@ -61,8 +61,8 @@ namespace LJCDataUtility
       var providerName = dataConfig.GetProviderName();
       var dataAccess = new DataAccess(connectionString, providerName);
 
-      var parentID = ParentObject.DataTableRowID(out short parentDbID);
-      var keyColumns = ColumnManager.ParentKey(parentID, parentDbID);
+      var parentId = ParentObject.DataTableRowId(out short parentDbId);
+      var keyColumns = ColumnManager.ParentKey(parentId, parentDbId);
       var propertyNames = GetColumnPropertyNames();
       var orderByNames = new List<string>()
       {
@@ -100,8 +100,8 @@ namespace LJCDataUtility
     {
       DbResult retResult;
 
-      var parentID = ParentObject.DataTableRowID(out short parentDbID);
-      var keyColumns = ColumnManager.ParentKey(parentID, parentDbID);
+      var parentId = ParentObject.DataTableRowId(out short parentDbId);
+      var keyColumns = ColumnManager.ParentKey(parentId, parentDbId);
       var propertyNames = GetColumnPropertyNames();
       var orderByNames = new List<string>()
       {

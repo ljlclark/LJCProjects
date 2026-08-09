@@ -181,7 +181,7 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataColumnManager.DbID;
+      short dbID = dataColumnManager.DbId;
       long dataTableID = 1;
       short dataTableDbID = 1;
       string name = "TestColumnName";
@@ -288,7 +288,7 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataColumnManager.DbID;
+      short dbID = dataColumnManager.DbId;
       long dataTableID = 1;
       short dataTableDbID = 1;
       string name = "TestColumnName";
@@ -351,7 +351,7 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataColumnManager.DbID;
+      short dbID = dataColumnManager.DbId;
       long dataTableID = 1;
       short dataTableDbID = 1;
       string name = "TestColumnName";
@@ -411,7 +411,7 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataColumnManager.DbID;
+      short dbID = dataColumnManager.DbId;
       long dataTableID = 1;
       short dataTableDbID = 1;
       string name = "TestColumnName";
@@ -451,7 +451,7 @@ namespace TestDataUtilityDAL
       // Update the test record.
       var id = dataColumn.Id;
       dbID = dataColumn.DbId;
-      var idKey = dataColumnManager.IDKey(id, dbID);
+      var idKey = dataColumnManager.IdKey(id, dbID);
       dataColumn.Description += " Updated";
       var propertyNames = new List<string>()
       {
@@ -462,7 +462,7 @@ namespace TestDataUtilityDAL
       dataColumnManager.Update(dataColumn, idKey, propertyNames);
 
       // Verify the test record was updated.
-      dataColumn = dataColumnManager.RetrieveWithID(id, dbID);
+      dataColumn = dataColumnManager.RetrieveWithId(id, dbID);
       result = dataColumn.Description;
       compare = "The test column. Updated";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -490,7 +490,7 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataColumnManager.DbID;
+      short dbID = dataColumnManager.DbId;
       long dataTableID = 1;
       short dataTableDbID = 1;
       string name = "TestColumnName";
@@ -532,7 +532,7 @@ namespace TestDataUtilityDAL
       var id = dataColumn.Id;
 
       // Test Method
-      dataColumn = dataColumnManager.RetrieveWithID(id, dbID);
+      dataColumn = dataColumnManager.RetrieveWithId(id, dbID);
 
       // Verify the record was retrieved.
       result = dataColumn.Name;
@@ -559,7 +559,7 @@ namespace TestDataUtilityDAL
       var dataColumnManager = new DataColumnManager(dbServiceRef
         , dataConfigName);
 
-      short dbID = dataColumnManager.DbID;
+      short dbID = dataColumnManager.DbId;
       long dataTableID = 1;
       short dataTableDbID = 1;
       string name = "TestTableName";
@@ -622,10 +622,10 @@ namespace TestDataUtilityDAL
         , dataConfigName);
 
       long id = 1;
-      short dbID = dataColumnManager.DbID;
+      short dbID = dataColumnManager.DbId;
 
       // Test Method
-      var idKey = dataColumnManager.IDKey(id, dbID);
+      var idKey = dataColumnManager.IdKey(id, dbID);
 
       //var key = idKey.LJCSearchPropertyName(DataUtilColumn.ColumnID);
       var key = idKey[DataUtilColumn.ColumnId];

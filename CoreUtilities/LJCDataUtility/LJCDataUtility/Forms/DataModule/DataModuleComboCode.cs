@@ -96,7 +96,7 @@ namespace LJCDataUtility
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCItem item in ModuleCombo.Items)
         {
-          var rowID = ParentObject.DataModuleItemID(out short rowDbID, item);
+          var rowID = ParentObject.DataModuleItemId(out short rowDbID, item);
           if (rowID == id
             && rowDbID == dbID)
           {
@@ -150,7 +150,7 @@ namespace LJCDataUtility
 
       if (isContinue)
       {
-        var id = ParentObject.DataModuleItemID(out short dbID);
+        var id = ParentObject.DataModuleItemId(out short dbID);
         var keyColumns = new LJCDataColumns()
         {
           { DataModule.ColumnId, id },
@@ -179,7 +179,7 @@ namespace LJCDataUtility
     {
       if (ModuleCombo.SelectedItem is LJCItem)
       {
-        var id = ParentObject.DataModuleItemID(out short dbID);
+        var id = ParentObject.DataModuleItemId(out short dbID);
         //var location = FormPoint.DialogScreenPoint(ModuleGrid);
         var detail = new DataModuleDetail()
         {
@@ -217,7 +217,7 @@ namespace LJCDataUtility
       if (ModuleCombo.SelectedItem is LJCItem)
       {
         // Save the original row.
-        id = ParentObject.DataModuleItemID(out dbID);
+        id = ParentObject.DataModuleItemId(out dbID);
       }
       DataRetrieve();
 

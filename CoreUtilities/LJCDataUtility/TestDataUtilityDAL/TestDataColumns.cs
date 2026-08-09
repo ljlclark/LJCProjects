@@ -299,7 +299,7 @@ namespace TestDataUtilityDAL
       dataColumns.Add(dataColumn);
 
       // Test Method
-      var item = dataColumns.LJCGetWithID(1, 2);
+      var item = dataColumns.LJCGetWithId(1, 2);
 
       var result = "";
       if (item != null)
@@ -418,7 +418,7 @@ namespace TestDataUtilityDAL
       dataColumns.Add(dataColumn);
 
       // Test Method
-      dataColumns.LJCSortID();
+      dataColumns.LJCSortId();
 
       dataColumn = dataColumns[0];
       var result = dataColumn.Id.ToString();

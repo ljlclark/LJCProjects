@@ -51,21 +51,21 @@ namespace LJCDataUtility
 
     #region DataModule value methods.
 
-    internal long DataModuleItemID(out short dbID, LJCItem item = null)
+    internal long DataModuleItemId(out short dbId, LJCItem item = null)
     {
-      long retModuleID = 0;
+      long retModuleId = 0;
 
-      dbID = 0;
+      dbId = 0;
       if (null == item)
       {
         item = ModuleCombo.SelectedItem as LJCItem;
       }
       if (item is LJCItem)
       {
-        retModuleID = item.ID;
-        dbID = item.DbID;
+        retModuleId = item.ID;
+        dbId = item.DbID;
       }
-      return retModuleID;
+      return retModuleId;
     }
 
     // Gets the selected row Name.
@@ -94,7 +94,7 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal long DataTableRowID(out short dbId, LJCGridRow row = null)
+    internal long DataTableRowId(out short dbId, LJCGridRow row = null)
     {
       long retTableId = 0;
 
@@ -130,20 +130,20 @@ namespace LJCDataUtility
     }
 
     // Gets the target table ID.
-    internal long TargetDataTableID(string targetTableName, out short dbId)
+    internal long TargetDataTableId(string targetTableName, out short dbId)
     {
-      long retTableID = 0;
+      long retTableId = 0;
 
-      var moduleID = DataModuleItemID(out dbId);
+      var moduleId = DataModuleItemId(out dbId);
       var tableManager = Managers.DataTableManager;
-      var targetTable = tableManager.RetrieveWithUnique(moduleID, dbId
+      var targetTable = tableManager.RetrieveWithUnique(moduleId, dbId
         , targetTableName);
       if (targetTable != null)
       {
-        retTableID = targetTable.Id;
+        retTableId = targetTable.Id;
         dbId = targetTable.DbId;
       }
-      return retTableID;
+      return retTableId;
     }
     #endregion
 
@@ -157,7 +157,7 @@ namespace LJCDataUtility
     }
 
     // Gets the selected row ID.
-    internal long DataColumnRowID(out short dbId, LJCGridRow row = null)
+    internal long DataColumnRowId(out short dbId, LJCGridRow row = null)
     {
       long retColumnId = 0;
 
@@ -241,9 +241,9 @@ namespace LJCDataUtility
     // Retrieve the Foreign keys.
     internal DataKeys ForeignKeys()
     {
-      var tableID = DataTableRowID(out short dbID);
+      var tableId = DataTableRowId(out short dbId);
       var keyManager = Managers.DataKeyManager;
-      var retKeys = keyManager.LoadWithParentType(tableID, dbID
+      var retKeys = keyManager.LoadWithParentType(tableId, dbId
         , (short)KeyType.Foreign);
       return retKeys;
     }
@@ -253,9 +253,9 @@ namespace LJCDataUtility
     {
       string retList = null;
 
-      var parentID = DataTableRowID(out short parentDbID);
+      var parentId = DataTableRowId(out short parentDbId);
       var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithParentType(parentID, parentDbID
+      var dataKey = keyManager.RetrieveWithParentType(parentId, parentDbId
         , (short)KeyType.Primary);
       if (dataKey != null)
       {
@@ -269,9 +269,9 @@ namespace LJCDataUtility
     {
       string retList = null;
 
-      var parentID = DataTableRowID(out short parentDbID);
+      long parentId = DataTableRowId(out short parentDbId);
       var keyManager = Managers.DataKeyManager;
-      var dataKey = keyManager.RetrieveWithParentType(parentID, parentDbID
+      var dataKey = keyManager.RetrieveWithParentType(parentId, parentDbId
         , (short)KeyType.Unique);
       if (dataKey != null)
       {

@@ -30,12 +30,12 @@ namespace LJCDataUtility
     // Generates the CreateTable procedure.
     internal void CreateTableProc()
     {
-      var parentID = ParentObject.DataTableRowID(out short parentDbID);
+      var parentId = ParentObject.DataTableRowId(out short parentDbId);
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
       };
-      var dataColumns = Managers.TableDataColumns(parentID, parentDbID
+      var dataColumns = Managers.TableDataColumns(parentId, parentDbId
         , orderByNames);
 
       if (LJC.HasListItems(dataColumns))

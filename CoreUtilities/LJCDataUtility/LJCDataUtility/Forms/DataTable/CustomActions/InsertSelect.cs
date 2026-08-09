@@ -35,7 +35,7 @@ namespace LJCDataUtility
       // Decrease Length: Check for truncation?
       // Decrease Int size: Check for truncation?
 
-      var parentID = ParentObject.DataTableRowID(out short parentDbID);
+      var parentID = ParentObject.DataTableRowId(out short parentDbID);
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence

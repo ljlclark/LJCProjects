@@ -29,13 +29,13 @@ namespace LJCDataUtility
     // Generates the AddData procedure.
     internal void AddDataProc()
     {
-      var tableID = ParentObject.DataTableRowID(out short tableDbID);
+      var tableId = ParentObject.DataTableRowId(out short tableDbId);
       var orderByNames = new List<string>()
       {
         DataUtilColumn.ColumnSequence
       };
-      var dataColumns = Managers.TableDataColumns(tableID
-        , tableDbID, orderByNames);
+      var dataColumns = Managers.TableDataColumns(tableId
+        , tableDbId, orderByNames);
 
       if (LJC.HasListItems(dataColumns))
       {
@@ -135,7 +135,7 @@ namespace LJCDataUtility
         }
 
         // Table
-        proc.Line($"IF NOT EXISTS(SELECT ID FROM {data.TableName}");
+        proc.Line($"IF NOT EXISTS(SELECT Id FROM {data.TableName}");
         proc.Line(" WHERE Name = @name)");
         proc.Line($"  INSERT INTO {data.TableName}");
 
@@ -151,7 +151,7 @@ namespace LJCDataUtility
         valuesBuilder.IsFirst = true;
         foreach (var tableColumn in data.TableColumns)
         {
-          if ("ID" == tableColumn.Name)
+          if ("Id" == tableColumn.Name)
           {
             continue;
           }
@@ -187,7 +187,7 @@ namespace LJCDataUtility
       {
         foreach (DataKey foreignKey in foreignKeys)
         {
-          // DataModuleID, DataModuleSiteID
+          // DataModuleId, DataModuleDbId
           var foreignKeyColumnNames = ToNames(foreignKey.SourceColumnName);
 
           var targetUniqueKeys = TargetUniqueKeys(foreignKey);
@@ -312,14 +312,14 @@ namespace LJCDataUtility
           foreach (DataKey dataKey in data.ForeignKeys)
           {
             // Include Referenced table.
-            var parentIDColumnName = dataKey.TargetColumnName;
+            var parentIdColumnName = dataKey.TargetColumnName;
             var line = myProc.IFItem(dataKey.TargetTableName
               , dataKey.TargetColumnName, dataKey.TargetColumnName
               , parmFindName);
             line += "\r\n";
 
             var varRefName = myProc.SQLVarName(dataKey.TargetTableName);
-            varRefName += parentIDColumnName;
+            varRefName += parentIdColumnName;
             varRefNames.Add(varRefName);
             line += $"IF {varRefName} IS NOT NULL";
             myProc.Line(line);
@@ -389,15 +389,15 @@ namespace LJCDataUtility
     {
       DataColumns retColumns = null;
 
-      var tableID = ParentObject.TargetDataTableID(targetTableName
-        , out short dbID);
-      if (tableID > 0)
+      var tableId = ParentObject.TargetDataTableId(targetTableName
+        , out short dbId);
+      if (tableId > 0)
       {
         var orderByNames = new List<string>()
         {
           DataUtilColumn.ColumnSequence
         };
-        retColumns = Managers.TableDataColumns(tableID, dbID, orderByNames);
+        retColumns = Managers.TableDataColumns(tableId, dbId, orderByNames);
       }
       return retColumns;
     }
@@ -408,15 +408,15 @@ namespace LJCDataUtility
       string retTypeValue = null;
 
       var targetTableName = dataKey.TargetTableName;
-      var targetTableID = ParentObject.TargetDataTableID(targetTableName
-        , out short targetDbID);
-      if (targetTableID > 0)
+      var targetTableId = ParentObject.TargetDataTableId(targetTableName
+        , out short targetDbId);
+      if (targetTableId > 0)
       {
-        var parentColumns = Managers.TableDataColumns(targetTableID
-          , targetDbID);
+        var parentColumns = Managers.TableDataColumns(targetTableId
+          , targetDbId);
         retTypeValue = "nvarchar(5)";
-        var findColumn = parentColumns.LJCGetWithUnique(targetTableID
-          , targetDbID, dataKey.TargetColumnName);
+        var findColumn = parentColumns.LJCGetWithUnique(targetTableId
+          , targetDbId, dataKey.TargetColumnName);
         if (findColumn != null)
         {
           retTypeValue = findColumn.TypeName;
@@ -433,11 +433,11 @@ namespace LJCDataUtility
     private DataKeys TargetUniqueKeys(DataKey dataKey)
     {
       var targetTableName = dataKey.TargetTableName;
-      var targetTableID = ParentObject.TargetDataTableID(targetTableName
-        , out short targetDbID);
+      var targetTableId = ParentObject.TargetDataTableId(targetTableName
+        , out short targetDbId);
       var keyManager = Managers.DataKeyManager;
-      var retUniqueKeys = keyManager.LoadWithParentType(targetTableID
-        , targetDbID, (int)KeyType.Unique);
+      var retUniqueKeys = keyManager.LoadWithParentType(targetTableId
+        , targetDbId, (int)KeyType.Unique);
       return retUniqueKeys;
     }
 
@@ -468,10 +468,10 @@ namespace LJCDataUtility
     {
       var targetTableName = foreignKey.TargetTableName;
       var targetTableColumns = TargetColumns(targetTableName);
-      var targetTableID = ParentObject.TargetDataTableID(targetTableName
-        , out short targetDbID);
-      var findColumn = targetTableColumns.LJCGetWithUnique(targetTableID
-        , targetDbID, uniqueColumnName);
+      var targetTableId = ParentObject.TargetDataTableId(targetTableName
+        , out short targetDbId);
+      var findColumn = targetTableColumns.LJCGetWithUnique(targetTableId
+        , targetDbId, uniqueColumnName);
       typeValue = "bigint";
       if (findColumn != null)
       {

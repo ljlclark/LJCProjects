@@ -133,7 +133,7 @@ namespace LJCDataUtilityDAL
     // Creates and adds the object from the supplied values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/Add1/*'/>
-    public DataUtilColumn Add(long id, short dbID, long dataTableId
+    public DataUtilColumn Add(long id, short dbId, long dataTableId
       , short dataTableDbId, string name)
     {
       DataUtilColumn retValue = null;
@@ -143,21 +143,21 @@ namespace LJCDataUtilityDAL
       {
         message += "id must be greater than zero.\r\n";
       }
-      if (dbID <= 0)
+      if (dbId <= 0)
       {
-        message += "dbID must be greater than zero.\r\n";
+        message += "dbId must be greater than zero.\r\n";
       }
-      if (dbID <= 0)
+      if (dbId <= 0)
       {
-        message += "dbID must be greater than zero.\r\n";
+        message += "dbId must be greater than zero.\r\n";
       }
       if (dataTableId <= 0)
       {
-        message += "dataTableID must be greater than zero.\r\n";
+        message += "dataTableId must be greater than zero.\r\n";
       }
       if (dataTableDbId <= 0)
       {
-        message += "dataTableDbID must be greater than zero.\r\n";
+        message += "dataTableDbId must be greater than zero.\r\n";
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
@@ -177,7 +177,7 @@ namespace LJCDataUtilityDAL
         retValue = new DataUtilColumn()
         {
           Id = id,
-          DbId = dbID,
+          DbId = dbId,
           DataTableId = dataTableId,
           DataTableDbId = dataTableDbId,
           Name = name,
@@ -190,24 +190,24 @@ namespace LJCDataUtilityDAL
     // Creates and adds the object from the provided values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/Add2/*'/>
-    public DataUtilColumn Add(short dbID, long dataTableId
+    public DataUtilColumn Add(short dbId, long dataTableId
       , short dataTableDbId, string name, string typeName
       , bool allowNull = true, short maxLength = 0, string defaultValue = null
       , short identityIncrement = 0)
     {
       DataUtilColumn retValue = null;
       string message = "";
-      if (dbID <= 0)
+      if (dbId <= 0)
       {
-        message += "dbID must be greater than zero.\r\n";
+        message += "dbId must be greater than zero.\r\n";
       }
       if (dataTableId <= 0)
       {
-        message += "dataTableID must be greater than zero.\r\n";
+        message += "dataTableId must be greater than zero.\r\n";
       }
       if (dataTableDbId <= 0)
       {
-        message += "dataTableDbID must be greater than zero.\r\n";
+        message += "dataTableDbId must be greater than zero.\r\n";
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
@@ -226,7 +226,7 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilColumn()
         {
-          DbId = dbID,
+          DbId = dbId,
           DataTableId = dataTableId,
           DataTableDbId = dataTableDbId,
           Name = name,
@@ -244,12 +244,12 @@ namespace LJCDataUtilityDAL
 
     // Retrieve the collection element.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='members/LJCGetWithID/*'/>
-    public DataUtilColumn LJCGetWithID(long id, short dbId)
+    ///  path='members/LJCGetWithId/*'/>
+    public DataUtilColumn LJCGetWithId(long id, short dbId)
     {
       DataUtilColumn retValue = null;
 
-      LJCSortID();
+      LJCSortId();
       DataUtilColumn searchItem = new DataUtilColumn()
       {
         Id = id,
@@ -266,8 +266,8 @@ namespace LJCDataUtilityDAL
     // Retrieve the collection element with unique values.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCGetWithUnique/*'/>
-    public DataUtilColumn LJCGetWithUnique(long dataTableID
-      , short dataTableDbID, string name)
+    public DataUtilColumn LJCGetWithUnique(long dataTableId
+      , short dataTableDbId, string name)
     {
       DataUtilColumn retValue = null;
 
@@ -275,8 +275,8 @@ namespace LJCDataUtilityDAL
       LJCSortUnique(comparer);
       DataUtilColumn searchItem = new DataUtilColumn()
       {
-        DataTableId = dataTableID,
-        DataTableDbId = dataTableDbID,
+        DataTableId = dataTableId,
+        DataTableDbId = dataTableDbId,
         Name = name,
       };
       int index = BinarySearch(searchItem, comparer);
@@ -290,10 +290,10 @@ namespace LJCDataUtilityDAL
     // Removes an item by name.
     /// <include file='Doc/DataColumns.xml'
     ///  path='members/LJCRemove/*'/>
-    public void LJCRemove(long dataTableID, long dataTableDbID, string name)
+    public void LJCRemove(long dataTableId, long dataTableDbId, string name)
     {
-      DataUtilColumn item = Find(x => x.DataTableId == dataTableID
-        && x.DataTableDbId == dataTableDbID
+      DataUtilColumn item = Find(x => x.DataTableId == dataTableId
+        && x.DataTableDbId == dataTableDbId
         && x.Name == name);
       if (item != null)
       {
@@ -305,16 +305,16 @@ namespace LJCDataUtilityDAL
     #region Sort Methods
 
     // Sort on ID.
-    /// <include file='Doc/DataTables.xml'
-    ///  path='members/LJCSortID/*'/>
-    public void LJCSortID()
+    /// <include file='Doc/DataColumns.xml'
+    ///  path='members/LJCSortId/*'/>
+    public void LJCSortId()
     {
       if (Count != mPrevCount
-        || mSortType.CompareTo(SortType.ID) != 0)
+        || mSortType.CompareTo(SortType.Id) != 0)
       {
         mPrevCount = Count;
         Sort();
-        mSortType = SortType.ID;
+        mSortType = SortType.Id;
       }
     }
 
@@ -346,10 +346,10 @@ namespace LJCDataUtilityDAL
     // The item for the specified name.
     /// <include file='Doc/DataColumns.xml'
     ///  path='members/UniqueIndexer/*'/>
-    public DataUtilColumn this[long dataTableID, short dataTableDbID
+    public DataUtilColumn this[long dataTableId, short dataTableDbId
       , string name]
     {
-      get => LJCGetWithUnique(dataTableID, dataTableDbID, name);
+      get => LJCGetWithUnique(dataTableId, dataTableDbId, name);
     }
     #endregion
 
@@ -361,7 +361,7 @@ namespace LJCDataUtilityDAL
 
     private enum SortType
     {
-      ID,
+      Id,
       Unique
     }
     #endregion

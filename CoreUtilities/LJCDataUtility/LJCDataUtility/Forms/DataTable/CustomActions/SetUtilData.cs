@@ -61,7 +61,7 @@ namespace LJCDataUtility
       if (isContinue)
       {
         var tableManager = Managers.DataTableManager;
-        var moduleID = ParentObject.DataModuleItemID(out short moduleDbID);
+        var moduleID = ParentObject.DataModuleItemId(out short moduleDbID);
         dataTable = tableManager.RetrieveWithUnique(moduleID, moduleDbID
           , TableName);
         if (null == dataTable)
@@ -228,7 +228,7 @@ namespace LJCDataUtility
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
           var columnManager = Managers.DataColumnManager;
-          var keyColumns = columnManager.IDKey(dataColumn.Id, dataColumn.DbId);
+          var keyColumns = columnManager.IdKey(dataColumn.Id, dataColumn.DbId);
           columnManager.Update(updateColumn, keyColumns);
         }
       }

@@ -28,7 +28,7 @@ namespace LJCDataUtility
       // Initialize property values.
       LJCId = 0;
       LJCIsUpdate = false;
-      LJCParentID = 0;
+      LJCParentId = 0;
       LJCParentName = null;
       LJCRecord = null;
 
@@ -68,7 +68,7 @@ namespace LJCDataUtility
         Text += " - Edit";
         LJCIsUpdate = true;
         var manager = LJCManagers.DataColumnManager;
-        mOriginalRecord = manager.RetrieveWithID(LJCId, LJCDbId);
+        mOriginalRecord = manager.RetrieveWithId(LJCId, LJCDbId);
         GetValues(mOriginalRecord);
       }
       else
@@ -119,8 +119,8 @@ namespace LJCDataUtility
 
         // Reference key values.
         LJCDbId = data.DbId;
-        LJCParentID = data.DataTableId;
-        LJCParentDbID = data.DataTableDbId;
+        LJCParentId = data.DataTableId;
+        LJCParentDbId = data.DataTableDbId;
       }
     }
 
@@ -146,8 +146,8 @@ namespace LJCDataUtility
       // Get Reference key values.
       retData.Id = LJCId;
       retData.DbId = LJCDbId;
-      retData.DataTableId = LJCParentID;
-      retData.DataTableDbId = LJCParentDbID;
+      retData.DataTableId = LJCParentId;
+      retData.DataTableDbId = LJCParentDbId;
       return retData;
     }
 
@@ -190,7 +190,7 @@ namespace LJCDataUtility
       {
         if (LJCIsUpdate)
         {
-          var keyColumns = manager.IDKey(LJCId, LJCDbId);
+          var keyColumns = manager.IdKey(LJCId, LJCDbId);
           LJCRecord.Id = 0;
           manager.Update(LJCRecord, keyColumns);
           ResetValues(LJCRecord);
@@ -384,7 +384,7 @@ namespace LJCDataUtility
       var isTypeSet = false;
 
       // Set TypeName = "bigint" and Identity values.
-      if ("ID" == columnName)
+      if ("Id" == columnName)
       {
         isTypeSet = true;
         if (-1 == TypeNameCombo.SelectedIndex)
@@ -397,7 +397,7 @@ namespace LJCDataUtility
 
       // Set TypeName = "bigint".
       if (columnName.Length > 2
-        && columnName.EndsWith("ID"))
+        && columnName.EndsWith("Id"))
       {
         isTypeSet = true;
         if (-1 == TypeNameCombo.SelectedIndex)
@@ -513,10 +513,10 @@ namespace LJCDataUtility
     internal ManagersDataUtility LJCManagers { get; set; }
 
     // Gets or sets the Parent ID value.
-    internal long LJCParentID { get; set; }
+    internal long LJCParentId { get; set; }
 
     // Gets or sets the ParentSite ID value.
-    internal short LJCParentDbID { get; set; }
+    internal short LJCParentDbId { get; set; }
 
     // Gets or sets the LJCParentName value.
     internal string LJCParentName
