@@ -23,8 +23,8 @@ namespace LJCDataUtilityDAL
     ///  path='members/Constructor/*'/>
     public DataModule()
     {
-      _Id = 0;
       _DbId = 0;
+      _Id = 0;
       _Name = "";
       _Description = "";
 
@@ -46,8 +46,8 @@ namespace LJCDataUtilityDAL
     ///  path='members/CopyConstructor/*'/>
     public DataModule(DataModule item)
     {
-      _Id = item.Id;
       _DbId = item.DbId;
+      _Id = item.Id;
       _Name = item.Name;
       _Description = item.Description;
 
@@ -84,13 +84,13 @@ namespace LJCDataUtilityDAL
           break;
         }
 
-        retValue = Id.CompareTo(other.Id);
+        retValue = DbId.CompareTo(other.DbId);
         if (retValue != NetString.CompareEqual)
         {
           break;
         }
 
-        retValue = DbId.CompareTo(other.DbId);
+        retValue = Id.CompareTo(other.Id);
         break;
       }
       return retValue;
@@ -101,6 +101,7 @@ namespace LJCDataUtilityDAL
     ///  path='members/SetOriginalValues/*'/>
     public void LJCSetOriginalValues()
     {
+      _OriginalValues.DbId = _DbId;
       _OriginalValues.Id = _Id;
       _OriginalValues.Name = _Name;
       _OriginalValues.Description = _Description;
@@ -119,6 +120,24 @@ namespace LJCDataUtilityDAL
     #endregion
 
     #region Data Properties
+
+    // Gets or sets the DataModuleID value.
+    /// <include file='Doc/DataModule.xml'
+    ///  path='members/DbId/*'/>
+    [Required]
+    [Column("DbId", TypeName = "smallint")]
+    public short DbId
+    {
+      get => _DbId;
+      set
+      {
+        if (_DbId != value)
+        {
+          _DbId = ChangedNames.Add(ColumnDbId, _OriginalValues.DbId, value);
+        }
+      }
+    }
+    private short _DbId;
 
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
@@ -140,24 +159,6 @@ namespace LJCDataUtilityDAL
       }
     }
     private long _Id;
-
-    // Gets or sets the DataModuleID value.
-    /// <include file='Doc/DataModule.xml'
-    ///  path='members/DbId/*'/>
-    [Required]
-    [Column("DbId", TypeName = "smallint")]
-    public short DbId
-    {
-      get => _DbId;
-      set
-      {
-        if (_DbId != value)
-        {
-          _DbId = ChangedNames.Add(ColumnDbId, _OriginalValues.DbId, value);
-        }
-      }
-    }
-    private short _DbId;
 
     // Gets or sets the Name value.
     /// <include file='Doc/DataModule.xml'
@@ -213,11 +214,11 @@ namespace LJCDataUtilityDAL
     /// <summary>The table name.</summary>
     public static string TableName = "DataModule";
 
-    /// <summary>The table row ID column name.</summary>
-    public static string ColumnId = "Id";
-
     /// <summary>The database ID column name.</summary>
     public static string ColumnDbId = "DbId";
+
+    /// <summary>The table row ID column name.</summary>
+    public static string ColumnId = "Id";
 
     /// <summary>The Name column name.</summary>
     public static string ColumnName = "Name";
@@ -237,11 +238,11 @@ namespace LJCDataUtilityDAL
     // The object starting values.
     private class OriginalValues
     {
-      // Gets or sets the table row ID.
-      public long Id { get; set; }
-
       // Gets or sets the database ID.
       public short DbId { get; set; }
+
+      // Gets or sets the table row ID.
+      public long Id { get; set; }
 
       // Gets or sets the unique name.
       public string Name { get; set; }
