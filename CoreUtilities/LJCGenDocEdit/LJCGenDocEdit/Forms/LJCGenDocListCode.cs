@@ -394,7 +394,7 @@ namespace LJCGenDocEdit
       var dataID = (int)ControlValueDataID(viewName);
       if (dataID > 0)
       {
-        viewCombo.LJCSetByItemID(dataID);
+        viewCombo.LJCSetByItemID(dataID, 0);
       }
     }
 

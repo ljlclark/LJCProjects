@@ -89,7 +89,7 @@ namespace LJCTransformManager
 				LJCIsUpdate = false;
 				LJCRecord = new LayoutColumn();
 				int stringID = 10;
-				DataTypeCombo.LJCSetByItemID(stringID);
+				DataTypeCombo.LJCSetByItemID(stringID, 0);
 				ParentNameTextbox.Text = LJCParentName;
 			}
 			Cursor = Cursors.Default;
@@ -105,7 +105,7 @@ namespace LJCTransformManager
 				ParentNameTextbox.Text = LJCParentName;
 				LayoutColumnNameTextbox.Text = dataRecord.Name;
 				LayoutColumnDescriptionTextbox.Text = dataRecord.Description;
-				DataTypeCombo.LJCSetByItemID(dataRecord.DataTypeID);
+				DataTypeCombo.LJCSetByItemID(dataRecord.DataTypeID, 0);
 				LengthTextbox.Text = dataRecord.Length.ToString();
 				SequenceTextbox.Text = dataRecord.Sequence.ToString();
 				IdentityCheckbox.Checked = dataRecord.IdentityKey;

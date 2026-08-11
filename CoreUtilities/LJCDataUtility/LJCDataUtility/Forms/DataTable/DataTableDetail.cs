@@ -102,7 +102,7 @@ namespace LJCDataUtility
         NewNameText.Text = data.NewName;
 
         // Reference key values.
-        LJCDbID = (short)data.DbId;
+        LJCDbID = data.DbId;
         LJCParentID = data.DataModuleId;
         LJCParentSiteID = data.DataModuleDbId;
       }

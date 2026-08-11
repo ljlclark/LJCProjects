@@ -93,7 +93,7 @@ namespace LJCUnitMeasure
 			if (UnitCategoryCombo.SelectedIndex >= 0)
 			{
 				// Data from items.
-				int id = UnitCategoryCombo.LJCSelectedItemID();
+				int id = (int)UnitCategoryCombo.LJCSelectedItemID();
 
 				detail = new UnitCategoryDetail(mManagers)
 				{
@@ -146,7 +146,7 @@ namespace LJCUnitMeasure
 					, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
 					// Data from items.
-					int id = UnitCategoryCombo.LJCSelectedItemID();
+					int id = (int)UnitCategoryCombo.LJCSelectedItemID();
 
 					var keyColumns = new LJCDataColumns()
 					{
@@ -175,7 +175,7 @@ namespace LJCUnitMeasure
 			mParent.Cursor = Cursors.WaitCursor;
 			if (UnitCategoryCombo.SelectedIndex >= 0)
 			{
-				id = UnitCategoryCombo.LJCSelectedItemID();
+				id = (int)UnitCategoryCombo.LJCSelectedItemID();
 			}
 			LoadCombo();
 

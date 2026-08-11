@@ -83,7 +83,7 @@ namespace LJCDataUtility
         DescriptionText.Text = data.Description;
 
         // Reference key values.
-        LJCDbID = (short)data.DbId;
+        LJCDbID = data.DbId;
       }
     }
 
@@ -154,7 +154,7 @@ namespace LJCDataUtility
         else
         {
           LJCRecord.Id = 0;
-          LJCRecord.DbId = mSettings.SiteID;
+          LJCRecord.DbId = (short)mSettings.SiteID;
           var addedRecord = manager.Add(LJCRecord);
           ResetValues(LJCRecord);
           if (addedRecord != null)

@@ -60,7 +60,7 @@ namespace LJCTransformManager
 		// Displays a view of the Source data.
 		private void SourceMenuView_Click(object sender, EventArgs e)
 		{
-			int dataSourceID = SourceDataCombo.LJCSelectedItemID();
+			int dataSourceID = (int)SourceDataCombo.LJCSelectedItemID();
 			mDataViewer.Show(dataSourceID);
 		}
 
@@ -71,7 +71,7 @@ namespace LJCTransformManager
 
 			if (SourceDataCombo.SelectedIndex != -1)
 			{
-				dataSourceID = SourceDataCombo.LJCSelectedItemID();
+				dataSourceID = (int)SourceDataCombo.LJCSelectedItemID();
 				SourceLayoutShow(dataSourceID);
 			}
 		}
@@ -82,7 +82,7 @@ namespace LJCTransformManager
 		// Displays a view of the Target data.
 		private void TargetView_Click(object sender, EventArgs e)
 		{
-			int dataSourceID = TargetDataCombo.LJCSelectedItemID();
+			int dataSourceID = (int)TargetDataCombo.LJCSelectedItemID();
 			mDataViewer.Show(dataSourceID);
 		}
 
@@ -93,7 +93,7 @@ namespace LJCTransformManager
 
 			if (TargetDataCombo.SelectedIndex != -1)
 			{
-				dataSourceID = TargetDataCombo.LJCSelectedItemID();
+				dataSourceID = (int)TargetDataCombo.LJCSelectedItemID();
 				SourceLayoutShow(dataSourceID);
 			}
 		}

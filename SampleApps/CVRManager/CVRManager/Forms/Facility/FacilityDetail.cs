@@ -100,7 +100,7 @@ namespace CVRManager
 			{
 				CodeTextbox.Text = dataRecord.Code;
 				DescriptionTextbox.Text = dataRecord.Description;
-				FacilityTypeCombo.LJCSetByItemID(dataRecord.CodeTypeID);
+				FacilityTypeCombo.LJCSetByItemID(dataRecord.CodeTypeID, 0);
 			}
 		}
 
@@ -112,7 +112,7 @@ namespace CVRManager
 				ID = LJCID,
 				Code = FormCommon.SetString(CodeTextbox.Text),
 				Description = DescriptionTextbox.Text,
-				CodeTypeID = FacilityTypeCombo.LJCSelectedItemID()
+				CodeTypeID = (int)FacilityTypeCombo.LJCSelectedItemID()
 			};
 			return retValue;
 		}
@@ -198,7 +198,7 @@ namespace CVRManager
 			CodeTypes codeTypes = Managers.CodeTypeManager.Load();
 			foreach (CodeType codeType in codeTypes)
 			{
-				FacilityTypeCombo.LJCAddItem((int)codeType.ID, codeType.Description);
+				FacilityTypeCombo.LJCAddItem((int)codeType.ID, 0, codeType.Description);
 			}
 			Cursor = Cursors.Default;
 		}

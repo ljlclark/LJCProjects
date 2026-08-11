@@ -90,7 +90,7 @@ namespace LJCTransformManager
 		{
 			LJCTransformProcess transformProcess;
 
-			int dataProcessID = DataProcessCombo.LJCSelectedItemID();
+			int dataProcessID = (int)DataProcessCombo.LJCSelectedItemID();
 
 			if (TaskGrid.CurrentRow is LJCGridRow row)
 			{
@@ -167,7 +167,7 @@ namespace LJCTransformManager
 
 			if (null == mDataProcess)
 			{
-				processID = DataProcessCombo.LJCSelectedItemID();
+				processID = (int)DataProcessCombo.LJCSelectedItemID();
 				DataProcessManager dataProcessManager = Managers.DataProcessManager;
 				mDataProcess = dataProcessManager.RetrieveWithID(processID);
 			}
@@ -442,7 +442,7 @@ namespace LJCTransformManager
 			if (DataProcessCombo.SelectedIndex > -1)
 			{
 				// Data from items.
-				id = DataProcessCombo.LJCSelectedItemID();
+				id = (int)DataProcessCombo.LJCSelectedItemID();
 				dataProcess = Managers.DataProcessManager.RetrieveWithID(id);
 			}
 
@@ -462,13 +462,13 @@ namespace LJCTransformManager
 				if (list.LJCSelectedRecord != null)
 				{
 					int selectedID = list.LJCSelectedRecord.DataProcessID;
-					DataProcessCombo.LJCSetByItemID(selectedID);
+					DataProcessCombo.LJCSetByItemID(selectedID, 0);
 				}
 			}
 			else
 			{
 				// Reselect original item.
-				DataProcessCombo.LJCSetByItemID(id);
+				DataProcessCombo.LJCSetByItemID(id, 0);
 			}
 		}
 		#endregion
@@ -489,14 +489,14 @@ namespace LJCTransformManager
 
 			if (StepCombo.SelectedIndex > -1)
 			{
-				id = StepCombo.LJCSelectedItemID();
+				id = (int)StepCombo.LJCSelectedItemID();
 				step = Managers.StepManager.RetrieveWithID(id);
 			}
 
 			if (DataProcessCombo.SelectedIndex > -1)
 			{
 				// Data from items.
-				int parentID = DataProcessCombo.LJCSelectedItemID();
+				int parentID = (int)DataProcessCombo.LJCSelectedItemID();
 				string parentName = DataProcessCombo.Text;
 
 				StepList list = new StepList()
@@ -517,13 +517,13 @@ namespace LJCTransformManager
 					if (list.LJCSelectedRecord != null)
 					{
 						int selectedID = list.LJCSelectedRecord.StepID;
-						StepCombo.LJCSetByItemID(selectedID);
+						StepCombo.LJCSetByItemID(selectedID, 0);
 					}
 				}
 				else
 				{
 					// Reselect original item.
-					StepCombo.LJCSetByItemID(id);
+					StepCombo.LJCSetByItemID(id, 0);
 				}
 			}
 		}

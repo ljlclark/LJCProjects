@@ -11,7 +11,9 @@ using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL
 {
-  /// <summary>The DataColumn data.</summary>
+  // The DataColumn data.
+  /// <include file='Doc/DataColumn.xml'
+  ///  path='members/DataUtilColumn/*'/>
   public class DataUtilColumn : IComparable<DataUtilColumn>
   {
     #region Constructor Methods
@@ -64,7 +66,7 @@ namespace LJCDataUtilityDAL
 
     // The Copy constructor.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='members/Constructor/*'/>
+    ///  path='members/CopyConstructor/*'/>
     public DataUtilColumn(DataUtilColumn item)
     {
       Id = item.Id;
@@ -131,7 +133,7 @@ namespace LJCDataUtilityDAL
 
     // Initializes the original values.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='members/SetOriginalValues/*'/>
+    ///  path='members/LJCSetOriginalValues/*'/>
     public void LJCSetOriginalValues()
     {
       _OriginalValues.ID = _Id;
@@ -165,9 +167,9 @@ namespace LJCDataUtilityDAL
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
 
-    // Gets or sets the ID value.
+    // Gets or sets the table row ID.
     /// <include file='Doc/DataColumn.xml'
-    ///  path='members/ID/*'/>
+    ///  path='members/Id/*'/>
     [Required]
     [Column("Id", TypeName = "bigint")]
     public long Id
@@ -183,9 +185,9 @@ namespace LJCDataUtilityDAL
     }
     private long _Id;
 
-    // Gets or sets the ID value.
+    // Gets or sets the database ID.
     /// <include file='Doc/DataColumn.xml'
-    ///  path='members/DataSiteID/*'/>
+    ///  path='members/DbId/*'/>
     [Required]
     [Column("DbId", TypeName = "smallint")]
     public short DbId
@@ -202,9 +204,9 @@ namespace LJCDataUtilityDAL
     }
     private short _DataDbID;
 
-    // Gets or sets the DataTableID value.
+    // Gets or sets the parent table row ID.
     /// <include file='Doc/DataColumn.xml'
-    ///  path='members/DataTableID/*'/>
+    ///  path='members/DataTableId/*'/>
     [Required]
     [Column("DataTableId", TypeName = "bigint")]
     public long DataTableId
@@ -221,9 +223,9 @@ namespace LJCDataUtilityDAL
     }
     private long _DataTableId;
 
-    // Gets or sets the DataTableID value.
+    // Gets or sets the parent database ID.
     /// <include file='Doc/DataColumn.xml'
-    ///  path='members/DataTableSiteID/*'/>
+    ///  path='members/DataTableDbId/*'/>
     [Required]
     [Column("DataTableDbId", TypeName = "smallint")]
     public short DataTableDbId
@@ -453,7 +455,9 @@ namespace LJCDataUtilityDAL
 
     #region Class Properties
 
-    /// <summary>Gets a reference to the ChangedNames list.</summary>
+    // Gets a reference to the ChangedNames list.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/ChangedNames/*'/>
     [XmlIgnore]
     public ChangedNames ChangedNames { get; private set; }
     #endregion
@@ -463,16 +467,16 @@ namespace LJCDataUtilityDAL
     /// <summary>The table name.</summary>
     public static string TableName = "DataColumn";
 
-    /// <summary>The ID column name.</summary>
+    /// <summary>The table row ID column name.</summary>
     public static string ColumnId = "Id";
 
-    /// <summary>The ID column name.</summary>
+    /// <summary>The database ID column name.</summary>
     public static string ColumnDbId = "DbId";
 
-    /// <summary>The DataTableID column name.</summary>
+    /// <summary>The the parent table row ID column name.</summary>
     public static string ColumnDataTableId = "DataTableId";
 
-    /// <summary>The DataTableSiteID column name.</summary>
+    /// <summary>The the parent database ID column name.</summary>
     public static string ColumnDataTableDbId = "DataTableDbId";
 
     /// <summary>The Name column name.</summary>
@@ -541,7 +545,7 @@ namespace LJCDataUtilityDAL
       // Gets or sets the database ID.
       public short DbID { get; set; }
 
-      // Gets or sets the parent row ID.
+      // Gets or sets the parent table row ID.
       public long DataTableID { get; set; }
 
       // Gets or sets the parent database ID.
@@ -585,7 +589,9 @@ namespace LJCDataUtilityDAL
 
   #region Comparers
 
-  /// <summary>Sort and search on Name value.</summary>
+  // Sort and search on Name value.
+  /// <include file='Doc/DataTable.xml'
+  ///  path='items/DataColumnUnique/*'/>
   public class DataColumnUnique : IComparer<DataUtilColumn>
   {
     // Compares two objects.
@@ -594,35 +600,34 @@ namespace LJCDataUtilityDAL
     {
       int retValue;
 
-      var isContinue = true;
-      retValue = NetCommon.CompareNull(x, y);
-      if (retValue != -2)
+      while (true)
       {
-        isContinue = false;
-      }
-      if (isContinue)
-      {
+        retValue = NetCommon.CompareNull(x, y);
+        if (retValue != NetString.CompareNotNull)
+        {
+          break; ;
+        }
+
         retValue = NetCommon.CompareNull(x.Name, y.Name);
-        if (retValue != -2)
+        if (retValue != NetString.CompareNotNull)
         {
-          isContinue = false;
+          break;
         }
-      }
-      if (isContinue)
-      {
-        retValue = x.DataTableId.CompareTo(y.DataTableId);
-        if (retValue != 0)
-        {
-          isContinue = false;
-        }
-      }
-      if (isContinue)
-      {
+
         retValue = x.DataTableDbId.CompareTo(y.DataTableDbId);
-      }
-      if (isContinue)
-      {
+        if (retValue != NetString.CompareEqual)
+        {
+          break;
+        }
+
+        retValue = x.DataTableId.CompareTo(y.DataTableId);
+        if (retValue != NetString.CompareEqual)
+        {
+          break;
+        }
+
         retValue = string.Compare(x.Name, y.Name, true);
+        break;
       }
       return retValue;
     }

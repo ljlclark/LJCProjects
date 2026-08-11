@@ -126,7 +126,7 @@ namespace LJCTransformManager
 			if (DialogResult.OK == list.ShowDialog())
 			{
 				SourceLayout sourceLayout = list.LJCSelectedRecord;
-				int dataSourceID = DataSourceCombo.LJCSelectedItemID();
+				int dataSourceID = (int)DataSourceCombo.LJCSelectedItemID();
 
 				if (UpdateDataSource(dataSourceID, sourceLayout.SourceLayoutID))
 				{

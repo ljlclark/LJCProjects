@@ -95,7 +95,7 @@ namespace LJCDataUtility
         AscendingCheck.Checked = data.IsAscending;
 
         // Reference key values.
-        LJCDbID = (short)data.DbId;
+        LJCDbID = data.DbId;
         LJCParentID = data.DataTableId;
         LJCParentDbID = data.DataTableDbId;
       }

@@ -128,8 +128,8 @@ namespace LJCUnitMeasure
 			UnitMeasure retValue = new UnitMeasure()
 			{
 				ID = LJCID,
-				UnitSystemID = SystemCombo.LJCSelectedItemID(),
-				UnitCategoryID = CategoryCombo.LJCSelectedItemID(),
+				UnitSystemID = (int)SystemCombo.LJCSelectedItemID(),
+				UnitCategoryID = (int)CategoryCombo.LJCSelectedItemID(),
 				Code = CodeText.Text.Trim(),
 				Name = NameText.Text.Trim(),
 				AltName = AltNameText.Text.Trim(),

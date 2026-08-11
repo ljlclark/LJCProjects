@@ -114,10 +114,10 @@ namespace LJCDataUtilityDAL
     ///  path='members/LJCSetOriginalValues/*'/>
     public void LJCSetOriginalValues()
     {
-      _OriginalValues.ID = _Id;
-      _OriginalValues.DataDbID = _DataModuleDbId;
-      _OriginalValues.DataModuleID = _DataModuleId;
-      _OriginalValues.DataModuleDbID = _DataModuleDbId;
+      _OriginalValues.Id = _Id;
+      _OriginalValues.DbID = _DataModuleDbId;
+      _OriginalValues.DataModuleId = _DataModuleId;
+      _OriginalValues.DataModuleDbId = _DataModuleDbId;
       _OriginalValues.Name = _Name;
       _OriginalValues.Description = _Description;
       _OriginalValues.Sequence = _Sequence;
@@ -142,9 +142,9 @@ namespace LJCDataUtilityDAL
     // Update ChangedNames.Add() statements to "Property" constant
     // if property was renamed.
 
-    // Gets or sets the ID value.
+    // Gets or sets the table row ID.
     /// <include file='doc/DataTable.xml'
-    ///  path='members/ID/*'/>
+    ///  path='members/Id/*'/>
     [Required]
     [Column("Id", TypeName = "bigint")]
     public long Id
@@ -154,7 +154,7 @@ namespace LJCDataUtilityDAL
       {
         if (_Id != value)
         {
-          _Id = ChangedNames.Add(ColumnId, _OriginalValues.ID, value);
+          _Id = ChangedNames.Add(ColumnId, _OriginalValues.Id, value);
         }
       }
     }
@@ -162,7 +162,7 @@ namespace LJCDataUtilityDAL
 
     // Gets or sets the database ID.
     /// <include file='doc/DataTable.xml'
-    ///  path='members/DataSiteID/*'/>
+    ///  path='members/DbId/*'/>
     [Required]
     [Column("DbId", TypeName = "smallint")]
     public short DbId
@@ -173,7 +173,7 @@ namespace LJCDataUtilityDAL
         if (_DbId != value)
         {
           _DbId = ChangedNames.Add(ColumnDbId
-            , _OriginalValues.DataDbID, value);
+            , _OriginalValues.DbID, value);
         }
       }
     }
@@ -181,7 +181,7 @@ namespace LJCDataUtilityDAL
 
     // Gets or sets the parent table row ID.
     /// <include file='doc/DataTable.xml'
-    ///  path='members/DataModuleID/*'/>
+    ///  path='members/DataModuleId/*'/>
     [Required]
     [Column("DataModuleId", TypeName = "bigint")]
     public long DataModuleId
@@ -192,7 +192,7 @@ namespace LJCDataUtilityDAL
         if (_DataModuleId != value)
         {
           _DataModuleId = ChangedNames.Add(ColumnDataModuleId
-            , _OriginalValues.DataModuleID, value);
+            , _OriginalValues.DataModuleId, value);
         }
       }
     }
@@ -200,7 +200,7 @@ namespace LJCDataUtilityDAL
 
     // Gets or sets the parent database ID.
     /// <include file='doc/DataTable.xml'
-    ///  path='members/DataModuleSiteID/*'/>
+    ///  path='members/DataModuleDbId/*'/>
     [Required]
     [Column("DataModuleDbId", TypeName = "bigint")]
     public short DataModuleDbId
@@ -211,7 +211,7 @@ namespace LJCDataUtilityDAL
         if (_DataModuleDbId != value)
         {
           _DataModuleDbId = ChangedNames.Add(ColumnDataModuleDbId
-            , _OriginalValues.DataModuleDbID, value);
+            , _OriginalValues.DataModuleDbId, value);
         }
       }
     }
@@ -333,16 +333,16 @@ namespace LJCDataUtilityDAL
     /// <summary>The table name.</summary>
     public static string TableName = "DataTable";
 
-    /// <summary>The ID column name.</summary>
+    /// <summary>The table row ID column name.</summary>
     public static string ColumnId = "Id";
 
-    /// <summary>The DataSiteID column name.</summary>
+    /// <summary>The database ID column name.</summary>
     public static string ColumnDbId = "DbId";
 
-    /// <summary>The DataModuleID column name.</summary>
+    /// <summary>The the parent table row ID column name.</summary>
     public static string ColumnDataModuleId = "DataModuleId";
 
-    /// <summary>The DataModuleSiteID column name.</summary>
+    /// <summary>The the parent database ID column name.</summary>
     public static string ColumnDataModuleDbId = "DataModuleDbId";
 
     /// <summary>The Name column name.</summary>
@@ -379,16 +379,16 @@ namespace LJCDataUtilityDAL
     private class OriginalValues
     {
       // Gets or sets the table row ID.
-      public long ID { get; set; }
+      public long Id { get; set; }
 
       // Gets or sets the database ID.
-      public short DataDbID { get; set; }
+      public short DbID { get; set; }
 
       // Gets or sets the parent table row ID.
-      public long DataModuleID { get; set; }
+      public long DataModuleId { get; set; }
 
       // Gets or sets the parent database ID.
-      public short DataModuleDbID { get; set; }
+      public short DataModuleDbId { get; set; }
 
       // Gets or sets the unique name.
       public string Name { get; set; }
@@ -412,7 +412,7 @@ namespace LJCDataUtilityDAL
 
   // Sort and search on Name value.
   /// <include file='Doc/DataTable.xml'
-  ///  path='items/Compare/*'/>
+  ///  path='items/DataTableUnique/*'/>
   public class DataTableUniqueComparer : IComparer<DataUtilTable>
   {
     // Compares two objects.

@@ -63,7 +63,7 @@ namespace LJCTransformManager
 			if (DataSourceCombo.SelectedIndex > -1)
 			{
 				// Data from items.
-				int parentID = DataSourceCombo.LJCSelectedItemID();
+				int parentID = (int)DataSourceCombo.LJCSelectedItemID();
 
 				var dataSourceManager = Managers.DataSourceManager;
 				DataSource dataSource = dataSourceManager.RetrieveWithID(parentID);

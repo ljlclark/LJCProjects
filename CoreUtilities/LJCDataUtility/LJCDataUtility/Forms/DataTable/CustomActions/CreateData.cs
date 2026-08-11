@@ -96,7 +96,7 @@ namespace LJCDataUtility
         foreach (var data in dataKeys)
         {
           var dataTable = tableManager.RetrieveWithID(data.DataTableId
-            , (short)data.DbId);
+            , data.DbId);
           proc.Line($"EXEC sp_DataKeyAdd {dataTable.Name}");
           proc.Line($" , '{data.Name}', {data.KeyType}");
           proc.Text($" , {data.SourceColumnName}, {data.TargetTableName}");
@@ -156,7 +156,7 @@ namespace LJCDataUtility
         foreach (var dataTable in dataTables)
         {
           var dataModule = moduleManager.RetrieveWithID(dataTable.DataModuleId
-            , (short)dataTable.DbId);
+            , dataTable.DbId);
           if (dataModule != null)
           {
             proc.Line($"EXEC sp_DataTableAdd {dataModule.Name}");

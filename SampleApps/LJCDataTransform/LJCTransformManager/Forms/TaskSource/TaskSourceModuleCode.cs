@@ -67,7 +67,7 @@ namespace LJCTransformManager
 			if (DataProcessCombo.SelectedIndex >= 0)
 			{
 				// Data from items.
-				int id = DataProcessCombo.LJCSelectedItemID();
+				int id = (int)DataProcessCombo.LJCSelectedItemID();
 
 				StepManager stepManager = Managers.StepManager;
 				records = stepManager.LoadWithProcessID(id);

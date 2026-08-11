@@ -422,7 +422,7 @@ namespace TestDataUtilityDAL
 
       // Update the test record.
       var id = utilTable.Id;
-      dbID = (short)utilTable.DbId;
+      dbID = utilTable.DbId;
       var idKey = dataTableManager.IDKey(id, dbID);
       utilTable.Description += " Updated";
       var propertyNames = new List<string>()

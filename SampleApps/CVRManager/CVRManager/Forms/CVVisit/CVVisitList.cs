@@ -159,7 +159,7 @@ namespace CVRManager
 		// Handles the SelectionChanged event.
 		private void FacilityCombo_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			mFacilityID = FacilityCombo.LJCSelectedItemID();
+			mFacilityID = (int)FacilityCombo.LJCSelectedItemID();
 			TimedChange(Change.Facility);
 		}
 		#endregion

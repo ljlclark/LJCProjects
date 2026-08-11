@@ -28,7 +28,15 @@ namespace LJCWinFormControls
 
     // Adds an Item to the ComboBox.
     /// <include file='Doc/LJCItemCombo.xml'
-    ///  path='items/LJCAddItem/*'/>
+    ///  path='items/LJCAddItem1/*'/>
+    public LJCItem LJCAddItem(long id, string text)
+    {
+      return LJCAddItem(id, 0, text);
+    }
+
+    // Adds an Item to the ComboBox.
+    /// <include file='Doc/LJCItemCombo.xml'
+    ///  path='items/LJCAddItem2/*'/>
     public LJCItem LJCAddItem(long id, short dbID, string text)
     {
       mArgError.MethodName = "LJCAddItem";
@@ -54,7 +62,7 @@ namespace LJCWinFormControls
     // Sets the combo SelectedIndex to the item with the specified ID value.
     /// <include file='Doc/LJCItemCombo.xml'
     ///  path='items/LJCSetByItemID/*'/>
-    public void LJCSetByItemID(int id, short dbID)
+    public void LJCSetByItemID(long id, short dbID = 0)
     {
       for (int index = 0; index < Items.Count; index++)
       {

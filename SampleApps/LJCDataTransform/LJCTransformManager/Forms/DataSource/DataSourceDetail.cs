@@ -79,7 +79,7 @@ namespace LJCTransformManager
 
 				// Set default values.
 				LJCRecord = new DataSource();
-				SourceTypeCombo.LJCSetByItemID(File);
+				SourceTypeCombo.LJCSetByItemID(File, 0);
 				SourceStatusCombo.SelectedItem = ProcessStatusType.Active;
 			}
 			Cursor = Cursors.Default;
@@ -94,8 +94,8 @@ namespace LJCTransformManager
 				ParentNameTextbox.Text = LJCParentName;
 				SourceNameTextbox.Text = dataRecord.Name;
 				SourceDescriptionTextbox.Text = dataRecord.Description;
-				LayoutCombo.LJCSetByItemID(dataRecord.SourceLayoutID);
-				SourceTypeCombo.LJCSetByItemID(dataRecord.SourceTypeID);
+				LayoutCombo.LJCSetByItemID(dataRecord.SourceLayoutID, 0);
+				SourceTypeCombo.LJCSetByItemID(dataRecord.SourceTypeID, 0);
 				DataConfigNameTextbox.Text = dataRecord.DataConfigName;
 				SourceItemNameTextbox.Text = dataRecord.SourceItemName;
 				mSourceStatusID = dataRecord.SourceStatusID;
@@ -112,7 +112,7 @@ namespace LJCTransformManager
 				DataSourceID = LJCID,
 				Name = FormCommon.SetString(SourceNameTextbox.Text),
 				Description = FormCommon.SetString(SourceDescriptionTextbox.Text),
-				SourceLayoutID = LayoutCombo.LJCSelectedItemID(),
+				SourceLayoutID = (int)LayoutCombo.LJCSelectedItemID(),
 				SourceTypeID = (short)SourceTypeCombo.LJCSelectedItemID(),
 				DataConfigName = DataConfigNameTextbox.Text,
 				SourceItemName = SourceItemNameTextbox.Text,

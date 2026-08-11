@@ -95,7 +95,7 @@ namespace CVRManager
 				// Set default values.
 				LJCRecord = new CVVisit();
 				mBaseTemperatureUnitID = GetCelsiusID();
-				TemperatureCombo.LJCSetByItemID(mBaseTemperatureUnitID);
+				TemperatureCombo.LJCSetByItemID(mBaseTemperatureUnitID, 0);
 			}
 			Cursor = Cursors.Default;
 		}
@@ -136,7 +136,7 @@ namespace CVRManager
 				mOriginalTemperature = temperature;
 				TemperatureText.Text = temperature;
 				mAllowChange = false;
-				TemperatureCombo.LJCSetByItemID(dataRecord.TemperatureUnitID);
+				TemperatureCombo.LJCSetByItemID(dataRecord.TemperatureUnitID, 0);
 				mAllowChange = true;
 
 				GetDateTime(RegisterDateMask, RegisterTimeMask, dataRecord.RegisterTime);
@@ -154,7 +154,7 @@ namespace CVRManager
 				FacilityID = LJCParentID,
 				CVPersonID = mCVPersonID,
 				Temperature = TemperatureText.Text.Trim(),
-				TemperatureUnitID = TemperatureCombo.LJCSelectedItemID(),
+				TemperatureUnitID = (int)TemperatureCombo.LJCSelectedItemID(),
 				BaseTemperature = mBaseTemperature,
 				BaseTemperatureUnitID = mBaseTemperatureUnitID,
 				RegisterTime = SetDateTime(RegisterDateMask, RegisterTimeMask),
@@ -359,7 +359,7 @@ namespace CVRManager
 			var unitMeasures = unitMeasureManager.LoadWithCodes("temp");
 			foreach (UnitMeasure unitMeasure in unitMeasures)
 			{
-				TemperatureCombo.LJCAddItem(unitMeasure.ID, unitMeasure.Name);
+				TemperatureCombo.LJCAddItem(unitMeasure.ID, 0, unitMeasure.Name);
 			}
 			Cursor = Cursors.Default;
 		}
@@ -496,7 +496,7 @@ namespace CVRManager
 		{
 			string temperature = TemperatureText.Text.Trim();
 			decimal.TryParse(temperature, out decimal temperatureValue);
-			int temperatureUnitID = TemperatureCombo.LJCSelectedItemID();
+			int temperatureUnitID = (int)TemperatureCombo.LJCSelectedItemID();
 
 			// Reset temperature values.
 			if (temperature != mOriginalTemperature)
@@ -537,7 +537,7 @@ namespace CVRManager
 			{
 				string temperature = TemperatureText.Text.Trim();
 				decimal.TryParse(temperature, out decimal temperatureValue);
-				int temperatureUnitID = TemperatureCombo.LJCSelectedItemID();
+				int temperatureUnitID = (int)TemperatureCombo.LJCSelectedItemID();
 				if (temperatureUnitID == mBaseTemperatureUnitID)
 				{
 					// Revert temperature to the base temperature.

@@ -244,7 +244,7 @@ namespace LJCDataUtility
       var tableId = DataTableRowId(out short dbId);
       var keyManager = Managers.DataKeyManager;
       var retKeys = keyManager.LoadWithParentType(tableId, dbId
-        , (short)KeyType.Foreign);
+        , (int)KeyType.Foreign);
       return retKeys;
     }
 
@@ -256,7 +256,7 @@ namespace LJCDataUtility
       var parentId = DataTableRowId(out short parentDbId);
       var keyManager = Managers.DataKeyManager;
       var dataKey = keyManager.RetrieveWithParentType(parentId, parentDbId
-        , (short)KeyType.Primary);
+        , (int)KeyType.Primary);
       if (dataKey != null)
       {
         retList = dataKey.SourceColumnName;
@@ -272,7 +272,7 @@ namespace LJCDataUtility
       long parentId = DataTableRowId(out short parentDbId);
       var keyManager = Managers.DataKeyManager;
       var dataKey = keyManager.RetrieveWithParentType(parentId, parentDbId
-        , (short)KeyType.Unique);
+        , (int)KeyType.Unique);
       if (dataKey != null)
       {
         retList = dataKey.SourceColumnName;

@@ -43,7 +43,7 @@ namespace LJCGenDocEdit
           foreach (DocAssembly dataRecord in dataRecords)
           {
             var text = $"{dataRecord.Name} - {dataRecord.Description}";
-            mDocList.AssemblyCombo.LJCAddItem(dataRecord.ID, text);
+            mDocList.AssemblyCombo.LJCAddItem(dataRecord.ID, 0, text);
           }
           mDocList.AssemblyCombo.SelectedIndex = 0;
         }
@@ -65,7 +65,7 @@ namespace LJCGenDocEdit
           var assemblyID = AssemblyComboID(index);
           if (assemblyID == dataRecord.ID)
           {
-            mAssemblyCombo.LJCSetByItemID(assemblyID);
+            mAssemblyCombo.LJCSetByItemID(assemblyID, 0);
             retValue = true;
             break;
           }

@@ -45,12 +45,12 @@ namespace LJCUnitMeasure
 			int systemID = 0;
 			if (mSystemCombo.SelectedIndex >= 0)
 			{
-				systemID = mSystemCombo.LJCSelectedItemID();
+				systemID = (int)mSystemCombo.LJCSelectedItemID();
 			}
 			int categoryID = 0;
 			if (mCategoryCombo.SelectedIndex >= 2)
 			{
-				categoryID = mCategoryCombo.LJCSelectedItemID();
+				categoryID = (int)mCategoryCombo.LJCSelectedItemID();
 			}
 
 			var keyColumns = new LJCDataColumns()
@@ -137,8 +137,8 @@ namespace LJCUnitMeasure
 			if (mSystemCombo.SelectedIndex >= 0)
 			{
 				// Data from items.
-				int unitSystemID = mSystemCombo.LJCSelectedItemID();
-				int unitCategoryID = mCategoryCombo.LJCSelectedItemID();
+				int unitSystemID = (int)mSystemCombo.LJCSelectedItemID();
+				int unitCategoryID = (int)mCategoryCombo.LJCSelectedItemID();
 
 				detail = new UnitMeasureDetail(mManagers)
 				{
@@ -161,8 +161,8 @@ namespace LJCUnitMeasure
 			{
 				// Data from items.
 				int id = row.LJCGetInt32(UnitMeasure.ColumnID);
-				int unitSystemID = mSystemCombo.LJCSelectedItemID();
-				int unitCategoryID = mCategoryCombo.LJCSelectedItemID();
+				int unitSystemID = (int)mSystemCombo.LJCSelectedItemID();
+				int unitCategoryID = (int)mCategoryCombo.LJCSelectedItemID();
 
 				detail = new UnitMeasureDetail(mManagers)
 				{

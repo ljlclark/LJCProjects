@@ -97,7 +97,7 @@ namespace LJCTransformManager
 				ParentNameTextbox.Text = LJCParentName;
 				TaskNameTextbox.Text = dataRecord.Name;
 				TaskDescriptionTextbox.Text = dataRecord.Description;
-				TaskTypeCombo.LJCSetByItemID(dataRecord.TaskTypeID);
+				TaskTypeCombo.LJCSetByItemID(dataRecord.TaskTypeID, 0);
 				ActionItemTextbox.Text = dataRecord.ActionItemName;
 				mTaskStatusID = dataRecord.TaskStatusID;
 				TaskStatusCombo.SelectedItem = (StepTaskStatus)mTaskStatusID;

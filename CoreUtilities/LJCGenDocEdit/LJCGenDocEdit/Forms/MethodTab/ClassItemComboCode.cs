@@ -44,7 +44,7 @@ namespace LJCGenDocEdit
           foreach (DocClass dataRecord in dataRecords)
           {
             var text = $"{dataRecord.Name} - {dataRecord.Description}";
-            mDocList.ClassCombo.LJCAddItem(dataRecord.ID, text);
+            mDocList.ClassCombo.LJCAddItem(dataRecord.ID, 0, text);
           }
           mDocList.ClassCombo.SelectedIndex = 0;
         }
@@ -68,7 +68,7 @@ namespace LJCGenDocEdit
         var classID = ClassComboID(index);
         if (classID == dataRecord.ID)
         {
-          mClassCombo.LJCSetByItemID(classID);
+          mClassCombo.LJCSetByItemID(classID, 0);
           retValue = true;
           break;
         }

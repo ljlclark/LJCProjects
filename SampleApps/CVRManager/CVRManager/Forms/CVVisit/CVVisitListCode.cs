@@ -47,7 +47,7 @@ namespace CVRManager
 
 			foreach (Facility facility in facilities)
 			{
-				FacilityCombo.LJCAddItem(facility.ID, facility.Description);
+				FacilityCombo.LJCAddItem(facility.ID, 0, facility.Description);
 			}
 
 			// Set initial control values.
@@ -140,7 +140,7 @@ namespace CVRManager
 			controlValues.Add(Name, Left, Top, Width, Height);
 
 			// Save other values.
-			int facilityID = FacilityCombo.LJCSelectedItemID();
+			int facilityID = (int)FacilityCombo.LJCSelectedItemID();
 			controlValues.Add("Facility", facilityID, 0, 0, 0);
 
 			NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null
@@ -177,7 +177,7 @@ namespace CVRManager
 					if (controlValue != null)
 					{
 						mFacilityID = controlValue.Left;
-						FacilityCombo.LJCSetByItemID(mFacilityID);
+						FacilityCombo.LJCSetByItemID(mFacilityID, 0);
 					}
 				}
 			}

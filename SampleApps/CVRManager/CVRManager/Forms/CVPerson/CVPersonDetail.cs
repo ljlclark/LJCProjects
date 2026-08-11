@@ -114,7 +114,7 @@ namespace CVRManager
 				LastNameTextbox.Text = dataRecord.LastName;
 				if (dataRecord.CVSexID > 0)
 				{
-					SexCombo.LJCSetByItemID((int)dataRecord.CVSexID);
+					SexCombo.LJCSetByItemID((int)dataRecord.CVSexID, 0);
 				}
 				AddressTextbox.Text = dataRecord.DeliveryAddressLine;
 				RegionTextbox.Text = dataRecord.LastLine;
@@ -264,7 +264,7 @@ namespace CVRManager
 			CVSexes cvSexes = Managers.CVSexManager.Load();
 			foreach (CVSex cvSex in cvSexes)
 			{
-				SexCombo.LJCAddItem((int)cvSex.ID, cvSex.Name);
+				SexCombo.LJCAddItem((int)cvSex.ID, 0, cvSex.Name);
 			}
 			Cursor = Cursors.Default;
 		}

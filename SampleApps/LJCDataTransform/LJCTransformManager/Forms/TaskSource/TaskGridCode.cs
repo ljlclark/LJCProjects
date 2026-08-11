@@ -37,7 +37,7 @@ namespace LJCTransformManager
 			if (mParent.StepCombo.SelectedIndex > -1)
 			{
 				// Data from items.
-				int parentID = mParent.StepCombo.LJCSelectedItemID();
+				int parentID = (int)mParent.StepCombo.LJCSelectedItemID();
 
 				StepTaskManager taskManager = mManagers.StepTaskManager;
 				records = taskManager.LoadWithStepID(parentID);
@@ -120,7 +120,7 @@ namespace LJCTransformManager
 			if (mParent.StepCombo.SelectedIndex > -1)
 			{
 				// Data from parent window or list.
-				int parentID = mParent.StepCombo.LJCSelectedItemID();
+				int parentID = (int)mParent.StepCombo.LJCSelectedItemID();
 				string parentName = mParent.StepCombo.Text;
 
 				TaskDetail detail = new TaskDetail()
@@ -142,7 +142,7 @@ namespace LJCTransformManager
 				&& mTaskGrid.CurrentRow is LJCGridRow row)
 			{
 				//  // Data from parent window or list.
-				int parentID = mParent.StepCombo.LJCSelectedItemID();
+				int parentID = (int)mParent.StepCombo.LJCSelectedItemID();
 				string parentName = mParent.StepCombo.Text;
 
 				TaskDetail detail = new TaskDetail()

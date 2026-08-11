@@ -487,7 +487,7 @@ namespace TestDataUtilityDAL
 
       // Update the test record.
       var id = dataModule.Id;
-      dbID = (short)dataModule.DbId;
+      dbID = dataModule.DbId;
       var idKey = dataModuleManager.IDKey(id, dbID);
       dataModule.Description += " Updated";
       var propertyNames = new List<string>()

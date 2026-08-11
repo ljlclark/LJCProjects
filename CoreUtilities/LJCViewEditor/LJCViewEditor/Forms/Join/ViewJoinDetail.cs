@@ -116,7 +116,7 @@ namespace LJCViewEditor
             string tableName = GetJoinTableName(item.Text);
             if (tableName == dataRecord.JoinTableName)
             {
-              JoinTableCombo.LJCSetByItemID(item.ID);
+              JoinTableCombo.LJCSetByItemID((short)item.ID, 0);
               break;
             }
           }
@@ -312,7 +312,7 @@ namespace LJCViewEditor
           if (targetTableName == foreignKey.SourceTable)
           {
             itemText = $"{itemText}-{foreignKey.SourceColumn}";
-            JoinTableCombo.LJCAddItem(index, itemText);
+            JoinTableCombo.LJCAddItem(index, 0, itemText);
           }
           //else
           //{

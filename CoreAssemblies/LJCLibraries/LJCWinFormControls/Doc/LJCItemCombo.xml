@@ -13,7 +13,15 @@
   </LJCItemCombo>
 
   <!-- Methods -->
-  <LJCAddItem>
+  <LJCAddItem1>
+    <summary>
+      Adds an Item to the ComboBox.
+    </summary>
+    <param name="id">The Item ID.</param>
+    <param name="text">The Item text.</param>
+    <returns>The added Item.</returns>
+  </LJCAddItem1>
+  <LJCAddItem2>
     <summary>
       Adds an Item to the ComboBox.
     </summary>
@@ -21,7 +29,7 @@
     <param name="dbID">The database ID.</param>
     <param name="text">The Item text.</param>
     <returns>The added Item.</returns>
-  </LJCAddItem>
+  </LJCAddItem2>
   <LJCSetByItemID>
     <summary>
       Sets the combo SelectedIndex to the item with the specified ID value.

@@ -496,8 +496,6 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Load with parent foreign keys.
-      //dataTableID = dataKey.DataTableID;
-      //dataTableDbID = (short)dataKey.DataTableSiteID;
       var tableName = "DataTable";
 
       // Test Method
@@ -566,7 +564,7 @@ namespace TestDataUtilityDAL
 
       // Load with parent.
       dataTableID = dataKey.DataTableId;
-      dataTableDbID = (short)dataKey.DataTableDbId;
+      dataTableDbID = dataKey.DataTableDbId;
 
       // Test Method
       var dataKeys = dataKeyManager.LoadWithParent(dataTableID, dataTableDbID);
@@ -632,7 +630,7 @@ namespace TestDataUtilityDAL
 
       // Load with parent.
       dataTableID = dataKey.DataTableId;
-      dataTableDbID = (short)dataKey.DataTableDbId;
+      dataTableDbID = dataKey.DataTableDbId;
       var keyType = 1;
 
       // Test Method
@@ -700,7 +698,7 @@ namespace TestDataUtilityDAL
 
       // Load with type.
       var id = dataKey.Id;
-      dbID = (short)dataKey.DataTableDbId;
+      dbID = dataKey.DataTableDbId;
       short keyType = 1;
 
       // Test Method
@@ -833,7 +831,7 @@ namespace TestDataUtilityDAL
 
       // Retrieve with parent KeyType.
       var parentID = dataKey.DataTableId;
-      short parentDbID = (short)dataKey.DataTableDbId;
+      short parentDbID = dataKey.DataTableDbId;
       var keyType = dataKey.KeyType;
 
       // Test Method

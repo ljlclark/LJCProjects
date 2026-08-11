@@ -183,7 +183,7 @@ namespace LJCDataUtility
         //var location = FormPoint.DialogScreenPoint(ModuleGrid);
         var detail = new DataModuleDetail()
         {
-          LJCID = (short)id,
+          LJCID = (int)id,
           LJCDbID = dbID,
           //LJCLocation = location,
           LJCManagers = Managers,

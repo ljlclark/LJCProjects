@@ -129,7 +129,7 @@ namespace CVRManager
 			if (mParent.FacilityCombo.SelectedItem != null)
 			{
 				// Data from items.
-				int parentID = mParent.FacilityCombo.LJCSelectedItemID();
+				int parentID = (int)mParent.FacilityCombo.LJCSelectedItemID();
 				string parentName = mParent.FacilityCombo.Text;
 
 				detail = new CVVisitDetail()
@@ -154,7 +154,7 @@ namespace CVRManager
 			{
 				// Data from items.
 				long id = row.LJCGetInt64(CVVisit.ColumnID);
-				int parentID = mParent.FacilityCombo.LJCSelectedItemID();
+				int parentID = (int)mParent.FacilityCombo.LJCSelectedItemID();
 				string parentName = mParent.FacilityCombo.Text;
 
 				detail = new CVVisitDetail()

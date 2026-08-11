@@ -96,7 +96,7 @@ namespace LJCDataUtility
       if (isContinue)
       {
         TableID = dataTable.Id;
-        TableDbID = (short)dataTable.DbId;
+        TableDbID = dataTable.DbId;
         UpdateColumns();
         SetKeysPrimary();
         SetKeysUnique();
@@ -124,7 +124,7 @@ namespace LJCDataUtility
       dataTable.ChangedNames.AddNames(propertyNames);
       var newTable = tableManager.Add(dataTable);
 
-      CreateColumns(newTable.Id, (short)newTable.DbId);
+      CreateColumns(newTable.Id, newTable.DbId);
       CreateKeys(newTable.Id);
 
       var tableGridCode = new DataTableGridCode(ParentObject);
@@ -500,7 +500,7 @@ namespace LJCDataUtility
         {
           var keyManager = Managers.DataKeyManager;
           var keyColumns = keyManager.UniqueKey(dataKey.DataTableId
-            , (short)dataKey.DataTableDbId, dataKey.Name);
+            , dataKey.DataTableDbId, dataKey.Name);
           keyManager.Update(updateKey, keyColumns);
         }
       }
