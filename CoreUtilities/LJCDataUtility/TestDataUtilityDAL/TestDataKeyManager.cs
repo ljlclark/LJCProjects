@@ -504,7 +504,7 @@ namespace TestDataUtilityDAL
       // Verify the record was retrieved.
       dataTableID = 4;
       name = "fk_DataKey_DataTable";
-      dataKey = dataKeys.LJCGetWithUnique(dataTableID, dataTableDbID, name);
+      dataKey = dataKeys.LJCGetWithUnique(dataTableDbID, dataTableID, name);
       result = dataKey.Name;
       compare = "fk_DataKey_DataTable";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -570,7 +570,7 @@ namespace TestDataUtilityDAL
       var dataKeys = dataKeyManager.LoadWithParent(dataTableID, dataTableDbID);
 
       // Verify the record was retrieved.
-      dataKey = dataKeys.LJCGetWithUnique(dataTableID, dataTableDbID, name);
+      dataKey = dataKeys.LJCGetWithUnique(dataTableDbID, dataTableID, name);
       result = dataKey.Name;
       compare = "TestKeyName";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -638,7 +638,7 @@ namespace TestDataUtilityDAL
         , dataTableDbID, keyType);
 
       // Verify the record was retrieved.
-      dataKey = dataKeys.LJCGetWithUnique(dataTableID, dataTableDbID, name);
+      dataKey = dataKeys.LJCGetWithUnique(dataTableDbID, dataTableID, name);
       result = dataKey.Name;
       compare = "TestKeyName";
       TestCommon.Write($"{methodName}2", result, compare);

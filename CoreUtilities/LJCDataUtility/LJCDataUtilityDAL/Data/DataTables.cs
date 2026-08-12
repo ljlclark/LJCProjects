@@ -74,7 +74,7 @@ namespace LJCDataUtilityDAL
     // The Copy constructor.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
-    public DataTables(DataTables items) : this()
+    public DataTables(DataTables items)
     {
       if (LJC.HasListItems(items))
       {
@@ -106,7 +106,7 @@ namespace LJCDataUtilityDAL
 
     // Checks if the collection has items.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='members/HasItems/*'/>
+    ///  path='members/LJCHasItems/*'/>
     public bool LJCHasItems()
     {
       bool retValue = false;
@@ -136,27 +136,27 @@ namespace LJCDataUtilityDAL
     // Creates and adds the object from the supplied values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/Add/*'/>
-    public DataUtilTable Add(long id, short dbID, long dataModuleID
-      , short dataModuleDbID, string name)
+    public DataUtilTable Add(short dbID, long id, short dataModuleDbId
+      , long dataModuleId, string name)
     {
       DataUtilTable retValue = null;
 
       string message = "";
-      if (id <= 0)
-      {
-        message += "id must be greater than zero.\r\n";
-      }
       if (dbID <= 0)
       {
         message += "dbID must be greater than zero.\r\n";
       }
-      if (dataModuleID <= 0)
+      if (id <= 0)
       {
-        message += "dataModuleID must be greater than zero.\r\n";
+        message += "id must be greater than zero.\r\n";
       }
-      if (dataModuleDbID <= 0)
+      if (dataModuleDbId <= 0)
       {
         message += "dataModuleDbID must be greater than zero.\r\n";
+      }
+      if (dataModuleId <= 0)
+      {
+        message += "dataModuleID must be greater than zero.\r\n";
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
@@ -164,8 +164,8 @@ namespace LJCDataUtilityDAL
 
       // Prevent search from sorting current items.
       var checkTables = Clone();
-      var duplicate = checkTables.LJCGetWithUnique(dataModuleID
-        , dataModuleDbID, name);
+      var duplicate = checkTables.LJCGetWithUnique(dataModuleDbId, dataModuleId
+        , name);
       if (duplicate != null)
       {
         retValue = duplicate.Clone();
@@ -175,10 +175,10 @@ namespace LJCDataUtilityDAL
       {
         retValue = new DataUtilTable()
         {
-          Id = id,
           DbId = dbID,
-          DataModuleId = dataModuleID,
-          DataModuleDbId = dataModuleDbID,
+          Id = id,
+          DataModuleDbId = dataModuleDbId,
+          DataModuleId = dataModuleId,
           Name = name,
         };
         Add(retValue);
@@ -186,18 +186,18 @@ namespace LJCDataUtilityDAL
       return retValue;
     }
 
-    // Retrieve the collection element.
+    // Retrieve the collection item.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCGetWithID/*'/>
-    public DataUtilTable LJCGetWithID(long id, short dbID)
+    public DataUtilTable LJCGetWithID(short dbID, long id)
     {
       DataUtilTable retValue = null;
 
       LJCSortID();
       DataUtilTable searchItem = new DataUtilTable()
       {
-        Id = id,
         DbId = dbID,
+        Id = id,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -210,8 +210,8 @@ namespace LJCDataUtilityDAL
     // Retrieve the collection element with unique values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/LJCGetWithUnique/*'/>
-    public DataUtilTable LJCGetWithUnique(long dataModuleID
-      , short dataModuleDbID, string name)
+    public DataUtilTable LJCGetWithUnique(short dataModuleDbID
+      , long dataModuleID, string name)
     {
       DataUtilTable retValue = null;
 
@@ -219,8 +219,8 @@ namespace LJCDataUtilityDAL
       LJCSortUnique(comparer);
       DataUtilTable searchItem = new DataUtilTable()
       {
-        DataModuleId = dataModuleID,
         DataModuleDbId = dataModuleDbID,
+        DataModuleId = dataModuleID,
         Name = name,
       };
       int index = BinarySearch(searchItem, comparer);
@@ -234,11 +234,11 @@ namespace LJCDataUtilityDAL
     // Removes an item by name.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/LJCRemove/*'/>
-    public void LJCRemove(long dataModuleID, short dataModuleDbID
+    public void LJCRemove(short dataModuleDbID, long dataModuleID 
       , string name)
     {
-      DataUtilTable item = Find(x => x.DataModuleId == dataModuleID
-        && x.DataModuleDbId == dataModuleDbID
+      DataUtilTable item = Find(x => x.DataModuleDbId == dataModuleDbID
+        && x.DataModuleId == dataModuleID
         && x.Name == name);
       if (item != null)
       {
@@ -291,10 +291,10 @@ namespace LJCDataUtilityDAL
     // The item for the supplied values.
     /// <include file='Doc/DataTables.xml'
     ///  path='members/UniqueIndexer/*'/>
-    public DataUtilTable this[long dataTableID, short dataTableDbID
+    public DataUtilTable this[short dataTableDbID, long dataTableID
       , string name]
     {
-      get => LJCGetWithUnique(dataTableID, dataTableDbID, name);
+      get => LJCGetWithUnique(dataTableDbID, dataTableID, name);
     }
     #endregion
 

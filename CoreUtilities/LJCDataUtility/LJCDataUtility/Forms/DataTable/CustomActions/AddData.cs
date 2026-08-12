@@ -409,14 +409,14 @@ namespace LJCDataUtility
 
       var targetTableName = dataKey.TargetTableName;
       var targetTableId = ParentObject.TargetDataTableId(targetTableName
-        , out short targetDbId);
+        , out short targetTableDbId);
       if (targetTableId > 0)
       {
         var parentColumns = Managers.TableDataColumns(targetTableId
-          , targetDbId);
+          , targetTableDbId);
         retTypeValue = "nvarchar(5)";
-        var findColumn = parentColumns.LJCGetWithUnique(targetTableId
-          , targetDbId, dataKey.TargetColumnName);
+        var findColumn = parentColumns.LJCGetWithUnique(targetTableDbId
+          , targetTableId, dataKey.TargetColumnName);
         if (findColumn != null)
         {
           retTypeValue = findColumn.TypeName;
@@ -469,9 +469,9 @@ namespace LJCDataUtility
       var targetTableName = foreignKey.TargetTableName;
       var targetTableColumns = TargetColumns(targetTableName);
       var targetTableId = ParentObject.TargetDataTableId(targetTableName
-        , out short targetDbId);
-      var findColumn = targetTableColumns.LJCGetWithUnique(targetTableId
-        , targetDbId, uniqueColumnName);
+        , out short targetTableDbId);
+      var findColumn = targetTableColumns.LJCGetWithUnique(targetTableDbId
+        , targetTableId, uniqueColumnName);
       typeValue = "bigint";
       if (findColumn != null)
       {

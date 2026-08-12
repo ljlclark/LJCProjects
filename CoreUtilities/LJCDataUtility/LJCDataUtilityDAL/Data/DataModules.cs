@@ -42,7 +42,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Get custom collection from List<T>.
-    /// <include path='members/LJCGetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCGetCollection/*'/>
     public static DataModules LJCGetCollection(List<DataModule> list)
     {
       DataModules retValue = null;
@@ -98,7 +99,7 @@ namespace LJCDataUtilityDAL
 
     // Checks if the collection has items.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='members/HasItems2/*'/>
+    ///  path='members/LJCHasItems/*'/>
     public bool LJCHasItems()
     {
       bool retValue = false;
@@ -128,30 +129,30 @@ namespace LJCDataUtilityDAL
     // Creates and adds the object from the supplied values.
     /// <include file='Doc/DataModules.xml'
     ///  path='members/Add/*'/>
-    public DataModule Add(long id, short dbId, string name)
+    public DataModule Add(short dbId, long id, string name)
     {
       DataModule retValue;
 
       string message = "";
-      if (id <= 0)
-      {
-        message += "id must be greater than zero.\r\n";
-      }
       if (dbId <= 0)
       {
         message += "dataSiteID must be greater than zero.\r\n";
+      }
+      if (id <= 0)
+      {
+        message += "id must be greater than zero.\r\n";
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
       NetString.ThrowArgError(mArgError.ToString());
 
-      retValue = LJCGetWithName(name);
+      retValue = LJCGetWithUnique(name);
       if (null == retValue)
       {
         retValue = new DataModule()
         {
-          Id = id,
           DbId = dbId,
+          Id = id,
           Name = name
         };
         Add(retValue);
@@ -162,15 +163,15 @@ namespace LJCDataUtilityDAL
     // Retrieve the collection item.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCGetWithID/*'/>
-    public DataModule LJCGetWithID(long id, short dbID)
+    public DataModule LJCGetWithID(short dbID, long id)
     {
       DataModule retValue = null;
 
       LJCSortID();
       DataModule searchItem = new DataModule()
       {
+        DbId = dbID,
         Id = id,
-        DbId= dbID,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)
@@ -181,8 +182,9 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection item with unique values.
-    /// <include path='members/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
-    public DataModule LJCGetWithName(string name)
+    /// <include file='Doc/DataModules.xml'
+    ///  path='members/LJCGetWithUnique/*'/>
+    public DataModule LJCGetWithUnique(string name)
     {
       DataModule retValue = null;
 
@@ -215,7 +217,9 @@ namespace LJCDataUtilityDAL
 
     #region Sort Methods
 
-    /// <summary>Sort on ID.</summary>
+    // Sort on ID.
+    /// <include file='Doc/DataModules.xml'
+    ///  path='members/LJCSortID/*'/>
     public void LJCSortID()
     {
       if (Count != mPrevCount
@@ -227,8 +231,9 @@ namespace LJCDataUtilityDAL
       }
     }
 
-    /// <summary>Sort on Unique values.</summary>
-    /// <param name="comparer">The Comparer object.</param>
+    // Sort on Unique values.
+    /// <include file='Doc/DataModules.xml'
+    ///  path='members/LJCSortUnique/*'/>
     public void LJCSortUnique(DataModuleUniqueComparer comparer)
     {
       if (Count != mPrevCount
@@ -243,17 +248,20 @@ namespace LJCDataUtilityDAL
 
     #region Properties
 
-    /// <summary>Gets the Default File Name.</summary>
+    // Gets the Default File Name.
+    /// <include file='Doc/DataModules.xml'
+    ///  path='members/LJCDefaultFileName/*'/>
     public static string LJCDefaultFileName
     {
       get { return "DataModules.xml"; }
     }
 
     // The item for the supplied name.
-    /// <include path='members/NameIndexer/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    ///  path='members/NameIndexer/*'/>
     public DataModule this[string name]
     {
-      get { return LJCGetWithName(name); }
+      get => LJCGetWithUnique(name);
     }
     #endregion
 

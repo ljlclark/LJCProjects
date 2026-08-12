@@ -283,7 +283,7 @@ namespace TestDataUtilityDAL
       dataModules.Add(dataModule);
 
       // Test Method
-      var item = dataModules.LJCGetWithName("Name");
+      var item = dataModules.LJCGetWithUnique("Name");
 
       var result = "";
       if (item != null)

@@ -11,7 +11,7 @@ namespace LJCDataUtilityDAL
 {
   // Represents a collection of DataKey objects.
   /// <include file='Doc/DataKeys.xml'
-  ///  path='members/DataTables/*'/>
+  ///  path='members/DataKeys/*'/>
   [XmlRoot("DataKeys")]
   public class DataKeys : List<DataKey>
   {
@@ -159,15 +159,15 @@ namespace LJCDataUtilityDAL
       mArgError.Add(name, "name");
       NetString.ThrowArgError(mArgError.ToString());
 
-      retValue = LJCGetWithUnique(dataTableId, dataTableDbId, name);
+      retValue = LJCGetWithUnique(dataTableDbId, dataTableId, name);
       if (null == retValue)
       {
         retValue = new DataKey()
         {
-          Id = id,
           DbId = dbId,
-          DataTableId = dataTableId,
+          Id = id,
           DataTableDbId = dataTableDbId,
+          DataTableId = dataTableId,
           Name = name,
         };
         Add(retValue);
@@ -199,7 +199,7 @@ namespace LJCDataUtilityDAL
     // Retrieve the collection element with unique values.
     /// <include file='Doc/DataKeys.xml'
     ///  path='members/LJCGetWithUnique/*'/>
-    public DataKey LJCGetWithUnique(long dataTableID, short dataTableDbID
+    public DataKey LJCGetWithUnique(short dataTableDbID, long dataTableID
       , string name)
     {
       DataKey retValue = null;
@@ -208,8 +208,8 @@ namespace LJCDataUtilityDAL
       LJCSortUnique(comparer);
       DataKey searchItem = new DataKey()
       {
-        DataTableId = dataTableID,
         DataTableDbId = dataTableDbID,
+        DataTableId = dataTableID,
         Name = name,
       };
       int index = BinarySearch(searchItem, comparer);
@@ -223,10 +223,10 @@ namespace LJCDataUtilityDAL
     // Removes an item by name.
     /// <include file='Doc/DataKeys.xml'
     ///  path='members/LJCRemove/*'/>
-    public void LJCRemove(long dataTableID, short dataTableDbID, string name)
+    public void LJCRemove(short dataTableDbID, long dataTableID, string name)
     {
-      DataKey item = Find(x => x.DataTableId == dataTableID
-        && x.DataTableDbId == dataTableDbID
+      DataKey item = Find(x => x.DataTableDbId == dataTableDbID
+        && x.DataTableId == dataTableID
         && x.Name == name);
       if (item != null)
       {
@@ -279,9 +279,9 @@ namespace LJCDataUtilityDAL
     // The item for the supplied name.
     /// <include file='Doc/DataKeys.xml'
     ///  path='members/UniqueIndexer/*'/>
-    public DataKey this[int dataTableID, short dataTableDbID, string name]
+    public DataKey this[short dataTableDbID, long dataTableID, string name]
     {
-      get { return LJCGetWithUnique(dataTableID, dataTableDbID, name); }
+      get { return LJCGetWithUnique(dataTableDbID, dataTableID, name); }
     }
     #endregion
 
