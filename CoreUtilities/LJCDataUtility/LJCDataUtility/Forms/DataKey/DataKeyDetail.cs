@@ -108,7 +108,8 @@ namespace LJCDataUtility
 
       // In control order.
       retData.Name = FormCommon.SetString(NameText.Text);
-      retData.KeyType = (short)KeyTypeCombo.LJCSelectedItemID();
+      var keyType = KeyTypeCombo.LJCSelectedItemID(out _);
+      retData.KeyType = (short)keyType;
       retData.SourceColumnName
         = FormCommon.SetString(SourceColumnText.Text);
       retData.TargetTableName

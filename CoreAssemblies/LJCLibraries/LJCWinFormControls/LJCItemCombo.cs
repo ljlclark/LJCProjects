@@ -9,7 +9,8 @@ using System.Windows.Forms;
 namespace LJCWinFormControls
 {
   // Provides custom functionality for a ComboBox control. (R)
-  /// <include path='items/LJCItemCombo/*' file='Doc/LJCItemCombo.xml'/>
+  /// <include file='Doc/LJCItemCombo.xml'
+  ///  path='items/LJCItemCombo/*'/>
   public partial class LJCItemCombo : ComboBox
   {
     #region Constructor
@@ -67,11 +68,19 @@ namespace LJCWinFormControls
       for (int index = 0; index < Items.Count; index++)
       {
         LJCItem item = Items[index] as LJCItem;
-        if (id == item.ID
-          && dbID == item.DbID)
+        if (id == item.ID)
         {
-          SelectedIndex = index;
-          break;
+          if (0 == dbID)
+          {
+            SelectedIndex = index;
+            break;
+          }
+
+          if (dbID == item.DbID)
+          {
+            SelectedIndex = index;
+            break;
+          }
         }
       }
     }
@@ -79,12 +88,14 @@ namespace LJCWinFormControls
     // Gets the combo SelectedItem ID.
     /// <include file='Doc/LJCItemCombo.xml'
     ///  path='items/LJCSelectedItemID/*'/>
-    public long LJCSelectedItemID()
+    public long LJCSelectedItemID(out short dbId)
     {
       long retValue = 0;
 
+      dbId = 0;
       if (SelectedItem is LJCItem item)
       {
+        dbId = item.DbID;
         retValue = item.ID;
       }
       return retValue;
