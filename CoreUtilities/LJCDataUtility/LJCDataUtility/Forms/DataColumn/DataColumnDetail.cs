@@ -144,10 +144,10 @@ namespace LJCDataUtility
       retData.AllowNull = AllowNullCheck.Checked;
 
       // Get Reference key values.
-      retData.Id = LJCId;
       retData.DbId = LJCDbId;
-      retData.DataTableId = LJCParentId;
+      retData.Id = LJCId;
       retData.DataTableDbId = LJCParentDbId;
+      retData.DataTableId = LJCParentId;
       return retData;
     }
 
