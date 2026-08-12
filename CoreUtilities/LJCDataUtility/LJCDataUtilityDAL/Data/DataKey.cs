@@ -476,12 +476,12 @@ namespace LJCDataUtilityDAL
 
   // Sort and search on Name value.
   /// <include file='Doc/DataKey.xml'
-  ///  path='items/Compare/*'/>
+  ///  path='members/Compare/*'/>
   public class DataKeyUniqueComparer : IComparer<DataKey>
   {
     // Compares two objects.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/Compare/*'/>
+    ///  path='members/Compare/*'/>
     public int Compare(DataKey x, DataKey y)
     {
       int retValue;

@@ -16,7 +16,7 @@ namespace LJCDataSiteDAL
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public static DataEntrySites LJCDeserialize(string fileSpec = null)
     {
       DataEntrySites retValue;
@@ -39,7 +39,7 @@ namespace LJCDataSiteDAL
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataEntrySites()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.DataEntrySites");
@@ -47,7 +47,7 @@ namespace LJCDataSiteDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataEntrySites(DataEntrySites items)
     {
       if (LJC.HasListItems(items))
@@ -63,7 +63,7 @@ namespace LJCDataSiteDAL
     #region Collection Methods
 
     // Creates and adds the object from the supplied values.
-    /// <include path='items/Add/*' file='Doc/DataEntrySites.xml'/>
+    /// <include path='members/Add/*' file='Doc/DataEntrySites.xml'/>
     public DataEntrySite Add(long dataEntryID, long dataEntrySiteID
       , long dataSiteID)
     {
@@ -100,7 +100,7 @@ namespace LJCDataSiteDAL
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataEntrySites Clone()
     {
       var retValue = MemberwiseClone() as DataEntrySites;
@@ -108,7 +108,7 @@ namespace LJCDataSiteDAL
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/LJCGetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCGetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataEntrySites LJCGetCollection(List<DataEntrySite> list)
     {
       DataEntrySites retValue = null;
@@ -125,7 +125,7 @@ namespace LJCDataSiteDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/LJCHasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCHasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public bool LJCHasItems()
     {
       bool retValue = false;
@@ -138,7 +138,7 @@ namespace LJCDataSiteDAL
     }
 
     // Removes an item by unique keys.
-    /// <include path='items/LJCRemove/*' file='Doc/DataEntrySites.xml'/>
+    /// <include path='members/LJCRemove/*' file='Doc/DataEntrySites.xml'/>
     public void LJCRemove(long dataEntryID, long dataEntrySiteID
       , long dataSiteID)
     {
@@ -153,7 +153,7 @@ namespace LJCDataSiteDAL
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -167,7 +167,7 @@ namespace LJCDataSiteDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element with primary key.
-    /// <include path='items/LJCSearchPrimary/*' file='Doc/DataEntrySites.xml'/>
+    /// <include path='members/LJCSearchPrimary/*' file='Doc/DataEntrySites.xml'/>
     public DataEntrySite LJCSearchPrimary(long dataEntryID, long dataEntrySiteID
       , long dataSiteID)
     {

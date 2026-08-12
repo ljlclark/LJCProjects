@@ -412,12 +412,12 @@ namespace LJCDataUtilityDAL
 
   // Sort and search on Name value.
   /// <include file='Doc/DataTable.xml'
-  ///  path='items/DataTableUnique/*'/>
+  ///  path='members/DataTableUnique/*'/>
   public class DataTableUniqueComparer : IComparer<DataUtilTable>
   {
     // Compares two objects.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/Compare/*'/>
+    ///  path='members/Compare/*'/>
     public int Compare(DataUtilTable x, DataUtilTable y)
     {
       int retValue;

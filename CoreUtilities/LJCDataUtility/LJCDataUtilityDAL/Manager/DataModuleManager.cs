@@ -196,8 +196,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Gets the ID key columns.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='items/UniqueKey/*'/>
+    /// <include file='Doc/DataModuleManager.xml'
+    ///  path='members/UniqueKey/*'/>
     public LJCDataColumns UniqueKey(string name)
     {
       // Needs cast for string to select the correct Add overload.

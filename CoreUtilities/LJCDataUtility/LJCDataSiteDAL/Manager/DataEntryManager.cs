@@ -15,7 +15,7 @@ namespace LJCDataSiteDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DataEntryManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DataEntry", string schemaName = null)
     {
@@ -41,7 +41,7 @@ namespace LJCDataSiteDAL
     #region Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Add/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DataEntry Add(DataEntry dataObject
       , List<string> propertyNames = null)
     {
@@ -57,14 +57,14 @@ namespace LJCDataSiteDAL
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
     }
 
     // Retrieves a collection of data records.
-    /// <include path='items/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DataEntries Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -77,7 +77,7 @@ namespace LJCDataSiteDAL
     }
 
     // Retrieves a record from the database.
-    /// <include path='items/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DataEntry Retrieve(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -90,7 +90,7 @@ namespace LJCDataSiteDAL
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public void Update(DataEntry dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
@@ -101,7 +101,7 @@ namespace LJCDataSiteDAL
     #region Load/Retrieve Methods
 
     // Retrieves a record with the supplied value.
-    /// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DataEntry RetrieveWithID(long id, List<string> propertyNames = null)
     {
       DataEntry retValue;
@@ -113,7 +113,7 @@ namespace LJCDataSiteDAL
     }
 
     // Retrieves a record with the supplied unique values.
-    /// <include path='items/RetrieveWithUnique/*' file='Doc/DataEntryManager.xml'/>
+    /// <include path='members/RetrieveWithUnique/*' file='Doc/DataEntryManager.xml'/>
     public DataEntry RetrieveWithUnique(long dataSiteID, DateTime entryTime
       , List<string> propertyNames = null)
     {
@@ -142,7 +142,7 @@ namespace LJCDataSiteDAL
     #region GetKey Methods
 
     // Gets the ID key columns.
-    /// <include path='items/IDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/IDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public LJCDataColumns IDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
@@ -156,7 +156,7 @@ namespace LJCDataSiteDAL
     }
 
     // Gets the Unique key columns.
-    /// <include path='items/UniqueKey/*' file='Doc/DataEntryManager.xml'/>
+    /// <include path='members/UniqueKey/*' file='Doc/DataEntryManager.xml'/>
     public LJCDataColumns UniqueKey(long dataSiteID, DateTime entryTime)
     {
       // Needs cast for string to select the correct Add overload.

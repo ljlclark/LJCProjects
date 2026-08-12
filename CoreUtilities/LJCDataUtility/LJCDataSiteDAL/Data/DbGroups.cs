@@ -17,7 +17,7 @@ namespace LJCDataSiteDAL
 
     // Deserializes from the specified XML file.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='items/LJCDeserialize/*'/>
+    ///  path='members/LJCDeserialize/*'/>
     public static DbGroups LJCDeserialize(string fileSpec = null)
     {
       DbGroups retValue;
@@ -41,7 +41,7 @@ namespace LJCDataSiteDAL
 
     // Initializes an object instance.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/DefaultConstructor/*'/>
     public DbGroups()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.DataSites");
@@ -49,7 +49,7 @@ namespace LJCDataSiteDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DbGroups(DbGroups items)
     {
       if (LJC.HasListItems(items))
@@ -65,7 +65,7 @@ namespace LJCDataSiteDAL
     #region Collection Methods
 
     // Creates and adds the object from the provided values.
-    /// <include path='items/Add/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/Add/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DbGroup Add(short id, string name)
     {
       DbGroup retValue;
@@ -93,7 +93,7 @@ namespace LJCDataSiteDAL
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DbGroups Clone()
     {
       var retValue = MemberwiseClone() as DbGroups;
@@ -101,7 +101,7 @@ namespace LJCDataSiteDAL
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/LJCGetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCGetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DbGroups LJCGetCollection(List<DbGroup> list)
     {
       DbGroups retValue = null;
@@ -118,7 +118,7 @@ namespace LJCDataSiteDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/LJCHasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCHasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public bool LJCHasItems()
     {
       bool retValue = false;
@@ -131,7 +131,7 @@ namespace LJCDataSiteDAL
     }
 
     // Removes an item by keys.
-    /// <include path='items/LJCRemove/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCRemove/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCRemove(string name)
     {
       DbGroup item = Find(x => x.Name == name);
@@ -142,7 +142,7 @@ namespace LJCDataSiteDAL
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -156,7 +156,7 @@ namespace LJCDataSiteDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DbGroup LJCSearchPrimary(short id)
     {
       DbGroup retValue = null;
@@ -175,7 +175,7 @@ namespace LJCDataSiteDAL
     }
 
     // Retrieve the collection element with unique values.
-    /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DbGroup LJCSearchName(string name)
     {
       DbGroup retValue = null;
@@ -229,7 +229,7 @@ namespace LJCDataSiteDAL
     }
 
     // The item for the specified name.
-    /// <include path='items/NameIndexer/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/NameIndexer/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DbGroup this[string name]
     {
       get { return LJCSearchName(name); }

@@ -118,7 +118,7 @@ namespace LJCDataUtilityDAL
 
     // Compares two objects.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/Compare/*'/>
+    ///  path='members/Compare/*'/>
     public int Compare(DataTable2 x, DataTable2 y)
     {
       int retValue;

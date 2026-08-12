@@ -17,7 +17,7 @@ namespace LJCDataSiteDAL
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCDeserialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public static DataEntries LJCDeserialize(string fileSpec = null)
     {
       DataEntries retValue;
@@ -40,7 +40,7 @@ namespace LJCDataSiteDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataEntries()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.DataEntries");
@@ -48,7 +48,7 @@ namespace LJCDataSiteDAL
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataEntries(DataEntries items)
     {
       if (LJC.HasListItems(items))
@@ -64,7 +64,7 @@ namespace LJCDataSiteDAL
     #region Collection Methods
 
     // Creates and adds the object from the supplied values.
-    /// <include path='items/Add/*' file='Doc/DataEntries.xml'/>
+    /// <include path='members/Add/*' file='Doc/DataEntries.xml'/>
     public DataEntry Add(long id, long dataSiteID, DateTime entryTime
       , string entryData)
     {
@@ -98,7 +98,7 @@ namespace LJCDataSiteDAL
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataEntries Clone()
     {
       var retValue = MemberwiseClone() as DataEntries;
@@ -106,7 +106,7 @@ namespace LJCDataSiteDAL
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/LJCGetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCGetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataEntries LJCGetCollection(List<DataEntry> list)
     {
       DataEntries retValue = null;
@@ -123,7 +123,7 @@ namespace LJCDataSiteDAL
     }
 
     // Checks if the collection has items.
-    /// <include path='items/LJCHasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCHasItems2/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public bool LJCHasItems()
     {
       bool retValue = false;
@@ -136,7 +136,7 @@ namespace LJCDataSiteDAL
     }
 
     // Removes an item by keys.
-    /// <include path='items/LJCRemove/*' file='Doc/DataEntries.xml'/>
+    /// <include path='members/LJCRemove/*' file='Doc/DataEntries.xml'/>
     public void LJCRemove(long dataSiteID, DateTime entryTime)
     {
       DataEntry item = Find(x =>
@@ -149,7 +149,7 @@ namespace LJCDataSiteDAL
     }
 
     // Serializes the collection to a file.
-    /// <include path='items/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCSerialize/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -163,7 +163,7 @@ namespace LJCDataSiteDAL
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCSearchID/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataEntry LJCSearchID(long id)
     {
       DataEntry retValue = null;
@@ -182,7 +182,7 @@ namespace LJCDataSiteDAL
     }
 
     // Retrieve the collection element with unique values.
-    /// <include path='items/LJCSearchUnique/*' file='Doc/DataEntries.xml'/>
+    /// <include path='members/LJCSearchUnique/*' file='Doc/DataEntries.xml'/>
     public DataEntry LJCSearchUnique(long parentID, DateTime entryTime)
     {
       DataEntry retValue = null;

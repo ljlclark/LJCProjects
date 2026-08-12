@@ -11,7 +11,7 @@ namespace LJCDataUtilityDAL
 {
   // Represents a collection of DataModule objects.
   /// <include file='Doc/DataModules.xml'
-  ///  path='members/DataTables/*'/>
+  ///  path='members/DataModules/*'/>
   [XmlRoot("DataModules")]
   public class DataModules : List<DataModule>
   {
@@ -42,7 +42,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Get custom collection from List<T>.
-    /// <include path='items/GetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCGetCollection/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public static DataModules LJCGetCollection(List<DataModule> list)
     {
       DataModules retValue = null;
@@ -89,7 +89,7 @@ namespace LJCDataUtilityDAL
 
     // Creates and returns a clone of the object.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public DataModules Clone()
     {
       var retValue = MemberwiseClone() as DataModules;
@@ -98,7 +98,7 @@ namespace LJCDataUtilityDAL
 
     // Checks if the collection has items.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='items/HasItems2/*'/>
+    ///  path='members/HasItems2/*'/>
     public bool LJCHasItems()
     {
       bool retValue = false;
@@ -112,7 +112,7 @@ namespace LJCDataUtilityDAL
 
     // Serializes the collection to a file.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='items/LJCSerialize/*'/>
+    ///  path='members/LJCSerialize/*'/>
     public void LJCSerialize(string fileSpec = null)
     {
       if (!NetString.HasValue(fileSpec))
@@ -127,7 +127,7 @@ namespace LJCDataUtilityDAL
 
     // Creates and adds the object from the supplied values.
     /// <include file='Doc/DataModules.xml'
-    ///  path='items/Add/*'/>
+    ///  path='members/Add/*'/>
     public DataModule Add(long id, short dbId, string name)
     {
       DataModule retValue;
@@ -161,7 +161,7 @@ namespace LJCDataUtilityDAL
 
     // Retrieve the collection item.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='items/LJCGetWithID/*'/>
+    ///  path='members/LJCGetWithID/*'/>
     public DataModule LJCGetWithID(long id, short dbID)
     {
       DataModule retValue = null;
@@ -181,7 +181,7 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieve the collection item with unique values.
-    /// <include path='items/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/LJCSearchName/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataModule LJCGetWithName(string name)
     {
       DataModule retValue = null;
@@ -202,7 +202,7 @@ namespace LJCDataUtilityDAL
 
     // Removes an item by name.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='items/LJCRemove/*'/>
+    ///  path='members/LJCRemove/*'/>
     public void LJCRemove(string name)
     {
       DataModule item = Find(x => x.Name == name);
@@ -250,7 +250,7 @@ namespace LJCDataUtilityDAL
     }
 
     // The item for the supplied name.
-    /// <include path='items/NameIndexer/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/NameIndexer/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public DataModule this[string name]
     {
       get { return LJCGetWithName(name); }

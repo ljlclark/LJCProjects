@@ -27,7 +27,7 @@ namespace LJCDataUtility
     #region Create Table HTML Document Methods
 
     // Creates the HTML Table document from a DataObject.
-    /// <include path='items/DataHTML/*' file='Doc/GenHTMLTable.xml'/>
+    /// <include path='members/DataHTML/*' file='Doc/GenHTMLTable.xml'/>
     internal string DataHTML(List<object> dataObjects
       , string heading, List<string> propertyNames, TextState textState)
     {
@@ -58,7 +58,7 @@ namespace LJCDataUtility
     }
 
     // Creates the HTML Table document from DataTable.
-    /// <include path='items/DataTableHTML/*' file='Doc/GenHTMLTable.xml'/>
+    /// <include path='members/DataTableHTML/*' file='Doc/GenHTMLTable.xml'/>
     internal string DataTableHTML(DataTable dataTable, string heading
       , TextState textState)
     {
@@ -88,7 +88,7 @@ namespace LJCDataUtility
     }
 
     // Creates the HTML Table document from DbResult.
-    /// <include path='items/ResultHTML/*' file='Doc/GenHTMLTable.xml'/>
+    /// <include path='members/ResultHTML/*' file='Doc/GenHTMLTable.xml'/>
     internal string ResultHTML(DbResult dbResult, string heading
       , TextState textState)
     {
@@ -118,7 +118,7 @@ namespace LJCDataUtility
     }
 
     // Creates the HTML Table document from a DataGridView.
-    /// <include path='items/DataGridHTML/*' file='Doc/GenHTMLTable.xml'/>
+    /// <include path='members/DataGridHTML/*' file='Doc/GenHTMLTable.xml'/>
     internal string DataGridHTML(DataGridView grid, string heading
       , TextState textState)
     {

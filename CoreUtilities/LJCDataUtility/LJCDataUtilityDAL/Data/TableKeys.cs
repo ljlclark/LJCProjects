@@ -12,14 +12,14 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public TableKeys()
     {
       mPrevCount = -1;
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
+    /// <include path='members/CopyConstructor/*' file='../../LJCGenDoc/Common/Collection.xml'/>
     public TableKeys(TableKeys items) : this()
     {
       if (LJC.HasListItems(items))

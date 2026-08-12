@@ -13,7 +13,7 @@ namespace LJCDataUtility
     #region Static Methods
 
     // Creates a SQL variable name from a column name.
-    /// <include path='items/SQLVarName/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/SQLVarName/*' file='Doc/ProcBuilder.xml'/>
     internal static string SQLVarName(string columnName)
     {
       var retName = "";
@@ -29,7 +29,7 @@ namespace LJCDataUtility
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/CProcBuilder/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/CProcBuilder/*' file='Doc/ProcBuilder.xml'/>
     internal ProcBuilder(DataUtilityList parentObject, string dbName
       , string tableName = null)
     {
@@ -39,7 +39,7 @@ namespace LJCDataUtility
     }
 
     // Resets the text values.
-    /// <include path='items/Reset/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/Reset/*' file='Doc/ProcBuilder.xml'/>
     internal void Reset(string dbName = null, string tableName = null)
     {
       if (NetString.HasValue(dbName))
@@ -128,7 +128,7 @@ namespace LJCDataUtility
     #region Procedure Methods
 
     // Adds the Procedure begin code.
-    /// <include path='items/Begin/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/Begin/*' file='Doc/ProcBuilder.xml'/>
     internal string Begin(string procedureName)
     {
       var b = new TextBuilder();
@@ -166,7 +166,7 @@ namespace LJCDataUtility
     }
 
     // Creates the insert Columns list.
-    /// <include path='items/ColumnsList/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/ColumnsList/*' file='Doc/ProcBuilder.xml'/>
     internal string ColumnsList(DataColumns dataColumns
       , bool includeParens = true, bool useNewNames = false
       , bool includeID = false)
@@ -215,7 +215,7 @@ namespace LJCDataUtility
     }
 
     // Gets the Table row IF statement.
-    /// <include path='items/IFItem/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/IFItem/*' file='Doc/ProcBuilder.xml'/>
     internal string IFItem(string parentTableName
       , string parentIDColumnName, string parentFindColumnName
       , string parmFindName)
@@ -231,7 +231,7 @@ namespace LJCDataUtility
     }
 
     // Creates the Parameters.
-    /// <include path='items/Parameters/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/Parameters/*' file='Doc/ProcBuilder.xml'/>
     internal string Parameters(DataColumns dataColumns, bool isFirst = true)
     {
       var b = new TextBuilder();
@@ -253,7 +253,7 @@ namespace LJCDataUtility
     }
 
     // Creates a SQL Declaration variable from a DataUtilityColumn.
-    /// <include path='items/SQLDeclaration/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/SQLDeclaration/*' file='Doc/ProcBuilder.xml'/>
     internal string SQLDeclaration(DataUtilColumn dataColumn)
     {
       var retValue = "";
@@ -269,7 +269,7 @@ namespace LJCDataUtility
     }
 
     // Creates the Values list.
-    /// <include path='items/ValuesList/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/ValuesList/*' file='Doc/ProcBuilder.xml'/>
     internal string ValuesList(DataColumns dataColumns
       , string varRefName = null)
     {
@@ -305,7 +305,7 @@ namespace LJCDataUtility
     #region Create Table Methods
 
     // Adds a foreign key.
-    /// <include path='items/AddForeignKey/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/AddForeignKey/*' file='Doc/ProcBuilder.xml'/>
     internal string AddForeignKey(string tableName
       , string objectName, string sourceColumnList
       , string targetTableName, string targetColumnList)
@@ -326,7 +326,7 @@ namespace LJCDataUtility
     }
 
     // Adds a primary key.
-    /// <include path='items/AddPrimaryKey/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/AddPrimaryKey/*' file='Doc/ProcBuilder.xml'/>
     internal string AddPrimaryKey(string tableName
       , string objectName, string columnList)
     {
@@ -344,7 +344,7 @@ namespace LJCDataUtility
     }
 
     // Adds a unique key.
-    /// <include path='items/AddUniqueKey/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/AddUniqueKey/*' file='Doc/ProcBuilder.xml'/>
     internal string AddUniqueKey(string tableName
       , string objectName, string columnList)
     {
@@ -360,7 +360,7 @@ namespace LJCDataUtility
     }
 
     // Returns Create Table SQL.
-    /// <include path='items/CreateTable/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/CreateTable/*' file='Doc/ProcBuilder.xml'/>
     internal string CreateTable(DataColumns dataColumns)
     {
       TableBegin();
@@ -385,7 +385,7 @@ namespace LJCDataUtility
     }
 
     // Complete Create Table procedure.
-    /// <include path='items/CreateTableProc/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/CreateTableProc/*' file='Doc/ProcBuilder.xml'/>
     internal string CreateTableProc(DataColumns dataColumns)
     {
       Begin(CreateProcName);
@@ -417,7 +417,7 @@ namespace LJCDataUtility
     }
 
     // Drops the constraint by provided name.
-    /// <include path='items/DropConstraint/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/DropConstraint/*' file='Doc/ProcBuilder.xml'/>
     internal string DropConstraint(string tableName
       , string objectName, ObjectType objectType)
     {
@@ -431,7 +431,7 @@ namespace LJCDataUtility
     }
 
     // Get column name and type.
-    /// <include path='items/NameAndType/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/NameAndType/*' file='Doc/ProcBuilder.xml'/>
     internal string NameAndType(DataUtilColumn dataColumn)
     {
       var b = new TextBuilder();
@@ -451,7 +451,7 @@ namespace LJCDataUtility
     }
 
     // Renames a table. Removes old keys and creates new keys.
-    /// <include path='items/RenameTableSQL/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/RenameTableSQL/*' file='Doc/ProcBuilder.xml'/>
     internal string RenameTableSQL(long tableID, long siteID, DataKeys dataKeys)
     {
       var b = new TextBuilder();
@@ -550,7 +550,7 @@ namespace LJCDataUtility
     }
 
     // Adds a table column definition.
-    /// <include path='items/TableColumn/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/TableColumn/*' file='Doc/ProcBuilder.xml'/>
     internal string TableColumn(DataUtilColumn dataColumn)
     {
       var b = new TextBuilder();
@@ -597,7 +597,7 @@ namespace LJCDataUtility
     }
 
     // Creates the Identity column.
-    /// <include path='items/TableIdentity/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/TableIdentity/*' file='Doc/ProcBuilder.xml'/>
     internal string TableIdentity(DataUtilColumn dataColumn)
     {
       var b = new TextBuilder();
@@ -629,7 +629,7 @@ namespace LJCDataUtility
     #region Alter Methods
 
     // Checks for the database object.
-    /// <include path='items/Check/*' file='Doc/ProcBuilder.xml'/>
+    /// <include path='members/Check/*' file='Doc/ProcBuilder.xml'/>
     internal string Check(string objectName, ObjectType objectType
       , bool useNot = false)
     {

@@ -14,14 +14,14 @@ namespace LJCDataSiteDAL
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataEntry()
     {
       ChangedNames = new ChangedNames();
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataEntry(DataEntry item)
     {
       ChangedNames = new ChangedNames();
@@ -35,7 +35,7 @@ namespace LJCDataSiteDAL
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataEntry Clone()
     {
       var retValue = MemberwiseClone() as DataEntry;
@@ -43,7 +43,7 @@ namespace LJCDataSiteDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(DataEntry other)
     {
       int retValue = -2;
@@ -63,7 +63,7 @@ namespace LJCDataSiteDAL
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
       var retValue = $":{mID}-{mDataSiteID}";
@@ -164,7 +164,7 @@ namespace LJCDataSiteDAL
   public class DataEntryUnique : IComparer<DataEntry>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int Compare(DataEntry x, DataEntry y)
     {
       int retValue;

@@ -14,7 +14,7 @@ namespace LJCDataSiteDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DataEntrySiteManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DataEntrySite", string schemaName = null)
     {
@@ -27,7 +27,7 @@ namespace LJCDataSiteDAL
     #region Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Add/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DataEntrySite Add(DataEntrySite dataObject
       , List<string> propertyNames = null)
     {
@@ -39,14 +39,14 @@ namespace LJCDataSiteDAL
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
     }
 
     // Retrieves a collection of data records.
-    /// <include path='items/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DataEntrySites Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -59,7 +59,7 @@ namespace LJCDataSiteDAL
     }
 
     // Retrieves a record from the database.
-    /// <include path='items/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DataEntrySite Retrieve(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -72,7 +72,7 @@ namespace LJCDataSiteDAL
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public void Update(DataEntrySite dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
@@ -83,7 +83,7 @@ namespace LJCDataSiteDAL
     #region Load/Retrieve Methods
 
     // Retrieves a record with the supplied values.
-    /// <include path='items/RetrieveWithPrimary/*' file='Doc/DataEntrySiteManager.xml'/>
+    /// <include path='members/RetrieveWithPrimary/*' file='Doc/DataEntrySiteManager.xml'/>
     public DataEntrySite RetrieveWithPrimary(long dataEntryID
       , long dataEntrySiteID, long dataSiteID
       , List<string> propertyNames = null)
@@ -100,7 +100,7 @@ namespace LJCDataSiteDAL
     #region GetKey Methods
 
     // Gets the primary key columns.
-    /// <include path='items/PrimaryKey/*' file='Doc/DataEntrySiteManager.xml'/>
+    /// <include path='members/PrimaryKey/*' file='Doc/DataEntrySiteManager.xml'/>
     public LJCDataColumns PrimaryKey(long dataEntryID, long dataEntrySiteID
       , long dataSiteID)
     {

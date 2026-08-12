@@ -85,8 +85,8 @@ namespace LJCDataUtilityDAL
     #region Data Methods
 
     // Adds a Data Record to the database.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='items/Add/*'/>
+    /// <include file='Doc/DataColumnManager.xml'
+    ///  path='members/Add/*'/>
     public DataUtilColumn Add(DataUtilColumn dataObject
       , List<string> propertyNames = null, bool includeNull = false)
     {

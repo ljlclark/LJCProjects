@@ -14,14 +14,14 @@ namespace LJCDataSiteDAL
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataEntrySite()
     {
       ChangedNames = new ChangedNames();
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataEntrySite(DataEntrySite item)
     {
       ChangedNames = new ChangedNames();
@@ -34,7 +34,7 @@ namespace LJCDataSiteDAL
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public DataEntrySite Clone()
     {
       var retValue = MemberwiseClone() as DataEntrySite;
@@ -42,7 +42,7 @@ namespace LJCDataSiteDAL
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(DataEntrySite other)
     {
       int retValue = -2;
@@ -77,7 +77,7 @@ namespace LJCDataSiteDAL
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public override string ToString()
     {
       var retValue = $":{mDataEntryID}-{mDataSiteID}";

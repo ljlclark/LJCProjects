@@ -686,8 +686,8 @@ namespace TestDataUtilityDAL
       // Verify the test record was created.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "DataTableID", dataTableID },
-        { "DataTableSiteID", dataTableDbID },
+        { "DataTableDbId", dataTableDbID },
+        { "DataTableId", dataTableID },
         { "Name", (object)name },
       };
       dataKey = dataKeyManager.Retrieve(uniqueColumns);
@@ -697,8 +697,8 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Load with type.
-      var id = dataKey.Id;
       dbID = dataKey.DataTableDbId;
+      var id = dataKey.Id;
       short keyType = 1;
 
       // Test Method
@@ -707,7 +707,7 @@ namespace TestDataUtilityDAL
         , keyType);
 
       // Verify the record was retrieved.
-      dataKey = dataKeys.LJCGetWithID(id, dbID);
+      dataKey = dataKeys.LJCGetWithID(dbID, id);
       result = dataKey.Name;
       compare = "TestKeyName";
       TestCommon.Write($"{methodName}2", result, compare);
@@ -732,16 +732,16 @@ namespace TestDataUtilityDAL
       var dataKeyManager = new DataKeyManager(dbServiceRef, dataConfigName);
 
       short dbID = dataKeyManager.DbID;
-      long dataTableID = 1;
       short dataTableDbID = 1;
+      long dataTableID = 1;
       string name = "TestKeyName";
 
       // Create the test record.
       var dataKey = new DataKey()
       {
         DbId = dbID,
-        DataTableId = dataTableID,
         DataTableDbId = dataTableDbID,
+        DataTableId = dataTableID,
         Name = name,
         KeyType = 1,
         IsAscending = true,
@@ -755,8 +755,8 @@ namespace TestDataUtilityDAL
       // Verify the test record was created.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "DataTableID", dataTableID },
-        { "DataTableSiteID", dataTableDbID },
+        { "DataTableDbId", dataTableDbID },
+        { "DataTableId", dataTableID },
         { "Name", (object)name },
       };
       dataKey = dataKeyManager.Retrieve(uniqueColumns);
@@ -796,16 +796,16 @@ namespace TestDataUtilityDAL
       var dataKeyManager = new DataKeyManager(dbServiceRef, dataConfigName);
 
       short dbID = dataKeyManager.DbID;
-      long dataTableID = 1;
       short dataTableDbID = 1;
+      long dataTableID = 1;
       string name = "TestKeyName";
 
       // Create the test record.
       var dataKey = new DataKey()
       {
         DbId = dbID,
-        DataTableId = dataTableID,
         DataTableDbId = dataTableDbID,
+        DataTableId = dataTableID,
         Name = name,
         KeyType = 1,
         IsAscending = true,
@@ -819,9 +819,9 @@ namespace TestDataUtilityDAL
       // Verify the test record was created.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "DataTableID", dataTableID },
-        { "DataTableSiteID", dataTableDbID },
-        { "Name", (object)name },
+        { "DataTableDbId", dataTableDbID },
+        { "DataTableId", dataTableID },
+        { "Name", name },
       };
       dataKey = dataKeyManager.Retrieve(uniqueColumns);
 
@@ -830,8 +830,8 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}1", result, compare);
 
       // Retrieve with parent KeyType.
-      var parentID = dataKey.DataTableId;
       short parentDbID = dataKey.DataTableDbId;
+      var parentID = dataKey.DataTableId;
       var keyType = dataKey.KeyType;
 
       // Test Method
@@ -863,16 +863,16 @@ namespace TestDataUtilityDAL
       var dataKeyManager = new DataKeyManager(dbServiceRef, dataConfigName);
 
       short dbID = dataKeyManager.DbID;
-      long dataTableID = 1;
       short dataTableDbID = 1;
+      long dataTableID = 1;
       string name = "TestKeyName";
 
       // Create the test record.
       var dataKey = new DataKey()
       {
         DbId = dbID,
-        DataTableId = dataTableID,
         DataTableDbId = dataTableDbID,
+        DataTableId = dataTableID,
         Name = name,
         KeyType = 1,
         IsAscending = true,
@@ -894,8 +894,8 @@ namespace TestDataUtilityDAL
       // Delete the test record.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "DataTableID", dataTableID },
-        { "DataTableSiteID", dataTableDbID },
+        { "DataTableDbId", dataTableDbID },
+        { "DataTableId", dataTableID },
         { "Name", (object)name },
       };
       dataKeyManager.Delete(uniqueColumns);
@@ -977,8 +977,8 @@ namespace TestDataUtilityDAL
       };
       var dataKeyManager = new DataKeyManager(dbServiceRef, dataConfigName);
 
-      long dataTableID = 1;
       short dataTableDbID = 1;
+      long dataTableID = 1;
 
       // Test Method
       var idKey = dataKeyManager.ParentKey(dataTableID, dataTableDbID);
@@ -1006,8 +1006,8 @@ namespace TestDataUtilityDAL
       };
       var dataKeyManager = new DataKeyManager(dbServiceRef, dataConfigName);
 
-      long dataTableID = 1;
       short dataTableDbID = 1;
+      long dataTableID = 1;
       int keyType = 1;
 
       // Test Method

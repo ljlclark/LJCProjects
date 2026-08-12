@@ -172,7 +172,7 @@ namespace LJCDataUtilityDAL
 
     // Loads records with the supplied values.
     /// <include file='Doc/DataKeyManager.xml'
-    ///  path='items/LoadWithForeign/*'/>
+    ///  path='members/LoadWithForeign/*'/>
     public DataKeys LoadWithForeign(string tableName
       , List<string> propertyNames = null)
     {
@@ -183,7 +183,7 @@ namespace LJCDataUtilityDAL
 
     // Loads records with the supplied values.
     /// <include file='Doc/DataKeyManager.xml'
-    ///  path='items/LoadWithParent/*'/>
+    ///  path='members/LoadWithParent/*'/>
     public DataKeys LoadWithParent(long parentID, short parentDbID
       , List<string> propertyNames = null)
     {
@@ -194,7 +194,7 @@ namespace LJCDataUtilityDAL
 
     // Loads records with the supplied values.
     /// <include file='Doc/DataKeyManager.xml'
-    ///  path='items/LoadWithParentType/*'/>
+    ///  path='members/LoadWithParentType/*'/>
     public DataKeys LoadWithParentType(long parentID, short parentDbID
       , int keyType, List<string> propertyNames = null)
     {
@@ -205,7 +205,7 @@ namespace LJCDataUtilityDAL
 
     // Loads records with the supplied values.
     /// <include file='Doc/DataKeyManager.xml'
-    ///  path='items/LoadWithType/*'/>
+    ///  path='members/LoadWithType/*'/>
     public DataKeys LoadWithType(long parentID, short parentDbID, short keyType
       , List<string> propertyNames = null)
     {
@@ -216,7 +216,7 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied value.
     /// <include file='Doc/DataKeyManager.xml'
-    ///  path='items/RetrieveWithIDs/*'/>
+    ///  path='members/RetrieveWithIDs/*'/>
     public DataKey RetrieveWithID(long id, short dbID
       , List<string> propertyNames = null)
     {
@@ -230,7 +230,7 @@ namespace LJCDataUtilityDAL
 
     // Retrieves a record with the supplied values.
     /// <include file='Doc/DataKeyManager.xml'
-    ///  path='items/RetrieveWithParentType/*'/>
+    ///  path='members/RetrieveWithParentType/*'/>
     public DataKey RetrieveWithParentType(long parentID, short parentDbID
       , short keyType, List<string> propertyNames = null)
     {
@@ -243,8 +243,8 @@ namespace LJCDataUtilityDAL
     }
 
     // Retrieves a record with the supplied unique values.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='items/RetrieveWithUnique/*'/>
+    /// <include file='Doc/DataKeyManager.xml'
+    ///  path='members/RetrieveWithUnique/*'/>
     public DataKey RetrieveWithUnique(long parentID, short parentDbID
       , string name, List<string> propertyNames = null)
     {
@@ -276,7 +276,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the primary key columns.
     /// <include file='Doc/DataKeyManager.xml'
-    ///  path='items/IDKeys/*'/>
+    ///  path='members/IDKeys/*'/>
     public LJCDataColumns IDKey(long id, short dbID)
     {
       // Add(columnName, object value, dataTypeName = "String");
@@ -293,7 +293,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the parent key columns.
     /// <include file='Doc/DataKeyManager.xml'
-    ///  path='items/ParentKey/*'/>
+    ///  path='members/ParentKey/*'/>
     public LJCDataColumns ParentKey(long parentID, short parentDbID)
     {
       // Add(columnName, object value, dataTypeName = "String");
@@ -307,7 +307,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the parent by type key columns.
     /// <include file='Doc/DataKeyManager.xml'
-    ///  path='items/ParentTypeKey/*'/>
+    ///  path='members/ParentTypeKey/*'/>
     public LJCDataColumns ParentTypeKey(long parentID, short parentDbID, int keyType)
     {
       // Add(columnName, object value, dataTypeName = "String");
@@ -322,7 +322,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the parent by type key columns.
     /// <include file='Doc/DataKeyManager.xml'
-    ///  path='items/TypeKey/*'/>
+    ///  path='members/TypeKey/*'/>
     public LJCDataColumns TypeKey(long parentID, short parentDbID, int keyType)
     {
       // Add(columnName, object value, dataTypeName = "String");
@@ -337,7 +337,7 @@ namespace LJCDataUtilityDAL
 
     // Gets the unique key columns.
     /// <include file='Doc/DataKeyManager.xml'
-    ///  path='items/UniqueKey/*'/>
+    ///  path='members/UniqueKey/*'/>
     public LJCDataColumns UniqueKey(long parentID, short parentDbID, string name)
     {
       // Add(columnName, object value, dataTypeName = "String");
@@ -355,7 +355,7 @@ namespace LJCDataUtilityDAL
     #region Joins
 
     // Creates and returns the Load Joins object.
-    /// <include path='items/GetLoadJoins/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/GetLoadJoins/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbJoins GetJoins()
     {
       DbJoins retValue = new DbJoins();

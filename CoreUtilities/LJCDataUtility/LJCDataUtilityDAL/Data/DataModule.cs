@@ -257,12 +257,12 @@ namespace LJCDataUtilityDAL
 
   // Sort and search on Name value.
   /// <include file='Doc/DataModule.xml'
-  ///  path='items/DataModuleUniqueComparer/*'/>
+  ///  path='members/DataModuleUniqueComparer/*'/>
   public class DataModuleUniqueComparer : IComparer<DataModule>
   {
     // Compares two objects.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/Compare/*'/>
+    ///  path='members/Compare/*'/>
     public int Compare(DataModule x, DataModule y)
     {
       int retValue;

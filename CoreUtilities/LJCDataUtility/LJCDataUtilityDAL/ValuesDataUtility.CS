@@ -16,7 +16,7 @@ namespace LJCDataUtilityDAL
     #region Constructors
 
     // Initializes an instance of the object.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public ValuesDataUtility()
     {
       mArgError = new ArgError("LJCDataUtilityDAL.ValuesDataUtility");

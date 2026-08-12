@@ -14,7 +14,7 @@ namespace LJCDataSiteDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/DataManagerC/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbGroupManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "DataSite", string schemaName = null)
     {
@@ -41,7 +41,7 @@ namespace LJCDataSiteDAL
     #region Data Methods
 
     // Adds a record to the database.
-    /// <include path='items/Add/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Add/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbGroup Add(DbGroup dataObject
       , List<string> propertyNames = null)
     {
@@ -57,14 +57,14 @@ namespace LJCDataSiteDAL
     }
 
     // Deletes the records with the specified key values.
-    /// <include path='items/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Delete/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       Manager.Delete(keyColumns, filters);
     }
 
     // Retrieves a collection of data records.
-    /// <include path='items/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Load/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbGroups Load(LJCDataColumns keyColumns = null
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -77,7 +77,7 @@ namespace LJCDataSiteDAL
     }
 
     // Retrieves a record from the database.
-    /// <include path='items/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Retrieve/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbGroup Retrieve(LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null
       , DbJoins joins = null)
@@ -91,7 +91,7 @@ namespace LJCDataSiteDAL
     }
 
     // Updates the record.
-    /// <include path='items/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/Update/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public void Update(DbGroup dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
@@ -120,7 +120,7 @@ namespace LJCDataSiteDAL
     }
 
     // Retrieves a record with the supplied value.
-    /// <include path='items/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/RetrieveWithID/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbGroup RetrieveWithID(long id, List<string> propertyNames = null)
     {
       DbGroup retValue;
@@ -132,7 +132,7 @@ namespace LJCDataSiteDAL
     }
 
     // Retrieves a record with the supplied unique values.
-    /// <include path='items/RetrieveWithName/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/RetrieveWithName/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public DbGroup RetrieveWithName(string name
       , List<string> propertyNames = null)
     {
@@ -148,7 +148,7 @@ namespace LJCDataSiteDAL
     #region GetKey Methods
 
     // Gets the ID key columns.
-    /// <include path='items/IDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/IDKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public LJCDataColumns IDKey(long id)
     {
       // Add(columnName, propertyName = null, renameAs = null
@@ -162,7 +162,7 @@ namespace LJCDataSiteDAL
     }
 
     // Gets the ID key columns.
-    /// <include path='items/NameKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include path='members/NameKey/*' file='../../LJCGenDoc/Common/Manager.xml'/>
     public LJCDataColumns NameKey(string name)
     {
       // Needs cast for string to select the correct Add overload.

@@ -36,8 +36,6 @@
     <summary>
       Gets the Unique ID key columns.
     </summary>
-    <param name="parentId">The parent foreign key.</param>
-    <param name="parentDbId">The parent foreign and site foreign key.</param>
     <param name="name">The name value.</param>
   </UniqueKey>
 </members>

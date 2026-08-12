@@ -366,7 +366,7 @@ namespace LJCDataUtility
     #region Control Event Handlers
 
     // Fires the Change event.
-    //// <include path='items/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
+    //// <include path='members/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());

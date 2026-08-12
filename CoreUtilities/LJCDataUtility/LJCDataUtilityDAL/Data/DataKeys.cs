@@ -132,42 +132,42 @@ namespace LJCDataUtilityDAL
 
     // Creates and adds the object from the provided values.
     /// <include file='Doc/DataKeys.xml'
-    ///  path='items/Add/*'/>
-    public DataKey Add(long id, short dbID, long dataTableID
-      , short dataTableDbID, string name)
+    ///  path='members/Add/*'/>
+    public DataKey Add(short dbId, long id, short dataTableDbId
+      , long dataTableId , string name)
     {
       DataKey retValue;
 
       string message = "";
+      if (dbId <= 0)
+      {
+        message += "dbID must be greater than zero.\r\n";
+      }
       if (id <= 0)
       {
         message += "id must be greater than zero.\r\n";
       }
-      if (dbID <= 0)
-      {
-        message += "dbID must be greater than zero.\r\n";
-      }
-      if (dataTableID <= 0)
-      {
-        message += "dataTableID must be greater than zero.\r\n";
-      }
-      if (dataTableDbID <= 0)
+      if (dataTableDbId <= 0)
       {
         message += "dataTableDbID must be greater than zero.\r\n";
+      }
+      if (dataTableId <= 0)
+      {
+        message += "dataTableID must be greater than zero.\r\n";
       }
       mArgError.Add(message);
       mArgError.Add(name, "name");
       NetString.ThrowArgError(mArgError.ToString());
 
-      retValue = LJCGetWithUnique(dataTableID, dataTableDbID, name);
+      retValue = LJCGetWithUnique(dataTableId, dataTableDbId, name);
       if (null == retValue)
       {
         retValue = new DataKey()
         {
           Id = id,
-          DbId = dbID,
-          DataTableId = dataTableID,
-          DataTableDbId = dataTableDbID,
+          DbId = dbId,
+          DataTableId = dataTableId,
+          DataTableDbId = dataTableDbId,
           Name = name,
         };
         Add(retValue);
@@ -178,15 +178,15 @@ namespace LJCDataUtilityDAL
     // Retrieve the collection element.
     /// <include file='../../LJCGenDoc/Common/Collection.xml'
     ///  path='members/LJCGetWithID/*'/>
-    public DataKey LJCGetWithID(long id, short dbID)
+    public DataKey LJCGetWithID(short dbID, long id)
     {
       DataKey retValue = null;
 
       LJCSortID();
       DataKey searchItem = new DataKey()
       {
-        Id = id,
         DbId = dbID,
+        Id = id,
       };
       int index = BinarySearch(searchItem);
       if (index > -1)

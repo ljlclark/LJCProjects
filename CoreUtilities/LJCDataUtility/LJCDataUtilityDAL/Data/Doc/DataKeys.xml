@@ -7,8 +7,10 @@
     <summary>
       Creates and adds the object from the provided values.
     </summary>
-    <param name="id">The item ID.</param>
-    <param name="dataTableID">The parent ID.</param>
+    <param name="dbId">The database ID.</param>
+    <param name="id">The table row ID.</param>
+    <param name="dataTableDbId">The parent database ID.</param>
+    <param name="dataTableId">The parent table row ID.</param>
     <param name="name">The name value.</param>
     <returns>A reference to the added item.</returns>
   </Add>
@@ -16,8 +18,8 @@
     <summary>
       Removes an item by name.
     </summary>
-    <param name="dataTableID">The parent ID.</param>
     <param name="dataTableDbID">The parent database ID.</param>
+    <param name="dataTableID">The parent table row ID.</param>
     <param name="name">The item unique Name value.</param>
   </LJCRemove>
   <LJCSearchUnique>

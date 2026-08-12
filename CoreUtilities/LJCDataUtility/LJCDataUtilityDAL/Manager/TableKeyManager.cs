@@ -24,7 +24,7 @@ namespace LJCDataUtilityDAL
 
     // Initializes an object instance.
     /// <include file='../../LJCGenDoc/Common/Manager.xml'
-    ///  path='items/DataManagerC/*'/>
+    ///  path='members/DataManagerC/*'/>
     public TableKeyManager(DbServiceRef dbServiceRef, string dataConfigName
       , string tableName = "", string schemaName = null) : this()
     {

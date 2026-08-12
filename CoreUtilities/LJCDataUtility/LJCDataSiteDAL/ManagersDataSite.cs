@@ -12,7 +12,7 @@ namespace LJCDataSiteDAL
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
     public ManagersDataSite()
     {
       mArgError = new ArgError("LJCDataUtility.ManagersDataSite");
