@@ -363,6 +363,8 @@ namespace LJCDataUtility
         if (detail.LJCIsUpdate)
         {
           RowUpdate(record);
+          // *** Add ***
+          Refresh();
         }
         else
         {

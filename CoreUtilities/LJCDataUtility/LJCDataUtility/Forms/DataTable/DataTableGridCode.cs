@@ -343,6 +343,8 @@ namespace LJCDataUtility
         if (detail.LJCIsUpdate)
         {
           RowUpdate(record);
+          // *** Add ***
+          Refresh();
         }
         else
         {
@@ -390,6 +392,8 @@ namespace LJCDataUtility
     {
       var setData = new SetUtilData(ParentObject);
       setData.SetData();
+      // *** Add ***
+      Refresh();
     }
 
     // Handles the "Create Table Procedure" menu item event.

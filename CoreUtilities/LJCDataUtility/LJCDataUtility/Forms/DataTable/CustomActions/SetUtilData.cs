@@ -1,11 +1,10 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SetUtilData.cs
 using LJCDataUtilityDAL;
 using LJCDBClientLib;
 using LJCDBDataAccess;
 using LJCNetCommon;
-using System.Data;
 using System.Windows.Forms;
 using LJC = LJCNetCommon.NetCommon;
 
