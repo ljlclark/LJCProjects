@@ -420,7 +420,8 @@ namespace LJCDBMessage
         LJCReflect reflect = new LJCReflect(dataObject);
         try
         {
-          retValue = reflect.GetValue("ChangedNames") as List<string>;
+          var changedNames = reflect.GetValue("ChangedNames") as ChangedNames;
+          retValue = changedNames.ChangedProperties;
         }
         catch (ArgumentException)
         {

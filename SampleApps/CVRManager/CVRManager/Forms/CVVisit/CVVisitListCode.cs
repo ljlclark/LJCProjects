@@ -140,7 +140,7 @@ namespace CVRManager
 			controlValues.Add(Name, Left, Top, Width, Height);
 
 			// Save other values.
-			int facilityID = (int)FacilityCombo.LJCSelectedItemID();
+			int facilityID = (int)FacilityCombo.LJCSelectedItemID(out _);
 			controlValues.Add("Facility", facilityID, 0, 0, 0);
 
 			NetCommon.XmlSerialize(controlValues.GetType(), controlValues, null

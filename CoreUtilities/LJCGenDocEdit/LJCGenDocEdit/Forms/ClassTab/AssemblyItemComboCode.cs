@@ -123,7 +123,7 @@ namespace LJCGenDocEdit
 
       if (mAssemblyCombo.SelectedItem != null)
       {
-        var assemblyID = (short)mAssemblyCombo.LJCSelectedItemID();
+        var assemblyID = (short)mAssemblyCombo.LJCSelectedItemID(out _);
         if (assemblyID > 0)
         {
           var manager = Managers.DocAssemblyManager;

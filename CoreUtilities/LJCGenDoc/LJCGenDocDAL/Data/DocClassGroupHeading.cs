@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 // DocClassGroupHeading.cs
 using LJCNetCommon;
-using LJCDBClientLib;
 using System;
 using System.Collections.Generic;
+using LJCDBMessage;
 
 namespace LJCGenDocDAL
 {

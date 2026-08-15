@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // ProcessGroupProcess.cs
 using System;
-using LJCDBClientLib;
+using LJCDBMessage;
 
 namespace LJCDataTransformDAL
 {

@@ -126,7 +126,7 @@ namespace LJCTransformManager
 				SourceLayoutID = LJCParentID,
 				Name = FormCommon.SetString(LayoutColumnNameTextbox.Text),
 				Description = FormCommon.SetString(LayoutColumnDescriptionTextbox.Text),
-				DataTypeID = (short)DataTypeCombo.LJCSelectedItemID(),
+				DataTypeID = (short)DataTypeCombo.LJCSelectedItemID(out _),
 				Length = length,
 				Sequence = sequence,
 				IdentityKey = IdentityCheckbox.Checked,

@@ -75,6 +75,7 @@ namespace LJCDataUtility
           SetKeysUnique();
           SetKeysForeign();
           ParentObject.ModuleCombo.Select();
+          ParentObject.TableGridCode.Refresh();
           MessageBox.Show("Create/Update complete");
         }
         break;
@@ -258,67 +259,64 @@ namespace LJCDataUtility
     {
       // Get columns from database table.
       var manager = new DataManager(DataConfigName, TableName);
-      var tableColumns = manager.BaseDefinition;
+      var dbColumns = manager.BaseDefinition;
 
       // Get definition columns.
       var columnManager = Managers.DataColumnManager;
       var keyColumns = columnManager.ParentKey(TableId, TableDbId);
-      var dataColumns = columnManager.Load(keyColumns);
-      foreach (var dataColumn in dataColumns)
+      var dataUtilColumns = columnManager.Load(keyColumns);
+      foreach (var dataUtilColumn in dataUtilColumns)
       {
         // Find column in database table.
-        var columnName = dataColumn.Name;
-        var tableColumn = tableColumns[columnName];
-        if (null == tableColumn)
+        var columnName = dataUtilColumn.Name;
+        var dbColumn = dbColumns[columnName];
+        if (null == dbColumn)
         {
           // Remove definition for missing table column.
           var message = $"Remove Definition {columnName}?";
           if (DialogResult.Yes == MessageBox.Show(message, "Remove Column"
               , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
           {
-            RemoveColumn(dataColumn.DbId, dataColumn.Id);
+            RemoveColumn(dataUtilColumn.DbId, dataUtilColumn.Id);
           }
         }
       }
     }
 
     // Updates the column values.
-    private void UpdateColumn(LJCDataColumn dbColumn, DataUtilColumn dataColumn)
+    private void UpdateColumn(LJCDataColumn dbColumn
+      , DataUtilColumn dataUtilColumn)
     {
       string compareText = "";
       var updateColumn = new DataUtilColumn();
 
       // Data name letter case does not match table.
       // Propose update to Name.
-      if (dataColumn.Name.CompareTo(dbColumn.ColumnName) != NetString.CompareEqual)
+      if (dataUtilColumn.Name.CompareTo(dbColumn.ColumnName) != NetString.CompareEqual)
       {
         updateColumn.Name = dbColumn.ColumnName;
-        compareText += $"DataColumn.Name: {dataColumn.Name}";
+        compareText += $"DataColumn.Name: {dataUtilColumn.Name}";
         compareText += $" = {dbColumn.ColumnName}\r\n";
       }
 
       // Propose update to SQLTypeName.
-      if (dataColumn.TypeName != dbColumn.SQLTypeName)
+      if (dataUtilColumn.TypeName != dbColumn.SQLTypeName)
       {
         updateColumn.TypeName = dbColumn.SQLTypeName;
-        compareText += $"DataColumn.TypeName: {dataColumn.TypeName}";
+        compareText += $"DataColumn.TypeName: {dataUtilColumn.TypeName}";
         compareText += $" = {dbColumn.SQLTypeName}\r\n";
       }
 
       // Propose update to MaxLength.
-      //if (-1 == tableColumn.MaxLength)
-      //{
-      //  tableColumn.MaxLength = -1;
-      //}
-      if (dataColumn.MaxLength != dbColumn.MaxLength)
+      if (dataUtilColumn.MaxLength != dbColumn.MaxLength)
       {
         updateColumn.MaxLength = (short)dbColumn.MaxLength;
-        compareText += $"DataColumn.MaxLength: {dataColumn.MaxLength}";
+        compareText += $"DataColumn.MaxLength: {dataUtilColumn.MaxLength}";
         compareText += $" = {dbColumn.MaxLength}\r\n";
       }
 
       // Propose update to AllowDBNull.
-      if (dataColumn.AllowNull != dbColumn.AllowDBNull)
+      if (dataUtilColumn.AllowNull != dbColumn.AllowDBNull)
       {
         var changes = updateColumn.ChangedNames;
         updateColumn.AllowNull = dbColumn.AllowDBNull;
@@ -326,21 +324,22 @@ namespace LJCDataUtility
         {
           updateColumn.ChangedNames.Add("AllowNull");
         }
-        compareText += $"DataColumn.AllowNull: {dataColumn.AllowNull}";
+        compareText += $"DataColumn.AllowNull: {dataUtilColumn.AllowNull}";
         compareText += $" = {dbColumn.AllowDBNull}\r\n";
       }
 
       // Show proposed changes.
       if (NetString.HasValue(compareText))
       {
-        var message = $"Update {dataColumn.Name}\r\n {compareText}";
+        var message = $"Update {dataUtilColumn.Name}\r\n {compareText}";
         if (DialogResult.Yes == MessageBox.Show(message, "Update"
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
           var columnManager = Managers.DataColumnManager;
-          var keyColumns = columnManager.IdKey(dataColumn.Id, dataColumn.DbId);
+          var keyColumns = columnManager.IdKey(dataUtilColumn.Id, dataUtilColumn.DbId);
           // *** Add ***
           var propertyNames = updateColumn.ChangedNames.ChangedProperties;
+          propertyNames = null;
           columnManager.Update(updateColumn, keyColumns, propertyNames);
         }
       }

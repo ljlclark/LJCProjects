@@ -3,8 +3,8 @@
 // PersonRelation.cs
 using System;
 using System.Collections.Generic;
-using LJCDBClientLib;
 using System.Runtime.Serialization;
+using LJCDBMessage;
 
 namespace LJCFacilityManagerDAL
 {

@@ -3,6 +3,7 @@
 // DbMetaDataKeyTypes.cs
 using System;
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 
 namespace LJCSQLUtilLibDAL

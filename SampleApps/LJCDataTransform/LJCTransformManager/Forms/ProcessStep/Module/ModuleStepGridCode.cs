@@ -37,7 +37,7 @@ namespace LJCTransformManager
 			if (mParent.DataProcessCombo.SelectedIndex > -1)
 			{
 				// Data from list items.
-				int parentID = (int)mParent.DataProcessCombo.LJCSelectedItemID();
+				int parentID = (int)mParent.DataProcessCombo.LJCSelectedItemID(out _);
 
 				var stepManager = mManagers.StepManager;
 				records = stepManager.LoadWithProcessID(parentID);
@@ -168,7 +168,7 @@ namespace LJCTransformManager
 			if (mParent.DataProcessCombo.SelectedIndex > -1)
 			{
 				// Data from parent window or list.
-				int parentID = (int)mParent.DataProcessCombo.LJCSelectedItemID();
+				int parentID = (int)mParent.DataProcessCombo.LJCSelectedItemID(out _);
 				string parentName = mParent.DataProcessCombo.Text;
 
 				detail = new StepDetail()
@@ -191,7 +191,7 @@ namespace LJCTransformManager
 				&& mStepGrid.CurrentRow is LJCGridRow row)
 			{
 				// Data from parent window or list.
-				int parentID = (int)mParent.DataProcessCombo.LJCSelectedItemID();
+				int parentID = (int)mParent.DataProcessCombo.LJCSelectedItemID(out _);
 				string parentName = mParent.DataProcessCombo.Text;
 
 				detail = new StepDetail()

@@ -112,7 +112,7 @@ namespace CVRManager
 				ID = LJCID,
 				Code = FormCommon.SetString(CodeTextbox.Text),
 				Description = DescriptionTextbox.Text,
-				CodeTypeID = (int)FacilityTypeCombo.LJCSelectedItemID()
+				CodeTypeID = (int)FacilityTypeCombo.LJCSelectedItemID(out _)
 			};
 			return retValue;
 		}

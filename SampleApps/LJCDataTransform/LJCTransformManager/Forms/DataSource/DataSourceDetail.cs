@@ -112,8 +112,8 @@ namespace LJCTransformManager
 				DataSourceID = LJCID,
 				Name = FormCommon.SetString(SourceNameTextbox.Text),
 				Description = FormCommon.SetString(SourceDescriptionTextbox.Text),
-				SourceLayoutID = (int)LayoutCombo.LJCSelectedItemID(),
-				SourceTypeID = (short)SourceTypeCombo.LJCSelectedItemID(),
+				SourceLayoutID = (int)LayoutCombo.LJCSelectedItemID(out _),
+				SourceTypeID = (short)SourceTypeCombo.LJCSelectedItemID(out _),
 				DataConfigName = DataConfigNameTextbox.Text,
 				SourceItemName = SourceItemNameTextbox.Text,
 				SourceStatusID = (short)SourceStatusCombo.SelectedItem

@@ -112,8 +112,10 @@ set marker=----------------- %counter% - LJCDBClientSQLLib -------------- >> Bui
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCDBClientLib >> Build.txt
-call CoreAssemblies\L
+echo LJCDBClientSQLLib >> Build.txt
+call CoreAssemblies\LJCDBClientSQLLib\UpdateDBClientSQLLib.cmd >> Build.txt
+msbuild CoreAssemblies\LJCDBClientSQLLib\LJCDBClientSQLLib.sln
+
 set /a counter+=1
 echo - >> Build.txt
 set marker=----------------- %counter% - LJCDBViewDAL ---------------- >> Build.txt

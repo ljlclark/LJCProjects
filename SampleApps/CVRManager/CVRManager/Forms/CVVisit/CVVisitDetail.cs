@@ -154,7 +154,7 @@ namespace CVRManager
 				FacilityID = LJCParentID,
 				CVPersonID = mCVPersonID,
 				Temperature = TemperatureText.Text.Trim(),
-				TemperatureUnitID = (int)TemperatureCombo.LJCSelectedItemID(),
+				TemperatureUnitID = (int)TemperatureCombo.LJCSelectedItemID(out _),
 				BaseTemperature = mBaseTemperature,
 				BaseTemperatureUnitID = mBaseTemperatureUnitID,
 				RegisterTime = SetDateTime(RegisterDateMask, RegisterTimeMask),
@@ -496,7 +496,7 @@ namespace CVRManager
 		{
 			string temperature = TemperatureText.Text.Trim();
 			decimal.TryParse(temperature, out decimal temperatureValue);
-			int temperatureUnitID = (int)TemperatureCombo.LJCSelectedItemID();
+			int temperatureUnitID = (int)TemperatureCombo.LJCSelectedItemID(out _);
 
 			// Reset temperature values.
 			if (temperature != mOriginalTemperature)
@@ -537,7 +537,7 @@ namespace CVRManager
 			{
 				string temperature = TemperatureText.Text.Trim();
 				decimal.TryParse(temperature, out decimal temperatureValue);
-				int temperatureUnitID = (int)TemperatureCombo.LJCSelectedItemID();
+				int temperatureUnitID = (int)TemperatureCombo.LJCSelectedItemID(out _);
 				if (temperatureUnitID == mBaseTemperatureUnitID)
 				{
 					// Revert temperature to the base temperature.

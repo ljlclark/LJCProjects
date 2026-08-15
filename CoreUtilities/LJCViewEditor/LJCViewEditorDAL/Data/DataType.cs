@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // DataType.cs
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 using System;
 

@@ -135,7 +135,7 @@ namespace CVRManager
 				FirstName = FirstNameTextbox.Text.Trim(),
 				MiddleName = MiddleNameTextbox.Text.Trim(),
 				LastName = LastNameTextbox.Text.Trim(),
-				CVSexID = SexCombo.LJCSelectedItemID(),
+				CVSexID = SexCombo.LJCSelectedItemID(out _),
 				DeliveryAddressLine = AddressTextbox.Text.Trim(),
 				LastLine = RegionTextbox.Text.Trim(),
 				Phone = PhoneTextbox.Text.Trim()

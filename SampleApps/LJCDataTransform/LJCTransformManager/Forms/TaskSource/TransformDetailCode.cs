@@ -64,8 +64,8 @@ namespace LJCTransformManager
 				StepTaskID = LJCParentID,
 				Name = TransformNameTextbox.Text,
 				Description = FormCommon.SetString(TransformDescriptionTextbox.Text),
-				SourceDataID = (int)SourceDataCombo.LJCSelectedItemID(),
-				TargetDataID = (int)TargetDataCombo.LJCSelectedItemID()
+				SourceDataID = (int)SourceDataCombo.LJCSelectedItemID(out _),
+				TargetDataID = (int)TargetDataCombo.LJCSelectedItemID(out _)
 			};
 			return retValue;
 		}

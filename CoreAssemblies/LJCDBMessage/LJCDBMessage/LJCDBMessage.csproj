@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangedNames.cs" />
     <Compile Include="ClassInfo\InfoDataColumn.cs" />
     <Compile Include="ClassInfo\InfoDataColumnCollection.cs" />
     <Compile Include="ClassInfo\InfoDataRow.cs" />

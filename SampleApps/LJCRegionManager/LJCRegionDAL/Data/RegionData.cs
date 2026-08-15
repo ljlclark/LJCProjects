@@ -3,6 +3,7 @@
 // RegionData.cs
 using System;
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 
 namespace LJCRegionDAL

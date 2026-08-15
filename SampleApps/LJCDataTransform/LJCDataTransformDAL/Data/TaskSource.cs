@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // TaskSource.cs
 using System;
-using LJCDBClientLib;
+using LJCDBMessage;
 
 namespace LJCDataTransformDAL
 {

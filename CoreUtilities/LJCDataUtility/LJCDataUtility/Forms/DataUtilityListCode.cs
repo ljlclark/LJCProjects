@@ -546,6 +546,9 @@ namespace LJCDataUtility
     // Gets or sets the configuration settings.
     internal StandardUISettings Settings { get; set; }
 
+    // Gets or sets the DataTableGridCode reference.
+    internal DataTableGridCode TableGridCode { get; set; }
+
     // Gets or sets the ModuleComboCode reference.
     private DataModuleComboCode ModuleComboCode { get; set; }
 
@@ -554,9 +557,6 @@ namespace LJCDataUtility
 
     // Gets or sets the KeyGridCode reference.
     private DataKeyGridCode KeyGridCode { get; set; }
-
-    // Gets or sets the DataTableGridCode reference.
-    private DataTableGridCode TableGridCode { get; set; }
 
     // Gets or sets the ControlValues object.
     private ControlValues ControlValues { get; set; }

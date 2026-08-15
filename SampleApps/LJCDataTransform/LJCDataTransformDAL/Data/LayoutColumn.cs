@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // LayoutColumn.cs
 using System;
-using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 
 namespace LJCDataTransformDAL

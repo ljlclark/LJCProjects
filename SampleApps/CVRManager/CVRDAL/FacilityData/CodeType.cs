@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 
 namespace CVRDAL

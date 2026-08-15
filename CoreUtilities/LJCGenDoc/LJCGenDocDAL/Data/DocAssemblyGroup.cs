@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 // DocAssemblyGroup.cs
 using LJCNetCommon;
-using LJCDBClientLib;
 using System;
 using System.Collections.Generic;
+using LJCDBMessage;
 
 namespace LJCGenDocDAL
 {

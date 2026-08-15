@@ -125,7 +125,7 @@ namespace LJCGenDocEdit
 
       if (mClassCombo.SelectedItem != null)
       {
-        var classID = (short)mClassCombo.LJCSelectedItemID();
+        var classID = (short)mClassCombo.LJCSelectedItemID(out _);
         if (classID > 0)
         {
           var manager = mManagers.DocClassManager;

@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // Account.cs
 using System;
-using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 
 namespace LJCFacilityManagerDAL

@@ -116,7 +116,7 @@ namespace LJCTransformManager
 				StepID = LJCParentID,
 				Name = FormCommon.SetString(TaskNameTextbox.Text),
 				Description = FormCommon.SetString(TaskDescriptionTextbox.Text),
-				TaskTypeID = (short)TaskTypeCombo.LJCSelectedItemID(),
+				TaskTypeID = (short)TaskTypeCombo.LJCSelectedItemID(out _),
 				ActionItemName = ActionItemTextbox.Text,
 				TaskStatusID = (short)TaskStatusCombo.SelectedItem,
 				Sequence = sequence

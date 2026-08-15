@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.Serialization;
 using LJCNetCommon;
-using LJCDBClientLib;
+using LJCDBMessage;
 
 namespace LJCFacilityManagerDAL
 {

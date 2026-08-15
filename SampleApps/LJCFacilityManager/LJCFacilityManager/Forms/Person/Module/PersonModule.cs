@@ -88,7 +88,7 @@ namespace LJCFacilityManager
 		// Displays the ViewBuilder to edit the current view.
 		internal void DoViewEdit(ViewComboControl viewCombo, ViewInfo viewInfo)
 		{
-			int viewID = (int)viewCombo.LJCSelectedItemID();
+			int viewID = (int)viewCombo.LJCSelectedItemID(out _);
 			var viewEditor = new ViewEditorList(viewInfo.TableName, false)
 			{
 				StartupViewDataID = viewID
@@ -310,7 +310,7 @@ namespace LJCFacilityManager
 			PersonGrid.Columns.Clear();
 
 			// Get the view grid columns
-			mViewInfoPerson.DataID = (int)ViewComboPerson.LJCSelectedItemID();
+			mViewInfoPerson.DataID = (int)ViewComboPerson.LJCSelectedItemID(out _);
 			var gridColumns = mDataDbView.GetGridColumns(mViewInfoPerson.DataID);
 			if (null == gridColumns)
 			{
@@ -352,7 +352,7 @@ namespace LJCFacilityManager
 			RelationGrid.Columns.Clear();
 
 			// Get the view grid columns
-			mViewInfoRelation.DataID = (int)ViewComboRelation.LJCSelectedItemID();
+			mViewInfoRelation.DataID = (int)ViewComboRelation.LJCSelectedItemID(out _);
 			var gridColumns = mDataDbView.GetGridColumns(mViewInfoRelation.DataID);
 			if (null == gridColumns)
 			{

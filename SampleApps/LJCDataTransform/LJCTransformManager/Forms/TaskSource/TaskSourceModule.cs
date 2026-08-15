@@ -90,7 +90,7 @@ namespace LJCTransformManager
 		{
 			LJCTransformProcess transformProcess;
 
-			int dataProcessID = (int)DataProcessCombo.LJCSelectedItemID();
+			int dataProcessID = (int)DataProcessCombo.LJCSelectedItemID(out _);
 
 			if (TaskGrid.CurrentRow is LJCGridRow row)
 			{
@@ -167,7 +167,7 @@ namespace LJCTransformManager
 
 			if (null == mDataProcess)
 			{
-				processID = (int)DataProcessCombo.LJCSelectedItemID();
+				processID = (int)DataProcessCombo.LJCSelectedItemID(out _);
 				DataProcessManager dataProcessManager = Managers.DataProcessManager;
 				mDataProcess = dataProcessManager.RetrieveWithID(processID);
 			}
@@ -442,7 +442,7 @@ namespace LJCTransformManager
 			if (DataProcessCombo.SelectedIndex > -1)
 			{
 				// Data from items.
-				id = (int)DataProcessCombo.LJCSelectedItemID();
+				id = (int)DataProcessCombo.LJCSelectedItemID(out _);
 				dataProcess = Managers.DataProcessManager.RetrieveWithID(id);
 			}
 
@@ -489,14 +489,14 @@ namespace LJCTransformManager
 
 			if (StepCombo.SelectedIndex > -1)
 			{
-				id = (int)StepCombo.LJCSelectedItemID();
+				id = (int)StepCombo.LJCSelectedItemID(out _);
 				step = Managers.StepManager.RetrieveWithID(id);
 			}
 
 			if (DataProcessCombo.SelectedIndex > -1)
 			{
 				// Data from items.
-				int parentID = (int)DataProcessCombo.LJCSelectedItemID();
+				int parentID = (int)DataProcessCombo.LJCSelectedItemID(out _);
 				string parentName = DataProcessCombo.Text;
 
 				StepList list = new StepList()

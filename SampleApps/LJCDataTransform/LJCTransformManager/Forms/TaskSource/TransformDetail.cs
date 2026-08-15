@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using LJCWinFormCommon;
 using LJCDataTransformDAL;
 using System.Collections.Generic;
-using LJCNetCommon;
 
 namespace LJCTransformManager
 {
@@ -60,7 +59,7 @@ namespace LJCTransformManager
 		// Displays a view of the Source data.
 		private void SourceMenuView_Click(object sender, EventArgs e)
 		{
-			int dataSourceID = (int)SourceDataCombo.LJCSelectedItemID();
+			int dataSourceID = (int)SourceDataCombo.LJCSelectedItemID(out _);
 			mDataViewer.Show(dataSourceID);
 		}
 
@@ -71,7 +70,7 @@ namespace LJCTransformManager
 
 			if (SourceDataCombo.SelectedIndex != -1)
 			{
-				dataSourceID = (int)SourceDataCombo.LJCSelectedItemID();
+				dataSourceID = (int)SourceDataCombo.LJCSelectedItemID(out _);
 				SourceLayoutShow(dataSourceID);
 			}
 		}
@@ -82,7 +81,7 @@ namespace LJCTransformManager
 		// Displays a view of the Target data.
 		private void TargetView_Click(object sender, EventArgs e)
 		{
-			int dataSourceID = (int)TargetDataCombo.LJCSelectedItemID();
+			int dataSourceID = (int)TargetDataCombo.LJCSelectedItemID(out _);
 			mDataViewer.Show(dataSourceID);
 		}
 
@@ -93,7 +92,7 @@ namespace LJCTransformManager
 
 			if (TargetDataCombo.SelectedIndex != -1)
 			{
-				dataSourceID = (int)TargetDataCombo.LJCSelectedItemID();
+				dataSourceID = (int)TargetDataCombo.LJCSelectedItemID(out _);
 				SourceLayoutShow(dataSourceID);
 			}
 		}
