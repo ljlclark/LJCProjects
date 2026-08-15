@@ -20,6 +20,7 @@ namespace LJCDataUtility
     {
       // Initialize property values.
       ParentObject = parentObject;
+      DbGroupId = ParentObject.DbGroupId;
       Managers = ParentObject.Managers;
     }
     #endregion
@@ -55,7 +56,7 @@ namespace LJCDataUtility
         var isUpdate = CreatePrompt(dataTable, TableName, out bool isCreate);
         if (isCreate)
         {
-          CreateData(moduleId);
+          CreateData(moduleDbId, moduleId);
           break;
         }
 
@@ -154,11 +155,13 @@ namespace LJCDataUtility
     #region Module Create Methods
 
     // Creates DataUtilTable and DataUtilColumn data.
-    private void CreateData(long moduleID)
+    private void CreateData(short moduleDbId, long moduleID)
     {
       var tableManager = Managers.DataTableManager;
       var dataTable = new DataUtilTable
       {
+        DbId = DbGroupId,
+        DataModuleDbId = moduleDbId,
         DataModuleId = moduleID,
         Name = TableName,
         Description = TableName
@@ -171,7 +174,7 @@ namespace LJCDataUtility
       var newTable = tableManager.Add(dataTable);
 
       CreateColumns(newTable.DbId, newTable.Id);
-      CreateKeys(newTable.Id);
+      CreateKeys(newTable.DbId, newTable.Id);
 
       var tableGridCode = new DataTableGridCode(ParentObject);
       tableGridCode.Refresh();
@@ -187,6 +190,7 @@ namespace LJCDataUtility
     {
       var newColumn = new DataUtilColumn
       {
+        DbId = DbGroupId,
         DataTableDbId = tableDbId,
         DataTableId = tableId,
         Name = dbColumn.ColumnName,
@@ -210,13 +214,13 @@ namespace LJCDataUtility
       var columnManager = Managers.DataColumnManager;
 
       // Set insert property names without auto increment columns.
-      var names = columnManager.PropertyNames();
-      names.Remove("Id");
-      newColumn.ChangedNames.AddNames(names);
+      var propertyNames = columnManager.PropertyNames();
+      propertyNames.Remove("Id");
+      newColumn.ChangedNames.AddNames(propertyNames);
 
-      // Remove property names where the object properties do not exist.
+      // Remove insert property names where object properties do not exist.
       LJCReflect reflect = new LJCReflect(newColumn);
-      foreach (var name in names)
+      foreach (var name in propertyNames)
       {
         if (!reflect.HasProperty(name))
         {
@@ -230,6 +234,7 @@ namespace LJCDataUtility
     // Creates the new columns.
     private void CreateColumns(short newTableDbId, long newTableId)
     {
+      // Get columns from table definition.
       var manager = new DataManager(DataConfigName, TableName);
       var dbColumns = manager.BaseDefinition;
       int sequence = 0;
@@ -278,37 +283,54 @@ namespace LJCDataUtility
     }
 
     // Updates the column values.
-    private void UpdateColumn(LJCDataColumn tableColumn, DataUtilColumn dataColumn)
+    private void UpdateColumn(LJCDataColumn dbColumn, DataUtilColumn dataColumn)
     {
       string compareText = "";
       var updateColumn = new DataUtilColumn();
-      if (dataColumn.TypeName != tableColumn.SQLTypeName)
+
+      // Data name letter case does not match table.
+      // Propose update to Name.
+      if (dataColumn.Name.CompareTo(dbColumn.ColumnName) != NetString.CompareEqual)
       {
-        updateColumn.TypeName = tableColumn.SQLTypeName;
-        compareText += $"DataColumn.TypeName: {dataColumn.TypeName}";
-        compareText += $" = {tableColumn.SQLTypeName}\r\n";
+        updateColumn.Name = dbColumn.ColumnName;
+        compareText += $"DataColumn.Name: {dataColumn.Name}";
+        compareText += $" = {dbColumn.ColumnName}\r\n";
       }
+
+      // Propose update to SQLTypeName.
+      if (dataColumn.TypeName != dbColumn.SQLTypeName)
+      {
+        updateColumn.TypeName = dbColumn.SQLTypeName;
+        compareText += $"DataColumn.TypeName: {dataColumn.TypeName}";
+        compareText += $" = {dbColumn.SQLTypeName}\r\n";
+      }
+
+      // Propose update to MaxLength.
       //if (-1 == tableColumn.MaxLength)
       //{
       //  tableColumn.MaxLength = -1;
       //}
-      if (dataColumn.MaxLength != tableColumn.MaxLength)
+      if (dataColumn.MaxLength != dbColumn.MaxLength)
       {
-        updateColumn.MaxLength = (short)tableColumn.MaxLength;
+        updateColumn.MaxLength = (short)dbColumn.MaxLength;
         compareText += $"DataColumn.MaxLength: {dataColumn.MaxLength}";
-        compareText += $" = {tableColumn.MaxLength}\r\n";
+        compareText += $" = {dbColumn.MaxLength}\r\n";
       }
-      if (dataColumn.AllowNull != tableColumn.AllowDBNull)
+
+      // Propose update to AllowDBNull.
+      if (dataColumn.AllowNull != dbColumn.AllowDBNull)
       {
         var changes = updateColumn.ChangedNames;
-        updateColumn.AllowNull = tableColumn.AllowDBNull;
+        updateColumn.AllowNull = dbColumn.AllowDBNull;
         if (!changes.Contains("AllowNull"))
         {
           updateColumn.ChangedNames.Add("AllowNull");
         }
         compareText += $"DataColumn.AllowNull: {dataColumn.AllowNull}";
-        compareText += $" = {tableColumn.AllowDBNull}\r\n";
+        compareText += $" = {dbColumn.AllowDBNull}\r\n";
       }
+
+      // Show proposed changes.
       if (NetString.HasValue(compareText))
       {
         var message = $"Update {dataColumn.Name}\r\n {compareText}";
@@ -329,11 +351,11 @@ namespace LJCDataUtility
     {
       // Get columns from database table.
       var manager = new DataManager(DataConfigName, TableName);
-      var tableColumns = manager.BaseDefinition;
-      foreach (var tableColumn in tableColumns)
+      var dbColumns = manager.BaseDefinition;
+      foreach (var dbColumn in dbColumns)
       {
         // Find column in utility definition.
-        var columnName = tableColumn.ColumnName;
+        var columnName = dbColumn.ColumnName;
         var columnManager = Managers.DataColumnManager;
         var dataColumn = columnManager.RetrieveWithUnique(TableId, TableDbId
           , columnName);
@@ -344,11 +366,11 @@ namespace LJCDataUtility
           if (DialogResult.Yes == MessageBox.Show(message, "Create Column"
               , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
           {
-            CreateColumn(tableColumn, TableDbId, TableId, tableColumns.Count + 1);
+            CreateColumn(dbColumn, TableDbId, TableId, dbColumns.Count + 1);
           }
           continue;
         }
-        UpdateColumn(tableColumn, dataColumn);
+        UpdateColumn(dbColumn, dataColumn);
       }
     }
     #endregion
@@ -356,10 +378,13 @@ namespace LJCDataUtility
     #region Key Create Methods
 
     // Creates DataKey data.
-    private void CreateKey(TableKey tableKey, long tableID, short keyType)
+    private void CreateKey(TableKey tableKey, short tableDbId, long tableID
+      , short keyType)
     {
       var newKey = new DataKey()
       {
+        DbId = DbGroupId,
+        DataTableDbId = tableDbId,
         DataTableId = tableID,
         Name = tableKey.ConstraintName,
         KeyType = keyType,
@@ -391,24 +416,24 @@ namespace LJCDataUtility
     }
 
     // Creates the new Keys.
-    private void CreateKeys(long newTableID)
+    private void CreateKeys(short newTableDbId, long newTableID)
     {
       var primaryKeys = GetTableKeys();
       foreach (var primaryKey in primaryKeys)
       {
-        CreateKey(primaryKey, newTableID, 1);
+        CreateKey(primaryKey, newTableDbId, newTableID, 1);
       }
 
       var uniqueKeys = GetTableKeys("UNIQUE");
       foreach (var uniqueKey in uniqueKeys)
       {
-        CreateKey(uniqueKey, newTableID, 2);
+        CreateKey(uniqueKey, newTableDbId, newTableID, 2);
       }
 
       var foreignKeys = GetTableKeys("FOREIGN KEY");
       foreach (var foreignKey in foreignKeys)
       {
-        CreateKey(foreignKey, newTableID, 3);
+        CreateKey(foreignKey, newTableDbId, newTableID, 3);
       }
     }
 
@@ -482,7 +507,7 @@ namespace LJCDataUtility
               if (DialogResult.Yes == MessageBox.Show(message, "Create Key"
                   , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
               {
-                CreateKey(workForeignTableKey, TableId, 3);
+                CreateKey(workForeignTableKey, TableDbId, TableId, 3);
               }
             }
             else
@@ -521,7 +546,7 @@ namespace LJCDataUtility
           if (DialogResult.Yes == MessageBox.Show(message, "Create Key"
               , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
           {
-            CreateKey(primaryKey, TableId, 1);
+            CreateKey(primaryKey, TableDbId, TableId, 1);
           }
         }
         else
@@ -557,7 +582,7 @@ namespace LJCDataUtility
           if (DialogResult.Yes == MessageBox.Show(message, "Create Key"
               , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
           {
-            CreateKey(uniqueKey, TableId, 2);
+            CreateKey(uniqueKey, TableDbId, TableId, 2);
           }
         }
         else
@@ -570,29 +595,37 @@ namespace LJCDataUtility
     // Updates the DataKey values.
     private void UpdateKey(TableKey tableKey, DataKey dataKey)
     {
-      string compare = "";
+      string compareText = "";
       var updateKey = new DataKey();
+
+      // Propose update to source name.
       if (dataKey.SourceColumnName != tableKey.ColumnName)
       {
         updateKey.SourceColumnName = tableKey.ColumnName;
-        compare += $"DataKey.SourceColumnName: {dataKey.SourceColumnName}";
-        compare += $" = {tableKey.ColumnName}\r\n";
+        compareText += $"DataKey.SourceColumnName: {dataKey.SourceColumnName}";
+        compareText += $" = {tableKey.ColumnName}\r\n";
       }
+
+      // Propose update to target table name.
       if (dataKey.TargetTableName != tableKey.TargetTable)
       {
         updateKey.TargetTableName = tableKey.TargetTable;
-        compare += $"DataKey.TargetTableName: {dataKey.TargetTableName}";
-        compare += $" = {tableKey.TargetTable}\r\n";
+        compareText += $"DataKey.TargetTableName: {dataKey.TargetTableName}";
+        compareText += $" = {tableKey.TargetTable}\r\n";
       }
+
+      // Propose update to target column name.
       if (dataKey.TargetColumnName != tableKey.TargetColumn)
       {
         updateKey.TargetColumnName = tableKey.TargetColumn;
-        compare += $"DataKey.TargetColumnName: {dataKey.TargetColumnName}";
-        compare += $" = {tableKey.TargetColumn}\r\n";
+        compareText += $"DataKey.TargetColumnName: {dataKey.TargetColumnName}";
+        compareText += $" = {tableKey.TargetColumn}\r\n";
       }
-      if (NetString.HasValue(compare))
+
+      // Show proposed changes.
+      if (NetString.HasValue(compareText))
       {
-        var message = $"Update {dataKey.Name}\r\n {compare}";
+        var message = $"Update {dataKey.Name}\r\n {compareText}";
         if (DialogResult.Yes == MessageBox.Show(message, "Update"
           , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
         {
@@ -611,6 +644,9 @@ namespace LJCDataUtility
 
     // Gets or sets the DataConfig name.
     private string DataConfigName { get; set; }
+
+    // Gets or sets the DbId create value.
+    private short DbGroupId { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }

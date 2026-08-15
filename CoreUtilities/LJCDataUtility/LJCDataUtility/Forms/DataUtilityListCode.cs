@@ -336,6 +336,8 @@ namespace LJCDataUtility
           , MessageBoxIcon.Error);
       }
       ConnectionType = values.ConnectionType;
+      // *** Add ***
+      DbGroupId = values.DbGroupID;
       Managers = values.Managers;
       Settings = values.StandardSettings;
       Text += $" - {Settings.DataConfigName}";
@@ -526,6 +528,8 @@ namespace LJCDataUtility
     #endregion
 
     #region Properties
+
+    internal short DbGroupId {get; set; }
 
     // Gets or sets the connection type value.
     internal string ConnectionType { get; set; }
