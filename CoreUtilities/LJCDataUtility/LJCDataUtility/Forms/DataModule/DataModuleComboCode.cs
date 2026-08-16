@@ -246,6 +246,7 @@ namespace LJCDataUtility
         if (detail.LJCIsUpdate)
         {
           RowUpdate(record);
+          Refresh();
         }
         else
         {

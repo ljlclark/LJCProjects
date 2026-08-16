@@ -318,12 +318,8 @@ namespace LJCDataUtility
       // Propose update to AllowDBNull.
       if (dataUtilColumn.AllowNull != dbColumn.AllowDBNull)
       {
-        var changes = updateColumn.ChangedNames;
+        //var changes = updateColumn.ChangedNames;
         updateColumn.AllowNull = dbColumn.AllowDBNull;
-        if (!changes.Contains("AllowNull"))
-        {
-          updateColumn.ChangedNames.Add("AllowNull");
-        }
         compareText += $"DataColumn.AllowNull: {dataUtilColumn.AllowNull}";
         compareText += $" = {dbColumn.AllowDBNull}\r\n";
       }
@@ -337,10 +333,7 @@ namespace LJCDataUtility
         {
           var columnManager = Managers.DataColumnManager;
           var keyColumns = columnManager.IdKey(dataUtilColumn.Id, dataUtilColumn.DbId);
-          // *** Add ***
-          var propertyNames = updateColumn.ChangedNames.ChangedProperties;
-          propertyNames = null;
-          columnManager.Update(updateColumn, keyColumns, propertyNames);
+          columnManager.Update(updateColumn, keyColumns);
         }
       }
     }
@@ -631,9 +624,7 @@ namespace LJCDataUtility
           var keyManager = Managers.DataKeyManager;
           var keyColumns = keyManager.UniqueKey(dataKey.DataTableId
             , dataKey.DataTableDbId, dataKey.Name);
-          // *** Add ***
-          var propertyNames = updateKey.ChangedNames.ChangedProperties;
-          keyManager.Update(updateKey, keyColumns, propertyNames);
+          keyManager.Update(updateKey, keyColumns);
         }
       }
     }

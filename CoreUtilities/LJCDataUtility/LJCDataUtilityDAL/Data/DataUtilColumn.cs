@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataUtilColumn.cs
-using LJCDBClientLib;
+using LJCDBMessage;
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;

@@ -1,10 +1,8 @@
 ﻿// Copyright(c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // DataEntrySite.cs
-using LJCNetCommon;
-using LJCDBClientLib;
 using System;
-using System.Collections.Generic;
+using LJCDBMessage;
 
 namespace LJCDataSiteDAL
 {
