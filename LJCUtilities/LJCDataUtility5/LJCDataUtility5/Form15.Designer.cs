@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      MainGrid = new LJCControls5.LJCDataGrid5();
+      MainGrid = new LJCControls5.LJCDataGrid();
       ((System.ComponentModel.ISupportInitialize)MainGrid).BeginInit();
       SuspendLayout();
       // 
@@ -57,6 +57,6 @@
 
     #endregion
 
-    internal LJCControls5.LJCDataGrid5 MainGrid;
+    internal LJCControls5.LJCDataGrid MainGrid;
   }
 }

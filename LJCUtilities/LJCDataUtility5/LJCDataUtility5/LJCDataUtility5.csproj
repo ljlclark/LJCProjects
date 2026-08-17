@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LJCControls5\LJCControls5.csproj" />
+    <ProjectReference Include="..\LJCDataUtilityDAL5\LJCDataUtilityDAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

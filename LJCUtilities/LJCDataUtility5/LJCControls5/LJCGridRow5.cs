@@ -9,14 +9,14 @@ namespace LJCControls5
   // Provides custom functionality for a DataGridViewRow control.
   /// <include file='Doc/LJCGridRow5.xml'
   ///  path='items/LJCGridRow5/*'/>
-  public class LJCGridRow5 : DataGridViewRow
+  public class LJCGridRow : DataGridViewRow
   {
     #region Constructors
 
     // Instantiates an instance of the class.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
     ///  path='items/Constructor/*'/>
-    public LJCGridRow5()
+    public LJCGridRow()
     {
       _ShortShorts = [];
       _StringShorts = [];

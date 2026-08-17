@@ -10,14 +10,14 @@ namespace LJCControls5
   // Provides custom functionality for a DataGridView control. (D)
   /// <include file='Doc/LJCDataGrid5.xml'
   ///  path='members/LJCDataGrid5/*'/>
-  public partial class LJCDataGrid5 : DataGridView
+  public partial class LJCDataGrid : DataGridView
   {
     #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../LJCUtilities/LJCGenDoc/Common/Data.xml'
     ///  path='members/Constructor1/*'/>
-    public LJCDataGrid5()
+    public LJCDataGrid()
     {
       InitializeComponent();
       LJCSetPlain();
@@ -34,7 +34,7 @@ namespace LJCControls5
     // Initializes an object instance and adds it to a container.
     /// <include file='Doc/LJCDataGrid5.xml'
     ///  path='members/Constructor2/*'/>
-    public LJCDataGrid5(IContainer container) : this()
+    public LJCDataGrid(IContainer container) : this()
     {
       container.Add(this);
     }
@@ -55,16 +55,16 @@ namespace LJCControls5
     // Adds a GridRow control to the grid. 
     /// <include file='Doc/LJCDataGrid.xml'
     ///  path='members/LJCRowAdd/*'/>
-    public LJCGridRow5? LJCRowAdd()
+    public LJCGridRow? LJCRowAdd()
     {
-      LJCGridRow5? retValue;
+      LJCGridRow? retValue;
       int index;
 
-      retValue = new LJCGridRow5();
+      retValue = new LJCGridRow();
       LJCAllowSelectionChange = false;
       index = Rows.Add(retValue);
       LJCAllowSelectionChange = true;
-      retValue = Rows[index] as LJCGridRow5;
+      retValue = Rows[index] as LJCGridRow;
 
       // Create minimum height;
       if (retValue != null)
@@ -85,13 +85,13 @@ namespace LJCControls5
     // Inserts a GridRow control into the grid. 
     /// <include file='Doc/LJCDataGrid.xml'
     ///  path='members/LJCRowInsert/*'/>
-    public LJCGridRow5? LJCRowInsert(int index)
+    public LJCGridRow? LJCRowInsert(int index)
     {
-      LJCGridRow5? retValue;
+      LJCGridRow? retValue;
 
-      retValue = new LJCGridRow5();
+      retValue = new LJCGridRow();
       Rows.Insert(index, retValue);
-      retValue = Rows[index] as LJCGridRow5;
+      retValue = Rows[index] as LJCGridRow;
 
       // Create minimum height;
       if (retValue != null)
@@ -141,14 +141,14 @@ namespace LJCControls5
     // Returns the current or first row.
     /// <include file='Doc/LJCDataGrid.xml'
     ///  path='members/LJCGetCurrentRow/*'/>
-    public LJCGridRow5? LJCGetCurrentRow()
+    public LJCGridRow? LJCGetCurrentRow()
     {
       if (null == CurrentRow
         && Rows.Count > 0)
       {
         LJCSetCurrentRow(Rows[0]);
       }
-      var retValue = CurrentRow as LJCGridRow5;
+      var retValue = CurrentRow as LJCGridRow;
       return retValue;
     }
 
@@ -167,14 +167,14 @@ namespace LJCControls5
     // Gets the row at the cursor location.
     /// <include file='Doc/LJCDataGrid5.xml'
     ///  path='members/LJCGetMouseRow/*'/>
-    public LJCGridRow5? LJCGetMouseRow(int x, int y)
+    public LJCGridRow? LJCGetMouseRow(int x, int y)
     {
-      LJCGridRow5? retValue = null;
+      LJCGridRow? retValue = null;
 
       int rowIndex = LJCGetMouseRowIndex(x, y);
       if (rowIndex >= 0)
       {
-        retValue = Rows[rowIndex] as LJCGridRow5;
+        retValue = Rows[rowIndex] as LJCGridRow;
       }
       return retValue;
     }
@@ -182,14 +182,14 @@ namespace LJCControls5
     // Retrieves the row where the mouse was clicked
     /// <include file='Doc/LJCDataGrid5.xml'
     ///  path='members/LJCGetMouseRow1/*'/>
-    public LJCGridRow5? LJCGetMouseRow(MouseEventArgs e)
+    public LJCGridRow? LJCGetMouseRow(MouseEventArgs e)
     {
-      LJCGridRow5? retValue = null;
+      LJCGridRow? retValue = null;
 
       int rowIndex = LJCGetMouseRowIndex(e);
       if (rowIndex >= 0)
       {
-        retValue = Rows[rowIndex] as LJCGridRow5;
+        retValue = Rows[rowIndex] as LJCGridRow;
       }
       return retValue;
     }
@@ -284,7 +284,7 @@ namespace LJCControls5
     // Saves the last selected row index.
     /// <include file='Doc/LJCDataGrid5.xml'
     ///  path='members/LJCSetLastRow/*'/>
-    public void LJCSetLastRow(LJCGridRow5? row = null)
+    public void LJCSetLastRow(LJCGridRow? row = null)
     {
       if (row != null)
       {
@@ -333,7 +333,7 @@ namespace LJCControls5
       var grid = gridColumn.DataGridView;
       if (grid != null)
       {
-        gridColumn.Width = ControlCommon5.TextUnitWidth(grid, calcLength
+        gridColumn.Width = ControlCommon.TextUnitWidth(grid, calcLength
           , capsCount);
       }
     }
@@ -551,19 +551,19 @@ namespace LJCControls5
       dragEvent.Effect = DragDropEffects.None;
 
       if (dragEvent.Data != null
-        && dragEvent.Data.GetDataPresent(typeof(LJCGridRow5)))
+        && dragEvent.Data.GetDataPresent(typeof(LJCGridRow)))
       {
         var targetIndex = LJCGetDragRowIndex(new Point(dragEvent.X, dragEvent.Y));
         if (targetIndex >= 0 && targetIndex < RowCount)
         {
-          if (dragEvent.Data.GetData(typeof(LJCGridRow5))
-            is LJCGridRow5 sourceRow)
+          if (dragEvent.Data.GetData(typeof(LJCGridRow))
+            is LJCGridRow sourceRow)
           {
             var dragDataName = sourceRow.LJCGetString("DragDataName");
             if (dragDataName != null
               && dragDataName == LJCDragDataName)
             {
-              if (Rows[targetIndex] is LJCGridRow5 targetRow
+              if (Rows[targetIndex] is LJCGridRow targetRow
                 && targetRow != sourceRow)
               {
                 if (targetRow != null)
@@ -644,7 +644,7 @@ namespace LJCControls5
     }
 
     // Sets the DragOver background.
-    private void SetDragOverBackground(LJCGridRow5? currentRow)
+    private void SetDragOverBackground(LJCGridRow? currentRow)
     {
       if (_PrevRow != null)
       {
@@ -698,8 +698,8 @@ namespace LJCControls5
 
     private Rectangle _DragStartBounds;
     private bool _IsDragStart;
-    private LJCGridRow5? _PrevRow;
-    private LJCGridRow5? _SourceRow;
+    private LJCGridRow? _PrevRow;
+    private LJCGridRow? _SourceRow;
     #endregion
   }
 }

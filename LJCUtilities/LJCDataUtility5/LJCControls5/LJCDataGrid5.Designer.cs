@@ -1,6 +1,6 @@
 ﻿namespace LJCControls5
 {
-  partial class LJCDataGrid5
+  partial class LJCDataGrid
   {
     /// <summary>
     /// Required designer variable.

@@ -1,7 +1,8 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// MainGridCode.cs
+// MainGridCode5.cs
 using LJCControls5;
+using LJCDataUtilityDAL5;
 using LJCNetCommon5;
 
 namespace LJCDataUtility5
@@ -42,6 +43,41 @@ namespace LJCDataUtility5
         // Setup the grid columns.
         MainGrid.LJCAddColumns(gridColumns);
       }
+    }
+    #endregion
+
+    #region Data Methods
+
+    internal void DataRetrieve()
+    {
+      ParentObject.Cursor = Cursors.WaitCursor;
+      MainGrid.LJCRowsClear();
+
+      ParentObject.Cursor = Cursors.Default;
+    }
+
+    //internal bool RowSelect(short dbId, long id)
+    //{
+    //}
+
+    //private LJCGridRow RowAdd(DataUtilTable data)
+    //{
+    //}
+
+    //private bool RowSelect(DataUtilTable data)
+    //{
+    //}
+
+    private void RowUpdate(DataUtilTable data)
+    {
+    }
+
+    private void SetControlState()
+    {
+    }
+
+    private void SetStoredValues(LJCGridRow row, DataUtilTable data)
+    {
     }
     #endregion
 
@@ -94,7 +130,7 @@ namespace LJCDataUtility5
 
     private Form1 ParentObject { get; set; }
 
-    private LJCDataGrid5 MainGrid { get; set; }
+    private LJCDataGrid MainGrid { get; set; }
     #endregion
   }
 }

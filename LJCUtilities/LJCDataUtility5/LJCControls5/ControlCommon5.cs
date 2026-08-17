@@ -7,7 +7,7 @@ namespace LJCControls5
   // Provides common WinForm control methods.
   /// <include file='Doc/ControlCommon5.xml'
   ///  path='members/ControlCommon5/*'/>
-  public class ControlCommon5
+  public class ControlCommon
   {
     // Use a supplied text and control font.
     /// <include file='Doc/ControlCommon5.xml'

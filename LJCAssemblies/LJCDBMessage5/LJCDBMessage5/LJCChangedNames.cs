@@ -1,9 +1,9 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ChangedNames.cs
+// LJCChangedNames.cs
 using LJCNetCommon5;
 
-namespace LJCDBClientLib5
+namespace LJCDBMessage5
 {
   // Contains the list of changed property names.
   /// <include path='items/ChangedNames/*' file='Doc/ProjectDBClientLib.xml'/>
