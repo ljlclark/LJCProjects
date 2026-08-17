@@ -1,12 +1,14 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCGridRow5.cs
-
 using LJCNetCommon5;
 using System.Data;
 
 namespace LJCControls5
 {
+  // Provides custom functionality for a DataGridViewRow control.
+  /// <include file='Doc/LJCGridRow5.xml'
+  ///  path='items/LJCGridRow5/*'/>
   public class LJCGridRow5 : DataGridViewRow
   {
     #region Constructors
@@ -257,6 +259,24 @@ namespace LJCControls5
     public void LJCSetString(string key, string value)
     {
       _StringStrings.TryAdd(key, value);
+    }
+
+    // Gets the stored short value using a short key.
+    /// <include file='Doc/LJCGridRow5.xml'
+    ///  path='members/LJCGetInt161/*'/>
+    public short LJCGetInt16(short key)
+    {
+      _ShortShorts.TryGetValue(key, out short retValue);
+      return retValue;
+    }
+
+    // Gets the stored short value using a string key.
+    /// <include file='Doc/LJCGridRow5.xml'
+    ///  path='members/LJCGetInt162/*'/>
+    public short LJCGetInt16(string key)
+    {
+      _StringShorts.TryGetValue(key, out short retValue);
+      return retValue;
     }
 
     // Gets the stored int value using an int key.

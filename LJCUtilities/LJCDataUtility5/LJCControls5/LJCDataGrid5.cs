@@ -1,26 +1,104 @@
-﻿using LJCNetCommon5;
+﻿// Copyright (c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// LJCDataGrid5.cs
+using LJCNetCommon5;
 using System.ComponentModel;
 using Timer = System.Windows.Forms.Timer;
 
 namespace LJCControls5
 {
+  // Provides custom functionality for a DataGridView control. (D)
+  /// <include file='Doc/LJCDataGrid5.xml'
+  ///  path='members/LJCDataGrid5/*'/>
   public partial class LJCDataGrid5 : DataGridView
   {
     #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../LJCUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/Constructor/*'/>
+    ///  path='members/Constructor1/*'/>
     public LJCDataGrid5()
     {
       InitializeComponent();
       LJCSetPlain();
       BackgroundColor = Color.AliceBlue;
+      LJCSetLastRow();
+      LJCDragDataName = "";
       _Timer = new Timer
       {
         Interval = 200
       };
       _Timer.Tick += Timer_Tick;
+    }
+
+    // Initializes an object instance and adds it to a container.
+    /// <include file='Doc/LJCDataGrid5.xml'
+    ///  path='members/Constructor2/*'/>
+    public LJCDataGrid5(IContainer container) : this()
+    {
+      container.Add(this);
+    }
+    #endregion
+
+    #region Row Data Methods
+
+    // Clears the rows without allowing SelectionChange.
+    /// <include file='Doc/LJCDataGrid5.xml'
+    ///  path='members/LJCRowsClear/*'/>
+    public void LJCRowsClear()
+    {
+      LJCAllowSelectionChange = false;
+      Rows.Clear();
+      LJCAllowSelectionChange = true;
+    }
+
+    // Adds a GridRow control to the grid. 
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='members/LJCRowAdd/*'/>
+    public LJCGridRow5? LJCRowAdd()
+    {
+      LJCGridRow5? retValue;
+      int index;
+
+      retValue = new LJCGridRow5();
+      LJCAllowSelectionChange = false;
+      index = Rows.Add(retValue);
+      LJCAllowSelectionChange = true;
+      retValue = Rows[index] as LJCGridRow5;
+
+      // Create minimum height;
+      if (retValue != null)
+      {
+        retValue.Height = LJCRowHeight;
+        if (retValue.Height < Font.Height + 4)
+        {
+          retValue.Height = Font.Height + 4;
+        }
+        if (retValue.Height < 18)
+        {
+          retValue.Height = 18;
+        }
+      }
+      return retValue;
+    }
+
+    // Inserts a GridRow control into the grid. 
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='members/LJCRowInsert/*'/>
+    public LJCGridRow5? LJCRowInsert(int index)
+    {
+      LJCGridRow5? retValue;
+
+      retValue = new LJCGridRow5();
+      Rows.Insert(index, retValue);
+      retValue = Rows[index] as LJCGridRow5;
+
+      // Create minimum height;
+      if (retValue != null)
+      {
+        retValue.Height = Font.Height + 4;
+      }
+      return retValue;
     }
     #endregion
 
@@ -58,22 +136,11 @@ namespace LJCControls5
     }
     #endregion
 
-    #region Row Data Methods
-
-    // Clears the rows without allowing SelectionChange.
-    /// <include file='Doc/LJCDataGrid5.xml'
-    ///  path='members/LJCRowsClear/*'/>
-    public void LJCRowsClear()
-    {
-      LJCAllowSelectionChange = false;
-      Rows.Clear();
-      LJCAllowSelectionChange = true;
-    }
-    #endregion
-
     #region Row Get Methods
 
-    ///<summary>Returns the current or first row.</summary>
+    // Returns the current or first row.
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='members/LJCGetCurrentRow/*'/>
     public LJCGridRow5? LJCGetCurrentRow()
     {
       if (null == CurrentRow
@@ -85,9 +152,21 @@ namespace LJCControls5
       return retValue;
     }
 
+    // Retrieves the row for a DragOver or DragDrop event.
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='members/LJCGetDragRowIndex/*'/>
+    public int LJCGetDragRowIndex(Point dragPoint)
+    {
+      int retValue;
+
+      var adjustPoint = PointToClient(dragPoint);
+      retValue = LJCGetMouseRowIndex(adjustPoint.X, adjustPoint.Y);
+      return retValue;
+    }
+
     // Gets the row at the cursor location.
     /// <include file='Doc/LJCDataGrid5.xml'
-    ///  path='items/LJCGetMouseRow/*'/>
+    ///  path='members/LJCGetMouseRow/*'/>
     public LJCGridRow5? LJCGetMouseRow(int x, int y)
     {
       LJCGridRow5? retValue = null;
@@ -102,7 +181,7 @@ namespace LJCControls5
 
     // Retrieves the row where the mouse was clicked
     /// <include file='Doc/LJCDataGrid5.xml'
-    ///  path='items/LJCGetMouseRow1/*'/>
+    ///  path='members/LJCGetMouseRow1/*'/>
     public LJCGridRow5? LJCGetMouseRow(MouseEventArgs e)
     {
       LJCGridRow5? retValue = null;
@@ -147,7 +226,7 @@ namespace LJCControls5
 
     // Sets the current row to the mouse row.
     /// <include file='Doc/LJCDataGrid5.xml'
-    ///  path='items/LJCSetMouseCurrentRow/*'/>
+    ///  path='members/LJCSetMouseCurrentRow/*'/>
     public void LJCSetCurrentRow(MouseEventArgs e
       , bool allowSelectionChange = false)
     {
@@ -159,7 +238,7 @@ namespace LJCControls5
 
     // Sets the current row.
     /// <include file='Doc/LJCDataGrid5.xml'
-    ///  path='items/LJCSetCurrentRow1/*'/>
+    ///  path='members/LJCSetCurrentRow1/*'/>
     public void LJCSetCurrentRow(DataGridViewRow row
       , bool allowSelectionChange = false)
     {
@@ -171,7 +250,7 @@ namespace LJCControls5
 
     // Sets the current row to the specified index.
     /// <include file='Doc/LJCDataGrid5.xml'
-    ///  path='items/LJCSetCurrentRow2/*'/>
+    ///  path='members/LJCSetCurrentRow2/*'/>
     public void LJCSetCurrentRow(int rowIndex, bool allowSelectionChange = false)
     {
       if (Rows[rowIndex] is DataGridViewRow row)
@@ -186,7 +265,7 @@ namespace LJCControls5
 
     // Compares the current row against the last selected row.
     /// <include file='Doc/LJCDataGrid5.xml'
-    ///  path='items/LJCIsDifferentRow/*'/>
+    ///  path='members/LJCIsDifferentRow/*'/>
     public bool LJCIsDifferentRow(MouseEventArgs e)
     {
       bool retValue = false;
@@ -204,7 +283,7 @@ namespace LJCControls5
 
     // Saves the last selected row index.
     /// <include file='Doc/LJCDataGrid5.xml'
-    ///  path='items/LJCSetLastRow/*'/>
+    ///  path='members/LJCSetLastRow/*'/>
     public void LJCSetLastRow(LJCGridRow5? row = null)
     {
       if (row != null)
@@ -440,24 +519,187 @@ namespace LJCControls5
     }
     #endregion
 
+    #region DragDrop Event Handlers
+
+    // The OnDragDrop event method.
+    /// <include file='Doc/LJCDataGrid5.xml'
+    ///  path='members/OnDragDrop/*'/>
+    protected override void OnDragDrop(DragEventArgs drgevent)
+    {
+      base.OnDragDrop(drgevent);
+
+      SetDragOverBackground(null);
+    }
+
+    // The OnDragLeave event method.
+    /// <include file='Doc/LJCDataGrid5.xml'
+    ///  path='members/OnDragLeave/*'/>
+    protected override void OnDragLeave(EventArgs e)
+    {
+      base.OnDragLeave(e);
+
+      SetDragOverBackground(null);
+    }
+
+    // The OnDragOver event method.
+    /// <include file='Doc/LJCDataGrid5.xml'
+    ///  path='members/OnDragOver/*'/>
+    protected override void OnDragOver(DragEventArgs dragEvent)
+    {
+      base.OnDragOver(dragEvent);
+
+      dragEvent.Effect = DragDropEffects.None;
+
+      if (dragEvent.Data != null
+        && dragEvent.Data.GetDataPresent(typeof(LJCGridRow5)))
+      {
+        var targetIndex = LJCGetDragRowIndex(new Point(dragEvent.X, dragEvent.Y));
+        if (targetIndex >= 0 && targetIndex < RowCount)
+        {
+          if (dragEvent.Data.GetData(typeof(LJCGridRow5))
+            is LJCGridRow5 sourceRow)
+          {
+            var dragDataName = sourceRow.LJCGetString("DragDataName");
+            if (dragDataName != null
+              && dragDataName == LJCDragDataName)
+            {
+              if (Rows[targetIndex] is LJCGridRow5 targetRow
+                && targetRow != sourceRow)
+              {
+                if (targetRow != null)
+                {
+                  SetDragOverBackground(targetRow);
+                  dragEvent.Effect = DragDropEffects.Move;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // The OnMouseDown event method.
+    /// <include file='Doc/LJCDataGrid5.xml'
+    ///  path='members/OnMouseDown/*'/>
+    protected override void OnMouseDown(MouseEventArgs e)
+    {
+      base.OnMouseDown(e);
+
+      if (e.Button == MouseButtons.Left)
+      {
+        if (LJCAllowDrag)
+        {
+          // Initializes the drag and drop values.
+          _SourceRow = LJCGetMouseRow(e.X, e.Y);
+          if (_SourceRow != null)
+          {
+            _IsDragStart = true;
+            _DragStartBounds = CreateDragStartBounds(e.X, e.Y, 8, 6);
+            _SourceRow.LJCSetString("DragDataName", LJCDragDataName);
+          }
+        }
+      }
+    }
+
+    // The OnMouseMove event method.
+    /// <include file='Doc/LJCDataGrid5.xml'
+    ///  path='members/OnMouseMove/*'/>
+    protected override void OnMouseMove(MouseEventArgs e)
+    {
+      base.OnMouseMove(e);
+
+      if (LJCAllowDrag)
+      {
+        // Starts the drag operation if the mouse moves outside
+        // the drag start bounds.
+        var mousePoint = new Point(e.X, e.Y);
+        if (_IsDragStart
+          && _SourceRow != null
+          && _DragStartBounds.Contains(mousePoint) == false)
+        {
+          _IsDragStart = false;
+          DoDragDrop(_SourceRow, DragDropEffects.Move);
+        }
+      }
+    }
+
+    // The OnMouseUp event method.
+    /// <include file='Doc/LJCDataGrid5.xml'
+    ///  path='members/OnMouseUp/*'/>
+    protected override void OnMouseUp(MouseEventArgs e)
+    {
+      base.OnMouseUp(e);
+
+      // Reset the drag start flag.
+      _IsDragStart = false;
+    }
+
+    // Creates a bounding rectangle to determine if the move operation should start.
+    private static Rectangle CreateDragStartBounds(int x, int y, int width, int height)
+    {
+      Rectangle retVal;
+
+      retVal = new Rectangle(x - (width / 2), y - (width / 2), width, height);
+      return retVal;
+    }
+
+    // Sets the DragOver background.
+    private void SetDragOverBackground(LJCGridRow5? currentRow)
+    {
+      if (_PrevRow != null)
+      {
+        _PrevRow.DefaultCellStyle.BackColor = Color.White;
+      }
+      if (currentRow != null)
+      {
+        _PrevRow = currentRow;
+        var color = Color.FromArgb(0xe0, 0xe8, 0xee);
+        currentRow.DefaultCellStyle.BackColor = color;
+      }
+    }
+    #endregion
+
     #region Properties
 
+    // Gets or sets the allow drag indicator.
+    /// <include file='Doc/LJCDataGrid5.xml'
+    ///  path='members/LJCAllowDrag/*'/>
+    [DefaultValue(false)]
+    public bool LJCAllowDrag { get; set; }
+
     // Gets or sets the allow SelectionChange indicator.
-    [Browsable(false)]
     /// <include file='Doc/LJCDataGrid5.xml'
     ///  path='members/LJCAllowSelectionChange/*'/>
+    [Browsable(false)]
     public bool LJCAllowSelectionChange { get; set; }
+
+    // Gets or sets the drag data name.
+    /// <include file='Doc/LJCDataGrid5.xml'
+    ///  path='members/LJCDragDataName/*'/>
+    [Browsable(false)]
+    public string LJCDragDataName { get; set; }
 
     // The last changed row index.
     /// <include file='Doc/LJCDataGrid5.xml'
     ///  path='members/LJCLastRowIndex/*'/>
     [Browsable(false)]
     public int LJCLastRowIndex { get; set; }
+
+    // Gets or sets the Row Height value.
+    /// <include file='Doc/LJCDataGrid5.xml'
+    ///  path='members/LJCRowHeight/*'/>
+    [DefaultValue(18)]
+    public int LJCRowHeight { get; set; }
     #endregion
 
     #region Class Data
 
     private readonly Timer _Timer;
+
+    private Rectangle _DragStartBounds;
+    private bool _IsDragStart;
+    private LJCGridRow5? _PrevRow;
+    private LJCGridRow5? _SourceRow;
     #endregion
   }
 }
