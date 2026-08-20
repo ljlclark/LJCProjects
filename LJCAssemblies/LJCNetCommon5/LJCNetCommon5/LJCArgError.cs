@@ -67,6 +67,25 @@ namespace LJCNetCommon5
     {
       mMessage += message;
     }
+
+    // Checks the ID values.
+    /// <include file="Doc/LJCArgError.xml"
+    ///  path="members/Add2/*"/>
+    /// <parentGroup>methods</parentGroup>
+    public void IDCheck(short dbId, long id)
+    {
+      string message = "";
+      if (dbId <= 0)
+      {
+        message += "dbId must be greater than zero.\r\n";
+      }
+      if (id <= 0)
+      {
+        message += "id must be greater than zero.\r\n";
+      }
+      Add(message);
+      LJCNetString.ThrowArgError(ToString());
+    }
     #endregion
 
     #region Properties

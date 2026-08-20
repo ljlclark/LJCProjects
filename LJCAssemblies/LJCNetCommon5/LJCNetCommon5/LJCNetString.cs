@@ -605,7 +605,7 @@ namespace LJCNetCommon5
     // Throws an ArgumentException if the provided message has a value.
     /// <include file='Doc/LJCNetString.xml'
     ///  path='members/ThrowArgError/*'/>
-    public static void ThrowArgError(string message)
+    public static void ThrowArgError(string? message)
     {
       if (LJC.HasText(message))
       {

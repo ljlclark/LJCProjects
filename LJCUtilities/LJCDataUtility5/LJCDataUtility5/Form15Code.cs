@@ -41,7 +41,7 @@ namespace LJCDataUtility5
     // Setup the data grids.
     private void SetupGrids()
     {
-      MainGridCode.SetupGrid();
+      TableGridCode.SetupGrid();
     }
     #endregion
 

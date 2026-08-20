@@ -38,10 +38,8 @@ namespace LJCDataUtility5
       Managers = new ManagersDataUtility(dataConfigName);
       // *** End ***
 
-      TableGridCode = new DataTableGridCode(this);
-
       // Setup control code.
-      MainGridCode = new DataTableGridCode(this);
+      TableGridCode = new DataTableGridCode(this);
     }
 
     private void Form1_Load(object sender, EventArgs e)
@@ -49,11 +47,9 @@ namespace LJCDataUtility5
       InitializeControls();
 
       // Testing
-      MainGridCode.DataRetrieve();
+      TableGridCode.DataRetrieve();
 
       CenterToScreen();
     }
-
-    private DataTableGridCode MainGridCode { get; set; }
   }
 }
