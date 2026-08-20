@@ -42,8 +42,8 @@ namespace LJCDBClientLib5
       DataConfigName = dataConfigName;
       TableName = tableName;
 
-      LJC.CheckArgument<string>(dataConfigName);
-      LJC.CheckArgument<string>(tableName);
+      LJC.CheckArgument<string>(dataConfigName, "dataConfigName");
+      LJC.CheckArgument<string>(tableName, "tableName");
 
       var dataConfigs = new LJCDataConfigs();
       dataConfigs.LoadData();
@@ -81,7 +81,7 @@ namespace LJCDBClientLib5
     ///  path='items/Add/*'/>
     public DataTable? Add(object dataObject, List<string>? propertyNames = null)
     {
-      LJC.CheckArgument(dataObject);
+      LJC.CheckArgument(dataObject, "dataObject");
       DataTable? retTable = null;
 
       // The record must not contain a value for DB Assigned columns.
@@ -133,7 +133,7 @@ namespace LJCDBClientLib5
     public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string>? propertyNames = null, LJCDBFilters? filters = null)
     {
-      LJC.CheckArgument<object>(dataObject);
+      LJC.CheckArgument<object>(dataObject, "dataObject");
 
       SQLStatement = CreateUpdateSQL(dataObject, keyColumns, propertyNames
         , filters);

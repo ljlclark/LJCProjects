@@ -17,7 +17,7 @@ namespace LJCDataUtility
   // Provides DataTableGrid methods for the DataUtilityList window.
   internal class DataTableGridCode
   {
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     internal DataTableGridCode(DataUtilityList parentObject)

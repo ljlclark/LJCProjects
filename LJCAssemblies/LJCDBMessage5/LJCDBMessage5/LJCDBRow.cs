@@ -89,7 +89,8 @@ namespace LJCDBMessage5
         LJCDataValue? retValue = null;
         if (null != Values)
         {
-          retValue = Values.LJCSearchPropertyName(propertyName);
+          //retValue = Values.LJCSearchPropertyName(propertyName);
+          retValue = Values[propertyName];
         }
         return retValue;
       }

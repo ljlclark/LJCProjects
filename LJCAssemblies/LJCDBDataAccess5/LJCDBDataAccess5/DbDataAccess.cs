@@ -411,7 +411,8 @@ namespace LJCDBDataAccess5
           && LJC.HasListItems(dbRequest.Columns))
         {
           // Add TABLE_NAME if it is not already defined.
-          var dataColumn = dbRequest.Columns.LJCSearchPropertyName("TABLE_NAME");
+          //var dataColumn = dbRequest.Columns.LJCSearchPropertyName("TABLE_NAME");
+          var dataColumn = dbRequest.Columns["TABLE_NAME"];
           if (null == dataColumn)
           {
             dbRequest.Columns.Add("TABLE_NAME");
@@ -479,6 +480,8 @@ namespace LJCDBDataAccess5
       LJCDataConfig dataConfig = GetLJCDataConfig(dataConfigName);
       DatabaseName = dataConfig.Database;
       ConnectionString = dataConfig.ConnectionString(dataConfig.ConnectionType);
+      // ?
+      ConnectionString += ";TrustServerCertificate=True;";
       mDataAccess.ConnectionString = ConnectionString;
       ProviderName = LJCDataConfig.ProviderName(dataConfig.ConnectionType);
     }
@@ -497,8 +500,9 @@ namespace LJCDBDataAccess5
         {
           foreach (DataColumn dataColumn in dataTable.Columns)
           {
-            var foundDataColumn
-              = dbRequest.Columns.LJCSearchPropertyName(dataColumn.ColumnName);
+            //var foundDataColumn
+            //  = dbRequest.Columns.LJCSearchPropertyName(dataColumn.ColumnName);
+            var foundDataColumn = dbRequest.Columns[dataColumn.ColumnName];
             if (null == foundDataColumn)
             {
               var newDataColumn = CreateDataColumnFromDbColumn(dataColumn);

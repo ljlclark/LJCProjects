@@ -151,12 +151,12 @@ namespace LJCDBMessage5
         retColumns = Columns.Clone();
         if (propertyNames != null)
         {
-          retColumns = Columns.LJCGetColumns(propertyNames);
+          retColumns = Columns.LJCColumns(propertyNames);
           if (Joins != null)
           {
             foreach (var dbJoin in Joins)
             {
-              retColumns = dbJoin.Columns.LJCGetColumns(propertyNames);
+              retColumns = dbJoin.Columns.LJCColumns(propertyNames);
               if (LJC.HasListItems(retColumns))
               {
                 foreach (var column in retColumns)

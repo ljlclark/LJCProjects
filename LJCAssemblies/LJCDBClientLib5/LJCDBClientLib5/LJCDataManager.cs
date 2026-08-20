@@ -460,7 +460,8 @@ namespace LJCDBClientLib5
         //};
         DataDefinition =
         [
-          new LJCDataColumn("TABLE_NAME", propertyName: "Name")
+          //new LJCDataColumn("TABLE_NAME", propertyName: "Name")
+          new LJCDataColumn("TABLE_NAME", columnName: "Name")
         ];
       }
 
@@ -469,7 +470,7 @@ namespace LJCDBClientLib5
       if (DataDefinition != null)
       {
         var propertyNames = new List<string>() { "Name" };
-        includedColumns = DataDefinition.LJCGetColumns(propertyNames);
+        includedColumns = DataDefinition.LJCColumns(propertyNames);
         Request.Columns = includedColumns?.Clone();
       }
       if (Request != null)
@@ -538,7 +539,8 @@ namespace LJCDBClientLib5
       DbAssignedColumns = [];
       foreach (string propertyName in propertyNames)
       {
-        LJCDataColumn? dataColumn = BaseDefinition.LJCSearchPropertyName(propertyName);
+        //LJCDataColumn? dataColumn = BaseDefinition.LJCSearchPropertyName(propertyName);
+        LJCDataColumn? dataColumn = BaseDefinition[propertyName];
         if (null == dataColumn)
         {
           throw new MissingMemberException($"Column '{propertyName}' was not found.");

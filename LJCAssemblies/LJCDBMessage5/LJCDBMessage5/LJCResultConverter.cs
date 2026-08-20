@@ -168,14 +168,22 @@ namespace LJCDBMessage5
 
       if (propertyMapping != null)
       {
-        dataColumn = propertyMapping?.LJCSearchRenameAs(columnName);
+        // *** Begin *** Add
+        var keys = new LJCDataColumns()
+        {
+          { "RenameAs", columnName },
+        };
+        // *** End ***
+        //dataColumn = propertyMapping?.LJCSearchRenameAs(columnName);
+        propertyMapping.LJCKeys = keys;
+        dataColumn = propertyMapping.LJCGetUnique();
         if (dataColumn != null)
         {
           retValue = dataColumn.PropertyName;
         }
         else
         {
-          dataColumn = propertyMapping?.LJCSearchColumnName(columnName);
+          dataColumn = propertyMapping[columnName];
           if (dataColumn != null)
           {
             retValue = dataColumn.PropertyName;

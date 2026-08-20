@@ -27,7 +27,7 @@ namespace LJCDBMessage5
       }
       else
       {
-        requestColumns = dataColumns.LJCGetColumns(propertyNames);
+        requestColumns = dataColumns.LJCColumns(propertyNames);
       }
       if (requestColumns != null)
       {
@@ -217,7 +217,8 @@ namespace LJCDBMessage5
 
       // Get column definition by column name.
       var searchName = LJCNetString.GetSearchName(keyColumn.ColumnName);
-      retValue = dataColumns.LJCSearchColumnName(searchName);
+      //retValue = dataColumns.LJCSearchColumnName(searchName);
+      retValue = dataColumns[searchName];
       if (retValue != null)
       {
         // Create key column with original name.

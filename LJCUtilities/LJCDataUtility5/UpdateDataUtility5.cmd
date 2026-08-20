@@ -1,7 +1,7 @@
 echo off
 rem Copyright (c) Lester J. Clark and Contributors.
 rem Licensed under the MIT License.
-rem UpdateDBClient5.cmd
+rem UpdateDataUtility5.cmd
 
 if exist SubFolders2.cmd goto BuildAll
 rem *** Called from solution folder. ***
@@ -15,8 +15,7 @@ goto Process:
 rem *** Called from line root folder UpdateAll.cmd. ***
 rem *** Sets the solution group folder values. ***
 call SubFolders2.cmd %1%
-rem set toRoot=%util%\LJCDBClient5\
-set toRoot=%assm%\LJCDBClientLib5\
+set toRoot=%util%\LJCDataUtility5\
 rem *** Sets the "to" value as External and creates folder. ***
 call TargetFolders.cmd
 :Process
@@ -39,25 +38,30 @@ set src=%assmRoot%LJCDataAccess5\LJCDataAccess5\%bin%
 echo copy %src%\LJCDataAccess5.dll %to%
 copy %src%\LJCDataAccess5.dll %to%
 
+set src=%assmRoot%LJCDBMessage5\LJCDBMessage5\%bin%
+echo copy %src%\LJCDBMessage5.dll %to%
+copy %src%\LJCDBMessage5.dll %to%
+
+set src=%assmRoot%LJCDBMessage5\LJCCipherLib5\%bin%
+echo copy %src%\LJCCipherLib5.dll %to%
+copy %src%\LJCCipherLib5.dll %to%
+
 set src=%assmRoot%LJCDBDataAccess5\LJCDBDataAccess5\%bin%
 echo copy %src%\LJCDBDataAccess5.dll %to%
 copy %src%\LJCDBDataAccess5.dll %to%
 
-set src=%assmRoot%LJCDBMessage5\LJCDBMessage5\%bin%
-echo copy %src%\LJCDBMessage5.dll %to%
-copy %src%\LJCDBMessage5.dll %to%
+set src=%assmRoot%LJCDBClientLib5\LJCDBClientLib5\%bin%
+echo copy %src%\LJCDBClientLib5.dll %to%
+copy %src%\LJCDBClientLib5.dll %to%
 
 rem *****************************
 rem *** Runtime-only Binaries ***
 
 rem ---------------------------
-set to=%toRoot%LJCDBClientLib5\%bin%
+set tobin=%bin%-windows
+set to=%toRoot%LJCDataUtility5\%tobin%
 echo.
 echo *** %to% ***
-
-rem set src=%assmRoot%LJCDBMessage\CipherLib\%bin%
-rem echo copy %src%\CipherLib.dll %to%
-rem copy %src%\CipherLib.dll %to%
 
 if %mainRoot%. == . goto End
 if %1%. == nopause. goto End

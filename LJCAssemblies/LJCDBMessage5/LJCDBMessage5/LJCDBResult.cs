@@ -34,7 +34,7 @@ namespace LJCDBMessage5
         DataTypeName = adoColumn.DataType.Name,
         MaxLength = adoColumn.MaxLength,
         PropertyName = adoColumn.ColumnName,
-        Unique = adoColumn.Unique
+        IsUniqueKey = adoColumn.Unique
       };
       return retValue;
     }
@@ -101,7 +101,8 @@ namespace LJCDBMessage5
         retValue = [];
         foreach (LJCDataValue dataValue in dataValues)
         {
-          findColumn = dataColumns.LJCSearchPropertyName(dataValue.PropertyName);
+          //findColumn = dataColumns.LJCSearchPropertyName(dataValue.PropertyName);
+          findColumn = dataColumns[dataValue.PropertyName];
           if (findColumn != null)
           {
             var dataColumn = new LJCDataColumn()

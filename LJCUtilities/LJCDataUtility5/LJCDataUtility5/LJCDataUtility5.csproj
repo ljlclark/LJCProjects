@@ -6,9 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.11" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LJCControls5\LJCControls5.csproj" />
@@ -16,6 +19,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="LJCCipherLib5">
+      <HintPath>..\External\LJCCipherLib5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDataAccess5">
+      <HintPath>..\External\LJCDataAccess5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDataAccessConfig5">
+      <HintPath>..\External\LJCDataAccessConfig5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBClientLib5">
+      <HintPath>..\External\LJCDBClientLib5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBDataAccess5">
+      <HintPath>..\External\LJCDBDataAccess5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBMessage5">
+      <HintPath>..\External\LJCDBMessage5.dll</HintPath>
+    </Reference>
     <Reference Include="LJCNetCommon5">
       <HintPath>..\External\LJCNetCommon5.dll</HintPath>
     </Reference>

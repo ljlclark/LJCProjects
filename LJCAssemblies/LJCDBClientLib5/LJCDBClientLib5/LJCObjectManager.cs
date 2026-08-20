@@ -223,7 +223,7 @@ namespace LJCDBClientLib5
       LJCDataColumns? retColumns = null;
       if (LJC.HasListItems(DataManager.DataDefinition))
       {
-        retColumns = DataManager.DataDefinition.LJCGetColumns(propertyNames);
+        retColumns = DataManager.DataDefinition.LJCColumns(propertyNames);
       }
       return retColumns;
     }
