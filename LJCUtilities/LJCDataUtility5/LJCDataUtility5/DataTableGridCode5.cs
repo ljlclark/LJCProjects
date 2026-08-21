@@ -66,8 +66,8 @@ namespace LJCDataUtility5
       //var moduleDbID = ljcItem.DbID;
       //var moduleID = ljcItem.ID;
       // Testing
-      var moduleDbId = 1;
-      short moduleId = 1;
+      short moduleDbId = 1;
+      var moduleId = 1;
 
       if (moduleDbId > 0
         && moduleId > 0)

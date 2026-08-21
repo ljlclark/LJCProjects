@@ -16,24 +16,30 @@ namespace LJCDBClientLib5
   {
     #region Constructors
 
+    public LJCDataManager()
+    {
+      BaseDefinition = [];
+      DataDefinition = [];
+      LookupColumnNames = [];
+      _DataConfigName = "";
+      _RequestCipherItems = new CipherItems();
+      _ResponseCipherItems = new CipherItems();
+      _RequestInsertItems = [];
+      _RequestSendCipher = new SendCipher();
+      _ResponseSendCipher = new SendCipher();
+      _SchemaName = "";
+      OrderByNames = [];
+    }
+
     // Initializes an object instance.
     /// <include file='Doc/DataManager.xml'
     ///  path='items/DataManagerC1/*'/>
     public LJCDataManager(LJCDbServiceRef? dbServiceRef, string dataConfigName
       , string? tableName = null, string? schemaName = null
-      , bool? useEncryption = true)
+      , bool? useEncryption = true) : this()
     {
       // Initialize required properties.
-      BaseDefinition = [];
-      LookupColumnNames = [];
-      mDataConfigName = dataConfigName;
-      mRequestCipherItems = new CipherItems();
-      mResponseCipherItems = new CipherItems();
-      mRequestInsertItems = [];
-      mRequestSendCipher = new SendCipher();
-      mResponseSendCipher = new SendCipher();
-      mSchemaName = "";
-      OrderByNames = [];
+      _DataConfigName = dataConfigName;
 
       Reset(dbServiceRef, dataConfigName, tableName, schemaName
         , useEncryption);
@@ -43,19 +49,10 @@ namespace LJCDBClientLib5
     /// <include file='Doc/DataManager.xml'
     ///  path='items/DataManagerC2/*'/>
     public LJCDataManager(string dataConfigName, string? tableName = null
-      , string? schemaName = null, bool? useEncryption = true)
+      , string? schemaName = null, bool? useEncryption = true) : this()
     {
       // Initialize required properties.
-      BaseDefinition = [];
-      LookupColumnNames = [];
-      mDataConfigName = dataConfigName;
-      mRequestCipherItems = new CipherItems();
-      mResponseCipherItems = new CipherItems();
-      mRequestInsertItems = [];
-      mRequestSendCipher = new SendCipher();
-      mResponseSendCipher = new SendCipher();
-      mSchemaName = "";
-      OrderByNames = [];
+      _DataConfigName = dataConfigName;
 
       Reset(null, dataConfigName, tableName, schemaName, useEncryption);
     }
@@ -105,7 +102,11 @@ namespace LJCDBClientLib5
       if (DbServiceRef != null
         && LJC.HasText(TableName))
       {
-        DataDefinition = CreateBaseDefinition();
+        var dataDefinition = CreateBaseDefinition();
+        if (dataDefinition != null)
+        {
+          DataDefinition = dataDefinition;
+        }
       }
     }
     #endregion
@@ -532,7 +533,8 @@ namespace LJCDBClientLib5
     }
 
     // Sets the database assigned value column names. 
-    /// <include path='items/SetDbAssignedColumns/*' file='Doc/DataManager.xml'/>
+    /// <include file='Doc/DataManager.xml'
+    ///  path='items/SetDbAssignedColumns/*'/>
     public void SetDbAssignedColumns(string[] propertyNames)
     {
       //DbAssignedColumns = new LJCDataColumns();
@@ -646,18 +648,18 @@ namespace LJCDBClientLib5
     // Decrypt Response Cipher
     private string GetIncommingText(byte[] responseSendCipher)
     {
-      var responseInsertItems = mResponseCipherItems.CreateReceivedItems(responseSendCipher);
-      mResponseSendCipher.SetInsertItems(responseInsertItems);
-      byte[] responseCipher = mResponseSendCipher.SendCipherToCipher(responseSendCipher);
-      var retValue = mResponseCipherItems.CreatePlainText(responseCipher);
+      var responseInsertItems = _ResponseCipherItems.CreateReceivedItems(responseSendCipher);
+      _ResponseSendCipher.SetInsertItems(responseInsertItems);
+      byte[] responseCipher = _ResponseSendCipher.SendCipherToCipher(responseSendCipher);
+      var retValue = _ResponseCipherItems.CreatePlainText(responseCipher);
       return retValue;
     }
 
     // Encrypt Request Cipher
     private byte[] GetOutgoingCipher(string plainText)
     {
-      byte[] cipher = mRequestCipherItems.CreateCipher(plainText);
-      byte[] retValue = mRequestSendCipher.GetSendCipher(cipher);
+      byte[] cipher = _RequestCipherItems.CreateCipher(plainText);
+      byte[] retValue = _RequestSendCipher.GetSendCipher(cipher);
       return retValue;
     }
     #endregion
@@ -676,21 +678,21 @@ namespace LJCDBClientLib5
     /// <summary>Gets or sets the data configuration name.</summary>
     public string DataConfigName
     {
-      get => mDataConfigName;
+      get => _DataConfigName;
       private set
       {
         if (value != null)
         {
-          mDataConfigName = value.Trim();
+          _DataConfigName = value.Trim();
         }
       }
     }
-    private string mDataConfigName;
+    private string _DataConfigName;
 
     // Gets or sets a reference to the Data Definition columns collection.
     /// <include file='Doc/DataManager.xml'
     ///  path='items/DataDefinition/*'/>
-    public LJCDataColumns? DataDefinition { get; set; }
+    public LJCDataColumns DataDefinition { get; set; }
 
     /// <summary>Gets or sets the Database assigned columns.</summary>
     public LJCDataColumns? DbAssignedColumns { get; set; }
@@ -701,16 +703,16 @@ namespace LJCDBClientLib5
     /// <summary>The Schema name.</summary>
     public string SchemaName
     {
-      get => mSchemaName;
+      get => _SchemaName;
       set
       {
         if (value != null)
         {
-          mSchemaName = value.Trim();
+          _SchemaName = value.Trim();
         }
       }
     }
-    private string mSchemaName;
+    private string _SchemaName;
 
     /// <summary>Gets or sets the last SQL statement.</summary>
     public string? SQLStatement { get; set; }
@@ -718,16 +720,16 @@ namespace LJCDBClientLib5
     /// <summary>The primary table name.</summary>
     public string? TableName
     {
-      get => mTableName;
+      get => _TableName;
       set
       {
         if (value != null)
         {
-          mTableName = value;
+          _TableName = value;
         }
       }
     }
-    private string? mTableName;
+    private string? _TableName;
     #endregion
 
     #region Other Properties
@@ -755,11 +757,11 @@ namespace LJCDBClientLib5
 
     #region Class Data
 
-    private readonly CipherItems mResponseCipherItems;
-    private readonly SendCipher mResponseSendCipher;
-    private readonly CipherItems mRequestCipherItems;
-    private readonly InsertItems mRequestInsertItems;
-    private readonly SendCipher mRequestSendCipher;
+    private readonly CipherItems _ResponseCipherItems;
+    private readonly SendCipher _ResponseSendCipher;
+    private readonly CipherItems _RequestCipherItems;
+    private readonly InsertItems _RequestInsertItems;
+    private readonly SendCipher _RequestSendCipher;
     #endregion
   }
 }
