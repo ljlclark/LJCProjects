@@ -1,0 +1,539 @@
+﻿// Copyright (c) Lester J.Clark and Contributors.
+// Licensed under the MIT License.
+// DataKey5.cs
+using LJCDBMessage5;
+using LJCNetCommon5;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
+
+namespace LJCDataUtilityDAL5
+{
+  // The DataKey data.
+  /// <include file='Doc/DataKey.xml'
+  ///  path='members/DataKey/*'/>
+  public class DataKey : IComparable<DataKey>
+  {
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
+    public DataKey()
+    {
+      _DbId = 0;
+      _Id = 0;
+      _DataTableDbId = 0;
+      _DataTableId = 0;
+      _Name = "";
+      _KeyType = 0;
+
+      _IsClustered = false;
+      _IsAscending = false;
+      _SourceColumnName = "";
+      _TargetTableName = null;
+      _TargetColumnName = null;
+      DataTableName = null;
+
+      ChangedNames = [];
+      _OriginalValues = new OriginalValues();
+      LJCSetOriginalValues();
+    }
+
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/DataKey.xml'
+    ///  path='members/ParamConstructor/*'/>
+    public DataKey(string name) : this()
+    {
+      _Name = name;
+    }
+
+    // The Copy constructor.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/CopyConstructor/*'/>
+    public DataKey(DataKey item)
+    {
+      _DbId = item.DbId;
+      _Id = item.Id;
+      _DataTableDbId = item.DataTableDbId;
+      _DataTableId = item.DataTableId;
+      _Name = item.Name;
+      _KeyType = item.KeyType;
+
+      _IsClustered = item.IsClustered;
+      _IsAscending = item.IsAscending;
+      _SourceColumnName = item.SourceColumnName;
+      _TargetTableName = item.TargetTableName;
+      _TargetColumnName = item.TargetColumnName;
+      DataTableName = item.DataTableName;
+
+      ChangedNames = item.ChangedNames;
+      _OriginalValues = new OriginalValues();
+      LJCSetOriginalValues();
+    }
+    #endregion
+
+    #region Data Object Methods
+
+    // Creates and returns a clone of this object.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
+    public DataKey? Clone()
+    {
+      var retValue = MemberwiseClone() as DataKey;
+      return retValue;
+    }
+
+    // Provides the default Sort functionality.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/CompareTo/*'/>
+    public int CompareTo(DataKey? other)
+    {
+      int retValue;
+
+      while (true)
+      {
+        if (null == other)
+        {
+          // This object is greater than null.
+          retValue = LJCNetString.CompareGreater;
+          break;
+        }
+
+        retValue = DbId.CompareTo(other.DbId);
+        if (retValue != LJCNetString.CompareEqual)
+        {
+          break;
+        }
+
+        retValue = Id.CompareTo(other.Id);
+        break;
+      }
+      return retValue;
+    }
+
+    // Initializes the original values.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/LJCSetOriginalValues/*'/>
+    public void LJCSetOriginalValues()
+    {
+      _OriginalValues.DbId = _DbId;
+      _OriginalValues.Id = _Id;
+      _OriginalValues.DataTableDbId = _DataTableDbId;
+      _OriginalValues.DataTableId = _DataTableId;
+      _OriginalValues.Name = _Name;
+      _OriginalValues.KeyType = _KeyType;
+
+      _OriginalValues.IsClustered = _IsClustered;
+      _OriginalValues.IsAscending = _IsAscending;
+      _OriginalValues.SourceColumnName = _SourceColumnName;
+      _OriginalValues.TargetTableName = _TargetTableName;
+      _OriginalValues.TargetColumnName = _TargetColumnName;
+      ChangedNames.Clear();
+    }
+
+    // The object string identifier.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/ToString/*'/>
+    public override string ToString()
+    {
+      var retValue = $"{_Name}:{_Id}";
+      return retValue;
+    }
+    #endregion
+
+    #region Data Properties
+
+    // Update ChangedNames.Add() statements to "Property" constant
+    // if property was renamed.
+
+    // Gets or sets the database ID.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/DbId/*'/>
+    [Required]
+    [Column("DbId", TypeName = "smallint")]
+    public short DbId
+    {
+      get => _DbId;
+      set
+      {
+        if (_DbId != value)
+        {
+          _DbId = ChangedNames.Add(ColumnDbId
+            , _OriginalValues.DbId, value);
+        }
+      }
+    }
+    private short _DbId;
+
+    // Gets or sets the table row ID.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/Id/*'/>
+    [Required]
+    [Column("Id", TypeName = "bigint")]
+    public long Id
+    {
+      get => _Id;
+      set
+      {
+        if (_Id != value)
+        {
+          _Id = ChangedNames.Add(ColumnId, _OriginalValues.Id, value);
+        }
+      }
+    }
+    private long _Id;
+
+    // Gets or sets the parent database ID.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/DataTableSiteID/*'/>
+    [Required]
+    [Column("DataTableDbId", TypeName = "smallint")]
+    public short DataTableDbId
+    {
+      get => _DataTableDbId;
+      set
+      {
+        if (_DataTableDbId != value)
+        {
+          _DataTableDbId = ChangedNames.Add(ColumnDataTableDbId
+            , _OriginalValues.DataTableDbId, value);
+        }
+      }
+    }
+    private short _DataTableDbId;
+
+    // Gets or sets the parent table row ID.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/DataTableID/*'/>
+    [Required]
+    [Column("DataTableId", TypeName = "bigint")]
+    public long DataTableId
+    {
+      get => _DataTableId;
+      set
+      {
+        if (_DataTableId != value)
+        {
+          _DataTableId = ChangedNames.Add(ColumnDataTableId
+          , _OriginalValues.DataTableId, value);
+        }
+      }
+    }
+    private long _DataTableId;
+
+    // Gets or sets the Name value.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/Name/*'/>
+    [Required]
+    [Column("Name", TypeName = "nvarchar(60")]
+    public string Name
+    {
+      get => _Name;
+      set
+      {
+        var newValue = value?.Trim();
+        if (LJC.HasText(newValue)
+          && _Name != newValue)
+        {
+          _Name = ChangedNames.Add(ColumnName, _OriginalValues.Name, newValue);
+        }
+      }
+    }
+    private string _Name;
+
+    // Gets or sets the KeyType value.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/KeyType/*'/>
+    [Required]
+    [Column("KeyType", TypeName = "smallint")]
+    public short KeyType
+    {
+      get => _KeyType;
+      set
+      {
+        if (_KeyType != value)
+        {
+          _KeyType = ChangedNames.Add(ColumnKeyType
+            , _OriginalValues.KeyType, value);
+        }
+      }
+    }
+    private short _KeyType;
+
+    // Gets or sets the IsAscending flag.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/IsAscending/*'/>
+    [Column("IsAscending", TypeName = "bit")]
+    public bool IsAscending
+    {
+      get => _IsAscending;
+      set
+      {
+        if (_IsAscending != value)
+        {
+          _IsAscending = ChangedNames.Add(ColumnIsAscending
+            , _OriginalValues.IsAscending, value);
+        }
+      }
+    }
+    private bool _IsAscending;
+
+    // Gets or sets the IsClustered flag.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/IsClustered/*'/>
+    [Column("IsClustered", TypeName = "bit")]
+    public bool IsClustered
+    {
+      get => _IsClustered;
+      set
+      {
+        if (_IsClustered != value)
+        {
+          _IsClustered = ChangedNames.Add(ColumnIsClustered
+            , _OriginalValues.IsClustered, value);
+        }
+      }
+    }
+    private bool _IsClustered;
+
+    // Gets or sets the source column name.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/SourceColumnName/*'/>
+    [Column("SourceColumnName", TypeName = "nvarchar(60")]
+    public string? SourceColumnName
+    {
+      get => _SourceColumnName;
+      set
+      {
+        var newValue = LJCNetString.ScrubDelimitedValues(value);
+        if (LJC.HasText(newValue)
+          && _SourceColumnName != newValue)
+        {
+          _SourceColumnName = ChangedNames.Add(ColumnSourceColumnName
+           , _OriginalValues.SourceColumnName, newValue);
+        }
+      }
+    }
+    private string? _SourceColumnName;
+
+    // Gets or sets the target table name.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/TargetTableName/*'/>
+    [Column("TargetTableName", TypeName = "nvarchar(60")]
+    public string? TargetTableName
+    {
+      get => _TargetTableName;
+      set
+      {
+        var newValue = value?.Trim();
+        if (LJC.HasText(newValue)
+          && _TargetTableName != newValue)
+        {
+          _TargetTableName = ChangedNames.Add(ColumnTargetTableName
+            , _OriginalValues.TargetTableName, newValue);
+        }
+      }
+    }
+    private string? _TargetTableName;
+
+    // Gets or sets the target column name.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/TargetColumnName/*'/>
+    [Column("TargetColumnName", TypeName = "nvarchar(60")]
+    public string? TargetColumnName
+    {
+      get => _TargetColumnName;
+      set
+      {
+        var newValue = value?.Trim();
+        if (LJC.HasText(newValue)
+          && _TargetColumnName != newValue)
+        {
+          _TargetColumnName = ChangedNames.Add(ColumnTargetColumnName
+            , _OriginalValues.TargetColumnName, newValue);
+        }
+      }
+    }
+    private string? _TargetColumnName;
+
+    // Gets or sets the Join TableName value.
+    /// <include file='doc/DataKey.xml'
+    ///  path='members/DataTableName/*'/>
+    public string? DataTableName { get; set; }
+    #endregion
+
+    #region Class Properties
+
+    // Gets a reference to the ChangedNames list.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/ChangedNames/*'/>
+    [XmlIgnore]
+    public LJCChangedNames ChangedNames { get; private set; }
+    #endregion
+
+    #region Class Data
+
+    /// <summary>The table name.</summary>
+    public const string TableName = "DataKey";
+
+    /// <summary>The DataSiteID column name.</summary>
+    public const string ColumnDbId = "DbId";
+
+    /// <summary>The ID column name.</summary>
+    public const string ColumnId = "Id";
+
+    /// <summary>The DataTableSiteID column name.</summary>
+    public const string ColumnDataTableDbId = "DataTableDbId";
+
+    /// <summary>The DataTableID column name.</summary>
+    public const string ColumnDataTableId = "DataTableId";
+
+    /// <summary>The Name column name.</summary>
+    public const string ColumnName = "Name";
+
+    /// <summary>The KeyType column name.</summary>
+    public const string ColumnKeyType = "KeyType";
+
+    /// <summary>The IsAscending column name.</summary>
+    public const string ColumnIsAscending = "IsAscending";
+
+    /// <summary>The IsClustered column name.</summary>
+    public const string ColumnIsClustered = "IsClustered";
+
+    /// <summary>The SourceColumnName column name.</summary>
+    public const string ColumnSourceColumnName = "SourceColumnName";
+
+    /// <summary>The SourceColumnNames column name.</summary>
+    public const string PropertySourceColumnNames = "SourceColumnNames";
+
+    /// <summary>The TargetTableName column name.</summary>
+    public const string ColumnTargetTableName = "TargetTableName";
+
+    /// <summary>The TargetColumnName column name.</summary>
+    public const string ColumnTargetColumnName = "TargetColumnName";
+
+    /// <summary>The TargetColumnName column name.</summary>
+    public const string PropertyTargetColumnNames = "TargetColumnNames";
+
+    /// <summary>The Name maximum length.</summary>
+    public const int LengthName = 60;
+
+    /// <summary>The SourceColumnName maximum length.</summary>
+    public const int LengthSourceColumnName = 60;
+
+    /// <summary>The TargetTableName maximum length.</summary>
+    public const int LengthTargetTableName = 60;
+
+    /// <summary>The TargetColumnName maximum length.</summary>
+    public const int LengthTargetColumnName = 60;
+
+    /// <summary>The Join TableName column name.</summary>
+    public const string ColumnDataTableName = "DataTableName";
+
+    // The object starting values.
+    private readonly OriginalValues _OriginalValues;
+
+    // The object starting values.
+    private class OriginalValues
+    {
+      // Initializes an object instance.
+      public OriginalValues()
+      {
+        DbId = 0;
+        Id = 0;
+        DataTableDbId = 0;
+        DataTableId = 0;
+        Name = "";
+        KeyType = 0;
+        IsAscending = true;
+        IsClustered = false;
+        SourceColumnName = null;
+        TargetTableName = null;
+        TargetColumnName = null;
+      }
+
+      // Gets or sets the database ID.
+      public short DbId { get; set; }
+
+      // Gets or sets the table row ID.
+      public long Id { get; set; }
+
+      // Gets or sets the parent database ID.
+      public short DataTableDbId { get; set; }
+
+      // Gets or sets the parent table row ID.
+      public long DataTableId { get; set; }
+
+      // Gets or sets the unique name.
+      public string Name { get; set; }
+
+      // Gets or sets the KeyType value.
+      public short KeyType { get; set; }
+
+      // Gets or sets the IsAscending flag.
+      public bool IsAscending { get; set; }
+
+      // Gets or sets the IsClustered flag.
+      public bool IsClustered { get; set; }
+
+      // Gets or sets the source column name.
+      public string? SourceColumnName { get; set; }
+
+      // Gets or sets the target table name.
+      public string? TargetTableName { get; set; }
+
+      // Gets or sets the target column name.
+      public string? TargetColumnName { get; set; }
+    }
+    #endregion
+  }
+
+  #region Comparers
+
+  // Sort and search on Name value.
+  /// <include file='Doc/DataKey.xml'
+  ///  path='members/DataKeyUnique/*'/>
+  public class DataKeyUnique : IComparer<DataKey>
+  {
+    // Compares two objects.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='members/Compare/*'/>
+    public int Compare(DataKey? x, DataKey? y)
+    {
+      int retValue;
+
+      while (true)
+      {
+        retValue = LJC.CompareNull(x, y);
+        if (retValue != LJCNetString.CompareNotNullOrEqual)
+        {
+          break;
+        }
+
+        retValue = LJC.CompareNull(x!.Name, y!.Name);
+        if (retValue != LJCNetString.CompareNotNullOrEqual)
+        {
+          break;
+        }
+
+        retValue = x.DataTableDbId.CompareTo(y.DataTableDbId);
+        if (retValue != LJCNetString.CompareEqual)
+        {
+          break;
+        }
+
+        retValue = x.DataTableId.CompareTo(y.DataTableId);
+        if (retValue != LJCNetString.CompareEqual)
+        {
+          break;
+        }
+
+        retValue = string.Compare(x.Name, y.Name, true);
+        break;
+      }
+      return retValue;
+    }
+  }
+  #endregion
+}

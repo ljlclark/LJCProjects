@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataEntryManager.xml -->
+<items>
+  <RetrieveWithUnique>
+    <summary>
+      Retrieves a record with the supplied unique values.
+    </summary>
+    <param name="dataSiteID">The site ID.</param>
+    <param name="entryTime">The entry time.</param>
+    <param name="propertyNames">The included property names.</param>
+    <returns>The Data Object.</returns>
+  </RetrieveWithUnique>
+  <UniqueKey>
+    <summary>
+      Gets the Unique key columns.
+    </summary>
+    <param name="dataSiteID">The site ID.</param>
+    <param name="entryTime">The entry time.</param>
+    <returns>The Unique keys object.</returns>
+  </UniqueKey>
+</items>
