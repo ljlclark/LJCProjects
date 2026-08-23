@@ -4,20 +4,17 @@
 using LJCControls5;
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
+using LJControls;
 using static LJCDataUtility5.DataUtilityList;
 
 namespace LJCDataUtility5
 {
   // Provides methods for the DataTable grid.
-  /// <include file='Doc/DataTableGridCode.xml'
-  ///  path='members/DataTableGridCode/*'/>
   internal class DataTableGridCode
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='members/Constructor/*'/>
     internal DataTableGridCode(DataUtilityList parentObject)
     {
       ParentObject = parentObject;
@@ -33,6 +30,10 @@ namespace LJCDataUtility5
 
       // Menu item events.
       var list = ParentObject;
+      list.TableNew.Click += TableNew_Click;
+      list.TableEdit.Click += TableEdit_Click;
+      list.TableDelete.Click += TableDelete_Click;
+      list.TableRefresh.Click += TableRefresh_Click;
       list.TableExit.Click += list.Exit_Click;
 
       // Grid events.
@@ -46,8 +47,6 @@ namespace LJCDataUtility5
     }
 
     // Configures the Grid.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='members/SetupGrid/*'/>
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
@@ -248,8 +247,9 @@ namespace LJCDataUtility5
     private void SetControlState()
     {
       //bool enableNew = ModuleCombo.CurrentRow != null;
-      //bool enableEdit = TableGrid.CurrentRow != null;
-      //FormCommon.SetMenuState(ColumnMenu, enableNew, enableEdit);
+      bool enableNew = true;
+      bool enableEdit = TableGrid.CurrentRow != null;
+      FormCommon.SetMenuState(TableMenu, enableNew, enableEdit);
       //ParentObject.ColumnHeading.Enabled = true;
     }
 
@@ -413,25 +413,25 @@ namespace LJCDataUtility5
     #region Action Event Handlers
 
     // Handles the New menu item event.
-    private void TableNew_Click(object sender, EventArgs e)
+    private void TableNew_Click(object? sender, EventArgs e)
     {
       New();
     }
 
     // Handles the Edit menu item event.
-    private void TableEdit_Click(object sender, EventArgs e)
+    private void TableEdit_Click(object? sender, EventArgs e)
     {
       Edit();
     }
 
     // Handles the Delete menu item event.
-    private void TableDelete_Click(object sender, EventArgs e)
+    private void TableDelete_Click(object? sender, EventArgs e)
     {
       Delete();
     }
 
     // Handles the Refresh menu item event.
-    private void TableRefresh_Click(object sender, EventArgs e)
+    private void TableRefresh_Click(object? sender, EventArgs e)
     {
       Refresh();
     }
@@ -442,7 +442,42 @@ namespace LJCDataUtility5
     // Handles the Grid KeyDown event.
     private void TableGrid_KeyDown(object? sender, KeyEventArgs e)
     {
-      MessageBox.Show("KeyDown");
+      switch (e.KeyCode)
+      {
+        case Keys.Enter:
+          Edit();
+          e.Handled = true;
+          break;
+
+        case Keys.F1:
+          ShowHelp();
+          e.Handled = true;
+          break;
+
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormPoint.MenuScreenPoint(TableGrid
+              , Control.MousePosition);
+            var menu = ParentObject.TableMenu;
+            menu.Show(position);
+            menu.Select();
+            e.Handled = true;
+          }
+          break;
+
+          //case Keys.Tab:
+          //  if (e.Shift)
+          //  {
+          //    ParentObject.ColumnTabs.Select();
+          //  }
+          //  else
+          //  {
+          //    ParentObject.ColumnTabs.Select();
+          //  }
+          //  e.Handled = true;
+          //  break;
+      }
     }
 
     // Handles the Grid MouseDoubleClick event.
@@ -450,7 +485,7 @@ namespace LJCDataUtility5
     {
       if (TableGrid.LJCGetMouseRow(e) != null)
       {
-        MessageBox.Show("MouseDoubleClick");
+        Edit();
       }
     }
 

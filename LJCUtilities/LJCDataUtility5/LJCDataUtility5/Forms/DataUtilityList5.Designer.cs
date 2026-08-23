@@ -35,6 +35,13 @@
       splitContainer1 = new SplitContainer();
       TableGrid = new LJCControls5.LJCDataGrid(components);
       TableMenu = new ContextMenuStrip(components);
+      TableNew = new ToolStripMenuItem();
+      TableEdit = new ToolStripMenuItem();
+      toolStripSeparator1 = new ToolStripSeparator();
+      TableDelete = new ToolStripMenuItem();
+      toolStripSeparator2 = new ToolStripSeparator();
+      TableRefresh = new ToolStripMenuItem();
+      toolStripSeparator3 = new ToolStripSeparator();
       TableExit = new ToolStripMenuItem();
       ColumnsSplit = new SplitContainer();
       tabControl1 = new TabControl();
@@ -47,6 +54,20 @@
       KeyMenu = new ContextMenuStrip(components);
       KeyExit = new ToolStripMenuItem();
       tabControl2 = new TabControl();
+      ColumnNew = new ToolStripMenuItem();
+      ColumnEdit = new ToolStripMenuItem();
+      ColumnDelete = new ToolStripMenuItem();
+      ColumnRefresh = new ToolStripMenuItem();
+      toolStripSeparator4 = new ToolStripSeparator();
+      toolStripSeparator5 = new ToolStripSeparator();
+      toolStripSeparator6 = new ToolStripSeparator();
+      KeyNew = new ToolStripMenuItem();
+      KeyDelete = new ToolStripMenuItem();
+      KeyRefresh = new ToolStripMenuItem();
+      KeyEdit = new ToolStripMenuItem();
+      toolStripSeparator7 = new ToolStripSeparator();
+      toolStripSeparator8 = new ToolStripSeparator();
+      toolStripSeparator9 = new ToolStripSeparator();
       ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
       splitContainer1.Panel1.SuspendLayout();
       splitContainer1.Panel2.SuspendLayout();
@@ -119,14 +140,57 @@
       // TableMenu
       // 
       TableMenu.ImageScalingSize = new Size(24, 24);
-      TableMenu.Items.AddRange(new ToolStripItem[] { TableExit });
+      TableMenu.Items.AddRange(new ToolStripItem[] { TableNew, TableEdit, toolStripSeparator1, TableDelete, toolStripSeparator2, TableRefresh, toolStripSeparator3, TableExit });
       TableMenu.Name = "ColumnMenu";
-      TableMenu.Size = new Size(112, 36);
+      TableMenu.Size = new Size(184, 182);
+      // 
+      // TableNew
+      // 
+      TableNew.Name = "TableNew";
+      TableNew.ShortcutKeys = Keys.Control | Keys.N;
+      TableNew.Size = new Size(183, 32);
+      TableNew.Text = "&New";
+      // 
+      // TableEdit
+      // 
+      TableEdit.Name = "TableEdit";
+      TableEdit.ShortcutKeyDisplayString = "ENTER";
+      TableEdit.Size = new Size(183, 32);
+      TableEdit.Text = "&Edit";
+      // 
+      // toolStripSeparator1
+      // 
+      toolStripSeparator1.Name = "toolStripSeparator1";
+      toolStripSeparator1.Size = new Size(180, 6);
+      // 
+      // TableDelete
+      // 
+      TableDelete.Name = "TableDelete";
+      TableDelete.ShortcutKeys = Keys.Delete;
+      TableDelete.Size = new Size(183, 32);
+      TableDelete.Text = "&Delete";
+      // 
+      // toolStripSeparator2
+      // 
+      toolStripSeparator2.Name = "toolStripSeparator2";
+      toolStripSeparator2.Size = new Size(180, 6);
+      // 
+      // TableRefresh
+      // 
+      TableRefresh.Name = "TableRefresh";
+      TableRefresh.ShortcutKeys = Keys.F5;
+      TableRefresh.Size = new Size(183, 32);
+      TableRefresh.Text = "&Refresh";
+      // 
+      // toolStripSeparator3
+      // 
+      toolStripSeparator3.Name = "toolStripSeparator3";
+      toolStripSeparator3.Size = new Size(180, 6);
       // 
       // TableExit
       // 
       TableExit.Name = "TableExit";
-      TableExit.Size = new Size(111, 32);
+      TableExit.Size = new Size(183, 32);
       TableExit.Text = "E&xit";
       TableExit.Click += Exit_Click;
       // 
@@ -204,14 +268,14 @@
       // ColumnMenu
       // 
       ColumnMenu.ImageScalingSize = new Size(24, 24);
-      ColumnMenu.Items.AddRange(new ToolStripItem[] { ColumnExit });
+      ColumnMenu.Items.AddRange(new ToolStripItem[] { ColumnNew, ColumnEdit, toolStripSeparator4, ColumnDelete, toolStripSeparator5, ColumnRefresh, toolStripSeparator6, ColumnExit });
       ColumnMenu.Name = "ColumnMenu";
-      ColumnMenu.Size = new Size(112, 36);
+      ColumnMenu.Size = new Size(184, 182);
       // 
       // ColumnExit
       // 
       ColumnExit.Name = "ColumnExit";
-      ColumnExit.Size = new Size(111, 32);
+      ColumnExit.Size = new Size(183, 32);
       ColumnExit.Text = "E&xit";
       // 
       // tabPage2
@@ -260,14 +324,14 @@
       // KeyMenu
       // 
       KeyMenu.ImageScalingSize = new Size(24, 24);
-      KeyMenu.Items.AddRange(new ToolStripItem[] { KeyExit });
+      KeyMenu.Items.AddRange(new ToolStripItem[] { KeyNew, KeyEdit, toolStripSeparator7, KeyDelete, toolStripSeparator8, KeyRefresh, toolStripSeparator9, KeyExit });
       KeyMenu.Name = "ColumnMenu";
-      KeyMenu.Size = new Size(112, 36);
+      KeyMenu.Size = new Size(184, 182);
       // 
       // KeyExit
       // 
       KeyExit.Name = "KeyExit";
-      KeyExit.Size = new Size(111, 32);
+      KeyExit.Size = new Size(240, 32);
       KeyExit.Text = "E&xit";
       // 
       // tabControl2
@@ -278,6 +342,92 @@
       tabControl2.SelectedIndex = 0;
       tabControl2.Size = new Size(143, 284);
       tabControl2.TabIndex = 0;
+      // 
+      // ColumnNew
+      // 
+      ColumnNew.Name = "ColumnNew";
+      ColumnNew.ShortcutKeys = Keys.Control | Keys.N;
+      ColumnNew.Size = new Size(183, 32);
+      ColumnNew.Text = "&New";
+      // 
+      // ColumnEdit
+      // 
+      ColumnEdit.Name = "ColumnEdit";
+      ColumnEdit.ShortcutKeyDisplayString = "ENTER";
+      ColumnEdit.Size = new Size(183, 32);
+      ColumnEdit.Text = "&Edit";
+      // 
+      // ColumnDelete
+      // 
+      ColumnDelete.Name = "ColumnDelete";
+      ColumnDelete.ShortcutKeys = Keys.Delete;
+      ColumnDelete.Size = new Size(183, 32);
+      ColumnDelete.Text = "&Delete";
+      // 
+      // ColumnRefresh
+      // 
+      ColumnRefresh.Name = "ColumnRefresh";
+      ColumnRefresh.ShortcutKeys = Keys.F5;
+      ColumnRefresh.Size = new Size(183, 32);
+      ColumnRefresh.Text = "&Refresh";
+      // 
+      // toolStripSeparator4
+      // 
+      toolStripSeparator4.Name = "toolStripSeparator4";
+      toolStripSeparator4.Size = new Size(180, 6);
+      // 
+      // toolStripSeparator5
+      // 
+      toolStripSeparator5.Name = "toolStripSeparator5";
+      toolStripSeparator5.Size = new Size(180, 6);
+      // 
+      // toolStripSeparator6
+      // 
+      toolStripSeparator6.Name = "toolStripSeparator6";
+      toolStripSeparator6.Size = new Size(180, 6);
+      // 
+      // KeyNew
+      // 
+      KeyNew.Name = "KeyNew";
+      KeyNew.ShortcutKeys = Keys.Control | Keys.N;
+      KeyNew.Size = new Size(240, 32);
+      KeyNew.Text = "&New";
+      // 
+      // KeyDelete
+      // 
+      KeyDelete.Name = "KeyDelete";
+      KeyDelete.ShortcutKeys = Keys.Delete;
+      KeyDelete.Size = new Size(240, 32);
+      KeyDelete.Text = "&Delete";
+      // 
+      // KeyRefresh
+      // 
+      KeyRefresh.Name = "KeyRefresh";
+      KeyRefresh.ShortcutKeys = Keys.F5;
+      KeyRefresh.Size = new Size(240, 32);
+      KeyRefresh.Text = "&Refresh";
+      // 
+      // KeyEdit
+      // 
+      KeyEdit.Name = "KeyEdit";
+      KeyEdit.ShortcutKeyDisplayString = "ENTER";
+      KeyEdit.Size = new Size(240, 32);
+      KeyEdit.Text = "&Edit";
+      // 
+      // toolStripSeparator7
+      // 
+      toolStripSeparator7.Name = "toolStripSeparator7";
+      toolStripSeparator7.Size = new Size(237, 6);
+      // 
+      // toolStripSeparator8
+      // 
+      toolStripSeparator8.Name = "toolStripSeparator8";
+      toolStripSeparator8.Size = new Size(237, 6);
+      // 
+      // toolStripSeparator9
+      // 
+      toolStripSeparator9.Name = "toolStripSeparator9";
+      toolStripSeparator9.Size = new Size(237, 6);
       // 
       // DataUtilityList
       // 
@@ -325,5 +475,26 @@
     internal ToolStripMenuItem ColumnExit;
     internal ContextMenuStrip KeyMenu;
     internal ToolStripMenuItem KeyExit;
+    internal ToolStripMenuItem TableNew;
+    internal ToolStripMenuItem TableEdit;
+    internal ToolStripMenuItem TableDelete;
+    internal ToolStripMenuItem TableRefresh;
+    private ToolStripSeparator toolStripSeparator1;
+    private ToolStripSeparator toolStripSeparator2;
+    private ToolStripSeparator toolStripSeparator3;
+    internal ToolStripMenuItem ColumnNew;
+    internal ToolStripMenuItem ColumnEdit;
+    private ToolStripSeparator toolStripSeparator4;
+    internal ToolStripMenuItem ColumnDelete;
+    private ToolStripSeparator toolStripSeparator5;
+    internal ToolStripMenuItem ColumnRefresh;
+    private ToolStripSeparator toolStripSeparator6;
+    internal ToolStripMenuItem KeyNew;
+    internal ToolStripMenuItem KeyEdit;
+    private ToolStripSeparator toolStripSeparator7;
+    internal ToolStripMenuItem KeyDelete;
+    private ToolStripSeparator toolStripSeparator8;
+    internal ToolStripMenuItem KeyRefresh;
+    private ToolStripSeparator toolStripSeparator9;
   }
 }
