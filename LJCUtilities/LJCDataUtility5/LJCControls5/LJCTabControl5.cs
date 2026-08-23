@@ -1,0 +1,438 @@
+// Copyright (c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// LJLCTabControl.cs
+using System.ComponentModel;
+
+namespace LJCControls5
+{
+  /// <summary>Provides custom drag and drop functionality for a TabControl.</summary>
+  public partial class LJCTabControl : TabControl
+  {
+    #region Constructors
+
+    // Initializes an instance of the class.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
+    public LJCTabControl()
+    {
+      InitializeComponent();
+      InitializeControl();
+    }
+
+    // Instantiates an instance of the class and adds it to a container.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCTabControlC/*'/>
+    public LJCTabControl(IContainer parentContainer)
+    {
+      parentContainer.Add(this);
+
+      InitializeComponent();
+      InitializeControl();
+    }
+    #endregion
+
+    #region Override Event Methods
+
+    // Provides custom MouseDown event code.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnMouseDown/*'/>
+    protected override void OnMouseDown(MouseEventArgs e)
+    {
+      base.OnMouseDown(e);
+
+      if (LJCAllowDrag)
+      {
+        // Initializes the drag and drop values.
+        _IsDragStart = true;
+        _DragStartBounds = CreateDragStartBounds(e.X, e.Y, 8, 6);
+        _SourceTabPage = LJCGetTabPage(e.X, e.Y);
+      }
+    }
+
+    // Provides custom MouseMove event code.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnMouseMove/*'/>
+    protected override void OnMouseMove(MouseEventArgs e)
+    {
+      base.OnMouseMove(e);
+
+      if (LJCAllowDrag)
+      {
+        // Starts the drag operation if the mouse moves outside the drag start bounds.
+        var mousePoint = new Point(e.X, e.Y);
+        if (_IsDragStart
+          && _SourceTabPage != null
+          && _DragStartBounds.Contains(mousePoint) == false)
+        {
+          _IsDragStart = false;
+          DoDragDrop(_SourceTabPage, DragDropEffects.Move);
+        }
+      }
+    }
+
+    // Provides custom DragOver event code.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnDragOver/*'/>
+    protected override void OnDragOver(DragEventArgs drgevent)
+    {
+      base.OnDragOver(drgevent);
+
+      drgevent.Effect = DragDropEffects.None;
+
+      if (drgevent.Data != null
+        && drgevent.Data.GetDataPresent(typeof(TabPage)))
+      {
+        // Get source tab page.
+        var sourceTabPage = drgevent.Data.GetData(typeof(TabPage)) as TabPage;
+
+        // Get target tab page.
+        TabPage? targetTabPage;
+        var tabPoint = PointToClient(new Point(drgevent.X, drgevent.Y));
+        if (1 == TabCount
+          && TabPages[0].Name == "")
+        {
+          // Set target to temporary target page.
+          targetTabPage = TabPages[0];
+        }
+        else
+        {
+          // Set target to drop target.
+          targetTabPage = LJCGetTabPage(tabPoint.X, tabPoint.Y);
+        }
+
+        if (tabPoint.X > Width - 20)
+        {
+          // Add temporary target page.
+          if (sourceTabPage != null)
+          {
+            var sourceTabControl = sourceTabPage.Parent as LJCTabControl;
+            if (sourceTabControl == this)
+            {
+              LJCOnLJCPanelAdd();
+            }
+          }
+        }
+        else
+        {
+          // Remove the temporary target page.
+          if (targetTabPage != null
+            && targetTabPage.Name == "")
+          {
+            LJCOnLJCPanelRemove();
+          }
+        }
+
+        // Sets the drag effects icon to allow the move if the
+        // target tab is not the same as the source tab.
+        if (targetTabPage != null
+          && sourceTabPage != targetTabPage)
+        {
+          drgevent.Effect = DragDropEffects.Move;
+        }
+      }
+    }
+
+    // Provides custom DragLeave event code.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnDragLeave/*'/>
+    protected override void OnDragLeave(EventArgs e)
+    {
+      base.OnDragLeave(e);
+
+      // Allows the temporary tab page to be removed and to collapses the tile panel
+      // if during the create function.
+      if (TabCount == 1
+        && TabPages[0].Name == "")
+      {
+        LJCOnLJCPanelRemove();
+      }
+    }
+
+    // Provides custom DragDrop event code.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnDragDrop/*'/>
+    protected override void OnDragDrop(DragEventArgs drgevent)
+    {
+      base.OnDragDrop(drgevent);
+
+      // Get source tab page.
+      TabPage? sourceTabPage = null;
+      TabControl? sourceTabControl = null;
+      if (drgevent.Data != null)
+      {
+        sourceTabPage = drgevent.Data.GetData(typeof(TabPage)) as TabPage;
+        if (sourceTabPage != null)
+        {
+          sourceTabControl = sourceTabPage.Parent as TabControl;
+        }
+      }
+
+      // Get target tab page.
+      TabPage? targetTabPage;
+      if (TabCount == 1
+        && TabPages[0].Name == "")
+      {
+        targetTabPage = TabPages[0];
+      }
+      else
+      {
+        var tabPoint = PointToClient(new Point(drgevent.X, drgevent.Y));
+        targetTabPage = LJCGetTabPage(tabPoint.X, tabPoint.Y);
+      }
+
+      if (sourceTabPage != null
+        && sourceTabControl != null
+        && targetTabPage != null
+        && targetTabPage != sourceTabPage)
+      {
+        sourceTabControl.TabPages.Remove(sourceTabPage);
+        if (targetTabPage.Name == "")
+        {
+          // Replace temporary tab page with source tab page.
+          TabPages.Remove(targetTabPage);
+          TabPages.Add(sourceTabPage);
+        }
+        else
+        {
+          // Move source tab page to target tab control.
+          var targetIndex = LJCGetTabPageIndex(targetTabPage);
+          TabPages.Insert(targetIndex, sourceTabPage);
+        }
+        SelectedTab = sourceTabPage;
+      }
+    }
+
+    // Provides custom MouseUp event code.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnMouseUp/*'/>
+    protected override void OnMouseUp(MouseEventArgs e)
+    {
+      base.OnMouseUp(e);
+
+      // Reset the drag start flag.
+      _IsDragStart = false;
+    }
+
+    // Provides custom Resize event code.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnResize/*'/>
+    protected override void OnResize(EventArgs e)
+    {
+      base.OnResize(e);
+
+      // Refresh the related controls as required.
+      RefreshParentPanel();
+    }
+    #endregion
+
+    #region Custom Event Methods
+
+    // Calls the LJCPanelAdd event handlers.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/OnLJCPanelAdd/*'/>
+    protected void LJCOnLJCPanelAdd()
+    {
+      LJCPanelAdd?.Invoke(this, new EventArgs());
+    }
+
+    // Calls the LJCPanelRemove event handlers. 
+    private void LJCOnLJCPanelRemove()
+    {
+      LJCPanelRemove?.Invoke(this, new EventArgs());
+    }
+    #endregion
+
+    #region Public Methods
+
+    // Closes the tiled split panel.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCCloseEmptyPanel/*'/>
+    public void LJCCloseEmptyPanel()
+    {
+      LJCOnLJCPanelRemove();
+    }
+
+    // Gets the tab page with the matching text.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCGetTabPage1/*'/>
+    public TabPage? LJCGetTabPage(string text)
+    {
+      TabPage? retValue = null;
+
+      TabPage currentTabPage;
+      for (int index = 0; index < TabPages.Count; index++)
+      {
+        currentTabPage = TabPages[index];
+        if (currentTabPage.Text == text)
+        {
+          retValue = currentTabPage;
+          break;
+        }
+      }
+      return retValue;
+    }
+
+    // Gets the tab page if the position corresponds to a tab label.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCGetTabPage2/*'/>
+    public TabPage? LJCGetTabPage(int x, int y)
+    {
+      Rectangle tabRectangle;
+      TabPage? retValue = null;
+
+      for (int index = 0; index < TabPages.Count; index++)
+      {
+        tabRectangle = GetTabRect(index);
+        if (tabRectangle.Contains(new Point(x, y)))
+        {
+          retValue = TabPages[index];
+          break;
+        }
+      }
+      return retValue;
+    }
+
+    // Retrieves the tab page where the mouse was clicked.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCGetTabPage3/*'/>
+    public TabPage? LJCGetTabPage(MouseEventArgs e)
+    {
+      var retValue = LJCGetTabPage(e.X, e.Y);
+      return retValue;
+    }
+
+    // Gets the tab index for a tab page.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCGetTabPageIndex/*'/>
+    public int LJCGetTabPageIndex(TabPage tabPage)
+    {
+      int retVal = -1;
+
+      for (int index = 0; index < TabPages.Count; index++)
+      {
+        if (tabPage.Equals(TabPages[index]))
+        {
+          retVal = index;
+          break;
+        }
+      }
+      return retVal;
+    }
+
+    // Moves a tab page.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCMoveTabPage/*'/>
+    public void LJCMoveTabPage(int sourceIndex, int targetIndex)
+    {
+      var sourcePage = TabPages[sourceIndex];
+      TabPages.RemoveAt(sourceIndex);
+      TabPages.Insert(targetIndex, sourcePage);
+    }
+
+    // Moves the tab page left to the main tabs.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCMoveTabPageLeft/*'/>
+    public void LJCMoveTabPageLeft(LJCTabControl targetTabs
+      , SplitContainer split)
+    {
+      if (SelectedTab != null)
+      {
+        SelectedTab.Parent = targetTabs;
+        if (0 == TabPages.Count)
+        {
+          split.Panel2Collapsed = true;
+        }
+      }
+    }
+
+    // Moves the tab page right to the tile tabs.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCMoveTabPageRight/*'/>
+    public void LJCMoveTabPageRight(LJCTabControl targetTabs
+      , SplitContainer split)
+    {
+      if (SelectedTab != null
+        && TabPages.Count > 1)
+      {
+        split.Panel2Collapsed = false;
+        SelectedTab.Parent = targetTabs;
+      }
+    }
+
+    // Sets the current tab page.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCSetCurrentTabPage/*'/>
+    public void LJCSetCurrentTabPage(MouseEventArgs e)
+    {
+      if (LJCGetTabPage(e) is TabPage tabPage)
+      {
+        SelectedTab = tabPage;
+      }
+    }
+    #endregion
+
+    #region Private Methods
+
+    // Creates a bounding rectangle to determine if the move operation should start.
+    private static Rectangle CreateDragStartBounds(int x, int y, int width, int height)
+    {
+      Rectangle retVal;
+
+      retVal = new Rectangle(x - (width / 2), y - (width / 2), width, height);
+      return retVal;
+    }
+
+    // Refreshes the parent panel.
+    private void RefreshParentPanel()
+    {
+      if (Parent != null)
+      {
+        if (Parent is Panel panel)
+        {
+          panel.Refresh();
+        }
+      }
+    }
+    #endregion
+
+    #region Setup Methods
+
+    // Configures the control.
+    private void InitializeControl()
+    {
+      // Initialize Class Data.
+      _IsDragStart = false;
+
+      // Initialize Property Values.
+      LJCAllowDrag = false;
+    }
+    #endregion
+
+    #region Properties
+
+    /// <summary>Determines if the custom drag drop is allowed.</summary>
+    [DefaultValue(false)]
+    public bool LJCAllowDrag { get; set; }
+    #endregion
+
+    #region Member Data
+
+    // Class Data.
+    private TabPage? _SourceTabPage = null!;
+    private Rectangle _DragStartBounds;
+    private bool _IsDragStart;
+
+    // Occurs during a dragdrop operation when a temporary target panel
+    // should be displayed.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCPanelAdd/*'/>
+    public event EventHandler<EventArgs> LJCPanelAdd = null!;
+
+    // Occurs during a dragdrop operation when a temporary target panel
+    // should be hidden.
+    /// <include file='Doc/LJCTabControl.xml'
+    ///  path='items/LJCPanelRemove/*'/>
+    public event EventHandler<EventArgs> LJCPanelRemove = null!;
+    #endregion
+  }
+}

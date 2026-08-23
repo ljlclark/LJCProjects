@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Text;
 
-namespace LJControls
+namespace LJCControls5
 {
   // Provides common WinForms methods.
   /// <include file='Doc/FormCommon.xml'
@@ -486,7 +486,7 @@ namespace LJControls
     // <param name="arguments">The program arguments.</param>
     /// <include file='Doc/FormCommon.xml'
     ///  path='items/ShellProgram/*'/>
-    public static void ShellProgram(string programName
+    public static void ShellProgram(string? programName
       , string? arguments = null)
     {
       ProcessStartInfo startInfo;

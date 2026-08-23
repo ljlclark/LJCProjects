@@ -3,6 +3,7 @@
 // LJCDataGrid5.cs
 using LJCNetCommon5;
 using System.ComponentModel;
+using System.Text;
 using Timer = System.Windows.Forms.Timer;
 
 namespace LJCControls5
@@ -23,6 +24,7 @@ namespace LJCControls5
       LJCSetPlain();
       BackgroundColor = Color.AliceBlue;
       LJCSetLastRow();
+
       LJCDragDataName = "";
       _Timer = new Timer
       {
@@ -58,11 +60,10 @@ namespace LJCControls5
     public LJCGridRow? LJCRowAdd()
     {
       LJCGridRow? retValue;
-      int index;
 
       retValue = new LJCGridRow();
       LJCAllowSelectionChange = false;
-      index = Rows.Add(retValue);
+      var index = Rows.Add(retValue);
       LJCAllowSelectionChange = true;
       retValue = Rows[index] as LJCGridRow;
 
@@ -99,6 +100,60 @@ namespace LJCControls5
         retValue.Height = Font.Height + 4;
       }
       return retValue;
+    }
+
+    // Exports the grid values to a data file.
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCExportData/*'/>
+    public void LJCExportData(string fileName)
+    {
+      StringBuilder builder;
+      string separator;
+      string line;
+
+      separator = "\t";
+      if (LJC.IsEqual(".csv", Path.GetExtension(fileName)))
+      {
+        separator = ", ";
+      }
+
+      // Write heading line.
+      builder = new StringBuilder(128);
+      foreach (DataGridViewColumn column in Columns)
+      {
+        if (builder.Length > 0)
+        {
+          builder.Append(separator);
+        }
+        builder.Append($"{column.Name}");
+      }
+      builder.AppendLine();
+      line = builder.ToString();
+      File.WriteAllText(fileName, line);
+
+      // Write data rows.
+      //builder = new StringBuilder(128);
+      foreach (DataGridViewRow row in Rows)
+      {
+        builder = new StringBuilder(128);
+        for (int index = 0; index < row.Cells.Count; index++)
+        {
+          if (index > 0)
+          {
+            builder.Append(separator);
+          }
+          object value = row.Cells[index].Value;
+          if (value != null)
+          {
+            builder.Append($"{row.Cells[index].Value}");
+          }
+        }
+        builder.AppendLine();
+        line = builder.ToString();
+        File.AppendAllText(fileName, line);
+      }
+
+      FormCommon.ShellProgram(null, fileName);
     }
     #endregion
 
@@ -199,9 +254,7 @@ namespace LJCControls5
     ///  path='members/LJCGetMouseRowIndex/*'/>
     public int LJCGetMouseRowIndex(MouseEventArgs e)
     {
-      int retValue;
-
-      retValue = LJCGetMouseRowIndex(e.X, e.Y);
+      var retValue = LJCGetMouseRowIndex(e.X, e.Y);
       return retValue;
     }
 
@@ -271,7 +324,6 @@ namespace LJCControls5
       bool retValue = false;
 
       var row = LJCGetMouseRow(e);
-      //if (LJCGetMouseRow(e) is LJCGridRow row
       if (row != null
         && row.Index != LJCLastRowIndex)
       {
@@ -404,6 +456,41 @@ namespace LJCControls5
           LJCAddColumn(dataColumn);
         }
         LJCSetLastColumnAutoSizeFill();
+      }
+    }
+
+    // Restores the grid column values.
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCRestoreColumnValues/*'/>
+    public void LJCRestoreColumnValues(ControlValues controlValues)
+    {
+      if (controlValues != null)
+      {
+        foreach (ControlValue controlValue in controlValues)
+        {
+          string[] items = controlValue.ControlName.Split(".".ToCharArray()
+            , StringSplitOptions.RemoveEmptyEntries);
+          if (items[0] == Name)
+          {
+            DataGridViewColumn column = Columns[items[1]];
+            if (column != null)
+            {
+              column.Width = controlValue.Width;
+            }
+          }
+        }
+      }
+    }
+
+    // Saves the grid column values.
+    /// <include file='Doc/LJCDataGrid.xml'
+    ///  path='items/LJCSaveColumnValues/*'/>
+    public void LJCSaveColumnValues(ControlValues controlValues)
+    {
+      foreach (DataGridViewColumn column in Columns)
+      {
+        string controlName = $"{Name}.{column.Name}";
+        controlValues.Add(controlName, 0, 0, column.Width, 0);
       }
     }
 

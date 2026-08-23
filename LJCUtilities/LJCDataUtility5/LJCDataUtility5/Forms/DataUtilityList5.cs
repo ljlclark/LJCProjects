@@ -1,6 +1,6 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// Form1.cs
+// DataUtilityList5.cs
 using LJCDataUtilityDAL5;
 using System.Configuration.Provider;
 
@@ -10,7 +10,7 @@ using System.Configuration.Provider;
 
 namespace LJCDataUtility5
 {
-  // The lists form.
+  // The list form.
   internal partial class DataUtilityList : Form
   {
     #region Constructor Methods
@@ -25,7 +25,7 @@ namespace LJCDataUtility5
     #region Form Event Handlers
 
     // Configures the form and loads the initial control data.
-    private void Form1_Load(object sender, EventArgs e)
+    private void DataUtilityList_Load(object sender, EventArgs e)
     {
       InitializeControls();
       CenterToScreen();
@@ -42,7 +42,7 @@ namespace LJCDataUtility5
       {
         case Change.Startup:
           //ConfigureControls();
-          //RestoreControlValues();
+          RestoreControlValues();
 
           // Load first control.
           //ModuleComboCode.DataRetrieve();
@@ -56,16 +56,16 @@ namespace LJCDataUtility5
           break;
 
         case Change.Table:
-          //ColumnGridCode.DataRetrieve();
-          //KeyGridCode.DataRetrieve();
+          ColumnGridCode.DataRetrieve();
+          KeyGridCode.DataRetrieve();
           break;
 
         case Change.Column:
-          //ColumnGrid.LJCSetLastRow();
+          ColumnGrid.LJCSetLastRow();
           break;
 
         case Change.Key:
-          //KeyGrid.LJCSetLastRow();
+          KeyGrid.LJCSetLastRow();
           break;
       }
       Cursor = Cursors.Default;
@@ -114,7 +114,7 @@ namespace LJCDataUtility5
     // Shared menu Exit event handler.
     internal void Exit_Click(object? sender, EventArgs e)
     {
-      //SaveControlValues();
+      SaveControlValues();
       Close();
     }
     #endregion

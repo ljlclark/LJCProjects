@@ -1,4 +1,6 @@
-﻿namespace LJCDataUtility5
+﻿using LJCControls5;
+
+namespace LJCDataUtility5
 {
     partial class DataUtilityList
     {
@@ -32,8 +34,8 @@
       DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
       DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
       DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-      splitContainer1 = new SplitContainer();
-      TableGrid = new LJCControls5.LJCDataGrid(components);
+      MainSplit = new SplitContainer();
+      TableGrid = new LJCDataGrid(components);
       TableMenu = new ContextMenuStrip(components);
       TableNew = new ToolStripMenuItem();
       TableEdit = new ToolStripMenuItem();
@@ -44,66 +46,66 @@
       toolStripSeparator3 = new ToolStripSeparator();
       TableExit = new ToolStripMenuItem();
       ColumnsSplit = new SplitContainer();
-      tabControl1 = new TabControl();
-      tabPage1 = new TabPage();
-      ColumnGrid = new LJCControls5.LJCDataGrid(components);
+      ColumnTabs = new LJCTabControl(components);
+      ColumnPage = new TabPage();
+      ColumnGrid = new LJCDataGrid(components);
       ColumnMenu = new ContextMenuStrip(components);
-      ColumnExit = new ToolStripMenuItem();
-      tabPage2 = new TabPage();
-      KeyGrid = new LJCControls5.LJCDataGrid(components);
-      KeyMenu = new ContextMenuStrip(components);
-      KeyExit = new ToolStripMenuItem();
-      tabControl2 = new TabControl();
       ColumnNew = new ToolStripMenuItem();
       ColumnEdit = new ToolStripMenuItem();
-      ColumnDelete = new ToolStripMenuItem();
-      ColumnRefresh = new ToolStripMenuItem();
       toolStripSeparator4 = new ToolStripSeparator();
+      ColumnDelete = new ToolStripMenuItem();
       toolStripSeparator5 = new ToolStripSeparator();
+      ColumnRefresh = new ToolStripMenuItem();
       toolStripSeparator6 = new ToolStripSeparator();
+      ColumnExit = new ToolStripMenuItem();
+      KeyPage = new TabPage();
+      KeyGrid = new LJCDataGrid(components);
+      KeyMenu = new ContextMenuStrip(components);
       KeyNew = new ToolStripMenuItem();
-      KeyDelete = new ToolStripMenuItem();
-      KeyRefresh = new ToolStripMenuItem();
       KeyEdit = new ToolStripMenuItem();
       toolStripSeparator7 = new ToolStripSeparator();
+      KeyDelete = new ToolStripMenuItem();
       toolStripSeparator8 = new ToolStripSeparator();
+      KeyRefresh = new ToolStripMenuItem();
       toolStripSeparator9 = new ToolStripSeparator();
-      ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
-      splitContainer1.Panel1.SuspendLayout();
-      splitContainer1.Panel2.SuspendLayout();
-      splitContainer1.SuspendLayout();
+      KeyExit = new ToolStripMenuItem();
+      TileTabs = new LJCTabControl(components);
+      ((System.ComponentModel.ISupportInitialize)MainSplit).BeginInit();
+      MainSplit.Panel1.SuspendLayout();
+      MainSplit.Panel2.SuspendLayout();
+      MainSplit.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)TableGrid).BeginInit();
       TableMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)ColumnsSplit).BeginInit();
       ColumnsSplit.Panel1.SuspendLayout();
       ColumnsSplit.Panel2.SuspendLayout();
       ColumnsSplit.SuspendLayout();
-      tabControl1.SuspendLayout();
-      tabPage1.SuspendLayout();
+      ColumnTabs.SuspendLayout();
+      ColumnPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)ColumnGrid).BeginInit();
       ColumnMenu.SuspendLayout();
-      tabPage2.SuspendLayout();
+      KeyPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)KeyGrid).BeginInit();
       KeyMenu.SuspendLayout();
       SuspendLayout();
       // 
-      // splitContainer1
+      // MainSplit
       // 
-      splitContainer1.Dock = DockStyle.Fill;
-      splitContainer1.Location = new Point(0, 0);
-      splitContainer1.Name = "splitContainer1";
-      splitContainer1.Orientation = Orientation.Horizontal;
+      MainSplit.Dock = DockStyle.Fill;
+      MainSplit.Location = new Point(0, 0);
+      MainSplit.Name = "MainSplit";
+      MainSplit.Orientation = Orientation.Horizontal;
       // 
-      // splitContainer1.Panel1
+      // MainSplit.Panel1
       // 
-      splitContainer1.Panel1.Controls.Add(TableGrid);
+      MainSplit.Panel1.Controls.Add(TableGrid);
       // 
-      // splitContainer1.Panel2
+      // MainSplit.Panel2
       // 
-      splitContainer1.Panel2.Controls.Add(ColumnsSplit);
-      splitContainer1.Size = new Size(800, 450);
-      splitContainer1.SplitterDistance = 162;
-      splitContainer1.TabIndex = 1;
+      MainSplit.Panel2.Controls.Add(ColumnsSplit);
+      MainSplit.Size = new Size(800, 450);
+      MainSplit.SplitterDistance = 162;
+      MainSplit.TabIndex = 1;
       // 
       // TableGrid
       // 
@@ -202,36 +204,36 @@
       // 
       // ColumnsSplit.Panel1
       // 
-      ColumnsSplit.Panel1.Controls.Add(tabControl1);
+      ColumnsSplit.Panel1.Controls.Add(ColumnTabs);
       // 
       // ColumnsSplit.Panel2
       // 
-      ColumnsSplit.Panel2.Controls.Add(tabControl2);
+      ColumnsSplit.Panel2.Controls.Add(TileTabs);
       ColumnsSplit.Size = new Size(800, 284);
       ColumnsSplit.SplitterDistance = 653;
       ColumnsSplit.TabIndex = 0;
       // 
-      // tabControl1
+      // ColumnTabs
       // 
-      tabControl1.Controls.Add(tabPage1);
-      tabControl1.Controls.Add(tabPage2);
-      tabControl1.Dock = DockStyle.Fill;
-      tabControl1.Location = new Point(0, 0);
-      tabControl1.Name = "tabControl1";
-      tabControl1.SelectedIndex = 0;
-      tabControl1.Size = new Size(653, 284);
-      tabControl1.TabIndex = 0;
+      ColumnTabs.Controls.Add(ColumnPage);
+      ColumnTabs.Controls.Add(KeyPage);
+      ColumnTabs.Dock = DockStyle.Fill;
+      ColumnTabs.Location = new Point(0, 0);
+      ColumnTabs.Name = "ColumnTabs";
+      ColumnTabs.SelectedIndex = 0;
+      ColumnTabs.Size = new Size(653, 284);
+      ColumnTabs.TabIndex = 0;
       // 
-      // tabPage1
+      // ColumnPage
       // 
-      tabPage1.Controls.Add(ColumnGrid);
-      tabPage1.Location = new Point(4, 34);
-      tabPage1.Name = "tabPage1";
-      tabPage1.Padding = new Padding(3);
-      tabPage1.Size = new Size(645, 246);
-      tabPage1.TabIndex = 0;
-      tabPage1.Text = "tabPage1";
-      tabPage1.UseVisualStyleBackColor = true;
+      ColumnPage.Controls.Add(ColumnGrid);
+      ColumnPage.Location = new Point(4, 34);
+      ColumnPage.Name = "ColumnPage";
+      ColumnPage.Padding = new Padding(3);
+      ColumnPage.Size = new Size(645, 246);
+      ColumnPage.TabIndex = 0;
+      ColumnPage.Text = "Column";
+      ColumnPage.UseVisualStyleBackColor = true;
       // 
       // ColumnGrid
       // 
@@ -272,22 +274,65 @@
       ColumnMenu.Name = "ColumnMenu";
       ColumnMenu.Size = new Size(184, 182);
       // 
+      // ColumnNew
+      // 
+      ColumnNew.Name = "ColumnNew";
+      ColumnNew.ShortcutKeys = Keys.Control | Keys.N;
+      ColumnNew.Size = new Size(183, 32);
+      ColumnNew.Text = "&New";
+      // 
+      // ColumnEdit
+      // 
+      ColumnEdit.Name = "ColumnEdit";
+      ColumnEdit.ShortcutKeyDisplayString = "ENTER";
+      ColumnEdit.Size = new Size(183, 32);
+      ColumnEdit.Text = "&Edit";
+      // 
+      // toolStripSeparator4
+      // 
+      toolStripSeparator4.Name = "toolStripSeparator4";
+      toolStripSeparator4.Size = new Size(180, 6);
+      // 
+      // ColumnDelete
+      // 
+      ColumnDelete.Name = "ColumnDelete";
+      ColumnDelete.ShortcutKeys = Keys.Delete;
+      ColumnDelete.Size = new Size(183, 32);
+      ColumnDelete.Text = "&Delete";
+      // 
+      // toolStripSeparator5
+      // 
+      toolStripSeparator5.Name = "toolStripSeparator5";
+      toolStripSeparator5.Size = new Size(180, 6);
+      // 
+      // ColumnRefresh
+      // 
+      ColumnRefresh.Name = "ColumnRefresh";
+      ColumnRefresh.ShortcutKeys = Keys.F5;
+      ColumnRefresh.Size = new Size(183, 32);
+      ColumnRefresh.Text = "&Refresh";
+      // 
+      // toolStripSeparator6
+      // 
+      toolStripSeparator6.Name = "toolStripSeparator6";
+      toolStripSeparator6.Size = new Size(180, 6);
+      // 
       // ColumnExit
       // 
       ColumnExit.Name = "ColumnExit";
       ColumnExit.Size = new Size(183, 32);
       ColumnExit.Text = "E&xit";
       // 
-      // tabPage2
+      // KeyPage
       // 
-      tabPage2.Controls.Add(KeyGrid);
-      tabPage2.Location = new Point(4, 34);
-      tabPage2.Name = "tabPage2";
-      tabPage2.Padding = new Padding(3);
-      tabPage2.Size = new Size(645, 246);
-      tabPage2.TabIndex = 1;
-      tabPage2.Text = "tabPage2";
-      tabPage2.UseVisualStyleBackColor = true;
+      KeyPage.Controls.Add(KeyGrid);
+      KeyPage.Location = new Point(4, 34);
+      KeyPage.Name = "KeyPage";
+      KeyPage.Padding = new Padding(3);
+      KeyPage.Size = new Size(645, 246);
+      KeyPage.TabIndex = 1;
+      KeyPage.Text = "Key";
+      KeyPage.UseVisualStyleBackColor = true;
       // 
       // KeyGrid
       // 
@@ -328,131 +373,88 @@
       KeyMenu.Name = "ColumnMenu";
       KeyMenu.Size = new Size(184, 182);
       // 
-      // KeyExit
-      // 
-      KeyExit.Name = "KeyExit";
-      KeyExit.Size = new Size(240, 32);
-      KeyExit.Text = "E&xit";
-      // 
-      // tabControl2
-      // 
-      tabControl2.Dock = DockStyle.Fill;
-      tabControl2.Location = new Point(0, 0);
-      tabControl2.Name = "tabControl2";
-      tabControl2.SelectedIndex = 0;
-      tabControl2.Size = new Size(143, 284);
-      tabControl2.TabIndex = 0;
-      // 
-      // ColumnNew
-      // 
-      ColumnNew.Name = "ColumnNew";
-      ColumnNew.ShortcutKeys = Keys.Control | Keys.N;
-      ColumnNew.Size = new Size(183, 32);
-      ColumnNew.Text = "&New";
-      // 
-      // ColumnEdit
-      // 
-      ColumnEdit.Name = "ColumnEdit";
-      ColumnEdit.ShortcutKeyDisplayString = "ENTER";
-      ColumnEdit.Size = new Size(183, 32);
-      ColumnEdit.Text = "&Edit";
-      // 
-      // ColumnDelete
-      // 
-      ColumnDelete.Name = "ColumnDelete";
-      ColumnDelete.ShortcutKeys = Keys.Delete;
-      ColumnDelete.Size = new Size(183, 32);
-      ColumnDelete.Text = "&Delete";
-      // 
-      // ColumnRefresh
-      // 
-      ColumnRefresh.Name = "ColumnRefresh";
-      ColumnRefresh.ShortcutKeys = Keys.F5;
-      ColumnRefresh.Size = new Size(183, 32);
-      ColumnRefresh.Text = "&Refresh";
-      // 
-      // toolStripSeparator4
-      // 
-      toolStripSeparator4.Name = "toolStripSeparator4";
-      toolStripSeparator4.Size = new Size(180, 6);
-      // 
-      // toolStripSeparator5
-      // 
-      toolStripSeparator5.Name = "toolStripSeparator5";
-      toolStripSeparator5.Size = new Size(180, 6);
-      // 
-      // toolStripSeparator6
-      // 
-      toolStripSeparator6.Name = "toolStripSeparator6";
-      toolStripSeparator6.Size = new Size(180, 6);
-      // 
       // KeyNew
       // 
       KeyNew.Name = "KeyNew";
       KeyNew.ShortcutKeys = Keys.Control | Keys.N;
-      KeyNew.Size = new Size(240, 32);
+      KeyNew.Size = new Size(183, 32);
       KeyNew.Text = "&New";
-      // 
-      // KeyDelete
-      // 
-      KeyDelete.Name = "KeyDelete";
-      KeyDelete.ShortcutKeys = Keys.Delete;
-      KeyDelete.Size = new Size(240, 32);
-      KeyDelete.Text = "&Delete";
-      // 
-      // KeyRefresh
-      // 
-      KeyRefresh.Name = "KeyRefresh";
-      KeyRefresh.ShortcutKeys = Keys.F5;
-      KeyRefresh.Size = new Size(240, 32);
-      KeyRefresh.Text = "&Refresh";
       // 
       // KeyEdit
       // 
       KeyEdit.Name = "KeyEdit";
       KeyEdit.ShortcutKeyDisplayString = "ENTER";
-      KeyEdit.Size = new Size(240, 32);
+      KeyEdit.Size = new Size(183, 32);
       KeyEdit.Text = "&Edit";
       // 
       // toolStripSeparator7
       // 
       toolStripSeparator7.Name = "toolStripSeparator7";
-      toolStripSeparator7.Size = new Size(237, 6);
+      toolStripSeparator7.Size = new Size(180, 6);
+      // 
+      // KeyDelete
+      // 
+      KeyDelete.Name = "KeyDelete";
+      KeyDelete.ShortcutKeys = Keys.Delete;
+      KeyDelete.Size = new Size(183, 32);
+      KeyDelete.Text = "&Delete";
       // 
       // toolStripSeparator8
       // 
       toolStripSeparator8.Name = "toolStripSeparator8";
-      toolStripSeparator8.Size = new Size(237, 6);
+      toolStripSeparator8.Size = new Size(180, 6);
+      // 
+      // KeyRefresh
+      // 
+      KeyRefresh.Name = "KeyRefresh";
+      KeyRefresh.ShortcutKeys = Keys.F5;
+      KeyRefresh.Size = new Size(183, 32);
+      KeyRefresh.Text = "&Refresh";
       // 
       // toolStripSeparator9
       // 
       toolStripSeparator9.Name = "toolStripSeparator9";
-      toolStripSeparator9.Size = new Size(237, 6);
+      toolStripSeparator9.Size = new Size(180, 6);
+      // 
+      // KeyExit
+      // 
+      KeyExit.Name = "KeyExit";
+      KeyExit.Size = new Size(183, 32);
+      KeyExit.Text = "E&xit";
+      // 
+      // TileTabs
+      // 
+      TileTabs.Dock = DockStyle.Fill;
+      TileTabs.Location = new Point(0, 0);
+      TileTabs.Name = "TileTabs";
+      TileTabs.SelectedIndex = 0;
+      TileTabs.Size = new Size(143, 284);
+      TileTabs.TabIndex = 0;
       // 
       // DataUtilityList
       // 
       AutoScaleDimensions = new SizeF(10F, 25F);
       AutoScaleMode = AutoScaleMode.Font;
       ClientSize = new Size(800, 450);
-      Controls.Add(splitContainer1);
+      Controls.Add(MainSplit);
       Name = "DataUtilityList";
       Text = "Form1";
-      Load += Form1_Load;
-      splitContainer1.Panel1.ResumeLayout(false);
-      splitContainer1.Panel2.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
-      splitContainer1.ResumeLayout(false);
+      Load += DataUtilityList_Load;
+      MainSplit.Panel1.ResumeLayout(false);
+      MainSplit.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)MainSplit).EndInit();
+      MainSplit.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)TableGrid).EndInit();
       TableMenu.ResumeLayout(false);
       ColumnsSplit.Panel1.ResumeLayout(false);
       ColumnsSplit.Panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)ColumnsSplit).EndInit();
       ColumnsSplit.ResumeLayout(false);
-      tabControl1.ResumeLayout(false);
-      tabPage1.ResumeLayout(false);
+      ColumnTabs.ResumeLayout(false);
+      ColumnPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)ColumnGrid).EndInit();
       ColumnMenu.ResumeLayout(false);
-      tabPage2.ResumeLayout(false);
+      KeyPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)KeyGrid).EndInit();
       KeyMenu.ResumeLayout(false);
       ResumeLayout(false);
@@ -462,13 +464,13 @@
 
     internal LJCControls5.LJCDataGrid ColumnGrid;
     internal LJCControls5.LJCDataGrid KeyGrid;
-    private SplitContainer splitContainer1;
+    private SplitContainer MainSplit;
     internal LJCControls5.LJCDataGrid TableGrid;
     private SplitContainer ColumnsSplit;
-    private TabControl tabControl1;
-    private TabPage tabPage1;
-    private TabPage tabPage2;
-    private TabControl tabControl2;
+    private LJCTabControl ColumnTabs;
+    private TabPage ColumnPage;
+    private TabPage KeyPage;
+    private LJCTabControl TileTabs;
     internal ContextMenuStrip TableMenu;
     internal ToolStripMenuItem TableExit;
     internal ContextMenuStrip ColumnMenu;

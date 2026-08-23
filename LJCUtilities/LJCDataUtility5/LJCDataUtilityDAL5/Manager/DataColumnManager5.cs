@@ -287,7 +287,7 @@ namespace LJCDataUtilityDAL5
       LJCDBJoin dbJoin;
       dbJoin = new LJCDBJoin
       {
-        TableName = "DataUtilTable",
+        TableName = "DataTable",
         JoinType = "left",
         JoinOns = new LJCDBJoinOns()
         {
