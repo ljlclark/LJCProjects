@@ -52,7 +52,7 @@ namespace LJCDataUtility5
     // Setup the grid code references.
     private void SetupControlCode()
     {
-      //ModuleComboCode = new DataModuleComboCode(this);
+      ModuleComboCode = new DataModuleComboCode(this);
       TableGridCode = new DataTableGridCode(this);
       ColumnGridCode = new DataColumnGridCode(this);
       KeyGridCode = new DataKeyGridCode(this);
@@ -250,7 +250,7 @@ namespace LJCDataUtility5
     private DataKeyGridCode KeyGridCode { get; set; } = null!;
 
     // Gets or sets the ModuleComboCode reference.
-    //private DataModuleComboCode ModuleComboCode { get; set; }
+    private DataModuleComboCode ModuleComboCode { get; set; } = null!;
 
     private ControlValues? ControlValues { get; set; }
     #endregion

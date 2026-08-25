@@ -45,9 +45,7 @@ namespace LJCDataUtility5
           RestoreControlValues();
 
           // Load first control.
-          //ModuleComboCode.DataRetrieve();
-          // *** Testing ***
-          DoChange(Change.Module);
+          ModuleComboCode.DataRetrieve();
           break;
 
         case Change.Module:

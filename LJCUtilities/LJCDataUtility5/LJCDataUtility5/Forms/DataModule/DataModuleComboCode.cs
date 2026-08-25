@@ -1,19 +1,14 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataModuleComboCode.cs
-using LJCDataUtilityDAL;
-using LJCNetCommon;
-using LJCWinFormCommon;
-using LJCWinFormControls;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using static LJCDataUtility.DataUtilityList;
-using LJC = LJCNetCommon.NetCommon;
+using LJCControls5;
+using LJCDataUtilityDAL5;
+using LJCNetCommon5;
+using static LJCDataUtility5.DataUtilityList;
 
-namespace LJCDataUtility
+namespace LJCDataUtility5
 {
-  // Provides DataModuleCombo methods for the Parent window.
+  // Provides methods for the DataModule combo.
   internal class DataModuleComboCode
   {
     #region Constructors
@@ -28,6 +23,8 @@ namespace LJCDataUtility
       // Set Combo vars.
       ModuleCombo = ParentObject.ModuleCombo;
       ModuleMenu = ParentObject.ModuleMenu;
+
+      // Set Data vars.
       Managers = ParentObject.Managers;
       ModuleManager = Managers.DataModuleManager;
 
@@ -43,7 +40,45 @@ namespace LJCDataUtility
       var combo = ModuleCombo;
       combo.KeyDown += ModuleGrid_KeyDown;
       combo.SelectedIndexChanged += ModuleGrid_SelectedIndexChanged;
+
       ParentObject.Cursor = Cursors.Default;
+    }
+    #endregion
+
+    #region Data Value Methods
+
+    // Gets the selected item ID.
+    internal long ItemId(out short dbId, LJCItem? item = null)
+    {
+      long retModuleId = 0;
+
+      dbId = 0;
+      if (null == item)
+      {
+        item = ModuleCombo.SelectedItem as LJCItem;
+      }
+      if (item != null)
+      {
+        retModuleId = item.ID;
+        dbId = item.DbID;
+      }
+      return retModuleId;
+    }
+
+    // Gets the selected item Name.
+    internal string? ItemName(LJCItem? item = null)
+    {
+      string? retModuleName = null;
+
+      if (null == item)
+      {
+        item = ModuleCombo.SelectedItem as LJCItem;
+      }
+      if (item != null)
+      {
+        retModuleName = item.Text;
+      }
+      return retModuleName;
     }
     #endregion
 
@@ -59,11 +94,14 @@ namespace LJCDataUtility
       {
         "Name"
       };
-      ModuleManager.Manager.OrderByNames = orderByNames;
-      var dataItems = ModuleManager.Load();
-      if (LJC.HasListItems(dataItems))
+      if (ModuleManager.Manager != null)
       {
-        foreach (var dataItem in dataItems)
+        ModuleManager.Manager.OrderByNames = orderByNames;
+      }
+      var items = ModuleManager.Load();
+      if (LJC.HasListItems(items))
+      {
+        foreach (var dataItem in items)
         {
           RowAdd(dataItem);
         }
@@ -73,35 +111,35 @@ namespace LJCDataUtility
         }
         ModuleCombo.Select();
       }
-      //SetControlState();
+      SetControlState();
       ParentObject.Cursor = Cursors.Default;
       ParentObject.DoChange(Change.Module);
     }
 
-    // Adds a grid row and updates it with the record values.
+    // Adds a combo item.
     private LJCItem RowAdd(DataModule data)
     {
-      var retValue = ModuleCombo.LJCAddItem(data.Id, 1, data.Name);
+      var retValue = ModuleCombo.LJCAddItem(data.Id, data.DbId, data.Name);
       return retValue;
     }
 
     // Selects a row based on the key record values.
-    private bool RowSelect(int id, short dbID)
+    private bool RowSelect(short dbId, long id)
     {
       bool retValue = false;
 
-      if (id > 0
-        && dbID > 0)
+      if (dbId > 0
+        && id > 0)
       {
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCItem item in ModuleCombo.Items)
         {
-          var rowID = ParentObject.DataModuleItemId(out short rowDbID, item);
-          if (rowID == id
-            && rowDbID == dbID)
+          var rowId = ItemId(out short rowDbId, item);
+          if (rowId == id
+            && rowDbId == dbId)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            ModuleCombo.LJCSetByItemID(id, dbID);
+            ModuleCombo.LJCSetByItemID(id, dbId);
             retValue = true;
             break;
           }
@@ -126,7 +164,7 @@ namespace LJCDataUtility
       bool enableNew = true;
       bool enableEdit = ModuleCombo.SelectedItem != null;
       FormCommon.SetMenuState(ModuleMenu, enableNew, enableEdit);
-      ParentObject.ModuleHeading.Enabled = true;
+      //ParentObject.ModuleHeading.Enabled = true;
     }
     #endregion
 
@@ -135,22 +173,21 @@ namespace LJCDataUtility
     // Deletes the selected row.
     internal void Delete()
     {
-      bool isContinue = true;
-      var item = ModuleCombo.SelectedItem as LJCItem;
-      if (item != null)
+      while (true)
       {
-        var title = "Delete Confirmation";
-        var message = FormCommon.DeleteConfirm;
-        if (DialogResult.No == MessageBox.Show(message, title
-          , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+        var item = ModuleCombo.SelectedItem as LJCItem;
+        if (item != null)
         {
-          isContinue = false;
+          var title = "Delete Confirmation";
+          var message = FormCommon.DeleteConfirm;
+          if (DialogResult.No == MessageBox.Show(message, title
+            , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+          {
+            break;
+          }
         }
-      }
 
-      if (isContinue)
-      {
-        var id = ParentObject.DataModuleItemId(out short dbID);
+        var id = ItemId(out short dbID);
         var keyColumns = new LJCDataColumns()
         {
           { DataModule.ColumnId, id },
@@ -159,18 +196,16 @@ namespace LJCDataUtility
         ModuleManager.Delete(keyColumns);
         if (0 == ModuleManager.AffectedCount)
         {
-          isContinue = false;
           var message = FormCommon.DeleteError;
           MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
             , MessageBoxIcon.Exclamation);
+          break;
         }
-      }
 
-      if (isContinue)
-      {
         ModuleCombo.Items.Remove(item);
         SetControlState();
         ParentObject.TimedChange(Change.Module);
+        break;
       }
     }
 
@@ -179,52 +214,51 @@ namespace LJCDataUtility
     {
       if (ModuleCombo.SelectedItem is LJCItem)
       {
-        var id = ParentObject.DataModuleItemId(out short dbID);
-        //var location = FormPoint.DialogScreenPoint(ModuleGrid);
-        var detail = new DataModuleDetail()
-        {
-          LJCID = (int)id,
-          LJCDbID = dbID,
-          //LJCLocation = location,
-          LJCManagers = Managers,
-        };
-        detail.LJCChange += Detail_Change;
-        //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
-        detail.ShowDialog();
+        // Data from items.
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
+        var id = ItemId(out short dbId);
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
+
+        //var detail = new DataModuleDetail()
+        //{
+        //  LJCID = (int)id,
+        //  LJCDbID = dbId,
+        //  //LJCLocation = location,
+        //  LJCManagers = Managers,
+        //};
+        //detail.LJCChange += Detail_Change;
+        //detail.ShowDialog();
       }
     }
 
     // Displays a detail dialog for a new record.
     internal void New()
     {
-      //var location = FormPoint.DialogScreenPoint(ModuleGrid);
-      var detail = new DataModuleDetail
-      {
-        //LJCLocation = location,
-        LJCManagers = Managers,
-      };
-      detail.LJCChange += Detail_Change;
-      //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
-      detail.ShowDialog();
+      //var detail = new DataModuleDetail
+      //{
+      //  LJCManagers = Managers,
+      //};
+      //detail.LJCChange += Detail_Change;
+      //detail.ShowDialog();
     }
 
     // Refreshes the list.
     internal void Refresh()
     {
       ParentObject.Cursor = Cursors.WaitCursor;
+      short dbId = 0;
       long id = 0;
-      short dbID = 0;
       if (ModuleCombo.SelectedItem is LJCItem)
       {
         // Save the original row.
-        id = ParentObject.DataModuleItemId(out dbID);
+        id = ItemId(out dbId);
       }
       DataRetrieve();
 
       // Select the original row.
       if (id > 0)
       {
-        RowSelect((int)id, dbID);
+        RowSelect(dbId, id);
       }
       ParentObject.Cursor = Cursors.Default;
     }
@@ -239,49 +273,49 @@ namespace LJCDataUtility
     // Adds new row or updates row with control values.
     private void Detail_Change(object sender, EventArgs e)
     {
-      var detail = sender as DataModuleDetail;
-      var record = detail.LJCRecord;
-      if (record != null)
-      {
-        if (detail.LJCIsUpdate)
-        {
-          RowUpdate(record);
-          Refresh();
-        }
-        else
-        {
-          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          var item = RowAdd(record);
-          ModuleCombo.LJCSetByItemID((int)item.ID, item.DbID);
-          SetControlState();
-          ParentObject.TimedChange(Change.Module);
-        }
-      }
+      //var detail = sender as DataModuleDetail;
+      //var record = detail.LJCRecord;
+      //if (record != null)
+      //{
+      //  if (detail.LJCIsUpdate)
+      //  {
+      //    RowUpdate(record);
+      //    Refresh();
+      //  }
+      //  else
+      //  {
+      //    // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+      //    var item = RowAdd(record);
+      //    ModuleCombo.LJCSetByItemID((int)item.ID, item.DbID);
+      //    SetControlState();
+      //    ParentObject.TimedChange(Change.Module);
+      //  }
+      //}
     }
     #endregion
 
     #region Action Event Handlers
 
     // Handles the New menu item event.
-    private void ModuleNew_Click(object sender, EventArgs e)
+    private void ModuleNew_Click(object? sender, EventArgs e)
     {
       New();
     }
 
     // Handles the Edit menu item event.
-    private void ModuleEdit_Click(object sender, EventArgs e)
+    private void ModuleEdit_Click(object? sender, EventArgs e)
     {
       Edit();
     }
 
     // Handles the Delete menu item event.
-    private void ModuleDelete_Click(object sender, EventArgs e)
+    private void ModuleDelete_Click(object? sender, EventArgs e)
     {
       Delete();
     }
 
     // Handles the Refresh menu item event.
-    private void ModuleRefresh_Click(object sender, EventArgs e)
+    private void ModuleRefresh_Click(object? sender, EventArgs e)
     {
       Refresh();
     }
@@ -290,7 +324,7 @@ namespace LJCDataUtility
     #region Control Event Handlers
 
     // Handles the Grid KeyDown event.
-    private void ModuleGrid_KeyDown(object sender, KeyEventArgs e)
+    private void ModuleGrid_KeyDown(object? sender, KeyEventArgs e)
     {
       switch (e.KeyCode)
       {
@@ -320,7 +354,7 @@ namespace LJCDataUtility
     }
 
     // Handles the SelectionChanged event.
-    private void ModuleGrid_SelectedIndexChanged(object sender, EventArgs e)
+    private void ModuleGrid_SelectedIndexChanged(object? sender, EventArgs e)
     {
       ParentObject.TimedChange(Change.Module);
     }

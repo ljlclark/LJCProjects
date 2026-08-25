@@ -37,6 +37,7 @@ namespace LJCDataUtility5
       MainSplit = new SplitContainer();
       TableGrid = new LJCDataGrid(components);
       TableMenu = new ContextMenuStrip(components);
+      Table = new ToolStripMenuItem();
       TableNew = new ToolStripMenuItem();
       TableEdit = new ToolStripMenuItem();
       toolStripSeparator1 = new ToolStripSeparator();
@@ -50,6 +51,7 @@ namespace LJCDataUtility5
       ColumnPage = new TabPage();
       ColumnGrid = new LJCDataGrid(components);
       ColumnMenu = new ContextMenuStrip(components);
+      toolStripMenuItem1 = new ToolStripMenuItem();
       ColumnNew = new ToolStripMenuItem();
       ColumnEdit = new ToolStripMenuItem();
       toolStripSeparator4 = new ToolStripSeparator();
@@ -62,6 +64,7 @@ namespace LJCDataUtility5
       KeyGrid = new LJCDataGrid(components);
       KeyMenu = new ContextMenuStrip(components);
       KeyNew = new ToolStripMenuItem();
+      toolStripMenuItem2 = new ToolStripMenuItem();
       KeyEdit = new ToolStripMenuItem();
       toolStripSeparator7 = new ToolStripSeparator();
       KeyDelete = new ToolStripMenuItem();
@@ -71,6 +74,16 @@ namespace LJCDataUtility5
       KeyExit = new ToolStripMenuItem();
       TileTabs = new LJCTabControl(components);
       ModuleCombo = new LJCItemCombo();
+      ModuleMenu = new ContextMenuStrip(components);
+      ModuleNew = new ToolStripMenuItem();
+      Module = new ToolStripMenuItem();
+      ModuleEdit = new ToolStripMenuItem();
+      toolStripSeparator10 = new ToolStripSeparator();
+      ModuleDelete = new ToolStripMenuItem();
+      toolStripSeparator11 = new ToolStripSeparator();
+      ModuleRefresh = new ToolStripMenuItem();
+      toolStripSeparator12 = new ToolStripSeparator();
+      ModuleExit = new ToolStripMenuItem();
       ModuleLabel = new Label();
       ConfigLabel = new Label();
       ConfigCombo = new LJCItemCombo();
@@ -91,6 +104,7 @@ namespace LJCDataUtility5
       KeyPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)KeyGrid).BeginInit();
       KeyMenu.SuspendLayout();
+      ModuleMenu.SuspendLayout();
       SuspendLayout();
       // 
       // MainSplit
@@ -147,9 +161,16 @@ namespace LJCDataUtility5
       // TableMenu
       // 
       TableMenu.ImageScalingSize = new Size(24, 24);
-      TableMenu.Items.AddRange(new ToolStripItem[] { TableNew, TableEdit, toolStripSeparator1, TableDelete, toolStripSeparator2, TableRefresh, toolStripSeparator3, TableExit });
+      TableMenu.Items.AddRange(new ToolStripItem[] { Table, TableNew, TableEdit, toolStripSeparator1, TableDelete, toolStripSeparator2, TableRefresh, toolStripSeparator3, TableExit });
       TableMenu.Name = "ColumnMenu";
-      TableMenu.Size = new Size(184, 182);
+      TableMenu.Size = new Size(184, 214);
+      // 
+      // Table
+      // 
+      Table.BackColor = SystemColors.GradientActiveCaption;
+      Table.Name = "Table";
+      Table.Size = new Size(183, 32);
+      Table.Text = "Table";
       // 
       // TableNew
       // 
@@ -278,9 +299,16 @@ namespace LJCDataUtility5
       // ColumnMenu
       // 
       ColumnMenu.ImageScalingSize = new Size(24, 24);
-      ColumnMenu.Items.AddRange(new ToolStripItem[] { ColumnNew, ColumnEdit, toolStripSeparator4, ColumnDelete, toolStripSeparator5, ColumnRefresh, toolStripSeparator6, ColumnExit });
+      ColumnMenu.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, ColumnNew, ColumnEdit, toolStripSeparator4, ColumnDelete, toolStripSeparator5, ColumnRefresh, toolStripSeparator6, ColumnExit });
       ColumnMenu.Name = "ColumnMenu";
-      ColumnMenu.Size = new Size(184, 182);
+      ColumnMenu.Size = new Size(184, 214);
+      // 
+      // toolStripMenuItem1
+      // 
+      toolStripMenuItem1.BackColor = SystemColors.GradientActiveCaption;
+      toolStripMenuItem1.Name = "toolStripMenuItem1";
+      toolStripMenuItem1.Size = new Size(183, 32);
+      toolStripMenuItem1.Text = "Column";
       // 
       // ColumnNew
       // 
@@ -337,7 +365,7 @@ namespace LJCDataUtility5
       KeyPage.Location = new Point(4, 34);
       KeyPage.Name = "KeyPage";
       KeyPage.Padding = new Padding(3);
-      KeyPage.Size = new Size(645, 212);
+      KeyPage.Size = new Size(645, 211);
       KeyPage.TabIndex = 1;
       KeyPage.Text = "Key";
       KeyPage.UseVisualStyleBackColor = true;
@@ -371,15 +399,15 @@ namespace LJCDataUtility5
       KeyGrid.RowHeadersWidth = 62;
       KeyGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       KeyGrid.ShowCellToolTips = false;
-      KeyGrid.Size = new Size(639, 206);
+      KeyGrid.Size = new Size(639, 205);
       KeyGrid.TabIndex = 9;
       // 
       // KeyMenu
       // 
       KeyMenu.ImageScalingSize = new Size(24, 24);
-      KeyMenu.Items.AddRange(new ToolStripItem[] { KeyNew, KeyEdit, toolStripSeparator7, KeyDelete, toolStripSeparator8, KeyRefresh, toolStripSeparator9, KeyExit });
+      KeyMenu.Items.AddRange(new ToolStripItem[] { toolStripMenuItem2, KeyNew, KeyEdit, toolStripSeparator7, KeyDelete, toolStripSeparator8, KeyRefresh, toolStripSeparator9, KeyExit });
       KeyMenu.Name = "ColumnMenu";
-      KeyMenu.Size = new Size(184, 182);
+      KeyMenu.Size = new Size(184, 214);
       // 
       // KeyNew
       // 
@@ -387,6 +415,13 @@ namespace LJCDataUtility5
       KeyNew.ShortcutKeys = Keys.Control | Keys.N;
       KeyNew.Size = new Size(183, 32);
       KeyNew.Text = "&New";
+      // 
+      // toolStripMenuItem2
+      // 
+      toolStripMenuItem2.BackColor = SystemColors.GradientActiveCaption;
+      toolStripMenuItem2.Name = "toolStripMenuItem2";
+      toolStripMenuItem2.Size = new Size(183, 32);
+      toolStripMenuItem2.Text = "Key";
       // 
       // KeyEdit
       // 
@@ -443,11 +478,75 @@ namespace LJCDataUtility5
       // 
       // ModuleCombo
       // 
+      ModuleCombo.ContextMenuStrip = ModuleMenu;
       ModuleCombo.FormattingEnabled = true;
       ModuleCombo.Location = new Point(132, 12);
       ModuleCombo.Name = "ModuleCombo";
       ModuleCombo.Size = new Size(230, 33);
       ModuleCombo.TabIndex = 1;
+      // 
+      // ModuleMenu
+      // 
+      ModuleMenu.ImageScalingSize = new Size(24, 24);
+      ModuleMenu.Items.AddRange(new ToolStripItem[] { Module, ModuleNew, ModuleEdit, toolStripSeparator10, ModuleDelete, toolStripSeparator11, ModuleRefresh, toolStripSeparator12, ModuleExit });
+      ModuleMenu.Name = "ModuleMenu";
+      ModuleMenu.Size = new Size(241, 247);
+      // 
+      // ModuleNew
+      // 
+      ModuleNew.Name = "ModuleNew";
+      ModuleNew.ShortcutKeys = Keys.Control | Keys.N;
+      ModuleNew.Size = new Size(240, 32);
+      ModuleNew.Text = "&New";
+      // 
+      // Module
+      // 
+      Module.BackColor = SystemColors.GradientActiveCaption;
+      Module.Name = "Module";
+      Module.Size = new Size(240, 32);
+      Module.Text = "Module";
+      // 
+      // ModuleEdit
+      // 
+      ModuleEdit.Name = "ModuleEdit";
+      ModuleEdit.ShortcutKeyDisplayString = "ENTER";
+      ModuleEdit.Size = new Size(240, 32);
+      ModuleEdit.Text = "&Edit";
+      // 
+      // toolStripSeparator10
+      // 
+      toolStripSeparator10.Name = "toolStripSeparator10";
+      toolStripSeparator10.Size = new Size(237, 6);
+      // 
+      // ModuleDelete
+      // 
+      ModuleDelete.Name = "ModuleDelete";
+      ModuleDelete.ShortcutKeys = Keys.Delete;
+      ModuleDelete.Size = new Size(240, 32);
+      ModuleDelete.Text = "&Delete";
+      // 
+      // toolStripSeparator11
+      // 
+      toolStripSeparator11.Name = "toolStripSeparator11";
+      toolStripSeparator11.Size = new Size(237, 6);
+      // 
+      // ModuleRefresh
+      // 
+      ModuleRefresh.Name = "ModuleRefresh";
+      ModuleRefresh.ShortcutKeys = Keys.F5;
+      ModuleRefresh.Size = new Size(240, 32);
+      ModuleRefresh.Text = "&Refresh";
+      // 
+      // toolStripSeparator12
+      // 
+      toolStripSeparator12.Name = "toolStripSeparator12";
+      toolStripSeparator12.Size = new Size(237, 6);
+      // 
+      // ModuleExit
+      // 
+      ModuleExit.Name = "ModuleExit";
+      ModuleExit.Size = new Size(240, 32);
+      ModuleExit.Text = "E&xit";
       // 
       // ModuleLabel
       // 
@@ -503,6 +602,7 @@ namespace LJCDataUtility5
       KeyPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)KeyGrid).EndInit();
       KeyMenu.ResumeLayout(false);
+      ModuleMenu.ResumeLayout(false);
       ResumeLayout(false);
     }
 
@@ -548,5 +648,18 @@ namespace LJCDataUtility5
     private Label ModuleLabel;
     private Label ConfigLabel;
     internal LJCItemCombo ConfigCombo;
+    internal ContextMenuStrip ModuleMenu;
+    internal ToolStripMenuItem ModuleNew;
+    internal ToolStripMenuItem ModuleEdit;
+    private ToolStripSeparator toolStripSeparator10;
+    internal ToolStripMenuItem ModuleDelete;
+    private ToolStripSeparator toolStripSeparator11;
+    internal ToolStripMenuItem ModuleRefresh;
+    private ToolStripSeparator toolStripSeparator12;
+    internal ToolStripMenuItem ModuleExit;
+    private ToolStripMenuItem Table;
+    private ToolStripMenuItem toolStripMenuItem1;
+    private ToolStripMenuItem toolStripMenuItem2;
+    private ToolStripMenuItem Module;
   }
 }
