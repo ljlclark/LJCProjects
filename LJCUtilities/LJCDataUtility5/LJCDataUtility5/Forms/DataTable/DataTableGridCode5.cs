@@ -83,7 +83,7 @@ namespace LJCDataUtility5
     // Gets the selected row ID.
     internal long RowId(out short dbId, LJCGridRow? row = null)
     {
-      long retTableId = 0;
+      long retId = 0;
 
       dbId = 0;
       row ??= Row();
@@ -91,10 +91,10 @@ namespace LJCDataUtility5
         && row.DataGridView != null
         && "TableGrid" == row.DataGridView.Name)
       {
-        retTableId = row.LJCGetInt64(DataUtilTable.ColumnId);
         dbId = row.LJCGetInt16(DataUtilTable.ColumnDbId);
+        retId = row.LJCGetInt64(DataUtilTable.ColumnId);
       }
-      return retTableId;
+      return retId;
     }
 
     // Gets the selected row Name.
@@ -119,18 +119,15 @@ namespace LJCDataUtility5
 
       tableDbId = 0;
 
-      //var moduleId = DataModuleItemId(out dbId);
-      // *** Begin *** Testing
-      short moduleDbId = 1;
-      var moduleId = 1;
-      // *** End ***
+      var moduleCode = ParentObject.ModuleComboCode;
+      var moduleId = moduleCode.ItemId(out short moduleDbId);
       var tableManager = Managers.DataTableManager;
       var targetTable = tableManager.RetrieveUnique(moduleDbId, moduleId
         , targetTableName);
       if (targetTable != null)
       {
-        retTableId = targetTable.Id;
         tableDbId = targetTable.DbId;
+        retTableId = targetTable.Id;
       }
       return retTableId;
     }
@@ -144,17 +141,7 @@ namespace LJCDataUtility5
       ParentObject.Cursor = Cursors.WaitCursor;
       TableGrid.LJCRowsClear();
 
-      //short moduleDbId = 0;
-      //long moduleId = 0;
-      // Testing
-      short moduleDbId = 1;
-      long moduleId = 1;
-      if (ModuleCombo.SelectedItem is LJCItem comboItem)
-      {
-        moduleDbId = comboItem.DbID;
-        moduleId = comboItem.ID;
-      }
-
+      var moduleId = ModuleCombo.LJCSelectedItemID(out short moduleDbId);
       if (moduleDbId > 0
         && moduleId > 0)
       {
@@ -283,11 +270,13 @@ namespace LJCDataUtility5
           }
         }
 
+        // Data from items.
         var id = RowId(out short dbId);
+
         var keyColumns = new LJCDataColumns()
         {
-          { DataUtilTable.ColumnId, id },
           { DataUtilTable.ColumnDbId, dbId },
+          { DataUtilTable.ColumnId, id },
         };
         TableManager.Delete(keyColumns);
         if (0 == TableManager.AffectedCount)
@@ -319,8 +308,8 @@ namespace LJCDataUtility5
         string parentName = "";
         if (ModuleCombo.SelectedItem is LJCItem item)
         {
-          parentID = item.ID;
           parentDbID = item.DbID;
+          parentID = item.ID;
           parentName = ModuleCombo.Text;
         }
 
@@ -355,8 +344,8 @@ namespace LJCDataUtility5
         string parentName = "";
         if (ModuleCombo.SelectedItem is LJCItem item)
         {
-          parentId = item.ID;
           parentDbId = item.DbID;
+          parentId = item.ID;
           parentName = ModuleCombo.Text;
         }
         var location = FormPoint.DialogScreenPoint(TableGrid);
@@ -381,8 +370,8 @@ namespace LJCDataUtility5
     internal void Refresh()
     {
       ParentObject.Cursor = Cursors.WaitCursor;
-      long id = 0;
       short dbId = 0;
+      long id = 0;
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         // Save the original row.

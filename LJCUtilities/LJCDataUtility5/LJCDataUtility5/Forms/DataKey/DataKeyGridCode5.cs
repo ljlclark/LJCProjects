@@ -97,8 +97,8 @@ namespace LJCDataUtility5
         && row.DataGridView != null
         && "KeyGrid" == row.DataGridView.Name)
       {
-        retKeyId = row.LJCGetInt64(DataKey.ColumnId);
         dbId = row.LJCGetInt16(DataKey.ColumnDbId);
+        retKeyId = row.LJCGetInt64(DataKey.ColumnId);
       }
       return retKeyId;
     }

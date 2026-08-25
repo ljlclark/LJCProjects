@@ -59,8 +59,8 @@ namespace LJCDataUtility5
       }
       if (item != null)
       {
-        retModuleId = item.ID;
         dbId = item.DbID;
+        retModuleId = item.ID;
       }
       return retModuleId;
     }

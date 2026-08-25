@@ -16,6 +16,10 @@ namespace LJCDataUtility5
     {
       Cursor = Cursors.WaitCursor;
 
+      // Action Event Handlers
+      ColumnTabMove.Click += ColumnTabMove_Click;
+      KeyTabMove.Click += KeyTabMove_Click;
+
       // Control Event Handlers
       ColumnTabs.MouseDown += ColumnTabs_MouseDown;
       TileTabs.MouseDown += TileTabs_MouseDown;
@@ -127,9 +131,6 @@ namespace LJCDataUtility5
           ColumnGrid.LJCRestoreColumnValues(ControlValues);
           KeyGrid.LJCRestoreColumnValues(ControlValues);
 
-          // Restore Font sizes.
-          FormCommon.RestoreTabsFontSize(ColumnTabs, ControlValues);
-
           FormCommon.RestoreSplitDistance(MainSplit, ControlValues);
           InfoValue = ControlValues.LJCSearchName("AddProc");
         }
@@ -149,9 +150,6 @@ namespace LJCDataUtility5
       TableGrid.LJCSaveColumnValues(controlValues);
       ColumnGrid.LJCSaveColumnValues(controlValues);
       KeyGrid.LJCSaveColumnValues(controlValues);
-
-      // Save Font sizes.
-      FormCommon.SaveTabFontSize(ColumnTabs, controlValues);
 
       controlValues.Add("MainSplit.SplitterDistance", 0, 0, 0
         , MainSplit.SplitterDistance);
@@ -186,13 +184,13 @@ namespace LJCDataUtility5
     #region Action Event Handlers
 
     // Performs a Move of the selected Main Tab to the TileTabs control.
-    private void ColumnTabMove_Click(object sender, EventArgs e)
+    private void ColumnTabMove_Click(object? sender, EventArgs e)
     {
       ColumnTabs.LJCMoveTabPageRight(TileTabs, ColumnsSplit);
     }
 
     // Performs a Move of the selected Tile Tab to the MainTabs control.
-    private void KeyTabMove_Click(object sender, EventArgs e)
+    private void KeyTabMove_Click(object? sender, EventArgs e)
     {
       TileTabs.LJCMoveTabPageLeft(ColumnTabs, ColumnsSplit);
     }
@@ -243,14 +241,14 @@ namespace LJCDataUtility5
     // Gets or sets the DataColumnGridCode reference.
     internal DataColumnGridCode ColumnGridCode { get; set; } = null!;
 
+    // Gets or sets the ModuleComboCode reference.
+    internal DataModuleComboCode ModuleComboCode { get; set; } = null!;
+
     // Gets or sets the DataTableGridCode reference.
     internal DataTableGridCode TableGridCode { get; set; } = null!;
 
     // Gets or sets the KeyGridCode reference.
     private DataKeyGridCode KeyGridCode { get; set; } = null!;
-
-    // Gets or sets the ModuleComboCode reference.
-    private DataModuleComboCode ModuleComboCode { get; set; } = null!;
 
     private ControlValues? ControlValues { get; set; }
     #endregion
