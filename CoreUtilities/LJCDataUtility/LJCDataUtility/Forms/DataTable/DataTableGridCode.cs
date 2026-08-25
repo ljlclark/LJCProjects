@@ -26,7 +26,7 @@ namespace LJCDataUtility
       ParentObject = parentObject;
       ParentObject.Cursor = Cursors.WaitCursor;
 
-      // Set Grid vars.
+      // Set control code vars.
       ModuleCombo = ParentObject.ModuleCombo;
       TableGrid = ParentObject.TableGrid;
       TableMenu = ParentObject.TableMenu;

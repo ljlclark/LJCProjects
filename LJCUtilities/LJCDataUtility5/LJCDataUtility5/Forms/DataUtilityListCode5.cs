@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // DataUtilityListCode5.cs
 using LJCControls5;
+using LJCDataAccessConfig5;
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
 
@@ -15,11 +16,14 @@ namespace LJCDataUtility5
     {
       Cursor = Cursors.WaitCursor;
 
-      // *** Testing ***
-      ColumnsSplit.Panel2Collapsed = true;
+      // Control Event Handlers
+      ColumnTabs.MouseDown += ColumnTabs_MouseDown;
+      TileTabs.MouseDown += TileTabs_MouseDown;
 
       InitializeClassData();
       SetupControlCode();
+      LoadControlData();
+      ControlSetup();
       InitialControlValues();
       SetupGrids();
       StartChangeProcessing();
@@ -52,6 +56,29 @@ namespace LJCDataUtility5
       TableGridCode = new DataTableGridCode(this);
       ColumnGridCode = new DataColumnGridCode(this);
       KeyGridCode = new DataKeyGridCode(this);
+    }
+
+    // Loads the initial Control data.
+    private void LoadControlData()
+    {
+      // Get DataConfigs
+      var dataConfigs = new LJCDataConfigs();
+      dataConfigs.LoadData();
+      foreach (var dataConfig in dataConfigs)
+      {
+        ConfigCombo.Items.Add(dataConfig);
+      }
+      if (ConfigCombo.Items.Count > 0)
+      {
+        ConfigCombo.SelectedIndex = 0;
+      }
+    }
+
+    // Initial Control setup.
+    private void ControlSetup()
+    {
+      // Provides additional Drag features between split LJCTabControls.
+      var _ = new LJCPanelManager(ColumnsSplit, ColumnTabs, TileTabs);
     }
 
     // Set initial Control values.
@@ -102,15 +129,6 @@ namespace LJCDataUtility5
 
           // Restore Font sizes.
           FormCommon.RestoreTabsFontSize(ColumnTabs, ControlValues);
-          //TableGrid.LJCRestoreFontSize(ControlValues);
-          //ColumnGrid.LJCRestoreFontSize(ControlValues);
-          //KeyGrid.LJCRestoreFontSize(ControlValues);
-
-          // Restore Menu Font sizes.
-          //FormCommon.RestoreMenuFontSize(ModuleMenu, ControlValues);
-          //FormCommon.RestoreMenuFontSize(TableMenu, ControlValues);
-          //FormCommon.RestoreMenuFontSize(ColumnMenu, ControlValues);
-          //FormCommon.RestoreMenuFontSize(KeyMenu, ControlValues);
 
           FormCommon.RestoreSplitDistance(MainSplit, ControlValues);
           InfoValue = ControlValues.LJCSearchName("AddProc");
@@ -121,7 +139,7 @@ namespace LJCDataUtility5
     // Saves the control values. 
     private void SaveControlValues()
     {
-      ControlValues controlValues = new ControlValues
+      var controlValues = new ControlValues
       {
         // Save Window values.
         { Name, Left, Top, Width, Height },
@@ -134,15 +152,6 @@ namespace LJCDataUtility5
 
       // Save Font sizes.
       FormCommon.SaveTabFontSize(ColumnTabs, controlValues);
-      //TableGrid.LJCSaveFontSize(controlValues);
-      //ColumnGrid.LJCSaveFontSize(controlValues);
-      //KeyGrid.LJCSaveFontSize(controlValues);
-
-      // Save Menu Font sizes.
-      //FormCommon.SaveMenuFontSize(ModuleMenu, controlValues);
-      //FormCommon.SaveMenuFontSize(TableMenu, controlValues);
-      //FormCommon.SaveMenuFontSize(ColumnMenu, controlValues);
-      //FormCommon.SaveMenuFontSize(KeyMenu, controlValues);
 
       controlValues.Add("MainSplit.SplitterDistance", 0, 0, 0
         , MainSplit.SplitterDistance);
@@ -174,10 +183,25 @@ namespace LJCDataUtility5
     }
     #endregion
 
+    #region Action Event Handlers
+
+    // Performs a Move of the selected Main Tab to the TileTabs control.
+    private void ColumnTabMove_Click(object sender, EventArgs e)
+    {
+      ColumnTabs.LJCMoveTabPageRight(TileTabs, ColumnsSplit);
+    }
+
+    // Performs a Move of the selected Tile Tab to the MainTabs control.
+    private void KeyTabMove_Click(object sender, EventArgs e)
+    {
+      TileTabs.LJCMoveTabPageLeft(ColumnTabs, ColumnsSplit);
+    }
+    #endregion
+
     #region Control Event Handlers
 
     // Handles the MouseDown event.
-    private void ColumnTabs_MouseDown(object sender, MouseEventArgs e)
+    private void ColumnTabs_MouseDown(object? sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
       {
@@ -187,7 +211,7 @@ namespace LJCDataUtility5
     }
 
     // Handles the MouseDown event.
-    private void TileTabs_MouseDown(object sender, MouseEventArgs e)
+    private void TileTabs_MouseDown(object? sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
       {
@@ -205,7 +229,7 @@ namespace LJCDataUtility5
     internal string ConnectionType { get; set; } = null!;
 
     // Gets or sets the ControlValues file name.
-    internal string ControlValuesFileName { get; set; }
+    internal string ControlValuesFileName { get; set; } = null!;
 
     // Gets or sets the InfoValue item.
     internal ControlValue? InfoValue { get; set; }
@@ -217,13 +241,13 @@ namespace LJCDataUtility5
     //internal LJCStandardUISettings Settings { get; set; }
 
     // Gets or sets the DataColumnGridCode reference.
-    private DataColumnGridCode ColumnGridCode { get; set; }
+    internal DataColumnGridCode ColumnGridCode { get; set; } = null!;
 
     // Gets or sets the DataTableGridCode reference.
     internal DataTableGridCode TableGridCode { get; set; } = null!;
 
     // Gets or sets the KeyGridCode reference.
-    private DataKeyGridCode KeyGridCode { get; set; }
+    private DataKeyGridCode KeyGridCode { get; set; } = null!;
 
     // Gets or sets the ModuleComboCode reference.
     //private DataModuleComboCode ModuleComboCode { get; set; }

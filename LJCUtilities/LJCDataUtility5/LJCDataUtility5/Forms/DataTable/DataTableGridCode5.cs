@@ -19,7 +19,8 @@ namespace LJCDataUtility5
       ParentObject = parentObject;
       ParentObject.Cursor = Cursors.WaitCursor;
 
-      // Set Grid vars.
+      // Set control code vars.
+      ModuleCombo = ParentObject.ModuleCombo;
       TableGrid = parentObject.TableGrid;
       TableMenu = ParentObject.TableMenu;
 
@@ -143,12 +144,16 @@ namespace LJCDataUtility5
       ParentObject.Cursor = Cursors.WaitCursor;
       TableGrid.LJCRowsClear();
 
-      //var ljcItem = ModuleCombo.SelectedItem as LJCItem;
-      //var moduleDbID = ljcItem.DbID;
-      //var moduleID = ljcItem.ID;
+      //short moduleDbId = 0;
+      //long moduleId = 0;
       // Testing
       short moduleDbId = 1;
-      var moduleId = 1;
+      long moduleId = 1;
+      if (ModuleCombo.SelectedItem is LJCItem comboItem)
+      {
+        moduleDbId = comboItem.DbID;
+        moduleId = comboItem.ID;
+      }
 
       if (moduleDbId > 0
         && moduleId > 0)
@@ -216,10 +221,9 @@ namespace LJCDataUtility5
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in TableGrid.Rows)
         {
-          var rowDbId = row.LJCGetInt16(DataUtilTable.ColumnDbId);
-          var rowID = row.LJCGetInt64(DataUtilTable.ColumnId);
+          var rowId = RowId(out short rowDbId, row);
           if (rowDbId == data.DbId
-            && rowID == data.Id)
+            && rowId == data.Id)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             TableGrid.LJCSetCurrentRow(row, true);
@@ -245,11 +249,10 @@ namespace LJCDataUtility5
     // Sets the control states based on the current control values.
     private void SetControlState()
     {
-      //bool enableNew = ModuleCombo.CurrentRow != null;
-      bool enableNew = true;
+      bool enableNew = ModuleCombo.SelectedItem != null;
       bool enableEdit = TableGrid.CurrentRow != null;
       FormCommon.SetMenuState(TableMenu, enableNew, enableEdit);
-      //ParentObject.ColumnHeading.Enabled = true;
+      //ParentObject.TableHeading.Enabled = true;
     }
 
     // Sets the row stored values.
@@ -266,43 +269,40 @@ namespace LJCDataUtility5
     // Deletes the selected row.
     internal void Delete()
     {
-      //bool isContinue = true;
-      //var row = TableGrid.CurrentRow as LJCGridRow;
-      //if (TableGrid.CurrentRow is LJCGridRow row)
-      //{
-      //  var title = "Delete Confirmation";
-      //  var message = FormCommon.DeleteConfirm;
-      //  if (DialogResult.No == MessageBox.Show(message, title
-      //    , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-      //  {
-      //    isContinue = false;
-      //  }
-      //}
+      while (true)
+      {
+        var row = TableGrid.CurrentRow;
+        if (row != null)
+        {
+          var title = "Delete Confirmation";
+          var message = FormCommon.DeleteConfirm;
+          if (DialogResult.No == MessageBox.Show(message, title
+            , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+          {
+            break;
+          }
+        }
 
-      //if (isContinue)
-      //{
-      //  var id = ParentObject.DataColumnRowId(out short dbId);
-      //  var keyColumns = new LJCDataColumns()
-      //  {
-      //    { DataUtilColumn.ColumnId, id },
-      //    { DataUtilColumn.ColumnDbId, dbId },
-      //  };
-      //  ColumnManager.Delete(keyColumns);
-      //  if (0 == ColumnManager.AffectedCount)
-      //  {
-      //    isContinue = false;
-      //    var message = FormCommon.DeleteError;
-      //    MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-      //      , MessageBoxIcon.Exclamation);
-      //  }
-      //}
+        var id = RowId(out short dbId);
+        var keyColumns = new LJCDataColumns()
+        {
+          { DataUtilTable.ColumnId, id },
+          { DataUtilTable.ColumnDbId, dbId },
+        };
+        TableManager.Delete(keyColumns);
+        if (0 == TableManager.AffectedCount)
+        {
+          var message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
+          break;
+        }
 
-      //if (isContinue)
-      //{
-      //  ColumnGrid.Rows.Remove(row);
-      //  SetControlState();
-      //  ParentObject.TimedChange(Change.Column);
-      //}
+        TableGrid.Rows.Remove(row);
+        SetControlState();
+        ParentObject.TimedChange(Change.Table);
+        break;
+      }
     }
 
     // Displays a detail dialog to edit a record.
@@ -311,10 +311,21 @@ namespace LJCDataUtility5
       //if (ModuleCombo.CurrentRow is LJCGridRow
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        //var id = ParentObject.DataColumnRowId(out short dbId);
-        //var parentId = ParentObject.DataTableRowId(out short parentDbId);
-        //string parentName = ParentObject.DataTableRowName();
-        //var location = FormPoint.DialogScreenPoint(ColumnGrid);
+        // Data from items.
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
+        var id = RowId(out short dbId);
+        short parentDbID = 0;
+        long parentID = 0;
+        string parentName = "";
+        if (ModuleCombo.SelectedItem is LJCItem item)
+        {
+          parentID = item.ID;
+          parentDbID = item.DbID;
+          parentName = ModuleCombo.Text;
+        }
+
+        var location = FormPoint.DialogScreenPoint(TableGrid);
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
         //var detail = new DataColumnDetail()
         //{
         //  LJCId = id,
@@ -335,26 +346,35 @@ namespace LJCDataUtility5
     // Displays a detail dialog for a new record.
     internal void New()
     {
-      //if (ModuleCombo.CurrentRow is LJCGridRow)
-      //{
-      //int sequence = ColumnGrid.Rows.Count + 1;
-      //var parentId = ParentObject.DataTableRowId(out short parentDbId);
-      //string parentName = ParentObject.DataTableRowName();
-      //var location = FormPoint.DialogScreenPoint(ColumnGrid);
-      //var detail = new DataColumnDetail
-      //{
-      //  LJCLocation = location,
-      //  LJCManagers = Managers,
-      //  LJCParentId = parentId,
-      //  LJCParentDbId = parentDbId,
-      //  LJCParentName = parentName,
-      //  LJCSequence = sequence
-      //};
-      //detail.LJCChange += Detail_Change;
-      //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
-      //detail.ShowDialog();
-      //detail.Dispose();
-      //}
+      if (ModuleCombo.SelectedItem != null)
+      {
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
+        int sequence = TableGrid.Rows.Count + 1;
+        short parentDbId = 0;
+        long parentId = 0;
+        string parentName = "";
+        if (ModuleCombo.SelectedItem is LJCItem item)
+        {
+          parentId = item.ID;
+          parentDbId = item.DbID;
+          parentName = ModuleCombo.Text;
+        }
+        var location = FormPoint.DialogScreenPoint(TableGrid);
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
+        //var detail = new DataColumnDetail
+        //{
+        //  LJCLocation = location,
+        //  LJCManagers = Managers,
+        //  LJCParentId = parentId,
+        //  LJCParentDbId = parentDbId,
+        //  LJCParentName = parentName,
+        //  LJCSequence = sequence
+        //};
+        //detail.LJCChange += Detail_Change;
+        //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
+        //detail.ShowDialog();
+        //detail.Dispose();
+      }
     }
 
     // Refreshes the list.
@@ -402,7 +422,7 @@ namespace LJCDataUtility5
       //    // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
       //    var row = RowAdd(record);
       //    ColumnGrid.LJCSetCurrentRow(row, true);
-      //    SetControlState();
+      SetControlState();
       //    ParentObject.TimedChange(Change.Column);
       //  }
       //}
@@ -465,17 +485,17 @@ namespace LJCDataUtility5
           }
           break;
 
-          //case Keys.Tab:
-          //  if (e.Shift)
-          //  {
-          //    ParentObject.ColumnTabs.Select();
-          //  }
-          //  else
-          //  {
-          //    ParentObject.ColumnTabs.Select();
-          //  }
-          //  e.Handled = true;
-          //  break;
+        case Keys.Tab:
+          if (e.Shift)
+          {
+            ParentObject.ColumnTabs.Select();
+          }
+          else
+          {
+            ParentObject.ColumnTabs.Select();
+          }
+          e.Handled = true;
+          break;
       }
     }
 
@@ -523,6 +543,9 @@ namespace LJCDataUtility5
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }
+
+    // Gets or sets the parent Combo reference.
+    private LJCItemCombo ModuleCombo { get; set; }
 
     // Gets or sets the Grid reference.
     private LJCDataGrid TableGrid { get; set; } = null!;

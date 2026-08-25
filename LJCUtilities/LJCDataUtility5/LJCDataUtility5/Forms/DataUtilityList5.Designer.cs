@@ -31,9 +31,9 @@ namespace LJCDataUtility5
     private void InitializeComponent()
     {
       components = new System.ComponentModel.Container();
-      DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
       DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
       DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+      DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
       MainSplit = new SplitContainer();
       TableGrid = new LJCDataGrid(components);
       TableMenu = new ContextMenuStrip(components);
@@ -70,6 +70,10 @@ namespace LJCDataUtility5
       toolStripSeparator9 = new ToolStripSeparator();
       KeyExit = new ToolStripMenuItem();
       TileTabs = new LJCTabControl(components);
+      ModuleCombo = new LJCItemCombo();
+      ModuleLabel = new Label();
+      ConfigLabel = new Label();
+      ConfigCombo = new LJCItemCombo();
       ((System.ComponentModel.ISupportInitialize)MainSplit).BeginInit();
       MainSplit.Panel1.SuspendLayout();
       MainSplit.Panel2.SuspendLayout();
@@ -91,8 +95,8 @@ namespace LJCDataUtility5
       // 
       // MainSplit
       // 
-      MainSplit.Dock = DockStyle.Fill;
-      MainSplit.Location = new Point(0, 0);
+      MainSplit.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      MainSplit.Location = new Point(0, 56);
       MainSplit.Name = "MainSplit";
       MainSplit.Orientation = Orientation.Horizontal;
       // 
@@ -103,9 +107,10 @@ namespace LJCDataUtility5
       // MainSplit.Panel2
       // 
       MainSplit.Panel2.Controls.Add(ColumnsSplit);
-      MainSplit.Size = new Size(800, 450);
-      MainSplit.SplitterDistance = 162;
-      MainSplit.TabIndex = 1;
+      MainSplit.Size = new Size(800, 394);
+      MainSplit.SplitterDistance = 140;
+      MainSplit.SplitterWidth = 5;
+      MainSplit.TabIndex = 4;
       // 
       // TableGrid
       // 
@@ -115,14 +120,14 @@ namespace LJCDataUtility5
       TableGrid.BackgroundColor = Color.AliceBlue;
       TableGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       TableGrid.ContextMenuStrip = TableMenu;
-      dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle4.BackColor = SystemColors.Window;
-      dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-      dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
-      dataGridViewCellStyle4.SelectionBackColor = SystemColors.ControlLight;
-      dataGridViewCellStyle4.SelectionForeColor = Color.Black;
-      dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-      TableGrid.DefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = SystemColors.Window;
+      dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+      dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+      dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLight;
+      dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+      dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+      TableGrid.DefaultCellStyle = dataGridViewCellStyle1;
       TableGrid.Dock = DockStyle.Fill;
       TableGrid.EditMode = DataGridViewEditMode.EditOnEnter;
       TableGrid.LJCAllowSelectionChange = false;
@@ -136,8 +141,8 @@ namespace LJCDataUtility5
       TableGrid.RowHeadersWidth = 62;
       TableGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       TableGrid.ShowCellToolTips = false;
-      TableGrid.Size = new Size(800, 162);
-      TableGrid.TabIndex = 1;
+      TableGrid.Size = new Size(800, 140);
+      TableGrid.TabIndex = 5;
       // 
       // TableMenu
       // 
@@ -209,20 +214,23 @@ namespace LJCDataUtility5
       // ColumnsSplit.Panel2
       // 
       ColumnsSplit.Panel2.Controls.Add(TileTabs);
-      ColumnsSplit.Size = new Size(800, 284);
+      ColumnsSplit.Size = new Size(800, 249);
       ColumnsSplit.SplitterDistance = 653;
-      ColumnsSplit.TabIndex = 0;
+      ColumnsSplit.SplitterWidth = 5;
+      ColumnsSplit.TabIndex = 6;
       // 
       // ColumnTabs
       // 
+      ColumnTabs.AllowDrop = true;
       ColumnTabs.Controls.Add(ColumnPage);
       ColumnTabs.Controls.Add(KeyPage);
       ColumnTabs.Dock = DockStyle.Fill;
+      ColumnTabs.LJCAllowDrag = true;
       ColumnTabs.Location = new Point(0, 0);
       ColumnTabs.Name = "ColumnTabs";
       ColumnTabs.SelectedIndex = 0;
-      ColumnTabs.Size = new Size(653, 284);
-      ColumnTabs.TabIndex = 0;
+      ColumnTabs.Size = new Size(653, 249);
+      ColumnTabs.TabIndex = 7;
       // 
       // ColumnPage
       // 
@@ -230,7 +238,7 @@ namespace LJCDataUtility5
       ColumnPage.Location = new Point(4, 34);
       ColumnPage.Name = "ColumnPage";
       ColumnPage.Padding = new Padding(3);
-      ColumnPage.Size = new Size(645, 246);
+      ColumnPage.Size = new Size(645, 211);
       ColumnPage.TabIndex = 0;
       ColumnPage.Text = "Column";
       ColumnPage.UseVisualStyleBackColor = true;
@@ -243,14 +251,14 @@ namespace LJCDataUtility5
       ColumnGrid.BackgroundColor = Color.AliceBlue;
       ColumnGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       ColumnGrid.ContextMenuStrip = ColumnMenu;
-      dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle1.BackColor = SystemColors.Window;
-      dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-      dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLight;
-      dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-      dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-      ColumnGrid.DefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = SystemColors.Window;
+      dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+      dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+      dataGridViewCellStyle2.SelectionBackColor = SystemColors.ControlLight;
+      dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+      dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+      ColumnGrid.DefaultCellStyle = dataGridViewCellStyle2;
       ColumnGrid.Dock = DockStyle.Fill;
       ColumnGrid.EditMode = DataGridViewEditMode.EditOnEnter;
       ColumnGrid.LJCAllowSelectionChange = false;
@@ -264,8 +272,8 @@ namespace LJCDataUtility5
       ColumnGrid.RowHeadersWidth = 62;
       ColumnGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       ColumnGrid.ShowCellToolTips = false;
-      ColumnGrid.Size = new Size(639, 240);
-      ColumnGrid.TabIndex = 1;
+      ColumnGrid.Size = new Size(639, 205);
+      ColumnGrid.TabIndex = 8;
       // 
       // ColumnMenu
       // 
@@ -329,7 +337,7 @@ namespace LJCDataUtility5
       KeyPage.Location = new Point(4, 34);
       KeyPage.Name = "KeyPage";
       KeyPage.Padding = new Padding(3);
-      KeyPage.Size = new Size(645, 246);
+      KeyPage.Size = new Size(645, 212);
       KeyPage.TabIndex = 1;
       KeyPage.Text = "Key";
       KeyPage.UseVisualStyleBackColor = true;
@@ -342,14 +350,14 @@ namespace LJCDataUtility5
       KeyGrid.BackgroundColor = Color.AliceBlue;
       KeyGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       KeyGrid.ContextMenuStrip = KeyMenu;
-      dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle2.BackColor = SystemColors.Window;
-      dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-      dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-      dataGridViewCellStyle2.SelectionBackColor = SystemColors.ControlLight;
-      dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-      dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-      KeyGrid.DefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = SystemColors.Window;
+      dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+      dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+      dataGridViewCellStyle3.SelectionBackColor = SystemColors.ControlLight;
+      dataGridViewCellStyle3.SelectionForeColor = Color.Black;
+      dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+      KeyGrid.DefaultCellStyle = dataGridViewCellStyle3;
       KeyGrid.Dock = DockStyle.Fill;
       KeyGrid.EditMode = DataGridViewEditMode.EditOnEnter;
       KeyGrid.LJCAllowSelectionChange = false;
@@ -363,8 +371,8 @@ namespace LJCDataUtility5
       KeyGrid.RowHeadersWidth = 62;
       KeyGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       KeyGrid.ShowCellToolTips = false;
-      KeyGrid.Size = new Size(639, 240);
-      KeyGrid.TabIndex = 1;
+      KeyGrid.Size = new Size(639, 206);
+      KeyGrid.TabIndex = 9;
       // 
       // KeyMenu
       // 
@@ -424,18 +432,56 @@ namespace LJCDataUtility5
       // 
       // TileTabs
       // 
+      TileTabs.AllowDrop = true;
       TileTabs.Dock = DockStyle.Fill;
+      TileTabs.LJCAllowDrag = true;
       TileTabs.Location = new Point(0, 0);
       TileTabs.Name = "TileTabs";
       TileTabs.SelectedIndex = 0;
-      TileTabs.Size = new Size(143, 284);
-      TileTabs.TabIndex = 0;
+      TileTabs.Size = new Size(142, 249);
+      TileTabs.TabIndex = 10;
+      // 
+      // ModuleCombo
+      // 
+      ModuleCombo.FormattingEnabled = true;
+      ModuleCombo.Location = new Point(132, 12);
+      ModuleCombo.Name = "ModuleCombo";
+      ModuleCombo.Size = new Size(230, 33);
+      ModuleCombo.TabIndex = 1;
+      // 
+      // ModuleLabel
+      // 
+      ModuleLabel.Location = new Point(12, 15);
+      ModuleLabel.Name = "ModuleLabel";
+      ModuleLabel.Size = new Size(114, 25);
+      ModuleLabel.TabIndex = 0;
+      ModuleLabel.Text = "Module";
+      // 
+      // ConfigLabel
+      // 
+      ConfigLabel.Location = new Point(390, 15);
+      ConfigLabel.Name = "ConfigLabel";
+      ConfigLabel.Size = new Size(165, 25);
+      ConfigLabel.TabIndex = 2;
+      ConfigLabel.Text = "Data Configuration";
+      // 
+      // ConfigCombo
+      // 
+      ConfigCombo.FormattingEnabled = true;
+      ConfigCombo.Location = new Point(561, 12);
+      ConfigCombo.Name = "ConfigCombo";
+      ConfigCombo.Size = new Size(230, 33);
+      ConfigCombo.TabIndex = 3;
       // 
       // DataUtilityList
       // 
       AutoScaleDimensions = new SizeF(10F, 25F);
       AutoScaleMode = AutoScaleMode.Font;
       ClientSize = new Size(800, 450);
+      Controls.Add(ConfigLabel);
+      Controls.Add(ConfigCombo);
+      Controls.Add(ModuleLabel);
+      Controls.Add(ModuleCombo);
       Controls.Add(MainSplit);
       Name = "DataUtilityList";
       Text = "Form1";
@@ -467,7 +513,7 @@ namespace LJCDataUtility5
     private SplitContainer MainSplit;
     internal LJCControls5.LJCDataGrid TableGrid;
     private SplitContainer ColumnsSplit;
-    private LJCTabControl ColumnTabs;
+    internal LJCTabControl ColumnTabs;
     private TabPage ColumnPage;
     private TabPage KeyPage;
     private LJCTabControl TileTabs;
@@ -498,5 +544,9 @@ namespace LJCDataUtility5
     private ToolStripSeparator toolStripSeparator8;
     internal ToolStripMenuItem KeyRefresh;
     private ToolStripSeparator toolStripSeparator9;
+    internal LJCItemCombo ModuleCombo;
+    private Label ModuleLabel;
+    private Label ConfigLabel;
+    internal LJCItemCombo ConfigCombo;
   }
 }

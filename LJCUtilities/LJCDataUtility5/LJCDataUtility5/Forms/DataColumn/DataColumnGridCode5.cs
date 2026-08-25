@@ -193,10 +193,9 @@ namespace LJCDataUtility5
         ParentObject.Cursor = Cursors.WaitCursor;
         foreach (LJCGridRow row in ColumnGrid.Rows)
         {
-          var rowDbId = row.LJCGetInt16(DataUtilColumn.ColumnDbId);
-          var rowID = row.LJCGetInt64(DataUtilColumn.ColumnId);
+          var rowId = RowId(out short rowDbId, row);
           if (rowDbId == data.DbId
-            && rowID == data.Id)
+            && rowId == data.Id)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
             ColumnGrid.LJCSetCurrentRow(row, true);
@@ -281,43 +280,40 @@ namespace LJCDataUtility5
     // Deletes the selected row.
     internal void Delete()
     {
-      //bool isContinue = true;
-      //var row = ColumnGrid.CurrentRow as LJCGridRow;
-      //if (ColumnGrid.CurrentRow is LJCGridRow row)
-      //{
-      //  var title = "Delete Confirmation";
-      //  var message = FormCommon.DeleteConfirm;
-      //  if (DialogResult.No == MessageBox.Show(message, title
-      //    , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-      //  {
-      //    isContinue = false;
-      //  }
-      //}
+      while (true)
+      {
+        var row = ColumnGrid.CurrentRow;
+        if (row != null)
+        {
+          var title = "Delete Confirmation";
+          var message = FormCommon.DeleteConfirm;
+          if (DialogResult.No == MessageBox.Show(message, title
+            , MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+          {
+            break;
+          }
+        }
 
-      //if (isContinue)
-      //{
-      //  var id = ParentObject.DataColumnRowId(out short dbId);
-      //  var keyColumns = new LJCDataColumns()
-      //  {
-      //    { DataUtilColumn.ColumnId, id },
-      //    { DataUtilColumn.ColumnDbId, dbId },
-      //  };
-      //  ColumnManager.Delete(keyColumns);
-      //  if (0 == ColumnManager.AffectedCount)
-      //  {
-      //    isContinue = false;
-      //    var message = FormCommon.DeleteError;
-      //    MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-      //      , MessageBoxIcon.Exclamation);
-      //  }
-      //}
+        var id = RowId(out short dbId);
+        var keyColumns = new LJCDataColumns()
+        {
+          { DataUtilColumn.ColumnId, id },
+          { DataUtilColumn.ColumnDbId, dbId },
+        };
+        ColumnManager.Delete(keyColumns);
+        if (0 == ColumnManager.AffectedCount)
+        {
+          var message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
+          break;
+        }
 
-      //if (isContinue)
-      //{
-      //  ColumnGrid.Rows.Remove(row);
-      //  SetControlState();
-      //  ParentObject.TimedChange(Change.Column);
-      //}
+        ColumnGrid.Rows.Remove(row);
+        SetControlState();
+        ParentObject.TimedChange(Change.Column);
+        break;
+      }
     }
 
     // Displays a detail dialog to edit a record.
@@ -326,10 +322,15 @@ namespace LJCDataUtility5
       if (TableGrid.CurrentRow is LJCGridRow
         && ColumnGrid.CurrentRow is LJCGridRow)
       {
-        //var id = ParentObject.DataColumnRowId(out short dbId);
-        //var parentId = ParentObject.DataTableRowId(out short parentDbId);
-        //string parentName = ParentObject.DataTableRowName();
-        //var location = FormPoint.DialogScreenPoint(ColumnGrid);
+        // Data from items.
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
+        var id = RowId(out short dbId);
+        var tableGridCode = ParentObject.TableGridCode;
+        var parentID = tableGridCode.RowId(out short parentDbId);
+        string? parentName = tableGridCode.RowName();
+        var location = FormPoint.DialogScreenPoint(ColumnGrid);
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
+
         //var detail = new DataColumnDetail()
         //{
         //  LJCId = id,
@@ -352,10 +353,15 @@ namespace LJCDataUtility5
     {
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        //int sequence = ColumnGrid.Rows.Count + 1;
-        //var parentId = ParentObject.DataTableRowId(out short parentDbId);
-        //string parentName = ParentObject.DataTableRowName();
-        //var location = FormPoint.DialogScreenPoint(ColumnGrid);
+        // Data from items.
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
+        int sequence = ColumnGrid.Rows.Count + 1;
+        var tableGridCode = ParentObject.TableGridCode;
+        var parentID = tableGridCode.RowId(out short parentDbId);
+        string? parentName = tableGridCode.RowName();
+        var location = FormPoint.DialogScreenPoint(ColumnGrid);
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
+
         //var detail = new DataColumnDetail
         //{
         //  LJCLocation = location,
@@ -417,7 +423,7 @@ namespace LJCDataUtility5
       //    // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
       //    var row = RowAdd(record);
       //    ColumnGrid.LJCSetCurrentRow(row, true);
-      //    SetControlState();
+      SetControlState();
       //    ParentObject.TimedChange(Change.Column);
       //  }
       //}
@@ -486,17 +492,17 @@ namespace LJCDataUtility5
           }
           break;
 
-          //case Keys.Tab:
-          //  if (e.Shift)
-          //  {
-          //    ParentObject.ColumnTabs.Select();
-          //  }
-          //  else
-          //  {
-          //    ParentObject.ColumnTabs.Select();
-          //  }
-          //  e.Handled = true;
-          //  break;
+        case Keys.Tab:
+          if (e.Shift)
+          {
+            ParentObject.ColumnTabs.Select();
+          }
+          else
+          {
+            ParentObject.ColumnTabs.Select();
+          }
+          e.Handled = true;
+          break;
       }
     }
 
