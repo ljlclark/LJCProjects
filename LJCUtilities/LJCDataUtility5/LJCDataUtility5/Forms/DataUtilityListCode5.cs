@@ -26,7 +26,6 @@ namespace LJCDataUtility5
 
       InitializeClassData();
       SetupControlCode();
-      LoadControlData();
       ControlSetup();
       InitialControlValues();
       SetupGrids();
@@ -57,25 +56,10 @@ namespace LJCDataUtility5
     private void SetupControlCode()
     {
       ModuleComboCode = new DataModuleComboCode(this);
+      ConfigComboCode = new DataConfigComboCode(this);
       TableGridCode = new DataTableGridCode(this);
       ColumnGridCode = new DataColumnGridCode(this);
       KeyGridCode = new DataKeyGridCode(this);
-    }
-
-    // Loads the initial Control data.
-    private void LoadControlData()
-    {
-      // Get DataConfigs
-      var dataConfigs = new LJCDataConfigs();
-      dataConfigs.LoadData();
-      foreach (var dataConfig in dataConfigs)
-      {
-        ConfigCombo.Items.Add(dataConfig);
-      }
-      if (ConfigCombo.Items.Count > 0)
-      {
-        ConfigCombo.SelectedIndex = 0;
-      }
     }
 
     // Initial Control setup.
@@ -240,6 +224,9 @@ namespace LJCDataUtility5
 
     // Gets or sets the DataColumnGridCode reference.
     internal DataColumnGridCode ColumnGridCode { get; set; } = null!;
+
+    // Gets or sets the ModuleComboCode reference.
+    internal DataConfigComboCode ConfigComboCode { get; set; } = null!;
 
     // Gets or sets the ModuleComboCode reference.
     internal DataModuleComboCode ModuleComboCode { get; set; } = null!;

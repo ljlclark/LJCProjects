@@ -11,7 +11,7 @@ namespace LJCDataUtility5
   // Provides methods for the DataModule combo.
   internal class DataModuleComboCode
   {
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     internal DataModuleComboCode(DataUtilityList parentObject)
@@ -26,7 +26,8 @@ namespace LJCDataUtility5
 
       // Set Data vars.
       Managers = ParentObject.Managers;
-      ModuleManager = Managers.DataModuleManager;
+      //ModuleManager = Managers.DataModuleManager;
+      Reset();
 
       // Menu item events.
       var list = ParentObject;
@@ -44,6 +45,22 @@ namespace LJCDataUtility5
 
       ParentObject.Cursor = Cursors.Default;
     }
+
+    // *** Add ***
+    public void Reset()
+    {
+      if (!LJC.Equals(CurrentDataConfig, Managers.DataConfigName))
+      {
+        ModuleManager = Managers.DataModuleManager;
+        CurrentDataConfig = Managers.DataConfigName;
+        var error = Managers.Error;
+        if (LJC.HasText(error))
+        {
+          MessageBox.Show(error);
+        }
+      }
+    }
+    private string? CurrentDataConfig { get; set; }
     #endregion
 
     #region Data Value Methods
@@ -95,23 +112,27 @@ namespace LJCDataUtility5
       {
         "Name"
       };
-      if (ModuleManager.Manager != null)
+
+      // *** Change ***
+      if (ModuleManager != null
+        && ModuleManager.Manager != null)
       {
         ModuleManager.Manager.OrderByNames = orderByNames;
-      }
-      var items = ModuleManager.Load();
-      if (LJC.HasListItems(items))
-      {
-        foreach (var dataItem in items)
+        var items = ModuleManager.Load();
+        if (LJC.HasListItems(items))
         {
-          RowAdd(dataItem);
+          foreach (var dataItem in items)
+          {
+            RowAdd(dataItem);
+          }
+          if (ModuleCombo.Items.Count > 0)
+          {
+            ModuleCombo.SelectedIndex = 0;
+          }
+          ModuleCombo.Select();
         }
-        if (ModuleCombo.Items.Count > 0)
-        {
-          ModuleCombo.SelectedIndex = 0;
-        }
-        ModuleCombo.Select();
       }
+
       SetControlState();
       ParentObject.Cursor = Cursors.Default;
       ParentObject.DoChange(Change.Module);
@@ -194,16 +215,20 @@ namespace LJCDataUtility5
           { DataModule.ColumnId, id },
           { DataModule.ColumnDbId, dbID },
         };
-        ModuleManager.Delete(keyColumns);
-        if (0 == ModuleManager.AffectedCount)
+        // *** Add ***
+        if (ModuleManager != null)
         {
-          var message = FormCommon.DeleteError;
-          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-            , MessageBoxIcon.Exclamation);
-          break;
-        }
+          ModuleManager.Delete(keyColumns);
+          if (0 == ModuleManager.AffectedCount)
+          {
+            var message = FormCommon.DeleteError;
+            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+              , MessageBoxIcon.Exclamation);
+            break;
+          }
 
-        ModuleCombo.Items.Remove(item);
+          ModuleCombo.Items.Remove(item);
+        }
         SetControlState();
         ParentObject.TimedChange(Change.Module);
         break;
@@ -382,7 +407,7 @@ namespace LJCDataUtility5
     private ManagersDataUtility Managers { get; set; }
 
     // Gets or sets the Manager reference.
-    private DataModuleManager ModuleManager { get; set; }
+    private DataModuleManager? ModuleManager { get; set; } = null!;
     #endregion
   }
 }

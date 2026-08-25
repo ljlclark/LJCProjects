@@ -605,7 +605,6 @@ namespace LJCDataUtility5
       ConfigCombo.Name = "ConfigCombo";
       ConfigCombo.Size = new Size(230, 33);
       ConfigCombo.TabIndex = 3;
-      ConfigCombo.MouseEnter += ConfigCombo_MouseEnter;
       // 
       // DataUtilityList
       // 
@@ -618,7 +617,7 @@ namespace LJCDataUtility5
       Controls.Add(ModuleCombo);
       Controls.Add(MainSplit);
       Name = "DataUtilityList";
-      Text = "Form1";
+      Text = "Data Utility";
       Load += DataUtilityList_Load;
       MainSplit.Panel1.ResumeLayout(false);
       MainSplit.Panel2.ResumeLayout(false);

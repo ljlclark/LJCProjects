@@ -44,13 +44,20 @@ namespace LJCDataUtility5
           //ConfigureControls();
           RestoreControlValues();
 
-          // Load first control.
+          // Load controls.
           ModuleComboCode.DataRetrieve();
+          ConfigComboCode.DataRetrieve();
           break;
 
         case Change.Module:
           ModuleCombo.Select();
           TableGridCode.DataRetrieve();
+          break;
+
+        case Change.Config:
+          Managers.Reset(ConfigCombo.Text);
+          ModuleComboCode.Reset();
+          ModuleComboCode.DataRetrieve();
           break;
 
         case Change.Table:
@@ -74,6 +81,7 @@ namespace LJCDataUtility5
     {
       Startup,
       Module,
+      Config,
       Table,
       Column,
       Key
@@ -116,10 +124,5 @@ namespace LJCDataUtility5
       Close();
     }
     #endregion
-
-    private void ConfigCombo_MouseEnter(object sender, EventArgs e)
-    {
-      ConfigCombo.Focus();
-    }
   }
 }
