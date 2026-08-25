@@ -48,9 +48,9 @@ namespace LJCDataUtility5
       TableExit = new ToolStripMenuItem();
       ColumnsSplit = new SplitContainer();
       ColumnTabs = new LJCTabControl(components);
-      ColumnPage = new TabPage();
       ColumnTabMenu = new ContextMenuStrip(components);
       ColumnTabMove = new ToolStripMenuItem();
+      ColumnPage = new TabPage();
       ColumnGrid = new LJCDataGrid(components);
       ColumnMenu = new ContextMenuStrip(components);
       toolStripMenuItem1 = new ToolStripMenuItem();
@@ -63,8 +63,6 @@ namespace LJCDataUtility5
       toolStripSeparator6 = new ToolStripSeparator();
       ColumnExit = new ToolStripMenuItem();
       KeyPage = new TabPage();
-      KeyTabMenu = new ContextMenuStrip(components);
-      KeyTabMove = new ToolStripMenuItem();
       KeyGrid = new LJCDataGrid(components);
       KeyMenu = new ContextMenuStrip(components);
       toolStripMenuItem2 = new ToolStripMenuItem();
@@ -77,6 +75,8 @@ namespace LJCDataUtility5
       toolStripSeparator9 = new ToolStripSeparator();
       KeyExit = new ToolStripMenuItem();
       TileTabs = new LJCTabControl(components);
+      KeyTabMenu = new ContextMenuStrip(components);
+      KeyTabMove = new ToolStripMenuItem();
       ModuleCombo = new LJCItemCombo();
       ModuleMenu = new ContextMenuStrip(components);
       Module = new ToolStripMenuItem();
@@ -102,14 +102,14 @@ namespace LJCDataUtility5
       ColumnsSplit.Panel2.SuspendLayout();
       ColumnsSplit.SuspendLayout();
       ColumnTabs.SuspendLayout();
-      ColumnPage.SuspendLayout();
       ColumnTabMenu.SuspendLayout();
+      ColumnPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)ColumnGrid).BeginInit();
       ColumnMenu.SuspendLayout();
       KeyPage.SuspendLayout();
-      KeyTabMenu.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)KeyGrid).BeginInit();
       KeyMenu.SuspendLayout();
+      KeyTabMenu.SuspendLayout();
       ModuleMenu.SuspendLayout();
       SuspendLayout();
       // 
@@ -260,17 +260,6 @@ namespace LJCDataUtility5
       ColumnTabs.Size = new Size(653, 249);
       ColumnTabs.TabIndex = 7;
       // 
-      // ColumnPage
-      // 
-      ColumnPage.Controls.Add(ColumnGrid);
-      ColumnPage.Location = new Point(4, 34);
-      ColumnPage.Name = "ColumnPage";
-      ColumnPage.Padding = new Padding(3);
-      ColumnPage.Size = new Size(645, 211);
-      ColumnPage.TabIndex = 0;
-      ColumnPage.Text = "Column";
-      ColumnPage.UseVisualStyleBackColor = true;
-      // 
       // ColumnTabMenu
       // 
       ColumnTabMenu.ImageScalingSize = new Size(24, 24);
@@ -283,6 +272,17 @@ namespace LJCDataUtility5
       ColumnTabMove.Name = "ColumnTabMove";
       ColumnTabMove.Size = new Size(208, 32);
       ColumnTabMove.Text = "Move Tab Right";
+      // 
+      // ColumnPage
+      // 
+      ColumnPage.Controls.Add(ColumnGrid);
+      ColumnPage.Location = new Point(4, 34);
+      ColumnPage.Name = "ColumnPage";
+      ColumnPage.Padding = new Padding(3);
+      ColumnPage.Size = new Size(645, 211);
+      ColumnPage.TabIndex = 0;
+      ColumnPage.Text = "Column";
+      ColumnPage.UseVisualStyleBackColor = true;
       // 
       // ColumnGrid
       // 
@@ -389,19 +389,6 @@ namespace LJCDataUtility5
       KeyPage.TabIndex = 1;
       KeyPage.Text = "Key";
       KeyPage.UseVisualStyleBackColor = true;
-      // 
-      // KeyTabMenu
-      // 
-      KeyTabMenu.ImageScalingSize = new Size(24, 24);
-      KeyTabMenu.Items.AddRange(new ToolStripItem[] { KeyTabMove });
-      KeyTabMenu.Name = "KeyTabMenu";
-      KeyTabMenu.Size = new Size(196, 36);
-      // 
-      // KeyTabMove
-      // 
-      KeyTabMove.Name = "KeyTabMove";
-      KeyTabMove.Size = new Size(195, 32);
-      KeyTabMove.Text = "Move Tab Left";
       // 
       // KeyGrid
       // 
@@ -510,6 +497,19 @@ namespace LJCDataUtility5
       TileTabs.Size = new Size(142, 249);
       TileTabs.TabIndex = 10;
       // 
+      // KeyTabMenu
+      // 
+      KeyTabMenu.ImageScalingSize = new Size(24, 24);
+      KeyTabMenu.Items.AddRange(new ToolStripItem[] { KeyTabMove });
+      KeyTabMenu.Name = "KeyTabMenu";
+      KeyTabMenu.Size = new Size(196, 36);
+      // 
+      // KeyTabMove
+      // 
+      KeyTabMove.Name = "KeyTabMove";
+      KeyTabMove.Size = new Size(195, 32);
+      KeyTabMove.Text = "Move Tab Left";
+      // 
       // ModuleCombo
       // 
       ModuleCombo.ContextMenuStrip = ModuleMenu;
@@ -605,6 +605,7 @@ namespace LJCDataUtility5
       ConfigCombo.Name = "ConfigCombo";
       ConfigCombo.Size = new Size(230, 33);
       ConfigCombo.TabIndex = 3;
+      ConfigCombo.MouseEnter += ConfigCombo_MouseEnter;
       // 
       // DataUtilityList
       // 
@@ -630,14 +631,14 @@ namespace LJCDataUtility5
       ((System.ComponentModel.ISupportInitialize)ColumnsSplit).EndInit();
       ColumnsSplit.ResumeLayout(false);
       ColumnTabs.ResumeLayout(false);
-      ColumnPage.ResumeLayout(false);
       ColumnTabMenu.ResumeLayout(false);
+      ColumnPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)ColumnGrid).EndInit();
       ColumnMenu.ResumeLayout(false);
       KeyPage.ResumeLayout(false);
-      KeyTabMenu.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)KeyGrid).EndInit();
       KeyMenu.ResumeLayout(false);
+      KeyTabMenu.ResumeLayout(false);
       ModuleMenu.ResumeLayout(false);
       ResumeLayout(false);
     }

@@ -46,6 +46,7 @@ namespace LJCDataUtility5
       grid.MouseDoubleClick += KeyGrid_MouseDoubleClick;
       grid.MouseDown += KeyGrid_MouseDown;
       grid.SelectionChanged += KeyGrid_SelectionChanged;
+      grid.MouseEnter += Grid_MouseEnter;
 
       ParentObject.Cursor = Cursors.Default;
     }
@@ -492,6 +493,12 @@ namespace LJCDataUtility5
         ParentObject.TimedChange(Change.Key);
       }
       KeyGrid.LJCAllowSelectionChange = true;
+    }
+
+    // Handles the MouseEnter event.
+    private void Grid_MouseEnter(object? sender, EventArgs e)
+    {
+      KeyGrid.Focus();
     }
     #endregion
 

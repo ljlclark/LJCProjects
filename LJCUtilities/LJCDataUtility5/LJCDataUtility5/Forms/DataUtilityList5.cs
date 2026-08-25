@@ -116,5 +116,10 @@ namespace LJCDataUtility5
       Close();
     }
     #endregion
+
+    private void ConfigCombo_MouseEnter(object sender, EventArgs e)
+    {
+      ConfigCombo.Focus();
+    }
   }
 }

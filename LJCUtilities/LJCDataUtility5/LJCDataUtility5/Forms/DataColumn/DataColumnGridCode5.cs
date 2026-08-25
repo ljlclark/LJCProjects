@@ -43,6 +43,7 @@ namespace LJCDataUtility5
       grid.MouseDoubleClick += ColumnGrid_MouseDoubleClick;
       grid.MouseDown += ColumnGrid_MouseDown;
       grid.SelectionChanged += ColumnGrid_SelectionChanged;
+      grid.MouseEnter += Grid_MouseEnter;
 
       ParentObject.Cursor = Cursors.Default;
     }
@@ -540,6 +541,12 @@ namespace LJCDataUtility5
         ParentObject.TimedChange(Change.Column);
       }
       ColumnGrid.LJCAllowSelectionChange = true;
+    }
+
+    // Handles the MouseEnter event.
+    private void Grid_MouseEnter(object? sender, EventArgs e)
+    {
+      ColumnGrid.Focus();
     }
     #endregion
 

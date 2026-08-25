@@ -38,8 +38,9 @@ namespace LJCDataUtility5
 
       // Combo events.
       var combo = ModuleCombo;
-      combo.KeyDown += ModuleGrid_KeyDown;
-      combo.SelectedIndexChanged += ModuleGrid_SelectedIndexChanged;
+      combo.KeyDown += ModuleCombo_KeyDown;
+      combo.SelectedIndexChanged += ModuleCombo_SelectedIndexChanged;
+      combo.MouseEnter += Combo_MouseEnter;
 
       ParentObject.Cursor = Cursors.Default;
     }
@@ -324,7 +325,7 @@ namespace LJCDataUtility5
     #region Control Event Handlers
 
     // Handles the Grid KeyDown event.
-    private void ModuleGrid_KeyDown(object? sender, KeyEventArgs e)
+    private void ModuleCombo_KeyDown(object? sender, KeyEventArgs e)
     {
       switch (e.KeyCode)
       {
@@ -354,9 +355,15 @@ namespace LJCDataUtility5
     }
 
     // Handles the SelectionChanged event.
-    private void ModuleGrid_SelectedIndexChanged(object? sender, EventArgs e)
+    private void ModuleCombo_SelectedIndexChanged(object? sender, EventArgs e)
     {
       ParentObject.TimedChange(Change.Module);
+    }
+
+    // Handles the MouseEnter event.
+    private void Combo_MouseEnter(object? sender, EventArgs e)
+    {
+      ModuleCombo.Focus();
     }
     #endregion
 
