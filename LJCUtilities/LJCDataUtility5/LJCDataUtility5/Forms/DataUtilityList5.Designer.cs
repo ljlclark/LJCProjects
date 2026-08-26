@@ -129,7 +129,7 @@ namespace LJCDataUtility5
       MainSplit.Panel2.Controls.Add(ColumnsSplit);
       MainSplit.Size = new Size(800, 394);
       MainSplit.SplitterDistance = 140;
-      MainSplit.SplitterWidth = 5;
+      MainSplit.SplitterWidth = 6;
       MainSplit.TabIndex = 4;
       // 
       // TableGrid
@@ -241,9 +241,8 @@ namespace LJCDataUtility5
       // ColumnsSplit.Panel2
       // 
       ColumnsSplit.Panel2.Controls.Add(TileTabs);
-      ColumnsSplit.Size = new Size(800, 249);
+      ColumnsSplit.Size = new Size(800, 248);
       ColumnsSplit.SplitterDistance = 653;
-      ColumnsSplit.SplitterWidth = 5;
       ColumnsSplit.TabIndex = 6;
       // 
       // ColumnTabs
@@ -257,7 +256,7 @@ namespace LJCDataUtility5
       ColumnTabs.Location = new Point(0, 0);
       ColumnTabs.Name = "ColumnTabs";
       ColumnTabs.SelectedIndex = 0;
-      ColumnTabs.Size = new Size(653, 249);
+      ColumnTabs.Size = new Size(653, 248);
       ColumnTabs.TabIndex = 7;
       // 
       // ColumnTabMenu
@@ -279,7 +278,7 @@ namespace LJCDataUtility5
       ColumnPage.Location = new Point(4, 34);
       ColumnPage.Name = "ColumnPage";
       ColumnPage.Padding = new Padding(3);
-      ColumnPage.Size = new Size(645, 211);
+      ColumnPage.Size = new Size(645, 210);
       ColumnPage.TabIndex = 0;
       ColumnPage.Text = "Column";
       ColumnPage.UseVisualStyleBackColor = true;
@@ -313,7 +312,7 @@ namespace LJCDataUtility5
       ColumnGrid.RowHeadersWidth = 62;
       ColumnGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       ColumnGrid.ShowCellToolTips = false;
-      ColumnGrid.Size = new Size(639, 205);
+      ColumnGrid.Size = new Size(639, 204);
       ColumnGrid.TabIndex = 8;
       // 
       // ColumnMenu
@@ -385,7 +384,7 @@ namespace LJCDataUtility5
       KeyPage.Location = new Point(4, 34);
       KeyPage.Name = "KeyPage";
       KeyPage.Padding = new Padding(3);
-      KeyPage.Size = new Size(645, 211);
+      KeyPage.Size = new Size(645, 210);
       KeyPage.TabIndex = 1;
       KeyPage.Text = "Key";
       KeyPage.UseVisualStyleBackColor = true;
@@ -419,7 +418,7 @@ namespace LJCDataUtility5
       KeyGrid.RowHeadersWidth = 62;
       KeyGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       KeyGrid.ShowCellToolTips = false;
-      KeyGrid.Size = new Size(639, 205);
+      KeyGrid.Size = new Size(639, 204);
       KeyGrid.TabIndex = 9;
       // 
       // KeyMenu
@@ -494,7 +493,7 @@ namespace LJCDataUtility5
       TileTabs.Location = new Point(0, 0);
       TileTabs.Name = "TileTabs";
       TileTabs.SelectedIndex = 0;
-      TileTabs.Size = new Size(142, 249);
+      TileTabs.Size = new Size(143, 248);
       TileTabs.TabIndex = 10;
       // 
       // KeyTabMenu

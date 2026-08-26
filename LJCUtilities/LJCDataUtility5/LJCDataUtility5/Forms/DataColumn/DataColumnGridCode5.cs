@@ -27,7 +27,7 @@ namespace LJCDataUtility5
 
       // Set Data vars.
       Managers = ParentObject.Managers;
-      ColumnManager = Managers.DataColumnManager;
+      Reset();
 
       // Menu item events.
       var list = ParentObject;
@@ -48,6 +48,21 @@ namespace LJCDataUtility5
       ParentObject.Cursor = Cursors.Default;
     }
 
+    // Resets the data manager.
+    internal void Reset()
+    {
+      if (!LJC.Equals(CurrentDataConfigName, Managers.DataConfigName))
+      {
+        ColumnManager = Managers.DataColumnManager;
+        CurrentDataConfigName = Managers.DataConfigName;
+        var error = Managers.Error;
+        if (LJC.HasText(error))
+        {
+          MessageBox.Show(error);
+        }
+      }
+    }
+
     // Configures the DataColumn Grid.
     internal void SetupGrid()
     {
@@ -65,13 +80,16 @@ namespace LJCDataUtility5
           DataUtilColumn.ColumnDefaultValue
         };
 
-        // Get the grid columns from the manager Data Definition.
-        var gridColumns = ColumnManager.Columns(propertyNames);
-
-        // Setup the grid columns.
-        if (gridColumns != null)
+        if (ColumnManager != null)
         {
-          ColumnGrid.LJCAddColumns(gridColumns);
+          // Get the grid columns from the manager Data Definition.
+          var gridColumns = ColumnManager.Columns(propertyNames);
+
+          // Setup the grid columns.
+          if (gridColumns != null)
+          {
+            ColumnGrid.LJCAddColumns(gridColumns);
+          }
         }
       }
     }
@@ -127,6 +145,7 @@ namespace LJCDataUtility5
       ParentObject.Cursor = Cursors.WaitCursor;
       ColumnGrid.LJCRowsClear();
 
+      // Parent grid has a selection.
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         var tableGridCode = ParentObject.TableGridCode;
@@ -136,16 +155,18 @@ namespace LJCDataUtility5
         {
           DataUtilColumn.ColumnSequence
         };
-        if (ColumnManager.Manager != null)
+
+        if (ColumnManager != null
+          && ColumnManager.Manager != null)
         {
           ColumnManager.Manager.OrderByNames = orderByNames;
-        }
-        var items = ColumnManager.Load(keyColumns);
-        if (LJC.HasListItems(items))
-        {
-          foreach (var item in items)
+          var items = ColumnManager.Load(keyColumns);
+          if (LJC.HasListItems(items))
           {
-            RowAdd(item);
+            foreach (var item in items)
+            {
+              RowAdd(item);
+            }
           }
         }
       }
@@ -295,23 +316,29 @@ namespace LJCDataUtility5
           }
         }
 
+        // Data from items.
         var id = RowId(out short dbId);
+
         var keyColumns = new LJCDataColumns()
         {
           { DataUtilColumn.ColumnId, id },
           { DataUtilColumn.ColumnDbId, dbId },
         };
-        ColumnManager.Delete(keyColumns);
-        if (0 == ColumnManager.AffectedCount)
-        {
-          var message = FormCommon.DeleteError;
-          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-            , MessageBoxIcon.Exclamation);
-          break;
-        }
 
-        ColumnGrid.Rows.Remove(row);
-        SetControlState();
+        if (ColumnManager != null)
+        {
+          ColumnManager.Delete(keyColumns);
+          if (0 == ColumnManager.AffectedCount)
+          {
+            var message = FormCommon.DeleteError;
+            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+              , MessageBoxIcon.Exclamation);
+            break;
+          }
+
+          ColumnGrid.Rows.Remove(row);
+          SetControlState();
+        }
         ParentObject.TimedChange(Change.Column);
         break;
       }
@@ -320,6 +347,7 @@ namespace LJCDataUtility5
     // Displays a detail dialog to edit a record.
     internal void Edit()
     {
+      // Parent grid and current grid have selections.
       if (TableGrid.CurrentRow is LJCGridRow
         && ColumnGrid.CurrentRow is LJCGridRow)
       {
@@ -327,8 +355,9 @@ namespace LJCDataUtility5
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
         var id = RowId(out short dbId);
         var tableGridCode = ParentObject.TableGridCode;
-        var parentID = tableGridCode.RowId(out short parentDbId);
+        var parentId = tableGridCode.RowId(out short parentDbId);
         string? parentName = tableGridCode.RowName();
+
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
 
@@ -336,11 +365,11 @@ namespace LJCDataUtility5
         //{
         //  LJCId = id,
         //  LJCDbId = dbId,
+        //  LJCParentDbId = parentDbId,
+        //  LJCParentId = parentId,
+        //  LJCParentName = parentName,
         //  LJCLocation = location,
         //  LJCManagers = Managers,
-        //  LJCParentId = parentId,
-        //  LJCParentDbId = parentDbId,
-        //  LJCParentName = parentName,
         //};
         //detail.LJCChange += Detail_Change;
         //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
@@ -352,12 +381,13 @@ namespace LJCDataUtility5
     // Displays a detail dialog for a new record.
     internal void New()
     {
+      // Parent grid has a selection.
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         // Data from items.
+        var tableGridCode = ParentObject.TableGridCode;
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
         int sequence = ColumnGrid.Rows.Count + 1;
-        var tableGridCode = ParentObject.TableGridCode;
         var parentID = tableGridCode.RowId(out short parentDbId);
         string? parentName = tableGridCode.RowName();
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
@@ -366,11 +396,11 @@ namespace LJCDataUtility5
         //var detail = new DataColumnDetail
         //{
         //  LJCLocation = location,
-        //  LJCManagers = Managers,
-        //  LJCParentId = parentId,
         //  LJCParentDbId = parentDbId,
+        //  LJCParentId = parentId,
         //  LJCParentName = parentName,
         //  LJCSequence = sequence
+        //  LJCManagers = Managers,
         //};
         //detail.LJCChange += Detail_Change;
         //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
@@ -393,7 +423,8 @@ namespace LJCDataUtility5
       DataRetrieve();
 
       // Select the original row.
-      if (id > 0)
+      if (dbId > 0
+        && id > 0)
       {
         RowSelect(dbId, id);
       }
@@ -552,23 +583,26 @@ namespace LJCDataUtility5
 
     #region Properties
 
+    // Gets or sets the Grid reference.
+    private LJCDataGrid ColumnGrid { get; set; }
+
+    // Gets or sets the Manager reference.
+    private DataColumnManager? ColumnManager { get; set; }
+
+    // Gets or sets the Menu reference.
+    private ContextMenuStrip ColumnMenu { get; set; }
+
+    // Gets or sets the current data config name.
+    private string? CurrentDataConfigName { get; set; }
+
+    // Gets or sets the Managers reference.
+    private ManagersDataUtility Managers { get; set; }
+
     // Gets or sets the parent List reference.
     private DataUtilityList ParentObject { get; set; }
 
     // Gets or sets the parent Grid reference.
     private LJCDataGrid TableGrid { get; set; }
-
-    // Gets or sets the Grid reference.
-    private LJCDataGrid ColumnGrid { get; set; }
-
-    // Gets or sets the Menu reference.
-    private ContextMenuStrip ColumnMenu { get; set; }
-
-    // Gets or sets the Managers reference.
-    private ManagersDataUtility Managers { get; set; }
-
-    // Gets or sets the Manager reference.
-    private DataColumnManager ColumnManager { get; set; }
     #endregion
   }
 }

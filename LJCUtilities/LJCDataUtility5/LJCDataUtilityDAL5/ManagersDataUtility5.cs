@@ -191,12 +191,12 @@ namespace LJCDataUtilityDAL5
 
     #region Properties
 
-    public string DataConfigName { get; set; }
+    public string DataConfigName { get; set; } = null!;
 
     // Gets the DataColumnManager object.
     /// <include file='Doc/ManagersDataUtility.xml'
     ///  path='members/DataColumnManager/*'/>
-    public DataColumnManager DataColumnManager
+    public DataColumnManager? DataColumnManager
     {
       get
       {
@@ -204,9 +204,16 @@ namespace LJCDataUtilityDAL5
         if (null == _DataColumnManager
           || _ResetNames.Contains(managerName))
         {
-          _DataColumnManager
-            = new DataColumnManager(_DbServiceRef, DataConfigName);
-          ClearResetName(managerName);
+          try
+          {
+            _DataColumnManager
+              = new DataColumnManager(_DbServiceRef, DataConfigName);
+            ClearResetName(managerName);
+          }
+          catch (Exception ex)
+          {
+            Error = ex.Message;
+          }
         }
         return _DataColumnManager;
       }
@@ -216,7 +223,7 @@ namespace LJCDataUtilityDAL5
     // Gets the DataKeyManager object.
     /// <include file='Doc/ManagersDataUtility.xml'
     ///  path='members/DataKeyManager/*'/>
-    public DataKeyManager DataKeyManager
+    public DataKeyManager? DataKeyManager
     {
       get
       {
@@ -224,9 +231,16 @@ namespace LJCDataUtilityDAL5
         if (null == _DataKeyManager
           || _ResetNames.Contains(managerName))
         {
-          _DataKeyManager
-            = new DataKeyManager(_DbServiceRef, DataConfigName);
-          ClearResetName(managerName);
+          try
+          {
+            _DataKeyManager
+              = new DataKeyManager(_DbServiceRef, DataConfigName);
+            ClearResetName(managerName);
+          }
+          catch (Exception ex)
+          {
+            Error = ex.Message;
+          }
         }
         return _DataKeyManager;
       }
@@ -244,28 +258,26 @@ namespace LJCDataUtilityDAL5
         if (null == _DataModuleManager
           || _ResetNames.Contains(managerName))
         {
-          // *** Add ***
           try
           {
             _DataModuleManager
               = new DataModuleManager(_DbServiceRef, DataConfigName);
+            ClearResetName(managerName);
           }
           catch (Exception ex)
           {
             Error = ex.Message;
           }
-          ClearResetName(managerName);
         }
         return _DataModuleManager;
       }
     }
     private DataModuleManager _DataModuleManager = null!;
-    public string? Error { get; set; }
 
     // Gets the DataTableManager object.
     /// <include file='Doc/ManagersDataUtility.xml'
     ///  path='members/DataTableManager/*'/>
-    public DataTableManager DataTableManager
+    public DataTableManager? DataTableManager
     {
       get
       {
@@ -273,21 +285,31 @@ namespace LJCDataUtilityDAL5
         if (null == _DataTableManager
           || _ResetNames.Contains(managerName))
         {
-          _DataTableManager
-            = new DataTableManager(_DbServiceRef, DataConfigName);
-          ClearResetName(managerName);
+          try
+          {
+            _DataTableManager
+              = new DataTableManager(_DbServiceRef, DataConfigName);
+            ClearResetName(managerName);
+          }
+          catch (Exception ex)
+          {
+            Error = ex.Message;
+          }
         }
         return _DataTableManager;
       }
     }
     private DataTableManager _DataTableManager = null!;
+
+    /// <include file='Doc/ManagersDataUtility.xml'
+    ///  path='members/Error/*'/>
+    public string? Error { get; set; }
     #endregion
 
     #region Class Data
 
     private readonly LJCArgError _ArgError;
     private LJCDbServiceRef _DbServiceRef = null!;
-    //private string _DataConfigName = null!;
     private List<string> _ResetNames = null!;
     #endregion
   }

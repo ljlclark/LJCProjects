@@ -26,7 +26,6 @@ namespace LJCDataUtility5
 
       // Set Data vars.
       Managers = ParentObject.Managers;
-      //ModuleManager = Managers.DataModuleManager;
       Reset();
 
       // Menu item events.
@@ -46,13 +45,12 @@ namespace LJCDataUtility5
       ParentObject.Cursor = Cursors.Default;
     }
 
-    // *** Add ***
     public void Reset()
     {
-      if (!LJC.Equals(CurrentDataConfig, Managers.DataConfigName))
+      if (!LJC.Equals(CurrentDataConfigName, Managers.DataConfigName))
       {
         ModuleManager = Managers.DataModuleManager;
-        CurrentDataConfig = Managers.DataConfigName;
+        CurrentDataConfigName = Managers.DataConfigName;
         var error = Managers.Error;
         if (LJC.HasText(error))
         {
@@ -60,7 +58,6 @@ namespace LJCDataUtility5
         }
       }
     }
-    private string? CurrentDataConfig { get; set; }
     #endregion
 
     #region Data Value Methods
@@ -113,7 +110,6 @@ namespace LJCDataUtility5
         "Name"
       };
 
-      // *** Change ***
       if (ModuleManager != null
         && ModuleManager.Manager != null)
       {
@@ -215,7 +211,7 @@ namespace LJCDataUtility5
           { DataModule.ColumnId, id },
           { DataModule.ColumnDbId, dbID },
         };
-        // *** Add ***
+
         if (ModuleManager != null)
         {
           ModuleManager.Delete(keyColumns);
@@ -254,6 +250,7 @@ namespace LJCDataUtility5
         //};
         //detail.LJCChange += Detail_Change;
         //detail.ShowDialog();
+        //detail.Dispose();
       }
     }
 
@@ -266,6 +263,7 @@ namespace LJCDataUtility5
       //};
       //detail.LJCChange += Detail_Change;
       //detail.ShowDialog();
+      //detail.Dispose();
     }
 
     // Refreshes the list.
@@ -282,7 +280,8 @@ namespace LJCDataUtility5
       DataRetrieve();
 
       // Select the original row.
-      if (id > 0)
+      if (dbId > 0
+        && id > 0)
       {
         RowSelect(dbId, id);
       }
@@ -313,7 +312,7 @@ namespace LJCDataUtility5
       //    // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
       //    var item = RowAdd(record);
       //    ModuleCombo.LJCSetByItemID((int)item.ID, item.DbID);
-      //    SetControlState();
+      SetControlState();
       //    ParentObject.TimedChange(Change.Module);
       //  }
       //}
@@ -364,18 +363,17 @@ namespace LJCDataUtility5
           e.Handled = true;
           break;
 
-        case Keys.Tab:
-          MessageBox.Show("Everywhere");
-          if (e.Shift)
-          {
-            ParentObject.ColumnTabs.Select();
-          }
-          else
-          {
-            ParentObject.ColumnTabs.Select();
-          }
-          e.Handled = true;
-          break;
+        //case Keys.Tab:
+        //  if (e.Shift)
+        //  {
+        //    ParentObject.ModuleCombo.Select();
+        //  }
+        //  else
+        //  {
+        //    ParentObject.ConfigCombo.Select();
+        //  }
+        //  e.Handled = true;
+        //  break;
       }
     }
 
@@ -394,20 +392,23 @@ namespace LJCDataUtility5
 
     #region Properties
 
-    // Gets or sets the Parent List reference.
-    private DataUtilityList ParentObject { get; set; }
-
-    // Gets or sets the Combo reference.
-    private LJCItemCombo ModuleCombo { get; set; }
-
-    // Gets or sets the Menu reference.
-    private ContextMenuStrip ModuleMenu { get; set; }
+    // Gets or sets the current data config name.
+    private string? CurrentDataConfigName { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }
 
+    // Gets or sets the Combo reference.
+    private LJCItemCombo ModuleCombo { get; set; }
+
     // Gets or sets the Manager reference.
     private DataModuleManager? ModuleManager { get; set; } = null!;
+
+    // Gets or sets the Menu reference.
+    private ContextMenuStrip ModuleMenu { get; set; }
+
+    // Gets or sets the Parent List reference.
+    private DataUtilityList ParentObject { get; set; }
     #endregion
   }
 }
