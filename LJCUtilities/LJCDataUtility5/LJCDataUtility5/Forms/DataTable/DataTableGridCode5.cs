@@ -16,6 +16,7 @@ namespace LJCDataUtility5
     // Initializes an object instance.
     internal DataTableGridCode(DataUtilityList parentObject, short dbGroupId)
     {
+      // Initialize property values.
       ParentObject = parentObject;
       ParentObject.Cursor = Cursors.WaitCursor;
       DbGroupId = dbGroupId;
@@ -165,6 +166,7 @@ namespace LJCDataUtility5
       ParentObject.Cursor = Cursors.WaitCursor;
       TableGrid.LJCRowsClear();
 
+      // Parent combo has a selection.
       var moduleId = ModuleCombo.LJCSelectedItemID(out short moduleDbId);
       if (moduleDbId > 0
         && moduleId > 0)
@@ -335,22 +337,22 @@ namespace LJCDataUtility5
         var id = RowId(out short dbId);
         short moduleDbId = 0;
         long moduleId = 0;
-        string parentName = "";
+        string moduleName = "";
         if (ModuleCombo.SelectedItem is LJCItem item)
         {
           moduleDbId = item.DbID;
           moduleId = item.ID;
-          parentName = ModuleCombo.Text;
+          moduleName = ModuleCombo.Text;
         }
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
         var detail = new DataTableDetail()
         {
-          LJCId = id,
           LJCDbId = dbId,
+          LJCId = id,
           LJCModuleDbId = moduleDbId,
           LJCModuleId = moduleId,
-          LJCModuleName = parentName,
+          LJCModuleName = moduleName,
           LJCLocation = location,
           LJCManagers = Managers,
         };
@@ -382,11 +384,11 @@ namespace LJCDataUtility5
         var detail = new DataTableDetail
         {
           LJCDbId = DbGroupId,
-          LJCLocation = location,
           LJCModuleDbId = moduleDbId,
           LJCModuleId = moduleId,
           LJCModuleName = moduleName,
           LJCSequence = sequence,
+          LJCLocation = location,
           LJCManagers = Managers,
         };
         detail.LJCChange += Detail_Change;

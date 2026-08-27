@@ -21,7 +21,7 @@ namespace LJCDataUtility5
       ParentObject.Cursor = Cursors.WaitCursor;
       DbGroupId = dbGroupId;
 
-      // Set Grid vars.
+      // Set control code vars.
       TableGrid = ParentObject.TableGrid;
       ColumnGrid = ParentObject.ColumnGrid;
       ColumnMenu = ParentObject.ColumnMenu;
@@ -322,8 +322,8 @@ namespace LJCDataUtility5
 
         var keyColumns = new LJCDataColumns()
         {
-          { DataUtilColumn.ColumnId, id },
           { DataUtilColumn.ColumnDbId, dbId },
+          { DataUtilColumn.ColumnId, id },
         };
 
         if (ColumnManager != null)
@@ -353,29 +353,26 @@ namespace LJCDataUtility5
         && ColumnGrid.CurrentRow is LJCGridRow)
       {
         // Data from items.
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
         var id = RowId(out short dbId);
         var tableGridCode = ParentObject.TableGridCode;
-        var parentId = tableGridCode.RowId(out short parentDbId);
-        string? parentName = tableGridCode.RowName();
+        var tableId = tableGridCode.RowId(out short tableDbId);
+        string? tableName = tableGridCode.RowName();
 
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
-
-        //var detail = new DataColumnDetail()
-        //{
-        //  LJCId = id,
-        //  LJCDbId = dbId,
-        //  LJCParentDbId = parentDbId,
-        //  LJCParentId = parentId,
-        //  LJCParentName = parentName,
-        //  LJCLocation = location,
-        //  LJCManagers = Managers,
-        //};
-        //detail.LJCChange += Detail_Change;
-        //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
-        //detail.ShowDialog();
-        //detail.Dispose();
+        var detail = new DataColumnDetail()
+        {
+          LJCDbId = dbId,
+          LJCId = id,
+          LJCTableDbId = tableDbId,
+          LJCTableId = tableId,
+          LJCTableName = tableName,
+          LJCLocation = location,
+          LJCManagers = Managers,
+        };
+        detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
+        detail.ShowDialog();
+        detail.Dispose();
       }
     }
 
@@ -387,26 +384,24 @@ namespace LJCDataUtility5
       {
         // Data from items.
         var tableGridCode = ParentObject.TableGridCode;
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
         int sequence = ColumnGrid.Rows.Count + 1;
-        var parentID = tableGridCode.RowId(out short parentDbId);
-        string? parentName = tableGridCode.RowName();
-        var location = FormPoint.DialogScreenPoint(ColumnGrid);
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
+        var tableId = tableGridCode.RowId(out short tableDbId);
+        string? tableName = tableGridCode.RowName();
 
-        //var detail = new DataColumnDetail
-        //{
-        //  LJCLocation = location,
-        //  LJCParentDbId = parentDbId,
-        //  LJCParentId = parentId,
-        //  LJCParentName = parentName,
-        //  LJCSequence = sequence
-        //  LJCManagers = Managers,
-        //};
-        //detail.LJCChange += Detail_Change;
-        //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
-        //detail.ShowDialog();
-        //detail.Dispose();
+        var location = FormPoint.DialogScreenPoint(ColumnGrid);
+        var detail = new DataColumnDetail
+        {
+          LJCTableDbId = tableDbId,
+          LJCTableId = tableId,
+          LJCTableName = tableName,
+          LJCSequence = sequence,
+          LJCLocation = location,
+          LJCManagers = Managers,
+        };
+        detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
+        detail.ShowDialog();
+        detail.Dispose();
       }
     }
 
@@ -442,24 +437,29 @@ namespace LJCDataUtility5
     // Adds new row or updates row with control values.
     private void Detail_Change(object? sender, EventArgs e)
     {
-      //var detail = sender as DataColumnDetail;
-      //var record = detail.LJCRecord;
-      //if (record != null)
-      //{
-      //  if (detail.LJCIsUpdate)
-      //  {
-      //    RowUpdate(record);
-      //    Refresh();
-      //  }
-      //  else
-      //  {
-      //    // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-      //    var row = RowAdd(record);
-      //    ColumnGrid.LJCSetCurrentRow(row, true);
-      SetControlState();
-      //    ParentObject.TimedChange(Change.Column);
-      //  }
-      //}
+      if (sender is DataColumnDetail detail)
+      {
+        var record = detail.LJCRecord;
+        if (record != null)
+        {
+          if (detail.LJCIsUpdate)
+          {
+            RowUpdate(record);
+            Refresh();
+          }
+          else
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            var row = RowAdd(record);
+            if (row != null)
+            {
+              ColumnGrid.LJCSetCurrentRow(row, true);
+              SetControlState();
+              ParentObject.TimedChange(Change.Column);
+            }
+          }
+        }
+      }
     }
     #endregion
 
@@ -584,8 +584,8 @@ namespace LJCDataUtility5
 
     #region Properties
 
-    // Gets or sets the database id.
-    internal short DbGroupId { get; set; }
+    // Gets or sets the current data config name.
+    private string? CurrentDataConfigName { get; set; }
 
     // Gets or sets the Grid reference.
     private LJCDataGrid ColumnGrid { get; set; }
@@ -596,8 +596,8 @@ namespace LJCDataUtility5
     // Gets or sets the Menu reference.
     private ContextMenuStrip ColumnMenu { get; set; }
 
-    // Gets or sets the current data config name.
-    private string? CurrentDataConfigName { get; set; }
+    // Gets or sets the database id.
+    internal short DbGroupId { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }

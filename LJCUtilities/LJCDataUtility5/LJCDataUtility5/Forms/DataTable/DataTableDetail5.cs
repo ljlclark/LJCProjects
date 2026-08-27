@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataModuleDetail.cs
+// DataTableDetail5.cs
 using LJCControls5;
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
@@ -8,58 +8,64 @@ using System.Text;
 
 namespace LJCDataUtility5
 {
-  // The DataModule detail dialog.
-  internal partial class DataModuleDetail : Form
+  // The DataTable detail dialog.
+  internal partial class DataTableDetail : Form
   {
     #region Constructors
 
     // Initializes an object instance.
-    internal DataModuleDetail()
+    internal DataTableDetail()
     {
       InitializeComponent();
 
       // Initialize property values.
       LJCDbId = 0;
       LJCId = 0;
+      LJCModuleDbId = 0;
+      LJCModuleId = 0;
+      _ModuleName = "";
       LJCIsUpdate = false;
       LJCRecord = null;
+
+      NameText.Leave += NameText_Leave;
     }
     #endregion
 
     #region Form Event Handlers
 
     // Configures the form and loads the initial control data.
-    private void DataModuleDetail_Load(object sender, EventArgs e)
+    private void DataTableDetail_Load(object? sender, EventArgs e)
     {
       AcceptButton = OKButton;
       CancelButton = FormCancelButton;
       InitializeControls();
       DataRetrieve();
-      CenterToParent();
-      //Location = LJCLocation;
+      //CenterToParent();
+      Location = LJCLocation;
     }
     #endregion
 
     #region Data Methods
 
     // Resets the empty record values.
-    private static void ResetValues(DataModule data)
+    private static void ResetValues(DataUtilTable data)
     {
       // In control order.
       data.Description = FormCommon.SetString(data.Description);
+      data.NewName = FormCommon.SetString(data.NewName);
     }
 
     // Retrieves the initial control data.
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
-      Text = "Module Detail";
+      Text = "Table Detail";
       if (LJCDbId > 0
         && LJCId > 0)
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        var manager = LJCManagers.DataModuleManager;
+        var manager = LJCManagers.DataTableManager;
         if (manager != null)
         {
           _OriginalRecord = manager.RetrieveWithId(LJCDbId, LJCId);
@@ -73,7 +79,14 @@ namespace LJCDataUtility5
       {
         Text += " - New";
         LJCIsUpdate = false;
-        LJCRecord = new DataModule();
+        LJCRecord = new DataUtilTable();
+        ParentNameText.Text = LJCModuleName;
+        SequenceText.Text = FormCommon.DefaultZero();
+        if (LJCSequence > 0)
+        {
+          SequenceText.Text = LJCSequence.ToString();
+        }
+        SchemaText.Text = "dbo";
       }
       NameText.Select();
       NameText.Select(0, 0);
@@ -81,39 +94,57 @@ namespace LJCDataUtility5
     }
 
     // Gets the record values and copies them to the controls.
-    private void GetValues(DataModule data)
+    private void GetValues(DataUtilTable data)
     {
       // In control order.
+      ParentNameText.Text = LJCModuleName;
       NameText.Text = data.Name;
       DescriptionText.Text = data.Description;
+      SequenceText.Text = data.Sequence.ToString();
+      SchemaText.Text = data.SchemaName;
+      if (!LJC.HasText(data.SchemaName))
+      {
+        SchemaText.Text = "dbo";
+      }
+      NewNameText.Text = data.NewName;
+
+      // Reference key values.
+      LJCDbId = data.DbId;
+      LJCModuleDbId = data.DataModuleDbId;
+      LJCModuleId = data.DataModuleId;
     }
 
     // Creates and returns a record object with the data from
-    private DataModule SetValues()
+    private DataUtilTable SetValues()
     {
       var retData = Data();
 
       // In control order.
-      retData.Name = FormCommon.SetString(NameText.Text);
+      retData.Name = NameText.Text;
       retData.Description = FormCommon.SetString(DescriptionText.Text);
+      retData.Sequence = LJC.ToInt32(SequenceText.Text);
+      retData.SchemaName = SchemaText.Text;
+      retData.NewName = FormCommon.SetString(NewNameText.Text);
 
       // Get Reference key values.
       retData.DbId = LJCDbId;
       retData.Id = LJCId;
+      retData.DataModuleDbId = LJCModuleDbId;
+      retData.DataModuleId = LJCModuleId;
       return retData;
     }
 
     // Gets the original or new record.
-    private DataModule Data()
+    private DataUtilTable Data()
     {
-      var retData = new DataModule();
+      var retData = new DataUtilTable();
 
       if (_OriginalRecord != null)
       {
-        var dataModule = _OriginalRecord.Clone();
-        if (dataModule != null)
+        var dataUtilTable = _OriginalRecord.Clone();
+        if (dataUtilTable != null)
         {
-          retData = dataModule;
+          retData = dataUtilTable;
         }
       }
       return retData;
@@ -126,24 +157,13 @@ namespace LJCDataUtility5
 
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetValues();
-      var manager = LJCManagers.DataModuleManager;
-      if (manager != null)
-      {
-        var lookupRecord = manager.RetrieveUnique(LJCRecord.Name);
-        if (lookupRecord != null
-          && manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
-        {
-          retValue = false;
-          FormCommon.DataError(this);
-        }
-      }
+      var manager = LJCManagers.DataTableManager;
 
-      if (manager != null
-        && retValue)
+      if (manager != null)
       {
         if (LJCIsUpdate)
         {
-          var keyColumns = DataModuleManager.IdKey(LJCDbId, LJCId);
+          var keyColumns = DataTableManager.IdKey(LJCDbId, LJCId);
           LJCRecord.Id = 0;
           manager.Update(LJCRecord, keyColumns);
           ResetValues(LJCRecord);
@@ -194,12 +214,6 @@ namespace LJCDataUtility5
         builder.AppendLine($"  {NameLabel.Text}");
       }
 
-      if (!LJC.HasText(DescriptionText.Text))
-      {
-        retValue = false;
-        builder.AppendLine($"  {DescriptionLabel.Text}");
-      }
-
       if (!retValue)
       {
         var title = "Data Entry Error";
@@ -223,8 +237,11 @@ namespace LJCDataUtility5
 
       // Set control values.
       SetNoSpace();
-      NameText.MaxLength = DataModule.LengthName;
-      DescriptionText.MaxLength = DataModule.LengthDescription;
+      SetNumericOnly();
+      NameText.MaxLength = DataUtilTable.LengthName;
+      DescriptionText.MaxLength = DataUtilTable.LengthDescription;
+      SequenceText.MaxLength = DataUtilTable.LengthSequence;
+      NewNameText.MaxLength = DataUtilTable.LengthName;
 
       Cursor = Cursors.Default;
     }
@@ -234,6 +251,15 @@ namespace LJCDataUtility5
     {
       NameText.KeyPress += FormCommon.TextNoSpaceKeyPress;
       NameText.TextChanged += FormCommon.TextNoSpaceChanged;
+      NewNameText.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      NewNameText.TextChanged += FormCommon.TextNoSpaceChanged;
+    }
+
+    // Sets the Numeric events.
+    private void SetNumericOnly()
+    {
+      SequenceText.KeyPress += _Sequence.KeyPress;
+      SequenceText.TextChanged += _Sequence.TextChanged;
     }
     #endregion
 
@@ -245,8 +271,17 @@ namespace LJCDataUtility5
       LJCChange?.Invoke(this, new EventArgs());
     }
 
+    // Handles the Leave event.
+    private void NameText_Leave(object? sender, EventArgs e)
+    {
+      if (!LJC.HasText(DescriptionText.Text))
+      {
+        DescriptionText.Text = NameText.Text;
+      }
+    }
+
     // Saves the data and closes the form.
-    private void OKButton_Click(object sender, EventArgs e)
+    private void OKButton_Click(object? sender, EventArgs e)
     {
       if (IsDataSaved())
       {
@@ -259,10 +294,10 @@ namespace LJCDataUtility5
 
     #region Properties
 
-    // Gets or sets the primary ID value.
+    // Gets or sets the database ID.
     internal short LJCDbId { get; set; }
 
-    // Gets or sets the primary ID value.
+    // Gets or sets the table row ID.
     internal long LJCId { get; set; }
 
     // Gets the LJCIsUpdate value.
@@ -274,8 +309,33 @@ namespace LJCDataUtility5
     // The Managers object.
     internal ManagersDataUtility LJCManagers { get; set; } = null!;
 
+    // Gets or sets the parent database ID.
+    internal short LJCModuleDbId { get; set; }
+
+    // Gets or sets the parent table row ID value.
+    internal long LJCModuleId { get; set; }
+
+    // Gets or sets the LJCParentName value.
+    internal string LJCModuleName
+    {
+      get => _ModuleName;
+      set
+      {
+        var newValue = value?.Trim();
+        if (LJC.HasText(newValue)
+          && _ModuleName != newValue)
+        {
+          _ModuleName = newValue;
+        }
+      }
+    }
+    private string _ModuleName;
+
     // Gets a reference to the record object.
-    internal DataModule? LJCRecord { get; private set; }
+    internal DataUtilTable? LJCRecord { get; private set; }
+
+    // Gets or sets the Sequence value.
+    internal int LJCSequence { get; set; }
     #endregion
 
     #region Class Data
@@ -283,7 +343,9 @@ namespace LJCDataUtility5
     // The Change event.
     internal event EventHandler<EventArgs> LJCChange = null!;
 
-    private DataModule? _OriginalRecord;
+    private DataUtilTable? _OriginalRecord;
+
+    private readonly LJCTextNumber _Sequence = new();
     #endregion
   }
 }
