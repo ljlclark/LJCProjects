@@ -14,10 +14,11 @@ namespace LJCDataUtility5
     #region Constructor Methods
 
     // Initializes an object instance.
-    internal DataTableGridCode(DataUtilityList parentObject)
+    internal DataTableGridCode(DataUtilityList parentObject, short dbGroupId)
     {
       ParentObject = parentObject;
       ParentObject.Cursor = Cursors.WaitCursor;
+      DbGroupId = dbGroupId;
 
       // Set control code vars.
       ModuleCombo = ParentObject.ModuleCombo;
@@ -119,16 +120,16 @@ namespace LJCDataUtility5
     // Gets the selected row Name.
     internal string? RowName(LJCGridRow? row = null)
     {
-      string? retTableName = null;
+      string? retName = null;
 
       row ??= Row();
       if (row != null
         && row.DataGridView != null
         && "TableGrid" == row.DataGridView.Name)
       {
-        retTableName = row.LJCGetString(DataUtilTable.ColumnName);
+        retName = row.LJCGetString(DataUtilTable.ColumnName);
       }
-      return retTableName;
+      return retName;
     }
 
     // Gets the target table ID.
@@ -331,34 +332,32 @@ namespace LJCDataUtility5
       if (TableGrid.CurrentRow is LJCGridRow)
       {
         // Data from items.
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
         var id = RowId(out short dbId);
-        short parentDbID = 0;
-        long parentID = 0;
+        short moduleDbId = 0;
+        long moduleId = 0;
         string parentName = "";
         if (ModuleCombo.SelectedItem is LJCItem item)
         {
-          parentDbID = item.DbID;
-          parentID = item.ID;
+          moduleDbId = item.DbID;
+          moduleId = item.ID;
           parentName = ModuleCombo.Text;
         }
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
-        //var detail = new DataColumnDetail()
-        //{
-        //  LJCId = id,
-        //  LJCDbId = dbId,
-        //  LJCParentId = parentId,
-        //  LJCParentDbId = parentDbId,
-        //  LJCParentName = parentName,
-        //  LJCLocation = location,
-        //  LJCManagers = Managers,
-        //};
-        //detail.LJCChange += Detail_Change;
-        //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
-        //detail.ShowDialog();
-        //detail.Dispose();
+        var detail = new DataTableDetail()
+        {
+          LJCId = id,
+          LJCDbId = dbId,
+          LJCModuleDbId = moduleDbId,
+          LJCModuleId = moduleId,
+          LJCModuleName = parentName,
+          LJCLocation = location,
+          LJCManagers = Managers,
+        };
+        detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
+        detail.ShowDialog();
+        detail.Dispose();
       }
     }
 
@@ -368,33 +367,32 @@ namespace LJCDataUtility5
       // Parent grid has a selection.
       if (ModuleCombo.SelectedItem != null)
       {
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
         int sequence = TableGrid.Rows.Count + 1;
-        short parentDbId = 0;
-        long parentId = 0;
-        string parentName = "";
+        short moduleDbId = 0;
+        long moduleId = 0;
+        string moduleName = "";
         if (ModuleCombo.SelectedItem is LJCItem item)
         {
-          parentDbId = item.DbID;
-          parentId = item.ID;
-          parentName = ModuleCombo.Text;
+          moduleDbId = item.DbID;
+          moduleId = item.ID;
+          moduleName = ModuleCombo.Text;
         }
-        var location = FormPoint.DialogScreenPoint(TableGrid);
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
 
-        //var detail = new DataColumnDetail
-        //{
-        //  LJCLocation = location,
-        //  LJCParentId = parentId,
-        //  LJCParentDbId = parentDbId,
-        //  LJCParentName = parentName,
-        //  LJCSequence = sequence
-        //  LJCManagers = Managers,
-        //};
-        //detail.LJCChange += Detail_Change;
-        //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
-        //detail.ShowDialog();
-        //detail.Dispose();
+        var location = FormPoint.DialogScreenPoint(TableGrid);
+        var detail = new DataTableDetail
+        {
+          LJCDbId = DbGroupId,
+          LJCLocation = location,
+          LJCModuleDbId = moduleDbId,
+          LJCModuleId = moduleId,
+          LJCModuleName = moduleName,
+          LJCSequence = sequence,
+          LJCManagers = Managers,
+        };
+        detail.LJCChange += Detail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
+        detail.ShowDialog();
+        detail.Dispose();
       }
     }
 
@@ -430,24 +428,29 @@ namespace LJCDataUtility5
     // Adds new row or updates row with control values.
     private void Detail_Change(object? sender, EventArgs e)
     {
-      //var detail = sender as DataColumnDetail;
-      //var record = detail.LJCRecord;
-      //if (record != null)
-      //{
-      //  if (detail.LJCIsUpdate)
-      //  {
-      //    RowUpdate(record);
-      //    Refresh();
-      //  }
-      //  else
-      //  {
-      //    // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-      //    var row = RowAdd(record);
-      //    ColumnGrid.LJCSetCurrentRow(row, true);
-      SetControlState();
-      //    ParentObject.TimedChange(Change.Column);
-      //  }
-      //}
+      if (sender is DataTableDetail detail)
+      {
+        var record = detail.LJCRecord;
+        if (record != null)
+        {
+          if (detail.LJCIsUpdate)
+          {
+            RowUpdate(record);
+            Refresh();
+          }
+          else
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            var row = RowAdd(record);
+            if (row != null)
+            {
+              TableGrid.LJCSetCurrentRow(row, true);
+              SetControlState();
+              ParentObject.TimedChange(Change.Table);
+            }
+          }
+        }
+      }
     }
     #endregion
 
@@ -569,6 +572,9 @@ namespace LJCDataUtility5
 
     // Gets or sets the current data config name.
     private string? CurrentDataConfigName { get; set; }
+
+    // Gets or sets the database id.
+    internal short DbGroupId { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }

@@ -15,12 +15,13 @@ namespace LJCDataUtility5
     #region Constructor Methods
 
     // Initializes an object instance.
-    internal DataKeyGridCode(DataUtilityList parentObject)
+    internal DataKeyGridCode(DataUtilityList parentObject, short dbGroupId)
     {
       // Initialize property values.
       ParentObject = parentObject;
       ParentObject.Cursor = Cursors.WaitCursor;
-      var configCombo = ParentObject.ConfigCombo;
+      DbGroupId = dbGroupId;
+      //var configCombo = ParentObject.ConfigCombo;
 
       // Set Grid vars.
       TableGrid = ParentObject.TableGrid;
@@ -536,6 +537,9 @@ namespace LJCDataUtility5
 
     // Gets or sets the current data config name.
     private string? CurrentDataConfigName { get; set; }
+
+    // Gets or sets the database id.
+    internal short DbGroupId { get; set; }
 
     // Gets or sets the Grid reference.
     private LJCDataGrid KeyGrid { get; set; }

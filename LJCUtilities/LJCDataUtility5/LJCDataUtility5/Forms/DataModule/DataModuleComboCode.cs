@@ -14,11 +14,12 @@ namespace LJCDataUtility5
     #region Constructor Methods
 
     // Initializes an object instance.
-    internal DataModuleComboCode(DataUtilityList parentObject)
+    internal DataModuleComboCode(DataUtilityList parentObject, short dbGroupId)
     {
       // Initialize property values.
       ParentObject = parentObject;
       ParentObject.Cursor = Cursors.WaitCursor;
+      DbGroupId = dbGroupId;
 
       // Set Combo vars.
       ModuleCombo = ParentObject.ModuleCombo;
@@ -65,7 +66,7 @@ namespace LJCDataUtility5
     // Gets the selected item ID.
     internal long ItemId(out short dbId, LJCItem? item = null)
     {
-      long retModuleId = 0;
+      long retId = 0;
 
       dbId = 0;
       if (null == item)
@@ -75,15 +76,15 @@ namespace LJCDataUtility5
       if (item != null)
       {
         dbId = item.DbID;
-        retModuleId = item.ID;
+        retId = item.ID;
       }
-      return retModuleId;
+      return retId;
     }
 
     // Gets the selected item Name.
     internal string? ItemName(LJCItem? item = null)
     {
-      string? retModuleName = null;
+      string? retName = null;
 
       if (null == item)
       {
@@ -91,9 +92,9 @@ namespace LJCDataUtility5
       }
       if (item != null)
       {
-        retModuleName = item.Text;
+        retName = item.Text;
       }
-      return retModuleName;
+      return retName;
     }
     #endregion
 
@@ -234,36 +235,36 @@ namespace LJCDataUtility5
     // Displays a detail dialog to edit a record.
     internal void Edit()
     {
+      // Current combo has selection.
       if (ModuleCombo.SelectedItem is LJCItem)
       {
         // Data from items.
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
         var id = ItemId(out short dbId);
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
 
-        //var detail = new DataModuleDetail()
-        //{
-        //  LJCID = (int)id,
-        //  LJCDbID = dbId,
-        //  //LJCLocation = location,
-        //  LJCManagers = Managers,
-        //};
-        //detail.LJCChange += Detail_Change;
-        //detail.ShowDialog();
-        //detail.Dispose();
+        var detail = new DataModuleDetail()
+        {
+          LJCDbId = dbId,
+          LJCId = id,
+          //LJCLocation = location,
+          LJCManagers = Managers,
+        };
+        detail.LJCChange += Detail_Change;
+        detail.ShowDialog();
+        detail.Dispose();
       }
     }
 
     // Displays a detail dialog for a new record.
     internal void New()
     {
-      //var detail = new DataModuleDetail
-      //{
-      //  LJCManagers = Managers,
-      //};
-      //detail.LJCChange += Detail_Change;
-      //detail.ShowDialog();
-      //detail.Dispose();
+      var detail = new DataModuleDetail
+      {
+        LJCDbId = DbGroupId,
+        LJCManagers = Managers,
+      };
+      detail.LJCChange += Detail_Change;
+      detail.ShowDialog();
+      detail.Dispose();
     }
 
     // Refreshes the list.
@@ -296,26 +297,28 @@ namespace LJCDataUtility5
     }
 
     // Adds new row or updates row with control values.
-    private void Detail_Change(object sender, EventArgs e)
+    private void Detail_Change(object? sender, EventArgs e)
     {
-      //var detail = sender as DataModuleDetail;
-      //var record = detail.LJCRecord;
-      //if (record != null)
-      //{
-      //  if (detail.LJCIsUpdate)
-      //  {
-      //    RowUpdate(record);
-      //    Refresh();
-      //  }
-      //  else
-      //  {
-      //    // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-      //    var item = RowAdd(record);
-      //    ModuleCombo.LJCSetByItemID((int)item.ID, item.DbID);
-      SetControlState();
-      //    ParentObject.TimedChange(Change.Module);
-      //  }
-      //}
+      if (sender is DataModuleDetail detail)
+      {
+        var record = detail.LJCRecord;
+        if (record != null)
+        {
+          if (detail.LJCIsUpdate)
+          {
+            RowUpdate(record);
+            Refresh();
+          }
+          else
+          {
+            // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+            var item = RowAdd(record);
+            ModuleCombo.LJCSetByItemID((int)item.ID, item.DbID);
+            SetControlState();
+            ParentObject.TimedChange(Change.Module);
+          }
+        }
+      }
     }
     #endregion
 
@@ -363,17 +366,29 @@ namespace LJCDataUtility5
           e.Handled = true;
           break;
 
-        //case Keys.Tab:
-        //  if (e.Shift)
-        //  {
-        //    ParentObject.ModuleCombo.Select();
-        //  }
-        //  else
-        //  {
-        //    ParentObject.ConfigCombo.Select();
-        //  }
-        //  e.Handled = true;
-        //  break;
+        case Keys.M:
+          if (e.Control)
+          {
+            var position = FormPoint.MenuScreenPoint(ModuleCombo
+              , Control.MousePosition);
+            var menu = ParentObject.ModuleMenu;
+            menu.Show(position);
+            menu.Select();
+            e.Handled = true;
+          }
+          break;
+
+          //case Keys.Tab:
+          //  if (e.Shift)
+          //  {
+          //    ParentObject.ModuleCombo.Select();
+          //  }
+          //  else
+          //  {
+          //    ParentObject.ConfigCombo.Select();
+          //  }
+          //  e.Handled = true;
+          //  break;
       }
     }
 
@@ -394,6 +409,9 @@ namespace LJCDataUtility5
 
     // Gets or sets the current data config name.
     private string? CurrentDataConfigName { get; set; }
+
+    // Gets or sets the database id.
+    private short DbGroupId { get; set; }
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }

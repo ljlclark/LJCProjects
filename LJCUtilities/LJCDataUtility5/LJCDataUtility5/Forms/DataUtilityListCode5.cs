@@ -8,10 +8,12 @@ using LJCNetCommon5;
 
 namespace LJCDataUtility5
 {
+  // The list form.
   internal partial class DataUtilityList : Form
   {
     #region Setup Methods
 
+    // Initializes the window controls.
     private void InitializeControls()
     {
       Cursor = Cursors.WaitCursor;
@@ -33,7 +35,7 @@ namespace LJCDataUtility5
       Cursor = Cursors.Default;
     }
 
-    // Initialize the Class Data.
+    // Initializes the Class Data.
     private void InitializeClassData()
     {
       var values = ValuesDataUtility.Instance;
@@ -55,11 +57,11 @@ namespace LJCDataUtility5
     // Setup the grid code references.
     private void SetupControlCode()
     {
-      ModuleComboCode = new DataModuleComboCode(this);
-      ConfigComboCode = new DataConfigComboCode(this);
-      TableGridCode = new DataTableGridCode(this);
-      ColumnGridCode = new DataColumnGridCode(this);
-      KeyGridCode = new DataKeyGridCode(this);
+      ModuleComboCode = new DataModuleComboCode(this, DbGroupId);
+      ConfigComboCode = new DataConfigComboCode(this, DbGroupId);
+      TableGridCode = new DataTableGridCode(this, DbGroupId);
+      ColumnGridCode = new DataColumnGridCode(this, DbGroupId);
+      KeyGridCode = new DataKeyGridCode(this, DbGroupId);
     }
 
     // Initial Control setup.
@@ -69,7 +71,7 @@ namespace LJCDataUtility5
       var _ = new LJCPanelManager(ColumnsSplit, ColumnTabs, TileTabs);
     }
 
-    // Set initial Control values.
+    // Sets the initial Control values.
     private void InitialControlValues()
     {
       LJCNetFile.CreateFolder("ExportFiles");
@@ -205,6 +207,7 @@ namespace LJCDataUtility5
 
     #region Properties
 
+    // Gets or sets the database id.
     internal short DbGroupId { get; set; }
 
     // Gets or sets the connection type value.
@@ -237,11 +240,12 @@ namespace LJCDataUtility5
     // Gets or sets the KeyGridCode reference.
     private DataKeyGridCode KeyGridCode { get; set; } = null!;
 
+    // Gets or sets the control values reference.
     private ControlValues? ControlValues { get; set; }
     #endregion
   }
 
-  /// <summary></summary>
+  // The table key types.
   internal enum KeyType : short
   {
     Primary = 1,

@@ -55,7 +55,11 @@ namespace LJCDataUtility5
           break;
 
         case Change.Config:
-          Managers.Reset(ConfigCombo.Text);
+          var configName = ConfigComboCode.ItemName();
+          if (configName != null)
+          {
+            Managers.Reset(configName);
+          }
           ModuleComboCode.Reset();
           ModuleComboCode.DataRetrieve();
           break;

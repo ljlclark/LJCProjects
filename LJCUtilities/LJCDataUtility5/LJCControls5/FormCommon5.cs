@@ -418,7 +418,7 @@ namespace LJCControls5
     // Does not allow spaces.
     /// <include file='Doc/FormCommon.xml'
     ///  path='items/TextNoSpaceKeyPress/*'/>
-    public static void TextNoSpaceKeyPress(object sender, KeyPressEventArgs e)
+    public static void TextNoSpaceKeyPress(object? sender, KeyPressEventArgs e)
     {
       if (!e.Handled)
       {
@@ -429,7 +429,7 @@ namespace LJCControls5
     // Strips blanks from the text value.
     /// <include file='Doc/FormCommon.xml'
     ///  path='items/TextNoSpaceChanged/*'/>
-    public static void TextNoSpaceChanged(object sender, EventArgs e)
+    public static void TextNoSpaceChanged(object? sender, EventArgs e)
     {
       if (sender is TextBox textBox
         && textBox.Text.Contains(' '))
@@ -752,9 +752,13 @@ namespace LJCControls5
     // Sets the string to "-null" if empty or blanks. and to "" if "-null".
     /// <include file='Doc/FormCommon.xml'
     ///  path='items/SetString/*'/>
-    public static string SetString(string text)
+    public static string SetString(string? text)
     {
-      string retValue = text;
+      string retValue = "";
+      if (LJC.HasText(text))
+      {
+        retValue = text;
+      }
 
       if (!LJC.HasText(retValue))
       {
@@ -762,7 +766,7 @@ namespace LJCControls5
       }
       else
       {
-        retValue = text.Trim();
+        retValue = text!.Trim();
         if ("-null" == retValue)
         {
           retValue = "";

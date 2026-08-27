@@ -14,11 +14,12 @@ namespace LJCDataUtility5
     #region Constructor Methods
 
     // Initializes an object instance.
-    internal DataColumnGridCode(DataUtilityList parentObject)
+    internal DataColumnGridCode(DataUtilityList parentObject, short dbGroupId)
     {
       // Initialize property values.
       ParentObject = parentObject;
       ParentObject.Cursor = Cursors.WaitCursor;
+      DbGroupId = dbGroupId;
 
       // Set Grid vars.
       TableGrid = ParentObject.TableGrid;
@@ -582,6 +583,9 @@ namespace LJCDataUtility5
     #endregion
 
     #region Properties
+
+    // Gets or sets the database id.
+    internal short DbGroupId { get; set; }
 
     // Gets or sets the Grid reference.
     private LJCDataGrid ColumnGrid { get; set; }

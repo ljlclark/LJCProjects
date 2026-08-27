@@ -225,6 +225,34 @@ namespace LJCDataUtilityDAL5
       };
       return retValue;
     }
+
+    // Check for duplicate unique key.
+    /// <include path='items/IsDuplicate/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    public bool IsDuplicate(DataModule lookupRecord, DataModule currentRecord
+      , bool isUpdate = false)
+    {
+      bool retValue = false;
+
+      if (lookupRecord != null)
+      {
+        if (!isUpdate)
+        {
+          // Duplicate for "New" record that already exists.
+          retValue = true;
+        }
+        else
+        {
+          // If not the current record.
+          if (lookupRecord.DbId != currentRecord.DbId
+            && lookupRecord.Id != currentRecord.Id)
+          {
+            // Duplicate for "Update" where unique key is modified.
+            retValue = true;
+          }
+        }
+      }
+      return retValue;
+    }
     #endregion
 
     #region Properties
