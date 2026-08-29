@@ -369,7 +369,10 @@ namespace LJCDataUtility5
       // Parent grid has a selection.
       if (ModuleCombo.SelectedItem != null)
       {
+        // Data from item.
         int sequence = TableGrid.Rows.Count + 1;
+
+        // Data from parent item.
         short moduleDbId = 0;
         long moduleId = 0;
         string moduleName = "";

@@ -382,15 +382,19 @@ namespace LJCDataUtility5
       // Parent grid has a selection.
       if (TableGrid.CurrentRow is LJCGridRow)
       {
-        // Data from items.
-        var tableGridCode = ParentObject.TableGridCode;
+        // Data from item.
         int sequence = ColumnGrid.Rows.Count + 1;
+
+        // Data from parent item.
+        var tableGridCode = ParentObject.TableGridCode;
         var tableId = tableGridCode.RowId(out short tableDbId);
         string? tableName = tableGridCode.RowName();
 
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail
         {
+          // *** Add ***
+          LJCDbId = DbGroupId,
           LJCTableDbId = tableDbId,
           LJCTableId = tableId,
           LJCTableName = tableName,

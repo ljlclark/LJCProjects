@@ -226,7 +226,6 @@ namespace LJCDataUtility5
       TableExit.Name = "TableExit";
       TableExit.Size = new Size(183, 32);
       TableExit.Text = "E&xit";
-      TableExit.Click += Exit_Click;
       // 
       // ColumnsSplit
       // 

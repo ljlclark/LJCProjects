@@ -346,6 +346,7 @@ namespace LJCDataUtility5
       // Parent grid has a selection.
       if (TableGrid.CurrentRow is LJCGridRow)
       {
+        // Data from parent item.
         var tableGridCode = ParentObject.TableGridCode;
         var tableID = tableGridCode.RowId(out short parentDbID);
         string? tableName = tableGridCode.RowName();
@@ -353,6 +354,8 @@ namespace LJCDataUtility5
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail
         {
+          // *** Add ***
+          LJCDbId = DbGroupId,
           LJCTableDbId = parentDbID,
           LJCTableId = tableID,
           LJCTableName = tableName,
