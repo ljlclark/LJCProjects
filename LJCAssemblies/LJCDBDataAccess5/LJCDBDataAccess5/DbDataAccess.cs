@@ -144,6 +144,8 @@ namespace LJCDBDataAccess5
               retRetrieve.AffectedRecords = AffectedCount;
               SqlStatement = $"{saveSql}\r\n{SqlStatement}";
               retRetrieve.ExecutedSql = SqlStatement;
+              // *** Add ***
+              retResult = retRetrieve;
             }
           }
         }

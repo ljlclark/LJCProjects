@@ -327,7 +327,8 @@ namespace LJCDBMessage5
 
       if (dataObject != null)
       {
-        if (!LJC.HasArrayElements(propertyNames))
+        //if (!LJC.HasArrayElements(propertyNames))
+        if (!LJC.HasListItems(propertyNames))
         {
           propertyNames = [];
           DefaultToChangedNames(dataObject, ref propertyNames);
