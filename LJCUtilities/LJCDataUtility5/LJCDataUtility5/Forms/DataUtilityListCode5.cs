@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 // DataUtilityListCode5.cs
 using LJCControls5;
-using LJCDataAccessConfig5;
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
 
@@ -88,7 +87,22 @@ namespace LJCDataUtility5
     }
     #endregion
 
-    #region Other Methods
+    #region Action Event Handlers
+
+    // Performs a Move of the selected Main Tab to the TileTabs control.
+    private void ColumnTabMove_Click(object? sender, EventArgs e)
+    {
+      ColumnTabs.LJCMoveTabPageRight(TileTabs, ColumnsSplit);
+    }
+
+    // Performs a Move of the selected Tile Tab to the MainTabs control.
+    private void KeyTabMove_Click(object? sender, EventArgs e)
+    {
+      TileTabs.LJCMoveTabPageLeft(ColumnTabs, ColumnsSplit);
+    }
+    #endregion
+
+    #region Control Methods
 
     // Restores the control values.
     private void RestoreControlValues()
@@ -164,21 +178,6 @@ namespace LJCDataUtility5
             break;
         }
       }
-    }
-    #endregion
-
-    #region Action Event Handlers
-
-    // Performs a Move of the selected Main Tab to the TileTabs control.
-    private void ColumnTabMove_Click(object? sender, EventArgs e)
-    {
-      ColumnTabs.LJCMoveTabPageRight(TileTabs, ColumnsSplit);
-    }
-
-    // Performs a Move of the selected Tile Tab to the MainTabs control.
-    private void KeyTabMove_Click(object? sender, EventArgs e)
-    {
-      TileTabs.LJCMoveTabPageLeft(ColumnTabs, ColumnsSplit);
     }
     #endregion
 

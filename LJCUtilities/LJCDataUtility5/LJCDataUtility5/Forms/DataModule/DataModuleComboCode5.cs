@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataModuleComboCode.cs
+// DataModuleComboCode5.cs
 using LJCControls5;
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
@@ -46,6 +46,7 @@ namespace LJCDataUtility5
       ParentObject.Cursor = Cursors.Default;
     }
 
+    // Resets the data manager.
     public void Reset()
     {
       if (!LJC.Equals(CurrentDataConfigName, Managers.DataConfigName))
@@ -61,7 +62,7 @@ namespace LJCDataUtility5
     }
     #endregion
 
-    #region Data Value Methods
+    #region Item Value Methods
 
     // Gets the selected item ID.
     internal long ItemId(out short dbId, LJCItem? item = null)
@@ -305,7 +306,7 @@ namespace LJCDataUtility5
       //  , "_ClassName_List.html");
     }
 
-    // Adds new row or updates row with control values.
+    // Adds or updates row with detail record values.
     private void Detail_Change(object? sender, EventArgs e)
     {
       if (sender is DataModuleDetail detail)

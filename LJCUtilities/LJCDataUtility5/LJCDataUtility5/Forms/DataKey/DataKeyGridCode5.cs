@@ -95,7 +95,7 @@ namespace LJCDataUtility5
     }
     #endregion
 
-    #region Data Value Methods
+    #region Item Value Methods
 
     // Gets the current DataKey grid row.
     internal LJCGridRow? Row()
@@ -395,7 +395,7 @@ namespace LJCDataUtility5
       //  , "_ClassName_List.html");
     }
 
-    // Adds new row or updates row with control values.
+    // Adds or updates row with detail record values.
     private void Detail_Change(object? sender, EventArgs e)
     {
       //var detail = sender as DataKeyDetail;
