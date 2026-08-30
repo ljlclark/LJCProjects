@@ -225,15 +225,12 @@ namespace LJCDataUtility5
             break;
           }
 
-          // *** Begin *** Add
           var index = ModuleCombo.SelectedIndex;
           if (index >= ModuleCombo.Items.Count - 1)
           {
             index -= 1;
           }
-          // *** End ***
           ModuleCombo.Items.Remove(item);
-          // *** Add ***
           ModuleCombo.SelectedIndex = index;
         }
         SetControlState();
@@ -405,7 +402,6 @@ namespace LJCDataUtility5
     // Handles the SelectionChanged event.
     private void ModuleCombo_SelectedIndexChanged(object? sender, EventArgs e)
     {
-      // *** Next Statement *** Add
       SetControlState();
       ParentObject.TimedChange(Change.Module);
     }

@@ -8,7 +8,7 @@ using static LJCDataUtility5.DataUtilityList;
 
 namespace LJCDataUtility5
 {
-  // Provides methods for the DataTable grid.
+  // Provides methods for the Table grid.
   internal class DataTableGridCode
   {
     #region Constructor Methods
@@ -298,7 +298,7 @@ namespace LJCDataUtility5
           }
         }
 
-        // Data from items.
+        // Data from current item.
         var id = RowId(out short dbId);
 
         var keyColumns = new LJCDataColumns()
@@ -329,12 +329,11 @@ namespace LJCDataUtility5
     // Displays a detail dialog to edit a record.
     internal void Edit()
     {
-      // Current grid has selection.
-      //if (ModuleCombo.CurrentRow is LJCGridRow
-      if (TableGrid.CurrentRow is LJCGridRow)
+      // Parent combo and current grid have selections.
+      if (ModuleCombo.SelectedItem is LJCItem
+        && TableGrid.CurrentRow is LJCGridRow)
       {
-        // Data from items.
-        var id = RowId(out short dbId);
+        // Data from parent item.
         short moduleDbId = 0;
         long moduleId = 0;
         string moduleName = "";
@@ -344,6 +343,9 @@ namespace LJCDataUtility5
           moduleId = item.ID;
           moduleName = ModuleCombo.Text;
         }
+
+        // Data from current item.
+        var id = RowId(out short dbId);
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
         var detail = new DataTableDetail()
@@ -366,12 +368,10 @@ namespace LJCDataUtility5
     // Displays a detail dialog for a new record.
     internal void New()
     {
-      // Parent grid has a selection.
-      if (ModuleCombo.SelectedItem != null)
+      // Parent combo and current grid have selections.
+      if (ModuleCombo.SelectedItem is LJCItem
+        && TableGrid.CurrentRow is LJCGridRow)
       {
-        // Data from item.
-        int sequence = TableGrid.Rows.Count + 1;
-
         // Data from parent item.
         short moduleDbId = 0;
         long moduleId = 0;
@@ -382,6 +382,9 @@ namespace LJCDataUtility5
           moduleId = item.ID;
           moduleName = ModuleCombo.Text;
         }
+
+        // Data from current item.
+        int sequence = TableGrid.Rows.Count + 1;
 
         var location = FormPoint.DialogScreenPoint(TableGrid);
         var detail = new DataTableDetail
@@ -518,7 +521,6 @@ namespace LJCDataUtility5
         case Keys.Tab:
           if (e.Shift)
           {
-            //ParentObject.ColumnTabs.Select();
             ParentObject.ConfigCombo.Select();
           }
           else

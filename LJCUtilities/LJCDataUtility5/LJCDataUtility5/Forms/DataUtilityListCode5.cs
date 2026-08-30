@@ -107,8 +107,6 @@ namespace LJCDataUtility5
     // Restores the control values.
     private void RestoreControlValues()
     {
-      //ControlValue controlValue;
-
       if (File.Exists(ControlValuesFileName))
       {
         ControlValues = LJC.XmlDeserialize(typeof(ControlValues)

@@ -8,7 +8,7 @@ using static LJCDataUtility5.DataUtilityList;
 
 namespace LJCDataUtility5
 {
-  // Provides methods for the DataKey grid.
+  // Provides methods for the Key grid.
   internal class DataKeyGridCode
   {
     #region Constructor Methods
@@ -22,14 +22,13 @@ namespace LJCDataUtility5
       DbGroupId = dbGroupId;
 
       // Set control code vars.
-      //var configCombo = ParentObject.ConfigCombo;
       TableGrid = ParentObject.TableGrid;
       KeyGrid = ParentObject.KeyGrid;
       KeyMenu = ParentObject.KeyMenu;
 
       // Set Data vars.
       Managers = ParentObject.Managers;
-      KeyManager = Managers.DataKeyManager;
+      Reset();
 
       // Menu item events.
       var list = ParentObject;
@@ -65,7 +64,7 @@ namespace LJCDataUtility5
       }
     }
 
-    // Configures the Grid.
+    // Configures the Key Grid.
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
@@ -286,8 +285,8 @@ namespace LJCDataUtility5
 
         var keyColumns = new LJCDataColumns()
         {
+          { DataKey.ColumnDbId, dbId },
           { DataKey.ColumnId, id },
-          { DataKey.ColumnDbId, dbId }
         };
 
         if (KeyManager != null)
@@ -354,7 +353,6 @@ namespace LJCDataUtility5
         var location = FormPoint.DialogScreenPoint(KeyGrid);
         var detail = new DataKeyDetail
         {
-          // *** Add ***
           LJCDbId = DbGroupId,
           LJCTableDbId = parentDbID,
           LJCTableId = tableID,
@@ -401,7 +399,6 @@ namespace LJCDataUtility5
     // Adds or updates row with detail record values.
     private void Detail_Change(object? sender, EventArgs e)
     {
-      //var detail = sender as DataKeyDetail;
       if (sender is DataKeyDetail detail)
       {
         var record = detail.LJCRecord;

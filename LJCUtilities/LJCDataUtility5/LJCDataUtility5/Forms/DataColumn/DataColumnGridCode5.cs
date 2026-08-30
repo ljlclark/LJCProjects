@@ -8,7 +8,7 @@ using static LJCDataUtility5.DataUtilityList;
 
 namespace LJCDataUtility5
 {
-  // Provides methods for the DataColumn grid.
+  // Provides methods for the Column grid.
   internal class DataColumnGridCode
   {
     #region Constructor Methods
@@ -64,7 +64,7 @@ namespace LJCDataUtility5
       }
     }
 
-    // Configures the DataColumn Grid.
+    // Configures the Column Grid.
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
@@ -317,7 +317,7 @@ namespace LJCDataUtility5
           }
         }
 
-        // Data from items.
+        // Data from current item.
         var id = RowId(out short dbId);
 
         var keyColumns = new LJCDataColumns()
@@ -352,11 +352,13 @@ namespace LJCDataUtility5
       if (TableGrid.CurrentRow is LJCGridRow
         && ColumnGrid.CurrentRow is LJCGridRow)
       {
-        // Data from items.
-        var id = RowId(out short dbId);
+        // Data from parent item.
         var tableGridCode = ParentObject.TableGridCode;
         var tableId = tableGridCode.RowId(out short tableDbId);
         string? tableName = tableGridCode.RowName();
+
+        // Data from current item.
+        var id = RowId(out short dbId);
 
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail()
@@ -379,21 +381,21 @@ namespace LJCDataUtility5
     // Displays a detail dialog for a new record.
     internal void New()
     {
-      // Parent grid has a selection.
-      if (TableGrid.CurrentRow is LJCGridRow)
+      // Parent grid and current grid have selections.
+      if (TableGrid.CurrentRow is LJCGridRow
+        && ColumnGrid.CurrentRow is LJCGridRow)
       {
-        // Data from item.
-        int sequence = ColumnGrid.Rows.Count + 1;
-
         // Data from parent item.
         var tableGridCode = ParentObject.TableGridCode;
         var tableId = tableGridCode.RowId(out short tableDbId);
         string? tableName = tableGridCode.RowName();
 
+        // Data from current item.
+        int sequence = ColumnGrid.Rows.Count + 1;
+
         var location = FormPoint.DialogScreenPoint(ColumnGrid);
         var detail = new DataColumnDetail
         {
-          // *** Add ***
           LJCDbId = DbGroupId,
           LJCTableDbId = tableDbId,
           LJCTableId = tableId,

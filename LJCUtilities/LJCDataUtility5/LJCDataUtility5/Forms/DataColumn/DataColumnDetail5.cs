@@ -3,7 +3,6 @@
 // DataColumnDetail5.cs
 using LJCControls5;
 using LJCDataUtilityDAL5;
-using LJCDBClientLib5;
 using LJCNetCommon5;
 using System.Text;
 
