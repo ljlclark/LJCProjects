@@ -163,7 +163,7 @@ namespace LJCDataUtility5
         var lookupRecord = manager.RetrieveUnique(LJCRecord.DataModuleDbId
           , LJCRecord.DataModuleId, LJCRecord.Name);
         if (lookupRecord != null
-          && manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
+          && DataTableManager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
         {
           retValue = false;
           FormCommon.DataError(this);

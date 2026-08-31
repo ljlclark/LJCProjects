@@ -14,7 +14,7 @@ namespace LJCDataUtilityDAL5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public TableKeys()
     {
@@ -23,7 +23,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The Copy constructor.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
     public TableKeys(TableKeys items) : this()
     {
@@ -40,7 +40,7 @@ namespace LJCDataUtilityDAL5
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public TableKeys Clone()
     {
@@ -57,7 +57,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCHasItems/*'/>
     public bool LJCHasItems()
     {

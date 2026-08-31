@@ -15,7 +15,7 @@ namespace LJCDataUtilityDAL5
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
     public static DataModules? LJCDeserialize(string? fileSpec = null)
     {
@@ -39,7 +39,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Get custom collection from List<T>.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCGetCollection/*'/>
     public static DataModules? LJCGetCollection(List<DataModule> list)
     {
@@ -56,7 +56,7 @@ namespace LJCDataUtilityDAL5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public DataModules()
     {
@@ -65,7 +65,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The Copy constructor.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
     public DataModules(DataModules items) : this()
     {
@@ -82,7 +82,7 @@ namespace LJCDataUtilityDAL5
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public DataModules Clone()
     {
@@ -102,7 +102,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCHasItems/*'/>
     public bool LJCHasItems()
     {
@@ -116,7 +116,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Serializes the collection to a file.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCSerialize/*'/>
     public void LJCSerialize(string? fileSpec = null)
     {
@@ -163,7 +163,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Retrieve the collection item.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCGetWithID/*'/>
     public DataModule? LJCGetWithID(short dbID, long id)
     {
@@ -211,7 +211,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Removes an item by name.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCRemove/*'/>
     public void LJCRemove(string name)
     {

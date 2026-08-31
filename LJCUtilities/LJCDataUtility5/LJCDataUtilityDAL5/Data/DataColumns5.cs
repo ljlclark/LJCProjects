@@ -15,7 +15,7 @@ namespace LJCDataUtilityDAL5
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
     public static DataColumns? LJCDeserialize(string? fileSpec = null)
     {
@@ -38,8 +38,8 @@ namespace LJCDataUtilityDAL5
       return retValue;
     }
 
-    // Get custom collection from List<T>.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    // Get a custom collection from List<T>.
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCGetCollection/*'/>
     public static DataColumns? LJCGetCollection(List<DataUtilColumn> list)
     {
@@ -56,7 +56,7 @@ namespace LJCDataUtilityDAL5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public DataColumns()
     {
@@ -65,7 +65,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The Copy constructor.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
     public DataColumns(DataColumns items) : this()
     {
@@ -82,7 +82,7 @@ namespace LJCDataUtilityDAL5
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public DataColumns Clone()
     {
@@ -99,7 +99,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCHasItems/*'/>
     public bool LJCHasItems()
     {
@@ -113,7 +113,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Serializes the collection to a file.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCSerialize/*'/>
     public void LJCSerialize(string? fileSpec = null)
     {
@@ -206,8 +206,8 @@ namespace LJCDataUtilityDAL5
       return retValue;
     }
 
-    // Retrieve the collection element.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    // Retrieve the collection item.
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCGetWithId/*'/>
     public DataUtilColumn? LJCGetWithId(short dbId, long id)
     {
@@ -295,8 +295,8 @@ namespace LJCDataUtilityDAL5
 
     #region Sort Methods
 
-    // Sort on ID.
-    /// <include file='Doc/DataColumns.xml'
+    // Sort on IDs.
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCSortId/*'/>
     public void LJCSortId()
     {

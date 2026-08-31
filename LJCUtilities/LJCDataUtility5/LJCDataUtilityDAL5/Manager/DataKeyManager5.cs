@@ -8,14 +8,47 @@ using LJCNetCommon5;
 namespace LJCDataUtilityDAL5
 {
   // Provides table specific data methods.
-  /// <include file='Doc/DataTableManager.xml'
+  /// <include file='Doc/DataKeyManager.xml'
   ///  path='members/DataKeyManager/*'/>
   public class DataKeyManager
   {
+    #region Static Methods
+
+    // Check for duplicate unique key.
+    /// <include file='../../LJCGenDoc5/Common/Manager.xml'
+    ///  path='items/IsDuplicate/*'/>
+    public static bool IsDuplicate(DataKey lookupRecord, DataKey currentRecord
+      , bool isUpdate = false)
+    {
+      bool retValue = false;
+
+      if (lookupRecord != null)
+      {
+        if (!isUpdate)
+        {
+          // Duplicate for "New" record that already exists.
+          retValue = true;
+        }
+        else
+        {
+          // If not the current record.
+          if (lookupRecord.DbId != currentRecord.DbId
+            && lookupRecord.Id != currentRecord.Id)
+          {
+            // Duplicate for "Update" where unique key is modified.
+            retValue = true;
+          }
+        }
+      }
+      return retValue;
+    }
+    #endregion
+
+
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    /// <include file='../../LJCGenDoc5/Common/Manager.xml'
     ///  path='members/Constructor/*'/>
     public DataKeyManager()
     {
@@ -72,7 +105,7 @@ namespace LJCDataUtilityDAL5
     #region Manager Methods
 
     // Creates a set of columns that match the supplied list.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    /// <include file='../../LJCGenDoc5/Common/Manager.xml'
     ///  path='members/Columns/*'/>
     public LJCDataColumns? Columns(List<string> propertyNames)
     {
@@ -86,7 +119,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Creates a list of BaseDefinition property names.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    /// <include file='../../LJCGenDoc5/Common/Manager.xml'
     ///  path='members/PropertyNames/*'/>
     public List<string>? PropertyNames()
     {
@@ -119,7 +152,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Deletes the records with the specified key values.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    /// <include file='../../LJCGenDoc5/Common/Manager.xml'
     ///  path='members/Delete/*'/>
     public void Delete(LJCDataColumns keyColumns, LJCDBFilters? filters = null)
     {
@@ -128,7 +161,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Retrieves a collection of data records.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    /// <include file='../../LJCGenDoc5/Common/Manager.xml'
     ///  path='members/Load/*'/>
     public DataKeys? Load(LJCDataColumns? keyColumns = null
       , List<string>? propertyNames = null, LJCDBFilters? filters = null
@@ -149,7 +182,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Retrieves a record from the database.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    /// <include file='../../LJCGenDoc5/Common/Manager.xml'
     ///  path='members/Retrieve/*'/>
     public DataKey? Retrieve(LJCDataColumns keyColumns
       , List<string>? propertyNames = null, LJCDBFilters? filters = null
@@ -170,7 +203,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Updates the record.
-    /// <include file='../../LJCGenDoc/Common/Manager.xml'
+    /// <include file='../../LJCGenDoc5/Common/Manager.xml'
     ///  path='members/Update/*'/>
     public void Update(DataKey dataObject, LJCDataColumns keyColumns
       , List<string>? propertyNames = null, LJCDBFilters? filters = null)
@@ -379,41 +412,13 @@ namespace LJCDataUtilityDAL5
       };
       return retValue;
     }
-
-    // Check for duplicate unique key.
-    /// <include file='../../LJCDocLib/Common/Manager.xml'
-    ///  path='items/IsDuplicate/*'/>
-    public bool IsDuplicate(DataKey lookupRecord, DataKey currentRecord
-      , bool isUpdate = false)
-    {
-      bool retValue = false;
-
-      if (lookupRecord != null)
-      {
-        if (!isUpdate)
-        {
-          // Duplicate for "New" record that already exists.
-          retValue = true;
-        }
-        else
-        {
-          // If not the current record.
-          if (lookupRecord.DbId != currentRecord.DbId
-            && lookupRecord.Id != currentRecord.Id)
-          {
-            // Duplicate for "Update" where unique key is modified.
-            retValue = true;
-          }
-        }
-      }
-      return retValue;
-    }
     #endregion
 
     #region Joins
 
     // Creates and returns the Load Joins object.
-    /// <include path='members/GetLoadJoins/*' file='../../LJCGenDoc/Common/Manager.xml'/>
+    /// <include file='../../LJCGenDoc5/Common/Manager.xml'
+    ///  path='members/GetLoadJoins/*'/>
     public static LJCDBJoins GetJoins()
     {
       LJCDBJoins retValue = [];
@@ -488,9 +493,9 @@ namespace LJCDataUtilityDAL5
     ///  path='members/ResultConverter/*'/>
     public LJCResultConverter<DataKey, DataKeys> ResultConverter { get; set; }
 
-    // Gets or sets the EntryManager reference.
-    /// <include file='Doc/DataKeyManager.xml'
-    ///  path='members/EntryManager/*'/>
+    //// Gets or sets the EntryManager reference.
+    ///// <include file='Doc/DataKeyManager.xml'
+    /////  path='members/EntryManager/*'/>
     //private DataEntryManager EntryManager { get; set; }
     #endregion
   }

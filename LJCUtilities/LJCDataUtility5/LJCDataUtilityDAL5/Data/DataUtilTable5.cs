@@ -10,14 +10,14 @@ using System.Xml.Serialization;
 namespace LJCDataUtilityDAL5
 {
   // The DataTable data.
-  /// <include file='Doc/DataTable.xml'
+  /// <include file='Doc/DataUtilTable.xml'
   ///  path='members/DataUtilTable/*'/>
   public class DataUtilTable : IComparable<DataUtilTable>
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public DataUtilTable()
     {
@@ -39,7 +39,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include file='Doc/DataTable.xml'
+    /// <include file='Doc/DataUtilTable.xml'
     ///  path='members/ParamConstructor/*'/>
     public DataUtilTable(string name, int sequence) : this()
     {
@@ -48,7 +48,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The Copy constructor.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/CopyConstructor/*'/>
     public DataUtilTable(DataUtilTable item)
     {
@@ -73,7 +73,7 @@ namespace LJCDataUtilityDAL5
     #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public DataUtilTable? Clone()
     {
@@ -82,7 +82,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Provides the default Sort functionality.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/CompareTo/*'/>
     public int CompareTo(DataUtilTable? other)
     {
@@ -110,7 +110,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Initializes the original values.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/LJCSetOriginalValues/*'/>
     public void LJCSetOriginalValues()
     {
@@ -128,7 +128,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The object string identifier.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/ToString/*'/>
     public override string ToString()
     {
@@ -143,7 +143,7 @@ namespace LJCDataUtilityDAL5
     // if property was renamed.
 
     // Gets or sets the database ID.
-    /// <include file='doc/DataTable.xml'
+    /// <include file='Doc/DataUtilTable.xml'
     ///  path='members/DbId/*'/>
     [Required]
     [Column("DbId", TypeName = "smallint")]
@@ -162,7 +162,7 @@ namespace LJCDataUtilityDAL5
     private short _DbId;
 
     // Gets or sets the table row ID.
-    /// <include file='doc/DataTable.xml'
+    /// <include file='Doc/DataUtilTable.xml'
     ///  path='members/Id/*'/>
     [Required]
     [Column("Id", TypeName = "bigint")]
@@ -180,7 +180,7 @@ namespace LJCDataUtilityDAL5
     private long _Id;
 
     // Gets or sets the parent database ID.
-    /// <include file='doc/DataTable.xml'
+    /// <include file='Doc/DataUtilTable.xml'
     ///  path='members/DataModuleDbId/*'/>
     [Required]
     [Column("DataModuleDbId", TypeName = "bigint")]
@@ -199,7 +199,7 @@ namespace LJCDataUtilityDAL5
     private short _DataModuleDbId;
 
     // Gets or sets the parent table row ID.
-    /// <include file='doc/DataTable.xml'
+    /// <include file='Doc/DataUtilTable.xml'
     ///  path='members/DataModuleId/*'/>
     [Required]
     [Column("DataModuleId", TypeName = "bigint")]
@@ -218,7 +218,7 @@ namespace LJCDataUtilityDAL5
     private long _DataModuleId;
 
     // Gets or sets the name value.
-    /// <include file='doc/DataTable.xml'
+    /// <include file='Doc/DataUtilTable.xml'
     ///  path='members/Name/*'/>
     [Required]
     [Column("Name", TypeName = "nvarchar(60")]
@@ -239,7 +239,7 @@ namespace LJCDataUtilityDAL5
     private string _Name;
 
     // Gets or sets the description.
-    /// <include file='doc/DataTable.xml'
+    /// <include file='Doc/DataUtilTable.xml'
     ///  path='members/Description/*'/>
     [Required]
     [Column("Description", TypeName = "nvarchar(80")]
@@ -260,7 +260,7 @@ namespace LJCDataUtilityDAL5
     private string? _Description;
 
     // Gets or sets the sequence.
-    /// <include file='doc/DataTable.xml'
+    /// <include file='Doc/DataUtilTable.xml'
     ///  path='members/Sequence/*'/>
     [Required]
     [Column("Sequence", TypeName = "int")]
@@ -279,7 +279,7 @@ namespace LJCDataUtilityDAL5
     private int _Sequence;
 
     // Gets or sets the schema name.
-    /// <include file='doc/DataTable.xml'
+    /// <include file='Doc/DataUtilTable.xml'
     ///  path='members/SchemaName/*'/>
     [Column("SchemaName", TypeName = "nvarchar(30")]
     public string? SchemaName
@@ -299,7 +299,7 @@ namespace LJCDataUtilityDAL5
     private string? _SchemaName;
 
     // Gets or sets the new name.
-    /// <include file='doc/DataTable.xml'
+    /// <include file='Doc/DataUtilTable.xml'
     ///  path='members/NewName/*'/>
     [Column("NewName", TypeName = "nvarchar(60")]
     public string? NewName
@@ -319,7 +319,7 @@ namespace LJCDataUtilityDAL5
     private string? _NewName;
 
     // Gets or sets the Join module name.
-    /// <include file='doc/DataTable.xml'
+    /// <include file='Doc/DataUtilTable.xml'
     ///  path='members/ModuleName/*'/>
     public string? ModuleName { get; set; }
     #endregion
@@ -327,7 +327,7 @@ namespace LJCDataUtilityDAL5
     #region Class Properties
 
     // Gets a reference to the ChangedNames list.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/ChangedNames/*'/>
     [XmlIgnore]
     public LJCChangedNames ChangedNames { get; private set; }
@@ -430,12 +430,12 @@ namespace LJCDataUtilityDAL5
   #region Comparers
 
   // Sort and search on Name value.
-  /// <include file='Doc/DataTable.xml'
+  /// <include file='Doc/DataUtilTable.xml'
   ///  path='members/DataTableUnique/*'/>
   public class DataTableUnique : IComparer<DataUtilTable>
   {
     // Compares two objects.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Compare/*'/>
     public int Compare(DataUtilTable? x, DataUtilTable? y)
     {

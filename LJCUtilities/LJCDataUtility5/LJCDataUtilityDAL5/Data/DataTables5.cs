@@ -16,7 +16,7 @@ namespace LJCDataUtilityDAL5
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
     public static DataTables? LJCDeserialize(string? fileSpec = null)
     {
@@ -39,8 +39,8 @@ namespace LJCDataUtilityDAL5
       return retValue;
     }
 
-    // Get custom collection from List<T>.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    // Get a custom collection from List<T>.
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCGetCollection/*'/>
     public static DataTables? LJCGetCollection(List<DataUtilTable> list)
     {
@@ -57,7 +57,7 @@ namespace LJCDataUtilityDAL5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public DataTables()
     {
@@ -66,7 +66,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The Copy constructor.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
     public DataTables(DataTables items) : this()
     {
@@ -83,7 +83,7 @@ namespace LJCDataUtilityDAL5
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public DataTables Clone()
     {
@@ -103,7 +103,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCHasItems/*'/>
     public bool LJCHasItems()
     {
@@ -117,7 +117,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Serializes the collection to a file.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCSerialize/*'/>
     public void LJCSerialize(string? fileSpec = null)
     {
@@ -132,7 +132,7 @@ namespace LJCDataUtilityDAL5
     #region Collection Data Methods
 
     // Creates and adds the object from the supplied values.
-    /// <include file='Doc/DataTables5.xml'
+    /// <include file='Doc/DataTables.xml'
     ///  path='members/Add/*'/>
     public DataUtilTable Add(short dbId, long id, short dataModuleDbId
       , long dataModuleId, string name)
@@ -168,7 +168,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Retrieve the collection item.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCGetWithID/*'/>
     public DataUtilTable? LJCGetWithID(short dbId, long id)
     {
@@ -192,7 +192,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Retrieve the collection element with unique values.
-    /// <include file='Doc/DataTables5.xml'
+    /// <include file='Doc/DataTables.xml'
     ///  path='members/LJCGetUnique/*'/>
     public DataUtilTable? LJCGetUnique(short dataModuleDbId
       , long dataModuleId, string name)
@@ -219,7 +219,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Removes an item by name.
-    /// <include file='Doc/DataTables5.xml'
+    /// <include file='Doc/DataTables.xml'
     ///  path='members/LJCRemove/*'/>
     public void LJCRemove(short dataModuleDbId, long dataModuleId
       , string name)
@@ -257,7 +257,7 @@ namespace LJCDataUtilityDAL5
     #region Sort Methods
 
     // Sort on ID.
-    /// <include file='Doc/DataTables5.xml'
+    /// <include file='Doc/DataTables.xml'
     ///  path='members/LJCSortId/*'/>
     public void LJCSortId()
     {
@@ -271,7 +271,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Sort on unique values.
-    /// <include file='Doc/DataTables5.xml'
+    /// <include file='Doc/DataTables.xml'
     ///  path='members/LJCSortUnique/*'/>
     public void LJCSortUnique(DataTableUnique comparer)
     {
@@ -288,7 +288,7 @@ namespace LJCDataUtilityDAL5
     #region Properties
 
     // Gets the Default File Name.
-    /// <include file='Doc/DataTables5.xml'
+    /// <include file='Doc/DataTables.xml'
     ///  path='members/LJCDefaultFileName/*'/>
     public static string LJCDefaultFileName
     {
@@ -296,7 +296,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The item for the supplied values.
-    /// <include file='Doc/DataTables5.xml'
+    /// <include file='Doc/DataTables.xml'
     ///  path='members/UniqueIndexer/*'/>
     public DataUtilTable? this[short dataTableDbID, long dataTableID
       , string name]

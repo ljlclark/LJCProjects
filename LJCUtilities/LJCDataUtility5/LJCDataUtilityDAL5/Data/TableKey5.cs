@@ -13,7 +13,7 @@ namespace LJCDataUtilityDAL5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public TableKey()
     {
@@ -30,7 +30,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The Copy constructor.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/CopyConstructor/*'/>
     public TableKey(TableKey item)
     {
@@ -50,7 +50,7 @@ namespace LJCDataUtilityDAL5
     #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public TableKey? Clone()
     {
@@ -59,7 +59,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Provides the default Sort functionality.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/CompareTo/*'/>
     public int CompareTo(TableKey? other)
     {
@@ -87,7 +87,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The object string identifier.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/ToString/*'/>
     public override string ToString()
     {
@@ -99,7 +99,7 @@ namespace LJCDataUtilityDAL5
     #region Data Properties
 
     // Gets or sets the ColumnName value.
-    /// <include file='doc/TableKey.xml'
+    /// <include file='Doc/TableKey.xml'
     ///  path='members/ColumnName/*'/>
     public string? ColumnName
     {
@@ -112,7 +112,7 @@ namespace LJCDataUtilityDAL5
     private string? _ColumnName;
 
     // Gets or sets the ConstraintName value.
-    /// <include file='doc/TableKey.xml'
+    /// <include file='Doc/TableKey.xml'
     ///  path='members/ConstraintName/*'/>
     public string? ConstraintName
     {
@@ -128,7 +128,7 @@ namespace LJCDataUtilityDAL5
     // if property was renamed.
 
     // Gets or sets the DBName value.
-    /// <include file='doc/TableKey.xml'
+    /// <include file='Doc/TableKey.xml'
     ///  path='members/DBName/*'/>
     public string? DBName
     {
@@ -141,7 +141,7 @@ namespace LJCDataUtilityDAL5
     private string? _DBName;
 
     // Gets or sets the KeyType value.
-    /// <include file='doc/TableKey.xml'
+    /// <include file='Doc/TableKey.xml'
     ///  path='members/KeyType/*'/>
     public string? KeyType
     {
@@ -154,7 +154,7 @@ namespace LJCDataUtilityDAL5
     private string? _KeyType;
 
     // Gets or sets the OrdinalPosition value.
-    /// <include file='doc/TableKey.xml'
+    /// <include file='Doc/TableKey.xml'
     ///  path='members/OrdinalPosition/*'/>
     public int OrdinalPosition
     {
@@ -167,7 +167,7 @@ namespace LJCDataUtilityDAL5
     private int _OrdinalPosition;
 
     // Gets or sets the TableName value.
-    /// <include file='doc/TableKey.xml'
+    /// <include file='Doc/TableKey.xml'
     ///  path='members/TableName/*'/>
     public string? TableName
     {
@@ -180,7 +180,7 @@ namespace LJCDataUtilityDAL5
     private string? _TableName;
 
     // Gets or sets the TableSchema value.
-    /// <include file='doc/TableKey.xml'
+    /// <include file='Doc/TableKey.xml'
     ///  path='members/TableSchema/*'/>
     public string? TableSchema
     {
@@ -193,7 +193,7 @@ namespace LJCDataUtilityDAL5
     private string? _TableSchema;
 
     // Gets or sets the TargetColumn value.
-    /// <include file='doc/TableKey.xml'
+    /// <include file='Doc/TableKey.xml'
     ///  path='members/TargetColumns/*'/>
     public string? TargetColumn
     {
@@ -206,7 +206,7 @@ namespace LJCDataUtilityDAL5
     private string? _TargetColumn;
 
     // Gets or sets the TargetTable value.
-    /// <include file='doc/TableKey.xml'
+    /// <include file='Doc/TableKey.xml'
     ///  path='members/TargetTable/*'/>
     public string? TargetTable
     {
@@ -219,7 +219,7 @@ namespace LJCDataUtilityDAL5
     private string? _TargetTable;
 
     // Gets or sets the UniqueConstraintName value.
-    /// <include file='doc/TableKey.xml'
+    /// <include file='Doc/TableKey.xml'
     ///  path='members/UniqueConstraintName/*'/>
     public string? UniqueConstraintName
     {

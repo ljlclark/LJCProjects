@@ -10,14 +10,14 @@ using System.Xml.Serialization;
 namespace LJCDataUtilityDAL5
 {
   // The DataColumn data.
-  /// <include file='Doc/DataColumn.xml'
+  /// <include file='Doc/DataUtilColumn.xml'
   ///  path='members/DataUtilColumn/*'/>
   public class DataUtilColumn : IComparable<DataUtilColumn>
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public DataUtilColumn()
     {
@@ -45,7 +45,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/ParamConstructor/*'/>
     public DataUtilColumn(string name, string typeName
       , bool allowNull = true, short maxLength = 0
@@ -64,7 +64,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The Copy constructor.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/CopyConstructor/*'/>
     public DataUtilColumn(DataUtilColumn item)
     {
@@ -95,7 +95,7 @@ namespace LJCDataUtilityDAL5
     #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public DataUtilColumn? Clone()
     {
@@ -104,7 +104,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Provides the default Sort functionality.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/CompareTo/*'/>
     public int CompareTo(DataUtilColumn? other)
     {
@@ -132,7 +132,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Initializes the original values.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/LJCSetOriginalValues/*'/>
     public void LJCSetOriginalValues()
     {
@@ -156,7 +156,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The object string identifier.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/ToString/*'/>
     public override string ToString()
     {
@@ -171,7 +171,7 @@ namespace LJCDataUtilityDAL5
     // if property was renamed.
 
     // Gets or sets the database ID.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/DbId/*'/>
     [Required]
     [Column("DbId", TypeName = "smallint")]
@@ -190,7 +190,7 @@ namespace LJCDataUtilityDAL5
     private short _DbId;
 
     // Gets or sets the table row ID.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/Id/*'/>
     [Required]
     [Column("Id", TypeName = "bigint")]
@@ -208,7 +208,7 @@ namespace LJCDataUtilityDAL5
     private long _Id;
 
     // Gets or sets the parent database ID.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/DataTableDbId/*'/>
     [Required]
     [Column("DataTableDbId", TypeName = "smallint")]
@@ -227,7 +227,7 @@ namespace LJCDataUtilityDAL5
     private short _DataTableDbId;
 
     // Gets or sets the parent table row ID.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/DataTableId/*'/>
     [Required]
     [Column("DataTableId", TypeName = "bigint")]
@@ -246,7 +246,7 @@ namespace LJCDataUtilityDAL5
     private long _DataTableId;
 
     // Gets or sets the Name value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/Name/*'/>
     [Required]
     [Column("Name", TypeName = "nvarchar(60")]
@@ -266,7 +266,7 @@ namespace LJCDataUtilityDAL5
     private string _Name;
 
     // Gets or sets the Description value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/Description/*'/>
     [Column("Description", TypeName = "nvarchar(80")]
     public string? Description
@@ -286,7 +286,7 @@ namespace LJCDataUtilityDAL5
     private string? _Description;
 
     // Gets or sets the Sequence value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/Sequence/*'/>
     [Required]
     [Column("Sequence", TypeName = "int")]
@@ -305,7 +305,7 @@ namespace LJCDataUtilityDAL5
     private int _Sequence;
 
     // Gets or sets the AllowNull value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/AllowNull/*'/>
     [Required]
     [Column("AllowNull", TypeName = "bit")]
@@ -324,7 +324,7 @@ namespace LJCDataUtilityDAL5
     private bool _AllowNull;
 
     // Gets or sets the Default value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/DefaultValue/*'/>
     [Column("DefaultValue", TypeName = "nvarchar(30)")]
     public string? DefaultValue
@@ -344,7 +344,7 @@ namespace LJCDataUtilityDAL5
     private string? _DefaultValue;
 
     // Gets or sets the IdentityStart value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/IdentityStart/*'/>
     [Required]
     [Column("IdentityStart", TypeName = "smallint")]
@@ -363,7 +363,7 @@ namespace LJCDataUtilityDAL5
     private short _IdentityStart;
 
     // Gets or sets the IdentityIncrement value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/IdentityIncrement/*'/>
     [Required]
     [Column("IdentityIncrement", TypeName = "smallint")]
@@ -382,7 +382,7 @@ namespace LJCDataUtilityDAL5
     private short _IdentityIncrement;
 
     // Gets or sets the MaxLength value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/MaxLength/*'/>
     [Required]
     [Column("MaxLength", TypeName = "smallint")]
@@ -401,7 +401,7 @@ namespace LJCDataUtilityDAL5
     private short _MaxLength;
 
     // Gets or sets the NewName value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/NewName/*'/>
     [Column("NewName", TypeName = "nvarchar(60")]
     public string? NewName
@@ -421,7 +421,7 @@ namespace LJCDataUtilityDAL5
     private string? _NewName;
 
     // Gets or sets the MaxLength value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/NewMaxLength/*'/>
     [Required]
     [Column("NewMaxLength", TypeName = "smallint")]
@@ -440,7 +440,7 @@ namespace LJCDataUtilityDAL5
     private short _NewMaxLength;
 
     // Gets or sets the TypeName value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/DataUtilColumn.xml'
     ///  path='members/TypeName/*'/>
     [Required]
     [Column("TypeName", TypeName = "nvarchar(20")]
@@ -469,7 +469,7 @@ namespace LJCDataUtilityDAL5
     #region Class Properties
 
     // Gets a reference to the ChangedNames list.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/ChangedNames/*'/>
     [XmlIgnore]
     public LJCChangedNames ChangedNames { get; private set; }
@@ -623,12 +623,12 @@ namespace LJCDataUtilityDAL5
   #region Comparers
 
   // Sort and search on Name value.
-  /// <include file='Doc/DataColumn.xml'
+  /// <include file='Doc/DataUtilColumn.xml'
   ///  path='members/DataColumnUnique/*'/>
   public class DataColumnUnique : IComparer<DataUtilColumn>
   {
     // Compares two objects.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Compare/*'/>
     public int Compare(DataUtilColumn? x, DataUtilColumn? y)
     {

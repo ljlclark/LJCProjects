@@ -15,7 +15,7 @@ namespace LJCDataUtilityDAL5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/ParamConstructor/*'/>
     public ManagersDataUtility(string dataConfigName
       , LJCDbServiceRef? dbServiceRef = null)
@@ -191,6 +191,8 @@ namespace LJCDataUtilityDAL5
 
     #region Properties
 
+    /// <include file='Doc/ManagersDataUtility.xml'
+    ///  path='members/DataConfigName/*'/>
     public string DataConfigName { get; set; } = null!;
 
     // Gets the DataColumnManager object.

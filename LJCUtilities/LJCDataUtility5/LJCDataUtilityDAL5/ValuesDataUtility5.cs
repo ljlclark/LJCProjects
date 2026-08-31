@@ -8,14 +8,14 @@ using LJCNetCommon5;
 namespace LJCDataUtilityDAL5
 {
   // The Application values singleton class.
-  /// <include file='../../LJCGenDoc/Common/Data.xml'
+  /// <include file='../../LJCGenDoc5/Common/Data.xml'
   ///  path='members/ValuesDataUtility/*'/>
   public sealed class ValuesDataUtility
   {
     #region Constructors
 
     // Initializes an instance of the object.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/DefaultConstructor/*'/>
     public ValuesDataUtility()
     {
@@ -24,8 +24,9 @@ namespace LJCDataUtilityDAL5
       //StandardSettings = new StandardUISettings();
     }
 
-    /// <summary>Configures the settings.</summary>
-    /// <param name="fileSpec">The config file name.</param>
+    // Configures the settings.
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
+    ///  path='members/SetConfigFile/*'/>
     public void SetConfigFile(string fileSpec = "LJCDataUtility.exe.config")
     {
       _ArgError.MethodName = "SetConfigFile(fileSpec)";
@@ -74,36 +75,56 @@ namespace LJCDataUtilityDAL5
 
     #region Properties
 
-    /// <summary>Gets or sets the connection type value.</summary>
+    // Gets or sets the connection type value.
+    /// <include file='Doc/ValuesDataUtility.xml'
+    ///  path='members/ConnectionType/*'/>
     public string ConnectionType { get; set; } = null!;
 
+    /// <include file='Doc/ValuesDataUtility.xml'
+    ///  path='members/DataConfigName/*'/>
     public string DataConfigName { get; set; } = null!;
 
-    /// <summary>Gets or sets the connection type value.</summary>
+    // Gets or sets the connection type value.
+    /// <include file='Doc/ValuesDataUtility.xml'
+    ///  path='members/DbGroupId/*'/>
     public short DbGroupId { get; set; }
 
-    /// <summary>Gets the Error message</summary>
+    // Gets the Error message
+    /// <include file='Doc/ValuesDataUtility.xml'
+    ///  path='members/Errors/*'/>
     public string Errors { get; private set; }
 
-    /// <summary>Gets the config FileSpec.</summary>
+    // Gets the config FileSpec.
+    /// <include file='Doc/ValuesDataUtility.xml'
+    ///  path='members/FileSpec/*'/>
     public string FileSpec { get; private set; } = null!;
 
-    /// <summary>Gets or sets the generated page count.</summary>
+    // Gets or sets the generated page count.
+    /// <include file='Doc/ValuesDataUtility.xml'
+    ///  path='members/GenPageCount/*'/>
     public int GenPageCount { get; set; }
 
-    /// <summary>Gets the singleton instance.</summary>
+    // Gets the singleton instance.
+    /// <include file='Doc/ValuesDataUtility.xml'
+    ///  path='members/ValuesDataUtility/*'/>
     public static ValuesDataUtility Instance
     {
       get { return mInstance; }
     }
 
-    /// <summary>Gets or sets the Managers class reference.</summary>
+    // Gets or sets the Managers class reference.
+    /// <include file='Doc/ValuesDataUtility.xml'
+    ///  path='members/Managers/*'/>
     public ManagersDataUtility Managers { get; set; } = null!;
 
-    /// <summary>Gets or sets the SiteManagers class reference.</summary>
+    // Gets or sets the SiteManagers class reference.
+    // <include file='Doc/ValuesDataUtility.xml'
+    //  path='members/SiteManagers/*'/>
     //public ManagersDataSite SiteManagers { get; set; }
 
-    /// <summary>Gets the StandardSettings value.</summary>
+    // Gets the StandardSettings value.
+    // <include file='Doc/ValuesDataUtility.xml'
+    //  path='members/StandardSettings/*'/>
     //public LJCStandardUISettings StandardSettings { get; private set; }
     #endregion
 

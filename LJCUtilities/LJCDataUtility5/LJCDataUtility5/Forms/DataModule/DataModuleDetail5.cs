@@ -134,7 +134,8 @@ namespace LJCDataUtility5
       {
         var lookupRecord = manager.RetrieveUnique(LJCRecord.Name);
         if (lookupRecord != null
-          && manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
+          && DataModuleManager.IsDuplicate(lookupRecord, LJCRecord
+          , LJCIsUpdate))
         {
           retValue = false;
           FormCommon.DataError(this);

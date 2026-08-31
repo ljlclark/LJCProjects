@@ -16,7 +16,7 @@ namespace LJCDataUtilityDAL5
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
     public static DataKeys? LJCDeserialize(string? fileSpec = null)
     {
@@ -40,7 +40,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Get custom collection from List<T>.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCGetCollection/*'/>
     public static DataKeys? LJCGetCollection(List<DataKey> list)
     {
@@ -57,7 +57,7 @@ namespace LJCDataUtilityDAL5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public DataKeys()
     {
@@ -66,7 +66,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The Copy constructor.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
     public DataKeys(DataKeys items) : this()
     {
@@ -83,7 +83,7 @@ namespace LJCDataUtilityDAL5
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public DataKeys Clone()
     {
@@ -100,7 +100,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCHasItems/*'/>
     public bool LJCHasItems()
     {
@@ -114,7 +114,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Serializes the collection to a file.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCSerialize/*'/>
     public void LJCSerialize(string? fileSpec = null)
     {
@@ -165,7 +165,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Retrieve the collection element.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCGetWithID/*'/>
     public DataKey? LJCGetWithID(short dbID, long id)
     {

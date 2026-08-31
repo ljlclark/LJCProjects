@@ -17,7 +17,7 @@ namespace LJCDataUtilityDAL5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public DataKey()
     {
@@ -49,7 +49,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The Copy constructor.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/CopyConstructor/*'/>
     public DataKey(DataKey item)
     {
@@ -76,7 +76,7 @@ namespace LJCDataUtilityDAL5
     #region Data Object Methods
 
     // Creates and returns a clone of this object.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public DataKey? Clone()
     {
@@ -85,7 +85,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Provides the default Sort functionality.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/CompareTo/*'/>
     public int CompareTo(DataKey? other)
     {
@@ -113,7 +113,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Initializes the original values.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/LJCSetOriginalValues/*'/>
     public void LJCSetOriginalValues()
     {
@@ -133,7 +133,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // The object string identifier.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/ToString/*'/>
     public override string ToString()
     {
@@ -366,7 +366,7 @@ namespace LJCDataUtilityDAL5
     #region Class Properties
 
     // Gets a reference to the ChangedNames list.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/ChangedNames/*'/>
     [XmlIgnore]
     public LJCChangedNames ChangedNames { get; private set; }
@@ -497,7 +497,7 @@ namespace LJCDataUtilityDAL5
   public class DataKeyUnique : IComparer<DataKey>
   {
     // Compares two objects.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='members/Compare/*'/>
     public int Compare(DataKey? x, DataKey? y)
     {
