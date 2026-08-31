@@ -92,7 +92,7 @@ namespace LJCControls5
               continue;
             }
 
-            var value = dataValues.LJCGetString(gridColumn.Name);
+            var value = dataValues.LJCString(gridColumn.Name);
             if (value != null)
             {
               listValues.Add(value);

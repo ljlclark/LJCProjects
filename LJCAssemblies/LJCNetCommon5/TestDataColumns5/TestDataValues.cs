@@ -411,7 +411,7 @@ namespace TestDataColumns5
       };
 
       // Test Method
-      var value = dataValues.LJCGetBoolean("TestValue");
+      var value = dataValues.LJCBoolean("TestValue");
 
       // Check Result
       var result = value.ToString();
@@ -527,7 +527,7 @@ namespace TestDataColumns5
       };
 
       // Test Method
-      var value = dataValues.LJCGetInt16("TestValue");
+      var value = dataValues.LJCInt16("TestValue");
 
       var result = value.ToString();
       var compare = "3";
@@ -546,7 +546,7 @@ namespace TestDataColumns5
       };
 
       // Test Method
-      var value = dataValues.LJCGetInt32("TestValue");
+      var value = dataValues.LJCInt32("TestValue");
 
       var result = value.ToString();
       var compare = "3";
@@ -565,7 +565,7 @@ namespace TestDataColumns5
       };
 
       // Test Method
-      var value = dataValues.LJCGetInt64("TestValue");
+      var value = dataValues.LJCInt64("TestValue");
 
       var result = value.ToString();
       var compare = "3";
@@ -603,7 +603,7 @@ namespace TestDataColumns5
       };
 
       // Test Method
-      var result = dataValues.LJCGetString("TestValue");
+      var result = dataValues.LJCString("TestValue");
 
       var compare = "3.14";
       TestCommon?.Show($"{methodName}", result, compare);
@@ -623,7 +623,7 @@ namespace TestDataColumns5
       // Test Method
       // *** c
       //var value = dataColumns.LJCGetObject("TestValue");
-      var value = dataValues.LJCGetValue("TestValue");
+      var value = dataValues.LJCValue("TestValue");
 
       var result = value?.ToString();
       var compare = "3";
@@ -644,7 +644,7 @@ namespace TestDataColumns5
       // Test Method
       dataValues.LJCSetValue("TestValue", "3.14159");
 
-      var result = dataValues.LJCGetString("TestValue");
+      var result = dataValues.LJCString("TestValue");
       var compare = "3.14159";
       TestCommon?.Show($"{methodName}", result, compare);
     }

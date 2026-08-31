@@ -365,11 +365,11 @@ namespace LJCNetCommon5
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCGetBoolean/*'/>
     /// <parentGroup>value</parentGroup>
-    public bool LJCGetBoolean(string propertyName)
+    public bool LJCBoolean(string propertyName)
     {
       bool retValue = default;
 
-      var value = LJCGetString(propertyName);
+      var value = LJCString(propertyName);
       if (value != null)
       {
         if (LJCNetString.IsDigits(value))
@@ -393,7 +393,7 @@ namespace LJCNetCommon5
     {
       byte retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCValue(propertyName);
       if (value != null)
       {
         retValue = LJC.GetByte(value);
@@ -408,7 +408,7 @@ namespace LJCNetCommon5
     {
       byte[] retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCValue(propertyName);
       if (value != null)
       {
         retValue = LJC.GetBytes(value);
@@ -424,7 +424,7 @@ namespace LJCNetCommon5
     {
       char retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCValue(propertyName);
       if (value != null)
       {
         retValue = LJC.GetChar(value);
@@ -440,7 +440,7 @@ namespace LJCNetCommon5
     {
       DateTime retValue = DateTime.Parse(LJC.MinSqlDate());
 
-      var value = LJCGetString(propertyName);
+      var value = LJCString(propertyName);
       if (value != null)
       {
         retValue = DateTime.Parse(value);
@@ -456,7 +456,7 @@ namespace LJCNetCommon5
     {
       decimal retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCValue(propertyName);
       if (value != null)
       {
         retValue = LJC.GetDecimal(value);
@@ -472,7 +472,7 @@ namespace LJCNetCommon5
     {
       double retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCValue(propertyName);
       if (value != null)
       {
         retValue = LJC.GetDouble(value);
@@ -484,11 +484,11 @@ namespace LJCNetCommon5
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCGetInt16/*'/>
     /// <parentGroup>value</parentGroup>
-    public short LJCGetInt16(string propertyName)
+    public short LJCInt16(string propertyName)
     {
       short retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCValue(propertyName);
       if (value != null)
       {
         retValue = LJC.GetInt16(value);
@@ -500,11 +500,11 @@ namespace LJCNetCommon5
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCGetInt32/*'/>
     /// <parentGroup>value</parentGroup>
-    public int LJCGetInt32(string propertyName)
+    public int LJCInt32(string propertyName)
     {
       int retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCValue(propertyName);
       if (value != null)
       {
         retValue = LJC.GetInt32(value);
@@ -516,11 +516,11 @@ namespace LJCNetCommon5
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCGetInt64/*'/>
     /// <parentGroup>value</parentGroup>
-    public long LJCGetInt64(string propertyName)
+    public long LJCInt64(string propertyName)
     {
       long retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCValue(propertyName);
       if (value != null)
       {
         retValue = LJC.GetInt64(value);
@@ -536,7 +536,7 @@ namespace LJCNetCommon5
     {
       float retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCValue(propertyName);
       if (value != null)
       {
         retValue = LJC.GetSingle(value);
@@ -548,11 +548,11 @@ namespace LJCNetCommon5
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCGetString/*'/>
     /// <parentGroup>value</parentGroup>
-    public string? LJCGetString(string propertyName)
+    public string? LJCString(string propertyName)
     {
       string retValue = default;
 
-      var value = LJCGetValue(propertyName);
+      var value = LJCValue(propertyName);
       if (value != null)
       {
         retValue = LJC.GetString(value);
@@ -564,7 +564,7 @@ namespace LJCNetCommon5
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCGetValue/*'/>
     /// <parentGroup>value</parentGroup>
-    public object? LJCGetValue(string propertyName)
+    public object? LJCValue(string propertyName)
     {
       object retValue = default;
 

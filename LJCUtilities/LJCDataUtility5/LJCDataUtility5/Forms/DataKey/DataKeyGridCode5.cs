@@ -193,11 +193,11 @@ namespace LJCDataUtility5
       if (retRow != null)
       {
         var dbColumnName = DataKey.ColumnDbId;
-        var dbId = dataValues.LJCGetInt16(dbColumnName);
+        var dbId = dataValues.LJCInt16(dbColumnName);
         retRow.LJCSetInt16(dbColumnName, dbId);
 
         var idColumnName = DataKey.ColumnId;
-        var id = dataValues.LJCGetInt64(idColumnName);
+        var id = dataValues.LJCInt64(idColumnName);
         retRow.LJCSetInt64(idColumnName, id);
 
         retRow.LJCSetValues(dataValues);

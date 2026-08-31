@@ -116,19 +116,23 @@ namespace LJCDataUtility5
         && ModuleManager.Manager != null)
       {
         ModuleManager.Manager.OrderByNames = orderByNames;
-        var items = ModuleManager.Load();
-        if (LJC.HasListItems(items))
+        var result = ModuleManager.LoadResult();
+        if (result != null
+          && LJC.HasListItems(result.Rows))
         {
-          foreach (var dataItem in items)
+          foreach (var row in result.Rows)
           {
-            RowAdd(dataItem);
+            if (LJC.HasListItems(row.Values))
+            {
+              RowAddValues(row.Values);
+            }
           }
-          if (ModuleCombo.Items.Count > 0)
-          {
-            ModuleCombo.SelectedIndex = 0;
-          }
-          ModuleCombo.Select();
         }
+        if (ModuleCombo.Items.Count > 0)
+        {
+          ModuleCombo.SelectedIndex = 0;
+        }
+        ModuleCombo.Select();
       }
 
       SetControlState();
@@ -140,6 +144,21 @@ namespace LJCDataUtility5
     private LJCItem RowAdd(DataModule data)
     {
       var retValue = ModuleCombo.LJCAddItem(data.Id, data.DbId, data.Name);
+      return retValue;
+    }
+
+    // Adds a combo item.
+    private LJCItem? RowAddValues(LJCDataValues dataValues)
+    {
+      LJCItem? retValue = null;
+
+      var dbId = dataValues.LJCInt16(DataModule.ColumnDbId);
+      var id = dataValues.LJCInt64(DataModule.ColumnId);
+      var name = dataValues.LJCString(DataModule.ColumnName);
+      if (LJC.HasText(name))
+      {
+        retValue = ModuleCombo.LJCAddItem(id, dbId, name);
+      }
       return retValue;
     }
 
