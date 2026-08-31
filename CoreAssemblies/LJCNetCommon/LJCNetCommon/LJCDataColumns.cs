@@ -137,25 +137,6 @@ namespace LJCNetCommon
       return retNames;
     }
 
-    // Operator to create LJCDataValues from LJCDataColumns.
-    // var dataValues = dataColumns;
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/ToDataValues/*'/>
-    public static implicit operator LJCDataValues(LJCDataColumns dataColumns)
-    {
-      LJCDataValues retValues = new LJCDataValues();
-
-      if (LJC.HasListItems(dataColumns))
-      {
-        foreach (LJCDataColumn dataColumn in dataColumns)
-        {
-          var dataValue = dataColumn;
-          retValues.Add(dataValue);
-        }
-      }
-      return retValues;
-    }
-
     // Custom binary search for Name value.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCSearchColumns/*'/>
@@ -216,6 +197,25 @@ namespace LJCNetCommon
         }
       }
       return retIndex;
+    }
+
+    // Operator to create LJCDataValues from LJCDataColumns.
+    // var dataValues = dataColumns;
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/ToDataValues/*'/>
+    public static implicit operator LJCDataValues(LJCDataColumns dataColumns)
+    {
+      LJCDataValues retValues = new LJCDataValues();
+
+      if (LJC.HasListItems(dataColumns))
+      {
+        foreach (LJCDataColumn dataColumn in dataColumns)
+        {
+          var dataValue = dataColumn;
+          retValues.Add(dataValue);
+        }
+      }
+      return retValues;
     }
 
     // Checks if the key columns value has changed.

@@ -32,6 +32,28 @@ namespace LJCNetCommon
       return retValues;
     }
 
+    // Operator to create LJCDataColumns from LJCDataValues.
+    // var dataColumns = dataValues;
+    /// <include file='Doc/LJCDataValues.xml'
+    ///  path='members/ToDataColumns/*'/>
+    public static implicit operator LJCDataColumns(LJCDataValues dataValues)
+    {
+      var retValues = new LJCDataColumns();
+
+      if (LJC.HasListItems(dataValues))
+      {
+        foreach (LJCDataValue dataValue in dataValues)
+        {
+          var dataColumn = new LJCDataColumn();
+          dataColumn.ColumnName = dataValue.ColumnName;
+          dataColumn.DataTypeName = dataValue.DataTypeName;
+          dataColumn.Value = dataValue.Value;
+          retValues.Add(dataColumn);
+        }
+      }
+      return retValues;
+    }
+
     // Checks if the key columns value has changed.
     private static bool IsKeyColumnsChanged(LJCDataValues newKeys
       , LJCDataValues currentKeys)

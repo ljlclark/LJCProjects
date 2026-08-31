@@ -5,6 +5,7 @@ using LJCControls5;
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
 using static LJCDataUtility5.DataUtilityList;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LJCDataUtility5
 {
@@ -179,13 +180,32 @@ namespace LJCDataUtility5
     // Adds a grid row and updates it with the record values.
     private LJCGridRow? RowAdd(DataUtilColumn data)
     {
-      var retValue = ColumnGrid.LJCRowAdd();
-      if (retValue != null)
+      var retRow = ColumnGrid.LJCRowAdd();
+      if (retRow != null)
       {
-        SetStoredValues(retValue, data);
-        retValue.LJCSetValues(data);
+        SetStoredValues(retRow, data);
+        retRow.LJCSetValues(data);
       }
-      return retValue;
+      return retRow;
+    }
+
+    // Adds a grid row and updates it with the result values.
+    private LJCGridRow? RowAddValues(LJCDataValues dataValues)
+    {
+      var retRow = ColumnGrid.LJCRowAdd();
+      if (retRow != null)
+      {
+        var dbColumnName = DataUtilColumn.ColumnDbId;
+        var dbId = dataValues.LJCGetInt16(dbColumnName);
+        retRow.LJCSetInt16(dbColumnName, dbId);
+
+        var idColumnName = DataUtilColumn.ColumnId;
+        var id = dataValues.LJCGetInt64(idColumnName);
+        retRow.LJCSetInt64(idColumnName, id);
+
+        retRow.LJCSetValues(dataValues);
+      }
+      return retRow;
     }
 
     // Selects a row based on the key record values.

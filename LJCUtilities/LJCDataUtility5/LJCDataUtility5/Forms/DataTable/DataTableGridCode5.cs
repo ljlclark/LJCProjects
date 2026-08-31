@@ -199,13 +199,32 @@ namespace LJCDataUtility5
     // Adds a grid row and updates it with the record values.
     private LJCGridRow? RowAdd(DataUtilTable data)
     {
-      var retValue = TableGrid.LJCRowAdd();
-      if (retValue != null)
+      var retRow = TableGrid.LJCRowAdd();
+      if (retRow != null)
       {
-        SetStoredValues(retValue, data);
-        retValue.LJCSetValues(data);
+        SetStoredValues(retRow, data);
+        retRow.LJCSetValues(data);
       }
-      return retValue;
+      return retRow;
+    }
+
+    // Adds a grid row and updates it with the result values.
+    private LJCGridRow? RowAddValues(LJCDataValues dataValues)
+    {
+      var retRow = TableGrid.LJCRowAdd();
+      if (retRow != null)
+      {
+        var dbColumnName = DataUtilTable.ColumnDbId;
+        var dbId = dataValues.LJCGetInt16(dbColumnName);
+        retRow.LJCSetInt16(dbColumnName, dbId);
+
+        var idColumnName = DataUtilTable.ColumnId;
+        var id = dataValues.LJCGetInt64(idColumnName);
+        retRow.LJCSetInt64(idColumnName, id);
+
+        retRow.LJCSetValues(dataValues);
+      }
+      return retRow;
     }
 
     // Selects a row based on the ID value.
