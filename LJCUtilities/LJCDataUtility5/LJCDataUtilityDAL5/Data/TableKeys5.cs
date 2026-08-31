@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // TableKeys5.cs
 using LJCNetCommon5;
+using System.Xml.Linq;
 
 namespace LJCDataUtilityDAL5
 {
@@ -80,6 +81,7 @@ namespace LJCDataUtilityDAL5
       TableKey? retValue = null;
 
       UniqueCheck(constraintName, ordinalPosition);
+      _ArgError.ThrowError();
 
       LJCSortUnique();
       var searchItem = new TableKey()
@@ -105,7 +107,6 @@ namespace LJCDataUtilityDAL5
       }
       _ArgError.Add(constraintName, "constraintName");
       _ArgError.Add(message);
-      LJCNetString.ThrowArgError(_ArgError.ToString());
     }
     #endregion
 

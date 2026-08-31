@@ -2,8 +2,6 @@
 // Licensed under the MIT License.
 // DataColumns5.cs
 using LJCNetCommon5;
-using System.Data;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL5
@@ -130,7 +128,7 @@ namespace LJCDataUtilityDAL5
     #region Collection Data Methods
 
     // Creates and adds the object from the supplied values.
-    /// <include file='Doc/DataTables.xml'
+    /// <include file='Doc/DataColumns.xml'
     ///  path='members/Add1/*'/>
     public DataUtilColumn Add(short dbId, long id, short dataTableDbId
       , long dataTableId, string name)
@@ -139,6 +137,7 @@ namespace LJCDataUtilityDAL5
 
       _ArgError.IDCheck(dbId, id);
       UniqueCheck(dataTableDbId, dataTableId, name);
+      _ArgError.ThrowError();
 
       // Prevent search from sorting current items.
       var checkColumns = Clone();
@@ -165,7 +164,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Creates and adds the object from the provided values.
-    /// <include file='Doc/DataTables.xml'
+    /// <include file='Doc/DataColumns.xml'
     ///  path='members/Add2/*'/>
     public DataUtilColumn Add(short dbId, short dataTableDbId
       , long dataTableId, string name, string typeName
@@ -174,28 +173,9 @@ namespace LJCDataUtilityDAL5
     {
       DataUtilColumn? retValue = null;
 
-      DbIdCheck(dbId);
+      _ArgError.DbIDCheck(dbId);
       UniqueCheck(dataTableDbId, dataTableId, name);
-
-      string message = "";
-      if (dbId <= 0)
-      {
-        message += "dbId must be greater than zero.\r\n";
-      }
-      if (dataTableDbId <= 0)
-      {
-        message += "dataTableDbId must be greater than zero.\r\n";
-      }
-      if (dataTableId <= 0)
-      {
-        message += "dataTableId must be greater than zero.\r\n";
-      }
-      if (LJC.HasText(message))
-      {
-        _ArgError.Add(message);
-        _ArgError.Add(name, "name");
-        LJCNetString.ThrowArgError(_ArgError.ToString());
-      }
+      _ArgError.ThrowError();
 
       // Prevent search from sorting current items.
       var checkColumns = Clone();
@@ -234,6 +214,7 @@ namespace LJCDataUtilityDAL5
       DataUtilColumn? retValue = null;
 
       _ArgError.IDCheck(dbId, id);
+      _ArgError.ThrowError();
 
       LJCSortId();
       var searchItem = new DataUtilColumn()
@@ -250,7 +231,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Retrieve the collection element with unique values.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='Doc/DataColumns.xml'
     ///  path='members/LJCGetUnique/*'/>
     public DataUtilColumn? LJCGetUnique(short dataTableDbId
       , long dataTableId, string name)
@@ -258,6 +239,7 @@ namespace LJCDataUtilityDAL5
       DataUtilColumn? retValue = null;
 
       UniqueCheck(dataTableDbId, dataTableId, name);
+      _ArgError.ThrowError();
 
       var comparer = new DataColumnUnique();
       LJCSortUnique(comparer);
@@ -281,26 +263,16 @@ namespace LJCDataUtilityDAL5
     public void LJCRemove(short dataTableDbId, long dataTableId, string name)
     {
       UniqueCheck(dataTableDbId, dataTableId, name);
+      _ArgError.ThrowError();
 
-      DataUtilColumn? item = Find(x => x.DataTableDbId == dataTableDbId
-        && x.DataTableId == dataTableId
-        && x.Name == name);
+      //DataUtilColumn? item = Find(x => x.DataTableDbId == dataTableDbId
+      //  && x.DataTableId == dataTableId
+      //  && x.Name == name);
+      var item = LJCGetUnique(dataTableDbId, dataTableId, name);
       if (item != null)
       {
         Remove(item);
       }
-    }
-
-    // Checks the DbId parameter.
-    private void DbIdCheck(short dbId)
-    {
-      string message = "";
-      if (dbId <= 0)
-      {
-        message += "dbID must be greater than zero.\r\n";
-      }
-      _ArgError.Add(message);
-      LJCNetString.ThrowArgError(_ArgError.ToString());
     }
 
     // Checks the unique parameters.
@@ -318,7 +290,6 @@ namespace LJCDataUtilityDAL5
       }
       _ArgError.Add(message);
       _ArgError.Add(name, "name");
-      LJCNetString.ThrowArgError(_ArgError.ToString());
     }
     #endregion
 
@@ -339,7 +310,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Sort on Unique values.
-    /// <include file='Doc/DataTables.xml'
+    /// <include file='Doc/DataColumns.xml'
     ///  path='members/LJCSortUnique/*'/>
     public void LJCSortUnique(DataColumnUnique comparer)
     {

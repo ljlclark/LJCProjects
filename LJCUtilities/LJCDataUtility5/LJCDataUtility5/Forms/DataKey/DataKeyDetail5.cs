@@ -165,8 +165,20 @@ namespace LJCDataUtility5
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetValues();
       var manager = LJCManagers.DataKeyManager;
-
       if (manager != null)
+      {
+        var lookupRecord = manager.RetrieveUnique(LJCRecord.DataTableDbId
+          , LJCRecord.DataTableId, LJCRecord.Name);
+        if (lookupRecord != null
+          && manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
+        {
+          retValue = false;
+          FormCommon.DataError(this);
+        }
+      }
+
+      if (manager != null
+        && retValue)
       {
         if (LJCIsUpdate)
         {
@@ -312,7 +324,6 @@ namespace LJCDataUtility5
     #region Control Event Handlers
 
     // Fires the Change event.
-    //// <include path='members/LJCOnChange/*' file='../../LJCDocLib/Common/Detail.xml'/>
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());

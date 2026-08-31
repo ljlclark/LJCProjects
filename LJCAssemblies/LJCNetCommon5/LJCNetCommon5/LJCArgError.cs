@@ -70,7 +70,21 @@ namespace LJCNetCommon5
 
     // Checks the ID values.
     /// <include file="Doc/LJCArgError.xml"
-    ///  path="members/Add2/*"/>
+    ///  path="members/DbIDCheck/*"/>
+    /// <parentGroup>methods</parentGroup>
+    public void DbIDCheck(short dbId)
+    {
+      string message = "";
+      if (dbId <= 0)
+      {
+        message += "dbId must be greater than zero.\r\n";
+      }
+      Add(message);
+    }
+
+    // Checks the ID values.
+    /// <include file="Doc/LJCArgError.xml"
+    ///  path="members/IDCheck/*"/>
     /// <parentGroup>methods</parentGroup>
     public void IDCheck(short dbId, long id)
     {
@@ -84,6 +98,13 @@ namespace LJCNetCommon5
         message += "id must be greater than zero.\r\n";
       }
       Add(message);
+    }
+
+    /// <include file="Doc/LJCArgError.xml"
+    ///  path="members/ThrowError/*"/>
+    /// <parentGroup>methods</parentGroup>
+    public void ThrowError()
+    {
       LJCNetString.ThrowArgError(ToString());
     }
     #endregion

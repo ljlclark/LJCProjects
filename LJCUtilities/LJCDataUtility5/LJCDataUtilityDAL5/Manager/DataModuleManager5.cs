@@ -55,7 +55,7 @@ namespace LJCDataUtilityDAL5
       var values = ValuesDataUtility.Instance;
       //var ManagersDataSite = values.SiteManagers;
       //DbId = ManagersDataSite.DbGroupManager.DbId;
-      DbId = 1;  // Testing
+      DbId = values.DbGroupId;
       //EntryManager = ManagersDataSite.DataEntryManager;
     }
     #endregion
@@ -227,7 +227,8 @@ namespace LJCDataUtilityDAL5
     }
 
     // Check for duplicate unique key.
-    /// <include path='items/IsDuplicate/*' file='../../LJCDocLib/Common/Manager.xml'/>
+    /// <include file='../../LJCDocLib/Common/Manager.xml'
+    ///  path='items/IsDuplicate/*'/>
     public bool IsDuplicate(DataModule lookupRecord, DataModule currentRecord
       , bool isUpdate = false)
     {

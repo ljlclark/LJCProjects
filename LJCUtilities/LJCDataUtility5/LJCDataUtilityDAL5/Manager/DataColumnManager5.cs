@@ -57,7 +57,7 @@ namespace LJCDataUtilityDAL5
       var values = ValuesDataUtility.Instance;
       //var ManagersDataSite = values.SiteManagers;
       //DbId = ManagersDataSite.DbGroupManager.DbId;
-      DbId = 1;  // Testing
+      DbId = values.DbGroupId;
       //EntryManager = ManagersDataSite.DataEntryManager;
     }
     #endregion
@@ -256,8 +256,37 @@ namespace LJCDataUtilityDAL5
       {
         { DataUtilColumn.ColumnDataTableDbId, parentDbId },
         { DataUtilColumn.ColumnDataTableId, parentId },
-        { DataUtilColumn.ColumnName, (object)name },
+        { DataUtilColumn.ColumnName, name },
       };
+      return retValue;
+    }
+
+    // Check for duplicate unique key.
+    /// <include file='../../LJCDocLib/Common/Manager.xml'
+    ///  path='items/IsDuplicate/*'/>
+    public bool IsDuplicate(DataUtilColumn lookupRecord
+      , DataUtilColumn currentRecord, bool isUpdate = false)
+    {
+      bool retValue = false;
+
+      if (lookupRecord != null)
+      {
+        if (!isUpdate)
+        {
+          // Duplicate for "New" record that already exists.
+          retValue = true;
+        }
+        else
+        {
+          // If not the current record.
+          if (lookupRecord.DbId != currentRecord.DbId
+            && lookupRecord.Id != currentRecord.Id)
+          {
+            // Duplicate for "Update" where unique key is modified.
+            retValue = true;
+          }
+        }
+      }
       return retValue;
     }
     #endregion

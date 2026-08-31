@@ -67,7 +67,7 @@ namespace LJCDataUtility5
     // Gets the selected item ID.
     internal long ItemId(out short dbId, LJCItem? item = null)
     {
-      long retId = 0;
+      long retItemId = 0;
 
       dbId = 0;
       if (null == item)
@@ -77,9 +77,9 @@ namespace LJCDataUtility5
       if (item != null)
       {
         dbId = item.DbID;
-        retId = item.ID;
+        retItemId = item.ID;
       }
-      return retId;
+      return retItemId;
     }
 
     // Gets the selected item Name.
@@ -207,7 +207,9 @@ namespace LJCDataUtility5
           }
         }
 
+        // Data from current item.
         var id = ItemId(out short dbID);
+
         var keyColumns = new LJCDataColumns()
         {
           { DataModule.ColumnId, id },
@@ -232,8 +234,8 @@ namespace LJCDataUtility5
           }
           ModuleCombo.Items.Remove(item);
           ModuleCombo.SelectedIndex = index;
+          SetControlState();
         }
-        SetControlState();
         ParentObject.TimedChange(Change.Module);
         break;
       }
@@ -245,14 +247,13 @@ namespace LJCDataUtility5
       // Current combo has selection.
       if (ModuleCombo.SelectedItem is LJCItem)
       {
-        // Data from items.
+        // Data from current item.
         var id = ItemId(out short dbId);
 
         var detail = new DataModuleDetail()
         {
           LJCDbId = dbId,
           LJCId = id,
-          //LJCLocation = location,
           LJCManagers = Managers,
         };
         detail.LJCChange += Detail_Change;

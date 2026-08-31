@@ -267,7 +267,7 @@ namespace LJCDataUtilityDAL5
   // Sort and search on Name value.
   /// <include file='Doc/DataModule.xml'
   ///  path='members/DataModuleUniqueComparer/*'/>
-  public class DataModuleUniqueComparer : IComparer<DataModule>
+  public class DataModuleUnique : IComparer<DataModule>
   {
     // Compares two objects.
     /// <include file='../../LJCGenDoc/Common/Data.xml'

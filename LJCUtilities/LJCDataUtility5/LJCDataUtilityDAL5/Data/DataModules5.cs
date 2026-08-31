@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace LJCDataUtilityDAL5
 {
   // Represents a collection of DataModule objects.
-  /// <include file='Doc/DataModules5.xml'
+  /// <include file='Doc/DataModules.xml'
   ///  path='members/DataModules/*'/>
   [XmlRoot("DataModules")]
   public class DataModules : List<DataModule>
@@ -137,11 +137,13 @@ namespace LJCDataUtilityDAL5
     {
       DataModule? retValue = null;
 
-      IDCheck(dbId, id);
+      _ArgError.IDCheck(dbId, id);
       UniqueCheck(name);
+      _ArgError.ThrowError();
 
       // Prevent search from sorting current items.
-      var duplicate = LJCGetUnique(name);
+      var checkModules = Clone();
+      var duplicate = checkModules.LJCGetUnique(name);
       if (duplicate != null)
       {
         retValue = duplicate.Clone();
@@ -167,7 +169,8 @@ namespace LJCDataUtilityDAL5
     {
       DataModule? retValue = null;
       
-      IDCheck(dbID, id);
+      _ArgError.IDCheck(dbID, id);
+      _ArgError.ThrowError();
 
       LJCSortID();
       var searchItem = new DataModule()
@@ -191,8 +194,9 @@ namespace LJCDataUtilityDAL5
       DataModule? retValue = null;
 
       UniqueCheck(name);
+      _ArgError.ThrowError();
 
-      var comparer = new DataModuleUniqueComparer();
+      var comparer = new DataModuleUnique();
       LJCSortUnique(comparer);
       var searchItem = new DataModule()
       {
@@ -212,35 +216,20 @@ namespace LJCDataUtilityDAL5
     public void LJCRemove(string name)
     {
       UniqueCheck(name);
+      _ArgError.ThrowError();
 
-      DataModule? item = Find(x => x.Name == name);
+      //DataModule? item = Find(x => x.Name == name);
+      var item = LJCGetUnique(name);
       if (item != null)
       {
         Remove(item);
       }
     }
 
-    // Checks the ID values.
-    private void IDCheck(short dbId, long id)
-    {
-      string message = "";
-      if (dbId <= 0)
-      {
-        message += "dbId must be greater than zero.\r\n";
-      }
-      if (id <= 0)
-      {
-        message += "id must be greater than zero.\r\n";
-      }
-      _ArgError.Add(message);
-      LJCNetString.ThrowArgError(_ArgError.ToString());
-    }
-
     // Checks the unique parameters.
     private void UniqueCheck(string name)
     {
       _ArgError.Add(name, "name");
-      LJCNetString.ThrowArgError(_ArgError.ToString());
     }
     #endregion
 
@@ -263,7 +252,7 @@ namespace LJCDataUtilityDAL5
     // Sort on Unique values.
     /// <include file='Doc/DataModules.xml'
     ///  path='members/LJCSortUnique/*'/>
-    public void LJCSortUnique(DataModuleUniqueComparer comparer)
+    public void LJCSortUnique(DataModuleUnique comparer)
     {
       if (Count != _PrevCount
         || _SortType.CompareTo(SortType.Unique) != 0)
@@ -286,8 +275,8 @@ namespace LJCDataUtilityDAL5
     }
 
     // The item for the supplied name.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='members/NameIndexer/*'/>
+    /// <include file='Doc/DataColumns.xml'
+    ///  path='members/UniqueIndexer/*'/>
     public DataModule? this[string name]
     {
       get => LJCGetUnique(name);

@@ -158,8 +158,20 @@ namespace LJCDataUtility5
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetValues();
       var manager = LJCManagers.DataTableManager;
-
       if (manager != null)
+      {
+        var lookupRecord = manager.RetrieveUnique(LJCRecord.DataModuleDbId
+          , LJCRecord.DataModuleId, LJCRecord.Name);
+        if (lookupRecord != null
+          && manager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
+        {
+          retValue = false;
+          FormCommon.DataError(this);
+        }
+      }
+
+      if (manager != null
+        && retValue)
       {
         if (LJCIsUpdate)
         {

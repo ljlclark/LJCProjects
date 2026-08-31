@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // DataTables5.cs
 using LJCNetCommon5;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL5
@@ -140,6 +141,7 @@ namespace LJCDataUtilityDAL5
 
       _ArgError.IDCheck(dbId, id);
       UniqueCheck(dataModuleDbId, dataModuleId, name);
+      _ArgError.ThrowError();
 
       // Prevent search from sorting current items.
       var checkTables = Clone();
@@ -173,6 +175,7 @@ namespace LJCDataUtilityDAL5
       DataUtilTable? retValue = null;
       
       _ArgError.IDCheck(dbId, id);
+      _ArgError.ThrowError();
 
       LJCSortId();
       var searchItem = new DataUtilTable()
@@ -197,6 +200,7 @@ namespace LJCDataUtilityDAL5
       DataUtilTable? retValue = null;
 
       UniqueCheck(dataModuleDbId , dataModuleId , name);
+      _ArgError.ThrowError();
 
       var comparer = new DataTableUnique();
       LJCSortUnique(comparer);
@@ -221,6 +225,7 @@ namespace LJCDataUtilityDAL5
       , string name)
     {
       UniqueCheck(dataModuleDbId, dataModuleId , name);
+      _ArgError.ThrowError();
 
       DataUtilTable? item = Find(x => x.DataModuleDbId == dataModuleDbId
         && x.DataModuleId == dataModuleId
@@ -246,7 +251,6 @@ namespace LJCDataUtilityDAL5
       }
       _ArgError.Add(message);
       _ArgError.Add(name, "name");
-      LJCNetString.ThrowArgError(_ArgError.ToString());
     }
     #endregion
 

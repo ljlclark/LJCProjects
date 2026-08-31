@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // DataKeys5.cs
 using LJCNetCommon5;
-using System.Data;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace LJCDataUtilityDAL5
@@ -138,6 +138,7 @@ namespace LJCDataUtilityDAL5
 
       _ArgError.IDCheck(dbId, id);
       UniqueCheck(dataTableDbId, dataTableId, name);
+      _ArgError.ThrowError();
 
       // Prevent search from sorting current items.
       var checkTables = Clone();
@@ -171,6 +172,7 @@ namespace LJCDataUtilityDAL5
       DataKey? retValue = null;
 
       _ArgError.IDCheck(dbID, id);
+      _ArgError.ThrowError();
 
       LJCSortID();
       var searchItem = new DataKey()
@@ -195,6 +197,7 @@ namespace LJCDataUtilityDAL5
       DataKey? retValue = null;
 
       UniqueCheck(dataTableDbId, dataTableId, name);
+      _ArgError.ThrowError();
 
       var comparer = new DataKeyUnique();
       LJCSortUnique(comparer);
@@ -218,10 +221,12 @@ namespace LJCDataUtilityDAL5
     public void LJCRemove(short dataTableDbId, long dataTableId, string name)
     {
       UniqueCheck(dataTableDbId, dataTableId, name);
+      _ArgError.ThrowError();
 
-      DataKey? item = Find(x => x.DataTableDbId == dataTableDbId
-        && x.DataTableId == dataTableId
-        && x.Name == name);
+      //DataKey? item = Find(x => x.DataTableDbId == dataTableDbId
+      //  && x.DataTableId == dataTableId
+      //  && x.Name == name);
+      var item = LJCGetUnique(dataTableDbId, dataTableId, name);
       if (item != null)
       {
         Remove(item);
@@ -243,7 +248,6 @@ namespace LJCDataUtilityDAL5
       }
       _ArgError.Add(message);
       _ArgError.Add(name, "name");
-      LJCNetString.ThrowArgError(_ArgError.ToString());
     }
     #endregion
 
