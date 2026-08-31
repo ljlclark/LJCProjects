@@ -154,12 +154,16 @@ namespace LJCDataUtility5
         if (KeyManager != null
           && KeyManager.Manager != null)
         {
-          var items = KeyManager.Load(keyColumns);
-          if (LJC.HasListItems(items))
+          var result = KeyManager.LoadResult(keyColumns);
+          if (result != null
+            && LJC.HasListItems(result.Rows))
           {
-            foreach (var item in items)
+            foreach (var row in result.Rows)
             {
-              RowAdd(item);
+              if (LJC.HasListItems(row.Values))
+              {
+                RowAddValues(row.Values);
+              }
             }
           }
         }

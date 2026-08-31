@@ -486,7 +486,7 @@ namespace LJCDataAccess5
               dbDataAdapter.SelectCommand = dbCommand;
               var dataSet = new DataSet();
               dbDataAdapter.Fill(dataSet);
-              if (LJC.HasDatasetTables(dataSet))
+              if (LJC.HasDataSetTables(dataSet))
               {
                 retValue = dataSet.Tables[0];
               }

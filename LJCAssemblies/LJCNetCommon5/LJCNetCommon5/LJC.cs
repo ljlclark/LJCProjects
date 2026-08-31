@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // LJC.cs
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
@@ -142,18 +143,9 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Checks a data table for columns definitions.
-    /// <include path="members/HasTableColumns1/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>check</parentGroup>
-    [Obsolete("Use HasTableColumns(dataColumns) instead.")]
-    public static bool HasColumns([NotNullWhen(true)]
-      DataColumnCollection? dataColumns)
-    {
-      return HasTableColumns(dataColumns);
-    }
-
     // Checks a DataColumns collection for items.
-    /// <include path="members/HasTableColumns1/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/HasTableColumns1/*'/>
     /// <parentGroup>check</parentGroup>
     public static bool HasTableColumns([NotNullWhen(true)]
       DataColumnCollection? dataColumns)
@@ -168,41 +160,24 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Checks a data table for columns definitions.
-    /// <include path="members/HasTableColumns2/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>check</parentGroup>
-    [Obsolete("Use HasTableColumns(dataTable) instead.")]
-    public static bool HasColumns([NotNullWhen(true)] DataTable? dataTable)
-    {
-      return HasTableColumns(dataTable);
-    }
-
-    // Checks a data table for columns definitions.
-    /// <include path="members/HasTableColumns2/*" file="Doc/LJC.xml"/>
+    // Checks a table for data columns.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/HasTableColumns2/*'/>
     /// <parentGroup>check</parentGroup>
     public static bool HasTableColumns([NotNullWhen(true)] DataTable? dataTable)
     {
-      bool retValue = true;
+      bool retValue = false;
 
-      if (dataTable != null
-        && HasTableColumns(dataTable.Columns))
+      if (dataTable != null)
       {
-        retValue = true;
+        retValue = HasTableColumns(dataTable.Columns);
       }
       return retValue;
     }
 
     // Checks a data table for rows.
-    /// <include path="members/HasTableData/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>check</parentGroup>
-    [Obsolete("Use HasTableData(dataTable) instead.")]
-    public static bool HasData([NotNullWhen(true)] DataTable? dataTable)
-    {
-      return HasTableData(dataTable);
-    }
-
-    // Checks a data table for rows.
-    /// <include path="members/HasTableData/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/HasTableData/*'/>
     /// <parentGroup>check</parentGroup>
     public static bool HasTableData([NotNullWhen(true)] DataTable? dataTable)
     {
@@ -215,15 +190,6 @@ namespace LJCNetCommon5
         retValue = true;
       }
       return retValue;
-    }
-
-    // Checks an array for elements.
-    /// <include path="members/HasArrayElements/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>check</parentGroup>
-    [Obsolete("Use HasArrayElements(array) instead.")]
-    public static bool HasElements([NotNullWhen(true)] object? array)
-    {
-      return HasArrayElements(array);
     }
 
     // Checks an array for elements.
@@ -250,15 +216,6 @@ namespace LJCNetCommon5
     // Checks an IList collection for items.
     /// <include path="members/HasListItems/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
-    [Obsolete("Use HasListItems(list) instead.")]
-    public static bool HasItems([NotNullWhen(true)] IList? list)
-    {
-      return HasListItems(list);
-    }
-
-    // Checks an IList collection for items.
-    /// <include path="members/HasListItems/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>check</parentGroup>
     public static bool HasListItems([NotNullWhen(true)] IList? list)
     {
       bool retValue = false;
@@ -271,38 +228,63 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Checks a DataSet for tables.
-    /// <include path="members/HasDatasetTables/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>check</parentGroup>
-    [Obsolete("Use HasDatasetTables(datset) instead.")]
-    public static bool HasTables([NotNullWhen(true)] DataSet? dataset)
-    {
-      return HasDatasetTables(dataset);
-    }
-
-    // Checks a DataSet for tables.
-    /// <include path="members/HasDatasetTables/*" file="Doc/LJC.xml"/>
-    /// <parentGroup>check</parentGroup>
-    public static bool HasDatasetTables([NotNullWhen(true)] DataSet? dataset)
+    // Checks a collection or array for items.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/HasListItems/*'/>
+    public static bool HasItems([NotNullWhen(true)] object? items)
     {
       bool retValue = false;
 
-      if (dataset != null
-        && dataset.Tables != null
-        && dataset.Tables.Count > 0)
+      if (items != null)
       {
-        retValue = true;
+        while (true)
+        {
+          var type = items.GetType();
+
+          // Check if the type itself is the generic IList<> interface
+          if (type.BaseType != null
+            && type.BaseType.IsGenericType
+            && type.BaseType.Name == "List`1")
+          {
+            var list = (IList)items;
+            if (list.Count > 0)
+            {
+              retValue = true;
+              break;
+            }
+          }
+
+          object[]? array = null;
+          if (type.IsArray)
+          {
+            array = (object[])items;
+          }
+          if (array != null
+            && array.Length > 0)
+          {
+            retValue = true;
+            break;
+          }
+          break;
+        }
       }
       return retValue;
     }
 
-    // Checks if a text value exists.
-    /// <include path="members/HasText/*" file="Doc/LJC.xml"/>
+    // Checks a DataSet for tables.
+    /// <include path="members/HasDatasetTables/*" file="Doc/LJC.xml"/>
     /// <parentGroup>check</parentGroup>
-    [Obsolete("Use HasText(text) instead.")]
-    public static bool HasValue([NotNullWhen(true)] string? text)
+    public static bool HasDataSetTables([NotNullWhen(true)] DataSet? dataSet)
     {
-      return HasText(text);
+      bool retValue = false;
+
+      if (dataSet != null
+        && dataSet.Tables != null
+        && dataSet.Tables.Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
     }
 
     // Checks if a text value exists.

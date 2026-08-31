@@ -181,12 +181,16 @@ namespace LJCDataUtility5
           && TableManager.Manager != null)
         {
           TableManager.Manager.OrderByNames = orderBy;
-          var items = TableManager.Load(keyColumns);
-          if (LJC.HasListItems(items))
+          var result = TableManager.LoadResult(keyColumns);
+          if (result != null
+            && LJC.HasListItems(result.Rows))
           {
-            foreach (var item in items)
+            foreach (var row in result.Rows)
             {
-              RowAdd(item);
+              if (LJC.HasListItems(row.Values))
+              {
+                RowAddValues(row.Values);
+              }
             }
           }
         }

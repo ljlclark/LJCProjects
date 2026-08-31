@@ -53,7 +53,7 @@ namespace LJCDataAccess5
           DataTypeName = tableColumn.DataType.Name,
           MaxLength = tableColumn.MaxLength,
           PropertyName = tableColumn.ColumnName,
-          Unique = tableColumn.Unique
+          IsUniqueKey = tableColumn.Unique
         };
       }
       return retTableColumn;

@@ -162,12 +162,16 @@ namespace LJCDataUtility5
           && ColumnManager.Manager != null)
         {
           ColumnManager.Manager.OrderByNames = orderByNames;
-          var items = ColumnManager.Load(keyColumns);
-          if (LJC.HasListItems(items))
+          var result = ColumnManager.LoadResult(keyColumns);
+          if (result != null
+            && LJC.HasListItems(result.Rows))
           {
-            foreach (var item in items)
+            foreach (var row in result.Rows)
             {
-              RowAdd(item);
+              if (LJC.HasListItems(row.Values))
+              {
+                RowAddValues(row.Values);
+              }
             }
           }
         }
@@ -180,6 +184,7 @@ namespace LJCDataUtility5
     // Adds a grid row and updates it with the record values.
     private LJCGridRow? RowAdd(DataUtilColumn data)
     {
+      var x = ColumnGrid.Columns;
       var retRow = ColumnGrid.LJCRowAdd();
       if (retRow != null)
       {

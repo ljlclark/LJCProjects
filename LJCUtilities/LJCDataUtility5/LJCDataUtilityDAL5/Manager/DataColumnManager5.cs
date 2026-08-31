@@ -174,6 +174,20 @@ namespace LJCDataUtilityDAL5
       return retValue;
     }
 
+    /// <include file='../../LJCGenDoc5/Common/Manager.xml'
+    ///  path='members/LoadResult/*'/>
+    public LJCDBResult? LoadResult(LJCDataColumns? keyColumns = null
+      , List<string>? propertyNames = null, LJCDBFilters? filters = null
+      , LJCDBJoins? joins = null)
+    {
+      if (null == joins)
+      {
+        joins = GetJoins();
+      }
+      var retValue = Manager?.Load(keyColumns, propertyNames, filters, joins);
+      return retValue;
+    }
+
     // Retrieves a record from the database.
     /// <include file='../../LJCGenDoc5/Common/Manager.xml'
     ///  path='members/Retrieve/*'/>
