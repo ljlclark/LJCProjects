@@ -28,295 +28,295 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.ParentNameText = new System.Windows.Forms.TextBox();
-      this.ParentNameLabel = new System.Windows.Forms.Label();
-      this.DescriptionText = new System.Windows.Forms.TextBox();
-      this.DescriptionLabel = new System.Windows.Forms.Label();
-      this.FormCancelButton = new System.Windows.Forms.Button();
-      this.OKButton = new System.Windows.Forms.Button();
-      this.NameText = new System.Windows.Forms.TextBox();
-      this.NameLabel = new System.Windows.Forms.Label();
-      this.SequenceText = new System.Windows.Forms.TextBox();
-      this.SequenceLabel = new System.Windows.Forms.Label();
-      this.IdentityStartText = new System.Windows.Forms.TextBox();
-      this.IdentityStartlabel = new System.Windows.Forms.Label();
-      this.IdentityIncrementText = new System.Windows.Forms.TextBox();
-      this.IdentityIncrementLabel = new System.Windows.Forms.Label();
-      this.MaxLengthText = new System.Windows.Forms.TextBox();
-      this.MaxLengthLabel = new System.Windows.Forms.Label();
-      this.TypeNameCombo = new LJCControls5.LJCItemCombo();
-      this.TypeNameLabel = new System.Windows.Forms.Label();
-      this.AllowNullCheck = new System.Windows.Forms.CheckBox();
-      this.DefaultText = new System.Windows.Forms.TextBox();
-      this.DefaultLabel = new System.Windows.Forms.Label();
-      this.NewNameText = new System.Windows.Forms.TextBox();
-      this.NewNameLabel = new System.Windows.Forms.Label();
-      this.NewMaxLengthText = new System.Windows.Forms.TextBox();
-      this.NewMaxLengthLabel = new System.Windows.Forms.Label();
-      this.SuspendLayout();
+      ParentNameText = new TextBox();
+      ParentNameLabel = new Label();
+      DescriptionText = new TextBox();
+      DescriptionLabel = new Label();
+      FormCancelButton = new Button();
+      OKButton = new Button();
+      NameText = new TextBox();
+      NameLabel = new Label();
+      SequenceText = new TextBox();
+      SequenceLabel = new Label();
+      IdentityStartText = new TextBox();
+      IdentityStartlabel = new Label();
+      IdentityIncrementText = new TextBox();
+      IdentityIncrementLabel = new Label();
+      MaxLengthText = new TextBox();
+      MaxLengthLabel = new Label();
+      TypeNameCombo = new LJCControls5.LJCItemCombo();
+      TypeNameLabel = new Label();
+      AllowNullCheck = new CheckBox();
+      DefaultText = new TextBox();
+      DefaultLabel = new Label();
+      NewNameText = new TextBox();
+      NewNameLabel = new Label();
+      NewMaxLengthText = new TextBox();
+      NewMaxLengthLabel = new Label();
+      SuspendLayout();
       // 
       // ParentNameText
       // 
-      this.ParentNameText.Location = new System.Drawing.Point(254, 22);
-      this.ParentNameText.Margin = new System.Windows.Forms.Padding(6);
-      this.ParentNameText.Name = "ParentNameText";
-      this.ParentNameText.ReadOnly = true;
-      this.ParentNameText.Size = new System.Drawing.Size(500, 32);
-      this.ParentNameText.TabIndex = 1;
+      ParentNameText.Location = new Point(217, 18);
+      ParentNameText.Margin = new Padding(6);
+      ParentNameText.Name = "ParentNameText";
+      ParentNameText.ReadOnly = true;
+      ParentNameText.Size = new Size(500, 31);
+      ParentNameText.TabIndex = 1;
       // 
       // ParentNameLabel
       // 
-      this.ParentNameLabel.AutoSize = true;
-      this.ParentNameLabel.Location = new System.Drawing.Point(23, 28);
-      this.ParentNameLabel.Name = "ParentNameLabel";
-      this.ParentNameLabel.Size = new System.Drawing.Size(117, 26);
-      this.ParentNameLabel.TabIndex = 0;
-      this.ParentNameLabel.Text = "Data Table";
+      ParentNameLabel.AutoSize = true;
+      ParentNameLabel.Location = new Point(12, 24);
+      ParentNameLabel.Name = "ParentNameLabel";
+      ParentNameLabel.Size = new Size(94, 25);
+      ParentNameLabel.TabIndex = 0;
+      ParentNameLabel.Text = "Data Table";
       // 
       // DescriptionText
       // 
-      this.DescriptionText.Location = new System.Drawing.Point(254, 163);
-      this.DescriptionText.Margin = new System.Windows.Forms.Padding(6);
-      this.DescriptionText.Name = "DescriptionText";
-      this.DescriptionText.Size = new System.Drawing.Size(500, 32);
-      this.DescriptionText.TabIndex = 7;
+      DescriptionText.Location = new Point(217, 147);
+      DescriptionText.Margin = new Padding(6);
+      DescriptionText.Name = "DescriptionText";
+      DescriptionText.Size = new Size(500, 31);
+      DescriptionText.TabIndex = 7;
       // 
       // DescriptionLabel
       // 
-      this.DescriptionLabel.AutoSize = true;
-      this.DescriptionLabel.Location = new System.Drawing.Point(23, 169);
-      this.DescriptionLabel.Name = "DescriptionLabel";
-      this.DescriptionLabel.Size = new System.Drawing.Size(121, 26);
-      this.DescriptionLabel.TabIndex = 6;
-      this.DescriptionLabel.Text = "Description";
+      DescriptionLabel.AutoSize = true;
+      DescriptionLabel.Location = new Point(12, 153);
+      DescriptionLabel.Name = "DescriptionLabel";
+      DescriptionLabel.Size = new Size(102, 25);
+      DescriptionLabel.TabIndex = 6;
+      DescriptionLabel.Text = "Description";
       // 
       // FormCancelButton
       // 
-      this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(578, 594);
-      this.FormCancelButton.Margin = new System.Windows.Forms.Padding(6);
-      this.FormCancelButton.Name = "FormCancelButton";
-      this.FormCancelButton.Size = new System.Drawing.Size(174, 46);
-      this.FormCancelButton.TabIndex = 24;
-      this.FormCancelButton.Text = "Cancel";
-      this.FormCancelButton.UseVisualStyleBackColor = true;
+      FormCancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      FormCancelButton.Location = new Point(577, 530);
+      FormCancelButton.Margin = new Padding(6);
+      FormCancelButton.Name = "FormCancelButton";
+      FormCancelButton.Size = new Size(140, 40);
+      FormCancelButton.TabIndex = 24;
+      FormCancelButton.Text = "Cancel";
+      FormCancelButton.UseVisualStyleBackColor = true;
       // 
       // OKButton
       // 
-      this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(387, 594);
-      this.OKButton.Margin = new System.Windows.Forms.Padding(6);
-      this.OKButton.Name = "OKButton";
-      this.OKButton.Size = new System.Drawing.Size(174, 46);
-      this.OKButton.TabIndex = 23;
-      this.OKButton.Text = "&OK";
-      this.OKButton.UseVisualStyleBackColor = true;
-      this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
+      OKButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      OKButton.Location = new Point(425, 530);
+      OKButton.Margin = new Padding(6);
+      OKButton.Name = "OKButton";
+      OKButton.Size = new Size(140, 40);
+      OKButton.TabIndex = 23;
+      OKButton.Text = "&OK";
+      OKButton.UseVisualStyleBackColor = true;
+      OKButton.Click += OKButton_Click;
       // 
       // NameText
       // 
-      this.NameText.Location = new System.Drawing.Point(254, 69);
-      this.NameText.Margin = new System.Windows.Forms.Padding(6);
-      this.NameText.Name = "NameText";
-      this.NameText.Size = new System.Drawing.Size(500, 32);
-      this.NameText.TabIndex = 3;
+      NameText.Location = new Point(217, 61);
+      NameText.Margin = new Padding(6);
+      NameText.Name = "NameText";
+      NameText.Size = new Size(500, 31);
+      NameText.TabIndex = 3;
       // 
       // NameLabel
       // 
-      this.NameLabel.AutoSize = true;
-      this.NameLabel.Location = new System.Drawing.Point(23, 75);
-      this.NameLabel.Name = "NameLabel";
-      this.NameLabel.Size = new System.Drawing.Size(71, 26);
-      this.NameLabel.TabIndex = 2;
-      this.NameLabel.Text = "Name";
+      NameLabel.AutoSize = true;
+      NameLabel.Location = new Point(12, 67);
+      NameLabel.Name = "NameLabel";
+      NameLabel.Size = new Size(59, 25);
+      NameLabel.TabIndex = 2;
+      NameLabel.Text = "Name";
       // 
       // SequenceText
       // 
-      this.SequenceText.Location = new System.Drawing.Point(254, 210);
-      this.SequenceText.Margin = new System.Windows.Forms.Padding(6);
-      this.SequenceText.Name = "SequenceText";
-      this.SequenceText.Size = new System.Drawing.Size(55, 32);
-      this.SequenceText.TabIndex = 9;
+      SequenceText.Location = new Point(217, 190);
+      SequenceText.Margin = new Padding(6);
+      SequenceText.Name = "SequenceText";
+      SequenceText.Size = new Size(55, 31);
+      SequenceText.TabIndex = 9;
       // 
       // SequenceLabel
       // 
-      this.SequenceLabel.AutoSize = true;
-      this.SequenceLabel.Location = new System.Drawing.Point(23, 216);
-      this.SequenceLabel.Name = "SequenceLabel";
-      this.SequenceLabel.Size = new System.Drawing.Size(110, 26);
-      this.SequenceLabel.TabIndex = 8;
-      this.SequenceLabel.Text = "Sequence";
+      SequenceLabel.AutoSize = true;
+      SequenceLabel.Location = new Point(12, 196);
+      SequenceLabel.Name = "SequenceLabel";
+      SequenceLabel.Size = new Size(88, 25);
+      SequenceLabel.TabIndex = 8;
+      SequenceLabel.Text = "Sequence";
       // 
       // IdentityStartText
       // 
-      this.IdentityStartText.Location = new System.Drawing.Point(254, 445);
-      this.IdentityStartText.Margin = new System.Windows.Forms.Padding(6);
-      this.IdentityStartText.Name = "IdentityStartText";
-      this.IdentityStartText.Size = new System.Drawing.Size(35, 32);
-      this.IdentityStartText.TabIndex = 19;
+      IdentityStartText.Location = new Point(217, 405);
+      IdentityStartText.Margin = new Padding(6);
+      IdentityStartText.Name = "IdentityStartText";
+      IdentityStartText.Size = new Size(35, 31);
+      IdentityStartText.TabIndex = 19;
       // 
       // IdentityStartlabel
       // 
-      this.IdentityStartlabel.AutoSize = true;
-      this.IdentityStartlabel.Location = new System.Drawing.Point(23, 451);
-      this.IdentityStartlabel.Name = "IdentityStartlabel";
-      this.IdentityStartlabel.Size = new System.Drawing.Size(134, 26);
-      this.IdentityStartlabel.TabIndex = 18;
-      this.IdentityStartlabel.Text = "Identity Start";
+      IdentityStartlabel.AutoSize = true;
+      IdentityStartlabel.Location = new Point(12, 411);
+      IdentityStartlabel.Name = "IdentityStartlabel";
+      IdentityStartlabel.Size = new Size(113, 25);
+      IdentityStartlabel.TabIndex = 18;
+      IdentityStartlabel.Text = "Identity Start";
       // 
       // IdentityIncrementText
       // 
-      this.IdentityIncrementText.Location = new System.Drawing.Point(254, 492);
-      this.IdentityIncrementText.Margin = new System.Windows.Forms.Padding(6);
-      this.IdentityIncrementText.Name = "IdentityIncrementText";
-      this.IdentityIncrementText.Size = new System.Drawing.Size(35, 32);
-      this.IdentityIncrementText.TabIndex = 21;
+      IdentityIncrementText.Location = new Point(217, 448);
+      IdentityIncrementText.Margin = new Padding(6);
+      IdentityIncrementText.Name = "IdentityIncrementText";
+      IdentityIncrementText.Size = new Size(35, 31);
+      IdentityIncrementText.TabIndex = 21;
       // 
       // IdentityIncrementLabel
       // 
-      this.IdentityIncrementLabel.AutoSize = true;
-      this.IdentityIncrementLabel.Location = new System.Drawing.Point(23, 498);
-      this.IdentityIncrementLabel.Name = "IdentityIncrementLabel";
-      this.IdentityIncrementLabel.Size = new System.Drawing.Size(185, 26);
-      this.IdentityIncrementLabel.TabIndex = 20;
-      this.IdentityIncrementLabel.Text = "Identity Increment";
+      IdentityIncrementLabel.AutoSize = true;
+      IdentityIncrementLabel.Location = new Point(12, 454);
+      IdentityIncrementLabel.Name = "IdentityIncrementLabel";
+      IdentityIncrementLabel.Size = new Size(156, 25);
+      IdentityIncrementLabel.TabIndex = 20;
+      IdentityIncrementLabel.Text = "Identity Increment";
       // 
       // MaxLengthText
       // 
-      this.MaxLengthText.Location = new System.Drawing.Point(254, 304);
-      this.MaxLengthText.Margin = new System.Windows.Forms.Padding(6);
-      this.MaxLengthText.Name = "MaxLengthText";
-      this.MaxLengthText.Size = new System.Drawing.Size(75, 32);
-      this.MaxLengthText.TabIndex = 13;
+      MaxLengthText.Location = new Point(217, 276);
+      MaxLengthText.Margin = new Padding(6);
+      MaxLengthText.Name = "MaxLengthText";
+      MaxLengthText.Size = new Size(75, 31);
+      MaxLengthText.TabIndex = 13;
       // 
       // MaxLengthLabel
       // 
-      this.MaxLengthLabel.AutoSize = true;
-      this.MaxLengthLabel.Location = new System.Drawing.Point(23, 310);
-      this.MaxLengthLabel.Name = "MaxLengthLabel";
-      this.MaxLengthLabel.Size = new System.Drawing.Size(125, 26);
-      this.MaxLengthLabel.TabIndex = 12;
-      this.MaxLengthLabel.Text = "Max Length";
+      MaxLengthLabel.AutoSize = true;
+      MaxLengthLabel.Location = new Point(12, 282);
+      MaxLengthLabel.Name = "MaxLengthLabel";
+      MaxLengthLabel.Size = new Size(104, 25);
+      MaxLengthLabel.TabIndex = 12;
+      MaxLengthLabel.Text = "Max Length";
       // 
       // TypeNameCombo
       // 
-      this.TypeNameCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.TypeNameCombo.Location = new System.Drawing.Point(254, 257);
-      this.TypeNameCombo.Margin = new System.Windows.Forms.Padding(6);
-      this.TypeNameCombo.Name = "TypeNameCombo";
-      this.TypeNameCombo.Size = new System.Drawing.Size(200, 34);
-      this.TypeNameCombo.TabIndex = 11;
+      TypeNameCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+      TypeNameCombo.Location = new Point(217, 233);
+      TypeNameCombo.Margin = new Padding(6);
+      TypeNameCombo.Name = "TypeNameCombo";
+      TypeNameCombo.Size = new Size(200, 33);
+      TypeNameCombo.TabIndex = 11;
       // 
       // TypeNameLabel
       // 
-      this.TypeNameLabel.AutoSize = true;
-      this.TypeNameLabel.Location = new System.Drawing.Point(23, 263);
-      this.TypeNameLabel.Name = "TypeNameLabel";
-      this.TypeNameLabel.Size = new System.Drawing.Size(118, 26);
-      this.TypeNameLabel.TabIndex = 10;
-      this.TypeNameLabel.Text = "TypeName";
+      TypeNameLabel.AutoSize = true;
+      TypeNameLabel.Location = new Point(12, 239);
+      TypeNameLabel.Name = "TypeNameLabel";
+      TypeNameLabel.Size = new Size(96, 25);
+      TypeNameLabel.TabIndex = 10;
+      TypeNameLabel.Text = "TypeName";
       // 
       // AllowNullCheck
       // 
-      this.AllowNullCheck.AutoSize = true;
-      this.AllowNullCheck.Location = new System.Drawing.Point(254, 539);
-      this.AllowNullCheck.Name = "AllowNullCheck";
-      this.AllowNullCheck.Size = new System.Drawing.Size(135, 30);
-      this.AllowNullCheck.TabIndex = 22;
-      this.AllowNullCheck.Text = "Allow Null";
-      this.AllowNullCheck.UseVisualStyleBackColor = true;
+      AllowNullCheck.AutoSize = true;
+      AllowNullCheck.Location = new Point(217, 491);
+      AllowNullCheck.Name = "AllowNullCheck";
+      AllowNullCheck.Size = new Size(118, 29);
+      AllowNullCheck.TabIndex = 22;
+      AllowNullCheck.Text = "Allow Null";
+      AllowNullCheck.UseVisualStyleBackColor = true;
       // 
       // DefaultText
       // 
-      this.DefaultText.Location = new System.Drawing.Point(254, 398);
-      this.DefaultText.Margin = new System.Windows.Forms.Padding(6);
-      this.DefaultText.Name = "DefaultText";
-      this.DefaultText.Size = new System.Drawing.Size(500, 32);
-      this.DefaultText.TabIndex = 17;
+      DefaultText.Location = new Point(217, 362);
+      DefaultText.Margin = new Padding(6);
+      DefaultText.Name = "DefaultText";
+      DefaultText.Size = new Size(500, 31);
+      DefaultText.TabIndex = 17;
       // 
       // DefaultLabel
       // 
-      this.DefaultLabel.AutoSize = true;
-      this.DefaultLabel.Location = new System.Drawing.Point(23, 404);
-      this.DefaultLabel.Name = "DefaultLabel";
-      this.DefaultLabel.Size = new System.Drawing.Size(143, 26);
-      this.DefaultLabel.TabIndex = 16;
-      this.DefaultLabel.Text = "Default Value";
+      DefaultLabel.AutoSize = true;
+      DefaultLabel.Location = new Point(12, 368);
+      DefaultLabel.Name = "DefaultLabel";
+      DefaultLabel.Size = new Size(116, 25);
+      DefaultLabel.TabIndex = 16;
+      DefaultLabel.Text = "Default Value";
       // 
       // NewNameText
       // 
-      this.NewNameText.Location = new System.Drawing.Point(254, 116);
-      this.NewNameText.Margin = new System.Windows.Forms.Padding(6);
-      this.NewNameText.Name = "NewNameText";
-      this.NewNameText.Size = new System.Drawing.Size(500, 32);
-      this.NewNameText.TabIndex = 5;
+      NewNameText.Location = new Point(217, 104);
+      NewNameText.Margin = new Padding(6);
+      NewNameText.Name = "NewNameText";
+      NewNameText.Size = new Size(500, 31);
+      NewNameText.TabIndex = 5;
       // 
       // NewNameLabel
       // 
-      this.NewNameLabel.AutoSize = true;
-      this.NewNameLabel.Location = new System.Drawing.Point(23, 122);
-      this.NewNameLabel.Name = "NewNameLabel";
-      this.NewNameLabel.Size = new System.Drawing.Size(121, 26);
-      this.NewNameLabel.TabIndex = 4;
-      this.NewNameLabel.Text = "New Name";
+      NewNameLabel.AutoSize = true;
+      NewNameLabel.Location = new Point(12, 110);
+      NewNameLabel.Name = "NewNameLabel";
+      NewNameLabel.Size = new Size(99, 25);
+      NewNameLabel.TabIndex = 4;
+      NewNameLabel.Text = "New Name";
       // 
       // NewMaxLengthText
       // 
-      this.NewMaxLengthText.Location = new System.Drawing.Point(254, 351);
-      this.NewMaxLengthText.Margin = new System.Windows.Forms.Padding(6);
-      this.NewMaxLengthText.Name = "NewMaxLengthText";
-      this.NewMaxLengthText.Size = new System.Drawing.Size(75, 32);
-      this.NewMaxLengthText.TabIndex = 15;
+      NewMaxLengthText.Location = new Point(217, 319);
+      NewMaxLengthText.Margin = new Padding(6);
+      NewMaxLengthText.Name = "NewMaxLengthText";
+      NewMaxLengthText.Size = new Size(75, 31);
+      NewMaxLengthText.TabIndex = 15;
       // 
       // NewMaxLengthLabel
       // 
-      this.NewMaxLengthLabel.AutoSize = true;
-      this.NewMaxLengthLabel.Location = new System.Drawing.Point(23, 357);
-      this.NewMaxLengthLabel.Name = "NewMaxLengthLabel";
-      this.NewMaxLengthLabel.Size = new System.Drawing.Size(175, 26);
-      this.NewMaxLengthLabel.TabIndex = 14;
-      this.NewMaxLengthLabel.Text = "New Max Length";
+      NewMaxLengthLabel.AutoSize = true;
+      NewMaxLengthLabel.Location = new Point(12, 325);
+      NewMaxLengthLabel.Name = "NewMaxLengthLabel";
+      NewMaxLengthLabel.Size = new Size(144, 25);
+      NewMaxLengthLabel.TabIndex = 14;
+      NewMaxLengthLabel.Text = "New Max Length";
       // 
       // DataColumnDetail
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-      this.ClientSize = new System.Drawing.Size(778, 654);
-      this.Controls.Add(this.NewMaxLengthText);
-      this.Controls.Add(this.NewMaxLengthLabel);
-      this.Controls.Add(this.NewNameText);
-      this.Controls.Add(this.NewNameLabel);
-      this.Controls.Add(this.DefaultText);
-      this.Controls.Add(this.DefaultLabel);
-      this.Controls.Add(this.AllowNullCheck);
-      this.Controls.Add(this.TypeNameCombo);
-      this.Controls.Add(this.TypeNameLabel);
-      this.Controls.Add(this.MaxLengthText);
-      this.Controls.Add(this.MaxLengthLabel);
-      this.Controls.Add(this.IdentityIncrementText);
-      this.Controls.Add(this.IdentityIncrementLabel);
-      this.Controls.Add(this.IdentityStartText);
-      this.Controls.Add(this.IdentityStartlabel);
-      this.Controls.Add(this.SequenceText);
-      this.Controls.Add(this.SequenceLabel);
-      this.Controls.Add(this.ParentNameText);
-      this.Controls.Add(this.ParentNameLabel);
-      this.Controls.Add(this.DescriptionText);
-      this.Controls.Add(this.DescriptionLabel);
-      this.Controls.Add(this.FormCancelButton);
-      this.Controls.Add(this.OKButton);
-      this.Controls.Add(this.NameText);
-      this.Controls.Add(this.NameLabel);
-      this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-      this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-      this.MaximizeBox = false;
-      this.MinimizeBox = false;
-      this.Name = "DataColumnDetail";
-      this.Text = "DataColumn Detail";
-      this.Load += new System.EventHandler(this.ColumnDetail_Load);
-      this.ResumeLayout(false);
-      this.PerformLayout();
+      AutoScaleDimensions = new SizeF(144F, 144F);
+      AutoScaleMode = AutoScaleMode.Dpi;
+      ClientSize = new Size(732, 583);
+      Controls.Add(NewMaxLengthText);
+      Controls.Add(NewMaxLengthLabel);
+      Controls.Add(NewNameText);
+      Controls.Add(NewNameLabel);
+      Controls.Add(DefaultText);
+      Controls.Add(DefaultLabel);
+      Controls.Add(AllowNullCheck);
+      Controls.Add(TypeNameCombo);
+      Controls.Add(TypeNameLabel);
+      Controls.Add(MaxLengthText);
+      Controls.Add(MaxLengthLabel);
+      Controls.Add(IdentityIncrementText);
+      Controls.Add(IdentityIncrementLabel);
+      Controls.Add(IdentityStartText);
+      Controls.Add(IdentityStartlabel);
+      Controls.Add(SequenceText);
+      Controls.Add(SequenceLabel);
+      Controls.Add(ParentNameText);
+      Controls.Add(ParentNameLabel);
+      Controls.Add(DescriptionText);
+      Controls.Add(DescriptionLabel);
+      Controls.Add(FormCancelButton);
+      Controls.Add(OKButton);
+      Controls.Add(NameText);
+      Controls.Add(NameLabel);
+      Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      FormBorderStyle = FormBorderStyle.FixedDialog;
+      Margin = new Padding(5, 4, 5, 4);
+      MaximizeBox = false;
+      MinimizeBox = false;
+      Name = "DataColumnDetail";
+      Text = "DataColumn Detail";
+      Load += ColumnDetail_Load;
+      ResumeLayout(false);
+      PerformLayout();
 
     }
 

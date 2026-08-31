@@ -28,175 +28,175 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.FormCancelButton = new System.Windows.Forms.Button();
-      this.OKButton = new System.Windows.Forms.Button();
-      this.DescriptionText = new System.Windows.Forms.TextBox();
-      this.DescriptonLabel = new System.Windows.Forms.Label();
-      this.NameText = new System.Windows.Forms.TextBox();
-      this.NameLabel = new System.Windows.Forms.Label();
-      this.ParentNameText = new System.Windows.Forms.TextBox();
-      this.ParentNameLabel = new System.Windows.Forms.Label();
-      this.NewNameText = new System.Windows.Forms.TextBox();
-      this.NewNameLabel = new System.Windows.Forms.Label();
-      this.SequenceText = new System.Windows.Forms.TextBox();
-      this.SequenceLabel = new System.Windows.Forms.Label();
-      this.SchemaLabel = new System.Windows.Forms.Label();
-      this.SchemaText = new System.Windows.Forms.TextBox();
-      this.SuspendLayout();
+      FormCancelButton = new Button();
+      OKButton = new Button();
+      DescriptionText = new TextBox();
+      DescriptonLabel = new Label();
+      NameText = new TextBox();
+      NameLabel = new Label();
+      ParentNameText = new TextBox();
+      ParentNameLabel = new Label();
+      NewNameText = new TextBox();
+      NewNameLabel = new Label();
+      SequenceText = new TextBox();
+      SequenceLabel = new Label();
+      SchemaLabel = new Label();
+      SchemaText = new TextBox();
+      SuspendLayout();
       // 
       // FormCancelButton
       // 
-      this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(578, 311);
-      this.FormCancelButton.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.FormCancelButton.Name = "FormCancelButton";
-      this.FormCancelButton.Size = new System.Drawing.Size(174, 46);
-      this.FormCancelButton.TabIndex = 13;
-      this.FormCancelButton.Text = "Cancel";
-      this.FormCancelButton.UseVisualStyleBackColor = true;
+      FormCancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      FormCancelButton.Location = new Point(532, 278);
+      FormCancelButton.Margin = new Padding(9, 8, 9, 8);
+      FormCancelButton.Name = "FormCancelButton";
+      FormCancelButton.Size = new Size(140, 40);
+      FormCancelButton.TabIndex = 13;
+      FormCancelButton.Text = "Cancel";
+      FormCancelButton.UseVisualStyleBackColor = true;
       // 
       // OKButton
       // 
-      this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(387, 311);
-      this.OKButton.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.OKButton.Name = "OKButton";
-      this.OKButton.Size = new System.Drawing.Size(174, 46);
-      this.OKButton.TabIndex = 12;
-      this.OKButton.Text = "&OK";
-      this.OKButton.UseVisualStyleBackColor = true;
-      this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
+      OKButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      OKButton.Location = new Point(373, 278);
+      OKButton.Margin = new Padding(9, 8, 9, 8);
+      OKButton.Name = "OKButton";
+      OKButton.Size = new Size(140, 40);
+      OKButton.TabIndex = 12;
+      OKButton.Text = "&OK";
+      OKButton.UseVisualStyleBackColor = true;
+      OKButton.Click += OKButton_Click;
       // 
       // DescriptionText
       // 
-      this.DescriptionText.Location = new System.Drawing.Point(255, 114);
-      this.DescriptionText.Margin = new System.Windows.Forms.Padding(6);
-      this.DescriptionText.Name = "DescriptionText";
-      this.DescriptionText.Size = new System.Drawing.Size(500, 32);
-      this.DescriptionText.TabIndex = 5;
+      DescriptionText.Location = new Point(172, 104);
+      DescriptionText.Margin = new Padding(6);
+      DescriptionText.Name = "DescriptionText";
+      DescriptionText.Size = new Size(500, 31);
+      DescriptionText.TabIndex = 5;
       // 
       // DescriptonLabel
       // 
-      this.DescriptonLabel.AutoSize = true;
-      this.DescriptonLabel.Location = new System.Drawing.Point(24, 120);
-      this.DescriptonLabel.Name = "DescriptonLabel";
-      this.DescriptonLabel.Size = new System.Drawing.Size(121, 26);
-      this.DescriptonLabel.TabIndex = 4;
-      this.DescriptonLabel.Text = "Description";
+      DescriptonLabel.AutoSize = true;
+      DescriptonLabel.Location = new Point(12, 107);
+      DescriptonLabel.Name = "DescriptonLabel";
+      DescriptonLabel.Size = new Size(102, 25);
+      DescriptonLabel.TabIndex = 4;
+      DescriptonLabel.Text = "Description";
       // 
       // NameText
       // 
-      this.NameText.Location = new System.Drawing.Point(255, 67);
-      this.NameText.Margin = new System.Windows.Forms.Padding(6);
-      this.NameText.Name = "NameText";
-      this.NameText.Size = new System.Drawing.Size(500, 32);
-      this.NameText.TabIndex = 3;
+      NameText.Location = new Point(171, 61);
+      NameText.Margin = new Padding(6);
+      NameText.Name = "NameText";
+      NameText.Size = new Size(500, 31);
+      NameText.TabIndex = 3;
       // 
       // NameLabel
       // 
-      this.NameLabel.AutoSize = true;
-      this.NameLabel.Location = new System.Drawing.Point(24, 73);
-      this.NameLabel.Name = "NameLabel";
-      this.NameLabel.Size = new System.Drawing.Size(71, 26);
-      this.NameLabel.TabIndex = 2;
-      this.NameLabel.Text = "Name";
+      NameLabel.AutoSize = true;
+      NameLabel.Location = new Point(12, 64);
+      NameLabel.Name = "NameLabel";
+      NameLabel.Size = new Size(59, 25);
+      NameLabel.TabIndex = 2;
+      NameLabel.Text = "Name";
       // 
       // ParentNameText
       // 
-      this.ParentNameText.Location = new System.Drawing.Point(255, 22);
-      this.ParentNameText.Margin = new System.Windows.Forms.Padding(6);
-      this.ParentNameText.Name = "ParentNameText";
-      this.ParentNameText.ReadOnly = true;
-      this.ParentNameText.Size = new System.Drawing.Size(500, 32);
-      this.ParentNameText.TabIndex = 1;
+      ParentNameText.Location = new Point(171, 18);
+      ParentNameText.Margin = new Padding(6);
+      ParentNameText.Name = "ParentNameText";
+      ParentNameText.ReadOnly = true;
+      ParentNameText.Size = new Size(500, 31);
+      ParentNameText.TabIndex = 1;
       // 
       // ParentNameLabel
       // 
-      this.ParentNameLabel.AutoSize = true;
-      this.ParentNameLabel.Location = new System.Drawing.Point(24, 28);
-      this.ParentNameLabel.Name = "ParentNameLabel";
-      this.ParentNameLabel.Size = new System.Drawing.Size(83, 26);
-      this.ParentNameLabel.TabIndex = 0;
-      this.ParentNameLabel.Text = "Module";
+      ParentNameLabel.AutoSize = true;
+      ParentNameLabel.Location = new Point(12, 21);
+      ParentNameLabel.Name = "ParentNameLabel";
+      ParentNameLabel.Size = new Size(73, 25);
+      ParentNameLabel.TabIndex = 0;
+      ParentNameLabel.Text = "Module";
       // 
       // NewNameText
       // 
-      this.NewNameText.Location = new System.Drawing.Point(255, 255);
-      this.NewNameText.Margin = new System.Windows.Forms.Padding(6);
-      this.NewNameText.Name = "NewNameText";
-      this.NewNameText.Size = new System.Drawing.Size(500, 32);
-      this.NewNameText.TabIndex = 11;
+      NewNameText.Location = new Point(172, 233);
+      NewNameText.Margin = new Padding(6);
+      NewNameText.Name = "NewNameText";
+      NewNameText.Size = new Size(500, 31);
+      NewNameText.TabIndex = 11;
       // 
       // NewNameLabel
       // 
-      this.NewNameLabel.AutoSize = true;
-      this.NewNameLabel.Location = new System.Drawing.Point(24, 261);
-      this.NewNameLabel.Name = "NewNameLabel";
-      this.NewNameLabel.Size = new System.Drawing.Size(121, 26);
-      this.NewNameLabel.TabIndex = 10;
-      this.NewNameLabel.Text = "New Name";
+      NewNameLabel.AutoSize = true;
+      NewNameLabel.Location = new Point(12, 236);
+      NewNameLabel.Name = "NewNameLabel";
+      NewNameLabel.Size = new Size(99, 25);
+      NewNameLabel.TabIndex = 10;
+      NewNameLabel.Text = "New Name";
       // 
       // SequenceText
       // 
-      this.SequenceText.Location = new System.Drawing.Point(255, 161);
-      this.SequenceText.Margin = new System.Windows.Forms.Padding(6);
-      this.SequenceText.Name = "SequenceText";
-      this.SequenceText.Size = new System.Drawing.Size(55, 32);
-      this.SequenceText.TabIndex = 7;
+      SequenceText.Location = new Point(172, 147);
+      SequenceText.Margin = new Padding(6);
+      SequenceText.Name = "SequenceText";
+      SequenceText.Size = new Size(55, 31);
+      SequenceText.TabIndex = 7;
       // 
       // SequenceLabel
       // 
-      this.SequenceLabel.AutoSize = true;
-      this.SequenceLabel.Location = new System.Drawing.Point(24, 167);
-      this.SequenceLabel.Name = "SequenceLabel";
-      this.SequenceLabel.Size = new System.Drawing.Size(110, 26);
-      this.SequenceLabel.TabIndex = 6;
-      this.SequenceLabel.Text = "Sequence";
+      SequenceLabel.AutoSize = true;
+      SequenceLabel.Location = new Point(12, 150);
+      SequenceLabel.Name = "SequenceLabel";
+      SequenceLabel.Size = new Size(88, 25);
+      SequenceLabel.TabIndex = 6;
+      SequenceLabel.Text = "Sequence";
       // 
       // SchemaLabel
       // 
-      this.SchemaLabel.AutoSize = true;
-      this.SchemaLabel.Location = new System.Drawing.Point(24, 214);
-      this.SchemaLabel.Name = "SchemaLabel";
-      this.SchemaLabel.Size = new System.Drawing.Size(93, 26);
-      this.SchemaLabel.TabIndex = 8;
-      this.SchemaLabel.Text = "Schema";
+      SchemaLabel.AutoSize = true;
+      SchemaLabel.Location = new Point(12, 193);
+      SchemaLabel.Name = "SchemaLabel";
+      SchemaLabel.Size = new Size(74, 25);
+      SchemaLabel.TabIndex = 8;
+      SchemaLabel.Text = "Schema";
       // 
       // SchemaText
       // 
-      this.SchemaText.Location = new System.Drawing.Point(255, 208);
-      this.SchemaText.Margin = new System.Windows.Forms.Padding(6);
-      this.SchemaText.Name = "SchemaText";
-      this.SchemaText.Size = new System.Drawing.Size(55, 32);
-      this.SchemaText.TabIndex = 9;
+      SchemaText.Location = new Point(172, 190);
+      SchemaText.Margin = new Padding(6);
+      SchemaText.Name = "SchemaText";
+      SchemaText.Size = new Size(55, 31);
+      SchemaText.TabIndex = 9;
       // 
       // DataTableDetail
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-      this.ClientSize = new System.Drawing.Size(778, 371);
-      this.Controls.Add(this.SchemaLabel);
-      this.Controls.Add(this.SchemaText);
-      this.Controls.Add(this.SequenceLabel);
-      this.Controls.Add(this.SequenceText);
-      this.Controls.Add(this.NewNameText);
-      this.Controls.Add(this.NewNameLabel);
-      this.Controls.Add(this.ParentNameText);
-      this.Controls.Add(this.ParentNameLabel);
-      this.Controls.Add(this.DescriptionText);
-      this.Controls.Add(this.DescriptonLabel);
-      this.Controls.Add(this.NameText);
-      this.Controls.Add(this.NameLabel);
-      this.Controls.Add(this.FormCancelButton);
-      this.Controls.Add(this.OKButton);
-      this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-      this.Margin = new System.Windows.Forms.Padding(4);
-      this.Name = "DataTableDetail";
-      this.Text = "DataTable Detail";
-      this.Load += new System.EventHandler(this.DataTableDetail_Load);
-      this.ResumeLayout(false);
-      this.PerformLayout();
+      AutoScaleDimensions = new SizeF(144F, 144F);
+      AutoScaleMode = AutoScaleMode.Dpi;
+      ClientSize = new Size(686, 329);
+      Controls.Add(SchemaLabel);
+      Controls.Add(SchemaText);
+      Controls.Add(SequenceLabel);
+      Controls.Add(SequenceText);
+      Controls.Add(NewNameText);
+      Controls.Add(NewNameLabel);
+      Controls.Add(ParentNameText);
+      Controls.Add(ParentNameLabel);
+      Controls.Add(DescriptionText);
+      Controls.Add(DescriptonLabel);
+      Controls.Add(NameText);
+      Controls.Add(NameLabel);
+      Controls.Add(FormCancelButton);
+      Controls.Add(OKButton);
+      Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      FormBorderStyle = FormBorderStyle.FixedDialog;
+      Margin = new Padding(4);
+      Name = "DataTableDetail";
+      Text = "DataTable Detail";
+      Load += DataTableDetail_Load;
+      ResumeLayout(false);
+      PerformLayout();
 
     }
 

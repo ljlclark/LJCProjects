@@ -28,204 +28,204 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.FormCancelButton = new System.Windows.Forms.Button();
-      this.OKButton = new System.Windows.Forms.Button();
-      this.ClusteredCheck = new System.Windows.Forms.CheckBox();
-      this.TargetTableText = new System.Windows.Forms.TextBox();
-      this.TargetTableLabel = new System.Windows.Forms.Label();
-      this.TargetColumnText = new System.Windows.Forms.TextBox();
-      this.TargetColumnLabel = new System.Windows.Forms.Label();
-      this.SourceColumnText = new System.Windows.Forms.TextBox();
-      this.SourceColumnLabel = new System.Windows.Forms.Label();
-      this.ParentNameText = new System.Windows.Forms.TextBox();
-      this.ParentNameLabel = new System.Windows.Forms.Label();
-      this.KeyTypeCombo = new LJCControls5.LJCItemCombo();
-      this.KeyTypeLabel = new System.Windows.Forms.Label();
-      this.NameText = new System.Windows.Forms.TextBox();
-      this.NameLabel = new System.Windows.Forms.Label();
-      this.AscendingCheck = new System.Windows.Forms.CheckBox();
-      this.SuspendLayout();
+      FormCancelButton = new Button();
+      OKButton = new Button();
+      ClusteredCheck = new CheckBox();
+      TargetTableText = new TextBox();
+      TargetTableLabel = new Label();
+      TargetColumnText = new TextBox();
+      TargetColumnLabel = new Label();
+      SourceColumnText = new TextBox();
+      SourceColumnLabel = new Label();
+      ParentNameText = new TextBox();
+      ParentNameLabel = new Label();
+      KeyTypeCombo = new LJCControls5.LJCItemCombo();
+      KeyTypeLabel = new Label();
+      NameText = new TextBox();
+      NameLabel = new Label();
+      AscendingCheck = new CheckBox();
+      SuspendLayout();
       // 
       // FormCancelButton
       // 
-      this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(578, 407);
-      this.FormCancelButton.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.FormCancelButton.Name = "FormCancelButton";
-      this.FormCancelButton.Size = new System.Drawing.Size(174, 46);
-      this.FormCancelButton.TabIndex = 15;
-      this.FormCancelButton.Text = "Cancel";
-      this.FormCancelButton.UseVisualStyleBackColor = true;
+      FormCancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      FormCancelButton.Location = new Point(578, 356);
+      FormCancelButton.Margin = new Padding(9, 8, 9, 8);
+      FormCancelButton.Name = "FormCancelButton";
+      FormCancelButton.Size = new Size(140, 40);
+      FormCancelButton.TabIndex = 15;
+      FormCancelButton.Text = "Cancel";
+      FormCancelButton.UseVisualStyleBackColor = true;
       // 
       // OKButton
       // 
-      this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(387, 407);
-      this.OKButton.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.OKButton.Name = "OKButton";
-      this.OKButton.Size = new System.Drawing.Size(174, 46);
-      this.OKButton.TabIndex = 14;
-      this.OKButton.Text = "&OK";
-      this.OKButton.UseVisualStyleBackColor = true;
-      this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
+      OKButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      OKButton.Location = new Point(420, 356);
+      OKButton.Margin = new Padding(9, 8, 9, 8);
+      OKButton.Name = "OKButton";
+      OKButton.Size = new Size(140, 40);
+      OKButton.TabIndex = 14;
+      OKButton.Text = "&OK";
+      OKButton.UseVisualStyleBackColor = true;
+      OKButton.Click += OKButton_Click;
       // 
       // ClusteredCheck
       // 
-      this.ClusteredCheck.AutoSize = true;
-      this.ClusteredCheck.Location = new System.Drawing.Point(254, 305);
-      this.ClusteredCheck.Margin = new System.Windows.Forms.Padding(4);
-      this.ClusteredCheck.Name = "ClusteredCheck";
-      this.ClusteredCheck.Size = new System.Drawing.Size(131, 30);
-      this.ClusteredCheck.TabIndex = 12;
-      this.ClusteredCheck.Text = "Clustered";
-      this.ClusteredCheck.UseVisualStyleBackColor = true;
+      ClusteredCheck.AutoSize = true;
+      ClusteredCheck.Location = new Point(218, 276);
+      ClusteredCheck.Margin = new Padding(4);
+      ClusteredCheck.Name = "ClusteredCheck";
+      ClusteredCheck.Size = new Size(112, 29);
+      ClusteredCheck.TabIndex = 12;
+      ClusteredCheck.Text = "Clustered";
+      ClusteredCheck.UseVisualStyleBackColor = true;
       // 
       // TargetTableText
       // 
-      this.TargetTableText.Location = new System.Drawing.Point(254, 210);
-      this.TargetTableText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.TargetTableText.Name = "TargetTableText";
-      this.TargetTableText.Size = new System.Drawing.Size(500, 32);
-      this.TargetTableText.TabIndex = 9;
+      TargetTableText.Location = new Point(218, 190);
+      TargetTableText.Margin = new Padding(9, 8, 9, 8);
+      TargetTableText.Name = "TargetTableText";
+      TargetTableText.Size = new Size(500, 31);
+      TargetTableText.TabIndex = 9;
       // 
       // TargetTableLabel
       // 
-      this.TargetTableLabel.AutoSize = true;
-      this.TargetTableLabel.Location = new System.Drawing.Point(23, 216);
-      this.TargetTableLabel.Name = "TargetTableLabel";
-      this.TargetTableLabel.Size = new System.Drawing.Size(132, 26);
-      this.TargetTableLabel.TabIndex = 8;
-      this.TargetTableLabel.Text = "Target Table";
+      TargetTableLabel.AutoSize = true;
+      TargetTableLabel.Location = new Point(12, 196);
+      TargetTableLabel.Name = "TargetTableLabel";
+      TargetTableLabel.Size = new Size(105, 25);
+      TargetTableLabel.TabIndex = 8;
+      TargetTableLabel.Text = "Target Table";
       // 
       // TargetColumnText
       // 
-      this.TargetColumnText.Location = new System.Drawing.Point(254, 257);
-      this.TargetColumnText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.TargetColumnText.Name = "TargetColumnText";
-      this.TargetColumnText.Size = new System.Drawing.Size(500, 32);
-      this.TargetColumnText.TabIndex = 11;
+      TargetColumnText.Location = new Point(218, 233);
+      TargetColumnText.Margin = new Padding(9, 8, 9, 8);
+      TargetColumnText.Name = "TargetColumnText";
+      TargetColumnText.Size = new Size(500, 31);
+      TargetColumnText.TabIndex = 11;
       // 
       // TargetColumnLabel
       // 
-      this.TargetColumnLabel.AutoSize = true;
-      this.TargetColumnLabel.Location = new System.Drawing.Point(23, 263);
-      this.TargetColumnLabel.Name = "TargetColumnLabel";
-      this.TargetColumnLabel.Size = new System.Drawing.Size(155, 26);
-      this.TargetColumnLabel.TabIndex = 10;
-      this.TargetColumnLabel.Text = "Target Column";
+      TargetColumnLabel.AutoSize = true;
+      TargetColumnLabel.Location = new Point(12, 239);
+      TargetColumnLabel.Name = "TargetColumnLabel";
+      TargetColumnLabel.Size = new Size(127, 25);
+      TargetColumnLabel.TabIndex = 10;
+      TargetColumnLabel.Text = "Target Column";
       // 
       // SourceColumnText
       // 
-      this.SourceColumnText.Location = new System.Drawing.Point(254, 163);
-      this.SourceColumnText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.SourceColumnText.Name = "SourceColumnText";
-      this.SourceColumnText.Size = new System.Drawing.Size(500, 32);
-      this.SourceColumnText.TabIndex = 7;
+      SourceColumnText.Location = new Point(218, 147);
+      SourceColumnText.Margin = new Padding(9, 8, 9, 8);
+      SourceColumnText.Name = "SourceColumnText";
+      SourceColumnText.Size = new Size(500, 31);
+      SourceColumnText.TabIndex = 7;
       // 
       // SourceColumnLabel
       // 
-      this.SourceColumnLabel.AutoSize = true;
-      this.SourceColumnLabel.Location = new System.Drawing.Point(23, 169);
-      this.SourceColumnLabel.Name = "SourceColumnLabel";
-      this.SourceColumnLabel.Size = new System.Drawing.Size(163, 26);
-      this.SourceColumnLabel.TabIndex = 6;
-      this.SourceColumnLabel.Text = "Source Column";
+      SourceColumnLabel.AutoSize = true;
+      SourceColumnLabel.Location = new Point(12, 153);
+      SourceColumnLabel.Name = "SourceColumnLabel";
+      SourceColumnLabel.Size = new Size(133, 25);
+      SourceColumnLabel.TabIndex = 6;
+      SourceColumnLabel.Text = "Source Column";
       // 
       // ParentNameText
       // 
-      this.ParentNameText.Location = new System.Drawing.Point(254, 22);
-      this.ParentNameText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.ParentNameText.Name = "ParentNameText";
-      this.ParentNameText.ReadOnly = true;
-      this.ParentNameText.Size = new System.Drawing.Size(500, 32);
-      this.ParentNameText.TabIndex = 1;
+      ParentNameText.Location = new Point(218, 18);
+      ParentNameText.Margin = new Padding(9, 8, 9, 8);
+      ParentNameText.Name = "ParentNameText";
+      ParentNameText.ReadOnly = true;
+      ParentNameText.Size = new Size(500, 31);
+      ParentNameText.TabIndex = 1;
       // 
       // ParentNameLabel
       // 
-      this.ParentNameLabel.AutoSize = true;
-      this.ParentNameLabel.Location = new System.Drawing.Point(23, 28);
-      this.ParentNameLabel.Name = "ParentNameLabel";
-      this.ParentNameLabel.Size = new System.Drawing.Size(117, 26);
-      this.ParentNameLabel.TabIndex = 0;
-      this.ParentNameLabel.Text = "Data Table";
+      ParentNameLabel.AutoSize = true;
+      ParentNameLabel.Location = new Point(12, 24);
+      ParentNameLabel.Name = "ParentNameLabel";
+      ParentNameLabel.Size = new Size(94, 25);
+      ParentNameLabel.TabIndex = 0;
+      ParentNameLabel.Text = "Data Table";
       // 
       // KeyTypeCombo
       // 
-      this.KeyTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.KeyTypeCombo.Location = new System.Drawing.Point(254, 116);
-      this.KeyTypeCombo.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.KeyTypeCombo.Name = "KeyTypeCombo";
-      this.KeyTypeCombo.Size = new System.Drawing.Size(200, 34);
-      this.KeyTypeCombo.TabIndex = 5;
+      KeyTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+      KeyTypeCombo.Location = new Point(218, 104);
+      KeyTypeCombo.Margin = new Padding(9, 8, 9, 8);
+      KeyTypeCombo.Name = "KeyTypeCombo";
+      KeyTypeCombo.Size = new Size(200, 33);
+      KeyTypeCombo.TabIndex = 5;
       // 
       // KeyTypeLabel
       // 
-      this.KeyTypeLabel.AutoSize = true;
-      this.KeyTypeLabel.Location = new System.Drawing.Point(23, 122);
-      this.KeyTypeLabel.Name = "KeyTypeLabel";
-      this.KeyTypeLabel.Size = new System.Drawing.Size(97, 26);
-      this.KeyTypeLabel.TabIndex = 4;
-      this.KeyTypeLabel.Text = "KeyType";
+      KeyTypeLabel.AutoSize = true;
+      KeyTypeLabel.Location = new Point(12, 110);
+      KeyTypeLabel.Name = "KeyTypeLabel";
+      KeyTypeLabel.Size = new Size(77, 25);
+      KeyTypeLabel.TabIndex = 4;
+      KeyTypeLabel.Text = "KeyType";
       // 
       // NameText
       // 
-      this.NameText.Location = new System.Drawing.Point(254, 69);
-      this.NameText.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-      this.NameText.Name = "NameText";
-      this.NameText.Size = new System.Drawing.Size(500, 32);
-      this.NameText.TabIndex = 3;
+      NameText.Location = new Point(218, 61);
+      NameText.Margin = new Padding(9, 8, 9, 8);
+      NameText.Name = "NameText";
+      NameText.Size = new Size(500, 31);
+      NameText.TabIndex = 3;
       // 
       // NameLabel
       // 
-      this.NameLabel.AutoSize = true;
-      this.NameLabel.Location = new System.Drawing.Point(23, 75);
-      this.NameLabel.Name = "NameLabel";
-      this.NameLabel.Size = new System.Drawing.Size(71, 26);
-      this.NameLabel.TabIndex = 2;
-      this.NameLabel.Text = "Name";
+      NameLabel.AutoSize = true;
+      NameLabel.Location = new Point(12, 67);
+      NameLabel.Name = "NameLabel";
+      NameLabel.Size = new Size(59, 25);
+      NameLabel.TabIndex = 2;
+      NameLabel.Text = "Name";
       // 
       // AscendingCheck
       // 
-      this.AscendingCheck.AutoSize = true;
-      this.AscendingCheck.Location = new System.Drawing.Point(254, 352);
-      this.AscendingCheck.Margin = new System.Windows.Forms.Padding(4);
-      this.AscendingCheck.Name = "AscendingCheck";
-      this.AscendingCheck.Size = new System.Drawing.Size(140, 30);
-      this.AscendingCheck.TabIndex = 13;
-      this.AscendingCheck.Text = "Ascending";
-      this.AscendingCheck.UseVisualStyleBackColor = true;
+      AscendingCheck.AutoSize = true;
+      AscendingCheck.Location = new Point(218, 315);
+      AscendingCheck.Margin = new Padding(4);
+      AscendingCheck.Name = "AscendingCheck";
+      AscendingCheck.Size = new Size(121, 29);
+      AscendingCheck.TabIndex = 13;
+      AscendingCheck.Text = "Ascending";
+      AscendingCheck.UseVisualStyleBackColor = true;
       // 
       // DataKeyDetail
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-      this.ClientSize = new System.Drawing.Size(778, 467);
-      this.Controls.Add(this.AscendingCheck);
-      this.Controls.Add(this.ClusteredCheck);
-      this.Controls.Add(this.TargetTableText);
-      this.Controls.Add(this.TargetTableLabel);
-      this.Controls.Add(this.TargetColumnText);
-      this.Controls.Add(this.TargetColumnLabel);
-      this.Controls.Add(this.SourceColumnText);
-      this.Controls.Add(this.SourceColumnLabel);
-      this.Controls.Add(this.ParentNameText);
-      this.Controls.Add(this.ParentNameLabel);
-      this.Controls.Add(this.KeyTypeCombo);
-      this.Controls.Add(this.KeyTypeLabel);
-      this.Controls.Add(this.NameText);
-      this.Controls.Add(this.NameLabel);
-      this.Controls.Add(this.FormCancelButton);
-      this.Controls.Add(this.OKButton);
-      this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-      this.Margin = new System.Windows.Forms.Padding(4);
-      this.MaximizeBox = false;
-      this.MinimizeBox = false;
-      this.Name = "DataKeyDetail";
-      this.Text = "DataKey Detail";
-      this.Load += new System.EventHandler(this.DataKeyDetail_Load);
-      this.ResumeLayout(false);
-      this.PerformLayout();
+      AutoScaleDimensions = new SizeF(144F, 144F);
+      AutoScaleMode = AutoScaleMode.Dpi;
+      ClientSize = new Size(733, 408);
+      Controls.Add(AscendingCheck);
+      Controls.Add(ClusteredCheck);
+      Controls.Add(TargetTableText);
+      Controls.Add(TargetTableLabel);
+      Controls.Add(TargetColumnText);
+      Controls.Add(TargetColumnLabel);
+      Controls.Add(SourceColumnText);
+      Controls.Add(SourceColumnLabel);
+      Controls.Add(ParentNameText);
+      Controls.Add(ParentNameLabel);
+      Controls.Add(KeyTypeCombo);
+      Controls.Add(KeyTypeLabel);
+      Controls.Add(NameText);
+      Controls.Add(NameLabel);
+      Controls.Add(FormCancelButton);
+      Controls.Add(OKButton);
+      Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      FormBorderStyle = FormBorderStyle.FixedDialog;
+      Margin = new Padding(4);
+      MaximizeBox = false;
+      MinimizeBox = false;
+      Name = "DataKeyDetail";
+      Text = "DataKey Detail";
+      Load += DataKeyDetail_Load;
+      ResumeLayout(false);
+      PerformLayout();
 
     }
 

@@ -124,9 +124,6 @@ namespace LJCDataUtilityDAL5
     }
     private string? _ConstraintName;
 
-    // Update ChangedNames.Add() statements to "Property" constant
-    // if property was renamed.
-
     // Gets or sets the DBName value.
     /// <include file='Doc/TableKey.xml'
     ///  path='members/DBName/*'/>
