@@ -36,6 +36,7 @@ namespace LJCDataUtility5
       list.TableEdit.Click += TableEdit_Click;
       list.TableDelete.Click += TableDelete_Click;
       list.TableRefresh.Click += TableRefresh_Click;
+      list.TableUpdate.Click += TableUpdate_Click;
       list.TableExit.Click += list.Exit_Click;
 
       // Grid events.
@@ -218,14 +219,7 @@ namespace LJCDataUtility5
       var retRow = TableGrid.LJCRowAdd();
       if (retRow != null)
       {
-        var dbColumnName = DataUtilTable.ColumnDbId;
-        var dbId = dataValues.LJCInt16(dbColumnName);
-        retRow.LJCSetInt16(dbColumnName, dbId);
-
-        var idColumnName = DataUtilTable.ColumnId;
-        var id = dataValues.LJCInt64(idColumnName);
-        retRow.LJCSetInt64(idColumnName, id);
-
+        SetStoredValues(retRow, dataValues);
         retRow.LJCSetValues(dataValues);
       }
       return retRow;
@@ -293,12 +287,31 @@ namespace LJCDataUtility5
       //ParentObject.TableHeading.Enabled = true;
     }
 
-    // Sets the row stored values.
+    // Sets the row stored values from the data object.
     private static void SetStoredValues(LJCGridRow row, DataUtilTable data)
     {
       row.LJCSetInt16(DataUtilTable.ColumnDbId, data.DbId);
       row.LJCSetInt64(DataUtilTable.ColumnId, data.Id);
       row.LJCSetString(DataUtilTable.ColumnName, data.Name);
+    }
+
+    // Sets the row stored values from the data values.
+    private void SetStoredValues(LJCGridRow row, LJCDataValues dataValues)
+    {
+      var columnName = DataUtilTable.ColumnDbId;
+      var dbId = dataValues.LJCInt16(columnName);
+      row.LJCSetInt16(columnName, dbId);
+
+      columnName = DataUtilTable.ColumnId;
+      var id = dataValues.LJCInt64(columnName);
+      row.LJCSetInt64(columnName, id);
+
+      columnName = DataUtilTable.ColumnName;
+      var name = dataValues.LJCString(columnName);
+      if (name != null)
+      {
+        row.LJCSetString(columnName, name);
+      }
     }
     #endregion
 
@@ -485,6 +498,16 @@ namespace LJCDataUtility5
     }
     #endregion
 
+    #region Custom Action Methods
+
+    // Handles the "Update From Table" menu event.
+    internal void UpdateData()
+    {
+      var updateData = new UpdateData(ParentObject);
+      updateData.SetData();
+    }
+    #endregion
+
     #region Action Event Handlers
 
     // Handles the New menu item event.
@@ -509,6 +532,13 @@ namespace LJCDataUtility5
     private void TableRefresh_Click(object? sender, EventArgs e)
     {
       Refresh();
+    }
+    #endregion
+
+    #region Custom Acton Event Handlers
+    private void TableUpdate_Click(object? sender, EventArgs e)
+    {
+      UpdateData();
     }
     #endregion
 

@@ -28,89 +28,89 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.FormCancelButton = new System.Windows.Forms.Button();
-      this.OKButton = new System.Windows.Forms.Button();
-      this.DescriptionText = new System.Windows.Forms.TextBox();
-      this.DescriptionLabel = new System.Windows.Forms.Label();
-      this.NameText = new System.Windows.Forms.TextBox();
-      this.NameLabel = new System.Windows.Forms.Label();
-      this.SuspendLayout();
+      FormCancelButton = new Button();
+      OKButton = new Button();
+      DescriptionText = new TextBox();
+      DescriptionLabel = new Label();
+      NameText = new TextBox();
+      NameLabel = new Label();
+      SuspendLayout();
       // 
       // FormCancelButton
       // 
-      this.FormCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.FormCancelButton.Location = new System.Drawing.Point(578, 124);
-      this.FormCancelButton.Margin = new System.Windows.Forms.Padding(6);
-      this.FormCancelButton.Name = "FormCancelButton";
-      this.FormCancelButton.Size = new System.Drawing.Size(174, 46);
-      this.FormCancelButton.TabIndex = 5;
-      this.FormCancelButton.Text = "Cancel";
-      this.FormCancelButton.UseVisualStyleBackColor = true;
+      FormCancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      FormCancelButton.Location = new Point(553, 104);
+      FormCancelButton.Margin = new Padding(6);
+      FormCancelButton.Name = "FormCancelButton";
+      FormCancelButton.Size = new Size(140, 40);
+      FormCancelButton.TabIndex = 5;
+      FormCancelButton.Text = "Cancel";
+      FormCancelButton.UseVisualStyleBackColor = true;
       // 
       // OKButton
       // 
-      this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.OKButton.Location = new System.Drawing.Point(387, 124);
-      this.OKButton.Margin = new System.Windows.Forms.Padding(6);
-      this.OKButton.Name = "OKButton";
-      this.OKButton.Size = new System.Drawing.Size(174, 46);
-      this.OKButton.TabIndex = 4;
-      this.OKButton.Text = "&OK";
-      this.OKButton.UseVisualStyleBackColor = true;
-      this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
+      OKButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      OKButton.Location = new Point(401, 104);
+      OKButton.Margin = new Padding(6);
+      OKButton.Name = "OKButton";
+      OKButton.Size = new Size(140, 40);
+      OKButton.TabIndex = 4;
+      OKButton.Text = "&OK";
+      OKButton.UseVisualStyleBackColor = true;
+      OKButton.Click += OKButton_Click;
       // 
       // DescriptionText
       // 
-      this.DescriptionText.Location = new System.Drawing.Point(254, 69);
-      this.DescriptionText.Margin = new System.Windows.Forms.Padding(6);
-      this.DescriptionText.Name = "DescriptionText";
-      this.DescriptionText.Size = new System.Drawing.Size(500, 32);
-      this.DescriptionText.TabIndex = 3;
+      DescriptionText.Location = new Point(193, 61);
+      DescriptionText.Margin = new Padding(6);
+      DescriptionText.Name = "DescriptionText";
+      DescriptionText.Size = new Size(500, 31);
+      DescriptionText.TabIndex = 3;
       // 
       // DescriptionLabel
       // 
-      this.DescriptionLabel.AutoSize = true;
-      this.DescriptionLabel.Location = new System.Drawing.Point(23, 75);
-      this.DescriptionLabel.Name = "DescriptionLabel";
-      this.DescriptionLabel.Size = new System.Drawing.Size(121, 26);
-      this.DescriptionLabel.TabIndex = 2;
-      this.DescriptionLabel.Text = "Description";
+      DescriptionLabel.AutoSize = true;
+      DescriptionLabel.Location = new Point(12, 67);
+      DescriptionLabel.Name = "DescriptionLabel";
+      DescriptionLabel.Size = new Size(102, 25);
+      DescriptionLabel.TabIndex = 2;
+      DescriptionLabel.Text = "Description";
       // 
       // NameText
       // 
-      this.NameText.Location = new System.Drawing.Point(254, 22);
-      this.NameText.Margin = new System.Windows.Forms.Padding(6);
-      this.NameText.Name = "NameText";
-      this.NameText.Size = new System.Drawing.Size(500, 32);
-      this.NameText.TabIndex = 1;
+      NameText.Location = new Point(193, 18);
+      NameText.Margin = new Padding(6);
+      NameText.Name = "NameText";
+      NameText.Size = new Size(500, 31);
+      NameText.TabIndex = 1;
       // 
       // NameLabel
       // 
-      this.NameLabel.AutoSize = true;
-      this.NameLabel.Location = new System.Drawing.Point(23, 28);
-      this.NameLabel.Name = "NameLabel";
-      this.NameLabel.Size = new System.Drawing.Size(71, 26);
-      this.NameLabel.TabIndex = 0;
-      this.NameLabel.Text = "Name";
+      NameLabel.AutoSize = true;
+      NameLabel.Location = new Point(12, 24);
+      NameLabel.Name = "NameLabel";
+      NameLabel.Size = new Size(59, 25);
+      NameLabel.TabIndex = 0;
+      NameLabel.Text = "Name";
       // 
       // DataModuleDetail
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-      this.ClientSize = new System.Drawing.Size(778, 184);
-      this.Controls.Add(this.DescriptionText);
-      this.Controls.Add(this.DescriptionLabel);
-      this.Controls.Add(this.NameText);
-      this.Controls.Add(this.NameLabel);
-      this.Controls.Add(this.FormCancelButton);
-      this.Controls.Add(this.OKButton);
-      this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-      this.Name = "DataModuleDetail";
-      this.Text = "DataModule Detai";
-      this.Load += new System.EventHandler(this.DataModuleDetail_Load);
-      this.ResumeLayout(false);
-      this.PerformLayout();
+      AutoScaleDimensions = new SizeF(144F, 144F);
+      AutoScaleMode = AutoScaleMode.Dpi;
+      ClientSize = new Size(706, 155);
+      Controls.Add(DescriptionText);
+      Controls.Add(DescriptionLabel);
+      Controls.Add(NameText);
+      Controls.Add(NameLabel);
+      Controls.Add(FormCancelButton);
+      Controls.Add(OKButton);
+      Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      FormBorderStyle = FormBorderStyle.FixedDialog;
+      Name = "DataModuleDetail";
+      Text = "DataModule Detai";
+      Load += DataModuleDetail_Load;
+      ResumeLayout(false);
+      PerformLayout();
 
     }
 

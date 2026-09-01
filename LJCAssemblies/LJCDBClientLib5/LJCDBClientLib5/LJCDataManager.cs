@@ -453,15 +453,10 @@ namespace LJCDBClientLib5
       LJCDBResult? retValue = null;
 
       // ToDo: Why is this needed when DbDataAccess.TableNames also adds it?
-      if (null == DataDefinition)
+      if (!LJC.HasListItems(DataDefinition))
       {
-        //DataDefinition = new LJCDataColumns()
-        //{
-        //  new LJCDataColumn("TABLE_NAME", propertyName: "Name")
-        //};
         DataDefinition =
         [
-          //new LJCDataColumn("TABLE_NAME", propertyName: "Name")
           new LJCDataColumn("TABLE_NAME", columnName: "Name")
         ];
       }
@@ -470,7 +465,8 @@ namespace LJCDBClientLib5
         , null, DataConfigName, SchemaName);
       if (DataDefinition != null)
       {
-        var propertyNames = new List<string>() { "Name" };
+        //var propertyNames = new List<string>() { "Name" };
+        var propertyNames = new List<string>() { "TABLE_NAME" };
         includedColumns = DataDefinition.LJCColumns(propertyNames);
         Request.Columns = includedColumns?.Clone();
       }

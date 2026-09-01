@@ -44,7 +44,6 @@ namespace LJCDataUtilityDAL5
     }
     #endregion
 
-
     #region Constructors
 
     // Initializes an object instance.

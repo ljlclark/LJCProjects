@@ -28,6 +28,21 @@ namespace LJCDBMessage5
       return retValue;
     }
 
+    // Adds a list of names.
+    /// <include file='Doc/ChangedNames.xml'
+    ///  path='items/AddNames/*'/>
+    public void AddNames(List<string> propertyNames)
+    {
+      foreach (string propertyName in propertyNames)
+      {
+        // Add value if not already added.
+        if (null == FindName(propertyName))
+        {
+          Add(propertyName);
+        }
+      }
+    }
+
     // Returns the existing property name or null if it does not exist.
     /// <include file='Doc/ChangedNames.xml'
     ///  path='items/FindName/*'/>
