@@ -218,8 +218,17 @@ namespace LJCDataAccess5
               {
                 if (command != null)
                 {
-                  ProviderFactory.OpenConnection();
-                  retValue = command.ExecuteNonQuery();
+                  try
+                  {
+                    ProviderFactory.OpenConnection();
+                    retValue = command.ExecuteNonQuery();
+                  }
+                  catch (Exception e)
+                  {
+                    string message = LJCNetString.ExceptionString(e);
+                    message += "\r\n" + sql;
+                    ErrorText = message;
+                  }
                 }
               }
             }
@@ -654,6 +663,11 @@ namespace LJCDataAccess5
       set { mDatabaseName = LJCNetString.InitString(value); }
     }
     private string? mDatabaseName;
+
+    // Contains the error text.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ErrorText/*'/>
+    public string? ErrorText { get; set; }
 
     // Gets a reference to the
     /// <include path='items/ProviderFactory/*' file='Doc/DataAccess.xml'/>

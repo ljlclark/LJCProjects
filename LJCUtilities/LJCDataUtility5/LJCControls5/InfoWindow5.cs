@@ -1,8 +1,11 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // InfoWindow5.cs
+using LJCDataAccess5;
+using LJCDataAccessConfig5;
 using LJCNetCommon5;
 using System.ComponentModel;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LJCControls5
 {
@@ -17,7 +20,6 @@ namespace LJCControls5
     public InfoWindow()
     {
       // Initialize properties.
-      LJCIsExecute = false;
     }
 
     // Initializes an object instance with the supplied values.
@@ -62,14 +64,6 @@ namespace LJCControls5
       return InfoRTBox.Text;
     }
 
-    // Gets the Contents.
-    /// <include file='Doc/InfoWindow.xml'
-    ///  path='items/Selected/*'/>
-    public string Selected()
-    {
-      return InfoRTBox.SelectedText;
-    }
-
     // Sets the execute button visibility.
     /// <include file='Doc/InfoWindow.xml'
     ///  path='items/ShowExecuteButton/*'/>
@@ -89,33 +83,30 @@ namespace LJCControls5
     }
     #endregion
 
-    #region Event Methods
-
-    // Fires the OnClose event.
-    /// <include file='Doc/InfoWindow.xml'
-    ///  path='items/OnClose/*'/>
-    protected void LJCOnClose()
-    {
-      LJCCloseEvent?.Invoke(this, new EventArgs());
-    }
-
-    // Fires the OnClosing event.
-    /// <include file='Doc/InfoWindow.xml'
-    ///  path='items/OnClosing/*'/>
-    protected override void OnClosing(CancelEventArgs e)
-    {
-      base.OnClosing(e);
-      LJCOnClose();
-    }
-    #endregion
-
     #region Control Event Handlers
 
     // Handles the ExecuteButton click event.
     private void ExecuteButton_Click(object sender, EventArgs e)
     {
-      LJCIsExecute = true;
-      Close();
+      var text = InfoRTBox.SelectedText;
+      if (!LJC.HasText(text))
+      {
+        text = Text;
+      }
+
+      var connectionString = DataConfig.ConnectionString(trusted: true);
+      var providerName = LJCDataConfig.ProviderName();
+      if (connectionString != null
+        && LJC.HasText(text))
+      {
+        var dataAccess = new LJCDataAccess(connectionString, providerName);
+        dataAccess.ExecuteScriptText(text);
+        var errorText = dataAccess.ErrorText;
+        if (LJC.HasText(errorText))
+        {
+          MessageBox.Show(errorText);
+        }
+      }
     }
 
     // Handles the OKButton click event.
@@ -126,6 +117,22 @@ namespace LJCControls5
     #endregion
 
     #region Properties
+
+    /// <include file='Doc/InfoWindow.xml'
+    ///  path='items/DataConfig/*'/>
+    public LJCDataConfig DataConfig
+    {
+      get => _DataConfig;
+      set
+      {
+        if (value != null)
+        {
+          _DataConfig = value;
+          ExecuteButton.Visible = true;
+        }
+      }
+    }
+    private LJCDataConfig _DataConfig = null!;
 
     // Gets or sets the InfoWindow contents.
     /// <include file='Doc/InfoWindow.xml'
@@ -139,11 +146,6 @@ namespace LJCControls5
       }
     }
     private string? _LJCContents = null!;
-
-    // Gets or sets the IsExecute value.
-    /// <include file='Doc/InfoWindow.xml'
-    ///  path='items/LJCIsExecute/*'/>
-    public bool LJCIsExecute { get; set; }
 
     // Gets or sets the form Title text.
     /// <include file='Doc/InfoWindow.xml'
@@ -159,15 +161,6 @@ namespace LJCControls5
 
     // The form location.
     private Point? LJCLocation { get; set; }
-    #endregion
-
-    #region Class Data
-
-    // The Close event.
-    /// <include file='Doc/InfoWindow.xml'
-    ///  path='items/LJCCloseEvent/*'/>
-    public event EventHandler<EventArgs> LJCCloseEvent = null!;
-
     #endregion
   }
 }

@@ -547,11 +547,13 @@ namespace LJCDataUtility5
 
     #region Custom Action Event Handlers
 
+    // Handles the Update Data menu item event.
     private void TableUpdate_Click(object? sender, EventArgs e)
     {
       UpdateData();
     }
 
+    // Handles the Create Table menu item event.
     private void TableCreate_Click(object? sender, EventArgs e)
     {
       CreateTable();
@@ -615,6 +617,8 @@ namespace LJCDataUtility5
     {
       if (e.Button == MouseButtons.Right)
       {
+        TableGrid.Select();
+
         // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         if (TableGrid.LJCIsDifferentRow(e))
         {

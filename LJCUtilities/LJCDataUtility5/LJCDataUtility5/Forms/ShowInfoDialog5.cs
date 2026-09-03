@@ -2,31 +2,41 @@
 // Licensed under the MIT License.
 // ShowInfoDialog5.cs
 using LJCControls5;
+using LJCDataAccessConfig5;
 
 namespace LJCDataUtility5
 {
-  /// <summary>Common DataUtility Methods.</summary>
+  // The ShowInfo Dialog.
+  /// <include file='Doc/ShowInfoDialog'
+  ///  path='members/ShowInfoDialog/*'/>
   public class ShowInfoDialog
   {
     #region Constructor Methods
 
-    /// <summary>Initializes an object instance.</summary>
+    // Initializes an object instance.
+    /// <include file='ShowInfoDialog'
+    ///  path='members/Constructor/*'/>
     public ShowInfoDialog()
     {
-      ShowExecuteButton = false;
     }
 
-    /// <summary>Initializes an object instance.</summary>
-    public ShowInfoDialog(bool showExecuteButton) : this()
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/ShowInfoDialog'
+    ///  path='members/ParamConstructor/*'/>
+    public ShowInfoDialog(LJCDataConfig? dataConfig) : this()
     {
-      ShowExecuteButton = showExecuteButton;
+      if (dataConfig != null)
+      {
+        DataConfig = dataConfig;
+      }
     }
-
     #endregion
 
-    #region Functions
+    #region Methods
 
-    /// <summary>Show the info window.</summary>
+    // Show the info dialog.
+    /// <include file='Doc/ShowInfoDialog'
+    ///  path='members/ShowInfo/*'/>
     public ControlValue ShowInfo(string contents, string text
       , ControlValue? controlValue = null)
     {
@@ -38,13 +48,16 @@ namespace LJCDataUtility5
         location = new Point(retValue.Left, retValue.Top);
       }
       var infoWindow = new InfoWindow(text, contents, location);
+      if (DataConfig != null)
+      {
+        infoWindow.DataConfig = DataConfig;
+      }
+
       if (retValue != null)
       {
         infoWindow.Height = retValue.Height;
         infoWindow.Width = retValue.Width;
       }
-      infoWindow.ShowExecuteButton(ShowExecuteButton);
-      infoWindow.LJCCloseEvent += InfoWindow_LJCCloseEvent;
       infoWindow.ShowDialog();
       retValue = new ControlValue()
       {
@@ -58,25 +71,12 @@ namespace LJCDataUtility5
     }
     #endregion
 
-    private void InfoWindow_LJCCloseEvent(object? sender, System.EventArgs e)
-    {
-      if (sender != null)
-      {
-        var infoWindow = (InfoWindow)sender;
-        if (infoWindow.LJCIsExecute)
-        {
-          Selected = infoWindow.Selected();
-          IsExecute = true;
-        }
-      }
-    }
+    #region Properties
 
-    /// <summary>Gets or sets the IsExecute flag.</summary>
-    public bool IsExecute { get; set; }
-
-    public string Selected { get; set; }
-
-    /// <summary>Gets or sets the show "Execute" button flag.</summary>
-    public bool ShowExecuteButton { get; set; }
+    // Gets or sets the data config object.
+    /// <include file='Doc/ShowInfoDialog'
+    ///  path='members/DataConfig/*'/>
+    public LJCDataConfig DataConfig { get; set; } = null!;
+    #endregion
   }
 }

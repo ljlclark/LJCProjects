@@ -22,6 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="LJCDataAccess5">
+      <HintPath>..\External\LJCDataAccess5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDataAccessConfig5">
+      <HintPath>..\External\LJCDataAccessConfig5.dll</HintPath>
+    </Reference>
     <Reference Include="LJCNetCommon5">
       <HintPath>..\External\LJCNetCommon5.dll</HintPath>
     </Reference>
