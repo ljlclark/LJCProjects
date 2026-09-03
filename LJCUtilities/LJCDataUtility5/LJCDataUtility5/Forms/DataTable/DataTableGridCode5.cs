@@ -36,7 +36,10 @@ namespace LJCDataUtility5
       list.TableEdit.Click += TableEdit_Click;
       list.TableDelete.Click += TableDelete_Click;
       list.TableRefresh.Click += TableRefresh_Click;
+
       list.TableUpdate.Click += TableUpdate_Click;
+      list.TableCreate.Click += TableCreate_Click;
+
       list.TableExit.Click += list.Exit_Click;
 
       // Grid events.
@@ -506,6 +509,13 @@ namespace LJCDataUtility5
       var updateData = new UpdateData(ParentObject);
       updateData.SetData();
     }
+
+    // Handles the "Create Table" menu event.
+    internal void CreateTable()
+    {
+      var createTable = new CreateTable(ParentObject);
+      createTable.CreateTableProc();
+    }
     #endregion
 
     #region Action Event Handlers
@@ -535,10 +545,16 @@ namespace LJCDataUtility5
     }
     #endregion
 
-    #region Custom Acton Event Handlers
+    #region Custom Action Event Handlers
+
     private void TableUpdate_Click(object? sender, EventArgs e)
     {
       UpdateData();
+    }
+
+    private void TableCreate_Click(object? sender, EventArgs e)
+    {
+      CreateTable();
     }
     #endregion
 

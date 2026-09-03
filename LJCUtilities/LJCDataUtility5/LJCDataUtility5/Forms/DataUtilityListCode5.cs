@@ -235,7 +235,7 @@ namespace LJCDataUtility5
     internal DataTableGridCode TableGridCode { get; set; } = null!;
 
     // Gets or sets the KeyGridCode reference.
-    private DataKeyGridCode KeyGridCode { get; set; } = null!;
+    internal DataKeyGridCode KeyGridCode { get; set; } = null!;
 
     // Gets or sets the control values reference.
     private ControlValues? ControlValues { get; set; }

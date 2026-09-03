@@ -45,6 +45,7 @@ namespace LJCDataUtility5
       toolStripSeparator2 = new ToolStripSeparator();
       TableRefresh = new ToolStripMenuItem();
       toolStripSeparator3 = new ToolStripSeparator();
+      TableUpdate = new ToolStripMenuItem();
       TableExit = new ToolStripMenuItem();
       ColumnsSplit = new SplitContainer();
       ColumnTabs = new LJCTabControl(components);
@@ -91,7 +92,8 @@ namespace LJCDataUtility5
       ModuleLabel = new Label();
       ConfigLabel = new Label();
       ConfigCombo = new LJCItemCombo();
-      TableUpdate = new ToolStripMenuItem();
+      toolStripSeparator13 = new ToolStripSeparator();
+      TableCreate = new ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)MainSplit).BeginInit();
       MainSplit.Panel1.SuspendLayout();
       MainSplit.Panel2.SuspendLayout();
@@ -168,9 +170,9 @@ namespace LJCDataUtility5
       // TableMenu
       // 
       TableMenu.ImageScalingSize = new Size(24, 24);
-      TableMenu.Items.AddRange(new ToolStripItem[] { Table, TableNew, TableEdit, toolStripSeparator1, TableDelete, toolStripSeparator2, TableRefresh, toolStripSeparator3, TableUpdate, TableExit });
+      TableMenu.Items.AddRange(new ToolStripItem[] { Table, TableNew, TableEdit, toolStripSeparator1, TableDelete, toolStripSeparator2, TableRefresh, toolStripSeparator3, TableUpdate, TableCreate, toolStripSeparator13, TableExit });
       TableMenu.Name = "ColumnMenu";
-      TableMenu.Size = new Size(241, 279);
+      TableMenu.Size = new Size(241, 318);
       // 
       // Table
       // 
@@ -221,6 +223,12 @@ namespace LJCDataUtility5
       // 
       toolStripSeparator3.Name = "toolStripSeparator3";
       toolStripSeparator3.Size = new Size(237, 6);
+      // 
+      // TableUpdate
+      // 
+      TableUpdate.Name = "TableUpdate";
+      TableUpdate.Size = new Size(240, 32);
+      TableUpdate.Text = "Update From Table";
       // 
       // TableExit
       // 
@@ -605,11 +613,16 @@ namespace LJCDataUtility5
       ConfigCombo.Size = new Size(230, 33);
       ConfigCombo.TabIndex = 3;
       // 
-      // TableUpdate
+      // toolStripSeparator13
       // 
-      TableUpdate.Name = "TableUpdate";
-      TableUpdate.Size = new Size(240, 32);
-      TableUpdate.Text = "Update From Table";
+      toolStripSeparator13.Name = "toolStripSeparator13";
+      toolStripSeparator13.Size = new Size(237, 6);
+      // 
+      // TableCreate
+      // 
+      TableCreate.Name = "TableCreate";
+      TableCreate.Size = new Size(240, 32);
+      TableCreate.Text = "Create Table";
       // 
       // DataUtilityList
       // 
@@ -707,5 +720,7 @@ namespace LJCDataUtility5
     private ContextMenuStrip KeyTabMenu;
     private ToolStripMenuItem KeyTabMove;
     internal ToolStripMenuItem TableUpdate;
+    internal ToolStripMenuItem TableCreate;
+    private ToolStripSeparator toolStripSeparator13;
   }
 }

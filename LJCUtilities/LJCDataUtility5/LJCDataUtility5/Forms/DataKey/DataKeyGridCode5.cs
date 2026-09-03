@@ -134,6 +134,63 @@ namespace LJCDataUtility5
       }
       return retKeyName;
     }
+
+    // Retrieve the Foreign keys.
+    internal DataKeys? ForeignKeys()
+    {
+      DataKeys? retKeys = null;
+
+      var keyManager = Managers.DataKeyManager;
+      if (keyManager != null)
+      {
+        var tableGridCode = ParentObject.TableGridCode;
+        var tableId = tableGridCode.RowId(out short tableDbId);
+        retKeys = keyManager.LoadWithParentType(tableDbId, tableId
+          , (int)KeyType.Foreign);
+      }
+      return retKeys;
+    }
+
+    // Retrieve the Primary key column list.
+    internal string? PrimaryKeyColumns()
+    {
+      string? retList = null;
+
+      DataKey? dataKey = null;
+      var keyManager = Managers.DataKeyManager;
+      if (keyManager != null)
+      {
+        var tableGridCode = ParentObject.TableGridCode;
+        var tableId = tableGridCode.RowId(out short TableDbId);
+        dataKey = keyManager.RetrieveWithParentType(TableDbId, tableId
+          , (int)KeyType.Primary);
+      }
+      if (dataKey != null)
+      {
+        retList = dataKey.SourceColumnName;
+      }
+      return retList;
+    }
+
+    // Retrieve the Unique key column list.
+    internal string? UniqueKeyColumns()
+    {
+      string? retList = null;
+
+      var keyManager = Managers.DataKeyManager;
+      if (keyManager != null)
+      {
+        var tableGridCode = ParentObject.TableGridCode;
+        long tableId = tableGridCode.RowId(out short tableDbId);
+        var dataKey = keyManager.RetrieveWithParentType(tableDbId, tableId
+          , (int)KeyType.Unique);
+        if (dataKey != null)
+        {
+          retList = dataKey.SourceColumnName;
+        }
+      }
+      return retList;
+    }
     #endregion
 
     #region Data Methods

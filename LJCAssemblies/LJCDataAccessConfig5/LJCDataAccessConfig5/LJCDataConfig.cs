@@ -108,7 +108,8 @@ namespace LJCDataAccessConfig5
 
     /// <include file='Doc/LJCDataConfig.xml'
     ///  path='members/ConnectionString/*'/>
-    public string? ConnectionString(string? connectionType = "SQLServer")
+    public string? ConnectionString(string? connectionType = "SQLServer"
+      , bool trusted = false)
     {
       LJCConnectionTemplates connectionTemplates;
       LJCConnectionTemplate connectionTemplate;
@@ -117,14 +118,15 @@ namespace LJCDataAccessConfig5
       connectionTemplates = [];
       connectionTemplates.LoadData();
       connectionTemplate = connectionTemplates.Retrieve(connectionType);
-      retValue = ConnectionStringFromTemplate(connectionTemplate?.Template);
+      retValue = ConnectionStringFromTemplate(connectionTemplate?.Template, trusted);
       return retValue;
     }
 
     // Creates the populated connection string from the template text.
     /// <include file='Doc/LJCDataConfig.xml'
     ///  path='members/ConnectionStringFromTemplate/*'/>
-    public string? ConnectionStringFromTemplate(string? templateText)
+    public string? ConnectionStringFromTemplate(string? templateText
+      , bool trusted = false)
     {
       DbConnectionStringBuilder connectionBuilder;
       string? replacementValue;
@@ -163,6 +165,10 @@ namespace LJCDataAccessConfig5
           }
         }
         retValue = connectionBuilder.ToString();
+        if (trusted)
+        {
+          retValue += ";TrustServerCertificate=True;";
+        }
       }
       return retValue;
     }
@@ -170,13 +176,13 @@ namespace LJCDataAccessConfig5
     // Creates the SQL integrated connection string from an internal value.
     /// <include file='Doc/LJCDataConfig.xml'
     ///  path='items/SQLIntegratedConnectionString/*'/>
-    public string? SQLIntegratedConnectionString()
+    public string? SQLIntegratedConnectionString(bool trusted = false)
     {
       string retValue;
 
       string connectionText = "Data Source={DbServer}; Initial Catalog={Database}; "
         + "Integrated Security=True";
-      retValue = ConnectionStringFromTemplate(connectionText);
+      retValue = ConnectionStringFromTemplate(connectionText, trusted);
       return retValue;
     }
     #endregion

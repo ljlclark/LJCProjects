@@ -32,7 +32,7 @@ namespace LJCDBDataAccess5
     {
       mDataAccess = new LJCDataAccess();
       DataConfigName = dataConfigName;
-      GetConfigValues(DataConfigName);
+      GetConfigValues(DataConfigName, true);
     }
 
     // Initializes an object instance with the supplied values.
@@ -477,13 +477,11 @@ namespace LJCDBDataAccess5
     // Sets the LJCDataConfig values.
     /// <include file='Doc/DbDataAccess.xml'
     ///  path='items/GetConfigValues/*'/>
-    private void GetConfigValues(string dataConfigName)
+    private void GetConfigValues(string dataConfigName, bool trusted = false)
     {
       LJCDataConfig dataConfig = GetLJCDataConfig(dataConfigName);
       DatabaseName = dataConfig.Database;
-      ConnectionString = dataConfig.ConnectionString(dataConfig.ConnectionType);
-      // ?
-      ConnectionString += ";TrustServerCertificate=True;";
+      ConnectionString = dataConfig.ConnectionString(dataConfig.ConnectionType, trusted);
       mDataAccess.ConnectionString = ConnectionString;
       ProviderName = LJCDataConfig.ProviderName(dataConfig.ConnectionType);
     }

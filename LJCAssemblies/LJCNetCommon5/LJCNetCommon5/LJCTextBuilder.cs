@@ -13,7 +13,7 @@ namespace LJCNetCommon5
     #region Static Methods
 
     // Gets the text length if not null.
-    private static int TextLength(string text)
+    private static int TextLength(string? text)
     {
       int retLength = 0;
       if (text != null)
@@ -104,7 +104,7 @@ namespace LJCNetCommon5
     // Adds text without modification.
     /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/AddText/*'/>
-    public void AddText(string text)
+    public void AddText(string? text)
     {
       if (TextLength(text) > 0)
       {
