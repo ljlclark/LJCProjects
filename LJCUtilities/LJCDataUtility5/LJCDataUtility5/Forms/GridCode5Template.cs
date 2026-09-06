@@ -1,20 +1,32 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataKeyGridCode5.cs
+// #SectionBegin
+// #Value _FileName_ DataColumnGridCode5
+// #Value _Namespace_ LJCDataUtility5
+// #Value _ParentObject_ DataUtilityList
+// #Value _ClassName_ DataColumnGridCode
+// #Value _ParentDataObjectName_ DataUtilTable
+// #Value _ParentDataObjectShortName_ DataTable
+// #Value _ParentGridName_ Table
+// #Value _DataObjectName_ DataUtilColumn
+// #Value _DataObjectShortName_ DataColumn
+// #Value _GridName_ Column
+
+// _FileName_.cs
 using LJCControls5;
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
-using static LJCDataUtility5.DataUtilityList;
+//using static _Namespace_._ParentObject_;
 
 namespace LJCDataUtility5
 {
-  // Provides methods for the Key grid.
-  internal class DataKeyGridCode
+  // Provides methods for the _GridName_ grid.
+  internal class _ClassName_
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    internal DataKeyGridCode(DataUtilityList parentObject, short dbGroupId)
+    internal _ClassName_(_ParentObject_ parentObject, short dbGroupId)
     {
       // Initialize property values.
       ParentObject = parentObject;
@@ -22,9 +34,10 @@ namespace LJCDataUtility5
       DbGroupId = dbGroupId;
 
       // Set control code vars.
-      TableGrid = ParentObject.TableGrid;
-      KeyGrid = ParentObject.KeyGrid;
-      KeyMenu = ParentObject.KeyMenu;
+      var parentGridCode = ParentObject._ParentGridName_GridCode;
+      ParentGrid = ParentObject._ParentGridName_Grid;
+      Grid = ParentObject._GridName_Grid;
+      GridMenu = ParentObject._GridName_Menu;
 
       // Set Data vars.
       Managers = ParentObject.Managers;
@@ -32,19 +45,19 @@ namespace LJCDataUtility5
 
       // Menu item events.
       var list = ParentObject;
-      list.KeyNew.Click += KeyNew_Click;
-      list.KeyEdit.Click += KeyEdit_Click;
-      list.KeyDelete.Click += KeyDelete_Click;
-      list.KeyRefresh.Click += KeyRefresh_Click;
-      list.KeyExit.Click += list.Exit_Click;
+      list._GridName_New.Click += New_Click;
+      list._GridName_Edit.Click += Edit_Click;
+      list._GridName_Delete.Click += Delete_Click;
+      list._GridName_Refresh.Click += Refresh_Click;
+      list._GridName_Exit.Click += list.Exit_Click;
 
       // Grid events.
-      var grid = KeyGrid;
-      grid.KeyDown += KeyGrid_KeyDown;
-      grid.MouseDoubleClick += KeyGrid_MouseDoubleClick;
-      grid.MouseDown += KeyGrid_MouseDown;
-      grid.SelectionChanged += KeyGrid_SelectionChanged;
-      grid.MouseEnter += Grid_MouseEnter;
+      //var grid = _GridName_Grid;
+      Grid.KeyDown += Grid_KeyDown;
+      Grid.MouseDoubleClick += Grid_MouseDoubleClick;
+      Grid.MouseDown += Grid_MouseDown;
+      Grid.SelectionChanged += Grid_SelectionChanged;
+      Grid.MouseEnter += Grid_MouseEnter;
 
       ParentObject.Cursor = Cursors.Default;
     }
@@ -54,40 +67,37 @@ namespace LJCDataUtility5
     {
       if (!LJC.Equals(CurrentDataConfigName, Managers.DataConfigName))
       {
-        KeyManager = Managers.DataKeyManager;
+        GridManager = Managers._DataObjectShortName_Manager;
         CurrentDataConfigName = Managers.DataConfigName;
         var error = Managers.Error;
         if (LJC.HasText(error))
         {
-          MessageBox.Show(error, "Key Manager Error");
+          MessageBox.Show(error, "_GridName_ Manager Error");
         }
       }
     }
 
-    // Configures the Key Grid.
+    // Configures the Grid.
     internal void SetupGrid()
     {
       // Setup default grid columns if no columns are defined.
-      if (0 == KeyGrid.Columns.Count)
+      if (0 == Grid.Columns.Count)
       {
         var propertyNames = new List<string>()
         {
-          DataKey.ColumnName,
-          DataKey.ColumnKeyType,
-          DataKey.ColumnSourceColumnName,
-          DataKey.ColumnTargetTableName,
-          DataKey.ColumnTargetColumnName
+          _DataObjectName_.ColumnName,
+          _DataObjectName_.ColumnDescription,
         };
 
-        if (KeyManager != null)
+        if (GridManager != null)
         {
           // Get the grid columns from the manager Data Definition.
-          var gridColumns = KeyManager.Columns(propertyNames);
+          var gridColumns = GridManager.Columns(propertyNames);
 
           // Setup the grid columns.
           if (gridColumns != null)
           {
-            KeyGrid.LJCAddColumns(gridColumns);
+            Grid.LJCAddColumns(gridColumns);
           }
         }
       }
@@ -99,7 +109,7 @@ namespace LJCDataUtility5
     // Gets the selected grid row.
     internal LJCGridRow? Row()
     {
-      var retRow = KeyGrid.CurrentRow as LJCGridRow;
+      var retRow = Grid.CurrentRow as LJCGridRow;
       return retRow;
     }
 
@@ -112,10 +122,10 @@ namespace LJCDataUtility5
       row ??= Row();
       if (row != null
         && row.DataGridView != null
-        && "KeyGrid" == row.DataGridView.Name)
+        && "_GridName_Grid" == row.DataGridView.Name)
       {
-        dbId = row.LJCGetInt16(DataKey.ColumnDbId);
-        retId = row.LJCGetInt64(DataKey.ColumnId);
+        dbId = row.LJCGetInt16(_DataObjectName_.ColumnDbId);
+        retId = row.LJCGetInt64(_DataObjectName_.ColumnId);
       }
       return retId;
     }
@@ -125,70 +135,17 @@ namespace LJCDataUtility5
     {
       string? retName = null;
 
+      string gridName = "_GridName_Grid";
+      string columnName = _DataObjectName_.ColumnName;
+
       row ??= Row();
       if (row != null
         && row.DataGridView != null
-        && "KeyGrid" == row.DataGridView.Name)
+        && gridName == row.DataGridView.Name)
       {
-        retName = row.LJCGetString(DataKey.ColumnName);
+        retName = row.LJCGetString(columnName);
       }
       return retName;
-    }
-
-    // Gets the Foreign keys.
-    internal DataKeys? ForeignKeys()
-    {
-      DataKeys? retKeys = null;
-
-      var keyManager = Managers.DataKeyManager;
-      if (keyManager != null)
-      {
-        var tableGridCode = ParentObject.TableGridCode;
-        var tableId = tableGridCode.RowId(out short tableDbId);
-        retKeys = keyManager.LoadWithParentType(tableDbId, tableId
-          , (int)KeyType.Foreign);
-      }
-      return retKeys;
-    }
-
-    // Retrieve the Primary key column list.
-    internal string? PrimaryKeyColumns()
-    {
-      string? retList = null;
-
-      var keyManager = Managers.DataKeyManager;
-      if (keyManager != null)
-      {
-        var tableGridCode = ParentObject.TableGridCode;
-        var tableId = tableGridCode.RowId(out short TableDbId);
-        var dataKey = keyManager.RetrieveWithParentType(TableDbId, tableId
-          , (int)KeyType.Primary);
-        if (dataKey != null)
-        {
-          retList = dataKey.SourceColumnName;
-        }
-      }
-      return retList;
-    }
-
-    // Retrieve the Unique key column list.
-    internal string? UniqueKeyColumns()
-    {
-      string? retList = null;
-
-      var keyManager = Managers.DataKeyManager;
-      if (keyManager != null)
-      {
-        var tableGridCode = ParentObject.TableGridCode;
-        long tableId = tableGridCode.RowId(out short tableDbId);
-        var dataKey = keyManager.RetrieveWithParentType(tableDbId, tableId
-          , (int)KeyType.Unique);
-        if (dataKey != null)
-        {
-          retList = dataKey.SourceColumnName;
-        }
-      }
-      return retList;
     }
     #endregion
 
@@ -197,20 +154,25 @@ namespace LJCDataUtility5
     // Retrieves the list rows.
     internal void DataRetrieve()
     {
+      var parentGrid = _ParentGridName_Grid;
+      var parentManager = _ParentDataObjectShortName_Manager;
+      //var grid = _GridName_Grid;
+      //var manager = _GridName_Manager;
+
       ParentObject.Cursor = Cursors.WaitCursor;
-      KeyGrid.LJCRowsClear();
+      Grid.LJCRowsClear();
 
       // Parent grid has a selection.
-      if (TableGrid.CurrentRow is LJCGridRow)
+      if (parentGrid.CurrentRow is LJCGridRow)
       {
-        var tableGridCode = ParentObject.TableGridCode;
-        var tableId = tableGridCode.RowId(out short tableDbId);
-        var keyColumns = DataKeyManager.ParentKey(tableDbId, tableId);
+        var parentGridCode = ParentObject._ParentGridName_GridCode;
+        var parentId = parentGridCode.RowId(out short parentDbId);
+        var keyColumns = parentManager.ParentKey(parentDbId, parentId);
 
-        if (KeyManager != null
-          && KeyManager.Manager != null)
+        if (manager != null
+          && manager.Manager != null)
         {
-          var result = KeyManager.LoadResult(keyColumns);
+          var result = manager.LoadResult(keyColumns);
           if (result != null
             && LJC.HasListItems(result.Rows))
           {
@@ -226,18 +188,17 @@ namespace LJCDataUtility5
       }
       SetControlState();
       ParentObject.Cursor = Cursors.Default;
-      ParentObject.DoChange(Change.Key);
+      ParentObject.DoChange(Change.Table);
     }
 
     // Adds a grid row and updates it with the record values.
-    private LJCGridRow? RowAdd(DataKey data)
+    private LJCGridRow? RowAdd(DataUtilTable data)
     {
-      var retRow = KeyGrid.LJCRowAdd();
+      var retRow = _GridName_Grid.LJCRowAdd();
       if (retRow != null)
       {
         SetStoredValues(retRow, data);
         retRow.LJCSetValues(data);
-        SetKeyTypeName(retRow, data.KeyType);
       }
       return retRow;
     }
@@ -245,7 +206,7 @@ namespace LJCDataUtility5
     // Adds a grid row and updates it with the result values.
     private LJCGridRow? RowAddValues(LJCDataValues dataValues)
     {
-      var retRow = KeyGrid.LJCRowAdd();
+      var retRow = _GridName_Grid.LJCRowAdd();
       if (retRow != null)
       {
         SetStoredValues(retRow, dataValues);
@@ -254,15 +215,15 @@ namespace LJCDataUtility5
       return retRow;
     }
 
-    // Selects a row based on the key record values.
-    private bool RowSelect(short dbId, long id)
+    // Selects a row based on the ID value.
+    internal bool RowSelect(short dbId, long id)
     {
       bool retValue = false;
 
       if (dbId > 0
         && id > 0)
       {
-        var data = new DataKey()
+        var data = new _DataObjectName_()
         {
           DbId = dbId,
           Id = id,
@@ -273,21 +234,22 @@ namespace LJCDataUtility5
     }
 
     // Selects a row based on the data values.
-    private bool RowSelect(DataKey data)
+    private bool RowSelect(_DataObjectName_ data)
     {
       bool retValue = false;
 
       if (data != null)
       {
         ParentObject.Cursor = Cursors.WaitCursor;
-        foreach (LJCGridRow row in KeyGrid.Rows)
+        var grid = _GridName_Grid;
+        foreach (LJCGridRow row in grid.Rows)
         {
           var rowId = RowId(out short rowDbId, row);
           if (rowDbId == data.DbId
             && rowId == data.Id)
           {
             // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-            KeyGrid.LJCSetCurrentRow(row, true);
+            grid.LJCSetCurrentRow(row, true);
             retValue = true;
             break;
           }
@@ -298,50 +260,50 @@ namespace LJCDataUtility5
     }
 
     // Updates the current row with the record values.
-    private void RowUpdate(DataKey data)
+    private void RowUpdate(DataUtilTable data)
     {
-      if (KeyGrid.CurrentRow is LJCGridRow row)
+      if (TableGrid.CurrentRow is LJCGridRow row)
       {
         SetStoredValues(row, data);
         row.LJCSetValues(data);
-        SetKeyTypeName(row, data.KeyType);
       }
     }
 
     // Sets the control states based on the current control values.
-    internal void SetControlState()
+    private void SetControlState()
     {
-      bool enableNew = TableGrid.CurrentRow != null;
-      bool enableEdit = KeyGrid.CurrentRow != null;
-      FormCommon.SetMenuState(KeyMenu, enableNew, enableEdit);
-      //ParentObject.KeyHeading.Enabled = true;
+      bool enableNew = ModuleCombo.SelectedItem != null;
+      bool enableNew = _ParentGridName_Grid.CurrentRow != null;
+      bool enableEdit = _GridName_Grid.CurrentRow != null;
+      FormCommon.SetMenuState(_GridName_Menu, enableNew, enableEdit);
+      //ParentObject._GridName_Heading.Enabled = true;
     }
 
-    // Sets the row stored values.
-    private void SetStoredValues(LJCGridRow row, DataKey data)
+    // Sets the row stored values from the data object.
+    private void SetStoredValues(LJCGridRow row, DataUtilTable data)
     {
-      row.LJCSetInt16(DataKey.ColumnDbId, data.DbId);
-      row.LJCSetInt64(DataKey.ColumnId, data.Id);
+      row.LJCSetInt16(_DataObjectName_.ColumnDbId, data.DbId);
+      row.LJCSetInt64(_DataObjectName_.ColumnId, data.Id);
+      row.LJCSetString(_DataObjectName_.ColumnName, data.Name);
     }
 
     // Sets the row stored values from the data values.
     private void SetStoredValues(LJCGridRow row, LJCDataValues dataValues)
     {
-      var columnName = DataKey.ColumnDbId;
+      var columnName = _DataObjectName_.ColumnDbId;
       var dbId = dataValues.LJCInt16(columnName);
       row.LJCSetInt16(columnName, dbId);
 
-      columnName = DataKey.ColumnId;
+      columnName = _DataObjectName_.ColumnId;
       var id = dataValues.LJCInt64(columnName);
       row.LJCSetInt64(columnName, id);
-    }
 
-    // Sets the KeyType column value.
-    private static string? SetKeyTypeName(LJCGridRow row, short keyType)
-    {
-      var retName = Enum.GetName(typeof(KeyType), keyType);
-      row.Cells["KeyType"].Value = retName;
-      return retName;
+      columnName = _DataObjectName_.ColumnName;
+      var name = dataValues.LJCString(columnName);
+      if (name != null)
+      {
+        row.LJCSetString(columnName, name);
+      }
     }
     #endregion
 
@@ -352,7 +314,7 @@ namespace LJCDataUtility5
     {
       while (true)
       {
-        var row = KeyGrid.CurrentRow as LJCGridRow;
+        var row = _GridName_Grid.CurrentRow;
         if (row != null)
         {
           var title = "Delete Confirmation";
@@ -367,16 +329,17 @@ namespace LJCDataUtility5
         // Data from current item.
         var id = RowId(out short dbId);
 
+        var manager = _GridName_Manager;
         var keyColumns = new LJCDataColumns()
         {
-          { DataKey.ColumnDbId, dbId },
-          { DataKey.ColumnId, id },
+          { _DataObjectName_.ColumnDbId, dbId },
+          { _DataObjectName_.ColumnId, id },
         };
 
-        if (KeyManager != null)
+        if (manager != null)
         {
-          KeyManager.Delete(keyColumns);
-          if (0 == KeyManager.AffectedCount)
+          manager.Delete(keyColumns);
+          if (0 == manager.AffectedCount)
           {
             var message = FormCommon.DeleteError;
             MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
@@ -384,10 +347,10 @@ namespace LJCDataUtility5
             break;
           }
 
-          KeyGrid.Rows.Remove(row);
+          _GridName_Grid.Rows.Remove(row);
           SetControlState();
         }
-        ParentObject.TimedChange(Change.Key);
+        ParentObject.TimedChange(Change.Table);
         break;
       }
     }
@@ -395,26 +358,26 @@ namespace LJCDataUtility5
     // Displays a detail dialog to edit a record.
     internal void Edit()
     {
-      // Parent grid and current grid have selections.
-      if (TableGrid.CurrentRow is LJCGridRow
-        && KeyGrid.CurrentRow is LJCGridRow)
+      // Parent combo and current grid have selections.
+      if (_ParentGridName_Grid.CurrentRow is LJCGridRow
+        && _GridName_Grid.CurrentRow is LJCGridRow)
       {
         // Data from parent item.
-        var tableGridCode = ParentObject.TableGridCode;
-        var tableId = tableGridCode.RowId(out short tableDbId);
-        string? tableName = tableGridCode.RowName();
+        var parentGridCode = ParentObject._ParentGridName_GridCode;
+        var parentId = parentGridCode.RowId(out short parentDbId);
+        string? parentName = parentGridCode.RowName();
 
         // Data from current item.
         var id = RowId(out short dbId);
 
-        var location = FormPoint.DialogScreenPoint(KeyGrid);
-        var detail = new DataKeyDetail()
+        var location = FormPoint.DialogScreenPoint(TableGrid);
+        var detail = new DataTableDetail()
         {
           LJCDbId = dbId,
           LJCId = id,
-          LJCTableDbId = tableDbId,
-          LJCTableId = tableId,
-          LJCTableName = tableName,
+          LJCModuleDbId = parentDbId,
+          LJCModuleId = parentId,
+          LJCModuleName = parentName,
           LJCLocation = location,
           LJCManagers = Managers,
         };
@@ -428,21 +391,32 @@ namespace LJCDataUtility5
     // Displays a detail dialog for a new record.
     internal void New()
     {
-      // Parent grid has a selection.
-      if (TableGrid.CurrentRow is LJCGridRow)
+      // Parent combo and current grid have selections.
+      if (ModuleCombo.SelectedItem is LJCItem
+        && TableGrid.CurrentRow is LJCGridRow)
       {
         // Data from parent item.
-        var tableGridCode = ParentObject.TableGridCode;
-        var tableID = tableGridCode.RowId(out short parentDbID);
-        string? tableName = tableGridCode.RowName();
+        short moduleDbId = 0;
+        long moduleId = 0;
+        string moduleName = "";
+        if (ModuleCombo.SelectedItem is LJCItem item)
+        {
+          moduleDbId = item.DbID;
+          moduleId = item.ID;
+          moduleName = ModuleCombo.Text;
+        }
 
-        var location = FormPoint.DialogScreenPoint(KeyGrid);
-        var detail = new DataKeyDetail
+        // Data from current item.
+        int sequence = TableGrid.Rows.Count + 1;
+
+        var location = FormPoint.DialogScreenPoint(TableGrid);
+        var detail = new DataTableDetail
         {
           LJCDbId = DbGroupId,
-          LJCTableDbId = parentDbID,
-          LJCTableId = tableID,
-          LJCTableName = tableName,
+          LJCModuleDbId = moduleDbId,
+          LJCModuleId = moduleId,
+          LJCModuleName = moduleName,
+          LJCSequence = sequence,
           LJCLocation = location,
           LJCManagers = Managers,
         };
@@ -459,7 +433,7 @@ namespace LJCDataUtility5
       ParentObject.Cursor = Cursors.WaitCursor;
       short dbId = 0;
       long id = 0;
-      if (KeyGrid.CurrentRow is LJCGridRow)
+      if (TableGrid.CurrentRow is LJCGridRow)
       {
         // Save the original row.
         id = RowId(out dbId);
@@ -485,7 +459,7 @@ namespace LJCDataUtility5
     // Adds or updates row with detail record values.
     private void Detail_Change(object? sender, EventArgs e)
     {
-      if (sender is DataKeyDetail detail)
+      if (sender is DataTableDetail detail)
       {
         var record = detail.LJCRecord;
         if (record != null)
@@ -501,9 +475,9 @@ namespace LJCDataUtility5
             var row = RowAdd(record);
             if (row != null)
             {
-              KeyGrid.LJCSetCurrentRow(row, true);
+              TableGrid.LJCSetCurrentRow(row, true);
               SetControlState();
-              ParentObject.TimedChange(Change.Key);
+              ParentObject.TimedChange(Change.Table);
             }
           }
         }
@@ -514,25 +488,25 @@ namespace LJCDataUtility5
     #region Action Event Handlers
 
     // Handles the New menu item event.
-    private void KeyNew_Click(object? sender, EventArgs e)
+    private void New_Click(object? sender, EventArgs e)
     {
       New();
     }
 
     // Handles the Edit menu item event.
-    private void KeyEdit_Click(object? sender, EventArgs e)
+    private void Edit_Click(object? sender, EventArgs e)
     {
       Edit();
     }
 
     // Handles the Delete menu item event.
-    private void KeyDelete_Click(object? sender, EventArgs e)
+    private void Delete_Click(object? sender, EventArgs e)
     {
       Delete();
     }
 
     // Handles the Refresh menu item event.
-    private void KeyRefresh_Click(object? sender, EventArgs e)
+    private void Refresh_Click(object? sender, EventArgs e)
     {
       Refresh();
     }
@@ -541,7 +515,7 @@ namespace LJCDataUtility5
     #region Control Event Handlers
 
     // Handles the Grid KeyDown event.
-    private void KeyGrid_KeyDown(object? sender, KeyEventArgs e)
+    private void Grid_KeyDown(object? sender, KeyEventArgs e)
     {
       switch (e.KeyCode)
       {
@@ -558,9 +532,9 @@ namespace LJCDataUtility5
         case Keys.M:
           if (e.Control)
           {
-            var position = FormPoint.MenuScreenPoint(KeyGrid
+            var position = FormPoint.MenuScreenPoint(TableGrid
               , Control.MousePosition);
-            var menu = ParentObject.KeyMenu;
+            var menu = ParentObject.TableMenu;
             menu.Show(position);
             menu.Select();
             e.Handled = true;
@@ -570,11 +544,11 @@ namespace LJCDataUtility5
         case Keys.Tab:
           if (e.Shift)
           {
-            ParentObject.ColumnTabs.Select();
+            ParentObject.ConfigCombo.Select();
           }
           else
           {
-            ParentObject.ModuleCombo.Select();
+            ParentObject.ColumnTabs.Select();
           }
           e.Handled = true;
           break;
@@ -582,47 +556,47 @@ namespace LJCDataUtility5
     }
 
     // Handles the Grid MouseDoubleClick event.
-    private void KeyGrid_MouseDoubleClick(object? sender, MouseEventArgs e)
+    private void Grid_MouseDoubleClick(object? sender, MouseEventArgs e)
     {
-      if (KeyGrid.LJCGetMouseRow(e) != null)
+      if (TableGrid.LJCGetMouseRow(e) != null)
       {
         Edit();
       }
     }
 
     // Handles the MouseDown event.
-    private void KeyGrid_MouseDown(object? sender, MouseEventArgs e)
+    private void Grid_MouseDown(object? sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
       {
-        KeyGrid.Focus();
+        TableGrid.Focus();
 
         // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
-        if (KeyGrid.LJCIsDifferentRow(e))
+        if (TableGrid.LJCIsDifferentRow(e))
         {
           // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-          KeyGrid.LJCSetCurrentRow(e);
+          TableGrid.LJCSetCurrentRow(e);
           SetControlState();
-          ParentObject.TimedChange(Change.Key);
+          ParentObject.TimedChange(Change.Table);
         }
       }
     }
 
     // Handles the SelectionChanged event.
-    private void KeyGrid_SelectionChanged(object? sender, EventArgs e)
+    private void Grid_SelectionChanged(object? sender, EventArgs e)
     {
-      if (KeyGrid.LJCAllowSelectionChange)
+      if (TableGrid.LJCAllowSelectionChange)
       {
         SetControlState();
-        ParentObject.TimedChange(Change.Key);
+        ParentObject.TimedChange(Change.Table);
       }
-      KeyGrid.LJCAllowSelectionChange = true;
+      TableGrid.LJCAllowSelectionChange = true;
     }
 
     // Handles the MouseEnter event.
     private void Grid_MouseEnter(object? sender, EventArgs e)
     {
-      KeyGrid.Focus();
+      TableGrid.Focus();
     }
     #endregion
 
@@ -634,23 +608,30 @@ namespace LJCDataUtility5
     // Gets or sets the database id.
     internal short DbGroupId { get; set; }
 
-    // Gets or sets the Grid reference.
-    private LJCDataGrid KeyGrid { get; set; }
-
-    // Gets or sets the Manager reference.
-    private DataKeyManager? KeyManager { get; set; }
+    // Gets or sets the grid reference.
+    private LJCDataGrid Grid { get; set; } = null!;
 
     // Gets or sets the Menu reference.
-    private ContextMenuStrip KeyMenu { get; set; }
+    private ContextMenuStrip GridMenu { get; set; }
+
+    // Gets or sets the Manager reference.
+    private DataTableManager? GridManager { get; set; } = null!;
 
     // Gets or sets the Managers reference.
     private ManagersDataUtility Managers { get; set; }
 
+    // Gets or sets the parent Combo reference.
+    private LJCItemCombo ModuleCombo { get; set; }
+
+    // Gets or sets the parent grid reference.
+    private LJCDataGrid ParentGrid { get; set; } = null!;
+
+    // Gets or sets the parent grid reference.
+    private _ParentDataObjectShortName_GridCode ParentGridCode { get; set; } = null!;
+
     // Gets or sets the Parent List reference.
     private DataUtilityList ParentObject { get; set; }
-
-    // Gets or sets the parent Grid reference.
-    private LJCDataGrid TableGrid { get; set; }
     #endregion
   }
+  // #SectionEnd
 }

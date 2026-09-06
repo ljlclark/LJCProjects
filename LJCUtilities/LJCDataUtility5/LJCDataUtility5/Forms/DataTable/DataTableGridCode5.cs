@@ -39,6 +39,7 @@ namespace LJCDataUtility5
 
       list.TableUpdate.Click += TableUpdate_Click;
       list.TableCreate.Click += TableCreate_Click;
+      list.TableConvert.Click += TableConvert_Click;
 
       list.TableExit.Click += list.Exit_Click;
 
@@ -63,7 +64,7 @@ namespace LJCDataUtility5
         var error = Managers.Error;
         if (LJC.HasText(error))
         {
-          MessageBox.Show(error);
+          MessageBox.Show(error, "Table Manager Error");
         }
       }
     }
@@ -98,7 +99,7 @@ namespace LJCDataUtility5
 
     #region Item Value Methods
 
-    // Gets the current row.
+    // Gets the selected grid row.
     internal LJCGridRow? Row()
     {
       var retRow = TableGrid.CurrentRow as LJCGridRow;
@@ -143,13 +144,11 @@ namespace LJCDataUtility5
       long? retTableId = 0;
 
       tableDbId = 0;
-
-      var moduleCode = ParentObject.ModuleComboCode;
-      var moduleId = moduleCode.ItemId(out short moduleDbId);
       var tableManager = Managers.DataTableManager;
-
       if (tableManager != null)
       {
+        var moduleCode = ParentObject.ModuleComboCode;
+        var moduleId = moduleCode.ItemId(out short moduleDbId);
         var targetTable = tableManager.RetrieveUnique(moduleDbId, moduleId
           , targetTableName);
         if (targetTable != null)
@@ -291,7 +290,7 @@ namespace LJCDataUtility5
     }
 
     // Sets the row stored values from the data object.
-    private static void SetStoredValues(LJCGridRow row, DataUtilTable data)
+    private void SetStoredValues(LJCGridRow row, DataUtilTable data)
     {
       row.LJCSetInt16(DataUtilTable.ColumnDbId, data.DbId);
       row.LJCSetInt64(DataUtilTable.ColumnId, data.Id);
@@ -516,6 +515,13 @@ namespace LJCDataUtility5
       var createTable = new CreateTable(ParentObject);
       createTable.CreateTableProc();
     }
+
+    // Handles the "Create Table" menu event.
+    internal void ConvertTable()
+    {
+      var convertTable = new ConvertTable(ParentObject);
+      convertTable.ConvertTableProc();
+    }
     #endregion
 
     #region Action Event Handlers
@@ -557,6 +563,12 @@ namespace LJCDataUtility5
     private void TableCreate_Click(object? sender, EventArgs e)
     {
       CreateTable();
+    }
+
+    // Handles the Create Table menu item event.
+    private void TableConvert_Click(object? sender, EventArgs e)
+    {
+      ConvertTable();
     }
     #endregion
 
@@ -617,7 +629,7 @@ namespace LJCDataUtility5
     {
       if (e.Button == MouseButtons.Right)
       {
-        TableGrid.Select();
+        TableGrid.Focus();
 
         // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         if (TableGrid.LJCIsDifferentRow(e))

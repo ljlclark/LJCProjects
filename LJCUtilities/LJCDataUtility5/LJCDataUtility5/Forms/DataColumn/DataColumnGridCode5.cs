@@ -5,7 +5,6 @@ using LJCControls5;
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
 using static LJCDataUtility5.DataUtilityList;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LJCDataUtility5
 {
@@ -60,7 +59,7 @@ namespace LJCDataUtility5
         var error = Managers.Error;
         if (LJC.HasText(error))
         {
-          MessageBox.Show(error);
+          MessageBox.Show(error, "Column Manager Error");
         }
       }
     }
@@ -109,7 +108,7 @@ namespace LJCDataUtility5
     // Gets the selected row ID.
     internal long RowId(out short dbId, LJCGridRow? row = null)
     {
-      long retColumnId = 0;
+      long retId = 0;
 
       dbId = 0;
       row ??= Row();
@@ -118,24 +117,24 @@ namespace LJCDataUtility5
         && "ColumnGrid" == row.DataGridView.Name)
       {
         dbId = row.LJCGetInt16(DataUtilColumn.ColumnDbId);
-        retColumnId = row.LJCGetInt64(DataUtilColumn.ColumnId);
+        retId = row.LJCGetInt64(DataUtilColumn.ColumnId);
       }
-      return retColumnId;
+      return retId;
     }
 
     // Gets the selected row Name.
     internal string? RowName(LJCGridRow? row = null)
     {
-      string? retColumnName = null;
+      string? retName = null;
 
       row ??= Row();
       if (row != null
         && row.DataGridView != null
         && "ColumnGrid" == row.DataGridView.Name)
       {
-        retColumnName = row.LJCGetString(DataUtilColumn.ColumnName);
+        retName = row.LJCGetString(DataUtilColumn.ColumnName);
       }
-      return retColumnName;
+      return retName;
     }
     #endregion
 
@@ -199,14 +198,7 @@ namespace LJCDataUtility5
       var retRow = ColumnGrid.LJCRowAdd();
       if (retRow != null)
       {
-        var dbColumnName = DataUtilColumn.ColumnDbId;
-        var dbId = dataValues.LJCInt16(dbColumnName);
-        retRow.LJCSetInt16(dbColumnName, dbId);
-
-        var idColumnName = DataUtilColumn.ColumnId;
-        var id = dataValues.LJCInt64(idColumnName);
-        retRow.LJCSetInt64(idColumnName, id);
-
+        SetStoredValues(retRow, dataValues);
         retRow.LJCSetValues(dataValues);
       }
       return retRow;
@@ -275,11 +267,23 @@ namespace LJCDataUtility5
     }
 
     // Sets the row stored values.
-    private static void SetStoredValues(LJCGridRow row, DataUtilColumn dataRecord)
+    private void SetStoredValues(LJCGridRow row, DataUtilColumn dataRecord)
     {
       row.LJCSetInt16(DataUtilColumn.ColumnDbId, dataRecord.DbId);
       row.LJCSetInt64(DataUtilColumn.ColumnId, dataRecord.Id);
       row.LJCSetString(DataUtilColumn.ColumnName, dataRecord.Name);
+    }
+
+    // Sets the row stored values from the data values.
+    private void SetStoredValues(LJCGridRow row, LJCDataValues dataValues)
+    {
+      var columnName = DataUtilColumn.ColumnDbId;
+      var dbId = dataValues.LJCInt16(columnName);
+      row.LJCSetInt16(columnName, dbId);
+
+      columnName = DataUtilColumn.ColumnId;
+      var id = dataValues.LJCInt64(columnName);
+      row.LJCSetInt64(columnName, id);
     }
     #endregion
 
@@ -583,6 +587,8 @@ namespace LJCDataUtility5
     {
       if (e.Button == MouseButtons.Right)
       {
+        ColumnGrid.Focus();
+
         // LJCIsDifferentRow() Sets the LJCLastRowIndex for new row.
         if (ColumnGrid.LJCIsDifferentRow(e))
         {

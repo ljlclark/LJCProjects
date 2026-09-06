@@ -46,6 +46,8 @@ namespace LJCDataUtility5
       TableRefresh = new ToolStripMenuItem();
       toolStripSeparator3 = new ToolStripSeparator();
       TableUpdate = new ToolStripMenuItem();
+      TableCreate = new ToolStripMenuItem();
+      toolStripSeparator13 = new ToolStripSeparator();
       TableExit = new ToolStripMenuItem();
       ColumnsSplit = new SplitContainer();
       ColumnTabs = new LJCTabControl(components);
@@ -92,8 +94,7 @@ namespace LJCDataUtility5
       ModuleLabel = new Label();
       ConfigLabel = new Label();
       ConfigCombo = new LJCItemCombo();
-      toolStripSeparator13 = new ToolStripSeparator();
-      TableCreate = new ToolStripMenuItem();
+      TableConvert = new ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)MainSplit).BeginInit();
       MainSplit.Panel1.SuspendLayout();
       MainSplit.Panel2.SuspendLayout();
@@ -170,70 +171,81 @@ namespace LJCDataUtility5
       // TableMenu
       // 
       TableMenu.ImageScalingSize = new Size(24, 24);
-      TableMenu.Items.AddRange(new ToolStripItem[] { Table, TableNew, TableEdit, toolStripSeparator1, TableDelete, toolStripSeparator2, TableRefresh, toolStripSeparator3, TableUpdate, TableCreate, toolStripSeparator13, TableExit });
+      TableMenu.Items.AddRange(new ToolStripItem[] { Table, TableNew, TableEdit, toolStripSeparator1, TableDelete, toolStripSeparator2, TableRefresh, toolStripSeparator3, TableUpdate, TableCreate, TableConvert, toolStripSeparator13, TableExit });
       TableMenu.Name = "ColumnMenu";
-      TableMenu.Size = new Size(241, 318);
+      TableMenu.Size = new Size(235, 316);
       // 
       // Table
       // 
       Table.BackColor = SystemColors.GradientActiveCaption;
       Table.Name = "Table";
-      Table.Size = new Size(240, 32);
+      Table.Size = new Size(234, 32);
       Table.Text = "Table";
       // 
       // TableNew
       // 
       TableNew.Name = "TableNew";
       TableNew.ShortcutKeys = Keys.Control | Keys.N;
-      TableNew.Size = new Size(240, 32);
+      TableNew.Size = new Size(234, 32);
       TableNew.Text = "&New";
       // 
       // TableEdit
       // 
       TableEdit.Name = "TableEdit";
       TableEdit.ShortcutKeyDisplayString = "ENTER";
-      TableEdit.Size = new Size(240, 32);
+      TableEdit.Size = new Size(234, 32);
       TableEdit.Text = "&Edit";
       // 
       // toolStripSeparator1
       // 
       toolStripSeparator1.Name = "toolStripSeparator1";
-      toolStripSeparator1.Size = new Size(237, 6);
+      toolStripSeparator1.Size = new Size(231, 6);
       // 
       // TableDelete
       // 
       TableDelete.Name = "TableDelete";
       TableDelete.ShortcutKeys = Keys.Delete;
-      TableDelete.Size = new Size(240, 32);
+      TableDelete.Size = new Size(234, 32);
       TableDelete.Text = "&Delete";
       // 
       // toolStripSeparator2
       // 
       toolStripSeparator2.Name = "toolStripSeparator2";
-      toolStripSeparator2.Size = new Size(237, 6);
+      toolStripSeparator2.Size = new Size(231, 6);
       // 
       // TableRefresh
       // 
       TableRefresh.Name = "TableRefresh";
       TableRefresh.ShortcutKeys = Keys.F5;
-      TableRefresh.Size = new Size(240, 32);
+      TableRefresh.Size = new Size(234, 32);
       TableRefresh.Text = "&Refresh";
       // 
       // toolStripSeparator3
       // 
       toolStripSeparator3.Name = "toolStripSeparator3";
-      toolStripSeparator3.Size = new Size(237, 6);
+      toolStripSeparator3.Size = new Size(231, 6);
       // 
       // TableUpdate
       // 
       TableUpdate.Name = "TableUpdate";
-      TableUpdate.Size = new Size(240, 32);
+      TableUpdate.Size = new Size(234, 32);
       TableUpdate.Text = "Update From Table";
+      // 
+      // TableCreate
+      // 
+      TableCreate.Name = "TableCreate";
+      TableCreate.Size = new Size(234, 32);
+      TableCreate.Text = "Create Table";
+      // 
+      // toolStripSeparator13
+      // 
+      toolStripSeparator13.Name = "toolStripSeparator13";
+      toolStripSeparator13.Size = new Size(231, 6);
       // 
       // TableExit
       // 
       TableExit.Name = "TableExit";
-      TableExit.Size = new Size(240, 32);
+      TableExit.Size = new Size(234, 32);
       TableExit.Text = "E&xit";
       // 
       // ColumnsSplit
@@ -613,16 +625,11 @@ namespace LJCDataUtility5
       ConfigCombo.Size = new Size(230, 33);
       ConfigCombo.TabIndex = 3;
       // 
-      // toolStripSeparator13
+      // TableConvert
       // 
-      toolStripSeparator13.Name = "toolStripSeparator13";
-      toolStripSeparator13.Size = new Size(237, 6);
-      // 
-      // TableCreate
-      // 
-      TableCreate.Name = "TableCreate";
-      TableCreate.Size = new Size(240, 32);
-      TableCreate.Text = "Create Table";
+      TableConvert.Name = "TableConvert";
+      TableConvert.Size = new Size(234, 32);
+      TableConvert.Text = "Convert Table";
       // 
       // DataUtilityList
       // 
@@ -722,5 +729,6 @@ namespace LJCDataUtility5
     internal ToolStripMenuItem TableUpdate;
     internal ToolStripMenuItem TableCreate;
     private ToolStripSeparator toolStripSeparator13;
+    internal ToolStripMenuItem TableConvert;
   }
 }
