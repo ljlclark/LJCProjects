@@ -66,13 +66,10 @@ namespace LJCDataUtility5
         Text += " - Edit";
         LJCIsUpdate = true;
         var manager = LJCManagers.DataTableManager;
-        if (manager != null)
+        _OriginalRecord = manager.RetrieveWithId(LJCDbId, LJCId);
+        if (_OriginalRecord != null)
         {
-          _OriginalRecord = manager.RetrieveWithId(LJCDbId, LJCId);
-          if (_OriginalRecord != null)
-          {
-            GetValues(_OriginalRecord);
-          }
+          GetValues(_OriginalRecord);
         }
       }
       else
@@ -158,20 +155,16 @@ namespace LJCDataUtility5
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetValues();
       var manager = LJCManagers.DataTableManager;
-      if (manager != null)
+      var lookupRecord = manager.RetrieveUnique(LJCRecord.DataModuleDbId
+        , LJCRecord.DataModuleId, LJCRecord.Name);
+      if (lookupRecord != null
+        && DataTableManager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
       {
-        var lookupRecord = manager.RetrieveUnique(LJCRecord.DataModuleDbId
-          , LJCRecord.DataModuleId, LJCRecord.Name);
-        if (lookupRecord != null
-          && DataTableManager.IsDuplicate(lookupRecord, LJCRecord, LJCIsUpdate))
-        {
-          retValue = false;
-          FormCommon.DataError(this);
-        }
+        retValue = false;
+        FormCommon.DataError(this);
       }
 
-      if (manager != null
-        && retValue)
+      if (retValue)
       {
         if (LJCIsUpdate)
         {

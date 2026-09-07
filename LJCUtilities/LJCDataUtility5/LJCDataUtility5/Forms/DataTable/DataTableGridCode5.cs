@@ -21,13 +21,16 @@ namespace LJCDataUtility5
       ParentObject.Cursor = Cursors.WaitCursor;
       DbGroupId = dbGroupId;
 
-      // Set control code vars.
+      // Set control values.
       ModuleCombo = ParentObject.ModuleCombo;
       TableGrid = parentObject.TableGrid;
       TableMenu = ParentObject.TableMenu;
 
-      // Set Data vars.
+      // Set data values.
       Managers = ParentObject.Managers;
+      TableManager = Managers.DataTableManager;
+      ShowManagersErrors();
+      CurrentDataConfigName = Managers.DataConfigName;
       Reset();
 
       // Menu item events.
@@ -36,12 +39,11 @@ namespace LJCDataUtility5
       list.TableEdit.Click += TableEdit_Click;
       list.TableDelete.Click += TableDelete_Click;
       list.TableRefresh.Click += TableRefresh_Click;
+      list.TableExit.Click += list.Exit_Click;
 
       list.TableUpdate.Click += TableUpdate_Click;
       list.TableCreate.Click += TableCreate_Click;
       list.TableConvert.Click += TableConvert_Click;
-
-      list.TableExit.Click += list.Exit_Click;
 
       // Grid events.
       var grid = TableGrid;
@@ -59,13 +61,10 @@ namespace LJCDataUtility5
     {
       if (!LJC.Equals(CurrentDataConfigName, Managers.DataConfigName))
       {
-        TableManager = Managers.DataTableManager;
+        // "Reset" property values.
         CurrentDataConfigName = Managers.DataConfigName;
-        var error = Managers.Error;
-        if (LJC.HasText(error))
-        {
-          MessageBox.Show(error, "Table Manager Error");
-        }
+        TableManager = Managers.DataTableManager;
+        ShowManagersErrors();
       }
     }
 
@@ -82,17 +81,24 @@ namespace LJCDataUtility5
           DataUtilTable.ColumnSequence
         };
 
-        if (TableManager != null)
-        {
-          // Get the grid columns from the manager Data Definition.
-          var gridColumns = TableManager.Columns(propertyNames);
+        // Get the grid columns from the manager Data Definition.
+        var gridColumns = TableManager.Columns(propertyNames);
 
-          // Setup the grid columns.
-          if (gridColumns != null)
-          {
-            TableGrid.LJCAddColumns(gridColumns);
-          }
+        // Setup the grid columns.
+        if (gridColumns != null)
+        {
+          TableGrid.LJCAddColumns(gridColumns);
         }
+      }
+    }
+
+    // Show the managers errors.
+    private void ShowManagersErrors()
+    {
+      var error = Managers.Error;
+      if (LJC.HasText(error))
+      {
+        MessageBox.Show(error, "Managers Error");
       }
     }
     #endregion
@@ -144,18 +150,14 @@ namespace LJCDataUtility5
       long? retTableId = 0;
 
       tableDbId = 0;
-      var tableManager = Managers.DataTableManager;
-      if (tableManager != null)
+      var comboCode = ParentObject.ModuleComboCode;
+      var moduleId = comboCode.ItemId(out short moduleDbId);
+      var targetTable = TableManager.RetrieveUnique(moduleDbId, moduleId
+        , targetTableName);
+      if (targetTable != null)
       {
-        var moduleCode = ParentObject.ModuleComboCode;
-        var moduleId = moduleCode.ItemId(out short moduleDbId);
-        var targetTable = tableManager.RetrieveUnique(moduleDbId, moduleId
-          , targetTableName);
-        if (targetTable != null)
-        {
-          tableDbId = targetTable.DbId;
-          retTableId = targetTable.Id;
-        }
+        tableDbId = targetTable.DbId;
+        retTableId = targetTable.Id;
       }
       return retTableId;
     }
@@ -180,8 +182,7 @@ namespace LJCDataUtility5
           DataUtilTable.ColumnSequence
         };
 
-        if (TableManager != null
-          && TableManager.Manager != null)
+        if (TableManager.Manager != null)
         {
           TableManager.Manager.OrderByNames = orderBy;
           var result = TableManager.LoadResult(keyColumns);
@@ -345,20 +346,17 @@ namespace LJCDataUtility5
           { DataUtilTable.ColumnId, id },
         };
 
-        if (TableManager != null)
+        TableManager.Delete(keyColumns);
+        if (0 == TableManager.AffectedCount)
         {
-          TableManager.Delete(keyColumns);
-          if (0 == TableManager.AffectedCount)
-          {
-            var message = FormCommon.DeleteError;
-            MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
-              , MessageBoxIcon.Exclamation);
-            break;
-          }
-
-          TableGrid.Rows.Remove(row);
-          SetControlState();
+          var message = FormCommon.DeleteError;
+          MessageBox.Show(message, "Delete Error", MessageBoxButtons.OK
+            , MessageBoxIcon.Exclamation);
+          break;
         }
+
+        TableGrid.Rows.Remove(row);
+        SetControlState();
         ParentObject.TimedChange(Change.Table);
         break;
       }
@@ -663,27 +661,27 @@ namespace LJCDataUtility5
     #region Properties
 
     // Gets or sets the current data config name.
-    private string? CurrentDataConfigName { get; set; }
+    private string CurrentDataConfigName { get; set; }
 
     // Gets or sets the database id.
     internal short DbGroupId { get; set; }
 
-    // Gets or sets the Managers reference.
+    // Gets or sets the managers reference.
     private ManagersDataUtility Managers { get; set; }
 
-    // Gets or sets the parent Combo reference.
+    // Gets or sets the parent control reference.
     private LJCItemCombo ModuleCombo { get; set; }
 
-    // Gets or sets the Parent List reference.
+    // Gets or sets the parent reference.
     private DataUtilityList ParentObject { get; set; }
 
-    // Gets or sets the Grid reference.
-    private LJCDataGrid TableGrid { get; set; } = null!;
+    // Gets or sets the main control reference.
+    private LJCDataGrid TableGrid { get; set; }
 
-    // Gets or sets the Manager reference.
-    private DataTableManager? TableManager { get; set; } = null!;
+    // Gets or sets the manager reference.
+    private DataTableManager TableManager { get; set; }
 
-    // Gets or sets the Menu reference.
+    // Gets or sets the menu reference.
     private ContextMenuStrip TableMenu { get; set; }
     #endregion
   }

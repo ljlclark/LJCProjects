@@ -623,25 +623,25 @@ namespace LJCDataUtility5
     // Gets or sets the current data config name.
     private string? CurrentDataConfigName { get; set; }
 
-    // Gets or sets the Grid reference.
+    // Gets or sets the main control reference.
     private LJCDataGrid ColumnGrid { get; set; }
 
-    // Gets or sets the Manager reference.
+    // Gets or sets the manager reference.
     private DataColumnManager? ColumnManager { get; set; }
 
-    // Gets or sets the Menu reference.
+    // Gets or sets the menu reference.
     private ContextMenuStrip ColumnMenu { get; set; }
 
     // Gets or sets the database id.
     internal short DbGroupId { get; set; }
 
-    // Gets or sets the Managers reference.
+    // Gets or sets the managers reference.
     private ManagersDataUtility Managers { get; set; }
 
-    // Gets or sets the parent List reference.
+    // Gets or sets the parent reference.
     private DataUtilityList ParentObject { get; set; }
 
-    // Gets or sets the parent Grid reference.
+    // Gets or sets the parent control reference.
     private LJCDataGrid TableGrid { get; set; }
     #endregion
   }

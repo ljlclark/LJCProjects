@@ -198,24 +198,23 @@ namespace LJCDataUtilityDAL5
     // Gets the DataColumnManager object.
     /// <include file='Doc/ManagersDataUtility.xml'
     ///  path='members/DataColumnManager/*'/>
-    public DataColumnManager? DataColumnManager
+    public DataColumnManager DataColumnManager
     {
       get
       {
         var managerName = "DataColumnManager";
-        if (null == _DataColumnManager
-          || _ResetNames.Contains(managerName))
+        if (_ResetNames.Contains(managerName))
         {
           try
           {
             _DataColumnManager
               = new DataColumnManager(_DbServiceRef, DataConfigName);
-            ClearResetName(managerName);
           }
           catch (Exception ex)
           {
             Error = ex.Message;
           }
+          ClearResetName(managerName);
         }
         return _DataColumnManager;
       }
@@ -225,24 +224,23 @@ namespace LJCDataUtilityDAL5
     // Gets the DataKeyManager object.
     /// <include file='Doc/ManagersDataUtility.xml'
     ///  path='members/DataKeyManager/*'/>
-    public DataKeyManager? DataKeyManager
+    public DataKeyManager DataKeyManager
     {
       get
       {
         var managerName = "DataKeyManager";
-        if (null == _DataKeyManager
-          || _ResetNames.Contains(managerName))
+        if (_ResetNames.Contains(managerName))
         {
           try
           {
             _DataKeyManager
               = new DataKeyManager(_DbServiceRef, DataConfigName);
-            ClearResetName(managerName);
           }
           catch (Exception ex)
           {
             Error = ex.Message;
           }
+          ClearResetName(managerName);
         }
         return _DataKeyManager;
       }
@@ -252,24 +250,23 @@ namespace LJCDataUtilityDAL5
     // Gets the DataModuleManager object.
     /// <include file='Doc/ManagersDataUtility.xml'
     ///  path='members/DataModuleManager/*'/>
-    public DataModuleManager? DataModuleManager
+    public DataModuleManager DataModuleManager
     {
       get
       {
         var managerName = "DataModuleManager";
-        if (null == _DataModuleManager
-          || _ResetNames.Contains(managerName))
+        if (_ResetNames.Contains(managerName))
         {
           try
           {
             _DataModuleManager
               = new DataModuleManager(_DbServiceRef, DataConfigName);
-            ClearResetName(managerName);
           }
           catch (Exception ex)
           {
             Error = ex.Message;
           }
+          ClearResetName(managerName);
         }
         return _DataModuleManager;
       }
@@ -279,24 +276,23 @@ namespace LJCDataUtilityDAL5
     // Gets the DataTableManager object.
     /// <include file='Doc/ManagersDataUtility.xml'
     ///  path='members/DataTableManager/*'/>
-    public DataTableManager? DataTableManager
+    public DataTableManager DataTableManager
     {
       get
       {
         var managerName = "DataTableManager";
-        if (null == _DataTableManager
-          || _ResetNames.Contains(managerName))
+        if (_ResetNames.Contains(managerName))
         {
           try
           {
             _DataTableManager
               = new DataTableManager(_DbServiceRef, DataConfigName);
-            ClearResetName(managerName);
           }
           catch (Exception ex)
           {
             Error = ex.Message;
           }
+          ClearResetName(managerName);
         }
         return _DataTableManager;
       }
