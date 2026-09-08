@@ -288,7 +288,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if a text value exists.
-    /// <include path="members/HasText/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/HasText/*'/>
     /// <parentGroup>check</parentGroup>
     public static bool HasText([NotNullWhen(true)] string? text)
     {
@@ -296,101 +297,30 @@ namespace LJCNetCommon5
     }
 
     // Checks if two values are equal.
-    /// <include path="members/IsEqual/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/IsEqual/*'/>
     /// <parentGroup>check</parentGroup>
-    public static bool IsEqual(object? oldValue, object? newValue)
+    public static bool IsEqual<T>(T compareValue, T compareToValue
+      , bool caseSensitive = false)
     {
-      bool retValue = false;
+      bool retValue;
 
-      if (null == oldValue
-        && null == newValue)
+      if (compareValue is string compare
+        && compareToValue is string compareTo)
       {
-        retValue = true;
-      }
-
-      if (oldValue != null
-        && newValue != null)
-      {
-        string typeName = oldValue.GetType().Name;
-        switch (typeName)
+        if (caseSensitive)
         {
-          case TypeBoolean:
-            if (GetBoolean(oldValue) == GetBoolean(newValue))
-            {
-              retValue = true;
-            }
-            break;
-
-          case TypeByte:
-            if (GetByte(oldValue) == GetByte(newValue))
-            {
-              retValue = true;
-            }
-            break;
-
-          case TypeChar:
-            if (GetChar(oldValue) == GetChar(newValue))
-            {
-              retValue = true;
-            }
-            break;
-
-          case TypeDateTime:
-            if (GetDateTime(oldValue) == GetDateTime(newValue))
-            {
-              retValue = true;
-            }
-            break;
-
-          case TypeDecimal:
-            if (GetDecimal(oldValue) == GetDecimal(newValue))
-            {
-              retValue = true;
-            }
-            break;
-
-          case TypeDouble:
-            if (GetDouble(oldValue) == GetDouble(newValue))
-            {
-              retValue = true;
-            }
-            break;
-
-          case TypeInt16:
-            if (GetInt16(oldValue) == GetInt16(newValue))
-            {
-              retValue = true;
-            }
-            break;
-
-          case TypeInt32:
-            if (GetInt32(oldValue) == GetInt32(newValue))
-            {
-              retValue = true;
-            }
-            break;
-
-          case TypeInt64:
-            if (GetInt64(oldValue) == GetInt64(newValue))
-            {
-              retValue = true;
-            }
-            break;
-
-          case TypeSingle:
-            if (GetSingle(oldValue) == GetSingle(newValue))
-            {
-              retValue = true;
-            }
-            break;
-
-          case TypeString:
-            if (0 == string.Compare(oldValue.ToString(), newValue.ToString()))
-            {
-              retValue = true;
-            }
-            break;
+          retValue = string.Equals(compare, compareTo);
         }
+        else
+        {
+          retValue = string.Equals(compare, compareTo
+            , StringComparison.OrdinalIgnoreCase);
+        }
+      }
+      else
+      {
+        retValue = EqualityComparer<T>.Default.Equals(compareValue, compareToValue);
       }
       return retValue;
     }

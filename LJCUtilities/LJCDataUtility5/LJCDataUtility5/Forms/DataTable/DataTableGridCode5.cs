@@ -3,6 +3,7 @@
 // DataTableGridCode5.cs
 using LJCControls5;
 using LJCDataUtilityDAL5;
+using LJCDBMessage5;
 using LJCNetCommon5;
 using static LJCDataUtility5.DataUtilityList;
 
@@ -30,7 +31,7 @@ namespace LJCDataUtility5
       Managers = ParentObject.Managers;
       TableManager = Managers.DataTableManager;
       ShowManagersErrors();
-      CurrentDataConfigName = Managers.DataConfigName;
+      DataConfigName = Managers.DataConfigName;
       Reset();
 
       // Menu item events.
@@ -59,10 +60,10 @@ namespace LJCDataUtility5
     // Resets the data manager.
     internal void Reset()
     {
-      if (!LJC.Equals(CurrentDataConfigName, Managers.DataConfigName))
+      if (!LJC.IsEqual(DataConfigName, Managers.DataConfigName))
       {
         // "Reset" property values.
-        CurrentDataConfigName = Managers.DataConfigName;
+        DataConfigName = Managers.DataConfigName;
         TableManager = Managers.DataTableManager;
         ShowManagersErrors();
       }
@@ -186,17 +187,7 @@ namespace LJCDataUtility5
         {
           TableManager.Manager.OrderByNames = orderBy;
           var result = TableManager.LoadResult(keyColumns);
-          if (result != null
-            && LJC.HasListItems(result.Rows))
-          {
-            foreach (var row in result.Rows)
-            {
-              if (LJC.HasListItems(row.Values))
-              {
-                RowAddValues(row.Values);
-              }
-            }
-          }
+          RowsAdd(result);
         }
       }
       SetControlState();
@@ -226,6 +217,34 @@ namespace LJCDataUtility5
         retRow.LJCSetValues(dataValues);
       }
       return retRow;
+    }
+
+    // Creates the grid rows from the collection object.
+    private void RowsAdd(DataTables items)
+    {
+      if (LJC.HasListItems(items))
+      {
+        foreach (var item in items)
+        {
+          RowAdd(item);
+        }
+      }
+    }
+
+    // Creates the grid rows from the result rows.
+    private void RowsAdd(LJCDBResult? result)
+    {
+      if (result != null
+        && LJC.HasListItems(result.Rows))
+      {
+        foreach (var row in result.Rows)
+        {
+          if (LJC.HasListItems(row.Values))
+          {
+            RowAddValues(row.Values);
+          }
+        }
+      }
     }
 
     // Selects a row based on the ID value.
@@ -661,7 +680,7 @@ namespace LJCDataUtility5
     #region Properties
 
     // Gets or sets the current data config name.
-    private string CurrentDataConfigName { get; set; }
+    private string DataConfigName { get; set; }
 
     // Gets or sets the database id.
     internal short DbGroupId { get; set; }

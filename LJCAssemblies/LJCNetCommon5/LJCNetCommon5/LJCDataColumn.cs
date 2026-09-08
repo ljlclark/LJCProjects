@@ -314,7 +314,7 @@ namespace LJCNetCommon5
       get => _Value;
       set
       {
-        if (!EqualityComparer<object>.Default.Equals(_Value, value))
+        if (!LJC.IsEqual(_Value, value))
         {
           _Value = value;
           if (value != null
@@ -325,7 +325,7 @@ namespace LJCNetCommon5
           }
 
           IsChanged = false;
-          if (!EqualityComparer<object>.Default.Equals(OriginalValue, _Value))
+          if (!LJC.IsEqual(OriginalValue, value))
           {
             IsChanged = true;
           }
@@ -401,7 +401,7 @@ namespace LJCNetCommon5
       get => _OriginalValue;
       set
       {
-        if (!EqualityComparer<object>.Default.Equals(_OriginalValue, value))
+        if (!LJC.IsEqual(_OriginalValue, value))
         {
           _OriginalValue = value;
           if (value != null

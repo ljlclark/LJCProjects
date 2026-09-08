@@ -73,9 +73,9 @@ namespace LJCNetCommon5
             var propertyValue = newColumn.Value;
             var sortPropertyName = currentColumn.PropertyName;
             var sortPropertyValue = currentColumn.Value;
-            if (propertyName.CompareTo(sortPropertyName) != 0
-              || !EqualityComparer<object>.Default.Equals(propertyValue
-              , sortPropertyValue))
+            // Property name or value changed.
+            if (!LJC.IsEqual(propertyName, sortPropertyName)
+              || !LJC.IsEqual(propertyValue, sortPropertyValue))
             {
               retValue = true;
               break;
