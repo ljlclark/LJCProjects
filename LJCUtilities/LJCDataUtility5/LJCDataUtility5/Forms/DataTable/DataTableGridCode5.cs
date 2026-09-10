@@ -46,6 +46,7 @@ namespace LJCDataUtility5
       list.TableCreate.Click += TableCreate_Click;
       list.TableConvert.Click += TableConvert_Click;
       list.TableAddProc.Click += TableAddProc_Click;
+      list.TableCreateData.Click += TableCreateData_Click;
 
       // Grid events.
       var grid = TableGrid;
@@ -547,6 +548,13 @@ namespace LJCDataUtility5
       AddDataProc addDataProc = new(ParentObject);
       addDataProc.CreateAddDataProc();
     }
+
+    // Handles the "Create Data Procedure" menu event.
+    internal void CreateDataProc()
+    {
+      CreateData createData = new(ParentObject);
+      createData.CreateDataProc();
+    }
     #endregion
 
     #region Action Event Handlers
@@ -600,6 +608,12 @@ namespace LJCDataUtility5
     private void TableAddProc_Click(object? sender, EventArgs e)
     {
       AddDataProc();
+    }
+
+    // Handles the Create Data menu item event.
+    private void TableCreateData_Click(object? sender, EventArgs e)
+    {
+      CreateDataProc();
     }
     #endregion
 

@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // AddDataProc5.cs
 using LJCDataAccess5;
@@ -28,10 +28,13 @@ namespace LJCDataUtility5
       KeyGridCode = ParentObject.KeyGridCode;
       Managers = ParentObject.Managers;
     }
-    #endregion
 
+    // Gets or sets the Table grid code reference.
     private DataTableGridCode TableGridCode { get; set; }
+
+    // Gets or sets the Key grid code reference.
     private DataKeyGridCode KeyGridCode { get; set; }
+    #endregion
 
     #region Methods
 

@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ConvertTable5.cs
 using LJCDataAccessConfig5;
@@ -37,10 +37,10 @@ namespace LJCDataUtility5
 
       var tableGridCode = ParentObject.TableGridCode;
       var id = tableGridCode.RowId(out short dbID);
-      var orderByNames = new List<string>()
-      {
-        DataUtilColumn.ColumnSequence
-      };
+      List<string> orderByNames =
+      [
+        DataUtilColumn.ColumnSequence,
+      ];
       var insertColumns = Managers.TableDataColumns(dbID, id
         , orderByNames);
 
@@ -270,7 +270,7 @@ namespace LJCDataUtility5
     }
 
     // Gets the default ISNULL value.
-    private static string DefaultNameValue(string selectName
+    private string DefaultNameValue(string selectName
       , string defaultValue)
     {
       string retValue;
@@ -283,7 +283,7 @@ namespace LJCDataUtility5
     // Get the default value.
     [SuppressMessage("Style", "IDE0066:Convert switch statement to expression"
       , Justification = "<Pending>")]
-    private static string DefaultValue(DataUtilColumn insertColumn)
+    private string DefaultValue(DataUtilColumn insertColumn)
     {
       string retValue = "";
 
