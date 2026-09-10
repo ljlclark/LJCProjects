@@ -50,7 +50,7 @@ namespace LJCDataUtility5
     #region Data Methods
 
     // Resets the empty record values.
-    private static void ResetValues(DataKey dataRecord)
+    private void ResetValues(DataKey dataRecord)
     {
       // In control order.
       dataRecord.SourceColumnName
@@ -340,18 +340,18 @@ namespace LJCDataUtility5
     {
       int index;
       var name = NameText.Text;
-      if (name.ToLower().StartsWith("pk"))
+      if (name.StartsWith("pk", StringComparison.OrdinalIgnoreCase))
       {
         index = KeyTypeCombo.FindString("Primary");
         KeyTypeCombo.SelectedIndex = index;
       }
-      if (name.ToLower().StartsWith("fk"))
+      if (name.StartsWith("fk", StringComparison.OrdinalIgnoreCase))
       {
         index = KeyTypeCombo.FindString("Foreign");
         KeyTypeCombo.SelectedIndex = index;
       }
-      if (name.ToLower().StartsWith("uq")
-        || name.ToLower().StartsWith("uk"))
+      if (name.StartsWith("uq", StringComparison.OrdinalIgnoreCase)
+        || name.StartsWith("uk", StringComparison.OrdinalIgnoreCase))
       {
         index = KeyTypeCombo.FindString("Unique");
         KeyTypeCombo.SelectedIndex = index;
@@ -380,16 +380,18 @@ namespace LJCDataUtility5
 
           var sourceColumnText = SourceColumnText.Text.Trim();
           if (!LJC.HasText(TargetTableText.Text)
-            && sourceColumnText.ToLower() != "id"
+            && !LJC.IsEqual(sourceColumnText, "id")
             && sourceColumnText.EndsWith("ID"))
           {
-            if (sourceColumnText.Contains(","))
+            if (sourceColumnText.Contains(','))
             {
-              var index = sourceColumnText.IndexOf(",");
-              sourceColumnText = sourceColumnText.Substring(0, index);
+              var index = sourceColumnText.IndexOf(',');
+              //sourceColumnText = sourceColumnText.Substring(0, index);
+              sourceColumnText = sourceColumnText[..index];
             }
             var length = sourceColumnText.Length - 2;
-            TargetTableText.Text = sourceColumnText.Substring(0, length);
+            //TargetTableText.Text = sourceColumnText.Substring(0, length);
+            TargetTableText.Text = sourceColumnText[..length];
             TargetColumnText.Text = "ID";
           }
           ClusteredChecked(false);

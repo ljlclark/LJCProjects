@@ -45,6 +45,7 @@ namespace LJCDataUtility5
       list.TableUpdate.Click += TableUpdate_Click;
       list.TableCreate.Click += TableCreate_Click;
       list.TableConvert.Click += TableConvert_Click;
+      list.TableAddProc.Click += TableAddProc_Click;
 
       // Grid events.
       var grid = TableGrid;
@@ -522,22 +523,29 @@ namespace LJCDataUtility5
     // Handles the "Update From Table" menu event.
     internal void UpdateData()
     {
-      var updateData = new UpdateData(ParentObject);
+      UpdateData updateData = new(ParentObject);
       updateData.SetData();
     }
 
     // Handles the "Create Table" menu event.
     internal void CreateTable()
     {
-      var createTable = new CreateTable(ParentObject);
+      CreateTable createTable = new(ParentObject);
       createTable.CreateTableProc();
     }
 
     // Handles the "Create Table" menu event.
     internal void ConvertTable()
     {
-      var convertTable = new ConvertTable(ParentObject);
+      ConvertTable convertTable = new(ParentObject);
       convertTable.ConvertTableProc();
+    }
+
+    // Handles the "Add Data Procedure" menu event.
+    internal void AddDataProc()
+    {
+      AddDataProc addDataProc = new(ParentObject);
+      addDataProc.CreateAddDataProc();
     }
     #endregion
 
@@ -586,6 +594,12 @@ namespace LJCDataUtility5
     private void TableConvert_Click(object? sender, EventArgs e)
     {
       ConvertTable();
+    }
+
+    // Handles the Add Data Procedure menu item event.
+    private void TableAddProc_Click(object? sender, EventArgs e)
+    {
+      AddDataProc();
     }
     #endregion
 

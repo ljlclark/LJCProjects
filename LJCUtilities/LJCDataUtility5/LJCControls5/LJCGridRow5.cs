@@ -143,7 +143,7 @@ namespace LJCControls5
     }
 
     // Gets the Data object property value.
-    private static string? GetPropertyValue(LJCReflect reflect, string propertyName)
+    private string? GetPropertyValue(LJCReflect reflect, string propertyName)
     {
       string? retValue = null;
 
@@ -166,7 +166,7 @@ namespace LJCControls5
     }
 
     // Format the date for display.
-    private static string? GetUiDateString(DateTime dateTime)
+    private string? GetUiDateString(DateTime dateTime)
     {
       string? retVal = null;
 
@@ -178,7 +178,7 @@ namespace LJCControls5
     }
 
     // Check for DB Minimum date or less.
-    private static bool IsDbMinDate(DateTime dateTime)
+    private bool IsDbMinDate(DateTime dateTime)
     {
       bool retValue = false;
       if (dateTime.Year < 1753)

@@ -337,7 +337,7 @@ namespace LJCDataUtility5
     }
 
     // Sets the KeyType column value.
-    private static string? SetKeyTypeName(LJCGridRow row, short keyType)
+    private string? SetKeyTypeName(LJCGridRow row, short keyType)
     {
       var retName = Enum.GetName(typeof(KeyType), keyType);
       row.Cells["KeyType"].Value = retName;

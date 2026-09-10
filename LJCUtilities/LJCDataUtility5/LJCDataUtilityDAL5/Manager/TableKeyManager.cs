@@ -199,7 +199,7 @@ namespace LJCDataUtilityDAL5
     //// Gets the sp_GetForeignKeys procedure SQL.
     //private string ForeignKeysProcedureSql(string tableName)
     //{
-    //  TextBuilder b = new TextBuilder();
+    //  TextBuilder b = new LJCTextBuilder();
     //  b.Line("CREATE PROCEDURE[dbo].[sp_GetForeignKeys]");
     //  b.Line("  @TableName nvarchar(20)");
     //  b.Line("AS");

@@ -722,7 +722,7 @@ namespace LJCControls5
     }
 
     // Creates a bounding rectangle to determine if the move operation should start.
-    private static Rectangle CreateDragStartBounds(int x, int y, int width, int height)
+    private Rectangle CreateDragStartBounds(int x, int y, int width, int height)
     {
       Rectangle retVal;
 

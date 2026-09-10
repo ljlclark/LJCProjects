@@ -51,7 +51,7 @@ namespace LJCDataUtility5
     #region Data Methods
 
     // Resets the empty record values.
-    private static void ResetValues(DataUtilColumn dataRecord)
+    private void ResetValues(DataUtilColumn dataRecord)
     {
       // In control order.
       dataRecord.Description = FormCommon.SetString(dataRecord.Description);
