@@ -11,6 +11,35 @@ namespace LJCDataUtility5
   // The DataModule detail dialog.
   internal partial class DataModuleDetail : Form
   {
+    #region Properties
+
+    // Gets or sets the primary ID value.
+    internal short LJCDbId { get; set; }
+
+    // Gets or sets the primary ID value.
+    internal long LJCId { get; set; }
+
+    // Gets the LJCIsUpdate value.
+    internal bool LJCIsUpdate { get; private set; }
+
+    // The form position.
+    internal Point LJCLocation { get; set; }
+
+    // The Managers object.
+    internal ManagersDataUtility LJCManagers { get; set; } = null!;
+
+    // Gets a reference to the record object.
+    internal DataModule? LJCRecord { get; private set; }
+    #endregion
+
+    #region Class Data
+
+    // The Change event.
+    internal event EventHandler<EventArgs> LJCChange = null!;
+
+    private DataModule? _OriginalRecord;
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -259,35 +288,6 @@ namespace LJCDataUtility5
         Close();
       }
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the primary ID value.
-    internal short LJCDbId { get; set; }
-
-    // Gets or sets the primary ID value.
-    internal long LJCId { get; set; }
-
-    // Gets the LJCIsUpdate value.
-    internal bool LJCIsUpdate { get; private set; }
-
-    // The form position.
-    internal Point LJCLocation { get; set; }
-
-    // The Managers object.
-    internal ManagersDataUtility LJCManagers { get; set; } = null!;
-
-    // Gets a reference to the record object.
-    internal DataModule? LJCRecord { get; private set; }
-    #endregion
-
-    #region Class Data
-
-    // The Change event.
-    internal event EventHandler<EventArgs> LJCChange = null!;
-
-    private DataModule? _OriginalRecord;
     #endregion
   }
 }

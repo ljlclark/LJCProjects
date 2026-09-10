@@ -25,6 +25,99 @@ namespace LJCDataUtility5
     }
     #endregion
 
+    #region Properties
+
+    // Gets or sets the Add data Procedure Name.
+    internal string AddProcName { get; set; } = null!;
+
+    // The beginning identifier delimiter.
+    internal string BeginDelimiter { get; set; } = null!;
+
+    // Gets or sets the Create Table Procedure Name.
+    internal string CreateProcName { get; set; } = null!;
+
+    // Gets or sets the Database Name.
+    internal string DBName { get; set; } = null!;
+
+    // The ending identifier delimiter.
+    internal string EndDelimiter { get; set; } = null!;
+
+    // Gets or sets the Create Foreign Key Drop Procedure Name.
+    internal string ForeignKeyDropProcName { get; set; } = null!;
+
+    // Gets or sets the Create Foreign Key Procedure Name.
+    internal string ForeignKeyProcName { get; set; } = null!;
+
+    // Gets or sets the Primary Key Name.
+    internal string PKName { get; set; } = null!;
+
+    /// <summary>Gets or sets the
+    /// Table Name.</summary>
+    internal string TableName { get; set; } = null!;
+
+    // Gets or sets the Unique Key Name.
+    internal string UQName { get; set; } = null!;
+
+    // Gets or sets an indicator if Create Table already has defined columns.
+    private bool HasColumns { get; set; }
+
+    // Gets or sets the Managers reference.
+    private ManagersDataUtility Managers { get; set; }
+
+    // Gets or sets the parent object reference.
+    private DataUtilityList ParentObject { get; set; }
+    #endregion
+
+    #region TextBuilder Properties
+
+    // Gets or sets the delimiter.
+    internal string Delimiter
+    {
+      get => Builder.Delimiter;
+      set { Builder.Delimiter = value; }
+    }
+
+    // Gets or sets the indent character count.
+    internal int IndentCharCount
+    {
+      get => Builder.IndentCharCount;
+      set { Builder.IndentCharCount = value; }
+    }
+
+    // Gets or sets the indent count.
+    internal int IndentCount
+    {
+      get => Builder.IndentCount;
+      set { Builder.AddIndent(value); }
+    }
+
+    // Gets or sets the first item indicator.
+    internal bool IsFirst
+    {
+      get => Builder.IsFirst;
+      set { Builder.IsFirst = value; }
+    }
+
+    // Gets or sets the TextBuilder object.
+    private LJCTextBuilder Builder { get; set; } = null!;
+    #endregion
+
+    #region Class Data
+
+    /// <summary></summary>
+    internal enum ObjectType
+    {
+      /// <summary></summary>
+      Primary = 1,
+      /// <summary></summary>
+      Unique,
+      /// <summary></summary>
+      Foreign,
+      /// <summary></summary>
+      Table
+    }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -253,21 +346,6 @@ namespace LJCDataUtility5
       return retParams;
     }
 
-    // Creates a SQL Declaration variable from a DataUtilityColumn.
-    internal string SQLDeclaration(DataUtilColumn dataColumn)
-    {
-      var retValue = "";
-
-      // @name nvarchar(60)
-      retValue += SQLVarName(dataColumn.Name);
-      retValue += $" {dataColumn.TypeName}";
-      if (dataColumn.MaxLength > 0)
-      {
-        retValue += $"({dataColumn.MaxLength})";
-      }
-      return retValue;
-    }
-
     // Creates the Values list.
     internal string ValuesList(DataColumns dataColumns
       , string? varRefName = null)
@@ -298,6 +376,21 @@ namespace LJCDataUtility5
       tb.Text(");");
       var retList = tb.ToString();
       return retList;
+    }
+
+    // Creates a SQL Declaration variable from a DataUtilityColumn.
+    private string SQLDeclaration(DataUtilColumn dataColumn)
+    {
+      var retValue = "";
+
+      // @name nvarchar(60)
+      retValue += SQLVarName(dataColumn.Name);
+      retValue += $" {dataColumn.TypeName}";
+      if (dataColumn.MaxLength > 0)
+      {
+        retValue += $"({dataColumn.MaxLength})";
+      }
+      return retValue;
     }
     #endregion
 
@@ -661,7 +754,7 @@ namespace LJCDataUtility5
     }
 
     // Gets the object type prefix value.
-    internal string? GetObjectTypeValue(ObjectType objectType)
+    private string? GetObjectTypeValue(ObjectType objectType)
     {
       string? retValue = null;
 
@@ -686,95 +779,5 @@ namespace LJCDataUtility5
       return retValue;
     }
     #endregion
-
-    #region Properties
-
-    // Gets or sets the Add data Procedure Name.
-    internal string AddProcName { get; set; } = null!;
-
-    // The beginning identifier delimiter.
-    internal string BeginDelimiter { get; set; } = null!;
-
-    // Gets or sets the Create Table Procedure Name.
-    internal string CreateProcName { get; set; } = null!;
-
-    // Gets or sets the Database Name.
-    internal string DBName { get; set; } = null!;
-
-    // The ending identifier delimiter.
-    internal string EndDelimiter { get; set; } = null!;
-
-    // Gets or sets the Create Foreign Key Drop Procedure Name.
-    internal string ForeignKeyDropProcName { get; set; } = null!;
-
-    // Gets or sets the Create Foreign Key Procedure Name.
-    internal string ForeignKeyProcName { get; set; } = null!;
-
-    // Gets or sets the Primary Key Name.
-    internal string PKName { get; set; } = null!;
-
-    /// <summary>Gets or sets the
-    /// Table Name.</summary>
-    internal string TableName { get; set; } = null!;
-
-    // Gets or sets the Unique Key Name.
-    internal string UQName { get; set; } = null!;
-
-    // Gets or sets an indicator if Create Table already has defined columns.
-    private bool HasColumns { get; set; }
-
-    // Gets or sets the Managers reference.
-    private ManagersDataUtility Managers { get; set; }
-
-    // Gets or sets the parent object reference.
-    private DataUtilityList ParentObject { get; set; }
-    #endregion
-
-    #region TextBuilder Properties
-
-    // Gets or sets the delimiter.
-    internal string Delimiter
-    {
-      get => Builder.Delimiter;
-      set { Builder.Delimiter = value; }
-    }
-
-    // Gets or sets the indent character count.
-    internal int IndentCharCount
-    {
-      get => Builder.IndentCharCount;
-      set { Builder.IndentCharCount = value; }
-    }
-
-    // Gets or sets the indent count.
-    internal int IndentCount
-    {
-      get => Builder.IndentCount;
-      set { Builder.AddIndent(value); }
-    }
-
-    // Gets or sets the first item indicator.
-    internal bool IsFirst
-    {
-      get => Builder.IsFirst;
-      set { Builder.IsFirst = value; }
-    }
-
-    // Gets or sets the TextBuilder object.
-    private LJCTextBuilder Builder { get; set; } = null!;
-    #endregion
-  }
-
-  /// <summary></summary>
-  internal enum ObjectType
-  {
-    /// <summary></summary>
-    Primary = 1,
-    /// <summary></summary>
-    Unique,
-    /// <summary></summary>
-    Foreign,
-    /// <summary></summary>
-    Table
   }
 }

@@ -3,12 +3,83 @@
 // MyProcBuilder.cs
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
+using static LJCDataUtility5.ProcBuilder;
 
 namespace LJCDataUtility5
 {
   //Provides methods to create MySQL procedure SQL code.
   internal class MyProcBuilder
   {
+    #region Properties
+
+    // Gets or sets the Add data Procedure Name.
+    internal string AddProcName { get; set; } = null!;
+
+    // The beginning identifier delimiter.
+    internal string BeginDelimiter { get; set; } = null!;
+
+    // Gets or sets the Create Table Procedure Name.
+    internal string CreateProcName { get; set; } = null!;
+
+    // Gets or sets the Database Name.
+    internal string DBName { get; set; } = null!;
+
+    // The ending identifier delimiter.
+    internal string EndDelimiter { get; set; } = null!;
+
+    // Gets or sets the Primary Key Name.
+    internal string PKName { get; set; } = null!;
+
+    // Gets or sets the Table Name.
+    internal string TableName { get; set; } = null!;
+
+    // Gets or sets the Unique Key Name.
+    internal string UQName { get; set; } = null!;
+
+    // Gets or sets an indicator if Create Table already has defined columns.
+    private bool HasColumns { get; set; }
+
+    // Gets or sets the Managers reference.
+    private ManagersDataUtility Managers { get; set; }
+
+    // Gets or sets the parent object reference.
+    private DataUtilityList ParentObject { get; set; }
+    #endregion
+
+    #region TextBuilder Properties
+
+    // Gets or sets the delimiter.
+    internal string Delimiter
+    {
+      get { return Builder.Delimiter; }
+      set { Builder.Delimiter = value; }
+    }
+
+    // Gets or sets the indent character count.
+    internal int IndentCharCount
+    {
+      get { return Builder.IndentCharCount; }
+      set { Builder.IndentCharCount = value; }
+    }
+
+    // Gets or sets the indent count.
+    internal int IndentCount
+    {
+      get { return Builder.IndentCount; }
+      set { Builder.AddIndent(value); }
+    }
+
+    // Gets or sets the first item indicator.
+    internal bool IsFirst
+    {
+      get { return Builder.IsFirst; }
+      set { Builder.IsFirst = value; }
+    }
+
+    // Gets or sets the TextBuilder object.
+    private LJCTextBuilder Builder { get; set; } = null!;
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -103,15 +174,15 @@ namespace LJCDataUtility5
     // Adds the Procedure begin code.
     internal string Begin(string procedureName)
     {
-      var b = new LJCTextBuilder();
-      b.Line("-- Copyright(c) Lester J. Clark and Contributors.");
-      b.Line("-- Licensed under the MIT License.");
-      b.Line($"-- {procedureName}.sql");
+      var tb = new LJCTextBuilder();
+      tb.Line("-- Copyright(c) Lester J. Clark and Contributors.");
+      tb.Line("-- Licensed under the MIT License.");
+      tb.Line($"-- {procedureName}.sql");
       var qualifiedName = QualifiedName(DBName, procedureName);
-      b.Line("DELIMITER $$");
-      b.Line($"DROP PROCEDURE IF EXISTS {qualifiedName};$$");
-      b.Line($"CREATE PROCEDURE {qualifiedName} (");
-      string retString = b.ToString();
+      tb.Line("DELIMITER $$");
+      tb.Line($"DROP PROCEDURE IF EXISTS {qualifiedName};$$");
+      tb.Line($"CREATE PROCEDURE {qualifiedName} (");
+      string retString = tb.ToString();
 
       Add(retString);
       return retString;
@@ -122,18 +193,18 @@ namespace LJCDataUtility5
       , bool includeParens = true, bool useNewNames = false
       , bool includeID = false, int indentCount = 0)
     {
-      var b = new LJCTextBuilder();
-      b.AddIndent(indentCount);
+      var tb = new LJCTextBuilder();
+      tb.AddIndent(indentCount);
       var value = "    ";
       if (includeParens)
       {
         value += "(";
       }
-      b.Text(value);
+      tb.Text(value);
 
       if (LJC.HasListItems(dataColumns))
       {
-        b.IsFirst = true;
+        tb.IsFirst = true;
         foreach (DataUtilColumn dataColumn in dataColumns)
         {
           if (!includeID
@@ -148,15 +219,15 @@ namespace LJCDataUtility5
           {
             nameValue = dataColumn.NewName;
           }
-          b.Item(nameValue);
+          tb.Item(nameValue);
         }
 
         if (includeParens)
         {
-          b.Text(")");
+          tb.Text(")");
         }
       }
-      var retList = b.ToString();
+      var retList = tb.ToString();
       return retList;
     }
 
@@ -169,11 +240,11 @@ namespace LJCDataUtility5
       var varRefName
         = SQLVarName($"{parentTableName}{parentIDColumnName}");
 
-      var b = new LJCTextBuilder();
-      b.Line($"(SET {varRefName} = (SELECT {parentIDColumnName}");
-      b.Line($" FROM {parentTableName}");
-      b.Line($" WHERE {parentFindColumnName} = {parmFindName});");
-      var retIf = b.ToString();
+      var tb = new LJCTextBuilder();
+      tb.Line($"(SET {varRefName} = (SELECT {parentIDColumnName}");
+      tb.Line($" FROM {parentTableName}");
+      tb.Line($" WHERE {parentFindColumnName} = {parmFindName});");
+      var retIf = tb.ToString();
       return retIf;
     }
 
@@ -181,7 +252,7 @@ namespace LJCDataUtility5
     internal string Parameters(DataColumns dataColumns, bool isFirst = true
       , int indentCount = 0)
     {
-      var b = new LJCTextBuilder();
+      var tb = new LJCTextBuilder();
       {
         IndentCount = indentCount;
       }
@@ -191,14 +262,14 @@ namespace LJCDataUtility5
         {
           if (!isFirst)
           {
-            b.Line(",");
+            tb.Line(",");
           }
           isFirst = false;
           var declaration = SQLDeclaration(dataColumn);
-          b.Text($"  {declaration}");
+          tb.Text($"  {declaration}");
         }
       }
-      var retParams = b.ToString();
+      var retParams = tb.ToString();
       return retParams;
     }
 
@@ -241,7 +312,8 @@ namespace LJCDataUtility5
       // @name
       var startChar = columnName.ToLower()[0];
       retName += $"@{startChar}";
-      retName += columnName.Substring(1);
+      //retName += columnName.Substring(1);
+      retName += columnName[1..];
       return retName;
     }
 
@@ -249,23 +321,23 @@ namespace LJCDataUtility5
     internal string ValuesList(DataColumns dataColumns
       , List<string>? varRefNames = null, int indentCount = 0)
     {
-      var b = new LJCTextBuilder();
-      b.AddIndent(indentCount);
-      b.Text("    VALUES(");
+      var tb = new LJCTextBuilder();
+      tb.AddIndent(indentCount);
+      tb.Text("    VALUES(");
 
       // Use the variable references instead of value.
       if (LJC.HasListItems(varRefNames))
       {
-        b.IsFirst = true;
+        tb.IsFirst = true;
         foreach (string varRefName in varRefNames)
         {
-          b.Item(varRefName);
+          tb.Item(varRefName);
         }
       }
 
       if (LJC.HasListItems(dataColumns))
       {
-        b.IsFirst = true;
+        tb.IsFirst = true;
         foreach (DataUtilColumn dataColumn in dataColumns)
         {
           if (dataColumn.Name.EndsWith("ID"))
@@ -275,12 +347,12 @@ namespace LJCDataUtility5
 
           var nameValue = SQLVarName(dataColumn.Name);
           nameValue = $"`{nameValue}`";
-          b.Item(nameValue);
+          tb.Item(nameValue);
         }
       }
 
-      b.Text(");");
-      var retList = b.ToString();
+      tb.Text(");");
+      var retList = tb.ToString();
       return retList;
     }
     #endregion
@@ -288,50 +360,50 @@ namespace LJCDataUtility5
     #region Create Table Methods
 
     // Adds a foreign key.
-    internal string AddForeignKey(string tableName
+    private string AddForeignKey(string tableName
       , string objectName, string sourceColumnList
       , string targetTableName, string targetColumnList)
     {
       var sourceNames = LJCNetString.DelimitValues(sourceColumnList, "`", "`");
       var targetNames = LJCNetString.DelimitValues(targetColumnList, "`", "`");
-      var b = new LJCTextBuilder();
-      b.Line($"ALTER TABLE `{tableName}`");
-      b.Line($"  ADD CONSTRAINT `{objectName}`");
-      b.Line($"   FOREIGN KEY ({sourceNames})");
-      b.Text($"   REFERENCES `{targetTableName}`");
-      b.Text($" ({targetNames});");
-      var retValue = b.ToString();
+      var tb = new LJCTextBuilder();
+      tb.Line($"ALTER TABLE `{tableName}`");
+      tb.Line($"  ADD CONSTRAINT `{objectName}`");
+      tb.Line($"   FOREIGN KEY ({sourceNames})");
+      tb.Text($"   REFERENCES `{targetTableName}`");
+      tb.Text($" ({targetNames});");
+      var retValue = tb.ToString();
       return retValue;
     }
 
     // Adds a primary key.
-    internal string AddPrimaryKey(string tableName
+    private string AddPrimaryKey(string tableName
       , string objectName, string columnList)
     {
       var columnNames = LJCNetString.DelimitValues(columnList, "`", "`");
-      var b = new LJCTextBuilder();
-      b.Line($"ALTER TABLE `{tableName}`");
-      b.Line($"  ADD CONSTRAINT `{objectName}`");
-      b.Text($"  PRIMARY KEY ({columnNames});");
-      var retValue = b.ToString();
+      var tb = new LJCTextBuilder();
+      tb.Line($"ALTER TABLE `{tableName}`");
+      tb.Line($"  ADD CONSTRAINT `{objectName}`");
+      tb.Text($"  PRIMARY KEY ({columnNames});");
+      var retValue = tb.ToString();
       return retValue;
     }
 
     // Adds a unique key.
-    internal string AddUniqueKey(string tableName
+    private string AddUniqueKey(string tableName
       , string objectName, string columnList)
     {
       var columnNames = LJCNetString.DelimitValues(columnList, "`", "`");
-      var b = new LJCTextBuilder();
-      b.Line($"ALTER TABLE `{tableName}`");
-      b.Line($"  ADD CONSTRAINT `{objectName}`");
-      b.Text($"  UNIQUE ({columnNames});");
-      var retValue = b.ToString();
+      var tb = new LJCTextBuilder();
+      tb.Line($"ALTER TABLE `{tableName}`");
+      tb.Line($"  ADD CONSTRAINT `{objectName}`");
+      tb.Text($"  UNIQUE ({columnNames});");
+      var retValue = tb.ToString();
       return retValue;
     }
 
     // Creates the Create Table SQL.
-    internal string CreateTable(DataColumns dataColumns)
+    private string CreateTable(DataColumns dataColumns)
     {
       Line(TableBegin());
       bool isAutoIncrement = false;
@@ -370,7 +442,7 @@ namespace LJCDataUtility5
     }
 
     // Complete Create Table procedure.
-    internal string CreateTableProc(DataColumns dataColumns)
+    private string CreateTableProc(DataColumns dataColumns)
     {
       Begin(CreateProcName);
       //Line("  IN parmName varchar(60)");
@@ -400,45 +472,46 @@ namespace LJCDataUtility5
     }
 
     // Drops the constraint by provided name.
-    internal string DropConstraint(string tableName
+    private string DropConstraint(string tableName
       , string objectName)
     {
-      var b = new LJCTextBuilder();
-      b.Line($"ALTER TABLE `{tableName}`");
-      b.Text($"  DROP CONSTRAINT IF EXISTS `{objectName}`;");
-      var retValue = b.ToString();
+      var tb = new LJCTextBuilder();
+      tb.Line($"ALTER TABLE `{tableName}`");
+      tb.Text($"  DROP CONSTRAINT IF EXISTS `{objectName}`;");
+      var retValue = tb.ToString();
       return retValue;
     }
 
     // Get column name and type.
-    internal string NameAndType(DataUtilColumn dataColumn)
+    private string NameAndType(DataUtilColumn dataColumn)
     {
-      var b = new LJCTextBuilder();
+      var tb = new LJCTextBuilder();
 
       // Column Name
-      b.Text($"  {BeginDelimiter}");
-      b.Text($"{dataColumn.Name}");
-      b.Text($"{EndDelimiter}");
+      tb.Text($"  {BeginDelimiter}");
+      tb.Text($"{dataColumn.Name}");
+      tb.Text($"{EndDelimiter}");
 
       // Type Name
       var typeName = dataColumn.TypeName.ToLower();
       if (typeName.StartsWith('n'))
       {
-        typeName = typeName.Substring(1);
+        //typeName = typeName.Substring(1);
+        typeName = typeName[1..];
       }
-      b.Text($" {typeName}");
+      tb.Text($" {typeName}");
 
-      var retString = b.ToString();
+      var retString = tb.ToString();
       return retString;
     }
 
     // Renames a table. Removes old keys and creates new keys.
-    internal string RenameTableSQL(long tableID, short dbID)
+    private string RenameTableSQL(long tableID, short dbID)
     {
       var keyManager = Managers.DataKeyManager;
-      var b = new LJCTextBuilder();
-      b.Line("/*");
-      b.Text("/* Drop foreign keys and constraints. */");
+      var tb = new LJCTextBuilder();
+      tb.Line("/*");
+      tb.Text("/* Drop foreign keys and constraints. */");
 
       // Drop referencing foreign keys.
       var foreignKeys = keyManager.LoadWithForeign(TableName);
@@ -449,8 +522,8 @@ namespace LJCDataUtility5
           if (LJC.HasText(dataKey.DataTableName))
           {
             var text = DropConstraint(dataKey.DataTableName, dataKey.Name);
-            b.Line();
-            b.Line(text);
+            tb.Line();
+            tb.Line(text);
           }
         }
       }
@@ -464,18 +537,18 @@ namespace LJCDataUtility5
           if (dataKey.KeyType != (short)ObjectType.Primary)
           {
             var text = DropConstraint(TableName, dataKey.Name);
-            b.Line();
-            b.Line(text);
+            tb.Line();
+            tb.Line(text);
           }
         }
       }
 
-      b.Line();
-      b.Line($"RENAME TABLE `{TableName}` TO `{TableName}Backup`;");
-      b.Line($"RENAME TABLE `New{TableName}` TO `{TableName}`;");
+      tb.Line();
+      tb.Line($"RENAME TABLE `{TableName}` TO `{TableName}Backup`;");
+      tb.Line($"RENAME TABLE `New{TableName}` TO `{TableName}`;");
 
-      b.Line();
-      b.Text("/* Add constraints and foreign keys. */");
+      tb.Line();
+      tb.Text("/* Add constraints and foreign keys. */");
 
       if (LJC.HasListItems(otherKeys))
       {
@@ -489,8 +562,8 @@ namespace LJCDataUtility5
               {
                 var columnList = dataKey.SourceColumnName;
                 text = AddUniqueKey(TableName, dataKey.Name, columnList);
-                b.Line();
-                b.Line(text);
+                tb.Line();
+                tb.Line(text);
               }
               break;
 
@@ -502,8 +575,8 @@ namespace LJCDataUtility5
                 text = AddForeignKey(TableName, dataKey.Name
                   , dataKey.SourceColumnName, dataKey.TargetTableName
                   , dataKey.TargetColumnName);
-                b.Line();
-                b.Line(text);
+                tb.Line();
+                tb.Line(text);
               }
               break;
           }
@@ -523,59 +596,59 @@ namespace LJCDataUtility5
             var text = AddForeignKey(dataKey.DataTableName, dataKey.Name
             , dataKey.SourceColumnName, dataKey.TargetTableName
             , dataKey.TargetColumnName);
-            b.Line();
-            b.Line(text);
+            tb.Line();
+            tb.Line(text);
           }
           break;
         }
       }
-      b.Line("*/");
-      var retValue = b.ToString();
+      tb.Line("*/");
+      var retValue = tb.ToString();
       return retValue;
     }
 
     // Adds the table begin code.
-    internal string TableBegin()
+    private string TableBegin()
     {
-      var b = new LJCTextBuilder();
-      b.Line();
-      b.Text($"CREATE TABLE IF NOT EXISTS ");
+      var tb = new LJCTextBuilder();
+      tb.Line();
+      tb.Text($"CREATE TABLE IF NOT EXISTS ");
       if (LJC.HasText(DBName))
       {
-        b.Text($"{BeginDelimiter}");
-        b.Text($"{DBName}");
-        b.Text($"{EndDelimiter}.");
+        tb.Text($"{BeginDelimiter}");
+        tb.Text($"{DBName}");
+        tb.Text($"{EndDelimiter}.");
       }
-      b.Text($"{BeginDelimiter}");
-      b.Text($"{TableName}");
-      b.Text($"{EndDelimiter} (");
+      tb.Text($"{BeginDelimiter}");
+      tb.Text($"{TableName}");
+      tb.Text($"{EndDelimiter} (");
 
       HasColumns = false;
-      string retString = b.ToString();
+      string retString = tb.ToString();
       return retString;
     }
 
     // Adds a table column definition.
-    internal string TableColumn(DataUtilColumn dataColumn)
+    private string TableColumn(DataUtilColumn dataColumn)
     {
-      var b = new LJCTextBuilder();
+      var tb = new LJCTextBuilder();
       var itemEnd = ItemEnd(HasColumns);
       if (LJC.HasText(itemEnd))
       {
-        b.Text(itemEnd);
+        tb.Text(itemEnd);
       }
-      b.Text(NameAndType(dataColumn));
+      tb.Text(NameAndType(dataColumn));
 
       var typeName = dataColumn.TypeName.Trim().ToLower();
       if (IsCharType(typeName))
       {
-        b.Text($"({dataColumn.MaxLength})");
+        tb.Text($"({dataColumn.MaxLength})");
 
         if (!LJC.HasText(dataColumn.DefaultValue))
         {
           if (!dataColumn.AllowNull)
           {
-            b.Text(" NOT NULL");
+            tb.Text(" NOT NULL");
           }
           else
           {
@@ -588,35 +661,35 @@ namespace LJCDataUtility5
       {
         if (!dataColumn.AllowNull)
         {
-          b.Text(" NOT");
+          tb.Text(" NOT");
         }
-        b.Text(" NULL");
+        tb.Text(" NULL");
       }
 
       if (dataColumn.DefaultValue != null)
       {
-        b.Text($" DEFAULT {dataColumn.DefaultValue}");
+        tb.Text($" DEFAULT {dataColumn.DefaultValue}");
       }
 
       HasColumns = true;
-      var retString = b.ToString();
+      var retString = tb.ToString();
       return retString;
     }
 
     // Creates the Identity column.
-    internal string TableIdentity(DataUtilColumn dataColumn)
+    private string TableIdentity(DataUtilColumn dataColumn)
     {
-      var b = new LJCTextBuilder();
+      var tb = new LJCTextBuilder();
       var itemEnd = ItemEnd(HasColumns);
       if (LJC.HasText(itemEnd))
       {
-        b.Text(itemEnd);
+        tb.Text(itemEnd);
       }
-      b.Text(NameAndType(dataColumn));
-      b.Text($" NOT NULL AUTO_INCREMENT");
+      tb.Text(NameAndType(dataColumn));
+      tb.Text($" NOT NULL AUTO_INCREMENT");
 
       HasColumns = true;
-      var retString = b.ToString();
+      var retString = tb.ToString();
       return retString;
     }
 
@@ -646,76 +719,6 @@ namespace LJCDataUtility5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the Add data Procedure Name.
-    internal string AddProcName { get; set; } = null!;
-
-    // The beginning identifier delimiter.
-    internal string BeginDelimiter { get; set; } = null!;
-
-    // Gets or sets the Create Table Procedure Name.
-    internal string CreateProcName { get; set; } = null!;
-
-    // Gets or sets the Database Name.
-    internal string DBName { get; set; } = null!;
-
-    // The ending identifier delimiter.
-    internal string EndDelimiter { get; set; } = null!;
-
-    // Gets or sets the Primary Key Name.
-    internal string PKName { get; set; } = null!;
-
-    // Gets or sets the Table Name.
-    internal string TableName { get; set; } = null!;
-
-    // Gets or sets the Unique Key Name.
-    internal string UQName { get; set; } = null!;
-
-    // Gets or sets an indicator if Create Table already has defined columns.
-    private bool HasColumns { get; set; }
-
-    // Gets or sets the Managers reference.
-    private ManagersDataUtility Managers { get; set; }
-
-    // Gets or sets the parent object reference.
-    private DataUtilityList ParentObject { get; set; }
-    #endregion
-
-    #region TextBuilder Properties
-
-    // Gets or sets the delimiter.
-    internal string Delimiter
-    {
-      get { return Builder.Delimiter; }
-      set { Builder.Delimiter = value; }
-    }
-
-    // Gets or sets the indent character count.
-    internal int IndentCharCount
-    {
-      get { return Builder.IndentCharCount; }
-      set { Builder.IndentCharCount = value; }
-    }
-
-    // Gets or sets the indent count.
-    internal int IndentCount
-    {
-      get { return Builder.IndentCount; }
-      set { Builder.AddIndent(value); }
-    }
-
-    // Gets or sets the first item indicator.
-    internal bool IsFirst
-    {
-      get { return Builder.IsFirst; }
-      set { Builder.IsFirst = value; }
-    }
-
-    // Gets or sets the TextBuilder object.
-    private LJCTextBuilder Builder { get; set; } = null!;
     #endregion
   }
 }

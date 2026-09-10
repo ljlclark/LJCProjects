@@ -11,6 +11,57 @@ namespace LJCDataUtility5
   // The DataKey detail dialog.
   internal partial class DataKeyDetail : Form
   {
+    #region Properties
+
+    // Gets or sets the primary ID value.
+    internal short LJCDbId { get; set; }
+
+    // Gets or sets the primary ID value.
+    internal long LJCId { get; set; }
+
+    // Gets the LJCIsUpdate value.
+    internal bool LJCIsUpdate { get; private set; }
+
+    // The form position.
+    internal Point LJCLocation { get; set; }
+
+    // The Managers object.
+    internal ManagersDataUtility LJCManagers { get; set; } = null!;
+
+    // Gets or sets the ParentSite ID value.
+    internal short LJCTableDbId { get; set; }
+
+    // Gets or sets the Parent ID value.
+    internal long LJCTableId { get; set; }
+
+    // Gets or sets the LJCParentName value.
+    internal string? LJCTableName
+    {
+      get => _TableName;
+      set
+      {
+        var newValue = value?.Trim();
+        if (LJC.HasText(newValue)
+          && _TableName != newValue)
+        {
+          _TableName = newValue;
+        }
+      }
+    }
+    private string _TableName;
+
+    // Gets a reference to the record object.
+    internal DataKey? LJCRecord { get; private set; }
+    #endregion
+
+    #region Class Data
+
+    // The Change event.
+    internal event EventHandler<EventArgs> LJCChange = null!;
+
+    private DataKey? _OriginalRecord;
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -398,57 +449,6 @@ namespace LJCDataUtility5
           break;
       }
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the primary ID value.
-    internal short LJCDbId { get; set; }
-
-    // Gets or sets the primary ID value.
-    internal long LJCId { get; set; }
-
-    // Gets the LJCIsUpdate value.
-    internal bool LJCIsUpdate { get; private set; }
-
-    // The form position.
-    internal Point LJCLocation { get; set; }
-
-    // The Managers object.
-    internal ManagersDataUtility LJCManagers { get; set; } = null!;
-
-    // Gets or sets the ParentSite ID value.
-    internal short LJCTableDbId { get; set; }
-
-    // Gets or sets the Parent ID value.
-    internal long LJCTableId { get; set; }
-
-    // Gets or sets the LJCParentName value.
-    internal string? LJCTableName
-    {
-      get => _TableName;
-      set
-      {
-        var newValue = value?.Trim();
-        if (LJC.HasText(newValue)
-          && _TableName != newValue)
-        {
-          _TableName = newValue;
-        }
-      }
-    }
-    private string _TableName;
-
-    // Gets a reference to the record object.
-    internal DataKey? LJCRecord { get; private set; }
-    #endregion
-
-    #region Class Data
-
-    // The Change event.
-    internal event EventHandler<EventArgs> LJCChange = null!;
-
-    private DataKey? _OriginalRecord;
     #endregion
   }
 }

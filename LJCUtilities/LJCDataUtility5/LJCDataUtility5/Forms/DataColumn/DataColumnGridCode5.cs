@@ -11,6 +11,33 @@ namespace LJCDataUtility5
   // Provides methods for the Column grid.
   internal class DataColumnGridCode
   {
+    #region Properties
+
+    // Gets or sets the current data config name.
+    private string? CurrentDataConfigName { get; set; }
+
+    // Gets or sets the main control reference.
+    private LJCDataGrid ColumnGrid { get; set; }
+
+    // Gets or sets the manager reference.
+    private DataColumnManager? ColumnManager { get; set; }
+
+    // Gets or sets the menu reference.
+    private ContextMenuStrip ColumnMenu { get; set; }
+
+    // Gets or sets the database id.
+    internal short DbGroupId { get; set; }
+
+    // Gets or sets the managers reference.
+    private ManagersDataUtility Managers { get; set; }
+
+    // Gets or sets the parent reference.
+    private DataUtilityList ParentObject { get; set; }
+
+    // Gets or sets the parent control reference.
+    private LJCDataGrid TableGrid { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -616,33 +643,6 @@ namespace LJCDataUtility5
     {
       ColumnGrid.Focus();
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the current data config name.
-    private string? CurrentDataConfigName { get; set; }
-
-    // Gets or sets the main control reference.
-    private LJCDataGrid ColumnGrid { get; set; }
-
-    // Gets or sets the manager reference.
-    private DataColumnManager? ColumnManager { get; set; }
-
-    // Gets or sets the menu reference.
-    private ContextMenuStrip ColumnMenu { get; set; }
-
-    // Gets or sets the database id.
-    internal short DbGroupId { get; set; }
-
-    // Gets or sets the managers reference.
-    private ManagersDataUtility Managers { get; set; }
-
-    // Gets or sets the parent reference.
-    private DataUtilityList ParentObject { get; set; }
-
-    // Gets or sets the parent control reference.
-    private LJCDataGrid TableGrid { get; set; }
     #endregion
   }
 }

@@ -85,11 +85,11 @@ namespace LJCDataUtility5
           break;
         }
 
-        var infoValue = ParentObject.InfoValue;
+        var infoValue = ParentObject.InfoControlValue;
         var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(showText
           , "Insert Select SQL", infoValue);
-        ParentObject.InfoValue = controlValue;
+        ParentObject.InfoControlValue = controlValue;
         break;
       }
     }

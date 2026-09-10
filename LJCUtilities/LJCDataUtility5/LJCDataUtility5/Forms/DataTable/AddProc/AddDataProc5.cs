@@ -5,12 +5,25 @@ using LJCDataAccess5;
 using LJCDataAccessConfig5;
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
+using static LJCDataUtility5.DataUtilityList;
 
 namespace LJCDataUtility5
 {
   // Provides methods to generate the AddData procedure.
   internal class AddDataProc
   {
+    #region Properties
+
+    // Gets or sets the DataConfig value.
+    private LJCDataConfig Config { get; set; } = null!;
+
+    // Gets or sets the Parent List reference.
+    private DataUtilityList ParentObject { get; set; }
+
+    // Gets or sets the Managers reference.
+    private ManagersDataUtility Managers { get; set; }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -101,7 +114,7 @@ namespace LJCDataUtility5
         var proc = new ProcBuilder(ParentObject, data.DBName, data.TableName);
         proc.Begin(proc.AddProcName);
 
-        var keyValues = KeyValues(data.ForeignKeys);
+        var keyValues = GetKeyValues(data.ForeignKeys);
         if (LJC.HasListItems(keyValues))
         {
           var uniqueParamValueList = UniqueParamValueList(keyValues);
@@ -197,17 +210,17 @@ namespace LJCDataUtility5
 
       if (LJC.HasText(retString))
       {
-        var infoValue = ParentObject.InfoValue;
+        var infoValue = ParentObject.InfoControlValue;
         var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(retString
           , "Add Data Procedure", infoValue);
-        ParentObject.InfoValue = controlValue;
+        ParentObject.InfoControlValue = controlValue;
       }
       return retString;
     }
 
     // Gets the referenced parameters.
-    private List<KeyValues> KeyValues(DataKeys foreignKeys)
+    private List<KeyValues> GetKeyValues(DataKeys foreignKeys)
     {
       List<KeyValues> retValues = [];
 
@@ -264,21 +277,6 @@ namespace LJCDataUtility5
         }
       }
       return retValues;
-    }
-
-    // Gets the foreign unique var name.
-    private string? UniqueVar(KeyValues keyValueObject, int index)
-    {
-      string? retValue = null;
-
-      var vars = keyValueObject.UniqueVarNames;
-      if (LJC.HasListItems(vars)
-        && vars.Count > 0
-        && vars.Count <= index + 1)
-      {
-        retValue = vars[index];
-      }
-      return retValue;
     }
 
     private bool IsForeignKeyColumn(List<KeyValues> foreignKeyParams
@@ -395,11 +393,11 @@ namespace LJCDataUtility5
 
       if (LJC.HasText(retString))
       {
-        var infoValue = ParentObject.InfoValue;
+        var infoValue = ParentObject.InfoControlValue;
         var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(retString
           , "Add Data Procedure", infoValue);
-        ParentObject.InfoValue = controlValue;
+        ParentObject.InfoControlValue = controlValue;
       }
       return retString;
     }
@@ -418,21 +416,6 @@ namespace LJCDataUtility5
         }
       }
       return retItems;
-    }
-
-    // Gets the target column name.
-    private string? UniqueColumnName(KeyValues keyValues, int index)
-    {
-      string? retValue = null;
-
-      var names = keyValues.UniqueColumnNames;
-      if (LJC.HasListItems(names)
-        && names.Count > 0
-        && names.Count <= index + 1)
-      {
-        retValue = names[index];
-      }
-      return retValue;
     }
 
     // Gets the target columns collection.
@@ -536,6 +519,21 @@ namespace LJCDataUtility5
       return retUniqueKeys;
     }
 
+    // Gets the target column name.
+    private string? UniqueColumnName(KeyValues keyValues, int index)
+    {
+      string? retValue = null;
+
+      var names = keyValues.UniqueColumnNames;
+      if (LJC.HasListItems(names)
+        && names.Count > 0
+        && names.Count <= index + 1)
+      {
+        retValue = names[index];
+      }
+      return retValue;
+    }
+
     // Gets the unique key param delimited list.
     private string UniqueParamValueList(List<KeyValues> foreignKeyParams)
     {
@@ -556,6 +554,21 @@ namespace LJCDataUtility5
         }
       }
       return retText;
+    }
+
+    // Gets the foreign unique var name.
+    private string? UniqueVar(KeyValues keyValueObject, int index)
+    {
+      string? retValue = null;
+
+      var vars = keyValueObject.UniqueVarNames;
+      if (LJC.HasListItems(vars)
+        && vars.Count > 0
+        && vars.Count <= index + 1)
+      {
+        retValue = vars[index];
+      }
+      return retValue;
     }
 
     private string UniqueVarName(DataKey foreignKey, string uniqueColumnName
@@ -610,22 +623,11 @@ namespace LJCDataUtility5
       return retVarName;
     }
     #endregion
-
-    #region Properties
-
-    // Gets or sets the DataConfig value.
-    private LJCDataConfig Config { get; set; } = null!;
-
-    // Gets or sets the Parent List reference.
-    private DataUtilityList ParentObject { get; set; }
-
-    // Gets or sets the Managers reference.
-    private ManagersDataUtility Managers { get; set; }
-    #endregion
   }
 
   internal class KeyValues
   {
+    #region Properties
 
     public List<string> ForeignKeyColumnNames { get; set; } = null!;
 
@@ -636,5 +638,6 @@ namespace LJCDataUtility5
     public List<string> UniqueVarNames { get; set; } = null!;
 
     public string ForeignTableName { get; set; } = null!;
+    #endregion
   }
 }

@@ -104,11 +104,11 @@ namespace LJCDataUtility5
         proc.Line("END");
         var value = proc.ToString();
 
-        var infoValue = ParentObject.InfoValue;
+        var infoControlValue = ParentObject.InfoControlValue;
         var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(value
-          , "Column Data Procedure", infoValue);
-        ParentObject.InfoValue = controlValue;
+          , "Column Data Procedure", infoControlValue);
+        ParentObject.InfoControlValue = controlValue;
       }
     }
 
@@ -155,11 +155,11 @@ namespace LJCDataUtility5
         proc.Line("END");
         var value = proc.ToString();
 
-        var infoValue = ParentObject.InfoValue;
+        var infoValue = ParentObject.InfoControlValue;
         var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(value
           , "Key Data Procedure", infoValue);
-        ParentObject.InfoValue = controlValue;
+        ParentObject.InfoControlValue = controlValue;
       }
     }
 
@@ -183,11 +183,11 @@ namespace LJCDataUtility5
         proc.Line("END");
         var value = proc.ToString();
 
-        var infoValue = ParentObject.InfoValue;
+        var infoValue = ParentObject.InfoControlValue;
         var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(value
           , "Module Data Procedure", infoValue);
-        ParentObject.InfoValue = controlValue;
+        ParentObject.InfoControlValue = controlValue;
       }
     }
 
@@ -217,11 +217,11 @@ namespace LJCDataUtility5
         proc.Line("END");
         var value = proc.ToString();
 
-        var infoValue = ParentObject.InfoValue;
+        var infoValue = ParentObject.InfoControlValue;
         var scriptWindow = new ShowInfoDialog();
         var controlValue = scriptWindow.ShowInfo(value
           , "Table Data Procedure", infoValue);
-        ParentObject.InfoValue = controlValue;
+        ParentObject.InfoControlValue = controlValue;
       }
     }
     #endregion

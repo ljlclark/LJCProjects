@@ -11,6 +11,30 @@ namespace LJCDataUtility5
   // Provides methods for the DataModule combo.
   internal class DataModuleComboCode
   {
+    #region Properties
+
+    // Gets or sets the current data config name.
+    private string? CurrentDataConfigName { get; set; }
+
+    // Gets or sets the database id.
+    private short DbGroupId { get; set; }
+
+    // Gets or sets the Managers reference.
+    private ManagersDataUtility Managers { get; set; }
+
+    // Gets or sets the Combo reference.
+    private LJCItemCombo ModuleCombo { get; set; }
+
+    // Gets or sets the Manager reference.
+    private DataModuleManager? ModuleManager { get; set; } = null!;
+
+    // Gets or sets the Menu reference.
+    private ContextMenuStrip ModuleMenu { get; set; }
+
+    // Gets or sets the Parent List reference.
+    private DataUtilityList ParentObject { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -431,30 +455,6 @@ namespace LJCDataUtility5
     {
       ModuleCombo.Focus();
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the current data config name.
-    private string? CurrentDataConfigName { get; set; }
-
-    // Gets or sets the database id.
-    private short DbGroupId { get; set; }
-
-    // Gets or sets the Managers reference.
-    private ManagersDataUtility Managers { get; set; }
-
-    // Gets or sets the Combo reference.
-    private LJCItemCombo ModuleCombo { get; set; }
-
-    // Gets or sets the Manager reference.
-    private DataModuleManager? ModuleManager { get; set; } = null!;
-
-    // Gets or sets the Menu reference.
-    private ContextMenuStrip ModuleMenu { get; set; }
-
-    // Gets or sets the Parent List reference.
-    private DataUtilityList ParentObject { get; set; }
     #endregion
   }
 }

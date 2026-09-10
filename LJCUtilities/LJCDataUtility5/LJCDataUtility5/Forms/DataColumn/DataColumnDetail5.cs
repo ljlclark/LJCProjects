@@ -11,6 +11,66 @@ namespace LJCDataUtility5
   // The DataColumn detail dialog.
   internal partial class DataColumnDetail : Form
   {
+    #region Properties
+
+    // Gets or sets the primary ID value.
+    internal short LJCDbId { get; set; }
+
+    // Gets or sets the primary ID value.
+    internal long LJCId { get; set; }
+
+    // Gets the LJCIsUpdate value.
+    internal bool LJCIsUpdate { get; private set; }
+
+    // The form position.
+    internal Point LJCLocation { get; set; }
+
+    // The Managers object.
+    internal ManagersDataUtility LJCManagers { get; set; } = null!;
+
+    // Gets or sets the Parent ID value.
+    internal long LJCTableId { get; set; }
+
+    // Gets or sets the ParentSite ID value.
+    internal short LJCTableDbId { get; set; }
+
+    // Gets or sets the LJCParentName value.
+    internal string? LJCTableName
+    {
+      get => _TableName;
+      set
+      {
+        var newValue = value?.Trim();
+        if (LJC.HasText(newValue)
+          && _TableName != newValue)
+        {
+          _TableName = newValue;
+        }
+      }
+    }
+    private string? _TableName;
+
+    // Gets a reference to the record object.
+    internal DataUtilColumn? LJCRecord { get; private set; }
+
+    // Gets or sets the Sequence value.
+    internal int LJCSequence { get; set; }
+    #endregion
+
+    #region Class Data
+
+    // The Change event.
+    internal event EventHandler<EventArgs> LJCChange = null!;
+
+    private DataUtilColumn? mOriginalRecord;
+
+    private readonly LJCTextNumber mSequence = new();
+    private readonly LJCTextNumber mMaxLength = new();
+    private readonly LJCTextNumber mNewMaxLength = new();
+    private readonly LJCTextNumber mIdentityStart = new();
+    private readonly LJCTextNumber mIdentityIncrement = new();
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -501,66 +561,6 @@ namespace LJCDataUtility5
         MaxLengthText.Text = "-1";
       }
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the primary ID value.
-    internal short LJCDbId { get; set; }
-
-    // Gets or sets the primary ID value.
-    internal long LJCId { get; set; }
-
-    // Gets the LJCIsUpdate value.
-    internal bool LJCIsUpdate { get; private set; }
-
-    // The form position.
-    internal Point LJCLocation { get; set; }
-
-    // The Managers object.
-    internal ManagersDataUtility LJCManagers { get; set; } = null!;
-
-    // Gets or sets the Parent ID value.
-    internal long LJCTableId { get; set; }
-
-    // Gets or sets the ParentSite ID value.
-    internal short LJCTableDbId { get; set; }
-
-    // Gets or sets the LJCParentName value.
-    internal string? LJCTableName
-    {
-      get => _TableName;
-      set
-      {
-        var newValue = value?.Trim();
-        if (LJC.HasText(newValue)
-          && _TableName != newValue)
-        {
-          _TableName = newValue;
-        }
-      }
-    }
-    private string? _TableName;
-
-    // Gets a reference to the record object.
-    internal DataUtilColumn? LJCRecord { get; private set; }
-
-    // Gets or sets the Sequence value.
-    internal int LJCSequence { get; set; }
-    #endregion
-
-    #region Class Data
-
-    // The Change event.
-    internal event EventHandler<EventArgs> LJCChange = null!;
-
-    private DataUtilColumn? mOriginalRecord;
-
-    private readonly LJCTextNumber mSequence = new();
-    private readonly LJCTextNumber mMaxLength = new();
-    private readonly LJCTextNumber mNewMaxLength = new();
-    private readonly LJCTextNumber mIdentityStart = new();
-    private readonly LJCTextNumber mIdentityIncrement = new();
     #endregion
   }
 }

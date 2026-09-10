@@ -10,6 +10,57 @@ namespace LJCDataUtility5
   // The list form.
   internal partial class DataUtilityList : Form
   {
+    #region Properties
+
+    // Gets or sets the database id.
+    internal short DbGroupId { get; set; }
+
+    // Gets or sets the connection type value.
+    internal string ConnectionType { get; set; } = null!;
+
+    // Gets or sets the ControlValues file name.
+    internal string ControlValuesFileName { get; set; } = null!;
+
+    // Gets or sets the InfoValue item.
+    internal ControlValue? InfoControlValue { get; set; }
+
+    // Gets or sets the Managers object.
+    internal ManagersDataUtility Managers { get; set; } = null!;
+
+    // Gets or sets the configuration settings.
+    //internal LJCStandardUISettings Settings { get; set; }
+
+    // Gets or sets the DataColumnGridCode reference.
+    internal DataColumnGridCode ColumnGridCode { get; set; } = null!;
+
+    // Gets or sets the ModuleComboCode reference.
+    internal DataConfigComboCode ConfigComboCode { get; set; } = null!;
+
+    // Gets or sets the ModuleComboCode reference.
+    internal DataModuleComboCode ModuleComboCode { get; set; } = null!;
+
+    // Gets or sets the DataTableGridCode reference.
+    internal DataTableGridCode TableGridCode { get; set; } = null!;
+
+    // Gets or sets the KeyGridCode reference.
+    internal DataKeyGridCode KeyGridCode { get; set; } = null!;
+
+    // Gets or sets the control values reference.
+    private ControlValues? ControlValues { get; set; }
+    #endregion
+
+    #region Class Data
+
+    // The table key types.
+    internal enum KeyType : short
+    {
+      Primary = 1,
+      Unique,
+      Foreign,
+      Table
+    }
+    #endregion
+
     #region Setup Methods
 
     // Initializes the window controls.
@@ -130,7 +181,7 @@ namespace LJCDataUtility5
           KeyGrid.LJCRestoreColumnValues(ControlValues);
 
           FormCommon.RestoreSplitDistance(MainSplit, ControlValues);
-          InfoValue = ControlValues.LJCSearchName("AddProc");
+          InfoControlValue = ControlValues.LJCSearchName("AddProc");
         }
       }
     }
@@ -151,9 +202,9 @@ namespace LJCDataUtility5
 
       controlValues.Add("MainSplit.SplitterDistance", 0, 0, 0
         , MainSplit.SplitterDistance);
-      if (InfoValue != null)
+      if (InfoControlValue != null)
       {
-        controlValues.Add(InfoValue);
+        controlValues.Add(InfoControlValue);
       }
 
       LJC.XmlSerialize(controlValues.GetType(), controlValues, null
@@ -201,53 +252,5 @@ namespace LJCDataUtility5
       SetFocusTab(e);
     }
     #endregion
-
-    #region Properties
-
-    // Gets or sets the database id.
-    internal short DbGroupId { get; set; }
-
-    // Gets or sets the connection type value.
-    internal string ConnectionType { get; set; } = null!;
-
-    // Gets or sets the ControlValues file name.
-    internal string ControlValuesFileName { get; set; } = null!;
-
-    // Gets or sets the InfoValue item.
-    internal ControlValue? InfoValue { get; set; }
-
-    // Gets or sets the Managers object.
-    internal ManagersDataUtility Managers { get; set; } = null!;
-
-    // Gets or sets the configuration settings.
-    //internal LJCStandardUISettings Settings { get; set; }
-
-    // Gets or sets the DataColumnGridCode reference.
-    internal DataColumnGridCode ColumnGridCode { get; set; } = null!;
-
-    // Gets or sets the ModuleComboCode reference.
-    internal DataConfigComboCode ConfigComboCode { get; set; } = null!;
-
-    // Gets or sets the ModuleComboCode reference.
-    internal DataModuleComboCode ModuleComboCode { get; set; } = null!;
-
-    // Gets or sets the DataTableGridCode reference.
-    internal DataTableGridCode TableGridCode { get; set; } = null!;
-
-    // Gets or sets the KeyGridCode reference.
-    internal DataKeyGridCode KeyGridCode { get; set; } = null!;
-
-    // Gets or sets the control values reference.
-    private ControlValues? ControlValues { get; set; }
-    #endregion
-  }
-
-  // The table key types.
-  internal enum KeyType : short
-  {
-    Primary = 1,
-    Unique,
-    Foreign,
-    Table
   }
 }
