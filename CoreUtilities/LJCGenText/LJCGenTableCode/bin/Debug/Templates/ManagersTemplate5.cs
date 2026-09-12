@@ -13,7 +13,7 @@ using LJCNetCommon;
 
 // #SectionBegin Class
 // #Value _ClassName_ ManagersAppName
-// #Value _NameSpace_ ManagersAppNameDAL
+// #Value _NameSpace_ ManagersAppNameDAL5
 namespace _NameSpace_
 {
 	/// <summary>Gets the Manager objects.</summary>
@@ -65,6 +65,7 @@ namespace _NameSpace_
 				}
 			}
 		}
+		private _TableName_Manager m_TableName_Manager;
 		// #SectionEnd Properties
 		#endregion
 
@@ -72,10 +73,6 @@ namespace _NameSpace_
 
 		private DbServiceRef mDbServiceRef;
 		private string mDataConfigName;
-		// #SectionBegin Properties
-		// #Value _TableName_ DataColumn
-		private _TableName_Manager m_TableName_Manager;
-		// #SectionEnd Properties
 		#endregion
 	}
 }
