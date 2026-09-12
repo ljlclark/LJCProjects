@@ -22,11 +22,6 @@ namespace LJCGenTextLib
     /// <returns>The Sections object.</returns>
     public Sections CreateSections(string[] templateLines)
     {
-      Section section = null;
-      Replacements replacements;
-      Replacement replacement;
-      Directive directive;
-      bool IsSectionDirective;
       Sections retValue;
 
       if (null == CommentChars)
@@ -39,56 +34,74 @@ namespace LJCGenTextLib
       LJCReflect reflect = new LJCReflect(defaultValues);
 
       retValue = new Sections();
+      Section section = null;
       for (int lineIndex = 0; lineIndex < templateLines.Length; lineIndex++)
       {
-        IsSectionDirective = false;
         string line = templateLines[lineIndex];
-        directive = Directive.GetDirective(line, CommentChars);
-
-        if (directive != null)
+        var directive = Directive.GetDirective(line, CommentChars);
+        if (null == directive)
         {
-          if (Directive.IsSectionDirective(line, CommentChars))
+          continue;
+        }
+
+        bool isSectionDirective = false;
+        if (Directive.IsSectionDirective(line, CommentChars))
+        {
+          isSectionDirective = true;
+
+          switch (directive.ID.ToLower())
           {
-            IsSectionDirective = true;
-
-            switch (directive.ID.ToLower())
-            {
-              case Directive.SectionBegin:
-                section = retValue.Retrieve(directive.Name);
-                if (null == section)
-                {
-                  section = retValue.Add(directive.Name);
-                }
-                break;
-
-              case Directive.SectionEnd:
-                section = null;
-                break;
-            }
-          }
-
-          if (section != null
-            && !IsSectionDirective)
-          {
-            if (Directive.IsValue(directive))
-            {
-              if (0 == section.RepeatItems.Count)
+            case Directive.SectionBegin:
+              section = retValue.Retrieve(directive.Name);
+              if (null == section)
               {
-                section.RepeatItems.Add("Item1");
+                section = retValue.Add(directive.Name);
               }
+              break;
 
-              replacements = section.RepeatItems[0].Replacements;
+            case Directive.SectionEnd:
+              section = null;
+              break;
+          }
+        }
+
+        // A section is active
+        // and line is not a section directive.
+        if (section != null
+          && !isSectionDirective)
+        {
+          if (Directive.IsValue(directive))
+          {
+            // Create a repeat item.
+            if (0 == section.RepeatItems.Count)
+            {
+              section.RepeatItems.Add("Item1");
+            }
+
+            // Check for existing replacement.
+            Replacement replacement = null;
+            var replacements = section.RepeatItems[0].Replacements;
+            if (replacements.Count > 0)
+            {
               replacement = replacements.Retrieve(directive.Name);
-              if (null == replacement)
+            }
+
+            // Create undefined replacement.
+            if (null == replacement)
+            {
+              string propertyValue = directive.Value;
+
+              // Get default value if available.
+              if (null == propertyValue)
               {
-                string propertyValue = null;
                 var propertyName = directive.Name.Replace("_", "");
                 if (reflect.HasProperty(propertyName))
                 {
                   propertyValue = reflect.GetString(propertyName);
                 }
-                replacements.Add(directive.Name, propertyValue);
               }
+
+              replacements.Add(directive.Name, propertyValue);
             }
           }
         }
