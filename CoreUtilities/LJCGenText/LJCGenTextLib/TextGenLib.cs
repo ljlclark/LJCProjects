@@ -8,10 +8,16 @@ using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCGenTextLib
 {
-  /// <summary>Generate output text from a template and data.</summary>
+  // Generates output text from a template and data.
+  /// <include file='Doc/TextGenLib.xml'
+  ///  path='items/TextGenLib/*'/>
   public class TextGenLib
   {
-    /// <summary>Initializes an object instance.</summary>
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TextGenLib.xml'
+    ///  path='items/Constructor/*'/>
     public TextGenLib()
     {
       CommentChars = "//";
@@ -22,11 +28,13 @@ namespace LJCGenTextLib
       ActiveReplacements = new List<Replacements>();
       Output = "";
     }
+    #endregion
 
     #region Main Processing Methods
 
-    // Generate the Output text.
-    /// <include path='items/TextGen/*' file='Doc/TextGenLib.xml'/>
+    // Generates the Output text.
+    /// <include file='Doc/TextGenLib.xml'
+    ///  path='items/TextGen/*'/>
     public string TextGen(Sections sections, string[] templateLines)
     {
       Sections = sections;
@@ -105,7 +113,7 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    // Process the #IfBegin directive.
+    // Processes the #IfBegin directive.
     private void DoIf(Directive directive, Replacements replacements
       , ref int lineIndex)
     {
@@ -170,7 +178,7 @@ namespace LJCGenTextLib
       }
     }
 
-    // Process the RepeatItems.
+    // Processes the RepeatItems.
     private void DoItems(Section section, ref int nextLineIndex)
     {
       var success = true;
@@ -271,7 +279,7 @@ namespace LJCGenTextLib
       }
     }
 
-    // If not directive, process replacements and add to output.
+    // If not directive, processes replacements and adds to output.
     private string DoOutput(Replacements replacements, string line)
     {
       string retValue = null;
@@ -288,7 +296,7 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    // Perform the line replacements.
+    // Performs the line replacements.
     private void DoReplacements(Replacements replacements
       , ref string lineItem)
     {
@@ -323,6 +331,7 @@ namespace LJCGenTextLib
       }
     }
 
+    // 
     private bool DoSubsection(Directive directive, RepeatItem repeatItem
       , ref int nextLineIndex)
     {
@@ -378,7 +387,7 @@ namespace LJCGenTextLib
 
     #region Other Methods
 
-    // Add current replacements to Active array.
+    // Adds current replacements to Active array.
     private void AddActive(RepeatItem item)
     {
       if (LJC.HasListItems(item.Replacements))
@@ -387,7 +396,7 @@ namespace LJCGenTextLib
       }
     }
 
-    // Add the line to the output.
+    // Adds the line to the output.
     private string AddOutput(string line)
     {
       string retValue = null;
@@ -482,7 +491,7 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    // Remove Replacements that are no longer active.
+    // Removes Replacements that are no longer active.
     private void RemoveActive()
     {
       if (LJC.HasListItems(ActiveReplacements))
@@ -494,21 +503,31 @@ namespace LJCGenTextLib
 
     #region Properties
 
-    /// <summary></summary>
+    // Gets or sets the single line comment characters.
+    /// <include file='Doc/TextGenLib.xml'
+    ///  path='items/CommentChars/*'/>
     public string CommentChars { get; set; }
 
-    /// <summary></summary>
+    // Gets or sets the placeholder begin characters.
+    /// <include file='Doc/TextGenLib.xml'
+    ///  path='items/PlaceholderBegin/*'/>
     public string PlaceholderBegin { get; set; }
 
-    /// <summary></summary>
+    // Gets or sets the placeholder end characters.
+    /// <include file='Doc/TextGenLib.xml'
+    ///  path='items/PlaceholderEnd/*'/>
     public string PlaceholderEnd { get; set; }
 
+    // Gets or sets the active replacements collection.
     private List<Replacements> ActiveReplacements { get; set; }
 
+    // Gets or sets the template lines.
     private string[] Lines { get; set; }
 
+    // Gets or sets the output value.
     private string Output { get; set; }
 
+    // Gets or sets the sections collection.
     private Sections Sections { get; set; }
     #endregion
   }
