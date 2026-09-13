@@ -133,6 +133,14 @@ namespace LJCGenTextEdit
           if (lookupRecord != null)
           {
             lookupRecord.Name = LJCRecord.Name;
+            // *** Begin *** Add 9/13/26
+            if (!string.Equals(LJCRecord.Name, mOriginalName
+              , StringComparison.OrdinalIgnoreCase))
+            {
+              var sections = LJCGenDataManager.LoadSections();
+              sections.Sort();
+            }
+            // *** End ***
             LJCGenDataManager.Save();
           }
         }

@@ -136,6 +136,14 @@ namespace LJCGenTextEdit
           if (lookupRecord != null)
           {
             lookupRecord.Name = LJCRecord.Name;
+            // *** Begin *** Add 9/13/26
+            if (!string.Equals(LJCRecord.Name, mOriginalName
+              , StringComparison.OrdinalIgnoreCase))
+            {
+              var repeatItems = LJCGenDataManager.LoadRepeatItems(LJCParentName);
+              repeatItems.Sort();
+            }
+            // *** End ***
             LJCGenDataManager.Save();
           }
         }
