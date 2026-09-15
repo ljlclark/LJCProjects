@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Directive.cs
 using System;
@@ -6,14 +6,15 @@ using System;
 namespace LJCGenTextLib
 {
   // Represents a Directive item.
-  /// <include path='items/Directive/*' file='Doc/ProjectGenTextLib.xml'/>
+  /// <include file='Doc/ProjectGenTextLib.xml'
+  ///  path='items/Directive/*'/>
   public class Directive
   {
     #region static check Line Functions
 
-    /// <summary>
-    /// Checks line for directive and returns the directive object.
-    /// </summary>
+    // Checks line for directive and returns the directive object.
+    /// <include file='Doc/ProjectGenTextLib.xml'
+    ///  path='items/GetDirective/*'/>
     public static Directive GetDirective(string line
       , string commentChars = "//")
     {
@@ -53,6 +54,8 @@ namespace LJCGenTextLib
     }
 
     /// <summary>Checks if the line has a directive.</summary>
+    /// <include file='Doc/ProjectGenTextLib.xml'
+    ///  path='items/GetDirective/*'/>
     public static bool IsDirective(string line
       , string commentChars)
     {
@@ -123,7 +126,7 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>Checks for Begin Section.</summary>
+    // Checks for Begin Section.
     internal static bool IsSectionBegin(string line
       , string commentChars)
     {
@@ -213,14 +216,16 @@ namespace LJCGenTextLib
     #region Constructors
 
     //Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public Directive()
     {
       CommentChars = "//";
     }
 
     // Initializes an object instance.
-    /// <include path='items/DirectiveC/*' file='Doc/Directive.xml'/>
+    /// <include file='Doc/Directive.xml'
+    ///  path='items/DirectiveC/*'/>
     public Directive(string id, string name, string modifier = "")
     {
       ID = id;
@@ -233,7 +238,8 @@ namespace LJCGenTextLib
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public Directive Clone()
     {
       Directive retValue = MemberwiseClone() as Directive;
@@ -241,7 +247,8 @@ namespace LJCGenTextLib
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/ToString/*'/>
     public override string ToString()
     {
       return $"{ID},{Name}";
@@ -268,7 +275,9 @@ namespace LJCGenTextLib
     //  return retValue;
     //}
 
-    /// <summary>Checks if directive ID = IfBegin.</summary>
+    // Checks if directive ID = IfBegin.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/IsIfBegin/*'/>
     public bool IsIfBegin()
     {
       bool retValue = false;
@@ -280,7 +289,9 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>Checks if directive ID = IfElse.</summary>
+    // Checks if directive ID = IfElse.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/IsIfElse/*'/>
     public bool IsIfElse()
     {
       bool retValue = false;
@@ -292,7 +303,9 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>Checks if directive ID = IfEnd.</summary>
+    // Checks if directive ID = IfEnd.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/IsIfEnd/*'/>
     public bool IsIfEnd()
     {
       bool retValue = false;
@@ -304,12 +317,9 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>
-    /// Checks the Name value.
-    /// </summary>
-    /// <param name="name">The Name value.</param>
-    /// <param name="caseInsensitive">Use insensitive compare.</param>
-    /// <returns>true if equal; otherwise, false.</returns>
+    // Checks the Name value.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/IsName/*'/>
     public bool IsName(string name, bool caseInsensitive = true)
     {
       bool retValue = false;
@@ -331,7 +341,9 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>Checks if directive ID = SectionBegin.</summary>
+    // Checks if directive ID = SectionBegin.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/IsSectionBegin/*'/>
     public bool IsSectionBegin()
     {
       bool retValue = false;
@@ -343,7 +355,9 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>Checks if directive ID = SectionEnd.</summary>
+    // Checks if directive ID = SectionEnd.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/IsSectionEnd/*'/>
     public bool IsSectionEnd()
     {
       bool retValue = false;
@@ -358,16 +372,24 @@ namespace LJCGenTextLib
 
     #region Properties
 
-    /// <summary>Gets or sets the line comment start characters.</summary>
+    // Gets or sets the line comment start characters.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/CommentChars/*'/>
     public string CommentChars { get; set; }
 
-    /// <summary>Gets or sets the directive ID.</summary>
+    // Gets or sets the directive ID.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/ID/*'/>
     public string ID { get; set; }
 
-    /// <summary>Gets or sets the Name value.</summary>
+    // Gets or sets the Name value.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/Name/*'/>
     public string Name { get; set; }
 
-    /// <summary>Gets or sets the Value property.</summary>
+    // Gets or sets the Value property.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/Value/*'/>
     public string Value { get; set; }
     #endregion
 

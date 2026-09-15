@@ -1,34 +1,32 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenReplacementManager.cs
-using LJCGenTextLib;
-using LJCNetCommon;
-using System;
+using LJCNetCommon5;
 
-namespace LJCGenTextEdit
+namespace LJCGenTextXML5
 {
   public partial class GenDataManager
   {
     #region Methods
 
     // Adds a Replacement record to the object data.
-    /// <include file='Doc/GenReplacementManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/AddReplacement/*'/>
     public void AddReplacement(string sectionName, string repeatItemName
       , Replacement replacement)
     {
-      if (NetString.HasValue(sectionName)
-        && NetString.HasValue(repeatItemName)
+      if (LJC.HasText(sectionName)
+        && LJC.HasText(repeatItemName)
         && replacement != null
-        && NetString.HasValue(replacement.Name))
+        && LJC.HasText(replacement.Name))
       {
         Section searchSection = GetSection(sectionName);
         if (searchSection != null)
         {
-          RepeatItem searchItem = GetRepeatItem(sectionName, repeatItemName);
+          var searchItem = GetRepeatItem(sectionName, repeatItemName);
           if (searchItem != null)
           {
-            Replacement searchReplacement = RetrieveReplacement(sectionName
+            var searchReplacement = RetrieveReplacement(sectionName
               , repeatItemName, replacement.Name);
             if (searchReplacement != null)
             {
@@ -45,18 +43,18 @@ namespace LJCGenTextEdit
     }
 
     // Retrieves a Replacement record from the object data.
-    /// <include file='Doc/GenReplacementManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/RetrieveReplacement/*'/>
-    public Replacement RetrieveReplacement(string sectionName
+    public Replacement? RetrieveReplacement(string sectionName
       , string repeatItemName, string replacementName)
     {
-      Replacement retValue = null;
+      Replacement? retValue = null;
 
-      if (NetString.HasValue(sectionName)
-        && NetString.HasValue(repeatItemName)
-        && NetString.HasValue(replacementName))
+      if (LJC.HasText(sectionName)
+        && LJC.HasText(repeatItemName)
+        && LJC.HasText(replacementName))
       {
-        RepeatItem repeatItem = GetRepeatItem(sectionName, repeatItemName);
+        var repeatItem = GetRepeatItem(sectionName, repeatItemName);
         if (repeatItem != null)
         {
           retValue = repeatItem.Replacements.Retrieve(replacementName);
@@ -66,16 +64,16 @@ namespace LJCGenTextEdit
     }
 
     // Retrieves a collection of data records.
-    /// <include file='Doc/GenReplacementManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/LoadReplacements/*'/>
-    public Replacements LoadReplacements(string sectionName, string repeatItemName)
+    public Replacements? LoadReplacements(string sectionName, string repeatItemName)
     {
-      Replacements retValue = null;
+      Replacements? retValue = null;
 
-      if (NetString.HasValue(sectionName)
-        && NetString.HasValue(repeatItemName))
+      if (LJC.HasText(sectionName)
+        && LJC.HasText(repeatItemName))
       {
-        RepeatItem repeatItem = GetRepeatItem(sectionName, repeatItemName);
+        var repeatItem = GetRepeatItem(sectionName, repeatItemName);
         if (repeatItem != null)
         {
           retValue = repeatItem.Replacements;
@@ -85,7 +83,7 @@ namespace LJCGenTextEdit
     }
 
     // Delete the Replacement record from the object data.
-    /// <include file='Doc/GenReplacementManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/DeleteReplacement/*'/>
     public bool DeleteReplacement(string sectionName, string repeatItemName
       , string replacementName)
@@ -95,7 +93,7 @@ namespace LJCGenTextEdit
       Section searchSection = GetSection(sectionName);
       if (searchSection != null)
       {
-        RepeatItem searchRepeatItem = GetRepeatItem(sectionName, repeatItemName);
+        var searchRepeatItem = GetRepeatItem(sectionName, repeatItemName);
         if (searchRepeatItem != null)
         {
           Replacement replacement = GetReplacement(sectionName, repeatItemName
@@ -114,7 +112,7 @@ namespace LJCGenTextEdit
     private Replacement GetReplacement(string sectionName, string repeatItemName
       , string replacementName)
     {
-      Replacement retValue = RetrieveReplacement(sectionName, repeatItemName
+      var retValue = RetrieveReplacement(sectionName, repeatItemName
         , replacementName);
       if (null == retValue)
       {

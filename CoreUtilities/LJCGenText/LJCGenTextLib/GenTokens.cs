@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenTokens.cs
 using System.Collections.Generic;
@@ -6,13 +6,15 @@ using System.Collections.Generic;
 namespace LJCGenTextLib
 {
   // Represents a collection of replacement token strings.
-  /// <include path='items/GenTokens/*' file='Doc/GenTokens.xml'/>
+  /// <include file='Doc/GenTokens.xml'
+  ///  path='items/GenTokens/*'/>
   public class GenTokens : List<string>
   {
     #region Constructors
 
     //Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public GenTokens()
     {
       mPrevCount = -1;
@@ -22,7 +24,8 @@ namespace LJCGenTextLib
     #region Methods
 
     // Sets the Token elements from the specified text.
-    /// <include path='items/SetTokens/*' file='Doc/GenTokens.xml'/>
+    /// <include file='Doc/GenTokens.xml'
+    ///  path='items/SetTokens/*'/>
     public void SetTokens(string text)
     {
       string tokenValue;
@@ -44,7 +47,8 @@ namespace LJCGenTextLib
     }
 
     // Retrieves the next valid token.
-    /// <include path='items/GetNextToken/*' file='Doc/GenTokens.xml'/>
+    /// <include file='Doc/GenTokens.xml'
+    ///  path='items/GetNextToken/*'/>
     public string GetNextToken(string text, ref int currentIndex)
     {
       int startIndex = 0;
@@ -88,7 +92,8 @@ namespace LJCGenTextLib
     }
 
     // Searches the entire sorted collection for an element with the specified value
-    /// <include path='items/BinarySearch/*' file='Doc/GenTokens.xml'/>
+    /// <include file='Doc/GenTokens.xml'
+    ///  path='items/BinarySearch/*'/>
     public new string BinarySearch(string tokenValue)
     {
       int index;

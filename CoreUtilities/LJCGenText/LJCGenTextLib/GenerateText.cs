@@ -1,4 +1,4 @@
-// Copyright(c) Lester J. Clark and Contributors.
+// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenerateText.cs
 using LJCNetCommon;
@@ -9,17 +9,15 @@ using System.IO;
 namespace LJCGenTextLib
 {
   // Generates text using a text template.
-  /// <include path='items/GenerateText/*' file='Doc/GenerateText.xml'/>
+  /// <include file='Doc/GenerateText.xml'
+  ///  path='items/GenerateText/*'/>
   public class GenerateText
   {
     #region Public Methods
 
     // Create Sections from template definition.
-    /// <summary>
-    /// Create Sections from template definition.
-    /// </summary>
-    /// <param name="templateLines">The Template lines.</param>
-    /// <returns>The Sections object.</returns>
+    /// <include file='Doc/GenerateText.xml'
+    ///  path='items/CreateSections/*'/>
     public Sections CreateSections(string[] templateLines)
     {
       Sections retValue;
@@ -109,7 +107,9 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary></summary>Get the Sections from the data file.
+    // </summary>Get the Sections from the data file.
+    /// <include file='Doc/GenerateText.xml'
+    ///  path='items/GetDataSections/*'/>
     public Sections GetDataSections(string dataFileSpec)
     {
       string errorText = null;
@@ -141,7 +141,9 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>Create the Out filespec from the dataFileSpec and outputFileSpec values.</summary>
+    // Create the Out filespec from the dataFileSpec and outputFileSpec values.
+    /// <include file='Doc/GenerateText.xml'
+    ///  path='items/GetOutFileSpec/*'/>
     public string GetOutFileSpec(string dataFileSpec, string outputFileSpec)
     {
       string retValue = null;
@@ -165,7 +167,9 @@ namespace LJCGenTextLib
 
     #region Properties
 
-    /// <summary>Gets or sets the line comment start characters.</summary>
+    // Gets or sets the line comment start characters.
+    /// <include file='Doc/GenerateText.xml'
+    ///  path='items/CommentChars/*'/>
     public string CommentChars { get; set; }
     #endregion
   }

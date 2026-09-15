@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<members>
+  <RepeatItems>
+    <summary>
+      Represents a collection of RepeatItem objects.
+    </summary>
+  </RepeatItems>  
+</members>

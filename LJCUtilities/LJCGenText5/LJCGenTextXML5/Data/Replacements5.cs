@@ -1,37 +1,41 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Replacements.cs
-using LJCNetCommon;
-using System.Collections.Generic;
+using LJCNetCommon5;
 
-namespace LJCGenTextLib
+namespace LJCGenTextXML5
 {
   // Represents a collection of Replacement objects.
-  /// <include file='Doc/Replacements.xml'
+  /// <include file='Doc/Replacements5.xml'
   ///  path='items/Replacements/*'/>
   public class Replacements : List<Replacement>
   {
+    #region Class Data
+
+    private int _PrevCount;
+    #endregion
+
     #region Constructors
 
     //Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='items/DefaultConstructor/*'/>
     public Replacements()
     {
-      mPrevCount = -1;
+      _PrevCount = -1;
     }
     #endregion
 
     #region Methods
 
     // Creates the Replacement object with the supplied values
-    /// <include file='Doc/Replacements.xml'
+    /// <include file='Doc/Replacements5.xml'
     ///  path='items/Add/*'/>
-    public Replacement Add(string name, string value)
+    public Replacement? Add(string name, string value)
     {
-      Replacement retValue = null;
+      Replacement? retValue = null;
 
-      if (NetString.HasValue(name))
+      if (LJC.HasText(name))
       {
         //retValue = LJCSearchByName(name);
         //if (null == retValue)
@@ -47,21 +51,22 @@ namespace LJCGenTextLib
     }
 
     // Retrieve the collection element with name.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='items/LJCSearchName/*'/>
-    public Replacement Retrieve(string name)
+    public Replacement? Retrieve(string name)
     {
       Replacement replacement;
       int index;
-      Replacement retValue = null;
+      Replacement? retValue = null;
 
-      if (Count != mPrevCount)
+      if (Count != _PrevCount)
       {
-        mPrevCount = Count;
+        _PrevCount = Count;
         Sort();
       }
 
-      replacement = new Replacement(name, null);
+      //replacement = new Replacement(name, null);
+      replacement = new Replacement(name, "");
       index = base.BinarySearch(replacement);
       if (index > -1)
       {
@@ -69,11 +74,6 @@ namespace LJCGenTextLib
       }
       return retValue;
     }
-    #endregion
-
-    #region Class Data
-
-    private int mPrevCount;
     #endregion
   }
 }

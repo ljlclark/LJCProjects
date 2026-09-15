@@ -1,19 +1,23 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // RepeatItems.cs
-using System.Collections.Generic;
 
-namespace LJCGenTextLib
+namespace LJCGenTextXML5
 {
   // Represents a collection of RepeatItem objects.
-  /// <include file='Doc/RepeatItems.xml'
+  /// <include file='Doc/RepeatItems5.xml'
   ///  path='items/RepeatItems/*'/>
   public class RepeatItems : List<RepeatItem>
   {
+    #region Class Data
+
+    private int _PrevCount;
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='items/DefaultConstructor/*'/>
     public RepeatItems()
     {
@@ -23,7 +27,7 @@ namespace LJCGenTextLib
     #region Methods
 
     // Creates the RepeateItem object and adds it to the end of the collection.
-    /// <include file='Doc/RepeatItems.xml'
+    /// <include file='Doc/RepeatItems5.xml'
     ///  path='items/Add/*'/>
     public RepeatItem Add(string name)
     {
@@ -45,17 +49,17 @@ namespace LJCGenTextLib
     }
 
     // Retrieve the collection element with name.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='items/LJCSearchName/*'/>
-    public RepeatItem Retrieve(string name)
+    public RepeatItem? Retrieve(string name)
     {
       RepeatItem repeatItem;
       int index;
-      RepeatItem retValue = null;
+      RepeatItem? retValue = null;
 
-      if (Count != mPrevCount)
+      if (Count != _PrevCount)
       {
-        mPrevCount = Count;
+        _PrevCount = Count;
         Sort();
       }
 
@@ -63,18 +67,13 @@ namespace LJCGenTextLib
       {
         Name = name
       };
-      index = base.BinarySearch(repeatItem);
+      index = BinarySearch(repeatItem);
       if (index > -1)
       {
         retValue = this[index];
       }
       return retValue;
     }
-    #endregion
-
-    #region Class Data
-
-    private int mPrevCount;
     #endregion
   }
 }

@@ -1,30 +1,27 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// GenItemManager.cs
-using LJCGenTextLib;
-using LJCNetCommon;
-using System;
-using LJC = LJCNetCommon.NetCommon;
+// GenItemManager5.cs
+using LJCNetCommon5;
 
-namespace LJCGenTextEdit
+namespace LJCGenTextXML5
 {
   public partial class GenDataManager
   {
     #region Methods
 
     // Adds a RepeatItem record to the object data.
-    /// <include file='Doc/GenItemManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/AddRepeatItem/*'/>
     public void AddRepeatItem(string sectionName, RepeatItem repeatItem)
     {
-      if (NetString.HasValue(sectionName)
+      if (LJC.HasText(sectionName)
         && repeatItem != null
-        && NetString.HasValue(repeatItem.Name))
+        && LJC.HasText(repeatItem.Name))
       {
         Section searchSection = GetSection(sectionName);
         if (searchSection != null)
         {
-          RepeatItem searchItem = RetrieveRepeatItem(sectionName
+          RepeatItem? searchItem = RetrieveRepeatItem(sectionName
             , repeatItem.Name);
           if (searchItem != null)
           {
@@ -40,14 +37,14 @@ namespace LJCGenTextEdit
     }
 
     // Retrieves a RepeatItem record from the object data.
-    /// <include file='Doc/GenItemManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/RetrieveRepeatItem/*'/>
-    public RepeatItem RetrieveRepeatItem(string sectionName, string repeatItemName)
+    public RepeatItem? RetrieveRepeatItem(string sectionName, string repeatItemName)
     {
-      RepeatItem retValue = null;
+      RepeatItem? retValue = null;
 
-      if (NetString.HasValue(sectionName)
-        && NetString.HasValue(repeatItemName))
+      if (LJC.HasText(sectionName)
+        && LJC.HasText(repeatItemName))
       {
         Section section = GetSection(sectionName);
         if (section != null)
@@ -59,13 +56,13 @@ namespace LJCGenTextEdit
     }
 
     // Retrieves a collection of data records.
-    /// <include file='Doc/GenItemManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/LoadRepeatItems/*'/>
-    public RepeatItems LoadRepeatItems(string sectionName)
+    public RepeatItems? LoadRepeatItems(string sectionName)
     {
-      RepeatItems retValue = null;
+      RepeatItems? retValue = null;
 
-      if (NetString.HasValue(sectionName))
+      if (LJC.HasText(sectionName))
       {
         Section section = GetSection(sectionName);
         if (section != null)
@@ -77,7 +74,7 @@ namespace LJCGenTextEdit
     }
 
     // Deletes the RepeatItem record from the object data.
-    /// <include file='Doc/GenItemManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/DeleteRepeatItem/*'/>
     public bool DeleteRepeatItem(string sectionName, string repeatItemName)
     {
@@ -86,7 +83,7 @@ namespace LJCGenTextEdit
       Section searchSection = GetSection(sectionName);
       if (searchSection != null)
       {
-        RepeatItem searchRepeatItem = GetRepeatItem(sectionName, repeatItemName);
+        var searchRepeatItem = GetRepeatItem(sectionName, repeatItemName);
         if (searchRepeatItem != null)
         {
           // Check for child items.
@@ -107,9 +104,9 @@ namespace LJCGenTextEdit
     }
 
     // Get the RepeatItem object.
-    private RepeatItem GetRepeatItem(string sectionName, string repeatItemName)
+    private RepeatItem? GetRepeatItem(string sectionName, string repeatItemName)
     {
-      RepeatItem retValue = RetrieveRepeatItem(sectionName, repeatItemName);
+      RepeatItem? retValue = RetrieveRepeatItem(sectionName, repeatItemName);
       if (null == retValue)
       {
         var errorText = $"The RepeatItem '{repeatItemName}' was not found.";

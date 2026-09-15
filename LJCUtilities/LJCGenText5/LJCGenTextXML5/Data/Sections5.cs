@@ -1,15 +1,13 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Sections.cs
-using LJCNetCommon;
-using System.Collections.Generic;
-using System.IO;
+using LJCNetCommon5;
 using System.Xml.Serialization;
 
-namespace LJCGenTextLib
+namespace LJCGenTextXML5
 {
   // Represents a collection of Section objects.
-  /// <include file='Doc/Sections.xml'
+  /// <include file='Doc/Sections5.xml'
   ///  path='items/Sections/*'/>
   [XmlRoot("Sections")]
   public class Sections : List<Section>
@@ -17,13 +15,13 @@ namespace LJCGenTextLib
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='items/LJCDeserialize/*'/>
-    public static Sections LJCDeserialize(string fileSpec = null)
+    public static Sections? LJCDeserialize(string? fileSpec = null)
     {
-      Sections retValue;
+      Sections? retValue;
 
-      if (!NetString.HasValue(fileSpec))
+      if (!LJC.HasText(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
@@ -34,34 +32,51 @@ namespace LJCGenTextLib
       }
       else
       {
-        retValue = NetCommon.XmlDeserialize(typeof(Sections)
+        retValue = LJC.XmlDeserialize(typeof(Sections)
           , fileSpec) as Sections;
       }
       return retValue;
     }
     #endregion
 
+    #region Properties
+
+    // Gets the Default File Name.
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
+    ///  path='items/LJCDefaultFileName/*'/>
+    [XmlIgnore()]
+    public static string LJCDefaultFileName
+    {
+      get { return "Sections.xml"; }
+    }
+    #endregion
+
+    #region Class Data
+
+    private int _PrevCount;
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='items/DefaultConstructor/*'/>
     public Sections()
     {
-      mPrevCount = -1;
+      _PrevCount = -1;
     }
     #endregion
 
     #region Methods
 
     // Creates the Section object with the supplied values
-    /// <include file='Doc/Sections.xml'
+    /// <include file='Doc/Sections5.xml'
     ///  path='items/Add/*'/>
-    public Section Add(string name)
+    public Section? Add(string name)
     {
-      Section retValue = null;
+      Section? retValue = null;
 
-      if (NetString.HasValue(name))
+      if (LJC.HasText(name))
       {
         retValue = Retrieve(name);
         if (null == retValue)
@@ -74,22 +89,20 @@ namespace LJCGenTextLib
     }
 
     // Retrieve the collection element with name.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='items/LJCSearchName/*'/>
-    public Section Retrieve(string name)
+    public Section? Retrieve(string name)
     {
-      Section section;
-      int index;
-      Section retValue = null;
+      Section? retValue = null;
 
-      if (Count != mPrevCount)
+      if (Count != _PrevCount)
       {
-        mPrevCount = Count;
+        _PrevCount = Count;
         Sort();
       }
 
-      section = new Section(name);
-      index = BinarySearch(section);
+      Section section = new(name);
+      var index = BinarySearch(section);
       if (index > -1)
       {
         retValue = this[index];
@@ -98,44 +111,27 @@ namespace LJCGenTextLib
     }
 
     // Serializes the collection to a file.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='items/LJCSerialize/*'/>
-    public void LJCSerialize(string fileSpec = null)
+    public void LJCSerialize(string? fileSpec = null)
     {
-      if (!NetString.HasValue(fileSpec))
+      if (!LJC.HasText(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
-      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
+      LJC.XmlSerialize(GetType(), this, null, fileSpec);
     }
 
     // Serializes the collection to a string.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
     ///  path='items/LJCSerializeToString/*'/>
     public string LJCSerializeToString()
     {
       string retValue;
 
-      retValue = NetCommon.XmlSerializeToString(GetType(), this, null);
+      retValue = LJC.XmlSerializeToString(GetType(), this, null);
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    // Gets the Default File Name.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
-    ///  path='items/LJCDefaultFileName/*'/>
-    [XmlIgnore()]
-    public static string LJCDefaultFileName
-    {
-      get { return "Sections.xml"; }
-    }
-    #endregion
-
-    #region Class Data
-
-    private int mPrevCount;
     #endregion
   }
 }

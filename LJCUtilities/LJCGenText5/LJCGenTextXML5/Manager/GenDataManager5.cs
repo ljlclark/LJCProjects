@@ -1,26 +1,67 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// GenDataManager.cs
-using LJCGenTextLib;
-using LJCNetCommon;
-using System;
-using System.IO;
-using LJC = LJCNetCommon.NetCommon;
+// GenDataManager5.cs
+using LJCNetCommon5;
 
-namespace LJCGenTextEdit
+namespace LJCGenTextXML5
 {
   // Provides GenData specific XML data manipulation methods.
-  /// <include path='items/GenDataManager/*' file='Doc/GenDataManager.xml'/>
+  /// <include file='Doc/GenDataManager5.xml'
+  ///  path='items/GenDataManager/*'/>
   public partial class GenDataManager
   {
+    #region Properties
+
+    // Gets or sets the XML data file specification.
+    /// <include file='Doc/GenDataManager5.xml'
+    ///  path='items/FileSpec/*'/>
+    public string FileSpec
+    {
+      get => mFileSpec;
+      set
+      {
+        var newValue = value?.Trim();
+        if (LJC.HasText(newValue)
+          && mFileSpec != newValue)
+        {
+          mFileSpec = newValue;
+          FileName = Path.GetFileName(mFileSpec);
+        }
+      }
+    }
+    private string mFileSpec = null!;
+
+    // Gets or sets the XML data file name.
+    /// <include file='Doc/GenDataManager5.xml'
+    ///  path='items/FileName/*'/>
+    public string FileName
+    {
+      get => mFileName;
+      private set
+      {
+        var newValue = value?.Trim();
+        if (LJC.HasText(newValue))
+        {
+          mFileName = newValue;
+        }
+      }
+    }
+    private string mFileName = null!;
+
+    // Gets or sets the Sections reference.
+    /// <include file='Doc/GenDataManager5.xml'
+    ///  path='items/Sections/*'/>
+    public Sections Sections { get; set; } = null!;
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='Doc/GenDataManager.xml'
-    ///  path='items/GenDataManagerC/*'/>
+    /// <include file='Doc/GenDataManager5.xml'
+    ///  path='items/Constructor/*'/>
     public GenDataManager(string fileSpec)
     {
-      Sections = null;
+      Sections = [];
       FileSpec = fileSpec;
       if (!File.Exists(FileSpec))
       {
@@ -29,7 +70,11 @@ namespace LJCGenTextEdit
       }
       else
       {
-        Sections = Sections.LJCDeserialize(FileSpec);
+        var newSections = Sections.LJCDeserialize(FileSpec);
+        if (newSections != null)
+        {
+          Sections = newSections;
+        }
       }
     }
     #endregion
@@ -37,14 +82,14 @@ namespace LJCGenTextEdit
     #region Data Methods
 
     // Adds a Section record to the object data.
-    /// <include file='Doc/GenDataManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/AddSection/*'/>
     public void AddSection(Section section)
     {
       if (section != null
-        && NetString.HasValue(section.Name))
+        && LJC.HasText(section.Name))
       {
-        Section searchSection = RetrieveSection(section.Name);
+        var searchSection = RetrieveSection(section.Name);
         if (searchSection != null)
         {
           string errorText = $"Section '{section.Name}' already exists.";
@@ -58,13 +103,13 @@ namespace LJCGenTextEdit
     }
 
     // Retrieves a Section record from the object data.
-    /// <include file='Doc/GenDataManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/RetrieveSection/*'/>
-    public Section RetrieveSection(string sectionName)
+    public Section? RetrieveSection(string sectionName)
     {
-      Section retValue = null;
+      Section? retValue = null;
 
-      if (NetString.HasValue(sectionName))
+      if (LJC.HasText(sectionName))
       {
         retValue = Sections.Retrieve(sectionName);
       }
@@ -72,7 +117,7 @@ namespace LJCGenTextEdit
     }
 
     // Retrieves a collection of data records.
-    /// <include file='Doc/GenDataManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/LoadSections/*'/>
     public Sections LoadSections()
     {
@@ -80,7 +125,7 @@ namespace LJCGenTextEdit
     }
 
     // Deletes the Section record from the object data.
-    /// <include file='Doc/GenDataManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/DeleteSection/*'/>
     public bool DeleteSection(string sectionName)
     {
@@ -107,7 +152,7 @@ namespace LJCGenTextEdit
     // Get the Section object.
     private Section GetSection(string sectionName)
     {
-      Section retValue = RetrieveSection(sectionName);
+      Section? retValue = RetrieveSection(sectionName);
       if (null == retValue)
       {
         string errorText = $"The Section '{sectionName}' does not exist.";
@@ -117,10 +162,10 @@ namespace LJCGenTextEdit
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Save the XML data.
-    /// <include file='Doc/GenDataManager.xml'
+    /// <include file='Doc/GenDataManager5.xml'
     ///  path='items/Save/*'/>
     public bool Save()
     {
@@ -135,7 +180,7 @@ namespace LJCGenTextEdit
       }
       else
       {
-        if (!NetString.HasValue(FileSpec))
+        if (!LJC.HasText(FileSpec))
         {
           errorText = "Missing FileSpec property value.";
           throw new MissingMemberException(errorText);
@@ -147,38 +192,6 @@ namespace LJCGenTextEdit
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the XML data file specification.
-    /// <include file='Doc/GenDataManager.xml'
-    ///  path='items/FileSpec/*'/>
-    public string FileSpec
-    {
-      get { return mFileSpec; }
-      set
-      {
-        mFileSpec = NetString.InitString(value);
-        FileName = Path.GetFileName(mFileSpec);
-      }
-    }
-    private string mFileSpec;
-
-    // Gets or sets the XML data file name.
-    /// <include file='Doc/GenDataManager.xml'
-    ///  path='items/FileName/*'/>
-    public string FileName
-    {
-      get { return mFileName; }
-      private set { mFileName = NetString.InitString(value); }
-    }
-    private string mFileName;
-
-    // Gets or sets the Sections reference.
-    /// <include file='Doc/GenDataManager.xml'
-    ///  path='items/Sections/*'/>
-    public Sections Sections { get; set; }
     #endregion
   }
 }

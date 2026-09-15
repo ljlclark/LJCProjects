@@ -1,21 +1,20 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Section.cs
-using System;
+using LJCNetCommon5;
 using System.Xml.Serialization;
-using LJC = LJCNetCommon.NetCommon;
 
-namespace LJCGenTextLib
+namespace LJCGenTextXML5
 {
-  // Represents a TextGen section.
-  /// <include file='Doc/Section.xml'
+  // Represents a GenText section.
+  /// <include file='Doc/Section5.xml'
   ///  path='items/Section/*'/>
   public class Section : IComparable<Section>
   {
     #region Static Functions
 
-    /// <summary>Checks for RepeatItem data.</summary>
-    /// <include file='Doc/Section.xml'
+    // Checks for RepeatItem data.
+    /// <include file='Doc/Section5.xml'
     ///  path='items/HasData/*'/>
     public static bool HasData(Section section)
     {
@@ -29,8 +28,8 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>Checks for Subsection.</summary>
-    /// <include file='Doc/Section.xml'
+    // Checks for Subsection.
+    /// <include file='Doc/Section5.xml'
     ///  path='items/HasSubsection/*'/>
     public static bool HasSubsection(Section section)
     {
@@ -44,8 +43,8 @@ namespace LJCGenTextLib
       return retValue;
     }
 
-    /// <summary>Checks for specified name.</summary>
-    /// <include file='Doc/Section.xml'
+    // Checks for specified name.
+    /// <include file='Doc/Section5.xml'
     ///  path='items/IsName/*'/>
     public static bool IsName(Section section, string name)
     {
@@ -59,39 +58,78 @@ namespace LJCGenTextLib
     }
     #endregion
 
+    #region Data Properties
+
+    // Gets or sets the IsList indicator.
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
+    ///  path='items/IsList/*'/>
+    [XmlIgnore()]
+    public bool IsList { get; set; }
+
+    // Gets or sets the section name.
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
+    ///  path='items/Name/*'/>
+    public string Name { get; set; } = null!;
+
+    // Gets or sets the repeate items.
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
+    ///  path='items/RepeatItems/*'/>
+    public RepeatItems RepeatItems { get; set; }
+    #endregion
+
+    #region Class Properties
+
+    // Gets or sets the current repeate item.
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
+    ///  path='items/CurrentRepeatItem/*'/>
+    [XmlIgnore()]
+    public RepeatItem CurrentRepeatItem { get; set; } = null!;
+
+    // Gets or sets the EndProcessing flag.
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
+    ///  path='items/EndProcessing/*'/>
+    public bool EndProcessing { get; set; }
+
+    // Gets or sets the starting line index.
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
+    ///  path='items/BeginLineIndex/*'/>
+    [XmlIgnore()]
+    public int BeginLineIndex { get; set; }
+    #endregion
+
     #region Constructors
 
     //Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='items/Constructor/*'/>
     public Section()
     {
-      RepeatItems = new RepeatItems();
+      RepeatItems = [];
     }
 
     // Initializes the Section object with the supplied values.
-    /// <include file='Doc/Section.xml'
+    /// <include file='Doc/Section5.xml'
     ///  path='items/ParamConstructor/*'/>
     public Section(string name)
     {
       Name = name;
-      RepeatItems = new RepeatItems();
+      RepeatItems = [];
     }
     #endregion
 
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='items/Clone/*'/>
-    public Section Clone()
+    public Section? Clone()
     {
-      Section retValue = MemberwiseClone() as Section;
+      Section? retValue = MemberwiseClone() as Section;
       return retValue;
     }
 
     // The object string identifier.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='items/ToString/*'/>
     public override string ToString()
     {
@@ -99,9 +137,9 @@ namespace LJCGenTextLib
     }
 
     // Provides the default Sort functionality.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='items/CompareTo/*'/>
-    public int CompareTo(Section other)
+    public int CompareTo(Section? other)
     {
       int retValue;
 
@@ -122,7 +160,7 @@ namespace LJCGenTextLib
     #region Other Methods
 
     // Checks for RepeatItem data.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='items/HasData/*'/>
     public bool HasData()
     {
@@ -136,7 +174,7 @@ namespace LJCGenTextLib
     }
 
     // Checks for Subsection.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='items/HasSubsection/*'/>
     public bool HasSubsection()
     {
@@ -151,7 +189,7 @@ namespace LJCGenTextLib
     }
 
     // Checks for Current Subsection RepeatItems.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='items/HasSubsectionData/*'/>
     public bool HasSubsectionData()
     {
@@ -166,57 +204,18 @@ namespace LJCGenTextLib
     }
 
     // Checks for specified name.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../LJCGenDoc5/Common/Data.xml'
     ///  path='items/IsName/*'/>
     public bool IsName(string name)
     {
       bool retValue = false;
 
-      if (Name.ToLower() == name.ToLower())
+      if (Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))
       {
         retValue = true;
       }
       return retValue;
     }
-    #endregion
-
-    #region Data Properties
-
-    // Gets or sets the IsList indicator.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/IsList/*'/>
-    [XmlIgnore()]
-    public bool IsList { get; set; }
-
-    // Gets or sets the section name.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/Name/*'/>
-    public string Name { get; set; }
-
-    // Gets or sets the repeate items.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/RepeatItems/*'/>
-    public RepeatItems RepeatItems { get; set; }
-    #endregion
-
-    #region Class Properties
-
-    // Gets or sets the current repeate item.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/CurrentRepeatItem/*'/>
-    [XmlIgnore()]
-    public RepeatItem CurrentRepeatItem { get; set; }
-
-    // Gets or sets the EndProcessing flag.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/EndProcessing/*'/>
-    public bool EndProcessing { get; set; }
-
-    // Gets or sets the starting line index.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/BeginLineIndex/*'/>
-    [XmlIgnore()]
-    public int BeginLineIndex { get; set; }
     #endregion
   }
 }

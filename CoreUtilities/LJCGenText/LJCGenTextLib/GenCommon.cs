@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // GenCommon.cs
 using LJCNetCommon;
@@ -7,10 +7,14 @@ using System.IO;
 
 namespace LJCGenTextLib
 {
-  /// <summary></summary>
+  // 
+  /// <include file='Doc/ProjectGenTextLib.xml'
+  ///  path='items/GenCommon/*'/>
   public static class GenCommon
   {
-    /// <summary>Get the template lines from the template file.</summary>
+    // Get the template lines from the template file.
+    /// <include file='Doc/ProjectGenTextLib.xml'
+    ///  path='items/GetTemplateLines/*'/>
     public static string[] GetTemplateLines(string templateFileSpec
       , out string errorText)
     {

@@ -1,4 +1,4 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // XMLData.cs
 using LJCNetCommon;
@@ -10,14 +10,16 @@ namespace LJCGenTextLib
   public class XMLData
   {
     // Adds padded and formatted text line.
-    /// <include path='items/Add/*' file='Doc/XMLData.xml'/>
+    /// <include file='Doc/XMLData.xml'
+    ///  path='items/Add/*'/>
     public void Add(string text, params object[] parms)
     {
       Builder.AppendLine(Pad(text, parms));
     }
 
     // Creates the Class Items.
-    /// <include path='items/ClassItems/*' file='Doc/XMLData.xml'/>
+    /// <include file='Doc/XMLData.xml'
+    ///  path='items/ClassItems/*'/>
     public string ClassItems(DefaultValues defaultValues)
     {
       string retValue;
@@ -73,7 +75,8 @@ namespace LJCGenTextLib
     }
 
     // Generates the data XML files.
-    /// <include path='items/Create/*' file='Doc/XMLData.xml'/>
+    /// <include file='Doc/XMLData.xml'
+    ///  path='items/Create/*'/>
     public string Create(string tableName, LJCDataColumns dbColumns)
     {
       string retValue;
@@ -103,7 +106,8 @@ namespace LJCGenTextLib
     }
 
     // Gets the default values from a file.
-    /// <include path='items/GetDefaults/*' file='Doc/XMLData.xml'/>
+    /// <include file='Doc/XMLData.xml'
+    ///  path='items/GetDefaults/*'/>
     public DefaultValues GetDefaults(string tableName
       , string fileSpec = null)
     {
@@ -131,7 +135,8 @@ namespace LJCGenTextLib
     }
 
     // Gets the plural value for the supplied name.
-    /// <include path='items/GetPlural/*' file='Doc/XMLData.xml'/>
+    /// <include file='Doc/XMLData.xml'
+    ///  path='items/GetPlural/*'/>
     public string GetPlural(string name)
     {
       string retValue;
@@ -163,7 +168,8 @@ namespace LJCGenTextLib
     }
 
     // Pads and formats the text.
-    /// <include path='items/Pad/*' file='Doc/XMLData.xml'/>
+    /// <include file='Doc/XMLData.xml'
+    ///  path='items/Pad/*'/>
     public string Pad(string text, params object[] parms)
     {
       string retValue;
@@ -175,7 +181,8 @@ namespace LJCGenTextLib
     }
 
     // Creates the Property Items.
-    /// <include path='items/PropertyItems/*' file='Doc/XMLData.xml'/>
+    /// <include file='Doc/XMLData.xml'
+    ///  path='items/PropertyItems/*'/>
     public string PropertyItems(LJCDataColumns dbColumns)
     {
       string retValue;
@@ -221,10 +228,14 @@ namespace LJCGenTextLib
 
     #region Properties
 
-    /// <summary>Gets or sets the Builder value.</summary>
+    // Gets or sets the Builder value.
+    /// <include file='Doc/XMLData.xml'
+    ///  path='items/Builder/*'/>
     public StringBuilder Builder { get; set; }
 
-    /// <summary>Gets or sets the PadLength value.</summary>
+    // Gets or sets the PadLength value.
+    /// <include file='Doc/XMLData.xml'
+    ///  path='items/PadLength/*'/>
     public int PadLength { get; set; }
     #endregion
   }
