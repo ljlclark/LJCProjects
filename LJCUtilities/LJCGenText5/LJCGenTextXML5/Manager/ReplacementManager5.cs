@@ -1,18 +1,41 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// GenReplacementManager.cs
+// ReplacementManager.cs
 using LJCNetCommon5;
 
 namespace LJCGenTextXML5
 {
-  public partial class GenDataManager
+  // Provides Replacement specific XML data manipulation methods.
+  /// <include file='Doc/ReplacementManager5.xml'
+  ///  path='items/ReplacementManager/*'/>
+  public partial class ReplacementManager
   {
+    #region Properties
+
+    private SectionManager SectionManager { get; set; } = null!;
+
+    private RepeatItemManager RepeatItemManager { get; set; } = null!;
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/RepeatItemManager5.xml'
+    ///  path='items/ParamConstructor/*'/>
+    public ReplacementManager(SectionManager sectionManager
+      , RepeatItemManager repeatItemManager)
+    {
+      SectionManager = sectionManager;
+      RepeatItemManager = repeatItemManager;
+    }
+    #endregion
+
     #region Methods
 
     // Adds a Replacement record to the object data.
-    /// <include file='Doc/GenDataManager5.xml'
-    ///  path='items/AddReplacement/*'/>
-    public void AddReplacement(string sectionName, string repeatItemName
+    /// <include file='Doc/ReplacementManager5.xml'
+    ///  path='items/Add/*'/>
+    public void Add(string sectionName, string repeatItemName
       , Replacement replacement)
     {
       if (LJC.HasText(sectionName)
@@ -20,14 +43,14 @@ namespace LJCGenTextXML5
         && replacement != null
         && LJC.HasText(replacement.Name))
       {
-        Section searchSection = GetSection(sectionName);
+        Section? searchSection = SectionManager.Retrieve(sectionName);
         if (searchSection != null)
         {
-          var searchItem = GetRepeatItem(sectionName, repeatItemName);
+          var searchItem = RepeatItemManager.Retrieve(sectionName, repeatItemName);
           if (searchItem != null)
           {
-            var searchReplacement = RetrieveReplacement(sectionName
-              , repeatItemName, replacement.Name);
+            var searchReplacement = Retrieve(sectionName, repeatItemName
+              , replacement.Name);
             if (searchReplacement != null)
             {
               var errorText = $"Replacement '{replacement.Name}' already exists.";
@@ -43,9 +66,9 @@ namespace LJCGenTextXML5
     }
 
     // Retrieves a Replacement record from the object data.
-    /// <include file='Doc/GenDataManager5.xml'
-    ///  path='items/RetrieveReplacement/*'/>
-    public Replacement? RetrieveReplacement(string sectionName
+    /// <include file='Doc/ReplacementManager5.xml'
+    ///  path='items/Retrieve/*'/>
+    public Replacement? Retrieve(string sectionName
       , string repeatItemName, string replacementName)
     {
       Replacement? retValue = null;
@@ -54,7 +77,7 @@ namespace LJCGenTextXML5
         && LJC.HasText(repeatItemName)
         && LJC.HasText(replacementName))
       {
-        var repeatItem = GetRepeatItem(sectionName, repeatItemName);
+        var repeatItem = RepeatItemManager.Retrieve(sectionName, repeatItemName);
         if (repeatItem != null)
         {
           retValue = repeatItem.Replacements.Retrieve(replacementName);
@@ -64,16 +87,16 @@ namespace LJCGenTextXML5
     }
 
     // Retrieves a collection of data records.
-    /// <include file='Doc/GenDataManager5.xml'
-    ///  path='items/LoadReplacements/*'/>
-    public Replacements? LoadReplacements(string sectionName, string repeatItemName)
+    /// <include file='Doc/ReplacementManager5.xml'
+    ///  path='items/Load/*'/>
+    public Replacements? Load(string sectionName, string repeatItemName)
     {
       Replacements? retValue = null;
 
       if (LJC.HasText(sectionName)
         && LJC.HasText(repeatItemName))
       {
-        var repeatItem = GetRepeatItem(sectionName, repeatItemName);
+        var repeatItem = RepeatItemManager.Retrieve(sectionName, repeatItemName);
         if (repeatItem != null)
         {
           retValue = repeatItem.Replacements;
@@ -83,17 +106,18 @@ namespace LJCGenTextXML5
     }
 
     // Delete the Replacement record from the object data.
-    /// <include file='Doc/GenDataManager5.xml'
-    ///  path='items/DeleteReplacement/*'/>
-    public bool DeleteReplacement(string sectionName, string repeatItemName
+    /// <include file='Doc/ReplacementManager5.xml'
+    ///  path='items/Delete/*'/>
+    public bool Delete(string sectionName, string repeatItemName
       , string replacementName)
     {
       bool retValue = false;
 
-      Section searchSection = GetSection(sectionName);
+      Section? searchSection = SectionManager.Retrieve(sectionName);
       if (searchSection != null)
       {
-        var searchRepeatItem = GetRepeatItem(sectionName, repeatItemName);
+        var searchRepeatItem = RepeatItemManager.Retrieve(sectionName
+          , repeatItemName);
         if (searchRepeatItem != null)
         {
           Replacement replacement = GetReplacement(sectionName, repeatItemName
@@ -112,7 +136,7 @@ namespace LJCGenTextXML5
     private Replacement GetReplacement(string sectionName, string repeatItemName
       , string replacementName)
     {
-      var retValue = RetrieveReplacement(sectionName, repeatItemName
+      var retValue = Retrieve(sectionName, repeatItemName
         , replacementName);
       if (null == retValue)
       {

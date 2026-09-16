@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<members>
-  <GenDataManager>
-    <summary>
-      Provides GenData specific XML data manipulation methods.
-    </summary>
-  </GenDataManager>  
-</members>

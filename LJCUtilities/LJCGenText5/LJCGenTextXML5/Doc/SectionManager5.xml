@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<members>
+  <SectionManager>
+    <summary>
+      Provides Section specific XML data manipulation methods.
+    </summary>
+  </SectionManager>  
+</members>

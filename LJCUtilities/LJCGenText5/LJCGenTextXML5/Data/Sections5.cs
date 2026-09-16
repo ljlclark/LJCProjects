@@ -12,7 +12,7 @@ namespace LJCGenTextXML5
   [XmlRoot("Sections")]
   public class Sections : List<Section>
   {
-    #region Static Functions
+    #region Static Methods
 
     // Deserializes from the specified XML file.
     /// <include file='../../LJCGenDoc5/Common/Collection.xml'
@@ -34,6 +34,26 @@ namespace LJCGenTextXML5
       {
         retValue = LJC.XmlDeserialize(typeof(Sections)
           , fileSpec) as Sections;
+      }
+      return retValue;
+    }
+
+    // Deserializes from the supplied XML string.
+    /// <include file='../../LJCGenDoc5/Common/Collection.xml'
+    ///  path='items/LJCDeserializeString/*'/>
+    public static Sections? LJCDeserializeString(string? xml)
+    {
+      Sections? retValue;
+
+      if (!LJC.HasText(xml))
+      {
+        string errorText = $"Parameter xml is missing.";
+        throw new ArgumentNullException(errorText);
+      }
+      else
+      {
+        retValue = LJC.XmlDeserializeMessage(typeof(Sections)
+          , xml) as Sections;
       }
       return retValue;
     }
@@ -69,7 +89,7 @@ namespace LJCGenTextXML5
 
     #region Methods
 
-    // Creates the Section object with the supplied values
+    // Creates and adds the Section object with the supplied values.
     /// <include file='Doc/Sections5.xml'
     ///  path='items/Add/*'/>
     public Section? Add(string name)

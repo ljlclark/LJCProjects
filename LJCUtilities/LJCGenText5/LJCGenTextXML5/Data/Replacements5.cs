@@ -37,15 +37,15 @@ namespace LJCGenTextXML5
 
       if (LJC.HasText(name))
       {
-        //retValue = LJCSearchByName(name);
-        //if (null == retValue)
-        //{
-        retValue = new Replacement(name, value)
+        retValue = Retrieve(name);
+        if (null == retValue)
         {
-          Name = name
-        };
-        Add(retValue);
-        //}
+          retValue = new Replacement(name, value)
+          {
+            Name = name
+          };
+          Add(retValue);
+        }
       }
       return retValue;
     }

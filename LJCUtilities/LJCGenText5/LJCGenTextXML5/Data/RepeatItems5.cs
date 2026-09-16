@@ -1,6 +1,7 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // RepeatItems.cs
+using LJCNetCommon5;
 
 namespace LJCGenTextXML5
 {
@@ -29,22 +30,22 @@ namespace LJCGenTextXML5
     // Creates the RepeateItem object and adds it to the end of the collection.
     /// <include file='Doc/RepeatItems5.xml'
     ///  path='items/Add/*'/>
-    public RepeatItem Add(string name)
+    public RepeatItem? Add(string name)
     {
-      RepeatItem retValue;
+      RepeatItem? retValue = null;
 
-      //if (LJCNetString.HasValue(name))
-      //{
-      //	retValue = LJCSearchByName(name);
-      //	if (null == retValue)
-      //	{
-      retValue = new RepeatItem()
+      if (LJC.HasText(name))
       {
-        Name = name
-      };
-      Add(retValue);
-      //	}
-      //}
+        retValue = Retrieve(name);
+        if (null == retValue)
+        {
+          retValue = new RepeatItem()
+          {
+            Name = name
+          };
+          Add(retValue);
+        }
+      }
       return retValue;
     }
 
