@@ -29,7 +29,7 @@ namespace TestGenText5
     #region Test Methods
 
     // Deserializes from the specified XML file.
-    private static void LJCDeserialize()
+    private void LJCDeserialize()
     {
       var methodName = "LJCDeserialize()";
 
@@ -83,7 +83,7 @@ namespace TestGenText5
     }
 
     // Deserializes from the supplied XML string.
-    private static void LJCDeserializeString()
+    private void LJCDeserializeString()
     {
       var methodName = "LJCDeserializeString()";
 
@@ -125,12 +125,13 @@ namespace TestGenText5
     }
 
     // Creates and adds the Section object with the supplied values.
-    private static void Add()
+    private void Add()
     {
       var methodName = "Add()";
 
       var xml = SampleXML();
       var sections = Sections.LJCDeserializeString(xml);
+
       string result;
       string compare;
       while (true)
@@ -166,7 +167,7 @@ namespace TestGenText5
     }
 
     // Retrieve the collection element with name.
-    private static void Retrieve()
+    private void Retrieve()
     {
       var methodName = "Retrieve()";
 
@@ -210,7 +211,7 @@ namespace TestGenText5
     }
 
     // Serializes the collection to a file.
-    private static void LJCSerialize()
+    private void LJCSerialize()
     {
       var methodName = "LJCSerialize()";
 
@@ -264,7 +265,7 @@ namespace TestGenText5
     }
 
     // Serializes the collection to a string.
-    private static void LJCSerializeString()
+    private void LJCSerializeString()
     {
       var methodName = "LJCSerializeString()";
 
@@ -307,9 +308,9 @@ namespace TestGenText5
     #region Other Methods
 
     // Creates the sample XML.
-    private static string SampleXML()
+    private string SampleXML()
     {
-      string retSample = "";
+      string retSample;
 
       LJCTextBuilder tb = new();
       tb.AddLine("<?xml version='1.0'?>");
@@ -336,7 +337,7 @@ namespace TestGenText5
     }
 
     // Writes the result to the console.
-    private static void WriteResult(string methodName, string result
+    private void WriteResult(string methodName, string result
       , string compare)
     {
       if (!LJC.HasText(result))

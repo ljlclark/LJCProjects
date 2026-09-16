@@ -23,7 +23,7 @@ namespace TestGenText5
     #region Test Methods
 
     // Creates and adds the Replacement object with the supplied values.
-    private static void Add()
+    private void Add()
     {
       var methodName = "Add()";
 
@@ -100,7 +100,7 @@ namespace TestGenText5
     }
 
     // Retrieve the collection element with name.
-    private static void Retrieve()
+    private void Retrieve()
     {
       var methodName = "Retrieve()";
 
@@ -174,7 +174,7 @@ namespace TestGenText5
     #region Other Methods
 
     // Creates the sample XML.
-    private static string SampleXML()
+    private string SampleXML()
     {
       string retSample;
 
@@ -203,7 +203,7 @@ namespace TestGenText5
     }
 
     // Writes the result to the console.
-    private static void WriteResult(string methodName, string result
+    private void WriteResult(string methodName, string result
       , string compare)
     {
       if (!LJC.HasText(result))

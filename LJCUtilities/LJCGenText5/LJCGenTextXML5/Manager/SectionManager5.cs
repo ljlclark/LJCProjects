@@ -54,7 +54,7 @@ namespace LJCGenTextXML5
     public Sections Sections { get; set; } = null!;
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/SectionManager5.xml'

@@ -26,6 +26,22 @@ namespace LJCGenTextXML5
     }
     #endregion
 
+    #region Data Methods
+
+    /// <include file='Doc/RepeatItems5.xml'
+    ///  path='items/Add/*'/>
+    public Replacements Clone()
+    {
+      //Replacements retReplacements = new Replacements();
+      //foreach (Replacement replacement in this)
+      //{
+      //  retReplacements.Add(replacement);
+      //}
+      Replacements retReplacements = [.. this];
+      return retReplacements;
+    }
+    #endregion
+
     #region Methods
 
     // Creates the Replacement object with the supplied values

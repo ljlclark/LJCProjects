@@ -127,6 +127,25 @@ namespace LJCGenTextXML5
       return retValue;
     }
 
+    // Deletes all Replacements for the named RepeatItem.
+    /// <include file='Doc/RepeatItemManager5.xml'
+    ///  path='items/DeleteRepeatItems/*'/>
+    public bool DeleteRepeatItems(string sectionName)
+    {
+      bool retValue = false;
+
+      var repeatItems = Load(sectionName);
+      if (LJC.HasListItems(repeatItems))
+      {
+        var deleteRepeatItems = repeatItems.Clone();
+        foreach (var repeatItem in deleteRepeatItems)
+        {
+          Delete(sectionName, repeatItem.Name);
+        }
+      }
+      return retValue;
+    }
+
     // Get the RepeatItem object.
     private RepeatItem? GetItem(string sectionName, string repeatItemName)
     {

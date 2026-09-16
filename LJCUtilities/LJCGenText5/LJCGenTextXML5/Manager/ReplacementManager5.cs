@@ -12,8 +12,10 @@ namespace LJCGenTextXML5
   {
     #region Properties
 
+    // Gets or sets the SectionManager reference.
     private SectionManager SectionManager { get; set; } = null!;
 
+    // Gets or sets the RepeatItemManager reference.
     private RepeatItemManager RepeatItemManager { get; set; } = null!;
     #endregion
 
@@ -22,11 +24,13 @@ namespace LJCGenTextXML5
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/RepeatItemManager5.xml'
     ///  path='items/ParamConstructor/*'/>
-    public ReplacementManager(SectionManager sectionManager
-      , RepeatItemManager repeatItemManager)
+    public ReplacementManager(Sections sections)
     {
-      SectionManager = sectionManager;
-      RepeatItemManager = repeatItemManager;
+      if (sections != null)
+      {
+        SectionManager = new SectionManager(sections);
+        RepeatItemManager = new RepeatItemManager(sections);
+      }
     }
     #endregion
 
@@ -105,7 +109,7 @@ namespace LJCGenTextXML5
       return retValue;
     }
 
-    // Delete the Replacement record from the object data.
+    // Deletes the Replacement record for the named RepeatItem and Replacement.
     /// <include file='Doc/ReplacementManager5.xml'
     ///  path='items/Delete/*'/>
     public bool Delete(string sectionName, string repeatItemName
@@ -127,6 +131,25 @@ namespace LJCGenTextXML5
             Replacements replacements = searchRepeatItem.Replacements;
             retValue = replacements.Remove(replacement);
           }
+        }
+      }
+      return retValue;
+    }
+
+    // Deletes all Replacements for the named RepeatItem.
+    /// <include file='Doc/ReplacementManager5.xml'
+    ///  path='items/DeleteReplacements/*'/>
+    public bool DeleteReplacements(string sectionName, string repeatItemName)
+    {
+      bool retValue = false;
+
+      var replacements = Load(sectionName, repeatItemName);
+      if (LJC.HasListItems(replacements))
+      {
+        var deleteReplacements = replacements.Clone();
+        foreach (var replacement in deleteReplacements)
+        {
+          Delete(sectionName, repeatItemName, replacement.Name);
         }
       }
       return retValue;

@@ -25,6 +25,22 @@ namespace LJCGenTextXML5
     }
     #endregion
 
+    #region Data Methods
+
+    /// <include file='Doc/RepeatItems5.xml'
+    ///  path='items/Add/*'/>
+    public RepeatItems Clone()
+    {
+      //RepeatItems retItems = new RepeatItems();
+      //foreach (RepeatItem item in this)
+      //{
+      //  retItems.Add(item);
+      //}
+      RepeatItems retItems = [.. this];
+      return retItems;
+    }
+    #endregion
+
     #region Methods
 
     // Creates the RepeateItem object and adds it to the end of the collection.
