@@ -1,10 +1,15 @@
-﻿using LJCGenTextXML5;
+﻿// Copyright (c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// TestSectionManager5.cs
+using LJCGenTextXML5;
 using LJCNetCommon5;
 
 namespace TestGenText5
 {
+  // Provides SectionManager specific test methods.
   internal class TestSectionManager
   {
+    // Initializes an object instance.
     public TestSectionManager()
     {
       // Constructor Methods
@@ -21,19 +26,92 @@ namespace TestGenText5
       Save();
     }
 
-    // Initializes an object instance with the supplied values.
-    private void Constructor1()
-    {
+    #region Constructor Methods
 
+    // Initializes an object instance with the supplied values.
+    private static void Constructor1()
+    {
+      var methodName = "Constructor1()";
+
+      var fileName = "Sections.xml";
+      var xml = Program.SampleXML();
+      File.WriteAllText(fileName, xml);
+
+      string result;
+      string compare;
+      while (true)
+      {
+        // Test Method
+        var sectionManager = new SectionManager(fileName);
+
+        if (!LJC.HasListItems(sectionManager.Sections))
+        {
+          result = "";
+          compare = "No Sections";
+          Program.WriteResult($"{methodName}1", result, compare);
+          break;
+        }
+
+        var section = sectionManager.Retrieve("Main");
+        result = "";
+        if (section != null)
+        {
+          result = section.Name;
+        }
+        compare = "Main";
+        Program.WriteResult($"{methodName}2", result, compare);
+        break;
+      }
     }
 
     // Initializes an object instance with the supplied values.
-    private void Constructor2()
+    private static void Constructor2()
     {
+      var methodName = "Constructor2()";
+
+      var xml = Program.SampleXML();
+      var sections = Sections.LJCDeserializeString(xml);
+
+      string result;
+      string compare;
+      while (true)
+      {
+        if (!LJC.HasListItems(sections))
+        {
+          result = "";
+          compare = "No Sections";
+          Program.WriteResult($"{methodName}1", result, compare);
+          break;
+        }
+
+        // Test Method
+        var sectionManager = new SectionManager(sections);
+
+        if (!LJC.HasListItems(sectionManager.Sections))
+        {
+          result = "";
+          compare = "No Sections";
+          Program.WriteResult($"{methodName}2", result, compare);
+          break;
+        }
+
+        var section = sectionManager.Retrieve("Main");
+        result = "";
+        if (section != null)
+        {
+          result = section.Name;
+        }
+        compare = "Main";
+        Program.WriteResult($"{methodName}3", result, compare);
+        break;
+      }
     }
+    #endregion
+
+    #region Data Methods
 
     // Adds a Section record to the object data.
-    private void Add()
+    private static void Add()
     {
       var methodName = "Add()";
 
@@ -87,7 +165,7 @@ namespace TestGenText5
     }
 
     // Retrieves a Section record from the object data.
-    private void Retrieve()
+    private static void Retrieve()
     {
       var methodName = "Retrieve()";
 
@@ -130,7 +208,7 @@ namespace TestGenText5
     }
 
     // Retrieves a collection of data records.
-    private void Load()
+    private static void Load()
     {
       var methodName = "Load()";
 
@@ -174,7 +252,7 @@ namespace TestGenText5
     }
 
     // Deletes the Section record from the object data.
-    private void Delete()
+    private static void Delete()
     {
       var methodName = "Delete()";
 
@@ -256,8 +334,37 @@ namespace TestGenText5
     }
 
     // Save the XML data.
-    private void Save()
+    private static void Save()
     {
+      var methodName = "Save()";
+
+      var xml = Program.SampleXML();
+      var sections = Sections.LJCDeserializeString(xml);
+
+      string result;
+      string compare;
+      while (true)
+      {
+        if (!LJC.HasListItems(sections))
+        {
+          result = "";
+          compare = "No Sections";
+          Program.WriteResult($"{methodName}1", result, compare);
+          break;
+        }
+
+        var sectionManager = new SectionManager(sections);
+        if (!LJC.HasListItems(sectionManager.Sections))
+        {
+          result = "";
+          compare = "No Sections";
+          Program.WriteResult($"{methodName}2", result, compare);
+          break;
+        }
+
+        break;
+      }
     }
+    #endregion
   }
 }

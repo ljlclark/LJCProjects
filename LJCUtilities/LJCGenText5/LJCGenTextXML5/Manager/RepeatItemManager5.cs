@@ -127,7 +127,7 @@ namespace LJCGenTextXML5
       return retValue;
     }
 
-    // Deletes all Replacements for the named RepeatItem.
+    // Deletes all RepeatItems for the named Section.
     /// <include file='Doc/RepeatItemManager5.xml'
     ///  path='items/DeleteRepeatItems/*'/>
     public bool DeleteRepeatItems(string sectionName)

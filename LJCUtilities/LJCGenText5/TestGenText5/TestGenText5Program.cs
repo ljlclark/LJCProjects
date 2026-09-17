@@ -15,6 +15,8 @@ namespace TestGenText5
         _ = new TestReplacementsXML();
 
         _ = new TestSectionManager();
+        _ = new TestItemManager();
+        _ = new TestReplacementManager();
       }
     }
 

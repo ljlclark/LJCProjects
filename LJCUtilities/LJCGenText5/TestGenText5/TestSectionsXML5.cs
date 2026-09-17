@@ -9,8 +9,6 @@ namespace TestGenText5
   // Provides Sections specific XML test methods.
   internal class TestSectionsXML
   {
-    #region Constructor Methods
-
     // Initializes an object instance.
     public TestSectionsXML()
     {
@@ -24,9 +22,8 @@ namespace TestGenText5
       LJCSerialize();
       LJCSerializeString();
     }
-    #endregion
 
-    #region Test Methods
+    #region Static Methods
 
     // Deserializes from the specified XML file.
     private void LJCDeserialize()
@@ -123,6 +120,9 @@ namespace TestGenText5
         break;
       }
     }
+    #endregion
+
+    #region Methods
 
     // Creates and adds the Section object with the supplied values.
     private void Add()
