@@ -18,9 +18,9 @@ namespace TestGenText5
 
       // Data Methods
       Add();
-      Retrieve();
-      Load();
       Delete();
+      Load();
+      Retrieve();
 
       // Methods
       Save();
@@ -33,14 +33,14 @@ namespace TestGenText5
     {
       var methodName = "Constructor1()";
 
-      var fileName = "Sections.xml";
-      var xml = Program.SampleXML();
-      File.WriteAllText(fileName, xml);
-
       string result;
       string compare;
       while (true)
       {
+        var fileName = "Sections.xml";
+        var xml = Program.SampleXML();
+        File.WriteAllText(fileName, xml);
+
         // Test Method
         var sectionManager = new SectionManager(fileName);
 
@@ -52,13 +52,14 @@ namespace TestGenText5
           break;
         }
 
-        var section = sectionManager.Retrieve("Main");
+        var sectionName = "Main";
+        var section = sectionManager.Retrieve(sectionName);
         result = "";
         if (section != null)
         {
           result = section.Name;
         }
-        compare = "Main";
+        compare = sectionName;
         Program.WriteResult($"{methodName}2", result, compare);
         break;
       }
@@ -69,13 +70,13 @@ namespace TestGenText5
     {
       var methodName = "Constructor2()";
 
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
-
       string result;
       string compare;
       while (true)
       {
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -95,13 +96,14 @@ namespace TestGenText5
           break;
         }
 
-        var section = sectionManager.Retrieve("Main");
+        var sectionName = "Main";
+        var section = sectionManager.Retrieve(sectionName);
         result = "";
         if (section != null)
         {
           result = section.Name;
         }
-        compare = "Main";
+        compare = sectionName;
         Program.WriteResult($"{methodName}3", result, compare);
         break;
       }
@@ -115,13 +117,13 @@ namespace TestGenText5
     {
       var methodName = "Add()";
 
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
-
       string result;
       string compare;
       while (true)
       {
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -139,43 +141,36 @@ namespace TestGenText5
           break;
         }
 
-        sections = sectionManager.Sections;
+        var newSectionName = "OneMore";
+        var section = new Section(newSectionName);
 
         // Test Method
-        var section = sections.Add("OneMore");
+        sectionManager.Add(section);
 
-        if (null == section)
-        {
-          result = "";
-          compare = "OneMore";
-          Program.WriteResult($"{methodName}3", result, compare);
-          break;
-        }
-
-        section = sectionManager.Retrieve("OneMore");
+        section = sectionManager.Retrieve(newSectionName);
         result = "";
         if (section != null)
         {
           result = section.Name;
         }
-        compare = "OneMore";
+        compare = newSectionName;
         Program.WriteResult($"{methodName}4", result, compare);
         break;
       }
     }
 
-    // Retrieves a Section record from the object data.
-    private static void Retrieve()
+    // Deletes the Section record from the object data.
+    private static void Delete()
     {
-      var methodName = "Retrieve()";
-
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
+      var methodName = "Delete()";
 
       string result;
       string compare;
       while (true)
       {
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -193,16 +188,65 @@ namespace TestGenText5
           break;
         }
 
-        // Test Method
-        var section = sectionManager.Retrieve("Main");
+        var newSectionName = "OneMore";
+        var section = sections.Add(newSectionName);
+        if (null == section)
+        {
+          result = "";
+          compare = newSectionName;
+          Program.WriteResult($"{methodName}3", result, compare);
+          break;
+        }
 
+        section = sectionManager.Retrieve(newSectionName);
+        if (null == section)
+        {
+          result = "";
+          compare = newSectionName;
+          Program.WriteResult($"{methodName}4", result, compare);
+          break;
+        }
+
+        sections = sectionManager.Load();
+        if (!LJC.HasListItems(sections))
+        {
+          result = "";
+          compare = "No Sections";
+          Program.WriteResult($"{methodName}5", result, compare);
+          break;
+        }
+
+        // Child replacements must be deleted first.
+        var sectionName = "Main";
+        var repeatItemName = "Item1";
+        var replacementManager = new ReplacementManager(sections);
+        replacementManager.DeleteReplacements(newSectionName, repeatItemName);
+
+        // Child repeat items must be deleted first.
+        var repeatItemManager = new RepeatItemManager(sections);
+        repeatItemManager.DeleteRepeatItems(newSectionName);
+
+        // Test Method
+        if (!sectionManager.Delete(newSectionName))
+        {
+          section = sectionManager.Retrieve(sectionName);
+          result = "";
+          if (section != null)
+          {
+            result = section.Name;
+          }
+          compare = "No Result";
+          Program.WriteResult($"{methodName}6", result, compare);
+        }
+
+        section = sectionManager.Retrieve(newSectionName);
         result = "";
         if (section != null)
         {
           result = section.Name;
         }
-        compare = "Main";
-        Program.WriteResult($"{methodName}3", result, compare);
+        compare = "No Result";
+        Program.WriteResult($"{methodName}7", result, compare);
         break;
       }
     }
@@ -212,13 +256,13 @@ namespace TestGenText5
     {
       var methodName = "Load()";
 
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
-
       string result;
       string compare;
       while (true)
       {
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -239,6 +283,14 @@ namespace TestGenText5
         // Test Method
         sections = sectionManager.Load();
 
+        if (!LJC.HasListItems(sections))
+        {
+          result = "";
+          compare = "No Sections";
+          Program.WriteResult($"{methodName}3", result, compare);
+          break;
+        }
+
         var section = sections[0];
         result = "";
         if (section != null)
@@ -246,23 +298,23 @@ namespace TestGenText5
           result = section.Name;
         }
         compare = "Main";
-        Program.WriteResult($"{methodName}3", result, compare);
+        Program.WriteResult($"{methodName}4", result, compare);
         break;
       }
     }
 
-    // Deletes the Section record from the object data.
-    private static void Delete()
+    // Retrieves a Section record from the object data.
+    private static void Retrieve()
     {
-      var methodName = "Delete()";
-
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
+      var methodName = "Retrieve()";
 
       string result;
       string compare;
       while (true)
       {
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -280,55 +332,18 @@ namespace TestGenText5
           break;
         }
 
-        var section = sections.Add("OneMore");
-        if (null == section)
-        {
-          result = "";
-          compare = "OneMore";
-          Program.WriteResult($"{methodName}3", result, compare);
-          break;
-        }
-
-        section = sectionManager.Retrieve("OneMore");
-        result = "";
-        if (section != null)
-        {
-          result = section.Name;
-        }
-        compare = "OneMore";
-        Program.WriteResult($"{methodName}4", result, compare);
-
-        // Child replacements must be deleted first.
         var sectionName = "Main";
-        var repeatItemName = "Item1";
-        var replacementManager = new ReplacementManager(sections);
-        replacementManager.DeleteReplacements(sectionName, repeatItemName);
-
-        // Child repeat items must be deleted first.
-        var repeatItemManager = new RepeatItemManager(sections);
-        repeatItemManager.DeleteRepeatItems(sectionName);
 
         // Test Method
-        if (sectionManager.Delete("Main"))
-        {
-          section = sections[0];
-          result = "";
-          if (section != null)
-          {
-            result = section.Name;
-          }
-          compare = "OneMore";
-          Program.WriteResult($"{methodName}5", result, compare);
-        }
+        var section = sectionManager.Retrieve(sectionName);
 
-        section = sections[0];
         result = "";
         if (section != null)
         {
           result = section.Name;
         }
-        compare = "OneMore";
-        Program.WriteResult($"{methodName}6", result, compare);
+        compare = sectionName;
+        Program.WriteResult($"{methodName}3", result, compare);
         break;
       }
     }

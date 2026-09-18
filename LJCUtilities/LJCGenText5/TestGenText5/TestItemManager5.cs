@@ -17,10 +17,10 @@ namespace TestGenText5
 
       // Data Methods
       Add();
-      Retrieve();
-      Load();
       Delete();
       DeleteRepeatItems();
+      Load();
+      Retrieve();
     }
 
     #region Constructor Methods
@@ -30,13 +30,13 @@ namespace TestGenText5
     {
       var methodName = "Constructor()";
 
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
-
       string result;
       string compare;
       while (true)
       {
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -48,13 +48,15 @@ namespace TestGenText5
         // Test Method
         var repeatItemManager = new RepeatItemManager(sections);
 
-        var repeatItem = repeatItemManager.Retrieve("Main", "Item1");
+        var sectionName = "Main";
+        var itemName = "Item1";
+        var repeatItem = repeatItemManager.Retrieve(sectionName, itemName);
         result = "";
         if (repeatItem != null)
         {
           result = repeatItem.Name;
         }
-        compare = "Item1";
+        compare = itemName;
         Program.WriteResult($"{methodName}2", result, compare);
         break;
       }
@@ -68,13 +70,13 @@ namespace TestGenText5
     {
       var methodName = "Add()";
 
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
-
       string result;
       string compare;
       while (true)
       {
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -85,107 +87,23 @@ namespace TestGenText5
 
         var repeatItemManager = new RepeatItemManager(sections);
         var sectionName = "Main";
-        var itemName = "Item2";
+        var newItemName = "Item2";
         var repeatItem = new RepeatItem()
         {
-          Name = itemName,
+          Name = newItemName,
         };
 
         // Test Method
         repeatItemManager.Add(sectionName, repeatItem);
 
-        repeatItem = repeatItemManager.Retrieve(sectionName, itemName);
+        repeatItem = repeatItemManager.Retrieve(sectionName, newItemName);
         result = "";
         if (repeatItem != null)
         {
           result = repeatItem.Name;
         }
-        compare = "Item2";
+        compare = newItemName;
         Program.WriteResult($"{methodName}2", result, compare);
-        break;
-      }
-    }
-
-    // Retrieves a Section record from the object data.
-    private static void Retrieve()
-    {
-      var methodName = "Retrieve()";
-
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
-
-      string result;
-      string compare;
-      while (true)
-      {
-        if (!LJC.HasListItems(sections))
-        {
-          result = "";
-          compare = "No Sections";
-          Program.WriteResult($"{methodName}1", result, compare);
-          break;
-        }
-
-        var repeatItemManager = new RepeatItemManager(sections);
-        var sectionName = "Main";
-        var itemName = "Item1";
-
-        // Test Method
-        var repeatItem = repeatItemManager.Retrieve(sectionName, itemName);
-
-        result = "";
-        if (repeatItem != null)
-        {
-          result = repeatItem.Name;
-        }
-        compare = "Item1";
-        Program.WriteResult($"{methodName}2", result, compare);
-        break;
-      }
-    }
-
-    // Retrieves a collection of data records.
-    private static void Load()
-    {
-      var methodName = "Load()";
-
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
-
-      string result;
-      string compare;
-      while (true)
-      {
-        if (!LJC.HasListItems(sections))
-        {
-          result = "";
-          compare = "No Sections";
-          Program.WriteResult($"{methodName}1", result, compare);
-          break;
-        }
-
-        var repeatItemManager = new RepeatItemManager(sections);
-        var sectionName = "Main";
-
-        // Test Method
-        var repeatItems = repeatItemManager.Load(sectionName);
-
-        if (!LJC.HasListItems(repeatItems))
-        {
-          result = "";
-          compare = "No RepeatItems";
-          Program.WriteResult($"{methodName}2", result, compare);
-          break;
-        }
-
-        var repeatItem = repeatItems[0];
-        result = "";
-        if (repeatItem != null)
-        {
-          result = repeatItem.Name;
-        }
-        compare = "Item1";
-        Program.WriteResult($"{methodName}3", result, compare);
         break;
       }
     }
@@ -195,13 +113,13 @@ namespace TestGenText5
     {
       var methodName = "Delete()";
 
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
-
       string result;
       string compare;
       while (true)
       {
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -212,18 +130,18 @@ namespace TestGenText5
 
         var repeatItemManager = new RepeatItemManager(sections);
         var sectionName = "Main";
-        var itemName = "Item2";
+        var newItemName = "Item2";
         var repeatItem = new RepeatItem()
         {
-          Name = itemName,
+          Name = newItemName,
         };
         repeatItemManager.Add(sectionName, repeatItem);
 
-        repeatItem = repeatItemManager.Retrieve(sectionName, itemName);
+        repeatItem = repeatItemManager.Retrieve(sectionName, newItemName);
         if (null == repeatItem)
         {
           result = "";
-          compare = itemName;
+          compare = newItemName;
           Program.WriteResult($"{methodName}2", result, compare);
           break;
         }
@@ -242,25 +160,25 @@ namespace TestGenText5
         replacementManager.DeleteReplacements(sectionName, "Item1");
 
         // Test Method
-        if (repeatItemManager.Delete(sectionName, "Item1"))
+        if (!repeatItemManager.Delete(sectionName, newItemName))
         {
-          repeatItem = repeatItems[0];
+          repeatItem = repeatItemManager.Retrieve(sectionName, newItemName);
           result = "";
           if (repeatItem != null)
           {
             result = repeatItem.Name;
           }
-          compare = "Item2";
+          compare = "No Result";
           Program.WriteResult($"{methodName}4", result, compare);
         }
 
-        repeatItem = repeatItems[0];
+        repeatItem = repeatItemManager.Retrieve(sectionName, newItemName);
         result = "";
         if (repeatItem != null)
         {
           result = repeatItem.Name;
         }
-        compare = "Item2";
+        compare = "No Result";
         Program.WriteResult($"{methodName}5", result, compare);
         break;
       }
@@ -330,6 +248,90 @@ namespace TestGenText5
           compare = "0";
           Program.WriteResult($"{methodName}4", result, compare);
         }
+        break;
+      }
+    }
+
+    // Retrieves a collection of data records.
+    private static void Load()
+    {
+      var methodName = "Load()";
+
+      string result;
+      string compare;
+      while (true)
+      {
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
+        if (!LJC.HasListItems(sections))
+        {
+          result = "";
+          compare = "No Sections";
+          Program.WriteResult($"{methodName}1", result, compare);
+          break;
+        }
+
+        var repeatItemManager = new RepeatItemManager(sections);
+        var sectionName = "Main";
+
+        // Test Method
+        var repeatItems = repeatItemManager.Load(sectionName);
+
+        if (!LJC.HasListItems(repeatItems))
+        {
+          result = "";
+          compare = "No RepeatItems";
+          Program.WriteResult($"{methodName}2", result, compare);
+          break;
+        }
+
+        var repeatItem = repeatItems[0];
+        result = "";
+        if (repeatItem != null)
+        {
+          result = repeatItem.Name;
+        }
+        compare = "Item1";
+        Program.WriteResult($"{methodName}3", result, compare);
+        break;
+      }
+    }
+
+    // Retrieves a Section record from the object data.
+    private static void Retrieve()
+    {
+      var methodName = "Retrieve()";
+
+      string result;
+      string compare;
+      while (true)
+      {
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
+        if (!LJC.HasListItems(sections))
+        {
+          result = "";
+          compare = "No Sections";
+          Program.WriteResult($"{methodName}1", result, compare);
+          break;
+        }
+
+        var repeatItemManager = new RepeatItemManager(sections);
+        var sectionName = "Main";
+        var itemName = "Item1";
+
+        // Test Method
+        var repeatItem = repeatItemManager.Retrieve(sectionName, itemName);
+
+        result = "";
+        if (repeatItem != null)
+        {
+          result = repeatItem.Name;
+        }
+        compare = itemName;
+        Program.WriteResult($"{methodName}2", result, compare);
         break;
       }
     }
