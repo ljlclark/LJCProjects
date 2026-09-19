@@ -3,6 +3,7 @@
 // TestSectionManager5.cs
 using LJCGenTextXML5;
 using LJCNetCommon5;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TestGenText5
 {
@@ -37,6 +38,7 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and write to a file.
         var fileName = "Sections.xml";
         var xml = Program.SampleXML();
         File.WriteAllText(fileName, xml);
@@ -44,6 +46,7 @@ namespace TestGenText5
         // Test Method
         var sectionManager = new SectionManager(fileName);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sectionManager.Sections))
         {
           result = "";
@@ -52,7 +55,10 @@ namespace TestGenText5
           break;
         }
 
+        // Set test values.
         var sectionName = "Main";
+
+        // Verify data was loaded.
         var section = sectionManager.Retrieve(sectionName);
         result = "";
         if (section != null)
@@ -74,9 +80,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -96,7 +104,10 @@ namespace TestGenText5
           break;
         }
 
+        // Set test values.
         var sectionName = "Main";
+
+        // Verify data was loaded.
         var section = sectionManager.Retrieve(sectionName);
         result = "";
         if (section != null)
@@ -121,9 +132,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -132,6 +145,7 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager and verify the data was loaded.
         var sectionManager = new SectionManager(sections);
         if (!LJC.HasListItems(sectionManager.Sections))
         {
@@ -141,12 +155,14 @@ namespace TestGenText5
           break;
         }
 
+        // Create a new Section.
         var newSectionName = "OneMore";
         var section = new Section(newSectionName);
 
         // Test Method
         sectionManager.Add(section);
 
+        // Verify Section was added.
         section = sectionManager.Retrieve(newSectionName);
         result = "";
         if (section != null)
@@ -168,9 +184,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -179,6 +197,7 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager and verify the data was loaded.
         var sectionManager = new SectionManager(sections);
         if (!LJC.HasListItems(sectionManager.Sections))
         {
@@ -188,8 +207,11 @@ namespace TestGenText5
           break;
         }
 
+        // Add a new Section.
         var newSectionName = "OneMore";
         var section = sections.Add(newSectionName);
+
+        // Show error if the Section was not added.
         if (null == section)
         {
           result = "";
@@ -198,21 +220,13 @@ namespace TestGenText5
           break;
         }
 
+        // Verify new Section was added.
         section = sectionManager.Retrieve(newSectionName);
         if (null == section)
         {
           result = "";
           compare = newSectionName;
           Program.WriteResult($"{methodName}4", result, compare);
-          break;
-        }
-
-        sections = sectionManager.Load();
-        if (!LJC.HasListItems(sections))
-        {
-          result = "";
-          compare = "No Sections";
-          Program.WriteResult($"{methodName}5", result, compare);
           break;
         }
 
@@ -229,6 +243,7 @@ namespace TestGenText5
         // Test Method
         if (!sectionManager.Delete(newSectionName))
         {
+          // Verify error where RepeatItem was not deleted.
           section = sectionManager.Retrieve(sectionName);
           result = "";
           if (section != null)
@@ -239,6 +254,7 @@ namespace TestGenText5
           Program.WriteResult($"{methodName}6", result, compare);
         }
 
+        // Verify Section was deleted.
         section = sectionManager.Retrieve(newSectionName);
         result = "";
         if (section != null)
@@ -260,9 +276,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -271,6 +289,7 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager and verify the data was loaded.
         var sectionManager = new SectionManager(sections);
         if (!LJC.HasListItems(sectionManager.Sections))
         {
@@ -283,6 +302,7 @@ namespace TestGenText5
         // Test Method
         sections = sectionManager.Load();
 
+        // verify the data was loaded.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -291,6 +311,7 @@ namespace TestGenText5
           break;
         }
 
+        // Verify the first item is "Main".
         var section = sections[0];
         result = "";
         if (section != null)
@@ -312,9 +333,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -323,6 +346,7 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager and verify the data was loaded.
         var sectionManager = new SectionManager(sections);
         if (!LJC.HasListItems(sectionManager.Sections))
         {
@@ -332,11 +356,13 @@ namespace TestGenText5
           break;
         }
 
+        // Set test values.
         var sectionName = "Main";
 
         // Test Method
         var section = sectionManager.Retrieve(sectionName);
 
+        // Verify retrieved item.
         result = "";
         if (section != null)
         {
@@ -353,13 +379,16 @@ namespace TestGenText5
     {
       var methodName = "Save()";
 
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
-
       string result;
       string compare;
       while (true)
       {
+
+        // Get XML and create the Sections collection.
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -368,6 +397,7 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager and verify the data was loaded.
         var sectionManager = new SectionManager(sections);
         if (!LJC.HasListItems(sectionManager.Sections))
         {
@@ -376,7 +406,6 @@ namespace TestGenText5
           Program.WriteResult($"{methodName}2", result, compare);
           break;
         }
-
         break;
       }
     }

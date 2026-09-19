@@ -34,9 +34,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -48,8 +50,11 @@ namespace TestGenText5
         // Test Method
         var repeatItemManager = new RepeatItemManager(sections);
 
+        // Set test values.
         var sectionName = "Main";
         var itemName = "Item1";
+
+        // Verify data was loaded.
         var repeatItem = repeatItemManager.Retrieve(sectionName, itemName);
         result = "";
         if (repeatItem != null)
@@ -74,9 +79,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -85,17 +92,23 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager.
         var repeatItemManager = new RepeatItemManager(sections);
-        var sectionName = "Main";
+
+        // Create a new RepeatItem.
         var newItemName = "Item2";
         var repeatItem = new RepeatItem()
         {
           Name = newItemName,
         };
 
+        // Set test values.
+        var sectionName = "Main";
+
         // Test Method
         repeatItemManager.Add(sectionName, repeatItem);
 
+        // Verify RepeatItem was added.
         repeatItem = repeatItemManager.Retrieve(sectionName, newItemName);
         result = "";
         if (repeatItem != null)
@@ -117,9 +130,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -128,8 +143,13 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager.
         var repeatItemManager = new RepeatItemManager(sections);
+
+        // Set test values.
         var sectionName = "Main";
+
+        // Add new RepeatItem.
         var newItemName = "Item2";
         var repeatItem = new RepeatItem()
         {
@@ -137,21 +157,13 @@ namespace TestGenText5
         };
         repeatItemManager.Add(sectionName, repeatItem);
 
+        // Verify new RepeatItem was returned.
         repeatItem = repeatItemManager.Retrieve(sectionName, newItemName);
         if (null == repeatItem)
         {
           result = "";
           compare = newItemName;
           Program.WriteResult($"{methodName}2", result, compare);
-          break;
-        }
-
-        var repeatItems = repeatItemManager.Load(sectionName);
-        if (!LJC.HasListItems(repeatItems))
-        {
-          result = "";
-          compare = "No RepeatItems";
-          Program.WriteResult($"{methodName}3", result, compare);
           break;
         }
 
@@ -162,6 +174,7 @@ namespace TestGenText5
         // Test Method
         if (!repeatItemManager.Delete(sectionName, newItemName))
         {
+          // Verify error where RepeatItem was not deleted.
           repeatItem = repeatItemManager.Retrieve(sectionName, newItemName);
           result = "";
           if (repeatItem != null)
@@ -172,6 +185,7 @@ namespace TestGenText5
           Program.WriteResult($"{methodName}4", result, compare);
         }
 
+        // Verify RepeatItem was deleted.
         repeatItem = repeatItemManager.Retrieve(sectionName, newItemName);
         result = "";
         if (repeatItem != null)
@@ -189,13 +203,15 @@ namespace TestGenText5
     {
       var methodName = "DeleteRepeatItems()";
 
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
-
       string result;
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -204,15 +220,21 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager.
         var repeatItemManager = new RepeatItemManager(sections);
+
+        // Set test values.
         var sectionName = "Main";
         var itemName = "Item2";
+
+        // Add a new RepeatItem.
         var repeatItem = new RepeatItem()
         {
           Name = itemName,
         };
         repeatItemManager.Add(sectionName, repeatItem);
 
+        // Verify new RepeatItem was added.
         repeatItem = repeatItemManager.Retrieve(sectionName, itemName);
         if (null == repeatItem)
         {
@@ -222,6 +244,7 @@ namespace TestGenText5
           break;
         }
 
+        // Get the repeat items.
         var repeatItems = repeatItemManager.Load(sectionName);
         if (!LJC.HasListItems(repeatItems))
         {
@@ -241,6 +264,7 @@ namespace TestGenText5
         // Test Method
         repeatItemManager.DeleteRepeatItems(sectionName);
 
+        // Verify all repeat items were deleted.
         repeatItems = repeatItemManager.Load(sectionName);
         if (LJC.HasListItems(repeatItems))
         {
@@ -261,9 +285,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -272,12 +298,16 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager.
         var repeatItemManager = new RepeatItemManager(sections);
+
+        // Set test values.
         var sectionName = "Main";
 
         // Test Method
         var repeatItems = repeatItemManager.Load(sectionName);
 
+        // verify the data was loaded.
         if (!LJC.HasListItems(repeatItems))
         {
           result = "";
@@ -286,6 +316,7 @@ namespace TestGenText5
           break;
         }
 
+        // Verify the first item is "Item1".
         var repeatItem = repeatItems[0];
         result = "";
         if (repeatItem != null)
@@ -307,9 +338,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -318,13 +351,17 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager.
         var repeatItemManager = new RepeatItemManager(sections);
+
+        // Set test values.
         var sectionName = "Main";
         var itemName = "Item1";
 
         // Test Method
         var repeatItem = repeatItemManager.Retrieve(sectionName, itemName);
 
+        // Verify retrieved item.
         result = "";
         if (repeatItem != null)
         {

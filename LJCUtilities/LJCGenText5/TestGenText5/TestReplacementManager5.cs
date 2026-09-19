@@ -34,9 +34,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -48,9 +50,12 @@ namespace TestGenText5
         // Test Method
         var replacementManager = new ReplacementManager(sections);
 
+        // Set test values.
         var sectionName = "Main";
         var itemName = "Item1";
         var replacementName = "_Namespace_";
+
+        // Verify data was loaded.
         var replacement = replacementManager.Retrieve(sectionName, itemName
           , replacementName);
         result = "";
@@ -76,9 +81,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -87,18 +94,24 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager.
         var replacementManager = new ReplacementManager(sections);
-        var sectionName = "Main";
-        var itemName = "Item1";
+
+        // Create a new Replacement.
         var newReplacementName = "_OneMore_";
         var replacement = new Replacement()
         {
           Name = newReplacementName,
         };
 
+        // Set test values.
+        var sectionName = "Main";
+        var itemName = "Item1";
+
         // Test Method
         replacementManager.Add(sectionName, itemName, replacement);
 
+        // Verify Replacement was added.
         replacement = replacementManager.Retrieve(sectionName, itemName
           , newReplacementName);
         result = "";
@@ -121,9 +134,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -132,9 +147,14 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager.
         var replacementManager = new ReplacementManager(sections);
+
+        // Set test values.
         var sectionName = "Main";
         var itemName = "Item1";
+
+        // Add a new Replacement.
         var newReplacementName = "_NewOne_";
         var replacement = new Replacement()
         {
@@ -142,6 +162,7 @@ namespace TestGenText5
         };
         replacementManager.Add(sectionName, itemName, replacement);
 
+        // Verify new Replacement was added.
         replacement = replacementManager.Retrieve(sectionName, itemName
           , newReplacementName);
         if (null == replacement)
@@ -152,19 +173,11 @@ namespace TestGenText5
           break;
         }
 
-        var replacements = replacementManager.Load(sectionName, itemName);
-        if (!LJC.HasListItems(replacements))
-        {
-          result = "";
-          compare = "No Replacements";
-          Program.WriteResult($"{methodName}3", result, compare);
-          break;
-        }
-
         // Test Method
         if (!replacementManager.Delete(sectionName, itemName
           , newReplacementName))
         {
+          // Verify error where Replacement was not deleted.
           replacement = replacementManager.Retrieve(sectionName, itemName
             , newReplacementName);
           result = "";
@@ -176,6 +189,7 @@ namespace TestGenText5
           Program.WriteResult($"{methodName}4", result, compare);
         }
 
+        // Verify Replacement was deleted.
         replacement = replacementManager.Retrieve(sectionName, itemName
           , newReplacementName);
         result = "";
@@ -194,13 +208,15 @@ namespace TestGenText5
     {
       var methodName = "DeleteReplacements()";
 
-      var xml = Program.SampleXML();
-      var sections = Sections.LJCDeserializeString(xml);
-
       string result;
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
+        var xml = Program.SampleXML();
+        var sections = Sections.LJCDeserializeString(xml);
+
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -209,9 +225,14 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager.
         var replacementManager = new ReplacementManager(sections);
+
+        // Set test values.
         var sectionName = "Main";
         var itemName = "Item1";
+
+        // Add a new Replacement.
         var replacementName = "_NewOne_";
         var replacement = new Replacement()
         {
@@ -219,29 +240,22 @@ namespace TestGenText5
         };
         replacementManager.Add(sectionName, itemName, replacement);
 
+        // Verify new Replacement was added.
         replacement = replacementManager.Retrieve(sectionName, itemName
           , replacementName);
         if (null == replacement)
         {
           result = "";
-          compare = "_NewOne_";
+          compare = "replacementName";
           Program.WriteResult($"{methodName}2", result, compare);
-          break;
-        }
-
-        var replacements = replacementManager.Load(sectionName, itemName);
-        if (!LJC.HasListItems(replacements))
-        {
-          result = "";
-          compare = "No Replacements";
-          Program.WriteResult($"{methodName}3", result, compare);
           break;
         }
 
         // Test Method
         replacementManager.DeleteReplacements(sectionName, itemName);
 
-        replacements = replacementManager.Load(sectionName, itemName);
+        // Verify all replacements were deleted.
+        var replacements = replacementManager.Load(sectionName, itemName);
         if (LJC.HasListItems(replacements))
         {
           result = replacements.Count.ToString();
@@ -261,9 +275,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -272,13 +288,17 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager.
         var replacementManager = new ReplacementManager(sections);
+
+        // Set test values.
         var sectionName = "Main";
         var repeatItemName = "Item1";
 
         // Test Method
         var replacements = replacementManager.Load(sectionName, repeatItemName);
 
+        // verify the data was loaded.
         if (!LJC.HasListItems(replacements))
         {
           result = "";
@@ -287,6 +307,7 @@ namespace TestGenText5
           break;
         }
 
+        // Verify the first item is "_Namespace_".
         var replacement = replacements[0];
         result = "";
         if (replacement != null)
@@ -308,9 +329,11 @@ namespace TestGenText5
       string compare;
       while (true)
       {
+        // Get XML and create the Sections collection.
         var xml = Program.SampleXML();
         var sections = Sections.LJCDeserializeString(xml);
 
+        // Check if the collection has items.
         if (!LJC.HasListItems(sections))
         {
           result = "";
@@ -319,7 +342,10 @@ namespace TestGenText5
           break;
         }
 
+        // Create the data manager.
         var replacementManager = new ReplacementManager(sections);
+
+        // Set test values.
         var sectionName = "Main";
         var itemName = "Item1";
         var replacementName = "_Namespace_";
@@ -328,6 +354,7 @@ namespace TestGenText5
         var replacement = replacementManager.Retrieve(sectionName, itemName
           , replacementName);
 
+        // Verify retrieved item.
         result = "";
         if (replacement != null)
         {
