@@ -23,10 +23,6 @@ CoreUtilities\LJCGenText\LJCGenText\bin\Debug\TestCode\
 CoreUtilities\LJCSystemBuilder\
 CoreUtilities\LJCViewBuilder\
 Dependencies\
-LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\LJCCodeDoc\
-LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\LJCPHPProjects\
-LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\LJCProjects\
-LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\LJCProjectsDevBackup\
 LJCUtilities\LJCBackup5\TestBackupChanges5\bin\Debug\net8.0\LJCProjects\
 LJCUtilities\LJCBackup5\TestCreateFileChanges5\bin\Debug\net8.0\LJCProjects\
 SampleApps\Genealogy\
