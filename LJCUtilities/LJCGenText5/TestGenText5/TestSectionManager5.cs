@@ -3,7 +3,6 @@
 // TestSectionManager5.cs
 using LJCGenTextXML5;
 using LJCNetCommon5;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TestGenText5
 {

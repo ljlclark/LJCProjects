@@ -87,7 +87,7 @@ namespace LJCGenTextXML5
     }
     #endregion
 
-    #region Methods
+    #region Collection Methods
 
     // Creates and adds the Section object with the supplied values.
     /// <include file='Doc/Sections5.xml'

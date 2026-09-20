@@ -38,7 +38,7 @@ namespace LJCGenTextXML5
     }
     #endregion
 
-    #region Public Methods
+    #region Data Methods
 
     // Creates and returns a clone of this object.
     /// <include file='../../LJCGenDoc5/Common/Data.xml'

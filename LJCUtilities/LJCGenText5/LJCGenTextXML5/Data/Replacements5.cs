@@ -28,7 +28,8 @@ namespace LJCGenTextXML5
 
     #region Data Methods
 
-    /// <include file='Doc/RepeatItems5.xml'
+    // Creates and returns a clone of this object.
+    /// <include file='Doc/Replacements5.xml'
     ///  path='items/Add/*'/>
     public Replacements Clone()
     {
@@ -42,7 +43,7 @@ namespace LJCGenTextXML5
     }
     #endregion
 
-    #region Methods
+    #region Collecion Methods
 
     // Creates the Replacement object with the supplied values
     /// <include file='Doc/Replacements5.xml'

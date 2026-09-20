@@ -27,6 +27,7 @@ namespace LJCGenTextXML5
 
     #region Data Methods
 
+    // Creates and returns a clone of this object.
     /// <include file='Doc/RepeatItems5.xml'
     ///  path='items/Add/*'/>
     public RepeatItems Clone()
@@ -41,7 +42,7 @@ namespace LJCGenTextXML5
     }
     #endregion
 
-    #region Methods
+    #region Collection Methods
 
     // Creates the RepeateItem object and adds it to the end of the collection.
     /// <include file='Doc/RepeatItems5.xml'
