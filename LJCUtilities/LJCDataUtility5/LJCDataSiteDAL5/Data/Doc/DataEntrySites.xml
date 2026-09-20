@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataEntrySites.xml -->
+<items>
+  <Add>
+    <summary>
+      Creates and adds the object from the supplied values.
+    </summary>
+    <param name="dataEntryID">The entry ID.</param>
+    <param name="dataEntrySiteID">The entry site ID.</param>
+    <param name="dataSiteID">The site ID.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <LJCRemove>
+    <summary>
+      Removes an item by unique keys.
+    </summary>
+    <param name="dataEntryID">The unique entry ID.</param>
+    <param name="dataEntrySiteID">The unique entry site ID.</param>
+    <param name="dataSiteID">The unique site ID.</param>
+  </LJCRemove>
+  <LJCSearchPrimary>
+    <summary>
+      Retrieve the collection element with primary key.
+    </summary>
+    <param name="dataEntryID">The unique entry ID.</param>
+    <param name="dataEntrySiteID">The unique entry site ID.</param>
+    <param name="dataSiteID">The unique site ID.</param>
+    <returns>A reference to the matching item.</returns>
+  </LJCSearchPrimary>
+</items>

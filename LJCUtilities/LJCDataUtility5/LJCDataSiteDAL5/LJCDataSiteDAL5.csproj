@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\DataEntryV1.cs" />
+    <Compile Remove="ManagersDataSite.cs" />
+    <Compile Remove="Manager\DataEntryManager.cs" />
+    <Compile Remove="Manager\DataEntrySiteManager.cs" />
+    <Compile Remove="Manager\DbGroupManager5.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LJCDBMessage5">
+      <HintPath>..\External\LJCDBMessage5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCNetCommon5">
+      <HintPath>..\External\LJCNetCommon5.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Manager\" />
+  </ItemGroup>
+
+</Project>
