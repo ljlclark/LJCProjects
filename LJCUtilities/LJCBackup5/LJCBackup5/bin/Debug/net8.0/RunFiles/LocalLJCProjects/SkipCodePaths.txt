@@ -1,3 +1,5 @@
+CoreAssemblies\LJCDBClientLib\External\
+CoreAssemblies\LJCLibraries\LJCModifyLine\
 CoreAssemblies\LJCPagination\
 CoreAssemblies\LJCViewControls\
 CoreTestApps\LJCDataManagerTest\
