@@ -19,7 +19,8 @@ namespace LJCGenTextLib5
       , string commentChars = "//")
     {
       string[] values;
-      char[] separator = { ' ' };
+      //char[] separator = { ' ' };
+      char[] separator = [' '];
       Directive? retValue = null;
 
       // Templates directive is in a comment.
@@ -33,7 +34,9 @@ namespace LJCGenTextLib5
           {
             CommentChars = commentChars
           };
-          values = line.Substring(index).Split(separator
+          //values = line.Substring(index).Split(separator
+          //  , StringSplitOptions.RemoveEmptyEntries);
+          values = line[index..].Split(separator
             , StringSplitOptions.RemoveEmptyEntries);
           if (values.Length > 0)
           {
@@ -229,17 +232,17 @@ namespace LJCGenTextLib5
     // Gets or sets the directive ID.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='items/ID/*'/>
-    public string ID { get; set; }
+    public string ID { get; set; } = null!;
 
     // Gets or sets the Name value.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='items/Name/*'/>
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     // Gets or sets the Value property.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='items/Value/*'/>
-    public string Value { get; set; }
+    public string Value { get; set; } = null!;
     #endregion
 
     #region Class Data
@@ -279,9 +282,9 @@ namespace LJCGenTextLib5
     // Creates and returns a clone of this object.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='items/Clone/*'/>
-    public Directive Clone()
+    public Directive? Clone()
     {
-      Directive retValue = MemberwiseClone() as Directive;
+      var retValue = MemberwiseClone() as Directive;
       return retValue;
     }
 

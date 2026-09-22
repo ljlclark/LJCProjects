@@ -181,10 +181,6 @@ namespace LJCGenTextLib5
       }
       return retValue;
     }
-
-    public void PopulateSection(Section section)
-    {
-    }
     #endregion
   }
 }

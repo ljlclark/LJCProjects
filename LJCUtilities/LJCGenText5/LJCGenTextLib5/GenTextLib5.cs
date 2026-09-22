@@ -54,7 +54,7 @@ namespace LJCGenTextLib5
       PlaceholderEnd = "_";
 
       // Private Properties
-      ActiveReplacements = new List<Replacements>();
+      ActiveReplacements = [];
       Output = "";
     }
     #endregion
@@ -408,7 +408,8 @@ namespace LJCGenTextLib5
         var line = Lines[index];
 
         var directive = Directive.GetDirective(line, CommentChars);
-        if (Directive.IsSectionEnd(line, CommentChars)
+        if (directive != null
+          && Directive.IsSectionEnd(line, CommentChars)
           && directive.Name == name)
         {
           retValue = index++;
@@ -482,8 +483,13 @@ namespace LJCGenTextLib5
     // Gets the begin section.
     private Section? GetBeginSection(string line)
     {
+      Section? retValue = null;
+
       var directive = Directive.GetDirective(line, CommentChars);
-      var retValue = Sections.Retrieve(directive.Name);
+      if (directive != null)
+      {
+        retValue = Sections.Retrieve(directive.Name);
+      }
       return retValue;
     }
 

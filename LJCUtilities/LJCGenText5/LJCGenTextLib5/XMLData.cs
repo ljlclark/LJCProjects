@@ -163,18 +163,21 @@ namespace LJCGenTextLib5
     {
       string retValue;
 
-      DefaultValues defaultValues = GetDefaults(tableName);
+      var defaultValues = GetDefaults(tableName);
 
       PadLength = 6;
-      StringBuilder build = new StringBuilder(64);
+      StringBuilder build = new(64);
       build.AppendLine("<?xml version = '1.0' encoding = 'utf-8'?>");
       build.Append("<Sections xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'");
       build.AppendLine(" xmlns:xsd='http://www.w3.org/2001/XMLSchema'>");
       build.AppendLine("  <Section>");
       build.AppendLine("    <Name>Class</Name>");
-      build.AppendLine("    <RepeatItems>");
-      build.AppendLine(ClassItems(defaultValues));
-      build.AppendLine("    </RepeatItems>");
+      if (defaultValues != null)
+      {
+        build.AppendLine("    <RepeatItems>");
+        build.AppendLine(ClassItems(defaultValues));
+        build.AppendLine("    </RepeatItems>");
+      }
       build.AppendLine("  </Section>");
       build.AppendLine("  <Section>");
       build.AppendLine("    <Name>Properties</Name>");
@@ -194,7 +197,7 @@ namespace LJCGenTextLib5
     {
       string retValue;
 
-      string padValue = new string(' ', PadLength);
+      string padValue = new(' ', PadLength);
       string readyText = string.Format(text, parms);
       retValue = $"{padValue}{readyText}";
       return retValue;
@@ -219,14 +222,20 @@ namespace LJCGenTextLib5
         Add("      <Name>_AllowDBNull_</Name>");
         Add("      <Value>{0}</Value>", dbColumn.AllowDBNull);
         Add("    </Replacement>");
-        Add("    <Replacement>");
-        Add("      <Name>_DataType_</Name>");
-        Add("      <Value>{0}</Value>", dbColumn.DataTypeName);
-        Add("    </Replacement>");
-        Add("    <Replacement>");
-        Add("      <Name>_DBType_</Name>");
-        Add("      <Value>{0}</Value>", dbColumn.SQLTypeName);
-        Add("    </Replacement>");
+        if (LJC.HasText(dbColumn.DataTypeName))
+        {
+          Add("    <Replacement>");
+          Add("      <Name>_DataType_</Name>");
+          Add("      <Value>{0}</Value>", dbColumn.DataTypeName);
+          Add("    </Replacement>");
+        }
+        if (LJC.HasText(dbColumn.SQLTypeName))
+        {
+          Add("    <Replacement>");
+          Add("      <Name>_DBType_</Name>");
+          Add("      <Value>{0}</Value>", dbColumn.SQLTypeName);
+          Add("    </Replacement>");
+        }
         Add("    <Replacement>");
         Add("      <Name>_ColumnName_</Name>");
         Add("      <Value>{0}</Value>", dbColumn.ColumnName);

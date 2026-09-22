@@ -9,50 +9,16 @@ namespace LJCGenTextLib5
   ///  path='items/GenTokens/*'/>
   public class GenTokens : List<string>
   {
-    #region Constructors
-
-    //Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
-    public GenTokens()
-    {
-      mPrevCount = -1;
-    }
-    #endregion
-
-    #region Methods
-
-    // Sets the Token elements from the specified text.
-    /// <include file='Doc/GenTokens.xml'
-    ///  path='items/SetTokens/*'/>
-    public void SetTokens(string text)
-    {
-      string tokenValue;
-      string existingToken;
-      int currentIndex;
-
-      Clear();
-      currentIndex = -1;
-      tokenValue = GetNextToken(text, ref currentIndex);
-      while (tokenValue != null)
-      {
-        existingToken = BinarySearch(tokenValue);
-        if (null == existingToken)
-        {
-          Add(tokenValue);
-        }
-        tokenValue = GetNextToken(text, ref currentIndex);
-      }
-    }
+    #region Static Methods
 
     // Retrieves the next valid token.
     /// <include file='Doc/GenTokens.xml'
     ///  path='items/GetNextToken/*'/>
-    public string GetNextToken(string text, ref int currentIndex)
+    public static string? GetNextToken(string text, ref int currentIndex)
     {
       int startIndex = 0;
       bool isSearching = true;
-      string retValue = null;
+      string? retValue = null;
 
       currentIndex++;
       if (currentIndex >= text.Length)
@@ -78,9 +44,9 @@ namespace LJCGenTextLib5
         if (isSearching)
         {
           retValue = text.Substring(startIndex, currentIndex - startIndex + 1);
-          if (-1 == retValue.IndexOf(' ')
-            && -1 == retValue.IndexOf(">")
-            && -1 == retValue.IndexOf("'"))
+          if (!retValue.Contains(' ')
+            && !retValue.Contains('>')
+            && !retValue.Contains('\''))
           {
             // The token contains no spaces so it is valid.
             isSearching = false;
@@ -89,14 +55,47 @@ namespace LJCGenTextLib5
       }
       return retValue;
     }
+    #endregion
+
+    #region Constructors
+
+    //Initializes an object instance.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
+    public GenTokens()
+    {
+      mPrevCount = -1;
+    }
+    #endregion
+
+    #region Methods
+
+    // Sets the Token elements from the specified text.
+    /// <include file='Doc/GenTokens.xml'
+    ///  path='items/SetTokens/*'/>
+    public void SetTokens(string text)
+    {
+      Clear();
+      int currentIndex = -1;
+      var tokenValue = GetNextToken(text, ref currentIndex);
+      while (tokenValue != null)
+      {
+        var existingToken = BinarySearch(tokenValue);
+        if (null == existingToken)
+        {
+          Add(tokenValue);
+        }
+        tokenValue = GetNextToken(text, ref currentIndex);
+      }
+    }
 
     // Searches the entire sorted collection for an element with the specified value
     /// <include file='Doc/GenTokens.xml'
     ///  path='items/BinarySearch/*'/>
-    public new string BinarySearch(string tokenValue)
+    public new string? BinarySearch(string tokenValue)
     {
       int index;
-      string retValue = null;
+      string? retValue = null;
 
       if (Count != mPrevCount)
       {
