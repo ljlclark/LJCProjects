@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LJCGenTextLib5\LJCGenTextLib5.csproj" />
     <ProjectReference Include="..\LJCGenTextXML5\LJCGenTextXML5.csproj" />
   </ItemGroup>
 

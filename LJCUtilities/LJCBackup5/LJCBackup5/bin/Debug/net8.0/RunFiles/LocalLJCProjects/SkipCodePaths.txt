@@ -25,8 +25,16 @@ CoreUtilities\LJCGenText\LJCGenText\bin\Debug\TestCode\
 CoreUtilities\LJCSystemBuilder\
 CoreUtilities\LJCViewBuilder\
 Dependencies\
+LJCAssemblies\LJCNetCommon5\_Save\
 LJCUtilities\LJCBackup5\TestBackupChanges5\bin\Debug\net8.0\LJCProjects\
 LJCUtilities\LJCBackup5\TestCreateFileChanges5\bin\Debug\net8.0\LJCProjects\
+LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\RunFiles\HPLJCProjects\
+LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\RunFiles\LocalLJCCodeDoc\
+LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\RunFiles\LocalLJCDBDiagrams\
+LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\RunFiles\LocalLJCJSCodeDoc\
+LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\RunFiles\LocalLJCPHPCodeDoc\
+LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\RunFiles\LocalLJCPHPProjects\
+LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\RunFiles\SegateLJCProjects\
 SampleApps\Genealogy\
 SampleApps\LJCDocAppManager\
 SampleApps\LJCFacilityManager\Output\

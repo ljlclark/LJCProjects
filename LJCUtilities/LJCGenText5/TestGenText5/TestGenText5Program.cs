@@ -1,4 +1,5 @@
-﻿using LJCGenTextXML5;
+﻿using LJCGenTextLib5;
+using LJCGenTextXML5;
 using LJCNetCommon5;
 
 namespace TestGenText5
@@ -17,6 +18,8 @@ namespace TestGenText5
         _ = new TestSectionManager();
         _ = new TestItemManager();
         _ = new TestReplacementManager();
+
+        _ = new TestGenSample();
       }
     }
 
