@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGenText5", "TestGenText
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCGenTextLib5", "LJCGenTextLib5\LJCGenTextLib5.csproj", "{B4B5151D-262E-45A2-91B7-985E69E8736A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCGenText5", "LJCGenText5\LJCGenText5.csproj", "{FEB22973-224C-4DF8-940E-8D0993BF2755}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B4B5151D-262E-45A2-91B7-985E69E8736A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4B5151D-262E-45A2-91B7-985E69E8736A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4B5151D-262E-45A2-91B7-985E69E8736A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEB22973-224C-4DF8-940E-8D0993BF2755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEB22973-224C-4DF8-940E-8D0993BF2755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEB22973-224C-4DF8-940E-8D0993BF2755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEB22973-224C-4DF8-940E-8D0993BF2755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

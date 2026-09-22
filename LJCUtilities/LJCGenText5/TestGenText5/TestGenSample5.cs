@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // TestGenSample5.cs
 using LJCGenTextLib5;
+using LJCGenTextXML5;
+using LJCNetCommon5;
 
 namespace TestGenText5
 {
@@ -11,6 +13,12 @@ namespace TestGenText5
     // Initializes an object instance.
     public TestGenSample()
     {
+      GenData();
+    }
+
+    // Generate from DataTemplate.
+    private static void GenData()
+    {
       var fileSpec = @"Templates\DataTemplate.cs";
       var lines = File.ReadAllLines(fileSpec);
 
@@ -19,9 +27,13 @@ namespace TestGenText5
 
       if (sections != null)
       {
+        // Testing
+        LJC.XmlSerialize(typeof(Sections), sections, null
+          , "TestData.xml");
+
         var genText = new GenTextLib();
         var generatedText = genText.TextGen(sections, lines);
-        File.WriteAllText(@"Work\Data.cs", generatedText);
+        File.WriteAllText(@"Output\Data.cs", generatedText);
       }
     }
   }
