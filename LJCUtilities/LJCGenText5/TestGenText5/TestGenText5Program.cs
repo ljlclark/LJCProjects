@@ -1,5 +1,5 @@
 ﻿using LJCGenTextLib5;
-using LJCGenTextXML5;
+using LJCGenTextXAL5;
 using LJCNetCommon5;
 
 namespace TestGenText5

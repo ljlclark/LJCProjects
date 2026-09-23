@@ -3,7 +3,7 @@
 // RepeatItemManager5.cs
 using LJCNetCommon5;
 
-namespace LJCGenTextXML5
+namespace LJCGenTextXAL5
 {
   // Provides RepeatItem specific XML data manipulation methods.
   /// <include file='Doc/RepeatItemManager5.xml'

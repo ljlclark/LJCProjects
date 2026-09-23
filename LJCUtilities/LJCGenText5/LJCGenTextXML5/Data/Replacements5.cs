@@ -3,7 +3,7 @@
 // Replacements.cs
 using LJCNetCommon5;
 
-namespace LJCGenTextXML5
+namespace LJCGenTextXAL5
 {
   // Represents a collection of Replacement objects.
   /// <include file='Doc/Replacements5.xml'

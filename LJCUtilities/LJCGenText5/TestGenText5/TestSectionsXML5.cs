@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TestSectionsXML5.cs
-using LJCGenTextXML5;
+using LJCGenTextXAL5;
 using LJCNetCommon5;
 
 namespace TestGenText5

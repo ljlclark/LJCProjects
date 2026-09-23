@@ -3,7 +3,7 @@
 // RepeatItems.cs
 using LJCNetCommon5;
 
-namespace LJCGenTextXML5
+namespace LJCGenTextXAL5
 {
   // Represents a collection of RepeatItem objects.
   /// <include file='Doc/RepeatItems5.xml'

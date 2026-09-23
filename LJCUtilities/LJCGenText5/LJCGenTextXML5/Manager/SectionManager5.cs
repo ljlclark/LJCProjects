@@ -3,7 +3,7 @@
 // SectionManager5.cs
 using LJCNetCommon5;
 
-namespace LJCGenTextXML5
+namespace LJCGenTextXAL5
 {
   // Provides Section specific XML data manipulation methods.
   /// <include file='Doc/SectionManager5.xml'

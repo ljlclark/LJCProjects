@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // Replacement.cs
 
-namespace LJCGenTextXML5
+namespace LJCGenTextXAL5
 {
   // Represents a GenText replacement item.
   /// <include file='Doc/Replacement5.xml'

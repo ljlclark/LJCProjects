@@ -4,7 +4,7 @@
 using LJCNetCommon5;
 using System.Xml.Serialization;
 
-namespace LJCGenTextXML5
+namespace LJCGenTextXAL5
 {
   // Represents a collection of Section objects.
   /// <include file='Doc/Sections5.xml'

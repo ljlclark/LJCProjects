@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.37628.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCGenTextXML5", "LJCGenTextXML5\LJCGenTextXML5.csproj", "{882493A1-9D56-416A-9204-3C28987C1948}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJCGenTextXAL5", "LJCGenTextXML5\LJCGenTextXAL5.csproj", "{882493A1-9D56-416A-9204-3C28987C1948}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGenText5", "TestGenText5\TestGenText5.csproj", "{953C6CD3-3FE7-4088-8482-296802AA38D1}"
 EndProject

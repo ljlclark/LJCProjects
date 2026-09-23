@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // RepeatItem.cs
 
-namespace LJCGenTextXML5
+namespace LJCGenTextXAL5
 {
   // Represents a GenText repeate item.
   /// <include file='../../LJCGenDoc5/Common/Data.xml'

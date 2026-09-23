@@ -3,7 +3,7 @@
 // ReplacementManager.cs
 using LJCNetCommon5;
 
-namespace LJCGenTextXML5
+namespace LJCGenTextXAL5
 {
   // Provides Replacement specific XML data manipulation methods.
   /// <include file='Doc/ReplacementManager5.xml'
