@@ -35,6 +35,7 @@ namespace LJCDataUtility5
       DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
       DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
       MainSplit = new SplitContainer();
+      ljcHeaderBox1 = new LJCHeaderBox();
       TableGrid = new LJCDataGrid(components);
       TableMenu = new ContextMenuStrip(components);
       Table = new ToolStripMenuItem();
@@ -49,6 +50,7 @@ namespace LJCDataUtility5
       TableCreate = new ToolStripMenuItem();
       TableConvert = new ToolStripMenuItem();
       TableAddProc = new ToolStripMenuItem();
+      TableCreateData = new ToolStripMenuItem();
       toolStripSeparator13 = new ToolStripSeparator();
       TableExit = new ToolStripMenuItem();
       ColumnsSplit = new SplitContainer();
@@ -96,7 +98,6 @@ namespace LJCDataUtility5
       ModuleLabel = new Label();
       ConfigLabel = new Label();
       ConfigCombo = new LJCItemCombo();
-      TableCreateData = new ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)MainSplit).BeginInit();
       MainSplit.Panel1.SuspendLayout();
       MainSplit.Panel2.SuspendLayout();
@@ -128,6 +129,7 @@ namespace LJCDataUtility5
       // 
       // MainSplit.Panel1
       // 
+      MainSplit.Panel1.Controls.Add(ljcHeaderBox1);
       MainSplit.Panel1.Controls.Add(TableGrid);
       // 
       // MainSplit.Panel2
@@ -138,11 +140,23 @@ namespace LJCDataUtility5
       MainSplit.SplitterWidth = 6;
       MainSplit.TabIndex = 4;
       // 
+      // ljcHeaderBox1
+      // 
+      ljcHeaderBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+      ljcHeaderBox1.LJCBeginColor = Color.AliceBlue;
+      ljcHeaderBox1.LJCEndColor = Color.LightSkyBlue;
+      ljcHeaderBox1.Location = new Point(0, 0);
+      ljcHeaderBox1.Name = "ljcHeaderBox1";
+      ljcHeaderBox1.Size = new Size(800, 34);
+      ljcHeaderBox1.TabIndex = 6;
+      ljcHeaderBox1.Text = "Table";
+      // 
       // TableGrid
       // 
       TableGrid.AllowUserToAddRows = false;
       TableGrid.AllowUserToDeleteRows = false;
       TableGrid.AllowUserToResizeRows = false;
+      TableGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       TableGrid.BackgroundColor = Color.AliceBlue;
       TableGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       TableGrid.ContextMenuStrip = TableMenu;
@@ -154,20 +168,19 @@ namespace LJCDataUtility5
       dataGridViewCellStyle1.SelectionForeColor = Color.Black;
       dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
       TableGrid.DefaultCellStyle = dataGridViewCellStyle1;
-      TableGrid.Dock = DockStyle.Fill;
       TableGrid.EditMode = DataGridViewEditMode.EditOnEnter;
       TableGrid.LJCAllowSelectionChange = false;
       TableGrid.LJCDragDataName = "";
       TableGrid.LJCLastRowIndex = -1;
       TableGrid.LJCRowHeight = 0;
-      TableGrid.Location = new Point(0, 0);
+      TableGrid.Location = new Point(0, 34);
       TableGrid.MultiSelect = false;
       TableGrid.Name = "TableGrid";
       TableGrid.RowHeadersVisible = false;
       TableGrid.RowHeadersWidth = 62;
       TableGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       TableGrid.ShowCellToolTips = false;
-      TableGrid.Size = new Size(800, 140);
+      TableGrid.Size = new Size(800, 106);
       TableGrid.TabIndex = 5;
       // 
       // TableMenu
@@ -250,6 +263,12 @@ namespace LJCDataUtility5
       TableAddProc.Name = "TableAddProc";
       TableAddProc.Size = new Size(245, 32);
       TableAddProc.Text = "Add Data Procedure";
+      // 
+      // TableCreateData
+      // 
+      TableCreateData.Name = "TableCreateData";
+      TableCreateData.Size = new Size(245, 32);
+      TableCreateData.Text = "Create Data";
       // 
       // toolStripSeparator13
       // 
@@ -639,12 +658,6 @@ namespace LJCDataUtility5
       ConfigCombo.Size = new Size(230, 33);
       ConfigCombo.TabIndex = 3;
       // 
-      // TableCreateData
-      // 
-      TableCreateData.Name = "TableCreateData";
-      TableCreateData.Size = new Size(245, 32);
-      TableCreateData.Text = "Create Data";
-      // 
       // DataUtilityList
       // 
       AutoScaleDimensions = new SizeF(10F, 25F);
@@ -746,5 +759,6 @@ namespace LJCDataUtility5
     internal ToolStripMenuItem TableConvert;
     internal ToolStripMenuItem TableAddProc;
     internal ToolStripMenuItem TableCreateData;
+    private LJCHeaderBox ljcHeaderBox1;
   }
 }
