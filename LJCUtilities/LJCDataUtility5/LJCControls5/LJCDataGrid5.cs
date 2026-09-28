@@ -57,15 +57,19 @@ namespace LJCControls5
     // Adds a GridRow control to the grid. 
     /// <include file='Doc/LJCDataGrid.xml'
     ///  path='members/LJCRowAdd/*'/>
-    public LJCGridRow? LJCRowAdd()
+    public LJCGridRow LJCRowAdd()
     {
-      LJCGridRow? retValue;
+      LJCGridRow retValue;
 
       retValue = new LJCGridRow();
       LJCAllowSelectionChange = false;
       var index = Rows.Add(retValue);
       LJCAllowSelectionChange = true;
-      retValue = Rows[index] as LJCGridRow;
+      //retValue = Rows[index] as LJCGridRow;
+      if (Rows[index] is LJCGridRow gridRow)
+      {
+        retValue = gridRow;
+      }
 
       // Create minimum height;
       if (retValue != null)
@@ -80,7 +84,7 @@ namespace LJCControls5
           retValue.Height = 18;
         }
       }
-      return retValue;
+      return retValue!;
     }
 
     // Inserts a GridRow control into the grid. 

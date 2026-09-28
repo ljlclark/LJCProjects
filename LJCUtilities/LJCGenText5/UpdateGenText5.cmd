@@ -24,10 +24,17 @@ rem ***************************
 rem *** Referenced Binaries ***
 echo *** %to% ***
 
-set bin=%bin%\net8.0
-set src=%assmRoot%LJCNetCommon5\LJCNetCommon5\%bin%
+set fromBin=%bin%\net8.0
+set src=%assmRoot%LJCNetCommon5\LJCNetCommon5\%fromBin%
 echo copy %src%\LJCNetCommon5.dll %to%
 copy %src%\LJCNetCommon5.dll %to%
+
+set fromBin=%bin%\net8.0-windows
+set src=%utilRoot%LJCDataUtility5\LJCControls5\%fromBin%
+echo copy %src%\LJCControls5.dll %to%
+copy %src%\LJCControls5.dll %to%
+
+set bin=%fromBin%\net8.0
 
 rem *****************************
 rem *** Runtime-only Binaries ***

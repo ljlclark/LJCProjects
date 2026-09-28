@@ -1,58 +1,94 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SyntaxHighlightHtml.cs
-using LJCNetCommon;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text;
 
-namespace LJCGenDocLib
+namespace LJCNetCommon5
 {
   // Provides methods for HTML Syntax Highighting.
-  /// <include path='items/SyntaxHighlight/*' file='Doc/SyntaxHighlight.xml'/>
+  /// <include file='Doc/SyntaxHighlight.xml'
+  ///  path='items/SyntaxHighlightHtml/*'/>
   public class SyntaxHighlightHtml
   {
     #region Static Methods
 
     // Retrieves the leading whitespace string.
-    /// <include path='items/SaveLeadingWhiteSpace/*' file='Doc/SyntaxHighlight.xml'/>
-    public static string SaveLeadingWhiteSpace(string text)
+    /// <include file='Doc/SyntaxHighlight.xml'
+    ///  path='items/SaveLeadingWhiteSpace/*'/>
+    public static string? SaveLeadingWhiteSpace(string? text)
     {
-      string retValue = text;
+      string? retValue = text;
 
-      for (int index = 0; index < retValue.Length; index++)
+      if (retValue != null)
       {
-        if (retValue[index] != ' '
-          && retValue[index] != '\t')
+        for (int index = 0; index < retValue.Length; index++)
         {
-          retValue = retValue.Substring(0, index);
-          break;
+          if (retValue[index] != ' '
+            && retValue[index] != '\t')
+          {
+            //retValue = retValue.Substring(0, index);
+            retValue = retValue[..index];
+            break;
+          }
         }
       }
       return retValue;
     }
 
     // Strips the specified number of leading whitespace characters from a string.
-    /// <include path='items/StripLeadingWhiteSpace/*' file='Doc/SyntaxHighlight.xml'/>
-    public static string StripExtraLeadingWhiteSpace(string text, int stripLength)
+    /// <include file='Doc/SyntaxHighlight.xml'
+    ///  path='items/StripExtraLeadingWhiteSpace/*'/>
+    public static string? StripExtraLeadingWhiteSpace(string text, int stripLength)
     {
-      string retValue = null;
+      string? retValue = null;
 
-      // *** Next Statement *** Add - 5/24
       string workText = text.Replace("\t", "  ");
       if (stripLength < workText.Length)
       {
-        retValue = workText.Substring(stripLength);
+        //retValue = workText.Substring(stripLength);
+        retValue = workText[stripLength..];
       }
       return retValue;
     }
     #endregion
 
+    #region Properties
+
+    // Gets the BeginComment span.
+    private static string BeginCommentSpan
+    {
+      get { return Span("comment", null, false); }
+    }
+
+    // Gets the BeginXmlComment span.
+    private static string BeginXmlCommentSpan
+    {
+      get { return Span("xmlComment", null, false); }
+    }
+
+    // Gets or sets the Allow Debug Breaks value.
+    /// <include file='Doc/SyntaxHighlight.xml'
+    ///  path='items/AllowDebugBreaks/*'/>
+    public bool AllowDebugBreaks { get; set; }
+
+    // Gets or sets the DataMember name value.
+    internal string DataMemberName { get; set; } = null!;
+
+    // Gets or sets the DataType name value.
+    internal string DataTypeName { get; set; } = null!;
+
+    // Gets the ReturnsInProcess flag.
+    private bool IsReturnsInProcess { get; set; }
+
+    // Gets or sets the SummaryInProcess flag.
+    private bool IsSummaryInProcess { get; set; }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/Constructor/*'/>
     public SyntaxHighlightHtml()
     {
       //DoSort();
@@ -62,12 +98,12 @@ namespace LJCGenDocLib
     #region Public Main Methods
 
     // Adds the Syntax Highlighting to the HTML code line.
-    /// <include path='items/AddSyntaxHighlight/*' file='Doc/SyntaxHighlight.xml'/>
+    /// <include file='Doc/SyntaxHighlight.xml'
+    ///  path='items/AddSyntaxHighlight/*'/>
     public string AddSyntaxHighlight(string line)
     {
       string text;
       string token;
-      // *** Next Statement *** Add - 2/5/24
       string leadingWhiteSpace = SaveLeadingWhiteSpace(line);
       string[] tokens = GetTokens(line);
 
@@ -82,18 +118,19 @@ namespace LJCGenDocLib
             CombineXmlCommentTokens(tokens, tokenIndex);
             AddXmlCommentSpan(ref tokens[tokenIndex]);
             text = GetToken(tokens, tokenIndex);
-            if (IsParam(text))
+            // *** Next Line *** Add
+            if (LJC.HasText(text))
             {
-              IsSummaryInProcess = false;
-              tokens[tokenIndex] = SetParamSpan(text);
+              if (IsParam(text))
+              {
+                IsSummaryInProcess = false;
+                tokens[tokenIndex] = SetParamSpan(text);
+              }
+              text = text.Replace("<", "&lt;");
+              text = text.Replace(">", "&gt;");
+              ProcessSummary(text, ref tokens, tokenIndex);
+              ProcessReturns(text, ref tokens, tokenIndex);
             }
-            // *** Begin *** Add - 2/5/24
-            text = text.Replace("<", "&lt;");
-            text = text.Replace(">", "&gt;");
-            //text = $"{leadingWhiteSpace}{text}";
-            // *** End   *** Add
-            ProcessSummary(text, ref tokens, tokenIndex);
-            ProcessReturns(text, ref tokens, tokenIndex);
             break;
           }
 
@@ -112,7 +149,7 @@ namespace LJCGenDocLib
 
           // Stop processing line if a data value.
           if (IsDataValue(token)
-            && !token.Contains("("))
+            && !token.Contains('('))
           {
             EndTokens(tokens, ref tokenIndex);
             break;
@@ -162,13 +199,13 @@ namespace LJCGenDocLib
 
       // Rebuild line from tokens.
       line = CombineTokens(tokens, 0);
-      // *** Next Statement *** Add - 2/5/24
       line = $"{leadingWhiteSpace}{line}";
       return line;
     }
 
     // Strips the defined leading white spaces and applies Syntax Highlighting.
-    /// <include path='items/FormatCode/*' file='Doc/SyntaxHighlight.xml'/>
+    /// <include file='Doc/SyntaxHighlight.xml'
+    ///  path='items/FormatCode/*'/>
     public string FormatCode(string dataTypeName, string dataMemberName
       , string code, bool stripLeadingSpaces = true)
     {
@@ -179,7 +216,7 @@ namespace LJCGenDocLib
 
       SetUserTypes(dataTypeName, dataMemberName, code);
 
-      StringBuilder builder = new StringBuilder(128);
+      StringBuilder builder = new(128);
       code = code.Replace("<", "&lt;");
       code = code.Replace(">", "&gt;");
       int stripLength = 8;
@@ -191,7 +228,6 @@ namespace LJCGenDocLib
         string line = lines[lineIndex];
         if (stripLeadingSpaces)
         {
-          // *** Next Statement *** Add - 5/25
           int length = line.Replace("\t", "  ").Length;
           if (length > stripLength)
           {
@@ -199,7 +235,7 @@ namespace LJCGenDocLib
             line = StripExtraLeadingWhiteSpace(line, stripLength);
             saveWhiteSpace = SaveLeadingWhiteSpace(line);
 
-            if (NetString.HasValue(line))
+            if (LJC.HasText(line))
             {
               line = AddSyntaxHighlight(line);
             }
@@ -215,11 +251,12 @@ namespace LJCGenDocLib
     }
 
     // Reads the User Types from a file or creates the file if it does not exist
-    /// <include path='items/SetUserTypes/*' file='Doc/SyntaxHighlight.xml'/>
+    /// <include file='Doc/SyntaxHighlight.xml'
+    ///  path='items/SetUserTypes/*'/>
     public void SetUserTypes(string dataTypeName, string dataMemberName
       , string code)
     {
-      UserTypes = new UserTypes();
+      UserTypes = [];
       dataTypeName = dataTypeName.Replace(".", null);
       if (!Directory.Exists("UserTypeFiles"))
       {
@@ -255,7 +292,8 @@ namespace LJCGenDocLib
     }
 
     // Updates the User Types if a new one is found in the HTML code line.
-    /// <include path='items/UpdateUserTypes/*' file='Doc/SyntaxHighlight.xml'/>
+    /// <include file='Doc/SyntaxHighlight.xml'
+    ///  path='items/UpdateUserTypes/*'/>
     public void UpdateUserTypes(string line)
     {
       int dotIndex;
@@ -278,7 +316,7 @@ namespace LJCGenDocLib
 
           // Stop processing line if a data value.
           if (IsDataValue(token)
-            && !token.Contains("("))
+            && !token.Contains('('))
           {
             EndTokens(tokens, ref tokenIndex);
             break;
@@ -322,15 +360,16 @@ namespace LJCGenDocLib
           if (!isUsing)
           {
             // Process static class method.
-            if ((dotIndex = token.IndexOf(".")) != -1)
+            if ((dotIndex = token.IndexOf('.')) != -1)
             {
-              string valueToken = token.Substring(0, dotIndex);
+              //string valueToken = token.Substring(0, dotIndex);
+              string valueToken = token[..dotIndex];
               AddMissingUserType(valueToken);
             }
           }
 
           // Token is a method definition or call.
-          if (token.IndexOf("(") > 0)
+          if (token.IndexOf('(') > 0)
           {
             // Increments the tokenIndex if the there are definition arguments
             // or multiple arguments.
@@ -354,15 +393,37 @@ namespace LJCGenDocLib
 
     #region Process Methods
 
+    // Processes RefType (class, interface, struct, enum or delegate) token.
+    private static void ProcessRefTypeTokens(string[] tokens, ref short tokenIndex
+      , bool getTypesOnly = false)
+    {
+      if (!getTypesOnly)
+      {
+        AddRefTypeSpan(ref tokens[tokenIndex]);
+      }
+      tokenIndex++;
+      string token = GetToken(tokens, tokenIndex);
+      if (token != null)
+      {
+        if (!getTypesOnly)
+        {
+          AddUserTypeSpan(ref tokens[tokenIndex]);
+        }
+      }
+    }
+
     // Processes a Generic Type token.
-    private void ProcessGenericToken(ref string token, bool getTypesOnly = false)
+    private void ProcessGenericToken(ref string token
+      , bool getTypesOnly = false)
     {
       if (token.Contains("&lt;")
         && token.Contains("&gt;"))
       {
-        int index = token.IndexOf("&");
-        string saveTypeValue = token.Substring(0, index);
-        string processValue = token.Substring(index);
+        int index = token.IndexOf('&');
+        //string saveTypeValue = token.Substring(0, index);
+        string saveTypeValue = token[..index];
+        //string processValue = token.Substring(index);
+        string processValue = token[index..];
 
         string tail = null;
         int tailIndex = token.IndexOf("&gt;");
@@ -371,11 +432,12 @@ namespace LJCGenDocLib
           tailIndex += "&gt;".Length;
           if (tailIndex < token.Length)
           {
-            tail = token.Substring(tailIndex);
+            //tail = token.Substring(tailIndex);
+            tail = token[tailIndex..];
           }
         }
 
-        string[] separators = new string[] { "&lt;", ",", "&gt;" };
+        string[] separators = ["&lt;", ",", "&gt;"];
         string[] genericTokens = processValue.Split(separators
           , StringSplitOptions.RemoveEmptyEntries);
         for (int genericIndex = 0; genericIndex < genericTokens.Length; genericIndex++)
@@ -423,12 +485,12 @@ namespace LJCGenDocLib
         if (!getTypesOnly)
         {
           bool first = true;
-          StringBuilder builder = new StringBuilder(64);
+          StringBuilder builder = new(64);
           builder.Append(saveTypeValue);
           builder.Append("&lt;");
           foreach (string genericToken in genericTokens)
           {
-            if (!genericToken.Contains(")"))
+            if (!genericToken.Contains(')'))
             {
               if (!first)
               {
@@ -446,22 +508,23 @@ namespace LJCGenDocLib
     }
 
     // Processes the Method token.
-    private bool ProcessMethod(string[] tokens, ref string token, ref short tokenIndex)
+    private bool ProcessMethod(string[] tokens, ref string token
+      , ref short tokenIndex)
     {
       string nextToken;
       bool retValue = false;
 
-      int index = token.IndexOf("(");
+      int index = token.IndexOf('(');
       if (index > 0)
       {
         string[] newTokens = token.Split('(');
 
         // If there are arguments.
         if (newTokens.Length > 1
-          && !newTokens[1].StartsWith(")"))
+          && !newTokens[1].StartsWith(')'))
         {
           // If not last argument token.
-          if (-1 == newTokens[1].IndexOf(")"))
+          if (!newTokens[1].Contains(')'))
           {
             // if first argument is not a method call.
             if (newTokens.Length < 3)
@@ -473,7 +536,7 @@ namespace LJCGenDocLib
                 {
                   break;
                 }
-                if (nextToken.EndsWith(","))
+                if (nextToken.EndsWith(','))
                 {
                   break;
                 }
@@ -503,14 +566,14 @@ namespace LJCGenDocLib
                   break;
                 }
 
-                if (nextToken.EndsWith(","))
+                if (nextToken.EndsWith(','))
                 {
                   // Move to next set of arguments.
                   break;
                 }
 
                 // Last argument token.
-                if (nextToken.IndexOf(")") > -1)
+                if (nextToken.IndexOf(')') > -1)
                 {
                   EndTokens(tokens, ref methodIndex);
                   break;
@@ -561,7 +624,6 @@ namespace LJCGenDocLib
           {
             if (!getTypesOnly)
             {
-              // *** Next Statement *** Add - 11/29/22
               if (tokenIndex < tokens.Length - 1)
               {
                 AddUserTypeSpan(ref tokens[tokenIndex]);
@@ -576,27 +638,9 @@ namespace LJCGenDocLib
       }
     }
 
-    // Processes RefType (class, interface, struct, enum or delegate) token.
-    private void ProcessRefTypeTokens(string[] tokens, ref short tokenIndex
-      , bool getTypesOnly = false)
-    {
-      if (!getTypesOnly)
-      {
-        AddRefTypeSpan(ref tokens[tokenIndex]);
-      }
-      tokenIndex++;
-      string token = GetToken(tokens, tokenIndex);
-      if (token != null)
-      {
-        if (!getTypesOnly)
-        {
-          AddUserTypeSpan(ref tokens[tokenIndex]);
-        }
-      }
-    }
-
     // Processes the Returns token.
-    private void ProcessReturns(string text, ref string[] tokens, int tokenIndex)
+    private void ProcessReturns(string text, ref string[] tokens
+      , int tokenIndex)
     {
       if (IsFullReturns(text))
       {
@@ -625,7 +669,8 @@ namespace LJCGenDocLib
     }
 
     // Processes the Summary token.
-    private void ProcessSummary(string text, ref string[] tokens, int tokenIndex)
+    private void ProcessSummary(string text, ref string[] tokens
+      , int tokenIndex)
     {
       if (IsFullSummary(text))
       {
@@ -654,7 +699,8 @@ namespace LJCGenDocLib
     }
 
     // Increments the tokenIndex if token is not a key value.
-    private bool ProcessTwoUnknownKeys(string[] tokens, ref string token, ref short tokenIndex)
+    private bool ProcessTwoUnknownKeys(string[] tokens, ref string token
+      , ref short tokenIndex)
     {
       string nextToken;
       bool retValue = false;
@@ -673,7 +719,7 @@ namespace LJCGenDocLib
             ProcessGenericToken(ref token, true);
 
             // Process nextToken method.
-            if (nextToken.IndexOf("(") > 0)
+            if (nextToken.IndexOf('(') > 0)
             {
               // Increments the tokenIndex if the there are definition arguments
               // or multiple arguments.
@@ -759,12 +805,14 @@ namespace LJCGenDocLib
             isCommonType = true;
           }
 
-          if (token.Contains("("))
+          if (token.Contains('('))
           {
-            int saveIndex = tokens[index].IndexOf("(");
-            string saveHead = tokens[index].Substring(0, saveIndex);
-            int tailIndex = token.IndexOf("(");
-            string tail = token.Substring(tailIndex + 1);
+            int saveIndex = tokens[index].IndexOf('(');
+            //string saveHead = tokens[index].Substring(0, saveIndex);
+            string saveHead = tokens[index][..saveIndex];
+            int tailIndex = token.IndexOf('(');
+            //string tail = token.Substring(tailIndex + 1);
+            string tail = token[(tailIndex + 1)..];
             if (IsUserType(tail))
             {
               if (!getTypesOnly)
@@ -790,7 +838,7 @@ namespace LJCGenDocLib
         string token = tokens[tokenIndex];
         if (token != null)
         {
-          if (token.Contains("("))
+          if (token.Contains('('))
           {
             if (tokenIndex > 0)
             {
@@ -806,8 +854,12 @@ namespace LJCGenDocLib
 
         if (isType)
         {
-          AddMissingUserType(token);
-          AddUserTypeSpan(ref tokens[tokenIndex]);
+          // *** Next Statement *** Add
+          if (token != null)
+          {
+            AddMissingUserType(token);
+            AddUserTypeSpan(ref tokens[tokenIndex]);
+          }
 
           // Skip identifier.
           if (tokens.Length > tokenIndex + 1)
@@ -821,38 +873,23 @@ namespace LJCGenDocLib
 
     #region Token Methods
 
-    // Adds a token to the UserTypes list.
-    private void AddMissingUserType(string token)
-    {
-      int prefixCount = 0;
-
-      if (char.IsUpper(token[0]))
-      {
-        token = StripQualifier(token, ref prefixCount);
-        if (null == UserTypes.LJCSearchName(token))
-        {
-          UserTypes.Add(token);
-          UserTypes.Sort();
-        }
-      }
-    }
-
     // Clears all the remaining tokens; starting with the specified token index.
-    private void ClearRemainingTokens(string[] tokens, int tokenIndex)
+    private static void ClearRemainingTokens(string[] tokens, int tokenIndex)
     {
       for (int index = tokenIndex; index < tokens.Length; index++)
       {
-        tokens[index] = null;
+        //tokens[index] = null;
+        tokens[index] = "";
       }
     }
 
     // Returns all the combined tokens as a single string.
     //private string CombineTokens(string[] tokens, short startTokenIndex)
-    private string CombineTokens(string[] tokens, short _)
+    private static string CombineTokens(string[] tokens, short _)
     {
       string retValue;
 
-      StringBuilder builder = new StringBuilder(128);
+      StringBuilder builder = new(128);
       foreach (string token in tokens)
       {
         if (null == token)
@@ -869,13 +906,14 @@ namespace LJCGenDocLib
       // Remove trailing space.
       if (retValue.Length > 1)
       {
-        retValue = retValue.Substring(0, retValue.Length - 1);
+        //retValue = retValue.Substring(0, retValue.Length - 1);
+        retValue = retValue[..^1];
       }
       return retValue;
     }
 
     // Combines the tokens for an XMLComment.
-    private void CombineXmlCommentTokens(string[] tokens, short tokenIndex)
+    private static void CombineXmlCommentTokens(string[] tokens, short tokenIndex)
     {
       string comment = CombineTokens(tokens, tokenIndex);
       tokens[tokenIndex] = comment;
@@ -883,15 +921,15 @@ namespace LJCGenDocLib
     }
 
     // Sets the tokenIndex to the end of the tokens array.
-    private void EndTokens(string[] tokens, ref short tokenIndex)
+    private static void EndTokens(string[] tokens, ref short tokenIndex)
     {
       tokenIndex = (short)tokens.Length;
     }
 
     // Gets the next token after the specified token index.
-    private string GetNextToken(string[] tokens, ref short tokenIndex)
+    private static string? GetNextToken(string[] tokens, ref short tokenIndex)
     {
-      string retValue = null;
+      string? retValue = null;
 
       tokenIndex++;
       if (tokenIndex >= 0 && tokens.Length > tokenIndex)
@@ -902,9 +940,9 @@ namespace LJCGenDocLib
     }
 
     // Gets the token at the specified token index.
-    private string GetToken(string[] tokens, short tokenIndex)
+    private static string? GetToken(string[] tokens, short tokenIndex)
     {
-      string retValue = null;
+      string? retValue = null;
 
       if (tokenIndex >= 0 && tokens.Length > tokenIndex)
       {
@@ -914,18 +952,193 @@ namespace LJCGenDocLib
     }
 
     // Returns the string as a set of tokens, split on blanks.
-    private string[] GetTokens(string text)
+    private static string[] GetTokens(string text)
     {
       string[] retValue;
 
-      char[] splitValues = new char[] { ' ' };
+      char[] splitValues = [' '];
       retValue = text.Trim().Split(splitValues
         , StringSplitOptions.RemoveEmptyEntries);
       return retValue;
     }
+
+    // Adds a token to the UserTypes list.
+    private void AddMissingUserType(string token)
+    {
+      int prefixCount = 0;
+
+      if (char.IsUpper(token[0]))
+      {
+        token = StripQualifier(token, ref prefixCount);
+        if (null == UserTypes.LJCSearchName(token))
+        {
+          UserTypes.Add(token);
+          UserTypes.Sort();
+        }
+      }
+    }
     #endregion
 
     #region Check Token Methods
+
+    // Check if the text is a Begin returns comment.
+    private static bool IsBeginReturns(string text)
+    {
+      bool retValue = false;
+
+      if (text.IndexOf(";returns") > -1)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if the text is a Begin summary comment.
+    private static bool IsBeginSummary(string text)
+    {
+      bool retValue = false;
+
+      if (text.IndexOf(";summary") > -1)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if a XML comment.
+    private static bool IsCodeXmlComment(string text)
+    {
+      bool retValue = false;
+
+      var trimText = text.Trim();
+      if (trimText.StartsWith("///")
+        || "#region" == trimText
+        || "#endregion" == trimText)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if a code comment.
+    private static bool IsComment(string text)
+    {
+      bool retValue = false;
+
+      if (!IsCodeXmlComment(text)
+        && text.Trim().StartsWith("//"))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if the text contains a common delimiter.
+    private static bool IsDelimiters(string text)
+    {
+      bool retValue = false;
+
+      if (":{}=\"".IndexOf(text) > -1)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if the text is an End returns comment.
+    private static bool IsEndReturns(string text)
+    {
+      bool retValue = false;
+
+      if (text.IndexOf(";/returns") > -1)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if the text is an End summary comment.
+    private static bool IsEndSummary(string text)
+    {
+      bool retValue = false;
+
+      if (text.IndexOf(";/summary") > -1)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if the text is a Full returns comment.
+    private static bool IsFullReturns(string text)
+    {
+      bool retValue = false;
+
+      if (IsBeginReturns(text)
+        && IsEndReturns(text))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if the text is a Full summary comment.
+    private static bool IsFullSummary(string text)
+    {
+      bool retValue = false;
+
+      if (IsBeginSummary(text)
+        && IsEndSummary(text))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if the text is a param comment.
+    private static bool IsParam(string text)
+    {
+      bool retValue = false;
+
+      if (LJC.HasText(text)
+        && text.IndexOf("&lt;param name=") > -1)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Check if the text is a Data value.
+    private static bool IsDataValue(string text)
+    {
+      double numericValue;
+      bool isException = false;
+      int prefixCount = 0;
+      bool retValue = false;
+
+      string stripText = StripQualifier(text, ref prefixCount);
+      try
+      {
+        numericValue = double.Parse(stripText);
+      }
+      catch (SystemException)
+      {
+        isException = true;
+      }
+      if (!isException)
+      {
+        retValue = true;
+      }
+      if (!retValue)
+      {
+        if (text.Contains('\"')
+          || text.Contains('\''))
+        {
+          retValue = true;
+        }
+      }
+      return retValue;
+    }
 
     // Check if any key value.
     private bool IsAnyKeyValue(string token)
@@ -943,30 +1156,6 @@ namespace LJCGenDocLib
       return retValue;
     }
 
-    // Check if the text is a Begin returns comment.
-    private bool IsBeginReturns(string text)
-    {
-      bool retValue = false;
-
-      if (text.IndexOf(";returns") > -1)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Check if the text is a Begin summary comment.
-    private bool IsBeginSummary(string text)
-    {
-      bool retValue = false;
-
-      if (text.IndexOf(";summary") > -1)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Check if the text is a Boolean operator.
     private bool IsBooleanOperator(string text)
     {
@@ -978,34 +1167,6 @@ namespace LJCGenDocLib
         {
           retValue = true;
         }
-      }
-      return retValue;
-    }
-
-    // Check if a XML comment.
-    private bool IsCodeXmlComment(string text)
-    {
-      bool retValue = false;
-
-      var trimText = text.Trim();
-      if (trimText.StartsWith("///")
-        || "#region" == trimText
-        || "#endregion" == trimText)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Check if a code comment.
-    private bool IsComment(string text)
-    {
-      bool retValue = false;
-
-      if (!IsCodeXmlComment(text)
-        && text.Trim().StartsWith("//"))
-      {
-        retValue = true;
       }
       return retValue;
     }
@@ -1043,100 +1204,6 @@ namespace LJCGenDocLib
         {
           retValue = IsUncommonDataType(stripText);
         }
-      }
-      return retValue;
-    }
-
-    // Check if the text is a Data value.
-    private bool IsDataValue(string text)
-    {
-      double numericValue;
-      bool isException = false;
-      int prefixCount = 0;
-      bool retValue = false;
-
-      string stripText = StripQualifier(text, ref prefixCount);
-      try
-      {
-        numericValue = double.Parse(stripText);
-      }
-      catch (SystemException)
-      {
-        isException = true;
-      }
-      if (!isException)
-      {
-        retValue = true;
-      }
-      if (!retValue)
-      {
-        if (text.Contains("\"")
-          || text.Contains("'"))
-        {
-          retValue = true;
-        }
-      }
-      return retValue;
-    }
-
-    // Check if the text contains a common delimiter.
-    private bool IsDelimiters(string text)
-    {
-      bool retValue = false;
-
-      if (":{}=\"".IndexOf(text) > -1)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Check if the text is an End returns comment.
-    private bool IsEndReturns(string text)
-    {
-      bool retValue = false;
-
-      if (text.IndexOf(";/returns") > -1)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Check if the text is an End summary comment.
-    private bool IsEndSummary(string text)
-    {
-      bool retValue = false;
-
-      if (text.IndexOf(";/summary") > -1)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Check if the text is a Full returns comment.
-    private bool IsFullReturns(string text)
-    {
-      bool retValue = false;
-
-      if (IsBeginReturns(text)
-        && IsEndReturns(text))
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Check if the text is a Full summary comment.
-    private bool IsFullSummary(string text)
-    {
-      bool retValue = false;
-
-      if (IsBeginSummary(text)
-        && IsEndSummary(text))
-      {
-        retValue = true;
       }
       return retValue;
     }
@@ -1215,18 +1282,6 @@ namespace LJCGenDocLib
       return retValue;
     }
 
-    // Check if the text is a param comment.
-    private bool IsParam(string text)
-    {
-      bool retValue = false;
-
-      if (text.IndexOf("&lt;param name=") > -1)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
     // Check if the text is a RefType.
     private bool IsRefType(string text)
     {
@@ -1249,7 +1304,8 @@ namespace LJCGenDocLib
 
       foreach (string name in names)
       {
-        if ("delimiters" == name.ToLower())
+        //if ("delimiters" == name.ToLower())
+        if (LJC.IsEqual("delimiters", name))
         {
           if (IsDelimiters(token))
           {
@@ -1258,7 +1314,7 @@ namespace LJCGenDocLib
           }
           continue;
         }
-        if ("codexmlcomment" == name.ToLower())
+        if (LJC.IsEqual("codexmlcomment", name))
         {
           if (IsCodeXmlComment(token))
           {
@@ -1267,7 +1323,7 @@ namespace LJCGenDocLib
           }
           continue;
         }
-        if ("comment" == name.ToLower())
+        if (LJC.IsEqual("comment", name))
         {
           if (IsComment(token))
           {
@@ -1276,7 +1332,7 @@ namespace LJCGenDocLib
           }
           continue;
         }
-        if ("modifier" == name.ToLower())
+        if (LJC.IsEqual("modifier", name))
         {
           if (IsModifier(token))
           {
@@ -1285,7 +1341,7 @@ namespace LJCGenDocLib
           }
           continue;
         }
-        if ("othermodifier" == name.ToLower())
+        if (LJC.IsEqual("othermodifier", name))
         {
           if (IsOtherModifier(token))
           {
@@ -1294,7 +1350,7 @@ namespace LJCGenDocLib
           }
           continue;
         }
-        if ("keyword" == name.ToLower())
+        if (LJC.IsEqual("keyword", name))
         {
           if (IsKeyword(token))
           {
@@ -1303,7 +1359,7 @@ namespace LJCGenDocLib
           }
           continue;
         }
-        if ("datatype" == name.ToLower())
+        if (LJC.IsEqual("datatype", name))
         {
           if (IsDataType(token))
           {
@@ -1312,7 +1368,7 @@ namespace LJCGenDocLib
           }
           continue;
         }
-        if ("reftype" == name.ToLower())
+        if (LJC.IsEqual("reftype", name))
         {
           if (IsRefType(token))
           {
@@ -1321,7 +1377,7 @@ namespace LJCGenDocLib
           }
           continue;
         }
-        if ("libtype" == name.ToLower())
+        if (LJC.IsEqual("libtype", name))
         {
           if (IsLibType(token))
           {
@@ -1330,7 +1386,7 @@ namespace LJCGenDocLib
           }
           continue;
         }
-        if ("usertype" == name.ToLower())
+        if (LJC.IsEqual("usertype", name))
         {
           if (IsUserType(token))
           {
@@ -1338,7 +1394,7 @@ namespace LJCGenDocLib
             break;
           }
         }
-        if ("comparisonoperator" == name.ToLower())
+        if (LJC.IsEqual("comparisonoperator", name))
         {
           if (IsComparisonOperator(token))
           {
@@ -1346,7 +1402,7 @@ namespace LJCGenDocLib
             break;
           }
         }
-        if ("booleanoperator" == name.ToLower())
+        if (LJC.IsEqual("booleanoperator", name))
         {
           if (IsBooleanOperator(token))
           {
@@ -1354,7 +1410,7 @@ namespace LJCGenDocLib
             break;
           }
         }
-        if ("uncommonkeyword" == name.ToLower())
+        if (LJC.IsEqual("uncommonkeyword", name))
         {
           if (IsUncommonKeyword(token))
           {
@@ -1422,20 +1478,8 @@ namespace LJCGenDocLib
 
     #region Include Span Methods
 
-    // Set the text as Comments text.
-    internal string SetCommentSpan(string line)
-    {
-      string retValue = line;
-      StringBuilder builder = new StringBuilder();
-      int index = retValue.IndexOf("//");
-      string comment = retValue.Substring(index);
-      builder.Append(GetWithCommentSpan(comment));
-      retValue = builder.ToString();
-      return retValue;
-    }
-
     // Set the text as Params text.
-    private string SetParamSpan(string text)
+    private static string SetParamSpan(string text)
     {
       string retValue = text;
 
@@ -1449,7 +1493,8 @@ namespace LJCGenDocLib
       {
         replaceTarget += ";";
         int trimLength = replaceTarget.Length - "\"&gt;".Length;
-        string trimmedTarget = replaceTarget.Substring(0, trimLength);
+        //string trimmedTarget = replaceTarget.Substring(0, trimLength);
+        string trimmedTarget = replaceTarget[..trimLength];
         string replaceValue = $"</span>{trimmedTarget}{BeginXmlCommentSpan}"
           + $"\"&gt;</span>{BeginCommentSpan}";
         text = text.Replace(replaceTarget, replaceValue);
@@ -1464,15 +1509,9 @@ namespace LJCGenDocLib
       return retValue;
     }
 
-    // Set the text as Returns text.
-    private string SetReturnsSpan(string text)
-    {
-      return SetSimpleCommentSpan(text, ";returns&gt;", "&lt;/returns&gt;");
-    }
-
     // Set the text between the delimiters as Comments text.
-    private string SetSimpleCommentSpan(string text, string beginDelimiter
-      , string endDelimiter = null)
+    private static string SetSimpleCommentSpan(string text, string beginDelimiter
+      , string? endDelimiter = null)
     {
       string replaceTarget;
       string replaceValue;
@@ -1533,30 +1572,49 @@ namespace LJCGenDocLib
         }
         replaceValue = $"{BeginCommentSpan}{replaceTarget}</span>";
       }
-      if (NetString.HasValue(replaceTarget))
+      if (LJC.HasText(replaceTarget))
       {
         retValue = text.Replace(replaceTarget, replaceValue);
       }
       return retValue;
     }
 
+    // Set the text as Returns text.
+    private static string SetReturnsSpan(string text)
+    {
+      return SetSimpleCommentSpan(text, ";returns&gt;", "&lt;/returns&gt;");
+    }
+
     // Set the text as Summary text.
-    private string SetSummarySpan(string text)
+    private static string SetSummarySpan(string text)
     {
       return SetSimpleCommentSpan(text, ";summary&gt;", "&lt;/summary&gt;");
+    }
+
+    // Set the text as Comments text.
+    internal string SetCommentSpan(string line)
+    {
+      string retValue = line;
+      StringBuilder builder = new();
+      int index = retValue.IndexOf("//");
+      //string comment = retValue.Substring(index);
+      string comment = retValue[index..];
+      builder.Append(GetWithCommentSpan(comment));
+      retValue = builder.ToString();
+      return retValue;
     }
     #endregion
 
     #region Get with Span methods.
 
     // Returns the text wrapped in a "comment" span.
-    private string GetWithCommentSpan(string text)
+    private static string GetWithCommentSpan(string text)
     {
       return Span("comment", text);
     }
 
     // Returns the text wrapped in a "commonType" span.
-    private string GetWithCommonTypeSpan(string text)
+    private static string GetWithCommonTypeSpan(string text)
     {
       int prefixCount = 0;
       string retValue;
@@ -1565,7 +1623,8 @@ namespace LJCGenDocLib
       if (stripText.Length < text.Length)
       {
         retValue = Span("commonType", stripText);
-        retValue += text.Substring(stripText.Length + prefixCount);
+        //retValue += text.Substring(stripText.Length + prefixCount);
+        retValue += text[(stripText.Length + prefixCount)..];
       }
       else
       {
@@ -1575,7 +1634,7 @@ namespace LJCGenDocLib
     }
 
     // Returns the text wrapped in a "keyWord" span.
-    private string GetWithKeyWordSpan(string text)
+    private static string GetWithKeyWordSpan(string text)
     {
       int prefixCount = 0;
       string retValue;
@@ -1584,7 +1643,8 @@ namespace LJCGenDocLib
       if (stripText.Length < text.Length)
       {
         retValue = Span("keyWord", stripText);
-        retValue += text.Substring(stripText.Length);
+        //retValue += text.Substring(stripText.Length);
+        retValue += text[stripText.Length..];
       }
       else
       {
@@ -1594,7 +1654,7 @@ namespace LJCGenDocLib
     }
 
     // Returns the text wrapped in a "libType" span.
-    private string GetWithLibTypeSpan(string text)
+    private static string GetWithLibTypeSpan(string text)
     {
       int prefixCount = 0;
       string retValue;
@@ -1603,7 +1663,8 @@ namespace LJCGenDocLib
       if (stripText.Length < text.Length)
       {
         retValue = Span("libType", stripText);
-        retValue += text.Substring(stripText.Length);
+        //retValue += text.Substring(stripText.Length);
+        retValue += text[stripText.Length..];
       }
       else
       {
@@ -1613,19 +1674,19 @@ namespace LJCGenDocLib
     }
 
     // Returns the text wrapped in a "modifier" span. 
-    private string GetWithModifierSpan(string text)
+    private static string GetWithModifierSpan(string text)
     {
       return Span("modifier", text);
     }
 
     // Returns the text wrapped in a "refType" span.
-    private string GetWithRefTypeSpan(string text)
+    private static string GetWithRefTypeSpan(string text)
     {
       return Span("refType", text);
     }
 
     // Returns the text wrapped in a "userType" span.
-    private string GetWithUserTypeSpan(string text)
+    private static string GetWithUserTypeSpan(string text)
     {
       int prefixCount = 0;
       string retValue;
@@ -1634,7 +1695,8 @@ namespace LJCGenDocLib
       if (stripText.Length < text.Length)
       {
         retValue = Span("userType", stripText);
-        retValue += text.Substring(stripText.Length);
+        //retValue += text.Substring(stripText.Length);
+        retValue += text[stripText.Length..];
       }
       else
       {
@@ -1644,26 +1706,13 @@ namespace LJCGenDocLib
     }
 
     // Returns the text wrapped in an "xmlComment" span.
-    private string GetWithXmlCommentSpan(string text)
+    private static string GetWithXmlCommentSpan(string text)
     {
       return Span("xmlComment", text);
     }
 
-    // Returns the text wrapped in a Span with the supplied class name.
-    private string Span(string className, string text, bool includeEnd = true)
-    {
-      string retValue;
-
-      retValue = $"<span class='{className}'>{text}";
-      if (includeEnd)
-      {
-        retValue = $"{retValue}</span>";
-      }
-      return retValue;
-    }
-
     // Strips the trailing text from the last qualifier in a qualifier chain.
-    private string StripQualifier(string text, ref int prefixCount)
+    private static string StripQualifier(string text, ref int prefixCount)
     {
       string retValue = text;
 
@@ -1689,34 +1738,36 @@ namespace LJCGenDocLib
         if (index < 0)
         {
           // Constructor
-          index = retValue.IndexOf("(");
+          index = retValue.IndexOf('(');
         }
         if (index < 0)
         {
           // Terminator
-          index = retValue.IndexOf(";");
+          index = retValue.IndexOf(';');
         }
         if (index < 0)
         {
           // Start array initializer.
-          index = retValue.IndexOf("{");
+          index = retValue.IndexOf('{');
         }
         if (index < 0)
         {
           // Item separator
-          index = retValue.IndexOf(",");
+          index = retValue.IndexOf(',');
         }
         if (index > -1)
         {
           if (0 == index)
           {
             prefixCount++;
-            retValue = retValue.Substring(index + 1);
+            //retValue = retValue.Substring(index + 1);
+            retValue = retValue[(index + 1)..];
             retValue = StripQualifier(retValue, ref prefixCount);
           }
           else
           {
-            retValue = retValue.Substring(0, index);
+            //retValue = retValue.Substring(0, index);
+            retValue = retValue[..index];
           }
         }
         else
@@ -1726,87 +1777,70 @@ namespace LJCGenDocLib
       }
       return retValue;
     }
+
+    // Returns the text wrapped in a Span with the supplied class name.
+    private static string Span(string className, string? text, bool includeEnd = true)
+    {
+      string retValue;
+
+      retValue = $"<span class='{className}'>{text}";
+      if (includeEnd)
+      {
+        retValue = $"{retValue}</span>";
+      }
+      return retValue;
+    }
     #endregion
 
     #region Add Span Methods
 
     // Adds a "comment" span to the supplied text.
-    private void AddCommentSpan(ref string text)
+    private static void AddCommentSpan(ref string text)
     {
       text = GetWithCommentSpan(text);
     }
 
     // Adds a "commonType" span to the supplied text.
-    private void AddCommonTypeSpan(ref string text)
+    private static void AddCommonTypeSpan(ref string text)
     {
       text = GetWithCommonTypeSpan(text);
     }
 
     // Adds a "keyWord" span to the supplied text.
-    private void AddKeyWordSpan(ref string text)
+    private static void AddKeyWordSpan(ref string text)
     {
       text = GetWithKeyWordSpan(text);
     }
 
     // Adds a "libType" span to the supplied text.
-    private void AddLibTypeSpan(ref string text)
+    private static void AddLibTypeSpan(ref string text)
     {
       text = GetWithLibTypeSpan(text);
     }
 
     // Adds a "modifier" span to the supplied text.
-    private void AddModifierSpan(ref string text)
+    private static void AddModifierSpan(ref string text)
     {
       text = GetWithModifierSpan(text);
     }
 
     // Adds a "refType" span to the supplied text.
-    private void AddRefTypeSpan(ref string text)
+    private static void AddRefTypeSpan(ref string text)
     {
       text = GetWithRefTypeSpan(text);
     }
 
     // Adds a "userType" span to the supplied text.
-    private void AddUserTypeSpan(ref string text)
+    private static void AddUserTypeSpan(ref string text)
     {
       text = GetWithUserTypeSpan(text);
     }
 
     // Adds an "xmlComment" span to the supplied text.
-    private void AddXmlCommentSpan(ref string text)
+    private static void AddXmlCommentSpan(ref string text)
     {
       text = GetWithXmlCommentSpan(text);
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets or sets the Allow Debug Breaks value.</summary>
-    public bool AllowDebugBreaks { get; set; }
-
-    // Gets the BeginComment span.
-    private string BeginCommentSpan
-    {
-      get { return Span("comment", null, false); }
-    }
-
-    // Gets the BeginXmlComment span.
-    private string BeginXmlCommentSpan
-    {
-      get { return Span("xmlComment", null, false); }
-    }
-
-    // Gets or sets the DataMember name value.
-    internal string DataMemberName { get; set; }
-
-    // Gets or sets the DataType name value.
-    internal string DataTypeName { get; set; }
-
-    // Gets the ReturnsInProcess flag.
-    private bool IsReturnsInProcess { get; set; }
-
-    // Gets or sets the SummaryInProcess flag.
-    private bool IsSummaryInProcess { get; set; }
     #endregion
 
     #region Fields
@@ -1826,15 +1860,15 @@ namespace LJCGenDocLib
     }
 
     // The list of Boolean operators.
-    private readonly List<string> BooleanOperators = new List<string>()
-    {
+    private readonly List<string> BooleanOperators =
+    [
       "&&",
       "||"
-    };
+    ];
 
     // The list of Comparison operators.
-    private readonly List<string> ComparisonOperators = new List<string>()
-    {
+    private readonly List<string> ComparisonOperators =
+    [
       "!=",
       "&gt",
       "&gt;",
@@ -1845,11 +1879,11 @@ namespace LJCGenDocLib
       "==",
       ">",
       ">="
-    };
+    ];
 
     // The list of common DataTypes.
-    private readonly List<string> DataTypes = new List<string>()
-    {
+    private readonly List<string> DataTypes =
+    [
       "bool",
       "Boolean",
       "int",
@@ -1862,11 +1896,11 @@ namespace LJCGenDocLib
       "String",
       "var",
       "void"
-    };
+    ];
 
     // The list of common Keywords.
-    private readonly List<string> KeyWords = new List<string>()
-    {
+    private readonly List<string> KeyWords =
+    [
       "as",
       "break",
       "case",
@@ -1898,51 +1932,51 @@ namespace LJCGenDocLib
       "typeof",
       "using",
       "while"
-    };
+    ];
 
     // The list of common Library types.
-    private readonly List<string> LibTypes = new List<string>()
-    {
+    private readonly List<string> LibTypes =
+    [
       "event",
       "List",
       "params",
       "StringBuilder"
-    };
+    ];
 
     // The list of common object modifiers.
-    private readonly List<string> Modifiers = new List<string>()
-    {
+    private readonly List<string> Modifiers =
+    [
       "override",
       "private",
       "protected",
       "public",
       "static"
-    };
+    ];
 
     // The list of uncommon object modifiers.
-    private readonly List<string> OtherModifiers = new List<string>()
-    {
+    private readonly List<string> OtherModifiers =
+    [
       "abstract",
       "extern",
       "internal",
       "protected",
       "sealed",
       "virtual"
-    };
+    ];
 
     // The list of common Reference types.
-    private readonly List<string> RefTypes = new List<string>()
-    {
+    private readonly List<string> RefTypes =
+    [
       "class",
       "delegate",
       "enum",
       "interface",
       "struct"
-    };
+    ];
 
     // The list of uncommon DataTypes.
-    private readonly List<string> UncommonDataTypes = new List<string>()
-    {
+    private readonly List<string> UncommonDataTypes =
+    [
       "byte",
       "Byte",
       "char",
@@ -1955,11 +1989,11 @@ namespace LJCGenDocLib
       "Int64",
       "long",
       "Single"
-    };
+    ];
 
     // The list of uncommon Keywords.
-    private readonly List<string> UncommonKeyWords = new List<string>()
-    {
+    private readonly List<string> UncommonKeyWords =
+    [
       "abstract",
       "base",
       "checked",
@@ -1975,12 +2009,10 @@ namespace LJCGenDocLib
       "unchecked",
       "unsafe",
       "volatile"
-    };
+    ];
 
     // The list of UserTypes.
-    private UserTypes UserTypes = new UserTypes()
-    {
-    };
+    private UserTypes UserTypes = [];
     #endregion
   }
 }

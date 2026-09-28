@@ -323,7 +323,7 @@ namespace LJCNetCommon5
 
           // Get index of next section.
           var nextIndex = wrapIndex + wrapText.Length;
-          if (!workText.StartsWith(","))
+          if (!workText.StartsWith(','))
           {
             // Adjust for removed leading space.
             nextIndex++;
@@ -881,7 +881,7 @@ namespace LJCNetCommon5
         // *** Different than TextBuilder ***
         // Get wrap point in allowed length.
         // Wrap on a space.
-        retIndex = text.LastIndexOf(" ", wrapLength);
+        retIndex = text.LastIndexOf(' ', wrapLength);
         if (-1 == retIndex)
         {
           // Wrap index not found; Wrap at new text.
@@ -904,7 +904,7 @@ namespace LJCNetCommon5
       {
         // Get text at the wrap index.
         retText = text.Substring(wrapIndex, nextLength);
-        if (retText.StartsWith(" "))
+        if (retText.StartsWith(' '))
         {
           // Remove leading space.
           retText = retText.Substring(1);
@@ -915,14 +915,14 @@ namespace LJCNetCommon5
         // Get text from next section.
         var startIndex = wrapIndex;
         var tempText = text.Substring(startIndex);
-        if (tempText.StartsWith(" "))
+        if (tempText.StartsWith(' '))
         {
           tempText = tempText.Substring(1);
           startIndex++;
         }
         // *** Different than TextBuilder ***
         nextLength = LineLimit - IndentLength();
-        nextLength = tempText.LastIndexOf(" ", nextLength);
+        nextLength = tempText.LastIndexOf(' ', nextLength);
         retText = text.Substring(startIndex, nextLength);
       }
       return retText;

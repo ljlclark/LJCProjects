@@ -584,10 +584,18 @@ namespace TestLJC5
     #endregion
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public class Person
   {
+    /// <summary></summary>
     public long Id { get; set; }
+
+    /// <summary></summary>
     public string? Name { get; set; }
+
+    /// <summary></summary>
     public bool PrincipleFlag { get; set; }
   }
 }

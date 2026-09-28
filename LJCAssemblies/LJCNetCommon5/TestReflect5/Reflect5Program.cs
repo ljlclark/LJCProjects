@@ -62,7 +62,7 @@ namespace TestReflect5
       PropertyInfo[] infos = reflect.PropertyInfos;
       if (LJC.HasArrayElements(infos))
       {
-        count = infos.Count();
+        count = infos.Length;
       }
       var result = count.ToString();
       var compare = "2";
@@ -415,20 +415,39 @@ namespace TestReflect5
     #endregion
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public class TestDate
   {
+    /// <summary></summary>
     public DateTime Holiday { get; set; }
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public class Person
   {
+    /// <summary></summary>
     public string? FirstName { get; set; }
+
+    /// <summary></summary>
     public string? LastName { get; set; }
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public class Persons : List<Person>
   {
     // Creates and adds the object to the collection.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="firstName"></param>
+    /// <param name="lastName"></param>
+    /// <returns></returns>
     public Person Add(string firstName, string lastName)
     {
       var retPerson = new Person

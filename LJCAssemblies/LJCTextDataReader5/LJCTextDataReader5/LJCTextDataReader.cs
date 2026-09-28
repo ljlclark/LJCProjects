@@ -8,13 +8,15 @@ using System.Text;
 namespace LJCTextDataReader5
 {
   // A text file data reader.
-  /// <include path='items/TextDataReader/*' file='Doc/TextDataReader.xml'/>
+  /// <include file='Doc/TextDataReader.xml'
+  ///  path='items/TextDataReader/*'/>
   public class LJCTextDataReader : IDataReader
   {
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/TextDataReaderC/*' file='Doc/TextDataReader.xml'/>
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/TextDataReaderC/*'/>
     public LJCTextDataReader(bool hasHeadingLine = true, short skipHeaderLines = 0
       , bool fixedLengthFields = false)
     {
@@ -329,6 +331,11 @@ namespace LJCTextDataReader5
     #region Custom Related Methods
 
     // Gets the LJCFieldDataType enum name from DataTypeName.
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public static string? DataTypeEnumName(string name)
     {
       string? retName = null;

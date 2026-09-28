@@ -94,13 +94,16 @@ namespace LJCGenTextLib5
       }
 
       LJCReflect? reflectDefaults = null;
-      if (LJC.XmlDeserialize(typeof(DefaultValues)
-        , "DefaultValues.xml") is DefaultValues defaultValues)
+      if (File.Exists("DefaultValues.xml"))
       {
-        reflectDefaults = new(defaultValues);
+        if (LJC.XmlDeserialize(typeof(DefaultValues)
+          , "DefaultValues.xml") is DefaultValues defaultValues)
+        {
+          reflectDefaults = new(defaultValues);
+        }
       }
-      retValue = [];
 
+      retValue = [];
       while (true)
       {
         Section? section = null;
@@ -158,13 +161,13 @@ namespace LJCGenTextLib5
           }
 
           // Create undefined replacement.
+          var propertyName = directive.Name.Replace("_", "");
           string? propertyValue = directive.Value;
 
           // Get default value if available.
           if (reflectDefaults != null
             && null == propertyValue)
           {
-            var propertyName = directive.Name.Replace("_", "");
             if (reflectDefaults.HasProperty(propertyName))
             {
               propertyValue = reflectDefaults.GetString(propertyName);
@@ -173,7 +176,8 @@ namespace LJCGenTextLib5
 
           if (null == propertyValue)
           {
-            propertyValue = "";
+            //propertyValue = "";
+            propertyValue = propertyName;
           }
           replacements.Add(directive.Name, propertyValue);
         }

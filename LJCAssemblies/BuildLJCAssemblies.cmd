@@ -31,7 +31,6 @@ echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDataAccessConfig5 >> Build.txt
 call LJCDataAccessConfig5\UpdateDataAccessConfig5.cmd >> Build.txt
-pause
 msbuild LJCDataAccessConfig5\LJCDataAccessConfig5.sln
 
 set /a counter+=1

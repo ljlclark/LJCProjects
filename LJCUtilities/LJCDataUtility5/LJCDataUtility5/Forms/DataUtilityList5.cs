@@ -8,6 +8,9 @@ using System.Configuration.Provider;
 // Install-Package System.Configuration.ConfigurationManager
 // Microsoft.Extensions.Configuration?
 
+// Net5+
+// Do not create nulls if possible.
+
 namespace LJCDataUtility5
 {
   // The list form.

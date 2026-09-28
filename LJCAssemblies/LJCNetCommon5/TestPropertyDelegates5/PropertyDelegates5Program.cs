@@ -119,10 +119,18 @@ namespace TestPropertyDelegates5
     #endregion
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public class TestData
   {
+    /// <summary></summary>
     public string? StringValue { get; set; }
+
+    /// <summary></summary>
     public bool BoolValue { get; set; }
+
+    /// <summary></summary>
     public byte ByteValue { get; set; }
   }
 }

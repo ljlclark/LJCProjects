@@ -1066,9 +1066,14 @@ namespace TestDataColumns5
     #endregion
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public class TestObject
   {
+    /// <summary></summary>
     public long ID { get; set; }
+    /// <summary></summary>
     public string? Name { get; set; }
   }
 }

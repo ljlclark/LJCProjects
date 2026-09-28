@@ -9,6 +9,9 @@ namespace LJCTextDataReader5
   /// </summary>
   public class LJCLineOffsets : List<LJCLineOffset>
   {
+    /// <summary>
+    /// 
+    /// </summary>
     public LJCLineOffsets()
     {
       LJCStream = null;

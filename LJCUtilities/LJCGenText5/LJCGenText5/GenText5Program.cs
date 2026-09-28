@@ -8,8 +8,10 @@ using static System.Console;
 
 namespace LJCGenText5
 {
+  // The GenText console app.
   internal class Program
   {
+    // The program entry method.
     static void Main(string[] args)
     {
       if (args.Length < 2)
@@ -32,6 +34,7 @@ namespace LJCGenText5
       }
     }
 
+    // Generate the output text.
     private static void Generate(string templateSpec, string dataSpec
       , string outputSpec = @"Output\*.cs")
     {
