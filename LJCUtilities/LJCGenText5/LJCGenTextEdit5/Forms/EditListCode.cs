@@ -12,6 +12,24 @@ namespace LJCGenTextEdit5
   // The GenText Edit list form.
   public partial class EditList : Form
   {
+    #region Control Code Properties
+
+    // Gets or sets the ItemGridCode reference.
+    internal ItemGridCode ItemGridCode { get; set; } = null!;
+
+    // Gets or sets the OutputTextCode reference.
+    internal OutputTextCode OutputTextCode { get; set; } = null!;
+
+    // Gets or sets the ReplacementGridCode reference.
+    internal ReplacementGridCode ReplacementGridCode { get; set; } = null!;
+
+    // Gets or sets the SectionGridCode reference.
+    internal SectionGridCode SectionGridCode { get; set; } = null!;
+
+    // Gets or sets the TemplateTextCode reference.
+    internal TemplateTextCode TemplateTextCode { get; set; } = null!;
+    #endregion
+
     #region Properties
 
     // Gets the RepeatItemManager reference.
@@ -23,7 +41,7 @@ namespace LJCGenTextEdit5
         if (value != null)
         {
           mItemManager = value;
-          mItemGridCode.ItemManager = mItemManager;
+          ItemGridCode.ItemManager = mItemManager;
         }
       }
     }
@@ -38,7 +56,7 @@ namespace LJCGenTextEdit5
         if (value != null)
         {
           mReplacementManager = value;
-          mItemGridCode.ItemManager = mItemManager;
+          ItemGridCode.ItemManager = mItemManager;
         }
       }
     }
@@ -53,9 +71,9 @@ namespace LJCGenTextEdit5
         if (value != null)
         {
           mSectionManager = value;
-          mSectionGridCode.SectionManager = mSectionManager;
-          mItemGridCode.ItemManager = mItemManager;
-          mReplacementGridCode.ReplacementManager = mReplacementManager;
+          SectionGridCode.SectionManager = mSectionManager;
+          ItemGridCode.ItemManager = mItemManager;
+          ReplacementGridCode.ReplacementManager = mReplacementManager;
         }
       }
     }
@@ -65,12 +83,7 @@ namespace LJCGenTextEdit5
     #region Class Data
 
     internal FilePaths mFilePaths = null!;
-    internal ItemGridCode mItemGridCode = null!;
-    //internal OutputTextCode mOutputTextCode;
-    internal ReplacementGridCode mReplacementGridCode = null!;
-    internal SectionGridCode mSectionGridCode = null!;
     internal SyntaxColors mSyntaxColors;
-    internal TemplateTextCode mTemplateTextCode = null!;
     internal readonly CodeTokenizer mTokenizer;
     private string mControlValuesFileName = null!;
     #endregion
@@ -97,11 +110,11 @@ namespace LJCGenTextEdit5
           }
 
           // Load first list.
-          mSectionGridCode.DataRetrieve();
+          SectionGridCode.DataRetrieve();
           break;
 
         case Change.Section:
-          mItemGridCode.DataRetrieve();
+          ItemGridCode.DataRetrieve();
           break;
 
         case Change.Item:
@@ -277,10 +290,12 @@ namespace LJCGenTextEdit5
     // Setup the grid code references.
     private void SetupGridCode()
     {
-      mSectionGridCode = new SectionGridCode(this);
-      mItemGridCode = new ItemGridCode(this);
-      mReplacementGridCode = new ReplacementGridCode(this);
-      //mOutputTextCode = new OutputTextCode(this);
+      _ = new TabsCode(this);
+      TemplateTextCode = new TemplateTextCode(this);
+      SectionGridCode = new SectionGridCode(this);
+      ItemGridCode = new ItemGridCode(this);
+      ReplacementGridCode = new ReplacementGridCode(this);
+      OutputTextCode = new OutputTextCode(this);
     }
 
     // Setup the data grids.
@@ -375,25 +390,6 @@ namespace LJCGenTextEdit5
       FormCommon.SetMenuState(ReplacementMenu, enableNew, enableEdit);
       ReplacementTitle.Enabled = true;
       ReplacementMenuHelp.Enabled = true;
-    }
-
-    // Sets the tab initial focus control.
-    private void SetFocusTab(TabPage tabPage)
-    {
-      switch (tabPage.Name)
-      {
-        case "TemplateTab":
-          TemplateRichText.Select();
-          break;
-
-        case "DataTab":
-          SectionGrid.Select();
-          break;
-
-        case "OutputTab":
-          OutputRichText.Select();
-          break;
-      }
     }
     #endregion
 

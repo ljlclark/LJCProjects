@@ -11,16 +11,18 @@ namespace LJCGenTextEdit5
   // Contains the SectionGrid methods.
   internal class SectionGridCode
   {
-    #region Properties
-
-    // Gets or sets the Manager reference.
-    internal SectionManager SectionManager { get; set; }
+    #region Parent Object Properties
 
     // Gets or sets the Parent List reference.
     private EditList EditList { get; set; }
 
     // Gets or sets the Section Grid reference.
     private LJCDataGrid SectionGrid { get; set; }
+
+    // Gets or sets the Manager reference.
+    internal SectionManager SectionManager { get; set; }
+
+    private TemplateTextCode TemplateTextCode { get; set; }
     #endregion
 
     #region Constructors
@@ -31,12 +33,14 @@ namespace LJCGenTextEdit5
       // Initialize property values.
       EditList = parentList;
       EditList.Cursor = Cursors.WaitCursor;
+
       SectionGrid = EditList.SectionGrid;
       SectionManager = EditList.SectionManager;
-      EditList.Cursor = Cursors.Default;
+      TemplateTextCode = EditList.TemplateTextCode;
 
       MenuEventHandlers();
       ControlEventHandlers();
+      EditList.Cursor = Cursors.Default;
     }
 
     // Creates the menu event handlers.
@@ -419,8 +423,7 @@ namespace LJCGenTextEdit5
     // Performs the Generate Output function.
     private void SectionMenuGenerate_Click(object? sender, EventArgs e)
     {
-      TemplateTextCode textCode = EditList.mTemplateTextCode;
-      textCode.Generate();
+      TemplateTextCode.Generate();
     }
 
     // Performs the Save function.
@@ -432,8 +435,7 @@ namespace LJCGenTextEdit5
     // Performs the Close function.
     private void SectionMenuExit_Click(object? sender, EventArgs e)
     {
-      TemplateTextCode textCode = EditList.mTemplateTextCode;
-      textCode.DoClose();
+      TemplateTextCode.DoClose();
     }
 
     // Displays the context sensitive help.
@@ -455,7 +457,7 @@ namespace LJCGenTextEdit5
     // Performs the Select Data XML file function.
     private void DataXMLButton_Click(object? sender, EventArgs e)
     {
-      EditList.mSectionGridCode.DataXMLLoad();
+      EditList.SectionGridCode.DataXMLLoad();
     }
 
     // Handles the form keys.
@@ -464,7 +466,7 @@ namespace LJCGenTextEdit5
       switch (e.KeyCode)
       {
         case Keys.Enter:
-          EditList.mSectionGridCode.Default();
+          EditList.SectionGridCode.Default();
           e.Handled = true;
           break;
 
@@ -475,7 +477,7 @@ namespace LJCGenTextEdit5
           break;
 
         case Keys.F5:
-          EditList.mSectionGridCode.Refresh();
+          EditList.SectionGridCode.Refresh();
           e.Handled = true;
           break;
 
@@ -509,7 +511,7 @@ namespace LJCGenTextEdit5
     {
       if (SectionGrid.LJCGetMouseRow(e) != null)
       {
-        EditList.mSectionGridCode.Default();
+        EditList.SectionGridCode.Default();
       }
     }
 

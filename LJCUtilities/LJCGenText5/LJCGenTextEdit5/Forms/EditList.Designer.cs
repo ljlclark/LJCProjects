@@ -193,7 +193,6 @@
       MainTabs.SelectedIndex = 0;
       MainTabs.Size = new Size(828, 680);
       MainTabs.TabIndex = 1;
-      MainTabs.MouseDown += MainTabs_MouseDown;
       // 
       // MainTabsMenu
       // 
@@ -207,7 +206,6 @@
       MainTabsMove.Name = "MainTabsMove";
       MainTabsMove.Size = new Size(176, 32);
       MainTabsMove.Text = "Move Right";
-      MainTabsMove.Click += MainTabsMove_Click;
       // 
       // TemplateTab
       // 
@@ -876,8 +874,6 @@
       OutputRichText.Size = new Size(817, 593);
       OutputRichText.TabIndex = 17;
       OutputRichText.Text = "";
-      OutputRichText.KeyDown += OutputRichText_KeyDown;
-      OutputRichText.KeyUp += OutputRichText_KeyUp;
       // 
       // OutputMenu
       // 
@@ -898,35 +894,30 @@
       XMLDecode.Name = "XMLDecode";
       XMLDecode.Size = new Size(269, 32);
       XMLDecode.Text = "XML De&code";
-      XMLDecode.Click += XMLDecode_Click;
       // 
       // XMLEncode
       // 
       XMLEncode.Name = "XMLEncode";
       XMLEncode.Size = new Size(269, 32);
       XMLEncode.Text = "XML E&ncode";
-      XMLEncode.Click += XMLEncode_Click;
       // 
       // HTMLXMLDecode
       // 
       HTMLXMLDecode.Name = "HTMLXMLDecode";
       HTMLXMLDecode.Size = new Size(269, 32);
       HTMLXMLDecode.Text = "HTML XML Decode";
-      HTMLXMLDecode.Click += HTMLXMLDecode_Click;
       // 
       // HTMLXMLEncode
       // 
       HTMLXMLEncode.Name = "HTMLXMLEncode";
       HTMLXMLEncode.Size = new Size(269, 32);
       HTMLXMLEncode.Text = "HTML XML Encode";
-      HTMLXMLEncode.Click += HTMLXMLEncode_Click;
       // 
       // HTMLCodeDecode
       // 
       HTMLCodeDecode.Name = "HTMLCodeDecode";
       HTMLCodeDecode.Size = new Size(269, 32);
       HTMLCodeDecode.Text = "HTML C# Syntax Colors";
-      HTMLCodeDecode.Click += HTMLCodeDecode_Click;
       // 
       // toolStripSeparator18
       // 
@@ -938,7 +929,6 @@
       OutputGenerate.Name = "OutputGenerate";
       OutputGenerate.Size = new Size(269, 32);
       OutputGenerate.Text = "&Generate Output";
-      OutputGenerate.Click += OutputGenerate_Click;
       // 
       // OutputSave
       // 
@@ -946,7 +936,6 @@
       OutputSave.ShortcutKeys = Keys.Control | Keys.S;
       OutputSave.Size = new Size(269, 32);
       OutputSave.Text = "&Save";
-      OutputSave.Click += OutputSave_Click;
       // 
       // toolStripSeparator9
       // 
@@ -958,7 +947,6 @@
       OutputExit.Name = "OutputExit";
       OutputExit.Size = new Size(269, 32);
       OutputExit.Text = "E&xit";
-      OutputExit.Click += OutputExit_Click;
       // 
       // toolStripSeparator17
       // 
@@ -971,7 +959,6 @@
       OutputHelp.ShortcutKeyDisplayString = "F1";
       OutputHelp.Size = new Size(269, 32);
       OutputHelp.Text = "&Help";
-      OutputHelp.Click += OutputHelp_Click;
       // 
       // OutputButton
       // 
@@ -982,7 +969,6 @@
       OutputButton.Size = new Size(31, 35);
       OutputButton.TabIndex = 16;
       OutputButton.UseVisualStyleBackColor = true;
-      OutputButton.Click += OutputButton_Click;
       // 
       // OutputTextbox
       // 
@@ -1010,7 +996,6 @@
       TileTabs.SelectedIndex = 0;
       TileTabs.Size = new Size(33, 680);
       TileTabs.TabIndex = 0;
-      TileTabs.MouseDown += TileTabs_MouseDown;
       // 
       // TileTabsMenu
       // 
@@ -1024,7 +1009,6 @@
       TileTabsMove.Name = "TileTabsMove";
       TileTabsMove.Size = new Size(163, 32);
       TileTabsMove.Text = "Move Left";
-      TileTabsMove.Click += TileTabsMove_Click;
       // 
       // EditList
       // 
@@ -1073,11 +1057,11 @@
 
     #endregion
 
-    private System.Windows.Forms.SplitContainer MainSplit;
-    private LJCControls5.LJCTabControl MainTabs;
+    internal System.Windows.Forms.SplitContainer MainSplit;
+    internal LJCControls5.LJCTabControl MainTabs;
     private System.Windows.Forms.TabPage TemplateTab;
     private System.Windows.Forms.TabPage DataTab;
-    private LJCControls5.LJCTabControl TileTabs;
+    internal LJCControls5.LJCTabControl TileTabs;
     private System.Windows.Forms.SplitContainer SectionSplit;
     private System.Windows.Forms.SplitContainer ItemSplit;
     private System.Windows.Forms.TabPage OutputTab;
@@ -1122,26 +1106,26 @@
     private System.Windows.Forms.Label TemplateLabel;
     internal LJCControls5.LJCRtControl TemplateRichText;
     internal LJCControls5.LJCRtControl OutputRichText;
-    private System.Windows.Forms.Button OutputButton;
+    internal System.Windows.Forms.Button OutputButton;
     internal System.Windows.Forms.TextBox OutputTextbox;
     private System.Windows.Forms.Label OutputLabel;
     internal System.Windows.Forms.ToolStripMenuItem SectionMenuSave;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     internal System.Windows.Forms.ToolStripMenuItem SectionMenuGenerate;
-    private System.Windows.Forms.ContextMenuStrip MainTabsMenu;
-    private System.Windows.Forms.ToolStripMenuItem MainTabsMove;
-    private System.Windows.Forms.ContextMenuStrip TileTabsMenu;
-    private System.Windows.Forms.ToolStripMenuItem TileTabsMove;
+    internal System.Windows.Forms.ContextMenuStrip MainTabsMenu;
+    internal System.Windows.Forms.ToolStripMenuItem MainTabsMove;
+    internal System.Windows.Forms.ContextMenuStrip TileTabsMenu;
+    internal System.Windows.Forms.ToolStripMenuItem TileTabsMove;
     internal System.Windows.Forms.ContextMenuStrip TemplateMenu;
     internal System.Windows.Forms.ToolStripMenuItem TemplateGenerate;
     internal System.Windows.Forms.ToolStripMenuItem TemplateSave;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
     internal System.Windows.Forms.ToolStripMenuItem TemplateExit;
-    private System.Windows.Forms.ContextMenuStrip OutputMenu;
-    private System.Windows.Forms.ToolStripMenuItem OutputGenerate;
-    private System.Windows.Forms.ToolStripMenuItem OutputSave;
+    internal System.Windows.Forms.ContextMenuStrip OutputMenu;
+    internal System.Windows.Forms.ToolStripMenuItem OutputGenerate;
+    internal System.Windows.Forms.ToolStripMenuItem OutputSave;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-    private System.Windows.Forms.ToolStripMenuItem OutputExit;
+    internal System.Windows.Forms.ToolStripMenuItem OutputExit;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     internal System.Windows.Forms.ToolStripMenuItem ItemMenuGenerate;
     internal System.Windows.Forms.ToolStripMenuItem ItemMenuSave;
@@ -1160,10 +1144,10 @@
     internal System.Windows.Forms.ToolStripMenuItem ItemMenuHelp;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
     internal System.Windows.Forms.ToolStripMenuItem ReplacementMenuHelp;
-    private System.Windows.Forms.ToolStripMenuItem OutputHelp;
+    internal System.Windows.Forms.ToolStripMenuItem OutputHelp;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
-    private System.Windows.Forms.ToolStripMenuItem XMLEncode;
-    private System.Windows.Forms.ToolStripMenuItem XMLDecode;
+    internal System.Windows.Forms.ToolStripMenuItem XMLEncode;
+    internal System.Windows.Forms.ToolStripMenuItem XMLDecode;
     internal System.Windows.Forms.ToolStripMenuItem TemplateFileEdit;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
     private System.Windows.Forms.ToolStripMenuItem SectionTitle;
@@ -1171,9 +1155,9 @@
     private System.Windows.Forms.ToolStripMenuItem ReplacementTitle;
     private System.Windows.Forms.ToolStripMenuItem TemplateTitle;
     private System.Windows.Forms.ToolStripMenuItem OutputTitle;
-    private System.Windows.Forms.ToolStripMenuItem HTMLXMLEncode;
-    private System.Windows.Forms.ToolStripMenuItem HTMLXMLDecode;
-    private System.Windows.Forms.ToolStripMenuItem HTMLCodeDecode;
+    internal System.Windows.Forms.ToolStripMenuItem HTMLXMLEncode;
+    internal System.Windows.Forms.ToolStripMenuItem HTMLXMLDecode;
+    internal System.Windows.Forms.ToolStripMenuItem HTMLCodeDecode;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
   }
 }

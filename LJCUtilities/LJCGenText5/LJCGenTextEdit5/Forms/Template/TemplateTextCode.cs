@@ -10,16 +10,14 @@ namespace LJCGenTextEdit5
 {
   internal class TemplateTextCode
   {
-    #region Properties
+    #region Parent Object Properties
 
     // Gets or sets the Parent List reference.
     private EditList EditList { get; set; }
-    #endregion
 
-    #region Class Data
+    private LJCRtControl TemplateText { get; set; }
 
-    private readonly LJCRtControl mTemplateRtControl;
-    private readonly LJCRtControl mOutputRtControl;
+    private LJCRtControl OutputRtControl { get; set; }
     #endregion
 
     #region Constructors
@@ -30,12 +28,13 @@ namespace LJCGenTextEdit5
       // Initialize property values.
       EditList = parentList;
       EditList.Cursor = Cursors.WaitCursor;
-      mOutputRtControl = EditList.OutputRichText;
-      mTemplateRtControl = EditList.TemplateRichText;
-      EditList.Cursor = Cursors.Default;
+
+      OutputRtControl = EditList.OutputRichText;
+      TemplateText = EditList.TemplateRichText;
 
       MenuEventHandlers();
       ControlEventHandlers();
+      EditList.Cursor = Cursors.Default;
     }
 
     // Creates the template menu event handlers.
@@ -102,10 +101,10 @@ namespace LJCGenTextEdit5
       {
         EditList.TemplateTextbox.Text = Path.GetFileName(targetFileSpec);
 
-        mTemplateRtControl.Font = new Font("Courier New", 12f
+        TemplateText.Font = new Font("Courier New", 12f
           , FontStyle.Bold);
-        mTemplateRtControl.WordWrap = false;
-        mTemplateRtControl.LJCLoadFromFile(targetFileSpec);
+        TemplateText.WordWrap = false;
+        TemplateText.LJCLoadFromFile(targetFileSpec);
 
         string fromPath = Environment.CurrentDirectory;
         targetFileSpec = LJCNetFile.GetRelativePath(fromPath, targetFileSpec);
@@ -122,7 +121,7 @@ namespace LJCGenTextEdit5
           }
         }
 
-        EditList.CreateColorSettings(mTemplateRtControl);
+        EditList.CreateColorSettings(TemplateText);
       }
     }
 
@@ -133,8 +132,8 @@ namespace LJCGenTextEdit5
 
       //mOutputRtControl.Font = new Font("Courier New", 12f
       //  , FontStyle.Bold);
-      mOutputRtControl.Font = new Font("Segoe UI", 11f);
-      mOutputRtControl.WordWrap = false;
+      OutputRtControl.Font = new Font("Segoe UI", 11f);
+      OutputRtControl.WordWrap = false;
 
       // Get data.
       var dataXMLPath = filePaths.DataXMLPath;
@@ -145,9 +144,9 @@ namespace LJCGenTextEdit5
       {
         var templateLines = EditList.TemplateRichText.Lines;
         var genTextLib = new GenTextLib();
-        mOutputRtControl.Text = genTextLib.TextGen(sections, templateLines);
+        OutputRtControl.Text = genTextLib.TextGen(sections, templateLines);
 
-        EditList.CreateColorSettings(mOutputRtControl);
+        EditList.CreateColorSettings(OutputRtControl);
       }
     }
 
@@ -189,10 +188,10 @@ namespace LJCGenTextEdit5
           File.WriteAllText(targetFileSpec, "");
           StreamWriter writer = File.CreateText(targetFileSpec);
           int count = 0;
-          foreach (string line in mTemplateRtControl.Lines)
+          foreach (string line in TemplateText.Lines)
           {
             count++;
-            if (count >= mTemplateRtControl.Lines.Length
+            if (count >= TemplateText.Lines.Length
               && !LJC.HasText(line))
             {
               break;
@@ -223,7 +222,7 @@ namespace LJCGenTextEdit5
       FilePaths filePaths = EditList.mFilePaths;
 
       var genSample = new GenSample();
-      string[] lines = mTemplateRtControl.Lines;
+      string[] lines = TemplateText.Lines;
       Sections? sections = genSample.CreateSections(lines);
 
       if (LJC.HasListItems(sections))
@@ -238,7 +237,7 @@ namespace LJCGenTextEdit5
         string fullSpec = Path.GetFullPath(fileSpec);
         filePaths.DataXMLPath = LJCNetFile.GetRelativePath(fromPath, fullSpec);
         EditList.DataXMLTextbox.Text = manager.FileName;
-        EditList.mSectionGridCode.DataRetrieve();
+        EditList.SectionGridCode.DataRetrieve();
       }
     }
 
@@ -337,7 +336,7 @@ namespace LJCGenTextEdit5
     // Performs the Select Template file function.
     private void TemplateButton_Click(object? sender, EventArgs e)
     {
-      EditList.mTemplateTextCode.TemplateLoad();
+      TemplateLoad();
     }
 
     // Handles the text keys.
@@ -372,8 +371,7 @@ namespace LJCGenTextEdit5
       {
         LJCRtControl richText = EditList.TemplateRichText;
         CodeTokenizer tokenizer = EditList.mTokenizer;
-        EditList.mTemplateTextCode.SetLineColors(e.KeyCode, richText
-          , tokenizer);
+        SetLineColors(e.KeyCode, richText, tokenizer);
       }
     }
     #endregion

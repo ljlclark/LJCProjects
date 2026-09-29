@@ -11,7 +11,10 @@ namespace LJCGenTextEdit5
   // Contains the ReplacementGrid methods.
   internal class ReplacementGridCode
   {
-    #region Properties
+    #region Control Code Properties
+    #endregion
+
+    #region Parent Object Properties
 
     // Gets or sets the Manager reference.
     internal ReplacementManager ReplacementManager { get; set; }
@@ -27,6 +30,8 @@ namespace LJCGenTextEdit5
 
     // Gets or sets the Section Grid reference.
     private LJCDataGrid SectionGrid { get; set; }
+
+    private TemplateTextCode TemplateTextCode { get; set; }
     #endregion
 
     #region Constructors
@@ -37,14 +42,16 @@ namespace LJCGenTextEdit5
       // Initialize property values.
       EditList = parentList;
       EditList.Cursor = Cursors.WaitCursor;
+
       ReplacementManager = EditList.ReplacementManager;
       ItemGrid = EditList.ItemGrid;
       ReplacementGrid = EditList.ReplacementGrid;
       SectionGrid = EditList.SectionGrid;
-      EditList.Cursor = Cursors.Default;
+      TemplateTextCode = EditList.TemplateTextCode;
 
       MenuEventHandlers();
       ControlEventHandlers();
+      EditList.Cursor = Cursors.Default;
     }
 
     // Creates the menu event handlers.
@@ -324,22 +331,20 @@ namespace LJCGenTextEdit5
     // Performs the Generate Output function.
     private void ReplacementGenerate_Click(object? sender, EventArgs e)
     {
-      TemplateTextCode templateTextCode = EditList.mTemplateTextCode;
-      templateTextCode.Generate();
+      TemplateTextCode.Generate();
     }
 
     // Performs the Save function.
     private void ReplacementSave_Click(object? sender, EventArgs e)
     {
-      SectionGridCode sectionGridCode = EditList.mSectionGridCode;
+      SectionGridCode sectionGridCode = EditList.SectionGridCode;
       sectionGridCode.DataXMLSave();
     }
 
     // Performs the Close function.
     private void ReplacementMenuExit_Click(object? sender, EventArgs e)
     {
-      TemplateTextCode templateTextCode = EditList.mTemplateTextCode;
-      templateTextCode.DoClose();
+      TemplateTextCode.DoClose();
     }
 
     // Displays the context sensitive help.
@@ -403,7 +408,7 @@ namespace LJCGenTextEdit5
     {
       if (ReplacementGrid.LJCGetMouseRow(e) != null)
       {
-        EditList.mReplacementGridCode.Edit();
+        EditList.ReplacementGridCode.Edit();
       }
     }
 
