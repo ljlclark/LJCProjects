@@ -16,8 +16,21 @@ namespace LJCGenTextEdit5
 
     #region Parent Object Properties
 
-    // Gets or sets the Manager reference.
-    internal ReplacementManager ReplacementManager { get; set; }
+    // Gets or sets the Section Manager reference.
+    internal SectionManager SectionManager
+    {
+      get => mSectionManager;
+      set
+      {
+        mSectionManager = value;
+        if (mSectionManager != null)
+        {
+          Sections sections = mSectionManager.Load();
+          ReplacementManager = new ReplacementManager(sections);
+        }
+      }
+    }
+    private SectionManager mSectionManager = null!;
 
     // Gets or sets the Parent List reference.
     private EditList EditList { get; set; }
@@ -27,6 +40,9 @@ namespace LJCGenTextEdit5
 
     // Gets or sets the Replacement Grid reference.
     private LJCDataGrid ReplacementGrid { get; set; }
+
+    // Gets or sets the Manager reference.
+    private ReplacementManager ReplacementManager { get; set; }
 
     // Gets or sets the Section Grid reference.
     private LJCDataGrid SectionGrid { get; set; }

@@ -71,9 +71,9 @@ namespace LJCGenTextEdit5
         if (value != null)
         {
           mSectionManager = value;
-          SectionGridCode.SectionManager = mSectionManager;
-          ItemGridCode.ItemManager = mItemManager;
-          ReplacementGridCode.ReplacementManager = mReplacementManager;
+          SectionGridCode.SectionManager = SectionManager;
+          ItemGridCode.SectionManager = SectionManager;
+          ReplacementGridCode.SectionManager = SectionManager;
         }
       }
     }

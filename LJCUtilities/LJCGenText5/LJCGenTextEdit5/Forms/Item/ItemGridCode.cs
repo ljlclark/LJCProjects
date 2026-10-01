@@ -20,7 +20,20 @@ namespace LJCGenTextEdit5
     internal RepeatItemManager ItemManager { get; set; }
 
     // Gets or sets the Section Manager reference.
-    internal SectionManager SectionManager { get; set; }
+    internal SectionManager SectionManager
+    {
+      get => mSectionManager;
+      set
+      {
+        mSectionManager = value;
+        if (mSectionManager != null)
+        {
+          Sections sections = mSectionManager.Load();
+          ItemManager = new RepeatItemManager(sections);
+        }
+      }
+    }
+    private SectionManager mSectionManager = null!;
 
     // Gets or sets the Parent List reference.
     private EditList EditList { get; set; }
