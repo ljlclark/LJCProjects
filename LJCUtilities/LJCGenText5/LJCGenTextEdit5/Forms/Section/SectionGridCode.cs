@@ -345,7 +345,6 @@ namespace LJCGenTextEdit5
     // Save the DataXML file.
     internal void DataXMLSave()
     {
-
       SectionManager manager = EditList.SectionManager;
 
       if (manager != null)

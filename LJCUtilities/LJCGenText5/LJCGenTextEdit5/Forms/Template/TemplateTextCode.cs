@@ -70,7 +70,6 @@ namespace LJCGenTextEdit5
     // Load the Template file.
     internal void TemplateLoad()
     {
-
       string? targetFileSpec = EditList.mFilePaths.TemplatePath;
       string? prevTargetPath = Path.GetDirectoryName(targetFileSpec);
 

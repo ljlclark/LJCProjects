@@ -11,9 +11,6 @@ namespace LJCGenTextEdit5
   // Contains the ReplacementGrid methods.
   internal class ReplacementGridCode
   {
-    #region Control Code Properties
-    #endregion
-
     #region Parent Object Properties
 
     // Gets or sets the Section Manager reference.
@@ -63,6 +60,7 @@ namespace LJCGenTextEdit5
       ItemGrid = EditList.ItemGrid;
       ReplacementGrid = EditList.ReplacementGrid;
       SectionGrid = EditList.SectionGrid;
+      SectionManager = EditList.SectionManager;
       TemplateTextCode = EditList.TemplateTextCode;
 
       MenuEventHandlers();
