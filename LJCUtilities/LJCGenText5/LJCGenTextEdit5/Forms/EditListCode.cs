@@ -118,7 +118,7 @@ namespace LJCGenTextEdit5
           break;
 
         case Change.Item:
-          //mReplacementGridCode.DataRetrieve();
+          ReplacementGridCode.DataRetrieve();
           break;
 
         case Change.Replacement:

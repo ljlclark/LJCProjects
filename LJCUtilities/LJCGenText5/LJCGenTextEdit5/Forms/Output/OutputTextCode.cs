@@ -13,12 +13,13 @@ namespace LJCGenTextEdit5
     // Gets or sets the Parent List reference.
     private EditList EditList { get; set; }
 
-    private TextBox OutputTextBox { get; set; }
-
+    // Gets or sets the OutputText reference.
     private LJCRtControl OutputText { get; set; }
 
-    private LJCRtControl TemplateText { get; set; }
+    // Gets or sets the Output TextBox reference.
+    private TextBox OutputTextBox { get; set; }
 
+    // Gets or sets the TemplateText code reference.
     private TemplateTextCode TemplateTextCode { get; set; }
     #endregion
 
@@ -33,7 +34,6 @@ namespace LJCGenTextEdit5
 
       OutputTextBox = EditList.OutputTextbox;
       OutputText = parentList.OutputRichText;
-      TemplateText = parentList.TemplateRichText;
       TemplateTextCode = EditList.TemplateTextCode;
 
       MenuEventHandlers();
@@ -104,7 +104,7 @@ namespace LJCGenTextEdit5
       {
         EditList.OutputTextbox.Text = Path.GetFileName(targetFileSpec);
 
-        OutputText.Font = new Font("Courier New", 9.0f);
+        //OutputText.Font = new Font("Courier New", 9.0f);
         OutputText.WordWrap = false;
         OutputText.LJCLoadFromFile(targetFileSpec);
 

@@ -15,9 +15,11 @@ namespace LJCGenTextEdit5
     // Gets or sets the Parent List reference.
     private EditList EditList { get; set; }
 
-    private LJCRtControl TemplateText { get; set; }
+    // Gets or sets the OutputText reference.
+    private LJCRtControl OutputText { get; set; }
 
-    private LJCRtControl OutputRtControl { get; set; }
+    // Gets or sets the TemplateText reference.
+    private LJCRtControl TemplateText { get; set; }
     #endregion
 
     #region Constructors
@@ -29,7 +31,7 @@ namespace LJCGenTextEdit5
       EditList = parentList;
       EditList.Cursor = Cursors.WaitCursor;
 
-      OutputRtControl = EditList.OutputRichText;
+      OutputText = EditList.OutputRichText;
       TemplateText = EditList.TemplateRichText;
 
       MenuEventHandlers();
@@ -100,8 +102,7 @@ namespace LJCGenTextEdit5
       {
         EditList.TemplateTextbox.Text = Path.GetFileName(targetFileSpec);
 
-        TemplateText.Font = new Font("Courier New", 12f
-          , FontStyle.Bold);
+        //TemplateText.Font = new Font("Courier New", 9.0f);
         TemplateText.WordWrap = false;
         TemplateText.LJCLoadFromFile(targetFileSpec);
 
@@ -129,10 +130,8 @@ namespace LJCGenTextEdit5
     {
       FilePaths filePaths = EditList.mFilePaths;
 
-      //mOutputRtControl.Font = new Font("Courier New", 12f
-      //  , FontStyle.Bold);
-      OutputRtControl.Font = new Font("Segoe UI", 11f);
-      OutputRtControl.WordWrap = false;
+      //OutputText.Font = new Font("Courier New", 9.0f);
+      OutputText.WordWrap = false;
 
       // Get data.
       var dataXMLPath = filePaths.DataXMLPath;
@@ -143,9 +142,9 @@ namespace LJCGenTextEdit5
       {
         var templateLines = EditList.TemplateRichText.Lines;
         var genTextLib = new GenTextLib();
-        OutputRtControl.Text = genTextLib.TextGen(sections, templateLines);
+        OutputText.Text = genTextLib.TextGen(sections, templateLines);
 
-        EditList.CreateColorSettings(OutputRtControl);
+        EditList.CreateColorSettings(OutputText);
       }
     }
 

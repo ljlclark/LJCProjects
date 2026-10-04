@@ -11,13 +11,7 @@ namespace LJCGenTextEdit5
   // Contains the ItemGrid methods.
   internal class ItemGridCode
   {
-    #region Control Code Properties
-    #endregion
-
     #region Parent Object Properties
-
-    // Gets or sets the Item Manager reference.
-    internal RepeatItemManager ItemManager { get; set; }
 
     // Gets or sets the Section Manager reference.
     internal SectionManager SectionManager
@@ -44,7 +38,14 @@ namespace LJCGenTextEdit5
     // Gets or sets the Section Grid reference.
     private LJCDataGrid SectionGrid { get; set; }
 
+    // Gets or sets the TemplateText Code reference.
     private TemplateTextCode TemplateTextCode { get; set; }
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the Item Manager reference.
+    internal RepeatItemManager ItemManager { get; set; } = null!;
     #endregion
 
     #region Constructors
@@ -57,7 +58,6 @@ namespace LJCGenTextEdit5
       EditList.Cursor = Cursors.WaitCursor;
 
       ItemGrid = EditList.ItemGrid;
-      ItemManager = EditList.ItemManager;
       SectionGrid = EditList.SectionGrid;
       SectionManager = EditList.SectionManager;
       TemplateTextCode = EditList.TemplateTextCode;

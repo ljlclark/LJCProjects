@@ -38,13 +38,17 @@ namespace LJCGenTextEdit5
     // Gets or sets the Replacement Grid reference.
     private LJCDataGrid ReplacementGrid { get; set; }
 
-    // Gets or sets the Manager reference.
-    private ReplacementManager ReplacementManager { get; set; }
-
     // Gets or sets the Section Grid reference.
     private LJCDataGrid SectionGrid { get; set; }
 
+    // Gets or sets the TemplateText Code reference.
     private TemplateTextCode TemplateTextCode { get; set; }
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the Manager reference.
+    private ReplacementManager ReplacementManager { get; set; } = null!;
     #endregion
 
     #region Constructors
@@ -56,7 +60,6 @@ namespace LJCGenTextEdit5
       EditList = parentList;
       EditList.Cursor = Cursors.WaitCursor;
 
-      ReplacementManager = EditList.ReplacementManager;
       ItemGrid = EditList.ItemGrid;
       ReplacementGrid = EditList.ReplacementGrid;
       SectionGrid = EditList.SectionGrid;

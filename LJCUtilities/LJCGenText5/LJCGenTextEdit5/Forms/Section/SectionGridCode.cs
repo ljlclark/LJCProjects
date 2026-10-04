@@ -13,15 +13,16 @@ namespace LJCGenTextEdit5
   {
     #region Parent Object Properties
 
+    // Gets or sets the Manager reference.
+    internal SectionManager SectionManager { get; set; }
+
     // Gets or sets the Parent List reference.
     private EditList EditList { get; set; }
 
     // Gets or sets the Section Grid reference.
     private LJCDataGrid SectionGrid { get; set; }
 
-    // Gets or sets the Manager reference.
-    internal SectionManager SectionManager { get; set; }
-
+    // Gets or sets the TemplateText Code reference.
     private TemplateTextCode TemplateTextCode { get; set; }
     #endregion
 
