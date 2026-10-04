@@ -60,7 +60,7 @@ namespace LJCControls5
       CodeTokenizer setup = new();
       setup.InitializeKeywords();
 
-      bool test = false;
+      bool test = true;
       if (test)
       {
         for (int index = 0; index < lines.Length; index++)

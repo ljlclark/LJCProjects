@@ -27,14 +27,16 @@ namespace _Namespace_
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/DefaultConstructor/*'/>
     public _ClassName_()
     {
       ChangedNames = new ChangedNames();
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/CopyConstructor/*'/>
     public _ClassName_(_ClassName_ item)
     {
       ChangedNames = new ChangedNames();
@@ -47,7 +49,8 @@ namespace _Namespace_
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path='items/Clone/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public _ClassName_ Clone()
     {
       var retValue = MemberwiseClone() as _ClassName_;
@@ -55,7 +58,8 @@ namespace _Namespace_
     }
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/CompareTo/*'/>
     public int CompareTo(_ClassName_ other)
     {
       int retValue;
@@ -77,7 +81,8 @@ namespace _Namespace_
     }
 
     // The object string identifier.
-    /// <include path='items/ToString/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/ToString/*'/>
     public override string ToString()
     {
       var retValue = $"{mSequence} {m_ToStringName_}:{mID}-{mValue}";
@@ -133,7 +138,9 @@ namespace _Namespace_
 
     #region Class Data
 
-    /// <summary>The table name.</summary>
+    // The table name.
+    /// <include file='Doc/_ClassName_.xml'
+    ///  path='items/TableName/*'/>
     public static string TableName = "_TableName_";
     // #SectionBegin Properties
     // #Value _ColumnName_
@@ -141,7 +148,9 @@ namespace _Namespace_
     // #Value _MaxLength_
     // #Value _PropertyName_
 
-    /// <summary>The _ColumnName_ column name.</summary>
+    // The _ColumnName_ column name.
+    /// <include file='Doc/_ClassName_.xml'
+    ///  path='items/Column_ColumnName_/*'/>
     public static string Column_ColumnName_ = "_ColumnName_";
     // #SectionEnd Properties
     // #SectionBegin Properties
@@ -151,7 +160,9 @@ namespace _Namespace_
     // #Value _PropertyName_
     // #IfBegin _DataType_ String
 
-    /// <summary>The _ColumnName_ maximum length.</summary>
+    // The _ColumnName_ maximum length.
+    /// <include file='Doc/_ClassName_.xml'
+    ///  path='items/Length_ColumnName_/*'/>
     public static int Length_ColumnName_ = _MaxLength_;
     // #IfEnd _DataType_
     // #SectionEnd Properties
@@ -166,11 +177,14 @@ namespace _Namespace_
 
   #region Comparers
 
-  /// <summary>Sort and search on Name value.</summary>
+  // Sort and search on Name value.
+  /// <include file='Doc/_ClassName_.xml'
+  ///  path='items/_ClassName_Unique/*'/>
   public class _ClassName_Unique : IComparer<_ClassName_>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/Compare/*'/>
     public int Compare(_ClassName_ x, _ClassName_ y)
     {
       int retValue;

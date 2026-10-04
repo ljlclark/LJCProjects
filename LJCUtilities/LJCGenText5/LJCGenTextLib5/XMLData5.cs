@@ -58,16 +58,29 @@ namespace LJCGenTextLib5
       {
         fileSpec = "DefaultValues.xml";
       }
-      retValue = LJC.XmlDeserialize(typeof(DefaultValues)
-        , fileSpec) as DefaultValues;
+
+      retValue = new()
+      {
+        ClassName = "TableName",
+        CollectionName = "TableNames",
+        Namespace = "LJCNamespace",
+      };
+      if (File.Exists(fileSpec))
+      {
+        retValue = LJC.XmlDeserialize(typeof(DefaultValues)
+          , fileSpec) as DefaultValues;
+      }
+
       if (retValue != null)
       {
         retValue.TableName = tableName;
-        if (0 == string.Compare(retValue.CollectionName, "TableNames", true))
+        var ignoreCase = true;
+        if (0 == string.Compare(retValue.CollectionName, "TableNames"
+          , ignoreCase))
         {
           retValue.CollectionName = GetPlural(tableName);
         }
-        if (0 == string.Compare(retValue.ClassName, "TableName", true))
+        if (0 == string.Compare(retValue.ClassName, "TableName", ignoreCase))
         {
           retValue.ClassName = tableName;
         }

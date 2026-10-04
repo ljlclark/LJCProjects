@@ -1,6 +1,6 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// GenTextEditSplash.cs
+// GenTextEditSplash5.cs
 using System.Reflection;
 using Timer = System.Windows.Forms.Timer;
 

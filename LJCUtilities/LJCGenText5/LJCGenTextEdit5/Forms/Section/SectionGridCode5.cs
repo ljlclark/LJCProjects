@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // SectionGridCode.cs
 using LJCControls5;
+using LJCDBClientLib5;
+using LJCGenTextLib5;
 using LJCGenTextXAL5;
 using LJCNetCommon5;
 using static LJCGenTextEdit5.EditList;
@@ -313,34 +315,34 @@ namespace LJCGenTextEdit5
     // Creates the DataXML data.
     internal void CreateDataFromTable()
     {
-      //var detail = new CreateDataDetail();
+      var detail = new CreateDataDetail();
 
-      //if (DialogResult.OK == detail.ShowDialog())
-      //{
-      //  string dataConfigName = detail.DataConfigName;
-      //  string tableName = detail.TableName;
+      if (DialogResult.OK == detail.ShowDialog())
+      {
+        string dataConfigName = detail.DataConfigName;
+        string tableName = detail.TableName;
 
-      //  LJCDataManager dataManager = new LJCDataManager(dataConfigName, tableName);
-      //  LJCDataColumns dbColumns = dataManager.DataDefinition;
-      //  XMLData xmlData = new XMLData();
-      //  string data = xmlData.Create(tableName, dbColumns);
+        LJCDataManager dataManager = new(dataConfigName, tableName);
+        LJCDataColumns dbColumns = dataManager.DataDefinition;
+        XMLData xmlData = new();
+        string data = xmlData.Create(tableName, dbColumns);
 
-      //  LJCNetFile.CreateFolder("DataXML");
-      //  string fileSpec = @"DataXML\GenData.xml";
-      //  File.WriteAllText(fileSpec, data);
+        LJCNetFile.CreateFolder("DataXML");
+        string fileSpec = @"DataXML\GenData.xml";
+        File.WriteAllText(fileSpec, data);
 
-      //  SectionManager manager = new(fileSpec);
-      //  EditList.SectionManager = manager;
-      //  if (manager != null)
-      //  {
-      //    string fromPath = Environment.CurrentDirectory;
-      //    string fullSpec = Path.GetFullPath(fileSpec);
-      //    EditList.mFilePaths.DataXMLPath = LJCNetFile.GetRelativePath(fromPath
-      //      , fullSpec);
-      //    EditList.DataXMLTextbox.Text = manager.FileName;
-      //  }
-      DataRetrieve();
-      //}
+        SectionManager manager = new(fileSpec);
+        EditList.SectionManager = manager;
+        if (manager != null)
+        {
+          string fromPath = Environment.CurrentDirectory;
+          string fullSpec = Path.GetFullPath(fileSpec);
+          EditList.mFilePaths.DataXMLPath = LJCNetFile.GetRelativePath(fromPath
+            , fullSpec);
+          EditList.DataXMLTextbox.Text = manager.FileName;
+        }
+        DataRetrieve();
+      }
     }
 
     // Save the DataXML file.

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// FilePaths.cs
+// FilePaths5.cs
 using LJCNetCommon5;
 
 namespace LJCGenTextEdit5

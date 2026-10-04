@@ -1,3 +1,10 @@
+// Copyright (c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// GenTextEdit5Program.cs
+
+// Install-Package Microsoft.Data.SqlClient
+// Install-Package System.Configuration.ConfigurationManager
+
 namespace LJCGenTextEdit5
 {
   internal static class Program

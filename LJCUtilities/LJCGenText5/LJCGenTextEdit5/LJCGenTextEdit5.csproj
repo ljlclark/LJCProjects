@@ -14,11 +14,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="LJCCipherLib5">
+      <HintPath>..\External\LJCCipherLib5.dll</HintPath>
+    </Reference>
     <Reference Include="LJCControls5">
       <HintPath>..\External\LJCControls5.dll</HintPath>
     </Reference>
+    <Reference Include="LJCDataAccessConfig5">
+      <HintPath>..\External\LJCDataAccessConfig5.dll</HintPath>
+    </Reference>
     <Reference Include="LJCDBClientLib5">
       <HintPath>..\External\LJCDBClientLib5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBMessage5">
+      <HintPath>..\External\LJCDBMessage5.dll</HintPath>
     </Reference>
     <Reference Include="LJCNetCommon5">
       <HintPath>..\External\LJCNetCommon5.dll</HintPath>
@@ -26,11 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Forms\Section\" />
-    <Folder Include="Forms\Template\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.1.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.12" />
   </ItemGroup>
 
