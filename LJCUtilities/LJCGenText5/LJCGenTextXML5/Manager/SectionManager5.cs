@@ -113,7 +113,7 @@ namespace LJCGenTextXAL5
     // Retrieves a Section record from the object data.
     /// <include file='Doc/SectionManager5.xml'
     ///  path='items/Retrieve/*'/>
-    public Section? Retrieve(string sectionName)
+    public Section? Retrieve(string? sectionName)
     {
       Section? retValue = null;
 

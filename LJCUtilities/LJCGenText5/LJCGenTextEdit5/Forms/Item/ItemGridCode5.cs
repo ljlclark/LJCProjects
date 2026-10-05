@@ -169,19 +169,19 @@ namespace LJCGenTextEdit5
     {
       if (SectionGrid.CurrentRow is LJCGridRow parentRow)
       {
-        //// Data from items.
-        //string parentName = parentRow.LJCGetCellText("Name");
+        // Data from items.
+        string? parentName = parentRow.LJCGetCellText("Name");
 
-        //var location = FormPoint.DialogScreenPoint(ItemGrid);
-        //var detail = new ItemDetail()
-        //{
-        //  LJCGenDataManager = EditList.GenDataManager,
-        //  LJCLocation = location,
-        //  LJCParentName = parentName
-        //};
-        //detail.LJCChange += ItemDetail_Change;
-        //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
-        //detail.ShowDialog();
+        var location = FormPoint.DialogScreenPoint(ItemGrid);
+        var detail = new ItemDetail()
+        {
+          ItemManager = EditList.ItemManager,
+          LJCLocation = location,
+          LJCParentName = parentName
+        };
+        detail.LJCChange += ItemDetail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
+        detail.ShowDialog();
       }
     }
 
@@ -191,21 +191,22 @@ namespace LJCGenTextEdit5
       if (SectionGrid.CurrentRow is LJCGridRow parentRow
         && ItemGrid.CurrentRow is LJCGridRow row)
       {
-        //// Data from items.
-        //string parentName = parentRow.LJCGetCellText("Name");
-        //string name = row.LJCGetCellText("Name");
+        // Data from items.
+        string? parentName = parentRow.LJCGetCellText("Name");
+        string? name = row.LJCGetCellText("Name");
 
-        //var location = FormPoint.DialogScreenPoint(ItemGrid);
-        //var detail = new ItemDetail()
-        //{
-        //  LJCGenDataManager = ItemManager,
-        //  LJCItemName = name,
-        //  LJCLocation = location,
-        //  LJCParentName = parentName
-        //};
-        //detail.LJCChange += ItemDetail_Change;
-        //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
-        //detail.ShowDialog();
+        var location = FormPoint.DialogScreenPoint(ItemGrid);
+        var detail = new ItemDetail()
+        {
+          SectionManager = SectionManager,
+          ItemManager = ItemManager,
+          LJCItemName = name,
+          LJCLocation = location,
+          LJCParentName = parentName,
+        };
+        detail.LJCChange += ItemDetail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
+        detail.ShowDialog();
       }
     }
 
@@ -279,21 +280,23 @@ namespace LJCGenTextEdit5
     }
 
     // Adds new row or updates row with changes from the detail dialog.
-    private void ItemDetail_Change(object sender, EventArgs e)
+    private void ItemDetail_Change(object? sender, EventArgs e)
     {
-      //var detail = sender as ItemDetail;
-      //var record = detail.LJCRecord;
-      //if (detail.LJCIsUpdate)
-      //{
-      //  RowUpdate(record);
-      //}
-      //else
-      //{
-      //  // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
-      //  var row = RowAdd(record);
-      //  ItemGrid.LJCSetCurrentRow(row, true);
-      //  EditList.TimedChange(EditList.Change.Item);
-      //}
+      if (sender is ItemDetail detail)
+      {
+        var record = detail.LJCRecord;
+        if (detail.LJCIsUpdate)
+        {
+          RowUpdate(record);
+        }
+        else
+        {
+          // LJCSetCurrentRow sets the LJCAllowSelectionChange property.
+          var row = RowAdd(record);
+          ItemGrid.LJCSetCurrentRow(row, true);
+          EditList.TimedChange(EditList.Change.Item);
+        }
+      }
     }
     #endregion
 

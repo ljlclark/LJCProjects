@@ -62,7 +62,7 @@ namespace LJCGenTextXAL5
     // Retrieves a RepeatItem record from the object data.
     /// <include file='Doc/RepeatItemManager5.xml'
     ///  path='items/Retrieve/*'/>
-    public RepeatItem? Retrieve(string sectionName, string repeatItemName)
+    public RepeatItem? Retrieve(string? sectionName, string? repeatItemName)
     {
       RepeatItem? retValue = null;
 

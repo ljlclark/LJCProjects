@@ -105,6 +105,8 @@ namespace LJCGenTextEdit5
         EditList.OutputTextbox.Text = Path.GetFileName(targetFileSpec);
 
         //OutputText.Font = new Font("Courier New", 9.0f);
+        Font font = OutputText.Font;
+        OutputText.Font = new Font(font.FontFamily, 10.0f);
         OutputText.WordWrap = false;
         OutputText.LJCLoadFromFile(targetFileSpec);
 

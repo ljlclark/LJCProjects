@@ -103,6 +103,8 @@ namespace LJCGenTextEdit5
         EditList.TemplateTextbox.Text = Path.GetFileName(targetFileSpec);
 
         //TemplateText.Font = new Font("Courier New", 9.0f);
+        Font font = TemplateText.Font;
+        TemplateText.Font = new Font(font.FontFamily, 10.0f);
         TemplateText.WordWrap = false;
         TemplateText.LJCLoadFromFile(targetFileSpec);
 
@@ -122,6 +124,7 @@ namespace LJCGenTextEdit5
         }
 
         EditList.CreateColorSettings(TemplateText);
+        EditList.SetTextColor(TemplateText);
       }
     }
 
@@ -131,6 +134,8 @@ namespace LJCGenTextEdit5
       FilePaths filePaths = EditList.mFilePaths;
 
       //OutputText.Font = new Font("Courier New", 9.0f);
+      Font font = OutputText.Font;
+      OutputText.Font = new Font(font.FontFamily, 10.0f);
       OutputText.WordWrap = false;
 
       // Get data.
@@ -145,6 +150,7 @@ namespace LJCGenTextEdit5
         OutputText.Text = genTextLib.TextGen(sections, templateLines);
 
         EditList.CreateColorSettings(OutputText);
+        EditList.SetTextColor(OutputText);
       }
     }
 

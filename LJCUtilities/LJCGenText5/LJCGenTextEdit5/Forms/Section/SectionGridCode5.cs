@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// SectionGridCode.cs
+// SectionGridCode5.cs
 using LJCControls5;
 using LJCDBClientLib5;
 using LJCGenTextLib5;
@@ -197,14 +197,14 @@ namespace LJCGenTextEdit5
     internal void New()
     {
       var location = FormPoint.DialogScreenPoint(SectionGrid);
-      //var detail = new SectionDetail()
-      //{
-      //  LJCGenDataManager = EditList.GenDataManager,
-      //  LJCLocation = location
-      //};
-      //detail.LJCChange += SectionDetail_Change;
-      //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
-      //detail.ShowDialog();
+      var detail = new SectionDetail()
+      {
+        SectionManager = EditList.SectionManager,
+        LJCLocation = location
+      };
+      detail.LJCChange += SectionDetail_Change;
+      detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
+      detail.ShowDialog();
     }
 
     // Displays a detail dialog to edit an existing record.
@@ -212,19 +212,19 @@ namespace LJCGenTextEdit5
     {
       if (SectionGrid.CurrentRow is LJCGridRow row)
       {
-        //// Data from items.
-        //string name = row.LJCGetCellText("Name");
+        // Data from items.
+        string? name = row.LJCGetCellText("Name");
 
-        //var location = FormPoint.DialogScreenPoint(SectionGrid);
-        //var detail = new SectionDetail()
-        //{
-        //  LJCGenDataManager = EditList.GenDataManager,
-        //  LJCLocation = location,
-        //  LJCSectionName = name
-        //};
-        //detail.LJCChange += SectionDetail_Change;
-        //detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
-        //detail.ShowDialog();
+        var location = FormPoint.DialogScreenPoint(SectionGrid);
+        var detail = new SectionDetail()
+        {
+          SectionManager = EditList.SectionManager,
+          LJCLocation = location,
+          LJCSectionName = name
+        };
+        detail.LJCChange += SectionDetail_Change;
+        detail.LJCLocation = FormPoint.AdjustedLocation(detail, location);
+        detail.ShowDialog();
       }
     }
 
@@ -293,23 +293,28 @@ namespace LJCGenTextEdit5
     }
 
     // Adds new row or updates existing row with changes from the detail dialog.
-    internal void SectionDetail_Change(object sender, EventArgs e)
+    internal void SectionDetail_Change(object? sender, EventArgs e)
     {
-      //var detail = sender as SectionDetail;
-      //var record = detail.LJCRecord;
-      //if (record != null)
-      //{
-      //  if (detail.LJCIsUpdate)
-      //  {
-      //    RowUpdate(record);
-      //  }
-      //  else
-      //  {
-      //    var row = RowAdd(record);
-      //    SectionGrid.LJCSetCurrentRow(row, true);
-      //    EditList.TimedChange(Change.Section);
-      //  }
-      //}
+      if (sender is SectionDetail detail)
+      {
+        var record = detail.LJCRecord;
+        if (record != null)
+        {
+          if (detail.LJCIsUpdate)
+          {
+            RowUpdate(record);
+          }
+          else
+          {
+            var row = RowAdd(record);
+            if (row != null)
+            {
+              SectionGrid.LJCSetCurrentRow(row, true);
+              EditList.TimedChange(Change.Section);
+            }
+          }
+        }
+      }
     }
 
     // Creates the DataXML data.
