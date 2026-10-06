@@ -175,7 +175,8 @@ namespace LJCGenTextEdit5
         var location = FormPoint.DialogScreenPoint(ItemGrid);
         var detail = new ItemDetail()
         {
-          ItemManager = EditList.ItemManager,
+          SectionManager = SectionManager,
+          ItemManager = ItemManager,
           LJCLocation = location,
           LJCParentName = parentName
         };
