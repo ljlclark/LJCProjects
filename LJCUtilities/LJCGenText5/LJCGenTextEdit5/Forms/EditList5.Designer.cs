@@ -360,6 +360,7 @@
       // DataXMLButton
       // 
       DataXMLButton.ImageKey = "Ellipse.bmp";
+      DataXMLButton.ImageList = imageList1;
       DataXMLButton.Location = new Point(594, 6);
       DataXMLButton.Margin = new Padding(4, 6, 4, 6);
       DataXMLButton.Name = "DataXMLButton";
@@ -430,8 +431,8 @@
       dataGridViewCellStyle1.BackColor = SystemColors.Window;
       dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
       dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-      dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLight;
-      dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+      dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
       dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
       SectionGrid.DefaultCellStyle = dataGridViewCellStyle1;
       SectionGrid.EditMode = DataGridViewEditMode.EditOnEnter;
@@ -573,8 +574,8 @@
       // 
       ItemSplit.Panel2.Controls.Add(ReplacementHeading);
       ItemSplit.Panel2.Controls.Add(ReplacementGrid);
-      ItemSplit.Size = new Size(817, 417);
-      ItemSplit.SplitterDistance = 175;
+      ItemSplit.Size = new Size(817, 416);
+      ItemSplit.SplitterDistance = 174;
       ItemSplit.SplitterWidth = 5;
       ItemSplit.TabIndex = 0;
       // 
@@ -623,7 +624,7 @@
       ItemGrid.RowTemplate.Height = 28;
       ItemGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       ItemGrid.ShowCellToolTips = false;
-      ItemGrid.Size = new Size(817, 135);
+      ItemGrid.Size = new Size(817, 134);
       ItemGrid.TabIndex = 1;
       ItemGrid.Text = "LJCDataGrid";
       // 
@@ -764,7 +765,7 @@
       ReplacementGrid.RowTemplate.Height = 28;
       ReplacementGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       ReplacementGrid.ShowCellToolTips = false;
-      ReplacementGrid.Size = new Size(817, 185);
+      ReplacementGrid.Size = new Size(817, 184);
       ReplacementGrid.TabIndex = 1;
       ReplacementGrid.Text = "LJCDataGrid";
       // 
