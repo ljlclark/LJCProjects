@@ -29,6 +29,7 @@
     private void InitializeComponent()
     {
       components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditList));
       DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
       DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
       DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -51,6 +52,7 @@
       TemplateHelp = new ToolStripMenuItem();
       TemplateAbout = new ToolStripMenuItem();
       TemplateButton = new Button();
+      imageList1 = new ImageList(components);
       TemplateTextbox = new TextBox();
       TemplateLabel = new Label();
       DataTab = new TabPage();
@@ -309,12 +311,20 @@
       // TemplateButton
       // 
       TemplateButton.ImageKey = "Ellipse.bmp";
+      TemplateButton.ImageList = imageList1;
       TemplateButton.Location = new Point(594, 6);
       TemplateButton.Margin = new Padding(4, 6, 4, 6);
       TemplateButton.Name = "TemplateButton";
       TemplateButton.Size = new Size(31, 35);
       TemplateButton.TabIndex = 12;
       TemplateButton.UseVisualStyleBackColor = true;
+      // 
+      // imageList1
+      // 
+      imageList1.ColorDepth = ColorDepth.Depth32Bit;
+      imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+      imageList1.TransparentColor = Color.Magenta;
+      imageList1.Images.SetKeyName(0, "Ellipse.bmp");
       // 
       // TemplateTextbox
       // 
@@ -563,8 +573,8 @@
       // 
       ItemSplit.Panel2.Controls.Add(ReplacementHeading);
       ItemSplit.Panel2.Controls.Add(ReplacementGrid);
-      ItemSplit.Size = new Size(817, 420);
-      ItemSplit.SplitterDistance = 178;
+      ItemSplit.Size = new Size(817, 417);
+      ItemSplit.SplitterDistance = 175;
       ItemSplit.SplitterWidth = 5;
       ItemSplit.TabIndex = 0;
       // 
@@ -613,7 +623,7 @@
       ItemGrid.RowTemplate.Height = 28;
       ItemGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       ItemGrid.ShowCellToolTips = false;
-      ItemGrid.Size = new Size(817, 138);
+      ItemGrid.Size = new Size(817, 135);
       ItemGrid.TabIndex = 1;
       ItemGrid.Text = "LJCDataGrid";
       // 
@@ -754,7 +764,7 @@
       ReplacementGrid.RowTemplate.Height = 28;
       ReplacementGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       ReplacementGrid.ShowCellToolTips = false;
-      ReplacementGrid.Size = new Size(817, 188);
+      ReplacementGrid.Size = new Size(817, 185);
       ReplacementGrid.TabIndex = 1;
       ReplacementGrid.Text = "LJCDataGrid";
       // 
@@ -963,6 +973,7 @@
       // OutputButton
       // 
       OutputButton.ImageKey = "Ellipse.bmp";
+      OutputButton.ImageList = imageList1;
       OutputButton.Location = new Point(594, 6);
       OutputButton.Margin = new Padding(4, 6, 4, 6);
       OutputButton.Name = "OutputButton";
@@ -1159,6 +1170,7 @@
     internal System.Windows.Forms.ToolStripMenuItem HTMLXMLDecode;
     internal System.Windows.Forms.ToolStripMenuItem HTMLCodeDecode;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
+    private ImageList imageList1;
   }
 }
 
