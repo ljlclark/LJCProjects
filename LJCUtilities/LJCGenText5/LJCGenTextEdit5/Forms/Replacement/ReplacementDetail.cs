@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// SectionDetail5.cs
+// ReplacementDetail5.cs
 using LJCControls5;
 using LJCGenTextXAL5;
 using LJCNetCommon5;
@@ -8,15 +8,12 @@ using System.Text;
 
 namespace LJCGenTextEdit5
 {
-  // The Section detail dialog.
-  /// <include file='Doc/SectionDetail.xml'
-  ///  path='items/SectionDetail/*'/>
-  public partial class SectionDetail : Form
+  // The Replacement detail dialog.
+  /// <include file='Doc/ReplacementDetail.xml'
+  ///  path='items/ReplacementDetail/*'/>
+  public partial class ReplacementDetail : Form
   {
     #region Properties
-
-    // Gets or sets the GenData Manager reference.
-    internal SectionManager SectionManager { get; set; } = null!;
 
     // The help file name.
     internal string? LJCHelpFile
@@ -27,7 +24,7 @@ namespace LJCGenTextEdit5
         mHelpFile = value?.Trim();
       }
     }
-    private string? mHelpFile = null!;
+    private string? mHelpFile;
 
     // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
@@ -35,11 +32,25 @@ namespace LJCGenTextEdit5
     // The form position.
     internal Point LJCLocation { get; set; }
 
+    // Gets or sets the Parent ID value.
+    internal string? LJCParentName
+    {
+      get => mParentName;
+      set
+      {
+        mParentName = value?.Trim();
+      }
+    }
+    private string? mParentName;
+
     // Gets a reference to the record object.
-    internal Section LJCRecord { get; private set; } = null!;
+    internal Replacement LJCRecord { get; private set; } = null!;
+
+    // Gets or sets the Replacement Manager reference.
+    internal ReplacementManager ReplacementManager { get; set; } = null!;
 
     // Gets or sets the primary ID value.
-    internal string? LJCSectionName
+    internal string? LJCReplacementName
     {
       get => mName;
       set
@@ -47,7 +58,34 @@ namespace LJCGenTextEdit5
         mName = value?.Trim();
       }
     }
-    private string? mName = null!;
+    private string? mName;
+
+    // Gets or sets the Section ID value.
+    internal string? LJCSectionName
+    {
+      get => mSectionName;
+      set
+      {
+        mSectionName = value?.Trim();
+      }
+    }
+    private string? mSectionName;
+
+    // Gets or sets the Section Manager reference.
+    internal SectionManager SectionManager
+    {
+      get => mSectionManager;
+      set
+      {
+        mSectionManager = value;
+        if (mSectionManager != null)
+        {
+          Sections sections = mSectionManager.Load();
+          ReplacementManager = new ReplacementManager(sections);
+        }
+      }
+    }
+    private SectionManager mSectionManager = null!;
 
     // Gets or sets the Begin Color.
     private Color BeginColor { get; set; }
@@ -61,7 +99,7 @@ namespace LJCGenTextEdit5
     private string mOriginalName = null!;
 
     // The Change event.
-    /// <include file='../../LJCGenDoc/Common/Detail.xml'
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='items/LJCChange/*'/>
     public event EventHandler<EventArgs> LJCChange = null!;
     #endregion
@@ -71,7 +109,7 @@ namespace LJCGenTextEdit5
     // Initializes an object instance.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
     ///  path='items/DefaultConstructor/*'/>
-    public SectionDetail()
+    public ReplacementDetail()
     {
       InitializeComponent();
 
@@ -84,7 +122,7 @@ namespace LJCGenTextEdit5
     #region Form Event Handlers
 
     // Configures the form and loads the initial control data.
-    private void SectionDetail_Load(object sender, EventArgs e)
+    private void ReplacementDetail_Load(object sender, EventArgs e)
     {
       AcceptButton = OKButton;
       CancelButton = FormCancelButton;
@@ -111,43 +149,52 @@ namespace LJCGenTextEdit5
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
-      Text = "Section Detail";
-      if (LJC.HasText(LJCSectionName))
+      Text = "Replacement Detail";
+      if (LJC.HasText(LJCSectionName)
+        && LJC.HasText(LJCParentName)
+        && LJC.HasText(LJCReplacementName))
       {
         Text += " - Edit";
         LJCIsUpdate = true;
-        mOriginalName = LJCSectionName;
-        var dataRecord = SectionManager.Retrieve(LJCSectionName);
+        mOriginalName = LJCReplacementName;
+        var dataRecord = ReplacementManager.Retrieve(LJCSectionName, LJCParentName
+          , LJCReplacementName);
         if (dataRecord != null)
         {
           GetRecordValues(dataRecord);
         }
+        ValueTextbox.Select();
       }
       else
       {
         Text += " - New";
         LJCIsUpdate = false;
-        LJCRecord = new Section();
+        LJCRecord = new Replacement();
+        ParentNameText.Text = LJCParentName;
+        NameText.Select();
       }
       Cursor = Cursors.Default;
     }
 
     // Gets the record values and copies them to the controls.
-    private void GetRecordValues(Section dataRecord)
+    private void GetRecordValues(Replacement dataRecord)
     {
       if (dataRecord != null)
       {
-        NameTextbox.Text = dataRecord.Name;
+        ParentNameText.Text = LJCParentName;
+        NameText.Text = dataRecord.Name;
+        ValueTextbox.Text = dataRecord.Value;
       }
     }
 
     // Creates and returns a record object with the data from
     // the controls.
-    private Section SetRecordValues()
+    private Replacement SetRecordValues()
     {
-      Section retValue = new()
+      Replacement retValue = new()
       {
-        Name = FormCommon.SetString(NameTextbox.Text),
+        Name = NameText.Text.Trim(),
+        Value = ValueTextbox.Text.Trim()
       };
       return retValue;
     }
@@ -155,7 +202,7 @@ namespace LJCGenTextEdit5
     // Saves the data.
     private bool DataSave()
     {
-      Section? lookupRecord;
+      Replacement? lookupRecord;
       string title;
       string message;
       bool retValue = true;
@@ -163,45 +210,55 @@ namespace LJCGenTextEdit5
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
 
-      // Lookup record on unique key.
-      lookupRecord = SectionManager.Retrieve(LJCRecord.Name);
-      //if (IsDuplicate(lookupRecord, LJCRecord))
-      if (IsDuplicate(lookupRecord))
+      while (true)
       {
-        retValue = false;
-        title = "Data Entry Error";
-        message = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-      }
+        if (!LJC.HasText(LJCSectionName)
+          || !LJC.HasText(LJCParentName))
+        {
+          Cursor = Cursors.Default;
+          break;
+        }
 
-      if (retValue)
-      {
+        // Lookup record on unique key.
+        lookupRecord = ReplacementManager.Retrieve(LJCSectionName
+          , LJCParentName, LJCRecord.Name);
+        if (IsDuplicate(lookupRecord))
+        {
+          retValue = false;
+          title = "Data Entry Error";
+          message = "The record already exists.";
+          Cursor = Cursors.Default;
+          MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+          break;
+        }
+
         if (LJCIsUpdate)
         {
           // Update record on primary key.
-          lookupRecord = SectionManager.Retrieve(mOriginalName);
+          lookupRecord = ReplacementManager.Retrieve(LJCSectionName
+          , LJCParentName, mOriginalName);
           if (lookupRecord != null)
           {
             lookupRecord.Name = LJCRecord.Name;
+            lookupRecord.Value = LJCRecord.Value;
 
-            // *** Begin *** Add 9/13/26
             // Sort if name is changed.
             if (!string.Equals(LJCRecord.Name, mOriginalName
               , StringComparison.OrdinalIgnoreCase))
             {
-              var sections = SectionManager.Load();
-              sections.Sort();
+              var replacements
+                = ReplacementManager.Load(LJCSectionName, LJCParentName);
+              replacements?.Sort();
             }
-            // *** End ***
           }
         }
         else
         {
           // Add new record.
-          SectionManager.Add(LJCRecord);
+          ReplacementManager.Add(LJCSectionName, LJCParentName, LJCRecord);
         }
         SectionManager.Save();
+        break;
       }
       Cursor = Cursors.Default;
       return retValue;
@@ -211,8 +268,8 @@ namespace LJCGenTextEdit5
     #region Private Methods
 
     // Check for duplicate unique key.
-    //private bool IsDuplicate(Section lookupRecord, Section currentRecord)
-    private bool IsDuplicate(Section? lookupRecord)
+    //private bool IsDuplicate(Replacement lookupRecord, Replacement currentRecord)
+    private bool IsDuplicate(Replacement? lookupRecord)
     {
       bool retValue = false;
 
@@ -246,10 +303,15 @@ namespace LJCGenTextEdit5
       builder = new StringBuilder(64);
       builder.AppendLine("Invalid or Missing Data:");
 
-      if (!LJC.HasText(NameTextbox.Text))
+      if (!LJC.HasText(NameText.Text))
       {
         retValue = false;
         builder.AppendLine($"  {NameLabel.Text}");
+      }
+      if (!LJC.HasText(ValueTextbox.Text))
+      {
+        retValue = false;
+        builder.AppendLine($"  {ValueLabel.Text}");
       }
 
       if (retValue == false)
@@ -273,10 +335,12 @@ namespace LJCGenTextEdit5
 
       // Initialize Class Data.
       //NameLabel.BackColor = BeginColor;
+      //ValueLabel.BackColor = BeginColor;
 
       // Set control values.
       SetNoSpace();
-      NameTextbox.MaxLength = 60;
+      NameText.MaxLength = 60;
+      ValueTextbox.MaxLength = 100;
 
       // Load control data.
 
@@ -286,8 +350,8 @@ namespace LJCGenTextEdit5
     // Sets the NoSpace events.
     private void SetNoSpace()
     {
-      NameTextbox.KeyPress += FormCommon.TextNoSpaceKeyPress;
-      NameTextbox.TextChanged += FormCommon.TextNoSpaceChanged;
+      NameText.KeyPress += FormCommon.TextNoSpaceKeyPress;
+      NameText.TextChanged += FormCommon.TextNoSpaceChanged;
     }
     #endregion
 
@@ -297,20 +361,20 @@ namespace LJCGenTextEdit5
     private void DetailMenuHelp_Click(object sender, EventArgs e)
     {
       Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
-        , @"Data\Section\SectionDetail.html");
+        , @"Data\Replacement\ReplacementDetail.html");
     }
     #endregion
 
     #region Control Event Handlers
 
     // Handles the control keys.
-    private void SectionDetail_KeyDown(object sender, KeyEventArgs e)
+    private void ReplacementDetail_KeyDown(object sender, KeyEventArgs e)
     {
       switch (e.KeyCode)
       {
         case Keys.F1:
           Help.ShowHelp(this, LJCHelpFile, HelpNavigator.Topic
-            , @"Data\Section\SectionDetail.html");
+            , @"Data\Replacement\ReplacementDetail.html");
           break;
       }
     }

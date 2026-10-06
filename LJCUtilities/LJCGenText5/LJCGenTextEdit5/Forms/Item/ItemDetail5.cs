@@ -8,13 +8,26 @@ using System.Text;
 
 namespace LJCGenTextEdit5
 {
-  /// <summary>The Item detail dialog.</summary>
+  // The Item detail dialog.
+  /// <include file='Doc/ItemDetail.xml'
+  ///  path='items/ItemDetail/*'/>
   public partial class ItemDetail : Form
   {
     #region Properties
 
     // Gets or sets the Item Manager reference.
     internal RepeatItemManager ItemManager { get; set; } = null!;
+
+    // The help file name.
+    internal string? LJCHelpFile
+    {
+      get => mHelpFile;
+      set
+      {
+        mHelpFile = value?.Trim();
+      }
+    }
+    private string? mHelpFile;
 
     // Gets the LJCIsUpdate value.
     internal bool LJCIsUpdate { get; private set; }
@@ -47,17 +60,6 @@ namespace LJCGenTextEdit5
     // Gets a reference to the record object.
     internal RepeatItem LJCRecord { get; private set; } = null!;
 
-    // The help file name.
-    internal string? LJCHelpFile
-    {
-      get => mHelpFile;
-      set
-      {
-        mHelpFile = value?.Trim();
-      }
-    }
-    private string? mHelpFile;
-
     // Gets or sets the GenData Manager reference.
     internal SectionManager SectionManager { get; set; } = null!;
 
@@ -72,7 +74,9 @@ namespace LJCGenTextEdit5
 
     private string mOriginalName = null!;
 
-    /// <summary>The Change event.</summary>
+    // The Change event.
+    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    ///  path='items/LJCChange/*'/>
     public event EventHandler<EventArgs> LJCChange = null!;
     #endregion
 
@@ -106,8 +110,6 @@ namespace LJCGenTextEdit5
     }
 
     // Paint the form background.
-    /// <include file='../../LJCGenDoc/Common/Detail.xml'
-    ///  path='items/OnPaintBackground/*'/>
     protected override void OnPaintBackground(PaintEventArgs e)
     {
       base.OnPaintBackground(e);
@@ -120,8 +122,6 @@ namespace LJCGenTextEdit5
     #region Data Methods
 
     // Retrieves the initial control data.
-    /// <include file='../../LJCGenDoc/Common/Detail.xml'
-    ///  path='items/DataRetrieve/*'/>
     private void DataRetrieve()
     {
       Cursor = Cursors.WaitCursor;
@@ -149,8 +149,6 @@ namespace LJCGenTextEdit5
     }
 
     // Gets the record values and copies them to the controls.
-    /// <include file='../../LJCGenDoc/Common/Detail.xml'
-    ///  path='items/GetRecordValues/*'/>
     private void GetRecordValues(RepeatItem dataRecord)
     {
       if (dataRecord != null)
@@ -162,8 +160,6 @@ namespace LJCGenTextEdit5
 
     // Creates and returns a record object with the data from
     // the controls.
-    /// <include file='../../LJCGenDoc/Common/Detail.xml'
-    ///  path='items/SetRecordValues/*'/>
     private RepeatItem SetRecordValues()
     {
       RepeatItem retValue = new()
@@ -174,8 +170,6 @@ namespace LJCGenTextEdit5
     }
 
     // Saves the data.
-    /// <include file='../../LJCGenDoc/Common/Detail.xml'
-    ///  path='items/DataSave/*'/>
     private bool DataSave()
     {
       RepeatItem? lookupRecord;
@@ -186,50 +180,51 @@ namespace LJCGenTextEdit5
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
 
-      // Lookup record on unique key.
-      lookupRecord = ItemManager.Retrieve(LJCParentName, LJCRecord.Name);
-      if (IsDuplicate(lookupRecord))
+      while (true)
       {
-        retValue = false;
-        title = "Data Entry Error";
-        message = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-      }
+        if (!LJC.HasText(LJCParentName))
+        {
+          Cursor = Cursors.Default;
+          break;
+        }
 
-      if (retValue)
-      {
+        // Lookup record on unique key.
+        lookupRecord = ItemManager.Retrieve(LJCParentName, LJCRecord.Name);
+        if (IsDuplicate(lookupRecord))
+        {
+          retValue = false;
+          title = "Data Entry Error";
+          message = "The record already exists.";
+          Cursor = Cursors.Default;
+          MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+          break;
+        }
+
         if (LJCIsUpdate)
         {
           // Update record on primary key.
-          lookupRecord = ItemManager.Retrieve(LJCParentName, mOriginalName);
+          //lookupRecord = ItemManager.Retrieve(LJCParentName, mOriginalName);
+          lookupRecord = ItemManager.Retrieve(LJCParentName, LJCRecord.Name);
           if (lookupRecord != null)
           {
             lookupRecord.Name = LJCRecord.Name;
 
-            // *** Begin *** Add 9/13/26
             // Sort if name is changed.
             if (!string.Equals(LJCRecord.Name, mOriginalName
               , StringComparison.OrdinalIgnoreCase))
             {
-              if (LJC.HasText(LJCParentName))
-              {
-                var repeatItems = ItemManager.Load(LJCParentName);
-                repeatItems?.Sort();
-              }
+              var repeatItems = ItemManager.Load(LJCParentName);
+              repeatItems?.Sort();
             }
-            // *** End ***
           }
         }
         else
         {
           // Add new record.
-          if (LJC.HasText(LJCParentName))
-          {
-            ItemManager.Add(LJCParentName, LJCRecord);
-          }
+          ItemManager.Add(LJCParentName, LJCRecord);
         }
         SectionManager.Save();
+        break;
       }
       Cursor = Cursors.Default;
       return retValue;
@@ -264,8 +259,6 @@ namespace LJCGenTextEdit5
     }
 
     // Validates the data.
-    /// <include file='../../LJCGenDoc/Common/Detail.xml'
-    ///  path='items/IsValid/*'/>
     private bool IsValid()
     {
       StringBuilder builder;
@@ -295,8 +288,6 @@ namespace LJCGenTextEdit5
     #region Setup Methods
 
     // Configures the controls and loads the selection control data.
-    /// <include file='../../LJCGenDoc/Common/Detail.xml'
-    ///  path='items/InitializeControls/*'/>
     private void InitializeControls()
     {
       BeginColor = Color.AliceBlue;
@@ -364,7 +355,7 @@ namespace LJCGenTextEdit5
       Close();
     }
 
-    /// <summary>Fires the Change event.</summary>
+    // Fires the Change event.
     protected void LJCOnChange()
     {
       LJCChange?.Invoke(this, new EventArgs());
