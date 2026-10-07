@@ -76,6 +76,8 @@ namespace LJCGenTextEdit5
       InitializeComponent();
 
       // Initialize property values.
+      BeginColor = Color.AliceBlue;
+      EndColor = Color.SkyBlue;
       LJCHelpFile = "GenTextEdit.chm";
       LJCIsUpdate = false;
     }
@@ -163,20 +165,20 @@ namespace LJCGenTextEdit5
       Cursor = Cursors.WaitCursor;
       LJCRecord = SetRecordValues();
 
-      // Lookup record on unique key.
-      lookupRecord = SectionManager.Retrieve(LJCRecord.Name);
-      //if (IsDuplicate(lookupRecord, LJCRecord))
-      if (IsDuplicate(lookupRecord))
+      while (true)
       {
-        retValue = false;
-        title = "Data Entry Error";
-        message = "The record already exists.";
-        Cursor = Cursors.Default;
-        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-      }
+        // Lookup record on unique key.
+        lookupRecord = SectionManager.Retrieve(LJCRecord.Name);
+        //if (IsDuplicate(lookupRecord, LJCRecord))
+        if (IsDuplicate(lookupRecord))
+        {
+          retValue = false;
+          title = "Data Entry Error";
+          message = "The record already exists.";
+          MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+          break;
+        }
 
-      if (retValue)
-      {
         if (LJCIsUpdate)
         {
           // Update record on primary key.
@@ -185,15 +187,12 @@ namespace LJCGenTextEdit5
           {
             lookupRecord.Name = LJCRecord.Name;
 
-            // *** Begin *** Add 9/13/26
             // Sort if name is changed.
-            if (!string.Equals(LJCRecord.Name, mOriginalName
-              , StringComparison.OrdinalIgnoreCase))
+            if (!LJC.IsEqual(LJCRecord.Name, mOriginalName))
             {
               var sections = SectionManager.Load();
               sections.Sort();
             }
-            // *** End ***
           }
         }
         else
@@ -202,6 +201,7 @@ namespace LJCGenTextEdit5
           SectionManager.Add(LJCRecord);
         }
         SectionManager.Save();
+        break;
       }
       Cursor = Cursors.Default;
       return retValue;
@@ -267,12 +267,8 @@ namespace LJCGenTextEdit5
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
-      BeginColor = Color.AliceBlue;
-      //EndColor = Color.LightSkyBlue;
-      EndColor = Color.SkyBlue;
-
       // Initialize Class Data.
-      //NameLabel.BackColor = BeginColor;
+      //FormCommon.SetLabelsBackColor(Controls, BeginColor);
 
       // Set control values.
       SetNoSpace();

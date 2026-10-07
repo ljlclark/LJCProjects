@@ -84,12 +84,14 @@ namespace LJCGenTextEdit5
 
     // Initializes an object instance.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='items/Constructor/*'/>
     public ItemDetail()
     {
       InitializeComponent();
 
       // Initialize property values.
+      BeginColor = Color.AliceBlue;
+      EndColor = Color.SkyBlue;
       LJCHelpFile = "GenTextEdit.chm";
       LJCIsUpdate = false;
     }
@@ -184,7 +186,6 @@ namespace LJCGenTextEdit5
       {
         if (!LJC.HasText(LJCParentName))
         {
-          Cursor = Cursors.Default;
           break;
         }
 
@@ -195,7 +196,6 @@ namespace LJCGenTextEdit5
           retValue = false;
           title = "Data Entry Error";
           message = "The record already exists.";
-          Cursor = Cursors.Default;
           MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
           break;
         }
@@ -203,15 +203,13 @@ namespace LJCGenTextEdit5
         if (LJCIsUpdate)
         {
           // Update record on primary key.
-          //lookupRecord = ItemManager.Retrieve(LJCParentName, mOriginalName);
-          lookupRecord = ItemManager.Retrieve(LJCParentName, LJCRecord.Name);
+          lookupRecord = ItemManager.Retrieve(LJCParentName, mOriginalName);
           if (lookupRecord != null)
           {
             lookupRecord.Name = LJCRecord.Name;
 
             // Sort if name is changed.
-            if (!string.Equals(LJCRecord.Name, mOriginalName
-              , StringComparison.OrdinalIgnoreCase))
+            if (!LJC.IsEqual(LJCRecord.Name, mOriginalName))
             {
               var repeatItems = ItemManager.Load(LJCParentName);
               repeatItems?.Sort();
@@ -290,12 +288,8 @@ namespace LJCGenTextEdit5
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
-      BeginColor = Color.AliceBlue;
-      //EndColor = Color.LightSkyBlue;
-      EndColor = Color.SkyBlue;
-
       // Initialize Class Data.
-      //NameLabel.BackColor = BeginColor;
+      //FormCommon.SetLabelsBackColor(Controls, BeginColor);
 
       // Set control values.
       SetNoSpace();

@@ -1,6 +1,6 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// CreateDataDetail.cs
+// CreateDataDetail5.cs
 using LJCControls5;
 using LJCDataAccessConfig5;
 using LJCDBClientLib5;
@@ -42,7 +42,6 @@ namespace LJCGenTextEdit5
 
       // Initialize property values.
       BeginColor = Color.AliceBlue;
-      //EndColor = Color.LightSkyBlue;
       EndColor = Color.SkyBlue;
     }
     #endregion
@@ -54,6 +53,7 @@ namespace LJCGenTextEdit5
     {
       AcceptButton = OKButton;
       CancelButton = FormCancelButton;
+
       InitializeControls();
       GetRecordValues();
       CenterToParent();
@@ -96,9 +96,12 @@ namespace LJCGenTextEdit5
     // Configures the controls and loads the selection control data.
     private void InitializeControls()
     {
+      Cursor = Cursors.WaitCursor;
+
+      // Initialize Class Data.
+      //FormCommon.SetLabelsBackColor(Controls, BeginColor);
+
       // Set control values.
-      //ConfigNameLabel.BackColor = BeginColor;
-      //TableNameLabel.BackColor = BeginColor;
 
       // Load control data.
       mDataConfigs = [];

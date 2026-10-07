@@ -215,7 +215,6 @@ namespace LJCGenTextEdit5
         if (!LJC.HasText(LJCSectionName)
           || !LJC.HasText(LJCParentName))
         {
-          Cursor = Cursors.Default;
           break;
         }
 
@@ -227,7 +226,6 @@ namespace LJCGenTextEdit5
           retValue = false;
           title = "Data Entry Error";
           message = "The record already exists.";
-          Cursor = Cursors.Default;
           MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
           break;
         }
@@ -243,8 +241,7 @@ namespace LJCGenTextEdit5
             lookupRecord.Value = LJCRecord.Value;
 
             // Sort if name is changed.
-            if (!string.Equals(LJCRecord.Name, mOriginalName
-              , StringComparison.OrdinalIgnoreCase))
+            if (!LJC.IsEqual(LJCRecord.Name, mOriginalName))
             {
               var replacements
                 = ReplacementManager.Load(LJCSectionName, LJCParentName);
@@ -330,12 +327,10 @@ namespace LJCGenTextEdit5
     private void InitializeControls()
     {
       BeginColor = Color.AliceBlue;
-      //EndColor = Color.LightSkyBlue;
       EndColor = Color.SkyBlue;
 
       // Initialize Class Data.
-      //NameLabel.BackColor = BeginColor;
-      //ValueLabel.BackColor = BeginColor;
+      //FormCommon.SetLabelsBackColor(Controls, BeginColor);
 
       // Set control values.
       SetNoSpace();
