@@ -33,7 +33,7 @@ namespace LJCDataUtilityDAL5
       _NewName = null;
       ModuleName = null;
 
-      ChangedNames = [];
+      ChangedNames = new LJCChangedNames();
       _OriginalValues = new OriginalValues();
       LJCSetOriginalValues();
     }

@@ -18,7 +18,7 @@ namespace LJCDataSiteDAL5
     ///  path='members/DefaultConstructor/*'/>
     public DataEntrySite()
     {
-      ChangedNames = [];
+      ChangedNames = new LJCChangedNames();
     }
 
     // The Copy constructor.
@@ -26,7 +26,7 @@ namespace LJCDataSiteDAL5
     ///  path='members/CopyConstructor/*'/>
     public DataEntrySite(DataEntrySite item)
     {
-      ChangedNames = [];
+      ChangedNames = new LJCChangedNames();
       DataEntryID = item.DataEntryID;
       DataEntrySiteID = item.DataEntrySiteID;
       DataSiteID = item.DataSiteID;

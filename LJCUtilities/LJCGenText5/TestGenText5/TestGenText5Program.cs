@@ -1,4 +1,6 @@
-﻿using LJCGenTextLib5;
+﻿// Copyright (c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// TestGenText5Program.cs
 using LJCGenTextXAL5;
 using LJCNetCommon5;
 

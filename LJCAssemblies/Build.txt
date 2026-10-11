@@ -1,4 +1,4 @@
------------------ 7 - LJCDBServiceLib5 ---------------  
+----------------- 8 - LJCDBServiceLib5 ---------------  
 LJCDBServiceLib5 
 *** LJCUtilities\LJCDBClient5\External ***
 copy ..\..\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\bin\Debug\net8.0\LJCNetCommon5.dll LJCUtilities\LJCDBClient5\External

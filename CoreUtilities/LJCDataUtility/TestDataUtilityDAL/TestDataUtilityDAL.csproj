@@ -65,23 +65,23 @@
   <ItemGroup>
     <Compile Include="DataUtilityDALProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestTableKeyManager.cs" />
-    <Compile Include="TestDataKeyManager.cs" />
-    <Compile Include="TestDataColumns.cs" />
-    <Compile Include="TestDataKeys.cs" />
-    <Compile Include="TestDataModuleManager.cs" />
-    <Compile Include="TestDataColumnManager.cs" />
-    <Compile Include="TestTableKeys.cs" />
-    <Compile Include="TestTableKey.cs" />
-    <Compile Include="TestDataTables.cs" />
-    <Compile Include="TestDataModules.cs" />
-    <Compile Include="TestDataTableManager.cs" />
+    <Compile Include="TableKey\TestTableKeyManager.cs" />
+    <Compile Include="DataKey\TestDataKeyManager.cs" />
+    <Compile Include="DataUtilColumn\TestDataColumns.cs" />
+    <Compile Include="DataKey\TestDataKeys.cs" />
+    <Compile Include="DataModule\TestDataModuleManager.cs" />
+    <Compile Include="DataUtilColumn\TestDataColumnManager.cs" />
+    <Compile Include="TableKey\TestTableKeys.cs" />
+    <Compile Include="TableKey\TestTableKey.cs" />
+    <Compile Include="DataUtilTable\TestDataTables.cs" />
+    <Compile Include="DataModule\TestDataModules.cs" />
+    <Compile Include="DataUtilTable\TestDataTableManager.cs" />
     <Compile Include="TestData2\TestDataTables2.cs" />
     <Compile Include="TestData2\TestDataTable2.cs" />
-    <Compile Include="TestDataModule.cs" />
-    <Compile Include="TestDataUtilColumn.cs" />
-    <Compile Include="TestDataKey.cs" />
-    <Compile Include="TestDataUtilTable.cs" />
+    <Compile Include="DataModule\TestDataModule.cs" />
+    <Compile Include="DataUtilColumn\TestDataUtilColumn.cs" />
+    <Compile Include="DataKey\TestDataKey.cs" />
+    <Compile Include="DataUtilTable\TestDataUtilTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

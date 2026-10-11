@@ -39,7 +39,7 @@ namespace LJCDataUtilityDAL5
       _TypeName = "";
       DataTableName = null;
 
-      ChangedNames = [];
+      ChangedNames = new LJCChangedNames();
       _OriginalValues = new OriginalValues();
       LJCSetOriginalValues();
     }

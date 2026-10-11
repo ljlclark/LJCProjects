@@ -26,7 +26,7 @@ namespace LJCDataUtilityDAL5
       _Name = "";
       _Description = "";
 
-      ChangedNames = [];
+      ChangedNames = new LJCChangedNames();
       _OriginalValues = new OriginalValues();
       LJCSetOriginalValues();
     }

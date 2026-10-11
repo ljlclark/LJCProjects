@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DataUtilColumn\TestDataColumns.cs" />
+    <Compile Remove="DataUtilTable\TestDataTableManager.cs" />
+    <Compile Remove="DataUtilTable\TestDataTables.cs" />
+    <Compile Remove="DataUtilTable\TestDataUtilTable.cs" />
+    <Compile Remove="TableKey\TestTableKey.cs" />
+    <Compile Remove="TableKey\TestTableKeyManager.cs" />
+    <Compile Remove="TableKey\TestTableKeys.cs" />
+    <Compile Remove="TestData2\TestDataTable2.cs" />
+    <Compile Remove="TestData2\TestDataTables2.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LJCDataUtilityDAL5\LJCDataUtilityDAL5.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LJCDataAccess5">
+      <HintPath>..\External\LJCDataAccess5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDataAccessConfig5">
+      <HintPath>..\External\LJCDataAccessConfig5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBClientLib5">
+      <HintPath>..\..\LJCGenText5\External\LJCDBClientLib5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBDataAccess5">
+      <HintPath>..\External\LJCDBDataAccess5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBMessage5">
+      <HintPath>..\External\LJCDBMessage5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCNetCommon5">
+      <HintPath>..\External\LJCNetCommon5.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataUtilTable\" />
+    <Folder Include="TableKey\" />
+    <Folder Include="TestData2\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.1.1" />
+  </ItemGroup>
+
+</Project>

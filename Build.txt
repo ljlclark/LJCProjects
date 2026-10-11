@@ -1,0 +1,887 @@
+----------------- 1 - LJCRegionManager ------------  
+LJCRegionManager 
+*** SampleApps\LJCRegionManager\External ***
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+
+*** SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug ***
+        1 file(s) copied.
+
+*** SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug ***
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+- 
+----------------- 2 - LJCUnitMeasure --------------  
+LJCUnitMeasure 
+*** SampleApps\LJCUnitMeasure\External ***
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+
+*** SampleApps\LJCUnitMeasure\LJCUnitMeasure\bin\Debug ***
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+- 
+----------------- 3 - CVRManager ------------  
+CVRManager 
+*** SampleApps\CVRManager\External ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\CVRManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\CVRManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll SampleApps\CVRManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll SampleApps\CVRManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll SampleApps\CVRManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll SampleApps\CVRManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll SampleApps\CVRManager\External
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.dll SampleApps\CVRManager\External
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.exe SampleApps\CVRManager\External
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionItem\bin\Debug\LJCRegionItem.dll SampleApps\CVRManager\External
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.exe SampleApps\CVRManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll SampleApps\CVRManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll SampleApps\CVRManager\External
+        1 file(s) copied.
+
+*** SampleApps\CVRManager\CVRManager\bin\Debug ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.dll SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.exe SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionItem\bin\Debug\LJCRegionItem.dll SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.exe SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.exe.config SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCUnitMeasure\LJCUnitMeasureDAL\bin\Debug\LJCUnitMeasureDAL.dll SampleApps\CVRManager\CVRManager\bin\Debug
+        1 file(s) copied.
+- 
+----------------- 4 - LJCFacilityManager ----------  
+LJCFacilityManager 
+*** SampleApps\LJCFacilityManager\External ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.exe SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.exe SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLib\bin\Debug\LJCSQLUtilLib.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLibDAL\bin\Debug\LJCSQLUtilLibDAL.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug\LJCViewBuilder.exe SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug\LJCViewEditor.exe SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll SampleApps\LJCFacilityManager\External
+        1 file(s) copied.
+
+*** SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.dll SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.exe SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.exe SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug
+        1 file(s) copied.
+
+*** SampleApps\LJCFacilityManager\FacilityForm\bin\Debug ***
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml SampleApps\LJCFacilityManager\FacilityForm\bin\Debug
+        1 file(s) copied.
+
+*** SampleApps\LJCFacilityManager\ModuleHost\bin\Debug ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.dll SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCFacilityManager\LJCFacilityManager\bin\Debug\FacilityManager.chm SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.dll SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLib\bin\Debug\LJCSQLUtilLib.dll SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLibDAL\bin\Debug\LJCSQLUtilLibDAL.dll SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug\LJCViewBuilder.exe SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug\LJCViewBuilder.exe.config SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug\LJCViewEditor.exe SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug\LJCViewEditor.exe.config SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCViewEditor\LJCViewEditorDAL\bin\Debug\LJCViewEditorDAL.dll SampleApps\LJCFacilityManager\ModuleHost\bin\Debug
+        1 file(s) copied.
+
+*** SampleApps\LJCFacilityManager\ModuleHost\bin\Debug ***
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+- 
+----------------- 5 - LJCDocAppManager ------------  
+LJCDocAppManager 
+*** SampleApps\LJCDocAppManager\External ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.dll SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.exe SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.exe SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll SampleApps\LJCDocAppManager\External
+        1 file(s) copied.
+
+*** SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\Output\*.* SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+The system cannot find the path specified.
+copy SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.dll SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.exe SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.exe SampleApps\LJCDocAppManager\LJCDocAppManager\bin\Debug
+        1 file(s) copied.
+- 
+----------------- 6 - LJCTextInvasion -------------  
+LJCTextInvasion 
+*** SampleApps\LJCTextInvasion\External ***
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+- 
+----------------- 7 - LJCDocGroupEditor.sln -------  
+LJCDocGroupEditor 
+- 
+----------------- 8 - LJCDataTransform ------------  
+LJCDataTransform 
+*** SampleApps\LJCDataTransform\External ***
+copy CoreUtilities\LJCAddressParserLib\LJCAddressParserLib\bin\Debug\LJCAddressParserLib.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCTextDataReader\LJCTextDataReaderLib\bin\Debug\LJCTextDataReaderLib.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll SampleApps\LJCDataTransform\External
+        1 file(s) copied.
+
+*** SampleApps\LJCDataTransform\LJCDataTransformProcess\bin\Debug ***
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml SampleApps\LJCDataTransform\LJCDataTransformProcess\bin\Debug
+        1 file(s) copied.
+
+*** SampleApps\LJCDataTransform\LJCTransformManager\bin\Debug ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\LJCDataTransform\LJCTransformManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml SampleApps\LJCDataTransform\LJCTransformManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\LJCDataTransform\LJCTransformManager\bin\Debug
+        1 file(s) copied.
+
+*** SampleApps\LJCDataTransform\ModuleHost\bin\Debug ***
+copy CoreUtilities\LJCAddressParserLib\LJCAddressParserLib\bin\Debug\LJCAddressParserLib.dll SampleApps\LJCDataTransform\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\LJCDataTransform\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\LJCDataTransform\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll SampleApps\LJCDataTransform\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll SampleApps\LJCDataTransform\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll SampleApps\LJCDataTransform\ModuleHost\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll SampleApps\LJCDataTransform\ModuleHost\bin\Debug
+        1 file(s) copied.
+
+*** SampleApps\LJCDataTransform\TransformServiceTest\bin\Debug ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\LJCDataTransform\TransformServiceTest\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\LJCDataTransform\TransformServiceTest\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml SampleApps\LJCDataTransform\TransformServiceTest\bin\Debug
+        1 file(s) copied.
+
+*** SampleApps\LJCDataTransform\ModuleHost\bin\Debug ***
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+- 
+----------------- 9 - LJCAppManager ---------------  
+LJCAppManager 
+*** SampleApps\LJCAppManager\External ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\LJCAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\LJCAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll SampleApps\LJCAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll SampleApps\LJCAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll SampleApps\LJCAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll SampleApps\LJCAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll SampleApps\LJCAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll SampleApps\LJCAppManager\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll SampleApps\LJCAppManager\External
+        1 file(s) copied.
+
+*** SampleApps\LJCAppManager\LJCAppManager\bin\Debug ***
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCAddressParserLib\LJCAddressParserLib\bin\Debug\LJCAddressParserLib.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCDataTransform\LJCCommonModuleLib\bin\Debug\LJCCommonModuleLib.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCDataTransform\LJCDataTransformDAL\bin\Debug\LJCDataTransformDAL.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCDataTransform\LJCDataTransformProcess\bin\Debug\LJCDataTransformProcess.exe SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCDataTransform\LJCDataTransformProcess\bin\Debug\LJCDataTransformProcess.exe.config SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCDataTransform\LJCTransformManager\bin\Debug\LJCTransformManager.exe SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCDataTransform\LJCTransformManager\bin\Debug\LJCTransformManager.exe.config SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCDataTransform\TransformServiceTest\bin\Debug\TransformServiceTest.exe SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCFacilityManager\Output\*.* SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+SampleApps\LJCFacilityManager\Output\LJCFacilityManager.exe
+SampleApps\LJCFacilityManager\Output\LJCFacilityManager.exe.config
+SampleApps\LJCFacilityManager\Output\LJCFacilityManager.pdb
+SampleApps\LJCFacilityManager\Output\LJCFacilityManagerDAL.dll
+SampleApps\LJCFacilityManager\Output\LJCFacilityManagerDAL.pdb
+        5 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionDAL\bin\Debug\LJCRegionDAL.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionForm\bin\Debug\LJCRegionForm.exe SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.exe SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy SampleApps\LJCRegionManager\LJCRegionManager\bin\Debug\LJCRegionManager.exe.config SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLib\bin\Debug\LJCSQLUtilLib.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLib\bin\Debug\LJCSQLUtilLibDAL.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCTextDataReader\LJCTextDataReaderLib\bin\Debug\LJCTextDataReaderLib.dll SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug\LJCViewBuilder.exe SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug\LJCViewBuilder.exe.config SampleApps\LJCAppManager\LJCAppManager\bin\Debug
+        1 file(s) copied.
+- 
+----------------- 10 - LJCFacilityManagerSetup -----  
+LJCFacilityManagerSetup 
+*** SampleApps\LJCFacilityManagerSetup\External ***
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+The system cannot find the path specified.
+        1 file(s) copied.
+
+*** SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup\bin\Debug ***
+        1 file(s) copied.
+        1 file(s) copied.
+
+*** SampleApps\LJCFacilityManagerSetup\LJCFacilityManagerSetup\InstallResources ***
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+The system cannot find the path specified.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+- 
+----------------- 11 - Genealogy -------------------  
+Genealogy 
+*** SampleApps\Genealogy\External ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\Genealogy\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\Genealogy\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll SampleApps\Genealogy\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll SampleApps\Genealogy\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll SampleApps\Genealogy\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll SampleApps\Genealogy\External
+The system cannot find the file specified.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll SampleApps\Genealogy\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll SampleApps\Genealogy\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCTextDataReader\LJCTextDataReaderLib\bin\Debug\LJCTextDataReaderLib.dll SampleApps\Genealogy\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll SampleApps\Genealogy\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll SampleApps\Genealogy\External
+        1 file(s) copied.
+
+*** SampleApps\Genealogy\GenealogyManager\bin\Debug ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\Genealogy\GenealogyManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\Genealogy\GenealogyManager\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll SampleApps\Genealogy\GenealogyManager\bin\Debug
+        1 file(s) copied.
+
+*** SampleApps\Genealogy\LJCGenPageGen\bin\Debug ***
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\Genealogy\LJCGenPageGen\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll SampleApps\Genealogy\LJCGenPageGen\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll SampleApps\Genealogy\LJCGenPageGen\bin\Debug
+        1 file(s) copied.
+- 
+----------------- 12 - LJCSystemBuilder ------------  
+LJCSystemBuilder 
+- 
+----------------- 13 - LJCSales ------------  
+LJCSales 
+*** SampleApps\LJCSales\External ***
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+
+*** SampleApps\LJCSales\LJCSalesManager\bin\Debug ***
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+- 
+----------------- 1 - LJCCodeLineCounter ---------- 
+LJCCodeLineCounter 
+*** CoreUtilities\LJCCodeLineCounter\External ***
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll CoreUtilities\LJCCodeLineCounter\External
+        1 file(s) copied.
+- 
+----------------- 2 - LJCAddressParserLib --------- 
+LJCAddressParserLib 
+*** CoreUtilities\LJCAddressParserLib\External ***
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll CoreUtilities\LJCAddressParserLib\External
+        1 file(s) copied.
+- 
+----------------- 3 - LJCExecuteScript ------------ 
+LJCExecuteScript 
+*** CoreUtilities\LJCExecuteScript\External ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCExecuteScript\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCExecuteScript\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll CoreUtilities\LJCExecuteScript\External
+        1 file(s) copied.
+
+*** CoreUtilities\LJCExecuteScript\LJCExecuteScript\bin\Debug ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCExecuteScript\LJCExecuteScript\bin\Debug
+        1 file(s) copied.
+
+*** CoreUtilities\LJCExecuteScript\LJCExecuteScripts\bin\Debug ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCExecuteScript\LJCExecuteScripts\bin\Debug
+        1 file(s) copied.
+- 
+----------------- 4 - LJCGenText ------------------ 
+LJCGenText 
+
+*** CoreUtilities\LJCGenText\External ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCGenText\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCGenText\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll CoreUtilities\LJCGenText\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll CoreUtilities\LJCGenText\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll CoreUtilities\LJCGenText\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll CoreUtilities\LJCGenText\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll CoreUtilities\LJCGenText\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll CoreUtilities\LJCGenText\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll CoreUtilities\LJCGenText\External
+        1 file(s) copied.
+copy CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug\LJCGenDocLib.dll CoreUtilities\LJCGenText\External
+        1 file(s) copied.
+
+*** CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug ***
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\DataConfigs.xml CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug
+        1 file(s) copied.
+copy MySql.Data.dll CoreUtilities\LJCGenText\LJCGenTableCode\bin\Debug
+        1 file(s) copied.
+
+*** CoreUtilities\LJCGenText\LJCGenTextEdit\bin\Debug ***
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll CoreUtilities\LJCGenText\LJCGenTextEdit\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCGenText\LJCGenTextEdit\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCGenText\LJCGenTextEdit\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll CoreUtilities\LJCGenText\LJCGenTextEdit\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll CoreUtilities\LJCGenText\LJCGenTextEdit\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll CoreUtilities\LJCGenText\LJCGenTextEdit\bin\Debug
+        1 file(s) copied.
+- 
+----------------- 5 - LJCGenDoc --------------- 
+LJCGenDoc 
+*** CoreUtilities\LJCGenDoc\External ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCGenDoc\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll CoreUtilities\LJCGenDoc\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll CoreUtilities\LJCGenDoc\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll CoreUtilities\LJCGenDoc\External
+        1 file(s) copied.
+copy CoreUtilities\LJCGenDoc\LJCDocObjLib\bin\Debug\LJCDocObjLib.dll CoreUtilities\LJCGenDoc\External
+        1 file(s) copied.
+copy CoreUtilities\LJCGenText\LJCGenText\bin\Debug\LJCGenTextLib.dll CoreUtilities\LJCGenDoc\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll CoreUtilities\LJCGenDoc\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll CoreUtilities\LJCGenDoc\External
+        1 file(s) copied.
+
+*** CoreUtilities\LJCGenDoc\GenDocScript\bin\Debug ***
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll CoreUtilities\LJCGenDoc\GenDocScript\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCGenDoc\GenDocScript\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCGenDoc\GenDocScript\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll CoreUtilities\LJCGenDoc\GenDocScript\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll CoreUtilities\LJCGenDoc\GenDocScript\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll CoreUtilities\LJCGenDoc\GenDocScript\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll CoreUtilities\LJCGenDoc\GenDocScript\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBViewControls\LJCDBViewControls\bin\Debug\LJCDBViewControls.dll CoreUtilities\LJCGenDoc\GenDocScript\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCGenDoc\LJCGenDocDAL\bin\Debug\LJCGenDocDAL.dll CoreUtilities\LJCGenDoc\GenDocScript\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug\LJCViewEditor.exe CoreUtilities\LJCGenDoc\GenDocScript\bin\Debug
+        1 file(s) copied.
+
+*** CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug ***
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll CoreUtilities\LJCGenDoc\LJCGenDoc\bin\Debug
+        1 file(s) copied.
+
+*** CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug ***
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCGenDoc\LJCGenDocDAL\bin\Debug\LJCGenDocDAL.dll CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll CoreUtilities\LJCGenDoc\LJCGenDocLib\bin\Debug
+        1 file(s) copied.
+- 
+----------------- 6 - LJCSQLUtilLib --------------- 
+LJCSQLUtilLib 
+*** CoreUtilities\LJCSQLUtilLib\External ***
+copy CoreAssemblies\LJCDataDetail\LJCDataDetail\bin\Debug\LJCDataDetail.exe CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataDetail\LJCDataDetailDAL\bin\Debug\LJCDataDetailDAL.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataDetail\LJCDataDetailLib\bin\Debug\LJCDataDetailLib.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll CoreUtilities\LJCSQLUtilLib\External
+        1 file(s) copied.
+
+*** CoreUtilities\LJCSQLUtilLib\ForeignKeyManagerTest\bin\Debug ***
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\DataConfigs.xml CoreUtilities\LJCSQLUtilLib\ForeignKeyManagerTest\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml CoreUtilities\LJCSQLUtilLib\ForeignKeyManagerTest\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll CoreUtilities\LJCSQLUtilLib\ForeignKeyManagerTest\bin\Debug
+        1 file(s) copied.
+
+*** CoreUtilities\LJCSQLUtilLib\DataHelper\bin\Debug ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCSQLUtilLib\DataHelper\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCSQLUtilLib\DataHelper\bin\Debug
+        1 file(s) copied.
+- 
+----------------- 7 - LJCViewBuilder --------------- 
+LJCViewEditor 
+*** CoreUtilities\LJCViewBuilder\External ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLib\bin\Debug\LJCSQLUtilLib.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLibDAL\bin\Debug\LJCSQLUtilLibDAL.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreUtilities\LJCViewEditor\LJCViewEditorDAL\bin\Debug\LJCViewEditorDAL.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll CoreUtilities\LJCViewBuilder\External
+        1 file(s) copied.
+
+*** CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug ***
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\DataConfigs.xml CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml CoreUtilities\LJCViewBuilder\LJCViewBuilder\bin\Debug
+        1 file(s) copied.
+- 
+----------------- 8 - LJCViewEditor --------------- 
+LJCViewEditor 
+*** CoreUtilities\LJCViewEditor\External ***
+copy CoreAssemblies\LJCDataDetail\LJCDataDetail\bin\Debug\LJCDataDetail.exe CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataDetail\LJCDataDetailLib\bin\Debug\LJCDataDetailLib.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLib\bin\Debug\LJCSQLUtilLib.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreUtilities\LJCSQLUtilLib\LJCSQLUtilLibDAL\bin\Debug\LJCSQLUtilLibDAL.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll CoreUtilities\LJCViewEditor\External
+        1 file(s) copied.
+
+*** CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug ***
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataDetail\LJCDataDetailDAL\bin\Debug\LJCDataDetailDAL.dll CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\DataConfigs.xml CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\ConnectionTemplates.xml CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug
+        1 file(s) copied.
+- 
+----------------- 9 - LJCDBViewControls ----------------  
+LJCDBViewControls 
+*** CoreAssemblies\LJCViewControls\External ***
+        1 file(s) copied.
+- 
+----------------- 10 - LJCGenDocEdit --------------- 
+LJCDocLib 
+*** CoreUtilities\LJCGenDocEdit\External ***
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCGenDocEdit\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll CoreUtilities\LJCGenDocEdit\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBMessage\LJCDBMessage\bin\Debug\LJCDBMessage.dll CoreUtilities\LJCGenDocEdit\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBViewControls\LJCDBViewControls\bin\Debug\LJCDBViewControls.dll CoreUtilities\LJCGenDocEdit\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.dll CoreUtilities\LJCGenDocEdit\External
+        1 file(s) copied.
+copy CoreUtilities\LJCGenDoc\LJCDocObjLib\bin\Debug\LJCDocObjLib.dll CoreUtilities\LJCGenDocEdit\External
+        1 file(s) copied.
+copy CoreUtilities\LJCGenDoc\LJCDocXMLObjLib\bin\Debug\LJCDocXMLObjLib.dll CoreUtilities\LJCGenDocEdit\External
+        1 file(s) copied.
+copy CoreUtilities\LJCGenDoc\LJCGenDocDAL\bin\Debug\LJCGenDocDAL.dll CoreUtilities\LJCGenDocEdit\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCNetCommon\LJCNetCommon\bin\Debug\LJCNetCommon.dll CoreUtilities\LJCGenDocEdit\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormCommon\bin\Debug\LJCWinFormCommon.dll CoreUtilities\LJCGenDocEdit\External
+        1 file(s) copied.
+copy CoreAssemblies\LJCLibraries\LJCWinFormControls\bin\Debug\LJCWinFormControls.dll CoreUtilities\LJCGenDocEdit\External
+        1 file(s) copied.
+
+*** CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug ***
+copy CoreAssemblies\LJCDBMessage\CipherLib\bin\Debug\CipherLib.dll CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccess\LJCDataAccess\bin\Debug\LJCDataAccess.dll CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDataAccessConfig\LJCDataAccessConfig\bin\Debug\LJCDataAccessConfig.dll CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBClientLib\LJCDBClientLib\bin\Debug\LJCDBClientLib.dll CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBViewDAL\LJCDBViewDAL\bin\Debug\LJCDBViewDAL.dll CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBDataAccess\LJCDBDataAccess\bin\Debug\LJCDBDataAccess.dll CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug
+        1 file(s) copied.
+copy CoreAssemblies\LJCDBServiceLib\LJCDBServiceLib\bin\Debug\LJCDBServiceLib.dll CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCGenDoc\LJCGenDocDAL\bin\Debug\LJCGenDocDAL.dll CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCViewEditor\LJCViewEditor\bin\Debug\LJCViewEditor.exe CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug
+        1 file(s) copied.
+copy CoreUtilities\LJCViewEditor\LJCViewEditorDAL\bin\Debug\LJCViewEditorDAL.dll CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\bin\Debug
+        1 file(s) copied.

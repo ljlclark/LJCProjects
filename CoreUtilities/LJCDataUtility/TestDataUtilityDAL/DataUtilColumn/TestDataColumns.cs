@@ -479,10 +479,10 @@ namespace TestDataUtilityDAL
       var dataColumns = new DataColumns();
       var dataColumn = new DataUtilColumn()
       {
-        Id = 1,
         DbId = 2,
-        DataTableId = 3,
+        Id = 1,
         DataTableDbId = 4,
+        DataTableId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -492,10 +492,10 @@ namespace TestDataUtilityDAL
 
       dataColumn = new DataUtilColumn()
       {
-        Id = 2,
         DbId = 3,
-        DataTableId = 4,
+        Id = 2,
         DataTableDbId = 5,
+        DataTableId = 4,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -503,7 +503,7 @@ namespace TestDataUtilityDAL
       };
       dataColumns.Add(dataColumn);
 
-      dataColumn = dataColumns[3, 4, "Name"];
+      dataColumn = dataColumns[4, 3, "Name"];
       var result = dataColumn.Name;
       var compare = "Name";
       TestCommon.Write($"{methodName}", result, compare);

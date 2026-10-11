@@ -1,0 +1,601 @@
+FindProcessor
+(short)
+
+Folder: LJCProjectsDev\CoreAssemblies\LJCNetCommon\LJCNetCommon
+****************************************
+
+ *** LJCReflect.cs
+
+Method:GetInt16(string
+Line: 235, && value.GetType() == typeof(short))
+Line: 237, retVal = (short)value;
+
+Method:SetPropertyValue(string
+Line: 413, if (typeof(short) == type)
+
+ *** NetCommon.cs
+
+Method:CheckArgument<T>(T
+Line: 67, || typeof(short) == argument.GetType())
+
+Method:GetDecimal(object
+Line: 915, || typeof(short) == type)
+
+Method:GetDouble(object
+Line: 935, || typeof(short) == type)
+
+Method:GetInt16(object
+Line: 950, if (typeof(short) == type)
+
+Method:GetInt32(object
+Line: 966, || typeof(short) == type)
+
+Method:GetInt64(object
+Line: 983, || typeof(short) == type)
+
+Method:GetSingle(object
+Line: 1061, || typeof(short) == type)
+
+Folder: LJCProjectsDev\CoreAssemblies\LJCNetCommon\LJCNetCommon\CodeTokens
+****************************************
+
+ *** CodeTokenizer.cs
+
+Method:EndTokens(ref
+Line: 86, tokenIndex = (short)Tokens.Length;
+
+Folder: LJCProjectsDev\CoreAssemblies\LJCNetCommon\TestDataColumns
+****************************************
+
+ *** TestDataColumns.cs
+
+Method:LJCGetInt16()
+Line: 893, var test = (short)3;
+
+ *** TestDataValues.cs
+
+Method:LJCGetInt16()
+Line: 547, var test = (short)3;
+
+Folder: LJCProjectsDev\CoreUtilities\LJCDataUtility\LJCDataUtility\Forms
+****************************************
+
+ *** DataUtilityListCode.cs
+
+Method:DataTableRowId(out
+Line: 110, dbId = (short)row.LJCGetInt32(DataUtilTable.ColumnDbId);
+
+Method:DataColumnRowId(out
+Line: 173, dbId = (short)row.LJCGetInt32(DataUtilColumn.ColumnDbId);
+
+Method:DataKeyRowId(out
+Line: 219, dbId = (short)row.LJCGetInt32(DataKey.ColumnDbId);
+
+Method:(short)KeyType.Foreign);
+Line: 247, , (short)KeyType.Foreign);
+
+Method:(short)KeyType.Primary);
+Line: 259, , (short)KeyType.Primary);
+
+Method:(short)KeyType.Unique);
+Line: 275, , (short)KeyType.Unique);
+
+ *** MyProcBuilder.cs
+
+Method:RenameTableSQL(long
+Line: 456, if (dataKey.KeyType != (short)ObjectType.Primary)
+
+ *** ProcBuilder.cs
+
+Method:RenameTableSQL(long
+Line: 465, && x.KeyType == (short)ObjectType.Foreign);
+Line: 477, && x.KeyType != (short)ObjectType.Primary);
+
+Folder: LJCProjectsDev\CoreUtilities\LJCDataUtility\LJCDataUtility\Forms\DataColumn
+****************************************
+
+ *** DataColumnDetail.cs
+
+Method:DataSave()
+Line: 203, LJCRecord.DbId = (short)mSettings.SiteID;
+
+Folder: LJCProjectsDev\CoreUtilities\LJCDataUtility\LJCDataUtility\Forms\DataKey
+****************************************
+
+ *** DataKeyDetail.cs
+
+Method:GetValues(DataKey
+Line: 98, LJCDbID = (short)data.DbId;
+
+Method:SetValues()
+Line: 111, retData.KeyType = (short)KeyTypeCombo.LJCSelectedItemID();
+
+Method:DataSave()
+Line: 180, LJCRecord.DbId = (short)mSettings.SiteID;
+
+Folder: LJCProjectsDev\CoreUtilities\LJCDataUtility\LJCDataUtility\Forms\DataModule
+****************************************
+
+ *** DataModuleComboCode.cs
+
+Method:Edit()
+Line: 186, LJCID = (short)id,
+
+ *** DataModuleDetail.cs
+
+Method:GetValues(DataModule
+Line: 86, LJCDbID = (short)data.DbId;
+
+Folder: LJCProjectsDev\CoreUtilities\LJCDataUtility\LJCDataUtility\Forms\DataTable
+****************************************
+
+ *** DataTableDetail.cs
+
+Method:GetValues(DataUtilTable
+Line: 105, LJCDbID = (short)data.DbId;
+
+Method:DataSave()
+Line: 183, LJCRecord.DbId = (short)mSettings.SiteID;
+
+Folder: LJCProjectsDev\CoreUtilities\LJCDataUtility\LJCDataUtility\Forms\DataTable\CustomActions
+****************************************
+
+ *** CreateData.cs
+
+Method:(short)data.DbId);
+Line: 99, , (short)data.DbId);
+
+Method:(short)dataTable.DbId);
+Line: 159, , (short)dataTable.DbId);
+
+ *** SetUtilData.cs
+
+Method:SetData()
+Line: 99, TableDbID = (short)dataTable.DbId;
+
+Method:CreateData(int
+Line: 127, CreateColumns(newTable.Id, (short)newTable.DbId);
+
+Method:CreateColumn(LJCDataColumn
+Line: 150, MaxLength = (short)dbColumn.MaxLength,
+
+Method:UpdateColumn(LJCDataColumn
+Line: 209, updateColumn.MaxLength = (short)dbColumn.MaxLength;
+
+Method:(short)dataKey.DataTableDbId,
+Line: 503, , (short)dataKey.DataTableDbId, dataKey.Name);
+
+Folder: LJCProjectsDev\CoreUtilities\LJCDataUtility\TestDataUtilityDAL
+****************************************
+
+ *** TestDataKeyManager.cs
+
+Method:LoadWithForeign()
+Line: 500, //dataTableDbID = (short)dataKey.DataTableSiteID;
+
+Method:LoadWithParent()
+Line: 569, dataTableDbID = (short)dataKey.DataTableDbId;
+
+Method:LoadWithParentType()
+Line: 635, dataTableDbID = (short)dataKey.DataTableDbId;
+
+Method:LoadWithType()
+Line: 703, dbID = (short)dataKey.DataTableDbId;
+
+Method:RetrieveWithParentType()
+Line: 836, short parentDbID = (short)dataKey.DataTableDbId;
+
+ *** TestDataModuleManager.cs
+
+Method:Update()
+Line: 490, dbID = (short)dataModule.DbId;
+
+ *** TestDataTableManager.cs
+
+Method:Update()
+Line: 425, dbID = (short)utilTable.DbId;
+
+Folder: LJCProjectsDev\CoreUtilities\LJCGenDoc\LJCGenDocLib
+****************************************
+
+ *** SyntaxHighlightHtml.cs
+
+Method:ProcessTypesAndKeywords(string[]
+Line: 695, short index = (short)(tokenIndex - 1);
+
+Method:EndTokens(string[]
+Line: 888, tokenIndex = (short)tokens.Length;
+
+Folder: LJCProjectsDev\CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\Forms\AssemblyTab
+****************************************
+
+ *** AssemblyGroupGridCode.cs
+
+Method:AssemblyGroupID(LJCGridRow
+Line: 363, retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+
+ *** AssemblyItemGridCode.cs
+
+Method:AssemblyGroupID(LJCGridRow
+Line: 400, retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+
+Method:AssemblyID(LJCGridRow
+Line: 416, retValue = (short)assemblyRow.LJCGetInt32(DocAssembly.ColumnID);
+
+Folder: LJCProjectsDev\CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\Forms\ClassGroupHeading
+****************************************
+
+ *** ClassHeadingGridCode.cs
+
+Method:ClassHeadingID(LJCGridRow
+Line: 364, retValue = (short)classHeadingRow.LJCGetInt32(DocClassGroupHeading.ColumnID);
+
+Folder: LJCProjectsDev\CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\Forms\ClassTab
+****************************************
+
+ *** AssemblyItemComboCode.cs
+
+Method:AssemblyComboID(int
+Line: 95, retValue = (short)item.ID;
+
+Method:AssemblyGroupID(LJCGridRow
+Line: 113, retValue = (short)assemblyGroupRow.LJCGetInt32(DocAssemblyGroup.ColumnID);
+
+Method:CurrentAssembly()
+Line: 126, var assemblyID = (short)mAssemblyCombo.LJCSelectedItemID();
+
+ *** ClassGroupGridCode.cs
+
+Method:ClassGroupID(LJCGridRow
+Line: 410, retValue = (short)row.LJCGetInt32(DocClassGroup.ColumnID);
+
+Method:DocAssemblyID(LJCGridRow
+Line: 439, retValue = (short)row.LJCGetInt32(DocAssembly.ColumnID);
+
+ *** ClassItemGridCode.cs
+
+Method:ClassGroupID(LJCGridRow
+Line: 418, retValue = (short)classGroupRow.LJCGetInt32(DocClassGroup.ColumnID);
+
+Method:DocAssemblyID(LJCGridRow
+Line: 439, retValue = (short)docAssemblyRow.LJCGetInt32(DocAssembly.ColumnID);
+
+Method:DocClassID(LJCGridRow
+Line: 481, retValue = (short)docClassRow.LJCGetInt32(LJCGenDocDAL.DocClass.ColumnID);
+
+Folder: LJCProjectsDev\CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\Forms\MethodGroupHeading
+****************************************
+
+ *** MethodHeadingGridCode.cs
+
+Method:MethodHeadingID(LJCGridRow
+Line: 364, retValue = (short)methodheadingRow.LJCGetInt32(DocMethodGroupHeading.ColumnID);
+
+Folder: LJCProjectsDev\CoreUtilities\LJCGenDocEdit\LJCGenDocEdit\Forms\MethodTab
+****************************************
+
+ *** ClassItemComboCode.cs
+
+Method:ClassComboID(int
+Line: 97, retValue = (short)item.ID;
+
+Method:ClassGroupID(LJCGridRow
+Line: 115, retValue = (short)classGroupGridRow.LJCGetInt32(DocClassGroup.ColumnID);
+
+Method:CurrentClass()
+Line: 128, var classID = (short)mClassCombo.LJCSelectedItemID();
+
+ *** MethodGroupGridCode.cs
+
+Method:DocClassID(LJCGridRow
+Line: 381, retValue = (short)docClassRow.LJCGetInt32(DocClass.ColumnID);
+
+Method:MethodGroupID(LJCGridRow
+Line: 410, retValue = (short)methodGroupRow.LJCGetInt32(DocMethodGroup.ColumnID);
+
+ *** MethodItemGridCode.cs
+
+Method:DocClassID(LJCGridRow
+Line: 386, retValue = (short)docClassRow.LJCGetInt32(DocClass.ColumnID);
+
+Method:DocMethodID(LJCGridRow
+Line: 402, retValue = (short)docMethodRow.LJCGetInt32(DocMethod.ColumnID);
+
+Method:MethodGroupID(LJCGridRow
+Line: 418, retValue = (short)methodGroupRow.LJCGetInt32(DocMethodGroup.ColumnID);
+
+Folder: LJCProjectsDev\CoreUtilities\LJCViewBuilder\LJCViewBuilder\Forms\ViewBuilder
+****************************************
+
+ *** ViewBuilderList.cs
+
+Method:SetSelectedPrimaryColumns()
+Line: 174, var id = (short)mSelectedViewID;
+
+Method:SetSelectedRelatedColumns()
+Line: 323, var id = (short)mSelectedViewID;
+
+Method:GetSelectedJoins()
+Line: 619, var id = (short)mSelectedViewID;
+
+Method:DoEditViewColumn()
+Line: 903, int parentID = (short)ViewCombo.LJCSelectedItemID();
+
+Method:DoEditRelatedColumn()
+Line: 964, int parentID = (short)ViewCombo.LJCSelectedItemID();
+
+Method:DoPreview()
+Line: 1039, var id = (short)mSelectedViewID;
+
+Method:ViewMenuSelect_Click(object
+Line: 1291, var id = (short)ViewCombo.LJCSelectedItemID();
+
+Folder: LJCProjectsDev\CoreUtilities\LJCViewEditor\LJCViewEditor\Forms\Join
+****************************************
+
+ *** ViewJoinDetail.cs
+
+Method:GetRecordValues(ViewJoin
+Line: 119, JoinTableCombo.LJCSetByItemID((short)item.ID, 0);
+
+Folder: LJCProjectsDev\LJCAssemblies\LJCNetCommon5\LJCNetCommon5
+****************************************
+
+ *** LJC.cs
+
+Method:CheckArgument<T>([NotNullWhen(true)]
+Line: 74, || typeof(short) == argument.GetType())
+
+Method:GetDecimal(object
+Line: 627, || typeof(short) == type)
+
+Method:GetDouble(object
+Line: 647, || typeof(short) == type)
+
+Method:GetInt16(object
+Line: 662, if (typeof(short) == type)
+
+Method:GetInt32(object
+Line: 678, || typeof(short) == type)
+
+Method:GetInt64(object
+Line: 695, || typeof(short) == type)
+
+Method:GetSingle(object
+Line: 773, || typeof(short) == type)
+
+ *** LJCReflect.cs
+
+Method:GetInt16(string
+Line: 228, && value.GetType() == typeof(short))
+Line: 230, retVal = (short)value;
+
+Method:SetPropertyValue(string
+Line: 424, if (typeof(short) == type)
+
+Folder: LJCProjectsDev\LJCAssemblies\LJCNetCommon5\TestDataColumns5
+****************************************
+
+ *** TestDataColumns.cs
+
+Method:LJCGetInt16()
+Line: 932, var test = (short)3;
+
+ *** TestDataValues.cs
+
+Method:LJCGetInt16()
+Line: 523, var test = (short)3;
+
+Folder: LJCProjectsDev\LJCAssemblies\LJCNetCommon5\TestDataValues5
+****************************************
+
+ *** DataValuesProgram.cs
+
+Method:LJCGetInt16()
+Line: 415, var test = (short)3;
+
+Folder: LJCProjectsDev\LJCAssemblies\LJCNetCommon5\TestReflect5
+****************************************
+
+ *** Reflect5Program.cs
+
+Method:GetInt16()
+Line: 247, var test = new { Value = (short)3 };
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCCommonModuleLib
+****************************************
+
+ *** CommonModule.cs
+
+Method:CheckTextData(string
+Line: 912, case (short)LJCFieldDataType.Boolean:
+Line: 915, case (short)LJCFieldDataType.Byte:
+Line: 918, case (short)LJCFieldDataType.DateTime:
+Line: 921, case (short)LJCFieldDataType.Decimal:
+Line: 924, case (short)LJCFieldDataType.Double:
+Line: 927, case (short)LJCFieldDataType.Int16:
+Line: 930, case (short)LJCFieldDataType.Int32:
+Line: 933, case (short)LJCFieldDataType.Int64:
+Line: 936, case (short)LJCFieldDataType.Single:
+Line: 939, case (short)LJCFieldDataType.String:
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCDataTransformDAL
+****************************************
+
+ *** LJCDataProcessHelper.cs
+
+Method:ResetStepsAndTasksToStatus(int
+Line: 184, step.StatusID = (short)stepTaskStatus;
+Line: 195, stepTask.TaskStatusID = (short)stepTaskStatus;
+
+Method:ResetToStatus(DataProcesses
+Line: 245, dataProcess.ProcessStatusID = (short)stepTaskStatus;
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCDataTransformDAL\Data
+****************************************
+
+ *** ProcessStatuses.cs
+
+Method:Add(int
+Line: 39, ProcessStatusID = (short)id,
+
+ *** TransformMaps.cs
+
+Method:LJCSearchSourceID(int
+Line: 130, SourceColumnID = (short)sourceID
+
+Method:LJCSearchTargetID(int
+Line: 152, TargetColumnID = (short)targetID
+
+Method:LJCSearchColumnIDs(int
+Line: 174, SourceColumnID = (short)sourceColumnID,
+Line: 175, TargetColumnID = (short)targetColumnID
+
+ *** TransformMatches.cs
+
+Method:LJCSearchSourceID(int
+Line: 127, SourceColumnID = (short)sourceID
+
+Method:LJCSearchTargetID(int
+Line: 149, TargetColumnID = (short)targetID
+
+Method:LJCSearchColumnIDs(int
+Line: 171, SourceColumnID = (short)sourceColumnID,
+Line: 172, TargetColumnID = (short)targetColumnID
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCTransformManager
+****************************************
+
+ *** TransformCommon.cs
+
+Method:SetStatusColor(DataGridViewCell
+Line: 84, case (short)ProcessStatusType.Available:
+Line: 87, case (short)ProcessStatusType.Active:
+Line: 90, case (short)ProcessStatusType.Inprocess:
+Line: 93, case (short)ProcessStatusType.Ready:
+Line: 97, case (short)ProcessStatusType.Failed:
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCTransformManager\Forms\DataSource
+****************************************
+
+ *** DataSourceDetail.cs
+
+Method:SetRecordValues()
+Line: 116, SourceTypeID = (short)SourceTypeCombo.LJCSelectedItemID(),
+Line: 119, SourceStatusID = (short)SourceStatusCombo.SelectedItem
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCTransformManager\Forms\LayoutColumn\List
+****************************************
+
+ *** LayoutColumnGridCode.cs
+
+Method:DoEditLayoutColumn()
+Line: 148, short id = (short)row.LJCGetInt32(LayoutColumn.ColumnLayoutColumnID);
+
+Method:DoDeleteLayoutColumn()
+Line: 196, short id = (short)row.LJCGetInt32(LayoutColumn.ColumnLayoutColumnID);
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCTransformManager\Forms\LayoutColumn\Module
+****************************************
+
+ *** ModuleLayoutColumnGridCode.cs
+
+Method:DoEditLayoutColumn()
+Line: 147, short id = (short)row.LJCGetInt32(LayoutColumn.ColumnLayoutColumnID);
+
+Method:DoDeleteLayoutColumn()
+Line: 195, short id = (short)row.LJCGetInt32(LayoutColumn.ColumnLayoutColumnID);
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCTransformManager\Forms\ProcessGroup\List
+****************************************
+
+ *** DataProcessDetail.cs
+
+Method:SetRecordValues()
+Line: 120, ProcessStatusID = (short)StatusCombo.SelectedItem,
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCTransformManager\Forms\ProcessStep\List
+****************************************
+
+ *** StepDetail.cs
+
+Method:SetRecordValues()
+Line: 118, StatusID = (short)TaskStatusCombo.SelectedItem,
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCTransformManager\Forms\ProcessStep\Module
+****************************************
+
+ *** TaskDetail.cs
+
+Method:SetRecordValues()
+Line: 119, TaskTypeID = (short)TaskTypeCombo.LJCSelectedItemID(),
+Line: 121, TaskStatusID = (short)TaskStatusCombo.SelectedItem,
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCTransformManager\Forms\SourceLayout
+****************************************
+
+ *** LayoutColumnDetail.cs
+
+Method:SetRecordValues()
+Line: 129, DataTypeID = (short)DataTypeCombo.LJCSelectedItemID(),
+
+ *** SourceLayoutColumnGridCode.cs
+
+Method:DoEditLayoutColumn()
+Line: 143, short id = (short)row.LJCGetInt32(LayoutColumn.ColumnLayoutColumnID);
+
+Method:DoDeleteLayoutColumn()
+Line: 191, short id = (short)row.LJCGetInt32(LayoutColumn.ColumnLayoutColumnID);
+
+Folder: LJCProjectsDev\SampleApps\LJCDataTransform\LJCTransformManager\Forms\TaskSource
+****************************************
+
+ *** MatchList.cs
+
+Method:SetChangeMatchAdd(LJCGridRow
+Line: 461, SourceColumnID = (short)sourceColumnID,
+Line: 462, TargetColumnID = (short)targetColumnID
+
+Method:GetSourceRowDbMatch(int
+Line: 673, retValue = GetSourceDbMatch(transformID, (short)layoutColumnID);
+
+Method:IsAvailableSourceDbMatch(int
+Line: 868, lookupMatch = GetSourceDbMatch(transformID, (short)sourceColumnID);
+
+ *** MergeMapList.cs
+
+Method:SetChangeMapAdd(LJCGridRow
+Line: 534, SourceColumnID = (short)sourceColumnID,
+Line: 535, TargetColumnID = (short)targetColumnID,
+
+Method:GetSourceRowDbMap(int
+Line: 822, retValue = GetSourceDbMap(transformID, (short)layoutColumnID);
+
+Method:IsAvailableSourceDbMap(int
+Line: 1017, lookupMap = GetSourceDbMap(transformID, (short)sourceColumnID);
+
+Method:SetControlState()
+Line: 1402, if (IsMapTypeChangeAvailable(sourceRow, (short)MapType.Merge))
+Line: 1406, if (IsMapTypeChangeAvailable(sourceRow, (short)MapType.Overwrite))
+Line: 1410, if (IsMapTypeChangeAvailable(sourceRow, (short)MapType.InsertInclude))
+Line: 1428, if (IsMapTypeChangeAvailable(targetRow, (short)MapType.Merge))
+Line: 1432, if (IsMapTypeChangeAvailable(targetRow, (short)MapType.Overwrite))
+Line: 1436, if (IsMapTypeChangeAvailable(targetRow, (short)MapType.InsertInclude))
+
+Method:(short)MapType.Merge);
+Line: 1471, , (short)MapType.Merge);
+
+Method:(short)MapType.Overwrite);
+Line: 1478, , (short)MapType.Overwrite);
+
+Method:(short)MapType.InsertInclude);
+Line: 1485, , (short)MapType.InsertInclude);
+
+Method:TargetMenuMerge_Click(object
+Line: 1510, SetMapTypeChange(sourceRow, (short)MapType.Merge);
+
+Method:TargetMenuOverwrite_Click(object
+Line: 1521, SetMapTypeChange(sourceRow, (short)MapType.Overwrite);
+
+Method:TargetMenuInsert_Click(object
+Line: 1532, SetMapTypeChange(sourceRow, (short)MapType.InsertInclude);

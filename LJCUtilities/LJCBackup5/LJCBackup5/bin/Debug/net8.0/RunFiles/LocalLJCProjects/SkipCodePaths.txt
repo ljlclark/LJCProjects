@@ -35,6 +35,10 @@ LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\RunFiles\LocalLJCJSCodeDoc\
 LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\RunFiles\LocalLJCPHPCodeDoc\
 LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\RunFiles\LocalLJCPHPProjects\
 LJCUtilities\LJCBackup5\LJCBackup5\bin\Debug\net8.0\RunFiles\SegateLJCProjects\
+LJCUtilities\LJCGenText5\LJCGenText5\bin\Debug\net8.0\Output
+LJCUtilities\LJCGenText5\LJCGenTextEdit5\bin\Debug\net8.0-windows\Output
+LJCUtilities\LJCGenText5\TestGenText5\bin\Debug\net8.0\win-x64\Output
+LJCUtilities\LJCDataUtility5\TestDataUtility5\bin\Debug\net8.0
 SampleApps\Genealogy\
 SampleApps\LJCDocAppManager\
 SampleApps\LJCFacilityManager\Output\

@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LJCControls5\LJCControls5.csproj" />
-    <ProjectReference Include="..\LJCDataUtilityDAL5\LJCDataUtilityDAL.csproj" />
+    <ProjectReference Include="..\LJCDataUtilityDAL5\LJCDataUtilityDAL5.csproj" />
   </ItemGroup>
 
   <ItemGroup>

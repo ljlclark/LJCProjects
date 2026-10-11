@@ -35,7 +35,7 @@ namespace LJCDataUtilityDAL5
       _TargetColumnName = null;
       DataTableName = null;
 
-      ChangedNames = [];
+      ChangedNames = new LJCChangedNames();
       _OriginalValues = new OriginalValues();
       LJCSetOriginalValues();
     }

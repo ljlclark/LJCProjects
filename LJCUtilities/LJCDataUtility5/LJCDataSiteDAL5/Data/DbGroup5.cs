@@ -25,7 +25,7 @@ namespace LJCDataSiteDAL5
       _Name = "";
       _Description = null;
 
-      ChangedNames = [];
+      ChangedNames = new LJCChangedNames();
       _OriginalValues = new OriginalValues();
       LJCSetOriginalValues();
     }
@@ -39,7 +39,7 @@ namespace LJCDataSiteDAL5
       _Name = item.Name;
       _Description = item.Description;
 
-      ChangedNames = [];
+      ChangedNames = new LJCChangedNames();
       _OriginalValues = new OriginalValues();
     }
     #endregion

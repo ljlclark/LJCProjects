@@ -19,11 +19,11 @@ namespace TestDataUtilityDAL
 
       _ = new TestDataUtilColumn();
       _ = new TestDataColumns();
-      _ = new TestDataColumnManager();
+      //_ = new TestDataColumnManager();
 
       _ = new TestDataKey();
-      _ = new TestDataKeys();
-      _ = new TestDataKeyManager();
+      //_ = new TestDataKeys();
+      //_ = new TestDataKeyManager();
 
       _ = new TestTableKey();
       _ = new TestTableKeys();
