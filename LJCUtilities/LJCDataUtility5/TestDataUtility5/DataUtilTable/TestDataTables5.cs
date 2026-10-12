@@ -1,21 +1,26 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TestDataTables.cs
-using LJCDataUtilityDAL;
-using LJCNetCommon;
-using System.Collections.Generic;
+// TestDataTables5.cs
+using LJCDataUtilityDAL5;
+using LJCNetCommon5;
 
-namespace TestDataUtilityDAL
+namespace TestDataUtilityDAL5
 {
   // Tests the DataTables collection.
   internal class TestDataTables
   {
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
     public TestDataTables()
     {
-      TestCommon = new TestCommon("TestDataTables");
+      TestCommon = new LJCTestCommon("TestDataTables");
     }
 
     // Run the tests.
@@ -33,11 +38,11 @@ namespace TestDataUtilityDAL
       // Collection Data Methods
       Add();
       LJCGetWithID();
-      LJCGetWithUnique();
+      LJCGetUnique();
       LJCRemove();
 
       // Sort Methods
-      LJCSortID();
+      LJCSortId();
       LJCSortUnique();
 
       // Data Properties
@@ -55,10 +60,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        Id = 1,
         DbId = 2,
-        DataModuleId = 3,
+        Id = 1,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -69,10 +74,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        Id = 2,
         DbId = 3,
-        DataModuleId = 4,
+        Id = 2,
         DataModuleDbId = 5,
+        DataModuleId = 4,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -85,7 +90,11 @@ namespace TestDataUtilityDAL
       // Test Method
       var newDataTables = DataTables.LJCDeserialize();
 
-      var result = newDataTables.Count.ToString();
+      var result = "";
+      if (LJC.HasListItems(newDataTables))
+      {
+        result = newDataTables.Count.ToString();
+      }
       var compare = "2";
       TestCommon.Write($"{methodName}", result, compare);
     }
@@ -98,10 +107,10 @@ namespace TestDataUtilityDAL
       var dataTables = new List<DataUtilTable>();
       var dataTable = new DataUtilTable
       {
-        Id = 1,
         DbId = 2,
-        DataModuleId = 3,
+        Id = 1,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -112,10 +121,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        Id = 2,
         DbId = 3,
-        DataModuleId = 4,
+        Id = 2,
         DataModuleDbId = 5,
+        DataModuleId = 4,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -127,7 +136,11 @@ namespace TestDataUtilityDAL
       // Test Method
       var newDataTables = DataTables.LJCGetCollection(dataTables);
 
-      var testDataTable = newDataTables[3, 4, "Name"];
+      DataUtilTable? testDataTable = null;
+      if (LJC.HasListItems(newDataTables))
+      {
+        testDataTable = newDataTables[4, 3, "Name"];
+      }
       if (null == testDataTable)
       {
         var result = "HasValue";
@@ -154,10 +167,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        Id = 1,
         DbId = 2,
-        DataModuleId = 3,
+        Id = 1,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -206,10 +219,10 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
-        Id = 1,
         DbId = 2,
-        DataModuleId = 3,
+        Id = 1,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -231,10 +244,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        Id = 1,
         DbId = 2,
-        DataModuleId = 3,
+        Id = 1,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -245,10 +258,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        Id = 2,
         DbId = 3,
-        DataModuleId = 4,
+        Id = 2,
         DataModuleDbId = 5,
+        DataModuleId = 4,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -262,7 +275,11 @@ namespace TestDataUtilityDAL
 
       var newDataTables = DataTables.LJCDeserialize();
 
-      var result = newDataTables.Count.ToString();
+      var result = "";
+      if (LJC.HasListItems(newDataTables))
+      {
+        result = newDataTables.Count.ToString();
+      }
       var compare = "2";
       TestCommon.Write($"{methodName}", result, compare);
     }
@@ -295,10 +312,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        Id = 1,
         DbId = 2,
-        DataModuleId = 3,
+        Id = 1,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -320,17 +337,17 @@ namespace TestDataUtilityDAL
     }
 
     // Retrieve the collection item with unique values.
-    private void LJCGetWithUnique()
+    private void LJCGetUnique()
     {
       var methodName = "LJCGetWithName()";
 
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        Id = 1,
         DbId = 2,
-        DataModuleId = 3,
+        Id = 1,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -340,7 +357,7 @@ namespace TestDataUtilityDAL
       dataTables.Add(dataTable);
 
       // Test Method
-      var item = dataTables.LJCGetWithUnique(3, 4, "Name");
+      var item = dataTables.LJCGetUnique(4, 3, "Name");
 
       var result = "";
       if (item != null)
@@ -359,10 +376,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        Id = 1,
         DbId = 2,
-        DataModuleId = 3,
+        Id = 1,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -373,10 +390,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        Id = 2,
         DbId = 3,
-        DataModuleId = 4,
+        Id = 2,
         DataModuleDbId = 5,
+        DataModuleId = 4,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -386,7 +403,7 @@ namespace TestDataUtilityDAL
       dataTables.Add(dataTable);
 
       // Test Method
-      dataTables.LJCRemove(3, 4, "Name");
+      dataTables.LJCRemove(4, 3, "Name");
 
       dataTable = dataTables[0];
       var result = dataTable.Name;
@@ -398,17 +415,17 @@ namespace TestDataUtilityDAL
     #region Sort Methods
 
     // Sort on ID.
-    private void LJCSortID()
+    private void LJCSortId()
     {
       var methodName = "LJCSortID()";
 
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        Id = 2,
         DbId = 3,
-        DataModuleId = 4,
+        Id = 2,
         DataModuleDbId = 5,
+        DataModuleId = 4,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -419,10 +436,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        Id = 1,
         DbId = 2,
-        DataModuleId = 3,
+        Id = 1,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -432,7 +449,7 @@ namespace TestDataUtilityDAL
       dataTables.Add(dataTable);
 
       // Test Method
-      dataTables.LJCSortID();
+      dataTables.LJCSortId();
 
       dataTable = dataTables[0];
       var result = dataTable.Id.ToString();
@@ -448,10 +465,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        Id = 1,
         DbId = 2,
-        DataModuleId = 3,
+        Id = 1,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -462,10 +479,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        Id = 2,
         DbId = 3,
-        DataModuleId = 3,
+        Id = 2,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -475,7 +492,7 @@ namespace TestDataUtilityDAL
       dataTables.Add(dataTable);
 
       // Test Method
-      var comparer = new DataTableUniqueComparer();
+      var comparer = new DataTableUnique();
       dataTables.LJCSortUnique(comparer);
 
       dataTable = dataTables[0];
@@ -495,10 +512,10 @@ namespace TestDataUtilityDAL
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
       {
-        Id = 1,
         DbId = 2,
-        DataModuleId = 3,
+        Id = 1,
         DataModuleDbId = 4,
+        DataModuleId = 3,
         Name = "Name",
         Description = "Description",
         Sequence = 1,
@@ -509,10 +526,10 @@ namespace TestDataUtilityDAL
 
       dataTable = new DataUtilTable
       {
-        Id = 2,
         DbId = 3,
-        DataModuleId = 4,
+        Id = 2,
         DataModuleDbId = 5,
+        DataModuleId = 4,
         Name = "First",
         Description = "Description2",
         Sequence = 2,
@@ -521,17 +538,15 @@ namespace TestDataUtilityDAL
       };
       dataTables.Add(dataTable);
 
-      dataTable = dataTables[3, 4, "Name"];
-      var result = dataTable.Name;
+      var result = "";
+      dataTable = dataTables[4, 3, "Name"];
+      if (dataTable != null)
+      {
+        result = dataTable.Name;
+      }
       var compare = "Name";
       TestCommon.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private TestCommon TestCommon { get; set; }
     #endregion
   }
 }

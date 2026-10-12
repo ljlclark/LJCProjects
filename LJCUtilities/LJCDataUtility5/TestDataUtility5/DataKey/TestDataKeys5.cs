@@ -98,7 +98,7 @@ namespace TestDataUtilityDAL5
       var newDataTables = DataKeys.LJCDeserialize();
 
       var result = "";
-      if (newDataTables != null)
+      if (LJC.HasListItems(newDataTables))
       {
         result = newDataTables.Count.ToString();
       }

@@ -62,10 +62,10 @@ namespace TestDataUtilityDAL5
 
       // Custom Data Methods
       RetrieveWithID();
-      RetrieveWithUnique();
+      RetrieveUnique();
 
       // Get Key Methods
-      IDKey();
+      IdKey();
       ParentKey();
       UniqueKey();
     }
@@ -173,7 +173,7 @@ namespace TestDataUtilityDAL5
       {
         result = names[2];
       }
-      var compare = "DbId";
+      var compare = "DataTableId";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -268,7 +268,7 @@ namespace TestDataUtilityDAL5
       {
         { "DataTableDbId", dataTableDbId },
         { "DataTableId", dataTableId },
-        { "Name", (object)name },
+        { "Name", name },
       };
       var dataColumn = dataColumnManager.Retrieve(uniqueColumns);
       if (dataColumn != null)
@@ -313,7 +313,7 @@ namespace TestDataUtilityDAL5
       string name = "TestColumnName";
 
       // Create the test record.
-      var dataUtilTable = new DataUtilColumn()
+      var dataUtilColumn = new DataUtilColumn()
       {
         DbId = dbId,
         DataTableDbId = dataTableDbId,
@@ -330,7 +330,7 @@ namespace TestDataUtilityDAL5
         NewMaxLength = 1,
         TypeName = "TypeName",
       };
-      dataColumnManager.Add(dataUtilTable);
+      dataColumnManager.Add(dataUtilColumn);
 
       // Test Method
       var dataColumns = dataColumnManager.Load();
@@ -400,7 +400,7 @@ namespace TestDataUtilityDAL5
       {
         { "DataTableDbId", dataTableDbId },
         { "DataTableId", dataTableId },
-        { "Name", (object)name },
+        { "Name", name },
       };
 
       // Test Method
@@ -601,9 +601,9 @@ namespace TestDataUtilityDAL5
     }
 
     // Retrieves a record with the supplied unique values.
-    private void RetrieveWithUnique()
+    private void RetrieveUnique()
     {
-      var methodName = "RetrieveWithUnique()";
+      var methodName = "RetrieveUnique()";
 
       // See: Run() for the DataConfigs.xml file example.
 
@@ -667,9 +667,9 @@ namespace TestDataUtilityDAL5
     #region GetKey Methods
 
     // Gets the ID key columns.
-    private void IDKey()
+    private void IdKey()
     {
-      var methodName = "IDKey()";
+      var methodName = "IdKey()";
 
       // See: Run() for the DataConfigs.xml file example.
 
@@ -743,7 +743,7 @@ namespace TestDataUtilityDAL5
 
       short dataModuleDbId = 1;
       long dataModuleId = 1;
-      string name = "TestTableName";
+      string name = "TestColumnName";
 
       // Test Method
       var uniqueKey = DataColumnManager.UniqueKey(dataModuleDbId, dataModuleId
@@ -760,7 +760,7 @@ namespace TestDataUtilityDAL5
           result = $"{propertyName}: {value}";
         }
       }
-      var compare = "Name: TestTableName";
+      var compare = $"Name: {name}";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion

@@ -30,6 +30,7 @@ namespace TestDataUtilityDAL5
     private void Run()
     {
       // Data Object Methods
+      AddChangedNames();
       Clone();
       CompareTo();
       LJCSetOriginalValues();
@@ -45,6 +46,27 @@ namespace TestDataUtilityDAL5
     #endregion
 
     #region Data Object Methods
+
+    // Adds changed propertynames.
+    private void AddChangedNames()
+    {
+      var methodName = "AddChangedNames()";
+
+      var dataModule = new DataModule();
+
+      var changedNames = new List<string>()
+      {
+        "Name",
+        "Description",
+      };
+
+      // Test Method
+      dataModule.ChangedNames.AddNames(changedNames);
+
+      var result = dataModule.ChangedNames.ChangedPropertyNames;
+      var compare = "Name, Description";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
 
     // Creates and returns a clone of this object.
     private void Clone()
@@ -98,11 +120,13 @@ namespace TestDataUtilityDAL5
 
       var dataModule = new DataModule
       {
-        Id = 1
+        DbId = 1,
+        Id = 1,
       };
       var toDataModule = new DataModule
       {
-        Id = 2
+        DbId = 2,
+        Id = 2,
       };
 
       var result = dataModule.CompareTo(toDataModule).ToString();
@@ -113,6 +137,7 @@ namespace TestDataUtilityDAL5
       compare = "1";
       TestCommon.Write($"{methodName}2", result, compare);
 
+      toDataModule.DbId = 1;
       toDataModule.Id = 1;
       result = dataModule.CompareTo(toDataModule).ToString();
       compare = "0";

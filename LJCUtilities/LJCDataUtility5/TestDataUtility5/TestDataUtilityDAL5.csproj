@@ -9,9 +9,6 @@
 
   <ItemGroup>
     <Compile Remove="DataUtilColumn\TestDataColumns.cs" />
-    <Compile Remove="DataUtilTable\TestDataTableManager.cs" />
-    <Compile Remove="DataUtilTable\TestDataTables.cs" />
-    <Compile Remove="DataUtilTable\TestDataUtilTable.cs" />
     <Compile Remove="TableKey\TestTableKey.cs" />
     <Compile Remove="TableKey\TestTableKeyManager.cs" />
     <Compile Remove="TableKey\TestTableKeys.cs" />
@@ -45,7 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataUtilTable\" />
     <Folder Include="TableKey\" />
     <Folder Include="TestData2\" />
   </ItemGroup>

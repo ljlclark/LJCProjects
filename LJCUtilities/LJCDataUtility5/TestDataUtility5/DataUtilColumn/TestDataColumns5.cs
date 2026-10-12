@@ -3,7 +3,6 @@
 // TestDataColumns5.cs
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
-using System.Collections.Generic;
 
 namespace TestDataUtilityDAL5
 {
@@ -46,7 +45,7 @@ namespace TestDataUtilityDAL5
       LJCRemove();
 
       // Sort Methods
-      LJCSortID();
+      LJCSortId();
       LJCSortUnique();
 
       // Data Properties
@@ -93,7 +92,7 @@ namespace TestDataUtilityDAL5
       var newDataColumns = DataColumns.LJCDeserialize();
 
       var result = "";
-      if (newDataColumns != null)
+      if (LJC.HasListItems(newDataColumns))
       {
         result = newDataColumns.Count.ToString();
       }
@@ -139,7 +138,7 @@ namespace TestDataUtilityDAL5
       DataUtilColumn? testDataColumn = null;
       if (LJC.HasListItems(newDataColumns))
       {
-        testDataColumn = newDataColumns[3, 4, "Name"];
+        testDataColumn = newDataColumns[4, 3, "Name"];
       }
       if (null == testDataColumn)
       {
@@ -268,12 +267,12 @@ namespace TestDataUtilityDAL5
       // Test Method
       dataColumns.LJCSerialize();
 
-      var newDataTables = DataTables.LJCDeserialize();
+      var newDataColumns = DataColumns.LJCDeserialize();
 
       var result = "";
-      if (LJC.HasListItems(newDataTables))
+      if (LJC.HasListItems(newDataColumns))
       {
-        result = newDataTables.Count.ToString();
+        result = newDataColumns.Count.ToString();
       }
       var compare = "2";
       TestCommon.Write($"{methodName}", result, compare);
@@ -406,7 +405,7 @@ namespace TestDataUtilityDAL5
     #region Sort Methods
 
     // Sort on ID.
-    private void LJCSortID()
+    private void LJCSortId()
     {
       var methodName = "LJCSortID()";
 

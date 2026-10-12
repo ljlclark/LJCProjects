@@ -120,7 +120,7 @@ namespace LJCDataUtilityDAL5
         }
 
         retValue = DbId.CompareTo(other.DbId);
-        if (LJCNetString.CompareEqual == retValue)
+        if (retValue != LJCNetString.CompareEqual)
         {
           break;
         }

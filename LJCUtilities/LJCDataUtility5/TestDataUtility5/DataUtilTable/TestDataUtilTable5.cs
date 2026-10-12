@@ -1,21 +1,29 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TestDataUtilTable.cs
-using LJCDataUtilityDAL;
-using LJCNetCommon;
-using System.Collections.Generic;
+// TestDataUtilTable5.cs
+using LJCDataUtilityDAL5;
+using LJCNetCommon5;
+using System.Data;
 
-namespace TestDataUtilityDAL
+namespace TestDataUtilityDAL5
 {
   // Tests the DataUtilTable object.
   internal class TestDataUtilTable
   {
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
+    /// <include file='Doc/TestDataUtilTable.xml'
+    ///  path='members/Constructor/*'/>
     public TestDataUtilTable()
     {
-      TestCommon = new TestCommon("TestDataUtilTable");
+      TestCommon = new LJCTestCommon("TestDataUtilTable");
       Run();
     }
 
@@ -31,12 +39,13 @@ namespace TestDataUtilityDAL
 
       // Data Properties
       NoChange();
-      ID();
-      DataSiteID();
-      DataModuleID();
-      DataModuleSiteID();
+      Id();
+      DbId();
+      DataModuleId();
+      DataModuleDbId();
       Name();
       Description();
+      Sequence();
       SchemaName();
       NewName();
     }
@@ -72,7 +81,9 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
+        DbId = 1,
         Id = 1,
+        DataModuleDbId = 2,
         DataModuleId = 2,
         Name = "Name",
         Description = "Description",
@@ -84,33 +95,45 @@ namespace TestDataUtilityDAL
       // Test Method
       var newDataTable = dataTable.Clone();
 
-      var result = newDataTable.Id.ToString();
-      var compare = "1";
-      TestCommon.Write($"{methodName}1", result, compare);
+      while (true)
+      {
+        var result = "";
+        if (newDataTable != null)
+        {
+          result = newDataTable.Id.ToString();
+        }
+        var compare = "1";
+        TestCommon.Write($"{methodName}1", result, compare);
+        if (null == newDataTable)
+        {
+          break;
+        }
 
-      result = newDataTable.DataModuleId.ToString();
-      compare = "2";
-      TestCommon.Write($"{methodName}2", result, compare);
+        result = newDataTable.DataModuleId.ToString();
+        compare = "2";
+        TestCommon.Write($"{methodName}2", result, compare);
 
-      result = newDataTable.Name;
-      compare = "Name";
-      TestCommon.Write($"{methodName}3", result, compare);
+        result = newDataTable.Name;
+        compare = "Name";
+        TestCommon.Write($"{methodName}3", result, compare);
 
-      result = newDataTable.Description;
-      compare = "Description";
-      TestCommon.Write($"{methodName}4", result, compare);
+        result = newDataTable.Description;
+        compare = "Description";
+        TestCommon.Write($"{methodName}4", result, compare);
 
-      result = newDataTable.Sequence.ToString();
-      compare = "1";
-      TestCommon.Write($"{methodName}5", result, compare);
+        result = newDataTable.Sequence.ToString();
+        compare = "1";
+        TestCommon.Write($"{methodName}5", result, compare);
 
-      result = newDataTable.SchemaName;
-      compare = "SchemaName";
-      TestCommon.Write($"{methodName}6", result, compare);
+        result = newDataTable.SchemaName;
+        compare = "SchemaName";
+        TestCommon.Write($"{methodName}6", result, compare);
 
-      result = newDataTable.NewName;
-      compare = "NewName";
-      TestCommon.Write($"{methodName}7", result, compare);
+        result = newDataTable.NewName;
+        compare = "NewName";
+        TestCommon.Write($"{methodName}7", result, compare);
+        break;
+      }
     }
 
     // Provides the default Sort functionality.
@@ -120,23 +143,26 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
-        Id = 1
+        DbId = 1,
+        Id = 1,
       };
       var toDataTable = new DataUtilTable
       {
-        Id = 2
+        DbId = 2,
+        Id = 2,
       };
 
-      var result = dataTable.CompareTo(toDataTable).ToString();
+      var result = $"{dataTable.CompareTo(toDataTable)}";
       var compare = "-1";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      result = toDataTable.CompareTo(dataTable).ToString();
+      result = $"{toDataTable.CompareTo(dataTable)}";
       compare = "1";
       TestCommon.Write($"{methodName}2", result, compare);
 
+      toDataTable.DbId = 1;
       toDataTable.Id = 1;
-      result = dataTable.CompareTo(toDataTable).ToString();
+      result = $"{dataTable.CompareTo(toDataTable)}";
       compare = "0";
       TestCommon.Write($"{methodName}3", result, compare);
     }
@@ -148,7 +174,9 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
+        DbId = 1,
         Id = 1,
+        DataModuleDbId = 2,
         DataModuleId = 2,
         Name = "Name",
         Description = "Description",
@@ -160,11 +188,13 @@ namespace TestDataUtilityDAL
       // Test Method
       dataTable.LJCSetOriginalValues();
 
+      dataTable.DbId = 1;
       dataTable.Id = 1;
       var result = dataTable.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
+      dataTable.DataModuleDbId = 2;
       dataTable.DataModuleId = 2;
       result = dataTable.ChangedNames.ChangedPropertyNames;
       compare = "No Result";
@@ -203,6 +233,7 @@ namespace TestDataUtilityDAL
 
       var dataTable = new DataUtilTable
       {
+        DbId = 1,
         Id = 1,
         Name = "Name",
       };
@@ -229,32 +260,10 @@ namespace TestDataUtilityDAL
       TestCommon.Write($"{methodName}", result, compare);
     }
 
-    // Change ID
-    private void ID()
+    // Change DbId
+    private void DbId()
     {
-      var methodName = "ID()";
-
-      // Test Method
-      var dataTable = new DataUtilTable
-      {
-        // Original Value
-        Id = 0,
-      };
-
-      var result = dataTable.ChangedNames.ChangedPropertyNames;
-      var compare = "No Result";
-      TestCommon.Write($"{methodName}1", result, compare);
-
-      dataTable.Id = 1;
-      result = dataTable.ChangedNames.ChangedPropertyNames;
-      compare = "ID";
-      TestCommon.Write($"{methodName}2", result, compare);
-    }
-
-    // Change DataSiteID
-    private void DataSiteID()
-    {
-      var methodName = "DataSiteID()";
+      var methodName = "DbId()";
 
       // Test Method
       var dataTable = new DataUtilTable
@@ -269,35 +278,36 @@ namespace TestDataUtilityDAL
 
       dataTable.DbId = 1;
       result = dataTable.ChangedNames.ChangedPropertyNames;
-      compare = "DataSiteID";
+      compare = "DbId";
       TestCommon.Write($"{methodName}2", result, compare);
     }
 
-    // Change DataModuleID
-    private void DataModuleID()
+    // Change ID
+    private void Id()
     {
-      var methodName = "DataModuleID()";
+      var methodName = "Id()";
 
+      // Test Method
       var dataTable = new DataUtilTable
       {
         // Original Value
-        DataModuleId = 0,
+        Id = 0,
       };
 
       var result = dataTable.ChangedNames.ChangedPropertyNames;
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataTable.DataModuleId = 1;
+      dataTable.Id = 1;
       result = dataTable.ChangedNames.ChangedPropertyNames;
-      compare = "DataModuleID";
+      compare = "Id";
       TestCommon.Write($"{methodName}2", result, compare);
     }
 
-    // Change DataSiteID
-    private void DataModuleSiteID()
+    // Change DataModuleDbId
+    private void DataModuleDbId()
     {
-      var methodName = "DataModuleSiteID()";
+      var methodName = "DataModuleDbId()";
 
       // Test Method
       var dataTable = new DataUtilTable
@@ -312,7 +322,29 @@ namespace TestDataUtilityDAL
 
       dataTable.DataModuleDbId = 1;
       result = dataTable.ChangedNames.ChangedPropertyNames;
-      compare = "DataModuleSiteID";
+      compare = "DataModuleDbId";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
+    // Change DataModuleID
+    private void DataModuleId()
+    {
+      var methodName = "DataModuleId()";
+
+      // Test Method
+      var dataTable = new DataUtilTable
+      {
+        // Original Value
+        DataModuleId = 0,
+      };
+
+      var result = dataTable.ChangedNames.ChangedPropertyNames;
+      var compare = "No Result";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dataTable.DataModuleId = 1;
+      result = dataTable.ChangedNames.ChangedPropertyNames;
+      compare = "DataModuleId";
       TestCommon.Write($"{methodName}2", result, compare);
     }
 
@@ -347,7 +379,7 @@ namespace TestDataUtilityDAL
       var dataTable = new DataUtilTable
       {
         // Original Value
-        Description = "",
+        Description = null,
       };
 
       var result = dataTable.ChangedNames.ChangedPropertyNames;
@@ -426,12 +458,6 @@ namespace TestDataUtilityDAL
       compare = "SchemaName, NewName";
       TestCommon.Write($"{methodName}2", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private TestCommon TestCommon { get; set; }
     #endregion
   }
 }

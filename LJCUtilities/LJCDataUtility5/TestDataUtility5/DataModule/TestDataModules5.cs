@@ -82,7 +82,7 @@ namespace TestDataUtilityDAL5
       var newDataModules = DataModules.LJCDeserialize();
 
       var result = "";
-      if (newDataModules != null)
+      if (LJC.HasListItems(newDataModules))
       {
         result = newDataModules.Count.ToString();
       }

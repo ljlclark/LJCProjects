@@ -30,6 +30,7 @@ namespace TestDataUtilityDAL5
     private void Run()
     {
       // Data Object Methods
+      AddChangedNames();
       Clone();
       CompareTo();
       LJCSetOriginalValues();
@@ -56,6 +57,27 @@ namespace TestDataUtilityDAL5
     #endregion
 
     #region Data Object Methods
+
+    // Adds changed propertynames.
+    private void AddChangedNames()
+    {
+      var methodName = "AddChangedNames()";
+
+      var dataUtilColumn = new DataUtilColumn();
+
+      var changedNames = new List<string>()
+      {
+        "Name",
+        "Description",
+      };
+
+      // Test Method
+      dataUtilColumn.ChangedNames.AddNames(changedNames);
+
+      var result = dataUtilColumn.ChangedNames.ChangedPropertyNames;
+      var compare = "Name, Description";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
 
     // Creates and returns a clone of this object.
     private void Clone()
@@ -157,6 +179,7 @@ namespace TestDataUtilityDAL5
       compare = "1";
       TestCommon.Write($"{methodName}2", result, compare);
 
+      toDataColumn.DbId = 1;
       toDataColumn.Id = 1;
       result = $"{dataColumn.CompareTo(toDataColumn)}";
       compare = "0";
@@ -241,6 +264,7 @@ namespace TestDataUtilityDAL5
 
       var dataColumn = new DataUtilColumn
       {
+        DbId = 1,
         Id = 1,
         Name = "Name",
       };
@@ -267,7 +291,7 @@ namespace TestDataUtilityDAL5
       TestCommon.Write($"{methodName}", result, compare);
     }
 
-    // Change DataSiteID
+    // Change DbId
     private void DbId()
     {
       var methodName = "DbId()";

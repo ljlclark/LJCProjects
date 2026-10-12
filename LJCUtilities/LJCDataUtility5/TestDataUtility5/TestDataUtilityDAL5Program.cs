@@ -15,13 +15,13 @@ namespace TestDataUtilityDAL5
       _ = new TestDataModules();
       _ = new TestDataModuleManager();
 
-      //_ = new TestDataUtilTable();
-      //_ = new TestDataTables();
-      //_ = new TestDataTableManager();
+      _ = new TestDataUtilTable();
+      _ = new TestDataTables();
+      _ = new TestDataTableManager();
 
       _ = new TestDataUtilColumn();
-      //_ = new TestDataColumns();
-      ////_ = new TestDataColumnManager();
+      _ = new TestDataColumns();
+      _ = new TestDataColumnManager();
 
       _ = new TestDataKey();
       _ = new TestDataKeys();
