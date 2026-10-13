@@ -1,9 +1,11 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
 // TableKeyManager.cs
+using LJCDataAccess5;
 using LJCDBClientLib5;
 using LJCDBMessage5;
 using LJCNetCommon5;
+using System.Data;
 
 namespace LJCDataUtilityDAL5
 {
@@ -46,35 +48,38 @@ namespace LJCDataUtilityDAL5
     {
       TableKeys? retValue = null;
 
-      ////var sql = "OBJECT_ID('[dbo].[sp_GetForeignKeys]', N'p')";
-      ////var dbResult = Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
-      //CreateForeignKeysProcedure();
+      //var sql = "OBJECT_ID('[dbo].[sp_GetForeignKeys]', N'p')";
+      //var dbResult = Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
+      CreateForeignKeysProcedure();
 
-      //var parms = new ProcedureParameters();
-      //var parm = new ProcedureParameter("@TableName", SqlDbType.NVarChar
-      //  , 20, Manager.TableName);
-      //parms.Add(parm);
+      var parms = new LJCProcedureParameters();
+      var parm = new LJCProcedureParameter("@TableName", (int)SqlDbType.NVarChar
+        , 20, Manager.TableName);
+      parms.Add(parm);
 
-      ////// ?
-      ////var headSql = "USE[LJCDataUtility] \r\n";
-      ////headSql += "SET ANSI_NULLS ON \r\n";
-      ////headSql += "SET QUOTED_IDENTIFIER ON \r\n";
-      ////var result = Manager.ExecuteClientSql(RequestType.ExecuteSQL, headSql);
+      //// ?
+      //var headSql = "USE[LJCDataUtility] \r\n";
+      //headSql += "SET ANSI_NULLS ON \r\n";
+      //headSql += "SET QUOTED_IDENTIFIER ON \r\n";
+      //var result = Manager.ExecuteClientSql(RequestType.ExecuteSQL, headSql);
 
-      //var dbResult = Manager.LoadProcedure("sp_GetForeignKeys", parms);
-      //retValue = ResultConverter.CreateCollection(dbResult);
-      //return retValue;
-
-      if (Manager.TableName != null)
+      var dbResult = Manager.LoadProcedure("sp_GetForeignKeys", parms);
+      if (dbResult != null)
       {
-        var sql = ForeignKeySql(Manager.TableName);
-        var dbResult = Manager.ExecuteClientSql(RequestType.LoadSQL, sql);
-        if (dbResult != null)
-        {
-          retValue = ResultConverter.CreateCollection(dbResult);
-        }
+        retValue = ResultConverter.CreateCollection(dbResult);
       }
       return retValue;
+
+      //if (Manager.TableName != null)
+      //{
+      //  var sql = ForeignKeySql(Manager.TableName);
+      //  var dbResult = Manager.ExecuteClientSql(RequestType.LoadSQL, sql);
+      //  if (dbResult != null)
+      //  {
+      //    retValue = ResultConverter.CreateCollection(dbResult);
+      //  }
+      //}
+      //return retValue;
     }
 
     // Retrieves a collection of Key records.
@@ -102,7 +107,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Gets the table foreign key values SQL.
-    private string ForeignKeySql(string tableName)
+    private static string ForeignKeySql(string tableName)
     {
       var tb = new LJCTextBuilder();
 
@@ -133,7 +138,7 @@ namespace LJCDataUtilityDAL5
     }
 
     // Gets the table key values SQL.
-    private string TableKeySql(string tableName
+    private static string TableKeySql(string tableName
       , string keyType = "PRIMARY KEY", string? uniqueConstraintName = null)
     {
       var tb = new LJCTextBuilder();
@@ -167,66 +172,70 @@ namespace LJCDataUtilityDAL5
       return retValue;
     }
 
-    //// Create the sp_GetForeignKeys procedure.
-    //private void CreateForeignKeysProcedure()
-    //{
-    //  var sql = "DROP PROCEDURE IF EXISTS dbo.sp_GetForeignKeys;";
-    //  Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
+    // Create the sp_GetForeignKeys procedure.
+    private void CreateForeignKeysProcedure()
+    {
+      if (LJC.HasText(Manager.TableName))
+      {
+        var sql = "DROP PROCEDURE IF EXISTS dbo.sp_GetForeignKeys;";
+        Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
 
-    //  sql = ForeignKeysProcedureSql(Manager.TableName);
-    //  try
-    //  {
-    //    Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
-    //  }
-    //  catch (Exception e)
-    //  {
-    //    var isHandled = false;
-    //    if (e is SqlException)
-    //    {
-    //      // ErrorCode -2146232060
-    //      if (e.Message.StartsWith("There is already an object"))
-    //      {
-    //        isHandled = true;
-    //      }
-    //    }
-    //    if (!isHandled)
-    //    {
-    //      throw e;
-    //    }
-    //  }
-    //}
+        sql = ForeignKeysProcedureSql(Manager.TableName);
+        try
+        {
+          Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
+        }
+        catch (Exception e)
+        {
+          var isHandled = false;
+          //if (e is SqlException)
+          //{
+          // ErrorCode -2146232060
+          if (e.Message.StartsWith("There is already an object"))
+          {
+            isHandled = true;
+          }
+          //}
+          if (!isHandled)
+          {
+            //throw e;
+            throw;
+          }
+        }
+      }
+    }
 
-    //// Gets the sp_GetForeignKeys procedure SQL.
-    //private string ForeignKeysProcedureSql(string tableName)
-    //{
-    //  TextBuilder b = new LJCTextBuilder();
-    //  b.Line("CREATE PROCEDURE[dbo].[sp_GetForeignKeys]");
-    //  b.Line("  @TableName nvarchar(20)");
-    //  b.Line("AS");
-    //  b.Line("BEGIN");
-    //  b.Line("SELECT");
-    //  b.Line(" tc.[TABLE_CATALOG] as DBName, ");
-    //  b.Line(" tc.[TABLE_SCHEMA] as TableSchema, ");
-    //  b.Line(" tc.[TABLE_NAME] as TableName, ");
-    //  b.Line(" tc.[CONSTRAINT_Name] as ConstraintName, ");
-    //  b.Line(" tc.[CONSTRAINT_TYPE] as KeyType, ");
-    //  b.Line(" ccu.[COLUMN_NAME] as ColumnName, ");
-    //  b.Line(" kcu.[ORDINAL_POSITION] as OrdinalPosition, ");
-    //  b.Line(" rc.[UPDATE_RULE] as UpdateRule, ");
-    //  b.Line(" rc.[DELETE_RULE] as DeleteRule ");
-    //  b.Line("from [INFORMATION_SCHEMA].[TABLE_CONSTRAINTS] as tc ");
-    //  b.Line("left join[INFORMATION_SCHEMA].[CONSTRAINT_COLUMN_USAGE] as ccu ");
-    //  b.Line(" on tc.[CONSTRAINT_NAME] = ccu.[CONSTRAINT_NAME] ");
-    //  b.Line("left join[INFORMATION_SCHEMA].[KEY_COLUMN_USAGE] as kcu ");
-    //  b.Line(" on tc.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
-    //  b.Line("left join[INFORMATION_SCHEMA].[REFERENTIAL_CONSTRAINTS] as rc ");
-    //  b.Line(" on ccu.[CONSTRAINT_NAME] = rc.[CONSTRAINT_NAME] ");
-    //  b.Line($"where tc.[TABLE_NAME] = '{tableName}'");
-    //  b.Line($" and tc.[CONSTRAINT_TYPE] = 'FOREIGN KEY'");
-    //  b.Line("END");
-    //  var retValue = b.ToString();
-    //  return retValue;
-    //}
+    // Gets the sp_GetForeignKeys procedure SQL.
+    private static string ForeignKeysProcedureSql(string tableName)
+    {
+      LJCTextBuilder tb = new();
+      tb.Line("CREATE PROCEDURE[dbo].[sp_GetForeignKeys]");
+      tb.Line("  @TableName nvarchar(20)");
+      tb.Line("AS");
+      tb.Line("BEGIN");
+      tb.Line("SELECT");
+      tb.Line(" tc.[TABLE_CATALOG] as DBName, ");
+      tb.Line(" tc.[TABLE_SCHEMA] as TableSchema, ");
+      tb.Line(" tc.[TABLE_NAME] as TableName, ");
+      tb.Line(" tc.[CONSTRAINT_Name] as ConstraintName, ");
+      tb.Line(" tc.[CONSTRAINT_TYPE] as KeyType, ");
+      tb.Line(" ccu.[COLUMN_NAME] as ColumnName, ");
+      tb.Line(" kcu.[ORDINAL_POSITION] as OrdinalPosition, ");
+      tb.Line(" rc.[UPDATE_RULE] as UpdateRule, ");
+      tb.Line(" rc.[DELETE_RULE] as DeleteRule ");
+      tb.Line("from [INFORMATION_SCHEMA].[TABLE_CONSTRAINTS] as tc ");
+      tb.Line("left join[INFORMATION_SCHEMA].[CONSTRAINT_COLUMN_USAGE] as ccu ");
+      tb.Line(" on tc.[CONSTRAINT_NAME] = ccu.[CONSTRAINT_NAME] ");
+      tb.Line("left join[INFORMATION_SCHEMA].[KEY_COLUMN_USAGE] as kcu ");
+      tb.Line(" on tc.[CONSTRAINT_NAME] = kcu.[CONSTRAINT_NAME] ");
+      tb.Line("left join[INFORMATION_SCHEMA].[REFERENTIAL_CONSTRAINTS] as rc ");
+      tb.Line(" on ccu.[CONSTRAINT_NAME] = rc.[CONSTRAINT_NAME] ");
+      tb.Line($"where tc.[TABLE_NAME] = '{tableName}'");
+      tb.Line($" and tc.[CONSTRAINT_TYPE] = 'FOREIGN KEY'");
+      tb.Line("END");
+      var retValue = tb.ToString();
+      return retValue;
+    }
     #endregion
 
     #region Properties
@@ -261,6 +270,10 @@ namespace LJCDataUtilityDAL5
         if (LJC.HasText(newValue))
         {
           _TableName = newValue;
+          if (Manager != null)
+          {
+            Manager.TableName = newValue;
+          }
         }
       }
     }

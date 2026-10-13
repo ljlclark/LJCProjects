@@ -27,9 +27,9 @@ namespace TestDataUtilityDAL5
       _ = new TestDataKeys();
       _ = new TestDataKeyManager();
 
-      //_ = new TestTableKey();
-      //_ = new TestTableKeys();
-      //_ = new TestTableKeyManager();
+      _ = new TestTableKey();
+      _ = new TestTableKeys();
+      _ = new TestTableKeyManager();
 
       //// Test collection of DbColumns.
       //_ = new TestDataTable2();

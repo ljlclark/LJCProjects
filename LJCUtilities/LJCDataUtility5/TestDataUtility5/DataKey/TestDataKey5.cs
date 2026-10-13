@@ -63,7 +63,7 @@ namespace TestDataUtilityDAL5
 
       var changedNames = new List<string>()
       {
-        "Name",
+        DataKey.ColumnName,
       };
 
       // Test Method

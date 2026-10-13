@@ -1,20 +1,26 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TestTableKeys.cs
-using LJCDataUtilityDAL;
-using LJCNetCommon;
+// TestTableKeys5.cs
+using LJCDataUtilityDAL5;
+using LJCNetCommon5;
 
-namespace TestDataUtilityDAL
+namespace TestDataUtilityDAL5
 {
   // Tests the DataModules collection.
   internal class TestTableKeys
   {
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
     public TestTableKeys()
     {
-      TestCommon = new TestCommon("TestTableKeys");
+      TestCommon = new LJCTestCommon("TestTableKeys");
       Run();
     }
 
@@ -26,7 +32,7 @@ namespace TestDataUtilityDAL
       LJCHasItems();
 
       // Collection Data Methods
-      LJCGetWithUnique();
+      LJCGetUnique();
 
       // Sort Methods
       LJCSortUnique();
@@ -47,15 +53,15 @@ namespace TestDataUtilityDAL
 
       var tableKey = new TableKey()
       {
-        ColumnName = "ColumnName",
-        ConstraintName = "ConstraintName",
-        DBName = "DBName",
-        KeyType = "KeyType",
-        OrdinalPosition = 1,
-        TableName = "TableName",
         TableSchema = "TableSchema",
-        TargetColumn = "TargetColumn",
+        DBName = "DBName",
+        ConstraintName = "ConstraintName",
+        KeyType = "KeyType",
+        TableName = "TableName",
+        ColumnName = "ColumnName",
         TargetTable = "TargetTable",
+        TargetColumn = "TargetColumn",
+        OrdinalPosition = 1,
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
@@ -105,15 +111,15 @@ namespace TestDataUtilityDAL
 
       var tableKey = new TableKey()
       {
-        ColumnName = "ColumnName",
-        ConstraintName = "ConstraintName",
-        DBName = "DBName",
-        KeyType = "KeyType",
-        OrdinalPosition = 1,
-        TableName = "TableName",
         TableSchema = "TableSchema",
-        TargetColumn = "TargetColumns",
+        DBName = "DBName",
+        ConstraintName = "ConstraintName",
+        KeyType = "KeyType",
+        TableName = "TableName",
+        ColumnName = "ColumnName",
         TargetTable = "TargetTable",
+        TargetColumn = "TargetColumns",
+        OrdinalPosition = 1,
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
@@ -127,7 +133,7 @@ namespace TestDataUtilityDAL
     #region Collection Data Methods
 
     // Retrieve the collection item with unique values.
-    private void LJCGetWithUnique()
+    private void LJCGetUnique()
     {
       var methodName = "LJCGetWithUnique()";
 
@@ -135,21 +141,21 @@ namespace TestDataUtilityDAL
 
       var tableKey = new TableKey()
       {
-        ColumnName = "ColumnName",
-        ConstraintName = "ConstraintName",
-        DBName = "DBName",
-        KeyType = "KeyType",
-        OrdinalPosition = 1,
-        TableName = "TableName",
         TableSchema = "TableSchema",
-        TargetColumn = "TargetColumns",
+        DBName = "DBName",
+        ConstraintName = "ConstraintName",
+        KeyType = "KeyType",
+        TableName = "TableName",
+        ColumnName = "ColumnName",
         TargetTable = "TargetTable",
+        TargetColumn = "TargetColumns",
+        OrdinalPosition = 1,
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
 
       // Test Method
-      var item = tableKeys.LJCGetWithUnique("ConstraintName", 1);
+      var item = tableKeys.LJCGetUnique("ConstraintName", 1);
 
       var result = "";
       if (item != null)
@@ -173,30 +179,30 @@ namespace TestDataUtilityDAL
 
       var tableKey = new TableKey()
       {
-        ColumnName = "ColumnName2",
-        ConstraintName = "ConstraintName",
-        DBName = "DBName",
-        KeyType = "KeyType",
-        OrdinalPosition = 2,
-        TableName = "TableName",
         TableSchema = "TableSchema",
+        DBName = "DBName",
+        ConstraintName = "ConstraintName",
+        KeyType = "KeyType",
+        TableName = "TableName",
+        ColumnName = "ColumnName2",
         TargetColumn = "TargetColumns",
         TargetTable = "TargetTable",
+        OrdinalPosition = 2,
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
 
       tableKey = new TableKey()
       {
-        ColumnName = "ColumnName",
-        ConstraintName = "ConstraintName",
-        DBName = "DBName",
-        KeyType = "KeyType",
-        OrdinalPosition = 1,
-        TableName = "TableName",
         TableSchema = "TableSchema",
-        TargetColumn = "TargetColumns",
+        DBName = "DBName",
+        ConstraintName = "ConstraintName",
+        KeyType = "KeyType",
+        TableName = "TableName",
+        ColumnName = "ColumnName",
         TargetTable = "TargetTable",
+        TargetColumn = "TargetColumns",
+        OrdinalPosition = 1,
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
@@ -222,45 +228,43 @@ namespace TestDataUtilityDAL
 
       var tableKey = new TableKey()
       {
-        ColumnName = "ColumnName",
-        ConstraintName = "ConstraintName",
-        DBName = "DBName",
-        KeyType = "KeyType",
-        OrdinalPosition = 1,
-        TableName = "TableName",
         TableSchema = "TableSchema",
-        TargetColumn = "TargetColumns",
+        DBName = "DBName",
+        ConstraintName = "ConstraintName",
+        KeyType = "KeyType",
+        TableName = "TableName",
+        ColumnName = "ColumnName",
         TargetTable = "TargetTable",
+        TargetColumn = "TargetColumns",
+        OrdinalPosition = 1,
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
 
       tableKey = new TableKey()
       {
-        ColumnName = "ColumnName2",
-        ConstraintName = "ConstraintName",
-        DBName = "DBName",
-        KeyType = "KeyType",
-        OrdinalPosition = 2,
-        TableName = "TableName",
         TableSchema = "TableSchema",
-        TargetColumn = "TargetColumns",
+        DBName = "DBName",
+        ConstraintName = "ConstraintName",
+        KeyType = "KeyType",
+        TableName = "TableName",
+        ColumnName = "ColumnName2",
         TargetTable = "TargetTable",
+        TargetColumn = "TargetColumns",
+        OrdinalPosition = 2,
         UniqueConstraintName = "UniqueConstraintName",
       };
       tableKeys.Add(tableKey);
 
       tableKey = tableKeys["ConstraintName", 2];
-      var result = tableKey.ColumnName;
+      var result = "";
+      if (tableKey != null)
+      {
+        result = tableKey.ColumnName;
+      }
       var compare = "ColumnName2";
       TestCommon.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private TestCommon TestCommon { get; set; }
     #endregion
   }
 }

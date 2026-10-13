@@ -8,7 +8,6 @@ using LJCDBClientLib5;
 using LJCDBDataAccess5;
 using LJCNetCommon5;
 using Microsoft.Data.SqlClient;
-using System.Data;
 
 namespace TestDataUtilityDAL5
 {
@@ -202,7 +201,7 @@ namespace TestDataUtilityDAL5
       // Delete the test record.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "Name", (object)name },
+        { DataModule.ColumnName, name },
       };
       dataModuleManager.Delete(uniqueColumns);
 
@@ -238,7 +237,7 @@ namespace TestDataUtilityDAL5
 
       var propertyNames = new List<string>()
       {
-        "Name",
+        DataModule.ColumnName,
       };
 
       // Test Method
@@ -247,7 +246,7 @@ namespace TestDataUtilityDAL5
       var result = "";
       if (LJC.HasListItems(columns))
       {
-        var column = columns["Name"];
+        var column = columns[DataModule.ColumnName];
         if (column != null)
         {
           result = column.PropertyName;
@@ -321,7 +320,7 @@ namespace TestDataUtilityDAL5
       // Verify the test record was created.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "Name", (object)name },
+        { DataModule.ColumnName, name },
       };
       dataModule = dataModuleManager.Retrieve(uniqueColumns);
       var result = "";
@@ -357,7 +356,7 @@ namespace TestDataUtilityDAL5
       // Create the test record.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "Name", (object)name },
+        { DataModule.ColumnName, name },
       };
       var dataModule = dataModuleManager.Retrieve(uniqueColumns);
       if (dataModule != null)
@@ -423,7 +422,7 @@ namespace TestDataUtilityDAL5
       // Delete the test record.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "Name", name },
+        { DataModule.ColumnName, name },
       };
       dataModuleManager.Delete(uniqueColumns);
     }
@@ -459,7 +458,7 @@ namespace TestDataUtilityDAL5
       // Verify the test record was created.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "Name", (object)name },
+        { DataModule.ColumnName, name },
       };
 
       // Test Method
@@ -508,7 +507,7 @@ namespace TestDataUtilityDAL5
       // Verify the test record was created.
       var uniqueColumns = new LJCDataColumns()
         {
-          { "Name", name },
+          { DataModule.ColumnName, name },
         };
       dataModule = dataModuleManager.Retrieve(uniqueColumns);
       var result = "";
@@ -589,7 +588,7 @@ namespace TestDataUtilityDAL5
       // Verify the test record was created.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "Name", (object)name },
+        { DataModule.ColumnName, name },
       };
       dataModule = dataModuleManager.Retrieve(uniqueColumns);
 
@@ -671,7 +670,7 @@ namespace TestDataUtilityDAL5
       // Delete the test record.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "Name", name },
+        { DataModule.ColumnName, name },
       };
       dataModuleManager.Delete(uniqueColumns);
     }

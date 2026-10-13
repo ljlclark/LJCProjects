@@ -21,6 +21,7 @@ namespace TestDataUtilityDAL5
     public TestDataTables()
     {
       TestCommon = new LJCTestCommon("TestDataTables");
+      Run();
     }
 
     // Run the tests.
@@ -37,7 +38,7 @@ namespace TestDataUtilityDAL5
 
       // Collection Data Methods
       Add();
-      LJCGetWithID();
+      LJCGetWithId();
       LJCGetUnique();
       LJCRemove();
 
@@ -305,9 +306,9 @@ namespace TestDataUtilityDAL5
     }
 
     // Retrieve the collection item.
-    public void LJCGetWithID()
+    public void LJCGetWithId()
     {
-      var methodName = "LJCGetWithID()";
+      var methodName = "LJCGetWithId()";
 
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable
@@ -325,7 +326,7 @@ namespace TestDataUtilityDAL5
       dataTables.Add(dataTable);
 
       // Test Method
-      var item = dataTables.LJCGetWithID(1, 2);
+      var item = dataTables.LJCGetWithID(2, 1);
 
       var result = "";
       if (item != null)
@@ -417,7 +418,7 @@ namespace TestDataUtilityDAL5
     // Sort on ID.
     private void LJCSortId()
     {
-      var methodName = "LJCSortID()";
+      var methodName = "LJCSortId()";
 
       var dataTables = new DataTables();
       var dataTable = new DataUtilTable

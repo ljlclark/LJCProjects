@@ -1,15 +1,22 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// TestTableKeyManager.cs
+// TestTableKeyManager5.cs
 using LJCDataUtilityDAL5;
 using LJCDBClientLib5;
 using LJCDBDataAccess5;
+using LJCNetCommon5;
 
 namespace TestDataUtilityDAL5
 {
   // Tests the TableKeyManager object.
   internal class TestTableKeyManager
   {
+    #region Properties
+
+    // Gets or sets the TestCommon reference.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -17,7 +24,7 @@ namespace TestDataUtilityDAL5
     ///  path='members/Constructor/*'/>
     public TestTableKeyManager()
     {
-      //TestCommon = new TestCommon("TestTableKeyManager");
+      TestCommon = new LJCTestCommon("TestTableKeyManager");
       Run();
     }
     #endregion
@@ -72,15 +79,13 @@ namespace TestDataUtilityDAL5
       var foreignKeys = tableKeyManager.LoadForeignKeys();
 
       var result = "";
-      if (foreignKeys != null
-        && foreignKeys.Count > 0)
+      if (LJC.HasListItems(foreignKeys))
       {
         var foreignKey = foreignKeys[0];
         result = foreignKey.TargetTable;
       }
       var compare = "DataModule";
-      //TestCommon.Write($"{methodName}", result, compare);
-      Program.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Retrieves a collection of table key records.
@@ -106,22 +111,14 @@ namespace TestDataUtilityDAL5
       var tableKeys = tableKeyManager.LoadTableKeys();
 
       var result = "";
-      if (tableKeys != null
-        && tableKeys.Count > 0)
+      if (LJC.HasListItems(tableKeys))
       {
         var tableKey = tableKeys[0];
         result = tableKey.ColumnName;
       }
-      var compare = "ID";
-      //TestCommon.Write($"{methodName}", result, compare);
-      Program.Write($"{methodName}", result, compare);
+      var compare = "DbId";
+      TestCommon.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon reference.
-    //private TestCommon TestCommon { get; set; }
     #endregion
   }
 }

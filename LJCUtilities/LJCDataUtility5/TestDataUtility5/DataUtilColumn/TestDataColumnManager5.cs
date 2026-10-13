@@ -83,16 +83,16 @@ namespace TestDataUtilityDAL5
       };
       var dataTableManager = new DataTableManager(dbServiceRef, dataConfigName);
 
-      short dataModuleDbId = 1;
-      long dataModuleId = 1;
+      short dataTableDbId = 1;
+      long dataTableId = 1;
       string name = "TestTableName";
 
       // Delete the test record.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "DataModuleDbId", dataModuleDbId },
-        { "DataModuleId", dataModuleId },
-        { "Name", (object)name },
+        { DataUtilColumn.ColumnDataTableDbId, dataTableDbId },
+        { DataUtilColumn.ColumnDataTableId, dataTableId },
+        { DataUtilColumn.ColumnName, name },
       };
       dataTableManager.Delete(uniqueColumns);
 
@@ -128,9 +128,9 @@ namespace TestDataUtilityDAL5
 
       var propertyNames = new List<string>()
       {
-        "DataTableDbId",
-        "DataTableId",
-        "Name",
+        DataUtilColumn.ColumnDataTableDbId,
+        DataUtilColumn.ColumnDataTableId,
+        DataUtilColumn.ColumnName,
       };
 
       // Test Method
@@ -139,7 +139,7 @@ namespace TestDataUtilityDAL5
       var result = "";
       if (LJC.HasListItems(columns))
       {
-        var column = columns["Name"];
+        var column = columns[DataUtilColumn.ColumnName];
         if (column != null)
         {
           result = column.PropertyName;
@@ -226,9 +226,9 @@ namespace TestDataUtilityDAL5
       // Verify the test record was created.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "DataTableDbId", dataTableDbId },
-        { "DataTableId", dataTableId },
-        { "Name", name },
+        { DataUtilColumn.ColumnDataTableDbId, dataTableDbId },
+        { DataUtilColumn.ColumnDataTableId, dataTableId },
+        { DataUtilColumn.ColumnName, name },
       };
       dataColumn = dataColumnManager.Retrieve(uniqueColumns);
       var result = "";
@@ -266,9 +266,9 @@ namespace TestDataUtilityDAL5
       // Create the test record.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "DataTableDbId", dataTableDbId },
-        { "DataTableId", dataTableId },
-        { "Name", name },
+        { DataUtilColumn.ColumnDataTableDbId, dataTableDbId },
+        { DataUtilColumn.ColumnDataTableId, dataTableId },
+        { DataUtilColumn.ColumnName, name },
       };
       var dataColumn = dataColumnManager.Retrieve(uniqueColumns);
       if (dataColumn != null)
@@ -347,9 +347,9 @@ namespace TestDataUtilityDAL5
       // Delete the test record.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "DataTableDbId", dataTableDbId },
-        { "DataTableId", dataTableId },
-        { "Name", (object)name },
+        { DataUtilColumn.ColumnDataTableDbId, dataTableDbId },
+        { DataUtilColumn.ColumnDataTableId, dataTableId },
+        { DataUtilColumn.ColumnName, (object)name },
       };
       dataColumnManager.Delete(uniqueColumns);
     }
@@ -398,9 +398,9 @@ namespace TestDataUtilityDAL5
       // Verify the test record was created.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "DataTableDbId", dataTableDbId },
-        { "DataTableId", dataTableId },
-        { "Name", name },
+        { DataUtilColumn.ColumnDataTableDbId, dataTableDbId },
+        { DataUtilColumn.ColumnDataTableId, dataTableId },
+        { DataUtilColumn.ColumnName, name },
       };
 
       // Test Method
@@ -462,9 +462,9 @@ namespace TestDataUtilityDAL5
       // Verify the test record was created.
       var uniqueColumns = new LJCDataColumns()
         {
-          { "DataTableDbId", dataTableDbId },
-          { "DataTableId", dataTableId },
-          { "Name", (object)name },
+          { DataUtilColumn.ColumnDataTableDbId, dataTableDbId },
+          { DataUtilColumn.ColumnDataTableId, dataTableId },
+          { DataUtilColumn.ColumnName, (object)name },
         };
       dataColumn = dataColumnManager.Retrieve(uniqueColumns);
       var result = "";
@@ -558,9 +558,9 @@ namespace TestDataUtilityDAL5
       // Verify the test record was created.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "DataTableDbId", dataTableDbId },
-        { "DataTableId", dataTableId },
-        { "Name", (object)name },
+        { DataUtilColumn.ColumnDataTableDbId, dataTableDbId },
+        { DataUtilColumn.ColumnDataTableId, dataTableId },
+        { DataUtilColumn.ColumnName, (object)name },
       };
       dataColumn = dataColumnManager.Retrieve(uniqueColumns);
 
@@ -656,9 +656,9 @@ namespace TestDataUtilityDAL5
       // Delete the test record.
       var uniqueColumns = new LJCDataColumns()
       {
-        { "DataTableDbId", dataTableDbId },
-        { "DataTableId", dataTableId },
-        { "Name", (object)name },
+        { DataUtilColumn.ColumnDataTableDbId, dataTableDbId },
+        { DataUtilColumn.ColumnDataTableId, dataTableId },
+        { DataUtilColumn.ColumnName, (object)name },
       };
       dataColumnManager.Delete(uniqueColumns);
     }

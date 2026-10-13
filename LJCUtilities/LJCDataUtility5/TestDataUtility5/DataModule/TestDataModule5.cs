@@ -56,8 +56,8 @@ namespace TestDataUtilityDAL5
 
       var changedNames = new List<string>()
       {
-        "Name",
-        "Description",
+        DataModule.ColumnName,
+        DataModule.ColumnDescription,
       };
 
       // Test Method
@@ -186,7 +186,7 @@ namespace TestDataUtilityDAL5
       {
         DbId = 2,
         Id = 1,
-        Name = "Name",
+        Name = DataModule.ColumnName,
       };
 
       // Test Method
@@ -271,9 +271,9 @@ namespace TestDataUtilityDAL5
       var compare = "No Result";
       TestCommon.Write($"{methodName}1", result, compare);
 
-      dataModule.Name = "Name";
+      dataModule.Name = DataModule.ColumnName;
       result = dataModule.ChangedNames.ChangedPropertyNames;
-      compare = "Name";
+      compare = DataModule.ColumnName;
       TestCommon.Write($"{methodName}2", result, compare);
     }
 

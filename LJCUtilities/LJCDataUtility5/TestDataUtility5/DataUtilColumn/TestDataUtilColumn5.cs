@@ -67,8 +67,8 @@ namespace TestDataUtilityDAL5
 
       var changedNames = new List<string>()
       {
-        "Name",
-        "Description",
+        DataUtilColumn.ColumnName,
+        DataUtilColumn.ColumnDescription,
       };
 
       // Test Method
