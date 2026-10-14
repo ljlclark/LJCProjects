@@ -1,21 +1,37 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataCommonProgram.cs
+// TestDataCommon5.cs
 using LJCDataAccess5;
+using LJCDataAccessConfig5;
 using LJCNetCommon5;
+using System.Data;
+using System.Data.Common;
 
-namespace TestDataCommon5
+namespace TestDataAccess5
 {
-  // The entry class.
-  internal class DataCommonProgram
+  internal class TestDataCommon
   {
-    // The entry method.
-    static void Main()
-    {
-      TestCommon = new LJCTestCommon("LJCDataCommon");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCDataCommon ***");
+    #region Properties
 
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestDataKey.xml'
+    ///  path='members/Constructor/*'/>
+    public TestDataCommon()
+    {
+      //TestCommon = new LJCTestCommon("LJCTestDataCommon");
+      TestCommon = new LJCTestCommon("TestDataCommon");
+      Run();
+    }
+
+    // Run the tests.
+    private void Run()
+    {
       // Data Access Methods
       SetTableMapping();
       SetTableMappingMySql();
@@ -30,16 +46,13 @@ namespace TestDataCommon5
       GetUIDateString();
       GetUIDateTimeString();
       GetUITimeString();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Data Access Methods
 
     // Sets the data adapter table mappings.
-    private static void SetTableMapping()
+    private void SetTableMapping()
     {
       var methodName = "SetTableMapping()";
 
@@ -49,7 +62,7 @@ namespace TestDataCommon5
     }
 
     // Sets the data adapter table mappings.
-    private static void SetTableMappingMySql()
+    private void SetTableMappingMySql()
     {
       var methodName = "SetTableMappingMySql()";
 
@@ -62,7 +75,7 @@ namespace TestDataCommon5
     #region Data Conversion Methods
 
     // Converts the date string to a DateTime value.
-    private static void GetDbDate()
+    private void GetDbDate()
     {
       var methodName = "GetDbDate()";
 
@@ -84,7 +97,7 @@ namespace TestDataCommon5
     }
 
     // Converts the date/time string to a DateTime value.
-    private static void GetDbDateTime()
+    private void GetDbDateTime()
     {
       var methodName = "GetDbDateTime()";
 
@@ -112,7 +125,7 @@ namespace TestDataCommon5
     }
 
     // Formats the DateTime value to a date string in database format.
-    private static void GetDbDateString()
+    private void GetDbDateString()
     {
       var methodName = "GetDbDateString()";
 
@@ -126,7 +139,7 @@ namespace TestDataCommon5
     }
 
     // Formats the DateTime value to a date/time string in database format.
-    private static void GetDbDateTimeString()
+    private void GetDbDateTimeString()
     {
       var methodName = "GetDbDateTimeString()";
 
@@ -138,7 +151,7 @@ namespace TestDataCommon5
     }
 
     // Get the minimum date/time value.
-    private static void GetMinDateTime()
+    private void GetMinDateTime()
     {
       var methodName = "GetMinDateTime()";
 
@@ -156,7 +169,7 @@ namespace TestDataCommon5
     }
 
     // Get the minimum date/time string formatted for display.
-    private static void GetMinUIDateTimeString()
+    private void GetMinUIDateTimeString()
     {
       var methodName = "GetMinUIDateTimeString()";
 
@@ -173,7 +186,7 @@ namespace TestDataCommon5
     }
 
     // Format the date value for display.
-    private static void GetUIDateString()
+    private void GetUIDateString()
     {
       var methodName = "GetUIDateString()";
 
@@ -186,7 +199,7 @@ namespace TestDataCommon5
     }
 
     // Format the date/time value for display.
-    private static void GetUIDateTimeString()
+    private void GetUIDateTimeString()
     {
       var methodName = "GetUIDateTimeString()";
 
@@ -199,7 +212,7 @@ namespace TestDataCommon5
     }
 
     // Format the date/time to time for display.
-    private static void GetUITimeString()
+    private void GetUITimeString()
     {
       var methodName = "GetUITimeString()";
 
@@ -210,12 +223,6 @@ namespace TestDataCommon5
       var compare = "12:30 PM";
       TestCommon?.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

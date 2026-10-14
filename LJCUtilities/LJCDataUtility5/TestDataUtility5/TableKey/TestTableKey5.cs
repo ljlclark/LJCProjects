@@ -58,10 +58,10 @@ namespace TestDataUtilityDAL5
         ConstraintName = "ConstraintName",
         KeyType = "KeyType",
         TableName = "TableName",
+        OrdinalPosition = 1,
         ColumnName = "ColumnName",
         TargetTable = "TargetTable",
         TargetColumn = "TargetColumn",
-        OrdinalPosition = 1,
         UniqueConstraintName = "UniqueConstraintName",
       };
 
@@ -70,16 +70,12 @@ namespace TestDataUtilityDAL5
 
       while (true)
       {
-
         var result = "";
-        if (newTableKey != null)
-        {
-          result = newTableKey.DBName;
-        }
-        var compare = "DBName";
-        TestCommon.Write($"{methodName}1", result, compare);
+        var compare = "";
+
         if (null == newTableKey)
         {
+          TestCommon.Write($"{methodName}1", result, compare);
           break;
         }
 
@@ -87,37 +83,41 @@ namespace TestDataUtilityDAL5
         compare = "TableSchema";
         TestCommon.Write($"{methodName}2", result, compare);
 
-        result = newTableKey.TableName;
-        compare = "TableName";
+        result = newTableKey.DBName;
+        compare = "DBName";
         TestCommon.Write($"{methodName}3", result, compare);
+
+        result = newTableKey.ConstraintName;
+        compare = "ConstraintName";
+        TestCommon.Write($"{methodName}7", result, compare);
+
+        result = newTableKey.UniqueConstraintName;
+        compare = "UniqueConstraintName";
+        TestCommon.Write($"{methodName}11", result, compare);
 
         result = newTableKey.KeyType;
         compare = "KeyType";
+        TestCommon.Write($"{methodName}5", result, compare);
+
+        result = newTableKey.TableName;
+        compare = "TableName";
         TestCommon.Write($"{methodName}4", result, compare);
 
         result = newTableKey.ColumnName;
         compare = "ColumnName";
-        TestCommon.Write($"{methodName}5", result, compare);
-
-        result = newTableKey.ConstraintName;
-        compare = "ConstraintName";
         TestCommon.Write($"{methodName}6", result, compare);
-
-        result = newTableKey.TargetTable;
-        compare = "TargetTable";
-        TestCommon.Write($"{methodName}7", result, compare);
-
-        result = newTableKey.TargetColumn;
-        compare = "TargetColumn";
-        TestCommon.Write($"{methodName}8", result, compare);
 
         result = $"{newTableKey.OrdinalPosition}";
         compare = "1";
-        TestCommon.Write($"{methodName}9", result, compare);
-
-        result = newTableKey.UniqueConstraintName;
-        compare = "UniqueConstraintName";
         TestCommon.Write($"{methodName}10", result, compare);
+
+        result = newTableKey.TargetTable;
+        compare = "TargetTable";
+        TestCommon.Write($"{methodName}8", result, compare);
+
+        result = newTableKey.TargetColumn;
+        compare = "TargetColumn";
+        TestCommon.Write($"{methodName}9", result, compare);
         break;
       }
     }

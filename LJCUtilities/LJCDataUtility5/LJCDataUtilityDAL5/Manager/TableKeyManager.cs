@@ -50,12 +50,12 @@ namespace LJCDataUtilityDAL5
 
       //var sql = "OBJECT_ID('[dbo].[sp_GetForeignKeys]', N'p')";
       //var dbResult = Manager.ExecuteClientSql(RequestType.ExecuteSQL, sql);
-      CreateForeignKeysProcedure();
+      //CreateForeignKeysProcedure();
 
-      var parms = new LJCProcedureParameters();
-      var parm = new LJCProcedureParameter("@TableName", (int)SqlDbType.NVarChar
-        , 20, Manager.TableName);
-      parms.Add(parm);
+      //var parms = new LJCProcedureParameters();
+      //var parm = new LJCProcedureParameter("@TableName", (int)SqlDbType.NVarChar
+      //  , 20, Manager.TableName);
+      //parms.Add(parm);
 
       //// ?
       //var headSql = "USE[LJCDataUtility] \r\n";
@@ -63,23 +63,23 @@ namespace LJCDataUtilityDAL5
       //headSql += "SET QUOTED_IDENTIFIER ON \r\n";
       //var result = Manager.ExecuteClientSql(RequestType.ExecuteSQL, headSql);
 
-      var dbResult = Manager.LoadProcedure("sp_GetForeignKeys", parms);
-      if (dbResult != null)
-      {
-        retValue = ResultConverter.CreateCollection(dbResult);
-      }
-      return retValue;
-
-      //if (Manager.TableName != null)
+      //var dbResult = Manager.LoadProcedure("sp_GetForeignKeys", parms);
+      //if (dbResult != null)
       //{
-      //  var sql = ForeignKeySql(Manager.TableName);
-      //  var dbResult = Manager.ExecuteClientSql(RequestType.LoadSQL, sql);
-      //  if (dbResult != null)
-      //  {
-      //    retValue = ResultConverter.CreateCollection(dbResult);
-      //  }
+      //  retValue = ResultConverter.CreateCollection(dbResult);
       //}
       //return retValue;
+
+      if (Manager.TableName != null)
+      {
+        var sql = ForeignKeySql(Manager.TableName);
+        var dbResult = Manager.ExecuteClientSql(RequestType.LoadSQL, sql);
+        if (dbResult != null)
+        {
+          retValue = ResultConverter.CreateCollection(dbResult);
+        }
+      }
+      return retValue;
     }
 
     // Retrieves a collection of Key records.
@@ -112,16 +112,16 @@ namespace LJCDataUtilityDAL5
       var tb = new LJCTextBuilder();
 
       tb.Line("select");
+      tb.Line("kcus.TABLE_SCHEMA AS TableSchema, ");
       tb.Line("rc.CONSTRAINT_CATALOG as DBName, ");
       tb.Line("rc.CONSTRAINT_NAME AS ConstraintName, ");
-      tb.Line("rc.UNIQUE_CONSTRAINT_NAME as UniqueConstraintName, ");
       tb.Line("tc.CONSTRAINT_TYPE as KeyType, ");
-      tb.Line("kcus.COLUMN_NAME AS ColumnName, ");
-      tb.Line("kcus.ORDINAL_POSITION as OrdinalPosition, ");
       tb.Line("kcus.TABLE_NAME AS TableName, ");
-      tb.Line("kcus.TABLE_SCHEMA AS TableSchema, ");
+      tb.Line("kcus.ORDINAL_POSITION as OrdinalPosition, ");
+      tb.Line("kcus.COLUMN_NAME AS ColumnName, ");
       tb.Line("kcut.COLUMN_NAME AS TargetColumn, ");
-      tb.Line("kcut.TABLE_NAME AS TargetTable ");
+      tb.Line("kcut.TABLE_NAME AS TargetTable, ");
+      tb.Line("rc.UNIQUE_CONSTRAINT_NAME as UniqueConstraintName ");
       tb.Line("from INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS rc ");
       tb.Line("left join INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc ");
       tb.Line("  on rc.CONSTRAINT_NAME = tc.CONSTRAINT_NAME ");

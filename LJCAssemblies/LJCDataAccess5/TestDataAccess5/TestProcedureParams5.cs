@@ -1,38 +1,46 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ProcedureParamsProgram.cs
+// TestProcedureParams5.cs
 using LJCDataAccess5;
 using LJCNetCommon5;
 using System.Data;
 
-namespace TestProcedureParameters5
+namespace TestDataAccess5
 {
-  // The entry class.
-  internal class ProcedureParamsProgram
+  internal class TestProcedureParams
   {
-    // The entry method.
-    static void Main()
-    {
-      TestCommon = new LJCTestCommon("LJCProcedureParameters");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCProcedureParameters ***");
+    #region Properties
 
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestDataKey.xml'
+    ///  path='members/Constructor/*'/>
+    public TestProcedureParams()
+    {
+      TestCommon = new LJCTestCommon("TestProcedureParam");
+      Run();
+    }
+
+    // Run the tests.
+    private void Run()
+    {
       // Constructor Methods
       ConstructorCopy();
 
       // Methods
       Add();
       LJCSearchName();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
-
+    #endregion
     #region Constructor Methods
 
     // The Copy constructor.
-    private static void ConstructorCopy()
+    private void ConstructorCopy()
     {
       var methodName = "ConstructorCopy()";
 
@@ -55,7 +63,7 @@ namespace TestProcedureParameters5
     }
 
     // Creates and adds the object from the supplied values.
-    private static void Add()
+    private void Add()
     {
       var methodName = "Add()";
 
@@ -79,7 +87,7 @@ namespace TestProcedureParameters5
     }
 
     // Retrieve the collection element by name.
-    private static void LJCSearchName()
+    private void LJCSearchName()
     {
       var methodName = "LJCSearchName()";
 
@@ -100,12 +108,6 @@ namespace TestProcedureParameters5
       var compare = "Name";
       TestCommon?.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

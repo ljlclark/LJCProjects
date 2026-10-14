@@ -1,22 +1,34 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ProcedureParamProgram.cs
+// TestProcedureParam5.cs
 using LJCDataAccess5;
 using LJCNetCommon5;
 using System.Data;
 
-namespace TestProcedureParam5
+namespace TestDataAccess5
 {
-  // The entry class.
-  internal class ProcedureParamProgram
+  internal class TestProcedureParam
   {
-    // The entry method.
-    static void Main()
-    {
-      TestCommon = new LJCTestCommon("LJCDbColumns");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCDbColumns ***");
+    #region Properties
 
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestDataKey.xml'
+    ///  path='members/Constructor/*'/>
+    public TestProcedureParam()
+    {
+      TestCommon = new LJCTestCommon("TestProcedureParam");
+      Run();
+    }
+
+    // Run the tests.
+    private void Run()
+    {
       // Constructor Methods
       ConstructorCopy();
       ConstructorParam();
@@ -25,16 +37,13 @@ namespace TestProcedureParam5
       ToStringMethod();
       Clone();
       CompareTo();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Constructor Methods
 
     // The Copy constructor.
-    private static void ConstructorCopy()
+    private void ConstructorCopy()
     {
       var methodName = "ConstructorCopy()";
 
@@ -57,7 +66,7 @@ namespace TestProcedureParam5
     }
 
     /// <summary>A Create constructor.</summary>
-    private static void ConstructorParam()
+    private void ConstructorParam()
     {
       var methodName = "ConstructorParam()";
 
@@ -78,7 +87,7 @@ namespace TestProcedureParam5
     #region Methods
 
     // The object string identifier.
-    private static void ToStringMethod()
+    private void ToStringMethod()
     {
       var methodName = "ToStringMethod()";
 
@@ -96,7 +105,7 @@ namespace TestProcedureParam5
     }
 
     // Creates and returns a clone of the object.
-    private static void Clone()
+    private void Clone()
     {
       var methodName = "Clone()";
 
@@ -119,7 +128,7 @@ namespace TestProcedureParam5
     }
 
     // Provides the default Sort functionality.
-    private static void CompareTo()
+    private void CompareTo()
     {
       var methodName = "CompareTo()";
 
@@ -138,12 +147,6 @@ namespace TestProcedureParam5
       var compare = LJCNetString.CompareEqual.ToString();
       TestCommon?.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

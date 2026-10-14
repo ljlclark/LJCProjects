@@ -1,35 +1,45 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DbColumnProgram.cs
+// TestDbColumn5.cs
 using LJCDataAccess5;
 using LJCNetCommon5;
 using System.Data;
 
-namespace TestDbColumn5
+namespace TestDataAccess5
 {
-  // The entry class.
-  internal class DbColumnProgram
+  internal class TestDbColumn
   {
-    // The entry method.
-    static void Main()
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestDataKey.xml'
+    ///  path='members/Constructor/*'/>
+    public TestDbColumn()
     {
-      TestCommon = new LJCTestCommon("LJCDbColumn");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCDbColumn ***");
+      TestCommon = new LJCTestCommon("TestDbColumn");
+      Run();
+    }
+
+    // Run the tests.
+    private void Run()
+    {
 
       // Static Methods
       Clone();
       ToDataColumn();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Static Methods
 
     // Clones a DataColumn object.
-    private static void Clone()
+    private void Clone()
     {
       var methodName = "Clone()";
 
@@ -56,7 +66,7 @@ namespace TestDbColumn5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    private static void ToDataColumn()
+    private void ToDataColumn()
     {
       var methodName = "ToDataColumn()";
 
@@ -82,12 +92,6 @@ namespace TestDbColumn5
       var compare = "Name";
       TestCommon?.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

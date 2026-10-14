@@ -1,20 +1,32 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ProviderFactoryProgram.cs
+// TestProviderFactory5.cs
 using LJCNetCommon5;
 
-namespace TestProviderFactory5
+namespace TestDataAccess5
 {
-  // The entry class.
-  internal class ProviderFactoryProgram
+  internal class TestProviderFactory
   {
-    // The entry method.
-    static void Main()
-    {
-      TestCommon = new LJCTestCommon("LJCProviderFactory");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCProviderFactory ***");
+    #region Properties
 
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestDataKey.xml'
+    ///  path='members/Constructor/*'/>
+    public TestProviderFactory()
+    {
+      TestCommon = new LJCTestCommon("TestProviderFactory");
+      Run();
+    }
+
+    // Run the tests.
+    private void Run()
+    {
       // Constructor Methods
       ConstructorParam();
 
@@ -24,16 +36,12 @@ namespace TestProviderFactory5
       CreateConnection();
       CreateDataAdapter();
       OpenConnection();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
-
+    #endregion
     #region Constructor Methods
 
     // Initializes an object instance with the supplied values.
-    private static void ConstructorParam()
+    private void ConstructorParam()
     {
       var methodName = "ConstructorParam()";
 
@@ -46,7 +54,7 @@ namespace TestProviderFactory5
     #region Methods
 
     // 
-    private static void CloseConnection()
+    private void CloseConnection()
     {
       var methodName = "CloseConnection()";
 
@@ -56,7 +64,7 @@ namespace TestProviderFactory5
     }
 
     // 
-    private static void CreateCommand()
+    private void CreateCommand()
     {
       var methodName = "CreateCommand()";
 
@@ -66,7 +74,7 @@ namespace TestProviderFactory5
     }
 
     // 
-    private static void CreateConnection()
+    private void CreateConnection()
     {
       var methodName = "CreateConnection()";
 
@@ -76,7 +84,7 @@ namespace TestProviderFactory5
     }
 
     // 
-    private static void CreateDataAdapter()
+    private void CreateDataAdapter()
     {
       var methodName = "CreateDataAdapter()";
 
@@ -86,7 +94,7 @@ namespace TestProviderFactory5
     }
 
     // 
-    private static void OpenConnection()
+    private void OpenConnection()
     {
       var methodName = "OpenConnection()";
 
@@ -94,12 +102,6 @@ namespace TestProviderFactory5
       var compare = "";
       TestCommon?.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

@@ -1,40 +1,48 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DbColumnsProgram.cs
-
+// TestDbColumns5.cs
+using LJCDataAccess5;
 using LJCNetCommon5;
 using System.Data;
 
-namespace TestDbColumns5
+namespace TestDataAccess5
 {
-  // The entry class.
-  internal class DbColumnsProgram
+  internal class TestDbColumns
   {
-    // The entry method.
-    static void Main()
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestDataKey.xml'
+    ///  path='members/Constructor/*'/>
+    public TestDbColumns()
     {
-      TestCommon = new LJCTestCommon("LJCDbColumns");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCDbColumns ***");
+      TestCommon = new LJCTestCommon("TestDbColumns");
+      Run();
+    }
 
+    // Run the tests.
+    private void Run()
+    {
       // Static Methods
-
       Clone();
       ColumnNames();
       Columns();
       CreateColumns();
       HasColumns();
       ToDataColumns();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Static Methods
 
     // Clones a DataColumnCollection.
-    private static void Clone()
+    private void Clone()
     {
       var methodName = "Clone()";
 
@@ -44,7 +52,7 @@ namespace TestDbColumns5
     }
 
     // Creates a Column Names list from a DataColumnCollection.
-    private static void ColumnNames()
+    private void ColumnNames()
     {
       var methodName = "ColumnNames()";
 
@@ -54,7 +62,7 @@ namespace TestDbColumns5
     }
 
     // Returns a set of DataColumns that match the supplied list.
-    private static void Columns()
+    private void Columns()
     {
       var methodName = "Columns()";
 
@@ -64,7 +72,7 @@ namespace TestDbColumns5
     }
 
     // Creates a new DataColumns object.
-    private static void CreateColumns()
+    private void CreateColumns()
     {
       var methodName = "CreateColumns()";
 
@@ -74,7 +82,7 @@ namespace TestDbColumns5
     }
 
     // Checks the DataColumnCollection object for items.
-    private static void HasColumns()
+    private void HasColumns()
     {
       var methodName = "HasColumns()";
 
@@ -84,7 +92,7 @@ namespace TestDbColumns5
     }
 
     // Creates an LJCDataColumns collection from a DataColumnCollection.
-    private static void ToDataColumns()
+    private void ToDataColumns()
     {
       var methodName = "ToDataColumns()";
 
@@ -92,13 +100,6 @@ namespace TestDbColumns5
       var compare = "";
       TestCommon?.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

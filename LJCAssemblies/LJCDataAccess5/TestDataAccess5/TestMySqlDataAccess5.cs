@@ -1,21 +1,32 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// MySqlDataAccessProgram.cs
-
+// TestMySqlDataAccess5.cs
 using LJCNetCommon5;
 
-namespace TestMySqlDataAccess5
+namespace TestDataAccess5
 {
-  // The entry class.
-  internal class MySqlDataAccessProgram
+  internal class TestMySqlDataAccess
   {
-    // The entry method.
-    static void Main()
-    {
-      TestCommon = new LJCTestCommon("LJCMySqlDataAccess");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCMySqlDataAccess ***");
+    #region Properties
 
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestMySqlDataAccess.xml'
+    ///  path='members/Constructor/*'/>
+    public TestMySqlDataAccess()
+    {
+      TestCommon = new LJCTestCommon("TestMySqlDataAccess");
+      Run();
+    }
+
+    // Run the tests.
+    private void Run()
+    {
       // Constructor Methods
       ConstructorParam();
 
@@ -28,15 +39,12 @@ namespace TestMySqlDataAccess5
       GetDataTableFromReader();
       GetProcedureDataTable();
       GetSchemaOnly();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Constructor Methods
 
-    private static void ConstructorParam()
+    private void ConstructorParam()
     {
       var methodName = "ConstructorParam()";
 
@@ -48,7 +56,7 @@ namespace TestMySqlDataAccess5
 
     #region Methods
 
-    private static void ExecuteNonQuery()
+    private void ExecuteNonQuery()
     {
       var methodName = "ExecuteNonQuery()";
 
@@ -57,7 +65,7 @@ namespace TestMySqlDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    private static void FillDataTable()
+    private void FillDataTable()
     {
       var methodName = "FillDataTable()";
 
@@ -66,7 +74,7 @@ namespace TestMySqlDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    private static void GetDataReader()
+    private void GetDataReader()
     {
       var methodName = "GetDataReader()";
 
@@ -75,7 +83,7 @@ namespace TestMySqlDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    private static void GetDataSet()
+    private void GetDataSet()
     {
       var methodName = "GetDataSet()";
 
@@ -84,7 +92,7 @@ namespace TestMySqlDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    private static void GetDataTable()
+    private void GetDataTable()
     {
       var methodName = "GetDataTable()";
 
@@ -93,7 +101,7 @@ namespace TestMySqlDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    private static void GetDataTableFromReader()
+    private void GetDataTableFromReader()
     {
       var methodName = "GetDataTableFromReader()";
 
@@ -102,7 +110,7 @@ namespace TestMySqlDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    private static void GetProcedureDataTable()
+    private void GetProcedureDataTable()
     {
       var methodName = "GetProcedureDataTable()";
 
@@ -111,7 +119,7 @@ namespace TestMySqlDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    private static void GetSchemaOnly()
+    private void GetSchemaOnly()
     {
       var methodName = "GetSchemaOnly()";
 
@@ -119,12 +127,6 @@ namespace TestMySqlDataAccess5
       var compare = "";
       TestCommon?.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

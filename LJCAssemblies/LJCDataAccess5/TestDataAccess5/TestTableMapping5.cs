@@ -1,36 +1,42 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TestMappingProgram.cs
-
+// TestTableMapping5.cs
 using LJCNetCommon5;
 
-namespace TestTableMapping5
+namespace TestDataAccess5
 {
-  // The entry class.
-  internal class TableMappingProgram
+  internal class TestTableMapping
   {
-    // The entry method.
-    static void Main()
-    {
-      TestCommon = new LJCTestCommon("LJCTableMapping");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCTableMapping ***");
+    #region Properties
 
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestDataKey.xml'
+    ///  path='members/Constructor/*'/>
+    public TestTableMapping()
+    {
+      TestCommon = new LJCTestCommon("TestTableMapping");
+      Run();
+    }
+
+    // Run the tests.
+    private void Run()
+    {
       // Methods
       AddColumnMap();
       AddTableMap();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
-
-    #region Properties
+    #endregion
 
     #region Methods
 
     // Adds a DataTable column map to the table mapping.
-    private static void AddColumnMap()
+    private void AddColumnMap()
     {
       var methodName = "AddColumnMap()";
 
@@ -40,7 +46,7 @@ namespace TestTableMapping5
     }
 
     // Adds a DataTable map to the TableMaps collection.
-    private static void AddTableMap()
+    private void AddTableMap()
     {
       var methodName = "AddTableMap()";
 
@@ -48,10 +54,6 @@ namespace TestTableMapping5
       var compare = "";
       TestCommon?.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }
