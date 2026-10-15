@@ -1,21 +1,29 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataConfigsProgram.cs
+// TestDataConfigs5.cs
 using LJCDataAccessConfig5;
 using LJCNetCommon5;
 
-namespace TestDataConfigs5
+namespace TestConnectionTemplates5
 {
-  // The entry class.
-  internal class DataConfigsProgram
+  internal class TestDataConfigs
   {
-    // The entry method.
-    static void Main()
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; } = null!;
+    #endregion
+
+    #region Constructor Methods
+
+    public TestDataConfigs()
     {
       TestCommon = new LJCTestCommon("LJCDataConfigs");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCDataConfigs ***");
+      Run();
+    }
 
+    private void Run()
+    {
       // Static Methods
       DataConfig();
 
@@ -26,16 +34,13 @@ namespace TestDataConfigs5
       Add();
       Retrieve();
       Save();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Static Methods
 
     // Gets a DataConfig from the DataConfigs.xml file.
-    private static void DataConfig()
+    private void DataConfig()
     {
       var methodName = "DataConfig()";
 
@@ -60,13 +65,13 @@ namespace TestDataConfigs5
         result = dataConfig.Name;
       }
       var compare = "DataConfig";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
 
     #region Constructor Methods
 
-    private static void LoadData()
+    private void LoadData()
     {
       var methodName = "LoadData()";
 
@@ -88,14 +93,14 @@ namespace TestDataConfigs5
       var dataConfig = dataConfigs.Retrieve(dataConfigName);
       var result = dataConfig.Name;
       var compare = "DataConfig";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
 
     #region Collection Methods
 
     // Creates and adds the object from the supplied valus.
-    private static void Add()
+    private void Add()
     {
       var methodName = "Add()";
 
@@ -119,11 +124,11 @@ namespace TestDataConfigs5
         result = dataConfig.Name;
       }
       var compare = "TestConfig";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Retrieve the data configuration.
-    private static void Retrieve()
+    private void Retrieve()
     {
       var methodName = "Retrieve()";
 
@@ -147,11 +152,11 @@ namespace TestDataConfigs5
         result = dataConfig.Name;
       }
       var compare = "DataConfig";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Saves the config data.
-    private static void Save()
+    private void Save()
     {
       var methodName = "Save()";
 
@@ -183,14 +188,8 @@ namespace TestDataConfigs5
         result = dataConfig.Name;
       }
       var compare = "TestConfig";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

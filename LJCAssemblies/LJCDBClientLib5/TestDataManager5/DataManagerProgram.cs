@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataManagerProgram.cs
-using LJCNetCommon5;
 
 namespace TestDataManager5
 {
@@ -11,19 +10,13 @@ namespace TestDataManager5
     // The entry method.
     static void Main()
     {
-      TestCommon = new LJCTestCommon("LJCDataManager");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCDataManager ***");
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
+      _ = new TestChangedNames();
+      _ = new TestDataManager();
+      _ = new TestDbManager();
+      _ = new TestDbServiceRef();
+      _ = new TestManagerCommon();
+      _ = new TestObjectManager();
+      _ = new TestSqlManager();
     }
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
-    #endregion
   }
 }

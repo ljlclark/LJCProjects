@@ -1,21 +1,29 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataConfigProgram.cs
+// TestDataConfig5.cs
 using LJCDataAccessConfig5;
 using LJCNetCommon5;
 
-namespace TestDataConfig5
+namespace TestConnectionTemplates5
 {
-  // The entry class.
-  internal class DataConfigProgram
+  internal class TestDataConfig
   {
-    // The entry method.
-    static void Main()
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; } = null!;
+    #endregion
+
+    #region Constructor Methods
+
+    public TestDataConfig()
     {
       TestCommon = new LJCTestCommon("LJCDataConfig");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCDataConfig ***");
+      Run();
+    }
 
+    private void Run()
+    {
       // Static Methods
       ProviderName();
 
@@ -27,29 +35,26 @@ namespace TestDataConfig5
       ConnectionString();
       ConnectionStringFromTemplate();
       SQLIntegratedConnectionString();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Static Methods
 
     // Retrieves the provider name value.
-    private static void ProviderName()
+    private void ProviderName()
     {
       var methodName = "ProviderName()";
 
       var result = LJCDataConfig.ProviderName("SQLServer");
       var compare = "System.Data.SqlClient";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
 
     #region Data Class Methods
 
     // The object string value.
-    private static void ToStringMethod()
+    private void ToStringMethod()
     {
       var methodName = "ToStringMethod()";
 
@@ -70,11 +75,11 @@ namespace TestDataConfig5
       // Test Method
       var result = dataConfig.ToString();
       var compare = "DataConfig";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Provides the default Sort functionality.
-    private static void CompareTo()
+    private void CompareTo()
     {
       var methodName = "CompareTo()";
 
@@ -91,14 +96,14 @@ namespace TestDataConfig5
       var value = dataConfig.CompareTo(other);
       var result = value.ToString();
       var compare = LJCNetString.CompareEqual.ToString();
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
 
     #region Methods
 
     // 
-    private static void ConnectionString()
+    private void ConnectionString()
     {
       var methodName = "ConnectionString()";
 
@@ -121,11 +126,11 @@ namespace TestDataConfig5
       var result = dataConfig.ConnectionString(dataConfig.ConnectionType);
       var compare = "Data Source=Machine_Name\\SQL_Instance_Name;Initial ";
       compare += "Catalog=Database_Name;Integrated Security=True";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Creates the populated connection string from the template text.
-    private static void ConnectionStringFromTemplate()
+    private void ConnectionStringFromTemplate()
     {
       var methodName = "ConnectionStringFromTemplate()";
 
@@ -158,11 +163,11 @@ namespace TestDataConfig5
       }
       var compare = "Data Source=Machine_Name\\SQL_Instance_Name;Initial ";
       compare += "Catalog=Database_Name;Integrated Security=True";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Creates the populated connection string from the template text.
-    private static void SQLIntegratedConnectionString()
+    private void SQLIntegratedConnectionString()
     {
       var methodName = "SQLIntegratedConnectionString()";
 
@@ -184,14 +189,8 @@ namespace TestDataConfig5
       var result = dataConfig.SQLIntegratedConnectionString();
       var compare = "Data Source=Machine_Name\\SQL_Instance_Name;Initial ";
       compare += "Catalog=Database_Name;Integrated Security=True";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }
