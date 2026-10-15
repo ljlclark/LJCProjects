@@ -1,0 +1,139 @@
+﻿// Copyright (c) Lester J. Clark and Contributors.
+// Licensed under the MIT License.
+// TestDataHTMLTable5.cs
+using LJCNetCommon5;
+
+namespace TestDBMessage5
+{
+  // Methods to test LJCDataHTMLTable.
+  internal class TestDataHTMLTable
+  {
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; } = null!;
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestDataHTMLTable.xml'
+    ///  path='members/Constructor/*'/>
+    public TestDataHTMLTable()
+    {
+      TestCommon = new LJCTestCommon("LJCDataHTML");
+      Run();
+    }
+
+    // Runs the tests.
+    private void Run()
+    {
+      // DataTable Methods
+      DataTableHeadings();
+      DataTableHTML();
+      DataTableRows();
+
+      // Data Object Methods
+      DataHeadings();
+      DataHTML();
+      DataRows();
+
+      // DbResult Methods
+      ResultHeadings();
+      ResultHTML();
+      ResultRows();
+    }
+    #endregion
+
+    #region DataTable Methods
+
+    private void DataTableHeadings()
+    {
+      var methodName = "DataTableHeadings()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    private void DataTableHTML()
+    {
+      var methodName = "DataTableHTML()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    private void DataTableRows()
+    {
+      var methodName = "DataTableRows()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+    #endregion
+
+    #region Data Object Methods
+
+    private void DataHeadings()
+    {
+      var methodName = "DataHeadings()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    private void DataHTML()
+    {
+      var methodName = "DataHTML()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    private void DataRows()
+    {
+      var methodName = "DataRows()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+    #endregion
+
+    #region DbResult Methods
+
+    private void ResultHeadings()
+    {
+      var methodName = "ResultHeadings()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    private void ResultHTML()
+    {
+      var methodName = "ResultHTML()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    private void ResultRows()
+    {
+      var methodName = "ResultRows()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+    #endregion
+
+  }
+}
