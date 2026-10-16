@@ -1,20 +1,33 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// AssemblyReflectProgram.cs
+// TestAssemblyReflect5.cs
 using LJCNetCommon5;
 
-namespace TestAssemblyReflect5
+namespace TestNetCommon5
 {
-  // The entry class.
-  internal class AssemblyReflectProgram
+  // Methods to test LJCAssemblyReflect.
+  internal class TestAssemblyReflect
   {
-    // The entry method.
-    static void Main()
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; } = null!;
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestAssemblyReflect.xml'
+    ///  path='members/Constructor/*'/>
+    public TestAssemblyReflect()
     {
       TestCommon = new LJCTestCommon("LJCAssemblyReflect");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCAssemblyReflect ***");
+      Run();
+    }
 
+    // Runs the tests.
+    private void Run()
+    {
       // Static Methods
       ParmNames();
       ParmTypeNames();
@@ -47,16 +60,13 @@ namespace TestAssemblyReflect5
       IsProperty();
       IsOverride();
       IsPublic();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Static Methods
 
     // Gets parm names from method info.
-    private static void ParmNames()
+    private void ParmNames()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -86,11 +96,11 @@ namespace TestAssemblyReflect5
         }
       }
       var compare = "True";
-      TestCommon?.Write("ParmNames()", result, compare);
+      TestCommon.Write("ParmNames()", result, compare);
     }
 
     // Gets parm method type names with parm names.
-    private static void ParmTypeNames()
+    private void ParmTypeNames()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -120,14 +130,14 @@ namespace TestAssemblyReflect5
         }
       }
       var compare = "True";
-      TestCommon?.Write("ParmTypeNames()", result, compare);
+      TestCommon.Write("ParmTypeNames()", result, compare);
     }
     #endregion
 
     #region Methods
 
     // Gets a field info object.
-    private static void GetFieldInfo()
+    private void GetFieldInfo()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -146,11 +156,11 @@ namespace TestAssemblyReflect5
         result = "True";
       }
       var compare = "True";
-      TestCommon?.Write("GetFieldInfo()", result, compare);
+      TestCommon.Write("GetFieldInfo()", result, compare);
     }
 
     // Gets a parameterless method info object.
-    private static void GetMethodInfo()
+    private void GetMethodInfo()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -169,11 +179,11 @@ namespace TestAssemblyReflect5
         result = "True";
       }
       var compare = "True";
-      TestCommon?.Write("GetMethodInfo()", result, compare);
+      TestCommon.Write("GetMethodInfo()", result, compare);
     }
 
     // Gets a parameterized method info object.
-    private static void ParmMethodInfo()
+    private void ParmMethodInfo()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -199,11 +209,11 @@ namespace TestAssemblyReflect5
         result = "True";
       }
       var compare = "True";
-      TestCommon?.Write("ParmMethodInfo()", result, compare);
+      TestCommon.Write("ParmMethodInfo()", result, compare);
     }
 
     // Gets parm method infos with method name and parm count.
-    private static void ParmMethodInfosWithCount()
+    private void ParmMethodInfosWithCount()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -224,11 +234,11 @@ namespace TestAssemblyReflect5
         result = "True";
       }
       var compare = "True";
-      TestCommon?.Write("ParmMethodInfosWithCount()", result, compare);
+      TestCommon.Write("ParmMethodInfosWithCount()", result, compare);
     }
 
     // Gets parm method info with parm names.
-    private static void ParmMethodInfoWithParms()
+    private void ParmMethodInfoWithParms()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -254,14 +264,14 @@ namespace TestAssemblyReflect5
         result = "True";
       }
       var compare = "True";
-      TestCommon?.Write("ParmMethodInfoWithParms()", result, compare);
+      TestCommon.Write("ParmMethodInfoWithParms()", result, compare);
     }
     #endregion
 
     #region Set Reflection Property Methods
 
     // Retrieves the Assembly reference.
-    private static void SetAssembly()
+    private void SetAssembly()
     {
       var assemblyName = "LJCNetCommon5.dll";
 
@@ -278,11 +288,11 @@ namespace TestAssemblyReflect5
         result = tokens[0];
       }
       var compare = "LJCNetCommon5";
-      TestCommon?.Write("SetAssembly()", result, compare);
+      TestCommon.Write("SetAssembly()", result, compare);
     }
 
     // Set the ConstructorInfo reference.
-    private static void SetConstructorInfo()
+    private void SetConstructorInfo()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -298,7 +308,7 @@ namespace TestAssemblyReflect5
       var cstrInfo = reflect.SetConstructorInfo("LJCDataColumns", null);
       var result = cstrInfo?.DeclaringType?.Name;
       var compare = "LJCDataColumns";
-      TestCommon?.Write("SetConstructorInfo()1", result, compare);
+      TestCommon.Write("SetConstructorInfo()1", result, compare);
 
       // Test Method
       // Get constructor with "items" parameter.
@@ -310,11 +320,11 @@ namespace TestAssemblyReflect5
       cstrInfo = reflect.SetConstructorInfo("LJCDataColumns", parms);
       result = cstrInfo?.DeclaringType?.Name;
       compare = "LJCDataColumns";
-      TestCommon?.Write("SetConstructorInfo()2", result, compare);
+      TestCommon.Write("SetConstructorInfo()2", result, compare);
     }
 
     // Set the FieldInfo reference.
-    private static void SetFieldInfo()
+    private void SetFieldInfo()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -339,11 +349,11 @@ namespace TestAssemblyReflect5
           compare = "mTestField";
         }
       }
-      TestCommon?.Write("SetFieldInfo()", result, compare);
+      TestCommon.Write("SetFieldInfo()", result, compare);
     }
 
     // Gets the Indexer Property info.
-    private static void SetIndexerInfo()
+    private void SetIndexerInfo()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -360,11 +370,11 @@ namespace TestAssemblyReflect5
         , indexerSignature);
       var result = propertyInfo?.Name;
       var compare = "Item";
-      TestCommon?.Write("SetIndexerInfo()", result, compare);
+      TestCommon.Write("SetIndexerInfo()", result, compare);
     }
 
     // Set the MethodInfo reference.
-    private static void SetMethodInfo()
+    private void SetMethodInfo()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -378,7 +388,7 @@ namespace TestAssemblyReflect5
       var methodInfo = reflect.SetMethodInfo("HasItems");
       var result = methodInfo?.Name;
       var compare = "HasItems";
-      TestCommon?.Write("SetMethodInfo()1", result, compare);
+      TestCommon.Write("SetMethodInfo()1", result, compare);
 
       // Test Method
       string[] parms =
@@ -388,11 +398,11 @@ namespace TestAssemblyReflect5
       methodInfo = reflect.SetMethodInfo("LJCGetBoolean", parms);
       result = methodInfo?.Name;
       compare = "LJCGetBoolean";
-      TestCommon?.Write("SetMethodInfo()2", result, compare);
+      TestCommon.Write("SetMethodInfo()2", result, compare);
     }
 
     // Set the PropertyInfo reference.
-    private static void SetPropertyInfo()
+    private void SetPropertyInfo()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -406,11 +416,11 @@ namespace TestAssemblyReflect5
       var propertyInfo = reflect.SetPropertyInfo("LJCDefaultFileName");
       var result = propertyInfo?.Name;
       var compare = "LJCDefaultFileName";
-      TestCommon?.Write("SetPropertyInfo()", result, compare);
+      TestCommon.Write("SetPropertyInfo()", result, compare);
     }
 
     // Set the Type reference.
-    private static void SetTypeReference()
+    private void SetTypeReference()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -423,14 +433,14 @@ namespace TestAssemblyReflect5
       var typeReference = reflect.SetTypeReference(typeName);
       var result = typeReference?.Name;
       var compare = "LJCDataColumns";
-      TestCommon?.Write("SetTypeReference()", result, compare);
+      TestCommon.Write("SetTypeReference()", result, compare);
     }
     #endregion
 
     #region Get Syntax Methods
 
     // Creates and returns the Constructor syntax.
-    private static void GetConstructorSyntax()
+    private void GetConstructorSyntax()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -449,11 +459,11 @@ namespace TestAssemblyReflect5
       // Test Method
       var result = reflect.GetConstructorSyntax();
       var compare = "public LJCDataColumns(LJCDataColumns items)";
-      TestCommon?.Write("GetConstructorSyntax()", result, compare);
+      TestCommon.Write("GetConstructorSyntax()", result, compare);
     }
 
     // Creates and returns the Field syntax string.
-    private static void GetFieldSyntax()
+    private void GetFieldSyntax()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -467,11 +477,11 @@ namespace TestAssemblyReflect5
       // Test Method
       var result = reflect.GetFieldSyntax();
       var compare = "public Int32 mTestField";
-      TestCommon?.Write("GetFieldSyntax()", result, compare);
+      TestCommon.Write("GetFieldSyntax()", result, compare);
     }
 
     // Creates and returns the Generic Type syntax.
-    private static void GetGenericTypeSyntax()
+    private void GetGenericTypeSyntax()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -483,11 +493,11 @@ namespace TestAssemblyReflect5
 
       var result = "Not Implemented";
       var compare = "";
-      TestCommon?.Write("GetGenericTypeSyntax()", result, compare);
+      TestCommon.Write("GetGenericTypeSyntax()", result, compare);
     }
 
     // Creates and returns the Method syntax.
-    private static void GetMethodSyntax()
+    private void GetMethodSyntax()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -505,11 +515,11 @@ namespace TestAssemblyReflect5
       // Test Method
       var result = reflect.GetMethodSyntax();
       var compare = "public Boolean LJCGetBoolean(String propertyName)";
-      TestCommon?.Write("GetMethodSyntax()", result, compare);
+      TestCommon.Write("GetMethodSyntax()", result, compare);
     }
 
     // Creates and returns the Property syntax.
-    private static void GetPropertySyntax()
+    private void GetPropertySyntax()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -523,11 +533,11 @@ namespace TestAssemblyReflect5
       // Test Method
       var result = reflect.GetPropertySyntax();
       var compare = "public static String LJCDefaultFileName";
-      TestCommon?.Write("GetPropertySyntax()", result, compare);
+      TestCommon.Write("GetPropertySyntax()", result, compare);
     }
 
     // Creates and returns the Type syntax.
-    private static void GetTypeSyntax()
+    private void GetTypeSyntax()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -540,14 +550,14 @@ namespace TestAssemblyReflect5
       // Test Method
       var result = reflect.GetTypeSyntax();
       var compare = "public class LJCDataColumns : List<LJCDataColumn>";
-      TestCommon?.Write("GetTypeSyntax()", result, compare);
+      TestCommon.Write("GetTypeSyntax()", result, compare);
     }
     #endregion
 
     #region Check Type Methods
 
     // Indicates if the Method is a property getter or setter.
-    private static void IsProperty()
+    private void IsProperty()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -559,11 +569,11 @@ namespace TestAssemblyReflect5
 
       var result = "Not Implemented";
       var compare = "";
-      TestCommon?.Write("IsProperty()", result, compare);
+      TestCommon.Write("IsProperty()", result, compare);
     }
 
     // Indicates if the method is "override".
-    private static void IsOverride()
+    private void IsOverride()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -584,11 +594,11 @@ namespace TestAssemblyReflect5
         result = value.ToString();
       }
       var compare = "True";
-      TestCommon?.Write("IsOverride()", result, compare);
+      TestCommon.Write("IsOverride()", result, compare);
     }
 
     // Indicates if the method is "public".
-    private static void IsPublic()
+    private void IsPublic()
     {
       var assemblyName = "LJCNetCommon5.dll";
       var typeName = "LJCNetCommon5.LJCDataColumns";
@@ -609,14 +619,8 @@ namespace TestAssemblyReflect5
         result = value.ToString();
       }
       var compare = "True";
-      TestCommon?.Write("IsPublic()", result, compare);
+      TestCommon.Write("IsPublic()", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

@@ -1,36 +1,44 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// CSParserProgram.cs
+// TestCSParser5.cs
 using LJCNetCommon5;
-using System.ComponentModel;
-using System.Diagnostics;
 
-namespace TestCSParser5
+namespace TestNetCommon5
 {
-  // The entry class.
-  internal class CSParserProgram
+  // Methods to test LJCCSParser.
+  internal class TestCSParser
   {
-    // The entry method.
-    static void Main()
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; } = null!;
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestCSParser.xml'
+    ///  path='members/Constructor/*'/>
+    public TestCSParser()
     {
       TestCommon = new LJCTestCommon("LJCCSParser");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCCSParser ***");
+      Run();
+    }
 
+    // Runs the tests.
+    private void Run()
+    {
       // Methods
       ClassName();
       MethodName();
       PropertyName();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Methods
 
     // Attempts to parse a class name.
-    private static void ClassName()
+    private void ClassName()
     {
       var classList = new List<string>
       {
@@ -56,12 +64,12 @@ namespace TestCSParser5
         var line = classList[index];
         var result = csParser.ClassName(line);
         var compare = "ClassName";
-        TestCommon?.Write($"ClassName(){index}", result, compare);
+        TestCommon.Write($"ClassName(){index}", result, compare);
       }
     }
 
     // Attempts to parse a method name.
-    private static void MethodName()
+    private void MethodName()
     {
       var methodList = new List<string>
       {
@@ -91,12 +99,12 @@ namespace TestCSParser5
         var line = methodList[index];
         var result = csParser.MethodName(line);
         var compare = "MethodName";
-        TestCommon?.Write($"MethodName(){index}", result, compare);
+        TestCommon.Write($"MethodName(){index}", result, compare);
       }
     }
 
     // Attempts to parse a property name.
-    private static void PropertyName()
+    private void PropertyName()
     {
       var propertyList = new List<string>
       {
@@ -126,16 +134,10 @@ namespace TestCSParser5
           }
           var result = csParser.PropertyName(line, nextLine);
           var compare = "Property";
-          TestCommon?.Write($"PropertyName(){index}", result, compare);
+          TestCommon.Write($"PropertyName(){index}", result, compare);
         }
       }
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

@@ -1,35 +1,45 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ArgErrorProgram.cs
+// TestArgError5.cs
 using LJCNetCommon5;
 
-namespace TestArgError5
+namespace TestNetCommon5
 {
-  // The entry class.
-  internal class ArgErrorProgram
+  // Methods to test LJCArgError.
+  internal class TestArgError
   {
-    // The entry method.
-    static void Main()
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; } = null!;
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestArgError.xml'
+    ///  path='members/Constructor/*'/>
+    public TestArgError()
     {
       TestCommon = new LJCTestCommon("LJCArgError");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCArgError ***");
+      Run();
+    }
 
+    // Runs the tests.
+    private void Run()
+    {
       // Data Class Methods
       ToStringMethod();
 
       // Methods
       Add1();
       Add2();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Data Class Methods
 
-    private static void ToStringMethod()
+    private void ToStringMethod()
     {
       var argError = new LJCArgError("ArgErrorProgram")
       {
@@ -40,7 +50,7 @@ namespace TestArgError5
       // Test Method
       var result = argError.ToString();
       var compare = "No Result";
-      TestCommon?.Write("ToStringMethod()1", result, compare);
+      TestCommon.Write("ToStringMethod()1", result, compare);
 
       // Missing object argument.
       argError.Clear();
@@ -51,7 +61,7 @@ namespace TestArgError5
       compare = "ArgErrorProgram\r\n";
       compare += "ToStringMethod()\r\n";
       compare += "argObject is missing.\r\n";
-      TestCommon?.Write("ToStringMethod()2", result, compare);
+      TestCommon.Write("ToStringMethod()2", result, compare);
 
       argError.Clear();
       var text = " ";
@@ -61,14 +71,14 @@ namespace TestArgError5
       compare = "ArgErrorProgram\r\n";
       compare += "ToStringMethod()\r\n";
       compare += "text is missing.\r\n";
-      TestCommon?.Write("ToStringMethod()3", result, compare);
+      TestCommon.Write("ToStringMethod()3", result, compare);
     }
     #endregion
 
     #region Methods
 
     // Adds a message using the provided values.
-    private static void Add1()
+    private void Add1()
     {
       var argError = new LJCArgError("ArgErrorProgram");
       argError.MethodName = "Add1()";
@@ -81,7 +91,7 @@ namespace TestArgError5
       var compare = "ArgErrorProgram\r\n";
       compare += "Add1()\r\n";
       compare += "argObject is missing.\r\n";
-      TestCommon?.Write("Add1()1", result, compare);
+      TestCommon.Write("Add1()1", result, compare);
 
       // Missing argObject and text arguments.
       var text = "  ";
@@ -91,11 +101,11 @@ namespace TestArgError5
       compare += "Add1()\r\n";
       compare += "argObject is missing.\r\n";
       compare += "text is missing.\r\n";
-      TestCommon?.Write("Add1()2", result, compare);
+      TestCommon.Write("Add1()2", result, compare);
     }
 
     // Adds a message.
-    private static void Add2()
+    private void Add2()
     {
       var argError = new LJCArgError("ArgErrorProgram");
       argError.MethodName = "Add2()";
@@ -107,14 +117,8 @@ namespace TestArgError5
       var compare = "ArgErrorProgram\r\n";
       compare += "Add2()\r\n";
       compare += "valueArg is greater than 5.";
-      TestCommon?.Write("Add1()", result, compare);
+      TestCommon.Write("Add1()", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }
