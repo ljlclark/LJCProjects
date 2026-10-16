@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LJCDataColumns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LJCDataColumn>
+    <AllowDBNull>false</AllowDBNull>
+    <AutoIncrement>false</AutoIncrement>
+    <ColumnName>ID</ColumnName>
+    <DataTypeName>Int64</DataTypeName>
+    <MaxLength>5</MaxLength>
+    <Position>-1</Position>
+    <PropertyName>ID</PropertyName>
+    <Value xsi:type="xsd:int">1</Value>
+    <AddOrderIndex>0</AddOrderIndex>
+    <IsPrimaryKey>false</IsPrimaryKey>
+    <IsUniqueKey>false</IsUniqueKey>
+  </LJCDataColumn>
+  <LJCDataColumn>
+    <AllowDBNull>false</AllowDBNull>
+    <AutoIncrement>false</AutoIncrement>
+    <ColumnName>Name</ColumnName>
+    <DataTypeName>string</DataTypeName>
+    <MaxLength>5</MaxLength>
+    <Position>-1</Position>
+    <PropertyName>Name</PropertyName>
+    <Value xsi:type="xsd:int">1</Value>
+    <AddOrderIndex>1</AddOrderIndex>
+    <IsPrimaryKey>false</IsPrimaryKey>
+    <IsUniqueKey>false</IsUniqueKey>
+  </LJCDataColumn>
+</LJCDataColumns>

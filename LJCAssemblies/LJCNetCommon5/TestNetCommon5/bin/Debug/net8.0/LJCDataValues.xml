@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LJCDataValues xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LJCDataValue>
+    <DataTypeName>Int64</DataTypeName>
+    <PropertyName>ID</PropertyName>
+    <Value xsi:type="xsd:int">1</Value>
+  </LJCDataValue>
+  <LJCDataValue>
+    <DataTypeName>String</DataTypeName>
+    <PropertyName>Name</PropertyName>
+    <Value xsi:type="xsd:int">1</Value>
+  </LJCDataValue>
+</LJCDataValues>
