@@ -16,7 +16,7 @@ rem *** Called from line root folder UpdateAll.cmd. ***
 rem *** Sets the solution group folder values. ***
 call SubFolders2.cmd %1%
 rem *** Sets the To root. ***
-set toRoot=%util%\LJCDataAccess5\
+set toRoot=%util%\LJCDataAccessS5\
 rem *** Sets the "to" value as External and creates folder. ***
 call TargetFolders.cmd
 :Process
@@ -27,7 +27,7 @@ echo *** %to% ***
 
 set bin=%bin%\net8.0
 
-set src=%assmRoot%LJCNetCommon5\LJCNetCommon5\%bin%
+set src=%assmRoot%LJCNetCommonS5\LJCNetCommon5\%bin%
 echo copy %src%\LJCNetCommon5.dll %to%
 copy %src%\LJCNetCommon5.dll %to%
 

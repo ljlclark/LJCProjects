@@ -27,7 +27,7 @@ echo *** %to% ***
 
 set bin=%bin%\net8.0
 
-set src=%assmRoot%LJCNetCommon5\LJCNetCommon5\%bin%
+set src=%assmRoot%LJCNetCommonS5\LJCNetCommon5\%bin%
 echo copy %src%\LJCNetCommon5.dll %to%
 copy %src%\LJCNetCommon5.dll %to%
 
