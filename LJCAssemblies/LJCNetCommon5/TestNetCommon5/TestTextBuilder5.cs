@@ -1,20 +1,36 @@
-﻿// Copyright (c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TestTextBuilder5Program.cs
+// TestTextBuilder5.cs
 using LJCNetCommon5;
 
-namespace TestTextBuilder5
+namespace TestNetCommon5
 {
-  // The entry class.
-  internal class TextBuilder5Program
+  // Provides the LJCTextBuilder test methods.
+  internal class TestTextBuilder
   {
-    // The entry method.
-    static void Main()
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; } = null!;
+
+    private const bool NoIndent = false;
+    private const bool NoNewLine = false;
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestTextBuilder.xml'
+    ///  path='members/Constructor/*'/>
+    public TestTextBuilder()
     {
       TestCommon = new LJCTestCommon("TestTextBuilder");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCTextBuilder ***");
+      Run();
+    }
 
+    // Runs the test methods.
+    private void Run()
+    {
       // Methods
       AddIndent();
 
@@ -34,16 +50,13 @@ namespace TestTextBuilder5
       GetLine();
       GetText();
       GetWrapped();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Methods
 
     // Changes the IndentCount by the provided value.
-    private static void AddIndent()
+    private void AddIndent()
     {
       var tb = new LJCTextBuilder();
 
@@ -81,13 +94,13 @@ namespace TestTextBuilder5
       b.AddLine("  This text is indented.");
       b.AddText("Not indented.  No start with newline.");
       var compare = b.ToString();
-      TestCommon?.Write("AddIndent()", result, compare);
+      TestCommon.Write("AddIndent()", result, compare);
     }
     #endregion
 
     #region Append Text Methods
 
-    private static void AddLine()
+    private void AddLine()
     {
       var tb = new LJCTextBuilder();
 
@@ -106,11 +119,11 @@ namespace TestTextBuilder5
       b.AddLine("This is an appended line.");
       b.AddText(":");
       var compare = b.ToString();
-      TestCommon?.Write("AddLine()", result, compare);
+      TestCommon.Write("AddLine()", result, compare);
     }
 
     // Adds text without modification.
-    private static void AddText()
+    private void AddText()
     {
       var tb = new LJCTextBuilder();
 
@@ -125,11 +138,11 @@ namespace TestTextBuilder5
       var b = new LJCTextBuilder();
       b.AddText("This is some appended text.");
       var compare = b.ToString();
-      TestCommon?.Write("AddText()", result, compare);
+      TestCommon.Write("AddText()", result, compare);
     }
 
     // Adds a delimiter if not the first list item.
-    private static void Item()
+    private void Item()
     {
       var tb = new LJCTextBuilder();
 
@@ -165,7 +178,7 @@ namespace TestTextBuilder5
     }
 
     // Adds a modified text line to the builder.
-    private static void Line()
+    private void Line()
     {
       var tb = new LJCTextBuilder();
 
@@ -196,11 +209,11 @@ namespace TestTextBuilder5
       b.AddLine();
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      TestCommon?.Write("Line()", result, compare);
+      TestCommon.Write("Line()", result, compare);
     }
 
     // Adds modified text to the builder.
-    private static void Text()
+    private void Text()
     {
       var tb = new LJCTextBuilder();
 
@@ -225,14 +238,14 @@ namespace TestTextBuilder5
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      TestCommon?.Write("Text()", result, compare);
+      TestCommon.Write("Text()", result, compare);
     }
     #endregion
 
     #region Get Text Methods
 
     // Indicates if the builder text ends with a newline.
-    private static bool EndsWithNewLine()
+    private bool EndsWithNewLine()
     {
       var tb = new LJCTextBuilder();
 
@@ -245,12 +258,12 @@ namespace TestTextBuilder5
       var b = new LJCTextBuilder();
       b.AddText("False");
       var compare = b.ToString();
-      TestCommon?.Write("EndsWithNewLine()", result, compare);
+      TestCommon.Write("EndsWithNewLine()", result, compare);
       return retValue;
     }
 
     // Allow text to start with a newline.
-    private static bool StartWithNewLine()
+    private bool StartWithNewLine()
     {
       var tb = new LJCTextBuilder();
 
@@ -263,12 +276,12 @@ namespace TestTextBuilder5
       var b = new LJCTextBuilder();
       b.AddText("False");
       var compare = b.ToString();
-      TestCommon?.Write("StartWithNewLine()", result, compare);
+      TestCommon.Write("StartWithNewLine()", result, compare);
       return retValue;
     }
 
     // Adds a delimiter if not the first list item.
-    private static void GetDelimited()
+    private void GetDelimited()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var tb = new LJCTextBuilder();
@@ -288,7 +301,7 @@ namespace TestTextBuilder5
     }
 
     // Gets a new potentially indented line.
-    private static void GetIndented()
+    private void GetIndented()
     {
       var tb = new LJCTextBuilder();
 
@@ -308,11 +321,11 @@ namespace TestTextBuilder5
       b.AddLine("This text is NOT indented.");
       b.AddText("    This text is indented.");
       var compare = b.ToString();
-      TestCommon?.Write("GetIndented()", result, compare);
+      TestCommon.Write("GetIndented()", result, compare);
     }
 
     // Returns the current indent string.
-    private static void GetIndentString()
+    private void GetIndentString()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var tb = new LJCTextBuilder();
@@ -328,11 +341,11 @@ namespace TestTextBuilder5
       //   :
 
       var compare = "  :";
-      TestCommon?.Write("GetIndentString()", result, compare);
+      TestCommon.Write("GetIndentString()", result, compare);
     }
 
     // Gets a modified text line.
-    private static void GetLine()
+    private void GetLine()
     {
       var tb = new LJCTextBuilder();
 
@@ -364,11 +377,11 @@ namespace TestTextBuilder5
       b.AddLine();
       b.AddText("  :");
       var compare = b.ToString();
-      TestCommon?.Write("GetLine()", result, compare);
+      TestCommon.Write("GetLine()", result, compare);
     }
 
     // Gets potentially indented and wrapped text.
-    private static void GetText()
+    private void GetText()
     {
       var tb = new LJCTextBuilder();
 
@@ -395,11 +408,11 @@ namespace TestTextBuilder5
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
-      TestCommon?.Write("GetText()", result, compare);
+      TestCommon.Write("GetText()", result, compare);
     }
 
     // Gets added text and new wrapped line if combined line > LineLimit.
-    private static void GetWrapped()
+    private void GetWrapped()
     {
       var tb = new LJCTextBuilder
       {
@@ -425,17 +438,8 @@ namespace TestTextBuilder5
       b.AddLine(" their country. Now is the");
       b.AddText("time for all good men to come to the aid of their country.");
       var compare = b.ToString();
-      TestCommon?.Write("GetWrapped()", result, compare);
+      TestCommon.Write("GetWrapped()", result, compare);
     }
-    #endregion
-
-    #region Class Data
-
-    // Gets or sets the test common object.
-    private static LJCTestCommon? TestCommon { get; set; }
-
-    private const bool NoIndent = false;
-    private const bool NoNewLine = false;
     #endregion
   }
 }

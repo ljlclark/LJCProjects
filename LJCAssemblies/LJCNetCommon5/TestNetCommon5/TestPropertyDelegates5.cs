@@ -1,37 +1,44 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// PropertyDelegates5Program.cs
+// TestPropertyDelegates5.cs
 using LJCNetCommon5;
-using System.Net.Http.Headers;
-using System.Reflection;
 
-namespace TestPropertyDelegates5
+namespace TestNetCommon5
 {
-  // The entry class.
-  internal class PropertyDelegates5Program
+  // Provides the LJCPropertyDelegate test methods.
+  internal class TestPropertyDelegates
   {
-    // The entry method.
-    static void Main()
-    {
-      TestCommon = new LJCTestCommon("LJCPropertyDelegates");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCPropertyDelegates ***");
+    #region Properties
 
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; } = null!;
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestPropertyDelegates.xml'
+    ///  path='members/Constructor/*'/>
+    public TestPropertyDelegates()
+    {
+      TestCommon = new LJCTestCommon("TestPropertyDelegates");
+      Run();
+    }
+
+    // Runs the test methods.
+    private void Run()
+    {
       // Collection Methods
       Add();
 
       LJCSearchName();
       LJCCreateDelegate();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
-
+    #endregion
     #region Collection Methods
 
     // Creates and adds a PropertyDelegate object to the collection.
-    private static void Add()
+    private void Add()
     {
       // The collection of delegate objects.
       var delegates = new LJCPropertyDelegates();
@@ -55,12 +62,12 @@ namespace TestPropertyDelegates5
         }
       }
       var compare = "StringValue";
-      TestCommon?.Write("Add()", result, compare);
+      TestCommon.Write("Add()", result, compare);
     }
     #endregion
 
     // Returns the PropertyDelegate object if found in the list.
-    private static void LJCSearchName()
+    private void LJCSearchName()
     {
       // The collection of delegate objects.
       var delegates = new LJCPropertyDelegates();
@@ -84,11 +91,11 @@ namespace TestPropertyDelegates5
         }
       }
       var compare = "StringValue";
-      TestCommon?.Write("Add()", result, compare);
+      TestCommon.Write("Add()", result, compare);
     }
 
     // Creates and returns the delegate for the named property.
-    private static void LJCCreateDelegate()
+    private void LJCCreateDelegate()
     {
       var result = "";
       var testData = new TestData
@@ -109,14 +116,8 @@ namespace TestPropertyDelegates5
         }
       }
       var compare = "Test";
-      TestCommon?.Write("LJCCreateDelegate", result, compare);
+      TestCommon.Write("LJCCreateDelegate", result, compare);
     }
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
-    #endregion
   }
 
   /// <summary>

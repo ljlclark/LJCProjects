@@ -22,6 +22,13 @@ namespace TestNetCommon5
       //_ = new TestHTMLBuilder();
       //_ = new TestKeyItem();
       _ = new TestKeyItems();
+      _ = new TestLJC();
+      _ = new TestNetString();
+      _ = new TestPropertyDelegate();
+      _ = new TestPropertyDelegates();
+      _ = new TestReflect();
+      _ = new TestTextBuilder();
+      _ = new TestTextParser();
     }
   }
 }

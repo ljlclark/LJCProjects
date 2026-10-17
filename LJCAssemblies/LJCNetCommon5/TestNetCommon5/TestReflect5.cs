@@ -1,21 +1,34 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// Reflect5Program.cs
+// TestReflect5.cs
 using LJCNetCommon5;
 using System.Reflection;
 
-namespace TestReflect5
+namespace TestNetCommon5
 {
-  // The entry class.
-  internal class Reflect5Program
+  // Provides the LJCReflect test methods.
+  internal class TestReflect
   {
-    // The entry method.
-    static void Main()
-    {
-      TestCommon = new LJCTestCommon("LJCReflect");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCReflect ***");
+    #region Properties
 
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; } = null!;
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/TestReflect.xml'
+    ///  path='members/Constructor/*'/>
+    public TestReflect()
+    {
+      TestCommon = new LJCTestCommon("TestReflect");
+      Run();
+    }
+
+    // Runs the test methods.
+    private void Run()
+    {
       // Constructor Methods
       Constructor();
       SetSource();
@@ -45,16 +58,13 @@ namespace TestReflect5
       // Set Methods
       SetPropertyValue();
       SetValue();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
+    #endregion
 
     #region Constructor Methods
 
     // Instantiates an instance of the class.
-    private static void Constructor()
+    private void Constructor()
     {
       var test = new { Name = "Name", Value = "Value" };
       var reflect = new LJCReflect(test);
@@ -66,11 +76,11 @@ namespace TestReflect5
       }
       var result = count.ToString();
       var compare = "2";
-      TestCommon?.Write("Constructor()", result, compare);
+      TestCommon.Write("Constructor()", result, compare);
     }
 
     // Sets the source object and type values.
-    private static void SetSource()
+    private void SetSource()
     {
       var test1 = new { Name = "Name", Value = "Value" };
       var reflect = new LJCReflect(test1);
@@ -83,14 +93,14 @@ namespace TestReflect5
       }
       var result = value?.ToString();
       var compare = "John";
-      TestCommon?.Write("SetSource()", result, compare);
+      TestCommon.Write("SetSource()", result, compare);
     }
     #endregion
 
     #region Methods
 
     // Gets the cached PropertyInfo value.
-    private static void GetPropertyInfo()
+    private void GetPropertyInfo()
     {
       var test = new { Name = "Name", Value = "Value" };
       var reflect = new LJCReflect(test);
@@ -102,11 +112,11 @@ namespace TestReflect5
       var value = info?.PropertyType;
       var result = value?.Name;
       var compare = "String";
-      TestCommon?.Write("GetPropertyInfo()", result, compare);
+      TestCommon.Write("GetPropertyInfo()", result, compare);
     }
 
     // Gets the cached PropertyInfo value.
-    private static void GetPropertyNames()
+    private void GetPropertyNames()
     {
       var test = new { Name = "Name", Value = "Value" };
       var reflect = new LJCReflect(test);
@@ -117,11 +127,11 @@ namespace TestReflect5
         result = string.Join(", ", names);
       }
       var compare = "Name, Value";
-      TestCommon?.Write("GetPropertyNames()", result, compare);
+      TestCommon.Write("GetPropertyNames()", result, compare);
     }
 
     // Get the property type.
-    private static void GetPropertyType()
+    private void GetPropertyType()
     {
       var item = LJC.TextToBytes("C");
       var test = new { Value = item[0] };
@@ -133,13 +143,13 @@ namespace TestReflect5
       }
       var result = value?.Name;
       var compare = "Byte";
-      TestCommon?.Write("GetPropertyType()", result, compare);
+      TestCommon.Write("GetPropertyType()", result, compare);
     }
 
     // Checks if a property exists.
-    private static void HasProperty()
+    private void HasProperty()
     {
-      var person = new Person()
+      var person = new ReflectPerson()
       {
         FirstName = "First",
         LastName = "Last",
@@ -148,25 +158,25 @@ namespace TestReflect5
       var value = reflect.HasProperty("FirstName");
       var result = value.ToString();
       var compare = "True";
-      TestCommon?.Write("HasProperty()", result, compare);
+      TestCommon.Write("HasProperty()", result, compare);
     }
     #endregion
 
     #region Value Methods
 
     // Gets the property value as a boolean.
-    private static void GetBoolean()
+    private void GetBoolean()
     {
       var test = new { Value = true };
       var reflect = new LJCReflect(test);
       var value = reflect.GetBoolean("Value");
       var result = value.ToString();
       var compare = "True";
-      TestCommon?.Write("GetBoolean()", result, compare);
+      TestCommon.Write("GetBoolean()", result, compare);
     }
 
     // Gets the property value as a byte.
-    private static void GetByte()
+    private void GetByte()
     {
       var item = LJC.TextToBytes("C");
       var test = new { Value = item[0] };
@@ -178,22 +188,22 @@ namespace TestReflect5
       }
       var result = value.ToString();
       var compare = "67";
-      TestCommon?.Write("GetByte()", result, compare);
+      TestCommon.Write("GetByte()", result, compare);
     }
 
     // Gets the property value as a char.
-    private static void GetChar()
+    private void GetChar()
     {
       var test = new { Value = 'C' };
       var reflect = new LJCReflect(test);
       var value = reflect.GetChar("Value");
       var result = value.ToString();
       var compare = "C";
-      TestCommon?.Write("GetChar()", result, compare);
+      TestCommon.Write("GetChar()", result, compare);
     }
 
     // Gets the property value as a DateTime value.
-    private static void GetDateTime()
+    private void GetDateTime()
     {
       var dateValue = new TestDate
       {
@@ -203,11 +213,11 @@ namespace TestReflect5
       var value = reflect.GetDateTime("Holiday");
       var result = value.ToShortDateString();
       var compare = "12/25/2026";
-      TestCommon?.Write("GetDateTime()", result, compare);
+      TestCommon.Write("GetDateTime()", result, compare);
     }
 
     // Gets the property value as a DB date/time string.
-    private static void GetDbDateString()
+    private void GetDbDateString()
     {
       var dateValue = new TestDate
       {
@@ -216,66 +226,66 @@ namespace TestReflect5
       var reflect = new LJCReflect(dateValue);
       var result = reflect.GetDbDateString("Holiday");
       var compare = "'2026/12/25 00:00:00'";
-      TestCommon?.Write("GetDbDateString()", result, compare);
+      TestCommon.Write("GetDbDateString()", result, compare);
     }
 
     // Gets the property value as a decimal.
-    private static void GetDecimal()
+    private void GetDecimal()
     {
       var test = new { Value = 3.14 };
       var reflect = new LJCReflect(test);
       var value = reflect.GetDouble("Value");
       var result = value.ToString();
       var compare = "3.14";
-      TestCommon?.Write("GetDecimal()", result, compare);
+      TestCommon.Write("GetDecimal()", result, compare);
     }
 
     // Gets the property value as a double.
-    private static void GetDouble()
+    private void GetDouble()
     {
       var test = new { Value = 3.14 };
       var reflect = new LJCReflect(test);
       var value = reflect.GetDouble("Value");
       var result = value.ToString();
       var compare = "3.14";
-      TestCommon?.Write("GetDouble()", result, compare);
+      TestCommon.Write("GetDouble()", result, compare);
     }
 
     // Gets the property value as a short.
-    private static void GetInt16()
+    private void GetInt16()
     {
       var test = new { Value = (short)3 };
       var reflect = new LJCReflect(test);
       var value = reflect.GetInt16("Value");
       var result = value.ToString();
       var compare = "3";
-      TestCommon?.Write("GetInt16()", result, compare);
+      TestCommon.Write("GetInt16()", result, compare);
     }
 
     // Gets the property value as an integer.
-    private static void GetInt32()
+    private void GetInt32()
     {
       var test = new { Value = 3 };
       var reflect = new LJCReflect(test);
       var value = reflect.GetInt32("Value");
       var result = value.ToString();
       var compare = "3";
-      TestCommon?.Write("GetInt32()", result, compare);
+      TestCommon.Write("GetInt32()", result, compare);
     }
 
     // Gets the property value as a long.
-    private static void GetInt64()
+    private void GetInt64()
     {
       var test = new { Value = (long)3 };
       var reflect = new LJCReflect(test);
       var value = reflect.GetInt64("Value");
       var result = value.ToString();
       var compare = "3";
-      TestCommon?.Write("GetInt64()", result, compare);
+      TestCommon.Write("GetInt64()", result, compare);
     }
 
     // Gets the property value as a float.
-    private static void GetSingle()
+    private void GetSingle()
     {
       // Must use "f" for float (single) or it defaults to double.
       var test = new { Value = 3.14f };
@@ -283,11 +293,11 @@ namespace TestReflect5
       var value = reflect.GetSingle("Value");
       var result = value.ToString();
       var compare = "3.14";
-      TestCommon?.Write("GetSingle()", result, compare);
+      TestCommon.Write("GetSingle()", result, compare);
     }
 
     // Gets the property value as a string.
-    private static void GetString()
+    private void GetString()
     {
       var persons = new Persons
       {
@@ -309,11 +319,11 @@ namespace TestReflect5
 
       // Use only the last result.
       var compare = "LastTwo";
-      TestCommon?.Write("GetString()", result, compare);
+      TestCommon.Write("GetString()", result, compare);
     }
 
     // Gets the property value as an object using a delegate.
-    private static void GetValue()
+    private void GetValue()
     {
       var persons = new Persons
       {
@@ -337,11 +347,11 @@ namespace TestReflect5
 
       // Use only the last result.
       var compare = "LastTwo";
-      TestCommon?.Write("GetValue()", result, compare);
+      TestCommon.Write("GetValue()", result, compare);
     }
 
     // Gets the property value as an object using reflection.
-    private static void GetValueReflect()
+    private void GetValueReflect()
     {
       var persons = new Persons
       {
@@ -365,14 +375,14 @@ namespace TestReflect5
 
       // Use only the last result.
       var compare = "LastTwo";
-      TestCommon?.Write("GetValueReflect()", result, compare);
+      TestCommon.Write("GetValueReflect()", result, compare);
     }
     #endregion
 
     #region Set Methods
 
     // Sets the property value based on value type.
-    private static void SetPropertyValue()
+    private void SetPropertyValue()
     {
       var persons = new Persons
       {
@@ -386,11 +396,11 @@ namespace TestReflect5
       reflect.SetPropertyValue("FirstName", "FirstChanged");
       var result = reflect.GetString("FirstName");
       var compare = "FirstChanged";
-      TestCommon?.Write("SetPropertyValue()", result, compare);
+      TestCommon.Write("SetPropertyValue()", result, compare);
     }
 
     // Sets the property value.
-    private static void SetValue()
+    private void SetValue()
     {
       var persons = new Persons
       {
@@ -404,14 +414,8 @@ namespace TestReflect5
       reflect.SetValue("FirstName", "FirstChanged");
       var result = reflect.GetString("FirstName");
       var compare = "FirstChanged";
-      TestCommon?.Write("SetValue()", result, compare);
+      TestCommon.Write("SetValue()", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 
@@ -427,7 +431,7 @@ namespace TestReflect5
   /// <summary>
   /// 
   /// </summary>
-  public class Person
+  public class ReflectPerson
   {
     /// <summary></summary>
     public string? FirstName { get; set; }
@@ -439,7 +443,7 @@ namespace TestReflect5
   /// <summary>
   /// 
   /// </summary>
-  public class Persons : List<Person>
+  public class Persons : List<ReflectPerson>
   {
     // Creates and adds the object to the collection.
     /// <summary>
@@ -448,9 +452,9 @@ namespace TestReflect5
     /// <param name="firstName"></param>
     /// <param name="lastName"></param>
     /// <returns></returns>
-    public Person Add(string firstName, string lastName)
+    public ReflectPerson Add(string firstName, string lastName)
     {
-      var retPerson = new Person
+      var retPerson = new ReflectPerson
       {
         FirstName = firstName,
         LastName = lastName,
