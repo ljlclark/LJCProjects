@@ -1,21 +1,27 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TestTextDataReader.cs
+// TestTextDataReader5.cs
 using LJCNetCommon5;
 using LJCTextDataReader5;
 
 namespace TestTextDataReader5
 {
-  // The entry class.
   internal class TestTextDataReader
   {
-    // The entry method.
-    static void Main()
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; } = null!;
+    #endregion
+
+    public TestTextDataReader()
     {
       TestCommon = new LJCTestCommon("LJCTextDataReader");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCTextDataReader ***");
+      Run();
+    }
 
+    private void Run()
+    {
       // IDataReader Methods
       Close();
       GetDataTypeName();
@@ -56,16 +62,12 @@ namespace TestTextDataReader5
       LJCSetStartIndex();
       LJCSetValues1();
       LJCSetValues2();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
 
     #region IDataReader Methods
 
     // Closes the data reader.
-    public static void Close()
+    public void Close()
     {
       var methodName = "Close()";
       string[] lines =
@@ -83,7 +85,7 @@ namespace TestTextDataReader5
       object value = textReader.IsClosed;
       var result = value.ToString();
       var compare = "False";
-      TestCommon?.Write($"{methodName}0", result, compare);
+      TestCommon.Write($"{methodName}0", result, compare);
 
       while (textReader.Read())
       {
@@ -93,33 +95,33 @@ namespace TestTextDataReader5
         var name = textReader["name"];
         result = name.ToString();
         compare = "Name Value";
-        TestCommon?.Write($"{methodName}1", result, compare);
+        TestCommon.Write($"{methodName}1", result, compare);
 
         var id = textReader["ID"];
         result = id.ToString();
         compare = "1";
-        TestCommon?.Write("{methodName}2", result, compare);
+        TestCommon.Write("{methodName}2", result, compare);
 
         value = textReader["Value"];
         result = value.ToString();
         compare = "3.14";
-        TestCommon?.Write($"{methodName}3", result, compare);
+        TestCommon.Write($"{methodName}3", result, compare);
 
         // Get values by field index.
         name = textReader[0];
         result = name.ToString();
         compare = "Name Value";
-        TestCommon?.Write($"{methodName}4", result, compare);
+        TestCommon.Write($"{methodName}4", result, compare);
 
         id = textReader[1];
         result = id.ToString();
         compare = "1";
-        TestCommon?.Write($"{methodName}5", result, compare);
+        TestCommon.Write($"{methodName}5", result, compare);
 
         value = textReader[2];
         result = value.ToString();
         compare = "3.14";
-        TestCommon?.Write($"{methodName}6", result, compare);
+        TestCommon.Write($"{methodName}6", result, compare);
       }
 
       // Test Method
@@ -127,11 +129,11 @@ namespace TestTextDataReader5
       value = textReader.IsClosed;
       result = value.ToString();
       compare = "True";
-      TestCommon?.Write("{methodName}7", result, compare);
+      TestCommon.Write("{methodName}7", result, compare);
     }
 
     // Retrieves the data type name for the supplied field.
-    private static void GetDataTypeName()
+    private void GetDataTypeName()
     {
       var methodName = "GetDataTypeName()";
       string[] lines =
@@ -150,16 +152,16 @@ namespace TestTextDataReader5
       // Get by field name.
       var result = textReader.GetDataTypeName("ID");
       var compare = "Int64";
-      TestCommon?.Write($"{methodName}1", result, compare);
+      TestCommon.Write($"{methodName}1", result, compare);
       // Get by field index.
       result = textReader.GetDataTypeName(1);
       compare = "Int64";
-      TestCommon?.Write($"{methodName}2", result, compare);
+      TestCommon.Write($"{methodName}2", result, compare);
       textReader.Close();
     }
 
     // Retrieves the type of the field for the supplied field index.
-    private static void GetFieldType()
+    private void GetFieldType()
     {
       var methodName = "GetFieldType()";
       string[] lines =
@@ -178,12 +180,12 @@ namespace TestTextDataReader5
       var type = textReader.GetFieldType(1);
       var result = type.Name;
       var compare = "Int64";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Retrieves the name of the data field with the supplied index.
-    private static void GetName()
+    private void GetName()
     {
       var methodName = "GetName()";
       string[] lines =
@@ -201,12 +203,12 @@ namespace TestTextDataReader5
       // Test Method
       var result = textReader.GetName(2);
       var compare = "Value";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Retrieves the index of the data field with the supplied name.
-    private static void GetOrdinal()
+    private void GetOrdinal()
     {
       var methodName = "GetOrdinal()";
       string[] lines =
@@ -225,12 +227,12 @@ namespace TestTextDataReader5
       var value = textReader.GetOrdinal("Value");
       var result = value.ToString();
       var compare = "2";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Gets the Fields as a Schema DataTable object.
-    private static void GetSchemaTable()
+    private void GetSchemaTable()
     {
       var methodName = "GetSchemaTable()";
       string[] lines =
@@ -251,12 +253,12 @@ namespace TestTextDataReader5
       var value = row["ColumnName"];
       var result = value.ToString();
       var compare = "Name";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Gets an array of record values.
-    private static void GetValues()
+    private void GetValues()
     {
       var methodName = "GetValues()";
       string[] lines =
@@ -278,12 +280,12 @@ namespace TestTextDataReader5
       var value = values[2];
       var result = value.ToString();
       var compare = "3.14";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Indicates if the field value is null or whitespace.
-    private static void IsDBNull()
+    private void IsDBNull()
     {
       var methodName = "IsDBNull()";
       string[] lines =
@@ -303,12 +305,12 @@ namespace TestTextDataReader5
       var value = textReader.IsDBNull(1);
       var result = value.ToString();
       var compare = "True";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Reads the next line of the text file.
-    private static void Read()
+    private void Read()
     {
       var methodName = "Read()";
       string[] lines =
@@ -330,7 +332,7 @@ namespace TestTextDataReader5
       var value = textReader["Name"];
       var result = value.ToString();
       var compare = "Name Value";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
     #endregion
@@ -338,7 +340,7 @@ namespace TestTextDataReader5
     #region Custom Related Methods
 
     // Gets the LJCFieldDataType enum name from DataTypeName.
-    private static void DataTypeEnumName()
+    private void DataTypeEnumName()
     {
       var methodName = "DataTypeEnumName()";
       string[] lines =
@@ -357,12 +359,12 @@ namespace TestTextDataReader5
       // Test Method
       var result = LJCTextDataReader.DataTypeEnumName(dataTypeName);
       var compare = "Int64";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Reads the next line from the line string array.
-    private static void LJCReadLine()
+    private void LJCReadLine()
     {
       var methodName = "LJCReadLine()";
       string[] lines =
@@ -384,7 +386,7 @@ namespace TestTextDataReader5
       var value = textReader["ID"];
       var result = value.ToString();
       var compare = "1";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
     #endregion
@@ -392,7 +394,7 @@ namespace TestTextDataReader5
     #region IDataRecord Get Data Methods
 
     // Reads the next line of the text file.
-    private static void GetWithIndex()
+    private void GetWithIndex()
     {
       var methodName = "GetWithIndex()";
       string[] lines =
@@ -414,7 +416,7 @@ namespace TestTextDataReader5
       result += $", {textReader.GetInt64(1)}";
       result += $", {textReader.GetDecimal(2)}";
       var compare = "Name Value, 1, 3.14";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
     #endregion
@@ -422,7 +424,7 @@ namespace TestTextDataReader5
     #region Get Data Custom Overloaded Methods
 
     // Reads the next line of the text file.
-    private static void GetWithName()
+    private void GetWithName()
     {
       var methodName = "GetWithName()";
       string[] lines =
@@ -444,7 +446,7 @@ namespace TestTextDataReader5
       result += $", {textReader.GetInt64("ID")}";
       result += $", {textReader.GetDecimal("Value")}";
       var compare = "Name Value, 1, 3.14";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
     #endregion
@@ -452,7 +454,7 @@ namespace TestTextDataReader5
     #region IDataReader Properties
 
     // Indicates if the reader is closed.
-    private static void IsClosed()
+    private void IsClosed()
     {
       var methodName = "GetWithName()";
       string[] lines =
@@ -472,20 +474,20 @@ namespace TestTextDataReader5
       var value = textReader.IsClosed;
       var result = value.ToString();
       var compare = "False";
-      TestCommon?.Write($"{methodName}1", result, compare);
+      TestCommon.Write($"{methodName}1", result, compare);
 
       textReader.Close();
       value = textReader.IsClosed;
       result = value.ToString();
       compare = "True";
-      TestCommon?.Write($"{methodName}2", result, compare);
+      TestCommon.Write($"{methodName}2", result, compare);
     }
     #endregion
 
     #region IDataRecord Properties
 
     // Indicates if the reader is closed.
-    private static void FieldCount()
+    private void FieldCount()
     {
       var methodName = "FieldCount()";
       string[] lines =
@@ -504,12 +506,12 @@ namespace TestTextDataReader5
       var value = textReader.FieldCount;
       var result = value.ToString();
       var compare = "3";
-      TestCommon?.Write($"{methodName}1", result, compare);
+      TestCommon.Write($"{methodName}1", result, compare);
       textReader.Close();
     }
 
     // Gets the data field value for the supplied field index.
-    private static void GetValueWithIndex()
+    private void GetValueWithIndex()
     {
       var methodName = "GetValueWithIndex()";
       string[] lines =
@@ -529,12 +531,12 @@ namespace TestTextDataReader5
       var value = textReader[2];
       var result = value.ToString();
       var compare = "3.14";
-      TestCommon?.Write($"{methodName}1", result, compare);
+      TestCommon.Write($"{methodName}1", result, compare);
       textReader.Close();
     }
 
     // Gets the data field value for the supplied field index.
-    private static void GetValueWithName()
+    private void GetValueWithName()
     {
       var methodName = "GetValueWithName()";
       string[] lines =
@@ -554,7 +556,7 @@ namespace TestTextDataReader5
       var value = textReader["Value"];
       var result = value.ToString();
       var compare = "3.14";
-      TestCommon?.Write($"{methodName}1", result, compare);
+      TestCommon.Write($"{methodName}1", result, compare);
       textReader.Close();
     }
     #endregion
@@ -562,7 +564,7 @@ namespace TestTextDataReader5
     #region Custom Methods
 
     // Checks for NewLine at end of file.
-    private static void LJCEndsWithNewLine()
+    private void LJCEndsWithNewLine()
     {
       var methodName = "LJCEndsWithNewLine()";
       string[] lines =
@@ -582,12 +584,12 @@ namespace TestTextDataReader5
       var value = textReader.LJCEndsWithNewLine();
       var result = value.ToString();
       var compare = "True";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Checks for NewLine at end of file.
-    private static void GetFieldNames()
+    private void GetFieldNames()
     {
       var methodName = "GetFieldNames()";
       string[] lines =
@@ -614,12 +616,12 @@ namespace TestTextDataReader5
         result += value;
       }
       var compare = "Name, ID, Value";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Checks for NewLine at end of file.
-    private static void LJCOpen()
+    private void LJCOpen()
     {
       var methodName = "LJCOpen()";
       string[] lines =
@@ -641,12 +643,12 @@ namespace TestTextDataReader5
       var value = textReader["Name"];
       var result = value.ToString();
       var compare = "Name Value";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Sets the data field definitions from an XML file.
-    private static void LJCSetFields()
+    private void LJCSetFields()
     {
       var methodName = "LJCSetFields()";
       string[] lines =
@@ -676,12 +678,12 @@ namespace TestTextDataReader5
       var value = textReader["Name"];
       var result = value.ToString();
       var compare = "Name Value";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Sets the source text file values.
-    private static void LJCSetFile()
+    private void LJCSetFile()
     {
       var methodName = "LJCSetFile()";
       string[] lines =
@@ -700,12 +702,12 @@ namespace TestTextDataReader5
       var value = textReader.FieldCount;
       var result = value.ToString();
       var compare = "3";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Sets the line field values.
-    private static void LJCSetLine()
+    private void LJCSetLine()
     {
       var methodName = "LJCSetLine()";
       string[] lines =
@@ -724,12 +726,12 @@ namespace TestTextDataReader5
       var value = textReader["Name"];
       var result = value.ToString();
       var compare = "Name Value";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Set the source line string array.
-    private static void LJCSetLines()
+    private void LJCSetLines()
     {
       var methodName = "LJCSetLines()";
       string[] lines =
@@ -745,7 +747,7 @@ namespace TestTextDataReader5
       var value = textReader.LJCDataFields.Count;
       var result = value.ToString();
       var compare = "3";
-      TestCommon?.Write($"{methodName}1", result, compare);
+      TestCommon.Write($"{methodName}1", result, compare);
       textReader.Close();
 
       // Tab separated values.
@@ -763,12 +765,12 @@ namespace TestTextDataReader5
       value = textReader.LJCDataFields.Count;
       result = value.ToString();
       compare = "3";
-      TestCommon?.Write($"{methodName}2", result, compare);
+      TestCommon.Write($"{methodName}2", result, compare);
       textReader.Close();
     }
 
     // Sets the data field names.
-    private static void LJCSetNames()
+    private void LJCSetNames()
     {
       var methodName = "LJCSetNames()";
       string[] lines =
@@ -789,12 +791,12 @@ namespace TestTextDataReader5
       var value = textReader.LJCDataFields.Count;
       var result = value.ToString();
       var compare = "3";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Sets the data object property values from the TextDataReader.
-    private static void LJCSetObjectValues()
+    private void LJCSetObjectValues()
     {
       var methodName = "LJCSetObjectValues()";
       string[] lines =
@@ -817,12 +819,12 @@ namespace TestTextDataReader5
       textReader.LJCSetObjectValues(dataObject, dataFields);
       var result = dataObject.Name;
       var compare = "Name Value";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Sets the page starting record index.
-    private static void LJCSetStartIndex()
+    private void LJCSetStartIndex()
     {
       var methodName = "LJCSetStartIndex()";
       string[] lines =
@@ -844,12 +846,12 @@ namespace TestTextDataReader5
       var value = textReader.LJCCurrentLineIndex;
       var result = value.ToString();
       var compare = "0";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Sets the current line values.
-    private static void LJCSetValues1()
+    private void LJCSetValues1()
     {
       var methodName = "LJCSetValues1()";
       string[] lines =
@@ -873,12 +875,12 @@ namespace TestTextDataReader5
       var value = textReader["Name"];
       var result = value.ToString();
       var compare = "Name Value";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
 
     // Sets the current, fixed length, line values.
-    private static void LJCSetValues2()
+    private void LJCSetValues2()
     {
       var methodName = "LJCSetValues2()";
       string[] lines =
@@ -904,15 +906,9 @@ namespace TestTextDataReader5
       var value = textReader["Name"];
       var result = value.ToString();
       var compare = "Name Value";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
       textReader.Close();
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
 
     // The test Data Object.

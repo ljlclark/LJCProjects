@@ -1,21 +1,27 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TestTextRegions.cs
+// TestTextRegion5.cs
 using LJCNetCommon5;
 using LJCTextDataReader5;
 
-namespace TestTextRegions5
+namespace TestTextDataReader5
 {
-  // The entry class.
   internal class TestTextRegion
   {
-    // The entry method.
-    static void Main()
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private LJCTestCommon TestCommon { get; set; } = null!;
+    #endregion
+
+    public TestTextRegion()
     {
       TestCommon = new LJCTestCommon("LJCTextRegion");
-      Console.WriteLine();
-      Console.WriteLine("*** LJCTextRegion ***");
+      Run();
+    }
 
+    private void Run()
+    {
       // Collection Methods
       Add();
 
@@ -23,17 +29,13 @@ namespace TestTextRegions5
       LJCHasRegions();
       LJCIsInRegion();
       LJCSplit();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue...");
-      Console.ReadKey();
     }
 
     #region Collection Methods
 
     // Creates a TextRegion from the supplied values and adds it to the
     // collection.
-    private static void Add()
+    private void Add()
     {
       var methodName = "Add()";
 
@@ -50,14 +52,14 @@ namespace TestTextRegions5
       var value = textRegions.LJCIsInRegion(index);
       var result = value.ToString();
       var compare = "True";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
 
     #region Methods
 
     // Identifies quoted regions and returns "True" if regions are found.
-    private static void LJCHasRegions()
+    private void LJCHasRegions()
     {
       var methodName = "LJCHasRegions()";
 
@@ -68,11 +70,11 @@ namespace TestTextRegions5
       var value = textRegions.LJCHasRegions(text);
       var result = value.ToString();
       var compare = "True";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Determines if a delimiter is in a text region.
-    private static void LJCIsInRegion()
+    private void LJCIsInRegion()
     {
       var methodName = "LJCIsInRegion()";
 
@@ -87,12 +89,12 @@ namespace TestTextRegions5
         var value = textRegions.LJCIsInRegion(index);
         var result = value.ToString();
         var compare = "True";
-        TestCommon?.Write($"{methodName}", result, compare);
+        TestCommon.Write($"{methodName}", result, compare);
       }
     }
 
     // Splits a line of text on the delimiters not enclosed in text regions.
-    private static void LJCSplit()
+    private void LJCSplit()
     {
       var methodName = "LJCSplit()";
 
@@ -108,14 +110,8 @@ namespace TestTextRegions5
         result = values[1];
       }
       var compare = "Second, Value";
-      TestCommon?.Write($"{methodName}", result, compare);
+      TestCommon.Write($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }
