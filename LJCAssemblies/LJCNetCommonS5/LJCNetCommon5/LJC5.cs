@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJC.cs
+// LJC5.cs
 using System.Collections;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
@@ -24,8 +23,9 @@ namespace LJCNetCommon5
   {
     #region Common Methods
 
+    // Creates the keys collection.
     /// <include file='Doc/LJC.xml'
-    ///  path='items/MinSqlDate/*'/>
+    ///  path='items/Keys/*'/>
     public static LJCDataColumns Keys(string propertyName, string searchValue)
     {
       return new LJCDataColumns()
@@ -46,8 +46,8 @@ namespace LJCNetCommon5
     #region Check Values Methods
 
     // Check for missing argument of type: string with no value, null, 
-    // integer = 0, IList with no items, decimal = 0 or DataTable with no rows.
-    /// <include path="members/CheckArgument/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/CheckArgument/*'/>
     /// <parentGroup>check</parentGroup>
     public static bool CheckArgument<T>([NotNullWhen(true)] T? argument
       , string argName)
@@ -114,7 +114,8 @@ namespace LJCNetCommon5
     }
 
     // Compare null values.
-    /// <include path="members/CompareNull/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/CompareNull/*'/>
     /// <parentGroup>check</parentGroup>
     public static int CompareNull(object? x, object? y)
     {
@@ -143,7 +144,7 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Checks a DataColumns collection for items.
+    // Checks a DataColumnCollection for items.
     /// <include file='Doc/LJC.xml'
     ///  path='members/HasTableColumns1/*'/>
     /// <parentGroup>check</parentGroup>
@@ -193,7 +194,8 @@ namespace LJCNetCommon5
     }
 
     // Checks an array for elements.
-    /// <include path="members/HasArrayElements/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/HasArrayElements/*'/>
     /// <parentGroup>check</parentGroup>
     public static bool HasArrayElements([NotNullWhen(true)] object? array)
     {
@@ -214,7 +216,8 @@ namespace LJCNetCommon5
     }
 
     // Checks an IList collection for items.
-    /// <include path="members/HasListItems/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/HasListItems/*'/>
     /// <parentGroup>check</parentGroup>
     public static bool HasListItems([NotNullWhen(true)] IList? list)
     {
@@ -229,50 +232,51 @@ namespace LJCNetCommon5
     }
 
     // Checks a collection or array for items.
-    /// <include file='Doc/LJC.xml'
-    ///  path='members/HasListItems/*'/>
-    public static bool HasItems([NotNullWhen(true)] object? items)
-    {
-      bool retValue = false;
+    // <include file='Doc/LJC.xml'
+    //  path='members/HasListItems/*'/>
+    //public static bool HasItems([NotNullWhen(true)] object? items)
+    //{
+    //  bool retValue = false;
 
-      if (items != null)
-      {
-        while (true)
-        {
-          var type = items.GetType();
+    //  if (items != null)
+    //  {
+    //    while (true)
+    //    {
+    //      var type = items.GetType();
 
-          // Check if the type itself is the generic IList<> interface
-          if (type.BaseType != null
-            && type.BaseType.IsGenericType
-            && type.BaseType.Name == "List`1")
-          {
-            var list = (IList)items;
-            if (list.Count > 0)
-            {
-              retValue = true;
-              break;
-            }
-          }
+    //      // Check if the type itself is the generic IList<> interface
+    //      if (type.BaseType != null
+    //        && type.BaseType.IsGenericType
+    //        && type.BaseType.Name == "List`1")
+    //      {
+    //        var list = (IList)items;
+    //        if (list.Count > 0)
+    //        {
+    //          retValue = true;
+    //          break;
+    //        }
+    //      }
 
-          object[]? array = null;
-          if (type.IsArray)
-          {
-            array = (object[])items;
-          }
-          if (array != null
-            && array.Length > 0)
-          {
-            retValue = true;
-            break;
-          }
-          break;
-        }
-      }
-      return retValue;
-    }
+    //      object[]? array = null;
+    //      if (type.IsArray)
+    //      {
+    //        array = (object[])items;
+    //      }
+    //      if (array != null
+    //        && array.Length > 0)
+    //      {
+    //        retValue = true;
+    //        break;
+    //      }
+    //      break;
+    //    }
+    //  }
+    //  return retValue;
+    //}
 
     // Checks a DataSet for tables.
-    /// <include path="members/HasDatasetTables/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/HasDataSetTables/*'/>
     /// <parentGroup>check</parentGroup>
     public static bool HasDataSetTables([NotNullWhen(true)] DataSet? dataSet)
     {
@@ -326,7 +330,8 @@ namespace LJCNetCommon5
     }
 
     // Check for DB Minimum date or less.
-    /// <include path="members/IsDbMinDate/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/IsDbMinDate/*'/>
     /// <parentGroup>check</parentGroup>
     public static bool IsDbMinDate(DateTime? dateTime)
     {
@@ -351,7 +356,9 @@ namespace LJCNetCommon5
 
     #region Console Methods
 
-    /// <summary>Clears an invalid ReadKey() selection.</summary>
+    // Clears an invalid ReadKey() selection.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ClearReadKey/*'/>
     public static void ClearReadKey(string prompt, char value)
     {
       while (true)
@@ -376,7 +383,9 @@ namespace LJCNetCommon5
       }
     }
 
-    /// <summary>Clears an invalid ReadLine() selection.</summary>
+    // Clears an invalid ReadLine() selection.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ClearReadLine/*'/>
     public static void ClearReadLine(string prompt, string value)
     {
       var left = prompt.Length + value.Length;
@@ -388,7 +397,9 @@ namespace LJCNetCommon5
       Console.Write(backspaces);
     }
 
-    /// <summary>Get a console character option value.</summary>
+    // Get a console character option value.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/KeyOption/*'/>
     public static char KeyOption(string prompt, string options)
     {
       char retOption;
@@ -442,7 +453,8 @@ namespace LJCNetCommon5
     #region Object Value Methods
 
     // Gets a decimal value from an object.
-    /// <include path="members/GetBoolean/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetBoolean/*'/>
     /// <parentGroup>value</parentGroup>
     public static bool GetBoolean(object value)
     {
@@ -457,7 +469,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a byte value from an object.
-    /// <include path="members/GetByte/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetByte/*'/>
     /// <parentGroup>value</parentGroup>
     public static byte GetByte(object value)
     {
@@ -475,8 +488,9 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Gets a byte value from an object.
-    /// <include path="members/GetByte/*" file="Doc/LJC.xml"/>
+    // Gets an array of bytes from an object.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetBytes/*'/>
     /// <parentGroup>value</parentGroup>
     public static byte[]? GetBytes(object value)
     {
@@ -494,7 +508,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a character value from an object.
-    /// <include path="members/GetChar/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetChar/*'/>
     /// <parentGroup>value</parentGroup>
     public static char GetChar(object value)
     {
@@ -509,7 +524,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a DateTime value from an object.
-    /// <include path="members/GetDateTime/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetDateTime/*'/>
     /// <parentGroup>value</parentGroup>
     public static DateTime? GetDateTime(object value)
     {
@@ -525,7 +541,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a decimal value from an object.
-    /// <include path="members/GetDecimal/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetDecimal/*'/>
     /// <parentGroup>value</parentGroup>
     public static decimal GetDecimal(object value)
     {
@@ -544,7 +561,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a decimal value from an object.
-    /// <include path="members/GetDouble/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetDouble/*'/>
     /// <parentGroup>value</parentGroup>
     public static double GetDouble(object value)
     {
@@ -564,7 +582,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a short value from an object.
-    /// <include path="members/GetInt16/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetInt16/*'/>
     /// <parentGroup>value</parentGroup>
     public static short GetInt16(object value)
     {
@@ -579,7 +598,8 @@ namespace LJCNetCommon5
     }
 
     // Gets an integer value from an object.
-    /// <include path="members/GetInt32/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetInt32/*'/>
     /// <parentGroup>value</parentGroup>
     public static int GetInt32(object value)
     {
@@ -595,7 +615,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a long value from an object.
-    /// <include path="members/GetInt64/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetInt64/*'/>
     /// <parentGroup>value</parentGroup>
     public static long GetInt64(object value)
     {
@@ -612,7 +633,8 @@ namespace LJCNetCommon5
     }
 
     // Gets an instantiated object value.
-    /// <include path="members/GetObject/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetObject/*'/>
     /// <parentGroup>value</parentGroup>
     public static object? GetObject(object value)
     {
@@ -672,7 +694,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a float value from an object.
-    /// <include path="members/GetSingle/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetSingle/*'/>
     /// <parentGroup>value</parentGroup>
     public static float GetSingle(object value)
     {
@@ -690,7 +713,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a trimmed string value from an object.
-    /// <include path="members/GetString/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetString/*'/>
     /// <parentGroup>value</parentGroup>
     public static string? GetString(object value)
     {
@@ -708,7 +732,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a short from a text string.
-    /// <include path="members/ToInt16/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ToInt16/*'/>
     /// <parentGroup>value</parentGroup>
     public static short ToInt16(string text)
     {
@@ -717,7 +742,8 @@ namespace LJCNetCommon5
     }
 
     // Gets an int from a text string.
-    /// <include path="members/ToInt32/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ToInt32/*'/>
     /// <parentGroup>value</parentGroup>
     public static int ToInt32(string text)
     {
@@ -729,7 +755,8 @@ namespace LJCNetCommon5
     #region Project Config Values Methods
 
     // Retrieves the Config bool value.
-    /// <include path="members/ConfigBool/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ConfigBool/*'/>
     /// <parentGroup>config</parentGroup>
     public static bool ConfigBool(string key)
     {
@@ -747,7 +774,8 @@ namespace LJCNetCommon5
     }
 
     // Retrieves the Config Color value.
-    /// <include path="members/ConfigColor/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ConfigColor/*'/>
     /// <parentGroup>config</parentGroup>
     public static bool ConfigColor(string key, out Color color)
     {
@@ -771,7 +799,8 @@ namespace LJCNetCommon5
     }
 
     // Retrieves the Config string value.
-    /// <include path="members/ConfigString/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ConfigString/*'/>
     /// <parentGroup>config</parentGroup>
     public static string? ConfigString(string key)
     {
@@ -784,8 +813,9 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    /// <summary>Accept or Select the DataConfig.</summary>
-    /// <include path="members/ConsoleConfig/*" file="Doc/LJC.xml"/>
+    // Accept or Select the DataConfig.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ConsoleConfig/*'/>
     /// <parentGroup>config</parentGroup>
     public static void ConsoleConfig(string dataConfigName)
     {
@@ -802,7 +832,8 @@ namespace LJCNetCommon5
     #region Serialization Methods
 
     // Deserialize an XML message file to an object.
-    /// <include path="members/XmlDeserialize/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/XmlDeserialize/*'/>
     /// <parentGroup>serialize</parentGroup>
     public static object? XmlDeserialize(Type type, string? fileSpec
       , string? rootName = null)
@@ -850,7 +881,8 @@ namespace LJCNetCommon5
     }
 
     // Deserialize an XML message string to an object.
-    /// <include path="members/XmlDeserializeMessage/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/XmlDeserializeMessage/*'/>
     /// <parentGroup>serialize</parentGroup>
     public static object? XmlDeserializeMessage(Type type, string message)
     {
@@ -871,7 +903,8 @@ namespace LJCNetCommon5
     }
 
     // Serialize an object to an XML message file.
-    /// <include path="members/XmlSerialize/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/XmlSerialize/*'/>
     /// <parentGroup>serialize</parentGroup>
     public static void XmlSerialize(Type type, object data
       , XmlSerializerNamespaces? namespaces, string? fileSpec
@@ -923,7 +956,8 @@ namespace LJCNetCommon5
     }
 
     // Serialize an object to an XML message string.
-    /// <include path="members/XmlSerializeToString/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/XmlSerializeToString/*'/>
     /// <parentGroup>serialize</parentGroup>
     public static string XmlSerializeToString(Type type, object data
       , XmlSerializerNamespaces? namespaces)
@@ -954,7 +988,8 @@ namespace LJCNetCommon5
 
     // ** Base64 Bytes and Text
     // Decodes a Base64 byte array to a Text value.
-    /// <include path="members/Base64BytesToText/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/Base64BytesToText/*'/>
     /// <parentGroup>convert</parentGroup>
     public static string? Base64BytesToText(byte[] bytes)
     {
@@ -963,7 +998,8 @@ namespace LJCNetCommon5
     }
 
     // Encodes a Text value to a Base64 byte array.
-    /// <include path="members/TextToBase64Bytes/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TextToBase64Bytes/*'/>
     /// <parentGroup>convert</parentGroup>
     public static byte[] TextToBase64Bytes(string text)
     {
@@ -974,7 +1010,8 @@ namespace LJCNetCommon5
 
     // ** Base64 Bytes and Text Bytes
     // Decodes a Base64 byte array to a Text byte array.
-    /// <include path="members/Base64BytesToTextBytes/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/Base64BytesToTextBytes/*'/>
     /// <parentGroup>convert</parentGroup>
     public static byte[] Base64BytesToTextBytes(byte[] bytes)
     {
@@ -991,7 +1028,8 @@ namespace LJCNetCommon5
     }
 
     // Encodes a Text byte array to a Base64 byte array.
-    /// <include path="members/TextBytesToBase64Bytes/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TextBytesToBase64Bytes/*'/>
     /// <parentGroup>convert</parentGroup>
     public static byte[] TextBytesToBase64Bytes(byte[] bytes)
     {
@@ -1019,7 +1057,8 @@ namespace LJCNetCommon5
 
     // ** Base64 and Text
     // Decodes a Base64 value to a Text value.
-    /// <include path="members/Base64ToText/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/Base64ToText/*'/>
     /// <parentGroup>convert</parentGroup>
     public static string Base64ToText(string base64Text)
     {
@@ -1027,7 +1066,8 @@ namespace LJCNetCommon5
     }
 
     // Encodes a Text value to a Base64 value.
-    /// <include path="members/TextToBase64/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TextToBase64/*'/>
     /// <parentGroup>convert</parentGroup>
     public static string TextToBase64(string text)
     {
@@ -1036,7 +1076,8 @@ namespace LJCNetCommon5
 
     // * Text Bytes and Base64
     // Decodes a Base64 value to a Text byte array.
-    /// <include path="members/Base64ToTextBytes/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/Base64ToTextBytes/*'/>
     /// <parentGroup>convert</parentGroup>
     public static byte[] Base64ToTextBytes(string base64)
     {
@@ -1046,7 +1087,8 @@ namespace LJCNetCommon5
     }
 
     // Encodes a Text byte array to a Base64 value.
-    /// <include path="members/TextBytesToBase64/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TextBytesToBase64/*'/>
     /// <parentGroup>convert</parentGroup>
     public static string? TextBytesToBase64(byte[] bytes)
     {
@@ -1057,7 +1099,8 @@ namespace LJCNetCommon5
 
     // ** Bytes and Text
     // Creates text from a byte array.
-    /// <include path="members/BytesToText/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/BytesToText/*'/>
     /// <parentGroup>convert</parentGroup>
     public static string? BytesToText(byte[]? bytes)
     {
@@ -1070,7 +1113,8 @@ namespace LJCNetCommon5
     }
 
     // Creates a byte array from text.
-    /// <include path="members/TextToBytes/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TextToBytes/*'/>
     /// <parentGroup>convert</parentGroup>
     public static byte[] TextToBytes(string text)
     {
@@ -1086,7 +1130,8 @@ namespace LJCNetCommon5
 
     // ** Stream and Bytes
     // Copies a memory stream to a byte array.
-    /// <include path="members/MemStreamToBytes/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/MemStreamToBytes/*'/>
     /// <parentGroup>convert</parentGroup>
     public static byte[] MemStreamToBytes(Stream stream)
     {
@@ -1102,7 +1147,8 @@ namespace LJCNetCommon5
     }
 
     // Copies a byte array to a memory stream.
-    /// <include path="members/BytesToMemStream/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/BytesToMemStream/*'/>
     /// <parentGroup>convert</parentGroup>
     public static Stream BytesToMemStream(byte[] bytes)
     {
@@ -1117,7 +1163,8 @@ namespace LJCNetCommon5
 
     // ** Stream and String (Text)
     // Creates a string from a memory stream.
-    /// <include path="members/MemStreamToString/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/MemStreamToString/*'/>
     /// <parentGroup>convert</parentGroup>
     public static string MemStreamToString(Stream stream)
     {
@@ -1132,7 +1179,8 @@ namespace LJCNetCommon5
     }
 
     // Creates a memory stream from a string.
-    /// <include path="members/StringToMemStream/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/StringToMemStream/*'/>
     /// <parentGroup>convert</parentGroup>
     public static Stream StringToMemStream(string text)
     {
@@ -1147,7 +1195,8 @@ namespace LJCNetCommon5
 
     // ** XML Entities
     // Decodes an encoded XML string.
-    /// <include path="members/XmlDecode/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/XmlDecode/*'/>
     /// <parentGroup>convert</parentGroup>
     public static string? XmlDecode(string text)
     {
@@ -1165,7 +1214,8 @@ namespace LJCNetCommon5
     }
 
     // Encodes a string with XML escape values.
-    /// <include path="members/XmlEncode/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/XmlEncode/*'/>
     /// <parentGroup>convert</parentGroup>
     public static string? XmlEncode(string text)
     {
@@ -1186,62 +1236,76 @@ namespace LJCNetCommon5
     #region DataType Names
 
     // The Boolean type name.
-    /// <include path="members/TypeBoolean/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TypeBoolean/*'/>
     /// <parentGroup>dataType</parentGroup>
     public const string TypeBoolean = "Boolean";
 
     // The Byte type name.
-    /// <include path="members/TypeByte/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TypeByte/*'/>
     /// <parentGroup>dataType</parentGroup>
     public const string TypeByte = "Byte";
 
     // The Char type name.
-    /// <include path="members/TypeChar/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TypeChar/*'/>
     /// <parentGroup>dataType</parentGroup>
     public const string TypeChar = "Char";
 
     // The DateTime type name.
-    /// <include path="members/TypeDateTime/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TypeDateTime/*'/>
     /// <parentGroup>dataType</parentGroup>
     public const string TypeDateTime = "DateTime";
 
     // Type Decimal type name.
-    /// <include path="members/TypeDecimal/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TypeDecimal/*'/>
     /// <parentGroup>dataType</parentGroup>
     public const string TypeDecimal = "Decimal";
 
     // The Double type name.
-    /// <include path="members/TypeDouble/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TypeDouble/*'/>
     /// <parentGroup>dataType</parentGroup>
     public const string TypeDouble = "Double";
 
     // The Int16 type name.
-    /// <include path="members/TypeInt16/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TypeInt16/*'/>
     /// <parentGroup>dataType</parentGroup>
     public const string TypeInt16 = "Int16";
 
     // The Int32 type name.
-    /// <include path="members/TypeInt32/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TypeInt32/*'/>
     /// <parentGroup>dataType</parentGroup>
     public const string TypeInt32 = "Int32";
 
     // The Int64 type name.
-    /// <include path="members/TypeInt64/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TypeInt64/*'/>
     /// <parentGroup>dataType</parentGroup>
     public const string TypeInt64 = "Int64";
 
     // The Single type name.
-    /// <include path="members/TypeSingle/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TypeSingle/*'/>
     /// <parentGroup>dataType</parentGroup>
     public const string TypeSingle = "Single";
 
     // The String type name.
-    /// <include path="members/TypeString/*" file="Doc/LJC.xml"/>
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/TypeString/*'/>
     /// <parentGroup>dataType</parentGroup>
     public const string TypeString = "String";
     #endregion
 
-    /// <summary></summary>
+    // 
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/IgnoreCase/*'/>
+    /// <parentGroup>dataType</parentGroup>
     public const StringComparison IgnoreCase = StringComparison.OrdinalIgnoreCase;
   }
 }

@@ -15,7 +15,21 @@
       </para>
     </remarks>
   </LJC>
-  
+
+  <!-- Common Methods -->
+  <Keys>
+    <summary>
+      Creates the keys collection.
+    </summary>
+    <param name="propertyName">The object property name.</param>
+    <param name="searchValue">The search value.</param>
+  </Keys>
+  <MinSqlDate>
+    <summary>
+      Get the minimum date value.
+    </summary>
+  </MinSqlDate>
+
   <!-- Check Values Methods -->
   <CheckArgument>
     <summary>
@@ -27,6 +41,7 @@
     <param name="argName">The argument name.</param>
     <exception cref="ArgumentNullException">Argument Null Exception</exception>
     <exception cref="ArgumentException">Argument Exception</exception>
+    <returns>true if a valid value; otherwise throws an exception.</returns>
   </CheckArgument>
   <CompareNull>
     <summary>
@@ -49,31 +64,31 @@
     <example>
       <code>
         using LJCNetCommon5;
-        
+
         /// &lt;summary&gt;Sort and search on Name value.&lt;/summary&gt;
         public class NameComparer : IComparer&lt;ClassName&gt;
         {
-          // Compares two objects.
-          /// &lt;include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/&gt;
-          public int Compare(ClassName x, ClassName y)
-          {
-            int retValue;
+        // Compares two objects.
+        /// &lt;include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/&gt;
+        public int Compare(ClassName x, ClassName y)
+        {
+        int retValue;
 
-            retValue = LJC.CompareNull(x, y);
-            if (LJCNetString.CompareNotNullOrEqual == retValue)
-            {
-              retValue = NetCommon.CompareNull(x?.Name, y?.Name);
-              if (LJCNetString.CompareNotNullOrEqual == retValue)
-              {
-                // Case sensitive.
-                //retValue = x!.Name!.CompareTo(y?.Name);
+        retValue = LJC.CompareNull(x, y);
+        if (LJCNetString.CompareNotNullOrEqual == retValue)
+        {
+        retValue = NetCommon.CompareNull(x?.Name, y?.Name);
+        if (LJCNetString.CompareNotNullOrEqual == retValue)
+        {
+        // Case sensitive.
+        //retValue = x!.Name!.CompareTo(y?.Name);
 
-                // Not case sensitive.
-                retValue = string.Compare(x.Name, y.Name, true);
-              }
-            }
-            return retValue;
-          }
+        // Not case sensitive.
+        retValue = string.Compare(x.Name, y.Name, true);
+        }
+        }
+        return retValue;
+        }
         }
       </code>
     </example>
@@ -121,22 +136,22 @@
       Checks an array for elements.
     </summary>
     <param name="array">The array object.</param>
-    <returns>true if an array and it has elements.</returns>
+    <returns>true if an array and it has elements; otherwise, false.</returns>
   </HasArrayElements>
   <HasListItems>
     <summary>
       Checks an IList collection for items.
     </summary>
     <param name="list">The IList interface.</param>
-    <returns>true if the collection contains items; otherwise; false.</returns>
+    <returns>true if the collection contains items; otherwise false.</returns>
   </HasListItems>
-  <HasDatasetTables>
+  <HasDataSetTables>
     <summary>
       Checks a DataSet for tables.
     </summary>
-    <param name="dataset">The DataSet object.</param>
+    <param name="dataSet">The DataSet object.</param>
     <returns>true if the DataSet has tables; otherwise, false.</returns>
-  </HasDatasetTables>
+  </HasDataSetTables>
   <HasText>
     <summary>
       Checks if a text value exists.
@@ -150,8 +165,12 @@
     <summary>
       Checks if two values are equal.
     </summary>
-    <param name="oldValue"> The previous value.</param>
-    <param name="newValue"> The new value.</param>
+    <typeparam name="T">The argument type.</typeparam>
+    <param name="compareValue">The compare value.</param>
+    <param name="compareToValue">The compare to value.</param>
+    <param name="caseSensitive">
+      Indicates if the comparison is case sensitive.
+    </param>
     <returns>true if equal; otherwise, false.</returns>
     <remarks>
       Performs a strongly-typed value check of two objects where those
@@ -169,6 +188,29 @@
     <returns>true if minimum; otherwise, false.</returns>
   </IsDbMinDate>
 
+  <!-- Console Methods -->
+  <ClearReadKey>
+    <summary>
+      Clears an invalid ReadKey() selection.
+    </summary>
+    <param name="prompt">The prompt string.</param>
+    <param name="value">The entered character value.</param>
+  </ClearReadKey>
+  <ClearReadLine>
+    <summary>
+      Clears an invalid ReadLine() selection.
+    </summary>
+    <param name="prompt">The prompt string.</param>
+    <param name="value">The entered string value.</param>
+  </ClearReadLine>
+  <KeyOption>
+    <summary>
+      Get a console character option value.
+    </summary>
+    <param name="prompt">The prompt string.</param>
+    <param name="options">The available options value.</param>
+  </KeyOption>
+  
   <!-- Object Value Methods -->
   <GetBoolean>
     <summary>
@@ -182,17 +224,17 @@
     <example>
       <code>
         using LJCNetCommon;
-        
+
         // Gets a bool value from an object.
         private static void GetBoolean()
         {
-          // Simulates an Object value like that received from a DataTable.
-          bool setup = true;
-          object obj = setup;
+        // Simulates an Object value like that received from a DataTable.
+        bool setup = true;
+        object obj = setup;
 
-          // Gets a short value from an object.
-          var result = NetCommon.GetBoolean(obj);
-          // result = True
+        // Gets a short value from an object.
+        var result = NetCommon.GetBoolean(obj);
+        // result = True
         }
       </code>
     </example>
@@ -213,18 +255,24 @@
         // Gets a byte value from an object.
         private static void GetByte()
         {
-          // Simulates an Object value like that received from a DataTable.
-          byte setup = Convert.ToByte('A');
-          object obj = setup;
+        // Simulates an Object value like that received from a DataTable.
+        byte setup = Convert.ToByte('A');
+        object obj = setup;
 
-          // Gets a byte value from an object.
-          byte value = NetCommon.GetByte(obj);
-          var result = value.ToString();
-          // result = "65"
+        // Gets a byte value from an object.
+        byte value = NetCommon.GetByte(obj);
+        var result = value.ToString();
+        // result = "65"
         }
       </code>
     </example>
   </GetByte>
+  <GetBytes>
+    <summary>
+      Gets an array of bytes from an object.
+    </summary>
+    <param name="value">The value object.</param>
+  </GetBytes>
   <GetChar>
     <summary>
       Gets a character value from an object.
@@ -241,14 +289,14 @@
         // Gets a char value from an object.
         private static void GetChar()
         {
-          // Simulates an Object value like that received from a DataTable.
-          char setup = Convert.ToChar('A');
-          object obj = setup;
+        // Simulates an Object value like that received from a DataTable.
+        char setup = Convert.ToChar('A');
+        object obj = setup;
 
-          // Gets a byte value from an object.
-          char value = NetCommon.GetChar(obj);
-          var result = value.ToString();
-          // result = "A";
+        // Gets a byte value from an object.
+        char value = NetCommon.GetChar(obj);
+        var result = value.ToString();
+        // result = "A";
         }
       </code>
     </example>
@@ -267,19 +315,19 @@
         // Gets a DateTime value from an object.
         private static void GetDateTime()
         {
-          // Simulates an Object value like that received from a DataTable.
-          string setup = "2026/06/15 12:30:00 PM";
-          object obj = setup;
+        // Simulates an Object value like that received from a DataTable.
+        string setup = "2026/06/15 12:30:00 PM";
+        object obj = setup;
 
-          // Gets a decimal value from an object.
-          DateTime? returnValue = NetCommon.GetDateTime(obj);
-          if (returnValue != null)
-          {
-            DateTime value = (DateTime)returnValue;
-            var result = $"{value:yyyy/MM/dd HH:mm:ss tt}";
-            //result = value.ToString("yyyy/MM/dd HH:mm:ss tt");
-            // result = "2026/06/15 12:30:00 PM";
-          }
+        // Gets a decimal value from an object.
+        DateTime? returnValue = NetCommon.GetDateTime(obj);
+        if (returnValue != null)
+        {
+        DateTime value = (DateTime)returnValue;
+        var result = $"{value:yyyy/MM/dd HH:mm:ss tt}";
+        //result = value.ToString("yyyy/MM/dd HH:mm:ss tt");
+        // result = "2026/06/15 12:30:00 PM";
+        }
         }
       </code>
     </example>
@@ -297,17 +345,17 @@
     <example>
       <code>
         using LJCNetCommon;
-        
+
         // Gets a decimal value from an object.
         private static void GetDecimal()
         {
-          // Simulates an Object value like that received from a DataTable.
-          decimal setup = 3.14m;
-          object obj = setup;
+        // Simulates an Object value like that received from a DataTable.
+        decimal setup = 3.14m;
+        object obj = setup;
 
-          // Gets a decimal value from an object.
-          decimal value = NetCommon.GetDecimal(obj);
-          // value = 3.14
+        // Gets a decimal value from an object.
+        decimal value = NetCommon.GetDecimal(obj);
+        // value = 3.14
         }
       </code>
     </example>
@@ -327,13 +375,13 @@
         // Gets a double value from an object.
         private static void GetDouble()
         {
-          // Simulates an Object value like that received from a DataTable.
-          double setup = 3.14d;
-          object obj = setup;
+        // Simulates an Object value like that received from a DataTable.
+        double setup = 3.14d;
+        object obj = setup;
 
-          // Gets a decimal value from an object.
-          double result = NetCommon.GetDouble(obj);
-          // result = 3.14;
+        // Gets a decimal value from an object.
+        double result = NetCommon.GetDouble(obj);
+        // result = 3.14;
         }
       </code>
     </example>
@@ -354,13 +402,13 @@
         // Gets a short value from an object.
         private static void GetInt16()
         {
-          // Simulates an Object value like that received from a DataTable.
-          short setup = 3;
-          object obj = setup;
+        // Simulates an Object value like that received from a DataTable.
+        short setup = 3;
+        object obj = setup;
 
-          // Gets a short value from an object.
-          short value = NetCommon.GetInt16(obj);
-          // value = 3
+        // Gets a short value from an object.
+        short value = NetCommon.GetInt16(obj);
+        // value = 3
         }
       </code>
     </example>
@@ -377,17 +425,17 @@
     <example>
       <code>
         using LJCNetCommon;
-        
+
         // Gets an int value from an object.
         private static void GetInt32()
         {
-          // Simulates an Object value like that received from a DataTable.
-          int setup = 3;
-          object obj = setup;
+        // Simulates an Object value like that received from a DataTable.
+        int setup = 3;
+        object obj = setup;
 
-          // Gets an int value from an object.
-          int value = NetCommon.GetInt32(obj);
-          // value = 3
+        // Gets an int value from an object.
+        int value = NetCommon.GetInt32(obj);
+        // value = 3
         }
       </code>
     </example>
@@ -404,17 +452,17 @@
     <example>
       <code>
         using LJCNetCommon;
-        
+
         // Gets a long value from an object.
         private static void GetInt64()
         {
-          // Simulates an Object value like that received from a DataTable.
-          long setup = 3;
-          object obj = setup;
+        // Simulates an Object value like that received from a DataTable.
+        long setup = 3;
+        object obj = setup;
 
-          // Gets a long value from an object.
-          long value = NetCommon.GetInt64(obj);
-          // value = 3
+        // Gets a long value from an object.
+        long value = NetCommon.GetInt64(obj);
+        // value = 3
         }
       </code>
     </example>
@@ -441,13 +489,13 @@
         // Gets a float (single) value from an object.
         private static void GetSingle()
         {
-          // Simulates an Object value like that received from a DataTable.
-          float setup = 3.14f;
-          object obj = setup;
+        // Simulates an Object value like that received from a DataTable.
+        float setup = 3.14f;
+        object obj = setup;
 
-          // Gets a decimal value from an object.
-          float result = NetCommon.GetSingle(obj);
-          result = 3.14;
+        // Gets a decimal value from an object.
+        float result = NetCommon.GetSingle(obj);
+        result = 3.14;
         }
       </code>
     </example>
@@ -461,17 +509,17 @@
     <example>
       <code>
         using LJCNetCommon;
-        
+
         // Gets a trimmed string value from an object.
         private static void GetString()
         {
-          // Simulates an Object value like that received from a DataTable.
-          string setup = "3";
-          object obj = setup;
+        // Simulates an Object value like that received from a DataTable.
+        string setup = "3";
+        object obj = setup;
 
-          // Gets a string value from an object.
-          string value = NetCommon.GetString(obj);
-          // value = "3"
+        // Gets a string value from an object.
+        string value = NetCommon.GetString(obj);
+        // value = "3"
         }
       </code>
     </example>
@@ -520,7 +568,7 @@
     <example>
       <code>
         using LJCNetCommon;
-        
+
         // This returns true.
         bool localDbAccess = LJCNetCommon.ConfigBool("LocalDbDataAccess");
       </code>
@@ -557,7 +605,7 @@
     <example>
       <code>
         using LJCNetCommon;
-        
+
         // This returns var beginColor that is Color.AliceBlue.
         // If the key is not found it returns Color.Black.
         LJCNetCommon.ConfigColor("BeginColor", out Color beginColor);
@@ -594,7 +642,7 @@
     <example>
       <code>
         using LJCNetCommon;
-        
+
         // This returns "MySql".
         string dbType = NetCommon.ConfigString("ConnectionType");
       </code>
@@ -622,27 +670,27 @@
 
         public class Person
         {
-          public long Id { get; set; }
-          public string Name { get; set; }
-          public bool PrincipleFlag { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public bool PrincipleFlag { get; set; }
         }
 
         // Deserialize an XML message file to an object.
         private static void XmlDeserialize()
         {
-          // Setup
-          var person = new Person()
-          {
-            Id = 1,
-            Name = "Text",
-            PrincipleFlag = true
-          };
-          string file = "Text.xml";
-          LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
+        // Setup
+        var person = new Person()
+        {
+        Id = 1,
+        Name = "Text",
+        PrincipleFlag = true
+        };
+        string file = "Text.xml";
+        LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
 
-          // Deserialize an XML message file to an object.
-          Person newPerson;
-          newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
+        // Deserialize an XML message file to an object.
+        Person newPerson;
+        newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
         }
       </code>
     </example>
@@ -660,26 +708,26 @@
 
         public class Person
         {
-          public long Id { get; set; }
-          public string Name { get; set; }
-          public bool PrincipleFlag { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public bool PrincipleFlag { get; set; }
         }
 
         // Deserialize an XML message string to an object.
         private static void XmlDeserializeMessage()
         {
-          // Setup
-          var person = new Person()
-          {
-            Id = 2,
-            Name = "Text",
-            PrincipleFlag = true
-          };
-          string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
+        // Setup
+        var person = new Person()
+        {
+        Id = 2,
+        Name = "Text",
+        PrincipleFlag = true
+        };
+        string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
 
-          // Deserialize an XML message string to an object.
-          Person newPerson;
-          newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
+        // Deserialize an XML message string to an object.
+        Person newPerson;
+        newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
         }
       </code>
     </example>
@@ -699,29 +747,29 @@
 
         public class Person
         {
-          public long Id { get; set; }
-          public string Name { get; set; }
-          public bool PrincipleFlag { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public bool PrincipleFlag { get; set; }
         }
 
         // Serialize an object to an XML message file.
         private static void XmlSerialize()
         {
-          // Setup
-          var person = new Person()
-          {
-            Id = 2,
-            Name = "Text",
-            PrincipleFlag = true
-          };
-          string file = "Text.xml";
+        // Setup
+        var person = new Person()
+        {
+        Id = 2,
+        Name = "Text",
+        PrincipleFlag = true
+        };
+        string file = "Text.xml";
 
-          // Serialize an object to an XML message file.
-          LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
+        // Serialize an object to an XML message file.
+        LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
 
-          // Check the object.
-          Person newPerson;
-          newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
+        // Check the object.
+        Person newPerson;
+        newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
         }
       </code>
     </example>
@@ -740,26 +788,26 @@
 
         public class Person
         {
-          public long Id { get; set; }
-          public string Name { get; set; }
-          public bool PrincipleFlag { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public bool PrincipleFlag { get; set; }
         }
 
         // Serialize an object to an XML message string.
         private static void XmlSerializeToString()
         {
-          // Serialize an object to an XML message string.
-          var person = new Person()
-          {
-            Id = 2,
-            Name = "Text",
-            PrincipleFlag = true
-          };
-          string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
+        // Serialize an object to an XML message string.
+        var person = new Person()
+        {
+        Id = 2,
+        Name = "Text",
+        PrincipleFlag = true
+        };
+        string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
 
-          // Check the object.
-          Person newPerson;
-          newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
+        // Check the object.
+        Person newPerson;
+        newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
         }
       </code>
     </example>
@@ -779,13 +827,13 @@
         // Decodes a Base64 byte array to a Text value.
         private static void Base64BytesToText()
         {
-          // Setup
-          // Encodes a Text value to a Base64 byte array.
-          byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
+        // Setup
+        // Encodes a Text value to a Base64 byte array.
+        byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
 
-          // Decodes a Base64 byte array to a Text value.
-          string text = NetCommon.Base64BytesToText(base64Bytes);
-          // text = "Text"
+        // Decodes a Base64 byte array to a Text value.
+        string text = NetCommon.Base64BytesToText(base64Bytes);
+        // text = "Text"
         }
       </code>
     </example>
@@ -803,12 +851,12 @@
         // Encodes a Text value to a Base64 byte array.
         private static void TextToBase64Bytes()
         {
-          // Create Text from Base64 byte array.
-          byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
+        // Create Text from Base64 byte array.
+        byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
 
-          // Check the text.
-          string text = NetCommon.Base64BytesToText(base64Bytes);
-          // text = "Text"
+        // Check the text.
+        string text = NetCommon.Base64BytesToText(base64Bytes);
+        // text = "Text"
         }
       </code>
     </example>
@@ -827,16 +875,16 @@
         // Decodes a Base64 byte array to a Text byte array.
         private static void Base64BytesToTextBytes()
         {
-          // Setup
-          // Encodes a Text value to a Base64 byte array.
-          byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
+        // Setup
+        // Encodes a Text value to a Base64 byte array.
+        byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
 
-          // Decodes a Base64 byte array to a Text byte array.
-          byte[] textBytes = NetCommon.Base64BytesToTextBytes(base64Bytes);
+        // Decodes a Base64 byte array to a Text byte array.
+        byte[] textBytes = NetCommon.Base64BytesToTextBytes(base64Bytes);
 
-          // Check the text.
-          string text = NetCommon.BytesToText(textBytes);
-          // text = "Text"
+        // Check the text.
+        string text = NetCommon.BytesToText(textBytes);
+        // text = "Text"
         }
       </code>
     </example>
@@ -854,16 +902,16 @@
         // Encodes a Text byte array to a Base64 byte array.
         private static void TextBytesToBase64Bytes()
         {
-          // Setup
-          // Creates a byte array from text.
-          byte[] textBytes = NetCommon.TextToBytes("Text");
+        // Setup
+        // Creates a byte array from text.
+        byte[] textBytes = NetCommon.TextToBytes("Text");
 
-          // Encodes a byte array to a Base64 byte array.
-          byte[] base64Bytes = NetCommon.TextBytesToBase64Bytes(textBytes);
+        // Encodes a byte array to a Base64 byte array.
+        byte[] base64Bytes = NetCommon.TextBytesToBase64Bytes(textBytes);
 
-          // Check the text.
-          string text = NetCommon.Base64BytesToText(base64Bytes);
-          // text = "Text"
+        // Check the text.
+        string text = NetCommon.Base64BytesToText(base64Bytes);
+        // text = "Text"
         }
       </code>
     </example>
@@ -882,13 +930,13 @@
         // Decodes a Base64 value to a Text value.
         private static void Base64ToText()
         {
-          // Setup
-          // Encodes a Text value to a Base64 value.
-          string base64 = NetCommon.TextToBase64("Text");
+        // Setup
+        // Encodes a Text value to a Base64 value.
+        string base64 = NetCommon.TextToBase64("Text");
 
-          // Decodes a Base64 string to Text.
-          string text = NetCommon.Base64ToText(base64);
-          // text = "Text"
+        // Decodes a Base64 string to Text.
+        string text = NetCommon.Base64ToText(base64);
+        // text = "Text"
         }
       </code>
     </example>
@@ -906,14 +954,14 @@
         // Encodes a Text value to a Base64 value.
         private static void TextToBase64()
         {
-          string text = "Text";
+        string text = "Text";
 
-          // Encodes text to a Base64 string.
-          string base64 = NetCommon.TextToBase64(text);
+        // Encodes text to a Base64 string.
+        string base64 = NetCommon.TextToBase64(text);
 
-          // Check the text.
-          text = NetCommon.Base64ToText(base64);
-          // text = "Text"
+        // Check the text.
+        text = NetCommon.Base64ToText(base64);
+        // text = "Text"
         }
       </code>
     </example>
@@ -932,16 +980,16 @@
         // Decodes a Base64 value to a Text byte array.
         public static void Base64ToTextBytes()
         {
-          // Setup
-          // Encodes a Text value to a Base64 value.
-          string base64 = NetCommon.TextToBase64("Text");
+        // Setup
+        // Encodes a Text value to a Base64 value.
+        string base64 = NetCommon.TextToBase64("Text");
 
-          // Decodes a Base64 value to a Text byte array.
-          byte[] textBytes = NetCommon.Base64ToTextBytes(base64);
+        // Decodes a Base64 value to a Text byte array.
+        byte[] textBytes = NetCommon.Base64ToTextBytes(base64);
 
-          // Check the text.
-          string text = NetCommon.BytesToText(textBytes);
-          // text = "Text"
+        // Check the text.
+        string text = NetCommon.BytesToText(textBytes);
+        // text = "Text"
         }
       </code>
     </example>
@@ -959,16 +1007,16 @@
         // Encodes a Text byte array to a Base64 value.
         public static void TextBytesToBase64()
         {
-          // Setup
-          // Creates a byte array from text.
-          byte[] TextBytes = NetCommon.TextToBytes("Text");
+        // Setup
+        // Creates a byte array from text.
+        byte[] TextBytes = NetCommon.TextToBytes("Text");
 
-          // Encodes a Text byte array to a Base64 value.
-          string base64 = NetCommon.TextBytesToBase64(TextBytes);
+        // Encodes a Text byte array to a Base64 value.
+        string base64 = NetCommon.TextBytesToBase64(TextBytes);
 
-          // Check the text.
-          string text = NetCommon.Base64ToText(base64);
-          // text = "Text"
+        // Check the text.
+        string text = NetCommon.Base64ToText(base64);
+        // text = "Text"
         }
       </code>
     </example>
@@ -987,13 +1035,13 @@
         // Creates text from a byte array.
         private static void BytesToText()
         {
-          // Setup
-          // Creates a byte array from text.
-          byte[] bytes = NetCommon.TextToBytes("Text");
+        // Setup
+        // Creates a byte array from text.
+        byte[] bytes = NetCommon.TextToBytes("Text");
 
-          // Creates text from a byte array.
-          string text = NetCommon.BytesToText(bytes);
-          // text = "Text"
+        // Creates text from a byte array.
+        string text = NetCommon.BytesToText(bytes);
+        // text = "Text"
         }
       </code>
     </example>
@@ -1011,20 +1059,20 @@
         // Creates a byte array from text.
         private static void TextToBytes()
         {
-          // Setup
-          string text = "Text";
+        // Setup
+        string text = "Text";
 
-          // Creates a byte array from text.
-          byte[] bytes = NetCommon.TextToBytes(text);
+        // Creates a byte array from text.
+        byte[] bytes = NetCommon.TextToBytes(text);
 
-          // Check the text.
-          text = NetCommon.BytesToText(bytes);
-          // text = "Text"
+        // Check the text.
+        text = NetCommon.BytesToText(bytes);
+        // text = "Text"
         }
       </code>
     </example>
   </TextToBytes>
-  
+
   <MemStreamToBytes>
     <summary>
       Copies a memory stream to a byte array.
@@ -1039,18 +1087,18 @@
         // Copies a memory stream to a byte array.
         private static void MemStreamToBytes()
         {
-          // Setup
-          byte[] textBytes;
-          // Creates a memory stream from a string.
-          using (Stream stream = NetCommon.StringToMemStream("Text"))
-          {
-            // Copies a memory stream to a byte array.
-            textBytes = NetCommon.MemStreamToBytes(stream);
-          }
+        // Setup
+        byte[] textBytes;
+        // Creates a memory stream from a string.
+        using (Stream stream = NetCommon.StringToMemStream("Text"))
+        {
+        // Copies a memory stream to a byte array.
+        textBytes = NetCommon.MemStreamToBytes(stream);
+        }
 
-          // Check the text.
-          string text = NetCommon.BytesToText(textBytes);
-          // text = "Text"
+        // Check the text.
+        string text = NetCommon.BytesToText(textBytes);
+        // text = "Text"
         }
       </code>
     </example>
@@ -1069,22 +1117,22 @@
         // Copies a byte array to a memory stream.
         private static void BytesToMemStream()
         {
-          // Setup
-          // Creates a byte array from text.
-          byte[] bytes = NetCommon.TextToBytes("Text");
+        // Setup
+        // Creates a byte array from text.
+        byte[] bytes = NetCommon.TextToBytes("Text");
 
-          // Copies a byte array to a memory stream.
-          using (Stream stream = NetCommon.BytesToMemStream(bytes))
-          {
-            // Check the text.
-            string text = NetCommon.MemStreamToString(stream);
-            // text = "Text"
-          }
+        // Copies a byte array to a memory stream.
+        using (Stream stream = NetCommon.BytesToMemStream(bytes))
+        {
+        // Check the text.
+        string text = NetCommon.MemStreamToString(stream);
+        // text = "Text"
+        }
         }
       </code>
     </example>
   </BytesToMemStream>
-  
+
   <MemStreamToString>
     <summary>
       Creates a string from a memory stream.
@@ -1098,14 +1146,14 @@
         // Creates a string from a memory stream.
         private static void MemStreamToString()
         {
-          // Setup
-          // Creates a memory stream from a string.
-          using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
-          {
-            // Creates a string from a memory stream.
-            string text = LJCNetCommon.MemStreamToString(stream);
-            // text = "Text"
-          }
+        // Setup
+        // Creates a memory stream from a string.
+        using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
+        {
+        // Creates a string from a memory stream.
+        string text = LJCNetCommon.MemStreamToString(stream);
+        // text = "Text"
+        }
         }
       </code>
     </example>
@@ -1119,22 +1167,22 @@
     <example>
       <code>
         using LJCNetCommon;
-        
+
         // Creates a memory stream from a string.
         private static void StringToMemStream()
         {
-          // Creates a memory stream from a string.
-          using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
-          {
-            // Check the text.
-            string text = LJCNetCommon.MemStreamToString(stream);
-            // text = "Text"
-          }
+        // Creates a memory stream from a string.
+        using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
+        {
+        // Check the text.
+        string text = LJCNetCommon.MemStreamToString(stream);
+        // text = "Text"
+        }
         }
       </code>
     </example>
   </StringToMemStream>
-  
+
   <XmlDecode>
     <summary>
       Decodes an encoded XML string.
@@ -1148,14 +1196,14 @@
         // Decodes an encoded XML string.
         private static void XmlDecode()
         {
-          // Setup
-          string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
-          // Encodes a string with XML escape values.
-          string encoded = LJCNetCommon.XmlEncode(xml);
+        // Setup
+        string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
+        // Encodes a string with XML escape values.
+        string encoded = LJCNetCommon.XmlEncode(xml);
 
-          // Decodes an encoded XML string.
-          string text = LJCNetCommon.XmlDecode(encoded);
-          // text = "Text"
+        // Decodes an encoded XML string.
+        string text = LJCNetCommon.XmlDecode(encoded);
+        // text = "Text"
         }
       </code>
     </example>
@@ -1173,20 +1221,20 @@
         // Encodes a string with XML escape values.
         private static void XmlEncode()
         {
-          // Setup
-          string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
+        // Setup
+        string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
 
-          // Encodes a string with XML escape values.
-          string encoded = NetCommon.XmlEncode(xml);
+        // Encodes a string with XML escape values.
+        string encoded = NetCommon.XmlEncode(xml);
 
-          // Check the text.
-          string text = NetCommon.XmlDecode(encoded);
-          // text = "Text"
+        // Check the text.
+        string text = NetCommon.XmlDecode(encoded);
+        // text = "Text"
         }
       </code>
     </example>
   </XmlEncode>
-  
+
   <!-- DataType Names -->
   <TypeBoolean>
     <summary>
@@ -1243,4 +1291,8 @@
       The String type name.
     </summary>
   </TypeString>
+
+  <IgnoreCase>
+    
+  </IgnoreCase>
 </members>
