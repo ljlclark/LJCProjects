@@ -14,6 +14,12 @@
         types.
       </para>
     </remarks>
+    <group name="check">Check Values</group>
+    <group name="convert">Text Conversion</group>
+    <group name="serialize">Serialization</group>
+    <group name="config">Project Config Value</group>
+    <group name="value">Values</group>
+    <group name="dataType">DataType Names</group>
   </LJC>
 
   <!-- Common Methods -->
@@ -42,6 +48,7 @@
     <exception cref="ArgumentNullException">Argument Null Exception</exception>
     <exception cref="ArgumentException">Argument Exception</exception>
     <returns>true if a valid value; otherwise throws an exception.</returns>
+    <parentGroup>check</parentGroup>
   </CheckArgument>
   <CompareNull>
     <summary>
@@ -61,6 +68,7 @@
       &lt;br /&gt;
       LJCNetString.CompareGreater (1) - Object x follows null object y.
     </remarks>
+    <parentGroup>check</parentGroup>
     <example>
       <code>
         using LJCNetCommon5;
@@ -99,6 +107,7 @@
     </summary>
     <param name="dataColumns">The DataColumns collection.</param>
     <returns>true if the collection has items; otherwise, false.</returns>
+    <parentGroup>check</parentGroup>
   </HasTableColumns1>
   <HasTableColumns2>
     <summary>
@@ -106,6 +115,7 @@
     </summary>
     <param name="dataTable">The data table object.</param>
     <returns>true if the data table contains Columns; otherwise, false.</returns>
+    <parentGroup>check</parentGroup>
   </HasTableColumns2>
   <HasTableData>
     <summary>
@@ -116,6 +126,7 @@
     <remarks>
       This allows a single if statement where the DataTable value may be null.
     </remarks>
+    <parentGroup>check</parentGroup>
     <example>
       <code>
         using System.Data;
@@ -137,6 +148,7 @@
     </summary>
     <param name="array">The array object.</param>
     <returns>true if an array and it has elements; otherwise, false.</returns>
+    <parentGroup>check</parentGroup>
   </HasArrayElements>
   <HasListItems>
     <summary>
@@ -144,14 +156,16 @@
     </summary>
     <param name="list">The IList interface.</param>
     <returns>true if the collection contains items; otherwise false.</returns>
+    <parentGroup>check</parentGroup>
   </HasListItems>
-  <HasDataSetTables>
+  <HasTables>
     <summary>
       Checks a DataSet for tables.
     </summary>
     <param name="dataSet">The DataSet object.</param>
     <returns>true if the DataSet has tables; otherwise, false.</returns>
-  </HasDataSetTables>
+    <parentGroup>check</parentGroup>
+  </HasTables>
   <HasText>
     <summary>
       Checks if a text value exists.
@@ -160,6 +174,7 @@
     <returns>
       true if the text has a value; otherwise false.
     </returns>
+    <parentGroup>check</parentGroup>
   </HasText>
   <IsEqual>
     <summary>
@@ -172,6 +187,7 @@
       Indicates if the comparison is case sensitive.
     </param>
     <returns>true if equal; otherwise, false.</returns>
+    <parentGroup>check</parentGroup>
     <remarks>
       Performs a strongly-typed value check of two objects where those
       objects are built-in system types.
@@ -186,6 +202,7 @@
       value.
     </param>
     <returns>true if minimum; otherwise, false.</returns>
+    <parentGroup>check</parentGroup>
   </IsDbMinDate>
 
   <!-- Console Methods -->
@@ -221,6 +238,7 @@
       The boolean value or false if the object is null.
       Also returns false if the object is not type "bool".
     </returns>
+    <parentGroup>value</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -248,6 +266,7 @@
       The byte value or the byte default if the object is null.
       Also returns false if the object is not type "byte".
     </returns>
+    <parentGroup>value</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -272,6 +291,7 @@
       Gets an array of bytes from an object.
     </summary>
     <param name="value">The value object.</param>
+    <parentGroup>value</parentGroup>
   </GetBytes>
   <GetChar>
     <summary>
@@ -282,6 +302,7 @@
       The char value or the char default if the object is null.
       Also returns false if the object is not type "char".
     </returns>
+    <parentGroup>value</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -310,6 +331,7 @@
       The DateTime value or null if the object is null.
       Also returns null if the object is not type "DateTime".
     </returns>
+    <parentGroup>value</parentGroup>
     <example>
       <code>
         // Gets a DateTime value from an object.
@@ -342,6 +364,7 @@
       Also returns zero if the object is not type "decimal", "long", "int"
       or "short".
     </returns>
+    <parentGroup>value</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -370,6 +393,7 @@
       Also returns zero if the object is not type "double", "decimal", "long"
       , "int" or "short".
     </returns>
+    <parentGroup>value</parentGroup>
     <example>
       <code>
         // Gets a double value from an object.
@@ -395,6 +419,7 @@
       The long value or zero if the object is null.
       Also returns zero if the object is not type "short".
     </returns>
+    <parentGroup>value</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -422,6 +447,7 @@
       The integer value or zero if the object is null.
       Also returns zero if the object is not type "int" or "short".
     </returns>
+    <parentGroup>value</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -449,6 +475,7 @@
       The long value or zero if the object is null.
       Also returns zero if the object is not type "long", "int" or "short".
     </returns>
+    <parentGroup>value</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -473,6 +500,7 @@
     </summary>
     <param name="value">The value object.</param>
     <returns>The instantiated object.</returns>
+    <parentGroup>value</parentGroup>
   </GetObject>
   <GetSingle>
     <summary>
@@ -484,6 +512,7 @@
       Also returns zero if the object is not type "single", "long", "int"
       or "short".
     </returns>
+    <parentGroup>value</parentGroup>
     <example>
       <code>
         // Gets a float (single) value from an object.
@@ -506,6 +535,7 @@
     </summary>
     <param name="value">The value object.</param>
     <returns>The trimmed string value or null if the object is null.</returns>
+    <parentGroup>value</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -529,12 +559,14 @@
       Gets a short from a text string.
     </summary>
     <param name="text">The text value.</param>
+    <parentGroup>value</parentGroup>
   </ToInt16>
   <ToInt32>
     <summary>
       Gets an int from a text string.
     </summary>
     <param name="text">The text value.</param>
+    <parentGroup>value</parentGroup>
   </ToInt32>
 
   <!-- Project Config Values Methods -->
@@ -544,6 +576,7 @@
     </summary>
     <param name="key">The key value.</param>
     <returns>The bool config value.</returns>
+    <parentGroup>config</parentGroup>
     <remarks>
       <para>
         This uses the program config file which is the name of the program plus
@@ -581,6 +614,7 @@
     <param name="key">The key value.</param>
     <param name="color">The default color value.</param>
     <returns>The Color setting value.</returns>
+    <parentGroup>config</parentGroup>
     <remarks>
       <para>
         This uses the program config file which is the name of the program plus
@@ -618,6 +652,7 @@
     </summary>
     <param name="key">The key value.</param>
     <returns>The string config value.</returns>
+    <parentGroup>config</parentGroup>
     <remarks>
       <para>
         This uses the program config file which is the name of the program plus
@@ -653,6 +688,7 @@
       Accept or Select the DataConfig.
     </summary>
     <param name="dataConfigName">The DataConfig name.</param>
+    <parentGroup>config</parentGroup>
   </ConsoleConfig>
 
   <!-- Serialization Methods -->
@@ -664,6 +700,7 @@
     <param name="fileSpec">The input file spec.</param>
     <param name="rootName">The Root Name value.</param>
     <returns>The deserialized object.</returns>
+    <parentGroup>serialize</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -702,6 +739,7 @@
     <param name="type">The object type.</param>
     <param name="message">The message string.</param>
     <returns>The deserialized object.</returns>
+    <parentGroup>serialize</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -741,6 +779,7 @@
     <param name="namespaces">The XML namespaces.</param>
     <param name="fileSpec">The output file spec.</param>
     <param name="rootName">The Root Name value.</param>
+    <parentGroup>serialize</parentGroup>
     <example>
       <code>
         using LJCNetCommon
@@ -782,6 +821,7 @@
     <param name="data">The object reference.</param>
     <param name="namespaces">The XML namespaces.</param>
     <returns>The XML message string.</returns>
+    <parentGroup>serialize</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -820,6 +860,7 @@
     </summary>
     <param name="bytes">The Base64 byte array.</param>
     <returns>The Text value.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -844,6 +885,7 @@
     </summary>
     <param name="text">The Text value.</param>
     <returns>Tye Base64 byte array.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -868,6 +910,7 @@
     </summary>
     <param name="bytes">The base64 byte array.</param>
     <returns>The Text byte array.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -895,6 +938,7 @@
     </summary>
     <param name="bytes">The byte array.</param>
     <returns>The Base64 byte array.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -923,6 +967,7 @@
     </summary>
     <param name="base64Text">The Base64 string.</param>
     <returns>The Text value.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -947,6 +992,7 @@
     </summary>
     <param name="text">The Text value.</param>
     <returns>The Base64 string.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -973,6 +1019,7 @@
     </summary>
     <param name="base64">The Base64 value.</param>
     <returns>The Text byte array.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -1000,6 +1047,7 @@
     </summary>
     <param name="bytes">The Text byte array.</param>
     <returns>The Base64 string.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -1028,6 +1076,7 @@
     </summary>
     <param name="bytes">The byte array.</param>
     <returns>The Text value.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -1052,6 +1101,7 @@
     </summary>
     <param name="text">The Text value.</param>
     <returns>The new byte array.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -1079,6 +1129,7 @@
     </summary>
     <param name="stream">The stream object.</param>
     <returns>The byte array.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using System.IO;
@@ -1109,6 +1160,7 @@
     </summary>
     <param name="bytes">The byte array.</param>
     <returns>The reference to the memory stream.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using System.IO;
@@ -1139,6 +1191,7 @@
     </summary>
     <param name="stream">The stream object.</param>
     <returns>The string value.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -1164,6 +1217,7 @@
     </summary>
     <param name="text">The Text value.</param>
     <returns>The reference to the memory stream.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -1189,6 +1243,7 @@
     </summary>
     <param name="text">The encoded text.</param>
     <returns>The decoded text.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -1214,6 +1269,7 @@
     </summary>
     <param name="text">The text to be encoded.</param>
     <returns>The encoded text.</returns>
+    <parentGroup>convert</parentGroup>
     <example>
       <code>
         using LJCNetCommon;
@@ -1240,59 +1296,72 @@
     <summary>
       The Boolean type name.
     </summary>
+    <parentGroup>dataType</parentGroup>
   </TypeBoolean>
   <TypeByte>
     <summary>
       The Byte type name.
     </summary>
+    <parentGroup>dataType</parentGroup>
   </TypeByte>
   <TypeChar>
     <summary>
       The Char type name.
     </summary>
+    <parentGroup>dataType</parentGroup>
   </TypeChar>
   <TypeDateTime>
     <summary>
       The DateTime type name.
     </summary>
+    <parentGroup>dataType</parentGroup>
   </TypeDateTime>
   <TypeDecimal>
     <summary>
       Type Decimal type name.
     </summary>
+    <parentGroup>dataType</parentGroup>
   </TypeDecimal>
   <TypeDouble>
     <summary>
       The Double type name.
     </summary>
+    <parentGroup>dataType</parentGroup>
   </TypeDouble>
   <TypeInt16>
     <summary>
       The Int16 type name.
     </summary>
+    <parentGroup>dataType</parentGroup>
   </TypeInt16>
   <TypeInt32>
     <summary>
       The Int32 type name.
     </summary>
+    <parentGroup>dataType</parentGroup>
   </TypeInt32>
   <TypeInt64>
     <summary>
       The Int64 type name.
     </summary>
+    <parentGroup>dataType</parentGroup>
   </TypeInt64>
   <TypeSingle>
     <summary>
       The Single type name.
     </summary>
+    <parentGroup>dataType</parentGroup>
   </TypeSingle>
   <TypeString>
     <summary>
       The String type name.
     </summary>
+    <parentGroup>dataType</parentGroup>
   </TypeString>
-
   <IgnoreCase>
-    
+    <summary>
+      The ignore case constant.
+    </summary>
+    <parentGroup>dataType</parentGroup>
   </IgnoreCase>
 </members>
