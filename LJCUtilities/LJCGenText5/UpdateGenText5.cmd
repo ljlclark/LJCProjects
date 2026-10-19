@@ -26,11 +26,11 @@ echo *** %to% ***
 
 set fromBin=%bin%\net8.0
 
-set src=%assmRoot%LJCDataAccess5\LJCDataAccess5\%fromBin%
+set src=%assmRoot%LJCDataAccessS5\LJCDataAccess5\%fromBin%
 echo copy %src%\LJCDataAccess5.dll %to%
 copy %src%\LJCDataAccess5.dll %to%
 
-set src=%assmRoot%LJCDataAccessConfig5\LJCDataAccessConfig5\%fromBin%
+set src=%assmRoot%LJCDataAccessConfigS5\LJCDataAccessConfig5\%fromBin%
 echo copy %src%\LJCDataAccessConfig5.dll %to%
 copy %src%\LJCDataAccessConfig5.dll %to%
 

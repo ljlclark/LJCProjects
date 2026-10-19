@@ -1,6 +1,6 @@
 LJCNetCommonS5
 LJCTextDataReader5
-LJCDataAccessConfig5
+LJCDataAccessConfigS5
 LJCDataAccessS5
 LJCDBMessage5
 LJCDBDataAccessS5
