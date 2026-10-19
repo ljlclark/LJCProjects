@@ -13,32 +13,32 @@ set marker=----------------- %counter% - LJCNetCommon5 --------------- > Build.t
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCNetCommon5 >> Build.txt
-msbuild LJCNetCommon5\LJCNetCommon5.sln
+echo LJCNetCommonS5 >> Build.txt
+msbuild LJCNetCommonS5\LJCNetCommonS5.sln
 
 set /a counter+=1
 set marker=----------------- %counter% - LJCTextDataReader5 --------- > Build.txt
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCTextDataReader5 >> Build.txt
-msbuild LJCTextDataReader5\LJCTextDataReader5.sln
+echo LJCTextDataReaderS5 >> Build.txt
+msbuild LJCTextDataReaderS5\LJCTextDataReaderS5.sln
 
 set /a counter+=1
-set marker=----------------- %counter% - LJCDataAccessConfig --------- > Build.txt
+set marker=----------------- %counter% - LJCDataAccessConfig5 --------- > Build.txt
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCDataAccessConfig5 >> Build.txt
-call LJCDataAccessConfig5\UpdateDataAccessConfig5.cmd >> Build.txt
-msbuild LJCDataAccessConfig5\LJCDataAccessConfig5.sln
+echo LJCDataAccessConfigS5 >> Build.txt
+call LJCDataAccessConfigS5\UpdateDataAccessConfigS5.cmd >> Build.txt
+msbuild LJCDataAccessConfigS5\LJCDataAccessConfigS5.sln
 
 set /a counter+=1
 set marker=----------------- %counter% - LJCDataAccess5 -------------- > Build.txt
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCDataAccess5 >> Build.txt
+echo LJCDataAccessS5 >> Build.txt
 call LJCDataAccessS5\UpdateDataAccessS5.cmd >> Build.txt
 msbuild LJCDataAccessS5\LJCDataAccessS5.sln
 
@@ -47,34 +47,34 @@ set marker=----------------- %counter% - LJCDBMessage5 --------------- > Build.t
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCDBMessage5 >> Build.txt
-call LJCDBMessage5\UpdateDBMessage5.cmd >> Build.txt
-msbuild LJCDBMessage5\LJCDBMessage5.sln
+echo LJCDBMessageS5 >> Build.txt
+call LJCDBMessageS5\UpdateDBMessageS5.cmd >> Build.txt
+msbuild LJCDBMessageS5\LJCDBMessageS5.sln
 
 set /a counter+=1
 set marker=----------------- %counter% - LJCDBDataAccess5 --------------- > Build.txt
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCDBDataAccess5 >> Build.txt
-call LJCDBDataAccess5\UpdateDBDataAccess5.cmd >> Build.txt
-msbuild LJCDBDataAccess5\LJCDBDataAccess5.sln
+echo LJCDBDataAccessS5 >> Build.txt
+call LJCDBDataAccessS5\UpdateDBDataAccessS5.cmd >> Build.txt
+msbuild LJCDBDataAccessS5\LJCDBDataAccessS5.sln
 
 set /a counter+=1
-set marker=----------------- %counter% - LJCDBClientLib5 --------------- > Build.txt
+set marker=----------------- %counter% - LJCDBClient5 --------------- > Build.txt
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCDBClientLib5 >> Build.txt
-call LJCDBClientLib5\UpdateDBClientLib5.cmd >> Build.txt
-msbuild LJCDBClientLib5\LJCDBClientLib5.sln
+echo LJCDBClientS5 >> Build.txt
+call LJCDBClientS5\UpdateDBClientS5.cmd >> Build.txt
+msbuild LJCDBClientS5\LJCDBClientS5.sln
 
 set /a counter+=1
 set marker=----------------- %counter% - LJCDBServiceLib5 --------------- > Build.txt
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCDBServiceLib5 >> Build.txt
-call LJCDBServiceLib5\UpdateDBServiceLib5.cmd >> Build.txt
-msbuild LJCDBServiceLib5\LJCDBServiceLib5.sln
+echo LJCDBServiceLibS5 >> Build.txt
+call LJCDBServiceLibS5\UpdateDBServiceLibS5.cmd >> Build.txt
+msbuild LJCDBServiceLibS5\LJCDBServiceLibS5.sln
 pause
