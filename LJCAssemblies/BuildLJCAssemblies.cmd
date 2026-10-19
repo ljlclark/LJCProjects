@@ -39,8 +39,8 @@ echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
 echo LJCDataAccess5 >> Build.txt
-call LJCDataAccess5\UpdateDataAccess5.cmd >> Build.txt
-msbuild LJCDataAccess5\LJCDataAccess5.sln
+call LJCDataAccessS5\UpdateDataAccessS5.cmd >> Build.txt
+msbuild LJCDataAccessS5\LJCDataAccessS5.sln
 
 set /a counter+=1
 set marker=----------------- %counter% - LJCDBMessage5 --------------- > Build.txt
