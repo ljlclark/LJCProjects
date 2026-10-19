@@ -15,17 +15,22 @@ namespace LJCDBMessage5
       , List<string>? propertyNames = null)
     {
       LJCDataColumns? requestColumns;
-      if (!LJC.HasItems(propertyNames))
+      if (!LJC.HasListItems(propertyNames))
       {
         // Default to all Data Definition columns.
         requestColumns = dataColumns;
       }
       else
       {
-        requestColumns = dataColumns.LJCGetColumns(propertyNames);
+        requestColumns = dataColumns.LJCColumns(propertyNames);
       }
 
-      var retValue = new LJCDataColumns(requestColumns);
+      LJCDataColumns retValue = [];
+      if (LJC.HasListItems(requestColumns))
+      {
+        //retValue = new LJCDataColumns(requestColumns);
+        retValue = [.. requestColumns];
+      }
       return retValue;
     }
 
@@ -59,7 +64,7 @@ namespace LJCDBMessage5
       if (dataObject != null
         && requestColumns != null)
       {
-        retValue = new LJCDataColumns();
+        retValue = [];
         var reflect = new LJCReflect(dataObject);
         foreach (LJCDataColumn dataColumn in requestColumns)
         {
@@ -186,7 +191,7 @@ namespace LJCDBMessage5
 
       // Get column definition by column name.
       var searchName = LJCNetString.GetSearchName(keyColumn.ColumnName);
-      retValue = dataColumns.LJCSearchColumnName(searchName);
+      retValue = dataColumns[searchName];
       if (retValue != null)
       {
         // Create key column with original name.
@@ -207,12 +212,13 @@ namespace LJCDBMessage5
 
       foreach (LJCDBJoin dbJoin in dbJoins)
       {
-        if (LJC.HasItems(dbJoin.Columns))
+        if (LJC.HasListItems(dbJoin.Columns))
         {
           retValue = GetKeyColumn(dbJoin.Columns, keyColumn);
           if (retValue != null)
           {
-            if (-1 == keyColumn.ColumnName.IndexOf("."))
+            //if (-1 == keyColumn.ColumnName.IndexOf('.'))
+            if (!keyColumn.ColumnName.Contains('.'))
             {
               string qualifier = dbJoin.TableName;
               if (dbJoin.TableAlias != null)
@@ -257,7 +263,7 @@ namespace LJCDBMessage5
 
       if (keyColumns != null)
       {
-        retValue = new LJCDataColumns();
+        retValue = [];
         foreach (LJCDataColumn dataColumn in keyColumns)
         {
           if (dataColumn.Value != null)
@@ -305,8 +311,8 @@ namespace LJCDBMessage5
       if (dataObject != null
         && requestColumns != null)
       {
-        retValue = new LJCDataColumns();
-        LJCReflect reflect = new LJCReflect(dataObject);
+        retValue = [];
+        var reflect = new LJCReflect(dataObject);
         foreach (LJCDataColumn dataColumn in requestColumns)
         {
           // Add LJCDataColumn from dataDefinition and value from dataObject.
@@ -383,7 +389,7 @@ namespace LJCDBMessage5
 
       if (dataObject != null)
       {
-        LJCReflect reflect = new LJCReflect(dataObject);
+        var reflect = new LJCReflect(dataObject);
         try
         {
           retValue = reflect.GetValue("ChangedNames") as List<string>;

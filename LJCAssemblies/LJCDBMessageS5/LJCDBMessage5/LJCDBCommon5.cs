@@ -53,7 +53,6 @@ namespace LJCDBMessage5
       {
         if (!LJC.HasArrayElements(propertyNames))
         {
-          //propertyNames = new List<string>();
           propertyNames = [];
           DefaultToChangedNames(dataObject, ref propertyNames);
         }
@@ -76,7 +75,6 @@ namespace LJCDBMessage5
       if (dataObject != null
         && LJC.HasListItems(requestColumns))
       {
-        //retValue = new LJCDataColumns();
         retValue = [];
         var reflect = new LJCReflect(dataObject);
         foreach (LJCDataColumn dataColumn in requestColumns)
@@ -160,7 +158,6 @@ namespace LJCDBMessage5
 
       if (LJC.HasListItems(keyColumns))
       {
-        //retValue = new LJCDataColumns();
         retValue = [];
         foreach (LJCDataColumn keyColumn in keyColumns)
         {
@@ -291,7 +288,6 @@ namespace LJCDBMessage5
 
       if (LJC.HasListItems(keyColumns))
       {
-        //retValue = new LJCDataColumns();
         retValue = [];
         foreach (LJCDataColumn dbColumn in keyColumns)
         {
@@ -351,7 +347,6 @@ namespace LJCDBMessage5
       if (dataObject != null
         && LJC.HasListItems(requestColumns))
       {
-        //retValue = new LJCDataColumns();
         retValue = [];
         var reflect = new LJCReflect(dataObject);
         foreach (LJCDataColumn dbColumn in requestColumns)

@@ -34,7 +34,7 @@ set src=%assmRoot%LJCDataAccessConfigS5\LJCDataAccessConfig5\%fromBin%
 echo copy %src%\LJCDataAccessConfig5.dll %to%
 copy %src%\LJCDataAccessConfig5.dll %to%
 
-set src=%assmRoot%LJCDBDataAccess5\LJCDBDataAccess5\%fromBin%
+set src=%assmRoot%LJCDBDataAccessS5\LJCDBDataAccess5\%fromBin%
 echo copy %src%\LJCDBDataAccess5.dll %to%
 copy %src%\LJCDBDataAccess5.dll %to%
 
@@ -42,11 +42,11 @@ set src=%assmRoot%LJCNetCommonS5\LJCNetCommon5\%fromBin%
 echo copy %src%\LJCNetCommon5.dll %to%
 copy %src%\LJCNetCommon5.dll %to%
 
-set src=%assmRoot%LJCDBMessage5\LJCDBMessage5\%fromBin%
+set src=%assmRoot%LJCDBMessageS5\LJCDBMessage5\%fromBin%
 echo copy %src%\LJCDBMessage5.dll %to%
 copy %src%\LJCDBMessage5.dll %to%
 
-set src=%assmRoot%LJCDBMessage5\LJCCipherLib5\%fromBin%
+set src=%assmRoot%LJCDBMessageS5\LJCCipherLib5\%fromBin%
 echo copy %src%\LJCCipherLib5.dll %to%
 copy %src%\LJCCipherLib5.dll %to%
 
