@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // DataAccessConfig5Program.cs
 
-namespace TestConnectionTemplates5
+namespace TestDataAccessConfig5
 {
   // The entry class.
   internal class DataAccessConfigProgram

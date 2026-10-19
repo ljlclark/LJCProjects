@@ -4,7 +4,7 @@
 using LJCDataAccessConfig5;
 using LJCNetCommon5;
 
-namespace TestConnectionTemplates5
+namespace TestDataAccessConfig5
 {
   internal class TestConnectionTemplates
   {

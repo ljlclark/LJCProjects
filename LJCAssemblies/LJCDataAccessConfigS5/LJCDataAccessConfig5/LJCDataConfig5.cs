@@ -111,14 +111,14 @@ namespace LJCDataAccessConfig5
     public string? ConnectionString(string? connectionType = "SQLServer"
       , bool trusted = false)
     {
-      LJCConnectionTemplates connectionTemplates;
-      LJCConnectionTemplate connectionTemplate;
       string? retValue;
 
-      connectionTemplates = [];
+      LJCConnectionTemplates connectionTemplates = [];
       connectionTemplates.LoadData();
+      LJCConnectionTemplate? connectionTemplate;
       connectionTemplate = connectionTemplates.Retrieve(connectionType);
-      retValue = ConnectionStringFromTemplate(connectionTemplate?.Template, trusted);
+      retValue = ConnectionStringFromTemplate(connectionTemplate?.Template
+        , trusted);
       return retValue;
     }
 
@@ -178,7 +178,7 @@ namespace LJCDataAccessConfig5
     ///  path='items/SQLIntegratedConnectionString/*'/>
     public string? SQLIntegratedConnectionString(bool trusted = false)
     {
-      string retValue;
+      string? retValue;
 
       string connectionText = "Data Source={DbServer}; Initial Catalog={Database}; "
         + "Integrated Security=True";

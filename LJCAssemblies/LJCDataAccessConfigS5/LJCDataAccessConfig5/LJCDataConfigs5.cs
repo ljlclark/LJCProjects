@@ -20,7 +20,7 @@ namespace LJCDataAccessConfig5
     ///  path='members/DataConfig/*'/>
     public static LJCDataConfig? DataConfig(string configName)
     {
-      LJCDataConfig retConfig = null;
+      LJCDataConfig? retConfig = null;
 
       if (LJC.HasText(configName))
       {
