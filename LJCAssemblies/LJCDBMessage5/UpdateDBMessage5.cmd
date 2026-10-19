@@ -30,7 +30,7 @@ set src=%assmRoot%LJCNetCommonS5\LJCNetCommon5\%bin%
 echo copy %src%\LJCNetCommon5.dll %to%
 copy %src%\LJCNetCommon5.dll %to%
 
-set src=%assmRoot%LJCDataAccess5\LJCDataAccess5\%bin%
+set src=%assmRoot%LJCDataAccessS5\LJCDataAccess5\%bin%
 echo copy %src%\LJCDataAccess5.dll %to%
 copy %src%\LJCDataAccess5.dll %to%
 

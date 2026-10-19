@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TableMapping.cs
+// LJCTableMapping5.cs
 using System.Data.Common;
 
 namespace LJCDataAccess5
