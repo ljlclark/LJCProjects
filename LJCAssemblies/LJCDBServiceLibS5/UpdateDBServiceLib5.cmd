@@ -30,15 +30,15 @@ set src=%assmRoot%LJCNetCommonS5\LJCNetCommon5\%bin%
 echo copy %src%\LJCNetCommon5.dll %to%
 copy %src%\LJCNetCommon5.dll %to%
 
-set src=%assmRoot%LJCDBDataAccess5\LJCDBDataAccess5\%bin%
+set src=%assmRoot%LJCDBDataAccessS5\LJCDBDataAccess5\%bin%
 echo copy %src%\LJCDBDataAccess5.dll %to%
 copy %src%\LJCDBDataAccess5.dll %to%
 
-set src=%assmRoot%LJCDBMessage5\LJCCipherLib5\%bin%
+set src=%assmRoot%LJCDBMessageS5\LJCCipherLib5\%bin%
 echo copy %src%\LJCCipherLib5.dll %to%
 copy %src%\LJCCipherLib5.dll %to%
 
-set src=%assmRoot%LJCDBMessage5\LJCDBMessage5\%bin%
+set src=%assmRoot%LJCDBMessageS5\LJCDBMessage5\%bin%
 echo copy %src%\LJCDBMessage5.dll %to%
 copy %src%\LJCDBMessage5.dll %to%
 
