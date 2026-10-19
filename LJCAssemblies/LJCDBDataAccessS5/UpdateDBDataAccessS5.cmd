@@ -15,7 +15,7 @@ goto Process:
 rem *** Called from line root folder UpdateAll.cmd. ***
 rem *** Sets the solution group folder values. ***
 call SubFolders2.cmd %1%
-set toRoot=%util%\LJCDBDataAccess5\
+set toRoot=%util%\LJCDBDataAccessS5\
 rem *** Sets the "to" value as External and creates folder. ***
 call TargetFolders.cmd
 :Process
@@ -38,7 +38,7 @@ set src=%assmRoot%LJCDataAccessS5\LJCDataAccess5\%bin%
 echo copy %src%\LJCDataAccess5.dll %to%
 copy %src%\LJCDataAccess5.dll %to%
 
-set src=%assmRoot%LJCDBMessage5\LJCDBMessage5\%bin%
+set src=%assmRoot%LJCDBMessageS5\LJCDBMessage5\%bin%
 echo copy %src%\LJCDBMessage5.dll %to%
 copy %src%\LJCDBMessage5.dll %to%
 
