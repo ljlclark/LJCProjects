@@ -105,7 +105,7 @@ namespace TestTextDataReader5
       // Test Method
       var values = textRegions.LJCSplit(text);
       var result = "";
-      if (LJC.HasElements(values))
+      if (LJC.HasArrayElements(values))
       {
         result = values[1];
       }

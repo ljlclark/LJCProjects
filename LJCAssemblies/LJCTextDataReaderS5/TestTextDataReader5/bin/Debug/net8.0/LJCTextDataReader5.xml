@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LJCTextDataReader5</name>
+    </assembly>
+    <members>
+        <member name="T:LJCTextDataReader5.LJCLineOffset">
+            <!-- No matching elements were found for the following include tag --><include path="items/LineOffset/*" file="Doc/ProjectTextDataReaderLib.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCLineOffset.CompareTo(LJCTextDataReader5.LJCLineOffset)">
+            <summary>
+      Provides the default Sort functionality.
+    </summary><param name="other">The compare-to object.</param><returns>
+      The integer that indicates the order relationship of the objects.
+    </returns><remarks>
+      A negative integer - This instance precedes the compare-to object.&lt;br /&gt;
+      Zero               - This instance and the compare-to object have the same position.&lt;br /&gt;
+      A postive integer  - This instance follows the compare-to object.
+    </remarks>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCLineOffset.Number">
+            <summary>Gets or sets the line number.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCLineOffset.Offset">
+            <summary>Gets or sets the character offset value.</summary>
+        </member>
+        <member name="T:LJCTextDataReader5.LJCLineOffsets">
+            <summary>
+            Represents a collection of LineOffset items.
+            </summary>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCLineOffsets.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCLineOffsets.#ctor(System.IO.Stream)">
+            <summary>
+            Initializes an object instance.
+            </summary>
+            <param name="stream">The file stream object.</param>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCLineOffsets.Add(System.Int64,System.Int64)">
+            <summary>
+            Creates and adds the object from the provided values.
+            </summary>
+            <param name="number">The line number.</param>
+            <param name="offset">The line offset value.</param>
+            <returns>A reference to the added item.</returns>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCLineOffsets.LJCSearchByNumber(System.Int64)">
+            <summary>
+            Retrieve the collection element by number.
+            </summary>
+            <param name="number">The item line number.</param>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCLineOffsets.LJCGetLineOffset(System.Int64)">
+            <summary>
+            Returns the line offset for the specified line.
+            </summary>
+            <param name="number">The line number.</param>
+            <returns>The line offset value.</returns>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCLineOffsets.LJCGetNextLineOffset(System.String)">
+            <summary>
+            Gets the offset for the next line.
+            </summary>
+            <param name="currentLine">The current line.</param>
+            <returns>The line offset value.</returns>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCLineOffsets.LJCSetNextLineOffset(System.String)">
+            <summary>
+            Sets the offset for the next line.
+            </summary>
+            <param name="line">The current line.</param>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCLineOffsets.LJCCurrentLineNumber">
+            <summary>Gets or sets the current line number.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCLineOffsets.LJCCurrentOffset">
+            <summary>Gets or sets the current line offset value.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCLineOffsets.LJCStream">
+            <summary>Gets or sets a reference to the file stream.</summary>
+        </member>
+        <member name="T:LJCTextDataReader5.LJCTextDataReader">
+            <!-- No matching elements were found for the following include tag --><include file="Doc/TextDataReader.xml" path="items/TextDataReader/*" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.#ctor(System.Boolean,System.Int16,System.Boolean)">
+            <!-- No matching elements were found for the following include tag --><include file="Doc/TextDataReader.xml" path="items/TextDataReaderC/*" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.Close">
+            <!-- No matching elements were found for the following include tag --><include path="items/Close/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.Dispose">
+            <!-- No matching elements were found for the following include tag --><include path="items/Dispose/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetData(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetData/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetDataTypeName(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetDataTypeName1/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetDataTypeName(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetDataTypeName2/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetFieldType(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetFieldType/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetName(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetName/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetOrdinal(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetOrdinal/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetSchemaTable">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetSchemaTable/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetValues(System.Object[])">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetValues/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.IsDBNull(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/IsDBNull/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.NextResult">
+            <!-- No matching elements were found for the following include tag --><include path="items/NextResult/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.Read">
+            <!-- No matching elements were found for the following include tag --><include path="items/Read/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.DataTypeEnumName(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCReadLine">
+            <!-- No matching elements were found for the following include tag --><include path="items/LJCReadLine/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetBoolean(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetBoolean/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetByte(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetByte/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetBytes/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetChar(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetChar/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetChars/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetDateTime(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetDateTime/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetDecimal(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetDecimal/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetDouble(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetDouble/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetFloat(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetFloat/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetGuid(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetGuid/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetInt16(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetInt16/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetInt32(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetInt32/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetInt64(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetInt64/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetString(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetString/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetTrimValue(System.Int32)">
+            <summary>Gets the trimmed string value.</summary>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetValue(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetValue/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetBoolean(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetBooleanN/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetByte(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetByteN/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetBytes(System.String,System.Int64,System.Byte[],System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetBytesN/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetChar(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetCharN/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetChars(System.String,System.Int64,System.Char[],System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetCharsN/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetDateTime(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetDateTimeN/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetDecimal(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetDecimalN/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetDouble(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetDoubleN/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetFloat(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetFloatN/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetGuid(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetGuidN/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetInt16(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetInt16N/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetInt32(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetInt32N/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetInt64(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetInt64N/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetString(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/GetStringN/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.GetTrimValue(System.String)">
+            <summary>Gets the trimmed string value.</summary>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCEndsWithNewLine">
+            <summary>Checks for NewLine at end of file.</summary>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCGetFieldNames">
+            <!-- No matching elements were found for the following include tag --><include path="items/LJCGetFieldNames/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCOpen">
+            <summary>Opens with the existing file settings.</summary>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCSetFields(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/LJCSetFields/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCSetFile(System.String,System.Char)">
+            <!-- No matching elements were found for the following include tag --><include path="items/LJCSetFile/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCSetLine(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/LJCSetLine/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCSetLines(System.String[],System.Char)">
+            <!-- No matching elements were found for the following include tag --><include path="items/LJCSetLines/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCSetNames(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/LJCSetNames/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCSetObjectValues(System.Object,LJCNetCommon5.LJCDataColumns)">
+            <!-- No matching elements were found for the following include tag --><include path="items/LJCSetObjectValues/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCSetStartIndex(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/LJCSetStartIndex/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCSetValues(System.String[])">
+            <!-- No matching elements were found for the following include tag --><include path="items/LJCSetValues1/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextDataReader.LJCSetValues(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/LJCSetValues2/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.Depth">
+            <summary>Currently returns 0.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.IsClosed">
+            <summary>Indicates if the reader is closed.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.RecordsAffected">
+            <summary>Currently returns -1.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.FieldCount">
+            <!-- No matching elements were found for the following include tag --><include path="items/FieldCount/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.Item(System.Int32)">
+            <!-- No matching elements were found for the following include tag --><include path="items/this1/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.Item(System.String)">
+            <!-- No matching elements were found for the following include tag --><include path="items/this2/*" file="Doc/TextDataReader.xml" />
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCCurrentLineIndex">
+            <summary>Gets or sets the Current Line index.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCCurrentRecordCount">
+            <summary>Gets or sets the Current RecordCount value.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCDataFields">
+            <summary>Gets or sets the current DataField values.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCFieldDelimiter">
+            <summary>Gets or sets the field delimiter.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCFileName">
+            <summary>Gets or sets the FileName value.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCFixedLengthFields">
+            <summary>Gets or sets the FixedLength fields indicator.</summary>
+            <remarks>Indicates if the fields are fixed length.</remarks>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCHasHeadingLine">
+            <summary>Gets or sets the HasHeadingLine value.</summary>
+            <remarks>Indicates if there is a header line.</remarks>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCLineOffsets">
+            <summary>Gets the LineOffsets collection.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCLines">
+            <summary>Gets or sets the Lines value.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCPageSize">
+            <summary>Gets or sets the PageSize value.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCPageStartIndex">
+            <summary>Gets or sets the PageStart index.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCSkipHeaderLines">
+            <summary>Gets or sets the number of lines to skip.</summary>
+            <remarks>Indicates the number of header lines to skip.</remarks>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCStream">
+            <summary>Gets the Stream value.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextDataReader.LJCStreamReader">
+            <summary>Gets or sets the StreamReader value.</summary>
+        </member>
+        <member name="T:LJCTextDataReader5.LJCFieldDataType">
+            <summary>The field data types.</summary>
+        </member>
+        <member name="F:LJCTextDataReader5.LJCFieldDataType.Boolean">
+            <summary>The Boolean value.</summary>
+        </member>
+        <member name="F:LJCTextDataReader5.LJCFieldDataType.Byte">
+            <summary>The Byte value.</summary>
+        </member>
+        <member name="F:LJCTextDataReader5.LJCFieldDataType.DateTime">
+            <summary>The DateTime value.</summary>
+        </member>
+        <member name="F:LJCTextDataReader5.LJCFieldDataType.Decimal">
+            <summary>The Decimal value.</summary>
+        </member>
+        <member name="F:LJCTextDataReader5.LJCFieldDataType.Double">
+            <summary>The Double value.</summary>
+        </member>
+        <member name="F:LJCTextDataReader5.LJCFieldDataType.Int16">
+            <summary>The Int16 value.</summary>
+        </member>
+        <member name="F:LJCTextDataReader5.LJCFieldDataType.Int32">
+            <summary>The Int32 value.</summary>
+        </member>
+        <member name="F:LJCTextDataReader5.LJCFieldDataType.Int64">
+            <summary>The Int64 value.</summary>
+        </member>
+        <member name="F:LJCTextDataReader5.LJCFieldDataType.Single">
+            <summary>The Single value.</summary>
+        </member>
+        <member name="F:LJCTextDataReader5.LJCFieldDataType.String">
+            <summary>The String value.</summary>
+        </member>
+        <member name="T:LJCTextDataReader5.LJCTextRegion">
+            <summary>Represents the text region.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextRegion.BeginIndex">
+            <summary>The region beginning index.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextRegion.EndIndex">
+            <summary>The region ending index.</summary>
+        </member>
+        <member name="T:LJCTextDataReader5.LJCTextRegions">
+            <summary>Represents a collection of TextRegion objects.</summary>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextRegions.#ctor">
+            <summary>
+            Initializes an object instance.
+            </summary>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextRegions.Add(System.Int32,System.Int32)">
+            <summary>
+            Creates a TextRegion from the supplied values and adds it to the collection.
+            /// </summary>
+            <param name="beginIndex">The beginning index.</param>
+            <param name="endIndex">The ending index.</param>
+            <returns>A reference to the created TextRegion object.</returns>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextRegions.LJCHasRegions(System.String)">
+            <summary>
+            Returns a value indicating if the supplied text value has text regions.
+            </summary>
+            <param name="text">The text value.</param>
+            <returns>Returns 'true' if the supplied text has regions.
+            Otherwise 'false'.</returns>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextRegions.LJCIsInRegion(System.Int32)">
+            <summary>
+            Determines if a delimiter is in a text region.
+            </summary>
+            <param name="index">The index of the delimiter.</param>
+            <returns>Returns 'true' if the delimiter is in a text region
+            otherwise 'false'.</returns>
+        </member>
+        <member name="M:LJCTextDataReader5.LJCTextRegions.LJCSplit(System.String)">
+            <summary>
+            Splits a line of text on the delimiters not enclosed in text regions.
+            </summary>
+            <param name="line">The line of text</param>
+            <returns>An array of field values.</returns>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextRegions.LJCFieldDelimiter">
+            <summary>The field delimiter.</summary>
+        </member>
+        <member name="P:LJCTextDataReader5.LJCTextRegions.LJCRegionDelimiter">
+            <summary>The text region delimiter.</summary>
+        </member>
+    </members>
+</doc>

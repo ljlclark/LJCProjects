@@ -213,13 +213,13 @@ namespace LJCTextDataReader5
         dataRow[AllowDBNull] = dataColumn.AllowDBNull;
         dataRow[IsAutoIncrement] = dataColumn.AutoIncrement;
         dataRow[ColumnName] = dataColumn.ColumnName;
-        if (LJC.HasValue(dataColumn.DataTypeName))
+        if (LJC.HasText(dataColumn.DataTypeName))
         {
           dataRow[DataType] = GetDataType(dataColumn.DataTypeName);
         }
         dataRow[DataTypeName] = dataColumn.DataTypeName;
         dataRow[ColumnSize] = dataColumn.MaxLength;
-        dataRow[IsUnique] = dataColumn.Unique;
+        dataRow[IsUnique] = dataColumn.IsUniqueKey;
         retValue.Rows.Add(dataRow);
       }
       return retValue;
@@ -244,7 +244,7 @@ namespace LJCTextDataReader5
     public bool IsDBNull(int i)
     {
       string text = GetString(i);
-      bool retValue = (!LJC.HasValue(text));
+      bool retValue = (!LJC.HasText(text));
       return retValue;
     }
 
@@ -519,7 +519,7 @@ namespace LJCTextDataReader5
       if (value != null)
       {
         var result = value.ToString();
-        if (LJC.HasValue(result))
+        if (LJC.HasText(result))
         {
           retValue = result;
         }
@@ -533,7 +533,7 @@ namespace LJCTextDataReader5
       var retValue = "";
 
       var result = GetString(i);
-      if (LJC.HasValue(result))
+      if (LJC.HasText(result))
       {
         retValue = result.Trim();
       }
@@ -673,7 +673,7 @@ namespace LJCTextDataReader5
       if (value != null)
       {
         var result = value.ToString();
-        if (LJC.HasValue(result))
+        if (LJC.HasText(result))
         {
           retValue = result;
         }
@@ -687,7 +687,7 @@ namespace LJCTextDataReader5
       string retValue = "";
 
       var result = GetString(name);
-      if (LJC.HasValue(result))
+      if (LJC.HasText(result))
       {
         retValue = result;
       }
@@ -744,7 +744,7 @@ namespace LJCTextDataReader5
     public void LJCOpen()
     {
       Close();
-      if (LJC.HasValue(LJCFileName))
+      if (LJC.HasText(LJCFileName))
       {
         LJCStreamReader = new StreamReader(LJCFileName, Encoding.UTF8
           , true, 4096);
@@ -782,11 +782,11 @@ namespace LJCTextDataReader5
     public void LJCSetFields(string layoutFileName)
     {
       LJCLayoutFileName = layoutFileName;
-      if (LJC.HasValue(LJCLayoutFileName))
+      if (LJC.HasText(LJCLayoutFileName))
       {
         var dataFields = LJC.XmlDeserialize(typeof(LJCDataColumns)
           , LJCLayoutFileName) as LJCDataColumns;
-        if (LJC.HasItems(dataFields))
+        if (LJC.HasListItems(dataFields))
         {
           LJCDataFields = dataFields;
         }
@@ -820,7 +820,7 @@ namespace LJCTextDataReader5
       if (LJCTextRegions.LJCHasRegions(line))
       {
         var lines = LJCTextRegions.LJCSplit(line);
-        if (LJC.HasItems(lines))
+        if (LJC.HasListItems(lines))
         {
           LJCSetValues(lines);
         }
@@ -864,7 +864,7 @@ namespace LJCTextDataReader5
       bool retValue = false;
 
       if (0 == FieldCount
-        && LJC.HasValue(line))
+        && LJC.HasText(line))
       {
         int position = 1;
         string[] fields = line.Split(LJCFieldDelimiter);
@@ -874,7 +874,7 @@ namespace LJCTextDataReader5
 
           // Check for included width and type value.
           string[] values = field.Split('|');
-          if (LJC.HasElements(values))
+          if (LJC.HasArrayElements(values))
           {
             fieldName = values[0].Trim();
             maxLength = 0;
@@ -898,7 +898,7 @@ namespace LJCTextDataReader5
             }
           }
 
-          if (LJC.HasValue(fieldName))
+          if (LJC.HasText(fieldName))
           {
             // Add field data definition.
             var dataColumn = new LJCDataColumn()
@@ -934,13 +934,13 @@ namespace LJCTextDataReader5
         fieldColumns = dataFields;
       }
 
-      if (LJC.HasItems(fieldColumns))
+      if (LJC.HasListItems(fieldColumns))
       {
         reflect = new LJCReflect(dataObject);
         foreach (LJCDataColumn dataColumn in fieldColumns)
         {
           string sourceColumnName = dataColumn.ColumnName;
-          if (LJC.HasValue(dataColumn.RenameAs))
+          if (LJC.HasText(dataColumn.RenameAs))
           {
             sourceColumnName = dataColumn.RenameAs;
           }
@@ -959,7 +959,7 @@ namespace LJCTextDataReader5
 
       LJCCurrentRecordCount = -1;
       if (recordIndex > -1
-        && LJC.HasValue(LJCFileName))
+        && LJC.HasText(LJCFileName))
       {
         if (IsClosed)
         {
@@ -995,7 +995,7 @@ namespace LJCTextDataReader5
 
         // Skip empty line.
         if (1 == values.Length
-          && !LJC.HasValue(values[0]))
+          && !LJC.HasText(values[0]))
         {
           isError = false;
         }

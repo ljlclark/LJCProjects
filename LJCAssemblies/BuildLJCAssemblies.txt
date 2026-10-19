@@ -4,5 +4,5 @@ LJCDataAccessConfigS5
 LJCDataAccessS5
 LJCDBMessage5
 LJCDBDataAccessS5
-LJCDBClientLib5
+LJCDBClientLibS5
 LJCDBServiceLib5

@@ -34,7 +34,7 @@ set src=%assmRoot%LJCDataAccessConfigS5\LJCDataAccessConfig5\%bin%
 echo copy %src%\LJCDataAccessConfig5.dll %to%
 copy %src%\LJCDataAccessConfig5.dll %to%
 
-set src=%assmRoot%LJCDataAccess5\LJCDataAccess5\%bin%
+set src=%assmRoot%LJCDataAccessS5\LJCDataAccess5\%bin%
 echo copy %src%\LJCDataAccess5.dll %to%
 copy %src%\LJCDataAccess5.dll %to%
 
@@ -50,7 +50,7 @@ set src=%assmRoot%LJCDBDataAccess5\LJCDBDataAccess5\%bin%
 echo copy %src%\LJCDBDataAccess5.dll %to%
 copy %src%\LJCDBDataAccess5.dll %to%
 
-set src=%assmRoot%LJCDBClientLib5\LJCDBClientLib5\%bin%
+set src=%assmRoot%LJCDBClientLibS5\LJCDBClientLib5\%bin%
 echo copy %src%\LJCDBClientLib5.dll %to%
 copy %src%\LJCDBClientLib5.dll %to%
 

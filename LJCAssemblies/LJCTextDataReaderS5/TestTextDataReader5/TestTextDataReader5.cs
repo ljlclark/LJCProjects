@@ -609,7 +609,7 @@ namespace TestTextDataReader5
       var result = "";
       foreach (var value in values)
       {
-        if (LJC.HasValue(result))
+        if (LJC.HasText(result))
         {
           result += ", ";
         }
