@@ -111,19 +111,19 @@ namespace TestConnectionTemplates5
       };
 
       // Test Method
-      var name = "TestConfig";
+      var name = "DataConfig";
       var dbServer = "Machine_Name\\SQL_Instance_Name";
       var database = "Database_Name";
       var connectionType = "SQLServer";
       dataConfigs.Add(name, dbServer, database, connectionType);
 
-      var dataConfig = dataConfigs.Retrieve("TestConfig");
+      var dataConfig = dataConfigs.Retrieve("DataConfig");
       var result = "";
       if (dataConfig != null)
       {
         result = dataConfig.Name;
       }
-      var compare = "TestConfig";
+      var compare = "DataConfig";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -166,7 +166,7 @@ namespace TestConnectionTemplates5
         ConfigFileSpec = "TestDataConfigs.xml"
       };
 
-      var name = "TestConfig";
+      var name = "DataConfig";
       var dbServer = "Machine_Name\\SQL_Instance_Name";
       var database = "Database_Name";
       var connectionType = "SQLServer";
@@ -180,14 +180,14 @@ namespace TestConnectionTemplates5
         ConfigFileSpec = "TestDataConfigs.xml"
       };
       dataConfigs.LoadData();
-      var dataConfigName = "TestConfig";
+      var dataConfigName = "DataConfig";
       var dataConfig = dataConfigs.Retrieve(dataConfigName);
       var result = "";
       if (dataConfig != null)
       {
         result = dataConfig.Name;
       }
-      var compare = "TestConfig";
+      var compare = "DataConfig";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion

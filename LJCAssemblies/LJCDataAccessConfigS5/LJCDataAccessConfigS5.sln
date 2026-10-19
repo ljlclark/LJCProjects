@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConnectionTemplates5", "TestConnectionTemplates5\TestConnectionTemplates5.csproj", "{FCE78A18-63E4-4CAA-8079-578D95BB442F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataAccessConfig5", "TestDataAccessConfig5\TestDataAccessConfig5.csproj", "{FCE78A18-63E4-4CAA-8079-578D95BB442F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
