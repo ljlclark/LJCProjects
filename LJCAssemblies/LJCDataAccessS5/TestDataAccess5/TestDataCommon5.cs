@@ -2,10 +2,7 @@
 // Licensed under the MIT License.
 // TestDataCommon5.cs
 using LJCDataAccess5;
-using LJCDataAccessConfig5;
 using LJCNetCommon5;
-using System.Data;
-using System.Data.Common;
 
 namespace TestDataAccess5
 {

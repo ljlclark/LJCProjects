@@ -5,7 +5,7 @@ using LJCNetCommon5;
 using System.Reflection;
 using System.Xml.Serialization;
 
-namespace LJCDataAccessConfig5
+namespace LJCDBConfig5
 {
   // Represents a collection of Connection string templates.
   /// <include file='Doc/LJCConnectionTemplates.xml'
@@ -13,6 +13,12 @@ namespace LJCDataAccessConfig5
   [XmlRoot("LJCConnectionTemplates")]
   public class LJCConnectionTemplates : List<LJCConnectionTemplate>
   {
+    #region Class Data
+
+    private int mPrevCount;
+    private readonly string mTemplateFileName;
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -31,7 +37,7 @@ namespace LJCDataAccessConfig5
       }
     }
 
-    // Loads the config data.
+    // Loads the template data.
     /// <include file='Doc/LJCConnectionTemplates.xml'
     ///  path='members/LoadData/*'/>
     public void LoadData()
@@ -161,12 +167,6 @@ namespace LJCDataAccessConfig5
     /// <include file='Doc/LJCConnectionTemplates.xml'
     ///  path='members/TemplateFileSpec/*'/>
     public string? TemplateFileSpec { get; private set; }
-    #endregion
-
-    #region Class Data
-
-    private int mPrevCount;
-    private readonly string mTemplateFileName;
     #endregion
   }
 }

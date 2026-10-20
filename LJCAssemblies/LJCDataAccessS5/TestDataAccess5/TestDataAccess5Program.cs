@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataAccess5Program.cs
+// TestDataAccess5Program.cs
 
 namespace TestDataAccess5
 {
   // The entry class.
-  internal class DataAccessProgram
+  internal class TestDataAccessProgram
   {
     // The entry method.
     static void Main()

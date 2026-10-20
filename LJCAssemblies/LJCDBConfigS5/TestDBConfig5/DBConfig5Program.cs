@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataAccessConfig5Program.cs
+// DBConfig5Program.cs
 
-namespace TestDataAccessConfig5
+namespace TestDBConfig5
 {
   // The entry class.
-  internal class DataAccessConfigProgram
+  internal class DBConfigProgram
   {
     // The entry method.
     static void Main()

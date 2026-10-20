@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // TestDataAccess5.cs
 using LJCDataAccess5;
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using LJCNetCommon5;
 using System.Data;
 using System.Data.Common;
@@ -181,7 +181,6 @@ namespace TestDataAccess5
       var sql = "select * from Person ";
       DbDataReader? dbDataReader;
       var result = "";
-      var compare = "";
       using (dbDataReader = dataAccess.GetDataReader(sql))
       {
         if (dbDataReader != null
@@ -189,7 +188,7 @@ namespace TestDataAccess5
         {
           result = "Open";
         }
-        compare = "Open";
+        var compare = "Open";
         TestCommon.Write($"{methodName}1", result, compare);
 
         // Test Method

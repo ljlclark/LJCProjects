@@ -25,13 +25,13 @@ echo LJCTextDataReaderS5 >> Build.txt
 msbuild LJCTextDataReaderS5\LJCTextDataReaderS5.sln
 
 set /a counter+=1
-set marker=----------------- %counter% - LJCDataAccessConfig5 ---------
+set marker=----------------- %counter% - LJCDBConfig5 ---------
 echo.
 echo                                         %marker%
 echo %marker% >> Build.txt
-echo LJCDataAccessConfigS5 >> Build.txt
-call LJCDataAccessConfigS5\UpdateDataAccessConfigS5.cmd BuildAll >> Build.txt
-msbuild LJCDataAccessConfigS5\LJCDataAccessConfigS5.sln
+echo LJCDBConfigS5 >> Build.txt
+call LJCDBConfigS5\UpdateDBConfigS5.cmd BuildAll >> Build.txt
+msbuild LJCDBConfigS5\LJCDBConfigS5.sln
 
 set /a counter+=1
 set marker=----------------- %counter% - LJCDataAccess5 --------------

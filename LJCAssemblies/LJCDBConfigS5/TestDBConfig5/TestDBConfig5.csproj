@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LJCDataAccessConfig5\LJCDataAccessConfig5.csproj" />
+    <ProjectReference Include="..\LJCDBConfig5\LJCDBConfig5.csproj" />
   </ItemGroup>
 
   <ItemGroup>

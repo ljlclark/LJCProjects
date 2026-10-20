@@ -1,7 +1,7 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDataAccess5.cs
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using LJCNetCommon5;
 using Microsoft.Data.SqlClient;
 using System.Data;

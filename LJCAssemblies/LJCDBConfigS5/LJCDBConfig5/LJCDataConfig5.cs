@@ -4,7 +4,7 @@
 using LJCNetCommon5;
 using System.Data.Common;
 
-namespace LJCDataAccessConfig5
+namespace LJCDBConfig5
 {
   // Represents a data location configuration.
   /// <include file='Doc/LJCDataConfig.xml'
@@ -18,35 +18,96 @@ namespace LJCDataAccessConfig5
     ///  path='members/ProviderName/*'/>
     public static string ProviderName(string? connectionType = "SQLServer")
     {
-      //string retVal = "System.Data.SqlClient";
-      string retVal = "Microsoft.Data.SqlClient";
+      string retName = "Microsoft.Data.SqlClient";
 
       if (connectionType != null)
       {
         if (LJCNetString.IsEqual(connectionType, "Access"))
         {
-          retVal = "Microsoft.Jet.OLEDB.4.0";
+          retName = "Microsoft.Jet.OLEDB.4.0";
         }
         if (LJCNetString.IsEqual(connectionType, "ODBC"))
         {
-          retVal = "MSDASQL.1";
+          retName = "MSDASQL.1";
         }
         if (LJCNetString.IsEqual(connectionType, "OleDB"))
         {
-          retVal = "SQLOLEDB";
+          retName = "SQLOLEDB";
         }
         if (LJCNetString.IsEqual(connectionType, "MySQL"))
         {
-          retVal = "MySql.Data.MySqlClient";
+          retName = "MySql.Data.MySqlClient";
         }
         if (LJCNetString.IsEqual(connectionType, "SQLServer"))
         {
-          //retVal = "System.Data.SqlClient";
-          retVal = "Microsoft.Data.SqlClient";
+          retName = "Microsoft.Data.SqlClient";
         }
       }
-      return retVal;
+      return retName;
     }
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the DataConfig name.
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/Name/*'/>
+    public string? Name
+    {
+      get => mName;
+      set { mName = value?.Trim(); }
+    }
+    private string? mName;
+
+    // Gets or sets the DbServer instance name.
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='mmebers/DbServer/*'/>
+    public string? DbServer
+    {
+      get => mDbServer;
+      set { mDbServer = value?.Trim(); }
+    }
+    private string? mDbServer;
+
+    // Gets or sets the Database name.
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/Database/*'/>
+    public string? Database
+    {
+      get => mDatabase;
+      set { mDatabase = value?.Trim(); }
+    }
+    private string? mDatabase;
+
+    // Gets or sets the ConnectionType name.
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/ConnectionType/*'/>
+    public string? ConnectionType
+    {
+      get => mConnectionType;
+      set { mConnectionType = value?.Trim(); }
+    }
+    private string? mConnectionType;
+
+    // Gets or sets the UserID name.
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/UserID/*'/>
+    public string? UserID
+    {
+      get => mUserID;
+      set { mUserID = value?.Trim(); }
+    }
+    private string? mUserID;
+
+    // Gets or sets the Pswd name.
+    /// <include file='Doc/LJCDataConfig.xml'
+    ///  path='members/Pswd/*'/>
+    public string? Pswd
+    {
+      get => mPswd;
+      set { mPswd = value?.Trim(); }
+    }
+    private string? mPswd;
     #endregion
 
     #region Constructor Methods
@@ -61,7 +122,7 @@ namespace LJCDataAccessConfig5
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/LJCDataConfig.xml'
     ///  path='members/ConstructorParam/*'/>
-    public LJCDataConfig(string? connectionType = null)
+    public LJCDataConfig(string? connectionType = null) : this()
     {
       if (LJC.HasText(connectionType))
       {
@@ -226,69 +287,6 @@ namespace LJCDataAccessConfig5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the DataConfig name.
-    /// <include file='Doc/LJCDataConfig.xml'
-    ///  path='members/Name/*'/>
-    public string? Name
-    {
-      get { return mName; }
-      set { mName = value?.Trim(); }
-    }
-    private string? mName;
-
-    // Gets or sets the DbServer instance name.
-    /// <include file='Doc/LJCDataConfig.xml'
-    ///  path='mmebers/DbServer/*'/>
-    public string? DbServer
-    {
-      get { return mDbServer; }
-      set { mDbServer = value?.Trim(); }
-    }
-    private string? mDbServer;
-
-    // Gets or sets the Database name.
-    /// <include file='Doc/LJCDataConfig.xml'
-    ///  path='members/Database/*'/>
-    public string? Database
-    {
-      get { return mDatabase; }
-      set { mDatabase = value?.Trim(); }
-    }
-    private string? mDatabase;
-
-    // Gets or sets the ConnectionType name.
-    /// <include file='Doc/LJCDataConfig.xml'
-    ///  path='members/ConnectionType/*'/>
-    public string? ConnectionType
-    {
-      get { return mConnectionType; }
-      set { mConnectionType = value?.Trim(); }
-    }
-    private string? mConnectionType;
-
-    // Gets or sets the UserID name.
-    /// <include file='Doc/LJCDataConfig.xml'
-    ///  path='members/UserID/*'/>
-    public string? UserID
-    {
-      get { return mUserID; }
-      set { mUserID = value?.Trim(); }
-    }
-    private string? mUserID;
-
-    // Gets or sets the Pswd name.
-    /// <include file='Doc/LJCDataConfig.xml'
-    ///  path='members/Pswd/*'/>
-    public string? Pswd
-    {
-      get { return mPswd; }
-      set { mPswd = value?.Trim(); }
-    }
-    private string? mPswd;
     #endregion
   }
 }

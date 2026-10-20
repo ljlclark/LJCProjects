@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // LJCSQLManager5.cs
 using LJCDataAccess5;
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using LJCDBMessage5;
 using LJCNetCommon5;
 using System.Data;

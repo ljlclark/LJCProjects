@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TestConnectionTemplates5.cs
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using LJCNetCommon5;
 
-namespace TestDataAccessConfig5
+namespace TestDBConfig5
 {
+  // Provides the LJCConnectionTemplates test methods.
   internal class TestConnectionTemplates
   {
     #region Properties
@@ -16,12 +17,16 @@ namespace TestDataAccessConfig5
 
     #region Constructor Methods
 
+    // Initializes an object instance.
+    /// <include file='Doc/TestDataTemplates.xml'
+    ///  path='members/Constructor/*'/>
     public TestConnectionTemplates()
     {
       TestCommon = new LJCTestCommon("LJCConnectionTemplates");
       Run();
     }
 
+    // Runs the tests.
     private void Run()
     {
       // Constructor Test Methods
@@ -36,7 +41,7 @@ namespace TestDataAccessConfig5
 
     #region Constructor Test Methods
 
-    // Loads the templates data.
+    // Loads the template data.
     private void LoadData()
     {
       var methodName = "LoadData()";

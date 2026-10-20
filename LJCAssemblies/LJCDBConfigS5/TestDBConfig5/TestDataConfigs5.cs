@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TestDataConfigs5.cs
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using LJCNetCommon5;
 
-namespace TestDataAccessConfig5
+namespace TestDBConfig5
 {
   internal class TestDataConfigs
   {
@@ -16,6 +16,8 @@ namespace TestDataAccessConfig5
 
     #region Constructor Methods
 
+    /// <include file='Doc/TestDataConfigs.xml'
+    ///  path='members/Constructor/*'/>
     public TestDataConfigs()
     {
       TestCommon = new LJCTestCommon("LJCDataConfigs");

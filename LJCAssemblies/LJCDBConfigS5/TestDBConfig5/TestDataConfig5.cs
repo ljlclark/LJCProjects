@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TestDataConfig5.cs
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using LJCNetCommon5;
 
-namespace TestDataAccessConfig5
+namespace TestDBConfig5
 {
+  // Provides the LJCDataConfig test methods.
   internal class TestDataConfig
   {
     #region Properties
@@ -16,16 +17,23 @@ namespace TestDataAccessConfig5
 
     #region Constructor Methods
 
+    // Initializes an object instance.
+    /// <include file='Doc/TestDataConfig.xml'
+    ///  path='members/Constructor/*'/>
     public TestDataConfig()
     {
       TestCommon = new LJCTestCommon("LJCDataConfig");
       Run();
     }
 
+    // Runs the tests.
     private void Run()
     {
       // Static Methods
       ProviderName();
+
+      // Constructor Test Methods
+      ConstructorParam();
 
       // Data Class Methods
       ToStringMethod();
@@ -47,6 +55,19 @@ namespace TestDataAccessConfig5
 
       var result = LJCDataConfig.ProviderName("SQLServer");
       var compare = "System.Data.SqlClient";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+    #endregion
+
+    #region Constructor Test Methods
+
+    // Initializes an object instance with the supplied values.
+    private void ConstructorParam()
+    {
+      var methodName = "ConstructorParam()";
+
+      var result = "Not Implemented";
+      var compare = "";
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
@@ -102,7 +123,7 @@ namespace TestDataAccessConfig5
 
     #region Methods
 
-    // 
+    // Gets the connection string.
     private void ConnectionString()
     {
       var methodName = "ConnectionString()";

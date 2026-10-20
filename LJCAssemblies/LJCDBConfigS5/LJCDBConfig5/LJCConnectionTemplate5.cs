@@ -4,13 +4,27 @@
 
 using LJCNetCommon5;
 
-namespace LJCDataAccessConfig5
+namespace LJCDBConfig5
 {
   // Represents a Connection String template.
-  /// <include path="members/LJCConnectionTemplate/*" file="Doc/LJCConnectionTemplate.xml"/>
+  /// <include file="Doc/LJCConnectionTemplate.xml"
+  ///  path="members/LJCConnectionTemplate/*"/>
   public class LJCConnectionTemplate : IComparable<LJCConnectionTemplate>
   {
-    #region Constructors
+    #region Properties
+
+    // Gets or sets the connection type name.
+    /// <include file='Doc/LJCConnectionTemplate.xml'
+    ///  path='members/Name/*'/>
+    public string? Name { get; set; }
+
+    // Gets or sets the connection string template.
+    /// <include file='Doc/LJCConnectionTemplate.xml'
+    ///  path='members/Template/*'/>
+    public string? Template { get; set; }
+    #endregion
+
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='Doc/LJCConnectionTemplate.xml'
@@ -65,19 +79,6 @@ namespace LJCDataAccessConfig5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the connection type name.
-    /// <include file='Doc/LJCConnectionTemplate.xml'
-    ///  path='members/Name/*'/>
-    public string? Name { get; set; }
-
-    // Gets or sets the connection string template.
-    /// <include file='Doc/LJCConnectionTemplate.xml'
-    ///  path='members/Template/*'/>
-    public string? Template { get; set; }
     #endregion
   }
 }

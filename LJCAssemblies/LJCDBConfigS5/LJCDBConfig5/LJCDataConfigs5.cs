@@ -5,7 +5,7 @@ using LJCNetCommon5;
 using System.Reflection;
 using System.Xml.Serialization;
 
-namespace LJCDataAccessConfig5
+namespace LJCDBConfig5
 {
   // Represents a collection of LJCDataConfig objects.
   /// <include file='Doc/LJCDataConfigs.xml'
@@ -30,6 +30,12 @@ namespace LJCDataAccessConfig5
       }
       return retConfig;
     }
+    #endregion
+
+    #region Class Data
+
+    private int mPrevCount;
+    private readonly string mConfigFileName;
     #endregion
 
     #region Constructor Methods
@@ -169,12 +175,6 @@ namespace LJCDataAccessConfig5
     /// <include file='Doc/LJCDataConfigs.xml'
     ///  path='members/ConfigFileSpec/*'/>
     public string ConfigFileSpec { get; set; }
-    #endregion
-
-    #region Class Data
-
-    private int mPrevCount;
-    private readonly string mConfigFileName;
     #endregion
   }
 }
