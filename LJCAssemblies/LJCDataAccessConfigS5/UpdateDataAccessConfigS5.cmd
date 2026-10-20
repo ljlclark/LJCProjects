@@ -3,19 +3,22 @@ rem Copyright (c) Lester J. Clark and Contributors.
 rem Licensed under the MIT License.
 rem UpdateDataAccessConfig5.cmd
 
+rem *** Check if Group Folder ***
 if exist SubFolders2.cmd goto BuildAll
-rem *** Called from solution folder. ***
+echo *** Called from Solution Folder. ***
 set mainRoot=..\..\
-rem *** Sets the solution group folder values. ***
+rem *** Sets the Solution Group Folder values. ***
 call %mainRoot%SubFolders2.cmd %1%
 rem *** Sets the "to" value as External and creates folder. ***
 call %mainRoot%TargetFolders.cmd
 goto Process:
 :BuildAll
-rem *** Called from line root folder UpdateAll.cmd. ***
-rem *** Sets the solution group folder values. ***
+echo *** Called from Codeline Root Folder. ***
+rem *** Sets the Codeline Group Folder values. ***
 call SubFolders2.cmd %1%
-set toRoot=%util%\LJCDataAccessConfig5\
+echo assmRoot-%assmRoot%
+echo utilRoot-%utilRoot%
+set toRoot=%util%\LJCDataAccessConfigS5\
 rem *** Sets the "to" value as External and creates folder. ***
 call TargetFolders.cmd
 :Process

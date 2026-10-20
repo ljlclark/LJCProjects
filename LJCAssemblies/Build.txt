@@ -1,13 +1,50 @@
------------------ 8 - LJCDBServiceLib5 ---------------  
-LJCDBServiceLib5 
-*** LJCUtilities\LJCDBClient5\External ***
-copy ..\..\LJCAssemblies\LJCNetCommon5\LJCNetCommon5\bin\Debug\net8.0\LJCNetCommon5.dll LJCUtilities\LJCDBClient5\External
-The system cannot find the path specified.
-copy ..\..\LJCAssemblies\LJCDBDataAccess5\LJCDBDataAccess5\bin\Debug\net8.0\LJCDBDataAccess5.dll LJCUtilities\LJCDBClient5\External
-The system cannot find the path specified.
-copy ..\..\LJCAssemblies\LJCDBMessage5\LJCCipherLib5\bin\Debug\net8.0\LJCCipherLib5.dll LJCUtilities\LJCDBClient5\External
-The system cannot find the path specified.
-copy ..\..\LJCAssemblies\LJCDBMessage5\LJCDBMessage5\bin\Debug\net8.0\LJCDBMessage5.dll LJCUtilities\LJCDBClient5\External
-The system cannot find the path specified.
+----------------- 1 - LJCNetCommon5 --------------- 
+LJCNetCommonS5 
+----------------- 2 - LJCTextDataReader5 --------- 
+LJCTextDataReaderS5 
+----------------- 3 - LJCDataAccessConfig5 --------- 
+LJCDataAccessConfigS5 
+*** Called from Codeline Root Folder. ***
+assmRoot-
+utilRoot-
+*** LJCUtilities\LJCDataAccessConfigS5\External ***
+copy LJCNetCommonS5\LJCNetCommon5\bin\Debug\net8.0\LJCNetCommon5.dll LJCUtilities\LJCDataAccessConfigS5\External
+        1 file(s) copied.
 
-*** LJCUtilities\LJCDBClient5\LJCGenDoc5\bin\Debug\net8.0 ***
+*** LJCUtilities\LJCDataAccessConfigS5\LJCGenDoc5\bin\Debug\net8.0 ***
+copy LJCDBMessage\CipherLib\bin\Debug\net8.0\CipherLib.dll LJCUtilities\LJCDataAccessConfigS5\LJCGenDoc5\bin\Debug\net8.0
+----------------- 4 - LJCDataAccess5 -------------- 
+LJCDataAccessS5 
+*** LJCUtilities\LJCDataAccessS5\External ***
+copy LJCNetCommonS5\LJCNetCommon5\bin\Debug\net8.0\LJCNetCommon5.dll LJCUtilities\LJCDataAccessS5\External
+        1 file(s) copied.
+copy LJCDataAccessConfigS5\LJCDataAccessConfig5\bin\Debug\net8.0\LJCDataAccessConfig5.dll LJCUtilities\LJCDataAccessS5\External
+        1 file(s) copied.
+
+*** LJCUtilities\LJCDataAccessS5\LJCGenDoc5\bin\Debug\net8.0 ***
+----------------- 5 - LJCDBMessage5 --------------- 
+LJCDBMessageS5 
+*** LJCUtilities\LJCDBMessage5\External ***
+copy LJCNetCommonS5\LJCNetCommon5\bin\Debug\net8.0\LJCNetCommon5.dll LJCUtilities\LJCDBMessage5\External
+        1 file(s) copied.
+copy LJCDataAccessS5\LJCDataAccess5\bin\Debug\net8.0\LJCDataAccess5.dll LJCUtilities\LJCDBMessage5\External
+        1 file(s) copied.
+
+*** LJCUtilities\LJCDBMessage5\LJCGenDoc5\bin\Debug\net8.0 ***
+----------------- 6 - LJCDBDataAccess5 --------------- 
+LJCDBDataAccessS5 
+*** LJCUtilities\LJCDBDataAccessS5\External ***
+copy LJCNetCommonS5\LJCNetCommon5\bin\Debug\net8.0\LJCNetCommon5.dll LJCUtilities\LJCDBDataAccessS5\External
+        1 file(s) copied.
+copy LJCDataAccessConfigS5\LJCDataAccessConfig5\bin\Debug\net8.0\LJCDataAccessConfig5.dll LJCUtilities\LJCDBDataAccessS5\External
+        1 file(s) copied.
+copy LJCDataAccessS5\LJCDataAccess5\bin\Debug\net8.0\LJCDataAccess5.dll LJCUtilities\LJCDBDataAccessS5\External
+        1 file(s) copied.
+copy LJCDBMessageS5\LJCDBMessage5\bin\Debug\net8.0\LJCDBMessage5.dll LJCUtilities\LJCDBDataAccessS5\External
+        1 file(s) copied.
+
+*** LJCUtilities\LJCDBDataAccessS5\LJCGenDoc5\bin\Debug\net8.0 ***
+----------------- 7 - LJCDBClient5 --------------- 
+LJCDBClientS5 
+----------------- 8 - LJCDBServiceLib5 --------------- 
+LJCDBServiceLibS5 

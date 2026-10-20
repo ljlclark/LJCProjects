@@ -8,8 +8,8 @@ rem *** Setup Solution Group Folders ***
 set assm=LJCAssemblies
 set util=LJCUtilities
 
-set assmRoot=%assm%\
-set utilRoot=%util%\
+set assmRoot=
+set utilRoot=
 
 if %1%. == BuildAll. goto Continue
 set assmRoot=..\..\%assm%\
