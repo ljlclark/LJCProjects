@@ -5,7 +5,6 @@ using LJCNetCommon5;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Data.Common;
-using System.Xml.Linq;
 
 namespace LJCDataAccess5
 {
@@ -14,9 +13,9 @@ namespace LJCDataAccess5
   {
     #region Constructors
 
-    // Initializes an object instance.
+    // Initializes an object instance with the supplied values.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='items/MySqlDataAccessC/*'/>
+    ///  path='items/ConstructorParam/*'/>
     public LJCMySqlDataAccess(string connectionString)
     {
       ConnectionString = connectionString;

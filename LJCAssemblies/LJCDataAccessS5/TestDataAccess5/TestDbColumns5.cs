@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TestDbColumns5.cs
-using LJCDataAccess5;
 using LJCNetCommon5;
-using System.Data;
 
 namespace TestDataAccess5
 {
@@ -18,7 +16,7 @@ namespace TestDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataKey.xml'
+    /// <include file='Doc/TestDbColumns.xml'
     ///  path='members/Constructor/*'/>
     public TestDbColumns()
     {

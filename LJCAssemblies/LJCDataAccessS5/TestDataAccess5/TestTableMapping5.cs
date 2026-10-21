@@ -16,7 +16,7 @@ namespace TestDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataKey.xml'
+    /// <include file='Doc/TestTableMapping.xml'
     ///  path='members/Constructor/*'/>
     public TestTableMapping()
     {

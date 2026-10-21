@@ -16,7 +16,7 @@ namespace TestDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataKey.xml'
+    /// <include file='Doc/TestProviderFactory.xml'
     ///  path='members/Constructor/*'/>
     public TestProviderFactory()
     {
@@ -38,7 +38,8 @@ namespace TestDataAccess5
       OpenConnection();
     }
     #endregion
-    #region Constructor Methods
+
+    #region Constructor Test Methods
 
     // Initializes an object instance with the supplied values.
     private void ConstructorParam()

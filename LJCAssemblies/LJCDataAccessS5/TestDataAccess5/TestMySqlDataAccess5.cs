@@ -27,7 +27,7 @@ namespace TestDataAccess5
     // Run the tests.
     private void Run()
     {
-      // Constructor Methods
+      // Constructor  Test Methods
       ConstructorParam();
 
       // Methods
@@ -42,8 +42,9 @@ namespace TestDataAccess5
     }
     #endregion
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
+    // Initializes an object instance with the supplied values.
     private void ConstructorParam()
     {
       var methodName = "ConstructorParam()";
@@ -56,6 +57,7 @@ namespace TestDataAccess5
 
     #region Methods
 
+    // Executes an Insert, Update or Delete statement.
     private void ExecuteNonQuery()
     {
       var methodName = "ExecuteNonQuery()";
@@ -65,6 +67,7 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
+    // Executes a Select statement and fills the specified DataTable.
     private void FillDataTable()
     {
       var methodName = "FillDataTable()";
@@ -74,6 +77,7 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
+    // Executes a Select statement and retrieves the MySqlDataReader object.
     private void GetDataReader()
     {
       var methodName = "GetDataReader()";
@@ -83,6 +87,7 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
+    // Executes a Select statement and retrieves the DataSet object.
     private void GetDataSet()
     {
       var methodName = "GetDataSet()";
@@ -92,6 +97,7 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
+    // Executes a Select statement and retrieves the DataTable object.
     private void GetDataTable()
     {
       var methodName = "GetDataTable()";
@@ -101,6 +107,7 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
+    // Executes a Select statement and retrieves the DataTable object.
     private void GetDataTableFromReader()
     {
       var methodName = "GetDataTableFromReader()";
@@ -110,6 +117,7 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
+    // Executes a Stored Procedure and retrieves the DataTable object.
     private void GetProcedureDataTable()
     {
       var methodName = "GetProcedureDataTable()";
@@ -119,6 +127,7 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
+    // Retrieves the DataTable object with schema only.
     private void GetSchemaOnly()
     {
       var methodName = "GetSchemaOnly()";

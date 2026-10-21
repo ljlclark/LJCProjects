@@ -18,7 +18,7 @@ namespace TestDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataKey.xml'
+    /// <include file='Doc/TestProcedureParam.xml'
     ///  path='members/Constructor/*'/>
     public TestProcedureParam()
     {
@@ -29,7 +29,7 @@ namespace TestDataAccess5
     // Run the tests.
     private void Run()
     {
-      // Constructor Methods
+      // Constructor Test Methods
       ConstructorCopy();
       ConstructorParam();
 
@@ -40,7 +40,7 @@ namespace TestDataAccess5
     }
     #endregion
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
     // The Copy constructor.
     private void ConstructorCopy()
