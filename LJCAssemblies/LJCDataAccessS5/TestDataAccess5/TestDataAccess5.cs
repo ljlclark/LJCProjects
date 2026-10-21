@@ -9,6 +9,7 @@ using System.Data.Common;
 
 namespace TestDataAccess5
 {
+  // Provides LJCDataAccess test methods.
   internal class TestDataAccess
   {
     #region Properties
@@ -20,8 +21,6 @@ namespace TestDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataAccess.xml'
-    ///  path='members/Constructor/*'/>
     public TestDataAccess()
     {
       TestCommon = new LJCTestCommon("TestDataAccess");

@@ -6,6 +6,7 @@ using LJCNetCommon5;
 
 namespace TestDataAccess5
 {
+  // Provides LJCDataCommon test methods.
   internal class TestDataCommon
   {
     #region Properties
@@ -17,8 +18,6 @@ namespace TestDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataCommon.xml'
-    ///  path='members/Constructor/*'/>
     public TestDataCommon()
     {
       TestCommon = new LJCTestCommon("TestDataCommon");

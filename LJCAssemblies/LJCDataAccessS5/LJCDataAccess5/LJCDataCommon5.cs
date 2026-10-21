@@ -1,7 +1,6 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDataCommon5.cs
-using System.Data;
 using System.Data.Common;
 using System.Data.SqlTypes;
 using LJCNetCommon5;

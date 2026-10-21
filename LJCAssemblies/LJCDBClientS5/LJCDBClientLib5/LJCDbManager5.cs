@@ -201,7 +201,7 @@ namespace LJCDBClientLib5
     /// <summary>Gets or sets the data configuration name.</summary>
     public string DataConfigName
     {
-      get { return mDataConfigName; }
+      get => mDataConfigName;
       private set { mDataConfigName = value.Trim(); }
     }
     private string mDataConfigName;
@@ -215,8 +215,8 @@ namespace LJCDBClientLib5
     /// <summary>The Schema name.</summary>
     public string? SchemaName
     {
-      get { return mSchemaName; }
-      set { mSchemaName = LJCNetString.InitString(value); }
+      get => mSchemaName;
+      set { mSchemaName = value?.Trim(); }
     }
     private string? mSchemaName;
 
@@ -226,7 +226,7 @@ namespace LJCDBClientLib5
     /// <summary>The primary table name.</summary>
     public string TableName
     {
-      get { return mTableName; }
+      get => mTableName;
       set { mTableName = value.Trim(); }
     }
     private string mTableName;

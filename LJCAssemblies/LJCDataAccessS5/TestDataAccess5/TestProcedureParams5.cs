@@ -7,6 +7,7 @@ using System.Data;
 
 namespace TestDataAccess5
 {
+  // Provides LJCProcedureParams test methods.
   internal class TestProcedureParams
   {
     #region Properties
@@ -18,8 +19,6 @@ namespace TestDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestProcedureParams.xml'
-    ///  path='members/Constructor/*'/>
     public TestProcedureParams()
     {
       TestCommon = new LJCTestCommon("TestProcedureParam");

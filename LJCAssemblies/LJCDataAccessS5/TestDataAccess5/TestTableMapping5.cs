@@ -5,6 +5,7 @@ using LJCNetCommon5;
 
 namespace TestDataAccess5
 {
+  // Provides LJCTableMapping test methods.
   internal class TestTableMapping
   {
     #region Properties
@@ -16,15 +17,13 @@ namespace TestDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestTableMapping.xml'
-    ///  path='members/Constructor/*'/>
     public TestTableMapping()
     {
       TestCommon = new LJCTestCommon("TestTableMapping");
       Run();
     }
 
-    // Run the tests.
+    // Runs the tests.
     private void Run()
     {
       // Methods

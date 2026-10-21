@@ -5,6 +5,7 @@ using LJCNetCommon5;
 
 namespace TestDataManager5
 {
+  // Provides LJCObjectManager test methods.
   internal class TestObjectManager
   {
     #region Properties
@@ -16,20 +17,19 @@ namespace TestDataManager5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDbServiceRef.xml'
-    ///  path='members/Constructor/*'/>
     public TestObjectManager()
     {
       TestCommon = new LJCTestCommon("TestObjectManager");
       Run();
     }
 
-    // Run the tests.
+    // Runs the tests.
     private void Run()
     {
       Test();
     }
 
+    // A test method placeholder.
     private void Test()
     {
       var methodName = "Test()";

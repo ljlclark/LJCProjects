@@ -25,10 +25,9 @@ namespace LJCDBClientLib5
 
     #region Public Methods
 
-    /// <summary>
-    /// Sets the Settings properties.
-    /// </summary>
-    /// <param name="programConfigFileName">The Program ConfigFile name.</param>
+    // Sets the Settings properties.
+    /// <include file='Doc/StandardUISettings.xml'
+    ///  path='items/SetProperties/*'/>
     public void SetProperties(string programConfigFileName)
     {
       //AppSettings = new AppSettings(programConfigFileName);

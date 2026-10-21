@@ -5,6 +5,7 @@ using LJCNetCommon5;
 
 namespace TestDataAccess5
 {
+  // Provides LJCProviderFactory test methods.
   internal class TestProviderFactory
   {
     #region Properties
@@ -16,8 +17,6 @@ namespace TestDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestProviderFactory.xml'
-    ///  path='members/Constructor/*'/>
     public TestProviderFactory()
     {
       TestCommon = new LJCTestCommon("TestProviderFactory");
@@ -54,7 +53,7 @@ namespace TestDataAccess5
 
     #region Methods
 
-    // 
+    // Closes the database connection.
     private void CloseConnection()
     {
       var methodName = "CloseConnection()";
@@ -64,7 +63,7 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    // 
+    // Retrieves the DbCommand object.
     private void CreateCommand()
     {
       var methodName = "CreateCommand()";
@@ -74,7 +73,7 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    // 
+    // Retrieves the DbConnection object.
     private void CreateConnection()
     {
       var methodName = "CreateConnection()";
@@ -84,7 +83,7 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    // 
+    // Creates the DbDataAdapter object.
     private void CreateDataAdapter()
     {
       var methodName = "CreateDataAdapter()";
@@ -94,7 +93,7 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    // 
+    // Opens the database connection.
     private void OpenConnection()
     {
       var methodName = "OpenConnection()";

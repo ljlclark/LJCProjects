@@ -82,7 +82,9 @@ namespace LJCDataAccess5
       return retValue;
     }
 
-    /// <summary>Checks for the "use" command.</summary>
+    // Checks for the "use" command.
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/IsUseCommand/*'/>
     public static bool IsUseCommand(string command)
     {
       var retValue = false;
@@ -95,6 +97,9 @@ namespace LJCDataAccess5
       return retValue;
     }
 
+    // Registers the SQL client provider.
+    /// <include file='Doc/DataCommon.xml'
+    ///  path='items/RegisterSqlClient/*'/>
     public static void RegisterSqlClient()
     {
       DbProviderFactories.RegisterFactory("Microsoft.Data.SqlClient"
@@ -629,7 +634,9 @@ namespace LJCDataAccess5
 
     #region Properties
 
-    /// <summary>Gets or sets the ConnectionString value.</summary>
+    // Gets or sets the ConnectionString value.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ConnectionString/*'/>
     public string? ConnectionString
     {
       get { return mConnectionString; }
@@ -656,11 +663,13 @@ namespace LJCDataAccess5
     }
     private string? mConnectionString;
 
-    /// <summary>Gets or sets the DatabaseName value.</summary>
+    // Gets or sets the DatabaseName value.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/DatabaseName/*'/>
     public string? DatabaseName
     {
       get { return mDatabaseName; }
-      set { mDatabaseName = LJCNetString.InitString(value); }
+      set { mDatabaseName = value?.Trim(); }
     }
     private string? mDatabaseName;
 
@@ -670,13 +679,16 @@ namespace LJCDataAccess5
     public string? ErrorText { get; set; }
 
     // Gets a reference to the
-    /// <include path='items/ProviderFactory/*' file='Doc/DataAccess.xml'/>
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ProviderFactory/*'/>
     public LJCProviderFactory? ProviderFactory { get; private set; }
 
-    /// <summary>Gets the ProviderName value.</summary>
+    // Gets the ProviderName value.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ProviderName/*'/>
     public string? ProviderName
     {
-      get { return mProviderName; }
+      get => mProviderName;
       set
       {
         if (LJC.HasText(value))
@@ -702,19 +714,23 @@ namespace LJCDataAccess5
     }
     private string? mProviderName;
 
-    /// <summary>Gets the ScriptSQL value.</summary>
+    // Gets the ScriptSQL value.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ScriptSQL/*'/>
     public string? ScriptSQL
     {
-      get { return mScriptSQL; }
-      set { mScriptSQL = LJCNetString.InitString(value); }
+      get => mScriptSQL;
+      set { mScriptSQL = value?.Trim(); }
     }
     private string? mScriptSQL;
 
-    /// <summary>Gets the TableName value.</summary>
+    // Gets the TableName value.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/TableName/*'/>
     public string? TableName
     {
-      get { return mTableName; }
-      set { mTableName = LJCNetString.InitString(value); }
+      get => mTableName;
+      set { mTableName = value?.Trim(); }
     }
     private string? mTableName;
     #endregion
@@ -725,7 +741,9 @@ namespace LJCDataAccess5
     #endregion
   }
 
-  /// <summary>The Connection types.</summary>
+  // The Connection types.
+  /// <include file='Doc/DataAccess.xml'
+  ///  path='items/ConnectionType/*'/>
   public enum ConnectionType
   {
     /// <summary>No connection type.</summary>

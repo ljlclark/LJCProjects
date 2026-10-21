@@ -675,13 +675,7 @@ namespace LJCDBClientLib5
     public string DataConfigName
     {
       get => _DataConfigName;
-      private set
-      {
-        if (value != null)
-        {
-          _DataConfigName = value.Trim();
-        }
-      }
+      private set { _DataConfigName = value.Trim(); }
     }
     private string _DataConfigName;
 
@@ -700,13 +694,7 @@ namespace LJCDBClientLib5
     public string SchemaName
     {
       get => _SchemaName;
-      set
-      {
-        if (value != null)
-        {
-          _SchemaName = value.Trim();
-        }
-      }
+      set { _SchemaName = value.Trim(); }
     }
     private string _SchemaName;
 
@@ -717,13 +705,7 @@ namespace LJCDBClientLib5
     public string? TableName
     {
       get => _TableName;
-      set
-      {
-        if (value != null)
-        {
-          _TableName = value;
-        }
-      }
+      set { _TableName = value?.Trim(); }
     }
     private string? _TableName;
     #endregion

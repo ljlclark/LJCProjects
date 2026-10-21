@@ -10,7 +10,6 @@ namespace TestDataManager5
     // The entry method.
     static void Main()
     {
-      _ = new TestChangedNames();
       _ = new TestDataManager();
       _ = new TestDbManager();
       _ = new TestDbServiceRef();

@@ -5,6 +5,7 @@ using LJCNetCommon5;
 
 namespace TestDataAccess5
 {
+  // Provides LJCMySqlDataAccess test methods.
   internal class TestMySqlDataAccess
   {
     #region Properties
@@ -16,8 +17,6 @@ namespace TestDataAccess5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestMySqlDataAccess.xml'
-    ///  path='members/Constructor/*'/>
     public TestMySqlDataAccess()
     {
       TestCommon = new LJCTestCommon("TestMySqlDataAccess");

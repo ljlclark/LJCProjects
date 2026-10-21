@@ -12,8 +12,6 @@ namespace TestDataAccess5
     {
       _ = new TestDataAccess();
       _ = new TestDataCommon();
-      _ = new TestDbColumn();
-      //_ = new TestDbColumns();
       _ = new TestProcedureParam();
       _ = new TestProcedureParams();
       //_ = new TestProviderFactory();

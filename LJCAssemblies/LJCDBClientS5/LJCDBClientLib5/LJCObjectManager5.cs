@@ -27,7 +27,8 @@ namespace LJCDBClientLib5
       mDataConfigName = dataConfigName;
       mTableName = tableName;
       SchemaName = schemaName;
-      DataManager = new LJCDataManager(DbServiceRef, DataConfigName, TableName, SchemaName);
+      DataManager = new LJCDataManager(DbServiceRef, DataConfigName, TableName
+        , SchemaName);
     }
     #endregion
 
@@ -323,14 +324,8 @@ namespace LJCDBClientLib5
     /// <summary>Gets or sets the data configuration name.</summary>
     public string DataConfigName
     {
-      get { return mDataConfigName; }
-      private set
-      {
-        if (value != null)
-        {
-          mDataConfigName = value.Trim();
-        }
-      }
+      get => mDataConfigName;
+      private set { mDataConfigName = value.Trim(); }
     }
     private string mDataConfigName;
 
@@ -344,7 +339,7 @@ namespace LJCDBClientLib5
     public string? SchemaName
     {
       get => mSchemaName;
-      set { mSchemaName = LJCNetString.InitString(value); }
+      set { mSchemaName = value?.Trim(); }
     }
     private string? mSchemaName;
 
@@ -352,18 +347,12 @@ namespace LJCDBClientLib5
     public string? SQLStatement { get; set; }
 
     /// <summary>The primary table name.</summary>
-    public string TableName
+    public string? TableName
     {
       get => mTableName;
-      set
-      {
-        if (value != null)
-        {
-          mTableName = value.Trim();
-        }
-      }
+      set { mTableName = value?.Trim(); }
     }
-    private string mTableName;
+    private string? mTableName;
     #endregion
 
     #region Other Properties

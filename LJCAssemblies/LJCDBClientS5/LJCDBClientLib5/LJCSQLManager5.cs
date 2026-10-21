@@ -294,18 +294,15 @@ namespace LJCDBClientLib5
     public LJCDataColumns BaseDefinition { get; private set; }
 
     /// <summary>Gets or sets the data configuration name.</summary>
-    public string DataConfigName
+    public string? DataConfigName
     {
       get => mDataConfigName;
       private set
       {
-        if (value != null)
-        {
-          mDataConfigName = value.Trim();
-        }
+        mDataConfigName = value?.Trim();
       }
     }
-    private string mDataConfigName;
+    private string? mDataConfigName;
 
     /// <summary>Gets the data definition columns collection.</summary>
     public LJCDataColumns DataDefinition { get; private set; }
@@ -317,35 +314,29 @@ namespace LJCDBClientLib5
     public List<string> LookupColumnNames { get; set; }
 
     /// <summary>The Schema name.</summary>
-    public string SchemaName
+    public string? SchemaName
     {
-      get { return mSchemaName; }
+      get => mSchemaName;
       set
       {
-        if (value != null)
-        {
-          mSchemaName = value.Trim();
-        }
+        mSchemaName = value?.Trim();
       }
     }
-    private string mSchemaName;
+    private string? mSchemaName;
 
     /// <summary>Gets or sets the last SQL statement.</summary>
     public string? SQLStatement { get; set; }
 
     /// <summary>The primary table name.</summary>
-    public string TableName
+    public string? TableName
     {
-      get { return mTableName; }
+      get => mTableName;
       set
       {
-        if (value != null)
-        {
-          mTableName = value.Trim();
-        }
+        mTableName = value?.Trim();
       }
     }
-    private string mTableName;
+    private string? mTableName;
     #endregion
 
     #region Class Data

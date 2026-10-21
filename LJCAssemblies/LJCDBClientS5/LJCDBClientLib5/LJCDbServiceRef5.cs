@@ -15,11 +15,8 @@ namespace LJCDBClientLib5
     }
 
     // Checks for the required object values.
-    /// <summary>
-    /// Checks for the required object values.
-    /// </summary>
-    /// <param name="dbServiceRef"></param>
-    /// <returns></returns>
+    /// <include file='Doc/DbServiceRef.xml'
+    ///  path='items/ItemValues/*'/>
     public static string ItemValues(LJCDbServiceRef dbServiceRef)
     {
       string retValue = "";
@@ -52,8 +49,8 @@ namespace LJCDBClientLib5
     //public DbService DbService { get; set; }
 
     // Gets or sets the DbServiceClient proxy reference.
-    /// <include file='Doc/DbServiceRef.xml'
-    ///  path='items/DbServiceClient/*'/>
+    // <include file='Doc/DbServiceRef.xml'
+    //  path='items/DbServiceClient/*'/>
     //public DbServiceClient DbServiceClient { get; set; }
   }
 }
