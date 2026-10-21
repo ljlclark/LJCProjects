@@ -4,14 +4,16 @@ rem SubFolders2.cmd
 
 set bin=bin\Debug
 
-rem *** Setup Solution Group Folders ***
+rem *** Group Folder Names ***
 set assm=LJCAssemblies
 set util=LJCUtilities
 
+rem *** Group Paths ***
 set assmRoot=
 set utilRoot=
-
 if %1%. == BuildAll. goto Continue
+
+rem *** Codeline Group Paths ***
 set assmRoot=..\..\%assm%\
 set utilRoot=..\..\%util%\
 :Continue

@@ -5,27 +5,24 @@ rem UpdateDataAccessConfig5.cmd
 
 rem *** Check if Group Folder ***
 if exist SubFolders2.cmd goto BuildAll
-echo *** Called from Solution Folder. ***
+
+rem *** Called from Solution Folder. ***
 set mainRoot=..\..\
-rem *** Sets the Solution Group Folder values. ***
 call %mainRoot%SubFolders2.cmd %1%
-rem *** Sets the "to" value as External and creates folder. ***
 call %mainRoot%TargetFolders.cmd
 goto Process:
-:BuildAll
-echo *** Called from Codeline Root Folder. ***
-rem *** Sets the Codeline Group Folder values. ***
-call SubFolders2.cmd %1%
-echo assmRoot-%assmRoot%
-echo utilRoot-%utilRoot%
-set toRoot=%util%\LJCDataAccessConfigS5\
-rem *** Sets the "to" value as External and creates folder. ***
-call TargetFolders.cmd
-:Process
 
+:BuildAll
+rem *** Called from Codeline Root or Group Folder. ***
+call SubFolders2.cmd %1%
+rem *** Set to Solution Folder. ***
+set toRoot=%utilRoot%\LJCDBConfigS5\
+call TargetFolders.cmd
+
+:Process
 rem ***************************
 rem *** Referenced Binaries ***
-echo *** %to% ***
+echo to = %to%
 
 set bin=%bin%\net8.0
 set src=%assmRoot%LJCNetCommonS5\LJCNetCommon5\%bin%
@@ -38,7 +35,7 @@ rem *** Runtime-only Binaries ***
 rem ---------------------------
 set to=%toRoot%LJCGenDoc5\%bin%
 echo.
-echo *** %to% ***
+echo to = %to%
 
 set src=%assmRoot%LJCDBMessage\CipherLib\%bin%
 echo copy %src%\CipherLib.dll %to%

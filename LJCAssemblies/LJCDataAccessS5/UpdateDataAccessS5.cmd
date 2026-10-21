@@ -3,24 +3,23 @@ rem Copyright (c) Lester J. Clark and Contributors.
 rem Licensed under the MIT License.
 rem UpdateDBMessage5.cmd
 
+rem *** Check if Group Folder ***
 if exist SubFolders2.cmd goto BuildAll
-rem *** Called from solution folder. ***
+
+rem *** Called from Solution Folder. ***
 set mainRoot=..\..\
-rem *** Sets the solution group folder values. ***
 call %mainRoot%SubFolders2.cmd %1%
-rem *** Sets the "to" value as External and creates folder. ***
 call %mainRoot%TargetFolders.cmd
 goto Process:
-:BuildAll
-rem *** Called from line root folder UpdateAll.cmd. ***
-rem *** Sets the solution group folder values. ***
-call SubFolders2.cmd %1%
-rem *** Sets the To root. ***
-set toRoot=%util%\LJCDataAccessS5\
-rem *** Sets the "to" value as External and creates folder. ***
-call TargetFolders.cmd
-:Process
 
+:BuildAll
+rem *** Called from Codeline Root or Group Folder. ***
+call SubFolders2.cmd %1%
+rem *** Set to Solution Folder. ***
+set toRoot=%utilRoot%\LJCDataAccessS5\
+call TargetFolders.cmd
+
+:Process
 rem ***************************
 rem *** Referenced Binaries ***
 echo *** %to% ***
