@@ -7,14 +7,79 @@ using LJCNetCommon5;
 
 namespace LJCDBClientLib5
 {
-  /// <summary>Provides DbDataAccess data manipulation methods.</summary>
+  // Provides DbDataAccess data manipulation methods.
+  /// <include file='Doc/ProjectDbManager.xml'
+  ///  path='members/LJCDbManager/*'/>
   public class LJCDbManager
   {
+    #region Properties
+
+    // Gets or sets the non-select affected record count.
+    /// <include file='Doc/DbManager.xml'
+    ///  path='members/AffectedCount/*'/>
+    public int AffectedCount { get; set; }
+
+    // Gets the base data definition columns collection.
+    /// <include file='Doc/DbManager.xml'
+    ///  path='members/BaseDefinition/*'/>
+    public LJCDataColumns BaseDefinition { get; private set; }
+
+    // Gets or sets the data configuration name.
+    /// <include file='Doc/DbManager.xml'
+    ///  path='members/DataConfigName/*'/>
+    public string DataConfigName
+    {
+      get => mDataConfigName;
+      private set => mDataConfigName = value.Trim();
+    }
+    private string mDataConfigName;
+
+    // Gets the data definition columns collection.
+    /// <include file='Doc/DbManager.xml'
+    ///  path='members/DataDefinition/*'/>
+    public LJCDataColumns? DataDefinition { get; private set; }
+
+    // Gets or sets the LookupColumn names.
+    /// <include file='Doc/DbManager.xml'
+    ///  path='members/LookupColumnNames/*'/>
+    public List<string> LookupColumnNames { get; set; }
+
+    // The Schema name.
+    /// <include file='Doc/DbManager.xml'
+    ///  path='members/SchemaName/*'/>
+    public string? SchemaName
+    {
+      get => mSchemaName;
+      set => mSchemaName = value?.Trim();
+    }
+    private string? mSchemaName;
+
+    // Gets or sets the last SQL statement.
+    /// <include file='Doc/DbManager.xml'
+    ///  path='members/SQLStatement/*'/>
+    public string SQLStatement { get; set; }
+
+    // The primary table name.
+    /// <include file='Doc/DbManager.xml'
+    ///  path='members/TableName/*'/>
+    public string TableName
+    {
+      get => mTableName;
+      set => mTableName = value.Trim();
+    }
+    private string mTableName;
+    #endregion
+
+    #region Class Data
+
+    private DbDataAccess? mDbDataAccess;
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
     /// <include file='Doc/DbManager.xml'
-    ///  path='items/DbManagerC/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDbManager(string dataConfigName, string tableName)
     {
       BaseDefinition = [];
@@ -29,7 +94,7 @@ namespace LJCDBClientLib5
 
     // Resets the data access configuration.
     /// <include file='Doc/DbManager.xml'
-    ///  path='items/Reset/*'/>
+    ///  path='members/Reset/*'/>
     public void Reset(string dataConfigName, string tableName)
     {
       DataConfigName = dataConfigName;
@@ -50,7 +115,7 @@ namespace LJCDBClientLib5
 
     // Adds a record to the database.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Manager.xml'
-    ///  path='items/Add/*'/>
+    ///  path='members/Add/*'/>
     public LJCDBResult? Add(object dataObject, List<string>? propertyNames = null)
     {
       LJCDBResult? retValue;
@@ -71,7 +136,7 @@ namespace LJCDBClientLib5
 
     // Deletes the records with the specified key values.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
-    ///  path='items/Delete/*'/>
+    ///  path='members/Delete/*'/>
     public void Delete(LJCDataColumns keyColumns, LJCDBFilters? filters = null)
     {
       if (LJC.HasListItems(keyColumns)
@@ -87,7 +152,7 @@ namespace LJCDBClientLib5
 
     // Executes the supplied request.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
-    ///  path='items/ExecuteRequest/*'/>
+    ///  path='members/ExecuteRequest/*'/>
     public LJCDBResult? ExecuteRequest(LJCDBRequest dbRequest)
     {
       LJCDBResult? retValue;
@@ -106,7 +171,7 @@ namespace LJCDBClientLib5
 
     // Loads a collection of data records.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
-    ///  path='items/Load/*'/>
+    ///  path='members/Load/*'/>
     public LJCDBResult? Load(LJCDataColumns keyColumns, List<string>? propertyNames = null
       , LJCDBFilters? filters = null, LJCDBJoins? joins = null)
     {
@@ -123,7 +188,7 @@ namespace LJCDBClientLib5
 
     // Retrieves a record from the database.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
-    ///  path='items/Retrieve/*'/>
+    ///  path='members/Retrieve/*'/>
     public LJCDBResult? Retrieve(LJCDataColumns keyColumns, List<string>? propertyNames = null
       , LJCDBFilters? filters = null, LJCDBJoins? joins = null)
     {
@@ -140,7 +205,7 @@ namespace LJCDBClientLib5
 
     // Updates the record.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/DbManager.xml'
-    ///  path='items/Update/*'/>
+    ///  path='members/Update/*'/>
     public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string>? propertyNames = null, LJCDBFilters? filters = null)
     {
@@ -157,8 +222,8 @@ namespace LJCDBClientLib5
     #region Other Public Methods
 
     // Adds the lookup column names.
-    /// <include file='Doc/DataManager.xml'
-    ///  path='items/SetLookupColumns/*'/>
+    /// <include file='Doc/DbManager.xml'
+    ///  path='members/SetLookupColumns/*'/>
     public void SetLookupColumns(string[] propertyNames)
     {
       foreach (string propertyName in propertyNames)
@@ -188,53 +253,6 @@ namespace LJCDBClientLib5
       }
       return retColumns;
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets or sets the non-select affected record count.</summary>
-    public int AffectedCount { get; set; }
-
-    /// <summary>Gets the base data definition columns collection.</summary>
-    public LJCDataColumns BaseDefinition { get; private set; }
-
-    /// <summary>Gets or sets the data configuration name.</summary>
-    public string DataConfigName
-    {
-      get => mDataConfigName;
-      private set { mDataConfigName = value.Trim(); }
-    }
-    private string mDataConfigName;
-
-    /// <summary>Gets the data definition columns collection.</summary>
-    public LJCDataColumns? DataDefinition { get; private set; }
-
-    /// <summary>Gets or sets the LookupColumn names.</summary>
-    public List<string> LookupColumnNames { get; set; }
-
-    /// <summary>The Schema name.</summary>
-    public string? SchemaName
-    {
-      get => mSchemaName;
-      set { mSchemaName = value?.Trim(); }
-    }
-    private string? mSchemaName;
-
-    /// <summary>Gets or sets the last SQL statement.</summary>
-    public string SQLStatement { get; set; }
-
-    /// <summary>The primary table name.</summary>
-    public string TableName
-    {
-      get => mTableName;
-      set { mTableName = value.Trim(); }
-    }
-    private string mTableName;
-    #endregion
-
-    #region Class Data
-
-    private DbDataAccess? mDbDataAccess;
     #endregion
   }
 }

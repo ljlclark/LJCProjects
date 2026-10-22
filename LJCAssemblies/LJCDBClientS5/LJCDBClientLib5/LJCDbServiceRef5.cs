@@ -7,7 +7,8 @@ using LJCDBDataAccess5;
 namespace LJCDBClientLib5
 {
   // Contains the DbDataAccess, DbService and DbServiceClient proxy references.
-  /// <include path='items/DbServiceRef/*' file='Doc/DbServiceRef.xml'/>
+  /// <include file='Doc/DbServiceRef.xml'
+  ///  path='members/ProjectDbServiceRef/*'/>
   public class LJCDbServiceRef
   {
     public LJCDbServiceRef()
@@ -16,7 +17,7 @@ namespace LJCDBClientLib5
 
     // Checks for the required object values.
     /// <include file='Doc/DbServiceRef.xml'
-    ///  path='items/ItemValues/*'/>
+    ///  path='members/ItemValues/*'/>
     public static string ItemValues(LJCDbServiceRef dbServiceRef)
     {
       string retValue = "";
@@ -41,16 +42,16 @@ namespace LJCDBClientLib5
 
     // Gets or sets the DbDataAccess reference.
     /// <include file='Doc/DbServiceRef.xml'
-    ///  path='items/DbDataAccess/*'/>
+    ///  path='members/DbDataAccess/*'/>
     public DbDataAccess? DbDataAccess { get; set; }
 
     // Gets or sets the DbService reference.
-    /// <include path='items/DbService/*' file='Doc/DbServiceRef.xml'/>
+    /// <include path='members/DbService/*' file='Doc/DbServiceRef.xml'/>
     //public DbService DbService { get; set; }
 
     // Gets or sets the DbServiceClient proxy reference.
     // <include file='Doc/DbServiceRef.xml'
-    //  path='items/DbServiceClient/*'/>
+    //  path='members/DbServiceClient/*'/>
     //public DbServiceClient DbServiceClient { get; set; }
   }
 }

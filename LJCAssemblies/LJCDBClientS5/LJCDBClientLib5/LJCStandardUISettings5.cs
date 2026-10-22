@@ -6,14 +6,16 @@ using System.Drawing;
 
 namespace LJCDBClientLib5
 {
-  /// <summary>The Standard Setting values.</summary>
+  // The Standard Setting values.
+  /// <include file='Doc/ProjectStandardUISettings.xml'
+  ///  path='members/LJCStandardUISettings/*'/>
   public class LJCStandardUISettings
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCStandardUISettings()
     {
       ConnectionString = "";
@@ -27,8 +29,10 @@ namespace LJCDBClientLib5
 
     // Sets the Settings properties.
     /// <include file='Doc/StandardUISettings.xml'
-    ///  path='items/SetProperties/*'/>
+    ///  path='members/SetProperties/*'/>
+#pragma warning disable IDE0060 // Remove unused parameter
     public void SetProperties(string programConfigFileName)
+#pragma warning restore IDE0060 // Remove unused parameter
     {
       //AppSettings = new AppSettings(programConfigFileName);
 
@@ -57,19 +61,29 @@ namespace LJCDBClientLib5
 
     #region Properties
 
-    /// <summary>Gets or sets the AppSettings value..</summary>
+    // Gets or sets the AppSettings value.
+    // <include file='Doc/StandardUISettings.xml'
+    //  path='members/AppSettings/*'/>
     //public AppSettings AppSettings { get; set; }
 
-    /// <summary>The begin gradient color.</summary>
+    // The begin gradient color.
+    /// <include file='Doc/StandardUISettings.xml'
+    ///  path='members/BeginColor/*'/>
     public Color BeginColor { get; private set; }
 
-    /// <summary>The connection string.</summary>
+    // The connection string.
+    /// <include file='Doc/StandardUISettings.xml'
+    ///  path='members/ConnectionString/*'/>
     public string ConnectionString { get; private set; }
 
-    /// <summary>The database connection type.</summary>
+    // The database connection type.
+    /// <include file='Doc/StandardUISettings.xml'
+    ///  path='members/ConnectionType/*'/>
     public ConnectionType ConnectionType { get; private set; }
 
-    /// <summary>Gets or sets the data config name.</summary>
+    // Gets or sets the data config name.
+    /// <include file='Doc/StandardUISettings.xml'
+    ///  path='members/DataConfigName/*'/>
     public string DataConfigName
     {
       get => mDataConfigName;
@@ -77,13 +91,19 @@ namespace LJCDBClientLib5
     }
     private string mDataConfigName;
 
-    /// <summary>Gets or sets the DbService references.</summary>
+    // Gets or sets the DbService references.
+    /// <include file='Doc/StandardUISettings.xml'
+    ///  path='members/DbServiceRef/*'/>
     public LJCDbServiceRef DbServiceRef { get; set; }
 
-    /// <summary>The end gradient color.</summary>
+    // The end gradient color.
+    /// <include file='Doc/StandardUISettings.xml'
+    ///  path='members/EndColor/*'/>
     public Color EndColor { get; private set; }
 
-    /// <summary>Gets or sets the export text file extension.</summary>
+    // Gets or sets the export text file extension.
+    /// <include file='Doc/StandardUISettings.xml'
+    ///  path='members/ExportTextExtension/*'/>
     public string ExportTextExtension
     {
       get => mExportTextExtension;
@@ -91,7 +111,9 @@ namespace LJCDBClientLib5
     }
     private string mExportTextExtension;
 
-    /// <summary>The SiteID.</summary>
+    // The SiteID.
+    /// <include file='Doc/StandardUISettings.xml'
+    ///  path='members/SiteID/*'/>
     public long SiteID { get; private set; }
     #endregion
   }
