@@ -5,11 +5,19 @@ using System.Data.Common;
 
 namespace LJCDataAccess5
 {
-  /// <summary>
-  /// Implements a helper class for creating table mappings.
-  /// </summary>
+  // Implements a helper class for creating table mappings.
+  /// <include file='Doc/ProjectTableMapping.xml'
+  ///  path='items/LJCTableMapping/*'/>
   public class LJCTableMapping
   {
+    #region Properties
+
+    // Gets a reference to the TableMaps object.
+    /// <include file='Doc/TableMapping.xml'
+    ///  path='items/TableMaps/*'/>
+    public DataTableMappingCollection TableMaps { get; private set; }
+    #endregion
+
     #region Constructors
 
     // Initializes an instance of the object.
@@ -57,12 +65,6 @@ namespace LJCDataAccess5
       retValue = TableMaps.Add(sourceTable, dataSetTable);
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets a reference to the TableMaps object.</summary>
-    public DataTableMappingCollection TableMaps { get; private set; }
     #endregion
   }
 }

@@ -13,13 +13,13 @@ namespace LJCDataAccess5
 {
   // Implements an ADO.NET SQL data access control layer.
   /// <include file='Doc/ProjectDataAccess.xml'
-  ///  path='items/DataAccess/*'/>
+  ///  path='items/LJCDataAccess/*'/>
   public partial class LJCDataAccess
   {
     #region Static Functions
 
     // Creates a connection string.
-    /// <include file='Doc/DataCommon.xml'
+    /// <include file='Doc/DataAccess.xml'
     ///  path='items/GetConnectionString/*'/>
     public static string GetConnectionString(string dataSourceName
       , string databaseName, string? userID = null, string? password = null
@@ -67,7 +67,7 @@ namespace LJCDataAccess5
     }
 
     // Creates the DataAccess object.
-    /// <include file='Doc/DataCommon.xml'
+    /// <include file='Doc/DataAccess.xml'
     ///  path='items/GetDataAccess/*'/>
     public static LJCDataAccess GetDataAccess(string dataSourceName
       , string databaseName, string providerName = "Microsoft.Data.SqlClient")
@@ -83,7 +83,7 @@ namespace LJCDataAccess5
     }
 
     // Checks for the "use" command.
-    /// <include file='Doc/DataCommon.xml'
+    /// <include file='Doc/DataAccess.xml'
     ///  path='items/IsUseCommand/*'/>
     public static bool IsUseCommand(string command)
     {
@@ -98,7 +98,7 @@ namespace LJCDataAccess5
     }
 
     // Registers the SQL client provider.
-    /// <include file='Doc/DataCommon.xml'
+    /// <include file='Doc/DataAccess.xml'
     ///  path='items/RegisterSqlClient/*'/>
     public static void RegisterSqlClient()
     {
@@ -160,6 +160,115 @@ namespace LJCDataAccess5
       }
       return retValue;
     }
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the ConnectionString value.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ConnectionString/*'/>
+    public string? ConnectionString
+    {
+      get => mConnectionString;
+      set
+      {
+        if (LJC.HasText(value))
+        {
+          mConnectionString = value;
+          if (!LJC.HasText(mProviderName))
+          {
+            mProviderName = GetSQLServerProviderName();
+          }
+
+          if ("MySql.Data.MySqlClient" == mProviderName)
+          {
+            mMySqlDataAccess = new LJCMySqlDataAccess(mConnectionString);
+          }
+          else
+          {
+            CreateProviderFactory(mConnectionString, mProviderName);
+          }
+        }
+      }
+    }
+    private string? mConnectionString;
+
+    // Gets or sets the DatabaseName value.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/DatabaseName/*'/>
+    public string? DatabaseName
+    {
+      get => mDatabaseName;
+      set => mDatabaseName = value?.Trim();
+    }
+    private string? mDatabaseName;
+
+    // Contains the error text.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ErrorText/*'/>
+    public string? ErrorText { get; set; }
+
+    // Gets a reference to the
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ProviderFactory/*'/>
+    public LJCProviderFactory? ProviderFactory { get; private set; }
+
+    // Gets the ProviderName value.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ProviderName/*'/>
+    public string? ProviderName
+    {
+      get => mProviderName;
+      set
+      {
+        if (LJC.HasText(value))
+        {
+          mProviderName = value;
+          if (!LJC.HasText(mProviderName))
+          {
+            mProviderName = GetSQLServerProviderName();
+          }
+          if (LJC.HasText(mConnectionString))
+          {
+            if ("MySql.Data.MySqlClient" == mProviderName)
+            {
+              mMySqlDataAccess = new LJCMySqlDataAccess(mConnectionString);
+            }
+            else
+            {
+              CreateProviderFactory(mConnectionString, mProviderName);
+            }
+          }
+        }
+      }
+    }
+    private string? mProviderName;
+
+    // Gets the ScriptSQL value.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/ScriptSQL/*'/>
+    public string? ScriptSQL
+    {
+      get => mScriptSQL;
+      set => mScriptSQL = value?.Trim();
+    }
+    private string? mScriptSQL;
+
+    // Gets the TableName value.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='items/TableName/*'/>
+    public string? TableName
+    {
+      get => mTableName;
+      set => mTableName = value?.Trim();
+    }
+    private string? mTableName;
+    #endregion
+
+    #region Class Data
+
+    // The MySql data access control object.
+    private LJCMySqlDataAccess? mMySqlDataAccess;
     #endregion
 
     #region Constructor Methods
@@ -630,114 +739,6 @@ namespace LJCDataAccess5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the ConnectionString value.
-    /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ConnectionString/*'/>
-    public string? ConnectionString
-    {
-      get { return mConnectionString; }
-      set
-      {
-        if (LJC.HasText(value))
-        {
-          mConnectionString = value;
-          if (!LJC.HasText(mProviderName))
-          {
-            mProviderName = GetSQLServerProviderName();
-          }
-
-          if ("MySql.Data.MySqlClient" == mProviderName)
-          {
-            mMySqlDataAccess = new LJCMySqlDataAccess(mConnectionString);
-          }
-          else
-          {
-            CreateProviderFactory(mConnectionString, mProviderName);
-          }
-        }
-      }
-    }
-    private string? mConnectionString;
-
-    // Gets or sets the DatabaseName value.
-    /// <include file='Doc/DataAccess.xml'
-    ///  path='items/DatabaseName/*'/>
-    public string? DatabaseName
-    {
-      get { return mDatabaseName; }
-      set { mDatabaseName = value?.Trim(); }
-    }
-    private string? mDatabaseName;
-
-    // Contains the error text.
-    /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ErrorText/*'/>
-    public string? ErrorText { get; set; }
-
-    // Gets a reference to the
-    /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ProviderFactory/*'/>
-    public LJCProviderFactory? ProviderFactory { get; private set; }
-
-    // Gets the ProviderName value.
-    /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ProviderName/*'/>
-    public string? ProviderName
-    {
-      get => mProviderName;
-      set
-      {
-        if (LJC.HasText(value))
-        {
-          mProviderName = value;
-          if (!LJC.HasText(mProviderName))
-          {
-            mProviderName = GetSQLServerProviderName();
-          }
-          if (LJC.HasText(mConnectionString))
-          {
-            if ("MySql.Data.MySqlClient" == mProviderName)
-            {
-              mMySqlDataAccess = new LJCMySqlDataAccess(mConnectionString);
-            }
-            else
-            {
-              CreateProviderFactory(mConnectionString, mProviderName);
-            }
-          }
-        }
-      }
-    }
-    private string? mProviderName;
-
-    // Gets the ScriptSQL value.
-    /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ScriptSQL/*'/>
-    public string? ScriptSQL
-    {
-      get => mScriptSQL;
-      set { mScriptSQL = value?.Trim(); }
-    }
-    private string? mScriptSQL;
-
-    // Gets the TableName value.
-    /// <include file='Doc/DataAccess.xml'
-    ///  path='items/TableName/*'/>
-    public string? TableName
-    {
-      get => mTableName;
-      set { mTableName = value?.Trim(); }
-    }
-    private string? mTableName;
-    #endregion
-
-    #region Class Data
-
-    private LJCMySqlDataAccess? mMySqlDataAccess;
     #endregion
   }
 

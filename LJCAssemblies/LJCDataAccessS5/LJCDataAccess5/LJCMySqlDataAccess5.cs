@@ -8,15 +8,31 @@ using System.Data.Common;
 
 namespace LJCDataAccess5
 {
-  /// <summary>Implements an ADO.NET MySQL data access control layer.</summary>
+  // Implements an ADO.NET MySQL data access control layer.
+  /// <include file='Doc/ProjectMySqlDataAccess.xml'
+  ///  path='items/LJCMySqlDataAccess/*'/>
   public class LJCMySqlDataAccess
   {
+    #region Properties
+
+    /// <summary>Gets or sets the ConnectionString value.</summary>
+    public string ConnectionString { get; set; }
+    #endregion
+
     #region Constructors
+
+    // Initializes an object instance.
+    /// <include file='Doc/MySqlDataAccess.xml'
+    ///  path='items/Constructor/*'/>
+    public LJCMySqlDataAccess()
+    {
+      ConnectionString = "";
+    }
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/MySqlDataAccess.xml'
     ///  path='items/ConstructorParam/*'/>
-    public LJCMySqlDataAccess(string connectionString)
+    public LJCMySqlDataAccess(string connectionString) : this()
     {
       ConnectionString = connectionString;
     }
@@ -307,12 +323,6 @@ namespace LJCDataAccess5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets or sets the ConnectionString value.</summary>
-    public string ConnectionString { get; set; }
     #endregion
   }
 }

@@ -7,9 +7,15 @@ using LJCNetCommon5;
 namespace LJCDataAccess5
 {
   // Represents a collection of ProcedureParameter objects.
-  /// <include path='items/ProcedureParameters/*' file='Doc/ProcedureParameters.xml'/>
+  /// <include file='Doc/ProjectProcedureParameters.xml'
+  ///  path='items/LJCProcedureParameters/*'/>
   public class LJCProcedureParameters : List<LJCProcedureParameter>
   {
+    #region Class Data
+
+    private int mPrevCount;
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -80,11 +86,6 @@ namespace LJCDataAccess5
       }
       return retValue;
     }
-    #endregion
-
-    #region Class Data
-
-    private int mPrevCount;
     #endregion
   }
 }

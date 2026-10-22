@@ -7,6 +7,8 @@ using System.Data;
 namespace LJCDataAccess5
 {
   // Contains methods to complement a DataColumn object.
+  /// <include file='Doc/ProjectTableColumn.xml'
+  ///  path='items/LJCTableColumn/*'/>
   public class LJCTableColumn
   {
     #region Static Methods

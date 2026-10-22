@@ -7,8 +7,34 @@ using LJCNetCommon5;
 namespace LJCDataAccess5
 {
   /// <summary>Represents a Procedure Parameter.</summary>
+  /// <include file='Doc/Common/ProjectProcedureParameter.xml'
+  ///  path='items/LJCProcedureParameter/*'/>
   public class LJCProcedureParameter : IComparable<LJCProcedureParameter>
   {
+    #region Properties
+
+    /// <summary>Gets or sets the ParameterDirection value.</summary>
+    public ParameterDirection Direction { get; set; }
+
+    /// <summary>Gets or sets the MySqlDbTypeID value.</summary>
+    public int MySqlDbTypeID { get; set; }
+
+    /// <summary>Gets or sets the ParameterName value.</summary>
+    public string? ParameterName { get; set; }
+
+    /// <summary>Gets or sets the Precision value.</summary>
+    public short Precision { get; set; }
+
+    /// <summary>Gets or sets the Size value.</summary>
+    public int Size { get; set; }
+
+    /// <summary>Gets or sets the SqlDbType value.</summary>
+    public int SqlDbTypeID { get; set; }
+
+    /// <summary>Gets or sets the Value.</summary>
+    public object? Value { get; set; }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -88,30 +114,6 @@ namespace LJCDataAccess5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets or sets the ParameterDirection value.</summary>
-    public ParameterDirection Direction { get; set; }
-
-    /// <summary>Gets or sets the MySqlDbTypeID value.</summary>
-    public int MySqlDbTypeID { get; set; }
-
-    /// <summary>Gets or sets the ParameterName value.</summary>
-    public string? ParameterName { get; set; }
-
-    /// <summary>Gets or sets the Precision value.</summary>
-    public short Precision { get; set; }
-
-    /// <summary>Gets or sets the Size value.</summary>
-    public int Size { get; set; }
-
-    /// <summary>Gets or sets the SqlDbType value.</summary>
-    public int SqlDbTypeID { get; set; }
-
-    /// <summary>Gets or sets the Value.</summary>
-    public object? Value { get; set; }
     #endregion
   }
 }

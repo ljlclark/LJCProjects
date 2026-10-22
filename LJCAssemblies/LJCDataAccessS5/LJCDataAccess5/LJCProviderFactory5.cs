@@ -9,9 +9,30 @@ using LJCNetCommon5;
 namespace LJCDataAccess5
 {
   // Implements a data provider factory.
-  /// <include path='items/ProviderFactory/*' file='Doc/ProviderFactory.xml'/>
+  /// <include file='Doc/ProjectProviderFactory.xml'
+  ///  path='items/LJCProviderFactory/*'/>
   public class LJCProviderFactory
   {
+    #region Properties
+
+    /// <summary>Gets the ConnectionString value.</summary>
+    public string ConnectionString { get; private set; }
+
+    /// <summary>Gets a reference to the DbProviderFactory object.</summary>
+    public DbProviderFactory? DbProviderFactory { get; private set; }
+
+    /// <summary>Gets the ProviderName value.</summary>
+    public string ProviderName { get; private set; }
+    #endregion
+
+    #region Class Data
+
+    //private const string ConfigConnectionString = "DefaultConnectionString";
+    private const string ConfigProvider = "DefaultProvider";
+
+    private DbConnection? mDbConnection;
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -170,26 +191,6 @@ namespace LJCDataAccess5
         }
       }
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets the ConnectionString value.</summary>
-    public string ConnectionString { get; private set; }
-
-    /// <summary>Gets a reference to the DbProviderFactory object.</summary>
-    public DbProviderFactory? DbProviderFactory { get; private set; }
-
-    /// <summary>Gets the ProviderName value.</summary>
-    public string ProviderName { get; private set; }
-    #endregion
-
-    #region Class Data
-
-    //private const string ConfigConnectionString = "DefaultConnectionString";
-    private const string ConfigProvider = "DefaultProvider";
-
-    private DbConnection? mDbConnection;
     #endregion
   }
 }
