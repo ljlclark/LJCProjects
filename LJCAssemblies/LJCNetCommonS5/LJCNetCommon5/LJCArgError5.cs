@@ -14,13 +14,18 @@ namespace LJCNetCommon5
   {
     #region Constructors
 
+    public LJCArgError()
+    {
+      ClassName = "";
+      mMessage = "";
+    }
+
     // Initializes an object instance.
     /// <include path="members/Constructor/*" file="Doc/LJCArgError.xml"/>
     /// <parentGroup>constructors</parentGroup>
-    public LJCArgError(string className)
+    public LJCArgError(string className) : this()
     {
       ClassName = className;
-      mMessage = "";
     }
 
     // Clears the messages.

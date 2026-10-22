@@ -30,7 +30,7 @@ namespace LJCNetCommon5
     public string? Name
     {
       get => mName;
-      set { mName = value?.Trim(); }
+      set => mName = value?.Trim();
     }
     private string? mName;
 
@@ -40,7 +40,7 @@ namespace LJCNetCommon5
     public string? Value
     {
       get => mValue;
-      set { mValue = value?.Trim(); }
+      set => mValue = value?.Trim();
     }
     private string? mValue;
     #endregion
