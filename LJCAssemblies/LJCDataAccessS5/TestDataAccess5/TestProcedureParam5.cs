@@ -32,7 +32,7 @@ namespace TestDataAccess5
       ConstructorCopy();
       ConstructorParam();
 
-      // Methods
+      // Method Test Methods
       ToStringMethod();
       Clone();
       CompareTo();
@@ -83,7 +83,7 @@ namespace TestDataAccess5
     }
     #endregion
 
-    #region Methods
+    #region Method Test Methods
 
     // The object string identifier.
     private void ToStringMethod()

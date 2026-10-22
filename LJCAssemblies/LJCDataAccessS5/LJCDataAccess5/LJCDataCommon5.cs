@@ -10,14 +10,14 @@ namespace LJCDataAccess5
 {
   // Provides common data methods.
   /// <include file='Doc/ProjectDataCommon.xml'
-  ///  path='items/LJCDataCommon/*'/>
+  ///  path='members/LJCDataCommon/*'/>
   public class LJCDataCommon
   {
     #region Data Access Methods
 
     // Sets the data adapter table mappings.
     /// <include file='Doc/DataCommon.xml'
-    ///  path='items/SetTableMapping/*'/>
+    ///  path='members/SetTableMapping/*'/>
     public static void SetTableMapping(DbDataAdapter? dataAdapter
       , DataTableMappingCollection? tableMapping)
     {
@@ -37,7 +37,7 @@ namespace LJCDataAccess5
 
     // Sets the data adapter table mappings.
     /// <include file='Doc/DataCommon.xml'
-    ///  path='items/SetTableMappingMySql/*'/>
+    ///  path='members/SetTableMappingMySql/*'/>
     public static void SetTableMappingMySql(MySqlDataAdapter dataAdapter
       , DataTableMappingCollection? tableMapping)
     {
@@ -59,7 +59,7 @@ namespace LJCDataAccess5
 
     // Converts the date string to a DateTime value.
     /// <include file='Doc/DataCommon.xml'
-    ///  path='items/GetDbDate/*'/>
+    ///  path='members/GetDbDate/*'/>
     public static DateTime GetDbDate(string dateText
       , ConnectionType connectionType = ConnectionType.SqlServer)
     {
@@ -77,7 +77,7 @@ namespace LJCDataAccess5
 
     // Converts the date/time string to a DateTime value.
     /// <include file='Doc/DataCommon.xml'
-    ///  path='items/GetDbDateTime/*'/>
+    ///  path='members/GetDbDateTime/*'/>
     public static DateTime GetDbDateTime(string dateText
       , ConnectionType connectionType = ConnectionType.SqlServer)
     {
@@ -94,7 +94,7 @@ namespace LJCDataAccess5
 
     // Formats the DateTime value to a date string in database format.
     /// <include file='Doc/DataCommon.xml'
-    ///  path='items/GetDbDateString/*'/>
+    ///  path='members/GetDbDateString/*'/>
     public static string GetDbDateString(DateTime dateTime
       , ConnectionType dbType = ConnectionType.SqlServer)
     {
@@ -107,7 +107,7 @@ namespace LJCDataAccess5
 
     // Formats the DateTime value to a date/time string in database format.
     /// <include file='Doc/DataCommon.xml'
-    ///  path='items/GetDbDateTimeString/*'/>
+    ///  path='members/GetDbDateTimeString/*'/>
     public static string GetDbDateTimeString(DateTime dateTime)
     {
       string retValue;
@@ -118,7 +118,7 @@ namespace LJCDataAccess5
 
     // Get the minimum date/time value.
     /// <include file='Doc/DataCommon.xml'
-    ///  path='items/GetMinDateTime/*'/>
+    ///  path='members/GetMinDateTime/*'/>
     public static DateTime GetMinDateTime(ConnectionType connectionType
       = ConnectionType.SqlServer)
     {
@@ -143,7 +143,7 @@ namespace LJCDataAccess5
 
     // Get the minimum date/time string formatted for display.
     /// <include file='Doc/DataCommon.xml'
-    ///  path='items/GetMinUIDateTimeString/*'/>
+    ///  path='members/GetMinUIDateTimeString/*'/>
     public static string GetMinUIDateTimeString(ConnectionType connectionType
       = ConnectionType.SqlServer)
     {
@@ -162,7 +162,7 @@ namespace LJCDataAccess5
 
     // Format the date value for display.
     /// <include file='Doc/DataCommon.xml'
-    ///  path='items/GetUIDateString/*'/>
+    ///  path='members/GetUIDateString/*'/>
     public static string? GetUIDateString(DateTime? dateTime)
     {
       string? retValue = null;
@@ -178,7 +178,7 @@ namespace LJCDataAccess5
 
     // Format the date/time value for display.
     /// <include file='Doc/DataCommon.xml'
-    ///  path='items/GetUIDateTimeString/*'/>
+    ///  path='members/GetUIDateTimeString/*'/>
     public static string? GetUIDateTimeString(DateTime dateTime)
     {
       string? retValue = null;
@@ -192,7 +192,7 @@ namespace LJCDataAccess5
 
     // Format the date/time to time for display.
     /// <include file='Doc/DataCommon.xml'
-    ///  path='items/GetUITimeString/*'/>
+    ///  path='members/GetUITimeString/*'/>
     public static string? GetUITimeString(DateTime dateTime)
     {
       string? retValue = null;

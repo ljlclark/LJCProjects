@@ -29,7 +29,7 @@ namespace TestDataAccess5
       // Constructor  Test Methods
       ConstructorParam();
 
-      // Methods
+      // Method Test Methods
       ExecuteNonQuery();
       FillDataTable();
       GetDataReader();
@@ -54,7 +54,7 @@ namespace TestDataAccess5
     }
     #endregion
 
-    #region Methods
+    #region Method Test Methods
 
     // Executes an Insert, Update or Delete statement.
     private void ExecuteNonQuery()

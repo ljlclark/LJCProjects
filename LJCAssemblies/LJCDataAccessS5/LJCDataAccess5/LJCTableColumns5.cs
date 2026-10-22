@@ -8,14 +8,14 @@ namespace LJCDataAccess5
 {
   // Contains methods to complement a DataColumnCollection object.
   /// <include file='Doc/ProjectTableColumns.xml'
-  ///  path='items/LJCTableColumns/*'/>
+  ///  path='members/TableColumns/*'/>
   public class LJCTableColumns
   {
     #region Static Methods
 
     // Clones a DataColumn collection.
-    /// <include file='Doc/LJCTableColumns.xml'
-    ///  path='items/Clone/*'/>
+    /// <include file='Doc/TableColumns.xml'
+    ///  path='members/Clone/*'/>
     public static DataColumnCollection? Clone(DataColumnCollection adoColumns)
     {
       DataColumnCollection? retTableColumns = null;
@@ -36,8 +36,8 @@ namespace LJCDataAccess5
     }
 
     // Creates a PropertyNames list from a DataColumns collection.
-    /// <include file='Doc/LJCTableColumns.xml'
-    ///  path='items/GetPropertyNames/*'/>
+    /// <include file='Doc/TableColumns.xml'
+    ///  path='members/ColumnNames/*'/>
     public static List<string>? ColumnNames(DataColumnCollection adoColumns)
     {
       List<string>? retValue = null;
@@ -55,8 +55,8 @@ namespace LJCDataAccess5
     }
 
     // Returns a set of DataColumns that match the supplied list.
-    /// <include file='Doc/LJCTableColumns.xml'
-    ///  path='items/Columns/*'/>
+    /// <include file='Doc/TableColumns.xml'
+    ///  path='members/Columns/*'/>
     public static DataColumnCollection? Columns(DataColumnCollection adoColumns
       , List<string>? columnNames = null)
     {
@@ -90,8 +90,8 @@ namespace LJCDataAccess5
     }
 
     // Creates a new DataColumnCollection object.
-    /// <include file='Doc/LJCTableColumns.xml'
-    ///  path='items/CreateColumns/*'/>
+    /// <include file='Doc/TableColumns.xml'
+    ///  path='members/CreateColumns/*'/>
     public static DataColumnCollection CreateColumns()
     {
       DataColumnCollection retTableColumns;
@@ -102,8 +102,8 @@ namespace LJCDataAccess5
     }
 
     // Checks the DataColumnCollection object for items.
-    /// <include file='Doc/LJCTableColumns.xml'
-    ///  path='items/HasColumns/*'/>
+    /// <include file='Doc/TableColumns.xml'
+    ///  path='members/HasColumns/*'/>
     // Note: Also in LJCDBMessage.DbResult
     public static bool HasColumns(DataColumnCollection adoColumns)
     {
@@ -117,8 +117,8 @@ namespace LJCDataAccess5
     }
 
     // Creates an LJCDataColumns collection from a DataColumnCollection.
-    /// <include file='Doc/LJCTableColumns.xml'
-    ///  path='items/ToDataColumns/*'/>
+    /// <include file='Doc/TableColumns.xml'
+    ///  path='members/ToDataColumns/*'/>
     // Note: Also in LJCDBMessage.DbResult
     public static LJCDataColumns? ToDataColumns(DataColumnCollection adoColumns)
     {

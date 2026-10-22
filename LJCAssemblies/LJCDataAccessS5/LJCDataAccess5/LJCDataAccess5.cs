@@ -13,14 +13,14 @@ namespace LJCDataAccess5
 {
   // Implements an ADO.NET SQL data access control layer.
   /// <include file='Doc/ProjectDataAccess.xml'
-  ///  path='items/LJCDataAccess/*'/>
+  ///  path='members/LJCDataAccess/*'/>
   public partial class LJCDataAccess
   {
     #region Static Functions
 
     // Creates a connection string.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/GetConnectionString/*'/>
+    ///  path='members/GetConnectionString/*'/>
     public static string GetConnectionString(string dataSourceName
       , string databaseName, string? userID = null, string? password = null
       , params string[] pairs)
@@ -68,7 +68,7 @@ namespace LJCDataAccess5
 
     // Creates the DataAccess object.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/GetDataAccess/*'/>
+    ///  path='members/GetDataAccess/*'/>
     public static LJCDataAccess GetDataAccess(string dataSourceName
       , string databaseName, string providerName = "Microsoft.Data.SqlClient")
     {
@@ -84,7 +84,7 @@ namespace LJCDataAccess5
 
     // Checks for the "use" command.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/IsUseCommand/*'/>
+    ///  path='members/IsUseCommand/*'/>
     public static bool IsUseCommand(string command)
     {
       var retValue = false;
@@ -99,7 +99,7 @@ namespace LJCDataAccess5
 
     // Registers the SQL client provider.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/RegisterSqlClient/*'/>
+    ///  path='members/RegisterSqlClient/*'/>
     public static void RegisterSqlClient()
     {
       DbProviderFactories.RegisterFactory("Microsoft.Data.SqlClient"
@@ -166,7 +166,7 @@ namespace LJCDataAccess5
 
     // Gets or sets the ConnectionString value.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ConnectionString/*'/>
+    ///  path='members/ConnectionString/*'/>
     public string? ConnectionString
     {
       get => mConnectionString;
@@ -195,7 +195,7 @@ namespace LJCDataAccess5
 
     // Gets or sets the DatabaseName value.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/DatabaseName/*'/>
+    ///  path='members/DatabaseName/*'/>
     public string? DatabaseName
     {
       get => mDatabaseName;
@@ -205,17 +205,17 @@ namespace LJCDataAccess5
 
     // Contains the error text.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ErrorText/*'/>
+    ///  path='members/ErrorText/*'/>
     public string? ErrorText { get; set; }
 
-    // Gets a reference to the
+    // Gets a reference to the provider factory.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ProviderFactory/*'/>
+    ///  path='members/ProviderFactory/*'/>
     public LJCProviderFactory? ProviderFactory { get; private set; }
 
     // Gets the ProviderName value.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ProviderName/*'/>
+    ///  path='members/ProviderName/*'/>
     public string? ProviderName
     {
       get => mProviderName;
@@ -246,7 +246,7 @@ namespace LJCDataAccess5
 
     // Gets the ScriptSQL value.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ScriptSQL/*'/>
+    ///  path='members/ScriptSQL/*'/>
     public string? ScriptSQL
     {
       get => mScriptSQL;
@@ -256,7 +256,7 @@ namespace LJCDataAccess5
 
     // Gets the TableName value.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/TableName/*'/>
+    ///  path='members/TableName/*'/>
     public string? TableName
     {
       get => mTableName;
@@ -275,7 +275,7 @@ namespace LJCDataAccess5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDataAccess()
     {
       RegisterSqlClient();
@@ -283,11 +283,10 @@ namespace LJCDataAccess5
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/DataAccessC/*'/>
+    ///  path='members/ConstructorParam/*'/>
     public LJCDataAccess(string connectionString, string? providerName = null
-      , string? databaseName = null)
+      , string? databaseName = null) : this()
     {
-      RegisterSqlClient();
       DatabaseName = databaseName;
       ConnectionString = connectionString;
       ProviderName = providerName;
@@ -298,7 +297,7 @@ namespace LJCDataAccess5
 
     // Closes the database connection.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/CloseConnection/*'/>
+    ///  path='members/CloseConnection/*'/>
     public void CloseConnection()
     {
       ProviderFactory?.CloseConnection();
@@ -306,7 +305,7 @@ namespace LJCDataAccess5
 
     // Executes an Insert, Update or Delete statement.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ExecuteNonQuery/*'/>
+    ///  path='members/ExecuteNonQuery/*'/>
     public int ExecuteNonQuery(string? sql)
     {
       DbCommand? command;
@@ -358,7 +357,7 @@ namespace LJCDataAccess5
 
     // Executes a script file.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ExecuteScript/*'/>
+    ///  path='members/ExecuteScript/*'/>
     public void ExecuteScript(string scriptFileSpec)
     {
       if (!File.Exists(scriptFileSpec))
@@ -375,7 +374,7 @@ namespace LJCDataAccess5
 
     // Executes a script text string.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/ExecuteScriptText/*'/>
+    ///  path='members/ExecuteScriptText/*'/>
     public void ExecuteScriptText(string scriptText)
     {
       var regexOptions = RegexOptions.IgnoreCase;
@@ -404,7 +403,7 @@ namespace LJCDataAccess5
 
     // Executes a Select statement and fills the specified DataTable.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/FillDataTable/*'/>
+    ///  path='members/FillDataTable/*'/>
     public void FillDataTable(string sql, DataTable dataTable
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -456,7 +455,7 @@ namespace LJCDataAccess5
 
     // Executes a Select statement and retrieves the DbDataReader object.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/GetDataReader/*'/>
+    ///  path='members/GetDataReader/*'/>
     public DbDataReader? GetDataReader(string sql)
     {
       DbCommand? command;
@@ -487,7 +486,7 @@ namespace LJCDataAccess5
 
     // Executes a Select statement and retrieves the DataSet object.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/GetDataSet/*'/>
+    ///  path='members/GetDataSet/*'/>
     public DataSet? GetDataSet(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -535,7 +534,7 @@ namespace LJCDataAccess5
 
     // Executes a Select statement and retrieves the DataTable object.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/GetDataTable/*'/>
+    ///  path='members/GetDataTable/*'/>
     public DataTable? GetDataTable(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -565,7 +564,7 @@ namespace LJCDataAccess5
 
     // Executes a Stored Procedure and retrieves the DataTable object.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/GetProcedureDataTable/*'/>
+    ///  path='members/GetProcedureDataTable/*'/>
     public DataTable? GetProcedureDataTable(string procedureName
       , LJCProcedureParameters? parameters = null)
     {
@@ -622,7 +621,7 @@ namespace LJCDataAccess5
 
     // Retrieves the DataTable object with schema only.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/GetSchemaOnly/*'/>
+    ///  path='members/GetSchemaOnly/*'/>
     public DataTable? GetSchemaOnly(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -667,7 +666,7 @@ namespace LJCDataAccess5
 
     // Get the column SQL types.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='items/GetColumnSQLTypes/*'/>
+    ///  path='members/GetColumnSQLTypes/*'/>
     public DataTable? GetColumnSQLTypes(string dbName, string tableName)
     {
       DataTable? retValue;
@@ -744,7 +743,7 @@ namespace LJCDataAccess5
 
   // The Connection types.
   /// <include file='Doc/DataAccess.xml'
-  ///  path='items/ConnectionType/*'/>
+  ///  path='members/ConnectionType/*'/>
   public enum ConnectionType
   {
     /// <summary>No connection type.</summary>

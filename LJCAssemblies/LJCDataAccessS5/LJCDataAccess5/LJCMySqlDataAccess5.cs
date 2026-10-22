@@ -10,12 +10,14 @@ namespace LJCDataAccess5
 {
   // Implements an ADO.NET MySQL data access control layer.
   /// <include file='Doc/ProjectMySqlDataAccess.xml'
-  ///  path='items/LJCMySqlDataAccess/*'/>
+  ///  path='members/LJCMySqlDataAccess/*'/>
   public class LJCMySqlDataAccess
   {
     #region Properties
 
-    /// <summary>Gets or sets the ConnectionString value.</summary>
+    // Gets or sets the ConnectionString value.
+    /// <include file='Doc/MySqlDataAccess.xml'
+    ///  path='members/ConnectionString/*'/>
     public string ConnectionString { get; set; }
     #endregion
 
@@ -23,7 +25,7 @@ namespace LJCDataAccess5
 
     // Initializes an object instance.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='items/Constructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCMySqlDataAccess()
     {
       ConnectionString = "";
@@ -31,7 +33,7 @@ namespace LJCDataAccess5
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='items/ConstructorParam/*'/>
+    ///  path='members/ConstructorParam/*'/>
     public LJCMySqlDataAccess(string connectionString) : this()
     {
       ConnectionString = connectionString;
@@ -42,7 +44,7 @@ namespace LJCDataAccess5
 
     // Executes an Insert, Update or Delete statement.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='items/ExecuteNonQuery/*'/>
+    ///  path='members/ExecuteNonQuery/*'/>
     public int ExecuteNonQuery(string sql)
     {
       MySqlConnection connection;
@@ -76,7 +78,7 @@ namespace LJCDataAccess5
 
     // Executes a Select statement and fills the specified DataTable.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='items/FillDataTable/*'/>
+    ///  path='members/FillDataTable/*'/>
     public void FillDataTable(string sql, DataTable dataTable
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -97,7 +99,7 @@ namespace LJCDataAccess5
 
     // Executes a Select statement and retrieves the MySqlDataReader object.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='items/GetDataReader/*'/>
+    ///  path='members/GetDataReader/*'/>
     public MySqlDataReader GetDataReader(string sql)
     {
       MySqlConnection connection;
@@ -132,7 +134,7 @@ namespace LJCDataAccess5
 
     // Executes a Select statement and retrieves the DataSet object.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='items/GetDataSet/*'/>
+    ///  path='members/GetDataSet/*'/>
     public DataSet? GetDataSet(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -156,7 +158,7 @@ namespace LJCDataAccess5
 
     // Executes a Select statement and retrieves the DataTable object.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='items/GetDataTable/*'/>
+    ///  path='members/GetDataTable/*'/>
     public DataTable? GetDataTable(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
@@ -172,7 +174,7 @@ namespace LJCDataAccess5
 
     // Executes a Select statement and retrieves the DataTable object.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='items/GetDataTableFromReader/*'/>
+    ///  path='members/GetDataTableFromReader/*'/>
     public DataTable GetDataTableFromReader(string sql)
     {
       MySqlDataReader reader;
@@ -235,7 +237,7 @@ namespace LJCDataAccess5
 
     // Executes a Stored Procedure and retrieves the DataTable object.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='items/GetProcedureDataTable/*'/>
+    ///  path='members/GetProcedureDataTable/*'/>
     public DataTable? GetProcedureDataTable(string procedureName
       , LJCProcedureParameters? parameters)
     {
@@ -287,7 +289,7 @@ namespace LJCDataAccess5
 
     // Retrieves the DataTable object with schema only.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='items/GetSchemaOnly/*'/>
+    ///  path='members/GetSchemaOnly/*'/>
     public DataTable? GetSchemaOnly(string sql
       , DataTableMappingCollection? tableMapping = null)
     {

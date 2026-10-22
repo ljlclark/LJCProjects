@@ -26,13 +26,13 @@ namespace TestDataAccess5
     // Runs the tests.
     private void Run()
     {
-      // Methods
+      // Method Test Methods
       AddColumnMap();
       AddTableMap();
     }
     #endregion
 
-    #region Methods
+    #region Method Test Methods
 
     // Adds a DataTable column map to the table mapping.
     private void AddColumnMap()

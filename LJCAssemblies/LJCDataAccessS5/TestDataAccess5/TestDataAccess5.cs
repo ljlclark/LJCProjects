@@ -30,15 +30,15 @@ namespace TestDataAccess5
     // Run the tests.
     private void Run()
     {
-      // Static Methods
+      // Static Test Methods
       GetConnectionString();
       GetDataAccess();
       IsUseCommand();
 
-      // Constructor Methods
+      // Constructor Test Methods
       ConstructorParam();
 
-      // Methods
+      // Method Test Methods
       CloseConnection();
       ExecuteNonQuery();
       ExecuteScript();
@@ -53,7 +53,7 @@ namespace TestDataAccess5
     }
     #endregion
 
-    #region Static Methods
+    #region Static Test Methods
 
     // Creates a connection string.
     private void GetConnectionString()
@@ -157,7 +157,7 @@ namespace TestDataAccess5
     }
     #endregion
 
-    #region Methods
+    #region Method Test Methods
 
     // Closes the database connection.
     private void CloseConnection()

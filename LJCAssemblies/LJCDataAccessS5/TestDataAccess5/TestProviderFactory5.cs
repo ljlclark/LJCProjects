@@ -29,7 +29,7 @@ namespace TestDataAccess5
       // Constructor Methods
       ConstructorParam();
 
-      // Methods
+      // Method Test Methods
       CloseConnection();
       CreateCommand();
       CreateConnection();
@@ -51,7 +51,7 @@ namespace TestDataAccess5
     }
     #endregion
 
-    #region Methods
+    #region Method Test Methods
 
     // Closes the database connection.
     private void CloseConnection()

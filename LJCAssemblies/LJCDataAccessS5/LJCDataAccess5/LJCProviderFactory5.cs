@@ -10,18 +10,24 @@ namespace LJCDataAccess5
 {
   // Implements a data provider factory.
   /// <include file='Doc/ProjectProviderFactory.xml'
-  ///  path='items/LJCProviderFactory/*'/>
+  ///  path='members/LJCProviderFactory/*'/>
   public class LJCProviderFactory
   {
     #region Properties
 
-    /// <summary>Gets the ConnectionString value.</summary>
+    // Gets the ConnectionString value.
+    /// <include file='Doc/ProviderFactory.xml'
+    ///  path='members/ConnectionString/*'/>
     public string ConnectionString { get; private set; }
 
-    /// <summary>Gets a reference to the DbProviderFactory object.</summary>
+    // Gets a reference to the DbProviderFactory object.
+    /// <include file='Doc/ProviderFactory.xml'
+    ///  path='members/DbProviderFactory/*'/>
     public DbProviderFactory? DbProviderFactory { get; private set; }
 
-    /// <summary>Gets the ProviderName value.</summary>
+    // Gets the ProviderName value.
+    /// <include file='Doc/ProviderFactory.xml'
+    ///  path='members/ProviderName/*'/>
     public string ProviderName { get; private set; }
     #endregion
 
@@ -37,7 +43,7 @@ namespace LJCDataAccess5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCProviderFactory()
     {
       ConnectionString = "";
@@ -47,8 +53,9 @@ namespace LJCDataAccess5
 
     // Initializes an object instance with the supplied values,
     /// <include file='Doc/ProviderFactory.xml'
-    ///  path='items/ProviderFactoryC/*'/>
+    ///  path='members/ConstructorParam/*'/>
     public LJCProviderFactory(string connectionString, string providerName)
+      : this()
     {
       ConnectionString = connectionString;
       ProviderName = providerName;
@@ -60,7 +67,7 @@ namespace LJCDataAccess5
 
     // Closes the database connection.
     /// <include file='Doc/ProviderFactory.xml'
-    ///  path='items/CloseConnection/*'/>
+    ///  path='members/CloseConnection/*'/>
     public void CloseConnection()
     {
       mDbConnection?.Close();
@@ -68,7 +75,7 @@ namespace LJCDataAccess5
 
     // Retrieves the DbCommand object.
     /// <include file='Doc/ProviderFactory.xml'
-    ///  path='items/CreateCommand/*'/>
+    ///  path='members/CreateCommand/*'/>
     public DbCommand? CreateCommand(string commandText
       , CommandType commandType = CommandType.Text)
     {
@@ -108,7 +115,7 @@ namespace LJCDataAccess5
 
     // Retrieves the DbConnection object.
     /// <include file='Doc/ProviderFactory.xml'
-    ///  path='items/CreateConnection/*'/>
+    ///  path='members/CreateConnection/*'/>
     public DbConnection? CreateConnection()
     {
       DbConnection? retValue = null;
@@ -138,7 +145,7 @@ namespace LJCDataAccess5
 
     // Creates the DbDataAdapter object.
     /// <include file='Doc/ProviderFactory.xml'
-    ///  path='items/CreateDataAdapter/*'/>
+    ///  path='members/CreateDataAdapter/*'/>
     public DbDataAdapter? CreateDataAdapter()
     {
       DbDataAdapter? retValue = null;
@@ -152,7 +159,7 @@ namespace LJCDataAccess5
 
     // Opens the database connection.
     /// <include file='Doc/ProviderFactory.xml'
-    ///  path='items/OpenConnection/*'/>
+    ///  path='members/OpenConnection/*'/>
     public void OpenConnection()
     {
       mDbConnection?.Open();
@@ -160,7 +167,7 @@ namespace LJCDataAccess5
 
     // Creates the DbProviderFactory object.
     /// <include file='Doc/ProviderFactory.xml'
-    ///  path='items/CreateDbProviderFactory/*'/>
+    ///  path='members/CreateDbProviderFactory/*'/>
     private void CreateDbProviderFactory()
     {
       StringBuilder builder;

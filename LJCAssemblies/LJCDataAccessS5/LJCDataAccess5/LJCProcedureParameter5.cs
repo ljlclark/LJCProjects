@@ -6,32 +6,46 @@ using LJCNetCommon5;
 
 namespace LJCDataAccess5
 {
-  /// <summary>Represents a Procedure Parameter.</summary>
+  // Represents a Procedure Parameter.
   /// <include file='Doc/Common/ProjectProcedureParameter.xml'
-  ///  path='items/LJCProcedureParameter/*'/>
+  ///  path='members/LJCProcedureParameter/*'/>
   public class LJCProcedureParameter : IComparable<LJCProcedureParameter>
   {
     #region Properties
 
-    /// <summary>Gets or sets the ParameterDirection value.</summary>
+    // Gets or sets the ParameterDirection value.
+    /// <include file='Doc/ProcedureParameter.xml'
+    ///  path='members/Direction/*'/>
     public ParameterDirection Direction { get; set; }
 
-    /// <summary>Gets or sets the MySqlDbTypeID value.</summary>
+    // Gets or sets the MySqlDbTypeID value.
+    /// <include file='Doc/ProcedureParameter.xml'
+    ///  path='members/MySqlDbTypeID/*'/>
     public int MySqlDbTypeID { get; set; }
 
-    /// <summary>Gets or sets the ParameterName value.</summary>
+    // Gets or sets the ParameterName value.
+    /// <include file='Doc/ProcedureParameter.xml'
+    ///  path='members/ParameterName/*'/>
     public string? ParameterName { get; set; }
 
-    /// <summary>Gets or sets the Precision value.</summary>
+    // Gets or sets the Precision value.
+    /// <include file='Doc/ProcedureParameter.xml'
+    ///  path='members/Precision/*'/>
     public short Precision { get; set; }
 
-    /// <summary>Gets or sets the Size value.</summary>
+    // Gets or sets the Size value.
+    /// <include file='Doc/ProcedureParameter.xml'
+    ///  path='members/Size/*'/>
     public int Size { get; set; }
 
-    /// <summary>Gets or sets the SqlDbType value.</summary>
+    // Gets or sets the SqlDbType value.
+    /// <include file='Doc/ProcedureParameter.xml'
+    ///  path='members/SqlDbTypeID/*'/>
     public int SqlDbTypeID { get; set; }
 
-    /// <summary>Gets or sets the Value.</summary>
+    // Gets or sets the Value.
+    /// <include file='Doc/ProcedureParameter.xml'
+    ///  path='members/Value/*'/>
     public object? Value { get; set; }
     #endregion
 
@@ -39,14 +53,30 @@ namespace LJCDataAccess5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCProcedureParameter()
     {
     }
 
+    // Initializes an object instance with the supplied values. 
+    /// <include file='Doc/ProcedureParameter.xml'
+    ///  path='members/ConstructorParam/*'/>
+    public LJCProcedureParameter(string parameterName, int sqlDbTypeID
+      , int size, object? value = null
+      , ParameterDirection direction = ParameterDirection.Input
+      , int mySqlDbTypeID = -1) : this()
+    {
+      ParameterName = parameterName;
+      SqlDbTypeID = sqlDbTypeID;
+      Size = size;
+      Direction = direction;
+      Value = value;
+      MySqlDbTypeID = mySqlDbTypeID;
+    }
+
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='members/ConstructorCopy/*'/>
     public LJCProcedureParameter(LJCProcedureParameter item)
     {
       Direction = item.Direction;
@@ -57,27 +87,13 @@ namespace LJCDataAccess5
       SqlDbTypeID = item.SqlDbTypeID;
       Value = item.Value;
     }
-
-    /// <summary>A Create constructor.</summary>
-    public LJCProcedureParameter(string parameterName, int sqlDbTypeID
-      , int size, object? value = null
-      , ParameterDirection direction = ParameterDirection.Input
-      , int mySqlDbTypeID = -1)
-    {
-      ParameterName = parameterName;
-      SqlDbTypeID = sqlDbTypeID;
-      Size = size;
-      Direction = direction;
-      Value = value;
-      MySqlDbTypeID = mySqlDbTypeID;
-    }
     #endregion
 
     #region Methods
 
     // The object string identifier.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/ToString/*'/>
+    ///  path='members/ToString/*'/>
     public override string? ToString()
     {
       return ParameterName;
@@ -85,7 +101,7 @@ namespace LJCDataAccess5
 
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCProcedureParameter? Clone()
     {
       LJCProcedureParameter? retValue = MemberwiseClone() as LJCProcedureParameter;
@@ -94,7 +110,7 @@ namespace LJCDataAccess5
 
     // Provides the default Sort functionality.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/CompareTo/*'/>
+    ///  path='members/CompareTo/*'/>
     public int CompareTo(LJCProcedureParameter? other)
     {
       int retValue;

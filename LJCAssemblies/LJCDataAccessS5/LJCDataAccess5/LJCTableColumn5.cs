@@ -8,14 +8,14 @@ namespace LJCDataAccess5
 {
   // Contains methods to complement a DataColumn object.
   /// <include file='Doc/ProjectTableColumn.xml'
-  ///  path='items/LJCTableColumn/*'/>
+  ///  path='members/LJCTableColumn/*'/>
   public class LJCTableColumn
   {
     #region Static Methods
 
     // Clones a DataColumn object.
-    /// <include file='Doc/LJCTableColumn.xml'
-    ///  path='items/DataColumnClone/*'/>
+    /// <include file='Doc/TableColumn.xml'
+    ///  path='members/Clone/*'/>
     public static DataColumn? Clone(DataColumn adoColumn)
     {
       DataColumn? retTableColumn = null;
@@ -37,8 +37,8 @@ namespace LJCDataAccess5
     }
 
     // Creates an LJCDataColumn object from a DataColumn object.
-    /// <include file='Doc/LJCTableColumn.xml'
-    ///  path='items/ToDataColumn/*'/>
+    /// <include file='Doc/TableColumn.xml'
+    ///  path='members/ToDataColumn/*'/>
     // Note: Also in LJCDBMessage.DbResult
     public static LJCDataColumn? ToDataColumn(DataColumn? tableColumn)
     {

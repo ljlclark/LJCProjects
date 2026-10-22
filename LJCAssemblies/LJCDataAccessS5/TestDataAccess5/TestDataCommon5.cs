@@ -27,11 +27,11 @@ namespace TestDataAccess5
     // Run the tests.
     private void Run()
     {
-      // Data Access Methods
+      // Data Access Test Methods
       SetTableMapping();
       SetTableMappingMySql();
 
-      // Data Conversion Methods
+      // Data Conversion Test Methods
       GetDbDate();
       GetDbDateTime();
       GetDbDateString();
@@ -44,7 +44,7 @@ namespace TestDataAccess5
     }
     #endregion
 
-    #region Data Access Methods
+    #region Data Access Test Methods
 
     // Sets the data adapter table mappings.
     private void SetTableMapping()
@@ -67,7 +67,7 @@ namespace TestDataAccess5
     }
     #endregion
 
-    #region Data Conversion Methods
+    #region Data Conversion Test Methods
 
     // Converts the date string to a DateTime value.
     private void GetDbDate()
