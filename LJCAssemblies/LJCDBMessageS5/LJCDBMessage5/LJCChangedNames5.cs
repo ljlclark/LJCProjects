@@ -1,7 +1,6 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCChangedNames.cs
-using LJCNetCommon5;
 
 namespace LJCDBMessage5
 {
@@ -10,6 +9,35 @@ namespace LJCDBMessage5
   ///  path='items/ChangedNames/*'/>
   public class LJCChangedNames
   {
+    #region Properties
+
+    // Returns the ChangedProperties collection.
+    /// <include file='Doc/LJCChangedNames.xml'
+    ///  path='items/ChangedProperties/*'/>
+    public List<string> ChangedProperties
+    {
+      //get => _ChangedProperties.ToList();
+      get => [.. _ChangedProperties];
+    }
+
+    // Returns the changed property names string.
+    /// <include file='Doc/LJCChangedNames.xml'
+    ///  path='items/ChangedPropertyNames/*'/>
+    public string ChangedPropertyNames
+    {
+      get => string.Join(", ", ChangedProperties);
+    }
+    #endregion
+
+    #region Class Data
+
+    // Prevents duplicates automatically.
+    // Faster than List<T>.
+    private readonly HashSet<string> _ChangedProperties;
+    #endregion
+
+    #region Constructor Methods
+
     // Initializes an object instance.
     /// <include file='Doc/LJCChangedNames.xml'
     ///  path='items/Constructor/*'/>
@@ -17,6 +45,9 @@ namespace LJCDBMessage5
     {
       _ChangedProperties = [];
     }
+    #endregion
+
+    #region Collection Methods
 
     // Adds the property name to the list if the value has changed and it
     // is not already in the list.
@@ -73,32 +104,6 @@ namespace LJCDBMessage5
     {
       _ChangedProperties.Remove(propertyName);
     }
-
-    #region Properties
-
-    // Returns the ChangedProperties collection.
-    /// <include file='Doc/LJCChangedNames.xml'
-    ///  path='items/ChangedProperties/*'/>
-    public List<string> ChangedProperties
-    {
-      //get => _ChangedProperties.ToList();
-      get => [.. _ChangedProperties];
-    }
-
-    // Returns the changed property names string.
-    /// <include file='Doc/LJCChangedNames.xml'
-    ///  path='items/ChangedPropertyNames/*'/>
-    public string ChangedPropertyNames
-    {
-      get => string.Join(", ", ChangedProperties);
-    }
-    #endregion
-
-    #region Class Data
-
-    // Prevents duplicates automatically.
-    // Faster than List<T>.
-    private readonly HashSet<string> _ChangedProperties;
     #endregion
   }
 }

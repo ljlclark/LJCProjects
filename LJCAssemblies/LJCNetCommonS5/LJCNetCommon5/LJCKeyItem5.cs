@@ -72,8 +72,8 @@ namespace LJCNetCommon5
     /// <include path="items/DataConfigName/*" file="Doc/LJCKeyItem.xml"/>
     public string? DataConfigName
     {
-      get { return mDataConfigName; }
-      set { mDataConfigName = LJCNetString.InitString(value); }
+      get => mDataConfigName;
+      set => mDataConfigName = value?.Trim();
     }
     private string? mDataConfigName;
 
@@ -81,8 +81,8 @@ namespace LJCNetCommon5
     /// <include path="items/Description/*" file="Doc/LJCKeyItem.xml"/>
     public string? Description
     {
-      get { return mDescription; }
-      set { mDescription = LJCNetString.InitString(value); }
+      get => mDescription;
+      set => mDescription = value?.Trim();
     }
     private string? mDescription;
 
@@ -98,8 +98,8 @@ namespace LJCNetCommon5
     /// <include path="items/PrimaryKeyName/*" file="Doc/LJCKeyItem.xml"/>
     public string? PrimaryKeyName
     {
-      get { return mPrimaryKeyName; }
-      set { mPrimaryKeyName = LJCNetString.InitString(value); }
+      get => mPrimaryKeyName;
+      set => mPrimaryKeyName = value?.Trim();
     }
     private string? mPrimaryKeyName;
 
@@ -107,8 +107,8 @@ namespace LJCNetCommon5
     /// <include path="items/PropertyName/*" file="Doc/LJCKeyItem.xml"/>
     public string? PropertyName
     {
-      get { return mPropertyName; }
-      set { mPropertyName = LJCNetString.InitString(value); }
+      get => mPropertyName;
+      set => mPropertyName = value?.Trim();
     }
     private string? mPropertyName;
 
@@ -116,8 +116,8 @@ namespace LJCNetCommon5
     /// <include path="items/TableName/*" file="Doc/LJCKeyItem.xml"/>
     public string? TableName
     {
-      get { return mTableName; }
-      set { mTableName = LJCNetString.InitString(value); }
+      get => mTableName;
+      set => mTableName = value?.Trim();
     }
     private string? mTableName;
     #endregion

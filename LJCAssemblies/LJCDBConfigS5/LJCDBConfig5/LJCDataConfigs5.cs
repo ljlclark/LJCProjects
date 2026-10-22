@@ -32,6 +32,24 @@ namespace LJCDBConfig5
     }
     #endregion
 
+    #region Properties
+
+    // Gets or sets the ConnectionType name.
+    /// <include file='Doc/LJCDataConfigs.xml'
+    ///  path='members/ConnectionType/*'/>
+    public string? ConnectionType
+    {
+      get { return mConnectionType; }
+      set { mConnectionType = value?.Trim(); }
+    }
+    private string? mConnectionType;
+
+    // The configuration file path.
+    /// <include file='Doc/LJCDataConfigs.xml'
+    ///  path='members/ConfigFileSpec/*'/>
+    public string ConfigFileSpec { get; set; }
+    #endregion
+
     #region Class Data
 
     private int mPrevCount;
@@ -157,24 +175,6 @@ namespace LJCDBConfig5
         File.WriteAllText(ConfigFileSpec, dataConfigs);
       }
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the ConnectionType name.
-    /// <include file='Doc/LJCDataConfigs.xml'
-    ///  path='members/ConnectionType/*'/>
-    public string? ConnectionType
-    {
-      get { return mConnectionType; }
-      set { mConnectionType = value?.Trim(); }
-    }
-    private string? mConnectionType;
-
-    // The configuration file path.
-    /// <include file='Doc/LJCDataConfigs.xml'
-    ///  path='members/ConfigFileSpec/*'/>
-    public string ConfigFileSpec { get; set; }
     #endregion
   }
 }

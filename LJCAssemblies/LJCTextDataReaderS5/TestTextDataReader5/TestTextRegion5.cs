@@ -6,6 +6,7 @@ using LJCTextDataReader5;
 
 namespace TestTextDataReader5
 {
+  // Provides LJCTextRegion test methods.
   internal class TestTextRegion
   {
     #region Properties
@@ -14,12 +15,14 @@ namespace TestTextDataReader5
     private LJCTestCommon TestCommon { get; set; } = null!;
     #endregion
 
+    // Initializes an object instance.
     public TestTextRegion()
     {
       TestCommon = new LJCTestCommon("LJCTextRegion");
       Run();
     }
 
+    // Runs the tests.
     private void Run()
     {
       // Collection Methods
@@ -33,8 +36,7 @@ namespace TestTextDataReader5
 
     #region Collection Methods
 
-    // Creates a TextRegion from the supplied values and adds it to the
-    // collection.
+    // Creates a TextRegion from the supplied values and adds to collection.
     private void Add()
     {
       var methodName = "Add()";

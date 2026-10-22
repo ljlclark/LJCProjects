@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Methods to test LJCCSParser.
+  // Provides LJCCSParser test methods.
   internal class TestCSParser
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestCSParser.xml'
-    ///  path='members/Constructor/*'/>
     public TestCSParser()
     {
       TestCommon = new LJCTestCommon("LJCCSParser");
@@ -28,14 +26,14 @@ namespace TestNetCommon5
     // Runs the tests.
     private void Run()
     {
-      // Methods
+      // Method Test Methods
       ClassName();
       MethodName();
       PropertyName();
     }
     #endregion
 
-    #region Methods
+    #region Method Test Methods
 
     // Attempts to parse a class name.
     private void ClassName()

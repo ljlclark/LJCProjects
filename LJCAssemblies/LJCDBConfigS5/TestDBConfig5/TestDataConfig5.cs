@@ -18,8 +18,6 @@ namespace TestDBConfig5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataConfig.xml'
-    ///  path='members/Constructor/*'/>
     public TestDataConfig()
     {
       TestCommon = new LJCTestCommon("LJCDataConfig");

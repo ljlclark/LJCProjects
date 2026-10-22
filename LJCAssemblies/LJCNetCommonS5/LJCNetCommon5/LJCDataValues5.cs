@@ -598,7 +598,7 @@ namespace LJCNetCommon5
     ///  path='members/LJCDefaultFileName/*'/>
     public static string LJCDefaultFileName
     {
-      get { return "LJCDataValues.xml"; }
+      get => "LJCDataValues.xml";
     }
 
     // Gets or sets the key columns.

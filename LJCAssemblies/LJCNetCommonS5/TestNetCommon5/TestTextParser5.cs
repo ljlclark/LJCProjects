@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCTextParser test methods.
+  // Provides LJCTextParser test methods.
   internal class TestTextParser
   {
     #region Properties
@@ -20,8 +20,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestTextParser.xml'
-    ///  path='members/Constructor/*'/>
     public TestTextParser()
     {
       TestCommon = new LJCTestCommon("TestTextParser");
@@ -31,52 +29,24 @@ namespace TestNetCommon5
     // Runs the test methods.
     private void Run()
     {
-      // Delimited String Methods
-
-      // Begin delimiter only.
-      // <comment>
+      // Delimited String Test Methods
       DelimitedString1();
-
-      // Begin delimiter and text.
-      // <comment>This is a comment.
       DelimitedString2();
-
-      // Text only.
-      // This is a comment.
       DelimitedString3();
-
-      // Text and end delimiter.
-      // This is a comment.</comment>
       DelimitedString4();
-
-      // End delimiter only.
-      // </comment>
       DelimitedString5();
-
-      // Multiple delimited values.
-      // Value (One), (Two)
       DelimitedString6();
-
-      // Both delimiters.
       DelimitedString7();
-
-      // Retrieves a string including the supplied delimiters.
       StringWithDelimiters();
 
-      // Find Tag Methods
-
-      // Finds the first tag in a text value.
+      // Find Tag Test Methods
       FindTag();
-
-      // Removes a section from a text value.
       RemoveSection();
-
-      // Removes tags from a text value.
       RemoveTags();
     }
     #endregion
 
-    #region Delimited String Methods
+    #region Delimited String Test Methods
 
     // Begin delimiter only.
     private void DelimitedString1()
@@ -204,7 +174,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Find Tag Methods
+    #region Find Tag Test Methods
 
     // Finds the first tag in a text value.
     private void FindTag()

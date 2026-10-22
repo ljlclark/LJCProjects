@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Methods to test LJCArgError.
+  // Provides LJCArgError test methods.
   internal class TestArgError
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestArgError.xml'
-    ///  path='members/Constructor/*'/>
     public TestArgError()
     {
       TestCommon = new LJCTestCommon("LJCArgError");
@@ -28,16 +26,16 @@ namespace TestNetCommon5
     // Runs the tests.
     private void Run()
     {
-      // Data Class Methods
+      // Data Class Test Methods
       ToStringMethod();
 
-      // Methods
+      // Method Test Methods
       Add1();
       Add2();
     }
     #endregion
 
-    #region Data Class Methods
+    #region Data Class Test Methods
 
     private void ToStringMethod()
     {
@@ -75,7 +73,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Methods
+    #region Method Test Methods
 
     // Adds a message using the provided values.
     private void Add1()

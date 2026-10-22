@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Methods to test LJCAssemblyReflect.
+  // Provides LJCAssemblyReflect test methods.
   internal class TestAssemblyReflect
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestAssemblyReflect.xml'
-    ///  path='members/Constructor/*'/>
     public TestAssemblyReflect()
     {
       TestCommon = new LJCTestCommon("LJCAssemblyReflect");
@@ -28,18 +26,18 @@ namespace TestNetCommon5
     // Runs the tests.
     private void Run()
     {
-      // Static Methods
+      // Static Test Methods
       ParmNames();
       ParmTypeNames();
 
-      // Methods
+      // Method Test Methods
       GetFieldInfo();
       GetMethodInfo();
       ParmMethodInfo();
       ParmMethodInfosWithCount();
       ParmMethodInfoWithParms();
 
-      // Set Reflection Property Methods
+      // Set Reflection Property Test Methods
       SetAssembly();
       SetConstructorInfo();
       SetFieldInfo();
@@ -48,7 +46,7 @@ namespace TestNetCommon5
       SetPropertyInfo();
       SetTypeReference();
 
-      // Get Syntax Methods
+      // Get Syntax Test Methods
       GetConstructorSyntax();
       GetFieldSyntax();
       GetGenericTypeSyntax();
@@ -56,14 +54,14 @@ namespace TestNetCommon5
       GetPropertySyntax();
       GetTypeSyntax();
 
-      // Check Type Methods
+      // Check Type Test Methods
       IsProperty();
       IsOverride();
       IsPublic();
     }
     #endregion
 
-    #region Static Methods
+    #region Static Test Methods
 
     // Gets parm names from method info.
     private void ParmNames()
@@ -134,7 +132,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Methods
+    #region Method Test Methods
 
     // Gets a field info object.
     private void GetFieldInfo()
@@ -268,7 +266,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Set Reflection Property Methods
+    #region Set Reflection Property Test Methods
 
     // Retrieves the Assembly reference.
     private void SetAssembly()
@@ -437,7 +435,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Get Syntax Methods
+    #region Get Syntax Test Methods
 
     // Creates and returns the Constructor syntax.
     private void GetConstructorSyntax()
@@ -554,7 +552,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Check Type Methods
+    #region Check Type Test Methods
 
     // Indicates if the Method is a property getter or setter.
     private void IsProperty()

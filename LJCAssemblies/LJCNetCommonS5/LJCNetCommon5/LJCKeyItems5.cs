@@ -311,7 +311,7 @@ namespace LJCNetCommon5
     ///  path='members/Count/*'/>
     public int Count
     {
-      get { return Items.Count; }
+      get => Items.Count;
     }
 
     // Gets the item by index value.

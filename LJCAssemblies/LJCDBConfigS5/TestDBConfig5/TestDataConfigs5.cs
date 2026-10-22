@@ -6,6 +6,7 @@ using LJCNetCommon5;
 
 namespace TestDBConfig5
 {
+  // Provides LJCDataConfigs test methods.
   internal class TestDataConfigs
   {
     #region Properties
@@ -16,20 +17,20 @@ namespace TestDBConfig5
 
     #region Constructor Methods
 
-    /// <include file='Doc/TestDataConfigs.xml'
-    ///  path='members/Constructor/*'/>
+    // Initializes an object instance.
     public TestDataConfigs()
     {
       TestCommon = new LJCTestCommon("LJCDataConfigs");
       Run();
     }
 
+    // Runs the tests.
     private void Run()
     {
       // Static Methods
       DataConfig();
 
-      // Constructor Methods
+      // Constructor Test Methods
       LoadData();
 
       // Collection Methods
@@ -71,8 +72,9 @@ namespace TestDBConfig5
     }
     #endregion
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
+    // Retrieves the config data.
     private void LoadData()
     {
       var methodName = "LoadData()";

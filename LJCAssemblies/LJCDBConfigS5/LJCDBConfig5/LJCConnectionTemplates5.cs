@@ -13,6 +13,14 @@ namespace LJCDBConfig5
   [XmlRoot("LJCConnectionTemplates")]
   public class LJCConnectionTemplates : List<LJCConnectionTemplate>
   {
+    #region Properties
+
+    // The configuration file path.
+    /// <include file='Doc/LJCConnectionTemplates.xml'
+    ///  path='members/TemplateFileSpec/*'/>
+    public string? TemplateFileSpec { get; private set; }
+    #endregion
+
     #region Class Data
 
     private int mPrevCount;
@@ -159,14 +167,6 @@ namespace LJCDBConfig5
         File.WriteAllText(TemplateFileSpec, templates);
       }
     }
-    #endregion
-
-    #region Properties
-
-    // The configuration file path.
-    /// <include file='Doc/LJCConnectionTemplates.xml'
-    ///  path='members/TemplateFileSpec/*'/>
-    public string? TemplateFileSpec { get; private set; }
     #endregion
   }
 }

@@ -10,7 +10,8 @@ namespace LJCDBMessage5
   class LJCDBCommonSBS
   {
     // Gets Request columns from the baseDefinition using the propertyNames.
-    /// <include path='items/RequestColumns/*' file='Doc/DbCommon.xml'/>
+    /// <include file='Doc/DbCommon.xml'
+    ///  path='items/RequestColumns/*'/>
     public static LJCDataColumns RequestColumns(LJCDataColumns dataColumns
       , List<string>? propertyNames = null)
     {
@@ -38,7 +39,8 @@ namespace LJCDBMessage5
 
     // Gets Request Value columns from the baseDefinition using the propertyNames.
     // Similar to RequestDataKeys and RequestLookupKeys()
-    /// <include path='items/RequestDataColumns/*' file='Doc/DbCommon.xml'/>
+    /// <include file='Doc/DbCommon.xml'
+    ///  path='items/RequestDataColumns/*'/>
     public static LJCDataColumns? RequestDataColumns(object dataObject
       , LJCDataColumns baseDefinition, List<string>? propertyNames = null
       , bool includeNull = false)

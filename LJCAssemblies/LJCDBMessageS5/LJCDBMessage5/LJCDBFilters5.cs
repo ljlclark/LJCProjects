@@ -37,7 +37,7 @@ namespace LJCDBMessage5
     public static LJCDBFilters SoundexFilters(string pColumnName, string pSearchValue
       , string? lColumnName = null, string? lSearchValue = null)
     {
-      LJCDBFilters retValue = new LJCDBFilters();
+      LJCDBFilters retValue = [];
       var conditions = retValue.Add("and", "or", "SoundexFilter");
 
       string? soundex;
@@ -108,7 +108,7 @@ namespace LJCDBMessage5
     public LJCDBFilter Add(string name, LJCDBConditionSet dbConditionSet
       , LJCDBFilters? dbFilters = null, string? booleanOperator = "and")
     {
-      LJCDBFilter retValue = new LJCDBFilter()
+      LJCDBFilter retValue = new()
       {
         Name = name,
         ConditionSet = dbConditionSet,
@@ -124,7 +124,7 @@ namespace LJCDBMessage5
     ///  path='items/Clone/*'/>
     public LJCDBFilters Clone()
     {
-      LJCDBFilters retValue = new LJCDBFilters();
+      LJCDBFilters retValue = [];
       foreach (LJCDBFilter item in this)
       {
         var filter = item.Clone();

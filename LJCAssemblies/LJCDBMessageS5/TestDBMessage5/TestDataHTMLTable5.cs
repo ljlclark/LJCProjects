@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestDBMessage5
 {
-  // Methods to test LJCDataHTMLTable.
+  // Provides LJCDataHTMLTable test methods.
   internal class TestDataHTMLTable
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataHTMLTable.xml'
-    ///  path='members/Constructor/*'/>
     public TestDataHTMLTable()
     {
       TestCommon = new LJCTestCommon("LJCDataHTML");
@@ -47,6 +45,7 @@ namespace TestDBMessage5
 
     #region DataTable Methods
 
+    // Create table headings from a DataTable.
     private void DataTableHeadings()
     {
       var methodName = "DataTableHeadings()";
@@ -56,6 +55,7 @@ namespace TestDBMessage5
       TestCommon.Write($"{methodName}", result, compare);
     }
 
+    // Creates an HTML table from a DataTable.
     private void DataTableHTML()
     {
       var methodName = "DataTableHTML()";
@@ -65,6 +65,7 @@ namespace TestDBMessage5
       TestCommon.Write($"{methodName}", result, compare);
     }
 
+    // Creates table rows from a DataTable.
     private void DataTableRows()
     {
       var methodName = "DataTableRows()";
@@ -77,6 +78,7 @@ namespace TestDBMessage5
 
     #region Data Object Methods
 
+    // Create table headings from a Data Object.
     private void DataHeadings()
     {
       var methodName = "DataHeadings()";
@@ -86,6 +88,7 @@ namespace TestDBMessage5
       TestCommon.Write($"{methodName}", result, compare);
     }
 
+    // Create an HTML table from a Data Object.
     private void DataHTML()
     {
       var methodName = "DataHTML()";
@@ -95,6 +98,7 @@ namespace TestDBMessage5
       TestCommon.Write($"{methodName}", result, compare);
     }
 
+    // Create table rows from a Data Object.
     private void DataRows()
     {
       var methodName = "DataRows()";
@@ -107,6 +111,7 @@ namespace TestDBMessage5
 
     #region DbResult Methods
 
+    // Create table headings from a DbResult.
     private void ResultHeadings()
     {
       var methodName = "ResultHeadings()";
@@ -116,6 +121,7 @@ namespace TestDBMessage5
       TestCommon.Write($"{methodName}", result, compare);
     }
 
+    // Creates an HTML table from a DbResult.
     private void ResultHTML()
     {
       var methodName = "ResultHTML()";
@@ -125,6 +131,7 @@ namespace TestDBMessage5
       TestCommon.Write($"{methodName}", result, compare);
     }
 
+    // Create table rows from a DbResult.
     private void ResultRows()
     {
       var methodName = "ResultRows()";
@@ -134,6 +141,5 @@ namespace TestDBMessage5
       TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
-
   }
 }

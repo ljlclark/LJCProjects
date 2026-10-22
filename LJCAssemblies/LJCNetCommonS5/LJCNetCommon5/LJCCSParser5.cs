@@ -221,7 +221,7 @@ namespace LJCNetCommon5
             && !tokens[0].StartsWith('#'))
           {
             retName = tokens[2];
-            if (tokens[2].Trim().StartsWith("{"))
+            if (tokens[2].Trim().StartsWith('{'))
             {
               retName = tokens[1];
             }

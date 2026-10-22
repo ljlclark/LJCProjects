@@ -332,7 +332,8 @@ namespace LJCNetCommon5
           // Get next work text if available.
           if (nextIndex < workText.Length)
           {
-            var tempText = workText.Substring(nextIndex);
+            //var tempText = workText.Substring(nextIndex);
+            var tempText = workText[nextIndex..];
             workText = tempText;
             totalLength = LineLength + TextLength(workText);
           }
@@ -830,7 +831,8 @@ namespace LJCNetCommon5
     // Gets the text to add to the existing line.
     private string GetAddText(string text, int addLength)
     {
-      var retText = text.Substring(0, addLength);
+      //var retText = text.Substring(0, addLength);
+      var retText = text[..addLength];
       if (LineLength > 0
         && addLength > 0)
       {
@@ -841,7 +843,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the text length if not null.
-    private int TextLength(string text)
+    private static int TextLength(string text)
     {
       int retLength = 0;
 
@@ -907,17 +909,20 @@ namespace LJCNetCommon5
         if (retText.StartsWith(' '))
         {
           // Remove leading space.
-          retText = retText.Substring(1);
+          //retText = retText.Substring(1);
+          retText = retText[1..];
         }
       }
       else
       {
         // Get text from next section.
         var startIndex = wrapIndex;
-        var tempText = text.Substring(startIndex);
+        //var tempText = text.Substring(startIndex);
+        var tempText = text[startIndex..];
         if (tempText.StartsWith(' '))
         {
-          tempText = tempText.Substring(1);
+          //tempText = tempText.Substring(1);
+          tempText = tempText[1..];
           startIndex++;
         }
         // *** Different than TextBuilder ***
@@ -953,7 +958,7 @@ namespace LJCNetCommon5
     // Gets the indent count.
     private int IndentCount
     {
-      get { return mIndentCount; }
+      get => mIndentCount;
       set
       {
         if (value >= 0)

@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Methods to test LJCAttributes.
+  // Provides LJCAttributes test methods.
   internal class TestAttributes
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestAttributes.xml'
-    ///  path='members/Constructor/*'/>
     public TestAttributes()
     {
       TestCommon = new LJCTestCommon("LJCAttributes");

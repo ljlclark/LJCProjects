@@ -6,7 +6,7 @@ using LJCNetCommon5;
 
 namespace TestDBMessage5
 {
-  // Methods to test LJCDBRow.
+  // Provides LJCDBRow test methods.
   internal class TestDBRow
   {
     #region Properties
@@ -18,8 +18,6 @@ namespace TestDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDBRow.xml'
-    ///  path='members/Constructor/*'/>
     public TestDBRow()
     {
       TestCommon = new LJCTestCommon("LJCDBRow");

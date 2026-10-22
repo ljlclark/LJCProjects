@@ -197,7 +197,7 @@ namespace LJCNetCommon5
     /// <summary>The Collection count.</summary>
     public int Count
     {
-      get { return Items.Count; }
+      get => Items.Count;
     }
 
     /// <summary>The KeyItem items.</summary>
@@ -226,7 +226,7 @@ namespace LJCNetCommon5
     /// <summary>Gets the Default File Name.</summary>
     public static string DefaultFileName
     {
-      get { return @"Keywords\DataTypes.xml"; }
+      get => @"Keywords\DataTypes.xml";
     }
     #endregion
 

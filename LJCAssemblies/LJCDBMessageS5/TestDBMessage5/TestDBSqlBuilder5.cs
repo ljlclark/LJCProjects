@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestDBMessage5
 {
-  // Methods to test LJCDBSqlBuilder.
+  // Provides LJCDBSqlBuilder test methods.
   internal class TestDBSqlBuilder
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDBSqlBuilder.xml'
-    ///  path='members/Constructor/*'/>
     public TestDBSqlBuilder()
     {
       TestCommon = new LJCTestCommon("LJCDBSqlBuilder");
@@ -35,6 +33,7 @@ namespace TestDBMessage5
 
     #region Test Methods
 
+    // A test method placeholder.
     private void Test()
     {
       var methodName = "Test()";

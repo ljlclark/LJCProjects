@@ -5,14 +5,18 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCDataValues test methods.
+  // Provides LJCDataValues test methods.
   internal class TestDataValues
   {
+    #region Properties
+
+    // Gets or sets the TestCommon object.
+    private static LJCTestCommon? TestCommon { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataValues.xml'
-    ///  path='members/Constructor/*'/>
     public TestDataValues()
     {
       TestCommon = new LJCTestCommon("TestDataValues");
@@ -22,94 +26,41 @@ namespace TestNetCommon5
     // Runs the test methods.
     private static void Run()
     {
-      #region Static Methods
-
-      // Deserializes from the specified XML file.
+      // Static Test Methods
       LJCDeserialize();
-      #endregion
 
-      #region Collection Methods
-
-      // Creates and returns a clone of the object.
+      // Collection Test Methods
       Clone();
-
-      // Checks if the collection has items.
       HasItems();
-
-      // Gets a collection of changed columns.
       LJCChanged();
-
-      // Sets the IsChanged value to false for all elements in the collection.
       LJCClearChanged();
-
-      // Gets a list of property names from the unique keys.
       LJCKeyPropertyNames();
-
-      // Get the list of property names.
       LJCPropertyNames();
-
-      // Serializes the collection
       LJCSerialize();
-      #endregion
 
-      #region Collection Data Methods
-
-      // Creates item with Position and MaxLength and adds it to the collection.
+      // Collection Data Test Methods
       Add();
-
-      // Gets the column that matches the key columns.
-      // The column is identified by its property names and values.
       LJCGetUnique();
-
-      // Sorts on the current key columns.
       LJCSort();
-      #endregion
 
-      #region Value Methods
-
-      // Gets the column object value as a bool.
+      // Value Test Methods
       LJCGetBoolean();
-
-      // Gets the column object value as a byte.
       LJCGetByte();
-
-      // Gets the column object value as a char.
       LJCGetChar();
-
-      // Gets the column object value as a DateTime.
       LJCGetDbDateTime();
-
-      // Gets the column object value as a decimal.
       LJCGetDecimal();
-
-      // Gets the column object value as a double.
       LJCGetDouble();
-
-      // Gets the column object value as a short int.
       LJCGetInt16();
-
-      // Gets the column object value as an int.
       LJCGetInt32();
-
-      // Gets the column object value as a long int.
       LJCGetInt64();
-
-      // Gets the column object value as a single.
       LJCGetSingle();
-
-      // Gets the string value for the column with the specified name.
       LJCGetString();
-
-      // Gets the column object value as an object.
       LJCGetValue();
-
-      // Update column value.
       LJCSetValue();
-      #endregion
     }
     #endregion
 
-    #region Static Methods
+    #region Static Test Methods
 
     // Deserializes from the specified XML file.
     private static void LJCDeserialize()
@@ -137,7 +88,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Collection Methods
+    #region Collection Test Methods
 
     // Creates and returns a clone of the object.
     private static void Clone()
@@ -315,7 +266,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Collection Data Methods
+    #region Collection Data Test Methods
 
     // Creates the Object from the arguments and adds it to the collection. (R)
     private static void Add()
@@ -393,7 +344,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Value Methods
+    #region Value Test Methods
 
     // Gets the column object value as a bool.
     private static void LJCGetBoolean()
@@ -645,12 +596,6 @@ namespace TestNetCommon5
       var compare = "3.14159";
       TestCommon?.Show($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

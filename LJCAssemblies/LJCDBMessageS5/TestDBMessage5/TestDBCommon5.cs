@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestDBMessage5
 {
-  // Methods to test LJCDBCommon.
+  // Provides LJCDBCommon test methods.
   internal class TestDBCommon
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDBCommon.xml'
-    ///  path='members/Constructor/*'/>
     public TestDBCommon()
     {
       TestCommon = new LJCTestCommon("LJCDBCommon");
@@ -35,6 +33,7 @@ namespace TestDBMessage5
 
     #region Test Methods
 
+    // A test method placeholder.
     private void Test()
     {
       var methodName = "Test()";

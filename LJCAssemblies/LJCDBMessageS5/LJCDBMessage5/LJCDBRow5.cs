@@ -26,6 +26,12 @@ namespace LJCDBMessage5
     }
     #endregion
 
+    #region Properties
+
+    /// <summary>Gets or sets the row values.</summary>
+    public LJCDataValues? Values { get; set; }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -95,9 +101,6 @@ namespace LJCDBMessage5
         return retValue;
       }
     }
-
-    /// <summary>Gets or sets the row values.</summary>
-    public LJCDataValues? Values { get; set; }
     #endregion
   }
 }

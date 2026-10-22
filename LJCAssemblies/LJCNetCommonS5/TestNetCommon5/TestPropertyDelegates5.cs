@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCPropertyDelegate test methods.
+  // Provides LJCPropertyDelegate test methods.
   internal class TestPropertyDelegates
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestPropertyDelegates.xml'
-    ///  path='members/Constructor/*'/>
     public TestPropertyDelegates()
     {
       TestCommon = new LJCTestCommon("TestPropertyDelegates");
@@ -28,14 +26,14 @@ namespace TestNetCommon5
     // Runs the test methods.
     private void Run()
     {
-      // Collection Methods
+      // Collection Test Methods
       Add();
-
       LJCSearchName();
       LJCCreateDelegate();
     }
     #endregion
-    #region Collection Methods
+
+    #region Collection Test Methods
 
     // Creates and adds a PropertyDelegate object to the collection.
     private void Add()

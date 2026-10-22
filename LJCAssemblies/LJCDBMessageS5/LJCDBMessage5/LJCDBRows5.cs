@@ -31,6 +31,15 @@ namespace LJCDBMessage5
     }
     #endregion
 
+    #region Properties
+
+    /// <summary>Gets the Default File Name.</summary>
+    public static string LJCDefaultFileName
+    {
+      get => "DbRows.xml";
+    }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -119,15 +128,6 @@ namespace LJCDBMessage5
         fileSpec = LJCDefaultFileName;
       }
       LJC.XmlSerialize(GetType(), this, null, fileSpec);
-    }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets the Default File Name.</summary>
-    public static string LJCDefaultFileName
-    {
-      get { return "DbRows.xml"; }
     }
     #endregion
   }

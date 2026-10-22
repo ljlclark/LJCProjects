@@ -6,7 +6,7 @@ using LJCNetCommon5;
 
 namespace TestDBMessage5
 {
-  // Methods to test LJCDBCommon.
+  // Provides LJCDBCommon test methods.
   internal class TestDBFilter
   {
     #region Properties
@@ -18,8 +18,6 @@ namespace TestDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDBFilter.xml'
-    ///  path='members/Constructor/*'/>
     public TestDBFilter()
     {
       TestCommon = new LJCTestCommon("LJCDBFilter");

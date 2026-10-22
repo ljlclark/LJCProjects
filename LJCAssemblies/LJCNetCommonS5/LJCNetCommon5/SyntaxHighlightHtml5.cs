@@ -57,13 +57,13 @@ namespace LJCNetCommon5
     // Gets the BeginComment span.
     private static string BeginCommentSpan
     {
-      get { return Span("comment", null, false); }
+      get => Span("comment", null, false);
     }
 
     // Gets the BeginXmlComment span.
     private static string BeginXmlCommentSpan
     {
-      get { return Span("xmlComment", null, false); }
+      get => Span("xmlComment", null, false);
     }
 
     // Gets or sets the Allow Debug Breaks value.

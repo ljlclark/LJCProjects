@@ -148,12 +148,22 @@ namespace LJCDBMessage5
     }
     #endregion
 
+    #region Class Data
+
+    private readonly LJCDBRequest mDbRequest = null!;
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
+    public LJCDBSqlBuilder()
+    {
+    }
+
+    // Initializes an object instance with the supplied values.
     /// <include file='Doc/DbSqlBuilder.xml'
     ///  path='items/DbSqlBuilderC/*'/>
-    public LJCDBSqlBuilder(LJCDBRequest dbRequest)
+    public LJCDBSqlBuilder(LJCDBRequest dbRequest) : this()
     {
       mDbRequest = dbRequest;
     }
@@ -670,7 +680,5 @@ namespace LJCDBMessage5
       return retValue;
     }
     #endregion
-
-    private readonly LJCDBRequest mDbRequest;
   }
 }

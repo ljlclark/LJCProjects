@@ -209,7 +209,7 @@ namespace LJCNetCommon5
     /// <summary>Gets or sets the secret key size in bits.</summary>
     public int KeySize
     {
-      get { return mAlgorithm.KeySize; }
+      get => mAlgorithm.KeySize;
       set
       {
         if (IsValidKeySize(value))
@@ -224,7 +224,7 @@ namespace LJCNetCommon5
     /// <include path='items/LegalKeySizes/*' file='Doc/LJCCryptography.xml'/>
     public KeySizes[] LegalKeySizes
     {
-      get { return mAlgorithm.LegalKeySizes; }
+      get => mAlgorithm.LegalKeySizes;
     }
 
     /// <summary>Gets or sets the encryption type.</summary>

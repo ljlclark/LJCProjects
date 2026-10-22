@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestDBMessage5
 {
-  // Methods to test LJCDBCommon.
+  // Provides LJCDBConditionSet test methods.
   internal class TestDBConditionSet
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDBConditionSet.xml'
-    ///  path='members/Constructor/*'/>
     public TestDBConditionSet()
     {
       TestCommon = new LJCTestCommon("LJCDBConditionSet");

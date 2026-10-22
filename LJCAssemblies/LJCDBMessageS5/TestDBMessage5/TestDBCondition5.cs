@@ -6,7 +6,7 @@ using LJCNetCommon5;
 
 namespace TestDBMessage5
 {
-  // Methods to test LJCDBCommon.
+  // Provides LJCDBCondition test methods.
   internal class TestDBCondition
   {
     #region Properties
@@ -18,8 +18,6 @@ namespace TestDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDBCondition.xml'
-    ///  path='members/Constructor/*'/>
     public TestDBCondition()
     {
       TestCommon = new LJCTestCommon("LJCDBCondition");
@@ -37,7 +35,7 @@ namespace TestDBMessage5
     }
     #endregion
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
     // The Copy constructor.
     private void ConstructorCopy()

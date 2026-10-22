@@ -56,36 +56,24 @@ namespace LJCDBMessage5
     /// <summary>The Boolean Operator value.</summary>
     public string BooleanOperator
     {
-      get { return mBooleanOperator; }
-      set
-      {
-        if (value != null)
-        {
-          mBooleanOperator = value;
-        }
-      }
+      get => mBooleanOperator;
+      set => mBooleanOperator = value;
     }
     private string mBooleanOperator;
 
     /// <summary>The 'From' column name.</summary>
     public string? FromColumnName
     {
-      get { return mFromColumnName; }
-      set { mFromColumnName = LJCNetString.InitString(value); }
+      get => mFromColumnName;
+      set => mFromColumnName = value?.Trim();
     }
     private string? mFromColumnName;
 
     /// <summary>The Join On Operator.</summary>
     public string JoinOnOperator
     {
-      get { return mJoinOnOperator; }
-      set
-      {
-        if (value != null)
-        {
-          mJoinOnOperator = value;
-        }
-      }
+      get => mJoinOnOperator;
+      set => mJoinOnOperator = value;
     }
     private string mJoinOnOperator;
 
@@ -95,8 +83,8 @@ namespace LJCDBMessage5
     /// <summary>The 'To' column name.</summary>
     public string? ToColumnName
     {
-      get { return mToColumnName; }
-      set { mToColumnName = LJCNetString.InitString(value); }
+      get => mToColumnName;
+      set => mToColumnName = value?.Trim();
     }
     private string? mToColumnName;
     #endregion

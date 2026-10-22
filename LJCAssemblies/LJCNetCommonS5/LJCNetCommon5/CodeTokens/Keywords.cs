@@ -153,7 +153,7 @@ namespace LJCNetCommon5
     /// <summary>The Collection count.</summary>
     public int Count
     {
-      get { return Items.Count; }
+      get => Items.Count;
     }
 
     // Gets the Collection Enumerator.
@@ -224,7 +224,7 @@ namespace LJCNetCommon5
     /// <summary>Gets the Default File Name.</summary>
     public static string DefaultFileName
     {
-      get { return @"Keywords\Keywords.xml"; }
+      get => @"Keywords\Keywords.xml";
     }
     #endregion
 

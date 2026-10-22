@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestDBMessage5
 {
-  // Methods to test LJCDBRows.
+  // Provides LJCDBRows test methods.
   internal class TestDBRows
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDBRows.xml'
-    ///  path='members/Constructor/*'/>
     public TestDBRows()
     {
       TestCommon = new LJCTestCommon("LJCDBRows");
@@ -31,7 +29,7 @@ namespace TestDBMessage5
       // Static Methods
       LJCDeserialize();
 
-      // Constructor Methods
+      // Constructor Test Methods
       ConstructorCopy();
 
       // Collection Methods
@@ -55,7 +53,7 @@ namespace TestDBMessage5
     }
     #endregion
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
     // The Copy constructor.
     private void ConstructorCopy()

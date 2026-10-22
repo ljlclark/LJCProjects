@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCPropertyDelegate test methods.
+  // Provides LJCPropertyDelegate test methods.
   internal class TestPropertyDelegate
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestPropertyDelegate.xml'
-    ///  path='members/Constructor/*'/>
     public TestPropertyDelegate()
     {
       TestCommon = new LJCTestCommon("TestPropertyDelegate");
@@ -28,9 +26,14 @@ namespace TestNetCommon5
     // Runs the test methods.
     private void Run()
     {
+      // Test Methods
       Test();
     }
+    #endregion
 
+    #region Test Methods
+
+    // A test method placeholder.
     private void Test()
     {
       var methodName = "Test()";

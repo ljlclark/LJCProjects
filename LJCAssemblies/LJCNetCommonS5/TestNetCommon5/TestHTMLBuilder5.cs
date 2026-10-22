@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCHTMLBuilder test methods.
+  // Provides LJCHTMLBuilder test methods.
   internal class TestHTMLBuilder
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestHTMLBuilder.xml'
-    ///  path='members/Constructor/*'/>
     public TestHTMLBuilder()
     {
       TestCommon = new LJCTestCommon("TestHTMLBuilder");
@@ -28,10 +26,10 @@ namespace TestNetCommon5
     // Runs the test methods.
     private void Run()
     {
-      // Data Class Methods
+      // Data Class Test Methods
       ToStringMethod();
 
-      // Methods
+      // Methods Test Methods
       AddChildIndent();
       AddIndent();
       EndsWithNewLine();
@@ -39,13 +37,13 @@ namespace TestNetCommon5
       IndentLength();
       StartsWithNewLine();
 
-      // Text Methods
+      // Text Methods Test Methods
       AddLine();
       AddText();
       Line();
       Text();
 
-      // Get Text Methods
+      // Get Text Methods Test Methods
       GetAttribs();
       GetIndented();
       GetIndentedString();
@@ -53,18 +51,18 @@ namespace TestNetCommon5
       GetText();
       GetWrapped();
 
-      // Element Methods
+      // Element Methods Test Methods
       Begin();
       Create();
       End();
 
-      // Get Element Methods
+      // Get Element Methods Test Methods
       GetBegin();
       GetBeginSelector();
       GetCreate();
       GetEnd();
 
-      // Create Element Methods
+      // Create Element Methods Test Methods
       Link();
       Meta();
       Metas();
@@ -74,13 +72,13 @@ namespace TestNetCommon5
       GetMetas();
       GetScript();
 
-      // HTML Methods
+      // HTML Methods Test Methods
       HTMLBegin();
       GetHTMLBegin();
       GetHTMLEnd();
       GetHTMLHead();
 
-      // Get Attribs Methods
+      // Get Attribs Methods Test Methods
       Attribs();
       StartAttribs();
       StartXMLAttribs();
@@ -88,7 +86,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Data Class Methods
+    #region Data Class Test Methods
 
     // Retrieves the object text.
     private void ToStringMethod()
@@ -99,7 +97,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Methods
+    #region Methods Test Methods
 
     // Adds the new (child) indents.
     // Use AddChildIndent after beginning an element.
@@ -151,7 +149,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Text Methods
+    #region Text Methods Test Methods
 
     // Adds a text line without modification.
     private void AddLine()
@@ -186,7 +184,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Get Text Methods
+    #region Get Text Methods Test Methods
 
     // Gets the attributes text.
     private void GetAttribs()
@@ -237,7 +235,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Element Methods
+    #region Element Methods Test Methods
 
     // Appends the element begin tag.
     private void Begin()
@@ -264,7 +262,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Get Element Methods
+    #region Get Element Methods Test Methods
 
     // Gets the element begin tag.
     private void GetBegin()
@@ -299,7 +297,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Create Element Methods
+    #region Create Element Methods Test Methods
 
     // Appends a <link> element for a style sheet.
     private void Link()
@@ -366,7 +364,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region HTML Methods
+    #region HTML Methods Test Methods
 
     // Creates the HTML beginning up to and including <head>.
     private void HTMLBegin()
@@ -401,7 +399,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Get Attribs Methods
+    #region Get Attribs Methods Test Methods
 
     // Gets common element attributes.
     private void Attribs()

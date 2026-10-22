@@ -526,7 +526,7 @@ namespace LJCNetCommon5
     ///  path='members/IndentCount/*'/>
     public int IndentCount
     {
-      get { return mIndentCount; }
+      get => mIndentCount;
       set
       {
         if (value >= 0)

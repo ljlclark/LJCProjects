@@ -26,7 +26,7 @@ namespace LJCNetCommon5
     ///  path='members/IndentCount/*'/>
     public int IndentCount
     {
-      get { return mIndentCount; }
+      get => mIndentCount;
       set
       {
         mIndentCount = 0;
@@ -43,7 +43,7 @@ namespace LJCNetCommon5
     ///  path='members/ChildIndentCount/*'/>
     public int ChildIndentCount
     {
-      get { return mChildIndentCount; }
+      get => mChildIndentCount;
       set
       {
         mChildIndentCount = 0;

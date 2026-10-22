@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCReflect test methods.
+  // Provides LJCReflect test methods.
   internal class TestReflect
   {
     #region Properties
@@ -18,8 +18,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestReflect.xml'
-    ///  path='members/Constructor/*'/>
     public TestReflect()
     {
       TestCommon = new LJCTestCommon("TestReflect");
@@ -29,17 +27,17 @@ namespace TestNetCommon5
     // Runs the test methods.
     private void Run()
     {
-      // Constructor Methods
+      // Constructor Test Methods
       Constructor();
       SetSource();
 
-      // Methods
+      // Method Test Methods
       GetPropertyInfo();
       GetPropertyNames();
       GetPropertyType();
       HasProperty();
 
-      // Value Methods
+      // Value Test Methods
       GetBoolean();
       GetByte();
       GetChar();
@@ -55,13 +53,13 @@ namespace TestNetCommon5
       GetValue();
       GetValueReflect();
 
-      // Set Methods
+      // Set Test Methods
       SetPropertyValue();
       SetValue();
     }
     #endregion
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
     // Instantiates an instance of the class.
     private void Constructor()
@@ -97,7 +95,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Methods
+    #region Method Test Methods
 
     // Gets the cached PropertyInfo value.
     private void GetPropertyInfo()
@@ -162,7 +160,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Value Methods
+    #region Value Test Methods
 
     // Gets the property value as a boolean.
     private void GetBoolean()
@@ -379,7 +377,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Set Methods
+    #region Set Test Methods
 
     // Sets the property value based on value type.
     private void SetPropertyValue()

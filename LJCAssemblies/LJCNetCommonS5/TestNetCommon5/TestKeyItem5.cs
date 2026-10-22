@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCKeyItem test methods.
+  // Provides LJCKeyItem test methods.
   internal class TestKeyItem
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestKeyItem.xml'
-    ///  path='members/Constructor/*'/>
     public TestKeyItem()
     {
       TestCommon = new LJCTestCommon("TestKeyItem");
@@ -28,19 +26,19 @@ namespace TestNetCommon5
     // Runs the test methods.
     private void Run()
     {
-      // Constructor Methods
+      // Constructor Test Methods
       ParmConstructor();
 
-      // Data Methods
+      // Data Test Methods
       Clone();
       ToStringMethod();
 
-      // Search and Sort Methods
+      // Search and Sort Test Methods
       CompareTo();
     }
     #endregion
 
-    #region Constructor Methods
+    #region Constructor Test Methods
 
     // Initializes an object instance.
     private void ParmConstructor()
@@ -54,7 +52,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Data Methods
+    #region Data Test Methods
 
     // Creates and returns a clone of this object.
     private void Clone()
@@ -78,7 +76,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Search and Sort Methods
+    #region Search and Sort Test Methods
 
     // Provides the default Sort functionality.
     private void CompareTo()

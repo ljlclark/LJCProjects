@@ -53,7 +53,7 @@ namespace LJCDBMessage5
     public string? BooleanOperator
     {
       get => mBooleanOperator;
-      set => mBooleanOperator = LJCNetString.InitString(value);
+      set => mBooleanOperator = value?.Trim();
     }
     private string? mBooleanOperator;
 

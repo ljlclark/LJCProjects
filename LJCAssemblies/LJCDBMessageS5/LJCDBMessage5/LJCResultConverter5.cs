@@ -160,7 +160,7 @@ namespace LJCDBMessage5
     #endregion
 
     // Gets the property name.
-    private string GetPropertyName(LJCDataColumns? propertyMapping, string columnName)
+    private static string GetPropertyName(LJCDataColumns? propertyMapping, string columnName)
     {
       // Similar logic in LJCDBMessage.DbResult.GetRowValues().
       LJCDataColumn? dataColumn;

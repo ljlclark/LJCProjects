@@ -6,7 +6,7 @@ using LJCNetCommon5;
 
 namespace TestDBMessage5
 {
-  // Methods to test LJCDBCommon.
+  // Provides LJCDBCommon test methods.
   internal class TestDBJoinOn
   {
     #region Properties
@@ -18,8 +18,6 @@ namespace TestDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDBJoinOn.xml'
-    ///  path='members/Constructor/*'/>
     public TestDBJoinOn()
     {
       TestCommon = new LJCTestCommon("LJCDBJoinOn");
@@ -29,7 +27,7 @@ namespace TestDBMessage5
     // Runs the tests.
     private void Run()
     {
-      // Constructor Methods
+      // Constructor Test Methods
       ConstructorCopy();
 
       // Collection Methods

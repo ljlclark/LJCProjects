@@ -9,6 +9,11 @@ namespace LJCDBMessage5
   /// <summary>Methods to set data in HTML elements.</summary>
   public class LJCDataHTMLTable
   {
+    #region Class Data
+
+    private const bool NoIndent = false;
+    #endregion
+
     #region Static DataTable Methods
 
     // Create table headings from a DataTable.
@@ -337,11 +342,6 @@ namespace LJCDBMessage5
       }
       return retValue;
     }
-    #endregion
-
-    #region Class Data
-
-    private const bool NoIndent = false;
     #endregion
   }
 }

@@ -6,7 +6,7 @@ using LJCNetCommon5;
 
 namespace TestDBConfig5
 {
-  // Provides the LJCConnectionTemplates test methods.
+  // Provides LJCConnectionTemplates test methods.
   internal class TestConnectionTemplates
   {
     #region Properties
@@ -18,8 +18,6 @@ namespace TestDBConfig5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataTemplates.xml'
-    ///  path='members/Constructor/*'/>
     public TestConnectionTemplates()
     {
       TestCommon = new LJCTestCommon("LJCConnectionTemplates");

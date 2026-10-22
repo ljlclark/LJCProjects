@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TestDBJoins5.cs
-using LJCDBMessage5;
 using LJCNetCommon5;
 
 namespace TestDBMessage5
 {
-  // Methods to test LJCDBCommon.
+  // Provides LJCDBCommon test methods.
   internal class TestDBJoins
   {
     #region Properties
@@ -18,8 +17,6 @@ namespace TestDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDBJoins.xml'
-    ///  path='members/Constructor/*'/>
     public TestDBJoins()
     {
       TestCommon = new LJCTestCommon("LJCDBJoins");
@@ -29,7 +26,7 @@ namespace TestDBMessage5
     // Runs the tests.
     private void Run()
     {
-      // Constructor Methods
+      // Constructor Test Methods
       ConstructorCopy();
 
       // Collection Methods

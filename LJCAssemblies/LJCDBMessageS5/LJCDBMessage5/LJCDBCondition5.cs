@@ -46,7 +46,7 @@ namespace LJCDBMessage5
     public string? ComparisonOperator
     {
       get => mComparisonOperator;
-      set => mComparisonOperator = LJCNetString.InitString(value);
+      set => mComparisonOperator = value?.Trim();
     }
     private string? mComparisonOperator;
 
@@ -54,7 +54,7 @@ namespace LJCDBMessage5
     public string? FirstValue
     {
       get => mFirstValue;
-      set => mFirstValue = LJCNetString.InitString(value);
+      set => mFirstValue = value?.Trim();
     }
     private string? mFirstValue;
 
@@ -62,7 +62,7 @@ namespace LJCDBMessage5
     public string? SecondValue
     {
       get => mSecondValue;
-      set => mSecondValue = LJCNetString.InitString(value);
+      set => mSecondValue = value?.Trim();
     }
     private string? mSecondValue;
     #endregion

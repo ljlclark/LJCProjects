@@ -517,8 +517,6 @@ namespace LJCDBDataAccess5
     }
 
     // Creates the result object with common values.
-    /// <include file='Doc/DbDataAccess.xml'
-    ///  path='items/CreateResult/*'/>
     private LJCDBResult CreateResult(LJCDBRequest dbRequest)
     {
       LJCDBResult retValue;
@@ -699,20 +697,21 @@ namespace LJCDBDataAccess5
     public string? DatabaseName
     {
       get => mDatabaseName;
-      set { mDatabaseName = LJCNetString.InitString(value); }
+      set { mDatabaseName = value?.Trim(); }
     }
     private string? mDatabaseName;
 
     /// <summary>Gets or sets the DBRequest object.</summary>
     public LJCDBRequest? DBRequest
     {
-      get { return mDBRequest; }
+      get => mDBRequest;
       set
       {
+        mDBRequest = value;
+        mDbSqlBuilder = null;
         if (value != null)
         {
-          mDBRequest = value;
-          mDbSqlBuilder = new LJCDBSqlBuilder(mDBRequest);
+          mDbSqlBuilder = new LJCDBSqlBuilder(value);
         }
       }
     }
@@ -733,13 +732,11 @@ namespace LJCDBDataAccess5
       get => mConnectionString;
       set
       {
+        mConnectionString = value?.Trim();
+        mDataAccess.ConnectionString = value;
         if (LJC.HasText(value))
         {
-          if (value != null)
-          {
-            mConnectionString = value.Trim();
-            mDataAccess.ConnectionString = mConnectionString;
-          }
+          mDataAccess.ConnectionString = value;
         }
       }
     }
@@ -751,10 +748,11 @@ namespace LJCDBDataAccess5
       get => mProviderName;
       set
       {
+        mProviderName = value?.Trim();
+        mDataAccess.ProviderName = value;
         if (LJC.HasText(value))
         {
-          mProviderName = value.Trim();
-          mDataAccess.ProviderName = mProviderName;
+          mDataAccess.ProviderName = value;
         }
       }
     }

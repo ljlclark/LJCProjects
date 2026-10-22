@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestDBMessage5
 {
-  // Methods to test LJCResultConverter.
+  // Povides LJCResultConverter test methods.
   internal class TestResultConverter
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestResultConverter.xml'
-    ///  path='members/Constructor/*'/>
     public TestResultConverter()
     {
       TestCommon = new LJCTestCommon("LJCResultConverter");
@@ -35,6 +33,7 @@ namespace TestDBMessage5
 
     #region Test Methods
 
+    // A test method placeholder.
     private void Test()
     {
       var methodName = "Test()";

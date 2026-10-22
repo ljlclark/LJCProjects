@@ -46,12 +46,11 @@ namespace LJCDBMessage5
     }
 
     // Sets condition set initial values.
-    private LJCDBConditionSet InitConditionSet()
+    private static LJCDBConditionSet InitConditionSet()
     {
       var retValue = new LJCDBConditionSet
       {
         BooleanOperator = "and",
-        //Conditions = new DbConditions() { }
         Conditions = []
       };
       return retValue;
@@ -88,7 +87,7 @@ namespace LJCDBMessage5
     public string? BooleanOperator
     {
       get => mBooleanOperator;
-      set => mBooleanOperator = LJCNetString.InitString(value);
+      set => mBooleanOperator = value?.Trim();
     }
     private string? mBooleanOperator;
 
@@ -102,7 +101,7 @@ namespace LJCDBMessage5
     public string? Name
     {
       get => mName;
-      set => mName = LJCNetString.InitString(value);
+      set => mName = value?.Trim();
     }
     private string? mName;
     #endregion

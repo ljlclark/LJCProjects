@@ -14,12 +14,14 @@ namespace TestTextDataReader5
     private LJCTestCommon TestCommon { get; set; } = null!;
     #endregion
 
+    // Initializes an object instance.
     public TestTextDataReader()
     {
       TestCommon = new LJCTestCommon("LJCTextDataReader");
       Run();
     }
 
+    // Runs the tests.
     private void Run()
     {
       // IDataReader Methods
@@ -914,10 +916,13 @@ namespace TestTextDataReader5
     // The test Data Object.
     private class Test()
     {
+      /// <summary>Gets or sets the Name.</summary>
       public string? Name { get; set; }
 
+      /// <summary>Gets or sets the ID.</summary>
       public long ID { get; set; }
 
+      /// <summary>Gets or sets the Value.</summary>
       public decimal Value { get; set; }
     }
   }

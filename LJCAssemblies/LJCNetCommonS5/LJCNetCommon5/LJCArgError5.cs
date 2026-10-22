@@ -121,12 +121,12 @@ namespace LJCNetCommon5
     /// <parentGroup>properties</parentGroup>
     public string? MethodName
     {
-      get { return mMethodName; }
+      get => mMethodName;
       set
       {
-        if (value != null)
+        mMethodName = value?.Trim();
+        if (LJC.HasText(value))
         {
-          mMethodName = value;
           mMessage = "";
         }
       }

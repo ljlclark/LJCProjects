@@ -1235,7 +1235,7 @@ namespace LJCTextDataReader5
     /// <summary>Currently returns 0.</summary>
     public int Depth
     {
-      get { return 0; }
+      get => 0;
     }
 
     /// <summary>Indicates if the reader is closed.</summary>
@@ -1244,7 +1244,7 @@ namespace LJCTextDataReader5
     /// <summary>Currently returns -1.</summary>
     public int RecordsAffected
     {
-      get { return -1; }
+      get => -1;
     }
     #endregion
 
@@ -1313,7 +1313,7 @@ namespace LJCTextDataReader5
     /// <summary>Gets or sets the field delimiter.</summary>
     public char LJCFieldDelimiter
     {
-      get { return mFieldDelimiter; }
+      get => mFieldDelimiter;
       set
       {
         if (value != '\0')

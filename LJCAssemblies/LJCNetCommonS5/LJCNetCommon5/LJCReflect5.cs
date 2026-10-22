@@ -76,7 +76,7 @@ namespace LJCNetCommon5
     ///  path='members/GetPropertyType/*'/>
     public Type? GetPropertyType(string propertyName)
     {
-      Type retVal = null;
+      Type retVal;
 
       var info = GetPropertyInfo(propertyName);
       retVal = info?.PropertyType;
@@ -285,7 +285,7 @@ namespace LJCNetCommon5
     ///  path='members/GetString/*'/>
     public string? GetString(string propertyName)
     {
-      string retVal = null;
+      string retVal;
 
       var value = GetValue(propertyName);
       retVal = value?.ToString();

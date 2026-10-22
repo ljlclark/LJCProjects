@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCKeyItems test methods.
+  // Provides LJCKeyItems test methods.
   internal class TestKeyItems
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestKeyItems.xml'
-    ///  path='members/Constructor/*'/>
     public TestKeyItems()
     {
       TestCommon = new LJCTestCommon("TestKeyItems");
@@ -28,37 +26,37 @@ namespace TestNetCommon5
     // Runs the test methods.
     private void Run()
     {
-      // Static Methods
+      // Static Test Methods
       GetCollection();
       HasItems1();
 
-      // Collection Methods
+      // Collection Test Methods
       Add1();
       Add2();
       Append();
       Clone();
       HasItems2();
 
-      // Other Methods
+      // Other Test Methods
       GetDescription();
       GetIndex();
       GetItem();
       GetItems();
 
-      // Search and Sort Methods
+      // Search and Sort Test Methods
       SearchPropertyName();
       SortPropertyName();
 
-      // IEnumerable Methods
+      // IEnumerable Test Methods
       GetEnumerator();
 
-      // IEnumerable Properties
+      // IEnumerable Property Test Methods
       Count();
       Indexer();
     }
     #endregion
 
-    #region Static Methods
+    #region Static Test Methods
 
     // Get custom collection from List<T>.
     private void GetCollection()
@@ -100,7 +98,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Collection Methods
+    #region Collection Test Methods
 
     // Adds the specified object.
     private void Add1()
@@ -191,7 +189,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Other Methods
+    #region Other Test Methods
 
     // Gets the Item Description with Value as index within PropertyName.
     private void GetDescription()
@@ -266,7 +264,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Search and Sort Methods
+    #region Search and Sort Test Methods
 
     // Retrieve the collection element.
     private void SearchPropertyName()
@@ -305,7 +303,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region IEnumerable Methods
+    #region IEnumerable Test Methods
 
     // Gets the Collection Enumerator.
     private void GetEnumerator()
@@ -328,7 +326,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region IEnumerable Properties
+    #region IEnumerable Property Test Methods
 
     // The Collection count.
     private void Count()

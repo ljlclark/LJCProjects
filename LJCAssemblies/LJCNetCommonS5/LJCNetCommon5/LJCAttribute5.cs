@@ -29,8 +29,8 @@ namespace LJCNetCommon5
     /// <parentGroup>properties</parentGroup>
     public string? Name
     {
-      get { return mName; }
-      set { mName = LJCNetString.InitString(value); }
+      get => mName;
+      set { mName = value?.Trim(); }
     }
     private string? mName;
 
@@ -39,8 +39,8 @@ namespace LJCNetCommon5
     /// <parentGroup>properties</parentGroup>
     public string? Value
     {
-      get { return mValue; }
-      set { mValue = LJCNetString.InitString(value); }
+      get => mValue;
+      set { mValue = value?.Trim(); }
     }
     private string? mValue;
     #endregion

@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCDataColumns test methods.
+  // Provides LJCDataColumns test methods.
   internal class TestDataColumns
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataColumns.xml'
-    ///  path='members/Constructor/*'/>
     public TestDataColumns()
     {
       TestCommon = new LJCTestCommon("LJCDataColumns");
@@ -28,143 +26,59 @@ namespace TestNetCommon5
     // Runs the tests.
     private void Run()
     {
-      #region Static Methods
-
-      // Deserializes from the specified XML file.
+      // Static Test Methods
       LJCDeserialize();
-
-      // Creates LJCDataColumns from a Data Object.
       LJCObjectColumns();
-
-      // Gets a collection of items from a data object that match the supplied
-      // property Names.
       LJCObjectColumnsInList();
-
-      // Creates a PropertyNames list from a DataObject.
       LJCObjectPropertyNames();
-
-      // Creates an LJCDataValues object from an LJCDataColumns object.
       DataColumnsToDataValues();
-      #endregion
 
-      #region Collection Methods
-
-      // Creates and returns a clone of the object.
+      // Collection Test Methods
       Clone();
-
-      // Checks if the collection has items.
       HasItems();
-
-      // Gets a collection of changed columns.
       LJCChanged();
-
-      // Sets the IsChanged value to false for all elements in the collection.
       LJCClearChanged();
-
-      // Returns a set of columns that match the supplied list.
       LJCColumns();
-
-      // Gets a list of property names from the unique keys.
       LJCKeyPropertyNames();
-
-      // Get the list of property names.
       LJCPropertyNames();
-
-      // Serializes the collection
       LJCSerialize();
-      #endregion
 
-      #region Collection Data Methods
-
-      // Adds the supplied item to the collection
+      // Collection Data Test Methods
       Add1();
-
-      // Creates item with Position and MaxLength and adds it to the collection.
       Add2();
-
-      // Creates item with Value and adds it to the collection.
       Add3();
-
-      // Gets the column that matches the key columns.
-      // The column is identified by its property names and values.
       LJCGetUnique();
-
-      // Removes the item with the supplied property name.
       LJCRemove();
-
-      // Add or Update.
       LJCSetData();
-
-      // Sorts on the current key columns.
       LJCSort();
-      #endregion
 
-      #region Other Methods
-
-      // Sets the caption properties.
+      // Other Test Methods
       LJCSetColumnCaptions();
-
-      // Maps the column property and rename values.
       LJCMapNames();
-      #endregion
 
-      #region Get Unique Examples
-
-      // Finds and returns the object that matches the supplied values.
+      // Get Unique Examples
       UniqueColumnName();
-
-      // Finds and returns the column that contains the supplied property name.
       UniquePropertyName();
-
-      // Sort on AddOrderIndex.
       UniqueAddOrderIndex();
-      #endregion
 
-      #region Value Methods
-
-      // Gets the column object value as a bool.
+      // Value Test Methods
       LJCGetBoolean();
-
-      // Gets the column object value as a byte.
       LJCGetByte();
-
-      // Gets the column object value as a char.
       LJCGetChar();
-
-      // Gets the column object value as a DateTime.
       LJCGetDbDateTime();
-
-      // Gets the column object value as a decimal.
       LJCGetDecimal();
-
-      // Gets the column object value as a double.
       LJCGetDouble();
-
-      // Gets the column object value as a short int.
       LJCGetInt16();
-
-      // Gets the column object value as an int.
       LJCGetInt32();
-
-      // Gets the column object value as a long int.
       LJCGetInt64();
-
-      // Gets the column object value as an object.
       LJCGetValue();
-
-      // Gets the column object value as a single.
       LJCGetSingle();
-
-      // Gets the string value for the column with the specified name.
       LJCGetString();
-
-      // Update column value.
       LJCSetValue();
-      #endregion
     }
     #endregion
 
-    #region Static Methods
+    #region Static Test Methods
 
     // Deserializes from the specified XML file.
     private void LJCDeserialize()
@@ -269,7 +183,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Collection Methods
+    #region Collection Test Methods
 
     // Creates and returns a clone of the object.
     private void Clone()
@@ -479,7 +393,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Collection Data Methods
+    #region Collection Data Test Methods
 
     // Adds the object element to the collection
     private void Add1()
@@ -666,7 +580,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Other Methods
+    #region Other Test Methods
 
     // Sets the caption properties.
     private void LJCSetColumnCaptions()
@@ -808,7 +722,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Value Methods
+    #region Value Test Methods
 
     // Gets the column object value as a bool.
     private void LJCGetBoolean()

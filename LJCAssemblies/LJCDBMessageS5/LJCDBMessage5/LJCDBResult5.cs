@@ -514,14 +514,14 @@ namespace LJCDBMessage5
     /// <summary>Gets the Default File Name.</summary>
     public static string LJCDefaultFileName
     {
-      get { return "DbResult.xml"; }
+      get => "DbResult.xml";
     }
 
     /// <summary>Gets or sets the executed SQL statement.</summary>
     public string? ExecutedSql
     {
       get => mExecutedSql;
-      set => mExecutedSql = LJCNetString.InitString(value);
+      set => mExecutedSql = value?.Trim();
     }
     private string? mExecutedSql;
 
@@ -529,7 +529,7 @@ namespace LJCDBMessage5
     public string? ProcedureName
     {
       get => mProcedureName;
-      set => mProcedureName = LJCNetString.InitString(value);
+      set => mProcedureName = value?.Trim();
     }
     private string? mProcedureName;
 
@@ -537,13 +537,7 @@ namespace LJCDBMessage5
     public string RequestTypeName
     {
       get => mRequestTypeName;
-      set
-      {
-        if (value != null)
-        {
-          mRequestTypeName = value.Trim();
-        }
-      }
+      set => mRequestTypeName = value.Trim();
     }
     private string mRequestTypeName;
 
@@ -555,7 +549,7 @@ namespace LJCDBMessage5
     public string? SchemaName
     {
       get => mSchemaName;
-      set => mSchemaName = LJCNetString.InitString(value);
+      set => mSchemaName = value?.Trim();
     }
     private string? mSchemaName;
 
@@ -563,7 +557,7 @@ namespace LJCDBMessage5
     public string? TableName
     {
       get => mTableName;
-      set => mTableName = LJCNetString.InitString(value);
+      set => mTableName = value?.Trim();
     }
     private string? mTableName;
     #endregion

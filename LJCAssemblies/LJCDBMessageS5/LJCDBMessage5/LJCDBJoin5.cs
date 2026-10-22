@@ -17,8 +17,8 @@ namespace LJCDBMessage5
     {
       mTableName = "";
       JoinType = "Left";
-      JoinOns = new LJCDBJoinOns();
-      Columns = new LJCDataColumns();
+      JoinOns = [];
+      Columns = [];
     }
 
     // The Copy constructor.
@@ -27,8 +27,10 @@ namespace LJCDBMessage5
     public LJCDBJoin(LJCDBJoin item)
     {
       mTableName = "";
-      Columns = new LJCDataColumns(item.Columns);
-      JoinOns = new LJCDBJoinOns(item.JoinOns);
+      //Columns = new LJCDataColumns(item.Columns);
+      Columns = [.. item.Columns];
+      //JoinOns = new LJCDBJoinOns(item.JoinOns);
+      JoinOns = [.. item.JoinOns];
       JoinType = item.JoinType;
       TableAlias = item.TableAlias;
       TableName = item.TableName;
@@ -42,7 +44,7 @@ namespace LJCDBMessage5
     ///  path='items/Clone/*'/>
     public LJCDBJoin Clone()
     {
-      LJCDBJoin retValue = new LJCDBJoin()
+      LJCDBJoin retValue = new()
       {
         JoinType = JoinType,
         TableName = TableName,
@@ -75,7 +77,7 @@ namespace LJCDBMessage5
     public string? JoinType
     {
       get => mJoinType;
-      set => mJoinType = LJCNetString.InitString(value);
+      set => mJoinType = value?.Trim();
     }
     private string? mJoinType;
 
@@ -83,7 +85,7 @@ namespace LJCDBMessage5
     public string? TableAlias
     {
       get => mTableAlias;
-      set => mTableAlias = LJCNetString.InitString(value);
+      set => mTableAlias = value?.Trim();
     }
     private string? mTableAlias;
 
@@ -91,13 +93,7 @@ namespace LJCDBMessage5
     public string TableName
     {
       get => mTableName;
-      set
-      {
-        if (value != null)
-        {
-          mTableName = value.Trim();
-        }
-      }
+      set => mTableName = value.Trim();
     }
     private string mTableName;
     #endregion

@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCTextBuilder test methods.
+  // Provides LJCTextBuilder test methods.
   internal class TestTextBuilder
   {
     #region Properties
@@ -20,8 +20,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestTextBuilder.xml'
-    ///  path='members/Constructor/*'/>
     public TestTextBuilder()
     {
       TestCommon = new LJCTestCommon("TestTextBuilder");
@@ -31,17 +29,17 @@ namespace TestNetCommon5
     // Runs the test methods.
     private void Run()
     {
-      // Methods
+      // Method Test Methods
       AddIndent();
 
-      // Append Text Methods
+      // Append Text Test Methods
       AddLine();
       AddText();
       Item();
       Line();
       Text();
 
-      // Get Text Methods
+      // Get Text Test Methods
       EndsWithNewLine();
       StartWithNewLine();
       GetDelimited();
@@ -53,7 +51,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Methods
+    #region Method Test Methods
 
     // Changes the IndentCount by the provided value.
     private void AddIndent()
@@ -98,7 +96,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Append Text Methods
+    #region Append Text Test Methods
 
     private void AddLine()
     {
@@ -242,7 +240,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Get Text Methods
+    #region Get Text Test Methods
 
     // Indicates if the builder text ends with a newline.
     private bool EndsWithNewLine()

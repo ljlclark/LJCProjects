@@ -5,51 +5,42 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCDataValue test methods.
+  // Provides LJCDataValue test methods.
   internal class TestDataValue
   {
+    #region Properties
+
+    // Indicates if "Not Implemented" methods should display a message.
+    private static bool ShowNotImplemented { get; set; }
+
+    // Gets or sets the TestCommon object.
+    private static LJCTestCommon? TestCommon { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataValue.xml'
-    ///  path='members/Constructor/*'/>
     public TestDataValue()
     {
       TestCommon = new LJCTestCommon("TestDataValue");
       Run();
     }
 
+    // Runs the tests.
     private static void Run()
     {
-      #region Constructor Test Methods
-
-      // Initializes an object instance with the supplied values.
+      // Constructor Test Methods
       ParamConstructor();
-
-      // The Copy constructor.
       CopyConstructor();
-      #endregion
 
-      #region Data Methods
-
-      // Creates and returns a clone of the object.
+      // Data Test Methods
       Clone();
-
-      // Formats the column value for an SQL string.
       FormatValue();
-
-      // Returns the object string identifier.
       ToStringMethod();
-
-      // Creates a combined LJCDataColumn from an LJCDataValue and LJCDataColumn.
       CreateColumn();
-      #endregion
 
-      #region Data Properties
-
-      // Gets or sets the Value object.
+      // Data Property Test Methods
       Value();
-      #endregion
     }
     #endregion
 
@@ -87,7 +78,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Data Methods
+    #region Data Test Methods
 
     // Creates and returns a clone of the object.
     private static void Clone()
@@ -179,7 +170,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Data Properties
+    #region Data Property Test Methods
 
     // Gets or sets the Value object.
     private static void Value()
@@ -222,14 +213,6 @@ namespace TestNetCommon5
       compare = "True";
       TestCommon?.Show($"{methodName}6", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    private static bool ShowNotImplemented { get; set; }
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

@@ -5,14 +5,21 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCDataColumn test methods.
+  // Provides LJCDataColumn test methods.
   internal class TestDataColumn
   {
+    #region Properties
+
+    // Indicates if the "Not Implemented" message is displayed.
+    private static bool ShowNotImplemented { get; set; }
+
+    // Gets or sets the TestCommon object.
+    private static LJCTestCommon? TestCommon { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestDataColumn.xml'
-    ///  path='members/Constructor/*'/>
     public TestDataColumn()
     {
       TestCommon = new LJCTestCommon("TestDataColumn")
@@ -25,108 +32,44 @@ namespace TestNetCommon5
     // Runs the tests.
     private static void Run()
     {
-      #region Constructor Test Methods
-
-      // Initializes an object instance with the supplied values.
+      // Constructor Test Methods
       ParamConstructor();
-
-      // The Copy constructor.
       CopyConstructor();
-      #endregion
 
-      #region Data Methods
-
-      // Creates and returns a clone of the object.
+      // Data Test Methods
       Clone();
-
-      // Formats the column value for an SQL string.
       FormatValue();
-
-      // Returns the object string identifier.
       TestToString();
-
-      // Creates a LJCDataValue object from an LJCDataColumn object.
       CreateValue();
-      #endregion
 
-      #region Data Properties
-
-      // Gets or sets the AllowDBNull flag.
+      // Data Property Test Methods
       AllowDBNull();
-
-      // Gets or sets the AutoIncrement flag.
       AutoIncrement();
-
-      // Gets or sets the Caption value.
       Caption();
-
-      // Gets or sets the ColumnName value.
       ColumnName();
-
-      // Gets or sets the DataTypeName value.
       DataTypeName();
-
-      // Gets or sets the MaxLength value.
       MaxLength();
-
-      // Gets or sets the Fixed Length Field Position value.
       Position();
-
-      // Gets or sets the PropertyName value.
       PropertyName();
-
-      // Gets or sets the RenameAs value.
       RenameAs();
-
-      // Gets or sets the SQLTypeName value.
       SQLTypeName();
-
-      // Gets or sets the Value object.
       Value();
-      #endregion
 
-      #region Additional Properties
-
-      // Gets or sets the add order index.
+      // Additional Property Test Methods
       AddOrderIndex();
-
-      // Gets or sets the default value.
       DefaultValue();
-
-      // Gets or sets the changed indicator.
       IsChanged();
-
-      // Gets or sets the primary key indicator.
       IsPrimaryKey();
-
-      // Gets or sets the unique key indicator.
       IsUniqueKey();
-
-      // Gets or sets the KeyType value.
-      // "Natural", "Natural*", "Foreign"
       KeyType();
-
-      // Gets or sets the original value.
       OriginalValue();
-      #endregion
 
-      #region View Join Data Properties
-
-      // Gets or sets the view ID value.
+      // View Join Data Test Properties
       ID();
-
-      // Gets or sets the view Sequence value.
       Sequence();
-
-      // Gets or sets the view DataID value.
       ViewDataID();
-
-      // Gets or sets the view JoinID value.
       ViewJoinID();
-
-      // Gets or sets the view Width value.
       Width();
-      #endregion
     }
     #endregion
 
@@ -168,7 +111,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Data Methods
+    #region Data Test Methods
 
     // Creates and returns a clone of the object.
     private static void Clone()
@@ -259,7 +202,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Data Properties
+    #region Data Property Test Methods
 
     // Gets or sets the AllowDBNull flag.
     private static void AllowDBNull()
@@ -373,7 +316,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Additional Properties
+    #region Additional Property Test Methods
 
     // Gets or sets the add order index.
     private static void AddOrderIndex()
@@ -447,7 +390,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region View Join Data Properties
+    #region View Join Data Property Test Methods
 
     // Gets or sets the view ID value.
     private static void ID()
@@ -498,14 +441,6 @@ namespace TestNetCommon5
       var compare = "Not Implemented";
       TestCommon?.Show($"{methodName}", result, compare);
     }
-    #endregion
-
-    #region Properties
-
-    private static bool ShowNotImplemented { get; set; }
-
-    // Gets or sets the TestCommon object.
-    private static LJCTestCommon? TestCommon { get; set; }
     #endregion
   }
 }

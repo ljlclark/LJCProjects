@@ -5,7 +5,7 @@ using LJCNetCommon5;
 
 namespace TestNetCommon5
 {
-  // Provides the LJCNetString test methods.
+  // Provides LJCNetString test methods.
   internal class TestNetString
   {
     #region Properties
@@ -17,8 +17,6 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/TestNetString.xml'
-    ///  path='members/Constructor/*'/>
     public TestNetString()
     {
       TestCommon = new LJCTestCommon("TestNetString");
@@ -28,12 +26,12 @@ namespace TestNetCommon5
     // Runs the test methods.
     private void Run()
     {
-      // Checking String Values
+      // Checking String Values Test Methods
       HasValue();
       IsDigits();
       IsEqual();
 
-      // Formatting a String
+      // Formatting a String Test Methods
       AddDelimitedValue();
       DelimitValues();
       ExceptionString();
@@ -46,20 +44,20 @@ namespace TestNetCommon5
       SplitSeparators();
       Truncate();
 
-      // Soundex Methods
+      // Soundex Test Methods
       CreateLSoundex();
       CreatePSoundex();
       Soundex();
       IsSoundexLetter();
       Phonetic();
 
-      // Other Methods
+      // Other Test Methods
       AddObjectArgError();
       ThrowArgError();
     }
     #endregion
 
-    #region Checking String Values
+    #region Checking String Values Test Methods
 
     // Checks if a text value exists.
     private void HasValue()
@@ -131,7 +129,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Formatting a String
+    #region Formatting a String Test Methods
 
     // Adds a value to a comma delimited string.
     private void AddDelimitedValue()
@@ -366,7 +364,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Soundex Methods
+    #region Soundex Test Methods
 
     // Creates a letter based soundex value.
     private void CreateLSoundex()
@@ -514,7 +512,7 @@ namespace TestNetCommon5
     }
     #endregion
 
-    #region Other Methods
+    #region Other Test Methods
 
     // Adds the missing argument name to the message.
     private void AddObjectArgError()

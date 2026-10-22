@@ -205,8 +205,8 @@ namespace LJCDBMessage5
     /// <summary>The data configuration name.</summary>
     public string? DataConfigName
     {
-      get { return mDataConfigName; }
-      set { mDataConfigName = LJCNetString.InitString(value); }
+      get => mDataConfigName;
+      set => mDataConfigName = value?.Trim();
     }
     private string? mDataConfigName;
 
@@ -225,7 +225,7 @@ namespace LJCDBMessage5
     public string? ProcedureName
     {
       get => mProcedureName;
-      set => mProcedureName = LJCNetString.InitString(value);
+      set => mProcedureName = value?.Trim();
     }
     private string? mProcedureName;
 
@@ -235,13 +235,7 @@ namespace LJCDBMessage5
     public string RequestTypeName
     {
       get => mRequestTypeName;
-      set
-      {
-        if (value != null)
-        {
-          mRequestTypeName = value.Trim();
-        }
-      }
+      set => mRequestTypeName = value.Trim();
     }
     private string mRequestTypeName;
 
@@ -249,7 +243,7 @@ namespace LJCDBMessage5
     public string? SchemaName
     {
       get => mSchemaName;
-      set => mSchemaName = LJCNetString.InitString(value);
+      set => mSchemaName = value?.Trim();
     }
     private string? mSchemaName;
 
@@ -257,14 +251,7 @@ namespace LJCDBMessage5
     public string? TableName
     {
       get => mTableName;
-      set
-      {
-        mTableName = value;
-        if (value != null)
-        {
-          mTableName = value.Trim();
-        }
-      }
+      set => mTableName = value?.Trim();
     }
     private string? mTableName;
     #endregion
@@ -281,7 +268,7 @@ namespace LJCDBMessage5
     public string? ClientSql
     {
       get => mClientSql;
-      set => mClientSql = LJCNetString.InitString(value);
+      set => mClientSql = value?.Trim();
     }
     private string? mClientSql;
 
