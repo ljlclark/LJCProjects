@@ -15,6 +15,87 @@ namespace LJCDBDataAccess5
   ///  path='items/DbDataAccess/*'/>
   public partial class DbDataAccess
   {
+    #region Public Properties
+
+    // Gets or sets the Database name.
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/DatabaseName/*'/>
+    public string? DatabaseName
+    {
+      get => mDatabaseName;
+      set { mDatabaseName = value?.Trim(); }
+    }
+    private string? mDatabaseName;
+
+    // Gets or sets the DBRequest object.
+    /// <include file='Doc/DbDataAccess.xml'
+    ///  path='items/DBRequest/*'/>
+    public LJCDBRequest? DBRequest
+    {
+      get => mDBRequest;
+      set
+      {
+        mDBRequest = value;
+        mDbSqlBuilder = null;
+        if (value != null)
+        {
+          mDbSqlBuilder = new LJCDBSqlBuilder(value);
+        }
+      }
+    }
+    private LJCDBRequest? mDBRequest;
+    #endregion
+
+    #region Private Properties
+
+    // Gets or sets the non-query affected record count.
+    private int AffectedCount { get; set; }
+
+    // Gets or sets the LJCDataConfig name.
+    private string? DataConfigName { get; set; }
+
+    // Gets or sets the Connection string.
+    private string? ConnectionString
+    {
+      get => mConnectionString;
+      set
+      {
+        mConnectionString = value?.Trim();
+        mDataAccess.ConnectionString = value;
+        if (LJC.HasText(value))
+        {
+          mDataAccess.ConnectionString = value;
+        }
+      }
+    }
+    private string? mConnectionString;
+
+    // Gets or sets the Provider name.
+    internal string? ProviderName
+    {
+      get => mProviderName;
+      set
+      {
+        mProviderName = value?.Trim();
+        mDataAccess.ProviderName = value;
+        if (LJC.HasText(value))
+        {
+          mDataAccess.ProviderName = value;
+        }
+      }
+    }
+    private string? mProviderName;
+
+    // Gets or sets the last action SQL statement.
+    private string? SqlStatement { get; set; }
+    #endregion
+
+    #region Class Data
+
+    private readonly LJCDataAccess mDataAccess;
+    private LJCDBSqlBuilder? mDbSqlBuilder;
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -689,83 +770,6 @@ namespace LJCDBDataAccess5
       }
       return retValue;
     }
-    #endregion
-
-    #region Public Properties
-
-    /// <summary>Gets or sets the Database name.</summary>
-    public string? DatabaseName
-    {
-      get => mDatabaseName;
-      set { mDatabaseName = value?.Trim(); }
-    }
-    private string? mDatabaseName;
-
-    /// <summary>Gets or sets the DBRequest object.</summary>
-    public LJCDBRequest? DBRequest
-    {
-      get => mDBRequest;
-      set
-      {
-        mDBRequest = value;
-        mDbSqlBuilder = null;
-        if (value != null)
-        {
-          mDbSqlBuilder = new LJCDBSqlBuilder(value);
-        }
-      }
-    }
-    private LJCDBRequest? mDBRequest;
-    #endregion
-
-    #region Private Properties
-
-    // Gets or sets the non-query affected record count.
-    private int AffectedCount { get; set; }
-
-    // Gets or sets the LJCDataConfig name.
-    private string? DataConfigName { get; set; }
-
-    // Gets or sets the Connection string.
-    private string? ConnectionString
-    {
-      get => mConnectionString;
-      set
-      {
-        mConnectionString = value?.Trim();
-        mDataAccess.ConnectionString = value;
-        if (LJC.HasText(value))
-        {
-          mDataAccess.ConnectionString = value;
-        }
-      }
-    }
-    private string? mConnectionString;
-
-    // Gets or sets the Provider name.
-    internal string? ProviderName
-    {
-      get => mProviderName;
-      set
-      {
-        mProviderName = value?.Trim();
-        mDataAccess.ProviderName = value;
-        if (LJC.HasText(value))
-        {
-          mDataAccess.ProviderName = value;
-        }
-      }
-    }
-    private string? mProviderName;
-
-    // Gets or sets the last action SQL statement.
-    private string? SqlStatement { get; set; }
-    #endregion
-
-    #region Class Data
-
-    private readonly LJCDataAccess mDataAccess;
-    private LJCDBSqlBuilder? mDbSqlBuilder;
     #endregion
   }
 }

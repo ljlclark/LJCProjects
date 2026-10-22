@@ -7,8 +7,8 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a collection of DbRow objects.
-  /// <include file='Doc/DbRows.xml'
-  ///  path='items/DbRows/*'/>
+  /// <include file='Doc/ProjectDbRows.xml'
+  ///  path='items/LJCDbRows/*'/>
   [XmlRoot("DbRows")]
   public class LJCDBRows : List<LJCDBRow>
   {
@@ -33,7 +33,9 @@ namespace LJCDBMessage5
 
     #region Properties
 
-    /// <summary>Gets the Default File Name.</summary>
+    // Gets the Default File Name.
+    /// <include file='Doc/DbRows.xml'
+    ///  path='items/LJCDefaultFileName/*'/>
     public static string LJCDefaultFileName
     {
       get => "DbRows.xml";

@@ -7,8 +7,8 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Converts DataColumns and DbResult objects to data objects.
-  /// <include file='Doc/ResultConverter.xml'
-  ///  path='items/ResultConverter/*'/>
+  /// <include file='Doc/ProjectResultConverter.xml'
+  ///  path='items/LJCResultConverter/*'/>
   public class LJCResultConverter<TData, TList>
     where TData : class, new()
     where TList : List<TData>, new()

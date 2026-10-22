@@ -8,7 +8,7 @@ using LJCDataAccess5;
 namespace LJCDBMessage5
 {
   /// <include file='Doc/ProjectDBMessage.xml'
-  ///  path='items/DbRequest/*'/>
+  ///  path='items/LJCDbRequest/*'/>
   [XmlRoot("DbRequest")]
   public class LJCDBRequest
   {
@@ -32,6 +32,122 @@ namespace LJCDBMessage5
       }
       return retValue;
     }
+    #endregion
+
+    #region Data Properties
+
+    // The included table columns.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Columns/*'/>
+    public LJCDataColumns? Columns { get; set; }
+
+    // The data configuration name.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/DataConfigName/*'/>
+    public string? DataConfigName
+    {
+      get => mDataConfigName;
+      set => mDataConfigName = value?.Trim();
+    }
+    private string? mDataConfigName;
+
+    // The where clause filters.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Filters/*'/>
+    public LJCDBFilters? Filters { get; set; }
+
+    // The table joins.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Joins/*'/>
+    public LJCDBJoins? Joins { get; set; }
+
+    // The key column values.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/KeyColumns/*'/>
+    public LJCDataColumns? KeyColumns { get; set; }
+
+    // Gets or sets the ProcedureName value.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/ProcedureName/*'/>
+    public string? ProcedureName
+    {
+      get => mProcedureName;
+      set => mProcedureName = value?.Trim();
+    }
+    private string? mProcedureName;
+
+    // The request type name.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/RequestTypeName/*'/>
+    public string RequestTypeName
+    {
+      get => mRequestTypeName;
+      set => mRequestTypeName = value.Trim();
+    }
+    private string mRequestTypeName;
+
+    // The schema name.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/SchemaName/*'/>
+    public string? SchemaName
+    {
+      get => mSchemaName;
+      set => mSchemaName = value?.Trim();
+    }
+    private string? mSchemaName;
+
+    // The table name.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/TableName/*'/>
+    public string? TableName
+    {
+      get => mTableName;
+      set => mTableName = value?.Trim();
+    }
+    private string? mTableName;
+    #endregion
+
+    #region Other Properties
+
+    // Indicates if the missing column should be added.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/AddMissingColumns/*'/>
+    public bool AddMissingColumns { get; set; }
+
+    // The Database Assigned columns.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/DbAssignedColumns/*'/>
+    public LJCDataColumns? DbAssignedColumns { get; set; }
+
+    // Gets or sets the ClientSql value.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/ClientSql/*'/>
+    public string? ClientSql
+    {
+      get => mClientSql;
+      set => mClientSql = value?.Trim();
+    }
+    private string? mClientSql;
+
+    // The OrderBy column names.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/OrderByNames/*'/>
+    public List<string>? OrderByNames { get; set; }
+
+    // The number of records in the page.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/PageSize/*'/>
+    public int PageSize { get; set; }
+
+    // Gets or sets the Parameters list reference.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/Parameters/*'/>
+    public LJCProcedureParameters? Parameters { get; set; }
+
+    // The page starting index.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/PageStartIndex/*'/>
+    public int PageStartIndex { get; set; }
     #endregion
 
     #region Constructors
@@ -193,96 +309,6 @@ namespace LJCDBMessage5
     {
       LJC.XmlSerialize(GetType(), this, null, fileSpec);
     }
-    #endregion
-
-    #region Data Properties
-
-    // The included table columns.
-    /// <include file='Doc/DbRequest.xml'
-    ///  path='items/Columns/*'/>
-    public LJCDataColumns? Columns { get; set; }
-
-    /// <summary>The data configuration name.</summary>
-    public string? DataConfigName
-    {
-      get => mDataConfigName;
-      set => mDataConfigName = value?.Trim();
-    }
-    private string? mDataConfigName;
-
-    /// <summary>The where clause filters.</summary>
-    public LJCDBFilters? Filters { get; set; }
-
-    /// <summary>The table joins.</summary>
-    public LJCDBJoins? Joins { get; set; }
-
-    // The key column values.
-    /// <include file='Doc/DbRequest.xml'
-    ///  path='items/KeyColumns/*'/>
-    public LJCDataColumns? KeyColumns { get; set; }
-
-    /// <summary>Gets or sets the ProcedureName value.</summary>
-    public string? ProcedureName
-    {
-      get => mProcedureName;
-      set => mProcedureName = value?.Trim();
-    }
-    private string? mProcedureName;
-
-    // The request type name.
-    /// <include file='Doc/DbRequest.xml'
-    ///  path='items/RequestTypeName/*'/>
-    public string RequestTypeName
-    {
-      get => mRequestTypeName;
-      set => mRequestTypeName = value.Trim();
-    }
-    private string mRequestTypeName;
-
-    /// <summary>The schema name.</summary>
-    public string? SchemaName
-    {
-      get => mSchemaName;
-      set => mSchemaName = value?.Trim();
-    }
-    private string? mSchemaName;
-
-    /// <summary>The table name.</summary>
-    public string? TableName
-    {
-      get => mTableName;
-      set => mTableName = value?.Trim();
-    }
-    private string? mTableName;
-    #endregion
-
-    #region Other Properties
-
-    /// <summary>Indicates if the missing column should be added.</summary>
-    public bool AddMissingColumns { get; set; }
-
-    /// <summary>The Database Assigned columns.</summary>
-    public LJCDataColumns? DbAssignedColumns { get; set; }
-
-    /// <summary>Gets or sets the ClientSql value.</summary>
-    public string? ClientSql
-    {
-      get => mClientSql;
-      set => mClientSql = value?.Trim();
-    }
-    private string? mClientSql;
-
-    /// <summary>The OrderBy column names.</summary>
-    public List<string>? OrderByNames { get; set; }
-
-    /// <summary>The number of records in the page.</summary>
-    public int PageSize { get; set; }
-
-    /// <summary>Gets or sets the Parameters list reference.</summary>
-    public LJCProcedureParameters? Parameters { get; set; }
-
-    /// <summary>The page starting index.</summary>
-    public int PageStartIndex { get; set; }
     #endregion
   }
 

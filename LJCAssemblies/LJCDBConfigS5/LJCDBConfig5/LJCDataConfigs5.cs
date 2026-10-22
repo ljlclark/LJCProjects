@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace LJCDBConfig5
 {
   // Represents a collection of LJCDataConfig objects.
-  /// <include file='Doc/LJCDataConfigs.xml'
+  /// <include file='Doc/ProjectDataConfigs.xml'
   ///  path='members/LJCDataConfigs/*'/>
   [XmlRoot("LJCDataConfigs")]
   public class LJCDataConfigs : List<LJCDataConfig>
@@ -16,7 +16,7 @@ namespace LJCDBConfig5
     #region Static Methods
 
     // Gets a DataConfig from the DataConfigs.xml file.
-    /// <include file='Doc/LJCDataConfigs.xml'
+    /// <include file='Doc/DataConfigs.xml'
     ///  path='members/DataConfig/*'/>
     public static LJCDataConfig? DataConfig(string configName)
     {
@@ -35,17 +35,17 @@ namespace LJCDBConfig5
     #region Properties
 
     // Gets or sets the ConnectionType name.
-    /// <include file='Doc/LJCDataConfigs.xml'
+    /// <include file='Doc/DataConfigs.xml'
     ///  path='members/ConnectionType/*'/>
     public string? ConnectionType
     {
-      get { return mConnectionType; }
-      set { mConnectionType = value?.Trim(); }
+      get => mConnectionType;
+      set => mConnectionType = value?.Trim();
     }
     private string? mConnectionType;
 
     // The configuration file path.
-    /// <include file='Doc/LJCDataConfigs.xml'
+    /// <include file='Doc/DataConfigs.xml'
     ///  path='members/ConfigFileSpec/*'/>
     public string ConfigFileSpec { get; set; }
     #endregion
@@ -59,7 +59,7 @@ namespace LJCDBConfig5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/LJCDataConfigs.xml'
+    /// <include file='Doc/DataConfigs.xml'
     ///  path='members/Constructor/*'/>
     public LJCDataConfigs()
     {
@@ -72,7 +72,7 @@ namespace LJCDBConfig5
     }
 
     // Retrieves the config data.
-    /// <include file='Doc/LJCDataConfigs.xml'
+    /// <include file='Doc/DataConfigs.xml'
     ///  path='members/LoadData/*'/>
     public void LoadData()
     {
@@ -96,7 +96,7 @@ namespace LJCDBConfig5
     #region Collection Methods
 
     // Creates and adds the object from the provided valus.
-    /// <include file='Doc/LJCDataConfigs.xml'
+    /// <include file='Doc/DataConfigs.xml'
     ///  path='members/Add/*'/>
     public LJCDataConfig Add(string name, string dbServer, string database
       , string connectionType)
@@ -113,7 +113,7 @@ namespace LJCDBConfig5
     }
 
     // Retrieve the data configuration.
-    /// <include file='Doc/LJCDataConfigs.xml'
+    /// <include file='Doc/DataConfigs.xml'
     ///  path='members/Retrieve/*'/>
     public LJCDataConfig Retrieve(string name)
     {
@@ -143,7 +143,7 @@ namespace LJCDBConfig5
     }
 
     // Saves the config data.
-    /// <include file='Doc/LJCDataConfigs.xml'
+    /// <include file='Doc/DataConfigs.xml'
     ///  path='members/Save/*'/>
     public void Save()
     {

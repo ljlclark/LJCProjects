@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace LJCDBConfig5
 {
   // Represents a collection of Connection string templates.
-  /// <include file='Doc/LJCConnectionTemplates.xml'
+  /// <include file='Doc/ProjectConnectionTemplates.xml'
   ///  path='members/LJCConnectionTemplates/*'/>
   [XmlRoot("LJCConnectionTemplates")]
   public class LJCConnectionTemplates : List<LJCConnectionTemplate>
@@ -16,7 +16,7 @@ namespace LJCDBConfig5
     #region Properties
 
     // The configuration file path.
-    /// <include file='Doc/LJCConnectionTemplates.xml'
+    /// <include file='Doc/ConnectionTemplates.xml'
     ///  path='members/TemplateFileSpec/*'/>
     public string? TemplateFileSpec { get; private set; }
     #endregion
@@ -30,7 +30,7 @@ namespace LJCDBConfig5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/LJCConnectionTemplates.xml'
+    /// <include file='Doc/ConnectionTemplates.xml'
     ///  path='members/Constructor/*'/>
     public LJCConnectionTemplates()
     {
@@ -46,7 +46,7 @@ namespace LJCDBConfig5
     }
 
     // Loads the template data.
-    /// <include file='Doc/LJCConnectionTemplates.xml'
+    /// <include file='Doc/ConnectionTemplates.xml'
     ///  path='members/LoadData/*'/>
     public void LoadData()
     {
@@ -70,7 +70,7 @@ namespace LJCDBConfig5
     #region Methods
 
     // Creates and adds the object from the supplied valus.
-    /// <include file='Doc/LJCConnectionTemplates.xml'
+    /// <include file='Doc/ConnectionTemplates.xml'
     ///  path='members/Add/*'/>
     public LJCConnectionTemplate Add(string name, string template)
     {
@@ -84,7 +84,7 @@ namespace LJCDBConfig5
     }
 
     // Retrieve the connection template.
-    /// <include file='Doc/LJCConnectionTemplates.xml'
+    /// <include file='Doc/ConnectionTemplates.xml'
     ///  path='members/Retrieve/*'/>
     public LJCConnectionTemplate? Retrieve(string? name)
     {
@@ -117,7 +117,7 @@ namespace LJCDBConfig5
     }
 
     // Saves the config data.
-    /// <include file='Doc/LJCConnectionTemplates.xml'
+    /// <include file='Doc/ConnectionTemplates.xml'
     ///  path='members/Save/*'/>
     public void Save()
     {

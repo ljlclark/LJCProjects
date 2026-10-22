@@ -5,9 +5,44 @@ using LJCNetCommon5;
 
 namespace LJCDBMessage5
 {
-  /// <summary>Represents a filter which is part of a where clause.</summary>
+  // Represents a filter which is part of a where clause.
+  /// <include file='Doc/ProjectDbFilter.xml'
+  ///  path='items/LJCDBFilter/*'/>
   public class LJCDBFilter
   {
+    #region Properties
+
+    // The filter boolean operator.
+    /// <include file='Doc/DbFilter.xml'
+    ///  path='items/BooleanOperator/*'/>
+    public string? BooleanOperator
+    {
+      get => mBooleanOperator;
+      set => mBooleanOperator = value?.Trim();
+    }
+    private string? mBooleanOperator;
+
+    // Gets or sets the filter condition set.
+    /// <include file='Doc/DbFilter.xml'
+    ///  path='items/ConditionSet/*'/>
+    public LJCDBConditionSet ConditionSet { get; set; }
+
+    // Gets or sets the contained filters.
+    /// <include file='Doc/DbFilter.xml'
+    ///  path='items/Filters/*'/>
+    public LJCDBFilters? Filters { get; set; }
+
+    // Gets or sets the Name value.
+    /// <include file='Doc/DbFilter.xml'
+    ///  path='items/Name/*'/>
+    public string? Name
+    {
+      get => mName;
+      set => mName = value?.Trim();
+    }
+    private string? mName;
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -79,31 +114,6 @@ namespace LJCDBMessage5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>The filter boolean operator.</summary>
-    public string? BooleanOperator
-    {
-      get => mBooleanOperator;
-      set => mBooleanOperator = value?.Trim();
-    }
-    private string? mBooleanOperator;
-
-    /// <summary>Gets or sets the filter condition set.</summary>
-    public LJCDBConditionSet ConditionSet { get; set; }
-
-    /// <summary>Gets or sets the contained filters.</summary>
-    public LJCDBFilters? Filters { get; set; }
-
-    /// <summary>Gets or sets the Name value.</summary>
-    public string? Name
-    {
-      get => mName;
-      set => mName = value?.Trim();
-    }
-    private string? mName;
     #endregion
   }
 }

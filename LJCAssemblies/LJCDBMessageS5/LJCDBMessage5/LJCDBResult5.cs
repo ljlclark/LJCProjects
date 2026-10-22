@@ -9,18 +9,16 @@ using System.Xml.Serialization;
 namespace LJCDBMessage5
 {
   // Represents a data result.
-  /// <include file='Doc/DbResult.xml'
-  ///  path='items/DbResult/*'/>
+  /// <include file='Doc/ProjectDbResult.xml'
+  ///  path='items/LJCDBResult/*'/>
   //[XmlRoot("DbResult")]
   public class LJCDBResult
   {
     #region TableData Static Methods?
 
-    /// <summary>
-    /// Creates a DataColumn object from a ADO Column object. 
-    /// </summary>
-    /// <param name="adoColumn">The DataColumn reference.</param>
-    /// <returns>The DataColumn Object.</returns>
+    // Creates a DataColumn object from a ADO Column object. 
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/GetDataColumn/*'/>
     public static LJCDataColumn GetDataColumn(DataColumn adoColumn)
     {
       LJCDataColumn retValue;
@@ -39,11 +37,9 @@ namespace LJCDBMessage5
       return retValue;
     }
 
-    /// <summary>
-    /// Creates a DataColumns collection from an ADO Columns collection.
-    /// </summary>
-    /// <param name="adoColumns">The DataColumnCollection reference.</param>
-    /// <returns>The LJCDataColumns object.</returns>
+    // Creates a DataColumns collection from an ADO Columns collection.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/GetDataColumns/*'/>
     public static LJCDataColumns? GetDataColumns(DataColumnCollection adoColumns)
     {
       LJCDataColumns? retValue = null;
@@ -62,11 +58,9 @@ namespace LJCDBMessage5
       return retValue;
     }
 
-    /// <summary>
-    /// Checks the DataColumnCollection object for items.
-    /// </summary>
-    /// <param name="dataColumns">The DataColumnCollection reference.</param>
-    /// <returns>true if there are items; otherwise false.</returns>
+    // Checks the DataColumnCollection object for items.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/HasColumns/*'/>
     public static bool HasColumns([NotNullWhen(true)] DataColumnCollection adoColumns)
     {
       bool retValue = false;
@@ -82,11 +76,8 @@ namespace LJCDBMessage5
     #region Static Methods
 
     // Creates combined DataColumns from DataColumns and DataValues.
-    /// <summary>
-    /// Creates combined DataColumns from result DataColumns and DataValues.
-    /// </summary>
-    /// <param name="dbResult">The DbResult object.</param>
-    /// <returns>The LJCDataColumns collection.</returns>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/CreateResultColumns/*'/>
     public static LJCDataColumns? CreateResultColumns(LJCDBResult dbResult)
     {
       LJCDataColumn? findColumn;
@@ -252,6 +243,88 @@ namespace LJCDBMessage5
         }
       }
     }
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the non-query affected record count.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/AffectedRecords/*'/>
+    public int AffectedRecords { get; set; }
+
+    // Gets the collection of columns that belong to this result.</summary>
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/Columns/*'/>
+    public LJCDataColumns? Columns { get; set; }
+
+    // Gets or sets the Database name.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/DatabaseName/*'/>
+    public string? DatabaseName { get; set; }
+
+    // Gets the Default File Name.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/LJCDefaultFileName/*'/>
+    public static string LJCDefaultFileName
+    {
+      get => "DbResult.xml";
+    }
+
+    // Gets or sets the executed SQL statement.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/ExecutedSql/*'/>
+    public string? ExecutedSql
+    {
+      get => mExecutedSql;
+      set => mExecutedSql = value?.Trim();
+    }
+    private string? mExecutedSql;
+
+    // Gets or sets the ProcedureName value.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/ProcedureName/*'/>
+    public string? ProcedureName
+    {
+      get => mProcedureName;
+      set => mProcedureName = value?.Trim();
+    }
+    private string? mProcedureName;
+
+    // The request type.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/RequestTypeName/*'/>
+    public string RequestTypeName
+    {
+      get => mRequestTypeName;
+      set => mRequestTypeName = value.Trim();
+    }
+    private string mRequestTypeName;
+
+    // A collection of DbValues objects.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/Rows/*'/>
+    [XmlArrayItem("DbRows")]
+    public LJCDBRows Rows { get; set; }
+
+    // The schema name.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/SchemaName/*'/>
+    public string? SchemaName
+    {
+      get => mSchemaName;
+      set => mSchemaName = value?.Trim();
+    }
+    private string? mSchemaName;
+
+    // The table name.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/TableName/*'/>
+    public string? TableName
+    {
+      get => mTableName;
+      set => mTableName = value?.Trim();
+    }
+    private string? mTableName;
     #endregion
 
     #region Constructors
@@ -494,72 +567,6 @@ namespace LJCDBMessage5
         }
       }
     }
-    #endregion
-
-    #region Private Methods
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets or sets the non-query affected record count.</summary>
-    public int AffectedRecords { get; set; }
-
-    /// <summary>Gets the collection of columns that belong to this result.</summary>
-    //[XmlArrayItem("Columns")]
-    public LJCDataColumns? Columns { get; set; }
-
-    /// <summary>Gets or sets the Database name.</summary>
-    public string? DatabaseName { get; set; }
-
-    /// <summary>Gets the Default File Name.</summary>
-    public static string LJCDefaultFileName
-    {
-      get => "DbResult.xml";
-    }
-
-    /// <summary>Gets or sets the executed SQL statement.</summary>
-    public string? ExecutedSql
-    {
-      get => mExecutedSql;
-      set => mExecutedSql = value?.Trim();
-    }
-    private string? mExecutedSql;
-
-    /// <summary>Gets or sets the ProcedureName value.</summary>
-    public string? ProcedureName
-    {
-      get => mProcedureName;
-      set => mProcedureName = value?.Trim();
-    }
-    private string? mProcedureName;
-
-    /// <summary>The request type.</summary>
-    public string RequestTypeName
-    {
-      get => mRequestTypeName;
-      set => mRequestTypeName = value.Trim();
-    }
-    private string mRequestTypeName;
-
-    /// <summary>A collection of DbValues objects.</summary>
-    [XmlArrayItem("DbRows")]
-    public LJCDBRows Rows { get; set; }
-
-    /// <summary>The schema name.</summary>
-    public string? SchemaName
-    {
-      get => mSchemaName;
-      set => mSchemaName = value?.Trim();
-    }
-    private string? mSchemaName;
-
-    /// <summary>The table name.</summary>
-    public string? TableName
-    {
-      get => mTableName;
-      set => mTableName = value?.Trim();
-    }
-    private string? mTableName;
     #endregion
   }
 }

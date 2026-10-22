@@ -7,8 +7,8 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Provides SQL builder methods.
-  /// <include file='Doc/DbSqlBuilder.xml'
-  ///  path='items/DbSqlBuilder/*'/>
+  /// <include file='Doc/ProjectDbSqlBuilder.xml'
+  ///  path='items/LJCDbSqlBuilder/*'/>
   public class LJCDBSqlBuilder
   {
     #region Static Methods

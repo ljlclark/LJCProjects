@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCDataConfigs.xml -->
+<members>
+  <!-- Class -->
+  <LJCDataConfigs>
+    <summary>
+      Represents a collection of LJCDataConfig objects.
+    </summary>
+  </LJCDataConfigs>
+  
+  <!-- Static Methods -->
+  <DataConfig>
+    <summary>
+      Gets a DataConfig from the DataConfigs.xml file.
+    </summary>
+    <param name="configName">The DataConfig name.</param>
+    <returns>The DataConfig object.</returns>
+  </DataConfig>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <LoadData>
+    <summary>
+      Retrieves the config data.
+    </summary>
+		<example>
+			<code>
+				using LJCDataAccessConfig;
+
+				var dataConfig = new LJCDataConfig();
+				dataConfig.LoadData();
+			</code>
+		</example>
+  </LoadData>
+  
+  <!-- Collection Methods -->
+  <Add>
+    <summary>
+      Creates and adds the object from the provided valus.
+    </summary>
+    <param name="name">The data configuration name.</param>
+    <param name="dbServer">The database server instance name.</param>
+    <param name="database">The database name.</param>
+    <param name="connectionType">The connection type.</param>
+    <returns></returns>
+  </Add>
+  <Retrieve>
+    <summary>
+      Retrieve the data configuration.
+    </summary>
+    <param name="name">The connection template configuration name.</param>
+		<example>
+			<code>
+        using LJCDataAccessConfig;
+
+        var dataConfigs = new LJCDataConfigs();
+        dataConfigs.LoadData();
+        var dataConfig = dataConfigs.Retrieve("SQLServer");
+      </code>
+		</example>
+  </Retrieve>
+  <Save>
+    <summary>
+      Saves the config data.
+    </summary>
+  </Save>
+  
+  <!-- Properties -->
+  <ConnectionType>
+    <summary>
+      Gets or sets the ConnectionType name.
+    </summary>
+  </ConnectionType>
+  <ConfigFileSpec>
+    <summary>
+      The configuration file path.
+    </summary>
+  </ConfigFileSpec>
+</members>

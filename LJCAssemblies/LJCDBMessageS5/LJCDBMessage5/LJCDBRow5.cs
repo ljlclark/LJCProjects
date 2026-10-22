@@ -5,7 +5,9 @@ using LJCNetCommon5;
 
 namespace LJCDBMessage5
 {
-  /// <summary>Represents a result Row.</summary>
+  // Represents a result Row.
+  /// <include file='Doc/ProjectDbRow.xml'
+  ///  path='items/LJCDBRow/*'/>
   public class LJCDBRow
   {
     #region Static Functions
@@ -28,7 +30,9 @@ namespace LJCDBMessage5
 
     #region Properties
 
-    /// <summary>Gets or sets the row values.</summary>
+    // Gets or sets the row values.
+    /// <include file='Doc/DbRow.xml'
+    ///  path='items/Values/*'/>
     public LJCDataValues? Values { get; set; }
     #endregion
 
