@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 namespace LJCNetCommon5
 {
   // Contains common static methods.
-  /// <include file='Doc/LJC.xml'
+  /// <include file='Doc/ProjectLJC.xml'
   ///  path='members/LJC/*'/>
   public class LJC
   {

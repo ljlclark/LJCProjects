@@ -1,15 +1,336 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCDataColumn.cs
+// LJCDataColumn5.cs
 using System.Xml.Serialization;
 
 namespace LJCNetCommon5
 {
   // Represents a data source column.
-  /// <include file='Doc/LJCDataColumn.xml'
+  /// <include file='Doc/ProjectDataColumn.xml'
   ///  path='members/LJCDataColumn/*'/>
   public class LJCDataColumn
   {
+    #region Data Properties
+
+    // Gets or sets the AllowDBNull flag.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/AllowDBNull/*'/>
+    public bool AllowDBNull { get; set; }
+
+    // Gets or sets the AutoIncrement flag.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/AutoIncrement/*'/>
+    public bool AutoIncrement { get; set; }
+
+    // Gets or sets the Caption value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/Caption/*'/>
+    public string? Caption
+    {
+      get => _Caption;
+      set
+      {
+        var newValue = value?.Trim();
+        if (_Caption != newValue)
+        {
+          _Caption = newValue;
+        }
+      }
+    }
+    private string? _Caption;
+
+    // Gets or sets the ColumnName value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/ColumnName/*'/>
+    public string ColumnName
+    {
+      get => _ColumnName;
+      set
+      {
+        var newValue = value?.Trim();
+
+        // Cannot change column name to null or white space.
+        if (_ColumnName != newValue
+          && LJC.HasText(newValue))
+        {
+          _ColumnName = newValue;
+
+          // Set empty property name the same as the column name.
+          if (!LJC.HasText(_PropertyName))
+          {
+            PropertyName = ColumnName;
+          }
+        }
+      }
+    }
+    private string _ColumnName;
+
+    // Gets or sets the DataTypeName value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/DataTypeName/*'/>
+    public string? DataTypeName
+    {
+      get => _DataTypeName;
+      set
+      {
+        var newValue = value?.Trim();
+        if (_DataTypeName != newValue)
+        {
+          _DataTypeName = newValue;
+        }
+      }
+    }
+    private string? _DataTypeName;
+
+    // Gets or sets the MaxLength value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/MaxLength/*'/>
+    public int MaxLength { get; set; }
+
+    // Gets or sets the Fixed Length Field Position value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/Position/*'/>
+    public int Position { get; set; }
+
+    // Gets or sets the PropertyName value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/PropertyName/*'/>
+    public string PropertyName
+    {
+      get => _PropertyName;
+      set
+      {
+        var newValue = value?.Trim();
+
+        // Cannot change property name to null or white space.
+        if (_PropertyName != newValue
+          && LJC.HasText(newValue))
+        {
+          _PropertyName = newValue;
+
+          // Set empty column name the same as the property name.
+          if (!LJC.HasText(_ColumnName))
+          {
+            ColumnName = PropertyName;
+          }
+        }
+      }
+    }
+    private string _PropertyName;
+
+    // Gets or sets the RenameAs value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/RenameAs/*'/>
+    public string? RenameAs
+    {
+      get => _RenameAs;
+      set
+      {
+        var newValue = value?.Trim();
+        if (_RenameAs != newValue)
+        {
+          _RenameAs = newValue;
+        }
+      }
+    }
+    private string? _RenameAs;
+
+    // Gets or sets the SQLTypeName value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/SQLTypeName/*'/>
+    public string? SQLTypeName
+    {
+      get => _SQLTypeName;
+      set
+      {
+        var newValue = value?.Trim();
+        if (_SQLTypeName != newValue)
+        {
+          _SQLTypeName = newValue;
+        }
+      }
+    }
+    private string? _SQLTypeName;
+
+    // Gets or sets the Value object.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/Value/*'/>
+    public object? Value
+    {
+      get => _Value;
+      set
+      {
+        if (!LJC.IsEqual(_Value, value))
+        {
+          _Value = value;
+          if (value != null
+            && typeof(string) == value.GetType())
+          {
+            var newValue = (string)value;
+            _Value = newValue?.Trim();
+          }
+
+          IsChanged = false;
+          if (!LJC.IsEqual(OriginalValue, value))
+          {
+            IsChanged = true;
+          }
+        }
+      }
+    }
+    private object? _Value;
+    #endregion
+
+    #region Additional Properties
+
+    // Gets or sets the add order index.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/AddOrderIndex/*'/>
+    public int AddOrderIndex { get; set; }
+
+    // Gets or sets the default value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/DefaultValue/*'/>
+    public string? DefaultValue
+    {
+      get => _DefaultValue;
+      set
+      {
+        var newValue = value?.Trim();
+        if (_DefaultValue != newValue)
+        {
+          _DefaultValue = value;
+        }
+      }
+    }
+    private string? _DefaultValue;
+
+    // Gets or sets the changed indicator.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/IsChanged/*'/>
+    [XmlIgnore()]
+    public bool IsChanged { get; set; }
+
+    // Gets or sets the primary key indicator.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/IsPrimaryKey/*'/>
+    public bool IsPrimaryKey { get; set; }
+
+    // Gets or sets the unique key indicator.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/IsUniqueKey/*'/>
+    public bool IsUniqueKey { get; set; }
+
+    // Gets or sets the KeyType value.
+    // "Natural", "Natural*", "Foreign"
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/KeyType/*'/>
+    public string? KeyType
+    {
+      get => _KeyType;
+      set
+      {
+        var newValue = value?.Trim();
+        if (_KeyType != newValue)
+        {
+          _KeyType = newValue;
+        }
+      }
+    }
+    private string? _KeyType;
+
+    // Gets or sets the original value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/OriginalValue/*'/>
+    public object? OriginalValue
+    {
+      get => _OriginalValue;
+      set
+      {
+        if (!LJC.IsEqual(_OriginalValue, value))
+        {
+          _OriginalValue = value;
+          if (value != null
+            && typeof(string) == value.GetType())
+          {
+            var newValue = (string)value;
+            _OriginalValue = newValue?.Trim();
+          }
+        }
+      }
+    }
+    private object? _OriginalValue;
+    #endregion
+
+    #region View Join Data Properties
+
+    // Gets or sets the view ID value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/ID/*'/>
+    [XmlIgnore()]
+    public int ID { get; set; }
+
+    // Gets or sets the view Sequence value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/Sequence/*'/>
+    [XmlIgnore()]
+    public int Sequence { get; set; }
+
+    // Gets or sets the view DataID value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/ViewDataID/*'/>
+    [XmlIgnore()]
+    public int ViewDataID { get; set; }
+
+    // Gets or sets the view JoinID value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/ViewJoinID/*'/>
+    [XmlIgnore()]
+    public int ViewJoinID { get; set; }
+
+    // Gets or sets the view Width value.
+    /// <include file='Doc/DataColumn.xml'
+    ///  path='members/Width/*'/>
+    [XmlIgnore()]
+    public int Width { get; set; }
+    #endregion
+
+    #region Class Data
+
+    /// <summary>The AllowDBNull column name.</summary>
+    public const string ColumnAllowDBNull = "AllowDBNull";
+
+    /// <summary>The AutoIncrement column name.</summary>
+    public const string ColumnAutoIncrement = "AutoIncrement";
+
+    /// <summary>The Caption column name.</summary>
+    public const string ColumnCaption = "Caption";
+
+    /// <summary>The ColumnName column name.</summary>
+    public const string ColumnColumnName = "ColumnName";
+
+    /// <summary>The DataTypeName column name.</summary>
+    public const string ColumnDataTypeName = "DataTypeName";
+
+    /// <summary>The MaxLength column name.</summary>
+    public const string ColumnMaxLength = "MaxLength";
+
+    /// <summary>The Position column name.</summary>
+    public const string ColumnPosition = "Position";
+
+    /// <summary>The PropertyName column name.</summary>
+    public const string ColumnPropertyName = "PropertyName";
+
+    /// <summary>The RenameAs column name.</summary>
+    public const string ColumnRenameAs = "RenameAs";
+
+    /// <summary>The SQLTypeName column name.</summary>
+    public const string ColumnSQLTypeName = "SQLTypeName";
+
+    /// <summary>The Value column name.</summary>
+    public const string ColumnValue = "Value";
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -48,7 +369,7 @@ namespace LJCNetCommon5
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include file='Doc/LJCDataColumn.xml'
+    /// <include file='Doc/DataColumn.xml'
     ///  path='members/ParamConstructor/*'/>
     public LJCDataColumn(string propertyName, string? value = null
       , string dataTypeName = "string", string? columnName = null
@@ -113,7 +434,7 @@ namespace LJCNetCommon5
     }
 
     // Formats the column value for an SQL string.
-    /// <include file='Doc/LJCDataColumn.xml'
+    /// <include file='Doc/DataColumn.xml'
     ///  path='members/FormatValue/*'/>
     public string? FormatValue()
     {
@@ -144,7 +465,7 @@ namespace LJCNetCommon5
     }
 
     // Creates a LJCDataValue object from an LJCDataColumn object.
-    /// <include file='Doc/LJCDataColumn.xml'
+    /// <include file='Doc/DataColumn.xml'
     ///  path='members/LJCDataValue/*'/>
     public static implicit operator LJCDataValue(LJCDataColumn dataColumn)
     {
@@ -162,327 +483,6 @@ namespace LJCNetCommon5
       }
       return retValue;
     }
-    #endregion
-
-    #region Data Properties
-
-    // Gets or sets the AllowDBNull flag.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/AllowDBNull/*'/>
-    public bool AllowDBNull { get; set; }
-
-    // Gets or sets the AutoIncrement flag.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/AutoIncrement/*'/>
-    public bool AutoIncrement { get; set; }
-
-    // Gets or sets the Caption value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/Caption/*'/>
-    public string? Caption
-    {
-      get => _Caption;
-      set
-      {
-        var newValue = value?.Trim();
-        if (_Caption != newValue)
-        {
-          _Caption = newValue;
-        }
-      }
-    }
-    private string? _Caption;
-
-    // Gets or sets the ColumnName value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/ColumnName/*'/>
-    public string ColumnName
-    {
-      get => _ColumnName;
-      set
-      {
-        var newValue = value?.Trim();
-
-        // Cannot change column name to null or white space.
-        if (_ColumnName != newValue
-          && LJC.HasText(newValue))
-        {
-          _ColumnName = newValue;
-
-          // Set empty property name the same as the column name.
-          if (!LJC.HasText(_PropertyName))
-          {
-            PropertyName = ColumnName;
-          }
-        }
-      }
-    }
-    private string _ColumnName;
-
-    // Gets or sets the DataTypeName value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/DataTypeName/*'/>
-    public string? DataTypeName
-    {
-      get => _DataTypeName;
-      set
-      {
-        var newValue = value?.Trim();
-        if (_DataTypeName != newValue)
-        {
-          _DataTypeName = newValue;
-        }
-      }
-    }
-    private string? _DataTypeName;
-
-    // Gets or sets the MaxLength value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/MaxLength/*'/>
-    public int MaxLength { get; set; }
-
-    // Gets or sets the Fixed Length Field Position value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/Position/*'/>
-    public int Position { get; set; }
-
-    // Gets or sets the PropertyName value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/PropertyName/*'/>
-    public string PropertyName
-    {
-      get => _PropertyName;
-      set
-      {
-        var newValue = value?.Trim();
-
-        // Cannot change property name to null or white space.
-        if (_PropertyName != newValue
-          && LJC.HasText(newValue))
-        {
-          _PropertyName = newValue;
-
-          // Set empty column name the same as the property name.
-          if (!LJC.HasText(_ColumnName))
-          {
-            ColumnName = PropertyName;
-          }
-        }
-      }
-    }
-    private string _PropertyName;
-
-    // Gets or sets the RenameAs value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/RenameAs/*'/>
-    public string? RenameAs
-    {
-      get => _RenameAs;
-      set
-      {
-        var newValue = value?.Trim();
-        if (_RenameAs != newValue)
-        {
-          _RenameAs = newValue;
-        }
-      }
-    }
-    private string? _RenameAs;
-
-    // Gets or sets the SQLTypeName value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/SQLTypeName/*'/>
-    public string? SQLTypeName
-    {
-      get => _SQLTypeName;
-      set
-      {
-        var newValue = value?.Trim();
-        if (_SQLTypeName != newValue)
-        {
-          _SQLTypeName = newValue;
-        }
-      }
-    }
-    private string? _SQLTypeName;
-
-    // Gets or sets the Value object.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/Value/*'/>
-    public object? Value
-    {
-      get => _Value;
-      set
-      {
-        if (!LJC.IsEqual(_Value, value))
-        {
-          _Value = value;
-          if (value != null
-            && typeof(string) == value.GetType())
-          {
-            var newValue = (string)value;
-            _Value = newValue?.Trim();
-          }
-
-          IsChanged = false;
-          if (!LJC.IsEqual(OriginalValue, value))
-          {
-            IsChanged = true;
-          }
-        }
-      }
-    }
-    private object? _Value;
-    #endregion
-
-    #region Additional Properties
-
-    // Gets or sets the add order index.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/AddOrderIndex/*'/>
-    public int AddOrderIndex { get; set; }
-
-    // Gets or sets the default value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/DefaultValue/*'/>
-    public string? DefaultValue
-    {
-      get => _DefaultValue;
-      set
-      {
-        var newValue = value?.Trim();
-        if (_DefaultValue != newValue)
-        {
-          _DefaultValue = value;
-        }
-      }
-    }
-    private string? _DefaultValue;
-
-    // Gets or sets the changed indicator.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/IsChanged/*'/>
-    [XmlIgnore()]
-    public bool IsChanged { get; set; }
-
-    // Gets or sets the primary key indicator.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/IsPrimaryKey/*'/>
-    public bool IsPrimaryKey { get; set; }
-
-    // Gets or sets the unique key indicator.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/IsUniqueKey/*'/>
-    public bool IsUniqueKey { get; set; }
-
-    // Gets or sets the KeyType value.
-    // "Natural", "Natural*", "Foreign"
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/KeyType/*'/>
-    public string? KeyType
-    {
-      get => _KeyType;
-      set
-      {
-        var newValue = value?.Trim();
-        if (_KeyType != newValue)
-        {
-          _KeyType = newValue;
-        }
-      }
-    }
-    private string? _KeyType;
-
-    // Gets or sets the original value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/OriginalValue/*'/>
-    public object? OriginalValue
-    {
-      get => _OriginalValue;
-      set
-      {
-        if (!LJC.IsEqual(_OriginalValue, value))
-        {
-          _OriginalValue = value;
-          if (value != null
-            && typeof(string) == value.GetType())
-          {
-            var newValue = (string)value;
-            _OriginalValue = newValue?.Trim();
-          }
-        }
-      }
-    }
-    private object? _OriginalValue;
-    #endregion
-
-    #region View Join Data Properties
-
-    // Gets or sets the view ID value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/ID/*'/>
-    [XmlIgnore()]
-    public int ID { get; set; }
-
-    // Gets or sets the view Sequence value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/Sequence/*'/>
-    [XmlIgnore()]
-    public int Sequence { get; set; }
-
-    // Gets or sets the view DataID value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/ViewDataID/*'/>
-    [XmlIgnore()]
-    public int ViewDataID { get; set; }
-
-    // Gets or sets the view JoinID value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/ViewJoinID/*'/>
-    [XmlIgnore()]
-    public int ViewJoinID { get; set; }
-
-    // Gets or sets the view Width value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/Width/*'/>
-    [XmlIgnore()]
-    public int Width { get; set; }
-    #endregion
-
-    #region Class Data
-
-    /// <summary>The AllowDBNull column name.</summary>
-    public const string ColumnAllowDBNull = "AllowDBNull";
-
-    /// <summary>The AutoIncrement column name.</summary>
-    public const string ColumnAutoIncrement = "AutoIncrement";
-
-    /// <summary>The Caption column name.</summary>
-    public const string ColumnCaption = "Caption";
-
-    /// <summary>The ColumnName column name.</summary>
-    public const string ColumnColumnName = "ColumnName";
-
-    /// <summary>The DataTypeName column name.</summary>
-    public const string ColumnDataTypeName = "DataTypeName";
-
-    /// <summary>The MaxLength column name.</summary>
-    public const string ColumnMaxLength = "MaxLength";
-
-    /// <summary>The Position column name.</summary>
-    public const string ColumnPosition = "Position";
-
-    /// <summary>The PropertyName column name.</summary>
-    public const string ColumnPropertyName = "PropertyName";
-
-    /// <summary>The RenameAs column name.</summary>
-    public const string ColumnRenameAs = "RenameAs";
-
-    /// <summary>The SQLTypeName column name.</summary>
-    public const string ColumnSQLTypeName = "SQLTypeName";
-
-    /// <summary>The Value column name.</summary>
-    public const string ColumnValue = "Value";
     #endregion
   }
 }

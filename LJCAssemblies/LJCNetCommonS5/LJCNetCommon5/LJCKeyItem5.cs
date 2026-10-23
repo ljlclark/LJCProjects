@@ -5,20 +5,86 @@
 namespace LJCNetCommon5
 {
   // Represents Key item values.
-  /// <include path="items/LJCKeyItem/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
+  /// <include file='Doc/ProjectKeyItem.xml'
+  ///  path='items/LJCKeyItem/*'/>
   public class LJCKeyItem : IComparable<LJCKeyItem>
   {
+    #region Properties
+
+    // Gets or sets the DataConfig name.
+    /// <include file='Doc/LJCKeyItem.xml'
+    ///  path='members/DataConfigName/*'/>
+    public string? DataConfigName
+    {
+      get => mDataConfigName;
+      set => mDataConfigName = value?.Trim();
+    }
+    private string? mDataConfigName;
+
+    // The Description value.
+    /// <include file='Doc/LJCKeyItem.xml'
+    ///  path='members/Description/*'/>
+    public string? Description
+    {
+      get => mDescription;
+      set => mDescription = value?.Trim();
+    }
+    private string? mDescription;
+
+    // The ID value.
+    /// <include file='Doc/LJCKeyItem.xml'
+    ///  path='members/ID/*'/>
+    public long ID { get; set; }
+
+    // Gets or sets the MaxLength value.
+    /// <include file='Doc/LJCKeyItem.xml'
+    ///  path='members/MaxLength/*'/>
+    public int MaxLength { get; set; }
+
+    // Gets or sets the Primary Key name.
+    /// <include file='Doc/LJCKeyItem.xml'
+    ///  path='members/PrimaryKeyName/*'/>
+    public string? PrimaryKeyName
+    {
+      get => mPrimaryKeyName;
+      set => mPrimaryKeyName = value?.Trim();
+    }
+    private string? mPrimaryKeyName;
+
+    // The Property name.
+    /// <include file='Doc/LJCKeyItem.xml'
+    ///  path='members/PropertyName/*'/>
+    public string? PropertyName
+    {
+      get => mPropertyName;
+      set => mPropertyName = value?.Trim();
+    }
+    private string? mPropertyName;
+
+    // Gets or sets the Table name.
+    /// <include file='Doc/LJCKeyItem.xml'
+    ///  path='members/TableName/*'/>
+    public string? TableName
+    {
+      get => mTableName;
+      set => mTableName = value?.Trim();
+    }
+    private string? mTableName;
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path="items/DefaultConstructor/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public LJCKeyItem()
     {
     }
 
     // Initializes an object instance.
-    /// <include path="items/KeyItem/*" file="Doc/LJCKeyItem.xml"/>
-    public LJCKeyItem(string propertyName, long id, string description)
+    /// <include file='Doc/LJCKeyItem.xml'
+    ///  path='members/ConstructorParam/*'/>
+    public LJCKeyItem(string propertyName, long id, string description) : this()
     {
       PropertyName = propertyName;
       ID = id;
@@ -29,7 +95,8 @@ namespace LJCNetCommon5
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include path="items/Clone/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public LJCKeyItem? Clone()
     {
       LJCKeyItem retValue = MemberwiseClone() as LJCKeyItem;
@@ -37,7 +104,8 @@ namespace LJCNetCommon5
     }
 
     // The object string identifier.
-    /// <include path="items/ToString/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/ToString/*'/>
     public override string? ToString()
     {
       return Description;
@@ -47,7 +115,8 @@ namespace LJCNetCommon5
     #region Search and Sort Methods
 
     // Provides the default Sort functionality.
-    /// <include path="items/CompareTo/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/CompareTo/*'/>
     public int CompareTo(LJCKeyItem? other)
     {
       int retValue;
@@ -64,62 +133,6 @@ namespace LJCNetCommon5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the DataConfig name.
-    /// <include path="items/DataConfigName/*" file="Doc/LJCKeyItem.xml"/>
-    public string? DataConfigName
-    {
-      get => mDataConfigName;
-      set => mDataConfigName = value?.Trim();
-    }
-    private string? mDataConfigName;
-
-    // The Description value.
-    /// <include path="items/Description/*" file="Doc/LJCKeyItem.xml"/>
-    public string? Description
-    {
-      get => mDescription;
-      set => mDescription = value?.Trim();
-    }
-    private string? mDescription;
-
-    // The ID value.
-    /// <include path="items/ID/*" file="Doc/LJCKeyItem.xml"/>
-    public long ID { get; set; }
-
-    // Gets or sets the MaxLength value.
-    /// <include path="items/MaxLength/*" file="Doc/LJCKeyItem.xml"/>
-    public int MaxLength { get; set; }
-
-    // Gets or sets the Primary Key name.
-    /// <include path="items/PrimaryKeyName/*" file="Doc/LJCKeyItem.xml"/>
-    public string? PrimaryKeyName
-    {
-      get => mPrimaryKeyName;
-      set => mPrimaryKeyName = value?.Trim();
-    }
-    private string? mPrimaryKeyName;
-
-    // The Property name.
-    /// <include path="items/PropertyName/*" file="Doc/LJCKeyItem.xml"/>
-    public string? PropertyName
-    {
-      get => mPropertyName;
-      set => mPropertyName = value?.Trim();
-    }
-    private string? mPropertyName;
-
-    // Gets or sets the Table name.
-    /// <include path="items/TableName/*" file="Doc/LJCKeyItem.xml"/>
-    public string? TableName
-    {
-      get => mTableName;
-      set => mTableName = value?.Trim();
-    }
-    private string? mTableName;
     #endregion
   }
 }

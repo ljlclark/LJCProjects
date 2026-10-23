@@ -7,20 +7,91 @@ using System.Text;
 namespace LJCNetCommon5
 {
   // Provides Assembly Reflection methods
-  /// <include path="members/LJCAssemblyReflect/*" file="Doc/LJCAssemblyReflect.xml"/>
-  /// <group name="static">Static</group>
-  /// <group name="constructor">Constructors</group>
-  /// <group name="method">Methods</group>
-  /// <group name="reflectionProperty">Set Reflection Properties</group>
-  /// <group name="syntax">Get Syntax</group>
-  /// <group name="check">Check Type</group>
-  /// <group name="properties">Properties</group>
+  /// <include file='Doc/ProjectAssemblyReflect.xml'
+  ///  path='members/LJCAssemblyReflect/*'/>
+  /// <group name='static">Static</group>
+  /// <group name='constructor">Constructors</group>
+  /// <group name='method">Methods</group>
+  /// <group name='reflectionProperty">Set Reflection Properties</group>
+  /// <group name='syntax">Get Syntax</group>
+  /// <group name='check">Check Type</group>
+  /// <group name='properties">Properties</group>
   public class LJCAssemblyReflect
   {
+    #region Properties
+
+    // The Assembly reference.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/Assembly/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public Assembly? Assembly { get; set; }
+
+    // The constructor information.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/ConstructorInfo/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public ConstructorInfo? ConstructorInfo { get; set; }
+
+    // The Field information.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/FieldInfo/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public FieldInfo? FieldInfo { get; set; }
+
+    // The Field name.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/FieldName/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public string? FieldName { get; set; }
+
+    // The Assembly file name.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/FileSpec/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public string? FileSpec { get; set; }
+
+    // The Method information.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/MethodInfo/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public MethodInfo? MethodInfo { get; set; }
+
+    // The Method name.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/MethodName/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public string? MethodName { get; set; }
+
+    // The Property information.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/PropertyInfo/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public PropertyInfo? PropertyInfo { get; set; }
+
+    // The Property name.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/PropertyName/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public string? PropertyName { get; set; }
+
+    // The Type name.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/TypeName/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public string? TypeName { get; set; }
+
+    // The Type reference.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/TypeReference/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public Type? TypeReference { get; set; }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path="members/DefaultConstructor/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/DefaultConstructor/*'/>
     /// <parentGroup>constructor</parentGroup>
     public LJCAssemblyReflect()
     {
@@ -28,7 +99,8 @@ namespace LJCNetCommon5
     }
 
     // Initializes an object instance.
-    /// <include path="members/Clear/*" file="../../../CoreUtilities/LJCGenDoc/Common/Data.xml"/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clear/*'/>
     /// <parentGroup>constructor</parentGroup>
     public void Clear()
     {
@@ -48,7 +120,8 @@ namespace LJCNetCommon5
     #region Static Methods
 
     // Gets parm names from method info.
-    /// <include path="members/ParmNames/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/ParmNames/*'/>
     /// <parentGroup>static</parentGroup>
     public static string[]? ParmNames(MethodInfo methodInfo)
     {
@@ -79,7 +152,8 @@ namespace LJCNetCommon5
     }
 
     // Gets parm method type names with parm names.
-    /// <include path="members/ParmTypeNames/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/ParmTypeNames/*'/>
     /// <parentGroup>static</parentGroup>
     public static string[]? ParmTypeNames(MethodInfo methodInfo)
     {
@@ -115,7 +189,8 @@ namespace LJCNetCommon5
     #region Methods
 
     // Gets a field info object.
-    /// <include path="members/GetFieldInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/GetFieldInfo/*'/>
     /// <parentGroup>method</parentGroup>
     public FieldInfo? GetFieldInfo(string fieldName)
     {
@@ -123,7 +198,8 @@ namespace LJCNetCommon5
     }
 
     // Gets a parameterless method info object.
-    /// <include path="members/MethodInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/MethodInfo/*'/>
     /// <parentGroup>method</parentGroup>
     public MethodInfo? GetMethodInfo(string methodName)
     {
@@ -148,7 +224,8 @@ namespace LJCNetCommon5
     }
 
     // Get a parameterized method info object.
-    /// <include path="members/ParmMethodInfosWithTypes/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/ParmMethodInfosWithTypes/*'/>
     /// <parentGroup>method</parentGroup>
     public MethodInfo? ParmMethodInfo(string methodName
       , string[] parmNames)
@@ -184,7 +261,8 @@ namespace LJCNetCommon5
     }
 
     // Gets parm method infos with method name and parm count.
-    /// <include path="members/ParmMethodInfosWithCount/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/ParmMethodInfosWithCount/*'/>
     /// <parentGroup>method</parentGroup>
     public MethodInfo[]? ParmMethodInfosWithCount(string methodName
       , int parmCount)
@@ -215,7 +293,8 @@ namespace LJCNetCommon5
     }
 
     // Gets parm method info with parm names.
-    /// <include path="members/ParmMethodInfosWithParms/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/ParmMethodInfosWithParms/*'/>
     /// <parentGroup>method</parentGroup>
     public MethodInfo? ParmMethodInfoWithParms(string methodName
       , string[] parmNames)
@@ -258,7 +337,8 @@ namespace LJCNetCommon5
     #region Set Reflection Property Methods
 
     // Retrieves the Assembly reference.
-    /// <include path="members/SetAssembly/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/SetAssembly/*'/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public Assembly? SetAssembly(string fileSpec)
     {
@@ -273,7 +353,8 @@ namespace LJCNetCommon5
     }
 
     // Set the ConstructorInfo reference.
-    /// <include path="members/SetConstructorInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/SetConstructorInfo/*'/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public ConstructorInfo? SetConstructorInfo(string methodName
       , string[]? parameterNames)
@@ -367,7 +448,8 @@ namespace LJCNetCommon5
     }
 
     // Set the FieldInfo reference.
-    /// <include path="members/SetFieldInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/SetFieldInfo/*'/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public FieldInfo? SetFieldInfo(string fieldName)
     {
@@ -383,7 +465,8 @@ namespace LJCNetCommon5
     }
 
     // Gets the Indexer Property info.
-    /// <include path="members/GetIndexerInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/GetIndexerInfo/*'/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public PropertyInfo? GetIndexerInfo(string fullName)
     {
@@ -418,7 +501,8 @@ namespace LJCNetCommon5
     }
 
     // Set the MethodInfo reference.
-    /// <include path="members/SetMethodInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/SetMethodInfo/*'/>
     /// <parentGroup>reflectionProperty</parentGroup>
     // ToDo: Refactor with new methods.
     public MethodInfo? SetMethodInfo(string methodName
@@ -536,7 +620,8 @@ namespace LJCNetCommon5
     }
 
     // Set the PropertyInfo reference.
-    /// <include path="members/SetPropertyInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/SetPropertyInfo/*'/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public PropertyInfo? SetPropertyInfo(string propertyName
       , string? indexerSignature = null)
@@ -563,7 +648,8 @@ namespace LJCNetCommon5
     }
 
     // Set the Type reference.
-    /// <include path="members/SetTypeReference/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/SetTypeReference/*'/>
     /// <parentGroup>reflectionProperty</parentGroup>
     public Type? SetTypeReference(string typeName)
     {
@@ -584,7 +670,8 @@ namespace LJCNetCommon5
     #region Get Syntax Methods
 
     // Creates and returns the Constructor syntax.
-    /// <include path="members/GetConstructorSyntax/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/GetConstructorSyntax/*'/>
     /// <parentGroup>syntax</parentGroup>
     public string? GetConstructorSyntax(ConstructorInfo? constructorInfo = null)
     {
@@ -668,7 +755,8 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns the Field syntax string.
-    /// <include path="members/GetFieldSyntax/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/GetFieldSyntax/*'/>
     /// <parentGroup>syntax</parentGroup>
     public string? GetFieldSyntax(FieldInfo? fieldInfo = null)
     {
@@ -710,7 +798,8 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns the Generic Type syntax.
-    /// <include path="members/GetGenericTypeSyntax/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/GetGenericTypeSyntax/*'/>
     /// <parentGroup>syntax</parentGroup>
     public string? GetGenericTypeSyntax(Type? typeReference = null)
     {
@@ -758,7 +847,8 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns the Method syntax.
-    /// <include path="members/GetMethodSyntax/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/GetMethodSyntax/*'/>
     /// <parentGroup>syntax</parentGroup>
     public string? GetMethodSyntax(MethodInfo? methodInfo = null)
     {
@@ -854,7 +944,8 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns the Property syntax.
-    /// <include path="members/GetPropertySyntax/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/GetPropertySyntax/*'/>
     /// <parentGroup>syntax</parentGroup>
     public string? GetPropertySyntax(PropertyInfo? propertyInfo = null)
     {
@@ -921,7 +1012,8 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns the Type syntax.
-    /// <include path="members/GetTypeSyntax/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/GetTypeSyntax/*'/>
     /// <parentGroup>syntax</parentGroup>
     public string? GetTypeSyntax(Type? typeReference = null)
     {
@@ -1037,7 +1129,8 @@ namespace LJCNetCommon5
     #region Check Type Methods
 
     // Indicates if the Method is not a property getter or setter.
-    /// <include path="members/IsNotProperty/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/IsNotProperty/*'/>
     /// <parentGroup>check</parentGroup>
     public static bool IsProperty(MethodInfo methodInfo)
     {
@@ -1053,7 +1146,8 @@ namespace LJCNetCommon5
     }
 
     // Indicates if the method is "override".
-    /// <include path="members/IsOverride/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/IsOverride/*'/>
     /// <parentGroup>check</parentGroup>
     public static bool IsOverride(MethodInfo methodInfo)
     {
@@ -1061,7 +1155,8 @@ namespace LJCNetCommon5
     }
 
     // Indicates if the method is "public".
-    /// <include path="members/IsPublic/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/IsPublic/*'/>
     /// <parentGroup>check</parentGroup>
     public bool IsPublic(MethodInfo? methodInfo = null)
     {
@@ -1097,7 +1192,8 @@ namespace LJCNetCommon5
     }
 
     // Indicates if the Type is a common type.
-    /// <include path="members/IsNotCommonClassification/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/IsNotCommonClassification/*'/>
     /// <parentGroup>check</parentGroup>
     private static bool IsCommonClassification(Type type)
     {
@@ -1112,7 +1208,8 @@ namespace LJCNetCommon5
     }
 
     // Indicates if the Interface is a common type.
-    /// <include path="members/IsNotCommonInterface/*" file="Doc/LJCAssemblyReflect.xml"/>
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/IsNotCommonInterface/*'/>
     /// <parentGroup>check</parentGroup>
     private static bool IsCommonInterface(Type type)
     {
@@ -1144,64 +1241,6 @@ namespace LJCNetCommon5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    // The Assembly reference.
-    /// <include path="members/Assembly/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public Assembly? Assembly { get; set; }
-
-    // The constructor information.
-    /// <include path="members/ConstructorInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public ConstructorInfo? ConstructorInfo { get; set; }
-
-    // The Field information.
-    /// <include path="members/FieldInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public FieldInfo? FieldInfo { get; set; }
-
-    // The Field name.
-    /// <include path="members/FieldName/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public string? FieldName { get; set; }
-
-    // The Assembly file name.
-    /// <include path="members/FileSpec/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public string? FileSpec { get; set; }
-
-    // The Method information.
-    /// <include path="members/MethodInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public MethodInfo? MethodInfo { get; set; }
-
-    // The Method name.
-    /// <include path="members/MethodName/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public string? MethodName { get; set; }
-
-    // The Property information.
-    /// <include path="members/PropertyInfo/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public PropertyInfo? PropertyInfo { get; set; }
-
-    // The Property name.
-    /// <include path="members/PropertyName/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public string? PropertyName { get; set; }
-
-    // The Type name.
-    /// <include path="members/TypeName/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public string? TypeName { get; set; }
-
-    // The Type reference.
-    /// <include path="members/ypeReference/*" file="Doc/LJCAssemblyReflect.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public Type? TypeReference { get; set; }
     #endregion
   }
 }

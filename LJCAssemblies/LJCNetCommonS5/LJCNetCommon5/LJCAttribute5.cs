@@ -1,19 +1,21 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCAttribute.cs
+// LJCAttribute5.cs
 
 namespace LJCNetCommon5
 {
   // Represents an HTML or XML element attribute.
-  /// <include path="members/LJCAttribute/*" file="Doc/LJCAttribute.xml"/>
-  /// <group name="constructor">Constructor</group>
-  /// <group name="properties">Properties</group>
+  /// <include file='Doc/ProjectAttribute.xml'
+  ///  path='members/LJCAttribute/*'/>
+  /// <group name='constructor">Constructor</group>
+  /// <group name='properties">Properties</group>
   public class LJCAttribute
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCAttribute.xml"/>
+    /// <include file='Doc/Attribute.xml'
+    ///  path='members/Constructor/*'/>
     /// <parentGroup>constructor</parentGroup>
     public LJCAttribute(string name, string? value = null)
     {
@@ -25,7 +27,8 @@ namespace LJCNetCommon5
     #region Properties
 
     // Gets or sets the attribute name.
-    /// <include path="members/Name/*" file="Doc/LJCAttribute.xml"/>
+    /// <include file='Doc/Attribute.xml'
+    ///  path='members/Name/*'/>
     /// <parentGroup>properties</parentGroup>
     public string? Name
     {
@@ -35,7 +38,8 @@ namespace LJCNetCommon5
     private string? mName;
 
     // Gets or sets the attribute value.
-    /// <include path="members/Value/*" file="Doc/LJCAttribute.xml"/>
+    /// <include file='Doc/Attribute.xml'
+    ///  path='members/Value/*'/>
     /// <parentGroup>properties</parentGroup>
     public string? Value
     {

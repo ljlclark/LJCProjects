@@ -5,7 +5,7 @@
 namespace LJCNetCommon5
 {
   // Represents a collection of User Type names.
-  /// <include file='Doc/UserTypes.xml'
+  /// <include file='Doc/ProjectUserTypes.xml'
   ///  path='members/UserTypes/*'/>
   public class UserTypes : List<string>
   {

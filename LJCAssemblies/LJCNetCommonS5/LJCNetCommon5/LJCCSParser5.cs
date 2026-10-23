@@ -6,10 +6,11 @@ namespace LJCNetCommon5
 {
   // Provides methods to parse a source line for class, method and property
   // definitions.
-  /// <include path="members/LJCCSParser/*" file="Doc/LJCCSParser.xml"/>
-  /// <group name="constructor">Constructor</group>
-  /// <group name="methods">Methods</group>
-  /// <group name="properties">Properties</group>
+  /// <include file='Doc/ProjectCSParser.xml'
+  /// path='members/LJCCSParser/*'/>
+  /// <group name='constructor">Constructor</group>
+  /// <group name='methods">Methods</group>
+  /// <group name='properties">Properties</group>
   public class LJCCSParser
   {
     #region Static Methods
@@ -31,10 +32,50 @@ namespace LJCNetCommon5
     }
     #endregion
 
+    #region Properties
+
+    // Gets or sets the second class access modifier.
+    /// <include file='Doc/CSParser.xml'
+    ///  path='members/ClassModifier2/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public string[]? ClassModifier2 { get; set; }
+
+    // Gets or sets the data types.
+    /// <include file='Doc/CSParser.xml'
+    ///  path='members/DataType/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public string[]? DataType { get; set; }
+
+    // Gets or sets the second method access modifier.
+    /// <include file='Doc/CSParser.xml'
+    ///  path='members/MethodModifier2/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public string[]? MethodModifier2 { get; set; }
+
+    // Gets or sets the third method access modifier.
+    /// <include file='Doc/CSParser.xml'
+    ///  path='members/MethodModifier3/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public string[]? MethodModifier3 { get; set; }
+
+    // Gets or sets the access modifiers.
+    /// <include file='Doc/CSParser.xml'
+    ///  path='members/Modifier/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public string[]? Modifier { get; set; }
+
+    // Gets or sets the second access modifier.
+    /// <include file='Doc/CSParser.xml'
+    ///  path='members/Modifier2/*'/>
+    /// <parentGroup>properties</parentGroup>
+    public string[]? Modifier2 { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCCSParser.xml"/>
+    /// <include file='Doc/CSParser.xml'
+    ///  path='members/Constructor/*'/>
     /// <parentGroup>constructor</parentGroup>
     public LJCCSParser()
     {
@@ -45,7 +86,8 @@ namespace LJCNetCommon5
     #region Public Methods
 
     // Attempts to parse a class name.
-    /// <include path="members/ClassName/*" file="Doc/LJCCSParser.xml"/>
+    /// <include file='Doc/CSParser.xml'
+    ///  path='members/ClassName/*'/>
     /// <parentGroup>methods</parentGroup>
     public string? ClassName(string line)
     {
@@ -95,7 +137,8 @@ namespace LJCNetCommon5
     }
 
     // Attempts to parse a method name.
-    /// <include path="members/MethodName/*" file="Doc/LJCCSParser.xml"/>
+    /// <include file='Doc/CSParser.xml'
+    ///  path='members/MethodName/*'/>
     /// <parentGroup>methods</parentGroup>
     public string? MethodName(string line)
     {
@@ -171,7 +214,8 @@ namespace LJCNetCommon5
     }
 
     // Attempts to parse a property name.
-    /// <include path="members/PropertyName/*" file="Doc/LJCCSParser.xml"/>
+    /// <include file='Doc/CSParser.xml'
+    ///  path='members/PropertyName/*'/>
     /// <parentGroup>methods</parentGroup>
     public string? PropertyName(string line, string? nextLine)
     {
@@ -422,39 +466,6 @@ namespace LJCNetCommon5
         "SByte",
       ];
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the second class access modifier.
-    /// <include path="members/ClassModifier2/*" file="Doc/LJCCSParser.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public string[]? ClassModifier2 { get; set; }
-
-    // Gets or sets the data types.
-    /// <include path="members/DataType/*" file="Doc/LJCCSParser.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public string[]? DataType { get; set; }
-
-    // Gets or sets the second method access modifier.
-    /// <include path="members/MethodModifier2/*" file="Doc/LJCCSParser.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public string[]? MethodModifier2 { get; set; }
-
-    // Gets or sets the third method access modifier.
-    /// <include path="members/MethodModifier3/*" file="Doc/LJCCSParser.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public string[]? MethodModifier3 { get; set; }
-
-    // Gets or sets the access modifiers.
-    /// <include path="members/Modifier/*" file="Doc/LJCCSParser.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public string[]? Modifier { get; set; }
-
-    // Gets or sets the second access modifier.
-    /// <include path="members/Modifier2/*" file="Doc/LJCCSParser.xml"/>
-    /// <parentGroup>properties</parentGroup>
-    public string[]? Modifier2 { get; set; }
     #endregion
   }
 }
