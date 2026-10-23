@@ -1,21 +1,21 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // Modifiers.cs
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using System.Xml.Serialization;
 
 namespace LJCNetCommon5
 {
-  /// <summary>Represents a collection of Modifiers.</summary>
+  // Represents a collection of Modifiers.
+  /// <include file='Doc/ProjectModifiers.xml'
+  ///  path='members/Modifiers/*'/>
   public class Modifiers : IEnumerable<string>
   {
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCDeserialize/*'/>
     public static List<string> Deserialize(string? fileSpec = null)
     {
       List<string> retValue;
@@ -53,7 +53,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems1/*'/>
     public static bool HasItems(Modifiers collection)
     {
       bool retValue = false;
@@ -66,10 +67,28 @@ namespace LJCNetCommon5
     }
     #endregion
 
+    #region Properties
+
+    // Gets the Default File Name.
+    /// <include file='Doc/Modifiers.xml'
+    ///  path='members/DefaultFileName/*'/>
+    public static string DefaultFileName
+    {
+      get => @"Keywords\Modifiers.xml";
+    }
+    #endregion
+
+    #region Class Data
+
+    private int mPrevCount;
+    private const string RootName = "Modifiers";
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/DefaultConstructor/*'/>
     public Modifiers()
     {
       Items = [];
@@ -77,7 +96,8 @@ namespace LJCNetCommon5
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/CopyConstructor/*'/>
     public Modifiers(Modifiers items)
     {
       Items = [];
@@ -94,7 +114,8 @@ namespace LJCNetCommon5
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include path='items/Add1/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/Modifiers.xml'
+    ///  path='members/Add1/*'/>
     public void Add(string item)
     {
       if (LJC.HasText(item))
@@ -104,7 +125,8 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public Modifiers Clone()
     {
       var retValue = new Modifiers();
@@ -116,7 +138,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -129,7 +152,8 @@ namespace LJCNetCommon5
     }
 
     // Serializes the collection
-    /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCSerialize/*'/>
     public void Serialize(string? fileSpec = null)
     {
       if (!LJC.HasText(fileSpec))
@@ -143,14 +167,17 @@ namespace LJCNetCommon5
 
     #region IEnumerable Methods and Properties
 
-    /// <summary>The Collection count.</summary>
+    // The Collection count.
+    /// <include file='Doc/Modifiers.xml'
+    ///  path='members/Count/*'/>
     public int Count
     {
       get => Items.Count;
     }
 
     // Gets the Collection Enumerator.
-    /// <include path='items/GetEnumerator/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/Modifiers.xml'
+    ///  path='members/GetEnumerator/*'/>
     public IEnumerator<string> GetEnumerator()
     {
       return ((IEnumerable<string>)Items).GetEnumerator();
@@ -162,12 +189,15 @@ namespace LJCNetCommon5
       return ((IEnumerable<string>)Items).GetEnumerator();
     }
 
-    /// <summary>The KeyItem items.</summary>
+    // The KeyItem items.
+    /// <include file='Doc/Modifiers.xml'
+    ///  path='members/Items/*'/>
     [XmlArray(RootName)]
     public List<string> Items { get; set; }
 
     // Gets the item by index value.
-    /// <include path='items/Indexer/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/Modifiers.xml'
+    ///  path='members/Indexer/*'/>
     public string? this[int index]
     {
       get
@@ -186,7 +216,8 @@ namespace LJCNetCommon5
     #region Sort and Search Methods
 
     // Retrieve the collection element.
-    /// <include path='items/SearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/SearchName/*'/>
     public string? SearchName(string name)
     {
       string? retValue = null;
@@ -201,7 +232,8 @@ namespace LJCNetCommon5
     }
 
     // Sort on Name.
-    /// <include path='items/SortName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/SortName/*'/>
     public void SortName()
     {
       if (Count != mPrevCount)
@@ -210,21 +242,6 @@ namespace LJCNetCommon5
         Items.Sort();
       }
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets the Default File Name.</summary>
-    public static string DefaultFileName
-    {
-      get => @"Keywords\Modifiers.xml";
-    }
-    #endregion
-
-    #region Class Data
-
-    private int mPrevCount;
-    private const string RootName = "Modifiers";
     #endregion
   }
 }

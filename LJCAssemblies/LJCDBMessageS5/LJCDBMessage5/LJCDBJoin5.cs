@@ -5,9 +5,54 @@ using LJCNetCommon5;
 
 namespace LJCDBMessage5
 {
-  /// <summary>Represents a database table join.</summary>
+  // Represents a database table join.
+  /// <include file='Doc/ProjectDBJoin.xml'
+  ///  path='items/LJCDBJoin/*'/>
   public class LJCDBJoin
   {
+    #region Properties
+
+    // The included join table columns.
+    /// <include file='Doc/DbJoin.xml'
+    ///  path='items/Columns/*'/>
+    public LJCDataColumns Columns { get; set; }
+
+    // The join on definitions.
+    /// <include file='Doc/DbJoin.xml'
+    ///  path='items/JoinOns/*'/>
+    public LJCDBJoinOns JoinOns { get; set; }
+
+    // The join type.
+    /// <include file='Doc/DbJoin.xml'
+    ///  path='items/JoinType/*'/>
+    public string? JoinType
+    {
+      get => mJoinType;
+      set => mJoinType = value?.Trim();
+    }
+    private string? mJoinType;
+
+    // The table alias.
+    /// <include file='Doc/DbJoin.xml'
+    ///  path='items/TableAlias/*'/>
+    public string? TableAlias
+    {
+      get => mTableAlias;
+      set => mTableAlias = value?.Trim();
+    }
+    private string? mTableAlias;
+
+    // The table name.
+    /// <include file='Doc/DbJoin.xml'
+    ///  path='items/TableName/*'/>
+    public string TableName
+    {
+      get => mTableName;
+      set => mTableName = value.Trim();
+    }
+    private string mTableName;
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -59,43 +104,6 @@ namespace LJCDBMessage5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    // The included join table columns.
-    /// <include file='Doc/DbJoin.xml'
-    ///  path='items/Columns/*'/>
-    public LJCDataColumns Columns { get; set; }
-
-    /// <summary>The join on definitions.</summary>
-    public LJCDBJoinOns JoinOns { get; set; }
-
-    // The join type.
-    /// <include file='Doc/DbJoin.xml'
-    ///  path='items/JoinType/*'/>
-    public string? JoinType
-    {
-      get => mJoinType;
-      set => mJoinType = value?.Trim();
-    }
-    private string? mJoinType;
-
-    /// <summary>The table alias.</summary>
-    public string? TableAlias
-    {
-      get => mTableAlias;
-      set => mTableAlias = value?.Trim();
-    }
-    private string? mTableAlias;
-
-    /// <summary>The table name.</summary>
-    public string TableName
-    {
-      get => mTableName;
-      set => mTableName = value.Trim();
-    }
-    private string mTableName;
     #endregion
   }
 }

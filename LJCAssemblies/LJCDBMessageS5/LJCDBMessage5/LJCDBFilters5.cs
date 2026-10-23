@@ -7,7 +7,8 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a collection of DbFilter objects.
-  /// <include path='items/DbFilters/*' file='Doc/DbFilters.xml'/>
+  /// <include file='Doc/ProjectDbFilters.xml'
+  /// path='items/LJCDbFilters/*'/>
   public class LJCDBFilters : List<LJCDBFilter>
   {
     #region Static Methods

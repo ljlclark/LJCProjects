@@ -20,7 +20,7 @@ namespace LJCNetCommon5
 
     // Creates the keys collection.
     /// <include file='Doc/LJC.xml'
-    ///  path='items/Keys/*'/>
+    ///  path='members/Keys/*'/>
     public static LJCDataColumns Keys(string propertyName, string searchValue)
     {
       return new LJCDataColumns()

@@ -6,7 +6,9 @@ using System.Data.SqlTypes;
 
 namespace LJCDBMessage5
 {
-  /// <summary>Common data message methods.</summary>
+  // Common data message methods.
+  /// <include file='Doc/ProjectDbCommon.xml'
+  ///  path='items/LJCDBCommon/*'/>
   public partial class LJCDBCommon
   {
     #region Create Request Columns

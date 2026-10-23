@@ -6,9 +6,28 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents the conditions and properties.
-  /// <include path='items/DbConditionSet/*' file='Doc/DbConditionSet.xml'/>
+  /// <include file='Doc/ProjectDbConditionSet.xml'
+  ///  path='items/LJCDbConditionSet/*'/>
   public class LJCDBConditionSet
   {
+    #region Properties
+
+    // The conditions boolean operator.
+    /// <include file='Doc/DbConditionSet.xml'
+    ///  path='items/BooleanOperator/*'/>
+    public string? BooleanOperator
+    {
+      get => mBooleanOperator;
+      set => mBooleanOperator = value?.Trim();
+    }
+    private string? mBooleanOperator;
+
+    // Gets or sets the conditions.
+    /// <include file='Doc/DbConditionSet.xml'
+    ///  path='items/Conditions/*'/>
+    public LJCDBConditions Conditions { get; set; }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
@@ -46,19 +65,5 @@ namespace LJCDBMessage5
       return retValue;
     }
     #endregion
-
-    #region Properties
-
-    /// <summary>The conditions boolean operator.</summary>
-    public string? BooleanOperator
-    {
-      get => mBooleanOperator;
-      set => mBooleanOperator = value?.Trim();
-    }
-    private string? mBooleanOperator;
-
-    /// <summary>Gets or sets the conditions.</summary>
-    public LJCDBConditions Conditions { get; set; }
   }
-  #endregion
 }

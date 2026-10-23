@@ -6,8 +6,8 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a collection of join on definitions.
-  /// <include file='Doc/DbJoinOns.xml'
-  ///  path='items/DbJoinOns/*'/>
+  /// <include file='Doc/ProjectDbJoinOns.xml'
+  ///  path='items/LJCDbJoinOns/*'/>
   public class LJCDBJoinOns : List<LJCDBJoinOn>
   {
     #region Constructors

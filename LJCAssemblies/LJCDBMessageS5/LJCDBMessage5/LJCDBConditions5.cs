@@ -6,7 +6,8 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a collection of DbCondition objects.
-  /// <include path='items/DbConditions/*' file='Doc/DbConditions.xml'/>
+  /// <include file='Doc/ProjectDbConditions.xml'
+  ///  path='items/LJCDbConditions/*'/>
   public class LJCDBConditions : List<LJCDBCondition>
   {
     #region Constructors

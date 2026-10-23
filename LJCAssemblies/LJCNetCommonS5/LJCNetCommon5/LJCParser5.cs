@@ -1,19 +1,36 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCParser5.cs
-using System;
 
 namespace LJCNetCommon5
 {
   // Contains parsing related methods.
-  /// <include file='Doc/LJCParser.xml'
+  /// <include file='Doc/ProjectParser.xml'
   ///  path='members/LJCParser/*'/>
   public class LJCParser
   {
+    #region Properties
+
+    // The delimited string begin index.
+    /// <include file='Doc/Parser.xml'
+    ///  path='members/BeginIndex/*'/>
+    public int BeginIndex { get; private set; }
+
+    // The delimited string end index.
+    /// <include file='Doc/Parser.xml'
+    ///  path='members/EndIndex/*'/>
+    public int EndIndex { get; private set; }
+
+    // The parsing start index.
+    /// <include file='Doc/Parser.xml'
+    ///  path='members/StartIndex/*'/>
+    public int StartIndex { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/LJCParser.xml'
+    /// <include file='Doc/Parser.xml'
     ///  path='members/Constructor/*'/>
     public LJCParser()
     {
@@ -26,7 +43,7 @@ namespace LJCNetCommon5
     #region Methods
 
     // Gets a delimited string.
-    /// <include file='Doc/LJCParser.xml'
+    /// <include file='Doc/Parser.xml'
     ///  path='members/DelimitedString/*'/>
     public string? DelimitedString(string text, string? beginDelimiter = null
       , string? endDelimiter = null)
@@ -84,7 +101,7 @@ namespace LJCNetCommon5
     }
 
     // Finds a tag in a text value.
-    /// <include file='Doc/LJCParser.xml'
+    /// <include file='Doc/Parser.xml'
     ///  path='members/FindTag/*'/>
     public string? FindTag(string text, ref string tagName)
     {
@@ -125,7 +142,7 @@ namespace LJCNetCommon5
     }
 
     // Removes a section from a text value.
-    /// <include file='Doc/LJCParser.xml'
+    /// <include file='Doc/Parser.xml'
     ///  path='members/RemoveSection/*'/>
     public string RemoveSection(string text, int beginIndex, int endIndex)
     {
@@ -146,7 +163,7 @@ namespace LJCNetCommon5
     }
 
     // Removes tags from a text value.
-    /// <include file='Doc/LJCParser.xml'
+    /// <include file='Doc/Parser.xml'
     ///  path='members/RemoveTags/*'/>
     public string RemoveTags(string text)
     {
@@ -165,7 +182,7 @@ namespace LJCNetCommon5
     }
 
     // Retrieve the selection string.
-    /// <include file='Doc/LJCParser.xml'
+    /// <include file='Doc/Parser.xml'
     ///  path='members/Selection/*'/>
     public string? Selection(string text)
     {
@@ -180,7 +197,7 @@ namespace LJCNetCommon5
     }
 
     // Retrieve the selection length.
-    /// <include file='Doc/LJCParser.xml'
+    /// <include file='Doc/Parser.xml'
     ///  path='members/SelectionLength/*'/>
     public int SelectionLength()
     {
@@ -196,7 +213,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the string including the supplied delimiters.
-    /// <include file='Doc/LJCParser.xml'
+    /// <include file='Doc/Parser.xml'
     ///  path='members/StringWithDelimiters/*'/>
     public string? StringWithDelimiters(string text, string? beginDelimiter = null
       , string? endDelimiter = null)
@@ -216,18 +233,6 @@ namespace LJCNetCommon5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>The delimited string begin index.</summary>
-    public int BeginIndex { get; private set; }
-
-    /// <summary>The delimited string end index.</summary>
-    public int EndIndex { get; private set; }
-
-    /// <summary>The parsing start index.</summary>
-    public int StartIndex { get; set; }
     #endregion
   }
 }

@@ -6,15 +6,15 @@ using System.Text;
 namespace LJCNetCommon5
 {
   // Provides methods for HTML Syntax Highighting.
-  /// <include file='Doc/SyntaxHighlight.xml'
-  ///  path='items/SyntaxHighlightHtml/*'/>
+  /// <include file='Doc/ProjectSyntaxHighlight.xml'
+  ///  path='members/SyntaxHighlightHtml/*'/>
   public class SyntaxHighlightHtml
   {
     #region Static Methods
 
     // Retrieves the leading whitespace string.
     /// <include file='Doc/SyntaxHighlight.xml'
-    ///  path='items/SaveLeadingWhiteSpace/*'/>
+    ///  path='members/SaveLeadingWhiteSpace/*'/>
     public static string? SaveLeadingWhiteSpace(string? text)
     {
       string? retValue = text;
@@ -37,7 +37,7 @@ namespace LJCNetCommon5
 
     // Strips the specified number of leading whitespace characters from a string.
     /// <include file='Doc/SyntaxHighlight.xml'
-    ///  path='items/StripExtraLeadingWhiteSpace/*'/>
+    ///  path='members/StripExtraLeadingWhiteSpace/*'/>
     public static string? StripExtraLeadingWhiteSpace(string text, int stripLength)
     {
       string? retValue = null;
@@ -54,6 +54,19 @@ namespace LJCNetCommon5
 
     #region Properties
 
+    // Gets or sets the Allow Debug Breaks value.
+    /// <include file='Doc/SyntaxHighlight.xml'
+    ///  path='members/AllowDebugBreaks/*'/>
+    /// <include file='Doc/SyntaxHighlight.xml'
+    ///  path='members/StripExtraLeadingWhiteSpace/*'/>
+    public bool AllowDebugBreaks { get; set; }
+
+    // Gets or sets the DataMember name value.
+    internal string DataMemberName { get; set; } = null!;
+
+    // Gets or sets the DataType name value.
+    internal string DataTypeName { get; set; } = null!;
+
     // Gets the BeginComment span.
     private static string BeginCommentSpan
     {
@@ -66,17 +79,6 @@ namespace LJCNetCommon5
       get => Span("xmlComment", null, false);
     }
 
-    // Gets or sets the Allow Debug Breaks value.
-    /// <include file='Doc/SyntaxHighlight.xml'
-    ///  path='items/AllowDebugBreaks/*'/>
-    public bool AllowDebugBreaks { get; set; }
-
-    // Gets or sets the DataMember name value.
-    internal string DataMemberName { get; set; } = null!;
-
-    // Gets or sets the DataType name value.
-    internal string DataTypeName { get; set; } = null!;
-
     // Gets the ReturnsInProcess flag.
     private bool IsReturnsInProcess { get; set; }
 
@@ -88,7 +90,7 @@ namespace LJCNetCommon5
 
     // Initializes an object instance.
     /// <include file='../../LJCGenDoc/Common/Data.xml'
-    ///  path='items/Constructor/*'/>
+    ///  path='members/Constructor/*'/>
     public SyntaxHighlightHtml()
     {
       //DoSort();
@@ -99,7 +101,7 @@ namespace LJCNetCommon5
 
     // Adds the Syntax Highlighting to the HTML code line.
     /// <include file='Doc/SyntaxHighlight.xml'
-    ///  path='items/AddSyntaxHighlight/*'/>
+    ///  path='members/AddSyntaxHighlight/*'/>
     public string AddSyntaxHighlight(string line)
     {
       string text;
@@ -205,7 +207,7 @@ namespace LJCNetCommon5
 
     // Strips the defined leading white spaces and applies Syntax Highlighting.
     /// <include file='Doc/SyntaxHighlight.xml'
-    ///  path='items/FormatCode/*'/>
+    ///  path='members/FormatCode/*'/>
     public string FormatCode(string dataTypeName, string dataMemberName
       , string code, bool stripLeadingSpaces = true)
     {
@@ -252,7 +254,7 @@ namespace LJCNetCommon5
 
     // Reads the User Types from a file or creates the file if it does not exist
     /// <include file='Doc/SyntaxHighlight.xml'
-    ///  path='items/SetUserTypes/*'/>
+    ///  path='members/SetUserTypes/*'/>
     public void SetUserTypes(string dataTypeName, string dataMemberName
       , string code)
     {
@@ -293,7 +295,7 @@ namespace LJCNetCommon5
 
     // Updates the User Types if a new one is found in the HTML code line.
     /// <include file='Doc/SyntaxHighlight.xml'
-    ///  path='items/UpdateUserTypes/*'/>
+    ///  path='members/UpdateUserTypes/*'/>
     public void UpdateUserTypes(string line)
     {
       int dotIndex;

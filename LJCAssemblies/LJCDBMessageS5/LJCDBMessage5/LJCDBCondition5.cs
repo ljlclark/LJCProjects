@@ -5,9 +5,44 @@ using LJCNetCommon5;
 
 namespace LJCDBMessage5
 {
-  /// <summary>Represents a filter condition.</summary>
+  // Represents a filter condition.
+  /// <include file='Doc/ProjectDbCondition.xml'
+  ///  path='items/LJCDBCondition/*'/>
   public class LJCDBCondition
   {
+    #region Properties
+
+    // The comparison operator.
+    /// <include file='Doc/DbCondition.xml'
+    ///  path='items/ComparisonOperator/*'/>
+    public string? ComparisonOperator
+    {
+      get => mComparisonOperator;
+      set => mComparisonOperator = value?.Trim();
+    }
+    private string? mComparisonOperator;
+
+    // The first data value.
+    /// <include file='Doc/DbCondition.xml'
+    ///  path='items/FirstValue/*'/>
+    public string? FirstValue
+    {
+      get => mFirstValue;
+      set => mFirstValue = value?.Trim();
+    }
+    private string? mFirstValue;
+
+    // The second data value.
+    /// <include file='Doc/DbCondition.xml'
+    ///  path='items/SecondValue/*'/>
+    public string? SecondValue
+    {
+      get => mSecondValue;
+      set => mSecondValue = value?.Trim();
+    }
+    private string? mSecondValue;
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -38,33 +73,6 @@ namespace LJCDBMessage5
       LJCDBCondition? retValue = MemberwiseClone() as LJCDBCondition;
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>The comparison operator.</summary>
-    public string? ComparisonOperator
-    {
-      get => mComparisonOperator;
-      set => mComparisonOperator = value?.Trim();
-    }
-    private string? mComparisonOperator;
-
-    /// <summary>The first data value.</summary>
-    public string? FirstValue
-    {
-      get => mFirstValue;
-      set => mFirstValue = value?.Trim();
-    }
-    private string? mFirstValue;
-
-    /// <summary>The second data value.</summary>
-    public string? SecondValue
-    {
-      get => mSecondValue;
-      set => mSecondValue = value?.Trim();
-    }
-    private string? mSecondValue;
     #endregion
   }
 }

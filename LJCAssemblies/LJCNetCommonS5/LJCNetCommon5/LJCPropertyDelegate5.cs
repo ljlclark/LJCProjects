@@ -5,16 +5,17 @@
 namespace LJCNetCommon5
 {
   // Represents a PropertyDelegate definition.
-  /// <include path="members/LJCPropertyDelegate/*" file="Doc/LJCPropertyDelegate.xml"/>
+  /// <include file='Doc/ProjectPropertyDelegate.xml'
+  ///  path='members/LJCPropertyDelegate/*'/>
   public class LJCPropertyDelegate
   {
     // Gets or sets the PropertyName value.
-    /// <include file='Doc/LJCPropertyDelegate.xml'
+    /// <include file='Doc/PropertyDelegate.xml'
     ///  path='members/PropertyName/*'/>
     public string? PropertyName { get; set; }
 
     // Gets or sets the Delegate reference.
-    /// <include file='Doc/LJCPropertyDelegate.xml'
+    /// <include file='Doc/PropertyDelegate.xml'
     ///  path='members/Value/*'/>
     public Func<object, object>? Value { get; set; }
   }

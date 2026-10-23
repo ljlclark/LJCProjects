@@ -1,21 +1,21 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataTypes.cs
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using System.Xml.Serialization;
 
 namespace LJCNetCommon5
 {
-  /// <summary>Represents a collection of Data Types.</summary>
+  // Represents a collection of Data Types.
+  /// <include file='Doc/DataTypes.xml'
+  ///  path='members/DataTypes/*'/>
   public class DataTypes : IEnumerable<string>
   {
-    #region Static Functions
+    #region Static Methods
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCDeserialize/*'/>
     public static List<string> Deserialize(string? fileSpec = null)
     {
       List<string> retValue;
@@ -59,7 +59,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems1/*'/>
     public static bool HasItems(DataTypes collection)
     {
       bool retValue = false;
@@ -72,10 +73,28 @@ namespace LJCNetCommon5
     }
     #endregion
 
+    #region Properties
+
+    // Gets the Default File Name.
+    /// <include file='Doc/DataTypes.xml'
+    ///  path='members/DefaultFileName/*'/>
+    public static string DefaultFileName
+    {
+      get => @"Keywords\DataTypes.xml";
+    }
+    #endregion
+
+    #region Class Data
+
+    private int mPrevCount;
+    private const string RootName = "DataTypes";
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public DataTypes()
     {
       Items = [];
@@ -83,10 +102,10 @@ namespace LJCNetCommon5
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
-    public DataTypes(DataTypes items)
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/ConstructorCopy/*'/>
+    public DataTypes(DataTypes items) : this()
     {
-      Items = [];
       if (HasItems(items))
       {
         foreach (var item in items)
@@ -100,7 +119,8 @@ namespace LJCNetCommon5
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include path='items/Add1/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/DataTypes.xml'
+    ///  path='members/Add/*'/>
     public void Add(string item)
     {
       if (LJC.HasText(item))
@@ -110,7 +130,8 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public DataTypes Clone()
     {
       var retValue = new DataTypes();
@@ -122,7 +143,8 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -135,7 +157,8 @@ namespace LJCNetCommon5
     }
 
     // Serializes the collection
-    /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/Serialize/*'/>
     public void Serialize(string? fileSpec = null)
     {
       if (!LJC.HasText(fileSpec))
@@ -150,7 +173,8 @@ namespace LJCNetCommon5
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/SearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/SearchName/*'/>
     public string? SearchName(string name)
     {
       string? retValue = null;
@@ -165,7 +189,8 @@ namespace LJCNetCommon5
     }
 
     // Sort on Name.
-    /// <include path='items/SortName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/SortName/*'/>
     public void SortName()
     {
       if (Count != mPrevCount)
@@ -179,7 +204,8 @@ namespace LJCNetCommon5
     #region IEnumerable Methods
 
     // Gets the Collection Enumerator.
-    /// <include path='items/GetEnumerator/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/DataTypes.xml'
+    ///  path='members/GetEnumerator/*'/>
     public IEnumerator<string> GetEnumerator()
     {
       return ((IEnumerable<string>)Items).GetEnumerator();
@@ -194,18 +220,23 @@ namespace LJCNetCommon5
 
     #region IEnumerable Properties
 
-    /// <summary>The Collection count.</summary>
+    // The Collection count.
+    /// <include file='Doc/DataTypes.xml'
+    ///  path='members/Count/*'/>
     public int Count
     {
       get => Items.Count;
     }
 
-    /// <summary>The KeyItem items.</summary>
+    // The KeyItem items.
+    /// <include file='Doc/DataTypes.xml'
+    ///  path='members/Items/*'/>
     [XmlArray(RootName)]
     public List<string> Items { get; set; }
 
     // Gets the item by index value.
-    /// <include path='items/Indexer/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/DataTypes.xml'
+    ///  path='members/Indexer/*'/>
     public string? this[int index]
     {
       get
@@ -219,21 +250,6 @@ namespace LJCNetCommon5
         return retValue;
       }
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets the Default File Name.</summary>
-    public static string DefaultFileName
-    {
-      get => @"Keywords\DataTypes.xml";
-    }
-    #endregion
-
-    #region Class Data
-
-    private int mPrevCount;
-    private const string RootName = "DataTypes";
     #endregion
   }
 }

@@ -6,8 +6,58 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   /// <summary>Represents a Join On definition.</summary>
+  /// <include file='Doc/ProjectDBJoinOn.xml'
+  ///  path='items/LJCDBJoinOn/*'/>
   public class LJCDBJoinOn
   {
+    #region Properties
+
+    // The Boolean Operator value.
+    /// <include file='Doc/DBJoinOn.xml'
+    ///  path='items/BooleanOperator/*'/>
+    public string BooleanOperator
+    {
+      get => mBooleanOperator;
+      set => mBooleanOperator = value;
+    }
+    private string mBooleanOperator;
+
+    // The 'From' column name.
+    /// <include file='Doc/DBJoinOn.xml'
+    ///  path='items/FromColumnName/*'/>
+    public string? FromColumnName
+    {
+      get => mFromColumnName;
+      set => mFromColumnName = value?.Trim();
+    }
+    private string? mFromColumnName;
+
+    // The Join On Operator.
+    /// <include file='Doc/DBJoinOn.xml'
+    ///  path='items/JoinOnOperator/*'/>
+    public string JoinOnOperator
+    {
+      get => mJoinOnOperator;
+      set => mJoinOnOperator = value;
+    }
+    private string mJoinOnOperator;
+
+    // Gets or sets the contained JoinOns.
+    /// <include file='Doc/DBJoinOn.xml'
+    ///  path='items/JoinOns/*'/>
+    public LJCDBJoinOns JoinOns { get; set; }
+
+    // The 'To' column name.
+    /// <include file='Doc/DBJoinOn.xml'
+    ///  path='items/ToColumnName/*'/>
+    public string? ToColumnName
+    {
+      get => mToColumnName;
+      set => mToColumnName = value?.Trim();
+    }
+    private string? mToColumnName;
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -49,44 +99,6 @@ namespace LJCDBMessage5
       LJCDBJoinOn? retValue = MemberwiseClone() as LJCDBJoinOn;
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>The Boolean Operator value.</summary>
-    public string BooleanOperator
-    {
-      get => mBooleanOperator;
-      set => mBooleanOperator = value;
-    }
-    private string mBooleanOperator;
-
-    /// <summary>The 'From' column name.</summary>
-    public string? FromColumnName
-    {
-      get => mFromColumnName;
-      set => mFromColumnName = value?.Trim();
-    }
-    private string? mFromColumnName;
-
-    /// <summary>The Join On Operator.</summary>
-    public string JoinOnOperator
-    {
-      get => mJoinOnOperator;
-      set => mJoinOnOperator = value;
-    }
-    private string mJoinOnOperator;
-
-    /// <summary>Gets or sets the contained JoinOns.</summary>
-    public LJCDBJoinOns JoinOns { get; set; }
-
-    /// <summary>The 'To' column name.</summary>
-    public string? ToColumnName
-    {
-      get => mToColumnName;
-      set => mToColumnName = value?.Trim();
-    }
-    private string? mToColumnName;
     #endregion
   }
 }

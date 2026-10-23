@@ -6,7 +6,9 @@ using System.Data;
 
 namespace LJCDBMessage5
 {
-  /// <summary>Methods to set data in HTML elements.</summary>
+  // Methods to set data in HTML elements.
+  /// <include file='Doc/ProjectHTMLTableData.xml'
+  ///  path='items/LJCDataHTMLTable/*'/>
   public class LJCDataHTMLTable
   {
     #region Class Data

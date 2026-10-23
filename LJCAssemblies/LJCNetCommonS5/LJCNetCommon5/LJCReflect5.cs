@@ -6,14 +6,31 @@ using System.Reflection;
 namespace LJCNetCommon5
 {
   // Provides object property reflection capabilities. (D)
-  /// <include file='Doc/LJCReflect.xml'
+  /// <include file='Doc/ProjectReflect.xml'
   ///  path='members/LJCReflect/*'/>
   public class LJCReflect
   {
+    #region Properties
+
+    // Gets or sets the PropertyInfos value.
+    /// <include file='Doc/Reflect.xml'
+    ///  path='members/PropertyInfos/*'/>
+    public PropertyInfo[] PropertyInfos { get; set; }
+    #endregion
+
+    #region Class Data
+
+    // Class Data.
+    private object mSource;
+    private readonly Type mType;
+    private readonly LJCPropertyDelegates mPropertyDelegates;
+    #endregion
+
     #region Constructor Methods
 
     // Instantiates an instance of the class.
-    /// <include path="members/LJCReflectC/*" file="Doc/LJCReflect.xml"/>
+    /// <include file='Doc/Reflect.xml'
+    ///  path='members/Constructor/*'/>
     public LJCReflect(object source)
     {
       mSource = source;
@@ -25,7 +42,7 @@ namespace LJCNetCommon5
     }
 
     // Sets the source object and type values.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/SetSource/*'/>
     public void SetSource(object source)
     {
@@ -36,7 +53,7 @@ namespace LJCNetCommon5
     #region Methods
 
     // Gets the cached PropertyInfo value.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetPropertyInfo/*'/>
     public PropertyInfo? GetPropertyInfo(string propertyName)
     {
@@ -54,7 +71,7 @@ namespace LJCNetCommon5
     }
 
     // Gets a list of the property names.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetPropertyNames/*'/>
     public List<string> GetPropertyNames()
     {
@@ -72,7 +89,7 @@ namespace LJCNetCommon5
     }
 
     // Get the property type.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetPropertyType/*'/>
     public Type? GetPropertyType(string propertyName)
     {
@@ -84,7 +101,7 @@ namespace LJCNetCommon5
     }
 
     // Checks if a property exists.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/HasProperty/*'/>
     public bool HasProperty(string propertyName)
     {
@@ -102,7 +119,7 @@ namespace LJCNetCommon5
     #region Value Methods
 
     // Gets the property value as a boolean.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetBoolean/*'/>
     public bool GetBoolean(string propertyName)
     {
@@ -118,7 +135,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as a byte.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetByte/*'/>
     public byte GetByte(string propertyName)
     {
@@ -134,7 +151,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as a char.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetChar/*'/>
     public char GetChar(string propertyName)
     {
@@ -150,7 +167,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as a DateTime value.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetDateTime/*'/>
     public DateTime GetDateTime(string propertyName)
     {
@@ -166,7 +183,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as a DB date/time string.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetDbDateString/*'/>
     public string? GetDbDateString(string propertyName)
     {
@@ -185,7 +202,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as a decimal.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetDecimal/*'/>
     public decimal GetDecimal(string propertyName)
     {
@@ -201,7 +218,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as a double.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetDouble/*'/>
     public double GetDouble(string propertyName)
     {
@@ -217,7 +234,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as a short.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetInt16/*'/>
     public short GetInt16(string propertyName)
     {
@@ -233,7 +250,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as an integer.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetInt32/*'/>
     public int GetInt32(string propertyName)
     {
@@ -249,7 +266,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as a long.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetInt64/*'/>
     public long GetInt64(string propertyName)
     {
@@ -265,7 +282,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as a float.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetSingle/*'/>
     public float GetSingle(string propertyName)
     {
@@ -281,7 +298,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as a string.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetString/*'/>
     public string? GetString(string propertyName)
     {
@@ -293,7 +310,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as an object using a delegate.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetValue/*'/>
     public object? GetValue(string? propertyName, bool throwError = true)
     {
@@ -333,7 +350,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the property value as an object using reflection.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetValueReflect/*'/>
     public object? GetValueReflect(string propertyName, bool throwError = true)
     {
@@ -363,7 +380,7 @@ namespace LJCNetCommon5
     #region Set Methods
 
     // Sets the property value based on value type.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/SetPropertyValue/*'/>
     public void SetPropertyValue(string propertyName, object? value)
     {
@@ -439,7 +456,7 @@ namespace LJCNetCommon5
     }
 
     // Sets the property value.
-    /// <include file='Doc/LJCReflect.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/SetValue/*'/>
     public void SetValue(string propertyName, object? value
       , PropertyInfo? propertyInfo = null)
@@ -472,22 +489,6 @@ namespace LJCNetCommon5
         }
       }
     }
-    #endregion
-
-    #region Properties
-
-    // Gets or sets the PropertyInfos value.
-    /// <include file='Doc/LJCReflect.xml'
-    ///  path='members/PropertyInfos/*'/>
-    public PropertyInfo[] PropertyInfos { get; set; }
-    #endregion
-
-    #region Class Data
-
-    // Class Data.
-    private object mSource;
-    private readonly Type mType;
-    private readonly LJCPropertyDelegates mPropertyDelegates;
     #endregion
   }
 }
