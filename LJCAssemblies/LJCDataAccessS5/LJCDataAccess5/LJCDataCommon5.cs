@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 namespace LJCDataAccess5
 {
   // Provides common data methods.
-  /// <include file='Doc/ProjectDataCommon.xml'
+  /// <include file='Doc/DataCommon.xml'
   ///  path='members/LJCDataCommon/*'/>
   public class LJCDataCommon
   {

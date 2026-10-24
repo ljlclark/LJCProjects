@@ -9,7 +9,7 @@ using LJCNetCommon5;
 namespace LJCDataAccess5
 {
   // Implements a data provider factory.
-  /// <include file='Doc/ProjectProviderFactory.xml'
+  /// <include file='Doc/ProviderFactory.xml'
   ///  path='members/LJCProviderFactory/*'/>
   public class LJCProviderFactory
   {

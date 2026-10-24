@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataCommon.xml -->
+<members>
+  <!-- Class -->
+  <LJCMySqlDataAccess>
+    <summary>
+      Contains methods to complement a DataColumn object.
+    </summary>
+  </LJCMySqlDataAccess>
+  
+  <!-- Properties -->
+  <ConnectionString>
+    <summary>
+      Gets or sets the ConnectionString value.
+    </summary>
+  </ConnectionString>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorParam>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="connectionString"></param>
+  </ConstructorParam>
+
+  <!-- Methods -->
+  <ExecuteNonQuery>
+    <summary>
+      Executes an Insert, Update or Delete statement.
+    </summary>
+    <param name="sql"></param>
+    <returns></returns>
+  </ExecuteNonQuery>
+  <FillDataTable>
+    <summary>
+      Executes a Select statement and fills the specified DataTable.
+    </summary>
+    <param name="sql"></param>
+    <param name="dataTable"></param>
+    <param name="tableMapping"></param>
+  </FillDataTable>
+  <GetDataReader>
+    <summary>
+      Executes a Select statement and retrieves the MySqlDataReader object.
+    </summary>
+    <param name="sql"></param>
+    <returns></returns>
+  </GetDataReader>
+  <GetDataSet>
+    <summary>
+      Executes a Select statement and retrieves the DataSet object.
+    </summary>
+    <param name="sql"></param>
+    <param name="tableMapping"></param>
+    <returns></returns>
+  </GetDataSet>
+  <GetDataTable>
+    <summary>
+      Executes a Select statement and retrieves the DataTable object.
+    </summary>
+    <param name="sql"></param>
+    <param name="tableMapping"></param>
+    <returns></returns>
+  </GetDataTable>
+  <GetDataTableFromReader>
+    <summary>
+      Executes a Select statement and retrieves the DataTable object.
+    </summary>
+    <param name="sql"></param>
+    <returns></returns>
+  </GetDataTableFromReader>
+  <GetProcedureDataTable>
+    <summary>
+      Executes a Stored Procedure and retrieves the DataTable object.
+    </summary>
+    <param name="procedureName"></param>
+    <param name="parameters"></param>
+    <returns></returns>
+  </GetProcedureDataTable>
+  <GetSchema>
+    <summary>
+      Retrieves the DataTable object with schema data.
+    </summary>
+    <param name="sql"></param>
+    <param name="tableMapping"></param>
+    <returns></returns>
+  </GetSchema>
+</members>

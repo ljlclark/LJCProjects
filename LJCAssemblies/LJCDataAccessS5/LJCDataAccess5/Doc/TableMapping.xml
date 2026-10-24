@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TableMapping.xml -->
+<members>
+  <!-- Class -->
+  <LJCTableMapping>
+    <summary>
+      Implements a helper class for creating table mappings.
+    </summary>
+  </LJCTableMapping>
+
+  <!-- Properties -->
+  <TableMaps>
+    <summary>
+      Gets a reference to the TableMaps object.
+    </summary>
+  </TableMaps>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an instance of the object.
+    </summary>
+  </Constructor>
+
+  <!-- Methods -->
+  <AddColumnMap>
+    <summary>
+      Adds a DataTable column map to the table mapping.
+    </summary>
+    <param name="dataSetTable"></param>
+    <param name="sourceColumn"></param>
+    <param name="dataSetColumn"></param>
+    <returns></returns>
+  </AddColumnMap>
+  <AddTableMap>
+    <summary>
+      Adds a DataTable map to the TableMaps collection.
+    </summary>
+    <param name="dataSetTable"></param>
+    <returns></returns>
+  </AddTableMap>
+</members>

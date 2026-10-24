@@ -7,7 +7,7 @@ using LJCNetCommon5;
 namespace LJCDataAccess5
 {
   // Represents a collection of ProcedureParameter objects.
-  /// <include file='Doc/ProjectProcedureParameters.xml'
+  /// <include file='Doc/ProcedureParameters.xml'
   ///  path='members/LJCProcedureParameters/*'/>
   public class LJCProcedureParameters : List<LJCProcedureParameter>
   {

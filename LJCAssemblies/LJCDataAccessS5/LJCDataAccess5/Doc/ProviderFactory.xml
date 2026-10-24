@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProviderFactory.xml -->
+<members>
+  <!-- Class -->
+  <LJCProviderFactory>
+    <summary>
+      Implements a data provider factory.
+    </summary>
+  </LJCProviderFactory>
+
+  <!-- Properties -->
+  <ConnectionString>
+    <summary>
+      Gets the ConnectionString value.
+    </summary>  
+  </ConnectionString>
+  <DbProviderFactory>
+    <summary>
+      Gets a reference to the DbProviderFactory object.
+    </summary>
+  </DbProviderFactory>
+  <ProviderName>
+    <summary>
+      Gets the ProviderName value.
+    </summary>
+  </ProviderName>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>    
+  </Constructor>
+  <ConstructorParam>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="connectionString"></param>
+    <param name="providerName"></param>
+  </ConstructorParam>
+
+  <!-- Methods -->
+  <CloseConnection>
+    <summary>
+      Closes the database connection.
+    </summary>
+  </CloseConnection>
+  <CreateCommand>
+    <summary>
+      Retrieves the DbCommand object.
+    </summary>
+    <param name="commandText"></param>
+    <param name="commandType"></param>
+    <returns></returns>
+  </CreateCommand>
+  <CreateConnection>
+    <summary>
+      Retrieves the DbConnection object.
+    </summary>
+    <returns></returns>
+  </CreateConnection>
+  <CreateDataAdapter>
+    <summary>
+      Creates the DbDataAdapter object.
+    </summary>
+    <returns></returns>
+  </CreateDataAdapter>
+  <OpenConnection>
+    <summary>
+      Opens the database connection.
+    </summary>
+  </OpenConnection>
+  <CreateDbProviderFactory>
+    <summary>
+      Creates the DbProviderFactory object.
+    </summary>
+  </CreateDbProviderFactory>
+</members>

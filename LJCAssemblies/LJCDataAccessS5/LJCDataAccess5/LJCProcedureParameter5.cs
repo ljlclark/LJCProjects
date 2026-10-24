@@ -7,7 +7,7 @@ using LJCNetCommon5;
 namespace LJCDataAccess5
 {
   // Represents a Procedure Parameter.
-  /// <include file='Doc/Common/ProjectProcedureParameter.xml'
+  /// <include file='Doc/ProcedureParameter.xml'
   ///  path='members/LJCProcedureParameter/*'/>
   public class LJCProcedureParameter : IComparable<LJCProcedureParameter>
   {
@@ -49,7 +49,7 @@ namespace LJCDataAccess5
     public object? Value { get; set; }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'

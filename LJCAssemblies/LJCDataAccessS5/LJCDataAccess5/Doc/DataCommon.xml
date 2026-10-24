@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataCommon.xml -->
+<members>
+  <!-- Class -->
+  <LJCDataCommon>
+    <summary>
+      Provides common data methods.
+    </summary>
+  </LJCDataCommon>
+  
+  <!-- Data Access Methods -->
+  <SetTableMapping>
+    <summary>
+      Sets the data adapter table mappings.
+    </summary>
+    <param name="dataAdapter"></param>
+    <param name="tableMapping"></param>
+  </SetTableMapping>
+  <SetTableMappingMySql>
+    <summary>
+      Sets the data adapter table mappings.
+    </summary>
+    <param name="dataAdapter"></param>
+    <param name="tableMapping"></param>
+  </SetTableMappingMySql>
+  
+  <!-- Data Conversion Methods -->
+  <GetDbDate>
+    <summary>
+      Converts the date string to a DateTime value.
+    </summary>
+    <param name="dateText"></param>
+    <param name="connectionType"></param>
+    <returns></returns>
+  </GetDbDate>
+  <GetDbDateTime>
+    <summary>
+      Converts the date/time string to a DateTime value.
+    </summary>
+    <param name="dateText"></param>
+    <param name="connectionType"></param>
+    <returns></returns>
+  </GetDbDateTime>
+  <GetDbDateString>
+    <summary>
+      Formats the DateTime value to a date string in database format.
+    </summary>
+    <param name="dateTime"></param>
+    <param name="dbType"></param>
+    <returns></returns>
+  </GetDbDateString>
+  <GetDbDateTimeString>
+    <summary>
+      Formats the DateTime value to a date/time string in database format.
+    </summary>
+    <param name="dateTime"></param>
+    <returns></returns>
+  </GetDbDateTimeString>
+  <GetMinDateTime>
+    <summary>
+      Get the minimum date/time value.
+    </summary>
+    <param name="connectionType"></param>
+    <returns></returns>
+  </GetMinDateTime>
+  <GetMinUIDateTimeString>
+    <summary>
+      Get the minimum date/time string formatted for display.
+    </summary>
+    <param name="connectionType"></param>
+    <returns></returns>
+  </GetMinUIDateTimeString>
+  <GetUIDateString>
+    <summary>
+      Format the date value for display.
+    </summary>
+    <param name="dateTime"></param>
+    <returns></returns>
+  </GetUIDateString>
+  <GetUIDateTimeString>
+    <summary>
+      Format the date/time value for display.
+    </summary>
+    <param name="dateTime"></param>
+    <returns></returns>
+  </GetUIDateTimeString>
+  <GetUITimeString>
+    <summary>
+      Format the date/time to time for display.
+    </summary>
+    <param name="dateTime"></param>
+    <returns></returns>
+  </GetUITimeString>
+</members>

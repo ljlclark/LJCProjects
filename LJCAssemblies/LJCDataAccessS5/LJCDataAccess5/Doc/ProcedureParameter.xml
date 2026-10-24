@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProcedureParameter.xml -->
+<members>
+  <!-- Class -->
+  <LJCProcedureParameter>
+    <summary>
+      Represents a Procedure Parameter.
+    </summary>
+  </LJCProcedureParameter>
+
+  <!-- Properties -->
+  <Direction>
+    <summary>
+      Gets or sets the ParameterDirection value.
+    </summary>  
+  </Direction>
+  <MySqlDbTypeID>
+    <summary>
+      Gets or sets the MySqlDbTypeID value.
+    </summary>
+  </MySqlDbTypeID>
+  <ParameterName>
+    <summary>
+      Gets or sets the ParameterName value.
+    </summary>
+  </ParameterName>
+  <Precision>
+    <summary>
+      Gets or sets the Precision value.
+    </summary>
+  </Precision>
+  <Size>
+    <summary>
+      Gets or sets the Size value.
+    </summary>
+  </Size>
+  <SqlDbTypeID>
+    <summary>
+      Gets or sets the SqlDbType value.
+    </summary>
+  </SqlDbTypeID>
+  <Value>
+    <summary>
+      Gets or sets the Value.
+    </summary>
+  </Value>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorParam>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="parameterName"></param>
+    <param name="sqlDbTypeID"></param>
+    <param name="size"></param>
+    <param name="value"></param>
+    <param name="direction"></param>
+    <param name="mySqlDbTypeID"></param>
+  </ConstructorParam>
+  <ConstructorCopy>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="item"></param>
+  </ConstructorCopy>
+
+  <!-- Methods -->
+  <ToString>
+    <summary>
+      The object string identifier.
+    </summary>
+    <returns></returns>
+  </ToString>
+  <Clone>
+    <summary>
+      Creates and returns a clone of the object.
+    </summary>
+    <returns></returns>
+  </Clone>
+  <CompareTo>
+    <summary>
+      Provides the default Sort functionality.
+    </summary>
+    <param name="other"></param>
+    <returns></returns>
+  </CompareTo>
+</members>

@@ -12,11 +12,11 @@ using System.Text.RegularExpressions;
 namespace LJCDataAccess5
 {
   // Implements an ADO.NET SQL data access control layer.
-  /// <include file='Doc/ProjectDataAccess.xml'
+  /// <include file='Doc/DataAccess.xml'
   ///  path='members/LJCDataAccess/*'/>
   public partial class LJCDataAccess
   {
-    #region Static Functions
+    #region Static Methods
 
     // Creates a connection string.
     /// <include file='Doc/DataAccess.xml'
@@ -552,7 +552,7 @@ namespace LJCDataAccess5
         }
         else
         {
-          retTable = GetSchemaOnly(sql);
+          retTable = GetSchema(sql);
           if (LJC.HasTableColumns(retTable))
           {
             FillDataTable(sql, retTable, tableMapping);
@@ -619,10 +619,10 @@ namespace LJCDataAccess5
       return retValue;
     }
 
-    // Retrieves the DataTable object with schema only.
+    // Retrieves the DataTable object with schema data.
     /// <include file='Doc/DataAccess.xml'
-    ///  path='members/GetSchemaOnly/*'/>
-    public DataTable? GetSchemaOnly(string sql
+    ///  path='members/GetSchema/*'/>
+    public DataTable? GetSchema(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
       DataTable? retValue = null;
@@ -632,7 +632,7 @@ namespace LJCDataAccess5
       {
         if (mMySqlDataAccess != null)
         {
-          retValue = mMySqlDataAccess.GetSchemaOnly(sql);
+          retValue = mMySqlDataAccess.GetSchema(sql);
         }
       }
       else

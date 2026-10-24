@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<members>
+  <!-- Class -->
+  <LJCTableColumn>
+    <summary>
+      Contains methods to complement a DataColumn object.
+    </summary>
+  </LJCTableColumn>
+  
+  <!-- Static Methods -->
+  <Clone>
+    <summary>
+      Clones a DataColumn object.
+    </summary>
+    <param name="dbColumn"></param>
+  </Clone>
+  <ToDataColumn>
+    <summary>
+      Creates an LJCDataColumn collection from a DataColumn object.
+    </summary>
+    <param name="dataColumn"></param>
+    <returns></returns>
+  </ToDataColumn>
+</members>

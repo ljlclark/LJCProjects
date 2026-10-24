@@ -1,4 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TableColumn.xml -->
 <members>
   <!-- Class -->
   <LJCTableColumn>
@@ -12,13 +15,13 @@
     <summary>
       Clones a DataColumn object.
     </summary>
-    <param name="dbColumn"></param>
+    <param name="adoColumn"></param>
   </Clone>
   <ToDataColumn>
     <summary>
       Creates an LJCDataColumn collection from a DataColumn object.
     </summary>
-    <param name="dataColumn"></param>
+    <param name="tableColumn"></param>
     <returns></returns>
   </ToDataColumn>
 </members>

@@ -1,4 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TableColumns.xml -->
 <members>
   <!-- Class -->
   <LJCTableColumns>
@@ -12,13 +15,13 @@
     <summary>
       Clones a DataColumn collection.
     </summary>
-    <param name="dbColumns"></param>
+    <param name="adoColumns"></param>
   </Clone>
   <ColumnNames>
     <summary>
       Creates a PropertyNames list from a DataColumn collection.
     </summary>
-    <param name="dbColumns"></param>
+    <param name="adoColumns"></param>
     <returns>
       A collection of property names.
     </returns>
@@ -27,7 +30,7 @@
     <summary>
       Returns a collection of DataColumns that match the supplied list.
     </summary>
-    <param name="dbColumns"></param>
+    <param name="adoColumns"></param>
     <param name="columnNames"></param>
   </Columns>
   <CreateColumns>
@@ -39,14 +42,14 @@
     <summary>
       Checks the DataColumnCollection object for items.
     </summary>
-    <param name="dataColumns">The DataColumnCollection reference.</param>
+    <param name="adoColumns">The DataColumnCollection reference.</param>
     <returns>true if there are items; otherwise false.</returns>
   </HasColumns>
   <ToDataColumns>
     <summary>
       Creates an LJCDataColumns collection from a DataColumnCollection.
     </summary>
-    <param name="dataColumns"></param>
+    <param name="adoColumns"></param>
     <returns></returns>
   </ToDataColumns>
 </members>

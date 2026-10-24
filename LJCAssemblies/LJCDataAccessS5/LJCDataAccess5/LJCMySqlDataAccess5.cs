@@ -9,7 +9,7 @@ using System.Data.Common;
 namespace LJCDataAccess5
 {
   // Implements an ADO.NET MySQL data access control layer.
-  /// <include file='Doc/ProjectMySqlDataAccess.xml'
+  /// <include file='Doc/MySqlDataAccess.xml'
   ///  path='members/LJCMySqlDataAccess/*'/>
   public class LJCMySqlDataAccess
   {
@@ -21,7 +21,7 @@ namespace LJCDataAccess5
     public string ConnectionString { get; set; }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='Doc/MySqlDataAccess.xml'
@@ -287,10 +287,10 @@ namespace LJCDataAccess5
       return retValue;
     }
 
-    // Retrieves the DataTable object with schema only.
+    // Retrieves the DataTable object with schema data.
     /// <include file='Doc/MySqlDataAccess.xml'
-    ///  path='members/GetSchemaOnly/*'/>
-    public DataTable? GetSchemaOnly(string sql
+    ///  path='members/GetSchema/*'/>
+    public DataTable? GetSchema(string sql
       , DataTableMappingCollection? tableMapping = null)
     {
       MySqlConnection connection;

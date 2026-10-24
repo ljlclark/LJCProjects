@@ -451,7 +451,7 @@ namespace TestDataAccess5
       var dataAccess = LJCDataAccess.GetDataAccess(dataSourceName
         , databaseName, providerName);
       var sql = "select * from Person";
-      var personTable = dataAccess.GetSchemaOnly(sql);
+      var personTable = dataAccess.GetSchema(sql);
 
       // Test Method
       if (personTable != null)
@@ -678,7 +678,7 @@ namespace TestDataAccess5
 
       // Test Method
       var sql = "select * from Person";
-      var personTable = dataAccess.GetSchemaOnly(sql);
+      var personTable = dataAccess.GetSchema(sql);
       var result = "";
       if (LJC.HasTableColumns(personTable))
       {

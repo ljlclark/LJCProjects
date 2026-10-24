@@ -6,7 +6,7 @@ using System.Data.Common;
 namespace LJCDataAccess5
 {
   // Implements a helper class for creating table mappings.
-  /// <include file='Doc/ProjectTableMapping.xml'
+  /// <include file='Doc/TableMapping.xml'
   ///  path='members/LJCTableMapping/*'/>
   public class LJCTableMapping
   {

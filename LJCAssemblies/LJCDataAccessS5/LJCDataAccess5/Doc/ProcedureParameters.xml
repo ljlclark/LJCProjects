@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ProcedureParameters.xml -->
+<members>
+  <!-- Class -->
+  <LJCProcedureParameters>
+    <summary>
+      Represents a collection of ProcedureParameter objects.
+    </summary>
+  </LJCProcedureParameters>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorCopy>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="items"></param>
+  </ConstructorCopy>
+
+  <!-- Methods -->
+  <Add>
+    <summary>
+      Creates and adds the object from the supplied values.
+    </summary>
+    <param name="parameterName"></param>
+    <param name="sqlDbTypeID"></param>
+    <param name="mySqlDbTypeID"></param>
+    <param name="size"></param>
+    <param name="value"></param>
+    <param name="direction"></param>
+    <returns></returns>
+  </Add>
+  <LJCSearchName>
+    <summary>
+      Retrieve the collection element by name.
+    </summary>
+    <param name="name"></param>
+    <returns></returns>
+  </LJCSearchName>
+</members>

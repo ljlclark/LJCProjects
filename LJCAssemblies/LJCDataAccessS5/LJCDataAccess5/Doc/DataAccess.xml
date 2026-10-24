@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataAccess.xml -->
+<members>
+  <!-- Class -->
+  <LJCDataAccess>
+    <summary>
+      Implements an ADO.NET SQL data access control layer.
+    </summary>
+  </LJCDataAccess>
+
+  <!-- Static Methods -->
+  <GetConnectionString>
+    <summary>
+      Creates a connection string.
+    </summary>
+    <param name="dataSourceName"></param>
+    <param name="databaseName"></param>
+    <param name="userID"></param>
+    <param name="password"></param>
+    <param name="pairs"></param>
+    <returns></returns>
+  </GetConnectionString>
+  <GetDataAccess>
+    <summary>
+      Creates the DataAccess object.
+    </summary>
+    <param name="dataSourceName"></param>
+    <param name="databaseName"></param>
+    <param name="providerName"></param>
+    <returns></returns>
+  </GetDataAccess>
+  <IsUseCommand>
+    <summary>
+      Checks for the "use" command.
+    </summary>
+    <param name="command"></param>
+    <returns></returns>
+  </IsUseCommand>
+  <RegisterSqlClient>
+    <summary>
+      Registers the SQL client provider.
+    </summary>
+  </RegisterSqlClient>
+
+  <!-- Properties -->
+  <ConnectionString>
+    <summary>
+      Gets or sets the ConnectionString value.
+    </summary>
+  </ConnectionString>
+  <DatabaseName>
+    <summary>
+      Gets or sets the DatabaseName value.
+    </summary>
+  </DatabaseName>
+  <ErrorText>
+    <summary>
+      Contains the error text.
+    </summary>
+  </ErrorText>
+  <ProviderFactory>
+    <summary>
+      Gets a reference to the provider factory.
+    </summary>
+  </ProviderFactory>
+  <ProviderName>
+    <summary>
+      Gets the ProviderName value.
+    </summary>
+  </ProviderName>
+  <ScriptSQL>
+    <summary>
+      Gets the ScriptSQL value.
+    </summary>
+  </ScriptSQL>
+  <TableName>
+    <summary>
+      Gets the TableName value.
+    </summary>
+  </TableName>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorParam>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="connectionString"></param>
+    <param name="providerName"></param>
+    <param name="databaseName"></param>
+  </ConstructorParam>
+
+  <!-- Methods -->
+  <CloseConnection>
+    <summary>
+      Closes the database connection.
+    </summary>
+  </CloseConnection>
+  <ExecuteNonQuery>
+    <summary>
+      Executes an Insert, Update or Delete statement.
+    </summary>
+    <param name="sql"></param>
+    <returns></returns>
+  </ExecuteNonQuery>
+  <ExecuteScript>
+    <summary>
+      Executes a script file.
+    </summary>
+    <param name="scriptFileSpec"></param>
+  </ExecuteScript>
+  <ExecuteScriptText>
+    <summary>
+      Executes a script text string.
+    </summary>
+    <param name="scriptText"></param>
+  </ExecuteScriptText>
+  <FillDataTable>
+    <summary>
+      Executes a Select statement and fills the specified DataTable.
+    </summary>
+    <param name="sql"></param>
+    <param name="dataTable"></param>
+    <param name="tableMapping"></param>
+  </FillDataTable>
+  <GetDataReader>
+    <summary>
+      Executes a Select statement and retrieves the DbDataReader object.
+    </summary>
+    <param name="sql"></param>
+    <returns></returns>
+  </GetDataReader>
+  <GetDataSet>
+    <summary>
+      Executes a Select statement and retrieves the DataSet object.
+    </summary>
+    <param name="sql"></param>
+    <param name="tableMapping"></param>
+    <returns></returns>
+  </GetDataSet>
+  <GetDataTable>
+    <summary>
+      Executes a Select statement and retrieves the DataTable object.
+    </summary>
+    <param name="sql"></param>
+    <param name="tableMapping"></param>
+    <returns></returns>
+  </GetDataTable>
+  <GetProcedureDataTable>
+    <summary>
+      Executes a Stored Procedure and retrieves the DataTable object.
+    </summary>
+    <param name="procedureName"></param>
+    <param name="parameters"></param>
+    <returns></returns>
+  </GetProcedureDataTable>
+  <GetSchema>
+    <summary>
+      Retrieves the DataTable object with schema data.
+    </summary>
+    <param name="sql"></param>
+    <param name="tableMapping"></param>
+    <returns></returns>
+  </GetSchema>
+  <GetColumnSQLTypes>
+    <summary>
+      Get the column SQL types.
+    </summary>
+    <param name="dbName"></param>
+    <param name="tableName"></param>
+    <returns></returns>
+  </GetColumnSQLTypes>
+  <ConnectionType>
+    <summary>
+      The Connection types.
+    </summary>
+  </ConnectionType>
+</members>
