@@ -15,6 +15,8 @@ namespace TestTextDataReader5
     #endregion
 
     // Initializes an object instance.
+    /// <include file='Doc/TestTextDataReader.xml'
+    ///  path='items/TestTextDataReader/*'/>
     public TestTextDataReader()
     {
       TestCommon = new LJCTestCommon("LJCTextDataReader");
@@ -24,6 +26,14 @@ namespace TestTextDataReader5
     // Runs the tests.
     private void Run()
     {
+      // IDataReader Properties
+      IsClosed();
+
+      // IDataRecord Properties
+      FieldCount();
+      GetValueWithIndex();
+      GetValueWithName();
+
       // IDataReader Methods
       Close();
       GetDataTypeName();
@@ -43,14 +53,6 @@ namespace TestTextDataReader5
       GetWithIndex();
       GetWithName();
 
-      // IDataReader Properties
-      IsClosed();
-
-      // IDataRecord Properties
-      FieldCount();
-      GetValueWithIndex();
-      GetValueWithName();
-
       // Custom Methods
       LJCEndsWithNewLine();
       GetFieldNames();
@@ -65,6 +67,116 @@ namespace TestTextDataReader5
       LJCSetValues1();
       LJCSetValues2();
     }
+
+    #region IDataReader Properties
+
+    // Indicates if the reader is closed.
+    private void IsClosed()
+    {
+      var methodName = "GetWithName()";
+      string[] lines =
+      [
+        // ColumnName|Length = 0|Type = "String".
+        "Name, ID||int64, Value||decimal",
+        "Name Value, 1, 3.14",
+      ];
+      File.WriteAllLines("Text.txt", lines);
+
+      var hasHeadingLine = true;
+      var textReader = new LJCTextDataReader(hasHeadingLine);
+      textReader.LJCSetFile("Text.txt");
+      textReader.Read();
+
+      // Test Methods
+      var value = textReader.IsClosed;
+      var result = value.ToString();
+      var compare = "False";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      textReader.Close();
+      value = textReader.IsClosed;
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+    #endregion
+
+    #region IDataRecord Properties
+
+    // Indicates if the reader is closed.
+    private void FieldCount()
+    {
+      var methodName = "FieldCount()";
+      string[] lines =
+      [
+        // ColumnName|Length = 0|Type = "String".
+        "Name, ID||int64, Value|0|decimal",
+        "Name Value, 1, 3.14",
+      ];
+      File.WriteAllLines("Text.txt", lines);
+
+      var hasHeadingLine = true;
+      var textReader = new LJCTextDataReader(hasHeadingLine);
+      textReader.LJCSetFile("Text.txt");
+
+      // Test Methods
+      var value = textReader.FieldCount;
+      var result = value.ToString();
+      var compare = "3";
+      TestCommon.Write($"{methodName}1", result, compare);
+      textReader.Close();
+    }
+
+    // Gets the data field value for the supplied field index.
+    private void GetValueWithIndex()
+    {
+      var methodName = "GetValueWithIndex()";
+      string[] lines =
+      [
+        // ColumnName|Length = 0|Type = "String".
+        "Name, ID||int64, Value||decimal",
+        "Name Value, 1, 3.14",
+      ];
+      File.WriteAllLines("Text.txt", lines);
+
+      var hasHeadingLine = true;
+      var textReader = new LJCTextDataReader(hasHeadingLine);
+      textReader.LJCSetFile("Text.txt");
+      textReader.Read();
+
+      // Test Methods
+      var value = textReader[2];
+      var result = value.ToString();
+      var compare = "3.14";
+      TestCommon.Write($"{methodName}1", result, compare);
+      textReader.Close();
+    }
+
+    // Gets the data field value for the supplied field index.
+    private void GetValueWithName()
+    {
+      var methodName = "GetValueWithName()";
+      string[] lines =
+      [
+        // ColumnName|Length = 0|Type = "String".
+        "Name, ID||int64, Value||decimal",
+        "Name Value, 1, 3.14",
+      ];
+      File.WriteAllLines("Text.txt", lines);
+
+      var hasHeadingLine = true;
+      var textReader = new LJCTextDataReader(hasHeadingLine);
+      textReader.LJCSetFile("Text.txt");
+      textReader.Read();
+
+      // Test Methods
+      var value = textReader["Value"];
+      var result = value.ToString();
+      var compare = "3.14";
+      TestCommon.Write($"{methodName}1", result, compare);
+      textReader.Close();
+    }
+    #endregion
 
     #region IDataReader Methods
 
@@ -449,116 +561,6 @@ namespace TestTextDataReader5
       result += $", {textReader.GetDecimal("Value")}";
       var compare = "Name Value, 1, 3.14";
       TestCommon.Write($"{methodName}", result, compare);
-      textReader.Close();
-    }
-    #endregion
-
-    #region IDataReader Properties
-
-    // Indicates if the reader is closed.
-    private void IsClosed()
-    {
-      var methodName = "GetWithName()";
-      string[] lines =
-      [
-        // ColumnName|Length = 0|Type = "String".
-        "Name, ID||int64, Value||decimal",
-        "Name Value, 1, 3.14",
-      ];
-      File.WriteAllLines("Text.txt", lines);
-
-      var hasHeadingLine = true;
-      var textReader = new LJCTextDataReader(hasHeadingLine);
-      textReader.LJCSetFile("Text.txt");
-      textReader.Read();
-
-      // Test Methods
-      var value = textReader.IsClosed;
-      var result = value.ToString();
-      var compare = "False";
-      TestCommon.Write($"{methodName}1", result, compare);
-
-      textReader.Close();
-      value = textReader.IsClosed;
-      result = value.ToString();
-      compare = "True";
-      TestCommon.Write($"{methodName}2", result, compare);
-    }
-    #endregion
-
-    #region IDataRecord Properties
-
-    // Indicates if the reader is closed.
-    private void FieldCount()
-    {
-      var methodName = "FieldCount()";
-      string[] lines =
-      [
-        // ColumnName|Length = 0|Type = "String".
-        "Name, ID||int64, Value|0|decimal",
-        "Name Value, 1, 3.14",
-      ];
-      File.WriteAllLines("Text.txt", lines);
-
-      var hasHeadingLine = true;
-      var textReader = new LJCTextDataReader(hasHeadingLine);
-      textReader.LJCSetFile("Text.txt");
-
-      // Test Methods
-      var value = textReader.FieldCount;
-      var result = value.ToString();
-      var compare = "3";
-      TestCommon.Write($"{methodName}1", result, compare);
-      textReader.Close();
-    }
-
-    // Gets the data field value for the supplied field index.
-    private void GetValueWithIndex()
-    {
-      var methodName = "GetValueWithIndex()";
-      string[] lines =
-      [
-        // ColumnName|Length = 0|Type = "String".
-        "Name, ID||int64, Value||decimal",
-        "Name Value, 1, 3.14",
-      ];
-      File.WriteAllLines("Text.txt", lines);
-
-      var hasHeadingLine = true;
-      var textReader = new LJCTextDataReader(hasHeadingLine);
-      textReader.LJCSetFile("Text.txt");
-      textReader.Read();
-
-      // Test Methods
-      var value = textReader[2];
-      var result = value.ToString();
-      var compare = "3.14";
-      TestCommon.Write($"{methodName}1", result, compare);
-      textReader.Close();
-    }
-
-    // Gets the data field value for the supplied field index.
-    private void GetValueWithName()
-    {
-      var methodName = "GetValueWithName()";
-      string[] lines =
-      [
-        // ColumnName|Length = 0|Type = "String".
-        "Name, ID||int64, Value||decimal",
-        "Name Value, 1, 3.14",
-      ];
-      File.WriteAllLines("Text.txt", lines);
-
-      var hasHeadingLine = true;
-      var textReader = new LJCTextDataReader(hasHeadingLine);
-      textReader.LJCSetFile("Text.txt");
-      textReader.Read();
-
-      // Test Methods
-      var value = textReader["Value"];
-      var result = value.ToString();
-      var compare = "3.14";
-      TestCommon.Write($"{methodName}1", result, compare);
       textReader.Close();
     }
     #endregion

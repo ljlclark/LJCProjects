@@ -1480,6 +1480,19 @@ namespace LJCNetCommon5
 
     #region Include Span Methods
 
+    // Set the text as Comments text.
+    internal string SetCommentSpan(string line)
+    {
+      string retValue = line;
+      StringBuilder builder = new();
+      int index = retValue.IndexOf("//");
+      //string comment = retValue.Substring(index);
+      string comment = retValue[index..];
+      builder.Append(GetWithCommentSpan(comment));
+      retValue = builder.ToString();
+      return retValue;
+    }
+
     // Set the text as Params text.
     private static string SetParamSpan(string text)
     {
@@ -1591,19 +1604,6 @@ namespace LJCNetCommon5
     private static string SetSummarySpan(string text)
     {
       return SetSimpleCommentSpan(text, ";summary&gt;", "&lt;/summary&gt;");
-    }
-
-    // Set the text as Comments text.
-    internal string SetCommentSpan(string line)
-    {
-      string retValue = line;
-      StringBuilder builder = new();
-      int index = retValue.IndexOf("//");
-      //string comment = retValue.Substring(index);
-      string comment = retValue[index..];
-      builder.Append(GetWithCommentSpan(comment));
-      retValue = builder.ToString();
-      return retValue;
     }
     #endregion
 
@@ -1847,6 +1847,7 @@ namespace LJCNetCommon5
 
     #region Fields
 
+    // Sorts the list items.
     internal void DoSort()
     {
       BooleanOperators.Sort();

@@ -16,6 +16,8 @@ namespace TestTextDataReader5
     #endregion
 
     // Initializes an object instance.
+    /// <include file='Doc/TestTextRegion.xml'
+    ///  path='items/TestTextRegion/*'/>
     public TestTextRegion()
     {
       TestCommon = new LJCTestCommon("LJCTextRegion");

@@ -1,18 +1,32 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LineOffset.cs
+// LineOffset5.cs
 
 namespace LJCTextDataReader5
 {
   // Represents the file character offset for a text line.
-  /// <include path='items/LineOffset/*' file='Doc/ProjectTextDataReaderLib.xml'/>
+  /// <include file='Doc/ProjectLineOffset.xml'
+  ///  path='items/LJCLineOffset/*'/>
   public class LJCLineOffset : IComparable<LJCLineOffset>
   {
+    #region Data Properties
+
+    // Gets or sets the line number.
+    /// <include file='Doc/ProjectLineOffset.xml'
+    ///  path='items/Number/*'/>
+    public long Number { get; set; }
+
+    // Gets or sets the character offset value.
+    /// <include file='Doc/ProjectLineOffset.xml'
+    ///  path='items/Offset/*'/>
+    public long Offset { get; set; }
+    #endregion
 
     #region Data Methods
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/CompareTo/*'/>
     public int CompareTo(LJCLineOffset? other)
     {
       int retValue;
@@ -31,15 +45,6 @@ namespace LJCTextDataReader5
       }
       return retValue;
     }
-    #endregion
-
-    #region Data Properties
-
-    /// <summary>Gets or sets the line number.</summary>
-    public long Number { get; set; }
-
-    /// <summary>Gets or sets the character offset value.</summary>
-    public long Offset { get; set; }
     #endregion
   }
 }

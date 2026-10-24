@@ -1,42 +1,65 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LineOffsets.cs
+// LineOffsets5.cs
 
 namespace LJCTextDataReader5
 {
-  /// <summary>
-  /// Represents a collection of LineOffset items.
-  /// </summary>
+  // Represents a collection of LineOffset items.
+  /// <include file='Doc/ProjectLineOffsets.xml'
+  ///  path='items/LJCLineOffsets/*'/>
   public class LJCLineOffsets : List<LJCLineOffset>
   {
-    /// <summary>
-    /// 
-    /// </summary>
+    #region Properties
+
+    // Gets or sets the current line number.
+    /// <include file='Doc/LineOffsets.xml'
+    ///  path='items/LJCCurrentLineNumber/*'/>
+    public long LJCCurrentLineNumber { get; set; }
+
+    // Gets or sets the current line offset value.
+    /// <include file='Doc/LineOffsets.xml'
+    ///  path='items/LJCCurrentOffset/*'/>
+    public long LJCCurrentOffset { get; set; }
+
+    // Gets or sets a reference to the file stream.
+    /// <include file='Doc/LineOffsets.xml'
+    ///  path='items/LJCStream/*'/>
+    public Stream? LJCStream { get; set; }
+    #endregion
+
+    #region Class Data
+
+    // The list previous count.
+    private int mPrevCount;
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/LineOffsets.xml'
+    ///  path='items/Constructor/*'/>
     public LJCLineOffsets()
     {
       LJCStream = null;
     }
 
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
-    /// <param name="stream">The file stream object.</param>
-    public LJCLineOffsets(Stream stream)
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/LineOffsets.xml'
+    ///  path='items/ConstructorParam/*'/>
+    public LJCLineOffsets(Stream stream) : this()
     {
       LJCStream = stream;
       LJCCurrentLineNumber = 0;
       LJCCurrentOffset = 3;
       LJCSetNextLineOffset(null);
     }
+    #endregion
 
     #region Collection Methods
 
-    /// <summary>
-    /// Creates and adds the object from the provided values.
-    /// </summary>
-    /// <param name="number">The line number.</param>
-    /// <param name="offset">The line offset value.</param>
-    /// <returns>A reference to the added item.</returns>
+    // Creates and adds the object from the provided values.
+    /// <include file='Doc/LineOffsets.xml'
+    ///  path='items/Add/*'/>
     public LJCLineOffset Add(long number, long offset)
     {
       var retValue = new LJCLineOffset()
@@ -51,10 +74,9 @@ namespace LJCTextDataReader5
 
     #region Sort and Search Methods
 
-    /// <summary>
-    /// Retrieve the collection element by number.
-    /// </summary>
-    /// <param name="number">The item line number.</param>
+    // Retrieve the collection element by number.
+    /// <include file='Doc/LineOffsets.xml'
+    ///  path='items/LJCSearchByNumber/*'/>
     public LJCLineOffset? LJCSearchByNumber(long number)
     {
       LJCLineOffset? retValue = null;
@@ -80,11 +102,9 @@ namespace LJCTextDataReader5
 
     #region Other Methods
 
-    /// <summary>
-    /// Returns the line offset for the specified line.
-    /// </summary>
-    /// <param name="number">The line number.</param>
-    /// <returns>The line offset value.</returns>
+    // Returns the line offset for the specified line.
+    /// <include file='Doc/LineOffsets.xml'
+    ///  path='items/LJCGetLineOffset/*'/>
     public long LJCGetLineOffset(long number)
     {
       long retValue = -1;
@@ -97,11 +117,9 @@ namespace LJCTextDataReader5
       return retValue;
     }
 
-    /// <summary>
-    /// Gets the offset for the next line.
-    /// </summary>
-    /// <param name="currentLine">The current line.</param>
-    /// <returns>The line offset value.</returns>
+    // Gets the offset for the next line.
+    /// <include file='Doc/LineOffsets.xml'
+    ///  path='items/LJCGetNextLineOffset/*'/>
     public long LJCGetNextLineOffset(string? currentLine)
     {
       long retValue = LJCCurrentOffset;
@@ -133,33 +151,15 @@ namespace LJCTextDataReader5
       return retValue;
     }
 
-    /// <summary>
-    /// Sets the offset for the next line.
-    /// </summary>
-    /// <param name="line">The current line.</param>
+    // Sets the offset for the next line.
+    /// <include file='Doc/LineOffsets.xml'
+    ///  path='items/LJCSetNextLineOffset/*'/>
     public void LJCSetNextLineOffset(string? line)
     {
       LJCCurrentLineNumber++;
       LJCCurrentOffset = LJCGetNextLineOffset(line);
       Add(LJCCurrentLineNumber, LJCCurrentOffset);
     }
-    #endregion
-
-    #region Properties
-    /// <summary>Gets or sets the current line number.</summary>
-    public long LJCCurrentLineNumber { get; set; }
-
-    /// <summary>Gets or sets the current line offset value.</summary>
-    public long LJCCurrentOffset { get; set; }
-
-    /// <summary>Gets or sets a reference to the file stream.</summary>
-    public Stream? LJCStream { get; set; }
-
-    #endregion
-
-    #region Class Data
-
-    private int mPrevCount;
     #endregion
   }
 }

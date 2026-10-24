@@ -1,18 +1,33 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TextRegions.cs
+// LJCTextRegions5.cs
 using LJCNetCommon5;
 
 namespace LJCTextDataReader5
 {
-  /// <summary>Represents a collection of TextRegion objects.</summary>
+  // Represents a collection of TextRegion objects.
+  /// <include file='Doc/ProjectTextRegions.xml'
+  ///  path='items/LJCTextRegions/*'/>
   public class LJCTextRegions : List<LJCTextRegion>
   {
+    #region Properties
+
+    // The field delimiter.
+    /// <include file='Doc/TextRegions.xml'
+    ///  path='items/LJCFieldDelimiter/*'/>
+    public char LJCFieldDelimiter { get; set; }
+
+    // The text region delimiter.
+    /// <include file='Doc/TextRegions.xml'
+    ///  path='items/LJCRegionDelimiter/*'/>
+    public char LJCRegionDelimiter { get; set; }
+    #endregion
+
     #region Constructors
 
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
+    // Initializes an object instance.
+    /// <include file='Doc/TextRegions.xml'
+    ///  path='items/Constructor/*'/>
     public LJCTextRegions()
     {
       LJCFieldDelimiter = ',';
@@ -22,12 +37,9 @@ namespace LJCTextDataReader5
 
     #region Collection Methods
 
-    /// <summary>
-    /// Creates a TextRegion from the supplied values and adds it to the collection.
-    /// /// </summary>
-    /// <param name="beginIndex">The beginning index.</param>
-    /// <param name="endIndex">The ending index.</param>
-    /// <returns>A reference to the created TextRegion object.</returns>
+    // Creates a TextRegion from the supplied values and adds it to the collection.
+    /// <include file='Doc/TextRegions.xml'
+    ///  path='items/Add/*'/>
     public LJCTextRegion Add(int beginIndex, int endIndex)
     {
       LJCTextRegion retValue;
@@ -44,12 +56,9 @@ namespace LJCTextDataReader5
 
     #region Other Methods
 
-    /// <summary>
-    /// Returns a value indicating if the supplied text value has text regions.
-    /// </summary>
-    /// <param name="text">The text value.</param>
-    /// <returns>Returns 'true' if the supplied text has regions.
-    /// Otherwise 'false'.</returns>
+    // Returns a value indicating if the supplied text value has text regions.
+    /// <include file='Doc/TextRegions.xml'
+    ///  path='items/LJCHasRegions/*'/>
     public bool LJCHasRegions(string text)
     {
       bool retValue = false;
@@ -79,12 +88,9 @@ namespace LJCTextDataReader5
       return retValue;
     }
 
-    /// <summary>
-    /// Determines if a delimiter is in a text region.
-    /// </summary>
-    /// <param name="index">The index of the delimiter.</param>
-    /// <returns>Returns 'true' if the delimiter is in a text region
-    /// otherwise 'false'.</returns>
+    // Determines if a delimiter is in a text region.
+    /// <include file='Doc/TextRegions.xml'
+    ///  path='items/LJCIsInRegion/*'/>
     public bool LJCIsInRegion(int index)
     {
       bool retValue = false;
@@ -100,11 +106,9 @@ namespace LJCTextDataReader5
       return retValue;
     }
 
-    /// <summary>
-    /// Splits a line of text on the delimiters not enclosed in text regions.
-    /// </summary>
-    /// <param name="line">The line of text</param>
-    /// <returns>An array of field values.</returns>
+    // Splits a line of text on the delimiters not enclosed in text regions.
+    /// <include file='Doc/TextRegions.xml'
+    ///  path='items/LJCSplit/*'/>
     public string[]? LJCSplit(string line)
     {
       var fields = new List<string>();
@@ -181,15 +185,6 @@ namespace LJCTextDataReader5
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>The field delimiter.</summary>
-    public char LJCFieldDelimiter { get; set; }
-
-    /// <summary>The text region delimiter.</summary>
-    public char LJCRegionDelimiter { get; set; }
     #endregion
   }
 }
