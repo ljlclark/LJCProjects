@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ManagerCommon.xml -->
+<members>
+  <!-- Class -->
+  <LJCManagerCommon>
+    <summary>
+      Contains common static manager methods.
+    </summary>
+  </LJCManagerCommon>
+  
+  <!-- Static Methods -->
+  <CreateRequest>
+    <summary>
+      Creates the LJCDBRequest object.
+    </summary>
+    <param name="requestType"></param>
+    <param name="tableName"></param>
+    <param name="requestColumns"></param>
+    <param name="dataConfigName"></param>
+    <param name="schemaName"></param>
+    <param name="keyColumns"></param>
+    <param name="filters"></param>
+    <param name="joins"></param>
+    <returns></returns>
+  </CreateRequest>
+  <CreateTables>
+    <summary>
+      Runs the CreateTables script.
+    </summary>
+    <param name="dataConfigName"></param>
+    <param name="fileSpecs"></param>
+    <returns></returns>
+  </CreateTables>
+  <Delete>
+    <summary>
+      Deletes the records with the specified key values.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="filters"></param>
+  </Delete>
+  <GetConfigValues>
+    <summary>
+      Gets the additional Config values.
+    </summary>
+    <param name="dataConfigName"></param>
+    <param name="connectionType"></param>
+    <param name="connectionString"></param>
+    <param name="providerName"></param>
+  </GetConfigValues>
+  <GetMissingTableErrorCode>
+    <summary>
+      Gets the Missing Table ErrorCode.
+    </summary>
+    <param name="dataConfigName"></param>
+    <returns></returns>
+  </GetMissingTableErrorCode>
+</members>

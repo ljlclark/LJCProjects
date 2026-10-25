@@ -10,8 +10,8 @@ using LJCNetCommon5;
 namespace LJCDBClientLib5
 {
   // Provides standard message data manipulation methods.
-  /// <include file='Doc/ProjectDataManager.xml'
-  ///  path='members/DataManager/*'/>
+  /// <include file='Doc/DataManager.xml'
+  ///  path='members/LJCDataManager/*'/>
   public class LJCDataManager : ILJCDataManager
   {
     #region Properties
@@ -109,7 +109,7 @@ namespace LJCDBClientLib5
     ///  path='members/Result/*'/>
     public LJCDBResult? Result { get; set; }
 
-    // Gets or sets the UseEncyption flag.
+    // Gets or sets the UseEncryption flag.
     /// <include file='Doc/DataManager.xml'
     ///  path='members/UseEncryption/*'/>
     public bool UseEncryption { get; set; }
@@ -533,8 +533,8 @@ namespace LJCDBClientLib5
 
     // Retrieves the column names for the specified table.
     /// <include file='Doc/DataManager.xml'
-    ///  path='members/GetSchemaOnly/*'/>
-    public LJCDBResult? GetSchemaOnly(string? dataConfigName = null
+    ///  path='members/GetSchema/*'/>
+    public LJCDBResult? GetSchema(string? dataConfigName = null
       , string? tableName = null)
     {
       LJCDBResult? retValue = null;
@@ -724,7 +724,7 @@ namespace LJCDBClientLib5
     {
       LJCDBResult? retResult = null;
 
-      LJCDBResult? dbResult = GetSchemaOnly(dataConfigName, tableName);
+      LJCDBResult? dbResult = GetSchema(dataConfigName, tableName);
       if (dbResult != null)
       {
         retResult = CreateSchemaColumnsResult(dbResult);
@@ -740,7 +740,7 @@ namespace LJCDBClientLib5
     {
       LJCDataColumns? retValue = null;
 
-      LJCDBResult? dbResult = GetSchemaOnly(DataConfigName, TableName);
+      LJCDBResult? dbResult = GetSchema(DataConfigName, TableName);
       if (LJCDBResult.HasColumns(dbResult))
       {
         //BaseDefinition = new LJCDataColumns(dbResult.Columns);

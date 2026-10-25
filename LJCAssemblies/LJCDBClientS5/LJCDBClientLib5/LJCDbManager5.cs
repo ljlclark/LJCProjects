@@ -8,7 +8,7 @@ using LJCNetCommon5;
 namespace LJCDBClientLib5
 {
   // Provides DbDataAccess data manipulation methods.
-  /// <include file='Doc/ProjectDbManager.xml'
+  /// <include file='Doc/DbManager.xml'
   ///  path='members/LJCDbManager/*'/>
   public class LJCDbManager
   {
@@ -219,7 +219,7 @@ namespace LJCDBClientLib5
     }
     #endregion
 
-    #region Other Public Methods
+    #region Other Methods
 
     // Adds the lookup column names.
     /// <include file='Doc/DbManager.xml'

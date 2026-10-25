@@ -9,7 +9,7 @@ using LJCNetCommon5;
 namespace LJCDBClientLib5
 {
   // Contains common static manager methods.
-  /// <include file='Doc/ProjectManagerCommon.xml'
+  /// <include file='Doc/ManagerCommon.xml'
   ///  path='members/LJCManagerCommon/*'/>
   public class LJCManagerCommon
   {
@@ -38,7 +38,7 @@ namespace LJCDBClientLib5
       return retValue;
     }
 
-    // Run the CreateTables script.
+    // Runs the CreateTables script.
     /// <include file='Doc/ManagerCommon.xml'
     ///  path='members/CreateTables/*'/>
     public static bool CreateTables(string dataConfigName, string[] fileSpecs)

@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DataManager.xml -->
+<members>
+  <!-- Class -->
+  <LJCDataManager>
+    <summary>
+      Provides standard message data manipulation methods.
+    </summary>
+  </LJCDataManager>
+  
+  <!-- Properties -->
+  <AffectedCount>
+    <summary>
+      Gets or sets the non-select affected record count.
+    </summary>
+  </AffectedCount>
+  <BaseDefinition>
+    <summary>
+      Gets the base data definition columns collection.
+    </summary>
+  </BaseDefinition>
+  <DbServiceRef>
+    <summary>
+      Gets DbServiceRef object.
+    </summary>
+  </DbServiceRef>
+  <DataConfigName>
+    <summary>
+      Gets or sets the data configuration name.
+    </summary>
+  </DataConfigName>
+  <DataDefinition>
+    <summary>
+      Gets the data definition columns collection.
+    </summary>
+  </DataDefinition>
+  <DbAssignedColumns>
+    <summary>
+      Gets or sets the Database assigned columns.
+    </summary>
+  </DbAssignedColumns>
+  <LookupColumnNames>
+    <summary>
+      Gets or sets the LookupColumn names.
+    </summary>
+  </LookupColumnNames>
+  <SchemaName>
+    <summary>
+      The Schema name.
+    </summary>
+  </SchemaName>
+  <SQLStatement>
+    <summary>
+      Gets or sets the last SQL statement.
+    </summary>
+  </SQLStatement>
+  <TableName>
+    <summary>
+      The primary table name.
+    </summary>
+  </TableName>
+
+  <!-- Other Properties -->
+  <OrderByNames>
+    <summary>
+      Gets or sets the order by names.
+    </summary>
+  </OrderByNames>
+  <PageSize>
+    <summary>
+      Gets or sets the pagination size.
+    </summary>
+  </PageSize>
+  <PageStartIndex>
+    <summary>
+      Gets or sets the pagination start index.
+    </summary>
+  </PageStartIndex>
+  <Request>
+    <summary>
+      Gets or sets the LJCDBRequest object reference.
+    </summary>
+  </Request>
+  <Result>
+    <summary>
+      Gets or sets the LJCDBResult object reference.
+    </summary>
+  </Result>
+  <UseEncryption>
+    <summary>
+      Gets or sets the UseEncryption flag.
+    </summary>
+  </UseEncryption>
+
+  <!-- Constructor Methods -->
+  <ConstructorParam1>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="dbServiceRef"></param>
+    <param name="dataConfigName"></param>
+    <param name="tableName"></param>
+    <param name="schemaName"></param>
+    <param name="useEncryption"></param>
+  </ConstructorParam1>
+  <ConstructorParam2>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="dataConfigName"></param>
+    <param name="tableName"></param>
+    <param name="schemaName"></param>
+    <param name="useEncryption"></param>
+  </ConstructorParam2>
+  <Reset>
+    <summary>
+      Resets the data access configuration.
+    </summary>
+    <param name="dbServiceRef"></param>
+    <param name="dataConfigName"></param>
+    <param name="tableName"></param>
+    <param name="schemaName"></param>
+    <param name="useEncryption"></param>
+  </Reset>
+  
+  <!-- Public Data Methods -->
+  <Add>
+    <summary>
+      Adds a record to the database.
+    </summary>
+    <param name="dataObject"></param>
+    <param name="propertyNames"></param>
+    <param name="includeNull"></param>
+    <returns></returns>
+  </Add>
+  <Delete>
+    <summary>
+      Deletes the records with the specified key values.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="filters"></param>
+  </Delete>
+  <ExecuteClientSql>
+    <summary>
+      Executes a non-query client SQL statement.
+    </summary>
+    <param name="requestType"></param>
+    <param name="sql"></param>
+    <param name="requestColumns"></param>
+    <returns></returns>
+  </ExecuteClientSql>
+  <Load>
+    <summary>
+      Gets a DataTable object.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="propertyNames"></param>
+    <param name="filters"></param>
+    <param name="joins"></param>
+    <returns></returns>
+  </Load>
+  <LoadProcedure>
+    <summary>
+      Retrieves a collection of data records.
+    </summary>
+    <param name="procedureName"></param>
+    <param name="parameters"></param>
+    <param name="joins"></param>
+    <returns></returns>
+  </LoadProcedure>
+  <Retrieve>
+    <summary>
+      Retrieves a record from the database.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="propertyNames"></param>
+    <param name="filters"></param>
+    <param name="joins"></param>
+    <returns></returns>
+  </Retrieve>
+  <Update>
+    <summary>
+      Gets a DataTable object.
+    </summary>
+    <param name="dataObject"></param>
+    <param name="keyColumns"></param>
+    <param name="propertyNames"></param>
+    <param name="filters"></param>
+    <returns></returns>
+  </Update>
+
+  <!-- Other Public Methods -->
+  <CreateLoadRequest>
+    <summary>
+      Creates the Load LJCDBRequest object.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="propertyNames"></param>
+    <param name="filters"></param>
+    <param name="joins"></param>
+    <returns></returns>
+  </CreateLoadRequest>
+  <ExecuteRequest>
+    <summary>
+      Executes the supplied request.
+    </summary>
+    <param name="dbRequest"></param>
+    <returns></returns>
+  </ExecuteRequest>
+  <GetPropertyNames>
+    <summary>
+      Creates a PropertyNames list from the data definition.
+    </summary>
+    <returns></returns>
+  </GetPropertyNames>
+  <GetSchema>
+    <summary>
+      Retrieves the column names for the specified table.
+    </summary>
+    <param name="dataConfigName"></param>
+    <param name="tableName"></param>
+    <returns></returns>
+  </GetSchema>
+  <GetTableNames>
+    <summary>
+      Retrieves the table names for the data configuration database.
+    </summary>
+    <returns></returns>
+  </GetTableNames>
+  <MapNames>
+    <summary>
+      Maps the column property and rename values.
+    </summary>
+    <param name="columnName"></param>
+    <param name="propertyName"></param>
+    <param name="renameAs"></param>
+    <param name="caption"></param>
+  </MapNames>
+  <Resequence>
+    <summary>
+      Resequence the sequence column values.
+    </summary>
+    <param name="idName"></param>
+    <param name="sequenceName"></param>
+    <param name="whereClause"></param>
+  </Resequence>
+  <SetDbAssignedColumns>
+    <summary>
+      Sets the database assigned value column names.
+    </summary>
+    <param name="propertyNames"></param>
+  </SetDbAssignedColumns>
+  <SetLookupColumns>
+    <summary>
+      Adds the lookup column names.
+    </summary>
+    <param name="propertyNames"></param>
+  </SetLookupColumns>
+  
+  <!-- Create Data Methods -->
+  <CreateSchemaColumnsResult1>
+    <summary>
+      Takes a result object and transforms it into a result of column names.
+    </summary>
+    <param name="dbResult"></param>
+    <returns></returns>
+  </CreateSchemaColumnsResult1>
+  <CreateSchemaColumnsResult2>
+    <summary>
+      Retrieves the schema result for the specified table and transforms it into
+      a result of column names.
+    </summary>
+    <param name="dataConfigName"></param>
+    <param name="tableName"></param>
+    <returns></returns>
+  </CreateSchemaColumnsResult2>
+</members>

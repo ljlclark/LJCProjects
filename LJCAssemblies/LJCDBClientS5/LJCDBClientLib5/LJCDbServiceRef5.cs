@@ -8,12 +8,10 @@ namespace LJCDBClientLib5
 {
   // Contains the DbDataAccess, DbService and DbServiceClient proxy references.
   /// <include file='Doc/DbServiceRef.xml'
-  ///  path='members/ProjectDbServiceRef/*'/>
+  ///  path='members/LJCDbServiceRef/*'/>
   public class LJCDbServiceRef
   {
-    public LJCDbServiceRef()
-    {
-    }
+    #region Static Methods
 
     // Checks for the required object values.
     /// <include file='Doc/DbServiceRef.xml'
@@ -39,6 +37,9 @@ namespace LJCDBClientLib5
       }
       return retValue;
     }
+    #endregion
+
+    #region Properties
 
     // Gets or sets the DbDataAccess reference.
     /// <include file='Doc/DbServiceRef.xml'
@@ -46,12 +47,23 @@ namespace LJCDBClientLib5
     public DbDataAccess? DbDataAccess { get; set; }
 
     // Gets or sets the DbService reference.
-    /// <include path='members/DbService/*' file='Doc/DbServiceRef.xml'/>
+    // <include path='members/DbService/*' file='Doc/DbServiceRef.xml'/>
     //public DbService DbService { get; set; }
 
     // Gets or sets the DbServiceClient proxy reference.
     // <include file='Doc/DbServiceRef.xml'
     //  path='members/DbServiceClient/*'/>
     //public DbServiceClient DbServiceClient { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/DbServiceRef.xml'
+    ///  path='members/Constructor/*'/>
+    public LJCDbServiceRef()
+    {
+    }
+    #endregion
   }
 }

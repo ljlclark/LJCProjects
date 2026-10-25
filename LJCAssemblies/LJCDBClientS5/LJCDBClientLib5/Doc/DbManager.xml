@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbManager.xml -->
+<members>
+  <!-- Class -->
+  <LJCDbManager>
+    <summary>
+      Provides DbDataAccess data manipulation methods.
+    </summary>
+  </LJCDbManager>
+  
+  <!-- Properties -->
+  <AffectedCount>
+    <summary>
+      Gets or sets the non-select affected record count.
+    </summary>
+  </AffectedCount>
+  <BaseDefinition>
+    <summary>
+      Gets the base data definition columns collection.
+    </summary>
+  </BaseDefinition>
+  <DataConfigName>
+    <summary>
+      Gets or sets the data configuration name.
+    </summary>
+  </DataConfigName>
+  <DataDefinition>
+    <summary>
+      Gets the data definition columns collection.
+    </summary>
+  </DataDefinition>
+  <LookupColumnNames>
+    <summary>
+      Gets or sets the LookupColumn names.
+    </summary>
+  </LookupColumnNames>
+  <SchemaName>
+    <summary>
+      The Schema name.
+    </summary>
+  </SchemaName>
+  <SQLStatement>
+    <summary>
+      Gets or sets the last SQL statement.
+    </summary>
+  </SQLStatement>
+  <TableName>
+    <summary>
+      The primary table name.
+    </summary>
+  </TableName>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="dataConfigName"></param>
+    <param name="tableName"></param>
+  </Constructor>
+  <Reset>
+    <summary>
+      Resets the data access configuration.
+    </summary>
+    <param name="dataConfigName"></param>
+    <param name="tableName"></param>
+  </Reset>
+  
+  <!-- DataManager related Public Data Methods -->
+  <Add>
+    <summary>
+      Adds a record to the database.
+    </summary>
+    <param name="dataObject"></param>
+    <param name="propertyNames"></param>
+    <returns></returns>
+  </Add>
+  <Delete>
+    <summary>
+      Deletes the records with the specified key values.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="filters"></param>
+  </Delete>
+  <ExecuteRequest>
+    <summary>
+      Executes the supplied request.
+    </summary>
+    <param name="dbRequest"></param>
+    <returns></returns>
+  </ExecuteRequest>
+  <Load>
+    <summary>
+      Loads a collection of data records.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="propertyNames"></param>
+    <param name="filters"></param>
+    <param name="joins"></param>
+    <returns></returns>
+  </Load>
+  <Retrieve>
+    <summary>
+      Retrieves a record from the database.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="propertyNames"></param>
+    <param name="filters"></param>
+    <param name="joins"></param>
+    <returns></returns>
+  </Retrieve>
+  <Update>
+    <summary>
+      Gets a DataTable object.
+    </summary>
+    <param name="dataObject"></param>
+    <param name="keyColumns"></param>
+    <param name="propertyNames"></param>
+    <param name="filters"></param>
+    <returns></returns>
+  </Update>
+
+  <!-- Other Methods -->
+  <SetLookupColumns>
+    <summary>
+      Adds the lookup column names.
+    </summary>
+    <param name="propertyNames"></param>
+  </SetLookupColumns>
+</members>

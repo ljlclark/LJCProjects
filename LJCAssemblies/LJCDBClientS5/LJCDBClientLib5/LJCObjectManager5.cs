@@ -8,7 +8,7 @@ using LJCNetCommon5;
 namespace LJCDBClientLib5
 {
   // Provides object specific data manipulation methods.
-  /// <include file='Doc/ProjectObjectManager.xml'
+  /// <include file='Doc/ObjectManager.xml'
   ///  path='members/ObjectManager/*'/>
   public class LJCObjectManager<TData, TList>
     where TData : class, new()

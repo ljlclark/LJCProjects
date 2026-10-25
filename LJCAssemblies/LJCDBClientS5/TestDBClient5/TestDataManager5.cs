@@ -26,8 +26,12 @@ namespace TestDataManager5
     // Run the tests.
     private void Run()
     {
+      // Methods
       Test();
     }
+    #endregion
+
+    #region Methods
 
     // A test method placeholder.
     private void Test()

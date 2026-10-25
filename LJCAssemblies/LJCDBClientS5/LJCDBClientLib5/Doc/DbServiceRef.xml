@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbServiceRef.xml -->
+<members>
+  <!-- Class -->
+  <LJCDbServiceRef>
+    <summary>
+      Contains the DbDataAccess, DbService and DbServiceClient proxy references.
+    </summary>
+  </LJCDbServiceRef>
+
+  <!-- Static Methods -->
+  <ItemValues>
+    <summary>
+      Checks for the required object values.
+    </summary>
+    <param name="dbServiceRef"></param>
+    <returns></returns>
+  </ItemValues>
+
+  <!-- Properties -->
+  <DbDataAccess>
+    <summary>
+      Gets or sets the DbDataAccess reference.
+    </summary>
+  </DbDataAccess>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+</members>
