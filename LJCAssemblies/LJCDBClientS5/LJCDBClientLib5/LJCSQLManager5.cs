@@ -10,7 +10,7 @@ using System.Data;
 namespace LJCDBClientLib5
 {
   // Provides SQL data manipulation methods.
-  /// <include file='Doc/ProjectSQLManager.xml'
+  /// <include file='Doc/SQLManager.xml'
   ///  path='members/LJCSQLManager/*'/>
   public class LJCSQLManager
   {
@@ -93,9 +93,9 @@ namespace LJCDBClientLib5
 
     #region Constructors
 
-    // Initializes an object instance.
+    // Initializes an object instance with the supplied values.
     /// <include file='Doc/SQLManager.xml'
-    ///  path='members/Constructor/*'/>
+    ///  path='members/ConstructorParam/*'/>
     public LJCSQLManager(string dataConfigName, string tableName
       , string? connectionString = null, string? providerName = null)
     {

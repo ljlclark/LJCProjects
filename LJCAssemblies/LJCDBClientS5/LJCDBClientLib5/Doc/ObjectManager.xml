@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ObjectManager.xml -->
+<members>
+  <!-- Class -->
+  <LJCObjectManager>
+    <summary>
+      Provides object specific data manipulation methods.
+    </summary>
+  </LJCObjectManager>
+  
+  <!-- Properties -->
+  <AffectedCount>
+    <summary>
+      Gets or sets the non-select affected record count.
+    </summary>
+  </AffectedCount>
+  <BaseDefinition>
+    <summary>
+      Gets the base data definition columns collection.
+    </summary>
+  </BaseDefinition>
+  <DbServiceRef>
+    <summary>
+      Gets DbServiceRef object.
+    </summary>
+  </DbServiceRef>
+  <DataConfigName>
+    <summary>
+      Gets or sets the data configuration name.
+    </summary>
+  </DataConfigName>
+  <DataDefinition>
+    <summary>
+      Gets the data definition columns collection.
+    </summary>
+  </DataDefinition>
+  <SchemaName>
+    <summary>
+      The Schema name.
+    </summary>
+  </SchemaName>
+  <SQLStatement>
+    <summary>
+      Gets or sets the last SQL statement.
+    </summary>
+  </SQLStatement>
+  <TableName>
+    <summary>
+      The primary table name.
+    </summary>
+  </TableName>
+
+  <!-- Other Properties -->
+  <DataManager>
+    <summary>
+      The Data Manager object.
+    </summary>
+  </DataManager>
+
+  <!-- Constructor Methods -->
+  <ConstructorParam>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="dbServiceRef"></param>
+    <param name="dataConfigName"></param>
+    <param name="tableName"></param>
+    <param name="schemaName"></param>
+  </ConstructorParam>
+  
+  <!-- Public Data Methods -->
+  <Add>
+    <summary>
+      Adds a record to the database.
+    </summary>
+    <param name="dataObject"></param>
+    <param name="propertyNames"></param>
+    <returns></returns>
+  </Add>
+  <CreateLoadRequest>
+    <summary>
+      Creates the Load DbRequest object.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="propertyNames"></param>
+    <param name="filters"></param>
+    <param name="joins"></param>
+    <returns></returns>
+  </CreateLoadRequest>
+  <Delete>
+    <summary>
+      Deletes the records with the specified key values.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="filters"></param>
+  </Delete>
+  <ExecuteClientSql>
+    <summary>
+      Executes a non-query client SQL statement.
+    </summary>
+    <param name="sql"></param>
+  </ExecuteClientSql>
+  <ExecuteRequest>
+    <summary>
+      Execute the supplied request.
+    </summary>
+    <param name="dbRequest"></param>
+    <returns></returns>
+  </ExecuteRequest>
+  <Load>
+    <summary>
+      Gets a DataTable object.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="propertyNames"></param>
+    <param name="filters"></param>
+    <param name="joins"></param>
+    <returns></returns>
+  </Load>
+  <LoadClientSql>
+    <summary>
+      Executes a "Load" client SQL statement.
+    </summary>
+    <param name="sql"></param>
+    <returns></returns>
+  </LoadClientSql>
+  <LoadProcedure>
+    <summary>
+      Retrieves a collection of data records.
+    </summary>
+    <param name="procedureName"></param>
+    <param name="parameters"></param>
+    <param name="joins"></param>
+    <returns></returns>
+  </LoadProcedure>
+  <Retrieve>
+    <summary>
+      Retrieves a record from the database.
+    </summary>
+    <param name="keyColumns"></param>
+    <param name="propertyNames"></param>
+    <param name="filters"></param>
+    <param name="joins"></param>
+    <returns></returns>
+  </Retrieve>
+  <RetrieveClientSql>
+    <summary>
+      Executes a "Retrieve" client SQL statement.
+    </summary>
+    <param name="sql"></param>
+    <returns></returns>
+  </RetrieveClientSql>
+  <Update>
+    <summary>
+      Gets a DataTable object.
+    </summary>
+    <param name="dataObject"></param>
+    <param name="keyColumns"></param>
+    <param name="propertyNames"></param>
+    <param name="filters"></param>
+    <returns></returns>
+  </Update>
+
+  <!-- Other Public Methods -->
+  <GetColumns>
+    <summary>
+      Creates a set of columns that match the supplied list.
+    </summary>
+    <param name="propertyNames"></param>
+    <returns></returns>
+  </GetColumns>
+  <MapNames>
+    <summary>
+      Maps the column property and rename values.
+    </summary>
+    <param name="columnName"></param>
+    <param name="propertyName"></param>
+    <param name="renameAs"></param>
+    <param name="caption"></param>
+  </MapNames>
+  <SetDbAssignedColumns>
+    <summary>
+      Sets the database assigned value column names.
+    </summary>
+    <param name="propertyNames"></param>
+  </SetDbAssignedColumns>
+  <SetLookupColumns>
+    <summary>
+      Adds the lookup column names.
+    </summary>
+    <param name="propertyNames"></param>
+  </SetLookupColumns>
+  
+  <!-- Create Data Methods -->
+  <CreateCollection>
+    <summary>
+      Creates a collection from the result records.
+    </summary>
+    <param name="dbResult"></param>
+    <returns></returns>
+  </CreateCollection>
+  <CreateData>
+    <summary>
+      Creates a data object from the result record.
+    </summary>
+    <param name="dbValues"></param>
+    <returns></returns>
+  </CreateData>
+</members>

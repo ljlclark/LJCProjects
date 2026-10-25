@@ -1,64 +1,16 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// StandardUISettings5.cs
+// LJCStandardUISettings5.cs
 using LJCDataAccess5;
 using System.Drawing;
 
 namespace LJCDBClientLib5
 {
   // The Standard Setting values.
-  /// <include file='Doc/ProjectStandardUISettings.xml'
+  /// <include file='Doc/StandardUISettings.xml'
   ///  path='members/LJCStandardUISettings/*'/>
   public class LJCStandardUISettings
   {
-    #region Constructors
-
-    // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/Constructor/*'/>
-    public LJCStandardUISettings()
-    {
-      ConnectionString = "";
-      mDataConfigName = "";
-      DbServiceRef = new LJCDbServiceRef();
-      mExportTextExtension = ".txt";
-    }
-    #endregion
-
-    #region Public Methods
-
-    // Sets the Settings properties.
-    /// <include file='Doc/StandardUISettings.xml'
-    ///  path='members/SetProperties/*'/>
-#pragma warning disable IDE0060 // Remove unused parameter
-    public void SetProperties(string programConfigFileName)
-#pragma warning restore IDE0060 // Remove unused parameter
-    {
-      //AppSettings = new AppSettings(programConfigFileName);
-
-      //DataConfigName = AppSettings.GetString("DataConfigName");
-      //DbServiceRef = new LJCDbServiceRef
-      //{
-      //  DbDataAccess = new DbDataAccess(DataConfigName)
-      //};
-
-      //string connectionTypeName = AppSettings.GetString("ConnectionType");
-      //ConnectionType = LJCDataCommon.GetConnectionType(connectionTypeName);
-
-      //BeginColor = AppSettings.GetColor("BeginColor", Color.AliceBlue);
-      //EndColor = AppSettings.GetColor("EndColor", Color.LightSkyBlue);
-      //ExportTextExtension = AppSettings.GetString("ExportTextExtension");
-      //if (!LJC.HasValue(ExportTextExtension))
-      //{
-      //  ExportTextExtension = "txt";
-      //}
-
-      //string siteID = AppSettings.GetString("SiteID");
-      //long.TryParse(siteID, out long id);
-      //SiteID = id;
-    }
-    #endregion
-
     #region Properties
 
     // Gets or sets the AppSettings value.
@@ -115,6 +67,54 @@ namespace LJCDBClientLib5
     /// <include file='Doc/StandardUISettings.xml'
     ///  path='members/SiteID/*'/>
     public long SiteID { get; private set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
+    public LJCStandardUISettings()
+    {
+      ConnectionString = "";
+      mDataConfigName = "";
+      DbServiceRef = new LJCDbServiceRef();
+      mExportTextExtension = ".txt";
+    }
+    #endregion
+
+    #region Public Methods
+
+    // Sets the Settings properties.
+    /// <include file='Doc/StandardUISettings.xml'
+    ///  path='members/SetProperties/*'/>
+#pragma warning disable IDE0060 // Remove unused parameter
+    public void SetProperties(string programConfigFileName)
+#pragma warning restore IDE0060 // Remove unused parameter
+    {
+      //AppSettings = new AppSettings(programConfigFileName);
+
+      //DataConfigName = AppSettings.GetString("DataConfigName");
+      //DbServiceRef = new LJCDbServiceRef
+      //{
+      //  DbDataAccess = new DbDataAccess(DataConfigName)
+      //};
+
+      //string connectionTypeName = AppSettings.GetString("ConnectionType");
+      //ConnectionType = LJCDataCommon.GetConnectionType(connectionTypeName);
+
+      //BeginColor = AppSettings.GetColor("BeginColor", Color.AliceBlue);
+      //EndColor = AppSettings.GetColor("EndColor", Color.LightSkyBlue);
+      //ExportTextExtension = AppSettings.GetString("ExportTextExtension");
+      //if (!LJC.HasValue(ExportTextExtension))
+      //{
+      //  ExportTextExtension = "txt";
+      //}
+
+      //string siteID = AppSettings.GetString("SiteID");
+      //long.TryParse(siteID, out long id);
+      //SiteID = id;
+    }
     #endregion
   }
 }
