@@ -19,19 +19,6 @@
     </remarks>
   </LJCDbConditions>
 
-  <!-- Constructor Methods -->
-  <Constructor>
-    <summary>
-      Initializes an object instance.
-    </summary>
-  </Constructor>
-  <CopyConstructor>
-    <summary>
-      The Copy constructor.
-    </summary>
-    <param name="items"></param>
-  </CopyConstructor>
-
   <!-- Collection Methods -->
   <Add>
     <summary>
@@ -42,16 +29,4 @@
     <param name="comparisonOperator">The comparison operator.</param>
     <returns>The added condition object.</returns>
   </Add>
-  <Clone>
-    <summary>
-      Creates and returns a clone of the object.
-    </summary>
-  </Clone>
-  <HasItems>
-    <summary>
-      Checks if the collection has items.
-    </summary>
-    <returns></returns>
-  </HasItems>
-
 </members>

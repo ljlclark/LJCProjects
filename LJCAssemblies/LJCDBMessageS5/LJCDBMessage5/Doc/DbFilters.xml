@@ -122,19 +122,6 @@
     <returns>The filters object.</returns>
   </SoundexFilters>
   
-  <!-- Constructors -->
-  <Constructor>
-    <summary>
-      Initializes an object instance.
-    </summary>
-  </Constructor>
-  <CopyConstructor>
-    <summary>
-      The Copy constructor.
-    </summary>
-    <param name="items"></param>
-  </CopyConstructor>
-  
   <!-- Collection Methods -->
   <Add1>
     <summary>
@@ -155,10 +142,4 @@
     <param name="booleanOperator">The filter boolean operator.</param>
     <returns></returns>
   </Add2>
-  <Clone>
-    <summary>
-      Creates and returns a clone of the object.
-    </summary>
-    <returns></returns>
-  </Clone>
 </members>

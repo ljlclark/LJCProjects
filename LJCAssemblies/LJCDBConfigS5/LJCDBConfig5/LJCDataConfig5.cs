@@ -134,7 +134,7 @@ namespace LJCDBConfig5
     #region Data Class Methods
 
     // The object string value.
-    /// <include file='Doc/DataConfig.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/ToString/*'/>
     public override string? ToString()
     {
@@ -142,7 +142,7 @@ namespace LJCDBConfig5
     }
 
     // Provides the default Sort functionality.
-    /// <include file='Doc/DataConfig.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/CompareTo/*'/>
     public int CompareTo(LJCDataConfig? other)
     {
@@ -166,7 +166,7 @@ namespace LJCDBConfig5
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     /// <include file='Doc/DataConfig.xml'
     ///  path='members/ConnectionString/*'/>

@@ -40,7 +40,7 @@ namespace LJCDataAccess5
     }
     #endregion
 
-    #region Methods
+    #region Collection Methods
 
     // Creates and adds the object from the supplied values.
     /// <include file='Doc/ProcedureParameters.xml'

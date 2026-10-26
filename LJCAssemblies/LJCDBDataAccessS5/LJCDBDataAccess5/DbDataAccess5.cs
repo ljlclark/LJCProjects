@@ -99,7 +99,7 @@ namespace LJCDBDataAccess5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='items/Constructor/*'/>
     public DbDataAccess()
     {
@@ -107,7 +107,7 @@ namespace LJCDBDataAccess5
     }
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='items/ConstructorParam1/*'/>
     public DbDataAccess(string dataConfigName)
     {

@@ -74,20 +74,6 @@
     </summary>
     <param name="connectionType"></param>
   </ConstructorParam>
-
-  <!-- Data Class Methods -->
-  <ToString>
-    <summary>
-      The object string identifier.
-    </summary>
-    <returns>The identifier value.</returns>
-  </ToString>
-  <CompareTo>
-    <summary>
-      Provides the default Sort functionality.
-    </summary>
-    <param name="other"></param>
-  </CompareTo>
   
   <!-- Public Methods -->
   <ConnectionString>

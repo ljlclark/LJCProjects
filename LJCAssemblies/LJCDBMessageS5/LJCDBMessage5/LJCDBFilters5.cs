@@ -61,14 +61,14 @@ namespace LJCDBMessage5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='Doc/DbFilters.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public LJCDBFilters()
     {
     }
 
     // The Copy constructor.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
     public LJCDBFilters(LJCDBFilters? items)
     {
@@ -79,6 +79,26 @@ namespace LJCDBMessage5
           Add(new LJCDBFilter(item));
         }
       }
+    }
+    #endregion
+
+    #region Data Class Methods
+
+    // Creates and returns a clone of the object.
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
+    ///  path='members/Clone/*'/>
+    public LJCDBFilters Clone()
+    {
+      LJCDBFilters retValue = [];
+      foreach (LJCDBFilter item in this)
+      {
+        var filter = item.Clone();
+        if (filter != null)
+        {
+          retValue.Add(filter);
+        }
+      }
+      return retValue;
     }
     #endregion
 
@@ -117,23 +137,6 @@ namespace LJCDBMessage5
         BooleanOperator = booleanOperator
       };
       Add(retValue);
-      return retValue;
-    }
-
-    // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/Clone/*'/>
-    public LJCDBFilters Clone()
-    {
-      LJCDBFilters retValue = [];
-      foreach (LJCDBFilter item in this)
-      {
-        var filter = item.Clone();
-        if (filter != null)
-        {
-          retValue.Add(filter);
-        }
-      }
       return retValue;
     }
     #endregion

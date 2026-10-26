@@ -89,7 +89,7 @@ namespace LJCDataAccess5
     }
     #endregion
 
-    #region Methods
+    #region Data Class Methods
 
     // The object string identifier.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'

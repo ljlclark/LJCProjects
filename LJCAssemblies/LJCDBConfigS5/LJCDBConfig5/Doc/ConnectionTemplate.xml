@@ -54,25 +54,4 @@
       Initializes an object instance.
     </summary>
   </Constructor>
-  
-  <!-- Data Class Methods -->
-  <Clone>
-    <summary>
-      Creates and returns a clone of the object.
-    </summary>
-    <returns>The new cloned value.</returns>
-  </Clone>
-  <ToString>
-    <summary>
-      The object string identifier.
-    </summary>
-    <returns>The identifier value.</returns>
-  </ToString>
-  <CompareTo>
-    <summary>
-      Provides the default Sort functionality.
-    </summary>
-    <param name="other">The compared to object.</param>
-    <returns>An integer value indicating the order relationship.</returns>
-  </CompareTo>
 </members>

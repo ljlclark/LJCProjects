@@ -31,24 +31,4 @@
       Gets or sets the Name value.
     </summary>
   </Name>
-  
-  <!-- Constructor Methods -->
-  <Constructor>
-    <summary>
-      Initializes an object instance.
-    </summary>
-  </Constructor>
-  <CopyConstructor>
-    <summary>
-      The Copy constructor.
-    </summary>
-    <param name="item"></param>
-  </CopyConstructor>
-  
-  <!-- Methods -->
-  <Clone>
-    <summary>
-      Creates and returns a clone of the object.
-    </summary>
-  </Clone>
 </members>

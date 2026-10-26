@@ -13,14 +13,14 @@ namespace LJCDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public LJCDBConditions()
     {
     }
 
     // The Copy constructor.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/ConstructorCopy/*'/>
     public LJCDBConditions(LJCDBConditions items)
     {
@@ -31,6 +31,26 @@ namespace LJCDBMessage5
           Add(new LJCDBCondition(item));
         }
       }
+    }
+    #endregion
+
+    #region Data Class Methods
+
+    // Creates and returns a clone of the object.
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
+    ///  path='members/Clone/*'/>
+    public LJCDBConditions Clone()
+    {
+      var retValue = new LJCDBConditions();
+      foreach (LJCDBCondition dbCondition in this)
+      {
+        var clone = dbCondition.Clone();
+        if (clone != null)
+        {
+          retValue.Add(clone);
+        }
+      }
+      return retValue;
     }
     #endregion
 
@@ -51,25 +71,8 @@ namespace LJCDBMessage5
       return retValue;
     }
 
-    // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/Clone/*'/>
-    public LJCDBConditions Clone()
-    {
-      var retValue = new LJCDBConditions();
-      foreach (LJCDBCondition dbCondition in this)
-      {
-        var clone = dbCondition.Clone();
-        if (clone != null)
-        {
-          retValue.Add(clone);
-        }
-      }
-      return retValue;
-    }
-
     // Checks if the collection has items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {

@@ -37,7 +37,7 @@ namespace LJCDBConfig5
     #region Data Class Methods
 
     // Creates and returns a clone of the object.
-    /// <include file='Doc/ConnectionTemplate.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public LJCConnectionTemplate? Clone()
     {
@@ -47,7 +47,7 @@ namespace LJCDBConfig5
     }
 
     // The object string value.
-    /// <include file='Doc/ConnectionTemplate.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/ToString/*'/>
     public override string? ToString()
     {
@@ -55,7 +55,7 @@ namespace LJCDBConfig5
     }
 
     // Provides the default Sort functionality.
-    /// <include file='Doc/ConnectionTemplate.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/CompareTo/*'/>
     public int CompareTo(LJCConnectionTemplate? other)
     {
