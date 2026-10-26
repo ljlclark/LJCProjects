@@ -7,15 +7,15 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Provides SQL builder methods.
-  /// <include file='Doc/ProjectDbSqlBuilder.xml'
-  ///  path='items/LJCDbSqlBuilder/*'/>
+  /// <include file='Doc/DbSqlBuilder.xml'
+  ///  path='members/LJCDbSqlBuilder/*'/>
   public class LJCDBSqlBuilder
   {
     #region Static Methods
 
     // Creates the where clause from the filters.
     /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/FilterWhereClause/*'/>
+    ///  path='members/FilterWhereClause/*'/>
     public static string? FilterWhereClause(LJCDBFilters dbFilters, bool recursive = false)
     {
       string? retValue = null;
@@ -150,30 +150,33 @@ namespace LJCDBMessage5
 
     #region Class Data
 
+    // The LJCDBRequest object.
     private readonly LJCDBRequest mDbRequest = null!;
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='members/Constructor/*'/>
     public LJCDBSqlBuilder()
     {
     }
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/DbSqlBuilderC/*'/>
+    ///  path='members/ConstructorParam/*'/>
     public LJCDBSqlBuilder(LJCDBRequest dbRequest) : this()
     {
       mDbRequest = dbRequest;
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Creates the list of included table columns.
     /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/ColumnList/*'/>
+    ///  path='members/ColumnList/*'/>
     public string ColumnList(LJCDBRequest? dbRequest = null, bool listOnly = true)
     {
       string retValue;
@@ -247,7 +250,7 @@ namespace LJCDBMessage5
 
     // Creates the SQL Insert statement.
     /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/CreateAddSql/*'/>
+    ///  path='members/CreateAddSql/*'/>
     public string CreateAddSql()
     {
       string retValue;
@@ -262,7 +265,7 @@ namespace LJCDBMessage5
 
     // Creates the SQL Delete statement.
     /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/CreateDeleteSql/*'/>
+    ///  path='members/CreateDeleteSql/*'/>
     public string CreateDeleteSql()
     {
       string retValue;
@@ -276,7 +279,7 @@ namespace LJCDBMessage5
 
     // Creates the SQL Select statement for multiple records.
     /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/CreateLoadSql/*'/>
+    ///  path='members/CreateLoadSql/*'/>
     public string CreateLoadSql(LJCDBRequest? dbRequest = null)
     {
       string retValue;
@@ -309,7 +312,7 @@ namespace LJCDBMessage5
 
     // Creates the SQL Select statement for one record.
     /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/CreateRetrieveSql/*'/>
+    ///  path='members/CreateRetrieveSql/*'/>
     public string CreateRetrieveSql(LJCDBRequest? dbRequest = null)
     {
       string retValue;
@@ -340,7 +343,7 @@ namespace LJCDBMessage5
 
     // Creates the SQL Update statement.
     /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/CreateUpdateSql/*'/>
+    ///  path='members/CreateUpdateSql/*'/>
     public string CreateUpdateSql()
     {
       string retValue;
@@ -353,6 +356,248 @@ namespace LJCDBMessage5
       retValue = builder.ToString();
       return retValue;
     }
+
+    // Creates a list of record values.
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='members/InsertValueList/*'/>
+    public string? InsertValueList(bool listOnly = true)
+    {
+      string? retValue = null;
+
+      if (LJC.HasListItems(mDbRequest.Columns))
+      {
+        var builder = new StringBuilder(64);
+        foreach (LJCDataColumn dataColumn in mDbRequest.Columns)
+        {
+          if (0 == builder.Length)
+          {
+            if (!listOnly)
+            {
+              builder.AppendLine("values(");
+            }
+          }
+          else
+          {
+            builder.AppendLine(",");
+          }
+          builder.Append($" {dataColumn.FormatValue()}");
+        }
+        builder.AppendLine();
+
+        if (!listOnly)
+        {
+          builder.Append(')');
+        }
+        retValue = builder.ToString();
+      }
+      return retValue;
+    }
+
+    // Creates the join statement.
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='members/JoinStatement/*'/>
+    public string? JoinStatement(LJCDBJoins dbJoins, string? schemaName = null)
+    {
+      string? retValue = null;
+
+      if (LJC.HasListItems(dbJoins))
+      {
+        var builder = new StringBuilder(64);
+        foreach (LJCDBJoin dbJoin in dbJoins)
+        {
+          // Begin the Join.
+          if (builder.Length > 0)
+          {
+            builder.AppendLine(" ");
+          }
+          builder.Append($"{dbJoin.JoinType} join");
+          builder.Append(GetJoinTableString(schemaName, dbJoin));
+          builder.Append("  on ");
+          builder.Append(GetJoinOns(dbJoin, dbJoin.JoinOns));
+        }
+        builder.AppendLine();
+        retValue = builder.ToString();
+      }
+      return retValue;
+    }
+
+    // Creates the where clause from the key values.
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='members/KeyWhereClause/*'/>
+    public string? KeyWhereClause()
+    {
+      string? retValue = null;
+
+      var keyColumns = mDbRequest.KeyColumns;
+      if (LJC.HasListItems(keyColumns))
+      {
+        var builder = new StringBuilder(64);
+        foreach (LJCDataColumn dataColumn in keyColumns)
+        {
+          // Do not include null or empty values.
+          if (null == dataColumn.Value
+            || !LJC.HasText(dataColumn.Value.ToString()))
+          {
+            continue;
+          }
+
+          string? value = dataColumn.FormatValue();
+          bool isZero = "0" == dataColumn.Value.ToString();
+
+          // Do not include AutoIncrement if the value is "0".
+          if (dataColumn.AutoIncrement && isZero)
+          {
+            continue;
+          }
+
+          if (0 == builder.Length)
+          {
+            builder.Append("where ");
+          }
+          else
+          {
+            builder.Append(" and ");
+          }
+
+          // Allow user to qualify column name to a table other than the
+          // primary table.
+          if (LJC.HasText(mDbRequest.TableName))
+          {
+            string tableName = mDbRequest.TableName;
+            string columnName = dataColumn.ColumnName;
+            if (columnName.IndexOf('.') > -1)
+            {
+              string[] values = columnName.Split('.');
+              if (values.Length > 1)
+              {
+                tableName = values[0];
+                columnName = values[1];
+              }
+            }
+
+            // Create the standard condition.
+            string text = $"{tableName}.{columnName} = {value}\r\n";
+
+            // Create the "is null" condition.
+            bool isNull = false;
+            if (dataColumn.DataTypeName != "String"
+              && dataColumn.DataTypeName != "Boolean")
+            {
+              if (dataColumn.AllowDBNull && isZero)
+              {
+                isNull = true;
+              }
+            }
+            if ("'-null'" == value)
+            {
+              isNull = true;
+            }
+            if (isNull)
+            {
+              text = $"{tableName}.{columnName} is null\r\n";
+            }
+
+            builder.Append(text);
+          }
+        }
+        retValue = builder.ToString();
+      }
+      return retValue;
+    }
+
+    // Creates the order by statement from the order by column list.
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='members/OrderBy/*'/>
+    public string? OrderBy()
+    {
+      string? retValue = null;
+
+      if (LJC.HasListItems(mDbRequest.OrderByNames))
+      {
+        var builder = new StringBuilder(64);
+        builder.Append("order by ");
+        bool first = true;
+        foreach (string name in mDbRequest.OrderByNames)
+        {
+          if (!first)
+          {
+            builder.Append(", ");
+          }
+          first = false;
+          builder.Append(name);
+        }
+        builder.AppendLine(" ");
+        retValue = builder.ToString();
+      }
+      return retValue;
+    }
+
+    // Creates the offset/fetch next statement.
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='members/PageFetch/*'/>
+    public string? PageFetch()
+    {
+      string? retValue = null;
+
+      if (LJC.HasListItems(mDbRequest.OrderByNames)
+        && mDbRequest.PageSize > 0)
+      {
+        var builder = new StringBuilder(64);
+        builder.Append($"offset {mDbRequest.PageStartIndex} rows\r\n");
+        builder.Append($"fetch next {mDbRequest.PageSize} rows only");
+        builder.AppendLine();
+        retValue = builder.ToString();
+      }
+      return retValue;
+    }
+
+    // Creates a list of record update values.
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='members/UpdateList/*'/>
+    public string? UpdateValueList()
+    {
+      string? retValue = null;
+
+      if (LJC.HasListItems(mDbRequest.Columns))
+      {
+        var builder = new StringBuilder(64);
+        foreach (LJCDataColumn dataColumn in mDbRequest.Columns)
+        {
+          if (builder.Length > 0)
+          {
+            builder.AppendLine(",");
+          }
+          builder.Append($" {dataColumn.ColumnName} = {dataColumn.FormatValue()}");
+        }
+        builder.AppendLine();
+        retValue = builder.ToString();
+      }
+      return retValue;
+    }
+
+    // Create the where clause.
+    /// <include file='Doc/DbSqlBuilder.xml'
+    ///  path='members/WhereClause/*'/>
+    public string? WhereClause()
+    {
+      string? retValue = null;
+
+      if (mDbRequest != null)
+      {
+        if (null == mDbRequest.Filters || 0 == mDbRequest.Filters.Count)
+        {
+          retValue = KeyWhereClause();
+        }
+        else
+        {
+          retValue = FilterWhereClause(mDbRequest.Filters);
+        }
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Private Methods
 
     // Get the JoinOn statements.
     private string GetJoinOns(LJCDBJoin dbJoin, LJCDBJoinOns dbJoinOns
@@ -438,245 +683,6 @@ namespace LJCDBMessage5
       }
       builder.AppendLine(" ");
       retValue = builder.ToString();
-      return retValue;
-    }
-
-    // Creates a list of record values.
-    /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/InsertValueList/*'/>
-    public string? InsertValueList(bool listOnly = true)
-    {
-      string? retValue = null;
-
-      if (LJC.HasListItems(mDbRequest.Columns))
-      {
-        var builder = new StringBuilder(64);
-        foreach (LJCDataColumn dataColumn in mDbRequest.Columns)
-        {
-          if (0 == builder.Length)
-          {
-            if (!listOnly)
-            {
-              builder.AppendLine("values(");
-            }
-          }
-          else
-          {
-            builder.AppendLine(",");
-          }
-          builder.Append($" {dataColumn.FormatValue()}");
-        }
-        builder.AppendLine();
-
-        if (!listOnly)
-        {
-          builder.Append(')');
-        }
-        retValue = builder.ToString();
-      }
-      return retValue;
-    }
-
-    // Creates the join statement.
-    /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/JoinStatement/*'/>
-    public string? JoinStatement(LJCDBJoins dbJoins, string? schemaName = null)
-    {
-      string? retValue = null;
-
-      if (LJC.HasListItems(dbJoins))
-      {
-        var builder = new StringBuilder(64);
-        foreach (LJCDBJoin dbJoin in dbJoins)
-        {
-          // Begin the Join.
-          if (builder.Length > 0)
-          {
-            builder.AppendLine(" ");
-          }
-          builder.Append($"{dbJoin.JoinType} join");
-          builder.Append(GetJoinTableString(schemaName, dbJoin));
-          builder.Append("  on ");
-          builder.Append(GetJoinOns(dbJoin, dbJoin.JoinOns));
-        }
-        builder.AppendLine();
-        retValue = builder.ToString();
-      }
-      return retValue;
-    }
-
-    // Creates the where clause from the key values.
-    /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/KeyWhereClause/*'/>
-    public string? KeyWhereClause()
-    {
-      string? retValue = null;
-
-      var keyColumns = mDbRequest.KeyColumns;
-      if (LJC.HasListItems(keyColumns))
-      {
-        var builder = new StringBuilder(64);
-        foreach (LJCDataColumn dataColumn in keyColumns)
-        {
-          // Do not include null or empty values.
-          if (null == dataColumn.Value
-            || !LJC.HasText(dataColumn.Value.ToString()))
-          {
-            continue;
-          }
-
-          string? value = dataColumn.FormatValue();
-          bool isZero = "0" == dataColumn.Value.ToString();
-
-          // Do not include AutoIncrement if the value is "0".
-          if (dataColumn.AutoIncrement && isZero)
-          {
-            continue;
-          }
-
-          if (0 == builder.Length)
-          {
-            builder.Append("where ");
-          }
-          else
-          {
-            builder.Append(" and ");
-          }
-
-          // Allow user to qualify column name to a table other than the
-          // primary table.
-          if (LJC.HasText(mDbRequest.TableName))
-          {
-            string tableName = mDbRequest.TableName;
-            string columnName = dataColumn.ColumnName;
-            if (columnName.IndexOf('.') > -1)
-            {
-              string[] values = columnName.Split('.');
-              if (values.Length > 1)
-              {
-                tableName = values[0];
-                columnName = values[1];
-              }
-            }
-
-            // Create the standard condition.
-            string text = $"{tableName}.{columnName} = {value}\r\n";
-
-            // Create the "is null" condition.
-            bool isNull = false;
-            if (dataColumn.DataTypeName != "String"
-              && dataColumn.DataTypeName != "Boolean")
-            {
-              if (dataColumn.AllowDBNull && isZero)
-              {
-                isNull = true;
-              }
-            }
-            if ("'-null'" == value)
-            {
-              isNull = true;
-            }
-            if (isNull)
-            {
-              text = $"{tableName}.{columnName} is null\r\n";
-            }
-
-            builder.Append(text);
-          }
-        }
-        retValue = builder.ToString();
-      }
-      return retValue;
-    }
-
-    // Creates the order by statement from the order by column list.
-    /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/OrderBy/*'/>
-    public string? OrderBy()
-    {
-      string? retValue = null;
-
-      if (LJC.HasListItems(mDbRequest.OrderByNames))
-      {
-        var builder = new StringBuilder(64);
-        builder.Append("order by ");
-        bool first = true;
-        foreach (string name in mDbRequest.OrderByNames)
-        {
-          if (!first)
-          {
-            builder.Append(", ");
-          }
-          first = false;
-          builder.Append(name);
-        }
-        builder.AppendLine(" ");
-        retValue = builder.ToString();
-      }
-      return retValue;
-    }
-
-    // Creates the offset/fetch next statement.
-    /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/PageFetch/*'/>
-    public string? PageFetch()
-    {
-      string? retValue = null;
-
-      if (LJC.HasListItems(mDbRequest.OrderByNames)
-        && mDbRequest.PageSize > 0)
-      {
-        var builder = new StringBuilder(64);
-        builder.Append($"offset {mDbRequest.PageStartIndex} rows\r\n");
-        builder.Append($"fetch next {mDbRequest.PageSize} rows only");
-        builder.AppendLine();
-        retValue = builder.ToString();
-      }
-      return retValue;
-    }
-
-    // Creates a list of record update values.
-    /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/UpdateList/*'/>
-    public string? UpdateValueList()
-    {
-      string? retValue = null;
-
-      if (LJC.HasListItems(mDbRequest.Columns))
-      {
-        var builder = new StringBuilder(64);
-        foreach (LJCDataColumn dataColumn in mDbRequest.Columns)
-        {
-          if (builder.Length > 0)
-          {
-            builder.AppendLine(",");
-          }
-          builder.Append($" {dataColumn.ColumnName} = {dataColumn.FormatValue()}");
-        }
-        builder.AppendLine();
-        retValue = builder.ToString();
-      }
-      return retValue;
-    }
-
-    // Create the where clause.
-    /// <include file='Doc/DbSqlBuilder.xml'
-    ///  path='items/WhereClause/*'/>
-    public string? WhereClause()
-    {
-      string? retValue = null;
-
-      if (mDbRequest != null)
-      {
-        if (null == mDbRequest.Filters || 0 == mDbRequest.Filters.Count)
-        {
-          retValue = KeyWhereClause();
-        }
-        else
-        {
-          retValue = FilterWhereClause(mDbRequest.Filters);
-        }
-      }
       return retValue;
     }
     #endregion

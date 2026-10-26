@@ -1,19 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DbSqlBuilder.xml -->
-<items>
-  <DbSqlBuilder>
+<members>
+  <!-- Class -->
+  <LJCDbSqlBuilder>
     <summary>
       Provides SQL builder methods.
     </summary>
-  </DbSqlBuilder>
-  <DbSqlBuilderC>
+  </LJCDbSqlBuilder>
+  
+  <!-- Static Methods -->
+  <FilterWhereClause>
+    <summary>
+      Creates the where clause from the filters.
+    </summary>
+    <param name="dbFilters">The filters object.</param>
+    <param name="recursive">Indicates if this is a recursive call.</param>
+    <returns>The filters where clause.</returns>
+  </FilterWhereClause>
+
+  <!-- Constructor Methods -->
+  <Constructor>
     <summary>
       Initializes an object instance.
     </summary>
+  </Constructor>
+  <ParamConstructor>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
     <param name="dbRequest">The request object.</param>
-  </DbSqlBuilderC>
+  </ParamConstructor>
+  
+  <!-- Methods -->
   <ColumnList>
     <summary>
       Creates the list of included table columns.
@@ -74,14 +94,6 @@
     </summary>
     <returns>The Update statement.</returns>
   </CreateUpdateSql>
-  <FilterWhereClause>
-    <summary>
-      Creates the where clause from the filters.
-    </summary>
-    <param name="dbFilters">The filters object.</param>
-    <param name="recursive">Indicates if this is a recursive call.</param>
-    <returns>The filters where clause.</returns>
-  </FilterWhereClause>
   <InsertValueList>
     <summary>
       Creates a list of record values.
@@ -157,16 +169,16 @@
     </summary>
     <returns>The pagination statement.</returns>
   </PageFetch>
-  <UpdateList>
+  <UpdateValueList>
     <summary>
       Creates a list of record update values.
     </summary>
     <returns>The update value list.</returns>
-  </UpdateList>
+  </UpdateValueList>
   <WhereClause>
     <summary>
       Create the where clause.
     </summary>
     <returns>The where clause string.</returns>
   </WhereClause>
-</items>
+</members>

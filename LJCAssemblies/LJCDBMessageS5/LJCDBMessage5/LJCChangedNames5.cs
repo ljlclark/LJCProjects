@@ -5,15 +5,15 @@
 namespace LJCDBMessage5
 {
   // Contains the list of changed property names.
-  /// <include file='Doc/ProjectChangedNames.xml'
-  ///  path='items/LJCChangedNames/*'/>
+  /// <include file='Doc/ChangedNames.xml'
+  ///  path='members/LJCChangedNames/*'/>
   public class LJCChangedNames
   {
     #region Properties
 
     // Returns the ChangedProperties collection.
     /// <include file='Doc/ChangedNames.xml'
-    ///  path='items/ChangedProperties/*'/>
+    ///  path='members/ChangedProperties/*'/>
     public List<string> ChangedProperties
     {
       //get => _ChangedProperties.ToList();
@@ -22,7 +22,7 @@ namespace LJCDBMessage5
 
     // Returns the changed property names string.
     /// <include file='Doc/ChangedNames.xml'
-    ///  path='items/ChangedPropertyNames/*'/>
+    ///  path='members/ChangedPropertyNames/*'/>
     public string ChangedPropertyNames
     {
       get => string.Join(", ", ChangedProperties);
@@ -40,7 +40,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance.
     /// <include file='Doc/ChangedNames.xml'
-    ///  path='items/Constructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCChangedNames()
     {
       _ChangedProperties = [];
@@ -52,7 +52,7 @@ namespace LJCDBMessage5
     // Adds the property name to the list if the value has changed and it
     // is not already in the list.
     /// <include file='Doc/ChangedNames.xml'
-    ///  path='items/Add/*'/>
+    ///  path='members/Add/*'/>
     public T Add<T>(string propertyName, T originalValue, T newValue)
     {
       T retValue = newValue;
@@ -71,7 +71,7 @@ namespace LJCDBMessage5
 
     // Adds a list of names.
     /// <include file='Doc/ChangedNames.xml'
-    ///  path='items/AddNames/*'/>
+    ///  path='members/AddNames/*'/>
     public void AddNames(List<string> propertyNames)
     {
       foreach (string propertyName in propertyNames)
@@ -83,7 +83,7 @@ namespace LJCDBMessage5
 
     // Clears the changed names.
     /// <include file='Doc/ChangedNames.xml'
-    ///  path='items/AddNames/*'/>
+    ///  path='members/Clear/*'/>
     public void Clear()
     {
       _ChangedProperties.Clear();
@@ -91,7 +91,7 @@ namespace LJCDBMessage5
 
     // Checks if the changed names contains a propertyName.
     /// <include file='Doc/ChangedNames.xml'
-    ///  path='items/Contains/*'/>
+    ///  path='members/Contains/*'/>
     public bool Contains(string propertyName)
     {
       return _ChangedProperties.Contains(propertyName);
@@ -99,7 +99,7 @@ namespace LJCDBMessage5
 
     // Removes a property name from the changed names.
     /// <include file='Doc/ChangedNames.xml'
-    ///  path='items/Remove/*'/>
+    ///  path='members/Remove/*'/>
     public void Remove(string propertyName)
     {
       _ChangedProperties.Remove(propertyName);

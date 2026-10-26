@@ -11,7 +11,7 @@ namespace LJCCipherLib5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public InsertItem()
     {
       Name = "";
@@ -19,7 +19,7 @@ namespace LJCCipherLib5
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public InsertItem(InsertItem item)
     {
       Name = item.Name;
@@ -31,7 +31,7 @@ namespace LJCCipherLib5
     #region Data Methods
 
     // Provides the default Sort functionality.
-    /// <include path='items/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/CompareTo/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int CompareTo(InsertItem? other)
     {
       int retValue;
@@ -69,7 +69,7 @@ namespace LJCCipherLib5
   public class InsertItemNameComparer : IComparer<InsertItem>
   {
     // Compares two objects.
-    /// <include path='items/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/Compare/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public int Compare(InsertItem? x, InsertItem? y)
     {
       int retValue;

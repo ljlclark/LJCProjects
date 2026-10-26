@@ -11,7 +11,7 @@ namespace LJCCipherLib5
 	{
 		// Get bytes from sourceCipher index values knowing only
 		// the index locations.
-		/// <include path='items/CreateNewItems/*' file='Doc/TargetCipher.xml'/>
+		/// <include path='members/CreateNewItems/*' file='Doc/TargetCipher.xml'/>
 		public InsertItems CreateNewItems(byte[] sourceCipher)
 		{
 			int previousLastIndex = 0;

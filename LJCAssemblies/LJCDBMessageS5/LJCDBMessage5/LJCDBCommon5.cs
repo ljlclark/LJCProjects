@@ -8,14 +8,14 @@ namespace LJCDBMessage5
 {
   // Common data message methods.
   /// <include file='Doc/DbCommon.xml'
-  ///  path='items/LJCDBCommon/*'/>
+  ///  path='members/LJCDBCommon/*'/>
   public partial class LJCDBCommon
   {
     #region Create Request Columns
 
     // Gets Request columns from the baseDefinition using the propertyNames.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/RequestColumns/*'/>
+    ///  path='members/RequestColumns/*'/>
     public static LJCDataColumns? RequestColumns(LJCDataColumns dataColumns
       , List<string>? propertyNames = null)
     {
@@ -45,7 +45,7 @@ namespace LJCDBMessage5
     // propertyNames.
     // Similar to RequestDataKeys and RequestLookupKeys()
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/RequestDataColumns/*'/>
+    ///  path='members/RequestDataColumns/*'/>
     public static LJCDataColumns? RequestDataColumns(object dataObject
       , LJCDataColumns baseDefinition, List<string>? propertyNames = null
       , bool? includeNull = false)
@@ -152,7 +152,7 @@ namespace LJCDBMessage5
 
     // Gets Request Key columns from baseDefinition using keyColumns and dbJoins.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/RequestKeys/*'/>
+    ///  path='members/RequestKeys/*'/>
     // Similar to DataColumns() and LookupKeys()
     public static LJCDataColumns? RequestKeys(LJCDataColumns? keyColumns
       , LJCDataColumns baseDefinition, LJCDBJoins? dbJoins = null)
@@ -266,7 +266,7 @@ namespace LJCDBMessage5
 
     // Gets the Request Key columns from the keyColumns and baseDefinition.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/RequestDataKeys/*'/>
+    ///  path='members/RequestDataKeys/*'/>
     // Similar to RequestDataColumns and RequestLookupKeys()
     public static LJCDataColumns? RequestDataKeys(LJCDataColumns keyColumns
       , LJCDataColumns baseDefinition)
@@ -317,7 +317,7 @@ namespace LJCDBMessage5
     // Get Request Value Key columns from the data object for the property names.
     // Creates Add Lookup Data Key Columns.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/RequestLookupKeys/*'/>
+    ///  path='members/RequestLookupKeys/*'/>
     // Similar to RequestDataColumns and RequestDataKeys()
     public static LJCDataColumns? RequestLookupKeys(object dataObject
       , LJCDataColumns baseDefinition, List<string>? propertyNames = null)
@@ -424,7 +424,7 @@ namespace LJCDBMessage5
 
     // Adds a changed property name.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/AddChangedName/*'/>
+    ///  path='members/AddChangedName/*'/>
     public static void AddChangedName(object dataObject, string propertyName)
     {
       List<string>? changedNames = GetChangedNames(dataObject);
@@ -441,7 +441,7 @@ namespace LJCDBMessage5
 
     // Clears the changed names.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/ClearChanged/*'/>
+    ///  path='members/ClearChanged/*'/>
     public static void ClearChanged(object dataObject)
     {
       List<string>? changedNames = GetChangedNames(dataObject);
@@ -450,7 +450,7 @@ namespace LJCDBMessage5
 
     // Gets the names of the changed properties.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/GetChangedNames/*'/>
+    ///  path='members/GetChangedNames/*'/>
     public static List<string>? GetChangedNames(object dataObject)
     {
       List<string>? retValue = null;
@@ -471,7 +471,7 @@ namespace LJCDBMessage5
 
     // Gets the ChangedNames if available and propertyNames is null.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/GetDefaultPropertyNames/*'/>
+    ///  path='members/GetDefaultPropertyNames/*'/>
     public static void DefaultToChangedNames(object dataObject
       , ref List<string> propertyNames)
     {
@@ -488,7 +488,7 @@ namespace LJCDBMessage5
 
     // Checks if there are changed property names and outputs the names.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/IsChanged/*'/>
+    ///  path='members/IsChanged/*'/>
     public static bool IsChanged(object dataObject, out List<string>? propertyNames)
     {
       bool retValue = false;
@@ -514,7 +514,7 @@ namespace LJCDBMessage5
 
     // Sets the Data Object property values from the data columns object.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/SetObjectValues1/*'/>
+    ///  path='members/SetObjectValues1/*'/>
     public static void SetObjectValues(LJCDataColumns dataColumns
       , object dataObject)
     {
@@ -530,7 +530,7 @@ namespace LJCDBMessage5
 
     // Sets the Data Object property values from the DbValues object.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/SetObjectValues2/*'/>
+    ///  path='members/SetObjectValues2/*'/>
     public static void SetObjectValues(LJCDataValues dataValues
       , object dataObject)
     {

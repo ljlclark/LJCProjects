@@ -6,15 +6,15 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a result Row.
-  /// <include file='Doc/ProjectDbRow.xml'
-  ///  path='items/LJCDBRow/*'/>
+  /// <include file='Doc/DbRow.xml'
+  ///  path='members/LJCDBRow/*'/>
   public class LJCDBRow
   {
-    #region Static Functions
+    #region Static Methods
 
     // Checks if the collection has items.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/HasItems1/*'/>
+    ///  path='members/HasItems1/*'/>
     public static bool HasItems(LJCDBRow collection)
     {
       bool retValue = false;
@@ -32,22 +32,55 @@ namespace LJCDBMessage5
 
     // Gets or sets the row values.
     /// <include file='Doc/DbRow.xml'
-    ///  path='items/Values/*'/>
+    ///  path='members/Values/*'/>
     public LJCDataValues? Values { get; set; }
+
+    // The row value for the specified value column index.
+    /// <include file='Doc/DbRow.xml'
+    ///  path='members/Item1/*'/>
+    public LJCDataValue? this[int columnIndex]
+    {
+      get
+      {
+        LJCDataValue? retValue = null;
+        if (null != Values)
+        {
+          retValue = Values[columnIndex];
+        }
+        return retValue;
+      }
+    }
+
+    // The row value for the specified value property name.
+    /// <include file='Doc/DbRow.xml'
+    ///  path='members/Item2/*'/>
+    public LJCDataValue? this[string propertyName]
+    {
+      get
+      {
+        LJCDataValue? retValue = null;
+        if (null != Values)
+        {
+          //retValue = Values.LJCSearchPropertyName(propertyName);
+          retValue = Values[propertyName];
+        }
+        return retValue;
+      }
+    }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDBRow()
     {
     }
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='members/CopyConstructor/*'/>
     public LJCDBRow(LJCDBRow items)
     {
       if (HasItems(items)
@@ -64,47 +97,11 @@ namespace LJCDBMessage5
 
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCDBRow? Clone()
     {
       LJCDBRow? retValue = MemberwiseClone() as LJCDBRow;
       return retValue;
     }
-
-    #region Properties
-
-    // The row value for the specified value column index.
-    /// <include file='Doc/DbRow.xml'
-    ///  path='items/Item1/*'/>
-    public LJCDataValue? this[int columnIndex]
-    {
-      get
-      {
-        LJCDataValue? retValue = null;
-        if (null != Values)
-        {
-          retValue = Values[columnIndex];
-        }
-        return retValue;
-      }
-    }
-
-    // The row value for the specified value property name.
-    /// <include file='Doc/DbRow.xml'
-    ///  path='items/Item2/*'/>
-    public LJCDataValue? this[string propertyName]
-    {
-      get
-      {
-        LJCDataValue? retValue = null;
-        if (null != Values)
-        {
-          //retValue = Values.LJCSearchPropertyName(propertyName);
-          retValue = Values[propertyName];
-        }
-        return retValue;
-      }
-    }
-    #endregion
   }
 }

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbCondition.xml -->
+<members>
+  <!-- Class -->
+  <LJCDbCondition>
+    <summary>
+      Represents a filter condition.
+    </summary>
+  </LJCDbCondition>
+
+  <!-- Properties -->
+  <ComparisonOperator>
+    <summary>
+      The comparison operator.
+    </summary>
+  </ComparisonOperator>
+  <FirstValue>
+    <summary>
+      The first data value.
+    </summary>
+  </FirstValue>
+  <SecondValue>
+    <summary>
+      The second data value.
+    </summary>
+  </SecondValue>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <CopyConstructor>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="item"></param>
+  </CopyConstructor>
+
+  <!-- Methods -->
+  <Clone>
+    <summary>
+      Creates and returns a clone of the object.
+    </summary>
+  </Clone>
+</members>

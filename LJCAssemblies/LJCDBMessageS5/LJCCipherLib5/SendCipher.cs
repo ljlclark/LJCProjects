@@ -11,14 +11,14 @@ namespace LJCCipherLib5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public SendCipher()
     {
       InsertItems = [];
     }
 
     // Initializes an object instance.
-    /// <include path='items/SendCipherC/*' file='Doc/SendCipher.xml'/>
+    /// <include path='members/SendCipherC/*' file='Doc/SendCipher.xml'/>
     public SendCipher(InsertItems insertItems)
     {
       InsertItems = [.. insertItems];
@@ -28,7 +28,7 @@ namespace LJCCipherLib5
     #region Public Methods
 
     // Returns the insert value from the sendCipher by name.
-    /// <include path='items/GetInsertItemValue/*' file='Doc/SendCipher.xml'/>
+    /// <include path='members/GetInsertItemValue/*' file='Doc/SendCipher.xml'/>
     public byte[]? GetInsertItemValue(byte[] sourceCipher, string name)
     {
       byte[]? retValue = null;
@@ -50,7 +50,7 @@ namespace LJCCipherLib5
     }
 
     // Returns the SendCipher value.
-    /// <include path='items/GetSendCipher/*' file='Doc/SendCipher.xml'/>
+    /// <include path='members/GetSendCipher/*' file='Doc/SendCipher.xml'/>
     public byte[] GetSendCipher(byte[] sourceCipher)
     {
       int valuesLength = GetValuesLength();
@@ -106,7 +106,7 @@ namespace LJCCipherLib5
     }
 
     // Returns the Cipher value.
-    /// <include path='items/SendCipherToCipher/*' file='Doc/SendCipher.xml'/>
+    /// <include path='members/SendCipherToCipher/*' file='Doc/SendCipher.xml'/>
     public byte[] SendCipherToCipher(byte[] sourceCipher)
     {
       int valuesLength = GetValuesLength();
@@ -149,7 +149,7 @@ namespace LJCCipherLib5
     }
 
     // Initializes the internal InsertItems property.
-    /// <include path='items/SendInsertItems/*' file='Doc/SendCipher.xml'/>
+    /// <include path='members/SendInsertItems/*' file='Doc/SendCipher.xml'/>
     public void SetInsertItems(InsertItems insertItems)
     {
       InsertItems = [.. insertItems];

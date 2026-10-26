@@ -7,17 +7,17 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Converts DataColumns and DbResult objects to data objects.
-  /// <include file='Doc/ProjectResultConverter.xml'
-  ///  path='items/LJCResultConverter/*'/>
+  /// <include file='Doc/ResultConverter.xml'
+  ///  path='members/LJCResultConverter/*'/>
   public class LJCResultConverter<TData, TList>
     where TData : class, new()
     where TList : List<TData>, new()
   {
-    #region public Methods
+    #region Methods
 
     // Creates a collection from the result records.
     /// <include file='Doc/ResultConverter.xml'
-    ///  path='items/CreateCollection/*'/>
+    ///  path='members/CreateCollection/*'/>
     public TList? CreateCollection(LJCDBResult dbResult)
     {
       // Also in LJCDBClientLib.ObjectManager.
@@ -45,7 +45,7 @@ namespace LJCDBMessage5
 
     // Creates a Data Object collection from the Table rows.
     /// <include file='Doc/ResultConverter.xml'
-    ///  path='items/CreateCollectionFromTable/*'/>
+    ///  path='members/CreateCollectionFromTable/*'/>
     public TList? CreateCollectionFromTable(DataTable dataTable
       , LJCDataColumns? dataColumns = null)
     {
@@ -71,7 +71,7 @@ namespace LJCDBMessage5
 
     // Creates a Data Object from the result DataColumns object.
     /// <include file='Doc/ResultConverter.xml'
-    ///  path='items/CreateData1/*'/>
+    ///  path='members/CreateData1/*'/>
     public TData CreateData(LJCDataColumns dataColumns)
     {
       TData retValue;
@@ -86,7 +86,7 @@ namespace LJCDBMessage5
 
     // Creates a Data Object from the result values.
     /// <include file='Doc/ResultConverter.xml'
-    ///  path='items/CreateData2/*'/>
+    ///  path='members/CreateData2/*'/>
     public TData? CreateData(LJCDBResult dbResult)
     {
       TData? retValue = null;
@@ -100,7 +100,7 @@ namespace LJCDBMessage5
 
     // Creates a Data Object from the data values.
     /// <include file='Doc/ResultConverter.xml'
-    ///  path='items/CreateData3/*'/>
+    ///  path='members/CreateData3/*'/>
     public TData? CreateData(LJCDataValues? dataValues)
     {
       // Also in LJCDBClientLib.ObjectManager.
@@ -120,7 +120,7 @@ namespace LJCDBMessage5
 
     // Creates a Data Object from the row values.
     /// <include file='Doc/ResultConverter.xml'
-    ///  path='items/CreateDataFromTable/*'/>
+    ///  path='members/CreateDataFromTable/*'/>
     public TData? CreateDataFromTable(DataTable dataTable, DataRow? dataRow = null
       , LJCDataColumns? dataColumns = null)
     {

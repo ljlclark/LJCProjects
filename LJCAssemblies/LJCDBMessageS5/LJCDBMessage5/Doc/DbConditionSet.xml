@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DbConditionSet.xml -->
-<items>
+<members>
   <!-- Class -->
   <LJCDbConditionSet>
     <summary>
@@ -65,16 +65,16 @@
       Initializes an object instance.
     </summary>
   </Constructor>
-  <ConstructorCopy>
+  <CopyConstructor>
     <summary>
       The copy constructor.
     </summary>
     <param name="item"></param>
-  </ConstructorCopy>
+  </CopyConstructor>
   <Clone>
     <summary>
       Creates and returns a clone of the object.
     </summary>
     <returns>The new cloned value.</returns>
   </Clone>
-</items>
+</members>

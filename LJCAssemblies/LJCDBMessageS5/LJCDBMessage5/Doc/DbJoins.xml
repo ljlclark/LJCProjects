@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DbJoins.xml -->
 <members>
@@ -117,12 +117,12 @@
       Initializes an object instance.
     </summary>
   </Constructor>
-  <ConstructorCopy>
+  <CopyConstructor>
     <summary>
       The Copy constructor.
     </summary>
     <param name="items"></param>
-  </ConstructorCopy>
+  </CopyConstructor>
   
   <!-- Collection Methods -->
   <Add>

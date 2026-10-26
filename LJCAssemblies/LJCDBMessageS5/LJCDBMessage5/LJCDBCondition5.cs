@@ -6,15 +6,15 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a filter condition.
-  /// <include file='Doc/ProjectDbCondition.xml'
-  ///  path='items/LJCDBCondition/*'/>
+  /// <include file='Doc/DbCondition.xml'
+  ///  path='members/LJCDBCondition/*'/>
   public class LJCDBCondition
   {
     #region Properties
 
     // The comparison operator.
     /// <include file='Doc/DbCondition.xml'
-    ///  path='items/ComparisonOperator/*'/>
+    ///  path='members/ComparisonOperator/*'/>
     public string? ComparisonOperator
     {
       get => mComparisonOperator;
@@ -24,7 +24,7 @@ namespace LJCDBMessage5
 
     // The first data value.
     /// <include file='Doc/DbCondition.xml'
-    ///  path='items/FirstValue/*'/>
+    ///  path='members/FirstValue/*'/>
     public string? FirstValue
     {
       get => mFirstValue;
@@ -34,7 +34,7 @@ namespace LJCDBMessage5
 
     // The second data value.
     /// <include file='Doc/DbCondition.xml'
-    ///  path='items/SecondValue/*'/>
+    ///  path='members/SecondValue/*'/>
     public string? SecondValue
     {
       get => mSecondValue;
@@ -47,14 +47,14 @@ namespace LJCDBMessage5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDBCondition()
     {
     }
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='members/ConstructorCopy/*'/>
     public LJCDBCondition(LJCDBCondition item)
     {
       ComparisonOperator = item.ComparisonOperator;
@@ -67,7 +67,7 @@ namespace LJCDBMessage5
 
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCDBCondition? Clone()
     {
       LJCDBCondition? retValue = MemberwiseClone() as LJCDBCondition;

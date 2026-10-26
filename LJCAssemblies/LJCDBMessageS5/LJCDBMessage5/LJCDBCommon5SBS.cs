@@ -11,7 +11,7 @@ namespace LJCDBMessage5
   {
     // Gets Request columns from the baseDefinition using the propertyNames.
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/RequestColumns/*'/>
+    ///  path='members/RequestColumns/*'/>
     public static LJCDataColumns RequestColumns(LJCDataColumns dataColumns
       , List<string>? propertyNames = null)
     {
@@ -40,7 +40,7 @@ namespace LJCDBMessage5
     // Gets Request Value columns from the baseDefinition using the propertyNames.
     // Similar to RequestDataKeys and RequestLookupKeys()
     /// <include file='Doc/DbCommon.xml'
-    ///  path='items/RequestDataColumns/*'/>
+    ///  path='members/RequestDataColumns/*'/>
     public static LJCDataColumns? RequestDataColumns(object dataObject
       , LJCDataColumns baseDefinition, List<string>? propertyNames = null
       , bool includeNull = false)
@@ -127,7 +127,7 @@ namespace LJCDBMessage5
     #region Key Columns
 
     // Gets Request Key columns from baseDefinition using keyColumns and dbJoins.
-    /// <include path='items/RequestKeys/*' file='Doc/DbCommon.xml'/>
+    /// <include path='members/RequestKeys/*' file='Doc/DbCommon.xml'/>
     // Similar to DataColumns() and LookupKeys()
     public static LJCDataColumns? RequestKeys(LJCDataColumns keyColumns
       , LJCDataColumns baseDefinition, LJCDBJoins? dbJoins = null)
@@ -240,7 +240,7 @@ namespace LJCDBMessage5
     #region Data Keys
 
     // Gets the Request Key columns from the keyColumns and baseDefinition.
-    /// <include path='items/RequestDataKeys/*' file='Doc/DbCommon.xml'/>
+    /// <include path='members/RequestDataKeys/*' file='Doc/DbCommon.xml'/>
     // Similar to RequestDataColumns and RequestLookupKeys()
     public static LJCDataColumns? RequestDataKeys(LJCDataColumns keyColumns
       , LJCDataColumns baseDefinition)
@@ -287,7 +287,7 @@ namespace LJCDBMessage5
 
     // Get Request Value Key columns from the data object for the property names.
     // Creates Add Lookup Data Key Columns.
-    /// <include path='items/RequestLookupKeys/*' file='Doc/DbCommon.xml'/>
+    /// <include path='members/RequestLookupKeys/*' file='Doc/DbCommon.xml'/>
     // Similar to RequestDataColumns and RequestDataKeys()
     public static LJCDataColumns? RequestLookupKeys(object dataObject
       , LJCDataColumns baseDefinition, List<string>? propertyNames = null)
@@ -384,7 +384,7 @@ namespace LJCDBMessage5
     #region Other Public Methods
 
     // Gets the names of the changed properties.
-    /// <include path='items/GetChangedNames/*' file='Doc/DbCommon.xml'/>
+    /// <include path='members/GetChangedNames/*' file='Doc/DbCommon.xml'/>
     public static List<string>? GetChangedNames(object dataObject)
     {
       List<string>? retValue = null;
@@ -404,7 +404,7 @@ namespace LJCDBMessage5
     }
 
     // Gets the ChangedNames if available and propertyNames is null.
-    /// <include path='items/GetDefaultPropertyNames/*' file='Doc/DbCommon.xml'/>
+    /// <include path='members/GetDefaultPropertyNames/*' file='Doc/DbCommon.xml'/>
     public static void GetDefaultPropertyNames(object dataObject
       , ref List<string>? propertyNames)
     {

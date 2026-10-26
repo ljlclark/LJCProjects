@@ -6,15 +6,15 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a filter which is part of a where clause.
-  /// <include file='Doc/ProjectDbFilter.xml'
-  ///  path='items/LJCDBFilter/*'/>
+  /// <include file='Doc/DbFilter.xml'
+  ///  path='members/LJCDBFilter/*'/>
   public class LJCDBFilter
   {
     #region Properties
 
     // The filter boolean operator.
     /// <include file='Doc/DbFilter.xml'
-    ///  path='items/BooleanOperator/*'/>
+    ///  path='members/BooleanOperator/*'/>
     public string? BooleanOperator
     {
       get => mBooleanOperator;
@@ -24,17 +24,17 @@ namespace LJCDBMessage5
 
     // Gets or sets the filter condition set.
     /// <include file='Doc/DbFilter.xml'
-    ///  path='items/ConditionSet/*'/>
+    ///  path='members/ConditionSet/*'/>
     public LJCDBConditionSet ConditionSet { get; set; }
 
     // Gets or sets the contained filters.
     /// <include file='Doc/DbFilter.xml'
-    ///  path='items/Filters/*'/>
+    ///  path='members/Filters/*'/>
     public LJCDBFilters? Filters { get; set; }
 
     // Gets or sets the Name value.
     /// <include file='Doc/DbFilter.xml'
-    ///  path='items/Name/*'/>
+    ///  path='members/Name/*'/>
     public string? Name
     {
       get => mName;
@@ -47,7 +47,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDBFilter()
     {
       BooleanOperator = "and";
@@ -58,7 +58,7 @@ namespace LJCDBMessage5
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='members/CopyConstructor/*'/>
     public LJCDBFilter(LJCDBFilter item)
     {
       BooleanOperator = item.BooleanOperator;
@@ -96,7 +96,7 @@ namespace LJCDBMessage5
 
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCDBFilter? Clone()
     {
       LJCDBFilter? retValue = MemberwiseClone() as LJCDBFilter;

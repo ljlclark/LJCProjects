@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DbRequest.xml -->
 <members>
@@ -133,19 +133,19 @@
       Initializes an object instance.
     </summary>
   </Constructor>
-  <ConstructorParam>
+  <ParamConstructor>
     <summary>
       Initializes an object instance with the supplied values.
     </summary>
     <param name="requestType">The request type.</param>
     <param name="tableName">The table name.</param>
     <param name="dataConfigName">The data configuration name.</param>
-  </ConstructorParam>
-  <ConstructorCopy>
+  </ParamConstructor>
+  <CopyConstructor>
     <summary>
       The Copy constructor.
     </summary>
-  </ConstructorCopy>
+  </CopyConstructor>
   
   <!-- Data Methods -->
   <Clone>

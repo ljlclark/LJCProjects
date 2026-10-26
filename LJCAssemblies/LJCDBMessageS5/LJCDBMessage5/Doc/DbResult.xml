@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DbResult.xml -->
-<items>
+<members>
   <LJCDBResult>
     <summary>
       Represents a Request result.
@@ -37,6 +37,12 @@
     <param name="adoColumns"></param>
     <returns></returns>
   </GetDataColumns>
+  <HasColumns>
+    <summary>
+      Checks the DataColumnCollection object for items.
+    </summary>
+    <param name="adoColumns"></param>
+  </HasColumns>
 
   <!-- Static Methods -->
   <CreateResultColumns>
@@ -103,7 +109,7 @@
     <summary>
       Adds the join values.
     </summary>
-    <param name="dbValues">The values object.</param>
+    <param name="dataValues">The values object.</param>
     <param name="dataRow">
       The &lt;span class="userType"&gt;DataRow&lt;/span&gt;
       object.
@@ -166,14 +172,19 @@
   <!-- Constructor Methods -->
   <Constructor>
     <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ParamConstructor1>
+    <summary>
       Initializes an object instance with the DbRequest object.
     </summary>
     <param name="dbRequest">
       The &lt;span class="userType"&gt;DbQuery&lt;/span&gt;
       object.
     </param>
-  </Constructor>
-  <ConstructorParam>
+  </ParamConstructor1>
+  <ParamConstructor2>
     <summary>
       Initializes an object instance with the supplied values.
     </summary>
@@ -181,13 +192,13 @@
     <param name="tableName">The table name.</param>
     <param name="schemaName">The schema name.</param>
     <param name="procedureName">The procedure name.</param>
-  </ConstructorParam>
-  <ConstructorCopy>
+  </ParamConstructor2>
+  <CopyConstructor>
     <summary>
       The Copy constructor.
     </summary>
     <param name="item"></param>
-  </ConstructorCopy>
+  </CopyConstructor>
 
   <!-- Collection Methods -->
   <Clone>
@@ -224,12 +235,6 @@
     </summary>
     <param name="fileSpec">The file specification.</param>
   </Serialize2>
-  <Serialize>
-    <summary>
-      Serialize the object to the specified file.
-    </summary>
-    <param name="fileSpec"></param>
-  </Serialize>
   
   <!-- Methods -->
   <GetValueColumns>
@@ -285,4 +290,4 @@
       </para>
     </remarks>
   </SetRows>
-</items>
+</members>

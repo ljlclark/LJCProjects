@@ -10,7 +10,7 @@ namespace LJCDBMessage5
 {
   // Represents a data result.
   /// <include file='Doc/DbResult.xml'
-  ///  path='items/LJCDBResult/*'/>
+  ///  path='members/LJCDBResult/*'/>
   //[XmlRoot("DbResult")]
   public class LJCDBResult
   {
@@ -18,7 +18,7 @@ namespace LJCDBMessage5
 
     // Creates a DataColumn object from a ADO Column object. 
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/GetDataColumn/*'/>
+    ///  path='members/GetDataColumn/*'/>
     public static LJCDataColumn GetDataColumn(DataColumn adoColumn)
     {
       LJCDataColumn retValue;
@@ -39,7 +39,7 @@ namespace LJCDBMessage5
 
     // Creates a DataColumns collection from an ADO Columns collection.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/GetDataColumns/*'/>
+    ///  path='members/GetDataColumns/*'/>
     public static LJCDataColumns? GetDataColumns(DataColumnCollection adoColumns)
     {
       LJCDataColumns? retValue = null;
@@ -60,7 +60,7 @@ namespace LJCDBMessage5
 
     // Checks the DataColumnCollection object for items.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/HasColumns/*'/>
+    ///  path='members/HasColumns/*'/>
     public static bool HasColumns([NotNullWhen(true)] DataColumnCollection adoColumns)
     {
       bool retValue = false;
@@ -77,7 +77,7 @@ namespace LJCDBMessage5
 
     // Creates combined DataColumns from DataColumns and DataValues.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/CreateResultColumns/*'/>
+    ///  path='members/CreateResultColumns/*'/>
     public static LJCDataColumns? CreateResultColumns(LJCDBResult dbResult)
     {
       LJCDataColumn? findColumn;
@@ -124,7 +124,7 @@ namespace LJCDBMessage5
 
     // Deserializes the DbResult message.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/DeserializeMessage/*'/>
+    ///  path='members/DeserializeMessage/*'/>
     public static LJCDBResult? DeserializeMessage(string result)
     {
       LJCDBResult? retValue = null;
@@ -143,7 +143,7 @@ namespace LJCDBMessage5
 
     // Gets the result values from the data row.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/GetRowValues/*'/>
+    ///  path='members/GetRowValues/*'/>
     public static LJCDataValues GetRowValues(LJCDataColumns dataColumns
       , DataRow dataRow)
     {
@@ -179,7 +179,7 @@ namespace LJCDBMessage5
 
     // Checks if the result has Columns.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/HasColumns1/*'/>
+    ///  path='members/HasColumns1/*'/>
     public static bool HasColumns([NotNullWhen(true)] LJCDBResult? dbResult)
     {
       bool retValue = false;
@@ -194,7 +194,7 @@ namespace LJCDBMessage5
 
     // Checks if the result has Columns and Rows.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/HasData1/*'/>
+    ///  path='members/HasData1/*'/>
     public static bool HasData(LJCDBResult dbResult)
     {
       bool retValue;
@@ -209,7 +209,7 @@ namespace LJCDBMessage5
 
     // <summary>Checks if the result has Rows.</summary>
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/HasRows1/*'/>
+    ///  path='members/HasRows1/*'/>
     public static bool HasRows([NotNullWhen(true)] LJCDBResult? dbResult)
     {
       bool retValue = false;
@@ -224,7 +224,7 @@ namespace LJCDBMessage5
 
     // Adds the join values.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/AddJoinRowValues/*'/>
+    ///  path='members/AddJoinRowValues/*'/>
     private static void AddJoinRowValues(LJCDataValues dataValues
       , DataRow dataRow, LJCDBJoins? dbJoins)
     {
@@ -249,22 +249,22 @@ namespace LJCDBMessage5
 
     // Gets or sets the non-query affected record count.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/AffectedRecords/*'/>
+    ///  path='members/AffectedRecords/*'/>
     public int AffectedRecords { get; set; }
 
     // Gets the collection of columns that belong to this result.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/Columns/*'/>
+    ///  path='members/Columns/*'/>
     public LJCDataColumns? Columns { get; set; }
 
     // Gets or sets the Database name.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/DatabaseName/*'/>
+    ///  path='members/DatabaseName/*'/>
     public string? DatabaseName { get; set; }
 
     // Gets the Default File Name.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/LJCDefaultFileName/*'/>
+    ///  path='members/LJCDefaultFileName/*'/>
     public static string LJCDefaultFileName
     {
       get => "DbResult.xml";
@@ -272,7 +272,7 @@ namespace LJCDBMessage5
 
     // Gets or sets the executed SQL statement.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/ExecutedSql/*'/>
+    ///  path='members/ExecutedSql/*'/>
     public string? ExecutedSql
     {
       get => mExecutedSql;
@@ -282,7 +282,7 @@ namespace LJCDBMessage5
 
     // Gets or sets the ProcedureName value.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/ProcedureName/*'/>
+    ///  path='members/ProcedureName/*'/>
     public string? ProcedureName
     {
       get => mProcedureName;
@@ -292,7 +292,7 @@ namespace LJCDBMessage5
 
     // The request type.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/RequestTypeName/*'/>
+    ///  path='members/RequestTypeName/*'/>
     public string RequestTypeName
     {
       get => mRequestTypeName;
@@ -302,13 +302,13 @@ namespace LJCDBMessage5
 
     // A collection of DbValues objects.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/Rows/*'/>
+    ///  path='members/Rows/*'/>
     [XmlArrayItem("DbRows")]
     public LJCDBRows Rows { get; set; }
 
     // The schema name.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/SchemaName/*'/>
+    ///  path='members/SchemaName/*'/>
     public string? SchemaName
     {
       get => mSchemaName;
@@ -318,7 +318,7 @@ namespace LJCDBMessage5
 
     // The table name.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/TableName/*'/>
+    ///  path='members/TableName/*'/>
     public string? TableName
     {
       get => mTableName;
@@ -331,7 +331,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDBResult()
     {
       mRequestTypeName = RequestType.Select.ToString();
@@ -343,7 +343,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance with the DbResult object.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/Constructor/*'/>
+    ///  path='members/ConstructorParam1/*'/>
     public LJCDBResult(LJCDBRequest dbRequest)
       : this(dbRequest.RequestTypeName, dbRequest.TableName
           , dbRequest.SchemaName, dbRequest.ProcedureName)
@@ -352,7 +352,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/ConstructorParam/*'/>
+    ///  path='members/ConstructorParam2/*'/>
     public LJCDBResult(string requestTypeName, string? tableName
       , string? schemaName = null, string? procedureName = null)
     {
@@ -371,7 +371,7 @@ namespace LJCDBMessage5
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/ConstructorCopy/*'/>
+    ///  path='members/ConstructorCopy/*'/>
     public LJCDBResult(LJCDBResult item)
     {
       mRequestTypeName = RequestType.Select.ToString();
@@ -396,7 +396,7 @@ namespace LJCDBMessage5
 
     // Clones the structure of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCDBResult? Clone()
     {
       LJCDBResult? retValue = MemberwiseClone() as LJCDBResult;
@@ -405,7 +405,7 @@ namespace LJCDBMessage5
 
     // Checks if the result has Columns.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/HasColumns2/*'/>
+    ///  path='members/HasColumns2/*'/>
     public bool HasColumns()
     {
       bool retValue = false;
@@ -419,7 +419,7 @@ namespace LJCDBMessage5
 
     // Checks if the result has Columns and Rows.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/HasColumns2/*'/>
+    ///  path='members/HasColumns2/*'/>
     public bool HasData()
     {
       bool retValue;
@@ -434,7 +434,7 @@ namespace LJCDBMessage5
 
     // <summary>Checks if the result has Rows.</summary>
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/HasRows2/*'/>
+    ///  path='members/HasRows2/*'/>
     public bool HasRows()
     {
       bool retValue = false;
@@ -448,7 +448,7 @@ namespace LJCDBMessage5
 
     // Serializes the object and returns the serialized string.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/Serialize1/*'/>
+    ///  path='members/Serialize1/*'/>
     public string Serialize()
     {
       string retValue;
@@ -459,7 +459,7 @@ namespace LJCDBMessage5
 
     // Serialize the object to the specified file.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/Serialize2/*'/>
+    ///  path='members/Serialize2/*'/>
     public void Serialize(string? fileSpec = null)
     {
       if (!LJC.HasText(fileSpec))
@@ -474,7 +474,7 @@ namespace LJCDBMessage5
 
     // Get DataColumns from result records.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/GetValueColumns/*'/>
+    ///  path='members/GetValueColumns/*'/>
     public LJCDataColumns? GetValueColumns(LJCDataValues? dataValues = null)
     {
       LJCDataColumns? retValue = null;
@@ -495,7 +495,7 @@ namespace LJCDBMessage5
 
     // Sets the Columns property from the principle and join columns.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/SetColumns1/*'/>
+    ///  path='members/SetColumns1/*'/>
     public void SetColumns(LJCDataColumns? dataColumns, LJCDBJoins? dbJoins = null)
     {
       if (LJC.HasListItems(dataColumns))
@@ -520,7 +520,7 @@ namespace LJCDBMessage5
 
     // Sets the Columns property from the Request columns.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/SetColumns2/*'/>
+    ///  path='members/SetColumns2/*'/>
     public void SetColumns(LJCDBRequest dbRequest)
     {
       SetColumns(dbRequest.Columns, dbRequest.Joins);
@@ -528,7 +528,7 @@ namespace LJCDBMessage5
 
     // Sets the result records from the DataTable and DbRequest objects.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/SetData/*'/>
+    ///  path='members/SetData/*'/>
     public void SetData(DataTable dataTable, LJCDBRequest dbRequest)
     {
       // *** Next Statement *** Add 12/25/24
@@ -545,7 +545,7 @@ namespace LJCDBMessage5
     // Sets the result records from the DataTable, principle values
     // and join values.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/SetRows/*'/>
+    ///  path='members/SetRows/*'/>
     public void SetRows(DataTable dataTable, LJCDBJoins? dbJoins = null)
     {
       if (LJC.HasTableData(dataTable))

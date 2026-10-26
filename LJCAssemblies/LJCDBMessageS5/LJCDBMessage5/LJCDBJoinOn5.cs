@@ -5,16 +5,16 @@ using LJCNetCommon5;
 
 namespace LJCDBMessage5
 {
-  /// <summary>Represents a Join On definition.</summary>
-  /// <include file='Doc/ProjectDBJoinOn.xml'
-  ///  path='items/LJCDBJoinOn/*'/>
+  // Represents a Join On definition.
+  /// <include file='Doc/DBJoinOn.xml'
+  ///  path='members/LJCDBJoinOn/*'/>
   public class LJCDBJoinOn
   {
     #region Properties
 
     // The Boolean Operator value.
     /// <include file='Doc/DBJoinOn.xml'
-    ///  path='items/BooleanOperator/*'/>
+    ///  path='members/BooleanOperator/*'/>
     public string BooleanOperator
     {
       get => mBooleanOperator;
@@ -24,7 +24,7 @@ namespace LJCDBMessage5
 
     // The 'From' column name.
     /// <include file='Doc/DBJoinOn.xml'
-    ///  path='items/FromColumnName/*'/>
+    ///  path='members/FromColumnName/*'/>
     public string? FromColumnName
     {
       get => mFromColumnName;
@@ -34,7 +34,7 @@ namespace LJCDBMessage5
 
     // The Join On Operator.
     /// <include file='Doc/DBJoinOn.xml'
-    ///  path='items/JoinOnOperator/*'/>
+    ///  path='members/JoinOnOperator/*'/>
     public string JoinOnOperator
     {
       get => mJoinOnOperator;
@@ -44,12 +44,12 @@ namespace LJCDBMessage5
 
     // Gets or sets the contained JoinOns.
     /// <include file='Doc/DBJoinOn.xml'
-    ///  path='items/JoinOns/*'/>
+    ///  path='members/JoinOns/*'/>
     public LJCDBJoinOns JoinOns { get; set; }
 
     // The 'To' column name.
     /// <include file='Doc/DBJoinOn.xml'
-    ///  path='items/ToColumnName/*'/>
+    ///  path='members/ToColumnName/*'/>
     public string? ToColumnName
     {
       get => mToColumnName;
@@ -62,7 +62,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDBJoinOn()
     {
       mBooleanOperator = "";
@@ -75,7 +75,7 @@ namespace LJCDBMessage5
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='members/CopyConstructor/*'/>
     public LJCDBJoinOn(LJCDBJoinOn item)
     {
       mBooleanOperator = "";
@@ -93,7 +93,7 @@ namespace LJCDBMessage5
 
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCDBJoinOn? Clone()
     {
       LJCDBJoinOn? retValue = MemberwiseClone() as LJCDBJoinOn;

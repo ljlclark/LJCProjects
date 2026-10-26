@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- ResultConverter.xml -->
-<items>
-  <ResultConverter>
+<members>
+  <!-- Class -->
+  <LJCResultConverter>
     <summary>
       Converts
       &lt;span class="userType"&gt;DbColumns&lt;/span&gt; and
@@ -12,7 +13,27 @@
     </summary>
     <typeparam name="TData">The data object type.</typeparam>
     <typeparam name="TList">The collection type.</typeparam>
-  </ResultConverter>
+  </LJCResultConverter>
+  
+  <!-- Methods -->
+  <CreateCollection>
+    <summary>
+      Creates a collection from the result records.
+    </summary>
+    <param name="dbResult">The result object.</param>
+    <returns>The collection.</returns>
+  </CreateCollection>
+  <CreateCollectionFromTable>
+    <summary>
+      Creates a Data Object collection from the Table rows.
+    </summary>
+    <param name="dataTable">The DataTable object.</param>
+    <param name="dataColumns">
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </param>
+    <returns>The Data Object collection.</returns>
+  </CreateCollectionFromTable>
   <CreateData1>
     <summary>
       Creates a Data Object from the result DbColumns object.
@@ -49,27 +70,10 @@
     </summary>
     <param name="dataTable">The DataTable object.</param>
     <param name="dataRow">The DataRow object.</param>
-    <param name="dataDefinition">
+    <param name="dataColumns">
       The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
       object.
     </param>
     <returns>The Data Object.</returns>
   </CreateDataFromTable>
-  <CreateCollection>
-    <summary>
-      Creates a collection from the result records.
-    </summary>
-    <param name="dbResult">The result object.</param>
-    <returns>The collection.</returns>
-  </CreateCollection>
-  <CreateCollectionFromTable>
-    <summary>
-      Creates a Data Object collection from the Table rows.
-    </summary>
-    <param name="dataTable">The DataTable object.</param>
-    <param name="dataDefinition">
-      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
-      object.</param>
-    <returns>The Data Object collection.</returns>
-  </CreateCollectionFromTable>
-</items>
+</members>

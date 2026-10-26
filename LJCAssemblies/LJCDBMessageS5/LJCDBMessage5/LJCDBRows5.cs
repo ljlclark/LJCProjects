@@ -7,16 +7,16 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a collection of DbRow objects.
-  /// <include file='Doc/ProjectDbRows.xml'
-  ///  path='items/LJCDbRows/*'/>
+  /// <include file='Doc/DbRows.xml'
+  ///  path='members/LJCDbRows/*'/>
   [XmlRoot("DbRows")]
   public class LJCDBRows : List<LJCDBRow>
   {
-    #region Static Functions
+    #region Static Methods
 
     // Deserializes from the specified XML file.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/LJCDeserialize/*'/>
+    ///  path='members/LJCDeserialize/*'/>
     public static LJCDBRows? LJCDeserialize(string? fileSpec = null)
     {
       LJCDBRows? retValue;
@@ -35,25 +35,25 @@ namespace LJCDBMessage5
 
     // Gets the Default File Name.
     /// <include file='Doc/DbRows.xml'
-    ///  path='items/LJCDefaultFileName/*'/>
+    ///  path='members/LJCDefaultFileName/*'/>
     public static string LJCDefaultFileName
     {
       get => "DbRows.xml";
     }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDBRows()
     {
     }
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='members/ConstructorCopy/*'/>
     public LJCDBRows(LJCDBRows items)
     {
       if (LJC.HasListItems(items))
@@ -70,7 +70,7 @@ namespace LJCDBMessage5
 
     // Adds the supplied object.
     /// <include file='Doc/DbRows.xml'
-    ///  path='items/Add/*'/>
+    ///  path='members/Add/*'/>
     public LJCDBRow? Add(LJCDataValues dataValues)
     {
       LJCDBRow? retValue = null;
@@ -88,7 +88,7 @@ namespace LJCDBMessage5
 
     // Clones the structure of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCDBRows Clone()
     {
       var retValue = new LJCDBRows();
@@ -108,7 +108,7 @@ namespace LJCDBMessage5
 
     // Checks if the collection has items.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/HasItems2/*'/>
+    ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -122,7 +122,7 @@ namespace LJCDBMessage5
 
     // Serialize the object to the specified file.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/Serialize2/*'/>
+    ///  path='members/Serialize2/*'/>
     public void Serialize(string? fileSpec = null)
     {
       if (!LJC.HasText(fileSpec))

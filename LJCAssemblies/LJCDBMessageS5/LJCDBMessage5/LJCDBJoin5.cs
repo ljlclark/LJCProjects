@@ -7,24 +7,24 @@ namespace LJCDBMessage5
 {
   // Represents a database table join.
   /// <include file='Doc/DBJoin.xml'
-  ///  path='items/LJCDBJoin/*'/>
+  ///  path='members/LJCDBJoin/*'/>
   public class LJCDBJoin
   {
     #region Properties
 
     // The included join table columns.
     /// <include file='Doc/DbJoin.xml'
-    ///  path='items/Columns/*'/>
+    ///  path='members/Columns/*'/>
     public LJCDataColumns Columns { get; set; }
 
     // The join on definitions.
     /// <include file='Doc/DbJoin.xml'
-    ///  path='items/JoinOns/*'/>
+    ///  path='members/JoinOns/*'/>
     public LJCDBJoinOns JoinOns { get; set; }
 
     // The join type.
     /// <include file='Doc/DbJoin.xml'
-    ///  path='items/JoinType/*'/>
+    ///  path='members/JoinType/*'/>
     public string? JoinType
     {
       get => mJoinType;
@@ -34,7 +34,7 @@ namespace LJCDBMessage5
 
     // The table alias.
     /// <include file='Doc/DbJoin.xml'
-    ///  path='items/TableAlias/*'/>
+    ///  path='members/TableAlias/*'/>
     public string? TableAlias
     {
       get => mTableAlias;
@@ -44,7 +44,7 @@ namespace LJCDBMessage5
 
     // The table name.
     /// <include file='Doc/DbJoin.xml'
-    ///  path='items/TableName/*'/>
+    ///  path='members/TableName/*'/>
     public string TableName
     {
       get => mTableName;
@@ -57,7 +57,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Constructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDBJoin()
     {
       mTableName = "";
@@ -68,7 +68,7 @@ namespace LJCDBMessage5
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/ConstructorCopy/*'/>
+    ///  path='members/ConstructorCopy/*'/>
     public LJCDBJoin(LJCDBJoin item)
     {
       mTableName = "";
@@ -86,7 +86,7 @@ namespace LJCDBMessage5
 
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCDBJoin Clone()
     {
       LJCDBJoin retValue = new()

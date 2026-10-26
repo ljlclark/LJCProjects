@@ -1,8 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DbRow.xml -->
-<items>
+<members>
+  <!-- Class -->
+  <LJCDBRow>
+    <summary>
+      Represents a result Row.
+    </summary>  
+  </LJCDBRow>
+  
+  <!-- Static Methods -->
+  <HasItems>
+    <summary>
+      Checks if the collection has items.
+    </summary>
+    <param name="collection"></param>
+  </HasItems>
+  
+  <!-- Properties -->
+  <Values>
+    <summary>
+      Gets or sets the row values.
+    </summary>
+  </Values>
   <Item1>
     <summary>
       The row value for the specified value column index.
@@ -17,4 +38,22 @@
     <param name="propertyName">The row value property name.</param>
     <returns>The selected DbValue row value object.</returns>
   </Item2>
-</items>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <CopyConstructor>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="items"></param>
+  </CopyConstructor>
+  <Clone>
+    <summary>
+      Creates and returns a clone of the object.
+    </summary>
+  </Clone>
+</members>

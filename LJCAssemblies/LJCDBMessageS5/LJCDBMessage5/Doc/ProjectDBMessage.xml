@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- ProjectDBMessage.xml -->
-<items>
+<members>
   <DbRequest>
     <summary>
       Represents a database request.
@@ -164,4 +164,4 @@
       </code>
     </example>
   </DbRequest>
-</items>
+</members>

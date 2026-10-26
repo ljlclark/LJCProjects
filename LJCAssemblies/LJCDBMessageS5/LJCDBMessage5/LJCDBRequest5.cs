@@ -8,7 +8,7 @@ using LJCDataAccess5;
 namespace LJCDBMessage5
 {
   /// <include file='Doc/DBRequest.xml'
-  ///  path='items/LJCDbRequest/*'/>
+  ///  path='members/LJCDbRequest/*'/>
   [XmlRoot("DbRequest")]
   public class LJCDBRequest
   {
@@ -16,7 +16,7 @@ namespace LJCDBMessage5
 
     // Deserializes the DbRequest message.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/Deserialize/*'/>
+    ///  path='members/Deserialize/*'/>
     public static LJCDBRequest? Deserialize(string request)
     {
       LJCDBRequest? retValue = null;
@@ -38,12 +38,12 @@ namespace LJCDBMessage5
 
     // The included table columns.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/Columns/*'/>
+    ///  path='members/Columns/*'/>
     public LJCDataColumns? Columns { get; set; }
 
     // The data configuration name.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/DataConfigName/*'/>
+    ///  path='members/DataConfigName/*'/>
     public string? DataConfigName
     {
       get => mDataConfigName;
@@ -53,22 +53,22 @@ namespace LJCDBMessage5
 
     // The where clause filters.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/Filters/*'/>
+    ///  path='members/Filters/*'/>
     public LJCDBFilters? Filters { get; set; }
 
     // The table joins.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/Joins/*'/>
+    ///  path='members/Joins/*'/>
     public LJCDBJoins? Joins { get; set; }
 
     // The key column values.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/KeyColumns/*'/>
+    ///  path='members/KeyColumns/*'/>
     public LJCDataColumns? KeyColumns { get; set; }
 
     // Gets or sets the ProcedureName value.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/ProcedureName/*'/>
+    ///  path='members/ProcedureName/*'/>
     public string? ProcedureName
     {
       get => mProcedureName;
@@ -78,7 +78,7 @@ namespace LJCDBMessage5
 
     // The request type name.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/RequestTypeName/*'/>
+    ///  path='members/RequestTypeName/*'/>
     public string RequestTypeName
     {
       get => mRequestTypeName;
@@ -88,7 +88,7 @@ namespace LJCDBMessage5
 
     // The schema name.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/SchemaName/*'/>
+    ///  path='members/SchemaName/*'/>
     public string? SchemaName
     {
       get => mSchemaName;
@@ -98,7 +98,7 @@ namespace LJCDBMessage5
 
     // The table name.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/TableName/*'/>
+    ///  path='members/TableName/*'/>
     public string? TableName
     {
       get => mTableName;
@@ -111,17 +111,17 @@ namespace LJCDBMessage5
 
     // Indicates if the missing column should be added.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/AddMissingColumns/*'/>
+    ///  path='members/AddMissingColumns/*'/>
     public bool AddMissingColumns { get; set; }
 
     // The Database Assigned columns.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/DbAssignedColumns/*'/>
+    ///  path='members/DbAssignedColumns/*'/>
     public LJCDataColumns? DbAssignedColumns { get; set; }
 
     // Gets or sets the ClientSql value.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/ClientSql/*'/>
+    ///  path='members/ClientSql/*'/>
     public string? ClientSql
     {
       get => mClientSql;
@@ -131,22 +131,22 @@ namespace LJCDBMessage5
 
     // The OrderBy column names.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/OrderByNames/*'/>
+    ///  path='members/OrderByNames/*'/>
     public List<string>? OrderByNames { get; set; }
 
     // The number of records in the page.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/PageSize/*'/>
+    ///  path='members/PageSize/*'/>
     public int PageSize { get; set; }
 
     // Gets or sets the Parameters list reference.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/Parameters/*'/>
+    ///  path='members/Parameters/*'/>
     public LJCProcedureParameters? Parameters { get; set; }
 
     // The page starting index.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/PageStartIndex/*'/>
+    ///  path='members/PageStartIndex/*'/>
     public int PageStartIndex { get; set; }
     #endregion
 
@@ -154,7 +154,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Constructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDBRequest()
     {
       //OrderByNames = new List<string>();
@@ -165,7 +165,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/ConstructorParam/*'/>
+    ///  path='members/ConstructorParam/*'/>
     public LJCDBRequest(RequestType requestType, string? tableName
       , string? dataConfigName = null)
     {
@@ -181,7 +181,7 @@ namespace LJCDBMessage5
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/ConstructorCopy/*'/>
+    ///  path='members/ConstructorCopy/*'/>
     public LJCDBRequest(LJCDBRequest item)
     {
       mRequestTypeName = RequestType.Select.ToString();
@@ -229,7 +229,7 @@ namespace LJCDBMessage5
 
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCDBRequest? Clone()
     {
       LJCDBRequest? retValue = MemberwiseClone() as LJCDBRequest;
@@ -257,7 +257,7 @@ namespace LJCDBMessage5
 
     // Get DataColumns from the DbRequest object definition.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/GetGridColumns1/*'/>
+    ///  path='members/GetGridColumns1/*'/>
     public LJCDataColumns? DataColumns(List<string>? propertyNames = null)
     {
       LJCDataColumns? retColumns = null;
@@ -293,7 +293,7 @@ namespace LJCDBMessage5
 
     // Serializes the object and returns the serialized string.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/Serialize1/*'/>
+    ///  path='members/Serialize1/*'/>
     public string Serialize()
     {
       string retValue;
@@ -304,7 +304,7 @@ namespace LJCDBMessage5
 
     // Serialize the object to the specified file.
     /// <include file='Doc/DbRequest.xml'
-    ///  path='items/Serialize2/*'/>
+    ///  path='members/Serialize2/*'/>
     public void Serialize(string fileSpec)
     {
       LJC.XmlSerialize(GetType(), this, null, fileSpec);
@@ -314,7 +314,7 @@ namespace LJCDBMessage5
 
   // The RequestType values.
   /// <include file='Doc/DbRequest.xml'
-  ///  path='items/RequestType/*'/>
+  ///  path='members/RequestType/*'/>
   public enum RequestType
   {
     /// <summary>The "Delete" request type.</summary>

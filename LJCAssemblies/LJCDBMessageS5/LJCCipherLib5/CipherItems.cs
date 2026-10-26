@@ -11,7 +11,7 @@ namespace LJCCipherLib5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include path='members/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
     public CipherItems()
     {
       Cryptography = new LJCCryptography();
@@ -23,7 +23,7 @@ namespace LJCCipherLib5
     #region Public Methods
 
     // Creates the Cipher.
-    /// <include path='items/CreateCipher/*' file='Doc/CipherItems.xml'/>
+    /// <include path='members/CreateCipher/*' file='Doc/CipherItems.xml'/>
     public byte[] CreateCipher(string plainText)
     {
       byte[] retValue = Cryptography.Encrypt(plainText, Key, IV);
@@ -31,7 +31,7 @@ namespace LJCCipherLib5
     }
 
     // Creates the InsertItems.
-    /// <include path='items/CreateItems/*' file='Doc/CipherItems.xml'/>
+    /// <include path='members/CreateItems/*' file='Doc/CipherItems.xml'/>
     public InsertItems CreateItems()
     {
       var retValue = new InsertItems();
@@ -66,7 +66,7 @@ namespace LJCCipherLib5
 
     // Get bytes from sourceCipher index values knowing only
     // the index locations.
-    /// <include path='items/CreateReceivedItems/*' file='Doc/CipherItems.xml'/>
+    /// <include path='members/CreateReceivedItems/*' file='Doc/CipherItems.xml'/>
     public InsertItems CreateReceivedItems(byte[] receivedCipher
       , bool setObjectItems = true)
     {
@@ -126,7 +126,7 @@ namespace LJCCipherLib5
     }
 
     // Returns the Plain Text value.
-    /// <include path='items/CreatePlainText/*' file='Doc/CipherItems.xml'/>
+    /// <include path='members/CreatePlainText/*' file='Doc/CipherItems.xml'/>
     public string CreatePlainText(byte[] cipher)
     {
       string retValue;
@@ -136,7 +136,7 @@ namespace LJCCipherLib5
     }
 
     // Initializes the internal InsertItems property.
-    /// <include path='items/SetInsertValues/*' file='Doc/CipherItems.xml'/>
+    /// <include path='members/SetInsertValues/*' file='Doc/CipherItems.xml'/>
     public void SetInsertValues(InsertItems insertItems)
     {
       // Uses the names created by the TargetCipher CreateNewItems() method.

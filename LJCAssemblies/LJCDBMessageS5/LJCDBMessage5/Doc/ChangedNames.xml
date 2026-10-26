@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- ChangedNames.xml -->
+<members>
+  <!-- Class -->
+  <LJCChangedNames>
+    <summary>
+      Contains the list of changed property names.
+    </summary>
+  </LJCChangedNames>
+  
+  <!-- Properties -->
+  <ChangedProperties>
+    <summary>
+      Returns the ChangedProperties collection.
+    </summary>
+  </ChangedProperties>
+  <ChangedPropertyNames>
+    <summary>
+      Returns the changed property names string.
+    </summary>
+  </ChangedPropertyNames>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  
+  <!-- Collection Methods -->
+  <Add>
+    <summary>
+      Adds the property name to the list if the value has changed and it is not
+      already in the list.
+    </summary>
+    <param name="propertyName"></param>
+    <param name="originalValue"></param>
+    <param name="newValue"></param>
+  </Add>
+  <AddNames>
+    <summary>
+      Adds a list of names.
+    </summary>
+    <param name="propertyNames"></param>
+  </AddNames>
+  <Clear>
+    <summary>
+      Clears the changed names.
+    </summary>
+  </Clear>
+  <Contains>
+    <summary>
+      Checks if the changed names contains a propertyName.
+    </summary>
+    <param name="propertyName"></param>
+  </Contains>
+  <Remove>
+    <summary>
+      Removes a property name from the changed names.
+    </summary>
+    <param name="propertyName"></param>
+  </Remove>
+</members>

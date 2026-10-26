@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbJoinOn.xml -->
+<members>
+  <!-- Class -->
+  <LJCDBJoinOn>
+    <summary>
+      Represents a Join On definition.
+    </summary>
+  </LJCDBJoinOn>
+  
+  <!-- Properties -->
+  <BooleanOperator>
+    <summary>
+      The Boolean Operator value.
+    </summary>
+  </BooleanOperator>
+  <FromColumnName>
+    <summary>
+      The 'From' column name.
+    </summary>
+  </FromColumnName>
+  <JoinOnOperator>
+    <summary>
+      The Join On Operator.
+    </summary>
+  </JoinOnOperator>
+  <JoinOns>
+    <summary>
+      Gets or sets the contained JoinOns.
+    </summary>
+  </JoinOns>
+  <ToColumnName>
+    <summary>
+      The 'To' column name.
+    </summary>
+  </ToColumnName>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <CopyConstructor>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="item"></param>
+  </CopyConstructor>
+  
+  <!-- Methods -->
+  <Clone>
+    <summary>
+      Creates and returns a clone of the object.
+    </summary>
+  </Clone>
+</members>

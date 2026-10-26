@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- HTMLData.xml -->
-<items>
-  <!-- Static DataTable Functions -->
+<!-- DataHTMLTable.xml -->
+<members>
+  <!-- Class -->
+  <LJCDataHTMLTable>
+    <summary>
+      Methods to set data in HTML elements.
+    </summary>
+  </LJCDataHTMLTable>
+  
+  <!-- Static DataTable Methods -->
   <DataTableHeadings>
     <summary>
       Create table headings from a DataTable.
@@ -27,7 +34,8 @@
     <param name="maxRows">The maximum number of rows to display.</param>
     <returns>The HTML table rows.</returns>
   </DataTableRows>
-  <!-- Static Data Object Functions -->
+  
+  <!-- Static Data Object Methods -->
   <DataHeadings>
     <summary>
       Create table headings from a data object.
@@ -54,7 +62,8 @@
     <param name="maxRows">The maximum number of rows to display.</param>
     <returns>The HTML table rows.</returns>
   </DataRows>
-  <!-- Static DbResult Functions -->
+  
+  <!-- Static DbResult Methods -->
   <ResultHeadings>
     <summary>
       Create table headings from a DbResult object.
@@ -81,4 +90,4 @@
     <param name="maxRows">The maximum number of rows to display.</param>
     <returns>The HTML table rows.</returns>
   </ResultRows>
-</items>
+</members>

@@ -7,21 +7,21 @@ namespace LJCDBMessage5
 {
   // Represents a collection of join on definitions.
   /// <include file='Doc/DbJoinOns.xml'
-  ///  path='items/LJCDbJoinOns/*'/>
+  ///  path='members/LJCDbJoinOns/*'/>
   public class LJCDBJoinOns : List<LJCDBJoinOn>
   {
     #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/DefaultConstructor/*'/>
     public LJCDBJoinOns()
     {
     }
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='members/CopyConstructor/*'/>
     public LJCDBJoinOns(LJCDBJoinOns items)
     {
       if (LJC.HasListItems(items))
@@ -38,7 +38,7 @@ namespace LJCDBMessage5
 
     // Creates and adds the element from the supplied values.
     /// <include file='Doc/DbJoinOns.xml'
-    ///  path='items/Add/*'/>
+    ///  path='members/Add/*'/>
     public LJCDBJoinOn Add(string fromColumnName, string toColumnName
       , string joinOperator = "=")
     {
@@ -56,7 +56,7 @@ namespace LJCDBMessage5
 
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCDBJoinOns Clone()
     {
       var retValue = new LJCDBJoinOns();

@@ -7,14 +7,14 @@ namespace LJCDBMessage5
 {
   // Represents the conditions and properties.
   /// <include file='Doc/DbConditionSet.xml'
-  ///  path='items/LJCDbConditionSet/*'/>
+  ///  path='members/LJCDbConditionSet/*'/>
   public class LJCDBConditionSet
   {
     #region Properties
 
     // The conditions boolean operator.
     /// <include file='Doc/DbConditionSet.xml'
-    ///  path='items/BooleanOperator/*'/>
+    ///  path='members/BooleanOperator/*'/>
     public string? BooleanOperator
     {
       get => mBooleanOperator;
@@ -24,7 +24,7 @@ namespace LJCDBMessage5
 
     // Gets or sets the conditions.
     /// <include file='Doc/DbConditionSet.xml'
-    ///  path='items/Conditions/*'/>
+    ///  path='members/Conditions/*'/>
     public LJCDBConditions Conditions { get; set; }
     #endregion
 
@@ -32,7 +32,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance.
     /// <include file='Doc/DbConditionSet.xml'
-    ///  path='items/Constructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCDBConditionSet()
     {
       //Conditions = new DbConditions();
@@ -41,7 +41,7 @@ namespace LJCDBMessage5
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/ConstructorCopy/*'/>
+    ///  path='members/ConstructorCopy/*'/>
     public LJCDBConditionSet(LJCDBConditionSet item)
     {
       BooleanOperator = item.BooleanOperator;
@@ -54,7 +54,7 @@ namespace LJCDBMessage5
 
     // Creates and returns a clone of the object.
     /// <include file='Doc/DbConditionSet.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCDBConditionSet? Clone()
     {
       LJCDBConditionSet? retValue = MemberwiseClone() as LJCDBConditionSet;

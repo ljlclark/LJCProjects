@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DbRows.xml -->
-<items>
+<members>
+  <!-- Class -->
   <DbRows>
     <summary>
       Represents a collection of
@@ -25,6 +26,34 @@
     </remarks>
   </DbRows>
 
+  <!-- Static Methods -->
+  <LJCDeserialize>
+    <summary>
+      Deserializes from the specified XML file.
+    </summary>
+    <param name="fileSpec"></param>
+  </LJCDeserialize>
+  
+  <!-- Properties -->
+  <LJCDefaultFileName>
+    <summary>
+      Gets the Default File Name.
+    </summary>
+  </LJCDefaultFileName>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <CopyConstructor>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="items"></param>
+  </CopyConstructor>
+  
   <!-- Collection Methods -->
   <Add>
     <summary>
@@ -32,4 +61,20 @@
     </summary>
     <param name="dataValues">The item object.</param>
   </Add>
-</items>
+  <Clone>
+    <summary>
+      Clones the structure of the object.
+    </summary>
+  </Clone>
+  <HasItems>
+    <summary>
+      Checks if the collection has items.
+    </summary>
+  </HasItems>
+  <Serialize>
+    <summary>
+      Serialize the object to the specified file.
+    </summary>
+    <param name="fileSpec"></param>
+  </Serialize>
+</members>
