@@ -6,7 +6,7 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a database table join.
-  /// <include file='Doc/ProjectDBJoin.xml'
+  /// <include file='Doc/DBJoin.xml'
   ///  path='items/LJCDBJoin/*'/>
   public class LJCDBJoin
   {
@@ -57,7 +57,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='items/Constructor/*'/>
     public LJCDBJoin()
     {
       mTableName = "";
@@ -68,7 +68,7 @@ namespace LJCDBMessage5
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='items/ConstructorCopy/*'/>
     public LJCDBJoin(LJCDBJoin item)
     {
       mTableName = "";

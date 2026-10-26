@@ -78,12 +78,12 @@
       </para>
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         var dbColumnBool = new DbColumn("TestBool", "1", NetCommon.TypeBoolean);
         var dbColumnDate = new DbColumn("TestDate", DateTime.Now()
-        , NetCommon.TypeDateTime);
+          , NetCommon.TypeDateTime);
         var dbColumnString = new DbColumn("TestString", "string");
       </code>
     </example>
@@ -183,21 +183,21 @@
       The Soundex value.
     </returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Creates a US Census soundex value.
         private static void Soundex()
         {
-        var text = "Clark";
-        var result = LJCNetString.Soundex(text);
-        // result = "C462"
+          var text = "Clark";
+          var result = LJCNetString.Soundex(text);
+          // result = "C462"
 
-        text = "Klum";
-        result = LJCNetString.Soundex(text);
-        // result = "K450"
+          text = "Klum";
+          result = LJCNetString.Soundex(text);
+          // result = "K450"
 
-        text = "Rodriguez";
-        result = LJCNetString.Soundex(text);
-        // result = "R362";
+          text = "Rodriguez";
+          result = LJCNetString.Soundex(text);
+          // result = "R362";
         }
       </code>
     </example>

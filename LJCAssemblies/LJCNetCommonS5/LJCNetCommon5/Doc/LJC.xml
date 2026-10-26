@@ -70,7 +70,7 @@
     </remarks>
     <parentGroup>check</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon5;
 
         /// &lt;summary&gt;Sort and search on Name value.&lt;/summary&gt;
@@ -128,7 +128,7 @@
     </remarks>
     <parentGroup>check</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System.Data;
         using LJCNetCommon;
 
@@ -227,7 +227,7 @@
     <param name="prompt">The prompt string.</param>
     <param name="options">The available options value.</param>
   </KeyOption>
-  
+
   <!-- Object Value Methods -->
   <GetBoolean>
     <summary>
@@ -240,7 +240,7 @@
     </returns>
     <parentGroup>value</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Gets a bool value from an object.
@@ -268,7 +268,7 @@
     </returns>
     <parentGroup>value</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Gets a byte value from an object.
@@ -304,7 +304,7 @@
     </returns>
     <parentGroup>value</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Gets a char value from an object.
@@ -333,7 +333,7 @@
     </returns>
     <parentGroup>value</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Gets a DateTime value from an object.
         private static void GetDateTime()
         {
@@ -366,7 +366,7 @@
     </returns>
     <parentGroup>value</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Gets a decimal value from an object.
@@ -395,7 +395,7 @@
     </returns>
     <parentGroup>value</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Gets a double value from an object.
         private static void GetDouble()
         {
@@ -421,7 +421,7 @@
     </returns>
     <parentGroup>value</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Gets a short value from an object.
@@ -449,7 +449,7 @@
     </returns>
     <parentGroup>value</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Gets an int value from an object.
@@ -477,7 +477,7 @@
     </returns>
     <parentGroup>value</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Gets a long value from an object.
@@ -514,7 +514,7 @@
     </returns>
     <parentGroup>value</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Gets a float (single) value from an object.
         private static void GetSingle()
         {
@@ -537,7 +537,7 @@
     <returns>The trimmed string value or null if the object is null.</returns>
     <parentGroup>value</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Gets a trimmed string value from an object.
@@ -599,7 +599,7 @@
       </para>
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // This returns true.
@@ -637,7 +637,7 @@
       </para>
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // This returns var beginColor that is Color.AliceBlue.
@@ -675,7 +675,7 @@
       </para>
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // This returns "MySql".
@@ -702,7 +702,7 @@
     <returns>The deserialized object.</returns>
     <parentGroup>serialize</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         public class Person
@@ -741,7 +741,7 @@
     <returns>The deserialized object.</returns>
     <parentGroup>serialize</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         public class Person
@@ -781,7 +781,7 @@
     <param name="rootName">The Root Name value.</param>
     <parentGroup>serialize</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon
 
         public class Person
@@ -823,7 +823,7 @@
     <returns>The XML message string.</returns>
     <parentGroup>serialize</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         public class Person
@@ -862,7 +862,7 @@
     <returns>The Text value.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Decodes a Base64 byte array to a Text value.
@@ -887,7 +887,7 @@
     <returns>Tye Base64 byte array.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Encodes a Text value to a Base64 byte array.
@@ -912,7 +912,7 @@
     <returns>The Text byte array.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Decodes a Base64 byte array to a Text byte array.
@@ -940,7 +940,7 @@
     <returns>The Base64 byte array.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Encodes a Text byte array to a Base64 byte array.
@@ -969,7 +969,7 @@
     <returns>The Text value.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Decodes a Base64 value to a Text value.
@@ -994,7 +994,7 @@
     <returns>The Base64 string.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Encodes a Text value to a Base64 value.
@@ -1021,7 +1021,7 @@
     <returns>The Text byte array.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Decodes a Base64 value to a Text byte array.
@@ -1049,7 +1049,7 @@
     <returns>The Base64 string.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Encodes a Text byte array to a Base64 value.
@@ -1078,7 +1078,7 @@
     <returns>The Text value.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Creates text from a byte array.
@@ -1103,7 +1103,7 @@
     <returns>The new byte array.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Creates a byte array from text.
@@ -1131,7 +1131,7 @@
     <returns>The byte array.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System.IO;
         using LJCNetCommon;
 
@@ -1162,7 +1162,7 @@
     <returns>The reference to the memory stream.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System.IO;
         using LJCNetCommon;
 
@@ -1193,20 +1193,20 @@
     <returns>The string value.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Creates a string from a memory stream.
         private static void MemStreamToString()
         {
-        // Setup
-        // Creates a memory stream from a string.
-        using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
-        {
-        // Creates a string from a memory stream.
-        string text = LJCNetCommon.MemStreamToString(stream);
-        // text = "Text"
-        }
+          // Setup
+          // Creates a memory stream from a string.
+          using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
+          {
+            // Creates a string from a memory stream.
+            string text = LJCNetCommon.MemStreamToString(stream);
+            // text = "Text"
+          }
         }
       </code>
     </example>
@@ -1219,19 +1219,19 @@
     <returns>The reference to the memory stream.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Creates a memory stream from a string.
         private static void StringToMemStream()
         {
-        // Creates a memory stream from a string.
-        using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
-        {
-        // Check the text.
-        string text = LJCNetCommon.MemStreamToString(stream);
-        // text = "Text"
-        }
+          // Creates a memory stream from a string.
+          using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
+          {
+            // Check the text.
+            string text = LJCNetCommon.MemStreamToString(stream);
+            // text = "Text"
+          }
         }
       </code>
     </example>
@@ -1245,20 +1245,20 @@
     <returns>The decoded text.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Decodes an encoded XML string.
         private static void XmlDecode()
         {
-        // Setup
-        string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
-        // Encodes a string with XML escape values.
-        string encoded = LJCNetCommon.XmlEncode(xml);
+          // Setup
+          string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
+          // Encodes a string with XML escape values.
+          string encoded = LJCNetCommon.XmlEncode(xml);
 
-        // Decodes an encoded XML string.
-        string text = LJCNetCommon.XmlDecode(encoded);
-        // text = "Text"
+          // Decodes an encoded XML string.
+          string text = LJCNetCommon.XmlDecode(encoded);
+          // text = "Text"
         }
       </code>
     </example>
@@ -1271,21 +1271,21 @@
     <returns>The encoded text.</returns>
     <parentGroup>convert</parentGroup>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Encodes a string with XML escape values.
         private static void XmlEncode()
         {
-        // Setup
-        string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
+          // Setup
+          string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
 
-        // Encodes a string with XML escape values.
-        string encoded = NetCommon.XmlEncode(xml);
+          // Encodes a string with XML escape values.
+          string encoded = NetCommon.XmlEncode(xml);
 
-        // Check the text.
-        string text = NetCommon.XmlDecode(encoded);
-        // text = "Text"
+          // Check the text.
+          string text = NetCommon.XmlDecode(encoded);
+          // text = "Text"
         }
       </code>
     </example>

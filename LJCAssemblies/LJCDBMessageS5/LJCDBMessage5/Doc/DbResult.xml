@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbResult.xml -->
+<items>
+  <LJCDBResult>
+    <summary>
+      Represents a Request result.
+    </summary>
+    <remarks>
+      <para>
+        The &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+        object contains the RequestTypeName and TableName that were in the
+        original &lt;span class="userType"&gt;DbQuery&lt;/span&gt;
+        request.
+      </para>
+      <para>
+        It also contains the
+        &lt;span class="userType"&gt;DbRecords&lt;/span&gt;
+        object with the result data.
+      </para>
+    </remarks>
+  </LJCDBResult>
+  
+  <!-- Table Data Static Methods -->
+  <GetDataColumn>
+    <summary>
+      Creates a DataColumn object from a ADO Column object.
+    </summary>
+    <param name="adoColumn"></param>
+    <returns></returns>
+  </GetDataColumn>
+  <GetDataColumns>
+    <summary>
+      Creates a DataColumns object from a ADO Columns object.
+    </summary>
+    <param name="adoColumns"></param>
+    <returns></returns>
+  </GetDataColumns>
+
+  <!-- Static Methods -->
+  <CreateResultColumns>
+    <summary>
+      Creates combined DataColumns from DataColumns and DataValues.
+    </summary>
+    <param name="dbResult"></param>
+    <returns></returns>
+  </CreateResultColumns>
+  <DeserializeMessage>
+    <summary>
+      Deserializes the
+      &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+      message.
+    </summary>
+    <param name="result">The result message.</param>
+    <returns>
+      The &lt;span class="userType"&gt;DbResult&lt;/span&gt;
+      object.
+    </returns>
+  </DeserializeMessage>
+  <GetRowValues>
+    <summary>
+      Gets the result values from the data row.
+    </summary>
+    <param name="dataColumns">The columns collection.</param>
+    <param name="dataRow">
+      The &lt;span class="userType"&gt;DataRow&lt;/span&gt;
+      object.
+    </param>
+    <returns>The result values.</returns>
+    <remarks>
+      <para>
+        Combines the required column definition values and
+        &lt;span class="userType"&gt;DataRow&lt;/span&gt;
+        data values into a
+        &lt;span class="userType"&gt;DbValues&lt;/span&gt;
+        collection.
+      </para>
+    </remarks>
+  </GetRowValues>
+  <HasColumns1>
+    <summary>
+      Checks if the result has Columns.
+    </summary>
+    <param name="dbResult">The DbResult object.</param>
+    <returns>true if there are columns; otherwise, false.</returns>
+  </HasColumns1>
+  <HasData1>
+    <summary>
+      Checks if the result has Columns and Rows.
+    </summary>
+    <param name="dbResult">The DbResult object.</param>
+    <returns>true if there are columns and rows; otherwise, false.</returns>
+  </HasData1>
+  <HasRows1>
+    <summary>
+      Checks if the result has Rows.
+    </summary>
+    <param name="dbResult">The DbResult object.</param>
+    <returns>true if there are rows; otherwise, false.</returns>
+  </HasRows1>
+  <AddJoinRowValues>
+    <summary>
+      Adds the join values.
+    </summary>
+    <param name="dbValues">The values object.</param>
+    <param name="dataRow">
+      The &lt;span class="userType"&gt;DataRow&lt;/span&gt;
+      object.
+    </param>
+    <param name="dbJoins">The joins.</param>
+  </AddJoinRowValues>
+
+  <!-- Properties -->
+  <AffectedRecords>
+    <summary>
+      Gets or sets the non-query affected record count.
+    </summary>
+  </AffectedRecords>
+  <Columns>
+    <summary>
+      Gets the collection of columns that belong to this result.
+    </summary>
+  </Columns>
+  <DatabaseName>
+    <summary>
+      Gets or sets the Database name.
+    </summary>
+  </DatabaseName>
+  <LJCDefaultFileName>
+    <summary>
+      Gets the Default File Name.
+    </summary>
+  </LJCDefaultFileName>
+  <ExecutedSql>
+    <summary>
+      Gets or sets the executed SQL statement.
+    </summary>
+  </ExecutedSql>
+  <ProcedureName>
+    <summary>
+      Gets or sets the ProcedureName value.
+    </summary>
+  </ProcedureName>
+  <RequestTypeName>
+    <summary>
+      The request type.
+    </summary>
+  </RequestTypeName>
+  <Rows>
+    <summary>
+      A collection of DbValues objects.
+    </summary>
+  </Rows>
+  <SchemaName>
+    <summary>
+      The schema name.
+    </summary>
+  </SchemaName>
+  <TableName>
+    <summary>
+      The table name.
+    </summary>
+  </TableName>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance with the DbRequest object.
+    </summary>
+    <param name="dbRequest">
+      The &lt;span class="userType"&gt;DbQuery&lt;/span&gt;
+      object.
+    </param>
+  </Constructor>
+  <ConstructorParam>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="requestTypeName">The request type name.</param>
+    <param name="tableName">The table name.</param>
+    <param name="schemaName">The schema name.</param>
+    <param name="procedureName">The procedure name.</param>
+  </ConstructorParam>
+  <ConstructorCopy>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="item"></param>
+  </ConstructorCopy>
+
+  <!-- Collection Methods -->
+  <Clone>
+    <summary>
+      Clones the structure of the object.
+    </summary>
+  </Clone>
+  <HasColumns2>
+    <summary>
+      Checks if the result has Columns.
+    </summary>
+    <returns>true if there are columns; otherwise, false.</returns>
+  </HasColumns2>
+  <HasData>
+    <summary>
+      Checks if the result has Columns and Rows.
+    </summary>
+  </HasData>
+  <HasRows2>
+    <summary>
+      Checks if the result has Rows.
+    </summary>
+    <returns>true if there are rows; otherwise, false.</returns>
+  </HasRows2>
+  <Serialize1>
+    <summary>
+      Serializes the object and returns the serialized string.
+    </summary>
+    <returns>The serialized string.</returns>
+  </Serialize1>
+  <Serialize2>
+    <summary>
+      Serialize the object to the specified file.
+    </summary>
+    <param name="fileSpec">The file specification.</param>
+  </Serialize2>
+  <Serialize>
+    <summary>
+      Serialize the object to the specified file.
+    </summary>
+    <param name="fileSpec"></param>
+  </Serialize>
+  
+  <!-- Methods -->
+  <GetValueColumns>
+    <summary>
+      Get &lt;span class="userType"&gt;DbValues&lt;/span&gt;
+      from result records.
+    </summary>
+    <param name="dataValues">The DbValues object.</param>"
+    <returns>
+      The &lt;span class="userType"&gt;DbColumns&lt;/span&gt;
+      object.
+    </returns>
+  </GetValueColumns>
+  <SetColumns1>
+    <summary>
+      Sets the Columns property from the principle and join columns.
+    </summary>
+    <param name="dataColumns">The principle columns.</param>
+    <param name="dbJoins">The joins.</param>
+  </SetColumns1>
+  <SetColumns2>
+    <summary>
+      Sets the Columns property from the Request columns.
+    </summary>
+    <param name="dbRequest"></param>
+  </SetColumns2>
+  <SetData>
+    <summary>
+      Sets the result records from the
+      &lt;span class="userType"&gt;DataTable&lt;/span&gt; and
+      &lt;span class="userType"&gt;DbRequest&lt;/span&gt; objects.
+    </summary>
+    <param name="dataTable">The data table.</param>
+    <param name="dbRequest">
+      The &lt;span class="userType"&gt;DBQuery&lt;/span&gt;
+      object.
+    </param>
+  </SetData>
+  <SetRows>
+    <summary>
+      Sets the result records from the DataTable, principle values and join values.
+    </summary>
+    <param name="dataTable">The data table.</param>
+    <param name="dbJoins">The joins.</param>
+    <remarks>
+      <para>
+        Creates a
+        &lt;span class="userType"&gt;DbRecords&lt;/span&gt;
+        collection of
+        &lt;span class="userType"&gt;DbValues&lt;/span&gt;
+        objects from a
+        &lt;span class="userType"&gt;DataTable&lt;/span&gt;.
+      </para>
+    </remarks>
+  </SetRows>
+</items>

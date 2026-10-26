@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace LJCDBConfig5
 {
   // Represents a collection of Connection string templates.
-  /// <include file='Doc/ProjectConnectionTemplates.xml'
+  /// <include file='Doc/ConnectionTemplates.xml'
   ///  path='members/LJCConnectionTemplates/*'/>
   [XmlRoot("LJCConnectionTemplates")]
   public class LJCConnectionTemplates : List<LJCConnectionTemplate>

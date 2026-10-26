@@ -85,7 +85,7 @@
       </para>
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         var dbColumnBool = new LJCDataColumn("TestBool", "1", NetCommon.TypeBoolean);
@@ -110,7 +110,7 @@
       object.
     </param>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
         
         var dbColumn = new LJCDataColumn()

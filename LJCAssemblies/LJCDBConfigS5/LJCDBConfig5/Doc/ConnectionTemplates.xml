@@ -3,6 +3,13 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCConnectionTemplates.xml -->
 <members>
+  <!-- Properties -->
+  <TemplateFileSpec>
+    <summary>
+      The configuration file path.
+    </summary>
+  </TemplateFileSpec>
+
   <!-- Constructor Methods -->
   <Constructor>
     <summary>
@@ -14,7 +21,7 @@
       Retrieves the connection template data.
     </summary>
 		<example>
-			<code>
+      <code xml:space="preserve">
 				using LJCDataAccessConfig;
 
 				ConnectionTemplates templates = new ConnectionTemplates();
@@ -38,7 +45,7 @@
     </summary>
     <param name="name">The connection template configuration name.</param>
 		<example>
-			<code>
+      <code xml:space="preserve">
 				using LJCDataAccessConfig;
 
 				ConnectionTemplates templates = new ConnectionTemplates();
@@ -52,11 +59,4 @@
       Saves the config data.
     </summary>
   </Save>
-  
-  <!-- Properties -->
-  <TemplateFileSpec>
-    <summary>
-      The configuration file path.
-    </summary>
-  </TemplateFileSpec>
 </members>

@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbRequest.xml -->
+<members>
+  <!-- Class -->
+  <LJCDbRequest>
+    <summary>
+      
+    </summary>
+  </LJCDbRequest>
+  
+  <!-- Static Methods -->
+  <Deserialize>
+    <summary>
+      Deserializes the
+      &lt;span class="userType"&gt;DbRequest&lt;/span&gt; message.
+    </summary>
+    <param name="request">The request message.</param>
+    <returns>
+      The &lt;span class="userType"&gt;DbRequest&lt;/span&gt;
+      object.
+    </returns>
+  </Deserialize>
+
+  <!-- Data Properties -->
+  <Columns>
+    <summary>The included table columns.</summary>
+    <remarks>
+      <para>
+        The Query Columns are those primary table base columnswhose values are
+        returned from the database. Initially, the Query Column
+        name and Property name are the same.
+      </para>
+      <para>
+        &lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;
+      </para>
+    </remarks>
+  </Columns>
+  <DataConfigName>
+    <summary>
+      The data configuration name.
+    </summary>
+  </DataConfigName>
+  <Filters>
+    <summary>
+      The where clause filters.
+    </summary>
+  </Filters>
+  <Joins>
+    <summary>
+      The table joins.
+    </summary>
+  </Joins>
+  <KeyColumns>
+    <summary>The key column values.</summary>
+    <remarks>
+      <para>
+        The Key Columns are those base columns and Join Columns whose value is
+        used in the where clause.
+      </para>
+      <para>
+        &lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;
+      </para>
+    </remarks>
+  </KeyColumns>
+  <ProcedureName>
+    <summary>
+      Gets or sets the ProcedureName value.
+    </summary>
+  </ProcedureName>
+  <RequestTypeName>
+    <summary>
+      The request type.
+    </summary>
+    <remarks>
+      This value can be "Insert", "Select", "Load", "Update", "Delete",
+      "SelectProcedure", "SchemaOnly", "TableNames", "RetrieveSql"
+      , "LoadSql" or "ExecuteSql".
+    </remarks>
+  </RequestTypeName>
+  <SchemaName>
+    <summary>
+      The schema name.
+    </summary>
+  </SchemaName>
+  <TableName>
+    <summary>
+      The table name.
+    </summary>
+  </TableName>
+
+  <!-- Other Properties -->
+  <AddMissingColumns>
+    <summary>
+      Indicates if the missing column should be added.
+    </summary>
+  </AddMissingColumns>
+  <DbAssignedColumns>
+    <summary>
+      The Database Assigned columns.
+    </summary>
+  </DbAssignedColumns>
+  <ClientSql>
+    <summary>
+      Gets or sets the ClientSql value.
+    </summary>
+  </ClientSql>
+  <OrderByNames>
+    <summary>
+      The OrderBy column names.
+    </summary>
+  </OrderByNames>
+  <PageSize>
+    <summary>
+      The number of records in the page.
+    </summary>
+  </PageSize>
+  <Parameters>
+    <summary>
+      Gets or sets the Parameters list reference.
+    </summary>
+  </Parameters>
+  <PageStartIndex>
+    <summary>
+      The page starting index.
+    </summary>
+  </PageStartIndex>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorParam>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="requestType">The request type.</param>
+    <param name="tableName">The table name.</param>
+    <param name="dataConfigName">The data configuration name.</param>
+  </ConstructorParam>
+  <ConstructorCopy>
+    <summary>
+      The Copy constructor.
+    </summary>
+  </ConstructorCopy>
+  
+  <!-- Data Methods -->
+  <Clone>
+    <summary>
+      Creates and returns a clone of the object.
+    </summary>
+  </Clone>
+  <DataColumns>
+    <summary>
+      Get DataColumns from the DbRequest object definition.
+    </summary>
+    <param name="propertyNames"></param>
+    <returns></returns>
+  </DataColumns>
+  <Serialize1>
+    <summary>
+      Serializes the object and returns the serialized string.
+    </summary>
+    <returns></returns>
+  </Serialize1>
+  <Serialize2>
+    <summary>
+      Serialize the object to the specified file.
+    </summary>
+    <param name="fileSpec">The file specification.</param>
+  </Serialize2>
+
+  <RequestType>
+    <summary>
+      The RequestType values.
+    </summary>
+  </RequestType>
+</members>

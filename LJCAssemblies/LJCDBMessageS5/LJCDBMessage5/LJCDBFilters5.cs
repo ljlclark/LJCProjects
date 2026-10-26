@@ -7,7 +7,7 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a collection of DbFilter objects.
-  /// <include file='Doc/ProjectDbFilters.xml'
+  /// <include file='Doc/DbFilters.xml'
   /// path='items/LJCDbFilters/*'/>
   public class LJCDBFilters : List<LJCDBFilter>
   {
@@ -62,7 +62,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance.
     /// <include file='Doc/DbFilters.xml'
-    ///  path='items/DbFiltersC/*'/>
+    ///  path='items/Constructor/*'/>
     public LJCDBFilters()
     {
     }

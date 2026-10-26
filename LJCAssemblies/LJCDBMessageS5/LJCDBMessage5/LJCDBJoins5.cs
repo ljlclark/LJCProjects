@@ -6,7 +6,7 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a collection of table joins.
-  /// <include file='Doc/ProjectDbJoins.xml'
+  /// <include file='Doc/DbJoins.xml'
   ///  path='items/LJCDBJoins/*'/>
   public class LJCDBJoins : List<LJCDBJoin>
   {

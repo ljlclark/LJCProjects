@@ -18,7 +18,19 @@
     <param name="configName">The DataConfig name.</param>
     <returns>The DataConfig object.</returns>
   </DataConfig>
-  
+
+  <!-- Properties -->
+  <ConnectionType>
+    <summary>
+      Gets or sets the ConnectionType name.
+    </summary>
+  </ConnectionType>
+  <ConfigFileSpec>
+    <summary>
+      The configuration file path.
+    </summary>
+  </ConfigFileSpec>
+
   <!-- Constructor Methods -->
   <Constructor>
     <summary>
@@ -30,7 +42,7 @@
       Retrieves the config data.
     </summary>
 		<example>
-			<code>
+      <code xml:space="preserve">
 				using LJCDataAccessConfig;
 
 				var dataConfig = new LJCDataConfig();
@@ -56,7 +68,7 @@
     </summary>
     <param name="name">The connection template configuration name.</param>
 		<example>
-			<code>
+      <code xml:space="preserve">
         using LJCDataAccessConfig;
 
         var dataConfigs = new LJCDataConfigs();
@@ -70,16 +82,4 @@
       Saves the config data.
     </summary>
   </Save>
-  
-  <!-- Properties -->
-  <ConnectionType>
-    <summary>
-      Gets or sets the ConnectionType name.
-    </summary>
-  </ConnectionType>
-  <ConfigFileSpec>
-    <summary>
-      The configuration file path.
-    </summary>
-  </ConfigFileSpec>
 </members>

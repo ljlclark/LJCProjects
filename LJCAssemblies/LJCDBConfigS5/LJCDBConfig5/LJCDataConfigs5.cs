@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace LJCDBConfig5
 {
   // Represents a collection of LJCDataConfig objects.
-  /// <include file='Doc/ProjectDataConfigs.xml'
+  /// <include file='Doc/DataConfigs.xml'
   ///  path='members/LJCDataConfigs/*'/>
   [XmlRoot("LJCDataConfigs")]
   public class LJCDataConfigs : List<LJCDataConfig>

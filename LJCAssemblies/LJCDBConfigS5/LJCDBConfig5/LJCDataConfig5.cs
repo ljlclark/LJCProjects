@@ -7,7 +7,7 @@ using System.Data.Common;
 namespace LJCDBConfig5
 {
   // Represents a data location configuration.
-  /// <include file='Doc/ProjectDataConfig.xml'
+  /// <include file='Doc/DataConfig.xml'
   ///  path='members/LJCDataConfig/*'/>
   public class LJCDataConfig : IComparable<LJCDataConfig>
   {
@@ -141,6 +141,7 @@ namespace LJCDBConfig5
       return mName;
     }
 
+    // Provides the default Sort functionality.
     /// <include file='Doc/DataConfig.xml'
     ///  path='members/CompareTo/*'/>
     public int CompareTo(LJCDataConfig? other)

@@ -49,7 +49,7 @@
       parameters exist.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Reflection;
         using LJC.Net.Common;
@@ -57,16 +57,16 @@
         public ConstructorInfo RetrieveConstructorInfo(string assemblyFileSpec, string fullTypeName
         , string constructorName, string[] parameterNames)
         {
-        ConstructorInfo retValue = null;
+          ConstructorInfo retValue = null;
 
-        // These calls are not required if an LJCAssemblyReflect reference is
-        // used and the the following set methods have already been executed.
-        LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
-        Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
-        Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
+          Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
 
-        retValue = assemblyReflect.SetConstructorInfo(constructorName, parameterNames);
-        return retValue;
+          retValue = assemblyReflect.SetConstructorInfo(constructorName, parameterNames);
+          return retValue;
         }
       </code>
     </example>
@@ -82,7 +82,7 @@
       property value if the type reference and the field exist.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Reflection;
         using LJC.Net.Common;
@@ -90,16 +90,16 @@
         public FieldInfo RetrieveFieldInfo(string assemblyFileSpec, string fullTypeName
         , string fieldName)
         {
-        FieldInfo retValue = null;
+          FieldInfo retValue = null;
 
-        // These calls are not required if an LJCAssemblyReflect reference is
-        // used and the the following set methods have already been executed.
-        LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
-        Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
-        Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
+          Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
 
-        retValue = assemblyReflect.SetFieldInfo(fieldName);
-        return retValue;
+          retValue = assemblyReflect.SetFieldInfo(fieldName);
+          return retValue;
         }
       </code>
     </example>
@@ -123,7 +123,7 @@
       parameters exist.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Reflection;
         using LJC.Net.Common;
@@ -131,16 +131,16 @@
         public MethodInfo RetrieveMethodInfo(string assemblyFileSpec, string fullTypeName
         , string methodName, string[] parameterNames)
         {
-        MethodInfo retValue = null;
+          MethodInfo retValue = null;
 
-        // These calls are not required if an LJCAssemblyReflect reference is
-        // used and the the following set methods have already been executed.
-        LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
-        Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
-        Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
+          Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
 
-        retValue = assemblyReflect.SetMethodInfo(methodName, parameterNames);
-        return retValue;
+          retValue = assemblyReflect.SetMethodInfo(methodName, parameterNames);
+          return retValue;
         }
       </code>
     </example>
@@ -157,7 +157,7 @@
       property value if the type reference and the property exist.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Reflection;
         using LJC.Net.Common;
@@ -165,16 +165,16 @@
         public PropertyInfo RetrievePropertyInfo(string assemblyFileSpec, string fullTypeName
         , string propertyName, string fullName)
         {
-        PropertyInfo retValue = null;
+          PropertyInfo retValue = null;
 
-        // These calls are not required if an LJCAssemblyReflect reference is
-        // used and the the following set methods have already been executed.
-        LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
-        Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
-        Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
+          Type typeReference = assemblyReflect.SetTypeReference(fullTypeName);
 
-        retValue = assemblyReflect.SetPropertyInfo(propertyName, fullName);
-        return retValue;
+          retValue = assemblyReflect.SetPropertyInfo(propertyName, fullName);
+          return retValue;
         }
       </code>
     </example>
@@ -190,22 +190,22 @@
       property value if the assembly reference and type name exist.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Reflection;
         using LJC.Net.Common;
 
         public Type RetrieveTypeReference(string assemblyFileSpec, string fullTypeName)
         {
-        Type retValue = null;
+          Type retValue = null;
 
-        // These calls are not required if an LJCAssemblyReflect reference is
-        // used and the the following set methods have already been executed.
-        LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
-        Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          Assembly assembly = assemblyReflect.SetAssembly(assemblyFileSpec);
 
-        retValue = assemblyReflect.SetTypeReference(fullTypeName);
-        return retValue;
+          retValue = assemblyReflect.SetTypeReference(fullTypeName);
+          return retValue;
         }
       </code>
     </example>
@@ -219,7 +219,7 @@
     <param name="constructorInfo">The ConstructorInfo object.</param>
     <returns>The Constructor syntax.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Reflection;
         using LJC.Net.Common;
@@ -227,17 +227,17 @@
         public string RetrieveConstructorSyntax(string assemblyFileSpec, string fullTypeName
         , string constructorName, string[] parameterNames)
         {
-        string retValue = null;
+          string retValue = null;
 
-        // These calls are not required if an LJCAssemblyReflect reference is
-        // used and the the following set methods have already been executed.
-        LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
-        assemblyReflect.SetAssembly(assemblyFileSpec);
-        assemblyReflect.SetTypeReference(fullTypeName);
-        assemblyReflect.SetConstructorInfo(constructorName, parameterNames);
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          assemblyReflect.SetAssembly(assemblyFileSpec);
+          assemblyReflect.SetTypeReference(fullTypeName);
+          assemblyReflect.SetConstructorInfo(constructorName, parameterNames);
 
-        retValue = assemblyReflect.GetConstructorSyntax();
-        return retValue;
+          retValue = assemblyReflect.GetConstructorSyntax();
+          return retValue;
         }
       </code>
     </example>
@@ -249,7 +249,7 @@
     <param name="fieldInfo">The FieldInfo object.</param>
     <returns></returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Reflection;
         using LJC.Net.Common;
@@ -257,17 +257,17 @@
         public string RetrieveFieldSyntax(string assemblyFileSpec, string fullTypeName
         , string fieldName)
         {
-        string retValue = null;
+          string retValue = null;
 
-        // These calls are not required if an LJCAssemblyReflect reference is
-        // used and the the following set methods have already been executed.
-        LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
-        assemblyReflect.SetAssembly(assemblyFileSpec);
-        assemblyReflect.SetTypeReference(fullTypeName);
-        assemblyReflect.SetFieldInfo(fieldName);
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          assemblyReflect.SetAssembly(assemblyFileSpec);
+          assemblyReflect.SetTypeReference(fullTypeName);
+          assemblyReflect.SetFieldInfo(fieldName);
 
-        retValue = assemblyReflect.GetFieldSyntax();
-        return retValue;
+          retValue = assemblyReflect.GetFieldSyntax();
+          return retValue;
         }
       </code>
     </example>
@@ -286,7 +286,7 @@
     <param name="methodInfo">The MethodInfo object.</param>
     <returns>The Method syntax.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Reflection;
         using LJC.Net.Common;
@@ -294,17 +294,17 @@
         public string RetrieveMethodSyntax(string assemblyFileSpec, string fullTypeName
         , string methodName, string[] parameterNames)
         {
-        string retValue = null;
+          string retValue = null;
 
-        // These calls are not required if an LJCAssemblyReflect reference is
-        // used and the the following set methods have already been executed.
-        LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
-        assemblyReflect.SetAssembly(assemblyFileSpec);
-        assemblyReflect.SetTypeReference(fullTypeName);
-        assemblyReflect.SetMethodInfo(methodName, parameterNames);
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          assemblyReflect.SetAssembly(assemblyFileSpec);
+          assemblyReflect.SetTypeReference(fullTypeName);
+          assemblyReflect.SetMethodInfo(methodName, parameterNames);
 
-        retValue = assemblyReflect.GetMethodSyntax();
-        return retValue;
+          retValue = assemblyReflect.GetMethodSyntax();
+          return retValue;
         }
       </code>
     </example>
@@ -316,7 +316,7 @@
     <param name="propertyInfo">The PropertyInfo object.</param>
     <returns>The syntax string.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Reflection;
         using LJC.Net.Common;
@@ -324,17 +324,17 @@
         public string RetrievePropertySyntax(string assemblyFileSpec, string fullTypeName
         , string propertyName, string fullName)
         {
-        string retValue = null;
+          string retValue = null;
 
-        // These calls are not required if an LJCAssemblyReflect reference is
-        // used and the the following set methods have already been executed.
-        LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
-        assemblyReflect.SetAssembly(assemblyFileSpec);
-        assemblyReflect.SetTypeReference(fullTypeName);
-        assemblyReflect.SetPropertyInfo(propertyName, fullName);
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          assemblyReflect.SetAssembly(assemblyFileSpec);
+          assemblyReflect.SetTypeReference(fullTypeName);
+          assemblyReflect.SetPropertyInfo(propertyName, fullName);
 
-        retValue = assemblyReflect.GetPropertySyntax();
-        return retValue;
+          retValue = assemblyReflect.GetPropertySyntax();
+          return retValue;
         }
       </code>
     </example>
@@ -346,23 +346,23 @@
     <param name="typeReference">The Type object.</param>
     <returns>The Type syntax.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Reflection;
         using LJC.Net.Common;
 
         public string RetrieveTypeSyntax(string assemblyFileSpec, string fullTypeName)
         {
-        string retValue = null;
+          string retValue = null;
 
-        // These calls are not required if an LJCAssemblyReflect reference is
-        // used and the the following set methods have already been executed.
-        LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
-        assemblyReflect.SetAssembly(assemblyFileSpec);
-        assemblyReflect.SetTypeReference(fullTypeName);
+          // These calls are not required if an LJCAssemblyReflect reference is
+          // used and the the following set methods have already been executed.
+          LJCAssemblyReflect assemblyReflect = new LJCAssemblyReflect();
+          assemblyReflect.SetAssembly(assemblyFileSpec);
+          assemblyReflect.SetTypeReference(fullTypeName);
 
-        retValue = assemblyReflect.GetTypeSyntax();
-        return retValue;
+          retValue = assemblyReflect.GetTypeSyntax();
+          return retValue;
         }
       </code>
     </example>

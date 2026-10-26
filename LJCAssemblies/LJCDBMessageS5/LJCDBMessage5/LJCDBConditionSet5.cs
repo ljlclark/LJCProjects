@@ -6,7 +6,7 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents the conditions and properties.
-  /// <include file='Doc/ProjectDbConditionSet.xml'
+  /// <include file='Doc/DbConditionSet.xml'
   ///  path='items/LJCDbConditionSet/*'/>
   public class LJCDBConditionSet
   {
@@ -32,7 +32,7 @@ namespace LJCDBMessage5
 
     // Initializes an object instance.
     /// <include file='Doc/DbConditionSet.xml'
-    ///  path='items/DbConditionSetC/*'/>
+    ///  path='items/Constructor/*'/>
     public LJCDBConditionSet()
     {
       //Conditions = new DbConditions();
@@ -41,7 +41,7 @@ namespace LJCDBMessage5
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='items/ConstructorCopy/*'/>
     public LJCDBConditionSet(LJCDBConditionSet item)
     {
       BooleanOperator = item.BooleanOperator;

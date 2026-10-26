@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbConditions.xml -->
+<items>
+  <!-- Class -->
+  <LJCDbConditions>
+    <summary>Represents a collection of
+    &lt;span class="userType"&gt;DbCondition&lt;/span&gt;
+    objects.</summary>
+    <remarks>
+      <para>
+        The common collection static method is HasItems()
+        &lt;br /&gt;
+        The collection contains a copy constructor.&lt;br /&gt;
+        The common collection instance methods are: Add(), Clone() and
+        HasItems().
+      </para>
+    </remarks>
+  </LJCDbConditions>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorCopy>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="items"></param>
+  </ConstructorCopy>
+
+  <!-- Collection Methods -->
+  <Add>
+    <summary>
+      Creates and adds the element from the supplied values.
+    </summary>
+    <param name="value1">The first data value.</param>
+    <param name="value2">The second data value.</param>
+    <param name="comparisonOperator">The comparison operator.</param>
+    <returns>The added condition object.</returns>
+  </Add>
+  <Clone>
+    <summary>
+      Creates and returns a clone of the object.
+    </summary>
+  </Clone>
+  <HasItems>
+    <summary>
+      Checks if the collection has items.
+    </summary>
+    <returns></returns>
+  </HasItems>
+</items>

@@ -13,7 +13,8 @@
     <param name="initializationVector">The IV value.</param>
     <returns>The decrypted text value.</returns>
     <example>
-      <code>        MemoryCrypto crypto = new MemoryCrypto();
+      <code xml:space="preserve">
+        MemoryCrypto crypto = new MemoryCrypto();
         string text = null;
         byte[] key = {230, 191, 149, 1, 207, 136, 112, 200
                        , 7, 192, 109, 130, 188, 192, 27, 183
@@ -59,7 +60,8 @@
     <param name="initializationVector">The IV value.</param>
     <returns>The encrypted byte array.</returns>
     <example>
-      <code>        MemoryCrypto crypto = new MemoryCrypto();
+      <code xml:space="preserve">
+        MemoryCrypto crypto = new MemoryCrypto();
         byte[] key;
         byte[] iv;
         byte[] cipher;

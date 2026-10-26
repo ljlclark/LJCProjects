@@ -6,22 +6,22 @@ using LJCNetCommon5;
 namespace LJCDBMessage5
 {
   // Represents a collection of DbCondition objects.
-  /// <include file='Doc/ProjectDbConditions.xml'
+  /// <include file='Doc/DbConditions.xml'
   ///  path='items/LJCDbConditions/*'/>
   public class LJCDBConditions : List<LJCDBCondition>
   {
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='items/Constructor/*'/>
     public LJCDBConditions()
     {
     }
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='items/ConstructorCopy/*'/>
     public LJCDBConditions(LJCDBConditions items)
     {
       if (LJC.HasListItems(items))

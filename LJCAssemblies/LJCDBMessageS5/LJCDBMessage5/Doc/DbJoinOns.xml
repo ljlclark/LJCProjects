@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbJoinOns.xml -->
+<members>
+  <!-- Class -->
+  <DbJoinOns>
+    <summary>
+      Represents a collection of join on definitions.
+    </summary>
+    <remarks>
+      <para>
+        The common collection static method is HasItems()
+        &lt;br /&gt;
+        The collection contains a copy constructor.&lt;br /&gt;
+        The common collection instance methods are: Add() and Clone().
+      </para>
+    </remarks>
+  </DbJoinOns>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorCopy>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="items"></param>
+  </ConstructorCopy>
+  
+  <!-- Collection Methods -->
+  <Add>
+    <summary>
+      Creates and adds the element from the supplied values.
+    </summary>
+    <param name="fromColumnName">The 'From' column name.</param>
+    <param name="toColumnName">The 'To' column name.</param>
+    <param name="joinOperator">The join operator.</param>
+  </Add>
+  <Clone>
+    <summary>
+      Creates and returns a clone of the object.
+    </summary>
+  </Clone>
+</members>

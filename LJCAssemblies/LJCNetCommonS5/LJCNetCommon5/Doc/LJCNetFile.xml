@@ -21,7 +21,7 @@
     </summary>
     <param name="path">The File specification.</param>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Creates a Folder Path if it does not already exist.

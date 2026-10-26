@@ -9,12 +9,12 @@ using System.Xml.Serialization;
 namespace LJCDBMessage5
 {
   // Represents a data result.
-  /// <include file='Doc/ProjectDbResult.xml'
+  /// <include file='Doc/DbResult.xml'
   ///  path='items/LJCDBResult/*'/>
   //[XmlRoot("DbResult")]
   public class LJCDBResult
   {
-    #region TableData Static Methods?
+    #region Table Data Static Methods?
 
     // Creates a DataColumn object from a ADO Column object. 
     /// <include file='Doc/DbResult.xml'
@@ -194,7 +194,7 @@ namespace LJCDBMessage5
 
     // Checks if the result has Columns and Rows.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/HasColumns1/*'/>
+    ///  path='items/HasData1/*'/>
     public static bool HasData(LJCDBResult dbResult)
     {
       bool retValue;
@@ -252,7 +252,7 @@ namespace LJCDBMessage5
     ///  path='items/AffectedRecords/*'/>
     public int AffectedRecords { get; set; }
 
-    // Gets the collection of columns that belong to this result.</summary>
+    // Gets the collection of columns that belong to this result.
     /// <include file='Doc/DbResult.xml'
     ///  path='items/Columns/*'/>
     public LJCDataColumns? Columns { get; set; }
@@ -341,9 +341,37 @@ namespace LJCDBMessage5
       Rows = [];
     }
 
+    // Initializes an object instance with the DbResult object.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/Constructor/*'/>
+    public LJCDBResult(LJCDBRequest dbRequest)
+      : this(dbRequest.RequestTypeName, dbRequest.TableName
+          , dbRequest.SchemaName, dbRequest.ProcedureName)
+    {
+    }
+
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/ConstructorParam/*'/>
+    public LJCDBResult(string requestTypeName, string? tableName
+      , string? schemaName = null, string? procedureName = null)
+    {
+      mRequestTypeName = RequestType.Select.ToString();
+
+      //Columns = new LJCDataColumns();
+      Columns = [];
+      DatabaseName = null;
+      ProcedureName = procedureName;
+      RequestTypeName = requestTypeName;
+      //Rows = new DbRows();
+      Rows = [];
+      SchemaName = schemaName;
+      TableName = tableName;
+    }
+
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='items/ConstructorCopy/*'/>
     public LJCDBResult(LJCDBResult item)
     {
       mRequestTypeName = RequestType.Select.ToString();
@@ -361,34 +389,6 @@ namespace LJCDBMessage5
       Rows = [.. item.Rows];
       SchemaName = item.SchemaName;
       TableName = item.TableName;
-    }
-
-    // Initializes an object instance with the DbResult object.
-    /// <include file='Doc/DbResult.xml'
-    ///  path='items/DbResultC1/*'/>
-    public LJCDBResult(LJCDBRequest dbRequest)
-      : this(dbRequest.RequestTypeName, dbRequest.TableName
-          , dbRequest.SchemaName, dbRequest.ProcedureName)
-    {
-    }
-
-    // Initializes an object instance with the supplied values.
-    /// <include file='Doc/DbResult.xml'
-    ///  path='items/DbResultC2/*'/>
-    public LJCDBResult(string requestTypeName, string? tableName
-      , string? schemaName = null, string? procedureName = null)
-    {
-      mRequestTypeName = RequestType.Select.ToString();
-
-      //Columns = new LJCDataColumns();
-      Columns = [];
-      DatabaseName = null;
-      ProcedureName = procedureName;
-      RequestTypeName = requestTypeName;
-      //Rows = new DbRows();
-      Rows = [];
-      SchemaName = schemaName;
-      TableName = tableName;
     }
     #endregion
 
@@ -470,7 +470,7 @@ namespace LJCDBMessage5
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Get DataColumns from result records.
     /// <include file='Doc/DbResult.xml'
@@ -495,7 +495,7 @@ namespace LJCDBMessage5
 
     // Sets the Columns property from the principle and join columns.
     /// <include file='Doc/DbResult.xml'
-    ///  path='items/SetColumns/*'/>
+    ///  path='items/SetColumns1/*'/>
     public void SetColumns(LJCDataColumns? dataColumns, LJCDBJoins? dbJoins = null)
     {
       if (LJC.HasListItems(dataColumns))
@@ -518,10 +518,9 @@ namespace LJCDBMessage5
       }
     }
 
-    /// <summary>
-    /// Sets the Columns property from the Request columns.
-    /// </summary>
-    /// <param name="dbRequest">The Request object.</param>
+    // Sets the Columns property from the Request columns.
+    /// <include file='Doc/DbResult.xml'
+    ///  path='items/SetColumns2/*'/>
     public void SetColumns(LJCDBRequest dbRequest)
     {
       SetColumns(dbRequest.Columns, dbRequest.Joins);

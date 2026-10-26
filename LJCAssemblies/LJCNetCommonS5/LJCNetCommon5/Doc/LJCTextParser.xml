@@ -29,7 +29,7 @@
       The text between the delimiters.
     </returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
         
         // Gets the string between the specified delimiters.
@@ -72,7 +72,7 @@
       The delimited text including the delimiters.
     </returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         // Get the string including the specified delimiters.
@@ -102,7 +102,7 @@
       The first tag.
     </returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Finds the first tag in a text value.
         private static void FindTag()
         {
@@ -141,7 +141,7 @@
       The text with the section removed.
     </returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Removes a section from a text value.
         private static void RemoveSection()
         {
@@ -172,7 +172,7 @@
       The text with the tags removed.
     </returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Removes tags from a text value.
         private static void RemoveTags()
         {

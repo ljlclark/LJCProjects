@@ -7,12 +7,12 @@ using LJCDataAccess5;
 
 namespace LJCDBMessage5
 {
-  /// <include file='Doc/ProjectDBMessage.xml'
+  /// <include file='Doc/DBRequest.xml'
   ///  path='items/LJCDbRequest/*'/>
   [XmlRoot("DbRequest")]
   public class LJCDBRequest
   {
-    #region Static Functions
+    #region Static Methods
 
     // Deserializes the DbRequest message.
     /// <include file='Doc/DbRequest.xml'
@@ -150,11 +150,11 @@ namespace LJCDBMessage5
     public int PageStartIndex { get; set; }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='items/Constructor/*'/>
     public LJCDBRequest()
     {
       //OrderByNames = new List<string>();
@@ -163,9 +163,25 @@ namespace LJCDBMessage5
       //mTableName = "TableName";
     }
 
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/DbRequest.xml'
+    ///  path='items/ConstructorParam/*'/>
+    public LJCDBRequest(RequestType requestType, string? tableName
+      , string? dataConfigName = null)
+    {
+      mRequestTypeName = requestType.ToString();
+      mTableName = tableName;
+
+      RequestTypeName = requestType.ToString();
+      TableName = tableName;
+      DataConfigName = dataConfigName;
+      //OrderByNames = new List<string>();
+      OrderByNames = [];
+    }
+
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='items/ConstructorCopy/*'/>
     public LJCDBRequest(LJCDBRequest item)
     {
       mRequestTypeName = RequestType.Select.ToString();
@@ -206,22 +222,6 @@ namespace LJCDBMessage5
       RequestTypeName = item.RequestTypeName;
       SchemaName = item.SchemaName;
       TableName = item.TableName;
-    }
-
-    // Initializes an object instance with the supplied values.
-    /// <include file='Doc/DbRequest.xml'
-    ///  path='items/DbRequestC/*'/>
-    public LJCDBRequest(RequestType requestType, string? tableName
-      , string? dataConfigName = null)
-    {
-      mRequestTypeName = requestType.ToString();
-      mTableName = tableName;
-
-      RequestTypeName = requestType.ToString();
-      TableName = tableName;
-      DataConfigName = dataConfigName;
-      //OrderByNames = new List<string>();
-      OrderByNames = [];
     }
     #endregion
 
@@ -312,7 +312,9 @@ namespace LJCDBMessage5
     #endregion
   }
 
-  /// <summary>The RequestType values.</summary>
+  // The RequestType values.
+  /// <include file='Doc/DbRequest.xml'
+  ///  path='items/RequestType/*'/>
   public enum RequestType
   {
     /// <summary>The "Delete" request type.</summary>

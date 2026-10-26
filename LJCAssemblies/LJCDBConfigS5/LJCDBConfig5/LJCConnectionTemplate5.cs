@@ -7,7 +7,7 @@ using LJCNetCommon5;
 namespace LJCDBConfig5
 {
   // Represents a Connection String template.
-  /// <include file="Doc/ProjectConnectionTemplate.xml"
+  /// <include file="Doc/ConnectionTemplate.xml"
   ///  path="members/LJCConnectionTemplate/*"/>
   public class LJCConnectionTemplate : IComparable<LJCConnectionTemplate>
   {

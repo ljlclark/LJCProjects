@@ -36,6 +36,18 @@
 		</remarks>
   </LJCConnectionTemplate>
   
+  <!-- Properties -->
+  <Name>
+    <summary>
+      Gets or sets the connection type name.
+    </summary>
+  </Name>
+  <Template>
+    <summary>
+      Gets or sets the connection string template.
+    </summary>
+  </Template>
+  
   <!-- Constructor Methods -->
   <Constructor>
     <summary>
@@ -63,16 +75,4 @@
     <param name="other">The compared to object.</param>
     <returns>An integer value indicating the order relationship.</returns>
   </CompareTo>
-  
-  <!-- Properties -->
-  <Name>
-    <summary>
-      Gets or sets the connection type name.
-    </summary>
-  </Name>
-  <Template>
-    <summary>
-      Gets or sets the connection string template.
-    </summary>
-  </Template>
 </members>

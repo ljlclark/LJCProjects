@@ -7,7 +7,7 @@ using System.Data.SqlTypes;
 namespace LJCDBMessage5
 {
   // Common data message methods.
-  /// <include file='Doc/ProjectDbCommon.xml'
+  /// <include file='Doc/DbCommon.xml'
   ///  path='items/LJCDBCommon/*'/>
   public partial class LJCDBCommon
   {
@@ -41,10 +41,11 @@ namespace LJCDBMessage5
 
     #region Data Value Columns
 
-    // Gets Request Value columns from the baseDefinition using the propertyNames.
+    // Gets Request Value columns from the baseDefinition using the
+    // propertyNames.
+    // Similar to RequestDataKeys and RequestLookupKeys()
     /// <include file='Doc/DbCommon.xml'
     ///  path='items/RequestDataColumns/*'/>
-    // Similar to RequestDataKeys and RequestLookupKeys()
     public static LJCDataColumns? RequestDataColumns(object dataObject
       , LJCDataColumns baseDefinition, List<string>? propertyNames = null
       , bool? includeNull = false)

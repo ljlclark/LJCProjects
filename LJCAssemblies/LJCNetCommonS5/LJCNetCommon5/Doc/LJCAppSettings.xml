@@ -9,7 +9,7 @@
     </summary>
     <param name="fileSpec">The Configuration file specification.</param>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         var appSettings = new AppSettings("AppName.exe.config");
@@ -25,7 +25,7 @@
     <param name="keyName">The setting key name.</param>
     <returns>The bool setting value.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // App.Config file.
         // &lt;configuration&gt;
         //   &lt;appSettings&gt;
@@ -51,7 +51,7 @@
       Returns the default color if the config file key is not found.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // App.Config file.
         // &lt;configuration&gt;
         //   &lt;appSettings&gt;
@@ -74,7 +74,7 @@
     <param name="rgbText">The RGB text.</param>
     <returns>The Color value.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // App.Config file.
         // &lt;configuration&gt;
         //   &lt;appSettings&gt;
@@ -98,7 +98,7 @@
     <param name="text">The color string text.</param>
     <returns>The integer color value.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System.Drawing;
         using LJCNetCommon;
 
@@ -116,7 +116,7 @@
       Indicates if a missing value throws an exception.
     </param>
     <example>
-      <code>
+      <code xml:space="preserve">
         // App.Config file.
         // &lt;configuration&gt;
         //   &lt;appSettings&gt;

@@ -11,11 +11,11 @@ using System.Text;
 namespace LJCDBDataAccess5
 {
   // The Data Access methods.
-  /// <include file='Doc/ProjectDBDataAccess.xml'
+  /// <include file='Doc/DbDataAccess.xml'
   ///  path='items/DbDataAccess/*'/>
   public partial class DbDataAccess
   {
-    #region Public Properties
+    #region Properties
 
     // Gets or sets the Database name.
     /// <include file='Doc/DbDataAccess.xml'
@@ -100,7 +100,7 @@ namespace LJCDBDataAccess5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='items/Constructor/*'/>
     public DbDataAccess()
     {
       mDataAccess = new LJCDataAccess();
@@ -108,7 +108,7 @@ namespace LJCDBDataAccess5
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='items/ConstructorParam1/*'/>
     public DbDataAccess(string dataConfigName)
     {
       mDataAccess = new LJCDataAccess();
@@ -118,7 +118,7 @@ namespace LJCDBDataAccess5
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/DbDataAccess.xml'
-    ///  path='items/DbDataAccessC/*'/>
+    ///  path='items/ConstructorParam2/*'/>
     public DbDataAccess(string databaseName, string? connectionString = null
       , string? providerName = null)
     {
@@ -131,7 +131,7 @@ namespace LJCDBDataAccess5
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Executes the specified database request XML message.
     /// <include file='Doc/DbDataAccess.xml'
@@ -181,9 +181,6 @@ namespace LJCDBDataAccess5
       }
       return retValue;
     }
-    #endregion
-
-    #region Private Data Methods
 
     // Inserts a record in the database with the specified columns.
     /// <include file='Doc/DbDataAccess.xml'

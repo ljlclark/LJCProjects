@@ -152,7 +152,7 @@
     <param name="propertyName">The property name.</param>
     <returns>The string property value.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
         
         // Initialize LJCReflect outside of loop.
@@ -174,7 +174,7 @@
     <param name="throwError">Indicates if the error should be thrown.</param>
     <returns>The object property value.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
         
         // Initialize LJCReflect outside of loop.
@@ -205,7 +205,7 @@
     <param name="propertyName">The property name.</param>
     <param name="value">The property value.</param>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Data;
         using System.Data.Common;

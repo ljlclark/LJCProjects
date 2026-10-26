@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbJoin.xml -->
+<members>
+  <!-- Properties -->
+  <Columns>
+    <summary>
+      The included join table columns.
+    </summary>
+    <remarks>&lt;span class="userType"&gt;LJCNetCommon.DbColumns&lt;/span&gt;</remarks>
+  </Columns>
+  <JoinOns>
+    <summary>
+      The join on definitions.
+    </summary>
+  </JoinOns>
+  <JoinType>
+    <summary>
+      The join type.
+    </summary>
+    <remarks>
+      Join type "Left" is the only join type supported by
+      &lt;span class="commonType"&gt;LJCDBService&lt;/span&gt;
+      at this time.
+    </remarks>
+  </JoinType>
+  <TableAlias>
+    <summary>
+      The table alias.
+    </summary>
+  </TableAlias>
+  <TableName>
+    <summary>
+      The table name.
+    </summary>
+  </TableName>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ConstructorCopy>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="item"></param>
+  </ConstructorCopy>
+  
+  <!-- Methods -->
+  <Clone>
+    <summary>
+      Creates and returns a clone of the object.
+    </summary>
+  </Clone>
+</members>
