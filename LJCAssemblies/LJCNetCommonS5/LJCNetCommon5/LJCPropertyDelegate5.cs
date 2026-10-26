@@ -5,7 +5,7 @@
 namespace LJCNetCommon5
 {
   // Represents a PropertyDelegate definition.
-  /// <include file='Doc/ProjectPropertyDelegate.xml'
+  /// <include file='Doc/PropertyDelegate.xml'
   ///  path='members/LJCPropertyDelegate/*'/>
   public class LJCPropertyDelegate
   {

@@ -5,7 +5,7 @@
 namespace LJCNetCommon5
 {
   // Represents a collection of Attribute elements.
-  /// <include file='Doc/ProjectAttributes.xml'
+  /// <include file='Doc/Attributes.xml'
   ///  path='members/LJCAttributes/*'/>
   /// <group name="collection">Collection</group>
   public class LJCAttributes : List<LJCAttribute>

@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- ResultConverter.xml -->
-<items>
+<members>
   <ResultConverter>
     <summary>
       Converts
@@ -72,4 +72,4 @@
       object.</param>
     <returns>The Data Object collection.</returns>
   </CreateCollectionFromTable>
-</items>
+</members>

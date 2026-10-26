@@ -5,7 +5,7 @@
 namespace LJCNetCommon5
 {
   // Contains parsing related methods.
-  /// <include file='Doc/ProjectParser.xml'
+  /// <include file='Doc/Parser.xml'
   ///  path='members/LJCParser/*'/>
   public class LJCParser
   {

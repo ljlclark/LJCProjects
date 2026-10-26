@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace LJCNetCommon5
 {
   // Represents a data source value.
-  /// <include file='Doc/ProjectDataValue.xml'
+  /// <include file='Doc/DataValue.xml'
   ///  path='members/LJCDataValue/*'/>
   public class LJCDataValue
   {
@@ -128,7 +128,7 @@ namespace LJCNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public LJCDataValue()
     {
@@ -153,7 +153,7 @@ namespace LJCNetCommon5
     }
 
     // The Copy constructor.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/CopyConstructor/*'/>
     public LJCDataValue(LJCDataValue item)
     {
@@ -170,7 +170,7 @@ namespace LJCNetCommon5
     #region Data Methods
 
     // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public LJCDataValue? Clone()
     {
@@ -188,7 +188,7 @@ namespace LJCNetCommon5
     }
 
     // The object string identifier.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/ToString/*'/>
     public override string ToString()
     {

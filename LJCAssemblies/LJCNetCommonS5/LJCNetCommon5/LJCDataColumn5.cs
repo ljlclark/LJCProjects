@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace LJCNetCommon5
 {
   // Represents a data source column.
-  /// <include file='Doc/ProjectDataColumn.xml'
+  /// <include file='Doc/DataColumn.xml'
   ///  path='members/LJCDataColumn/*'/>
   public class LJCDataColumn
   {
@@ -334,7 +334,7 @@ namespace LJCNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public LJCDataColumn()
     {
@@ -387,7 +387,7 @@ namespace LJCNetCommon5
     }
 
     // Initializes an object instance from the supplied object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/CopyConstructor/*'/>
     public LJCDataColumn(LJCDataColumn item)
     {
@@ -425,7 +425,7 @@ namespace LJCNetCommon5
     #region Data Methods
 
     // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public LJCDataColumn? Clone()
     {
@@ -443,7 +443,7 @@ namespace LJCNetCommon5
     }
 
     // Returns the object string identifier.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/ToString/*'/>
     public override string ToString()
     {

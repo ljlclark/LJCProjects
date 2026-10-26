@@ -6,7 +6,7 @@ using System.Text;
 namespace LJCNetCommon5
 {
   // Contains common string related static methods.
-  /// <include file='Doc/ProjectNetString.xml'
+  /// <include file='Doc/NetString.xml'
   ///  path='members/LJCNetString/*'/>
   public class LJCNetString
   {

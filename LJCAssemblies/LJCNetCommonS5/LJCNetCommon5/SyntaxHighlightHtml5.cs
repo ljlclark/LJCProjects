@@ -6,7 +6,7 @@ using System.Text;
 namespace LJCNetCommon5
 {
   // Provides methods for HTML Syntax Highighting.
-  /// <include file='Doc/ProjectSyntaxHighlight.xml'
+  /// <include file='Doc/SyntaxHighlight.xml'
   ///  path='members/SyntaxHighlightHtml/*'/>
   public class SyntaxHighlightHtml
   {
@@ -89,7 +89,7 @@ namespace LJCNetCommon5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public SyntaxHighlightHtml()
     {

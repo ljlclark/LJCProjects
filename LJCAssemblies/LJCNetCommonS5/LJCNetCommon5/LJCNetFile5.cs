@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace LJCNetCommon5
 {
   // Contains common file related static functions. (R)
-  /// <include file='Doc/ProjectNetFile.xml'
+  /// <include file='Doc/NetFile.xml'
   ///  path='members/LJCNetFile/*'/>
   public class LJCNetFile
   {

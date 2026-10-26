@@ -5,7 +5,7 @@
 namespace LJCNetCommon5
 {
   // Provides test methods.
-  /// <include file='Doc/ProjectTestCommon.xml'
+  /// <include file='Doc/TestCommon.xml'
   ///  path='members/LJCTestCommon/*'/>
   public class LJCTestCommon
   {

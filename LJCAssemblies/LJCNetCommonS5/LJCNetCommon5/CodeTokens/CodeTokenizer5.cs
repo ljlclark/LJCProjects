@@ -8,7 +8,7 @@ using System.Text;
 namespace LJCNetCommon5
 {
   // A C# Code Tokenizer class.
-  /// <include file='Doc/ProjectCodeTokenizer.xml'
+  /// <include file='Doc/CodeTokenizer.xml'
   ///  path='members/CodeTokenizer/*'/>
   public class CodeTokenizer
   {
@@ -73,7 +73,7 @@ namespace LJCNetCommon5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/DefaultConstructor/*'/>
     public CodeTokenizer()
     {

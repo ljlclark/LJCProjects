@@ -6,7 +6,7 @@ using System.Text;
 namespace LJCNetCommon5
 {
   // Provides methods for creating text.
-  /// <include file='Doc/ProjectTextBuilder.xml'
+  /// <include file='Doc/TextBuilder.xml'
   ///  path='members/LJCTextBuilder/*'/>
   public class LJCTextBuilder
   {

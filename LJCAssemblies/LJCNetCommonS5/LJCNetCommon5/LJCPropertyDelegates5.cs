@@ -7,7 +7,7 @@ using System.Reflection;
 namespace LJCNetCommon5
 {
   // Represents a collection of PropertyDelegate objects.
-  /// <include file='Doc/ProjectPropertyDelegates.xml'
+  /// <include file='Doc/PropertyDelegates.xml'
   ///  path='members/LJCPropertyDelegates/*'/>
   public class LJCPropertyDelegates : List<LJCPropertyDelegate>
   {

@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 namespace LJCNetCommon5
 {
   // Contains common static methods.
-  /// <include file='Doc/ProjectLJC.xml'
+  /// <include file='Doc/LJC.xml'
   ///  path='members/LJC/*'/>
   public class LJC
   {
@@ -907,6 +907,7 @@ namespace LJCNetCommon5
     // ** Base64 Bytes and Text
     // Decodes a Base64 byte array to a Text value.
     /// <include file='Doc/LJC.xml'
+    ///  path='members/Base64BytesToText/*'/>
     public static string? Base64BytesToText(byte[] bytes)
     {
       byte[] byteArray = Base64BytesToTextBytes(bytes);

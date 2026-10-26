@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace LJCNetCommon5
 {
   // Represents a collection of LJCDataValue objects.
-  /// <include file='Doc/ProjectDataValues.xml'
+  /// <include file='Doc/DataValues.xml'
   ///  path='members/LJCDataValues/*'/>
   /// <group name="static">Static Methods</group>
   /// <group name="constructors">Constructors</group>
@@ -20,7 +20,7 @@ namespace LJCNetCommon5
     #region Static Methods
 
     // Deserializes from the specified XML file.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
     public static LJCDataValues? LJCDeserialize(string? fileSpec = null)
     {
@@ -155,7 +155,7 @@ namespace LJCNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     /// <parentGroup>constructors</parentGroup>
     public LJCDataValues()
@@ -165,7 +165,7 @@ namespace LJCNetCommon5
     }
 
     // The Copy constructor.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
     /// <parentGroup>constructors</parentGroup>
     public LJCDataValues(LJCDataValues items)
@@ -183,7 +183,7 @@ namespace LJCNetCommon5
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     /// <parentGroup>collection</parentGroup>
     public LJCDataValues Clone()
@@ -201,7 +201,7 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems/*'/>
     /// <parentGroup>collection</parentGroup>
     public bool HasItems()
@@ -320,7 +320,7 @@ namespace LJCNetCommon5
     }
 
     // Serializes the collection
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCSerialize/*'/>
     /// <parentGroup>collection</parentGroup>
     public void LJCSerialize(string? fileSpec = null)

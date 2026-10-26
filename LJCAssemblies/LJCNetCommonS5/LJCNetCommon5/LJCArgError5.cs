@@ -5,12 +5,12 @@
 namespace LJCNetCommon5
 {
   // Creates an argument error message.
-  /// <include file='Doc/ProjectArgError.xml'
+  /// <include file='Doc/ArgError.xml'
   ///  path='members/LJCArgError/*'/>
-  /// <group name='constructors">Constructors</group>
-  /// <group name='dataClass">Data Class</group>
-  /// <group name='methods">Methods</group>
-  /// <group name='properties">Properties</group>
+  /// <group name="constructors">Constructors</group>
+  /// <group name="dataClass">Data Class</group>
+  /// <group name="methods">Methods</group>
+  /// <group name="properties">Properties</group>
   public class LJCArgError
   {
     #region Properties
@@ -47,6 +47,8 @@ namespace LJCNetCommon5
 
     #region Constructors
 
+    /// <include file='Doc/ArgError.xml'
+    ///  path='members/Constructor/*'/>
     public LJCArgError()
     {
       ClassName = "";
@@ -55,7 +57,7 @@ namespace LJCNetCommon5
 
     // Initializes an object instance.
     /// <include file='Doc/ArgError.xml'
-    ///  path='members/Constructor/*'/>
+    ///  path='members/ParamConstructor/*'/>
     /// <parentGroup>constructors</parentGroup>
     public LJCArgError(string className) : this()
     {

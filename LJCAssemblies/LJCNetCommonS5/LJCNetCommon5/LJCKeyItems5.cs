@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace LJCNetCommon5
 {
   // <summary>Represents a collection of KeyItem objects.</summary>
-  /// <include file='Doc/ProjectKeyItems.xml'
+  /// <include file='Doc/KeyItems.xml'
   ///  path='members/LJCKeyItems/*'/>
   public class LJCKeyItems : IEnumerable<LJCKeyItem>
   {
@@ -32,7 +32,7 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems1/*'/>
     public static bool HasItems(LJCKeyItems collection)
     {
@@ -91,7 +91,7 @@ namespace LJCNetCommon5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/DefaultConstructor/*'/>
     public LJCKeyItems()
     {
@@ -100,7 +100,7 @@ namespace LJCNetCommon5
     }
 
     // The Copy constructor.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
     public LJCKeyItems(LJCKeyItems items) : this()
     {
@@ -164,7 +164,7 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public LJCKeyItems Clone()
     {
@@ -181,7 +181,7 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {
@@ -195,7 +195,7 @@ namespace LJCNetCommon5
     }
 
     // Retrieves an item by property name.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCRetrieve/*'/>
     public LJCKeyItem? LJCRetrieve(string propertyName)
     {
@@ -301,7 +301,7 @@ namespace LJCNetCommon5
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/SearchName/*'/>
     public LJCKeyItems? SearchPropertyName(string name)
     {
@@ -315,7 +315,7 @@ namespace LJCNetCommon5
     }
 
     // Sort on Name.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/SortName/*'/>
     public void SortPropertyName()
     {

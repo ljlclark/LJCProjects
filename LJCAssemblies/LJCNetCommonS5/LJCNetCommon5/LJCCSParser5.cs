@@ -6,11 +6,11 @@ namespace LJCNetCommon5
 {
   // Provides methods to parse a source line for class, method and property
   // definitions.
-  /// <include file='Doc/ProjectCSParser.xml'
+  /// <include file='Doc/CSParser.xml'
   /// path='members/LJCCSParser/*'/>
-  /// <group name='constructor">Constructor</group>
-  /// <group name='methods">Methods</group>
-  /// <group name='properties">Properties</group>
+  /// <group name="constructor">Constructor</group>
+  /// <group name="methods">Methods</group>
+  /// <group name="properties">Properties</group>
   public class LJCCSParser
   {
     #region Static Methods

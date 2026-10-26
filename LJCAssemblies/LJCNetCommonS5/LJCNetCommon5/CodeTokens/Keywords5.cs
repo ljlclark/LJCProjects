@@ -1,20 +1,20 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// Modifiers.cs
+// Keywords.cs
 using System.Collections;
 using System.Xml.Serialization;
 
 namespace LJCNetCommon5
 {
-  // Represents a collection of Modifiers.
-  /// <include file='Doc/ProjectModifiers.xml'
-  ///  path='members/Modifiers/*'/>
-  public class Modifiers : IEnumerable<string>
+  // Represents a collection of Keywords.
+  /// <include file='Doc/KeyWords.xml'
+  ///  path='members/Keywords/*'/>
+  public class Keywords : IEnumerable<string>
   {
-    #region Static Functions
+    #region Static Methods
 
     // Deserializes from the specified XML file.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
     public static List<string> Deserialize(string? fileSpec = null)
     {
@@ -34,12 +34,19 @@ namespace LJCNetCommon5
         // The default list of common Modifiers.
         retValue =
         [
-          "abstract",
-          "extern",
-          "internal",
-          "protected",
-          "sealed",
-          "virtual"
+          "as",
+          "catch",
+          "continue",
+          "default",
+          "do",
+          "finally",
+          "is",
+          "out",
+          "ref",
+          "this",
+          "throw",
+          "try",
+          "typeof"
         ];
         LJC.XmlSerialize(typeof(List<string>), retValue, null, fileSpec
           , RootName);
@@ -53,9 +60,9 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems1/*'/>
-    public static bool HasItems(Modifiers collection)
+    public static bool HasItems(Keywords collection)
     {
       bool retValue = false;
 
@@ -70,35 +77,35 @@ namespace LJCNetCommon5
     #region Properties
 
     // Gets the Default File Name.
-    /// <include file='Doc/Modifiers.xml'
+    /// <include file='Doc/Keywords.xml'
     ///  path='members/DefaultFileName/*'/>
     public static string DefaultFileName
     {
-      get => @"Keywords\Modifiers.xml";
+      get => @"Keywords\Keywords.xml";
     }
     #endregion
 
     #region Class Data
 
     private int mPrevCount;
-    private const string RootName = "Modifiers";
+    private const string RootName = "Keywords";
     #endregion
 
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/DefaultConstructor/*'/>
-    public Modifiers()
+    public Keywords()
     {
       Items = [];
       mPrevCount = -1;
     }
 
     // The Copy constructor.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
-    public Modifiers(Modifiers items)
+    public Keywords(Keywords items)
     {
       Items = [];
       if (HasItems(items))
@@ -114,7 +121,7 @@ namespace LJCNetCommon5
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include file='Doc/Modifiers.xml'
+    /// <include file='Doc/Keywords.xml'
     ///  path='members/Add1/*'/>
     public void Add(string item)
     {
@@ -125,20 +132,20 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
-    public Modifiers Clone()
+    public Keywords Clone()
     {
-      var retValue = new Modifiers();
-      foreach (string modifier in this)
+      var retValue = new Keywords();
+      foreach (string keyword in this)
       {
-        retValue.Add(modifier);
+        retValue.Add(keyword);
       }
       return retValue;
     }
 
     // Checks if the collection has items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {
@@ -152,7 +159,7 @@ namespace LJCNetCommon5
     }
 
     // Serializes the collection
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCSerialize/*'/>
     public void Serialize(string? fileSpec = null)
     {
@@ -168,7 +175,7 @@ namespace LJCNetCommon5
     #region IEnumerable Methods and Properties
 
     // The Collection count.
-    /// <include file='Doc/Modifiers.xml'
+    /// <include file='Doc/Keywords.xml'
     ///  path='members/Count/*'/>
     public int Count
     {
@@ -176,7 +183,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the Collection Enumerator.
-    /// <include file='Doc/Modifiers.xml'
+    /// <include file='Doc/Keywords.xml'
     ///  path='members/GetEnumerator/*'/>
     public IEnumerator<string> GetEnumerator()
     {
@@ -190,13 +197,13 @@ namespace LJCNetCommon5
     }
 
     // The KeyItem items.
-    /// <include file='Doc/Modifiers.xml'
+    /// <include file='Doc/Keywords.xml'
     ///  path='members/Items/*'/>
     [XmlArray(RootName)]
     public List<string> Items { get; set; }
 
     // Gets the item by index value.
-    /// <include file='Doc/Modifiers.xml'
+    /// <include file='Doc/Keywords.xml'
     ///  path='members/Indexer/*'/>
     public string? this[int index]
     {
@@ -216,7 +223,7 @@ namespace LJCNetCommon5
     #region Sort and Search Methods
 
     // Retrieve the collection element.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/SearchName/*'/>
     public string? SearchName(string name)
     {
@@ -232,7 +239,7 @@ namespace LJCNetCommon5
     }
 
     // Sort on Name.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/SortName/*'/>
     public void SortName()
     {

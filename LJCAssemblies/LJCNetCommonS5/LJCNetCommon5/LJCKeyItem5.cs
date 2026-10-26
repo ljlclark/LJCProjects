@@ -5,14 +5,14 @@
 namespace LJCNetCommon5
 {
   // Represents Key item values.
-  /// <include file='Doc/ProjectKeyItem.xml'
+  /// <include file='Doc/KeyItem.xml'
   ///  path='items/LJCKeyItem/*'/>
   public class LJCKeyItem : IComparable<LJCKeyItem>
   {
     #region Properties
 
     // Gets or sets the DataConfig name.
-    /// <include file='Doc/LJCKeyItem.xml'
+    /// <include file='Doc/KeyItem.xml'
     ///  path='members/DataConfigName/*'/>
     public string? DataConfigName
     {
@@ -22,7 +22,7 @@ namespace LJCNetCommon5
     private string? mDataConfigName;
 
     // The Description value.
-    /// <include file='Doc/LJCKeyItem.xml'
+    /// <include file='Doc/KeyItem.xml'
     ///  path='members/Description/*'/>
     public string? Description
     {
@@ -32,17 +32,17 @@ namespace LJCNetCommon5
     private string? mDescription;
 
     // The ID value.
-    /// <include file='Doc/LJCKeyItem.xml'
+    /// <include file='Doc/KeyItem.xml'
     ///  path='members/ID/*'/>
     public long ID { get; set; }
 
     // Gets or sets the MaxLength value.
-    /// <include file='Doc/LJCKeyItem.xml'
+    /// <include file='Doc/KeyItem.xml'
     ///  path='members/MaxLength/*'/>
     public int MaxLength { get; set; }
 
     // Gets or sets the Primary Key name.
-    /// <include file='Doc/LJCKeyItem.xml'
+    /// <include file='Doc/KeyItem.xml'
     ///  path='members/PrimaryKeyName/*'/>
     public string? PrimaryKeyName
     {
@@ -52,7 +52,7 @@ namespace LJCNetCommon5
     private string? mPrimaryKeyName;
 
     // The Property name.
-    /// <include file='Doc/LJCKeyItem.xml'
+    /// <include file='Doc/KeyItem.xml'
     ///  path='members/PropertyName/*'/>
     public string? PropertyName
     {
@@ -62,7 +62,7 @@ namespace LJCNetCommon5
     private string? mPropertyName;
 
     // Gets or sets the Table name.
-    /// <include file='Doc/LJCKeyItem.xml'
+    /// <include file='Doc/KeyItem.xml'
     ///  path='members/TableName/*'/>
     public string? TableName
     {
@@ -75,14 +75,14 @@ namespace LJCNetCommon5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public LJCKeyItem()
     {
     }
 
     // Initializes an object instance.
-    /// <include file='Doc/LJCKeyItem.xml'
+    /// <include file='Doc/KeyItem.xml'
     ///  path='members/ConstructorParam/*'/>
     public LJCKeyItem(string propertyName, long id, string description) : this()
     {
@@ -95,7 +95,7 @@ namespace LJCNetCommon5
     #region Data Methods
 
     // Creates and returns a clone of this object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public LJCKeyItem? Clone()
     {
@@ -104,7 +104,7 @@ namespace LJCNetCommon5
     }
 
     // The object string identifier.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/ToString/*'/>
     public override string? ToString()
     {
@@ -115,7 +115,7 @@ namespace LJCNetCommon5
     #region Search and Sort Methods
 
     // Provides the default Sort functionality.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/CompareTo/*'/>
     public int CompareTo(LJCKeyItem? other)
     {

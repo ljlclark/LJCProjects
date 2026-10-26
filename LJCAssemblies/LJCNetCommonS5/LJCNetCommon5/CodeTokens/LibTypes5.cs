@@ -7,14 +7,14 @@ using System.Xml.Serialization;
 namespace LJCNetCommon5
 {
   // Represents a collection of Library Types.
-  /// <include file='Doc/ProjectLibTypes.xml'
+  /// <include file='Doc/LibTypes.xml'
   ///  path='members/LibTypes/*'/>
   public class LibTypes : IEnumerable<string>
   {
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
     public static List<string> Deserialize(string? fileSpec = null)
     {
@@ -51,7 +51,7 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems1/*'/>
     public static bool HasItems(LibTypes collection)
     {
@@ -85,7 +85,7 @@ namespace LJCNetCommon5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/DefaultConstructor/*'/>
     public LibTypes()
     {
@@ -94,7 +94,7 @@ namespace LJCNetCommon5
     }
 
     // The Copy constructor.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
     public LibTypes(LibTypes items)
     {
@@ -123,7 +123,7 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public LibTypes Clone()
     {
@@ -136,7 +136,7 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {
@@ -150,7 +150,7 @@ namespace LJCNetCommon5
     }
 
     // Serializes the collection
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCSerialize/*'/>
     public void Serialize(string? fileSpec = null)
     {
@@ -214,7 +214,7 @@ namespace LJCNetCommon5
     #region Sort and Search Methods
 
     // Retrieve the collection element.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/SearchName/*'/>
     public string? SearchName(string name)
     {
@@ -230,7 +230,7 @@ namespace LJCNetCommon5
     }
 
     // Sort on Name.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/SortName/*'/>
     public void SortName()
     {

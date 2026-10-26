@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace LJCNetCommon5
 {
   // Represents a collection of LJCDataColumn objects.
-  /// <include file='Doc/ProjectDataColumns.xml'
+  /// <include file='Doc/DataColumns.xml'
   ///  path='members/LJCDataColumns/*'/>
   [XmlRoot("LJCDataColumns")]
   public class LJCDataColumns : List<LJCDataColumn>
@@ -14,7 +14,7 @@ namespace LJCNetCommon5
     #region Static Methods
 
     // Deserializes from the specified XML file.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
     public static LJCDataColumns? LJCDeserialize(string? fileSpec = null)
     {
@@ -279,7 +279,7 @@ namespace LJCNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public LJCDataColumns()
     {
@@ -288,7 +288,7 @@ namespace LJCNetCommon5
     }
 
     // Initializes an object from the supplied items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
     public LJCDataColumns(LJCDataColumns items)
     {
@@ -305,7 +305,7 @@ namespace LJCNetCommon5
     #region Collection Methods
 
     // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public LJCDataColumns Clone()
     {
@@ -322,7 +322,7 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems/*'/>
     public bool HasItems()
     {
@@ -434,7 +434,7 @@ namespace LJCNetCommon5
     }
 
     // Serializes the collection
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCSerialize/*'/>
     public void LJCSerialize(string? fileSpec = null)
     {

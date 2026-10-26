@@ -1,20 +1,20 @@
 ﻿// Copyright(c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// CommonDataTypes.cs
+// CommonKeywords.cs
 using System.Collections;
 using System.Xml.Serialization;
 
 namespace LJCNetCommon5
 {
-  // Represents a collection of Common Data Types.
-  /// <include file='Doc/ProjectCommonDataTypes.xml'
-  ///  path='members/LJCDeserialize/*'/>
-  public class CommonDataTypes : IEnumerable<string>
+  /// <summary>Represents a collection of Common Key Words.</summary>
+  /// <include file='Doc/CommonKeywords.xml'
+  ///  path='members/CommonKeywords/*'/>
+  public class CommonKeywords : IEnumerable<string>
   {
     #region Static Methods
 
     // Deserializes from the specified XML file.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
     public static List<string> Deserialize(string? fileSpec = null)
     {
@@ -31,21 +31,27 @@ namespace LJCNetCommon5
       }
       else
       {
-        // The default list of common Data Types.
+        // The default list of common Keywords.
         retValue =
         [
-          "bool",
-          "Boolean",
-          "int",
-          "Int16",
-          "Int32",
-          "object",
-          "Object",
-          "short",
-          "string",
-          "String",
-          "var",
-          "void"
+          "break",
+          "case",
+          "else",
+          "false",
+          "for",
+          "foreach",
+          "get",
+          "if",
+          "in",
+          "namespace",
+          "new",
+          "null",
+          "return",
+          "set",
+          "switch",
+          "true",
+          "using",
+          "while"
         ];
         LJC.XmlSerialize(typeof(List<string>), retValue, null, fileSpec
           , RootName);
@@ -59,9 +65,9 @@ namespace LJCNetCommon5
     }
 
     // Checks if the collection has items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems1/*'/>
-    public static bool HasItems(CommonDataTypes collection)
+    public static bool HasItems(CommonKeywords collection)
     {
       bool retValue = false;
 
@@ -76,37 +82,36 @@ namespace LJCNetCommon5
     #region Properties
 
     // Gets the Default File Name.
-    /// <include file='Doc/CommonDataTypes.xml'
+    /// <include file='Doc/CommonKeywords.xml'
     ///  path='members/DefaultFileName/*'/>
     public static string DefaultFileName
     {
-      get => @"Keywords\CommonDataTypes.xml";
+      get => @"Keywords\CommonKeywords.xml";
     }
     #endregion
 
     #region Class Data
 
     private int mPrevCount;
-    private const string RootName = "CommonDataTypes";
+    private const string RootName = "CommonKeywords";
     #endregion
 
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/DefaultConstructor/*'/>
-    public CommonDataTypes()
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
+    public CommonKeywords()
     {
       Items = [];
       mPrevCount = -1;
     }
 
     // The Copy constructor.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='members/CopyConstructor/*'/>
-    public CommonDataTypes(CommonDataTypes items)
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
+    ///  path='members/ConstructorCopy/*'/>
+    public CommonKeywords(CommonKeywords items) : this()
     {
-      Items = [];
       if (HasItems(items))
       {
         foreach (var item in items)
@@ -120,7 +125,7 @@ namespace LJCNetCommon5
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include file='Doc/CommonDataTypes.xml'
+    /// <include file='Doc/CommonKeywords.xml'
     ///  path='members/Add/*'/>
     public void Add(string item)
     {
@@ -131,16 +136,20 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
-    public CommonDataTypes? Clone()
+    public CommonKeywords Clone()
     {
-      CommonDataTypes retValue = MemberwiseClone() as CommonDataTypes;
+      var retValue = new CommonKeywords();
+      foreach (string keyword in this)
+      {
+        retValue.Add(keyword);
+      }
       return retValue;
     }
 
     // Checks if the collection has items.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {
@@ -154,7 +163,7 @@ namespace LJCNetCommon5
     }
 
     // Serializes the collection
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCSerialize/*'/>
     public void Serialize(string? fileSpec = null)
     {
@@ -170,7 +179,7 @@ namespace LJCNetCommon5
     #region IEnumerable Methods and Properties
 
     // The Collection count.
-    /// <include file='Doc/CommonDataTypes.xml'
+    /// <include file='Doc/CommonKeywords.xml'
     ///  path='members/Count/*'/>
     public int Count
     {
@@ -178,7 +187,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the Collection Enumerator.
-    /// <include file='Doc/CommonDataTypes.xml'
+    /// <include file='Doc/CommonKeywords.xml'
     ///  path='members/GetEnumerator/*'/>
     public IEnumerator<string> GetEnumerator()
     {
@@ -192,13 +201,13 @@ namespace LJCNetCommon5
     }
 
     // The KeyItem items.
-    /// <include file='Doc/CommonDataTypes.xml'
+    /// <include file='Doc/CommonKeywords.xml'
     ///  path='members/Items/*'/>
     [XmlArray(RootName)]
     public List<string> Items { get; set; }
 
     // Gets the item by index value.
-    /// <include file='Doc/CommonDataTypes.xml'
+    /// <include file='Doc/CommonKeywords.xml'
     ///  path='members/Indexer/*'/>
     public string? this[int index]
     {
@@ -218,7 +227,7 @@ namespace LJCNetCommon5
     #region Sort and Search Methods
 
     // Retrieve the collection element.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/SearchName/*'/>
     public string? SearchName(string name)
     {
@@ -234,7 +243,7 @@ namespace LJCNetCommon5
     }
 
     // Sort on Name.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/SortName/*'/>
     public void SortName()
     {

@@ -7,15 +7,15 @@ using System.Text;
 namespace LJCNetCommon5
 {
   // Provides Assembly Reflection methods
-  /// <include file='Doc/ProjectAssemblyReflect.xml'
+  /// <include file='Doc/AssemblyReflect.xml'
   ///  path='members/LJCAssemblyReflect/*'/>
-  /// <group name='static">Static</group>
-  /// <group name='constructor">Constructors</group>
-  /// <group name='method">Methods</group>
-  /// <group name='reflectionProperty">Set Reflection Properties</group>
-  /// <group name='syntax">Get Syntax</group>
-  /// <group name='check">Check Type</group>
-  /// <group name='properties">Properties</group>
+  /// <group name="static">Static</group>
+  /// <group name="constructor">Constructors</group>
+  /// <group name="method">Methods</group>
+  /// <group name="reflectionProperty">Set Reflection Properties</group>
+  /// <group name="syntax">Get Syntax</group>
+  /// <group name="check">Check Type</group>
+  /// <group name="properties">Properties</group>
   public class LJCAssemblyReflect
   {
     #region Properties
@@ -90,7 +90,7 @@ namespace LJCNetCommon5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/DefaultConstructor/*'/>
     /// <parentGroup>constructor</parentGroup>
     public LJCAssemblyReflect()
@@ -99,7 +99,7 @@ namespace LJCNetCommon5
     }
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clear/*'/>
     /// <parentGroup>constructor</parentGroup>
     public void Clear()

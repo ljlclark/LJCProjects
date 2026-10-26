@@ -5,7 +5,7 @@
 namespace LJCNetCommon5
 {
   // Represents the text state.
-  /// <include file="Doc/ProjectTextState.xml"
+  /// <include file="Doc/TextState.xml"
   ///  path="members/LJCTextState/*"/>
   public class LJCTextState
   {

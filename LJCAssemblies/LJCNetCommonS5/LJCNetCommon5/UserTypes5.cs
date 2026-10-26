@@ -5,7 +5,7 @@
 namespace LJCNetCommon5
 {
   // Represents a collection of User Type names.
-  /// <include file='Doc/ProjectUserTypes.xml'
+  /// <include file='Doc/UserTypes.xml'
   ///  path='members/UserTypes/*'/>
   public class UserTypes : List<string>
   {
@@ -18,7 +18,7 @@ namespace LJCNetCommon5
     #region Methods
 
     // Retrieve the collection element by name.
-    /// <include file='../../LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCSearchName/*'/>
     public string? LJCSearchName(string name)
     {

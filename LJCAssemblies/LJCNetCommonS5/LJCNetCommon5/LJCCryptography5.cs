@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 namespace LJCNetCommon5
 {
   // Provides methods to encrypt and decrypt data in memory.
-  /// <include file='Doc/ProjectCryptography.xml'
+  /// <include file='Doc/Cryptography.xml'
   ///  path='members/LJCCryptography/*'/>
   public class LJCCryptography
   {
@@ -63,7 +63,7 @@ namespace LJCNetCommon5
     #region Constructors
 
     // Initializes a new instance of the MemoryCrypto class.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public LJCCryptography()
     {

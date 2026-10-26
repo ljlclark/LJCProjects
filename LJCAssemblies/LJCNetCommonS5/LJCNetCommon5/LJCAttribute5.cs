@@ -5,10 +5,10 @@
 namespace LJCNetCommon5
 {
   // Represents an HTML or XML element attribute.
-  /// <include file='Doc/ProjectAttribute.xml'
+  /// <include file='Doc/Attribute.xml'
   ///  path='members/LJCAttribute/*'/>
-  /// <group name='constructor">Constructor</group>
-  /// <group name='properties">Properties</group>
+  /// <group name="constructor">Constructor</group>
+  /// <group name="properties">Properties</group>
   public class LJCAttribute
   {
     #region Constructor Methods

@@ -15,8 +15,13 @@
     <summary>
       Initializes an object instance.
     </summary>
-    <param name="className">The Class name.</param>
   </Constructor>
+  <ParamConstructor>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="className">The Class name.</param>
+  </ParamConstructor>
   
   <!-- Data Class Methods -->
   <ToString>

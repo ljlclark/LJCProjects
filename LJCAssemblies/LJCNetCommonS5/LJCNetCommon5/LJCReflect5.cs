@@ -6,7 +6,7 @@ using System.Reflection;
 namespace LJCNetCommon5
 {
   // Provides object property reflection capabilities. (D)
-  /// <include file='Doc/ProjectReflect.xml'
+  /// <include file='Doc/Reflect.xml'
   ///  path='members/LJCReflect/*'/>
   public class LJCReflect
   {

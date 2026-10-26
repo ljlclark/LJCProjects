@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- Parser.xml -->
+<members>
+  <!-- Class -->
+  <LJCParser>
+    <summary>
+      Contains parsing related methods.
+    </summary>
+  </LJCParser>
+
+  <!-- Properties -->
+  <BeginIndex>
+    The delimited string begin index.
+  </BeginIndex>
+  <BeginIndex>
+    The delimited string end index.
+  </BeginIndex>
+  <StartIndex>
+    The parsing start index.
+  </StartIndex>
+  
+  <!-- Constructors -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  
+  <!--  Methods -->
+  <DelimitedString>
+    <summary>
+      Gets a delimited string.
+    </summary>
+    <param name="text"></param>
+    <param name="beginDelimiter"></param>
+    <param name="endDelimiter"></param>
+  </DelimitedString>
+  <FindTag>
+    <summary>
+      Finds a tag in a text value.
+    </summary>
+    <param name="text"></param>
+    <param name="tagName"></param>
+  </FindTag>
+  <RemoveSection>
+    <summary>
+      Removes a section from a text value.
+    </summary>
+    <param name="text"></param>
+    <param name="beginIndex"></param>
+    <param name="endIndex"></param>
+  </RemoveSection>
+  <RemoveTags>
+    <summary>
+      Removes tags from a text value.
+    </summary>
+    <param name="text"></param>
+  </RemoveTags>
+  <Selection>
+    <summary>
+      Retrieve the selection string.
+    </summary>
+    <param name="text"></param>
+  </Selection>
+  <SelectionLength>
+    <summary>
+      Retrieve the selection length.
+    </summary>
+  </SelectionLength>
+  <StringWithDelimiters>
+    <summary>
+      Gets the string including the supplied delimiters.
+    </summary>
+    <param name="text"></param>
+    <param name="beginDelimiter"></param>
+    <param name="endDelimiter"></param>
+  </StringWithDelimiters>
+</members>
