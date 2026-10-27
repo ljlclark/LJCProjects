@@ -3,6 +3,6 @@ echo Licensed under the MIT License.
 rem BuildDataAccessConfigS5.cmd
 call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat"
 
-call UpdateDataAccessConfigS5.cmd nopause
-msbuild LJCDataAccessConfigS5.sln -t:rebuild
+call UpdateDBConfigS5.cmd nopause
+msbuild LJCDBConfigS5.sln -t:rebuild
 pause

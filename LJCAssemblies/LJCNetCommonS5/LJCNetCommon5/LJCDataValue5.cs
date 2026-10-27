@@ -105,9 +105,6 @@ namespace LJCNetCommon5
       }
     }
     private object? _OriginalValue;
-    #endregion
-
-    #region Class Data
 
     // The DataTypeName column name.
     /// <include file='Doc/DataValue.xml'

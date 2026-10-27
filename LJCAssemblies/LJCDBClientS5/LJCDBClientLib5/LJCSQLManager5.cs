@@ -283,7 +283,7 @@ namespace LJCDBClientLib5
       LJCDataColumns? retValue = null;
 
       string sql = $"select * from {TableName}";
-      var dataTable = mDataAccess.GetSchemaOnly(sql);
+      var dataTable = mDataAccess.GetSchema(sql);
       if (dataTable != null)
       {
         var dbColumns = LJCTableColumns.Clone(dataTable.Columns);

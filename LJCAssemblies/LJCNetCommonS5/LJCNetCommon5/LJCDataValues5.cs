@@ -144,9 +144,6 @@ namespace LJCNetCommon5
         return retValue;
       }
     }
-    #endregion
-
-    #region Class Data
 
     private bool _IsPendingSort;
     private int _PrevCount;
@@ -395,6 +392,18 @@ namespace LJCNetCommon5
         }
       }
       return retValue;
+    }
+
+    // Removes the item with the supplied property name.
+    /// <include file='Doc/DataValues.xml'
+    ///  path='members/LJCRemove/*'/>
+    public void LJCRemove(string propertyName)
+    {
+      var dataValue = this[propertyName];
+      if (dataValue != null)
+      {
+        Remove(dataValue);
+      }
     }
 
     // Sorts on the current key columns.
