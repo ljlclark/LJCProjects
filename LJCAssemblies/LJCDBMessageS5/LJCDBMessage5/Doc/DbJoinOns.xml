@@ -31,6 +31,13 @@
     <param name="items"></param>
   </CopyConstructor>
   
+  <!-- Data Class Methods -->
+  <Clone>
+    <summary>
+      Creates and returns a clone of the object.
+    </summary>
+  </Clone>
+
   <!-- Collection Methods -->
   <Add>
     <summary>
@@ -40,9 +47,4 @@
     <param name="toColumnName">The 'To' column name.</param>
     <param name="joinOperator">The join operator.</param>
   </Add>
-  <Clone>
-    <summary>
-      Creates and returns a clone of the object.
-    </summary>
-  </Clone>
 </members>

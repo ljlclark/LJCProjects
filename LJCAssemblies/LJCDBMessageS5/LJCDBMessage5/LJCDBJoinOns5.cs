@@ -13,14 +13,14 @@ namespace LJCDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/DefaultConstructor/*'/>
     public LJCDBJoinOns()
     {
     }
 
     // The Copy constructor.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/CopyConstructor/*'/>
     public LJCDBJoinOns(LJCDBJoinOns items)
     {
@@ -31,6 +31,26 @@ namespace LJCDBMessage5
           Add(new LJCDBJoinOn(item));
         }
       }
+    }
+    #endregion
+
+    #region Data Class Methods
+
+    // Creates and returns a clone of the object.
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
+    ///  path='members/Clone/*'/>
+    public LJCDBJoinOns Clone()
+    {
+      var retValue = new LJCDBJoinOns();
+      foreach (LJCDBJoinOn item in this)
+      {
+        var clone = item.Clone();
+        if (clone != null)
+        {
+          retValue.Add(clone);
+        }
+      }
+      return retValue;
     }
     #endregion
 
@@ -51,23 +71,6 @@ namespace LJCDBMessage5
         JoinOnOperator = joinOperator
       };
       Add(retValue);
-      return retValue;
-    }
-
-    // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/Clone/*'/>
-    public LJCDBJoinOns Clone()
-    {
-      var retValue = new LJCDBJoinOns();
-      foreach (LJCDBJoinOn item in this)
-      {
-        var clone = item.Clone();
-        if (clone != null)
-        {
-          retValue.Add(clone);
-        }
-      }
       return retValue;
     }
     #endregion

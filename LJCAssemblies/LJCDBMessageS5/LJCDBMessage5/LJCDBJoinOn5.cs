@@ -61,7 +61,7 @@ namespace LJCDBMessage5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
     public LJCDBJoinOn()
     {
@@ -74,7 +74,7 @@ namespace LJCDBMessage5
     }
 
     // The Copy constructor.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/CopyConstructor/*'/>
     public LJCDBJoinOn(LJCDBJoinOn item)
     {
@@ -89,10 +89,10 @@ namespace LJCDBMessage5
     }
     #endregion
 
-    #region Methods
+    #region Data Class Methods
 
     // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
     public LJCDBJoinOn? Clone()
     {

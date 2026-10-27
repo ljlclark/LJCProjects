@@ -95,6 +95,8 @@ namespace LJCDBMessage5
     }
     #endregion
 
+    #region Data Class Methods
+
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
     ///  path='members/Clone/*'/>
@@ -103,5 +105,6 @@ namespace LJCDBMessage5
       LJCDBRow? retValue = MemberwiseClone() as LJCDBRow;
       return retValue;
     }
+    #endregion
   }
 }

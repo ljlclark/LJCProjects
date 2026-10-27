@@ -49,7 +49,7 @@
     <param name="item"></param>
   </CopyConstructor>
   
-  <!-- Methods -->
+  <!-- Data Class Methods -->
   <Clone>
     <summary>
       Creates and returns a clone of the object.

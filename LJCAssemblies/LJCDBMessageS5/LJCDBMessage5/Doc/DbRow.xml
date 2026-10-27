@@ -51,6 +51,8 @@
     </summary>
     <param name="items"></param>
   </CopyConstructor>
+  
+  <!-- Data Class Methods -->
   <Clone>
     <summary>
       Creates and returns a clone of the object.

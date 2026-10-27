@@ -54,6 +54,13 @@
     <param name="items"></param>
   </CopyConstructor>
   
+  <!-- Data Class Methods -->
+  <Clone>
+    <summary>
+      Clones the structure of the object.
+    </summary>
+  </Clone>
+
   <!-- Collection Methods -->
   <Add>
     <summary>
@@ -61,11 +68,6 @@
     </summary>
     <param name="dataValues">The item object.</param>
   </Add>
-  <Clone>
-    <summary>
-      Clones the structure of the object.
-    </summary>
-  </Clone>
   <HasItems>
     <summary>
       Checks if the collection has items.

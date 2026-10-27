@@ -66,25 +66,7 @@ namespace LJCDBMessage5
     }
     #endregion
 
-    #region Collection Methods
-
-    // Adds the supplied object.
-    /// <include file='Doc/DbRows.xml'
-    ///  path='members/Add/*'/>
-    public LJCDBRow? Add(LJCDataValues dataValues)
-    {
-      LJCDBRow? retValue = null;
-
-      if (LJC.HasListItems(dataValues))
-      {
-        retValue = new LJCDBRow()
-        {
-          Values = [.. dataValues]
-        };
-        Add(retValue);
-      }
-      return retValue;
-    }
+    #region Data Class Methods
 
     // Clones the structure of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
@@ -102,6 +84,27 @@ namespace LJCDBMessage5
             retValue.Add(clone);
           }
         }
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Collection Methods
+
+    // Adds the supplied object.
+    /// <include file='Doc/DbRows.xml'
+    ///  path='members/Add/*'/>
+    public LJCDBRow? Add(LJCDataValues dataValues)
+    {
+      LJCDBRow? retValue = null;
+
+      if (LJC.HasListItems(dataValues))
+      {
+        retValue = new LJCDBRow()
+        {
+          Values = [.. dataValues]
+        };
+        Add(retValue);
       }
       return retValue;
     }
