@@ -9,16 +9,7 @@
       Represents an HTML or XML element attribute.
     </summary>
   </LJCAttribute>
-  
-  <!-- Constructors -->
-  <Constructor>
-    <summary>
-      Initializes an object instance.
-    </summary>
-    <param name="name">The attribute name.</param>
-    <param name="value">The attribute value.</param>
-  </Constructor>
-  
+
   <!-- Properties -->
   <Name>
     <summary>
@@ -30,4 +21,13 @@
       Gets or sets the attribute value.
     </summary>
   </Value>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+    <param name="name">The attribute name.</param>
+    <param name="value">The attribute value.</param>
+  </Constructor>
 </members>

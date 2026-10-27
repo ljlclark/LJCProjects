@@ -10,7 +10,7 @@ namespace LJCNetCommon5
   /// <group name="collection">Collection</group>
   public class LJCAttributes : List<LJCAttribute>
   {
-    #region Collection Methods
+    #region Collection Data Methods
 
     // Creates and adds an Attribute.
     /// <include file='Doc/Attributes.xml'

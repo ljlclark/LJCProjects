@@ -75,6 +75,36 @@
   </CopyConstructor>
   
   <!-- Collection Methods -->
+  <LJCChanged>
+    <summary>
+      Gets a collection of changed columns.
+    </summary>
+    <returns>The changed columns list.</returns>
+  </LJCChanged>
+  <LJCClearChanged>
+    <summary>
+      Sets the IsChanged value to false for all elements in the collection.
+    </summary>
+  </LJCClearChanged>
+  <LJCColumns>
+    <summary>
+      Returns a collection of columns that match the supplied list.
+    </summary>
+    <param name="propertyNames">The column property names.</param>
+    <returns>The created object.</returns>
+  </LJCColumns>
+  <LJCKeyPropertyNames>
+    <summary>
+      Gets a list of property names from the unique keys.
+    </summary>
+  </LJCKeyPropertyNames>
+  <LJCPropertyNames>
+    <summary>
+      Gets a list of property names from the collection items.
+    </summary>
+  </LJCPropertyNames>
+
+  <!-- Collection Data Methods -->
   <Add1>
     <summary>
       Adds the object element to the collection
@@ -119,112 +149,38 @@
       </code>
     </example>
   </Add3>
-  <LJCAddPropertyAs>
+  <LJCGetUnique>
     <summary>
-      Creates the
-      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
-      from the supplied values and adds to the collection.
-      (R)
+      Gets the column that matches the key columns.
     </summary>
-    <param name="propertyName">The property name.</param>
-    <param name="caption">The caption value.</param>
-    <param name="renameAs">The rename value.</param>
-    <param name="dataTypeName">The data type name.</param>
-    <returns>
-      The created
-      &lt;span class="userType"&gt;DbColumn&lt;/span&gt; object.
-    </returns>
-    <remarks>
-      Accepts the property name and sets the column name the same as the
-      property name. If the renameAs value is null, then it is also set the
-      same as the property name.
-    </remarks>
-  </LJCAddPropertyAs>
-  <LJCGetColumn>
+    <param name="keys"></param>
+  </LJCGetUnique>
+  <LJCRemove>
     <summary>
-      Returns a column by property name.
+      Removes the item with the supplied property name.
     </summary>
-     <param name="propertyName">The property name.</param>
-    <returns>A reference to the matching column.</returns>
-  </LJCGetColumn>
-  <LJCGetColumns>
+    <param name="propertyName"></param>
+  </LJCRemove>
+  <LJCSetData>
     <summary>
-      Returns a set of columns that match the supplied list.
+      Add or Update.
     </summary>
-    <param name="propertyNames">The column property names.</param>
-    <returns>The created object.</returns>
-  </LJCGetColumns>
-  <LJCGetColumns2>
+    <param name="dataColumn"></param>
+  </LJCSetData>
+  <LJCSort>
     <summary>
-      Configure the Grid Columns from the Data object properties.
+      Sorts on the current key columns.
     </summary>
-    <param name="dataObject">The Data object.</param>
-    <param name="propertyNames">The included columns.</param>
-    <example>
-      <code xml:space="preserve">
-        // See the DataManager setup code on the ResultGridData class page.
+    <param name="keys"></param>
+  </LJCSort>
 
-        using LJCDBClientLib;
-        using LJCGridDataLib;
-
-        // Configure the Grid Columns from the Data object properties.
-        private DbColumns SetGridColumns2(DataManager dataManager)
-        {
-          DbColumns retValue;
-
-          var dataObject = new ADataObject();
-
-          // Create the Grid columns.
-          var resultGridData = new ResultGridData(LJCDataGridName);
-          retValue = resultGridData.GetGridColumns(dataObject);
-          return retValue;
-        }
-      </code>
-    </example>
-  </LJCGetColumns2>
-  <LJCRemoveColumn>
+  <!-- Other Methods -->
+  <LJCSetCaptions>
     <summary>
-      Removes a grid column.
+      Sets caption properties for supplied columns from current columns.
     </summary>
-    <param name="columnName">The column name.</param>
-  </LJCRemoveColumn>
-
-  <!-- Data Methods -->
-  <LJCClearChanged>
-    <summary>
-      Sets the IsChanged value to false for all elements in the collection.
-    </summary>
-  </LJCClearChanged>
-  <LJCGetChanged>
-    <summary>
-      Gets a collection of changed columns.
-    </summary>
-    <returns>The changed columns list.</returns>
-  </LJCGetChanged>
-
-  <!-- Search and Sort Methods -->
-  <LJCSearchPropertyName>
-    <summary>
-      Finds and returns the column that contains the supplied property name.
-    </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>A reference to the column object.</returns>
-  </LJCSearchPropertyName>
-  <LJCSearchRenameAs>
-    <summary>
-      Finds and returns the column that contains the supplied RenameAs value.
-    </summary>
-    <param name="renameAs">The RenameAs value.</param>
-    <returns>A reference to the column object.</returns>
-  </LJCSearchRenameAs>
-
-  <!-- Other Public Methods -->
-  <LJCSetColumnCaptions>
-    <summary>
-      Sets the caption properties.
-    </summary>
-    <param name="dataColumns">The target object.</param>
-  </LJCSetColumnCaptions>
+    <param name="dataColumns"></param>
+  </LJCSetCaptions>
   <LJCMapNames>
     <summary>
       Maps the column property and rename values.

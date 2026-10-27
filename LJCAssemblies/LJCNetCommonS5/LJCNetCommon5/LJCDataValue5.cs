@@ -76,7 +76,7 @@ namespace LJCNetCommon5
     private object? _Value;
     #endregion
 
-    #region Additional Properties
+    #region Properties
 
     // Gets or sets the changed indicator.
     /// <include file='Doc/DataValue.xml'
@@ -167,7 +167,7 @@ namespace LJCNetCommon5
     }
     #endregion
 
-    #region Data Methods
+    #region Data Class Methods
 
     // Creates and returns a clone of the object.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'

@@ -47,7 +47,7 @@ namespace LJCNetCommon5
     }
     #endregion
 
-    #region IEnumerable Properties
+    #region Properties
 
     // The Collection count.
     /// <include file='Doc/KeyItems.xml'
@@ -56,6 +56,12 @@ namespace LJCNetCommon5
     {
       get => Items.Count;
     }
+
+    // The KeyItem items.
+    /// <include file='Doc/KeyItems.xml'
+    ///  path='members/Items/*'/>
+    [XmlArray(RootName)]
+    public List<LJCKeyItem> Items { get; set; }
 
     // Gets the item by index value.
     /// <include file='Doc/KeyItems.xml'
@@ -74,12 +80,6 @@ namespace LJCNetCommon5
         return retValue;
       }
     }
-
-    // The KeyItem items.
-    /// <include file='Doc/KeyItems.xml'
-    ///  path='members/Items/*'/>
-    [XmlArray(RootName)]
-    public List<LJCKeyItem> Items { get; set; }
     #endregion
 
     #region Class Data
@@ -88,7 +88,7 @@ namespace LJCNetCommon5
     private const string RootName = "KeyItems";
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
@@ -115,6 +115,40 @@ namespace LJCNetCommon5
     #endregion
 
     #region Collection Methods
+
+    // Creates and returns a clone of the object.
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
+    ///  path='members/Clone/*'/>
+    public LJCKeyItems Clone()
+    {
+      var retValue = new LJCKeyItems();
+      foreach (LJCKeyItem keyItem in this)
+      {
+        var newKeyItem = keyItem.Clone();
+        if (newKeyItem != null)
+        {
+          retValue.Add(newKeyItem);
+        }
+      }
+      return retValue;
+    }
+
+    // Checks if the collection has items.
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
+    ///  path='members/HasItems2/*'/>
+    public bool HasItems()
+    {
+      bool retValue = false;
+
+      if (Count > 0)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Collection Data Methods
 
     // Adds the specified object.
     /// <include file='Doc/KeyItems.xml'
@@ -161,37 +195,6 @@ namespace LJCNetCommon5
           Add(item);
         }
       }
-    }
-
-    // Creates and returns a clone of the object.
-    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
-    ///  path='members/Clone/*'/>
-    public LJCKeyItems Clone()
-    {
-      var retValue = new LJCKeyItems();
-      foreach (LJCKeyItem keyItem in this)
-      {
-        var newKeyItem = keyItem.Clone();
-        if (newKeyItem != null)
-        {
-          retValue.Add(newKeyItem);
-        }
-      }
-      return retValue;
-    }
-
-    // Checks if the collection has items.
-    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
-    ///  path='members/HasItems2/*'/>
-    public bool HasItems()
-    {
-      bool retValue = false;
-
-      if (Count > 0)
-      {
-        retValue = true;
-      }
-      return retValue;
     }
 
     // Retrieves an item by property name.

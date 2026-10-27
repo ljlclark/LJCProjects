@@ -9,12 +9,6 @@
       Initializes an object instance.
     </summary>
   </Constructor>
-  <CopyConstructor>
-    <summary>
-      The Copy constructor.
-    </summary>
-    <param name="item">The source item.</param>
-  </CopyConstructor>
   <ParamConstructor>
     <summary>
       Initializes an object instance with the supplied values.
@@ -23,8 +17,19 @@
     <param name="value">The item value.</param>
     <param name="dataTypeName">The DataType name.</param>
   </ParamConstructor>
+  <CopyConstructor>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="item">The source item.</param>
+  </CopyConstructor>
   
-  <!-- Conversions -->
+  <!-- Data Class Methods -->
+  <FormatValue>
+    <summary>
+      Formats the column value for the SQL string.
+    </summary>
+  </FormatValue>  
   <CreateColumn>
     <summary>
       Creates a combined

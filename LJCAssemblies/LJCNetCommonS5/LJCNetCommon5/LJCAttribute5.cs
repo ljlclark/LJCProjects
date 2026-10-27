@@ -11,19 +11,6 @@ namespace LJCNetCommon5
   /// <group name="properties">Properties</group>
   public class LJCAttribute
   {
-    #region Constructor Methods
-
-    // Initializes an object instance.
-    /// <include file='Doc/Attribute.xml'
-    ///  path='members/Constructor/*'/>
-    /// <parentGroup>constructor</parentGroup>
-    public LJCAttribute(string name, string? value = null)
-    {
-      Name = name;
-      Value = value;
-    }
-    #endregion
-
     #region Properties
 
     // Gets or sets the attribute name.
@@ -47,6 +34,19 @@ namespace LJCNetCommon5
       set => mValue = value?.Trim();
     }
     private string? mValue;
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='Doc/Attribute.xml'
+    ///  path='members/Constructor/*'/>
+    /// <parentGroup>constructor</parentGroup>
+    public LJCAttribute(string name, string? value = null)
+    {
+      Name = name;
+      Value = value;
+    }
     #endregion
   }
 }

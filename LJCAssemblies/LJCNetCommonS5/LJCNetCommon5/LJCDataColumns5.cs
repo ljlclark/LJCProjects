@@ -366,7 +366,7 @@ namespace LJCNetCommon5
       }
     }
 
-    // Gets a collection of items that match a list of property names.
+    // Gets a collection of items that match the supplied list.
     /// <include file='Doc/DataColumns.xml'
     ///  path='members/LJCColumns/*'/>
     public LJCDataColumns? LJCColumns(List<string> propertyNames)
@@ -609,7 +609,7 @@ namespace LJCNetCommon5
     }
     #endregion
 
-    #region Other Public Methods
+    #region Other Methods
 
     // Sets caption properties for supplied columns from current columns.
     /// <include file='Doc/DataColumns.xml'

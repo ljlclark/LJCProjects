@@ -14,19 +14,33 @@
       the collection object: values["PropertyName"];
     </remarks>
   </LJCDataValues>
-  
-  <!-- Collection Methods -->
-  <Add>
-    <summary>
-      Creates the Object from the arguments and adds it to the collection.
-    </summary>
-    <param name="propertyName">The PropertyName value.</param>
-    <param name="value">The item value.</param>
-    <param name="dataTypeName">The DataType name.</param>
-    <returns>A reference to the added item.</returns>
-  </Add>
 
-  <!-- Item Methods -->
+  <!-- Properties -->
+  <LJCDefaultFileName>
+    <summary>
+      Gets the Default File Name.
+    </summary>
+  </LJCDefaultFileName>
+  <LJCKeys>
+    <summary>
+      Gets or sets the key columns.
+    </summary>
+  </LJCKeys>
+  <Item>
+    <summary>
+      The column for the specified property name.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The selected DbValue object.</returns>
+  </Item>
+
+  <!-- Collection Methods -->
+  <LJCChanged>
+    <summary>
+      Gets a collection of changed columns.
+    </summary>
+    <returns>The changed columns list.</returns>
+  </LJCChanged>
   <LJCClearChanged>
     <summary>
       Sets the IsChanged value to false for all elements in the collection.
@@ -45,38 +59,148 @@
       &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
     </returns>
   </LJCCreateColumns>
-  <LJCGetChanged>
+  <LJCKeyPropertyNames>
     <summary>
-      Gets a collection of changed columns.
+      Gets a list of property names from the collection items.
     </summary>
-    <returns>The changed columns list.</returns>
-  </LJCGetChanged>
- 
-  <!-- Search and Sort Methods -->
-  <LJCSearchPropertyName>
+    <param name="keys"></param>
+  </LJCKeyPropertyNames>
+  <LJCPropertyNames>
     <summary>
-      Finds and returns the object that matches the supplied values.
+      Gets a list of property names from the collection items.
     </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>The found DbValue object.</returns>
-  </LJCSearchPropertyName>
+    <param name="dataValues"></param>
+  </LJCPropertyNames>
+
+  <!-- Collection Data Methods -->
+  <Add>
+    <summary>
+      Creates the Object from the arguments and adds it to the collection.
+    </summary>
+    <param name="propertyName">The PropertyName value.</param>
+    <param name="value">The item value.</param>
+    <param name="dataTypeName">The DataType name.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <LJCGetUnique>
+    <summary>
+      Returns the column that matches the key columns.
+    </summary>
+    <param name="keys"></param>
+  </LJCGetUnique>
+  <LJCSort>
+    <summary>
+      Sorts on the current key columns.
+    </summary>
+    <param name="keys"></param>
+  </LJCSort>
   
   <!-- Value Methods -->
+  <LJCBoolean>
+    <summary>
+      Gets the column object value as a bool.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The bool value.</returns>
+  </LJCBoolean>
+  <LJCGetByte>
+    <summary>
+      Gets the column object value as a byte.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The byte value.</returns>
+  </LJCGetByte>
+  <LJCGetChar>
+    <summary>
+      Gets the column object value as a char.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The char value.</returns>
+  </LJCGetChar>
+  <LJCGetDbDateTime>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;DateTime&lt;/span&gt;.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The DateTime value.</returns>
+  </LJCGetDbDateTime>
+  <LJCGetDecimal>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;decimal&lt;/span&gt;
+      value.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The &lt;span class="userType"&gt;Decimal&lt;/span&gt; value.
+    </returns>
+  </LJCGetDecimal>
+  <LJCGetDouble>
+    <summary>
+      Gets the column object value as a double.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The double value.</returns>
+  </LJCGetDouble>
+  <LJCInt16>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;short&lt;/span&gt; int.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The
+      &lt;span class="userType"&gt;short&lt;/span&gt;
+      int value.
+    </returns>
+  </LJCInt16>
+  <LJCInt32>
+    <summary>
+      Gets the column object value as an
+      &lt;span class="userType"&gt;int&lt;/span&gt;.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The &lt;span class="userType"&gt;int&lt;/span&gt;
+      value.
+    </returns>
+  </LJCInt32>
+  <LJCInt64>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;long&lt;/span&gt; int.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The &lt;span class="userType"&gt;long&lt;/span&gt;
+      int value.
+    </returns>
+  </LJCInt64>
+  <LJCGetSingle>
+    <summary>
+      Gets the column object value as a single.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The float value.</returns>
+  </LJCGetSingle>
+  <LJCString>
+    <summary>
+      Gets the string value for the column with the specified name.
+    </summary>
+  </LJCString>
+  <LJCValue>
+    <summary>
+      Gets the string value for the column with the specified name.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The column value.</returns>
+  </LJCValue>
   <LJCSetValue>
     <summary>
-      Sets the object value for the column with the specified name.
+      Sets the value for the column with the specified name.
     </summary>
     <param name="propertyName">The property name.</param>
-    <param name="value">The string value.</param>
-    <returns>The column value.</returns>
+    <param name="value">The column value.</param>
   </LJCSetValue>
-
-  <!-- Properties -->
-  <Item>
-    <summary>
-      The column for the specified property name.
-    </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>The selected DbValue object.</returns>
-  </Item>
 </members>
