@@ -587,7 +587,7 @@ namespace LJCTextDataReader5
     }
     #endregion
 
-    #region IDataRecord Get Data with Index Methods
+    #region IDataRecord Value with Index Methods
 
     // Returns the bool value of the data field at the specified index.
     /// <include file='Doc/TextDataReader.xml'
@@ -759,7 +759,7 @@ namespace LJCTextDataReader5
     }
     #endregion
 
-    #region Additional Index Methods
+    #region Additional Value with Index Methods
 
     // Returns the database DateTime string value of the data field.
     /// <include file='Doc/TextDataReader.xml'
@@ -797,7 +797,7 @@ namespace LJCTextDataReader5
     }
     #endregion
 
-    #region Get Data with Name Overloaded Methods
+    #region Value with Name Methods
 
     // Returns the bool value of the data field with the specified name.
     /// <include file='Doc/TextDataReader.xml'
@@ -955,11 +955,11 @@ namespace LJCTextDataReader5
     }
     #endregion
 
-    #region Additional Name Methods
+    #region Additional Value with Name Overloaded Methods
 
     // Returns the database DateTime string value of the data field.
     /// <include file='Doc/TextDataReader.xml'
-    ///  path='items/GetDBDateString/*'/>
+    ///  path='items/GetDBDateStringN/*'/>
     public string? GetDbDateString(string name)
     {
       var value = this[name];
@@ -969,7 +969,7 @@ namespace LJCTextDataReader5
 
     // Gets the column object value as a DateTime.
     /// <include file='Doc/TextDataReader.xml'
-    ///  path='members/LJCDbDateTime/*'/>
+    ///  path='members/LJCDbDateTimeN/*'/>
     public DateTime GetDbDateTime(string name)
     {
       var value = this[name];
@@ -979,7 +979,7 @@ namespace LJCTextDataReader5
 
     // Gets the trimmed string value.
     /// <include file='Doc/TextDataReader.xml'
-    ///  path='items/GetTrimValueN/*'/>
+    ///  path='items/GetTrimStringN/*'/>
     public string GetTrimString(string name)
     {
       string retValue = "";

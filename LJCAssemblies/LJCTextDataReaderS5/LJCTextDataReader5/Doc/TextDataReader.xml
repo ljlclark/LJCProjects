@@ -1,4 +1,262 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <members>
+  <!--  Value with Index Methods -->
+  <GetBoolean>
+    <summary>
+      Returns the bool value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The bool value.</returns>
+  </GetBoolean>
+  <GetByte>
+    <summary>
+      Returns the byte value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The byte value.</returns>
+  </GetByte>
+  <GetBytes>
+    <summary>
+      Place field bytes into a byte array buffer.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The byte array value.</returns>
+  </GetBytes>
+  <GetChar>
+    <summary>
+      Returns the char value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The character value.</returns>
+  </GetChar>
+  <GetChars>
+    <summary>
+      Place field characters into a character array buffer.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The character array value.</returns>
+  </GetChars>
+  <GetDateTime>
+    <summary>
+      Returns the DateTime value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The DateTime value.</returns>
+  </GetDateTime>
+  <GetDecimal>
+    <summary>
+      Returns the decimal value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The decimal value.</returns>
+  </GetDecimal>
+  <GetDouble>
+    <summary>
+      Returns the double value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The double value.</returns>
+  </GetDouble>
+  <GetFloat>
+    <summary>
+      Returns the float value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The float value.</returns>
+  </GetFloat>
+  <GetGuid>
+    <summary>
+      Returns the Guid value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The GUID value.</returns>
+  </GetGuid>
+  <GetInt16>
+    <summary>
+      Returns the short int value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The short value.</returns>
+  </GetInt16>
+  <GetInt32>
+    <summary>
+      Returns the int value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The integer property value.</returns>
+  </GetInt32>
+  <GetInt64>
+    <summary>
+      Returns the long int value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The long value.</returns>
+  </GetInt64>
+  <GetString>
+    <summary>
+      Returns the string value of the data field with the specified name.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The string value.</returns>
+  </GetString>
+  <GetValue>
+    <summary>
+      Returns the object value of the data field at the specified index.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The object value.</returns>
+  </GetValue>
+
+  <!--  Additional Value with Index Methods -->
+  <GetDbDateString>
+    <summary>
+      Returns the database DateTime string value of the data field.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The database DateTime string value or null if not a valid date/time.</returns>
+  </GetDbDateString>
+  <GetDbDateTime>
+    <summary>
+      Gets the column object value as a DateTime.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The DateTime value.</returns>
+  </GetDbDateTime>
+  <GetTrimString>
+    <summary>
+      Gets the trimmed string value.
+    </summary>
+    <param name="i">The field index..</param>
+    <returns>The trimmed string value.</returns>
+  </GetTrimString>
+
+  <!--  Value with Name Methods -->
+  <GetBooleanN>
+    <summary>
+      Returns the bool value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The bool value.</returns>
+  </GetBooleanN>
+  <GetByteN>
+    <summary>
+      Returns the byte value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The byte value.</returns>
+  </GetByteN>
+  <GetBytesN>
+    <summary>
+      Place field bytes into a byte array buffer.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The byte array value.</returns>
+  </GetBytesN>
+  <GetCharN>
+    <summary>
+      Returns the char value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The character value.</returns>
+  </GetCharN>
+  <GetCharsN>
+    <summary>
+      Place field characters into a character array buffer.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The character array value.</returns>
+  </GetCharsN>
+  <GetDateTimeN>
+    <summary>
+      Returns the DateTime value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The DateTime value.</returns>
+  </GetDateTimeN>
+  <GetDecimalN>
+    <summary>
+      Returns the decimal value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The decimal value.</returns>
+  </GetDecimalN>
+  <GetDoubleN>
+    <summary>
+      Returns the double value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The double value.</returns>
+  </GetDoubleN>
+  <GetFloatN>
+    <summary>
+      Returns the float value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The float value.</returns>
+  </GetFloatN>
+  <GetGuidN>
+    <summary>
+      Returns the Guid value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The GUID value.</returns>
+  </GetGuidN>
+  <GetInt16N>
+    <summary>
+      Returns the short int value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The short value.</returns>
+  </GetInt16N>
+  <GetInt32N>
+    <summary>
+      Returns the int value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The integer property value.</returns>
+  </GetInt32N>
+  <GetInt64N>
+    <summary>
+      Returns the long int value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The long value.</returns>
+  </GetInt64N>
+  <GetStringN>
+    <summary>
+      Returns the string value of the data field with the specified name.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The string value.</returns>
+  </GetStringN>
+  <GetValueN>
+    <summary>
+      Returns the object value of the data field at the specified index.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The object value.</returns>
+  </GetValueN>
   
+  <!--  Additional Value with Name Methods -->
+  <GetDbDateStringN>
+    <summary>
+      Returns the database DateTime string value of the data field.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The database DateTime string value or null if not a valid date/time.</returns>
+  </GetDbDateStringN>
+  <GetDbDateTimeN>
+    <summary>
+      Gets the column object value as a DateTime.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The DateTime value.</returns>
+  </GetDbDateTimeN>
+  <GetTrimStringN>
+    <summary>
+      Gets the trimmed string value.
+    </summary>
+    <param name="name">The field name.</param>
+    <returns>The trimmed string value.</returns>
+  </GetTrimStringN>
 </members>
