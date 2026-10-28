@@ -379,7 +379,7 @@ namespace TestNetCommon5
         { "TestValue", testBytes, "byte" },
       };
       // Test Method
-      var value = dataValues.LJCGetByte("TestValue");
+      var value = dataValues.LJCByte("TestValue");
       // Check Result
       var bytes = new byte[] { value };
       var result = LJC.BytesToText(bytes);
@@ -399,7 +399,7 @@ namespace TestNetCommon5
       };
 
       // Test Method
-      var value = dataValues.LJCGetChar("TestValue");
+      var value = dataValues.LJCChar("TestValue");
 
       var result = value.ToString();
       var compare = "C";
@@ -418,7 +418,7 @@ namespace TestNetCommon5
       };
 
       // Test Method
-      var value = dataValues.LJCGetDbDateTime("TestValue");
+      var value = dataValues.LJCDbDateTime("TestValue");
 
       var result = value.ToShortDateString();
       var compare = "1/1/2026";
@@ -437,7 +437,7 @@ namespace TestNetCommon5
       };
 
       // Test Method
-      var value = dataValues.LJCGetDecimal("TestValue");
+      var value = dataValues.LJCDecimal("TestValue");
 
       var result = value.ToString();
       var compare = "3.14";
@@ -456,7 +456,7 @@ namespace TestNetCommon5
       };
 
       // Test Method
-      var value = dataValues.LJCGetDouble("TestValue");
+      var value = dataValues.LJCDouble("TestValue");
 
       var result = value.ToString();
       var compare = "3.14";
@@ -532,7 +532,7 @@ namespace TestNetCommon5
       };
 
       // Test Method
-      var value = dataValues.LJCGetSingle("TestValue");
+      var value = dataValues.LJCFloat("TestValue");
 
       var result = value.ToString();
       var compare = "3.14";

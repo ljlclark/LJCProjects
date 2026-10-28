@@ -123,14 +123,8 @@ namespace LJCNetCommon5
     ///  path='members/GetBoolean/*'/>
     public bool GetBoolean(string propertyName)
     {
-      bool retVal = default;
-
       var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(bool))
-      {
-        retVal = (bool)value;
-      }
+      var retVal = LJC.GetBoolean(value);
       return retVal;
     }
 
@@ -139,15 +133,19 @@ namespace LJCNetCommon5
     ///  path='members/GetByte/*'/>
     public byte GetByte(string propertyName)
     {
-      byte retVal = default;
-
       var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(byte))
-      {
-        retVal = (byte)value;
-      }
-      return retVal;
+      var retValue = LJC.GetByte(value);
+      return retValue;
+    }
+
+    // Gets the property value as a byte array.
+    /// <include file='Doc/Reflect.xml'
+    ///  path='members/GetBytes/*'/>
+    public byte[] GetBytes(string propertyName)
+    {
+      var value = GetValue(propertyName);
+      var retValue = LJC.GetBytes(value);
+      return retValue;
     }
 
     // Gets the property value as a char.
@@ -155,15 +153,19 @@ namespace LJCNetCommon5
     ///  path='members/GetChar/*'/>
     public char GetChar(string propertyName)
     {
-      char retVal = default;
-
       var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(char))
-      {
-        retVal = (char)value;
-      }
-      return retVal;
+      var retValue = LJC.GetChar(value);
+      return retValue;
+    }
+
+    // Gets the property value as a char array.
+    /// <include file='Doc/Reflect.xml'
+    ///  path='members/GetChars/*'/>
+    public char[] GetChars(string propertyName)
+    {
+      var value = GetValue(propertyName);
+      var retValue = LJC.GetChars(value);
+      return retValue;
     }
 
     // Gets the property value as a DateTime value.
@@ -171,34 +173,9 @@ namespace LJCNetCommon5
     ///  path='members/GetDateTime/*'/>
     public DateTime GetDateTime(string propertyName)
     {
-      DateTime retVal = default;
-
       var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(DateTime))
-      {
-        retVal = Convert.ToDateTime(value);
-      }
-      return retVal;
-    }
-
-    // Gets the property value as a DB date/time string.
-    /// <include file='Doc/Reflect.xml'
-    ///  path='members/GetDbDateString/*'/>
-    public string? GetDbDateString(string propertyName)
-    {
-      string retVal = default;
-
-      if (LJC.HasText(propertyName))
-      {
-        var type = GetPropertyType(propertyName);
-        if (type == typeof(DateTime))
-        {
-          var dateTime = GetDateTime(propertyName);
-          retVal = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
-        }
-      }
-      return retVal;
+      var retValue = LJC.GetDateTime(value);
+      return retValue;
     }
 
     // Gets the property value as a decimal.
@@ -206,15 +183,9 @@ namespace LJCNetCommon5
     ///  path='members/GetDecimal/*'/>
     public decimal GetDecimal(string propertyName)
     {
-      decimal retVal = default;
-
       var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(decimal))
-      {
-        retVal = (decimal)value;
-      }
-      return retVal;
+      var retValue = LJC.GetDecimal(value);
+      return retValue;
     }
 
     // Gets the property value as a double.
@@ -222,15 +193,19 @@ namespace LJCNetCommon5
     ///  path='members/GetDouble/*'/>
     public double GetDouble(string propertyName)
     {
-      double retVal = default;
-
       var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(double))
-      {
-        retVal = (double)value;
-      }
-      return retVal;
+      var retValue = LJC.GetDouble(value);
+      return retValue;
+    }
+
+    // Gets the property value as a float.
+    /// <include file='Doc/Reflect.xml'
+    ///  path='members/GetFloat/*'/>
+    public float GetFloat(string propertyName)
+    {
+      var value = GetValue(propertyName);
+      var retValue = LJC.GetFloat(value);
+      return retValue;
     }
 
     // Gets the property value as a short.
@@ -238,15 +213,9 @@ namespace LJCNetCommon5
     ///  path='members/GetInt16/*'/>
     public short GetInt16(string propertyName)
     {
-      short retVal = default;
-
       var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(short))
-      {
-        retVal = (short)value;
-      }
-      return retVal;
+      short retValue = LJC.GetInt16(value);
+      return retValue;
     }
 
     // Gets the property value as an integer.
@@ -254,15 +223,9 @@ namespace LJCNetCommon5
     ///  path='members/GetInt32/*'/>
     public int GetInt32(string propertyName)
     {
-      int retVal = default;
-
       var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(int))
-      {
-        retVal = (int)value;
-      }
-      return retVal;
+      int retValue = LJC.GetInt32(value);
+      return retValue;
     }
 
     // Gets the property value as a long.
@@ -270,31 +233,9 @@ namespace LJCNetCommon5
     ///  path='members/GetInt64/*'/>
     public long GetInt64(string propertyName)
     {
-      long retVal = default;
-
       var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(long))
-      {
-        retVal = (long)value;
-      }
-      return retVal;
-    }
-
-    // Gets the property value as a float.
-    /// <include file='Doc/Reflect.xml'
-    ///  path='members/GetSingle/*'/>
-    public float GetSingle(string propertyName)
-    {
-      float retVal = default;
-
-      var value = GetValue(propertyName);
-      if (value != null
-        && value.GetType() == typeof(float))
-      {
-        retVal = (float)value;
-      }
-      return retVal;
+      var retValue = LJC.GetInt64(value);
+      return retValue;
     }
 
     // Gets the property value as a string.
@@ -302,11 +243,9 @@ namespace LJCNetCommon5
     ///  path='members/GetString/*'/>
     public string? GetString(string propertyName)
     {
-      string retVal;
-
       var value = GetValue(propertyName);
-      retVal = value?.ToString();
-      return retVal;
+      var retValue = LJC.GetString(value);
+      return retValue;
     }
 
     // Gets the property value as an object using a delegate.
@@ -346,6 +285,29 @@ namespace LJCNetCommon5
           }
         }
       }
+      return retValue;
+    }
+    #endregion
+
+    #region Addition Value Methods
+
+    // Gets the property value as a DB date/time string.
+    /// <include file='Doc/Reflect.xml'
+    ///  path='members/GetDbDateString/*'/>
+    public string? GetDbDateString(string propertyName)
+    {
+      var value = GetValue(propertyName);
+      var retValue = LJC.GetDbDateString(value);
+      return retValue;
+    }
+
+    // Gets the column object value as a DateTime.
+    /// <include file='Doc/DataValues.xml'
+    ///  path='members/GetDbDateTime/*'/>
+    public DateTime GetDbDateTime(string propertyName)
+    {
+      var value = GetValue(propertyName);
+      var retValue = LJC.GetDbDateTime(value);
       return retValue;
     }
 

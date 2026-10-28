@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Text;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace LJCNetCommon5
@@ -396,14 +397,17 @@ namespace LJCNetCommon5
     // Gets a decimal value from an object.
     /// <include file='Doc/LJC.xml'
     ///  path='members/GetBoolean/*'/>
-    public static bool GetBoolean(object value)
+    public static bool GetBoolean(object? value)
     {
       bool retValue = default;
 
-      var type = value.GetType();
-      if (typeof(bool) == type)
+      if (value != null)
       {
-        retValue = Convert.ToBoolean(value);
+        var type = value.GetType();
+        if (typeof(bool) == type)
+        {
+          retValue = Convert.ToBoolean(value);
+        }
       }
       return retValue;
     }
@@ -411,7 +415,7 @@ namespace LJCNetCommon5
     // Gets a byte value from an object.
     /// <include file='Doc/LJC.xml'
     ///  path='members/GetByte/*'/>
-    public static byte GetByte(object value)
+    public static byte GetByte(object? value)
     {
       byte retValue = default;
 
@@ -430,9 +434,9 @@ namespace LJCNetCommon5
     // Gets an array of bytes from an object.
     /// <include file='Doc/LJC.xml'
     ///  path='members/GetBytes/*'/>
-    public static byte[]? GetBytes(object value)
+    public static byte[] GetBytes(object? value)
     {
-      byte[] retValue = default;
+      byte[] retValue = [];
 
       if (value != null)
       {
@@ -448,14 +452,35 @@ namespace LJCNetCommon5
     // Gets a character value from an object.
     /// <include file='Doc/LJC.xml'
     ///  path='members/GetChar/*'/>
-    public static char GetChar(object value)
+    public static char GetChar(object? value)
     {
       char retValue = default;
 
-      var type = value.GetType();
-      if (typeof(char) == type)
+      if (value != null)
       {
-        retValue = Convert.ToChar(value);
+        var type = value.GetType();
+        if (typeof(char) == type)
+        {
+          retValue = Convert.ToChar(value);
+        }
+      }
+      return retValue;
+    }
+
+    // Gets a character array from an object.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetChars/*'/>
+    public static char[] GetChars(object? value)
+    {
+      char[] retValue = [];
+
+      if (value != null)
+      {
+        var type = value.GetType();
+        if (typeof(char[]) == type)
+        {
+          retValue = (char[])value;
+        }
       }
       return retValue;
     }
@@ -463,15 +488,18 @@ namespace LJCNetCommon5
     // Gets a DateTime value from an object.
     /// <include file='Doc/LJC.xml'
     ///  path='members/GetDateTime/*'/>
-    public static DateTime? GetDateTime(object value)
+    public static DateTime GetDateTime(object? value)
     {
-      DateTime? retValue = null;
+      DateTime retValue = DateTime.MinValue;
 
-      var type = value.GetType();
-      //if (typeof(DateTime) == type)
-      if (typeof(string) == type)
+      if (value != null)
       {
-        retValue = Convert.ToDateTime(value);
+        var type = value.GetType();
+        if (typeof(DateTime) == type
+          || typeof(string) == type)
+        {
+          retValue = Convert.ToDateTime(value);
+        }
       }
       return retValue;
     }
@@ -479,18 +507,21 @@ namespace LJCNetCommon5
     // Gets a decimal value from an object.
     /// <include file='Doc/LJC.xml'
     ///  path='members/GetDecimal/*'/>
-    public static decimal GetDecimal(object value)
+    public static decimal GetDecimal(object? value)
     {
       decimal retValue = default;
 
-      var type = value.GetType();
-      if (typeof(decimal) == type
-        || typeof(float) == type
-        || typeof(int) == type
-        || typeof(long) == type
-        || typeof(short) == type)
+      if (value != null)
       {
-        retValue = Convert.ToDecimal(value);
+        var type = value.GetType();
+        if (typeof(decimal) == type
+          || typeof(float) == type
+          || typeof(int) == type
+          || typeof(long) == type
+          || typeof(short) == type)
+        {
+          retValue = Convert.ToDecimal(value);
+        }
       }
       return retValue;
     }
@@ -498,19 +529,62 @@ namespace LJCNetCommon5
     // Gets a decimal value from an object.
     /// <include file='Doc/LJC.xml'
     ///  path='members/GetDouble/*'/>
-    public static double GetDouble(object value)
+    public static double GetDouble(object? value)
     {
       double retValue = default;
 
-      var type = value.GetType();
-      if (typeof(double) == type
-        || typeof(decimal) == type
-        || typeof(float) == type
-        || typeof(int) == type
-        || typeof(long) == type
-        || typeof(short) == type)
+      if (value != null)
       {
-        retValue = Convert.ToDouble(value);
+        var type = value.GetType();
+        if (typeof(double) == type
+          || typeof(decimal) == type
+          || typeof(float) == type
+          || typeof(int) == type
+          || typeof(long) == type
+          || typeof(short) == type)
+        {
+          retValue = Convert.ToDouble(value);
+        }
+      }
+      return retValue;
+    }
+
+    // Gets a float value from an object.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetFloat/*'/>
+    public static float GetFloat(object? value)
+    {
+      float retValue = default;
+
+      if (value != null)
+      {
+        var type = value.GetType();
+        if (typeof(float) == type
+          || typeof(int) == type
+          || typeof(long) == type
+          || typeof(short) == type)
+        {
+          retValue = Convert.ToSingle(value);
+        }
+      }
+      return retValue;
+    }
+
+    // Returns the Guid value of the data field with the specified name. 
+    /// <include file='Doc/LJC.xml'
+    ///  path='items/GetGuid/*'/>
+    public static Guid GetGuid(object? value)
+    {
+      Guid retValue = default;
+
+      if (value != null)
+      {
+        var type = value.GetType();
+        if (typeof(Guid) == type)
+        {
+          var result = GetString(value);
+          _ = Guid.TryParse(result, out retValue);
+        }
       }
       return retValue;
     }
@@ -518,14 +592,17 @@ namespace LJCNetCommon5
     // Gets a short value from an object.
     /// <include file='Doc/LJC.xml'
     ///  path='members/GetInt16/*'/>
-    public static short GetInt16(object value)
+    public static short GetInt16(object? value)
     {
       short retValue = default;
 
-      var type = value.GetType();
-      if (typeof(short) == type)
+      if (value != null)
       {
-        retValue = Convert.ToInt16(value);
+        var type = value.GetType();
+        if (typeof(short) == type)
+        {
+          retValue = Convert.ToInt16(value);
+        }
       }
       return retValue;
     }
@@ -533,15 +610,18 @@ namespace LJCNetCommon5
     // Gets an integer value from an object.
     /// <include file='Doc/LJC.xml'
     ///  path='members/GetInt32/*'/>
-    public static int GetInt32(object value)
+    public static int GetInt32(object? value)
     {
       int retValue = default;
 
-      var type = value.GetType();
-      if (typeof(int) == type
-        || typeof(short) == type)
+      if (value != null)
       {
-        retValue = Convert.ToInt32(value);
+        var type = value.GetType();
+        if (typeof(int) == type
+          || typeof(short) == type)
+        {
+          retValue = Convert.ToInt32(value);
+        }
       }
       return retValue;
     }
@@ -549,24 +629,45 @@ namespace LJCNetCommon5
     // Gets a long value from an object.
     /// <include file='Doc/LJC.xml'
     ///  path='members/GetInt64/*'/>
-    public static long GetInt64(object value)
+    public static long GetInt64(object? value)
     {
       long retValue = default;
 
-      var type = value.GetType();
-      if (typeof(int) == type
-        || typeof(long) == type
-        || typeof(short) == type)
+      if (value != null)
       {
-        retValue = Convert.ToInt64(value);
+        var type = value.GetType();
+        if (typeof(int) == type
+          || typeof(long) == type
+          || typeof(short) == type)
+        {
+          retValue = Convert.ToInt64(value);
+        }
+      }
+      return retValue;
+    }
+
+    // Gets a trimmed string value from an object.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetString/*'/>
+    public static string? GetString(object? value)
+    {
+      string? retValue = default;
+
+      if (value != null)
+      {
+        var text = value.ToString();
+        if (HasText(text))
+        {
+          retValue = text.Trim();
+        }
       }
       return retValue;
     }
 
     // Gets an instantiated object value.
     /// <include file='Doc/LJC.xml'
-    ///  path='members/GetObject/*'/>
-    public static object? GetObject(object value)
+    ///  path='members/GetValue/*'/>
+    public static object? GetValue(object value)
     {
       object? retValue = null;
 
@@ -612,7 +713,7 @@ namespace LJCNetCommon5
             break;
 
           case TypeSingle:
-            retValue = GetSingle(value);
+            retValue = GetFloat(value);
             break;
 
           case TypeString:
@@ -622,38 +723,46 @@ namespace LJCNetCommon5
       }
       return retValue;
     }
+    #endregion
 
-    // Gets a float value from an object.
+    #region Additional Value Methods
+
+    // Gets a database DateTime string value from an object.
     /// <include file='Doc/LJC.xml'
-    ///  path='members/GetSingle/*'/>
-    public static float GetSingle(object value)
-    {
-      float retValue = default;
-
-      var type = value.GetType();
-      if (typeof(float) == type
-        || typeof(int) == type
-        || typeof(long) == type
-        || typeof(short) == type)
-      {
-        retValue = Convert.ToSingle(value);
-      }
-      return retValue;
-    }
-
-    // Gets a trimmed string value from an object.
-    /// <include file='Doc/LJC.xml'
-    ///  path='members/GetString/*'/>
-    public static string? GetString(object value)
+    ///  path='members/GetDbDateString/*'/>
+    public static string? GetDbDateString(object? value)
     {
       string? retValue = default;
 
       if (value != null)
       {
-        var text = value.ToString();
-        if (HasText(text))
+        var type = value.GetType();
+        if (type == typeof(DateTime))
         {
-          retValue = text.Trim();
+          var dateTime = GetDateTime(value);
+          retValue = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
+        }
+      }
+      return retValue;
+    }
+
+    // Gets a DateTime value from an object.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetDbDateTime/*'/>
+    public static DateTime GetDbDateTime(object? value)
+    {
+      DateTime retValue = DateTime.MinValue;
+
+      if (value != null)
+      {
+        var type = value.GetType();
+        if (typeof(string) == type)
+        {
+          string result = value.ToString();
+          if (HasText(result))
+          {
+            retValue = DateTime.Parse(result);
+          }
         }
       }
       return retValue;

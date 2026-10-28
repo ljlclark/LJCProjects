@@ -288,7 +288,7 @@ namespace TestNetCommon5
       // Must use "f" for float (single) or it defaults to double.
       var test = new { Value = 3.14f };
       var reflect = new LJCReflect(test);
-      var value = reflect.GetSingle("Value");
+      var value = reflect.GetFloat("Value");
       var result = value.ToString();
       var compare = "3.14";
       TestCommon.Write("GetSingle()", result, compare);

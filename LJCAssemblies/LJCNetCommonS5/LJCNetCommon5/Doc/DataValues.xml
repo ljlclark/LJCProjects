@@ -110,6 +110,13 @@
     <param name="propertyName">The property name.</param>
     <returns>The byte value.</returns>
   </LJCGetByte>
+  <LJCBytes>
+    <summary>
+      Gets the column object value as a byte array.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The byte array value.</returns>
+  </LJCBytes>
   <LJCGetChar>
     <summary>
       Gets the column object value as a char.
@@ -117,14 +124,19 @@
     <param name="propertyName">The property name.</param>
     <returns>The char value.</returns>
   </LJCGetChar>
-  <LJCGetDbDateTime>
+  <LJCChars>
     <summary>
-      Gets the column object value as a
-      &lt;span class="userType"&gt;DateTime&lt;/span&gt;.
+      Gets the column object value as a char array.
     </summary>
     <param name="propertyName">The property name.</param>
-    <returns>The DateTime value.</returns>
-  </LJCGetDbDateTime>
+    <returns>The char array value.</returns>
+  </LJCChars>
+  <LJCDateTime>
+    <summary>
+      Gets the column object as a DateTime value.
+    </summary>
+    <param name="propertyName">The property name.</param>
+  </LJCDateTime>
   <LJCGetDecimal>
     <summary>
       Gets the column object value as a
@@ -143,6 +155,20 @@
     <param name="propertyName">The property name.</param>
     <returns>The double value.</returns>
   </LJCGetDouble>
+  <LJCGetFloat>
+    <summary>
+      Gets the column object value as a float.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The float value.</returns>
+  </LJCGetFloat>
+  <LJCGuid>
+    <summary>
+      Gets the column object value as a GUID.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The GUID value.</returns>
+  </LJCGuid>
   <LJCInt16>
     <summary>
       Gets the column object value as a
@@ -177,25 +203,35 @@
       int value.
     </returns>
   </LJCInt64>
-  <LJCGetSingle>
-    <summary>
-      Gets the column object value as a single.
-    </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>The float value.</returns>
-  </LJCGetSingle>
   <LJCString>
     <summary>
-      Gets the string value for the column with the specified name.
+      Gets the column object value as a string.
     </summary>
   </LJCString>
   <LJCValue>
     <summary>
-      Gets the string value for the column with the specified name.
+      Gets the column object value as an object.
     </summary>
     <param name="propertyName">The property name.</param>
     <returns>The column value.</returns>
   </LJCValue>
+
+  <!-- Additional Value Methods -->
+  <LJCDbDateString>
+    <summary>
+      Gets a database DateTime string.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The DateTime string value.</returns>
+  </LJCDbDateString>
+  <LJCDbDateTime>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;DateTime&lt;/span&gt;.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The DateTime value.</returns>
+  </LJCDbDateTime>
   <LJCSetValue>
     <summary>
       Sets the value for the column with the specified name.

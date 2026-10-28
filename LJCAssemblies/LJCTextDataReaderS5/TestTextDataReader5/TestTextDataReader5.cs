@@ -526,7 +526,8 @@ namespace TestTextDataReader5
 
       // Test Methods
       //var result = textReader.GetString(0);
-      var result = textReader.GetTrimValue(0);
+      //var result = textReader.GetTrimValue(0);
+      var result = "";
       result += $", {textReader.GetInt64(1)}";
       result += $", {textReader.GetDecimal(2)}";
       var compare = "Name Value, 1, 3.14";
@@ -556,7 +557,7 @@ namespace TestTextDataReader5
 
       // Test Methods
       //var result = textReader.GetString("Name");
-      var result = textReader.GetTrimValue("Name");
+      var result = textReader.GetTrimString("Name");
       result += $", {textReader.GetInt64("ID")}";
       result += $", {textReader.GetDecimal("Value")}";
       var compare = "Name Value, 1, 3.14";

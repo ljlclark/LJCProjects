@@ -246,13 +246,13 @@
         // Gets a bool value from an object.
         private static void GetBoolean()
         {
-        // Simulates an Object value like that received from a DataTable.
-        bool setup = true;
-        object obj = setup;
+          // Simulates an Object value like that received from a DataTable.
+          bool setup = true;
+          object obj = setup;
 
-        // Gets a short value from an object.
-        var result = NetCommon.GetBoolean(obj);
-        // result = True
+          // Gets a short value from an object.
+          var result = NetCommon.GetBoolean(obj);
+          // result = True
         }
       </code>
     </example>
@@ -274,14 +274,14 @@
         // Gets a byte value from an object.
         private static void GetByte()
         {
-        // Simulates an Object value like that received from a DataTable.
-        byte setup = Convert.ToByte('A');
-        object obj = setup;
+          // Simulates an Object value like that received from a DataTable.
+          byte setup = Convert.ToByte('A');
+          object obj = setup;
 
-        // Gets a byte value from an object.
-        byte value = NetCommon.GetByte(obj);
-        var result = value.ToString();
-        // result = "65"
+          // Gets a byte value from an object.
+          byte value = NetCommon.GetByte(obj);
+          var result = value.ToString();
+          // result = "65"
         }
       </code>
     </example>
@@ -310,18 +310,30 @@
         // Gets a char value from an object.
         private static void GetChar()
         {
-        // Simulates an Object value like that received from a DataTable.
-        char setup = Convert.ToChar('A');
-        object obj = setup;
+          // Simulates an Object value like that received from a DataTable.
+          char setup = Convert.ToChar('A');
+          object obj = setup;
 
-        // Gets a byte value from an object.
-        char value = NetCommon.GetChar(obj);
-        var result = value.ToString();
-        // result = "A";
+          // Gets a byte value from an object.
+          char value = NetCommon.GetChar(obj);
+          var result = value.ToString();
+          // result = "A";
         }
       </code>
     </example>
   </GetChar>
+  <GetChars>
+    <summary>
+      Gets a character array from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The character array.
+    </returns>
+    <remarks>
+      Returns an empty array if the value is null or not type character array.
+    </remarks>
+  </GetChars>
   <GetDateTime>
     <summary>
       Gets a DateTime value from an object.
@@ -337,19 +349,19 @@
         // Gets a DateTime value from an object.
         private static void GetDateTime()
         {
-        // Simulates an Object value like that received from a DataTable.
-        string setup = "2026/06/15 12:30:00 PM";
-        object obj = setup;
+          // Simulates an Object value like that received from a DataTable.
+          string setup = "2026/06/15 12:30:00 PM";
+          object obj = setup;
 
-        // Gets a decimal value from an object.
-        DateTime? returnValue = NetCommon.GetDateTime(obj);
-        if (returnValue != null)
-        {
-        DateTime value = (DateTime)returnValue;
-        var result = $"{value:yyyy/MM/dd HH:mm:ss tt}";
-        //result = value.ToString("yyyy/MM/dd HH:mm:ss tt");
-        // result = "2026/06/15 12:30:00 PM";
-        }
+          // Gets a decimal value from an object.
+          DateTime? returnValue = NetCommon.GetDateTime(obj);
+          if (returnValue != null)
+          {
+            DateTime value = (DateTime)returnValue;
+            var result = $"{value:yyyy/MM/dd HH:mm:ss tt}";
+            //result = value.ToString("yyyy/MM/dd HH:mm:ss tt");
+            // result = "2026/06/15 12:30:00 PM";
+          }
         }
       </code>
     </example>
@@ -372,13 +384,13 @@
         // Gets a decimal value from an object.
         private static void GetDecimal()
         {
-        // Simulates an Object value like that received from a DataTable.
-        decimal setup = 3.14m;
-        object obj = setup;
+          // Simulates an Object value like that received from a DataTable.
+          decimal setup = 3.14m;
+          object obj = setup;
 
-        // Gets a decimal value from an object.
-        decimal value = NetCommon.GetDecimal(obj);
-        // value = 3.14
+          // Gets a decimal value from an object.
+          decimal value = NetCommon.GetDecimal(obj);
+          // value = 3.14
         }
       </code>
     </example>
@@ -399,17 +411,56 @@
         // Gets a double value from an object.
         private static void GetDouble()
         {
-        // Simulates an Object value like that received from a DataTable.
-        double setup = 3.14d;
-        object obj = setup;
+          // Simulates an Object value like that received from a DataTable.
+          double setup = 3.14d;
+          object obj = setup;
 
-        // Gets a decimal value from an object.
-        double result = NetCommon.GetDouble(obj);
-        // result = 3.14;
+          // Gets a decimal value from an object.
+          double result = NetCommon.GetDouble(obj);
+          // result = 3.14;
         }
       </code>
     </example>
   </GetDouble>
+  <GetFloat>
+    <summary>
+      Gets a float value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The single value or zero if the object is null.
+      Also returns zero if the object is not type "single", "long", "int"
+      or "short".
+    </returns>
+    <parentGroup>value</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        // Gets a float (single) value from an object.
+        private static void GetFloat()
+        {
+          // Simulates an Object value like that received from a DataTable.
+          float setup = 3.14f;
+          object obj = setup;
+
+          // Gets a decimal value from an object.
+          float result = NetCommon.GetSingle(obj);
+          result = 3.14;
+        }
+      </code>
+    </example>
+  </GetFloat>
+  <GetGUID>
+    <summary>
+      Gets a GUID value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The GUID value.
+    </returns>
+    <remarks>
+      The default value if the object is null or not type "GUID".
+    </remarks>
+  </GetGUID>
   <GetInt16>
     <summary>
       Gets a short value from an object.
@@ -427,13 +478,13 @@
         // Gets a short value from an object.
         private static void GetInt16()
         {
-        // Simulates an Object value like that received from a DataTable.
-        short setup = 3;
-        object obj = setup;
+          // Simulates an Object value like that received from a DataTable.
+          short setup = 3;
+          object obj = setup;
 
-        // Gets a short value from an object.
-        short value = NetCommon.GetInt16(obj);
-        // value = 3
+          // Gets a short value from an object.
+          short value = NetCommon.GetInt16(obj);
+          // value = 3
         }
       </code>
     </example>
@@ -455,13 +506,13 @@
         // Gets an int value from an object.
         private static void GetInt32()
         {
-        // Simulates an Object value like that received from a DataTable.
-        int setup = 3;
-        object obj = setup;
+          // Simulates an Object value like that received from a DataTable.
+          int setup = 3;
+          object obj = setup;
 
-        // Gets an int value from an object.
-        int value = NetCommon.GetInt32(obj);
-        // value = 3
+          // Gets an int value from an object.
+          int value = NetCommon.GetInt32(obj);
+          // value = 3
         }
       </code>
     </example>
@@ -483,52 +534,17 @@
         // Gets a long value from an object.
         private static void GetInt64()
         {
-        // Simulates an Object value like that received from a DataTable.
-        long setup = 3;
-        object obj = setup;
+          // Simulates an Object value like that received from a DataTable.
+          long setup = 3;
+          object obj = setup;
 
-        // Gets a long value from an object.
-        long value = NetCommon.GetInt64(obj);
-        // value = 3
+          // Gets a long value from an object.
+          long value = NetCommon.GetInt64(obj);
+          // value = 3
         }
       </code>
     </example>
   </GetInt64>
-  <GetObject>
-    <summary>
-      Gets an instantiated object value.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>The instantiated object.</returns>
-    <parentGroup>value</parentGroup>
-  </GetObject>
-  <GetSingle>
-    <summary>
-      Gets a float value from an object.
-    </summary>
-    <param name="value">The value object.</param>
-    <returns>
-      The single value or zero if the object is null.
-      Also returns zero if the object is not type "single", "long", "int"
-      or "short".
-    </returns>
-    <parentGroup>value</parentGroup>
-    <example>
-      <code xml:space="preserve">
-        // Gets a float (single) value from an object.
-        private static void GetSingle()
-        {
-        // Simulates an Object value like that received from a DataTable.
-        float setup = 3.14f;
-        object obj = setup;
-
-        // Gets a decimal value from an object.
-        float result = NetCommon.GetSingle(obj);
-        result = 3.14;
-        }
-      </code>
-    </example>
-  </GetSingle>
   <GetString>
     <summary>
       Gets a trimmed string value from an object.
@@ -554,6 +570,28 @@
       </code>
     </example>
   </GetString>
+  <GetValue>
+    <summary>
+      Gets an instantiated object value.
+    </summary>
+    <param name="value">The value object.</param>
+    <returns>The instantiated object.</returns>
+    <parentGroup>value</parentGroup>
+  </GetValue>
+
+  <!--  Additional Value Methods -->
+  <GetDbDateString>
+    <summary>
+      Gets a database DateTime string value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+  </GetDbDateString>
+  <GetDbDateTime>
+    <summary>
+      Gets a DateTime value from an object.
+    </summary>
+    <param name="value">The value object.</param>
+  </GetDbDateTime>
   <ToInt16>
     <summary>
       Gets a short from a text string.

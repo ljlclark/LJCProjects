@@ -647,21 +647,22 @@ namespace LJCNetCommon5
     ///  path='members/LJCBoolean/*'/>
     public bool LJCBoolean(string propertyName)
     {
-      bool retValue = default;
+      //bool retValue = default;
 
-      var value = LJCString(propertyName);
-      if (value != null)
-      {
-        if (LJCNetString.IsDigits(value))
-        {
-          var checkValue = Convert.ToInt16(value);
-          retValue = Convert.ToBoolean(checkValue);
-        }
-        else
-        {
-          _ = bool.TryParse(value, out retValue);
-        }
-      }
+      //var value = LJCString(propertyName);
+      //if (value != null)
+      //{
+      //  if (LJCNetString.IsDigits(value))
+      //  {
+      //    var checkValue = Convert.ToInt16(value);
+      //    retValue = Convert.ToBoolean(checkValue);
+      //  }
+      //  else
+      //  {
+      //    _ = bool.TryParse(value, out retValue);
+      //  }
+      var value = LJCValue(propertyName);
+      var retValue = LJC.GetBoolean(value);
       return retValue;
     }
 
@@ -670,13 +671,8 @@ namespace LJCNetCommon5
     ///  path='members/LJCByte/*'/>
     public byte LJCByte(string propertyName)
     {
-      byte retValue = default;
-
       var value = LJCValue(propertyName);
-      if (value != null)
-      {
-        retValue = LJC.GetByte(value);
-      }
+      var retValue = LJC.GetByte(value);
       return retValue;
     }
 
@@ -685,13 +681,8 @@ namespace LJCNetCommon5
     /// path="members/LJCBytes/*"/>
     public byte[]? LJCBytes(string propertyName)
     {
-      byte[] retValue = default;
-
       var value = LJCValue(propertyName);
-      if (value != null)
-      {
-        retValue = LJC.GetBytes(value);
-      }
+      var retValue = LJC.GetBytes(value);
       return retValue;
     }
 
@@ -700,28 +691,28 @@ namespace LJCNetCommon5
     ///  path='members/LJCChar/*'/>
     public char LJCChar(string propertyName)
     {
-      char retValue = default;
-
       var value = LJCValue(propertyName);
-      if (value != null)
-      {
-        retValue = LJC.GetChar(value);
-      }
+      var retValue = LJC.GetChar(value);
       return retValue;
     }
 
-    // Gets the column object value as a DateTime.
+    // Gets the column object value as a char array.
     /// <include file='Doc/DataColumns.xml'
-    ///  path='members/LJCDbDateTime/*'/>
-    public DateTime LJCDbDateTime(string propertyName)
+    ///  path='members/LJCChars/*'/>
+    public char[] LJCChars(string propertyName)
     {
-      DateTime retValue = DateTime.Parse(LJC.MinSqlDate());
+      var value = LJCValue(propertyName);
+      var retValue = LJC.GetChars(value);
+      return retValue;
+    }
 
-      var value = LJCString(propertyName);
-      if (value != null)
-      {
-        retValue = DateTime.Parse(value);
-      }
+    // Gets the column object as a DateTime value.
+    /// <include file='Doc/DataValues.xml'
+    ///  path='members/LJCDateTime/*'/>
+    public DateTime LJCDateTime(string propertyName)
+    {
+      var value = LJCValue(propertyName);
+      var retValue = LJC.GetDateTime(value);
       return retValue;
     }
 
@@ -730,13 +721,8 @@ namespace LJCNetCommon5
     ///  path='members/LJCDecimal/*'/>
     public decimal LJCDecimal(string propertyName)
     {
-      decimal retValue = default;
-
       var value = LJCValue(propertyName);
-      if (value != null)
-      {
-        retValue = LJC.GetDecimal(value);
-      }
+      var retValue = LJC.GetDecimal(value);
       return retValue;
     }
 
@@ -745,13 +731,28 @@ namespace LJCNetCommon5
     ///  path='members/LJCDouble/*'/>
     public double LJCDouble(string propertyName)
     {
-      double retValue = default;
-
       var value = LJCValue(propertyName);
-      if (value != null)
-      {
-        retValue = LJC.GetDouble(value);
-      }
+      var retValue = LJC.GetDouble(value);
+      return retValue;
+    }
+
+    // Gets the column object value as a single.
+    /// <include file='Doc/DataColumns.xml'
+    ///  path='members/LJCFloat/*'/>
+    public float LJCFloat(string propertyName)
+    {
+      var value = LJCValue(propertyName);
+      var retValue = LJC.GetFloat(value);
+      return retValue;
+    }
+
+    // Gets the column object value as a GUID.
+    /// <include file='Doc/DataColumns.xml'
+    ///  path='items/LJCGuid/*'/>
+    public Guid LJCGuid(string propertyName)
+    {
+      var value = LJCValue(propertyName);
+      var retValue = LJC.GetGuid(value);
       return retValue;
     }
 
@@ -760,13 +761,8 @@ namespace LJCNetCommon5
     ///  path='members/LJCInt16/*'/>
     public short LJCInt16(string propertyName)
     {
-      short retValue = default;
-
       var value = LJCValue(propertyName);
-      if (value != null)
-      {
-        retValue = LJC.GetInt16(value);
-      }
+      var retValue = LJC.GetInt16(value);
       return retValue;
     }
 
@@ -775,13 +771,8 @@ namespace LJCNetCommon5
     ///  path='members/LJCInt32/*'/>
     public int LJCInt32(string propertyName)
     {
-      int retValue = default;
-
       var value = LJCValue(propertyName);
-      if (value != null)
-      {
-        retValue = LJC.GetInt32(value);
-      }
+      var retValue = LJC.GetInt32(value);
       return retValue;
     }
 
@@ -790,28 +781,8 @@ namespace LJCNetCommon5
     ///  path='members/LJCInt64/*'/>
     public long LJCInt64(string propertyName)
     {
-      long retValue = default;
-
       var value = LJCValue(propertyName);
-      if (value != null)
-      {
-        retValue = LJC.GetInt64(value);
-      }
-      return retValue;
-    }
-
-    // Gets the column object value as a single.
-    /// <include file='Doc/DataColumns.xml'
-    ///  path='members/LJCSingle/*'/>
-    public float LJCSingle(string propertyName)
-    {
-      float retValue = default;
-
-      var value = LJCValue(propertyName);
-      if (value != null)
-      {
-        retValue = LJC.GetSingle(value);
-      }
+      var retValue = LJC.GetInt64(value);
       return retValue;
     }
 
@@ -820,13 +791,8 @@ namespace LJCNetCommon5
     ///  path='members/LJCString/*'/>
     public string? LJCString(string propertyName)
     {
-      string retValue = default;
-
       var value = LJCValue(propertyName);
-      if (value != null)
-      {
-        retValue = LJC.GetString(value);
-      }
+      var retValue = LJC.GetString(value);
       return retValue;
     }
 
@@ -843,6 +809,29 @@ namespace LJCNetCommon5
       {
         retValue = dataColumn.Value;
       }
+      return retValue;
+    }
+    #endregion
+
+    #region Additional Value Methods
+
+    // Gets a database DateTime string.
+    /// <include file='Doc/DataValues.xml'
+    ///  path='members/LJCGetDbDateString/*'/>
+    public string? LJCDbDateString(string propertyName)
+    {
+      var value = LJCValue(propertyName);
+      var retValue = LJC.GetDbDateString(value);
+      return retValue;
+    }
+
+    // Gets the column object value as a DateTime.
+    /// <include file='Doc/DataColumns.xml'
+    ///  path='members/LJCDbDateTime/*'/>
+    public DateTime LJCDbDateTime(string propertyName)
+    {
+      var value = LJCValue(propertyName);
+      var retValue = LJC.GetDbDateTime(value);
       return retValue;
     }
 

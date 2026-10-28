@@ -310,37 +310,37 @@ namespace LJCTextDataReader5
       switch (dataTypeName)
       {
         case "Boolean":
-          retValue = typeof(Boolean);
+          retValue = typeof(bool);
           break;
         case "Byte":
-          retValue = typeof(Byte);
+          retValue = typeof(byte);
           break;
         case "DateTime":
           retValue = typeof(DateTime);
           break;
         case "Decimal":
-          retValue = typeof(Decimal);
+          retValue = typeof(decimal);
           break;
         case "Double":
-          retValue = typeof(Double);
+          retValue = typeof(double);
           break;
         case "Int16":
-          retValue = typeof(Int16);
+          retValue = typeof(short);
           break;
         case "Int32":
-          retValue = typeof(Int32);
+          retValue = typeof(int);
           break;
         case "Int64":
-          retValue = typeof(Int64);
+          retValue = typeof(long);
           break;
         case "Single":
-          retValue = typeof(Single);
+          retValue = typeof(float);
           break;
         case "String":
-          retValue = typeof(String);
+          retValue = typeof(string);
           break;
         default:
-          retValue = typeof(String);
+          retValue = typeof(string);
           break;
       }
 #pragma warning restore IDE0066 // Convert switch statement to expression
@@ -594,7 +594,9 @@ namespace LJCTextDataReader5
     ///  path='items/GetBoolean/*'/>
     public bool GetBoolean(int i)
     {
-      var _ = bool.TryParse(GetString(i), out bool retValue);
+      //var _ = bool.TryParse(GetString(i), out bool retValue);
+      var value = this[i];
+      var retValue = LJC.GetBoolean(value);
       return retValue;
     }
 
@@ -603,7 +605,9 @@ namespace LJCTextDataReader5
     ///  path='items/GetByte/*'/>
     public byte GetByte(int i)
     {
-      var _ = byte.TryParse(GetString(i), out byte retValue);
+      //var _ = byte.TryParse(GetString(i), out byte retValue);
+      var value = this[i];
+      var retValue = LJC.GetByte(value);
       return retValue;
     }
 
@@ -625,7 +629,9 @@ namespace LJCTextDataReader5
     ///  path='items/GetChar/*'/>
     public char GetChar(int i)
     {
-      var _ = char.TryParse(GetString(i), out char retValue);
+      //var _ = char.TryParse(GetString(i), out char retValue);
+      var value = this[i];
+      var retValue = LJC.GetChar(value);
       return retValue;
     }
 
@@ -647,7 +653,9 @@ namespace LJCTextDataReader5
     ///  path='items/GetDateTime/*'/>
     public DateTime GetDateTime(int i)
     {
-      var _ = DateTime.TryParse(GetString(i), out DateTime retValue);
+      //var _ = DateTime.TryParse(GetString(i), out DateTime retValue);
+      var value = this[i];
+      DateTime retValue = LJC.GetDateTime(value);
       return retValue;
     }
 
@@ -656,7 +664,9 @@ namespace LJCTextDataReader5
     ///  path='items/GetDecimal/*'/>
     public decimal GetDecimal(int i)
     {
-      var _ = decimal.TryParse(GetString(i), out decimal retValue);
+      //var _ = decimal.TryParse(GetString(i), out decimal retValue);
+      var value = this[i];
+      var retValue = LJC.GetDecimal(value);
       return retValue;
     }
 
@@ -665,7 +675,9 @@ namespace LJCTextDataReader5
     ///  path='items/GetDouble/*'/>
     public double GetDouble(int i)
     {
-      var _ = double.TryParse(GetString(i), out double retValue);
+      //var _ = double.TryParse(GetString(i), out double retValue);
+      var value = this[i];
+      var retValue = LJC.GetDouble(value);
       return retValue;
     }
 
@@ -674,7 +686,9 @@ namespace LJCTextDataReader5
     ///  path='items/GetFloat/*'/>
     public float GetFloat(int i)
     {
-      var _ = float.TryParse(GetString(i), out float retValue);
+      //var _ = float.TryParse(GetString(i), out float retValue);
+      var value = this[i];
+      var retValue = LJC.GetFloat(value);
       return retValue;
     }
 
@@ -692,7 +706,8 @@ namespace LJCTextDataReader5
     ///  path='items/GetInt16/*'/>
     public short GetInt16(int i)
     {
-      var _ = short.TryParse(GetString(i), out short retValue);
+      object value = this[i];
+      short retValue = LJC.GetInt16(value);
       return retValue;
     }
 
@@ -701,7 +716,9 @@ namespace LJCTextDataReader5
     ///  path='items/GetInt32/*'/>
     public int GetInt32(int i)
     {
-      var _ = int.TryParse(GetString(i), out int retValue);
+      //var _ = int.TryParse(GetString(i), out int retValue);
+      var value = this[i];
+      var retValue = LJC.GetInt32(value);
       return retValue;
     }
 
@@ -710,7 +727,9 @@ namespace LJCTextDataReader5
     ///  path='items/GetInt64/*'/>
     public long GetInt64(int i)
     {
-      var _ = long.TryParse(GetString(i), out long retValue);
+      //var _ = long.TryParse(GetString(i), out long retValue);
+      var value = this[i];
+      var retValue = LJC.GetInt64(value);
       return retValue;
     }
 
@@ -721,29 +740,11 @@ namespace LJCTextDataReader5
     {
       string retValue = "";
 
-      object value = this[i];
-      if (value != null)
-      {
-        var result = value.ToString();
-        if (LJC.HasText(result))
-        {
-          retValue = result;
-        }
-      }
-      return retValue;
-    }
-
-    // Gets the trimmed string value.
-    /// <include file='Doc/TextDataReader.xml'
-    ///  path='items/GetTrimValue/*'/>
-    public string GetTrimValue(int i)
-    {
-      var retValue = "";
-
-      var result = GetString(i);
+      var value = this[i];
+      var result = LJC.GetString(value);
       if (LJC.HasText(result))
       {
-        retValue = result.Trim();
+        retValue = result;
       }
       return retValue;
     }
@@ -758,6 +759,44 @@ namespace LJCTextDataReader5
     }
     #endregion
 
+    #region Additional Index Methods
+
+    // Returns the database DateTime string value of the data field.
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetDBDateString/*'/>
+    public string? GetDbDateString(int i)
+    {
+      var value = this[i];
+      var retValue = LJC.GetDbDateString(value);
+      return retValue;
+    }
+
+    // Gets the column object value as a DateTime.
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='members/DbDateTime/*'/>
+    public DateTime GetDbDateTime(int i)
+    {
+      var value = this[i];
+      var retValue = LJC.GetDbDateTime(value);
+      return retValue;
+    }
+
+    // Gets the trimmed string value.
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetTrimValue/*'/>
+    public string GetTrimString(int i)
+    {
+      var retValue = "";
+
+      string result = GetString(i);
+      if (LJC.HasText(result))
+      {
+        retValue = result.Trim();
+      }
+      return retValue;
+    }
+    #endregion
+
     #region Get Data with Name Overloaded Methods
 
     // Returns the bool value of the data field with the specified name.
@@ -765,7 +804,8 @@ namespace LJCTextDataReader5
     ///  path='items/GetBooleanN/*'/>
     public bool GetBoolean(string name)
     {
-      _ = bool.TryParse(GetString(name), out bool retValue);
+      var value = this[name];
+      var retValue = LJC.GetBoolean(value);
       return retValue;
     }
 
@@ -774,20 +814,18 @@ namespace LJCTextDataReader5
     ///  path='items/GetByteN/*'/>
     public byte GetByte(string name)
     {
-      _ = byte.TryParse(GetString(name), out byte retValue);
+      var value = this[name];
+      var retValue = LJC.GetByte(value);
       return retValue;
     }
 
     // Place field bytes into a byte array buffer.
     /// <include file='Doc/TextDataReader.xml'
     ///  path='items/GetBytesN/*'/>
-    public long GetBytes(string name, long fieldOffset, byte[] buffer
-      , int bufferoffset)
+    public byte[] GetBytes(string name)
     {
-      long retValue;
-
-      string text = GetString(name);
-      retValue = GetBytesFromText(text, fieldOffset, buffer, bufferoffset);
+      var value = this[name];
+      var retValue = LJC.GetBytes(value);
       return retValue;
     }
 
@@ -796,20 +834,18 @@ namespace LJCTextDataReader5
     ///  path='items/GetCharN/*'/>
     public char GetChar(string name)
     {
-      _ = char.TryParse(GetString(name), out char retValue);
+      var value = this[name];
+      var retValue = LJC.GetChar(value);
       return retValue;
     }
 
     // Place field characters into a character array buffer.
     /// <include file='Doc/TextDataReader.xml'
     ///  path='items/GetCharsN/*'/>
-    public long GetChars(string name, long fieldOffset, char[] buffer
-      , int bufferoffset)
+    public char[] GetChars(string name)
     {
-      long retValue;
-
-      string text = GetString(name);
-      retValue = GetCharsFromText(text, fieldOffset, buffer, bufferoffset);
+      var value = this[name];
+      var retValue = LJC.GetChars(value);
       return retValue;
     }
 
@@ -818,7 +854,8 @@ namespace LJCTextDataReader5
     ///  path='items/GetDateTimeN/*'/>
     public DateTime GetDateTime(string name)
     {
-      _ = DateTime.TryParse(GetString(name), out DateTime retValue);
+      var value = this[name];
+      DateTime retValue = LJC.GetDateTime(value);
       return retValue;
     }
 
@@ -827,7 +864,8 @@ namespace LJCTextDataReader5
     ///  path='items/GetDecimalN/*'/>
     public decimal GetDecimal(string name)
     {
-      _ = decimal.TryParse(GetString(name), out decimal retValue);
+      var value = this[name];
+      var retValue = LJC.GetDecimal(value);
       return retValue;
     }
 
@@ -836,7 +874,8 @@ namespace LJCTextDataReader5
     ///  path='items/GetDoubleN/*'/>
     public double GetDouble(string name)
     {
-      _ = double.TryParse(GetString(name), out double retValue);
+      var value = this[name];
+      var retValue = LJC.GetDouble(value);
       return retValue;
     }
 
@@ -845,7 +884,8 @@ namespace LJCTextDataReader5
     ///  path='items/GetFloatN/*'/>
     public float GetFloat(string name)
     {
-      _ = float.TryParse(GetString(name), out float retValue);
+      var value = this[name];
+      var retValue = LJC.GetFloat(value);
       return retValue;
     }
 
@@ -854,7 +894,8 @@ namespace LJCTextDataReader5
     ///  path='items/GetGuidN/*'/>
     public Guid GetGuid(string name)
     {
-      _ = Guid.TryParse(GetString(name), out Guid retValue);
+      var value = this[name];
+      var retValue = LJC.GetGuid(value);
       return retValue;
     }
 
@@ -863,7 +904,8 @@ namespace LJCTextDataReader5
     ///  path='items/GetInt16N/*'/>
     public short GetInt16(string name)
     {
-      _ = short.TryParse(GetString(name), out short retValue);
+      var value = this[name];
+      var retValue = LJC.GetInt16(value);
       return retValue;
     }
 
@@ -872,7 +914,8 @@ namespace LJCTextDataReader5
     ///  path='items/GetInt32N/*'/>
     public int GetInt32(string name)
     {
-      _ = int.TryParse(GetString(name), out int retValue);
+      var value = this[name];
+      var retValue = LJC.GetInt32(value);
       return retValue;
     }
 
@@ -881,7 +924,8 @@ namespace LJCTextDataReader5
     ///  path='items/GetInt64N/*'/>
     public long GetInt64(string name)
     {
-      _ = long.TryParse(GetString(name), out long retValue);
+      var value = this[name];
+      var retValue = LJC.GetInt64(value);
       return retValue;
     }
 
@@ -892,29 +936,58 @@ namespace LJCTextDataReader5
     {
       string retValue = "";
 
-      object value = this[name];
-      if (value != null)
+      var value = this[name];
+      var result = LJC.GetString(value);
+      if (LJC.HasText(result))
       {
-        var result = value.ToString();
-        if (LJC.HasText(result))
-        {
-          retValue = result;
-        }
+        retValue = result;
       }
+      return retValue;
+    }
+
+    // Returns the object value of the data field at the specified index.
+    // This is a minimum required method.
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetValueN/*'/>
+    public object GetValue(string name)
+    {
+      return this[name];
+    }
+    #endregion
+
+    #region Additional Name Methods
+
+    // Returns the database DateTime string value of the data field.
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='items/GetDBDateString/*'/>
+    public string? GetDbDateString(string name)
+    {
+      var value = this[name];
+      var retValue = LJC.GetDbDateString(value);
+      return retValue;
+    }
+
+    // Gets the column object value as a DateTime.
+    /// <include file='Doc/TextDataReader.xml'
+    ///  path='members/LJCDbDateTime/*'/>
+    public DateTime GetDbDateTime(string name)
+    {
+      var value = this[name];
+      var retValue = LJC.GetDbDateTime(value);
       return retValue;
     }
 
     // Gets the trimmed string value.
     /// <include file='Doc/TextDataReader.xml'
     ///  path='items/GetTrimValueN/*'/>
-    public string GetTrimValue(string name)
+    public string GetTrimString(string name)
     {
       string retValue = "";
 
-      var result = GetString(name);
+      string result = GetString(name);
       if (LJC.HasText(result))
       {
-        retValue = result;
+        retValue = result.Trim();
       }
       return retValue;
     }
@@ -1285,7 +1358,7 @@ namespace LJCTextDataReader5
 
       if (null == dataType)
       {
-        dataType = typeof(String);
+        dataType = typeof(string);
       }
 
       switch (dataType.Name)
@@ -1322,8 +1395,8 @@ namespace LJCTextDataReader5
       AddColumn(retValue, "ColumnSize", typeof(Int32), true);
       AddColumn(retValue, "NumericPrecision", typeof(Int16), true);
       AddColumn(retValue, "NumericScale", typeof(Int16), true);
-      AddColumn(retValue, "IsUnique", typeof(Boolean), true);
-      AddColumn(retValue, "IsKey", typeof(Boolean), true);
+      AddColumn(retValue, "IsUnique", typeof(bool), true);
+      AddColumn(retValue, "IsKey", typeof(bool), true);
       AddColumn(retValue, "BaseServerName", readOnly: true);
       AddColumn(retValue, "BaseCatalogName", readOnly: true);
       AddColumn(retValue, "BaseColumnName", readOnly: true);

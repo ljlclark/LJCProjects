@@ -442,7 +442,7 @@ namespace TestNetCommon5
       object obj = setup;
 
       // Gets a decimal value from an object.
-      float value = LJC.GetSingle(obj);
+      float value = LJC.GetFloat(obj);
       var result = value.ToString();
       var compare = "3.14";
       TestCommon.Write("GetDouble()", result, compare);

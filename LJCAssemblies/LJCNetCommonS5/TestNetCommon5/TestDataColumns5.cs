@@ -68,9 +68,9 @@ namespace TestNetCommon5
       LJCGetDbDateTime();
       LJCGetDecimal();
       LJCGetDouble();
-      LJCGetInt16();
-      LJCGetInt32();
-      LJCGetInt64();
+      LJCInt16();
+      LJCInt32();
+      LJCInt64();
       LJCGetValue();
       LJCGetSingle();
       LJCGetString();
@@ -842,7 +842,7 @@ namespace TestNetCommon5
     }
 
     // Gets the column object value as a short int.
-    private void LJCGetInt16()
+    private void LJCInt16()
     {
       var methodName = "LJCGetInt16()";
 
@@ -861,7 +861,7 @@ namespace TestNetCommon5
     }
 
     // Gets the column object value as an int.
-    private void LJCGetInt32()
+    private void LJCInt32()
     {
       var methodName = "LJCGetInt32()";
 
@@ -880,7 +880,7 @@ namespace TestNetCommon5
     }
 
     // Gets the column object value as a long int.
-    private void LJCGetInt64()
+    private void LJCInt64()
     {
       var methodName = "LJCGetInt64()";
 
@@ -931,7 +931,7 @@ namespace TestNetCommon5
       };
 
       // Test Method
-      var value = dataColumns.LJCSingle("TestValue");
+      var value = dataColumns.LJCFloat("TestValue");
 
       var result = value.ToString();
       var compare = "3.14";
