@@ -10,8 +10,7 @@
     </summary>
     <remarks>
       <para>
-        The LJC class contains static methods for all .NET program
-        types.
+        The LJC class contains static methods for all .NET program types.
       </para>
     </remarks>
     <group name="check">Check Values</group>

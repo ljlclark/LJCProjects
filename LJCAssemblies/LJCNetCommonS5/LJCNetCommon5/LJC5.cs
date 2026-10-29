@@ -7,7 +7,6 @@ using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Text;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace LJCNetCommon5
@@ -119,6 +118,7 @@ namespace LJCNetCommon5
     #region Check Values Methods
 
     // Check for missing argument of type: string with no value, null, 
+    //   , numeric, IList, DataTable.
     /// <include file='Doc/LJC.xml'
     ///  path='members/CheckArgument/*'/>
     public static bool CheckArgument<T>([NotNullWhen(true)] T? argument
@@ -499,10 +499,9 @@ namespace LJCNetCommon5
       if (value != null)
       {
         var type = value.GetType();
-        if (typeof(byte[]) == type)
+        if (typeof(byte) == type)
         {
-          var bytes = (byte[])value;
-          retValue = bytes[0];
+          retValue = (byte)value;
         }
       }
       return retValue;

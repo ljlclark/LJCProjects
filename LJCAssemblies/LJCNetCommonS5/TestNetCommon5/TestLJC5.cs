@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // TestLJC5.cs
 using LJCNetCommon5;
+using System.Data;
 using System.Xml.Serialization;
 
 namespace TestNetCommon5
@@ -38,21 +39,55 @@ namespace TestNetCommon5
       UITimeString();
 
       // Check Values Test Methods
-      //CheckArgument();
-      //CompareNull();
-      //HasTableColumns1();
-      //HasTableColumns2();
-      //HasTableData();
-      //HasArrayElements();
-      //HasListItems();
-      //HasText();
-      //IsEqual();
-      //IsDbMinDate();
+      CheckArgument();
+      CompareNull();
+      HasTableColumns1();
+      HasTableColumns2();
+      HasTableData();
+      HasArrayElements();
+      HasListItems();
+      HasTables();
+      HasText();
+      IsEqual();
+      IsDbMinDate();
 
       // Console Test Methods
       //ClearReadKey();
       //ClearReadLine();
       //KeyOption();
+
+      // Object Value Test Methods
+      GetBoolean();
+      GetByte();
+      GetBytes();
+      GetChar();
+      GetChars();
+      GetDateTime();
+      GetDecimal();
+      GetDouble();
+      GetFloat();
+      GetGuid();
+      GetInt16();
+      GetInt32();
+      GetInt64();
+      GetString();
+      GetValue();
+
+      // Additional Value Test Methods
+      GetDbDateString();
+      GetDbDateTime();
+
+      // Project Config Values Test Methods
+      //ConfigBool();
+      //ConfigColor();
+      //ConfigString();
+      //ConsoleConfig();
+
+      // Serialization Test Methods
+      XmlDeserialize();
+      XmlDeserializeMessage();
+      XmlSerialize();
+      XmlSerializeToString();
 
       // Text Conversion Test Methods
       Base64BytesToText();
@@ -69,42 +104,8 @@ namespace TestNetCommon5
       BytesToMemStream();
       MemStreamToString();
       StringToMemStream();
-      XmlEncode();
       XmlDecode();
-
-      // Additional Value Test Methods
-      //GetDbDateString();
-      //GetDbDateTime();
-
-      // Project Config Values Test Methods
-      //ConfigBool();
-      //ConfigColor();
-      //ConfigString();
-      //ConsoleConfig();
-
-      // Serialization Test Methods
-      XmlDeserialize();
-      XmlDeserializeMessage();
-      XmlSerialize();
-      XmlSerializeToString();
-
-      // Object Value Test Methods
-      GetBoolean();
-      GetByte();
-      GetBytes();
-      GetChar();
-      GetChars();
-      GetDateTime();
-      GetDecimal();
-      GetDouble();
-      GetFloat();
-      GetGuid();
-      GetInt16();
-      GetInt32();
-      GetInt64();
-      GetValue();
-      GetString();
-      GetValue();
+      XmlEncode();
     }
     #endregion
 
@@ -127,18 +128,28 @@ namespace TestNetCommon5
     {
       var methodName = "Keys()";
 
-      var result = "Not Implemented";
-      var compare = "";
+      // Test Method
+      var keys = LJC.Keys("PropertyName", "SearchValue");
+
+      var value = keys[0].Value;
+      var result = "";
+      if (value != null)
+      {
+        result = value.ToString();
+      }
+      var compare = "SearchValue";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
     // Get the minimum date value.
     private void MinSqlDate()
     {
-      var methodName = "Keys()";
+      var methodName = "MinSqlDate()";
 
-      var result = "Not Implemented";
-      var compare = "";
+      // Test Method
+      var result = LJC.MinSqlDate();
+
+      var compare = "1753/01/01 00:00:00";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -147,8 +158,15 @@ namespace TestNetCommon5
     {
       var methodName = "ToInt16()";
 
-      var result = "Not Implemented";
-      var compare = "";
+      // Test Method
+      var value = LJC.ToInt16("3");
+
+      var result = "";
+      if (value > 0)
+      {
+        result = value.ToString();
+      }
+      var compare = "3";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -157,8 +175,15 @@ namespace TestNetCommon5
     {
       var methodName = "ToInt32()";
 
-      var result = "Not Implemented";
-      var compare = "";
+      // Test Method
+      var value = LJC.ToInt32("3");
+
+      var result = "";
+      if (value > 0)
+      {
+        result = value.ToString();
+      }
+      var compare = "3";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -202,6 +227,349 @@ namespace TestNetCommon5
     }
     #endregion
 
+    #region Check Values Test Methods
+
+    // Check for missing argument of type: string with no value, null, 
+    private void CheckArgument()
+    {
+      var methodName = "CheckArgument()";
+
+      // Test Method
+      var value = LJC.CheckArgument("X", "StringArg");
+
+      var result = value.ToString();
+      var compare = "True";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      value = LJC.CheckArgument(3, "IntArg");
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}2", result, compare);
+
+      value = LJC.CheckArgument(3.14, "FloatArg");
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}3", result, compare);
+
+      List<string> list = [];
+      value = LJC.CheckArgument(list, "ListArg");
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}4", result, compare);
+
+      DataTable dataTable = new();
+      value = LJC.CheckArgument(dataTable, "DataTableArg");
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}5", result, compare);
+    }
+
+    // Compare null values.
+    private void CompareNull()
+    {
+      var methodName = "CompareNull()";
+
+      // Test Method
+      var value = LJC.CompareNull(null, "");
+
+      var result = value.ToString();
+      var compare = "-1";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      value = LJC.CompareNull(null, null);
+      result = value.ToString();
+      compare = "0";
+      TestCommon.Write($"{methodName}2", result, compare);
+
+      value = LJC.CompareNull("", null);
+      result = value.ToString();
+      compare = "1";
+      TestCommon.Write($"{methodName}3", result, compare);
+    }
+
+    // Checks a DataColumnCollection for items.
+    private void HasTableColumns1()
+    {
+      var methodName = "HasTableColumns1()";
+
+      DataTable dataTable = new();
+
+      // Test Method
+      var value = LJC.HasTableColumns(dataTable.Columns);
+
+      var result = value.ToString();
+      var compare = "False";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dataTable.Columns.Add("Name", typeof(string));
+      value = LJC.HasTableColumns(dataTable.Columns);
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
+    // Checks a table for data columns.
+    private void HasTableColumns2()
+    {
+      var methodName = "HasTableColumns2()";
+
+      DataTable dataTable = new();
+
+      // Test Method
+      var value = LJC.HasTableColumns(dataTable);
+
+      var result = value.ToString();
+      var compare = "False";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dataTable.Columns.Add("Name", typeof(string));
+      value = LJC.HasTableColumns(dataTable);
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
+    // Checks a data table for rows.
+    private void HasTableData()
+    {
+      var methodName = "HasTableData()";
+
+      DataTable dataTable = new();
+      dataTable.Columns.Add("Name", typeof(string));
+
+      // Test Method
+      var value = LJC.HasTableData(dataTable);
+
+      var result = value.ToString();
+      var compare = "False";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dataTable.Rows.Add(["NameValue"]);
+      value = LJC.HasTableData(dataTable);
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
+    // Checks an array for elements.
+    private void HasArrayElements()
+    {
+      var methodName = "HasArrayElements()";
+
+      string[] array = [];
+
+      // Test Method
+      var value = LJC.HasArrayElements(array);
+
+      var result = value.ToString();
+      var compare = "False";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      array = ["Value1", "Value1"];
+      value = LJC.HasArrayElements(array);
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
+    // Checks an IList collection for items.
+    private void HasListItems()
+    {
+      var methodName = "HasListItems()";
+
+      List<string> list = [];
+
+      // Test Method
+      var value = LJC.HasListItems(list);
+
+      var result = value.ToString();
+      var compare = "False";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      list.Add("Value");
+      value = LJC.HasListItems(list);
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}1", result, compare);
+    }
+
+    // Checks a DataSet for tables.
+    private void HasTables()
+    {
+      var methodName = "HasTables()";
+
+      DataSet dataSet = new();
+
+      // Test Method
+      var value = LJC.HasTables(dataSet);
+
+      var result = value.ToString();
+      var compare = "False";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dataSet.Tables.Add(new DataTable("Name"));
+      value = LJC.HasTables(dataSet);
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}1", result, compare);
+    }
+
+    // Checks if a text value exists.
+    private void HasText()
+    {
+      var methodName = "HasText()";
+
+      var text = "";
+
+      // Test Method
+      var value = LJC.HasText(text);
+
+      var result = value.ToString();
+      var compare = "False";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      text = "Text";
+      value = LJC.HasText(text);
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+
+    // Checks if two values are equal.
+    private void IsEqual()
+    {
+      var methodName = "IsEqual()";
+
+      string compareValue = null;
+      string compareTo = null;
+
+      // Test Method
+      var value = LJC.IsEqual(compareValue, compareTo);
+
+      var result = value.ToString();
+      var compare = "True";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      compareTo = "X";
+      value = LJC.IsEqual(compareValue, compareTo);
+      result = value.ToString();
+      compare = "False";
+      TestCommon.Write($"{methodName}2", result, compare);
+
+      compareValue = "x";
+      value = LJC.IsEqual(compareValue, compareTo);
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}3", result, compare);
+
+      compareValue = "x";
+      value = LJC.IsEqual(compareValue, compareTo, true);
+      result = value.ToString();
+      compare = "False";
+      TestCommon.Write($"{methodName}4", result, compare);
+    }
+
+    // Checks if two values are equal.
+    private void IsDbMinDate()
+    {
+      var methodName = "IsDbMinDate()";
+
+      DateTime dateTime = new(1752, 1, 1);
+
+      // Test Method
+      var value = LJC.IsDbMinDate(dateTime);
+
+      var result = value.ToString();
+      var compare = "True";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      dateTime = new DateTime(1753, 1, 1);
+      value = LJC.IsDbMinDate(dateTime);
+      result = value.ToString();
+      compare = "True";
+      TestCommon.Write($"{methodName}2", result, compare);
+
+      dateTime = new DateTime(1753, 1, 2);
+      value = LJC.IsDbMinDate(dateTime);
+      result = value.ToString();
+      compare = "False";
+      TestCommon.Write($"{methodName}3", result, compare);
+    }
+    #endregion
+
+    #region Console Test Methods
+
+    // Clears an invalid ReadKey() selection.
+    private static void ClearReadKey()
+    {
+      Console.WriteLine();
+      Console.WriteLine("TestLJC.ClearReadKey()");
+
+      Console.Write("Press the [backspace] key: ");
+      Console.ReadKey();
+      var charValue = '\b';
+
+      // Test Method
+      LJC.ClearReadKey("Press the [backspace] key: ", charValue);
+
+      Console.ReadKey();
+      Console.WriteLine();
+      Console.Write("Press the [space] key: ");
+      Console.ReadKey();
+      charValue = ' ';
+      LJC.ClearReadKey("Press the [space] key: ", charValue);
+
+      Console.ReadKey();
+      Console.WriteLine();
+      Console.Write("Press the [tab] key: ");
+      Console.ReadKey();
+      charValue = '\t';
+      LJC.ClearReadKey("Press the [tab] key: ", charValue);
+
+      Console.ReadKey();
+      Console.WriteLine();
+      Console.Write("Press the [enter] key: ");
+      Console.ReadKey();
+      charValue = '\r';
+      LJC.ClearReadKey("Press the [enter] key: ", charValue);
+
+      Console.ReadKey();
+      Console.WriteLine();
+    }
+
+    // Clears an invalid ReadLine() selection.
+    private static void ClearReadLine()
+    {
+      Console.WriteLine();
+      Console.WriteLine("TestLJC.ClearReadLine()");
+
+      Console.Write("Press the [enter] key: X");
+      Console.ReadLine();
+      var value = "X";
+
+      // Test Method
+      LJC.ClearReadLine("Press the [enter] key: ", value);
+
+      Console.ReadKey();
+      Console.WriteLine();
+    }
+
+    // Get a console character option value.
+    private static void KeyOption()
+    {
+      Console.WriteLine();
+      Console.WriteLine("TestLJC.KeyOption()");
+
+      var options = "X";
+      Console.WriteLine("Valid options are 'X'.");
+      Console.WriteLine();
+      Console.Write("Enter an option: ");
+
+      // Test Method
+      LJC.KeyOption("Enter an option: ", options);
+    }
+    #endregion
+
     #region Object Value Test Methods
 
     // Gets a bool value from an object.
@@ -225,8 +593,9 @@ namespace TestNetCommon5
       byte setup = Convert.ToByte('A');
       object obj = setup;
 
-      // Gets a byte value from an object.
+      // Test Method
       byte value = LJC.GetByte(obj);
+
       var result = value.ToString();
       var compare = "65";
       TestCommon.Write("GetByte()", result, compare);
@@ -235,10 +604,20 @@ namespace TestNetCommon5
     // Gets an array of bytes from an object.
     private void GetBytes()
     {
-      var methodName = "GetChars()";
+      var methodName = "GetBytes()";
 
-      var result = "Not Implemented";
-      var compare = "";
+      // Simulates an Object value.
+      byte[] a = LJC.TextToBytes("A");
+      byte[] b = LJC.TextToBytes("B");
+      byte[] setup = [a[0], b[0]];
+      object obj = setup;
+
+      // Test Method
+      byte[] value = LJC.GetBytes(obj);
+
+      var resultValue = value[0];
+      var result = resultValue.ToString();
+      var compare = "65";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -249,8 +628,9 @@ namespace TestNetCommon5
       char setup = Convert.ToChar('A');
       object obj = setup;
 
-      // Gets a byte value from an object.
+      // Test Method
       char value = LJC.GetChar(obj);
+
       var result = value.ToString();
       var compare = "A";
       TestCommon.Write("GetChar()", result, compare);
@@ -261,8 +641,16 @@ namespace TestNetCommon5
     {
       var methodName = "GetChars()";
 
-      var result = "Not Implemented";
-      var compare = "";
+      // Simulates an Object value like that received from a DataTable.
+      char[] setup = ['A', 'B'];
+      object obj = setup;
+
+      // Test Method
+      char[] value = LJC.GetChars(obj);
+
+      var resultValue = value[0];
+      var result = resultValue.ToString();
+      var compare = "A";
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -332,8 +720,14 @@ namespace TestNetCommon5
     {
       var methodName = "GetGuid()";
 
-      var result = "Not Implemented";
-      var compare = "";
+      // Simulates an Object value.
+      var guid = Guid.NewGuid();
+      object obj = guid;
+
+      // Test Method
+      var value = LJC.GetGuid(obj);
+      var result = value.ToString();
+      var compare = result;
       TestCommon.Write($"{methodName}", result, compare);
     }
 
@@ -398,9 +792,255 @@ namespace TestNetCommon5
     {
       var methodName = "GetValue()";
 
-      var result = "Not Implemented";
+      object setup = "A";
+
+      // Test Method
+      var value = LJC.GetValue(setup);
+
+      var result = LJC.GetString(value);
+      var compare = "A";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+    #endregion
+
+    #region Additional Value Test Methods
+
+    // Gets a database DateTime string value from an object.
+    private void GetDbDateString()
+    {
+      var methodName = "GetDbDateString()";
+
+      // Simulates an Object value.
+      DateTime dateTime = new(2026, 10, 1);
+      object obj = dateTime;
+
+      // Test Method
+      var result = LJC.GetDbDateString(obj);
+
+      var compare = "2026/10/01 00:00:00";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Gets a DateTime value from an object.
+    private void GetDbDateTime()
+    {
+      var methodName = "GetDbDateTime()";
+
+      var setup = "10/1/2026 00:00:00";
+      object obj = setup;
+
+      // Test Method
+      var value = LJC.GetDbDateTime(obj);
+
+      var result = LJC.GetDbDateString(value);
+      var compare = "2026/10/01 00:00:00";
+      TestCommon.Write($"{methodName}1", result, compare);
+
+      setup = "2026/10/1 00:00:00";
+      obj = setup;
+      value = LJC.GetDbDateTime(obj);
+      result = LJC.GetDbDateString(value);
+      compare = "2026/10/01 00:00:00";
+      TestCommon.Write($"{methodName}2", result, compare);
+    }
+    #endregion
+
+    #region Project Config Values Test Methods
+
+    // Retrieves the Config bool value.
+    private void ConfigBool()
+    {
+      var methodName = "ConfigBool()";
+
+      // Test Method
+
+      var value = "Not Implemented";
+      var result = "";
+      if (value != null)
+      {
+        result = value.ToString();
+      }
       var compare = "";
       TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Retrieves the Config Color value.
+    private void ConfigColor()
+    {
+      var methodName = "ConfigColor()";
+
+      // Test Method
+
+      var value = "Not Implemented";
+      var result = "";
+      if (value != null)
+      {
+        result = value.ToString();
+      }
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Retrieves the Config string value.
+    private void ConfigString()
+    {
+      var methodName = "ConfigString()";
+
+      // Test Method
+
+      var value = "Not Implemented";
+      var result = "";
+      if (value != null)
+      {
+        result = value.ToString();
+      }
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Accept or Select the DataConfig.
+    private void ConsoleConfig()
+    {
+      var methodName = "ConsoleConfig()";
+
+      // Test Method
+
+      var value = "Not Implemented";
+      var result = "";
+      if (value != null)
+      {
+        result = value.ToString();
+      }
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+    #endregion
+
+    #region Serialization Test Methods
+
+    // Deserialize an XML message file to an object.
+    private void XmlDeserialize()
+    {
+      // Setup
+      var person = new Person()
+      {
+        Id = 1,
+        Name = "Text",
+        PrincipleFlag = true
+      };
+      string file = "Text.xml";
+      //LJC.XmlSerialize(person.GetType(), person, null, file);
+      LJC.XmlSerialize(typeof(Person), person, null, file);
+
+      // Deserialize an XML message file to an object.
+      Person? newPerson;
+      newPerson = LJC.XmlDeserialize(typeof(Person), file) as Person;
+      if (null == newPerson)
+      {
+        Console.WriteLine("XmlDeserialize()1 newPerson is null.");
+      }
+      else
+      {
+        var result = $"{newPerson.Id}, {newPerson.Name}" +
+            $", {newPerson.PrincipleFlag}";
+        var compare = "1, Text, True";
+        TestCommon.Write("XmlDeserialize()2", result, compare);
+      }
+    }
+
+    // Deserialize an XML message string to an object.
+    private void XmlDeserializeMessage()
+    {
+      // Setup
+      var person = new Person()
+      {
+        Id = 2,
+        Name = "Text",
+        PrincipleFlag = true
+      };
+      //string message = LJC.XmlSerializeToString(person.GetType(), person
+      //  , null);
+      var nameSpaces = new XmlSerializerNamespaces();
+      string message = LJC.XmlSerializeToString(person.GetType(), person
+        , nameSpaces);
+
+      // Deserialize an XML message string to an object.
+      Person? newPerson;
+      newPerson = LJC.XmlDeserializeMessage(typeof(Person), message) as Person;
+      if (null == newPerson)
+      {
+        Console.WriteLine("XmlDeserializeMessage()1 newPerson is null.");
+      }
+      else
+      {
+        var result = $"{newPerson.Id}, {newPerson.Name}" +
+        $", {newPerson.PrincipleFlag}";
+        var compare = "2, Text, True";
+        TestCommon.Write("XmlDeserializeMessage()2", result, compare);
+      }
+    }
+
+    // Serialize an object to an XML message file.
+    private void XmlSerialize()
+    {
+      // Setup
+      var person = new Person()
+      {
+        Id = 2,
+        Name = "Text",
+        PrincipleFlag = true
+      };
+      string file = "Text.xml";
+
+      // Serialize an object to an XML message file.
+      LJC.XmlSerialize(person.GetType(), person, null, file);
+
+      // Check the object.
+      Person? newPerson;
+      newPerson = LJC.XmlDeserialize(typeof(Person), file) as Person;
+      if (null == newPerson)
+      {
+        Console.WriteLine("XmlSerialize()1 newPerson is null.");
+      }
+      else
+      {
+        var result = $"{newPerson.Id}, {newPerson.Name}" +
+          $", {newPerson.PrincipleFlag}";
+        var compare = "2, Text, True";
+        TestCommon.Write("XmlSerialize()2", result, compare);
+      }
+    }
+
+    // Serialize an object to an XML message string.
+    private void XmlSerializeToString()
+    {
+      // Serialize an object to an XML message string.
+      var person = new Person()
+      {
+        Id = 2,
+        Name = "Text",
+        PrincipleFlag = true
+      };
+      //string message = LJC.XmlSerializeToString(person.GetType(), person
+      //  , null);
+      var nameSpaces = new XmlSerializerNamespaces();
+      string message = LJC.XmlSerializeToString(person.GetType(), person
+        , nameSpaces);
+
+      // Check the object.
+      Person? newPerson;
+      newPerson = LJC.XmlDeserializeMessage(typeof(Person), message) as Person;
+      if (null == newPerson)
+      {
+        Console.WriteLine("XmlSerializeToString()1 newPerson is null.");
+      }
+      else
+      {
+        var result = $"{newPerson.Id}, {newPerson.Name}" +
+          $", {newPerson.PrincipleFlag}";
+        var compare = "2, Text, True";
+        TestCommon.Write("XmlSerializeToString()2", result, compare);
+      }
     }
     #endregion
 
@@ -625,134 +1265,6 @@ namespace TestNetCommon5
         var result = LJC.XmlDecode(encoded);
         var compare = "<text>Here & There</text>";
         TestCommon.Write("XmlEncode()", result, compare);
-      }
-    }
-    #endregion
-
-    #region Serialization Test Methods
-
-    // Deserialize an XML message file to an object.
-    private void XmlDeserialize()
-    {
-      // Setup
-      var person = new Person()
-      {
-        Id = 1,
-        Name = "Text",
-        PrincipleFlag = true
-      };
-      string file = "Text.xml";
-      //LJC.XmlSerialize(person.GetType(), person, null, file);
-      LJC.XmlSerialize(typeof(Person), person, null, file);
-
-      // Deserialize an XML message file to an object.
-      Person? newPerson;
-      newPerson = LJC.XmlDeserialize(typeof(Person), file) as Person;
-      if (null == newPerson)
-      {
-        Console.WriteLine("XmlDeserialize()1 newPerson is null.");
-      }
-      else
-      {
-        var result = $"{newPerson.Id}, {newPerson.Name}" +
-            $", {newPerson.PrincipleFlag}";
-        var compare = "1, Text, True";
-        TestCommon.Write("XmlDeserialize()2", result, compare);
-      }
-    }
-
-    // Deserialize an XML message string to an object.
-    private void XmlDeserializeMessage()
-    {
-      // Setup
-      var person = new Person()
-      {
-        Id = 2,
-        Name = "Text",
-        PrincipleFlag = true
-      };
-      //string message = LJC.XmlSerializeToString(person.GetType(), person
-      //  , null);
-      var nameSpaces = new XmlSerializerNamespaces();
-      string message = LJC.XmlSerializeToString(person.GetType(), person
-        , nameSpaces);
-
-      // Deserialize an XML message string to an object.
-      Person? newPerson;
-      newPerson = LJC.XmlDeserializeMessage(typeof(Person), message) as Person;
-      if (null == newPerson)
-      {
-        Console.WriteLine("XmlDeserializeMessage()1 newPerson is null.");
-      }
-      else
-      {
-        var result = $"{newPerson.Id}, {newPerson.Name}" +
-        $", {newPerson.PrincipleFlag}";
-        var compare = "2, Text, True";
-        TestCommon.Write("XmlDeserializeMessage()2", result, compare);
-      }
-    }
-
-    // Serialize an object to an XML message file.
-    private void XmlSerialize()
-    {
-      // Setup
-      var person = new Person()
-      {
-        Id = 2,
-        Name = "Text",
-        PrincipleFlag = true
-      };
-      string file = "Text.xml";
-
-      // Serialize an object to an XML message file.
-      LJC.XmlSerialize(person.GetType(), person, null, file);
-
-      // Check the object.
-      Person? newPerson;
-      newPerson = LJC.XmlDeserialize(typeof(Person), file) as Person;
-      if (null == newPerson)
-      {
-        Console.WriteLine("XmlSerialize()1 newPerson is null.");
-      }
-      else
-      {
-        var result = $"{newPerson.Id}, {newPerson.Name}" +
-          $", {newPerson.PrincipleFlag}";
-        var compare = "2, Text, True";
-        TestCommon.Write("XmlSerialize()2", result, compare);
-      }
-    }
-
-    // Serialize an object to an XML message string.
-    private void XmlSerializeToString()
-    {
-      // Serialize an object to an XML message string.
-      var person = new Person()
-      {
-        Id = 2,
-        Name = "Text",
-        PrincipleFlag = true
-      };
-      //string message = LJC.XmlSerializeToString(person.GetType(), person
-      //  , null);
-      var nameSpaces = new XmlSerializerNamespaces();
-      string message = LJC.XmlSerializeToString(person.GetType(), person
-        , nameSpaces);
-
-      // Check the object.
-      Person? newPerson;
-      newPerson = LJC.XmlDeserializeMessage(typeof(Person), message) as Person;
-      if (null == newPerson)
-      {
-        Console.WriteLine("XmlSerializeToString()1 newPerson is null.");
-      }
-      else
-      {
-        var result = $"{newPerson.Id}, {newPerson.Name}" +
-          $", {newPerson.PrincipleFlag}";
-        var compare = "2, Text, True";
-        TestCommon.Write("XmlSerializeToString()2", result, compare);
       }
     }
     #endregion
