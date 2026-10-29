@@ -105,17 +105,6 @@ namespace LJCDataAccess5
       return retValue;
     }
 
-    // Formats the DateTime value to a date/time string in database format.
-    /// <include file='Doc/DataCommon.xml'
-    ///  path='members/GetDbDateTimeString/*'/>
-    public static string GetDbDateTimeString(DateTime dateTime)
-    {
-      string retValue;
-
-      retValue = dateTime.ToString("yyyy/MM/dd HH:mm:ss");
-      return retValue;
-    }
-
     // Get the minimum date/time value.
     /// <include file='Doc/DataCommon.xml'
     ///  path='members/GetMinDateTime/*'/>
@@ -156,54 +145,6 @@ namespace LJCDataAccess5
         // "1753/01/01 00:00:00";
         retValue = string.Format(SqlDateTime.MinValue.ToString()
           , "MM/dd/yyyy HH:mm:ss");
-      }
-      return retValue;
-    }
-
-    // Format the date value for display.
-    /// <include file='Doc/DataCommon.xml'
-    ///  path='members/GetUIDateString/*'/>
-    public static string? GetUIDateString(DateTime? dateTime)
-    {
-      string? retValue = null;
-
-      if (dateTime != null
-        && !LJC.IsDbMinDate(dateTime))
-      {
-        DateTime tempDateTime = (DateTime)dateTime;
-        retValue = tempDateTime.ToString("MM/dd/yyyy");
-      }
-      return retValue;
-    }
-
-    // Format the date/time value for display.
-    /// <include file='Doc/DataCommon.xml'
-    ///  path='members/GetUIDateTimeString/*'/>
-    public static string? GetUIDateTimeString(DateTime dateTime)
-    {
-      string? retValue = null;
-
-      if (!LJC.IsDbMinDate(dateTime))
-      {
-        retValue = dateTime.ToString("MM/dd/yyyy HH:mm:ss");
-      }
-      return retValue;
-    }
-
-    // Format the date/time to time for display.
-    /// <include file='Doc/DataCommon.xml'
-    ///  path='members/GetUITimeString/*'/>
-    public static string? GetUITimeString(DateTime dateTime)
-    {
-      string? retValue = null;
-
-      if (!LJC.IsDbMinDate(dateTime))
-      {
-        retValue = dateTime.ToShortTimeString();
-        if (7 == retValue.Length)
-        {
-          retValue = "0" + retValue;
-        }
       }
       return retValue;
     }

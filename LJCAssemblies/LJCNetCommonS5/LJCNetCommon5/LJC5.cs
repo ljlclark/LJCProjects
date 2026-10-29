@@ -19,6 +19,17 @@ namespace LJCNetCommon5
   {
     #region Common Methods
 
+    // Formats the DateTime value to a date/time string in database format.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/DbDateTimeString/*'/>
+    public static string DbDateTimeString(DateTime dateTime)
+    {
+      string retValue;
+
+      retValue = dateTime.ToString("yyyy/MM/dd HH:mm:ss");
+      return retValue;
+    }
+
     // Creates the keys collection.
     /// <include file='Doc/LJC.xml'
     ///  path='members/Keys/*'/>
@@ -36,6 +47,72 @@ namespace LJCNetCommon5
     public static string MinSqlDate()
     {
       return "1753/01/01 00:00:00";
+    }
+
+    // Gets a short from a text string.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ToInt16/*'/>
+    public static short ToInt16(string text)
+    {
+      _ = short.TryParse(text, out short value);
+      return value;
+    }
+
+    // Gets an int from a text string.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ToInt32/*'/>
+    public static int ToInt32(string text)
+    {
+      _ = int.TryParse(text, out int value);
+      return value;
+    }
+
+    // Format the date value for display.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/UIDateString/*'/>
+    public static string? UIDateString(DateTime? dateTime)
+    {
+      string? retValue = null;
+
+      if (dateTime != null
+        && !LJC.IsDbMinDate(dateTime))
+      {
+        DateTime tempDateTime = (DateTime)dateTime;
+        retValue = tempDateTime.ToString("MM/dd/yyyy");
+      }
+      return retValue;
+    }
+
+    // Format the date/time value for display.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/UIDateTimeString/*'/>
+    public static string? UIDateTimeString(DateTime dateTime)
+    {
+      string? retValue = null;
+
+      if (!IsDbMinDate(dateTime))
+      {
+        retValue = dateTime.ToString("MM/dd/yyyy HH:mm:ss");
+      }
+      return retValue;
+    }
+
+    // Format the date/time to time for display.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/UITimeString/*'/>
+    public static string? UITimeString(DateTime dateTime)
+    {
+      string? retValue = null;
+
+      if (!IsDbMinDate(dateTime))
+      {
+        retValue = dateTime.ToShortTimeString();
+        if (7 == retValue.Length)
+        {
+          retValue = "0" + retValue;
+        }
+      }
+      return retValue;
     }
     #endregion
 
@@ -740,7 +817,8 @@ namespace LJCNetCommon5
         if (type == typeof(DateTime))
         {
           var dateTime = GetDateTime(value);
-          retValue = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
+          //retValue = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
+          retValue = DbDateTimeString(dateTime);
         }
       }
       return retValue;
@@ -766,24 +844,6 @@ namespace LJCNetCommon5
         }
       }
       return retValue;
-    }
-
-    // Gets a short from a text string.
-    /// <include file='Doc/LJC.xml'
-    ///  path='members/ToInt16/*'/>
-    public static short ToInt16(string text)
-    {
-      _ = short.TryParse(text, out short value);
-      return value;
-    }
-
-    // Gets an int from a text string.
-    /// <include file='Doc/LJC.xml'
-    ///  path='members/ToInt32/*'/>
-    public static int ToInt32(string text)
-    {
-      _ = int.TryParse(text, out int value);
-      return value;
     }
     #endregion
 

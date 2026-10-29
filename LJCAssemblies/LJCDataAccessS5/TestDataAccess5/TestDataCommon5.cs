@@ -35,12 +35,8 @@ namespace TestDataAccess5
       GetDbDate();
       GetDbDateTime();
       GetDbDateString();
-      GetDbDateTimeString();
       GetMinDateTime();
       GetMinUIDateTimeString();
-      GetUIDateString();
-      GetUIDateTimeString();
-      GetUITimeString();
     }
     #endregion
 
@@ -133,18 +129,6 @@ namespace TestDataAccess5
       TestCommon?.Write($"{methodName}", result, compare);
     }
 
-    // Formats the DateTime value to a date/time string in database format.
-    private void GetDbDateTimeString()
-    {
-      var methodName = "GetDbDateTimeString()";
-
-      // Test Method
-      var dateTime = new DateTime(2025, 12, 25, 21, 30, 0);
-      var result = LJCDataCommon.GetDbDateTimeString(dateTime);
-      var compare = "2025/12/25 21:30:00";
-      TestCommon?.Write($"{methodName}", result, compare);
-    }
-
     // Get the minimum date/time value.
     private void GetMinDateTime()
     {
@@ -178,45 +162,6 @@ namespace TestDataAccess5
       result = LJCDataCommon.GetMinUIDateTimeString(connectionType);
       compare = "1/1/0001 12:00:00 AM";
       TestCommon?.Write($"{methodName}2", result, compare);
-    }
-
-    // Format the date value for display.
-    private void GetUIDateString()
-    {
-      var methodName = "GetUIDateString()";
-
-      var dateTime = new DateTime(2025, 12, 25, 12, 30, 10);
-
-      // Test Method
-      var result = LJCDataCommon.GetUIDateString(dateTime);
-      var compare = "12/25/2025";
-      TestCommon?.Write($"{methodName}", result, compare);
-    }
-
-    // Format the date/time value for display.
-    private void GetUIDateTimeString()
-    {
-      var methodName = "GetUIDateTimeString()";
-
-      var dateTime = new DateTime(2025, 12, 25, 12, 30, 10);
-
-      // Test Method
-      var result = LJCDataCommon.GetUIDateTimeString(dateTime);
-      var compare = "12/25/2025 12:30:10";
-      TestCommon?.Write($"{methodName}", result, compare);
-    }
-
-    // Format the date/time to time for display.
-    private void GetUITimeString()
-    {
-      var methodName = "GetUITimeString()";
-
-      var dateTime = new DateTime(2025, 12, 25, 12, 30, 10);
-
-      // Test Method
-      var result = LJCDataCommon.GetUITimeString(dateTime);
-      var compare = "12:30 PM";
-      TestCommon?.Write($"{methodName}", result, compare);
     }
     #endregion
   }

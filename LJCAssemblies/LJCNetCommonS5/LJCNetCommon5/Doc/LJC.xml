@@ -23,6 +23,13 @@
   </LJC>
 
   <!-- Common Methods -->
+  <DbDateTimeString>
+    <summary>
+      Formats the DateTime value to a date/time string in database format.
+    </summary>
+    <param name="dateTime"></param>
+    <returns></returns>
+  </DbDateTimeString>
   <Keys>
     <summary>
       Creates the keys collection.
@@ -35,6 +42,41 @@
       Get the minimum date value.
     </summary>
   </MinSqlDate>
+  <ToInt16>
+    <summary>
+      Gets a short from a text string.
+    </summary>
+    <param name="text">The text value.</param>
+    <parentGroup>value</parentGroup>
+  </ToInt16>
+  <ToInt32>
+    <summary>
+      Gets an int from a text string.
+    </summary>
+    <param name="text">The text value.</param>
+    <parentGroup>value</parentGroup>
+  </ToInt32>
+  <UIDateString>
+    <summary>
+      Format the date value for display.
+    </summary>
+    <param name="dateTime"></param>
+    <returns></returns>
+  </UIDateString>
+  <UIDateTimeString>
+    <summary>
+      Format the date/time value for display.
+    </summary>
+    <param name="dateTime"></param>
+    <returns></returns>
+  </UIDateTimeString>
+  <UITimeString>
+    <summary>
+      Format the date/time to time for display.
+    </summary>
+    <param name="dateTime"></param>
+    <returns></returns>
+  </UITimeString>
 
   <!-- Check Values Methods -->
   <CheckArgument>
@@ -76,27 +118,27 @@
         /// &lt;summary&gt;Sort and search on Name value.&lt;/summary&gt;
         public class NameComparer : IComparer&lt;ClassName&gt;
         {
-        // Compares two objects.
-        /// &lt;include path='members/Compare/*' file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'/&gt;
-        public int Compare(ClassName x, ClassName y)
-        {
-        int retValue;
+          // Compares two objects.
+          /// &lt;include path='members/Compare/*' file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'/&gt;
+          public int Compare(ClassName x, ClassName y)
+          {
+            int retValue;
 
-        retValue = LJC.CompareNull(x, y);
-        if (LJCNetString.CompareNotNullOrEqual == retValue)
-        {
-        retValue = NetCommon.CompareNull(x?.Name, y?.Name);
-        if (LJCNetString.CompareNotNullOrEqual == retValue)
-        {
-        // Case sensitive.
-        //retValue = x!.Name!.CompareTo(y?.Name);
+            retValue = LJC.CompareNull(x, y);
+            if (LJCNetString.CompareNotNullOrEqual == retValue)
+            {
+              retValue = NetCommon.CompareNull(x?.Name, y?.Name);
+              if (LJCNetString.CompareNotNullOrEqual == retValue)
+              {
+                // Case sensitive.
+                //retValue = x!.Name!.CompareTo(y?.Name);
 
-        // Not case sensitive.
-        retValue = string.Compare(x.Name, y.Name, true);
-        }
-        }
-        return retValue;
-        }
+                // Not case sensitive.
+                retValue = string.Compare(x.Name, y.Name, true);
+              }
+            }
+            return retValue;
+          }
         }
       </code>
     </example>
@@ -592,20 +634,6 @@
     </summary>
     <param name="value">The value object.</param>
   </GetDbDateTime>
-  <ToInt16>
-    <summary>
-      Gets a short from a text string.
-    </summary>
-    <param name="text">The text value.</param>
-    <parentGroup>value</parentGroup>
-  </ToInt16>
-  <ToInt32>
-    <summary>
-      Gets an int from a text string.
-    </summary>
-    <param name="text">The text value.</param>
-    <parentGroup>value</parentGroup>
-  </ToInt32>
 
   <!-- Project Config Values Methods -->
   <ConfigBool>

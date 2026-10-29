@@ -27,6 +27,33 @@ namespace TestNetCommon5
     // Runs the test methods.
     private void Run()
     {
+      // Common Test Methods
+      DbDateTimeString();
+      Keys();
+      MinSqlDate();
+      ToInt16();
+      ToInt32();
+      UIDateString();
+      UIDateTimeString();
+      UITimeString();
+
+      // Check Values Test Methods
+      //CheckArgument();
+      //CompareNull();
+      //HasTableColumns1();
+      //HasTableColumns2();
+      //HasTableData();
+      //HasArrayElements();
+      //HasListItems();
+      //HasText();
+      //IsEqual();
+      //IsDbMinDate();
+
+      // Console Test Methods
+      //ClearReadKey();
+      //ClearReadLine();
+      //KeyOption();
+
       // Text Conversion Test Methods
       Base64BytesToText();
       TextToBase64Bytes();
@@ -45,25 +72,335 @@ namespace TestNetCommon5
       XmlEncode();
       XmlDecode();
 
-      // Object Value Test Methods
-      GetBoolean();
-      GetByte();
-      GetChar();
-      GetDateTime();
-      GetDecimal();
-      GetDouble();
-      GetInt16();
-      GetInt32();
-      GetInt64();
-      GetObject();
-      GetSingle();
-      GetString();
+      // Additional Value Test Methods
+      //GetDbDateString();
+      //GetDbDateTime();
+
+      // Project Config Values Test Methods
+      //ConfigBool();
+      //ConfigColor();
+      //ConfigString();
+      //ConsoleConfig();
 
       // Serialization Test Methods
       XmlDeserialize();
       XmlDeserializeMessage();
       XmlSerialize();
       XmlSerializeToString();
+
+      // Object Value Test Methods
+      GetBoolean();
+      GetByte();
+      GetBytes();
+      GetChar();
+      GetChars();
+      GetDateTime();
+      GetDecimal();
+      GetDouble();
+      GetFloat();
+      GetGuid();
+      GetInt16();
+      GetInt32();
+      GetInt64();
+      GetValue();
+      GetString();
+      GetValue();
+    }
+    #endregion
+
+    #region Common Test Methods
+
+    // Formats the DateTime value to a date/time string in database format.
+    private void DbDateTimeString()
+    {
+      var methodName = "DbDateTimeString()";
+
+      // Test Method
+      var dateTime = new DateTime(2025, 12, 25, 21, 30, 0);
+      var result = LJC.DbDateTimeString(dateTime);
+      var compare = "2025/12/25 21:30:00";
+      TestCommon?.Write($"{methodName}", result, compare);
+    }
+
+    // Creates the keys collection.
+    private void Keys()
+    {
+      var methodName = "Keys()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Get the minimum date value.
+    private void MinSqlDate()
+    {
+      var methodName = "Keys()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Gets a short from a text string.
+    private void ToInt16()
+    {
+      var methodName = "ToInt16()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Gets an int from a text string.
+    private void ToInt32()
+    {
+      var methodName = "ToInt32()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Format the date value for display.
+    private void UIDateString()
+    {
+      var methodName = "GetUIDateString()";
+
+      var dateTime = new DateTime(2025, 12, 25, 12, 30, 10);
+
+      // Test Method
+      var result = LJC.UIDateString(dateTime);
+      var compare = "12/25/2025";
+      TestCommon?.Write($"{methodName}", result, compare);
+    }
+
+    // Format the date/time value for display.
+    private void UIDateTimeString()
+    {
+      var methodName = "GetUIDateTimeString()";
+
+      var dateTime = new DateTime(2025, 12, 25, 12, 30, 10);
+
+      // Test Method
+      var result = LJC.UIDateTimeString(dateTime);
+      var compare = "12/25/2025 12:30:10";
+      TestCommon?.Write($"{methodName}", result, compare);
+    }
+
+    // Format the date/time to time for display.
+    private void UITimeString()
+    {
+      var methodName = "GetUITimeString()";
+
+      var dateTime = new DateTime(2025, 12, 25, 12, 30, 10);
+
+      // Test Method
+      var result = LJC.UITimeString(dateTime);
+      var compare = "12:30 PM";
+      TestCommon?.Write($"{methodName}", result, compare);
+    }
+    #endregion
+
+    #region Object Value Test Methods
+
+    // Gets a bool value from an object.
+    private void GetBoolean()
+    {
+      // Simulates an Object value like that received from a DataTable.
+      bool setup = true;
+      object obj = setup;
+
+      // Gets a short value from an object.
+      bool value = LJC.GetBoolean(obj);
+      var result = value.ToString();
+      var compare = "True";
+      TestCommon.Write("GetBoolean()", result, compare);
+    }
+
+    // Gets a byte value from an object.
+    private void GetByte()
+    {
+      // Simulates an Object value like that received from a DataTable.
+      byte setup = Convert.ToByte('A');
+      object obj = setup;
+
+      // Gets a byte value from an object.
+      byte value = LJC.GetByte(obj);
+      var result = value.ToString();
+      var compare = "65";
+      TestCommon.Write("GetByte()", result, compare);
+    }
+
+    // Gets an array of bytes from an object.
+    private void GetBytes()
+    {
+      var methodName = "GetChars()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Gets a char value from an object.
+    private void GetChar()
+    {
+      // Simulates an Object value like that received from a DataTable.
+      char setup = Convert.ToChar('A');
+      object obj = setup;
+
+      // Gets a byte value from an object.
+      char value = LJC.GetChar(obj);
+      var result = value.ToString();
+      var compare = "A";
+      TestCommon.Write("GetChar()", result, compare);
+    }
+
+    // Gets a character array from an object.
+    private void GetChars()
+    {
+      var methodName = "GetChars()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Gets a DateTime value from an object.
+    private void GetDateTime()
+    {
+      // Simulates an Object value like that received from a DataTable.
+      string setup = "2026/06/15 12:30:00 PM";
+      object obj = setup;
+
+      // Gets a decimal value from an object.
+      DateTime? returnValue = LJC.GetDateTime(obj);
+      if (returnValue != null)
+      {
+        DateTime value = (DateTime)returnValue;
+        var result = $"{value:yyyy/MM/dd HH:mm:ss tt}";
+        //result = value.ToString("yyyy/MM/dd HH:mm:ss tt");
+        var compare = "2026/06/15 12:30:00 PM";
+        TestCommon.Write("GetDateTime()", result, compare);
+      }
+    }
+
+    // Gets a decimal value from an object.
+    private void GetDecimal()
+    {
+      // Simulates an Object value like that received from a DataTable.
+      decimal setup = 3.14m;
+      object obj = setup;
+
+      // Gets a decimal value from an object.
+      decimal value = LJC.GetDecimal(obj);
+      var result = value.ToString();
+      var compare = "3.14";
+      TestCommon.Write("GetDecimal()", result, compare);
+    }
+
+    // Gets a double value from an object.
+    private void GetDouble()
+    {
+      // Simulates an Object value like that received from a DataTable.
+      double setup = 3.14d;
+      object obj = setup;
+
+      // Gets a decimal value from an object.
+      double value = LJC.GetDouble(obj);
+      var result = value.ToString();
+      var compare = "3.14";
+      TestCommon.Write("GetDouble()", result, compare);
+    }
+
+    // Gets a float (single) value from an object.
+    private void GetFloat()
+    {
+      // Simulates an Object value like that received from a DataTable.
+      float setup = 3.14f;
+      object obj = setup;
+
+      // Gets a decimal value from an object.
+      float value = LJC.GetFloat(obj);
+      var result = value.ToString();
+      var compare = "3.14";
+      TestCommon.Write("GetDouble()", result, compare);
+    }
+
+    // Gets a GUID value from an object.
+    private void GetGuid()
+    {
+      var methodName = "GetGuid()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
+    }
+
+    // Gets a short value from an object.
+    private void GetInt16()
+    {
+      // Simulates an Object value like that received from a DataTable.
+      short setup = 3;
+      object obj = setup;
+
+      // Gets a short value from an object.
+      short value = LJC.GetInt16(obj);
+      var result = value.ToString();
+      var compare = "3";
+      TestCommon.Write("GetInt16()", result, compare);
+    }
+
+    // Gets an int value from an object.
+    private void GetInt32()
+    {
+      // Simulates an Object value like that received from a DataTable.
+      int setup = 3;
+      object obj = setup;
+
+      // Gets an int value from an object.
+      int value = LJC.GetInt32(obj);
+      var result = value.ToString();
+      var compare = "3";
+      TestCommon.Write("GetInt32()", result, compare);
+    }
+
+    // Gets a long value from an object.
+    private void GetInt64()
+    {
+      // Simulates an Object value like that received from a DataTable.
+      long setup = 3;
+      object obj = setup;
+
+      // Gets a long value from an object.
+      long value = LJC.GetInt64(obj);
+      var result = value.ToString();
+      var compare = "3";
+      TestCommon.Write("GetInt64()", result, compare);
+    }
+
+    // Gets a trimmed string value from an object.
+    private void GetString()
+    {
+      // Simulates an Object value like that received from a DataTable.
+      string setup = "3";
+      object obj = setup;
+
+      // Gets a string value from an object.
+      string? value = LJC.GetString(obj);
+      var result = value;
+      var compare = "3";
+      TestCommon.Write("GetString", result, compare);
+    }
+
+    // Gets an instantiated object value.
+    private void GetValue()
+    {
+      var methodName = "GetValue()";
+
+      var result = "Not Implemented";
+      var compare = "";
+      TestCommon.Write($"{methodName}", result, compare);
     }
     #endregion
 
@@ -289,177 +626,6 @@ namespace TestNetCommon5
         var compare = "<text>Here & There</text>";
         TestCommon.Write("XmlEncode()", result, compare);
       }
-    }
-    #endregion
-
-    #region Object Value Test Methods
-
-    // Gets a bool value from an object.
-    private void GetBoolean()
-    {
-      // Simulates an Object value like that received from a DataTable.
-      bool setup = true;
-      object obj = setup;
-
-      // Gets a short value from an object.
-      bool value = LJC.GetBoolean(obj);
-      var result = value.ToString();
-      var compare = "True";
-      TestCommon.Write("GetBoolean()", result, compare);
-    }
-
-    // Gets a byte value from an object.
-    private void GetByte()
-    {
-      // Simulates an Object value like that received from a DataTable.
-      byte setup = Convert.ToByte('A');
-      object obj = setup;
-
-      // Gets a byte value from an object.
-      byte value = LJC.GetByte(obj);
-      var result = value.ToString();
-      var compare = "65";
-      TestCommon.Write("GetByte()", result, compare);
-    }
-
-    // Gets a char value from an object.
-    private void GetChar()
-    {
-      // Simulates an Object value like that received from a DataTable.
-      char setup = Convert.ToChar('A');
-      object obj = setup;
-
-      // Gets a byte value from an object.
-      char value = LJC.GetChar(obj);
-      var result = value.ToString();
-      var compare = "A";
-      TestCommon.Write("GetChar()", result, compare);
-    }
-
-    // Gets a DateTime value from an object.
-    private void GetDateTime()
-    {
-      // Simulates an Object value like that received from a DataTable.
-      string setup = "2026/06/15 12:30:00 PM";
-      object obj = setup;
-
-      // Gets a decimal value from an object.
-      DateTime? returnValue = LJC.GetDateTime(obj);
-      if (returnValue != null)
-      {
-        DateTime value = (DateTime)returnValue;
-        var result = $"{value:yyyy/MM/dd HH:mm:ss tt}";
-        //result = value.ToString("yyyy/MM/dd HH:mm:ss tt");
-        var compare = "2026/06/15 12:30:00 PM";
-        TestCommon.Write("GetDateTime()", result, compare);
-      }
-    }
-
-    // Gets a decimal value from an object.
-    private void GetDecimal()
-    {
-      // Simulates an Object value like that received from a DataTable.
-      decimal setup = 3.14m;
-      object obj = setup;
-
-      // Gets a decimal value from an object.
-      decimal value = LJC.GetDecimal(obj);
-      var result = value.ToString();
-      var compare = "3.14";
-      TestCommon.Write("GetDecimal()", result, compare);
-    }
-
-    // Gets a double value from an object.
-    private void GetDouble()
-    {
-      // Simulates an Object value like that received from a DataTable.
-      double setup = 3.14d;
-      object obj = setup;
-
-      // Gets a decimal value from an object.
-      double value = LJC.GetDouble(obj);
-      var result = value.ToString();
-      var compare = "3.14";
-      TestCommon.Write("GetDouble()", result, compare);
-    }
-
-    // Gets a short value from an object.
-    private void GetInt16()
-    {
-      // Simulates an Object value like that received from a DataTable.
-      short setup = 3;
-      object obj = setup;
-
-      // Gets a short value from an object.
-      short value = LJC.GetInt16(obj);
-      var result = value.ToString();
-      var compare = "3";
-      TestCommon.Write("GetInt16()", result, compare);
-    }
-
-    // Gets an int value from an object.
-    private void GetInt32()
-    {
-      // Simulates an Object value like that received from a DataTable.
-      int setup = 3;
-      object obj = setup;
-
-      // Gets an int value from an object.
-      int value = LJC.GetInt32(obj);
-      var result = value.ToString();
-      var compare = "3";
-      TestCommon.Write("GetInt32()", result, compare);
-    }
-
-    // Gets a long value from an object.
-    private void GetInt64()
-    {
-      // Simulates an Object value like that received from a DataTable.
-      long setup = 3;
-      object obj = setup;
-
-      // Gets a long value from an object.
-      long value = LJC.GetInt64(obj);
-      var result = value.ToString();
-      var compare = "3";
-      TestCommon.Write("GetInt64()", result, compare);
-    }
-
-    private void GetObject()
-    {
-      var methodName = "GetObject()";
-
-      var result = "Not Implemented";
-      var compare = "";
-      TestCommon.Write($"{methodName}", result, compare);
-    }
-
-    // Gets a float (single) value from an object.
-    private void GetSingle()
-    {
-      // Simulates an Object value like that received from a DataTable.
-      float setup = 3.14f;
-      object obj = setup;
-
-      // Gets a decimal value from an object.
-      float value = LJC.GetFloat(obj);
-      var result = value.ToString();
-      var compare = "3.14";
-      TestCommon.Write("GetDouble()", result, compare);
-    }
-
-    // Gets a trimmed string value from an object.
-    private void GetString()
-    {
-      // Simulates an Object value like that received from a DataTable.
-      string setup = "3";
-      object obj = setup;
-
-      // Gets a string value from an object.
-      string? value = LJC.GetString(obj);
-      var result = value;
-      var compare = "3";
-      TestCommon.Write("GetString", result, compare);
     }
     #endregion
 
