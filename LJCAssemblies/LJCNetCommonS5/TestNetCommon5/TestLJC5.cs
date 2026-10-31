@@ -116,9 +116,11 @@ namespace TestNetCommon5
     {
       var methodName = "DbDateTimeString()";
 
+      var setup = new DateTime(2025, 12, 25, 21, 30, 0);
+
       // Test Method
-      var dateTime = new DateTime(2025, 12, 25, 21, 30, 0);
-      var result = LJC.DbDateTimeString(dateTime);
+      var result = LJC.DbDateTimeString(setup);
+
       var compare = "2025/12/25 21:30:00";
       TestCommon?.Write($"{methodName}", result, compare);
     }

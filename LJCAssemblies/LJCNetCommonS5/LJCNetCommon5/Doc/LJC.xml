@@ -28,6 +28,20 @@
     </summary>
     <param name="dateTime"></param>
     <returns></returns>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Formats the DateTime value to a date/time string in database format.
+        private void DbDateTimeString()
+        {
+          // Test Method
+          var dateTime = new DateTime(2025, 12, 25, 21, 30, 0);
+          var result = LJC.DbDateTimeString(dateTime);
+          var compare = "2025/12/25 21:30:00";
+        }
+      </code>
+    </example>
   </DbDateTimeString>
   <Keys>
     <summary>
@@ -35,11 +49,45 @@
     </summary>
     <param name="propertyName">The object property name.</param>
     <param name="searchValue">The search value.</param>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Creates the keys collection.
+        private void Keys()
+        {
+          // Test Method
+          var keys = LJC.Keys("PropertyName", "SearchValue");
+
+          var value = keys[0].Value;
+          var result = "";
+          if (value != null)
+          {
+            result = value.ToString();
+          }
+          var compare = "SearchValue";
+        }
+      </code>
+    </example>
   </Keys>
   <MinSqlDate>
     <summary>
       Get the minimum date value.
     </summary>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Get the minimum date value.
+        private void MinSqlDate()
+        {
+          // Test Method
+          var result = LJC.MinSqlDate();
+
+          var compare = "1753/01/01 00:00:00";
+        }
+      </code>
+    </example>
   </MinSqlDate>
   <ToInt16>
     <summary>
@@ -47,6 +95,25 @@
     </summary>
     <param name="text">The text value.</param>
     <parentGroup>value</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Gets a short from a text string.
+        private void ToInt16()
+        {
+          // Test Method
+          var value = LJC.ToInt16("3");
+
+          var result = "";
+          if (value > 0)
+          {
+            result = value.ToString();
+          }
+          var compare = "3";
+        }
+      </code>
+    </example>
   </ToInt16>
   <ToInt32>
     <summary>
@@ -54,6 +121,25 @@
     </summary>
     <param name="text">The text value.</param>
     <parentGroup>value</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Gets an int from a text string.
+        private void ToInt32()
+        {
+          // Test Method
+          var value = LJC.ToInt32("3");
+
+          var result = "";
+          if (value > 0)
+          {
+            result = value.ToString();
+          }
+          var compare = "3";
+        }
+      </code>
+    </example>
   </ToInt32>
   <UIDateString>
     <summary>
@@ -61,6 +147,21 @@
     </summary>
     <param name="dateTime"></param>
     <returns></returns>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Format the date value for display.
+        private void UIDateString()
+        {
+          var dateTime = new DateTime(2025, 12, 25, 12, 30, 10);
+
+          // Test Method
+          var result = LJC.UIDateString(dateTime);
+          var compare = "12/25/2025";
+        }
+      </code>
+    </example>
   </UIDateString>
   <UIDateTimeString>
     <summary>
@@ -68,6 +169,21 @@
     </summary>
     <param name="dateTime"></param>
     <returns></returns>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Format the date/time value for display.
+        private void UIDateTimeString()
+        {
+          var dateTime = new DateTime(2025, 12, 25, 12, 30, 10);
+
+          // Test Method
+          var result = LJC.UIDateTimeString(dateTime);
+          var compare = "12/25/2025 12:30:10";
+        }
+      </code>
+    </example>
   </UIDateTimeString>
   <UITimeString>
     <summary>
@@ -75,6 +191,21 @@
     </summary>
     <param name="dateTime"></param>
     <returns></returns>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Format the date/time to time for display.
+        private void UITimeString()
+        {
+          var dateTime = new DateTime(2025, 12, 25, 12, 30, 10);
+
+          // Test Method
+          var result = LJC.UITimeString(dateTime);
+          var compare = "12:30 PM";
+        }
+      </code>
+    </example>
   </UITimeString>
 
   <!-- Check Values Methods -->
@@ -90,6 +221,46 @@
     <exception cref="ArgumentException">Argument Exception</exception>
     <returns>true if a valid value; otherwise throws an exception.</returns>
     <parentGroup>check</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Check for missing argument of type: string with no value, null, 
+        private void CheckArgument()
+        {
+          var methodName = "CheckArgument()";
+
+          // Test Method
+          var value = LJC.CheckArgument("X", "StringArg");
+
+          var result = value.ToString();
+          var compare = "True";
+          TestCommon.Write($"{methodName}1", result, compare);
+
+          value = LJC.CheckArgument(3, "IntArg");
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}2", result, compare);
+
+          value = LJC.CheckArgument(3.14, "FloatArg");
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}3", result, compare);
+
+          List&lt;string&gt; list = [];
+          value = LJC.CheckArgument(list, "ListArg");
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}4", result, compare);
+
+          DataTable dataTable = new();
+          value = LJC.CheckArgument(dataTable, "DataTableArg");
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}5", result, compare);
+        }
+      </code>
+    </example>
   </CheckArgument>
   <CompareNull>
     <summary>
@@ -126,7 +297,7 @@
             retValue = LJC.CompareNull(x, y);
             if (LJCNetString.CompareNotNullOrEqual == retValue)
             {
-              retValue = NetCommon.CompareNull(x?.Name, y?.Name);
+              retValue = LJC.CompareNull(x?.Name, y?.Name);
               if (LJCNetString.CompareNotNullOrEqual == retValue)
               {
                 // Case sensitive.
@@ -149,6 +320,33 @@
     <param name="dataColumns">The DataColumns collection.</param>
     <returns>true if the collection has items; otherwise, false.</returns>
     <parentGroup>check</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+        using System.Data;
+
+        // Checks a DataColumnCollection for items.
+        private void HasTableColumns1()
+        {
+          var methodName = "HasTableColumns1()";
+
+          DataTable dataTable = new();
+
+          // Test Method
+          var value = LJC.HasTableColumns(dataTable.Columns);
+
+          var result = value.ToString();
+          var compare = "False";
+          TestCommon.Write($"{methodName}1", result, compare);
+
+          dataTable.Columns.Add("Name", typeof(string));
+          value = LJC.HasTableColumns(dataTable.Columns);
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}2", result, compare);
+        }
+      </code>
+    </example>
   </HasTableColumns1>
   <HasTableColumns2>
     <summary>
@@ -157,6 +355,33 @@
     <param name="dataTable">The data table object.</param>
     <returns>true if the data table contains Columns; otherwise, false.</returns>
     <parentGroup>check</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+        using System.Data;
+
+        // Checks a table for data columns.
+        private void HasTableColumns2()
+        {
+          var methodName = "HasTableColumns2()";
+
+          DataTable dataTable = new();
+
+          // Test Method
+          var value = LJC.HasTableColumns(dataTable);
+
+          var result = value.ToString();
+          var compare = "False";
+          TestCommon.Write($"{methodName}1", result, compare);
+
+          dataTable.Columns.Add("Name", typeof(string));
+          value = LJC.HasTableColumns(dataTable);
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}2", result, compare);
+        }
+      </code>
+    </example>
   </HasTableColumns2>
   <HasTableData>
     <summary>
@@ -170,15 +395,29 @@
     <parentGroup>check</parentGroup>
     <example>
       <code xml:space="preserve">
+        using LJCNetCommon5;
         using System.Data;
-        using LJCNetCommon;
 
-        private static void HasData()
+        // Checks a data table for rows.
+        private void HasTableData()
         {
-        DataTable dataTable = new DataTable();
+          var methodName = "HasTableData()";
 
-        // Returns false.
-        bool result = NetCommon.HasData(dataTable);
+          DataTable dataTable = new();
+          dataTable.Columns.Add("Name", typeof(string));
+
+          // Test Method
+          var value = LJC.HasTableData(dataTable);
+
+          var result = value.ToString();
+          var compare = "False";
+          TestCommon.Write($"{methodName}1", result, compare);
+
+          dataTable.Rows.Add(["NameValue"]);
+          value = LJC.HasTableData(dataTable);
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}2", result, compare);
         }
       </code>
     </example>
@@ -190,6 +429,32 @@
     <param name="array">The array object.</param>
     <returns>true if an array and it has elements; otherwise, false.</returns>
     <parentGroup>check</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Checks an array for elements.
+        private void HasArrayElements()
+        {
+          var methodName = "HasArrayElements()";
+
+          string[] array = [];
+
+          // Test Method
+          var value = LJC.HasArrayElements(array);
+
+          var result = value.ToString();
+          var compare = "False";
+          TestCommon.Write($"{methodName}1", result, compare);
+
+          array = ["Value1", "Value1"];
+          value = LJC.HasArrayElements(array);
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}2", result, compare);
+        }
+      </code>
+    </example>
   </HasArrayElements>
   <HasListItems>
     <summary>
@@ -198,6 +463,32 @@
     <param name="list">The IList interface.</param>
     <returns>true if the collection contains items; otherwise false.</returns>
     <parentGroup>check</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Checks an IList collection for items.
+        private void HasListItems()
+        {
+          var methodName = "HasListItems()";
+
+          List&lt;string&gt; list = [];
+
+          // Test Method
+          var value = LJC.HasListItems(list);
+
+          var result = value.ToString();
+          var compare = "False";
+          TestCommon.Write($"{methodName}1", result, compare);
+
+          list.Add("Value");
+          value = LJC.HasListItems(list);
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}1", result, compare);
+        }
+      </code>
+    </example>
   </HasListItems>
   <HasTables>
     <summary>
@@ -206,6 +497,32 @@
     <param name="dataSet">The DataSet object.</param>
     <returns>true if the DataSet has tables; otherwise, false.</returns>
     <parentGroup>check</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Checks a DataSet for tables.
+        private void HasTables()
+        {
+          var methodName = "HasTables()";
+
+          DataSet dataSet = new();
+
+          // Test Method
+          var value = LJC.HasTables(dataSet);
+
+          var result = value.ToString();
+          var compare = "False";
+          TestCommon.Write($"{methodName}1", result, compare);
+
+          dataSet.Tables.Add(new DataTable("Name"));
+          value = LJC.HasTables(dataSet);
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}1", result, compare);
+        }
+      </code>
+    </example>
   </HasTables>
   <HasText>
     <summary>
@@ -216,6 +533,32 @@
       true if the text has a value; otherwise false.
     </returns>
     <parentGroup>check</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Checks if a text value exists.
+        private void HasText()
+        {
+          var methodName = "HasText()";
+
+          var text = "";
+
+          // Test Method
+          var value = LJC.HasText(text);
+
+          var result = value.ToString();
+          var compare = "False";
+          TestCommon.Write($"{methodName}1", result, compare);
+
+          text = "Text";
+          value = LJC.HasText(text);
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}2", result, compare);
+        }
+      </code>
+    </example>
   </HasText>
   <IsEqual>
     <summary>
@@ -233,6 +576,45 @@
       Performs a strongly-typed value check of two objects where those
       objects are built-in system types.
     </remarks>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Checks if two values are equal.
+        private void IsEqual()
+        {
+          var methodName = "IsEqual()";
+
+          string compareValue = null;
+          string compareTo = null;
+
+          // Test Method
+          var value = LJC.IsEqual(compareValue, compareTo);
+
+          var result = value.ToString();
+          var compare = "True";
+          TestCommon.Write($"{methodName}1", result, compare);
+
+          compareTo = "X";
+          value = LJC.IsEqual(compareValue, compareTo);
+          result = value.ToString();
+          compare = "False";
+          TestCommon.Write($"{methodName}2", result, compare);
+
+          compareValue = "x";
+          value = LJC.IsEqual(compareValue, compareTo);
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}3", result, compare);
+
+          compareValue = "x";
+          value = LJC.IsEqual(compareValue, compareTo, true);
+          result = value.ToString();
+          compare = "False";
+          TestCommon.Write($"{methodName}4", result, compare);
+        }
+      </code>
+    </example>
   </IsEqual>
   <IsDbMinDate>
     <summary>
@@ -244,6 +626,38 @@
     </param>
     <returns>true if minimum; otherwise, false.</returns>
     <parentGroup>check</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Checks if two values are equal.
+        private void IsDbMinDate()
+        {
+          var methodName = "IsDbMinDate()";
+
+          DateTime dateTime = new(1752, 1, 1);
+
+          // Test Method
+          var value = LJC.IsDbMinDate(dateTime);
+
+          var result = value.ToString();
+          var compare = "True";
+          TestCommon.Write($"{methodName}1", result, compare);
+
+          dateTime = new DateTime(1753, 1, 1);
+          value = LJC.IsDbMinDate(dateTime);
+          result = value.ToString();
+          compare = "True";
+          TestCommon.Write($"{methodName}2", result, compare);
+
+          dateTime = new DateTime(1753, 1, 2);
+          value = LJC.IsDbMinDate(dateTime);
+          result = value.ToString();
+          compare = "False";
+          TestCommon.Write($"{methodName}3", result, compare);
+        }
+      </code>
+    </example>
   </IsDbMinDate>
 
   <!-- Console Methods -->
@@ -253,6 +667,49 @@
     </summary>
     <param name="prompt">The prompt string.</param>
     <param name="value">The entered character value.</param>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Clears an invalid ReadKey() selection.
+        private static void ClearReadKey()
+        {
+          Console.WriteLine();
+          Console.WriteLine("TestLJC.ClearReadKey()");
+
+          Console.Write("Press the [backspace] key: ");
+          Console.ReadKey();
+          var charValue = '\b';
+
+          // Test Method
+          LJC.ClearReadKey("Press the [backspace] key: ", charValue);
+
+          Console.ReadKey();
+          Console.WriteLine();
+          Console.Write("Press the [space] key: ");
+          Console.ReadKey();
+          charValue = ' ';
+          LJC.ClearReadKey("Press the [space] key: ", charValue);
+
+          Console.ReadKey();
+          Console.WriteLine();
+          Console.Write("Press the [tab] key: ");
+          Console.ReadKey();
+          charValue = '\t';
+          LJC.ClearReadKey("Press the [tab] key: ", charValue);
+
+          Console.ReadKey();
+          Console.WriteLine();
+          Console.Write("Press the [enter] key: ");
+          Console.ReadKey();
+          charValue = '\r';
+          LJC.ClearReadKey("Press the [enter] key: ", charValue);
+
+          Console.ReadKey();
+          Console.WriteLine();
+        }
+      </code>
+    </example>
   </ClearReadKey>
   <ClearReadLine>
     <summary>
@@ -260,6 +717,28 @@
     </summary>
     <param name="prompt">The prompt string.</param>
     <param name="value">The entered string value.</param>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Clears an invalid ReadLine() selection.
+        private static void ClearReadLine()
+        {
+          Console.WriteLine();
+          Console.WriteLine("TestLJC.ClearReadLine()");
+
+          Console.Write("Press the [enter] key: X");
+          Console.ReadLine();
+          var value = "X";
+
+          // Test Method
+          LJC.ClearReadLine("Press the [enter] key: ", value);
+
+          Console.ReadKey();
+          Console.WriteLine();
+        }
+      </code>
+    </example>
   </ClearReadLine>
   <KeyOption>
     <summary>
@@ -267,6 +746,26 @@
     </summary>
     <param name="prompt">The prompt string.</param>
     <param name="options">The available options value.</param>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Get a console character option value.
+        private static void KeyOption()
+        {
+          Console.WriteLine();
+          Console.WriteLine("TestLJC.KeyOption()");
+
+          var options = "X";
+          Console.WriteLine("Valid options are 'X'.");
+          Console.WriteLine();
+          Console.Write("Enter an option: ");
+
+          // Test Method
+          LJC.KeyOption("Enter an option: ", options);
+        }
+      </code>
+    </example>
   </KeyOption>
 
   <!-- Object Value Methods -->
@@ -282,7 +781,7 @@
     <parentGroup>value</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Gets a bool value from an object.
         private static void GetBoolean()
@@ -292,7 +791,7 @@
           object obj = setup;
 
           // Gets a short value from an object.
-          var result = NetCommon.GetBoolean(obj);
+          var result = LJC.GetBoolean(obj);
           // result = True
         }
       </code>
@@ -310,7 +809,7 @@
     <parentGroup>value</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Gets a byte value from an object.
         private static void GetByte()
@@ -320,7 +819,7 @@
           object obj = setup;
 
           // Gets a byte value from an object.
-          byte value = NetCommon.GetByte(obj);
+          byte value = LJC.GetByte(obj);
           var result = value.ToString();
           // result = "65"
         }
@@ -333,6 +832,31 @@
     </summary>
     <param name="value">The value object.</param>
     <parentGroup>value</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Gets an array of bytes from an object.
+        private void GetBytes()
+        {
+          var methodName = "GetBytes()";
+
+          // Simulates an Object value.
+          byte[] a = LJC.TextToBytes("A");
+          byte[] b = LJC.TextToBytes("B");
+          byte[] setup = [a[0], b[0]];
+          object obj = setup;
+
+          // Test Method
+          byte[] value = LJC.GetBytes(obj);
+
+          var resultValue = value[0];
+          var result = resultValue.ToString();
+          var compare = "65";
+          TestCommon.Write($"{methodName}", result, compare);
+        }
+      </code>
+    </example>
   </GetBytes>
   <GetChar>
     <summary>
@@ -346,7 +870,7 @@
     <parentGroup>value</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Gets a char value from an object.
         private static void GetChar()
@@ -356,7 +880,7 @@
           object obj = setup;
 
           // Gets a byte value from an object.
-          char value = NetCommon.GetChar(obj);
+          char value = LJC.GetChar(obj);
           var result = value.ToString();
           // result = "A";
         }
@@ -374,6 +898,29 @@
     <remarks>
       Returns an empty array if the value is null or not type character array.
     </remarks>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Gets a character array from an object.
+        private void GetChars()
+        {
+          var methodName = "GetChars()";
+
+          // Simulates an Object value like that received from a DataTable.
+          char[] setup = ['A', 'B'];
+          object obj = setup;
+
+          // Test Method
+          char[] value = LJC.GetChars(obj);
+
+          var resultValue = value[0];
+          var result = resultValue.ToString();
+          var compare = "A";
+          TestCommon.Write($"{methodName}", result, compare);
+        }
+      </code>
+    </example>
   </GetChars>
   <GetDateTime>
     <summary>
@@ -387,6 +934,8 @@
     <parentGroup>value</parentGroup>
     <example>
       <code xml:space="preserve">
+        using LJCNetCommon5;
+
         // Gets a DateTime value from an object.
         private static void GetDateTime()
         {
@@ -395,7 +944,7 @@
           object obj = setup;
 
           // Gets a decimal value from an object.
-          DateTime? returnValue = NetCommon.GetDateTime(obj);
+          DateTime? returnValue = LJC.GetDateTime(obj);
           if (returnValue != null)
           {
             DateTime value = (DateTime)returnValue;
@@ -420,7 +969,7 @@
     <parentGroup>value</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Gets a decimal value from an object.
         private static void GetDecimal()
@@ -430,7 +979,7 @@
           object obj = setup;
 
           // Gets a decimal value from an object.
-          decimal value = NetCommon.GetDecimal(obj);
+          decimal value = LJC.GetDecimal(obj);
           // value = 3.14
         }
       </code>
@@ -449,6 +998,8 @@
     <parentGroup>value</parentGroup>
     <example>
       <code xml:space="preserve">
+        using LJCNetCommon5;
+
         // Gets a double value from an object.
         private static void GetDouble()
         {
@@ -457,7 +1008,7 @@
           object obj = setup;
 
           // Gets a decimal value from an object.
-          double result = NetCommon.GetDouble(obj);
+          double result = LJC.GetDouble(obj);
           // result = 3.14;
         }
       </code>
@@ -476,6 +1027,8 @@
     <parentGroup>value</parentGroup>
     <example>
       <code xml:space="preserve">
+        using LJCNetCommon5;
+
         // Gets a float (single) value from an object.
         private static void GetFloat()
         {
@@ -484,7 +1037,7 @@
           object obj = setup;
 
           // Gets a decimal value from an object.
-          float result = NetCommon.GetSingle(obj);
+          float result = LJC.GetSingle(obj);
           result = 3.14;
         }
       </code>
@@ -501,6 +1054,27 @@
     <remarks>
       The default value if the object is null or not type "GUID".
     </remarks>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5;
+
+        // Gets a GUID value from an object.
+        private void GetGuid()
+        {
+          var methodName = "GetGuid()";
+
+          // Simulates an Object value.
+          var guid = Guid.NewGuid();
+          object obj = guid;
+
+          // Test Method
+          var value = LJC.GetGuid(obj);
+          var result = value.ToString();
+          var compare = result;
+          TestCommon.Write($"{methodName}", result, compare);
+        }
+      </code>
+    </example>
   </GetGUID>
   <GetInt16>
     <summary>
@@ -514,7 +1088,7 @@
     <parentGroup>value</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Gets a short value from an object.
         private static void GetInt16()
@@ -524,7 +1098,7 @@
           object obj = setup;
 
           // Gets a short value from an object.
-          short value = NetCommon.GetInt16(obj);
+          short value = LJC.GetInt16(obj);
           // value = 3
         }
       </code>
@@ -542,7 +1116,7 @@
     <parentGroup>value</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Gets an int value from an object.
         private static void GetInt32()
@@ -552,7 +1126,7 @@
           object obj = setup;
 
           // Gets an int value from an object.
-          int value = NetCommon.GetInt32(obj);
+          int value = LJC.GetInt32(obj);
           // value = 3
         }
       </code>
@@ -570,7 +1144,7 @@
     <parentGroup>value</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Gets a long value from an object.
         private static void GetInt64()
@@ -580,7 +1154,7 @@
           object obj = setup;
 
           // Gets a long value from an object.
-          long value = NetCommon.GetInt64(obj);
+          long value = LJC.GetInt64(obj);
           // value = 3
         }
       </code>
@@ -595,18 +1169,18 @@
     <parentGroup>value</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Gets a trimmed string value from an object.
         private static void GetString()
         {
-        // Simulates an Object value like that received from a DataTable.
-        string setup = "3";
-        object obj = setup;
+          // Simulates an Object value like that received from a DataTable.
+          string setup = "3";
+          object obj = setup;
 
-        // Gets a string value from an object.
-        string value = NetCommon.GetString(obj);
-        // value = "3"
+          // Gets a string value from an object.
+          string value = LJC.GetString(obj);
+          // value = "3"
         }
       </code>
     </example>
@@ -618,6 +1192,26 @@
     <param name="value">The value object.</param>
     <returns>The instantiated object.</returns>
     <parentGroup>value</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5
+        
+        // Gets an instantiated object value.
+        private void GetValue()
+        {
+          var methodName = "GetValue()";
+
+          object setup = "A";
+
+          // Test Method
+          var value = LJC.GetValue(setup);
+
+          var result = LJC.GetString(value);
+          var compare = "A";
+          TestCommon.Write($"{methodName}", result, compare);
+        }
+      </code>
+    </example>
   </GetValue>
 
   <!--  Additional Value Methods -->
@@ -626,12 +1220,61 @@
       Gets a database DateTime string value from an object.
     </summary>
     <param name="value">The value object.</param>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5
+        
+        // Gets a database DateTime string value from an object.
+        private void GetDbDateString()
+        {
+          var methodName = "GetDbDateString()";
+
+          // Simulates an Object value.
+          DateTime dateTime = new(2026, 10, 1);
+          object obj = dateTime;
+
+          // Test Method
+          var result = LJC.GetDbDateString(obj);
+
+          var compare = "2026/10/01 00:00:00";
+          TestCommon.Write($"{methodName}", result, compare);
+        }
+      </code>
+    </example>
   </GetDbDateString>
   <GetDbDateTime>
     <summary>
       Gets a DateTime value from an object.
     </summary>
     <param name="value">The value object.</param>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5
+        
+        // Gets a DateTime value from an object.
+        private void GetDbDateTime()
+        {
+          var methodName = "GetDbDateTime()";
+
+          var setup = "10/1/2026 00:00:00";
+          object obj = setup;
+
+          // Test Method
+          var value = LJC.GetDbDateTime(obj);
+
+          var result = LJC.GetDbDateString(value);
+          var compare = "2026/10/01 00:00:00";
+          TestCommon.Write($"{methodName}1", result, compare);
+
+          setup = "2026/10/1 00:00:00";
+          obj = setup;
+          value = LJC.GetDbDateTime(obj);
+          result = LJC.GetDbDateString(value);
+          compare = "2026/10/01 00:00:00";
+          TestCommon.Write($"{methodName}2", result, compare);
+        }
+      </code>
+    </example>
   </GetDbDateTime>
 
   <!-- Project Config Values Methods -->
@@ -665,10 +1308,10 @@
     </remarks>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // This returns true.
-        bool localDbAccess = LJCNetCommon.ConfigBool("LocalDbDataAccess");
+        bool localDbAccess = LJC.ConfigBool("LocalDbDataAccess");
       </code>
     </example>
   </ConfigBool>
@@ -703,11 +1346,11 @@
     </remarks>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // This returns var beginColor that is Color.AliceBlue.
         // If the key is not found it returns Color.Black.
-        LJCNetCommon.ConfigColor("BeginColor", out Color beginColor);
+        LJC.ConfigColor("BeginColor", out Color beginColor);
       </code>
     </example>
   </ConfigColor>
@@ -741,10 +1384,10 @@
     </remarks>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // This returns "MySql".
-        string dbType = NetCommon.ConfigString("ConnectionType");
+        string dbType = LJC.ConfigString("ConnectionType");
       </code>
     </example>
   </ConfigString>
@@ -754,6 +1397,12 @@
     </summary>
     <param name="dataConfigName">The DataConfig name.</param>
     <parentGroup>config</parentGroup>
+    <example>
+      <code xml:space="preserve">
+        using LJCNetCommon5
+        
+      </code>
+    </example>
   </ConsoleConfig>
 
   <!-- Serialization Methods -->
@@ -768,31 +1417,31 @@
     <parentGroup>serialize</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         public class Person
         {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public bool PrincipleFlag { get; set; }
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
         }
 
         // Deserialize an XML message file to an object.
         private static void XmlDeserialize()
         {
-        // Setup
-        var person = new Person()
-        {
-        Id = 1,
-        Name = "Text",
-        PrincipleFlag = true
-        };
-        string file = "Text.xml";
-        LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
+          // Setup
+          var person = new Person()
+          {
+            Id = 1,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string file = "Text.xml";
+          LJC.XmlSerialize(person.GetType(), person, null, file);
 
-        // Deserialize an XML message file to an object.
-        Person newPerson;
-        newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
+          // Deserialize an XML message file to an object.
+          Person? newPerson;
+          newPerson = LJC.XmlDeserialize(typeof(Person), file) as Person;
         }
       </code>
     </example>
@@ -807,30 +1456,30 @@
     <parentGroup>serialize</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         public class Person
         {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public bool PrincipleFlag { get; set; }
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
         }
 
         // Deserialize an XML message string to an object.
         private static void XmlDeserializeMessage()
         {
-        // Setup
-        var person = new Person()
-        {
-        Id = 2,
-        Name = "Text",
-        PrincipleFlag = true
-        };
-        string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
+          // Setup
+          var person = new Person()
+          {
+            Id = 2,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string message = LJC.XmlSerializeToString(person.GetType(), person, null);
 
-        // Deserialize an XML message string to an object.
-        Person newPerson;
-        newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
+          // Deserialize an XML message string to an object.
+          Person newPerson;
+          newPerson = LJC.XmlDeserializeMessage(typeof(Person), message) as Person;
         }
       </code>
     </example>
@@ -851,29 +1500,29 @@
 
         public class Person
         {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public bool PrincipleFlag { get; set; }
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
         }
 
         // Serialize an object to an XML message file.
         private static void XmlSerialize()
         {
-        // Setup
-        var person = new Person()
-        {
-        Id = 2,
-        Name = "Text",
-        PrincipleFlag = true
-        };
-        string file = "Text.xml";
+          // Setup
+          var person = new Person()
+          {
+            Id = 2,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string file = "Text.xml";
 
-        // Serialize an object to an XML message file.
-        LJCNetCommon.XmlSerialize(person.GetType(), person, null, file);
+          // Serialize an object to an XML message file.
+          LJC.XmlSerialize(person.GetType(), person, null, file);
 
-        // Check the object.
-        Person newPerson;
-        newPerson = LJCNetCommon.XmlDeserialize(typeof(Person), file) as Person;
+          // Check the object.
+          Person newPerson;
+          newPerson = LJC.XmlDeserialize(typeof(Person), file) as Person;
         }
       </code>
     </example>
@@ -889,30 +1538,30 @@
     <parentGroup>serialize</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         public class Person
         {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public bool PrincipleFlag { get; set; }
+          public long Id { get; set; }
+          public string Name { get; set; }
+          public bool PrincipleFlag { get; set; }
         }
 
         // Serialize an object to an XML message string.
         private static void XmlSerializeToString()
         {
-        // Serialize an object to an XML message string.
-        var person = new Person()
-        {
-        Id = 2,
-        Name = "Text",
-        PrincipleFlag = true
-        };
-        string message = LJCNetCommon.XmlSerializeToString(person.GetType(), person, null);
+          // Serialize an object to an XML message string.
+          var person = new Person()
+          {
+            Id = 2,
+            Name = "Text",
+            PrincipleFlag = true
+          };
+          string message = LJC.XmlSerializeToString(person.GetType(), person, null);
 
-        // Check the object.
-        Person newPerson;
-        newPerson = LJCNetCommon.XmlDeserializeMessage(typeof(Person), message) as Person;
+          // Check the object.
+          Person newPerson;
+          newPerson = LJC.XmlDeserializeMessage(typeof(Person), message) as Person;
         }
       </code>
     </example>
@@ -928,18 +1577,18 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Decodes a Base64 byte array to a Text value.
         private static void Base64BytesToText()
         {
-        // Setup
-        // Encodes a Text value to a Base64 byte array.
-        byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
+          // Setup
+          // Encodes a Text value to a Base64 byte array.
+          byte[] base64Bytes = LJC.TextToBase64Bytes("Text");
 
-        // Decodes a Base64 byte array to a Text value.
-        string text = NetCommon.Base64BytesToText(base64Bytes);
-        // text = "Text"
+          // Decodes a Base64 byte array to a Text value.
+          string text = LJC.Base64BytesToText(base64Bytes);
+          // text = "Text"
         }
       </code>
     </example>
@@ -953,17 +1602,17 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Encodes a Text value to a Base64 byte array.
         private static void TextToBase64Bytes()
         {
-        // Create Text from Base64 byte array.
-        byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
+          // Create Text from Base64 byte array.
+          byte[] base64Bytes = LJC.TextToBase64Bytes("Text");
 
-        // Check the text.
-        string text = NetCommon.Base64BytesToText(base64Bytes);
-        // text = "Text"
+          // Check the text.
+          string text = LJC.Base64BytesToText(base64Bytes);
+          // text = "Text"
         }
       </code>
     </example>
@@ -978,21 +1627,21 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Decodes a Base64 byte array to a Text byte array.
         private static void Base64BytesToTextBytes()
         {
-        // Setup
-        // Encodes a Text value to a Base64 byte array.
-        byte[] base64Bytes = NetCommon.TextToBase64Bytes("Text");
+          // Setup
+          // Encodes a Text value to a Base64 byte array.
+          byte[] base64Bytes = LJC.TextToBase64Bytes("Text");
 
-        // Decodes a Base64 byte array to a Text byte array.
-        byte[] textBytes = NetCommon.Base64BytesToTextBytes(base64Bytes);
+          // Decodes a Base64 byte array to a Text byte array.
+          byte[] textBytes = LJC.Base64BytesToTextBytes(base64Bytes);
 
-        // Check the text.
-        string text = NetCommon.BytesToText(textBytes);
-        // text = "Text"
+          // Check the text.
+          string text = LJC.BytesToText(textBytes);
+          // text = "Text"
         }
       </code>
     </example>
@@ -1006,21 +1655,21 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Encodes a Text byte array to a Base64 byte array.
         private static void TextBytesToBase64Bytes()
         {
-        // Setup
-        // Creates a byte array from text.
-        byte[] textBytes = NetCommon.TextToBytes("Text");
+          // Setup
+          // Creates a byte array from text.
+          byte[] textBytes = LJC.TextToBytes("Text");
 
-        // Encodes a byte array to a Base64 byte array.
-        byte[] base64Bytes = NetCommon.TextBytesToBase64Bytes(textBytes);
+          // Encodes a byte array to a Base64 byte array.
+          byte[] base64Bytes = LJC.TextBytesToBase64Bytes(textBytes);
 
-        // Check the text.
-        string text = NetCommon.Base64BytesToText(base64Bytes);
-        // text = "Text"
+          // Check the text.
+          string text = LJC.Base64BytesToText(base64Bytes);
+          // text = "Text"
         }
       </code>
     </example>
@@ -1035,18 +1684,18 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Decodes a Base64 value to a Text value.
         private static void Base64ToText()
         {
-        // Setup
-        // Encodes a Text value to a Base64 value.
-        string base64 = NetCommon.TextToBase64("Text");
+          // Setup
+          // Encodes a Text value to a Base64 value.
+          string base64 = LJC.TextToBase64("Text");
 
-        // Decodes a Base64 string to Text.
-        string text = NetCommon.Base64ToText(base64);
-        // text = "Text"
+          // Decodes a Base64 string to Text.
+          string text = LJC.Base64ToText(base64);
+          // text = "Text"
         }
       </code>
     </example>
@@ -1060,19 +1709,19 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Encodes a Text value to a Base64 value.
         private static void TextToBase64()
         {
-        string text = "Text";
+          string text = "Text";
 
-        // Encodes text to a Base64 string.
-        string base64 = NetCommon.TextToBase64(text);
+          // Encodes text to a Base64 string.
+          string base64 = LJC.TextToBase64(text);
 
-        // Check the text.
-        text = NetCommon.Base64ToText(base64);
-        // text = "Text"
+          // Check the text.
+          text = LJC.Base64ToText(base64);
+          // text = "Text"
         }
       </code>
     </example>
@@ -1087,21 +1736,21 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Decodes a Base64 value to a Text byte array.
         public static void Base64ToTextBytes()
         {
-        // Setup
-        // Encodes a Text value to a Base64 value.
-        string base64 = NetCommon.TextToBase64("Text");
+          // Setup
+          // Encodes a Text value to a Base64 value.
+          string base64 = LJC.TextToBase64("Text");
 
-        // Decodes a Base64 value to a Text byte array.
-        byte[] textBytes = NetCommon.Base64ToTextBytes(base64);
+          // Decodes a Base64 value to a Text byte array.
+          byte[] textBytes = LJC.Base64ToTextBytes(base64);
 
-        // Check the text.
-        string text = NetCommon.BytesToText(textBytes);
-        // text = "Text"
+          // Check the text.
+          string text = LJC.BytesToText(textBytes);
+          // text = "Text"
         }
       </code>
     </example>
@@ -1115,21 +1764,21 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Encodes a Text byte array to a Base64 value.
         public static void TextBytesToBase64()
         {
-        // Setup
-        // Creates a byte array from text.
-        byte[] TextBytes = NetCommon.TextToBytes("Text");
+          // Setup
+          // Creates a byte array from text.
+          byte[] TextBytes = LJC.TextToBytes("Text");
 
-        // Encodes a Text byte array to a Base64 value.
-        string base64 = NetCommon.TextBytesToBase64(TextBytes);
+          // Encodes a Text byte array to a Base64 value.
+          string base64 = LJC.TextBytesToBase64(TextBytes);
 
-        // Check the text.
-        string text = NetCommon.Base64ToText(base64);
-        // text = "Text"
+          // Check the text.
+          string text = LJC.Base64ToText(base64);
+          // text = "Text"
         }
       </code>
     </example>
@@ -1144,18 +1793,18 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Creates text from a byte array.
         private static void BytesToText()
         {
-        // Setup
-        // Creates a byte array from text.
-        byte[] bytes = NetCommon.TextToBytes("Text");
+          // Setup
+          // Creates a byte array from text.
+          byte[] bytes = LJC.TextToBytes("Text");
 
-        // Creates text from a byte array.
-        string text = NetCommon.BytesToText(bytes);
-        // text = "Text"
+          // Creates text from a byte array.
+          string text = LJC.BytesToText(bytes);
+          // text = "Text"
         }
       </code>
     </example>
@@ -1169,20 +1818,20 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Creates a byte array from text.
         private static void TextToBytes()
         {
-        // Setup
-        string text = "Text";
+          // Setup
+          string text = "Text";
 
-        // Creates a byte array from text.
-        byte[] bytes = NetCommon.TextToBytes(text);
+          // Creates a byte array from text.
+          byte[] bytes = LJC.TextToBytes(text);
 
-        // Check the text.
-        text = NetCommon.BytesToText(bytes);
-        // text = "Text"
+          // Check the text.
+          text = LJC.BytesToText(bytes);
+          // text = "Text"
         }
       </code>
     </example>
@@ -1198,23 +1847,23 @@
     <example>
       <code xml:space="preserve">
         using System.IO;
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Copies a memory stream to a byte array.
         private static void MemStreamToBytes()
         {
-        // Setup
-        byte[] textBytes;
-        // Creates a memory stream from a string.
-        using (Stream stream = NetCommon.StringToMemStream("Text"))
-        {
-        // Copies a memory stream to a byte array.
-        textBytes = NetCommon.MemStreamToBytes(stream);
-        }
+          // Setup
+          byte[] textBytes;
+          // Creates a memory stream from a string.
+          using (Stream stream = LJC.StringToMemStream("Text"))
+          {
+            // Copies a memory stream to a byte array.
+            textBytes = LJC.MemStreamToBytes(stream);
+          }
 
-        // Check the text.
-        string text = NetCommon.BytesToText(textBytes);
-        // text = "Text"
+          // Check the text.
+          string text = LJC.BytesToText(textBytes);
+          // text = "Text"
         }
       </code>
     </example>
@@ -1229,22 +1878,22 @@
     <example>
       <code xml:space="preserve">
         using System.IO;
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Copies a byte array to a memory stream.
         private static void BytesToMemStream()
         {
-        // Setup
-        // Creates a byte array from text.
-        byte[] bytes = NetCommon.TextToBytes("Text");
+          // Setup
+          // Creates a byte array from text.
+          byte[] bytes = LJC.TextToBytes("Text");
 
-        // Copies a byte array to a memory stream.
-        using (Stream stream = NetCommon.BytesToMemStream(bytes))
-        {
-        // Check the text.
-        string text = NetCommon.MemStreamToString(stream);
-        // text = "Text"
-        }
+          // Copies a byte array to a memory stream.
+          using (Stream stream = LJC.BytesToMemStream(bytes))
+          {
+            // Check the text.
+            string text = LJC.MemStreamToString(stream);
+            // text = "Text"
+          }
         }
       </code>
     </example>
@@ -1259,17 +1908,17 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Creates a string from a memory stream.
         private static void MemStreamToString()
         {
           // Setup
           // Creates a memory stream from a string.
-          using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
+          using (Stream stream = LJCLJC.StringToMemStream("Text"))
           {
             // Creates a string from a memory stream.
-            string text = LJCNetCommon.MemStreamToString(stream);
+            string text = LJCLJC.MemStreamToString(stream);
             // text = "Text"
           }
         }
@@ -1285,16 +1934,16 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Creates a memory stream from a string.
         private static void StringToMemStream()
         {
           // Creates a memory stream from a string.
-          using (Stream stream = LJCNetCommon.StringToMemStream("Text"))
+          using (Stream stream = LJCLJC.StringToMemStream("Text"))
           {
             // Check the text.
-            string text = LJCNetCommon.MemStreamToString(stream);
+            string text = LJCLJC.MemStreamToString(stream);
             // text = "Text"
           }
         }
@@ -1311,7 +1960,7 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Decodes an encoded XML string.
         private static void XmlDecode()
@@ -1319,10 +1968,10 @@
           // Setup
           string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
           // Encodes a string with XML escape values.
-          string encoded = LJCNetCommon.XmlEncode(xml);
+          string encoded = LJCLJC.XmlEncode(xml);
 
           // Decodes an encoded XML string.
-          string text = LJCNetCommon.XmlDecode(encoded);
+          string text = LJCLJC.XmlDecode(encoded);
           // text = "Text"
         }
       </code>
@@ -1337,7 +1986,7 @@
     <parentGroup>convert</parentGroup>
     <example>
       <code xml:space="preserve">
-        using LJCNetCommon;
+        using LJCNetCommon5;
 
         // Encodes a string with XML escape values.
         private static void XmlEncode()
@@ -1346,10 +1995,10 @@
           string xml = "&lt;text&gt;Here &amp; There&lt;/text&gt;";
 
           // Encodes a string with XML escape values.
-          string encoded = NetCommon.XmlEncode(xml);
+          string encoded = LJC.XmlEncode(xml);
 
           // Check the text.
-          string text = NetCommon.XmlDecode(encoded);
+          string text = LJC.XmlDecode(encoded);
           // text = "Text"
         }
       </code>
