@@ -293,15 +293,7 @@ namespace LJCDataAccess5
     }
     #endregion
 
-    #region Methods
-
-    // Closes the database connection.
-    /// <include file='Doc/DataAccess.xml'
-    ///  path='members/CloseConnection/*'/>
-    public void CloseConnection()
-    {
-      ProviderFactory?.CloseConnection();
-    }
+    #region Insert, Update and Delete Methods
 
     // Executes an Insert, Update or Delete statement.
     /// <include file='Doc/DataAccess.xml'
@@ -354,52 +346,9 @@ namespace LJCDataAccess5
       }
       return retValue;
     }
+    #endregion
 
-    // Executes a script file.
-    /// <include file='Doc/DataAccess.xml'
-    ///  path='members/ExecuteScript/*'/>
-    public void ExecuteScript(string scriptFileSpec)
-    {
-      if (!File.Exists(scriptFileSpec))
-      {
-        var errorText = $"File '{scriptFileSpec}' was not found.\r\n";
-        throw new ArgumentException(errorText);
-      }
-      else
-      {
-        string scriptText = File.ReadAllText(scriptFileSpec);
-        ExecuteScriptText(scriptText);
-      }
-    }
-
-    // Executes a script text string.
-    /// <include file='Doc/DataAccess.xml'
-    ///  path='members/ExecuteScriptText/*'/>
-    public void ExecuteScriptText(string scriptText)
-    {
-      var regexOptions = RegexOptions.IgnoreCase;
-      string[] commands = Regex.Split(scriptText, "go\r\n", regexOptions);
-
-      var first = true;
-      foreach (string command in commands)
-      {
-        ScriptSQL = command;
-        var sql = ScriptSQL;
-        if (GetUse(ref first, ref sql))
-        {
-          ScriptSQL = sql;
-          if (LJC.HasText(mProviderName)
-            && IsMySql(mProviderName))
-          {
-            mMySqlDataAccess?.ExecuteNonQuery(ScriptSQL);
-          }
-          else
-          {
-            ExecuteNonQuery(ScriptSQL);
-          }
-        }
-      }
-    }
+    #region Select Methods
 
     // Executes a Select statement and fills the specified DataTable.
     /// <include file='Doc/DataAccess.xml'
@@ -662,6 +611,66 @@ namespace LJCDataAccess5
         }
       }
       return retValue;
+    }
+    #endregion
+
+    #region Script Methods
+
+    // Executes a script file.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='members/ExecuteScript/*'/>
+    public void ExecuteScript(string scriptFileSpec)
+    {
+      if (!File.Exists(scriptFileSpec))
+      {
+        var errorText = $"File '{scriptFileSpec}' was not found.\r\n";
+        throw new ArgumentException(errorText);
+      }
+      else
+      {
+        string scriptText = File.ReadAllText(scriptFileSpec);
+        ExecuteScriptText(scriptText);
+      }
+    }
+
+    // Executes a script text string.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='members/ExecuteScriptText/*'/>
+    public void ExecuteScriptText(string scriptText)
+    {
+      var regexOptions = RegexOptions.IgnoreCase;
+      string[] commands = Regex.Split(scriptText, "go\r\n", regexOptions);
+
+      var first = true;
+      foreach (string command in commands)
+      {
+        ScriptSQL = command;
+        var sql = ScriptSQL;
+        if (GetUse(ref first, ref sql))
+        {
+          ScriptSQL = sql;
+          if (LJC.HasText(mProviderName)
+            && IsMySql(mProviderName))
+          {
+            mMySqlDataAccess?.ExecuteNonQuery(ScriptSQL);
+          }
+          else
+          {
+            ExecuteNonQuery(ScriptSQL);
+          }
+        }
+      }
+    }
+    #endregion
+
+    #region Other Methods
+
+    // Closes the database connection.
+    /// <include file='Doc/DataAccess.xml'
+    ///  path='members/CloseConnection/*'/>
+    public void CloseConnection()
+    {
+      ProviderFactory?.CloseConnection();
     }
 
     // Get the column SQL types.

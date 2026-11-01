@@ -3,8 +3,6 @@
 // LJCInclude.cs
 using LJCNetCommon;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Diagnostics;
 using System.IO;
 
 namespace LJCDocDataGenLib
@@ -35,11 +33,11 @@ namespace LJCDocDataGenLib
     /// </summary>
     /// <param name="includeLine"></param>
     /// <param name="codeFileSpec"></param>
-    public void SetComments(string includeLine, string codeFileSpec)
+    public void SetComments(string[] bothLines, string codeFileSpec)
     {
       // Sets LibName, XMLFile and memberTag.
       var memberTag = "";
-      if (SetIncludeValues(includeLine, codeFileSpec, ref memberTag))
+      if (SetIncludeValues(bothLines, codeFileSpec, ref memberTag))
       {
         var isContinue = false;
         var lines = File.ReadAllLines(XMLFile);
@@ -75,7 +73,7 @@ namespace LJCDocDataGenLib
           {
             // New comment.
             CurrentTag = LineBeginTag(line, out _);
-            SetComment(line);
+            SetComment(trimLine);
             var findEndTag = LineEndTag(trimLine, out bool isValid);
             if (!isValid)
             {
@@ -97,7 +95,7 @@ namespace LJCDocDataGenLib
               // Has end tag so end Continue comment.
               isContinue = false;
             }
-            var comment = SetComment(line);
+            var comment = SetComment(trimLine);
             LineEndTag(comment, out bool isValid);
             if (!isValid)
             {
@@ -276,7 +274,7 @@ namespace LJCDocDataGenLib
     }
 
     // Sets the Class include file values: LibName, XMLFile.
-    private bool SetIncludeValues(string includeLine, string codeFileSpec
+    private bool SetIncludeValues(string[] bothLines, string codeFileSpec
       , ref string memberTag)
     {
       var retValue = true;
@@ -284,30 +282,46 @@ namespace LJCDocDataGenLib
       LibName = Path.GetFileNameWithoutExtension(codeFileSpec);
       Comments = new List<string>();
       var parser = new LJCParser();
-      var xmlPath = parser.DelimitedString(includeLine, "path=\"", "\"");
-      if (null == xmlPath)
+      foreach (string line in bothLines)
       {
-        parser.StartIndex = 0;
-        xmlPath = parser.DelimitedString(includeLine, "path='", "'");
+        retValue = true;
+        var xmlPath = parser.DelimitedString(line, "path=\"", "\"");
         if (null == xmlPath)
         {
-          retValue = false;
+          parser.StartIndex = 0;
+          xmlPath = parser.DelimitedString(line, "path='", "'");
+          if (null == xmlPath)
+          {
+            retValue = false;
+          }
+        }
+        if (xmlPath != null)
+        {
+          parser.StartIndex = 0;
+          memberTag = parser.DelimitedString(line, "members/", "/*");
+          break;
         }
       }
 
       if (retValue)
       {
-        parser.StartIndex = 0;
-        memberTag = parser.DelimitedString(includeLine, "members/", "/*");
-        parser.StartIndex = 0;
-        XMLFile = parser.DelimitedString(includeLine, "file=\"", "\"");
-        if (null == XMLFile)
+        retValue = true;
+        foreach (string line in bothLines)
         {
           parser.StartIndex = 0;
-          XMLFile = parser.DelimitedString(includeLine, "file='", "'");
+          XMLFile = parser.DelimitedString(line, "file=\"", "\"");
           if (null == XMLFile)
           {
-            retValue = false;
+            parser.StartIndex = 0;
+            XMLFile = parser.DelimitedString(line, "file='", "'");
+            if (null == XMLFile)
+            {
+              retValue = false;
+            }
+          }
+          if (XMLFile != null)
+          {
+            break;
           }
         }
         XMLFile = XMLFile.Replace("/", "\\");

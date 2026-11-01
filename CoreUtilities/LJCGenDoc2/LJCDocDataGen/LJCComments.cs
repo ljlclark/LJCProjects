@@ -50,9 +50,10 @@ namespace LJCDocDataGenLib
 
     // Sets the XML comment value.
     /// <include path="members/SetComment/*" file="Doc/LJCComments.xml"/>
-    public void SetComment(string line, string codeFileSpec = null)
+    public void SetComment(string[] bothLines, string codeFileSpec = null)
     {
-      var trimLine = line.Trim();
+      BothLines = bothLines;
+      var trimLine = BothLines[0].Trim();
 
       var success = true;
       if (!trimLine.StartsWith("///"))
@@ -72,7 +73,7 @@ namespace LJCDocDataGenLib
         // Testing
         if (trimLine.ToLower().Contains("parentgroup"))
         {
-          Debugger.Break();
+          //Debugger.Break();
         }
 
         // New comment.
@@ -85,10 +86,13 @@ namespace LJCDocDataGenLib
           ClearTagComment();
         }
 
-        var comment = GetComment(trimLine);
+        var comment = GetComment(BothLines);
         if (CurrentTagName != null)
         {
-          SaveComment(comment);
+          if (NetString.HasValue(comment))
+          {
+            SaveComment(comment);
+          }
           if (!HasCurrentEndTag(trimLine))
           {
             // No end tag so start Continue comment.
@@ -104,8 +108,12 @@ namespace LJCDocDataGenLib
           // Has end tag so end Continue comment.
           IsContinue = false;
         }
-        var comment = GetComment(trimLine);
-        SaveComment(comment);
+        //var comment = GetComment(trimLine);
+        var comment = GetComment(BothLines);
+        if (NetString.HasValue(comment))
+        {
+          SaveComment(comment);
+        }
       }
     }
     #endregion
@@ -160,9 +168,11 @@ namespace LJCDocDataGenLib
 
     // Gets the comment from a line.
     /// <include path="members/GetComment/*" file="Doc/LJCComments.xml"/>
-    private string GetComment(string line)
+    private string GetComment(string[] bothLines)
     {
       string retComment = null;
+
+      var line = bothLines[0];
 
       // Get using CurrentTagName.
       var beginTag = BeginTag();
@@ -183,12 +193,17 @@ namespace LJCDocDataGenLib
       if ("<include" == beginTag)
       {
         isSimpleComment = false;
-        Include.SetComments(line, CodeFileSpec);
+        Include.SetComments(bothLines, CodeFileSpec);
 
         // Process the include comment lines through SetComment().
         foreach (var comment in Include.Comments)
         {
-          SetComment(comment);
+          string[] both = new string[]
+          {
+            comment,
+            null,
+          };
+          SetComment(both);
         }
 
         // Remove extra line from code.
@@ -231,7 +246,11 @@ namespace LJCDocDataGenLib
         retComment = parser.DelimitedString(line.ToLower(), beginTag, endTag);
         if (retComment != null)
         {
-          retComment = parser.Selection(line);
+          var value = parser.Selection(line);
+          if (NetString.HasValue(value))
+          {
+            retComment = value.Trim();
+          }
         }
         if (trimEnd)
         {
@@ -530,6 +549,9 @@ namespace LJCDocDataGenLib
 
     /// <summary>The Code File base (Library) name.</summary>
     public string LibName { get; set; }
+
+    // The Line and ContinueLine values.
+    private string[] BothLines { get; set; }
     #endregion
 
     #region Private Properties

@@ -25,7 +25,7 @@ namespace LJCGenDoc2
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Creates CodeDoc pages from source list.
     /// <include path="members/CreateFromList/*" file="Doc/LJCGenDoc2.xml"/>
@@ -59,7 +59,7 @@ namespace LJCGenDoc2
     /// <param name="folderPath">The folder path.</param>
     public void CreateFilePages(string sourcePath, string pattern)
     {
-      string docDataXML = null;
+      string docDataXML;
       var ext = Path.GetExtension(sourcePath);
       if (!NetString.HasValue(ext))
       {

@@ -9,13 +9,15 @@ using System.IO;
 namespace LJCDocDataGenLib
 {
   // Provides methods to generate DocData XML files from a code file.
-  /// <include path="members/LJCDocDataGen/*" file="Doc/LJCDocDataGen.xml"/>
+  /// <include file="Doc/LJCDocDataGen.xml"
+  ///  path="members/LJCDocDataGen/*"/>
   public class LJCDocDataGen
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCDocDataGen.xml"/>
+    /// <include file="Doc/LJCDocDataGen.xml"
+    ///  path="members/Constructor/*"/>
     public LJCDocDataGen()
     {
       // Collects the comments for the next DocData XML output point
@@ -35,7 +37,7 @@ namespace LJCDocDataGenLib
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Creates and potentially writes the DocData XML.
     /// <include path="members/SerializeDocData/*" file="Doc/LJCDocDataGen.xml"/>
@@ -62,56 +64,59 @@ namespace LJCDocDataGenLib
     {
       string retXMLString = null;
 
-      bool success = true;
-      if (!File.Exists(codeFileSpec))
+      while (true)
       {
-        success = false;
-      }
-
-      Lines = null;
-      if (success)
-      {
-        Lines = File.ReadAllLines(codeFileSpec);
-        if (null == Lines)
+        bool success = true;
+        if (!File.Exists(codeFileSpec))
         {
-          success = false;
+          break;
         }
-      }
 
-      if (success)
-      {
+        Lines = null;
+        if (success)
+        {
+          Lines = File.ReadAllLines(codeFileSpec);
+          //if (null == Lines)
+          if (!NetCommon.HasElements(Lines))
+          {
+            break;
+          }
+        }
+
         // Testing
         //FileNameBreak("LJCDocDataGen.cs", codeFileSpec);
 
-        if (Lines.Length > 0)
+        LineIndex = 0;
+        while (LineIndex < Lines.Length)
         {
-          LineIndex = 0;
-          while (LineIndex < Lines.Length)
+          Line = Lines[LineIndex];
+
+          // Get potential continuation line if available -
+          // before incrementing for next line.
+          ContinueLine = GetContinueLine(LineIndex);
+          BothLines = new string[]
           {
-            Line = Lines[LineIndex];
+            Line, ContinueLine,
+          };
+          LineIndex++;
 
-            // Get potential continuation line if available -
-            // before incrementing for next line.
-            ContinueLine = GetContinueLine(LineIndex);
-            LineIndex++;
-
-            // Process LibName:, XML Comment, empty line and Comment Line.
-            if (LineProcessed(codeFileSpec))
-            {
-              continue;
-            }
-
-            // Check for Class, Method or Property.
-            var tokens = NetString.Split(Line, " ");
-            if (tokens.Length < 2)
-            {
-              continue;
-            }
-
-            // Process Lib, Class, Method or Property.
-            SetValuesItem();
+          // Process LibName:, XML Comment, empty line and Comment Line.
+          if (LineProcessed(codeFileSpec))
+          {
+            continue;
           }
+
+          // Check for Class, Method or Property.
+          var tokens = NetString.Split(Line, " ");
+          if (tokens.Length < 2)
+          {
+            continue;
+          }
+
+          // Process Lib, Class, Method or Property.
+          SetValuesItem();
         }
+        break;
       }
 
       if (DocDataFile != null)
@@ -123,7 +128,7 @@ namespace LJCDocDataGenLib
     }
     #endregion
 
-    #region Private Processing Methods
+    #region Processing Methods
 
     private string GetContinueLine(int index)
     {
@@ -164,35 +169,30 @@ namespace LJCDocDataGenLib
     {
       var retProcessed = false;
 
-      // Skip blank line.
-      if (!NetString.HasValue(Line))
+      while (true)
       {
-        retProcessed = true;
-      }
+        // Skip blank line.
+        if (!NetString.HasValue(Line))
+        {
+          retProcessed = true;
+          break;
+        }
 
-      // Skip LibName: XML comment.
-      var isLibName = false;
-      if (!retProcessed
-        && IsLibName(Line))
-      {
-        isLibName = true;
-      }
+        // Set XML comment values.
+        if (!IsLibName(Line)
+          && Line.Trim().StartsWith("///"))
+        {
+          Comments.SetComment(BothLines, codeFileSpec);
+          retProcessed = true;
+          break;
+        }
 
-      // Collect XML comments.
-      // *** Next Statement *** Change 5/6/26
-      if (!retProcessed
-        && !isLibName
-        && Line.Trim().StartsWith("///"))
-      {
-        Comments.SetComment(Line, codeFileSpec);
-        retProcessed = true;
-      }
-
-      // Skip comment.
-      if (!retProcessed
-        && Line.Trim().StartsWith("//"))
-      {
-        retProcessed = true;
+        // Skip comment.
+        if (Line.Trim().StartsWith("//"))
+        {
+          retProcessed = true;
+        }
+        break;
       }
       return retProcessed;
     }
@@ -202,15 +202,22 @@ namespace LJCDocDataGenLib
     {
       if (NetString.HasValue(ClassName))
       {
-        InitializeClasses();
+        if (null == DocDataFile.Classes)
+        {
+          DocDataFile.Classes = new LJCDocDataClasses();
+        }
         var classes = DocDataFile.Classes;
         var summary = Comments.Summary;
         var classItem = new LJCDocDataClass(ClassName, summary);
         classes.Add(classItem);
+
         classItem.Code = Comments.Code;
         foreach (var group in Comments.Groups)
         {
-          InitializeGroups(classItem);
+          if (null == classItem.Groups)
+          {
+            classItem.Groups = new LJCDocDataParams();
+          }
           classItem.Groups.Add(group);
         }
         classItem.Remarks = Comments.Remarks;
@@ -222,47 +229,34 @@ namespace LJCDocDataGenLib
     // Sets the DocData values for the Class, Method or Property.
     private void SetValuesItem()
     {
-      var isFound = false;
-
-      // Starts like this so code sections can be processed in any order.
-      if (!isFound
-        && IsLibName(Line))
+      while (true)
       {
-        isFound = true;
-        SetValuesLib();
-      }
+        if (IsLibName(Line))
+        {
+          SetValuesLib();
+          break;
+        }
 
-      if (!isFound)
-      {
         var codeParse = new LJCCSParser();
         if (Line.Contains("class "))
         {
           var className = codeParse.ClassName(Line);
           if (NetString.HasValue(className))
           {
-            isFound = true;
             ClassName = className;
             SetValuesClass();
+            break;
           }
         }
-      }
 
-      if (!isFound)
-      {
         var methodName = SetValuesMethod();
         if (NetString.HasValue(methodName))
         {
-          isFound = true;
+          break;
         }
-      }
 
-      if (!isFound)
-      {
-        var propertyName = SetValuesProperty();
-        if (NetString.HasValue(propertyName))
-        {
-          //isFound = true;
-        }
+        SetValuesProperty();
+        break;
       }
     }
 
@@ -289,7 +283,10 @@ namespace LJCDocDataGenLib
           var classItem = classes.Find(x => x.Name == ClassName);
           if (classItem != null)
           {
-            InitializeMethods(classItem);
+            if (null == classItem.Methods)
+            {
+              classItem.Methods = new LJCDocDataMethods();
+            }
             var methods = classItem.Methods;
             var method = new LJCDocDataMethod(retMethodName, Comments.Summary)
             {
@@ -323,7 +320,10 @@ namespace LJCDocDataGenLib
           var classItem = classes.Find(x => x.Name == ClassName);
           if (classItem != null)
           {
-            InitializeProperties(classItem);
+            if (null == classItem.Properties)
+            {
+              classItem.Properties = new LJCDocDataProperties();
+            }
             var properties = classItem.Properties;
             var property = new LJCDocDataProperty(retPropertyName
               , Comments.Summary)
@@ -350,42 +350,6 @@ namespace LJCDocDataGenLib
       if (fileName == nameOnly)
       {
         Debugger.Break();
-      }
-    }
-
-    // Initialize the file Classes collection.
-    private void InitializeClasses()
-    {
-      if (null == DocDataFile.Classes)
-      {
-        DocDataFile.Classes = new LJCDocDataClasses();
-      }
-    }
-
-    // Initialize the class Groups collection.
-    private void InitializeGroups(LJCDocDataClass classItem)
-    {
-      if (null == classItem.Groups)
-      {
-        classItem.Groups = new LJCDocDataParams();
-      }
-    }
-
-    // Initialize the class Methods collection.
-    private void InitializeMethods(LJCDocDataClass classItem)
-    {
-      if (null == classItem.Methods)
-      {
-        classItem.Methods = new LJCDocDataMethods();
-      }
-    }
-
-    // Initialize the class Properties collection.
-    private void InitializeProperties(LJCDocDataClass classItem)
-    {
-      if (null == classItem.Properties)
-      {
-        classItem.Properties = new LJCDocDataProperties();
       }
     }
 
@@ -458,10 +422,17 @@ namespace LJCDocDataGenLib
 
     #region Properties
 
+    // Line and ContinueLine.
+    private string[] BothLines { get; set; }
+
+    // The class name.
     private string ClassName { get; set; }
 
     // The XML Comments object.
     private LJCComments Comments { get; set; }
+
+    // The next process line.
+    private string ContinueLine { get; set; }
 
     // The DocDataFile object.
     private LJCDocDataFile DocDataFile { get; set; }
@@ -481,9 +452,6 @@ namespace LJCDocDataGenLib
 
     // The method name.
     private string MethodName { get; set; }
-
-    // The next process line.
-    private string ContinueLine { get; set; }
 
     // The property name.
     private string PropertyName { get; set; }

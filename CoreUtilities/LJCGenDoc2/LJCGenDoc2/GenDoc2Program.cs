@@ -8,17 +8,20 @@ using System;
 using System.CodeDom.Compiler;
 
 // The GenDoc2 Program.
-/// <include path="members/LJCGenDoc2/*" file="Doc/GenDoc2Program.xml"/>
+/// <include file="Doc/GenDoc2Program.xml"
+///  path="members/LJCGenDoc2/*"/>
 /// LibName: LJCGenDoc2
 
 namespace LJCGenDoc2
 {
   // The program entry class.
-  /// <include path="members/GenDoc2Program/*" file="Doc/GenDoc2Program.xml"/>
+  /// <include file="Doc/GenDoc2Program.xml"
+  ///  path="members/GenDoc2Program/*"/>
   internal class GenDoc2Program
   {
     // The program entry method.
-    /// <include path="members/Main/*" file="Doc/GenDoc2Program.xml"/>
+    /// <include file="Doc/GenDoc2Program.xml"
+    ///  path="members/Main/*"/>
     static void Main(string[] args)
     {
       var genDoc2 = new LJCGenDoc2();
