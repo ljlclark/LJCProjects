@@ -44,10 +44,12 @@ namespace LJCNetCommon
       {
         foreach (LJCDataValue dataValue in dataValues)
         {
-          var dataColumn = new LJCDataColumn();
-          dataColumn.ColumnName = dataValue.ColumnName;
-          dataColumn.DataTypeName = dataValue.DataTypeName;
-          dataColumn.Value = dataValue.Value;
+          var dataColumn = new LJCDataColumn
+          {
+            PropertyName = dataValue.PropertyName,
+            DataTypeName = dataValue.DataTypeName,
+            Value = dataValue.Value
+          };
           retValues.Add(dataColumn);
         }
       }

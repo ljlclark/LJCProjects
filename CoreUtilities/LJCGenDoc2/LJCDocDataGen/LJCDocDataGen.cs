@@ -30,7 +30,8 @@ namespace LJCDocDataGenLib
     }
 
     // Sets the GenCodeDoc config.
-    /// <include path="members/SetConfig/*" file="Doc/LJCDocDataGen.xml"/>
+    /// <include file="Doc/LJCDocDataGen.xml"
+    ///  path="members/SetConfig/*"/>
     public void SetConfig(LJCGenDocConfig config)
     {
       GenDocConfig = config;
@@ -40,7 +41,8 @@ namespace LJCDocDataGenLib
     #region Methods
 
     // Creates and potentially writes the DocData XML.
-    /// <include path="members/SerializeDocData/*" file="Doc/LJCDocDataGen.xml"/>
+    /// <include file="Doc/LJCDocDataGen.xml"
+    ///  path="members/SerializeDocData/*"/>
     public string SerializeDocData(string codeFileSpec)
     {
       string retXMLString;
@@ -59,7 +61,8 @@ namespace LJCDocDataGenLib
     }
 
     /// Generates the Doc data for the file.
-    /// <include path="members/ProcessCode/*" file="Doc/LJCDocDataGen.xml"/>
+    /// <include file="Doc/LJCDocDataGen.xml"
+    ///  path="members/ProcessCode/*"/>
     public string ProcessCode(string codeFileSpec)
     {
       string retXMLString = null;
@@ -76,7 +79,6 @@ namespace LJCDocDataGenLib
         if (success)
         {
           Lines = File.ReadAllLines(codeFileSpec);
-          //if (null == Lines)
           if (!NetCommon.HasElements(Lines))
           {
             break;
@@ -96,7 +98,8 @@ namespace LJCDocDataGenLib
           ContinueLine = GetContinueLine(LineIndex);
           BothLines = new string[]
           {
-            Line, ContinueLine,
+            Line,
+            ContinueLine,
           };
           LineIndex++;
 
@@ -106,14 +109,14 @@ namespace LJCDocDataGenLib
             continue;
           }
 
-          // Check for Class, Method or Property.
+          // Check for Project, Class, Method or Property.
           var tokens = NetString.Split(Line, " ");
           if (tokens.Length < 2)
           {
             continue;
           }
 
-          // Process Lib, Class, Method or Property.
+          // Process Project (Lib), Class, Method or Property.
           SetValuesItem();
         }
         break;
@@ -130,6 +133,7 @@ namespace LJCDocDataGenLib
 
     #region Processing Methods
 
+    // Gets the next line as potential continuation line.
     private string GetContinueLine(int index)
     {
       string retLine = null;
@@ -226,7 +230,7 @@ namespace LJCDocDataGenLib
       }
     }
 
-    // Sets the DocData values for the Class, Method or Property.
+    // Sets the DocData values for the Project (Lib), Class, Method or Property.
     private void SetValuesItem()
     {
       while (true)

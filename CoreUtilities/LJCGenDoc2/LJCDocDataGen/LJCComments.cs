@@ -9,13 +9,15 @@ using System.Diagnostics;
 namespace LJCDocDataGenLib
 {
   // Provides methods to parse XML comment values.
-  /// <include path="members/LJCComments/*" file="Doc/LJCComments.xml"/>
+  /// <include file='Doc/LJCComments.xml'
+  ///  path='members/LJCComments/*'/>
   public class LJCComments
   {
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCComments.xml"/>
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/Constructor/*'/>
     public LJCComments()
     {
       // Initialize XML Comment properties.
@@ -28,15 +30,16 @@ namespace LJCDocDataGenLib
       // Initialize private properties.
       CodeFileSpec = null;
       Include = new LJCInclude();
-      IsContinue = false;
+      IsNewComment = false;
       SetCommentTags();
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Clears the XML comments.
-    /// <include path="members/ClearComments/*" file="Doc/LJCComments.xml"/>
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/ClearComments/*'/>
     public void ClearComments()
     {
       Code = null;
@@ -49,86 +52,152 @@ namespace LJCDocDataGenLib
     }
 
     // Sets the XML comment value.
-    /// <include path="members/SetComment/*" file="Doc/LJCComments.xml"/>
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/SetComment/*'/>
     public void SetComment(string[] bothLines, string codeFileSpec = null)
     {
       BothLines = bothLines;
       var trimLine = BothLines[0].Trim();
 
-      var success = true;
-      if (!trimLine.StartsWith("///"))
+      while (true)
       {
-        success = false;
-      }
-
-      if (success
-        && codeFileSpec != null)
-      {
-        CodeFileSpec = codeFileSpec;
-      }
-
-      if (success
-        && !IsContinue)
-      {
-        // Testing
-        if (trimLine.ToLower().Contains("parentgroup"))
+        // Line is not an XML comment.
+        if (!trimLine.StartsWith("///"))
         {
-          //Debugger.Break();
+          break;
         }
 
-        // New comment.
-        CurrentTagName = LineBeginTagName(trimLine);
-
-        // Do not clear if multiple tags are allowed.
-        if ("param" != CurrentTagName
-          && "group" != CurrentTagName)
+        if (codeFileSpec != null)
         {
-          ClearTagComment();
+          CodeFileSpec = codeFileSpec;
         }
 
-        var comment = GetComment(BothLines);
-        if (CurrentTagName != null)
+        // Comment can span multiple lines.
+        if (IsNewComment)
         {
-          if (NetString.HasValue(comment))
+          CurrentTagName = GetBeginTagName(trimLine);
+          if (NetString.HasValue(CurrentTagName))
           {
+            ClearSingleTagComment();
+            var comment = GetComment(BothLines);
             SaveComment(comment);
-          }
-          if (!HasCurrentEndTag(trimLine))
-          {
-            // No end tag so start Continue comment.
-            IsContinue = true;
+            IsNewComment = HasEndTag(trimLine);
           }
         }
-      }
-      else
-      {
-        // Continue comment.
-        if (HasCurrentEndTag(trimLine))
+        else
         {
-          // Has end tag so end Continue comment.
-          IsContinue = false;
-        }
-        //var comment = GetComment(trimLine);
-        var comment = GetComment(BothLines);
-        if (NetString.HasValue(comment))
-        {
+          var comment = GetComment(BothLines);
           SaveComment(comment);
+          IsNewComment = !HasEndTag(trimLine);
+        }
+        break;
+      }
+    }
+
+    // Gets the comment from a line.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/GetComment/*'/>
+    private string GetComment(string[] bothLines)
+    {
+      string retComment = null;
+
+      var line = bothLines[0];
+      var lowerCaseLine = line.ToLower();
+
+      // Get using CurrentTagName.
+      var beginTag = BeginTag();
+      var endTag = EndTag();
+
+      var beginIndex = -1;
+      if (beginTag != null)
+      {
+        beginIndex = lowerCaseLine.IndexOf(beginTag);
+      }
+      if (beginIndex < 0)
+      {
+        // No BeginTag so set parse for start of comment.
+        beginTag = "///";
+      }
+
+      var isSimpleComment = true;
+      if ("<include" == beginTag)
+      {
+        isSimpleComment = false;
+        Include.SetComments(bothLines, CodeFileSpec);
+        AddIncludeComments();
+
+        // Indicate that Include comment processing is done.
+        CurrentTagName = null;
+      }
+
+      // Save group item.
+      if ("<group" == beginTag)
+      {
+        isSimpleComment = false;
+        var groupComment = new LJCDocDataParam();
+        var group = groupComment.GetParam(line);
+        Groups.Add(group);
+      }
+
+      // Save param item.
+      if ("<param" == beginTag)
+      {
+        isSimpleComment = false;
+        var paramComment = new LJCDocDataParam();
+        var param = paramComment.GetParam(line);
+        Params.Add(param);
+      }
+
+      if (isSimpleComment)
+      {
+        var parser = new LJCParser();
+        retComment = parser.DelimitedString(lowerCaseLine, beginTag, endTag);
+        if (retComment != null)
+        {
+          retComment = retComment.TrimStart();
+          if (HasEndTag(line))
+          {
+            retComment = retComment.TrimEnd();
+          }
         }
       }
+      return retComment;
     }
     #endregion
 
     #region Private Comment Methods
 
+    // Adds the include comment lines.
+    private void AddIncludeComments()
+    {
+      foreach (var comment in Include.Comments)
+      {
+        string[] both = new string[]
+        {
+            comment,
+            null,
+        };
+        SetComment(both);
+      }
+
+      if (Code != null)
+      {
+        Code = Code.TrimEnd();
+      }
+    }
+
     // Clear comment for current or supplied tag name.
-    private void ClearTagComment(string tagName = null)
+    private void ClearSingleTagComment(string tagName = null)
     {
       if (null == tagName)
       {
         tagName = CurrentTagName;
       }
 
-      if (tagName != null)
+      // Do not clear if multiple tags are allowed.
+      if (NetString.HasValue(tagName)
+        && "param" != tagName
+        && "group" != tagName)
       {
         switch (tagName.ToLower())
         {
@@ -166,128 +235,37 @@ namespace LJCDocDataGenLib
       }
     }
 
-    // Gets the comment from a line.
-    /// <include path="members/GetComment/*" file="Doc/LJCComments.xml"/>
-    private string GetComment(string[] bothLines)
-    {
-      string retComment = null;
-
-      var line = bothLines[0];
-
-      // Get using CurrentTagName.
-      var beginTag = BeginTag();
-      var endTag = EndTag();
-
-      var beginIndex = -1;
-      if (beginTag != null)
-      {
-        beginIndex = line.ToLower().IndexOf(beginTag);
-      }
-      if (beginIndex < 0)
-      {
-        // No BeginTag so set parse for start of comment.
-        beginTag = "///";
-      }
-
-      var isSimpleComment = true;
-      if ("<include" == beginTag)
-      {
-        isSimpleComment = false;
-        Include.SetComments(bothLines, CodeFileSpec);
-
-        // Process the include comment lines through SetComment().
-        foreach (var comment in Include.Comments)
-        {
-          string[] both = new string[]
-          {
-            comment,
-            null,
-          };
-          SetComment(both);
-        }
-
-        // Remove extra line from code.
-        if (Code != null)
-        {
-          Code = Code.TrimEnd();
-        }
-
-        // Indicate that Include comment processing is done.
-        CurrentTagName = null;
-      }
-
-      // Save group item.
-      if ("<group" == beginTag)
-      {
-        isSimpleComment = false;
-        var groupComment = new LJCDocDataParam();
-        var group = groupComment.GetParam(line);
-        Groups.Add(group);
-      }
-
-      // Save param item.
-      if ("<param" == beginTag)
-      {
-        isSimpleComment = false;
-        var paramComment = new LJCDocDataParam();
-        var param = paramComment.GetParam(line);
-        Params.Add(param);
-      }
-
-      if (isSimpleComment)
-      {
-        var trimEnd = true;
-        if (!HasCurrentEndTag(line))
-        {
-          // No EndTag so do not remove newline.
-          trimEnd = false;
-        }
-        var parser = new LJCParser();
-        retComment = parser.DelimitedString(line.ToLower(), beginTag, endTag);
-        if (retComment != null)
-        {
-          var value = parser.Selection(line);
-          if (NetString.HasValue(value))
-          {
-            retComment = value.Trim();
-          }
-        }
-        if (trimEnd)
-        {
-          retComment = retComment.TrimEnd();
-        }
-      }
-      return retComment;
-    }
-
     // Saves the comment for the current comment tag.
     private void SaveComment(string comment)
     {
-      switch (CurrentTagName)
+      if (NetString.HasValue(comment))
       {
-        case "code":
-          if (Code != "")
-          {
-            Code += "\r\n";
-          }
-          Code += NetCommon.XmlEncode(comment);
-          break;
+        switch (CurrentTagName)
+        {
+          case "code":
+            if (Code != "")
+            {
+              Code += "\r\n";
+            }
+            Code += NetCommon.XmlEncode(comment);
+            break;
 
-        case "parentgroup":
-          ParentGroup = NetCommon.XmlEncode(comment);
-          break;
+          case "parentgroup":
+            ParentGroup = NetCommon.XmlEncode(comment);
+            break;
 
-        case "remarks":
-          Remarks += NetCommon.XmlEncode(comment);
-          break;
+          case "remarks":
+            Remarks += NetCommon.XmlEncode(comment);
+            break;
 
-        case "returns":
-          Returns += NetCommon.XmlEncode(comment);
-          break;
+          case "returns":
+            Returns += NetCommon.XmlEncode(comment);
+            break;
 
-        case "summary":
-          Summary += NetCommon.XmlEncode(comment);
-          break;
+          case "summary":
+            Summary += NetCommon.XmlEncode(comment);
+            break;
+        }
       }
     }
     #endregion
@@ -304,7 +282,7 @@ namespace LJCDocDataGenLib
         tagName = CurrentTagName;
       }
 
-      if (tagName != null)
+      if (NetString.HasValue(tagName))
       {
         switch (tagName.Trim().ToLower())
         {
@@ -445,7 +423,7 @@ namespace LJCDocDataGenLib
     }
 
     // Indicates if the lines has a current EndTag.
-    private bool HasCurrentEndTag(string line)
+    private bool HasEndTag(string line)
     {
       var retValue = false;
 
@@ -459,13 +437,14 @@ namespace LJCDocDataGenLib
     }
 
     /// Gets the tag name if the line contains a begin tag.
-    private string LineBeginTagName(string line)
+    private string GetBeginTagName(string line)
     {
       string retName = null;
 
+      var lowerCaseLine = line.ToLower();
       foreach (string beginTag in BeginTags)
       {
-        if (line.ToLower().IndexOf(beginTag) >= 0)
+        if (lowerCaseLine.IndexOf(beginTag) >= 0)
         {
           retName = BeginTagName(beginTag);
           break;
@@ -479,9 +458,10 @@ namespace LJCDocDataGenLib
     {
       string retName = null;
 
+      var lowerCaseLine = line.ToLower();
       foreach (string endTag in EndTags)
       {
-        if (line.ToLower().IndexOf(endTag) >= 0)
+        if (lowerCaseLine.IndexOf(endTag) >= 0)
         {
           retName = EndTagName(endTag);
           break;
@@ -569,7 +549,7 @@ namespace LJCDocDataGenLib
     private LJCInclude Include { get; set; }
 
     // The IsContinue flag.
-    private bool IsContinue { get; set; }
+    private bool IsNewComment { get; set; }
     #endregion
   }
 }

@@ -308,8 +308,8 @@ namespace LJCNetCommon
         "virtual",
       };
 
-      // public sealed class
       // public abstract class
+      // public sealed class
       ClassModifier2 = new string[]
       {
         "abstract",

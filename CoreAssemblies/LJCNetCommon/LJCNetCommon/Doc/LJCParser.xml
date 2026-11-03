@@ -20,6 +20,7 @@
     <param name="text">The text value.</param>
     <param name="beginDelimiter">The begin delimiter.</param>
     <param name="endDelimiter">The end delimiter.</param>
+    <param name="required">Delimiters must exist exactly as specified.</param>
     <returns>The delimited string.</returns>
   </DelimitedString>
   <FindTag>

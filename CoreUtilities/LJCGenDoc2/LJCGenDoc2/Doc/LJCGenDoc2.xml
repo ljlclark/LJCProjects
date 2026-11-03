@@ -22,6 +22,19 @@
       Creates CodeDoc pages from source list.
     </summary>
     <param name="sourceListSpec">The source list filespec.</param>
+    <example>
+      <code xml:space="preserve">
+        include LJCNetCommon;
+        
+        private static void CreateFromList()
+        {
+          var genDoc2 = new LJCGenDoc2();
+          
+          // Test Method
+          genDoc2.CreateFromList("SourceFile.cs");
+        }
+      </code>
+    </example>
   </CreateFromList>
   <CreateFilePages>
     <summary>

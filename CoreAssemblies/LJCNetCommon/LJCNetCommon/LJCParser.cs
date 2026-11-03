@@ -29,19 +29,35 @@ namespace LJCNetCommon
     /// <include file='Doc/LJCParser.xml'
     ///  path='members/DelimitedString/*'/>
     public string DelimitedString(string text, string beginDelimiter = null
-      , string endDelimiter = null)
+      , string endDelimiter = null, bool required = false)
     {
       string retValue = null;
 
       BeginIndex = -1;
       EndIndex = -1;
 
-      if (StartIndex > -1
-        && NetString.HasValue(text)
-        && StartIndex < text.Length - 1
-        && (null == beginDelimiter
-        || text.Contains(beginDelimiter)))
+      while (true)
       {
+        // No text to parse.
+        if (!NetString.HasValue(text))
+        {
+          break;
+        }
+
+        // Start parsing index is invalid.
+        if (-1 == StartIndex
+          || StartIndex >= text.Length - 1)
+        {
+          break;
+        }
+
+        // Text does not contain the begin delimiter.
+        if (beginDelimiter != null
+          && !text.Contains(beginDelimiter))
+        {
+          break;
+        }
+
         var beginLength = 0;
         BeginIndex = 0;
         //if (NetString.HasValue(beginDelimiter))
@@ -66,6 +82,11 @@ namespace LJCNetCommon
             endLength = endDelimiter.Length;
             EndIndex = index;
           }
+          if (required
+            && index < 0)
+          {
+            EndIndex = BeginIndex;
+          }
         }
 
         int textLength = EndIndex - BeginIndex;
@@ -79,6 +100,7 @@ namespace LJCNetCommon
           // and end delimiter.
           StartIndex = EndIndex + 1;
         }
+        break;
       }
       return retValue;
     }
