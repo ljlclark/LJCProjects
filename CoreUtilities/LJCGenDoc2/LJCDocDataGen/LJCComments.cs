@@ -3,6 +3,7 @@
 // LJCComments.cs
 using LJCDocDataDAL;
 using LJCNetCommon;
+using System;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
@@ -13,6 +14,60 @@ namespace LJCDocDataGenLib
   ///  path='members/LJCComments/*'/>
   public class LJCComments
   {
+    #region XML Comment Properties
+
+    /// <summary>The example Code.</summary>
+    public string Code { get; set; }
+
+    /// <summary>The groups.</summary>
+    public LJCDocDataParams Groups { get; set; }
+
+    /// <summary>The Param comments.</summary>
+    public LJCDocDataParams Params { get; set; }
+
+    /// <summary>The Parent group name.</summary>
+    public string ParentGroup { get; set; }
+
+    /// <summary>The Remark comment.</summary>
+    public string Remarks { get; set; }
+
+    /// <summary>The Returns comment.</summary>
+    public string Returns { get; set; }
+
+    /// <summary>The Summary comment.</summary>
+    public string Summary { get; set; }
+    #endregion
+
+    #region Public Properties
+
+    /// <summary>The current tag name.</summary>
+    public string CurrentTagName { get; set; }
+
+    /// <summary>The Code File base (Library) name.</summary>
+    public string LibName { get; set; }
+
+    // The Line and ContinueLine values.
+    private string[] BothLines { get; set; }
+    #endregion
+
+    #region Private Properties
+
+    //// The Begin comment tags.
+    //private string[] BeginTags { get; set; }
+
+    // The Code File specification.
+    private string CodeFileSpec { get; set; }
+
+    // The IncludeFile object.
+    private LJCInclude Include { get; set; }
+
+    // The IsContinue flag.
+    private bool IsNewComment { get; set; }
+
+    // Gets or sets the parser object.
+    private LJCParser Parser { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -30,7 +85,8 @@ namespace LJCDocDataGenLib
       // Initialize private properties.
       CodeFileSpec = null;
       Include = new LJCInclude();
-      IsNewComment = false;
+      IsNewComment = true;
+      Parser = new LJCParser();
       SetCommentTags();
     }
     #endregion
@@ -75,20 +131,24 @@ namespace LJCDocDataGenLib
         // Comment can span multiple lines.
         if (IsNewComment)
         {
-          CurrentTagName = GetBeginTagName(trimLine);
+          CurrentTagName = Parser.ValidBeginTagName(trimLine);
           if (NetString.HasValue(CurrentTagName))
           {
             ClearSingleTagComment();
             var comment = GetComment(BothLines);
             SaveComment(comment);
-            IsNewComment = HasEndTag(trimLine);
+            IsNewComment = Parser.HasValidEndTag(trimLine);
           }
         }
         else
         {
           var comment = GetComment(BothLines);
           SaveComment(comment);
-          IsNewComment = !HasEndTag(trimLine);
+          IsNewComment = Parser.HasValidEndTag(trimLine);
+          if (trimLine.EndsWith("/>"))
+          {
+            IsNewComment = true;
+          }
         }
         break;
       }
@@ -102,27 +162,28 @@ namespace LJCDocDataGenLib
       string retComment = null;
 
       var line = bothLines[0];
-      var lowerCaseLine = line.ToLower();
 
       // Get using CurrentTagName.
-      var beginTag = BeginTag();
-      var endTag = EndTag();
-
-      var beginIndex = -1;
-      if (beginTag != null)
+      var shortBeginTag = Parser.NameToShortBeginTag(CurrentTagName);
+      string beginTag = null;
+      if (NetString.HasValue(shortBeginTag))
       {
-        beginIndex = lowerCaseLine.IndexOf(beginTag);
+        beginTag = $"{shortBeginTag}>";
       }
+      var endTag = Parser.EndTag(line);
+
+      var beginIndex = NetString.IndexOf(line, shortBeginTag);
       if (beginIndex < 0)
       {
         // No BeginTag so set parse for start of comment.
-        beginTag = "///";
+        beginTag = "/// ";
       }
 
       var isSimpleComment = true;
-      if ("<include" == beginTag)
+      if ("<include" == shortBeginTag)
       {
         isSimpleComment = false;
+        Include.SetValidTagNames(Parser.ValidTagNames);
         Include.SetComments(bothLines, CodeFileSpec);
         AddIncludeComments();
 
@@ -131,7 +192,7 @@ namespace LJCDocDataGenLib
       }
 
       // Save group item.
-      if ("<group" == beginTag)
+      if ("<group" == shortBeginTag)
       {
         isSimpleComment = false;
         var groupComment = new LJCDocDataParam();
@@ -140,7 +201,7 @@ namespace LJCDocDataGenLib
       }
 
       // Save param item.
-      if ("<param" == beginTag)
+      if ("<param" == shortBeginTag)
       {
         isSimpleComment = false;
         var paramComment = new LJCDocDataParam();
@@ -151,11 +212,14 @@ namespace LJCDocDataGenLib
       if (isSimpleComment)
       {
         var parser = new LJCParser();
-        retComment = parser.DelimitedString(lowerCaseLine, beginTag, endTag);
-        if (retComment != null)
+        retComment = parser.DelimitedString(line, beginTag, endTag);
+        if (NetString.HasValue(retComment))
         {
-          retComment = retComment.TrimStart();
-          if (HasEndTag(line))
+          if (CurrentTagName != "code")
+          {
+            retComment = retComment.TrimStart();
+          }
+          if (Parser.HasValidEndTag(line))
           {
             retComment = retComment.TrimEnd();
           }
@@ -238,7 +302,8 @@ namespace LJCDocDataGenLib
     // Saves the comment for the current comment tag.
     private void SaveComment(string comment)
     {
-      if (NetString.HasValue(comment))
+      if ("code" == CurrentTagName
+        || NetString.HasValue(comment))
       {
         switch (CurrentTagName)
         {
@@ -250,7 +315,7 @@ namespace LJCDocDataGenLib
             Code += NetCommon.XmlEncode(comment);
             break;
 
-          case "parentgroup":
+          case "parentGroup":
             ParentGroup = NetCommon.XmlEncode(comment);
             break;
 
@@ -272,284 +337,20 @@ namespace LJCDocDataGenLib
 
     #region Private Tag Methods
 
-    // Get the starting begin tag for the tag name.
-    private string BeginTag(string tagName = null)
-    {
-      string retTag = null;
-
-      if (null == tagName)
-      {
-        tagName = CurrentTagName;
-      }
-
-      if (NetString.HasValue(tagName))
-      {
-        switch (tagName.Trim().ToLower())
-        {
-          case "code":
-            retTag = "<code>";
-            break;
-          case "group":
-            retTag = "<group";
-            break;
-          case "include":
-            retTag = "<include";
-            break;
-          case "parentgroup":
-            retTag = "<parentgroup>";
-            break;
-          case "param":
-            retTag = "<param";
-            break;
-          case "remarks":
-            retTag = "<remarks>";
-            break;
-          case "returns":
-            retTag = "<returns>";
-            break;
-          case "summary":
-            retTag = "<summary>";
-            break;
-        }
-      }
-      return retTag;
-    }
-
-    // Gets the tag name for the starting begin tag.
-    private string BeginTagName(string beginTag)
-    {
-      string retName = null;
-
-      switch (beginTag.Trim().ToLower())
-      {
-        case "<code>":
-          retName = "code";
-          break;
-        case "<group":
-          retName = "group";
-          break;
-        case "<include":
-          retName = "include";
-          break;
-        case "<parentgroup>":
-          retName = "parentgroup";
-          break;
-        case "<param":
-          retName = "param";
-          break;
-        case "<remarks>":
-          retName = "remarks";
-          break;
-        case "<returns>":
-          retName = "returns";
-          break;
-        case "<summary>":
-          retName = "summary";
-          break;
-      }
-      return retName;
-    }
-
-    // Gets the end tag for the tag name.
-    private string EndTag(string tagName = null)
-    {
-      string retTag = null;
-
-      if (null == tagName)
-      {
-        tagName = CurrentTagName;
-      }
-
-      if (tagName != null)
-      {
-        switch (tagName.Trim().ToLower())
-        {
-          case "code":
-            retTag = "</code>";
-            break;
-          case "group":
-            retTag = "</group>";
-            break;
-          case "parentgroup":
-            retTag = "</parentgroup>";
-            break;
-          case "param":
-            retTag = "</param>";
-            break;
-          case "remarks":
-            retTag = "</remarks>";
-            break;
-          case "returns":
-            retTag = "</returns>";
-            break;
-          case "summary":
-            retTag = "</summary>";
-            break;
-        }
-      }
-      return retTag;
-    }
-
-    // Gets the tag name for the end tag.
-    private string EndTagName(string endTag)
-    {
-      string retName = null;
-
-      switch (endTag.Trim().ToLower())
-      {
-        case "</code>":
-          retName = "code";
-          break;
-        case "</group>":
-          retName = "group";
-          break;
-        case "</parentgroup>":
-          retName = "parentgroup";
-          break;
-        case "</param>":
-          retName = "param";
-          break;
-        case "</remarks>":
-          retName = "remarks";
-          break;
-        case "</returns>":
-          retName = "returns";
-          break;
-        case "</summary>":
-          retName = "summary";
-          break;
-      }
-      return retName;
-    }
-
-    // Indicates if the lines has a current EndTag.
-    private bool HasEndTag(string line)
-    {
-      var retValue = false;
-
-      var endTag = EndTag();
-      if (endTag != null
-        && line.ToLower().LastIndexOf(endTag) >= 0)
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    /// Gets the tag name if the line contains a begin tag.
-    private string GetBeginTagName(string line)
-    {
-      string retName = null;
-
-      var lowerCaseLine = line.ToLower();
-      foreach (string beginTag in BeginTags)
-      {
-        if (lowerCaseLine.IndexOf(beginTag) >= 0)
-        {
-          retName = BeginTagName(beginTag);
-          break;
-        }
-      }
-      return retName;
-    }
-
-    // Gets the tag name if the line ontains an end tag.
-    private string LineEndTagName(string line)
-    {
-      string retName = null;
-
-      var lowerCaseLine = line.ToLower();
-      foreach (string endTag in EndTags)
-      {
-        if (lowerCaseLine.IndexOf(endTag) >= 0)
-        {
-          retName = EndTagName(endTag);
-          break;
-        }
-      }
-      return retName;
-    }
-
     // Sets the comment tag values.
     private void SetCommentTags()
     {
-      BeginTags = new string[]
-      {
-        "<code>",
-        "<group",
-        "<include",
-        "<parentgroup>",
-        "<param",
-        "<remarks>",
-        "<returns>",
-        "<summary>",
-      };
-
-      EndTags = new string[]
-      {
-        "</code>",
-        "</group>",
-        "</parentgroup>",
-        "</param>",
-        "</remarks>",
-        "</returns>",
-        "</summary>",
+      Parser.ValidTagNames = new string[] {
+        "code",
+        "group",
+        "include",
+        "param",
+        "parentGroup",
+        "remarks",
+        "returns",
+        "summary",
       };
     }
-    #endregion
-
-    #region XML Comment Properties
-
-    /// <summary>The example Code.</summary>
-    public string Code { get; set; }
-
-    /// <summary>The groups.</summary>
-    public LJCDocDataParams Groups { get; set; }
-
-    /// <summary>The Param comments.</summary>
-    public LJCDocDataParams Params { get; set; }
-
-    /// <summary>The Parent group name.</summary>
-    public string ParentGroup { get; set; }
-
-    /// <summary>The Remark comment.</summary>
-    public string Remarks { get; set; }
-
-    /// <summary>The Returns comment.</summary>
-    public string Returns { get; set; }
-
-    /// <summary>The Summary comment.</summary>
-    public string Summary { get; set; }
-    #endregion
-
-    #region Public Properties
-
-    /// <summary>The current tag name.</summary>
-    public string CurrentTagName { get; set; }
-
-    /// <summary>The Code File base (Library) name.</summary>
-    public string LibName { get; set; }
-
-    // The Line and ContinueLine values.
-    private string[] BothLines { get; set; }
-    #endregion
-
-    #region Private Properties
-
-    // The Begin comment tags.
-    private string[] BeginTags { get; set; }
-
-    // The Code File specification.
-    private string CodeFileSpec { get; set; }
-
-    // The End comment tags.
-    private string[] EndTags { get; set; }
-
-    // The IncludeFile object.
-    private LJCInclude Include { get; set; }
-
-    // The IsContinue flag.
-    private bool IsNewComment { get; set; }
     #endregion
   }
 }

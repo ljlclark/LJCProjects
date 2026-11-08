@@ -10,6 +10,35 @@ namespace LJCNetCommon
   ///  path='members/LJCParser/*'/>
   public class LJCParser
   {
+    #region Properties
+
+    /// <summary>The delimited string begin index.</summary>
+    public int BeginIndex { get; private set; }
+
+    /// <summary>The delimited string end index.</summary>
+    public int EndIndex { get; private set; }
+
+    /// <summary>The parsing start index.</summary>
+    public int StartIndex { get; set; }
+
+    // Gets or sets the valid tag names.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/ValidTagNames/*'/>
+    public string[] ValidTagNames
+    {
+      get { return _ValidTagNames; }
+      set
+      {
+        if (NetCommon.HasListItems(value))
+        {
+          _ValidTagNames = value;
+          Array.Sort(ValidTagNames);
+        }
+      }
+    }
+    private string[] _ValidTagNames;
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -25,13 +54,48 @@ namespace LJCNetCommon
 
     #region Methods
 
+    // Changes quotes between double and single quotes.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/ChangeQuote/*'/>
+    public bool ChangeQuote(string text, out string changeValue)
+    {
+      bool retValue = false;
+
+      changeValue = text;
+
+      // ToDo?: Handle contained quotes.
+      // If double quote, change to single quote.
+      if (text.Contains("\""))
+      {
+        retValue = true;
+        changeValue = text.Replace("\"", "'");
+      }
+
+      // If quote was not changed.
+      if (!retValue)
+      {
+        // If single quote, change to double quote.
+        if (text.Contains("'"))
+        {
+          retValue = true;
+          changeValue = text.Replace("'", "\"");
+        }
+      }
+      return retValue;
+    }
+
     // Gets a delimited string.
     /// <include file='Doc/LJCParser.xml'
     ///  path='members/DelimitedString/*'/>
     public string DelimitedString(string text, string beginDelimiter = null
-      , string endDelimiter = null, bool required = false)
+      , string endDelimiter = null, bool required = false, bool reset = true)
     {
       string retValue = null;
+
+      if (reset)
+      {
+        StartIndex = 0;
+      }
 
       BeginIndex = -1;
       EndIndex = -1;
@@ -46,7 +110,7 @@ namespace LJCNetCommon
 
         // Start parsing index is invalid.
         if (-1 == StartIndex
-          || StartIndex >= text.Length - 1)
+          || StartIndex > text.Length - 1)
         {
           break;
         }
@@ -117,7 +181,6 @@ namespace LJCNetCommon
       {
         findValue += tagName;
       }
-      StartIndex = 0;
       retValue = DelimitedString(text, findValue, ">");
       var name = retValue;
 
@@ -125,7 +188,6 @@ namespace LJCNetCommon
       if (name != null
         && !findValue.Contains("/"))
       {
-        StartIndex = 0;
         name = StringWithDelimiters(retValue, retValue[0].ToString(), " ");
         if (NetString.HasValue(name))
         {
@@ -171,7 +233,6 @@ namespace LJCNetCommon
       do
       {
         string tagName = null;
-        StartIndex = 0;
         tag = FindTag(retValue, ref tagName);
         retValue = RemoveSection(retValue, BeginIndex, EndIndex);
       } while (tag != null);
@@ -213,11 +274,12 @@ namespace LJCNetCommon
     /// <include file='Doc/LJCParser.xml'
     ///  path='members/StringWithDelimiters/*'/>
     public string StringWithDelimiters(string text, string beginDelimiter = null
-      , string endDelimiter = null)
+      , string endDelimiter = null, bool required = false, bool reset = true)
     {
       string retValue = null;
 
-      if (DelimitedString(text, beginDelimiter, endDelimiter) != null)
+      if (DelimitedString(text, beginDelimiter, endDelimiter, required, reset)
+        != null)
       {
         // Include Delimiters
         int endLength = endDelimiter.Length;
@@ -230,18 +292,398 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+
+    // Parses with different combinations of double or single quotes.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/ParseWithQuotes/*'/>
+    public string ParseWithQuotes(string text, string beginDelimiter = null,
+      string endDelimiter = null)
+    {
+      string retValue;
+
+      var required = true;
+      while (true)
+      {
+        // If the end delimiter is supplied it must exist in the text.
+        retValue = DelimitedString(text, beginDelimiter, endDelimiter
+          , required);
+        if (NetString.HasValue(retValue))
+        {
+          break;
+        }
+
+        ChangeQuote(beginDelimiter, out string changeStart);
+        ChangeQuote(endDelimiter, out string changeEnd);
+        // If the end delimiter is supplied it must exist in the text.
+        retValue = DelimitedString(text, changeStart, changeEnd
+          , required);
+        break;
+      }
+      return retValue;
+    }
     #endregion
 
-    #region Properties
+    #region Begin Tag Methods
 
-    /// <summary>The delimited string begin index.</summary>
-    public int BeginIndex { get; private set; }
+    // Gets the begin tag.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/BeginTag/*'/>
+    public string BeginTag(string line)
+    {
+      string retTag = null;
 
-    /// <summary>The delimited string end index.</summary>
-    public int EndIndex { get; private set; }
+      var tagContents = BeginTagContents(line);
+      if (NetString.HasValue(tagContents))
+      {
+        retTag = $"<{tagContents}";
+      }
+      return retTag;
+    }
 
-    /// <summary>The parsing start index.</summary>
-    public int StartIndex { get; set; }
+    // Gets the begin tag with attributes.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/BeginTagContents/*'/>
+    public string BeginTagContents(string line)
+    {
+      string retContents = null;
+
+      var tagContents = DelimitedString(line, "<", ">");
+      if (NetString.HasValue(tagContents)
+        && !tagContents.StartsWith("/"))
+      {
+        retContents = tagContents;
+      }
+      return retContents;
+    }
+
+    // Gets the begin tag name.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/BeginTagName/*'/>
+    public string BeginTagName(string line)
+    {
+      string retName = null;
+
+      string beginName = null;
+      var beginContents = BeginTagContents(line);
+      if (NetString.HasValue(beginContents))
+      {
+        beginName = beginContents;
+        if (beginContents.Contains(" "))
+        {
+          beginName = DelimitedString(beginContents, null, " ");
+        }
+      }
+
+      if (NetString.HasValue(beginName))
+      {
+        retName = beginName;
+      }
+      return retName;
+    }
+
+    // Indicates if a line starts with a specific begin tag name.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/IsBeginTagName/*'/>
+    public bool IsBeginTagName(string line, string beginTagName)
+    {
+      var retValue = false;
+
+      var tagName = BeginTagName(line);
+      if (NetString.HasValue(tagName)
+        && tagName == beginTagName)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region End Tag Methods
+
+    // Gets the end tag.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/EndTag/*'/>
+    public string EndTag(string line)
+    {
+      string retTag = null;
+
+      var tagName = EndTagName(line);
+      if (NetString.HasValue(tagName))
+      {
+        retTag = $"</{tagName}";
+      }
+      return retTag;
+    }
+
+    // Gets the end tag name.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/EndTagName/*'/>
+    public string EndTagName(string line)
+    {
+      string retName = null;
+
+      if (line.Trim().EndsWith("/>"))
+      {
+        // Set for empty tag.
+        retName = ">";
+      }
+      else
+      {
+        var tagName = DelimitedString(line, "</", ">");
+        if (NetString.HasValue(tagName))
+        {
+          retName = tagName;
+        }
+      }
+      return retName;
+    }
+
+    // Indicates if a line ends with a specific end tag name.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/IsEndTagName/*'/>
+    public bool IsEndTagName(string line, string endTagName)
+    {
+      var retValue = false;
+
+      var tagName = EndTagName(line);
+      if (NetString.HasValue(tagName)
+        && tagName == endTagName)
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Valid Begin Tag Methods
+
+    // Checks for a valid begin tag.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/HasValidBeginTag/*'/>
+    public bool HasValidBeginTag(string line)
+    {
+      bool retValue = false;
+
+      var beginTag = ValidBeginTag(line);
+      if (NetString.HasValue(beginTag))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks for a begin tag and sets out value to it if found.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/HasValidBeginTagName/*'/>
+    public bool HasValidBeginTagName(string line, out string beginName)
+    {
+      bool retValue = false;
+
+      beginName = null;
+
+      var tagName = ValidBeginTagName(line);
+      if (NetString.HasValue(tagName))
+      {
+        beginName = tagName;
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Gets the valid begin tag if begin tag is valid.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/ValidBeginTag/*'/>
+    public string ValidBeginTag(string line)
+    {
+      string retTag = null;
+
+      var tagContents = BeginTagContents(line);
+      var tagName = BeginTagName(line);
+
+      // Has tag name.
+      if (NetString.HasValue(tagContents)
+        && NetString.HasValue(tagName)
+        && IsValidTagName(tagName))
+      {
+        retTag = $"<{tagContents}>";
+      }
+      return retTag;
+    }
+
+    // Gets the valid tag name if the line contains a begin tag.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/ValidBeginTagName/*'/>
+    public string ValidBeginTagName(string line)
+    {
+      string retName = null;
+
+      // Get the first tag.
+      var beginName = BeginTagName(line);
+
+      // Has tag and is not an end tag.
+      if (NetString.HasValue(beginName)
+        && IsValidTagName(beginName))
+      {
+        retName = beginName;
+      }
+      return retName;
+    }
+    #endregion
+
+    #region Valid End Tag Methods
+
+    // Checks for a valid end tag.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/HasValidEndTag/*'/>
+    public bool HasValidEndTag(string line)
+    {
+      bool retValue = false;
+
+      var endTag = ValidEndTag(line);
+      if (NetString.HasValue(endTag))
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Checks for a begin tag and sets out value to it if found.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/HasValidEndTagName/*'/>
+    public bool HasValidEndTagName(string line, out string endName)
+    {
+      var retValue = false;
+
+      endName = null;
+
+      var tagName = ValidEndTagName(line);
+      if (NetString.HasValue(tagName))
+      {
+        endName = tagName;
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Gets the valid begin tag if begin tag is valid.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/ValidEndTag/*'/>
+    public string ValidEndTag(string line)
+    {
+      string retTag = null;
+
+      var endName = EndTagName(line);
+
+      // Has tag name.
+      if (NetString.HasValue(endName)
+        && IsValidTagName(endName))
+      {
+        retTag = $"</{endName}>";
+      }
+      return retTag;
+    }
+
+    // Gets the valid tag name if the line contains an end tag.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/ValidEndTagName/*'/>
+    public string ValidEndTagName(string line)
+    {
+      string retName = null;
+
+      var endName = EndTagName(line);
+
+      if (NetString.HasValue(endName)
+        && IsValidTagName(endName))
+      {
+        retName = endName;
+      }
+      return retName;
+    }
+    #endregion
+
+    #region Name and Tag Methods
+
+    // Gets the tag name for the end tag.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/ShortBeginTagToName/*'/>
+    public string ShortBeginTagToName(string shortBeginTag)
+    {
+      string retName = null;
+
+      if (NetString.HasValue(shortBeginTag))
+      {
+        retName = shortBeginTag.Trim();
+        retName = retName.Substring(1, retName.Length - 1);
+      }
+      return retName;
+    }
+
+    // Gets the end tag for the tag name.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/NameToShortBeginTag/*'/>
+    public string NameToShortBeginTag(string tagName)
+    {
+      string retTag = null;
+
+      if (tagName != null)
+      {
+        retTag = $"<{tagName}";
+      }
+      return retTag;
+    }
+
+    // Gets the tag name for the end tag.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/EndTagToName/*'/>
+    public string EndTagToName(string endTag)
+    {
+      string retName = null;
+
+      if (NetString.HasValue(endTag))
+      {
+        retName = endTag.Trim();
+        if ('/' == retName[2])
+        {
+          retName = endTag.Trim();
+          retName = retName.Substring(2, retName.Length - 3);
+        }
+      }
+      return retName;
+    }
+
+    // Gets the end tag for the tag name.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/NameToEndTag/*'/>
+    public string NameToEndTag(string tagName)
+    {
+      string retTag = null;
+
+      if (tagName != null)
+      {
+        retTag = $"</{tagName}>";
+      }
+      return retTag;
+    }
+
+    // Checks for a valid comment tag name.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/IsValidTagName/*'/>
+    private bool IsValidTagName(string tagName)
+    {
+      var retValue = false;
+
+      if (tagName != null
+        && NetCommon.HasListItems(ValidTagNames))
+      {
+        int index = Array.BinarySearch(ValidTagNames, tagName);
+        if (index >= 0
+          && index < ValidTagNames.Length)
+        {
+          retValue = true;
+        }
+      }
+      return retValue;
+    }
     #endregion
   }
 }

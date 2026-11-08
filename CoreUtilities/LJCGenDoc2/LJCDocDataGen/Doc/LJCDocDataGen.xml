@@ -24,13 +24,13 @@
   </SetConfig>
 
   <!-- Public Methods -->
-  <SerializeDocData>
+  <CreateDocData>
     <summary>
       Creates and potentially writes the DocData XML.
     </summary>
     <param name="codeFileSpec">The code filespec.</param>
     <returns>The DocData XML string.</returns>
-  </SerializeDocData>
+  </CreateDocData>
   <ProcessCode>
     <summary>
       Generates the Doc data for the file.

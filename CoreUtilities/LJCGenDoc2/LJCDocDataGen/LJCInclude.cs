@@ -4,8 +4,10 @@
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 
 namespace LJCDocDataGenLib
 {
@@ -21,7 +23,12 @@ namespace LJCDocDataGenLib
     ///  path='members/CurrentTag/*'/>
     public List<string> Comments { get; private set; }
 
-    // Gets the current tag value.
+    // Gets the current tag name.
+    /// <include file='Doc/LJCInclude.xml'
+    ///  path='members/CurrentTagName/*'/>
+    public string CurrentTagName { get; private set; }
+
+    // Gets the current tag.
     /// <include file='Doc/LJCInclude.xml'
     ///  path='members/CurrentTag/*'/>
     public string CurrentTag { get; private set; }
@@ -35,6 +42,9 @@ namespace LJCDocDataGenLib
     /// <include file='Doc/LJCInclude.xml'
     ///  path='members/XMLFile/*'/>
     public string IncludeFile { get; private set; }
+
+    // Gets or sets the parser object.
+    private LJCParser Parser { get; set; }
     #endregion
 
     #region Constructor Methods
@@ -48,6 +58,15 @@ namespace LJCDocDataGenLib
       CurrentTag = null;
       LibName = null;
       IncludeFile = null;
+      Parser = new LJCParser();
+    }
+
+    // Sets the parser valid tag names.
+    /// <include file='Doc/LJCInclude.xml'
+    ///  path='members/SetValidTagNames/*'/>
+    public void SetValidTagNames(string[] validTagNames)
+    {
+      Parser.ValidTagNames = validTagNames;
     }
     #endregion
 
@@ -62,36 +81,51 @@ namespace LJCDocDataGenLib
       var memberTag = "";
       if (SetIncludeValues(bothLines, codeFileSpec, ref memberTag))
       {
-        var isNewComment = true;
         var lines = File.ReadAllLines(IncludeFile);
 
-        var isStart = true;
-        for (int index = 0; index < lines.Length; index++)
+        // Start processing at first child of the member tag.
+        var startIndex = MemberTagsIndex(lines, memberTag);
+
+        var isNewComment = true;
+        for (int index = startIndex; index < lines.Length; index++)
         {
-          // Start processing at first child of the member tag.
-          var line = SetToMemberTags(lines, memberTag, ref index, ref isStart);
+          var line = lines[index];
+          var trimLine = line.Trim();
+
+          if (trimLine == $"</{memberTag}>")
+          {
+            // End of member comments.
+            break;
+          }
+
+          // Get potentially included end tag.
+          var endTag = Parser.ValidEndTag(trimLine);
 
           // Comment can span multiple lines.
-          var trimLine = line.Trim();
-          var endTag = LineEndTag(trimLine, out _);
-          //DebugBreak(endTag, "</example>");
-          //DebugBreak(endTag, "</code>");
           if (isNewComment)
           {
-            CurrentTag = LineBeginTag(line, out bool isValid);
-            //DebugBreak(CurrentTag, "<example>");
-            //DebugBreak(CurrentTag, "<code");
-            if (!isValid)
+            CurrentTag = Parser.ValidBeginTag(trimLine);
+            if (NetString.HasValue(CurrentTag))
             {
-              break;
+              if ("<example>" == CurrentTag)
+              {
+                var currentTag = CurrentTag;
+                trimLine = AdvanceToCode(lines, ref currentTag, ref index);
+                CurrentTag = currentTag;
+              }
+              CurrentTagName = Parser.ValidBeginTagName(trimLine);
+              SetComment(trimLine);
+              isNewComment = NetString.HasValue(endTag);
             }
-            SetComment(trimLine);
-            isNewComment = NetString.HasValue(endTag);
           }
           else
           {
-            isNewComment = NetString.HasValue(endTag);
             SetComment(trimLine);
+            isNewComment = NetString.HasValue(endTag);
+            if ("</code>" == endTag)
+            {
+              AdvanceAfterExample(lines, endTag, ref index);
+            }
           }
         }
       }
@@ -102,24 +136,23 @@ namespace LJCDocDataGenLib
     {
       string retComment;
 
-      var beginTag = LineBeginTag(line, out _);
-      var endTag = LineEndTag(line, out _);
+      var beginTag = Parser.ValidBeginTag(line);
+      var endTag = Parser.ValidEndTag(line);
 
       while (true)
       {
-        var parser = new LJCParser();
-
-        // If endTag is empty, returns comment to end of text line.
-        var commentText = parser.DelimitedString(line, beginTag, endTag);
-        if ("<code>" == CurrentTag
-          && endTag != null)
+        // If endTag is missing, returns comment to end of text line.
+        var commentText = Parser.DelimitedString(line, beginTag, endTag);
+        if ("code" == CurrentTagName)
         {
-          commentText = commentText.TrimEnd();
-        }
-
-        if ("/" == beginTag)
-        {
-          beginTag = null;
+          if (null == commentText)
+          {
+            commentText = "";
+          }
+          if (endTag != null)
+          {
+            commentText = commentText.TrimEnd();
+          }
         }
 
         // Build an XML comment.
@@ -148,32 +181,38 @@ namespace LJCDocDataGenLib
 
     #region Private Methods
 
-    // Changes quotes between double and single quotes.
-    private bool ChangeQuote(string text, out string changeValue)
+    // Advances to after the <example> tag.
+    private void AdvanceAfterExample(string[] lines, string endTag
+      , ref int index)
     {
-      bool retValue = false;
-
-      changeValue = text;
-
-      // ToDo: Handle contained quotes.
-      // If double quote, change to single quote.
-      if (text.Contains("\""))
+      if ("</code>" == endTag)
       {
-        retValue = true;
-        changeValue = text.Replace("\"", "'");
-      }
-
-      // If quote was not changed.
-      if (!retValue)
-      {
-        // If single quote, change to double quote.
-        if (text.Contains("'"))
+        string line = lines[index];
+        while (!Parser.IsEndTagName(line, "example"))
         {
-          retValue = true;
-          changeValue = text.Replace("'", "\"");
+          index++;
+          line = lines[index];
         }
       }
-      return retValue;
+    }
+
+    // Advance to the <code> tag.
+    private string AdvanceToCode(string[] lines, ref string currentTag
+      , ref int index)
+    {
+      string retLine = lines[index];
+
+      if ("<example>" == currentTag
+        && ToBeginCode(lines, ref index))
+      {
+        var line = lines[index];
+        if (Parser.HasValidBeginTagName(line, out string tempTag))
+        {
+          retLine = line;
+          currentTag = tempTag;
+        }
+      }
+      return retLine;
     }
 
     // Performs a debug break if a value contains a compare to value.
@@ -189,84 +228,6 @@ namespace LJCDocDataGenLib
           Debugger.Break();
         }
       }
-    }
-
-    // Checks for a valid comment tag name.
-    private bool IsCommentTagName(string tagName)
-    {
-      var retValue = false;
-
-      if (tagName != null)
-      {
-        // Eliminate attributes.
-        if (tagName != null
-          && tagName.Contains(" "))
-        {
-          var parser = new LJCParser();
-          tagName = parser.DelimitedString(tagName, null, " ");
-        }
-
-        switch (tagName.ToLower())
-        {
-          case "code":
-          case "example":
-          case "group":
-          case "param":
-          case "parentgroup":
-          case "remarks":
-          case "returns":
-          case "summary":
-            retValue = true;
-            break;
-        }
-      }
-      return retValue;
-    }
-
-    // Gets the begin tag.
-    private string LineBeginTag(string line, out bool isValid)
-    {
-      isValid = false;
-      string retBeginTag = null;
-
-      var parser = new LJCParser();
-      var beginTagName = parser.DelimitedString(line, "<", ">");
-
-      // Skip end tag.
-      if (beginTagName != null
-        && beginTagName.StartsWith("/"))
-      {
-        beginTagName = null;
-      }
-
-      if (IsCommentTagName(beginTagName))
-      {
-        isValid = true;
-        retBeginTag = $"<{beginTagName}>";
-      }
-      if (!NetString.HasValue(beginTagName))
-      {
-        isValid = true;
-      }
-      return retBeginTag;
-    }
-
-    // Gets the end tag.
-    private string LineEndTag(string line, out bool isValid)
-    {
-      string retEndTag = null;
-
-      isValid = false;
-
-      var parser = new LJCParser();
-      var endTagName = parser.DelimitedString(line, "</", ">");
-
-      if (IsCommentTagName(endTagName))
-      {
-        isValid = true;
-        retEndTag = $"</{endTagName}>";
-      }
-      return retEndTag;
     }
 
     // Replaces tabs with spaces and removes extra leading spaces
@@ -289,34 +250,57 @@ namespace LJCDocDataGenLib
       return retComment;
     }
 
-    // Parses with different combinations of double or single quotes.
-    private string ParseWithQuotes(string text, string beginDelimiter = null,
-      string endDelimiter = null)
+    // Set index to first child of the member tag.
+    private int MemberTagsIndex(string[] lines, string memberTag)
     {
-      string retValue;
+      var retIndex = 0;
 
-      var parser = new LJCParser();
-      var required = true;
-      while (true)
+      var process = NetString.HasValue(memberTag);
+      var tag = $"<{memberTag}>";
+      //if (!Array.Exists(lines, element => element.Contains(tag)))
+      if (!Array.Exists(lines, element => element.Trim() == tag))
       {
-        parser.StartIndex = 0;
-        // If the end delimiter is supplied it must exist in the text.
-        retValue = parser.DelimitedString(text, beginDelimiter, endDelimiter
-          , required);
-        if (NetString.HasValue(retValue))
+        process = false;
+      }
+
+      while (process)
+      {
+        if (retIndex >= lines.Length)
         {
+          // End of lines.
           break;
         }
 
-        ChangeQuote(beginDelimiter, out string changeStart);
-        ChangeQuote(endDelimiter, out string changeEnd);
-        parser.StartIndex = 0;
-        // If the end delimiter is supplied it must exist in the text.
-        retValue = parser.DelimitedString(text, changeStart, changeEnd
-          , required);
+        var line = lines[retIndex];
+        if (line.IndexOf($"<{memberTag}>") < 0)
+        {
+          // Tag was not found so continue.
+          retIndex++;
+          continue;
+        }
+
+        // Move to first XML comments.
+        if (retIndex < lines.Length)
+        {
+          retIndex++;
+        }
         break;
       }
-      return retValue;
+      return retIndex;
+    }
+
+    // Gets the next trimmed line.
+    private string NextTrimLine(string[] lines, ref int index)
+    {
+      string retLine = null;
+
+      index++;
+      if (index <= lines.Length)
+      {
+        retLine = lines[index];
+        retLine = retLine.Trim();
+      }
+      return retLine;
     }
 
     // Sets the Class include file values: LibName, IncludeFile.
@@ -334,15 +318,14 @@ namespace LJCDocDataGenLib
       foreach (string line in bothLines)
       {
         retValue = true;
-        var xmlPath = ParseWithQuotes(line, "path=\"", "\"");
+        var xmlPath = Parser.ParseWithQuotes(line, "path=\"", "\"");
         if (!NetString.HasValue(xmlPath))
         {
           retValue = false;
         }
         else
         {
-          var parser = new LJCParser();
-          memberTag = parser.DelimitedString(line, "members/", "/*");
+          memberTag = Parser.DelimitedString(line, "members/", "/*");
           break;
         }
       }
@@ -353,7 +336,7 @@ namespace LJCDocDataGenLib
         foreach (string line in bothLines)
         {
           retValue = true;
-          IncludeFile = ParseWithQuotes(line, "file=\"", "\"");
+          IncludeFile = Parser.ParseWithQuotes(line, "file=\"", "\"");
           if (!NetString.HasValue(IncludeFile))
           {
             retValue = false;
@@ -376,41 +359,52 @@ namespace LJCDocDataGenLib
       return retValue;
     }
 
-    // Set index to first child of the member tag.
-    private string SetToMemberTags(string[] lines, string memberTag, ref int index
-      , ref bool isStart)
+    // Finds the beginning of the <code> comment.
+    private bool ToBeginCode(string[] lines, ref int index)
     {
-      var retLine = lines[index];
+      bool retValue = false;
 
-      while (true)
+      var tempIndex = index;
+      var line = lines[tempIndex];
+      if (Parser.IsBeginTagName(line, "example"))
       {
-        if (!NetString.HasValue(memberTag)
-          || !isStart)
+        while (true)
         {
-          break;
-        }
+          string trimLine = NextTrimLine(lines, ref tempIndex);
 
-        var tag = $"<{memberTag}>";
-        //if (!Array.Exists(lines, element => element.Contains(tag)))
-        if (!Array.Exists(lines, element => element.Trim() == tag))
-        {
-          break;
-        }
+          // Keep searching until begin "code", end "code", end "example" or
+          // end of file.
+          if (!Parser.IsBeginTagName(trimLine, "code")
+            && !Parser.IsEndTagName(trimLine, "code")
+            && !Parser.IsEndTagName(trimLine, "example"))
+          {
+            if (null == trimLine)
+            {
+              break;
+            }
+            continue;
+          }
 
-        var line = lines[index];
-        if (line.IndexOf($"<{memberTag}>") < 0)
-        {
-          index++;
-          continue;
-        }
+          Parser.HasValidBeginTagName(trimLine, out string tagName);
+          if ("code" == tagName)
+          {
+            retValue = true;
+            index = tempIndex;
+            break;
+          }
 
-        // Move to first XML comments.
-        index++;
-        retLine = lines[index];
-        break;
+          if (Parser.HasValidEndTagName(trimLine, out tagName))
+          {
+            if ("code" == tagName
+              || "example" == tagName)
+            {
+              index = tempIndex;
+              break;
+            }
+          }
+        }
       }
-      isStart = false;
-      return retLine;
+      return retValue;
     }
     #endregion
   }

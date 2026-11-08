@@ -42,8 +42,8 @@ namespace LJCDocDataGenLib
 
     // Creates and potentially writes the DocData XML.
     /// <include file="Doc/LJCDocDataGen.xml"
-    ///  path="members/SerializeDocData/*"/>
-    public string SerializeDocData(string codeFileSpec)
+    ///  path="members/CreateDocData/*"/>
+    public string CreateDocData(string codeFileSpec)
     {
       string retXMLString;
 
@@ -84,9 +84,6 @@ namespace LJCDocDataGenLib
             break;
           }
         }
-
-        // Testing
-        //FileNameBreak("LJCDocDataGen.cs", codeFileSpec);
 
         LineIndex = 0;
         while (LineIndex < Lines.Length)
@@ -346,16 +343,6 @@ namespace LJCDocDataGenLib
     #endregion
 
     #region Other Private Methods
-
-    // Break on a file name.
-    private void FileNameBreak(string fileName, string fileSpec)
-    {
-      var nameOnly = Path.GetFileName(fileSpec);
-      if (fileName == nameOnly)
-      {
-        Debugger.Break();
-      }
-    }
 
     // Creates a Lib DocData XML output file spec.
     private string LibGenXMLSpec(string codeFileSpec, string outputPath = null)

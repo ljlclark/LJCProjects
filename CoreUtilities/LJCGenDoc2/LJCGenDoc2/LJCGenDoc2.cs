@@ -67,7 +67,7 @@ namespace LJCGenDoc2
         var files = Directory.GetFiles(sourcePath, pattern);
         foreach (var file in files)
         {
-          docDataXML = DocDataGen.SerializeDocData(file);
+          docDataXML = DocDataGen.CreateDocData(file);
           if (docDataXML != null)
           {
             //var genDataXML = GenDataGen.SerializeGenData(docDataXML, file);
@@ -77,7 +77,7 @@ namespace LJCGenDoc2
       else
       {
         // Process specific file.
-        docDataXML = DocDataGen.SerializeDocData(sourcePath);
+        docDataXML = DocDataGen.CreateDocData(sourcePath);
         if (docDataXML != null)
         {
           var genDataXML = GenDataGen.SerializeGenData(docDataXML, sourcePath);

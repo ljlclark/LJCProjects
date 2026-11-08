@@ -21,6 +21,22 @@ namespace LJCNetCommon
       return !string.IsNullOrWhiteSpace(text);
     }
 
+    // Gets the case insensitive index of the findText.
+    /// <include file='Doc/NetString.xml'
+    ///  path='members/IndexOf/*'/>
+    public static int IndexOf(string text, string findText)
+    {
+      var retIndex = -1;
+
+      if (HasValue(text)
+        && HasValue(findText))
+      {
+        StringComparison comparison = StringComparison.InvariantCultureIgnoreCase;
+        retIndex = text.IndexOf(findText, comparison);
+      }
+      return retIndex;
+    }
+
     // Checks a string value for digits.
     /// <include file='Doc/NetString.xml'
     ///  path='members/IsDigits/*'/>
