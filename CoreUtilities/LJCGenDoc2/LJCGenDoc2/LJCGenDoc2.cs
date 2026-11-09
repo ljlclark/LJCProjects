@@ -64,13 +64,14 @@ namespace LJCGenDoc2
       if (!NetString.HasValue(ext))
       {
         // Process files in a folder.
-        var files = Directory.GetFiles(sourcePath, pattern);
-        foreach (var file in files)
+        var codeFileSpecs = Directory.GetFiles(sourcePath, pattern);
+        foreach (var codeFileSpec in codeFileSpecs)
         {
-          docDataXML = DocDataGen.CreateDocData(file);
+          docDataXML = DocDataGen.CreateDocData(codeFileSpec);
           if (docDataXML != null)
           {
-            //var genDataXML = GenDataGen.SerializeGenData(docDataXML, file);
+            var genDataXML = GenDataGen.CreateGenData(docDataXML
+              , codeFileSpec);
           }
         }
       }
@@ -80,7 +81,7 @@ namespace LJCGenDoc2
         docDataXML = DocDataGen.CreateDocData(sourcePath);
         if (docDataXML != null)
         {
-          var genDataXML = GenDataGen.SerializeGenData(docDataXML, sourcePath);
+          var genDataXML = GenDataGen.CreateGenData(docDataXML, sourcePath);
         }
       }
     }

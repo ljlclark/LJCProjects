@@ -10,30 +10,6 @@ namespace LJCDocDataDAL
   /// <include path="members/LJCDocDataClass/*" file="Doc/LJCDocDataClass.xml"/>
   public class LJCDocDataClass
   {
-    #region Constructor Methods
-
-    // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCDocDataClass.xml"/>
-    public LJCDocDataClass()
-    {
-    }
-
-    // Initializes an object instance with the provided values.
-    /// <include path="members/ConstructorParams/*" file="Doc/LJCDocDataClass.xml"/>
-    public LJCDocDataClass(string name, string summary)
-    {
-      Name = name;
-      Summary = summary;
-
-      //Groups = new LJCDocDataParams();
-      //Methods = new LJCDocDataMethods();
-      //Properties = new LJCDocDataProperties();
-      Groups = null;
-      Methods = null;
-      Properties = null;
-    }
-    #endregion
-
     #region Properties
 
     /// <summary>The Code value.</summary>
@@ -59,6 +35,30 @@ namespace LJCDocDataDAL
 
     /// <summary>The class syntax.</summary>
     public string Syntax;
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include path="members/Constructor/*" file="Doc/LJCDocDataClass.xml"/>
+    public LJCDocDataClass()
+    {
+    }
+
+    // Initializes an object instance with the provided values.
+    /// <include path="members/ConstructorParams/*" file="Doc/LJCDocDataClass.xml"/>
+    public LJCDocDataClass(string name, string summary)
+    {
+      Name = name;
+      Summary = summary;
+
+      //Groups = new LJCDocDataParams();
+      //Methods = new LJCDocDataMethods();
+      //Properties = new LJCDocDataProperties();
+      Groups = null;
+      Methods = null;
+      Properties = null;
+    }
     #endregion
   }
 }

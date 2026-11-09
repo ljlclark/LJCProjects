@@ -97,6 +97,7 @@ namespace _Namespace_
 		// Update ChangedNames.Add() statements to "Property" constant
 		// if property was renamed.
 		// #SectionBegin Properties
+		// #Value _AllowDBNull_ 
 		// #Value _ColumnName_
 		// #Value _DataType_
 		// #Value _MaxLength_
@@ -151,6 +152,7 @@ namespace _Namespace_
 		///   path='items/TableName/*'/>
 		public static string TableName = "_TableName_";
 		// #SectionBegin Properties
+		// #Value _AllowDBNull_ 
 		// #Value _ColumnName_
 		// #Value _DataType_
 		// #Value _MaxLength_
@@ -162,6 +164,7 @@ namespace _Namespace_
 		public static string Column_ColumnName_ = "_ColumnName_";
 		// #SectionEnd Properties
 		// #SectionBegin Properties
+		// #Value _AllowDBNull_ 
 		// #Value _ColumnName_
 		// #Value _DataType_
 		// #Value _MaxLength_
