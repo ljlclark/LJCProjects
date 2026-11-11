@@ -37,6 +37,10 @@ namespace LJCGenDataGenLib
     string HTMLFileSpec { get; set; }
     #endregion
 
+    #region Class Values
+    private LJCDocDataMethods RemainingMethods { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -88,6 +92,9 @@ namespace LJCGenDataGenLib
       replacements.Add("_MethodListPreface_", "");
       if (NetCommon.HasListItems(docDataClass.Methods))
       {
+        RemainingMethods = docDataClass.Methods;
+        CreateGroupMethods(retSections, docDataClass);
+
         var methodCount = docDataClass.Methods.Count.ToString();
         replacements.Add("_OtherMethodCount_", methodCount);
         CreateMethods(retSections, docDataClass);
@@ -104,6 +111,48 @@ namespace LJCGenDataGenLib
       copyright += "Licensed under the MIT License.";
       replacements.Add("_Copyright_", copyright);
       return retSections;
+    }
+
+    private void CreateGroupMethods(Sections sections
+      , LJCDocDataClass docDataClass)
+    {
+      Section groupSection = null;
+      RepeatItems groupItems = null;
+      var hasRemaining = false;
+      if (NetCommon.HasListItems(RemainingMethods))
+      {
+        groupSection = sections.Add("MethodGroups");
+        groupItems = groupSection.RepeatItems;
+        hasRemaining = true;
+      }
+
+      while (hasRemaining)
+      {
+        foreach (var group in docDataClass.Groups)
+        {
+          var groupItem = groupItems.Add(group.Name);
+          var replacements = groupItem.Replacements;
+          replacements.Add("_Heading_", group.Name);
+          var subsection = new Section("subsection");
+          groupItems[0].Subsection = subsection;
+          var subItems = subsection.RepeatItems;
+
+          var methods = RemainingMethods.FindAll(method
+            => method.ParentGroup == group.Name);
+          if (NetCommon.HasListItems(methods))
+          {
+            var subItem = subItems.Add(group.Name);
+            foreach (var method in methods)
+            {
+              subItem.Replacements.Add("_Name_", method.Name);
+              subItem.Replacements.Add("_Summary_", method.Summary);
+              RemainingMethods.Remove(method);
+              hasRemaining = NetCommon.HasListItems(RemainingMethods);
+            }
+          }
+        }
+        hasRemaining = false;
+      }
     }
 
     // Creates the Methods GenData.
