@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCGenType.xml -->
+<members>
+  <!-- Class -->
+  <LJCGenType>
+    <summary>
+      Provides methods to create the type (class) GenData.
+    </summary>
+  </LJCGenType>
+  
+  <!-- Properties -->
+  <GenDocConfig>
+    <summary>
+      Gets or sets the GenDoc configuration.
+    </summary>
+  </GenDocConfig>
+  <HTMLFolderName>
+    <summary>
+      Gets or sets the HTML folder name.
+    </summary>
+  </HTMLFolderName>
+  <HTMLFileName>
+    <summary>
+      Gets or sets the HTML file name.
+    </summary>
+  </HTMLFileName>
+  <HTMLFileSpec>
+    <summary>
+      Gets or sets the HTML file specification.
+    </summary>
+  </HTMLFileSpec>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  
+  <!-- Methods -->
+  <GenDataClass>
+    <summary>
+      Creates the Class GenData.
+    </summary>
+  </GenDataClass>
+</members>

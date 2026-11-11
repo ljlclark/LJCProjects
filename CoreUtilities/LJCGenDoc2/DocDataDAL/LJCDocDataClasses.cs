@@ -6,7 +6,8 @@ using System.Collections.Generic;
 namespace LJCDocDataDAL
 {
   // Represents a collection of LJCDocDataClass objects.
-  /// <include path="members/LJCDocDataClasses/*" file="Doc/LJCDocDataClasses.xml"/>
+  /// <include file='Doc/LJCDocDataClasses.xml'
+  ///  path='members/LJCDocDataClasses/*'/>
   public class LJCDocDataClasses : List<LJCDocDataClass>
   {
   }

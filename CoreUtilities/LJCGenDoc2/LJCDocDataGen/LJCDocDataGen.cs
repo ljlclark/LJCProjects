@@ -13,6 +13,43 @@ namespace LJCDocDataGenLib
   ///  path="members/LJCDocDataGen/*"/>
   public class LJCDocDataGen
   {
+    #region Properties
+
+    // Line and ContinueLine.
+    private string[] BothLines { get; set; }
+
+    // The class name.
+    private string ClassName { get; set; }
+
+    // The XML Comments object.
+    private LJCComments Comments { get; set; }
+
+    // The next process line.
+    private string ContinueLine { get; set; }
+
+    // The DocDataFile object.
+    private LJCDocDataFile DocDataFile { get; set; }
+
+    // The GenDoc configuration.
+    private LJCGenDocConfig GenDocConfig { get; set; }
+
+    // The Lib name.
+    private string LibName { get; set; }
+
+    // The current process line.
+    private string Line { get; set; }
+
+    private int LineIndex { get; set; }
+
+    private string[] Lines { get; set; }
+
+    // The method name.
+    private string MethodName { get; set; }
+
+    // The property name.
+    private string PropertyName { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -179,6 +216,13 @@ namespace LJCDocDataGenLib
           break;
         }
 
+        if (Line.Trim().StartsWith("namespace"))
+        {
+          Comments.SetComment(BothLines, codeFileSpec);
+          retProcessed = true;
+          break;
+        }
+
         // Set XML comment values.
         if (!IsLibName(Line)
           && Line.Trim().StartsWith("///"))
@@ -221,6 +265,7 @@ namespace LJCDocDataGenLib
           }
           classItem.Groups.Add(group);
         }
+        classItem.Namespace = Comments.Namespace;
         classItem.Remarks = Comments.Remarks;
         classItem.Syntax = Line.Trim();
         Comments.ClearComments();
@@ -342,7 +387,7 @@ namespace LJCDocDataGenLib
     }
     #endregion
 
-    #region Other Private Methods
+    #region Other Methods
 
     // Creates a Lib DocData XML output file spec.
     private string LibGenXMLSpec(string codeFileSpec, string outputPath = null)
@@ -409,43 +454,6 @@ namespace LJCDocDataGenLib
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    // Line and ContinueLine.
-    private string[] BothLines { get; set; }
-
-    // The class name.
-    private string ClassName { get; set; }
-
-    // The XML Comments object.
-    private LJCComments Comments { get; set; }
-
-    // The next process line.
-    private string ContinueLine { get; set; }
-
-    // The DocDataFile object.
-    private LJCDocDataFile DocDataFile { get; set; }
-
-    // The GenDoc configuration.
-    private LJCGenDocConfig GenDocConfig { get; set; }
-
-    // The Lib name.
-    private string LibName { get; set; }
-
-    // The current process line.
-    private string Line { get; set; }
-
-    private int LineIndex { get; set; }
-
-    private string[] Lines { get; set; }
-
-    // The method name.
-    private string MethodName { get; set; }
-
-    // The property name.
-    private string PropertyName { get; set; }
     #endregion
   }
 }

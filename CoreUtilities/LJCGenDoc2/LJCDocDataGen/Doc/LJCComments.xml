@@ -1,14 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCComments.xml -->
 <members>
+  <!-- Class -->
   <LJCComments>
     <summary>
       Provides methods to parse XML comment values.
     </summary>
   </LJCComments>
   
+  <!-- XML Comment Properties -->
+  <Code>
+    <summary>
+      Gets or sets the example code.
+    </summary>
+  </Code>
+  <Groups>
+    <summary>
+      Gets or sets the Groups collection.
+    </summary>
+  </Groups>
+  <Namespace>
+    <summary>
+      Gets or sets the Namespace.
+    </summary>
+  </Namespace>
+  <Params>
+    <summary>
+      Gets or sets the Params collection.
+    </summary>
+  </Params>
+  <ParentGroup>
+    <summary>
+      Gets or sets the parent group name.
+    </summary>
+  </ParentGroup>
+  <Remarks>
+    <summary>
+      Gets or sets the remarks.
+    </summary>
+  </Remarks>
+  <Returns>
+    <summary>
+      Gets or sets the returns text.
+    </summary>
+  </Returns>
+  <Summary>
+    <summary>
+      Gets or sets the summary text.
+    </summary>
+  </Summary>
+
+  <!-- Properties -->
+  <CurrentTagName>
+    <summary>
+      Gets or sets the current tag name.
+    </summary>
+  </CurrentTagName>
+  <LibName>
+    <summary>
+      Gets or sets the Code File base Library (project) name.
+    </summary>
+  </LibName>
+  <BothLines>
+    <summary>
+      Gets or sets the line and continue line values.
+    </summary>
+  </BothLines>
+
   <!-- Constructor Methods -->
   <Constructor>
     <summary>
@@ -26,7 +86,7 @@
     <summary>
       Sets the XML comment value.
     </summary>
-    <param name="line">The source code line.</param>
+    <param name="bothLines">The source code lines.</param>
     <param name="codeFileSpec">The code filespec.</param>
   </SetComment>
 </members>

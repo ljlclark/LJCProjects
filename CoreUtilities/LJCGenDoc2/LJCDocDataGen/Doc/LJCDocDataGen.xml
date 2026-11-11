@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCDocDataGen.xml -->
 <members>
@@ -23,7 +23,7 @@
     <param name="config">The LJCGenDocConfig object.</param>
   </SetConfig>
 
-  <!-- Public Methods -->
+  <!-- Methods -->
   <CreateDocData>
     <summary>
       Creates and potentially writes the DocData XML.

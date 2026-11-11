@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\LJCDocDataDAL.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,6 +57,18 @@
     <Compile Include="LJCDocDataProperty.cs" />
     <Compile Include="LJCGenDocConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Doc\LJCDocDataProperty.xml" />
+    <Content Include="Doc\LJCDocDataProperties.xml" />
+    <Content Include="Doc\LJCDocDataParam.xml" />
+    <Content Include="Doc\LJCDocDataParams.xml" />
+    <Content Include="Doc\LJCDocDataMethod.xml" />
+    <Content Include="Doc\LJCDocDataMethods.xml" />
+    <Content Include="Doc\LJCDocDataClasses.xml" />
+    <Content Include="Doc\LJCDocDataClass.xml" />
+    <Content Include="Doc\LJCDocDataFile.xml" />
+    <Content Include="Doc\LJCGenDocConfig.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

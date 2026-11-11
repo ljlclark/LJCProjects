@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCGenDataGen.xml -->
 <members>
+  <!-- Class -->
   <LJCGenDataGen>
     <summary>
       Contains methods to create GenData XML and HTML Doc from DocData XML.
@@ -10,7 +11,29 @@
     <group name="Constructor">Constructor Methods</group>
   </LJCGenDataGen>
   
+  <!-- Properties -->
+  <DocDataFile>
+    <summary>
+      Gets or sets the DocData.
+    </summary>
+  </DocDataFile>
+  <GenDocConfig>
+    <summary>
+      Gets or sets the GenDoc configuration.
+    </summary>
+  </GenDocConfig>
+  <HTMLPath>
+    <summary>
+      Gets or sets the path for HTML output.
+    </summary>
+  </HTMLPath>
+
   <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
   <SetConfig>
     <summary>
       Sets the GenCodeDoc config.
@@ -18,4 +41,16 @@
     <param name="config">The LJCGenDocConfig object.</param>
     <parentgroup>Constructor</parentgroup>
   </SetConfig>
+  
+  <!-- Methods -->
+  <CreateGenData>
+    <summary>
+      Creates the GenData xml from the DocData xml.
+    </summary>
+  </CreateGenData>
+  <GenTypePages>
+    <summary>
+      Generates the type (class) pages.
+    </summary>
+  </GenTypePages>
 </members>

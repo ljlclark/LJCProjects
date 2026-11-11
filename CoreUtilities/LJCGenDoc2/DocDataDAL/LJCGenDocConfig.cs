@@ -6,16 +6,44 @@ using System.Linq;
 
 namespace LJCDocDataDAL
 {
-  /// <summary>
-  /// Represents a GenCodeDoc configuration.
-  /// </summary>
+  // Represents a GenCodeDoc configuration.
+  /// <include file='Doc/LJCGenDocConfig.xml'
+  ///  path='members/LJCGenDocConfig/*'/>
   public class LJCGenDocConfig
   {
+    #region Properties
+
+    // Gets or sets the DocData XML target path.
+    /// <include file='Doc/LJCGenDocConfig.xml'
+    ///  path='members/DocDataXMLPath/*'/>
+    public string DocDataXMLPath { get; set; }
+
+    // Gets or sets the GenData XML target path.
+    /// <include file='Doc/LJCGenDocConfig.xml'
+    ///  path='members/GenDataXMLPath/*'/>
+    public string GenDataXMLPath { get; set; }
+
+    // Gets or sets the output target path.
+    /// <include file='Doc/LJCGenDocConfig.xml'
+    ///  path='members/OutputPath/*'/>
+    public string OutputPath { get; set; }
+
+    // Gets or sets a value indicating if the DocData XML is written to a file.
+    /// <include file='Doc/LJCGenDocConfig.xml'
+    ///  path='members/WriteDocDataXML/*'/>
+    public bool WriteDocDataXML { get; set; }
+
+    // Gets or sets a value indicating if the GenData XML is written to a file.
+    /// <include file='Doc/LJCGenDocConfig.xml'
+    ///  path='members/WriteGenDataXML/*'/>
+    public bool WriteGenDataXML { get; set; }
+    #endregion
+
     #region Constructor Methods
 
-    /// <summary>
-    /// Initializes an object instance.
-    /// </summary>
+    // Initializes an object instance.
+    /// <include file='Doc/LJCGenDocConfig.xml'
+    ///  path='members/Constructor/*'/>
     public LJCGenDocConfig()
     {
       // Initialize Properties
@@ -29,11 +57,9 @@ namespace LJCDocDataDAL
 
     #region Methods
 
-    /// <summary>
-    /// Gets the relative path prefix.
-    /// </summary>
-    /// <param name="path">The parent folder path.</param>
-    /// <returns>The relative path prefix from the program folder.</returns>
+    // Returns the relative path prefix.
+    /// <include file='Doc/LJCGenDocConfig.xml'
+    ///  path='members/GetParentPathPrefix/*'/>
     public string GetParentPathPrefix(string path)
     {
       string retPath;
@@ -44,11 +70,9 @@ namespace LJCDocDataDAL
       return retPath;
     }
 
-    /// <summary>
-    /// Sets a configuration property from a template line.
-    /// </summary>
-    /// <param name="line">The template line.</param>
-    /// <returns>true if line is a file; otherwise false.</returns>
+    // Sets a configuration property from a template line.
+    /// <include file='Doc/LJCGenDocConfig.xml'
+    ///  path='members/SetProperty/*'/>
     public bool SetProperty(string line)
     {
       var retIsSource = false;
@@ -87,34 +111,6 @@ namespace LJCDocDataDAL
       }
       return retIsSource;
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>
-    /// The DocDataXML target path.
-    /// </summary>
-    public string DocDataXMLPath { get; set; }
-
-    /// <summary>
-    /// The GenDataXML target path.
-    /// </summary>
-    public string GenDataXMLPath { get; set; }
-
-    /// <summary>
-    /// The Output target path.
-    /// </summary>
-    public string OutputPath { get; set; }
-
-    /// <summary>
-    /// Indicates if the DocDataXML will be written to a file.
-    /// </summary>
-    public bool WriteDocDataXML { get; set; }
-
-    /// <summary>
-    /// Indicates if the GenDataXML will be written to a file.
-    /// </summary>
-    public bool WriteGenDataXML { get; set; }
     #endregion
   }
 }

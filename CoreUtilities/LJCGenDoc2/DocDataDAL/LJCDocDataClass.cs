@@ -2,59 +2,78 @@
 // Licensed under the MIT License.
 // LJCDocDataClass.cs
 
-using System.Collections.Generic;
-
 namespace LJCDocDataDAL
 {
   // Represents a DocData class.
-  /// <include path="members/LJCDocDataClass/*" file="Doc/LJCDocDataClass.xml"/>
+  /// <include file='Doc/LJCDocDataClass.xml'
+  ///  path='members/LJCDocDataClass/*'/>
   public class LJCDocDataClass
   {
     #region Properties
 
-    /// <summary>The Code value.</summary>
-    public string Code;
+    // Gets or sets the example code.
+    /// <include file='Doc/LJCDocDataClass.xml'
+    ///  path='members/Code/*'/>
+    public string Code { get; set; }
 
-    /// <summary>The method groups.</summary>
-    public LJCDocDataParams Groups;
+    /// Gets or sets the Groups collection.
+    /// <include file='Doc/LJCDocDataClass.xml'
+    ///  path='members/Groups/*'/>
+    public LJCDocDataParams Groups { get; set; }
 
-    /// <summary>The Method array.</summary>
-    public LJCDocDataMethods Methods;
+    // Gets or sets the Methods collection.
+    /// <include file='Doc/LJCDocDataClass.xml'
+    ///  path='members/Methods/*'/>
+    public LJCDocDataMethods Methods { get; set; }
 
-    /// <summary>The Name value.</summary>
-    public string Name;
+    // Gets or sets the class name.
+    /// <include file='Doc/LJCDocDataClass.xml'
+    ///  path='members/Name/*'/>
+    public string Name { get; set; }
 
-    /// <summary>The Property array.</summary>
-    public LJCDocDataProperties Properties;
+    // Gets or sets the namespace.
+    /// <include file='Doc/LJCDocDataClass.xml'
+    ///  path='members/Namespace/*'/>
+    public string Namespace { get; set; }
 
-    /// <summary>The Remarks value.</summary>
-    public string Remarks;
+    // Gets or sets the Properties collection.
+    /// <include file='Doc/LJCDocDataClass.xml'
+    ///  path='members/Properties/*'/>
+    public LJCDocDataProperties Properties { get; set; }
 
-    /// <summary>The Summary value.</summary>
-    public string Summary;
+    // Gets or sets the remarks.
+    /// <include file='Doc/LJCDocDataClass.xml'
+    ///  path='members/Remarks/*'/>
+    public string Remarks { get; set; }
 
-    /// <summary>The class syntax.</summary>
-    public string Syntax;
+    // Gets or sets the summary text.
+    /// <include file='Doc/LJCDocDataClass.xml'
+    ///  path='members/Summary/*'/>
+    public string Summary { get; set; }
+
+    // Gets or sets the syntax.
+    /// <include file='Doc/LJCDocDataClass.xml'
+    ///  path='members/Syntax/*'/>
+    public string Syntax { get; set; }
     #endregion
 
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCDocDataClass.xml"/>
+    /// <include file='Doc/LJCDocDataClass.xml'
+    ///  path='members/Constructor/*'/>
     public LJCDocDataClass()
     {
     }
 
-    // Initializes an object instance with the provided values.
-    /// <include path="members/ConstructorParams/*" file="Doc/LJCDocDataClass.xml"/>
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/LJCDocDataClass.xml'
+    ///  path='members/ParamConstructor/*'/>
     public LJCDocDataClass(string name, string summary)
     {
       Name = name;
       Summary = summary;
 
-      //Groups = new LJCDocDataParams();
-      //Methods = new LJCDocDataMethods();
-      //Properties = new LJCDocDataProperties();
       Groups = null;
       Methods = null;
       Properties = null;

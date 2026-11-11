@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCGenDoc2.xml -->
 <members>
+  <!-- Class -->
   <LJCGenDoc2>
     <summary>
       Generates HTML Doc for sources in SourceList.txt.
@@ -16,7 +17,7 @@
     </summary>
   </Constructor>
   
-  <!-- Public Methods -->
+  <!-- Methods -->
   <CreateFromList>
     <summary>
       Creates CodeDoc pages from source list.

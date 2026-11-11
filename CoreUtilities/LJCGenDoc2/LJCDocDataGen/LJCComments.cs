@@ -16,37 +16,62 @@ namespace LJCDocDataGenLib
   {
     #region XML Comment Properties
 
-    /// <summary>The example Code.</summary>
+    // Gets or sets the example code.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/Code/*'/>
     public string Code { get; set; }
 
-    /// <summary>The groups.</summary>
+    // Gets or sets the Groups collection.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/Groups/*'/>
     public LJCDocDataParams Groups { get; set; }
 
-    /// <summary>The Param comments.</summary>
+    // Gets or sets the Namespace.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/Namespace/*'/>
+    public string Namespace { get; set; }
+
+    // Gets or sets the Params collection.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/Params/*'/>
     public LJCDocDataParams Params { get; set; }
 
-    /// <summary>The Parent group name.</summary>
+    // Gets or sets the parent group name.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/ParentGroup/*'/>
     public string ParentGroup { get; set; }
 
-    /// <summary>The Remark comment.</summary>
+    // Gets or sets the remarks.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/Remarks/*'/>
     public string Remarks { get; set; }
 
-    /// <summary>The Returns comment.</summary>
+    // Gets or sets the returns text.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/Returns/*'/>
     public string Returns { get; set; }
 
-    /// <summary>The Summary comment.</summary>
+    // Gets or sets the summary text.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/Summary/*'/>
     public string Summary { get; set; }
     #endregion
 
-    #region Public Properties
+    #region Properties
 
-    /// <summary>The current tag name.</summary>
+    // Gets or sets the current tag name.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/CurrentTagName/*'/>
     public string CurrentTagName { get; set; }
 
-    /// <summary>The Code File base (Library) name.</summary>
+    // Gets or sets the Code File base Library (project) name.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/LibName/*'/>
     public string LibName { get; set; }
 
-    // The Line and ContinueLine values.
+    // Gets or sets the line and continue line values.
+    /// <include file='Doc/LJCComments.xml'
+    ///  path='members/BothLines/*'/>
     private string[] BothLines { get; set; }
     #endregion
 
@@ -117,6 +142,16 @@ namespace LJCDocDataGenLib
 
       while (true)
       {
+        if (trimLine.StartsWith("namespace"))
+        {
+          var tokens = NetString.Split(trimLine, " ");
+          if (2 == tokens.Length)
+          {
+            Namespace = tokens[1];
+          }
+          break;
+        }
+
         // Line is not an XML comment.
         if (!trimLine.StartsWith("///"))
         {

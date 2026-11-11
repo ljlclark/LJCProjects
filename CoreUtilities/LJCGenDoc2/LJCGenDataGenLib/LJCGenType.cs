@@ -6,7 +6,6 @@ using LJCGenTextLib;
 using LJCNetCommon;
 using System;
 using System.IO;
-using static System.Collections.Specialized.BitVector32;
 
 namespace LJCGenDataGenLib
 {
@@ -66,15 +65,15 @@ namespace LJCGenDataGenLib
       var item = section.RepeatItems.Add(docDataClass.Name);
       var replacements = item.Replacements;
 
+      replacements.Add("_GenDate_", DateTime.Now.ToShortDateString());
       replacements.Add("_AssemblyName_", "AssemblyName");
       replacements.Add("_AssemblyHtm_", "AssemblyHtml");
-      replacements.Add("_Namespace_", "Namespace");
+      replacements.Add("_Namespace_", docDataClass.Namespace);
 
       replacements.Add("_TypeName_", docDataClass.Name);
       replacements.Add("_Summary_", docDataClass.Summary);
       replacements.Add("_Syntax_", docDataClass.Syntax);
 
-      replacements.Add("_GenDate_", DateTime.Now.ToShortDateString());
       if (NetString.HasValue(docDataClass.Remarks))
       {
         replacements.Add("_RemarkText_", docDataClass.Remarks);
@@ -85,18 +84,25 @@ namespace LJCGenDataGenLib
         replacements.Add("_Code_", docDataClass.Code);
         replacements.Add("_HasExample_", "true");
       }
+
+      replacements.Add("_MethodListPreface_", "");
       if (NetCommon.HasListItems(docDataClass.Methods))
       {
         var methodCount = docDataClass.Methods.Count.ToString();
-        replacements.Add("_PublicMethodCount_", methodCount);
+        replacements.Add("_OtherMethodCount_", methodCount);
         CreateMethods(retSections, docDataClass);
       }
+
       if (NetCommon.HasListItems(docDataClass.Properties))
       {
         var propertyCount = docDataClass.Properties.Count.ToString();
         replacements.Add("_PropertyCount_", propertyCount);
         CreateProperties(retSections, docDataClass);
       }
+
+      var copyright = "Copyright (c) Lester J. Clark and Contributors.<br />";
+      copyright += "Licensed under the MIT License.";
+      replacements.Add("_Copyright_", copyright);
       return retSections;
     }
 
@@ -117,7 +123,7 @@ namespace LJCGenDataGenLib
           //replacements.Add("_TypeName_", method.TypeName);
 
           replacements.Add("_MethodName_", method.Name);
-          replacements.Add("_Summary_", method.Summary);
+          replacements.Add("_MethodSummary_", method.Summary);
           replacements.Add("_Returns_", method.Returns);
           replacements.Add("_RemarkText_", method.Remarks);
           replacements.Add("_Syntax_", method.Syntax);

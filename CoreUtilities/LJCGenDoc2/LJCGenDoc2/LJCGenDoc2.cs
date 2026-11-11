@@ -10,13 +10,33 @@ using System.IO;
 namespace LJCGenDoc2
 {
   // Generates HTML Doc for sources in SourceList.txt.
-  /// <include path="members/LJCGenDoc2/*" file="Doc/LJCGenDoc2.xml"/>
+  /// <include file='Doc/LJCGenDoc2.xml'
+  ///  path='members/LJCGenDoc2/*'/>
   public class LJCGenDoc2
   {
+    #region Properties
+
+    // The Generate DocData XML object.
+    /// <include file='Doc/LJCGenDoc2.xml'
+    ///  path='members/DocDataGen/*'/>
+    public LJCDocDataGen DocDataGen { get; set; }
+
+    // The Generate GenData XML object.
+    /// <include file='Doc/LJCGenDoc2.xml'
+    ///  path='members/GenDataGen/*'/>
+    public LJCGenDataGen GenDataGen { get; set; }
+
+    // The GenDoc configuration.
+    /// <include file='Doc/LJCGenDoc2.xml'
+    ///  path='members/GenDocConfig/*'/>
+    public LJCGenDocConfig GenDocConfig { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include path="members/Constructor/*" file="Doc/LJCGenDoc2.xml"/>
+    /// <include file='Doc/LJCGenDoc2.xml'
+    ///  path='members/Constructor/*'/>
     public LJCGenDoc2()
     {
       // Initialize Properties
@@ -28,7 +48,8 @@ namespace LJCGenDoc2
     #region Methods
 
     // Creates CodeDoc pages from source list.
-    /// <include path="members/CreateFromList/*" file="Doc/LJCGenDoc2.xml"/>
+    /// <include file='Doc/LJCGenDoc2.xml'
+    ///  path='members/CreateFromList/*'/>
     public void CreateFromList(string sourceListSpec)
     {
       if (null == GenDocConfig)
@@ -53,10 +74,9 @@ namespace LJCGenDoc2
       }
     }
 
-    /// <summary>
     /// Creates the HTML documentation files.
-    /// </summary>
-    /// <param name="folderPath">The folder path.</param>
+    /// <include file='Doc/LJCGenDoc2.xml'
+    ///  path='members/CreateFilePages/*'/>
     public void CreateFilePages(string sourcePath, string pattern)
     {
       string docDataXML;
@@ -87,32 +107,12 @@ namespace LJCGenDoc2
     }
 
     // Sets the GenCodeDoc config.
-    /// <include path="members/SetConfig/*" file="Doc/LJCGenDoc2.xml"/>
+    /// <include file='Doc/LJCGenDoc2.xml'
+    ///  path='members/SetConfig/*'/>
     public void SetConfig(LJCGenDocConfig config)
     {
       GenDocConfig = config;
     }
-    #endregion
-
-    #region Private Methods
-    #endregion
-
-    #region Properties
-
-    /// <summary>
-    // The Generate DocData XML object.
-    /// </summary>
-    public LJCDocDataGen DocDataGen { get; set; }
-
-    /// <summary>
-    // The Generate DocData XML object.
-    /// </summary>
-    public LJCGenDataGen GenDataGen { get; set; }
-
-    /// <summary>
-    // The GenDoc configuration.
-    /// </summary>
-    public LJCGenDocConfig GenDocConfig { get; set; }
     #endregion
   }
 }

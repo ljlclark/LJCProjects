@@ -4,16 +4,14 @@
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 
 namespace LJCDocDataGenLib
 {
-  /// <summary>
-  /// Provides methods to retrieve the Include file XML comment values.
-  /// </summary>
+  // Provides methods to retrieve the Include file XML comment values.
+  /// <include file='Doc/LJCInclude.xml'
+  ///  path='members/LJCInclude/*'/>
   public class LJCInclude
   {
     #region Properties
@@ -40,7 +38,7 @@ namespace LJCDocDataGenLib
 
     // Gets the include XML file name.
     /// <include file='Doc/LJCInclude.xml'
-    ///  path='members/XMLFile/*'/>
+    ///  path='members/IncludeFile/*'/>
     public string IncludeFile { get; private set; }
 
     // Gets or sets the parser object.

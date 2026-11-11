@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- GenDoc2Program.xml -->
 <members>
@@ -11,6 +11,8 @@
       Generates HTML Doc pages.
     </remarks>
   </LJCGenDoc2>
+
+  <!-- Class -->
   <GenDoc2Program>
     <summary>
       The program entry class.
@@ -20,6 +22,8 @@
     </remarks>
     <group name="Entry">Entry Method</group>
   </GenDoc2Program>
+  
+  <!-- Methods -->
   <Main>
     <summary>
       The program entry method.

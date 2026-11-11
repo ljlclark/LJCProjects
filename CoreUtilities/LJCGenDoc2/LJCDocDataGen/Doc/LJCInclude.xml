@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCComments.xml -->
+<members>
+  <!-- Class -->
+  <LJCComments>
+    <summary>
+      Provides methods to parse XML comment values.
+    </summary>
+  </LJCComments>
+  
+  <!-- Properties -->
+  <Comments>
+    <summary>
+      Gets the include XML comments.
+    </summary>
+  </Comments>
+  <CurrentTagName>
+    <summary>
+      Gets the current tag name.
+    </summary>
+  </CurrentTagName>
+  <CurrentTag>
+    <summary>
+      Gets the current tag.
+    </summary>
+  </CurrentTag>
+  <LibName>
+    <summary>
+      Gets the project (Lib) name.
+    </summary>
+  </LibName>
+  <IncludeFile>
+    <summary>
+      Gets the include XML file name.
+    </summary>
+  </IncludeFile>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <SetValidTagNames>
+    <summary>
+      Sets the parser valid tag names.
+    </summary>
+  </SetValidTagNames>
+  
+  <!-- Public Methods -->
+  <SetComments>
+    <summary>
+      Sets the XML comments from the specified include file.
+    </summary>
+  </SetComments>
+</members>

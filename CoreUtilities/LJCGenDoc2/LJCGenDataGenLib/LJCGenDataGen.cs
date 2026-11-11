@@ -15,7 +15,7 @@ namespace LJCGenDataGenLib
 
     // Gets or sets the DocData.
     /// <include file='Doc/LJCGenDataGen.xml'
-    ///  path='members/LJCComments/*'/>
+    ///  path='members/DocDataFile/*'/>
     public LJCDocDataFile DocDataFile { get; set; }
 
     // Gets or sets the GenDoc configuration.

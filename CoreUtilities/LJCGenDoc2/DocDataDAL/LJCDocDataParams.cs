@@ -6,7 +6,8 @@ using System.Collections.Generic;
 namespace LJCDocDataDAL
 {
   // Represents a collection of LJCDocDataParam objects.
-  /// <include path="members/LJCDocDataParams/*" file="Doc/LJCDocDataParams.xml"/>
+  /// <include file='Doc/LJCDocDataParams.xml'
+  ///  path='members/LJCDocDataParams/*'/>
   public class LJCDocDataParams : List<LJCDocDataParam>
   {
   }
