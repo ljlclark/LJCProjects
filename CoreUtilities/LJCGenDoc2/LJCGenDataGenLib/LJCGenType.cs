@@ -5,7 +5,9 @@ using LJCDocDataDAL;
 using LJCGenTextLib;
 using LJCNetCommon;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace LJCGenDataGenLib
 {
@@ -83,21 +85,27 @@ namespace LJCGenDataGenLib
         replacements.Add("_RemarkText_", docDataClass.Remarks);
         replacements.Add("_HasRemarks_", "true");
       }
-      if (NetString.HasValue(docDataClass.Code))
-      {
-        replacements.Add("_Code_", docDataClass.Code);
-        replacements.Add("_HasExample_", "true");
-      }
 
-      replacements.Add("_MethodListPreface_", "");
       if (NetCommon.HasListItems(docDataClass.Methods))
       {
         RemainingMethods = docDataClass.Methods;
-        CreateGroupMethods(retSections, docDataClass);
+        // *** Begin ***
+        var groupMethods = RemainingMethods.FindAll(method
+          => NetString.HasValue(method.ParentGroup));
+        if (groupMethods.Count > 0)
+        {
+          replacements.Add("_GroupMethodCount_", groupMethods.Count.ToString());
+          // *** End ***
+          CreateGroupMethods(retSections, docDataClass);
+        }
 
-        var methodCount = docDataClass.Methods.Count.ToString();
-        replacements.Add("_OtherMethodCount_", methodCount);
-        CreateMethods(retSections, docDataClass);
+        if (NetCommon.HasListItems(RemainingMethods))
+        {
+          //var methodCount = docDataClass.Methods.Count.ToString();
+          var methodCount = RemainingMethods.Count.ToString();
+          replacements.Add("_OtherMethodCount_", methodCount);
+          CreateMethods(retSections, docDataClass);
+        }
       }
 
       if (NetCommon.HasListItems(docDataClass.Properties))
@@ -107,58 +115,66 @@ namespace LJCGenDataGenLib
         CreateProperties(retSections, docDataClass);
       }
 
+      if (NetString.HasValue(docDataClass.Code))
+      {
+        replacements.Add("_Code_", docDataClass.Code);
+        replacements.Add("_HasExample_", "true");
+      }
+
       var copyright = "Copyright (c) Lester J. Clark and Contributors.<br />";
       copyright += "Licensed under the MIT License.";
       replacements.Add("_Copyright_", copyright);
       return retSections;
     }
 
+    // Creates the group methods.
+    /// <include file='Doc/LJCGenType.xml'
+    ///  path='members/CreateGroupMethods/*'/>
     private void CreateGroupMethods(Sections sections
       , LJCDocDataClass docDataClass)
     {
       Section groupSection = null;
       RepeatItems groupItems = null;
-      var hasRemaining = false;
-      if (NetCommon.HasListItems(RemainingMethods))
+      if (NetCommon.HasListItems(docDataClass.Groups)
+        && NetCommon.HasListItems(RemainingMethods))
       {
         groupSection = sections.Add("MethodGroups");
         groupItems = groupSection.RepeatItems;
-        hasRemaining = true;
-      }
 
-      while (hasRemaining)
-      {
         foreach (var group in docDataClass.Groups)
         {
+          var methods = RemainingMethods.FindAll(method
+            => method.ParentGroup == group.Name);
+          if (!NetCommon.HasListItems(methods))
+          {
+            continue;
+          }
+
           var groupItem = groupItems.Add(group.Name);
           var replacements = groupItem.Replacements;
           replacements.Add("_Heading_", group.Name);
+
           var subsection = new Section("subsection");
-          groupItems[0].Subsection = subsection;
+          groupItem.Subsection = subsection;
           var subItems = subsection.RepeatItems;
 
-          var methods = RemainingMethods.FindAll(method
-            => method.ParentGroup == group.Name);
-          if (NetCommon.HasListItems(methods))
+          //var subItem = subItems.Add(group.Name);
+          foreach (var method in methods)
           {
-            var subItem = subItems.Add(group.Name);
-            foreach (var method in methods)
-            {
-              subItem.Replacements.Add("_Name_", method.Name);
-              subItem.Replacements.Add("_Summary_", method.Summary);
-              RemainingMethods.Remove(method);
-              hasRemaining = NetCommon.HasListItems(RemainingMethods);
-            }
+            var subItem = subItems.Add(method.Name);
+            subItem.Replacements.Add("_Name_", method.Name);
+            subItem.Replacements.Add("_Summary_", method.Summary);
+            RemainingMethods.Remove(method);
           }
         }
-        hasRemaining = false;
       }
     }
 
     // Creates the Methods GenData.
     private void CreateMethods(Sections sections, LJCDocDataClass docDataClass)
     {
-      if (NetCommon.HasListItems(docDataClass.Methods))
+      //if (NetCommon.HasListItems(docDataClass.Methods))
+      if (NetCommon.HasListItems(RemainingMethods))
       {
         var section = sections.Add("PublicMethods");
         foreach (var method in docDataClass.Methods)

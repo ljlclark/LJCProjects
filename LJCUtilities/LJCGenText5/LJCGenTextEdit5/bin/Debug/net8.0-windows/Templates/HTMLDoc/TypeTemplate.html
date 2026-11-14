@@ -10,11 +10,10 @@
 <!-- #Value _GenDate_ -->
 <!-- #Value _HasExample_ -->
 <!-- #Value _HasRemarks_ -->
-<!-- #Value _MethodListPreface_ -->
 <!-- #Value _Namespace_ -->
-<!-- #Value _PrivateMethodCount_ -->
 <!-- #Value _PropertyCount_ -->
-<!-- #Value _PublicMethodCount_ -->
+<!-- #Value _GroupMethodCount_ -->
+<!-- #Value _OtherMethodCount_ -->
 <!-- #Value _RemarkText_ -->
 <!-- #Value _Summary_ -->
 <!-- #Value _Syntax_ -->
@@ -29,8 +28,8 @@
   <meta charset='utf-8' />
   <meta name="author" content="Lester J. Clark" />
   <meta name="viewport" content="width=device-width" initial-scale=1 />
-  <link rel='stylesheet' type='text/css' href='../../CSS/CodeDoc.css' />
-  <link rel='stylesheet' type='text/css' href='../../CSS/Syntax.css' />
+  <link rel='stylesheet' type='text/css' href='../CSS/CodeDoc.css' />
+  <link rel='stylesheet' type='text/css' href='../CSS/Syntax.css' />
 </head>
 <body>
   <div class="page">
@@ -46,7 +45,9 @@
     <div id='Header'>
       <div id='Title'>Class _TypeName_</div>
     </div>
-    <!--X------------------------------------->
+    <!--X----------------------------------->
+    <!--X-- Syntax ------------------------->
+    <!--X----------------------------------->
     <!-- #IfBegin _Syntax_ HasValue -->
     <br />
     <div class='Text'>Syntax</div>
@@ -65,6 +66,8 @@
     </div>
     <!-- #IfEnd Syntax -->
     <!--X------------------------------------->
+    <!--X-- Summary -------------------------->
+    <!--X------------------------------------->
     <!-- #IfBegin _Summary_ HasValue -->
     <br />
     <div class='Text'>_Summary_</div>
@@ -72,7 +75,9 @@
     <br />
     <div class='RedText'>Missing Summary</div>
     <!-- #IfEnd Summary -->
-    <!--X------------------------------------->
+    <!--X----------------------------------->
+    <!--X-- Remarks ------------------------>
+    <!--X----------------------------------->
     <!-- #IfBegin _HasRemarks_ True -->
     <br />
     <div class='Text'>Remarks</div>
@@ -81,18 +86,22 @@
     <br />
     <div class='Text'>_RemarkText_</div>
     <!-- #IfEnd RemarkText -->
-    <!--X------------------------------------->
+    <!--X----------------------------------->
+    <!--X-- Type Remarks ------------------->
+    <!--X----------------------------------->
     <!-- #SectionBegin TypeRemarks -->
     <!-- #Value _Para_ -->
     <br />
     <div class='Text'>_Para_</div>
     <!-- #SectionEnd TypeRemarks -->
-    <!--X------------------------------------->
+    <!--X----------------------------------->
+    <!--X-- Links -------------------------->
+    <!--X----------------------------------->
     <!-- #IfBegin _HasLinks_ true -->
     <br />
     <div class='Text'>
       <!-- #IfEnd _HasLinks_ -->
-      <!--X------------------------------------->
+      <!--X--------------------------------->
       <!-- #SectionBegin Links -->
       <!-- #Value _LinkFile_ -->
       <!-- #Value _LinkText_ -->
@@ -100,17 +109,19 @@
       <a class="links" href='_LinkFile_' target='_blank'>_LinkText_</a>
       <!-- #IfEnd _HasLinks_ -->
       <!-- #SectionEnd Links -->
-      <!--X------------------------------------->
+      <!--X--------------------------------->
       <!-- #IfBegin _HasLinks_ true -->
     </div>
     <!-- #IfEnd _HasLinks_ -->
-    <!--X------------------------------------->
+    <!--X----------------------------------->
+    <!--X-- Method Groups ------------------>
+    <!--X----------------------------------->
     <!-- #SectionBegin MethodGroups -->
     <!-- #Value _Heading_ -->
     <br />
     <div class='Title1'>_Heading_<br></div>
     <table class='ListTable'>
-      <!--X------------------------------------->
+      <!--X--------------------------------->
       <!-- #SectionBegin Subsection -->
       <!-- #Value _HTMLFileName_ -->
       <!-- #Value _Name_ -->
@@ -126,16 +137,21 @@
         <!-- #IfEnd _Summary_ -->
       </tr>
       <!-- #SectionEnd Subsection -->
-      <!--X------------------------------------->
+      <!--X--------------------------------->
     </table>
     <!-- #SectionEnd MethodGroups -->
-    <!--X------------------------------------->
-    <!--X------------------------------------->
+    <!-- #IfBegin _GroupMethodCount_ HasValue -->
+    <div class='Text'>_GroupMethodCount_ Methods</div>
+    <!-- #IfEnd GroupMethodCount -->
+    <!--X----------------------------------->
+    <!--X-- Not Grouped Methods ------------>
+    <!--X----------------------------------->
     <!-- #IfBegin _OtherMethodCount_ HasValue -->
     <br />
-    <div class='Title1'>_MethodListPreface_ Methods</div>
+    <div class='Title1'>Public Methods</div>
     <table class='ListTable'>
-      <!-- #IfEnd PublicMethodCount -->
+      <!-- #IfEnd OtherMethodCount -->
+      <!--X--------------------------------->
       <!-- #SectionBegin PublicMethods -->
       <!-- #Value _FileName_ -->
       <!-- #Value _MethodName_ -->
@@ -151,41 +167,20 @@
         <!-- #IfEnd _MethodSummary_ -->
       </tr>
       <!-- #SectionEnd PublicMethods -->
-      <!-- #IfBegin _PublicMethodCount_ HasValue -->
+      <!--X--------------------------------->
+      <!-- #IfBegin _OtherMethodCount_ HasValue -->
     </table>
-    <div class='Text'>_PublicMethodCount_ Methods</div>
-    <!-- #IfEnd PublicMethodCount -->
-    <!--X------------------------------------->
-    <!-- #IfBegin _PrivateMethodCount_ HasValue -->
-    <br />
-    <div class='Title2'>_MethodListPreface_Private Methods</div>
-    <table class='ListTable'>
-      <!-- #IfEnd PrivateMethodCount -->
-      <!-- #SectionBegin PrivateMethods -->
-      <!-- #Value _FileName_ -->
-      <!-- #Value _MethodName_ -->
-      <!-- #Value _MethodSummary_ -->
-      <tr>
-        <td class='ListTable' width='25%'>
-          <a href='_FileName_'>_MethodName_</a>
-        </td>
-        <!-- #IfBegin _MethodSummary_ HasValue -->
-        <td class='ListTable'>_MethodSummary_</td>
-        <!-- #IfElse -->
-        <td class='ListTableMissing'>Missing Summary</td>
-        <!-- #IfEnd _MethodSummary_ -->
-      </tr>
-      <!-- #SectionEnd PrivateMethods -->
-      <!-- #IfBegin _PrivateMethodCount_ HasValue -->
-    </table>
-    <div class='Text'>_PrivateMethodCount_ Methods</div>
-    <!-- #IfEnd PrivateMethodCount -->
-    <!--X------------------------------------->
+    <div class='Text'>_OtherMethodCount_ Methods</div>
+    <!-- #IfEnd OtherMethodCount -->
+    <!--X----------------------------------->
+    <!--X-- Properties --------------------->
+    <!--X----------------------------------->
     <!-- #IfBegin _PropertyCount_ HasValue -->
     <br />
     <div id='Title'>Properties</div>
     <table class='ListTable'>
       <!-- #IfEnd PropertyCount -->
+      <!--X--------------------------------->
       <!-- #SectionBegin Properties -->
       <!-- #Value _FileName_ -->
       <!-- #Value _PropertyName_ -->
@@ -201,15 +196,19 @@
         <!-- #IfEnd _PropertySummary_ -->
       </tr>
       <!-- #SectionEnd Properties -->
+      <!--X--------------------------------->
       <!-- #IfBegin _PropertyCount_ HasValue -->
     </table>
     <!-- #IfEnd PropertyCount -->
-    <!--X------------------------------------->
+    <!--X----------------------------------->
+    <!--X-- Fields ------------------------->
+    <!--X----------------------------------->
     <!-- #IfBegin _FieldCount_ HasValue -->
     <br />
     <div id='Title'>Fields</div>
     <table class='ListTable'>
       <!-- #IfEnd FieldCount -->
+    <!--X----------------------------------->
       <!-- #SectionBegin Fields -->
       <!-- #Value _FieldName_ -->
       <!-- #Value _FieldSummary_ -->
@@ -225,21 +224,27 @@
         <!-- #IfEnd _FieldSummary_ -->
       </tr>
       <!-- #SectionEnd Fields -->
+      <!--X--------------------------------->
       <!-- #IfBegin _FieldCount_ HasValue -->
     </table>
     <!-- #IfEnd FieldCount -->
-    <!--X------------------------------------->
+    <!--X----------------------------------->
+    <!--X-- Example ------------------------>
+    <!--X----------------------------------->
     <!-- #IfBegin _HasExample_ HasValue -->
     <br />
     <div class='Text'>Example</div>
     <!-- #IfEnd HasExample -->
+    <!--X----------------------------------->
     <!-- #SectionBegin ExampleRemarks -->
     <!-- #Value _Para_ -->
     <!-- #Value _Code_ -->
     <br />
     <div class='Text'>_Para_</div>
     <!-- #SectionEnd ExampleRemarks -->
-    <!--X-------------------------------------->
+    <!--X----------------------------------->
+    <!--X-- Code --------------------------->
+    <!--X----------------------------------->
     <!-- #IfBegin _Code_ HasValue -->
     <br />
     <div class='SectionContainer'>
@@ -255,12 +260,12 @@
       </table>
     </div>
     <!-- #IfEnd Code -->
-    <!--X-------------------------------------->
+    <!--X----------------------------------->
     <br />
     <div class="SmallText">_Copyright_</div>
     <br />
   </div>
 </body>
 <!-- #SectionEnd Main -->
-<!--X-------------------------------------->
+<!--X--------------------------------------->
 </html>

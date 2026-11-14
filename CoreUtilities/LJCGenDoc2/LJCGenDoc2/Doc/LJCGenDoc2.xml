@@ -8,6 +8,8 @@
     <summary>
       Generates HTML Doc for sources in SourceList.txt.
     </summary>
+    <group name="Constructor">Constructor Method</group>
+    <group name="Methods">Methods</group>
   </LJCGenDoc2>
   
   <!-- Constructor Methods -->
@@ -15,6 +17,7 @@
     <summary>
       Initializes an object instance.
     </summary>
+    <parentGroup>Constructor</parentGroup>
   </Constructor>
   
   <!-- Methods -->
@@ -23,6 +26,7 @@
       Creates CodeDoc pages from source list.
     </summary>
     <param name="sourceListSpec">The source list filespec.</param>
+    <parentGroup>Methods</parentGroup>
     <example>
       <code xml:space="preserve">
         include LJCNetCommon;
@@ -43,11 +47,13 @@
     </summary>
     <param name="sourcePath">The source folder or file path.</param>
     <param name="pattern">The source folder file pattern.</param>
+    <parentGroup>Methods</parentGroup>
   </CreateFilePages>
   <SetConfig>
     <summary>
       Sets the GenCodeDoc config.
     </summary>
     <param name="config">The GenCodeDocConfig object.</param>
+    <parentGroup>Methods</parentGroup>
   </SetConfig>
 </members>

@@ -13,6 +13,10 @@ namespace LJCGenDataGenLib
   {
     #region Properties
 
+    /// <include file='Doc/LJCGenDataGen.xml'
+    ///  path='members/CodeFileSpec/*'/>
+    public string CodeFileSpec { get; set; }
+
     // Gets or sets the DocData.
     /// <include file='Doc/LJCGenDataGen.xml'
     ///  path='members/DocDataFile/*'/>
@@ -62,6 +66,7 @@ namespace LJCGenDataGenLib
     {
       string retGenDataXML = null;
 
+      CodeFileSpec = codeFileSpec;
       DocDataFile = NetCommon.XmlDeserializeMessage(typeof(LJCDocDataFile)
         , docDataXML) as LJCDocDataFile;
 
@@ -79,7 +84,44 @@ namespace LJCGenDataGenLib
         var genType = new LJCGenType(GenDocConfig, docDataClass);
         var sections = genType.GenDataClass(docDataClass);
         var sectionsXML = sections.LJCSerializeToString();
+        WriteClassGenXML(sectionsXML, CodeFileSpec);
       }
+    }
+    #endregion
+
+    #region Other Methods
+
+    // Creates a Lib DocData XML output file spec.
+    private string ClassGenXMLSpec(string codeFileSpec
+      , string outputPath = null)
+    {
+      string retFilespec;
+
+      if (null == outputPath)
+      {
+        outputPath = @"../XMLGenData/";
+      }
+      NetFile.CreateFolder(outputPath);
+      var fileName = Path.GetFileNameWithoutExtension(codeFileSpec) + ".xml";
+      retFilespec = $"{outputPath}/{fileName}";
+      return retFilespec;
+    }
+
+    // Writes the ClassGenXML file.
+    private bool WriteClassGenXML(string classGenXML, string codeFileSpec)
+    {
+      var retValue = false;
+
+      var writeGenDataXML = GenDocConfig.WriteGenDataXML;
+      if (writeGenDataXML
+        && classGenXML != null)
+      {
+        retValue = true;
+        var genDataXMLPath = GenDocConfig.GenDataXMLPath;
+        var fileSpec = ClassGenXMLSpec(codeFileSpec, genDataXMLPath);
+        File.WriteAllText(fileSpec, classGenXML);
+      }
+      return retValue;
     }
     #endregion
   }

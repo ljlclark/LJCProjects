@@ -19,13 +19,15 @@ namespace LJCNetCommon
     ///  path='items/CreateFolder/*'/>
     public static void CreateFolder(string path)
     {
-      if (path.Contains("\\"))
+      if (path.Contains(@"\")
+        || path.Contains("/"))
       {
         path = Path.GetDirectoryName(path);
       }
       // Next Statement - Change - 1/22
-      if (-1 == path.IndexOf(".")
-        && !Directory.Exists(path))
+      //if (-1 == path.IndexOf(".")
+      //  && !Directory.Exists(path))
+      if (!Directory.Exists(path))
       {
         Directory.CreateDirectory(path);
       }

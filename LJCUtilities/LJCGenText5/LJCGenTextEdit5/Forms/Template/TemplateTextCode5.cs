@@ -97,7 +97,7 @@ namespace LJCGenTextEdit5
       }
 
       string filter = "C#(*.cs)|*.cs|All Files(*.*)|*.*";
-      targetFileSpec = FormCommon.SelectFile(filter, sourceFolder, "*.cs");
+      targetFileSpec = FormCommon.SelectFile(filter, sourceFolder, "*.*");
       if (targetFileSpec != null)
       {
         EditList.TemplateTextbox.Text = Path.GetFileName(targetFileSpec);
