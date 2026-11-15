@@ -23,7 +23,7 @@ namespace LJCDBMessage
     {
       DbResult retValue = null;
 
-      if (LJCNetString.HasValue(result))
+      if (LJC.HasText(result))
       {
         retValue = LJC.XmlDeserializeMessage(typeof(DbResult), result)
           as DbResult;
@@ -199,7 +199,7 @@ namespace LJCDBMessage
     ///  path='items/Serialize2/*'/>
     public void Serialize(string fileSpec = null)
     {
-      if (!LJCNetString.HasValue(fileSpec))
+      if (!LJC.HasText(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }

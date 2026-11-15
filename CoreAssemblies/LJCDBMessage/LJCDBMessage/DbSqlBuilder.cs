@@ -143,7 +143,7 @@ namespace LJCDBMessage
       builder.AppendLine("select ");
       builder.Append(ColumnList());
       builder.Append("from ");
-      if (LJCNetString.HasValue(dbRequest.SchemaName))
+      if (LJC.HasText(dbRequest.SchemaName))
       {
         builder.Append($"{dbRequest.SchemaName}.");
       }
@@ -172,7 +172,7 @@ namespace LJCDBMessage
       builder.AppendLine("select");
       builder.Append(ColumnList(dbRequest));
       builder.Append("from ");
-      if (LJCNetString.HasValue(dbRequest.SchemaName))
+      if (LJC.HasText(dbRequest.SchemaName))
       {
         builder.Append($"{dbRequest.SchemaName}.");
       }
@@ -355,7 +355,7 @@ namespace LJCDBMessage
 
       StringBuilder builder = new StringBuilder(64);
       builder.Append(" ");
-      if (LJCNetString.HasValue(schemaName))
+      if (LJC.HasText(schemaName))
       {
         // Note: use schemaName from params?
         builder.Append($"{mDbRequest.SchemaName}.");
@@ -449,7 +449,7 @@ namespace LJCDBMessage
         {
           // Do not include null or empty values.
           if (null == dbColumn.Value
-            || !LJCNetString.HasValue(dbColumn.Value.ToString()))
+            || !LJC.HasText(dbColumn.Value.ToString()))
           {
             continue;
           }
@@ -592,7 +592,7 @@ namespace LJCDBMessage
         }
         else
         {
-          if (LJCNetString.HasValue(alias))
+          if (LJC.HasText(alias))
           {
             tableName = alias;
           }

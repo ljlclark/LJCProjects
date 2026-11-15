@@ -31,7 +31,7 @@ namespace LJCDBClientLib
 
       mDbDataAccess = new DbDataAccess(DataConfigName);
       if (mDbDataAccess != null
-        && LJCNetString.HasValue(TableName))
+        && LJC.HasText(TableName))
       {
         DataDefinition = CreateDataDefinition();
         LookupColumnNames = new List<string>();

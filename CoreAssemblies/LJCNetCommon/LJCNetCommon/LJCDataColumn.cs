@@ -207,7 +207,7 @@ namespace LJCNetCommon
 
         // Cannot change column name to null or white space.
         if (_ColumnName != newValue
-          && LJCNetString.HasValue(newValue))
+          && LJC.HasText(newValue))
         {
           _ColumnName = newValue;
 
@@ -260,12 +260,12 @@ namespace LJCNetCommon
 
         // Cannot change property name to null or white space.
         if (_PropertyName != newValue
-          && LJCNetString.HasValue(newValue))
+          && LJC.HasText(newValue))
         {
           _PropertyName = newValue;
 
           // Set empty column name the same as the property name.
-          if (!LJCNetString.HasValue(_ColumnName))
+          if (!LJC.HasText(_ColumnName))
           {
             ColumnName = PropertyName;
           }

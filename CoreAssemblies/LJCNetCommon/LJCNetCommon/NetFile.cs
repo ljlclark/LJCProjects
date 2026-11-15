@@ -62,7 +62,7 @@ namespace LJCNetCommon
       string errorText;
       string[] retValue;
 
-      if (!LJCNetString.HasValue(fileSpec))
+      if (!LJC.HasText(fileSpec))
       {
         errorText = "Missing file specification.\r\n";
         throw new ArgumentException(errorText);
@@ -99,7 +99,7 @@ namespace LJCNetCommon
       string retValue = null;
 
       bool success = true;
-      if (LJCNetString.HasValue(programFileSpec))
+      if (LJC.HasText(programFileSpec))
       {
         if (!File.Exists(programFileSpec))
         {
@@ -157,7 +157,7 @@ namespace LJCNetCommon
       string message;
 
       CreateFolder(logFileSpec);
-      if (LJCNetString.HasValue(formatText))
+      if (LJC.HasText(formatText))
       {
         string text = string.Format(formatText, parameters);
         message = $"{DateTime.Now} - {text}";
@@ -175,7 +175,7 @@ namespace LJCNetCommon
     public static void WriteLogLine(string logFileSpec, string formatText = null
       , params object[] parameters)
     {
-      if (LJCNetString.HasValue(formatText))
+      if (LJC.HasText(formatText))
       {
         formatText += "\r\n";
       }

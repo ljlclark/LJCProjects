@@ -25,7 +25,7 @@ namespace LJCDataAccessConfig
     {
       DataConfig retConfig = null;
 
-      if (LJCNetString.HasValue(configName))
+      if (LJC.HasText(configName))
       {
         var dataConfigs = new DataConfigs();
         dataConfigs.LJCLoadData();

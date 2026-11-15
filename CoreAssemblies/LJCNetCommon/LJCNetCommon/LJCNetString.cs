@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // LJCNetString.cs
 using System;
+using System.Linq;
 using System.Text;
 
 namespace LJCNetCommon
@@ -11,31 +12,30 @@ namespace LJCNetCommon
   ///  path='members/LJCNetString/*'/>
   public class LJCNetString
   {
+    #region Constants
+
+    // The "compare" object is equal to the "compareto" object.
+    /// <include file='Doc/NetString.xml'
+    ///  path='members/CompareEqual/*'/>
+    public const int CompareEqual = 0;
+
+    // The "compare" object is greater than the "compareto" object.
+    /// <include file='Doc/NetString.xml'
+    ///  path='members/CompareGreater/*'/>
+    public const int CompareGreater = 1;
+
+    // The "compare" object is less than the "compareto" object.
+    /// <include file='Doc/NetString.xml'
+    ///  path='members/CompareLess/*'/>
+    public const int CompareLess = -1;
+
+    // The "compare" object and "compareto" object are not both null.
+    /// <include file='Doc/NetString.xml'
+    ///  path='members/CompareNotNullOrEqual/*'/>
+    public const int CompareNotNullOrEqual = -2;
+    #endregion
+
     #region Checking String Values
-
-    // Checks if a text value exists.
-    /// <include file='Doc/NetString.xml'
-    ///  path='members/HasValue/*'/>
-    public static bool HasValue(string text)
-    {
-      return !string.IsNullOrWhiteSpace(text);
-    }
-
-    // Gets the case insensitive index of the findText.
-    /// <include file='Doc/NetString.xml'
-    ///  path='members/IndexOf/*'/>
-    public static int IndexOf(string text, string findText)
-    {
-      var retIndex = -1;
-
-      if (HasValue(text)
-        && HasValue(findText))
-      {
-        StringComparison comparison = StringComparison.InvariantCultureIgnoreCase;
-        retIndex = text.IndexOf(findText, comparison);
-      }
-      return retIndex;
-    }
 
     // Checks a string value for digits.
     /// <include file='Doc/NetString.xml'
@@ -45,7 +45,7 @@ namespace LJCNetCommon
       string textTrim;
       bool retValue = true;
 
-      if (!HasValue(text))
+      if (!LJC.HasText(text))
       {
         retValue = false;
       }
@@ -76,7 +76,29 @@ namespace LJCNetCommon
         retValue = stringA.Equals(stringB
           , System.StringComparison.InvariantCultureIgnoreCase);
       }
+
+      if (null == stringA
+        && null == stringB)
+      {
+        retValue = true;
+      }
       return retValue;
+    }
+
+    // Gets the case insensitive index of the findText.
+    /// <include file='Doc/NetString.xml'
+    ///  path='members/IndexOf/*'/>
+    public static int IndexOf(string text, string findText)
+    {
+      var retIndex = -1;
+
+      if (LJC.HasText(text)
+        && LJC.HasText(findText))
+      {
+        StringComparison comparison = StringComparison.InvariantCultureIgnoreCase;
+        retIndex = text.IndexOf(findText, comparison);
+      }
+      return retIndex;
     }
     #endregion
 
@@ -87,7 +109,7 @@ namespace LJCNetCommon
     ///  path='members/AddDelimitedValue/*'/>
     public static void AddDelimitedValue(ref string target, string value)
     {
-      if (HasValue(target))
+      if (LJC.HasText(target))
       {
         target += ", ";
       }
@@ -106,24 +128,27 @@ namespace LJCNetCommon
     {
       string retName = "";
 
-      var names = Split(values, ",");
-      if (LJC.HasListItems(names))
+      if (LJC.HasText(values))
       {
-        foreach (var name in names)
+        var names = Split(values, ",");
+        if (LJC.HasListItems(names))
         {
-          if (HasValue(retName))
+          foreach (var name in names)
           {
-            retName += ", ";
-          }
-          var tempName = name.Trim();
-          if (!tempName.StartsWith(beginDelimiter))
-          {
-            retName += beginDelimiter;
-          }
-          retName += tempName;
-          if (!tempName.EndsWith(endDelimiter))
-          {
-            retName += endDelimiter;
+            if (LJC.HasText(retName))
+            {
+              retName += ", ";
+            }
+            var tempName = name.Trim();
+            if (!tempName.StartsWith(beginDelimiter))
+            {
+              retName += beginDelimiter;
+            }
+            retName += tempName;
+            if (!tempName.EndsWith(endDelimiter))
+            {
+              retName += endDelimiter;
+            }
           }
         }
       }
@@ -159,6 +184,7 @@ namespace LJCNetCommon
         switch (dataTypeName)
         {
           case LJC.TypeBoolean:
+          case "bool":
             if (IsEqual(retValue.ToLower(), "true"))
             {
               retValue = "1";
@@ -170,7 +196,7 @@ namespace LJCNetCommon
             break;
 
           case LJC.TypeDateTime:
-            DateTime dateTime = Convert.ToDateTime(retValue);
+            DateTime dateTime = Convert.ToDateTime(value);
             if (LJC.IsDbMinDate(dateTime))
             {
               retValue = "null";
@@ -182,6 +208,7 @@ namespace LJCNetCommon
             break;
 
           case LJC.TypeString:
+          case "string":
             if (retValue != null
               && retValue != "null")
             {
@@ -203,7 +230,7 @@ namespace LJCNetCommon
       bool makeUpper = false;
       string retVal = null;
 
-      if (HasValue(name))
+      if (LJC.HasText(name))
       {
         builder = new StringBuilder(64);
         foreach (char ch in name)
@@ -239,7 +266,7 @@ namespace LJCNetCommon
     {
       var retValue = columnName;
 
-      var index = columnName.IndexOf(".");
+      var index = columnName.IndexOf('.');
       if (index > -1)
       {
         // Get property name from qualified name.
@@ -255,7 +282,7 @@ namespace LJCNetCommon
     {
       string retVal = null;
 
-      if (HasValue(value))
+      if (LJC.HasText(value))
       {
         retVal = value.Trim();
       }
@@ -269,9 +296,9 @@ namespace LJCNetCommon
     {
       string retValues = "";
 
-      if (HasValue(values))
+      if (LJC.HasText(values))
       {
-        if (!values.Contains(","))
+        if (!values.Contains(','))
         {
           retValues = values.Trim();
         }
@@ -282,7 +309,7 @@ namespace LJCNetCommon
           {
             foreach (string item in items)
             {
-              if (LJCNetString.HasValue(retValues))
+              if (LJC.HasText(retValues))
               {
                 retValues += ", ";
               }
@@ -294,14 +321,14 @@ namespace LJCNetCommon
       return retValues;
     }
 
-    // Split a string without empty entries.
+    // Split a string on a single separator without empty entries.
     /// <include file='Doc/NetString.xml'
     ///  path='members/Split/*'/>
     public static string[] Split(string text, string separator = ",")
     {
       string[] retValues = null;
 
-      if (HasValue(text))
+      if (LJC.HasText(text))
       {
         var separators = new string[] { separator };
         retValues = text.Split(separators
@@ -317,7 +344,7 @@ namespace LJCNetCommon
     {
       string[] retValues = null;
 
-      if (HasValue(text))
+      if (LJC.HasText(text))
       {
         retValues = text.Split(separators
           , StringSplitOptions.RemoveEmptyEntries);
@@ -332,7 +359,7 @@ namespace LJCNetCommon
     {
       var retValue = text;
 
-      if (HasValue(text)
+      if (LJC.HasText(text)
         && text.Length > length)
       {
         retValue = text.Substring(0, length);
@@ -350,7 +377,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (HasValue(text))
+      if (LJC.HasText(text))
       {
         var builder = new StringBuilder(64);
 
@@ -383,7 +410,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (HasValue(text))
+      if (LJC.HasText(text))
       {
         var builder = new StringBuilder(64);
 
@@ -422,22 +449,22 @@ namespace LJCNetCommon
     {
       bool retValue = false;
 
-      if (HasValue(text)
+      if (LJC.HasText(text)
         && index < text.Length)
       {
         text = text.ToUpper();
-        string currentChar = text[index].ToString();
-        string prevChar = null;
+        char currentChar = text[index];
+        char prevChar = ' ';
         if (index > 0)
         {
-          prevChar = text[index - 1].ToString();
+          prevChar = text[index - 1];
         }
 
         // Do not include blank or vowels.
         if (!" AEIOU".Contains(currentChar))
         {
           // Do not include double consonants.
-          if (prevChar != null
+          if (prevChar != ' '
             && prevChar != currentChar)
           {
             retValue = true;
@@ -458,7 +485,7 @@ namespace LJCNetCommon
       letter = null;
 
       // Index is in text and a next char is available.
-      if (HasValue(text)
+      if (LJC.HasText(text)
         && index < text.Length - 1)
       {
         text = text.ToUpper();
@@ -476,9 +503,10 @@ namespace LJCNetCommon
                 break;
 
               case 'S':
+                // Second char is available.
                 if (text.Length > index + 2)
                 {
-                  var secondChar = text[index + 2].ToString();
+                  var secondChar = text[index + 2];
                   if ("AEIOUY".Contains(secondChar))
                   {
                     retValue = true;
@@ -514,12 +542,75 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+
+    // Creates a US Census soundex value.
+    /// <include file='Doc/NetString.xml'
+    ///  path='members/Soundex/*'/>
+    public static string Soundex(string text)
+    {
+      string retValue = null;
+
+      if (LJC.HasText(text))
+      {
+        var tb = new TextBuilder();
+        var upperText = text.ToUpper().Trim();
+        foreach (char letter in upperText)
+        {
+          // Keep the first letter.
+          if (0 == tb.ToString().Length)
+          {
+            tb.AddText(letter.ToString());
+          }
+          else
+          {
+            if (!"AEIOUHWY".Contains(letter))
+            {
+              if ("BFPV".Contains(letter))
+              {
+                tb.AddText("1");
+              }
+              if ("CGJKQSXZ".Contains(letter))
+              {
+                tb.AddText("2");
+              }
+              if ("DT".Contains(letter))
+              {
+                tb.AddText("3");
+              }
+              if ("L".Contains(letter))
+              {
+                tb.AddText("4");
+              }
+              if ("MN".Contains(letter))
+              {
+                tb.AddText("5");
+              }
+              if ("R".Contains(letter))
+              {
+                tb.AddText("6");
+              }
+            }
+          }
+        }
+        retValue = Truncate(tb.ToString(), 4);
+        if (LJC.HasText(retValue)
+          && retValue.Length < 4)
+        {
+          var addLength = 4 - retValue.Length;
+          var addList = Enumerable.Repeat("0", addLength);
+          var addValue = string.Concat(addList);
+          retValue = $"{retValue}{addValue}";
+        }
+      }
+      return retValue;
+    }
     #endregion
 
-    #region Other Functions
+    #region Other Methods
 
-    /// <summary>Adds the missing argument name to the message.</summary>
-    /// <include path='members/AddObjectArgError/*' file='Doc/NetString.xml'/>
+    // Adds the missing argument name to the message.
+    /// <include file='Doc/NetString.xml'
+    ///  path='members/AddObjectArgError/*'/>
     public static void AddObjectArgError(ref string message, object argument
       , string name = null, string errorContext = null)
     {
@@ -532,7 +623,7 @@ namespace LJCNetCommon
       {
         if (typeof(string) == argument.GetType())
         {
-          if (!LJCNetString.HasValue(argument.ToString()))
+          if (!LJC.HasText(argument.ToString()))
           {
             missing = true;
           }
@@ -541,11 +632,11 @@ namespace LJCNetCommon
 
       if (missing)
       {
-        if (LJCNetString.HasValue(errorContext))
+        if (LJC.HasText(errorContext))
         {
           message += $"{errorContext}\r\n";
         }
-        if (!LJCNetString.HasValue(name))
+        if (!LJC.HasText(name))
         {
           name = "argument";
         }
@@ -554,37 +645,17 @@ namespace LJCNetCommon
     }
 
     // Throws an ArgumentException if the provided message has a value.
-    /// <include path='members/ThrowArgError/*' file='Doc/NetString.xml'/>
+    /// <include file='Doc/NetString.xml'
+    ///  path='members/ThrowArgError/*'/>
     public static void ThrowArgError(string message)
     {
-      if (HasValue(message))
+      if (LJC.HasText(message))
       {
         message = message.Trim();
         var argMessage = $"Missing or invalid arguments:\r\n{message}";
-        throw new ArgumentException(argMessage.ToString());
+        throw new ArgumentException(argMessage);
       }
     }
-    #endregion
-
-    #region Constants
-
-    /// <summary>The compare object is equal to the compareto ojbect..</summary>
-    public const int CompareEqual = 0;
-
-    /// <summary>
-    /// The compare object is greater than the compareto object.
-    /// </summary>
-    public const int CompareGreater = 1;
-
-    /// <summary>
-    /// The compare object  is less than the compareto object.
-    /// </summary>
-    public const int CompareLess = -1;
-
-    /// <summary>
-    /// The compare object is notnull or equal is equal to the compareto object.
-    /// </summary>
-    public const int CompareNotNullOrEqual = -2;
     #endregion
   }
 }

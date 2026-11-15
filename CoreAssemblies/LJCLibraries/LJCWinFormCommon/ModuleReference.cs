@@ -182,7 +182,7 @@ namespace LJCWinFormCommon
 
       if (null == Assembly)
       {
-        if (!LJCNetString.HasValue(FileName))
+        if (!LJC.HasText(FileName))
         {
           //retValue = false;
           errorText = "The ModuleReference.FileName value is not set.";
@@ -221,7 +221,7 @@ namespace LJCWinFormCommon
 
       if (null == ControlType)
       {
-        if (!LJCNetString.HasValue(ModuleName))
+        if (!LJC.HasText(ModuleName))
         {
           //retValue = false;
           errorText = "The ModuleReference.ModuleName value is not set.";

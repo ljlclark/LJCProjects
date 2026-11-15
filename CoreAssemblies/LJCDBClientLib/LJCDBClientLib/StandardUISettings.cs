@@ -43,7 +43,7 @@ namespace LJCDBClientLib
       BeginColor = AppSettings.GetColor("BeginColor", Color.AliceBlue);
       EndColor = AppSettings.GetColor("EndColor", Color.LightSkyBlue);
       ExportTextExtension = AppSettings.GetString("ExportTextExtension");
-      if (!LJCNetString.HasValue(ExportTextExtension))
+      if (!LJC.HasText(ExportTextExtension))
       {
         ExportTextExtension = "txt";
       }

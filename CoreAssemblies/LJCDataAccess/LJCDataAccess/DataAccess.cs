@@ -454,7 +454,7 @@ namespace LJCDataAccess
       {
         if (IsUseCommand(sql))
         {
-          if (LJCNetString.HasValue(TableName))
+          if (LJC.HasText(TableName))
           {
             sql = $"use {TableName}";
           }
@@ -491,15 +491,15 @@ namespace LJCDataAccess
         retValue = false;
         errorText += "The LJCDataAccess.ProviderFactory value is not set.\r\n";
       }
-      if (!LJCNetString.HasValue(ConnectionString))
+      if (!LJC.HasText(ConnectionString))
       {
         errorText += "The LJCDataAccess.ConnectionString value is not set.\r\n";
       }
-      if (!LJCNetString.HasValue(ProviderName))
+      if (!LJC.HasText(ProviderName))
       {
         errorText += "The LJCDataAccess.ProviderName value is not set.\r\n";
       }
-      if (LJCNetString.HasValue(errorText))
+      if (LJC.HasText(errorText))
       {
         throw new MissingMemberException(errorText);
       }
@@ -537,7 +537,7 @@ namespace LJCDataAccess
       set
       {
         mConnectionString = value;
-        if (!LJCNetString.HasValue(mProviderName))
+        if (!LJC.HasText(mProviderName))
         {
           mProviderName = GetSQLServerProviderName();
         }
@@ -565,11 +565,11 @@ namespace LJCDataAccess
       set
       {
         mProviderName = value;
-        if (!LJCNetString.HasValue(mProviderName))
+        if (!LJC.HasText(mProviderName))
         {
           mProviderName = GetSQLServerProviderName();
         }
-        if (LJCNetString.HasValue(mConnectionString))
+        if (LJC.HasText(mConnectionString))
         {
           if ("MySql.Data.MySqlClient" == mProviderName)
           {

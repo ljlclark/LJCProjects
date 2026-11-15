@@ -37,7 +37,7 @@ namespace LJCNetCommon
       , string compare, bool bracket = false)
     {
       var message = CompareMessage(methodName, result, compare, bracket);
-      if (LJCNetString.HasValue(message))
+      if (LJC.HasText(message))
       {
         Console.WriteLine(message);
       }
@@ -58,11 +58,11 @@ namespace LJCNetCommon
     {
       var retMessage = "";
 
-      if (!LJCNetString.HasValue(result))
+      if (!LJC.HasText(result))
       {
         result = "No Result";
       }
-      if (!LJCNetString.HasValue(compare))
+      if (!LJC.HasText(compare))
       {
         compare = "No Compare";
       }

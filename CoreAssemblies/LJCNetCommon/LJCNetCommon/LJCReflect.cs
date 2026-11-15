@@ -179,7 +179,7 @@ namespace LJCNetCommon
     {
       string retVal = default;
 
-      if (LJCNetString.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var type = GetPropertyType(propertyName);
         if (type == typeof(DateTime))
@@ -337,7 +337,7 @@ namespace LJCNetCommon
     {
       object retVal = null;
 
-      if (LJCNetString.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         var propertyInfo = GetPropertyInfo(propertyName);
         if (propertyInfo != null)
@@ -359,7 +359,7 @@ namespace LJCNetCommon
       Type type;
 
       if (value != null
-        && LJCNetString.HasValue(value.ToString()))
+        && LJC.HasText(value.ToString()))
       {
         PropertyInfo propertyInfo = GetPropertyInfo(propertyName);
         if (propertyInfo != null)

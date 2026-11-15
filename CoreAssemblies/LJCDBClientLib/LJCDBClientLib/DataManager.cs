@@ -46,7 +46,7 @@ namespace LJCDBClientLib
     {
       DataConfigName = dataConfigName;
       TableName = tableName;
-      if (LJCNetString.HasValue(schemaName))
+      if (LJC.HasText(schemaName))
       {
         SchemaName = schemaName;
       }
@@ -75,7 +75,7 @@ namespace LJCDBClientLib
         };
       }
       if (DbServiceRef != null
-        && LJCNetString.HasValue(TableName))
+        && LJC.HasText(TableName))
       {
         DataDefinition = CreateBaseDefinition();
         LookupColumnNames = new List<string>();
@@ -344,7 +344,7 @@ namespace LJCDBClientLib
             result = DbServiceRef.DbServiceClient.Execute(request);
           }
 
-          if (LJCNetString.HasValue(result))
+          if (LJC.HasText(result))
           {
             string resultText;
             if (UseEncryption)

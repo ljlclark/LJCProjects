@@ -314,7 +314,7 @@ namespace LJCWinFormControls
         string text = textParser.DelimitedString("_", "_");
         var beginIndex = textParser.BeginIndex;
 
-        while (LJCNetString.HasValue(text))
+        while (LJC.HasText(text))
         {
           // Use if there are no embeded spaces.
           string[] tokens = text.Split(' ');
@@ -355,7 +355,7 @@ namespace LJCWinFormControls
         , endDelimiter);
       var beginIndex = textParser.BeginIndex;
 
-      if (LJCNetString.HasValue(text))
+      if (LJC.HasText(text))
       {
         int beginLength = beginDelimiter.Length;
         int startPosition = beginIndex + beginLength;

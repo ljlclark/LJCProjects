@@ -22,7 +22,7 @@ namespace LJCDBMessage
     {
       DbRequest retValue = null;
 
-      if (LJCNetString.HasValue(request))
+      if (LJC.HasText(request))
       {
         retValue = LJC.XmlDeserializeMessage(typeof(DbRequest)
           , request) as DbRequest;

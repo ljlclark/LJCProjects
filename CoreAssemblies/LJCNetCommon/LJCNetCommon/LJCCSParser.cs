@@ -85,7 +85,7 @@ namespace LJCNetCommon
       // var name = method();
 
       // void Method()
-      if (!LJCNetString.HasValue(retName)
+      if (!LJC.HasText(retName)
         && tokens.Length > 1)
       {
         if (IsType(tokens[0]))
@@ -98,7 +98,7 @@ namespace LJCNetCommon
       }
 
       // static void Method()
-      if (!LJCNetString.HasValue(retName)
+      if (!LJC.HasText(retName)
         && tokens.Length > 2)
       {
         if ((IsModifier(tokens[0])
@@ -113,7 +113,7 @@ namespace LJCNetCommon
       }
 
       // public static void Method()
-      if (!LJCNetString.HasValue(retName)
+      if (!LJC.HasText(retName)
         && tokens.Length > 3)
       {
         if (IsModifier(tokens[0])
@@ -138,7 +138,7 @@ namespace LJCNetCommon
 
       string[] tokens = LJCNetString.Split(line, " ");
 
-      if (!LJCNetString.HasValue(retName))
+      if (!LJC.HasText(retName))
       {
         // type Property
         if (2 == tokens.Length
@@ -170,7 +170,7 @@ namespace LJCNetCommon
         }
       }
 
-      if (!LJCNetString.HasValue(retName))
+      if (!LJC.HasText(retName))
       {
         // modifier type Property {
         if (tokens.Length > 3

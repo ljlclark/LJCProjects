@@ -62,7 +62,7 @@ namespace LJCNetCommon
       bool retValue = false;
 
       string keyValue = GetKeyValue(keyName);
-      if (LJCNetString.HasValue(keyValue))
+      if (LJC.HasText(keyValue))
       {
         //retValue = true;
         bool.TryParse(keyValue, out retValue);
@@ -77,10 +77,10 @@ namespace LJCNetCommon
     {
       Color retValue = defaultColor;
 
-      if (LJCNetString.HasValue(keyName))
+      if (LJC.HasText(keyName))
       {
         string keyValue = GetKeyValue(keyName);
-        if (LJCNetString.HasValue(keyValue))
+        if (LJC.HasText(keyValue))
         {
           if (keyValue.Contains(","))
           {
@@ -199,7 +199,7 @@ namespace LJCNetCommon
     private string GetKeyValue(string keyName)
     {
       string retValue = GetString(keyName);
-      if (!LJCNetString.HasValue(retValue))
+      if (!LJC.HasText(retValue))
       {
         string errorText = $"AppSetting 'key={keyName}' not found.";
         throw new MissingMemberException(errorText);

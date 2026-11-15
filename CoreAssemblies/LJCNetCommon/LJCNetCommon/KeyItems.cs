@@ -77,7 +77,7 @@ namespace LJCNetCommon
     {
       KeyItem retValue = null;
 
-      if (LJCNetString.HasValue(propertyName))
+      if (LJC.HasText(propertyName))
       {
         retValue = new KeyItem()
         {
@@ -224,7 +224,7 @@ namespace LJCNetCommon
     {
       KeyItems retValue = null;
 
-      if (dataColumn != null && LJCNetString.HasValue(dataColumn.PropertyName))
+      if (dataColumn != null && LJC.HasText(dataColumn.PropertyName))
       {
         retValue = SearchPropertyName(dataColumn.PropertyName);
       }

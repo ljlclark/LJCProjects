@@ -113,7 +113,7 @@ namespace LJCTextDataReaderLib
       string[] retValue = null;
 
       int beginIndex = -1;
-      if (LJCNetString.HasValue(line))
+      if (LJC.HasText(line))
       {
         beginIndex = 0;
       }

@@ -32,7 +32,7 @@ namespace LJCDBClientLib
       DataConfigName = dataConfigName;
       TableName = tableName;
 
-      if (LJCNetString.HasValue(connectionString))
+      if (LJC.HasText(connectionString))
       {
         LJC.CheckArgument<string>(providerName, "providerName");
       }
@@ -51,7 +51,7 @@ namespace LJCDBClientLib
 
       mDataAccess = new DataAccess(connectionString, providerName);
       if (mDataAccess != null
-        && LJCNetString.HasValue(TableName))
+        && LJC.HasText(TableName))
       {
         DataDefinition = CreateDataDefinition();
         LookupColumnNames = new List<string>();
@@ -88,7 +88,7 @@ namespace LJCDBClientLib
     public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       SQLStatement = CreateDeleteSQL(keyColumns, filters);
-      if (LJCNetString.HasValue(SQLStatement))
+      if (LJC.HasText(SQLStatement))
       {
         AffectedCount = mDataAccess.ExecuteNonQuery(SQLStatement);
       }
@@ -144,7 +144,7 @@ namespace LJCDBClientLib
 
       SQLStatement = CreateUpdateSQL(dataObject, keyColumns, propertyNames
         , filters);
-      if (LJCNetString.HasValue(SQLStatement))
+      if (LJC.HasText(SQLStatement))
       {
         AffectedCount = mDataAccess.ExecuteNonQuery(SQLStatement);
       }

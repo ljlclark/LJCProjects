@@ -487,7 +487,7 @@ namespace LJCDBDataAccess
       StringBuilder builder = new StringBuilder(64);
       builder.Append("select * \r\n");
       builder.Append("from ");
-      if (LJCNetString.HasValue(dbRequest.SchemaName))
+      if (LJC.HasText(dbRequest.SchemaName))
       {
         builder.Append($"{dbRequest.SchemaName}.");
       }
@@ -587,7 +587,7 @@ namespace LJCDBDataAccess
       get { return mDatabaseName; }
       set
       {
-        if (LJCNetString.HasValue(value))
+        if (LJC.HasText(value))
         {
           mDatabaseName = LJCNetString.InitString(value);
         }
@@ -622,7 +622,7 @@ namespace LJCDBDataAccess
       get { return mConnectionString; }
       set
       {
-        if (LJCNetString.HasValue(value))
+        if (LJC.HasText(value))
         {
           mConnectionString = LJCNetString.InitString(value);
           mDataAccess.ConnectionString = mConnectionString;
@@ -637,7 +637,7 @@ namespace LJCDBDataAccess
       get { return mProviderName; }
       set
       {
-        if (LJCNetString.HasValue(value))
+        if (LJC.HasText(value))
         {
           mProviderName = LJCNetString.InitString(value);
           mDataAccess.ProviderName = mProviderName;

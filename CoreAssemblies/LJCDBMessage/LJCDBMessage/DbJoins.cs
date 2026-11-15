@@ -48,8 +48,8 @@ namespace LJCDBMessage
         TableName = tableName,
         TableAlias = tableAlias
       };
-      if (LJCNetString.HasValue(fromJoinOnColumn)
-        && LJCNetString.HasValue(toJoinOnColumn))
+      if (LJC.HasText(fromJoinOnColumn)
+        && LJC.HasText(toJoinOnColumn))
       {
         retValue.JoinOns.Add(fromJoinOnColumn, toJoinOnColumn);
       }

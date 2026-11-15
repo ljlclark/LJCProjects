@@ -172,28 +172,28 @@ namespace LJCDataAccessConfig
       switch (marker.ToLower())
       {
         case "dbserver":
-          if (LJCNetString.HasValue(DbServer))
+          if (LJC.HasText(DbServer))
           {
             retValue = DbServer;
           }
           break;
 
         case "database":
-          if (LJCNetString.HasValue(Database))
+          if (LJC.HasText(Database))
           {
             retValue = Database;
           }
           break;
 
         case "uid":
-          if (LJCNetString.HasValue(UserID))
+          if (LJC.HasText(UserID))
           {
             retValue = UserID;
           }
           break;
 
         case "pswd":
-          if (LJCNetString.HasValue(Pswd))
+          if (LJC.HasText(Pswd))
           {
             retValue = Pswd;
           }
