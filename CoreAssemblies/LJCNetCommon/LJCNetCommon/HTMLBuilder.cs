@@ -187,7 +187,7 @@ namespace LJCNetCommon
     {
       string retText = "";
 
-      if (NetCommon.HasListItems(attribs))
+      if (LJC.HasListItems(attribs))
       {
         var hb = new HTMLBuilder(textState);
         var isFirst = true;
@@ -701,7 +701,7 @@ namespace LJCNetCommon
       var hb = new HTMLBuilder(textState);
 
       hb.Text("<!DOCTYPE html>");
-      if (NetCommon.HasElements(copyright))
+      if (LJC.HasArrayElements(copyright))
       {
         foreach (string line in copyright)
         {

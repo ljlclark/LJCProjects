@@ -68,7 +68,7 @@
     <Compile Include="LJCCryptography.cs" />
     <Compile Include="LJCCSParser.cs" />
     <Compile Include="LJCParser.cs" />
-    <Compile Include="NetCommon.cs" />
+    <Compile Include="LJC.cs" />
     <Compile Include="NetFile.cs" />
     <Compile Include="NetString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,7 +118,7 @@
     <Content Include="Doc\LJCCryptography.xml" />
     <Content Include="Doc\LJCCSParser.xml" />
     <Content Include="Doc\LJCParser.xml" />
-    <Content Include="Doc\NetCommon.xml">
+    <Content Include="Doc\LJC.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Doc\LJCReflect.xml">

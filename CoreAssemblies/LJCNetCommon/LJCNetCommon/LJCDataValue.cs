@@ -3,7 +3,7 @@
 // LJCDataValue.cs
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using LJC = LJCNetCommon.NetCommon;
+using LJC = LJCNetCommon.LJC;
 
 namespace LJCNetCommon
 {

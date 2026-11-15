@@ -3,7 +3,6 @@
 // DbSqlBuilder.cs
 using System.Text;
 using LJCNetCommon;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {

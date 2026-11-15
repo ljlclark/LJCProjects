@@ -8,7 +8,6 @@ using LJCDBMessage;
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBClientLib
 {
@@ -333,7 +332,7 @@ namespace LJCDBClientLib
           }
           else
           {
-            request = NetCommon.TextToBase64(request);
+            request = LJC.TextToBase64(request);
           }
 
           if (DbServiceRef.DbService != null)
@@ -355,7 +354,7 @@ namespace LJCDBClientLib
             }
             else
             {
-              resultText = NetCommon.Base64ToText(result);
+              resultText = LJC.Base64ToText(result);
             }
             retValue = DbResult.DeserializeMessage(resultText);
             Result = retValue.Clone();

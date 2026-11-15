@@ -238,7 +238,7 @@ namespace LJCDataAccess
     {
       string retValue = null;
 
-      if (dateTime != null && !NetCommon.IsDbMinDate(dateTime))
+      if (dateTime != null && !LJC.IsDbMinDate(dateTime))
       {
         DateTime tempDateTime = (DateTime)dateTime;
         retValue = tempDateTime.ToString("MM/dd/yyyy");
@@ -253,7 +253,7 @@ namespace LJCDataAccess
     {
       string retValue = null;
 
-      if (!NetCommon.IsDbMinDate(dateTime))
+      if (!LJC.IsDbMinDate(dateTime))
       {
         retValue = dateTime.ToString("MM/dd/yyyy HH:mm:ss");
       }
@@ -267,7 +267,7 @@ namespace LJCDataAccess
     {
       string retValue = null;
 
-      if (!NetCommon.IsDbMinDate(dateTime))
+      if (!LJC.IsDbMinDate(dateTime))
       {
         retValue = dateTime.ToShortTimeString();
         if (7 == retValue.Length)

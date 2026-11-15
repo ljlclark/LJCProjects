@@ -43,7 +43,7 @@ namespace LJCDataAccessConfig
 
       ljcCryptography = new LJCCryptography();
       cipher = ljcCryptography.Encrypt(data, mKey, mIv);
-      retValue = NetCommon.TextBytesToBase64(cipher);
+      retValue = LJC.TextBytesToBase64(cipher);
       return retValue;
     }
 

@@ -3,7 +3,6 @@
 // SendCipher.cs
 using LJCNetCommon;
 using System;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace CipherLib
 {

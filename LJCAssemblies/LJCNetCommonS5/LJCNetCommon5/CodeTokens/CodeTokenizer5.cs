@@ -1,8 +1,7 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CodeTokenizer.cs
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace LJCNetCommon5
@@ -139,7 +138,6 @@ namespace LJCNetCommon5
     ///  path='members/CombineXmlCommentTokens/*'/>
     public void CombineXmlCommentTokens(short tokenIndex)
     {
-      //string comment = CombineTokens(Tokens, tokenIndex);
       string comment = CombineTokens(Tokens);
       Tokens[tokenIndex] = comment;
       ClearRemainingTokens(tokenIndex + 1);
@@ -523,7 +521,6 @@ namespace LJCNetCommon5
     #region Private Methods
 
     // Returns all the combined tokens as a single string.
-    //private string CombineTokens(string[] tokens, short startTokenIndex)
     private static string CombineTokens(string[] tokens)
     {
       string retValue;

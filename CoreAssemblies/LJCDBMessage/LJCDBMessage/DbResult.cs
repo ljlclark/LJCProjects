@@ -5,10 +5,7 @@ using System;
 using System.Data;
 using System.Xml.Serialization;
 using LJCDataAccess;
-
-//using LJCGridDataLib;
 using LJCNetCommon;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {
@@ -329,7 +326,7 @@ namespace LJCDBMessage
     ///  path='items/SetRows/*'/>
     public void SetRows(DataTable dataTable, DbJoins dbJoins = null)
     {
-      if (LJC.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         var dataColumns = LJCTableColumns.ToDataColumns(dataTable.Columns);
         foreach (DataRow dataRow in dataTable.Rows)

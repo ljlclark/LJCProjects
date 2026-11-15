@@ -24,6 +24,7 @@
     </summary>
     <typeparam name="T">The argument type.</typeparam>
     <param name="argument">The argument value.</param>
+    <param name="argName"></param>
     <exception cref="ArgumentNullException">Argument Null Exception</exception>
     <exception cref="ArgumentException">Argument Exception</exception>
   </CheckArgument>
@@ -138,8 +139,10 @@
     <summary>
       Checks if two values are equal.
     </summary>
-    <param name="oldValue"> The previous value.</param>
-    <param name="newValue"> The new value.</param>
+    <typeparam name="T"></typeparam>
+    <param name="compareValue">The previous value.</param>
+    <param name="compareToValue">The new value.</param>
+    <param name="caseSensitive"></param>
     <returns>true if equal; otherwise, false.</returns>
     <remarks>
       Performs a strongly-typed value check of two objects where those

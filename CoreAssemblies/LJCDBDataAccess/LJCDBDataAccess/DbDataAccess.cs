@@ -8,7 +8,6 @@ using LJCNetCommon;
 using System;
 using System.Data;
 using System.Text;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBDataAccess
 {
@@ -180,7 +179,7 @@ namespace LJCDBDataAccess
       DataTable dataTable = mDataAccess.GetDataTable(SqlStatement);
       retValue.ExecutedSql = SqlStatement;
 
-      if (NetCommon.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         retValue.SetData(dataTable, DbRequest);
       }
@@ -198,7 +197,7 @@ namespace LJCDBDataAccess
       DataTable dataTable = mDataAccess.GetDataTable(SqlStatement);
       retValue.ExecutedSql = SqlStatement;
 
-      if (NetCommon.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         if (null == DbRequest.Columns || 0 == DbRequest.Columns.Count)
         {
@@ -228,7 +227,7 @@ namespace LJCDBDataAccess
       DataTable dataTable = mDataAccess.GetDataTable(SqlStatement);
       retValue.ExecutedSql = SqlStatement;
 
-      if (NetCommon.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         retValue.SetData(dataTable, dbRequest);
       }
@@ -246,7 +245,7 @@ namespace LJCDBDataAccess
       DataTable dataTable = mDataAccess.GetDataTable(SqlStatement);
       retValue.ExecutedSql = SqlStatement;
 
-      if (NetCommon.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         if (null == DbRequest.Columns || 0 == DbRequest.Columns.Count)
         {
@@ -314,7 +313,7 @@ namespace LJCDBDataAccess
       DbResult retValue = CreateResult(dbRequest);
 
       DataTable dataTable = GetTableNames(databaseName);
-      if (NetCommon.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         // Add TABLE_NAME if it is not already defined.
         //var dbColumn = dbRequest.Columns.LJCSearchPropertyName("TABLE_NAME");
@@ -550,7 +549,7 @@ namespace LJCDBDataAccess
     // Get the SQL Type name.
     private void SetSQLTypeName(DataTable sqlTypesTable, LJCDataColumn dataColumn)
     {
-      if (NetCommon.HasData(sqlTypesTable))
+      if (LJC.HasTableData(sqlTypesTable))
       {
         foreach (DataRow dataRow in sqlTypesTable.Rows)
         {

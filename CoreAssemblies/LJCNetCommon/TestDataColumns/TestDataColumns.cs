@@ -4,7 +4,7 @@
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
-using LJC = LJCNetCommon.NetCommon;
+using LJC = LJCNetCommon.LJC;
 
 namespace TestData
 {

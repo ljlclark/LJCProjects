@@ -112,7 +112,7 @@ namespace LJCWinFormCommon
     {
       int retValue;
 
-      retValue = NetCommon.CompareNull(x, y);
+      retValue = LJC.CompareNull(x, y);
       if (-2 == retValue)
       {
         retValue = x.FileName.CompareTo(y.FileName);

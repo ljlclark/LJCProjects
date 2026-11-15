@@ -343,7 +343,7 @@ namespace LJCDataAccess
           dbDataAdapter.SelectCommand = dbCommand;
           DataSet dataSet = new DataSet();
           dbDataAdapter.Fill(dataSet);
-          if (NetCommon.HasTables(dataSet))
+          if (LJC.HasTables(dataSet))
           {
             retValue = dataSet.Tables[0];
           }

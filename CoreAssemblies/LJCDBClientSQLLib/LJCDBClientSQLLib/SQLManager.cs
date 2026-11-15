@@ -8,7 +8,6 @@ using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBClientSQLLib
 {

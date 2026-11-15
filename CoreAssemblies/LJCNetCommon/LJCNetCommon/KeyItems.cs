@@ -125,7 +125,7 @@ namespace LJCNetCommon
     {
       KeyItems retValue = null;
 
-      if (NetCommon.HasListItems(items))
+      if (LJC.HasListItems(items))
       {
         retValue = new KeyItems();
         foreach (KeyItem item in items)

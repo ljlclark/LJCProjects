@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Data;
 using LJCNetCommon;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {
@@ -48,8 +47,8 @@ namespace LJCDBMessage
       // Testing in LJCDBServiceLib.TestDbDataAccess.
       TList retValue = null;
 
-      if (NetCommon.HasColumns(dataTable)
-        && NetCommon.HasData(dataTable))
+      if (LJC.HasTableColumns(dataTable)
+        && LJC.HasTableData(dataTable))
       {
         retValue = new TList();
         foreach (DataRow dataRow in dataTable.Rows)
@@ -125,8 +124,8 @@ namespace LJCDBMessage
       string propertyName;
       TData retValue = null;
 
-      if (NetCommon.HasColumns(dataTable)
-        && NetCommon.HasData(dataTable))
+      if (LJC.HasTableColumns(dataTable)
+        && LJC.HasTableData(dataTable))
       {
         retValue = new TData();
 

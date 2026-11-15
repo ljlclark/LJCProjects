@@ -9,7 +9,6 @@ namespace LJCTextDataReaderLib
   /// <include path='items/LineOffset/*' file='Doc/ProjectTextDataReaderLib.xml'/>
   public class LineOffset : IComparable<LineOffset>
   {
-
     #region Data Methods
 
     // Provides the default Sort functionality.

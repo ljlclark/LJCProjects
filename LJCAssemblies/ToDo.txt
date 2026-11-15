@@ -1,0 +1,7 @@
+Modify LJCNetCommon code to match LJCNetCommon5.
+Modify LJCTextDataReader code to match LJCTextDataReader5.
+Modify LJCDBConfig code to match LJCDBConfig5.
+Modify LJCDataAccess code to match LJCDataAccess5.
+Modify LJCDBMessage code to match LJCDBMessage5.
+Modify LJCDBDataAccess code to match LJCDBDataAccess5.
+Modify LJCDBClient code to match LJCDBClient5.

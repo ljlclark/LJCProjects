@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using LJCNetCommon;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {

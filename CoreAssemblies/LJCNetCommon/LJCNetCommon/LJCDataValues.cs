@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using LJC = LJCNetCommon.NetCommon;
+using LJC = LJCNetCommon.LJC;
 
 namespace LJCNetCommon
 {
@@ -541,7 +541,7 @@ namespace LJCNetCommon
       var value = LJCGetValue(propertyName);
       if (value != null)
       {
-        retValue = LJC.GetSingle(value);
+        retValue = LJC.GetFloat(value);
       }
       return retValue;
     }

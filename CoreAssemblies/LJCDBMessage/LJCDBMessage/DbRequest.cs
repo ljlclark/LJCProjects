@@ -24,7 +24,7 @@ namespace LJCDBMessage
 
       if (NetString.HasValue(request))
       {
-        retValue = NetCommon.XmlDeserializeMessage(typeof(DbRequest)
+        retValue = LJC.XmlDeserializeMessage(typeof(DbRequest)
           , request) as DbRequest;
         if (null == retValue)
         {
@@ -115,7 +115,7 @@ namespace LJCDBMessage
     {
       string retValue;
 
-      retValue = NetCommon.XmlSerializeToString(GetType(), this, null);
+      retValue = LJC.XmlSerializeToString(GetType(), this, null);
       return retValue;
     }
 
@@ -124,7 +124,7 @@ namespace LJCDBMessage
     ///  path='items/Serialize2/*'/>
     public void Serialize(string fileSpec)
     {
-      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
+      LJC.XmlSerialize(GetType(), this, null, fileSpec);
     }
     #endregion
 

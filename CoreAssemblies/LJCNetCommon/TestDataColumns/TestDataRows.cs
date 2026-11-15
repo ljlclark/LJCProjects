@@ -3,7 +3,7 @@
 // TestDataRows.cs
 using LJCNetCommon;
 using System;
-using LJC = LJCNetCommon.NetCommon;
+using LJC = LJCNetCommon.LJC;
 
 namespace TestData
 {

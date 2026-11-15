@@ -817,7 +817,7 @@ namespace LJCTextDataReaderLib
     public void LJCSetFields(string layoutFileName)
     {
       LJCLayoutFileName = layoutFileName;
-      LJCDataFields = NetCommon.XmlDeserialize(typeof(LJCDataColumns)
+      LJCDataFields = LJC.XmlDeserialize(typeof(LJCDataColumns)
         , LJCLayoutFileName) as LJCDataColumns;
     }
 

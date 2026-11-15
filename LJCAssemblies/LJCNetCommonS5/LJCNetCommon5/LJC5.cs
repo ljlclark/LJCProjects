@@ -1182,6 +1182,7 @@ namespace LJCNetCommon5
     public static string? BytesToText(byte[]? bytes)
     {
       string retValue = null;
+
       if (bytes != null)
       {
         retValue = Encoding.UTF8.GetString(bytes);

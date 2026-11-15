@@ -3,7 +3,6 @@
 // DbFilters.cs
 using System.Collections.Generic;
 using LJCNetCommon;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {

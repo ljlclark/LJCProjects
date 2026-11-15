@@ -52,7 +52,7 @@ namespace LJCDBServiceLib
       }
       else
       {
-        requestText = NetCommon.Base64ToText(request);
+        requestText = LJC.Base64ToText(request);
       }
       DbRequest dbRequest = DbRequest.Deserialize(requestText);
 
@@ -73,7 +73,7 @@ namespace LJCDBServiceLib
       }
       else
       {
-        retValue = NetCommon.TextToBase64(retValue);
+        retValue = LJC.TextToBase64(retValue);
       }
 
       return retValue;

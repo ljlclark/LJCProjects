@@ -26,7 +26,7 @@ namespace LJCNetCommon
       }
       if (File.Exists(fileSpec))
       {
-        retValue = NetCommon.XmlDeserialize(typeof(List<string>), fileSpec
+        retValue = LJC.XmlDeserialize(typeof(List<string>), fileSpec
           , RootName) as List<string>;
       }
       else
@@ -53,7 +53,7 @@ namespace LJCNetCommon
           "using",
           "while"
         };
-        NetCommon.XmlSerialize(typeof(List<string>), retValue, null, fileSpec
+        LJC.XmlSerialize(typeof(List<string>), retValue, null, fileSpec
           , RootName);
       }
       return retValue;
@@ -143,7 +143,7 @@ namespace LJCNetCommon
       {
         fileSpec = DefaultFileName;
       }
-      NetCommon.XmlSerialize(typeof(List<string>), this, null, fileSpec
+      LJC.XmlSerialize(typeof(List<string>), this, null, fileSpec
         , RootName);
     }
     #endregion

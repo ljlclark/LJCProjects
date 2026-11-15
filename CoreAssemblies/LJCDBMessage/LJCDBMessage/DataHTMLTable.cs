@@ -4,7 +4,6 @@
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {
@@ -20,7 +19,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (NetCommon.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();
@@ -43,7 +42,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (NetCommon.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();
@@ -67,7 +66,7 @@ namespace LJCDBMessage
     {
       string retValue = null;
 
-      if (NetCommon.HasData(dataTable))
+      if (LJC.HasTableData(dataTable))
       {
         var hb = new HTMLBuilder();
         var textState = new TextState();

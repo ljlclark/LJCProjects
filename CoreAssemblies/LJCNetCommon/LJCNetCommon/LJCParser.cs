@@ -29,7 +29,7 @@ namespace LJCNetCommon
       get { return _ValidTagNames; }
       set
       {
-        if (NetCommon.HasListItems(value))
+        if (LJC.HasListItems(value))
         {
           _ValidTagNames = value;
           Array.Sort(ValidTagNames);
@@ -673,7 +673,7 @@ namespace LJCNetCommon
       var retValue = false;
 
       if (tagName != null
-        && NetCommon.HasListItems(ValidTagNames))
+        && LJC.HasListItems(ValidTagNames))
       {
         int index = Array.BinarySearch(ValidTagNames, tagName);
         if (index >= 0

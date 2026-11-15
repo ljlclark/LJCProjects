@@ -61,7 +61,7 @@ namespace LJCDataAccessConfig
         WriteDefaultData();
       }
 
-      if (NetCommon.XmlDeserialize(typeof(DataConfigs)
+      if (LJC.XmlDeserialize(typeof(DataConfigs)
         , ConfigFileSpec) is DataConfigs dataConfigs)
       {
         Clear();
@@ -124,7 +124,7 @@ namespace LJCDataAccessConfig
     ///  path='items/LJCSave/*'/>
     public void LJCSave()
     {
-      NetCommon.XmlSerialize(this.GetType(), this, null, ConfigFileSpec);
+      LJC.XmlSerialize(this.GetType(), this, null, ConfigFileSpec);
     }
     #endregion
 

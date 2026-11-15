@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using LJCNetCommon;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBMessage
 {
@@ -27,7 +26,7 @@ namespace LJCDBMessage
       {
         fileSpec = LJCDefaultFileName;
       }
-      retValue = NetCommon.XmlDeserialize(typeof(DbRows), fileSpec)
+      retValue = LJC.XmlDeserialize(typeof(DbRows), fileSpec)
         as DbRows;
       return retValue;
     }
@@ -113,7 +112,7 @@ namespace LJCDBMessage
       {
         fileSpec = LJCDefaultFileName;
       }
-      NetCommon.XmlSerialize(GetType(), this, null, fileSpec);
+      LJC.XmlSerialize(GetType(), this, null, fileSpec);
     }
     #endregion
 

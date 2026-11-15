@@ -8,7 +8,8 @@ using System.Linq;
 namespace LJCDBMessage
 {
   // Contains the list of changed property names.
-  /// <include path='items/ChangedNames/*' file='Doc/ProjectDBClientLib.xml'/>
+  /// <include file='Doc/ProjectDBMessage.xml'
+  ///  path='items/ChangedNames/*'/>
   public class ChangedNames
   {
     /// <summary>Initializes an object instance.</summary>

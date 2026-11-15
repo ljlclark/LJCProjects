@@ -74,10 +74,10 @@ namespace CipherLib
     {
       int retValue;
 
-      retValue = NetCommon.CompareNull(x, y);
+      retValue = LJC.CompareNull(x, y);
       if (-2 == retValue)
       {
-        retValue = NetCommon.CompareNull(x.Name, y.Name);
+        retValue = LJC.CompareNull(x.Name, y.Name);
         if (-2 == retValue)
         {
           // Case sensitive.

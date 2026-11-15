@@ -7,7 +7,6 @@ using LJCDBMessage;
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDBClientLib
 {
@@ -35,12 +34,12 @@ namespace LJCDBClientLib
 
       if (NetString.HasValue(connectionString))
       {
-        NetCommon.CheckArgument<string>(providerName);
+        LJC.CheckArgument<string>(providerName, "providerName");
       }
       else
       {
-        NetCommon.CheckArgument<string>(dataConfigName);
-        NetCommon.CheckArgument<string>(tableName);
+        LJC.CheckArgument<string>(dataConfigName, "dataConfigName");
+        LJC.CheckArgument<string>(tableName, "tableName");
 
         DataConfigs dataConfigs = new DataConfigs();
         dataConfigs.LJCLoadData();
@@ -67,7 +66,7 @@ namespace LJCDBClientLib
     ///  path='items/Add/*'/>
     public DataTable Add(object dataObject, List<string> propertyNames = null)
     {
-      NetCommon.CheckArgument<object>(dataObject);
+      LJC.CheckArgument<object>(dataObject, "dataObject");
 
       // The record must not contain a value for DB Assigned columns.
       var addSQLStatement = CreateAddSQL(dataObject, propertyNames);
@@ -141,7 +140,7 @@ namespace LJCDBClientLib
     public void Update(object dataObject, LJCDataColumns keyColumns
       , List<string> propertyNames = null, DbFilters filters = null)
     {
-      NetCommon.CheckArgument<object>(dataObject);
+      LJC.CheckArgument<object>(dataObject, "dataObject");
 
       SQLStatement = CreateUpdateSQL(dataObject, keyColumns, propertyNames
         , filters);

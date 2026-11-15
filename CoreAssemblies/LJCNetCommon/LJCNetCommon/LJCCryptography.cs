@@ -60,7 +60,7 @@ namespace LJCNetCommon
         , CryptoStreamMode.Write);
 
       // Create source stream.
-      srcStream = NetCommon.BytesToMemStream(cipher);
+      srcStream = LJC.BytesToMemStream(cipher);
 
       // Read from source stream and write to crypto stream.
       buffer = new byte[1024];
@@ -72,7 +72,7 @@ namespace LJCNetCommon
 
       // Get text from destination stream.
       cryptoStream.FlushFinalBlock();
-      retVal = NetCommon.MemStreamToBytes(destStream);
+      retVal = LJC.MemStreamToBytes(destStream);
 
       // Clean-up.
       destStream.Close();
@@ -100,7 +100,7 @@ namespace LJCNetCommon
       mSal.IV = initializationVector;
 
       // Stack source stream and crypto stream.
-      srcStream = NetCommon.BytesToMemStream(bytes);
+      srcStream = LJC.BytesToMemStream(bytes);
       cryptoStream = new CryptoStream(srcStream, mSal.CreateEncryptor()
         , CryptoStreamMode.Read);
 
@@ -118,7 +118,7 @@ namespace LJCNetCommon
 
       // Get cipher from destination stream.
       destWriter.Flush();
-      retVal = NetCommon.MemStreamToBytes(destStream);
+      retVal = LJC.MemStreamToBytes(destStream);
 
       // Clean-up.
       destWriter.Close();

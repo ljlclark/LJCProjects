@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Data;
 using LJCNetCommon;
 using MySql.Data.MySqlClient;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataAccess
 {

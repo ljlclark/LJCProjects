@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // InsertItems.cs
+using LJCNetCommon;
 using System.Collections.Generic;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace CipherLib
 {

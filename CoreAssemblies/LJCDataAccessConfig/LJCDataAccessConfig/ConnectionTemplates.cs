@@ -42,7 +42,7 @@ namespace LJCDataAccessConfig
         WriteDefaultData();
       }
 
-      if (NetCommon.XmlDeserialize(typeof(ConnectionTemplates)
+      if (LJC.XmlDeserialize(typeof(ConnectionTemplates)
         , LJCTemplateFileSpec) is ConnectionTemplates connectionTemplates)
       {
         Clear();
@@ -102,7 +102,7 @@ namespace LJCDataAccessConfig
     ///  path='items/LJCSave/*'/>
     public void LJCSave()
     {
-      NetCommon.XmlSerialize(GetType(), this, null, LJCTemplateFileSpec);
+      LJC.XmlSerialize(GetType(), this, null, LJCTemplateFileSpec);
     }
     #endregion
 

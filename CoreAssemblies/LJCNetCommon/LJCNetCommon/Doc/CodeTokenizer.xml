@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- CodeTokenizer.xml -->
-<items>
+<members>
   <CodeTokenizer>
     <summary>
       A C# Code Tokenizer class. (RE)
@@ -422,4 +422,4 @@
         // stripToken = "List".</code>
     </example>
   </StripQualifier>
-</items>
+</members>

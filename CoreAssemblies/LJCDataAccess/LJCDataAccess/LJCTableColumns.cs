@@ -4,7 +4,6 @@
 using LJCNetCommon;
 using System.Collections.Generic;
 using System.Data;
-using LJC = LJCNetCommon.NetCommon;
 
 namespace LJCDataAccess
 {
@@ -110,7 +109,7 @@ namespace LJCDataAccess
     {
       bool retValue = false;
 
-      if (LJC.HasColumns(adoColumns))
+      if (LJC.HasTableColumns(adoColumns))
       {
         retValue = true;
       }

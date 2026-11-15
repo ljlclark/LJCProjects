@@ -148,7 +148,7 @@ namespace LJCDataAccess
       DataTable retValue = null;
 
       DataSet dataSet = GetDataSet(sql, tableMapping);
-      if (NetCommon.HasTables(dataSet))
+      if (LJC.HasTables(dataSet))
       {
         retValue = dataSet.Tables[0];
       }
@@ -253,7 +253,7 @@ namespace LJCDataAccess
         dataAdapter = new MySqlDataAdapter(command);
         DataSet dataSet = new DataSet();
         dataAdapter.Fill(dataSet);
-        if (NetCommon.HasTables(dataSet))
+        if (LJC.HasTables(dataSet))
         {
           retValue = dataSet.Tables[0];
         }
@@ -296,7 +296,7 @@ namespace LJCDataAccess
         DataCommon.SetTableMappingMySql(dataAdapter, tableMapping);
         dataSet = new DataSet();
         dataAdapter.FillSchema(dataSet, SchemaType.Source);
-        if (NetCommon.HasTables(dataSet))
+        if (LJC.HasTables(dataSet))
         {
           retValue = dataSet.Tables[0];
         }

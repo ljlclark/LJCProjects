@@ -100,6 +100,7 @@
     </Content>
     <Content Include="Doc\DbConditionSet.xml" />
     <Content Include="Doc\DbFilters.xml" />
+    <Content Include="Doc\ChangedNames.xml" />
     <Content Include="Doc\DbJoin.xml" />
     <Content Include="Doc\DbJoinOns.xml" />
     <Content Include="Doc\DbJoins.xml" />

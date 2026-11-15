@@ -107,7 +107,7 @@ namespace LJCNetCommon
       string retName = "";
 
       var names = Split(values, ",");
-      if (NetCommon.HasListItems(names))
+      if (LJC.HasListItems(names))
       {
         foreach (var name in names)
         {
@@ -158,7 +158,7 @@ namespace LJCNetCommon
 
         switch (dataTypeName)
         {
-          case NetCommon.TypeBoolean:
+          case LJC.TypeBoolean:
             if (IsEqual(retValue.ToLower(), "true"))
             {
               retValue = "1";
@@ -169,9 +169,9 @@ namespace LJCNetCommon
             }
             break;
 
-          case NetCommon.TypeDateTime:
+          case LJC.TypeDateTime:
             DateTime dateTime = Convert.ToDateTime(retValue);
-            if (NetCommon.IsDbMinDate(dateTime))
+            if (LJC.IsDbMinDate(dateTime))
             {
               retValue = "null";
             }
@@ -181,7 +181,7 @@ namespace LJCNetCommon
             }
             break;
 
-          case NetCommon.TypeString:
+          case LJC.TypeString:
             if (retValue != null
               && retValue != "null")
             {
@@ -278,7 +278,7 @@ namespace LJCNetCommon
         else
         {
           string[] items = Split(values, ",");
-          if (NetCommon.HasElements(items))
+          if (LJC.HasArrayElements(items))
           {
             foreach (string item in items)
             {
