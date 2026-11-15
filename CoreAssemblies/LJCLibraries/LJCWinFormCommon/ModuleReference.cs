@@ -182,7 +182,7 @@ namespace LJCWinFormCommon
 
       if (null == Assembly)
       {
-        if (!NetString.HasValue(FileName))
+        if (!LJCNetString.HasValue(FileName))
         {
           //retValue = false;
           errorText = "The ModuleReference.FileName value is not set.";
@@ -190,7 +190,7 @@ namespace LJCWinFormCommon
         }
         else
         {
-          if (NetString.IsEqual(FileName, "LJC.AppManager.exe"))
+          if (LJCNetString.IsEqual(FileName, "LJC.AppManager.exe"))
           {
             //Assembly = Assembly.GetExecutingAssembly();
             Assembly = Assembly.GetEntryAssembly();
@@ -221,7 +221,7 @@ namespace LJCWinFormCommon
 
       if (null == ControlType)
       {
-        if (!NetString.HasValue(ModuleName))
+        if (!LJCNetString.HasValue(ModuleName))
         {
           //retValue = false;
           errorText = "The ModuleReference.ModuleName value is not set.";

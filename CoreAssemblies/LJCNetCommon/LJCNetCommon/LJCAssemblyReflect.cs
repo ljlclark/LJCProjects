@@ -39,7 +39,7 @@ namespace LJCNetCommon
       TypeReference = null;
       MethodName = null;
       MethodInfo = null;
-      if (NetString.HasValue(FileSpec)
+      if (LJCNetString.HasValue(FileSpec)
         && File.Exists(FileSpec))
       {
         Assembly = Assembly.LoadFrom(FileSpec);
@@ -151,7 +151,7 @@ namespace LJCNetCommon
 
       FieldInfo = null;
       if (TypeReference != null
-        && NetString.HasValue(FieldName))
+        && LJCNetString.HasValue(FieldName))
       {
         FieldInfo = TypeReference.GetField(FieldName);
       }
@@ -219,7 +219,7 @@ namespace LJCNetCommon
 
       MethodInfo = null;
       if (TypeReference != null
-        && NetString.HasValue(MethodName))
+        && LJCNetString.HasValue(MethodName))
       {
         BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public
           | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly;
@@ -318,7 +318,7 @@ namespace LJCNetCommon
 
       PropertyInfo = null;
       if (TypeReference != null
-        && NetString.HasValue(PropertyName))
+        && LJCNetString.HasValue(PropertyName))
       {
         if ("Item" == PropertyName)
         {
@@ -343,7 +343,7 @@ namespace LJCNetCommon
       MethodName = null;
       MethodInfo = null;
       if (Assembly != null
-        && NetString.HasValue(TypeName))
+        && LJCNetString.HasValue(TypeName))
       {
         TypeReference = Assembly.GetType(TypeName);
       }

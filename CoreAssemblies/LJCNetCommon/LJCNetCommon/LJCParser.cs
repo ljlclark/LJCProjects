@@ -103,7 +103,7 @@ namespace LJCNetCommon
       while (true)
       {
         // No text to parse.
-        if (!NetString.HasValue(text))
+        if (!LJCNetString.HasValue(text))
         {
           break;
         }
@@ -177,7 +177,7 @@ namespace LJCNetCommon
       string retValue;
 
       var findValue = "<";
-      if (!NetString.HasValue(tagName))
+      if (!LJCNetString.HasValue(tagName))
       {
         findValue += tagName;
       }
@@ -189,7 +189,7 @@ namespace LJCNetCommon
         && !findValue.Contains("/"))
       {
         name = StringWithDelimiters(retValue, retValue[0].ToString(), " ");
-        if (NetString.HasValue(name))
+        if (LJCNetString.HasValue(name))
         {
           name = name.Substring(0, name.Length - 1);
         }
@@ -283,7 +283,7 @@ namespace LJCNetCommon
       {
         // Include Delimiters
         int endLength = endDelimiter.Length;
-        if (!NetString.HasValue(endDelimiter))
+        if (!LJCNetString.HasValue(endDelimiter))
         {
           endLength = 0;
         }
@@ -307,7 +307,7 @@ namespace LJCNetCommon
         // If the end delimiter is supplied it must exist in the text.
         retValue = DelimitedString(text, beginDelimiter, endDelimiter
           , required);
-        if (NetString.HasValue(retValue))
+        if (LJCNetString.HasValue(retValue))
         {
           break;
         }
@@ -333,7 +333,7 @@ namespace LJCNetCommon
       string retTag = null;
 
       var tagContents = BeginTagContents(line);
-      if (NetString.HasValue(tagContents))
+      if (LJCNetString.HasValue(tagContents))
       {
         retTag = $"<{tagContents}";
       }
@@ -348,7 +348,7 @@ namespace LJCNetCommon
       string retContents = null;
 
       var tagContents = DelimitedString(line, "<", ">");
-      if (NetString.HasValue(tagContents)
+      if (LJCNetString.HasValue(tagContents)
         && !tagContents.StartsWith("/"))
       {
         retContents = tagContents;
@@ -365,7 +365,7 @@ namespace LJCNetCommon
 
       string beginName = null;
       var beginContents = BeginTagContents(line);
-      if (NetString.HasValue(beginContents))
+      if (LJCNetString.HasValue(beginContents))
       {
         beginName = beginContents;
         if (beginContents.Contains(" "))
@@ -374,7 +374,7 @@ namespace LJCNetCommon
         }
       }
 
-      if (NetString.HasValue(beginName))
+      if (LJCNetString.HasValue(beginName))
       {
         retName = beginName;
       }
@@ -389,7 +389,7 @@ namespace LJCNetCommon
       var retValue = false;
 
       var tagName = BeginTagName(line);
-      if (NetString.HasValue(tagName)
+      if (LJCNetString.HasValue(tagName)
         && tagName == beginTagName)
       {
         retValue = true;
@@ -408,7 +408,7 @@ namespace LJCNetCommon
       string retTag = null;
 
       var tagName = EndTagName(line);
-      if (NetString.HasValue(tagName))
+      if (LJCNetString.HasValue(tagName))
       {
         retTag = $"</{tagName}";
       }
@@ -430,7 +430,7 @@ namespace LJCNetCommon
       else
       {
         var tagName = DelimitedString(line, "</", ">");
-        if (NetString.HasValue(tagName))
+        if (LJCNetString.HasValue(tagName))
         {
           retName = tagName;
         }
@@ -446,7 +446,7 @@ namespace LJCNetCommon
       var retValue = false;
 
       var tagName = EndTagName(line);
-      if (NetString.HasValue(tagName)
+      if (LJCNetString.HasValue(tagName)
         && tagName == endTagName)
       {
         retValue = true;
@@ -465,7 +465,7 @@ namespace LJCNetCommon
       bool retValue = false;
 
       var beginTag = ValidBeginTag(line);
-      if (NetString.HasValue(beginTag))
+      if (LJCNetString.HasValue(beginTag))
       {
         retValue = true;
       }
@@ -482,7 +482,7 @@ namespace LJCNetCommon
       beginName = null;
 
       var tagName = ValidBeginTagName(line);
-      if (NetString.HasValue(tagName))
+      if (LJCNetString.HasValue(tagName))
       {
         beginName = tagName;
         retValue = true;
@@ -501,8 +501,8 @@ namespace LJCNetCommon
       var tagName = BeginTagName(line);
 
       // Has tag name.
-      if (NetString.HasValue(tagContents)
-        && NetString.HasValue(tagName)
+      if (LJCNetString.HasValue(tagContents)
+        && LJCNetString.HasValue(tagName)
         && IsValidTagName(tagName))
       {
         retTag = $"<{tagContents}>";
@@ -521,7 +521,7 @@ namespace LJCNetCommon
       var beginName = BeginTagName(line);
 
       // Has tag and is not an end tag.
-      if (NetString.HasValue(beginName)
+      if (LJCNetString.HasValue(beginName)
         && IsValidTagName(beginName))
       {
         retName = beginName;
@@ -540,7 +540,7 @@ namespace LJCNetCommon
       bool retValue = false;
 
       var endTag = ValidEndTag(line);
-      if (NetString.HasValue(endTag))
+      if (LJCNetString.HasValue(endTag))
       {
         retValue = true;
       }
@@ -557,7 +557,7 @@ namespace LJCNetCommon
       endName = null;
 
       var tagName = ValidEndTagName(line);
-      if (NetString.HasValue(tagName))
+      if (LJCNetString.HasValue(tagName))
       {
         endName = tagName;
         retValue = true;
@@ -575,7 +575,7 @@ namespace LJCNetCommon
       var endName = EndTagName(line);
 
       // Has tag name.
-      if (NetString.HasValue(endName)
+      if (LJCNetString.HasValue(endName)
         && IsValidTagName(endName))
       {
         retTag = $"</{endName}>";
@@ -592,7 +592,7 @@ namespace LJCNetCommon
 
       var endName = EndTagName(line);
 
-      if (NetString.HasValue(endName)
+      if (LJCNetString.HasValue(endName)
         && IsValidTagName(endName))
       {
         retName = endName;
@@ -610,7 +610,7 @@ namespace LJCNetCommon
     {
       string retName = null;
 
-      if (NetString.HasValue(shortBeginTag))
+      if (LJCNetString.HasValue(shortBeginTag))
       {
         retName = shortBeginTag.Trim();
         retName = retName.Substring(1, retName.Length - 1);
@@ -639,7 +639,7 @@ namespace LJCNetCommon
     {
       string retName = null;
 
-      if (NetString.HasValue(endTag))
+      if (LJCNetString.HasValue(endTag))
       {
         retName = endTag.Trim();
         if ('/' == retName[2])

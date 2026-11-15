@@ -73,7 +73,7 @@ namespace LJCDBMessage
     public string JoinType
     {
       get { return mJoinType; }
-      set { mJoinType = NetString.InitString(value); }
+      set { mJoinType = LJCNetString.InitString(value); }
     }
     private string mJoinType;
 
@@ -81,7 +81,7 @@ namespace LJCDBMessage
     public string TableAlias
     {
       get { return mTableAlias; }
-      set { mTableAlias = NetString.InitString(value); }
+      set { mTableAlias = LJCNetString.InitString(value); }
     }
     private string mTableAlias;
 
@@ -89,7 +89,7 @@ namespace LJCDBMessage
     public string TableName
     {
       get { return mTableName; }
-      set { mTableName = NetString.InitString(value); }
+      set { mTableName = LJCNetString.InitString(value); }
     }
     private string mTableName;
     #endregion

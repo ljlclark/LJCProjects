@@ -215,7 +215,7 @@ namespace LJCNetCommon
           // Get the object compare value.
           var dataColumns = this[middleIndex];
 
-          int compareValue = NetString.CompareGreater;
+          int compareValue = LJCNetString.CompareGreater;
           for (short index = 0; index < _Keys.Count; index++)
           {
             var keyValue = _Keys[index];
@@ -225,7 +225,7 @@ namespace LJCNetCommon
             if (index < _Keys.Count - 1)
             {
               // Parent key value is not equal.
-              if (compareValue != NetString.CompareEqual)
+              if (compareValue != LJCNetString.CompareEqual)
               {
                 break;
               }
@@ -233,7 +233,7 @@ namespace LJCNetCommon
             else
             {
               // Item key value is equal.
-              if (NetString.CompareEqual == compareValue)
+              if (LJCNetString.CompareEqual == compareValue)
               {
                 retIndex = middleIndex;
               }
@@ -241,12 +241,12 @@ namespace LJCNetCommon
           }
 
           // Item was found.
-          if (NetString.CompareEqual == compareValue)
+          if (LJCNetString.CompareEqual == compareValue)
           {
             break;
           }
 
-          if (NetString.CompareLess == compareValue)
+          if (LJCNetString.CompareLess == compareValue)
           {
             // Eliminate left half
             leftIndex = middleIndex + 1;
@@ -336,7 +336,7 @@ namespace LJCNetCommon
       {
         // End if one of the objects is null.
         if (null == LJCPropertyNames
-          || retValue != NetString.CompareNotNullOrEqual)
+          || retValue != LJCNetString.CompareNotNullOrEqual)
         {
           break;
         }
@@ -349,14 +349,14 @@ namespace LJCNetCommon
           retValue = LJC.CompareNull(xValue, yValue);
 
           // Break if one of the values is null.
-          if (retValue != NetString.CompareNotNullOrEqual)
+          if (retValue != LJCNetString.CompareNotNullOrEqual)
           {
             break;
           }
         }
 
         // End if one of the values is null.
-        if (retValue != NetString.CompareNotNullOrEqual)
+        if (retValue != LJCNetString.CompareNotNullOrEqual)
         {
           break;
         }
@@ -371,7 +371,7 @@ namespace LJCNetCommon
           {
             // Compare parent keys.
             retValue = xValue.CompareTo(yValue);
-            if (retValue != NetString.CompareEqual)
+            if (retValue != LJCNetString.CompareEqual)
             {
               break;
             }

@@ -69,7 +69,7 @@ namespace LJCNetCommon
     ///  path='members/FormatValue/*'/>
     public string FormatValue()
     {
-      string retValue = NetString.FormatValue(Value, DataTypeName);
+      string retValue = LJCNetString.FormatValue(Value, DataTypeName);
       return retValue;
     }
 

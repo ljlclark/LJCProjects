@@ -54,7 +54,7 @@ namespace LJCDBMessage
       }
       set
       {
-        mBooleanOperator = NetString.InitString(value);
+        mBooleanOperator = LJCNetString.InitString(value);
       }
     }
     private string mBooleanOperator;

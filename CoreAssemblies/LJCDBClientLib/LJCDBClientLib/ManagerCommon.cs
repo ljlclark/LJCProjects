@@ -43,7 +43,7 @@ namespace LJCDBClientLib
     {
       bool retValue;
 
-      if (!NetString.HasValue(dataConfigName))
+      if (!LJCNetString.HasValue(dataConfigName))
       {
         throw new ArgumentException("message", nameof(dataConfigName));
       }

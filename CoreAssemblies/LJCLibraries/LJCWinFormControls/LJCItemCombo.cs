@@ -48,7 +48,7 @@ namespace LJCWinFormControls
       }
       mArgError.Add(message);
       mArgError.Add(text, "text");
-      NetString.ThrowArgError(mArgError.ToString());
+      LJCNetString.ThrowArgError(mArgError.ToString());
 
       var retItem = new LJCItem()
       {

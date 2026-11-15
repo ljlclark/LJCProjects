@@ -24,7 +24,7 @@ namespace LJCWinFormCommon
     {
       bool retValue = false;
 
-      if (!NetString.HasValue(exceptionMessage))
+      if (!LJCNetString.HasValue(exceptionMessage))
       {
         throw new ArgumentException("message", nameof(exceptionMessage));
       }
@@ -247,7 +247,7 @@ namespace LJCWinFormCommon
     {
       bool retValue = false;
 
-      if (NetString.HasValue(errorText))
+      if (LJCNetString.HasValue(errorText))
       {
         retValue = true;
         MessageBox.Show(errorText, caption, MessageBoxButtons.OK
@@ -267,7 +267,7 @@ namespace LJCWinFormCommon
       if (affectedCount < 1)
       {
         retValue = true;
-        if (!NetString.HasValue(errorText))
+        if (!LJCNetString.HasValue(errorText))
         {
           errorText = "No records affected.";
           FormCommon.ShowError(errorText, caption);
@@ -733,7 +733,7 @@ namespace LJCWinFormCommon
     {
       string retValue = text;
 
-      if (!NetString.HasValue(retValue))
+      if (!LJCNetString.HasValue(retValue))
       {
         retValue = "-null";
       }

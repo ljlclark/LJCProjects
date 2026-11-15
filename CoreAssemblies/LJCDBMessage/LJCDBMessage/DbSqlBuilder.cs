@@ -143,7 +143,7 @@ namespace LJCDBMessage
       builder.AppendLine("select ");
       builder.Append(ColumnList());
       builder.Append("from ");
-      if (NetString.HasValue(dbRequest.SchemaName))
+      if (LJCNetString.HasValue(dbRequest.SchemaName))
       {
         builder.Append($"{dbRequest.SchemaName}.");
       }
@@ -172,7 +172,7 @@ namespace LJCDBMessage
       builder.AppendLine("select");
       builder.Append(ColumnList(dbRequest));
       builder.Append("from ");
-      if (NetString.HasValue(dbRequest.SchemaName))
+      if (LJCNetString.HasValue(dbRequest.SchemaName))
       {
         builder.Append($"{dbRequest.SchemaName}.");
       }
@@ -258,7 +258,7 @@ namespace LJCDBMessage
                 // Boolean Operator.
                 builder.Append($" {conditionSet.BooleanOperator} ");
               }
-              if (NetString.IsEqual("is null", condition.SecondValue))
+              if (LJCNetString.IsEqual("is null", condition.SecondValue))
               {
                 builder.Append("{condition.FirstValue} is null");
               }
@@ -355,7 +355,7 @@ namespace LJCDBMessage
 
       StringBuilder builder = new StringBuilder(64);
       builder.Append(" ");
-      if (NetString.HasValue(schemaName))
+      if (LJCNetString.HasValue(schemaName))
       {
         // Note: use schemaName from params?
         builder.Append($"{mDbRequest.SchemaName}.");
@@ -449,7 +449,7 @@ namespace LJCDBMessage
         {
           // Do not include null or empty values.
           if (null == dbColumn.Value
-            || !NetString.HasValue(dbColumn.Value.ToString()))
+            || !LJCNetString.HasValue(dbColumn.Value.ToString()))
           {
             continue;
           }
@@ -592,7 +592,7 @@ namespace LJCDBMessage
         }
         else
         {
-          if (NetString.HasValue(alias))
+          if (LJCNetString.HasValue(alias))
           {
             tableName = alias;
           }

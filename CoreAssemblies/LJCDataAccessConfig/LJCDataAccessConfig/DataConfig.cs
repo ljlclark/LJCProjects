@@ -24,23 +24,23 @@ namespace LJCDataAccessConfig
 
       if (connectionTypeName != null)
       {
-        if (NetString.IsEqual(connectionTypeName, "OleDB"))
+        if (LJCNetString.IsEqual(connectionTypeName, "OleDB"))
         {
           retVal = "SQLOLEDB";
         }
-        if (NetString.IsEqual(connectionTypeName, "ODBC"))
+        if (LJCNetString.IsEqual(connectionTypeName, "ODBC"))
         {
           retVal = "MSDASQL.1";
         }
-        if (NetString.IsEqual(connectionTypeName, "SQLServer"))
+        if (LJCNetString.IsEqual(connectionTypeName, "SQLServer"))
         {
           retVal = "System.Data.SqlClient";
         }
-        if (NetString.IsEqual(connectionTypeName, "MySQL"))
+        if (LJCNetString.IsEqual(connectionTypeName, "MySQL"))
         {
           retVal = "MySql.Data.MySqlClient";
         }
-        if (NetString.IsEqual(connectionTypeName, "Access"))
+        if (LJCNetString.IsEqual(connectionTypeName, "Access"))
         {
           retVal = "Microsoft.Jet.OLEDB.4.0";
         }
@@ -172,28 +172,28 @@ namespace LJCDataAccessConfig
       switch (marker.ToLower())
       {
         case "dbserver":
-          if (NetString.HasValue(DbServer))
+          if (LJCNetString.HasValue(DbServer))
           {
             retValue = DbServer;
           }
           break;
 
         case "database":
-          if (NetString.HasValue(Database))
+          if (LJCNetString.HasValue(Database))
           {
             retValue = Database;
           }
           break;
 
         case "uid":
-          if (NetString.HasValue(UserID))
+          if (LJCNetString.HasValue(UserID))
           {
             retValue = UserID;
           }
           break;
 
         case "pswd":
-          if (NetString.HasValue(Pswd))
+          if (LJCNetString.HasValue(Pswd))
           {
             retValue = Pswd;
           }
@@ -234,7 +234,7 @@ namespace LJCDataAccessConfig
     public string Name
     {
       get { return mName; }
-      set { mName = NetString.InitString(value); }
+      set { mName = LJCNetString.InitString(value); }
     }
     private string mName;
 
@@ -242,7 +242,7 @@ namespace LJCDataAccessConfig
     public string DbServer
     {
       get { return mDbServer; }
-      set { mDbServer = NetString.InitString(value); }
+      set { mDbServer = LJCNetString.InitString(value); }
     }
     private string mDbServer;
 
@@ -250,7 +250,7 @@ namespace LJCDataAccessConfig
     public string Database
     {
       get { return mDatabase; }
-      set { mDatabase = NetString.InitString(value); }
+      set { mDatabase = LJCNetString.InitString(value); }
     }
     private string mDatabase;
 
@@ -258,7 +258,7 @@ namespace LJCDataAccessConfig
     public string ConnectionType
     {
       get { return mConnectionType; }
-      set { mConnectionType = NetString.InitString(value); }
+      set { mConnectionType = LJCNetString.InitString(value); }
     }
     private string mConnectionType;
 
@@ -266,7 +266,7 @@ namespace LJCDataAccessConfig
     public string UserID
     {
       get { return mUserID; }
-      set { mUserID = NetString.InitString(value); }
+      set { mUserID = LJCNetString.InitString(value); }
     }
     private string mUserID;
 
@@ -274,7 +274,7 @@ namespace LJCDataAccessConfig
     public string Pswd
     {
       get { return mPswd; }
-      set { mPswd = NetString.InitString(value); }
+      set { mPswd = LJCNetString.InitString(value); }
     }
     private string mPswd;
     #endregion

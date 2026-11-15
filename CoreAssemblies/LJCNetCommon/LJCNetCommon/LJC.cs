@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -19,6 +20,17 @@ namespace LJCNetCommon
   public class LJC
   {
     #region Common Methods
+
+    // Formats the DateTime value to a date/time string in database format.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/DbDateTimeString/*'/>
+    public static string DbDateTimeString(DateTime dateTime)
+    {
+      string retValue;
+
+      retValue = dateTime.ToString("yyyy/MM/dd HH:mm:ss");
+      return retValue;
+    }
 
     // Creates the keys collection.
     /// <include file='Doc/LJC.xml'
@@ -56,6 +68,54 @@ namespace LJCNetCommon
       _ = int.TryParse(text, out int value);
       return value;
     }
+
+    // Format the date value for display.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/UIDateString/*'/>
+    public static string UIDateString(DateTime? dateTime)
+    {
+      string retValue = null;
+
+      if (dateTime != null
+        && !LJC.IsDbMinDate(dateTime))
+      {
+        DateTime tempDateTime = (DateTime)dateTime;
+        retValue = tempDateTime.ToString("MM/dd/yyyy");
+      }
+      return retValue;
+    }
+
+    // Format the date/time value for display.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/UIDateTimeString/*'/>
+    public static string UIDateTimeString(DateTime dateTime)
+    {
+      string retValue = null;
+
+      if (!IsDbMinDate(dateTime))
+      {
+        retValue = dateTime.ToString("MM/dd/yyyy HH:mm:ss");
+      }
+      return retValue;
+    }
+
+    // Format the date/time to time for display.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/UITimeString/*'/>
+    public static string UITimeString(DateTime dateTime)
+    {
+      string retValue = null;
+
+      if (!IsDbMinDate(dateTime))
+      {
+        retValue = dateTime.ToShortTimeString();
+        if (7 == retValue.Length)
+        {
+          retValue = "0" + retValue;
+        }
+      }
+      return retValue;
+    }
     #endregion
 
     #region Check Values Methods
@@ -64,7 +124,8 @@ namespace LJCNetCommon
     //   , numeric, IList, DataTable.
     /// <include file='Doc/LJC.xml'
     ///  path='members/CheckArgument/*'/>
-    public static bool CheckArgument<T>(T argument, string argName)
+    public static bool CheckArgument<T>(T argument
+      , string argName)
     {
       var retValue = true;
 
@@ -117,8 +178,8 @@ namespace LJCNetCommon
 
       if (typeof(DataTable) == argument.GetType())
       {
-        DataTable dataTable = argument as DataTable;
-        if (HasTableData(dataTable))
+        if (argument is DataTable dataTable
+          && HasTableData(dataTable))
         {
           var message = $"Missing argument {argName}.";
           throw new ArgumentNullException(message);
@@ -134,25 +195,25 @@ namespace LJCNetCommon
     {
       int retValue;
 
-      retValue = NetString.CompareNotNull;
+      retValue = LJCNetString.CompareNotNullOrEqual;
 
       if (null == x)
       {
         // Null is less than not null.
-        retValue = NetString.CompareLess;
+        retValue = LJCNetString.CompareLess;
       }
 
       if (null == y)
       {
         // Not null is greater than null.
-        retValue = NetString.CompareGreater;
+        retValue = LJCNetString.CompareGreater;
       }
 
       if (null == x
         && null == y)
       {
         // Null is equal to null.
-        retValue = NetString.CompareEqual;
+        retValue = LJCNetString.CompareEqual;
       }
       return retValue;
     }
@@ -162,7 +223,7 @@ namespace LJCNetCommon
     ///  path='members/HasTableColumns1/*'/>
     public static bool HasTableColumns(DataColumnCollection dataColumns)
     {
-      bool retValue = true;
+      bool retValue = false;
 
       if (dataColumns != null
         && dataColumns.Count > 0)
@@ -177,7 +238,7 @@ namespace LJCNetCommon
     ///  path='members/HasTableColumns2/*'/>
     public static bool HasTableColumns(DataTable dataTable)
     {
-      bool retValue = true;
+      bool retValue = false;
 
       if (dataTable != null)
       {
@@ -222,7 +283,6 @@ namespace LJCNetCommon
       }
       return retValue;
     }
-
 
     // Checks an IList collection for items.
     /// <include file='Doc/LJC.xml'
@@ -312,6 +372,102 @@ namespace LJCNetCommon
         }
       }
       return retValue;
+    }
+    #endregion
+
+    #region Console Methods
+
+    // Clears an invalid ReadKey() selection.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ClearReadKey/*'/>
+    public static void ClearReadKey(string prompt, char value)
+    {
+      while (true)
+      {
+        if ("\r\t ".Contains(value))
+        {
+          var left = prompt.Length;
+          Console.SetCursorPosition(left, Console.CursorTop);
+          break;
+        }
+
+        if ("\b".Contains(value))
+        {
+          Console.Write(" ");
+          break;
+        }
+
+        Console.Write('\b');
+        Console.Write(' ');
+        Console.Write('\b');
+        break;
+      }
+    }
+
+    // Clears an invalid ReadLine() selection.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/ClearReadLine/*'/>
+    public static void ClearReadLine(string prompt, string value)
+    {
+      var left = prompt.Length + value.Length;
+      var backspaces = new string('\b', value.Length);
+      var spaces = new string(' ', value.Length);
+      Console.SetCursorPosition(left, Console.CursorTop - 1);
+      Console.Write(backspaces);
+      Console.Write(spaces);
+      Console.Write(backspaces);
+    }
+
+    // Get a console character option value.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/KeyOption/*'/>
+    public static char KeyOption(string prompt, string options)
+    {
+      char retOption;
+
+      // Get valid key.
+      while (true)
+      {
+        while (true)
+        {
+          var info = Console.ReadKey();
+          retOption = info.KeyChar;
+          if (options.Contains(retOption))
+          {
+            break;
+          }
+          ClearReadKey(prompt, retOption);
+        }
+
+        // Wait for ENTER key.
+        var success = false;
+        while (true)
+        {
+          var info = Console.ReadKey();
+          var keyChar = info.KeyChar;
+          if ('\b' == keyChar)
+          {
+            Console.Write(' ');
+            Console.Write('\b');
+            break;
+          }
+          if ('\r' == keyChar)
+          {
+            success = true;
+            break;
+          }
+          else
+          {
+            ClearReadKey(prompt, keyChar);
+          }
+        }
+        if (success)
+        {
+          break;
+        }
+      }
+      Console.WriteLine();
+      return retOption;
     }
     #endregion
 
@@ -434,14 +590,17 @@ namespace LJCNetCommon
     {
       decimal retValue = default;
 
-      var type = value.GetType();
-      if (typeof(decimal) == type
-        || typeof(float) == type
-        || typeof(int) == type
-        || typeof(long) == type
-        || typeof(short) == type)
+      if (value != null)
       {
-        retValue = Convert.ToDecimal(value);
+        var type = value.GetType();
+        if (typeof(decimal) == type
+          || typeof(float) == type
+          || typeof(int) == type
+          || typeof(long) == type
+          || typeof(short) == type)
+        {
+          retValue = Convert.ToDecimal(value);
+        }
       }
       return retValue;
     }
@@ -453,15 +612,18 @@ namespace LJCNetCommon
     {
       double retValue = default;
 
-      var type = value.GetType();
-      if (typeof(double) == type
-        || typeof(decimal) == type
-        || typeof(float) == type
-        || typeof(int) == type
-        || typeof(long) == type
-        || typeof(short) == type)
+      if (value != null)
       {
-        retValue = Convert.ToDouble(value);
+        var type = value.GetType();
+        if (typeof(double) == type
+          || typeof(decimal) == type
+          || typeof(float) == type
+          || typeof(int) == type
+          || typeof(long) == type
+          || typeof(short) == type)
+        {
+          retValue = Convert.ToDouble(value);
+        }
       }
       return retValue;
     }
@@ -473,13 +635,16 @@ namespace LJCNetCommon
     {
       float retValue = default;
 
-      var type = value.GetType();
-      if (typeof(float) == type
-        || typeof(int) == type
-        || typeof(long) == type
-        || typeof(short) == type)
+      if (value != null)
       {
-        retValue = Convert.ToSingle(value);
+        var type = value.GetType();
+        if (typeof(float) == type
+          || typeof(int) == type
+          || typeof(long) == type
+          || typeof(short) == type)
+        {
+          retValue = Convert.ToSingle(value);
+        }
       }
       return retValue;
     }
@@ -633,6 +798,51 @@ namespace LJCNetCommon
           case TypeString:
             retValue = GetString(value);
             break;
+        }
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Additional Value Methods
+
+    // Gets a database DateTime string value from an object.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetDbDateString/*'/>
+    public static string GetDbDateString(object value)
+    {
+      string retValue = default;
+
+      if (value != null)
+      {
+        var type = value.GetType();
+        if (type == typeof(DateTime))
+        {
+          var dateTime = GetDateTime(value);
+          //retValue = $"'{dateTime:yyyy/MM/dd HH:mm:ss}'";
+          retValue = DbDateTimeString(dateTime);
+        }
+      }
+      return retValue;
+    }
+
+    // Gets a DateTime value from an object.
+    /// <include file='Doc/LJC.xml'
+    ///  path='members/GetDbDateTime/*'/>
+    public static DateTime GetDbDateTime(object value)
+    {
+      DateTime retValue = DateTime.MinValue;
+
+      if (value != null)
+      {
+        var type = value.GetType();
+        if (typeof(string) == type)
+        {
+          string result = value.ToString();
+          if (HasText(result))
+          {
+            retValue = DateTime.Parse(result);
+          }
         }
       }
       return retValue;
@@ -833,7 +1043,6 @@ namespace LJCNetCommon
       {
         fileStream?.Close();
       }
-      return;
     }
 
     // Serialize an object to an XML message string.
@@ -872,7 +1081,7 @@ namespace LJCNetCommon
     ///  path='members/Base64BytesToText/*'/>
     public static string Base64BytesToText(byte[] bytes)
     {
-      byte[] byteArray = LJC.Base64BytesToTextBytes(bytes);
+      byte[] byteArray = Base64BytesToTextBytes(bytes);
       return BytesToText(byteArray);
     }
 
@@ -1060,7 +1269,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // XML Entities
+    // ** XML Entities
     // Decodes an encoded XML string.
     /// <include file='Doc/LJC.xml'
     ///  path='members/XmlDecode/*'/>

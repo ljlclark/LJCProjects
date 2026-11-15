@@ -24,7 +24,7 @@ namespace LJCDBMessage
       var conditions = retValue.Add(name: "SQLSoundexFilter");
       var value1 = $"Soundex({columnName})";
       var value2 = $"Soundex('{searchValue}')";
-      if (NetString.HasValue(soundexColumn))
+      if (LJCNetString.HasValue(soundexColumn))
       {
         value1 = soundexColumn;
       }
@@ -45,16 +45,16 @@ namespace LJCDBMessage
       var conditions = retValue.Add("and", "or", "SoundexFilter");
 
       string soundex;
-      if (NetString.HasValue(pColumnName)
-        && NetString.HasValue(pSearchValue))
+      if (LJCNetString.HasValue(pColumnName)
+        && LJCNetString.HasValue(pSearchValue))
       {
-        soundex = NetString.CreatePSoundex(pSearchValue);
+        soundex = LJCNetString.CreatePSoundex(pSearchValue);
         conditions.Add(pColumnName, $"'{soundex}%'", "like");
       }
-      if (NetString.HasValue(lColumnName)
-        && NetString.HasValue(lSearchValue))
+      if (LJCNetString.HasValue(lColumnName)
+        && LJCNetString.HasValue(lSearchValue))
       {
-        soundex = NetString.CreateLSoundex(lSearchValue);
+        soundex = LJCNetString.CreateLSoundex(lSearchValue);
         conditions.Add(lColumnName, $"'{soundex}%'", "like");
       }
       //retValue.Add(filter);

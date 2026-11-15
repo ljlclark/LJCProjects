@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// NetString.cs
+// LJCNetString.cs
 using System;
 using System.Text;
 
@@ -8,8 +8,8 @@ namespace LJCNetCommon
 {
   // Contains common string related static methods.
   /// <include file='Doc/NetString.xml'
-  ///  path='members/NetString/*'/>
-  public class NetString
+  ///  path='members/LJCNetString/*'/>
+  public class LJCNetString
   {
     #region Checking String Values
 
@@ -282,7 +282,7 @@ namespace LJCNetCommon
           {
             foreach (string item in items)
             {
-              if (NetString.HasValue(retValues))
+              if (LJCNetString.HasValue(retValues))
               {
                 retValues += ", ";
               }
@@ -532,7 +532,7 @@ namespace LJCNetCommon
       {
         if (typeof(string) == argument.GetType())
         {
-          if (!NetString.HasValue(argument.ToString()))
+          if (!LJCNetString.HasValue(argument.ToString()))
           {
             missing = true;
           }
@@ -541,11 +541,11 @@ namespace LJCNetCommon
 
       if (missing)
       {
-        if (NetString.HasValue(errorContext))
+        if (LJCNetString.HasValue(errorContext))
         {
           message += $"{errorContext}\r\n";
         }
-        if (!NetString.HasValue(name))
+        if (!LJCNetString.HasValue(name))
         {
           name = "argument";
         }
@@ -580,11 +580,6 @@ namespace LJCNetCommon
     /// The compare object  is less than the compareto object.
     /// </summary>
     public const int CompareLess = -1;
-
-    /// <summary>
-    /// The compare object is notnull or equal is equal to the compareto object.
-    /// </summary>
-    public const int CompareNotNull = -2;
 
     /// <summary>
     /// The compare object is notnull or equal is equal to the compareto object.

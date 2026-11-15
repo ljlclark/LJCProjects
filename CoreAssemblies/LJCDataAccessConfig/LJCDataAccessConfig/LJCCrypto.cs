@@ -90,7 +90,7 @@ namespace LJCDataAccessConfig
       }
       set
       {
-        mPassword = NetString.InitString(value);
+        mPassword = LJCNetString.InitString(value);
       }
     }
 

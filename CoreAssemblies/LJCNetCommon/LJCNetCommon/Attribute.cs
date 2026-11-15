@@ -30,7 +30,7 @@ namespace LJCNetCommon
       get { return mName; }
       set
       {
-        mName = NetString.InitString(value);
+        mName = LJCNetString.InitString(value);
       }
     }
     private string mName;
@@ -41,7 +41,7 @@ namespace LJCNetCommon
       get { return mValue; }
       set
       {
-        mValue = NetString.InitString(value);
+        mValue = LJCNetString.InitString(value);
       }
     }
     private string mValue;

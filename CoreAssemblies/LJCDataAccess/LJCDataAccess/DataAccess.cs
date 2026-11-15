@@ -143,7 +143,7 @@ namespace LJCDataAccess
         }
         catch (Exception ex)
         {
-          string message = NetString.ExceptionString(ex);
+          string message = LJCNetString.ExceptionString(ex);
           message += "\r\n" + sql;
           throw new Exception(message);
         }
@@ -226,7 +226,7 @@ namespace LJCDataAccess
           }
           catch (Exception ex)
           {
-            string message = NetString.ExceptionString(ex);
+            string message = LJCNetString.ExceptionString(ex);
             throw new Exception(message);
           }
         }
@@ -381,7 +381,7 @@ namespace LJCDataAccess
             }
             catch (Exception ex)
             {
-              string message = NetString.ExceptionString(ex);
+              string message = LJCNetString.ExceptionString(ex);
               message += "\r\n" + sql;
               throw new Exception(message);
             }
@@ -454,7 +454,7 @@ namespace LJCDataAccess
       {
         if (IsUseCommand(sql))
         {
-          if (NetString.HasValue(TableName))
+          if (LJCNetString.HasValue(TableName))
           {
             sql = $"use {TableName}";
           }
@@ -491,15 +491,15 @@ namespace LJCDataAccess
         retValue = false;
         errorText += "The LJCDataAccess.ProviderFactory value is not set.\r\n";
       }
-      if (!NetString.HasValue(ConnectionString))
+      if (!LJCNetString.HasValue(ConnectionString))
       {
         errorText += "The LJCDataAccess.ConnectionString value is not set.\r\n";
       }
-      if (!NetString.HasValue(ProviderName))
+      if (!LJCNetString.HasValue(ProviderName))
       {
         errorText += "The LJCDataAccess.ProviderName value is not set.\r\n";
       }
-      if (NetString.HasValue(errorText))
+      if (LJCNetString.HasValue(errorText))
       {
         throw new MissingMemberException(errorText);
       }
@@ -537,7 +537,7 @@ namespace LJCDataAccess
       set
       {
         mConnectionString = value;
-        if (!NetString.HasValue(mProviderName))
+        if (!LJCNetString.HasValue(mProviderName))
         {
           mProviderName = GetSQLServerProviderName();
         }
@@ -565,11 +565,11 @@ namespace LJCDataAccess
       set
       {
         mProviderName = value;
-        if (!NetString.HasValue(mProviderName))
+        if (!LJCNetString.HasValue(mProviderName))
         {
           mProviderName = GetSQLServerProviderName();
         }
-        if (NetString.HasValue(mConnectionString))
+        if (LJCNetString.HasValue(mConnectionString))
         {
           if ("MySql.Data.MySqlClient" == mProviderName)
           {
@@ -588,7 +588,7 @@ namespace LJCDataAccess
     public string ScriptSQL
     {
       get { return mScriptSQL; }
-      set { mScriptSQL = NetString.InitString(value); }
+      set { mScriptSQL = LJCNetString.InitString(value); }
     }
     private string mScriptSQL;
 
@@ -596,7 +596,7 @@ namespace LJCDataAccess
     public string TableName
     {
       get { return mTableName; }
-      set { mTableName = NetString.InitString(value); }
+      set { mTableName = LJCNetString.InitString(value); }
     }
     private string mTableName;
     #endregion

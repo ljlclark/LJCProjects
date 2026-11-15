@@ -50,7 +50,7 @@ namespace LJCDBMessage
     public string BooleanOperator
     {
       get { return mBooleanOperator; }
-      set { mBooleanOperator = NetString.InitString(value); }
+      set { mBooleanOperator = LJCNetString.InitString(value); }
     }
     private string mBooleanOperator;
 
@@ -58,7 +58,7 @@ namespace LJCDBMessage
     public string FromColumnName
     {
       get { return mFromColumnName; }
-      set { mFromColumnName = NetString.InitString(value); }
+      set { mFromColumnName = LJCNetString.InitString(value); }
     }
     private string mFromColumnName;
 
@@ -66,7 +66,7 @@ namespace LJCDBMessage
     public string JoinOnOperator
     {
       get { return mJoinOnOperator; }
-      set { mJoinOnOperator = NetString.InitString(value); }
+      set { mJoinOnOperator = LJCNetString.InitString(value); }
     }
     private string mJoinOnOperator;
 
@@ -77,7 +77,7 @@ namespace LJCDBMessage
     public string ToColumnName
     {
       get { return mToColumnName; }
-      set { mToColumnName = NetString.InitString(value); }
+      set { mToColumnName = LJCNetString.InitString(value); }
     }
     private string mToColumnName;
     #endregion

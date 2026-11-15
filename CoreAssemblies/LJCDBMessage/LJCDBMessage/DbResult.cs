@@ -23,7 +23,7 @@ namespace LJCDBMessage
     {
       DbResult retValue = null;
 
-      if (NetString.HasValue(result))
+      if (LJCNetString.HasValue(result))
       {
         retValue = LJC.XmlDeserializeMessage(typeof(DbResult), result)
           as DbResult;
@@ -199,7 +199,7 @@ namespace LJCDBMessage
     ///  path='items/Serialize2/*'/>
     public void Serialize(string fileSpec = null)
     {
-      if (!NetString.HasValue(fileSpec))
+      if (!LJCNetString.HasValue(fileSpec))
       {
         fileSpec = LJCDefaultFileName;
       }
@@ -424,7 +424,7 @@ namespace LJCDBMessage
     public string ExecutedSql
     {
       get { return mExecutedSql; }
-      set { mExecutedSql = NetString.InitString(value); }
+      set { mExecutedSql = LJCNetString.InitString(value); }
     }
     private string mExecutedSql;
 
@@ -432,7 +432,7 @@ namespace LJCDBMessage
     public string ProcedureName
     {
       get { return mProcedureName; }
-      set { mProcedureName = NetString.InitString(value); }
+      set { mProcedureName = LJCNetString.InitString(value); }
     }
     private string mProcedureName;
 
@@ -440,7 +440,7 @@ namespace LJCDBMessage
     public string RequestTypeName
     {
       get { return mRequestTypeName; }
-      set { mRequestTypeName = NetString.InitString(value); }
+      set { mRequestTypeName = LJCNetString.InitString(value); }
     }
     private string mRequestTypeName;
 
@@ -452,7 +452,7 @@ namespace LJCDBMessage
     public string SchemaName
     {
       get { return mSchemaName; }
-      set { mSchemaName = NetString.InitString(value); }
+      set { mSchemaName = LJCNetString.InitString(value); }
     }
     private string mSchemaName;
 
@@ -460,7 +460,7 @@ namespace LJCDBMessage
     public string TableName
     {
       get { return mTableName; }
-      set { mTableName = NetString.InitString(value); }
+      set { mTableName = LJCNetString.InitString(value); }
     }
     private string mTableName;
     #endregion

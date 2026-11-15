@@ -154,7 +154,7 @@ namespace LJCNetCommon
         // Get the object compare value.
         var dataColumns = list[middleIndex] as LJCDataColumns;
 
-        int compareValue = NetString.CompareGreater;
+        int compareValue = LJCNetString.CompareGreater;
         for (short index = 0; index < keyColumns.Count; index++)
         {
           var keyColumn = keyColumns[index];
@@ -164,7 +164,7 @@ namespace LJCNetCommon
           if (index < keyColumns.Count - 1)
           {
             // Parent key value is not equal.
-            if (compareValue != NetString.CompareEqual)
+            if (compareValue != LJCNetString.CompareEqual)
             {
               break;
             }
@@ -172,7 +172,7 @@ namespace LJCNetCommon
           else
           {
             // Item key value is equal.
-            if (NetString.CompareEqual == compareValue)
+            if (LJCNetString.CompareEqual == compareValue)
             {
               retIndex = middleIndex;
             }
@@ -180,12 +180,12 @@ namespace LJCNetCommon
         }
 
         // DbColumns item was found.
-        if (NetString.CompareEqual == compareValue)
+        if (LJCNetString.CompareEqual == compareValue)
         {
           break;
         }
 
-        if (NetString.CompareLess == compareValue)
+        if (LJCNetString.CompareLess == compareValue)
         {
           // Eliminate left half
           leftIndex = middleIndex + 1;
@@ -395,7 +395,7 @@ namespace LJCNetCommon
         retColumns = new LJCDataColumns();
         foreach (string propertyName in propertyNames)
         {
-          var searchName = NetString.GetSearchName(propertyName);
+          var searchName = LJCNetString.GetSearchName(propertyName);
           var searchColumn = this[searchName];
           if (searchColumn != null)
           {
@@ -672,7 +672,7 @@ namespace LJCNetCommon
       var value = LJCGetString(propertyName);
       if (value != null)
       {
-        if (NetString.IsDigits(value))
+        if (LJCNetString.IsDigits(value))
         {
           var checkValue = Convert.ToInt16(value);
           retValue = Convert.ToBoolean(checkValue);
@@ -963,7 +963,7 @@ namespace LJCNetCommon
       {
         // End if one or both objects are null.
         if (null == LJCPropertyNames
-          || retValue != NetString.CompareNotNullOrEqual)
+          || retValue != LJCNetString.CompareNotNullOrEqual)
         {
           break;
         }
@@ -979,14 +979,14 @@ namespace LJCNetCommon
           retValue = LJC.CompareNull(xValue, yValue);
 
           // Break if one or both values are null.
-          if (retValue != NetString.CompareNotNullOrEqual)
+          if (retValue != LJCNetString.CompareNotNullOrEqual)
           {
             break;
           }
         }
 
         // End if one or both values are null.
-        if (retValue != NetString.CompareNotNullOrEqual)
+        if (retValue != LJCNetString.CompareNotNullOrEqual)
         {
           break;
         }
@@ -1003,7 +1003,7 @@ namespace LJCNetCommon
             {
               // Compare parent keys.
               retValue = xValue.CompareTo(yValue);
-              if (retValue != NetString.CompareEqual)
+              if (retValue != LJCNetString.CompareEqual)
               {
                 break;
               }

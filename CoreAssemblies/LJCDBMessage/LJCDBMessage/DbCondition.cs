@@ -51,7 +51,7 @@ namespace LJCDBMessage
       }
       set
       {
-        mComparisonOperator = NetString.InitString(value);
+        mComparisonOperator = LJCNetString.InitString(value);
       }
     }
     private string mComparisonOperator;
@@ -65,7 +65,7 @@ namespace LJCDBMessage
       }
       set
       {
-        mFirstValue = NetString.InitString(value);
+        mFirstValue = LJCNetString.InitString(value);
       }
     }
     private string mFirstValue;
@@ -79,7 +79,7 @@ namespace LJCDBMessage
       }
       set
       {
-        mSecondValue = NetString.InitString(value);
+        mSecondValue = LJCNetString.InitString(value);
       }
     }
     private string mSecondValue;

@@ -22,7 +22,7 @@ namespace LJCDBMessage
     {
       DbRequest retValue = null;
 
-      if (NetString.HasValue(request))
+      if (LJCNetString.HasValue(request))
       {
         retValue = LJC.XmlDeserializeMessage(typeof(DbRequest)
           , request) as DbRequest;
@@ -166,7 +166,7 @@ namespace LJCDBMessage
     public string DataConfigName
     {
       get { return mDataConfigName; }
-      set { mDataConfigName = NetString.InitString(value); }
+      set { mDataConfigName = LJCNetString.InitString(value); }
     }
     private string mDataConfigName;
 
@@ -185,7 +185,7 @@ namespace LJCDBMessage
     public string ProcedureName
     {
       get { return mProcedureName; }
-      set { mProcedureName = NetString.InitString(value); }
+      set { mProcedureName = LJCNetString.InitString(value); }
     }
     private string mProcedureName;
 
@@ -195,7 +195,7 @@ namespace LJCDBMessage
     public string RequestTypeName
     {
       get { return mRequestTypeName; }
-      set { mRequestTypeName = NetString.InitString(value); }
+      set { mRequestTypeName = LJCNetString.InitString(value); }
     }
     private string mRequestTypeName;
 
@@ -203,7 +203,7 @@ namespace LJCDBMessage
     public string SchemaName
     {
       get { return mSchemaName; }
-      set { mSchemaName = NetString.InitString(value); }
+      set { mSchemaName = LJCNetString.InitString(value); }
     }
     private string mSchemaName;
 
@@ -211,7 +211,7 @@ namespace LJCDBMessage
     public string TableName
     {
       get { return mTableName; }
-      set { mTableName = NetString.InitString(value); }
+      set { mTableName = LJCNetString.InitString(value); }
     }
     private string mTableName;
     #endregion
@@ -228,7 +228,7 @@ namespace LJCDBMessage
     public string ClientSql
     {
       get { return mClientSql; }
-      set { mClientSql = NetString.InitString(value); }
+      set { mClientSql = LJCNetString.InitString(value); }
     }
     private string mClientSql;
 

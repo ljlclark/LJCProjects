@@ -383,7 +383,7 @@ namespace LJCNetCommon
       var value = LJCGetString(propertyName);
       if (value != null)
       {
-        if (NetString.IsDigits(value))
+        if (LJCNetString.IsDigits(value))
         {
           var checkValue = Convert.ToInt16(value);
           retValue = Convert.ToBoolean(checkValue);
@@ -674,7 +674,7 @@ namespace LJCNetCommon
       {
         // End if one or both objects are null.
         if (null == LJCPropertyNames
-          || retValue != NetString.CompareNotNullOrEqual)
+          || retValue != LJCNetString.CompareNotNullOrEqual)
         {
           break;
         }
@@ -690,14 +690,14 @@ namespace LJCNetCommon
           retValue = LJC.CompareNull(xValue, yValue);
 
           // Break if one or both values are null.
-          if (retValue != NetString.CompareNotNullOrEqual)
+          if (retValue != LJCNetString.CompareNotNullOrEqual)
           {
             break;
           }
         }
 
         // End if one or both values are null.
-        if (retValue != NetString.CompareNotNullOrEqual)
+        if (retValue != LJCNetString.CompareNotNullOrEqual)
         {
           break;
         }
@@ -714,7 +714,7 @@ namespace LJCNetCommon
             {
               // Compare parent keys.
               retValue = xValue.CompareTo(yValue);
-              if (retValue != NetString.CompareEqual)
+              if (retValue != LJCNetString.CompareEqual)
               {
                 break;
               }

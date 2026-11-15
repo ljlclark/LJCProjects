@@ -321,7 +321,7 @@ namespace LJCWinFormControls
       int columnIndex = Columns.Add(checkColumn);
       retValue = Columns[columnIndex];
       retValue.HeaderText = null;
-      if (NetString.HasValue(caption))
+      if (LJCNetString.HasValue(caption))
       {
         retValue.HeaderText = caption;
       }
@@ -449,7 +449,7 @@ namespace LJCWinFormControls
       }
 
       var calcLength = textLength;
-      if (NetString.HasValue(gridColumn.HeaderText)
+      if (LJCNetString.HasValue(gridColumn.HeaderText)
         && gridColumn.HeaderText.Length > textLength)
       {
         calcLength = gridColumn.HeaderText.Length;

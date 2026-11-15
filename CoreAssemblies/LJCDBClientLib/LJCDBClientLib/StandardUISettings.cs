@@ -43,7 +43,7 @@ namespace LJCDBClientLib
       BeginColor = AppSettings.GetColor("BeginColor", Color.AliceBlue);
       EndColor = AppSettings.GetColor("EndColor", Color.LightSkyBlue);
       ExportTextExtension = AppSettings.GetString("ExportTextExtension");
-      if (!NetString.HasValue(ExportTextExtension))
+      if (!LJCNetString.HasValue(ExportTextExtension))
       {
         ExportTextExtension = "txt";
       }
@@ -72,7 +72,7 @@ namespace LJCDBClientLib
     public string DataConfigName
     {
       get { return mDataConfigName; }
-      set { mDataConfigName = NetString.InitString(value); }
+      set { mDataConfigName = LJCNetString.InitString(value); }
     }
     private string mDataConfigName;
 
@@ -86,7 +86,7 @@ namespace LJCDBClientLib
     public string ExportTextExtension
     {
       get { return mExportTextExtension; }
-      set { mExportTextExtension = NetString.InitString(value); }
+      set { mExportTextExtension = LJCNetString.InitString(value); }
     }
     private string mExportTextExtension;
 

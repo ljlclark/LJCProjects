@@ -32,9 +32,9 @@ namespace LJCNetCommon5
     // Creates the keys collection.
     /// <include file='Doc/LJC.xml'
     ///  path='members/Keys/*'/>
-    public static LJCDataColumns Keys(string propertyName, string searchValue)
+    public static LJCDataValues Keys(string propertyName, string searchValue)
     {
-      return new LJCDataColumns()
+      return new LJCDataValues()
       {
         { propertyName, searchValue },
       };
@@ -1360,11 +1360,11 @@ namespace LJCNetCommon5
     /// <include file='Doc/LJC.xml'
     ///  path='members/TypeString/*'/>
     public const string TypeString = "String";
-    #endregion
 
     // The ignore case constant.
     /// <include file='Doc/LJC.xml'
     ///  path='members/IgnoreCase/*'/>
     public const StringComparison IgnoreCase = StringComparison.OrdinalIgnoreCase;
+    #endregion
   }
 }

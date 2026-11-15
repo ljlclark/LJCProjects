@@ -232,7 +232,7 @@ namespace LJCTextDataReaderLib
       bool retValue;
 
       string text = GetString(i);
-      retValue = (!NetString.HasValue(text));
+      retValue = (!LJCNetString.HasValue(text));
       return retValue;
     }
 
@@ -491,7 +491,7 @@ namespace LJCTextDataReaderLib
 
       object value = this[i];
       if (value != null
-        && NetString.HasValue(value.ToString()))
+        && LJCNetString.HasValue(value.ToString()))
       {
         retValue = value.ToString();
       }
@@ -652,7 +652,7 @@ namespace LJCTextDataReaderLib
 
       object value = this[name];
       if (value != null
-        && NetString.HasValue(value.ToString()))
+        && LJCNetString.HasValue(value.ToString()))
       {
         retValue = value.ToString();
       }
@@ -958,7 +958,7 @@ namespace LJCTextDataReaderLib
       foreach (LJCDataColumn dbColumn in fieldColumns)
       {
         string sourceColumnName = dbColumn.ColumnName;
-        if (NetString.HasValue(dbColumn.RenameAs))
+        if (LJCNetString.HasValue(dbColumn.RenameAs))
         {
           sourceColumnName = dbColumn.RenameAs;
         }
@@ -1013,7 +1013,7 @@ namespace LJCTextDataReaderLib
 
         // Skip empty line.
         if (1 == values.Length
-          && !NetString.HasValue(values[0]))
+          && !LJCNetString.HasValue(values[0]))
         {
           isError = false;
         }

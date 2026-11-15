@@ -43,7 +43,7 @@ namespace LJCWinFormControls
     {
       DateTime startDate;
 
-      if (NetString.HasValue(mStartDate)
+      if (LJCNetString.HasValue(mStartDate)
         && mStartDate.Trim() != "/  /")
       {
         startDate = DateTime.Parse(mStartDate);
@@ -145,7 +145,7 @@ namespace LJCWinFormControls
       }
       set
       {
-        mStartDate = NetString.InitString(value);
+        mStartDate = LJCNetString.InitString(value);
       }
     }
     private string mStartDate;

@@ -270,7 +270,7 @@ namespace LJCNetCommon
       if (text != null)
       {
         var keyword = CommonDataTypes.SearchName(text);
-        if (NetString.HasValue(keyword))
+        if (LJCNetString.HasValue(keyword))
         {
           retValue = true;
         }
@@ -279,7 +279,7 @@ namespace LJCNetCommon
           if (!firstPass)
           {
             keyword = DataTypes.SearchName(text);
-            if (NetString.HasValue(keyword))
+            if (LJCNetString.HasValue(keyword))
             {
               retValue = true;
             }
@@ -344,7 +344,7 @@ namespace LJCNetCommon
       if (text != null)
       {
         var keyword = CommonKeywords.SearchName(text);
-        if (NetString.HasValue(keyword))
+        if (LJCNetString.HasValue(keyword))
         {
           retValue = true;
         }
@@ -353,7 +353,7 @@ namespace LJCNetCommon
           if (!firstPass)
           {
             keyword = Keywords.SearchName(text);
-            if (NetString.HasValue(keyword))
+            if (LJCNetString.HasValue(keyword))
             {
               retValue = true;
             }
@@ -373,7 +373,7 @@ namespace LJCNetCommon
       if (text != null)
       {
         var keyword = LibTypes.SearchName(text);
-        if (NetString.HasValue(keyword))
+        if (LJCNetString.HasValue(keyword))
         {
           retValue = true;
         }
@@ -390,7 +390,7 @@ namespace LJCNetCommon
       if (text != null)
       {
         var keyword = CommonModifiers.SearchName(text);
-        if (NetString.HasValue(keyword))
+        if (LJCNetString.HasValue(keyword))
         {
           retValue = true;
         }
@@ -399,7 +399,7 @@ namespace LJCNetCommon
           if (!firstPass)
           {
             keyword = Modifiers.SearchName(text);
-            if (NetString.HasValue(keyword))
+            if (LJCNetString.HasValue(keyword))
             {
               retValue = true;
             }
@@ -433,7 +433,7 @@ namespace LJCNetCommon
       if (text != null)
       {
         var keyword = RefTypes.SearchName(text);
-        if (NetString.HasValue(keyword))
+        if (LJCNetString.HasValue(keyword))
         {
           retValue = true;
         }

@@ -374,7 +374,7 @@ namespace TestData
           var compareValue = dataRows.LJCCompareColumn(dataColumnValue
             , keyColumn);
 
-          if (NetString.CompareEqual == compareValue)
+          if (LJCNetString.CompareEqual == compareValue)
           {
             found = true;
             result = $"{dataColumn.Value}";

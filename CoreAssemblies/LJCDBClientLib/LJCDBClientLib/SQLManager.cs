@@ -32,7 +32,7 @@ namespace LJCDBClientLib
       DataConfigName = dataConfigName;
       TableName = tableName;
 
-      if (NetString.HasValue(connectionString))
+      if (LJCNetString.HasValue(connectionString))
       {
         LJC.CheckArgument<string>(providerName, "providerName");
       }
@@ -51,7 +51,7 @@ namespace LJCDBClientLib
 
       mDataAccess = new DataAccess(connectionString, providerName);
       if (mDataAccess != null
-        && NetString.HasValue(TableName))
+        && LJCNetString.HasValue(TableName))
       {
         DataDefinition = CreateDataDefinition();
         LookupColumnNames = new List<string>();
@@ -88,7 +88,7 @@ namespace LJCDBClientLib
     public void Delete(LJCDataColumns keyColumns, DbFilters filters = null)
     {
       SQLStatement = CreateDeleteSQL(keyColumns, filters);
-      if (NetString.HasValue(SQLStatement))
+      if (LJCNetString.HasValue(SQLStatement))
       {
         AffectedCount = mDataAccess.ExecuteNonQuery(SQLStatement);
       }
@@ -144,7 +144,7 @@ namespace LJCDBClientLib
 
       SQLStatement = CreateUpdateSQL(dataObject, keyColumns, propertyNames
         , filters);
-      if (NetString.HasValue(SQLStatement))
+      if (LJCNetString.HasValue(SQLStatement))
       {
         AffectedCount = mDataAccess.ExecuteNonQuery(SQLStatement);
       }
@@ -267,7 +267,7 @@ namespace LJCDBClientLib
     public string DataConfigName
     {
       get { return mDataConfigName; }
-      private set { mDataConfigName = NetString.InitString(value); }
+      private set { mDataConfigName = LJCNetString.InitString(value); }
     }
     private string mDataConfigName;
 
@@ -284,7 +284,7 @@ namespace LJCDBClientLib
     public string SchemaName
     {
       get { return mSchemaName; }
-      set { mSchemaName = NetString.InitString(value); }
+      set { mSchemaName = LJCNetString.InitString(value); }
     }
     private string mSchemaName;
 
@@ -295,7 +295,7 @@ namespace LJCDBClientLib
     public string TableName
     {
       get { return mTableName; }
-      set { mTableName = NetString.InitString(value); }
+      set { mTableName = LJCNetString.InitString(value); }
     }
     private string mTableName;
     #endregion

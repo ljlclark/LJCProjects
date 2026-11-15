@@ -119,7 +119,7 @@ namespace LJCNetCommon
     ///  path='members/FormatValue/*'/>
     public string FormatValue()
     {
-      string retValue = NetString.FormatValue(Value, DataTypeName);
+      string retValue = LJCNetString.FormatValue(Value, DataTypeName);
       return retValue;
     }
 
@@ -207,7 +207,7 @@ namespace LJCNetCommon
 
         // Cannot change column name to null or white space.
         if (_ColumnName != newValue
-          && NetString.HasValue(newValue))
+          && LJCNetString.HasValue(newValue))
         {
           _ColumnName = newValue;
 
@@ -260,12 +260,12 @@ namespace LJCNetCommon
 
         // Cannot change property name to null or white space.
         if (_PropertyName != newValue
-          && NetString.HasValue(newValue))
+          && LJCNetString.HasValue(newValue))
         {
           _PropertyName = newValue;
 
           // Set empty column name the same as the property name.
-          if (!NetString.HasValue(_ColumnName))
+          if (!LJCNetString.HasValue(_ColumnName))
           {
             ColumnName = PropertyName;
           }

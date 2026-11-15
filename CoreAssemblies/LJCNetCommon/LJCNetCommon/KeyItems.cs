@@ -77,7 +77,7 @@ namespace LJCNetCommon
     {
       KeyItem retValue = null;
 
-      if (NetString.HasValue(propertyName))
+      if (LJCNetString.HasValue(propertyName))
       {
         retValue = new KeyItem()
         {
@@ -176,7 +176,7 @@ namespace LJCNetCommon
       int retValue = -1;
 
       if (dataColumn.Value != null
-        && NetString.IsDigits(dataColumn.Value.ToString()))
+        && LJCNetString.IsDigits(dataColumn.Value.ToString()))
       {
         int.TryParse(dataColumn.Value.ToString(), out int index);
         index--;
@@ -224,7 +224,7 @@ namespace LJCNetCommon
     {
       KeyItems retValue = null;
 
-      if (dataColumn != null && NetString.HasValue(dataColumn.PropertyName))
+      if (dataColumn != null && LJCNetString.HasValue(dataColumn.PropertyName))
       {
         retValue = SearchPropertyName(dataColumn.PropertyName);
       }

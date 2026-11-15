@@ -137,7 +137,7 @@ namespace LJCNetCommon5
         {
           // Get where LJCDataColumn property = "PropertyName"
           //   , value = propertyName.
-          var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
+          var keys = LJC.Keys(LJCDataValue.ColumnPropertyName
           , propertyName);
           retValue = LJCGetUnique(keys);
         }
@@ -353,7 +353,7 @@ namespace LJCNetCommon5
     // The column is identified by its property names and values.
     /// <include file='Doc/DataValues.xml'
     ///  path='members/LJCGetUnique/*'/>
-    public LJCDataValue? LJCGetUnique(LJCDataColumns? keys = null)
+    public LJCDataValue? LJCGetUnique(LJCDataValues? keys = null)
     {
       LJCDataValue retValue = null;
 
@@ -409,7 +409,7 @@ namespace LJCNetCommon5
     // Sorts on the current key columns.
     /// <include file='Doc/DataValues.xml'
     ///  path='members/LJCSort/*'/>
-    public void LJCSort(LJCDataColumns? keys = null)
+    public void LJCSort(LJCDataValues? keys = null)
     {
       if (LJC.HasListItems(keys))
       {

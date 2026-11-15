@@ -191,7 +191,7 @@ namespace LJCDBMessage
       var columnName = keyColumn.ColumnName;
 
       // Get column definition by column name.
-      var searchName = NetString.GetSearchName(keyColumn.ColumnName);
+      var searchName = LJCNetString.GetSearchName(keyColumn.ColumnName);
       //retValue = dataColumns.LJCSearchColumnName(searchName);
       retValue = dataColumns[searchName];
       if (retValue != null)

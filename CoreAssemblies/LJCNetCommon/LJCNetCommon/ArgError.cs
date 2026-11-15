@@ -27,7 +27,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      if (NetString.HasValue(mMessage))
+      if (LJCNetString.HasValue(mMessage))
       {
         retValue = $"{ClassName}\r\n{MethodName}\r\n";
         retValue += mMessage;
@@ -42,7 +42,7 @@ namespace LJCNetCommon
     /// <param name="name">The argument name.</param>
     public void Add(object argument, string name)
     {
-      NetString.AddObjectArgError(ref mMessage, argument, name);
+      LJCNetString.AddObjectArgError(ref mMessage, argument, name);
     }
 
     /// <summary>Adds a message.</summary>

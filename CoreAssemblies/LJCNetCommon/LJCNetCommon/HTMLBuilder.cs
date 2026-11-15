@@ -199,7 +199,7 @@ namespace LJCNetCommon
           if (!isFirst)
           {
             // Wrap line for large attribute value.
-            if (NetString.HasValue(value)
+            if (LJCNetString.HasValue(value)
               && value.Length > 35)
             {
               hb.AddText($"\r\n{GetIndentString()}");
@@ -208,7 +208,7 @@ namespace LJCNetCommon
           isFirst = false;
 
           hb.AddText($" {name}");
-          if (NetString.HasValue(value))
+          if (LJCNetString.HasValue(value))
           {
             hb.AddText($"=\"{value}\"");
           }
@@ -268,7 +268,7 @@ namespace LJCNetCommon
         retText = "\r\n";
       }
 
-      if (NetString.HasValue(text))
+      if (LJCNetString.HasValue(text))
       {
         retText += text;
 
@@ -480,7 +480,7 @@ namespace LJCNetCommon
       // Content is added if not an empty element.
       var isWrapped = false;
       if (!isEmpty
-        && NetString.HasValue(text))
+        && LJCNetString.HasValue(text))
       {
         var content = Content(text, textState, isEmpty, out isWrapped);
         hb.AddText(content);
@@ -640,11 +640,11 @@ namespace LJCNetCommon
         , isEmpty: true);
       hb.Text(createText, false);
 
-      if (NetString.HasValue(description))
+      if (LJCNetString.HasValue(description))
       {
         hb.Meta("description", description, textState);
       }
-      if (NetString.HasValue(keywords))
+      if (LJCNetString.HasValue(keywords))
       {
         hb.Meta("keywords", keywords, textState);
       }
@@ -708,7 +708,7 @@ namespace LJCNetCommon
           hb.Text($"<!-- {line} -->");
         }
       }
-      if (NetString.HasValue(fileName))
+      if (LJCNetString.HasValue(fileName))
       {
         hb.Text($"<!-- {fileName} -->");
       }
@@ -768,11 +768,11 @@ namespace LJCNetCommon
     public Attributes Attribs(string className = null, string id = null)
     {
       var retAttribs = new Attributes();
-      if (NetString.HasValue(id))
+      if (LJCNetString.HasValue(id))
       {
         retAttribs.Add("id", id);
       }
-      if (NetString.HasValue(className))
+      if (LJCNetString.HasValue(className))
       {
         retAttribs.Add("class", className);
       }
@@ -839,7 +839,7 @@ namespace LJCNetCommon
       // Add text content.
       isWrapped = false;
       if (!isEmpty
-        && NetString.HasValue(text))
+        && LJCNetString.HasValue(text))
       {
         if (text.Length > 80 - IndentLength())
         {

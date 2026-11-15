@@ -58,7 +58,7 @@ namespace LJCDBMessage
     public string BooleanOperator
     {
       get { return mBooleanOperator; }
-      set { mBooleanOperator = NetString.InitString(value); }
+      set { mBooleanOperator = LJCNetString.InitString(value); }
     }
     private string mBooleanOperator;
 
@@ -72,7 +72,7 @@ namespace LJCDBMessage
     public string Name
     {
       get { return mName; }
-      set { mName = NetString.InitString(value); }
+      set { mName = LJCNetString.InitString(value); }
     }
     private string mName;
     #endregion

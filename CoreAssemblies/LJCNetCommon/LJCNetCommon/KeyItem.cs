@@ -91,7 +91,7 @@ namespace LJCNetCommon
     public string DataConfigName
     {
       get { return mDataConfigName; }
-      set { mDataConfigName = NetString.InitString(value); }
+      set { mDataConfigName = LJCNetString.InitString(value); }
     }
     private string mDataConfigName;
 
@@ -99,7 +99,7 @@ namespace LJCNetCommon
     public string Description
     {
       get { return mDescription; }
-      set { mDescription = NetString.InitString(value); }
+      set { mDescription = LJCNetString.InitString(value); }
     }
     private string mDescription;
 
@@ -113,7 +113,7 @@ namespace LJCNetCommon
     public string PrimaryKeyName
     {
       get { return mPrimaryKeyName; }
-      set { mPrimaryKeyName = NetString.InitString(value); }
+      set { mPrimaryKeyName = LJCNetString.InitString(value); }
     }
     private string mPrimaryKeyName;
 
@@ -121,7 +121,7 @@ namespace LJCNetCommon
     public string PropertyName
     {
       get { return mPropertyName; }
-      set { mPropertyName = NetString.InitString(value); }
+      set { mPropertyName = LJCNetString.InitString(value); }
     }
     private string mPropertyName;
 
@@ -129,7 +129,7 @@ namespace LJCNetCommon
     public string TableName
     {
       get { return mTableName; }
-      set { mTableName = NetString.InitString(value); }
+      set { mTableName = LJCNetString.InitString(value); }
     }
     private string mTableName;
     #endregion

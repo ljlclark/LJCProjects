@@ -30,7 +30,7 @@ namespace LJCNetCommon
     {
       string retName = null;
 
-      string[] tokens = NetString.Split(line, " ");
+      string[] tokens = LJCNetString.Split(line, " ");
 
       // class
       if (tokens.Length > 1)
@@ -78,14 +78,14 @@ namespace LJCNetCommon
     {
       string retName = null;
 
-      string[] tokens = NetString.Split(line, " ");
+      string[] tokens = LJCNetString.Split(line, " ");
 
       // [modifier] [modifier2] method()
       // if (returnsBool());
       // var name = method();
 
       // void Method()
-      if (!NetString.HasValue(retName)
+      if (!LJCNetString.HasValue(retName)
         && tokens.Length > 1)
       {
         if (IsType(tokens[0]))
@@ -98,7 +98,7 @@ namespace LJCNetCommon
       }
 
       // static void Method()
-      if (!NetString.HasValue(retName)
+      if (!LJCNetString.HasValue(retName)
         && tokens.Length > 2)
       {
         if ((IsModifier(tokens[0])
@@ -113,7 +113,7 @@ namespace LJCNetCommon
       }
 
       // public static void Method()
-      if (!NetString.HasValue(retName)
+      if (!LJCNetString.HasValue(retName)
         && tokens.Length > 3)
       {
         if (IsModifier(tokens[0])
@@ -136,9 +136,9 @@ namespace LJCNetCommon
     {
       string retName = null;
 
-      string[] tokens = NetString.Split(line, " ");
+      string[] tokens = LJCNetString.Split(line, " ");
 
-      if (!NetString.HasValue(retName))
+      if (!LJCNetString.HasValue(retName))
       {
         // type Property
         if (2 == tokens.Length
@@ -170,7 +170,7 @@ namespace LJCNetCommon
         }
       }
 
-      if (!NetString.HasValue(retName))
+      if (!LJCNetString.HasValue(retName))
       {
         // modifier type Property {
         if (tokens.Length > 3

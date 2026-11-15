@@ -87,7 +87,7 @@ namespace LJCWinFormControls
     private void SetContents()
     {
       if (InfoRTBox != null
-        && NetString.HasValue(LJCContents))
+        && LJCNetString.HasValue(LJCContents))
       {
         InfoRTBox.Text = LJCContents;
       }
@@ -138,7 +138,7 @@ namespace LJCWinFormControls
       get { return mLJCContents; }
       set
       {
-        mLJCContents = NetString.InitString(value);
+        mLJCContents = LJCNetString.InitString(value);
       }
     }
     private string mLJCContents;
@@ -150,7 +150,7 @@ namespace LJCWinFormControls
     public string LJCText
     {
       get { return Text; }
-      set { Text = !NetString.HasValue(value) ? Text : value.Trim(); }
+      set { Text = !LJCNetString.HasValue(value) ? Text : value.Trim(); }
     }
 
     // The form location.

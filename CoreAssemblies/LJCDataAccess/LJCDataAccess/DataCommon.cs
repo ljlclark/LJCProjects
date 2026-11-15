@@ -67,23 +67,23 @@ namespace LJCDataAccess
 
       if (connectionTypeName != null)
       {
-        if (NetString.IsEqual(connectionTypeName, "OleDB"))
+        if (LJCNetString.IsEqual(connectionTypeName, "OleDB"))
         {
           retVal = ConnectionType.OleDb;
         }
-        if (NetString.IsEqual(connectionTypeName, "ODBC"))
+        if (LJCNetString.IsEqual(connectionTypeName, "ODBC"))
         {
           retVal = ConnectionType.Odbc;
         }
-        if (NetString.IsEqual(connectionTypeName, "SQLServer"))
+        if (LJCNetString.IsEqual(connectionTypeName, "SQLServer"))
         {
           retVal = ConnectionType.SqlServer;
         }
-        if (NetString.IsEqual(connectionTypeName, "MySQL"))
+        if (LJCNetString.IsEqual(connectionTypeName, "MySQL"))
         {
           retVal = ConnectionType.MySql;
         }
-        if (NetString.IsEqual(connectionTypeName, "Access"))
+        if (LJCNetString.IsEqual(connectionTypeName, "Access"))
         {
           retVal = ConnectionType.Access;
         }
@@ -141,7 +141,7 @@ namespace LJCDataAccess
       DateTime retValue;
 
       retValue = GetMinDateTime(connectionType);
-      if (NetString.HasValue(dateText)
+      if (LJCNetString.HasValue(dateText)
         && dateText.Trim() != "/  /")
       {
         retValue = DateTime.Parse(dateText);
@@ -159,7 +159,7 @@ namespace LJCDataAccess
       DateTime retValue;
 
       retValue = GetMinDateTime(connectionType);
-      if (NetString.HasValue(dateText)
+      if (LJCNetString.HasValue(dateText)
         && dateText.Trim() != "/  /")
       {
         retValue = DateTime.Parse(dateText);

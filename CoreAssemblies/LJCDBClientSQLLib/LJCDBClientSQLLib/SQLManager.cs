@@ -41,7 +41,7 @@ namespace LJCDBClientSQLLib
 
       mDataAccess = new DataAccess(connectionString, providerName);
       if (mDataAccess != null
-        && NetString.HasValue(TableName))
+        && LJCNetString.HasValue(TableName))
       {
         DataDefinition = CreateDataDefinition();
         LookupColumnNames = new List<string>();
@@ -236,7 +236,7 @@ namespace LJCDBClientSQLLib
     public string DataConfigName
     {
       get { return mDataConfigName; }
-      private set { mDataConfigName = NetString.InitString(value); }
+      private set { mDataConfigName = LJCNetString.InitString(value); }
     }
     private string mDataConfigName;
 
@@ -250,7 +250,7 @@ namespace LJCDBClientSQLLib
     public string SchemaName
     {
       get { return mSchemaName; }
-      set { mSchemaName = NetString.InitString(value); }
+      set { mSchemaName = LJCNetString.InitString(value); }
     }
     private string mSchemaName;
 
@@ -261,7 +261,7 @@ namespace LJCDBClientSQLLib
     public string TableName
     {
       get { return mTableName; }
-      set { mTableName = NetString.InitString(value); }
+      set { mTableName = LJCNetString.InitString(value); }
     }
     private string mTableName;
     #endregion
