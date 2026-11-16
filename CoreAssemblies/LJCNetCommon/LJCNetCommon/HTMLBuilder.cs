@@ -191,7 +191,7 @@ namespace LJCNetCommon
       {
         var hb = new HTMLBuilder(textState);
         var isFirst = true;
-        foreach (Attribute attrib in attribs)
+        foreach (LJCAttribute attrib in attribs)
         {
           var name = attrib.Name;
           var value = attrib.Value;

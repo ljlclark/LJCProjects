@@ -44,8 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
-    <Compile Include="ArgError.cs" />
-    <Compile Include="Attribute.cs" />
+    <Compile Include="LJCArgError.cs" />
+    <Compile Include="LJCAttribute.cs" />
     <Compile Include="Attributes.cs" />
     <Compile Include="CodeTokens\CodeTokenizer.cs" />
     <Compile Include="CodeTokens\CommonDataTypes.cs" />
@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\AppSettings.xml" />
+    <Content Include="Doc\LJCArgError.xml" />
     <Content Include="Doc\CodeTokenizer.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -107,7 +108,7 @@
     <Content Include="Doc\DbValues.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Doc\Attribute.xml" />
+    <Content Include="Doc\LJCAttribute.xml" />
     <Content Include="Doc\Attributes.xml" />
     <Content Include="Doc\HTMLBuilder.xml" />
     <Content Include="Doc\KeyItem.xml" />

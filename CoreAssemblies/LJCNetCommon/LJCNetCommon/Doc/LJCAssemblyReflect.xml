@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCAssemblyReflect.xml -->
-<items>
+<members>
   <LJCAssemblyReflect>
     <summary>
       Provides Assembly Reflection methods.
@@ -384,4 +384,4 @@
     <param name="methodInfo">The MethodInfo object.</param>
     <returns>true if "public"; otherwise, false.</returns>
   </IsPublic>
-</items>
+</members>

@@ -44,3 +44,6 @@ C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCom
 C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\TestNetCommon5\obj\Debug\net8.0\TestNetC.D8769124.Up2Date
 C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\TestNetCommon5\obj\Debug\net8.0\TestNetCommon5.genruntimeconfig.cache
 C:\Users\Les\Documents\Visual Studio 2022\LJCProjectsDev\LJCAssemblies\LJCNetCommon5\TestNetCommon5\obj\Debug\net8.0\ref\TestNetCommon5.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\LJCAssemblies\LJCNetCommonS5\TestNetCommon5\obj\Debug\net8.0\TestNetCommon5.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\LJCAssemblies\LJCNetCommonS5\TestNetCommon5\obj\Debug\net8.0\refint\TestNetCommon5.dll
+C:\Users\Les\Documents\Visual Studio 2022\LJCProjects\LJCAssemblies\LJCNetCommonS5\TestNetCommon5\obj\Debug\net8.0\TestNetCommon5.pdb

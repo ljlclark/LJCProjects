@@ -1,6 +1,6 @@
 // Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// LJCassemblyReflect.cs
+// LJCAssemblyReflect.cs
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,35 +10,315 @@ using System.Linq;
 
 namespace LJCNetCommon
 {
-  // Provides Assembly Reflection methods (D)
+  // Provides Assembly Reflection methods
   /// <include file='Doc/LJCAssemblyReflect.xml'
-  ///  path='items/LJCAssemblyReflect/*'/>
+  ///  path='members/LJCAssemblyReflect/*'/>
   public class LJCAssemblyReflect
   {
+    #region Static Methods
+
+    // Gets parm names from method info.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/ParmNames/*'/>
+    public static string[] ParmNames(MethodInfo methodInfo)
+    {
+      string[] retParamNames = null;
+
+      if (methodInfo != null)
+      {
+        var paramNames = new List<string>();
+        ParameterInfo[] parmInfos;
+
+        parmInfos = methodInfo.GetParameters();
+        if (LJC.HasListItems(parmInfos))
+        {
+          for (int index = 0; index < parmInfos.Length; index++)
+          {
+            ParameterInfo parmInfo = parmInfos[index];
+            string parmName = parmInfo.Name;
+            if (LJC.HasText(parmName))
+            {
+              paramNames.Add(parmName);
+            }
+          }
+          retParamNames = paramNames.ToArray();
+        }
+      }
+      return retParamNames;
+    }
+
+    // Gets parm method type names with parm names.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/ParmTypeNames/*'/>
+    public static string[] ParmTypeNames(MethodInfo methodInfo)
+    {
+      string[] retTypeNames = null;
+
+      if (methodInfo != null)
+      {
+        var typeNames = new List<string>();
+        ParameterInfo[] parmInfos;
+        parmInfos = methodInfo.GetParameters();
+        if (LJC.HasListItems(parmInfos))
+        {
+          for (int index = 0; index < parmInfos.Length; index++)
+          {
+            ParameterInfo parmInfo = parmInfos[index];
+            if (parmInfo != null)
+            {
+              string typeName = parmInfo.ParameterType.Name;
+              if (LJC.HasText(typeName))
+              {
+                typeNames.Add(typeName);
+              }
+            }
+          }
+          retTypeNames = typeNames.ToArray();
+        }
+      }
+      return retTypeNames;
+    }
+    #endregion
+
+    #region Properties
+
+    // The Assembly reference.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/Assembly/*'/>
+    public Assembly Assembly { get; set; }
+
+    // The constructor information.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/ConstructorInfo/*'/>
+    public ConstructorInfo ConstructorInfo { get; set; }
+
+    // The Field information.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/FieldInfo/*'/>
+    public FieldInfo FieldInfo { get; set; }
+
+    // The Field name.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/FieldName/*'/>
+    public string FieldName { get; set; }
+
+    // The Assembly file name.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/FileSpec/*'/>
+    public string FileSpec { get; set; }
+
+    // The Method information.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/MethodInfo/*'/>
+    public MethodInfo MethodInfo { get; set; }
+
+    // The Method name.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/MethodName/*'/>
+    public string MethodName { get; set; }
+
+    // The Property information.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/PropertyInfo/*'/>
+    public PropertyInfo PropertyInfo { get; set; }
+
+    // The Property name.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/PropertyName/*'/>
+    public string PropertyName { get; set; }
+
+    // The Type name.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/TypeName/*'/>
+    public string TypeName { get; set; }
+
+    // The Type reference.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/TypeReference/*'/>
+    public Type TypeReference { get; set; }
+    #endregion
+
     #region Constructors
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/DefaultConstructor/*'/>
     public LJCAssemblyReflect()
     {
+      Clear();
+    }
+
+    // Initializes an object instance.
+    /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
+    ///  path='members/Clear/*'/>
+    public void Clear()
+    {
+      Assembly = null;
+      FieldInfo = null;
+      FieldName = null;
+      FileSpec = null;
+      MethodInfo = null;
+      MethodName = null;
+      PropertyInfo = null;
+      PropertyName = null;
+      TypeName = null;
+      TypeReference = null;
     }
     #endregion
 
-    #region Set Object Reflection Property Methods
+    #region Methods
 
-    // Retrieves the Assembly reference. (R)
+    // Gets a field info object.
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/SetAssembly/*'/>
+    ///  path='members/GetFieldInfo/*'/>
+    public FieldInfo GetFieldInfo(string fieldName)
+    {
+      return TypeReference?.GetField(fieldName);
+    }
+
+    // Gets a parameterless method info object.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/MethodInfo/*'/>
+    public MethodInfo GetMethodInfo(string methodName)
+    {
+      MethodInfo retMethodInfo = null;
+
+      MethodInfo[] methodInfos = TypeReference?.GetMethods().Where
+        (x => x.Name.Equals(methodName)).ToArray();
+      if (LJC.HasListItems(methodInfos))
+      {
+        ParameterInfo[] parmInfos;
+        foreach (MethodInfo methodInfo in methodInfos)
+        {
+          try { parmInfos = methodInfo.GetParameters(); }
+          catch { continue; }
+          if (!LJC.HasListItems(parmInfos))
+          {
+            retMethodInfo = methodInfo;
+          }
+        }
+      }
+      return retMethodInfo;
+    }
+
+    // Get a parameterized method info object.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/ParmMethodInfosWithTypes/*'/>
+    public MethodInfo ParmMethodInfo(string methodName
+      , string[] parmNames)
+    {
+      MethodInfo retMethodInfo = null;
+
+      var methodInfo = ParmMethodInfoWithParms(methodName, parmNames);
+      if (methodInfo != null)
+      {
+        var typeNames = ParmTypeNames(methodInfo);
+        var parmInfos = methodInfo.GetParameters();
+        if (LJC.HasListItems(typeNames)
+          && LJC.HasListItems(parmInfos)
+          && typeNames.Length == parmInfos.Length)
+        {
+          var found = true;
+          for (int index = 0; index < typeNames.Length; index++)
+          {
+            string typeName = typeNames[index];
+            if (typeName != parmInfos[index].ParameterType.Name)
+            {
+              found = false;
+              break;
+            }
+          }
+          if (found)
+          {
+            retMethodInfo = methodInfo;
+          }
+        }
+      }
+      return retMethodInfo;
+    }
+
+    // Gets parm method infos with method name and parm count.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/ParmMethodInfosWithCount/*'/>
+    public MethodInfo[] ParmMethodInfosWithCount(string methodName
+      , int parmCount)
+    {
+      MethodInfo[] retMethodInfos = null;
+
+      MethodInfo[] methodInfos = TypeReference?.GetMethods().Where
+        (x => x.Name.Equals(methodName)).ToArray();
+      if (LJC.HasListItems(methodInfos))
+      {
+        var methodInfoList = new List<MethodInfo>();
+        ParameterInfo[] parmInfos;
+
+        // Check parameter count.
+        foreach (MethodInfo methodInfo in methodInfos)
+        {
+          try { parmInfos = methodInfo.GetParameters(); }
+          catch { continue; }
+          if (parmInfos.Length == parmCount)
+          {
+            methodInfoList.Add(methodInfo);
+          }
+        }
+        retMethodInfos = methodInfoList.ToArray();
+      }
+      return retMethodInfos;
+    }
+
+    // Gets parm method info with parm names.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/ParmMethodInfosWithParms/*'/>
+    public MethodInfo ParmMethodInfoWithParms(string methodName
+      , string[] parmNames)
+    {
+      MethodInfo retMethodInfo = null;
+
+      var methodInfos = ParmMethodInfosWithCount(methodName, parmNames.Length);
+      if (LJC.HasListItems(methodInfos)
+        && LJC.HasListItems(parmNames))
+      {
+        foreach (MethodInfo methodInfo in methodInfos)
+        {
+          var parmInfos = methodInfo.GetParameters();
+          if (!LJC.HasListItems(parmInfos)
+            || parmInfos.Length != parmNames.Length)
+          {
+            continue;
+          }
+          var found = true;
+          for (int index = 0; index < parmNames.Length; index++)
+          {
+            string parmName = parmNames[index];
+            if (parmName != parmInfos[index].Name)
+            {
+              found = false;
+              break;
+            }
+          }
+          if (found)
+          {
+            retMethodInfo = methodInfo;
+            break;
+          }
+        }
+      }
+      return retMethodInfo;
+    }
+    #endregion
+
+    #region Set Reflection Property Methods
+
+    // Retrieves the Assembly reference.
+    /// <include file='Doc/LJCAssemblyReflect.xml'
+    ///  path='members/SetAssembly/*'/>
     public Assembly SetAssembly(string fileSpec)
     {
       FileSpec = fileSpec;
 
-      Assembly = null;
-      TypeName = null;
-      TypeReference = null;
-      MethodName = null;
-      MethodInfo = null;
+      Clear();
+      FileSpec = fileSpec;
       if (LJC.HasText(FileSpec)
         && File.Exists(FileSpec))
       {
@@ -47,9 +327,9 @@ namespace LJCNetCommon
       return Assembly;
     }
 
-    // Set the ConstructorInfo reference. (RE)
+    // Set the ConstructorInfo reference.
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/SetConstructorInfo/*'/>
+    ///  path='members/SetConstructorInfo/*'/>
     public ConstructorInfo SetConstructorInfo(string methodName
       , string[] parameterNames)
     {
@@ -61,14 +341,14 @@ namespace LJCNetCommon
       MethodInfo = null;
       if (TypeReference != null)
       {
-        // *** Change *** 4/20/25
         //BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public
         //  | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly;
         BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public
           | BindingFlags.Static | BindingFlags.DeclaredOnly;
 
         if (null == parameterNames
-          || (parameterNames != null && 0 == parameterNames.Length))
+          || (parameterNames != null
+          && 0 == parameterNames.Length))
         {
           // Get constructor with no parameters.
           Type[] types = new Type[0];
@@ -142,9 +422,9 @@ namespace LJCNetCommon
       return ConstructorInfo;
     }
 
-    // Set the FieldInfo reference. (RE)
+    // Set the FieldInfo reference.
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/SetFieldInfo/*'/>
+    ///  path='members/SetFieldInfo/*'/>
     public FieldInfo SetFieldInfo(string fieldName)
     {
       FieldName = fieldName;
@@ -160,7 +440,7 @@ namespace LJCNetCommon
 
     // Gets the Indexer Property info.
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/GetIndexerInfo/*'/>
+    ///  path='members/GetIndexerInfo/*'/>
     public PropertyInfo GetIndexerInfo(string fullName)
     {
       Type argType = null;
@@ -192,30 +472,23 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Set the MethodInfo reference. (RE)
+    // Set the MethodInfo reference.
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/SetMethodInfo/*'/>
-    public MethodInfo SetMethodInfo(string methodName, string[] parameterNames)
+    ///  path='members/SetMethodInfo/*'/>
+    public MethodInfo SetMethodInfo(string methodName
+      , string[] parameterNames)
     {
       ParameterInfo[] parameterInfos;
       MethodInfo selectedMethodInfo = null;
 
       ConstructorInfo = null;
       MethodName = methodName;
-      // *** Begin *** Add - 10/4/23
-      if (MethodName.Contains("`"))
+      if (MethodName.Contains('`'))
       {
-        //var startIndex = 0;
-        //MethodName = NetString.GetStringWithDelimiters(MethodName
-        //  , MethodName[0].ToString(), ref startIndex, "`");
-        var parser = new LJCParser
-        {
-          StartIndex = 0
-        };
+        var parser = new LJCParser();
         MethodName = parser.StringWithDelimiters(MethodName, MethodName[0].ToString(), "`");
-        MethodName = MethodName.Substring(0, MethodName.Length - 1);
+        MethodName = MethodName?.Substring(0, MethodName.Length - 1);
       }
-      // *** End   *** Add - 10/4/23
 
       MethodInfo = null;
       if (TypeReference != null
@@ -225,7 +498,8 @@ namespace LJCNetCommon
           | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly;
 
         if (null == parameterNames
-          || (parameterNames != null && 0 == parameterNames.Length))
+          || (parameterNames != null
+          && 0 == parameterNames.Length))
         {
           // Get method with no parameters.
           MethodInfo = TypeReference.GetMethod(MethodName, bindingFlags
@@ -242,10 +516,7 @@ namespace LJCNetCommon
             {
               parameterInfos = methodInfo.GetParameters();
             }
-            catch (SystemException)
-            {
-              continue;
-            }
+            catch (SystemException) { continue; }
             if (parameterInfos.Length != parameterNames.Length)
             {
               continue;
@@ -308,9 +579,9 @@ namespace LJCNetCommon
       return MethodInfo;
     }
 
-    // Set the PropertyInfo reference. (RE)
+    // Set the PropertyInfo reference.
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/SetPropertyInfo/*'/>
+    ///  path='members/SetPropertyInfo/*'/>
     public PropertyInfo SetPropertyInfo(string propertyName
       , string fullName = null)
     {
@@ -332,9 +603,9 @@ namespace LJCNetCommon
       return PropertyInfo;
     }
 
-    // Set the Type reference. (RE)
+    // Set the Type reference.
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/SetTypeReference/*'/>
+    ///  path='members/SetTypeReference/*'/>
     public Type SetTypeReference(string typeName)
     {
       TypeName = typeName;
@@ -355,7 +626,7 @@ namespace LJCNetCommon
 
     // Creates and returns the Constructor syntax. (E)
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/GetConstructorSyntax/*'/>
+    ///  path='members/GetConstructorSyntax/*'/>
     public string GetConstructorSyntax(ConstructorInfo constructorInfo = null)
     {
       ConstructorInfo info = constructorInfo;
@@ -439,7 +710,7 @@ namespace LJCNetCommon
 
     // Creates and returns the Field syntax string. (E)
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/GetFieldSyntax/*'/>
+    ///  path='members/GetFieldSyntax/*'/>
     public string GetFieldSyntax(FieldInfo fieldInfo = null)
     {
       FieldInfo info = fieldInfo;
@@ -481,7 +752,7 @@ namespace LJCNetCommon
 
     // Creates and returns the Generic Type syntax.
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/GetGenericTypeSyntax/*'/>
+    ///  path='members/GetGenericTypeSyntax/*'/>
     public string GetGenericTypeSyntax(Type typeReference = null)
     {
       Type type = typeReference;
@@ -528,7 +799,7 @@ namespace LJCNetCommon
 
     // Creates and returns the Method syntax. (E)
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/GetMethodSyntax/*'/>
+    ///  path='members/GetMethodSyntax/*'/>
     public string GetMethodSyntax(MethodInfo methodInfo = null)
     {
       MethodInfo info = methodInfo;
@@ -540,7 +811,7 @@ namespace LJCNetCommon
       }
 
       if (info != null
-        && IsNotProperty(info))
+        && IsProperty(info))
       {
         StringBuilder builder = new StringBuilder(128);
 
@@ -624,7 +895,7 @@ namespace LJCNetCommon
 
     // Creates and returns the Property syntax string. (E)
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/GetPropertySyntax/*'/>
+    ///  path='members/GetPropertySyntax/*'/>
     public string GetPropertySyntax(PropertyInfo propertyInfo = null)
     {
       PropertyInfo info = propertyInfo;
@@ -642,21 +913,24 @@ namespace LJCNetCommon
         // Access Modifier
         MethodInfo methodInfo = info.GetMethod;
 
-        if (methodInfo.IsPublic)
+        if (methodInfo != null)
         {
-          builder.Append("public ");
-        }
-        if (methodInfo.IsPrivate)
-        {
-          builder.Append("private ");
-        }
-        if (methodInfo.IsStatic)
-        {
-          builder.Append("static ");
-        }
+          if (methodInfo.IsPublic)
+          {
+            builder.Append("public ");
+          }
+          if (methodInfo.IsPrivate)
+          {
+            builder.Append("private ");
+          }
+          if (methodInfo.IsStatic)
+          {
+            builder.Append("static ");
+          }
 
-        // Return Type
-        builder.Append($"{methodInfo.ReturnType.Name} ");
+          // Return Type
+          builder.Append($"{methodInfo.ReturnType.Name} ");
+        }
 
         // Name
         if ("Item" == info.Name)
@@ -670,7 +944,7 @@ namespace LJCNetCommon
 
         // Parameters
         ParameterInfo[] parameterInfos = info.GetIndexParameters();
-        if (parameterInfos.Count() > 0)
+        if (parameterInfos.Length > 0)
         {
           ParameterInfo parameterInfo = parameterInfos[0];
           builder.Append($"{parameterInfo.ParameterType.Name} ");
@@ -688,7 +962,7 @@ namespace LJCNetCommon
 
     // Creates and returns the Type syntax. (E)
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/GetTypeSyntax/*'/>
+    ///  path='members/GetTypeSyntax/*'/>
     public string GetTypeSyntax(Type typeReference = null)
     {
       Type type = typeReference;
@@ -757,7 +1031,7 @@ namespace LJCNetCommon
           }
           else
           {
-            if (IsNotCommonClassification(baseType))
+            if (!IsCommonClassification(baseType))
             {
               hasQualifiers = true;
               builder.Append($": {baseType.Name} ");
@@ -766,11 +1040,12 @@ namespace LJCNetCommon
         }
 
         // Implemented Interfaces
-        if (baseType != null && baseType.Name != "Enum")
+        if (baseType != null
+          && baseType.Name != "Enum")
         {
           foreach (Type implementedType in type.GetInterfaces())
           {
-            if (IsNotCommonInterface(implementedType))
+            if (!IsCommonInterface(implementedType))
             {
               if (!hasQualifiers)
               {
@@ -801,62 +1076,65 @@ namespace LJCNetCommon
 
     #region Public Flag Methods
 
-    // Indicates if the Type is not a common type.
+    // Indicates if the Type is a common type.
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/IsNotCommonClassification/*'/>
-    public bool IsNotCommonClassification(Type type)
+    ///  path='members/IsCommonClassification/*'/>
+    public bool IsCommonClassification(Type type)
     {
-      bool retValue = true;
+      bool retValue = false;
 
       if (type.Name == "Object"
         || type.Name == "Enum")
       {
-        retValue = false;
+        retValue = true;
       }
       return retValue;
     }
 
-    // Indicates if the Interface is not a common type.
+    // Indicates if the Interface is a common type.
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/IsNotCommonInterface/*'/>
-    public bool IsNotCommonInterface(Type type)
+    ///  path='members/IsCommonInterface/*'/>
+    public bool IsCommonInterface(Type type)
     {
-      bool retValue = true;
+      bool retValue = false;
 
-      if (type.FullName.StartsWith("System.ComponentModel")
+      if (type != null)
+      {
+        if (type.FullName.StartsWith("System.ComponentModel")
         || type.FullName.StartsWith("System.ServiceModel")
         || type.FullName.StartsWith("System.Windows.Forms"))
-      {
-        retValue = false;
-      }
-
-      if (retValue)
-      {
-        if (type.Name.StartsWith("ICloneable")
-          || type.Name.StartsWith("ICollection")
-          || type.Name.StartsWith("IConvertible")
-          || type.Name.StartsWith("IDisposable")
-          || type.Name.StartsWith("IFormattable")
-          || type.Name.StartsWith("IEnumerable")
-          || type.Name.StartsWith("IList")
-          || type.Name.StartsWith("IReadOnly"))
         {
-          retValue = false;
+          retValue = true;
+        }
+
+        if (retValue)
+        {
+          if (type.Name.StartsWith("ICloneable")
+            || type.Name.StartsWith("ICollection")
+            || type.Name.StartsWith("IConvertible")
+            || type.Name.StartsWith("IDisposable")
+            || type.Name.StartsWith("IFormattable")
+            || type.Name.StartsWith("IEnumerable")
+            || type.Name.StartsWith("IList")
+            || type.Name.StartsWith("IReadOnly"))
+          {
+            retValue = true;
+          }
         }
       }
       return retValue;
     }
 
-    // Indicates if the Method is not a property getter or setter.
+    // Indicates if the Method is a property getter or setter.
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/IsNotProperty/*'/>
-    public bool IsNotProperty(MethodInfo methodInfo)
+    ///  path='members/IsProperty/*'/>
+    public bool IsProperty(MethodInfo methodInfo)
     {
       bool retValue = false;
 
       if (methodInfo != null
-        && !methodInfo.Name.StartsWith("get_")
-        && !methodInfo.Name.StartsWith("set_"))
+        && methodInfo.Name.StartsWith("get_")
+        && methodInfo.Name.StartsWith("set_"))
       {
         retValue = true;
       }
@@ -865,7 +1143,7 @@ namespace LJCNetCommon
 
     // Indicates if the method is "override".
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/IsOverride/*'/>
+    ///  path='members/IsOverride/*'/>
     public bool IsOverride(MethodInfo methodInfo)
     {
       return !methodInfo.Equals(methodInfo.GetBaseDefinition());
@@ -873,7 +1151,7 @@ namespace LJCNetCommon
 
     // Indicates if the method is "public".
     /// <include file='Doc/LJCAssemblyReflect.xml'
-    ///  path='items/IsPublic/*'/>
+    ///  path='members/IsPublic/*'/>
     public bool IsPublic(MethodInfo methodInfo = null)
     {
       MethodInfo info = methodInfo;
@@ -886,7 +1164,7 @@ namespace LJCNetCommon
 
       if (info != null)
       {
-        if (IsNotProperty(info))
+        if (!IsProperty(info))
         {
           if (info.IsPublic)
           {
@@ -906,42 +1184,6 @@ namespace LJCNetCommon
       }
       return retValue;
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>The Assembly reference.</summary>
-    public Assembly Assembly { get; set; }
-
-    /// <summary>The constructor information.</summary>
-    public ConstructorInfo ConstructorInfo { get; set; }
-
-    /// <summary>The Field information.</summary>
-    public FieldInfo FieldInfo { get; set; }
-
-    /// <summary>The Field name.</summary>
-    public string FieldName { get; set; }
-
-    /// <summary>The Assembly file name.</summary>
-    public string FileSpec { get; set; }
-
-    /// <summary>The Method information.</summary>
-    public MethodInfo MethodInfo { get; set; }
-
-    /// <summary>The Method name.</summary>
-    public string MethodName { get; set; }
-
-    /// <summary>The Property information.</summary>
-    public PropertyInfo PropertyInfo { get; set; }
-
-    /// <summary>The Property name.</summary>
-    public string PropertyName { get; set; }
-
-    /// <summary>The Type name.</summary>
-    public string TypeName { get; set; }
-
-    /// <summary>The Type reference.</summary>
-    public Type TypeReference { get; set; }
     #endregion
   }
 }

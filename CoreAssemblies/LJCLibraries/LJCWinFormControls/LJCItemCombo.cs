@@ -21,7 +21,7 @@ namespace LJCWinFormControls
     public LJCItemCombo()
     {
       InitializeComponent();
-      mArgError = new ArgError("LJCItemCombo");
+      mArgError = new LJCArgError("LJCItemCombo");
     }
     #endregion
 
@@ -143,7 +143,7 @@ namespace LJCWinFormControls
     #region Class Values
 
     // The ArgError object.
-    private readonly ArgError mArgError;
+    private readonly LJCArgError mArgError;
     #endregion
   }
 

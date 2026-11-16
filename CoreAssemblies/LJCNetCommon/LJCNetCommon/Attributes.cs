@@ -9,16 +9,16 @@ namespace LJCNetCommon
   /// <summary>
   /// Represents a collection of Attribute elements.
   /// </summary>
-  public class Attributes : List<Attribute>
+  public class Attributes : List<LJCAttribute>
   {
     #region Collection Methods
 
     // Creates and adds an Attribute.
     /// <include file='Doc/Attributes.xml'
     ///  path='items/Add/*'/>
-    public Attribute Add(string name, string value)
+    public LJCAttribute Add(string name, string value)
     {
-      var retAttribute = new Attribute(name, value);
+      var retAttribute = new LJCAttribute(name, value);
       Add(retAttribute);
       return retAttribute;
     }

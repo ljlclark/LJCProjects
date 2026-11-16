@@ -1,28 +1,77 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// ArgError.cs
-using System;
+// LJCArgError.cs
 
 namespace LJCNetCommon
 {
-  /// <summary></summary>
-  public class ArgError
+  // Creates an argument error message.
+  /// <include file='Doc/LJCArgError.xml'
+  ///  path='members/LJCArgError/*'/>
+  public class LJCArgError
   {
+    #region Properties
+
+    // Gets or sets the Class name.
+    /// <include file='Doc/LJCArgError.xml'
+    ///  path='members/ClassName/*'/>
+    public string ClassName { get; set; }
+
+    // Gets or sets the Method name.
+    /// <include file='Doc/LJCArgError.xml'
+    ///  path='members/MethodName/*'/>
+    public string MethodName
+    {
+      get => mMethodName;
+      set
+      {
+        mMethodName = value?.Trim();
+        if (LJC.HasText(value))
+        {
+          mMessage = "";
+        }
+      }
+    }
+    private string mMethodName;
+    #endregion
+
+    #region Class Data
+
+    private string mMessage;
+    #endregion
+
     #region Constructors
 
-    /// <summary>Initializes an object instance.</summary>
-    /// <param name="className">The Class name.</param>
-    public ArgError(string className)
+    // Initializes an object instance.
+    /// <include file='Doc/LJCArgError.xml'
+    ///  path='members/Constructor/*'/>
+    public LJCArgError()
+    {
+      ClassName = "";
+      mMessage = "";
+    }
+
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/LJCArgError.xml'
+    ///  path='members/ParamConstructor/*'/>
+    public LJCArgError(string className) : this()
     {
       ClassName = className;
+    }
+
+    // Clears the messages.
+    /// <include file='Doc/LJCArgError.xml'
+    ///  path='members/Clear/*'/>
+    public void Clear()
+    {
       mMessage = "";
     }
     #endregion
 
-    #region Methods
+    #region Data Class Methods
 
-    /// <summary>Returns the message string.</summary>
-    /// <returns>The message string.</returns>
+    // Returns the message string.
+    /// <include file='Doc/LJCArgError.xml'
+    ///  path='members/Clear/*'/>
     public override string ToString()
     {
       string retValue = null;
@@ -34,46 +83,63 @@ namespace LJCNetCommon
       }
       return retValue;
     }
+    #endregion
 
-    /// <summary>
-    /// Adds a message using the provided values.
-    /// </summary>
-    /// <param name="argument">The argument value.</param>
-    /// <param name="name">The argument name.</param>
+    #region Methods
+
+    // Adds a message using the provided values.
+    /// <include file='Doc/LJCArgError.xml'
+    ///  path='members/Add1/*'/>
     public void Add(object argument, string name)
     {
       LJCNetString.AddObjectArgError(ref mMessage, argument, name);
     }
 
-    /// <summary>Adds a message.</summary>
-    /// <param name="message">The message value.</param>
+    // Adds a message.
+    /// <include file='Doc/LJCArgError.xml'
+    ///  path='members/Add2/*'/>
     public void Add(string message)
     {
       mMessage += message;
     }
-    #endregion
 
-    #region Properties
-
-    /// <summary>Gets or sets the Class name.</summary>
-    public string ClassName { get; set; }
-
-    /// <summary>Gets or sets the Method name.</summary>
-    public string MethodName
+    // Checks the ID values.
+    /// <include file='Doc/LJCArgError.xml'
+    ///  path='members/DbIDCheck/*'/>
+    public void DbIDCheck(short dbId)
     {
-      get { return mMethodName; }
-      set
+      string message = "";
+      if (dbId <= 0)
       {
-        mMethodName = value;
-        mMessage = "";
+        message += "dbId must be greater than zero.\r\n";
       }
+      Add(message);
     }
-    private string mMethodName;
-    #endregion
 
-    #region Class Data
+    // Checks the ID values.
+    /// <include file='Doc/LJCArgError.xml'
+    ///  path='members/IDCheck/*'/>
+    public void IDCheck(short dbId, long id)
+    {
+      string message = "";
+      if (dbId <= 0)
+      {
+        message += "dbId must be greater than zero.\r\n";
+      }
+      if (id <= 0)
+      {
+        message += "id must be greater than zero.\r\n";
+      }
+      Add(message);
+    }
 
-    private string mMessage;
+    // 
+    /// <include file='Doc/LJCArgError.xml'
+    ///  path='members/ThrowError/*'/>
+    public void ThrowError()
+    {
+      LJCNetString.ThrowArgError(ToString());
+    }
     #endregion
   }
 }

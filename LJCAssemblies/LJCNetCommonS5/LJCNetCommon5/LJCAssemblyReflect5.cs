@@ -18,6 +18,75 @@ namespace LJCNetCommon5
   /// <group name="properties">Properties</group>
   public class LJCAssemblyReflect
   {
+    #region Static Methods
+
+    // Gets parm names from method info.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/ParmNames/*'/>
+    /// <parentGroup>static</parentGroup>
+    public static string[]? ParmNames(MethodInfo methodInfo)
+    {
+      string[] retParamNames = null;
+
+      if (methodInfo != null)
+      {
+        var paramNames = new List<string>();
+        ParameterInfo[] parmInfos;
+
+        parmInfos = methodInfo.GetParameters();
+        if (LJC.HasListItems(parmInfos))
+        {
+          for (int index = 0; index < parmInfos.Length; index++)
+          {
+            ParameterInfo parmInfo = parmInfos[index];
+            string parmName = parmInfo.Name;
+            if (LJC.HasText(parmName))
+            {
+              paramNames.Add(parmName);
+            }
+          }
+          //retParamNames = paramNames.ToArray();
+          retParamNames = [.. paramNames];
+        }
+      }
+      return retParamNames;
+    }
+
+    // Gets parm method type names with parm names.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/ParmTypeNames/*'/>
+    /// <parentGroup>static</parentGroup>
+    public static string[]? ParmTypeNames(MethodInfo methodInfo)
+    {
+      string[] retTypeNames = null;
+
+      if (methodInfo != null)
+      {
+        var typeNames = new List<string>();
+        ParameterInfo[] parmInfos;
+        parmInfos = methodInfo.GetParameters();
+        if (LJC.HasListItems(parmInfos))
+        {
+          for (int index = 0; index < parmInfos.Length; index++)
+          {
+            ParameterInfo parmInfo = parmInfos[index];
+            if (parmInfo != null)
+            {
+              string typeName = parmInfo.ParameterType.Name;
+              if (LJC.HasText(typeName))
+              {
+                typeNames.Add(typeName);
+              }
+            }
+          }
+          //retTypeNames = typeNames.ToArray();
+          retTypeNames = [.. typeNames];
+        }
+      }
+      return retTypeNames;
+    }
+    #endregion
+
     #region Properties
 
     // The Assembly reference.
@@ -114,75 +183,6 @@ namespace LJCNetCommon5
       PropertyName = null;
       TypeName = null;
       TypeReference = null;
-    }
-    #endregion
-
-    #region Static Methods
-
-    // Gets parm names from method info.
-    /// <include file='Doc/AssemblyReflect.xml'
-    ///  path='members/ParmNames/*'/>
-    /// <parentGroup>static</parentGroup>
-    public static string[]? ParmNames(MethodInfo methodInfo)
-    {
-      string[] retParamNames = null;
-
-      if (methodInfo != null)
-      {
-        var paramNames = new List<string>();
-        ParameterInfo[] parmInfos;
-
-        parmInfos = methodInfo.GetParameters();
-        if (LJC.HasListItems(parmInfos))
-        {
-          for (int index = 0; index < parmInfos.Length; index++)
-          {
-            ParameterInfo parmInfo = parmInfos[index];
-            string parmName = parmInfo.Name;
-            if (LJC.HasText(parmName))
-            {
-              paramNames.Add(parmName);
-            }
-          }
-          //retParamNames = paramNames.ToArray();
-          retParamNames = [.. paramNames];
-        }
-      }
-      return retParamNames;
-    }
-
-    // Gets parm method type names with parm names.
-    /// <include file='Doc/AssemblyReflect.xml'
-    ///  path='members/ParmTypeNames/*'/>
-    /// <parentGroup>static</parentGroup>
-    public static string[]? ParmTypeNames(MethodInfo methodInfo)
-    {
-      string[] retTypeNames = null;
-
-      if (methodInfo != null)
-      {
-        var typeNames = new List<string>();
-        ParameterInfo[] parmInfos;
-        parmInfos = methodInfo.GetParameters();
-        if (LJC.HasListItems(parmInfos))
-        {
-          for (int index = 0; index < parmInfos.Length; index++)
-          {
-            ParameterInfo parmInfo = parmInfos[index];
-            if (parmInfo != null)
-            {
-              string typeName = parmInfo.ParameterType.Name;
-              if (LJC.HasText(typeName))
-              {
-                typeNames.Add(typeName);
-              }
-            }
-          }
-          //retTypeNames = typeNames.ToArray();
-          retTypeNames = [.. typeNames];
-        }
-      }
-      return retTypeNames;
     }
     #endregion
 
@@ -373,7 +373,8 @@ namespace LJCNetCommon5
           | BindingFlags.Static | BindingFlags.DeclaredOnly;
 
         if (null == parameterNames
-          || (parameterNames != null && 0 == parameterNames.Length))
+          || (parameterNames != null
+          && 0 == parameterNames.Length))
         {
           // Get constructor with no parameters.
           Type[] types = [];
@@ -515,13 +516,7 @@ namespace LJCNetCommon5
       MethodName = methodName;
       if (MethodName.Contains('`'))
       {
-        //var startIndex = 0;
-        //MethodName = NetString.GetStringWithDelimiters(MethodName
-        //  , MethodName[0].ToString(), ref startIndex, "`");
-        var parser = new LJCTextParser()
-        {
-          StartIndex = 0
-        };
+        var parser = new LJCTextParser();
         MethodName = parser.StringWithDelimiters(MethodName, MethodName[0].ToString(), "`");
         //MethodName = MethodName?.Substring(0, MethodName.Length - 1);
         MethodName = MethodName?[..^1];
@@ -1128,7 +1123,58 @@ namespace LJCNetCommon5
 
     #region Check Type Methods
 
-    // Indicates if the Method is not a property getter or setter.
+    // Indicates if the Type is a common type.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/IsNotCommonClassification/*'/>
+    /// <parentGroup>check</parentGroup>
+    private static bool IsCommonClassification(Type type)
+    {
+      bool retValue = false;
+
+      if (type.Name == "Object"
+        || type.Name == "Enum")
+      {
+        retValue = true;
+      }
+      return retValue;
+    }
+
+    // Indicates if the Interface is a common type.
+    /// <include file='Doc/AssemblyReflect.xml'
+    ///  path='members/IsNotCommonInterface/*'/>
+    /// <parentGroup>check</parentGroup>
+    private static bool IsCommonInterface(Type type)
+    {
+      bool retValue = false;
+
+      if (type != null)
+      {
+        if (type.FullName!.StartsWith("System.ComponentModel")
+          || type.FullName.StartsWith("System.ServiceModel")
+          || type.FullName.StartsWith("System.Windows.Forms"))
+        {
+          retValue = true;
+        }
+
+        if (!retValue)
+        {
+          if (type.Name.StartsWith("ICloneable")
+            || type.Name.StartsWith("ICollection")
+            || type.Name.StartsWith("IConvertible")
+            || type.Name.StartsWith("IDisposable")
+            || type.Name.StartsWith("IFormattable")
+            || type.Name.StartsWith("IEnumerable")
+            || type.Name.StartsWith("IList")
+            || type.Name.StartsWith("IReadOnly"))
+          {
+            retValue = true;
+          }
+        }
+      }
+      return retValue;
+    }
+
+    // Indicates if the Method is a property getter or setter.
     /// <include file='Doc/AssemblyReflect.xml'
     ///  path='members/IsNotProperty/*'/>
     /// <parentGroup>check</parentGroup>
@@ -1183,57 +1229,6 @@ namespace LJCNetCommon5
         if (ConstructorInfo != null)
         {
           if (ConstructorInfo.IsPublic)
-          {
-            retValue = true;
-          }
-        }
-      }
-      return retValue;
-    }
-
-    // Indicates if the Type is a common type.
-    /// <include file='Doc/AssemblyReflect.xml'
-    ///  path='members/IsNotCommonClassification/*'/>
-    /// <parentGroup>check</parentGroup>
-    private static bool IsCommonClassification(Type type)
-    {
-      bool retValue = false;
-
-      if (type.Name == "Object"
-        || type.Name == "Enum")
-      {
-        retValue = true;
-      }
-      return retValue;
-    }
-
-    // Indicates if the Interface is a common type.
-    /// <include file='Doc/AssemblyReflect.xml'
-    ///  path='members/IsNotCommonInterface/*'/>
-    /// <parentGroup>check</parentGroup>
-    private static bool IsCommonInterface(Type type)
-    {
-      bool retValue = false;
-
-      if (type != null)
-      {
-        if (type.FullName!.StartsWith("System.ComponentModel")
-          || type.FullName.StartsWith("System.ServiceModel")
-          || type.FullName.StartsWith("System.Windows.Forms"))
-        {
-          retValue = true;
-        }
-
-        if (!retValue)
-        {
-          if (type.Name.StartsWith("ICloneable")
-            || type.Name.StartsWith("ICollection")
-            || type.Name.StartsWith("IConvertible")
-            || type.Name.StartsWith("IDisposable")
-            || type.Name.StartsWith("IFormattable")
-            || type.Name.StartsWith("IEnumerable")
-            || type.Name.StartsWith("IList")
-            || type.Name.StartsWith("IReadOnly"))
           {
             retValue = true;
           }

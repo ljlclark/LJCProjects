@@ -47,6 +47,7 @@ namespace LJCNetCommon5
 
     #region Constructors
 
+    // Initializes an object instance.
     /// <include file='Doc/ArgError.xml'
     ///  path='members/Constructor/*'/>
     public LJCArgError()
@@ -55,7 +56,7 @@ namespace LJCNetCommon5
       mMessage = "";
     }
 
-    // Initializes an object instance.
+    // Initializes an object instance with the supplied values.
     /// <include file='Doc/ArgError.xml'
     ///  path='members/ParamConstructor/*'/>
     /// <parentGroup>constructors</parentGroup>
@@ -145,6 +146,7 @@ namespace LJCNetCommon5
       Add(message);
     }
 
+    // 
     /// <include file='Doc/ArgError.xml'
     ///  path='members/ThrowError/*'/>
     /// <parentGroup>methods</parentGroup>
