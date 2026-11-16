@@ -331,7 +331,7 @@ namespace TestHTMLBuilder
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
 
-      var attribs = new Attributes()
+      var attribs = new LJCAttributes()
       {
         { "class", "Selector" },
       };
@@ -579,7 +579,7 @@ namespace TestHTMLBuilder
     }
 
     private static string CustomBegin(string name, TextState textState
-      , Attributes attribs = null, bool addIndent = true
+      , LJCAttributes attribs = null, bool addIndent = true
       , bool childIndent = true)
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -972,7 +972,7 @@ namespace TestHTMLBuilder
       var id = "id";
 
       // Gets common element attributes.
-      Attributes attribs = hb.Attribs(className, id);
+      LJCAttributes attribs = hb.Attribs(className, id);
 
       var result = hb.GetAttribs(attribs, textState);
       var compare = " id=\"id\" class=\"className\"";

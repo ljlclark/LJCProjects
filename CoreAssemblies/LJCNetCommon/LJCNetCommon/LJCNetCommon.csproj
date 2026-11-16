@@ -46,7 +46,7 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="LJCArgError.cs" />
     <Compile Include="LJCAttribute.cs" />
-    <Compile Include="Attributes.cs" />
+    <Compile Include="LJCAttributes.cs" />
     <Compile Include="CodeTokens\CodeTokenizer.cs" />
     <Compile Include="CodeTokens\CommonDataTypes.cs" />
     <Compile Include="CodeTokens\CommonModifiers.cs" />
@@ -109,7 +109,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Doc\LJCAttribute.xml" />
-    <Content Include="Doc\Attributes.xml" />
+    <Content Include="Doc\LJCAttributes.xml" />
     <Content Include="Doc\HTMLBuilder.xml" />
     <Content Include="Doc\KeyItem.xml" />
     <Content Include="Doc\KeyItems.xml" />

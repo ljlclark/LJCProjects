@@ -183,7 +183,7 @@ namespace LJCNetCommon
     // Gets the attributes text.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetAttribs/*'/>
-    public string GetAttribs(Attributes attribs, TextState textState)
+    public string GetAttribs(LJCAttributes attribs, TextState textState)
     {
       string retText = "";
 
@@ -367,7 +367,7 @@ namespace LJCNetCommon
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/Begin/*'/>
     public string Begin(string name, TextState textState
-      , Attributes attribs = null, bool addIndent = true
+      , LJCAttributes attribs = null, bool addIndent = true
       , bool childIndent = true)
     {
       var createText = GetBegin(name, textState, attribs, addIndent
@@ -387,7 +387,7 @@ namespace LJCNetCommon
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/Create/*'/>
     public string Create(string name, string text, TextState textState
-      , Attributes attribs = null, bool addIndent = true
+      , LJCAttributes attribs = null, bool addIndent = true
       , bool childIndent = true, bool isEmpty = false, bool close = true)
     {
       // Adds the indent string.
@@ -427,7 +427,7 @@ namespace LJCNetCommon
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetBegin/*'/>
     public string GetBegin(string name, TextState textState
-      , Attributes attribs = null, bool addIndent = true
+      , LJCAttributes attribs = null, bool addIndent = true
       , bool childIndent = true)
     {
       var hb = new HTMLBuilder(textState);
@@ -460,7 +460,7 @@ namespace LJCNetCommon
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetCreate/*'/>
     public string GetCreate(string name, string text, TextState textState
-      , Attributes attribs = null, bool addIndent = true
+      , LJCAttributes attribs = null, bool addIndent = true
       , bool childIndent = true, bool isEmpty = false, bool close = true)
     {
       textState.ChildIndentCount = 0; // ?
@@ -589,7 +589,7 @@ namespace LJCNetCommon
     {
       var hb = new HTMLBuilder(textState);
 
-      var attribs = new Attributes()
+      var attribs = new LJCAttributes()
       {
         { "rel", "stylesheet" },
         { "type", "text/css" },
@@ -610,7 +610,7 @@ namespace LJCNetCommon
     {
       var hb = new HTMLBuilder(textState);
 
-      var attribs = new Attributes()
+      var attribs = new LJCAttributes()
       {
         { "name", name },
         { "content", content },
@@ -632,7 +632,7 @@ namespace LJCNetCommon
     {
       var hb = new HTMLBuilder(textState);
 
-      var attribs = new Attributes()
+      var attribs = new LJCAttributes()
       {
         { "charset", charSet }
       };
@@ -663,7 +663,7 @@ namespace LJCNetCommon
     {
       var hb = new HTMLBuilder(textState);
 
-      var attribs = new Attributes()
+      var attribs = new LJCAttributes()
       {
         { "src", fileName },
       };
@@ -765,9 +765,9 @@ namespace LJCNetCommon
     // Gets common element attributes.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/Attribs/*'/>
-    public Attributes Attribs(string className = null, string id = null)
+    public LJCAttributes Attribs(string className = null, string id = null)
     {
-      var retAttribs = new Attributes();
+      var retAttribs = new LJCAttributes();
       if (LJC.HasText(id))
       {
         retAttribs.Add("id", id);
@@ -782,9 +782,9 @@ namespace LJCNetCommon
     // Creates the HTML element attributes.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/StartAttribs/*'/>
-    public Attributes StartAttribs()
+    public LJCAttributes StartAttribs()
     {
-      var retAttribs = new Attributes()
+      var retAttribs = new LJCAttributes()
       {
         { "lang", "en" },
         //{ "xmlns", "http://www.w3.org/1999/xhtml" },
@@ -795,9 +795,9 @@ namespace LJCNetCommon
     // Creates the XML start attributes.
     /// <include file='Doc/XMLBuilder.xml'
     ///  path='items/StartAttributes/*'/>
-    public Attributes StartXMLAttribs()
+    public LJCAttributes StartXMLAttribs()
     {
-      var retAttribs = new Attributes
+      var retAttribs = new LJCAttributes
       {
         { "xmlns:xsd", "http://www.w3.org/2001/XMLSchema" },
         { "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance" }
@@ -808,7 +808,7 @@ namespace LJCNetCommon
     // Gets common table attributes.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/TableAttribs/*'/>
-    public Attributes TableAttribs(int border = 1, int cellSpacing = 0
+    public LJCAttributes TableAttribs(int border = 1, int cellSpacing = 0
       , int cellPadding = 2, string className = null, string id = null)
     {
       var retAttribs = Attribs(className, id);
