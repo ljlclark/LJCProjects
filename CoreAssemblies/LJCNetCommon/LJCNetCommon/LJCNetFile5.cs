@@ -1,53 +1,48 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// NetFile.cs
-using System;
+// LJCNetFile.cs
 using System.Diagnostics;
-using System.IO;
 
-namespace LJCNetCommon
+namespace LJCNetCommon5
 {
   // Contains common file related static functions. (R)
   /// <include file='Doc/NetFile.xml'
-  ///  path='items/NetFile/*'/>
-  public class NetFile
+  ///  path='members/LJCNetFile/*'/>
+  public class LJCNetFile
   {
-    #region Public Functions
+    #region Static Methods
 
-    // Creates a Folder Path if it does not already exist. (E)
+    // Creates a Folder Path if it does not already exist.
     /// <include file='Doc/NetFile.xml'
-    ///  path='items/CreateFolder/*'/>
+    ///  path='members/CreateFolder/*'/>
     public static void CreateFolder(string path)
     {
-      if (path.Contains(@"\")
-        || path.Contains("/"))
+      if (LJC.HasText(path))
       {
-        path = Path.GetDirectoryName(path);
-      }
-      // Next Statement - Change - 1/22
-      //if (-1 == path.IndexOf(".")
-      //  && !Directory.Exists(path))
-      if (!Directory.Exists(path))
-      {
-        Directory.CreateDirectory(path);
+        var makePath = Path.GetDirectoryName(path);
+        if (LJC.HasText(makePath)
+          && !Directory.Exists(makePath))
+        {
+          Directory.CreateDirectory(makePath);
+        }
       }
     }
 
     // Returns the relative path.
     /// <include file='Doc/NetFile.xml'
-    ///  path='items/GetRelativePath/*'/>
+    ///  path='members/GetRelativePath/*'/>
     public static string GetRelativePath(string fromPath, string toFileSpec)
     {
       string retValue;
 
-      // Folders must end in a slash
+      // Folders must end with a slash
       if (!fromPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
       {
         fromPath += Path.DirectorySeparatorChar;
       }
 
-      Uri fromUri = new Uri(fromPath);
-      Uri toUri = new Uri(toFileSpec);
+      Uri fromUri = new(fromPath);
+      Uri toUri = new(toFileSpec);
       Uri relativeUri = fromUri.MakeRelativeUri(toUri);
       retValue = Uri.UnescapeDataString(relativeUri.ToString());
       retValue = retValue.Replace('/', Path.DirectorySeparatorChar);
@@ -56,7 +51,7 @@ namespace LJCNetCommon
 
     // Get all text lines from a file.
     /// <include file='Doc/NetFile.xml'
-    ///  path='items/ReadAllLines/*'/>
+    ///  path='members/ReadAllLines/*'/>
     public static string[] ReadAllLines(string fileSpec)
     {
       string errorText;
@@ -88,15 +83,12 @@ namespace LJCNetCommon
     }
 
     // Executes an external program.
-    /// <summary>
-    /// Executes an external program.
-    /// </summary>
-    /// <param name="programFileSpec">The program name.</param>
-    /// <param name="arguments">The program arguments.</param>
-    public static string ShellProgram(string programFileSpec
-      , string arguments = null)
+    /// <include file='Doc/NetFile.xml'
+    ///   path='members/ShellProgram/*'/>
+    public static string? ShellProgram(string programFileSpec
+      , string? arguments = null)
     {
-      string retValue = null;
+      string? retValue = null;
 
       bool success = true;
       if (LJC.HasText(programFileSpec))
@@ -120,7 +112,7 @@ namespace LJCNetCommon
 
         // If no programFileSpec, then arguments must contain only a
         // file specification.
-        if (null == programFileSpec)
+        if (!LJC.HasText(programFileSpec))
         {
           if (!File.Exists(arguments))
           {
@@ -143,15 +135,18 @@ namespace LJCNetCommon
 
       if (success)
       {
-        Process.Start(startInfo);
+        if (startInfo != null)
+        {
+          Process.Start(startInfo);
+        }
       }
       return retValue;
     }
 
     // Writes a string format to the Log file with the current date and time.
     /// <include file='Doc/NetFile.xml'
-    ///  path='items/WriteLog/*'/>
-    public static void WriteLog(string logFileSpec, string formatText = null
+    ///   path='members/WriteLog/*'/>
+    public static void WriteLog(string logFileSpec, string? formatText = null
       , params object[] parameters)
     {
       string message;
@@ -171,9 +166,9 @@ namespace LJCNetCommon
 
     // Writes string format + cr/lf to the Log file with current date and time.
     /// <include file='Doc/NetFile.xml'
-    ///  path='items/WriteLogLine/*'/>
-    public static void WriteLogLine(string logFileSpec, string formatText = null
-      , params object[] parameters)
+    ///   path='members/WriteLogLine/*'/>
+    public static void WriteLogLine(string logFileSpec
+      , string? formatText = null, params object[] parameters)
     {
       if (LJC.HasText(formatText))
       {

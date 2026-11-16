@@ -69,7 +69,7 @@
     <Compile Include="LJCCSParser.cs" />
     <Compile Include="LJCParser.cs" />
     <Compile Include="LJC.cs" />
-    <Compile Include="NetFile.cs" />
+    <Compile Include="LJCNetFile.cs" />
     <Compile Include="LJCNetString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LJCReflect.cs" />
@@ -124,8 +124,8 @@
     <Content Include="Doc\LJCReflect.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Doc\NetFile.xml" />
-    <Content Include="Doc\NetString.xml" />
+    <Content Include="Doc\LJCNetFile.xml" />
+    <Content Include="Doc\LJCNetString.xml" />
     <Content Include="Doc\ProjectNetCommon.xml">
       <SubType>Designer</SubType>
     </Content>

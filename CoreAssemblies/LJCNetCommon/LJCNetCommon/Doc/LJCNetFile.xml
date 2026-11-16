@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- NetFile.xml -->
-<items>
+<members>
   <NetFile>
     <summary>
       Contains common file related static functions. (RE)
@@ -66,4 +66,4 @@
     <param name="formatText">The Format text.</param>
     <param name="parameters">The Format parameters.</param>
   </WriteLogLine>
-</items>
+</members>
