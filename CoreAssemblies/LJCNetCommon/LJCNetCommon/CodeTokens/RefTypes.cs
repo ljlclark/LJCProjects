@@ -15,7 +15,8 @@ namespace LJCNetCommon
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCDeserialize/*'/>
     public static List<string> Deserialize(string fileSpec = null)
     {
       List<string> retValue;
@@ -47,7 +48,8 @@ namespace LJCNetCommon
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems1/*'/>
     public static bool HasItems(RefTypes collection)
     {
       bool retValue = false;
@@ -63,7 +65,8 @@ namespace LJCNetCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
     public RefTypes()
     {
       Items = new List<string>();
@@ -71,7 +74,8 @@ namespace LJCNetCommon
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/CopyConstructor/*'/>
     public RefTypes(RefTypes items)
     {
       Items = new List<string>();
@@ -88,7 +92,8 @@ namespace LJCNetCommon
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include path='items/Add1/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/RefTypes.xml'
+    ///  path='members/Add1/*'/>
     public void Add(string item)
     {
       if (LJC.HasText(item))
@@ -98,7 +103,8 @@ namespace LJCNetCommon
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
     public RefTypes Clone()
     {
       var retValue = new RefTypes();
@@ -110,7 +116,8 @@ namespace LJCNetCommon
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -123,7 +130,8 @@ namespace LJCNetCommon
     }
 
     // Serializes the collection
-    /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='members/LJCSerialize/*'/>
     public void Serialize(string fileSpec = null)
     {
       if (!LJC.HasText(fileSpec))
@@ -137,14 +145,17 @@ namespace LJCNetCommon
 
     #region IEnumerable Methods and Properties
 
-    /// <summary>The Collection count.</summary>
+    // The Collection count.
+    /// <include file='Doc/RefTypes.xml'
+    ///  path='members/Count/*'/>
     public int Count
     {
       get { return Items.Count; }
     }
 
     // Gets the Collection Enumerator.
-    /// <include path='items/GetEnumerator/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/RefTypes.xml'
+    ///  path='members/GetEnumerator/*'/>
     public IEnumerator<string> GetEnumerator()
     {
       return ((IEnumerable<string>)Items).GetEnumerator();
@@ -156,12 +167,15 @@ namespace LJCNetCommon
       return ((IEnumerable<string>)Items).GetEnumerator();
     }
 
-    /// <summary>The KeyItem items.</summary>
+    // The Collection items.
+    /// <include file='Doc/RefTypes.xml'
+    ///  path='members/Items/*'/>
     [XmlArray(RootName)]
     public List<string> Items { get; set; }
 
     // Gets the item by index value.
-    /// <include path='items/Indexer/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/RefTypes.xml'
+    ///  path='members/Indexer/*'/>
     public string this[int index]
     {
       get
@@ -180,7 +194,8 @@ namespace LJCNetCommon
     #region Sort and Search Methods
 
     // Retrieve the collection element.
-    /// <include path='items/SearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/SearchName/*'/>
     public string SearchName(string name)
     {
       string retValue = null;
@@ -195,7 +210,8 @@ namespace LJCNetCommon
     }
 
     // Sort on Name.
-    /// <include path='items/SortName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/SortName/*'/>
     public void SortName()
     {
       if (Count != mPrevCount)
@@ -208,7 +224,9 @@ namespace LJCNetCommon
 
     #region Properties
 
-    /// <summary>Gets the Default File Name.</summary>
+    // Gets the Default File Name.
+    /// <include file='Doc/RefTypes.xml'
+    ///  path='members/DefaultFileName/*'/>
     public static string DefaultFileName
     {
       get { return @"Keywords\RefTypes.xml"; }

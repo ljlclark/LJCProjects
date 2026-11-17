@@ -10,15 +10,123 @@ namespace LJCNetCommon
   ///  path='members/LJCParser/*'/>
   public class LJCParser
   {
+    #region Static Methods
+
+    // Changes quotes between double and single quotes.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/ChangeQuote/*'/>
+    public static bool ChangeQuote(string text, out string changeValue)
+    {
+      bool retValue = false;
+
+      changeValue = text;
+
+      while (true)
+      {
+        if (!LJC.HasText(text))
+        {
+          break;
+        }
+
+        // ToDo?: Handle contained quotes.
+        // If double quote, change to single quote.
+        if (text.Contains("\""))
+        {
+          retValue = true;
+          changeValue = text.Replace("\"", "'");
+          break;
+        }
+
+        // If quote was not changed.
+        // and single quote, change to double quote.
+        if (text.Contains("'"))
+        {
+          retValue = true;
+          changeValue = text.Replace("'", "\"");
+        }
+        break;
+      }
+      return retValue;
+    }
+
+    // Gets the tag name for the end tag.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/ShortBeginTagToName/*'/>
+    public static string ShortBeginTagToName(string shortBeginTag)
+    {
+      string retName = null;
+
+      if (LJC.HasText(shortBeginTag))
+      {
+        retName = shortBeginTag.Trim();
+        retName = retName.Substring(1, retName.Length - 1);
+      }
+      return retName;
+    }
+
+    // Gets the end tag for the tag name.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/NameToShortBeginTag/*'/>
+    public static string NameToShortBeginTag(string tagName)
+    {
+      string retTag = null;
+
+      if (tagName != null)
+      {
+        retTag = $"<{tagName}";
+      }
+      return retTag;
+    }
+
+    // Gets the tag name for the end tag.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/EndTagToName/*'/>
+    public static string EndTagToName(string endTag)
+    {
+      string retName = null;
+
+      if (LJC.HasText(endTag))
+      {
+        retName = endTag.Trim();
+        if ('/' == retName[2])
+        {
+          retName = endTag.Trim();
+          retName = retName.Substring(2, retName.Length - 3);
+        }
+      }
+      return retName;
+    }
+
+    // Gets the end tag for the tag name.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/NameToEndTag/*'/>
+    public static string NameToEndTag(string tagName)
+    {
+      string retTag = null;
+
+      if (tagName != null)
+      {
+        retTag = $"</{tagName}>";
+      }
+      return retTag;
+    }
+    #endregion
+
     #region Properties
 
-    /// <summary>The delimited string begin index.</summary>
+    // The delimited string begin index.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/BeginIndex/*'/>
     public int BeginIndex { get; private set; }
 
-    /// <summary>The delimited string end index.</summary>
+    // The delimited string end index.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/EndIndex/*'/>
     public int EndIndex { get; private set; }
 
-    /// <summary>The parsing start index.</summary>
+    // The parsing start index.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/StartIndex/*'/>
     public int StartIndex { get; set; }
 
     // Gets or sets the valid tag names.
@@ -26,7 +134,7 @@ namespace LJCNetCommon
     ///  path='members/ValidTagNames/*'/>
     public string[] ValidTagNames
     {
-      get { return _ValidTagNames; }
+      get => _ValidTagNames;
       set
       {
         if (LJC.HasListItems(value))
@@ -49,40 +157,11 @@ namespace LJCNetCommon
       BeginIndex = -1;
       EndIndex = -1;
       StartIndex = 0;
+      _ValidTagNames = new string[0];
     }
     #endregion
 
     #region Methods
-
-    // Changes quotes between double and single quotes.
-    /// <include file='Doc/LJCParser.xml'
-    ///  path='members/ChangeQuote/*'/>
-    public bool ChangeQuote(string text, out string changeValue)
-    {
-      bool retValue = false;
-
-      changeValue = text;
-
-      // ToDo?: Handle contained quotes.
-      // If double quote, change to single quote.
-      if (text.Contains("\""))
-      {
-        retValue = true;
-        changeValue = text.Replace("\"", "'");
-      }
-
-      // If quote was not changed.
-      if (!retValue)
-      {
-        // If single quote, change to double quote.
-        if (text.Contains("'"))
-        {
-          retValue = true;
-          changeValue = text.Replace("'", "\"");
-        }
-      }
-      return retValue;
-    }
 
     // Gets a delimited string.
     /// <include file='Doc/LJCParser.xml'
@@ -124,7 +203,6 @@ namespace LJCNetCommon
 
         var beginLength = 0;
         BeginIndex = 0;
-        //if (NetString.HasValue(beginDelimiter))
         if (beginDelimiter != null)
         {
           var index = text.IndexOf(beginDelimiter, StartIndex);
@@ -137,7 +215,6 @@ namespace LJCNetCommon
 
         int endLength = 0;
         EndIndex = text.Length;
-        //if (NetString.HasValue(endDelimiter))
         if (endDelimiter != null)
         {
           var index = text.IndexOf(endDelimiter, BeginIndex);
@@ -188,7 +265,8 @@ namespace LJCNetCommon
       if (name != null
         && !findValue.Contains("/"))
       {
-        name = StringWithDelimiters(retValue, retValue[0].ToString(), " ");
+        //name = StringWithDelimiters(retValue, retValue[0].ToString(), " ");
+        name = StringWithDelimiters(name, name[0].ToString(), " ");
         if (LJC.HasText(name))
         {
           name = name.Substring(0, name.Length - 1);
@@ -199,7 +277,10 @@ namespace LJCNetCommon
       {
         name = $"/{name}";
       }
-      tagName = name;
+      if (name != null)
+      {
+        tagName = name;
+      }
       return retValue;
     }
 
@@ -232,7 +313,7 @@ namespace LJCNetCommon
       string tag;
       do
       {
-        string tagName = null;
+        string tagName = "";
         tag = FindTag(retValue, ref tagName);
         retValue = RemoveSection(retValue, BeginIndex, EndIndex);
       } while (tag != null);
@@ -282,10 +363,10 @@ namespace LJCNetCommon
         != null)
       {
         // Include Delimiters
-        int endLength = endDelimiter.Length;
-        if (!LJC.HasText(endDelimiter))
+        int endLength = 0;
+        if (LJC.HasText(endDelimiter))
         {
-          endLength = 0;
+          endLength = endDelimiter.Length;
         }
         int textLength = EndIndex - BeginIndex + endLength + 1;
         retValue = text.Substring(BeginIndex - 1, textLength);
@@ -598,71 +679,6 @@ namespace LJCNetCommon
         retName = endName;
       }
       return retName;
-    }
-    #endregion
-
-    #region Name and Tag Methods
-
-    // Gets the tag name for the end tag.
-    /// <include file='Doc/LJCParser.xml'
-    ///  path='members/ShortBeginTagToName/*'/>
-    public string ShortBeginTagToName(string shortBeginTag)
-    {
-      string retName = null;
-
-      if (LJC.HasText(shortBeginTag))
-      {
-        retName = shortBeginTag.Trim();
-        retName = retName.Substring(1, retName.Length - 1);
-      }
-      return retName;
-    }
-
-    // Gets the end tag for the tag name.
-    /// <include file='Doc/LJCParser.xml'
-    ///  path='members/NameToShortBeginTag/*'/>
-    public string NameToShortBeginTag(string tagName)
-    {
-      string retTag = null;
-
-      if (tagName != null)
-      {
-        retTag = $"<{tagName}";
-      }
-      return retTag;
-    }
-
-    // Gets the tag name for the end tag.
-    /// <include file='Doc/LJCParser.xml'
-    ///  path='members/EndTagToName/*'/>
-    public string EndTagToName(string endTag)
-    {
-      string retName = null;
-
-      if (LJC.HasText(endTag))
-      {
-        retName = endTag.Trim();
-        if ('/' == retName[2])
-        {
-          retName = endTag.Trim();
-          retName = retName.Substring(2, retName.Length - 3);
-        }
-      }
-      return retName;
-    }
-
-    // Gets the end tag for the tag name.
-    /// <include file='Doc/LJCParser.xml'
-    ///  path='members/NameToEndTag/*'/>
-    public string NameToEndTag(string tagName)
-    {
-      string retTag = null;
-
-      if (tagName != null)
-      {
-        retTag = $"</{tagName}>";
-      }
-      return retTag;
     }
 
     // Checks for a valid comment tag name.

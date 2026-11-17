@@ -24,7 +24,7 @@ namespace LJCNetCommon
       var bindingFlags = BindingFlags.Instance
         | BindingFlags.Public;
       PropertyInfos = mType.GetProperties(bindingFlags);
-      mPropertyDelegates = new PropertyDelegates();
+      mPropertyDelegates = new LJCPropertyDelegates();
     }
 
     // Sets the source object and type values.
@@ -474,7 +474,7 @@ namespace LJCNetCommon
     // Class Data.
     private object mSource;
     private readonly Type mType;
-    private readonly PropertyDelegates mPropertyDelegates;
+    private readonly LJCPropertyDelegates mPropertyDelegates;
     #endregion
   }
 }

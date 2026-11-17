@@ -1,7 +1,6 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // DataTypes.cs
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +14,8 @@ namespace LJCNetCommon
     #region Static Functions
 
     // Deserializes from the specified XML file.
-    /// <include path='items/LJCDeserialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCDeserialize/*'/>
     public static List<string> Deserialize(string fileSpec = null)
     {
       List<string> retValue;
@@ -54,7 +54,8 @@ namespace LJCNetCommon
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems1/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/HasItems1/*'/>
     public static bool HasItems(DataTypes collection)
     {
       bool retValue = false;
@@ -70,7 +71,8 @@ namespace LJCNetCommon
     #region Constructors
 
     // Initializes an object instance.
-    /// <include path='items/DefaultConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Constructor/*'/>
     public DataTypes()
     {
       Items = new List<string>();
@@ -78,7 +80,8 @@ namespace LJCNetCommon
     }
 
     // The Copy constructor.
-    /// <include path='items/CopyConstructor/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/CopyConstructor/*'/>
     public DataTypes(DataTypes items)
     {
       Items = new List<string>();
@@ -95,7 +98,8 @@ namespace LJCNetCommon
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include path='items/Add1/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/DataTypes.xml'
+    ///  path='items/Add1/*'/>
     public void Add(string item)
     {
       if (LJC.HasText(item))
@@ -105,7 +109,8 @@ namespace LJCNetCommon
     }
 
     // Creates and returns a clone of the object.
-    /// <include path='items/Clone/*' file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='items/Clone/*'/>
     public DataTypes Clone()
     {
       var retValue = new DataTypes();
@@ -117,7 +122,8 @@ namespace LJCNetCommon
     }
 
     // Checks if the collection has items.
-    /// <include path='items/HasItems2/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -130,7 +136,8 @@ namespace LJCNetCommon
     }
 
     // Serializes the collection
-    /// <include path='items/LJCSerialize/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/LJCSerialize/*'/>
     public void Serialize(string fileSpec = null)
     {
       if (!LJC.HasText(fileSpec))
@@ -145,7 +152,8 @@ namespace LJCNetCommon
     #region Search and Sort Methods
 
     // Retrieve the collection element.
-    /// <include path='items/SearchName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/SearchName/*'/>
     public string SearchName(string name)
     {
       string retValue = null;
@@ -160,7 +168,8 @@ namespace LJCNetCommon
     }
 
     // Sort on Name.
-    /// <include path='items/SortName/*' file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'/>
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
+    ///  path='items/SortName/*'/>
     public void SortName()
     {
       if (Count != mPrevCount)
@@ -174,7 +183,8 @@ namespace LJCNetCommon
     #region IEnumerable Methods
 
     // Gets the Collection Enumerator.
-    /// <include path='items/GetEnumerator/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/DataTypes.xml'
+    ///  path='items/GetEnumerator/*'/>
     public IEnumerator<string> GetEnumerator()
     {
       return ((IEnumerable<string>)Items).GetEnumerator();
@@ -189,7 +199,9 @@ namespace LJCNetCommon
 
     #region IEnumerable Properties
 
-    /// <summary>The Collection count.</summary>
+    // The Collection count.
+    /// <include file='Doc/DataTypes.xml'
+    ///  path='members/Count/*'/>
     public int Count
     {
       get { return Items.Count; }
@@ -200,7 +212,8 @@ namespace LJCNetCommon
     public List<string> Items { get; set; }
 
     // Gets the item by index value.
-    /// <include path='items/Indexer/*' file='Doc/KeyItems.xml'/>
+    /// <include file='Doc/DataTypes.xml'
+    ///  path='items/Indexer/*'/>
     public string this[int index]
     {
       get

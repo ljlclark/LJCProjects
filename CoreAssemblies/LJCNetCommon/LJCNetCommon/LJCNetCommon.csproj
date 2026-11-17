@@ -73,13 +73,37 @@
     <Compile Include="LJCNetString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LJCReflect.cs" />
-    <Compile Include="PropertyDelegate.cs" />
-    <Compile Include="PropertyDelegates.cs" />
+    <Compile Include="LJCPropertyDelegate.cs" />
+    <Compile Include="LJCPropertyDelegates.cs" />
     <Compile Include="TestCommon.cs" />
     <Compile Include="TextBuilder.cs" />
     <Compile Include="TextState.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CodeTokens\Doc\RefTypes.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="CodeTokens\Doc\Modifiers.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="CodeTokens\Doc\LibTypes.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="CodeTokens\Doc\Keywords.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="CodeTokens\Doc\DataTypes.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="CodeTokens\Doc\CommonModifiers.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="CodeTokens\Doc\CommonKeywords.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="CodeTokens\Doc\CommonDataTypes.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Doc\AppSettings.xml" />
     <Content Include="Doc\LJCArgError.xml" />
     <Content Include="Doc\CodeTokenizer.xml">
@@ -130,6 +154,7 @@
     <Content Include="Doc\ProjectNetCommon.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Doc\PropertyDelegate.xml" />
     <Content Include="Doc\PropertyDelegates.xml" />
     <Content Include="Doc\TextBuilder.xml" />
     <Content Include="Doc\XMLAttribute.xml" />

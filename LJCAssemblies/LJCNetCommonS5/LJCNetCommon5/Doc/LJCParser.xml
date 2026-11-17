@@ -36,6 +36,8 @@
     <param name="text"></param>
     <param name="beginDelimiter"></param>
     <param name="endDelimiter"></param>
+    <param name="required"></param>
+    <param name="reset"></param>
   </DelimitedString>
   <FindTag>
     <summary>
@@ -76,5 +78,7 @@
     <param name="text"></param>
     <param name="beginDelimiter"></param>
     <param name="endDelimiter"></param>
+    <param name="required"></param>
+    <param name="reset"></param>
   </StringWithDelimiters>
 </members>
