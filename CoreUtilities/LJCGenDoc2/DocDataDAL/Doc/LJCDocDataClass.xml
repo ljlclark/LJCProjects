@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCDocDataClass.xml -->
+<members>
+  <!-- Class -->
+  <LJCDocDataClass>
+    <summary>
+      Represents a DocData class.
+    </summary>
+  </LJCDocDataClass>
+  
+  <!-- Properties -->
+  <Code>
+    <summary>
+      Gets or sets the example code.
+    </summary>
+  </Code>
+  <Groups>
+    <summary>
+      Gets or sets the Groups collection.
+    </summary>
+  </Groups>
+  <Methods>
+    <summary>
+      Gets or sets the Methods collection.
+    </summary>
+  </Methods>
+  <Name>
+    <summary>
+      Gets or sets the class name.
+    </summary>
+  </Name>
+  <Properties>
+    <summary>
+      Gets or sets the Properties collection.
+    </summary>
+  </Properties>
+  <Remarks>
+    <summary>
+      Gets or sets the remarks.
+    </summary>
+  </Remarks>
+  <Summary>
+    <summary>
+      Gets or sets the summary text.
+    </summary>
+  </Summary>
+  <Syntax>
+    <summary>
+      Gets or sets the syntax.
+    </summary>
+  </Syntax>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ParamConstructor>
+    <summary>
+      Initialize an object instance with the supplied values.
+    </summary>
+  </ParamConstructor>
+</members>

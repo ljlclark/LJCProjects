@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCDocDataFile.xml -->
+<members>
+  <!-- Class -->
+  <LJCDocDataFile>
+    <summary>
+      Represents a DocData Lib file.
+    </summary>
+  </LJCDocDataFile>
+  
+  <!-- Properties -->
+  <Classes>
+    <summary>
+      Gets or sets the Classes collection.
+    </summary>
+  </Classes>
+  <Name>
+    <summary>
+      Gets or sets the file name.
+    </summary>
+  </Name>
+  <Remarks>
+    <summary>
+      Gets or sets the remarks.
+    </summary>
+  </Remarks>
+  <Summary>
+    <summary>
+      Gets or sets the summary text.
+    </summary>
+  </Summary>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ParamConstructor>
+    <summary>
+      Initialize an object instance with the supplied values.
+    </summary>
+  </ParamConstructor>
+</members>

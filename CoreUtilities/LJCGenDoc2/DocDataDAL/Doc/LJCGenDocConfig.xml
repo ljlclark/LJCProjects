@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCGenDocConfig.xml -->
+<members>
+  <!-- Class -->
+  <LJCGenDocConfig>
+    <summary>
+      Represents a GenCodeDoc configuration.
+    </summary>
+  </LJCGenDocConfig>
+  
+  <!-- Properties -->
+  <DocDataXMLPath>
+    <summary>
+      Gets or sets the DocData XML target path.
+    </summary>
+  </DocDataXMLPath>
+  <GenDataXMLPath>
+    <summary>
+      Gets or sets the GenData XML target path.
+    </summary>
+  </GenDataXMLPath>
+  <OutputPath>
+    <summary>
+      Gets or sets the output target path.
+    </summary>
+  </OutputPath>
+  <WriteDocDataXML>
+    <summary>
+      Gets or sets a value indicating if the DocData XML is written to a file.
+    </summary>
+  </WriteDocDataXML>
+  <WriteGenDataXML>
+    <summary>
+      Gets or sets a value indicating if the GenData XML is written to a file.
+    </summary>
+  </WriteGenDataXML>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  
+  <!-- Public Methods -->
+  <GetParentPathPrefix>
+    <summary>
+      // Returns the relative path prefix.
+    </summary>
+    <param name="path"></param>
+  </GetParentPathPrefix>
+  <SetProperty>
+    <summary>
+      Sets a configuration property from a template line.
+    </summary>
+    <param name="line">The source code line.</param>
+  </SetProperty>
+</members>

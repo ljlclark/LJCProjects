@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- LJCDocDataParam.xml -->
+<members>
+  <!-- Class -->
+  <LJCDocDataParam>
+    <summary>
+      Represents a DocData parameter.
+    </summary>
+  </LJCDocDataParam>
+  
+  <!-- Properties -->
+  <Name>
+    <summary>
+      Gets or sets the class name.
+    </summary>
+  </Name>
+  <Summary>
+    <summary>
+      Gets or sets the summary text.
+    </summary>
+  </Summary>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ParamConstructor>
+    <summary>
+      Initialize an object instance with the supplied values.
+    </summary>
+  </ParamConstructor>
+  
+  <!-- Methods -->
+  <GetParam>
+    <summary>
+      Sets the parameter values from a code line.
+    </summary>
+  </GetParam>
+</members>
