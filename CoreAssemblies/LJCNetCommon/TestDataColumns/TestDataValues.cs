@@ -429,7 +429,7 @@ namespace TestData
       };
 
       // Test Method
-      var value = dataValues.LJCGetBoolean("TestValue");
+      var value = dataValues.LJCBoolean("TestValue");
 
       // Check Result
       var result = value.ToString();
@@ -450,7 +450,7 @@ namespace TestData
       };
 
       // Test Method
-      var value = dataValues.LJCGetByte("TestValue");
+      var value = dataValues.LJCByte("TestValue");
 
       // Check Result
       var ch = (char)value;
@@ -472,7 +472,7 @@ namespace TestData
       };
 
       // Test Method
-      var value = dataValues.LJCGetChar("TestValue");
+      var value = dataValues.LJCChar("TestValue");
 
       var result = $"{value}";
       var compare = "C";
@@ -492,7 +492,7 @@ namespace TestData
       };
 
       // Test Method
-      var value = dataValues.LJCGetDbDateTime("TestValue");
+      var value = dataValues.LJCDbDateTime("TestValue");
 
       var result = value.ToShortDateString();
       var compare = "1/1/2026";
@@ -512,7 +512,7 @@ namespace TestData
       };
 
       // Test Method
-      var value = dataValues.LJCGetDecimal("TestValue");
+      var value = dataValues.LJCDecimal("TestValue");
 
       var result = value.ToString();
       var compare = "3.14";
@@ -532,7 +532,7 @@ namespace TestData
       };
 
       // Test Method
-      var value = dataValues.LJCGetDouble("TestValue");
+      var value = dataValues.LJCDouble("TestValue");
 
       var result = value.ToString();
       var compare = "3.14";
@@ -552,7 +552,7 @@ namespace TestData
       };
 
       // Test Method
-      var value = dataValues.LJCGetInt16("TestValue");
+      var value = dataValues.LJCInt16("TestValue");
 
       var result = value.ToString();
       var compare = "3";
@@ -572,7 +572,7 @@ namespace TestData
       };
 
       // Test Method
-      var value = dataValues.LJCGetInt32("TestValue");
+      var value = dataValues.LJCInt32("TestValue");
 
       var result = value.ToString();
       var compare = "3";
@@ -592,7 +592,7 @@ namespace TestData
       };
 
       // Test Method
-      var value = dataValues.LJCGetInt64("TestValue");
+      var value = dataValues.LJCInt64("TestValue");
 
       var result = value.ToString();
       var compare = "3";
@@ -612,7 +612,7 @@ namespace TestData
       };
 
       // Test Method
-      var value = dataValues.LJCGetSingle("TestValue");
+      var value = dataValues.LJCFloat("TestValue");
 
       var result = value.ToString();
       var compare = "3.14";
@@ -632,7 +632,7 @@ namespace TestData
       };
 
       // Test Method
-      var result = dataValues.LJCGetString("TestValue");
+      var result = dataValues.LJCString("TestValue");
 
       var compare = "3.14";
       TestCommon.Write($"{methodName}", result, compare);
@@ -651,7 +651,7 @@ namespace TestData
       };
 
       // Test Method
-      var value = dataValues.LJCGetValue("TestValue");
+      var value = dataValues.LJCValue("TestValue");
 
       var result = value?.ToString();
       var compare = "3";
@@ -673,7 +673,7 @@ namespace TestData
       // Test Method
       dataValues.LJCSetValue("TestValue", "3.14159");
 
-      var result = dataValues.LJCGetString("TestValue");
+      var result = dataValues.LJCString("TestValue");
       var compare = "3.14159";
       TestCommon.Write($"{methodName}", result, compare);
     }

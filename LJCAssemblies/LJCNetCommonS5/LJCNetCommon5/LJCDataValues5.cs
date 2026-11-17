@@ -144,6 +144,9 @@ namespace LJCNetCommon5
         return retValue;
       }
     }
+    #endregion
+
+    #region Class Data
 
     private bool _IsPendingSort;
     private int _PrevCount;
@@ -239,7 +242,7 @@ namespace LJCNetCommon5
     /// <parentGroup>item</parentGroup>
     public void LJCClearChanged()
     {
-      foreach (LJCDataValue dataValue in this)
+      foreach (var dataValue in this)
       {
         dataValue.IsChanged = false;
       }
@@ -251,11 +254,11 @@ namespace LJCNetCommon5
     /// <parentGroup>item</parentGroup>
     public LJCDataColumns? LJCCreateColumns(LJCDataColumns? dataColumns)
     {
-      LJCDataColumns retValue = null;
+      LJCDataColumns retColumns = null;
 
       if (dataColumns != null)
       {
-        retValue = [];
+        retColumns = [];
         foreach (var dataValue in this)
         {
           if (dataValue.PropertyName != null)
@@ -264,12 +267,12 @@ namespace LJCNetCommon5
             var newDataValue = dataValue.CreateColumn(dataColumn!);
             if (newDataValue != null)
             {
-              retValue.Add(newDataValue);
+              retColumns.Add(newDataValue);
             }
           }
         }
       }
-      return retValue;
+      return retColumns;
     }
 
     // Gets a list of property names from the collection items.
@@ -277,7 +280,7 @@ namespace LJCNetCommon5
     ///  path='members/LJCKeyPropertyNames/*'/>
     public List<string>? LJCKeyPropertyNames(LJCDataValues? keys = null)
     {
-      List<string>? retList = null;
+      List<string>? retNames = null;
 
       if (!LJC.HasListItems(keys))
       {
@@ -285,13 +288,13 @@ namespace LJCNetCommon5
       }
       if (LJC.HasListItems(keys))
       {
-        retList = [];
+        retNames = [];
         foreach (var dataColumn in keys)
         {
-          retList.Add(dataColumn.PropertyName);
+          retNames.Add(dataColumn.PropertyName);
         }
       }
-      return retList;
+      return retNames;
     }
 
     // Gets a list of property names from the collection items.
@@ -299,7 +302,7 @@ namespace LJCNetCommon5
     ///  path='members/LJCPropertyNames/*'/>
     public List<string>? LJCPropertyNames(LJCDataValues? dataValues = null)
     {
-      List<string>? retList = null;
+      List<string>? retNames = null;
 
       if (!LJC.HasListItems(dataValues))
       {
@@ -307,13 +310,13 @@ namespace LJCNetCommon5
       }
       if (LJC.HasListItems(dataValues))
       {
-        retList = [];
+        retNames = [];
         foreach (var dataValue in dataValues)
         {
-          retList.Add(dataValue.PropertyName);
+          retNames.Add(dataValue.PropertyName);
         }
       }
-      return retList;
+      return retNames;
     }
 
     // Serializes the collection
@@ -349,8 +352,8 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Returns the column that matches the key columns.
-    // The column is identified by its property names and values.
+    // Returns the value that matches the key columns.
+    // The value is identified by its property names and values.
     /// <include file='Doc/DataValues.xml'
     ///  path='members/LJCGetUnique/*'/>
     public LJCDataValue? LJCGetUnique(LJCDataValues? keys = null)
@@ -602,7 +605,7 @@ namespace LJCNetCommon5
     }
     #endregion
 
-    #region Additional Value Methods
+    #region Other Value Methods
 
     // Gets a database DateTime string.
     /// <include file='Doc/DataValues.xml'

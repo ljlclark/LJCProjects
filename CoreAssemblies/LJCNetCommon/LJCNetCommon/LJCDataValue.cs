@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCDataValue.cs
-using System.Collections.Generic;
 using System.Xml.Serialization;
-using LJC = LJCNetCommon.LJC;
 
 namespace LJCNetCommon
 {
@@ -12,7 +10,104 @@ namespace LJCNetCommon
   ///  path='members/LJCDataValue/*'/>
   public class LJCDataValue
   {
-    #region Constructors
+    #region Data Properties
+
+    // Gets or sets the DataTypeName value.
+    /// <include file='Doc/LJCDataValue.xml'
+    ///  path='members/DataTypeName/*'/>
+    public string DataTypeName
+    {
+      get => _DataTypeName;
+      set
+      {
+        var newValue = value?.Trim();
+        if (_DataTypeName != newValue)
+        {
+          _DataTypeName = newValue;
+        }
+      }
+    }
+    private string _DataTypeName;
+
+    // Gets or sets the PropertyName value.
+    /// <include file='Doc/LJCDataValue.xml'
+    ///  path='members/PropertyName/*'/>
+    public string PropertyName
+    {
+      get => _PropertyName;
+      set
+      {
+        var newValue = value?.Trim();
+        if (_PropertyName != newValue
+          && LJC.HasText(newValue))
+        {
+          _PropertyName = newValue;
+        }
+      }
+    }
+    private string _PropertyName;
+
+    // Gets or sets the Value object.
+    /// <include file='Doc/LJCDataValue.xml'
+    ///  path='members/Value/*'/>
+    public object Value
+    {
+      get => _Value;
+      set
+      {
+        if (!LJC.IsEqual(_Value, value))
+        {
+          _Value = value;
+          if (value != null
+            && typeof(string) == value.GetType())
+          {
+            var newValue = (string)value;
+            _Value = newValue?.Trim();
+          }
+
+          IsChanged = false;
+          if (!LJC.IsEqual(OriginalValue, value))
+          {
+            IsChanged = true;
+          }
+        }
+      }
+    }
+    private object _Value;
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the changed indicator.
+    /// <include file='Doc/LJCDataColumn.xml'
+    ///  path='members/IsChanged/*'/>
+    [XmlIgnore()]
+    public bool IsChanged { get; set; }
+
+    // Gets or sets the original value.
+    /// <include file='Doc/LJCDataColumn.xml'
+    ///  path='members/OriginalValue/*'/>
+    public object OriginalValue
+    {
+      get => _OriginalValue;
+      set
+      {
+        if (!LJC.IsEqual(_OriginalValue, value))
+        {
+          _OriginalValue = value;
+          if (value != null
+            && typeof(string) == value.GetType())
+          {
+            var newValue = (string)value;
+            _OriginalValue = newValue?.Trim();
+          }
+        }
+      }
+    }
+    private object _OriginalValue;
+    #endregion
+
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
@@ -43,17 +138,18 @@ namespace LJCNetCommon
     ///  path='members/CopyConstructor/*'/>
     public LJCDataValue(LJCDataValue item)
     {
+      // Data Properties
       DataTypeName = item.DataTypeName;
       PropertyName = item.PropertyName;
       Value = item.Value;
 
-      // Additional Properties
+      // Properties
       IsChanged = item.IsChanged;
       OriginalValue = item.OriginalValue;
     }
     #endregion
 
-    #region Data Methods
+    #region Data Class Methods
 
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
@@ -119,103 +215,6 @@ namespace LJCNetCommon
       }
       return retColumn;
     }
-    #endregion
-
-    #region Data Properties
-
-    // Gets or sets the DataTypeName value.
-    /// <include file='Doc/LJCDataValue.xml'
-    ///  path='members/DataTypeName/*'/>
-    public string DataTypeName
-    {
-      get => _DataTypeName;
-      set
-      {
-        var newValue = value?.Trim();
-        if (_DataTypeName != newValue)
-        {
-          _DataTypeName = newValue;
-        }
-      }
-    }
-    private string _DataTypeName;
-
-    // Gets or sets the PropertyName value.
-    /// <include file='Doc/LJCDataValue.xml'
-    ///  path='members/PropertyName/*'/>
-    public string PropertyName
-    {
-      get => _PropertyName;
-      set
-      {
-        var newValue = value?.Trim();
-        if (_PropertyName != newValue
-          && LJC.HasText(newValue))
-        {
-          _PropertyName = newValue;
-        }
-      }
-    }
-    private string _PropertyName;
-
-    // Gets or sets the Value object.
-    /// <include file='Doc/LJCDataValue.xml'
-    ///  path='members/Value/*'/>
-    public object Value
-    {
-      get => _Value;
-      set
-      {
-        if (!EqualityComparer<object>.Default.Equals(_Value, value))
-        {
-          _Value = value;
-          if (value != null
-            && typeof(string) == value.GetType())
-          {
-            var newValue = (string)value;
-            _Value = newValue?.Trim();
-          }
-
-          IsChanged = false;
-          if (!EqualityComparer<object>.Default.Equals(OriginalValue, _Value))
-          {
-            IsChanged = true;
-          }
-        }
-      }
-    }
-    private object _Value;
-    #endregion
-
-    #region Additional Properties
-
-    // Gets or sets the changed indicator.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/IsChanged/*'/>
-    [XmlIgnore()]
-    public bool IsChanged { get; set; }
-
-    // Gets or sets the original value.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/OriginalValue/*'/>
-    public object OriginalValue
-    {
-      get => _OriginalValue;
-      set
-      {
-        if (!EqualityComparer<object>.Default.Equals(_OriginalValue, value))
-        {
-          _OriginalValue = value;
-          if (value != null
-            && typeof(string) == value.GetType())
-          {
-            var newValue = (string)value;
-            _OriginalValue = newValue?.Trim();
-          }
-        }
-      }
-    }
-    private object _OriginalValue;
     #endregion
   }
 }

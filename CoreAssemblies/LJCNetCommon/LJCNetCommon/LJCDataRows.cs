@@ -3,7 +3,6 @@
 // LJCDataRows.cs
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using LJC = LJCNetCommon.LJC;
 
 namespace LJCNetCommon
 {

@@ -154,11 +154,12 @@ namespace LJCNetCommon5
     ///  path='members/CopyConstructor/*'/>
     public LJCDataValue(LJCDataValue item)
     {
+      // Data Properties
       _DataTypeName = item.DataTypeName;
       _PropertyName = item.PropertyName;
       Value = item.Value;
 
-      // Additional Properties
+      // Properties
       IsChanged = item.IsChanged;
       OriginalValue = item.OriginalValue;
     }

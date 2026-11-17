@@ -72,7 +72,7 @@ namespace LJCNetCommon5
     private string? mTableName;
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
@@ -83,7 +83,7 @@ namespace LJCNetCommon5
 
     // Initializes an object instance.
     /// <include file='Doc/KeyItem.xml'
-    ///  path='members/ConstructorParam/*'/>
+    ///  path='members/ParamConstructor/*'/>
     public LJCKeyItem(string propertyName, long id, string description) : this()
     {
       PropertyName = propertyName;
@@ -92,7 +92,7 @@ namespace LJCNetCommon5
     }
     #endregion
 
-    #region Data Methods
+    #region Data Class Methods
 
     // Creates and returns a clone of this object.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'

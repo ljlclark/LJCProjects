@@ -6,12 +6,12 @@ using System.Xml.Serialization;
 
 namespace LJCNetCommon5
 {
-  // <summary>Represents a collection of KeyItem objects.</summary>
+  // Represents a collection of KeyItem objects.
   /// <include file='Doc/KeyItems.xml'
   ///  path='members/LJCKeyItems/*'/>
   public class LJCKeyItems : IEnumerable<LJCKeyItem>
   {
-    #region Static Functions
+    #region Static Methods
 
     // Get custom collection from List<T>.
     /// <include file='Doc/KeyItems.xml'
@@ -92,7 +92,7 @@ namespace LJCNetCommon5
 
     // Initializes an object instance.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
-    ///  path='members/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCKeyItems()
     {
       Items = [];
