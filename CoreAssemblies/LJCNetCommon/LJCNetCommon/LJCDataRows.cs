@@ -220,7 +220,7 @@ namespace LJCNetCommon
           {
             var keyValue = _Keys[index];
             var propertyName = keyValue.PropertyName;
-            var columnValue = dataColumns.LJCGetString(propertyName);
+            var columnValue = dataColumns.LJCString(propertyName);
             compareValue = LJCCompareColumn(columnValue, keyValue);
             if (index < _Keys.Count - 1)
             {
@@ -344,8 +344,8 @@ namespace LJCNetCommon
         // Check for null values.
         foreach (string propertyName in LJCPropertyNames)
         {
-          var xValue = x.LJCGetString(propertyName);
-          var yValue = y.LJCGetString(propertyName);
+          var xValue = x.LJCString(propertyName);
+          var yValue = y.LJCString(propertyName);
           retValue = LJC.CompareNull(xValue, yValue);
 
           // Break if one of the values is null.
@@ -364,8 +364,8 @@ namespace LJCNetCommon
         for (int index = 0; index < LJCPropertyNames.Count; index++)
         {
           var propertyName = LJCPropertyNames[index];
-          var xValue = x.LJCGetString(propertyName);
-          var yValue = y.LJCGetString(propertyName);
+          var xValue = x.LJCString(propertyName);
+          var yValue = y.LJCString(propertyName);
 
           if (index < LJCPropertyNames.Count - 1)
           {

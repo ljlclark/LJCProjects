@@ -121,7 +121,7 @@ namespace LJCNetCommon5
     // Operator to create LJCDataValues from LJCDataColumns.
     // var dataValues = dataColumns;
     /// <include file='Doc/DataColumns.xml'
-    ///  path='members/DataColumnsToDataValues/*'/>
+    ///  path='members/ToDataValues/*'/>
     public static implicit operator LJCDataValues(LJCDataColumns dataColumns)
     {
       LJCDataValues retValues = [];
@@ -268,6 +268,9 @@ namespace LJCNetCommon5
         return retColumn;
       }
     }
+    #endregion
+
+    #region Class Data
 
     private bool _IsPendingSort;
     private int _PrevCount;
@@ -647,20 +650,6 @@ namespace LJCNetCommon5
     ///  path='members/LJCBoolean/*'/>
     public bool LJCBoolean(string propertyName)
     {
-      //bool retValue = default;
-
-      //var value = LJCString(propertyName);
-      //if (value != null)
-      //{
-      //  if (LJCNetString.IsDigits(value))
-      //  {
-      //    var checkValue = Convert.ToInt16(value);
-      //    retValue = Convert.ToBoolean(checkValue);
-      //  }
-      //  else
-      //  {
-      //    _ = bool.TryParse(value, out retValue);
-      //  }
       var value = LJCValue(propertyName);
       var retValue = LJC.GetBoolean(value);
       return retValue;
@@ -707,7 +696,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the column object as a DateTime value.
-    /// <include file='Doc/DataValues.xml'
+    /// <include file='Doc/DataColumns.xml'
     ///  path='members/LJCDateTime/*'/>
     public DateTime LJCDateTime(string propertyName)
     {
@@ -813,11 +802,11 @@ namespace LJCNetCommon5
     }
     #endregion
 
-    #region Additional Value Methods
+    #region Other Value Methods
 
     // Gets a database DateTime string.
     /// <include file='Doc/DataValues.xml'
-    ///  path='members/LJCGetDbDateString/*'/>
+    ///  path='members/LJCDbDateString/*'/>
     public string? LJCDbDateString(string propertyName)
     {
       var value = LJCValue(propertyName);
