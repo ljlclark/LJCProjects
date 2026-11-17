@@ -229,7 +229,7 @@ namespace LJCNetCommon5
           // type Property
           if (2 == tokens.Length
             && !IsModifier(tokens[0])
-            //&& !IsModifier2(tokens[0])
+            //&& !IsMethodModifier2(tokens[0])
             && !tokens[0].StartsWith('#')
             && nextLine != null
             && nextLine.Trim().StartsWith('{'))

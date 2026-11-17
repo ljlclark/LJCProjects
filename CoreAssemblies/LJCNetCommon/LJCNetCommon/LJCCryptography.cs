@@ -7,17 +7,51 @@ using System.Security.Cryptography;
 
 namespace LJCNetCommon
 {
-  /// <summary>Provides methods to encrypt and decrypt data in memory.</summary>
+  // Provides methods to encrypt and decrypt data in memory.
+  /// <include file='Doc/LJCCryptography.xml'
+  ///  path='members/LJCCryptography/*'/>
   public class LJCCryptography
   {
+    #region Properties
+
+    // Gets or sets the secret key size in bits.
+    /// <include file='Doc/LJCCryptography.xml'
+    ///  path='members/KeySize/*'/>
+    public int KeySize
+    {
+      get => mAlgorithm.KeySize;
+      set
+      {
+        if (IsValidKeySize(value))
+        {
+          mAlgorithm.KeySize = value;
+        }
+        return;
+      }
+    }
+
+    // Gets the supported key sizes.
+    /// <include file='Doc/LJCCryptography.xml'
+    ///  path='items/LegalKeySizes/*'/>
+    public KeySizes[] LegalKeySizes
+    {
+      get => mAlgorithm.LegalKeySizes;
+    }
+    #endregion
+
+    #region Class Data
+
+    private readonly SymmetricAlgorithm mAlgorithm;
+    #endregion
+
     #region Constructors
 
     // Initializes a new instance of the MemoryCrypto class.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='items/Constructor/*'/>
     public LJCCryptography()
     {
-      Type = Cryptography_Type.Crypto_Rijndael;
+      mAlgorithm = Aes.Create();
       return;
     }
     #endregion
@@ -51,12 +85,12 @@ namespace LJCNetCommon
       byte[] buffer;
       byte[] retVal;
 
-      mSal.Key = key;
-      mSal.IV = initializationVector;
+      mAlgorithm.Key = key;
+      mAlgorithm.IV = initializationVector;
 
       // Stack destination stream and crypto stream.
       destStream = new MemoryStream();
-      cryptoStream = new CryptoStream(destStream, mSal.CreateDecryptor()
+      cryptoStream = new CryptoStream(destStream, mAlgorithm.CreateDecryptor()
         , CryptoStreamMode.Write);
 
       // Create source stream.
@@ -96,12 +130,12 @@ namespace LJCNetCommon
       byte[] buffer;
       byte[] retVal;
 
-      mSal.Key = key;
-      mSal.IV = initializationVector;
+      mAlgorithm.Key = key;
+      mAlgorithm.IV = initializationVector;
 
       // Stack source stream and crypto stream.
       srcStream = LJC.BytesToMemStream(bytes);
-      cryptoStream = new CryptoStream(srcStream, mSal.CreateEncryptor()
+      cryptoStream = new CryptoStream(srcStream, mAlgorithm.CreateEncryptor()
         , CryptoStreamMode.Read);
 
       // Create destination stream and stream writer.
@@ -146,8 +180,8 @@ namespace LJCNetCommon
     ///  path='items/GenerateIV/*'/>
     public byte[] GenerateIV()
     {
-      mSal.GenerateIV();
-      return mSal.IV;
+      mAlgorithm.GenerateIV();
+      return mAlgorithm.IV;
     }
 
     // Generates a random encryption key based on the encryption type.
@@ -155,8 +189,8 @@ namespace LJCNetCommon
     ///  path='items/GenerateKey/*'/>
     public byte[] GenerateKey()
     {
-      mSal.GenerateKey();
-      return mSal.Key;
+      mAlgorithm.GenerateKey();
+      return mAlgorithm.Key;
     }
 
     // Returns true if the key size is valid otherwise returns false.
@@ -184,78 +218,6 @@ namespace LJCNetCommon
       }
       return retVal;
     }
-
-    // Returns the crypto type text using the CryptoType enumeration.
-    private string GetCryptoTypeText(Cryptography_Type cryptoType)
-    {
-      string retVal = null;
-
-      switch (cryptoType)
-      {
-        case Cryptography_Type.Crypto_DES:
-          retVal = "DES";
-          break;
-
-        case Cryptography_Type.Crypto_3DES:
-          retVal = "3DES";
-          break;
-
-        case Cryptography_Type.Crypto_RC2:
-          retVal = "RC2";
-          break;
-
-        case Cryptography_Type.Crypto_Rijndael:
-          retVal = "Rijndael";
-          break;
-      }
-      return retVal;
-    }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets or sets the secret key size in bits.</summary>
-    public int KeySize
-    {
-      get { return mSal.KeySize; }
-      set
-      {
-        if (IsValidKeySize(value))
-        {
-          mSal.KeySize = value;
-        }
-        return;
-      }
-    }
-
-    // Gets the supported key sizes.
-    /// <include file='Doc/LJCCryptography.xml'
-    ///  path='items/LegalKeySizes/*'/>
-    public KeySizes[] LegalKeySizes
-    {
-      get { return mSal.LegalKeySizes; }
-    }
-
-    /// <summary>Gets or sets the encryption type.</summary>
-    public Cryptography_Type Type
-    {
-      get { return mType; }
-      set
-      {
-        mType = value;
-        mCryptoTypeText = GetCryptoTypeText(mType);
-        mSal = SymmetricAlgorithm.Create(mCryptoTypeText);
-        return;
-      }
-    }
-    #endregion
-
-    #region Class Data
-
-    // Property values.
-    string mCryptoTypeText;
-    SymmetricAlgorithm mSal;
-    Cryptography_Type mType;
     #endregion
   }
 

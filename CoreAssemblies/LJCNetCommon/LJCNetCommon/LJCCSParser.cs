@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 // LJCCSParser.cs
 
+using System.Linq;
+
 namespace LJCNetCommon
 {
   // Provides methods to parse a source line for class, method and property
@@ -10,6 +12,57 @@ namespace LJCNetCommon
   ///  path='members/LJCCSParser/*'/>
   public class LJCCSParser
   {
+    #region Static Methods
+
+    // Gets the method name.
+    private string ScrubMethodName(string token)
+    {
+      string retValue = null;
+
+      var index = token.IndexOf("(");
+      if (index >= 0)
+      {
+        var length = token.Length;
+        length -= length - index;
+        retValue = token.Substring(0, length);
+      }
+      return retValue;
+    }
+    #endregion
+
+    #region Properties
+
+    // Gets or sets the second class access modifier.
+    /// <include file='Doc/LJCCSParser.xml'
+    ///  path='members/ClassModifier2/*'/>
+    public string[] ClassModifier2 { get; set; }
+
+    // Gets or sets the data types.
+    /// <include file='Doc/LJCCSParser.xml'
+    ///  path='members/DataType/*'/>
+    public string[] DataType { get; set; }
+
+    // Gets or sets the second method access modifier.
+    /// <include file='Doc/LJCCSParser.xml'
+    ///  path='members/MethodModifier2/*'/>
+    public string[] MethodModifier2 { get; set; }
+
+    // Gets or sets the third method access modifier.
+    /// <include file='Doc/LJCCSParser.xml'
+    ///  path='members/MethodModifier3/*'/>
+    public string[] MethodModifier3 { get; set; }
+
+    // Gets or sets the access modifiers.
+    /// <include file='Doc/LJCCSParser.xml'
+    ///  path='members/Modifier/*'/>
+    public string[] Modifier { get; set; }
+
+    // Gets or sets the second access modifier.
+    /// <include file='Doc/LJCCSParser.xml'
+    ///  path='members/Modifier2/*'/>
+    public string[] Modifier2 { get; set; }
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -31,40 +84,42 @@ namespace LJCNetCommon
       string retName = null;
 
       string[] tokens = LJCNetString.Split(line, " ");
-
-      // class
-      if (tokens.Length > 1)
+      if (LJC.HasArrayElements(tokens))
       {
-        if ("class" == tokens[0])
+        // class
+        if (tokens.Length > 1)
         {
-          retName = tokens[1];
-        }
-      }
-
-      // public class
-      if (null == retName
-        && tokens.Length > 2)
-      {
-        if (IsModifier(tokens[0])
-          || IsModifier2(tokens[0]))
-        {
-          if ("class" == tokens[1])
+          if ("class" == tokens[0])
           {
-            retName = tokens[2];
+            retName = tokens[1];
           }
         }
-      }
 
-      // public abstract class
-      if (null == retName
-        && tokens.Length > 3)
-      {
-        if (IsModifier(tokens[0])
-          && IsClassModifier2(tokens[1]))
+        // public class
+        if (null == retName
+          && tokens.Length > 2)
         {
-          if ("class" == tokens[2])
+          if (IsModifier(tokens[0])
+            || IsClassModifier2(tokens[0]))
           {
-            retName = tokens[3];
+            if ("class" == tokens[1])
+            {
+              retName = tokens[2];
+            }
+          }
+        }
+
+        // public abstract class
+        if (null == retName
+          && tokens.Length > 3)
+        {
+          if (IsModifier(tokens[0])
+            && IsClassModifier2(tokens[1]))
+          {
+            if ("class" == tokens[2])
+            {
+              retName = tokens[3];
+            }
           }
         }
       }
@@ -79,50 +134,68 @@ namespace LJCNetCommon
       string retName = null;
 
       string[] tokens = LJCNetString.Split(line, " ");
+      if (LJC.HasArrayElements(tokens))
+      {
+        // [modifier] [modifier2] method()
+        // if (returnsBool());
+        // var name = method();
 
-      // [modifier] [modifier2] method()
-      // if (returnsBool());
-      // var name = method();
-
-      // void Method()
-      if (!LJC.HasText(retName)
+        // void Method()
+        if (!LJC.HasText(retName)
         && tokens.Length > 1)
-      {
-        if (IsType(tokens[0]))
         {
-          if (tokens[1].Contains("("))
+          if (IsType(tokens[0]))
           {
-            retName = ScrubMethodName(tokens[1]);
+            if (tokens[1].Contains('('))
+            {
+              retName = ScrubMethodName(tokens[1]);
+            }
           }
         }
-      }
 
-      // static void Method()
-      if (!LJC.HasText(retName)
-        && tokens.Length > 2)
-      {
-        if ((IsModifier(tokens[0])
-          || IsModifier2(tokens[0]))
-          && IsType(tokens[1]))
+        // static void Method()
+        if (!LJC.HasText(retName)
+          && tokens.Length > 2)
         {
-          if (tokens[2].Contains("("))
+          if ((IsModifier(tokens[0])
+            || IsMethodModifier2(tokens[0]))
+            && IsType(tokens[1]))
           {
-            retName = ScrubMethodName(tokens[2]);
+            if (tokens[2].Contains('('))
+            {
+              retName = ScrubMethodName(tokens[2]);
+            }
           }
         }
-      }
 
-      // public static void Method()
-      if (!LJC.HasText(retName)
-        && tokens.Length > 3)
-      {
-        if (IsModifier(tokens[0])
-          && IsModifier2(tokens[1])
-          && IsType(tokens[2]))
+        // public static void Method()
+        if (!LJC.HasText(retName)
+          && tokens.Length > 3)
         {
-          if (tokens[3].Contains("("))
+          if (IsModifier(tokens[0])
+            && IsMethodModifier2(tokens[1])
+            && IsType(tokens[2]))
           {
-            retName = ScrubMethodName(tokens[3]);
+            if (tokens[3].Contains('('))
+            {
+              retName = ScrubMethodName(tokens[3]);
+            }
+          }
+        }
+
+        // public static void Method()
+        if (!LJC.HasText(retName)
+          && tokens.Length > 4)
+        {
+          if (IsModifier(tokens[0])
+            && IsMethodModifier2(tokens[1])
+            && IsMethodModifier3(tokens[2])
+            && IsType(tokens[3]))
+          {
+            if (tokens[4].Contains('('))
+            {
+              retName = ScrubMethodName(tokens[4]);
+            }
           }
         }
       }
@@ -137,64 +210,69 @@ namespace LJCNetCommon
       string retName = null;
 
       string[] tokens = LJCNetString.Split(line, " ");
-
-      if (!LJC.HasText(retName))
+      if (LJC.HasArrayElements(tokens))
       {
-        // type Property
-        if (2 == tokens.Length
-          && !IsModifier(tokens[0])
-          && !IsModifier2(tokens[0])
-          && !tokens[0].StartsWith("#")
-          && nextLine != null
-          && nextLine.Trim().StartsWith("{"))
+        if (!LJC.HasText(retName))
         {
-          retName = tokens[1];
-
-          // Not "type Method()"
-          // Not "type VarName;"
-          // Not "VarName ="
-          if (tokens[1].Contains("(")
-            || tokens[1].EndsWith(";")
-            || "=" == tokens[1])
+          // type Property
+          if (2 == tokens.Length
+            && !IsModifier(tokens[0])
+            && !tokens[0].StartsWith("#")
+            && nextLine != null
+            && nextLine.Trim().StartsWith("{"))
           {
-            retName = null;
-          }
+            retName = tokens[1];
 
-          // Not "type VarName = "
-          if (tokens.Length > 2
-            && "=" == tokens[2]
-            && tokens[2] != "{")
-          {
-            retName = null;
+            // Not "type Method()"
+            // Not "type VarName;"
+            // Not "VarName ="
+            if (tokens[1].Contains('(')
+              || tokens[1].EndsWith(";")
+              || "=" == tokens[1])
+            {
+              retName = null;
+            }
+
+            // Not "type VarName = "
+            if (tokens.Length > 2
+              && "=" == tokens[2]
+              && tokens[2] != "{")
+            {
+              retName = null;
+            }
           }
         }
-      }
 
-      if (!LJC.HasText(retName))
-      {
-        // modifier type Property {
-        if (tokens.Length > 3
-          && (IsModifier(tokens[0])
-          || IsModifier2(tokens[0]))
-          && !tokens[0].StartsWith("#"))
+        if (!LJC.HasText(retName))
         {
-          retName = tokens[2];
-
-          // Not "type VarName = "
-          // Not "modifier type Method()"
-          // Not "modifier type VarName;
-          if ("=" == tokens[2]
-            || tokens[2].Contains("(")
-            || tokens[2].EndsWith(";"))
-          {
-            retName = null;
-          }
-
-          // Not "mofifier type VarName ="
+          // modifier type Property {
           if (tokens.Length > 3
-            && "=" == tokens[3])
+            && (IsModifier(tokens[0])
+            || IsType(tokens[0]))
+            && !tokens[0].StartsWith("#"))
           {
-            retName = null;
+            retName = tokens[2];
+            if (tokens[2].Trim().StartsWith("{"))
+            {
+              retName = tokens[1];
+            }
+
+            // Not "type VarName = "
+            // Not "modifier type Method()"
+            // Not "modifier type VarName;
+            if ("=" == tokens[2]
+              || tokens[2].Contains('(')
+              || tokens[2].EndsWith(";"))
+            {
+              retName = null;
+            }
+
+            // Not "mofifier type VarName ="
+            if (tokens.Length > 3
+              && "=" == tokens[3])
+            {
+              retName = null;
+            }
           }
         }
       }
@@ -209,12 +287,15 @@ namespace LJCNetCommon
     {
       var retValue = false;
 
-      foreach (var classModifier in ClassModifier2)
+      if (LJC.HasArrayElements(ClassModifier2))
       {
-        if (token == classModifier)
+        foreach (var classModifier in ClassModifier2)
         {
-          retValue = true;
-          break;
+          if (token == classModifier)
+          {
+            retValue = true;
+            break;
+          }
         }
       }
       return retValue;
@@ -225,28 +306,53 @@ namespace LJCNetCommon
     {
       var retValue = false;
 
-      foreach (var modifier in Modifier)
+      if (LJC.HasArrayElements(Modifier))
       {
-        if (token == modifier)
+        foreach (var modifier in Modifier)
         {
-          retValue = true;
-          break;
+          if (token == modifier)
+          {
+            retValue = true;
+            break;
+          }
         }
       }
       return retValue;
     }
 
     // Checks if the token is a Modifier2.
-    private bool IsModifier2(string token)
+    private bool IsMethodModifier2(string token)
     {
       var retValue = false;
 
-      foreach (var modifier in Modifier2)
+      if (LJC.HasArrayElements(MethodModifier2))
       {
-        if (token == modifier)
+        foreach (var modifier in MethodModifier2)
         {
-          retValue = true;
-          break;
+          if (token == modifier)
+          {
+            retValue = true;
+            break;
+          }
+        }
+      }
+      return retValue;
+    }
+
+    // Checks if the token is a Modifier.
+    private bool IsMethodModifier3(string token)
+    {
+      var retValue = false;
+
+      if (LJC.HasArrayElements(MethodModifier3))
+      {
+        foreach (var modifier in MethodModifier3)
+        {
+          if (token == modifier)
+          {
+            retValue = true;
+            break;
+          }
         }
       }
       return retValue;
@@ -257,28 +363,16 @@ namespace LJCNetCommon
     {
       var retValue = false;
 
-      foreach (var dataType in DataType)
+      if (LJC.HasArrayElements(DataType))
       {
-        if (token == dataType)
+        foreach (var dataType in DataType)
         {
-          retValue = true;
-          break;
+          if (token == dataType)
+          {
+            retValue = true;
+            break;
+          }
         }
-      }
-      return retValue;
-    }
-
-    // Gets the method name.
-    private string ScrubMethodName(string token)
-    {
-      string retValue = null;
-
-      var index = token.IndexOf("(");
-      if (index >= 0)
-      {
-        var length = token.Length;
-        length -= length - index;
-        retValue = token.Substring(0, length);
       }
       return retValue;
     }
@@ -292,15 +386,12 @@ namespace LJCNetCommon
         "private",
         "protected",
         "public",
+        "static",
       };
 
-      // protected internal *
-      // public override
-      // private protected *
-      // public static
-      // public virtual
-      Modifier2 = new string[]
+      MethodModifier2 = new string[]
       {
+        "abstract",
         "internal",
         "override",
         "protected",
@@ -308,37 +399,49 @@ namespace LJCNetCommon
         "virtual",
       };
 
+      MethodModifier3 = new string[]
+      {
+        "sealed",
+      };
+
       // public abstract class
       // public sealed class
       ClassModifier2 = new string[]
       {
         "abstract",
+        "protected",
         "sealed",
+        "static",
       };
 
       // In common usage order.
       DataType = new string[]
       {
+        "void",
         "string",
         "bool",
         "int",
         "long",
         "short",
+        //
         "String",
         "Boolean",
         "Int32",
         "Int64",
         "Int16",
-        "char",
-        "byte",
+        //
         "decimal",
         "double",
         "float",
-        "Char",
-        "Byte",
+        "char",
+        "byte",
+        //
         "Decimal",
         "Double",
         "Single",
+        "Char",
+        "Byte",
+        //
         "enum",
         "DateTime",
         "struct",
@@ -350,24 +453,8 @@ namespace LJCNetCommon
         "UInt16",
         "sbyte",
         "SByte",
-        "void",
       };
     }
-    #endregion
-
-    #region Properties
-
-    /// <summary>Gets or sets the second class access modifier.</summary>
-    public string[] ClassModifier2 { get; set; }
-
-    /// <summary>Gets or sets the data types.</summary>
-    public string[] DataType { get; set; }
-
-    /// <summary>Gets or sets the access modifiers.</summary>
-    public string[] Modifier { get; set; }
-
-    /// <summary>Gets or sets the second access modifier.</summary>
-    public string[] Modifier2 { get; set; }
     #endregion
   }
 }
