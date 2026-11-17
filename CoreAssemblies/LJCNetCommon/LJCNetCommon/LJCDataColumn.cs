@@ -3,7 +3,6 @@
 // LJCDataColumn.cs
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using LJC = LJCNetCommon.LJC;
 
 namespace LJCNetCommon
 {
@@ -12,160 +11,6 @@ namespace LJCNetCommon
   ///  path='members/LJCDataColumn/*'/>
   public class LJCDataColumn
   {
-    #region Constructor Methods
-
-    // Initializes an object instance.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/Constructor/*'/>
-    public LJCDataColumn()
-    {
-      // Data Properties
-      AllowDBNull = false;
-      AutoIncrement = false;
-      _Caption = "";
-      _ColumnName = "";
-      _DataTypeName = "string";
-      MaxLength = 0;
-      Position = -1;
-      _PropertyName = "";
-      _RenameAs = null;
-      _SQLTypeName = null;
-      _Value = null;
-
-      // Additional Properties
-      AddOrderIndex = -1;
-      _DefaultValue = null;
-      IsChanged = false;
-      IsPrimaryKey = false;
-      _KeyType = null;
-      _OriginalValue = null;
-      IsUniqueKey = false;
-
-      // View Join Data Properties
-      ID = 0;
-      Sequence = 0;
-      ViewDataID = 0;
-      ViewJoinID = 0;
-      Width = 0;
-    }
-
-    // Initializes an object instance with the supplied values.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/ParamConstructor/*'/>
-    public LJCDataColumn(string propertyName, string value = null
-      , string dataTypeName = "string", string columnName = null
-      , bool assignedKey = false, string renameValue = null) : this()
-    {
-      PropertyName = propertyName;
-      Value = value;
-      DataTypeName = dataTypeName;
-      if (LJC.HasText(columnName))
-      {
-        ColumnName = columnName;
-      }
-      AutoIncrement = assignedKey;
-      RenameAs = renameValue;
-    }
-
-    // Initializes an object instance from the supplied object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/CopyConstructor/*'/>
-    public LJCDataColumn(LJCDataColumn item)
-    {
-      // Data Properties
-      AllowDBNull = item.AllowDBNull;
-      AutoIncrement = item.AutoIncrement;
-      Caption = item.Caption;
-      ColumnName = item.ColumnName;
-      DataTypeName = item.DataTypeName;
-      MaxLength = item.MaxLength;
-      Position = item.Position;
-      PropertyName = item.PropertyName;
-      RenameAs = item.RenameAs;
-      SQLTypeName = item.SQLTypeName;
-      Value = item.Value;
-
-      // Additional Properties
-      AddOrderIndex = item.AddOrderIndex;
-      DefaultValue = item.DefaultValue;
-      IsChanged = item.IsChanged;
-      IsPrimaryKey = item.IsPrimaryKey;
-      KeyType = item.KeyType;
-      OriginalValue = item.OriginalValue;
-      IsUniqueKey = item.IsUniqueKey;
-
-      // View Join Data Properties
-      ID = item.ID;
-      Sequence = item.Sequence;
-      ViewDataID = item.ViewDataID;
-      ViewJoinID = item.ViewJoinID;
-      Width = item.Width;
-    }
-    #endregion
-
-    #region Data Methods
-
-    // Creates and returns a clone of the object.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/Clone/*'/>
-    public LJCDataColumn Clone()
-    {
-      var retValue = MemberwiseClone() as LJCDataColumn;
-      return retValue;
-    }
-
-    // Formats the column value for an SQL string.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/FormatValue/*'/>
-    public string FormatValue()
-    {
-      string retValue = LJCNetString.FormatValue(Value, DataTypeName);
-      return retValue;
-    }
-
-    // Returns the object string identifier.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/ToString/*'/>
-    public override string ToString()
-    {
-      string retValue = _PropertyName;
-
-      if (_ColumnName != _PropertyName)
-      {
-        retValue += $"-{_ColumnName}";
-      }
-      if (IsPrimaryKey)
-      {
-        retValue += "-P";
-      }
-      if (_Value != null)
-      {
-        retValue += $":{_Value}";
-      }
-      return retValue;
-    }
-
-    // Creates a LJCDataValue object from an LJCDataColumn object.
-    /// <include file='Doc/LJCDataColumn.xml'
-    ///  path='members/LJCDataValue/*'/>
-    public static implicit operator LJCDataValue(LJCDataColumn dataColumn)
-    {
-      LJCDataValue retValue = null;
-
-      if (dataColumn != null)
-      {
-        retValue = new LJCDataValue()
-        {
-          DataTypeName = dataColumn.DataTypeName,
-          IsChanged = dataColumn.IsChanged,
-          PropertyName = dataColumn.PropertyName,
-          Value = dataColumn.Value
-        };
-      }
-      return retValue;
-    }
-    #endregion
-
     #region Data Properties
 
     // Gets or sets the AllowDBNull flag.
@@ -316,7 +161,7 @@ namespace LJCNetCommon
       get => _Value;
       set
       {
-        if (!EqualityComparer<object>.Default.Equals(_Value, value))
+        if (!LJC.IsEqual(_Value, value))
         {
           _Value = value;
           if (value != null
@@ -337,7 +182,7 @@ namespace LJCNetCommon
     private object _Value;
     #endregion
 
-    #region Additional Properties
+    #region Properties
 
     // Gets or sets the add order index.
     /// <include file='Doc/LJCDataColumn.xml'
@@ -403,7 +248,7 @@ namespace LJCNetCommon
       get => _OriginalValue;
       set
       {
-        if (!EqualityComparer<object>.Default.Equals(_OriginalValue, value))
+        if (!LJC.IsEqual(_OriginalValue, value))
         {
           _OriginalValue = value;
           if (value != null
@@ -485,6 +330,160 @@ namespace LJCNetCommon
 
     /// <summary>The Value column name.</summary>
     public static string ColumnValue = "Value";
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Constructor/*'/>
+    public LJCDataColumn()
+    {
+      // Data Properties
+      AllowDBNull = false;
+      AutoIncrement = false;
+      _Caption = "";
+      _ColumnName = "";
+      _DataTypeName = "string";
+      MaxLength = 0;
+      Position = -1;
+      _PropertyName = "";
+      _RenameAs = null;
+      _SQLTypeName = null;
+      _Value = null;
+
+      // Properties
+      AddOrderIndex = -1;
+      _DefaultValue = null;
+      IsChanged = false;
+      IsPrimaryKey = false;
+      _KeyType = null;
+      _OriginalValue = null;
+      IsUniqueKey = false;
+
+      // View Join Data Properties
+      ID = 0;
+      Sequence = 0;
+      ViewDataID = 0;
+      ViewJoinID = 0;
+      Width = 0;
+    }
+
+    // Initializes an object instance with the supplied values.
+    /// <include file='Doc/LJCDataColumn.xml'
+    ///  path='members/ParamConstructor/*'/>
+    public LJCDataColumn(string propertyName, string value = null
+      , string dataTypeName = "string", string columnName = null
+      , bool assignedKey = false, string renameValue = null) : this()
+    {
+      PropertyName = propertyName;
+      Value = value;
+      DataTypeName = dataTypeName;
+      if (LJC.HasText(columnName))
+      {
+        ColumnName = columnName;
+      }
+      AutoIncrement = assignedKey;
+      RenameAs = renameValue;
+    }
+
+    // Initializes an object instance from the supplied object.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/CopyConstructor/*'/>
+    public LJCDataColumn(LJCDataColumn item)
+    {
+      // Data Properties
+      AllowDBNull = item.AllowDBNull;
+      AutoIncrement = item.AutoIncrement;
+      Caption = item.Caption;
+      ColumnName = item.ColumnName;
+      DataTypeName = item.DataTypeName;
+      MaxLength = item.MaxLength;
+      Position = item.Position;
+      PropertyName = item.PropertyName;
+      RenameAs = item.RenameAs;
+      SQLTypeName = item.SQLTypeName;
+      Value = item.Value;
+
+      // Properties
+      AddOrderIndex = item.AddOrderIndex;
+      DefaultValue = item.DefaultValue;
+      IsChanged = item.IsChanged;
+      IsPrimaryKey = item.IsPrimaryKey;
+      KeyType = item.KeyType;
+      OriginalValue = item.OriginalValue;
+      IsUniqueKey = item.IsUniqueKey;
+
+      // View Join Data Properties
+      ID = item.ID;
+      Sequence = item.Sequence;
+      ViewDataID = item.ViewDataID;
+      ViewJoinID = item.ViewJoinID;
+      Width = item.Width;
+    }
+    #endregion
+
+    #region Data Class Methods
+
+    // Creates and returns a clone of the object.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/Clone/*'/>
+    public LJCDataColumn Clone()
+    {
+      var retValue = MemberwiseClone() as LJCDataColumn;
+      return retValue;
+    }
+
+    // Formats the column value for an SQL string.
+    /// <include file='Doc/LJCDataColumn.xml'
+    ///  path='members/FormatValue/*'/>
+    public string FormatValue()
+    {
+      string retValue = LJCNetString.FormatValue(Value, DataTypeName);
+      return retValue;
+    }
+
+    // Returns the object string identifier.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/ToString/*'/>
+    public override string ToString()
+    {
+      string retValue = _PropertyName;
+
+      if (_ColumnName != _PropertyName)
+      {
+        retValue += $"-{_ColumnName}";
+      }
+      if (IsPrimaryKey)
+      {
+        retValue += "-P";
+      }
+      if (_Value != null)
+      {
+        retValue += $":{_Value}";
+      }
+      return retValue;
+    }
+
+    // Creates a LJCDataValue object from an LJCDataColumn object.
+    /// <include file='Doc/LJCDataColumn.xml'
+    ///  path='members/LJCDataValue/*'/>
+    public static implicit operator LJCDataValue(LJCDataColumn dataColumn)
+    {
+      LJCDataValue retValue = null;
+
+      if (dataColumn != null)
+      {
+        retValue = new LJCDataValue()
+        {
+          DataTypeName = dataColumn.DataTypeName,
+          IsChanged = dataColumn.IsChanged,
+          PropertyName = dataColumn.PropertyName,
+          Value = dataColumn.Value
+        };
+      }
+      return retValue;
+    }
     #endregion
   }
 }

@@ -351,7 +351,7 @@ namespace LJCNetCommon5
       _SQLTypeName = null;
       _Value = null;
 
-      // Additional Properties
+      // Properties
       AddOrderIndex = -1;
       _DefaultValue = null;
       IsChanged = false;
@@ -404,7 +404,7 @@ namespace LJCNetCommon5
       SQLTypeName = item.SQLTypeName;
       Value = item.Value;
 
-      // Additional Properties
+      // Properties
       AddOrderIndex = item.AddOrderIndex;
       DefaultValue = item.DefaultValue;
       IsChanged = item.IsChanged;

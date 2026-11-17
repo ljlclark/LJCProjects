@@ -3,9 +3,7 @@
 // LJCDataColumns.cs
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Xml.Serialization;
-using LJC = LJCNetCommon.LJC;
 
 namespace LJCNetCommon
 {
