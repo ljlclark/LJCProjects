@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- DbDataAccess.xml -->
+<members>
+  <!-- Class -->
+  <DbDataAccess>
+    <summary>
+      The Data Access methods.
+    </summary>
+  </DbDataAccess>
+
+  <!-- Properties -->
+  <DatabaseName>
+    <summary>
+      Gets or sets the Database name.
+    </summary>
+  </DatabaseName>
+  <DBRequest>
+    <summary>
+      Gets or sets the DBRequest object.
+    </summary>
+  </DBRequest>
+
+  <!-- Constructor Methods -->
+  <ConstructorParam1>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="dataConfigName"></param>
+  </ConstructorParam1>
+  <ConstructorParam2>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="databaseName"></param>
+    <param name="connectionString"></param>
+    <param name="providerName"></param>
+  </ConstructorParam2>
+
+  <!-- Methods -->
+  <Execute>
+    <summary>
+      Executes the specified database request XML message.
+    </summary>
+    <param name="dbRequest">The ConnectionType name.</param>
+    <returns></returns>
+  </Execute>
+</members>

@@ -1,0 +1,30 @@
+﻿- LJC -           - LJCReflect -    - LJCDataColumns -  - LJCDataValues -  - LJCTextDataReader - - LJCDataCommon -
+GetBoolean()      GetBoolean()      LJCBoolean()        LJCBoolean()       GetBoolean()
+GetByte()         GetByte()         LJCByte()           LJCByte()          GetByte()
+GetBytes()        GetBytes()        LJCBytes()          LJCBytes()         GetBytes()
+GetChar()         GetChar()         LJCChar()           LJCChar()          GetChar()
+GetChars()        GetChars()        LJCChars()          LJCChars()         GetChars()
+GetDateTime()     GetDateTime()     LJCDateTime()       LJCDateTime()      GetDateTime()
+GetDecimal()      GetDecimal()      LJCDecimal()        LJCDecimal()       GetDecimal()
+GetDouble()       GetDouble()       LJCDouble()         LJCDouble()        GetDouble()
+GetFloat()        GetFloat()        LJCFloat()          LJCFloat()         GetFloat()
+GetGuid()         GetGuid()         LJCGuid()           LJCGuid()          GetGuid()
+GetInt16()        GetInt16()        LJCInt16()          LJCInt16()         GetInt16()
+GetInt32()        GetInt32()        LJCInt32()          LJCInt32()         GetInt32()
+GetInt64()        GetInt64()        LJCInt64()          LJCInt64()         GetInt64()
+GetString()       GetString()       LJCString()         LJCString()        GetString()
+GetValue()        GetValue()        LJCValue()          LJCValue()         GetValue()
+
+- Additional Value Methods
+- LJC -           - LJCReflect -    - LJCDataColumns -  - LJCDataValues -  - LJCTextDataReader - - LJCDataCommon -
+GetDbDateString() GetDbDateString() LJCDbDateString()   LJCDbDateString()  GetDbDateString()     GetDbDateString()
+GetDbDateTime()   GetDbDateTime()   LJCDbDateTime()     LJCDbDateTime()    GetDbDateTime         GetDbDateTime()
+                                                                           GetTrimString()
+                                    LJCSetValue()       LJCSetValue()
+                  GetValueReflect() 
+                                                                                                 GetDbDate()
+                                                                                                 GetMinDateTime()
+                                                                                                 GetUIDateString()
+                                                                                                 GetUITimeString()
+                                                                                                 GetUIDateTimeString()
+
