@@ -71,7 +71,7 @@ namespace LJCNetCommon
 
     // Returns the message string.
     /// <include file='Doc/LJCArgError.xml'
-    ///  path='members/Clear/*'/>
+    ///  path='members/ToString/*'/>
     public override string ToString()
     {
       string retValue = null;

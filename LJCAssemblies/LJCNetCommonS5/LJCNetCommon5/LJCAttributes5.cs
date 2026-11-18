@@ -5,17 +5,15 @@
 namespace LJCNetCommon5
 {
   // Represents a collection of Attribute elements.
-  /// <include file='Doc/Attributes.xml'
+  /// <include file='Doc/LJCAttributes.xml'
   ///  path='members/LJCAttributes/*'/>
-  /// <group name="collection">Collection</group>
   public class LJCAttributes : List<LJCAttribute>
   {
     #region Collection Data Methods
 
     // Creates and adds an Attribute.
-    /// <include file='Doc/Attributes.xml'
+    /// <include file='Doc/LJCAttributes.xml'
     ///  path='members/Add/*'/>
-    /// <parentGroup>collection</parentGroup>
     public LJCAttribute Add(string name, string value)
     {
       var retAttrib = new LJCAttribute(name, value);

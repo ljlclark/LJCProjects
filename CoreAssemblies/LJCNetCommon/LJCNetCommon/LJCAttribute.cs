@@ -32,7 +32,7 @@ namespace LJCNetCommon
     private string mValue;
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='Doc/LJCAttribute.xml'

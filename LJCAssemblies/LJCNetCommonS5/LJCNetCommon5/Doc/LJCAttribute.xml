@@ -8,6 +8,8 @@
     <summary>
       Represents an HTML or XML element attribute.
     </summary>
+    <group name="constructor">Constructor</group>
+    <group name="properties">Properties</group>
   </LJCAttribute>
 
   <!-- Properties -->
@@ -15,11 +17,13 @@
     <summary>
       Gets or sets the attribute name.
     </summary>
+    <parentGroup>properties</parentGroup>
   </Name>
   <Value>
     <summary>
       Gets or sets the attribute value.
     </summary>
+    <parentGroup>properties</parentGroup>
   </Value>
 
   <!-- Constructor Methods -->
@@ -29,5 +33,6 @@
     </summary>
     <param name="name">The attribute name.</param>
     <param name="value">The attribute value.</param>
+    /// <parentGroup>constructor</parentGroup>
   </Constructor>
 </members>

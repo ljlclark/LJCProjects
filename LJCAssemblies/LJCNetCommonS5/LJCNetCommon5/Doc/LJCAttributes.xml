@@ -3,6 +3,14 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCAttributes.xml -->
 <members>
+  <!--  Class -->
+  <LJCAttributes>
+    <summary>
+      Represents a collection of Attribute elements.
+    </summary>
+    <group name="collection">Collection</group>
+  </LJCAttributes>
+
   <!-- Collection Methods -->
   <Add>
     <summary>
@@ -11,5 +19,6 @@
     <param name="name">The attribute name.</param>
     <param name="value">The attribute value.</param>
     <returns>The XMLAttribute reference.</returns>
+    <parentGroup>collection</parentGroup>
   </Add>
 </members>

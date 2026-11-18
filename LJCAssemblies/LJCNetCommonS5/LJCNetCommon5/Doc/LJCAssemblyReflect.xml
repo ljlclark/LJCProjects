@@ -8,6 +8,13 @@
     <summary>
       Provides Assembly Reflection methods.
     </summary>
+    <group name="static">Static</group>
+    <group name="constructor">Constructors</group>
+    <group name="method">Methods</group>
+    <group name="reflectionProperty">Set Reflection Properties</group>
+    <group name="syntax">Get Syntax</group>
+    <group name="check">Check Type</group>
+    <group name="properties">Properties</group>
     <remarks>
       <para>
         Provides information for Constructors, Types, Methods, Properties and Fields.
@@ -24,6 +31,88 @@
     </remarks>
   </LJCAssemblyReflect>
 
+  <!-- Static Methods -->
+  <ParmNames>
+    <summary>
+      Gets parm names from method info.
+    </summary>
+    <parentGroup>static</parentGroup>
+  </ParmNames>
+  <ParmTypeNames>
+    <summary>
+      Gets parm method type names with parm names.
+    </summary>
+    <parentGroup>static</parentGroup>
+  </ParmTypeNames>
+  
+  <!-- Properties -->
+  <Assembly>
+    <summary>
+      The Assembly reference.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </Assembly>
+  <ConstructorInfo>
+    <summary>
+      The constructor information.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </ConstructorInfo>
+  <FieldInfo>
+    <summary>
+      The Field information.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </FieldInfo>
+  <FieldName>
+    <summary>
+      The Field name.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </FieldName>
+  <FileSpec>
+    <summary>
+      The Assembly file name.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </FileSpec>
+  <MethodInfo>
+    <summary>
+      The Method information.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </MethodInfo>
+  <MethodName>
+    <summary>
+      The Method name.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </MethodName>
+  <PropertyInfo>
+    <summary>
+      The Property information.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </PropertyInfo>
+  <PropertyName>
+    <summary>
+      The Property name.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </PropertyName>
+  <TypeName>
+    <summary>
+      The Type name.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </TypeName>
+  <TypeReference>
+    <summary>
+      The Type reference.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </TypeReference>
+
   <!-- Set Reflection Property Methods -->
   <SetAssembly>
     <summary>
@@ -31,6 +120,7 @@
     </summary>
     <param name="fileSpec">The file specification.</param>
     <returns>The Assembly reference.</returns>
+    <parentGroup>reflectionProperty</parentGroup>
     <remarks>
       Sets the FileSpec property value and attempts to set the Assembly property
       value if the assembly exists.
@@ -43,6 +133,7 @@
     <param name="methodName">The Method name.</param>
     <param name="parameterNames">The parameter types.</param>
     <returns>The ConstructorInfo value.</returns>
+    <parentGroup>reflectionProperty</parentGroup>
     <remarks>
       Sets the MethodName property value and attempts to set the ConstructorInfo
       property value if the type reference and constructor with the correct
@@ -77,6 +168,7 @@
     </summary>
     <param name="fieldName">The Field name.</param>
     <returns>The FieldInfo value.</returns>
+    <parentGroup>reflectionProperty</parentGroup>
     <remarks>
       Sets the FieldName property value and attempts to set the FieldInfo
       property value if the type reference and the field exist.
@@ -109,6 +201,7 @@
       Gets the Indexer Property info.
     </summary>
     <returns>The XMLDoc full name.</returns>
+    <parentGroup>reflectionProperty</parentGroup>
   </GetIndexerInfo>
   <SetMethodInfo>
     <summary>
@@ -117,6 +210,7 @@
     <param name="methodName">The Method name.</param>
     <param name="parameterNames">The parameter types.</param>
     <returns>The MethodInfo value.</returns>
+    <parentGroup>reflectionProperty</parentGroup>
     <remarks>
       Sets the MethodName property value and attempts to set the MethodInfo
       property value if the type reference and method with the correct
@@ -152,6 +246,7 @@
     <param name="propertyName">The Property name.</param>
     <param name="indexerSignature">The XMLDoc full name.</param>
     <returns>The PropertyInfo value.</returns>
+    <parentGroup>reflectionProperty</parentGroup>
     <remarks>
       Sets the PropertyName property value and attempts to set the PropertyInfo
       property value if the type reference and the property exist.
@@ -185,6 +280,7 @@
     </summary>
     <param name="typeName">The fully qualified Type name.</param>
     <returns>The Type reference.</returns>
+    <parentGroup>reflectionProperty</parentGroup>
     <remarks>
       Sets the TypeName property value and attempts to set the TypeReference
       property value if the assembly reference and type name exist.
@@ -218,6 +314,7 @@
     </summary>
     <param name="constructorInfo">The ConstructorInfo object.</param>
     <returns>The Constructor syntax.</returns>
+    <parentGroup>syntax</parentGroup>
     <example>
       <code xml:space="preserve">
         using System;
@@ -248,6 +345,7 @@
     </summary>
     <param name="fieldInfo">The FieldInfo object.</param>
     <returns></returns>
+    <parentGroup>syntax</parentGroup>
     <example>
       <code xml:space="preserve">
         using System;
@@ -278,6 +376,7 @@
     </summary>
     <param name="typeReference">The Type object.</param>
     <returns>The Generic Type syntax.</returns>
+    <parentGroup>syntax</parentGroup>
   </GetGenericTypeSyntax>
   <GetMethodSyntax>
     <summary>
@@ -285,6 +384,7 @@
     </summary>
     <param name="methodInfo">The MethodInfo object.</param>
     <returns>The Method syntax.</returns>
+    <parentGroup>syntax</parentGroup>
     <example>
       <code xml:space="preserve">
         using System;
@@ -315,6 +415,7 @@
     </summary>
     <param name="propertyInfo">The PropertyInfo object.</param>
     <returns>The syntax string.</returns>
+    <parentGroup>syntax</parentGroup>
     <example>
       <code xml:space="preserve">
         using System;
@@ -345,6 +446,7 @@
     </summary>
     <param name="typeReference">The Type object.</param>
     <returns>The Type syntax.</returns>
+    <parentGroup>syntax</parentGroup>
     <example>
       <code xml:space="preserve">
         using System;
@@ -375,6 +477,7 @@
     </summary>
     <param name="methodInfo">The MethodInfo object.</param>
     <returns>true if not a Property; otherwise, false.</returns>
+    <parentGroup>check</parentGroup>
   </IsProperty>
   <IsOverride>
     <summary>
@@ -382,6 +485,7 @@
     </summary>
     <param name="methodInfo">The MethodInfo object.</param>
     <returns>true if "override"; otherwise, false.</returns>
+    <parentGroup>check</parentGroup>
   </IsOverride>
   <IsPublic>
     <summary>
@@ -389,62 +493,6 @@
     </summary>
     <param name="methodInfo">The MethodInfo object.</param>
     <returns>true if "public"; otherwise, false.</returns>
+    <parentGroup>check</parentGroup>
   </IsPublic>
-
-  <!-- Properties -->
-  <Assembly>
-    <summary>
-      The Assembly reference.
-    </summary>
-  </Assembly>
-  <ConstructorInfo>
-    <summary>
-      The constructor information.
-    </summary>
-  </ConstructorInfo>
-  <FieldInfo>
-    <summary>
-      The Field information.
-    </summary>
-  </FieldInfo>
-  <FieldName>
-    <summary>
-      The Field name.
-    </summary>
-  </FieldName>
-  <FileSpec>
-    <summary>
-      The Assembly file name.
-    </summary>
-  </FileSpec>
-  <MethodInfo>
-    <summary>
-      The Method information.
-    </summary>
-  </MethodInfo>
-  <MethodName>
-    <summary>
-      The Method name.
-    </summary>
-  </MethodName>
-  <PropertyInfo>
-    <summary>
-      The Property information.
-    </summary>
-  </PropertyInfo>
-  <PropertyName>
-    <summary>
-      The Property name.
-    </summary>
-  </PropertyName>
-  <TypeName>
-    <summary>
-      The Type name.
-    </summary>
-  </TypeName>
-  <TypeReference>
-    <summary>
-      The Type reference.
-    </summary>
-  </TypeReference>
 </members>

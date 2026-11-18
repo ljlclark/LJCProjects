@@ -5,18 +5,15 @@
 namespace LJCNetCommon5
 {
   // Represents an HTML or XML element attribute.
-  /// <include file='Doc/Attribute.xml'
+  /// <include file='Doc/LJCAttribute.xml'
   ///  path='members/LJCAttribute/*'/>
-  /// <group name="constructor">Constructor</group>
-  /// <group name="properties">Properties</group>
   public class LJCAttribute
   {
     #region Properties
 
     // Gets or sets the attribute name.
-    /// <include file='Doc/Attribute.xml'
+    /// <include file='Doc/LJCAttribute.xml'
     ///  path='members/Name/*'/>
-    /// <parentGroup>properties</parentGroup>
     public string? Name
     {
       get => mName;
@@ -25,9 +22,8 @@ namespace LJCNetCommon5
     private string? mName;
 
     // Gets or sets the attribute value.
-    /// <include file='Doc/Attribute.xml'
+    /// <include file='Doc/LJCAttribute.xml'
     ///  path='members/Value/*'/>
-    /// <parentGroup>properties</parentGroup>
     public string? Value
     {
       get => mValue;
@@ -39,9 +35,8 @@ namespace LJCNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    /// <include file='Doc/Attribute.xml'
-    ///  path='members/Constructor/*'/>
-    /// <parentGroup>constructor</parentGroup>
+    /// <include file='Doc/LJCAttribute.xml'
+    ///  path='members/ParamConstructor/*'/>
     public LJCAttribute(string name, string? value = null)
     {
       Name = name;

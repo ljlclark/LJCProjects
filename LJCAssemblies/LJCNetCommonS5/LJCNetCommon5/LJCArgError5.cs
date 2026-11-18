@@ -5,26 +5,20 @@
 namespace LJCNetCommon5
 {
   // Creates an argument error message.
-  /// <include file='Doc/ArgError.xml'
+  /// <include file='Doc/LJCArgError.xml'
   ///  path='members/LJCArgError/*'/>
-  /// <group name="constructors">Constructors</group>
-  /// <group name="dataClass">Data Class</group>
-  /// <group name="methods">Methods</group>
-  /// <group name="properties">Properties</group>
   public class LJCArgError
   {
     #region Properties
 
     // Gets or sets the Class name.
-    /// <include file='Doc/ArgError.xml'
+    /// <include file='Doc/LJCArgError.xml'
     ///  path='members/ClassName/*'/>
-    /// <parentGroup>properties</parentGroup>
     public string ClassName { get; set; }
 
     // Gets or sets the Method name.
-    /// <include file='Doc/ArgError.xml'
+    /// <include file='Doc/LJCArgError.xml'
     ///  path='members/MethodName/*'/>
-    /// <parentGroup>properties</parentGroup>
     public string? MethodName
     {
       get => mMethodName;
@@ -48,7 +42,7 @@ namespace LJCNetCommon5
     #region Constructors
 
     // Initializes an object instance.
-    /// <include file='Doc/ArgError.xml'
+    /// <include file='Doc/LJCArgError.xml'
     ///  path='members/Constructor/*'/>
     public LJCArgError()
     {
@@ -57,18 +51,16 @@ namespace LJCNetCommon5
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include file='Doc/ArgError.xml'
+    /// <include file='Doc/LJCArgError.xml'
     ///  path='members/ParamConstructor/*'/>
-    /// <parentGroup>constructors</parentGroup>
     public LJCArgError(string className) : this()
     {
       ClassName = className;
     }
 
     // Clears the messages.
-    /// <include file='Doc/ArgError.xml'
+    /// <include file='Doc/LJCArgError.xml'
     ///  path='members/Clear/*'/>
-    /// <parentGroup>constructors</parentGroup>
     public void Clear()
     {
       mMessage = "";
@@ -78,9 +70,8 @@ namespace LJCNetCommon5
     #region Data Class Methods
 
     // Returns the message string.
-    /// <include file='Doc/ArgError.xml'
+    /// <include file='Doc/LJCArgError.xml'
     ///  path='members/ToString/*'/>
-    /// <parentGroup>dataClass</parentGroup>
     public override string? ToString()
     {
       string retValue = null;
@@ -97,27 +88,24 @@ namespace LJCNetCommon5
     #region Methods
 
     // Adds a message using the provided values.
-    /// <include file='Doc/ArgError.xml'
+    /// <include file='Doc/LJCArgError.xml'
     ///  path='members/Add1/*'/>
-    /// <parentGroup>methods</parentGroup>
     public void Add(object? argument, string name)
     {
       LJCNetString.AddObjectArgError(ref mMessage, argument, name);
     }
 
     // Adds a message.
-    /// <include file='Doc/ArgError.xml'
+    /// <include file='Doc/LJCArgError.xml'
     ///  path='members/Add2/*'/>
-    /// <parentGroup>methods</parentGroup>
     public void Add(string message)
     {
       mMessage += message;
     }
 
     // Checks the ID values.
-    /// <include file='Doc/ArgError.xml'
+    /// <include file='Doc/LJCArgError.xml'
     ///  path='members/DbIDCheck/*'/>
-    /// <parentGroup>methods</parentGroup>
     public void DbIDCheck(short dbId)
     {
       string message = "";
@@ -129,9 +117,8 @@ namespace LJCNetCommon5
     }
 
     // Checks the ID values.
-    /// <include file='Doc/ArgError.xml'
+    /// <include file='Doc/LJCArgError.xml'
     ///  path='members/IDCheck/*'/>
-    /// <parentGroup>methods</parentGroup>
     public void IDCheck(short dbId, long id)
     {
       string message = "";
@@ -147,9 +134,8 @@ namespace LJCNetCommon5
     }
 
     // 
-    /// <include file='Doc/ArgError.xml'
+    /// <include file='Doc/LJCArgError.xml'
     ///  path='members/ThrowError/*'/>
-    /// <parentGroup>methods</parentGroup>
     public void ThrowError()
     {
       LJCNetString.ThrowArgError(ToString());

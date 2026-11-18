@@ -8,8 +8,26 @@
     <summary>
       Creates an argument error message.
     </summary>
+    <group name="constructors">Constructors</group>
+    <group name="dataClass">Data Class</group>
+    <group name="methods">Methods</group>
+    <group name="properties">Properties</group>
   </LJCArgError>
-  
+
+  <!-- Properties -->
+  <ClassName>
+    <summary>
+      Gets or sets the Class name.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </ClassName>
+  <MethodName>
+    <summary>
+      Gets or sets the Method name.
+    </summary>
+    <parentGroup>properties</parentGroup>
+  </MethodName>
+
   <!-- Constructors -->
   <Constructor>
     <summary>
@@ -21,7 +39,14 @@
       Initializes an object instance with the supplied values.
     </summary>
     <param name="className">The Class name.</param>
+    <parentGroup>constructors</parentGroup>
   </ParamConstructor>
+  <Clear>
+    <summary>
+      Clears the messages.
+    </summary>
+    <parentGroup>constructors</parentGroup>
+  </Clear>
   
   <!-- Data Class Methods -->
   <ToString>
@@ -31,6 +56,7 @@
     <returns>
       The message string.
     </returns>
+    <parentGroup>dataClass</parentGroup>
   </ToString>
   
   <!-- Methods -->
@@ -40,23 +66,31 @@
     </summary>
     <param name="argument">The argument value.</param>
     <param name="name">The argument name.</param>
+    <parentGroup>methods</parentGroup>
   </Add1>
   <Add2>
     <summary>
       Adds a message.
     </summary>
     <param name="message">The message value.</param>
+    <parentGroup>methods</parentGroup>
   </Add2>
-  
-  <!-- Properties -->
-  <ClassName>
+  <DbIDCheck>
     <summary>
-      Gets or sets the Class name.
+      Checks the ID values.
     </summary>
-  </ClassName>
-  <MethodName>
+    <parentGroup>methods</parentGroup>
+  </DbIDCheck>
+  <IDCheck>
     <summary>
-      Gets or sets the Method name.
+      Checks the ID values.
     </summary>
-  </MethodName>
+    <parentGroup>methods</parentGroup>
+  </IDCheck>
+  <ThrowError>
+    <summary>
+      
+    </summary>
+    /// <parentGroup>methods</parentGroup>
+  </ThrowError>
 </members>

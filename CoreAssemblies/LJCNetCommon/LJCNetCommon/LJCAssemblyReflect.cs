@@ -315,8 +315,6 @@ namespace LJCNetCommon
     ///  path='members/SetAssembly/*'/>
     public Assembly SetAssembly(string fileSpec)
     {
-      FileSpec = fileSpec;
-
       Clear();
       FileSpec = fileSpec;
       if (LJC.HasText(FileSpec)
@@ -387,7 +385,7 @@ namespace LJCNetCommon
 
         if (selectedConstructorInfo != null)
         {
-          StringBuilder builder = new StringBuilder(64);
+          var builder = new StringBuilder(64);
           bool first = true;
           builder.Append($"{TypeReference.Name}(");
           string signature;
@@ -405,7 +403,7 @@ namespace LJCNetCommon
             builder.Append(parameterInfo.ParameterType.Name);
             parameterTypeList.Add(parameterInfo.ParameterType);
           }
-          builder.Append(")");
+          builder.Append(')');
           signature = builder.ToString();
           Type[] parameterTypes = new Type[parameterTypeList.Count];
           parameterTypeList.CopyTo(parameterTypes);
@@ -543,7 +541,7 @@ namespace LJCNetCommon
 
         if (selectedMethodInfo != null)
         {
-          StringBuilder builder = new StringBuilder(64);
+          var builder = new StringBuilder(64);
           bool first = true;
           builder.Append($"{MethodName}(");
           string signature = null;
@@ -561,7 +559,7 @@ namespace LJCNetCommon
             builder.Append(parameterInfo.ParameterType.Name);
             parameterTypeList.Add(parameterInfo.ParameterType);
           }
-          builder.Append(")");
+          builder.Append(')');
           signature = builder.ToString();
           Type[] parameterTypes = new Type[parameterTypeList.Count];
           parameterTypeList.CopyTo(parameterTypes);
@@ -583,7 +581,7 @@ namespace LJCNetCommon
     /// <include file='Doc/LJCAssemblyReflect.xml'
     ///  path='members/SetPropertyInfo/*'/>
     public PropertyInfo SetPropertyInfo(string propertyName
-      , string fullName = null)
+      , string indexerSignature = null)
     {
       PropertyName = propertyName;
 
@@ -593,7 +591,10 @@ namespace LJCNetCommon
       {
         if ("Item" == PropertyName)
         {
-          PropertyInfo = GetIndexerInfo(fullName);
+          if (LJC.HasText(indexerSignature))
+          {
+            PropertyInfo = GetIndexerInfo(indexerSignature);
+          }
         }
         else
         {
@@ -624,7 +625,7 @@ namespace LJCNetCommon
 
     #region Get Syntax Methods
 
-    // Creates and returns the Constructor syntax. (E)
+    // Creates and returns the Constructor syntax.
     /// <include file='Doc/LJCAssemblyReflect.xml'
     ///  path='members/GetConstructorSyntax/*'/>
     public string GetConstructorSyntax(ConstructorInfo constructorInfo = null)
@@ -639,7 +640,7 @@ namespace LJCNetCommon
 
       if (info != null)
       {
-        StringBuilder builder = new StringBuilder(128);
+        var builder = new StringBuilder(128);
 
         // Access Modifier
         if (info.IsPublic)
@@ -702,13 +703,13 @@ namespace LJCNetCommon
           }
         }
 
-        builder.Append(")");
+        builder.Append(')');
         retValue = builder.ToString();
       }
       return retValue;
     }
 
-    // Creates and returns the Field syntax string. (E)
+    // Creates and returns the Field syntax string.
     /// <include file='Doc/LJCAssemblyReflect.xml'
     ///  path='members/GetFieldSyntax/*'/>
     public string GetFieldSyntax(FieldInfo fieldInfo = null)
@@ -723,7 +724,7 @@ namespace LJCNetCommon
 
       if (info != null)
       {
-        StringBuilder builder = new StringBuilder(128);
+        var builder = new StringBuilder(128);
 
         // Access Modifier
         if (info.IsPublic)
@@ -766,7 +767,7 @@ namespace LJCNetCommon
       if (type != null
         && type.IsGenericType)
       {
-        StringBuilder builder = new StringBuilder(128);
+        var builder = new StringBuilder(128);
         int charIndex = type.Name.IndexOf('`');
         builder.Append($"{type.Name.Substring(0, charIndex)}<");
         bool isFirst = true;
@@ -791,13 +792,13 @@ namespace LJCNetCommon
           isFirst = false;
           builder.Append(typeArgument.Name);
         }
-        builder.Append(">");
+        builder.Append('>');
         retValue = builder.ToString();
       }
       return retValue;
     }
 
-    // Creates and returns the Method syntax. (E)
+    // Creates and returns the Method syntax.
     /// <include file='Doc/LJCAssemblyReflect.xml'
     ///  path='members/GetMethodSyntax/*'/>
     public string GetMethodSyntax(MethodInfo methodInfo = null)
@@ -811,9 +812,9 @@ namespace LJCNetCommon
       }
 
       if (info != null
-        && IsProperty(info))
+        && !IsProperty(info))
       {
-        StringBuilder builder = new StringBuilder(128);
+        var builder = new StringBuilder(128);
 
         // Access Modifier
         if (info.IsPrivate)
@@ -887,13 +888,13 @@ namespace LJCNetCommon
           }
         }
 
-        builder.Append(")");
+        builder.Append(')');
         retValue = builder.ToString();
       }
       return retValue;
     }
 
-    // Creates and returns the Property syntax string. (E)
+    // Creates and returns the Property syntax string.
     /// <include file='Doc/LJCAssemblyReflect.xml'
     ///  path='members/GetPropertySyntax/*'/>
     public string GetPropertySyntax(PropertyInfo propertyInfo = null)
@@ -908,7 +909,7 @@ namespace LJCNetCommon
 
       if (info != null)
       {
-        StringBuilder builder = new StringBuilder(128);
+        var builder = new StringBuilder(128);
 
         // Access Modifier
         MethodInfo methodInfo = info.GetMethod;
@@ -953,14 +954,14 @@ namespace LJCNetCommon
 
         if ("Item" == info.Name)
         {
-          builder.Append(")");
+          builder.Append(')');
         }
         retValue = builder.ToString();
       }
       return retValue;
     }
 
-    // Creates and returns the Type syntax. (E)
+    // Creates and returns the Type syntax.
     /// <include file='Doc/LJCAssemblyReflect.xml'
     ///  path='members/GetTypeSyntax/*'/>
     public string GetTypeSyntax(Type typeReference = null)
@@ -975,7 +976,7 @@ namespace LJCNetCommon
 
       if (type != null)
       {
-        StringBuilder builder = new StringBuilder(128);
+        var builder = new StringBuilder(128);
 
         // Access Modifier
         if (type.IsPublic)
@@ -1074,12 +1075,12 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Public Flag Methods
+    #region Check Type Methods
 
     // Indicates if the Type is a common type.
     /// <include file='Doc/LJCAssemblyReflect.xml'
     ///  path='members/IsCommonClassification/*'/>
-    public bool IsCommonClassification(Type type)
+    public static bool IsCommonClassification(Type type)
     {
       bool retValue = false;
 
@@ -1094,7 +1095,7 @@ namespace LJCNetCommon
     // Indicates if the Interface is a common type.
     /// <include file='Doc/LJCAssemblyReflect.xml'
     ///  path='members/IsCommonInterface/*'/>
-    public bool IsCommonInterface(Type type)
+    public static bool IsCommonInterface(Type type)
     {
       bool retValue = false;
 
@@ -1107,7 +1108,7 @@ namespace LJCNetCommon
           retValue = true;
         }
 
-        if (retValue)
+        if (!retValue)
         {
           if (type.Name.StartsWith("ICloneable")
             || type.Name.StartsWith("ICollection")
@@ -1128,13 +1129,13 @@ namespace LJCNetCommon
     // Indicates if the Method is a property getter or setter.
     /// <include file='Doc/LJCAssemblyReflect.xml'
     ///  path='members/IsProperty/*'/>
-    public bool IsProperty(MethodInfo methodInfo)
+    public static bool IsProperty(MethodInfo methodInfo)
     {
       bool retValue = false;
 
       if (methodInfo != null
-        && methodInfo.Name.StartsWith("get_")
-        && methodInfo.Name.StartsWith("set_"))
+        && (methodInfo.Name.StartsWith("get_")
+        || methodInfo.Name.StartsWith("set_")))
       {
         retValue = true;
       }
@@ -1144,7 +1145,7 @@ namespace LJCNetCommon
     // Indicates if the method is "override".
     /// <include file='Doc/LJCAssemblyReflect.xml'
     ///  path='members/IsOverride/*'/>
-    public bool IsOverride(MethodInfo methodInfo)
+    public static bool IsOverride(MethodInfo methodInfo)
     {
       return !methodInfo.Equals(methodInfo.GetBaseDefinition());
     }
