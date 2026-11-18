@@ -32,7 +32,7 @@ namespace LJCNetCommon
 
     // Gets the supported key sizes.
     /// <include file='Doc/LJCCryptography.xml'
-    ///  path='items/LegalKeySizes/*'/>
+    ///  path='members/LegalKeySizes/*'/>
     public KeySizes[] LegalKeySizes
     {
       get => mAlgorithm.LegalKeySizes;
@@ -41,6 +41,7 @@ namespace LJCNetCommon
 
     #region Class Data
 
+    // Property values.
     private readonly SymmetricAlgorithm mAlgorithm;
     #endregion
 
@@ -48,7 +49,7 @@ namespace LJCNetCommon
 
     // Initializes a new instance of the MemoryCrypto class.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Constructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCCryptography()
     {
       mAlgorithm = Aes.Create();
@@ -60,7 +61,7 @@ namespace LJCNetCommon
 
     // Returns a decrypted string from a cipher byte array. (E)
     /// <include file='Doc/LJCCryptography.xml'
-    ///  path='items/Decrypt/*'/>
+    ///  path='members/Decrypt/*'/>
     public string Decrypt(byte[] cipher, byte[] key
       , byte[] initializationVector)
     {
@@ -74,7 +75,7 @@ namespace LJCNetCommon
 
     // Returns a decrypted byte array from a cipher byte array.
     /// <include file='Doc/LJCCryptography.xml'
-    ///  path='items/DecryptBytes/*'/>
+    ///  path='members/DecryptBytes/*'/>
     public byte[] DecryptBytes(byte[] cipher, byte[] key
       , byte[] initializationVector)
     {
@@ -118,7 +119,7 @@ namespace LJCNetCommon
 
     // Returns an encrypted byte array from a byte array.
     /// <include file='Doc/LJCCryptography.xml'
-    ///  path='items/Encrypt1/*'/>
+    ///  path='members/Encrypt1/*'/>
     public byte[] Encrypt(byte[] bytes, byte[] key
       , byte[] initializationVector)
     {
@@ -165,7 +166,7 @@ namespace LJCNetCommon
 
     // Returns an encrypted byte array from a string value. (E)
     /// <include file='Doc/LJCCryptography.xml'
-    ///  path='items/Encrypt2/*'/>
+    ///  path='members/Encrypt2/*'/>
     public byte[] Encrypt(string plainText, byte[] key
       , byte[] initializationVector)
     {
@@ -177,7 +178,7 @@ namespace LJCNetCommon
 
     // Generates a random initialization vector based on the encryption type.
     /// <include file='Doc/LJCCryptography.xml'
-    ///  path='items/GenerateIV/*'/>
+    ///  path='members/GenerateIV/*'/>
     public byte[] GenerateIV()
     {
       mAlgorithm.GenerateIV();
@@ -186,7 +187,7 @@ namespace LJCNetCommon
 
     // Generates a random encryption key based on the encryption type.
     /// <include file='Doc/LJCCryptography.xml'
-    ///  path='items/GenerateKey/*'/>
+    ///  path='members/GenerateKey/*'/>
     public byte[] GenerateKey()
     {
       mAlgorithm.GenerateKey();
@@ -195,7 +196,7 @@ namespace LJCNetCommon
 
     // Returns true if the key size is valid otherwise returns false.
     /// <include file='Doc/LJCCryptography.xml'
-    ///  path='items/IsValidKeySize/*'/>
+    ///  path='members/IsValidKeySize/*'/>
     public bool IsValidKeySize(int sizeValue)
     {
       KeySizes[] keySizesArray;

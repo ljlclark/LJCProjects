@@ -7,14 +7,14 @@ using System.Security.Cryptography;
 namespace LJCNetCommon5
 {
   // Provides methods to encrypt and decrypt data in memory.
-  /// <include file='Doc/Cryptography.xml'
+  /// <include file='Doc/LJCCryptography.xml'
   ///  path='members/LJCCryptography/*'/>
   public class LJCCryptography
   {
     #region Properties
 
     // Gets or sets the secret key size in bits.
-    /// <include file='Doc/Cryptography.xml'
+    /// <include file='Doc/LJCCryptography.xml'
     ///  path='members/KeySize/*'/>
     public int KeySize
     {
@@ -30,34 +30,18 @@ namespace LJCNetCommon5
     }
 
     // Gets the supported key sizes.
-    /// <include file='Doc/Cryptography.xml'
+    /// <include file='Doc/LJCCryptography.xml'
     ///  path='members/LegalKeySizes/*'/>
     public KeySizes[] LegalKeySizes
     {
       get => mAlgorithm.LegalKeySizes;
     }
-
-    // Gets or sets the encryption type.
-    //public Cryptography_Type Type
-    //{
-    //  get { return mType; }
-    //  set
-    //  {
-    //    mType = value;
-    //    mCryptoTypeText = GetCryptoTypeText(mType);
-    //    //mAlgorithm = SymmetricAlgorithm.Create(mCryptoTypeText);
-    //    mAlgorithm = Aes.Create();
-    //    return;
-    //  }
-    //}
     #endregion
 
     #region Class Data
 
     // Property values.
-    //tring? mCryptoTypeText;
     private readonly SymmetricAlgorithm mAlgorithm;
-    //Cryptography_Type mType;
     #endregion
 
     #region Constructors
@@ -67,7 +51,6 @@ namespace LJCNetCommon5
     ///  path='members/Constructor/*'/>
     public LJCCryptography()
     {
-      //Type = Cryptography_Type.Crypto_Rijndael;
       mAlgorithm = Aes.Create();
       return;
     }
@@ -76,7 +59,7 @@ namespace LJCNetCommon5
     #region Methods
 
     // Returns a decrypted string from a cipher byte array. (E)
-    /// <include file='Doc/Cryptography.xml'
+    /// <include file='Doc/LJCCryptography.xml'
     ///  path='members/Decrypt/*'/>
     public string Decrypt(byte[] cipher, byte[] key
       , byte[] initializationVector)
@@ -90,8 +73,8 @@ namespace LJCNetCommon5
     }
 
     // Returns a decrypted byte array from a cipher byte array.
-    /// <include file='Doc/Cryptography.xml'
-    /// path='members/DecryptBytes/*'/>
+    /// <include file='Doc/LJCCryptography.xml'
+    ///  path='members/DecryptBytes/*'/>
     public byte[] DecryptBytes(byte[] cipher, byte[] key
       , byte[] initializationVector)
     {
@@ -134,7 +117,7 @@ namespace LJCNetCommon5
     }
 
     // Returns an encrypted byte array from a byte array.
-    /// <include file='Doc/Cryptography.xml'
+    /// <include file='Doc/LJCCryptography.xml'
     ///  path='members/Encrypt1/*'/>
     public byte[] Encrypt(byte[] bytes, byte[] key
       , byte[] initializationVector)
@@ -181,7 +164,7 @@ namespace LJCNetCommon5
     }
 
     // Returns an encrypted byte array from a string value. (E)
-    /// <include file='Doc/Cryptography.xml'
+    /// <include file='Doc/LJCCryptography.xml'
     ///  path='members/Encrypt2/*'/>
     public byte[] Encrypt(string plainText, byte[] key
       , byte[] initializationVector)
@@ -193,7 +176,7 @@ namespace LJCNetCommon5
     }
 
     // Generates a random initialization vector based on the encryption type.
-    /// <include file='Doc/Cryptography.xml'
+    /// <include file='Doc/LJCCryptography.xml'
     ///  path='members/GenerateIV/*'/>
     public byte[] GenerateIV()
     {
@@ -202,7 +185,7 @@ namespace LJCNetCommon5
     }
 
     // Generates a random encryption key based on the encryption type.
-    /// <include file='Doc/Cryptography.xml'
+    /// <include file='Doc/LJCCryptography.xml'
     ///  path='members/GenerateKey/*'/>
     public byte[] GenerateKey()
     {
@@ -211,7 +194,7 @@ namespace LJCNetCommon5
     }
 
     // Returns true if the key size is valid otherwise returns false.
-    /// <include file='Doc/Cryptography.xml'
+    /// <include file='Doc/LJCCryptography.xml'
     ///  path='members/IsValidKeySize/*'/>
     public bool IsValidKeySize(int sizeValue)
     {
@@ -235,32 +218,6 @@ namespace LJCNetCommon5
       }
       return retVal;
     }
-
-    //// Returns the crypto type text using the CryptoType enumeration.
-    //private static string? GetCryptoTypeText(Cryptography_Type cryptoType)
-    //{
-    //  string retValue = null;
-
-    //  switch (cryptoType)
-    //  {
-    //    case Cryptography_Type.Crypto_DES:
-    //      retValue = "DES";
-    //      break;
-
-    //    case Cryptography_Type.Crypto_3DES:
-    //      retValue = "3DES";
-    //      break;
-
-    //    case Cryptography_Type.Crypto_RC2:
-    //      retValue = "RC2";
-    //      break;
-
-    //    case Cryptography_Type.Crypto_Rijndael:
-    //      retValue = "Rijndael";
-    //      break;
-    //  }
-    //  return retValue;
-    //}
     #endregion
   }
 

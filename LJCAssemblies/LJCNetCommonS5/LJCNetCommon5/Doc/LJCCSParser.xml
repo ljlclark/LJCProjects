@@ -9,6 +9,9 @@
       Provides methods to parse a source line for class, method and property
       definitions.
     </summary>
+    <group name="constructor">Constructor</group>
+    <group name="methods">Methods</group>
+    <group name="properties">Properties</group>
   </LJCCSParser>
   
   <!-- Constructor Methods -->
@@ -16,6 +19,7 @@
     <summary>
       Initializes an object instance.
     </summary>
+    <parentGroup>constructor</parentGroup>
   </Constructor>
 
   <!-- Methods -->
@@ -27,6 +31,7 @@
     <returns>
       The class name if the line contains a class definition; otherwise null.
     </returns>
+    <parentGroup>methods</parentGroup>
   </ClassName>
   <MethodName>
     <summary>
@@ -36,6 +41,7 @@
     <returns>
       The method name if the line contains a method definition; otherwise null.
     </returns>
+    <parentGroup>methods</parentGroup>
   </MethodName>
   <PropertyName>
     <summary>
@@ -47,6 +53,7 @@
       The property name if the line contains a property definition; otherwise
       null.
     </returns>
+    <parentGroup>methods</parentGroup>
   </PropertyName>
   
   <!-- Properties -->
@@ -54,20 +61,24 @@
     <summary>
       Gets or sets the second class access modifier.
     </summary>
+    <parentGroup>properties</parentGroup>
   </ClassModifier2>
   <DataType>
     <summary>
       Gets or sets the data types.
     </summary>
+    <parentGroup>properties</parentGroup>
   </DataType>
   <Modifier>
     <summary>
       Gets or sets the access modifiers.
     </summary>
+    <parentGroup>properties</parentGroup>
   </Modifier>
   <Modifier2>
     <summary>
       Gets or sets the second access modifier.
     </summary>
+    <parentGroup>properties</parentGroup>
   </Modifier2>
 </members>

@@ -172,7 +172,7 @@ namespace LJCNetCommon
           }
 
           IsChanged = false;
-          if (!EqualityComparer<object>.Default.Equals(OriginalValue, _Value))
+          if (!LJC.IsEqual(OriginalValue, value))
           {
             IsChanged = true;
           }
@@ -299,37 +299,37 @@ namespace LJCNetCommon
     #region Class Data
 
     /// <summary>The AllowDBNull column name.</summary>
-    public static string ColumnAllowDBNull = "AllowDBNull";
+    public const string ColumnAllowDBNull = "AllowDBNull";
 
     /// <summary>The AutoIncrement column name.</summary>
-    public static string ColumnAutoIncrement = "AutoIncrement";
+    public const string ColumnAutoIncrement = "AutoIncrement";
 
     /// <summary>The Caption column name.</summary>
-    public static string ColumnCaption = "Caption";
+    public const string ColumnCaption = "Caption";
 
     /// <summary>The ColumnName column name.</summary>
-    public static string ColumnColumnName = "ColumnName";
+    public const string ColumnColumnName = "ColumnName";
 
     /// <summary>The DataTypeName column name.</summary>
-    public static string ColumnDataTypeName = "DataTypeName";
+    public const string ColumnDataTypeName = "DataTypeName";
 
     /// <summary>The MaxLength column name.</summary>
-    public static string ColumnMaxLength = "MaxLength";
+    public const string ColumnMaxLength = "MaxLength";
 
     /// <summary>The Position column name.</summary>
-    public static string ColumnPosition = "Position";
+    public const string ColumnPosition = "Position";
 
     /// <summary>The PropertyName column name.</summary>
-    public static string ColumnPropertyName = "PropertyName";
+    public const string ColumnPropertyName = "PropertyName";
 
     /// <summary>The RenameAs column name.</summary>
-    public static string ColumnRenameAs = "RenameAs";
+    public const string ColumnRenameAs = "RenameAs";
 
     /// <summary>The SQLTypeName column name.</summary>
-    public static string ColumnSQLTypeName = "SQLTypeName";
+    public const string ColumnSQLTypeName = "SQLTypeName";
 
     /// <summary>The Value column name.</summary>
-    public static string ColumnValue = "Value";
+    public const string ColumnValue = "Value";
     #endregion
 
     #region Constructor Methods
@@ -395,12 +395,12 @@ namespace LJCNetCommon
       // Data Properties
       AllowDBNull = item.AllowDBNull;
       AutoIncrement = item.AutoIncrement;
-      Caption = item.Caption;
-      ColumnName = item.ColumnName;
-      DataTypeName = item.DataTypeName;
+      _Caption = item.Caption;
+      _ColumnName = item.ColumnName;
+      _DataTypeName = item.DataTypeName;
       MaxLength = item.MaxLength;
       Position = item.Position;
-      PropertyName = item.PropertyName;
+      _PropertyName = item.PropertyName;
       RenameAs = item.RenameAs;
       SQLTypeName = item.SQLTypeName;
       Value = item.Value;
@@ -470,7 +470,7 @@ namespace LJCNetCommon
     ///  path='members/LJCDataValue/*'/>
     public static implicit operator LJCDataValue(LJCDataColumn dataColumn)
     {
-      LJCDataValue retValue = null;
+      var retValue = new LJCDataValue();
 
       if (dataColumn != null)
       {

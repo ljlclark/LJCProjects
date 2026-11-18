@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCCSParser.cs
-
 using System.Linq;
 
 namespace LJCNetCommon
@@ -19,7 +18,7 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      var index = token.IndexOf("(");
+      var index = token.IndexOf('(');
       if (index >= 0)
       {
         var length = token.Length;
@@ -114,7 +113,7 @@ namespace LJCNetCommon
           && tokens.Length > 3)
         {
           if (IsModifier(tokens[0])
-            && IsClassModifier2(tokens[1]))
+            || IsClassModifier2(tokens[1]))
           {
             if ("class" == tokens[2])
             {
@@ -142,7 +141,7 @@ namespace LJCNetCommon
 
         // void Method()
         if (!LJC.HasText(retName)
-        && tokens.Length > 1)
+          && tokens.Length > 1)
         {
           if (IsType(tokens[0]))
           {
@@ -246,7 +245,8 @@ namespace LJCNetCommon
         if (!LJC.HasText(retName))
         {
           // modifier type Property {
-          if (tokens.Length > 3
+          //if (tokens.Length > 3
+          if (tokens.Length > 2
             && (IsModifier(tokens[0])
             || IsType(tokens[0]))
             && !tokens[0].StartsWith("#"))

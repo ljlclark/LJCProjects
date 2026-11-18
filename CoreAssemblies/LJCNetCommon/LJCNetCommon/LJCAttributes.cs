@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace LJCNetCommon
 {
-  /// Represents a collection of Attribute elements.
+  // Represents a collection of Attribute elements.
   /// <include file='Doc/LJCAttributes.xml'
   ///  path='members/LJCAttributes/*'/>
   public class LJCAttributes : List<LJCAttribute>
@@ -17,9 +17,9 @@ namespace LJCNetCommon
     ///  path='members/Add/*'/>
     public LJCAttribute Add(string name, string value)
     {
-      var retAttribute = new LJCAttribute(name, value);
-      Add(retAttribute);
-      return retAttribute;
+      var retAttrib = new LJCAttribute(name, value);
+      Add(retAttrib);
+      return retAttrib;
     }
     #endregion
   }

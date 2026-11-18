@@ -6,24 +6,24 @@ using System.Xml.Serialization;
 namespace LJCNetCommon5
 {
   // Represents a data source column.
-  /// <include file='Doc/DataColumn.xml'
+  /// <include file='Doc/LJCDataColumn.xml'
   ///  path='members/LJCDataColumn/*'/>
   public class LJCDataColumn
   {
     #region Data Properties
 
     // Gets or sets the AllowDBNull flag.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/AllowDBNull/*'/>
     public bool AllowDBNull { get; set; }
 
     // Gets or sets the AutoIncrement flag.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/AutoIncrement/*'/>
     public bool AutoIncrement { get; set; }
 
     // Gets or sets the Caption value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/Caption/*'/>
     public string? Caption
     {
@@ -40,7 +40,7 @@ namespace LJCNetCommon5
     private string? _Caption;
 
     // Gets or sets the ColumnName value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/ColumnName/*'/>
     public string ColumnName
     {
@@ -66,7 +66,7 @@ namespace LJCNetCommon5
     private string _ColumnName;
 
     // Gets or sets the DataTypeName value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/DataTypeName/*'/>
     public string? DataTypeName
     {
@@ -83,17 +83,17 @@ namespace LJCNetCommon5
     private string? _DataTypeName;
 
     // Gets or sets the MaxLength value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/MaxLength/*'/>
     public int MaxLength { get; set; }
 
     // Gets or sets the Fixed Length Field Position value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/Position/*'/>
     public int Position { get; set; }
 
     // Gets or sets the PropertyName value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/PropertyName/*'/>
     public string PropertyName
     {
@@ -119,7 +119,7 @@ namespace LJCNetCommon5
     private string _PropertyName;
 
     // Gets or sets the RenameAs value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/RenameAs/*'/>
     public string? RenameAs
     {
@@ -136,7 +136,7 @@ namespace LJCNetCommon5
     private string? _RenameAs;
 
     // Gets or sets the SQLTypeName value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/SQLTypeName/*'/>
     public string? SQLTypeName
     {
@@ -153,7 +153,7 @@ namespace LJCNetCommon5
     private string? _SQLTypeName;
 
     // Gets or sets the Value object.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/Value/*'/>
     public object? Value
     {
@@ -184,12 +184,12 @@ namespace LJCNetCommon5
     #region Properties
 
     // Gets or sets the add order index.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/AddOrderIndex/*'/>
     public int AddOrderIndex { get; set; }
 
     // Gets or sets the default value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/DefaultValue/*'/>
     public string? DefaultValue
     {
@@ -206,24 +206,24 @@ namespace LJCNetCommon5
     private string? _DefaultValue;
 
     // Gets or sets the changed indicator.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/IsChanged/*'/>
     [XmlIgnore()]
     public bool IsChanged { get; set; }
 
     // Gets or sets the primary key indicator.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/IsPrimaryKey/*'/>
     public bool IsPrimaryKey { get; set; }
 
     // Gets or sets the unique key indicator.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/IsUniqueKey/*'/>
     public bool IsUniqueKey { get; set; }
 
     // Gets or sets the KeyType value.
     // "Natural", "Natural*", "Foreign"
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/KeyType/*'/>
     public string? KeyType
     {
@@ -240,7 +240,7 @@ namespace LJCNetCommon5
     private string? _KeyType;
 
     // Gets or sets the original value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/OriginalValue/*'/>
     public object? OriginalValue
     {
@@ -265,31 +265,31 @@ namespace LJCNetCommon5
     #region View Join Data Properties
 
     // Gets or sets the view ID value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/ID/*'/>
     [XmlIgnore()]
     public int ID { get; set; }
 
     // Gets or sets the view Sequence value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/Sequence/*'/>
     [XmlIgnore()]
     public int Sequence { get; set; }
 
     // Gets or sets the view DataID value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/ViewDataID/*'/>
     [XmlIgnore()]
     public int ViewDataID { get; set; }
 
     // Gets or sets the view JoinID value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/ViewJoinID/*'/>
     [XmlIgnore()]
     public int ViewJoinID { get; set; }
 
     // Gets or sets the view Width value.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/Width/*'/>
     [XmlIgnore()]
     public int Width { get; set; }
@@ -369,7 +369,7 @@ namespace LJCNetCommon5
     }
 
     // Initializes an object instance with the supplied values.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/ParamConstructor/*'/>
     public LJCDataColumn(string propertyName, string? value = null
       , string dataTypeName = "string", string? columnName = null
@@ -434,7 +434,7 @@ namespace LJCNetCommon5
     }
 
     // Formats the column value for an SQL string.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/FormatValue/*'/>
     public string? FormatValue()
     {
@@ -465,7 +465,7 @@ namespace LJCNetCommon5
     }
 
     // Creates a LJCDataValue object from an LJCDataColumn object.
-    /// <include file='Doc/DataColumn.xml'
+    /// <include file='Doc/LJCDataColumn.xml'
     ///  path='members/LJCDataValue/*'/>
     public static implicit operator LJCDataValue(LJCDataColumn dataColumn)
     {
