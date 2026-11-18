@@ -20,7 +20,7 @@ namespace LJCWinFormCommon
         && grid.Columns.Count > 0)
       {
         var hb = new HTMLBuilder();
-        var textState = new TextState();
+        var textState = new LJCTextState();
 
         hb.Begin("tr", textState);
         foreach (DataGridViewColumn column in grid.Columns)
@@ -44,7 +44,7 @@ namespace LJCWinFormCommon
         && grid.Rows.Count > 0)
       {
         var hb = new HTMLBuilder();
-        var textState = new TextState();
+        var textState = new LJCTextState();
 
         var attribs = hb.TableAttribs();
         hb.Begin("table", textState, attribs);
@@ -69,7 +69,7 @@ namespace LJCWinFormCommon
         && grid.Rows.Count > 0)
       {
         var hb = new HTMLBuilder();
-        var textState = new TextState();
+        var textState = new LJCTextState();
 
         foreach (DataGridViewRow row in grid.Rows)
         {

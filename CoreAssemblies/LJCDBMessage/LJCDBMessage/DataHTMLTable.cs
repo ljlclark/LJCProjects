@@ -22,7 +22,7 @@ namespace LJCDBMessage
       if (LJC.HasTableData(dataTable))
       {
         var hb = new HTMLBuilder();
-        var textState = new TextState();
+        var textState = new LJCTextState();
 
         hb.Begin("tr", textState);
         foreach (DataColumn column in dataTable.Columns)
@@ -45,7 +45,7 @@ namespace LJCDBMessage
       if (LJC.HasTableData(dataTable))
       {
         var hb = new HTMLBuilder();
-        var textState = new TextState();
+        var textState = new LJCTextState();
 
         var attribs = hb.TableAttribs();
         hb.Begin("table", textState, attribs);
@@ -69,7 +69,7 @@ namespace LJCDBMessage
       if (LJC.HasTableData(dataTable))
       {
         var hb = new HTMLBuilder();
-        var textState = new TextState();
+        var textState = new LJCTextState();
 
         var count = 0;
         foreach (DataRow row in dataTable.Rows)
@@ -107,7 +107,7 @@ namespace LJCDBMessage
       if (LJC.HasListItems(dataObjects))
       {
         var hb = new HTMLBuilder();
-        var textState = new TextState();
+        var textState = new LJCTextState();
 
         hb.Begin("tr", textState);
         var dataObject = dataObjects[0];
@@ -138,7 +138,7 @@ namespace LJCDBMessage
       if (LJC.HasListItems(dataObjects))
       {
         var hb = new HTMLBuilder();
-        var textState = new TextState();
+        var textState = new LJCTextState();
 
         var attribs = hb.TableAttribs();
         hb.Begin("table", textState, attribs);
@@ -163,7 +163,7 @@ namespace LJCDBMessage
       if (LJC.HasListItems(dataObjects))
       {
         var hb = new HTMLBuilder();
-        var textState = new TextState();
+        var textState = new LJCTextState();
 
         var count = 0;
         foreach (var dataObject in dataObjects)
@@ -204,7 +204,8 @@ namespace LJCDBMessage
     // Create table headings from a DbResult.
     /// <include file='Doc/HTMLTableData.xml'
     ///  path='items/ResultHeadings/*'/>
-    public static string ResultHeadings(DbResult dbResult, TextState textState)
+    public static string ResultHeadings(DbResult dbResult
+      , LJCTextState textState)
     {
       string retValue = null;
 
@@ -226,7 +227,7 @@ namespace LJCDBMessage
     // Creates an HTML table from a DbResult.
     /// <include file='Doc/HTMLTableData.xml'
     ///  path='items/ResultHTML/*'/>
-    public static string ResultHTML(DbResult dbResult, TextState textState
+    public static string ResultHTML(DbResult dbResult, LJCTextState textState
       , int maxRows = 0)
     {
       string retValue = null;
@@ -253,7 +254,7 @@ namespace LJCDBMessage
     // Create table rows from a DbResult.
     /// <include file='Doc/HTMLTableData.xml'
     ///  path='items/ResultRows/*'/>
-    public static string ResultRows(DbResult dbResult, TextState textState
+    public static string ResultRows(DbResult dbResult, LJCTextState textState
       , int maxRows = 0)
     {
       string retValue = null;
