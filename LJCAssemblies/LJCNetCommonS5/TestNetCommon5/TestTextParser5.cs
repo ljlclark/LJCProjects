@@ -54,7 +54,7 @@ namespace TestNetCommon5
       var line = "<comment>";
       var beginDelimiter = "<comment>";
 
-      var textParser = new LJCTextParser();
+      var textParser = new LJCParser();
       var text = textParser.DelimitedString(line, beginDelimiter);
       var result = $"{text}, {textParser.BeginIndex}, {textParser.EndIndex}";
       result += $", {textParser.StartIndex}";
@@ -68,7 +68,7 @@ namespace TestNetCommon5
       var line = "<comment>This is a comment.";
       var beginDelimiter = "<comment>";
 
-      var parser = new LJCTextParser();
+      var parser = new LJCParser();
       var text = parser.DelimitedString(line, beginDelimiter);
       var result = $"{text}, {parser.BeginIndex}, {parser.EndIndex}";
       result += $", {parser.StartIndex}";
@@ -81,7 +81,7 @@ namespace TestNetCommon5
     {
       var line = "This is a comment.";
 
-      var parser = new LJCTextParser();
+      var parser = new LJCParser();
       var text = parser.DelimitedString(line);
       var result = $"{text}, {parser.BeginIndex}, {parser.EndIndex}";
       result += $", {parser.StartIndex}";
@@ -95,7 +95,7 @@ namespace TestNetCommon5
       var line = "This is a comment.</comment>";
       var endDelimiter = "</comment>";
 
-      var parser = new LJCTextParser();
+      var parser = new LJCParser();
       var text = parser.DelimitedString(line, null, endDelimiter);
       var result = $"{text}, {parser.BeginIndex}, {parser.EndIndex}";
       result += $", {parser.StartIndex}";
@@ -109,7 +109,7 @@ namespace TestNetCommon5
       var line = "</comment>";
       var endDelimiter = "</comment>";
 
-      var parser = new LJCTextParser();
+      var parser = new LJCParser();
       var text = parser.DelimitedString(line, null, endDelimiter);
       var result = $"{text}, {parser.BeginIndex}, {parser.EndIndex}";
       result += $", {parser.StartIndex}";
@@ -124,7 +124,7 @@ namespace TestNetCommon5
       var beginDelimiter = "(";
       var endDelimiter = ")";
 
-      var parser = new LJCTextParser();
+      var parser = new LJCParser();
       var first = true;
       while (parser.StartIndex >= 0)
       {
@@ -152,7 +152,7 @@ namespace TestNetCommon5
       var beginDelimiter = "(";
       var endDelimiter = ")";
 
-      var parser = new LJCTextParser();
+      var parser = new LJCParser();
       var text = parser.DelimitedString(line, beginDelimiter, endDelimiter);
       var result = $"{text}, {parser.StartIndex}";
       var compare = "One, -1";
@@ -166,7 +166,7 @@ namespace TestNetCommon5
       var beginDelimiter = "(";
       var endDelimiter = ")";
 
-      var parser = new LJCTextParser();
+      var parser = new LJCParser();
       var text = parser.StringWithDelimiters(line, beginDelimiter, endDelimiter);
       var result = $"{text}, {parser.StartIndex}";
       var compare = "(One), -1";
@@ -181,8 +181,8 @@ namespace TestNetCommon5
     {
       var line = "<comment>A comment.</comment>";
 
-      var textParser = new LJCTextParser();
-      string? findTagName = null;
+      var textParser = new LJCParser();
+      string findTagName = "";
       var result = textParser.FindTag(line, ref findTagName);
       var compare = "<comment>";
       TestCommon.Write("FindTag()1", result, compare);
@@ -191,7 +191,7 @@ namespace TestNetCommon5
       TestCommon.Write("FindTag()2", result, compare);
 
       line = "<comment name=\"What?\">A comment.</comment>";
-      findTagName = null;
+      findTagName = "";
       result = textParser.FindTag(line, ref findTagName);
       compare = "<comment>";
       TestCommon.Write("FindTag()2", result, compare);
@@ -213,7 +213,7 @@ namespace TestNetCommon5
     {
       var line = "<comment>A comment.</comment>";
 
-      var textParser = new LJCTextParser();
+      var textParser = new LJCParser();
       var beginIndex = 0;
       var endIndex = 8;
       var result = textParser.RemoveSection(line, beginIndex, endIndex);
@@ -232,7 +232,7 @@ namespace TestNetCommon5
     {
       var line = "<comment>A comment.</comment>";
 
-      var textParser = new LJCTextParser();
+      var textParser = new LJCParser();
       var result = textParser.RemoveTags(line);
       var compare = "A comment.";
       TestCommon.Write("RemoveTags", result, compare);

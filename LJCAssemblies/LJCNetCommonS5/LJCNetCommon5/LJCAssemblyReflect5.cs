@@ -516,7 +516,7 @@ namespace LJCNetCommon5
       MethodName = methodName;
       if (MethodName.Contains('`'))
       {
-        var parser = new LJCTextParser();
+        var parser = new LJCParser();
         MethodName = parser.StringWithDelimiters(MethodName, MethodName[0].ToString(), "`");
         //MethodName = MethodName?.Substring(0, MethodName.Length - 1);
         MethodName = MethodName?[..^1];
