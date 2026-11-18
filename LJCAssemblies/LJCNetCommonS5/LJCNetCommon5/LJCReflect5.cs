@@ -20,7 +20,6 @@ namespace LJCNetCommon5
 
     #region Class Data
 
-    // Class Data.
     private object mSource;
     private readonly Type mType;
     private readonly LJCPropertyDelegates mPropertyDelegates;
@@ -60,13 +59,6 @@ namespace LJCNetCommon5
       PropertyInfo retValue = null;
 
       retValue = Array.Find(PropertyInfos, (x) => x.Name == propertyName);
-      //if (null == retValue)
-      //{
-      //  var name = mType.Name;
-      //	var text = $"{name} Property '{propertyName}' was not found"
-      //		+ $" in object '{mSource.GetType().Name}'.";
-      //	throw new ArgumentException(text);
-      //}
       return retValue;
     }
 
@@ -93,10 +85,8 @@ namespace LJCNetCommon5
     ///  path='members/GetPropertyType/*'/>
     public Type? GetPropertyType(string propertyName)
     {
-      Type retVal;
-
       var info = GetPropertyInfo(propertyName);
-      retVal = info?.PropertyType;
+      Type retVal = info?.PropertyType;
       return retVal;
     }
 
@@ -289,7 +279,7 @@ namespace LJCNetCommon5
     }
     #endregion
 
-    #region Addition Value Methods
+    #region Other Value Methods
 
     // Gets the property value as a DB date/time string.
     /// <include file='Doc/Reflect.xml'

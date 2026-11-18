@@ -14,7 +14,7 @@ namespace TestCSParser
     // The entry method.
     private static void Main()
     {
-      TestCommon = new TestCommon("CSParserProgram");
+      TestCommon = new LJCTestCommon("CSParserProgram");
       Console.WriteLine();
       Console.WriteLine("*** CSParser ***");
 
@@ -104,7 +104,7 @@ namespace TestCSParser
     #region Class Data
 
     // The test common object.
-    private static TestCommon TestCommon { get; set; }
+    private static LJCTestCommon TestCommon { get; set; }
     #endregion
   }
 }

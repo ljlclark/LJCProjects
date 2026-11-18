@@ -75,9 +75,9 @@
     <Compile Include="LJCReflect.cs" />
     <Compile Include="LJCPropertyDelegate.cs" />
     <Compile Include="LJCPropertyDelegates.cs" />
-    <Compile Include="TestCommon.cs" />
-    <Compile Include="TextBuilder.cs" />
-    <Compile Include="TextState.cs" />
+    <Compile Include="LJCTestCommon.cs" />
+    <Compile Include="LJCTextBuilder.cs" />
+    <Compile Include="LJCTextState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeTokens\Doc\RefTypes.xml">
@@ -151,12 +151,14 @@
     </Content>
     <Content Include="Doc\LJCNetFile.xml" />
     <Content Include="Doc\LJCNetString.xml" />
+    <Content Include="Doc\LJCTextState.xml" />
     <Content Include="Doc\ProjectNetCommon.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Doc\PropertyDelegate.xml" />
     <Content Include="Doc\PropertyDelegates.xml" />
-    <Content Include="Doc\TextBuilder.xml" />
+    <Content Include="Doc\LJCTestCommon.xml" />
+    <Content Include="Doc\LJCTextBuilder.xml" />
     <Content Include="Doc\XMLAttribute.xml" />
     <Content Include="Doc\XMLAttributes.xml" />
     <Content Include="Doc\XMLBuilder.xml" />

@@ -31,11 +31,6 @@ namespace LJCNetCommon5
     ///  path='members/Builder/*'/>
     public StringBuilder Builder { get; set; }
 
-    // The debug text.
-    /// <include file='Doc/TextBuilder.xml'
-    ///  path='members/DebugText/*'/>
-    public string DebugText { get; set; }
-
     // Gets or sets the delimiter.
     /// <include file='Doc/TextBuilder.xml'
     ///  path='members/Delimiter/*'/>
@@ -121,7 +116,7 @@ namespace LJCNetCommon5
     public string WrapPrefix { get; set; }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance with the provided values.
     /// <include file='Doc/TextBuilder.xml'
@@ -143,7 +138,6 @@ namespace LJCNetCommon5
       WrapAtDelimiter = true;
       WrapEnabled = false;
       WrapPrefix = "  ";
-      DebugText = "";
     }
     #endregion
 
@@ -194,7 +188,6 @@ namespace LJCNetCommon5
       Builder.AppendLine(text);
 
       var retText = $"{text}\r\n";
-      DebugText += retText;
       return retText;
     }
 
@@ -206,8 +199,6 @@ namespace LJCNetCommon5
       if (TextLength(text) > 0)
       {
         Builder.Append(text);
-
-        DebugText += text;
       }
     }
 
@@ -227,8 +218,6 @@ namespace LJCNetCommon5
         allowNewLine = false;
       }
       IsFirst = false;
-
-      DebugText += Text(retText, addIndent, allowNewLine);
       return retText;
     }
 
@@ -243,7 +232,6 @@ namespace LJCNetCommon5
       LineLength = 0;
 
       retText = $"{retText}\r\n";
-      DebugText += retText;
       return retText;
     }
 
@@ -257,8 +245,6 @@ namespace LJCNetCommon5
       if (TextLength(retText) > 0)
       {
         Builder.Append(retText);
-
-        DebugText += retText;
       }
       return retText;
     }

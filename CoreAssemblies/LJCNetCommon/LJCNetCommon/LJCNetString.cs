@@ -552,7 +552,7 @@ namespace LJCNetCommon
 
       if (LJC.HasText(text))
       {
-        var tb = new TextBuilder();
+        var tb = new LJCTextBuilder();
         var upperText = text.ToUpper().Trim();
         foreach (char letter in upperText)
         {

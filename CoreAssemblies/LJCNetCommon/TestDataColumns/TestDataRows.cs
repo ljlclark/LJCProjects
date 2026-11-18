@@ -15,7 +15,7 @@ namespace TestData
     // Initializes an object instance.
     public TestDataRows()
     {
-      TestCommon = new TestCommon("TestDataRows");
+      TestCommon = new LJCTestCommon("TestDataRows");
       Console.WriteLine();
       Console.WriteLine("**********************");
       Console.Write("*** LJCDataRows ***");
@@ -411,7 +411,7 @@ namespace TestData
     #region Class Data
 
     // The test common object.
-    private static TestCommon TestCommon { get; set; }
+    private static LJCTestCommon TestCommon { get; set; }
     #endregion
   }
 }

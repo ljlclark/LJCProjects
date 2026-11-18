@@ -11,7 +11,7 @@ namespace TestHTMLBuilder
     // Performs the tests.
     private static void Main()
     {
-      TestCommon = new TestCommon("HTMLBuilder");
+      TestCommon = new LJCTestCommon("HTMLBuilder");
       Console.WriteLine();
       Console.WriteLine("*** HTMLBuilder ***");
 
@@ -77,7 +77,7 @@ namespace TestHTMLBuilder
     public static void Build()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder();
@@ -129,7 +129,7 @@ namespace TestHTMLBuilder
     private static void AddChildIndent()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       var result = CustomBegin("body", textState);
 
@@ -326,7 +326,7 @@ namespace TestHTMLBuilder
     private static void GetAttribs()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -501,7 +501,7 @@ namespace TestHTMLBuilder
     private static void BeginHTML()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -538,7 +538,7 @@ namespace TestHTMLBuilder
     private static void CreateHTML()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -565,7 +565,7 @@ namespace TestHTMLBuilder
     private static void EndHTML()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -578,7 +578,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("End()", result, compare);
     }
 
-    private static string CustomBegin(string name, TextState textState
+    private static string CustomBegin(string name, LJCTextState textState
       , LJCAttributes attribs = null, bool addIndent = true
       , bool childIndent = true)
     {
@@ -602,7 +602,7 @@ namespace TestHTMLBuilder
     private static void GetBegin()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder();
@@ -626,7 +626,7 @@ namespace TestHTMLBuilder
     private static void GetBeginSelector()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder();
@@ -650,7 +650,7 @@ namespace TestHTMLBuilder
     private static void GetCreate()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -667,7 +667,7 @@ namespace TestHTMLBuilder
     private static void GetEnd()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -687,7 +687,7 @@ namespace TestHTMLBuilder
     private static void Link()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -707,7 +707,7 @@ namespace TestHTMLBuilder
     private static void Meta()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -729,7 +729,7 @@ namespace TestHTMLBuilder
     private static void Metas()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -752,7 +752,7 @@ namespace TestHTMLBuilder
     private static void Script()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -769,7 +769,7 @@ namespace TestHTMLBuilder
     private static void GetLink()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -788,7 +788,7 @@ namespace TestHTMLBuilder
     private static void GetMeta()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -809,7 +809,7 @@ namespace TestHTMLBuilder
     private static void GetMetas()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -831,7 +831,7 @@ namespace TestHTMLBuilder
     private static void GetScript()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -850,7 +850,7 @@ namespace TestHTMLBuilder
     private static void HTMLBegin()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -882,7 +882,7 @@ namespace TestHTMLBuilder
     private static void GetHTMLBegin()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -913,7 +913,7 @@ namespace TestHTMLBuilder
     private static void GetHTMLEnd()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -932,7 +932,7 @@ namespace TestHTMLBuilder
     private static void GetHTMLHead()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -962,7 +962,7 @@ namespace TestHTMLBuilder
     public static void Attribs()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -982,7 +982,7 @@ namespace TestHTMLBuilder
     public static void StartAttribs()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -1000,7 +1000,7 @@ namespace TestHTMLBuilder
     public static void StartAttribsXML()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -1021,7 +1021,7 @@ namespace TestHTMLBuilder
     public static void TableAttribs()
     {
       // Root Method Begin
-      var textState = new TextState();
+      var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
       var hb = new HTMLBuilder(textState);
@@ -1044,7 +1044,7 @@ namespace TestHTMLBuilder
 
     #region Class Data
 
-    private static TestCommon TestCommon { get; set; }
+    private static LJCTestCommon TestCommon { get; set; }
     #endregion
   }
 }

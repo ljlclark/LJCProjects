@@ -13,7 +13,7 @@ namespace LJCNetCommon
     #region Constructors
 
     /// <summary>Initializes an object instance.</summary>
-    public HTMLBuilder(TextState textState = null)
+    public HTMLBuilder(LJCTextState textState = null)
     {
       Builder = new StringBuilder(128);
       IndentCharCount = 2;
@@ -45,7 +45,7 @@ namespace LJCNetCommon
     // Use AddChildIndent after beginning an element.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/AddChildIndent/*'/>
-    public void AddChildIndent(string createText, TextState textState)
+    public void AddChildIndent(string createText, LJCTextState textState)
     {
       var childIndentCount = textState.ChildIndentCount;
 
@@ -183,7 +183,7 @@ namespace LJCNetCommon
     // Gets the attributes text.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetAttribs/*'/>
-    public string GetAttribs(LJCAttributes attribs, TextState textState)
+    public string GetAttribs(LJCAttributes attribs, LJCTextState textState)
     {
       string retText = "";
 
@@ -366,7 +366,7 @@ namespace LJCNetCommon
     // Appends the element begin tag.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/Begin/*'/>
-    public string Begin(string name, TextState textState
+    public string Begin(string name, LJCTextState textState
       , LJCAttributes attribs = null, bool addIndent = true
       , bool childIndent = true)
     {
@@ -386,7 +386,7 @@ namespace LJCNetCommon
     // Appends an element.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/Create/*'/>
-    public string Create(string name, string text, TextState textState
+    public string Create(string name, string text, LJCTextState textState
       , LJCAttributes attribs = null, bool addIndent = true
       , bool childIndent = true, bool isEmpty = false, bool close = true)
     {
@@ -409,7 +409,7 @@ namespace LJCNetCommon
     // Appends the element end tag.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/End/*'/>
-    public string End(string name, TextState textState, bool addIndent = true)
+    public string End(string name, LJCTextState textState, bool addIndent = true)
     {
       var createText = GetEnd(name, textState, addIndent);
       var indent = false;
@@ -426,7 +426,7 @@ namespace LJCNetCommon
     // Gets the element begin tag.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetBegin/*'/>
-    public string GetBegin(string name, TextState textState
+    public string GetBegin(string name, LJCTextState textState
       , LJCAttributes attribs = null, bool addIndent = true
       , bool childIndent = true)
     {
@@ -445,7 +445,7 @@ namespace LJCNetCommon
     // Gets beginning of style selector.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetBeginSelector/*'/>
-    public string GetBeginSelector(string selectorName, TextState textState)
+    public string GetBeginSelector(string selectorName, LJCTextState textState)
     {
       var hb = new HTMLBuilder(textState);
 
@@ -459,7 +459,7 @@ namespace LJCNetCommon
     // Gets the element text.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetCreate/*'/>
-    public string GetCreate(string name, string text, TextState textState
+    public string GetCreate(string name, string text, LJCTextState textState
       , LJCAttributes attribs = null, bool addIndent = true
       , bool childIndent = true, bool isEmpty = false, bool close = true)
     {
@@ -512,7 +512,7 @@ namespace LJCNetCommon
     // Gets the element end tag.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetEnd/*'/>
-    public string GetEnd(string name, TextState textState
+    public string GetEnd(string name, LJCTextState textState
       , bool addIndent = true)
     {
       var hb = new HTMLBuilder(textState);
@@ -530,7 +530,7 @@ namespace LJCNetCommon
     // Appends a <link> element for a style sheet.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/Link/*'/>
-    public string Link(string fileName, TextState textState)
+    public string Link(string fileName, LJCTextState textState)
     {
       var createText = GetLink(fileName, textState);
       Text(createText, false);
@@ -543,7 +543,7 @@ namespace LJCNetCommon
     // Appends a <meta> element.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/Meta/*'/>
-    public string Meta(string name, string content, TextState textState)
+    public string Meta(string name, string content, LJCTextState textState)
     {
       var createText = GetMeta(name, content, textState);
       Text(createText, false);
@@ -556,7 +556,7 @@ namespace LJCNetCommon
     // Appends common <meta> elements.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/Metas/*'/>
-    public string Metas(string author, TextState textState
+    public string Metas(string author, LJCTextState textState
       , string description = null, string keywords = null
       , string charSet = "utf-8")
     {
@@ -572,7 +572,7 @@ namespace LJCNetCommon
     // Appends a <script> element for a script file.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/Script/*'/>
-    public string Script(string fileName, TextState textState)
+    public string Script(string fileName, LJCTextState textState)
     {
       var createText = GetScript(fileName, textState);
       Text(createText, false);
@@ -585,7 +585,7 @@ namespace LJCNetCommon
     // Gets the <link> element for a style sheet.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetLink/*'/>
-    public string GetLink(string fileName, TextState textState)
+    public string GetLink(string fileName, LJCTextState textState)
     {
       var hb = new HTMLBuilder(textState);
 
@@ -606,7 +606,7 @@ namespace LJCNetCommon
     // Gets a <meta> element.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetMeta/*'/>
-    public string GetMeta(string name, string content, TextState textState)
+    public string GetMeta(string name, string content, LJCTextState textState)
     {
       var hb = new HTMLBuilder(textState);
 
@@ -626,7 +626,7 @@ namespace LJCNetCommon
     // Gets common <meta> elements.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetMetas/*'/>
-    public string GetMetas(string author, TextState textState
+    public string GetMetas(string author, LJCTextState textState
       , string description = null, string keywords = null
       , string charSet = "utf-8")
     {
@@ -659,7 +659,7 @@ namespace LJCNetCommon
     // Gets the <script> element.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetScript/*'/>
-    public string GetScript(string fileName, TextState textState)
+    public string GetScript(string fileName, LJCTextState textState)
     {
       var hb = new HTMLBuilder(textState);
 
@@ -680,7 +680,7 @@ namespace LJCNetCommon
     // Creates the HTML beginning up to and including <head>.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/HTMLBegin/*'/>
-    public string HTMLBegin(TextState textState, string[] copyright = null
+    public string HTMLBegin(LJCTextState textState, string[] copyright = null
       , string fileName = null)
     {
       var retValue = GetHTMLBegin(textState, copyright, fileName);
@@ -695,7 +695,7 @@ namespace LJCNetCommon
     // Gets the HTML beginning up to <head>.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetHTMLBegin/*'/>
-    public string GetHTMLBegin(TextState textState, string[] copyright = null
+    public string GetHTMLBegin(LJCTextState textState, string[] copyright = null
       , string fileName = null)
     {
       var hb = new HTMLBuilder(textState);
@@ -729,7 +729,7 @@ namespace LJCNetCommon
     // Gets the HTML end <body> and <html>.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetHTMLEnd/*'/>
-    public string GetHTMLEnd(TextState textState)
+    public string GetHTMLEnd(LJCTextState textState)
     {
       var hb = new HTMLBuilder(textState);
 
@@ -747,7 +747,7 @@ namespace LJCNetCommon
     // Gets the main HTML Head elements.
     /// <include file='Doc/HTMLBuilder.xml'
     ///  path='items/GetHTMLHead/*'/>
-    public string GetHTMLHead(TextState textState, string title = null
+    public string GetHTMLHead(LJCTextState textState, string title = null
       , string author = null, string description = null)
     {
       var hb = new HTMLBuilder(textState);
@@ -822,7 +822,7 @@ namespace LJCNetCommon
     #region Private Methods
 
     // Adds indent to builders and state object.
-    private void AddSyncIndent(HTMLBuilder hb, TextState state
+    private void AddSyncIndent(HTMLBuilder hb, LJCTextState state
       , int value = 1)
     {
       this.AddIndent(value);
@@ -831,7 +831,7 @@ namespace LJCNetCommon
     }
 
     // Creates the content text.
-    private string Content(string text, TextState textState, bool isEmpty
+    private string Content(string text, LJCTextState textState, bool isEmpty
       , out bool isWrapped)
     {
       string retValue = "";
@@ -886,7 +886,7 @@ namespace LJCNetCommon
     }
 
     // Updates the text state values.
-    private void UpdateState(TextState textState)
+    private void UpdateState(LJCTextState textState)
     {
       if (textState != null)
       {

@@ -163,6 +163,7 @@
       Gets the property value as an object using a delegate. (E)
     </summary>
     <param name="propertyName">The property name.</param>
+    <param name="throwError"></param>
     <returns>The object property value.</returns>
     <example>
       <code>

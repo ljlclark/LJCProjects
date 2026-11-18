@@ -1,0 +1,503 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Licensed under the MIT License. -->
+<!-- TextBuilder.xml -->
+<items>
+  <TextBuilder>
+    <summary>
+      Provides methods for creating text.
+    </summary>
+    <remarks>
+      The TextBuilder class is designed for creating text. It is similar
+      in principle to the StringBuilder class which is designed for creating
+      strings.&lt;br /&gt;
+      &lt;br /&gt;
+
+      The TextBuilder class - like the StringBuilder class - stores the text
+      internally. The text is retrieved with the ToString() method.&lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;b&gt;Add Text Methods&lt;/b&gt;&lt;br /&gt;
+      The "Add" methods are similar to StringBuilder methods:&lt;br /&gt;
+      AddLine() - StringBuilder.AppendLine()&lt;br /&gt;
+      AddText() - StringBuilder.Append()&lt;br /&gt;
+      "Add" methods add text to the builder unmodified except for AddLine()
+      which appends a newline.&lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;b&gt;Append Text Methods&lt;/b&gt;&lt;br /&gt;
+      Item(), Line(), Text()&lt;br /&gt;
+      "Append" methods add the potentially indented and wrapped text to the
+      builder.&lt;br /&gt;
+      The Text() method creates the added text without an ending newline This
+      behavior is done for consistency and it allows the developer to append to
+      the existing text.&lt;br /&gt;
+      "Append" methods start the text with a newline if the builder already has
+      text, param allowNewLine = true and builder text does not end with a
+      newline.&lt;br /&gt;
+      The Line() and Text() methods should have the addIndent property set to
+      false if it applies text retrieved with a "Get" method as the "Get" method
+      has already applied the indent.&lt;br /&gt;
+      &lt;br /&gt;
+
+      The AddIndent() method manually controls the current indent count.
+      The indent string length is calculated with the properties
+      (IndentCount * IndentCharCount) and can be retrieved with the
+      IndentLength property.&lt;br /&gt;
+      &lt;br /&gt;
+
+      &lt;b&gt;Get Text Methods&lt;/b&gt;&lt;br /&gt;
+      GetItem(), GetLine(), GetText()&lt;br /&gt;
+      All "Get" methods create and return the potentialy indented and
+      wrapped text but do not add it to the builder.&lt;br /&gt;
+    </remarks>
+  </TextBuilder>
+  <!-- Data Class Methods 1 -->
+  <ToString>
+    <summary>
+      Retrieves the text.
+    </summary>
+    <returns>The Builder text.</returns>
+  </ToString>
+  <!-- Methods 1 -->
+  <AddIndent>
+    <summary>
+      Changes the IndentCount by the provided value.
+    </summary>
+    <param name="increment">
+      The amount to increment or decrement the indent count.
+    </param>
+    <returns>The current indent count.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder();
+
+        // Example Method:
+        // The builder keeps track of the current number of indents.
+        // Adds 1 indent by default.
+        tb.AddIndent();
+
+        // Adds text without modification.
+        tb.AddText("This text is not indented.");
+
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Defaults: addIndent = true, allowNewLine = true.
+        tb.Text("This text is indented.");
+
+        // No Indent
+        var addIndent = false;
+        tb.Text("Not indented.", addIndent);
+
+        // Do not start a new line.
+        tb.Text("No start with newline.", allowNewLine: false);
+        var result = tb.ToString();
+
+        // result:
+        // This text is not indented.
+        //   This text is indented.
+        // Not Indented.  No start with newline.
+      </code>
+    </example>
+  </AddIndent>
+  <!-- Append Text Methods (5) -->
+  <AddLine>
+    <summary>
+      Adds a text line without modification.
+    </summary>
+    <param name="text">The add text.</param>
+    <returns>The added text line.</returns>
+    <remarks>
+      AddLine() is an "Append" method. It adds the unmodified text line to the
+      builder.
+    </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder();
+
+        // Example Method:
+        // Adds text that ends with a newline.
+        tb.AddLine("This is an appended line.");
+
+        tb.AddText(":");
+        var result = tb.ToString();
+
+        // result:
+        // This is an appended line.
+        // :
+      </code>
+    </example>
+  </AddLine>
+  <AddText>
+    <summary>Adds text without modification.</summary>
+    <param name="text">The add text.</param>
+    <returns>The added text.</returns>
+    <remarks>
+      AddText() is an "Append" method. It adds the unmodified text to the builder.
+    </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder();
+
+        // Example Method:
+        // Adds text without modification.
+        tb.AddText("This is some appended text.");
+        var result = tb.ToString();
+
+        // result:
+        // This is some appended text.
+      </code>
+    </example>
+  </AddText>
+  <Item>
+    <summary>
+      Adds a delimiter if not the first list item
+      and adds a newline if line length is greater than CharLength.
+    </summary>
+    <param name="text">The next append value.</param>
+    <param name="addIndent">Indicates if the element can be indented.</param>
+    <param name="allowNewLine">Indicates if a new line can be added.</param>"
+    <returns>
+      The potentially indented, delimited and wrapped new text value.
+    </returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder();
+
+        // Defaults: IsFirst = true, Delimiter = ", ".
+        for (int index = 0; index &lt; 14; index++)
+      {
+        // Example Method
+        var text = $"{index}**-";
+        tb.Item(text, NoIndent, NoNewLine);
+      }
+      var saveResult = tb.ToString();
+
+      // result:
+      // 0**-, 1**-, 2**-, 3**-, 4**-, 5**-, 6**-, 7**-, 8**-, 9**-, 10**-, 11**-, 12**-, 13**-, 14**-
+      </code>
+    </example>
+  </Item>
+  <Line>
+    <summary>
+      Adds a modified text line to the builder.
+    </summary>
+    <param name="text">The add text.</param>
+    <param name="addIndent">Indicates if the element can be indented.</param>
+    <param name="allowNewLine">Indicates if a new line can be added.</param>"
+    <returns>The potentially indented and wrapped new text value.</returns>
+    <returns>The added text.</returns>
+    <remarks>
+      Line() is an "Append" method. It creates the text with GetText() and adds
+      a new line after the text. The text is then added to the builder.
+      &lt;br /&gt;
+      Line() works the same as Text() except it appends a new line.
+    </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder();
+
+        tb.Text("This is an appended line.");
+
+        // The builder keeps track of the current number of indents.
+        tb.AddIndent();
+
+        // Example Method:
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Ends the text with a newline.
+        // Defaults: addIndent = true, allowNewLine = true.
+        tb.Line();
+
+        tb.Text("This is an indented line.");
+        var result = tb.ToString();
+
+        // result:
+        // This is an appended line.
+        //
+        //   This is an indented line.
+      </code>
+    </example>
+  </Line>
+  <Text>
+    <summary>
+      Adds modified text to the builder.
+    </summary>
+    <param name="text">The next append value.</param>
+    <param name="addIndent">Indicates if the text can be indented.</param>
+    <param name="allowNewLine">Indicates if a new line can be added.</param>"
+    <returns>The potentially indented and wrapped new text value.</returns>
+    <remarks>
+      Text() is an "Append" method. It creates the text with GetText() and adds
+      it to the builder.&lt;br /&gt;
+      Note: One should set the "addIndent" parameter to false when adding text
+      to the builder after getting the text with a "GetText" method. This is
+      because the the indent has already been added with the "GetText"
+      method.
+    </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder();
+
+        tb.Text("This is an appended line.");
+
+        // The builder keeps track of the current number of indents.
+        tb.AddIndent();
+
+        // Example Method:
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Defaults: addIndent = true, allowNewLine = true.
+        tb.Text("This is an indented line.");
+        var result = tb.ToString();
+
+        // result:
+        // This is an appended line.
+        //   This is an indented line.
+      </code>
+    </example>
+  </Text>
+  <!-- Get Text Methods -->
+  <EndsWithNewLine>
+    <example>
+      <code>
+        var tb = new TextBuilder();
+
+        bool retValue = tb.EndsWithNewLine();
+        var result = retValue.ToString();
+
+        // result:
+        // False
+      </code>
+    </example>
+  </EndsWithNewLine>
+  <StartWithNewLine>
+    <example>
+      <code>
+        var tb = new TextBuilder();
+
+        bool retValue = tb.StartWithNewLine(true);
+        var result = retValue.ToString();
+
+        // result:
+        // False
+      </code>
+    </example>
+  </StartWithNewLine>
+  <GetIndented>
+    <summary>
+      Gets a new potentially indented line.
+    </summary>
+    <param name="text">The add text.</param>
+    <returns>The potentially indented new text value.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder();
+
+        // Example Method:
+        var result = tb.GetIndented("This text is NOT indented.");
+
+        // The builder keeps track of the current number of indents.
+        tb.AddIndent(2);
+        result += tb.GetLine();
+        result += tb.GetIndented("This text is indented.");
+
+        // result:
+        // This text is NOT indented.
+        //     This text is indented.
+      </code>
+    </example>
+  </GetIndented>
+  <GetIndentedString>
+    <summary>
+    </summary>
+    <returns></returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder();
+
+        tb.AddIndent(1);
+
+        // Example Method:
+        var result = tb.GetIndentString();
+
+        result += tb.GetText(":", false);
+
+        // result:
+        //   :
+      </code>
+    </example>
+  </GetIndentedString>
+  <GetItem>
+    <summary>
+      Adds a delimiter if not the first list item.
+    </summary>
+    <param name="text">The next append value.</param>
+    <returns>The potentially indented and delimited new text value.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder();
+
+        var result = "List: ";
+
+        // Example Method
+        // Defaults: tb.IsFirst = true, tb.Delimiter = ","
+        result += tb.GetDelimited("One");
+        result += tb.GetDelimited("Two");
+        result += tb.GetDelimited("Three");
+
+        // result:
+        // One, Two, Three
+      </code>
+    </example>
+  </GetItem>
+  <GetLine>
+    <summary>
+      Gets a modified text line.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="addIndent">Indicates if the element can be indented.</param>
+    <param name="allowNewLine">Indicates if a new line can be added.</param>
+    <returns>The potentially indented and wrapped new text value.</returns>
+    <remarks>
+      GetLine() is a "GetString" method. It creates and returns the potentially
+      indented and wrapped text. It will start the returned text with a new line
+      if the builder already has text.&lt;br /&gt;
+      It appends a new line to the returned text.
+      The applied indent is the product of the class properties IndentCount
+      and IndentCharCount. (IndentCount * IndentCharCount).&lt;br /&gt;
+      The "addIndent" parameter defaults to true. Set it to false to prevent
+      indenting the line further.&lt;br /&gt;
+      The "allowNewLine" parameter defaults to true. Set it to false to prevent
+      starting with a new line.&lt;br /&gt;
+      Wraps the text with a newline if the WrapEnabled parameter is true and the
+      line length is greater than LineLimit.&lt;br /&gt;
+      GetLine() works the same as GetText() except it appends a new line.
+    </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder();
+
+        tb.Text("This is an appended line.");
+
+        // The builder keeps track of the current number of indents.
+        tb.AddIndent();
+
+        // Example Method:
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Ends the text with a newline.
+        // Defaults: addIndent = true, allowNewLine = true.
+        var text = tb.GetLine();
+        tb.AddText(text);
+
+        tb.Text(":");
+        var result = tb.ToString();
+
+        // result:
+        // This is an appended line.
+        //
+        //   :
+      </code>
+    </example>
+  </GetLine>
+  <GetText>
+    <summary>
+      Gets potentially indented and wrapped text.
+    </summary>
+    <param name="text">The text value.</param>
+    <param name="addIndent">Indicates if the text can be indented.</param>
+    <param name="allowNewLine">Indicates if a new line can be added.</param>
+    <returns>The potentially indented and wrapped new text value.</returns>
+    <remarks>
+      GetText() is a "GetString" method. It creates and returns the potentially
+      indented and wrapped text. It will start the returned text with a new line
+      if the builder already has text.&lt;br /&gt;
+      The applied indent is the product of the class properties IndentCount
+      and IndentCharCount. (IndentCount * IndentCharCount).&lt;br /&gt;
+      The "addIndent" parameter defaults to true. Set it to false to prevent
+      indenting the line further.&lt;br /&gt;
+      The "allowNewLine" parameter defaults to true. Set it to false to prevent
+      starting with a new line.&lt;br /&gt;
+      Wraps the text with a newline if the WrapEnabled parameter is true and the
+      line length is greater than LineLimit.
+    </remarks>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder();
+
+        tb.Text("This is an appended line.");
+
+        // The builder keeps track of the current number of indents.
+        tb.AddIndent();
+
+        // Example Method:
+        // Starts the text with a newline if the builder already has text
+        // and param allowNewLine = true and builder text does not end with
+        // a newline.
+        // The text begins with the current indent string if param
+        // addIndent = true.
+        // Defaults: addIndent = true, allowNewLine = true.
+        var tempText = tb.GetText("This is an indented line.");
+        tb.AddText(tempText);
+        var result = tb.ToString();
+
+        // result:
+        // This is an appended line.
+        //   This is an indented line.
+      </code>
+    </example>
+  </GetText>
+  <GetWrapped>
+    <summary>
+      Gets added text and new wrapped line if combined line > LineLimit.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>The potentially wrapped and indented new text value.</returns>
+    <example>
+      <code>
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var tb = new TextBuilder
+        {
+          WrapEnabled = true,
+          WrapPrefix = "",
+        };
+
+        // Example Method:
+        var b = new TextBuilder();
+        b.AddText("Now is the time for all good men to come to the aid of their");
+        b.AddText(" country.");
+        b.AddText(" Now is the time for all good men to come to the aid of their");
+        b.AddText(" country.");
+        var text = b.ToString();
+        var result = tb.GetWrapped(text);
+
+        // result:
+        // Now is the time for all good men to come to the aid of their country. Now is the
+        // time for all good men to come to the aid of their country.
+      </code>
+    </example>
+  </GetWrapped>
+</items>

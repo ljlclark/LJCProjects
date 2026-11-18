@@ -16,11 +16,11 @@ namespace LJCNetCommon5
     ///  path='members/ShowNotImplemented/*'/>
     public bool ShowNotImplemented { get; set; }
 
-    // Gets the class name.
+    // The class name.
     private readonly string? _ClassName;
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='Doc/TestCommon.xml'

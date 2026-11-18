@@ -15,7 +15,7 @@ namespace TestNetString
     /// </summary>
     static void Main()
     {
-      TestCommon = new TestCommon("NetStringProgram");
+      TestCommon = new LJCTestCommon("NetStringProgram");
       Console.WriteLine();
       Console.WriteLine("*** NetString ***");
 
@@ -208,7 +208,7 @@ namespace TestNetString
     #region Class Data
 
     // The test common object.
-    private static TestCommon TestCommon { get; set; }
+    private static LJCTestCommon TestCommon { get; set; }
     #endregion
   }
 }
