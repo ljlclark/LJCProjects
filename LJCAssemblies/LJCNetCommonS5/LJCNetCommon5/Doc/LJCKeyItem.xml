@@ -4,12 +4,12 @@
 <!-- LJCKeyItem.xml -->
 <members>
   <!-- Class -->
-  <LJCKeyItem>
+  <ParamConstructor>
     <summary>
       Initializes an object instance.
     </summary>
     <param name="propertyName">The Property name.</param>
     <param name="id">The ID value.</param>
     <param name="description">The Description value.</param>
-  </LJCKeyItem>
+  </ParamConstructor>
 </members>

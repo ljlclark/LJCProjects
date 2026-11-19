@@ -19,7 +19,7 @@ namespace LJCWinFormCommon
       if (grid != null
         && grid.Columns.Count > 0)
       {
-        var hb = new HTMLBuilder();
+        var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
 
         hb.Begin("tr", textState);
@@ -43,7 +43,7 @@ namespace LJCWinFormCommon
       if (grid != null
         && grid.Rows.Count > 0)
       {
-        var hb = new HTMLBuilder();
+        var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
 
         var attribs = hb.TableAttribs();
@@ -68,7 +68,7 @@ namespace LJCWinFormCommon
       if (grid != null
         && grid.Rows.Count > 0)
       {
-        var hb = new HTMLBuilder();
+        var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
 
         foreach (DataGridViewRow row in grid.Rows)

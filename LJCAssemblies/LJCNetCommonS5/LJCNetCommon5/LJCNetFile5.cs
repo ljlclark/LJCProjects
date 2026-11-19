@@ -6,36 +6,39 @@ using System.Diagnostics;
 namespace LJCNetCommon5
 {
   // Contains common file related static functions. (R)
-  /// <include file='Doc/NetFile.xml'
+  /// <include file='Doc/LJCNetFile.xml'
   ///  path='members/LJCNetFile/*'/>
   public class LJCNetFile
   {
     #region Static Methods
 
     // Creates a Folder Path if it does not already exist.
-    /// <include file='Doc/NetFile.xml'
+    /// <include file='Doc/LJCNetFile.xml'
     ///  path='members/CreateFolder/*'/>
     public static void CreateFolder(string path)
     {
-      if (LJC.HasText(path))
+      string makePath = null;
+      if (LJC.HasText(path)
+        && (path.Contains('\\')
+        || path.Contains('/')))
       {
-        var makePath = Path.GetDirectoryName(path);
-        if (LJC.HasText(makePath)
-          && !Directory.Exists(makePath))
-        {
-          Directory.CreateDirectory(makePath);
-        }
+        makePath = Path.GetDirectoryName(path);
+      }
+      if (LJC.HasText(makePath)
+        && !Directory.Exists(makePath))
+      {
+        Directory.CreateDirectory(makePath);
       }
     }
 
     // Returns the relative path.
-    /// <include file='Doc/NetFile.xml'
+    /// <include file='Doc/LJCNetFile.xml'
     ///  path='members/GetRelativePath/*'/>
     public static string GetRelativePath(string fromPath, string toFileSpec)
     {
       string retValue;
 
-      // Folders must end in a slash
+      // Folders must end with a slash
       if (!fromPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
       {
         fromPath += Path.DirectorySeparatorChar;
@@ -50,7 +53,7 @@ namespace LJCNetCommon5
     }
 
     // Get all text lines from a file.
-    /// <include file='Doc/NetFile.xml'
+    /// <include file='Doc/LJCNetFile.xml'
     ///  path='members/ReadAllLines/*'/>
     public static string[] ReadAllLines(string fileSpec)
     {
@@ -83,7 +86,7 @@ namespace LJCNetCommon5
     }
 
     // Executes an external program.
-    /// <include file='Doc/NetFile.xml'
+    /// <include file='Doc/LJCNetFile.xml'
     ///   path='members/ShellProgram/*'/>
     public static string? ShellProgram(string programFileSpec
       , string? arguments = null)
@@ -145,7 +148,7 @@ namespace LJCNetCommon5
     }
 
     // Writes a string format to the Log file with the current date and time.
-    /// <include file='Doc/NetFile.xml'
+    /// <include file='Doc/LJCNetFile.xml'
     ///   path='members/WriteLog/*'/>
     public static void WriteLog(string logFileSpec, string? formatText = null
       , params object[] parameters)
@@ -166,7 +169,7 @@ namespace LJCNetCommon5
     }
 
     // Writes string format + cr/lf to the Log file with current date and time.
-    /// <include file='Doc/NetFile.xml'
+    /// <include file='Doc/LJCNetFile.xml'
     ///   path='members/WriteLogLine/*'/>
     public static void WriteLogLine(string logFileSpec
       , string? formatText = null, params object[] parameters)

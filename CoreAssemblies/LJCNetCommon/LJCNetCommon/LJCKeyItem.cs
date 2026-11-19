@@ -7,14 +7,14 @@ namespace LJCNetCommon
 {
   // Represents Key item values.
   /// <include file='Doc/LJCKeyItem.xml'
-  ///  path='items/LJCKeyItem/*'/>
+  ///  path='members/LJCKeyItem/*'/>
   public class LJCKeyItem : IComparable<LJCKeyItem>
   {
     #region Properties
 
     // Gets or sets the DataConfig name.
     /// <include file='Doc/LJCKeyItem.xml'
-    ///  path='items/DataConfigName/*'/>
+    ///  path='members/DataConfigName/*'/>
     public string DataConfigName
     {
       get => mDataConfigName;
@@ -77,14 +77,14 @@ namespace LJCNetCommon
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCKeyItem()
     {
     }
 
     // Initializes an object instance.
     /// <include file='Doc/LJCKeyItem.xml'
-    ///  path='items/ParamConstructor/*'/>
+    ///  path='members/ParamConstructor/*'/>
     public LJCKeyItem(string propertyName, long id, string description) : this()
     {
       PropertyName = propertyName;
@@ -94,16 +94,16 @@ namespace LJCNetCommon
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='members/CopyConstructor/*'/>
     public LJCKeyItem(LJCKeyItem item)
     {
       DataConfigName = item.DataConfigName;
-      Description = Description;
-      ID = ID;
-      MaxLength = MaxLength;
-      PrimaryKeyName = PrimaryKeyName;
-      PropertyName = PropertyName;
-      TableName = TableName;
+      Description = item.Description;
+      ID = item.ID;
+      MaxLength = item.MaxLength;
+      PrimaryKeyName = item.PrimaryKeyName;
+      PropertyName = item.PropertyName;
+      TableName = item.TableName;
     }
     #endregion
 
@@ -111,7 +111,7 @@ namespace LJCNetCommon
 
     // Creates and returns a clone of this object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCKeyItem Clone()
     {
       LJCKeyItem retValue = MemberwiseClone() as LJCKeyItem;
@@ -120,7 +120,7 @@ namespace LJCNetCommon
 
     // The object string identifier.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/ToString/*'/>
+    ///  path='members/ToString/*'/>
     public override string ToString()
     {
       return Description;
@@ -131,7 +131,7 @@ namespace LJCNetCommon
 
     // Provides the default Sort functionality.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/CompareTo/*'/>
+    ///  path='members/CompareTo/*'/>
     public int CompareTo(LJCKeyItem other)
     {
       int retValue;

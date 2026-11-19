@@ -5,14 +5,14 @@
 namespace LJCNetCommon5
 {
   // Represents Key item values.
-  /// <include file='Doc/KeyItem.xml'
-  ///  path='items/LJCKeyItem/*'/>
+  /// <include file='Doc/LJCKeyItem.xml'
+  ///  path='members/LJCKeyItem/*'/>
   public class LJCKeyItem : IComparable<LJCKeyItem>
   {
     #region Properties
 
     // Gets or sets the DataConfig name.
-    /// <include file='Doc/KeyItem.xml'
+    /// <include file='Doc/LJCKeyItem.xml'
     ///  path='members/DataConfigName/*'/>
     public string? DataConfigName
     {
@@ -22,7 +22,7 @@ namespace LJCNetCommon5
     private string? mDataConfigName;
 
     // The Description value.
-    /// <include file='Doc/KeyItem.xml'
+    /// <include file='Doc/LJCKeyItem.xml'
     ///  path='members/Description/*'/>
     public string? Description
     {
@@ -32,17 +32,17 @@ namespace LJCNetCommon5
     private string? mDescription;
 
     // The ID value.
-    /// <include file='Doc/KeyItem.xml'
+    /// <include file='Doc/LJCKeyItem.xml'
     ///  path='members/ID/*'/>
     public long ID { get; set; }
 
     // Gets or sets the MaxLength value.
-    /// <include file='Doc/KeyItem.xml'
+    /// <include file='Doc/LJCKeyItem.xml'
     ///  path='members/MaxLength/*'/>
     public int MaxLength { get; set; }
 
     // Gets or sets the Primary Key name.
-    /// <include file='Doc/KeyItem.xml'
+    /// <include file='Doc/LJCKeyItem.xml'
     ///  path='members/PrimaryKeyName/*'/>
     public string? PrimaryKeyName
     {
@@ -52,7 +52,7 @@ namespace LJCNetCommon5
     private string? mPrimaryKeyName;
 
     // The Property name.
-    /// <include file='Doc/KeyItem.xml'
+    /// <include file='Doc/LJCKeyItem.xml'
     ///  path='members/PropertyName/*'/>
     public string? PropertyName
     {
@@ -62,7 +62,7 @@ namespace LJCNetCommon5
     private string? mPropertyName;
 
     // Gets or sets the Table name.
-    /// <include file='Doc/KeyItem.xml'
+    /// <include file='Doc/LJCKeyItem.xml'
     ///  path='members/TableName/*'/>
     public string? TableName
     {
@@ -82,13 +82,27 @@ namespace LJCNetCommon5
     }
 
     // Initializes an object instance.
-    /// <include file='Doc/KeyItem.xml'
+    /// <include file='Doc/LJCKeyItem.xml'
     ///  path='members/ParamConstructor/*'/>
     public LJCKeyItem(string propertyName, long id, string description) : this()
     {
       PropertyName = propertyName;
       ID = id;
       Description = description;
+    }
+
+    // The Copy constructor.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/CopyConstructor/*'/>
+    public LJCKeyItem(LJCKeyItem item)
+    {
+      DataConfigName = item.DataConfigName;
+      Description = item.Description;
+      ID = item.ID;
+      MaxLength = item.MaxLength;
+      PrimaryKeyName = item.PrimaryKeyName;
+      PropertyName = item.PropertyName;
+      TableName = item.TableName;
     }
     #endregion
 

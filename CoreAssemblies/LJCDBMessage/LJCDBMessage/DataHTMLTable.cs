@@ -21,7 +21,7 @@ namespace LJCDBMessage
 
       if (LJC.HasTableData(dataTable))
       {
-        var hb = new HTMLBuilder();
+        var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
 
         hb.Begin("tr", textState);
@@ -44,7 +44,7 @@ namespace LJCDBMessage
 
       if (LJC.HasTableData(dataTable))
       {
-        var hb = new HTMLBuilder();
+        var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
 
         var attribs = hb.TableAttribs();
@@ -68,7 +68,7 @@ namespace LJCDBMessage
 
       if (LJC.HasTableData(dataTable))
       {
-        var hb = new HTMLBuilder();
+        var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
 
         var count = 0;
@@ -106,7 +106,7 @@ namespace LJCDBMessage
 
       if (LJC.HasListItems(dataObjects))
       {
-        var hb = new HTMLBuilder();
+        var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
 
         hb.Begin("tr", textState);
@@ -137,7 +137,7 @@ namespace LJCDBMessage
 
       if (LJC.HasListItems(dataObjects))
       {
-        var hb = new HTMLBuilder();
+        var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
 
         var attribs = hb.TableAttribs();
@@ -162,7 +162,7 @@ namespace LJCDBMessage
 
       if (LJC.HasListItems(dataObjects))
       {
-        var hb = new HTMLBuilder();
+        var hb = new LJCHTMLBuilder();
         var textState = new LJCTextState();
 
         var count = 0;
@@ -211,7 +211,7 @@ namespace LJCDBMessage
 
       if (DbResult.HasRows(dbResult))
       {
-        var hb = new HTMLBuilder(textState);
+        var hb = new LJCHTMLBuilder(textState);
 
         hb.Begin("tr", textState);
         foreach (var value in dbResult.Rows[0].Values)
@@ -234,7 +234,7 @@ namespace LJCDBMessage
 
       if (LJC.HasListItems(dbResult.Rows))
       {
-        var hb = new HTMLBuilder(textState);
+        var hb = new LJCHTMLBuilder(textState);
 
         var attribs = hb.TableAttribs();
         hb.Begin("table", textState, attribs);
@@ -261,7 +261,7 @@ namespace LJCDBMessage
 
       if (DbResult.HasRows(dbResult))
       {
-        var hb = new HTMLBuilder(textState);
+        var hb = new LJCHTMLBuilder(textState);
 
         var count = 0;
         foreach (var row in dbResult.Rows)

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// NetFile.cs
+// LJCNetFile.cs
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -12,24 +12,26 @@ namespace LJCNetCommon
   ///  path='members/LJCNetFile/*'/>
   public class LJCNetFile
   {
-    #region Public Functions
+    #region Static Methods
 
     // Creates a Folder Path if it does not already exist. (E)
     /// <include file='Doc/LJCNetFile.xml'
     ///  path='members/CreateFolder/*'/>
     public static void CreateFolder(string path)
     {
-      if (path.Contains(@"\")
-        || path.Contains("/"))
+      string makePath = null;
+      if (LJC.HasText(path)
+        && (path.Contains("\\")
+        || path.Contains("/")))
       {
-        path = Path.GetDirectoryName(path);
+        makePath = Path.GetDirectoryName(path);
       }
-      // Next Statement - Change - 1/22
       //if (-1 == path.IndexOf(".")
       //  && !Directory.Exists(path))
-      if (!Directory.Exists(path))
+      if (LJC.HasText(makePath)
+        && !Directory.Exists(makePath))
       {
-        Directory.CreateDirectory(path);
+        Directory.CreateDirectory(makePath);
       }
     }
 
@@ -140,7 +142,10 @@ namespace LJCNetCommon
 
       if (success)
       {
-        Process.Start(startInfo);
+        if (startInfo != null)
+        {
+          Process.Start(startInfo);
+        }
       }
       return retValue;
     }

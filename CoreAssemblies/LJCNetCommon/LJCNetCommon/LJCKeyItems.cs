@@ -9,15 +9,15 @@ namespace LJCNetCommon
 {
   // Represents a collection of KeyItem objects.
   /// <include file='Doc/LJCKeyItems.xml'
-  ///  path='items/KeyItems/*'/>
+  ///  path='members/LJCKeyItems/*'/>
   public class LJCKeyItems : IEnumerable<LJCKeyItem>
   {
     #region Static Methods
 
     // Get custom collection from List<T>.
     /// <include file='Doc/LJCKeyItems.xml'
-    ///  path='items/GetCollection/*'/>
-    public LJCKeyItems GetCollection(List<LJCKeyItem> items)
+    ///  path='members/GetCollection/*'/>
+    public static LJCKeyItems GetCollection(List<LJCKeyItem> items)
     {
       LJCKeyItems retValue = null;
 
@@ -34,7 +34,7 @@ namespace LJCNetCommon
 
     // Checks if the collection has items.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/HasItems1/*'/>
+    ///  path='members/HasItems1/*'/>
     public static bool HasItems(LJCKeyItems collection)
     {
       bool retValue = false;
@@ -66,7 +66,7 @@ namespace LJCNetCommon
 
     // Gets the item by index value.
     /// <include file='Doc/LJCKeyItems.xml'
-    ///  path='items/Indexer/*'/>
+    ///  path='members/Indexer/*'/>
     public LJCKeyItem this[int index]
     {
       get
@@ -93,7 +93,7 @@ namespace LJCNetCommon
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Constructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCKeyItems()
     {
       Items = new List<LJCKeyItem>();
@@ -102,7 +102,7 @@ namespace LJCNetCommon
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='members/CopyConstructor/*'/>
     public LJCKeyItems(LJCKeyItems items) : this()
     {
       if (HasItems(items))
@@ -119,20 +119,24 @@ namespace LJCNetCommon
 
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public LJCKeyItems Clone()
     {
       var retValue = new LJCKeyItems();
       foreach (LJCKeyItem keyItem in this)
       {
-        retValue.Add(keyItem.Clone());
+        var newKeyItem = keyItem.Clone();
+        if (newKeyItem != null)
+        {
+          retValue.Add(newKeyItem);
+        }
       }
       return retValue;
     }
 
     // Checks if the collection has items.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/HasItems2/*'/>
+    ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -149,7 +153,7 @@ namespace LJCNetCommon
 
     // Adds the specified object.
     /// <include file='Doc/LJCKeyItems.xml'
-    ///  path='items/Add1/*'/>
+    ///  path='members/Add1/*'/>
     public void Add(LJCKeyItem item)
     {
       if (item != null)
@@ -160,7 +164,7 @@ namespace LJCNetCommon
 
     // Creates and adds the object from the provided values.
     /// <include file='Doc/LJCKeyItems.xml'
-    ///  path='items/Add2/*'/>
+    ///  path='members/Add2/*'/>
     public LJCKeyItem Add(string propertyName, long id, string description = null
       , int maxLength = 10)
     {
@@ -182,7 +186,7 @@ namespace LJCNetCommon
 
     // Appends the supplied objects to the collection.
     /// <include file='Doc/LJCKeyItems.xml'
-    ///  path='items/Append/*'/>
+    ///  path='members/Append/*'/>
     public void Append(LJCKeyItems items)
     {
       if (HasItems(items))
@@ -218,7 +222,7 @@ namespace LJCNetCommon
 
     // Gets the Item Description with Value as index within PropertyName.
     /// <include file='Doc/LJCKeyItems.xml'
-    ///  path='items/GetDescription/*'/>
+    ///  path='members/GetDescription/*'/>
     public string GetDescription(LJCDataColumn dataColumn)
     {
       string retValue = null;
@@ -233,7 +237,7 @@ namespace LJCNetCommon
 
     // Get index from Value.
     /// <include file='Doc/LJCKeyItems.xml'
-    ///  path='items/GetIndex/*'/>
+    ///  path='members/GetIndex/*'/>
     public int GetIndex(LJCDataColumn dataColumn)
     {
       int retValue = -1;
@@ -241,7 +245,7 @@ namespace LJCNetCommon
       if (dataColumn.Value != null
         && LJCNetString.IsDigits(dataColumn.Value.ToString()))
       {
-        int.TryParse(dataColumn.Value.ToString(), out int index);
+        _ = int.TryParse(dataColumn.Value.ToString(), out int index);
         index--;
         if (index >= 0
           && index < Items.Count)
@@ -254,7 +258,7 @@ namespace LJCNetCommon
 
     // Gets the KeyItem with Value as index within PropertyName.
     /// <include file='Doc/LJCKeyItems.xml'
-    ///  path='items/GetItem/*'/>
+    ///  path='members/GetItem/*'/>
     public LJCKeyItem GetItem(LJCDataColumn dataColumn)
     {
       LJCKeyItem retValue = null;
@@ -284,7 +288,7 @@ namespace LJCNetCommon
 
     // Gets the Items with the PropertyName.
     /// <include file='Doc/LJCKeyItems.xml'
-    ///  path='items/GetItems/*'/>
+    ///  path='members/GetItems/*'/>
     public LJCKeyItems GetItems(LJCDataColumn dataColumn)
     {
       LJCKeyItems retValue = null;
@@ -302,7 +306,7 @@ namespace LJCNetCommon
 
     // Retrieve the collection element.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/SearchName/*'/>
+    ///  path='members/SearchPropertyName/*'/>
     public LJCKeyItems SearchPropertyName(string name)
     {
       List<LJCKeyItem> items;
@@ -316,7 +320,7 @@ namespace LJCNetCommon
 
     // Sort on Name.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/SortName/*'/>
+    ///  path='members/SortPropertyName/*'/>
     public void SortPropertyName()
     {
       if (Count != mPrevCount)
@@ -331,7 +335,7 @@ namespace LJCNetCommon
 
     // Gets the Collection Enumerator.
     /// <include file='Doc/LJCKeyItems.xml'
-    ///  path='items/GetEnumerator/*'/>
+    ///  path='members/GetEnumerator/*'/>
     public IEnumerator<LJCKeyItem> GetEnumerator()
     {
       return ((IEnumerable<LJCKeyItem>)Items).GetEnumerator();
