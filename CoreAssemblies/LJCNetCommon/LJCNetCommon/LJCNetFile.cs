@@ -97,20 +97,16 @@ namespace LJCNetCommon
     {
       string retValue = null;
 
-      bool success = true;
-      if (LJC.HasText(programFileSpec))
+      while (true)
       {
-        if (!File.Exists(programFileSpec))
+        if (LJC.HasText(programFileSpec)
+          && !File.Exists(programFileSpec))
         {
-          success = false;
           retValue = $"The File '{programFileSpec}'\r\n was not found.";
+          break;
         }
-      }
 
-      ProcessStartInfo startInfo = null;
-      if (success)
-      {
-        startInfo = new ProcessStartInfo()
+        var startInfo = new ProcessStartInfo()
         {
           Arguments = arguments,
           FileName = programFileSpec,
@@ -123,29 +119,25 @@ namespace LJCNetCommon
         {
           if (!File.Exists(arguments))
           {
-            success = false;
             retValue = $"The File '{arguments}'\r\n was not found.";
+            break;
           }
-          else
-          {
-            string filePath = Path.GetDirectoryName(arguments);
-            string fileName = Path.GetFileName(arguments);
-            startInfo = new ProcessStartInfo()
-            {
-              FileName = fileName,
-              UseShellExecute = true,
-              WorkingDirectory = filePath
-            };
-          }
-        }
-      }
 
-      if (success)
-      {
+          string filePath = Path.GetDirectoryName(arguments);
+          string fileName = Path.GetFileName(arguments);
+          startInfo = new ProcessStartInfo()
+          {
+            FileName = fileName,
+            UseShellExecute = true,
+            WorkingDirectory = filePath
+          };
+        }
+
         if (startInfo != null)
         {
           Process.Start(startInfo);
         }
+        break;
       }
       return retValue;
     }
