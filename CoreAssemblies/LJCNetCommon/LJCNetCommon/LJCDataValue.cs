@@ -79,13 +79,13 @@ namespace LJCNetCommon
     #region Properties
 
     // Gets or sets the changed indicator.
-    /// <include file='Doc/LJCDataColumn.xml'
+    /// <include file='Doc/LJCDataValue.xml'
     ///  path='members/IsChanged/*'/>
     [XmlIgnore()]
     public bool IsChanged { get; set; }
 
     // Gets or sets the original value.
-    /// <include file='Doc/LJCDataColumn.xml'
+    /// <include file='Doc/LJCDataValue.xml'
     ///  path='members/OriginalValue/*'/>
     public object OriginalValue
     {
@@ -107,6 +107,24 @@ namespace LJCNetCommon
     private object _OriginalValue;
     #endregion
 
+    #region Class Data
+
+    // The DataTypeName column name.
+    /// <include file='Doc/LJCDataValue.xml'
+    ///  path='members/ColumnDataTypeName/*'/>
+    public const string ColumnDataTypeName = "DataTypeName";
+
+    // The PropertyName column name.
+    /// <include file='Doc/LJCDataValue.xml'
+    ///  path='members/ColumnPropertyName/*'/>
+    public const string ColumnPropertyName = "PropertyName";
+
+    // The Value column name.
+    /// <include file='Doc/LJCDataValue.xml'
+    ///  path='members/ColumnValue/*'/>
+    public const string ColumnValue = "Value";
+    #endregion
+
     #region Constructor Methods
 
     // Initializes an object instance.
@@ -114,10 +132,12 @@ namespace LJCNetCommon
     ///  path='members/Constructor/*'/>
     public LJCDataValue()
     {
-      DataTypeName = "string";
-      PropertyName = "";
-      Value = null;
+      // Data Properties
+      _DataTypeName = "string";
+      _PropertyName = "";
+      _Value = null;
 
+      // Properties
       IsChanged = false;
       _OriginalValue = null;
     }
@@ -139,8 +159,8 @@ namespace LJCNetCommon
     public LJCDataValue(LJCDataValue item)
     {
       // Data Properties
-      DataTypeName = item.DataTypeName;
-      PropertyName = item.PropertyName;
+      _DataTypeName = item.DataTypeName;
+      _PropertyName = item.PropertyName;
       Value = item.Value;
 
       // Properties
@@ -161,7 +181,7 @@ namespace LJCNetCommon
     }
 
     // Formats the column value for the SQL string.
-    /// <include file='Doc/DbColumn.xml'
+    /// <include file='Doc/DbValue.xml'
     ///  path='members/FormatValue/*'/>
     public string FormatValue()
     {
@@ -186,24 +206,24 @@ namespace LJCNetCommon
     // Creates a combined LJCDataColumn from a LJCDataValue and LJCDataColumn.
     /// <include file='Doc/LJCDataValue.xml'
     ///  path='members/CreateColumn/*'/>
-    public LJCDataColumn CreateColumn(LJCDataColumn definitionColumn)
+    public LJCDataColumn CreateColumn(LJCDataColumn dataColumn)
     {
       LJCDataColumn retColumn;
 
       retColumn = new LJCDataColumn()
       {
-        Caption = definitionColumn.Caption,
-        ColumnName = definitionColumn.ColumnName,
-        DataTypeName = definitionColumn.DataTypeName,
-        IsChanged = definitionColumn.IsChanged,
-        PropertyName = definitionColumn.PropertyName,
+        Caption = dataColumn.Caption,
+        ColumnName = dataColumn.ColumnName,
+        DataTypeName = dataColumn.DataTypeName,
+        IsChanged = dataColumn.IsChanged,
+        PropertyName = dataColumn.PropertyName,
         Value = Value
       };
 
       if (Value != null
         && typeof(string) == Value.GetType())
       {
-        retColumn.MaxLength = definitionColumn.MaxLength;
+        retColumn.MaxLength = dataColumn.MaxLength;
         if (0 == retColumn.MaxLength)
         {
           retColumn.MaxLength = 10;

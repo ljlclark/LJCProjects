@@ -292,7 +292,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the column object value as a DateTime.
-    /// <include file='Doc/DataValues.xml'
+    /// <include file='Doc/Reflect.xml'
     ///  path='members/GetDbDateTime/*'/>
     public DateTime GetDbDateTime(string propertyName)
     {

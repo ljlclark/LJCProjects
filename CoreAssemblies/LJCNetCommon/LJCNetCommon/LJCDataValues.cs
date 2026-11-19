@@ -143,7 +143,7 @@ namespace LJCNetCommon
     }
     private LJCDataValues _Keys;
 
-    // The column for the specified name.
+    // Gets the item with the supplied property name.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/Item/*'/>
     public LJCDataValue this[string propertyName]
@@ -157,7 +157,7 @@ namespace LJCNetCommon
         {
           // Get where LJCDataColumn property = "PropertyName"
           //   , value = propertyName.
-          var keys = LJC.Keys(LJCDataColumn.ColumnPropertyName
+          var keys = LJC.Keys(LJCDataValue.ColumnPropertyName
           , propertyName);
           retValue = LJCGetUnique(keys);
         }
@@ -347,7 +347,7 @@ namespace LJCNetCommon
 
     #region Collection Data Methods
 
-    // Creates the Object from the arguments and adds it to the collection.
+    // Creates item with supplied values and adds it to the collection.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/Add/*'/>
     public LJCDataValue Add(string propertyName, object value
@@ -363,7 +363,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets the value that matches the key columns.
+    // Returns the value that matches the key columns.
     // The value is identified by its property names and values.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCGetUnique/*'/>
@@ -383,14 +383,14 @@ namespace LJCNetCommon
         // Create search item.
         var dataValue = new LJCDataValue();
         var reflect = new LJCReflect(dataValue);
-        foreach (var key in keys)
+        foreach (var key in LJCKeys)
         {
           reflect.SetValue(key.PropertyName, key.Value);
         }
 
         // Create comparer.
         DataValueKey comparer = null;
-        var propertyNames = LJCPropertyNames(keys);
+        var propertyNames = LJCPropertyNames(LJCKeys);
         if (propertyNames != null)
         {
           comparer = new DataValueKey()
@@ -507,7 +507,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets the column object value as a decimal value.
+    // Gets the column object value as a decimal.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCDecimal/*'/>
     public decimal LJCDecimal(string propertyName)
@@ -517,7 +517,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets the column object value as a decimal double.
+    // Gets the column object value as a double.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCDouble/*'/>
     public double LJCDouble(string propertyName)
@@ -587,7 +587,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets the column object value.
+    // Gets the column object value as an object.
     /// <include file='Doc/LJCDataValues.xml'
     ///  path='members/LJCValue/*'/>
     public object LJCValue(string propertyName)
@@ -668,8 +668,8 @@ namespace LJCNetCommon
           break;
         }
 
-        LJCReflect xReflect = new LJCReflect(x);
-        LJCReflect yReflect = new LJCReflect(y);
+        var xReflect = new LJCReflect(x);
+        var yReflect = new LJCReflect(y);
 
         // Check for null values.
         foreach (string propertyName in LJCPropertyNames)

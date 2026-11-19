@@ -9,6 +9,12 @@
       Represents a collection of
       &lt;span class="userType"&gt;DbValue&lt;/span&gt; objects.
     </summary>
+    <group name="static">Static Methods</group>
+    <group name="constructors">Constructors</group>
+    <group name="collection">Collection Methods</group>
+    <group name="item">Item Methods</group>
+    <group name="search">Search and Sort Methods</group>
+    <group name="value">Value Methods</group>
     <remarks>
       A DbValue collection element can also be retrieved by name using
       the collection object: values["PropertyName"];
@@ -40,11 +46,13 @@
       Gets a collection of changed columns.
     </summary>
     <returns>The changed columns list.</returns>
+    <parentGroup>collection</parentGroup>
   </LJCChanged>
   <LJCClearChanged>
     <summary>
       Sets the IsChanged value to false for all elements in the collection.
     </summary>
+    <parentGroup>collection</parentGroup>
   </LJCClearChanged>
   <LJCCreateColumns>
     <summary>
@@ -58,18 +66,21 @@
       The combined
       &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
     </returns>
+    <parentGroup>collection</parentGroup>
   </LJCCreateColumns>
   <LJCKeyPropertyNames>
     <summary>
       Gets a list of property names from the collection items.
     </summary>
     <param name="keys"></param>
+    <parentGroup>collection</parentGroup>
   </LJCKeyPropertyNames>
   <LJCPropertyNames>
     <summary>
       Gets a list of property names from the collection items.
     </summary>
     <param name="dataValues"></param>
+    <parentGroup>collection</parentGroup>
   </LJCPropertyNames>
 
   <!-- Collection Data Methods -->
