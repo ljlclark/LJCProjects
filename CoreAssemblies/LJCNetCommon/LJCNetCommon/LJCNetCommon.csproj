@@ -134,7 +134,7 @@
     </Content>
     <Content Include="Doc\LJCAttribute.xml" />
     <Content Include="Doc\LJCAttributes.xml" />
-    <Content Include="Doc\HTMLBuilder.xml" />
+    <Content Include="Doc\LJCHTMLBuilder.xml" />
     <Content Include="Doc\LJCKeyItem.xml" />
     <Content Include="Doc\LJCKeyItems.xml" />
     <Content Include="Doc\LJCAssemblyReflect.xml">

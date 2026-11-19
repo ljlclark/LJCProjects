@@ -80,7 +80,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       var copyright = new string[]
       {
@@ -108,7 +108,7 @@ namespace TestHTMLBuilder
       hb.Text(text, addIndent);
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("<!DOCTYPE html>");
       b.AddLine("<!-- Copyright (c) Lester J. Clark and Contributors -->");
       b.AddLine("<!-- Licensed under the MIT License. -->");
@@ -140,7 +140,7 @@ namespace TestHTMLBuilder
     private static void AddIndent()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Example Method:
       // The builder keeps track of the current number of indents.
@@ -161,7 +161,7 @@ namespace TestHTMLBuilder
       hb.AddText(" No start with newline.");
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("This text is not indented.");
       b.AddLine("  This text is indented.");
       b.AddText("Not indented. No start with newline.");
@@ -172,14 +172,14 @@ namespace TestHTMLBuilder
     private static bool EndsWithNewLine()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Example Method:
       // Indicates if the builder text ends with a newline.
       bool retValue = hb.EndsWithNewLine();
       var result = retValue.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddText("False");
       var compare = b.ToString();
       TestCommon.Write("EndsWithNewLine()", result, compare);
@@ -189,14 +189,14 @@ namespace TestHTMLBuilder
     private static bool StartWithNewLine()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Example Method:
       // Checks if text can start with a newline.
       bool retValue = hb.StartWithNewLine(true);
       var result = retValue.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddText("False");
       var compare = b.ToString();
       TestCommon.Write("StartWithNewLine()", result, compare);
@@ -206,7 +206,7 @@ namespace TestHTMLBuilder
     private static bool HasText()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Example Method:
       // Adds text without modification.
@@ -216,7 +216,7 @@ namespace TestHTMLBuilder
       var retValue = hb.HasText();
       var result = retValue.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddText("True");
       var compare = b.ToString();
       TestCommon.Write("HasText()", result, compare);
@@ -229,7 +229,7 @@ namespace TestHTMLBuilder
     private static void AddLine()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Example Method:
       // Adds a text line without modification.
@@ -239,7 +239,7 @@ namespace TestHTMLBuilder
       hb.AddText(":");
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("This is an appended line.");
       b.AddText(":");
       var compare = b.ToString();
@@ -249,7 +249,7 @@ namespace TestHTMLBuilder
     private static void AddText()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Example Method:
       // Adds text without modification.
@@ -263,7 +263,7 @@ namespace TestHTMLBuilder
     private static void Line()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Adds potentially modified text to the builder.
       hb.Text("This is an appended line.");
@@ -286,7 +286,7 @@ namespace TestHTMLBuilder
       hb.Text("This is an indented line.");
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("This is an appended line.");
       b.AddLine();
       b.AddText("  This is an indented line.");
@@ -297,7 +297,7 @@ namespace TestHTMLBuilder
     private static void Text()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       hb.Text("This is an appended line.");
 
@@ -316,7 +316,7 @@ namespace TestHTMLBuilder
       hb.Text("This is an indented line.");
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
@@ -329,7 +329,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       var attribs = new LJCAttributes()
       {
@@ -341,7 +341,7 @@ namespace TestHTMLBuilder
       hb.End("div", textState);
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("<div class=\"Selector\">");
       b.AddText("</div>");
       var compare = b.ToString();
@@ -351,7 +351,7 @@ namespace TestHTMLBuilder
     private static void GetIndented()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Example Method:
       // Gets a new potentially indented line.
@@ -369,7 +369,7 @@ namespace TestHTMLBuilder
       hb.Text(result, addIndent);
       result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("This text is NOT indented.");
       b.AddText("    This text is indented.");
       var compare = b.ToString();
@@ -379,7 +379,7 @@ namespace TestHTMLBuilder
     private static void GetIndentString()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Changes the IndentCount by the provided value.
       hb.AddIndent(1);
@@ -402,7 +402,7 @@ namespace TestHTMLBuilder
     private static void GetLine()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Adds text without modification.
       hb.AddText("This is an appended line.");
@@ -428,7 +428,7 @@ namespace TestHTMLBuilder
       hb.Text(":");
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("This is an appended line.");
       b.AddText("  :");
       var compare = b.ToString();
@@ -438,7 +438,7 @@ namespace TestHTMLBuilder
     private static void GetText()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Adds potentially modified text to the builder.
       hb.Text("This is an appended line.");
@@ -460,7 +460,7 @@ namespace TestHTMLBuilder
       hb.AddText(text);
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("This is an appended line.");
       b.AddText("  This is an indented line.");
       var compare = b.ToString();
@@ -470,13 +470,13 @@ namespace TestHTMLBuilder
     private static void GetWrapped()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder()
+      var hb = new LJCHTMLBuilder()
       {
         WrapEnabled = true
       };
 
       // Example Method:
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       // Adds text without modification.
       b.AddText("Now is the time for all good men to come to the aid of their");
       b.AddText(" country.");
@@ -487,7 +487,7 @@ namespace TestHTMLBuilder
       // Appends added text and new wrapped line if combined line > LineLimit.
       var result = hb.GetWrapped(text);
 
-      b = new HTMLBuilder();
+      b = new LJCHTMLBuilder();
       b.AddText("Now is the time for all good men to come to the aid of");
       b.AddLine(" their country. Now is the");
       b.AddText("time for all good men to come to the aid of their country.");
@@ -504,7 +504,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Creates the HTML element attributes.
       var attribs = hb.StartAttribs();
@@ -527,7 +527,7 @@ namespace TestHTMLBuilder
       hb.End("html", textState);
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       //b.AddLine("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">");
       b.AddLine("<html lang=\"en\">");
       b.AddText("</html>");
@@ -541,7 +541,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Creates the HTML element attributes.
@@ -554,7 +554,7 @@ namespace TestHTMLBuilder
       hb.Create("html", null, textState, attribs, addIndent);
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddText("<html lang=\"en\">");
       //b.AddText(" xmlns=\"http://www.w3.org/1999/xhtml\">");
       b.AddText("</html>");
@@ -568,7 +568,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Gets the element end tag.
@@ -583,7 +583,7 @@ namespace TestHTMLBuilder
       , bool childIndent = true)
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Gets the element begin tag.
       var createText = hb.GetBegin(name, textState, attribs, addIndent
@@ -605,7 +605,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Example Method:
       // Gets the element begin tag.
@@ -629,7 +629,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder();
+      var hb = new LJCHTMLBuilder();
 
       // Example Method:
       // Gets beginning of style selector.
@@ -653,7 +653,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Gets the element text.
@@ -670,7 +670,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Gets the element end tag.
@@ -690,14 +690,14 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Appends a <link> element for a style sheet.
       hb.Link("File.css", textState);
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddText("<link rel=\"stylesheet\" type=\"text/css\"");
       b.AddText(" href=\"File.css\" />");
       var compare = b.ToString();
@@ -710,7 +710,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       var content = "width=device-width initial-scale=1";
@@ -719,7 +719,7 @@ namespace TestHTMLBuilder
       hb.Meta("viewport", content, textState);
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddText("<meta name=\"viewport\"");
       b.AddText($" content=\"{content}\" />");
       var compare = b.ToString();
@@ -732,14 +732,14 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Appends common <meta> elements.
       hb.Metas("Mr. Smith", textState, "The Description");
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("<meta charset=\"utf-8\" />");
       b.AddLine("<meta name=\"description\" content=\"The Description\" />");
       b.AddLine("<meta name=\"author\" content=\"Mr. Smith\" />");
@@ -755,7 +755,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Appends a <script> element for a script file.
@@ -772,13 +772,13 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Gets the <link> element for a style sheet.
       var result = hb.GetLink("File.css", textState);
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddText("<link rel=\"stylesheet\" type=\"text/css\"");
       b.AddText(" href=\"File.css\" />");
       var compare = b.ToString();
@@ -791,7 +791,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       var content = "width=device-width initial-scale=1";
@@ -799,7 +799,7 @@ namespace TestHTMLBuilder
       // Gets a <meta> element.
       var result = hb.GetMeta("viewport", content, textState);
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddText("<meta name=\"viewport\"");
       b.AddText($" content=\"{content}\" />");
       var compare = b.ToString();
@@ -812,13 +812,13 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Gets common <meta> elements.
       var result = hb.GetMetas("Mr. Smith", textState, "The Description");
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("<meta charset=\"utf-8\" />");
       b.AddLine("<meta name=\"description\" content=\"The Description\" />");
       b.AddLine("<meta name=\"author\" content=\"Mr. Smith\" />");
@@ -834,7 +834,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Gets the <script> element.
@@ -853,7 +853,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       var copyright = new string[]
@@ -867,7 +867,7 @@ namespace TestHTMLBuilder
       hb.HTMLBegin(textState, copyright, fileName);
       var result = hb.ToString();
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("<!DOCTYPE html>");
       b.AddLine("<!-- Copyright (c) First Line -->");
       b.AddLine("<!-- Second Line -->");
@@ -885,7 +885,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       var copyright = new string[]
@@ -898,7 +898,7 @@ namespace TestHTMLBuilder
       // Gets the HTML beginning up to <head>.
       var result = hb.GetHTMLBegin(textState, copyright, fileName);
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("<!DOCTYPE html>");
       b.AddLine("<!-- Copyright (c) First Line -->");
       b.AddLine("<!-- Second Line -->");
@@ -916,13 +916,13 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Gets the HTML end <body> and <html>.
       var result = hb.GetHTMLEnd(textState);
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("</body>");
       b.AddText("</html>");
       var compare = b.ToString();
@@ -935,7 +935,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       var title = "The Title";
@@ -946,7 +946,7 @@ namespace TestHTMLBuilder
       // Defaults: title = null, author = null, description = null.
       var result = hb.GetHTMLHead(textState, title, author, description);
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine("<title>The Title</title>");
       b.AddLine("<meta charset=\"utf-8\" />");
       b.AddLine("<meta name=\"description\" content=\"The Description\" />");
@@ -965,7 +965,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       var className = "className";
@@ -985,7 +985,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Creates the HTML element attributes.
@@ -1003,7 +1003,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       // Creates the HTML element attributes.
@@ -1011,7 +1011,7 @@ namespace TestHTMLBuilder
 
       var result = hb.GetAttribs(attribs, textState);
 
-      var b = new HTMLBuilder();
+      var b = new LJCHTMLBuilder();
       b.AddLine(" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"");
       b.AddText(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
       var compare = b.ToString();
@@ -1024,7 +1024,7 @@ namespace TestHTMLBuilder
       var textState = new LJCTextState();
 
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new HTMLBuilder(textState);
+      var hb = new LJCHTMLBuilder(textState);
 
       // Example Method:
       var border = 1;
