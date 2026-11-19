@@ -150,7 +150,10 @@ namespace LJCNetCommon
         int middleIndex = leftIndex + (rightIndex - leftIndex) / 2;
 
         // Get the object compare value.
-        var dataColumns = list[middleIndex] as LJCDataColumns;
+        if (!(list[middleIndex] is LJCDataColumns dataColumns))
+        {
+          continue;
+        }
 
         int compareValue = LJCNetString.CompareGreater;
         for (short index = 0; index < keyColumns.Count; index++)
@@ -158,6 +161,10 @@ namespace LJCNetCommon
           var keyColumn = keyColumns[index];
           var propertyName = keyColumn.PropertyName;
           var columnValue = dataColumns.LJCString(propertyName);
+          if (null == columnValue)
+          {
+            break;
+          }
           compareValue = LJCCompareColumn(columnValue, keyColumn);
           if (index < keyColumns.Count - 1)
           {
@@ -254,9 +261,6 @@ namespace LJCNetCommon
             var propertyValue = newColumn.Value;
             var sortPropertyName = currentColumn.PropertyName;
             var sortPropertyValue = currentColumn.Value;
-            //if (propertyName.CompareTo(sortPropertyName) != 0
-            //  || !EqualityComparer<object>.Default.Equals(propertyValue
-            //  , sortPropertyValue))
             // Property name or value changed.
             if (!LJC.IsEqual(propertyName, sortPropertyName)
               || !LJC.IsEqual(propertyValue, sortPropertyValue))
@@ -732,21 +736,8 @@ namespace LJCNetCommon
     ///  path='members/LJCBoolean/*'/>
     public bool LJCBoolean(string propertyName)
     {
-      bool retValue = default;
-
-      var value = LJCString(propertyName);
-      if (value != null)
-      {
-        if (LJCNetString.IsDigits(value))
-        {
-          var checkValue = Convert.ToInt16(value);
-          retValue = Convert.ToBoolean(checkValue);
-        }
-        else
-        {
-          _ = bool.TryParse(value, out retValue);
-        }
-      }
+      var value = LJCValue(propertyName);
+      var retValue = LJC.GetBoolean(value);
       return retValue;
     }
 

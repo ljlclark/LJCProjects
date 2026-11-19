@@ -13,6 +13,21 @@ namespace LJCNetCommon5
   {
     #region Static Methods
 
+    // Compare column value to key column value.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/LJCCompareColumn/*'/>
+    public static int LJCCompareColumn(string columnValue, LJCDataValue keyColumn
+      , bool ignoreCase = true)
+    {
+      string searchValue = null;
+      if (keyColumn.Value != null)
+      {
+        searchValue = keyColumn.Value.ToString();
+      }
+      int retIndex = string.Compare(columnValue, searchValue, ignoreCase);
+      return retIndex;
+    }
+
     // Deserializes from the specified XML file.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
@@ -116,6 +131,75 @@ namespace LJCNetCommon5
         }
       }
       return retNames;
+    }
+
+    // Custom binary search for Name value.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/LJCSearchColumns/*'/>
+    public static int LJCSearchColumns<T>(List<T> list, LJCDataValues keyColumns)
+    {
+      int retIndex = -1;
+
+      int leftIndex = 0;
+      int rightIndex = list.Count - 1;
+      while (leftIndex <= rightIndex)
+      {
+        // Get the midpoint.
+        int middleIndex = leftIndex + (rightIndex - leftIndex) / 2;
+
+        // Get the object compare value.
+        if (list[middleIndex] is not LJCDataColumns dataColumns)
+        {
+          continue;
+        }
+
+        int compareValue = LJCNetString.CompareGreater;
+        for (short index = 0; index < keyColumns.Count; index++)
+        {
+          var keyColumn = keyColumns[index];
+          var propertyName = keyColumn.PropertyName;
+          var columnValue = dataColumns.LJCString(propertyName);
+          if (null == columnValue)
+          {
+            break;
+          }
+          compareValue = LJCCompareColumn(columnValue, keyColumn);
+          if (index < keyColumns.Count - 1)
+          {
+            // Parent key value is not equal.
+            if (compareValue != LJCNetString.CompareEqual)
+            {
+              break;
+            }
+          }
+          else
+          {
+            // Item key value is equal.
+            if (LJCNetString.CompareEqual == compareValue)
+            {
+              retIndex = middleIndex;
+            }
+          }
+        }
+
+        // DbColumns item was found.
+        if (LJCNetString.CompareEqual == compareValue)
+        {
+          break;
+        }
+
+        if (LJCNetString.CompareLess == compareValue)
+        {
+          // Eliminate left half
+          leftIndex = middleIndex + 1;
+        }
+        else
+        {
+          // Eliminate right half
+          rightIndex = middleIndex - 1;
+        }
+      }
+      return retIndex;
     }
 
     // Operator to create LJCDataValues from LJCDataColumns.
