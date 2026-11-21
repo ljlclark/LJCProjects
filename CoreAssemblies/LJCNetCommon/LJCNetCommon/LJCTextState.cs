@@ -46,7 +46,7 @@ namespace LJCNetCommon
     private int mChildIndentCount;
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance with the supplied values.
     /// <include file='Doc/LJCTextState.xml'

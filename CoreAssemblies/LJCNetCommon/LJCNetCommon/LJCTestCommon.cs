@@ -12,6 +12,11 @@ namespace LJCNetCommon
   {
     #region Properties
 
+    // Gets or sets the show flag.
+    /// <include file='Doc/LJCTestCommon.xml'
+    ///  path='members/ShowNotImplemented/*'/>
+    public bool ShowNotImplemented { get; set; }
+
     // The class name.
     private readonly string _ClassName;
     #endregion
@@ -23,6 +28,8 @@ namespace LJCNetCommon
     ///  path='members/Constructor/*'/>
     public LJCTestCommon()
     {
+      ShowNotImplemented = true;
+      _ClassName = null;
     }
 
     // Initializes an object instance with the supplied values.
@@ -35,6 +42,24 @@ namespace LJCNetCommon
     #endregion
 
     #region Methods
+
+    // Show the result.
+    /// <include file='Doc/LJCTestCommon.xml'
+    ///  path='members/ShowResult/*'/>
+    public void Show(string methodName, string result
+      , string compare)
+    {
+      while (true)
+      {
+        if (!ShowNotImplemented
+          && compare == "Not Implemented")
+        {
+          break;
+        }
+        Write($"{methodName}", result, compare);
+        break;
+      }
+    }
 
     // Writes a compare message to the console.
     /// <include file='Doc/LJCTestCommon.xml'

@@ -9,13 +9,13 @@ using System.Reflection;
 namespace LJCNetCommon
 {
   // Represents a collection of PropertyDelegate objects.
-  /// <include file='Doc/PropertyDelegates.xml'
+  /// <include file='Doc/LJCPropertyDelegates.xml'
   ///  path='members/LJCPropertyDelegates/*'/>
   public class LJCPropertyDelegates : List<LJCPropertyDelegate>
   {
     // Creates and adds a PropertyDelegate object to the collection. (R)
-    /// <include file='Doc/PropertyDelegates.xml'
-    ///  path='items/Add/*'/>
+    /// <include file='Doc/LJCPropertyDelegates.xml'
+    ///  path='members/Add/*'/>
     public LJCPropertyDelegate Add(PropertyInfo propertyInfo)
     {
       LJCPropertyDelegate retValue;
@@ -38,8 +38,8 @@ namespace LJCNetCommon
     }
 
     // Returns the PropertyDelegate object if found in the list.
-    /// <include file='Doc/PropertyDelegates.xml'
-    ///  path='items/LJCSearchName/*'/>
+    /// <include file='Doc/LJCPropertyDelegates.xml'
+    ///  path='members/LJCSearchName/*'/>
     public LJCPropertyDelegate LJCSearchName(string propertyName)
     {
       LJCPropertyDelegate retValue = null;
@@ -49,8 +49,8 @@ namespace LJCNetCommon
     }
 
     // Creates and returns the delegate for the named property.
-    /// <include file='Doc/PropertyDelegates.xml'
-    ///  path='items/LJCCreateDelegate/*'/>
+    /// <include file='Doc/LJCPropertyDelegates.xml'
+    ///  path='members/LJCCreateDelegate/*'/>
     public Func<object, object> LJCCreateDelegate(PropertyInfo propertyInfo)
     {
       Func<object, object> retValue = null;

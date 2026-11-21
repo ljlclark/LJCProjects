@@ -9,7 +9,7 @@ namespace LJCNetCommon
 {
   // Provides object property reflection capabilities.
   /// <include file='Doc/LJCReflect.xml'
-  ///  path='items/LJCReflect/*'/>
+  ///  path='members/LJCReflect/*'/>
   public class LJCReflect
   {
     #region Properties
@@ -31,7 +31,7 @@ namespace LJCNetCommon
 
     // Instantiates an instance of the class.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/Constructor/*'/>
+    ///  path='members/Constructor/*'/>
     public LJCReflect(object source)
     {
       mSource = source;
@@ -44,7 +44,7 @@ namespace LJCNetCommon
 
     // Sets the source object and type values.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/SetSource/*'/>
+    ///  path='members/SetSource/*'/>
     public void SetSource(object source)
     {
       mSource = source;
@@ -55,7 +55,7 @@ namespace LJCNetCommon
 
     // Gets the cached PropertyInfo value.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetPropertyInfo/*'/>
+    ///  path='members/GetPropertyInfo/*'/>
     public PropertyInfo GetPropertyInfo(string propertyName)
     {
       PropertyInfo retValue = null;
@@ -73,7 +73,7 @@ namespace LJCNetCommon
 
     // Gets a list of the property names.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetPropertyNames/*'/>
+    ///  path='members/GetPropertyNames/*'/>
     public List<string> GetPropertyNames()
     {
       List<string> retValue = new List<string>();
@@ -91,7 +91,7 @@ namespace LJCNetCommon
 
     // Get the property type.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetPropertyType/*'/>
+    ///  path='members/GetPropertyType/*'/>
     public Type GetPropertyType(string propertyName)
     {
       var info = GetPropertyInfo(propertyName);
@@ -119,7 +119,7 @@ namespace LJCNetCommon
 
     // Gets the property value as a boolean.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetBoolean/*'/>
+    ///  path='members/GetBoolean/*'/>
     public bool GetBoolean(string propertyName)
     {
       var value = GetValue(propertyName);
@@ -129,7 +129,7 @@ namespace LJCNetCommon
 
     // Gets the property value as a byte.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetByte/*'/>
+    ///  path='members/GetByte/*'/>
     public byte GetByte(string propertyName)
     {
       var value = GetValue(propertyName);
@@ -149,7 +149,7 @@ namespace LJCNetCommon
 
     // Gets the property value as a char.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetChar/*'/>
+    ///  path='members/GetChar/*'/>
     public char GetChar(string propertyName)
     {
       var value = GetValue(propertyName);
@@ -169,7 +169,7 @@ namespace LJCNetCommon
 
     // Gets the property value as a DateTime value.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetDateTime/*'/>
+    ///  path='members/GetDateTime/*'/>
     public DateTime GetDateTime(string propertyName)
     {
       var value = GetValue(propertyName);
@@ -179,7 +179,7 @@ namespace LJCNetCommon
 
     // Gets the property value as a decimal.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetDecimal/*'/>
+    ///  path='members/GetDecimal/*'/>
     public decimal GetDecimal(string propertyName)
     {
       var value = GetValue(propertyName);
@@ -189,7 +189,7 @@ namespace LJCNetCommon
 
     // Gets the property value as a double.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetDouble/*'/>
+    ///  path='members/GetDouble/*'/>
     public double GetDouble(string propertyName)
     {
       var value = GetValue(propertyName);
@@ -209,7 +209,7 @@ namespace LJCNetCommon
 
     // Gets the property value as a short.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetInt16/*'/>
+    ///  path='members/GetInt16/*'/>
     public short GetInt16(string propertyName)
     {
       var value = GetValue(propertyName);
@@ -219,7 +219,7 @@ namespace LJCNetCommon
 
     // Gets the property value as an integer.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetInt32/*'/>
+    ///  path='members/GetInt32/*'/>
     public int GetInt32(string propertyName)
     {
       var value = GetValue(propertyName);
@@ -229,7 +229,7 @@ namespace LJCNetCommon
 
     // Gets the property value as a long.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetInt64/*'/>
+    ///  path='members/GetInt64/*'/>
     public long GetInt64(string propertyName)
     {
       var value = GetValue(propertyName);
@@ -239,7 +239,7 @@ namespace LJCNetCommon
 
     // Gets the property value as a string.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetString/*'/>
+    ///  path='members/GetString/*'/>
     public string GetString(string propertyName)
     {
       var value = GetValue(propertyName);
@@ -247,9 +247,9 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets the property value as an object using a delegate. (E)
+    // Gets the property value as an object using a delegate.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetValue/*'/>
+    ///  path='members/GetValue/*'/>
     public object GetValue(string propertyName, bool throwError = true)
     {
       object retValue = null;
@@ -265,7 +265,7 @@ namespace LJCNetCommon
             if (throwError)
             {
               var name = mType.Name;
-              var text = $"{name} Property {propertyName} was not found.";
+              var text = $"{name} Property \"{propertyName}\" was not found.";
               throw new ArgumentException(text);
             }
           }
@@ -292,7 +292,7 @@ namespace LJCNetCommon
 
     // Gets the property value as a DB date/time string.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/GetDbDateString/*'/>
+    ///  path='members/GetDbDateString/*'/>
     public string GetDbDateString(string propertyName)
     {
       var value = GetValue(propertyName);
@@ -325,7 +325,7 @@ namespace LJCNetCommon
           if (throwError)
           {
             var name = mType.Name;
-            var text = $"{name} Property {propertyName} was not found.";
+            var text = $"{name} Property \"{propertyName}\" was not found.";
             throw new ArgumentException(text);
           }
         }
@@ -340,9 +340,9 @@ namespace LJCNetCommon
 
     #region Set Methods
 
-    // Sets the property value based on value type. (E)
+    // Sets the property value based on value type.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/SetPropertyValue/*'/>
+    ///  path='members/SetPropertyValue/*'/>
     public void SetPropertyValue(string propertyName, object value)
     {
       Type type;
@@ -418,7 +418,7 @@ namespace LJCNetCommon
 
     // Sets the property value.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='items/SetValue/*'/>
+    ///  path='members/SetValue/*'/>
     public void SetValue(string propertyName, object value
       , PropertyInfo propertyInfo = null)
     {

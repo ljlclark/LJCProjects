@@ -7,12 +7,12 @@ using System.Reflection;
 namespace LJCNetCommon5
 {
   // Represents a collection of PropertyDelegate objects.
-  /// <include file='Doc/PropertyDelegates.xml'
+  /// <include file='Doc/LJCPropertyDelegates.xml'
   ///  path='members/LJCPropertyDelegates/*'/>
   public class LJCPropertyDelegates : List<LJCPropertyDelegate>
   {
     // Creates and adds a PropertyDelegate object to the collection. (R)
-    /// <include file='Doc/PropertyDelegates.xml'
+    /// <include file='Doc/LJCPropertyDelegates.xml'
     ///  path='members/Add/*'/>
     public LJCPropertyDelegate? Add(PropertyInfo propertyInfo)
     {
@@ -36,7 +36,7 @@ namespace LJCNetCommon5
     }
 
     // Returns the PropertyDelegate object if found in the list.
-    /// <include file='Doc/PropertyDelegates.xml'
+    /// <include file='Doc/LJCPropertyDelegates.xml'
     ///  path='members/LJCSearchName/*'/>
     public LJCPropertyDelegate? LJCSearchName(string propertyName)
     {
@@ -47,7 +47,7 @@ namespace LJCNetCommon5
     }
 
     // Creates and returns the delegate for the named property.
-    /// <include file='Doc/PropertyDelegates.xml'
+    /// <include file='Doc/LJCPropertyDelegates.xml'
     ///  path='members/LJCCreateDelegate/*'/>
     public static Func<object, object>? LJCCreateDelegate(PropertyInfo propertyInfo)
     {

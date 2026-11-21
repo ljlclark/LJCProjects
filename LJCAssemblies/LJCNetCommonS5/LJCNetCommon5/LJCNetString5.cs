@@ -1,4 +1,4 @@
-﻿// Copyright (c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // LJCNetString.cs
 using System.Text;
@@ -6,29 +6,29 @@ using System.Text;
 namespace LJCNetCommon5
 {
   // Contains common string related static methods.
-  /// <include file='Doc/NetString.xml'
+  /// <include file='Doc/LJCNetString.xml'
   ///  path='members/LJCNetString/*'/>
   public class LJCNetString
   {
     #region Constants
 
     // The "compare" object is equal to the "compareto" object.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/CompareEqual/*'/>
     public const int CompareEqual = 0;
 
     // The "compare" object is greater than the "compareto" object.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/CompareGreater/*'/>
     public const int CompareGreater = 1;
 
     // The "compare" object is less than the "compareto" object.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/CompareLess/*'/>
     public const int CompareLess = -1;
 
     // The "compare" object and "compareto" object are not both null.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/CompareNotNullOrEqual/*'/>
     public const int CompareNotNullOrEqual = -2;
     #endregion
@@ -36,7 +36,7 @@ namespace LJCNetCommon5
     #region Checking String Values
 
     // Checks a string value for digits.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/IsDigits/*'/>
     public static bool IsDigits(string? text)
     {
@@ -63,7 +63,7 @@ namespace LJCNetCommon5
     }
 
     // Do an Ignore Case string compare.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/IsEqual/*'/>
     public static bool IsEqual(string? stringA, string? stringB)
     {
@@ -82,12 +82,28 @@ namespace LJCNetCommon5
       }
       return retValue;
     }
+
+    // Gets the case insensitive index of the findText.
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/IndexOf/*'/>
+    public static int IndexOf(string text, string findText)
+    {
+      var retIndex = -1;
+
+      if (LJC.HasText(text)
+        && LJC.HasText(findText))
+      {
+        StringComparison comparison = StringComparison.InvariantCultureIgnoreCase;
+        retIndex = text.IndexOf(findText, comparison);
+      }
+      return retIndex;
+    }
     #endregion
 
     #region Formatting a String
 
     // Adds a value to a comma delimited string.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/AddDelimitedValue/*'/>
     public static void AddDelimitedValue(ref string? target, string value)
     {
@@ -103,7 +119,7 @@ namespace LJCNetCommon5
     }
 
     // Adds delimiters to one or more values.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/DelimitValues/*'/>
     public static string DelimitValues(string? values, string beginDelimiter
       , string endDelimiter)
@@ -138,7 +154,7 @@ namespace LJCNetCommon5
     }
 
     // Creates an exception string with outer and inner exception.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/ExceptionString/*'/>
     public static string ExceptionString(Exception e)
     {
@@ -153,7 +169,7 @@ namespace LJCNetCommon5
     }
 
     // Formats the column value for the SQL string.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/FormatValue/*'/>
     public static string? FormatValue(object? value, string? dataTypeName)
     {
@@ -204,7 +220,7 @@ namespace LJCNetCommon5
     }
 
     // Gets a column name with underscores converted to Pascal case.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/GetPropertyName/*'/>
     public static string? GetPropertyName(string? name)
     {
@@ -242,7 +258,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the Search Property name.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/GetSearchName/*'/>
     public static string GetSearchName(string columnName)
     {
@@ -258,7 +274,7 @@ namespace LJCNetCommon5
     }
 
     // Initializes a string to the trimmed value or null.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/InitString/*'/>
     public static string? InitString(string? value)
     {
@@ -272,7 +288,7 @@ namespace LJCNetCommon5
     }
 
     // Scrubs extra blanks from the comma delimited string.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/ScrubDelimitedValues/*'/>
     public static string ScrubDelimitedValues(string? values)
     {
@@ -304,7 +320,7 @@ namespace LJCNetCommon5
     }
 
     // Split a string on a single separator without empty entries.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/Split/*'/>
     public static string[]? Split(string? text, string separator = ",")
     {
@@ -320,7 +336,7 @@ namespace LJCNetCommon5
     }
 
     // Split a string on multiple separators without empty entries.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/Split2/*'/>
     public static string[]? Split(string? text, string[] separators)
     {
@@ -335,7 +351,7 @@ namespace LJCNetCommon5
     }
 
     // Truncates a text string to the specified length.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/Truncate/*'/>
     public static string? Truncate(string? text, int length)
     {
@@ -353,7 +369,7 @@ namespace LJCNetCommon5
     #region Soundex Methods
 
     // Creates a letter based soundex value.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/CreateLSoundex/*'/>
     public static string? CreateLSoundex(string? text)
     {
@@ -386,7 +402,7 @@ namespace LJCNetCommon5
     }
 
     // Creates a Phonetic based soundex value.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/CreatePSoundex/*'/>
     public static string? CreatePSoundex(string? text)
     {
@@ -424,70 +440,8 @@ namespace LJCNetCommon5
       return retValue;
     }
 
-    // Creates a US Census soundex value.
-    /// <include file='Doc/NetString.xml'
-    ///  path='members/Soundex/*'/>
-    public static string? Soundex(string text)
-    {
-      string? retValue = null;
-
-      if (LJC.HasText(text))
-      {
-        var tb = new LJCTextBuilder();
-        var upperText = text.ToUpper().Trim();
-        foreach (char letter in upperText)
-        {
-          // Keep the first letter.
-          if (0 == tb.ToString().Length)
-          {
-            tb.AddText(letter.ToString());
-          }
-          else
-          {
-            if (!"AEIOUHWY".Contains(letter))
-            {
-              if ("BFPV".Contains(letter))
-              {
-                tb.AddText("1");
-              }
-              if ("CGJKQSXZ".Contains(letter))
-              {
-                tb.AddText("2");
-              }
-              if ("DT".Contains(letter))
-              {
-                tb.AddText("3");
-              }
-              if ("L".Contains(letter))
-              {
-                tb.AddText("4");
-              }
-              if ("MN".Contains(letter))
-              {
-                tb.AddText("5");
-              }
-              if ("R".Contains(letter))
-              {
-                tb.AddText("6");
-              }
-            }
-          }
-        }
-        retValue = Truncate(tb.ToString(), 4);
-        if (LJC.HasText(retValue)
-          && retValue.Length < 4)
-        {
-          var addLength = 4 - retValue.Length;
-          var addList = Enumerable.Repeat("0", addLength);
-          var addValue = string.Concat(addList);
-          retValue = $"{retValue}{addValue}";
-        }
-      }
-      return retValue;
-    }
-
     // Checks if the letter is a soundex skipped letter.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/IsSoundexLetter/*'/>
     public static bool IsSoundexLetter(string? text, int index)
     {
@@ -498,7 +452,7 @@ namespace LJCNetCommon5
       {
         text = text.ToUpper();
         char currentChar = text[index];
-        char? prevChar = null;
+        char prevChar = ' ';
         if (index > 0)
         {
           prevChar = text[index - 1];
@@ -508,7 +462,7 @@ namespace LJCNetCommon5
         if (!" AEIOU".Contains(currentChar))
         {
           // Do not include double consonants.
-          if (prevChar != null
+          if (prevChar != ' '
             && prevChar != currentChar)
           {
             retValue = true;
@@ -520,7 +474,7 @@ namespace LJCNetCommon5
 
     // Creates a Phonetic character from the supplied text starting at the
     // supplied index.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/Phonetic/*'/>
     public static bool Phonetic(string? text, ref int index, out char? letter)
     {
@@ -586,12 +540,74 @@ namespace LJCNetCommon5
       }
       return retValue;
     }
+
+    // Creates a US Census soundex value.
+    /// <include file='Doc/LJCNetString.xml'
+    ///  path='members/Soundex/*'/>
+    public static string? Soundex(string text)
+    {
+      string? retValue = null;
+
+      if (LJC.HasText(text))
+      {
+        var tb = new LJCTextBuilder();
+        var upperText = text.ToUpper().Trim();
+        foreach (char letter in upperText)
+        {
+          // Keep the first letter.
+          if (0 == tb.ToString().Length)
+          {
+            tb.AddText(letter.ToString());
+          }
+          else
+          {
+            if (!"AEIOUHWY".Contains(letter))
+            {
+              if ("BFPV".Contains(letter))
+              {
+                tb.AddText("1");
+              }
+              if ("CGJKQSXZ".Contains(letter))
+              {
+                tb.AddText("2");
+              }
+              if ("DT".Contains(letter))
+              {
+                tb.AddText("3");
+              }
+              if ("L".Contains(letter))
+              {
+                tb.AddText("4");
+              }
+              if ("MN".Contains(letter))
+              {
+                tb.AddText("5");
+              }
+              if ("R".Contains(letter))
+              {
+                tb.AddText("6");
+              }
+            }
+          }
+        }
+        retValue = Truncate(tb.ToString(), 4);
+        if (LJC.HasText(retValue)
+          && retValue.Length < 4)
+        {
+          var addLength = 4 - retValue.Length;
+          var addList = Enumerable.Repeat("0", addLength);
+          var addValue = string.Concat(addList);
+          retValue = $"{retValue}{addValue}";
+        }
+      }
+      return retValue;
+    }
     #endregion
 
     #region Other Methods
 
     // Adds the missing argument name to the message.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/AddObjectArgError/*'/>
     public static void AddObjectArgError(ref string message, object? argument
       , string? name = null, string? errorContext = null)
@@ -627,7 +643,7 @@ namespace LJCNetCommon5
     }
 
     // Throws an ArgumentException if the provided message has a value.
-    /// <include file='Doc/NetString.xml'
+    /// <include file='Doc/LJCNetString.xml'
     ///  path='members/ThrowArgError/*'/>
     public static void ThrowArgError(string? message)
     {

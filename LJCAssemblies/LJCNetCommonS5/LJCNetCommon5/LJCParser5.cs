@@ -299,8 +299,8 @@ namespace LJCNetCommon5
         BeginIndex = -1;
         EndIndex = -1;
         //var value = retValue.Substring(0, beginIndex);
-        var value = retValue[..beginIndex];
         //value += retValue.Substring(endIndex + 1);
+        var value = retValue[..beginIndex];
         value += retValue[(endIndex + 1)..];
         retValue = value;
       }

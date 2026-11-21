@@ -155,8 +155,8 @@
     <Content Include="Doc\ProjectNetCommon.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Doc\PropertyDelegate.xml" />
-    <Content Include="Doc\PropertyDelegates.xml" />
+    <Content Include="Doc\LJCPropertyDelegate.xml" />
+    <Content Include="Doc\LJCPropertyDelegates.xml" />
     <Content Include="Doc\LJCTestCommon.xml" />
     <Content Include="Doc\LJCTextBuilder.xml" />
     <Content Include="Doc\XMLAttribute.xml" />

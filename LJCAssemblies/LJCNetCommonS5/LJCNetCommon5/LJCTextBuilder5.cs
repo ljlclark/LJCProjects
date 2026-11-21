@@ -6,7 +6,7 @@ using System.Text;
 namespace LJCNetCommon5
 {
   // Provides methods for creating text.
-  /// <include file='Doc/TextBuilder.xml'
+  /// <include file='Doc/LJCTextBuilder.xml'
   ///  path='members/LJCTextBuilder/*'/>
   public class LJCTextBuilder
   {
@@ -27,17 +27,17 @@ namespace LJCNetCommon5
     #region Properties
 
     // The internal StringBuilder class.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/Builder/*'/>
     public StringBuilder Builder { get; set; }
 
     // Gets or sets the delimiter.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/Delimiter/*'/>
     public string Delimiter { get; set; }
 
     // Gets a value indicating if the builder has text.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/HasText/*'/>
     public bool HasText
     {
@@ -53,12 +53,12 @@ namespace LJCNetCommon5
     }
 
     // Gets or sets the indent character count.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/IndentCharCount/*'/>
     public int IndentCharCount { get; set; }
 
     // Gets or sets the indent count.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/IndentCount/*'/>
     public int IndentCount
     {
@@ -74,7 +74,7 @@ namespace LJCNetCommon5
     private int mIndentCount;
 
     // Gets the current indent length.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/IndentLength/*'/>
     public int IndentLength
     {
@@ -85,33 +85,33 @@ namespace LJCNetCommon5
     }
 
     // Gets or sets the first item indicator.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/IsFirst/*'/>
     public bool IsFirst { get; set; }
 
     // Gets the current length.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/LineLength/*'/>
     public int LineLength { get; private set; }
 
     // Gets the character limit.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/LineLimit/*'/>
     public int LineLimit { get; private set; }
 
     // Gets or sets a value that indicates if a wrap should occur at a leading
     // delimiter.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/WrapAtDelimiter/*'/>
     public bool WrapAtDelimiter { get; set; }
 
     // Gets or sets a value that indicates if line wrapping is enabled.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/WrapEnabled/*'/>
     public bool WrapEnabled { get; set; }
 
     // Gets or sets the new line prefix.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/WrapPrefix/*'/>
     public string WrapPrefix { get; set; }
     #endregion
@@ -119,7 +119,7 @@ namespace LJCNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance with the provided values.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/Constructor/*'/>
     public LJCTextBuilder(LJCTextState? textState = null)
     {
@@ -144,7 +144,7 @@ namespace LJCNetCommon5
     #region Data Class Methods
 
     // Clears the Builder text.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/Clear/*'/>
     public void Clear()
     {
@@ -154,7 +154,7 @@ namespace LJCNetCommon5
     }
 
     // Retrieves the object text.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/ToString/*'/>
     public override string ToString()
     {
@@ -165,7 +165,7 @@ namespace LJCNetCommon5
     #region Methods
 
     // Changes the IndentCount by the provided value.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/AddIndent/*'/>
     public int AddIndent(int increment = 1)
     {
@@ -181,7 +181,7 @@ namespace LJCNetCommon5
     #region Append Text Methods
 
     // Adds a text line without modification.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/AddLine/*'/>
     public string AddLine(string? text = null)
     {
@@ -192,7 +192,7 @@ namespace LJCNetCommon5
     }
 
     // Adds text without modification.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/AddText/*'/>
     public void AddText(string? text)
     {
@@ -203,7 +203,7 @@ namespace LJCNetCommon5
     }
 
     // Adds a delimiter if not the first list item.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/Item/*'/>
     public string Item(string text, bool addIndent = true
       , bool allowNewLine = true)
@@ -222,7 +222,7 @@ namespace LJCNetCommon5
     }
 
     // Adds a modified text line to the builder.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/Line/*'/>
     public string Line(string? text = null, bool addIndent = true
       , bool allowNewLine = true)
@@ -236,7 +236,7 @@ namespace LJCNetCommon5
     }
 
     // Adds modified text to the builder.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/Text/*'/>
     public string Text(string text, bool addIndent = true
       , bool allowNewLine = true)
@@ -253,7 +253,7 @@ namespace LJCNetCommon5
     #region Get Text Methods
 
     // Indicates if the builder text ends with a newline.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/EndsWithNewLine/*'/>
     public bool EndsWithNewLine()
     {
@@ -271,7 +271,7 @@ namespace LJCNetCommon5
     }
 
     // Allow text to start with a newline.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/StartWithNewLine/*'/>
     public bool StartWithNewLine(bool allowNewLine)
     {
@@ -287,7 +287,7 @@ namespace LJCNetCommon5
     }
 
     // Adds a delimiter if not the first list item.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/GetDelimited/*'/>
     public string GetDelimited(string text)
     {
@@ -302,7 +302,7 @@ namespace LJCNetCommon5
     }
 
     // Gets a new potentially indented line.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/GetIndented/*'/>
     public string GetIndented(string text)
     {
@@ -324,7 +324,7 @@ namespace LJCNetCommon5
     }
 
     // Returns the current indent string.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/GetIndentString/*'/>
     public string GetIndentString()
     {
@@ -333,7 +333,7 @@ namespace LJCNetCommon5
     }
 
     // Gets a modified text line.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/GetLine/*'/>
     public string GetLine(string? text = null, bool addIndent = true
       , bool allowNewLine = true)
@@ -344,7 +344,7 @@ namespace LJCNetCommon5
     }
 
     // Gets potentially indented and wrapped text.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/GetText/*'/>
     public string GetText(string? text, bool addIndent = true
       , bool allowNewLine = true)
@@ -357,7 +357,6 @@ namespace LJCNetCommon5
         retText = "\r\n";
       }
 
-      //if (TextLength(text) > 0)
       if (LJC.HasText(text))
       {
         retText += text;
@@ -388,7 +387,7 @@ namespace LJCNetCommon5
     }
 
     // Gets added text and new wrapped line if combined line > LineLimit.
-    /// <include file='Doc/TextBuilder.xml'
+    /// <include file='Doc/LJCTextBuilder.xml'
     ///  path='members/GetWrapped/*'/>
     public string GetWrapped(string text)
     {
