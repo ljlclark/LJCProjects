@@ -421,38 +421,7 @@ namespace LJCNetCommon
       return retHasItems;
     }
 
-    // Gets a collection of changed columns.
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCChanged/*'/>
-    public LJCDataColumns LJCChanged()
-    {
-      List<LJCDataColumn> dataColumns;
-      var retColumns = new LJCDataColumns();
-
-      dataColumns = FindAll(x => x.IsChanged);
-      foreach (LJCDataColumn dataColumn in dataColumns)
-      {
-        var newDataColumn = dataColumn.Clone();
-        if (newDataColumn != null)
-        {
-          retColumns.Add(newDataColumn);
-        }
-      }
-      return retColumns;
-    }
-
-    // Sets the IsChanged value to false for all items.
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCClearChanged/*'/>
-    public void LJCClearChanged()
-    {
-      foreach (LJCDataColumn dataColumn in this)
-      {
-        dataColumn.IsChanged = false;
-      }
-    }
-
-    // Gets a collection of items that match a list of property names.
+    // Returns a collection of columns that match the supplied property names.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCColumns/*'/>
     public LJCDataColumns LJCColumns(List<string> propertyNames)
@@ -692,6 +661,40 @@ namespace LJCNetCommon
         }
       }
       _IsPendingSort = false;
+    }
+    #endregion
+
+    #region Changes Methods
+
+    // Gets a collection of changed columns.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/LJCChanged/*'/>
+    public LJCDataColumns LJCChanged()
+    {
+      List<LJCDataColumn> dataColumns;
+      var retColumns = new LJCDataColumns();
+
+      dataColumns = FindAll(x => x.IsChanged);
+      foreach (LJCDataColumn dataColumn in dataColumns)
+      {
+        var newDataColumn = dataColumn.Clone();
+        if (newDataColumn != null)
+        {
+          retColumns.Add(newDataColumn);
+        }
+      }
+      return retColumns;
+    }
+
+    // Sets the IsChanged value to false for all items.
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/LJCClearChanged/*'/>
+    public void LJCClearChanged()
+    {
+      foreach (LJCDataColumn dataColumn in this)
+      {
+        dataColumn.IsChanged = false;
+      }
     }
     #endregion
 
