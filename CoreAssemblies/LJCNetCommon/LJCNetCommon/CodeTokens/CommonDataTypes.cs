@@ -197,7 +197,7 @@ namespace LJCNetCommon
 
     // Retrieve the collection element.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/SearchName/*'/>
+    ///  path='members/SearchName/*'/>
     public string SearchName(string name)
     {
       string retValue = null;
@@ -213,7 +213,7 @@ namespace LJCNetCommon
 
     // Sort on Name.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/SortName/*'/>
+    ///  path='members/SortName/*'/>
     public void SortName()
     {
       if (Count != mPrevCount)

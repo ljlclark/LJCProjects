@@ -11,6 +11,44 @@
     </summary>
   </LJCCSParser>
   
+  <!-- Properties -->
+  <ClassModifier2>
+    <summary>
+      Gets or sets the second class access modifier.
+    </summary>
+    <returns></returns>
+  </ClassModifier2>
+  <DataType>
+    <summary>
+      Gets or sets the data types.
+    </summary>
+    <returns></returns>
+  </DataType>
+  <MethodModifier2>
+    <summary>
+      Gets or sets the second method access modifier.
+    </summary>
+    <returns></returns>
+  </MethodModifier2>
+  <MethodModifier3>
+    <summary>
+      Gets or sets the third method access modifier.
+    </summary>
+    <returns></returns>
+  </MethodModifier3>
+  <Modifier>
+    <summary>
+      Gets or sets the access modifiers.
+    </summary>
+    <returns></returns>
+  </Modifier>
+  <Modifier2>
+    <summary>
+      Gets or sets the second access modifier.
+    </summary>
+    <returns></returns>
+  </Modifier2>
+
   <!-- Constructor Methods -->
   <Constructor>
     <summary>

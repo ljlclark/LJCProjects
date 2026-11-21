@@ -106,7 +106,7 @@
     </Content>
     <Content Include="Doc\AppSettings.xml" />
     <Content Include="Doc\LJCArgError.xml" />
-    <Content Include="Doc\CodeTokenizer.xml">
+    <Content Include="CodeTokens\Doc\CodeTokenizer.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Doc\LJCDataRows.xml">
@@ -120,16 +120,6 @@
     </Content>
     <Content Include="Doc\LJCDataValue.xml" />
     <Content Include="Doc\LJCDataColumn.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Doc\DbColumn.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Doc\DbColumns.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Doc\DbValue.xml" />
-    <Content Include="Doc\DbValues.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Doc\LJCAttribute.xml" />
@@ -159,9 +149,6 @@
     <Content Include="Doc\LJCPropertyDelegates.xml" />
     <Content Include="Doc\LJCTestCommon.xml" />
     <Content Include="Doc\LJCTextBuilder.xml" />
-    <Content Include="Doc\XMLAttribute.xml" />
-    <Content Include="Doc\XMLAttributes.xml" />
-    <Content Include="Doc\XMLBuilder.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

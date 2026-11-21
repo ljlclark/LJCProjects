@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- KeyItem.xml -->
-<items>
+<members>
   <KeyItem>
     <summary>
       Initializes an object instance.
@@ -11,4 +11,4 @@
     <param name="id">The ID value.</param>
     <param name="description">The Description value.</param>
   </KeyItem>
-</items>
+</members>

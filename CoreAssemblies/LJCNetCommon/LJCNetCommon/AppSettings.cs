@@ -12,14 +12,14 @@ namespace LJCNetCommon
 {
   // Represents the Configuration AppSettings.
   /// <include file='Doc/ProjectNetCommon.xml'
-  ///  path='items/AppSettings/*'/>
+  ///  path='members/AppSettings/*'/>
   public class AppSettings
   {
     #region Constructors
 
     // Initializes an object instance.
     /// <include file='Doc/AppSettings.xml'
-    ///  path='items/AppSettingsC/*'/>
+    ///  path='members/AppSettingsC/*'/>
     public AppSettings(string fileSpec)
     {
       XElement appSettings;
@@ -56,7 +56,7 @@ namespace LJCNetCommon
 
     // Gets the bool value of the specified setting. (E)
     /// <include file='Doc/AppSettings.xml'
-    ///  path='items/GetBool/*'/>
+    ///  path='members/GetBool/*'/>
     public bool GetBool(string keyName)
     {
       bool retValue = false;
@@ -72,7 +72,7 @@ namespace LJCNetCommon
 
     // Gets the Color value of the specified setting. (E)
     /// <include file='Doc/AppSettings.xml'
-    ///  path='items/GetColor/*'/>
+    ///  path='members/GetColor/*'/>
     public Color GetColor(string keyName, Color defaultColor)
     {
       Color retValue = defaultColor;
@@ -97,7 +97,7 @@ namespace LJCNetCommon
 
     // Gets a Color from an RGB string. (E)
     /// <include file='Doc/AppSettings.xml'
-    ///  path='items/GetColorFromRGBString/*'/>
+    ///  path='members/GetColorFromRGBString/*'/>
     public Color GetColorFromRGBString(string rgbText)
     {
       string[] rgb;
@@ -131,7 +131,7 @@ namespace LJCNetCommon
 
     // Gets an integer color value from a string. (E)
     /// <include file='Doc/AppSettings.xml'
-    ///  path='items/GetColorValue/*'/>
+    ///  path='members/GetColorValue/*'/>
     public int GetColorValue(string text)
     {
       string errorText;
@@ -156,7 +156,7 @@ namespace LJCNetCommon
 
     // Get the string value of the specified setting. (E)
     /// <include file='Doc/AppSettings.xml'
-    ///  path='items/GetString/*'/>
+    ///  path='members/GetString/*'/>
     public string GetString(string keyName, bool allowMissingValue = true)
     {
       IEnumerable<XElement> settings = null;

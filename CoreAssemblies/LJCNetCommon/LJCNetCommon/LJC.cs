@@ -651,7 +651,7 @@ namespace LJCNetCommon
 
     // Returns the Guid value of the data field with the specified name. 
     /// <include file='Doc/LJC.xml'
-    ///  path='items/GetGuid/*'/>
+    ///  path='members/GetGuid/*'/>
     public static Guid GetGuid(object value)
     {
       Guid retValue = default;

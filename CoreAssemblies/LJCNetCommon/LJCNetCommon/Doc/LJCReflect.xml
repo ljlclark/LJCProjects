@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCReflect.xml -->
-<items>
+<members>
   <LJCReflect>
     <summary>
       Provides object property reflection capabilities. (DE)
@@ -144,7 +144,7 @@
     <param name="propertyName">The property name.</param>
     <returns>The string property value.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
         
         // Initialize LJCReflect outside of loop.
@@ -166,7 +166,7 @@
     <param name="throwError"></param>
     <returns>The object property value.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
         
         // Initialize LJCReflect outside of loop.
@@ -185,6 +185,7 @@
       Gets the property value as an object using reflection.
     </summary>
     <param name="propertyName">The property name.</param>
+    <param name="throwError"></param>
     <returns>The object property value.</returns>
   </GetValueReflect>
 
@@ -196,7 +197,7 @@
     <param name="propertyName">The property name.</param>
     <param name="value">The property value.</param>
     <example>
-      <code>
+      <code xml:space="preserve">
         using System;
         using System.Data;
         using System.Data.Common;
@@ -224,4 +225,4 @@
     <param name="value">The property value.</param>
     <param name="propertyInfo">The PropertyInfo value.</param>
   </SetValue>
-</items>
+</members>

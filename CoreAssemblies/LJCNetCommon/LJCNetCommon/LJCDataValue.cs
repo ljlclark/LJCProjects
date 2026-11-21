@@ -181,7 +181,7 @@ namespace LJCNetCommon
     }
 
     // Formats the column value for the SQL string.
-    /// <include file='Doc/DbValue.xml'
+    /// <include file='Doc/LJCDataValue.xml'
     ///  path='members/FormatValue/*'/>
     public string FormatValue()
     {

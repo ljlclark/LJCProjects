@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- PropertyDelegates.xml -->
-<items>
+<members>
   <Add>
     <summary>
       Creates and adds a PropertyDelegate object to the collection. (R)
@@ -27,4 +27,4 @@
     <param name="propertyInfo">The PropertyInfo object.</param>
     <returns>The property access delegate.</returns>
   </LJCCreateDelegate>
-</items>
+</members>

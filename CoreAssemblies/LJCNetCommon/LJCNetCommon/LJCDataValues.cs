@@ -539,7 +539,7 @@ namespace LJCNetCommon
 
     // Returns the Guid value of the data field with the specified name. 
     /// <include file='Doc/LJCDataValues.xml'
-    ///  path='items/LJCGuid/*'/>
+    ///  path='members/LJCGuid/*'/>
     public Guid LJCGuid(string propertyName)
     {
       var value = LJCValue(propertyName);

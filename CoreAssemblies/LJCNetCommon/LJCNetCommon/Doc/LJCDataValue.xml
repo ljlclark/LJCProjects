@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DbValue.xml -->
-<items>
+<members>
   <DbValueC>
     <summary>
       Initializes an object instance with the supplied values.
@@ -14,11 +14,11 @@
   <CreateColumn>
     <summary>
       Creates a combined
-      &lt;span class="userType"&gt;DbColumn&lt;/span&gt; from a
-      &lt;span class="userType"&gt;DbValue&lt;/span&gt; and
-      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;.
+      &lt;span class="userType"&gt;DataColumn&lt;/span&gt; from a
+      &lt;span class="userType"&gt;DataValue&lt;/span&gt; and
+      &lt;span class="userType"&gt;DataColumn&lt;/span&gt;.
     </summary>
-    <param name="definitionColumn">
+    <param name="dataColumn">
       The &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
       object.
     </param>
@@ -28,4 +28,4 @@
       object.
     </returns>
   </CreateColumn>
-</items>
+</members>

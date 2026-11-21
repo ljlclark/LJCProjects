@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DbValues.xml -->
-<items>
+<members>
   <DbValues>
     <summary>
       Represents a collection of
@@ -34,11 +34,11 @@
   <LJCCreateColumns>
     <summary>
       Creates combined
-      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; from
-      &lt;span class="userType"&gt;DbColumns&lt;/span&gt; and
-      &lt;span class="userType"&gt;DbValues&lt;/span&gt;.
+      &lt;span class="userType"&gt;DataColumns&lt;/span&gt; from
+      &lt;span class="userType"&gt;DataColumns&lt;/span&gt; and
+      &lt;span class="userType"&gt;DataValues&lt;/span&gt;.
     </summary>
-    <param name="dataDefinition">The column definitions.</param>
+    <param name="dataColumns">The column definitions.</param>
     <returns>
       The combined
       &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
@@ -78,4 +78,4 @@
     <param name="propertyName">The property name.</param>
     <returns>The selected DbValue object.</returns>
   </Item>
-</items>
+</members>

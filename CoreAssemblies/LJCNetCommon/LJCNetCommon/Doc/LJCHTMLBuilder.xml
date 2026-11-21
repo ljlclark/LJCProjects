@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- HTMLBuilder.xml -->
-<items>
+<members>
   <HTMLBuilder>
     <summary>
       Provides methods for creating HTML text.
@@ -103,7 +103,7 @@
     </param>
     <returns>The current indent count.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
@@ -151,7 +151,7 @@
       builder.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
@@ -178,7 +178,7 @@
       AddText() is an "Append" method. It adds the unmodified text to the builder.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
@@ -207,7 +207,7 @@
       Line() works the same as Text() except it appends a new line.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
@@ -253,7 +253,7 @@
       method.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
@@ -287,7 +287,7 @@
       true if builder text ends with a newline; otherwise false.
     </returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         var hb = new HTMLBuilder();
 
         bool retValue = hb.EndsWithNewLine();
@@ -305,7 +305,7 @@
     <param name="allowNewLine">Indicates if a new line can be added.</param>
     <returns>true if allowed to start with a newline; otherwise false.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         var hb = new HTMLBuilder();
 
         bool retValue = hb.StartWithNewLine(true);
@@ -330,7 +330,7 @@
       already has a value.&lt;br /&gt;
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -358,7 +358,7 @@
     <param name="text">The add text.</param>
     <returns>The potentially indented new text value.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
@@ -385,7 +385,7 @@
     </summary>
     <returns>The current indent string.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
@@ -427,7 +427,7 @@
       GetLine() works the same as GetText() except it appends a new line.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
@@ -479,7 +479,7 @@
       line length is greater than LineLimit.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder();
 
@@ -512,7 +512,7 @@
     <param name="text">The text value.</param>
     <returns>The potentially wrapped and indented new text value.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
         var hb = new HTMLBuilder()
         {
@@ -558,7 +558,7 @@
       a value.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -611,7 +611,7 @@
       a value.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -648,7 +648,7 @@
       a value.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -671,7 +671,7 @@
     <param name="textState">The current text state values.</param>
     <returns>The added &lt;link&gt; element.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -696,7 +696,7 @@
     <param name="textState">The current text state values.</param>
     <returns>The added &amp;lt;meta&amp;gt; element.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -724,7 +724,7 @@
     <param name="charSet">The charset value.</param>
     <returns>The added &amp;lt;meta&amp;gt; elements.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -751,7 +751,7 @@
     <param name="textState">The current text state values.</param>
     <returns>The added &amp;lt;script&amp;gt; element.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -780,7 +780,7 @@
       textState.ChildIndentCount > 0.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -834,7 +834,7 @@
       method.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -863,7 +863,7 @@
     <param name="textState">The current text state values.</param>
     <returns>The style selector beginning.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -916,7 +916,7 @@
       not closed.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -948,7 +948,7 @@
       and returns the text value.
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -973,7 +973,7 @@
     <param name="textState">The current text state values.</param>
     <returns>The &lt;link&gt; element.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -997,7 +997,7 @@
     <param name="textState">The current text state values.</param>
     <returns>The &amp;lt;meta&amp;gt; element.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -1024,7 +1024,7 @@
     <param name="charSet">The charset value.</param>
     <returns>The &amp;lt;meta&amp;gt; elements.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -1050,7 +1050,7 @@
     <param name="textState">The current text state values.</param>
     <returns>The &amp;lt;script&amp;gt; element.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -1075,7 +1075,7 @@
     <param name="fileName">The HTML file name.</param>
     <returns>The added HTML beginning text.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -1114,7 +1114,7 @@
     <param name="fileName">The HTML file name.</param>
     <returns>The HTML beginning text.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -1147,7 +1147,7 @@
     <param name="textState">The current text state values.</param>
     <returns>The HTML end tags.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -1173,7 +1173,7 @@
     <param name="description">The description.</param>
     <returns>The common HTML head elements.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -1204,7 +1204,7 @@
     <param name="id">The id attribute.</param>
     <returns>The common element attributes collection.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -1229,7 +1229,7 @@
     </summary>
     <returns>The HTML start attributes.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -1256,7 +1256,7 @@
     <param name="id">The id attribute.</param>
     <returns>The common table attributes.</returns>
     <example>
-      <code>
+      <code xml:space="preserve">
         // Root Method Begin
         var textState = new TextState();
 
@@ -1276,4 +1276,4 @@
       </code>
     </example>
   </TableAttribs>
-</items>
+</members>

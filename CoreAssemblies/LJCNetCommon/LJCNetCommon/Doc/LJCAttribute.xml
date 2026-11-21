@@ -3,11 +3,31 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCAttribute.xml -->
 <members>
-  <CHTMLAttribute>
+  <!-- Class -->
+  <LJCAttribute>
+    <summary>
+      Represents an HTML or XML element attribute.
+    </summary>
+  </LJCAttribute>
+  
+  <!-- Properties -->
+  <Name>
+    <summary>
+      Gets or sets the attribute name.
+    </summary>
+  </Name>
+  <Value>
+    <summary>
+      Gets or sets the attribute value.
+    </summary>
+  </Value>
+  
+  <!-- Constructor Methods -->
+  <ParamConstructor>
     <summary>
       Initializes an object instance.
     </summary>
     <param name="name">The attribute name.</param>
     <param name="value">The attribute value.</param>
-  </CHTMLAttribute>
+  </ParamConstructor>
 </members>

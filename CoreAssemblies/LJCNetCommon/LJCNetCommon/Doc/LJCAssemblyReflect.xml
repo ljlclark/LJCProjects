@@ -3,10 +3,10 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCAssemblyReflect.xml -->
 <members>
+  <!-- Class -->
   <LJCAssemblyReflect>
     <summary>
       Provides Assembly Reflection methods.
-      (DE)
     </summary>
     <remarks>
       <para>
@@ -24,6 +24,121 @@
     </remarks>
   </LJCAssemblyReflect>
 
+  <!-- Static Methods -->
+  <ParmNames>
+    <summary>
+      Gets parm names from method info.
+    </summary>
+    <returns></returns>
+  </ParmNames>
+  <ParmTypeNames>
+    <summary>
+      Gets parm method type names with parm names.
+    </summary>
+    <returns></returns>
+  </ParmTypeNames>
+
+  <!-- Properties -->
+  <Assembly>
+    <summary>
+      The Assembly reference.
+    </summary>
+  </Assembly>
+  <ConstructorInfo>
+    <summary>
+      The constructor information.
+    </summary>
+  </ConstructorInfo>
+  <FieldInfo>
+    <summary>
+      The Field information.
+    </summary>
+  </FieldInfo>
+  <FieldName>
+    <summary>
+      The Field name.
+    </summary>
+  </FieldName>
+  <FileSpec>
+    <summary>
+      The Assembly file name.
+    </summary>
+  </FileSpec>
+  <MethodInfo>
+    <summary>
+      The Method information.
+    </summary>
+  </MethodInfo>
+  <MethodName>
+    <summary>
+      The Method name.
+    </summary>
+  </MethodName>
+  <PropertyInfo>
+    <summary>
+      The Property information.
+    </summary>
+  </PropertyInfo>
+  <PropertyName>
+    <summary>
+      The Property name.
+    </summary>
+  </PropertyName>
+  <TypeName>
+    <summary>
+      The Type name.
+    </summary>
+  </TypeName>
+  <TypeReference>
+    <summary>
+      The Type reference.
+    </summary>
+  </TypeReference>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <Clear>
+    <summary>
+      Clears the property values.
+    </summary>
+  </Clear>
+
+  <!-- Methods -->
+  <GetFieldInfo>
+    <summary>
+      Gets a field info object.
+    </summary>
+    <returns></returns>
+  </GetFieldInfo>
+  <GetMethodInfo>
+    <summary>
+      Gets a parameterless method info object.
+    </summary>
+    <returns></returns>
+  </GetMethodInfo>
+  <ParmMethodInfo>
+    <summary>
+      Get a parameterized method info object.
+    </summary>
+    <returns></returns>
+  </ParmMethodInfo>
+  <ParmMethodInfosWithCount>
+    <summary>
+      Gets parm method infos with method name and parm count.
+    </summary>
+    <returns></returns>
+  </ParmMethodInfosWithCount>
+  <ParmMethodInfoWithParms>
+    <summary>
+      Gets parm method info with parm names.
+    </summary>
+    <returns></returns>
+  </ParmMethodInfoWithParms>
+  
   <!-- Public Set Methods -->
   <SetAssembly>
     <summary>
@@ -49,7 +164,7 @@
       parameters exist.
     </remarks>
     <example>
-      <code>        using System;
+      <code xml:space="preserve">        using System;
         using System.Reflection;
         using LJC.Net.Common;
 
@@ -80,7 +195,7 @@
       property value if the type reference and the field exist.
     </remarks>
     <example>
-      <code>        using System;
+      <code xml:space="preserve">        using System;
         using System.Reflection;
         using LJC.Net.Common;
 
@@ -119,7 +234,7 @@
       parameters exist.
     </remarks>
     <example>
-      <code>        using System;
+      <code xml:space="preserve">        using System;
         using System.Reflection;
         using LJC.Net.Common;
 
@@ -151,7 +266,7 @@
       property value if the type reference and the property exist.
     </remarks>
     <example>
-      <code>        using System;
+      <code xml:space="preserve">        using System;
         using System.Reflection;
         using LJC.Net.Common;
 
@@ -182,7 +297,7 @@
       property value if the assembly reference and type name exist.
     </remarks>
     <example>
-      <code>        using System;
+      <code xml:space="preserve">        using System;
         using System.Reflection;
         using LJC.Net.Common;
 
@@ -209,7 +324,7 @@
     <param name="constructorInfo">The ConstructorInfo object.</param>
     <returns>The Constructor syntax.</returns>
     <example>
-      <code>        using System;
+      <code xml:space="preserve">        using System;
         using System.Reflection;
         using LJC.Net.Common;
 
@@ -237,7 +352,7 @@
     <param name="fieldInfo">The FieldInfo object.</param>
     <returns></returns>
     <example>
-      <code>        using System;
+      <code xml:space="preserve">        using System;
         using System.Reflection;
         using LJC.Net.Common;
 
@@ -272,7 +387,7 @@
     <param name="methodInfo">The MethodInfo object.</param>
     <returns>The Method syntax.</returns>
     <example>
-      <code>        using System;
+      <code xml:space="preserve">        using System;
         using System.Reflection;
         using LJC.Net.Common;
 
@@ -300,7 +415,7 @@
     <param name="propertyInfo">The PropertyInfo object.</param>
     <returns>The syntax string.</returns>
     <example>
-      <code>        using System;
+      <code xml:space="preserve">        using System;
         using System.Reflection;
         using LJC.Net.Common;
 
@@ -328,7 +443,7 @@
     <param name="typeReference">The Type object.</param>
     <returns>The Type syntax.</returns>
     <example>
-      <code>        using System;
+      <code xml:space="preserve">        using System;
         using System.Reflection;
         using LJC.Net.Common;
         
@@ -349,27 +464,27 @@
   </GetTypeSyntax>
 
   <!-- Public Flag Methods -->
-  <IsNotCommonClassification>
+  <IsCommonClassification>
     <summary>
-      Indicates if the Type is not a common type.
+      Indicates if the Type is a common type.
     </summary>
     <param name="type">The Type object.</param>
-    <returns>true if not a common type; otherwise, false.</returns>
-  </IsNotCommonClassification>
-  <IsNotCommonInterface>
+    <returns>true if a common type; otherwise, false.</returns>
+  </IsCommonClassification>
+  <IsCommonInterface>
     <summary>
-      Indicates if the Interface is not a common type.
+      Indicates if the Interface is a common type.
     </summary>
     <param name="type">The Type object.</param>
-    <returns>true if not a common interface; otherwise, false.</returns>
-  </IsNotCommonInterface>
-  <IsNotProperty>
+    <returns>true if a common interface; otherwise, false.</returns>
+  </IsCommonInterface>
+  <IsProperty>
     <summary>
-      Indicates if the Method is not a property getter or setter.
+      Indicates if the Method is a property getter or setter.
     </summary>
     <param name="methodInfo">The MethodInfo object.</param>
-    <returns>true if not a Property; otherwise, false.</returns>
-  </IsNotProperty>
+    <returns>true if a Property; otherwise, false.</returns>
+  </IsProperty>
   <IsOverride>
     <summary>
       Indicates if the method is "override".

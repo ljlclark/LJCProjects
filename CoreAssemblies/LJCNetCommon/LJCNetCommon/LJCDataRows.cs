@@ -323,7 +323,7 @@ namespace LJCNetCommon
 
     // Compares two objects.
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='items/Compare/*'/>
+    ///  path='members/Compare/*'/>
     public int Compare(LJCDataColumns x, LJCDataColumns y)
     {
       int retValue;

@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- DbColumn.xml -->
-<items>
+<members>
   <DbColumn>
     <summary>
       Represents a Data Column definition. (D)
@@ -75,7 +75,7 @@
       </para>
     </remarks>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
 
         var dbColumnBool = new DbColumn("TestBool", "1", NetCommon.TypeBoolean);
@@ -100,7 +100,7 @@
       object.
     </param>
     <example>
-      <code>
+      <code xml:space="preserve">
         using LJCNetCommon;
         
         var dbColumn = new DbColumn()
@@ -219,4 +219,4 @@
       Sort and search on RenameAs value.
     </summary>
   </DbColumnRenameAsComparer>
-</items>
+</members>

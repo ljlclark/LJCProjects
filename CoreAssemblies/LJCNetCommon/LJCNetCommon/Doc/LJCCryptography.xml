@@ -2,7 +2,34 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCCryptography.xml -->
-<items>
+<members>
+  <!-- Class -->
+  <LJCCryptography>
+    <summary>
+      Provides methods to encrypt and decrypt data in memory.
+    </summary>
+  </LJCCryptography>
+  
+  <!-- Properties -->
+  <KeySize>
+    <summary>
+      Gets or sets the secret key size in bits.
+    </summary>
+  </KeySize>
+  <LegalKeySizes>
+    <summary>
+      Gets the supported key sizes.
+    </summary>
+    <returns></returns>
+  </LegalKeySizes>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes a new instance of the MemoryCrypto class.
+    </summary>
+  </Constructor>
+  
   <!-- Methods -->
   <Decrypt>
     <summary>
@@ -13,7 +40,7 @@
     <param name="initializationVector">The IV value.</param>
     <returns>The decrypted text value.</returns>
     <example>
-      <code>        MemoryCrypto crypto = new MemoryCrypto();
+      <code xml:space="preserve">        MemoryCrypto crypto = new MemoryCrypto();
         string text = null;
         byte[] key = {230, 191, 149, 1, 207, 136, 112, 200
                        , 7, 192, 109, 130, 188, 192, 27, 183
@@ -59,7 +86,7 @@
     <param name="initializationVector">The IV value.</param>
     <returns>The encrypted byte array.</returns>
     <example>
-      <code>        MemoryCrypto crypto = new MemoryCrypto();
+      <code xml:space="preserve">        MemoryCrypto crypto = new MemoryCrypto();
         byte[] key;
         byte[] iv;
         byte[] cipher;
@@ -94,12 +121,4 @@
     <param name="sizeValue">The size value.</param>
     <returns>true if valid; otherwise, false.</returns>
   </IsValidKeySize>
-
-  <!-- Properties -->
-  <LegalKeySizes>
-    <summary>
-      Gets the supported key sizes.
-    </summary>
-    <returns></returns>
-  </LegalKeySizes>
-</items>
+</members>

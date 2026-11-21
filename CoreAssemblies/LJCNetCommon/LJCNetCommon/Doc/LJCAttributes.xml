@@ -3,6 +3,14 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCAttributes.xml -->
 <members>
+  <!-- Class -->
+  <LJCAttributes>
+    <summary>
+      Represents a collection of Attribute elements.
+    </summary>
+  </LJCAttributes>
+  
+  <!-- Collection Data Methods -->
   <Add>
     <summary>
       Creates and adds an XMLAttribute.

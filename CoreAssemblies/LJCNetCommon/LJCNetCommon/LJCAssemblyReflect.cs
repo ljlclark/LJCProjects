@@ -148,7 +148,7 @@ namespace LJCNetCommon
       Clear();
     }
 
-    // Initializes an object instance.
+    // Clears the property values.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clear/*'/>
     public void Clear()

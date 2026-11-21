@@ -838,7 +838,7 @@ namespace LJCNetCommon
     }
 
     // Creates the XML start attributes.
-    /// <include file='Doc/XMLBuilder.xml'
+    /// <include file='Doc/LJCHTMLBuilder.xml'
     ///  path='members/StartAttributes/*'/>
     public LJCAttributes StartXMLAttribs()
     {

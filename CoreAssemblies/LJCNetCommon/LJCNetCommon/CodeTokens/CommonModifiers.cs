@@ -16,7 +16,7 @@ namespace LJCNetCommon
 
     // Deserializes from the specified XML file.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/LJCDeserialize/*'/>
+    ///  path='members/LJCDeserialize/*'/>
     public static List<string> Deserialize(string fileSpec = null)
     {
       List<string> retValue;
@@ -49,7 +49,7 @@ namespace LJCNetCommon
 
     // Checks if the collection has items.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/HasItems1/*'/>
+    ///  path='members/HasItems1/*'/>
     public static bool HasItems(CommonModifiers collection)
     {
       bool retValue = false;
@@ -66,7 +66,7 @@ namespace LJCNetCommon
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Constructor/*'/>
+    ///  path='members/Constructor/*'/>
     public CommonModifiers()
     {
       Items = new List<string>();
@@ -75,7 +75,7 @@ namespace LJCNetCommon
 
     // The Copy constructor.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/CopyConstructor/*'/>
+    ///  path='members/CopyConstructor/*'/>
     public CommonModifiers(CommonModifiers items)
     {
       Items = new List<string>();
@@ -93,7 +93,7 @@ namespace LJCNetCommon
 
     // Adds the specified object.
     /// <include file='Doc/CommonModifiers.xml'
-    ///  path='items/Add1/*'/>
+    ///  path='members/Add1/*'/>
     public void Add(string item)
     {
       if (LJC.HasText(item))
@@ -104,7 +104,7 @@ namespace LJCNetCommon
 
     // Creates and returns a clone of the object.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='items/Clone/*'/>
+    ///  path='members/Clone/*'/>
     public CommonModifiers Clone()
     {
       CommonModifiers retValue = MemberwiseClone() as CommonModifiers;
@@ -113,7 +113,7 @@ namespace LJCNetCommon
 
     // Checks if the collection has items.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/HasItems2/*'/>
+    ///  path='members/HasItems2/*'/>
     public bool HasItems()
     {
       bool retValue = false;
@@ -127,7 +127,7 @@ namespace LJCNetCommon
 
     // Serializes the collection
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/LJCSerialize/*'/>
+    ///  path='members/LJCSerialize/*'/>
     public void Serialize(string fileSpec = null)
     {
       if (!LJC.HasText(fileSpec))
@@ -151,7 +151,7 @@ namespace LJCNetCommon
 
     // Gets the Collection Enumerator.
     /// <include file='Doc/CommonModifiers.xml'
-    ///  path='items/GetEnumerator/*'/>
+    ///  path='members/GetEnumerator/*'/>
     public IEnumerator<string> GetEnumerator()
     {
       return ((IEnumerable<string>)Items).GetEnumerator();
@@ -191,7 +191,7 @@ namespace LJCNetCommon
 
     // Retrieve the collection element.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/SearchName/*'/>
+    ///  path='members/SearchName/*'/>
     public string SearchName(string name)
     {
       string retValue = null;
@@ -207,7 +207,7 @@ namespace LJCNetCommon
 
     // Sort on Name.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Collection.xml'
-    ///  path='items/SortName/*'/>
+    ///  path='members/SortName/*'/>
     public void SortName()
     {
       if (Count != mPrevCount)

@@ -823,7 +823,7 @@ namespace LJCNetCommon
 
     // Gets the column object value as a GUID.
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='items/LJCGuid/*'/>
+    ///  path='members/LJCGuid/*'/>
     public Guid LJCGuid(string propertyName)
     {
       var value = LJCValue(propertyName);

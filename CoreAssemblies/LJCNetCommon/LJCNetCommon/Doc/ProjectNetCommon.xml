@@ -2,7 +2,7 @@
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- ProjectNetCommon.xml -->
-<items>
+<members>
   <!-- Use the first class in the project to load the Project Level Remarks -->
   <AppSettings>
     <summary>
@@ -40,4 +40,4 @@
       </para>
     </remarks>
   </AppSettings>
-</items>
+</members>

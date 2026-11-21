@@ -3,11 +3,75 @@
 <!-- Licensed under the MIT License. -->
 <!-- LJCArgError.xml -->
 <members>
-  <CHTMLAttribute>
+  <!-- Class -->
+  <LJCArgError>
+    <summary>
+      Creates an argument error message.
+    </summary>
+  </LJCArgError>
+
+  <!-- Properties -->
+  <ClassName>
+    <summary>
+      Gets or sets the Class name.
+    </summary>
+  </ClassName>
+  <MethodName>
+    <summary>
+      Gets or sets the Method name.
+    </summary>
+  </MethodName>
+
+  <!-- Constructor Methods -->
+  <Constructor>
     <summary>
       Initializes an object instance.
     </summary>
-    <param name="name">The attribute name.</param>
-    <param name="value">The attribute value.</param>
-  </CHTMLAttribute>
+  </Constructor>
+  <ParamConstructor>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+    <param name="className">The class name.</param>
+  </ParamConstructor>
+  <Clear>
+    <summary>
+      Clears the messages.
+    </summary>
+  </Clear>
+
+  <!-- Data Class Methods -->
+  <ToString>
+    <summary>
+      Returns the message string.
+    </summary>
+    <returns></returns>
+  </ToString>
+  
+  <!-- Methods -->
+  <Add1>
+    <summary>
+      Adds a message using the provided values.
+    </summary>
+  </Add1>
+  <Add2>
+    <summary>
+      Adds a message.
+    </summary>
+  </Add2>
+  <DbIDCheck>
+    <summary>
+      Checks the ID values.
+    </summary>
+  </DbIDCheck>
+  <IDCheck>
+    <summary>
+      Checks the ID values.
+    </summary>
+  </IDCheck>
+  <ThrowError>
+    <summary>
+      
+    </summary>
+  </ThrowError>
 </members>
