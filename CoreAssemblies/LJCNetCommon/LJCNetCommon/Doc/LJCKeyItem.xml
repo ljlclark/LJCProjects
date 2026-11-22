@@ -1,14 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- KeyItem.xml -->
+<!-- LJCKeyItem.xml -->
 <members>
-  <KeyItem>
+  <!-- Class -->
+  <LJCKeyItem>
+    <summary>
+      Represents Key item values.
+    </summary>
+  </LJCKeyItem>
+  
+  <!-- Properties -->
+  <DataConfigName>
+    <summary>
+      Gets or sets the DataConfig name.
+    </summary>
+  </DataConfigName>
+  <Description>
+    <summary>
+      The Description value.
+    </summary>
+  </Description>
+  <ID>
+    <summary>
+      The ID value.
+    </summary>
+  </ID>
+  <MaxLength>
+    <summary>
+      Gets or sets the MaxLength value.
+    </summary>
+  </MaxLength>
+  <PrimaryKeyName>
+    <summary>
+      Gets or sets the Primary Key name.
+    </summary>
+  </PrimaryKeyName>
+  <PropertyName>
+    <summary>
+      The Property name.
+    </summary>
+  </PropertyName>
+  <TableName>
+    <summary>
+      Gets or sets the Table name.
+    </summary>
+  </TableName>
+ 
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <ParamConstructor>
     <summary>
       Initializes an object instance.
     </summary>
     <param name="propertyName">The Property name.</param>
     <param name="id">The ID value.</param>
     <param name="description">The Description value.</param>
-  </KeyItem>
+  </ParamConstructor>
+  <CopyConstructor>
+    <summary>
+      The Copy constructor.
+    </summary>
+  </CopyConstructor>
+
+<!-- Data Class Methods -->
+  <Clone>
+    <summary>
+      Creates and returns a clone of this object.
+    </summary>
+  </Clone>
+  <CompareTo>
+    <summary>
+      Provides the default Sort functionality.
+    </summary>
+  </CompareTo>
+  <ToString>
+    <summary>
+      The object string identifier.
+    </summary>
+  </ToString>
 </members>

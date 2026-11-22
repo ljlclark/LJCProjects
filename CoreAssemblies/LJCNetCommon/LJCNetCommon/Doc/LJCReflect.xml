@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCReflect.xml -->
 <members>
+  <!-- Class -->
   <LJCReflect>
     <summary>
       Provides object property reflection capabilities. (DE)
@@ -23,13 +24,20 @@
     </remarks>
   </LJCReflect>
 
+  <!-- Properties -->
+  <PropertyInfos>
+    <summary>
+      Gets or sets the PropertyInfos value.
+    </summary>
+  </PropertyInfos>
+  
   <!-- Constructor Methods -->
-  <LJCReflectC>
+  <ParamConstructor>
     <summary>
       Instantiates an instance of the class.
     </summary>
     <param name="source">The source object.</param>
-  </LJCReflectC>
+  </ParamConstructor>
   <SetSource>
     <summary>
       Sets the source object and type values.
@@ -37,7 +45,7 @@
     <param name="source">The source object.</param>
   </SetSource>
 
-  <!-- public Methods -->
+  <!-- Methods -->
   <GetPropertyInfo>
     <summary>
       Gets the cached PropertyInfo value.
@@ -58,6 +66,11 @@
     <param name="propertyName">The property name.</param>
     <returns>The property type.</returns>
   </GetPropertyType>
+  <HasProperty>
+    <summary>
+      Checks if a property exists.
+    </summary>
+  </HasProperty>
 
   <!-- Value Methods -->
   <GetBoolean>
@@ -74,6 +87,11 @@
     <param name="propertyName">The property name.</param>
     <returns>The byte value.</returns>
   </GetByte>
+  <GetBytes>
+    <summary>
+      Gets the property value as a byte array.
+    </summary>
+  </GetBytes>
   <GetChar>
     <summary>
       Gets the property value as a char.
@@ -81,6 +99,11 @@
     <param name="propertyName">The property name.</param>
     <returns>The char value.</returns>
   </GetChar>
+  <GetChars>
+    <summary>
+      Gets the property value as a char array.
+    </summary>
+  </GetChars>
   <GetDateTime>
     <summary>
       Gets the property value as a DateTime value.
@@ -88,13 +111,6 @@
     <param name="propertyName">The property name.</param>
     <returns>The string property value.</returns>
   </GetDateTime>
-  <GetDbDateString>
-    <summary>
-      Gets the property value as a DB date/time string.
-    </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>The object property value or null if not a valid date/time.</returns>
-  </GetDbDateString>
   <GetDecimal>
     <summary>
       Gets the property value as a decimal.
@@ -109,6 +125,13 @@
     <param name="propertyName">The property name.</param>
     <returns>The double value.</returns>
   </GetDouble>
+  <GetFloat>
+    <summary>
+      Gets the property value as a float.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The float value.</returns>
+  </GetFloat>
   <GetInt16>
     <summary>
       Gets the property value as a short.
@@ -130,13 +153,6 @@
     <param name="propertyName">The property name.</param>
     <returns>The long value.</returns>
   </GetInt64>
-  <GetSingle>
-    <summary>
-      Gets the property value as a float.
-    </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>The float value.</returns>
-  </GetSingle>
   <GetString>
     <summary>
       Gets the property value as a string.
@@ -180,6 +196,20 @@
       </code>
     </example>
   </GetValue>
+
+  <!-- Other Value Methods -->
+  <GetDbDateString>
+    <summary>
+      Gets the property value as a DB date/time string.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The object property value or null if not a valid date/time.</returns>
+  </GetDbDateString>
+  <GetDbDateTime>
+    <summary>
+      Gets the column object value as a DateTime.
+    </summary>
+  </GetDbDateTime>
   <GetValueReflect>
     <summary>
       Gets the property value as an object using reflection.

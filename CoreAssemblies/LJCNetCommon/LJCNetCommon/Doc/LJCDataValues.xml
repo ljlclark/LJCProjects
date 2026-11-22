@@ -1,31 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- DbValues.xml -->
+<!-- LJCDataValues.xml -->
 <members>
-  <DbValues>
+  <!-- Class -->
+  <LJCDataValues>
     <summary>
       Represents a collection of
-      &lt;span class="userType"&gt;DbValue&lt;/span&gt; objects.
+      &lt;span class="userType"&gt;LJCDataValue&lt;/span&gt; objects.
     </summary>
     <remarks>
-      A DbValue collection element can also be retrieved by name using
+      A LJCDataValues collection element can also be retrieved by name using
       the collection object: values["PropertyName"];
     </remarks>
-  </DbValues>
+  </LJCDataValues>
+  
+  <!-- Static Methods -->
+  <LJCDeserialize>
+    <summary>
+      Deserializes from the specified XML file.
+    </summary>
+  </LJCDeserialize>
+  <ToDataColumns>
+    <summary>
+      Operator to create LJCDataColumns from LJCDataValues.
+    </summary>
+  </ToDataColumns>
+
+  <!-- Properties -->
+  <LJCDefaultFileName>
+    <summary>
+      Gets the Default File Name.
+    </summary>
+  </LJCDefaultFileName>
+  <LJCKeys>
+    <summary>
+      Gets or sets the key columns.
+    </summary>
+  </LJCKeys>
+  <Item>
+    <summary>
+      The column for the specified property name.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The selected DbValue object.</returns>
+  </Item>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <CopyConstructor>
+    <summary>
+      The Copy constructor.
+    </summary>
+  </CopyConstructor>
   
   <!-- Collection Methods -->
-  <Add>
+  <Clone>
     <summary>
-      Creates the Object from the arguments and adds it to the collection.
+      
     </summary>
-    <param name="propertyName">The PropertyName value.</param>
-    <param name="value">The item value.</param>
-    <param name="dataTypeName">The DataType name.</param>
-    <returns>A reference to the added item.</returns>
-  </Add>
-
-  <!-- Item Methods -->
+  </Clone>
+  <HasItems>
+    <summary>
+      
+    </summary>
+  </HasItems>
+  <LJCChanged>
+    <summary>
+      Gets a collection of changed columns.
+    </summary>
+    <returns>The changed columns list.</returns>
+  </LJCChanged>
   <LJCClearChanged>
     <summary>
       Sets the IsChanged value to false for all elements in the collection.
@@ -44,23 +93,176 @@
       &lt;span class="userType"&gt;DbColumns&lt;/span&gt; object.
     </returns>
   </LJCCreateColumns>
-  <LJCGetChanged>
+  <LJCKeyPropertyNames>
     <summary>
-      Gets a collection of changed columns.
+      Gets a list of property names from the collection items.
     </summary>
-    <returns>The changed columns list.</returns>
-  </LJCGetChanged>
- 
-  <!-- Search and Sort Methods -->
-  <LJCSearchPropertyName>
+  </LJCKeyPropertyNames>
+  <LJCPropertyNames>
     <summary>
-      Finds and returns the object that matches the supplied values.
+      Gets a list of property names from the collection items.
     </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>The found DbValue object.</returns>
-  </LJCSearchPropertyName>
+  </LJCPropertyNames>
+  <LJCSerialize>
+    <summary>
+      Serializes the collection
+    </summary>
+  </LJCSerialize>
+  
+  <!-- Collection Data Methods -->
+  <Add>
+    <summary>
+      Creates the Object from the arguments and adds it to the collection.
+    </summary>
+    <param name="propertyName">The PropertyName value.</param>
+    <param name="value">The item value.</param>
+    <param name="dataTypeName">The DataType name.</param>
+    <returns>A reference to the added item.</returns>
+  </Add>
+  <LJCGetUnique>
+    <summary>
+      Returns the value that matches the key columns.
+    </summary>
+  </LJCGetUnique>
+  <Remove>
+    <summary>
+      Removes the item with the supplied property name.
+    </summary>
+  </Remove>
+  <LJCSort>
+    <summary>
+      Sorts on the current key columns.
+    </summary>
+  </LJCSort>
   
   <!-- Value Methods -->
+  <LJCBoolean>
+    <summary>
+      Gets the column object value as a bool.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The bool value.</returns>
+  </LJCBoolean>
+  <LJCByte>
+    <summary>
+      Gets the column object value as a byte.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The byte value.</returns>
+  </LJCByte>
+  <LJCBytes>
+    <summary>
+      Gets the column object value as a byte array.
+    </summary>
+  </LJCBytes>
+  <LJCChar>
+    <summary>
+      Gets the column object value as a char.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The char value.</returns>
+  </LJCChar>
+  <LJCChars>
+    <summary>
+      Gets the column object value as a char array.
+    </summary>
+  </LJCChars>
+  <LJCDateTime>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;DateTime&lt;/span&gt;.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The DateTime value.</returns>
+  </LJCDateTime>
+  <LJCDecimal>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;decimal&lt;/span&gt;
+      value.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The &lt;span class="userType"&gt;Decimal&lt;/span&gt; value.
+    </returns>
+  </LJCDecimal>
+  <LJCDouble>
+    <summary>
+      Gets the column object value as a double.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The double value.</returns>
+  </LJCDouble>
+  <LJCFloat>
+    <summary>
+      Gets the column object value as a float.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The float value.</returns>
+  </LJCFloat>
+  <LJCGuid>
+    <summary>
+      Gets the column object value as a GUID.
+    </summary>
+  </LJCGuid>
+  <LJCInt16>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;short&lt;/span&gt; int.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The
+      &lt;span class="userType"&gt;short&lt;/span&gt;
+      int value.
+    </returns>
+  </LJCInt16>
+  <LJCInt32>
+    <summary>
+      Gets the column object value as an
+      &lt;span class="userType"&gt;int&lt;/span&gt;.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The &lt;span class="userType"&gt;int&lt;/span&gt;
+      value.
+    </returns>
+  </LJCInt32>
+  <LJCInt64>
+    <summary>
+      Gets the column object value as a
+      &lt;span class="userType"&gt;long&lt;/span&gt; int.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>
+      The &lt;span class="userType"&gt;long&lt;/span&gt;
+      int value.
+    </returns>
+  </LJCInt64>
+  <LJCString>
+    <summary>
+      Gets the column object value as a string.
+    </summary>
+  </LJCString>
+  <LJCValue>
+    <summary>
+      Gets the column object value as an object.
+    </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The object value.</returns>
+  </LJCValue>
+
+  <!-- Other Value Methods -->
+  <LJCDbDateString>
+    <summary>
+      Gets a database DateTime string.
+    </summary>
+  </LJCDbDateString>
+  <LJCDbDateTime>
+    <summary>
+      Gets the column object value as a DateTime.
+    </summary>
+  </LJCDbDateTime>
   <LJCSetValue>
     <summary>
       Sets the object value for the column with the specified name.
@@ -69,13 +271,4 @@
     <param name="value">The string value.</param>
     <returns>The column value.</returns>
   </LJCSetValue>
-
-  <!-- Properties -->
-  <Item>
-    <summary>
-      The column for the specified property name.
-    </summary>
-    <param name="propertyName">The property name.</param>
-    <returns>The selected DbValue object.</returns>
-  </Item>
 </members>

@@ -118,17 +118,6 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // The object string identifier.
-    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/ToString/*'/>
-    public override string ToString()
-    {
-      return Description;
-    }
-    #endregion
-
-    #region Search and Sort Methods
-
     // Provides the default Sort functionality.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
     ///  path='members/CompareTo/*'/>
@@ -147,6 +136,14 @@ namespace LJCNetCommon
         retValue = string.Compare(PropertyName, other.PropertyName, true);
       }
       return retValue;
+    }
+
+    // The object string identifier.
+    /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
+    ///  path='members/ToString/*'/>
+    public override string ToString()
+    {
+      return Description;
     }
     #endregion
   }

@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- NetFile.xml -->
+<!-- LJCNetFile.xml -->
 <members>
-  <NetFile>
+  <!-- Class -->
+  <LJCNetFile>
     <summary>
       Contains common file related static functions. (RE)
     </summary>
@@ -11,9 +12,9 @@
       The NetFile class contains file related static helper functions for
       all .NET program types.
     </remarks>
-  </NetFile>
+  </LJCNetFile>
 
-  <!-- Public Functions -->
+  <!-- Static Methods -->
   <CreateFolder>
     <summary>
       Creates a Folder Path if it does not already exist. (E)
@@ -49,6 +50,11 @@
     <param name="fileSpec">The file specification.</param>
     <returns>A string array of text lines.</returns>
   </ReadAllLines>
+  <ShellProgram>
+    <summary>
+      Executes an external program.
+    </summary>
+  </ShellProgram>
   <WriteLog>
     <summary>
       Writes a string format to the Log file with the current date and time.

@@ -31,7 +31,7 @@ namespace LJCNetCommon
 
     // Instantiates an instance of the class.
     /// <include file='Doc/LJCReflect.xml'
-    ///  path='members/Constructor/*'/>
+    ///  path='members/ParamConstructor/*'/>
     public LJCReflect(object source)
     {
       mSource = source;

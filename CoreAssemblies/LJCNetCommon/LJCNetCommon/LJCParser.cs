@@ -284,6 +284,35 @@ namespace LJCNetCommon
       return retValue;
     }
 
+    // Parses with different combinations of double or single quotes.
+    /// <include file='Doc/LJCParser.xml'
+    ///  path='members/ParseWithQuotes/*'/>
+    public string ParseWithQuotes(string text, string beginDelimiter = null,
+      string endDelimiter = null)
+    {
+      string retValue;
+
+      var required = true;
+      while (true)
+      {
+        // If the end delimiter is supplied it must exist in the text.
+        retValue = DelimitedString(text, beginDelimiter, endDelimiter
+          , required);
+        if (LJC.HasText(retValue))
+        {
+          break;
+        }
+
+        ChangeQuote(beginDelimiter, out string changeStart);
+        ChangeQuote(endDelimiter, out string changeEnd);
+        // If the end delimiter is supplied it must exist in the text.
+        retValue = DelimitedString(text, changeStart, changeEnd
+          , required);
+        break;
+      }
+      return retValue;
+    }
+
     // Removes a section from a text value.
     /// <include file='Doc/LJCParser.xml'
     ///  path='members/RemoveSection/*'/>
@@ -370,35 +399,6 @@ namespace LJCNetCommon
         }
         int textLength = EndIndex - BeginIndex + endLength + 1;
         retValue = text.Substring(BeginIndex - 1, textLength);
-      }
-      return retValue;
-    }
-
-    // Parses with different combinations of double or single quotes.
-    /// <include file='Doc/LJCParser.xml'
-    ///  path='members/ParseWithQuotes/*'/>
-    public string ParseWithQuotes(string text, string beginDelimiter = null,
-      string endDelimiter = null)
-    {
-      string retValue;
-
-      var required = true;
-      while (true)
-      {
-        // If the end delimiter is supplied it must exist in the text.
-        retValue = DelimitedString(text, beginDelimiter, endDelimiter
-          , required);
-        if (LJC.HasText(retValue))
-        {
-          break;
-        }
-
-        ChangeQuote(beginDelimiter, out string changeStart);
-        ChangeQuote(endDelimiter, out string changeEnd);
-        // If the end delimiter is supplied it must exist in the text.
-        retValue = DelimitedString(text, changeStart, changeEnd
-          , required);
-        break;
       }
       return retValue;
     }
@@ -628,7 +628,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Checks for a begin tag and sets out value to it if found.
+    // Checks for an end tag and sets out value to it if found.
     /// <include file='Doc/LJCParser.xml'
     ///  path='members/HasValidEndTagName/*'/>
     public bool HasValidEndTagName(string line, out string endName)
@@ -646,7 +646,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets the valid begin tag if begin tag is valid.
+    // Gets the valid end tag if end tag is valid.
     /// <include file='Doc/LJCParser.xml'
     ///  path='members/ValidEndTag/*'/>
     public string ValidEndTag(string line)

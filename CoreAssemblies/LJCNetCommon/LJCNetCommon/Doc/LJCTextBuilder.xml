@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- TextBuilder.xml -->
+<!-- LJCTextBuilder.xml -->
 <members>
-  <TextBuilder>
+  <!-- Class -->
+  <LJCTextBuilder>
     <summary>
       Provides methods for creating text.
     </summary>
@@ -51,15 +52,98 @@
       All "Get" methods create and return the potentialy indented and
       wrapped text but do not add it to the builder.&lt;br /&gt;
     </remarks>
-  </TextBuilder>
-  <!-- Data Class Methods 1 -->
+  </LJCTextBuilder>
+    
+  <!-- Static Methods -->
+  <TextLength>
+    <summary>
+      Gets the text length if not null.
+    </summary>
+  </TextLength>
+  
+  <!-- Properties -->
+  <Builder>
+    <summary>
+      The internal StringBuilder class.
+    </summary>
+  </Builder>
+  <Delimiter>
+    <summary>
+      Gets or sets the delimiter.
+    </summary>
+  </Delimiter>
+  <HasText>
+    <summary>
+      Gets a value indicating if the builder has text.
+    </summary>
+  </HasText>
+  <IndentCharCount>
+    <summary>
+      Gets or sets the indent character count.
+    </summary>
+  </IndentCharCount>
+  <IndentCount>
+    <summary>
+      Gets or sets the indent count.
+    </summary>
+  </IndentCount>
+  <IndentLength>
+    <summary>
+      Gets the current indent length.
+    </summary>
+  </IndentLength>
+  <IsFirst>
+    <summary>
+      Gets or sets the first item indicator.
+    </summary>
+  </IsFirst>
+  <LineLength>
+    <summary>
+      Gets the current length.
+    </summary>
+  </LineLength>
+  <LineLimit>
+    <summary>
+      Gets the character limit.
+    </summary>
+  </LineLimit>
+  <WrapAtDelimiter>
+    <summary>
+      Gets or sets a value indicating if wrap should occur at leading delimiter.
+    </summary>
+  </WrapAtDelimiter>
+  <WrapEnabled>
+    <summary>
+      Gets or sets a value that indicates if line wrapping is enabled.
+    </summary>
+  </WrapEnabled>
+  <WrapPrefix>
+    <summary>
+      Gets or sets the new line prefix.
+    </summary>
+  </WrapPrefix>
+  
+  <!-- Constructor Methods -->
+  <ParamConstructor>
+    <summary>
+      Initializes an object instance with the supplied values.
+    </summary>
+  </ParamConstructor>
+  
+  <!-- Data Class Methods -->
+  <Clear>
+    <summary>
+      Clears the Builder text.
+    </summary>
+  </Clear>
   <ToString>
     <summary>
       Retrieves the text.
     </summary>
     <returns>The Builder text.</returns>
   </ToString>
-  <!-- Methods 1 -->
+  
+  <!-- Methods -->
   <AddIndent>
     <summary>
       Changes the IndentCount by the provided value.
@@ -104,7 +188,8 @@
       </code>
     </example>
   </AddIndent>
-  <!-- Append Text Methods (5) -->
+  
+  <!-- Append Text Methods -->
   <AddLine>
     <summary>
       Adds a text line without modification.
@@ -271,6 +356,7 @@
       </code>
     </example>
   </Text>
+  
   <!-- Get Text Methods -->
   <EndsWithNewLine>
     <example>
@@ -298,6 +384,11 @@
       </code>
     </example>
   </StartWithNewLine>
+  <GetDelimited>
+    <summary>
+      Adds a delimiter if not the first list item.
+    </summary>
+  </GetDelimited>
   <GetIndented>
     <summary>
       Gets a new potentially indented line.
@@ -344,30 +435,6 @@
       </code>
     </example>
   </GetIndentedString>
-  <GetItem>
-    <summary>
-      Adds a delimiter if not the first list item.
-    </summary>
-    <param name="text">The next append value.</param>
-    <returns>The potentially indented and delimited new text value.</returns>
-    <example>
-      <code xml:space="preserve">
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var tb = new TextBuilder();
-
-        var result = "List: ";
-
-        // Example Method
-        // Defaults: tb.IsFirst = true, tb.Delimiter = ","
-        result += tb.GetDelimited("One");
-        result += tb.GetDelimited("Two");
-        result += tb.GetDelimited("Three");
-
-        // result:
-        // One, Two, Three
-      </code>
-    </example>
-  </GetItem>
   <GetLine>
     <summary>
       Gets a modified text line.

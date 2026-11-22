@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TextState.cs
+// LJCTextState.cs
 
 namespace LJCNetCommon
 {

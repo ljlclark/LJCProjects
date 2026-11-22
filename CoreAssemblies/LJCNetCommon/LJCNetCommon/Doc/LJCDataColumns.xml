@@ -105,11 +105,11 @@
       Initializes an object instance.
     </summary>
   </Constructor>
-  <ParamConstructor>
+  <CopyConstructor>
     <summary>
       Initializes an object from the supplied items.
     </summary>
-  </ParamConstructor>
+  </CopyConstructor>
 
   <!-- Collection Methods -->
   <Clone>
@@ -129,6 +129,11 @@
     <param name="propertyNames">The column property names.</param>
     <returns>The created object.</returns>
   </LJCColumns>
+  <LJCKeyPropertyNames>
+    <summary>
+      Gets a list of property names from the collection items.
+    </summary>
+  </LJCKeyPropertyNames>
   <LJCPropertyNames>
     <summary>
       Gets a list of property names from the collection items.
@@ -185,27 +190,6 @@
       </code>
     </example>
   </Add3>
-  <LJCAddPropertyAs>
-    <summary>
-      Creates the
-      &lt;span class="userType"&gt;DbColumn&lt;/span&gt;
-      from the supplied values and adds to the collection.
-      (R)
-    </summary>
-    <param name="propertyName">The property name.</param>
-    <param name="caption">The caption value.</param>
-    <param name="renameAs">The rename value.</param>
-    <param name="dataTypeName">The data type name.</param>
-    <returns>
-      The created
-      &lt;span class="userType"&gt;DbColumn&lt;/span&gt; object.
-    </returns>
-    <remarks>
-      Accepts the property name and sets the column name the same as the
-      property name. If the renameAs value is null, then it is also set the
-      same as the property name.
-    </remarks>
-  </LJCAddPropertyAs>
   <LJCGetUnique>
     <summary>
       Gets the column that matches the key columns.
@@ -242,18 +226,12 @@
   </LJCClearChanged>
 
   <!-- Other Methods -->
-  <LJCGetMinSqlDate>
-    <summary>
-      Get the minimum date value.
-    </summary>
-    <returns>The minimum value in database format.</returns>
-  </LJCGetMinSqlDate>
-  <LJCSetColumnCaptions>
+  <LJCSetCaptions>
     <summary>
       Sets the caption properties.
     </summary>
     <param name="dataColumns">The target object.</param>
-  </LJCSetColumnCaptions>
+  </LJCSetCaptions>
   <LJCMapNames>
     <summary>
       Maps the column property and rename values.
@@ -279,6 +257,11 @@
     <param name="propertyName">The property name.</param>
     <returns>The byte value.</returns>
   </LJCByte>
+  <LJCBytes>
+    <summary>
+      Gets the column object value as a byte array.
+    </summary>
+  </LJCBytes>
   <LJCChar>
     <summary>
       Gets the column object value as a char.
@@ -324,6 +307,11 @@
     <param name="propertyName">The property name.</param>
     <returns>The float value.</returns>
   </LJCFloat>
+  <LJCGuid>
+    <summary>
+      Gets the column object value as a GUID.
+    </summary>
+  </LJCGuid>
   <LJCInt16>
     <summary>
       Gets the column object value as a

@@ -1,18 +1,72 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCParser.xml -->
 <members>
+  <!-- Class -->
   <LJCParser>
     <summary>
       Contains parsing related methods.
     </summary>
   </LJCParser>
+
+  <!-- Static Methods -->
+  <ChangeQuote>
+    <summary>
+      Changes quotes between double and single quotes.
+    </summary>
+  </ChangeQuote>
+  <ShortBeginTagToName>
+    <summary>
+      Gets the tag name for the end tag.
+    </summary>
+  </ShortBeginTagToName>
+  <NameToShortBeginTag>
+    <summary>
+      Gets the end tag for the tag name.
+    </summary>
+  </NameToShortBeginTag>
+  <EndTagToName>
+    <summary>
+      Gets the tag name for the end tag.
+    </summary>
+  </EndTagToName>
+  <NameToEndTag>
+    <summary>
+      Gets the end tag for the tag name.
+    </summary>
+  </NameToEndTag>
+
+  <!-- Properties -->
+  <BeginIndex>
+    <summary>
+      The delimited string begin index.
+    </summary>
+  </BeginIndex>
+  <EndIndex>
+    <summary>
+      The delimited string end index.
+    </summary>
+  </EndIndex>
+  <StartIndex>
+    <summary>
+      The parsing start index.
+    </summary>
+  </StartIndex>
+  <ValidTagNames>
+    <summary>
+      Gets or sets the valid tag names.
+    </summary>
+  </ValidTagNames>
+
+  <!-- Constructor Methods -->
   <Constructor>
     <summary>
       Initializes an object instance.
     </summary>
   </Constructor>
+
+  <!-- Methods -->
   <DelimitedString>
     <summary>
       Gets the delimited string.
@@ -31,6 +85,11 @@
     <param name="text">The text value.</param>
     <param name="tagName">The tag name.</param>
   </FindTag>
+  <ParseWithQuotes>
+    <summary>
+      Parses with different combinations of double or single quotes.
+    </summary>
+  </ParseWithQuotes>
   <RemoveSection>
     <summary>
       Removes a section from a text value.
@@ -69,4 +128,87 @@
     <param name="reset">Reset StartIndex to zero.</param>
     <returns>The delimited string including the delimiters.</returns>
   </StringWithDelimiters>
+
+  <!-- Begin Tag Methods -->
+  <BeginTag>
+    <summary>
+      Gets the begin tag.
+    </summary>
+  </BeginTag>
+  <BeginTagContents>
+    <summary>
+      Gets the begin tag with attributes.
+    </summary>
+  </BeginTagContents>
+  <BeginTagName>
+    <summary>
+      Gets the begin tag name.
+    </summary>
+  </BeginTagName>
+  <IsBeginTagName>
+    <summary>
+      Indicates if a line starts with a specific begin tag name.
+    </summary>
+  </IsBeginTagName>
+  
+  <!-- End Tag Methods -->
+  <EndTag>
+    <summary>
+      Gets the end tag.
+    </summary>
+  </EndTag>
+  <EndTagName>
+    <summary>
+      Gets the end tag name.
+    </summary>
+  </EndTagName>
+  <IsEndTagName>
+    <summary>
+      Indicates if a line ends with a specific end tag name.
+    </summary>
+  </IsEndTagName>
+
+  <!-- Valid Begin Tag Methods -->
+  <HasValidBeginTag>
+    <summary>
+      Checks for a valid begin tag.
+    </summary>
+  </HasValidBeginTag>
+  <HasValidBeginTagName>
+    <summary>
+      Checks for a begin tag and sets out value to it if found.
+    </summary>
+  </HasValidBeginTagName>
+  <ValidBeginTag>
+    <summary>
+      Gets the valid begin tag if begin tag is valid.
+    </summary>
+  </ValidBeginTag>
+  <ValidBeginTagName>
+    <summary>
+      Gets the valid tag name if the line contains a begin tag.
+    </summary>
+  </ValidBeginTagName>
+  
+  <!-- Valid End Tag Methods -->
+  <HasValidEndTag>
+    <summary>
+      Checks for a valid end tag.
+    </summary>
+  </HasValidEndTag>
+  <HasValidEndTagName>
+    <summary>
+      Checks for an end tag and sets out value to it if found.
+    </summary>
+  </HasValidEndTagName>
+  <ValidEndTag>
+    <summary>
+      Gets the valid end tag if end tag is valid.
+    </summary>
+  </ValidEndTag>
+  <ValidEndTagName>
+    <summary>
+      Gets the valid tag name if the line contains a begin tag.
+    </summary>
+  </ValidEndTagName>
 </members>

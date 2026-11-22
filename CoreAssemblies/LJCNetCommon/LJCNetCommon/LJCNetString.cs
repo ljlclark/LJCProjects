@@ -12,7 +12,7 @@ namespace LJCNetCommon
   ///  path='members/LJCNetString/*'/>
   public class LJCNetString
   {
-    #region Constants
+    #region Class Data
 
     // The "compare" object is equal to the "compareto" object.
     /// <include file='Doc/LJCNetString.xml'

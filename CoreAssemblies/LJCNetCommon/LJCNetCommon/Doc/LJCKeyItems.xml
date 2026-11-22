@@ -1,16 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- KeyItems.xml -->
 <members>
-  <KeyItems>
+  <!-- Class -->
+  <LJCKeyItems>
     <summary>
       Represents a collection of
       &lt;span class="userType"&gt;KeyItem&lt;/span&gt; objects.
     </summary>
-  </KeyItems>
+  </LJCKeyItems>
   
+  <!-- Static Methods -->
+  <GetCollection>
+    <summary>
+      Get custom collection from List&lt;T&gt;.
+    </summary>
+    <param name="items">The Items collection.</param>
+    <returns>The collection object reference.</returns>
+  </GetCollection>
+  <HasItems>
+    <summary>
+      Checks if the collection has items.
+    </summary>
+  </HasItems>
+  
+  <!-- Properties -->
+  <Count>
+    <summary>
+      The Collection count.
+    </summary>
+  </Count>
+  <Items>
+    <summary>
+      The LJCKeyItem items.
+    </summary>
+  </Items>
+  <Indexer>
+    <summary>
+      Gets the item by index value.
+    </summary>
+    <param name="index">The index value.</param>
+    <returns>The element item object.</returns>
+  </Indexer>
+
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
+  <CopyConstructor>
+    <summary>
+      The Copy constructor.
+    </summary>
+  </CopyConstructor>
+
   <!-- Collection Methods -->
+  <Clone>
+    <summary>
+      Creates and returns a clone of the object.
+    </summary>
+  </Clone>
+  <HasItems2>
+    <summary>
+      Checks if the collection has items.
+    </summary>
+  </HasItems2>
+  
+  <!-- Collection Data Methods -->
   <Add1>
     <summary>
       Adds the specified object.
@@ -32,21 +90,13 @@
     </summary>
     <param name="items">The collection to be appended.</param>
   </Append>
-  <GetCollection>
+  <LJCRetrieve>
     <summary>
-      Get custom collection from List&lt;T&gt;.
+      Retrieves an item by property name.
     </summary>
-    <param name="items">The Items collection.</param>
-    <returns>The collection object reference.</returns>
-  </GetCollection>
-  <GetEnumerator>
-    <summary>
-      Gets the Collection Enumerator.
-    </summary>
-    <returns>The Collection Enumerator.</returns>
-  </GetEnumerator>
+  </LJCRetrieve>
 
-  <!-- Custom Methods -->
+  <!-- Other Methods -->
   <GetDescription>
     <summary>
       Gets the Item Description with Value as index within PropertyName.
@@ -76,12 +126,23 @@
     <returns>The valid ControlItems.</returns>
   </GetItems>
 
-  <!-- Collection Properties -->
-  <Indexer>
+  <!-- Search and Sort Methods -->
+  <SearchPropertyName>
     <summary>
-      Gets the item by index value.
+      Retrieve the collection element.
     </summary>
-    <param name="index">The index value.</param>
-    <returns>The element item object.</returns>
-  </Indexer>
+  </SearchPropertyName>
+  <SortPropertyName>
+    <summary>
+      Sort on Name.
+    </summary>
+  </SortPropertyName>
+  
+  <!-- IEnumerable Methods -->
+  <GetEnumerator>
+    <summary>
+      Gets the Collection Enumerator.
+    </summary>
+    <returns>The Collection Enumerator.</returns>
+  </GetEnumerator>
 </members>

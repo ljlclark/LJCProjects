@@ -7,7 +7,7 @@ namespace LJCNetCommon
 {
   // Provides methods for creating HTML text.
   /// <include file='Doc/LJCHTMLBuilder.xml'
-  ///  path='members/HTMLBuilder/*'/>
+  ///  path='members/LJCHTMLBuilder/*'/>
   public class LJCHTMLBuilder
   {
     #region Properties
@@ -54,7 +54,7 @@ namespace LJCNetCommon
 
     // Initializes an object instance.
     /// <include file='Doc/LJCHTMLBuilder.xml'
-    ///  path='members/LJCHTMLBuilder/*'/>
+    ///  path='members/ParamConstructor/*'/>
     public LJCHTMLBuilder(LJCTextState textState = null)
     {
       Builder = new StringBuilder(128);
@@ -148,7 +148,7 @@ namespace LJCNetCommon
 
     // Gets the current indent length.
     /// <include file='Doc/LJCHTMLBuilder.xml'
-    ///  path='members/HTMLBuilder/*'/>
+    ///  path='members/IndentLength/*'/>
     public int IndentLength()
     {
       return IndentCount * IndentCharCount;
@@ -839,7 +839,7 @@ namespace LJCNetCommon
 
     // Creates the XML start attributes.
     /// <include file='Doc/LJCHTMLBuilder.xml'
-    ///  path='members/StartAttributes/*'/>
+    ///  path='members/StartXMLAttributes/*'/>
     public LJCAttributes StartXMLAttribs()
     {
       var retAttribs = new LJCAttributes

@@ -74,8 +74,7 @@ namespace LJCNetCommon
       }
     }
 
-    // Creates a compare message if the result value does not equal the compare
-    // value.
+    // Creates a compare message if result value does not equal compare value.
     /// <include file='Doc/LJCTestCommon.xml'
     ///  path='members/CompareMessage/*'/>
     public string CompareMessage(string methodName, string result

@@ -58,7 +58,7 @@ namespace LJCNetCommon
       get => Items.Count;
     }
 
-    // The KeyItem items.
+    // The LJCKeyItem items.
     /// <include file='Doc/LJCKeyItems.xml'
     ///  path='members/Items/*'/>
     [XmlArray(RootName)]

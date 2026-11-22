@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright(c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- HTMLBuilder.xml -->
+<!-- LJCHTMLBuilder.xml -->
 <members>
-  <HTMLBuilder>
+  <!-- Class -->
+  <LJCHTMLBuilder>
     <summary>
       Provides methods for creating HTML text.
     </summary>
@@ -85,7 +86,37 @@
       All "Get" methods create and return the potentially indented and wrapped
       text but do not add it to the builder.
     </remarks>
-  </HTMLBuilder>
+  </LJCHTMLBuilder>
+  
+  <!-- Properties -->
+  <IndentCharCount>
+    <summary>
+      Gets or sets the indent character count.
+    </summary>
+  </IndentCharCount>
+  <LineLength>
+    <summary>
+      Gets the current length.
+    </summary>
+  </LineLength>
+  <LineLimit>
+    <summary>
+      Gets or sets the character limit.
+    </summary>
+  </LineLimit>
+  <WrapEnabled>
+    <summary>
+      Indicates if line wrapping is enabled.
+    </summary>
+  </WrapEnabled>
+  
+  <!-- Constructor Methods -->
+  <ParamConstructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </ParamConstructor>
+  
   <!-- Data Class Methods -->
   <ToString>
     <summary>
@@ -93,7 +124,51 @@
     </summary>
     <returns>The HTML text.</returns>
   </ToString>
+  
   <!-- Methods -->
+  <AddChildIndent>
+    <summary>
+      Adds the new (child) indents.
+    </summary>
+    <param name="createText">The previously created text.</param>
+    <param name="textState">The TextState object.</param>
+    <remarks>
+      Adds an indent for following child elements.&lt;br /&gt;
+      The indent will only be added if the createText length > 0 and the
+      textState.ChildIndentCount > 0.
+    </remarks>
+    <example>
+      <code xml:space="preserve">
+        // Root Method Begin
+        var textState = new TextState();
+
+        var result = CustomBegin("body", textState);
+
+        // result:
+        // &amp;lt;body&amp;gt;
+
+        private static string CustomBegin(string name, TextState textState
+          , Attributes attribs = null, bool addIndent = true
+          , bool childIndent = true)
+        {
+          // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+          var hb = new HTMLBuilder(textState);
+
+          var createText = hb.GetBegin(name, textState, attribs, addIndent
+            , childIndent);
+          // Use NoIndent after a "GetText" method.
+          hb.Text(createText, NoIndent);
+          // Use AddChildIndent after beginning an element.
+          hb.AddChildIndent(createText, textState);
+          var result = hb.ToString();
+
+          // Append Method
+          //hb.UpdateState(textState);
+          return result;
+        }
+      </code>
+    </example>
+  </AddChildIndent>
   <AddIndent>
     <summary>
       Changes the IndentCount by the provided value.
@@ -139,7 +214,55 @@
       </code>
     </example>
   </AddIndent>
-  <!-- Append Text Methods (4) -->
+  <EndsWithNewLine>
+    <summary>
+      Indicates if the builder text ends with a newline.
+    </summary>
+    <returns>
+      true if builder text ends with a newline; otherwise false.
+    </returns>
+    <example>
+      <code xml:space="preserve">
+        var hb = new HTMLBuilder();
+
+        bool retValue = hb.EndsWithNewLine();
+        var result = retValue.ToString();
+
+        // result:
+        // False
+      </code>
+    </example>
+  </EndsWithNewLine>
+  <HasText>
+    <summary>
+      Indicates if the builder has text.
+    </summary>
+  </HasText>
+  <IndentLength>
+    <summary>
+      Gets the current indent length.
+    </summary>
+  </IndentLength>
+  <StartWithNewLine>
+    <summary>
+      Allow text to start with a newline.
+    </summary>
+    <param name="allowNewLine">Indicates if a new line can be added.</param>
+    <returns>true if allowed to start with a newline; otherwise false.</returns>
+    <example>
+      <code xml:space="preserve">
+        var hb = new HTMLBuilder();
+
+        bool retValue = hb.StartWithNewLine(true);
+        var result = retValue.ToString();
+
+        // result:
+        // False
+      </code>
+    </example>
+  </StartWithNewLine>
+
+  <!-- Text Methods -->
   <AddLine>
     <summary>
       Adds a text line without modification.
@@ -278,44 +401,8 @@
       </code>
     </example>
   </Text>
-  <!-- Get Text Methods (8) -->
-  <EndsWithNewLine>
-    <summary>
-      Indicates if the builder text ends with a newline.
-    </summary>
-    <returns>
-      true if builder text ends with a newline; otherwise false.
-    </returns>
-    <example>
-      <code xml:space="preserve">
-        var hb = new HTMLBuilder();
-
-        bool retValue = hb.EndsWithNewLine();
-        var result = retValue.ToString();
-
-        // result:
-        // False
-      </code>
-    </example>
-  </EndsWithNewLine>
-  <StartWithNewLine>
-    <summary>
-      Allow text to start with a newline.
-    </summary>
-    <param name="allowNewLine">Indicates if a new line can be added.</param>
-    <returns>true if allowed to start with a newline; otherwise false.</returns>
-    <example>
-      <code xml:space="preserve">
-        var hb = new HTMLBuilder();
-
-        bool retValue = hb.StartWithNewLine(true);
-        var result = retValue.ToString();
-
-        // result:
-        // False
-      </code>
-    </example>
-  </StartWithNewLine>
+  
+  <!-- Get Text Methods -->
   <GetAttribs>
     <summary>
       Gets the attributes text.
@@ -534,7 +621,8 @@
       </code>
     </example>
   </GetWrapped>
-  <!-- Append Element Methods (7) -->
+  
+  <!-- Element Methods -->
   <Begin>
     <summary>
       Appends the element begin tag.
@@ -663,154 +751,8 @@
       </code>
     </example>
   </End>
-  <Link>
-    <summary>
-      Appends a &amp;lt;link&amp;gt; element for a style sheet.
-    </summary>
-    <param name="fileName">The CSS file name.</param>
-    <param name="textState">The current text state values.</param>
-    <returns>The added &lt;link&gt; element.</returns>
-    <example>
-      <code xml:space="preserve">
-        // Root Method Begin
-        var textState = new TextState();
-
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuilder(textState);
-
-        // Example Method:
-        hb.Link("File.css", textState);
-        var result = hb.ToString();
-
-        // result:
-        // &amp;lt;link rel="stylesheet" type="text/css" href=File.css /&amp;gt;
-      </code>
-    </example>
-  </Link>
-  <Meta>
-    <summary>
-      Appends a &amp;lt;meta&amp;gt; element.
-    </summary>
-    <param name="name">The name value.</param>
-    <param name="content">The content value.</param>
-    <param name="textState">The current text state values.</param>
-    <returns>The added &amp;lt;meta&amp;gt; element.</returns>
-    <example>
-      <code xml:space="preserve">
-        // Root Method Begin
-        var textState = new TextState();
-
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuilder(textState);
-
-        // Example Method:
-        var content = "width=device-width initial-scale=1";
-        hb.Meta("viewport", content, textState);
-        var result = hb.ToString();
-
-        // result:
-        // &amp;lt;meta name="viewport" content="width=device-width initial-scale=1" /&amp;gt;
-      </code>
-    </example>
-  </Meta>
-  <Metas>
-    <summary>
-      Appends common &amp;lt;meta&amp;gt; elements.
-    </summary>
-    <param name="author">The author.</param>
-    <param name="textState">The current text state values.</param>
-    <param name="description">The description.</param>
-    <param name="keywords">The keywords.</param>
-    <param name="charSet">The charset value.</param>
-    <returns>The added &amp;lt;meta&amp;gt; elements.</returns>
-    <example>
-      <code xml:space="preserve">
-        // Root Method Begin
-        var textState = new TextState();
-
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuilder(textState);
-
-        // Example Method:
-        hb.Metas("Mr. Smith", textState, "The Description");
-        var result = hb.ToString();
-
-        // result:
-        // &amp;lt;meta charset="utf-8" /&amp;gt;
-        // &amp;lt;meta name="description" content="The Description" /&amp;gt;
-        // &amp;lt;meta name="author" content="Mr. Smith" /&amp;gt;
-        // &amp;lt;meta name="viewport" content="width=device-width initial-scale=1" /&amp;gt;
-      </code>
-    </example>
-  </Metas>
-  <Script>
-    <summary>
-      Appends a &amp;lt;script&amp;gt; element.
-    </summary>
-    <param name="fileName">The script file name.</param>
-    <param name="textState">The current text state values.</param>
-    <returns>The added &amp;lt;script&amp;gt; element.</returns>
-    <example>
-      <code xml:space="preserve">
-        // Root Method Begin
-        var textState = new TextState();
-
-        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-        var hb = new HTMLBuilder(textState);
-
-        // Example Method:
-        hb.Script("File.js", textState);
-        var result = hb.ToString();
-
-        // result:
-        // &amp;lt;script src="File.js"&amp;gt;&amp;lt;&amp;gt;
-      </code>
-    </example>
-  </Script>
-  <!-- Get Element Methods (9) -->
-  <AddChildIndent>
-    <summary>
-      Adds the new (child) indents.
-    </summary>
-    <param name="createText">The previously created text.</param>
-    <param name="textState">The TextState object.</param>
-    <remarks>
-      Adds an indent for following child elements.&lt;br /&gt;
-      The indent will only be added if the createText length > 0 and the
-      textState.ChildIndentCount > 0.
-    </remarks>
-    <example>
-      <code xml:space="preserve">
-        // Root Method Begin
-        var textState = new TextState();
-
-        var result = CustomBegin("body", textState);
-
-        // result:
-        // &amp;lt;body&amp;gt;
-
-        private static string CustomBegin(string name, TextState textState
-          , Attributes attribs = null, bool addIndent = true
-          , bool childIndent = true)
-        {
-          // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-          var hb = new HTMLBuilder(textState);
-
-          var createText = hb.GetBegin(name, textState, attribs, addIndent
-            , childIndent);
-          // Use NoIndent after a "GetText" method.
-          hb.Text(createText, NoIndent);
-          // Use AddChildIndent after beginning an element.
-          hb.AddChildIndent(createText, textState);
-          var result = hb.ToString();
-
-          // Append Method
-          //hb.UpdateState(textState);
-          return result;
-        }
-      </code>
-    </example>
-  </AddChildIndent>
+  
+  <!-- Get Element Methods -->
   <GetBegin>
     <summary>
       Gets the element begin tag.
@@ -965,6 +907,112 @@
       </code>
     </example>
   </GetEnd>
+
+  <!-- Create Element Methods -->
+  <Link>
+    <summary>
+      Appends a &amp;lt;link&amp;gt; element for a style sheet.
+    </summary>
+    <param name="fileName">The CSS file name.</param>
+    <param name="textState">The current text state values.</param>
+    <returns>The added &lt;link&gt; element.</returns>
+    <example>
+      <code xml:space="preserve">
+        // Root Method Begin
+        var textState = new TextState();
+
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        hb.Link("File.css", textState);
+        var result = hb.ToString();
+
+        // result:
+        // &amp;lt;link rel="stylesheet" type="text/css" href=File.css /&amp;gt;
+      </code>
+    </example>
+  </Link>
+  <Meta>
+    <summary>
+      Appends a &amp;lt;meta&amp;gt; element.
+    </summary>
+    <param name="name">The name value.</param>
+    <param name="content">The content value.</param>
+    <param name="textState">The current text state values.</param>
+    <returns>The added &amp;lt;meta&amp;gt; element.</returns>
+    <example>
+      <code xml:space="preserve">
+        // Root Method Begin
+        var textState = new TextState();
+
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        var content = "width=device-width initial-scale=1";
+        hb.Meta("viewport", content, textState);
+        var result = hb.ToString();
+
+        // result:
+        // &amp;lt;meta name="viewport" content="width=device-width initial-scale=1" /&amp;gt;
+      </code>
+    </example>
+  </Meta>
+  <Metas>
+    <summary>
+      Appends common &amp;lt;meta&amp;gt; elements.
+    </summary>
+    <param name="author">The author.</param>
+    <param name="textState">The current text state values.</param>
+    <param name="description">The description.</param>
+    <param name="keywords">The keywords.</param>
+    <param name="charSet">The charset value.</param>
+    <returns>The added &amp;lt;meta&amp;gt; elements.</returns>
+    <example>
+      <code xml:space="preserve">
+        // Root Method Begin
+        var textState = new TextState();
+
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        hb.Metas("Mr. Smith", textState, "The Description");
+        var result = hb.ToString();
+
+        // result:
+        // &amp;lt;meta charset="utf-8" /&amp;gt;
+        // &amp;lt;meta name="description" content="The Description" /&amp;gt;
+        // &amp;lt;meta name="author" content="Mr. Smith" /&amp;gt;
+        // &amp;lt;meta name="viewport" content="width=device-width initial-scale=1" /&amp;gt;
+      </code>
+    </example>
+  </Metas>
+  <Script>
+    <summary>
+      Appends a &amp;lt;script&amp;gt; element.
+    </summary>
+    <param name="fileName">The script file name.</param>
+    <param name="textState">The current text state values.</param>
+    <returns>The added &amp;lt;script&amp;gt; element.</returns>
+    <example>
+      <code xml:space="preserve">
+        // Root Method Begin
+        var textState = new TextState();
+
+        // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+        var hb = new HTMLBuilder(textState);
+
+        // Example Method:
+        hb.Script("File.js", textState);
+        var result = hb.ToString();
+
+        // result:
+        // &amp;lt;script src="File.js"&amp;gt;&amp;lt;&amp;gt;
+      </code>
+    </example>
+  </Script>
   <GetLink>
     <summary>
       Gets the link element for a style sheet.
@@ -1065,7 +1113,8 @@
       </code>
     </example>
   </GetScript>
-  <!-- Append HTML Methods -->
+  
+  <!-- HTML Methods -->
   <HTMLBegin>
     <summary>
       Creates the HTML beginning up to and including head;.
@@ -1104,7 +1153,6 @@
       </code>
     </example>
   </HTMLBegin>
-  <!-- Get HTML Methods (3) -->
   <GetHTMLBegin>
     <summary>
       Gets the HTML beginning up to and including &amp;lt;head&amp;gt;.
@@ -1195,7 +1243,8 @@
       </code>
     </example>
   </GetHTMLHead>
-  <!-- Get Element Attribs Methods (3) -->
+
+  <!-- Get Attribs Methods -->
   <Attribs>
     <summary>
       Gets common element attributes.
@@ -1245,6 +1294,11 @@
       </code>
     </example>
   </StartAttribs>
+  <StartXMLAttribs>
+    <summary>
+      Creates the XML start attributes.
+    </summary>
+  </StartXMLAttribs>
   <TableAttribs>
     <summary>
       Gets common table attributes.

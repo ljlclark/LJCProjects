@@ -120,7 +120,7 @@ namespace LJCNetCommon
 
     // Initializes an object instance with the provided values.
     /// <include file='Doc/LJCTextBuilder.xml'
-    ///  path='members/Constructor/*'/>
+    ///  path='members/ParamConstructor/*'/>
     public LJCTextBuilder(LJCTextState textState = null)
     {
       Builder = new StringBuilder(128);
