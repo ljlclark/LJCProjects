@@ -6,15 +6,17 @@ namespace TestData
 {
   internal class TestDataProgram
   {
-    static void Main(string[] args)
+    static void Main()
     {
       _ = new TestDataRows();
-
       _ = new TestDataColumn();
       _ = new TestDataColumns();
-
       _ = new TestDataValue();
       _ = new TestDataValues();
+
+      _ = new TestHTMLBuilder();
+
+      _ = new TestNetString();
     }
   }
 }

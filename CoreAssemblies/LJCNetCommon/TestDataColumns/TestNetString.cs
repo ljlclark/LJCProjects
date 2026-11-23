@@ -1,54 +1,41 @@
 ﻿// Copyright (c) Lester J.Clark and Contributors.
 // Licensed under the MIT License.
-// NetStringProgram.cs
+// TestNetString.cs
 using LJCNetCommon;
 using System;
 
-namespace TestNetString
+namespace TestData
 {
-  internal class NetStringProgram
+  internal class TestNetString
   {
-    #region Entry Methods
+    #region Class Data
 
-    /// <summary>
-    /// 
-    /// </summary>
-    static void Main()
+    private static LJCTestCommon TestCommon { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    public TestNetString()
     {
-      TestCommon = new LJCTestCommon("NetStringProgram");
+      TestCommon = new LJCTestCommon("TestNetString");
       Console.WriteLine();
-      Console.WriteLine("*** NetString ***");
+      Console.WriteLine("**********************");
+      Console.Write("*** LJCNetString ***");
+      Run();
+    }
 
+    // Runs the test methods.
+    private void Run()
+    {
       // Parsing Delimited String
-
-      // Begin delimiter only.
-      // <comment>
       DelimitedString1();
-
-      // Begin delimiter and text.
-      // <comment>This is a comment.
       DelimitedString2();
-
-      // Text only.
-      // This is a comment.
       DelimitedString3();
-
-      // Text and end delimiter.
-      // This is a comment.</comment>
       DelimitedString4();
-
-      // End delimiter only.
-      // </comment>
       DelimitedString5();
-
-      // Multiple delimited values.
-      // Value (One), (Two)
-      DelimitedString6();
-
-      // Delimited string.
+      //DelimitedString6();
       DelimitedString7();
-
-      // A delimited string with delimiters.
       StringWithDelimiters();
     }
     #endregion
@@ -56,10 +43,8 @@ namespace TestNetString
     #region Methods
 
     // Begin delimiter only.
-    /// <summary>
-    /// 
-    /// </summary>
-    public static void DelimitedString1()
+    // <comment>
+    private static void DelimitedString1()
     {
       var line = "<comment>";
       var beginDelimiter = "<comment>";
@@ -73,10 +58,8 @@ namespace TestNetString
     }
 
     // Begin delimiter and text.
-    /// <summary>
-    /// 
-    /// </summary>
-    public static void DelimitedString2()
+    // <comment>This is a comment.
+    private static void DelimitedString2()
     {
       var line = "<comment>This is a comment.";
       var beginDelimiter = "<comment>";
@@ -90,10 +73,8 @@ namespace TestNetString
     }
 
     // Text only.
-    /// <summary>
-    /// 
-    /// </summary>
-    public static void DelimitedString3()
+    // This is a comment.
+    private static void DelimitedString3()
     {
       var line = "This is a comment.";
 
@@ -106,10 +87,8 @@ namespace TestNetString
     }
 
     // Text and end delimiter.
-    /// <summary>
-    /// 
-    /// </summary>
-    public static void DelimitedString4()
+    // This is a comment.</comment>
+    private static void DelimitedString4()
     {
       var line = "This is a comment.</comment>";
       var endDelimiter = "</comment>";
@@ -123,10 +102,8 @@ namespace TestNetString
     }
 
     // End delimiter only.
-    /// <summary>
-    /// 
-    /// </summary>
-    public static void DelimitedString5()
+    // </comment>
+    private static void DelimitedString5()
     {
       var line = "</comment>";
       var endDelimiter = "</comment>";
@@ -140,10 +117,8 @@ namespace TestNetString
     }
 
     // Multiple delimited values.
-    /// <summary>
-    /// 
-    /// </summary>
-    public static void DelimitedString6()
+    // Value (One), (Two)
+    private static void DelimitedString6()
     {
       var line = "Value (One), (Two)";
       var beginDelimiter = "(";
@@ -171,10 +146,7 @@ namespace TestNetString
     }
 
     // A delimited string.
-    /// <summary>
-    /// 
-    /// </summary>
-    public static void DelimitedString7()
+    private static void DelimitedString7()
     {
       var line = "Value (One)";
       var beginDelimiter = "(";
@@ -188,10 +160,7 @@ namespace TestNetString
     }
 
     // A delimited string with delimiters.
-    /// <summary>
-    /// 
-    /// </summary>
-    public static void StringWithDelimiters()
+    private static void StringWithDelimiters()
     {
       var line = "Value (One)";
       var beginDelimiter = "(";
@@ -203,12 +172,6 @@ namespace TestNetString
       var compare = "(One), -1";
       TestCommon.Write("GetStringWithDelimiters()", result, compare);
     }
-    #endregion
-
-    #region Class Data
-
-    // The test common object.
-    private static LJCTestCommon TestCommon { get; set; }
     #endregion
   }
 }

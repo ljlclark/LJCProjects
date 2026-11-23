@@ -45,7 +45,7 @@
     <summary>
       Returns the message string.
     </summary>
-    <returns></returns>
+    <returns>The object string.</returns>
   </ToString>
   
   <!-- Methods -->
@@ -53,25 +53,31 @@
     <summary>
       Adds a message using the provided values.
     </summary>
+    <param name="argument">The argument value.</param>
+    <param name="name">The argument name.</param>
   </Add1>
   <Add2>
     <summary>
       Adds a message.
     </summary>
+    <param name="message">The error message.</param>
   </Add2>
   <DbIDCheck>
     <summary>
       Checks the ID values.
     </summary>
+    <param name="dbId">The database id.</param>
   </DbIDCheck>
   <IDCheck>
     <summary>
       Checks the ID values.
     </summary>
+    <param name="dbId">The database id.</param>
+    <param name="id">The table id.</param>
   </IDCheck>
   <ThrowError>
     <summary>
-      
+      Throws the accumulated error messages.
     </summary>
   </ThrowError>
 </members>

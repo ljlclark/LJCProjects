@@ -221,12 +221,12 @@ namespace LJCNetCommon
     // Checks a DataColumnCollection for items.
     /// <include file='Doc/LJC.xml'
     ///  path='members/HasTableColumns1/*'/>
-    public static bool HasTableColumns(DataColumnCollection dataColumns)
+    public static bool HasTableColumns(DataColumnCollection adoColumns)
     {
       bool retValue = false;
 
-      if (dataColumns != null
-        && dataColumns.Count > 0)
+      if (adoColumns != null
+        && adoColumns.Count > 0)
       {
         retValue = true;
       }

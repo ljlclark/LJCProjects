@@ -29,13 +29,15 @@
     <summary>
       Gets parm names from method info.
     </summary>
-    <returns></returns>
+    <param name="methodInfo"></param>
+    <returns>An array of param names.</returns>
   </ParmNames>
   <ParmTypeNames>
     <summary>
       Gets parm method type names with parm names.
     </summary>
-    <returns></returns>
+    <param name="methodInfo"></param>
+    <returns>An array of param type names.</returns>
   </ParmTypeNames>
 
   <!-- Properties -->
@@ -112,31 +114,39 @@
     <summary>
       Gets a field info object.
     </summary>
-    <returns></returns>
+    <param name="fieldName">The field name.</param>
+    <returns>The FieldInfo object.</returns>
   </GetFieldInfo>
   <GetMethodInfo>
     <summary>
       Gets a parameterless method info object.
     </summary>
-    <returns></returns>
+    <param name="methodName">The method name.</param>
+    <returns>The MethodInfo object.</returns>
   </GetMethodInfo>
   <ParmMethodInfo>
     <summary>
       Get a parameterized method info object.
     </summary>
-    <returns></returns>
+    <param name="methodName">The method name.</param>
+    <param name="parmNames">The parameter names.</param>
+    <returns>The MethodInfo object.</returns>
   </ParmMethodInfo>
   <ParmMethodInfosWithCount>
     <summary>
       Gets parm method infos with method name and parm count.
     </summary>
-    <returns></returns>
+    <param name="methodName">The method name.</param>
+    <param name="parmCount">The parameter count.</param>
+    <returns>The MethodInfo object.</returns>
   </ParmMethodInfosWithCount>
   <ParmMethodInfoWithParms>
     <summary>
       Gets parm method info with parm names.
     </summary>
-    <returns></returns>
+    <param name="methodName">The method name.</param>
+    <param name="parmNames">The parameter names.</param>
+    <returns>The MethodInfo object.</returns>
   </ParmMethodInfoWithParms>
   
   <!-- Public Set Methods -->

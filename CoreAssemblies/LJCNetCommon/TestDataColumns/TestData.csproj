@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestNetString.cs" />
     <Compile Include="TestDataProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDataColumn.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="TestDataRows.cs" />
     <Compile Include="TestDataValue.cs" />
     <Compile Include="TestDataValues.cs" />
+    <Compile Include="TestHTMLBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

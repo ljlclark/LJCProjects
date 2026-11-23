@@ -4,7 +4,7 @@
 <!-- LJC.xml -->
 <members>
   <!-- Class -->
-  <NetCommon>
+  <LJC>
     <summary>
       Contains common static methods.
     </summary>
@@ -14,50 +14,64 @@
         program types.
       </para>
     </remarks>
-  </NetCommon>
+  </LJC>
 
   <!--  Common Methods -->
   <DbDateTimeString>
     <summary>
       Formats the DateTime value to a date/time string in database format.
     </summary>
+    <param name="dateTime">The DataTime value.</param>
+    <returns>The database input date/time string.</returns>
   </DbDateTimeString>
   <Keys>
     <summary>
       Creates the keys collection.
     </summary>
+    <param name="propertyName">The property name.</param>
+    <param name="searchValue">The search value.</param>
+    <returns>The data value keys.</returns>
   </Keys>
   <MinSqlDate>
     <summary>
       Get the minimum date value.
     </summary>
+    <returns>The SQL minimum date/time string.</returns>
   </MinSqlDate>
   <ToInt16>
     <summary>
       Gets a short from a text string.
     </summary>
     <param name="text">The text value.</param>
+    <returns>The short value.</returns>
   </ToInt16>
   <ToInt32>
     <summary>
       Gets an int from a text string.
     </summary>
     <param name="text">The text value.</param>
+    <returns>The int value.</returns>
   </ToInt32>
   <UIDateString>
     <summary>
       Format the date value for display.
     </summary>
+    <param name="dateTime">The DataTime value.</param>
+    <returns>The UI formatted date string "MM/dd/yyyy".</returns>
   </UIDateString>
   <UIDateTimeString>
     <summary>
       Format the date/time value for display.
     </summary>
+    <param name="dateTime">The DataTime value.</param>
+    <returns>The UI formatted date/time string "MM/dd/yyyy HH:mm:ss".</returns>
   </UIDateTimeString>
   <UITimeString>
     <summary>
       Format the date/time to time for display.
     </summary>
+    <param name="dateTime">The DataTime value.</param>
+    <returns>The UI formatted time string "HH:mm:ss".</returns>
   </UITimeString>
 
   <!-- Check Values Functions -->
@@ -68,9 +82,10 @@
     </summary>
     <typeparam name="T">The argument type.</typeparam>
     <param name="argument">The argument value.</param>
-    <param name="argName"></param>
+    <param name="argName">The argument name.</param>
     <exception cref="ArgumentNullException">Argument Null Exception</exception>
     <exception cref="ArgumentException">Argument Exception</exception>
+    <returns>true if argument is valid; otherwise, false.</returns>
   </CheckArgument>
   <CompareNull>
     <summary>
@@ -124,7 +139,7 @@
     <summary>
       Checks a DataColumns collection for items.
     </summary>
-    <param name="dataColumns">The DataColumns collection.</param>
+    <param name="adoColumns">The DataColumns collection.</param>
     <returns>true if the collection has items; otherwise, false.</returns>
   </HasTableColumns1>
   <HasTableColumns2>
@@ -170,7 +185,7 @@
       Checks an IList collection for items.
     </summary>
     <param name="list">The IList interface.</param>
-    <returns>true if the collection contains items; otherwise; false.</returns>
+    <returns>true if the collection contains items; otherwise, false.</returns>
   </HasListItems>
   <HasTables>
     <summary>
@@ -179,6 +194,13 @@
     <param name="dataSet">The DataSet object.</param>
     <returns>true if the DataSet has tables; otherwise, false.</returns>
   </HasTables>
+  <HasText>
+    <summary>
+      Checks if a text value exists.
+    </summary>
+    <param name="text">The text value.</param>
+    <returns>true if there is text; otherwise, false.</returns>
+  </HasText>
   <IsEqual>
     <summary>
       Checks if two values are equal.
@@ -209,16 +231,23 @@
     <summary>
       Clears an invalid ReadKey() selection.
     </summary>
+    <param name="prompt">The text prompt.</param>
+    <param name="value">The character value.</param>
   </ClearReadKey>
   <ClearReadLine>
     <summary>
       Clears an invalid ReadLine() selection.
     </summary>
+    <param name="prompt">The text prompt.</param>
+    <param name="value">The character value.</param>
   </ClearReadLine>
   <KeyOption>
     <summary>
       Get a console character option value.
     </summary>
+    <param name="prompt">The text prompt.</param>
+    <param name="options">The valid option characters.</param>
+    <returns>The valid selected option.</returns>
   </KeyOption>
 
   <!-- Object Data Functions -->
@@ -257,8 +286,8 @@
     </summary>
     <param name="value">The value object.</param>
     <returns>
-      The byte value or the byte default if the object is null.
-      Also returns false if the object is not type "byte".
+      The byte value or byte default if the object is null.
+      Also returns the byte default if the object is not type "byte".
     </returns>
     <example>
       <code xml:space="preserve">
@@ -285,6 +314,8 @@
     <summary>
       Gets an array of bytes from an object.
     </summary>
+    <param name="value">The value object.</param>
+    <returns>The byte array.</returns>
   </GetBytes>
   <GetChar>
     <summary>
@@ -292,8 +323,8 @@
     </summary>
     <param name="value">The value object.</param>
     <returns>
-      The char value or the char default if the object is null.
-      Also returns false if the object is not type "char".
+      The char value or char default if the object is null.
+      Also returns the char default if the object is not type "char".
     </returns>
     <example>
       <code xml:space="preserve">
@@ -319,6 +350,8 @@
     <summary>
       Gets a character array from an object.
     </summary>
+    <param name="value">The value object.</param>
+    <returns>The char array.</returns>
   </GetChars>
   <GetDateTime>
     <summary>
@@ -326,8 +359,8 @@
     </summary>
     <param name="value">The value object.</param>
     <returns>
-      The DateTime value or null if the object is null.
-      Also returns null if the object is not type "DateTime".
+      The DateTime value or DateTime minimum if the object is null.
+      Also returns the DataTime minimum if the object is not type "DateTime".
     </returns>
   </GetDateTime>
   <GetDecimal>
@@ -336,9 +369,9 @@
     </summary>
     <param name="value">The value object.</param>
     <returns>
-      The decimal value or zero if the object is null.
-      Also returns zero if the object is not type "decimal", "long", "int"
-      or "short".
+      The decimal value or decimal default if the object is null.
+      Also returns the decimal default if the object is not type "decimal",
+      "long", "int" or "short".
     </returns>
     <example>
       <code xml:space="preserve">
@@ -363,9 +396,9 @@
     </summary>
     <param name="value">The value object.</param>
     <returns>
-      The double value or zero if the object is null.
-      Also returns zero if the object is not type "double", "decimal", "long"
-      , "int" or "short".
+      The double value or double default if the object is null.
+      Also returns the double default if the object is not type "double",
+      "decimal", "long", "int" or "short".
     </returns>
   </GetDouble>
   <GetFloat>
@@ -374,15 +407,20 @@
     </summary>
     <param name="value">The value object.</param>
     <returns>
-      The single value or zero if the object is null.
-      Also returns zero if the object is not type "single", "long", "int"
-      or "short".
+      The single value or float default if the object is null.
+      Also returns the float default if the object is not type "single", "long",
+      "int" or "short".
     </returns>
   </GetFloat>
   <GetGuid>
     <summary>
       Returns the Guid value of the data field with the specified name.
     </summary>
+    <param name="value">The value object.</param>
+    <returns>
+      The Guid value or Guid default if the object is null.
+      Also returns the Guid default if the object is not type "guid".
+    </returns>
   </GetGuid>
   <GetInt16>
     <summary>
@@ -390,8 +428,8 @@
     </summary>
     <param name="value">The value object.</param>
     <returns>
-      The long value or zero if the object is null.
-      Also returns zero if the object is not type "short".
+      The long value or short default if the object is null.
+      Also returns the short default if the object is not type "short".
     </returns>
     <example>
       <code xml:space="preserve">
@@ -416,8 +454,8 @@
     </summary>
     <param name="value">The value object.</param>
     <returns>
-      The integer value or zero if the object is null.
-      Also returns zero if the object is not type "int" or "short".
+      The integer value or int default if the object is null.
+      Also returns the int default if the object is not type "int" or "short".
     </returns>
     <example>
       <code xml:space="preserve">
@@ -442,8 +480,9 @@
     </summary>
     <param name="value">The value object.</param>
     <returns>
-      The long value or zero if the object is null.
-      Also returns zero if the object is not type "long", "int" or "short".
+      The long value or long default if the object is null.
+      Also returns the long default if the object is not type "long", "int" or
+      "short".
     </returns>
     <example>
       <code xml:space="preserve">
@@ -467,7 +506,10 @@
       Gets a trimmed string value from an object. (E)
     </summary>
     <param name="value">The value object.</param>
-    <returns>The trimmed string value or null if the object is null.</returns>
+    <returns>
+      The trimmed string value or string default if the object is null or does
+      not have text.
+    </returns>
     <example>
       <code xml:space="preserve">
         using LJCNetCommon;
@@ -490,7 +532,7 @@
       Gets an instantiated object value.
     </summary>
     <param name="value">The value object.</param>
-    <returns>The instantiated object.</returns>
+    <returns>The instantiated object or null.</returns>
   </GetValue>
 
   <!--  Additional Value Methods -->
@@ -498,11 +540,15 @@
     <summary>
       Gets a database DateTime string value from an object.
     </summary>
+    <param name="value">The value object.</param>
+    <returns>The date/time string value.</returns>
   </GetDbDateString>
   <GetDbDateTime>
     <summary>
       Gets a DateTime value from an object.
     </summary>
+    <param name="value">The value object.</param>
+    <returns>The DataTime value.</returns>
   </GetDbDateTime>
 
   <!-- Configuration Methods -->

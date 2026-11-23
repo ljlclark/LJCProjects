@@ -36,6 +36,7 @@ namespace LJCNetCommon
 
     #region Class Data
 
+    // The accumulated error messages.
     private string mMessage;
     #endregion
 
@@ -133,7 +134,7 @@ namespace LJCNetCommon
       Add(message);
     }
 
-    // 
+    // Throws the accumulated error messages.
     /// <include file='Doc/LJCArgError.xml'
     ///  path='members/ThrowError/*'/>
     public void ThrowError()

@@ -4,17 +4,30 @@
 using LJCNetCommon;
 using System;
 
-namespace TestHTMLBuilder
+namespace TestData
 {
-  internal class HTMLBuilderTest
+  internal class TestHTMLBuilder
   {
-    // Performs the tests.
-    private static void Main()
-    {
-      TestCommon = new LJCTestCommon("HTMLBuilder");
-      Console.WriteLine();
-      Console.WriteLine("*** HTMLBuilder ***");
+    #region Class Data
 
+    private static LJCTestCommon TestCommon { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    public TestHTMLBuilder()
+    {
+      TestCommon = new LJCTestCommon("TestHTMLBuilder");
+      Console.WriteLine();
+      Console.WriteLine("**********************");
+      Console.Write("*** LJCHTMLBuilder ***");
+      Run();
+    }
+
+    // Runs the test methods.
+    private void Run()
+    {
       // Simple HTML build.
       Build();
 
@@ -22,8 +35,9 @@ namespace TestHTMLBuilder
       AddChildIndent();
       AddIndent();
       EndsWithNewLine();
-      StartWithNewLine();
       HasText();
+      IndentLength();
+      StartWithNewLine();
 
       // Text Methods
       AddLine();
@@ -67,11 +81,8 @@ namespace TestHTMLBuilder
       StartAttribs();
       StartAttribsXML();
       TableAttribs();
-
-      Console.WriteLine();
-      Console.WriteLine("Press any key to continue . . .");
-      Console.ReadKey();
     }
+    #endregion
 
     // Simple HTML build.
     public static void Build()
@@ -126,6 +137,7 @@ namespace TestHTMLBuilder
 
     #region Methods
 
+    // Adds the new (child) indents.
     private static void AddChildIndent()
     {
       // Root Method Begin
@@ -137,6 +149,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("AddChildIndent()", result, compare);
     }
 
+    // Changes the IndentCount by the provided value.
     private static void AddIndent()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -169,6 +182,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("AddIndent()", result, compare);
     }
 
+    // Indicates if the builder text ends with a newline.
     private static bool EndsWithNewLine()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -186,23 +200,7 @@ namespace TestHTMLBuilder
       return retValue;
     }
 
-    private static bool StartWithNewLine()
-    {
-      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
-      var hb = new LJCHTMLBuilder();
-
-      // Example Method:
-      // Checks if text can start with a newline.
-      bool retValue = hb.StartWithNewLine(true);
-      var result = retValue.ToString();
-
-      var b = new LJCHTMLBuilder();
-      b.AddText("False");
-      var compare = b.ToString();
-      TestCommon.Write("StartWithNewLine()", result, compare);
-      return retValue;
-    }
-
+    // Indicates if the builder has text.
     private static bool HasText()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -222,10 +220,39 @@ namespace TestHTMLBuilder
       TestCommon.Write("HasText()", result, compare);
       return retValue;
     }
+
+    // Gets the current indent length.
+    private static void IndentLength()
+    {
+      var methodName = "IndentLength()";
+
+      var result = "";
+      var compare = "Not Implemented.";
+      TestCommon.Show($"{methodName}", result, compare);
+    }
+
+    // Checks if text can start with a newline.
+    private static bool StartWithNewLine()
+    {
+      // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
+      var hb = new LJCHTMLBuilder();
+
+      // Example Method:
+      // Checks if text can start with a newline.
+      bool retValue = hb.StartWithNewLine(true);
+      var result = retValue.ToString();
+
+      var b = new LJCHTMLBuilder();
+      b.AddText("False");
+      var compare = b.ToString();
+      TestCommon.Write("StartWithNewLine()", result, compare);
+      return retValue;
+    }
     #endregion
 
     #region Text Methods
 
+    // Adds a text line without modification.
     private static void AddLine()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -246,6 +273,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("AddLine()", result, compare);
     }
 
+    // Adds text without modification.
     private static void AddText()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -260,6 +288,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("AddText()", result, compare);
     }
 
+    // Adds a potentially modified text line to the builder.
     private static void Line()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -294,6 +323,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("Line()", result, compare);
     }
 
+    // Adds potentially modified text to the builder.
     private static void Text()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -322,7 +352,11 @@ namespace TestHTMLBuilder
       var compare = b.ToString();
       TestCommon.Write("Text()", result, compare);
     }
+    #endregion
 
+    #region Get Text Methods
+
+    // Gets the attributes text.
     private static void GetAttribs()
     {
       // Root Method Begin
@@ -348,6 +382,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetAttribs()", result, compare);
     }
 
+    // Gets a new potentially indented line.
     private static void GetIndented()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -376,6 +411,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetIndented()", result, compare);
     }
 
+    // Returns the current indent string.
     private static void GetIndentString()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -399,6 +435,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetIndentString()", result, compare);
     }
 
+    // Gets a modified text line.
     private static void GetLine()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -435,6 +472,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetLine()", result, compare);
     }
 
+    // Gets potentially indented and wrapped text.
     private static void GetText()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -467,6 +505,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetText()", result, compare);
     }
 
+    // Appends added text and new wrapped line if combined line > LineLimit.
     private static void GetWrapped()
     {
       // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.
@@ -498,6 +537,7 @@ namespace TestHTMLBuilder
 
     #region Element Methods
 
+    // Appends the element begin tag.
     private static void BeginHTML()
     {
       // Root Method Begin
@@ -535,6 +575,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("Begin()", result, compare);
     }
 
+    // Appends an element.
     private static void CreateHTML()
     {
       // Root Method Begin
@@ -562,6 +603,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("Create()", result, compare);
     }
 
+    // Appends the element end tag.
     private static void EndHTML()
     {
       // Root Method Begin
@@ -598,7 +640,11 @@ namespace TestHTMLBuilder
       var result = hb.ToString();
       return result;
     }
+    #endregion
 
+    #region Get Element Methods
+
+    // Gets the element begin tag.
     private static void GetBegin()
     {
       // Root Method Begin
@@ -623,6 +669,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetBegin()", result, compare);
     }
 
+    // Gets beginning of style selector.
     private static void GetBeginSelector()
     {
       // Root Method Begin
@@ -647,6 +694,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetBeginSelector()", result, compare);
     }
 
+    // Gets the element text.
     private static void GetCreate()
     {
       // Root Method Begin
@@ -664,6 +712,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetCreate()", result, compare);
     }
 
+    // Gets the element end tag.
     private static void GetEnd()
     {
       // Root Method Begin
@@ -684,6 +733,7 @@ namespace TestHTMLBuilder
 
     #region Create Element Methods
 
+    // Appends a <link> element for a style sheet.
     private static void Link()
     {
       // Root Method Begin
@@ -704,6 +754,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("Link()", result, compare);
     }
 
+    // Appends a <meta> element.
     private static void Meta()
     {
       // Root Method Begin
@@ -726,6 +777,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("Meta()", result, compare);
     }
 
+    // Appends common <meta> elements.
     private static void Metas()
     {
       // Root Method Begin
@@ -749,6 +801,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("Metas()", result, compare);
     }
 
+    // Appends a <script> element for a script file.
     private static void Script()
     {
       // Root Method Begin
@@ -766,6 +819,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("Script()", result, compare);
     }
 
+    // Gets the <link> element for a style sheet.
     private static void GetLink()
     {
       // Root Method Begin
@@ -785,6 +839,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetLink()", result, compare);
     }
 
+    // Gets a <meta> element.
     private static void GetMeta()
     {
       // Root Method Begin
@@ -806,6 +861,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetMeta()", result, compare);
     }
 
+    // Gets common <meta> elements.
     private static void GetMetas()
     {
       // Root Method Begin
@@ -828,6 +884,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetMetas()", result, compare);
     }
 
+    // Gets the <script> element.
     private static void GetScript()
     {
       // Root Method Begin
@@ -847,6 +904,7 @@ namespace TestHTMLBuilder
 
     #region HTML Methods
 
+    // Creates the HTML beginning up to and including <head>.
     private static void HTMLBegin()
     {
       // Root Method Begin
@@ -879,6 +937,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("HTMLBegin()", result, compare);
     }
 
+    // Gets the HTML beginning up to <head>.
     private static void GetHTMLBegin()
     {
       // Root Method Begin
@@ -910,6 +969,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetHTMLBegin()", result, compare);
     }
 
+    // Gets the HTML end <body> and <html>.
     private static void GetHTMLEnd()
     {
       // Root Method Begin
@@ -929,6 +989,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("GetHTMLEnd()", result, compare);
     }
 
+    // Gets the main HTML Head elements.
     private static void GetHTMLHead()
     {
       // Root Method Begin
@@ -959,6 +1020,7 @@ namespace TestHTMLBuilder
 
     #region Get Attribs Methods
 
+    // Gets common element attributes.
     public static void Attribs()
     {
       // Root Method Begin
@@ -979,6 +1041,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("Attribs()", result, compare);
     }
 
+    // Creates the HTML element attributes.
     public static void StartAttribs()
     {
       // Root Method Begin
@@ -997,6 +1060,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("StartAttribs()", result, compare);
     }
 
+    // Creates the XML start attributes.
     public static void StartAttribsXML()
     {
       // Root Method Begin
@@ -1018,6 +1082,7 @@ namespace TestHTMLBuilder
       TestCommon.Write("StartAttribs()", result, compare);
     }
 
+    // Gets common table attributes.
     public static void TableAttribs()
     {
       // Root Method Begin
@@ -1040,11 +1105,6 @@ namespace TestHTMLBuilder
       var compare = " border=\"1\" cellspacing=\"2\" cellpadding=\"3\"";
       TestCommon.Write("TableAttribs()", result, compare);
     }
-    #endregion
-
-    #region Class Data
-
-    private static LJCTestCommon TestCommon { get; set; }
     #endregion
   }
 }
