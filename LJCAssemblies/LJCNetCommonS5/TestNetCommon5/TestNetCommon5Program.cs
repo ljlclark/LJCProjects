@@ -14,7 +14,6 @@ namespace TestNetCommon5
       //_ = new TestAssemblyReflect();
       _ = new TestAttribute();
       _ = new TestAttributes();
-      _ = new TestCSParser();
       _ = new TestDataColumn();
       _ = new TestDataColumns();
       _ = new TestDataValue();

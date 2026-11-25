@@ -13,67 +13,67 @@ namespace LJCNetCommon
   {
     #region Properties
 
-    // 
+    // Gets or sets the default parsing begin delimiter.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/BeginDelimiter/*'/>
     public string BeginDelimiter { get; set; } = null;
 
-    // The most common Data Types.
+    // Gets or sets the most common Data Types.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/CommonDataTypes/*'/>
     public CommonDataTypes CommonDataTypes { get; set; }
 
-    // The most common Keywords.
+    // Gets or sets the most common Keywords.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/CommonKeywords/*'/>
     public CommonKeywords CommonKeywords { get; set; }
 
-    // The most common Modifiers.
+    // Gets or sets the most common Modifiers.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/CommonModifiers/*'/>
     public CommonModifiers CommonModifiers { get; set; }
 
-    // The additional Data Types.
+    // Gets or sets the additional Data Types.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/DataTypes/*'/>
     public DataTypes DataTypes { get; set; }
 
-    // 
+    // Gets or sets the default parsing end delimiter.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/EndDelimiter/*'/>
     public string EndDelimiter { get; set; } = null;
 
-    // The additional Keywords.
+    // Gets or sets the additional Keywords.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/Keywords/*'/>
     public Keywords Keywords { get; set; }
 
-    // The Library Types.
+    // Gets or sets the Library Types.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/LibTypes/*'/>
     public LibTypes LibTypes { get; set; }
 
-    // The additional Modifiers.
+    // Gets or sets the additional Modifiers.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/Modifiers/*'/>
     public Modifiers Modifiers { get; set; }
 
-    // The Reference types.
+    // Gets or sets the Reference types.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/RefTypes/*'/>
     public RefTypes RefTypes { get; set; }
 
-    // Gets or sets the Token values.
+    // Gets or sets the token values.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/Tokens/*'/>
     public string[] Tokens { get; set; }
     #endregion
 
-    #region Constructors
+    #region Constructor Methods
 
     // Initializes an object instance.
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
-    ///  path='members/DefaultConstructor/*'/>
+    ///  path='members/Constructor/*'/>
     public CodeTokenizer()
     {
       BeginDelimiter = "<";
@@ -119,7 +119,7 @@ namespace LJCNetCommon
     }
     #endregion
 
-    #region Public Methods
+    #region Methods
 
     // Clears all the remaining tokens; starting with the specified token index.
     /// <include file='Doc/CodeTokenizer.xml'
@@ -128,7 +128,6 @@ namespace LJCNetCommon
     {
       for (int index = tokenIndex; index < Tokens.Length; index++)
       {
-        // *** Next Statement *** Change
         Tokens[index] = "";
       }
     }
@@ -151,7 +150,7 @@ namespace LJCNetCommon
       tokenIndex = (short)Tokens.Length;
     }
 
-    // Gets the next token after the specified token index.(E)
+    // Gets the next token after the specified token index.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/GetNextToken/*'/>
     public string GetNextToken(ref short tokenIndex)
@@ -163,7 +162,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Gets the token at the specified token index. (E)
+    // Gets the token at the specified token index.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/GetToken/*'/>
     public string GetToken(short tokenIndex)
@@ -177,7 +176,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Check if the text has the begin delimiter. (E)
+    // Check if the text has the begin delimiter.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/HasBeginDelimiter/*'/>
     public bool HasBeginDelimiter(string text, string beginDelimiter)
@@ -196,7 +195,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Check if the text is a Full summary comment. (E)
+    // Check if the text is a complete XML comment.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/HasBothDelimiters/*'/>
     public bool HasBothDelimiters(string text, string beginDelimiter
@@ -231,7 +230,7 @@ namespace LJCNetCommon
       return retValue;
     }
 
-    // Check if a XML comment.
+    // Check if an XML comment.
     /// <include file='Doc/CodeTokenizer.xml'
     ///  path='members/IsCodeXmlComment/*'/>
     public bool IsCodeXmlComment(string text)

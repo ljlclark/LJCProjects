@@ -1,24 +1,25 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// DataTypes.cs
+// LJCModifiers.cs
+using LJCNetCommon5;
 using System.Collections;
 using System.Xml.Serialization;
 
-namespace LJCNetCommon5
+namespace LJCCSParser5
 {
-  // Represents a collection of Data Types.
-  /// <include file='Doc/DataTypes.xml'
-  ///  path='members/DataTypes/*'/>
-  public class DataTypes : IEnumerable<string>
+  // Represents a collection of Modifiers.
+  /// <include file='Doc/LJCModifiers.xml'
+  ///  path='members/Modifiers/*'/>
+  public class LJCModifiers : IEnumerable<string>
   {
-    #region Static Methods
+    #region Static Functions
 
     // Deserializes from the specified XML file.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/LJCDeserialize/*'/>
     public static List<string> Deserialize(string? fileSpec = null)
     {
-      List<string> retValue;
+      List<string>? retValue;
 
       if (!LJC.HasText(fileSpec))
       {
@@ -34,18 +35,12 @@ namespace LJCNetCommon5
         // The default list of common Modifiers.
         retValue =
         [
-          "byte",
-          "Byte",
-          "char",
-          "Char",
-          "decimal",
-          "Decimal",
-          "double",
-          "Double",
-          "float",
-          "Int64",
-          "long",
-          "Single"
+          "abstract",
+          "extern",
+          "internal",
+          "protected",
+          "sealed",
+          "virtual"
         ];
         LJC.XmlSerialize(typeof(List<string>), retValue, null, fileSpec
           , RootName);
@@ -61,7 +56,7 @@ namespace LJCNetCommon5
     // Checks if the collection has items.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems1/*'/>
-    public static bool HasItems(DataTypes collection)
+    public static bool HasItems(LJCModifiers collection)
     {
       bool retValue = false;
 
@@ -76,26 +71,26 @@ namespace LJCNetCommon5
     #region Properties
 
     // Gets the Default File Name.
-    /// <include file='Doc/DataTypes.xml'
+    /// <include file='Doc/LJCLJCModifiers.xml'
     ///  path='members/DefaultFileName/*'/>
     public static string DefaultFileName
     {
-      get => @"Keywords\DataTypes.xml";
+      get => @"Keywords\Modifiers.xml";
     }
     #endregion
 
     #region Class Data
 
     private int mPrevCount;
-    private const string RootName = "DataTypes";
+    private const string RootName = "Modifiers";
     #endregion
 
     #region Constructors
 
     // Initializes an object instance.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
-    ///  path='members/Constructor/*'/>
-    public DataTypes()
+    ///  path='members/DefaultConstructor/*'/>
+    public LJCModifiers()
     {
       Items = [];
       mPrevCount = -1;
@@ -103,9 +98,10 @@ namespace LJCNetCommon5
 
     // The Copy constructor.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
-    ///  path='members/ConstructorCopy/*'/>
-    public DataTypes(DataTypes items) : this()
+    ///  path='members/CopyConstructor/*'/>
+    public LJCModifiers(LJCModifiers items)
     {
+      Items = [];
       if (HasItems(items))
       {
         foreach (var item in items)
@@ -119,8 +115,8 @@ namespace LJCNetCommon5
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include file='Doc/DataTypes.xml'
-    ///  path='members/Add/*'/>
+    /// <include file='Doc/LJCLJCModifiers.xml'
+    ///  path='members/Add1/*'/>
     public void Add(string item)
     {
       if (LJC.HasText(item))
@@ -132,12 +128,12 @@ namespace LJCNetCommon5
     // Creates and returns a clone of the object.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
-    public DataTypes Clone()
+    public LJCModifiers Clone()
     {
-      var retValue = new DataTypes();
-      foreach (string dataType in this)
+      var retValue = new LJCModifiers();
+      foreach (string modifier in this)
       {
-        retValue.Add(dataType);
+        retValue.Add(modifier);
       }
       return retValue;
     }
@@ -158,7 +154,7 @@ namespace LJCNetCommon5
 
     // Serializes the collection
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
-    ///  path='members/Serialize/*'/>
+    ///  path='members/LJCSerialize/*'/>
     public void Serialize(string? fileSpec = null)
     {
       if (!LJC.HasText(fileSpec))
@@ -170,7 +166,55 @@ namespace LJCNetCommon5
     }
     #endregion
 
-    #region Search and Sort Methods
+    #region IEnumerable Methods and Properties
+
+    // The Collection count.
+    /// <include file='Doc/LJCModifiers.xml'
+    ///  path='members/Count/*'/>
+    public int Count
+    {
+      get => Items.Count;
+    }
+
+    // Gets the Collection Enumerator.
+    /// <include file='Doc/LJCModifiers.xml'
+    ///  path='members/GetEnumerator/*'/>
+    public IEnumerator<string> GetEnumerator()
+    {
+      return ((IEnumerable<string>)Items).GetEnumerator();
+    }
+
+    // Gets the Collection Enumerator.
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return ((IEnumerable<string>)Items).GetEnumerator();
+    }
+
+    // The KeyItem items.
+    /// <include file='Doc/LJCModifiers.xml'
+    ///  path='members/Items/*'/>
+    [XmlArray(RootName)]
+    public List<string> Items { get; set; }
+
+    // Gets the item by index value.
+    /// <include file='Doc/LJCModifiers.xml'
+    ///  path='members/Indexer/*'/>
+    public string? this[int index]
+    {
+      get
+      {
+        string? retValue = null;
+
+        if (index >= 0 && index < Count)
+        {
+          retValue = Items[index];
+        }
+        return retValue;
+      }
+    }
+    #endregion
+
+    #region Sort and Search Methods
 
     // Retrieve the collection element.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
@@ -197,57 +241,6 @@ namespace LJCNetCommon5
       {
         mPrevCount = Count;
         Items.Sort();
-      }
-    }
-    #endregion
-
-    #region IEnumerable Methods
-
-    // Gets the Collection Enumerator.
-    /// <include file='Doc/DataTypes.xml'
-    ///  path='members/GetEnumerator/*'/>
-    public IEnumerator<string> GetEnumerator()
-    {
-      return ((IEnumerable<string>)Items).GetEnumerator();
-    }
-
-    // Gets the Collection Enumerator.
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-      return ((IEnumerable<string>)Items).GetEnumerator();
-    }
-    #endregion
-
-    #region IEnumerable Properties
-
-    // The Collection count.
-    /// <include file='Doc/DataTypes.xml'
-    ///  path='members/Count/*'/>
-    public int Count
-    {
-      get => Items.Count;
-    }
-
-    // The KeyItem items.
-    /// <include file='Doc/DataTypes.xml'
-    ///  path='members/Items/*'/>
-    [XmlArray(RootName)]
-    public List<string> Items { get; set; }
-
-    // Gets the item by index value.
-    /// <include file='Doc/DataTypes.xml'
-    ///  path='members/Indexer/*'/>
-    public string? this[int index]
-    {
-      get
-      {
-        string retValue = null;
-
-        if (index >= 0 && index < Count)
-        {
-          retValue = Items[index];
-        }
-        return retValue;
       }
     }
     #endregion

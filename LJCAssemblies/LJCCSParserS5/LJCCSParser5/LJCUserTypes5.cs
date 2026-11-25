@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// UserTypes.cs
+// LJCUserTypes.cs
 
-namespace LJCNetCommon5
+namespace LJCCSParser5
 {
   // Represents a collection of User Type names.
-  /// <include file='Doc/UserTypes.xml'
+  /// <include file='Doc/LJCLJCUserTypes.xml'
   ///  path='members/UserTypes/*'/>
-  public class UserTypes : List<string>
+  public class LJCUserTypes : List<string>
   {
     #region Class Data
 

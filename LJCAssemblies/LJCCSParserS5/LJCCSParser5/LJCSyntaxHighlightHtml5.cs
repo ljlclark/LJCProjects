@@ -1,19 +1,20 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// SyntaxHighlightHtml.cs
+// LJCSyntaxHighlightHtml.cs
+using LJCNetCommon5;
 using System.Text;
 
-namespace LJCNetCommon5
+namespace LJCCSParser5
 {
   // Provides methods for HTML Syntax Highighting.
-  /// <include file='Doc/SyntaxHighlight.xml'
+  /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
   ///  path='members/SyntaxHighlightHtml/*'/>
-  public class SyntaxHighlightHtml
+  public class LJCSyntaxHighlightHtml
   {
     #region Static Methods
 
     // Retrieves the leading whitespace string.
-    /// <include file='Doc/SyntaxHighlight.xml'
+    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
     ///  path='members/SaveLeadingWhiteSpace/*'/>
     public static string? SaveLeadingWhiteSpace(string? text)
     {
@@ -36,7 +37,7 @@ namespace LJCNetCommon5
     }
 
     // Strips the specified number of leading whitespace characters from a string.
-    /// <include file='Doc/SyntaxHighlight.xml'
+    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
     ///  path='members/StripExtraLeadingWhiteSpace/*'/>
     public static string? StripExtraLeadingWhiteSpace(string text, int stripLength)
     {
@@ -55,9 +56,9 @@ namespace LJCNetCommon5
     #region Properties
 
     // Gets or sets the Allow Debug Breaks value.
-    /// <include file='Doc/SyntaxHighlight.xml'
+    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
     ///  path='members/AllowDebugBreaks/*'/>
-    /// <include file='Doc/SyntaxHighlight.xml'
+    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
     ///  path='members/StripExtraLeadingWhiteSpace/*'/>
     public bool AllowDebugBreaks { get; set; }
 
@@ -91,7 +92,7 @@ namespace LJCNetCommon5
     // Initializes an object instance.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
-    public SyntaxHighlightHtml()
+    public LJCSyntaxHighlightHtml()
     {
       //DoSort();
     }
@@ -100,13 +101,13 @@ namespace LJCNetCommon5
     #region Public Main Methods
 
     // Adds the Syntax Highlighting to the HTML code line.
-    /// <include file='Doc/SyntaxHighlight.xml'
+    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
     ///  path='members/AddSyntaxHighlight/*'/>
     public string AddSyntaxHighlight(string line)
     {
-      string text;
-      string token;
-      string leadingWhiteSpace = SaveLeadingWhiteSpace(line);
+      string? text;
+      string? token;
+      string? leadingWhiteSpace = SaveLeadingWhiteSpace(line);
       string[] tokens = GetTokens(line);
 
       short tokenIndex = -1;
@@ -206,7 +207,7 @@ namespace LJCNetCommon5
     }
 
     // Strips the defined leading white spaces and applies Syntax Highlighting.
-    /// <include file='Doc/SyntaxHighlight.xml'
+    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
     ///  path='members/FormatCode/*'/>
     public string FormatCode(string dataTypeName, string dataMemberName
       , string code, bool stripLeadingSpaces = true)
@@ -226,8 +227,8 @@ namespace LJCNetCommon5
 
       for (int lineIndex = 0; lineIndex < lines.Length; lineIndex++)
       {
-        string saveWhiteSpace;
-        string line = lines[lineIndex];
+        string? saveWhiteSpace;
+        string? line = lines[lineIndex];
         if (stripLeadingSpaces)
         {
           int length = line.Replace("\t", "  ").Length;
@@ -253,7 +254,7 @@ namespace LJCNetCommon5
     }
 
     // Reads the User Types from a file or creates the file if it does not exist
-    /// <include file='Doc/SyntaxHighlight.xml'
+    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
     ///  path='members/SetUserTypes/*'/>
     public void SetUserTypes(string dataTypeName, string dataMemberName
       , string code)
@@ -294,13 +295,13 @@ namespace LJCNetCommon5
     }
 
     // Updates the User Types if a new one is found in the HTML code line.
-    /// <include file='Doc/SyntaxHighlight.xml'
+    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
     ///  path='members/UpdateUserTypes/*'/>
     public void UpdateUserTypes(string line)
     {
       int dotIndex;
-      string token;
-      string nextToken;
+      string? token;
+      string? nextToken;
       string[] tokens = GetTokens(line);
 
       bool isUsing = false;
@@ -404,7 +405,7 @@ namespace LJCNetCommon5
         AddRefTypeSpan(ref tokens[tokenIndex]);
       }
       tokenIndex++;
-      string token = GetToken(tokens, tokenIndex);
+      string? token = GetToken(tokens, tokenIndex);
       if (token != null)
       {
         if (!getTypesOnly)
@@ -427,7 +428,7 @@ namespace LJCNetCommon5
         //string processValue = token.Substring(index);
         string processValue = token[index..];
 
-        string tail = null;
+        string? tail = null;
         int tailIndex = token.IndexOf("&gt;");
         if (tailIndex > -1)
         {
@@ -513,7 +514,7 @@ namespace LJCNetCommon5
     private bool ProcessMethod(string[] tokens, ref string token
       , ref short tokenIndex)
     {
-      string nextToken;
+      string? nextToken;
       bool retValue = false;
 
       int index = token.IndexOf('(');
@@ -603,7 +604,7 @@ namespace LJCNetCommon5
       }
 
       // Type token.
-      string token;
+      string? token;
       bool isCommonType = false;
       while ((token = GetNextToken(tokens, ref tokenIndex)) != null)
       {
@@ -704,7 +705,7 @@ namespace LJCNetCommon5
     private bool ProcessTwoUnknownKeys(string[] tokens, ref string token
       , ref short tokenIndex)
     {
-      string nextToken;
+      string? nextToken;
       bool retValue = false;
 
       // Look for two unknown keys together.
@@ -741,7 +742,7 @@ namespace LJCNetCommon5
     {
       // Backup to start with the same token.
       short index = (short)(tokenIndex - 1);
-      string token;
+      string? token;
       while ((token = GetNextToken(tokens, ref index)) != null)
       {
         tokenIndex = index;
@@ -1481,7 +1482,7 @@ namespace LJCNetCommon5
     #region Include Span Methods
 
     // Set the text as Comments text.
-    internal string SetCommentSpan(string line)
+    internal static string SetCommentSpan(string line)
     {
       string retValue = line;
       StringBuilder builder = new();
@@ -1502,7 +1503,7 @@ namespace LJCNetCommon5
       //string replaceTarget = NetString.GetDelimitedString(text, "name=\""
       //  , ref startIndex, ";");
       var textParser = new LJCParser();
-      string replaceTarget = textParser.DelimitedString(text, "name=\"", ";");
+      var replaceTarget = textParser.DelimitedString(text, "name=\"", ";");
 
       if (replaceTarget != null)
       {
@@ -1528,7 +1529,7 @@ namespace LJCNetCommon5
     private static string SetSimpleCommentSpan(string text, string beginDelimiter
       , string? endDelimiter = null)
     {
-      string replaceTarget;
+      string? replaceTarget;
       string replaceValue;
       string retValue = text;
 
@@ -2015,7 +2016,7 @@ namespace LJCNetCommon5
     ];
 
     // The list of UserTypes.
-    private UserTypes UserTypes = [];
+    private LJCUserTypes UserTypes = [];
     #endregion
   }
 }

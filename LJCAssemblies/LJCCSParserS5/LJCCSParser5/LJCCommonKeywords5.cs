@@ -1,15 +1,16 @@
-﻿// Copyright(c) Lester J. Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// CommonKeywords.cs
+// LJCCommonKeywords.cs
+using LJCNetCommon5;
 using System.Collections;
 using System.Xml.Serialization;
 
-namespace LJCNetCommon5
+namespace LJCCSParser5
 {
   /// <summary>Represents a collection of Common Key Words.</summary>
-  /// <include file='Doc/CommonKeywords.xml'
+  /// <include file='Doc/LJCCommonKeywords.xml'
   ///  path='members/CommonKeywords/*'/>
-  public class CommonKeywords : IEnumerable<string>
+  public class LJCCommonKeywords : IEnumerable<string>
   {
     #region Static Methods
 
@@ -18,7 +19,7 @@ namespace LJCNetCommon5
     ///  path='members/LJCDeserialize/*'/>
     public static List<string> Deserialize(string? fileSpec = null)
     {
-      List<string> retValue;
+      List<string>? retValue;
 
       if (!LJC.HasText(fileSpec))
       {
@@ -67,7 +68,7 @@ namespace LJCNetCommon5
     // Checks if the collection has items.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/HasItems1/*'/>
-    public static bool HasItems(CommonKeywords collection)
+    public static bool HasItems(LJCCommonKeywords collection)
     {
       bool retValue = false;
 
@@ -82,7 +83,7 @@ namespace LJCNetCommon5
     #region Properties
 
     // Gets the Default File Name.
-    /// <include file='Doc/CommonKeywords.xml'
+    /// <include file='Doc/LJCCommonKeywords.xml'
     ///  path='members/DefaultFileName/*'/>
     public static string DefaultFileName
     {
@@ -101,7 +102,7 @@ namespace LJCNetCommon5
     // Initializes an object instance.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Constructor/*'/>
-    public CommonKeywords()
+    public LJCCommonKeywords()
     {
       Items = [];
       mPrevCount = -1;
@@ -110,7 +111,7 @@ namespace LJCNetCommon5
     // The Copy constructor.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Collection.xml'
     ///  path='members/ConstructorCopy/*'/>
-    public CommonKeywords(CommonKeywords items) : this()
+    public LJCCommonKeywords(LJCCommonKeywords items) : this()
     {
       if (HasItems(items))
       {
@@ -125,7 +126,7 @@ namespace LJCNetCommon5
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include file='Doc/CommonKeywords.xml'
+    /// <include file='Doc/LJCCommonKeywords.xml'
     ///  path='members/Add/*'/>
     public void Add(string item)
     {
@@ -138,9 +139,9 @@ namespace LJCNetCommon5
     // Creates and returns a clone of the object.
     /// <include file='../../../LJCUtilities/LJCGenDoc5/Common/Data.xml'
     ///  path='members/Clone/*'/>
-    public CommonKeywords Clone()
+    public LJCCommonKeywords Clone()
     {
-      var retValue = new CommonKeywords();
+      var retValue = new LJCCommonKeywords();
       foreach (string keyword in this)
       {
         retValue.Add(keyword);
@@ -179,7 +180,7 @@ namespace LJCNetCommon5
     #region IEnumerable Methods and Properties
 
     // The Collection count.
-    /// <include file='Doc/CommonKeywords.xml'
+    /// <include file='Doc/LJCCommonKeywords.xml'
     ///  path='members/Count/*'/>
     public int Count
     {
@@ -187,7 +188,7 @@ namespace LJCNetCommon5
     }
 
     // Gets the Collection Enumerator.
-    /// <include file='Doc/CommonKeywords.xml'
+    /// <include file='Doc/LJCCommonKeywords.xml'
     ///  path='members/GetEnumerator/*'/>
     public IEnumerator<string> GetEnumerator()
     {
@@ -201,13 +202,13 @@ namespace LJCNetCommon5
     }
 
     // The KeyItem items.
-    /// <include file='Doc/CommonKeywords.xml'
+    /// <include file='Doc/LJCCommonKeywords.xml'
     ///  path='members/Items/*'/>
     [XmlArray(RootName)]
     public List<string> Items { get; set; }
 
     // Gets the item by index value.
-    /// <include file='Doc/CommonKeywords.xml'
+    /// <include file='Doc/LJCCommonKeywords.xml'
     ///  path='members/Indexer/*'/>
     public string? this[int index]
     {
