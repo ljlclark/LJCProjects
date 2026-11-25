@@ -1,32 +1,249 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- LJCTextState.xml -->
+<!-- LJCCodeTokenizer.xml -->
 <members>
   <!-- Class -->
-  <LJCTextState>
+  <LJCCodeTokenizer>
     <summary>
-      Represents the text state.
+      A C# Code Tokenizer class.
     </summary>
-  </LJCTextState>
-  
+  </LJCCodeTokenizer>
+
+  <!-- Static Methods -->
+  <IsCodeXmlComment>
+    <summary>
+      Check if an XML comment.
+    </summary>
+    <param name="text">The text line value.</param>
+    <returns>true if an XML comment; otherwise, false.</returns>
+  </IsCodeXmlComment>
+  <IsComment>
+    <summary>
+      Check if a code comment.
+    </summary>
+    <param name="text">The text line value.</param>
+    <returns>true if a code comment; otherwise, false.</returns>
+  </IsComment>
+  <IsDataValue>
+    <summary>
+      Check if the text is a Data value.
+    </summary>
+    <param name="text">The text line value.</param>
+    <returns>true if a data value; otherwise, false.</returns>
+  </IsDataValue>
+  <IsDelimiters>
+    <summary>
+      Check if the text contains a common delimiter.
+    </summary>
+    <param name="text">The text line value.</param>
+    <returns>true if contains a common delimiter; otherwise, false.</returns>
+  </IsDelimiters>
+  <IsParam>
+    <summary>
+      Check if the text is a param comment.
+    </summary>
+    <param name="text">The text line value.</param>
+    <returns>true if contains a param comment; otherwise, false.</returns>
+  </IsParam>
+  <StripQualifier>
+    <summary>
+      Strips the leading qualifiers and from next qualifier to end of string.
+    </summary>
+    <param name="text">The text line value.</param>
+    <param name="prefixCount">Set as the number of prefix qualifiers.</param>
+    <returns>The text without qualifiers.</returns>
+  </StripQualifier>
+  <CombineTokens>
+    <summary>
+      Returns all the combined tokens as a single string.
+    </summary>
+    <param name="tokens">The tokens string array.</param>
+    <returns>The combined tokens string.</returns>
+  </CombineTokens>
+
+  <!-- Properties -->
+  <BeginDelimiter>
+    <summary>
+      Gets or sets the default parsing begin delimiter.
+    </summary>
+  </BeginDelimiter>
+  <CommonDataTypes>
+    <summary>
+      Gets or sets the most common Data Types.
+    </summary>
+  </CommonDataTypes>
+  <CommonKeywords>
+    <summary>
+      Gets or sets the most common Keywords.
+    </summary>
+  </CommonKeywords>
+  <CommonModifiers>
+    <summary>
+      Gets or sets the most common Modifiers.
+    </summary>
+  </CommonModifiers>
+  <DataTypes>
+    <summary>
+      Gets or sets the additional Data Types.
+    </summary>
+  </DataTypes>
+  <EndDelimiter>
+    <summary>
+      Gets or sets the default parsing end delimiter.
+    </summary>
+  </EndDelimiter>
+  <Keywords>
+    <summary>
+      Gets or sets the additional Keywords.
+    </summary>
+  </Keywords>
+  <LibTypes>
+    <summary>
+      Gets or sets the Library Types.
+    </summary>
+  </LibTypes>
+  <Modifiers>
+    <summary>
+      Gets or sets the additional Modifiers.
+    </summary>
+  </Modifiers>
+  <RefTypes>
+    <summary>
+      Gets or sets the Reference types.
+    </summary>
+  </RefTypes>
+  <Tokens>
+    <summary>
+      Gets or sets the token values.
+    </summary>
+  </Tokens>
+
   <!-- Constructors -->
   <Constructor>
     <summary>
-      Initializes an object instance with the supplied values.
+      Initializes an object instance.
     </summary>
-    <param name="indentCount">The initial indent count.</param>
   </Constructor>
-  
-  <!-- Properties -->
-  <IndentCount>
+  <InitializeKeywords>
     <summary>
-      Gets or sets the current indent count to sync called method.
+      Initializes the Keywords.
     </summary>
-  </IndentCount>
-  <ChildIndentCount>
+  </InitializeKeywords>
+  <SetKeywords>
     <summary>
-      Gets or sets the new indent count to sync calling method.
+      Sets the Keywords from the previously initialized CodeTokens.
     </summary>
-  </ChildIndentCount>
+  </SetKeywords>
+
+  <!-- Methods -->
+  <ClearRemainingTokens>
+    <summary>
+      Clears all the remaining tokens; starting with the specified token index.
+    </summary>
+    <param name="tokenIndex">The starting token index.</param>
+  </ClearRemainingTokens>
+  <CombineXMLCommentTokens>
+    <summary>
+      Combines the tokens for an XMLComment.
+    </summary>
+    <param name="tokenIndex">The starting token index.</param>
+  </CombineXMLCommentTokens>
+  <EndTokens>
+    <summary>
+      Sets the tokenIndex to the end of the tokens array.s
+    </summary>
+    <param name="tokenIndex"></param>
+  </EndTokens>
+  <GetNextToken>
+    <summary>
+      Gets the next token after the specified token index.
+    </summary>
+    <param name="tokenIndex">Sets the next token index.</param>
+    <returns>The next token.</returns>
+  </GetNextToken>
+  <GetToken>
+    <summary>
+      Gets the token at the specified token index.
+    </summary>
+    <param name="tokenIndex">The token index.</param>
+    <returns>The token.</returns>
+  </GetToken>
+  <HasBeginDelimiter>
+    <summary>
+      Check if the text has the begin delimiter.
+    </summary>
+    <param name="text">The text line value.</param>
+    <param name="beginDelimiter">The begin delimiter.</param>
+    <returns>
+      true if the text has the begin delimiter; otherwise, false.
+    </returns>
+  </HasBeginDelimiter>
+  <HasBothDelimiters>
+    <summary>
+      Check if the text is a complete XML comment.
+    </summary>
+    <param name="text">The text line value.</param>
+    <param name="beginDelimiter">The begin delimiter.</param>
+    <param name="endDelimiter">The end delimiter.</param>
+    <returns>
+      true if the text has both begin delimiters; otherwise, false.
+    </returns>
+  </HasBothDelimiters>
+  <HasEndDelimiter>
+    <summary>
+      Check if the text has the end delimiter.
+    </summary>
+    <param name="text">The text line value.</param>
+    <param name="endDelimiter">The end delimiter.</param>
+    <returns>
+      true if the text has the end begin delimiter; otherwise, false.
+    </returns>
+  </HasEndDelimiter>
+  <IsDataType>
+    <summary>
+      Check if the text is a DataType.
+    </summary>
+    <param name="text">The text line value.</param>
+    <param name="firstPass">Indicates if this is the first pass.</param>
+    <returns>true if the text is a data type; otherwise, false.</returns>
+  </IsDataType>
+  <IsKeyword>
+    <summary>
+      Check if the text is a Keyword.
+    </summary>
+    <param name="text">The text line value.</param>
+    <param name="firstPass">Indicates if this is the first pass.</param>
+    <returns>true if the text is a keyword; otherwise, false.</returns>
+  </IsKeyword>
+  <IsLibType>
+    <summary>
+      Check if the text is a LibType.
+    </summary>
+    <param name="text">The text line value.</param>
+    <returns>
+      true if the text is a common library type; otherwise, false.
+    </returns>
+  </IsLibType>
+  <IsModifier>
+    <summary>
+      Check if the text is a Modifier.
+    </summary>
+    <param name="text">The text line value.</param>
+    <param name="firstPass"></param>
+    <returns>true if the text is a modifier; otherwise, false.</returns>
+  </IsModifier>
+  <IsRefType>
+    <summary>
+      Check if the text is a RefType.
+    </summary>
+    <param name="text">The text line value.</param>
+    <returns>true if the text is a reference type; otherwise, false.</returns>
+  </IsRefType>
+  <SetTokens>
+    <summary>
+      Sets the Tokens value, split on blanks.
+    </summary>
+    <param name="text">The text line value.</param>
+  </SetTokens>
 </members>
