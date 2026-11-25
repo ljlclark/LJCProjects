@@ -12,6 +12,40 @@ namespace LJCNetCommon
   [XmlRoot("LJCDataRows")]
   public class LJCDataRows : List<LJCDataColumns>
   {
+    #region Properties
+
+    // Gets or sets the key columns.
+    /// <include file='Doc/LJCDataRows.xml'
+    ///  path='members/LJCKeys/*'/>
+    public LJCDataValues LJCKeys
+    {
+      get => _Keys;
+      set
+      {
+        if (IsKeyColumnsChanged(value, _Keys))
+        {
+          _IsPendingSort = true;
+        }
+        // Must be done after check for changes.
+        _Keys = value;
+
+        // New sort if count has changed.
+        if (Count != _PrevCount)
+        {
+          _IsPendingSort = true;
+          _PrevCount = Count;
+        }
+      }
+    }
+    private LJCDataValues _Keys;
+    #endregion
+
+    #region Class Data
+
+    private bool _IsPendingSort;
+    private int _PrevCount;
+    #endregion
+
     #region Constructor Methods
 
     /// <include file='../../../CoreUtilities/LJCGenDoc/Common/Data.xml'
@@ -41,15 +75,15 @@ namespace LJCNetCommon
 
     // Gets property names list from data columns.
     /// <include file='Doc/LJCDataRows.xml'
-    ///  path='members/LJCKeyPropertyNames/*'/>
-    public List<string> LJCKeyPropertyNames(LJCDataValues dataValues)
+    ///  path='members/LJCKeysPropertyNames/*'/>
+    public List<string> LJCKeysPropertyNames(LJCDataValues keys)
     {
       List<string> retList = null;
 
-      if (LJC.HasListItems(dataValues))
+      if (LJC.HasListItems(keys))
       {
         retList = new List<string>();
-        foreach (var dataValue in dataValues)
+        foreach (var dataValue in keys)
         {
           retList.Add(dataValue.PropertyName);
         }
@@ -59,8 +93,8 @@ namespace LJCNetCommon
 
     // Gets property names list from data columns.
     /// <include file='Doc/LJCDataRows.xml'
-    ///  path='members/LJCPropertyNames/*'/>
-    public List<string> LJCPropertyNames(LJCDataColumns dataColumns)
+    ///  path='members/LJCColumnsPropertyNames/*'/>
+    public List<string> LJCColumnsPropertyNames(LJCDataColumns dataColumns)
     {
       List<string> retList = null;
 
@@ -115,10 +149,10 @@ namespace LJCNetCommon
 
       if (_IsPendingSort)
       {
-        var sortNames = LJCKeyPropertyNames(_Keys);
+        var sortNames = LJCKeysPropertyNames(_Keys);
         if (sortNames != null)
         {
-          var uniqueComparer = new DataRowKeyComparer
+          var uniqueComparer = new DataRowKey
           {
             LJCPropertyNames = sortNames
           };
@@ -276,46 +310,12 @@ namespace LJCNetCommon
       return retIndex;
     }
     #endregion
-
-    #region Properties
-
-    // Gets or sets the key columns.
-    /// <include file='Doc/LJCDataRows.xml'
-    ///  path='members/LJCKeys/*'/>
-    public LJCDataValues LJCKeys
-    {
-      get => _Keys;
-      set
-      {
-        if (IsKeyColumnsChanged(value, _Keys))
-        {
-          _IsPendingSort = true;
-        }
-        // Must be done after check for changes.
-        _Keys = value;
-
-        // New sort if count has changed.
-        if (Count != _PrevCount)
-        {
-          _IsPendingSort = true;
-          _PrevCount = Count;
-        }
-      }
-    }
-    private LJCDataValues _Keys;
-    #endregion
-
-    #region Class Data
-
-    private bool _IsPendingSort;
-    private int _PrevCount;
-    #endregion
   }
 
   // Sort and search on key values.
   /// <include file='Doc/LJCDataRows.xml'
   ///  path='members/DataRowKeyComparer/*'/>
-  public class DataRowKeyComparer : IComparer<LJCDataColumns>
+  public class DataRowKey : IComparer<LJCDataColumns>
   {
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/LJCPropertyNames/*'/>

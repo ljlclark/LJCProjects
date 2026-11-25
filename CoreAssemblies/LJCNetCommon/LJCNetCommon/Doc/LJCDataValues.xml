@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCDataValues.xml -->
 <members>
@@ -20,11 +20,14 @@
     <summary>
       Deserializes from the specified XML file.
     </summary>
+    <param name="fileSpec">The XML file name.</param>
   </LJCDeserialize>
   <ToDataColumns>
     <summary>
       Operator to create LJCDataColumns from LJCDataValues.
     </summary>
+    <param name="dataValues">The data values collection.</param>
+    <returns>The data columns collection.</returns>
   </ToDataColumns>
 
   <!-- Properties -->
@@ -43,7 +46,7 @@
       The column for the specified property name.
     </summary>
     <param name="propertyName">The property name.</param>
-    <returns>The selected DbValue object.</returns>
+    <returns>The selected data value object.</returns>
   </Item>
 
   <!-- Constructor Methods -->
@@ -56,24 +59,26 @@
     <summary>
       The Copy constructor.
     </summary>
+    <param name="items">The source items.</param>
   </CopyConstructor>
   
   <!-- Collection Methods -->
   <Clone>
     <summary>
-      
+      Creates and returns a clone of the object.
     </summary>
   </Clone>
   <HasItems>
     <summary>
-      
+      Checks if the collection has items.
     </summary>
+    <returns>true if there are items; otherwise, false.</returns>
   </HasItems>
   <LJCChanged>
     <summary>
       Gets a collection of changed columns.
     </summary>
-    <returns>The changed columns list.</returns>
+    <returns>The changed values collection.</returns>
   </LJCChanged>
   <LJCClearChanged>
     <summary>
@@ -97,16 +102,21 @@
     <summary>
       Gets a list of property names from the collection items.
     </summary>
+    <param name="keys">The data values collection.</param>
+    <returns>A list of property names.</returns>
   </LJCKeyPropertyNames>
   <LJCPropertyNames>
     <summary>
       Gets a list of property names from the collection items.
     </summary>
+    <param name="dataValues">The data values collection.</param>
+    <returns>A list of property names.</returns>
   </LJCPropertyNames>
   <LJCSerialize>
     <summary>
       Serializes the collection
     </summary>
+    <param name="fileSpec">The XML file name.</param>
   </LJCSerialize>
   
   <!-- Collection Data Methods -->
@@ -123,16 +133,20 @@
     <summary>
       Returns the value that matches the key columns.
     </summary>
+    <param name="keys">The LJCDataValue keys.</param>
+    <returns>The matching item object.</returns>
   </LJCGetUnique>
   <Remove>
     <summary>
       Removes the item with the supplied property name.
     </summary>
+    <param name="propertyName">The property name.</param>
   </Remove>
   <LJCSort>
     <summary>
       Sorts on the current key columns.
     </summary>
+    <param name="keys">The LJCDataValue keys.</param>
   </LJCSort>
   
   <!-- Value Methods -->
@@ -154,6 +168,8 @@
     <summary>
       Gets the column object value as a byte array.
     </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The byte array.</returns>
   </LJCBytes>
   <LJCChar>
     <summary>
@@ -166,6 +182,8 @@
     <summary>
       Gets the column object value as a char array.
     </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The char array.</returns>
   </LJCChars>
   <LJCDateTime>
     <summary>
@@ -204,6 +222,8 @@
     <summary>
       Gets the column object value as a GUID.
     </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The Guid value.</returns>
   </LJCGuid>
   <LJCInt16>
     <summary>
@@ -243,6 +263,8 @@
     <summary>
       Gets the column object value as a string.
     </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The string value.</returns>
   </LJCString>
   <LJCValue>
     <summary>
@@ -257,11 +279,15 @@
     <summary>
       Gets a database DateTime string.
     </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The database format date string.</returns>
   </LJCDbDateString>
   <LJCDbDateTime>
     <summary>
       Gets the column object value as a DateTime.
     </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The DateTime value.</returns>
   </LJCDbDateTime>
   <LJCSetValue>
     <summary>
@@ -269,6 +295,5 @@
     </summary>
     <param name="propertyName">The property name.</param>
     <param name="value">The string value.</param>
-    <returns>The column value.</returns>
   </LJCSetValue>
 </members>

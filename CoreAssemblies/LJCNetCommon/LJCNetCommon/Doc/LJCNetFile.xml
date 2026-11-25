@@ -54,6 +54,9 @@
     <summary>
       Executes an external program.
     </summary>
+    <param name="programFileSpec">The program file specification.</param>
+    <param name="arguments">The command line parameters.</param>
+    <returns>An error text.</returns>
   </ShellProgram>
   <WriteLog>
     <summary>

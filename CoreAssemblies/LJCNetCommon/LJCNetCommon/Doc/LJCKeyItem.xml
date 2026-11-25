@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCKeyItem.xml -->
 <members>
@@ -65,6 +65,7 @@
     <summary>
       The Copy constructor.
     </summary>
+    <param name="item">The source item.</param>
   </CopyConstructor>
 
 <!-- Data Class Methods -->
@@ -72,15 +73,19 @@
     <summary>
       Creates and returns a clone of this object.
     </summary>
+    <returns>The cloned object.</returns>
   </Clone>
   <CompareTo>
     <summary>
       Provides the default Sort functionality.
     </summary>
+    <param name="other">The "compare to" object.</param>
+    <returns>The "Compare" value.</returns>
   </CompareTo>
   <ToString>
     <summary>
       The object string identifier.
     </summary>
+    <returns>The object identifier string.</returns>
   </ToString>
 </members>

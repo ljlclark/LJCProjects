@@ -27,6 +27,7 @@
     <summary>
       Initializes an object instance with the supplied values.
     </summary>
+    <param name="className">The class name.</param>
   </ParamConstructor>
 
 <!-- Methods -->
@@ -34,15 +35,27 @@
     <summary>
       Show the result.
     </summary>
+    <param name="methodName"></param>
+    <param name="result">The result value.</param>
+    <param name="compare">The "compare to" value.</param>
   </Show>
   <Write>
     <summary>
       Writes a compare message to the console.
     </summary>
+    <param name="methodName"></param>
+    <param name="result">The result value.</param>
+    <param name="compare">The "compare to" value.</param>
+    <param name="bracket">Indicates if the value should be bracketed.</param>
   </Write>
   <CompareMessage>
     <summary>
       Creates a compare message if result value does not equal compare value.
     </summary>
+    <param name="methodName"></param>
+    <param name="result">The result value.</param>
+    <param name="compare">The "compare to" value.</param>
+    <param name="bracket">Indicates if the value should be bracketed.</param>
+    <returns>The compare value.</returns>
   </CompareMessage>
 </members>

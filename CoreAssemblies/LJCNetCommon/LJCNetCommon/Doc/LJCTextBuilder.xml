@@ -59,6 +59,8 @@
     <summary>
       Gets the text length if not null.
     </summary>
+    <param name="text">The text value.</param>
+    <returns>The text length if available.</returns>
   </TextLength>
   
   <!-- Properties -->
@@ -128,6 +130,7 @@
     <summary>
       Initializes an object instance with the supplied values.
     </summary>
+    <param name="textState">The text state object.</param>
   </ParamConstructor>
   
   <!-- Data Class Methods -->
@@ -359,6 +362,12 @@
   
   <!-- Get Text Methods -->
   <EndsWithNewLine>
+    <summary>
+      Indicates if the builder text ends with a newline.
+    </summary>
+    <returns>
+      true if the builder text ends with a newline; otherwise, false.
+    </returns>
     <example>
       <code xml:space="preserve">
         var tb = new TextBuilder();
@@ -372,6 +381,11 @@
     </example>
   </EndsWithNewLine>
   <StartWithNewLine>
+    <summary>
+      Allow text to start with a newline.
+    </summary>
+    <param name="allowNewLine">Indicates if a new line is allowed.</param>
+    <returns>true if a newline was added; otherwise, false.</returns>
     <example>
       <code xml:space="preserve">
         var tb = new TextBuilder();
@@ -388,6 +402,8 @@
     <summary>
       Adds a delimiter if not the first list item.
     </summary>
+    <param name="text">The text value.</param>
+    <returns>The modified text.</returns>
   </GetDelimited>
   <GetIndented>
     <summary>
@@ -416,8 +432,9 @@
   </GetIndented>
   <GetIndentedString>
     <summary>
+      Returns the current indent string.
     </summary>
-    <returns></returns>
+    <returns>The modified string.</returns>
     <example>
       <code xml:space="preserve">
         // Defaults: IndentCharCount = 2, LineLimit = 80, WrapEnabled = false.

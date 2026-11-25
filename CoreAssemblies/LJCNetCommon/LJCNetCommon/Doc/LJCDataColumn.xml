@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright(c) Lester J. Clark and Contributors. -->
+<!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
 <!-- LJCDataColumn.xml -->
 <members>
@@ -209,6 +209,11 @@
   </Width>
 
   <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
   <ParamConstructor>
     <summary>
       Initializes an object instance with the supplied values.
@@ -224,7 +229,7 @@
     <summary>
       Initializes an object instance from the supplied object.
     </summary>
-    <param name="item"></param>
+    <param name="item">The source item.</param>
   </CopyConstructor>
   
   <!-- Data Class Methods -->
@@ -232,6 +237,7 @@
     <summary>
       Creates and returns a clone of the object.
     </summary>
+    <returns>The cloned object.</returns>
   </Clone>
   <FormatValue>
     <summary>
@@ -265,6 +271,7 @@
     <summary>
       Returns the object string identifier.
     </summary>
+    <returns>The object identifier string.</returns>
   </ToString>
   <CreateDataValue>
     <summary>

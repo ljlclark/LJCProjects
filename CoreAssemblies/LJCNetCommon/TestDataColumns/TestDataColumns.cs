@@ -459,7 +459,7 @@ namespace TestData
       };
 
       // Test Method
-      var propertyNames = dataColumns.LJCKeyPropertyNames();
+      var propertyNames = dataColumns.LJCKeysPropertyNames();
 
       var result = propertyNames[1];
       var compare = "Name";
@@ -480,7 +480,7 @@ namespace TestData
       };
 
       // Test Method
-      var propertyNames = dataColumns.LJCPropertyNames();
+      var propertyNames = dataColumns.LJCColumnsPropertyNames();
 
       var result = propertyNames[1];
       var compare = "Name";

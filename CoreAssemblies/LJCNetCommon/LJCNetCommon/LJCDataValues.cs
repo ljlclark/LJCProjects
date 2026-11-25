@@ -646,7 +646,7 @@ namespace LJCNetCommon
   public class DataValueKey : IComparer<LJCDataValue>
   {
     /// <include file='Doc/LJCDataValues.xml'
-    ///  path='members/LJCPropertyNames/*'/>
+    ///  path='members/PropertyNames/*'/>
     public List<string> LJCPropertyNames { get; set; }
 
     // Compares two objects.

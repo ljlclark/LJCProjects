@@ -310,7 +310,7 @@ namespace LJCNetCommon
 
     // Gets or sets the key columns.
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCKeyColumns/*'/>
+    ///  path='members/LJCKeys/*'/>
     public LJCDataValues LJCKeys
     {
       get => _Keys;
@@ -446,8 +446,8 @@ namespace LJCNetCommon
 
     // Gets a list of property names from the collection items.
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCKeyPropertyNames/*'/>
-    public List<string> LJCKeyPropertyNames(LJCDataValues keys = null)
+    ///  path='members/LJCKeysPropertyNames/*'/>
+    public List<string> LJCKeysPropertyNames(LJCDataValues keys = null)
     {
       List<string> retNames = null;
 
@@ -468,8 +468,8 @@ namespace LJCNetCommon
 
     // Gets a list of property names from the collection items.
     /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCPropertyNames/*'/>
-    public List<string> LJCPropertyNames(LJCDataColumns dataColumns = null)
+    ///  path='members/LJCColumnsPropertyNames/*'/>
+    public List<string> LJCColumnsPropertyNames(LJCDataColumns dataColumns = null)
     {
       List<string> retNames = null;
 
@@ -579,7 +579,7 @@ namespace LJCNetCommon
 
         // Create comparer.
         DataColumnKey comparer = null;
-        var propertyNames = LJCKeyPropertyNames(LJCKeys);
+        var propertyNames = LJCKeysPropertyNames(LJCKeys);
         if (propertyNames != null)
         {
           comparer = new DataColumnKey()
@@ -650,7 +650,7 @@ namespace LJCNetCommon
 
       if (_IsPendingSort)
       {
-        var sortNames = LJCKeyPropertyNames(_Keys);
+        var sortNames = LJCKeysPropertyNames(_Keys);
         if (sortNames != null)
         {
           var uniqueComparer = new DataColumnKey
@@ -932,6 +932,10 @@ namespace LJCNetCommon
   ///  path='members/DataColumnKey/*'/>
   public class DataColumnKey : IComparer<LJCDataColumn>
   {
+    /// <include file='Doc/LJCDataColumns.xml'
+    ///  path='members/LJCPropertyNames/*'/>
+    public List<string> LJCPropertyNames { get; set; }
+
     // Compares two objects.
     /// <include file='Doc/LJCDataColumns.xml'
     ///  path='members/Compare/*'/>
@@ -1002,9 +1006,5 @@ namespace LJCNetCommon
       }
       return retValue;
     }
-
-    /// <include file='Doc/LJCDataColumns.xml'
-    ///  path='members/LJCPropertyNames/*'/>
-    public List<string> LJCPropertyNames { get; set; }
   }
 }

@@ -151,7 +151,7 @@ namespace TestData
       var dataRows = CreateTestDataRows();
 
       var dataColumns = dataRows[0];
-      var propertyNamesList = dataRows.LJCPropertyNames(dataColumns);
+      var propertyNamesList = dataRows.LJCColumnsPropertyNames(dataColumns);
       var result = propertyNamesList[0];
       var compare = "FirstName";
       TestCommon.Write($"{methodName}", result, compare);

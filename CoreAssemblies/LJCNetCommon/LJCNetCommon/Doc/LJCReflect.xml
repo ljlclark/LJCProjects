@@ -70,6 +70,7 @@
     <summary>
       Checks if a property exists.
     </summary>
+    <param name="propertyName">The property name.</param>
   </HasProperty>
 
   <!-- Value Methods -->
@@ -91,6 +92,8 @@
     <summary>
       Gets the property value as a byte array.
     </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The byte array.</returns>
   </GetBytes>
   <GetChar>
     <summary>
@@ -103,6 +106,8 @@
     <summary>
       Gets the property value as a char array.
     </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The char array.</returns>
   </GetChars>
   <GetDateTime>
     <summary>
@@ -209,6 +214,8 @@
     <summary>
       Gets the column object value as a DateTime.
     </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The DateTime object.</returns>
   </GetDbDateTime>
   <GetValueReflect>
     <summary>

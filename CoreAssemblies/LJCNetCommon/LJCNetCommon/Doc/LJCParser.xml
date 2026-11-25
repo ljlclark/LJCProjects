@@ -15,26 +15,37 @@
     <summary>
       Changes quotes between double and single quotes.
     </summary>
+    <param name="text">The text value.</param>
+    <param name="changeValue">The changed value.</param>
+    <returns>true if the quote was changed; otherwise, false.</returns>
   </ChangeQuote>
   <ShortBeginTagToName>
     <summary>
       Gets the tag name for the end tag.
     </summary>
+    <param name="shortBeginTag">The short begin tag.</param>
+    <returns>The short begin name.</returns>
   </ShortBeginTagToName>
   <NameToShortBeginTag>
     <summary>
       Gets the end tag for the tag name.
     </summary>
+    <param name="tagName">The tag value.</param>
+    <returns>The short begin tag.</returns>
   </NameToShortBeginTag>
   <EndTagToName>
     <summary>
       Gets the tag name for the end tag.
     </summary>
+    <param name="endTag">The end tag.</param>
+    <returns>The end tag name.</returns>
   </EndTagToName>
   <NameToEndTag>
     <summary>
       Gets the end tag for the tag name.
     </summary>
+    <param name="tagName">The tag name.</param>
+    <returns>The tag value.</returns>
   </NameToEndTag>
 
   <!-- Properties -->
@@ -84,11 +95,16 @@
     </summary>
     <param name="text">The text value.</param>
     <param name="tagName">The tag name.</param>
+    <returns>The found tag.</returns>
   </FindTag>
   <ParseWithQuotes>
     <summary>
       Parses with different combinations of double or single quotes.
     </summary>
+    <param name="text">The source text.</param>
+    <param name="beginDelimiter">The begin delimiter.</param>
+    <param name="endDelimiter">The end delimiter.</param>
+    <returns>The parsed value.</returns>
   </ParseWithQuotes>
   <RemoveSection>
     <summary>
@@ -97,12 +113,14 @@
     <param name="text">The text value.</param>
     <param name="beginIndex">The begin index.</param>
     <param name="endIndex">The end index.</param>
+    <returns>The changed text value.</returns>
   </RemoveSection>
   <RemoveTags>
     <summary>
       Removes tags from a text value.
     </summary>
     <param name="text">The text value.</param>
+    <returns>The changed text value.</returns>
   </RemoveTags>
   <Selection>
     <summary>
@@ -134,21 +152,30 @@
     <summary>
       Gets the begin tag.
     </summary>
+    <param name="line">The text line.</param>
+    <returns>The found short begin tag.</returns>
   </BeginTag>
   <BeginTagContents>
     <summary>
       Gets the begin tag with attributes.
     </summary>
+    <param name="line">The text line.</param>
+    <returns>The found begin tag attributes.</returns>
   </BeginTagContents>
   <BeginTagName>
     <summary>
       Gets the begin tag name.
     </summary>
+    <param name="line">The text line.</param>
+    <returns>The found begin tag name.</returns>
   </BeginTagName>
   <IsBeginTagName>
     <summary>
       Indicates if a line starts with a specific begin tag name.
     </summary>
+    <param name="line">The text line.</param>
+    <param name="beginTagName">The begin tag name.</param>
+    <returns>true if the begin tag was found; otherwise, false.</returns>
   </IsBeginTagName>
   
   <!-- End Tag Methods -->
@@ -156,16 +183,23 @@
     <summary>
       Gets the end tag.
     </summary>
+    <param name="line">The text line.</param>
+    <returns>The found short end tag.</returns>
   </EndTag>
   <EndTagName>
     <summary>
       Gets the end tag name.
     </summary>
+    <param name="line">The text line.</param>
+    <returns>The found end tag name.</returns>
   </EndTagName>
   <IsEndTagName>
     <summary>
       Indicates if a line ends with a specific end tag name.
     </summary>
+    <param name="line">The text line.</param>
+    <param name="endTagName">The end tag name.</param>
+    <returns>true if the end tag was found; otherwise, false.</returns>
   </IsEndTagName>
 
   <!-- Valid Begin Tag Methods -->
@@ -173,21 +207,30 @@
     <summary>
       Checks for a valid begin tag.
     </summary>
+    <param name="line">The text line.</param>
+    <returns>true if a valid begin tag was found; otherwise, false.</returns>
   </HasValidBeginTag>
   <HasValidBeginTagName>
     <summary>
       Checks for a begin tag and sets out value to it if found.
     </summary>
+    <param name="line">The text line.</param>
+    <param name="beginName">The found begin tag name.</param>
+    <returns>true if a valid begin tag was found; otherwise, false.</returns>
   </HasValidBeginTagName>
   <ValidBeginTag>
     <summary>
       Gets the valid begin tag if begin tag is valid.
     </summary>
+    <param name="line">The text line.</param>
+    <returns>The valid begin tag if found.</returns>
   </ValidBeginTag>
   <ValidBeginTagName>
     <summary>
       Gets the valid tag name if the line contains a begin tag.
     </summary>
+    <param name="line">The text line.</param>
+    <returns>The valid begin tag name if found.</returns>
   </ValidBeginTagName>
   
   <!-- Valid End Tag Methods -->
@@ -195,20 +238,29 @@
     <summary>
       Checks for a valid end tag.
     </summary>
+    <param name="line">The text line.</param>
+    <returns>true if a valid end tag was found; otherwise, false.</returns>
   </HasValidEndTag>
   <HasValidEndTagName>
     <summary>
       Checks for an end tag and sets out value to it if found.
     </summary>
+    <param name="line">The text line.</param>
+    <param name="endName">The found end tag name.</param>
+    <returns>true if a valid end tag was found; otherwise, false.</returns>
   </HasValidEndTagName>
   <ValidEndTag>
     <summary>
       Gets the valid end tag if end tag is valid.
     </summary>
+    <param name="line">The text line.</param>
+    <returns>The valid end tag if found.</returns>
   </ValidEndTag>
   <ValidEndTagName>
     <summary>
       Gets the valid tag name if the line contains a begin tag.
     </summary>
+    <param name="line">The text line.</param>
+    <returns>The valid end tag name if found.</returns>
   </ValidEndTagName>
 </members>

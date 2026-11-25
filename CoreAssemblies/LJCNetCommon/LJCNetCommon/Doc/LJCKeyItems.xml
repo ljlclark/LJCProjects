@@ -23,6 +23,8 @@
     <summary>
       Checks if the collection has items.
     </summary>
+    <param name="collection">The collection object.</param>
+    <returns>true if there are items; otherwise, false.</returns>
   </HasItems>
   
   <!-- Properties -->
@@ -30,11 +32,13 @@
     <summary>
       The Collection count.
     </summary>
+    <returns>The items count.</returns>
   </Count>
   <Items>
     <summary>
       The LJCKeyItem items.
     </summary>
+    <returns>The items collection.</returns>
   </Items>
   <Indexer>
     <summary>
@@ -54,6 +58,7 @@
     <summary>
       The Copy constructor.
     </summary>
+    <param name="items">The source collection.</param>
   </CopyConstructor>
 
   <!-- Collection Methods -->
@@ -61,11 +66,13 @@
     <summary>
       Creates and returns a clone of the object.
     </summary>
+    <returns>The cloned object.</returns>
   </Clone>
   <HasItems2>
     <summary>
       Checks if the collection has items.
     </summary>
+    <returns>true if there are items; otherwise, false.</returns>
   </HasItems2>
   
   <!-- Collection Data Methods -->
@@ -74,6 +81,7 @@
       Adds the specified object.
     </summary>
     <param name="item">The item object.</param>
+    <remarks>Overrides the base Add method.</remarks>
   </Add1>
   <Add2>
     <summary>
@@ -83,6 +91,7 @@
     <param name="id">The ID value.</param>
     <param name="description">The Description.</param>
     <param name="maxLength">The MaxLength value.</param>"
+    <returns>The created key item object.</returns>
   </Add2>
   <Append>
     <summary>
@@ -94,6 +103,8 @@
     <summary>
       Retrieves an item by property name.
     </summary>
+    <param name="propertyName">The property name.</param>
+    <returns>The matching item object.</returns>
   </LJCRetrieve>
 
   <!-- Other Methods -->
@@ -131,6 +142,8 @@
     <summary>
       Retrieve the collection element.
     </summary>
+    <param name="name">The property name.</param>
+    <returns>The matching item object.</returns>
   </SearchPropertyName>
   <SortPropertyName>
     <summary>
