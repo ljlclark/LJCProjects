@@ -1,23 +1,35 @@
-﻿// Copyright (c) Lester J.Clark and Contributors.
+﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// CodeParseProgram.cs
+// TestCSParser.cs
 using LJCNetCommon;
 using System;
 
-namespace TestCSParser
+namespace TestNetCommon
 {
-  // Provides methods to test class LJCCSParser.
-  internal class CSParserProgram
+  // Provides the LJCCSParser test methods.
+  internal class TestCSParser
   {
-    #region Entry Methods
+    #region Class Data
 
-    // The entry method.
-    private static void Main()
+    // The test common object.
+    private static LJCTestCommon TestCommon { get; set; }
+    #endregion
+
+    #region Constructor Methods
+
+    // Initializes an object instance.
+    public TestCSParser()
     {
-      TestCommon = new LJCTestCommon("CSParserProgram");
+      TestCommon = new LJCTestCommon("TestCSParser");
       Console.WriteLine();
-      Console.WriteLine("*** CSParser ***");
+      Console.WriteLine("*********************");
+      Console.Write("*** LJCCSParser ***");
+      Run();
+    }
 
+    // Runs the test methods.
+    private void Run()
+    {
       // Methods
       ParseClass();
       ParseMethod();
@@ -99,12 +111,6 @@ namespace TestCSParser
       }
       TestCommon.Write("ParsePropertyLine", result, compare);
     }
-    #endregion
-
-    #region Class Data
-
-    // The test common object.
-    private static LJCTestCommon TestCommon { get; set; }
     #endregion
   }
 }

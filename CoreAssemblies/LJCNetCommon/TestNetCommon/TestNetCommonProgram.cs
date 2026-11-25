@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
-// TestDataProgram.cs
+// TestNetCommonProgram.cs
 
-namespace TestData
+namespace TestNetCommon
 {
-  internal class TestDataProgram
+  internal class TestNetCommonProgram
   {
     static void Main()
     {
@@ -14,9 +14,10 @@ namespace TestData
       _ = new TestDataValue();
       _ = new TestDataValues();
 
-      _ = new TestHTMLBuilder();
-
       _ = new TestNetString();
+      _ = new TestCSParser();
+
+      _ = new TestHTMLBuilder();
     }
   }
 }

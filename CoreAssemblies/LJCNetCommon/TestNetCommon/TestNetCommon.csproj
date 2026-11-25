@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8D3E5880-56BC-40F1-BF9B-82D241D007F4}</ProjectGuid>
+    <ProjectGuid>{F81AE179-DA9C-4B01-8218-263C4E71818F}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TestCSParser</RootNamespace>
-    <AssemblyName>TestCSParser</AssemblyName>
+    <RootNamespace>TestData</RootNamespace>
+    <AssemblyName>TestData</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,15 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSParserProgram.cs" />
+    <Compile Include="TestCSParser.cs" />
+    <Compile Include="TestNetString.cs" />
+    <Compile Include="TestNetCommonProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDataColumn.cs" />
+    <Compile Include="TestDataColumns.cs" />
+    <Compile Include="TestDataRows.cs" />
+    <Compile Include="TestDataValue.cs" />
+    <Compile Include="TestDataValues.cs" />
+    <Compile Include="TestHTMLBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJCNetCommon\LJCNetCommon.csproj">
-      <Project>{aec27bf0-b501-443d-a6a3-6d5fd59c6a47}</Project>
+      <Project>{AEC27BF0-B501-443D-A6A3-6D5FD59C6A47}</Project>
       <Name>LJCNetCommon</Name>
     </ProjectReference>
   </ItemGroup>

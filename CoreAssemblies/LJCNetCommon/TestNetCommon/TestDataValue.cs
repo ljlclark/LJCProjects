@@ -4,7 +4,7 @@
 using LJCNetCommon;
 using System;
 
-namespace TestData
+namespace TestNetCommon
 {
   // Provides the LJCDataValue test methods.
   internal class TestDataValue

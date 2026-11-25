@@ -4,9 +4,8 @@
 using LJCNetCommon;
 using System;
 using System.Collections.Generic;
-using LJC = LJCNetCommon.LJC;
 
-namespace TestData
+namespace TestNetCommon
 {
   // Provides the LJCDataColumns test methods.
   internal class TestDataColumns

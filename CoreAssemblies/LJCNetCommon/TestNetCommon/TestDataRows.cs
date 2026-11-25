@@ -3,9 +3,8 @@
 // TestDataRows.cs
 using LJCNetCommon;
 using System;
-using LJC = LJCNetCommon.LJC;
 
-namespace TestData
+namespace TestNetCommon
 {
   // Provides the LJCDataRows test methods.
   internal class TestDataRows
