@@ -7,14 +7,14 @@ using System.Text;
 namespace LJCCSParser5
 {
   // Provides methods for HTML Syntax Highighting.
-  /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
+  /// <include file='Doc/LJCSyntaxHighlight.xml'
   ///  path='members/SyntaxHighlightHtml/*'/>
   public class LJCSyntaxHighlightHtml
   {
     #region Static Methods
 
     // Retrieves the leading whitespace string.
-    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
+    /// <include file='Doc/LJCSyntaxHighlight.xml'
     ///  path='members/SaveLeadingWhiteSpace/*'/>
     public static string? SaveLeadingWhiteSpace(string? text)
     {
@@ -37,7 +37,7 @@ namespace LJCCSParser5
     }
 
     // Strips the specified number of leading whitespace characters from a string.
-    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
+    /// <include file='Doc/LJCSyntaxHighlight.xml'
     ///  path='members/StripExtraLeadingWhiteSpace/*'/>
     public static string? StripExtraLeadingWhiteSpace(string text, int stripLength)
     {
@@ -56,9 +56,9 @@ namespace LJCCSParser5
     #region Properties
 
     // Gets or sets the Allow Debug Breaks value.
-    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
+    /// <include file='Doc/LJCSyntaxHighlight.xml'
     ///  path='members/AllowDebugBreaks/*'/>
-    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
+    /// <include file='Doc/LJCSyntaxHighlight.xml'
     ///  path='members/StripExtraLeadingWhiteSpace/*'/>
     public bool AllowDebugBreaks { get; set; }
 
@@ -101,7 +101,7 @@ namespace LJCCSParser5
     #region Public Main Methods
 
     // Adds the Syntax Highlighting to the HTML code line.
-    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
+    /// <include file='Doc/LJCSyntaxHighlight.xml'
     ///  path='members/AddSyntaxHighlight/*'/>
     public string AddSyntaxHighlight(string line)
     {
@@ -207,7 +207,7 @@ namespace LJCCSParser5
     }
 
     // Strips the defined leading white spaces and applies Syntax Highlighting.
-    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
+    /// <include file='Doc/LJCSyntaxHighlight.xml'
     ///  path='members/FormatCode/*'/>
     public string FormatCode(string dataTypeName, string dataMemberName
       , string code, bool stripLeadingSpaces = true)
@@ -254,7 +254,7 @@ namespace LJCCSParser5
     }
 
     // Reads the User Types from a file or creates the file if it does not exist
-    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
+    /// <include file='Doc/LJCSyntaxHighlight.xml'
     ///  path='members/SetUserTypes/*'/>
     public void SetUserTypes(string dataTypeName, string dataMemberName
       , string code)
@@ -295,7 +295,7 @@ namespace LJCCSParser5
     }
 
     // Updates the User Types if a new one is found in the HTML code line.
-    /// <include file='Doc/LJCLJCSyntaxHighlight.xml'
+    /// <include file='Doc/LJCSyntaxHighlight.xml'
     ///  path='members/UpdateUserTypes/*'/>
     public void UpdateUserTypes(string line)
     {

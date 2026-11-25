@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace LJCCSParser5
 {
   // Represents a collection of Reference Types.
-  /// <include file='Doc/LJCLJCRefTypes.xml'
+  /// <include file='Doc/LJCRefTypes.xml'
   ///  path='members/RefTypes/*'/>
   public class LJCRefTypes : IEnumerable<string>
   {
@@ -70,7 +70,7 @@ namespace LJCCSParser5
     #region Properties
 
     /// <summary>Gets the Default File Name.</summary>
-    /// <include file='Doc/LJCLJCRefTypes.xml'
+    /// <include file='Doc/LJCRefTypes.xml'
     ///  path='members/DefaultFileName/*'/>
     public static string DefaultFileName
     {
@@ -114,7 +114,7 @@ namespace LJCCSParser5
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include file='Doc/LJCLJCRefTypes.xml'
+    /// <include file='Doc/LJCRefTypes.xml'
     ///  path='members/Add1/*'/>
     public void Add(string item)
     {
@@ -168,7 +168,7 @@ namespace LJCCSParser5
     #region IEnumerable Methods and Properties
 
     // The Collection count.
-    /// <include file='Doc/LJCLJCRefTypes.xml'
+    /// <include file='Doc/LJCRefTypes.xml'
     ///  path='members/Count/*'/>
     public int Count
     {
@@ -176,7 +176,7 @@ namespace LJCCSParser5
     }
 
     // Gets the Collection Enumerator.
-    /// <include file='Doc/LJCLJCRefTypes.xml'
+    /// <include file='Doc/LJCRefTypes.xml'
     ///  path='members/GetEnumerator/*'/>
     public IEnumerator<string> GetEnumerator()
     {
@@ -190,13 +190,13 @@ namespace LJCCSParser5
     }
 
     // The KeyItem items.
-    /// <include file='Doc/LJCLJCRefTypes.xml'
+    /// <include file='Doc/LJCRefTypes.xml'
     ///  path='members/Items/*'/>
     [XmlArray(RootName)]
     public List<string> Items { get; set; }
 
     // Gets the item by index value.
-    /// <include file='Doc/LJCLJCRefTypes.xml'
+    /// <include file='Doc/LJCRefTypes.xml'
     ///  path='members/Indexer/*'/>
     public string? this[int index]
     {

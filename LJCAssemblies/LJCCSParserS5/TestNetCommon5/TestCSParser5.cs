@@ -3,10 +3,10 @@
 // TestCSParser5.cs
 using LJCNetCommon5;
 
-namespace TestNetCommon5
+namespace TestLJCCSParser5
 {
   // Provides LJCCSParser test methods.
-  internal class TestCSParser
+  internal class TestCSParser5
   {
     #region Properties
 
@@ -17,7 +17,7 @@ namespace TestNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance.
-    public TestCSParser()
+    public TestCSParser5()
     {
       TestCommon = new LJCTestCommon("LJCCSParser");
       Run();
@@ -125,7 +125,7 @@ namespace TestNetCommon5
         var line = propertyList[index];
         if (line != "{")
         {
-          string nextLine = null;
+          string? nextLine = null;
           if (index < propertyList.Count - 1)
           {
             nextLine = propertyList[index + 1];

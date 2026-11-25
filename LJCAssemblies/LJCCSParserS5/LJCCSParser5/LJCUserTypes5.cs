@@ -5,7 +5,7 @@
 namespace LJCCSParser5
 {
   // Represents a collection of User Type names.
-  /// <include file='Doc/LJCLJCUserTypes.xml'
+  /// <include file='Doc/LJCUserTypes.xml'
   ///  path='members/UserTypes/*'/>
   public class LJCUserTypes : List<string>
   {

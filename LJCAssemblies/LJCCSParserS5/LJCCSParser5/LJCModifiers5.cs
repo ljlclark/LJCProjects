@@ -71,7 +71,7 @@ namespace LJCCSParser5
     #region Properties
 
     // Gets the Default File Name.
-    /// <include file='Doc/LJCLJCModifiers.xml'
+    /// <include file='Doc/LJCModifiers.xml'
     ///  path='members/DefaultFileName/*'/>
     public static string DefaultFileName
     {
@@ -115,7 +115,7 @@ namespace LJCCSParser5
     #region Collection Methods
 
     // Adds the specified object.
-    /// <include file='Doc/LJCLJCModifiers.xml'
+    /// <include file='Doc/LJCModifiers.xml'
     ///  path='members/Add1/*'/>
     public void Add(string item)
     {
