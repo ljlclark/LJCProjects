@@ -17,6 +17,15 @@ echo LJCNetCommonS5 >> Build.txt
 msbuild LJCNetCommonS5\LJCNetCommonS5.sln
 
 set /a counter+=1
+set marker=----------------- %counter% - LJCCSParser5 ---------
+echo.
+echo                                         %marker%
+echo %marker% >> Build.txt
+echo LJCCSParserS5 >> Build.txt
+call LJCCSParserS5\UpdateCSParserS5.cmd BuildAll >> Build.txt
+msbuild LJCCSParserS5\LJCCSParserS5.sln
+
+set /a counter+=1
 set marker=----------------- %counter% - LJCTextDataReader5 ---------
 echo.
 echo                                         %marker%
