@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // TestCSParser5.cs
+using LJCCSParser5;
 using LJCNetCommon5;
 
 namespace TestLJCCSParser5
