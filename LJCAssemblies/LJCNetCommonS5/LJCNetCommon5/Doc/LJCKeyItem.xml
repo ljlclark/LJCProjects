@@ -4,6 +4,55 @@
 <!-- LJCKeyItem.xml -->
 <members>
   <!-- Class -->
+  <LJCKeyItem>
+    <summary>
+      Represents Key item values.
+    </summary>
+  </LJCKeyItem>
+
+  <!-- Properties -->
+  <DataConfigName>
+    <summary>
+      Gets or sets the DataConfig name.
+    </summary>
+  </DataConfigName>
+  <Description>
+    <summary>
+      Gets or sets the Description value.
+    </summary>
+  </Description>
+  <ID>
+    <summary>
+      Gets or sets the ID value.
+    </summary>
+  </ID>
+  <MaxLength>
+    <summary>
+      Gets or sets the MaxLength value.
+    </summary>
+  </MaxLength>
+  <PrimaryKeyName>
+    <summary>
+      Gets or sets the Primary Key name.
+    </summary>
+  </PrimaryKeyName>
+  <PropertyName>
+    <summary>
+      Gets or sets the Property name.
+    </summary>
+  </PropertyName>
+  <TableName>
+    <summary>
+      Gets or sets the Table name.
+    </summary>
+  </TableName>
+  
+  <!-- Constructor Methods -->
+  <Constructor>
+    <summary>
+      Initializes an object instance.
+    </summary>
+  </Constructor>
   <ParamConstructor>
     <summary>
       Initializes an object instance.
@@ -12,4 +61,30 @@
     <param name="id">The ID value.</param>
     <param name="description">The Description value.</param>
   </ParamConstructor>
+  <CopyConstructor>
+    <summary>
+      The Copy constructor.
+    </summary>
+    <param name="item">The source item.</param>
+  </CopyConstructor>
+  
+  <!-- Data Class Methods -->
+  <Clone>
+    <summary>
+      Creates and returns a clone of this object.
+    </summary>
+  </Clone>
+  <ToString>
+    <summary>
+      The object string identifier.
+    </summary>
+  </ToString>
+  
+  <!-- Search and Sort Methods -->
+  <CompareTo>
+    <summary>
+      Provides the default Sort functionality.
+    </summary>
+    <param name="other">The "Compare To" object.</param>
+  </CompareTo>
 </members>

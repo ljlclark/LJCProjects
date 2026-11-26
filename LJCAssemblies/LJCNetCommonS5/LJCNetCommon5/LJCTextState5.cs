@@ -5,14 +5,14 @@
 namespace LJCNetCommon5
 {
   // Represents the text state.
-  /// <include file="Doc/TextState.xml"
+  /// <include file="Doc/LJCTextState.xml"
   ///  path="members/LJCTextState/*"/>
   public class LJCTextState
   {
     #region Properties
 
     // Gets or sets the current indent count to sync called method.
-    /// <include file='Doc/TextState.xml'
+    /// <include file='Doc/LJCTextState.xml'
     ///  path='members/IndentCount/*'/>
     public int IndentCount
     {
@@ -29,7 +29,7 @@ namespace LJCNetCommon5
     private int mIndentCount;
 
     // Gets or sets the new indent count to sync calling method.
-    /// <include file='Doc/TextState.xml'
+    /// <include file='Doc/LJCTextState.xml'
     ///  path='members/ChildIndentCount/*'/>
     public int ChildIndentCount
     {
@@ -49,7 +49,7 @@ namespace LJCNetCommon5
     #region Constructor Methods
 
     // Initializes an object instance with the supplied values.
-    /// <include file='Doc/TextState.xml'
+    /// <include file='Doc/LJCTextState.xml'
     ///  path='members/Constructor/*'/>
     public LJCTextState(int indentCount = 0)
     {

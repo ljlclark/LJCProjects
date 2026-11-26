@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright (c) Lester J. Clark and Contributors. -->
 <!-- Licensed under the MIT License. -->
-<!-- PropertyDelegates.xml -->
+<!-- LJCPropertyDelegates.xml -->
 <members>
   <!-- Methods -->
   <Add>
     <summary>
-      Creates and adds a PropertyDelegate object to the collection. (R)
+      Creates and adds a PropertyDelegate object to the collection.
     </summary>
     <param name="propertyInfo">The PropertyInfo object.</param>
     <returns>The PropertyDelegate object.</returns>

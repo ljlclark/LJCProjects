@@ -21,7 +21,7 @@ namespace LJCNetCommon5
     }
     private string? mDataConfigName;
 
-    // The Description value.
+    // Gets or sets the Description value.
     /// <include file='Doc/LJCKeyItem.xml'
     ///  path='members/Description/*'/>
     public string? Description
@@ -31,7 +31,7 @@ namespace LJCNetCommon5
     }
     private string? mDescription;
 
-    // The ID value.
+    // Gets or sets the ID value.
     /// <include file='Doc/LJCKeyItem.xml'
     ///  path='members/ID/*'/>
     public long ID { get; set; }
@@ -51,7 +51,7 @@ namespace LJCNetCommon5
     }
     private string? mPrimaryKeyName;
 
-    // The Property name.
+    // Gets or sets the Property name.
     /// <include file='Doc/LJCKeyItem.xml'
     ///  path='members/PropertyName/*'/>
     public string? PropertyName

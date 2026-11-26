@@ -14,11 +14,11 @@ GetInt32()        GetInt32()        LJCInt32()          LJCInt32()         GetIn
 GetInt64()        GetInt64()        LJCInt64()          LJCInt64()         GetInt64()
 GetString()       GetString()       LJCString()         LJCString()        GetString()
 GetValue()        GetValue()        LJCValue()          LJCValue()         GetValue()
-
+                  (PropertyName)    PropertyName        PropertyName       (ColumnName)
 - Additional Value Methods
 - LJC -           - LJCReflect -    - LJCDataColumns -  - LJCDataValues -  - LJCTextDataReader - - LJCDataCommon -
 GetDbDateString() GetDbDateString() LJCDbDateString()   LJCDbDateString()  GetDbDateString()     GetDbDateString()
-GetDbDateTime()   GetDbDateTime()   LJCDbDateTime()     LJCDbDateTime()    GetDbDateTime         GetDbDateTime()
+GetDbDateTime()   GetDbDateTime()   LJCDbDateTime()     LJCDbDateTime()    GetDbDateTime()       GetDbDateTime()
                                                                            GetTrimString()
                                     LJCSetValue()       LJCSetValue()
                   GetValueReflect() 
