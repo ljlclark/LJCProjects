@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // TableNameSelect5.cs
 using LJCControls5;
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using LJCDBClientLib5;
 using LJCDBMessage5;
 

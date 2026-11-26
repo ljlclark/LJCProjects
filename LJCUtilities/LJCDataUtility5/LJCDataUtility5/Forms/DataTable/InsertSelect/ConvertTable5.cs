@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ConvertTable5.cs
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using LJCDataUtilityDAL5;
 using LJCDBClientLib5;
 using LJCNetCommon5;

@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // CreateDataDetail5.cs
 using LJCControls5;
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using LJCDBClientLib5;
 using LJCDBMessage5;
 using LJCNetCommon5;

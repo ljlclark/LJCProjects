@@ -20,11 +20,14 @@
     <Reference Include="LJCControls5">
       <HintPath>..\External\LJCControls5.dll</HintPath>
     </Reference>
-    <Reference Include="LJCDataAccessConfig5">
-      <HintPath>..\External\LJCDataAccessConfig5.dll</HintPath>
+    <Reference Include="LJCCSParser5">
+      <HintPath>..\External\LJCCSParser5.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBClientLib5">
       <HintPath>..\External\LJCDBClientLib5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBConfig5">
+      <HintPath>..\..\LJCDataUtility5\External\LJCDBConfig5.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBMessage5">
       <HintPath>..\External\LJCDBMessage5.dll</HintPath>

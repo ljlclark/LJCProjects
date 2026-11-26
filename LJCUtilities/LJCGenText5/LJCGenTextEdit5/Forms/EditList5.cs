@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // EditList.cs
 using LJCControls5;
-using LJCNetCommon5;
+using LJCCSParser5;
 
 namespace LJCGenTextEdit5
 {
@@ -44,7 +44,7 @@ namespace LJCGenTextEdit5
       //EndColor = Color.LightSkyBlue;
       //EndColor = Color.SkyBlue;
       mSyntaxColors = new SyntaxColors();
-      mTokenizer = new CodeTokenizer();
+      mTokenizer = new LJCCodeTokenizer();
       mTokenizer.InitializeKeywords();
       Cursor = Cursors.Default;
     }

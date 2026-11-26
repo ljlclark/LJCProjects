@@ -2,14 +2,6 @@
 // Licensed under the MIT License.
 // DataUtilityList5.cs
 using LJCDataUtilityDAL5;
-using System.Configuration.Provider;
-
-// Install-Package Microsoft.Data.SqlClient
-// Install-Package System.Configuration.ConfigurationManager
-// Microsoft.Extensions.Configuration?
-
-// Net5+
-// Do not create nulls if possible.
 
 namespace LJCDataUtility5
 {

@@ -11,11 +11,11 @@
     <Reference Include="LJCDataAccess5">
       <HintPath>..\External\LJCDataAccess5.dll</HintPath>
     </Reference>
-    <Reference Include="LJCDataAccessConfig5">
-      <HintPath>..\External\LJCDataAccessConfig5.dll</HintPath>
-    </Reference>
     <Reference Include="LJCDBClientLib5">
       <HintPath>..\External\LJCDBClientLib5.dll</HintPath>
+    </Reference>
+    <Reference Include="LJCDBConfig5">
+      <HintPath>..\External\LJCDBConfig5.dll</HintPath>
     </Reference>
     <Reference Include="LJCDBDataAccess5">
       <HintPath>..\External\LJCDBDataAccess5.dll</HintPath>

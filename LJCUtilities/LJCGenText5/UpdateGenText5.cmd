@@ -26,21 +26,21 @@ echo *** %to% ***
 
 set fromBin=%bin%\net8.0
 
-set src=%assmRoot%LJCDataAccessS5\LJCDataAccess5\%fromBin%
-echo copy %src%\LJCDataAccess5.dll %to%
-copy %src%\LJCDataAccess5.dll %to%
-
-set src=%assmRoot%LJCDataAccessConfigS5\LJCDataAccessConfig5\%fromBin%
-echo copy %src%\LJCDataAccessConfig5.dll %to%
-copy %src%\LJCDataAccessConfig5.dll %to%
-
-set src=%assmRoot%LJCDBDataAccessS5\LJCDBDataAccess5\%fromBin%
-echo copy %src%\LJCDBDataAccess5.dll %to%
-copy %src%\LJCDBDataAccess5.dll %to%
-
 set src=%assmRoot%LJCNetCommonS5\LJCNetCommon5\%fromBin%
 echo copy %src%\LJCNetCommon5.dll %to%
 copy %src%\LJCNetCommon5.dll %to%
+
+set src=%assmRoot%LJCCSParserS5\LJCCSParser5\%fromBin%
+echo copy %src%\LJCCSParser5.dll %to%
+copy %src%\LJCCSParser5.dll %to%
+
+set src=%assmRoot%LJCDBConfigS5\LJCDBConfig5\%fromBin%
+echo copy %src%\LJCDBConfig5.dll %to%
+copy %src%\LJCDBConfig5.dll %to%
+
+set src=%assmRoot%LJCDataAccessS5\LJCDataAccess5\%fromBin%
+echo copy %src%\LJCDataAccess5.dll %to%
+copy %src%\LJCDataAccess5.dll %to%
 
 set src=%assmRoot%LJCDBMessageS5\LJCDBMessage5\%fromBin%
 echo copy %src%\LJCDBMessage5.dll %to%
@@ -49,6 +49,10 @@ copy %src%\LJCDBMessage5.dll %to%
 set src=%assmRoot%LJCDBMessageS5\LJCCipherLib5\%fromBin%
 echo copy %src%\LJCCipherLib5.dll %to%
 copy %src%\LJCCipherLib5.dll %to%
+
+set src=%assmRoot%LJCDBDataAccessS5\LJCDBDataAccess5\%fromBin%
+echo copy %src%\LJCDBDataAccess5.dll %to%
+copy %src%\LJCDBDataAccess5.dll %to%
 
 rem ---------------------------
 set fromBin=%bin%\net8.0-windows

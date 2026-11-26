@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // ValuesDataUtility5.cs
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 //using LJCDataSiteDAL;
 using LJCNetCommon5;
 

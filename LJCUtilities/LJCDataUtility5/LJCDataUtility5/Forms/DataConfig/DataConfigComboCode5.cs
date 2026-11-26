@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // DataConfigComboCode5.cs
 using LJCControls5;
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using static LJCDataUtility5.DataUtilityList;
 
 namespace LJCDataUtility5

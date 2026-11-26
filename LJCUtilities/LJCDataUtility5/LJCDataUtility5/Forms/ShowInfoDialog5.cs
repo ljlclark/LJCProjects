@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 // ShowInfoDialog5.cs
 using LJCControls5;
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 
 namespace LJCDataUtility5
 {

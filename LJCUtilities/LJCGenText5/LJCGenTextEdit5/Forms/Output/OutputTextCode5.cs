@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // OutputTextCode.cs
 using LJCControls5;
+using LJCCSParser5;
 using LJCNetCommon5;
 
 namespace LJCGenTextEdit5
@@ -251,7 +252,7 @@ namespace LJCGenTextEdit5
     private void HTMLCodeDecode_Click(object? sender, EventArgs e)
     {
       List<string> lines = [];
-      var syntaxHtml = new SyntaxHighlightHtml();
+      var syntaxHtml = new LJCSyntaxHighlightHtml();
       foreach (var line in OutputText.Lines)
       {
         lines.Add(syntaxHtml.AddSyntaxHighlight(line));

@@ -1,12 +1,8 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // SyntaxColors.cs
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using LJCNetCommon5;
+using Tokenizer = LJCCSParser5.LJCCodeTokenizer;
 
 namespace LJCControls5
 {
@@ -57,7 +53,7 @@ namespace LJCControls5
     ///  path='items/CreateColorSettings2/*'/>
     public void CreateColorSettings(string[] lines)
     {
-      CodeTokenizer setup = new();
+      Tokenizer setup = new();
       setup.InitializeKeywords();
 
       bool test = true;
@@ -81,12 +77,12 @@ namespace LJCControls5
     // Creates the ColorSettings for the specified line.
     /// <include file='Doc/SyntaxColors.xml'
     ///  path='items/CreateLineColorSettings/*'/>
-    public void CreateLineColorSettings(CodeTokenizer setup, string lineText, int lineIndex)
+    public void CreateLineColorSettings(Tokenizer setup, string lineText, int lineIndex)
     {
       string? token;
       bool firstPass = false;
 
-      CodeTokenizer tokens = new();
+      Tokenizer tokens = new();
       tokens.SetKeywords(setup);
 
       tokens.SetTokens(lineText);
@@ -97,13 +93,13 @@ namespace LJCControls5
         {
           // Only process if first token and token is "///".
           if (0 == tokenIndex
-            && tokens.IsCodeXmlComment(token))
+            && Tokenizer.IsCodeXmlComment(token))
           {
             // Process entire line as one token.
             tokens.CombineXmlCommentTokens(tokenIndex);
             ColorSettings.Add(lineIndex, 0, lineText.Length, mXmlLineColor);
 
-            if (tokens.IsParam(lineText))
+            if (Tokenizer.IsParam(lineText))
             {
               ProcessParam(lineText, lineIndex);
             }
@@ -117,7 +113,7 @@ namespace LJCControls5
           }
 
           // Process if token is "//".
-          if (tokens.IsComment(token))
+          if (Tokenizer.IsComment(token))
           {
             tokens.Tokens[tokenIndex] = lineText.Trim();
             tokens.ClearRemainingTokens(tokenIndex + 1);
@@ -135,7 +131,7 @@ namespace LJCControls5
 
           // Must strip qualifiers from token before the following code.
           int prefixCount = 0;
-          string stripToken = tokens.StripQualifier(token, ref prefixCount);
+          string stripToken = Tokenizer.StripQualifier(token, ref prefixCount);
 
           if (tokens.IsModifier(stripToken, firstPass))
           {
@@ -143,7 +139,7 @@ namespace LJCControls5
             break;
           }
 
-          if (tokens.IsDelimiters(token))
+          if (Tokenizer.IsDelimiters(token))
           {
             break;
           }
@@ -155,7 +151,7 @@ namespace LJCControls5
           }
 
           // Stop processing line if a data value.
-          if (tokens.IsDataValue(stripToken)
+          if (Tokenizer.IsDataValue(stripToken)
             && !token.Contains('('))
           {
             tokens.EndTokens(ref tokenIndex);
@@ -201,7 +197,7 @@ namespace LJCControls5
     // Processes the Summary and Returns tokens.
     /// <include file='Doc/SyntaxColors.xml'
     ///  path='items/ProcessXmlComment/*'/>
-    public void ProcessXmlComment(CodeTokenizer tokens, string lineText, int lineIndex
+    public void ProcessXmlComment(Tokenizer tokens, string lineText, int lineIndex
       , string beginTag, string endTag, bool isSummary = true)
     {
       // Both tags are in the line.
@@ -279,7 +275,7 @@ namespace LJCControls5
     }
 
     // Processes the Key value.
-    private void ProcessKeyValue(CodeTokenizer _, string lineText
+    private void ProcessKeyValue(Tokenizer _, string lineText
       , int lineIndex, string token, Color color)
     {
       int beginIndex;

@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // TemplateTextCode.cs
 using LJCControls5;
+using LJCCSParser5;
 using LJCGenTextLib5;
 using LJCGenTextXAL5;
 using LJCNetCommon5;
@@ -255,7 +256,7 @@ namespace LJCGenTextEdit5
 
     // Set ColorSettings for the current line.
     internal void SetLineColors(Keys keyCode, LJCRtControl rtControl
-      , CodeTokenizer tokens)
+      , LJCCodeTokenizer tokens)
     {
       if (!IsControlKey(keyCode))
       {
@@ -374,7 +375,7 @@ namespace LJCGenTextEdit5
       if (!e.Control)
       {
         LJCRtControl richText = EditList.TemplateRichText;
-        CodeTokenizer tokenizer = EditList.mTokenizer;
+        LJCCodeTokenizer tokenizer = EditList.mTokenizer;
         SetLineColors(e.KeyCode, richText, tokenizer);
       }
     }

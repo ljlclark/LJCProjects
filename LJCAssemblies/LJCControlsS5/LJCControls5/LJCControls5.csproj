@@ -2,19 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-    <GenerateDocumentationFile>False</GenerateDocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>full</DebugType>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,11 +12,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="LJCCSParser5">
+      <HintPath>..\External\LJCCSParser5.dll</HintPath>
+    </Reference>
     <Reference Include="LJCDataAccess5">
       <HintPath>..\External\LJCDataAccess5.dll</HintPath>
     </Reference>
-    <Reference Include="LJCDataAccessConfig5">
-      <HintPath>..\External\LJCDataAccessConfig5.dll</HintPath>
+    <Reference Include="LJCDBConfig5">
+      <HintPath>..\External\LJCDBConfig5.dll</HintPath>
     </Reference>
     <Reference Include="LJCNetCommon5">
       <HintPath>..\External\LJCNetCommon5.dll</HintPath>

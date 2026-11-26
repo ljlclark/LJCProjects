@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Lester J. Clark and Contributors.
 // Licensed under the MIT License.
 // CreateData5.cs
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using LJCDataUtilityDAL5;
 using LJCNetCommon5;
 

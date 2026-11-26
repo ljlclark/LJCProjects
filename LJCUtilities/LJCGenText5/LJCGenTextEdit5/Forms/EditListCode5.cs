@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 // EditListCode.cs
 using LJCControls5;
+using LJCCSParser5;
 using LJCDataUtilityDAL5;
 using LJCGenTextXAL5;
 using LJCNetCommon5;
@@ -84,7 +85,7 @@ namespace LJCGenTextEdit5
 
     internal FilePaths mFilePaths = null!;
     internal SyntaxColors mSyntaxColors;
-    internal readonly CodeTokenizer mTokenizer;
+    internal readonly LJCCodeTokenizer mTokenizer;
     private string mControlValuesFileName = null!;
     #endregion
 

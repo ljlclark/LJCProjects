@@ -209,7 +209,7 @@ namespace LJCDBConfig5
             string keyword = values[0].Trim();
             string value = values[1];
 
-            var textParser = new LJCTextParser();
+            var textParser = new LJCParser();
             string? marker = textParser.DelimitedString(value, "{", "}");
 
             if (marker != null)

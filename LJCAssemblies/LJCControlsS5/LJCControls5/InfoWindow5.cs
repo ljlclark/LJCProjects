@@ -2,10 +2,8 @@
 // Licensed under the MIT License.
 // InfoWindow5.cs
 using LJCDataAccess5;
-using LJCDataAccessConfig5;
+using LJCDBConfig5;
 using LJCNetCommon5;
-using System.ComponentModel;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace LJCControls5
 {
